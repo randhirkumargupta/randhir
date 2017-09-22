@@ -114,7 +114,8 @@ function get_article_item_rss($section_id, $term_name, $section_url) {
         $img_url = $image_data->imageurl;
         $created = $resvalue['created'];
         $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-        $created_date = date("D, d M Y H:i:s", $created);
+        date_default_timezone_set("GMT");
+        $created_date = date("D, d M Y H:i:s e", $created);
         $output .= '<item><title><![CDATA[' . $title . ']]></title><link><![CDATA[' . $url . '?utm_source=rss]]></link><description><![CDATA[<a href="' . $url . '?utm_source=rss"><img src="' . $img_url . '" align="left" hspace="2" height="180" width="305" alt="" border="0"/></a>' . $field_story_kicker_text_value . ']]></description><pubDate>' . $created_date . ' GMT</pubDate></item>';
     }
     return $output;
@@ -181,7 +182,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+    //$query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_reporter', 'sr', 'sr.entity_id=n.nid');
     $query->leftJoin('node', 'reporter', 'sr.field_story_reporter_target_id=reporter.nid');
@@ -190,7 +191,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
     $query->fields('reporter', array('title'));
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
-    $query->fields('eli', array('field_story_extra_large_image_fid'));
+    //$query->fields('eli', array('field_story_extra_large_image_fid'));
     $query->fields('kt', array('field_story_kicker_text_value'));
 
     $query->condition('n.status', 1);
@@ -213,7 +214,8 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
         //$img_url = $image_data->imageurl;
         $created = $resvalue['created'];
         $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-        $created_date = date("D, d M Y H:i:s", $created);
+        date_default_timezone_set("GMT");
+        $created_date = date("D, d M Y H:i:s e", $created);
         $output .= '<item><title><![CDATA[' . $title . ']]></title>';
         $output .= '<link><![CDATA[' . $url . ']]></link>';
         $output .= '<guid>' . $nid . '</guid>';
