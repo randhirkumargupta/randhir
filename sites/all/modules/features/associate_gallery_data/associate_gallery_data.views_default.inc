@@ -71,7 +71,7 @@ function associate_gallery_data_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'entityreference_style';
   $handler->display->display_options['style_options']['search_fields'] = array(
     'nid' => 'nid',
-    'title' => 0,
+    'title' => 'title',
     'nothing' => 0,
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -135,7 +135,7 @@ function associate_gallery_data_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'entityreference_style';
   $handler->display->display_options['style_options']['search_fields'] = array(
     'nid' => 'nid',
-    'title' => 0,
+    'title' => 'title',
     'nothing' => 0,
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -220,7 +220,7 @@ function associate_gallery_data_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'entityreference_style';
   $handler->display->display_options['style_options']['search_fields'] = array(
     'nid' => 'nid',
-    'title' => 0,
+    'title' => 'title',
     'nothing' => 0,
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -285,7 +285,7 @@ function associate_gallery_data_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'entityreference_style';
   $handler->display->display_options['style_options']['search_fields'] = array(
     'nid' => 'nid',
-    'title' => 0,
+    'title' => 'title',
     'nothing' => 0,
   );
   $handler->display->display_options['defaults']['style_options'] = FALSE;

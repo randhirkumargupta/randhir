@@ -7323,7 +7323,6 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 #block-itg-mega-reviews-critics-mega-review-mobile-header {
     .comment-mobile {
         background: #1c1c1c;
-        margin: -15px -15px 20px;
         font-family: $itg-roboto;
         text-align: right;
         ul {
@@ -7332,7 +7331,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                 @include display-inline;
                 a {
                     color: #c0c0c0;
-                    padding: 10px 8px;
+                    padding: 10px 5px;
                     display: block;
                     text-transform: uppercase;
                     i {
@@ -7348,4 +7347,4 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 }
 
 
-/*css end Mega Review || Mobile */
+/*css end Mega Review || Mobile  */

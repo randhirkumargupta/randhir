@@ -628,11 +628,13 @@ class itg_auto_save {
                   $inputs['form_id'] == 'survey_node_form' ||
                   $inputs['form_id'] == 'quiz_node_form' && $field['fieldName'] == 'field_story_reporter') {
             $this->value = $inputs[$field['fieldName']]['und'];
-            preg_match_all('!\d+!', $this->value[0]['target_id'], $matches);
-            $targetid = reset($matches);
-            if (isset($targetid[0]) && !empty($targetid[0])) {
-              $node->{$field['fieldName']}['und'][0]['target_id'] = $targetid[0];
-            }
+            if (isset($this->value[0]['target_id']) && !empty($this->value[0]['target_id'])) {
+              preg_match_all('!\d+!', $this->value[0]['target_id'], $matches);
+              $targetid = reset($matches);
+              if (isset($targetid[0]) && !empty($targetid[0])) {  
+                $node->{$field['fieldName']}['und'][0]['target_id'] = $targetid[0];
+              }
+            } 
           } else {
             $this->value = $inputs[$field['fieldName']]['und'];
             preg_match_all('!\d+!', $this->value, $matches);
@@ -643,7 +645,7 @@ class itg_auto_save {
                 $node->{$field['fieldName']}['und'][$i]['target_id'] = $target_val;
                 $i++;
               }
-            }
+            } 
           }
           break;
 

@@ -127,6 +127,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                        jQuery('#edit-field-story-category-tid').trigger('change');
                        jQuery('.video_landing_menu li a:first').addClass('menu-active');
                    });", array('type' => 'inline', 'scope' => 'footer'));
+//           drupal_add_js("jQuery(document).ready(function(){
+//                       jQuery('.video_landing_menu li:first a').addClass('menu-active');
+//                    });", array('type' => 'inline', 'scope' => 'footer'));
 ?>
             <div class="slide-icon scroll-arrow-left"><i class="fa fa-angle-right ll"></i></div>
           </div>
