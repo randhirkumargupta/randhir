@@ -991,6 +991,7 @@ function itg_akamai_init() {
           }
         }
       }
+      drupal_add_js(drupal_get_path('module', 'itg_akamai') . '/js/itg_akamai.js', array('scope' => 'footer'));
     } // End of theme conditon
   }
 }

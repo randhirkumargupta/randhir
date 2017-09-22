@@ -7,7 +7,8 @@ foreach ($rows as $row): ?>
   }
   else {
     $img = "<img width='103' height='103'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/imgpsh_fullsize103x103.png' alt='' />";
-    print l($img, $row['php'] . '/speaker-details', array('query' => array('speaker' => $row['nid']), 'html' => TRUE));
+    $host_url = itg_event_get_host_name();
+    print l($img, $host_url . '/speaker-details', array('query' => array('speaker' => $row['nid']), 'html' => TRUE));
   }
   ?>
   <div class="views-field-title" title="<?php echo strip_tags($row['title']);?>"><?php print $row['title']; ?></div>
