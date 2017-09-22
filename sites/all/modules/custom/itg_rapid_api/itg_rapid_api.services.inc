@@ -3139,7 +3139,7 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
 
 
         if ($uid) {
-            $local_account = localSignup($params);
+            $local_account = localLogin($params);
             //p($local_account);echo "andy";die();
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
