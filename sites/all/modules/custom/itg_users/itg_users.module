@@ -6,6 +6,7 @@
  * Provides Users functionality and customizations.
  */
 module_load_include('inc', 'itg_users', 'includes/itg_users');
+module_load_include('inc', 'itg_users', 'includes/itg_user_role_and_permission');
 /**
  * Implement hook_user_presave
  * @param array $edit
@@ -58,6 +59,14 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
+
+        
+    $role_permission = itg_user_role_and_permissions();
+    $form_prefix = !empty($form['#prefix']) ? $form['#prefix'] : '';
+    $form['#prefix'] = $form_prefix.'<div class="get-tokens">Click 
+      <a href="javascript:;" data-id="mail-templates-token">here</a> to know about all existing user roles and their permissions  </div>'.$role_permission;
+
+    
     $form['#attributes']['autocomplete'] = 'off';
     $form['account']['mail']['#attributes']['autocomplete'] = 'off';
     $form['account']['pass']['#prefix'] = '<input type="password" name="custompass" style="display:none">';
