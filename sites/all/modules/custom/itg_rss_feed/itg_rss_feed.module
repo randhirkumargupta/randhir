@@ -37,7 +37,7 @@ function itg_rss_feed_menu() {
     'file' => 'inc/video_rss_feed.inc',
     'type' => MENU_CALLBACK,
   );
-  $items['rss/photo'] = array(
+  $items['rss/gallery'] = array(
     'page callback' => 'photo_rss_feed',
     'access arguments' => array('access content'),
     'file' => 'inc/photo_rss_feed.inc',
