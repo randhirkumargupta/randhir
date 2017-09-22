@@ -859,7 +859,7 @@ function itg_global_get_order_details() {
 }
 
 /**
- * Implemsnts global_update_alternate_email(). 
+ * Implements global_update_alternate_email(). 
  */
 function global_update_alternate_email($alt_email = NULL, $sso_id = NULL) {
   if (!empty($alt_email) && !empty($sso_id)) {
@@ -976,7 +976,7 @@ function global_sso_entry_backend_user_email($email = NULL, $uid = NULL, $proper
 }
 
 /**
- * Implemsnts itg_sso_get_social_uid(). 
+ * Implements itg_sso_get_social_uid(). 
  */
 function itg_sso_get_social_uid($sso_id = NULL) {
   if (!empty($sso_id)) {
@@ -1001,7 +1001,7 @@ function itg_sso_get_social_uid($sso_id = NULL) {
 }
 
 /**
- * Implemsnts itg_sso_get_social_mobile(). 
+ * Implements itg_sso_get_social_mobile(). 
  */
 function itg_sso_get_social_mobile($sso_id = NULL) {
   
