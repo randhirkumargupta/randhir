@@ -21,6 +21,11 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
+if(isset($row->nid)) {
+    $nid = $row->nid;
+} elseif(isset($row->node_itg_widget_order_nid)) {
+    $nid = $row->node_itg_widget_order_nid;
+}
 global $base_url, $user;
 $arg = arg();
 if ($external_url = _is_external_url_story_article($row->nid)) {
@@ -70,7 +75,7 @@ if ($external_url = _is_external_url_story_article($row->nid)) {
       }
     } else {
       if (is_widget_views($view)) {
-        print html_entity_decode(l(strip_tags($output), 'node/' . $row->nid . '/edit', array(
+        print html_entity_decode(l(strip_tags($output), 'node/' . $nid . '/edit', array(
           'attributes' => array(
             'target' => '_blank'
           )
@@ -83,7 +88,7 @@ if ($external_url = _is_external_url_story_article($row->nid)) {
   }
 } else {
      if (is_widget_views($view)) {
-         print html_entity_decode(l(strip_tags($output), 'node/' . $row->nid . '/edit', array(
+         print html_entity_decode(l(strip_tags($output), 'node/' . $nid . '/edit', array(
           'attributes' => array(
             'target' => '_blank'
           )
