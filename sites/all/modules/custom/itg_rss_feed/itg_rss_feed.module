@@ -17,10 +17,15 @@ function itg_rss_feed_menu() {
     'access arguments' => array('access content'),
     'file' => 'inc/anchor_rss_feed.inc',
     'type' => MENU_CALLBACK,
-  );
-  
+  );  
   $items['rss/article'] = array(
     'page callback' => 'article_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/article_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/article-google-newsstand'] = array(
+    'page callback' => 'article_rss_feed_google_newsstand',
     'access arguments' => array('access content'),
     'file' => 'inc/article_rss_feed.inc',
     'type' => MENU_CALLBACK,
@@ -51,6 +56,17 @@ function get_rss_feed_header() {
   $output = '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>';
 
+  return $output;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function get_rss_feed_google_stand_header() {
+  $output = "";
+  $output = '<rss xmlns:content="http://purl.org/rss/1.0/modules/content" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel>';
   return $output;
 }
 
@@ -155,5 +171,22 @@ function get_rss_feed_sub_header_article($term_name = NULL, $section_url = NULL)
   }
   $output .= "<description>India Today</description></image>";
 
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader Article
+ *
+ * @return string
+ */
+function get_rss_feed_sub_header_article_news_stand($term_name = NULL, $section_url = NULL) {
+  global $base_url;
+  $output = "";
+  $cat_name = '';
+  if(!empty($term_name)){
+      $cat_name = '| ' . $term_name;
+  }  
+  $todat_date = date("D, d M Y H:i:s");
+  $output .= "<title>India Today</title><link>".$base_url."></link><description>India Today</description><language>en-us</language><atom:link rel='hub' href='http://pubsubhubbub.appspot.com' />";
   return $output;
 }
