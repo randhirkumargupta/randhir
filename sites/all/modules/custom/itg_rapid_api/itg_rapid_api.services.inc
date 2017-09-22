@@ -807,7 +807,7 @@ function itg_rapid_api_resource() {
                             'type' => 'array',
                         ),
                         array(
-                            'name' => 'login_type',
+                            'name' => 'device_id',
                             'optional' => TRUE,
                             //'source' => 'data',
                             //'source' => array('data' => 'login_type'),
@@ -816,7 +816,7 @@ function itg_rapid_api_resource() {
                             'type' => 'array',
                         ),
                         array(
-                            'name' => 'token_id',
+                            'name' => 'device_type',
                             'optional' => TRUE,
                             //'source' => 'data',
                             //'source' => array('data' => 'token_id'),
@@ -3110,24 +3110,26 @@ function itg_rapid_api_testing($token) {
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $token_id) {
+function itg_rapid_api_login_request($token) {
+    
     $HTTP_RAW_POST_DATA;
     //$params = $_POST;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //p($params);die();
-    $login_type = 0;
-    $login_type = $params['login_type'];
-    if ($login_type < 0 || $login_type > 2) {
-        watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
-        $account = array();
-        $account['status_code'] = "0";
-        $account['status_message'] = "Invalid Login Type.";
-        return $account;
-    }
-    // for traditional login
-    if ($login_type == 0) {
+   
+   
         $method = "POST";
         $data = $params;
+        // login raw input validation
+        $validation_error = array();
+        $validation_error_str = "";
+        $validation_error = loginValidation_rapid($params);
+        $validation_error_str = implode(", ", $validation_error['custom_error']);
+        if ($validation_error_str) {
+            $account_err['status_code'] = "0";
+            $account_err['status_message'] = "$validation_error_str";
+            return $account_err;
+        }
         $account = array();
         $url = SSO_SERVER_URL . "/appapi/login_request";
         $result = callAPI($method, $url, $params);
@@ -3136,7 +3138,6 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
         $uid = $result_obj->uid;
         $auth_token = $result_obj->token;
         $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-
 
         if ($uid) {
             $local_account = localLogin($params);
@@ -3150,16 +3151,56 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
                 $is_first_login = 0;
             }
             if ($auth_token) {
+                //p($result_obj);die();
+                $field_first_name = $local_account->user->field_first_name['und'][0]['value'];
+                $field_last_name = $local_account->user->field_last_name['und'][0]['value'];
+                $field_short_description = $local_account->user->field_short_description['und'][0]['value'];
+                $profile_image = $local_account->user->field_user_picture['und'][0]['value'];
+                $gender = $local_account->user->field_user_gender['und'][0]['value'];
+                $date_of_birth = $local_account->user->field_story_issue_date['und'][0]['value'];
+                //$mail = $result_obj->mail;
+                $phone_number = "";
+                $mail = "";
+                if(is_numeric($name)){
+                    $phone_number = $name;
+                }
+                else{
+                    $mail = $name;
+                }
                 $account['status_code'] = "1";
                 $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
-                $account['data']['is_first_login'] = "$is_first_login";
                 $account['data']['auth_token'] = "$auth_token";
+                $account['data']['is_authenticated'] = "$auth_token";
+                
+                $account['data']['first_name'] = "$field_first_name";
+                $account['data']['last_name'] = "$field_last_name";
+                $account['data']['email_id'] = "$mail";
+                $account['data']['phone_number'] = "$phone_number";
+                $account['data']['location'] = "$field_short_description";
+                $account['data']['profile_image'] = "$profile_image";
+                $account['data']['gender'] = "$gender";
+                $account['data']['date_of_birth'] = "$date_of_birth";
+                
+                // query for insert data into itg_app_device - $action $token
+                $action = 2;
+                $device_id = $params['device_id'];
+                $device_type = $params['device_type'];
+                db_insert('itg_app_device')
+                        ->fields(array(
+                            'uid' => $uid,
+                            'device_id' => check_plain($device_id),
+                            'device_type' => check_plain($device_type),
+                            'action' => check_plain($action),
+                            'token' => check_plain($auth_token),
+                        ))
+                        ->execute();
+                
             } else {
                 watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
                 //return services_error(t('Wrong username or password.'), 401);
                 $account = array();
-                $account['status_code'] = "0";
+                $account['status_code'] = "2";
                 $account['status_message'] = "Wrong username or password.";
                 return $account;
             }
@@ -3167,133 +3208,12 @@ function itg_rapid_api_login_request($token, $user_id, $password, $login_type, $
             watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
             //return services_error(t('Wrong username or password.'), 401);
             $account = array();
-            $account['status_code'] = "0";
+            $account['status_code'] = "3";
             $account['status_message'] = "Wrong username or password.";
             return $account;
         }
 
         return $account;
-    }
-    // for FW login
-    elseif ($login_type == 1) {
-        $method = "POST";
-
-        $data = array();
-        $password = rand(0, 9999);
-        //$_GET['password'] = $password;
-        $data['token'] = $params['token_id'];
-        $data['app_id'] = $params['app_id'];
-        $data['uname'] = $params['user_id'];
-        $data['uid'] = $params['user_id'];
-        $data['issued_at'] = $params['issued_at'];
-        $data['expires_at'] = $params['expires_at'];
-        $data['password'] = $password;
-        $account = array();
-        $url = SSO_SERVER_URL . "/appapi/fblogin";
-        $result = callAPI($method, $url, $data);
-        $result_obj = json_decode($result);
-        $uid = 0;
-        $uid = $result_obj->user->uid;
-        $auth_token = $result_obj->token;
-        $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-
-
-        if ($uid) {
-            $local_account = fblogin($data);
-            //p($local_account);echo "andy";die();
-            $uid = $local_account->user->uid;
-            $name = $local_account->user->name;
-            $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
-            $auth_token = $local_account->token;
-            $is_first_login = 1;
-            if ($field_logged_in_count > 0) {
-                $is_first_login = 0;
-            }
-            if ($auth_token) {
-                $account['status_code'] = "1";
-                $account['status_message'] = "";
-                $account['data']['user_id'] = "$name";
-                $account['data']['is_first_login'] = "$is_first_login";
-                $account['data']['auth_token'] = "$auth_token";
-            } else {
-                watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
-                //return services_error(t('Wrong username or password.'), 401);
-                $account = array();
-                $account['status_code'] = "0";
-                $account['status_message'] = "Wrong username or password.";
-                return $account;
-            }
-        } else {
-            watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
-            //return services_error(t('Wrong username or passwordfb.'), 401);
-            $account = array();
-            $account['status_code'] = "0";
-            $account['status_message'] = "Wrong username or password.";
-            return $account;
-        }
-
-        return $account;
-    }
-    // for TWT login
-    elseif ($login_type == 2) {
-        $method = "POST";
-
-        $data = array();
-        $password = rand(0, 9999);
-        //$_GET['password'] = $password;
-        $data['token'] = $params['token_id'];
-        $data['app_id'] = $params['app_id'];
-        $data['uname'] = $params['user_id'];
-        $data['uid'] = $params['user_id'];
-        $data['issued_at'] = $params['issued_at'];
-        $data['expires_at'] = $params['expires_at'];
-        $data['password'] = $password;
-        $account = array();
-        $url = SSO_SERVER_URL . "/appapi/fblogin";
-        $result = callAPI($method, $url, $data);
-        $result_obj = json_decode($result);
-        $uid = 0;
-        $uid = $result_obj->user->uid;
-        $auth_token = $result_obj->token;
-        $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
-
-
-        if ($uid) {
-            $local_account = twtlogin($data);
-            //p($local_account);echo "andy";die();
-            $uid = $local_account->user->uid;
-            $name = $local_account->user->name;
-            $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
-            $auth_token = $local_account->token;
-            $is_first_login = 1;
-            if ($field_logged_in_count > 0) {
-                $is_first_login = 0;
-            }
-            if ($auth_token) {
-                $account['status_code'] = "1";
-                $account['status_message'] = "";
-                $account['data']['user_id'] = "$name";
-                $account['data']['is_first_login'] = "$is_first_login";
-                $account['data']['auth_token'] = "$auth_token";
-            } else {
-                watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
-                //return services_error(t('Wrong username or password.'), 401);
-                $account = array();
-                $account['status_code'] = "0";
-                $account['status_message'] = "Wrong username or password.";
-                return $account;
-            }
-        } else {
-            watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
-            //return services_error(t('Wrong username or passwordtwt.'), 401);
-            $account = array();
-            $account['status_code'] = "0";
-            $account['status_message'] = "Wrong username or password.";
-            return $account;
-        }
-
-        return $account;
-    }
 }
 
 //itg_rapid_api_signup
