@@ -161,6 +161,11 @@ function ipad_notification_xml() {
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
+      $android_header = $data->android_header;
+      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+      $cat = taxonomy_term_load($primary_cat);
+      $section = $cat->name;
+
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -180,13 +185,28 @@ function ipad_notification_xml() {
       $created_date_time = format_date($msg_node->created, 'custom', 'Y-m-d H:i:s P');
 
       if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
         $msg_created_date = format_date(strtotime($data->created_datetime), 'custom', 'M d, Y');
         $msg_created_date_time = format_date(strtotime($data->created_datetime), 'custom', 'Y-m-d H:i:s P');
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><thumbimage></thumbimage><kickerimage></kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+        $header = $data->android_header;
+        $section = $data->category;
+        $thumb_img = $data->android_banner;
+        $web_url = $data->mobile_url;
+        if ($data->message_url != '') {
+          $live_url = strpos($data->message_url, 'livetv.jsp');
+          if ($live_url !== false) {
+            $url = '/hltapps/api/livetv.xml';
+            $section = $data->category;
+          }
+          else {
+            $url = '';
+            $section = '';
+          }
+        }
+        
+        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>".$header."</header><section_name>".$section."</section_name><thumbimage>".$thumb_img."</thumbimage><kickerimage>".$thumb_img."</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
@@ -212,6 +232,11 @@ function chrome_notification_xml() {
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
+      $android_header = $data->android_header;
+      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+      $cat = taxonomy_term_load($primary_cat);
+      $section = $cat->name;
+
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -230,13 +255,28 @@ function chrome_notification_xml() {
       $created_date = format_date($msg_node->created, 'custom', 'M d, Y');
       $created_date_time = format_date($msg_node->created, 'custom', 'Y-m-d H:i:s P');
       if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
         $msg_created_date = format_date(strtotime($data->created_datetime), 'custom', 'M d, Y');
         $msg_created_date_time = format_date(strtotime($data->created_datetime), 'custom', 'Y-m-d H:i:s P');
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><thumbimage></thumbimage><kickerimage></kickerimage><url></url><weburl></weburl ><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+        $header = $data->android_header;
+        $section = $data->category;
+        $thumb_img = $data->android_banner;
+        $web_url = $data->mobile_url;
+        if ($data->message_url != '') {
+          $live_url = strpos($data->message_url, 'livetv.jsp');
+          if ($live_url !== false) {
+            $url = '/hltapps/api/livetv.xml';
+            $section = $data->category;
+          }
+          else {
+            $url = '';
+            $section = '';
+          }
+        }
+        
+        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>".$header."</header><section_name>".$section."</section_name><thumbimage>".$thumb_img."</thumbimage><kickerimage>".$thumb_img."</kickerimage><url>".$url."</url><weburl>".$web_url."</weburl ><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
@@ -262,6 +302,11 @@ function safari_notification_xml() {
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
+      $android_header = $data->android_header;
+      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+      $cat = taxonomy_term_load($primary_cat);
+      $section = $cat->name;
+
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -281,13 +326,28 @@ function safari_notification_xml() {
       $created_date_time = format_date($msg_node->created, 'custom', 'Y-m-d H:i:s P');
 
       if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
         $msg_created_date = format_date(strtotime($data->created_datetime), 'custom', 'M d, Y');
         $msg_created_date_time = format_date(strtotime($data->created_datetime), 'custom', 'Y-m-d H:i:s P');
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><thumbimage></thumbimage><kickerimage></kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+        $header = $data->android_header;
+        $section = $data->category;
+        $thumb_img = $data->android_banner;
+        $web_url = $data->mobile_url;
+        if ($data->message_url != '') {
+          $live_url = strpos($data->message_url, 'livetv.jsp');
+          if ($live_url !== false) {
+            $url = '/hltapps/api/livetv.xml';
+            $section = $data->category;
+          }
+          else {
+            $url = '';
+            $section = '';
+          }
+        }
+        
+        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>".$header."</header><section_name>".$section."</section_name><thumbimage>".$thumb_img."</thumbimage><kickerimage>".$thumb_img."</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
@@ -314,6 +374,12 @@ function amazon_notification_xml() {
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
+
+      $android_header = $data->android_header;
+      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+      $cat = taxonomy_term_load($primary_cat);
+      $section = $cat->name;
+
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -333,13 +399,28 @@ function amazon_notification_xml() {
       $created_date_time = format_date($msg_node->created, 'custom', 'Y-m-d H:i:s P');
 
       if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
         $msg_created_date = format_date(strtotime($data->created_datetime), 'custom', 'M d, Y');
         $msg_created_date_time = format_date(strtotime($data->created_datetime), 'custom', 'Y-m-d H:i:s P');
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><thumbimage></thumbimage><kickerimage></kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+        $header = $data->android_header;
+        $section = $data->category;
+        $thumb_img = $data->android_banner;
+        $web_url = $data->mobile_url;
+        if ($data->message_url != '') {
+          $live_url = strpos($data->message_url, 'livetv.jsp');
+          if ($live_url !== false) {
+            $url = '/hltapps/api/livetv.xml';
+            $section = $data->category;
+          }
+          else {
+            $url = '';
+            $section = '';
+          }
+        }
+        
+        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>".$header."</header><section_name>".$section."</section_name><thumbimage>".$thumb_img."</thumbimage><kickerimage>".$thumb_img."</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
@@ -365,6 +446,12 @@ function windows8_notification_xml() {
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
+
+      $android_header = $data->android_header;
+      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+      $cat = taxonomy_term_load($primary_cat);
+      $section = $cat->name;
+
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -384,13 +471,27 @@ function windows8_notification_xml() {
       $created_date_time = format_date($msg_node->created, 'custom', 'Y-m-d H:i:s P');
 
       if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
         $msg_created_date = format_date(strtotime($data->created_datetime), 'custom', 'M d, Y');
         $msg_created_date_time = format_date(strtotime($data->created_datetime), 'custom', 'Y-m-d H:i:s P');
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><thumbimage></thumbimage><kickerimage></kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+        $header = $data->android_header;
+        $section = $data->category;
+        $thumb_img = $data->android_banner;
+        $web_url = $data->mobile_url;
+        if ($data->message_url != '') {
+          $live_url = strpos($data->message_url, 'livetv.jsp');
+          if ($live_url !== false) {
+            $url = '/hltapps/api/livetv.xml';
+            $section = $data->category;
+          }
+          else {
+            $url = '';
+            $section = '';
+          }
+        }
+        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>".$header."</header><section_name>".$section."</section_name><thumbimage>".$thumb_img."</thumbimage><kickerimage>".$thumb_img."</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
@@ -417,6 +518,12 @@ function osx_notification_xml() {
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
+
+      $android_header = $data->android_header;
+      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+      $cat = taxonomy_term_load($primary_cat);
+      $section = $cat->name;
+
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -436,13 +543,28 @@ function osx_notification_xml() {
       $created_date_time = format_date($msg_node->created, 'custom', 'Y-m-d H:i:s P');
 
       if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
         $msg_created_date = format_date(strtotime($data->created_datetime), 'custom', 'M d, Y');
         $msg_created_date_time = format_date(strtotime($data->created_datetime), 'custom', 'Y-m-d H:i:s P');
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><thumbimage></thumbimage><kickerimage></kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+        $header = $data->android_header;
+        $section = $data->category;
+        $thumb_img = $data->android_banner;
+        $web_url = $data->mobile_url;
+        if ($data->message_url != '') {
+          $live_url = strpos($data->message_url, 'livetv.jsp');
+          if ($live_url !== false) {
+            $url = '/hltapps/api/livetv.xml';
+            $section = $data->category;
+          }
+          else {
+            $url = '';
+            $section = '';
+          }
+        }
+        
+        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>".$header."</header><section_name>".$section."</section_name><thumbimage>".$thumb_img."</thumbimage><kickerimage>".$thumb_img."</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
@@ -469,6 +591,12 @@ function nokiaasha_notification_xml() {
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
+
+      $android_header = $data->android_header;
+      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+      $cat = taxonomy_term_load($primary_cat);
+      $section = $cat->name;
+
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -488,13 +616,28 @@ function nokiaasha_notification_xml() {
       $created_date_time = format_date($msg_node->created, 'custom', 'Y-m-d H:i:s P');
 
       if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
         $msg_created_date = format_date(strtotime($data->created_datetime), 'custom', 'M d, Y');
         $msg_created_date_time = format_date(strtotime($data->created_datetime), 'custom', 'Y-m-d H:i:s P');
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><thumbimage></thumbimage><kickerimage></kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+        $header = $data->android_header;
+        $section = $data->category;
+        $thumb_img = $data->android_banner;
+        $web_url = $data->mobile_url;
+        if ($data->message_url != '') {
+          $live_url = strpos($data->message_url, 'livetv.jsp');
+          if ($live_url !== false) {
+            $url = '/hltapps/api/livetv.xml';
+            $section = $data->category;
+          }
+          else {
+            $url = '';
+            $section = '';
+          }
+        }
+        
+        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>".$header."</header><section_name>".$section."</section_name><thumbimage>".$thumb_img."</thumbimage><kickerimage>".$thumb_img."</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
@@ -521,6 +664,12 @@ function bb_notification_xml() {
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
+
+      $android_header = $data->android_header;
+      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+      $cat = taxonomy_term_load($primary_cat);
+      $section = $cat->name;
+
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -540,13 +689,27 @@ function bb_notification_xml() {
       $created_date_time = format_date($msg_node->created, 'custom', 'Y-m-d H:i:s P');
 
       if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
         $msg_created_date = format_date(strtotime($data->created_datetime), 'custom', 'M d, Y');
         $msg_created_date_time = format_date(strtotime($data->created_datetime), 'custom', 'Y-m-d H:i:s P');
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><thumbimage></thumbimage><kickerimage></kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+        $header = $data->android_header;
+        $section = $data->category;
+        $thumb_img = $data->android_banner;
+        $web_url = $data->mobile_url;
+        if ($data->message_url != '') {
+          $live_url = strpos($data->message_url, 'livetv.jsp');
+          if ($live_url !== false) {
+            $url = '/hltapps/api/livetv.xml';
+            $section = $data->category;
+          }
+          else {
+            $url = '';
+            $section = '';
+          }
+        }
+        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>".$header."</header><section_name>".$section."</section_name><thumbimage>".$thumb_img."</thumbimage><kickerimage>".$thumb_img."</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
@@ -563,9 +726,12 @@ function notifications_article() {
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
-
+      $android_header = $data->android_header;
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
+      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+      $cat = taxonomy_term_load($primary_cat);
+      $section = $cat->name;
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
       $title = isset($msg_node->title) ? $msg_node->title : '';
       if ($msg_node->type == 'story') {
@@ -584,13 +750,27 @@ function notifications_article() {
       $created_date_time = format_date($msg_node->created, 'custom', 'Y-m-d H:i:s P');
 
       if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $title . "]]></title><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        $output .= "<article><title><![CDATA[" . $title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
         $msg_created_date = format_date(strtotime($data->created_datetime), 'custom', 'M d, Y');
         $msg_created_date_time = format_date(strtotime($data->created_datetime), 'custom', 'Y-m-d H:i:s P');
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><thumbimage></thumbimage><kickerimage></kickerimage><url></url><weburl></weburl><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+        $header = $data->android_header;
+        $section = $data->category;
+        $thumb_img = $data->android_banner;
+        $web_url = $data->mobile_url;
+        if ($data->message_url != '') {
+          $live_url = strpos($data->message_url, 'livetv.jsp');
+          if ($live_url !== false) {
+            $url = '/hltapps/api/livetv.xml';
+            $section = $data->category;
+          }
+          else {
+            $url = '';
+            $section = '';
+          }
+        }
+        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>".$header."</header><section_name>".$section."</section_name><thumbimage>".$thumb_img."</thumbimage><kickerimage>".$thumb_img."</kickerimage><url>" . $url . "</url><weburl>".$web_url."</weburl><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
       //Attach the node type details
     }
@@ -601,10 +781,9 @@ function notifications_article() {
 function message_data() {
   $config = get_notification_config();
   $params = drupal_get_query_parameters();
-
   $res = db_select('message', 'm')
           ->fields('m')
-          ->condition('m.website', $params['website'])
+          //->condition('m.content_type_tag','live')
           ->range($config['start_index'], $config['end_index'])
           ->execute()->fetchAll();
   return $res;
