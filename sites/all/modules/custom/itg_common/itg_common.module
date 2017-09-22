@@ -966,7 +966,7 @@ function itg_content_inactive() {
   $current_time = date("Y-m-d H:i:s");
   //set content type
   //$content_type = array('story', 'videogallery'); 
-  $content_type = array('videogallery' , "story" , "photogallery");
+  $content_type = array("story" , "photogallery");
   
   $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');
