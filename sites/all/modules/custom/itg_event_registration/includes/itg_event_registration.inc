@@ -293,7 +293,7 @@ $current_date_time = date('Y-m-d H:i:s');
         $query->fields('n', array('title'));
         $query->condition('title', '%' . $title . '%', 'LIKE');
         $query->condition('n.type', 'event_backend', '=');
-        $query->condition('n.status', 1);
+        //$query->condition('n.status', 1);
         $query->range(0, 20);
 
         $result = $query->execute();
