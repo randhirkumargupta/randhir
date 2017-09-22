@@ -98,7 +98,6 @@ function get_photo_item_rss($section_id, $term_name, $section_url) {
             $output .= '<link><![CDATA[http://indiatoday.intoday.in/subscription.html?utm_source=rss]]></link>';
             $output .= '<description><![CDATA[Subscribe now for your favourite magazines]]></description>';
             $output .= '</item>';
-            continue;
         }
         $title = $resvalue['title'];
         $nid = $resvalue['nid'];

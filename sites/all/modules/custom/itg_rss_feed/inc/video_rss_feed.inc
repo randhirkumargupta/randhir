@@ -99,7 +99,6 @@ function get_video_item_rss($section_id, $term_name, $section_url) {
             $output .= '<link><![CDATA[http://indiatoday.intoday.in/subscription.html?utm_source=rss]]></link>';
             $output .= '<description><![CDATA[Subscribe now for your favourite magazines]]></description>';
             $output .= '</item>';
-            continue;
         }
         $title = $resvalue['title'];
         $nid = $resvalue['nid'];
@@ -115,7 +114,7 @@ function get_video_item_rss($section_id, $term_name, $section_url) {
         $output .= '<title><![CDATA[' . $title . ']]></title>';
         $output .= '<link><![CDATA[' . $url . ']]></link>';
         $output .= '<description><a href="'.$url.'"><img src="'.$img_url.'" align="left" hspace="2" height="82" width="107" alt="" border="0" /></a><![CDATA[' . $body_value . ']]></description>';
-        $output .= '<pubDate><![CDATA[' . $created_date . ']]></pubDate>';
+        $output .= '<pubDate>' . $created_date . '></pubDate>';
         $output .= '<media:content type="video/quicktime" expression="full" url= "' . $url . '">';
         $output .= '<media:category scheme="'. $url . '">' . $term_name . '</media:category>';
         $output .= '<media:text type="plain">' . $title . '</media:text>';

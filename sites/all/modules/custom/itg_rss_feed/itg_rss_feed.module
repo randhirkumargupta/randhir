@@ -43,6 +43,18 @@ function itg_rss_feed_menu() {
     'file' => 'inc/photo_rss_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss/homepage-topstories'] = array(
+    'page callback' => 'homepage_topstories_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/homepage_topstories_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/issue'] = array(
+    'page callback' => 'issue_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/issue_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
     return $items;
 }
 
@@ -76,11 +88,38 @@ function get_rss_feed_google_stand_header() {
  * @return string
  */
 function get_rss_feed_sub_header_anchors() {
+  global $base_url;
+    $output = "";
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output = "<title><![CDATA[India Today | Anchors]]></title><description>India Today</description><link><![CDATA[".$base_url."]]></link><lastBuildDate>".$todat_date."</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>".$base_url."/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | Anchors]]></title><link><![CDATA[".$base_url."/headlines_today/anchors]]></link><description>India Today</description></image>";
+  return $output;
+}
+/**
+ * common function for return rss feed file Subheader
+ *
+ * @return string
+ */
+function get_rss_feed_sub_header_issue($issue = NULL, $issue_url) {
+  global $base_url;
+    $output = "";
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output = "<title><![CDATA[India Today | ".$issue."]]></title><description>India Today</description><link><![CDATA[".$base_url."]]></link><lastBuildDate>".$todat_date."</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>".$base_url."/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | ".$issue."]]></title><link><![CDATA[".$issue_url."]]></link><description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file Subheader
+ *
+ * @return string
+ */
+function get_rss_feed_sub_header_home_top() {
+  global $base_url;
   $output = "";
   date_default_timezone_set("GMT");
   $todat_date = date("D, d M Y H:i:s e");
-  $output = "<title><![CDATA[India Today | Anchors]]></title><description>India Today</description><link><![CDATA[http://indiatoday.intoday.in/]]></link><lastBuildDate>".$todat_date."</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>http://itgdrapid.indiatodayonline.in/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | Anchors]]></title><link><![CDATA[http://indiatoday.intoday.in/headlines_today/anchors]]></link><description>India Today</description></image>";
-
+  $output = "<title><![CDATA[India Today Latest Stories]]></title><description>India Today</description><link><![CDATA[".$base_url."]]></link><lastBuildDate>".$todat_date."</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>".$base_url."/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today Latest Stories]]></title><link><![CDATA[".$base_url."]]></link><description>India Today</description></image>";
   return $output;
 }
 
