@@ -83,7 +83,7 @@ if (!empty($content)):
   }
 
   if (function_exists(itg_sso_url)) {
-    $itg_sso_url = '<a href="http://' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
+    $itg_sso_url = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
   }
   // Check if it is sponsor story.
   $is_sponsor_story = FALSE;
@@ -726,7 +726,7 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:EXPERT-CHUNK]', '', $story_body);
                   }
                 }
-                $movie_html = itg_story_movie_image_plugin_data($node->nid);
+                $movie_html = $content['movie_plugin'];
                 if (strpos($story_body, '[ITG:TECH-PHOTOS]')) {
                   if (!empty($node->field_story_technology['und'])) {
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', $movie_html, $story_body);
@@ -824,14 +824,14 @@ if (!empty($content)):
                    if(!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
                      $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
                    }
-                   $output = itg_story_photo_story_html($node->nid, $primary_cat);
+                   $output = $content['photo_story_html'];
                    print $output;
                  }
                  ?>
             <!-- for photo story bottom slider, loop has been repeated again -->
             <?php
             if (!empty($node->field_photo_story)) {
-              $html_output = itg_story_photo_story_bottom_html($node->nid);
+              $html_output = $content['photo_story_bottom_html'];
               print $html_output;
             }
             ?>
@@ -984,7 +984,7 @@ if (!empty($content)):
               else:
                 ?>
                 <li class="mhide">
-                  <a title="follow story" href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow story'); ?></a>
+                  <a title="follow story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow story'); ?></a>
                 </li>
   <?php endif; ?>
 

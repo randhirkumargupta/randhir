@@ -275,7 +275,7 @@ function itg_personalization_block_view($delta = '') {
   $change_pass_url = '';
   if ($delta == 'personalization_edit_profile') {
     $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-    $change_pass_url = 'http://' . PARENT_SSO . '/sso/change-password/' . $uri;
+    $change_pass_url = PARENT_SSO . '/sso/change-password/' . $uri;
   }
   $block = array();
   $output = '<ul class="profile-edit-tab">';

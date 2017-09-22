@@ -148,7 +148,7 @@ if (!empty($data['node_data'])) :
                   <?php endif;
                 else: ?>
                   <li class="mhide">
-                  <a title="Follow the Story" href="http://<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class=""><?php print t('Follow the Story'); ?></a>
+                  <a title="Follow the Story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class=""><?php print t('Follow the Story'); ?></a>
                   </li>
             <?php endif; ?>
           <?php endif; ?>
