@@ -39,7 +39,7 @@ function itg_widget_init() {
     $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
     $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
     drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));     
+    drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
 }
 
 /**
@@ -105,17 +105,17 @@ function itg_widget_menu() {
       'page callback' => 'itg_widget_all_content_nid',
       'access arguments' => array('access content'),
     );
-    
+
     $items['autocomplete-widget-path/%/autocomplete'] = array(
       'page callback' => 'autocomplete_widget_path_without_filter',
       'access arguments' => array('access itg story'),
     );
-    
+
     $items['autocomplete-widget-path/%/%/%/%/autocomplete'] = array(
       'page callback' => 'autocomplete_widget_path_with_filter',
       'access arguments' => array('access itg story'),
     );
-    
+
     $items['node-list-for-year-end/%/%/autocomplete'] = array(
       'page callback' => 'autocomplete_for_year_end_widgets',
       'access arguments' => array('access content'),
@@ -1937,16 +1937,21 @@ function __itg_widget_helper_data_insert($nid) {
     if ($nid) {
         __itg_widget_helper_data_delete($nid);
         try {
+            $node_load_data = node_load($nid);
             db_insert('itg_widget_helper')
               ->fields(array(
                 'nid',
-                'node_data'
+                'node_data',
+                'node_status',
+                'node_type',
                 )
               )
               ->values(
                 array(
                   'nid' => $nid,
-                  'node_data' => serialize(node_load($nid)),
+                  'node_data' => serialize($node_load_data),
+                  'node_status' => $node_load_data->status,
+                  'node_type' => $node_load_data->type,
                 )
               )->execute();
         } catch (Exception $ex) {
@@ -1976,9 +1981,11 @@ function __itg_widget_helper_data_delete($nid) {
  */
 function __itg_widget_helper_data_update($nid) {
     if ($nid) {
+        $node_load_data = node_load($nid);
         try {
             db_update('itg_widget_helper')->fields(array(
-                'node_data' => serialize(node_load($nid)),
+                'node_data' => serialize($node_load_data),
+                'node_status' => $node_load_data->status,
               ))
               ->condition('nid', $nid)
               ->execute();
@@ -2119,75 +2126,97 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
     return !empty($final_widget_array) ? $final_widget_array : array();
 }
 
-function insert_data_in_widget_helper_test() {   
-  $table = 'itg_widget_order_section';    
-  $categories = db_query("select distinct(cat_id) from $table where widget = 'section_wise_widget'"); 
-  foreach ($categories as $data) { 
-    $section = $data->cat_id; 
-    try {     
-      $query = db_select($table, "tbl");   
-      $query->fields("tbl", array("id"));
-      $query->range(100, 100000);  
-      $query->orderBy("id", "DESC");   
-      $query->condition("cat_id", $section);
-      $query->condition("widget", 'section_wise_widget');    
-      $query->condition("content_type", 'story');    
-      $section_data = $query->execute()->fetchAll();  
-    } catch (Exception $ex) {            
-      drupal_set_message($ex->getMessage());     
-    }        
-    foreach ($section_data as $sec) {  
-    try {        
-        db_delete($table) ->condition("id", $sec->id)         
-          ->execute();         
-        } catch (Exception $ex) {  
-        drupal_set_message($ex->getMessage());        
-      }      
-    }  
-    
-    
-     $section = $data->cat_id; 
-    try {     
-      $query = db_select($table, "tbl");   
-      $query->fields("tbl", array("id"));
-      $query->range(100, 100000);  
-      $query->orderBy("id", "DESC");   
-      $query->condition("cat_id", $section);
-      $query->condition("widget", 'section_wise_widget');    
-      $query->condition("content_type", 'videogallery');    
-      $section_data = $query->execute()->fetchAll();  
-    } catch (Exception $ex) {            
-      drupal_set_message($ex->getMessage());     
-    }        
-    foreach ($section_data as $sec) {  
-    try {        
-        db_delete($table) ->condition("id", $sec->id)         
-          ->execute();         
-        } catch (Exception $ex) {  
-        drupal_set_message($ex->getMessage());        
-      }      
-    }  
-    
-     $section = $data->cat_id; 
-    try {     
-      $query = db_select($table, "tbl");   
-      $query->fields("tbl", array("id"));
-      $query->range(100, 100000);  
-      $query->orderBy("id", "DESC");   
-      $query->condition("cat_id", $section);
-      $query->condition("widget", 'section_wise_widget');    
-      $query->condition("content_type", 'photogallery');    
-      $section_data = $query->execute()->fetchAll();  
-    } catch (Exception $ex) {            
-      drupal_set_message($ex->getMessage());     
-    }        
-    foreach ($section_data as $sec) {  
-    try {        
-        db_delete($table) ->condition("id", $sec->id)         
-          ->execute();         
-        } catch (Exception $ex) {  
-        drupal_set_message($ex->getMessage());        
-      }      
-    }  
-  }
+function insert_data_in_widget_helper_test() {
+    $table = 'itg_widget_order_section';
+    $categories = db_query("select distinct(cat_id) from $table where widget = 'section_wise_widget'");
+    foreach ($categories as $data) {
+        $section = $data->cat_id;
+        try {
+            $query = db_select($table, "tbl");
+            $query->fields("tbl", array("id"));
+            $query->range(100, 100000);
+            $query->orderBy("id", "DESC");
+            $query->condition("cat_id", $section);
+            $query->condition("widget", 'section_wise_widget');
+            $query->condition("content_type", 'story');
+            $section_data = $query->execute()->fetchAll();
+        } catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+        }
+        foreach ($section_data as $sec) {
+            try {
+                db_delete($table)->condition("id", $sec->id)
+                  ->execute();
+            } catch (Exception $ex) {
+                drupal_set_message($ex->getMessage());
+            }
+        }
+
+
+        $section = $data->cat_id;
+        try {
+            $query = db_select($table, "tbl");
+            $query->fields("tbl", array("id"));
+            $query->range(100, 100000);
+            $query->orderBy("id", "DESC");
+            $query->condition("cat_id", $section);
+            $query->condition("widget", 'section_wise_widget');
+            $query->condition("content_type", 'videogallery');
+            $section_data = $query->execute()->fetchAll();
+        } catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+        }
+        foreach ($section_data as $sec) {
+            try {
+                db_delete($table)->condition("id", $sec->id)
+                  ->execute();
+            } catch (Exception $ex) {
+                drupal_set_message($ex->getMessage());
+            }
+        }
+
+        $section = $data->cat_id;
+        try {
+            $query = db_select($table, "tbl");
+            $query->fields("tbl", array("id"));
+            $query->range(100, 100000);
+            $query->orderBy("id", "DESC");
+            $query->condition("cat_id", $section);
+            $query->condition("widget", 'section_wise_widget');
+            $query->condition("content_type", 'photogallery');
+            $section_data = $query->execute()->fetchAll();
+        } catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+        }
+        foreach ($section_data as $sec) {
+            try {
+                db_delete($table)->condition("id", $sec->id)
+                  ->execute();
+            } catch (Exception $ex) {
+                drupal_set_message($ex->getMessage());
+            }
+        }
+    }
+}
+
+function is_widget_views($view) {
+    $flag = FALSE;
+    $view_name = array(
+      'section_wise_draggable_content_order',
+      'story_widget',
+      'widget_anchors_listing',
+      'photo_carousel_widget',
+      'poll_widget',
+      'home_page_feature_widget',
+      'photo_carousel_widget',
+      'so_sorry',
+      'special_auto_review_widget',
+      'yearender_top_news_and_top_videos',
+      'most_read_widget',
+      'special_how_i_made_it',
+    );
+    if (in_array($view->name, $view_name)) {
+        $flag = TRUE;
+    }
+    return $flag;
 }

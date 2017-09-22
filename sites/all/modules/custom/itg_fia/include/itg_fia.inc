@@ -27,14 +27,14 @@ function itg_fia_xml_node_feed($query) {
   foreach ($nodes as $node) {
     if ($node->workbench_moderation['current']->state == 'published') {
       $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
-      $pubdate = date('Y-m-d h:i:s+05:30', $node->workbench_moderation['current']->timestamp);
+      $pubdate = date('Y-m-d\Th:i:s\Z', $node->workbench_moderation['current']->timestamp);
     } else {
       $op_pub = date('F j, h:i a', $node->created);
-      $pubdate = date('Y-m-d h:i:s+5:30', $node->created);
+      $pubdate = date('Y-m-d\Th:i:s\Z', $node->created);
     }
     $guid = $node->nid . " at " . $base_url;
     $op_modified = date('F j, h:i a', $node->changed);
-    $modified = date('Y-m-d h:i:s+5:30', $node->changed);
+    $modified = date('Y-m-d\Th:i:s\Z', $node->changed);
     $auth_name = get_author_name($node->nid);
     $desc = $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
     $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
@@ -234,23 +234,11 @@ function itg_fia_xml_node_feed($query) {
       'link' => $base_url . '/' . current_path(),
   );
 
-//  header("Content-Type: text/xml");
-//  $output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" >";
-//  $output .= "<rss version='2.0' xml:base='" . $xml_base . "' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:atom='http://www.w3.org/2005/Atom'>";
-//  $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items);
-//  $dom = new DOMDocument;
-//  $dom->preserveWhiteSpace = false;
-//  $dom->formatOutput = true;
-//  $dom->loadXML($output);
-//  echo $dom->saveXML();
-//  exit;
-
   $output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>\n";
   $output .= "<rss version='2.0' xml:base='" . $xml_base . "' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:atom='http://www.w3.org/2005/Atom'>\n";
   $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items);
   drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');
   print $output;
-  
 }
 
 /**
@@ -275,68 +263,67 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
  * Creates the xml item.
  */
 function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
-
   $output = "    <item>\n";
-  $output .= "     <title>" . $title . "</title>\n";
-  $output .= "     <link>" . check_url($link) . "</link>\n";
-  $output .= "     <guid>" . $guid . "</guid>\n";
-  $output .= "     <pubDate><![CDATA[" . $pubdate . "]]></pubDate>\n";
-  $output .= "     <author>" . $name . "</author>\n";
-  $output .= "     <description>" . $desc . "</description>\n";
+  $output .= "      <title>" . $title . "</title>\n";
+  $output .= "      <link>" . check_url($link) . "</link>\n";
+  $output .= "      <guid>" . $guid . "</guid>\n";
+  $output .= "      <pubDate><![CDATA[" . $pubdate . "]]></pubDate>\n";
+  $output .= "      <author>" . $name . "</author>\n";
+  $output .= "      <description>" . $desc . "</description>\n";
   $output .= "    <content:encoded>\n";
   $output .= "    <![CDATA[\n";
   $output .= "    <!doctype html>\n";
   $output .= "    <html lang='en' prefix='op: http://media.facebook.com/op#'>\n";
   $output .= "    <head>\n";
-  $output .= "     <meta charset='utf-8'>\n";
-  $output .= "     <meta property ='fb:op-recirculation-ads' content=placement_id=".'xxxxxx'.">\n";
-  $output .= "     <meta property='fb:use_automatic_ad_placement' content='enable=true ad_density=default'>\n";
-  $output .= "     <meta property='op:markup_version' content='v1.0'>\n";
-  $output .= "     <meta property='og:title' content='" . $title . "'>\n";
-  $output .= "     <meta property='og:description' content='" . $desc . "'>\n";
-  $output .= "     <link rel='canonical' href='" . $link . "'>\n";
-  $output .= "     <link rel='stylesheet' title='default' href='#'>\n";
-  $output .= "     <meta property='op:markup_version' content='v1.0'>\n";
-  $output .= "    </head>\n";
-  $output .= "     <body>\n";
-  $output .= "     <article>\n";
-  $output .= "     <header>\n";
+  $output .= "    <meta charset='utf-8'>\n";
+  $output .= "    <meta property ='fb:op-recirculation-ads' content=placement_id=".'xxxxxx'.">\n";
+  $output .= "    <meta property='fb:use_automatic_ad_placement' content='enable=true ad_density=default'>\n";
+  $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
+  $output .= "    <meta property='og:title' content='" . $title . "'>\n";
+  $output .= "    <meta property='og:description' content='" . $desc . "'>\n";
+  $output .= "    <link rel='canonical' href='" . $link . "'>\n";
+  $output .= "    <link rel='stylesheet' title='default' href='#'>";
+  $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
+  $output .= "    </head>\n\n";
+  $output .= "    <body>\n";
+  $output .= "    <article>\n";
+  $output .= "    <header>\n";
   // <!-- The header image shown inside your article --> 
-  $output .= "     <figure data-feedback='fb:likes, fb:comments'>\n";
-  $output .= "      <img src='" . $fb_instant_image . "' />\n";
-  $output .= "      <figcaption class='op-vertical-below'>\n";
-  $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>\n";
-  $output .= "      </figcaption>\n";
-  $output .= "     </figure>\n";
-  $output .= "     <h1>" . $title . "</h1>\n";
-  $output .= "     <h2>" . $kicker . "</h2>\n";
+  $output .= "    <figure data-feedback='fb:likes, fb:comments'>";
+  $output .= "     <img src='" . $fb_instant_image . "' />";
+  $output .= "     <figcaption class='op-vertical-below'>";
+  $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>";
+  $output .= "     </figcaption>";
+  $output .= "    </figure>";
+  $output .= "    <h1>" . $title . "</h1>";
+  $output .= "    <h2>" . $kicker . "</h2>";
   // <!-- A kicker for your article -->
-  $output .= "     <h3 class='op-kicker'>" . $kicker . "</h3>\n";
+  $output .= "      <h3 class='op-kicker'>" . $kicker . "</h3>\n";
   // <!-- The author of your article -->
-  $output .= "     <address>" . $name . "</address>\n";
-  $output .= "     <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
-  $output .= "     <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>\n";
-  $output .= "     </header>\n";
-  
-  $output .= "     <div property='content:encoded'>" . $node_body_content . "</div>\n";
-  $output .= "      <footer>\n";
+  $output .= "      <address>" . $name . "</address>\n";
+  $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
+  $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>\n";
+  $output .= "    </header>\n\n";
+  $output .= "    <div property='content:encoded'>" . $node_body_content . "</div>\n";
+  $output .= "    <footer>\n";
   // <!-- Credits for your article -->
-  $output .= "       <aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>\n";
+  $output .= "    <aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>\n";
   // <!-- Copyright details for your article -->
-  $output .= "       <small>© Facebook</small>\n";
-  $output .= "      </footer>\n";
-  $output .= "     </article>\n";
-  $output .= "     </body>\n";
-  $output .= "    </html>\n";
-  $output .= "    ]]>\n";
-  $output .= "    </content:encoded>\n";
-  $output .= "    </item>\n";
+  $output .= "    <small>© Facebook</small>\n";
+  $output .= "    </footer>\n\n";
+  $output .= "    </article>\n\n";
+  $output .= "    </body>\n\n";
+  $output .= "    </html>\n\n";
+  $output .= "    ]]>\n\n";
+  $output .= "    </content:encoded>\n\n";
+  $output .= "    </item>\n\n";
   return $output;
 }
 
 /*
  * Return Author Name
  */
+
 function get_author_name($auid) {
   $get_author_id = db_query("SELECT byline_id from {itg_multi_byline_info} mbi WHERE mbi.nid = :nid AND mbi.publish_status = :status", array(":nid" => $auid, ":status" => 1))->fetchField();
   $author_name = db_query("SELECT title from {node} n WHERE n.nid = :nid", array(":nid" => $get_author_id))->fetchField();

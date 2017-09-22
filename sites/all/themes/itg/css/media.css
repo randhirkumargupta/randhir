@@ -1685,6 +1685,23 @@
   .view-front-end-global-search .searh-all-filters .views-exposed-widget.views-submit-button {
     width: 165px;
   }
+
+  /*css start photo page embed code */
+  .show-embed-code-link .show-embed-code-div {
+    width: 280px;
+    left: -18px;
+  }
+  .show-embed-code-link .show-embed-code-div textarea {
+    min-height: 120px;
+  }
+
+  /*css end photo page embed code */
+  /*css start video detail page video player */
+  #block-views-video-landing-header-block .video-header-left .video iframe {
+    width: 100%;
+  }
+
+  /*css end video detail page video player*/
 }
 @media only screen and (max-width: 767px) {
   /*css start oscar-layout-page */

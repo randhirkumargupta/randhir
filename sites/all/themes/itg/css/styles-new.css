@@ -7615,7 +7615,6 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 /*css Mega Review || Mobile */
 #block-itg-mega-reviews-critics-mega-review-mobile-header .comment-mobile {
   background: #1c1c1c;
-  margin: -15px -15px 20px;
   font-family: "Roboto", sans-serif;
   text-align: right;
 }
@@ -7629,7 +7628,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 }
 #block-itg-mega-reviews-critics-mega-review-mobile-header .comment-mobile ul li a {
   color: #c0c0c0;
-  padding: 10px 8px;
+  padding: 10px 5px;
   display: block;
   text-transform: uppercase;
 }
@@ -7640,4 +7639,4 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   display: none;
 }
 
-/*css end Mega Review || Mobile */
+/*css end Mega Review || Mobile  */

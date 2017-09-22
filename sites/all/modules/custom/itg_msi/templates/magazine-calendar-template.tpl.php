@@ -1,4 +1,4 @@
-<span class="calendar-title">calendar</span>
+<span class="widget-title">calendar</span>
 <?php
 
 /**

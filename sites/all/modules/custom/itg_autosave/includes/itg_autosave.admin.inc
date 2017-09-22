@@ -165,22 +165,31 @@ function itg_autosave_nodeform($nid, $ctype) {
     $title = isset($inputs['title']) ? $inputs['title'] != '' ? check_plain($inputs['title']) : ''  : '';
   }
 
-  // If title is empty then exit the process.
+  
   if ($node->nid != null) {
-    // Set up the meta tags values on node updated
-      
+    
+    // Issue Based Story Setup
+    if (!array_key_exists('field_story_magazine_story_issue', $inputs)) {
+      $node->field_story_magazine_story_issue = array();
+    } else {
+      $issue_value = array('und' => array(0 => array('value' => 'magazine_issue_story')));
+      $node->field_story_magazine_story_issue = $issue_value;
+    }
+    
+    // Set up the event backend
     if (isset($arg[2]) && !empty($arg[2])) {
       if ($node->type == 'event_backend') {
         if (strpos($_SERVER['HTTP_REFERER'], 'step_configuration')){
           $node->field_step_completion[LANGUAGE_NONE][0]['value'] = 2;
         }
       }
-      
+      // Set up the meta tags values on node updated
       $node->metatags[LANGUAGE_NONE]['title']['value'] = $inputs['metatags']['und']['title']['value'];
       $node->metatags[LANGUAGE_NONE]['description']['value'] = $inputs['metatags']['und']['description']['value'];
       $node->metatags[LANGUAGE_NONE]['keywords']['value'] = $inputs['metatags']['und']['keywords']['value'];
     }
     
+    // Get the lock status and add lock into the node form
     $lock_status = $itg_auto_save->itg_autosave_get_lock_status_node_id($node->nid);
     if ($lock_status->lock_status == 1 && $node->status == 0 && $arg[2] == 'null') {
       print t('Autosave lock from add page');
@@ -188,6 +197,7 @@ function itg_autosave_nodeform($nid, $ctype) {
     }
   }
 
+  // If title is empty then exit the process.
   if (empty($title)) {
     print t('Title is empty');
     exit();

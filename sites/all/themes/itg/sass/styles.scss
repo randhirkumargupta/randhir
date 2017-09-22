@@ -2228,10 +2228,13 @@ footer {
 .home-shows {
     .trending-videos {
         border: none;
-        padding-top: 25px;
+        padding-top: 0px;
         .trending-videos-list {
             overflow: hidden;
             padding: 10px 0;
+            &:first-child {
+                padding-top: 0;
+            }
         }
     }
 }
@@ -4662,7 +4665,7 @@ h1.category-heading {
         @include video-detail-page-sociallike;
         .slick-slider {
             padding: 10px;
-            background: #000;
+            /*background: #000*/
             border: none;
             .slick-slide {
                 position: relative;
@@ -13389,7 +13392,7 @@ span.close_btt {
 }
 
 .not-front .watch-right-now-video h3 {
-    display: none;
+    /* display: none;*/
 }
 
 span.see-picture {
@@ -13429,7 +13432,7 @@ span.see-picture {
 }
 
 .top_stories_ordering .widget-title {
-    padding: 1px 7px;
+    padding: 5px 7px 1px 7px;
 }
 
 .data-holder {
