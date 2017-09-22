@@ -15,9 +15,7 @@
         <item>
             <title> {{{node_title}}} </title>
             <link> {{{node_permalink}}} </link>
-            <description>
-                <a href="{{{mrss_node_permalink}}}"><img src="{{{field_story_extra_small_image}}}" align="left" hspace="2" height="82" width="107" alt="" border="0" /></a>{{{field_story_expert_description}}}<br clear="all"/>
-            </description>
+            <description><![CDATA[  <a href="{{{mrss_node_permalink}}}"> <img align="left" hspace="2" height="82" width="107" alt="" border="0" src="{{{field_story_extra_large_image}}}"> </a> ]]> {{{field_story_expert_description}}} <![CDATA[ <br clear='all'> ]]> </description>
             <pubDate> {{{node_published_date}}} </pubDate>
             <media:content type="video/quicktime" expression="full" url="{{{mrss_node_permalink}}}">
                 <media:category scheme="{{{mrss_node_permalink}}}">{{{section_category_name}}}</media:category>
