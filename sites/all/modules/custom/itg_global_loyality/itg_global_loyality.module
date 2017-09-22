@@ -76,6 +76,13 @@ function itg_global_loyality_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['itg-sso-get-social-mobile'] = array(
+    'title' => t('get mobile of social user'),
+    'page callback' => 'itg_sso_get_social_mobile',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   $items['admin/config/people/global-point-report-history'] = array(
     'title' => 'Global point history',
     'description' => 'Global point history',
@@ -965,5 +972,56 @@ function global_sso_entry_backend_user_email($email = NULL, $uid = NULL, $proper
         
       }
     }
+  }
+}
+
+/**
+ * Implemsnts itg_sso_get_social_uid(). 
+ */
+function itg_sso_get_social_uid($sso_id = NULL) {
+  if (!empty($sso_id)) {
+    global $user;
+    if ($user->uid > 0 && array_key_exists(FRONT_USER, $user->roles)) {
+      $url = variable_get('global_loyalty_url') . '/itg-sso-get-social-mobile';
+      $data = 'sso_id=' . $sso_id;
+      $options = array(
+        'method' => 'POST',
+        'data' => $data,
+        'timeout' => 60,
+        'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+      );
+      $response = drupal_http_request($url, $options);
+      // Check if successful
+      if ($response->code == 200) {
+        $result =  json_decode($response->data, true);
+        return $result;
+      }
+    }
+  }
+}
+
+/**
+ * Implemsnts itg_sso_get_social_mobile(). 
+ */
+function itg_sso_get_social_mobile($sso_id = NULL) {
+  
+  $sso_id = $_POST['sso_id'];
+  if (!empty($sso_id)) {
+    try {
+      $uid = itg_global_loyality_get_uid($sso_id);
+      $query = db_select('field_data_field_mobile_number', 'f');
+      $query->fields('f', array('field_mobile_number_value'))
+            ->condition('f.bundle', 'user')
+            ->condition('f.entity_id', $uid);
+      $result = $query->execute()->fetchField();
+      print drupal_json_output($result);
+      drupal_exit();
+    }
+    catch (Exception $e) {
+      watchdog('get social user mobile exception', '<pre>' . $e->getMessage() . '</pre>');
+    }
+  }
+  else {
+    return drupal_access_denied();
   }
 }
