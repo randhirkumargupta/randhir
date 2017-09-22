@@ -25,7 +25,7 @@ foreach ($view->result as $item): ?>
                         'attributes' => array('class' => 'custom-inline', 'style' => 'border:1px solid #aaa;')
                       )
                     );
-            print $image;
+           print l($image, 'node/' . $item->nid, array('html' => TRUE));
 
           } ?> 
    
@@ -33,7 +33,7 @@ foreach ($view->result as $item): ?>
   </div>
   <div class="detail">
        <div class="anchor-right" >
-            <h3><?php print $item->node_title; ?></h3>
+            <h3><?php print l($item->node_title , 'node/' . $item->nid) ?></h3>
                <!-------  followers count -->
                   <?php 
                   if (function_exists('itg_get_followers')) { 
