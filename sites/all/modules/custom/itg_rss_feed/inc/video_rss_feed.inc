@@ -109,7 +109,8 @@ function get_video_item_rss($section_id, $term_name, $section_url) {
         $image_data = get_thumbnail_by_fid($field_story_extra_large_image_fid);
         $img_url = $image_data->imageurl;
         $created = $resvalue['created'];
-        $created_date = date("D, d M Y H:i:s", $created);  
+        date_default_timezone_set("GMT");
+        $created_date = date("D, d M Y H:i:s e", $created);  
         $output .= '<item>';
         $output .= '<title><![CDATA[' . $title . ']]></title>';
         $output .= '<link><![CDATA[' . $url . ']]></link>';
