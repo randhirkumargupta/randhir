@@ -67,10 +67,14 @@ if (!in_array('administrator', $user->roles)) {
     <i class="fa fa-bell-o"></i>
     <dfn class="itg-final-bell-count">
       <?php 
+        $octopus_html_slug_notification = '';
         if(function_exists('itg_octopus_get_slug_notification')){
           $itg_octopus_get_slug_notification = '';
           $itg_octopus_get_slug_notification = itg_octopus_get_slug_notification();
           print $itg_octopus_get_slug_notification['count'];
+          if (isset($itg_octopus_get_slug_notification['html'])) {
+            $octopus_html_slug_notification = $itg_octopus_get_slug_notification['html'];
+          }
         }
       ?>
     </dfn>
@@ -89,7 +93,7 @@ if (!in_array('administrator', $user->roles)) {
     print '  Username - '. $user->name.' | Role - '.$role_display.' | '.$myaccount;
    ?>
 </span>                                                  
-<div class="bell-notice itg-final-bell-notice"><?php print $itg_octopus_get_slug_notification['html']; ?></div>
+<div class="bell-notice itg-final-bell-notice"><?php print $octopus_html_slug_notification; ?></div>
 
 </div>
 <?php } ?>
