@@ -33,13 +33,15 @@ function itg_widget_init() {
 // Js for move funtionality.
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
     global $base_url, $user;
-
+    $arg = arg();
+    if(($arg[0] != 'node') && ($arg[1] != 'add' && $arg[2] != 'edit')) {
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
     $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
     drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
+    }
 }
 
 /**
