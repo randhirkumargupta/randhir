@@ -613,7 +613,9 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 
   if (function_exists('itg_common_dropdown_supplement')) {
+    if(!empty($magazine_id)) {
     $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+    }
   }
 
   // Setup tv time field select
@@ -1294,6 +1296,7 @@ function _sponsor_category_setting() {
  * @return false or external url
  */
 function _is_external_url_story_article($nid) {
+  
   $is_external_url = FALSE;
   if (isset($nid)) {
     if (db_table_exists('field_data_field_story_external_url')) {
