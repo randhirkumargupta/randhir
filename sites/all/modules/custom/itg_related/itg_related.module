@@ -168,6 +168,7 @@ function my_custom_ajax_callback() {
     $final_link = str_replace("&width=900&height=700&iframe=true", "", $_POST['dta']);
     $final_with_title = $final_link . '&sname=' . $_POST['search_name'];
     $related_res = '<li><a class= "def-cur-pointer" onclick="showrelatedpopup(' . "'" . $final_with_title . "'" . ')">' . $_POST['search_name'] . '</a></li>';
+    cache_clear_all('itg_related:related_form_block', 'cache_block', TRUE);
   }
 
   if ($result !== FALSE) {
@@ -655,7 +656,7 @@ function itg_related_save_search() {
 
   $related_html.= '</ul>';
 
-  print $related_html;
+  return $related_html;
 }
 
 /**
@@ -680,6 +681,7 @@ function itg_related_block_view($delta = '') {
   $data = '';
   switch ($delta) {
     case 'related_form_block':
+      $data = itg_related_save_search();
       $block['content'] = theme('related_form_display_block', array('data' => $data));
       break;
   }
