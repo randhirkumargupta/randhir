@@ -437,7 +437,7 @@ function itg_menu_manager_form_validate($form, &$form_state) {
  */
 function itg_menu_manager_get_child_under_category_management($string) {
     //$vocuvolary = taxonomy_vocabulary_machine_name_load('category_management');
-    $options_source = _get_all_terms_under_vocabulary(CATEGORY_MANAGMENT);
+    /*$options_source = _get_all_terms_under_vocabulary(CATEGORY_MANAGMENT);
 
     foreach ($options_source as $item) {
         if (itg_category_manager_term_state($item->tid) && module_exists('itg_category_manager') && function_exists('itg_category_manager_term_state')) {
@@ -451,7 +451,14 @@ function itg_menu_manager_get_child_under_category_management($string) {
       ->fields('ttd', array('tid', 'name'))
       ->condition('ttd.tid', array($options), 'IN')
       ->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE')
-      ->range(0, 20);
+      ->range(0, 20);*/
+    
+    //code add by shravan :: 24 sept 2017
+    $match_terms_query = db_select('taxonomy_term_data', 'ttd');
+    $match_terms_query->fields('ttd', array('tid', 'name'));
+    $match_terms_query->Join('itg_category_manager', 'icm', 'icm.tid = ttd.tid');    
+    $match_terms_query->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE');
+    $match_terms_query->range(0, 20);
 
     $match_terms = $match_terms_query->execute()->fetchAll();
 
