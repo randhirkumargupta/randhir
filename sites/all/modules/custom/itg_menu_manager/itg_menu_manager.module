@@ -456,7 +456,8 @@ function itg_menu_manager_get_child_under_category_management($string) {
     //code add by shravan :: 24 sept 2017
     $match_terms_query = db_select('taxonomy_term_data', 'ttd');
     $match_terms_query->fields('ttd', array('tid', 'name'));
-    $match_terms_query->Join('itg_category_manager', 'icm', 'icm.tid = ttd.tid');    
+    $match_terms_query->Join('itg_category_manager', 'icm', 'icm.tid = ttd.tid');
+    $match_terms_query->condition('icm.status', 1);
     $match_terms_query->condition('ttd.name', '%' . db_like($string) . '%', 'LIKE');
     $match_terms_query->range(0, 20);
 
