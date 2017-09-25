@@ -325,7 +325,9 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
     if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview') {
       drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2, 'scope' => 'footer'));
     }
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
+    
+  $ctype = array('story', 'photogallery', 'videogallery', 'mega_review_critic', 'blog', 'breaking_news', 'podcast');
+  if (in_array($node->type, $ctype)) {
       if (!empty($node->field_gallery_image['und'][0]['value']) && $node->type == 'photogallery') {
         $entity = entity_load('field_collection_item', array($node->field_gallery_image['und'][0]['value']));
         $photo_image = $entity[$node->field_gallery_image['und'][0]['value']]->field_images['und'][0]['uri'];
@@ -377,6 +379,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         drupal_add_html_head($twitter_tag, 'twitter_tag' . $key);
         
       }
+      
       $fb_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
       $fb_image_tag = array(
           '#type' => 'html_tag',
@@ -404,6 +407,69 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           )
         );
       
+      $og_locale = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:locale',
+            'content' => 'en_US',
+          )
+        );
+      
+      $og_sitename = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:site_name',
+            'content' => 'India Today',
+          )
+        );
+      
+      $data = getimagesize($fb_image);
+      $publish_time = date('F d,Y h.i A', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']));
+      $og_image_width = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image:width',
+            'content' => $data[0],
+          )
+        );
+      $og_image_height = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image:height',
+            'content' => $data[1],
+          )
+        );
+      $og_image_type = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:image:type',
+            'content' => $data['mime'],
+          )
+        );
+      
+      $og_publish_time = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:published_time',
+            'content' => $publish_time,
+          )
+        );
+      
+      $og_description = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'property' => 'og:description',
+            'content' => $node->metatags[LANGUAGE_NONE]['description']['value'],
+          )
+        );
+      
       if($view_mode != 'amp') {
         $og_path = $base_url.'/'.$node->path['alias'];
       } else {
@@ -419,10 +485,17 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           )
         );
       drupal_add_html_head($fb_og_url, 'fb_og_url');
+      drupal_add_html_head($og_description, 'og_description');
       drupal_add_html_head($fb_og_title, 'fb_og_title');
       drupal_add_html_head($fb_og_type, 'fb_og_type');
+      drupal_add_html_head($og_locale, 'og_locale');
+      drupal_add_html_head($og_sitename, 'og_sitename');
+      drupal_add_html_head($og_publish_time, 'og_publish_time');
       if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
       drupal_add_html_head($fb_image_tag, 'fb_image_tag');
+      drupal_add_html_head($og_image_width, 'og_image_width');
+      drupal_add_html_head($og_image_height, 'og_image_height');
+      drupal_add_html_head($og_image_type, 'og_image_type');
       }
     }
   }
