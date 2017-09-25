@@ -1147,6 +1147,24 @@ function itg_rapid_api_resource() {
                             'description' => 'user mobile or email',
                             'type' => 'array',
                         ),
+                        array(
+                            'name' => 'device_id',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device_id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_type',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device_type',
+                            'type' => 'array',
+                        ),
                     ),
                 ),
             ),
@@ -3453,15 +3471,39 @@ function itg_rapid_api_twtlogin($token, $app_id, $uname, $uid, $issued_at, $expi
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_forgot_password($token, $user_id) {
+function itg_rapid_api_forgot_password($token) {
     $HTTP_RAW_POST_DATA;
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
+    
+     // login raw input validation
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = forgotPasswordValidation_rapid($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+    if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    }
+    
+     // check valid user_id
+    $rand = rand();
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $result = callAPI("GET", $url, $params);
+    $result_obj = json_decode($result);
+    //echo "hi";p($result_obj->uid);die();
+    if (!$result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "This phone number/ email is not registered";
+        return $account_err;
+    }
 
     $url = SSO_SERVER_URL . "/appapi/forgot_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
+    cleanToken_Rapid($params);
     $data['status_code'] = "1";
     $data['status_message'] = "";
 

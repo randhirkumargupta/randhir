@@ -1158,7 +1158,69 @@ function cleanToken_Rapid($params) {
         $query = db_delete('itg_app_device');
         $query->condition('uid', $uid);
         $query->condition('device_id', $device_id);
-        $query->condition('token', $auth_token);
+        //$query->condition('token', $auth_token);
         $query->execute();
     }
+}
+
+/**
+ * Call back function for forgot password raw data validation .
+ * @param array
+ * @return array
+ */
+function forgotPasswordValidation_rapid($params) {
+
+    $user_id = trim($params['user_id']);    
+    $device_id = trim($params['device_id']);
+    $device_type = trim($params['device_type']);
+
+    $error = array();
+    $userid_is_numeric = 0;
+
+    $userid_is_numeric = is_numeric($user_id);
+
+    if (!$userid_is_numeric) {
+        if (function_exists('itg_sso_user_email_check')) {
+            $get_user_check_email = itg_sso_user_email_check($user_id);
+        }
+        if (function_exists('itg_sso_user_email_domain')) {
+            $get_user_check_domain = itg_sso_user_email_domain($user_id);
+        }
+    } else {
+        if (function_exists('itg_sso_user_mobile_check')) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($mobile);
+        }
+    }
+
+
+    // user_id validation
+
+    if (empty($user_id)) {
+        $error['user_id'] = t('Please Enter Email/Mobile');
+    } else {
+
+        if (!$userid_is_numeric) {
+            if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+                $error['user_id'] = t("Invalid email/phone number");
+            } else if (empty($get_user_check_email)) {
+                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+            } else {
+                //$error['user_id'] = t("");
+            }
+        } else {
+            if (!preg_match('/^\d{10}$/', $user_id)) {
+                $error['user_id'] = t("Invalid email/phone number");
+            } else if (empty($get_user_check_mobile)) {
+                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+            } else {
+                //$error['user_id'] = t('');
+            }
+        }
+    }
+
+    
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
+
+    return $error_settings;
 }
