@@ -283,6 +283,5 @@ function getImgTag($node) {
   if ($src) {
     $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
   }
-
   return $imgtag;
 }
