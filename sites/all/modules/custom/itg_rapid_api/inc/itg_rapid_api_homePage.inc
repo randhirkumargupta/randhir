@@ -88,7 +88,7 @@ function homePageJsonPackagelist() {
         $data_news['order'] = "1";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "Lifestyle";
-        $data_news['label'] = "Customized - Edit team will put it in Text Field";
+        $data_news['label'] = "Lifestyle";
         $data_news['show_label'] = "0";
 
 
@@ -300,7 +300,7 @@ function homePageJsonTopstories() {
     $data_topstories['order'] = "2";
     $data_topstories['type'] = "newslist";
     $data_topstories['title'] = "Top Stories";
-    $data_topstories['label'] = "Customized - Edit team will put it in Text Field";
+    $data_topstories['label'] = "Top Stories";
     $data_topstories['show_label'] = "0";
 
     // xml tag wring for features widget..
@@ -437,7 +437,7 @@ function homePageJsonNewslist_india() {
         $data_news['order'] = "3";
         $data_news['type'] = "newslist";
         $data_news['title'] = "India";
-        $data_news['label'] = "Customized - Edit team will put it in Text Field";
+        $data_news['label'] = "India";
         $data_news['show_label'] = "0";
 
 
@@ -641,7 +641,7 @@ function homePageJsonNewslist_world() {
         $data_news['order'] = "4";
         $data_news['type'] = "newslist";
         $data_news['title'] = "World";
-        $data_news['label'] = "Customized - Edit team will put it in Text Field";
+        $data_news['label'] = "World";
         $data_news['show_label'] = "0";
 
 
@@ -811,7 +811,7 @@ function homePageJsonMagazine() {
     $data_magazine['order'] = "5";
     $data_magazine['type'] = "magazine";
     $data_magazine['title'] = "From The Magazine";
-    $data_magazine['label'] = "Customized - Edit team will put it in Text Field";
+    $data_magazine['label'] = "From The Magazine";
     $data_magazine['show_label'] = "0";
     // news list
     $share_url = get_node_firebase_weburl($nid);
