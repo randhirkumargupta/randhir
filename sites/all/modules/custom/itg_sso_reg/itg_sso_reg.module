@@ -30,8 +30,9 @@ function itg_sso_reg_init() {
     drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_change_email.js', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
   }
-
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js', array('scope' => 'footer'));  
+  if($theme == FRONT_THEME_NAME) {
+  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js', array('scope' => 'footer'));
+  }
 }
 
 /**
