@@ -162,7 +162,9 @@ function itg_users_block_user() {
 
   foreach ($itg_result as $itg_val) {
     $user = user_load($itg_val->entity_id);
+    if (!array_key_exists(FRONT_USER, $user->roles)) {
     $user->status = 0;
     user_save($user);
+    }
   }
 }
