@@ -82,6 +82,20 @@ function get_rss_feed_header() {
  *
  * @return string
  */
+function get_rss_feed_sub_header_latestnews() {
+  global $base_url;
+    $output = "";
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output = "<title><![CDATA[India Today Latest Stories]]></title><description>India Today</description><link><![CDATA[".$base_url."]]></link><lastBuildDate>".$todat_date."</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>".$base_url."/sites/all/themes/itg/logo.png</url><title><![CDATA[India Today | Anchors]]></title><link><![CDATA[".$base_url."]]></link><description>India Today</description></image>";
+  return $output;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
 function get_rss_feed_google_stand_header() {
   $output = "";
   $output = '<rss xmlns:content="http://purl.org/rss/1.0/modules/content" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel>';
