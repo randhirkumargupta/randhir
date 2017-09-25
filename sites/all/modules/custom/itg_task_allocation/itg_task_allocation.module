@@ -60,13 +60,13 @@ function itg_task_allocation_expirestatus_enddatemail() {
     $query->fields('s', array('field_task_comment_change_status_value'));
     $query->fields('u', array('mail'));
     $query->fields('ur', array('mail'));
-//    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
-//    $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
+    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
+    $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
     $result = $query->execute();
     foreach ($result as $value) {   
-//      $node = node_load($value->nid);
-//      $node->field_task_comment_change_status['und'][0]['value'] = 'expired';
-//      field_attach_update('node', $node);
+      $node = node_load($value->nid);
+      $node->field_task_comment_change_status['und'][0]['value'] = 'expired';
+      field_attach_update('node', $node);
       expiredtask_authormail_content($value, 'task_expiry', 'task_idea_allocation_tracking');
     }
 }
