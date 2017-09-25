@@ -61,6 +61,13 @@ function itg_rss_feed_menu() {
     'file' => 'inc/latestnews_rss_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  
+  $items['rss/miscellaneous'] = array(
+    'page callback' => 'miscellaneous_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/miscellaneous_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
     return $items;
 }
 
@@ -74,6 +81,20 @@ function get_rss_feed_header() {
   $output = '<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>';
 
+  return $output;
+}
+
+/**
+ * common function for return rss feed file header
+ *
+ * @return string
+ */
+function get_rss_feed_sub_header_miscellaneous() {
+  global $base_url;
+    $output = "";
+  date_default_timezone_set("GMT");
+  $todat_date = date("D, d M Y H:i:s e");
+  $output = "<title><![CDATA[India Today | Twitter]]></title><description>India Today</description><link><![CDATA[".$base_url."/newsbuzzer ]]></link><lastBuildDate>".$todat_date."</lastBuildDate><generator>FeedCreator 1.7.2</generator><image><url>".$base_url."/sites/all/themes/itg/logo.png</url><title><![CDATA[India TodayMiscellaneous]]></title><link><![CDATA[".$base_url."/newsbuzzer ]]></link><description>India Today</description></image>";
   return $output;
 }
 
