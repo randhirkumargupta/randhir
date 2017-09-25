@@ -291,7 +291,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
     // for story assign to widget
     if (function_exists('itg_story_assign_to_widget')) {
        if(is_array($story_widget) && count($story_widget) > 0) {		
-          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign, 'story');
       }
     }
   }
@@ -309,7 +309,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
       // for story assign to widget
       if (function_exists('itg_story_assign_to_widget')) {
         if(is_array($story_widget) && count($story_widget) > 0) {
-          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign, 'story');
         }
       }
 
@@ -374,9 +374,8 @@ function itg_story_form_custom_callback($form, &$form_state) {
  * @param array $story_widget
  * @param int $cat_id
  */
-function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previous_story_assign) {
+function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previous_story_assign, $content_type) {
   if (!empty($story_widget)) {
-    $content_type = 'story';
     foreach ($story_widget as $widget_val) {
       $result[$widget_val] = $widget_val;
       $result_exist = itg_story_widget_data_exist($nid, 'top_stories_widget');

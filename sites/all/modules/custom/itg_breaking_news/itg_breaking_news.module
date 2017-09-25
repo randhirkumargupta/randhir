@@ -241,7 +241,19 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_breaking_news_form_custom_callback($form, &$form_state) {
-  
+  if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+    $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+  }
+  else {
+    $previous_story_assign = '';
+  }
+  $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+  // for breaking new assign to widget
+  if (function_exists('itg_story_assign_to_widget')) {
+    if(is_array($story_widget) && count($story_widget) > 0) {
+      itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign, 'breaking_news');
+    }
+  }
   // REDIRECTION FOR APPLY BUTTON
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
