@@ -3495,7 +3495,7 @@ function itg_rapid_api_forgot_password($token) {
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
     if (!$result_obj->uid) {
-        $account_err['status_code'] = "0";
+        $account_err['status_code'] = "2";
         $account_err['status_message'] = "This phone number/ email is not registered";
         return $account_err;
     }
