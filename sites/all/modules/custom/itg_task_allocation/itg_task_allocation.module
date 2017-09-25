@@ -54,18 +54,19 @@ function itg_task_allocation_expirestatus_enddatemail() {
     $query->join('users', 'ur', 'ur.uid = ttm.field_task_team_member_target_id');
     $query->fields('n', array('nid'));
     $query->condition('n.status', 1, '=');
+    $query->condition('n.nid', 840590, '=');
     $query->condition('n.type', 'task_idea_allocation_tracking', '=');
     $query->fields('f', array('field_task_finish_date_and_time_value'));
     $query->fields('s', array('field_task_comment_change_status_value'));
     $query->fields('u', array('mail'));
     $query->fields('ur', array('mail'));
-    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
-    $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
+//    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
+//    $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
     $result = $query->execute();
     foreach ($result as $value) {   
-      $node = node_load($value->nid);
-      $node->field_task_comment_change_status['und'][0]['value'] = 'expired';
-      field_attach_update('node', $node);
+//      $node = node_load($value->nid);
+//      $node->field_task_comment_change_status['und'][0]['value'] = 'expired';
+//      field_attach_update('node', $node);
       expiredtask_authormail_content($value, 'task_expiry', 'task_idea_allocation_tracking');
     }
 }
@@ -589,7 +590,6 @@ function expiredmail_mail_content($to) {
     'body' => $content,
     'subject' => $subject,
   );
-
   $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
@@ -615,9 +615,10 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   global $base_url;
   if (!empty($var->ur_mail) || !empty($var->mail)) {
     $node_url = l('URL', '/node/' . $var->nid);
+    $node_title = itg_common_get_node_title($var->nid);
     $body = $get_mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value'];
-    $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);
-
+    $get_title = str_replace('[itg_mail_token:itg_node_title]', $node_title, $body);
+    $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $get_title);
     $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
                 <html xmlns:v="urn:schemas-microsoft-com:vml">
                   <head><title></title></head>
@@ -645,10 +646,10 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   
   if (!empty($var->mail)) {
     $node_url = l('URL', '/node/' . $var->nid);
+    $node_title = itg_common_get_node_title($var->nid);
     $body = $get_mail_data->field_mail_body_task_idea_assign[LANGUAGE_NONE][0]['value'];
-    
-    $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);
-
+    $get_title = str_replace('[itg_mail_token:itg_node_title]', $node_title, $body);
+    $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $get_title);
     $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
                 <html xmlns:v="urn:schemas-microsoft-com:vml">
                   <head><title></title></head>
