@@ -3482,8 +3482,12 @@ function itg_rapid_api_forgot_password($token) {
     $validation_error_str = "";
     $validation_error = forgotPasswordValidation_rapid($params);
     $validation_error_str = implode(", ", $validation_error['custom_error']);
+    $error_code_flag = 0;
+    if($error_code_flag = "This phone number/ email is not registered"){
+        $error_code_flag = 2;
+    }
     if ($validation_error_str) {
-        $account_err['status_code'] = "0";
+        $account_err['status_code'] = "$error_code_flag";
         $account_err['status_message'] = "$validation_error_str";
         return $account_err;
     }
