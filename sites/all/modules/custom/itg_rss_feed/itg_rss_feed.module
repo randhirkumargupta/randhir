@@ -55,6 +55,12 @@ function itg_rss_feed_menu() {
     'file' => 'inc/issue_rss_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss/latestnews'] = array(
+    'page callback' => 'latestnews_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/latestnews_rss_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
     return $items;
 }
 
