@@ -157,7 +157,7 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__ssoheader';
   }
 
-  if ((!empty($arg[2]) && $arg[2] == 'ugc') || $arg[0] == 'password-success' || $arg[0] == 'complete-page' || $arg[0] == 'associate-photo-video-content' || $arg[0] == 'funalytics-popup' || $arg[1] == 'videogallery-embed') {
+  if (!empty($arg[2]) && (($arg[2] == 'ugc') || $arg[0] == 'password-success' || $arg[0] == 'complete-page' || $arg[0] == 'associate-photo-video-content' || $arg[0] == 'funalytics-popup' || $arg[1] == 'videogallery-embed')) {
     $variables['theme_hook_suggestions'][] = 'page__removeheader';
   }
 
@@ -177,7 +177,7 @@ function itg_preprocess_page(&$variables) {
   }
 
   // Access domain
-  if (function_exists('domain_select_format')) {
+  /*if (function_exists('domain_select_format')) {
     $format = domain_select_format();
     foreach (domain_domains() as $data) {
       if ($data['valid'] || user_access('access inactive domains')) {
@@ -192,7 +192,7 @@ function itg_preprocess_page(&$variables) {
     if (in_array($parse['host'], $options)) {
       $variables['theme_hook_suggestions'][] = 'page__event_domain';
     }
-  }
+  }*/
 
 
   // Call Event Parent TPL

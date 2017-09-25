@@ -275,6 +275,13 @@ function itg_widgets_custom_variables() {
 		'#attributes' => array('placeholder' => t('Enter Facebook share application id')),
 		'#default_value' => variable_get('itg_sharing_app_id'),
 	);
+  
+  $form['logoutsec_time'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter sso logout in milisecond'),
+		'#attributes' => array('placeholder' => t('Enter sso logout in milisecond')),
+		'#default_value' => variable_get('logoutsec_time'),
+	);
 
 	$form['parent_sso'] = array(
 		'#type' => 'textfield',

@@ -31,7 +31,8 @@
             }
             // code for logout 
             jQuery("a#myhref").attr('href', 'javascript:void(0)');
-
+            var logoutsec = Drupal.settings.itg_sso_login.settings.logoutsec;
+            console.log(logoutsec);
             jQuery('body').on('click', '#myhref', function () {
                 //Call Ajax
                 jQuery.ajax({
@@ -41,7 +42,7 @@
                         jQuery('#widget-ajex-loader').show();
                         setTimeout(function () {// wait for 5 secs(2)
                             window.location = base_url;
-                        }, 20000);
+                        }, logoutsec);
                     }
                 });
             });            
@@ -57,7 +58,7 @@
                         jQuery('#widget-ajex-loader').show();
                         setTimeout(function () {// wait for 5 secs(2)
                             window.location = base_url;
-                        }, 20000);
+                        }, logoutsec);
                     }
                 });
             });
