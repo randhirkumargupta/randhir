@@ -172,7 +172,7 @@ function itg_story_follow_unfollow_print($nid, $ntype, $activity, $t_name) {
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     // prepare url for sharing
     $uri = base64_encode($actual_link);
-    $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
+    $sso_url = PARENT_SSO . '/saml_login/other/' . $uri;
     $html = "<li class=\"author mhide\"><a title='follow' href='".$sso_url."'>Follow</a>".$t_name."</li>";
   }
   print $html;
