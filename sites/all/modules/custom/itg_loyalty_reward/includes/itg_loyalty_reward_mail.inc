@@ -112,7 +112,8 @@ function itg_loyalty_reward_product_expiration_user_emails($user_type,$node_user
   $query->fields('u', array('uid'))
       ->fields('u', array('mail'))
       ->fields('u', array('name'))
-      ->condition('r.name', $roles, 'IN');
+      ->condition('r.name', $roles, 'IN')
+      ->condition('u.status', 1);
   $result = $query->execute();
   while ($record = $result->fetchAssoc()) {
     $user_list[] = $record['mail'];

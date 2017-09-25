@@ -1112,7 +1112,6 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
 
   if ($event == 'update' && $vbo_state == 'pub-unpub') {
     $to_mail = $to;
-//    $to_mail = 'gourav.walia@kelltontech.com';
     $subject = 'A new ' . $content_type . ' has been unpublished, please find details below.';
     $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
                       <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
@@ -1139,9 +1138,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   }
 
   if ($event == 'create' && $review == 'published') {
-    $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
+    $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
     $to_mail = $author_mail[0];
-//    $to_mail = 'gourav.walia@kelltontech.com';
 
     if (function_exists('itg_mail_templates_get_mailcontent')) {
       $mail_data = itg_mail_templates_get_mailcontent($content_type, 'create');
@@ -1184,20 +1182,15 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       }
       $mail_content = $mail_node_author;
     }
-//    $task_subject = 'A new ' . $content_type . ' has been submitted for your review, please find details below.';
-//    $submitted_by = 'Submitted By: ' . $current_user_name;
-//    $subject = ucfirst($content_type) . ' Submitted ' . $node->title;
   }
   elseif ($event == 'create' && $review == 'needs_review') {
-    $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
+    $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
     if (!empty($author_mail)) {
       $get_mails = array_merge($author_mail, $to);
       $to_mail = implode(',', $get_mails);
-//      $to_mail = 'gourav.walia@kelltontech.com';
     }
     else {
       $to_mail = $to;
-//      $to_mail = 'gourav.walia@kelltontech.com';
     }
 
     if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -1245,15 +1238,13 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   }
   elseif ($event == 'update') {
     if ($review == 'needs_review') {
-      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
+      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
       if (!empty($author_mail)) {
         $get_mails = array_merge($author_mail, $to);
         $to_mail = implode(',', $get_mails);
-//        $to_mail = 'gourav.walia@kelltontech.com';
       }
       else {
         $to_mail = $to;
-//        $to_mail = 'gourav.walia@kelltontech.com';
       }
 
       if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -1301,9 +1292,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
 //      $task_subject = 'A new ' . $content_type . ' has been updated and submitted for your review, please find details below.';
     }
     else if ($review == 'rejected') {
-      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
+      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
       $to_mail = $author_mail[0];
-//      $to_mail = 'gourav.walia@kelltontech.com';
 
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
@@ -1346,12 +1336,10 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         }
         $mail_content = $mail_node_author;
       }
-//      $task_subject = 'Your ' . $content_type . ' has been rejected, please find details below.';
     }
     else if ($review == 'needs_modification') {
-      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
+      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
       $to_mail = $author_mail[0];
-//      $to_mail = 'gourav.walia@kelltontech.com';
 
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
@@ -1396,9 +1384,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
 //      $task_subject = 'Your ' . $content_type . ' has been required some modification, please find details below.';
     }
     else if ($review == 'published') {
-      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $node->uid))->fetchField();
+      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
       $to_mail = $author_mail[0];
-//      $to_mail = 'gourav.walia@kelltontech.com';
 
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, 'update');
@@ -1440,14 +1427,10 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         }
         $mail_content = $mail_node_author;
       }
-//      $task_subject = 'Your ' . $content_type . ' has been published, please find details below.';
     }
 
-//    $submitted_by = 'Updated By: ' . $current_user_name;
-//    $subject = ucfirst($content_type) . ' Updation ' . $node->title;
   }
   $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_node_author);
-//  $node_url = $base_url . '/node/' . $node->nid;
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
                 <head><title></title></head>
@@ -1506,6 +1489,7 @@ function get_email_by_roll($id) {
   $query->fields('u', array('mail'));
   $query->join('users_roles', 'ur', 'ur.uid = u.uid');
   $query->condition('ur.rid', $id, IN);
+  $query->condition('u.status', 1);
   $result = $query->execute();
 
   foreach ($result as $val) {
