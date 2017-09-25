@@ -69,7 +69,7 @@ function get_issue_article_item_rss($issue_title = NULL, $issue_url = NULL) {
     $query = db_select('field_data_field_story_issue_date', 'isuue');
     $query->leftJoin('node', 'n', 'n.nid=isuue.entity_id');
     $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-//    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
     $query->condition('isuue.field_story_issue_date_value', $issue_title);
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
@@ -77,13 +77,18 @@ function get_issue_article_item_rss($issue_title = NULL, $issue_url = NULL) {
     $query->orderBy('n.nid', 'ASC')->range($range_min, $range_max);
 
     $query->fields('n', array('nid', 'title', 'created'));
+    $query->fields('pc', array('field_primary_category_value'));
     $query->fields('kt', array('field_story_kicker_text_value'));
 
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
-    
     $counter = 0;
     foreach ($result as $reskey => $resvalue) {
+        $story_section_name = '';
+        if(!empty($resvalue['field_primary_category_value'])){
+            $story_section = array_reverse(taxonomy_get_parents_all($resvalue['field_primary_category_value']));
+            $story_section_name = $story_section[0]->name;
+        }   
         $counter++;
         if ($counter == 5) {
             $output .= '<item>';
@@ -100,7 +105,7 @@ function get_issue_article_item_rss($issue_title = NULL, $issue_url = NULL) {
         date_default_timezone_set("GMT");
         $created_date = date("D, d M Y H:i:s e", $created);
         $output .= '<item><title><![CDATA[' . $title . ']]></title>';
-        $output .= '<sectionname>From India Today magazine</sectionname>';
+        $output .= '<sectionname>'.$story_section_name.'</sectionname>';
         $output .= '<link><![CDATA[' . $url . ']]></link>';
         $output .= '<description><![CDATA[' . $field_story_kicker_text_value . ']]></description>';
         $output .= '<pubDate>' . $created_date . ' GMT</pubDate>';
