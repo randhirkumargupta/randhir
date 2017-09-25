@@ -124,15 +124,12 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
         );
     $form['field_byline_department']['#prefix'] = '<div id="dropdown-byline_departent">';
     $form['field_byline_department']['#suffix'] = '</div>';
-
-
     if (isset($form_state['node']) && isset($form_state['node']->field_byline_company) && !empty($form_state['node']->field_byline_company[LANGUAGE_NONE][0]['tid'])) {
         $company_tid = $form_state['node']->field_byline_company[LANGUAGE_NONE][0]['tid'];
     }
     if (isset($form_state['values']) && !empty($form_state['values']['field_byline_company'][LANGUAGE_NONE][0]['tid'])) {
         $company_tid = $form_state['values']['field_byline_company'][LANGUAGE_NONE][0]['tid'];
     }
-
     $byline_dept_arr_opt = array();
     if (!empty($company_tid)) {
         $byline_dept_arr = get_byline_department_by_company($company_tid);
@@ -144,7 +141,6 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
             $form['field_byline_department'][LANGUAGE_NONE]['#options'] = $byline_dept_arr_opt;
         }
     }   
-
     $form['field_byline_department'][LANGUAGE_NONE]['#options'] = $byline_dept_arr_opt;
 
     $form['#after_build'][] = 'itg_reporter_after_build';
