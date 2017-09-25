@@ -16,7 +16,6 @@ function itg_quiz_winners_mail_list() {
     else {
       $user_email_arr[] = $value['user_email'];
     }
-    //$user_email_arr[] = $value['user_email'];
   }
   $user_email_arr_unique = array_unique($user_email_arr);
   $user_email_str = implode(',',$user_email_arr_unique);
