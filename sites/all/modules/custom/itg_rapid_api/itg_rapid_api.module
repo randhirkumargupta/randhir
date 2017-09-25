@@ -1073,7 +1073,7 @@ function loginValidation_rapid($params) {
     $password = trim($params['password']);
     $device_id = trim($params['device_id']);
     $device_type = trim($params['device_type']);
-    
+
     $error = array();
     $userid_is_numeric = 0;
 
@@ -1120,7 +1120,7 @@ function loginValidation_rapid($params) {
 
     // password validation
     $pass = $password;
-    
+
 
     $min_length = 6;
     $max_length = 15;
@@ -1138,4 +1138,27 @@ function loginValidation_rapid($params) {
     $error_settings['custom_error'] = $error;
 
     return $error_settings;
+}
+
+/**
+ * function for delete token from itg_app_device
+ * @param array
+ * @return array
+ */
+function cleanToken_Rapid($params) {
+    // p($params);die();
+    $user_id = $params['user_id'];
+    $auth_token = $params['auth_token'];
+    $device_id = $params['device_id'];
+    
+    $user = user_load_by_name($user_id);    
+    $uid = $user->uid;
+    if ($uid) {
+        //p($user);die();
+        $query = db_delete('itg_app_device');
+        $query->condition('uid', $uid);
+        $query->condition('device_id', $device_id);
+        $query->condition('token', $auth_token);
+        $query->execute();
+    }
 }
