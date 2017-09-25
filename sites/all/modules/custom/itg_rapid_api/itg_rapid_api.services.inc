@@ -1210,6 +1210,24 @@ function itg_rapid_api_resource() {
                             'description' => 'otp_code',
                             'type' => 'array',
                         ),
+                        array(
+                            'name' => 'device_id',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device_id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_type',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device_type',
+                            'type' => 'array',
+                        ),
                     ),
                 ),
             ),
@@ -3522,10 +3540,24 @@ function itg_rapid_api_forgot_password($token) {
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
+function itg_rapid_api_otp_verification($token) {
     $HTTP_RAW_POST_DATA;
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    // login raw input validation
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = forgotPasswordValidation_rapid($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+    $error_code_flag = 0;
+    if($error_code_flag = "This phone number/ email is not registered"){
+        $error_code_flag = 2;
+    }
+    if ($validation_error_str) {
+        $account_err['status_code'] = "$error_code_flag";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    }
     //$params = $_POST;
     $url = SSO_SERVER_URL . "/appapi/otp_verification";
     $result = callAPI($method, $url, $params);
@@ -3557,10 +3589,10 @@ function itg_rapid_api_otp_verification($token, $user_id, $otp_code) {
         $data['status_message'] = "";
         $data['data']['user_id'] = "$uname";
         $data['data']['is_authenticated'] = "1";
-        $data['data']['auth_token'] = "$return->token";
+        //$data['data']['auth_token'] = "$return->token";
     } else {
         $data['status_code'] = "0";
-        $data['status_message'] = "Invalid User Id or OTP";
+        $data['status_message'] = "Please enter the correct OTP";
     }
 
 
