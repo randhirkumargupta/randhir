@@ -29,7 +29,7 @@ foreach ($data as $key => $commentary) {
     <?php if ($finalBall == 6 && (int)$last_ball != (int)$over): ?>
         <?php
         $_batsman = explode('|', $commentary->BatDetails);
-        $batDetails = $_batsman[1] . '(' . $_batsman[2] . 'b ' . $_batsman[3] . '*4' . $_batsman[4] . '*6)';
+        $batDetails = $_batsman[1] . '(' . $_batsman[2] . 'b ' . $_batsman[3] . '*4' . $_batsman[4] . ' *6)';
         $_bowler = explode('|', $commentary->BowlDetails);
         $bowlDetails = $_bowler[1] . '-' . $_bowler[2] . '-' . $_bowler[3] . '-' . $_bowler[4];
         ?>
@@ -43,7 +43,7 @@ foreach ($data as $key => $commentary) {
                 </div>
                 <div class="bollerDetails">
                     <span class="sectiontime bollNameSaperator">Bowler</span>
-                    <span class="sectiontime float-left"><?php echo $commentary->Bowler; ?><span class="bowler_detail overball"><?php echo $bowlDetails; ?></span></span>
+                    <span class="sectiontime float-left"><?php echo $commentary->Bowler; ?><span class="bowler_detail overball">&nbsp;<?php echo $bowlDetails; ?></span></span>
                 </div>
 
 
