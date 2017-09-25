@@ -34,7 +34,21 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
         $auth_attr = simplesaml_get_uid_byauth($authname);
         $mobile = $auth_attr['mobile'];
         db_set_active();
-  } 
+        // code to use in optimization using drupal http request.
+        /*if (function_exists('itg_global_loyality_get_sso_id')) {
+          $sso_final_id = itg_global_loyality_get_sso_id($user->uid);
+         }
+         if (empty($sso_final_id)) {
+           $sso_id = $user->uid;
+         }
+         else {
+           $sso_id = $sso_final_id;
+         }
+         if(function_exists('itg_sso_get_social_uid')) {
+           $mobile = itg_sso_get_social_uid($sso_id);
+         }*/
+  
+  }
   } else {
     $mobile = $user_detail->field_mobile_number['und'][0]['value'];
   }

@@ -354,7 +354,8 @@ jQuery(document).ready(function () {
         }
     });
     
-    jQuery('.story-login-follow').click(function (event) {
+    jQuery('body').on('click', '.story-login-follow', function (event) {
+    //jQuery('.story-login-follow').click(function (event) {
         var post_data = "";
             jQuery.ajax({
                 'url': Drupal.settings.baseUrl.baseUrl + '/story-login-follow-callback',

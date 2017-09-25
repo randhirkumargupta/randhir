@@ -2157,7 +2157,7 @@ function itg_widget_block_view_alter(&$data, $block) {
 
 
 
-    if ($block->delta == 'programmes-rhs_programmes') {
+    if (isset($block->delta) && $block->delta == 'programmes-rhs_programmes') {
         $arraynid = array();
         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
         if (in_array($arg[1], $arraynid) || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
@@ -2188,7 +2188,7 @@ function itg_widget_block_view_alter(&$data, $block) {
         $arraynid = array();
         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
 
-        if (in_array($arg[1], $arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
+        if (isset($arg[1]) && (in_array($arg[1], $arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category))) {
             drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
 
