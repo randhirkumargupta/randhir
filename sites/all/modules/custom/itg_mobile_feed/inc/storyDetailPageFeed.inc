@@ -263,6 +263,7 @@ function emptygetImgTag() {
 function getImgTag($node) {
   $imgtag = "";
   $src = "";
+  $img_caption_val = "";
 
   $html = $node->body['und']['0']['value'];
   $doc = new DOMDocument();
@@ -274,9 +275,14 @@ function getImgTag($node) {
   $nodelist = $xpath->query("//img");
   // gets the 1st image
   $node = $nodelist->item(0);
-  if ($src) {
-    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption></caption></image></bodyimages>";
+  if ($node->attributes->length > 0) {
+    //It has img
+    $src = $node->attributes->getNamedItem('src')->nodeValue;
+    //$img_caption_val = getStringBetween($html, '<div class="body_caption">', '</div>');
   }
-
+  
+  if ($src) {
+    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
+  }
   return $imgtag;
 }
