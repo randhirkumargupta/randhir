@@ -546,27 +546,7 @@ jQuery(document).ready(function () {
                 }
             }
         ]
-    });
-    var fit_to_view = false;
-    if(jQuery(window).width() < 1024){
-	    fit_to_view = true;
-	}
-    if (jQuery.isFunction(jQuery(".fancybox-thumb").fancybox)) {
-		jQuery(".fancybox-thumb").fancybox({
-			fitToView: fit_to_view,
-			padding: 0,
-			arrows: true,
-			helpers	: {
-				//~ title	: {
-					//~ type: 'outside'
-				//~ },
-				thumbs	: {
-					width	: 80,
-					height	: 80
-				}
-			}
-		});
-	}
+    });  
 
     var arrayOne = [];
     jQuery('.factoids-slider li').each(function () {
@@ -575,6 +555,14 @@ jQuery(document).ready(function () {
     });
     var largest = Math.max.apply(Math, arrayOne);
     jQuery(".factoids-slider li").css('height', largest + "px");
+    //PrettyPhoto
+    jQuery("a[rel^='prettyPhoto']").prettyPhoto({		
+		default_width: 1077,
+		default_height: 770,
+		show_title: false,
+		deeplinking: false,
+		allow_expand: false,
+	});
 
 });
 
