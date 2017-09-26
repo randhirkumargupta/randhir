@@ -790,7 +790,7 @@ function notifications_article() {
 function message_data() {
   $config = get_notification_config();
   $params = drupal_get_query_parameters();
-  $message_data_url = 'http://itgcms.localhost.com/pushwoosh/message_api.php?app_id=' . $params['app_id'] . '&devices=' . $params['app_id'] . '';
+  $message_data_url = 'http://feeds.intoday.in/pushwoosh/message_api.php?app_id=' . $params['app_id'] . '&devices=' . $params['app_id'] . '';
 
   $all_data = file_get_contents($message_data_url);
   $message_data = json_decode($all_data);
