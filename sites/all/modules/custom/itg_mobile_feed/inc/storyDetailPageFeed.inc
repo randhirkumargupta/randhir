@@ -263,6 +263,7 @@ function emptygetImgTag() {
 function getImgTag($node) {
   $imgtag = "";
   $src = "";
+  $img_caption_val = "";
 
   $html = $node->body['und']['0']['value'];
   $doc = new DOMDocument();
@@ -277,7 +278,7 @@ function getImgTag($node) {
   if ($node->attributes->length > 0) {
     //It has img
     $src = $node->attributes->getNamedItem('src')->nodeValue;
-    $img_caption_val = getStringBetween($html, '<div class="body_caption">', '</div>');
+    //$img_caption_val = getStringBetween($html, '<div class="body_caption">', '</div>');
   }
   
   if ($src) {
