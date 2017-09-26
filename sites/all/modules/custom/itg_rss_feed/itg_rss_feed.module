@@ -68,6 +68,12 @@ function itg_rss_feed_menu() {
     'file' => 'inc/miscellaneous_rss_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['video-sitemap.xml'] = array(
+    'page callback' => 'itg_video_sitemap',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_video_sitemap.inc',
+    'type' => MENU_CALLBACK,
+  );
     return $items;
 }
 
