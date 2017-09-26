@@ -41,8 +41,16 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         $document->addField('sm_common_kicker_text', $node->field_podcast_kicker_message['und']['0']['value']);
     }
 
-    if (isset($node->field_story_expert_description['und']['0']['value']) && $node->type == 'story') {
+    if ($node->type == 'story') {
+      if(!empty($node->field_story_expert_description['und']['0']['value'])) {
         $document->addField('sm_field_custom_expert_description', $node->field_story_expert_description['und']['0']['value']);
+      }
+      if(!empty($node->field_map_embed_code['und']['0']['value'])) {
+        $document->addField('sm_field_map_embed_code', $node->field_map_embed_code['und']['0']['value']);
+      }
+      if(!empty($node->field_social_embed_code['und']['0']['value'])) {
+        $document->addField('sm_field_social_embed_code', $node->field_social_embed_code['und']['0']['value']);
+      }
     }
 
     if (isset($node->type) && $node->type == 'story') {
