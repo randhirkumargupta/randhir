@@ -134,7 +134,6 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
     if (!empty($company_tid)) {
         $byline_dept_arr = get_byline_department_by_company($company_tid);
         if (!empty($byline_dept_arr)) {
-            $byline_dept_arr_opt = array();
             foreach ($byline_dept_arr as $key => $value) {
                 $byline_dept_arr_opt[trim($value->entity_id)] = trim($value->name);
             }
