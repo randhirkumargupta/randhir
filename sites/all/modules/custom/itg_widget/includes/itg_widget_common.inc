@@ -780,6 +780,9 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     }
     switch ($form['#id']) {
 
+        case 'views-exposed-form-category-manager-page-1':
+            $form['name']['#maxlength'] = 300;
+            break;
         case 'views-exposed-form-manage-newsletter-page':
             $form['status_1']['#options'] = array(
               'any' => '- Any -',
