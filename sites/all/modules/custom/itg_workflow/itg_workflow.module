@@ -1111,7 +1111,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
 
 
   if ($event == 'update' && $vbo_state == 'pub-unpub') {
-    $to_mail = $to;
+    $to_mail = implode(',', $to);
     $subject = 'A new ' . $content_type . ' has been unpublished, please find details below.';
     $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
                       <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
@@ -1135,9 +1135,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
                           </tr>
                       </table>
                   </div>';
-  }
-
-  if ($event == 'create' && $review == 'published') {
+  } 
+  elseif ($event == 'create' && $review == 'published') {
     $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
     $to_mail = $author_mail[0];
 
@@ -1190,7 +1189,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       $to_mail = implode(',', $get_mails);
     }
     else {
-      $to_mail = $to;
+      $to_mail = implode(',', $to);
     }
 
     if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -1244,7 +1243,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $to_mail = implode(',', $get_mails);
       }
       else {
-        $to_mail = $to;
+        $to_mail = implode(',', $to);
       }
 
       if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -1289,7 +1288,6 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
 
         $mail_content = $mail_node_author;
       }
-//      $task_subject = 'A new ' . $content_type . ' has been updated and submitted for your review, please find details below.';
     }
     else if ($review == 'rejected') {
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
@@ -1381,7 +1379,6 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         }
         $mail_content = $mail_node_author;
       }
-//      $task_subject = 'Your ' . $content_type . ' has been required some modification, please find details below.';
     }
     else if ($review == 'published') {
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
@@ -1430,7 +1427,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     }
 
   }
-  $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_node_author);
+  
+  $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
                 <head><title></title></head>
@@ -1438,10 +1436,12 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   $content .= $mail_content;
   $content .= '</body>';
   $content .= '</html>';
+  
   $params = array(
     'body' => $content,
     'subject' => $subject,
   );
+  
   $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
