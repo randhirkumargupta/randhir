@@ -1224,3 +1224,28 @@ function forgotPasswordValidation_rapid($params) {
 
     return $error_settings;
 }
+
+/**
+ * Implements itg_otp_device_info_insert_rapid
+ * @param array $pram 
+ * @param int $rand_otp
+ * @param int $source
+ * @param string $created
+ */
+function itg_otp_device_info_insert_rapid($params, $rand_otp, $source, $created) {
+  $user_id = trim($params['user_id']);    
+  $device_id = trim($params['device_id']);
+  $device_type = trim($params['device_type']);  
+  //$created_fi = UNIX_TIMESTAMP($created);
+  
+  $otp = db_insert('itg_otp_device_info') // Table name no longer needs {}
+              ->fields(array(
+                'user_id' => $user_id,
+                'device_id' => $device_id,
+                'device_type' => $device_type,
+                'source' => $source,
+                'otp' => $rand_otp,
+                //'created' => UNIX_TIMESTAMP($created),
+              ))
+              ->execute();
+}

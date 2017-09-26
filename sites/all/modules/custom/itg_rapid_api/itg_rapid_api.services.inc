@@ -2270,6 +2270,8 @@ function itg_rapid_api_resource() {
             ),
         ),
             // for static other device end
+        
+        
     );
 
     return $api;
@@ -3521,10 +3523,21 @@ function itg_rapid_api_forgot_password($token) {
         $account_err['status_message'] = "This phone number/ email is not registered";
         return $account_err;
     }
-
+    
     $url = SSO_SERVER_URL . "/appapi/forgot_password";
+    //itg_otp_device_info_insert_rapid($params);
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
+    
+    // get_otp & insert into itg_otp_device_info
+    $rand = rand();
+    $url = SSO_SERVER_URL . "/appapi/get_otp/" . $rand;
+    $result = callAPI("GET", $url, $params);
+    $result_obj_otp = json_decode($result);
+    //p($result_obj_otp);die();
+    if($result_obj_otp[0]->otp){
+        itg_otp_device_info_insert_rapid($params, $result_obj_otp[0]->otp, 1, $result_obj_otp[0]->created);
+    }
     cleanToken_Rapid($params);
     $data['status_code'] = "1";
     $data['status_message'] = "";
