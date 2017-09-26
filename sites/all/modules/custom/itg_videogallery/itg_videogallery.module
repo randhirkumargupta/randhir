@@ -3137,7 +3137,9 @@ function itg_videogallery_send_video_exception_notification($nid, $video_ids) {
   $to_mail = $to;
   $getuser_info = user_load($node->uid);
   $name = ucfirst($getuser_info->field_first_name[LANGUAGE_NONE][0]['value']) . ' ' . ucfirst($getuser_info->field_last_name[LANGUAGE_NONE][0]['value']);
-  $email = $getuser_info->email;
+  if (isset($getuser_info->status) && $getuser_info->status == 1) {
+    $email = $getuser_info->email;
+  }
   $subject = 'A new ' . $content_type . ' has been unpublished, please find details below.';
   $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
                       <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
