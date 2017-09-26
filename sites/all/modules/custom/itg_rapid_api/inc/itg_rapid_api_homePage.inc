@@ -825,7 +825,7 @@ function homePageJsonMagazine() {
     $data_newslist[0]['n_type'] = "";
     $data_newslist[0]['n_is_developing'] = "$is_developing";
     $data_newslist[0]['n_is_sponsored'] = "";
-    $data_newslist[0]['n_share_link'] = "$share_url";
+    $data_newslist[0]['n_share_link'] = "";
     $data_newslist[0]['n_title'] = "";
     $data_newslist[0]['n_description'] = "";
     $data_newslist[0]['n_pcategory_id'] = "";
