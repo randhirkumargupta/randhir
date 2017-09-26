@@ -1507,8 +1507,10 @@ function get_email_by_roll($id) {
  * {@inheritdoc}
  */
 function itg_workflow_views_api() {
+  
   return array(
     'api' => 3,
     'path' => drupal_get_path('module', 'itg_workflow') . '/includes/views',
   );
+  
 }
