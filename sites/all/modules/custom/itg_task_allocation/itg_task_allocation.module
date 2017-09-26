@@ -575,7 +575,11 @@ function expiredmail_mail_content($to) {
   $task_subject = t('A task has been expired that was created by you');
   $subject = t('Task Expired');
   
-  $node_url = l('URL', 'node/'.$node->nid);
+  if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
+    $node_url = $base_url . '/node/' . $node->nid;
+  } else {
+    $node_url = $base_url . '/user/login?destination=' . current_path();
+  }
 
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
@@ -612,9 +616,15 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
     $subject = $get_mail_data->field_mail_subject_task_idea[LANGUAGE_NONE][0]['value'];
   }
   
-  global $base_url;
+  global $base_url, $user;
   if (!empty($var->ur_mail) || !empty($var->mail)) {
-    $node_url = l('URL', '/node/' . $var->nid);
+//    $node_url = l('URL', '/node/' . $var->nid);
+    if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
+      $node_url = $base_url . '/node/' . $var->nid;
+    } else {
+      $node_url = $base_url . '/user/login?destination=' . current_path();
+    }
+
     $node_title = itg_common_get_node_title($var->nid);
     $body = $get_mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value'];
     $get_title = str_replace('[itg_mail_token:itg_node_title]', $node_title, $body);
@@ -645,7 +655,12 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   }
   
   if (!empty($var->mail)) {
-    $node_url = l('URL', '/node/' . $var->nid);
+    if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
+      $node_url = $base_url . '/node/' . $var->nid;
+    } else {
+      $node_url = $base_url . '/user/login?destination=' . current_path();
+    }
+//    $node_url = l('URL', '/node/' . $var->nid);
     $node_title = itg_common_get_node_title($var->nid);
     $body = $get_mail_data->field_mail_body_task_idea_assign[LANGUAGE_NONE][0]['value'];
     $get_title = str_replace('[itg_mail_token:itg_node_title]', $node_title, $body);
