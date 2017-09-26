@@ -169,7 +169,7 @@
             jQuery('.plupload_start').on('click', function () {
                 $('#story-node-form').ajaxComplete(function (event, request, settings) {
                     if (jQuery('input[name="field_story_technology[und][0][field_technology_sample_photo][und][0][fid]"]').val() == 0) {
-                        jQuery('.field-multiple-table tbody tr:first .cancel').mousedown();
+                        jQuery('.form-field-name-field-story-technology .field-multiple-table tbody tr:first .cancel').mousedown();
                         jQuery(this).off(event);
                     }
 
