@@ -552,7 +552,8 @@
     .view-programme-content,
     .page-sports-video,
     .page-sports-photo,
-    .view-programme-content-live-tv {
+    .view-programme-content-live-tv,
+    .view-podcasts-listing.podcast-detail-page {
         .view-content {
             .photo-list {
                 margin: 0 -10px;
@@ -1790,6 +1791,16 @@
     .state-election-map-wrapper .left-chart .graph-table-wrapper {
         width: 100%;
     }
+    .section-anchors .view-category-wise-content-list .catagory-listing .detail {
+        h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        p {
+            display: block;
+        }
+    }
 }
 
 @media all and (min-width: 680px) {
@@ -2452,7 +2463,8 @@
     .view-programme-content,
     .page-sports-video,
     .page-sports-photo,
-    .view-programme-content-live-tv {
+    .view-programme-content-live-tv,
+    .view-podcasts-listing.podcast-detail-page {
         .view-content {
             .photo-list {
                 li {
@@ -2571,7 +2583,8 @@
     .view-programme-content,
     .page-sports-video,
     .page-sports-photo,
-    .view-programme-content-live-tv {
+    .view-programme-content-live-tv,
+    .view-podcasts-listing.podcast-detail-page {
         .view-content {
             .photo-list {
                 li {
