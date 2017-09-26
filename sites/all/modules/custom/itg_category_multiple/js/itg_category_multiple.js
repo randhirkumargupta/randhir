@@ -12,7 +12,7 @@ $(document).ready(function() {
     var currentsubsubsubCategoryRequest = null;
 
     // Hiding category
-    $('.form-field-name-field-story-category').hide();
+   $('.form-field-name-field-story-category').hide();
 
     if (!$('#edit-itg-category').val()) {
         $('.form-item-itg-category').hide();
@@ -42,7 +42,7 @@ $(document).ready(function() {
         // Saving the extra data for the section 
         var category_extra_data = {};
         category_extra_data.section = $(this).val(); // Setting for section 
-        $('input[name="field_story_extra_data[und][0][value]"]').val(btoa(JSON.stringify(category_extra_data)));
+        //$('input[name="field_story_extra_data[und][0][value]"]').val(btoa(JSON.stringify(category_extra_data)));
 
         if (categoryies) {
             $('#edit-field-story-category-und').val('');
@@ -65,9 +65,14 @@ $(document).ready(function() {
                 data: {
                     type: $(this).attr('name'),
                     section: JSON.stringify(categoryies),
-                    pcat: $('#edit-field-primary-category-und-0-value').attr('value')
+                    pcat: $('#edit-field-primary-category-und-0-value').attr('value'),
+                    b_cat: JSON.stringify($('#edit-itg-category').val()),
+                    b_sub_cat: JSON.stringify($('#edit-itg-sub-category').val()),
+                    b_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-category').val()),
+                    b_sub_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-sub-category').val()),
                 },
                 success: function(html) {
+                    //console.log(html);
                     var item = JSON.parse(html);
                     if (item.main.length > 0) {
                         $('.form-item-itg-category').show();
@@ -82,10 +87,47 @@ $(document).ready(function() {
                     $('#edit-itg-primary-category').empty();
                     $('#edit-itg-category').append(item.main);
                     $('#edit-itg-primary-category').append(item.primary);
-                    if (item.pcat.length > 0) {
-                      $('#edit-field-primary-category-und-0-value').attr('value', item.pcat)
-                      $('#edit-itg-primary-category').val(item.pcat);
+
+                    // $('#edit-field-story-category-und').val($('#edit-itg-section').val());
+                    // $('#edit-field-story-category-und').val($('#edit-itg-category').val());
+                    // $('#edit-field-story-category-und').val($('#edit-itg-sub-category').val());
+                    // $('#edit-field-story-category-und').val($('#edit-itg-sub-sub-category').val());
+                    // $('#edit-field-story-category-und').val($('#edit-itg-sub-sub-sub-category').val());
+
+                    if (item.b_cat.length > 0) { // Category
+                        $('#edit-itg-category').val(JSON.parse(item.b_cat));
                     }
+                    if (item.b_sub_cat_opt.length > 0) { // Sub Category opt
+                        $('.form-item-itg-sub-category').show();
+                        $('#edit-itg-sub-category').append(item.b_sub_cat_opt);
+                    }
+                    if (item.b_sub_cat.length > 0) { // Sub Category val
+                        $('#edit-itg-sub-category').val(JSON.parse(item.b_sub_cat));
+                    }
+
+                    if (item.b_sub_sub_cat_opt.length > 0) { // Sub Sub Category opt
+                        $('.form-item-itg-sub-sub-category').show();
+                        $('#edit-itg-sub-sub-category').append(item.b_sub_sub_cat_opt);
+                    }
+                    if (item.b_sub_sub_cat.length > 0) { // Sub Sub Category val
+                        $('#edit-itg-sub-sub-category').val(JSON.parse(item.b_sub_sub_cat));
+                    }
+
+
+                    if (item.b_sub_sub_sub_cat_opt.length > 0) { // Sub Sub Category opt
+                        $('.form-item-itg-sub-sub-sub-category').show();
+                        $('#edit-itg-sub-sub-sub-category').append(item.b_sub_sub_sub_cat_opt);
+                    }
+                    if (item.b_sub_sub_sub_cat.length > 0) { // Sub Sub Category val
+                        $('#edit-itg-sub-sub-sub-category').val(JSON.parse(item.b_sub_sub_sub_cat));
+                    }
+
+                    if (item.pcat.length > 0) {
+                        $('#edit-field-primary-category-und-0-value').attr('value', item.pcat)
+                        $('#edit-itg-primary-category').val(item.pcat);
+                    }
+                    itg_category_multiple_data_sync(); // Sync data 
+
                 }
             });
         } else {
@@ -124,7 +166,11 @@ $(document).ready(function() {
                     type: $(this).attr('name'),
                     section: JSON.stringify($('#edit-itg-section').val()),
                     category: JSON.stringify(categoryies),
-                    pcat: $('#edit-field-primary-category-und-0-value').attr('value')
+                    pcat: $('#edit-field-primary-category-und-0-value').attr('value'),
+                    b_cat: JSON.stringify($('#edit-itg-category').val()),
+                    b_sub_cat: JSON.stringify($('#edit-itg-sub-category').val()),
+                    b_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-category').val()),
+                    b_sub_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-sub-category').val()),
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
@@ -142,10 +188,38 @@ $(document).ready(function() {
                     $('#edit-itg-primary-category').empty();
                     $('#edit-itg-sub-category').append(item.main);
                     $('#edit-itg-primary-category').append(item.primary);
+
+
+                    if (item.b_sub_cat.length > 0) { // Sub Category val
+                        $('#edit-itg-sub-category').val(JSON.parse(item.b_sub_cat));
+                    }
+
+                    if (item.b_sub_sub_cat_opt.length > 0) { // Sub Sub Category opt
+                        $('.form-item-itg-sub-sub-category').show();
+                        $('#edit-itg-sub-sub-category').append(item.b_sub_sub_cat_opt);
+                    }
+                    if (item.b_sub_sub_cat.length > 0) { // Sub Sub Category val
+                        $('#edit-itg-sub-sub-category').val(JSON.parse(item.b_sub_sub_cat));
+                    }
+
+
+                    if (item.b_sub_sub_sub_cat_opt.length > 0) { // Sub Sub Category opt
+                        $('.form-item-itg-sub-sub-sub-category').show();
+                        $('#edit-itg-sub-sub-sub-category').append(item.b_sub_sub_sub_cat_opt);
+                    }
+                    if (item.b_sub_sub_sub_cat.length > 0) { // Sub Sub Category val
+                        $('#edit-itg-sub-sub-sub-category').val(JSON.parse(item.b_sub_sub_sub_cat));
+                    }
+
+
+
                     if (item.pcat.length > 0) {
                         $('#edit-field-primary-category-und-0-value').attr('value', item.pcat)
                         $('#edit-itg-primary-category').val(item.pcat);
                     }
+                    
+                    itg_category_multiple_data_sync(); // Sync data 
+
 
                 }
             });
@@ -184,7 +258,11 @@ $(document).ready(function() {
                     section: JSON.stringify($('#edit-itg-section').val()),
                     category: JSON.stringify($('#edit-itg-category').val()),
                     sub_category: JSON.stringify(categoryies),
-                    pcat: $('#edit-field-primary-category-und-0-value').attr('value')
+                    pcat: $('#edit-field-primary-category-und-0-value').attr('value'),
+                    b_cat: JSON.stringify($('#edit-itg-category').val()),
+                    b_sub_cat: JSON.stringify($('#edit-itg-sub-category').val()),
+                    b_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-category').val()),
+                    b_sub_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-sub-category').val()),
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
@@ -199,10 +277,27 @@ $(document).ready(function() {
                     $('#edit-itg-primary-category').empty();
                     $('#edit-itg-sub-sub-category').append(item.main);
                     $('#edit-itg-primary-category').append(item.primary);
-                    if (item.pcat.length > 0) {
-                      $('#edit-field-primary-category-und-0-value').attr('value', item.pcat)
-                      $('#edit-itg-primary-category').val(item.pcat);
+
+
+                    if (item.b_sub_sub_cat.length > 0) { // Sub Sub Category val
+                        $('#edit-itg-sub-sub-category').val(JSON.parse(item.b_sub_sub_cat));
                     }
+
+                    if (item.b_sub_sub_sub_cat_opt.length > 0) { // Sub Sub Category opt
+                        $('.form-item-itg-sub-sub-sub-category').show();
+                        $('#edit-itg-sub-sub-sub-category').append(item.b_sub_sub_sub_cat_opt);
+                    }
+                    if (item.b_sub_sub_sub_cat.length > 0) { // Sub Sub Category val
+                        $('#edit-itg-sub-sub-sub-category').val(JSON.parse(item.b_sub_sub_sub_cat));
+                    }
+
+                    if (item.pcat.length > 0) {
+                        $('#edit-field-primary-category-und-0-value').attr('value', item.pcat)
+                        $('#edit-itg-primary-category').val(item.pcat);
+                    }
+                 
+                    itg_category_multiple_data_sync(); // Sync data 
+
 
                 }
             });
@@ -242,8 +337,11 @@ $(document).ready(function() {
                     category: JSON.stringify($('#edit-itg-category').val()),
                     sub_category: JSON.stringify($('#edit-itg-sub-category').val()),
                     sub_sub_category: JSON.stringify(categoryies),
-                    pcat: $('#edit-field-primary-category-und-0-value').attr('value')
-
+                    pcat: $('#edit-field-primary-category-und-0-value').attr('value'),
+                    b_cat: JSON.stringify($('#edit-itg-category').val()),
+                    b_sub_cat: JSON.stringify($('#edit-itg-sub-category').val()),
+                    b_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-category').val()),
+                    b_sub_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-sub-category').val()),
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
@@ -259,12 +357,18 @@ $(document).ready(function() {
                     $('#edit-itg-primary-category').empty();
                     $('#edit-itg-sub-sub-sub-category').append(item.main);
                     $('#edit-itg-primary-category').append(item.primary);
-                     if (item.pcat.length > 0) {
-                      $('#edit-field-primary-category-und-0-value').attr('value', item.pcat)
-                      $('#edit-itg-primary-category').val(item.pcat);
+
+                    if (item.b_sub_sub_sub_cat.length > 0) { // Sub Sub Category val
+                        $('#edit-itg-sub-sub-sub-category').val(JSON.parse(item.b_sub_sub_sub_cat));
                     }
 
-                }
+
+                    if (item.pcat.length > 0) {
+                        $('#edit-field-primary-category-und-0-value').attr('value', item.pcat)
+                        $('#edit-itg-primary-category').val(item.pcat);
+                    }
+                    itg_category_multiple_data_sync(); // Sync data 
+                 }
             });
         } else {
 
@@ -275,7 +379,6 @@ $(document).ready(function() {
     $('#edit-itg-sub-sub-sub-category').on('change', function() {
         var categoryies = $(this).val();
         var actual_dom_name = $(this).attr('name');
-
         // Saving the extra data for the sub sub sub category 
         var category_extra_data = {};
         category_extra_data.section = jQuery('#edit-itg-section').val(); // Setting for section 
@@ -284,7 +387,6 @@ $(document).ready(function() {
         category_extra_data.sub_sub_category = jQuery('#edit-itg-sub-sub-category').val(); // Setting for sub sub category
         category_extra_data.sub_sub_sub_category = jQuery('#edit-itg-sub-sub-sub-category').val(); // Setting for sub sub sub category
         $('input[name="field_story_extra_data[und][0][value]"]').val(btoa(JSON.stringify(category_extra_data)));
-
         jQuery('#edit-field-story-category-und').val('');
         jQuery('#edit-field-story-category-und').val(jQuery('#edit-itg-section').val().concat(jQuery('#edit-itg-category').val()).concat(jQuery('#edit-itg-sub-category').val()).concat(jQuery('#edit-itg-sub-sub-category').val()).concat($(this).val()));
 
@@ -305,17 +407,18 @@ $(document).ready(function() {
                     sub_sub_category: JSON.stringify($('#edit-itg-sub-sub-category').val()),
                     sub_sub_sub_category: JSON.stringify(categoryies),
                     type: $(this).attr('name'),
-                    pcat: $('#edit-field-primary-category-und-0-value').attr('value')
+                            pcat: $('#edit-field-primary-category-und-0-value').attr('value')
 
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
                     $('#edit-itg-primary-category').empty();
                     $('#edit-itg-primary-category').append(item.primary);
-                     if (item.pcat.length > 0) {
-                      $('#edit-field-primary-category-und-0-value').attr('value', item.pcat)
-                      $('#edit-itg-primary-category').val(item.pcat);
+                    if (item.pcat.length > 0) {
+                        $('#edit-field-primary-category-und-0-value').attr('value', item.pcat)
+                        $('#edit-itg-primary-category').val(item.pcat);
                     }
+                   itg_category_multiple_data_sync(); // Sync data 
 
                 }
             });
@@ -323,6 +426,9 @@ $(document).ready(function() {
 
         }
     });
+
+
+
     // Setting the value for  the primary category
     $('#edit-itg-primary-category').on('change', function() {
         var categoryies = $(this).val();
@@ -346,3 +452,17 @@ $(document).ready(function() {
     });
 
 });
+
+/**
+ * This is custom function for data syncing  
+ */
+function itg_category_multiple_data_sync() {
+    var a = jQuery('#edit-itg-section').val();
+    var b = jQuery('#edit-itg-category').val();
+    var c = jQuery('#edit-itg-sub-category').val();
+    var d = jQuery('#edit-itg-sub-sub-category').val();
+    var e = jQuery('#edit-itg-sub-sub-sub-category').val();
+    var final_mapping = a.concat(b, c, d, e);
+    final_mapping = final_mapping.filter(Number);
+    jQuery('#edit-field-story-category-und').val(final_mapping);
+}
