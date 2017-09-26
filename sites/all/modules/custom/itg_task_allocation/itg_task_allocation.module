@@ -54,7 +54,6 @@ function itg_task_allocation_expirestatus_enddatemail() {
     $query->join('users', 'ur', 'ur.uid = ttm.field_task_team_member_target_id');
     $query->fields('n', array('nid'));
     $query->condition('n.status', 1, '=');
-    $query->condition('n.nid', 840590, '=');
     $query->condition('n.type', 'task_idea_allocation_tracking', '=');
     $query->fields('f', array('field_task_finish_date_and_time_value'));
     $query->fields('s', array('field_task_comment_change_status_value'));
