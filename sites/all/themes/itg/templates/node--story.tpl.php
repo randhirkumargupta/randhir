@@ -896,7 +896,7 @@ if (!empty($content)):
         <?php
         $get_val = '0' . arg(1);
         if (function_exists('itg_flag_get_count')) {
-          $popup_like = itg_flag_get_count($get_val, 'like_count');
+          $popup_like = itg_flag_get_count($get_val);
           //$dislike = itg_flag_get_count($get_val, 'dislike_count');
         }
 
@@ -995,7 +995,7 @@ if (!empty($content)):
             <div class="snap-post">
               <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
               <?php
-              $tot_like = itg_flag_get_count(arg(1), 'like_count');
+              $tot_like = itg_flag_get_count(arg(1));
               //$dislike = itg_flag_get_count(arg(1), 'dislike_count');
               if (!empty($tot_like['like_count'])) {
                 $like_count = '(' . $tot_like['like_count'] . ')';
