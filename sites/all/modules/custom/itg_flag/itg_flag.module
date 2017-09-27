@@ -81,7 +81,12 @@ function itg_flag_details() {
   }
   else {
     if (function_exists('itg_get_migrated_like_count')) {
-      $migrated_count = itg_get_migrated_like_count(ltrim($nd_id, '0'));
+      if($datatype == 'photogallery') {
+      $step_nid = ltrim($nd_id, '0');  
+      $migrated_count = itg_get_migrated_like_count(str_replace('1000', '', $step_nid));
+      } else {
+      $migrated_count = itg_get_migrated_like_count(ltrim($nd_id, '0')); 
+      }
     }
 
     if ($typ == 'like_count') {
@@ -139,7 +144,7 @@ function itg_flag_details() {
         $response = array('type' => $typ, 'count' => $mig_count, 'nd_id' => $nd_id, 'chk' => 'sty');
       }
       if ($dtag == 'dsty') {
-        $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id, 'chk' => 'dsty');
+        $response = array('type' => $typ, 'count' => $mig_count, 'nd_id' => $nd_id, 'chk' => 'dsty');
       }
     }
     else {
