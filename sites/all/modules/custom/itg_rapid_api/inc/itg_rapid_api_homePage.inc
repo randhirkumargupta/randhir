@@ -1107,8 +1107,37 @@ function homePageJsonPoll() {
     $n_magazine = array();
 
     //$n_magazine = getMagazineList(); // homepage.inc
-    $n_polls_data = polls_open_list(0);
-    $n_polls = $n_polls_data['data'];
+   // $n_polls_data = polls_open_list(0);
+    //$n_polls = $n_polls_data['data'];
+    
+    $poll_json = " {
+                                \"p_id\": \"837281\",
+                                \"p_is_sponsored\": \"\",
+                                \"p_sponsored_icon\": \"\",
+                                \"p_sponsored_link\": \"\",
+                                \"p_publish_datetime\": \"2017-08-25 15:30:00\",
+                                \"p_title\": \"Government says Right to Privacy is a fundamental right but should be subjected to reasonable restrictions\",
+                                \"p_image\": \"\",
+                                \"p_share_link\": \"https://peg3z.app.goo.gl/akjJ8zS0PCsmv0vx2\",
+                                \"p_option\": [
+                                    {
+                                        \"o_id\": \"1031143\",
+                                        \"o_title\": \"Can't Say\",
+                                        \"o_image\": \"\"
+                                    },
+                                    {
+                                        \"o_id\": \"1031144\",
+                                        \"o_title\": \"Disagree\",
+                                        \"o_image\": \"\"
+                                    },
+                                    {
+                                        \"o_id\": \"1031145\",
+                                        \"o_title\": \"Agree\",
+                                        \"o_image\": \"\"
+                                    }
+                                ]
+                            }";
+    $n_polls = json_decode($poll_json, true);
 
     $data_magazine['id'] = "5";
     $data_magazine['order'] = "5";
