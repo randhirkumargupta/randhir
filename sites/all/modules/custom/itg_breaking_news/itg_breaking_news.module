@@ -450,7 +450,6 @@ function itg_breaking_news_views_query_alter(&$view, &$query) {
 
 /**
  * Function for ajax request callback
- * 
  */
 function cricket_live_blog_content_callback() {
   $match_id = $_POST['match_id'];
@@ -471,8 +470,13 @@ function cricket_live_blog_content_callback() {
 }
 
 /**
- * Function for Live cricket blog 
- * 
+ * function for show Cricket data from json.
+ * @param string $match_id
+ * @param int $start
+ * @param int $total
+ * @param int $commentary_id
+ * @param boolean $latest
+ * @return array
  */
 function get_cricket_live_blog_data($match_id, $start, $total, $commentary_id, $latest = FALSE) {
   if (!empty($match_id)) {
@@ -574,7 +578,7 @@ function get_cricket_live_blog_data($match_id, $start, $total, $commentary_id, $
 
 /**
  * Menu callback for load commentary from db
- * @param type $nid
+ * @param int $nid
  * @param int $page
  * 
  */
@@ -590,8 +594,10 @@ function get_commentary_data_db_callback($nid, $page = 0) {
 }
 
 /**
- * Get Match commentary from db
  * 
+ * @param int $nid
+ * @param int $page
+ * @return boolean/array
  */
 function get_commentary_data_db($nid, $page) {
   $data = FALSE;
