@@ -32,7 +32,7 @@
             // code for logout 
             jQuery("a#myhref").attr('href', 'javascript:void(0)');
             var logoutsec = Drupal.settings.itg_sso_login.settings.logoutsec;
-            console.log(logoutsec);
+            //console.log(logoutsec);
             jQuery('body').on('click', '#myhref', function () {
                 //Call Ajax
                 jQuery.ajax({
