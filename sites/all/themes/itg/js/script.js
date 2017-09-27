@@ -555,6 +555,16 @@ jQuery(document).ready(function () {
     });
     var largest = Math.max.apply(Math, arrayOne);
     jQuery(".factoids-slider li").css('height', largest + "px");
+    //PrettyPhoto
+    if (jQuery.isFunction(jQuery("a[rel^='prettyPhoto']").prettyPhoto)) {
+		jQuery("a[rel^='prettyPhoto']").prettyPhoto({
+			default_width: 1077,
+			default_height: 770,
+			show_title: false,
+			deeplinking: false,
+			allow_expand: false,
+		});
+	}
 
 });
 
