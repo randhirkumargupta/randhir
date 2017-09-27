@@ -738,16 +738,39 @@ jQuery(document).ready(function () {
             if (radioCheck == true && radioVal == 'Daily') {
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').hide();
+                $(this).parents('td').find('.field-name-field-minute').hide();
+                $(this).parents('td').find('.field-name-field-minute select').hide();
+                $(this).parents('td').find('.field-name-field-syndication-time').show();
             }
             if (radioCheck == true && radioVal == 'Weekly') {
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
                 $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
                 $(this).parents('td').find('.field-name-field-syndication-set-day').show();
+                $(this).parents('td').find('.field-name-field-minute').hide();
+                $(this).parents('td').find('.field-name-field-minute select').hide();
+                $(this).parents('td').find('.field-name-field-syndication-time').show();
             }
             if (radioCheck == true && radioVal == 'Monthly') {
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
                 $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
                 $(this).parents('td').find('.field-name-field-syndication-set-day-month').show();
+                $(this).parents('td').find('.field-name-field-minute').hide();
+                $(this).parents('td').find('.field-name-field-minute select').hide();
+                $(this).parents('td').find('.field-name-field-syndication-time').show();
+            }
+            if (radioCheck == true && radioVal == 'Minute') {
+                console.log(radioVal);
+                $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
+                $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
+                $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
+                $(this).parents('td').find('.field-name-field-minute').show();
+                $(this).parents('td').find('.field-name-field-minute select').show();
+                var time_val = $(this).parents('td').find('.field-name-field-syndication-time input').val();
+                console.log(time_val);
+                if(time_val == "" || time_val.length <=0) {
+                    $(this).parents('td').find('.field-name-field-syndication-time').hide();
+                    $(this).parents('td').find('.field-name-field-syndication-time input').val("00:00");
+                }
             }
         });
         $('.form-field-name-field-newsl-add-news .field-name-field-news-type').each(function () {

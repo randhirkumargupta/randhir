@@ -300,7 +300,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_link .= ' / ' . l("Podcast", "podcast") . ' / ' . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'poll') {
-    $section_link .= ' / Poll';
+    $section_link .= ' / Polls';
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'blog') {
     $section_link .= ' / ' . l('Blog', 'blog') . ' / ' . $node_title;
