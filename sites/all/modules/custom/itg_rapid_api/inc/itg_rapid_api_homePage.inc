@@ -1141,9 +1141,9 @@ function homePageJsonPoll() {
 
     $data_magazine['id'] = "5";
     $data_magazine['order'] = "5";
-    $data_magazine['type'] = "polls List";
-    $data_magazine['title'] = "polls";
-    $data_magazine['label'] = "polls";
+    $data_magazine['type'] = "poll";
+    $data_magazine['title'] = "poll";
+    $data_magazine['label'] = "poll";
     $data_magazine['show_label'] = "0";
     // news list
     $share_url = get_node_firebase_weburl($nid);
