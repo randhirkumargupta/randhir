@@ -1696,6 +1696,10 @@ input[type="text"] {
                         margin-top: -3px;
                         line-height: 18px;
                         padding-left: 0;
+                        line-height: 20px;
+                        a {
+                            color: #0783ec;
+                        }
                         &:before {
                             content: '|';
                             margin: 0 5px 0 0;
@@ -2406,6 +2410,7 @@ body.has-cart-popup {
                 .form-type-checkbox {
                     >label {
                         height: 127px;
+                        margin-bottom: 20px;
                     }
                 }
             }
