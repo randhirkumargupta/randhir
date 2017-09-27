@@ -783,6 +783,39 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
         case 'views-exposed-form-category-manager-page-1':
             $form['name']['#maxlength'] = 300;
             break;
+        case 'views-exposed-form-strory-menegment-page-1':
+        case 'views-exposed-form-strory-menegment-page-3':
+        case 'views-exposed-form-strory-menegment-page-7':
+        case 'views-exposed-form-strory-menegment-page':
+        case 'views-exposed-form-strory-menegment-page-12':
+        case 'views-exposed-form-strory-menegment-page-9':
+        case 'views-exposed-form-strory-menegment-page-4':
+        case 'views-exposed-form-photo-gallery-management-page-3':
+        case 'views-exposed-form-photo-gallery-management-page-1':
+        case 'views-exposed-form-photo-gallery-management-page-7':
+        case 'views-exposed-form-photo-gallery-management-page':
+        case 'views-exposed-form-photo-gallery-management-page-4':
+        case 'views-exposed-form-videogallery-management-page-3':
+        case 'views-exposed-form-videogallery-management-page-1':
+        case 'views-exposed-form-videogallery-management-page-7':
+        case 'views-exposed-form-videogallery-management-page':
+        case 'views-exposed-form-videogallery-management-page-4':
+        case 'views-exposed-form-podcast-management-page-3':
+        case 'views-exposed-form-poll-listing-page':
+        case 'views-exposed-form-podcast-management-page-1':
+        case 'views-exposed-form-poll-listing-page-1':
+        case 'views-exposed-form-poll-listing-page-2':
+        case 'views-exposed-form-podcast-management-page-4':
+        case 'views-exposed-form-podcast-management-page':
+        case 'views-exposed-form-podcast-management-page-7':
+        case 'views-exposed-form-blogs-management-page-3':
+        case 'views-exposed-form-blogs-management-page-7':
+        case 'views-exposed-form-blogs-management-page-1':
+        case 'views-exposed-form-blogs-management-page':
+        case 'views-exposed-form-blogs-management-page-4':
+            $form['title']['#maxlength'] = 300;
+            $form['field_story_category_tid']['#maxlength'] = 300;
+            break;
         case 'views-exposed-form-manage-newsletter-page':
             $form['status_1']['#options'] = array(
               'any' => '- Any -',
