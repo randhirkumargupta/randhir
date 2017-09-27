@@ -445,7 +445,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_form_section_wise_content_ordering_list_page') {
     $type_in_url = $_GET['type'];
     $actual_weight_type = 'All';
-    $types = array("story", "videogallery", "photogallery");
+    $types = array("story", "videogallery", "photogallery", "breaking_news");
     if (in_array($type_in_url, $types)) {
       $actual_weight_type = $type_in_url;
     }
@@ -2142,6 +2142,7 @@ function get_view_nodes_form_custom_table_for_widgets($widget_name, $range_max, 
       ->orderBy('n.nid', 'DESC')
       ->range($range_min, $range_max)
       ->fields('iwo', array('nid', 'extra', 'weight'));
+
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $key => $entity_data_node) {
     $entity_data[] = $entity_data_node;
