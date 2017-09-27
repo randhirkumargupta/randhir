@@ -4,4 +4,3 @@ package = "ITG"
 core = 7.x
 
 files[] = itg_breaking_news.module
-files[] = inc/itg_migrate.cricketliveblog.inc

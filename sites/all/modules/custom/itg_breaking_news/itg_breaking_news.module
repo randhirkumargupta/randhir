@@ -8,25 +8,6 @@
  */
 
 /**
- * implement hook_migrate_api()
- * @return array
- */
-function itg_breaking_news_migrate_api() {
-  $api = array(
-    'api' => 2,
-    'groups' => array(
-      'itg_cricketliveblog' => array(
-        'title' => t('Itg Cricket Live Blog Imports'),
-      )
-    ),
-    'migrations' => array(
-      'ItgCricketliveblog' => array('class_name' => 'ItgCricketliveblog', 'group_name' => 'itg_cricketliveblog'),
-    ),
-  );
-  return $api;
-}
-
-/**
  * Implements hook_menu().
  *
  * {@inheridoc}.
