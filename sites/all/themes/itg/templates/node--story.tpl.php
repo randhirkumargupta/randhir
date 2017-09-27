@@ -896,12 +896,12 @@ if (!empty($content)):
         <?php
         $get_val = '0' . arg(1);
         if (function_exists('itg_flag_get_count')) {
-          $like = itg_flag_get_count($get_val, 'like_count');
-          $dislike = itg_flag_get_count($get_val, 'dislike_count');
+          $popup_like = itg_flag_get_count($get_val, 'like_count');
+          //$dislike = itg_flag_get_count($get_val, 'dislike_count');
         }
 
-        $like_count_like = $like['like_count'] + $migrated_count[0]['like_count'];
-        $dislike_count_like = $dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
+        $like_count_like = $popup_like['like_count'] + $migrated_count[0]['like_count'];
+        $dislike_count_like = $popup_like['dislike_count'] + $migrated_count[0]['dislike_count'];
 
         $pid = "voted_" . $get_val;
         $like = "no-of-likes_" . $get_val;
@@ -995,13 +995,13 @@ if (!empty($content)):
             <div class="snap-post">
               <div class="discription"><?php print $node->field_story_snap_post[LANGUAGE_NONE][0]['value']; ?></div>
               <?php
-              $like = itg_flag_get_count(arg(1), 'like_count');
-              $dislike = itg_flag_get_count(arg(1), 'dislike_count');
-              if (!empty($like['like_count'])) {
-                $like_count = '(' . $like['like_count'] . ')';
+              $tot_like = itg_flag_get_count(arg(1), 'like_count');
+              //$dislike = itg_flag_get_count(arg(1), 'dislike_count');
+              if (!empty($tot_like['like_count'])) {
+                $like_count = '(' . $tot_like['like_count'] . ')';
               }
-              if (!empty($dislike['dislike_count'])) {
-                $dislike_count = '(' . $dislike['dislike_count'] . ')';
+              if (!empty($tot_like['dislike_count'])) {
+                $dislike_count = '(' . $tot_like['dislike_count'] . ')';
               }
               $pid = "voted_" . arg(1);
               $like = "no-of-likes_" . arg(1);
