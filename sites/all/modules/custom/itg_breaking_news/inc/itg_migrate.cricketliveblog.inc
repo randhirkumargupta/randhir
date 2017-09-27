@@ -39,7 +39,7 @@ class ItgCricketliveblog extends XMLMigration {
         
         $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
-        $items_url = $xml_folder . 'cricket_blog_1.xml';
+        $items_url = $xml_folder . 'cricket_blog.xml';
 
         // This is the xpath identifying the items to be migrated, relative to the
         // document.
@@ -81,11 +81,38 @@ class ItgCricketliveblog extends XMLMigration {
         //$this->addFieldMapping('field_breaking_content_details', 'content_details')->xpath('content_details');
         $this->addFieldMapping('field_label', 'shortdescription')->xpath('shortdescription');
         //$this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
+        
         $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
+        $this->addFieldMapping('field_story_extra_large_image:preserve_files')
+            ->defaultValue(TRUE);
+        $this->addFieldMapping('field_story_extra_large_image:alt', 'extra_large_alt')->xpath('extra_large_alt');
+        $this->addFieldMapping('field_story_extra_large_image:title', 'extra_large_title')->xpath('extra_large_title');
         $this->addFieldMapping('field_story_large_image', 'largeimage')->xpath('largeimage');
+        $this->addFieldMapping('field_story_large_image:preserve_files')
+            ->defaultValue(TRUE);
+        /* $this->addFieldMapping('field_story_large_image:destination_dir')
+          ->defaultValue('s3fs-public/dailymotion_video'); */
+        $this->addFieldMapping('field_story_large_image:alt', 'large_alt')->xpath('large_alt');
+        $this->addFieldMapping('field_story_large_image:title', 'large_title')->xpath('large_title');
         $this->addFieldMapping('field_story_medium_image', 'mediumimage')->xpath('mediumimage');
+        $this->addFieldMapping('field_story_medium_image:preserve_files')
+            ->defaultValue(TRUE);
+        $this->addFieldMapping('field_story_medium_image:alt', 'mediumimage_alt')->xpath('mediumimage_alt');
+        $this->addFieldMapping('field_story_medium_image:title', 'mediumimage_title')->xpath('mediumimage_title');
         $this->addFieldMapping('field_story_small_image', 'smallimage')->xpath('smallimage');
+        $this->addFieldMapping('field_story_small_image:preserve_files')
+            ->defaultValue(TRUE);
+        $this->addFieldMapping('field_story_small_image:alt', 'smallimage_alt')->xpath('smallimage_alt');
+        $this->addFieldMapping('field_story_small_image:title', 'smallimage_title')->xpath('smallimage_title');
         $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
+        $this->addFieldMapping('field_story_extra_small_image:preserve_files')
+            ->defaultValue(TRUE);
+        $this->addFieldMapping('field_story_extra_small_image:file_replace')
+            ->defaultValue(FILE_EXISTS_REPLACE);
+        $this->addFieldMapping('field_story_extra_small_image:alt', 'extra_small_alt')->xpath('extra_small_alt');
+        $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');
+        
+        
         $this->addFieldMapping('created', 'createddate')->xpath('createddate');
         $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
         $this->addFieldMapping('pathauto')->defaultValue(0);
@@ -220,7 +247,7 @@ class ItgCricketliveblog extends XMLMigration {
             }
             field_attach_update('node', $node);
         }        
-        //ordering_set_of_content($node, $row->xml->id);
+        ordering_set_of_content($node, (300 - (int)$row->xml->id));
     }
 
 }
