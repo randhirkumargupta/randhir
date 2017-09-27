@@ -35,10 +35,17 @@ class ItgCricketliveblog extends XMLMigration {
 
 
         // This can also be an URL instead of a local file path.
-        $file_path = drupal_realpath(drupal_get_path('module', 'itg_breaking_news'));
+       // $file_path = drupal_realpath(drupal_get_path('module', 'itg_breaking_news'));
 
-        $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+       // $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
+       // $items_url = $xml_folder . 'cricket_blog.xml';
+        
+        $file_path = 'sites/default/files';
+
+        $xml_folder = $file_path . '/' . 'migrate/xml_file/live-blogs/';
+
+        //$items_url = $xml_folder . 'tech_liveblog.xml';
         $items_url = $xml_folder . 'cricket_blog.xml';
 
         // This is the xpath identifying the items to be migrated, relative to the
