@@ -94,7 +94,14 @@ $detect = new Mobile_Detect;
               if (strpos($data['user_detail']['mail'], 'nowhere.com') !== false) {
               //echo 'Please update your email address';
               } else {
-              echo $data['user_detail']['mail'];  
+                if ((strpos($data['user_detail']['mail'], '@twitter.com') !== false || strpos($data['user_detail']['mail'], '@facebook.com') !== false)) {
+                     $user_alt_mail = itg_get_user_alt_email($user->uid);
+                }
+                if(!empty($user_alt_mail)) {
+                 echo $user_alt_mail; 
+                } else {
+                 echo $data['user_detail']['mail'];
+                }
               }
               ?>
               </span>
@@ -109,8 +116,18 @@ $detect = new Mobile_Detect;
       </div>
   <?php if (strpos($data['user_detail']['mail'], 'nowhere.com') !== false) { ?>        
   <!-- <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $data['user_detail']['mail']; ?></span></div> -->
-  <?php } else {?>
-       <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $data['user_detail']['mail']; ?></span></div>
+  <?php } else { 
+    
+                if ((strpos($data['user_detail']['mail'], '@twitter.com') !== false || strpos($data['user_detail']['mail'], '@facebook.com') !== false)) {
+                     $user_alt_mail = itg_get_user_alt_email($user->uid);
+                }
+                if(!empty($user_alt_mail)) {
+                 $user_ml =  $user_alt_mail; 
+                } else {
+                 $user_ml = $data['user_detail']['mail'];
+                }
+    ?>
+       <div class="sent-on-message">All the update regarding the order will be sent on <span><?php echo $user_ml; ?></span></div>
   <?php } ?>     
   </div>
   <?php if (count($data['product_detail']) > 0): if ($detect->isMobile() ) {?>
