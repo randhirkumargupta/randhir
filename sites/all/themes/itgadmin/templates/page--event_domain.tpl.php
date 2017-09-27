@@ -25,7 +25,7 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
     <header class="header" id="header" role="banner">
             <section class="header-top">
               <div class="event-header-banner">
-                <img src="<?php echo $banner_image; ?>" alt="">
+              <img src="<?php echo $banner_image; ?>" alt="">
               <div class="event-add-header">
                 
               <?php 
