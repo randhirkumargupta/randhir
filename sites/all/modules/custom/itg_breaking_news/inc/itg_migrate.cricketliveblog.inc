@@ -33,10 +33,10 @@ class ItgCricketliveblog extends XMLMigration {
           'modifieddate' => t('modifieddate'),
         );
 
-        
+
         // This can also be an URL instead of a local file path.
         $file_path = drupal_realpath(drupal_get_path('module', 'itg_breaking_news'));
-        
+
         $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
         $items_url = $xml_folder . 'cricket_blog.xml';
@@ -81,7 +81,7 @@ class ItgCricketliveblog extends XMLMigration {
         //$this->addFieldMapping('field_breaking_content_details', 'content_details')->xpath('content_details');
         $this->addFieldMapping('field_label', 'shortdescription')->xpath('shortdescription');
         //$this->addFieldMapping('field_primary_category', 'primarycategory')->xpath('primarycategory');
-        
+
         $this->addFieldMapping('field_story_extra_large_image', 'extralargeimage')->xpath('extralargeimage');
         $this->addFieldMapping('field_story_extra_large_image:preserve_files')
             ->defaultValue(TRUE);
@@ -111,13 +111,13 @@ class ItgCricketliveblog extends XMLMigration {
             ->defaultValue(FILE_EXISTS_REPLACE);
         $this->addFieldMapping('field_story_extra_small_image:alt', 'extra_small_alt')->xpath('extra_small_alt');
         $this->addFieldMapping('field_story_extra_small_image:title', 'extra_small_title')->xpath('extra_small_title');
-        
-        
+
+
         $this->addFieldMapping('created', 'createddate')->xpath('createddate');
         $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
         $this->addFieldMapping('pathauto')->defaultValue(0);
         $this->addFieldMapping('path', 'sefurl')->xpath(t('metatags/sefurl'));
-        
+
         $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
         $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
         $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
@@ -138,7 +138,7 @@ class ItgCricketliveblog extends XMLMigration {
         else {
             $row->xml->createdby = 1;
         }
-        
+
         // Match_id migrate
         $row->match_id_new = '';
         if (isset($row->xml->match_id) && !empty($row->xml->match_id)) {
@@ -179,55 +179,35 @@ class ItgCricketliveblog extends XMLMigration {
         if (!empty($row->tag_new)) {
             $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
         }
-        
+
         $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1208836'; // Section
         $node->field_story_category[LANGUAGE_NONE][1]['tid'] = '1208839'; // Category
         $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1208839'; // primary category
         $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
-        
+
         if (!empty($row->match_id_new)) {
             $node->field_match_id[LANGUAGE_NONE][0]['value'] = $row->match_id_new;
         }
         $node->field_constituancy[LANGUAGE_NONE][0]['value'] = '';
-        
     }
 
     public function complete($entity, $row) {
         $node = node_load($entity->nid);
         $key = 0;
-//        $published_date = date('Y-m-d', $node->created);
-//        $key = 0;
-//        $pathdata .= 'live-blog/cricket-live-blog/story';
-//        // Add node title.
-//        $pathdata .= '/' . trim($row->xml->metatags->sefurl);
-//        // Add node id.
-//        $pathdata .= '-' . $node->nid;
-//        // Add workbanch date.
-//        $pathdata .= '-' . $published_date;
-//        if(isset($row->xml->metatags->sefurl)){
-//             $path = array(
-//               'source' => "node/{$node->nid}",
-//               'alias' => $pathdata
-//             );
-//             path_save($path);
-//         }
-        
-         if(isset($row->xml->redirection_url)){
-             $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
-             $redirect = new stdClass();
-             $redirect->type = 'redirect';
-             $redirect->source_options = $redirect->redirect_options = array();
-             $redirect->language = LANGUAGE_NONE;
-             $redirect->status_code = 0;
-             $redirect->source = trim($sorce_url);
-             $redirect->redirect = "node/{$node->nid}";
-             redirect_save($redirect);         
-         }
-        
-       
-        
-        if (isset($row->xml->content_details->details)) {            
-            foreach ($row->xml->content_details->details as $value) {                
+        if (isset($row->xml->redirection_url)) {
+            $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
+            $redirect = new stdClass();
+            $redirect->type = 'redirect';
+            $redirect->source_options = $redirect->redirect_options = array();
+            $redirect->language = LANGUAGE_NONE;
+            $redirect->status_code = 0;
+            $redirect->source = trim($sorce_url);
+            $redirect->redirect = "node/{$node->nid}";
+            redirect_save($redirect);
+        }
+
+        if (isset($row->xml->content_details->details)) {
+            foreach ($row->xml->content_details->details as $value) {
                 $content_title = (string) $value->content_title;
                 //$breaking_band = (string) $value->mark_as_breaking_band;
                 $notification = (string) $value->notification;
@@ -246,8 +226,7 @@ class ItgCricketliveblog extends XMLMigration {
                 $key++;
             }
             field_attach_update('node', $node);
-        }        
-        ordering_set_of_content($node, (300 - (int)$row->xml->id));
+        }
+        ordering_set_of_content($node, (300 - (int) $row->xml->id));
     }
-
 }
