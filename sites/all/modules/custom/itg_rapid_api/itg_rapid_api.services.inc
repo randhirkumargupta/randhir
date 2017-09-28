@@ -1301,21 +1301,57 @@ function itg_rapid_api_resource() {
                             'type' => 'array',
                         ),
                         array(
-                            'name' => 'old_pass',
+                            'name' => 'auth_token',
                             'optional' => TRUE,
                             //'source' => 'data',
                             //'source' => array('data' => 'user_id'),
                             'source' => array('data'),
-                            'description' => 'password',
+                            'description' => 'auth token',
                             'type' => 'array',
                         ),
                         array(
-                            'name' => 'new_pass',
+                            'name' => 'old_password',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'old password',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'new_password',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'new password',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'confirm_password',
                             'optional' => TRUE,
                             //'source' => 'data',
                             //'source' => array('data' => 'user_id'),
                             'source' => array('data'),
                             'description' => 'confirm password',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_id',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_type',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device type',
                             'type' => 'array',
                         ),
                     ),
@@ -2270,6 +2306,79 @@ function itg_rapid_api_resource() {
             ),
         ),
             // for static other device end
+        
+        // reset_password custom resource declaration.....
+        'reset_password' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Retrieves change_password schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_reset_password',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+//                        array(
+//                            'name' => 'token',
+//                            'type' => 'string',
+//                            'description' => 'Function to perform',
+//                            'source' => array('path' => 0),
+//                            'optional' => TRUE,
+//                            'default' => '*',
+//                        ),
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'user mobile or email',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'new_password',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'new password',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'confirm_password',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'confirm password',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_id',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_type',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device type',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
         
         
     );
@@ -3643,19 +3752,22 @@ function itg_rapid_api_resend_otp($token, $user_id) {
  * @return array
  * 	The node processed information array.
  */
-function itg_rapid_api_change_password($token, $user_id) {
+function itg_rapid_api_change_password($token) {
     $HTTP_RAW_POST_DATA;
     $method = "POST";
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $params['pass'] = $params['old_pass'];
-    $params['pass2'] = $params['new_pass'];
-    //$params = $_POST;
-    $pass_valid_msg = validateServicePass($params);
-    if ($pass_valid_msg['success_flag'] == 0) {
-        $error_msg = $pass_valid_msg['msg'];
-        $data['status_code'] = "0";
-        $data['status_message'] = "$error_msg";
-        return $data;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE); 
+    $params['old_pass'] = trim($params['old_password']);
+    $params['new_pass'] = trim($params['new_password']);
+    
+    // raw input validation
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = validateChangePass($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+    if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
     }
     $url = SSO_SERVER_URL . "/appapi/change_password";
     $result = callAPI($method, $url, $params);
@@ -3663,11 +3775,13 @@ function itg_rapid_api_change_password($token, $user_id) {
 
     if ($result_obj->uid) {
         $local_obj = localChangePass($params, $result_obj->uid);
+        itg_reset_pass_info_insert_rapid($params,2);
+        cleanToken_Rapid($params);
         $data['status_code'] = "1";
-        $data['status_message'] = "";
+        $data['status_message'] = "Password has changed";
     } else {
-        $data['status_code'] = "0";
-        $data['status_message'] = "customised_message";
+        $data['status_code'] = "2";
+        $data['status_message'] = "Password has not changed";
     }
 
 
@@ -4752,4 +4866,46 @@ function itg_rapid_api_adconfig_tab($token) {
     $return_obj = $obj;
 
     return $return_obj;
+}
+
+/**
+ * [itg_rapid_api_reset_password] definition.
+ * Returns the information about a itg_rapid_api_reset_password.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_reset_password($token) {
+    $HTTP_RAW_POST_DATA;
+    $method = "POST";
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    // raw input validation
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = validateResetPass($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+    if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    }
+    $url = SSO_SERVER_URL . "/appapi/reset_password";
+    $result = callAPI($method, $url, $params);
+    $result_obj = json_decode($result);
+
+    if ($result_obj->uid) {
+        $local_obj = localResetPass($params, $result_obj->uid);
+        itg_reset_pass_info_insert_rapid($params,1);
+        cleanToken_Rapid($params);
+        $data['status_code'] = "1";
+        $data['status_message'] = "password has been changed";
+    } else {
+        $data['status_code'] = "2";
+        $data['status_message'] = "password has not been changed";
+    }
+
+
+
+    return $data;
 }

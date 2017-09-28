@@ -384,9 +384,25 @@ function localLogin($data){
 }
 
 function localChangePass($get_data, $uid){
-     $uname = $user_id = $get_data['user_id'];
-    $pass  = $get_data['pass'];
-    $pass2 = $get_data['pass2'];
+    $uname = $user_id = $get_data['user_id'];
+    $pass  = $get_data['new_password'];
+    $pass2 = $get_data['confirm_password'];
+    $msg = "";
+    $data = array();
+    $account = user_load_by_name($uname);
+
+
+    $edit = array('pass' => $pass2);
+
+    // Save the account with the new password.
+    $flag = user_save($account, $edit);
+    return $flag;
+}
+
+function localResetPass($get_data, $uid){
+    $uname = $user_id = $get_data['user_id'];
+    $pass  = $get_data['new_password'];
+    $pass2 = $get_data['confirm_password'];
     $msg = "";
     $data = array();
     $account = user_load_by_name($uname);
