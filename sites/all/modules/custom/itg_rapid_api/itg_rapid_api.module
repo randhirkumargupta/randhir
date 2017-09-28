@@ -1382,7 +1382,7 @@ function validateChangePass($params) {
     $device_type = trim($params['device_type']);
     $old_password = trim($params['old_password']);
     $account = user_load_by_name($user_id);
-    $oldpass_flag = user_check_password($old_pass, $account);
+    $oldpass_flag = user_check_password($old_password, $account);
 
     $error = array();
     $userid_is_numeric = 0;
