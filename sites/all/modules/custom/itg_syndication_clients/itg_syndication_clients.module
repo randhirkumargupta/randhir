@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * The ITG Syndication clients.
+ * Contains functionality for ITG Syndication for clients.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function itg_syndication_clients_menu() {
+  $items['bsb/story/%'] = array(
+    'page callback' => 'itg_bsb_story_syndication',
+    'page arguments' => array(2),
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_bsb_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * This function is used to create bsb directory on public folder
+ * hook_install
+ */
+function itg_syndication_clients_install() {
+  $bsbdir = 'public://bsb';
+  file_prepare_directory($bsbdir, FILE_CREATE_DIRECTORY);
+}
+
+function slugify($text) {
+  // replace & to and -
+  $text = preg_replace('&', 'and', $text);
+  // replace non letter or digits by -
+  $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+  // transliterate
+  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+  // remove unwanted characters
+  $text = preg_replace('~[^-\w]+~', '', $text);
+  // trim
+  $text = trim($text, '-');
+  // remove duplicate -
+  $text = preg_replace('~-+~', '-', $text);
+  
+  // lowercase
+  $text = strtolower($text);
+
+  if (empty($text)) {
+    return 'n-a';
+  }
+  return $text;
+}
