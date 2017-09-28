@@ -20,6 +20,10 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         $document->addField('sm_field_node_status', $node->status);
     }
     
+    if (isset($node->nid)) {
+        $document->addField('sm_itg_custom_nid', $node->nid);
+    }
+    
     if (isset($node->field_story_extra_large_image['und']['0']['alt'])) {
       if(!empty($node->field_story_extra_large_image['und']['0']['alt'])) {
         $document->addField('sm_alttext', $node->field_story_extra_large_image['und']['0']['alt']);
