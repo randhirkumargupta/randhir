@@ -197,7 +197,7 @@ $uri = base64_encode($actual_link);
                                         <div class="bounce2"></div>
                                         <div class="bounce3"></div>
                                     </div></div>
-                                    <div style="margin:0 auto; width:622px;" id="migrate_video_palyer_container">
+                                    <div  id="migrate_video_palyer_container">
                                         <?php print theme('migrated_video_player', array("url" => $video_value->field_migrated_video_url_value, 'nid' => $nid, 'image' => $image_url)); ?>
                                     </div> 
                                 </div>
@@ -255,7 +255,7 @@ $uri = base64_encode($actual_link);
                           <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                               <div class="show-embed-code-div">
                                   <div class="copy-sample-code">
-                                      <textarea readonly><iframe allowfullscreen="" frameborder="0"  height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" width="648" /></textarea>
+                                      <textarea readonly><iframe allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>
                                   </div>
                               </div>
                           </li>
@@ -326,7 +326,7 @@ $uri = base64_encode($actual_link);
                               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                   <div class="show-embed-code-div">
                                       <div class="copy-sample-code">
-                                          <textarea readonly><iframe allowfullscreen="" frameborder="0" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" width="648" /></textarea>    
+                                          <textarea readonly><iframe allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>    
                                       </div>
                                   </div>
                               </li>
