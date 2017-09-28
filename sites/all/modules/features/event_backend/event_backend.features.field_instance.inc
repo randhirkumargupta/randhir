@@ -100,7 +100,7 @@ function event_backend_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_sponsor_type',
     'label' => 'Sponsor Type',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,

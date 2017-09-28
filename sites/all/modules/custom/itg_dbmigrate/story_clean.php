@@ -9,7 +9,7 @@ create_story_xml_clean();
  * Implement function for create index.xml
  */
 function create_index_xml(){
-  $xml_path = 'sites/default/files/migrate/xml_file/xml_file_chunk/';
+  $xml_path = 'sites/default/files/migrate/xml_file/xml_file_chunk_story_normal/';
   $foldername = 'story/';
   $path = $xml_path.$foldername;
   foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $filename) {
@@ -44,10 +44,10 @@ function create_story_xml_clean() {
 
 
 $pti_array = array('indiatoday-story_2017-04-01.xml', 'indiatoday-story_2017-04-14.xml', 'indiatoday-story_2017-04-15.xml', 'indiatoday-story_2017-05-01.xml', 'indiatoday-story_2017-05-15.xml', 'indiatoday-story_2017-06-01.xml', 'indiatoday-story_2017-06-14.xml', 'indiatoday-story_2017-06-15.xml');
- 
- $file_path = 'sites/default/files/migrate/xml_file/xml_file_chunk/';
- foreach($pti_array as $xm_name) {
-  $xml_path = 'sites/default/files/migrate/xml_file/xml_file_chunk/';
+ $story_array = array('indiatoday-story_2017-01-01.xml', 'indiatoday-story_2017-02-01.xml', 'indiatoday-story_2017-03-01.xml', 'indiatoday-story_2017-04-01.xml', 'indiatoday-story_2017-05-01.xml', 'indiatoday-story_2017-06-01.xml');
+ $file_path = 'sites/default/files/migrate/xml_file/xml_file_chunk_story_normal/';
+ foreach($story_array as $xm_name) {
+  $xml_path = 'sites/default/files/migrate/xml_file/xml_file_chunk_story_normal/';
   $xml = simplexml_load_file($file_path . $xm_name, 'SimpleXMLElement');
   $i = 0;
   foreach ($xml->story as $stories) {
