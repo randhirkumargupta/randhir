@@ -86,7 +86,13 @@ function itg_flag_get_count($nid, $type) {
     $cond = array('nid' => (int)$nid);
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
-      $data[$type] = $document[$type];
+      if (!empty($type)) {
+        $data[$type] = $document[$type];
+      }
+      else {
+        $data['like_count'] = $document['like_count'];
+        $data['dislike_count'] = $document['dislike_count'];
+      }
     }
     return $data;
   }

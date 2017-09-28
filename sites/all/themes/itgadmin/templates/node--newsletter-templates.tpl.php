@@ -71,7 +71,7 @@
       <?php } ?>
        <div class="field">
         <div class="field-label"><?php print t('Banner:'); ?></div>
-        <div class="field-items"><img src="<?php echo str_replace('public://', $base_url.'/sites/default/files/', $banner ); ?>" alt="" width="100" height="100"/></div>
+        <div class="field-items"><img src="<?php echo file_create_url($banner); //str_replace('public://', $base_url.'/sites/default/files/', $banner ); ?>" alt="" width="100" height="100"/></div>
       </div>
       <?php if($node->body[LANGUAGE_NONE][0]['value']) { ?>
       <div class="field">

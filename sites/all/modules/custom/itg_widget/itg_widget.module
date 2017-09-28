@@ -2212,7 +2212,6 @@ function insert_data_in_widget_helper_test() {
                 drupal_set_message($ex->getMessage());
             }
         }
-
         $section = $data->cat_id;
         try {
             $query = db_select($table, "tbl");
@@ -2241,6 +2240,7 @@ function is_widget_views($view) {
     $flag = FALSE;
     $view_name = array(
       'section_wise_draggable_content_order',
+      'section_wise_content_ordering_list',
       'story_widget',
       'widget_anchors_listing',
       'photo_carousel_widget',

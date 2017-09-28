@@ -130,7 +130,8 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
  */
 function itg_get_newsletter_mail_content($node, $template_node) {
   global $base_url;
-  $banner = $base_url . str_replace('public://', '/sites/default/files/', $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
+  // $banner = $base_url . str_replace('public://', '/sites/default/files/', $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
+  $banner = file_create_url($template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
   $footer = $template_node->body[LANGUAGE_NONE][0]['value'];
   
   $content = '<!DOCTYPE html> 
@@ -147,9 +148,9 @@ function itg_get_newsletter_mail_content($node, $template_node) {
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
   $news_content = '';
   foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
-
     $news_detail = entity_load('field_collection_item', array($news_arr['value']));
-    $title = $node->field_news_title[LANGUAGE_NONE][0]['value'];
+    // $title = $node->field_news_title[LANGUAGE_NONE][0]['value'];
+    $title = $news_detail[$news_arr['value']]->field_news_title[LANGUAGE_NONE][0]['value'];
     $kicker = $news_detail[$news_arr['value']]->field_news_kicker[LANGUAGE_NONE][0]['value'];
     if ($news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail", $news_detail[$news_arr['value']]->field_news_thumbnail[LANGUAGE_NONE][0]['uri']);
@@ -173,8 +174,6 @@ function itg_get_newsletter_mail_content($node, $template_node) {
     else {
       $link = $news_detail[$news_arr['value']]->field_news_external_url[LANGUAGE_NONE][0]['value'];
     }
-
-//    $news_content = '';
     if ($flag) {
       $news_content .= '<tr>
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>

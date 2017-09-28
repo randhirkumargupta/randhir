@@ -129,7 +129,8 @@ function itg_ugc_send_follow_story_content_mail($node) {
 function itg_get_user_email_by_id($uid) {
   $query = db_select('users', 'u')
       ->fields('u', array('mail'))
-      ->condition('u.uid', $uid, '=');
+      ->condition('u.uid', $uid, '=')
+      ->condition('u.status', 1);
   return $query->execute()->fetchField();
 }
 

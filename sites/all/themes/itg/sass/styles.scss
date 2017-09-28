@@ -1602,7 +1602,7 @@ footer {
 
 .itg-common-section {
     .droppable {
-        height: 440px;
+        height: 420px;
     }
     .home-page-poll-block-wrap {
         .droppable {
@@ -1860,7 +1860,12 @@ footer {
 
 .section-ordering {
     a {
-        display: inline;
+        &:not(.video-icon) {
+            display: inline;
+        }
+        &.pic-no-icon {
+            display: block;
+        }
     }
     h3 {
         padding: 10px 0;
@@ -2936,7 +2941,7 @@ footer {
                     width: 200px;
                     position: absolute;
                     box-shadow: 0px 0px 5px #ccc;
-                    left: 0;
+                    right: 0;
                     top: 40px;
                     font-weight: normal;
                     color: #000;
@@ -2945,13 +2950,14 @@ footer {
                     line-height: 24px;
                     text-align: left;
                     border: 1px solid #d2d2d2;
+                    z-index: 1;
                     overflow: visible !important;
                     &:before {
                         content: '';
                         height: 21px;
                         background: url(../images/story-up-arrow-icon.png) no-repeat;
                         position: absolute;
-                        left: 12px;
+                        right: 12px;
                         top: -21px;
                         width: 25px;
                     }
@@ -3108,6 +3114,7 @@ footer {
         background: #f3f3f3;
         padding: 10px;
         position: relative;
+        padding-right: 100px;
         .tech-rating {
             width: 88px;
             height: 33px;
@@ -4662,6 +4669,9 @@ h1.category-heading {
         .iframe-video {
             padding-bottom: 72.3%;
             padding-top: 0;
+            .jwplayer {
+                position: static !important;
+            }
         }
         @include video-detail-page-sociallike;
         .slick-slider {
@@ -6082,7 +6092,7 @@ section.sidebar {
 
 .recommended-for-you {
     background: #f3f3f3;
-    margin: 40px 0px 0px 0px;
+    margin: 50px 0px 0px 0px;
     padding: 20px 0 10px 0;
     .widget-title {
         margin-bottom: 10px;
@@ -6862,12 +6872,22 @@ section.sidebar {
 .event-sidebar {
     .header-top {
         .event-header-banner {
-            height: 185px;
+            /*height: 185px;*/
+            overflow: hidden;
             @include pos(relative);
             text-align: center;
-            .event-add-header {
-                padding-top: 45px;
+            img {
                 width: 100%;
+            }
+            .event-add-header {
+                position: absolute;
+                width: 70%;
+                margin: auto;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
             }
         }
     }
@@ -7252,6 +7272,7 @@ section.sidebar {
                 &.image {
                     img {
                         width: 72px;
+                        max-width: 72px;
                         height: 72px;
                         border-radius: 100%;
                         border: 2px solid #ef3c24;
@@ -7358,8 +7379,10 @@ section.sidebar {
                 z-index: 1;
                 left: 0;
                 top: 50px;
-                width: 150px;
+                width: 200px;
                 display: none;
+                max-height: 200px;
+                overflow: auto;
                 li {
                     float: none;
                     a {
@@ -8050,9 +8073,9 @@ section.sidebar {
         font-weight: 700;
     }
     .tc-txt {
-        padding: 0;
+        /* padding: 0;
         background: transparent;
-        border: none;
+        border: none;*/
         font-family: roboto;
         font-size: 12px;
         color: #707070;
@@ -9268,6 +9291,8 @@ section.sidebar {
         }
     }
     .budget-top-block {
+        display: inline-block;
+        width: 100%;
         h1 {
             display: inline;
         }
@@ -10815,6 +10840,7 @@ h1.about-us-heading {
     ul {
         background: #a00606;
         padding: 0px;
+        padding-left: 0 !important;
         li {
             padding: 25px 0;
             font-size: 15px;
@@ -11513,10 +11539,11 @@ h1.about-us-heading {
                 height: 33px;
                 line-height: 33px;
                 background: transparent;
-                a {
+                a * {
                     font-size: 20px;
                     color: #000;
                     font-size: 18px;
+                    line-height: 34px;
                 }
             }
             .field-content {
@@ -13782,7 +13809,7 @@ span.story-sponsor-powered-text::last-word {
 
 .byline a[title='Follow'],
 .byline a[title='follow'] {
-    background: url(../images/followunB.gif) no-repeat 25% 2px;
+    background: url(../images/followunB.gif) no-repeat 2px 2px;
     padding-left: 38px;
     padding-top: 10px;
     padding-bottom: 7px;

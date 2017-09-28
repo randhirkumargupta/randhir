@@ -442,6 +442,10 @@ function itgadmin_preprocess_page(&$vars) {
     , 'election-graph-widget-list'
     , 'dailymotion-video-play'
     , 'solr-unpublish-video'
+    , 'search-unpublish-internal-video'
+    , 'search-publish-internal-video'
+    , 'search-publish-internal-video-singal'
+    , 'search-unpublish-internal-video-singal'
   );
 
   if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
@@ -545,12 +549,12 @@ function itgadmin_js_alter(&$javascript) {
 //  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']['scope'] = 'footer';
 //  $javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']['scope'] = 'footer';
 
-  /* group for unset image js file */
+  /* group for unset image js file 
   if(($arg[0] != 'node') && ($arg[1] != 'add' && $arg[2] != 'edit')) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);  
-  }
+  }*/
   
   /* group for colorbox js */
  $unset_array = array('mydraft-story', 'itg-menu-manager', 'in-queue-story', 'published-story', 'expired-story', 'unpublished-story', 'archive-story', 'ugc-published-story');

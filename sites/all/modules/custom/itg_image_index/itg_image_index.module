@@ -20,6 +20,10 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         $document->addField('sm_field_node_status', $node->status);
     }
     
+    if (isset($node->nid)) {
+        $document->addField('sm_itg_custom_nid', $node->nid);
+    }
+    
     if (isset($node->field_story_extra_large_image['und']['0']['alt'])) {
       if(!empty($node->field_story_extra_large_image['und']['0']['alt'])) {
         $document->addField('sm_alttext', $node->field_story_extra_large_image['und']['0']['alt']);
@@ -41,12 +45,24 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
         $document->addField('sm_common_kicker_text', $node->field_podcast_kicker_message['und']['0']['value']);
     }
 
-    if (isset($node->field_story_expert_description['und']['0']['value']) && $node->type == 'story') {
+    if ($node->type == 'story') {
+      if(!empty($node->field_story_expert_description['und']['0']['value'])) {
         $document->addField('sm_field_custom_expert_description', $node->field_story_expert_description['und']['0']['value']);
+      }
+      if(!empty($node->field_map_embed_code['und']['0']['value'])) {
+        $document->addField('sm_field_map_embed_code', $node->field_map_embed_code['und']['0']['value']);
+      }
+      if(!empty($node->field_social_embed_code['und']['0']['value'])) {
+        $document->addField('sm_field_social_embed_code', $node->field_social_embed_code['und']['0']['value']);
+      }
     }
 
     if (isset($node->type) && $node->type == 'story') {
+      if($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated') {
         $itg_body = apachesolr_clean_text($node->body[$node->language][0]['value']);
+      } else {
+        $itg_body = $node->body[$node->language][0]['value'];
+      }
         $document->addField('sm_field_custom_story_description_text', $itg_body);
         $document->addField('sm_field_custom_emoji', $node->field_emoji['und']['0']['value']);
         $document->addField('sm_field_custom_emoji_2', $node->field_emoji_2['und']['0']['value']);

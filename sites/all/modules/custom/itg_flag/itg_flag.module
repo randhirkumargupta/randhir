@@ -81,7 +81,13 @@ function itg_flag_details() {
   }
   else {
     if (function_exists('itg_get_migrated_like_count')) {
-      $migrated_count = itg_get_migrated_like_count(ltrim($nd_id, '0'));
+      if($datatype == 'photogallery') {
+        $step_nid = ltrim($nd_id, '0');
+        $step_nid = substr($step_nid, 0, -4);;
+        $migrated_count = itg_get_migrated_like_count($step_nid);
+      } else {
+      $migrated_count = itg_get_migrated_like_count(ltrim($nd_id, '0')); 
+      }
     }
 
     if ($typ == 'like_count') {
@@ -94,16 +100,15 @@ function itg_flag_details() {
     if (function_exists('itg_flag_get_count')) {
     $pre_count = itg_flag_get_count($nd_id, $typ);
     }
-  $nid = itg_flag_get_nid($nd_id);
-  if (!empty($pre_count[$typ])) {
-    $pre_count = $pre_count[$typ] + 1;
-    $mig_count = $pre_mig_count + $pre_count;
-  }
-  else {
-    
-    $pre_count = 1;
-    $mig_count = $pre_mig_count + $pre_count;
-  }
+    $nid = itg_flag_get_nid($nd_id);
+    if (!empty($pre_count[$typ])) {
+      $pre_count = $pre_count[$typ] + 1;
+      $mig_count = $pre_mig_count + $pre_count;
+    }
+    else {
+      $pre_count = 1;
+      $mig_count = $pre_mig_count + $pre_count;
+    }
   
   if (!empty($nid)) {
     itg_flag_upd_count($nd_id, $typ, $pre_count);
@@ -139,7 +144,7 @@ function itg_flag_details() {
         $response = array('type' => $typ, 'count' => $mig_count, 'nd_id' => $nd_id, 'chk' => 'sty');
       }
       if ($dtag == 'dsty') {
-        $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id, 'chk' => 'dsty');
+        $response = array('type' => $typ, 'count' => $mig_count, 'nd_id' => $nd_id, 'chk' => 'dsty');
       }
     }
     else {
