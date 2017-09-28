@@ -1856,9 +1856,18 @@ function itg_widget_query_category_wise_content_list_alter(QueryAlterableInterfa
 function _get_content_type_for_widget($widget_name) {
     $content_type = array('story', 'videogallery', 'photogallery');
     switch ($widget_name) {
-        case 'top_stories_widget':
-            $content_type = array('story');
-            break;
+      case 'top_stories_widget':
+        $content_type = array('story','breaking_news');
+        break;
+      case 'dont_miss_content_widget':
+        $content_type = array('story','videogallery', 'photogallery', 'breaking_news');
+        break;
+      case 'we_may_suggest_widget':
+        $content_type = array('story','videogallery', 'photogallery', 'breaking_news');
+        break;
+      case 'home_page_feature_widget':
+        $content_type = array('story','videogallery', 'photogallery', 'breaking_news');
+        break;
     }
     return $content_type;
 }
