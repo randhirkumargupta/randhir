@@ -347,29 +347,121 @@ function itg_category_multiple_menu() {
  * Implements itg_category_multiple_find()
  */
 function itg_category_multiple_find() {
+  $render_data = array();
+  
+  $render_data['b_cat_opt'] = '';
+  $render_data['b_sub_cat_opt'] = '';
+  $render_data['b_sub_sub_cat_opt'] = '';
+  $render_data['b_sub_sub_sub_cat_opt'] = '';
+  $render_data['b_cat'] = '';
+  $render_data['b_sub_cat'] = '';
+  $render_data['b_sub_sub_cat'] = '';
+  $render_data['b_sub_sub_sub_cat'] = '';
+  
   $category = $_POST['type'];
   switch ($category) {
     case 'itg_section[]':
+
       if (isset($_POST['section']) && count($_POST['section']) >= 1 && !empty($_POST['section'])) {
         $main_category = get_categoryies_by_tid(json_decode($_POST['section']));
-        $primary_category = get_parent_structure_by_tid(json_decode($_POST['section']));
-        $render_data['main'] = $main_category;
-        $render_data['primary'] = $primary_category;
         $render_data['pcat'] = isset($_POST['pcat']) ? $_POST['pcat'] : '';
+        $itg_category_array_holder = array();
+
+        $itg_category_array_holder[] = json_decode($_POST['section']);
+
+        if (!empty($main_category['html']) && isset($_POST['b_cat']) && !empty($_POST['b_cat'])) {
+          $category_data_c_after_intrs = array_values(itg_category_multiple_array_intersect($main_category['tids'], json_decode($_POST['b_cat'])));
+          $render_data['b_cat'] = $_POST['b_cat'];
+          $category_data_c = get_categoryies_by_tid($category_data_c_after_intrs);
+          $render_data['b_cat_opt'] = $main_category['html'];
+          $itg_category_array_holder[] = $category_data_c_after_intrs;
+        }
+
+        if (isset($category_data_c['tids']) && !empty($render_data['b_cat_opt']) && isset($_POST['b_sub_cat']) && !empty($_POST['b_sub_cat'])) {
+          $sub_category_data_c_after_intrs = itg_category_multiple_array_intersect($category_data_c['tids'], json_decode($_POST['b_sub_cat']));
+          $render_data['b_sub_cat'] = $_POST['b_sub_cat'];
+          $sub_category_data_c = get_categoryies_by_tid($sub_category_data_c_after_intrs);
+          $render_data['b_sub_cat_opt'] = $category_data_c['html'];
+          $itg_category_array_holder[] = $sub_category_data_c_after_intrs;
+        }
+        if (!empty($sub_category_data_c['tids']) && !empty($render_data['b_cat_opt']) && !empty($render_data['b_sub_cat_opt']) && isset($_POST['b_sub_sub_cat']) && !empty($_POST['b_sub_sub_cat'])) {
+          $sub_sub_category_data_c_after_intrs = itg_category_multiple_array_intersect($sub_category_data_c['tids'], json_decode($_POST['b_sub_sub_cat']));
+          $render_data['b_sub_sub_cat'] = $_POST['b_sub_sub_cat'];
+          $sub_sub_category_data_c = get_categoryies_by_tid($sub_sub_category_data_c_after_intrs);
+          $render_data['b_sub_sub_cat_opt'] = $sub_category_data_c['html'];
+          $itg_category_array_holder[] = $sub_sub_category_data_c_after_intrs;
+        }
+
+        if (!empty($sub_sub_category_data_c['tids']) && !empty($render_data['b_cat_opt']) && !empty($render_data['b_sub_sub_cat_opt']) && isset($_POST['b_sub_sub_sub_cat']) && !empty($_POST['b_sub_sub_sub_cat'])) {
+          $sub_sub_sub_category_data_c_after_intrs = itg_category_multiple_array_intersect($sub_sub_category_data_c['tids'], json_decode($_POST['b_sub_sub_sub_cat']));
+          $render_data['b_sub_sub_sub_cat'] = $_POST['b_sub_sub_sub_cat'];
+          $sub_sub_sub_category_data_c = get_categoryies_by_tid($sub_sub_sub_category_data_c_after_intrs);
+          $render_data['b_sub_sub_sub_cat_opt'] = $sub_sub_category_data_c['html'];
+          $itg_category_array_holder[] = $sub_sub_sub_category_data_c_after_intrs;
+        }
+
+        $itg_category_list_for_primary = array();
+        foreach ($itg_category_array_holder as $arr_chunk) {
+          if (is_array($arr_chunk)) {
+            $itg_category_list_for_primary = array_merge($itg_category_list_for_primary, $arr_chunk);
+          }
+        }
+
+        $primary_category = get_parent_structure_by_tid($itg_category_list_for_primary);
+        $render_data['main'] = $main_category['html'];
+        $render_data['primary'] = $primary_category;
         print json_encode($render_data);
         drupal_exit();
       }
       break;
     case 'itg_category[]':
       if (isset($_POST['category']) && count($_POST['category']) >= 1 && !empty($_POST['category'])) {
-        $main_category = get_categoryies_by_tid(json_decode($_POST['category']));
+        $category_data_c = get_categoryies_by_tid(json_decode($_POST['category']));
         $section = json_decode($_POST['section']);
         $category = json_decode($_POST['category']);
-        $final_array_for_final_category = array_merge($section, $category);
-        $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
-        $render_data['main'] = $main_category;
-        $render_data['primary'] = $primary_category;
+        $render_data['main'] = $category_data_c['html']; // Category default option 
         $render_data['pcat'] = isset($_POST['pcat']) ? $_POST['pcat'] : '';
+        $itg_category_array_holder = array();
+
+        // Default initilization for section and category
+        $itg_category_array_holder[] = json_decode($_POST['section']);  // Holding section  in an array
+        $itg_category_array_holder[] = json_decode($_POST['category']);  // Holding category  in an array
+
+        if (isset($category_data_c['tids']) && isset($_POST['b_sub_cat']) && !empty($_POST['b_sub_cat'])) {
+          $sub_category_data_c_after_intrs = itg_category_multiple_array_intersect($category_data_c['tids'], json_decode($_POST['b_sub_cat']));
+          $render_data['b_sub_cat'] = $_POST['b_sub_cat'];
+          $sub_category_data_c = get_categoryies_by_tid($sub_category_data_c_after_intrs);
+          $render_data['b_sub_cat_opt'] = $category_data_c['html'];
+          $itg_category_array_holder[] = $sub_category_data_c_after_intrs;
+        }
+        if (!empty($sub_category_data_c['tids']) && !empty($render_data['b_sub_cat_opt']) && isset($_POST['b_sub_sub_cat']) && !empty($_POST['b_sub_sub_cat'])) {
+          $sub_sub_category_data_c_after_intrs = itg_category_multiple_array_intersect($sub_category_data_c['tids'], json_decode($_POST['b_sub_sub_cat']));
+          $render_data['b_sub_sub_cat'] = $_POST['b_sub_sub_cat'];
+          $sub_sub_category_data_c = get_categoryies_by_tid($sub_sub_category_data_c_after_intrs);
+          $render_data['b_sub_sub_cat_opt'] = $sub_category_data_c['html'];
+          $itg_category_array_holder[] = $sub_sub_category_data_c_after_intrs;
+        }
+
+        if (!empty($sub_sub_category_data_c['tids']) && !empty($render_data['b_sub_sub_cat_opt']) && isset($_POST['b_sub_sub_sub_cat']) && !empty($_POST['b_sub_sub_sub_cat'])) {
+          $sub_sub_sub_category_data_c_after_intrs = itg_category_multiple_array_intersect($sub_sub_category_data_c['tids'], json_decode($_POST['b_sub_sub_sub_cat']));
+          $render_data['b_sub_sub_sub_cat'] = $_POST['b_sub_sub_sub_cat'];
+          $sub_sub_sub_category_data_c = get_categoryies_by_tid($sub_sub_sub_category_data_c_after_intrs);
+          $render_data['b_sub_sub_sub_cat_opt'] = $sub_sub_category_data_c['html'];
+          $itg_category_array_holder[] = $sub_sub_sub_category_data_c_after_intrs;
+        }
+
+
+        $itg_category_list_for_primary = array();
+        foreach ($itg_category_array_holder as $arr_chunk) {
+          if (is_array($arr_chunk)) {
+            $itg_category_list_for_primary = array_merge($itg_category_list_for_primary, $arr_chunk);
+          }
+        }
+
+        $primary_category = get_parent_structure_by_tid($itg_category_list_for_primary);
+        $render_data['primary'] = $primary_category;
+
+
         print json_encode($render_data);
         drupal_exit();
       }
@@ -377,15 +469,46 @@ function itg_category_multiple_find() {
 
     case 'itg_sub_category[]':
       if (isset($_POST['sub_category']) && count($_POST['sub_category']) >= 1 && !empty($_POST['sub_category'])) {
-        $main_category = get_categoryies_by_tid(json_decode($_POST['sub_category']));
+        $sub_category_data_c = get_categoryies_by_tid(json_decode($_POST['sub_category']));
         $section = json_decode($_POST['section']);
         $category = json_decode($_POST['category']);
         $sub_category = json_decode($_POST['sub_category']);
-        $final_array_for_final_category = array_merge($section, $category, $sub_category);
-        $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
-        $render_data['main'] = $main_category;
-        $render_data['primary'] = $primary_category;
+        $render_data['main'] = $sub_category_data_c['html'];
         $render_data['pcat'] = isset($_POST['pcat']) ? $_POST['pcat'] : '';
+        $itg_category_array_holder = array();
+
+        // Default initilization for section and category
+        $itg_category_array_holder[] = json_decode($_POST['section']);  // Holding section  in an array
+        $itg_category_array_holder[] = json_decode($_POST['category']);  // Holding category  in an array
+        $itg_category_array_holder[] = json_decode($_POST['sub_category']);  // Holding sub category  in an array
+
+        if (!empty($sub_category_data_c['tids']) && isset($_POST['b_sub_sub_cat']) && !empty($_POST['b_sub_sub_cat'])) {
+          $sub_sub_category_data_c_after_intrs = itg_category_multiple_array_intersect($sub_category_data_c['tids'], json_decode($_POST['b_sub_sub_cat']));
+          $render_data['b_sub_sub_cat'] = $_POST['b_sub_sub_cat'];
+          $sub_sub_category_data_c = get_categoryies_by_tid($sub_sub_category_data_c_after_intrs);
+          $render_data['b_sub_sub_cat_opt'] = $sub_category_data_c['html'];
+          $itg_category_array_holder[] = $sub_sub_category_data_c_after_intrs;
+        }
+
+        if (!empty($sub_sub_category_data_c['tids']) && !empty($render_data['b_sub_sub_cat_opt']) && isset($_POST['b_sub_sub_sub_cat']) && !empty($_POST['b_sub_sub_sub_cat'])) {
+          $sub_sub_sub_category_data_c_after_intrs = itg_category_multiple_array_intersect($sub_sub_category_data_c['tids'], json_decode($_POST['b_sub_sub_sub_cat']));
+          $render_data['b_sub_sub_sub_cat'] = $_POST['b_sub_sub_sub_cat'];
+          $sub_sub_sub_category_data_c = get_categoryies_by_tid($sub_sub_sub_category_data_c_after_intrs);
+          $render_data['b_sub_sub_sub_cat_opt'] = $sub_sub_category_data_c['html'];
+          $itg_category_array_holder[] = $sub_sub_sub_category_data_c_after_intrs;
+        }
+
+
+        $itg_category_list_for_primary = array();
+        foreach ($itg_category_array_holder as $arr_chunk) {
+          if (is_array($arr_chunk)) {
+            $itg_category_list_for_primary = array_merge($itg_category_list_for_primary, $arr_chunk);
+          }
+        }
+
+        $primary_category = get_parent_structure_by_tid($itg_category_list_for_primary);
+        $render_data['primary'] = $primary_category;
+
         print json_encode($render_data);
         drupal_exit();
       }
@@ -393,22 +516,47 @@ function itg_category_multiple_find() {
 
     case 'itg_sub_sub_category[]':
       if (isset($_POST['sub_sub_category']) && count($_POST['sub_sub_category']) >= 1 && !empty($_POST['sub_sub_category'])) {
-        $main_category = get_categoryies_by_tid(json_decode($_POST['sub_sub_category']));
+        $sub_sub_category_data_c = get_categoryies_by_tid(json_decode($_POST['sub_sub_category']));
         $section = json_decode($_POST['section']);
         $category = json_decode($_POST['category']);
         $sub_category = json_decode($_POST['sub_category']);
         $sub_sub_category = json_decode($_POST['sub_sub_category']);
-        $final_array_for_final_category = array_merge($section, $category, $sub_category, $sub_sub_category);
-        $primary_category = get_parent_structure_by_tid($final_array_for_final_category);
-        $render_data['main'] = $main_category;
-        $render_data['primary'] = $primary_category;
+        $render_data['main'] = $sub_sub_category_data_c['html'];
         $render_data['pcat'] = isset($_POST['pcat']) ? $_POST['pcat'] : '';
+
+        $itg_category_array_holder = array();
+
+        // Default initilization for section and category
+        $itg_category_array_holder[] = json_decode($_POST['section']);  // Holding section  in an array
+        $itg_category_array_holder[] = json_decode($_POST['category']);  // Holding category  in an array
+        $itg_category_array_holder[] = json_decode($_POST['sub_category']);  // Holding sub category  in an array
+        $itg_category_array_holder[] = json_decode($_POST['sub_sub_category']);  // Holding sub sub category  in an array
+
+        if (!empty($sub_sub_category_data_c['tids']) && isset($_POST['b_sub_sub_sub_cat']) && !empty($_POST['b_sub_sub_sub_cat'])) {
+          $sub_sub_sub_category_data_c_after_intrs = itg_category_multiple_array_intersect($sub_sub_category_data_c['tids'], json_decode($_POST['b_sub_sub_sub_cat']));
+          $render_data['b_sub_sub_sub_cat'] = $_POST['b_sub_sub_sub_cat'];
+          $sub_sub_sub_category_data_c = get_categoryies_by_tid($sub_sub_sub_category_data_c_after_intrs);
+          $render_data['b_sub_sub_sub_cat_opt'] = $sub_sub_category_data_c['html'];
+          $itg_category_array_holder[] = $sub_sub_sub_category_data_c_after_intrs;
+        }
+
+        $itg_category_list_for_primary = array();
+        foreach ($itg_category_array_holder as $arr_chunk) {
+          if (is_array($arr_chunk)) {
+            $itg_category_list_for_primary = array_merge($itg_category_list_for_primary, $arr_chunk);
+          }
+        }
+
+        $primary_category = get_parent_structure_by_tid($itg_category_list_for_primary);
+        $render_data['primary'] = $primary_category;
+
+
         print json_encode($render_data);
         drupal_exit();
       }
       break;
 
-    case 'itg_sub_sub_sub_category[]':
+    case 'itg_sub_sub_sub_category[]': //p($_POST);
       if (isset($_POST['sub_sub_sub_category']) && count($_POST['sub_sub_sub_category']) >= 1 && !empty($_POST['sub_sub_sub_category'])) {
         $section = json_decode($_POST['section']);
         $category = json_decode($_POST['category']);
@@ -435,6 +583,7 @@ function get_categoryies_by_tid($tids) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $html = '';
+    $render_tids = array();
     $return_data_chunk = array();
     if ($con) {
       $people = $con->taxonomy_term_data_mongo;
@@ -444,8 +593,11 @@ function get_categoryies_by_tid($tids) {
         $category_data = $people->find(array('status' => 1, "parent" => array('$in' => $new_tids)));
         foreach ($category_data as $chunk_data) {
           $html.='<option value="' . $chunk_data['tid'] . '">' . $chunk_data['name'] . '</option>';
+          $render_tids[] = $chunk_data['tid'];
         }
-        return $html;
+        $return_data_chunk['tids'] = $render_tids;
+        $return_data_chunk['html'] = $html;
+        return $return_data_chunk;
       }
     }
   }
@@ -899,4 +1051,14 @@ function itg_category_multiple_mapped_fields() {
     'itg_sub_sub_sub_category[]',
     'itg_primary_category'
   );
+}
+
+/**
+ * Function for array intersect
+ * @param array $arr1
+ * @param array $arr2
+ */
+function itg_category_multiple_array_intersect($arr1, $arr2) {
+  $result = array_intersect($arr1, $arr2);
+  return $result;
 }

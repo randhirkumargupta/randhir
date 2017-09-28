@@ -216,7 +216,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['fields']['field_issue_title_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_issue_title_1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_issue_title_1']['settings'] = array(
-    'format_type' => 'itg_d_m_y',
+    'format_type' => 'magazine_date_format',
     'fromto' => '',
     'multiple_number' => '',
     'multiple_from' => '',

@@ -21,14 +21,12 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
-if(isset($row->nid)) {
-    $nid = $row->nid;
-} elseif(isset($row->node_itg_widget_order_nid)) {
-    $nid = $row->node_itg_widget_order_nid;
-}
-if (is_widget_views($view)) {
-    echo l('<span class="view-link">view  </span>', FRONT_URL . '/node/' . $nid , array("html" => TRUE , "attributes" => array("target" => "_blank")));
-} else {
+?>
+<?php
+
+if (!empty($output)) {
     print $output;
+} else {
+    echo t("N/A");
 }
 ?>
