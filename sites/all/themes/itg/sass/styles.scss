@@ -1860,7 +1860,12 @@ footer {
 
 .section-ordering {
     a {
-        display: inline;
+        &:not(.video-icon) {
+            display: inline;
+        }
+        &.pic-no-icon {
+            display: block;
+        }
     }
     h3 {
         padding: 10px 0;
@@ -4664,6 +4669,9 @@ h1.category-heading {
         .iframe-video {
             padding-bottom: 72.3%;
             padding-top: 0;
+            .jwplayer {
+                position: static !important;
+            }
         }
         @include video-detail-page-sociallike;
         .slick-slider {
@@ -6084,7 +6092,7 @@ section.sidebar {
 
 .recommended-for-you {
     background: #f3f3f3;
-    margin: 40px 0px 0px 0px;
+    margin: 50px 0px 0px 0px;
     padding: 20px 0 10px 0;
     .widget-title {
         margin-bottom: 10px;
@@ -7264,6 +7272,7 @@ section.sidebar {
                 &.image {
                     img {
                         width: 72px;
+                        max-width: 72px;
                         height: 72px;
                         border-radius: 100%;
                         border: 2px solid #ef3c24;
@@ -7370,8 +7379,10 @@ section.sidebar {
                 z-index: 1;
                 left: 0;
                 top: 50px;
-                width: 150px;
+                width: 200px;
                 display: none;
+                max-height: 200px;
+                overflow: auto;
                 li {
                     float: none;
                     a {
@@ -8062,9 +8073,9 @@ section.sidebar {
         font-weight: 700;
     }
     .tc-txt {
-        padding: 0;
+        /* padding: 0;
         background: transparent;
-        border: none;
+        border: none;*/
         font-family: roboto;
         font-size: 12px;
         color: #707070;

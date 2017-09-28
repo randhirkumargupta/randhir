@@ -219,9 +219,11 @@
     }
     .top-block .top-colum-3 {
         @include calculate-width(1);
+        margin-top: 50px;
         >.itg-widget-parent {
             @include float(left);
             width: 48%;
+            margin-bottom: 0;
         }
         .trending-list {
             @include float(right);
@@ -443,6 +445,10 @@
      ::-webkit-scrollbar-thumb {
         border-radius: 10px;
         background-color: #aaa;
+    }
+    #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+        width: 55px;
+        height: 55px;
     }
 }
 
@@ -801,6 +807,10 @@
         .top-colum-3 {
             padding: 0 15px;
             @include calculate-width(1);
+        }
+        .top-colum-1,
+        .top-colum-3 {
+            margin-top: 50px;
         }
     }
     .itg-layout-container .itg-h450-section .droppable,
@@ -1513,10 +1523,6 @@
                 }
                 .container-inline-date {
                     margin-left: 10px;
-                    +.container-inline-date {
-                        display: block;
-                        vertical-align: top;
-                    }
                 }
             }
         }
@@ -1844,6 +1850,12 @@
             }
         }
     }
+    .view-front-end-global-search .views-exposed-widget .caln .container-inline-date {
+        display: block;
+        +.container-inline-date {
+            margin-left: 17px;
+        }
+    }
     /*search page filter scroll */
 }
 
@@ -2032,6 +2044,9 @@
         .highlights-video .live-event-video {
             height: 250px;
         }
+    }
+    #block-views-program-schedule-block-4 .view-display-id-block_4>.view-content>.views-row {
+        width: 49%;
     }
     /*End event page*/
     /*Home page start css*/

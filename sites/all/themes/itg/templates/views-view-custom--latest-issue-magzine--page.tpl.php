@@ -121,8 +121,9 @@
       if (!empty($lock_story)) {
         $lock_class = 'class="lock"';
       }
-      $output = $img;
-      $output .= '<span class="widget-title">' . t($value->name) . '</span>';
+
+      $output = '<span class="widget-title">' . t($value->name) . '</span>';
+      $output .= $img;
 
       if (!empty($lock_story)) {
         $output .= '<h3 class="lock" title="' . strip_tags($title) . '">' . $title . '</h3>';
@@ -177,9 +178,9 @@
             $sup_sub_title .= '<p>' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $s_value->nid) . '</p>';
           }
         }
-      }
-      $supp_output = $supp_img;
-      $supp_output .= '<span class="widget-title">' . itg_msi_issue_suppliment_title($s_value->field_story_select_supplement_target_id) . '</span>';
+      }      
+      $supp_output = '<span class="widget-title">' . itg_msi_issue_suppliment_title($s_value->field_story_select_supplement_target_id) . '</span>';
+      $supp_output .= $supp_img;
       if (!empty($lock_story)) {
         $supp_output .= '<h3 class="lock">' . $supp_title . '</h3>';
       }
