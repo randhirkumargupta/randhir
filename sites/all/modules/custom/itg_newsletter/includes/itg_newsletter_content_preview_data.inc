@@ -72,7 +72,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
   foreach ($story_nodes as $news_array) {
     $news_detail = node_load($news_array);
     if(!empty($news_detail)) {
-    $title =  $news_detail->title;
+    $title =  __html_output_with_tags($news_detail->title, 0, 1000);
     $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     if ($news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) {
       $thumbnail = image_style_url("thumbnail" , $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);

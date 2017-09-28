@@ -11,7 +11,7 @@
 
 
       <div class="magazin-subscribe magazin-desktop">
-        <span class="latest-issue">latest issue</span>
+        <span class="latest-issue"><?php print t('latest issue'); ?></span>
         <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
         <div class="issue-title">
           <?php 
@@ -44,7 +44,7 @@
 <div class="magazin-lhs-top magazin-mob">
   <div class="magazin-top">
     <div class="magazin-subscribe">
-      <span class="latest-issue"><?php t('latest issue'); ?></span>
+      <span class="latest-issue"><?php print t('latest issue'); ?></span>
       <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
         <div class="issue-title">
           <?php 

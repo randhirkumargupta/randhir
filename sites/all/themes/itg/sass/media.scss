@@ -1557,7 +1557,7 @@
         }
     }
     .event-sidebar .header-top .event-header-banner {
-        height: 150px;
+        /* height: 150px;*/
     }
     #block-itg-event-backend-program-tab-block .top-block-highlight {
         .highlights-container .wrap-listing {
@@ -1657,6 +1657,10 @@
         }
     }
     /*css end video detail page video player*/
+    .story-section .story-left,
+    .story-section .story-right {
+        padding: 0;
+    }
 }
 
 @media only screen and (max-width:767px) {
@@ -1801,6 +1805,46 @@
             display: block;
         }
     }
+    /*search page filter scroll */
+    [id*="views-exposed-form-front-end-global-search-page"] {
+        .views-exposed-form {
+            position: relative;
+            z-index: 99;
+            height: 80px;
+            [class*="views-widget-filter-tm_vid"],
+            #edit-sm-field-itg-common-by-line-name-wrapper,
+            #edit-bundle-name-wrapper,
+            #edit-hash-wrapper {
+                position: static;
+                padding-top: 13px;
+                .views-widget {
+                    display: none;
+                    position: relative;
+                    left: auto;
+                    top: auto;
+                }
+            }
+        }
+    }
+    .view-front-end-global-search .searh-all-filters {
+        zoom: 1;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .view-front-end-global-search .searh-all-filters::-webkit-scrollbar {
+        display: none;
+    }
+    .view-front-end-global-search {
+        .views-exposed-widget .caln {
+            right: 60px;
+            width: 208px;
+            .views-exposed-widget {
+                display: block;
+            }
+        }
+    }
+    /*search page filter scroll */
 }
 
 @media all and (min-width: 680px) {
@@ -1970,7 +2014,7 @@
         }
     }
     .event-sidebar .header-top .event-header-banner {
-        height: 112px;
+        /* height: 112px;*/
     }
     #block-menu-menu-event-menu {
         .wrap-mobile-social {

@@ -43,8 +43,13 @@ foreach ($field_collection_data as $data) {
   echo "</td>";
   echo "</tr>";
   echo "<tr>";
-  echo "<th>Set Time: </th>";
-  echo "<td>" . $data['feed_time'] . "</td>";
+  if($data['feed_frequency'] != 'Minute') {
+    echo "<th>Set Time: </th>";
+    echo "<td>" . $data['feed_time'] . "</td>";
+  } else {
+    echo "<th> Selected Minute: </th>";
+    echo "<td>" . $data['feed_frequency_value'] . "</td>";
+  }
   echo "</tr>";
   echo "<tr>";
   echo "<th>Number of feeds: </th>";

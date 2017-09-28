@@ -159,6 +159,40 @@ function syndication_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_syndication_rule_details-field_minute'.
+  $field_instances['field_collection_item-field_syndication_rule_details-field_minute'] = array(
+    'bundle' => 'field_syndication_rule_details',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 11,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_minute',
+    'label' => 'Minute',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_syndication_rule_details-field_syndication_content_type'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_content_type'] = array(
     'bundle' => 'field_syndication_rule_details',
@@ -371,7 +405,7 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -439,7 +473,7 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
@@ -473,7 +507,7 @@ function syndication_feature_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 8,
     ),
   );
 
@@ -510,7 +544,7 @@ function syndication_feature_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 9,
     ),
   );
 
@@ -1132,6 +1166,7 @@ function syndication_feature_field_default_field_instances() {
   t('FTP Username');
   t('Footer');
   t('Header');
+  t('Minute');
   t('Number of feeds');
   t('Select Client title');
   t('Select Content Type');
