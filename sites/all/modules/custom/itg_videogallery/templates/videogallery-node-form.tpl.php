@@ -150,6 +150,7 @@
 
 
 
+<script src="http://media2.intoday.in/lallantop/wp-content/themes/lallantop/asset/js/jwplayer/jwplayer.js"></script>
 
 
 

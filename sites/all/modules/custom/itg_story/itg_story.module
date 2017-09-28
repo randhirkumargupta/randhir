@@ -298,16 +298,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
   $title = ucfirst($form_state['node']->title);
   $clone_id = $_GET['clone_id'];
   // code insert image in custom table
-  $node_id = $form_state['node']->nid;
-  if ($form_state['input']['original_image_fids'] != "") {
-    $image_ids = explode('#', $form_state['input']['original_image_fids']);
-
-    if (!empty($image_ids)) {
-      if (function_exists('itg_photogallery_insert_image_data'))
-        itg_photogallery_insert_image_data($image_ids, $node_id);
-    }
-  }
-
+ 
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }

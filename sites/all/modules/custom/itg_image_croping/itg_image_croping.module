@@ -811,13 +811,17 @@ function itg_image_croping_crop_image_orignal() {
   $filepath = file_default_scheme() . '://' . $filedir;
   $orig_width = $image->info['width'];
   $orig_height = $image->info['height'];
+   if($image_width > 1800) {
+    $scaled = image_scale_and_crop($image, $image_width, $image_height);
 
+   }else {
   if ($image->info ['width'] < $image_width || $image->info['height'] < $image_height) {
     $scaled = image_scale($image, $image_width, $image_height, true);
   }
   else {
     $scaled = image_scale_and_crop($image, $image_width, $image_height);
   }
+   }
   $image_name_orignal = $file_image->filename;
   $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
   $image_name = $image_name_orignal .'-'. $image_width.'x'.$image_height;
