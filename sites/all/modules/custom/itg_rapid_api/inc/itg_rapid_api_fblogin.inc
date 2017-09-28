@@ -389,13 +389,30 @@ function localChangePass($get_data, $uid){
     $pass2 = $get_data['confirm_password'];
     $msg = "";
     $data = array();
-    $account = user_load_by_name($uname);
+    if (is_numeric($uname)) {
+        if (function_exists(itg_sso_user_mobile_check)) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($uname);
+        }
+        if (!empty($get_user_check_mobile)) {
+            $account = user_load($get_user_check_mobile);
+        }
+    } else {
+        if (function_exists(itg_sso_user_email_check)) {
+            $get_user_check_email = itg_sso_user_email_check($uname);
+        }
+        if (!empty($get_user_check_email)) {
+            $account = user_load($get_user_check_email);
+        }
+    }
 
 
     $edit = array('pass' => $pass2);
 
     // Save the account with the new password.
     $flag = user_save($account, $edit);
+
+
+
     return $flag;
 }
 
@@ -404,13 +421,31 @@ function localResetPass($get_data, $uid){
     $pass  = $get_data['new_password'];
     $pass2 = $get_data['confirm_password'];
     $msg = "";
+    //$data = array();
     $data = array();
-    $account = user_load_by_name($uname);
+    if (is_numeric($uname)) {
+        if (function_exists(itg_sso_user_mobile_check)) {
+            $get_user_check_mobile = itg_sso_user_mobile_check($uname);
+        }
+        if (!empty($get_user_check_mobile)) {
+            $account = user_load($get_user_check_mobile);
+        }
+    } else {
+        if (function_exists(itg_sso_user_email_check)) {
+            $get_user_check_email = itg_sso_user_email_check($uname);
+        }
+        if (!empty($get_user_check_email)) {
+            $account = user_load($get_user_check_email);
+        }
+    }
 
 
     $edit = array('pass' => $pass2);
 
     // Save the account with the new password.
     $flag = user_save($account, $edit);
+
+
+
     return $flag;
 }
