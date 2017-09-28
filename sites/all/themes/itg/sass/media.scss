@@ -219,9 +219,11 @@
     }
     .top-block .top-colum-3 {
         @include calculate-width(1);
+        margin-top: 50px;
         >.itg-widget-parent {
             @include float(left);
             width: 48%;
+            margin-bottom: 0;
         }
         .trending-list {
             @include float(right);
@@ -805,6 +807,10 @@
         .top-colum-3 {
             padding: 0 15px;
             @include calculate-width(1);
+        }
+        .top-colum-1,
+        .top-colum-3 {
+            margin-top: 50px;
         }
     }
     .itg-layout-container .itg-h450-section .droppable,
@@ -1517,10 +1523,6 @@
                 }
                 .container-inline-date {
                     margin-left: 10px;
-                    +.container-inline-date {
-                        display: block;
-                        vertical-align: top;
-                    }
                 }
             }
         }
@@ -1846,6 +1848,12 @@
             .views-exposed-widget {
                 display: block;
             }
+        }
+    }
+    .view-front-end-global-search .views-exposed-widget .caln .container-inline-date {
+        display: block;
+        +.container-inline-date {
+            margin-left: 17px;
         }
     }
     /*search page filter scroll */
