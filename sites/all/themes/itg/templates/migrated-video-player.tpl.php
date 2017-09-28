@@ -1,37 +1,29 @@
-
-
+<?php
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+global $base_url;
+?>
+<script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
 
 <?php
-if ($width == "") {
-  $width = 420;
-}
-if ($height == "") {
-  $height = 500;
-}
-if (arg(0) == 'embeded-video') {
-  global $base_url;
-  ?>
-<script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer-jquery-1.11.3.min.js';?>"></script>
-  <script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js';?>"></script>
- <?php } 
-$video_all_data = json_decode($video_data, TRUE);
-$player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
+
+$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
 
-<div id="videoplayer"> </div>
-
-
+    <div id="videoplayer"> </div>
 <script type="text/javascript">
   var myUserAgent = navigator.userAgent;
-
   var myUserAgent = navigator.userAgent;
   var currentItem = 0;
   //var videoSectionId=321;
   var vdopiavideoid = '15719';
   //var arrPlaylist=[""];
-
   var autoplay = "true";
   var mp4videoFlagJS = 1;
   //$(document).ready(function() {	
@@ -43,18 +35,19 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
           //var multipart=0;
           playlist: [{
                   title: "",
-                  'image': "<?php echo $player_content['player_image']; ?>",
+                  'image': "<?php echo $image; ?>",
                   sources: [
                       {
-                          file: "<?php echo $player_content['bitrate_url']; ?>"
-                      }, {
-                          file: "<?php echo $player_content['file_url']; ?>"
+                          file: "<?php echo $data_video['bitrate_url']; ?>"
+                      }, 
+                      {
+                          file: "<?php echo $data_video['file_url']; ?>"
 
                       }]
               }],
           primary: "html5",
-          width: "100%",
-          height: "100%",
+          width: "622",
+          height: "442",
           aspectratio: "16:9",
           "stretching": "exactfit",
           androidhls: "true",
@@ -74,18 +67,12 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
   playerInstance.on('setupError', function (event) {
-      //alert('Setup Error:'+event.message);
       if (event.message == 'Error loading player: No playable sources found') {
-
-          //alert(event.message);
           document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
       } else {
           loadplayerjw();
       }
   });
-
-  //});           
-
 
 
 

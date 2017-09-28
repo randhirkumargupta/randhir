@@ -328,6 +328,7 @@ function itg_octopus_api_rundown_listing() {
   $result = $query->execute();
   $rows = array();
   $sn = 1;
+  $row_count = itg_octopus_api_rundown_listing_count($current_rundown);
 
   $header = array(
     array('data' => t('Sn.')),
@@ -391,11 +392,56 @@ function itg_octopus_api_rundown_listing() {
            </div>';
   $output .= render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
-  $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . count($rows) . ')</span></div>';
+  $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . $row_count. ')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
   # add the pager
   $output .= theme('pager');
   return $output;
+}
+
+/**
+ * Implements function itg_octopus_api_rundown_listing_count for get all count
+ */
+function itg_octopus_api_rundown_listing_count($current_rundown) {
+  $query = db_select('itg_rundown', 'rund');
+  $query->join('itg_octopus_slug', 'ios', 'rund.rundown_id=ios.rundown_id');
+  $query->join('itg_element_clip', 'clip', 'clip.storyid=ios.storyid');
+  $query->fields('ios');
+  $query->fields('clip', array('text'));
+
+  if (isset($_GET['title']) && !empty($_GET['title'])) { // Title
+    $query->condition('ios.story_title', $_GET['title'], '=');
+  }
+
+  if (isset($_GET['video_id']) && !empty($_GET['video_id'])) { // For Video ID
+    $query->condition('ios.storyid', $_GET['video_id'], '=');
+  }
+
+  if (isset($_GET['category']) && !empty($_GET['category'])) { // For Category
+    $category_data = explode(',', trim($_GET['category']));
+    $category_data = array_map('trim', $category_data);
+    $query->condition('ios.category', $category_data, 'IN');
+  }
+
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : '';
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : '';
+
+  if (isset($start_date) && !empty($start_date)) { // start date
+    $query->condition('ios.story_modified_timestamp', strtotime($start_date), '>=');
+  }
+
+  if (isset($end_date) && !empty($end_date)) { // end date
+    $query->condition('ios.story_modified_timestamp', strtotime($end_date), '<=');
+  }
+
+  if (isset($current_rundown) && !empty($current_rundown)) {
+    $query->condition('rund.type', $current_rundown, '=');
+  }
+
+  $query->orderBy('ios.id', 'DESC');
+
+// p($query->__toString());
+  return $result = $query->execute()->rowCount();
 }
 
 /**
