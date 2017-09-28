@@ -444,6 +444,10 @@
         border-radius: 10px;
         background-color: #aaa;
     }
+    #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+        width: 55px;
+        height: 55px;
+    }
 }
 
 @media only screen and (min-width:991px) and (max-width: 1024px) {
@@ -2032,6 +2036,9 @@
         .highlights-video .live-event-video {
             height: 250px;
         }
+    }
+    #block-views-program-schedule-block-4 .view-display-id-block_4>.view-content>.views-row {
+        width: 49%;
     }
     /*End event page*/
     /*Home page start css*/
