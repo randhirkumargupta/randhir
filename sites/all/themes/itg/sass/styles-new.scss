@@ -439,6 +439,7 @@ input[type="text"] {
     font-size: 16px;
     padding: 0;
     font-weight: 600;
+    margin-bottom: 5px;
     a {
         color: #323232;
     }
@@ -595,11 +596,12 @@ input[type="text"] {
     height: 100%;
 }
 
-.itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
+
+/*.itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
 .itg-layout-container .itg-top-section .top-colum-2 .droppable,
 .itg-layout-container .itg-top-section .top-colum-1 .droppable {
     margin-bottom: 50px;
-}
+}*/
 
 #block-block-1 {
     border-top: 1px solid #ddd;
@@ -1695,6 +1697,10 @@ input[type="text"] {
                         margin-top: -3px;
                         line-height: 18px;
                         padding-left: 0;
+                        line-height: 20px;
+                        a {
+                            color: #0783ec;
+                        }
                         &:before {
                             content: '|';
                             margin: 0 5px 0 0;
@@ -2405,6 +2411,7 @@ body.has-cart-popup {
                 .form-type-checkbox {
                     >label {
                         height: 127px;
+                        margin-bottom: 20px;
                     }
                 }
             }
@@ -5047,6 +5054,15 @@ article.node-mega-review-critic {
             position: absolute;
             bottom: 0;
             left: 0;
+        }
+        .dots-know-more {
+            text-align: right;
+            padding: 15px;
+            background: #f7f7f7;
+            font-family: roboto;
+            font-size: 13px;
+            font-weight: 600;
+            color: #818181;
         }
     }
     .highcharts-container {

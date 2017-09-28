@@ -64,10 +64,6 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
                             // Logic to exclude inactive category.
                             if (!empty($menu_data['term_load'])) {
                               $category_manager_tid = $menu_data['term_load']->tid;
-                              $term_state = itg_category_manager_term_state($category_manager_tid);
-                              if ($term_state == 0) {
-                                continue;
-                              }
                             }
                             $menu_link_data = itg_menu_manager_get_menu($menu_data , arg());
                             $image_class = $menu_link_data['image_class'];

@@ -21,9 +21,15 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
+if(isset($row->nid)) {
+    $nid = $row->nid;
+} elseif(isset($row->node_itg_widget_order_nid)) {
+    $nid = $row->node_itg_widget_order_nid;
+}
 global $base_url, $user;
 $arg = arg();
-if ($external_url = _is_external_url_story_article($row->nid)) {
+
+if ($arg[2] != 'story' && $external_url = _is_external_url_story_article($row->nid)) {
   print l($row->_field_data['nid']['entity']->title, $external_url);
 } else if ($field->view->name == 'speaker_option_for_event' || $field->view->name == 'autocomplete_for_event' || $field->view->name == 'autocomplete_event_photo' || $field->view->name == 'podcast_for_event' || $field->view->name == 'manage_survey' || $field->view->name == 'manage_quiz' || $field->view->name == 'bitrates_videos') {
   
@@ -70,7 +76,7 @@ if ($external_url = _is_external_url_story_article($row->nid)) {
       }
     } else {
       if (is_widget_views($view)) {
-        print html_entity_decode(l(strip_tags($output), 'node/' . $row->nid . '/edit', array(
+        print html_entity_decode(l(strip_tags($output), 'node/' . $nid . '/edit', array(
           'attributes' => array(
             'target' => '_blank'
           )
@@ -83,7 +89,7 @@ if ($external_url = _is_external_url_story_article($row->nid)) {
   }
 } else {
      if (is_widget_views($view)) {
-         print html_entity_decode(l(strip_tags($output), 'node/' . $row->nid . '/edit', array(
+         print html_entity_decode(l(strip_tags($output), 'node/' . $nid . '/edit', array(
           'attributes' => array(
             'target' => '_blank'
           )

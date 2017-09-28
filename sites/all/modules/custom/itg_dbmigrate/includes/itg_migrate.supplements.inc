@@ -26,9 +26,9 @@ class ItgSupplementsMigration extends XMLMigration {
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
     
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/issue-supplement-scp/issue-suppliments/';
     
-    $items_url = $xml_folder . 'indiatoday_suppliment_2007.xml';
+    $items_url = $xml_folder . 'indiatoday_suppliment_2017.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.

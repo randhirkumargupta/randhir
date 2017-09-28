@@ -119,14 +119,7 @@ function itg_msi_issue_form_custom_submit($form, &$form_state) {
     }
     // code insert image in custom table
     $node_id = $form_state['node']->nid;
-    if ($form_state['input']['original_image_fids'] != "") {
-        $image_ids = explode('#', $form_state['input']['original_image_fids']);
 
-        if (!empty($image_ids)) {
-            if (function_exists('itg_photogallery_insert_image_data'))
-                itg_photogallery_insert_image_data($image_ids, $node_id);
-        }
-    }
     if (arg(2) == 'edit') {
         $op = 'updated.';
     }
@@ -1273,4 +1266,10 @@ function itg_msi_views_api() {
     return array(
         'api' => 3,
     );
+}
+
+function _get_nid_from_title($title) {
+    return db_select('node' , 'n')
+      ->fields('n' , array("nid"))
+      ->condition("n.title" , $title)->execute()->fetchField();
 }

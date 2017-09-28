@@ -8,10 +8,6 @@
         // Logic to exclude inactive category.
         if (!empty($menu_data['term_load'])) {
           $category_manager_tid = $menu_data['term_load']->tid;
-          $term_state = itg_category_manager_term_state($category_manager_tid);
-          if ($term_state == 0) {
-            continue;
-          }
         }
         ?>
         <?php

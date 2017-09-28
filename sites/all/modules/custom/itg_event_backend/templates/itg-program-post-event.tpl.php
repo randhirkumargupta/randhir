@@ -69,7 +69,11 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
             else {
               $story_img = "<img width='364' height='205'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/event_post_default.jpg' alt='' />";
             }
-            $output_story_img = l($story_img, 'node/' . $detail['nid'], array('html' => TRUE));
+            if(!empty($detail['nid'])) {
+              $output_story_img = l($story_img, 'node/' . $detail['nid'], array('html' => TRUE));
+            }else {
+              $output_story_img = $story_img;
+            }
             $output_story_kicker = '';
             if (!empty($detail['kicker'])) {
               $output_story_kicker = $detail['kicker'];

@@ -33,13 +33,15 @@ function itg_widget_init() {
 // Js for move funtionality.
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
     global $base_url, $user;
-
+    $arg = arg();
+    if(($arg[0] != 'node') && ($arg[1] != 'add' && $arg[2] != 'edit')) {
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
     $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
     drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
+    }
 }
 
 /**
@@ -256,9 +258,45 @@ function itg_widget_cronapi($op, $job = NULL) {
       'description' => 'Delete unpublised nodes from database itg_widget_order_table. It may be heavy cron so please run in midnight',
       'callback' => 'itg_widget_remove_unpublised_node',
     );
+    
+    $items['tig-content-expiry-videogallery'] = array(
+      'description' => 'Content expiry for video content',
+      'callback' => 'itg_content_inactive_videogallery',
+    );
     return $items;
 }
 
+
+
+function itg_content_inactive_videogallery() {
+
+  $current_time = date("Y-m-d H:i:s");
+  //set content type
+  //$content_type = array('story', 'videogallery'); 
+  $content_type = array("videogallery");
+  
+  $itg_query = db_select('node', 'n');
+  $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');
+  $itg_query->fields('expiry', array('field_story_expiry_date_value'));
+  $itg_query->fields('n', array('nid'));
+  $itg_query->condition('n.type', $content_type, 'IN');
+  $itg_query->condition('n.status', 1);
+  $itg_query->condition('expiry.field_story_expiry_date_value', $current_time, '<');
+  $itg_query->isNotNull('expiry.field_story_expiry_date_value');
+  $itg_result = $itg_query->execute()->fetchAll();
+  itg_watchdog("nodes_expiry" , $itg_result);
+  foreach ($itg_result as $itg_val) {
+    $node = node_load($itg_val->nid);
+    $nodeid[] = $node->nid;
+    $node->status = 0;
+      if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
+        itg_videogallery_node_publish_to_unpublish($node->nid);
+      }
+    node_save($node);
+    itg_widget_handle_unpublished_node($node->nid);
+  }
+  itg_watchdog("nodes_expiry" , $nodeid);
+}
 /**
  * {@inheritdoc}
  */
@@ -1885,7 +1923,7 @@ function __get_sosorry_video_nid($type = 'feature') {
 function __html_output_with_tags($string, $start = 0, $end = 100) {
     $html = html_entity_decode(drupal_html_to_text($string));
     $doc = new DOMDocument();
-    $doc->loadHTML($html, LIBXML_HTML_NODEFDTD);
+    @$doc->loadHTML($html, LIBXML_HTML_NODEFDTD);
     return $doc->saveHTML();
 }
 
@@ -2174,7 +2212,6 @@ function insert_data_in_widget_helper_test() {
                 drupal_set_message($ex->getMessage());
             }
         }
-
         $section = $data->cat_id;
         try {
             $query = db_select($table, "tbl");
@@ -2203,6 +2240,7 @@ function is_widget_views($view) {
     $flag = FALSE;
     $view_name = array(
       'section_wise_draggable_content_order',
+      'section_wise_content_ordering_list',
       'story_widget',
       'widget_anchors_listing',
       'photo_carousel_widget',
