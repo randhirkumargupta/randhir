@@ -168,6 +168,14 @@
                 if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
+                    var getvideo_tyepe = parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
+                    if (getvideo_tyepe != "") {
+                        if (getvideo_tyepe == 'DM') {
+                            alert("Please remove DM plateform Video ");
+                            return false;
+                        }
+
+                    }
                     jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     jQuery.ajax({
                         url: base_url + '/solr-video-make-fid',
@@ -311,6 +319,7 @@
                 $(".ftp-server-internal").hide();
                 $(this).addClass('active');
                 $('.video-local').removeClass('active');
+                $('.internal-video-tab').removeClass('active');
                 $('.used-unused-select').val('unused');
                 $('.used-unused-select').trigger('change');
 
