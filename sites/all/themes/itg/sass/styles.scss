@@ -1863,6 +1863,9 @@ footer {
         &:not(.video-icon) {
             display: inline;
         }
+        &.pic-no-icon {
+            display: block;
+        }
     }
     h3 {
         padding: 10px 0;
@@ -6089,7 +6092,7 @@ section.sidebar {
 
 .recommended-for-you {
     background: #f3f3f3;
-    margin: 40px 0px 0px 0px;
+    margin: 50px 0px 0px 0px;
     padding: 20px 0 10px 0;
     .widget-title {
         margin-bottom: 10px;
