@@ -46,9 +46,11 @@ if ($classes) {
       </thead>
     <?php endif; ?>
     <tbody>
-        <?php foreach ($rows as $row_count => $row): ?>
+        <?php foreach ($rows as $row_count => $row): 
+
+          ?>
           <?php
-          $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#video_gallery';
+          $video_value = $row['sm_field_video_id'] . '#' . $row['sm_field_video_size'] . '#' . $row['label'] . '#' . $row['sm_field_video_thumb_url'] . '#' . $row['sm_field_video_duration'] . '#' . $row['sm_field_property'] . '#video_gallery##'.$row['sm_field_video_type'].'#'.$row['sm_field_all_xml_content'];
           $video_image = '<img  width="100" height="44" src="' . $row['sm_field_video_thumb_url'] . '">';
           $file_size = number_format($row['sm_field_video_size'] / (1024 * 1024), 2);
           ?>
@@ -71,7 +73,7 @@ if ($classes) {
                         $statusDis = "";
                       }
                       ?>
-                      <input <?php echo $statusDis; ?> id = "video_id_<?php echo $row['sm_field_video_id']; ?>" type = "checkbox" name = "video-form" class = "form-radio video-checkbox-form" value = "<?php echo $video_value; ?>"/>
+                      <input <?php echo $statusDis; ?> data-video-type = "<?php echo $row['sm_field_video_type']; ?>" id = "video_id_<?php echo $row['sm_field_video_id']; ?>" type = "checkbox" name = "video-form" class = "form-radio video-checkbox-form" value = "<?php echo $video_value; ?>"/>
                   </td>
                   <?php
                 }

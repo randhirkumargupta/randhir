@@ -156,12 +156,13 @@ function itg_common_permission() {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url, $theme;
   $arg = arg();
+
    $solr_video_video_id = array('views-exposed-form-searchimage-page-1' , 
       'views-exposed-form-searchimage-search-unpublish-video' ,
     'views-exposed-form-searchimage-search-publish-video-radio',
     'views-exposed-form-searchimage-search-publish-video', 
     );
-  if( in_array($form['#id'], $solr_video_video_id) == 'views-exposed-form-searchimage-search-unpublish-video') {
+  if( in_array($form['#id'], $solr_video_video_id)) {
     
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/bootstrap.min.js', array('scope' => 'footer'));
@@ -193,6 +194,42 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   
 ", array('type' => 'inline', 'scope' => 'footer'));
   }
+  
+  // add code for internal video repo
+  
+  $solr_video_view_internal = array('views-exposed-form-searchimage-search-unpublish-internal-video' , 
+      'views-exposed-form-searchimage-search-unpublish-internal-video-singal','views-exposed-form-searchimage-search-publish-internal-video-singal', 'views-exposed-form-searchimage-search-publish-internal-video');
+  if( in_array($form['#id'], $solr_video_view_internal)) {
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/bootstrap.min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery.snippet.min.js', array('scope' => 'footer'));
+    drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery.easyPaginate.js', array('scope' => 'footer'));
+    drupal_add_js("jQuery('#edit-video-browse-select').easyPaginate({
+		   paginateElement: '.ftp_video_radio',
+		   elementsPerPage: 20,
+		   effect: 'climb'
+	     }); jQuery('.play-video').click(function () {
+      var getvideo_id = $(this).attr('data-video-id');
+      jQuery.ajax({
+          url: Drupal.settings.basePath + 'internal-video-play',
+          type: 'post',
+          beforeSend: function (xhr) {
+              jQuery('#widget-ajex-loader').show();
+          },
+          data: {'videodata': getvideo_id, 'width': 400, 'height': 260},
+          success: function (data) {
+              jQuery('#video_play_div').html(data);
+              jQuery('#widget-ajex-loader').hide();
+          },
+          error: function (xhr, desc, err) {
+          }
+      });
+  });", array('type' => 'inline', 'scope' => 'footer'));
+  }
+  
+  
   
   if ($theme == 'itgadmin') {
     $form['actions']['delete']['#access'] = FALSE;

@@ -2212,7 +2212,6 @@ function insert_data_in_widget_helper_test() {
                 drupal_set_message($ex->getMessage());
             }
         }
-
         $section = $data->cat_id;
         try {
             $query = db_select($table, "tbl");

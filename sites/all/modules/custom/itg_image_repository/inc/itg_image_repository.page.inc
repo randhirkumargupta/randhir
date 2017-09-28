@@ -49,13 +49,13 @@ function itg_image_repository_content($user, $scheme = NULL, $jsop = NULL) {
   //Before creating the content let's add main files required for itg_image_repository to function properly.
   $path = drupal_get_path('module', 'itg_image_repository');
   drupal_add_js($path . '/js/jquery.form.js', array( 'scope' => 'footer'));
-  drupal_add_js($path . '/js/itg_image_repository.js', array( 'scope' => 'footer'));
+  drupal_add_js($path . '/js/itg_image_repository.js', array( 'scope' => 'header'));
   drupal_add_js($path . '/js/itg_image_repository_extras.js', array( 'scope' => 'footer'));
   drupal_add_js($path . '/js/dropzone.js');
 
   drupal_add_css($path . '/css/itg_image_repository-content.css');
   drupal_add_css($path . '/css/dropzone.css');
-  drupal_add_js($path . '/js/imce.js', array( 'scope' => 'footer'));
+  drupal_add_js($path . '/js/imce.js');
   drupal_add_js($path . '/js/imce_extras.js', array( 'scope' => 'footer'));
 
   //process forms.
