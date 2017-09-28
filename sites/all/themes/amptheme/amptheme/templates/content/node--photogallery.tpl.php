@@ -23,8 +23,8 @@
       $height = $data[1];
       //print '<amp-img height="363" width="647" layout="responsive"  alt="" title="" src="' . $amp_image . '"></amp-img>';
       $html .='<div class="slide"><div class="photo-slide"><amp-img src="'.image_style_url("photgallery_landing_slider_753x543", $file->uri).'"
-        width="'.$width.'"
-        height="'.$height.'"><div fallback>offline</div></amp-img><div class="caption"><i class="fa fa-camera" aria-hidden="true"></i> '.$i.' of '.count($node->field_gallery_image['und']).'</div></div>
+        width="753"
+        height="543"><div fallback>offline</div></amp-img><div class="caption"><i class="fa fa-camera" aria-hidden="true"></i> '.$i.' of '.count($node->field_gallery_image['und']).'</div></div>
         <p>'.$caption.'</p></div>';
         $i++;
     }
