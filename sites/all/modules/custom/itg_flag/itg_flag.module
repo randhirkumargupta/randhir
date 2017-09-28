@@ -190,12 +190,23 @@ function itg_user_activity_front() {
         $people = $con->front_user_activity;
         $get_previous_info = itg_get_front_activity_info($nd_id, $dtag, $user->uid, $user_activity, $status = '');
         if (empty($get_previous_info['nid'])) {
-          $actual_data = node_load($nd_id);
-          $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
-          $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
-          $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-          $path = $actual_data->path['source'];
-          $qry = array("nid" => $nd_id, "uid" => $user->uid, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" =>time());
+          if($dtag == 'tag') {
+            $term = taxonomy_term_load($nd_id);
+            $actual_title = $term->name;
+            $primary_cat_id = '';
+            $primary_cat_name = '';
+            $extra_image = null;
+            $path = '';
+          } else {
+            $actual_data = node_load($nd_id);
+            $actual_title = $actual_data->title;
+            $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
+            $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
+            $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+            $path = $actual_data->path['source'];
+          }
+
+          $qry = array("nid" => $nd_id, "uid" => $user->uid, "title" => $actual_title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" =>time());
           $result = $people->insert($qry);
           $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
           print json_encode($response);
