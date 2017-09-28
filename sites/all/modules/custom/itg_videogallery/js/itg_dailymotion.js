@@ -233,7 +233,7 @@
                         type: 'post',
                         data: {'checkvalue': selected_check_boxes_values},
                         success: function (data) {
-                            alert(data);
+                  
                             var as = JSON.parse(data);
                             var parsed = JSON.parse(data);
 
