@@ -439,6 +439,7 @@ input[type="text"] {
     font-size: 16px;
     padding: 0;
     font-weight: 600;
+    margin-bottom: 5px;
     a {
         color: #323232;
     }
@@ -5053,6 +5054,15 @@ article.node-mega-review-critic {
             position: absolute;
             bottom: 0;
             left: 0;
+        }
+        .dots-know-more {
+            text-align: right;
+            padding: 15px;
+            background: #f7f7f7;
+            font-family: roboto;
+            font-size: 13px;
+            font-weight: 600;
+            color: #818181;
         }
     }
     .highcharts-container {
