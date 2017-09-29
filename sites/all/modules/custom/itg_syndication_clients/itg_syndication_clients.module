@@ -5,7 +5,6 @@
  * The ITG Syndication clients.
  * Contains functionality for ITG Syndication for clients.
  */
-
 module_load_include('inc', 'itg_syndication_clients', 'itg_syndication_clients.helper');
 
 /**
@@ -32,7 +31,8 @@ function itg_syndication_clients_install() {
 
 function slugify($text) {
   $text = preg_replace('&', 'and', $text);
-  var_dump($text);die;
+  var_dump($text);
+  die;
   $text = preg_replace('~[^\pL\d]+~u', '-', $text);
   $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
   $text = preg_replace('~[^-\w]+~', '', $text);
@@ -45,11 +45,10 @@ function slugify($text) {
   return $text;
 }
 
-
-function get_terms_name_by_ids($tids = array()){
-  if(count($tids) <= 0)
+function get_terms_name_by_ids($tids = array()) {
+  if (count($tids) <= 0)
     return FALSE;
-  
+
   $query = db_select('taxonomy_term_data', 'ttd');
   $query->fields('ttd', array('tid', 'name'));
   $query->condition('ttd.tid', $tids, 'IN');
@@ -57,18 +56,17 @@ function get_terms_name_by_ids($tids = array()){
   return $result;
 }
 
-
-function get_image_info_by_fid($fid = NULL){
+function get_image_info_by_fid($fid = NULL) {
   $image_data = array();
-  if(!empty($fid)){
+  if (!empty($fid)) {
     $query = db_select('image_info', 'ii');
     $query->fields('ii', array('image_caption'));
     $query->condition('ii.fid', $fid, '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $image_data['caption'] = '';
-    if(count($result) > 0){
+    if (count($result) > 0) {
       $image_data['caption'] = $result[0]['image_caption'];
-    }     
+    }
     $img_url = get_thumbnail_by_fid($fid);
     $image_data['imag_url'] = $img_url;
     $ext = end(explode(".", $img_url));
@@ -77,62 +75,62 @@ function get_image_info_by_fid($fid = NULL){
   return $image_data;
 }
 
-function get_thumbnail_by_fid($fid = NULL, $style = NULL){
-     if(!empty($fid)){
-         $file_obj = file_load($fid);
-         if(empty($style)){
-           $img_url= file_create_url($file_obj->uri);
-         }else{
-           $img_url = image_style_url($style, $file_obj->uri);
-         }
-         return $img_url;
-     }
-     return FALSE;
- } 
- 
- 
-function get_term_name_by_tid($tid = NULL){
+function get_thumbnail_by_fid($fid = NULL, $style = NULL) {
+  if (!empty($fid)) {
+    $file_obj = file_load($fid);
+    if (empty($style)) {
+      $img_url = file_create_url($file_obj->uri);
+    }
+    else {
+      $img_url = image_style_url($style, $file_obj->uri);
+    }
+    return $img_url;
+  }
+  return FALSE;
+}
+
+function get_term_name_by_tid($tid = NULL) {
   $tname = '';
-  if(!empty($tid)){
+  if (!empty($tid)) {
     $query = db_select('taxonomy_term_data', 'ttd');
     $query->fields('ttd', array('name'));
     $query->condition('ttd.tid', $tid, '=');
     $tname = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    if(count($tname) > 0){
+    if (count($tname) > 0) {
       $tname = $tname[0]['name'];
     }
   }
   return $tname;
 }
 
-function get_content_city($nid = NULL){
+function get_content_city($nid = NULL) {
   $city = '';
-  if(!empty($nid)){
+  if (!empty($nid)) {
     $query = db_select('field_data_field_stroy_city', 'city');
     $query->leftJoin('taxonomy_term_data', 'tdata', 'tdata.tid=city.field_stroy_city_tid');
     $query->fields('tdata', array('name'));
     $query->fields('city', array('field_stroy_city_tid'));
     $query->condition('city.entity_id', $nid, '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    if(count($result) > 0){
+    if (count($result) > 0) {
       $city = $result[0]['name'];
     }
   }
   return $city;
 }
 
-function get_content_tags($nid = NULL, $isStr = FALSE){
+function get_content_tags($nid = NULL, $isStr = FALSE) {
   $tags = array();
-  if(!empty($nid)){
+  if (!empty($nid)) {
     $query = db_select('field_data_field_story_itg_tags', 'tags');
     $query->leftJoin('taxonomy_term_data', 'tdata', 'tdata.tid=tags.field_story_itg_tags_tid');
     $query->fields('tdata', array('name'));
     $query->fields('tags', array('field_story_itg_tags_tid'));
     $query->condition('tags.entity_id', $nid, '=');
     $tags = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    if($isStr){
+    if ($isStr) {
       $keywords = array();
-      foreach($tags as $value){
+      foreach ($tags as $value) {
         $keywords[] = $value['name'];
       }
       $tags = implode(',', $keywords);
@@ -141,17 +139,17 @@ function get_content_tags($nid = NULL, $isStr = FALSE){
   return $tags;
 }
 
-function get_releted_content_by_nid($nid = NULL){
+function get_releted_content_by_nid($nid = NULL) {
   $related_content = array();
-  if(!empty($nid)){
+  if (!empty($nid)) {
     $query = db_select('field_data_field_common_related_content', 'rc');
     $query->fields('rc', array('field_common_related_content_value'));
     $query->condition('rc.entity_id', $nid, '=');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);   
-    if(count($result) > 0){
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) > 0) {
       $related_str = explode('|~|', $result[0]['field_common_related_content_value']);
       $nids = array();
-      foreach($related_str as $value){
+      foreach ($related_str as $value) {
         $nids[] = end(explode('IT_', $value));
       }
       $query = db_select('node', 'rn');

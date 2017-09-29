@@ -4,8 +4,7 @@
  * @file
  * The ITG Syndication clients for store configuration
  */
-
-function getbsb_client_array(){
+function getbsb_client_array() {
   $story = array(
     '1206533' => 'it-story-movies.xml',
     '1206550' => 'it-story-sports.xml',
