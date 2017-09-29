@@ -145,7 +145,7 @@ function itg_print_team_form_alter(&$form, &$form_state, $form_id) {
 
     // Hide issue and magazine form edit page
     
-//    $form['field_pti_supplement']['#access'] = FALSE;
+    $form['field_pti_supplement']['#access'] = FALSE;
     
     // Hide Rating and Mark as complete fields from node edit page
     $form['field_pti_mark_as_complete']['#access'] = FALSE;
