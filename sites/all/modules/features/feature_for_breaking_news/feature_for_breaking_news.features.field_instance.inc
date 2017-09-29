@@ -828,19 +828,20 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-breaking_news-field_label'.
-  $field_instances['node-breaking_news-field_label'] = array(
+  // Exported field_instance:
+  // 'node-breaking_news-field_live_blog_timeline_active'.
+  $field_instances['node-breaking_news-field_live_blog_timeline_active'] = array(
     'bundle' => 'breaking_news',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Short Description',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
+        'module' => 'list',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 7,
+        'type' => 'list_default',
+        'weight' => 44,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -851,22 +852,19 @@ function feature_for_breaking_news_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'exclude_cv' => 0,
-    'field_name' => 'field_label',
-    'label' => 'Short Description',
+    'field_name' => 'field_live_blog_timeline_active',
+    'label' => 'Time Line active',
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
-      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'size' => 60,
-      ),
-      'type' => 'text_textfield',
-      'weight' => 5,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 54,
     ),
   );
 
@@ -1753,11 +1751,11 @@ function feature_for_breaking_news_field_default_field_instances() {
   t('Related Content');
   t('Related Content Detail');
   t('Section');
-  t('Short Description');
   t('Short description');
   t('Small image');
   t('Source type');
   t('Tags');
+  t('Time Line active');
   t('Title');
   t('Type');
   t('primary category');
