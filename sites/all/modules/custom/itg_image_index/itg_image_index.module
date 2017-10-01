@@ -58,12 +58,15 @@ function apachesolr_image_apachesolr_index_document_build($document, $node, $nam
     }
 
     if (isset($node->type) && $node->type == 'story') {
-      if($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated') {
+      /*if($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated') {
         $itg_body = apachesolr_clean_text($node->body[$node->language][0]['value']);
       } else {
         $itg_body = $node->body[$node->language][0]['value'];
-      }
-        $document->addField('sm_field_custom_story_description_text', $itg_body);
+      }*/
+        $itg_body = $node->body[$node->language][0]['value'];
+        if($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+          $document->addField('sm_field_custom_story_description_text', $itg_body);
+        }
         $document->addField('sm_field_custom_emoji', $node->field_emoji['und']['0']['value']);
         $document->addField('sm_field_custom_emoji_2', $node->field_emoji_2['und']['0']['value']);
         

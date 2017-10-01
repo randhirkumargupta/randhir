@@ -74,6 +74,11 @@ function itg_front_end_common_block_info() {
     'cache' => DRUPAL_CACHE_GLOBAL,
   );  
   
+  $blocks['amp_story_ad_block'] = array(
+    'info' => t('Amp story ad block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  
   return $blocks;
 }
 
@@ -131,6 +136,10 @@ function itg_front_end_common_block_view($delta = '') {
     
     case 'latest_from_pti':
       $block['content'] = _latest_from_pti();
+      break;
+    
+    case 'amp_story_ad_block':
+      $block['content'] = _amp_story_ad_block();
       break;
     
     case 'recommended_anonymous_user':
@@ -231,6 +240,21 @@ _taboola.push(
 </div>
 ";
   return $output;
+}
+
+/**
+ * Implements _amp_story_ad_block().
+ */
+function _amp_story_ad_block() {
+ 
+  $output = '<amp-ad width=300 height=250
+    type="doubleclick"
+    data-slot="/1007232/Indiatoday_AMP_Mobile_Story_ATF_300x250"
+    data-multi-size-validation="false">
+  <div placeholder></div>
+  <div fallback></div>
+</amp-ad>';
+  return $output; 
 }
 
 /**
