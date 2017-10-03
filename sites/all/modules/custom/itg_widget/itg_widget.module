@@ -1979,13 +1979,13 @@ function __itg_widget_helper_data_insert($nid) {
     if ($nid) {
         __itg_widget_helper_data_delete($nid);
         $node_load_data = node_load($nid);
+        itg_watchdog("widget_update" , array(
+              'nid' => $nid,
+              'node_status' => $node_load_data->status,
+              'node_type' => $node_load_data->type,
+            ));
         if($node_load_data->status) {
             try {
-                itg_watchdog("widget_update" , array(
-                      'nid' => $nid,
-                      'node_status' => $node_load_data->status,
-                      'node_type' => $node_load_data->type,
-                    ));
                 db_insert('itg_widget_helper')
                   ->fields(array(
                     'nid',

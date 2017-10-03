@@ -2940,6 +2940,7 @@ function get_max_weight_for_special($type) {
  * {@inheritdoc}
  */
 function itg_widget_node_update($node) {
+    itg_watchdog("status_test" , array($node->nid , $node->status));
     if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
         $arg = arg();
         if (itg_workflow_stop_node_update_batch_for_widgets()) {
@@ -2967,8 +2968,7 @@ function itg_widget_node_update($node) {
             }
         }
     }
-
-    if ($node->status == 0) {
+    if ($node->status == 0 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
         itg_widget_handle_unpublished_node($node->nid);
     }
 }
@@ -3001,7 +3001,6 @@ function manage_widget_order_during_node_update($nid, $category_tid, $node_type)
     } catch (Exception $ex) {
         // watchdog("video_test", $nid . '--' . $category_tid . '--' . $node_type . '----' . $max_result);
     }
-    __itg_widget_helper_data_insert($nid);
 }
 
 /**
