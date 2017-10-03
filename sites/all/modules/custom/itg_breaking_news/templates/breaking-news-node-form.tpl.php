@@ -35,6 +35,8 @@
              </div>
 <?php print drupal_render($form['field_story_itg_tags']); ?>
 <?php print drupal_render($form['field_breaking_coverage_end_time']); ?>
+<?php print drupal_render($form['field_breaking_display_on']); ?>
+<?php print drupal_render($form['field_live_blog_timeline_active']); ?>
 
 <div id="BrowseMedia" class='browse-media-file'>
   <h2 class="story-title">Browse Media</h2>

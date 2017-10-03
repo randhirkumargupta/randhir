@@ -43,6 +43,7 @@
                     var value = $(v).val();
 
                     var markexpert = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
+                    
                     if (value == EXPERT) {
                         $('.field-name-field-user-section').show();
                     } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR || value == SITE_ADMIN) {
@@ -80,17 +81,24 @@
                     
                     if (value == EXPERT) {
                       
-                      $('#edit-field-user-section > .form-type-select > label').html('Section');
+                      $('#edit-field-user-section > .form-type-select > label').html('Section<span class="form-required"> *</span>');
                       $('.field-name-field-user-section').show();
                       $('.user-configurations').show().find('.field-name-field-user-section').show().prev().hide();
                       $('.field-name-field-mark-as-expert').find('.form-checkbox').attr('checked', false);
+                      $('.field-name-field-user-section').find('select').val("_none");
                         
                     } else if (value == COPYEDITOR || value == EDITOR || value == SECTIONEDITORANCHOR || value == SITE_ADMIN) {
                       
                       $('#edit-field-user-section > .form-type-select > label').html('Section<span class="form-required"> *</span>');
                       $('.field-name-field-user-section').find('select').val("_none");
                       $('.user-configurations').show().find('.field-name-field-user-section').hide().prev().show();
-                      
+                      var markexpert = $('.field-name-field-mark-as-expert').find('.form-checkbox').is(':checked');
+                      if (markexpert == true) {
+                            $('.field-name-field-user-section').show();
+                        }
+                        else {
+                            $('.field-name-field-user-section').hide();
+                        }
                     } else {
                       
                       $('.field-name-field-user-section').find('select').val("_none");
