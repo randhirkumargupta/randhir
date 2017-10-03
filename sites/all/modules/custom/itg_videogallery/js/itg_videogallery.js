@@ -69,11 +69,12 @@
 
             $('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
                 var flag = 0;
-                for (i = 0; i < 10; i++) {
+                for (i = 0; i < 30; i++) {
                     var valuefiled = $("input[name='field_video_upload[und][" + i + "][field_videogallery_video_upload][und][0][fid]']").val();
                     if ((typeof valuefiled !== "undefined"))
                     {
                         if (valuefiled == 0) {
+                            $("input[name='field_video_upload[und][" + i + "][field_videogallery_video_upload][und][0][fid]']").closest("tr").hide();
                         } else {
                             flag = 1;
                         }
@@ -82,6 +83,7 @@
                 
                 if (flag == '0') {
                     $('#edit-field-video-repo-type-und-0-value').val('');
+                    
                     $('#edit-field-video-upload').hide();
                 }else {
                     $('#edit-field-video-upload').show();

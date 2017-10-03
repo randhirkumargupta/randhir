@@ -31,7 +31,7 @@ if ($classes) {
     <?php if (!empty($header)) : ?>
       <thead>
           <tr>
-             
+              <th>&nbsp;</th>
               <?php foreach ($header as $field => $label): ?>
               <?php if($label != "") { ?>
                 <th <?php
