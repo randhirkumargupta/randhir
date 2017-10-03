@@ -109,8 +109,8 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
 
          $videid = $question_detail[$question_arr['value']]->field_question_video[LANGUAGE_NONE][0]['fid'];
 
-         if (function_exists('itg_videogallery_get_videoid_new')) {
-          $video_ids = itg_videogallery_get_videoid_new($videid);
+         if (function_exists('itg_videogallery_get_videoid_new_private')) {
+          $video_ids = itg_videogallery_get_videoid_new_private($videid);
            $question_media = '<div class="survey-video"><iframe width="740" height="447" frameborder="0" scrolling="no"
                                                 src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>';
