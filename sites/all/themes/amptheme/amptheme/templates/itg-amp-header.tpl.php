@@ -128,3 +128,11 @@ global $base_url, $user;
   </nav>
 
 </header>
+<?php if($title[0]['type'] == 'story') { ?>
+<div class="story_ad_block custom-amp-ad">
+            <?php
+            $block = module_invoke('itg_front_end_common', 'block_view', 'amp_story_ad_block');
+            print render($block['content']);
+            ?>
+</div>
+<?php } ?>
