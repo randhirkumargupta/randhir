@@ -169,8 +169,6 @@ function itg_widget_menu() {
       'access arguments' => array('administer nodequeue'),
     );
 
-
-
     $items['issue_filter_widget'] = array(
       'page callback' => 'itg_widget_issuewidget_filter_form', // load the croper according to size!.
       'type' => MENU_CALLBACK,
@@ -190,6 +188,12 @@ function itg_widget_menu() {
     $items['key-candidate-widget-node/%/%/%/%'] = array(
       'page callback' => 'move_node_from_key_candidate_widget',
       'page arguments' => array(1, 2, 3, 4),
+      'access arguments' => array('administer nodequeue'),
+    );
+    
+    $items['purge-widget-data/%'] = array(
+      'page callback' => '__itg_widget_helper_data_insert',
+      'page arguments' => array(1),
       'access arguments' => array('administer nodequeue'),
     );
 
