@@ -72,7 +72,7 @@ else {
                 else {
                   ?>
                   <input type="hidden" id="single_add" name="single_add" value="0">
-                  <a href="javascript:void(0)" class = "button asso-filed"><?php print t('Associate Video'); ?></a>
+                  <a href="javascript:void(0)" class = "button btn-submit asso-filed"><?php print t('Associate Video'); ?></a>
                 <?php } ?>
             </div>  
 
@@ -121,7 +121,7 @@ else {
                 else {
                   ?>
                   <input type="hidden" id="single_add" name="single_add" value="0">
-                  <a href="javascript:void(0)" class = "button asso-filed-internal"><?php print t('Associate Video'); ?></a>
+                  <a href="javascript:void(0)" class = "button btn-submit asso-filed-internal"><?php print t('Associate Video'); ?></a>
                 <?php } ?>
             </div>  
 
