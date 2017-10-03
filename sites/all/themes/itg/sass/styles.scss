@@ -1861,7 +1861,7 @@ footer {
 .section-ordering {
     a {
         &:not(.video-icon) {
-            display: inline;
+            display: inline-block;
         }
         &.pic-no-icon {
             display: block;

@@ -14285,3 +14285,9 @@ div.ctools-modal-content {
         }
     }
 }
+
+[id*="redirect-list-form"] {
+    fieldset {
+        border: 1px solid #ccc;
+    }
+}
