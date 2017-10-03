@@ -353,7 +353,7 @@ function itg_report_api_user_list() {
     }
    
     $redis_key = "itg_report_api_user_list_" . $suffix;
-    //echo $redis_key; die();
+    echo $redis_key; die();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -439,6 +439,7 @@ function itg_report_api_story_video_photo_field_report() {
 
    $suffix = $start_date."_".$end_date;
     $redis_key = "itg_report_api_story_video_photo_field_report" . $suffix;
+   // echo $redis_key; die();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -504,6 +505,7 @@ function itg_report_api_author_report_tvtn() {
 
    $suffix = $start_date;
     $redis_key = "itg_report_api_author_report_tvtn_" . $suffix;
+   // echo $redis_key; die();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -541,6 +543,7 @@ function itg_report_api_auscovery_dashboard_web() {
 
    $suffix = $start_date."_".$end_date;
     $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
+    //echo $redis_key; die();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -577,7 +580,8 @@ function itg_report_api_auscovery_dashboard_mob() {
     }  
 
    $suffix = $start_date."_".$end_date;
-    $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
+    $redis_key = "itg_report_api_auscovery_dashboard_mob" . $suffix;
+    //echo $redis_key; die();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {

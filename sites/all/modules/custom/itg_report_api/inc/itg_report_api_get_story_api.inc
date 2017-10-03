@@ -20,7 +20,8 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
     $list = array();
     $data = array();
     $total_cont = 0;
-    $range_max = $item_per_page;
+    $range_max = 20;
+    $pageno = 0;
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
@@ -58,7 +59,7 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
     }
     
     //$query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-    $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid');
+    $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     //$total_records = $query->countQuery()->execute()->fetchField();
     //echo $query; die();
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
