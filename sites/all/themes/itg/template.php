@@ -266,6 +266,7 @@ function itg_breadcrumb($variables) {
  * {@inheritdoc}
  */
 function itg_preprocess_html(&$vars) {
+  $arg = arg();
   global $base_url, $user;
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
@@ -283,8 +284,14 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-
-  // Code ends for adding header, body start, body close for ads module
+  
+  // Code for setting page header title for home page
+  if (!empty(arg(1)) && is_numeric(arg(1))) {
+    $arg_data = node_load(arg(1));
+    if ($arg_data->type == 'page' && $arg_data->nid == 2) {
+      $vars['head_title'] = $arg_data->metatags[LANGUAGE_NONE]['title']['value'] . ' | IndiaToday';
+    }
+  }
 }
 
 /**

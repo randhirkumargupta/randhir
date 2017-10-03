@@ -878,6 +878,7 @@ function itg_print_team_rating_custom_submit($form, &$form_state) {
  * @param string $magazine
  */
 function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
+  
   global $user; 
   module_load_include('inc', 'itg_print_team', 'includes/print_team_mail');
   $print_node = node_load($nid);
@@ -886,32 +887,33 @@ function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
   if (strlen($issue) >= 1 && is_integer($issue)) {
     $print_node->field_pti_issue[LANGUAGE_NONE][0]['target_id'] = $issue;
   } else {
-    unset($print_node->field_pti_issue);
+    $print_node->field_pti_issue = array();
   }
   if (strlen($magazine) >= 1 && is_integer($magazine)) {
     $print_node->field_pti_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
   } else {
-    unset($print_node->field_pti_magazine);
+    $print_node->field_pti_magazine = array();
   }
   
-//  if (strlen($supplement) >= 1 && is_integer($supplement)) {
-//    if ($supplement != '_none') {
-//      $print_node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
-//    } else {
-//      unset($print_node->field_pti_supplement);
-//    }
-//  } else {
-//    unset($print_node->field_pti_supplement);
-//  }
+  if (strlen($supplement) >= 1 && is_integer($supplement)) {
+    if ($supplement != '_none') {
+      $print_node->field_pti_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+    } else {
+      $print_node->field_pti_supplement = array();
+    }
+  } else {
+    $print_node->field_pti_supplement = array();
+  }
    
   try{
   field_attach_update('node', $print_node);
   } catch(Exception $e) {
     watchdog('print_error', $e->getMessage());
   }
-
+  
   // Varibles for story node
   $issue_title = itg_common_get_node_title($issue);
+  
   $section = $print_node->field_story_category[LANGUAGE_NONE][0]['tid'];
   $rating = $print_node->field_story_rating[LANGUAGE_NONE][0]['value'];
   $headline = $print_node->title;
@@ -951,22 +953,25 @@ function itg_print_team_association_save($nid, $issue, $magazine, $supplement) {
   if (!empty($section)) {
     $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $section;
   }
-
+  
   //Association of issue with story
-  $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = isset($issue_title) ? $issue_title : date('Y-m-d h:i:s', time());
-
+  $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = !empty($issue_title) ? $issue_title : date('Y-m-d h:i:s', time());
+  
   //Association of magazine with story
   $node->field_story_magazine_story_issue[LANGUAGE_NONE][0]['value'] = 'magazine_issue_story';
 
   if (strlen($magazine) >= 1 && is_integer($magazine)) {
     $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $magazine;
+  } else {
+    $node->field_story_select_magazine = array();
   }
+  
 
-//  if (strlen($supplement) >= 1 && is_integer($supplement)) {
-//    $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
-//  } else {
-//    unset($node->field_story_select_supplement);
-//  }
+  if (strlen($supplement) >= 1 && is_integer($supplement)) {
+    $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $supplement;
+  } else {
+    $node->field_story_select_supplement = array();
+  }
   
   if ($fid) {
     $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'] = $fid;
