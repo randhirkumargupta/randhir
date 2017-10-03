@@ -1863,6 +1863,9 @@ footer {
         &:not(.video-icon) {
             display: inline;
         }
+        &.pic-no-icon {
+            display: block;
+        }
     }
     h3 {
         padding: 10px 0;
@@ -6089,7 +6092,7 @@ section.sidebar {
 
 .recommended-for-you {
     background: #f3f3f3;
-    margin: 40px 0px 0px 0px;
+    margin: 50px 0px 0px 0px;
     padding: 20px 0 10px 0;
     .widget-title {
         margin-bottom: 10px;
@@ -8274,9 +8277,13 @@ section.sidebar {
         }
     }
     .section_wise_order-edu-tips-and-trick {
-        overflow: auto;
+        /*overflow: auto;*/
         border: 1px solid #ddd;
         padding: 10px;
+        .auto-tips-n-tricks {
+            height: 220px;
+            overflow: auto;
+        }
     }
     .auto-tips-n-tricks {
         ul {
@@ -9631,8 +9638,6 @@ section.sidebar {
     }
     .key-candidate {
         font-family: $itg-roboto;
-        max-height: 282px;
-        overflow: auto;
         .most_popular {
             border: none;
         }
@@ -9659,6 +9664,8 @@ section.sidebar {
         .key-candidate-detail {
             font-family: $itg-roboto;
             display: none;
+            max-height: 282px;
+            overflow: auto;
             ul {
                 @include clearfix;
                 border-bottom: 1px solid $border-color;
@@ -13921,3 +13928,12 @@ span.story-sponsor-powered-text::last-word {
 
 
 /* css end loader */
+
+.sso-main-content {
+    >.messages.error {
+        text-align: center;
+        ul {
+            list-style-type: none;
+        }
+    }
+}

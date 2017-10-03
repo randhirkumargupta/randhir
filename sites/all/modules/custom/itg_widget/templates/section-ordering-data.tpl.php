@@ -53,7 +53,7 @@ if ($widget_style == 'auto-road-trip') {
                       ?>
                   </span>
               </li>
-            <?php
+              <?php
             }
           }
           ?>
@@ -99,7 +99,7 @@ else if ($widget_style == 'auto-tips-and-tricks' || $widget_style == 'edu-tips-a
               </li>
 
 
-            <?php
+              <?php
             }
           }
           ?>
@@ -165,7 +165,7 @@ else if ($widget_style == 'buying-guid') {
                     <li>
                         <span class="title" title="<?php echo $title; ?>"><?php echo l(mb_strimwidth(ucfirst($title), 0, 55, ".."), "node/" . $nid); ?></span>
                         <p title="<?php echo $desc; ?>">
-        <?php echo l(itg_common_get_smiley_title($nid, 0, 100, ".."), "node/" . $nid); ?>
+                            <?php echo l(itg_common_get_smiley_title($nid, 0, 100, ".."), "node/" . $nid); ?>
                         </p>
                     </li>            
                 </ul>
@@ -184,6 +184,7 @@ else if ($widget_style == 'buying-guid') {
               <?php
               if (!empty($data)) {
                 foreach ($data as $count => $entity) {
+                  $nid = $entity['nid'];
                   $desc = $entity['title'];
                   $title = $entity['title'];
                   if ($entity['field_story_short_headline_value'] != "") {
@@ -210,7 +211,7 @@ else if ($widget_style == 'buying-guid') {
                             ?>
                         </span>
                         <p title="<?php echo $desc; ?>">
-                    <?php echo l(mb_strimwidth($desc, 0, 100, ".."), "node/" . $nid); ?>
+                            <?php echo l(mb_strimwidth($desc, 0, 100, ".."), "node/" . $nid); ?>
                         </p>
                     </li>   
                     <?php
@@ -834,13 +835,13 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
                   }
                   ?>
 
-      <?php if (!empty($extra_large_image_url)) { ?>
+                  <?php if (!empty($extra_large_image_url)) { ?>
 
                     <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  
                             <img  height="66" width="88"  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> </a></span>
 
-      <?php }
-      ?>
+                  <?php }
+                  ?>
 
                   <span class="detail" title="<?php echo $desc; ?>"> 
                       <?php
@@ -858,7 +859,7 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
                       ?>
                   </span>
               </li>
-            <?php
+              <?php
             }
           }
           ?>
@@ -893,13 +894,13 @@ else if ($widget_style == 'home-shows') {
                   }
                   ?>
 
-      <?php if (!empty($extra_large_image_url)) { ?>
+                  <?php if (!empty($extra_large_image_url)) { ?>
 
                     <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  
                             <img  height="66" width="88" src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> </a></span>
 
-                      <?php }
-                      ?>
+                  <?php }
+                  ?>
 
                   <span title="<?php echo $desc; ?>">
                       <?php
@@ -917,10 +918,10 @@ else if ($widget_style == 'home-shows') {
                       ?>
                   </span>
               </li>
-    <?php
-    }
-  }
-  ?>
+              <?php
+            }
+          }
+          ?>
       </ul>
   </div>
 
@@ -959,8 +960,8 @@ else if ($widget_style == 'home-watch') {
                         <span class="dm-pic"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  
                                 <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_small_image_alt']; ?>" title="<?php echo $entity['field_story_small_image_title']; ?>" /> </a> <span><i class="fa fa-play-circle"></i> <?php echo $entity['field_video_duration_value']; ?></span></span>
 
-                          <?php }
-                          ?>
+                      <?php }
+                      ?>
 
                       <span class="dm-detail" title="<?php echo $desc; ?>">
                           <?php
@@ -978,10 +979,10 @@ else if ($widget_style == 'home-watch') {
                           ?>
                       </span>
                   </li>
-    <?php
-    }
-  }
-  ?>
+                  <?php
+                }
+              }
+              ?>
           </ul>
       </div></div>
 
@@ -1017,8 +1018,8 @@ else if ($widget_style == 'budget-decoded') {
                     <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"> 
                         <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /></a>
 
-                      <?php }
-                      ?>
+                  <?php }
+                  ?>
 
                   <h3 title="<?php echo $desc; ?>">
                       <?php
@@ -1036,10 +1037,10 @@ else if ($widget_style == 'budget-decoded') {
                       ?>
                   </h3>
               </li>
-    <?php
-    }
-  }
-  ?>
+              <?php
+            }
+          }
+          ?>
       </ul>
   </div>        
 
@@ -1079,8 +1080,8 @@ else if ($widget_style == 'sport-column') {
                     ?>
                     <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> </a></span>
 
-                      <?php }
-                      ?>
+                  <?php }
+                  ?>
 
 
                   <span title="<?php echo $desc; ?>">
@@ -1099,19 +1100,19 @@ else if ($widget_style == 'sport-column') {
                       ?>
                   </span>
               </li>
-    <?php
-    }
-  }
-  ?>
+              <?php
+            }
+          }
+          ?>
       </ul>
   </div>
 
-      <?php
-    }
-    else if ($widget_style == 'election-so-sorry') {
-      ?>
+  <?php
+}
+else if ($widget_style == 'election-so-sorry') {
+  ?>
 
-      <?php if (!empty($data)) : global $base_url; ?>
+  <?php if (!empty($data)) : global $base_url; ?>
     <div class="section-ordering">
         <?php
         if (!empty($data)) {
@@ -1138,7 +1139,7 @@ else if ($widget_style == 'sport-column') {
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
                 </a>
-                  <?php } ?>
+              <?php } ?>
               <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['title'] ?> ">
                   <?php
                   if (!empty($entity['field_photo_see_pic_link_value'])) {
@@ -1154,21 +1155,21 @@ else if ($widget_style == 'sport-column') {
                   }
                   ?>
               </h3>
-        <?php endif; ?>
+            <?php endif; ?>
 
-      <?php
-      }
-    }
-    ?>
+            <?php
+          }
+        }
+        ?>
     </div>
   <?php else : ?>
     <span class="no-result-found"><?php print t("Content Not Found") ?></span>
   <?php endif; ?>
 
-          <?php
-        }
-        else if ($widget_style == 'talking-point') {
-          ?>
+  <?php
+}
+else if ($widget_style == 'talking-point') {
+  ?>
 
   <div class="tech-trip">
       <ul class="trending-videos">
@@ -1211,13 +1212,13 @@ else if ($widget_style == 'sport-column') {
                     ?>
                     <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print base_path() . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" /></a></span>
 
-                      <?php }
-                      ?>
-                      <?php
-                      if (isset($reporter->title) && $reporter->title != "") {
-                        print '<h4 title="' . $reporter->title . '">' . ucfirst(mb_strimwidth($reporter->title, 0, 50, "..")) . '</h4>';
-                      }
-                      ?>
+                  <?php }
+                  ?>
+                  <?php
+                  if (isset($reporter->title) && $reporter->title != "") {
+                    print '<h4 title="' . $reporter->title . '">' . ucfirst(mb_strimwidth($reporter->title, 0, 50, "..")) . '</h4>';
+                  }
+                  ?>
                   <span title="<?php echo $desc; ?>">
                       <?php
                       if (!empty($entity['field_photo_see_pic_link_value'])) {
@@ -1234,19 +1235,19 @@ else if ($widget_style == 'sport-column') {
                       ?>
                   </span>
               </li>
-    <?php
-    }
-  }
-  ?>
+              <?php
+            }
+          }
+          ?>
       </ul>
   </div>
 
-      <?php
-    }
-    else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
-      ?>
+  <?php
+}
+else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
+  ?>
 
-      <?php if (!empty($data)) : global $base_url; ?>
+  <?php if (!empty($data)) : global $base_url; ?>
     <div class="section-ordering">
         <?php
         if (!empty($data)) {
@@ -1264,82 +1265,82 @@ else if ($widget_style == 'sport-column') {
             }
             ?>
             <?php if ($count == 0) : ?>
-          <?php if (!empty($extra_large_image_url)) { ?>
+              <?php if (!empty($extra_large_image_url)) { ?>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>"/>
                 </a>
-                    <?php
-                  }
-                  else {
-                    ?>
+                <?php
+              }
+              else {
+                ?>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>"/>
                 </a>
-                  <?php } ?>
+              <?php } ?>
               <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
                   <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), "node/" . $nid); ?>
               </h3>
-                <?php endif; ?>
-                <?php if ($count != 0) : ?>
+            <?php endif; ?>
+            <?php if ($count != 0) : ?>
               <p title="<?php echo $entity['title']; ?>" class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
                   <?php
                   if (!empty($entity['field_photo_see_pic_link_value'])) {
                     echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
                   }
                   ?>
-              <?php
-              if (function_exists('itg_common_get_smiley_title')) {
-                echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE));
-              }
-              else {
-                echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/" . $nid);
-              }
-              ?>
+                  <?php
+                  if (function_exists('itg_common_get_smiley_title')) {
+                    echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE));
+                  }
+                  else {
+                    echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/" . $nid);
+                  }
+                  ?>
               </p>
-        <?php endif; ?>
-      <?php
-      }
-    }
-    ?>
+            <?php endif; ?>
+            <?php
+          }
+        }
+        ?>
     </div>
-      <?php else : ?>
+  <?php else : ?>
     <span class="no-result-found"><?php print t("Content Not Found") ?></span>
-      <?php endif; ?>
+  <?php endif; ?>
 
-    <?php } else if ($widget_style == 'edu-notification' || $widget_style == 'edu-featurefilia' || $widget_style == 'edu-jobs-and-career' || $widget_style == 'edu-sample-paper') { ?>
+<?php } else if ($widget_style == 'edu-notification' || $widget_style == 'edu-featurefilia' || $widget_style == 'edu-jobs-and-career' || $widget_style == 'edu-sample-paper') { ?>
 
   <?php if (!empty($data)) : global $base_url; ?>
     <div class="section-ordering">
-            <?php
-            if (!empty($data)) {
-              $extra_large_image_url = "";
-              foreach ($data as $count => $entity) {
-                $desc = $entity['title'];
-                $nid = $entity['nid'];
-                ?>
+        <?php
+        if (!empty($data)) {
+          $extra_large_image_url = "";
+          foreach ($data as $count => $entity) {
+            $desc = $entity['title'];
+            $nid = $entity['nid'];
+            ?>
 
 
             <p title="<?php echo $desc; ?>" class="<?php print $entity['type'] ?> section-order-<?php print $entity['nid'] ?>">
-            <?php
-            if (!empty($entity['field_photo_see_pic_link_value'])) {
-              echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
-            }
-            ?>
-        <?php echo l(itg_common_get_smiley_title($nid, 0, 100), "node/" . $nid); ?>
+                <?php
+                if (!empty($entity['field_photo_see_pic_link_value'])) {
+                  echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
+                }
+                ?>
+                <?php echo l(itg_common_get_smiley_title($nid, 0, 100), "node/" . $nid); ?>
             </p>
 
-      <?php
-      }
-    }
-    ?>
+            <?php
+          }
+        }
+        ?>
     </div>
-      <?php else : ?>
+  <?php else : ?>
     <span class="no-result-found"><?php print t("Content Not Found") ?></span>
-      <?php endif; ?>
+  <?php endif; ?>
 
-    <?php } else if ($widget_style == 'edu-from-the-magazine') { ?>
+<?php } else if ($widget_style == 'edu-from-the-magazine') { ?>
 
-      <?php if (!empty($data)) : global $base_url; ?>
+  <?php if (!empty($data)) : global $base_url; ?>
     <div class="from-the-magazine">
 
         <?php
@@ -1360,21 +1361,21 @@ else if ($widget_style == 'sport-column') {
               }
             }
             ?>
-                <?php if ($count == 0) : ?>
+            <?php if ($count == 0) : ?>
               <div class="magazine-detail">
 
                   <?php if (!empty($extra_large_image_url)) { ?>
                     <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                         <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_extra_large_image_alt']; ?>" title="<?php echo $entity['field_story_extra_large_image_title']; ?>" />
                     </a>
-                            <?php
-                          }
-                          else {
-                            ?>
+                    <?php
+                  }
+                  else {
+                    ?>
                     <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                         <img class="defalt-placeholder-magazin"  height="140" width="100" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" />
                     </a>
-                          <?php } ?>
+                  <?php } ?>
                   <div class="small-detail">
                       <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
                           <?php
@@ -1397,48 +1398,48 @@ else if ($widget_style == 'sport-column') {
                             echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
                           }
                           ?>
-          <?php
-          if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($nid, 0, 70), "node/" . $nid, array("html" => TRUE));
-          }
-          else {
-            echo l(mb_strimwidth($desc, 0, 80, ".."), "node/" . $nid);
-          }
-          ?>
+                          <?php
+                          if (function_exists('itg_common_get_smiley_title')) {
+                            echo l(itg_common_get_smiley_title($nid, 0, 70), "node/" . $nid, array("html" => TRUE));
+                          }
+                          else {
+                            echo l(mb_strimwidth($desc, 0, 80, ".."), "node/" . $nid);
+                          }
+                          ?>
                       </p>
                   </div>
               </div>
 
-                <?php endif; ?>
-                <?php if ($count != 0) : ?>
+            <?php endif; ?>
+            <?php if ($count != 0) : ?>
               <p title="<?php echo $entity['title']; ?>" class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
                   <?php
                   if (!empty($entity['field_photo_see_pic_link_value'])) {
                     echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
                   }
                   ?>
-              <?php
-              if (function_exists('itg_common_get_smiley_title')) {
-                echo l(itg_common_get_smiley_title($nid, 0, 25), "node/" . $nid, array("html" => TRUE));
-              }
-              else {
-                echo l(mb_strimwidth($entity['title'], 0, 55, ".."), "node/" . $nid);
-              }
-              ?>
+                  <?php
+                  if (function_exists('itg_common_get_smiley_title')) {
+                    echo l(itg_common_get_smiley_title($nid, 0, 25), "node/" . $nid, array("html" => TRUE));
+                  }
+                  else {
+                    echo l(mb_strimwidth($entity['title'], 0, 55, ".."), "node/" . $nid);
+                  }
+                  ?>
               </p>
-        <?php endif; ?>
-      <?php
-      }
-    }
-    ?>
+            <?php endif; ?>
+            <?php
+          }
+        }
+        ?>
     </div>
-      <?php else : ?>
+  <?php else : ?>
     <span class="no-result-found"><?php print t("Content Not Found") ?></span>
-      <?php endif; ?>
+  <?php endif; ?>
 
-    <?php } else {
-      ?>
-      <?php if (!empty($data)) : global $base_url; ?>
+<?php } else {
+  ?>
+  <?php if (!empty($data)) : global $base_url; ?>
     <div class="section-ordering" data-id="<?php print $widget_style; ?>" id="card_<?php print $itg_section_id; ?>_<?php print $block_id; ?>">
         <!--      <div class="itg-ajax-loader">
             loader...
@@ -1462,14 +1463,14 @@ else if ($widget_style == 'sport-column') {
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
                 </a>
-                    <?php
-                  }
-                  else {
-                    ?>
+                <?php
+              }
+              else {
+                ?>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" />
                 </a>
-                  <?php } ?>
+              <?php } ?>
               <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
                   <?php
                   if (!empty($entity['field_photo_see_pic_link_value'])) {
@@ -1485,31 +1486,31 @@ else if ($widget_style == 'sport-column') {
                   }
                   ?>
               </h3>
-                <?php endif; ?>
-                <?php if ($count != 0) : ?>
+            <?php endif; ?>
+            <?php if ($count != 0) : ?>
               <p title="<?php echo $entity['title']; ?>" class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
                   <?php
                   if (!empty($entity['field_photo_see_pic_link_value'])) {
                     echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
                   }
                   ?>
-              <?php if (_is_sponsor_story_article($nid)): ?>
+                  <?php if (_is_sponsor_story_article($nid)): ?>
                     <span class="itg-sponsor-section-title"><?php print t('SPONSORED'); ?></span>
-              <?php endif; ?>
-              <?php
-              if (function_exists('itg_common_get_smiley_title')) {
-                echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE));
-              }
-              else {
-                echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/" . $nid);
-              }
-              ?>
+                  <?php endif; ?>
+                  <?php
+                  if (function_exists('itg_common_get_smiley_title')) {
+                    echo l(itg_common_get_smiley_title($nid, 0, 90), "node/" . $nid, array("html" => TRUE));
+                  }
+                  else {
+                    echo l(mb_strimwidth($entity['title'], 0, 100, ".."), "node/" . $nid);
+                  }
+                  ?>
               </p>
-        <?php endif; ?>
-      <?php
-      }
-    }
-    ?>
+            <?php endif; ?>
+            <?php
+          }
+        }
+        ?>
     </div>
   <?php else : ?>
     <span class="no-result-found"><?php print t("Content Not Found") ?></span>

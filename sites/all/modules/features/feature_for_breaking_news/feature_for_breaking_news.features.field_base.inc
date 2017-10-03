@@ -277,28 +277,32 @@ function feature_for_breaking_news_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_label'.
-  $field_bases['field_label'] = array(
+  // Exported field_base: 'field_live_blog_timeline_active'.
+  $field_bases['field_live_blog_timeline_active'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_label',
+    'field_name' => 'field_live_blog_timeline_active',
     'field_permissions' => array(
       'type' => 0,
     ),
     'indexes' => array(
-      'format' => array(
-        0 => 'format',
+      'value' => array(
+        0 => 'value',
       ),
     ),
     'locked' => 0,
-    'module' => 'text',
+    'module' => 'list',
     'settings' => array(
-      'max_length' => 255,
+      'allowed_values' => array(
+        1 => 'Active',
+        0 => 'Inactive',
+      ),
+      'allowed_values_function' => '',
     ),
     'translatable' => 0,
-    'type' => 'text',
+    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_mark_as_breaking_band'.

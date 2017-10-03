@@ -16,8 +16,8 @@ else {
 <div id="videoupload">
     <div class="browse-ftp <?php echo $singalcalss; ?>">
         <div id="itg_video_content">
-            <div class="video-ftp active"><?php print t('FTP'); ?></div>
-            <div class="internal-video-tab"><?php print t('Internal'); ?></div>
+            <div class="video-ftp active"><?php print t('DM Videos'); ?></div>
+            <div class="internal-video-tab"><?php print t('ITGD Videos'); ?></div>
             <?php if ($_GET['input_filed'] != 'ckeditor' && $_GET['no_value'] != 'single') { ?>
               <div class="video-local"><?php print t('Local Browse'); ?></div>
             <?php } ?>
@@ -72,7 +72,7 @@ else {
                 else {
                   ?>
                   <input type="hidden" id="single_add" name="single_add" value="0">
-                  <a href="javascript:void(0)" class = "button asso-filed"><?php print t('Associate Video'); ?></a>
+                  <a href="javascript:void(0)" class = "button btn-submit asso-filed"><?php print t('Associate Video'); ?></a>
                 <?php } ?>
             </div>  
 
@@ -121,7 +121,7 @@ else {
                 else {
                   ?>
                   <input type="hidden" id="single_add" name="single_add" value="0">
-                  <a href="javascript:void(0)" class = "button asso-filed-internal"><?php print t('Associate Video'); ?></a>
+                  <a href="javascript:void(0)" class = "button btn-submit asso-filed-internal"><?php print t('Associate Video'); ?></a>
                 <?php } ?>
             </div>  
 
