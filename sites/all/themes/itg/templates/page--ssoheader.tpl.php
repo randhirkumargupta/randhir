@@ -98,7 +98,7 @@ if($arg[0] == 'sso-user') {
 
   <main id="main">
     
-    <section id="content" class="container" role="main">
+    <section id="content" class="container sso-main-content" role="main">
       <?php print $messages; ?>
       <?php print render($page['content']); ?>
       
