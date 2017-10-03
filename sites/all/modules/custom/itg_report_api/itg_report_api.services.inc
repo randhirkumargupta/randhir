@@ -314,6 +314,7 @@ function itg_report_api_story_count_report() {
     }
    
     $redis_key = "itg_report_api_story_count_report" . $suffix;
+   // echo $redis_key; exit();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -336,28 +337,31 @@ function itg_report_api_story_count_report() {
  * @return array - The processed information array.
  */
 function itg_report_api_user_list() {
-    $user_type = $_GET['user_type'];
-    $user_sub_type = $_GET['user_sub_type'];
-    $item_per_page = $_GET['item_per_page'];
-    $pageno = $_GET['pageno'];
+    $user_type = $_GET['type'];
+    $user_sub_type = $_GET['sub_type'];
+    $start_date = $_GET['start_date'];
+    $end_date = $_GET['end_date'];
+    
 
     
     if (!is_numeric($item_per_page)) {
         $item_per_page = 0;
     }
-    $suffix = $user_type . "_" . $user_sub_type .  "_" . $item_per_page."_".$pageno;
+    $suffix = $user_type . "_" . $user_sub_type. "_" . $start_date. "_" . $end_date;
     if($pageno =="na"){
         $pageno = 0;
     }
    
-    $redis_key = "itg_report_api_user_list" . $suffix;
+    $redis_key = "itg_report_api_user_list_" . $suffix;
+    //echo $redis_key; die();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
-        $jsondata = getUserList_Report($user_type, $user_sub_type, $item_per_page, $pageno);
+        //$jsondata = getUserList_Report($user_type, $user_sub_type, $item_per_page, $pageno);
+        $jsondata = getUserList_Report($user_type, $user_sub_type, $start_date, $end_date);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -373,12 +377,14 @@ function itg_report_api_user_list() {
  * @return array - The processed information array.
  */
 function itg_report_api_get_story_api() {
+    //p($_GET);die();
     $start_date = $_GET['start_date'];
     $end_date = $_GET['end_date'];
-    $type = $_GET['type'];
-    $status = $_GET['status'];
-    $item_per_page = $_GET['item_per_page'];
-    $pageno = $_GET['pageno'];
+    $user_type = $_GET['user_type'];
+    $user_sub_type = $_GET['user_sub_type'];
+    $userid = $_GET['userid'];
+    $content_type = $_GET['content_type'];
+    
     //valid tid & pageno
 
     if (!is_numeric($status)) {
@@ -387,19 +393,20 @@ function itg_report_api_get_story_api() {
     if (!is_numeric($item_per_page)) {
         $item_per_page = 0;
     }
-    $suffix = $start_date . "_" . $end_date . "_" . $type . "_" . $status . "_" . $item_per_page."_".$pageno;
+    $suffix = $start_date . "_" . $end_date . "_" . $user_type . "_" . $user_sub_type . "_" . $userid."_".$content_type;
     if($pageno =="na"){
         $pageno = 0;
     }
    
     $redis_key = "itg_report_api_get_story_api" . $suffix;
+    //echo $redis_key; die();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
-        $jsondata = getStoryAPI($start_date, $end_date, $type, $status, $item_per_page, $pageno);
+        $jsondata = getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid, $content_type);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -463,7 +470,8 @@ function itg_report_api_author_report() {
       
 
    $suffix = $start_date;
-    $redis_key = "itg_report_api_author_report" . $suffix;
+    $redis_key = "itg_report_api_author_report_" . $suffix;
+    //echo $redis_key; die();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -495,7 +503,7 @@ function itg_report_api_author_report_tvtn() {
       
 
    $suffix = $start_date;
-    $redis_key = "itg_report_api_author_report_tvtn" . $suffix;
+    $redis_key = "itg_report_api_author_report_tvtn_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {

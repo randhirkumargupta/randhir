@@ -8,12 +8,13 @@
  * main function for generate getStoryAPI array
  * @pram datetime $start_date
  * @pram datetime $end_date
- * @pram string $type
- * @pram int $status
- * @pram int $item_per_page
+ * @pram string $user_type
+ * @pram string $user_sub_type
+ * @pram string $userid
+ * @pram string $content_type
  * @return array
  */
-function getStoryAPI($start_date, $end_date, $type, $status, $item_per_page, $pageno = 0) {
+function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid, $content_type) {
 
     global $base_url;
     $list = array();
@@ -26,6 +27,8 @@ function getStoryAPI($start_date, $end_date, $type, $status, $item_per_page, $pa
     } else {
         $range_min = 0;
     }
+    $start_date = strtotime($start_date);
+    $end_date = strtotime($end_date);
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -35,19 +38,29 @@ function getStoryAPI($start_date, $end_date, $type, $status, $item_per_page, $pa
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     //end   
-    if ($start_date != "na") {
-        $start_date_timestamp = strtotime($start_date);
-        $query->condition('n.created', $start_date_timestamp, ">=");
+    
+      //filter of user type
+    if($user_sub_type == "created_by"){
+        $query->condition('n.created', $start_date, '>=');
+        $query->condition('n.created', $end_date, '<=');
     }
-    if ($end_date != "na") {
-        $end_date_timestamp = strtotime($end_date);
-        $query->condition('n.created', $end_date_timestamp, "<=");
+    elseif($user_sub_type == "modified by" || $user_sub_type == "modified_by"){
+        $query->condition('n.changed', $start_date, '>=');
+        $query->condition('n.changed', $end_date, '<=');
     }
-    if ($type != "na") {
-        $query->condition('n.type', $type);
+    // filter by content type
+    if ($content_type != "na") {
+        $query->condition('n.type', $content_type);
     }
-    $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    // filter by uid
+    if ($userid != "na") {
+        $query->condition('n.uid', $userid);
+    }
+    
+    //$query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid');
     //$total_records = $query->countQuery()->execute()->fetchField();
+    //echo $query; die();
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $reskey => $resvalue) {
@@ -68,7 +81,7 @@ function getStoryAPI($start_date, $end_date, $type, $status, $item_per_page, $pa
         $wordcount = count(explode(" ", strip_tags(trim($body_value))));
         $created_datetime = date("Y-m-d H:i:s", $created);
         $prime_cat = getNodePrimeCatByNid($nid);
-        $video_embed = "no";
+
         // list data
         $list[$nid]['id'] = "$nid";
         $list[$nid]['title'] = "$title";
@@ -77,15 +90,15 @@ function getStoryAPI($start_date, $end_date, $type, $status, $item_per_page, $pa
         $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
         $list[$nid]['section_name'] = "$prime_cat->name";
         $list[$nid]['created_datetime'] = "$created_datetime";
-        $list[$nid]['video_embed'] = "$video_embed";
+        $list[$nid]['video_embed'] = "$nid";
         $list[$nid]['created_by'] = "$created_by";
     }
     //$start_date, $end_date, $type, $status, $item_per_page, $pageno = 0
-    $total_records = totalRecordsCount_StoryAPI($start_date, $end_date, $type, $status, $item_per_page, $pageno);
+    //$total_records = totalRecordsCount_StoryAPI($start_date, $end_date, $type, $status, $item_per_page, $pageno);
     //$next_page_no = $pageno + 1;
     //$next_page_url = $base_url . "/reportapi/story_count_report?start_date=" . $start_date . "&end_date=" . $end_date . "&type=" . $type . "&status=" . $status . "&item_per_page=" . $item_per_page . "&pageno=" . $next_page_no . "";
     $data['results'] = $list;
-    $data['total_records'] = "$total_records";
+    $data['total_records'] = "$total_cont";
     //$data['next_page_url'] = "$next_page_url";
     return $data;
 }

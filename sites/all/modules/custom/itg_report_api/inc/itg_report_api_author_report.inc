@@ -104,6 +104,23 @@ function author_report_tvtn($start_date) {
         }
         $author_loop_cont++;
     }
+     //static author data
+    $auhtor_data[0]['author_id'] = "1568";
+    $auhtor_data[0]['author_email'] = "anand.patel@aajtak.com";
+    $auhtor_data[0]['author_name'] = "Anand Patel";
+    $auhtor_data[0]['site_id'] = "1";
+    $auhtor_data[0]['today'] = "1";
+    $auhtor_data[0]['yesterday'] = "1";
+    $auhtor_data[0]['month'] = "1";
+    $auhtor_data[0]['year'] = "1";
+    
+    $auhtor_data[0]['contents']['author_id'] = "1568";
+    $auhtor_data[0]['contents']['author_email'] = "anand.patel@aajtak.com";
+    $auhtor_data[0]['contents']['author_name'] = "Anand Patel";
+    $auhtor_data[0]['contents']['site_id'] = "1";
+    $auhtor_data[0]['contents']['content_url'] = "";
+    $auhtor_data[0]['contents']['page_title'] = "Sharad Yadav shoots letter to";
+    //$auhtor_data[0]['contents']['author_id'] = "1";
     $data['auhtorwise_data']['auhtor_data'] = $auhtor_data;
 
     return $data;
@@ -209,6 +226,25 @@ function author_report($start_date) {
         }
         $author_loop_cont++;
     }
+    //static author data
+    $auhtor_data[0]['author_id'] = "1568";
+    $auhtor_data[0]['author_email'] = "anand.patel@aajtak.com";
+    $auhtor_data[0]['author_name'] = "Anand Patel";
+    $auhtor_data[0]['site_id'] = "1";
+    $auhtor_data[0]['today'] = "1";
+    $auhtor_data[0]['yesterday'] = "1";
+    $auhtor_data[0]['month'] = "1";
+    $auhtor_data[0]['year'] = "1";
+    
+    $auhtor_data[0]['contents']['author_id'] = "1568";
+    $auhtor_data[0]['contents']['author_email'] = "anand.patel@aajtak.com";
+    $auhtor_data[0]['contents']['author_name'] = "Anand Patel";
+    $auhtor_data[0]['contents']['site_id'] = "1";
+    $auhtor_data[0]['contents']['content_url'] = "";
+    $auhtor_data[0]['contents']['page_title'] = "Sharad Yadav shoots letter to";
+    //$auhtor_data[0]['contents']['author_id'] = "1";
+    
+    
     $data['auhtorwise_data']['auhtor_data'] = $auhtor_data;
 
     return $data;
@@ -251,7 +287,8 @@ function getAuthorList_Report() {
     $query->leftJoin('users_roles', 'ur', 'ur.uid=u.uid');
     $query->fields('u', array('uid', 'name', 'mail', 'status'));
 
-    $query->condition('ur.rid', 1, '<>')->condition('ur.rid', 25, '<>')->orderBy('u.name', 'DESC')->groupBy('u.uid');
+    //$query->condition('ur.rid', 1, '<>')->condition('ur.rid', 25, '<>')->orderBy('u.name', 'DESC')->groupBy('u.uid');
+    $query->orderBy('u.name', 'DESC')->groupBy('u.uid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $uid = $resvalue['uid'];

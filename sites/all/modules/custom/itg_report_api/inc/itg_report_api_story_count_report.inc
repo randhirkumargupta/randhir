@@ -68,7 +68,7 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
         $wordcount = count(explode(" ", strip_tags(trim($body_value))));
         $created_datetime = date("Y-m-d H:i:s", $created);
         $prime_cat = getNodePrimeCatByNid($nid);
-        $video_embed = "no";
+
         // list data
         $list[$nid]['id'] = "$nid";
         $list[$nid]['title'] = "$title";
@@ -77,7 +77,7 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
         $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
         $list[$nid]['section_name'] = "$prime_cat->name";
         $list[$nid]['created_datetime'] = "$created_datetime";
-        $list[$nid]['video_embed'] = "$video_embed";
+        $list[$nid]['video_embed'] = "$nid";
         $list[$nid]['created_by'] = "$created_by";
     }
     //$start_date, $end_date, $type, $status, $item_per_page, $pageno = 0
@@ -87,6 +87,19 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
     $data['results'] = $list;
     $data['total_records'] = "$total_records";
     $data['next_page_url'] = "$next_page_url";
+    //secrtion data report
+    $section_data = array();
+    $section_data = getSectionCountData_report($start_date, $end_date);
+    
+//    $section_data[0]['count'] = "4";
+//    $section_data[0]['section'] = "Auto";
+//    $section_data[0]['section_id'] = "230";
+//    
+//    $section_data[1]['count'] = "4";
+//    $section_data[1]['section'] = "Auto";
+//    $section_data[1]['section_id'] = "230";
+    
+    $data['section_data'] = $section_data;
     return $data;
 }
 
@@ -133,4 +146,60 @@ function totalRecordsCount($start_date, $end_date, $type, $status, $item_per_pag
     //return $query->countQuery()->execute()->fetchField();
     $total_records = count($result_cont);
     return $total_records;
+}
+
+/**
+ * function for get section data
+ * @pram datetime $start_date
+ * @pram datetime $end_date
+ * @return array $section_data;
+ */
+
+function getSectionCountData_report($start_date, $end_date){
+    global $base_url;
+    $section_data = array();
+    $section_list_count = array();
+    $vid = 14;
+    $section_list = getSectionListByVID($vid);
+    //p($section_list);die();
+    $loop_count = 0;
+     foreach ($section_list as $key => $value) {
+        //p($value);die();
+        $n_cont = 0;
+        $n_cont = countTidNode_report($start_date, $end_date, $value['tid']);
+        if($n_cont){
+            $ntid = $value['tid'];
+            $term = taxonomy_term_load($ntid);
+            $section_data[$loop_count]['count'] = "$n_cont";
+            $section_data[$loop_count]['section'] = "$term->name";
+            $section_data[$loop_count]['section_id'] = "$ntid";
+            $loop_count++;
+        }
+        
+     }
+     return $section_data;
+}
+
+/**
+ * function for section node count
+ * @pram datetime $start_date
+ * @pram datetime $end_date
+ * @pram int $tid
+ * @return int $n_count;
+ */
+
+function countTidNode_report($start_date, $end_date, $tid){
+    //story count between
+    //echo $start_date; echo "###"; echo $end_date; echo "###"; echo $tid; die();
+    $start_date_timestamp = strtotime($start_date);
+    $end_date_timestamp = strtotime($end_date);
+    $n_count = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->fields('n', array('nid'));
+    $query->condition('n.created', $start_date_timestamp, '>=')->condition('n.created', $end_date_timestamp, '<=')->condition('ti.tid', $tid);
+    //$query->condition('ti.tid', $tid);
+    $result = $query->execute()->fetchAll();
+    $total_records_between = count($result);
+    return $total_records_between;
 }

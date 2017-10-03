@@ -13,7 +13,55 @@
  * @pram int $pageno 
  * @return array userList
  */
-function getUserList_Report($user_type, $user_sub_type, $item_per_page, $pageno){
+function getUserList_Report($user_type, $user_sub_type, $start_date, $end_date){
+    global $base_url;
+    $list = array();
+    $data = array();
+    $total_cont = 0;
+    
+    $query = db_select('node', 'n');
+    $query->leftJoin('users', 'u', 'u.uid=n.uid');
+    //$query->fields('n', array('uid', 'nid'));
+    $query->fields('u', array('uid', 'name', 'mail', 'status'));
+    $start_date = strtotime($start_date);
+    $end_date = strtotime($end_date);
+    //filter of content type
+    if($user_type != "na"){
+        $query->condition('n.type', $user_type, '=');
+    }
+    
+    //filter of user type
+    if($user_sub_type == "created_by"){
+        $query->condition('n.created', $start_date, '>=');
+        $query->condition('n.created', $end_date, '<=');
+    }
+    elseif($user_sub_type == "modified by" || $user_sub_type == "modified_by"){
+        $query->condition('n.changed', $start_date, '>=');
+        $query->condition('n.changed', $end_date, '<=');
+    }
+    $query->orderBy('u.name', 'DESC');
+    $query->groupBy('n.uid');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $reskey => $resvalue) {
+        $uid = $resvalue['uid'];
+        $name = $resvalue['name'];
+        $mail = $resvalue['mail'];
+        $status = $resvalue['status'];
+        // list data
+        $list[$total_cont]['user_id'] = "$uid";
+        $list[$total_cont]['name'] = "$name";
+        $list[$total_cont]['email'] = "$mail";
+        $list[$total_cont]['status'] = "$status";
+        
+        $total_cont++;
+    }
+    
+    $data['results'] = $list;
+    $data['total_records'] = "$total_cont";
+    return $data;
+    
+}
+function getUserList_Report_bk($user_type, $user_sub_type, $item_per_page, $pageno){
     global $base_url;
     $list = array();
     $data = array();
