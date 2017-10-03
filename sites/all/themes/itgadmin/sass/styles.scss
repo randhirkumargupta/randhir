@@ -1109,7 +1109,7 @@ div.form-type-password-confirm {
         }
     }
     .form-actions {
-        padding-left: 250px;
+        /* padding-left: 250px; */
     }
     #edit-mimemail {
         @extend .hide;
@@ -14271,4 +14271,17 @@ div.ctools-modal-content {
 .view-display-id-solr_unpublish_video .solr-unpublish-icon {
     width: 45px;
     display: block;
+}
+
+[id*="itg-category-manager-import-tag-form"] {
+    .import-notes {
+        ul {
+            padding-left: 18px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .form-type-managed-file {
+            padding-left: 0;
+        }
+    }
 }

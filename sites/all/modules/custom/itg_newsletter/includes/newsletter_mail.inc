@@ -141,7 +141,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body><table cellspacing="0" cellpadding="0" style="width: 333px; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" /></td></tr>';
+  <body><table cellspacing="0" cellpadding="0" style="width: 600px; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" width="100%" height="100px" /></td></tr>';
 
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
@@ -240,7 +240,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial">
-    <tr><td colspan="2"><img src="' . $banner . '" alt="" /></td></tr>';
+    <tr><td colspan="2"><img src="' . $banner . '" alt="" width="100%" height="100px" /></td></tr>';
 
     $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
