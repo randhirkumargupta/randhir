@@ -849,6 +849,16 @@
             }
         }
     }
+    .tech-layout-page .auto-block-1,
+    .tech-layout-page .auto-block-2,
+    .auto-layout-page .auto-block-1,
+    .auto-layout-page .auto-block-2 {
+        height: auto;
+        min-height: auto;
+    }
+    .itg-top-section .featured-news {
+        padding-bottom: 0px;
+    }
     /*End CSS Top Block Grid Home Page*/
     /*Start Dont miss Home page css*/
     .dont-miss {
@@ -1667,6 +1677,25 @@
     .story-section .story-right {
         padding: 0;
     }
+    /* css tech page */
+    .tech-layout-page {
+        .trending-list {
+            .widget-title {
+                background: #e4e4e4;
+                display: block;
+                padding: 8px;
+                height: inherit;
+                border: 1px solid #e4e4e4;
+                color: #5c5c5c;
+            }
+        }
+        #block-itg-widget-tech-most-read {
+            border: 1px solid #e4e4e4;
+            border-top: 0;
+            padding: 5px;
+        }
+    }
+    /* css end tech page */
 }
 
 @media only screen and (max-width:767px) {
@@ -2593,8 +2622,8 @@
             margin-top: 20px;
         }
         .election-graph {
-            margin-top: -30px;
-            padding-bottom: 50px;
+            /*margin-top: -30px;
+            padding-bottom: 50px;*/
             width: auto;
             .col-el-5 {
                 width: 100%;
