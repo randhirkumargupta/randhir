@@ -1597,7 +1597,7 @@ function itg_story_mega_review_node_embed($node){
   $output .= '<div class="movie-description">';
   $output .=  render(field_view_field('node', $node, 'field_story_movie_description', $display));
   $output .= '</div>';
-  $output .= '<div class="rating-and-social-wrapper"><div class="movie-rating" data-star-value="'.$average_rating.'"></div><div class="social-info">';
+  $output .= '<div class="rating-and-social-wrapper"><div class="movie-rating" data-star-value="'.$average_rating.'%"></div><div class="social-info">';
   $output .= '<span class="share-count"><i>';
   if(!empty($tot_count)) {
 	$output .= $tot_count;
