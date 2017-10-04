@@ -60,6 +60,8 @@ function generatePhotoCategoryList($tid, $pageno) {
     // variable declaration
     global $base_url;
     $node_count = "";
+    // filter user data list
+    $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522);
     $output = "";
     $data = array();
     $tid_list = array();
@@ -137,6 +139,8 @@ function generatePhotoCategoryList($tid, $pageno) {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
+        //change in query
+        $query->condition('n.uid', $filter_user_data, 'NOT IN');
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
