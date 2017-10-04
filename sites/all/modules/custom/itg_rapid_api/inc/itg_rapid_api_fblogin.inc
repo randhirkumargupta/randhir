@@ -228,6 +228,9 @@ function localSignup($data) {
         } else {
             $form_state['values']['mail'] = "";
         }
+        if($data['email_id'] != "" && filter_var($data['email_id'], FILTER_VALIDATE_EMAIL)){
+            $mail = $data['email_id'];
+        }
         // prepare array for user
         $edit = array(
             'name' => $user_id,
