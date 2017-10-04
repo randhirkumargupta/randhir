@@ -3330,7 +3330,7 @@ function itg_rapid_api_login_request($token) {
             $field_first_name = $local_account->user->field_first_name['und'][0]['value'];
             $field_last_name = $local_account->user->field_last_name['und'][0]['value'];
             $field_short_description = $local_account->user->field_short_description['und'][0]['value'];
-            $profile_image = $local_account->user->field_user_picture['und'][0]['value'];
+            $profile_image = completeFilePath($local_account->user->field_user_picture['und'][0]['fid']);
             $gender = $local_account->user->field_user_gender['und'][0]['value'];
             $date_of_birth = $local_account->user->field_story_issue_date['und'][0]['value'];
             //$mail = $result_obj->mail;
@@ -3345,7 +3345,7 @@ function itg_rapid_api_login_request($token) {
             $account['status_message'] = "";
             $account['data']['user_id'] = "$name";
             $account['data']['auth_token'] = "$auth_token";
-            $account['data']['is_authenticated'] = "$auth_token";
+            $account['data']['is_authenticated'] = "0";
 
             $account['data']['first_name'] = "$field_first_name";
             $account['data']['last_name'] = "$field_last_name";
