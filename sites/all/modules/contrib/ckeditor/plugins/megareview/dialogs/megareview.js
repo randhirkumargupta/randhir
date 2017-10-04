@@ -40,7 +40,7 @@ CKEDITOR.dialog.add('megareviewDialog', function(editor) {
               if(bas_path == 'http://localhost/') {
                 bas_path = bas_path+'itgcms/';
               }
-              var title_str=jQuery('#cke_489_textInput').val();
+              var title_str=jQuery('.megareview-txt').val();
               editor.popup(bas_path + 'pqs/associate-with-story/mega_review_critic/'+title_str, 400, 600);
             }
           }
