@@ -4,6 +4,7 @@
  * @file
  * The ITG Syndication clients for store configuration
  */
+
 function getbsb_client_array() {
   $story = array(
     '1206533' => 'it-story-movies.xml',
@@ -34,4 +35,12 @@ function getbsb_client_array() {
     '1208369' => 'it-story-westbengal.xml',
   );
   return $story;
+}
+
+
+function getbsb_client_photo_array(){
+  $photo = array(
+    '1208655' => 'cinema-superfast-photos.xml',
+  );
+  return $photo;
 }

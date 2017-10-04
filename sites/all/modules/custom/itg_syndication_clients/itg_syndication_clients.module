@@ -17,6 +17,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_bsb_story.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['bsb/photos'] = array(
+    'page callback' => 'itg_bsb_photo_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_bsb_photo.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -30,9 +36,9 @@ function itg_syndication_clients_install() {
 }
 
 function slugify($text) {
-  $text = preg_replace('&', 'and', $text);
-  var_dump($text);
-  die;
+  
+  $text = preg_replace('~&~', 'and', $text);
+  
   $text = preg_replace('~[^\pL\d]+~u', '-', $text);
   $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
   $text = preg_replace('~[^-\w]+~', '', $text);
