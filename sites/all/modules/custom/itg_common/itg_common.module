@@ -163,7 +163,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     'views-exposed-form-searchimage-search-publish-video', 
     );
   if( in_array($form['#id'], $solr_video_video_id)) {
-    
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/bootstrap.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery.snippet.min.js', array('scope' => 'footer'));
@@ -174,13 +175,14 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 		   effect: 'climb'
 	     }); jQuery('body').on('click','.play-video',function () {
           var getvideo_id = $(this).attr('data-video-id');
+          var getvideo_repo = $(this).attr('data-type-repo');
           jQuery.ajax({
           url: Drupal.settings.basePath + 'dailymotion-video-play',
           type: 'post',
           beforeSend: function (xhr) {
               jQuery('#widget-ajex-loader').show();
           },
-          data: {'videoid': getvideo_id,'width':400,'height':260},
+          data: {'videoid': getvideo_id, 'getvideo_repo':getvideo_repo,'width':400,'height':260},
           success: function (data) {
               jQuery('#video_play_div').html(data);
               jQuery('#widget-ajex-loader').hide();
@@ -212,13 +214,14 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 		   effect: 'climb'
 	     }); jQuery('.play-video').click(function () {
       var getvideo_id = $(this).attr('data-video-id');
+      var getvideo_repo = $(this).attr('data-type-repo');
       jQuery.ajax({
           url: Drupal.settings.basePath + 'internal-video-play',
           type: 'post',
           beforeSend: function (xhr) {
               jQuery('#widget-ajex-loader').show();
           },
-          data: {'videodata': getvideo_id, 'width': 400, 'height': 260},
+          data: {'videodata': getvideo_id, 'getvideo_repo':getvideo_repo, 'width': 400, 'height': 260},
           success: function (data) {
               jQuery('#video_play_div').html(data);
               jQuery('#widget-ajex-loader').hide();
