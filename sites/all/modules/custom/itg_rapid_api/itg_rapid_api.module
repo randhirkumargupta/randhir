@@ -955,7 +955,11 @@ function signupValidation_rapid($params) {
         $error['password'] = t('Password should be minimum 6 characters without any space ');
     } else if (strlen($pass) > $max_length) {
         $error['password'] = t('Password should be maximum 15 characters without any space ');
-    } else if ($pass != $cpass) {
+    } 
+    else if (!preg_match('/\d/',$pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
+                $error['password'] = t("Password should be 1 special and 1 numeric character");
+            }
+    else if ($pass != $cpass) {
         $error['password'] = t('Password and Confirm Password do not match');
     } else {
         //$error['password'] = t('');
