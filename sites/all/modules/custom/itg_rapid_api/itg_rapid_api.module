@@ -1325,9 +1325,9 @@ function validateResetPass($params) {
         $error['new_password'] = t('New Password should be minimum 6 characters without any space ');
     } else if (strlen($pass) > $max_length) {
         $error['new_password'] = t('New Password should be maximum 15 characters without any space ');
-    } else {
-        //$error['new_password'] = t('');
-    }
+    } else if (!preg_match('/\d/',$pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
+                $error['password'] = t("New Password should be 1 special and 1 numeric character");
+            }
     //confirm pass
     if (empty($pass2)) {
         $error['confirm_password'] = t('please enter confirm password');
@@ -1335,9 +1335,9 @@ function validateResetPass($params) {
         $error['confirm_password'] = t('Confirm Password should be minimum 6 characters without any space ');
     } else if (strlen($pass2) > $max_length) {
         $error['confirm_password'] = t('Confirm Password should be maximum 15 characters without any space ');
-    } else {
-        //$error['new_password'] = t('');
-    }
+    } else if (!preg_match('/\d/',$pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
+                $error['password'] = t("Confirm Password should be 1 special and 1 numeric character");
+            }
     //match both pass
 
     if ($pass != $pass2) {
@@ -1455,9 +1455,9 @@ function validateChangePass($params) {
         $error['new_password'] = t('New Password should be minimum 6 characters without any space ');
     } else if (strlen($pass) > $max_length) {
         $error['new_password'] = t('New Password should be maximum 15 characters without any space ');
-    } else {
-        //$error['new_password'] = t('');
-    }
+    } else if (!preg_match('/\d/',$pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
+                $error['password'] = t("New Password should be 1 special and 1 numeric character");
+            }
     //confirm pass
     if (empty($pass2)) {
         $error['confirm_password'] = t('please enter confirm password');
@@ -1465,9 +1465,9 @@ function validateChangePass($params) {
         $error['confirm_password'] = t('Confirm Password should be minimum 6 characters without any space ');
     } else if (strlen($pass2) > $max_length) {
         $error['confirm_password'] = t('Confirm Password should be maximum 15 characters without any space ');
-    } else {
-        //$error['new_password'] = t('');
-    }
+    } else if (!preg_match('/\d/',$pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
+                $error['password'] = t("Confirm Password should be 1 special and 1 numeric character");
+            }
     //match both pass
 
     if ($pass != $pass2) {
