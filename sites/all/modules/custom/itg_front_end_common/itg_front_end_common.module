@@ -282,7 +282,7 @@ function _vukkul_block_content() {
   }
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($reporter_node);
-  drupal_add_js('http://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
+  drupal_add_js('http://vuukle.com/js/vuukle.js', array('type' => 'external'));
   $output = '<script type="text/javascript">
 
                var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
@@ -304,7 +304,7 @@ function _vukkul_block_content() {
                create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
 
                </script>';
-  //return $output;
+  return $output;
 }
 
 /**
