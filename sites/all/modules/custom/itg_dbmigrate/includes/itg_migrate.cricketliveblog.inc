@@ -126,6 +126,9 @@ class ItgCricketliveblog extends XMLMigration {
     $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
     $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
     $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
+    $this->addFieldMapping('field_story_source_type')
+        ->defaultValue('migrated');
+    $this->addFieldMapping('field_story_source_id', 'id')->xpath('id'); // source id
   }
 
   public function prepareRow($row) {
@@ -197,7 +200,7 @@ class ItgCricketliveblog extends XMLMigration {
   }
 
   public function complete($entity, $row) {
-    $node = node_load($entity->nid);
+	  $node = node_load($entity->nid);
     $key = 0;
     if (isset($row->xml->redirection_url)) {
       $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
