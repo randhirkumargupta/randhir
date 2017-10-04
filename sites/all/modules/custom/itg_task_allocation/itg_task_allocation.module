@@ -59,7 +59,7 @@ function itg_task_allocation_expirestatus_enddatemail() {
     $query->fields('s', array('field_task_comment_change_status_value'));
     $query->fields('u', array('mail'));
     $query->fields('ur', array('mail'));
-    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
+//    $query->condition('s.field_task_comment_change_status_value', 'open', '=');
     $query->condition('f.field_task_finish_date_and_time_value', $current_time, '<=');
     $result = $query->execute();
     foreach ($result as $value) {   
@@ -575,9 +575,9 @@ function expiredmail_mail_content($to) {
   $subject = t('Task Expired');
   
   if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
-    $node_url = $base_url . '/node/' . $node->nid;
+    $node_url = l('URL', $base_url.'/node/'.$var->nid);
   } else {
-    $node_url = $base_url . '/user/login?destination=' . current_path();
+    $node_url = l('URL', array('@login-link' => $base_url . '/user/login?destination='.current_path()));
   }
 
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
@@ -618,11 +618,10 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
   global $base_url, $user;
   if (!empty($var->ur_mail) || !empty($var->mail)) {
     if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
-      $node_url = $base_url . '/node/' . $var->nid;
+      $node_url = l('URL', $base_url.'/node/'.$var->nid);
     } else {
-      $node_url = $base_url . '/user/login?destination=' . current_path();
+      $node_url = l('URL', array('@login-link' => $base_url . '/user/login?destination='.current_path()));
     }
-
     $node_title = itg_common_get_node_title($var->nid);
 
     $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
