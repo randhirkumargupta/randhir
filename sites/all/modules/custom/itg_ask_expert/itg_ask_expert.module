@@ -240,14 +240,12 @@ function itg_ask_expert_node_insert($node) {
         $content .= $mail_content;
         $content .= '</body>';
         $content .= '</html>';
-//        $mail_content = itg_ask_expert_get_mail_content($node);
         $mail_contents = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
         $params = array(
             'body' => $mail_contents,
             'subject' => $mail_subject,
         );
         $to = implode(',', $expert_arr);
-//        $to = 'gourav.walia@kelltontech.com';
         $mail = drupal_mail('itg_ask_expert', 'send_mail_to_expert', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
         if ($mail['result']) {
             return TRUE;
@@ -271,7 +269,6 @@ function itg_ask_expert_node_update($node) {
         module_load_include('inc', 'itg_ask_expert', 'include/itg_ask_expert_mail');
         // get term id to fetch all role related to term id
         $to = $node->field_user_email[LANGUAGE_NONE][0]['value'];
-//        $to = 'gourav.walia@kelltontech.com';
         $name = $node->field_user_name[LANGUAGE_NONE][0]['value'];
         $node_url = l($node->title, FRONT_URL . '/node/' . $node->nid);
         
@@ -342,8 +339,9 @@ function itg_expert_mail($get_term_id) {
     $itg_query->fields('u', array('mail', 'name'));
     $itg_query->condition('s.field_user_section_tid', $get_term_id, '=');
     $itg_query->join('users', 'u', 's.entity_id = u.uid');
+    $itg_query->condition('u.status', 1);
     $itg_expert_role_arr = $itg_query->execute()->fetchAll();
-
+    
     foreach ($itg_expert_role_arr as $expert_mail_arr) {
         $itg_final_mail[] = $expert_mail_arr->mail;
     }

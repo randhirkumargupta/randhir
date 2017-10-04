@@ -141,10 +141,8 @@ $argum = base64_encode(arg(1));
                                         if(function_exists(itg_event_backend_highlights_like_dislike)) {
                                             //$val = $row['item_id'];
                                             $val = arg(1) . $like_id;
-                                            if(function_exists('itg_common_get_node_type')) {
-                                                $datatype = itg_common_get_node_type(arg(1));
-                                            }
-                                            print itg_event_backend_highlights_like_dislike($val, $datatype);
+                                            $datatype = $photo_node->type;
+                                            print itg_event_backend_highlights_like_dislike($val, $datatype, arg(1));
                                         }
                                         ?>
                                     </div>

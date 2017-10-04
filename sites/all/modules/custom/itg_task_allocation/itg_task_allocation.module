@@ -404,7 +404,6 @@ function task_get_mail_content($node, $event, $to, $user_name) {
     'body' => $mail_content,
     'subject' => $task_subject,
   );
-//  $to = 'gourav.walia@kelltontech.com';
   $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
@@ -575,7 +574,11 @@ function expiredmail_mail_content($to) {
   $task_subject = t('A task has been expired that was created by you');
   $subject = t('Task Expired');
   
-  $node_url = l('URL', 'node/'.$node->nid);
+  if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
+    $node_url = $base_url . '/node/' . $node->nid;
+  } else {
+    $node_url = $base_url . '/user/login?destination=' . current_path();
+  }
 
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
               <html xmlns:v="urn:schemas-microsoft-com:vml">
@@ -590,7 +593,6 @@ function expiredmail_mail_content($to) {
     'body' => $content,
     'subject' => $subject,
   );
-
   $mail = drupal_mail('itg_task_allocation', 'send_mail_to_task', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
@@ -612,69 +614,66 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
     $get_mail_data = itg_mail_templates_get_mailcontent($task_type, $expiry_task);
     $subject = $get_mail_data->field_mail_subject_task_idea[LANGUAGE_NONE][0]['value'];
   }
-  
-  global $base_url;
+
+  global $base_url, $user;
   if (!empty($var->ur_mail) || !empty($var->mail)) {
-    $node_url = l('URL', '/node/' . $var->nid);
-    $body = $get_mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value'];
-    $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);
+    if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
+      $node_url = $base_url . '/node/' . $var->nid;
+    } else {
+      $node_url = $base_url . '/user/login?destination=' . current_path();
+    }
+
+    $node_title = itg_common_get_node_title($var->nid);
 
     $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
                 <html xmlns:v="urn:schemas-microsoft-com:vml">
                   <head><title></title></head>
                   <body style="margin:0; padding:0;">';
-    $content .= $body_data;
-    $content .= '</body>';
-    $content .= '</html>';
-    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
-    $params = array(
-      'body' => $mail_content,
-      'subject' => $subject,
-    );
-//    $to_assignee = 'gourav.walia@kelltontech.com';
-    $to_assignee = $var->ur_mail;
-//    $to_user_mail = array($var->mail, $var->ur_mail);
-    $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assignee, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-    if ($mail['result']) {
-      return TRUE;
-    }
-    else {
-      $error_msg = 'Failed to send the email!';
-      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-      return FALSE;
-    }
-    
-  }
-  
-  if (!empty($var->mail)) {
-    $node_url = l('URL', '/node/' . $var->nid);
-    $body = $get_mail_data->field_mail_body_task_idea_assign[LANGUAGE_NONE][0]['value'];
-    
-    $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $body);
 
-    $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-                <html xmlns:v="urn:schemas-microsoft-com:vml">
-                  <head><title></title></head>
-                  <body style="margin:0; padding:0;">';
-    $content .= $body_data;
-    $content .= '</body>';
-    $content .= '</html>';
-    $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
-    $params = array(
-      'body' => $mail_content,
-      'subject' => $subject,
-    );
-//    $to_assigner = 'gourav.walia@kelltontech.com';
-    $to_assigner = $var->mail;
-//    $to_user_mail = array($var->mail, $var->ur_mail);
-    $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_assigner, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-    if ($mail['result']) {
-      return TRUE;
+    if (array_key_exists('ur_mail', $var)) {
+      $body = $get_mail_data->field_mail_subject_body[LANGUAGE_NONE][0]['value'];
+      $get_title = str_replace('[itg_mail_token:itg_node_title]', $node_title, $body);
+      $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $get_title);
+      $content .= $body_data;
+      $content .= '</body>';
+      $content .= '</html>';
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
+      $params = array(
+          'body' => $mail_content,
+          'subject' => $subject,
+      );
+      $to_mail = $var->ur_mail;
+      $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      if ($mail['result']) {
+        return TRUE;
+      } else {
+        $error_msg = 'Failed to send the email!';
+        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+        return FALSE;
+      }
     }
-    else {
-      $error_msg = 'Failed to send the email!';
-      watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-      return FALSE;
+    
+    if (array_key_exists('mail', $var)) {
+      $body = $get_mail_data->field_mail_body_task_idea_assign[LANGUAGE_NONE][0]['value'];
+      $get_title = str_replace('[itg_mail_token:itg_node_title]', $node_title, $body);
+      $body_data = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $get_title);
+      $content .= $body_data;
+      $content .= '</body>';
+      $content .= '</html>';
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $content);
+      $params = array(
+          'body' => $mail_content,
+          'subject' => $subject,
+      );
+      $to_mail = $var->mail;
+      $mail = drupal_mail('itg_task_allocation', 'exp_task_rem', $to_mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      if ($mail['result']) {
+        return TRUE;
+      } else {
+        $error_msg = 'Failed to send the email!';
+        watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
+        return FALSE;
+      }
     }
   }
 }

@@ -101,7 +101,7 @@ function itg_fia_xml_node_feed($query) {
             $get_script .= '<figure><img src="' . $imgs_path . '" /></figure>';
           }
         }
-        $full_script_slider[$gall_position] = '<figure class="op-slideshow">' . $get_script . '</figure>';
+        $full_script_slider[$gall_position][] = '<figure class="op-slideshow">' . $get_script . '</figure>';
       }
     }
     
@@ -204,23 +204,40 @@ function itg_fia_xml_node_feed($query) {
     // Creating Slideshow for facebook instant article data
     if (!empty($imgs_path)) {
       $slider_keys = array_keys($full_script_slider);
-      foreach ($slider_keys as $xx => $sliderkey) {
-        $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey];
-      }
-    }
-    
-    // Creating Social Embed Code for facebook instant article data
-    if (!empty($embed_code_data)) {
-      if (in_array($embed_code_pos, $bk)) {
-        $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] .
-          '<figure class="op-interactive">' . $embed_code_data . '</figure>';
-      } else {
-        $last_postion = end($bk);
-        $body_vals[$last_postion] = $body_vals[$last_postion] .
-          '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+      foreach ($slider_keys as $k => $sliderkey) {
+        $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey][0];
       }
     }
 
+    // Creating Social Embed Code for facebook instant article data
+    if (!empty($embed_code_data)) {
+      if (in_array($embed_code_pos, $bk)) {
+        $eic = substr_count($embed_code_data, '<iframe');
+        if ($eic > 1) {
+          $newiframe = str_replace(" />", "></iframe>", $embed_code_data);
+          $fie = explode("<iframe", $newiframe);
+          unset($fie[0]);
+          foreach ($fie as $fie_key => $fie_val) {
+            $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . '<figure class="op-interactive"><iframe ' . $fie_val . '</figure>';
+          }
+        } else {
+          $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+        }
+      } else {
+        $last_postion = end($bk);
+        $eic = substr_count($embed_code_data, '<iframe');
+        if ($eic > 1) {
+          $newiframe = str_replace(" />", "></iframe>", $embed_code_data);
+          $fie = explode("<iframe", $newiframe);
+          unset($fie[0]);
+          foreach ($fie as $fie_key => $fie_val) {
+            $body_vals[$last_postion] = $body_vals[$last_postion] . '<figure class="op-interactive"><iframe ' . $fie_val . '</figure>';
+          }
+        } else {
+          $body_vals[$last_postion] = $body_vals[$last_postion] . '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+        }
+      }
+    }
     $node_body = implode("<p>", $body_vals);
     $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);

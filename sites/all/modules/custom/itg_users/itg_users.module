@@ -6,6 +6,7 @@
  * Provides Users functionality and customizations.
  */
 module_load_include('inc', 'itg_users', 'includes/itg_users');
+module_load_include('inc', 'itg_users', 'includes/itg_user_role_and_permission');
 /**
  * Implement hook_user_presave
  * @param array $edit
@@ -58,6 +59,14 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
   }
 
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
+
+        
+    $role_permission = itg_user_role_and_permissions();
+    $form_prefix = !empty($form['#prefix']) ? $form['#prefix'] : '';
+    $form['#prefix'] = $form_prefix.'<div class="get-tokens">Click 
+      <a href="javascript:;" data-id="mail-templates-token">here</a> to know about all existing user roles and their permissions  </div>'.$role_permission;
+
+    
     $form['#attributes']['autocomplete'] = 'off';
     $form['account']['mail']['#attributes']['autocomplete'] = 'off';
     $form['account']['pass']['#prefix'] = '<input type="password" name="custompass" style="display:none">';
@@ -406,6 +415,7 @@ function itg_users_role_delegation($role_array) {
   }
   else if (array_key_exists(SITE_ADMIN, $user->roles)) {
     unset($role_array[3]);
+    unset($role_array[FRONT_USER]);
     $user_array = $role_array;
   }
   else if (array_key_exists(ADMINISTRATOR, $user->roles)) {
@@ -572,14 +582,12 @@ function itg_users_user_update(&$edit, $account, $category) {
         $mail_lname = str_replace('[itg_mail_token:itg_account_user_lname]', $lname, $mail_fname);
         $mail_contents = $mail_lname;
       }
-//      $mail_content = itg_users_get_mail_content($role, 'Password Changed');
       $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
       $params = array(
         'body' => $mail_content,
         'subject' => $mail_subject,
       );
       $to = $account->mail;
-//      $to = 'gourav.walia@kelltontech.com';
 
       $mail = drupal_mail('itg_users', 'send_password_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
@@ -614,7 +622,6 @@ function itg_users_user_update(&$edit, $account, $category) {
       );
 
       $to = $account->mail;
-//      $to = 'gourav.walia@kelltontech.com';
       $mail = drupal_mail('itg_users', 'send_role_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
       if ($mail['result']) {
         return TRUE;
@@ -644,7 +651,6 @@ function itg_users_user_update(&$edit, $account, $category) {
     );
 
     $to = $account->mail;
-//    $to = 'gourav.walia@kelltontech.com';
     $mail = drupal_mail('itg_users', 'send_subscribe_mail_to_user', $to, language_default(), $params, 'no-reply@indiatoday.com', TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -671,7 +677,7 @@ function itg_users_user_update(&$edit, $account, $category) {
  */
 function itg_users_user_insert(&$edit, $account, $category) {
   /** do not delete code */
-  global $base_url;
+  global $base_url, $user;
   $mail = $account->mail;
   $uid = $account->uid;
   $roles = $account->roles;

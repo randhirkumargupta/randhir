@@ -232,10 +232,11 @@ function save_cron_details_of_syndication($node) {
         $time_rule = $field_collection_item[$val['value']]->field_syndication_time[LANGUAGE_NONE][0]['value'];
         $day = $field_collection_item[$val['value']]->field_syndication_set_day[LANGUAGE_NONE][0]['value'];
         $dt = $field_collection_item[$val['value']]->field_syndication_set_day_month[LANGUAGE_NONE][0]['value'];
+        $min = $field_collection_item[$val['value']]->field_minute[LANGUAGE_NONE][0]['value'];
         $num_of_feeds = $field_collection_item[$val['value']]->field_syndication_num_of_feeds[LANGUAGE_NONE][0]['value'];
         $magazine_name = $field_collection_item[$val['value']]->field_syndication_magazine[LANGUAGE_NONE][0]['value'];
         //get cron time
-        $cron_time_array = get_cron_time($frequency, $time_rule, $day, $dt);
+        $cron_time_array = get_cron_time($frequency, $time_rule, $day, $dt , $min);
         $previous_time = $cron_time_array['previous_time'];
         $scheduler_time = $cron_time_array['scheduler_time'];
 
@@ -247,6 +248,7 @@ function save_cron_details_of_syndication($node) {
             'frequency' => $frequency,
             'time_rule' => $time_rule,
             'day_name' => $day,
+            'min' => $min,
             'date' => $dt,
             'num_of_feeds' => $num_of_feeds,
             'magazine_name' => $magazine_name,
@@ -303,6 +305,10 @@ function update_cron_time_after_feed_generate($data, $id, $cron_time) {
     } else if($data['frequency'] == 'Monthly') {
         $scheduler_time = strtotime('+1 month', $cron_time);
         $previous_time = $cron_time;
+    } else if($data['frequency'] == 'Minute') {
+        $min = $data['min'];
+        $scheduler_time = strtotime("+$min minutes", $cron_time);
+        $previous_time = $cron_time;
     }
 
     db_update('itg_cron_time_scheduler')
@@ -322,8 +328,7 @@ function update_cron_time_after_feed_generate($data, $id, $cron_time) {
  * @param string $dt
  * @return array time
  */
-function get_cron_time($frequency, $time_rule, $day = NULL, $dt = NULL) {
-
+function get_cron_time($frequency, $time_rule, $day = NULL, $dt = NULL , $min = NULL) {
     if($frequency == 'Daily') {
         $current_date = time();
         $cron_time = date('m/d/Y', $current_date) . ' ' . $time_rule;
@@ -341,10 +346,12 @@ function get_cron_time($frequency, $time_rule, $day = NULL, $dt = NULL) {
         $cron_time = $cron_time_month . '/' . $dt . '/' . $cron_time_year . ' ' . $time_rule;
         $scheduler_time = strtotime($cron_time);
         $previous_time = strtotime($cron_time . ' -1 month');
+    } else if($frequency == 'Minute') {
+        $scheduler_time = strtotime(date("Y/m/d h:m:i", strtotime("+$min minutes")));
+        $previous_time = strtotime(date("Y/m/d h:m:i", strtotime("-$min minutes")));
     }
 
     $date_array = array('scheduler_time' => $scheduler_time, 'previous_time' => $previous_time);
-
     return $date_array;
 }
 

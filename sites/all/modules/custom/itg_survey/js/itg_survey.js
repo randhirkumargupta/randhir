@@ -183,15 +183,25 @@
           hideOption.show();
         }
       
-      $('.form-field-name-field-survey-add-questions').on('change', '.form-select', function(){
-        var selvalue = $(this).val();
-        var hide_option = $(this).closest('tr').find('.field-name-field-survey-answer-option-2');
-        if(selvalue == "rating"){
-          hide_option.hide();
-        }
-        else{
-          hide_option.show();
-        }
+//      $('.form-field-name-field-survey-add-questions').on('change', '.form-select', function(){
+//        var selvalue = $(this).val();
+//        var hide_option = $(this).closest('tr').find('.field-name-field-survey-answer-option-2');
+//        if(selvalue == "rating"){
+//          hide_option.hide();
+//        }
+//        else {
+//          hide_option.show();
+//        }
+//      });
+
+      // Hiding add more options from answer choices if Answer Type is Rating
+      $("#edit-field-survey-add-questions-und-0-field-survey-answer-type-und").on('change', function(){
+          var selvalue = $(this).val();
+          if(selvalue == "rating") {
+            $('#edit-field-survey-add-questions-und-0-field-survey-answer-option-2').hide();
+          } else {
+            $('#edit-field-survey-add-questions-und-0-field-survey-answer-option-2').show();
+          }
       });
       
     }

@@ -762,6 +762,7 @@ function itg_syndication_get_rules_detaiils() {
       $field_syndication_mode = $entity[$id]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
       $field_syndication_time = $entity[$id]->field_syndication_time[LANGUAGE_NONE][0]['value'];
       $field_syndication_num_of_feeds = $entity[$id]->field_syndication_num_of_feeds[LANGUAGE_NONE][0]['value'];
+      $min = $entity[$id]->field_minute[LANGUAGE_NONE][0]['value'];
       $field_syndication_frequency = $entity[$id]->field_syndication_frequency[LANGUAGE_NONE][0]['value'];
       $magazine_load = node_load($entity[$id]->field_syndication_magazine[LANGUAGE_NONE][0]['value']);
       $field_syndication_magazine = $magazine_load->title;
@@ -773,6 +774,7 @@ function itg_syndication_get_rules_detaiils() {
         'feed_time' => $field_syndication_time,
         'feed_num' => $field_syndication_num_of_feeds,
         'feed_frequency' => $field_syndication_frequency,
+        'feed_frequency_value' => $min,
         'feed_magazine' => $field_syndication_magazine,
         'node_obj' => $node_data,
       );

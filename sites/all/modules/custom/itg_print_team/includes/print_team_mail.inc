@@ -21,26 +21,29 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
       $body_datas = str_replace('[itg_mail_token:itg_node_title]', $node->title, $body_data);
       $mail_content = str_replace('Click here for more details', 'Click ' . $idea_link . ' for more details', $body_datas);
     }
-//    $mail_content = itg_print_team_approval_mail_content($node);
     $user_emails = itg_print_team_get_approval_user_emails('approval_users');
     $user_email_ids = implode(",", $user_emails);
-//    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   elseif($source == 'update') {
     $mail_content = itg_print_team_status_mail_content($node);
     $user = user_load($node->uid);
-    $user_email_id[] = $user->mail;
+    if ($user->status == 1) {
+      $user_email_id[] = $user->mail;
+    }
+    
     $rid = array(PHOTO_COORDINATOR, PHOTO_HEAD, DESIGN_HEAD, COPY_DESK, DESIGNER, PHOTOGRAPHER);
     $user_email = get_email_by_roll($rid);
-    $all_mails = array_merge($user_email_id, $user_email);
+    if (!empty($user_email_id) && is_array($user_email_id)) {
+      $all_mails = array_merge($user_email_id, $user_email);
+    } else {
+      $all_mails = $user_email;
+    }
     $user_email_ids = implode(",", $all_mails);
-//    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
   else {
     $mail_content = itg_print_team_association_mail_content($node, $op_type);
     $user_emails = itg_print_team_get_approval_user_emails('association_users');
     $user_email_ids = implode(",", $user_emails);
-//    $user_email_ids = 'gourav.walia@kelltontech.com';
   }
 
   // Array of email subject and body 
@@ -49,8 +52,6 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
     'body' => $mail_contents,
     'subject' => $mail_subject,
   );
-  // Send mail function
-  // for code email
   $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;
