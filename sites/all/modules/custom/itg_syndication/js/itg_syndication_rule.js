@@ -29,13 +29,29 @@ function syndication_rules_show_filed(number_of_tr) {
     for (i = 0; i <= number_of_tr; i++) {
         var field_syndication_frequency = jQuery('input[name="field_syndication_rule_details[und][' + i + '][field_syndication_frequency][und]"]:checked').val();
         var field_content_type = jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-content-type-und\"]').val();
-
         if (field_syndication_frequency == "Weekly") {
             jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-und\"]').parent().parent().show();
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-minute\"]').hide();
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day\"]').show();
+        }
+        
+        if (field_syndication_frequency == "Daily") {
+               jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-minute\"]').hide();
         }
 
         if (field_syndication_frequency == "Monthly") {
             jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-month\"]').parent().parent().show();
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-minute\"]').hide();
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-month\"]').show();
+        }
+        
+        if (field_syndication_frequency == "Minute") {
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-minute\"]').show();
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-time-und-0-value\"]').val("11:00");
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-month\"]').hide();
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day\"]').hide();
+            jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-time\"]').hide();
+            
         }
         
         if (field_content_type == "magazine") {
@@ -57,4 +73,7 @@ jQuery(document).ajaxSuccess(function () {
 jQuery(document).ready(function () {
     var number_of_tr = jQuery('.field-multiple-table tr').length;
     syndication_rules_show_filed(number_of_tr);
+    jQuery('[id^=\"field-syndication-rule-details-values\"]').on("click" , function() {
+        syndication_rules_show_filed(number_of_tr);
+    });
 });

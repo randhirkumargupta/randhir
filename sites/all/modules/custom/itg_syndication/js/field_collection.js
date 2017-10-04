@@ -21,6 +21,10 @@
                 if (field_syndication_frequency == "Monthly") {
                     jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-month\"]').parent().parent().show();
                 }
+                
+                if (field_syndication_frequency == "Minute") {
+                    jQuery('[id^=\"edit-field-syndication-rule-details-und-' + i + '-field-syndication-set-day-minute\"]').parent().parent().show();
+                }
 
             }
         }

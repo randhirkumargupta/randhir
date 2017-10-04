@@ -30,6 +30,7 @@ function itg_blog_views_pre_render(&$view) {
     }
     if ($view->name == "blogs_management") {
         $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content_blog .= l(t('Post new Blog'), 'node/add/blog', array('query' => array('destination' => arg(0))));
         $view->attachment_before = $header_content_blog;
     }
     // Add create link on header of the ugc tab view.
@@ -81,14 +82,6 @@ function itg_blog_form_alter(&$form, &$form_state, $form_id) {
 function itg_blog_form_custom_callback($form, &$form_state) {
 // code insert image in custom table
     $node_id = $form_state['node']->nid;
-    if ($form_state['input']['original_image_fids'] != "") {
-        $image_ids = explode('#', $form_state['input']['original_image_fids']);
-
-        if (!empty($image_ids)) {
-            if (function_exists('itg_photogallery_insert_image_data'))
-                itg_photogallery_insert_image_data($image_ids, $node_id);
-        }
-    }
     $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
     $node_type = ucfirst($form_state['node']->type);
     $node_type = str_replace("_", " ", $node_type);

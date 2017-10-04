@@ -171,9 +171,9 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
         $ans_media = "";
         if ($answer_option == 'Video') {
           foreach ($ans_option_arr[$ans_option['value']]->field_quiz_answer_video[LANGUAGE_NONE] as $final_ans_op) {
-            if (function_exists('itg_videogallery_get_videoid_new')) {
-          $video_ids = itg_videogallery_get_videoid_new($final_ans_op['fid']);
-           $ans_media = '<iframe width="130" height="100" frameborder="0" scrolling="no"
+            if (function_exists('itg_videogallery_get_videoid_new_private')) {
+          $video_ids = itg_videogallery_get_videoid_new_private($final_ans_op['fid']);
+           $ans_media = '<iframe width="100%" height="127" frameborder="0" scrolling="no"
                                                 src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
                                                 allowfullscreen></iframe>';
         }
@@ -189,8 +189,8 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
 
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Video') {
          $videid = $question_detail[$question_arr['value']]->field_question_video[LANGUAGE_NONE][0]['fid'];
-         if (function_exists('itg_videogallery_get_videoid_new')) {
-          $video_ids = itg_videogallery_get_videoid_new($videid);
+         if (function_exists('itg_videogallery_get_videoid_new_private')) {
+          $video_ids = itg_videogallery_get_videoid_new_private($videid);
            $question_media = '<div class="quiz-video"><iframe width="740" height="447" frameborder="0" scrolling="no"
                                                 src="https://www.dailymotion.com/embed/video/'.$video_ids.'?autoplay=0&ui-logo=1&mute=1&ui-start-screen-info"
                                                 allowfullscreen></iframe></div>';

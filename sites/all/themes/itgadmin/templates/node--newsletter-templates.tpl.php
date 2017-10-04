@@ -50,10 +50,10 @@
         <div class="field-label"><?php print t('Template Name:'); ?></div>
         <div class="field-items"><?php echo ucwords($node->title); ?></div>
       </div>
-      <div class="field">
-        <div class="field-label"><?php print t('Subject Line:'); ?></div>
-        <div class="field-items"><?php echo ucwords($node->field_news_title[LANGUAGE_NONE][0]['value']); ?></div>
-      </div>
+<!--      <div class="field">
+        <div class="field-label"><?php // print t('Subject Line:'); ?></div>
+        <div class="field-items"><?php // echo ucwords($node->field_news_title[LANGUAGE_NONE][0]['value']); ?></div>
+      </div>-->
        <div class="field">
         <div class="field-label"><?php print t('Header Headline:'); ?></div>
         <div class="field-items"><?php echo ucwords($node->field_newst_header_headline[LANGUAGE_NONE][0]['value']); ?></div>
@@ -71,7 +71,7 @@
       <?php } ?>
        <div class="field">
         <div class="field-label"><?php print t('Banner:'); ?></div>
-        <div class="field-items"><img src="<?php echo str_replace('public://', $base_url.'/sites/default/files/', $banner ); ?>" alt="" width="100" height="100"/></div>
+        <div class="field-items"><img src="<?php echo file_create_url($banner); //str_replace('public://', $base_url.'/sites/default/files/', $banner ); ?>" alt="" width="100" height="100"/></div>
       </div>
       <?php if($node->body[LANGUAGE_NONE][0]['value']) { ?>
       <div class="field">
