@@ -16,7 +16,7 @@ $videoids = "";
 if (function_exists('get_video_in_fieldcollection_by_nid')) {
   $videoids = get_video_in_fieldcollection_by_nid($nid);
 
-  //p($videoids);
+  // p($videoids);
 }
 $argum = base64_encode(arg(1));
 $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -88,6 +88,12 @@ $uri = base64_encode($actual_link);
                               $autoplay = 1;
                             }
                             ?> <?php
+                            if ($video_value->field_video_thumbnail_fid != "" && $video_value->solr_video_thumb == "") {
+                              $image_data_thumb = file_load($video_value->field_video_thumbnail_fid);
+                              if (!empty($image_data_thumb)) {
+                                $video_value->solr_video_thumb = file_create_url($image_data_thumb->uri);
+                              }
+                            }
                             if ($video_value->solr_video_thumb != "") {
                               $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
                             }
@@ -107,13 +113,13 @@ $uri = base64_encode($actual_link);
                             ?>
 
                             <?php if ($keys == 0) { ?>
-                      <div style="display:none" class="loading-video"><div class="spinner">
-                                        <div class="bounce1"></div>
-                                        <div class="bounce2"></div>
-                                        <div class="bounce3"></div>
-                                    </div></div>
+                              <div style="display:none" class="loading-video"><div class="spinner">
+                                      <div class="bounce1"></div>
+                                      <div class="bounce2"></div>
+                                      <div class="bounce3"></div>
+                                  </div></div>
                               <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
-                                      
+
                                       <div class="iframe-video1 video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
@@ -193,10 +199,10 @@ $uri = base64_encode($actual_link);
                               <?php if ($keys == 0) { ?>
                                 <div class="iframe-video">
                                     <div style="display:none" class="loading-video"><div class="spinner">
-                                        <div class="bounce1"></div>
-                                        <div class="bounce2"></div>
-                                        <div class="bounce3"></div>
-                                    </div></div>
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div></div>
                                     <div  id="migrate_video_palyer_container">
                                         <?php print theme('migrated_video_player', array("url" => $video_value->field_migrated_video_url_value, 'nid' => $nid, 'image' => $image_url)); ?>
                                     </div> 
