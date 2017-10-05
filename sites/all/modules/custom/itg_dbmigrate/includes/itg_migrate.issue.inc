@@ -136,8 +136,9 @@ class ItgIssueMigration extends XMLMigration {
   public function complete($entity, $row) {
   print $row->xml->id.' ';
     if(!empty($row->xml->weburl)){
-      $year = date('Y', (string) $row->xml->issue_date);
-      $new_redirect = 'calendar/'.$entity->nid.'/'.$year.'/magazine.html';
+      $year = date('d-m-Y', (string) $row->xml->issue_date);
+      //$new_redirect = 'calendar/'.$entity->nid.'/'.$year.'/magazine.html';
+      $new_redirect = 'magazine/'.$year;
       $source = explode('indiatoday.intoday.in/', (string) $row->xml->weburl);
       $redirect = new StdClass();
       redirect_object_prepare($redirect);

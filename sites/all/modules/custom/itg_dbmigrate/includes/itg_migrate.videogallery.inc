@@ -603,7 +603,14 @@ class ItgVideogalleryMigration extends XMLMigration {
           $field_collection_item->save(TRUE);
           $node->field_video_upload[LANGUAGE_NONE][$key]['value'] = $field_collection_item->item_id;
           if ($key == 0) {
-            $node->field_video_duration[LANGUAGE_NONE][0]['value'] = (string) $value->part_duration;
+            $duration = "";
+            if ((string) $value->part_duration < 3600) {
+              $duration = gmdate("i:s", (string) $value->part_duration);
+            }
+            else {
+              $duration = gmdate("H:i:s", (string) $value->part_duration);
+            }
+            $node->field_video_duration[LANGUAGE_NONE][0]['value'] = $duration;
           }
           $key++;
         }
