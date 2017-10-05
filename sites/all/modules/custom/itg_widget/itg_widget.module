@@ -1816,6 +1816,9 @@ function _get_content_type_for_widget($widget_name) {
     case 'most_popular_widget':
       $content_type = array('story','breaking_news');
       break;
+    case 'home_page_feature_widget':
+      $content_type = array('story','videogallery', 'photogallery', 'breaking_news');
+      break;
   }
   return $content_type;
 }

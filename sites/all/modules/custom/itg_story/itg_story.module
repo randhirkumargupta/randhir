@@ -185,9 +185,6 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
     case 'story_node_form':
       global $base_url, $user;
 
-      // unset None value
-      unset($form['field_story_assign_to_widget'][LANGUAGE_NONE]['#options']['_none']);
-
       // code for body field config
       $form['body']['#states'] = array(
         'required' => array(
@@ -294,7 +291,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
     // for story assign to widget
     if (function_exists('itg_story_assign_to_widget')) {
        if(is_array($story_widget) && count($story_widget) > 0) {		
-          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign, 'story');
       }
     }
   }
@@ -312,7 +309,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
       // for story assign to widget
       if (function_exists('itg_story_assign_to_widget')) {
         if(is_array($story_widget) && count($story_widget) > 0) {
-          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign);
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign, 'story');
         }
       }
 
@@ -377,9 +374,8 @@ function itg_story_form_custom_callback($form, &$form_state) {
  * @param array $story_widget
  * @param int $cat_id
  */
-function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previous_story_assign) {
+function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previous_story_assign, $content_type) {
   if (!empty($story_widget)) {
-    $content_type = 'story';
     foreach ($story_widget as $widget_val) {
       $result[$widget_val] = $widget_val;
       $result_exist = itg_story_widget_data_exist($nid, 'top_stories_widget');
@@ -489,15 +485,19 @@ function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previou
         elseif ($row['value'] == 'big_story') {
           $widget_value = 'big_story_format_widget';
         }
-
-        try {
-          db_delete('itg_widget_order')
+        elseif ($row['value'] == 'dont_miss') {
+          $widget_value = 'dont_miss_content_widget';
+        }
+        if ($widget_value) {
+          try {
+            db_delete('itg_widget_order')
               ->condition('widget', $widget_value)
               ->condition('nid', $nid)
               ->execute();
-        }
-        catch (Exception $ex) {
-          drupal_set_message($ex->getMessage());
+          }
+          catch (Exception $ex) {
+            drupal_set_message($ex->getMessage());
+          }
         }
       }
     }
@@ -1589,6 +1589,8 @@ function itg_story_mega_review_node_embed($node){
   $output .=  '</script>';
   $output .= '<link type="text/css" rel="Stylesheet" href="/'.$theme_path.'/css/styles-new.css" />';
   $output .= '<link type="text/css" rel="Stylesheet" href="/'.$theme_path.'/css/font-awesome.css" />';
+  $output .= '<link type="text/css" rel="Stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab" />';
+  $output .= '<link type="text/css" rel="Stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />';
   $output .= '<script type="text/javascript" src="/'.drupal_get_path('module', 'itg_flag').'/js/itg_flag.js" ></script>';
   $output .= '<div class="embed-mega-review">';
   $output .= '<a href="'.$node_alias.'" target="_blank"><h1>'.$node->title.'</h1></a>';

@@ -88,8 +88,9 @@ class ItgCricketliveblog extends XMLMigration {
         $this->addFieldMapping('field_story_extra_small_image', 'extrasmallimage')->xpath('extrasmallimage');
         $this->addFieldMapping('created', 'createddate')->xpath('createddate');
         $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
-//        $this->addFieldMapping('pathauto', 'sefurl')->xpath(t('metatags/sefurl'));
         $this->addFieldMapping('pathauto')->defaultValue(0);
+        $this->addFieldMapping('path', 'sefurl')->xpath(t('metatags/sefurl'));
+        
         $this->addFieldMapping('metatag_title', 'pagetitle')->xpath('metatags/pagetitle');
         $this->addFieldMapping('metatag_description', 'metadescription')->xpath('metatags/metadescription');
         $this->addFieldMapping('metatag_keywords', 'keywords')->xpath('metatags/keywords');
@@ -153,6 +154,12 @@ class ItgCricketliveblog extends XMLMigration {
         if (!empty($row->tag_new)) {
             $node->field_story_itg_tags[LANGUAGE_NONE] = $row->tag_new;
         }
+        
+        $node->field_story_category[LANGUAGE_NONE][0]['tid'] = '1208919'; // Section
+        $node->field_story_category[LANGUAGE_NONE][1]['tid'] = '1208920'; // Category
+        $node->field_primary_category[LANGUAGE_NONE][0]['value'] = '1208920'; // primary category
+        $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
+        
         if (!empty($row->match_id_new)) {
             $node->field_match_id[LANGUAGE_NONE][0]['value'] = $row->match_id_new;
         }
@@ -162,15 +169,23 @@ class ItgCricketliveblog extends XMLMigration {
 
     public function complete($entity, $row) {
         $node = node_load($entity->nid);
-        
         $key = 0;
-        if(isset($row->xml->metatags->sefurl)){
-             $path = array(
-               'source' => "node/{$node->nid}",
-               'alias' => $row->xml->metatags->sefurl
-             );
-             path_save($path);
-         }
+//        $published_date = date('Y-m-d', $node->created);
+//        $key = 0;
+//        $pathdata .= 'live-blog/cricket-live-blog/story';
+//        // Add node title.
+//        $pathdata .= '/' . trim($row->xml->metatags->sefurl);
+//        // Add node id.
+//        $pathdata .= '-' . $node->nid;
+//        // Add workbanch date.
+//        $pathdata .= '-' . $published_date;
+//        if(isset($row->xml->metatags->sefurl)){
+//             $path = array(
+//               'source' => "node/{$node->nid}",
+//               'alias' => $pathdata
+//             );
+//             path_save($path);
+//         }
         
          if(isset($row->xml->redirection_url)){
              $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
@@ -187,6 +202,7 @@ class ItgCricketliveblog extends XMLMigration {
        
         
         if (isset($row->xml->content_details->details)) {
+            
             foreach ($row->xml->content_details->details as $value) {
                 
                 $content_title = (string) $value->content_title;
@@ -214,6 +230,8 @@ class ItgCricketliveblog extends XMLMigration {
             }
             field_attach_update('node', $node);
         }
+        
+        ordering_set_of_content($node, $row->xml->id);
     }
 
 }

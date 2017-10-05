@@ -5919,6 +5919,13 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   width: 170px;
 }
 
+/* rateing iframe css*/
+
+.embed-mega-review a{ text-decoration:none; font-family:"Roboto Slab", sans-serif }
+.embed-mega-review .field-name-field-story-movie-description .field-item{font-family:"Roboto Slab", sans-serif;padding: 10px 0;     font-size: 0.9375rem;
+    line-height: 27px;}
+
+
 @media all and (min-width: 768px) {
   .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
     display: inline-block !important;
@@ -6389,11 +6396,11 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
   article.node-mega-review-critic .movie-review-wrapper .movie-trailer,
   article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
-    width: 100%;
+    width: 50%;
   }
 
   article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
-    height: auto;
+    height: 170px;
   }
 
   article.node-mega-review-critic .rating-and-social-wrapper .social-info {
@@ -7142,4 +7149,15 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .page-personalization #block-formblock-ugc .node-ugc-form .form-field-type-image .form-type-managed-file div.image-widget-data .form-submit[value="Remove"] {
     right: 3px;
   }
+}
+
+
+/* budget predictor Css */
+.budget-predictor-msg{ font-size:16px; font-weight: normal; margin-bottom: 20px; }
+@media only screen and (max-width:767px){
+  .budget-predictor-table th.title{    font-size: 14px;padding: 10px 5px; min-width: 70px;max-width: 70px; }
+  .budget-predictor-table td{padding: 0;}
+  #main-container-budget #sortable1 li, #main-container-budget #sortable2 li, #main-container-budget #sortable3 li, #main-container-budget #sortable4 li{
+    width: 40px;height: 40px;margin: 10px 5px;}
+   .budget-predictor-table .cheaper-deaper-action button{padding: 3px 9px 1px;font-size: 13px;}
 }

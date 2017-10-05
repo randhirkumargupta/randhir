@@ -233,6 +233,7 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#value'] = 'Publish';
     $form['#after_build'][] = 'itg_breaking_news_after_build';
     $form['actions']['submit']['#submit'][] = 'itg_breaking_news_form_custom_callback';
+    $form['#validate'][] = 'itg_breaking_news_form_custom_validate';
   }
 }
 
@@ -241,7 +242,19 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_breaking_news_form_custom_callback($form, &$form_state) {
-  
+  if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+    $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+  }
+  else {
+    $previous_story_assign = '';
+  }
+  $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+  // for breaking new assign to widget
+  if (function_exists('itg_story_assign_to_widget')) {
+    if(is_array($story_widget) && count($story_widget) > 0) {
+      itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign, 'breaking_news');
+    }
+  }
   // REDIRECTION FOR APPLY BUTTON
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
@@ -265,6 +278,14 @@ function itg_breaking_news_form_custom_callback($form, &$form_state) {
   $ctype = $form_state['node']->field_type[LANGUAGE_NONE][0]['value'];
   drupal_set_message(t($ctype . ' <b>' . $breaking_news_title . '</b> has been ' . $op . '.'));
   $_GET['destination'] = $_REQUEST['destination'];
+}
+
+function itg_breaking_news_form_custom_validate($form, &$form_state){
+    if($form_state['values']['field_type']['und'][0]['value'] == 'Cricket Live Blog'){
+        if(empty($form_state['values']['field_primary_category']['und'][0]['value'])){
+            form_set_error('field_primary_category', t("Primary category Field is required!"));
+        }
+    }
 }
 
 /**
@@ -445,14 +466,7 @@ function itg_breaking_news_views_query_alter(&$view, &$query) {
 function cricket_live_blog_content_callback() {
     $match_id = $_POST['match_id'];
     if (isset($match_id)) {
-        $commentary_id = $_POST['commentary_id'];
-        if (isset($_POST['is_load_new']) && $_POST['is_load_new'] == 'true') {
-            $html = get_cricket_live_blog_data($match_id, NULL, NULL, $commentary_id, TRUE);
-        }
-        else {
-            $html = get_cricket_live_blog_data($match_id, NULL, 20, $commentary_id, FALSE);
-        }
-
+        $html = get_cricket_live_blog_data($match_id);
         print json_encode(array('status' => 'success', 'data' => $html));
     }
     else {
@@ -465,123 +479,35 @@ function cricket_live_blog_content_callback() {
  * Function for Live cricket blog 
  * 
  */
-function get_cricket_live_blog_data($match_id, $start, $total, $commentary_id, $latest = FALSE) {
+function get_cricket_live_blog_data($match_id, $limit = NULL) {
 
     if (!empty($match_id)) {
         $api_base_url = 'http://feeds.intoday.in/xml_it/commentary/';
         $match_commentary = file_get_contents($api_base_url . $match_id . '_ballbyball.json');
         if ($match_commentary) {
+            $commentary = array();
             $match_commentary = json_decode($match_commentary);
-            if (is_array($match_commentary->Match->Innings)) {
-                $innings = array_reverse($match_commentary->Match->Innings, TRUE);
+            $innings = array_reverse($match_commentary->Match->Innings, TRUE);
+            if (!is_array($innings)) {
+                $innings = array($innings);
             }
-            else {
-                $innings = $match_commentary->Match->Innings;
-            }
-            if (is_array($innings)) {
-                $ball_by_ball = array_reverse($innings[0]->Node, TRUE);
-            }
-            else {
-                $ball_by_ball = array_reverse($innings->Node, TRUE);
-            }
-
-            if ($commentary_id != NULL && $latest) {
-                $exit = FALSE;
-                $flag = FALSE;
-                $commentary = array();
-                $counter = 0;
-                $current_inn = $_POST['current_inn'];
-                $_ball_by_ball = $match_commentary->Match->Innings;
-                if (!is_array($_ball_by_ball)) {
-                    $_ball_by_ball = array($_ball_by_ball);
+            foreach ($innings as $key => $value) {
+                $nodes = array();
+                if(!empty($value->Node)){
+                  $nodes = array_reverse($value->Node);
                 }
-                foreach ($_ball_by_ball as $inn_key => $inn_value) {
-                    $commentary_nodes = ($inn_value->Node);
-                    foreach ($commentary_nodes as $node_key => $node_value) {
-                        if ($flag) {
-                            $node_value->innings = $inn_key;
-                            $commentary[] = $node_value;
-                            $counter++;
-                        }
-                        if ($node_value->Id == $commentary_id && $inn_key == $current_inn) {
-                            $flag = TRUE;
-                        }
-                        if ($counter == 20) {
-                            $exit = TRUE;
-                            break;
-                        }
-                    }
-                    if ($exit) {
-                        break;
-                    }
-                }
-                $commentary = array_reverse($commentary, TRUE);
-            }
-            else if ($commentary_id != NULL && !$latest) {
-                $counter = 1;
-                $total = (!empty($total) ? $total : 20);
-                $flag = FALSE;
-                $commentary = array();
-                $exit = FALSE;
-                $current_inn = $_POST['current_inn'];
-                if (!is_array($innings)) {
-                    $innings = array($innings);
-                }
-
-                foreach ($innings as $key => $inning) {
-                    $_commentaries = array_reverse($inning->Node, TRUE);
-                    foreach ($_commentaries as $_commentary) {
-                        if ($flag) {
-                            $_commentary->innings = $key;
-                            $commentary[] = $_commentary;
-                            $counter++;
-                        }
-                        if ($_commentary->Id == $commentary_id && $key == $current_inn) {
-                            $flag = TRUE;
-                        }
-                        if ($counter == ($total + 1)) {
-                            $exit = TRUE;
-                            break;
-                        }
-                    }
-                    if ($exit) {
-                        break;
-                    }
+                foreach($nodes as $node_key => $node_value){
+                    $commentary[] = $node_value;
                 }
             }
-            else {
-                if (!is_array($innings)) {
-                    $innings = array($innings);
-                }
-                $current_inn_ = key($innings);
-                if($innings[$current_inn_]->Node != NULL){
-                    $ball_by_ball = array_reverse($innings[$current_inn_]->Node, TRUE);
-                }else{
-                    $current_inn_ = 0;
-                    $ball_by_ball = array_reverse($innings[$current_inn_]->Node, TRUE);
-                }
-                
-                foreach ($ball_by_ball as $key => $value) {
-                    $ball_by_ball[$key]->innings = $current_inn_;
-                }
-                $commentary = array_slice($ball_by_ball, 0, $total);
+            if(!empty($limit)){
+              $commentary = array_slice($commentary, 0, $limit);
             }
             return theme('cricket_live_blog_commentary', array('data' => $commentary));
         }
     }
 }
 
-/**
- * Function for Live cricket blog 
- * 
- */
-function get_cricket_live_blog_data_db($ids) {
-    if (!empty($ids) && count($ids) > 0) {
-        if ($match_commentary) {
-            return theme('cricket_live_blog_commentary', array('data' => json_decode($match_commentary)));
-        }
-    }
-}
 
 /**
  * Menu callback for load commentary from db
