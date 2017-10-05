@@ -97,7 +97,7 @@ function generateVideoCategoryList($tid, $pageno) {
     // select node belong from current term id or child term id
     
     // filter user data list
-    $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350, 1148);
+    $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350, 1148, 2573);
 
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
@@ -354,7 +354,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $range_min = 0;
   }
   // filter user data list
-  $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350, 1148);
+  $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350, 1148, 2573);
   $order_by = 'ASC';
   $type = "videogallery";
   $photo_list_array = array();
