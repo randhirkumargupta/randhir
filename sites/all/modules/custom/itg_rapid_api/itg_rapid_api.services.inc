@@ -2305,8 +2305,7 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-            // for static other device end
-        
+        // for static other device end
         // reset_password custom resource declaration.....
         'reset_password' => array(
             'operations' => array(
@@ -2379,7 +2378,6 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-        
         // authtoken_verification custom resource declaration.....
         'authtoken_verification' => array(
             'operations' => array(
@@ -2435,8 +2433,6 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
-        
-        
     );
 
     return $api;
@@ -3299,10 +3295,13 @@ function itg_rapid_api_homePage($token) {
 }
 
 function itg_rapid_api_testing($token) {
-    // code for check POST method only start   
-    $user = user_load_by_name("rakesh1234@mailinator.com");
-    p($user);
-    die();
+
+// code for check POST method only start   
+    $user = user_load(1989);
+    echo "<pre>";
+    print_r($user);
+    echo "<pre>";
+    exit();
     $req_mth_flag = checkReqMethod();
     if ($req_mth_flag == 0 || $req_mth_flag == "0") {
         $data['status_code'] = "0";
@@ -3310,11 +3309,7 @@ function itg_rapid_api_testing($token) {
         return $data;
     }
     // code for check POST method only end 
-    $user = user_load(1989);
-    echo "<pre>";
-    print_r($user);
-    echo "<pre>";
-    exit();
+
     $get_token = variable_get('mobile_service_token');
 
     $str = '{
@@ -3362,7 +3357,7 @@ function itg_rapid_api_login_request($token) {
     }
     //check user is block
     $user_data = user_load_by_name($data['user_id']);
-    if($user_data->status == 0){
+    if ($user_data->status == 0) {
         $account_err['status_code'] = "3";
         $account_err['status_message'] = "Accont Locked";
         return $account_err;
@@ -3444,7 +3439,7 @@ function itg_rapid_api_login_request($token) {
         watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
         //return services_error(t('Wrong username or password.'), 401);
         $account = array();
-        $account['status_code'] = "3";
+        $account['status_code'] = "2";
         $account['status_message'] = "Wrong username or password.";
         return $account;
     }
@@ -3668,14 +3663,13 @@ function itg_rapid_api_forgot_password($token) {
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
-    
-     // login raw input validation
+    // login raw input validation
     $validation_error = array();
     $validation_error_str = "";
     $validation_error = forgotPasswordValidation_rapid($params);
     $validation_error_str = implode(", ", $validation_error['custom_error']);
     $error_code_flag = 0;
-    if($error_code_flag = "This phone number/ email is not registered"){
+    if ($error_code_flag = "This phone number/ email is not registered") {
         $error_code_flag = 2;
     }
     if ($validation_error_str) {
@@ -3683,8 +3677,8 @@ function itg_rapid_api_forgot_password($token) {
         $account_err['status_message'] = "$validation_error_str";
         return $account_err;
     }
-    
-     // check valid user_id
+
+    // check valid user_id
     $rand = rand();
     $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
@@ -3695,19 +3689,19 @@ function itg_rapid_api_forgot_password($token) {
         $account_err['status_message'] = "This phone number/ email is not registered";
         return $account_err;
     }
-    
+
     $url = SSO_SERVER_URL . "/appapi/forgot_password";
     //itg_otp_device_info_insert_rapid($params);
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
-    
+
     // get_otp & insert into itg_otp_device_info
     $rand = rand();
     $url = SSO_SERVER_URL . "/appapi/get_otp/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj_otp = json_decode($result);
     //p($result_obj_otp);die();
-    if($result_obj_otp[0]->otp){
+    if ($result_obj_otp[0]->otp) {
         itg_otp_device_info_insert_rapid($params, $result_obj_otp[0]->otp, 1, $result_obj_otp[0]->created);
     }
     cleanToken_Rapid($params);
@@ -3735,7 +3729,7 @@ function itg_rapid_api_otp_verification($token) {
     $validation_error = forgotPasswordValidation_rapid($params);
     $validation_error_str = implode(", ", $validation_error['custom_error']);
     $error_code_flag = 0;
-    if($error_code_flag = "This phone number/ email is not registered"){
+    if ($error_code_flag = "This phone number/ email is not registered") {
         $error_code_flag = 2;
     }
     if ($validation_error_str) {
@@ -3818,10 +3812,10 @@ function itg_rapid_api_resend_otp($token, $user_id) {
 function itg_rapid_api_change_password($token) {
     $HTTP_RAW_POST_DATA;
     $method = "POST";
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE); 
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $params['old_pass'] = trim($params['old_password']);
     $params['new_pass'] = trim($params['new_password']);
-    
+
     // raw input validation
     $validation_error = array();
     $validation_error_str = "";
@@ -3832,14 +3826,40 @@ function itg_rapid_api_change_password($token) {
         $account_err['status_message'] = "$validation_error_str";
         return $account_err;
     }
+    
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+        $result = callAPI("GET", $url, $params);
+        $result_obj = json_decode($result);
+        //echo "hi";p($result_obj->uid);die();
+        if (!$result_obj->uid) {
+            $account_err['status_code'] = "0";
+            $account_err['status_message'] = "Invalid User_ID";
+            return $account_err;
+        }
+    
     $url = SSO_SERVER_URL . "/appapi/change_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
     if ($result_obj->uid) {
         $local_obj = localChangePass($params, $result_obj->uid);
-        itg_reset_pass_info_insert_rapid($params,2);
+        itg_reset_pass_info_insert_rapid($params, 2);
         cleanToken_Rapid($params);
+        $user = user_load_by_name($params('user_id'));
+
+        watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+
+        $original_session_state = drupal_save_session();
+        drupal_save_session(TRUE);
+
+        // Destroy the current session.
+        module_invoke_all('user_logout', $user);
+        session_destroy();
+
+        // Load the anonymous user.
+        $user = drupal_anonymous_user();
+
+        drupal_save_session($original_session_state);
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
     } else {
@@ -4953,14 +4973,41 @@ function itg_rapid_api_reset_password($token) {
         $account_err['status_message'] = "$validation_error_str";
         return $account_err;
     }
+    
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+        $result = callAPI("GET", $url, $params);
+        $result_obj = json_decode($result);
+        //echo "hi";p($result_obj->uid);die();
+        if (!$result_obj->uid) {
+            $account_err['status_code'] = "0";
+            $account_err['status_message'] = "Invalid User_ID";
+            return $account_err;
+        }
+    
     $url = SSO_SERVER_URL . "/appapi/reset_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
     if ($result_obj->uid) {
         $local_obj = localResetPass($params, $result_obj->uid);
-        itg_reset_pass_info_insert_rapid($params,1);
+        itg_reset_pass_info_insert_rapid($params, 1);
         cleanToken_Rapid($params);
+        $user = user_load_by_name($params('user_id'));
+
+        watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+
+        $original_session_state = drupal_save_session();
+        drupal_save_session(TRUE);
+
+        // Destroy the current session.
+        module_invoke_all('user_logout', $user);
+        session_destroy();
+
+        // Load the anonymous user.
+        $user = drupal_anonymous_user();
+
+        drupal_save_session($original_session_state);
+
         $data['status_code'] = "1";
         $data['status_message'] = "password has been changed";
     } else {
@@ -5003,8 +5050,7 @@ function itg_rapid_api_authtoken_verification($token) {
         $account_err['status_code'] = "0";
         $account_err['status_message'] = "$validation_error_str";
         return $account_err;
-    }
-    else{
+    } else {
         $rand = rand();
         $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
         $result = callAPI("GET", $url, $params);
@@ -5018,13 +5064,11 @@ function itg_rapid_api_authtoken_verification($token) {
         if (!drupal_valid_token($token, 'services')) {
             $res['status_code'] = "2";
             $res['status_message'] = "invalid token";
-        }
-        else{
+        } else {
             $res['status_code'] = "1";
             $res['status_message'] = "";
         }
     }
-    
+
     return $res;
-    
 }
