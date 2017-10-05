@@ -790,7 +790,7 @@ function itg_poll_get_past_data($nid) {
     return '<ul class="past-poll">' . $outputnew . '</ul>';
   }
   else {
-    return '<p class="get-result">You will get the result after poll compilation</p>';
+    return '<p class="get-result">You will get the result after poll completion</p>';
   }
 }
 
