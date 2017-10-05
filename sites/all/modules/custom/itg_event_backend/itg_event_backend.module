@@ -697,22 +697,6 @@ function itg_event_backend_after_build($form, &$form_state) {
       ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
     ),
   );
-  $form['field_story_new_title']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
-    ),
-  );
-  $form['field_news_title']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
-    ),
-  );
-  $form['field_tab_description']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
-    ),
-  );
-
   $form['field_no_of_tickets']['#states'] = array(
     'visible' => array(
       array(':input[name="field_event_type[und]"]' => array('value' => 'paid')),

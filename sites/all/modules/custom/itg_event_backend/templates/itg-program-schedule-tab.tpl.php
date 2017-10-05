@@ -139,8 +139,8 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $tab_url_value = $_GET['tab'];
   $tab_value = itg_event_backend_tab_title($host_node, $tab_url_value);
   
-  print $tab_value[$tab_url_value]['tab_title'];
-  print $tab_value[$tab_url_value]['tab_description'];
+  print '<h2 style="color:'.$font_color.'">'.$tab_value[$tab_url_value]['tab_title'].'</h2>';
+  print '<p style="color:'. $content_font_color.'">'.$tab_value[$tab_url_value]['tab_description'].'</p>';
   
 }
  }
