@@ -967,7 +967,7 @@ function itg_event_backend_block_view($delta = '') {
       $block['content'] = theme('itg_event_backend_tab_form_display_block', array('data' => ''));
       break;
     case 'event_header_menu':
-      $block['content'] = theme('event_header_menu', array('data' => ''));
+      $block['content'] = theme('event_header_menu', array('data' => itg_event_backend_get_event_node('node')));
       break;
     case 'event_header_adds':
       $block['content'] = theme('event_header_adds', array('data' => ''));
@@ -2422,4 +2422,51 @@ function itg_event_backend_tokens($type, $tokens, array $data = array(), array $
         }
     }
     return $replacements;
+}
+
+/**
+ * Implement function for Tab Title
+ */
+function itg_event_backend_tab_title($node, $tab_sef) {
+
+   foreach ($node->field_event_tabs['und'] as $imagecollection){
+    $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    if($tab_sef == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_name'] = $value->field_tab_name[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_title'] = $value->field_tab_title[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_sef_url_radio'] = $value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_sef'] = $value->field_tab_sef[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_url'] = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_description'] = $value->field_tabs_description[LANGUAGE_NONE][0]['value'];
+    }
+  }
+  return $tab_value;
+}
+
+/**
+ * Implement function for Tab menu
+ */
+function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font) {
+    $path_alias = drupal_get_path_alias('node/'.  $node->nid);
+    $flash_back_link = '<ul>';
+    $flash_back_link_top = '';
+    $key = 0;
+   foreach ($node->field_event_tabs['und'] as $imagecollection){
+    $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
+      if($key == 0) {
+        $flash_back_link_top = l('...', $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$tab_menu_font")));
+      }
+      $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$menu_font_color"))) . '</li>';
+    }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
+       if($key == 0) {
+         $flash_back_link_top =  l('...', $value->field_tab_url[LANGUAGE_NONE][0]['value'], array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$tab_menu_font")));
+       }
+      $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $value->field_tab_url[LANGUAGE_NONE][0]['value'], array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
+    }
+    $key++;
+  }
+  $flash_back_link .= '</ul>';
+  $all_link = array('tab_top_menu' => $flash_back_link_top, 'tab_menu' => $flash_back_link);
+  return $all_link;
 }

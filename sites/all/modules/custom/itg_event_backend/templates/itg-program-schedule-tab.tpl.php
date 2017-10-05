@@ -27,7 +27,8 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   if ($actual_host_name) {
     $baseurl = $actual_host_name . '/';
   }
-
+  // Tab title
+  if(empty($_GET['tab'])) {
   if ($current_date < $event_close_date) {
     if (!empty($data)) {
       ksort($data);
@@ -133,5 +134,14 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
         $output = render($render_array);
         print $output;
       }
-    }
+   
+}else {
+  $tab_url_value = $_GET['tab'];
+  $tab_value = itg_event_backend_tab_title($host_node, $tab_url_value);
+  
+  print $tab_value[$tab_url_value]['tab_title'];
+  print $tab_value[$tab_url_value]['tab_description'];
+  
+}
+ }
     ?>
