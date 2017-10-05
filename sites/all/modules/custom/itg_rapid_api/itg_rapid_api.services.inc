@@ -4998,6 +4998,16 @@ function itg_rapid_api_authtoken_verification($token) {
         return $account_err;
     }
     else{
+        $rand = rand();
+        $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+        $result = callAPI("GET", $url, $params);
+        $result_obj = json_decode($result);
+        //echo "hi";p($result_obj->uid);die();
+        if (!$result_obj->uid) {
+            $account_err['status_code'] = "0";
+            $account_err['status_message'] = "Invalid User_ID";
+            return $account_err;
+        }
         if (!drupal_valid_token($token, 'services')) {
             $res['status_code'] = "2";
             $res['status_message'] = "invalid token";
