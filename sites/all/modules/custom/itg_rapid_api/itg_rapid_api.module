@@ -1226,7 +1226,7 @@ function forgotPasswordValidation_rapid($params) {
             if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
                 $error['user_id'] = t("Invalid email/phone number");
             } else if (empty($get_user_check_email)) {
-                $error['user_id'] = t("This phone number/ email is not registered");
+               // $error['user_id'] = t("This phone number/ email is not registered");
             } else {
                 //$error['user_id'] = t("");
             }
@@ -1234,7 +1234,7 @@ function forgotPasswordValidation_rapid($params) {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("Invalid email/phone number");
             } else if (empty($get_user_check_mobile)) {
-                $error['user_id'] = t("This phone number/ email is not registered");
+                //$error['user_id'] = t("This phone number/ email is not registered");
             } else {
                 //$error['user_id'] = t('');
             }
