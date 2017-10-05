@@ -3791,6 +3791,17 @@ function itg_rapid_api_resend_otp($token, $user_id) {
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     //$params = $_POST;
+     $rand = rand();
+    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+        $result = callAPI("GET", $url, $params);
+        $result_obj = json_decode($result);
+        //echo "hi";p($result_obj->uid);die();
+        if (!$result_obj->uid) {
+            $account_err['status_code'] = "0";
+            $account_err['status_message'] = "Invalid User_ID";
+            return $account_err;
+        }
+    
     $url = SSO_SERVER_URL . "/appapi/resend_otp";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
