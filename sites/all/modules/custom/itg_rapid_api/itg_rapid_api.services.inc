@@ -3477,8 +3477,13 @@ function itg_rapid_api_signup($token) {
     $result = callAPI("GET", $url, $data);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
+    $error_code_flag = 0;
+        //if ($validation_error_str = "User already exists") {
+         if (strpos($validation_error_str,'User already exists') !== false) {
+            $error_code_flag = 2;
+        }
     if ($validation_error_str) {
-        $account_err['status_code'] = "0";
+        $account_err['status_code'] = "$error_code_flag";
         $account_err['status_message'] = "$validation_error_str";
         return $account_err;
     } elseif ($result_obj->uid) {
@@ -3669,7 +3674,8 @@ function itg_rapid_api_forgot_password($token) {
     $validation_error = forgotPasswordValidation_rapid($params);
     $validation_error_str = implode(", ", $validation_error['custom_error']);
     $error_code_flag = 0;
-    if ($error_code_flag = "This phone number/ email is not registered") {
+    //if ($error_code_flag = "This phone number/ email is not registered") {
+    if (strpos($validation_error_str,'This phone number/ email is not registered') !== false) {
         $error_code_flag = 2;
     }
     if ($validation_error_str) {
@@ -3729,7 +3735,8 @@ function itg_rapid_api_otp_verification($token) {
     $validation_error = forgotPasswordValidation_rapid($params);
     $validation_error_str = implode(", ", $validation_error['custom_error']);
     $error_code_flag = 0;
-    if ($error_code_flag = "This phone number/ email is not registered") {
+    //if ($error_code_flag = "This phone number/ email is not registered") {
+    if (strpos($validation_error_str,'This phone number/ email is not registered') !== false) {
         $error_code_flag = 2;
     }
     if ($validation_error_str) {
