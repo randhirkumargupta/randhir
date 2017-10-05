@@ -3863,7 +3863,8 @@ function itg_rapid_api_change_password($token) {
         $local_obj = localChangePass($params, $result_obj->uid);
         itg_reset_pass_info_insert_rapid($params, 2);
         cleanToken_Rapid($params);
-        $user = user_load_by_name($params('user_id'));
+        $user_name = $params['user_id'];
+        $user = user_load_by_name($user_name);;
 
         watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
 
