@@ -927,7 +927,7 @@ function signupValidation_rapid($params) {
             } else if (!empty($get_user_check_email)) {
                 $error['user_id'] = t("User already exists with " . $user_id . "");
             } else if (!empty($get_user_check_domain)) {
-                $error['user_id'] = t("User already exists with " . $user_id . "");
+                //$error['user_id'] = t("User already exists with " . $user_id . "");
             } else {
                 //$error['user_id'] = t("");
             }
@@ -935,7 +935,7 @@ function signupValidation_rapid($params) {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("Invalid Mobile Number");
             } else if (!empty($get_user_check_mobile)) {
-                $error['user_id'] = t("User already exists with " . $user_id . "");
+                //$error['user_id'] = t("User already exists with " . $user_id . "");
             } else {
                 //$error['user_id'] = t('');
             }
@@ -1116,7 +1116,7 @@ function loginValidation_rapid($params) {
             if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
                 $error['user_id'] = t("Invalid Email");
             } else if (empty($get_user_check_email)) {
-                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else {
                 //$error['user_id'] = t("");
             }
@@ -1124,7 +1124,7 @@ function loginValidation_rapid($params) {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("Invalid Mobile Number");
             } else if (empty($get_user_check_mobile)) {
-                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else {
                 //$error['user_id'] = t('');
             }
@@ -1323,7 +1323,7 @@ function validateResetPass($params) {
             if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
                 $error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else if (empty($get_user_check_email)) {
-                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+               // $error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else {
                 //$error['user_id'] = t("");
             }
@@ -1331,7 +1331,7 @@ function validateResetPass($params) {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else if (empty($get_user_check_mobile)) {
-                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else {
                 //$error['user_id'] = t('');
             }
@@ -1453,7 +1453,7 @@ function validateChangePass($params) {
             if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
                 $error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else if (empty($get_user_check_email)) {
-                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else {
                 //$error['user_id'] = t("");
             }
@@ -1461,7 +1461,7 @@ function validateChangePass($params) {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else if (empty($get_user_check_mobile)) {
-                $error['user_id'] = t("A User is not registered with this " . $user_id . "");
+                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else {
                 //$error['user_id'] = t('');
             }
