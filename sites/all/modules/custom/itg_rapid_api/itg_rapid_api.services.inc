@@ -3360,6 +3360,13 @@ function itg_rapid_api_login_request($token) {
         $account_err['status_message'] = "$validation_error_str";
         return $account_err;
     }
+    //check user is block
+    $user_data = user_load_by_name($data['user_id']);
+    if($user_data->status == 0){
+        $account_err['status_code'] = "3";
+        $account_err['status_message'] = "Accont Locked";
+        return $account_err;
+    }
     $account = array();
     $url = SSO_SERVER_URL . "/appapi/login_request";
     $result = callAPI($method, $url, $params);
