@@ -23,6 +23,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_bsb_photo.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['bsb/videos'] = array(
+    'page callback' => 'itg_bsb_video_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_bsb_video.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 

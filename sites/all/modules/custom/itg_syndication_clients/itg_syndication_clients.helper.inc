@@ -44,3 +44,10 @@ function getbsb_client_photo_array(){
   );
   return $photo;
 }
+
+function getbsb_client_video_array(){
+  $video = array(
+    '1206552' => 'video_latest.xml',
+  );
+  return $video;
+}
