@@ -70,7 +70,7 @@ $argum = base64_encode(arg(1));
                 }
                 ?>
                 <?php if($user->uid > 0): ?>
-                    <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i></a></li>
+                    <li><a class="def-cur-pointer" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
                 <?php else: ?>
                     <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                 <?php endif; ?>
@@ -183,7 +183,7 @@ $argum = base64_encode(arg(1));
                         </div>
                     </li>
                     <?php if($user->uid > 0): ?>
-                        <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                        <li class="mhide"><a class="def-cur-pointer" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
                     <?php else: ?>
                         <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                     <?php endif; ?>
