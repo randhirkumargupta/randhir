@@ -361,7 +361,6 @@ function itg_video_check_exist_file($filename) {
   $query->orderBy('fm.fid', 'DESC');
   $query->range(0, 1);
   $results = $query->execute()->fetchAll();
-
   if (!isset($results[0])) {
     $res = 'public://' . LOCAL_VIDEO_DIR . '/' . date('Ym') . '/' . $filename;
     return $res;
@@ -2554,7 +2553,8 @@ function itg_videogallery_dailymotion_video_play() {
    $height = $_POST['height'];
   }
   $data_video_info = itg_videogallery_get_all_video_info_by_video_id($_POST['videoid']);
-  if($data_video_info[0]->video_type == 'INTERNAL') {
+  
+  if($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
     $data_from_solr = itg_videogallery_getsolr_data_for_internal_video($_POST['videoid']);
 
   print  theme('itg_videogallery_internal_video_play', array('video_data' => $data_from_solr[0], 'width'=>$width , 'height'=>400 ));
@@ -3657,12 +3657,14 @@ function get_video_in_fieldcollection_by_nid($nid) {
   $query->leftJoin('dailymotion_response_details', 'drd', 'drd.fid = fvu.field_videogallery_video_upload_fid');
   $query->Join('itg_solr_video_info', 'isvi', 'isvi.fid = fvu.field_videogallery_video_upload_fid');
   $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
-// $query->leftJoin('field_data_field_videogallery_description', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
+  $query->leftJoin('field_data_field_include_ads', 'ads_inc', 'ads_inc.entity_id = fvu.entity_id');
+  $query->leftJoin('field_data_field_video_thumbnail', 'thumb_img', 'thumb_img.entity_id = fvu.entity_id');
   $query->leftJoin('field_data_field_video_title', 'desc_inc', 'desc_inc.entity_id = fvu.entity_id');
   $query->fields('drd', array('video_id', 'dailymotion_thumb_url', 'is_draft'));
   $query->fields('isvi', array('fid', 'solr_video_id', 'solr_video_thumb', 'video_embedded_url', 'property','video_repo_type','video_xml_data'));
   $query->fields('up_video', array('entity_id'));
   $query->fields('ads_inc', array('field_include_ads_value'));
+  $query->fields('thumb_img', array('field_video_thumbnail_fid' , 'field_video_thumbnail_alt', 'field_video_thumbnail_title'));
   $query->fields('desc_inc', array('field_video_title_value'));
   $query->condition('up_video.entity_id', $nid);
   $query->orderBy('up_video.delta', 'ASC');
@@ -3936,26 +3938,26 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'videogallery' && !in_array($view_mode, $os)) {
 // Category view on landing page
     drupal_add_js("jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').live('click', function(){
-var section_id = jQuery(this).val();
-jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li a').removeClass('active');
-jQuery('#edit-field-story-category-tid').val(section_id); 
-jQuery('#edit-field-story-category-tid').trigger('change');
-jQuery(this).find('a').addClass('active');
-});", array('type' => 'inline', 'scope' => 'footer'));
+   var section_id = jQuery(this).val();
+   jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li a').removeClass('active');
+   jQuery('#edit-field-story-category-tid').val(section_id); 
+   jQuery('#edit-field-story-category-tid').trigger('change');
+   jQuery(this).find('a').addClass('active');
+  });", array('type' => 'inline', 'scope' => 'footer'));
     if (!empty($_GET['category'])) {
 
       drupal_add_js("jQuery(document).ready(function(){
-jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
-if(jQuery(this).val() == " . $_GET['category'] . "){
-jQuery(this).find('a').addClass('active');
-}
-});
-});", array('type' => 'inline', 'scope' => 'footer'));
-    }
+        jQuery('#block-itg-videogallery-videogallery-menu-video-block ul li').each(function() {
+        if(jQuery(this).val() == " . $_GET['category'] . "){
+         jQuery(this).find('a').addClass('active');
+         }
+       });
+       });", array('type' => 'inline', 'scope' => 'footer'));
+     }
       // This is for hiding a specific RHS1 block for video
         drupal_add_js("jQuery(document).ready(function(){
-jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-rhs1-300x250']\").remove();
-});", array('type' => 'inline', 'scope' => 'footer')); 
+           jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-rhs1-300x250']\").remove();
+           });", array('type' => 'inline', 'scope' => 'footer')); 
 
 // Views render on video template
     if (itg_videogallery_get_categoryparent(@$_GET['category']) == TRUE && empty($_GET['sid'])) {

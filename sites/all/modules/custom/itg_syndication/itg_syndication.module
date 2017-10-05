@@ -724,6 +724,17 @@ function replace_charcters_for_syndication_file($original_string) {
 }
 
 /**
+ * Implements hook_js_alter().
+ */
+function itg_syndication_js_alter(&$js) {
+  foreach ($js as $path => &$values) {
+    $arg = arg();
+    if ($arg[0] == 'node' && $arg[1] == 'add' && $arg[2] == 'syndication-feed-from-pattern') {
+      $values['preprocess'] = FALSE;
+    }
+  }
+}
+/**
  * {@inheritdocs}
  */
 function itg_syndication_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {

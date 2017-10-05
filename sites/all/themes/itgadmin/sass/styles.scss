@@ -2353,7 +2353,8 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-video-anchor-values"],
 [id*="field-story-technology-values"],
 [id*="field-photo-story-values"],
-[id*="field-story-listicle-values"] {
+[id*="field-story-listicle-values"],
+[id*="field-event-tabs-values"] {
     @extend .itg-add-another-item;
 }
 
@@ -3560,7 +3561,8 @@ div.node {
 [id*="field-program-schedule-values"],
 [id*="field-event-media-values"],
 [id*="field-event-highlights-values"],
-[id*="field-associate-sponsors-values"] {
+[id*="field-associate-sponsors-values"],
+[id*="field-event-tabs-values"] {
     tbody {
         overflow: visible;
         float: left;
@@ -7990,7 +7992,7 @@ div.node {
 #itg_video_content {
     .video-local {
         @extend .fleft;
-        width: 33%;
+        width: 50%;
         cursor: pointer;
         height: 50px;
         background-color: #e4e3e5;
@@ -8008,7 +8010,7 @@ div.node {
     .internal-video-tab {
         text-align: center;
         @extend .fleft;
-        width: 33%;
+        width: 50%;
         cursor: pointer;
         height: 50px;
         background-color: #e4e3e5;
@@ -14066,7 +14068,7 @@ fieldset#edit-xmlsitemap {
                 width: 5%;
             }
             &.search-title-wraper {
-                width: 30%;
+                width: 19%;
             }
             &.search-date-wraper {
                 width: 15%;
@@ -14094,7 +14096,7 @@ fieldset#edit-xmlsitemap {
                     width: 5%;
                 }
                 &.show_video_title {
-                    width: 30%;
+                    width: 19%;
                 }
                 &.file_size_date_time {
                     width: 15%;
@@ -14280,8 +14282,18 @@ div.ctools-modal-content {
             margin-top: 10px;
             margin-bottom: 20px;
         }
-        .form-type-managed-file {
-            padding-left: 0;
-        }
     }
+    .form-type-managed-file {
+        padding-left: 0;
+    }
+}
+
+[id*="redirect-list-form"] {
+    fieldset {
+        border: 1px solid #ccc;
+    }
+}
+
+[id*="field-event-tabs-values"]>tbody>tr>td {
+    width: 800px;
 }

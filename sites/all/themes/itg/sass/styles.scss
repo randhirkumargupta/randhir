@@ -1861,7 +1861,7 @@ footer {
 .section-ordering {
     a {
         &:not(.video-icon) {
-            display: inline;
+            display: inline-block;
         }
         &.pic-no-icon {
             display: block;
@@ -6372,6 +6372,8 @@ section.sidebar {
         }
     }
     .auto-tips-n-tricks {
+        height: 402px;
+        overflow: auto;
         ul {
             list-style: none;
             li {
@@ -9760,7 +9762,7 @@ section.sidebar {
         #map-state {
             position: absolute;
             right: 0;
-            top: -16px;
+            top: -40px;
             height: 20px;
             line-height: 20px;
             padding: 0;
@@ -9781,6 +9783,12 @@ section.sidebar {
                 left: 50%;
                 margin-top: -48px;
                 margin-left: -110px;
+            }
+        }
+        .map-box {
+            h4 {
+                min-height: 28px;
+                padding-right: 150px;
             }
         }
     }
@@ -13463,8 +13471,17 @@ span.see-picture {
     height: calc(100% - 22px);
 }
 
-.top_stories_ordering .widget-title {
-    padding: 5px 7px 1px 7px;
+.top_stories_ordering,
+.special-top-news {
+    .widget-title {
+        padding: 5px 7px 1px 7px;
+    }
+}
+
+.special-top-news {
+    .itg-listing-wrapper {
+        height: 100%;
+    }
 }
 
 .data-holder {
