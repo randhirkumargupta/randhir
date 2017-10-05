@@ -61,7 +61,7 @@ function generatePhotoCategoryList($tid, $pageno) {
     global $base_url;
     $node_count = "";
     // filter user data list
-    $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350);
+    $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350, 1148);
     $output = "";
     $data = array();
     $tid_list = array();
