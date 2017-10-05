@@ -2380,6 +2380,62 @@ function itg_rapid_api_resource() {
             ),
         ),
         
+        // authtoken_verification custom resource declaration.....
+        'authtoken_verification' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Retrieves authtoken_verification schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_authtoken_verification',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'user mobile or email',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'auth_token',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'auth token',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_id',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'device_type',
+                            'optional' => TRUE,
+                            //'source' => 'data',
+                            //'source' => array('data' => 'user_id'),
+                            'source' => array('data'),
+                            'description' => 'device type',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        
         
     );
 
@@ -4908,4 +4964,50 @@ function itg_rapid_api_reset_password($token) {
 
 
     return $data;
+}
+
+// login serveice function start from here
+
+/**
+ * [itg_rapid_api_authtoken_verification] definition.
+ * Returns the information about a itg_rapid_api_authtoken_verification.
+ * @param $nid
+ *   The nid of the housing_scheme node.
+ * @return array
+ * 	The node processed information array.
+ */
+function itg_rapid_api_authtoken_verification($token) {
+
+    $HTTP_RAW_POST_DATA;
+    //$params = $_POST;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    //p($params);die();
+
+    $token = $params['auth_token'];
+    $data = array();
+    $method = "POST";
+    $res = array();
+    // login raw input validation
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = authtokenValidation_rapid($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+    if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    }
+    else{
+        if (!drupal_valid_token($token, 'services')) {
+            $res['status_code'] = "2";
+            $res['status_message'] = "invalid token";
+        }
+        else{
+            $res['status_code'] = "1";
+            $res['status_message'] = "";
+        }
+    }
+    
+    return $res;
+    
 }
