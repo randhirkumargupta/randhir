@@ -353,7 +353,7 @@ function itg_report_api_user_list() {
     }
    
     $redis_key = "itg_report_api_user_list_" . $suffix;
-    echo $redis_key; die();
+    //echo $redis_key; die();
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
