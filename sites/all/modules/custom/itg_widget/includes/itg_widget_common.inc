@@ -527,7 +527,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         unset($form['shs_term_node_tid_depth']['#options']);
         $form['shs_term_node_tid_depth']['#options'] = $op;
     }
-    if ($form_id == 'taxonomy_form_term' && $form['#term']['vocabulary_machine_name'] == 'state_managment') {
+    if ($form_state['input']['op'] != 'Delete' && $form_id == 'taxonomy_form_term' && $form['#term']['vocabulary_machine_name'] == 'state_managment') {
 
         $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
         // override taxonomy.
