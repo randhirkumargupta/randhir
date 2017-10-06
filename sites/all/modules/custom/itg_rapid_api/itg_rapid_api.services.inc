@@ -3607,6 +3607,10 @@ elseif ($login_type == 1){
 elseif ($login_type == 2){
     $method = "POST";
 
+        
+        
+        
+        
         $data = array();
         $password = rand(0, 9999);
         //$_GET['password'] = $password;
@@ -3619,10 +3623,15 @@ elseif ($login_type == 2){
         $data['app_id'] = $uname_fi;
         $data['issued_at'] = $uname_fi;
         $data['expires_at'] = $uname_fi;
+        
+    
+        
+        $rand = rand();
         $account = array();
-        $url = SSO_SERVER_URL."/appapi/twtlogin/it";
-        $result = callAPI($method, $url, $data);
-        $result_obj = json_decode($result);
+        $url = SSO_SERVER_URL."/appapi/twtlogin/".$rand;
+        //echo $url; die();
+        $result = callAPI("GET", $url, $data);
+        
         $uid = 0;
         $uid = $result_obj->user->uid;
         $auth_token = $result_obj->token;

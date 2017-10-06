@@ -102,7 +102,7 @@ function userloginTWT($uname, $uidget, $password){
  */
 
 function userSignupTWT($uname_social, $uid_social, $password){
-    $mail = $uid_social."@twitter.com";
+    $mail = $uid_social;
     $username = $uname_social;    
     $first_name = "";
     $last_name = "";
