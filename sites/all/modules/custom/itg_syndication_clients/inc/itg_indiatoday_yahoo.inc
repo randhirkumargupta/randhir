@@ -64,6 +64,7 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $metatags = get_node_metatags_by_nid($value['nid']);
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
+      $kicker_text = html_entity_decode($value['field_story_kicker_text_value']);
       $keywords = '';
       if ($metatags) {
         $keywords = $metatags['keywords']['value'];
@@ -74,7 +75,7 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $xml .= '<category>' . $section_name . '></category>';
       $xml .= '<pubDate>' . $publish_date . '></pubDate>';
       $xml .= '<guid>' . $guid . '</guid>';
-      $xml .= '<description><![CDATA[' . $value['field_story_kicker_text_value'] . ']]></description>';
+      $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';
       $xml .= '<keywords><![CDATA[' . $keywords . ']]></keywords>';
       $xml .= '<media:content url="' . $medium_img["imag_url"] . '" type="image/' . $medium_img["mime_type"] . '"/>';

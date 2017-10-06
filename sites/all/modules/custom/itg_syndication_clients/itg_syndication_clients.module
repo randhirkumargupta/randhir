@@ -210,3 +210,20 @@ function get_node_metatags_by_nid($nid = NULL) {
 function genrate_uniqui_guid(){
   return md5(uniqid(rand(), true));
 }
+
+function get_byline_name_by_nid($nid = NULL){
+  $byline = '';
+  if (!empty($nid)) {
+    
+    $query = db_select('itg_multi_byline_info', 'bi');
+    $query->leftJoin('node', 'n', 'bi.byline_id=n.nid');
+    $query->fields('n', array('title'));
+    $query->condition('bi.publish_status', 1, '=');
+    $query->condition('bi.nid', $nid, '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) > 0) {
+      $byline = $result[0]['title'];
+    }
+  }
+  return $byline;
+}

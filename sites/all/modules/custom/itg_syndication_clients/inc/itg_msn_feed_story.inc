@@ -29,14 +29,15 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $query->fields('dbody', array('body_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
     
+
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');
     $query->orderBy('n.created', 'DESC');
-    $query->groupBy('n.nid')->range(0, 30);
+    $query->groupBy('n.nid')->range(0, 20);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
+    
     $xml = genrate_msn_feed_story_syndication_xml($result, $section_name);
-    $xml_path = 'sites/default/files/bsb/';
+    $xml_path = 'sites/default/files/feeds/msnfeeds/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -48,85 +49,69 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
-    $xml = '<feed>';
-    $xml .= '<provider>indiatoday</provider>';
-    $xml .= '<language>en-US</language>';
-    $xml .= '<news>';
+    $current_date = date("Ymd\THisP");
+    $xml = '<NewsML>';
+    $xml .= '<NewsEnvelope>';
+    $xml .= '<DateAndTime>' . $current_date . '</DateAndTime>';
+    $xml .= '</NewsEnvelope>';
     foreach ($result as $key => $value) {
-      $publish_date = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
-      $modify_date = date("Y-m-d\TH:i:sP", $value['changed']);
-      $place = get_content_city($value['nid']);
-      $keyword = get_content_tags($value['nid'], TRUE);
-      $byline = get_byline_by_nid($value['nid']);
+      
+      $nid = $value['nid'];
+      $publish_date = date("Ymd\THisP", $value['created']);
+      $modify_date = date("Ymd\THisP", $value['changed']);
+      $reporter = get_byline_name_by_nid($nid);
+      if(empty($reporter)){
+        $reporter = 'IndiaToday.in';
+      }      
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
-      $xml .= '<item>';
-      $xml .= '<id>' . $value['nid'] . '</id>';
-      $xml .= '<short_title><![CDATA[' . $value['field_story_short_headline_value'] . ']]></short_title>';
-      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
-      $xml .= '<publish_date><![CDATA[' . $publish_date . ']]></publish_date>';
-      $xml .= '<last_update><![CDATA[' . $modify_date . ']]></last_update>';
-      $xml .= '<place><![CDATA[' . $place . ']]></place>';
-      $xml .= '<keywords><![CDATA[' . $keyword . ']]></keywords>';
-      $xml .= '<url><![CDATA[' . $url . ']]></url>';
-      $xml .= '<category><![CDATA[' . $category . ']]></category>';
-      $xml .= '<synopsis><![CDATA[' . $value["field_story_kicker_text_value"] . ']]></synopsis>';
-      $xml .= '<detail><![CDATA[' . $body . ']]></detail>';
 
-      //xml tag for images
-      $xml .= '<multimedia>';
-      $xml .= '<images>';
-      if (!empty($value['field_story_small_image_fid'])) {
-        $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
-        $xml .= '<image>';
-        $xml .= '<caption><![CDATA[' . $small_img["caption"] . ']]></caption>';
-        $xml .= '<items>';
-        $xml .= '<item>';
-        $xml .= '<width>170</width>';
-        $xml .= '<height>127</height>';
-        $xml .= '<url><![CDATA[' . $small_img["imag_url"] . ']]></url>';
-        $xml .= '<format>' . $small_img["mime_type"] . '></format>';
-        $xml .= '</item>';
-        $xml .= '</items>';
-        $xml .= '</image>';
-      }
-      if (!empty($value['field_story_medium_image_fid'])) {
-        $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
-        $xml .= '<image>';
-        $xml .= '<caption><![CDATA[' . $medium_img["caption"] . ']]></caption>';
-        $xml .= '<items>';
-        $xml .= '<item>';
-        $xml .= '<width>300</width>';
-        $xml .= '<height>350</height>';
-        $xml .= '<url><![CDATA[' . $medium_img["imag_url"] . ']]></url>';
-        $xml .= '<format>' . $medium_img["mime_type"] . '></format>';
-        $xml .= '</item>';
-        $xml .= '</items>';
-        $xml .= '</image>';
-      }
-      $xml .= '</images>';
-      $xml .= '<videos></videos>'; // Need to discuss with Santosh Sir
-      $xml .= '<audios></audios>'; // Need to discuss with Santosh Sir
-      $xml .= '</multimedia>';
-
-      // Code for related content
-      $related_nodes = get_releted_content_by_nid($value['nid']);
-      if (count($related_nodes) > 0) {
-        $xml .= '<related>';
-        foreach ($related_nodes as $value) {
-          $related_node_url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
-          $xml .= '<item>';
-          $xml .= '<id>' . $value["nid"] . '</id>';
-          $xml .= '<title><![CDATA[' . $value["title"] . ']]></title>';
-          $xml .= '<url><![CDATA[' . $related_node_url . ']]></url>';
-          $xml .= '</item>';
-        }
-        $xml .= '</related>';
-      }
-      $xml .= '</item>';
+      $kicker_text = html_entity_decode($value['field_story_kicker_text_value']);
+      $year = date('Y');
+      $xml .= '<NewsItem LinkType="normal">';
+      $xml .= '<Identification>';
+      $xml .= '<NewsIdentifier>';
+      $xml .= '<ProviderId>' . $reporter . '</ProviderId>';
+      $xml .= '</NewsIdentifier>';
+      $xml .= '</Identification>';
+      $xml .= '<NewsManagement>';
+      $xml .= '<NewsItemType FormalName="News"/>';
+      $xml .= '<FirstCreated>' . $publish_date . '</FirstCreated>';
+      $xml .= '<ThisRevisionCreated>' . $modify_date . '</ThisRevisionCreated>';
+      $xml .= '<Status FormalName="Usable"/>';
+      $xml .= '</NewsManagement>';
+      $xml .= '<NewsComponent EquivalentsList="no" Essential="no" Duid="' . $nid . '">';
+      $xml .= '<NewsLines>';
+      $xml .= '<CopyrightLine>' . $year . ' India Today.</CopyrightLine>';
+      $xml .= '</NewsLines>';
+      $xml .= '<NewsComponent Duid="' . $nid . '">';
+      $xml .= '<DateLine>' . $publish_date . '</DateLine>';
+      $xml .= '<Author>' . $reporter . '</Author>';
+      $xml .= '<NewsComponent>';
+      $xml .= '<Role FormalName="Main"/>';
+      $xml .= '<NewsLines>';
+      $xml .= '<HeadLine>' . $value['title'] . '</HeadLine>';
+      $xml .= '<SlugLine>' . $kicker_text . '</SlugLine>';
+      $xml .= '<MoreLink/>';
+      $xml .= '</NewsLines>';
+      $xml .= '<ContentItem>';
+      $xml .= '<MediaType FormalName="ComplexData"/>';
+      $xml .= '<MimeType FormalName="text/vnd.IPTC.NITF"/>';
+      $xml .= '<DataContent>';
+      $xml .= '<nitf>';
+      $xml .= '<body>';
+      $xml .= '<body.content><![CDATA[' . $body . ']]></body.content>';
+      $xml .= '</body>';
+      $xml .= '</nitf>';
+      $xml .= '<weburl>' . $url . '</weburl>';
+      $xml .= '</DataContent>';
+      $xml .= '</ContentItem>';
+      $xml .= '</NewsComponent>';
+      $xml .= '</NewsComponent>';
+      $xml .= '</NewsComponent>';
+      $xml .= '</NewsItem>';
     }
-    $xml .= '</news>';
-    $xml .= '</feed>';
+    $xml .= '</NewsML>';
   }
   return $xml;
 }
