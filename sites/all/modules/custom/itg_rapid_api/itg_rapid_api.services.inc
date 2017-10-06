@@ -4059,6 +4059,7 @@ function itg_rapid_api_change_password($token) {
         $user = drupal_anonymous_user();
 
         drupal_save_session($original_session_state);
+        deviceTokenReset_Rapid($params);
         $data['status_code'] = "1";
         $data['status_message'] = "Password has changed";
     } else {
@@ -5215,7 +5216,7 @@ function itg_rapid_api_reset_password($token) {
         $user = drupal_anonymous_user();
 
         drupal_save_session($original_session_state);
-
+        deviceTokenReset_Rapid($params);
         $data['status_code'] = "1";
         $data['status_message'] = "password has been changed";
     } else {

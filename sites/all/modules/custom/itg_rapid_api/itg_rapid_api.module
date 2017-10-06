@@ -1726,3 +1726,25 @@ function twtogin_rapid($params){
     return $error_settings;
     
 }
+
+/**
+ * Call back function for device token reset .
+ * @param array
+ * @return array
+ */
+function deviceTokenReset_Rapid($params){
+    $user_id = trim($params['user_id']);    
+    $device_id = trim($params['device_id']);    
+    $device_type = trim($params['device_type']);
+    
+    $user_data = user_load_by_name($user_id);
+    
+    $token_updated = db_update('itg_app_device');
+    $token_updated->fields(array(
+      'token' => "",
+      
+    ));
+    $token_updated->condition('uid', $user_data->uid);
+    $token_updated->execute();
+    
+}
