@@ -382,6 +382,7 @@ input[type="text"] {
 
 .itg-h321-section {
     .tech_reviews,
+    .tech_reviews-block_5,
     .auto_reviews,
     .dont_miss {
         height: 100%;
@@ -439,6 +440,7 @@ input[type="text"] {
     font-size: 16px;
     padding: 0;
     font-weight: 600;
+    margin-bottom: 5px;
     a {
         color: #323232;
     }
@@ -1696,6 +1698,10 @@ input[type="text"] {
                         margin-top: -3px;
                         line-height: 18px;
                         padding-left: 0;
+                        line-height: 20px;
+                        a {
+                            color: #0783ec;
+                        }
                         &:before {
                             content: '|';
                             margin: 0 5px 0 0;
@@ -1990,6 +1996,9 @@ input[type="text"] {
             &:hover {
                 box-shadow: 0 0 5px 0 #999;
             }
+        }
+        &:after {
+            display: none;
         }
     }
 }
@@ -2406,6 +2415,7 @@ body.has-cart-popup {
                 .form-type-checkbox {
                     >label {
                         height: 127px;
+                        margin-bottom: 20px;
                     }
                 }
             }
@@ -5055,6 +5065,15 @@ article.node-mega-review-critic {
     }
     +.vukkul-comment {
         margin-top: 50px;
+    }
+    .dots-know-more {
+        text-align: right;
+        padding: 15px;
+        background: #f7f7f7;
+        font-family: roboto;
+        font-size: 13px;
+        font-weight: 600;
+        color: #818181;
     }
 }
 

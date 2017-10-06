@@ -212,6 +212,8 @@
  *   );
  * @endcode
  */
+
+// setting for UAT backend
  /*$databases = array (
   'default' => 
   array (
@@ -228,16 +230,36 @@
   ),
 );*/
 
+// setting for Prod backend
+/*$databases = array (
+  'default' => 
+  array (
+    'default' => 
+    array (
+      'database'=>'indiatoday',   
+      'username' => 'prod_it_write',
+      'password' => 'pr0d_!t@64',
+      'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+      'port' => '3306',
+      'driver' => 'mysql',
+      'prefix' => '',
+    ),
+  ),
+);*/
+
+//for master and slave setting
+
+
+// setting for UAT
 $databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'
-  //'slave' => 'autoslave', // optional, defaults to 'autoslave'
-  'slave' => array('slave1','slave2'), // optional, defaults to 'autoslave'
+  'slave' => 'autoslave', // optional, defaults to 'autoslave'  
 // Always use "master" for tables "semaphore" and "sessions"
   'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
 );
-// setting for UAT
-/*$databases['default']['master'] = array(
+
+$databases['default']['master'] = array(
   //'database' => 'indiatoday_migrate',
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_write',
@@ -267,12 +289,19 @@ $databases['sso_db']['default'] = array(
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
-);*/
-
+);
 // end setting for UAT
+
 //for production setting
-$databases['default']['master'] = array(
-  //'database' => 'indiatoday_migrate',
+/*$databases['default']['default'] = array(
+  'driver' => 'autoslave',
+  'master' => 'master', // optional, defaults to 'master'  
+  'slave' => array('slave1','slave2'), // optional, defaults to 'autoslave'
+// Always use "master" for tables "semaphore" and "sessions"
+  'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
+);
+
+$databases['default']['master'] = array(  
   'database' => 'indiatoday',
   'username' => 'prod_it_write',
   'password' => 'pr0d_!t@64',
@@ -312,9 +341,9 @@ $databases['sso_db']['default'] = array(
       'port' => '3306',
       'driver' => 'mysql',
       'prefix' => '',
-);
-
+);*/
 //end production setting
+
 // Use locking that supports force master
 $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
 

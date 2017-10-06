@@ -219,9 +219,11 @@
     }
     .top-block .top-colum-3 {
         @include calculate-width(1);
+        margin-top: 50px;
         >.itg-widget-parent {
             @include float(left);
             width: 48%;
+            margin-bottom: 0;
         }
         .trending-list {
             @include float(right);
@@ -443,6 +445,10 @@
      ::-webkit-scrollbar-thumb {
         border-radius: 10px;
         background-color: #aaa;
+    }
+    #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
+        width: 55px;
+        height: 55px;
     }
 }
 
@@ -802,6 +808,10 @@
             padding: 0 15px;
             @include calculate-width(1);
         }
+        .top-colum-1,
+        .top-colum-3 {
+            margin-top: 50px;
+        }
     }
     .itg-layout-container .itg-h450-section .droppable,
     .itg-layout-container .itg-h321-section .droppable,
@@ -838,6 +848,16 @@
                 }
             }
         }
+    }
+    .tech-layout-page .auto-block-1,
+    .tech-layout-page .auto-block-2,
+    .auto-layout-page .auto-block-1,
+    .auto-layout-page .auto-block-2 {
+        height: auto;
+        min-height: auto;
+    }
+    .itg-top-section .featured-news {
+        padding-bottom: 0px;
     }
     /*End CSS Top Block Grid Home Page*/
     /*Start Dont miss Home page css*/
@@ -1513,10 +1533,6 @@
                 }
                 .container-inline-date {
                     margin-left: 10px;
-                    +.container-inline-date {
-                        display: block;
-                        vertical-align: top;
-                    }
                 }
             }
         }
@@ -1557,7 +1573,7 @@
         }
     }
     .event-sidebar .header-top .event-header-banner {
-        height: 150px;
+        /* height: 150px;*/
     }
     #block-itg-event-backend-program-tab-block .top-block-highlight {
         .highlights-container .wrap-listing {
@@ -1657,6 +1673,29 @@
         }
     }
     /*css end video detail page video player*/
+    .story-section .story-left,
+    .story-section .story-right {
+        padding: 0;
+    }
+    /* css tech page */
+    .tech-layout-page {
+        .trending-list {
+            .widget-title {
+                background: #e4e4e4;
+                display: block;
+                padding: 8px;
+                height: inherit;
+                border: 1px solid #e4e4e4;
+                color: #5c5c5c;
+            }
+        }
+        #block-itg-widget-tech-most-read {
+            border: 1px solid #e4e4e4;
+            border-top: 0;
+            padding: 5px;
+        }
+    }
+    /* css end tech page */
 }
 
 @media only screen and (max-width:767px) {
@@ -1700,6 +1739,7 @@
             .pic {
                 width: 145px;
                 margin-right: 10px;
+                margin-bottom: 10px;
             }
             .voting-data {
                 float: none;
@@ -1709,6 +1749,7 @@
             }
             .vota-time.desktop-hide {
                 display: block;
+                padding-top: 0;
             }
         }
     }
@@ -1800,6 +1841,55 @@
         p {
             display: block;
         }
+    }
+    /*search page filter scroll */
+    [id*="views-exposed-form-front-end-global-search-page"] {
+        .views-exposed-form {
+            position: relative;
+            z-index: 99;
+            height: 80px;
+            [class*="views-widget-filter-tm_vid"],
+            #edit-sm-field-itg-common-by-line-name-wrapper,
+            #edit-bundle-name-wrapper,
+            #edit-hash-wrapper {
+                position: static;
+                padding-top: 13px;
+                .views-widget {
+                    display: none;
+                    position: relative;
+                    left: auto;
+                    top: auto;
+                }
+            }
+        }
+    }
+    .view-front-end-global-search .searh-all-filters {
+        zoom: 1;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .view-front-end-global-search .searh-all-filters::-webkit-scrollbar {
+        display: none;
+    }
+    .view-front-end-global-search {
+        .views-exposed-widget .caln {
+            right: 60px;
+            width: 208px;
+            .views-exposed-widget {
+                display: block;
+            }
+        }
+    }
+    .view-front-end-global-search .views-exposed-widget .caln .container-inline-date {
+        display: block;
+        +.container-inline-date {
+            margin-left: 17px;
+        }
+    }
+    /*search page filter scroll end */
+    .home_page_poll_widget_block .poll-data .active-poll-title {
+        height: auto;
     }
 }
 
@@ -1970,7 +2060,7 @@
         }
     }
     .event-sidebar .header-top .event-header-banner {
-        height: 112px;
+        /* height: 112px;*/
     }
     #block-menu-menu-event-menu {
         .wrap-mobile-social {
@@ -1988,6 +2078,9 @@
         .highlights-video .live-event-video {
             height: 250px;
         }
+    }
+    #block-views-program-schedule-block-4 .view-display-id-block_4>.view-content>.views-row {
+        width: 49%;
     }
     /*End event page*/
     /*Home page start css*/
@@ -2007,6 +2100,7 @@
         .trending-list {
             @include float(none);
             @include calculate-width(1);
+            margin-top: 50px;
         }
     }
     /*Home page end css*/
@@ -2534,8 +2628,8 @@
             margin-top: 20px;
         }
         .election-graph {
-            margin-top: -30px;
-            padding-bottom: 50px;
+            /*margin-top: -30px;
+            padding-bottom: 50px;*/
             width: auto;
             .col-el-5 {
                 width: 100%;
@@ -2611,6 +2705,30 @@
     }
     .story-section .story-right.photo-story .multiple-photo {
         padding: 0;
+    }
+    .poll-banner.image-poll-list .poll-list .voting-data .past-poll {
+        margin: 0;
+        li {
+            margin: 0;
+            float: left;
+            width: 33.33%;
+            +li {
+                padding-left: 10px;
+            }
+            .noofvotes {
+                padding: 0;
+                width: 35%;
+            }
+            .poll-past-percentage-progess {
+                padding: 0;
+                width: 65%;
+            }
+            .poll-answer-text {
+                img {
+                    height: auto;
+                }
+            }
+        }
     }
 }
 

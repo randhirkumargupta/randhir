@@ -49,7 +49,7 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
       '#default_value' => $f_name . ' ' . $l_name,
       '#required' => TRUE,
     );
-    $form['email'] = array(
+    /*$form['email'] = array(
       '#type' => 'textfield',
       '#attributes' => array(
         'placeholder' => t('Email'),
@@ -57,7 +57,7 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
       ),
       '#default_value' => $mail,
       '#required' => TRUE,
-    );
+    );*/
     $form['phone'] = array(
       '#type' => 'textfield',
       '#attributes' => array(

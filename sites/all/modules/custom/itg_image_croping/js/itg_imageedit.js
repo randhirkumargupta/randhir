@@ -11,17 +11,16 @@ jQuery(document).ready(function() {
     var mouseY = 0;
     var image_fiedlid = document.getElementById("image_fiedlid").value;
 
-    jQuery("#imgtag img").on('click', function(e) { // make sure the image is click
-        var imgtag = jQuery(this).parent(); // get the div to append the tagging list
-        mouseX = (e.pageX - jQuery(imgtag).offset().left) - 50; // x and y axis
+    jQuery("#imgtag img").on('click', function(e) { /* make sure the image is click*/
+        var imgtag = jQuery(this).parent(); /* get the div to append the tagging list*/
+        mouseX = (e.pageX - jQuery(imgtag).offset().left) - 50; /* x and y axis*/
         mouseY = (e.pageY - jQuery(imgtag).offset().top) - 50;
-        jQuery('#tagit').remove( ); // remove any tagit div first
+        jQuery('#tagit').remove( ); 
         jQuery(imgtag).append('<div id="tagit"><div class="box"></div><div class="name"><div class="text">Tag</div><input type="text" name="tagname" id="tagname" placeholder="Title"/><input type="text" name="tagurl" class="error" id="tagurl" placeholder="Tag Url" /><span style="display:none" class="error web-error" for="edit-title" generated="true">Enter currect url .</span><input type="button" name="btnsave" value="Save" id="btnsavetag" /><input type="button" name="btncancel" value="Cancel" id="btncancel" /></div></div>');
         jQuery('#tagit').css({top: mouseY, left: mouseX});
         jQuery('#tagname').focus();
     });
 
-    // Save button click - save tags
     jQuery(document).on('click', '#tagit #btnsavetag', function() {
         name = jQuery('#tagname').val();
         tagurl = jQuery('#tagurl').val();
@@ -60,12 +59,12 @@ jQuery(document).ready(function() {
         }, 200);
     });
 
-    // Cancel the tag box.
+    /* Cancel the tag box.*/
     jQuery(document).on('click', '#tagit #btncancel', function() {
         jQuery('#tagit').fadeOut();
     });
 
-    // mouseover the taglist 
+    /* mouseover the taglist */
     jQuery('#taglist').on('mouseover', 'li', function( ) {
         id = jQuery(this).attr("id");
         jQuery('#view_' + id).css({opacity: 1.0});
@@ -73,16 +72,16 @@ jQuery(document).ready(function() {
         jQuery('#view_' + id).css({opacity: 0.0});
     });
 
-    // mouseover the tagboxes that is already there but opacity is 0.
+    /* mouseover the tagboxes that is already there but opacity is 0. */
     jQuery('.tagview').live('mouseover', function( ) {
         var pos = jQuery(this).position();
         jQuery(this).css({opacity: 1.0});
-        jQuery(this).siblings('.square-tag').hide();// div appears when opacity is set to 1.
+        jQuery(this).siblings('.square-tag').hide();/* div appears when opacity is set to 1.*/
     }).live('mouseout', '.tagview', function( ) {
         jQuery(this).css({opacity: 0.0});
-        jQuery(this).siblings('.square-tag').show(); // hide the div by setting opacity to 0.
+        jQuery(this).siblings('.square-tag').show(); /* hide the div by setting opacity to 0.*/
     });
-    // Save button click - save tags
+    /* Save button click - save tags */
     jQuery('#btnsavetagedit').live('click', function() {
         name = jQuery('#tagname').val();
         tagurl = jQuery('#tagurl').val();
@@ -117,13 +116,13 @@ jQuery(document).ready(function() {
     });
 
 
-    // Remove tags.
+    /* Remove tags.*/
     jQuery('.remove').live('click', function() {
         id = jQuery(this).parent().attr("id");
         id = id.split('_');
         id = id[1];
         showloader();
-        // Remove the tag
+        /* Remove the tag */
         jQuery.ajax({
             type: "POST",
             url: Drupal.settings.basePath + 'removetags',
@@ -131,7 +130,7 @@ jQuery(document).ready(function() {
             success: function(data) {
                 var img = jQuery('#imgtag').find('img');
                 var id = jQuery(img).attr('id');
-                //get tags if present
+                /*get tags if present*/
                 jQuery('#tagit').fadeOut();
                 viewtag(image_fiedlid);
             }
@@ -152,7 +151,7 @@ jQuery(document).ready(function() {
                 var url = objdata.tag_url;
                 var xcord = objdata.x_coordinate;
                 var ycord = objdata.y_coordinate;
-                jQuery('#tagit').remove( ); // remove any tagit div first
+                jQuery('#tagit').remove( ); 
                 jQuery('#imgtag').append('<div id="tagit"  style="top: ' + ycord + 'px; left: ' + xcord + 'px;"><div class="box"></div><div class="name"><div class="text">Tag</div><input type="text" name="tagname" id="tagname" placeholder="Title" value="' + tags + '"/><input type="hidden" name="tagid" id="tagid" value="' + id + '"/><input type="text" value="' + url + '" name="tagurl" class="error" id="tagurl" placeholder="Tag Url" /><span style="display:none" class="error web-error" for="edit-title" generated="true">Enter currect url .</span><input type="button" name="btnsave" value="Save" id="btnsavetagedit" /><input type="button" name="btncancel" value="Cancel" id="btncancel" /></div></div>');
                 jQuery('#tagname').focus();
             }
@@ -163,7 +162,7 @@ jQuery(document).ready(function() {
         id = id.split('_');
         id = id[1];
         showloader();
-        // Remove the tag
+        /* Remove the tag */
         $.ajax({
             type: "POST",
             url: Drupal.settings.basePath + 'removetags',
@@ -171,7 +170,7 @@ jQuery(document).ready(function() {
             success: function(data) {
                 var img = jQuery('#imgtag').find('img');
                 var id = jQuery(img).attr('id');
-                //get tags if present
+                /*get tags if present*/
                 jQuery('#tagit').fadeOut();
                 viewtag(image_fiedlid);
             }
@@ -181,7 +180,6 @@ jQuery(document).ready(function() {
 
 });
 
-//
 function viewtag(pic_id) {
 
     jQuery.ajax({

@@ -931,7 +931,7 @@ function itg_workflow_node_insert($node) {
       } */
     //getting mail id's of high level users
 //      
-    $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
+    $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, AUTHOR_GUEST);
     if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
       $user_email = get_email_by_roll($rid);
       workflow_get_mail_content($node, 'create', $user_email, $node->name, $user->name);
@@ -1002,19 +1002,25 @@ function itg_workflow_node_update($node) {
       }
     }
     unset($_SESSION['node_preview_unique'][$node->nid]);
-
-    if ($node->type == 'story' && $node->workbench_moderation['current']->state == 'published') {
+    
+    if ($node->type == 'story' && $node->workbench_moderation['current']->state == 'published' || $node->workbench_moderation['current']->state == 'draft') {
+      
+      $node_state = $node->workbench_moderation['current']->state;
       $query = db_select('node', 'n');
-      $query->condition('n.status', 0, '=');
+      if (!empty($node_state) && $node_state == 'published') {
+        $query->condition('n.status', 0, '=');
+      } elseif (!empty($node_state) && $node_state == 'draft') {
+        $query->condition('n.status', 1, '=');
+      }
       $query->fields('n', array('title', 'nid'));
       $query->condition('n.type', 'story', '=');
       $query->condition('n.nid', $node->nid, '=');
       $result = $query->execute();
       $num_of_results = $result->rowCount();
       if ($num_of_results >= 1) {
-        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO, EDITOR);
         $user_email = get_email_by_roll($rid);
-        workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name, 'pub-unpub');
+        workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name, 'pub-unpub', $node_state);
       }
     }
 
@@ -1025,10 +1031,10 @@ function itg_workflow_node_update($node) {
       //getting mail id's of high level users
       if ($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {
         //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
-        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO, EDITOR);
       }
       else {
-        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
+        $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
         //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
       }
 
@@ -1048,12 +1054,12 @@ function itg_workflow_node_update($node) {
             //getting mail id's of high level users
             if ($node->type == 'story' && $node->workbench_moderation_state_new == 'published') {
               //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR, SEO);
-              $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO);
+              $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO, EDITOR);
               $user_email = get_email_by_roll($rid);
               workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name);
             }
             else {
-              $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR);
+              $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
               $user_email = get_email_by_roll($rid);
               workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name);
               //$rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
@@ -1097,7 +1103,7 @@ function itg_workflow_stop_email_during_bulk_operation($request) {
  * @param string $current_user_name
  * @return 
  */
-function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name, $vbo_state) {
+function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name, $vbo_state, $vbo_update) {
   global $base_url;
   $author_mail = array();
   $content_type = $node->type;
@@ -1111,8 +1117,16 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
 
 
   if ($event == 'update' && $vbo_state == 'pub-unpub') {
+    if ($vbo_update == 'published') {
+      $subject_line_upd = 'unpublished';
+      $body_htwo = 'STORY UNPUBLISHED';
+    } 
+    elseif($vbo_update == 'draft') {
+      $subject_line_upd = 'published';
+      $body_htwo = 'STORY PUBLISHED';
+    }
     $to_mail = implode(',', $to);
-    $subject = 'A new ' . $content_type . ' has been unpublished, please find details below.';
+    $subject = 'A new ' . $content_type . ' has been ' . $subject_line_upd . ', please find details below.';
     $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
                       <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
                           <tr>
@@ -1122,11 +1136,11 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
                           </tr>
                           <tr>
                               <td style="padding: 10px 20px;">
-                                  <h2 style="font-size: 18px; margin: 20px 0 30px;">STORY UNPUBLISHED :</h2>
+                                  <h2 style="font-size: 18px; margin: 20px 0 30px;">' . $body_htwo . ' :</h2>
                                   <strong style="font-size: 16px;">Dear SEO Team,</strong>
                                   <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . ucwords($content_type) . ' <strong style="color: #000;">title.</strong></p>
                                   <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . $node_url . '</p>
-                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;">has been unpublished.</p>
+                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;">has been ' . $subject_line_upd . '.</p>
                                   <p style="font-size: 16px; color: #595959; margin: 20px 0;"><strong style="color: #000;">Thanks,</strong><br>India Today Team</p>
                               </td>
                           </tr>
@@ -1183,15 +1197,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     }
   }
   elseif ($event == 'create' && $review == 'needs_review') {
-    $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
-    if (!empty($author_mail)) {
-      $get_mails = array_merge($author_mail, $to);
-      $to_mail = implode(',', $get_mails);
-    }
-    else {
-      $to_mail = implode(',', $to);
-    }
-
+    $to_mail = implode(',', $to);
     if (function_exists('itg_mail_templates_get_mailcontent')) {
       $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
       $mail_data_cat = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
@@ -1237,15 +1243,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   }
   elseif ($event == 'update') {
     if ($review == 'needs_review') {
-      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
-      if (!empty($author_mail)) {
-        $get_mails = array_merge($author_mail, $to);
-        $to_mail = implode(',', $get_mails);
-      }
-      else {
-        $to_mail = implode(',', $to);
-      }
-
+      $to_mail = implode(',', $to);
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
         $mail_data_cat = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];

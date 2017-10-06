@@ -566,9 +566,20 @@ function itg_event_backend_after_build($form, &$form_state) {
       $highlight_options[$program_daywise . '--' . $program_title . '--' . $start_time . '--' . $end_time] = t($day_value[0] . ' - ' . $program_title . ' - ' . $start_time . ' to ' . $end_time);
       //$media_options[$program_daywise] = t($program_daywise);
       $media_options = $highlight_options;
-      if (isset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//      if (isset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//        $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//        $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//      }
+      
+      
+       if (!empty($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+       if((empty($form_state['input']['field_program_schedule']['und'][$key]['field_daywise_event']['und'])) && $form_state['input']['field_program_schedule']['und'][$key]['field_daywise_event']['und'] != $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value']) {
         $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+       }else{
+        $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_program_schedule']['und'][$key]['field_daywise_event']['und'];
+        
+       }
       }
       unset($form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated']);
       $form['field_program_schedule'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
@@ -577,14 +588,34 @@ function itg_event_backend_after_build($form, &$form_state) {
 
   foreach ($form['field_event_highlights'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
-      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//      }
+      
+       if (!empty($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+       if((empty($form_state['input']['field_event_highlights']['und'][$key]['field_daywise_event']['und'])) && $form_state['input']['field_event_highlights']['und'][$key]['field_daywise_event']['und'] != $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value']) {
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+       }else{
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_event_highlights']['und'][$key]['field_daywise_event']['und'];
+        
+       }
       }
-      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'])) {
+      
+       if (!empty($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'])) {
+       if((empty($form_state['input']['field_event_highlights']['und'][$key]['field_programe_title']['und'])) && $form_state['input']['field_event_highlights']['und'][$key]['field_programe_title']['und'] != $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value']) {
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
         $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
+       }else{
+        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_event_highlights']['und'][$key]['field_programe_title']['und'];
+        
+       }
       }
+//      if (isset($form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'])) {
+//        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
+//        $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#entity']->field_programe_title[LANGUAGE_NONE][0]['value'];
+//      }
 
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $options_daywise;
       $form['field_event_highlights'][LANGUAGE_NONE][$key]['field_programe_title'][LANGUAGE_NONE]['#options'] = $highlight_options;
@@ -596,14 +627,26 @@ function itg_event_backend_after_build($form, &$form_state) {
   foreach ($form['field_event_media'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] . '<span title="This field is required." class="form-required"> *</span>';
-      if (isset($form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
-        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-      }
-
+      
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $media_options;
       $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
-    }
+//      if (isset($form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+//        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+//      }
+//      
+      
+      if (!empty($form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+       if((empty($form_state['input']['field_event_media']['und'][$key]['field_daywise_event']['und'])) && $form_state['input']['field_event_media']['und'][$key]['field_daywise_event']['und'] != $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value']) {
+        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+       }else{
+        $form['field_event_media'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_event_media']['und'][$key]['field_daywise_event']['und'];
+        
+       }
+      }
+
+      }
   }
 
   // event sponsors Daywise
@@ -612,14 +655,18 @@ function itg_event_backend_after_build($form, &$form_state) {
   foreach ($form['field_associate_sponsors'][LANGUAGE_NONE] as $key => $program) {
     if (is_numeric($key)) {
       $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#title'];// . '<span title="This field is required." class="form-required"></span>';
-      if (isset($form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
-        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
-      }
-
       $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#options'] = $media_options_sponsor;
       $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event']['#validated'] = TRUE;
-    }
+    if (!empty($form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'])) {
+      if((empty($form_state['input']['field_associate_sponsors']['und'][$key]['field_daywise_event']['und'])) && $form_state['input']['field_associate_sponsors']['und'][$key]['field_daywise_event']['und'] != $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value']) {
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      }else{
+        $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#value'][0] = $form_state['input']['field_associate_sponsors']['und'][$key]['field_daywise_event']['und'];
+        //$form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#default_value'][0] = $form['field_associate_sponsors'][LANGUAGE_NONE][$key]['field_daywise_event'][LANGUAGE_NONE]['#entity']->field_daywise_event[LANGUAGE_NONE][0]['value'];
+      }
+      }
+      }
   }
 
   // Next and Save button access according steps step_configuration
@@ -650,22 +697,6 @@ function itg_event_backend_after_build($form, &$form_state) {
       ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
     ),
   );
-  $form['field_story_new_title']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
-    ),
-  );
-  $form['field_news_title']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
-    ),
-  );
-  $form['field_tab_description']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
-    ),
-  );
-
   $form['field_no_of_tickets']['#states'] = array(
     'visible' => array(
       array(':input[name="field_event_type[und]"]' => array('value' => 'paid')),
@@ -920,7 +951,7 @@ function itg_event_backend_block_view($delta = '') {
       $block['content'] = theme('itg_event_backend_tab_form_display_block', array('data' => ''));
       break;
     case 'event_header_menu':
-      $block['content'] = theme('event_header_menu', array('data' => ''));
+      $block['content'] = theme('event_header_menu', array('data' => itg_event_backend_get_event_node('node')));
       break;
     case 'event_header_adds':
       $block['content'] = theme('event_header_adds', array('data' => ''));
@@ -1947,21 +1978,25 @@ function itg_event_backend_highlights_block_content() {
  * @param int $unique_id
  * @return string
  */
-function itg_event_backend_highlights_like_dislike($unique_id, $datatype = NULL) {
+function itg_event_backend_highlights_like_dislike($unique_id, $datatype = NULL, $nid = NULL) {
   $arg = arg();
   if (function_exists('itg_flag_get_count')) {
-    $like = itg_flag_get_count($unique_id, 'like_count');
-    $dislike = itg_flag_get_count($unique_id, 'dislike_count');
+    $mongo_like_dislike = itg_flag_get_count($unique_id);
+    //$dislike = itg_flag_get_count($unique_id, 'dislike_count');
   }
-  // get migrated count 
+  // get migrated count
   //node type check for migrated content
   $type = itg_event_backend_get_node_type($arg[1]);
-  if (function_exists('itg_get_migrated_like_count') && $type != 'photogallery') {
-    $migrated_count = itg_get_migrated_like_count($unique_id);
+  if (function_exists('itg_get_migrated_like_count')) {
+    if($type == 'photogallery') {
+    $migrated_count = itg_get_migrated_like_count($nid);
+    } else {
+    $migrated_count = itg_get_migrated_like_count($unique_id); 
+    }
   }
 
-  $sum_of_likes = $like['like_count'] + $migrated_count[0]['like_count'];
-  $sum_of_dislikes = $dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
+  $sum_of_likes = $mongo_like_dislike['like_count'] + $migrated_count[0]['like_count'];
+  $sum_of_dislikes = $mongo_like_dislike['dislike_count'] + $migrated_count[0]['dislike_count'];
   $like_count_common = '(' . $sum_of_likes . ')';
   $dislike_count_common = '(' . $sum_of_dislikes . ')';
 
@@ -2371,4 +2406,51 @@ function itg_event_backend_tokens($type, $tokens, array $data = array(), array $
         }
     }
     return $replacements;
+}
+
+/**
+ * Implement function for Tab Title
+ */
+function itg_event_backend_tab_title($node, $tab_sef) {
+
+   foreach ($node->field_event_tabs['und'] as $imagecollection){
+    $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    if($tab_sef == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_name'] = $value->field_tab_name[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_title'] = $value->field_tab_title[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_sef_url_radio'] = $value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_sef'] = $value->field_tab_sef[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_url'] = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_description'] = $value->field_tabs_description[LANGUAGE_NONE][0]['value'];
+    }
+  }
+  return $tab_value;
+}
+
+/**
+ * Implement function for Tab menu
+ */
+function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font) {
+    $path_alias = drupal_get_path_alias('node/'.  $node->nid);
+    $flash_back_link = '<ul>';
+    $flash_back_link_top = '';
+    $key = 0;
+   foreach ($node->field_event_tabs['und'] as $imagecollection){
+    $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
+      if($key == 0) {
+        $flash_back_link_top = l('...', $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$tab_menu_font")));
+      }
+      $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$menu_font_color"))) . '</li>';
+    }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
+       if($key == 0) {
+         $flash_back_link_top =  l('...', $value->field_tab_url[LANGUAGE_NONE][0]['value'], array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$tab_menu_font")));
+       }
+      $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $value->field_tab_url[LANGUAGE_NONE][0]['value'], array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
+    }
+    $key++;
+  }
+  $flash_back_link .= '</ul>';
+  $all_link = array('tab_top_menu' => $flash_back_link_top, 'tab_menu' => $flash_back_link);
+  return $all_link;
 }

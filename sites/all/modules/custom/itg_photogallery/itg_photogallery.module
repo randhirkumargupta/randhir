@@ -163,14 +163,6 @@ function itg_photogallery_form_custom_callback($form, &$form_state) {
 	$title = ucfirst($form_state['node']->title);
 
 	$node_id = $form_state['node']->nid;
-	if (isset($form_state['input']['original_image_fids']) && ($form_state['input']['original_image_fids'] != "")) {
-		$image_ids = explode('#', $form_state['input']['original_image_fids']);
-
-		if (!empty($image_ids)) {
-			if (function_exists('itg_photogallery_insert_image_data'))
-				itg_photogallery_insert_image_data($image_ids, $node_id);
-		}
-	}
 
 	if ($form_state['node']->field_story_facebook_video['und'][0]['fid']) {
 		$fids[] = $form_state['node']->field_story_facebook_video['und'][0]['fid'];
@@ -534,7 +526,7 @@ function itg_photogallery_crop_thumb($fid) {
 		$image_extension = end(explode('.', $file_image->uri));
 		$image_name_array = explode('.', $file_image->filename);
 		$image_name_exclude_ext = $image_name_array[0];
-		$image_name = rand(1111, 99999) . $image_name_exclude_ext . '-' . EXTRA_SMALL_IMAGE_WIDTH . 'x' . EXTRA_SMALL_IMAGE_HEIGHT;
+		$image_name = $image_name_exclude_ext . '-' . EXTRA_SMALL_IMAGE_WIDTH . 'x' . EXTRA_SMALL_IMAGE_HEIGHT;
 		$sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_extension);
 		$uri = $filepath . '/' . $image_name . '.' . $image_extension;
 		$wrapper = file_stream_wrapper_get_instance_by_uri($uri);
