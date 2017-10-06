@@ -335,7 +335,7 @@ if ($theme != 'itgadmin') {
                                 </div>
                             </div>
                               <div class="row">
-                                <div class="col-md-12 col-sm-6 itg-layout-260 mt-10">
+                                <div class="col-md-12 col-sm-6 itg-layout-260">
                                   <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Points tally');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -363,7 +363,7 @@ if ($theme != 'itgadmin') {
                                 </div>
 
 
-                                <div class="col-md-12 col-sm-6 itg-layout-375 mt-10">
+                                <div class="col-md-12 col-sm-6 itg-layout-375">
                                   <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Top performers');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -392,7 +392,7 @@ if ($theme != 'itgadmin') {
                               </div>
                             
                               <div class="row">  
-                                <div class="col-md-12 col-sm-6 itg-layout-315 mt-10">
+                                <div class="col-md-12 col-sm-6 itg-layout-315">
                                   <div class="widget-help-text"><?php print t('Special widgets');?> ( <strong><?php print t('Poll');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -425,7 +425,7 @@ if ($theme != 'itgadmin') {
                                     </div>  
                                 </div>
 
-                                <div class="col-md-12 col-sm-6 itg-layout-340 mt-10">
+                                <div class="col-md-12 col-sm-6 itg-layout-340">
                                   <div class="widget-help-text"><?php print t('Special widgets');?> ( <strong><?php print t('Tweets');?></strong> )</div>
                                     <div class="itg-widget">
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
