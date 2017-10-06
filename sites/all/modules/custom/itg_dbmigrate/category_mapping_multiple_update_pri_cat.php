@@ -305,28 +305,37 @@ function ordering_set_of_content_cat_map($node, $count) {
         $exist_cat_id = check_ordering_cat_id($nid, $category['tid']);
         $exist_cat_section_id = check_ordering_cat_id_section($nid, $category['tid']);
         if (empty($exist_cat_section_id)) {
-        $query = db_insert('itg_widget_order_section')
-            ->fields(array(
-              'nid' => $nid,
-              'widget' => 'section_wise_widget',
-              'content_type' => $node->type,
-              'cat_id' => $category['tid'],
-              'weight' => $count,
-              'extra' => "",
-            ))
-            ->execute();
+        if (function_exists('__itg_widget_helper_data_insert')) {
+                            __itg_widget_helper_data_insert($node->nid);
+                        }
+        
+         $query = db_insert('itg_widget_order_section')
+        ->fields(array(
+          'nid' => $nid,
+          'widget' => 'section_wise_widget',
+          'content_type' => $node->type,
+          'cat_id' => $category['tid'],
+          'weight' => $count,
+          'extra' => "",
+        ))
+        ->execute();
+         _delete_old_data_from_section_widget('itg_widget_order_section', $category['tid'], $node->type);
         }
 if (empty($exist_cat_id)) {
+  if (function_exists('__itg_widget_helper_data_insert')) {
+                            __itg_widget_helper_data_insert($node->nid);
+                        }
         $query = db_insert('itg_widget_order')
-            ->fields(array(
-              'nid' => $nid,
-              'widget' => 'section_wise_widget',
-              'content_type' => 'All',
-              'cat_id' => $category['tid'],
-              'weight' => $count,
-              'extra' => '',
-            ))
-            ->execute();
+        ->fields(array(
+          'nid' => $nid,
+            'widget' => 'section_wise_widget',
+            'content_type' => 'All',
+            'cat_id' => $category['tid'],
+            'weight' => $count,
+            'extra' => '',
+        ))
+        ->execute();  
+       _delete_old_data_from_section_widget('itg_widget_order', $category['tid'], "all");
       }
     }
   }

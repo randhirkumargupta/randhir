@@ -2553,7 +2553,8 @@ function itg_videogallery_dailymotion_video_play() {
    $height = $_POST['height'];
   }
   $data_video_info = itg_videogallery_get_all_video_info_by_video_id($_POST['videoid']);
-  if($data_video_info[0]->video_type == 'INTERNAL') {
+  
+  if($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
     $data_from_solr = itg_videogallery_getsolr_data_for_internal_video($_POST['videoid']);
 
   print  theme('itg_videogallery_internal_video_play', array('video_data' => $data_from_solr[0], 'width'=>$width , 'height'=>400 ));
