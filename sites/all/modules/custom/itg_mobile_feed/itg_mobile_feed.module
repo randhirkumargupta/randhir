@@ -998,10 +998,10 @@ function redis_cache_pattern_manager_submit($form,&$form_state){
 
   $key_patt = $form_state['values']['redis_cache_pattern'];
   $responce = redis_key_pattern_delete($key_patt);
-  if($responce != '1'){
+  if($responce == '0' || $responce == 0){
      drupal_set_message('Unable to delete redis Cache','error');
   }else {
-     drupal_set_message('Redis Key Has been deleted Successfully.');
+     drupal_set_message('Redis '.$responce.' Key Has been deleted Successfully.');
   }
 
 }

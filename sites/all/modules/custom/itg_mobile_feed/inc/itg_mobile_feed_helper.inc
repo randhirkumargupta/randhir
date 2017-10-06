@@ -125,11 +125,13 @@ function redis_key_pattern_delete($key_patt) {
 
   $redis = redis_connection();  
   $all_redis_key = $redis->keys("*");
-  
+  $flag = 0;
     foreach($all_redis_key as $key => $value) {
         if (strpos($key,$key_patt) !== false) {
           $res = $redis->del($key);
+          if($res)
+              $flag++;
         }
     }
-    return $res;
+    return $flag;
 }
