@@ -6372,6 +6372,8 @@ section.sidebar {
         }
     }
     .auto-tips-n-tricks {
+        height: 402px;
+        overflow: auto;
         ul {
             list-style: none;
             li {
@@ -13469,8 +13471,17 @@ span.see-picture {
     height: calc(100% - 22px);
 }
 
-.top_stories_ordering .widget-title {
-    padding: 5px 7px 1px 7px;
+.top_stories_ordering,
+.special-top-news {
+    .widget-title {
+        padding: 5px 7px 1px 7px;
+    }
+}
+
+.special-top-news {
+    .itg-listing-wrapper {
+        height: 100%;
+    }
 }
 
 .data-holder {

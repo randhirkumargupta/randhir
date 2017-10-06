@@ -80,9 +80,9 @@
                         }
                     }
                 }
-                
                 if (flag == '0') {
                     $('#edit-field-video-repo-type-und-0-value').val('');
+          
                     $('#edit-field-video-upload').hide();
                 }else {
                     $('#edit-field-video-upload').show();
