@@ -51,3 +51,11 @@ function getbsb_client_video_array(){
   );
   return $video;
 }
+
+function getindiatoday_yahoo_client_array(){
+  $yahoo_story = array(
+    'ids' => array(1206533,1206567,1206688,1206689,1206572,1206578),
+    'filename' => 'top-indiatoday.xml'
+  );
+  return $yahoo_story;
+}

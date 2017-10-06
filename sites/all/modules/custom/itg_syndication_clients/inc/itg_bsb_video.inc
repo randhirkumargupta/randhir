@@ -387,12 +387,7 @@ function get_nid_is_syndications($nid) {
   return $flag;
 }
 
-function get_node_metatags_by_nid($nid = NULL) {
-  if (empty($nid))
-    return FALSE;
-  $result = db_select('metatag', 'mt')->fields('mt', array('data'))->condition('mt.entity_id', $nid, '=')->execute()->fetchAssoc();
-  return $result;
-}
+
 
 /**
  * function for generate Empty image xml tag

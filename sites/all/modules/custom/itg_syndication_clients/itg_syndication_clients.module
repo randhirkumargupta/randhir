@@ -29,6 +29,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_bsb_video.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['indiatoday/yahoo'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -41,10 +47,8 @@ function itg_syndication_clients_install() {
   file_prepare_directory($bsbdir, FILE_CREATE_DIRECTORY);
 }
 
-function slugify($text) {
-  
-  $text = preg_replace('~&~', 'and', $text);
-  
+function slugify($text) {  
+  $text = preg_replace('~&~', 'and', $text);  
   $text = preg_replace('~[^\pL\d]+~u', '-', $text);
   $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
   $text = preg_replace('~[^-\w]+~', '', $text);
@@ -171,4 +175,16 @@ function get_releted_content_by_nid($nid = NULL) {
     }
   }
   return $related_content;
+}
+
+
+function get_node_metatags_by_nid($nid = NULL) {
+  if (empty($nid))
+    return FALSE;
+  $result = db_select('metatag', 'mt')->fields('mt', array('data'))->condition('mt.entity_id', $nid, '=')->execute()->fetchAssoc();
+  return $result;
+}
+
+function genrate_uniqui_guid(){
+  return md5(uniqid(rand(), true));
 }
