@@ -1635,3 +1635,94 @@ function authtokenValidation_rapid($params){
     return $error_settings;
     
 }
+
+/**
+ * Call back function for fblogin_rapid raw data validation .
+ * @param array
+ * @return array
+ */
+
+function fblogin_rapid($params){
+    $user_id = trim($params['user_id']);    
+    $device_id = trim($params['device_id']);    
+    $device_type = trim($params['device_type']);
+    //echo "hi";p($params);die();
+    $error = array();
+    $userid_is_numeric = 0;
+    
+    if (empty($user_id)) {
+        $error['user_id'] = t('User id cannot be an empty');
+    }
+    
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
+    
+    if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+                $error['user_id'] = t("Invalid  User id");
+            } 
+            else{
+                if (strpos($user_id,"@facebook.com") !== false) {
+                    //echo 'true';
+                }
+                else{
+                    $error['user_id'] = t("Invalid  User id");
+                }
+            }
+    
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
+
+    return $error_settings;
+    
+}
+/**
+ * Call back function for twtogin_rapid raw data validation .
+ * @param array
+ * @return array
+ */
+
+function twtogin_rapid($params){
+    $user_id = trim($params['user_id']);    
+    $device_id = trim($params['device_id']);    
+    $device_type = trim($params['device_type']);
+    //echo "hi";p($params);die();
+    $error = array();
+    $userid_is_numeric = 0;
+    
+    if (empty($user_id)) {
+        $error['user_id'] = t('User id cannot be an empty');
+    }
+    
+    // deviceid/type start
+    if (empty($device_id)) {
+        $error['device_id'] = t('Device id cannot be an empty');
+    }
+    if (empty($device_type)) {
+        $error['device_type'] = t('Device type cannot be an empty');
+    }
+    // deviceid/type end
+    
+    if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
+                $error['user_id'] = t("Invalid  User id");
+            } 
+            else{
+                if (strpos($user_id,"@twitter.com") !== false) {
+                    //echo 'true';
+                }
+                else{
+                    $error['user_id'] = t("Invalid  User id");
+                }
+            }
+    
+    $error_settings = array();
+    $error_settings['custom_error'] = $error;
+
+    return $error_settings;
+    
+}

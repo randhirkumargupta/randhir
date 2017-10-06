@@ -3553,7 +3553,16 @@ elseif ($login_type == 1){
         $data['issued_at'] = $uname_fi;
         $data['expires_at'] = $uname_fi;
         
-    
+    // signup validation function calling
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = fblogin_rapid($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    }
         
         $rand = rand();
         $account = array();
@@ -3630,7 +3639,16 @@ elseif ($login_type == 2){
         $data['issued_at'] = $uname_fi;
         $data['expires_at'] = $uname_fi;
         
-    
+    // signup validation function calling
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = twtogin_rapid($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    }
         
         $rand = rand();
         $account = array();
