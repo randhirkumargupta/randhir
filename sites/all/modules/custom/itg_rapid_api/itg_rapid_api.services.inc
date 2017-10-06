@@ -3579,12 +3579,14 @@ elseif ($login_type == 1){
             if ($field_logged_in_count > 0) {
                 $is_first_login = 0;
             }
-            if ($auth_token) {
+            if ($auth_token) {      
+                
+                
                 $account['status_code'] = "1";
                 $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
-                $account['data']['is_first_login'] = "$is_first_login";
                 $account['data']['auth_token'] = "$auth_token";
+                
             } else {
                 watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
                 //return services_error(t('Wrong username or password.'), 401);
@@ -3605,7 +3607,11 @@ elseif ($login_type == 1){
         return $account;
 }
 elseif ($login_type == 2){
-    $method = "POST";
+    
+    
+        $method = "POST";
+        
+        //p($params);die();
 
         
         
@@ -3628,10 +3634,11 @@ elseif ($login_type == 2){
         
         $rand = rand();
         $account = array();
-        $url = SSO_SERVER_URL."/appapi/twtlogin/".$rand;
+        $url = SSO_SERVER_URL."/appapi/fblogin/".$rand;
         //echo $url; die();
         $result = callAPI("GET", $url, $data);
-        
+        //echo "andy1";p($result);die();
+        $result_obj = json_decode($result);
         $uid = 0;
         $uid = $result_obj->user->uid;
         $auth_token = $result_obj->token;
@@ -3639,7 +3646,7 @@ elseif ($login_type == 2){
 
 
         if ($uid) {
-            $local_account = twtlogin($data);
+            $local_account = fblogin($data);
             //p($local_account);echo "andy";die();
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
@@ -3653,7 +3660,6 @@ elseif ($login_type == 2){
                 $account['status_code'] = "1";
                 $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
-                $account['data']['is_first_login'] = "$is_first_login";
                 $account['data']['auth_token'] = "$auth_token";
             } else {
                 watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
