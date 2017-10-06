@@ -196,12 +196,10 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
     $form['field_survey_start_date']['#prefix'] = '<div id="newsletter-date-time-wrapper">';
     $form['field_newsl_time']['und']['#suffix'] = '</div>';
 
-    // Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
-    $form['actions']['submit']['#submit'][] = 'itg_newsletter_submit_handler_for_redirect';
-
     // Call function after build
     $form['#after_build'][] = 'itg_newsletter_form_after_build';
-
+    // Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
+    $form['actions']['submit']['#submit'][] = 'itg_newsletter_submit_handler_for_redirect';
     $allowed_ct = array('_none' , 'story' , 'videogallery' , 'photogallery');
 
     foreach ($form['field_cm_select_type']['und']['#options'] as $CT => $options) {
@@ -220,16 +218,20 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
     if(arg(2) == 'edit') {
       // Handle edit case.
       // Below code limit the sections options.
-      $cm_select_type = $form['#node']->field_cm_select_type['und'][0]['value'];
-      $options_array = json_decode(_get_newslatter_sections($cm_select_type));
-      $form['field_story_category']['#prefix'] = '<div id="field_story_category_id">';
-      $form['field_story_category']['#suffix'] = '</div>';
-      $options = array();
-      $options['_none'] = t('- None -');
-      foreach($options_array as $option) {
-        $options[$option->value] = $option->text;
+      $nl_type = $form['#node']->field_newsl_newsletter_type['und'][0]['value'];
+      $nl_content = $form['#node']->field_newsl_newsletter_content['und'][0]['value'];
+      if (isset($nl_type) && $nl_type == "automatic" && $nl_content == "select_section") {
+        $cm_select_type = $form['#node']->field_cm_select_type['und'][0]['value'];
+        $options_array = json_decode(_get_newslatter_sections($cm_select_type));
+        $form['field_story_category']['#prefix'] = '<div id="field_story_category_id">';
+        $form['field_story_category']['#suffix'] = '</div>';
+        $options = array();
+        $options['_none'] = t('- None -');
+        foreach($options_array as $option) {
+          $options[$option->value] = $option->text;
+        }
+        $form['field_story_category']['und']['#options'] = $options;
       }
-      $form['field_story_category']['und']['#options'] = $options;
     }
   }
 

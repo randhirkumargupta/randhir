@@ -99,7 +99,13 @@ function itg_front_end_common_block_view($delta = '') {
       break;
 
     case 'vukkul_block':
-      $block['content'] = _vukkul_block_content();
+      $is_front_page = drupal_is_front_page();
+      if ($is_front_page) {
+        $block['content'] = '';
+      }
+      else {
+        $block['content'] = _vukkul_block_content();
+      }
       break;
     
     case 'related_video_block':
