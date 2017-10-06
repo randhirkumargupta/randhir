@@ -311,8 +311,8 @@ function itg_quiz_views_pre_render(&$view) {
  * Implement hook_form_views_exposed_form_alter.
  * {@inheritdoc}
  */
-function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {  
-   if ($form['#id'] == 'views-exposed-form-manage-quiz-page' || $form['#id'] == 'views-exposed-form-manage-quiz-page-1') {     
+function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+   if ($form['#id'] == 'views-exposed-form-manage-quiz-page' || $form['#id'] == 'views-exposed-form-manage-quiz-page-1' || $form['#id'] == 'views-exposed-form-manage-quiz-page-2') {     
      // Call function autocomplete to show matching titles.
      $form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));
