@@ -461,6 +461,12 @@ jQuery(document).ready(function () {
         jQuery('.head-live-tv .mobile-user').click(function () {
             jQuery(this).next('ul.menu').toggle();
         });
+        
+        if(is_mobile){
+                jQuery('.head-live-tv .user-icon').click(function () {
+                jQuery(this).next('ul.menu').toggle();
+            });
+        }
     }
 
     //ITG footer
@@ -555,16 +561,6 @@ jQuery(document).ready(function () {
     });
     var largest = Math.max.apply(Math, arrayOne);
     jQuery(".factoids-slider li").css('height', largest + "px");
-    //PrettyPhoto
-    if (jQuery.isFunction(jQuery("a[rel^='prettyPhoto']").prettyPhoto)) {
-        jQuery("a[rel^='prettyPhoto']").prettyPhoto({
-            default_width: 1077,
-            default_height: 770,
-            show_title: false,
-            deeplinking: false,
-            allow_expand: false,
-        });
-    }
 
 });
 
@@ -1049,6 +1045,16 @@ jQuery(document).ready(function (e) {
         load_video_in_slider(getvideofid, ajaxpath, getvideoindex)
 
     });
+    
+    
+    jQuery('.migrate-thumb-video').click(function () {
+        var getvideoimage = jQuery(this).attr('data-image');
+        var getvideonid = jQuery(this).attr('data-nid');
+        var getvideourl = jQuery(this).attr('data-video-url');
+        var ajaxpath = Drupal.settings.basePath + 'getvideoplayer-migrated';
+        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid,getvideourl)
+
+    });
     jQuery('.itg-embed-photo-slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -1159,6 +1165,30 @@ function load_video_in_slider(fid, path, getvideoindex) {
         data: { 'fid': fid, 'tabindex': getvideoindex },
         success: function (data) {
             jQuery('#video_palyer_container').html(data);
+            jQuery('.loading-video').hide();
+
+        },
+        complete: function () {
+        },
+        error: function (xhr, desc, err) {
+            console.log(xhr);
+            console.log("Details: " + desc + "\nError:" + err);
+        }
+    });
+
+}
+
+function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid,getvideourl) {
+
+    jQuery.ajax({
+        url: ajaxpath,
+        type: 'get',
+        beforeSend: function () {
+            jQuery('.loading-video').show();
+        },
+        data: { 'video_image': getvideoimage, 'nid': getvideonid , 'video_url': getvideourl },
+        success: function (data) {
+            jQuery('#migrate_video_palyer_container').html(data);
             jQuery('.loading-video').hide();
 
         },
