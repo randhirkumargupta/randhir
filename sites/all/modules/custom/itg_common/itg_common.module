@@ -1769,7 +1769,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
     foreach ($result[0] as $value1) {
       $Twitterdataid = itg_get_twitter_embeded_id($value1);
       if ($Twitterdataid != 0) {
-        $ampTwitterValue1 = str_replace("<blockquote", "<blockquote placeholder ", $value1);
+        //$ampTwitterValue1 = str_replace("<blockquote", "<blockquote placeholder ", $value1);
         
         $amp_twitter = '<amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter>'; //data-cards="hidden"
         //pr($value1);
@@ -1805,7 +1805,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
       $Twitterdataid = itg_get_twitter_embeded_video_id($value1);
       $Twitterdataid = preg_replace('/\?.*/', '', $Twitterdataid);
       if ($Twitterdataid != 0) {
-        $ampTwitterValue1 = str_replace("<blockquote", "<blockquote placeholder ", $value1);
+        //$ampTwitterValue1 = str_replace("<blockquote", "<blockquote placeholder ", $value1);
         // echo $Twitterdataid; die();
         $amp_twitter = '<p><amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter></p>'; //data-cards="hidden"
         //echo $amp_twitter; die();
