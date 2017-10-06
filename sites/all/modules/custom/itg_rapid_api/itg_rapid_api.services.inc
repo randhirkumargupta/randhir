@@ -5270,7 +5270,7 @@ function itg_rapid_api_authtoken_verification($token) {
             return $account_err;
         }
         if (!drupal_valid_token($token, 'services')) {
-            $res['status_code'] = "2";
+            $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
         } else {
             $res['status_code'] = "1";
