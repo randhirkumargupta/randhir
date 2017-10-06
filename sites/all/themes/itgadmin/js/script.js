@@ -360,13 +360,14 @@ jQuery(document).ready(function () {
         });
         $('.video-in-form').click(function () {
             var getvideo_id = $(this).attr('data-video-id');
+             var getvideo_repo = $(this).attr('data-type-repo');
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'dailymotion-video-play',
                 type: 'post',
                 beforeSend: function (xhr) {
                     window.parent.jQuery('#widget-ajex-loader').show();
                 },
-                data: {'videoid': getvideo_id},
+                data: {'videoid': getvideo_id,'getvideo_repo':getvideo_repo,},
                 success: function (data) {
 
                     var appenddata = '<div id="smi-popup" class="itg-popup itg-photo-popup">';

@@ -49,10 +49,16 @@
             });
 
             $('#edit-field-event-media-und-0-remove-button').hide();
-            if(jQuery( ".cancel" ).is("#edit-field-event-highlights-und-1-remove-button")) {
+            if (jQuery(".cancel").is("#edit-field-event-highlights-und-1-remove-button")) {
                 $('#edit-field-event-highlights-und-0-remove-button').show();
-            }else {
-              $('#edit-field-event-highlights-und-0-remove-button').hide(); 
+            } else {
+                $('#edit-field-event-highlights-und-0-remove-button').hide();
+            }
+            
+            if (jQuery(".cancel").is("#edit-field-event-tabs-und-1-remove-button")) {
+                $('#edit-field-event-tabs-und-0-remove-button').show();
+            } else {
+                $('#edit-field-event-tabs-und-0-remove-button').hide();
             }
             
             $('#edit-field-program-schedule-und-0-remove-button').hide();
@@ -105,6 +111,44 @@
                     $('.field-name-field-group-registration-fee-10').show();
                 }
             });
+
+            jQuery('.form-field-name-field-event-tabs .form-radio').on('change', function () {
+                var value = jQuery(this).val();
+                var tabsefFields = jQuery(this).parents('tr.draggable').find('.field-name-field-tab-sef, .field-name-field-tabs-description');
+                var taburlFields = jQuery(this).parents('tr.draggable').find('.field-name-field-tab-url');
+
+                if (value === 'tab_url') {
+                    taburlFields.find('input').val('');
+                    taburlFields.find('textarea').html('');
+                    taburlFields.show();
+                    tabsefFields.hide();
+                } else if (value === 'tab_sef') {
+                    tabsefFields.find('input').val('');
+                    tabsefFields.find('textarea').html('');
+                    tabsefFields.show();
+                    taburlFields.hide();
+                }
+
+            });
+
+
+            jQuery('.form-field-name-field-event-tabs tr.draggable').each(function () {
+                jQuery(this).find('.field-name-field-tab-sef-tab-url .form-type-radio').each(function () {
+                    var defaltVal = jQuery(this).find('input[type="radio"]:checked').val();
+                    var taburlFields = jQuery(this).parents('td').find('.field-name-field-tab-sef, .field-name-field-tabs-description');
+                    var tabsefFields = jQuery(this).parents('td').find('.field-name-field-tab-url');
+
+                    if (defaltVal === 'tab_url') {
+                        taburlFields.hide();
+                        tabsefFields.show();
+                    } else if (defaltVal === 'tab_sef') {
+                        tabsefFields.hide();
+                        taburlFields.show();
+                    }
+                });
+            });
         }
     }
 })(jQuery);
+
+
