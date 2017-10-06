@@ -64,7 +64,7 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $metatags = get_node_metatags_by_nid($value['nid']);
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
-      $kicker_text = html_entity_decode($value['field_story_kicker_text_value']);
+      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $keywords = '';
       if ($metatags) {
         $keywords = $metatags['keywords']['value'];

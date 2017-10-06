@@ -37,6 +37,8 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
     $xml = genrate_msn_feed_story_syndication_xml($result, $section_name);
+//    header( 'content-type: text/xml' );
+//    print $xml;die;
     $xml_path = 'sites/default/files/feeds/msnfeeds/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
@@ -54,6 +56,7 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
     $xml .= '<NewsEnvelope>';
     $xml .= '<DateAndTime>' . $current_date . '</DateAndTime>';
     $xml .= '</NewsEnvelope>';
+    
     foreach ($result as $key => $value) {
       
       $nid = $value['nid'];
@@ -66,7 +69,9 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
 
-      $kicker_text = html_entity_decode($value['field_story_kicker_text_value']);
+      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+      $title = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['title']));
+      
       $year = date('Y');
       $xml .= '<NewsItem LinkType="normal">';
       $xml .= '<Identification>';
@@ -90,7 +95,7 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
       $xml .= '<NewsComponent>';
       $xml .= '<Role FormalName="Main"/>';
       $xml .= '<NewsLines>';
-      $xml .= '<HeadLine>' . $value['title'] . '</HeadLine>';
+      $xml .= '<HeadLine>' . $title . '</HeadLine>';
       $xml .= '<SlugLine>' . $kicker_text . '</SlugLine>';
       $xml .= '<MoreLink/>';
       $xml .= '</NewsLines>';
