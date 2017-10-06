@@ -3590,7 +3590,7 @@ if ($validation_error_str) {
             }
             if ($auth_token) {      
                 
-                
+                $user = updateUsedrProfileAtSignup_rapid($data, 1); 
                 $account['status_code'] = "1";
                 $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
@@ -3675,6 +3675,7 @@ if ($validation_error_str) {
                 $is_first_login = 0;
             }
             if ($auth_token) {
+                $user = updateUsedrProfileAtSignup_rapid($data, 1); 
                 $account['status_code'] = "1";
                 $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
