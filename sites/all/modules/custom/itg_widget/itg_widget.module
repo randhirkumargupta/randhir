@@ -597,7 +597,7 @@ function itg_widget_block_view($delta = '') {
         // featured photo carousel reordering widget case
         case 'featured_photo_carousel':
             drupal_add_library('flexslider', 'flexslider');
-            libraries_load('flexslider');
+           // libraries_load('flexslider');
             module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');
 
             drupal_add_js('jQuery(window).load(function() {

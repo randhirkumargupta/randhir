@@ -738,7 +738,7 @@ function itg_syndication_js_alter(&$js) {
  * {@inheritdocs}
  */
 function itg_syndication_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
-  if($form['#term']['vocabulary_machine_name'] == 'client_title') {
+  if($form_state['input']['op'] != 'Delete' && $form['#term']['vocabulary_machine_name'] == 'client_title') {
     $form['#validate'][] =  'itg_syndication_client_title_validate';
   }
 }
