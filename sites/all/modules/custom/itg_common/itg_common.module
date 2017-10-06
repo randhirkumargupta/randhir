@@ -1729,7 +1729,6 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
 
   preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $fullReplacesBodyText, $iframes);
 
-  //    print_r($matches);       
   foreach ($iframes[0] as $iframes) {
     preg_match('/src="([^"]+)"/', $iframes, $match);
     $frame_url = parse_url($match[1]);
@@ -1769,13 +1768,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
     foreach ($result[0] as $value1) {
       $Twitterdataid = itg_get_twitter_embeded_id($value1);
       if ($Twitterdataid != 0) {
-        //$ampTwitterValue1 = str_replace("<blockquote", "<blockquote placeholder ", $value1);
-        
-        $amp_twitter = '<amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter>'; //data-cards="hidden"
-        //pr($value1);
-        //pr($amp_twitter);
+       $amp_twitter = '<amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter>'; //data-cards="hidden"
         $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
-        //p($fullReplacesBodyText);
         $value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
 
@@ -1872,7 +1866,6 @@ function itg_get_instagram_shortcode($bodystr) {
       $hrefs[] = $tag->getAttribute('href');
       }
     }
-    //p($hrefs);
     $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
     $twitterurl_embedded_url_refined_url = str_replace("https://www.instagram.com/", "", $twitterurl_embedded_url);
     $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
