@@ -195,7 +195,7 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
 
     $form['field_survey_start_date']['#prefix'] = '<div id="newsletter-date-time-wrapper">';
     $form['field_newsl_time']['und']['#suffix'] = '</div>';
-
+    
     // Call function after build
     $form['#after_build'][] = 'itg_newsletter_form_after_build';
     // Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
@@ -313,7 +313,6 @@ function _generate_options_for_newslatter($cm_select_type) {
  * @param array $form_state
  */
 function itg_newsletter_submit_handler_for_redirect($form , &$form_state) {
-
   if (isset($_SESSION['messages']['status'])) {
     unset($_SESSION['messages']['status']);
   }
@@ -410,7 +409,8 @@ function itg_newsletter_views_pre_render(&$view) {
   // Add "Create Newsletter" button on listing page of Newsletter
   if ($view->name == "manage_newsletter") {
     $header_content_newsletter = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
-    $header_content_newsletter .= '<a href="./node/add/newsletter">Create Newsletter</a>';
+    // $header_content_newsletter .= '<a href="./node/add/newsletter">Create Newsletter</a>';
+    $header_content_newsletter .= l(t('Create Newsletter'), 'node/add/newsletter', array('query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content_newsletter;
   }
   // Add create button for Newsletter Template
