@@ -14,7 +14,7 @@ function fblogin($data) {
 //    print_r($data);
 //    echo "</pre>";
 //    exit();    
-    $token = $data['token'];
+     $token = $data['token'];
     $app_id_social = $data['app_id'];
     $uname_social = $data['uname'];
     $uid_social = $data['uid'];
@@ -101,7 +101,7 @@ function userloginFB($uname, $uidget, $password) {
  * @return array
  */
 function userSignupFB($uname_social, $uid_social, $password) {
-    $mail = $uid_social . "@facebook.com";
+    $mail = $uid_social;
     $username = $uname_social;    
     $first_name = "";
     $last_name = "";

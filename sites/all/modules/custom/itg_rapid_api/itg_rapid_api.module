@@ -605,12 +605,12 @@ function callAPI($method, $url, $data = false) {
     // Optional Authentication:
     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     curl_setopt($curl, CURLOPT_USERPWD, "itgddev:itgd@789");
-
+//echo $url; die();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
     $result = curl_exec($curl);
-
+//var_dump($result);die();
     curl_close($curl);
 
     return $result;
