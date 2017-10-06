@@ -35,6 +35,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_indiatoday_yahoo.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['feeds/msnfeeds/story'] = array(
+    'page callback' => 'itg_msn_feed_story_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_msn_feed_story.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -120,6 +126,22 @@ function get_term_name_by_tid($tid = NULL) {
 }
 
 function get_content_city($nid = NULL) {
+  $city = '';
+  if (!empty($nid)) {
+    $query = db_select('field_data_field_stroy_city', 'city');
+    $query->leftJoin('taxonomy_term_data', 'tdata', 'tdata.tid=city.field_stroy_city_tid');
+    $query->fields('tdata', array('name'));
+    $query->fields('city', array('field_stroy_city_tid'));
+    $query->condition('city.entity_id', $nid, '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) > 0) {
+      $city = $result[0]['name'];
+    }
+  }
+  return $city;
+}
+
+function get_byline_by_nid($nid = NULL) {
   $city = '';
   if (!empty($nid)) {
     $query = db_select('field_data_field_stroy_city', 'city');
