@@ -133,6 +133,14 @@ function itg_mobile_feed_menu() {
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
+  $items['admin/api-configuration/feed-api/redis-cache-pattern'] = array(
+    'title' => 'Flush Redis Cache Key Pattern',
+    'description' => 'Flush Redis Cache Key Pattern',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('redis_cache_pattern_manager'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   $items['admin/api-configuration/feed-api/tid-config'] = array(
     'title' => 'Feed Taxonomy Configuration',
@@ -959,4 +967,41 @@ function emptygetRelatedNodeXmlTag() {
   $output .= "</related>";
 
   return $output;
+}
+
+
+/*
+ * creage form for redis cache apttern delete by admin
+ */
+function redis_cache_pattern_manager() {
+  $form = array();
+
+  $form['redis_cache_pattern'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Remove Redis Cache Key'),
+    '#size' => 60,
+    '#description' => t("Please Put Redis Key"),
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete'),
+  );
+
+  return $form;
+}
+
+/*
+ * redis cache apttern form submit
+ */
+function redis_cache_pattern_manager_submit($form,&$form_state){
+
+  $key_patt = $form_state['values']['redis_cache_pattern'];
+  $responce = redis_key_pattern_delete($key_patt);
+  if($responce != '1'){
+     drupal_set_message('Unable to delete redis Cache','error');
+  }else {
+     drupal_set_message('Redis Key Has been deleted Successfully.');
+  }
+
 }
