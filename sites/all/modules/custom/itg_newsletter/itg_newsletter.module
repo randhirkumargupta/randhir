@@ -1032,6 +1032,12 @@ function itg_newslatter_get_subscribe_page_users_email($getsection) {
  * @return array
  */
 function itg_newsletter_get_section_stories($section , $crontime , $previoustime, $node = array()) {
+  $content_limit = variable_get('newsletter_content_limit');
+  if (isset($content_limit) && is_numeric($content_limit)) {
+    $renge = $content_limit;
+  } else {
+    $renge = 20;
+  }
   foreach ($node->field_cm_select_type[LANGUAGE_NONE] as $key => $val) {
     $c_type[] = $val['value'];
   }
@@ -1044,7 +1050,7 @@ function itg_newsletter_get_section_stories($section , $crontime , $previoustime
   $query->condition('fsc.field_story_category_tid' , $section , 'IN');
   $query->condition('n.changed' , $previoustime , '<=');
   $query->orderBy('n.nid' , 'DESC');
-  $query->range(0 , 20);
+  $query->range(0 , $renge);
   $result = $query->execute();
   while ($records = $result->fetchAssoc()) {
     $nids[] = $records['nid'];
