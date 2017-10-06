@@ -4531,6 +4531,7 @@ function itg_rapid_api_log_out($token) {
     $rand = rand();
     $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
+    $token = $params['auth_token'];
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
     if (!$result_obj->uid) {
@@ -4538,6 +4539,13 @@ function itg_rapid_api_log_out($token) {
         $account_err['status_message'] = "Invalid User_ID";
         return $account_err;
     }
+    
+    if (!drupal_valid_token($token, 'services')) {
+            $res['status_code'] = "0";
+            $res['status_message'] = "invalid token";
+            return $res;
+        }
+    
     //$params = $_POST;
     {
         // call sso server api
