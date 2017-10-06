@@ -1117,29 +1117,24 @@ function homePageJsonPoll() {
     //$n_polls = $n_polls_data['data'];
     
     $poll_json = " {
-                                \"p_id\": \"837281\",
+                                \"p_id\": \"837283\",
                                 \"p_is_sponsored\": \"\",
                                 \"p_sponsored_icon\": \"\",
                                 \"p_sponsored_link\": \"\",
                                 \"p_publish_datetime\": \"2017-08-25 15:30:00\",
-                                \"p_title\": \"Government says Right to Privacy is a fundamental right but should be subjected to reasonable restrictions\",
-                                \"p_image\": \"\",
-                                \"p_share_link\": \"https://peg3z.app.goo.gl/akjJ8zS0PCsmv0vx2\",
+                                \"p_title\": \"BJP says Supreme Court's triple talaq verdict will end communal appeasement politics.\",
+                                \"p_image\": \"http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/card_14618248577791503655685.jpg\",
+                                \"p_share_link\": \"https://peg3z.app.goo.gl/qYPfjFjqTea5uHLR2\",
                                 \"p_option\": [
                                     {
-                                        \"o_id\": \"1031143\",
-                                        \"o_title\": \"Can't Say\",
-                                        \"o_image\": \"\"
+                                        \"o_id\": \"1031148\",
+                                        \"o_title\": \"\",
+                                        \"o_image\": \"http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/I-agree1981503655508.jpg\"
                                     },
                                     {
-                                        \"o_id\": \"1031144\",
-                                        \"o_title\": \"Disagree\",
-                                        \"o_image\": \"\"
-                                    },
-                                    {
-                                        \"o_id\": \"1031145\",
-                                        \"o_title\": \"Agree\",
-                                        \"o_image\": \"\"
+                                        \"o_id\": \"1031149\",
+                                        \"o_title\": \"\",
+                                        \"o_image\": \"http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/22167215-disagree-rubber-stamp-over-a-white-background9401503655569.jpg\"
                                     }
                                 ]
                             }";
