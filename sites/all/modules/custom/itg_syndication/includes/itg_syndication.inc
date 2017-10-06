@@ -34,6 +34,7 @@ function itg_syndication_generate_xml($data) {
   }
 
   watchdog("Syndication", "delivery_mode_type : $delivery_mode_type");
+  itg_watchdog("Syndication_file", $file);
   // Decide sharing mode
   switch ($delivery_mode_type) {
     // 1. Fetch web URL (our server)
@@ -262,6 +263,7 @@ function get_syndication_feed_byurl() {
   }
   $itg_query->orderBy('feed.created_date', 'DESC');
   $itg_query->range(0, 100);
+
   $itg_result = $itg_query->execute()->fetchAll();
   if (!empty($itg_result)) {
     $xml = file_get_contents($itg_result[0]->xml_name);

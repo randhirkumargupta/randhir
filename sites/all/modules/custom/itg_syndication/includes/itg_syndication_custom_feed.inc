@@ -31,11 +31,17 @@ function generate_custom_pattern_feed($data) {
     $client = isset($data['client_title']) ? $data['client_title'] : "";
     $content_type = isset($data['web_property']) ? $data['web_property'] : "";
     $section_id = isset($data['section_id']) ? $data['section_id'] : "";
+    $category_id = isset($data['category_id']) ? $data['category_id'] : "";
     $frequency = isset($data['frequency']) ? $data['frequency'] : "";
     $section_name = "";
+    $category_name = "";
     if (!empty($section_id)) {
         $section_name_obj = get_term_name_from_tid($section_id);
         $section_name = $section_name_obj->name;
+    }
+    if (!empty($category_id)) {
+      $category_name_obj = get_term_name_from_tid($category_id);
+      $category_name = $category_name_obj->name;
     }
     // As known magazine is story content.
     if ($content_type == 'magazine') {
@@ -76,7 +82,7 @@ function generate_custom_pattern_feed($data) {
                 $feed .= "<![CDATA[ " . htmlspecialchars($pattern['field_syndication_footer_value'], ENT_XML1, 'UTF-8') . " ]]>";
                 $feed .= '</footer>';
             }
-            $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed);
+            $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $category_name,  $content_type, $frequency, $feed_dir, $feed);
             return $file_path_feed;
         } else {
             //$feed = feed_starting_tags($feed_type);
@@ -84,7 +90,8 @@ function generate_custom_pattern_feed($data) {
             foreach ($nids as $nid) {
                 $feed .= get_custom_feeds_files($nid, $default_pattern, $feed_type);
             }
-            $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed);
+            $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $category_name, $content_type, $frequency, $feed_dir, $feed);
+          itg_watchdog("Syndication_file_path_feed", $file_path_feed);
             return $file_path_feed;
         }
     }
@@ -93,7 +100,7 @@ function generate_custom_pattern_feed($data) {
     }
 }
 
-function _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed) {
+function _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $category_name, $content_type, $frequency, $feed_dir, $feed) {
     if ($feed_type == 'rss' || $feed_type == 'mrss' || $feed_type == 'xml') {
         $final_feed = get_full_feed_after_replace_items_tags_wtih_dollers($default_pattern, $feed);
         $var_array = get_vars_from_feed_pattern($final_feed, $feed_type);
@@ -105,7 +112,7 @@ function _get_feed_file_url_for_syndication($feed_type, $default_pattern, $clien
     $dom->loadXML($feed);
     $dom->formatOutput = true;
     $feed = $dom->saveXML($dom->documentElement);
-    $filename = sydication_pattren_file_name("$client - $today", $feed_type, $section_name, $content_type, $frequency, $feed_type);
+    $filename = sydication_pattren_file_name("$client - $today", $feed_type, $section_name, $category_name, $content_type, $frequency, $feed_type);
     $feed = html_entity_decode($feed);
     $file_path_feed = sydication_feed_file_path($feed, $feed_dir, $filename, $section_name);
     return $file_path_feed;
@@ -185,7 +192,7 @@ function feed_ending_tags($feed_type) {
  * @param string $extention
  * @return string
  */
-function sydication_pattren_file_name($name, $extention, $section = "", $content_type = "", $frequency = "", $feed_type = "") {
+function sydication_pattren_file_name($name, $extention, $section = "", $category = "", $content_type = "", $frequency = "", $feed_type = "") {
     if ($extention == 'xml' || $extention == 'rss' || $extention == 'mrss') {
         $extention = 'xml';
     }
@@ -195,7 +202,12 @@ function sydication_pattren_file_name($name, $extention, $section = "", $content
     } else {
         $feed_type = strtolower($feed_type);
         // Handled for Syndication Rules.
-        $filename = itg_common_url_friendly_path("$section-$content_type") . "-$frequency-$feed_type-feed.$extention";
+        if(!empty($category_name)) {
+          $filename = itg_common_url_friendly_path("$section-$category-$content_type") . "-$frequency-$feed_type-feed.$extention";
+        } else {
+          $filename = itg_common_url_friendly_path("$section-$content_type") . "-$frequency-$feed_type-feed.$extention";
+        }
+
     }
     return $filename;
 }
