@@ -84,7 +84,7 @@ function generatePhotoCategoryList($tid, $pageno) {
         if ($tid > 0) {
             $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
         } else {
-            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
+            $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 1208521, $max_depth = NULL, $load_entities = FALSE);
         }
         $term_tree_count = count($term_tree);
         if ($term_tree_count) {
