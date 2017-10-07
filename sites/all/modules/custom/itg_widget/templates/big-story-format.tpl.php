@@ -89,7 +89,7 @@ if (!empty($data['node_data'])) :
           $pipelineclass = "";
           if (!empty($data['node_data']->type) && $data['node_data']->type == 'story') {
                 if (function_exists('itg_common_get_addontitle')) {
-                  $add_on_data = itg_common_get_addontitle($data['node_data']->nid);
+                  $add_on_data = itg_common_get_addontitle($data['node_obj']);
                   
                   if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
                     $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
