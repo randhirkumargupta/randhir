@@ -8,7 +8,7 @@
  */
 
 
-global $theme, $user;
+global $theme, $user, $base_url;
 $preview = NULL;
 
 if (arg(2) == 'preview') {
@@ -338,6 +338,67 @@ if ($theme != 'itgadmin') {
             </div>  
         </div>
         <!-- News Section card Ends -->
+        <!-- Photogallery Section -->
+        <div class="news-photo-section">
+        <h3><span>Latest Photo Galleries</span></h3>
+        <ul class="photo-list">
+		<?php
+			$gallery_items = itg_common_get_content_by_section('1208521', 'photogallery');
+			foreach($gallery_items as $item_key => $item_val){
+				if ((!empty($item_val['uri']) && isset($item_val['uri']))) {
+					$image = theme('image_style',array('path' => $item_val['uri'], 'style_name' => 'video_landing_page_170_x_127'));
+				}
+				else{
+					$image = '<img src = "'.$base_url.'/'. drupal_get_path('theme', 'itg').'/images/itg_image170x127.jpg">';
+				}
+				?>
+				<li class="col-md-3">
+					<div class="tile">
+						<figure>
+						<?php print l($image, 'node/'.$item_val['nid'], array('html' => TRUE)); ?>
+						<figcaption><i class="fa fa-camera" aria-hidden="true"></i><?php print itg_common_count_images_in_photogallery($item_val['nid']); ?> images</figcaption>
+						</figure>
+						<span class="posted-on"><?php print format_date($item_val['created'], 'itg_day_date'); ?></span>
+						<p title="<?php print $item_val['title'];?>">
+						<?php print l($item_val['title'], 'node/'.$item_val['nid']); ?>
+						</p>
+					</div>
+				</li>
+			<?php }			
+		?>
+		</ul>
+		</div>
+		<!-- Videogallery section -->
+		<div class="news-photo-section">
+		<h3><span>Latest Video Galleries</span></h3>
+        <ul class="photo-list">
+		<?php
+			$gallery_items = itg_common_get_content_by_section('1206552', 'videogallery');
+			foreach($gallery_items as $item_key => $item_val){
+				if ((!empty($item_val['uri']) && isset($item_val['uri']))) {
+					$image = theme('image_style',array('path' => $item_val['uri'], 'style_name' => 'video_landing_page_170_x_127'));
+				}
+				else{
+					$image = '<img src = "'.$base_url.'/'. drupal_get_path('theme', 'itg').'/images/itg_image170x127.jpg">';
+				}				
+				?>
+				<li class="col-md-3">
+					<div class="tile">
+						<figure>
+						<?php print l($image, 'node/'.$item_val['nid'], array('html' => TRUE)); ?>
+						<figcaption><i class="fa fa-play-circle"></i> <?php print $item_val['field_video_duration_value']; ?></figcaption>
+						</figure>
+						<span class="posted-on"><?php print format_date($item_val['created'], 'itg_day_date'); ?></span>
+						<p title="<?php print $item_val['title'];?>">
+						<?php print l($item_val['title'], 'node/'.$item_val['nid']); ?>
+						</p>
+					</div>
+				</li>
+			<?php }			
+		?>
+		</ul>
+		</div>
+		<!-- Static content -->
         <div class="clear"></div><div class="news_content"><p>India Today News breaks the most important stories in and from India and abroad in six sections - India News, Business News, Cinema News, Sports News, World News and Lifestyle News. India News keeps tab of every development in all parts of India. Business News has the latest business updates from India and abroad. Cinema News tracks the latest from Bollywood, Hollywood and the South film industries and TV channels. Sports News has all the sports from India and abroad with a special focus on cricket. Lifestyle News presents developments that impact one's lifestyle. World News makes sense of news across the world and its impact on India</p></div>
     </div>
     <!-- Left 8 Block section -->
