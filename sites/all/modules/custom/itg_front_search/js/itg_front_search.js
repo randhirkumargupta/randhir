@@ -133,6 +133,8 @@ function getParameterByName(name, url) {
 }
 
 jQuery(document).ready(function () {
+    //ON load hide calendar
+    jQuery(".caln").hide();
     //ON CLICK SHOW FILTER TYPES
     jQuery("body, html").find('.searh-all-filters').prepend('<div class="views-exposed-widget search-filter">Filters: </div>');
     jQuery("body, html").on("click", ".searh-all-filters label", function () {
