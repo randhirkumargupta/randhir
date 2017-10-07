@@ -1289,7 +1289,8 @@ function _sponsor_category_setting() {
 function _is_external_url_story_article($nid) {
   
   $is_external_url = FALSE;
-  if (isset($nid)) {
+  //commented by shravan and discussed with shashank
+ /* if (isset($nid)) {
     if (db_table_exists('field_data_field_story_external_url')) {
       $type_query = db_select('node', 'n');
       $type_query->fields('n', array('type'));
@@ -1308,6 +1309,6 @@ function _is_external_url_story_article($nid) {
         }
       }
     }
-  }
+  }*/
   return $is_external_url;
 }

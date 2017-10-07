@@ -1472,7 +1472,8 @@ function itg_common_url_friendly_path($pathdata) {
  */
 function _is_sponsor_story_article($nid) {
   $is_sponsor = FALSE;
-  if (isset($nid)) {
+  //code commented by shravan
+  /*if (isset($nid)) {
     $type_query = db_select('node', 'n');
     $type_query->fields('n', array('type'));
     $type_query->condition('n.nid', $nid, '=');
@@ -1493,7 +1494,7 @@ function _is_sponsor_story_article($nid) {
         }
       }
     }
-  }
+  }*/
   return $is_sponsor;
 }
 
