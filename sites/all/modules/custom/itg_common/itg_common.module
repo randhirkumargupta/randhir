@@ -123,6 +123,15 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['itg-akamai-load-my-account'] = array(
+    'title' => 'Akamai Load My Account',
+    'description' => 'Akamai Load My Account',
+    'page callback' => 'itg_akamai_load_my_account',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_akamai.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -1061,7 +1070,7 @@ function itg_is_special_page() {
  * @return string
  *   Returns node title.
  */
-function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
+function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
   // Condition is to make free title on home page ITG-3774
   //if(drupal_is_front_page() || itg_is_special_page()) {
     $max_limit = 10000;
@@ -1071,19 +1080,13 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255, $is
   $positions_array = array();
   $left_smiles = "";
   $right_smiles = "";
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
-  $query->fields('n', array('title'));
-  $query->fields('emoji', array('field_emoji_value'));
-  $query->fields('sh', array('field_story_short_headline_value'));
-  $query->fields('emoji_2', array('field_emoji_2_value'));
-  $query->fields('emoji_pos', array('field_emoji_position_value'));
-  $query->condition('n.nid', $nid);
-  $query->condition('n.type', 'story');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $result = array(
+    'field_story_short_headline_value' => $node_obj->field_story_short_headline['und'][0]['value'],
+    'field_emoji_position_value' => $node_obj->field_emoji_position['und'][0]['value'],
+    'field_emoji_2_value' => $node_obj->field_emoji_2['und'][0]['value'],
+    'field_emoji_value' => $node_obj->field_emoji['und'][0]['value'],
+    'title' => $node_obj->title,
+  );
   if (!empty($result[0]['field_story_short_headline_value'])) {
     foreach ($result as $positions) {
       if (!empty($positions['field_emoji_position_value'])) {
@@ -1139,11 +1142,7 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255, $is
     }
   }
   else {
-    $query = db_select('node', 'n');
-    $query->fields("n", array("title"));
-    $query->condition('n.nid', $nid);
-    $result = $query->execute()->fetchField();
-    return ucfirst(mb_strimwidth($result, $min_limit, $max_limit, ".."));
+    return ucfirst(mb_strimwidth($node_obj->title, $min_limit, $max_limit, ".."));
   }
 }
 
@@ -1482,7 +1481,8 @@ function itg_common_url_friendly_path($pathdata) {
  */
 function _is_sponsor_story_article($nid) {
   $is_sponsor = FALSE;
-  if (isset($nid)) {
+  //code commented by shravan
+  /*if (isset($nid)) {
     $type_query = db_select('node', 'n');
     $type_query->fields('n', array('type'));
     $type_query->condition('n.nid', $nid, '=');
@@ -1503,7 +1503,7 @@ function _is_sponsor_story_article($nid) {
         }
       }
     }
-  }
+  }*/
   return $is_sponsor;
 }
 
@@ -1660,19 +1660,13 @@ function itg_common_global_alt_title($field_machine_name, $fid = NULL) {
  * Implements itg_common_get_addontitle().
  * @param int $nid;
  */
-function itg_common_get_addontitle($nid) {
-  if (!empty($nid)) {
-    $addon_list = array();
-    $query = db_select('field_data_field_story_new_title', 'addon');
-    $query->join('field_data_field_story_redirection_url_titl', 'addurl', 'addurl.entity_id = addon.entity_id');
-    $query->fields('addon', array('field_story_new_title_value'))
-          ->fields('addurl', array('field_story_redirection_url_titl_value'));
-    $query->condition('addon.entity_id', $nid);
-    $result = $query->execute();
-    while ($record = $result->fetchAssoc()) {
-      $addon_list['ad_title'] = $record['field_story_new_title_value'];
-      $addon_list['ad_url'] = $record['field_story_redirection_url_titl_value'];
-    }
+function itg_common_get_addontitle($node_obj) {
+  if (!empty($node_obj)) {
+     $addon_list = array();
+    //while ($record = $result->fetchAssoc()) {
+      $addon_list['ad_title'] = $node_obj->field_story_new_title['und'][0]['value'];
+      $addon_list['ad_url'] = $node_obj->field_story_redirection_url_titl['und'][0]['value'];//$record['field_story_redirection_url_titl_value'];
+    //}
 
     return $addon_list;
   }

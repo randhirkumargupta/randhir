@@ -36,7 +36,7 @@ function itg_fia_xml_node_feed($query) {
     $op_modified = date('F j, h:i a', $node->changed);
     $modified = date('Y-m-d\Th:i:s\Z', $node->changed);
     $auth_name = get_author_name($node->nid);
-    $desc = $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
+    $desc = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
     $embed_code_data = $node->field_social_embed_code[LANGUAGE_NONE][0]['value'];
     $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
