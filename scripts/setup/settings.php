@@ -251,7 +251,7 @@
 
 
 // setting for UAT
-$databases['default']['default'] = array(
+/*$databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'
   'slave' => 'autoslave', // optional, defaults to 'autoslave'  
@@ -289,11 +289,11 @@ $databases['sso_db']['default'] = array(
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
-);
+);*/
 // end setting for UAT
 
 //for production setting
-/*$databases['default']['default'] = array(
+$databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'  
   'slave' => array('slave1','slave2'), // optional, defaults to 'autoslave'
@@ -341,7 +341,7 @@ $databases['sso_db']['default'] = array(
       'port' => '3306',
       'driver' => 'mysql',
       'prefix' => '',
-);*/
+);
 //end production setting
 
 // Use locking that supports force master
