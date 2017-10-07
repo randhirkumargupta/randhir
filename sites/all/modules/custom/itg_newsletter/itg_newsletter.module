@@ -472,6 +472,7 @@ function itg_newsletter_shedule_date_validate($form , &$form_state) {
  * {@inheritdoc}
  */
 function itg_newsletter_node_presave($node) {
+  
   if ($node->type == 'newsletter') {
     if (!empty($node->op)) {
       $node->field_op_flag[LANGUAGE_NONE][0]['value'] = $node->op;
@@ -489,6 +490,13 @@ function itg_newsletter_node_presave($node) {
         $node->field_survey_start_date['und'][0]['value'] = $date;
         $node->field_survey_start_date['und'][0]['value2'] = $date;
       }
+    }
+  }
+  
+  // Placing Unsubscribe token/link to the node body field for newsletter template
+  if ($node->type == 'newsletter_templates') {
+    if (isset($node->body[LANGUAGE_NONE][0]['value']) && !empty($node->body[LANGUAGE_NONE][0]['value'])) {
+      $node->body[LANGUAGE_NONE][0]['value'] = $node->body[LANGUAGE_NONE][0]['value'] . '[UNSUBSCRIBEURL]';
     }
   }
 }
