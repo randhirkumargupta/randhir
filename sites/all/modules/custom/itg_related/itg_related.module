@@ -321,12 +321,14 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $str .= 'dm_field_itg_content_publish_dat:(' . $date_val_str . ')';
     }
 
-    $ctype_tab = array('story', 'photogallery', 'video');
+    $ctype_tab = array('story', 'gallery', 'video');
 
     // case if arg(1) contain either type or date
     if (!empty($arg[1]) && in_array($arg[1], $ctype_tab)) {
       if ($arg[1] == 'story' || $arg[1] == 'video') {
         $type = ucwords($arg[1]);
+      } else if($arg[1] == 'gallery') {
+        $type = 'photogallery';
       }
       else {
         $type = $arg[1];
@@ -353,6 +355,8 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if (!empty($arg[1]) && !empty($arg[2])) {
       if ($arg[1] == 'story' || $arg[1] == 'video') {
         $type = ucwords($arg[1]);
+      } else if($arg[1] == 'gallery') {
+        $type = 'photogallery';
       }
       else {
         $type = $arg[1];
@@ -366,7 +370,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     }
 
     $query->replaceParam("fq", '(' . $str . ')');
-   
+   pr($query->getSolrParams());
   }
   else if ($arg[0] == 'related-content' && !empty($_GET['width'])) {
       $bundle_name = array('story', 'blog', 'photogallery', 'videogallery', 'podcast', 'breaking_news');
