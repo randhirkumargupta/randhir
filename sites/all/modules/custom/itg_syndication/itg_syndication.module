@@ -356,6 +356,11 @@ function itg_syndication_rule_after_build($form, &$form_state) {
   return $form;
 }
 
+/**
+ * option value for category
+ * @param int $section_id
+ * @return array
+ */
 function syndication_get_categoty_option_array($section_id) {
   $option_array = array();
   $option_array['_none'] = '-None-';
@@ -368,6 +373,12 @@ function syndication_get_categoty_option_array($section_id) {
   return $option_array;
 }
 
+/**
+ * ajax callback function
+ * @param $form
+ * @param $form_state
+ * @return array
+ */
 function syndication_category_ajax_callback($form , &$form_state) {
   $selected_section_id = $form_state['triggering_element']['#value'];
   itg_watchdog('selected_section_callback_id', $selected_section_id);
@@ -392,7 +403,6 @@ function syndication_category_ajax_callback($form , &$form_state) {
     }
     $option_html .= '<option value="'.$value.'"  '.$selected.'> '.$option.' </option>';
   }
-  $commands[] = ajax_command_alert(t('ajax_command_alert() is working fine'));
   $settings['wrapper'] = $wrapper;
   $settings['option_html'] = $option_html;
   $commands[] = array (
@@ -401,7 +411,6 @@ function syndication_category_ajax_callback($form , &$form_state) {
   );
   return array('#type' => 'ajax', '#commands' => $commands);
 }
-
 
 /**
  * function for Issue list
@@ -830,6 +839,7 @@ function itg_syndication_get_rules_detaiils() {
       $entity = entity_load('field_collection_item', array($id));
       $field_syndication_content_type = $entity[$id]->field_syndication_content_type[LANGUAGE_NONE][0]['value'];
       $field_syndication_select_section = $entity[$id]->field_syndication_select_section[LANGUAGE_NONE][0]['tid'];
+      $field_syndication_sc_category = $entity[$id]->field_syndication_sc_category[LANGUAGE_NONE][0]['tid'];
       $field_syndication_feed_type = $entity[$id]->field_syndication_feed_type[LANGUAGE_NONE][0]['value'];
       $field_syndication_mode = $entity[$id]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
       $field_syndication_time = $entity[$id]->field_syndication_time[LANGUAGE_NONE][0]['value'];
@@ -841,6 +851,7 @@ function itg_syndication_get_rules_detaiils() {
       $rules_data[] = array(
         'content_type' => $field_syndication_content_type,
         'section' => get_term_name_from_tid($field_syndication_select_section)->name,
+        'category' => get_term_name_from_tid($field_syndication_sc_category)->name,
         'feed_type' => $field_syndication_feed_type,
         'feed_mode' => $field_syndication_mode,
         'feed_time' => $field_syndication_time,

@@ -43,6 +43,7 @@ function generate_custom_pattern_feed($data) {
       $category_name_obj = get_term_name_from_tid($category_id);
       $category_name = $category_name_obj->name;
     }
+
     // As known magazine is story content.
     if ($content_type == 'magazine') {
         $content_type = 'story';
@@ -51,6 +52,7 @@ function generate_custom_pattern_feed($data) {
     if (count($data) && (!empty($nids) && !empty($client) && !empty($content_type))) {
         /* get pattern of specific client for specific content_type */
         $pattern = get_client_feed_pattern($client, $content_type, $feed_type);
+
         /* Create Directory if does not exists */
         if (!empty($section_name)) {
             // Handled for Syndication rules
@@ -63,6 +65,7 @@ function generate_custom_pattern_feed($data) {
         file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
         $today = date('Y-M-d-h-m-s');
         /* Iterate for nodes */
+
         if (!empty($pattern['field_syndication_xml_formate_xml'])) {
             $default_pattern = $pattern['field_syndication_xml_formate_xml'];
             // $feed = feed_starting_tags($feed_type);
@@ -91,7 +94,7 @@ function generate_custom_pattern_feed($data) {
                 $feed .= get_custom_feeds_files($nid, $default_pattern, $feed_type);
             }
             $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $category_name, $content_type, $frequency, $feed_dir, $feed);
-          itg_watchdog("Syndication_file_path_feed", $file_path_feed);
+            itg_watchdog("Syndication_file_path_feed", $file_path_feed);
             return $file_path_feed;
         }
     }
@@ -202,7 +205,7 @@ function sydication_pattren_file_name($name, $extention, $section = "", $categor
     } else {
         $feed_type = strtolower($feed_type);
         // Handled for Syndication Rules.
-        if(!empty($category_name)) {
+        if(!empty($category)) {
           $filename = itg_common_url_friendly_path("$section-$category-$content_type") . "-$frequency-$feed_type-feed.$extention";
         } else {
           $filename = itg_common_url_friendly_path("$section-$content_type") . "-$frequency-$feed_type-feed.$extention";

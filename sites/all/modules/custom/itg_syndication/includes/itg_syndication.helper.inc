@@ -152,7 +152,7 @@ function itg_syndication_get_issue_list($magazine = NULL) {
  * @return string $file_url
  */
 function get_content_id_for_syndication($data, $created_date) {
-    if($data['content_type'] == 'magazine12345') {
+    if($data['content_type'] == 'magazine') {
         // Get issues nids.
         $issue_nids = db_select('field_data_field_issue_magazine', 'fdm');
         $issue_nids->fields('fdm', array('entity_id'));
@@ -188,6 +188,7 @@ function get_content_id_for_syndication($data, $created_date) {
         if(!empty($data['num_of_feeds'])) {
             $itg_query->range(0, $data['num_of_feeds']);
         }
+
         $itg_result = $itg_query->execute()->fetchAll();
         foreach($itg_result as $itg_val) {
             $content_id[] = $itg_val->nid;
@@ -207,6 +208,7 @@ function get_content_id_for_syndication($data, $created_date) {
         'syndication' => serialize($content_id),
         'frequency' => strtolower($data['frequency']),
     );
+
     $file_path = feed_generator_of_contents($data_array);
     $file_url = $file_path['file_path'];
     watchdog("syndication_file_url", "File url : $file_url");
