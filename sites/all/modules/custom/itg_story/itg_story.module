@@ -361,6 +361,8 @@ function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previou
     foreach ($story_widget as $widget_val) {
       $result[$widget_val] = $widget_val;
       $result_exist = itg_story_widget_data_exist($nid, 'top_stories_widget');
+      itg_watchdog('assign_widget_val', $widget_val);
+      itg_watchdog('assign_result_exist', $result_exist);
       // for top stories
       if ($widget_val == 'top_stories') {
         $weight_data = itg_story_widget_max_value('top_stories_widget');
