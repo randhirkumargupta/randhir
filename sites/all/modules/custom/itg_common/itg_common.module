@@ -1679,3 +1679,244 @@ function itg_common_taxonomy_get_parents($tid) {
 
     return isset($parents[$tid]) ? $parents[$tid] : array();
 }
+
+
+/**
+ * Implements itg_custom_amp_body_filter();
+ */
+function itg_custom_amp_body_filter($fullReplacesBodyText) {
+  
+  $fullReplacesBodyText = trim(preg_replace('/mce_href=[^>]*/', '', $fullReplacesBodyText));
+
+  $fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));
+
+  $fullReplacesBodyText = trim(preg_replace('/style=[^>]*/', '', $fullReplacesBodyText));
+
+  $fullReplacesBodyText = trim(preg_replace('/<style(.*)\/style>/', '', $fullReplacesBodyText));
+
+  preg_match_all('/<img.*src=\"(.*)\".*>/isU', $fullReplacesBodyText, $matches);
+
+  $i = 0;
+  foreach ($matches[0] as $images) {
+
+    $src = $matches[1][$i];
+    list($width, $height, $type, $attr) = getimagesize($src);
+
+    $layout_responsive = ($width > 300) ? 'layout="responsive"' : '';
+    $img = ' <amp-img  src="' . $src . '" alt="" height="' . $height . '" width="' . $width . '" ' . $layout_responsive . '></amp-img>  ';
+
+
+    $fullReplacesBodyText = str_replace($images, $img, $fullReplacesBodyText);
+
+    $i++;
+  }
+
+  preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $fullReplacesBodyText, $iframes);
+
+  foreach ($iframes[0] as $iframes) {
+    preg_match('/src="([^"]+)"/', $iframes, $match);
+    $frame_url = parse_url($match[1]);
+    if ($frame_url['scheme'] != 'https') {
+      $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
+    }
+    else {
+    $frame = '<amp-iframe width="200" height="100"
+    sandbox="allow-scripts allow-same-origin"
+    layout="responsive"
+    frameborder="0"
+    src="' . $match[1] . '">
+    </amp-iframe>';
+      $fullReplacesBodyText = str_replace($iframes, $frame, $fullReplacesBodyText);
+    }
+  }
+  
+  preg_match_all('/<style.*><\/style>/isU', $fullReplacesBodyText, $styles);
+    
+  foreach ($styles[0] as $style) {
+    $fullReplacesBodyText = str_replace($style, "", $fullReplacesBodyText);
+  }
+
+  $value_mambots = '"mambots/';
+  $string_value_mambots_replace = '"http://indiatoday.intoday.in/mambots/';
+  $fullReplacesBodyText = str_replace($value_mambots, $string_value_mambots_replace, $fullReplacesBodyText);
+  $fullReplacesBodyText = str_replace(array("<br/>", "<br>"), "", $fullReplacesBodyText);
+
+
+  $result = array();
+  $fullReplacesBodyText = $bodystr = stripcslashes($fullReplacesBodyText);
+  
+    // code to replace embed twitter
+  preg_match_all("'<blockquote class=\"twitter-tweet\"(.*)>(.*)</blockquote>'siU", $bodystr, $result);
+
+  if (!empty($result)) {
+    foreach ($result[0] as $value1) {
+      $Twitterdataid = itg_get_twitter_embeded_id($value1);
+      if ($Twitterdataid != 0) {
+       $amp_twitter = '<amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter>'; //data-cards="hidden"
+        $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
+        $value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script(.*)src=\"//platform.twitter.com/widgets.js\"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+      }
+    }
+  }
+  
+  // code to replace embed twitter video
+  preg_match_all("'<blockquote class=\"twitter-video\"(.*)>(.*)</blockquote>'siU", $bodystr, $result);
+  if (!empty($result)) {
+    foreach ($result[0] as $value1) {
+      $Twitterdataid = itg_get_twitter_embeded_video_id($value1);
+      $Twitterdataid = preg_replace('/\?.*/', '', $Twitterdataid);
+      if ($Twitterdataid != 0) {
+        //$ampTwitterValue1 = str_replace("<blockquote", "<blockquote placeholder ", $value1);
+        // echo $Twitterdataid; die();
+        $amp_twitter = '<p><amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter></p>'; //data-cards="hidden"
+        //echo $amp_twitter; die();
+        $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
+        
+        $value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script(.*)src=\"//platform.twitter.com/widgets.js\"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+      }
+    }
+  }
+  
+  // code to replace instagram
+  preg_match_all("'<blockquote class=\"instagram-media\"(.*)>(.*)</blockquote>'siU", $fullReplacesBodyText, $result);
+  if (!empty($result)) {
+    foreach ($result as $key => $value) {
+      foreach ($value as $key1 => $value1) {
+        $instagramcode = itg_get_instagram_shortcode($value1);
+        if ($instagramcode) {
+          $amp_instagram = '<p><amp-instagram data-shortcode="' . $instagramcode . '" width="381" height="500" layout="responsive"></amp-instagram></p>'; //data-cards="hidden"
+          
+          $fullReplacesBodyText = str_replace($value1, $amp_instagram, $fullReplacesBodyText);
+          $value2 = '<script src="//platform.instagram.com/en_US/embeds.js" async="" defer="" ></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+          $value2 = '<script async="" defer="" src="//platform.instagram.com/en_US/embeds.js" ></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        }
+      }
+    }
+  }
+  
+  return $fullReplacesBodyText;
+}
+
+/**
+ * Implements itg_get_instagram_shortcode();
+ */
+function itg_get_instagram_shortcode($bodystr) {
+
+  preg_match("'<blockquote class=\"instagram-media\"(.*)</blockquote>'si", $bodystr, $match);
+  if ($match) {
+    preg_match_all('/<a href="(.*)">/', $bodystr, $a);
+    $hrefs = array();
+    $dom = new DOMDocument();
+    $dom->loadHTML($match[1]);
+    $tags = $dom->getElementsByTagName('a');
+    foreach ($tags as $tag) {
+      if (strpos($tag->getAttribute('href'),'instagram') !== false) {
+      $hrefs[] = $tag->getAttribute('href');
+      }
+    }
+    $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+    $twitterurl_embedded_url_refined_url = str_replace("https://www.instagram.com/", "", $twitterurl_embedded_url);
+    $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+    $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 2];
+    return $twitter_url_emb_id;
+  }
+  return false;
+}
+
+/**
+ * Implements itg_get_twitter_embeded_id().
+ */
+function itg_get_twitter_embeded_id($bodystr) {
+  preg_match("'<blockquote class=\"twitter-tweet\"(.*)>(.*)</blockquote>'si", $bodystr, $match);
+  if ($match) {
+    preg_match_all('/<a href="(.*)">/', $bodystr, $a);
+
+    $hrefs = array();
+    try {
+      $dom = new DOMDocument();
+      $dom->loadHTML($match[1]);
+
+      $tags = $dom->getElementsByTagName('a');
+      foreach ($tags as $tag) {
+        if (strpos($tag->getAttribute('href'),'twitter') !== false) {
+        $hrefs[] = $tag->getAttribute('href');
+        }
+      }
+      $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+      $twitterurl_embedded_url_refined_url = str_replace("https://twitter.com/", "", $twitterurl_embedded_url);
+      $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+      $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 1];
+    }
+    catch (Exception $e) {
+      $twitter_url_emb_id = 0;
+    }
+    return $twitter_url_emb_id;
+  }
+  return 0;
+}
+
+/*
+ * Implements itg_get_twitter_embeded_video_id().
+ */
+function itg_get_twitter_embeded_video_id($bodystr) {
+  preg_match("'<blockquote class=\"twitter-video\"(.*)>(.*)</blockquote>'si", $bodystr, $match);
+  if ($match) {
+    preg_match_all('/<a href="(.*)">/', $bodystr, $a);
+    $hrefs = array();
+    try {
+      $dom = new DOMDocument();
+      $dom->loadHTML($match[1]);
+
+      $tags = $dom->getElementsByTagName('a');
+      foreach ($tags as $tag) {
+        $hrefs[] = $tag->getAttribute('href');
+      }
+
+      $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+      $twitterurl_embedded_url_refined_url = str_replace("https://twitter.com/", "", $twitterurl_embedded_url);
+      $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+      $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 1];
+    }
+    catch (Exception $e) {
+      $twitter_url_emb_id = 0;
+    }
+    return $twitter_url_emb_id;
+  }
+  return 0;
+}
