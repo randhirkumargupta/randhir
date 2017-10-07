@@ -601,7 +601,7 @@ function itg_photogallery_block_view($delta = '') {
 			break;
     case 'photogallery_link_menu_block':
       if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
-        $node = node_load(arg(1));
+        $node = menu_get_object();
         if ($node->type == 'photogallery') {
           $block['content'] = theme('photogallery_menu_link_block', array('data' => $data));
         }
