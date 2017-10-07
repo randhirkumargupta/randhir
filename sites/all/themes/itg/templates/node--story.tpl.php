@@ -60,13 +60,17 @@ if (!empty($content)):
   }
 
     // for activate_live_tv
-    $activate_live_tv = false;
+    $activate_live_tv = FALSE;
+    $is_sponsor_story = FALSE;
     $config = array();
     if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
         foreach ($node->field_story_configurations[LANGUAGE_NONE] as $value) {
             $config[] = $value['value'];
             if($value['value'] == 'activate_live_tv') {
-                $activate_live_tv = true;
+                $activate_live_tv = TRUE;
+            }
+            if($value['value'] == 'sponsor') {
+                $is_sponsor_story = TRUE;
             }
         }
     }
@@ -89,14 +93,14 @@ if (!empty($content)):
   $is_sponsor_story = FALSE;
   $sponsor_text = '';
   $flag = FALSE;
-  if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
-    foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $config_val) {
-      if ($config_val['value'] == 'sponsor') {
-        $is_sponsor_story = TRUE;
-        break;
-      }
-    }
-  }
+//  if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+//    foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $config_val) {
+//      if ($config_val['value'] == 'sponsor') {
+//        $is_sponsor_story = TRUE;
+//        break;
+//      }
+//    }
+//  }
   // If sponsored story then check sponsored category.
   if ($is_sponsor_story && !empty($node->field_story_category[LANGUAGE_NONE])) {
     foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $cat_val) {
