@@ -1306,7 +1306,7 @@ function itg_event_backend_get_session_sponsor($daywise) {
 
 /**
  * Implement function to get associated story
- * @return array
+ * @return arrayy
  */
 function itg_event_backend_get_session_story_title($daywise, $font_color) {
 
