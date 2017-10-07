@@ -30209,6 +30209,10 @@ span.story-sponsor-powered-text::last-word {
     height: 12px; width: 1px; top: 3px;} 
 .live-block #cricketblog .batBollDetails .bollerDetails .batsman_detail.overball{ margin-left:20px;}
 .live-block #cricketblog .batBollDetails .bollerDetails .bowler_detail.overball{ margin-left:20px;}
+
+.megareview iframe.embed-megareview{ background:#f0f0f0; }
+
+
 @media only screen and (max-width:1024px){
 	.live-block h1{ font-size:30px; line-height:36px;}	
 }

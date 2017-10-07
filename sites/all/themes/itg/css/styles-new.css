@@ -3710,6 +3710,11 @@ div#forgot-field-heading {
   display: none;
 }
 
+.embed-mega-review{ padding-bottom:15px; }
+article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .social-info{ display:block; border-top:0; width:auto; }
+article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .movie-rating{ height:60px; margin-top: 20px; }
+
+
 /* CSS To Add Zoom Effect on Images */
 @media all and (min-width: 1025px) {
   .zoom-image, #block-itg-front-end-common-related-photo-block #related-photo ul li a,
@@ -5925,7 +5930,6 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 .embed-mega-review .field-name-field-story-movie-description .field-item{font-family:"Roboto Slab", sans-serif;padding: 10px 0;     font-size: 0.9375rem;
     line-height: 27px;}
 
-
 @media all and (min-width: 768px) {
   .block-itg-personalization .personal-menu-tab, .block-itg-personalization .saved-item-tab {
     display: inline-block !important;
@@ -7106,6 +7110,8 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .feed-type ul li {
     width: 32%;
   }
+
+
 }
 @media all and (max-width: 480px) {
   .feed-type ul li {
@@ -7137,6 +7143,9 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
   .sign-in-link a {
     float: left;
   }
+  article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .social-info{ display: none; }
+  article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .movie-rating{ height:40px;margin-top:0px; }
+  article.node-mega-review-critic .embed-mega-review .movie-review-wrapper .movie-review-text,article.node-mega-review-critic .embed-mega-review .movie-review-wrapper .movie-trailer{height: auto;width: 100%;}
 }
 @media all and (max-width: 360px) {
   .cart-total-block .points-balance span:first-child {
