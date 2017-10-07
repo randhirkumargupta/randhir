@@ -370,7 +370,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     }
 
     $query->replaceParam("fq", '(' . $str . ')');
-   pr($query->getSolrParams());
+   //pr($query->getSolrParams());
   }
   else if ($arg[0] == 'related-content' && !empty($_GET['width'])) {
       $bundle_name = array('story', 'blog', 'photogallery', 'videogallery', 'podcast', 'breaking_news');
