@@ -528,12 +528,19 @@ function _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_
  * @return array
  */
 function _get_most_popular_nodes_based_on_top_20_shared($newsfrequency = NULL) {
+  // Check for dynamic content limit
+  if (isset($content_limit) && is_numeric($content_limit)) {
+    $renge = $content_limit;
+  } else {
+    $renge = 20;
+  }
+
   $nodes_shared = _get_last_24_hour_visited_node_ids_for_top_20_shared_story($newsfrequency);
   foreach ($nodes_shared as $sh_node) {
     $data_sh[$sh_node] = itg_analytics_get_node_analytics_data_only_shared_count($sh_node);
   }
   arsort($data_sh);
-  return array_slice(array_keys($data_sh), 0, 20);
+  return array_slice(array_keys($data_sh), 0, $renge);
 }
 
 /**
@@ -544,13 +551,20 @@ function _get_most_popular_nodes_based_on_top_20_shared($newsfrequency = NULL) {
  * @return array
  */
 function _get_most_popular_nodes_based_on_top_20_trending($newsfrequency = NULL) {
+  // Check for dynamic content limit
+  if (isset($content_limit) && is_numeric($content_limit)) {
+    $renge = $content_limit;
+  } else {
+    $renge = 20;
+  }
+
   //  Top 20 Trending story within 24 hours are returning from here
   $nodes_trending = _get_last_24_hour_visited_node_ids_for_top_20_trending_story($newsfrequency);
   foreach ($nodes_trending as $tr_node) {
     $data_tr[$tr_node] = itg_analytics_get_node_analytics_data($tr_node);
   }
   arsort($data_tr);
-  return array_slice(array_keys($data_tr), 0, 20);
+  return array_slice(array_keys($data_tr), 0, $renge);
 }
 
 /**
@@ -560,13 +574,20 @@ function _get_most_popular_nodes_based_on_top_20_trending($newsfrequency = NULL)
  * @return array
  */
 function _get_most_popular_nodes_based_on_top_20_most_viewed($newsfrequency = NULL) {
+  // Check for dynamic content limit
+  if (isset($content_limit) && is_numeric($content_limit)) {
+    $renge = $content_limit;
+  } else {
+    $renge = 20;
+  }
+
   //  Top 20 Trending story within 24 hours are returning from here
   $nodes_trending = _get_last_24_hour_visited_node_ids_for_top_20_most_viewed($newsfrequency);
   foreach ($nodes_trending as $tr_node) {
     $data_tr[$tr_node] = itg_analytics_get_node_analytics_data_only_view_count($tr_node);
   }
   arsort($data_tr);
-  return array_slice(array_keys($data_tr), 0, 20);
+  return array_slice(array_keys($data_tr), 0, $renge);
 }
 
 /**
