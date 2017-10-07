@@ -196,6 +196,46 @@ function event_backend_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_event_media-field_associate_story_event_new'.
+  $field_instances['field_collection_item-field_event_media-field_associate_story_event_new'] = array(
+    'bundle' => 'field_event_media',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 0,
+    'field_name' => 'field_associate_story_event_new',
+    'label' => 'Story',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'STARTS_WITH',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 1,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_event_media-field_daywise_event'.
   $field_instances['field_collection_item-field_event_media-field_daywise_event'] = array(
     'bundle' => 'field_event_media',
@@ -225,7 +265,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 2,
+      'weight' => 0,
     ),
   );
 
@@ -265,7 +305,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -305,7 +345,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -345,7 +385,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -1230,7 +1270,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -1275,7 +1315,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -1359,7 +1399,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -1445,7 +1485,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 15,
     ),
   );
 
@@ -1574,7 +1614,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 14,
     ),
   );
 
@@ -1617,7 +1657,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -1662,7 +1702,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 20,
+      'weight' => 13,
     ),
   );
 
@@ -2225,7 +2265,7 @@ function event_backend_field_default_field_instances() {
         'replace_label' => 0,
       ),
       'type' => 'field_collection_embed',
-      'weight' => 10,
+      'weight' => 14,
     ),
   );
 
@@ -2539,7 +2579,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -3191,6 +3231,7 @@ function event_backend_field_default_field_instances() {
   t('Sponsor Type');
   t('Sponsors');
   t('Start Time');
+  t('Story');
   t('Tab Highlighted Colour');
   t('Tab Sef');
   t('Tab Sef / Tab Url');
