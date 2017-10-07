@@ -1047,23 +1047,20 @@ if (!empty($content)):
 
         </div>
 
-        <?php
-        if (function_exists('taboola_view')) {
-          taboola_view();
-        }
-        ?>
-
-        <?php
-        if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
-          if (!empty($node->field_story_comment_question['und'][0]['value'])) {
-            $question = 'Q:' . $node->field_story_comment_question['und'][0]['value'];
-          }
-          ?>
-          <div class="c_ques"><?php print $question; ?></div>
           <div class="vukkul-comment">
             <div id="vuukle-emote"></div>
-            <div id="vuukle_div"></div>
+            <?php
+              if (function_exists('taboola_view')) {
+                taboola_view();
+              }
 
+              if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
+                if (!empty($node->field_story_comment_question['und'][0]['value'])) {
+                  $question = 'Q:' . $node->field_story_comment_question['und'][0]['value'];
+              }
+            ?>
+            <div class="c_ques"><?php print $question; ?></div>
+            <div id="vuukle_div"></div>
             <?php
             if (function_exists('vukkul_view')) {
               vukkul_view();
