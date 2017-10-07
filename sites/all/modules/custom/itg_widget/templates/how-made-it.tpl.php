@@ -35,7 +35,7 @@
                 <?php
                 $desc = $entity['title'];
                 if (function_exists('itg_common_get_smiley_title')) {
-                  echo l(itg_common_get_smiley_title($entity['nid'], 0, 70), "node/" . $entity['nid'], array('html' => TRUE));
+                  echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 70), "node/" . $entity['nid'], array('html' => TRUE));
                 }
                 else {
                   echo l(mb_strimwidth($desc, 0, 70, ".."), "node/" . $entity['nid']);

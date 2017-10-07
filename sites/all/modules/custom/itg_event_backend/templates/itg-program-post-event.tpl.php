@@ -48,7 +48,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
           foreach ($value as $program) {
             $media = $program["daywise"] . '--' . $program["session_title"] . '--' . $program["start_time"] . '--' . $program["end_time"];
             $session_result = itg_event_backend_get_session_photo_video($media);
-            $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
+            $story_title = itg_event_backend_get_session_story_title_move_field($media, $content_font_color);
             $output_story_title = '';
 
             foreach ($story_title['story_title'] as $title) {

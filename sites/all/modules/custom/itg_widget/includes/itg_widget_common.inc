@@ -2942,7 +2942,10 @@ function get_max_weight_for_special($type) {
 function itg_widget_node_update($node) {
     itg_watchdog("status_test" , array($node->nid , $node->status));
     if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
-        $arg = arg();
+      if($node->status == 1 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
+          __itg_widget_helper_data_insert($node->nid);
+        }  
+      $arg = arg();
         if (itg_workflow_stop_node_update_batch_for_widgets()) {
             return;
         }
@@ -2961,7 +2964,6 @@ function itg_widget_node_update($node) {
               ->condition('content_type', $node->type)
               ->condition('widget', 'section_wise_widget')
               ->condition('nid', $nid)->execute();
-
             foreach ($cat_id as $category) {
                 manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
                 manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
