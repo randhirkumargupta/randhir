@@ -49,12 +49,12 @@ $conf['memcache_storage_key_prefix'] = 'itgmem';
 //$conf['session_inc'] = 'sites/all/modules/contrib/memcache_storage/includes/session.inc';
 
 // setting for UAT
-/*$conf['memcache_servers'] = array(
+$conf['memcache_servers'] = array(
   'itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
-);*/
+);
 
 // setting for production
-$conf['memcache_servers'] = array(
+/*$conf['memcache_servers'] = array(
   'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
-);
+);*/
 
