@@ -4927,8 +4927,7 @@ function itg_videogallery_get_play_video_in_video_info($video_data) {
  */
 
 function itg_videogallery_get_video_setting_by_bucket_name($bucket_name) {
-	return '';
-  $query = db_select('node', 'n');
+   $query = db_select('node', 'n');
    $query->join('field_data_field_hls_domain', 'fdfhd', 'fdfhd.entity_id = n.nid');
    $query->join('field_data_field_progressive_domain', 'fdfpd', 'fdfpd.entity_id = n.nid');
    $query->fields('fdfhd', array('field_hls_domain_value'));
