@@ -110,7 +110,7 @@ if ($classes) {
                     print 'class="' . $field_classes[$field][$row_count] . '" ';
                   }
                   ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
-                          <?php print '<a class="play solr-unpublish-icon video-in-form" href="javascript:void(0)" data-video-id = ' . $row['sm_field_video_id'] . '><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a>'; ?>
+                          <?php print '<a class="play solr-unpublish-icon video-in-form" href="javascript:void(0)" data-type-repo = '.$row['sm_field_video_type'].' data-video-id = ' . $row['sm_field_video_id'] . '><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a>'; ?>
                   </td>
                 <?php }
                 ?>

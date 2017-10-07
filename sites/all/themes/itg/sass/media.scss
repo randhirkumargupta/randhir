@@ -1739,6 +1739,7 @@
             .pic {
                 width: 145px;
                 margin-right: 10px;
+                margin-bottom: 10px;
             }
             .voting-data {
                 float: none;
@@ -1748,6 +1749,7 @@
             }
             .vota-time.desktop-hide {
                 display: block;
+                padding-top: 0;
             }
         }
     }
@@ -1885,7 +1887,10 @@
             margin-left: 17px;
         }
     }
-    /*search page filter scroll */
+    /*search page filter scroll end */
+    .home_page_poll_widget_block .poll-data .active-poll-title {
+        height: auto;
+    }
 }
 
 @media all and (min-width: 680px) {
@@ -2095,6 +2100,7 @@
         .trending-list {
             @include float(none);
             @include calculate-width(1);
+            margin-top: 50px;
         }
     }
     /*Home page end css*/
@@ -2587,6 +2593,18 @@
         display: block;
     }
     /*    sosory css end */
+    /* css start change password sso */
+    .page-sso-change-password {
+        form#itg-sso-reg-password-form {
+            padding: 20px 20px;
+        }
+        .password-strength {
+            float: none;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+    }
+    /* css end change password sso */
 }
 
 @media only screen and (max-width:480px) {
@@ -2699,6 +2717,30 @@
     }
     .story-section .story-right.photo-story .multiple-photo {
         padding: 0;
+    }
+    .poll-banner.image-poll-list .poll-list .voting-data .past-poll {
+        margin: 0;
+        li {
+            margin: 0;
+            float: left;
+            width: 33.33%;
+            +li {
+                padding-left: 10px;
+            }
+            .noofvotes {
+                padding: 0;
+                width: 35%;
+            }
+            .poll-past-percentage-progess {
+                padding: 0;
+                width: 65%;
+            }
+            .poll-answer-text {
+                img {
+                    height: auto;
+                }
+            }
+        }
     }
 }
 
@@ -4076,6 +4118,7 @@
         width: 20px;
         height: 20px;
         background-size: 55%;
+        background-position: 0% -23px
     }
     .byline a[title='Unfollow'],
     .byline a[title='unfollow'] {
@@ -4083,7 +4126,6 @@
         width: 20px;
         height: 20px;
         background-size: 55%;
-        background-position: 0% -23px;
     }
 }
 

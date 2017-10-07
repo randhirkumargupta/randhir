@@ -461,6 +461,12 @@ jQuery(document).ready(function () {
         jQuery('.head-live-tv .mobile-user').click(function () {
             jQuery(this).next('ul.menu').toggle();
         });
+        
+        if(is_mobile){
+                jQuery('.head-live-tv .user-icon').click(function () {
+                jQuery(this).next('ul.menu').toggle();
+            });
+        }
     }
 
     //ITG footer
