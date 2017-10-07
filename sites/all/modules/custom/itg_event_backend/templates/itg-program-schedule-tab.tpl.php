@@ -72,7 +72,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
                 $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" />';
                 $sponsor_tags = '<div class="spncor-tag"><span>' . t("Powered By") . '</span>' . l($sponsor_img, $baseurl . 'sponsor-details', array('attributes' => array('target' => '_blank'), 'query' => array('sponsor' => $sponsor_all_data->nid), 'html' => true)) . '</div>';
               }
-              $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
+              $story_title = itg_event_backend_get_session_story_title_move_field($media, $content_font_color);
               $output_story_title = '';
               foreach ($story_title['story_title'] as $title) {
                 if (!empty($title)) {
