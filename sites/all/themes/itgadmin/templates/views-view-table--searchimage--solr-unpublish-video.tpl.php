@@ -27,11 +27,11 @@ if ($classes) {
       <caption><?php print $caption . $title; ?></caption>
       <?php
     endif;
-    $all_used_video = itg_videogallery_get_all_publish_video_of_video_content();
     ?>
     <?php if (!empty($header)) : ?>
       <thead>
           <tr>
+              <th>&nbsp;</th>
               <?php foreach ($header as $field => $label): ?>
               <?php if($label != "") { ?>
                 <th <?php
@@ -65,15 +65,8 @@ if ($classes) {
                 if ($field == 'nothing') {
                   ?>
                   <td>
-                      <?php
-                      if (in_array($row['sm_field_video_id'], $all_used_video)) {
-                        $statusDis = 'disabled="disabled"';
-                      }
-                      else {
-                        $statusDis = "";
-                      }
-                      ?>
-                      <input <?php echo $statusDis; ?> data-video-type = "<?php echo $row['sm_field_video_type']; ?>" id = "video_id_<?php echo $row['sm_field_video_id']; ?>" type = "checkbox" name = "video-form" class = "form-radio video-checkbox-form" value = "<?php echo $video_value; ?>"/>
+                      
+                      <input  data-video-type = "<?php echo $row['sm_field_video_type']; ?>" id = "video_id_<?php echo $row['sm_field_video_id']; ?>" type = "checkbox" name = "video-form" class = "form-radio video-checkbox-form" value = "<?php echo $video_value; ?>"/>
                   </td>
                   <?php
                 }
@@ -117,7 +110,7 @@ if ($classes) {
                     print 'class="' . $field_classes[$field][$row_count] . '" ';
                   }
                   ?><?php print drupal_attributes($field_attributes[$field][$row_count]); ?>>
-                          <?php print '<a class="play video-in-form" href="javascript:void(0)" data-video-id = ' . $row['sm_field_video_id'] . '><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a>'; ?>
+                          <?php print '<a class="play solr-unpublish-icon video-in-form" href="javascript:void(0)" data-type-repo = '.$row['sm_field_video_type'].' data-video-id = ' . $row['sm_field_video_id'] . '><i class="fa fa-play-circle" aria-hidden="true"></i> Play</a>'; ?>
                   </td>
                 <?php }
                 ?>

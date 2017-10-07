@@ -61,19 +61,33 @@
                 var image_fids = [];
                 var selected_check_boxes_values = new Array();
                 var selected_check_boxes_index = 0;
+                var selected_data_video_type = new Array();
                 $("#video_iframe").contents().find("input:checkbox[class=form-radio]:checked").each(function () {
                     selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
+                    var video_type_atr = $(this).attr('data-video-type');
+                    selected_data_video_type.push(video_type_atr);
+                });
+                var unique = selected_data_video_type.filter(function (itm, i, selected_data_video_type) {
+                    return i == selected_data_video_type.indexOf(itm);
                 });
                 if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
-                    var getvideo_tyepe = parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
-                    if (getvideo_tyepe != "") {
-                        if (getvideo_tyepe == 'INTERNAL') {
+                    if (unique.length > 1) {
+                        alert("Please select same plateform video.");
+                        return false;
+                    }
+                    var getvideo_type = parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
+                    if (getvideo_type != "") {
+                        if (unique[0] == 'DM' && getvideo_type == 'INTERNAL') {
                             alert("Please remove Internal plateform Video ");
                             return false;
-                        }
 
+                        }
+                        if (unique[0] == 'INTERNAL' && getvideo_type == 'DM') {
+                            alert("Please remove Dailymotion plateform Video ");
+                            return false;
+                        }
                     }
                     jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     jQuery.ajax({
@@ -96,8 +110,12 @@
                             parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                             parent.jQuery('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
                                 try {
-                                    parent.jQuery('#edit-field-video-repo-type-und-0-value').val('DM');
-
+                                    if (unique[0] == 'DM') {
+                                        parent.jQuery('#edit-field-video-repo-type-und-0-value').val('DM');
+                                    }
+                                    if (unique[0] == 'INTERNAL') {
+                                        parent.jQuery('#edit-field-video-repo-type-und-0-value').val('INTERNAL');
+                                    }
                                     parent.jQuery.colorbox.close();
                                 } catch (err) {
 
@@ -168,6 +186,14 @@
                 if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
+                    var getvideo_tyepe = parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
+                    if (getvideo_tyepe != "") {
+                        if (getvideo_tyepe == 'DM') {
+                            alert("Please remove DM plateform Video ");
+                            return false;
+                        }
+
+                    }
                     jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     jQuery.ajax({
                         url: base_url + '/solr-video-make-fid',
@@ -225,7 +251,7 @@
                         type: 'post',
                         data: {'checkvalue': selected_check_boxes_values},
                         success: function (data) {
-                            alert(data);
+
                             var as = JSON.parse(data);
                             var parsed = JSON.parse(data);
 
@@ -311,6 +337,7 @@
                 $(".ftp-server-internal").hide();
                 $(this).addClass('active');
                 $('.video-local').removeClass('active');
+                $('.internal-video-tab').removeClass('active');
                 $('.used-unused-select').val('unused');
                 $('.used-unused-select').trigger('change');
 

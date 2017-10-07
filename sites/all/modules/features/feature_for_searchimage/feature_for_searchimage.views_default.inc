@@ -407,6 +407,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_video_used']['field'] = 'sm_field_video_used';
   $handler->display->display_options['fields']['sm_field_video_used']['label'] = 'Play Video';
   $handler->display->display_options['fields']['sm_field_video_used']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_all_xml_content */
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['id'] = 'sm_field_all_xml_content';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['field'] = 'sm_field_all_xml_content';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_video_type */
+  $handler->display->display_options['fields']['sm_field_video_type']['id'] = 'sm_field_video_type';
+  $handler->display->display_options['fields']['sm_field_video_type']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_video_type']['field'] = 'sm_field_video_type';
+  $handler->display->display_options['fields']['sm_field_video_type']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: label */
@@ -523,11 +535,6 @@ function feature_for_searchimage_views_default_views() {
     25 => 0,
     26 => 0,
   );
-  /* Filter criterion: Apache Solr: sm_field_video_type */
-  $handler->display->display_options['filters']['sm_field_video_type']['id'] = 'sm_field_video_type';
-  $handler->display->display_options['filters']['sm_field_video_type']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['sm_field_video_type']['field'] = 'sm_field_video_type';
-  $handler->display->display_options['filters']['sm_field_video_type']['value'] = 'DM';
   $handler->display->display_options['path'] = 'search-unpublish-video';
 
   /* Display: Page */
@@ -647,6 +654,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_video_date_time']['field'] = 'sm_field_video_date_time';
   $handler->display->display_options['fields']['sm_field_video_date_time']['label'] = '';
   $handler->display->display_options['fields']['sm_field_video_date_time']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_all_xml_content */
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['id'] = 'sm_field_all_xml_content';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['field'] = 'sm_field_all_xml_content';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_video_type */
+  $handler->display->display_options['fields']['sm_field_video_type']['id'] = 'sm_field_video_type';
+  $handler->display->display_options['fields']['sm_field_video_type']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_video_type']['field'] = 'sm_field_video_type';
+  $handler->display->display_options['fields']['sm_field_video_type']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: label */
@@ -763,11 +782,6 @@ function feature_for_searchimage_views_default_views() {
     25 => 0,
     26 => 0,
   );
-  /* Filter criterion: Apache Solr: sm_field_video_type */
-  $handler->display->display_options['filters']['sm_field_video_type']['id'] = 'sm_field_video_type';
-  $handler->display->display_options['filters']['sm_field_video_type']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['sm_field_video_type']['field'] = 'sm_field_video_type';
-  $handler->display->display_options['filters']['sm_field_video_type']['value'] = 'DM';
   $handler->display->display_options['path'] = 'search-unpublish-video-radio';
 
   /* Display: Page */
@@ -887,6 +901,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_video_date_time']['field'] = 'sm_field_video_date_time';
   $handler->display->display_options['fields']['sm_field_video_date_time']['label'] = '';
   $handler->display->display_options['fields']['sm_field_video_date_time']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_all_xml_content */
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['id'] = 'sm_field_all_xml_content';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['field'] = 'sm_field_all_xml_content';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_video_type */
+  $handler->display->display_options['fields']['sm_field_video_type']['id'] = 'sm_field_video_type';
+  $handler->display->display_options['fields']['sm_field_video_type']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_video_type']['field'] = 'sm_field_video_type';
+  $handler->display->display_options['fields']['sm_field_video_type']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: label */
@@ -966,11 +992,6 @@ function feature_for_searchimage_views_default_views() {
     22 => 0,
     24 => 0,
   );
-  /* Filter criterion: Apache Solr: sm_field_video_type */
-  $handler->display->display_options['filters']['sm_field_video_type']['id'] = 'sm_field_video_type';
-  $handler->display->display_options['filters']['sm_field_video_type']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['sm_field_video_type']['field'] = 'sm_field_video_type';
-  $handler->display->display_options['filters']['sm_field_video_type']['value'] = 'DM';
   $handler->display->display_options['path'] = 'search-publish-video';
 
   /* Display: Page */
@@ -1090,6 +1111,18 @@ function feature_for_searchimage_views_default_views() {
   $handler->display->display_options['fields']['sm_field_video_date_time']['field'] = 'sm_field_video_date_time';
   $handler->display->display_options['fields']['sm_field_video_date_time']['label'] = '';
   $handler->display->display_options['fields']['sm_field_video_date_time']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_all_xml_content */
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['id'] = 'sm_field_all_xml_content';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['field'] = 'sm_field_all_xml_content';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_all_xml_content']['element_label_colon'] = FALSE;
+  /* Field: Apache Solr: sm_field_video_type */
+  $handler->display->display_options['fields']['sm_field_video_type']['id'] = 'sm_field_video_type';
+  $handler->display->display_options['fields']['sm_field_video_type']['table'] = 'apachesolr__solr';
+  $handler->display->display_options['fields']['sm_field_video_type']['field'] = 'sm_field_video_type';
+  $handler->display->display_options['fields']['sm_field_video_type']['label'] = '';
+  $handler->display->display_options['fields']['sm_field_video_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Apache Solr: label */
@@ -1169,11 +1202,6 @@ function feature_for_searchimage_views_default_views() {
     22 => 0,
     24 => 0,
   );
-  /* Filter criterion: Apache Solr: sm_field_video_type */
-  $handler->display->display_options['filters']['sm_field_video_type']['id'] = 'sm_field_video_type';
-  $handler->display->display_options['filters']['sm_field_video_type']['table'] = 'apachesolr__solr';
-  $handler->display->display_options['filters']['sm_field_video_type']['field'] = 'sm_field_video_type';
-  $handler->display->display_options['filters']['sm_field_video_type']['value'] = 'DM';
   $handler->display->display_options['path'] = 'search-publish-video-radio';
 
   /* Display: Page */

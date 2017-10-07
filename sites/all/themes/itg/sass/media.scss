@@ -219,9 +219,11 @@
     }
     .top-block .top-colum-3 {
         @include calculate-width(1);
+        margin-top: 50px;
         >.itg-widget-parent {
             @include float(left);
             width: 48%;
+            margin-bottom: 0;
         }
         .trending-list {
             @include float(right);
@@ -806,6 +808,10 @@
             padding: 0 15px;
             @include calculate-width(1);
         }
+        .top-colum-1,
+        .top-colum-3 {
+            margin-top: 50px;
+        }
     }
     .itg-layout-container .itg-h450-section .droppable,
     .itg-layout-container .itg-h321-section .droppable,
@@ -842,6 +848,16 @@
                 }
             }
         }
+    }
+    .tech-layout-page .auto-block-1,
+    .tech-layout-page .auto-block-2,
+    .auto-layout-page .auto-block-1,
+    .auto-layout-page .auto-block-2 {
+        height: auto;
+        min-height: auto;
+    }
+    .itg-top-section .featured-news {
+        padding-bottom: 0px;
     }
     /*End CSS Top Block Grid Home Page*/
     /*Start Dont miss Home page css*/
@@ -1517,10 +1533,6 @@
                 }
                 .container-inline-date {
                     margin-left: 10px;
-                    +.container-inline-date {
-                        display: block;
-                        vertical-align: top;
-                    }
                 }
             }
         }
@@ -1665,6 +1677,25 @@
     .story-section .story-right {
         padding: 0;
     }
+    /* css tech page */
+    .tech-layout-page {
+        .trending-list {
+            .widget-title {
+                background: #e4e4e4;
+                display: block;
+                padding: 8px;
+                height: inherit;
+                border: 1px solid #e4e4e4;
+                color: #5c5c5c;
+            }
+        }
+        #block-itg-widget-tech-most-read {
+            border: 1px solid #e4e4e4;
+            border-top: 0;
+            padding: 5px;
+        }
+    }
+    /* css end tech page */
 }
 
 @media only screen and (max-width:767px) {
@@ -1708,6 +1739,7 @@
             .pic {
                 width: 145px;
                 margin-right: 10px;
+                margin-bottom: 10px;
             }
             .voting-data {
                 float: none;
@@ -1717,6 +1749,7 @@
             }
             .vota-time.desktop-hide {
                 display: block;
+                padding-top: 0;
             }
         }
     }
@@ -1848,7 +1881,16 @@
             }
         }
     }
-    /*search page filter scroll */
+    .view-front-end-global-search .views-exposed-widget .caln .container-inline-date {
+        display: block;
+        +.container-inline-date {
+            margin-left: 17px;
+        }
+    }
+    /*search page filter scroll end */
+    .home_page_poll_widget_block .poll-data .active-poll-title {
+        height: auto;
+    }
 }
 
 @media all and (min-width: 680px) {
@@ -2058,6 +2100,7 @@
         .trending-list {
             @include float(none);
             @include calculate-width(1);
+            margin-top: 50px;
         }
     }
     /*Home page end css*/
@@ -2550,6 +2593,18 @@
         display: block;
     }
     /*    sosory css end */
+    /* css start change password sso */
+    .page-sso-change-password {
+        form#itg-sso-reg-password-form {
+            padding: 20px 20px;
+        }
+        .password-strength {
+            float: none;
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+    }
+    /* css end change password sso */
 }
 
 @media only screen and (max-width:480px) {
@@ -2585,8 +2640,8 @@
             margin-top: 20px;
         }
         .election-graph {
-            margin-top: -30px;
-            padding-bottom: 50px;
+            /*margin-top: -30px;
+            padding-bottom: 50px;*/
             width: auto;
             .col-el-5 {
                 width: 100%;
@@ -2663,6 +2718,30 @@
     .story-section .story-right.photo-story .multiple-photo {
         padding: 0;
     }
+    .poll-banner.image-poll-list .poll-list .voting-data .past-poll {
+        margin: 0;
+        li {
+            margin: 0;
+            float: left;
+            width: 33.33%;
+            +li {
+                padding-left: 10px;
+            }
+            .noofvotes {
+                padding: 0;
+                width: 35%;
+            }
+            .poll-past-percentage-progess {
+                padding: 0;
+                width: 65%;
+            }
+            .poll-answer-text {
+                img {
+                    height: auto;
+                }
+            }
+        }
+    }
 }
 
 @media only screen and (max-width:340px) {
@@ -2673,6 +2752,9 @@
         top: 40px;
         font-size: 18px;
         line-height: 37px;
+    }
+    #block-itg-layout-manager-header-block .head-live-tv .globle-search.active {
+        width: 108px;
     }
 }
 
@@ -4039,6 +4121,7 @@
         width: 20px;
         height: 20px;
         background-size: 55%;
+        background-position: 0% -23px
     }
     .byline a[title='Unfollow'],
     .byline a[title='unfollow'] {
@@ -4046,7 +4129,6 @@
         width: 20px;
         height: 20px;
         background-size: 55%;
-        background-position: 0% -23px;
     }
 }
 

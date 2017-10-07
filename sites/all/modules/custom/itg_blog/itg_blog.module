@@ -30,6 +30,7 @@ function itg_blog_views_pre_render(&$view) {
     }
     if ($view->name == "blogs_management") {
         $header_content_blog = '<span class="count">Count (' . $view->total_rows . ') </span>';
+        $header_content_blog .= l(t('Post new Blog'), 'node/add/blog', array('query' => array('destination' => arg(0))));
         $view->attachment_before = $header_content_blog;
     }
     // Add create link on header of the ugc tab view.

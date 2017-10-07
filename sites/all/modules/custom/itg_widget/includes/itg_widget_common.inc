@@ -527,7 +527,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         unset($form['shs_term_node_tid_depth']['#options']);
         $form['shs_term_node_tid_depth']['#options'] = $op;
     }
-    if ($form_id == 'taxonomy_form_term' && $form['#term']['vocabulary_machine_name'] == 'state_managment') {
+    if ($form_state['input']['op'] != 'Delete' && $form_id == 'taxonomy_form_term' && $form['#term']['vocabulary_machine_name'] == 'state_managment') {
 
         $tax = taxonomy_get_tree(CATEGORY_MANAGMENT, $parent = 0, $max_depth = 1, $load_entities = FALSE);
         // override taxonomy.
@@ -2940,8 +2940,12 @@ function get_max_weight_for_special($type) {
  * {@inheritdoc}
  */
 function itg_widget_node_update($node) {
+    itg_watchdog("status_test" , array($node->nid , $node->status));
     if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
-        $arg = arg();
+      if($node->status == 1 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
+          __itg_widget_helper_data_insert($node->nid);
+        }  
+      $arg = arg();
         if (itg_workflow_stop_node_update_batch_for_widgets()) {
             return;
         }
@@ -2960,15 +2964,13 @@ function itg_widget_node_update($node) {
               ->condition('content_type', $node->type)
               ->condition('widget', 'section_wise_widget')
               ->condition('nid', $nid)->execute();
-
             foreach ($cat_id as $category) {
                 manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
                 manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
             }
         }
     }
-
-    if ($node->status == 0) {
+    if ($node->status == 0 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
         itg_widget_handle_unpublished_node($node->nid);
     }
 }
