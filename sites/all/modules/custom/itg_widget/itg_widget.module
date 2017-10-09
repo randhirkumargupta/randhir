@@ -1984,27 +1984,29 @@ function __itg_widget_helper_data_insert($nid) {
               'nid' => $nid,
               'node_status' => $node_load_data->status,
               'node_type' => $node_load_data->type,
-            ));
-            try {
-                db_insert('itg_widget_helper')
-                  ->fields(array(
-                    'nid',
-                    'node_data',
-                    'node_status',
-                    'node_type',
-                    )
-                  )
-                  ->values(
-                    array(
-                      'nid' => $nid,
-                      'node_data' => serialize($node_load_data),
-                      'node_status' => $node_load_data->status,
-                      'node_type' => $node_load_data->type,
-                    )
-                  )->execute();
-            } catch (Exception $ex) {
-                drupal_set_message($ex->getMessage(), 'error');
-            }
+            )
+        );
+        try {
+          itg_watchdog("helper_insert" , $node_load_data->field_emoji_position);
+            db_insert('itg_widget_helper')
+              ->fields(array(
+                'nid',
+                'node_data',
+                'node_status',
+                'node_type',
+                )
+              )
+              ->values(
+                array(
+                  'nid' => $nid,
+                  'node_data' => serialize($node_load_data),
+                  'node_status' => $node_load_data->status,
+                  'node_type' => $node_load_data->type,
+                )
+              )->execute();
+        } catch (Exception $ex) {
+            drupal_set_message($ex->getMessage(), 'error');
+        }
     }
 }
 
@@ -2013,6 +2015,7 @@ function __itg_widget_helper_data_insert($nid) {
  * @param int $nid
  */
 function __itg_widget_helper_data_delete($nid) {
+  itg_watchdog("helper_delete" , $nid);
     if ($nid) {
         try {
             db_delete('itg_widget_helper')->condition("nid", $nid)->execute();
