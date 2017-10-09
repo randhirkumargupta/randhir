@@ -11090,8 +11090,7 @@ h1.about-us-heading {
     margin: 20px 0 10px 0;
     .fun-facts,
     .social-share {
-        display: inline-block;
-        vertical-align: top;
+        display: block;
         h2,
         ul {
             display: inline;
@@ -11104,7 +11103,7 @@ h1.about-us-heading {
     .social-share {
         ul {
             margin-top: 3px;
-            padding-left: 10px !important;
+            padding-left: 0px !important;
             display: inline-block;
             li {
                 a {
