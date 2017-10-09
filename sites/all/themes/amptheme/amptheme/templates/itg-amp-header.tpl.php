@@ -1,14 +1,15 @@
 <?php
 global $base_url, $user;
+$search_url = FRONT_URL.'/get-amp-search';
 ?>
 
 <header role="banner" id="header">
   <a href="<?php print $base_url; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
     <amp-img src="<?php print $base_url; ?>/sites/all/themes/amptheme/amptheme/logo.png" alt="<?php print t('Home'); ?>" height="58" width = "71"></amp-img>
   </a>
- <form method="POST"
+ <form method="GET"
   class="search-form"
-  action-xhr="#"
+  action=<?php print $search_url; ?>
   target="_top">
     <input type="search" 
       placeholder="Search..."
@@ -18,14 +19,6 @@ global $base_url, $user;
     class="ampstart-btn caps">
   <a href="#" class="search" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>
 </form>
-    <?php
-    if (isset($_POST['submitlogin'])) {
-      $name = isset($_POST['search']) ? $_POST['search'] : '';
-      $searchurl = FRONT_URL . '/topic/' . $name;
-      header('Location: ' . $searchurl);
-    }
-    ?>
- 
   <nav id="navbar">
     <amp-accordion disable-session-states>
       <section>
