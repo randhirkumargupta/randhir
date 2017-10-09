@@ -2601,18 +2601,6 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['path']['label'] = '';
   $handler->display->display_options['fields']['path']['exclude'] = TRUE;
   $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
-  /* Field: Global: PHP */
-  $handler->display->display_options['fields']['php']['id'] = 'php';
-  $handler->display->display_options['fields']['php']['table'] = 'views';
-  $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['label'] = 'Actual Host';
-  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = 'if(function_exists(\'itg_event_get_host_name\')){
-  echo itg_event_get_host_name();
-}';
-  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
-  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Field: Small image */
   $handler->display->display_options['fields']['field_story_small_image']['id'] = 'field_story_small_image';
   $handler->display->display_options['fields']['field_story_small_image']['table'] = 'field_data_field_story_small_image';
@@ -2623,7 +2611,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => '110x82',
-    'image_link' => '',
+    'image_link' => 'content',
   );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
@@ -2805,7 +2793,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['field_story_medium_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_medium_image']['settings'] = array(
     'image_style' => 'anchors_landing',
-    'image_link' => '',
+    'image_link' => 'content',
   );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;

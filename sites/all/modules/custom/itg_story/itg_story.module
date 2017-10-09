@@ -943,7 +943,12 @@ function itg_story_node_view($node, $view_mode, $langcode) {
 
     if (function_exists('itg_common_get_smiley_title')) {
       if (!empty($node->field_emoji[LANGUAGE_NONE][0]['value']) || !empty($node->field_emoji_2[LANGUAGE_NONE][0]['value'])) {
-        $node->content['story_title'] = itg_common_get_smiley_title($node->nid, 0, 255, TRUE);
+       $node_smiley_array = array('field_story_short_headline_value' => $node->field_story_short_headline['und'][0]['value'],
+                                  'field_emoji_position_value' => $node->field_emoji_position['und'][0]['value'],
+                                  'field_emoji_2_value' => $node->field_emoji_2['und'][0]['value'],
+                                  'field_emoji_value' => $node->field_emoji['und'][0]['value'],
+                                  'title' => $node->title);
+        $node->content['story_title'] = itg_common_get_smiley_title($node_smiley_array, 0, 255, TRUE);
       }
       else {
         $node->content['story_title'] = $node->title;
@@ -1289,7 +1294,8 @@ function _sponsor_category_setting() {
 function _is_external_url_story_article($nid) {
   
   $is_external_url = FALSE;
-  if (isset($nid)) {
+  //commented by shravan and discussed with shashank
+ /* if (isset($nid)) {
     if (db_table_exists('field_data_field_story_external_url')) {
       $type_query = db_select('node', 'n');
       $type_query->fields('n', array('type'));
@@ -1308,6 +1314,6 @@ function _is_external_url_story_article($nid) {
         }
       }
     }
-  }
+  }*/
   return $is_external_url;
 }

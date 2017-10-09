@@ -6,7 +6,7 @@
       if (!empty($entity['nid'])) :
         // code for add on story title and url
         if (function_exists('itg_common_get_addontitle')) {
-          $add_on_data = itg_common_get_addontitle($entity['nid']);
+          $add_on_data = itg_common_get_addontitle($entity['node_obj']);
           $pipelinetext = "";
           $pipelineclass = "";
           if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
@@ -23,7 +23,7 @@
           <?php 
           endif;
           if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($entity['nid'], 0, 110), "node/" . $entity['nid'], array("html" => TRUE , 'attributes' => array("title" => $entity['title'])));
+            echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 110), "node/" . $entity['nid'], array("html" => TRUE , 'attributes' => array("title" => $entity['title'])));
             echo $pipelinetext;
           }
           else {

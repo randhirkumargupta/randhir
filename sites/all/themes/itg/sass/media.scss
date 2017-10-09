@@ -105,11 +105,6 @@
             height: 520px;
             margin-bottom: 50px;
         }
-        .auto-block-2 {
-            .special-top-news {
-                overflow: auto;
-            }
-        }
         .auto-block-3 {
             .ad-widget {
                 height: 245px;
@@ -416,11 +411,6 @@
         }
     }
     /*poll page css end*/
-    /*education page css start*/
-    .education-layout-page .auto-block-2 .special-top-news {
-        overflow: scroll;
-    }
-    /*education page css end*/
     /*for all special pages start*/
     .widget-wrapper {
         max-height: 100%;
@@ -822,7 +812,6 @@
     .itg-common-section .droppable,
     .sport-home-layout-page .itg-layout-615 .auto-block-1,
     .sport-home-layout-page .itg-layout-375 .droppable,
-    .sport-home-layout-page .itg-layout-615 .auto-block-2,
     .sport-home-layout-page .itg-layout-615 .droppable,
     .sport-home-layout-page .itg-layout-225 .droppable,
     .sport-home-layout-page .itg-layout-485 .droppable,
@@ -834,7 +823,6 @@
     .movie-layout-page .itg-layout-580 .itg-widget-child .droppable,
     .movie-layout-page .itg-layout-580 .droppable,
     .movie-layout-page .itg-layout-580 .droppable .auto-block-1,
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-2,
     .auto-layout-page .auto-block-1,
     .election-page .right-side .itg-484 .droppable {
         height: auto;
@@ -848,13 +836,6 @@
                 }
             }
         }
-    }
-    .tech-layout-page .auto-block-1,
-    .tech-layout-page .auto-block-2,
-    .auto-layout-page .auto-block-1,
-    .auto-layout-page .auto-block-2 {
-        height: auto;
-        min-height: auto;
     }
     .itg-top-section .featured-news {
         padding-bottom: 0px;
@@ -1687,6 +1668,8 @@
                 height: inherit;
                 border: 1px solid #e4e4e4;
                 color: #5c5c5c;
+                margin-bottom: 0;
+                border-radius: 5px 5px 0 0;
             }
         }
         #block-itg-widget-tech-most-read {
@@ -2752,6 +2735,9 @@
         top: 40px;
         font-size: 18px;
         line-height: 37px;
+    }
+    #block-itg-layout-manager-header-block .head-live-tv .globle-search.active {
+        width: 108px;
     }
 }
 

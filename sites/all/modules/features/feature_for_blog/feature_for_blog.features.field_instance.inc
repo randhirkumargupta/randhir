@@ -57,7 +57,7 @@ function feature_for_blog_field_default_field_instances() {
     'bundle' => 'blog',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Configuration',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -222,7 +222,7 @@ function feature_for_blog_field_default_field_instances() {
     'bundle' => 'blog',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Short description',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -245,6 +245,11 @@ function feature_for_blog_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -406,7 +411,7 @@ function feature_for_blog_field_default_field_instances() {
     'bundle' => 'blog',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Twitter Handle',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -429,6 +434,11 @@ function feature_for_blog_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -526,7 +536,7 @@ function feature_for_blog_field_default_field_instances() {
     'bundle' => 'blog',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Comment question',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -549,6 +559,11 @@ function feature_for_blog_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),

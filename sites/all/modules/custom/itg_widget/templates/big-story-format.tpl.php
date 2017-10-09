@@ -65,7 +65,7 @@ if (!empty($data['node_data'])) :
           $red_dot_class = "";
           $red_dot_class = ($data['node_data']->type == 'breaking_news') ? 'breaking-news-red-dot' : "";
           if(function_exists('itg_common_get_smiley_title')) {
-            $node_title = itg_common_get_smiley_title($data['node_data']->nid, 0, 100);
+            $node_title = itg_common_get_smiley_title($data['node_data'], 0, 100);
           }
           else {
             $node_title = mb_strimwidth($data['node_data']->title, 0, 110, "..");
@@ -89,7 +89,7 @@ if (!empty($data['node_data'])) :
           $pipelineclass = "";
           if (!empty($data['node_data']->type) && $data['node_data']->type == 'story') {
                 if (function_exists('itg_common_get_addontitle')) {
-                  $add_on_data = itg_common_get_addontitle($data['node_data']->nid);
+                  $add_on_data = itg_common_get_addontitle($data['node_obj']);
                   
                   if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
                     $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
