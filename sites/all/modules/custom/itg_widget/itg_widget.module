@@ -290,13 +290,13 @@ function itg_content_inactive_videogallery() {
   $itg_result = $itg_query->execute()->fetchAll();
   itg_watchdog("nodes_expiry" , $itg_result);
   foreach ($itg_result as $itg_val) {
-    $node = node_load($itg_val->nid);
+    $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
-    $node->status = 0;
+    $node_data->status = 0;
       if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
         itg_videogallery_node_publish_to_unpublish($node->nid);
       }
-    node_save($node);
+    node_save($node_data);
     itg_widget_handle_unpublished_node($node->nid);
   }
   itg_watchdog("nodes_expiry" , $nodeid);
@@ -1985,7 +1985,6 @@ function __itg_widget_helper_data_insert($nid) {
               'node_status' => $node_load_data->status,
               'node_type' => $node_load_data->type,
             ));
-        if($node_load_data->status) {
             try {
                 db_insert('itg_widget_helper')
                   ->fields(array(
@@ -2006,7 +2005,6 @@ function __itg_widget_helper_data_insert($nid) {
             } catch (Exception $ex) {
                 drupal_set_message($ex->getMessage(), 'error');
             }
-        }
     }
 }
 
