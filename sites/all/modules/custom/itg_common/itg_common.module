@@ -1090,7 +1090,8 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
   $right_smiles = "";
   $result = [];
   if (!empty($node_obj) && is_numeric($node_obj) && (int) $node_obj) {
-   $result[] = get_field_value_for_smily($node_obj); 
+   $result[] = get_field_value_for_smily($node_obj);
+   
   } else {
       $result[] = array(
         'field_story_short_headline_value' => $node_obj['field_story_short_headline'],
@@ -1155,7 +1156,7 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
     }
   }
   else {
-    return ucfirst(mb_strimwidth($node_obj->title, $min_limit, $max_limit, ".."));
+    return ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
   }
 }
 
@@ -1962,7 +1963,7 @@ function get_field_value_for_smily($nid) {
   $query->fields('emoji_2', array('field_emoji_2_value'));
   $query->fields('emoji_pos', array('field_emoji_position_value'));
   $query->condition('n.nid', $nid);
-  $query->condition('n.type', 'story');
+  //$query->condition('n.type', 'story');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return array(
     'field_story_short_headline_value' => $result[0]['field_story_short_headline_value'],
