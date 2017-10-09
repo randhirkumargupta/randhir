@@ -152,11 +152,8 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
     if (!empty($arg[1]) && is_numeric($arg[1])) {
       $remove_subscribe_link = str_replace("[UNSUBSCRIBEURL]", " ", $form['#node']->body['und'][0]['value']);
       $form['#node']->body['und'][0]['value'] = $remove_subscribe_link;
-//      p($form['#node']->body['und'][0]['value']);
-//      $remove_subscribe_link = str_replace("[UNSUBSCRIBEURL]", " ", $form['#node']->body['und'][0]['safe_value']);
-//      $form['#node']->body['und'][0]['safe_value'] = $remove_subscribe_link;
-      
     }
+    
     $form['field_newst_banner'][LANGUAGE_NONE][0]['#required'] = FALSE;
   }
   // Set destination for newsletter form
