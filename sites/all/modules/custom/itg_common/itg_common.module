@@ -791,7 +791,7 @@ function itg_common_node_presave($node) {
         if ($node->op == 'Publish') {
           $node->status = 1;
         }
-        elseif ($node->op == 'Save as Draft' || $node->status == 0) {
+        if ($node->op == 'Save as Draft') {
           $node->status = 0;
         }
       }
@@ -1026,15 +1026,15 @@ function itg_content_inactive() {
   $itg_result = $itg_query->execute()->fetchAll();
   itg_watchdog("nodes_expiry" , $itg_result);
   foreach ($itg_result as $itg_val) {
-    $node = node_load($itg_val->nid);
+    $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
-    $node->status = 0;
+    $node_data->status = 0;
 //    if($node->type == 'videogallery') {
 //      if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
 //        itg_videogallery_node_publish_to_unpublish($node->nid);
 //      }
 //    }
-    node_save($node);
+    node_save($node_data);
     itg_widget_handle_unpublished_node($node->nid);
   }
   itg_watchdog("nodes_expiry" , $nodeid);
@@ -1080,7 +1080,8 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
   $positions_array = array();
   $left_smiles = "";
   $right_smiles = "";
-  $result = array(
+  $result = [];
+  $result[] = array(
     'field_story_short_headline_value' => $node_obj->field_story_short_headline['und'][0]['value'],
     'field_emoji_position_value' => $node_obj->field_emoji_position['und'][0]['value'],
     'field_emoji_2_value' => $node_obj->field_emoji_2['und'][0]['value'],
