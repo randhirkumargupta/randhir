@@ -101,19 +101,28 @@ function itg_get_parents_taxonomy($tid) {
 function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   $old_content_id = '';
   $arg = arg();
+  $type = 'story'; // use photogallery & videogallery in condition if you have
+  
   if (!empty($_GET['sId']) && is_numeric($_GET['sId'])) { //code for this URL (story.jsp?sId=877)
     $old_content_id = $_GET['sId'];
   } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content' && arg(0) == 'conclave') {//conclave/index.php?option=com_content&task=view&id=2968&sectionid=15&secid=1&issueid=34&Itemid=1
       $old_content_id = '200'.$_GET['id'];
   } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content') {//code for this URL (option=com_content)
       $old_content_id = $_GET['id'];
+} else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Photo') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
+      $old_content_id = $arg[2];
+      $type = 'photogallery';
+} else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Video') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
+      $old_content_id = $arg[2];
+      $type = 'videogallery';
   } else if ($arg[0] == 'node' && empty($arg[1])) {
     drupal_goto(FRONT_URL);
   }
   
   //code for url redirection
   if (!empty($old_content_id)) {
-    $content_id = get_new_content_id_by_migrated_id($old_content_id, 'story');   
+    //$content_id = get_new_content_id_by_migrated_id($old_content_id, 'story');
+      $content_id = get_new_content_id_by_migrated_id($old_content_id, $type);  
     $alias = get_redirect_url($content_id);
     if (isset($alias)) {
       drupal_goto($alias);
