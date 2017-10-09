@@ -2940,9 +2940,9 @@ function get_max_weight_for_special($type) {
  * {@inheritdoc}
  */
 function itg_widget_node_update($node) {
-
+    itg_watchdog("status_test" , array($node->nid , $node->status));
     if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news') {
-      if($node->status == 1 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
+	if($node->status == 1 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
           __itg_widget_helper_data_insert($node->nid);
         }  
         $arg = arg();
