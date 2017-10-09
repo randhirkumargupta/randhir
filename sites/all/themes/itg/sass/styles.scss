@@ -2849,6 +2849,9 @@ footer {
                     font-size: 13px;
                     color: #8d8d8d;
                     font-weight: 300;
+                    +.description {
+                        margin-top: 0;
+                    }
                 }
             }
         }
@@ -4313,10 +4316,6 @@ h1.category-heading {
                     }
                 }
             }
-        }
-        .flex-control-nav,
-        .flex-direction-nav {
-            display: none;
         }
         .flex-count {
             @include display-inline;
@@ -6119,13 +6118,19 @@ section.sidebar {
     border-bottom: none;
 }
 
-#block-views-so-sorry-most-watched {
+#block-views-so-sorry-most-watched,
+.sport_ipl-ipl_video {
     margin-top: 50px;
-    .view-so-sorry {
+    .view-so-sorry,
+    .view-sport-ipl {
         .view-content {
             @include photo-scroll;
         }
     }
+}
+
+.sport_ipl-ipl_video {
+    margin-top: 0;
 }
 
 .view-display-id-so_sorry_page {
