@@ -132,7 +132,7 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
-  $items['get-amp-search'] = array(
+  $items['get-amp-search-keyword'] = array(
     'page callback' => 'itg_get_amp_search_result',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
