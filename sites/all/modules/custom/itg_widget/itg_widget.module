@@ -454,7 +454,8 @@ function itg_widget_block_view($delta = '') {
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
             //$block['subject'] = t('');
             $info['widget'] = 'big_story_format_widget';
-            $data = itg_widget_big_story_block_data($info);
+            $data = itg_widget_big_story_block_data($info);            
+            
             foreach ($data as $big_story_data) {
                 if (isset($big_story_data['is_live_tv']) && !empty($big_story_data['is_live_tv'])) {
                     $live_tv_flag = TRUE;
