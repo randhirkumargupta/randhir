@@ -148,6 +148,15 @@ function itg_newsletter_theme($existing , $type , $theme , $path) {
  */
 function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
   if ($form_id == 'newsletter_templates_node_form') {
+    $arg = arg();
+    if (!empty($arg[1]) && is_numeric($arg[1])) {
+      $remove_subscribe_link = str_replace("[UNSUBSCRIBEURL]", " ", $form['#node']->body['und'][0]['value']);
+      $form['#node']->body['und'][0]['value'] = $remove_subscribe_link;
+//      p($form['#node']->body['und'][0]['value']);
+//      $remove_subscribe_link = str_replace("[UNSUBSCRIBEURL]", " ", $form['#node']->body['und'][0]['safe_value']);
+//      $form['#node']->body['und'][0]['safe_value'] = $remove_subscribe_link;
+      
+    }
     $form['field_newst_banner'][LANGUAGE_NONE][0]['#required'] = FALSE;
   }
   // Set destination for newsletter form
@@ -495,8 +504,12 @@ function itg_newsletter_node_presave($node) {
   
   // Placing Unsubscribe token/link to the node body field for newsletter template
   if ($node->type == 'newsletter_templates') {
-    if (isset($node->body[LANGUAGE_NONE][0]['value']) && !empty($node->body[LANGUAGE_NONE][0]['value'])) {
-      $node->body[LANGUAGE_NONE][0]['value'] = $node->body[LANGUAGE_NONE][0]['value'] . '[UNSUBSCRIBEURL]';
+    if (isset($node->body[LANGUAGE_NONE][0]['value'])) {
+      if (strpos($node->body[LANGUAGE_NONE][0]['value'], '[UNSUBSCRIBEURL]')) {
+        $node->body[LANGUAGE_NONE][0]['value'] = $node->body[LANGUAGE_NONE][0]['value'];
+      } else {
+        $node->body[LANGUAGE_NONE][0]['value'] = $node->body[LANGUAGE_NONE][0]['value'] . '[UNSUBSCRIBEURL]';
+      }
     }
   }
 }
@@ -561,7 +574,6 @@ function itg_newsletter_node_insert($node) {
         ));
         $query->execute();
       }
-
       break;
 
     default:
