@@ -1080,7 +1080,8 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
   $positions_array = array();
   $left_smiles = "";
   $right_smiles = "";
-  $result = array(
+  $result = [];
+  $result[] = array(
     'field_story_short_headline_value' => $node_obj->field_story_short_headline['und'][0]['value'],
     'field_emoji_position_value' => $node_obj->field_emoji_position['und'][0]['value'],
     'field_emoji_2_value' => $node_obj->field_emoji_2['und'][0]['value'],
