@@ -1077,7 +1077,6 @@ function itg_is_special_page() {
  *   Returns node title.
  */
 function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
-  
 // Condition is to make free title on home page ITG-3774
   //if(drupal_is_front_page() || itg_is_special_page()) {
     $max_limit = 10000;
@@ -1093,10 +1092,10 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
    $result[] = get_field_value_for_smily($node_obj); 
   } else {
       $result[] = array(
-        'field_story_short_headline_value' => $node_obj['field_story_short_headline'],
-        'field_emoji_position_value' => $node_obj['field_emoji_position'],
-        'field_emoji_2_value' => $node_obj['field_emoji_2'],
-        'field_emoji_value' => $node_obj['field_emoji'],
+        'field_story_short_headline_value' => $node_obj['field_story_short_headline_value'],
+        'field_emoji_position_value' => $node_obj['field_emoji_position_value'],
+        'field_emoji_2_value' => $node_obj['field_emoji_2_value'],
+        'field_emoji_value' => $node_obj['field_emoji_value'],
         'title' => $node_obj['title'],
       );
   }
