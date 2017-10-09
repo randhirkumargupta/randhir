@@ -536,6 +536,9 @@ $root-font-size: 16px;
     padding: 0 10px;
     @include calculate-width(1);
     color: #fff;
+    a {
+        color: #fff;
+    }
 }
 
 @mixin video-left-border-bottom {
