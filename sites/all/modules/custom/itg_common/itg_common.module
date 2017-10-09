@@ -132,6 +132,12 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['get-amp-search-keyword'] = array(
+    'page callback' => 'itg_get_amp_search_result',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -1966,3 +1972,15 @@ function get_field_value_for_smily($nid) {
     'title' => $result[0]['title'],
   );
 }
+
+/**
+ * Implements itg_get_amp_search_result().
+ */
+function itg_get_amp_search_result() {
+  if (isset($_GET['search'])) {
+    $name = isset($_GET['search']) ? $_GET['search'] : '';
+    $searchurl = FRONT_URL . '/topic/' . $name;
+    drupal_goto($searchurl);
+  }
+}
+
