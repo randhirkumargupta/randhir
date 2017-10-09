@@ -149,7 +149,7 @@ function itg_newsletter_theme($existing , $type , $theme , $path) {
 function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
   if ($form_id == 'newsletter_templates_node_form') {
     $arg = arg();
-    if (!empty($arg[1]) && is_numeric($arg[1])) {
+    if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[2] == 'edit') {
       $remove_subscribe_link = str_replace("[UNSUBSCRIBEURL]", " ", $form['#node']->body['und'][0]['value']);
       $form['#node']->body['und'][0]['value'] = $remove_subscribe_link;
     }
