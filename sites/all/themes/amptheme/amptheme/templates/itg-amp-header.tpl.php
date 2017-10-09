@@ -1,6 +1,6 @@
 <?php
 global $base_url, $user;
-$search_url = FRONT_URL.'/get-amp-search';
+$search_url = FRONT_URL.'/get-amp-search-keyword';
 ?>
 
 <header role="banner" id="header">
