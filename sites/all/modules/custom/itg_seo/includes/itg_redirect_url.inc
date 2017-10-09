@@ -109,10 +109,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $old_content_id = '200'.$_GET['id'];
   } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content') {//code for this URL (option=com_content)
       $old_content_id = $_GET['id'];
-} else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Photo') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
+  } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && strtolower($arg[1]) == 'story') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
+      $old_content_id = $arg[2];
+      $type = 'story';
+  } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && strtolower($arg[1]) == 'photo') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
       $old_content_id = $arg[2];
       $type = 'photogallery';
-} else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Video') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
+  } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && strtolower($arg[1]) == 'video') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
       $old_content_id = $arg[2];
       $type = 'videogallery';
   } else if ($arg[0] == 'node' && empty($arg[1])) {
