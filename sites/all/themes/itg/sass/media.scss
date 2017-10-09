@@ -73,8 +73,12 @@
     }
     /*defalt add for special pages START*/
     .itg-layout-container .ad-widget {
-        height: 295px;
-        padding: 20px;
+        height: 250px;
+        padding: 0px;
+    }
+    section.sidebar .block-itg-ads {
+        padding: 0;
+        border-bottom: none;
     }
     /*defalt add for special pages END*/
     /* css for dont miss*/
@@ -1874,6 +1878,9 @@
     .home_page_poll_widget_block .poll-data .active-poll-title {
         height: auto;
     }
+    .sport-home-layout-page .right-side .col-md-12 {
+        min-height: 100%;
+    }
 }
 
 @media all and (min-width: 680px) {
@@ -2700,6 +2707,10 @@
     }
     .story-section .story-right.photo-story .multiple-photo {
         padding: 0;
+        .slick-next,
+        .slick-prev {
+            display: none;
+        }
     }
     .poll-banner.image-poll-list .poll-list .voting-data .past-poll {
         margin: 0;
@@ -3438,6 +3449,14 @@
         #main .row {
             overflow: hidden;
         }
+    }
+    .featured_photo_carousel .flexslider .flex-direction-nav a:before,
+    .tech-block_5 .flexslider .flex-direction-nav a:before,
+    .auto-block_5 .flexslider .flex-direction-nav a:before {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 20px;
     }
 }
 
