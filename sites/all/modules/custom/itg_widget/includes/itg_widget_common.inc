@@ -2970,9 +2970,9 @@ function itg_widget_node_update($node) {
             }
         }
     }
-    if ($node->status == 0 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
+    /*if ($node->status == 0 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
         itg_widget_handle_unpublished_node($node->nid);
-    }
+    }*/
 }
 
 /**
