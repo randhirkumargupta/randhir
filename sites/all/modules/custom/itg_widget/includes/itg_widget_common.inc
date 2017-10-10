@@ -2830,7 +2830,7 @@ function itg_widget_node_insert($node) {
                 }
             }
         }
-        if ($node->status == 0) {
+        if ($node->status == 0 && !empty($node->op)) {
             itg_widget_handle_unpublished_node($node->nid);
         }
     }
@@ -2948,7 +2948,7 @@ function itg_widget_node_update($node) {
         }
 
         if (isset($arg[1]) && $arg[1] != 'add') {
-          if($node->status == 1 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
+          if($node->field_story_source_type['und'][0]['value'] != 'migrated') {
             __itg_widget_helper_data_insert($node->nid);
           }
             watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
@@ -2970,9 +2970,9 @@ function itg_widget_node_update($node) {
             }
         }
     }
-    if ($node->status == 0 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
+    /*if ($node->status == 0 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
         itg_widget_handle_unpublished_node($node->nid);
-    }
+    }*/
 }
 
 /**

@@ -1984,27 +1984,29 @@ function __itg_widget_helper_data_insert($nid) {
               'nid' => $nid,
               'node_status' => $node_load_data->status,
               'node_type' => $node_load_data->type,
-            ));
-            try {
-                db_insert('itg_widget_helper')
-                  ->fields(array(
-                    'nid',
-                    'node_data',
-                    'node_status',
-                    'node_type',
-                    )
-                  )
-                  ->values(
-                    array(
-                      'nid' => $nid,
-                      'node_data' => serialize($node_load_data),
-                      'node_status' => $node_load_data->status,
-                      'node_type' => $node_load_data->type,
-                    )
-                  )->execute();
-            } catch (Exception $ex) {
-                drupal_set_message($ex->getMessage(), 'error');
-            }
+            )
+        );
+        try {
+          itg_watchdog("helper_insert" , $node_load_data->field_emoji_position);
+            db_insert('itg_widget_helper')
+              ->fields(array(
+                'nid',
+                'node_data',
+                'node_status',
+                'node_type',
+                )
+              )
+              ->values(
+                array(
+                  'nid' => $nid,
+                  'node_data' => serialize($node_load_data),
+                  'node_status' => $node_load_data->status,
+                  'node_type' => $node_load_data->type,
+                )
+              )->execute();
+        } catch (Exception $ex) {
+            drupal_set_message($ex->getMessage(), 'error');
+        }
     }
 }
 
@@ -2013,6 +2015,7 @@ function __itg_widget_helper_data_insert($nid) {
  * @param int $nid
  */
 function __itg_widget_helper_data_delete($nid) {
+  itg_watchdog("helper_delete" , $nid);
     if ($nid) {
         try {
             db_delete('itg_widget_helper')->condition("nid", $nid)->execute();
@@ -2052,7 +2055,13 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
         foreach ($result as $widget_data) {
 
             $node_load_data = unserialize($widget_data->node_data);
-
+            $node_smily_data = array('field_story_short_headline_value' => $node_load_data->field_story_short_headline['und'][0]['value'],
+                                  'field_emoji_position_value' => $node_load_data->field_emoji_position['und'][0]['value'],
+                                  'field_emoji_2_value' => $node_load_data->field_emoji_2['und'][0]['value'],
+                                  'field_emoji_value' => $node_load_data->field_emoji['und'][0]['value'],
+                                  'title' => $node_load_data->title,
+                               );
+            
             $uri = $node_load_data->field_story_extra_large_image['und'][0]['uri'];
             $li_file_uri = $node_load_data->field_story_large_image['und'][0]['uri'];
             $mi_file_uri = $node_load_data->field_story_medium_image['und'][0]['uri'];
@@ -2103,7 +2112,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               'field_story_medium_image_title' => $node_load_data->field_story_medium_image_title['und'][0]['title'],
               'field_story_small_image_alt' => $node_load_data->field_story_small_image_alt['und'][0]['alt'],
               'field_story_small_image_title' => $node_load_data->field_story_small_image_title['und'][0]['title'],
-              'node_obj' => $node_load_data,
+              'node_obj' => $node_smily_data,
             );
         }
     }
