@@ -153,8 +153,7 @@ function itg_dbmigrate_migrate_api() {
 
       'itg_best_college' => array(
         'title' => t('Itg Best College Migration'),
-      ),
-
+      ),  
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -273,7 +272,6 @@ function itg_dbmigrate_migrate_api() {
         'class_name' => 'ItgMegareviewMigration',
         'group_name' => 'itg_megareview',
       ),
-
     ),
 
   );
