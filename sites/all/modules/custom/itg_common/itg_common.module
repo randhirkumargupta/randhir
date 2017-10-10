@@ -1077,23 +1077,29 @@ function itg_is_special_page() {
  *   Returns node title.
  */
 function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
-  // Condition is to make free title on home page ITG-3774
+// Condition is to make free title on home page ITG-3774
   //if(drupal_is_front_page() || itg_is_special_page()) {
     $max_limit = 10000;
   //}
+    
   $arg = arg();
   $titlte = "";
   $positions_array = array();
   $left_smiles = "";
   $right_smiles = "";
   $result = [];
-  $result[] = array(
-    'field_story_short_headline_value' => $node_obj->field_story_short_headline['und'][0]['value'],
-    'field_emoji_position_value' => $node_obj->field_emoji_position['und'][0]['value'],
-    'field_emoji_2_value' => $node_obj->field_emoji_2['und'][0]['value'],
-    'field_emoji_value' => $node_obj->field_emoji['und'][0]['value'],
-    'title' => $node_obj->title,
-  );
+  if (!empty($node_obj) && is_numeric($node_obj) && (int) $node_obj) {
+   $result[] = get_field_value_for_smily($node_obj);
+   
+  } else {
+      $result[] = array(
+        'field_story_short_headline_value' => $node_obj['field_story_short_headline_value'],
+        'field_emoji_position_value' => $node_obj['field_emoji_position_value'],
+        'field_emoji_2_value' => $node_obj['field_emoji_2_value'],
+        'field_emoji_value' => $node_obj['field_emoji_value'],
+        'title' => $node_obj['title'],
+      );
+  }
   if (!empty($result[0]['field_story_short_headline_value'])) {
     foreach ($result as $positions) {
       if (!empty($positions['field_emoji_position_value'])) {
@@ -1149,7 +1155,7 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
     }
   }
   else {
-    return ucfirst(mb_strimwidth($node_obj->title, $min_limit, $max_limit, ".."));
+    return ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
   }
 }
 
@@ -1939,6 +1945,35 @@ function itg_get_twitter_embeded_video_id($bodystr) {
 }
 
 /**
+ * Function is used to prepare node title with emoji.
+ * 
+ * @param type $nid
+ * @return type
+ */
+function get_field_value_for_smily($nid) {
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
+  $query->fields('n', array('title'));
+  $query->fields('emoji', array('field_emoji_value'));
+  $query->fields('sh', array('field_story_short_headline_value'));
+  $query->fields('emoji_2', array('field_emoji_2_value'));
+  $query->fields('emoji_pos', array('field_emoji_position_value'));
+  $query->condition('n.nid', $nid);
+  //$query->condition('n.type', 'story');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return array(
+    'field_story_short_headline_value' => $result[0]['field_story_short_headline_value'],
+    'field_emoji_position_value' => $result[0]['field_emoji_position_value'],
+    'field_emoji_2_value' => $result[0]['field_emoji_2_value'],
+    'field_emoji_value' => $result[0]['field_emoji_value'],
+    'title' => $result[0]['title'],
+  );
+}
+
+/**
  * Implements itg_get_amp_search_result().
  */
 function itg_get_amp_search_result() {
@@ -1948,3 +1983,4 @@ function itg_get_amp_search_result() {
     drupal_goto($searchurl);
   }
 }
+
