@@ -4035,6 +4035,11 @@ function itg_rapid_api_change_password($token) {
             $account_err['status_message'] = "Invalid User_ID";
             return $account_err;
         }
+        $token = $params['authtoken_id'];
+    if (!drupal_valid_token($token, 'services')) {
+        $data['status_code'] = "0";
+        $data['status_message'] = "invalid token";
+    }
     
     $url = SSO_SERVER_URL . "/appapi/change_password";
     $result = callAPI($method, $url, $params);
