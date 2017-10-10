@@ -151,7 +151,9 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
     $arg = arg();
     if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[2] == 'edit') {
       $remove_subscribe_link = str_replace("[UNSUBSCRIBEURL]", " ", $form['#node']->body['und'][0]['value']);
-      $form['#node']->body['und'][0]['value'] = $remove_subscribe_link;
+      $form['body']['und'][0]['#default_value'] = $remove_subscribe_link;
+//      p($form['body']['und'][0]['#default_value']);
+      
     }
     
     $form['field_newst_banner'][LANGUAGE_NONE][0]['#required'] = FALSE;
@@ -504,8 +506,10 @@ function itg_newsletter_node_presave($node) {
     if (isset($node->body[LANGUAGE_NONE][0]['value'])) {
       if (strpos($node->body[LANGUAGE_NONE][0]['value'], '[UNSUBSCRIBEURL]')) {
         $node->body[LANGUAGE_NONE][0]['value'] = $node->body[LANGUAGE_NONE][0]['value'];
+        p($node->body[LANGUAGE_NONE][0]['value']);
       } else {
         $node->body[LANGUAGE_NONE][0]['value'] = $node->body[LANGUAGE_NONE][0]['value'] . '[UNSUBSCRIBEURL]';
+        p($node->body[LANGUAGE_NONE][0]['value']);
       }
     }
   }
