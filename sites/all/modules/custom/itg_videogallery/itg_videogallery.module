@@ -5046,6 +5046,7 @@ function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previou
   }
 }
 
+ /*
  * Function for show related content in block
  * @return boolean|string
  */
