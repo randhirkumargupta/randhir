@@ -5046,10 +5046,11 @@ function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previou
   }
 }
 
- /*
- * Function for show related content in block
- * @return boolean|string
- */
+
+/* 
+* Function for show related content in block
+* @return boolean|string
+*/
 function get_header_tab_related_video_block_content() {
   if (arg(1) == null)
     return false;
