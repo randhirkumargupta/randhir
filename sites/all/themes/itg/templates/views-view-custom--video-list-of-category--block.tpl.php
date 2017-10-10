@@ -9,7 +9,7 @@
     }
     $section_cat_id = $row['field_story_category'];
     ?>
-    <li class="col-md-3">
+    <li>
         <div class="tile">
       <figure>
   <?php print l($img, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>

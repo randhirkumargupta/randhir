@@ -158,6 +158,22 @@ function itg_videogallery_block_info() {
     'info' => t('Video landing page menu'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['itg_videogallery_tab_realted'] = array(
+    'info' => t('Video header related content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['itg_videogallery_menu_content'] = array(
+    'info' => t('Video landing Link page menu'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['itg_other_videogallery_section'] = array(
+    'info' => t('Other Video Gallery from primary Category'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['itg_trending_videos_widget_tab'] = array(
+    'info' => t('Trending videos for video tab'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -176,6 +192,35 @@ function itg_videogallery_block_view($delta = '') {
       break;
     case 'videogallery_menu_video_block':
       $block['content'] = theme('videogallery_menu_video_block', array('data' => $data));
+      break;
+    case 'itg_videogallery_tab_realted':
+      $block['content'] = get_header_tab_related_video_block_content();
+      break;
+    case 'itg_videogallery_menu_content':
+      if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+        $node = menu_get_object();
+        if ($node->type == 'videogallery') {
+          $block['content'] = theme('itg_videogallery_menu_content_theme', array('data' => $data));
+        }
+        else {
+          $block['content'] = '';
+        }
+      }
+      else {
+        $block['content'] = '';
+      }
+      break;
+    case 'itg_other_videogallery_section':
+      $block['content'] = _get_other_videos_from_primary_category();
+      break;
+    // Trending videos ordering reordering widget case
+    case 'itg_trending_videos_widget_tab':
+      $info['widget'] = 'trending_videos_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = 3;
+      $info['min_limit'] = 3;
+      $data = itg_widget_get_widget_data_data($info);
+      $block['content'] = theme("trending_videos_tab", array("data" => $data));
       break;
   }
 
@@ -235,6 +280,15 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    'itg_videogallery_menu_content_theme' => array(
+      'template' => 'videogallery-link-menu-landing-template',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'trending_videos_tab' => array(
+      'template' => 'trending-videos-tab',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates'
+    )
   );
   return $themes;
 }
@@ -248,6 +302,15 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
 function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   switch ($form_id) {
+    case 'itg_widgets_custom_variables':
+      $form['tid_videos'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Tid of videos',
+        '#default_value' => variable_get('tid_videos'),
+        '#size' => 20,
+        '#maxlength' => 20,
+      );
+      break;
     case 'videogallery_node_form':
       $arg = arg(2);
       $form['field_story_expert_description']['und'][0]['#format'] = 'full_html';
@@ -1480,6 +1543,16 @@ function itg_videogallery_views_pre_render(&$view) {
     if (!isset($_POST['views_bulk_operations'])) {
       $header_content_video = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
       $header_content_video .= l(t('Upload Video'), 'node/add/videogallery', array('query' => array('destination' => arg(0))));
+      $view->attachment_before = $header_content_video;
+    }
+  }
+  if ($view->name == "video_list_of_category" && $view->current_display == 'block_4') {
+    if (isset($view->args[0])) {
+      $cat_name = itg_videogallery_get_tname($view->args[0]);
+      $header_content_video = '<div class="other_video_category"><h3><span>Other Videos from ' . $cat_name . '</span></h3></div>';
+      $view->attachment_before = $header_content_video;
+    }else{
+      $header_content_video = '<div class="other_video_category"><h3><span>Other Videos from category</span></h3></div>';
       $view->attachment_before = $header_content_video;
     }
   }
@@ -3948,6 +4021,7 @@ function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
 /**
  * {@inheritdoc}
  */
+/*
 function itg_videogallery_node_view($node, $view_mode, $langcode) {
   $os = array("search_index", "amp");
  
@@ -3995,6 +4069,7 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
     $node->view_output = $view_output;
   }
 }
+*/
 
 /**
  * Implements hook_views_query_alter()
@@ -4868,7 +4943,7 @@ function itg_videogallery_get_play_video_in_video_info($video_data) {
  */
 
 function itg_videogallery_get_video_setting_by_bucket_name($bucket_name) {
-  $query = db_select('node', 'n');
+   $query = db_select('node', 'n');
    $query->join('field_data_field_hls_domain', 'fdfhd', 'fdfhd.entity_id = n.nid');
    $query->join('field_data_field_progressive_domain', 'fdfpd', 'fdfpd.entity_id = n.nid');
    $query->fields('fdfhd', array('field_hls_domain_value'));
@@ -4959,3 +5034,74 @@ function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previou
     }
   }
 }
+
+ * Function for show related content in block
+ * @return boolean|string
+ */
+function get_header_tab_related_video_block_content() {
+  if (arg(1) == null)
+    return false;
+  $related_content = itg_get_related_content(arg(1));
+  if (!empty($related_content)) {
+    if (function_exists('itg_get_related_story_id')) {
+      $related_result = itg_get_related_story_id($related_content);
+    }
+    $related_video .= "<div id='related-video-tab'><ul class='video-list'>";
+    foreach ($related_result as $site_hash_key) {
+      $current_entity_id = $site_hash_key;
+      $related_data = itg_get_related_story_content($current_entity_id);
+
+      if (!empty($related_data)) {
+        $related_title = mb_strimwidth($related_data->label, 0, 80, "..");
+        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
+        $related_video_duration = $related_data->sm_field_video_duration[0];
+        $related_image = '<img class="related-default" src="' . $related_image_url . '">';
+        if (empty($related_image_url)) {
+          $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+          $related_video .= "<li class='related_content_tab'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'><img src='$img_url' class='related-default' alt='$related_title' /><span class='videolengh'><i class='fa fa-play-circle'></i> " . $related_video_duration . "</span></a>";
+          $related_video .= "<p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
+        }
+        else {
+          $related_video .= "<li class='related_content_tabs'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<span class='videolengh'><i class='fa fa-play-circle'></i> " . $related_video_duration . "</span>" . $related_image;
+          $related_video .= "</a><p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
+        }
+      }
+    }
+    $related_video .= "</ul></div>";
+    return $related_video;
+  }
+  else {
+    return false;
+  }
+}
+
+/**
+ * Function to show Other video gallery from node primary category
+ * @return array or empty
+ */
+function _get_other_videos_from_primary_category() {
+  if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+    $tid = get_tid_using_nid_custom(arg(1));
+    return views_embed_view('video_list_of_category', 'block_4', $tid);
+  }
+  else {
+    return '';
+  }
+}
+
+/**
+ * Get Primary category Tid using nid without node load
+ * @param int $nid
+ * @return int
+ */
+function get_tid_using_nid_custom($nid) {
+  if (isset($nid)) {
+    $query = db_select('field_data_field_story_category', 'ttd');
+    $query->fields('ttd', array('field_story_category_tid'));
+    $query->condition('ttd.entity_id', $nid, '=');
+    $result = $query->execute()->fetchField();
+    return $result;
+  }
+  return 0;
+}
+
