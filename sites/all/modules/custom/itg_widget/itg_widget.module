@@ -1979,7 +1979,7 @@ function __itg_check_nid_in_widget($nid) {
 function __itg_widget_helper_data_insert($nid) {
     if ($nid) {
         __itg_widget_helper_data_delete($nid);
-        $node_load_data = node_load($nid);
+        $node_load_data = node_load($nid , null , TRUE);
         itg_watchdog("widget_update" , array(
               'nid' => $nid,
               'node_status' => $node_load_data->status,
