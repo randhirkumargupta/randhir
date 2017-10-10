@@ -252,7 +252,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['max_length'] = '261';
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Field: Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -337,6 +337,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
+    'breaking_news' => 'breaking_news',
     'story' => 'story',
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
@@ -434,7 +435,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['field_story_kicker_text']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['field_story_kicker_text']['element_label_colon'] = FALSE;
-  /* Field: Field: Description */
+  /* Field: Field: Short description */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -518,6 +519,7 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
+    'breaking_news' => 'breaking_news',
     'story' => 'story',
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
