@@ -2759,7 +2759,7 @@ function insert_all_node_in_widegt_table() {
  * {@inheritdoc}
  */
 function itg_widget_node_insert($node) {
-    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery')) {
         if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
