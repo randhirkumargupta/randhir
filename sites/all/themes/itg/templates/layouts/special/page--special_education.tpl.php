@@ -719,7 +719,7 @@ if ($theme != 'itgadmin') {
         </div>
 
         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
-          <div class="widget-help-text"><?php print t('Special widgets');?> ( <strong><?php print t('video');?></strong> )</div>
+          <div class="widget-help-text">Section card</div>
             <div class="itg-widget shadow-on">
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-15']['widget_name'].$widget_data['itg-block-15']['widget_display_name']; ?>">

@@ -303,6 +303,13 @@ function itg_widgets_custom_variables() {
 		'#attributes' => array('placeholder' => t('Enter see pic limit')),
 		'#default_value' => variable_get('SEE_PIC'),
 	);
+  
+	$form['newsletter_content_limit'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter limit for Newsletter Item'),
+		'#attributes' => array('placeholder' => t('Enter limit for Newsletter Item')),
+		'#default_value' => variable_get('newsletter_content_limit'),
+	);
 
 	return system_settings_form($form);
 }

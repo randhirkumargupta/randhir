@@ -27,7 +27,8 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   if ($actual_host_name) {
     $baseurl = $actual_host_name . '/';
   }
-
+  // Tab title
+  if(empty($_GET['tab'])) {
   if ($current_date < $event_close_date) {
     if (!empty($data)) {
       ksort($data);
@@ -71,7 +72,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
                 $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" />';
                 $sponsor_tags = '<div class="spncor-tag"><span>' . t("Powered By") . '</span>' . l($sponsor_img, $baseurl . 'sponsor-details', array('attributes' => array('target' => '_blank'), 'query' => array('sponsor' => $sponsor_all_data->nid), 'html' => true)) . '</div>';
               }
-              $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
+              $story_title = itg_event_backend_get_session_story_title_move_field($media, $content_font_color);
               $output_story_title = '';
               foreach ($story_title['story_title'] as $title) {
                 if (!empty($title)) {
@@ -133,5 +134,14 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
         $output = render($render_array);
         print $output;
       }
-    }
+   
+}else {
+  $tab_url_value = $_GET['tab'];
+  $tab_value = itg_event_backend_tab_title($host_node, $tab_url_value);
+  
+  print '<h2 style="color:'.$font_color.'">'.$tab_value[$tab_url_value]['tab_title'].'</h2>';
+  print '<p style="color:'. $content_font_color.'">'.$tab_value[$tab_url_value]['tab_description'].'</p>';
+  
+}
+ }
     ?>
