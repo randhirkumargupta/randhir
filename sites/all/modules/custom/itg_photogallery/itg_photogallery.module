@@ -576,7 +576,7 @@ function itg_photogallery_block_info() {
 		'info' => t('Photo landing page menu'),
 		'cache' => DRUPAL_CACHE_GLOBAL,
 	);
-  $blocks['itg_photogallery_link_menu_block'] = array(
+  $blocks['photogallery_link_menu_block'] = array(
     'info' => t('PhotoGallery Section menu block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
@@ -599,11 +599,11 @@ function itg_photogallery_block_view($delta = '') {
 		case 'photo_menu_landing_block':
 			$block['content'] = theme('Photo_landing_menu_block', array('data' => $data));
 			break;
-    case 'itg_photogallery_link_menu_block':
+    case 'photogallery_link_menu_block':
       if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
         $node = menu_get_object();
         if ($node->type == 'photogallery') {
-          $block['content'] = theme('itg_photogallery_menu_link_block', array('data' => $data));
+          $block['content'] = theme('photogallery_menu_link_block', array('data' => $data));
         }
         else {
           $block['content'] = '';
@@ -641,7 +641,7 @@ function itg_photogallery_theme($existing, $type, $theme, $path) {
 			'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
 			'render element' => 'form',
 		),
-    'itg_photogallery_menu_link_block' => array(
+    'photogallery_menu_link_block' => array(
       'template' => 'photogallery-menu-link-block',
       'path' => drupal_get_path('module', 'itg_photogallery') . '/templates',
       'variables' => array('data' => NULL),
