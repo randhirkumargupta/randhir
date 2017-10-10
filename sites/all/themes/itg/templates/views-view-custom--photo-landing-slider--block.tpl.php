@@ -70,7 +70,7 @@ $argum = base64_encode(arg(1));
                 }
                 ?>
                 <?php if($user->uid > 0): ?>
-                    <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i></a></li>
+                    <li><a class="def-cur-pointer" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
                 <?php else: ?>
                     <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                 <?php endif; ?>
@@ -183,7 +183,7 @@ $argum = base64_encode(arg(1));
                         </div>
                     </li>
                     <?php if($user->uid > 0): ?>
-                        <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/personalization/my-content/<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                        <li class="mhide"><a class="def-cur-pointer" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
                     <?php else: ?>
                         <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                     <?php endif; ?>
@@ -226,11 +226,7 @@ $argum = base64_encode(arg(1));
 </div>
 
 <?php
-    $explode = explode("?", $_SERVER['REQUEST_URI']);
-    $initial_slide = 0;
-    if(count($explode) > 1) {
-        $initial_slide = is_integer(end($explode)) ? end($explode) : 0;
-    }
+    $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
 ?>
 <script>
     jQuery(document).ready(function (e) {
@@ -294,30 +290,30 @@ $argum = base64_encode(arg(1));
             asNavFor: '.slick-thumbs-slider, .slickslide, .counterslide'
         });
 // Photogallery slider javascript
-//        jQuery(document).ready(function () {
-//            jQuery(".slick-arrow , li.slick-slide").on("click", function () {
-//                var active_slide = jQuery(".slick-active").attr("data-slick-index");
-//                var current_url = window.location.href.split('?')[0];
-//                if (active_slide > 0) {
-//                    window.history.pushState("", "", current_url + "?" + active_slide);
-//                } else {
-//                    // If frist slide then put pull without query string.
-//                    window.history.pushState("", "", current_url);
-//                }
-//            });
-//        });
+        jQuery(document).ready(function () {
+            jQuery(".slick-arrow , li.slick-slide").on("click", function () {
+                var active_slide = jQuery(".slick-active").attr("data-slick-index");
+                var current_url = window.location.href.split('?')[0];
+                if (active_slide > 0) {
+                    window.history.pushState("", "", current_url + "?photo=" + active_slide);
+                } else {
+                    // If frist slide then put pull without query string.
+                    window.history.pushState("", "", current_url);
+                }
+            });
+        });
     });
     // Photogallery slider javascript
     // Handle Thumb for active set class
-//    jQuery(window).load(function() {
-//        var active_slide = jQuery(".slick-active").attr("data-slick-index");
-//        jQuery( '.slick-thumbs li' ).removeClass('slick-current');
-//        jQuery( '.slick-thumbs li' ).each( function(key , item) {
-//            if(key == active_slide) {
-//                jQuery( this).addClass("slick-current");
-//            }
-//        });
-//    });
+    jQuery(window).load(function() {
+        var active_slide = jQuery(".slick-active").attr("data-slick-index");
+        jQuery( '.slick-thumbs li' ).removeClass('slick-current');
+        jQuery( '.slick-thumbs li' ).each( function(key , item) {
+            if(key == active_slide) {
+                jQuery( this).addClass("slick-current");
+            }
+        });
+    });
 </script>
 
 

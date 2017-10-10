@@ -943,7 +943,7 @@ function syndication_feature_field_default_field_instances() {
     'bundle' => 'syndication_feed_from_pattern',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Footer',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -966,6 +966,11 @@ function syndication_feature_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
@@ -986,7 +991,7 @@ function syndication_feature_field_default_field_instances() {
     'bundle' => 'syndication_feed_from_pattern',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Header',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1009,6 +1014,11 @@ function syndication_feature_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),

@@ -29,7 +29,9 @@ foreach($rows as $id => $row):
     ?>
     <div class="poll-banner test <?php echo $image_poll_class; ?>">
         <div class="poll-list">
+            <?php if(!empty($row['field_poll_banner'])) { ?>
             <div class="pic"><?php echo $row['field_poll_banner']; ?> </div>
+            <?php } ?>
             <div class="detail">
                 <div class="detail-content">
                     <h4><?php echo $row['title']; ?></h4>

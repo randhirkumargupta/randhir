@@ -145,14 +145,14 @@ function itg_akamai_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  $items['itg-akamai-load-my-account'] = array(
+  /*$items['itg-akamai-load-my-account'] = array(
     'title' => 'Akamai Load My Account',
     'description' => 'Akamai Load My Account',
     'page callback' => 'itg_akamai_load_my_account',
     'access arguments' => array('access content'),
     'file' => 'includes/itg_akamai.helper.inc',
     'type' => MENU_CALLBACK,
-  );
+  );*/
 
   return $items;
 }
@@ -993,7 +993,7 @@ function itg_akamai_init() {
           }
         }
       }
-      drupal_add_js(drupal_get_path('module', 'itg_akamai') . '/js/itg_akamai.js', array('scope' => 'footer'));
+      //drupal_add_js(drupal_get_path('module', 'itg_akamai') . '/js/itg_akamai.js', array('scope' => 'footer'));
     } // End of theme conditon
   }
 }

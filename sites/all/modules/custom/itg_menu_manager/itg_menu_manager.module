@@ -1263,6 +1263,7 @@ function itg_menu_manager_webform_js_submit(&$form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_menu_manager_custom_submit($form, &$form_state) {
+    cache_clear_all('menu_level_data', 'cache', TRUE);
     // Current display for indentifing the view page (Widget name).
     //$current_display = $form_state['build_info']['args'][0]->current_display;
     // Below view_name will use to get widget name.

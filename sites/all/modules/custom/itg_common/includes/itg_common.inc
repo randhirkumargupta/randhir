@@ -133,6 +133,21 @@ function itg_common_get_node_type($nid) {
 }
 
 /**
+ * Get node type and primary category from nid
+ * @param int $nid
+ * @return string
+ */
+function itg_common_get_type_category($nid) {
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_primary_category', 'fc', 'n.nid = fc.entity_id');
+  $query->fields('n', array('type'));
+  $query->fields('fc', array('field_primary_category_value'));
+  $query->condition('n.nid', $nid, '=');
+
+  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+}
+
+/**
  * Get node count.
  * @param string $content_type
  * @param int $uid

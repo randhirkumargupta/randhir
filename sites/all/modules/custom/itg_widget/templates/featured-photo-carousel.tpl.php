@@ -7,15 +7,18 @@ if(!empty($data)) {
             foreach($data as $key => $entity_data_node) {
                 ?>
                 <li>
-                    <a   title="<?php echo $entity_data_node['image_title']; ?>" href="<?php echo $entity_data_node['node_url']; ?>">
-                        <img src="<?php print $entity_data_node['file_url']; ?>" title="<?php echo $entity_data_node['image_title']; ?>" alt="<?php echo $entity_data_node['image_alt']; ?>" />
-                    </a>
+    <?php 
+        $full_image = '<img src="'. $entity_data_node['file_url'] .'" title="'. $entity_data_node['image_title'] .'" alt="'. $entity_data_node['image_alt'].'" />';
+    ?>                   
+                    <?php
+                        echo l($full_image , "node/".$entity_data_node['nid'] , array("html" => TRUE))
+                    ?>
                     <div class="detail">
                         <p class="flex-count"><i class="fa fa-camera"></i> <?php echo $entity_data_node['count'] . t('Images'); ?> </p>
                         <p class="flex-caption" title="<?php echo $entity_data_node['title']; ?>">
-                            <a  href="<?php echo $entity_data_node['node_url']; ?>">
-                                <?php print itg_common_get_smiley_title($entity_data_node['nid'], 0, 145, ".."); ?>
-                            </a>
+                            <?php
+                                echo l($entity_data_node['title'] , "node/".$entity_data_node['nid'] , array("html" => TRUE))
+                            ?>
                         </p>
                     </div>
                 </li>
