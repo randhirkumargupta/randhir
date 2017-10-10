@@ -137,7 +137,10 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
                         <?php if(!empty($node->field_match_id['und'][0]['value'])):?>
                         <?php print get_cricket_live_blog_data($node->field_match_id['und'][0]['value'], 50); ?>
                         <?php else:?>
-                        <?php print get_commentary_data_db($node->nid,0); ?>
+                        <?php if(function_exists('get_commentary_data_db')){
+                                  print get_commentary_data_db($node->nid,0);                          
+                              } 
+                        ?>
                         <?php endif;?>
                     </div>       
                 </div>
