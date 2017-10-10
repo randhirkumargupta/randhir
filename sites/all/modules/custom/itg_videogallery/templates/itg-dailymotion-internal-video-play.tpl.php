@@ -1,38 +1,26 @@
 
-<link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" />
-<style>
-    #right-section .rt-colum{float:left}
-    .jw-controlbar .jw-option{line-height:12px !important; line-height:17px !important; font-family:"Roboto", sans-serif !important;}
-    .jw-icon-hd::before{content: "\f013" !important; font-family: FontAwesome;}
-    span.flasherror{ display:block; text-align:center; margin-top:33%; position:relative; margin-bottom:5px; font-family:roboto; font-weight:400;}
-    a.flashlogo{ width:100px; margin:0 auto; display:block;}
-    .videocat-ancorlist{ background:#F3F3F3; margin-bottom:20px;}
-    .videocat-ancorlist ul li{ list-style:none; width:auto; float:left;  padding:8px 0;}
-    .videocat-ancorlist ul li a{ font-size:16px; color:#838383; display:block; float:left; width:auto; font-weight:300; padding:0 10px; border-right:1px solid #838383; line-height:16px;}
-    .videocat-ancorlist ul li:last-child a{border-right:0px;}
 
-    #fullvideosdisplay{width:650px !important;}
-
-    @media screen and (max-width :800px){
-        .watchright_now{float:left !important;}
-        #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(4), #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(5) { float:left;}
-        #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(6), #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(7) { float:right;}
-
-    }
-    *{box-sizing:border-box!important;}
-</style>
 
 <?php
-$width = 420;
-$height = 500;
+if ($width == "") {
+  $width = 420;
+}
+if ($height == "") {
+  $height = 500;
+}
+if (arg(0) == 'embeded-video') {
+  global $base_url;
+  ?>
+<script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer-jquery-1.11.3.min.js';?>"></script>
+  <script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js';?>"></script>
+ <?php } 
 $video_all_data = json_decode($video_data, TRUE);
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
-
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
-<div id="setupplayer" style="width:<?php echo $width . 'px'; ?>;">
-    <div id="videoplayer">                </div></div>
+
+<div id="videoplayer"> </div>
 
 
 <script type="text/javascript">
@@ -55,7 +43,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
           //var multipart=0;
           playlist: [{
                   title: "",
-                  'image': "<?php echo  $player_content['player_image'];?>",
+                  'image': "<?php echo $player_content['player_image']; ?>",
                   sources: [
                       {
                           file: "<?php echo $player_content['bitrate_url']; ?>"
@@ -72,11 +60,6 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
           androidhls: "true",
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
-          sharing: {
-              code: encodeURI("<iframe class='embedframe' src='http://indiatoday.intoday.in/embed/3d6foqhpi51c' width='100%' height='100%' frameborder='0' scrolling='no' />"),
-              link: "http://indiatoday.intoday.in/embed/3d6foqhpi51c",
-              heading: "Share video"
-          },
           autostart: true,
           advertising: {
               client: "googima", skipoffset: 5,
@@ -112,7 +95,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
 
 
 <script>
-  $(document).ready(function () {
+  jQuery(document).ready(function () {
 
       playerInstance.play();
 

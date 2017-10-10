@@ -442,6 +442,10 @@ function itgadmin_preprocess_page(&$vars) {
     , 'election-graph-widget-list'
     , 'dailymotion-video-play'
     , 'solr-unpublish-video'
+    , 'search-unpublish-internal-video'
+    , 'search-publish-internal-video'
+    , 'search-publish-internal-video-singal'
+    , 'search-unpublish-internal-video-singal'
   );
 
   if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {

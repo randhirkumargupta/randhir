@@ -15,6 +15,8 @@ $image = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NON
 $videoids = "";
 if (function_exists('get_video_in_fieldcollection_by_nid')) {
   $videoids = get_video_in_fieldcollection_by_nid($nid);
+
+  // p($videoids);
 }
 $argum = base64_encode(arg(1));
 $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -86,6 +88,12 @@ $uri = base64_encode($actual_link);
                               $autoplay = 1;
                             }
                             ?> <?php
+                            if ($video_value->field_video_thumbnail_fid != "" && $video_value->solr_video_thumb == "") {
+                              $image_data_thumb = file_load($video_value->field_video_thumbnail_fid);
+                              if (!empty($image_data_thumb)) {
+                                $video_value->solr_video_thumb = file_create_url($image_data_thumb->uri);
+                              }
+                            }
                             if ($video_value->solr_video_thumb != "") {
                               $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
                             }
@@ -105,40 +113,50 @@ $uri = base64_encode($actual_link);
                             ?>
 
                             <?php if ($keys == 0) { ?>
+                              <div style="display:none" class="loading-video"><div class="spinner">
+                                      <div class="bounce1"></div>
+                                      <div class="bounce2"></div>
+                                      <div class="bounce3"></div>
+                                  </div></div>
                               <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
-                                      <div style="display:none" class="loading-video">Load.....</div>
+
                                       <div class="iframe-video1 video-iframe-wrapper" id="video_0">
+                                          <?php
+                                          if ($videoids[0]->video_repo_type == 'INTERNAL') {
+                                            print theme('internal_video_player', array("data" => $videoids[0]->fid));
+                                          }
+                                          ?>
                                       </div>
-                                      <script>
-                                        jQuery(window).load(function () {
-                                            jQuery('.video-slider-images').removeClass('pointer-event-none');
-                                        });
-                                        var player_0 = DM.player(
-                                                document.querySelector('#video_0'),
-                                                {
-                                                    video: '<?php print $vide_dm_id; ?>',
-                                                    width: '600px',
-                                                    height: '450px',
-                                                    params: {
-                                                        autoplay: <?php echo $autoplay; ?>,
-                                                        controls: 1,
-                                                        'sharing-enable': 0,
-                                                        'ui-start-screen-info': 0,
-                                                        'endscreen-enable':<?php echo $ads_flag; ?>,
-                                                        'ui-logo': 0,
-                                                    }
-                                                }
-                                        );
-                                        player_0.addEventListener('video_end', function (event) {
-                                            jQuery('.image_index_<?php print $keys + 1; ?>').trigger('click');
-                                        });
-                                      </script>
+                                      <?php if ($videoids[0]->video_repo_type != 'INTERNAL') { ?>
+                                        <script>
+                                          jQuery(window).load(function () {
+                                              jQuery('.video-slider-images').removeClass('pointer-event-none');
+                                          });
+                                          var player_0 = DM.player(
+                                                  document.querySelector('#video_0'),
+                                                  {
+                                                      video: '<?php print $vide_dm_id; ?>',
+                                                      width: '600px',
+                                                      height: '450px',
+                                                      params: {
+                                                          autoplay: <?php echo $autoplay; ?>,
+                                                          controls: 1,
+                                                          'sharing-enable': 0,
+                                                          'ui-start-screen-info': 0,
+                                                          'endscreen-enable':<?php echo $ads_flag; ?>,
+                                                          'ui-logo': 0,
+                                                      }
+                                                  }
+                                          );
+                                          player_0.addEventListener('video_end', function (event) {
+                                              jQuery('.image_index_<?php print $keys + 1; ?>').trigger('click');
+                                          });
+                                        </script>
+                                      <?php } ?>
                                   </div>
                               </div>
                             <?php }
                             ?>
-
-
 
                             <?php
                             $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
@@ -158,19 +176,11 @@ $uri = base64_encode($actual_link);
                           $video_kicker = get_video_kicker_by_nid($nid);
                         }
 
-                        drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
                         $hide_player = "";
                         $description_slider = "";
                         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images "><ul >';
                         $description_slider = '<div class="video-slider-description"><ul>';
                         foreach ($videoids as $keys => $video_value) {
-                          if ($keys != 0) {
-                            $hide_player = 'hide-player';
-                            $autoplay = 0;
-                          }
-                          else {
-                            $autoplay = 1;
-                          }
                           ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
                           if (module_exists('itg_videogallery')) {
                             $vid = itg_videogallery_get_videoid($row['fid']);
@@ -178,59 +188,26 @@ $uri = base64_encode($actual_link);
                           $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 
                           if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
-                            $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $image_url . '" height="66" width="88" alt=""></li>';
+                            $newimageds.= '<li><img class="migrate-thumb-video" data-image ="' . $image_url . '" data-nid = "' . $nid . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . $image_url . '" height="66" width="88" alt=""></li>';
                           }
                           else {
-                            $newimageds.= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
+                            $image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg";
+                            $newimageds.= '<li><img class="migrate-thumb-video" data-nid = "' . $nid . '" data-image ="' . $image_url . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
                           }
-                          $ads_flag = 0;
-                          if ($video_value->field_include_ads_value == 'yes') {
-                            $ads_flag = 1;
-                          }
-                          $allbitrates = array();
-                          foreach ($video_node->field_multi_bitrate[LANGUAGE_NONE] as $bitratevalue) {
-                            $allbitrates[] = end(explode('@', $bitratevalue['value']));
-                          }
-                          $usebitrates = implode(',', $allbitrates);
-                          $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
-                          //$getfile_its_url = itg_videogallery_get_video_bitrate($nid);
                           ?>
-                              <div class="iframe-video">
 
-                                  <div style="margin:0 auto; width:622px;"><div align="center" id="videoplayer_<?php echo $keys; ?>"></div></div> 
-                                  <script type="text/javascript">
-
-                                    jwplayer('videoplayer_<?php echo $keys; ?>').setup({
-                                        playlist: [{
-                                                title: "<?php print $row['title']; ?>",
-                                                image: "<?php echo $image_url; ?>",
-                                                sources: [
-                                                    //                                                            {
-                                                    //                                                                file: "<?php echo $getvideo_bitrate_url; ?>"
-                                                    //                                                            },
-                                                    {
-                                                        file: "<?php print $video_value->field_migrated_video_url_value; ?>"
-                                                    }]
-                                            }],
-                                        primary: "flash",
-                                        width: "622",
-                                        height: "446",
-                                        aspectratio: "4:3",
-                                        "stretching": "exactfit",
-                                        androidhls: "true",
-                                        fallback: "false",
-                                        hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
-                                        advertising: {
-                                            client: "vast",
-                                            skipoffset: 5,
-                                            schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
-
-                                        },
-                                        ga: {
-                                            idstring: "<?php print $row['title']; ?>",
-                                        }
-                                    });</script></div>
-
+                              <?php if ($keys == 0) { ?>
+                                <div class="iframe-video">
+                                    <div style="display:none" class="loading-video"><div class="spinner">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div></div>
+                                    <div  id="migrate_video_palyer_container">
+                                        <?php print theme('migrated_video_player', array("url" => $video_value->field_migrated_video_url_value, 'nid' => $nid, 'image' => $image_url)); ?>
+                                    </div> 
+                                </div>
+                              <?php } ?>
                           </div>
 
                           <?php
@@ -246,16 +223,16 @@ $uri = base64_encode($actual_link);
                   <div class="social-likes mhide">
                       <ul>
                           <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                    if (function_exists(itg_flag_get_count)) {
-                      $like_count = itg_flag_get_count(arg(1), 'like_count');
-                    }
-                    // get migrated count 
-                    if (function_exists('itg_get_migrated_like_count')) {
-                      $migrated_count = itg_get_migrated_like_count(arg(1));
-                    }
-                    print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                      ?></span></a></li>
-                                      <?php
+                                      if (function_exists(itg_flag_get_count)) {
+                                        $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                      }
+                                      // get migrated count 
+                                      if (function_exists('itg_get_migrated_like_count')) {
+                                        $migrated_count = itg_get_migrated_like_count(arg(1));
+                                      }
+                                      print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                                      ?></span></a></li>
+                          <?php
                           if ($user->uid > 0) {
                             if (function_exists(itg_get_front_activity_info)) {
                               $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -284,7 +261,7 @@ $uri = base64_encode($actual_link);
                           <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                               <div class="show-embed-code-div">
                                   <div class="copy-sample-code">
-                                      <textarea readonly><iframe allowfullscreen="" frameborder="0"  height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" width="648" /></textarea>
+                                      <textarea readonly><iframe allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>
                                   </div>
                               </div>
                           </li>
@@ -317,16 +294,16 @@ $uri = base64_encode($actual_link);
                       <div class="social-likes desktop-hide">
                           <ul>
                               <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                if (function_exists(itg_flag_get_count)) {
-                  $like_count = itg_flag_get_count(arg(1), 'like_count');
-                }
-                // get migrated count 
-                if (function_exists('itg_get_migrated_like_count')) {
-                  $migrated_count = itg_get_migrated_like_count(arg(1));
-                }
-                print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                  ?></span></a></li>
-                                          <?php
+                                          if (function_exists(itg_flag_get_count)) {
+                                            $like_count = itg_flag_get_count(arg(1), 'like_count');
+                                          }
+                                          // get migrated count 
+                                          if (function_exists('itg_get_migrated_like_count')) {
+                                            $migrated_count = itg_get_migrated_like_count(arg(1));
+                                          }
+                                          print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                                          ?></span></a></li>
+                              <?php
                               if ($user->uid > 0) {
                                 if (function_exists(itg_get_front_activity_info)) {
                                   $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -355,7 +332,7 @@ $uri = base64_encode($actual_link);
                               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                   <div class="show-embed-code-div">
                                       <div class="copy-sample-code">
-                                          <textarea readonly><iframe allowfullscreen="" frameborder="0" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" width="648" /></textarea>    
+                                          <textarea readonly><iframe allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>    
                                       </div>
                                   </div>
                               </li>
@@ -397,7 +374,7 @@ $uri = base64_encode($actual_link);
                       </div>
                   </div>
               </div>
-              <?php //$row['field_story_expert_description'];               ?>
+              <?php //$row['field_story_expert_description'];                  ?>
               <div class="col-md-4 video-header-right">
                   <div class="ads">
                       <?php

@@ -309,6 +309,34 @@ function feature_for_poll_views_default_views() {
 </div>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'OR',
+  );
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'poll' => 'poll',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: End Date (field_poll_end_date) */
+  $handler->display->display_options['filters']['field_poll_end_date_value']['id'] = 'field_poll_end_date_value';
+  $handler->display->display_options['filters']['field_poll_end_date_value']['table'] = 'field_data_field_poll_end_date';
+  $handler->display->display_options['filters']['field_poll_end_date_value']['field'] = 'field_poll_end_date_value';
+  $handler->display->display_options['filters']['field_poll_end_date_value']['operator'] = 'empty';
+  $handler->display->display_options['filters']['field_poll_end_date_value']['group'] = 2;
+  /* Filter criterion: Content: End Date (field_poll_end_date) */
+  $handler->display->display_options['filters']['field_poll_end_date_value_1']['id'] = 'field_poll_end_date_value_1';
+  $handler->display->display_options['filters']['field_poll_end_date_value_1']['table'] = 'field_data_field_poll_end_date';
+  $handler->display->display_options['filters']['field_poll_end_date_value_1']['field'] = 'field_poll_end_date_value';
+  $handler->display->display_options['filters']['field_poll_end_date_value_1']['operator'] = '<';
+  $handler->display->display_options['filters']['field_poll_end_date_value_1']['group'] = 2;
+  $handler->display->display_options['filters']['field_poll_end_date_value_1']['form_type'] = 'date_text';
+  $handler->display->display_options['filters']['field_poll_end_date_value_1']['default_date'] = 'now';
   $export['past_polls'] = $view;
 
   $view = new view();

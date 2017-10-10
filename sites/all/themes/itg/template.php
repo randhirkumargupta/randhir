@@ -25,6 +25,14 @@ function itg_theme() {
     'path' => drupal_get_path('theme', 'itg') . '/templates',
     'template' => 'user-pass',
   );
+  $items['internal_video_player'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'internal-video-player',
+  );
+  $items['migrated_video_player'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'migrated-video-player',
+  );
   return $items;
 }
 
@@ -258,6 +266,7 @@ function itg_breadcrumb($variables) {
  * {@inheritdoc}
  */
 function itg_preprocess_html(&$vars) {
+  $arg = arg();
   global $base_url, $user;
   if ($base_url == BACKEND_URL && !empty($user->uid)) {
     $vars['classes_array'][] = 'pointer-event-none';
@@ -275,8 +284,14 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-
-  // Code ends for adding header, body start, body close for ads module
+  
+  // Code for setting page header title for home page
+  if (!empty(arg(1)) && is_numeric(arg(1))) {
+    $arg_data = node_load(arg(1));
+    if ($arg_data->type == 'page' && $arg_data->nid == 2 && isset($arg_data->metatags[LANGUAGE_NONE]['title']['value']) && !empty($arg_data->metatags[LANGUAGE_NONE]['title']['value'])) {
+      $vars['head_title'] = $arg_data->metatags[LANGUAGE_NONE]['title']['value'] . ' | IndiaToday';
+    }
+  }
 }
 
 /**
@@ -519,7 +534,7 @@ function itg_link($variables) {
  */
 function itg_js_alter(&$javascript) {
   // some js unset
-  
+
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
@@ -531,7 +546,7 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
-  
+
 //itg theme JS alter    
   $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';

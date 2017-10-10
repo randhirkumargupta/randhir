@@ -1109,7 +1109,7 @@ div.form-type-password-confirm {
         }
     }
     .form-actions {
-        padding-left: 250px;
+        /* padding-left: 250px; */
     }
     #edit-mimemail {
         @extend .hide;
@@ -7990,7 +7990,7 @@ div.node {
 #itg_video_content {
     .video-local {
         @extend .fleft;
-        width: 50%;
+        width: 33%;
         cursor: pointer;
         height: 50px;
         background-color: #e4e3e5;
@@ -8004,10 +8004,11 @@ div.node {
             color: #fff;
         }
     }
-    .video-ftp {
+    .video-ftp,
+    .internal-video-tab {
         text-align: center;
         @extend .fleft;
-        width: 50%;
+        width: 33%;
         cursor: pointer;
         height: 50px;
         background-color: #e4e3e5;
@@ -12853,9 +12854,57 @@ six {
     }
 }
 
-.ftp-server>iframe {
-    border: 1px solid #ccc;
-    width: 100%;
+#views-exposed-form-searchimage-search-unpublish-internal-video,
+#views-exposed-form-searchimage-search-publish-internal-video-singal,
+#views-exposed-form-searchimage-search-publish-internal-video {
+    padding-bottom: 20px;
+    .views-exposed-form {
+        .views-exposed-widget {
+            vertical-align: top;
+            &.views-submit-button {
+                position: relative;
+                padding-right: 85px;
+                width: 180px;
+                .form-submit {
+                    position: absolute;
+                    right: 5px;
+                    top: 38px;
+                }
+            }
+            &.views-reset-button {
+                .form-submit {
+                    margin-top: 28px;
+                }
+            }
+            &.views-widget-filter-bundle_name {
+                display: none;
+            }
+            &.views-widget-filter-keyword {
+                width: 350px;
+            }
+        }
+    }
+}
+
+#views-exposed-form-searchimage-search-publish-internal-video-singal,
+#views-exposed-form-searchimage-search-publish-internal-video {
+    .views-exposed-form .views-exposed-widget.views-widget-filter-sm_field_video_used {
+        display: none;
+    }
+}
+
+.ftp-server,
+.ftp-server-internal {
+    >iframe {
+        border: 1px solid #ccc;
+        width: 100%;
+    }
+}
+
+.ftp-server-internal {
+    >iframe {
+        margin-top: 20px;
+    }
 }
 
 
@@ -13479,8 +13528,12 @@ body.taxonomy-form-term-tags {
 }
 
 .ftp-center #itg_video_content .video-ftp {
+    width: 50%;
+}
+
+.ftp-center #itg_video_content .internal-video-tab {
+    width: 50%;
     border-right: none;
-    width: 100%;
 }
 
 .view-tags-listing {
@@ -14116,7 +14169,7 @@ fieldset#edit-xmlsitemap {
     top: 10px;
     right: 10px;
     width: 400px;
-    height: 260px;
+    height: 225px;
 }
 
 .view.view-display-id-search_unpublish_video {
@@ -14208,5 +14261,33 @@ div.ctools-modal-content {
                 width: 100px;
             }
         }
+    }
+}
+
+.view-filters #views-exposed-form-searchimage-search-unpublish-internal-video #edit-bundle-name-wrapper {
+    display: none;
+}
+
+.view-display-id-solr_unpublish_video .solr-unpublish-icon {
+    width: 45px;
+    display: block;
+}
+
+[id*="itg-category-manager-import-tag-form"] {
+    .import-notes {
+        ul {
+            padding-left: 18px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+    }
+    .form-type-managed-file {
+        padding-left: 0;
+    }
+}
+
+[id*="redirect-list-form"] {
+    fieldset {
+        border: 1px solid #ccc;
     }
 }
