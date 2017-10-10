@@ -94,6 +94,14 @@ function itg_story_menu() {
     'file' => 'includes/itg_story.helper.inc',
     'type' => MENU_CALLBACK,
   );
+  
+  $items['byline/%ctools_js/add'] = array(
+    'title' => 'Add Byline',
+    'page callback' => 'itg_story_add_byline_popup',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   return $items;
 }
@@ -273,6 +281,30 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       if (isset($form['field_photo_story']['und']['#max_delta']) && isset($form['your_field']['und']['#max_delta']) && $form['your_field']['und']['#max_delta'] == 0) {
         $form['field_photo_story']['und'][0]['remove_button']['#prefix'] = '<div style="display:none;"';
         $form['field_photo_story']['und'][0]['remove_button']['#suffix'] = '</div>';
+      }
+      //Byline popup
+      // Load the modal library and add the modal javascript.
+      ctools_include('modal');
+      ctools_modal_add_js();
+      break;
+    case 'reporter_node_form' :
+      if ($form_state['reporter_popup_form']) {
+        $form['field_reporter_twitter_handle']['#access'] = FALSE;
+        $form['field_story_expert_name']['#access'] = FALSE;
+        $form['field_story_new_title']['#access'] = FALSE;
+        $form['field_constituancy']['#access'] = FALSE;
+        $form['field_party_name']['#access'] = FALSE;
+        $form['field_reporter_movie_name']['#access'] = FALSE;
+        $form['field_story_category']['#access'] = FALSE;
+        $form['field_story_extra_large_image']['#access'] = FALSE;
+        $form['body']['#access'] = FALSE;
+        $form['field_reporter_facebook_id']['#access'] = FALSE;
+        $form['field_career_graph_cast']['#access'] = FALSE;
+        $form['field_old_content_source_id']['#access'] = FALSE;
+        $form['category_holder']['#access'] = FALSE;
+        $form['path_alias']['#access'] = FALSE;
+        $form['actions']['preview']['#access'] = FALSE;
+        $form['actions']['cancel']['#access'] = FALSE;
       }
       break;
   }
@@ -697,8 +729,9 @@ function itg_story_after_build($form, &$form_state) {
   else {
     $reporter_id = $form['#node']->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
   }
+  $add_byline_link = l('Add Byline', 'byline/nojs/add', array( 'attributes' => array('class' => array( 'ctools-use-modal', 'add-byline-link' )) ));
   $form['field_story_reporter']['#prefix'] = '<div class="multi_reporter">';
-  $form['field_story_reporter']['#suffix'] = '<a class="multi-byline" data-tag="save">' . t('Add') . '</a></div><div class="byline-list"><ul class="byline-ul">' . itg_byline_info($reporter_id) . '</ul><span class="add-more save-byline">' . t('Save') . '</span></div><span class="success-byline"></span>';
+  $form['field_story_reporter']['#suffix'] = '<a class="multi-byline" data-tag="save">' . t('Add') . '</a>'.$add_byline_link.'</div><div class="byline-list"><ul class="byline-ul">' . itg_byline_info($reporter_id) . '</ul><span class="add-more save-byline">' . t('Save') . '</span></div><span class="success-byline"></span>';
 
   $form['original_image_fids'] = array(
     '#type' => 'hidden',
@@ -1495,4 +1528,48 @@ function _is_external_url_story_article($nid) {
     }
   }*/
   return $is_external_url;
+}
+
+/**
+ * Add byline menu page callback
+ * @global type $user
+ * @param type $ajax
+ */
+function itg_story_add_byline_popup($ajax) {
+  global $user;
+  if ($ajax) {
+    ctools_include('ajax');
+    ctools_include('modal');
+
+    ctools_include('node.pages', 'node', '');
+    $node = (object) array(
+          'uid' => $user->uid,
+          'name' => (isset($user->name) ? $user->name : ''),
+          'type' => 'reporter',
+          'language' => LANGUAGE_NONE,
+    );
+
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('Add Byline'),
+      'reporter_popup_form' => 1,
+    );
+    $form_state['build_info']['args'] = array($node);
+    // Use ctools to generate ajax instructions for the browser to create
+    // a form in a modal popup.
+    $output = ctools_modal_form_wrapper('reporter_node_form', $form_state);
+
+    // If the form has been submitted, there may be additional instructions
+    // such as dismissing the modal popup.
+    if (!empty($form_state['executed'])) {
+      $output = array();
+      $output[] = ctools_modal_command_display(
+          t('Node created'), 'Node creation successful.');/** Add success message */
+      $output[] = ctools_modal_command_dismiss(); //Close modal automatically
+      $output[] = ctools_ajax_command_reload(); //reload parent window 
+    };
+    // Return the ajax instructions to the browser via ajax_render().
+    print ajax_render($output);
+    drupal_exit();
+  }
 }
