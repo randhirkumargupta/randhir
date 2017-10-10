@@ -1,0 +1,625 @@
+
+.lft { float:left}
+.rght { float:right}
+.clear {clear:both}
+.frmcont {
+    clear: both;
+    margin: 0px 50px 60px 0px;
+    position: relative;
+    width: 1000px;
+}
+.frm-head,.frm-share,.frm-img { }
+.frm-head {  height:100px; width:630px;}
+.frm-share { width:150px; height:30px; float:right; position:relative; height:35px!important; z-index:9999999999;}
+.frm-listing {font:normal 24px/26px Arial Black; color:#000; padding:5px 0 15px 0; z-index:777777;}
+.frm-listing ul {margin:0; padding:0;width:448px;}
+.frm-listing ul li { border-bottom:1px dotted #000000; padding:8px 0; list-style:none;}
+.frm-img {
+    background: none;
+    height: 276px;
+    position: absolute;
+    right: 0;
+    top: 91px;
+    width: 427px;
+}
+.frm-stilltxt {font:bold 20px/24px Arial; color:#f5000c;}
+.frm-tell {font:normal 18px Arial; color:#000000;margin-top: 5px;}
+.form-txt {
+    
+    color: #F5000C;
+    font: 18px Arial Black;
+    margin-top: 10px;
+    padding: 10px;
+}
+.optmarg {margin-left:100px;}
+.frmpopup {
+    background-color: #FFFFFF;
+    border-radius: 0.6em 0.6em 0.6em 0.6em;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    height: 150px;
+    left: 35%;
+    position: fixed;
+    top: 20%;
+    width: 600px;
+    z-index: 99999999;
+}
+.frmpopup_mail {
+    background-color: #FFFFFF;
+    border-radius: 0.6em 0.6em 0.6em 0.6em;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+    height: 250px;
+    left: 35%;
+    position: fixed;
+    top: 20%;
+    width: 600px;
+    z-index: 99999999;
+}
+
+
+.frmpopup .popup-close, .frmpopup_mail .popup-close_mail {
+    cursor: pointer;
+    height: 24px;
+    overflow: hidden;
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    width: 24px;
+}
+.frmpopup .cha, .frmpopup_mail .cha {
+    margin: 25px 0 15px 10px;
+    overflow: hidden;
+    width: 98%;
+}
+.frmfielddiv {
+    float: left;
+    margin-bottom: 10px;
+}
+.inputfield {
+    float: left;
+    font: 14px/20px arial;
+    width: 375px;
+}
+.sharer_div {
+    background-position: -390px 0;
+    display: none;
+	margin-top: 38px;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+    z-index: 99999;
+}
+
+    .sharer_div.open {
+        background-position: 0 0;
+    }
+
+    .sharer_div, .sharer_div .pointer {
+        background: url("http://indiatoday.intoday.in//images/spt_bgnd_share_312x232_2.png") no-repeat scroll 0 0 transparent;
+    }
+
+        .sharer_div .pointer {
+            background-position: -826px 0;
+            height: 30px;
+            left: 26px;
+            position: absolute;
+            top: -10px;
+            visibility: visible;
+            width: 50px;
+        }
+
+        .sharer_div .close {
+            background: #fff;
+            background-position: -826px 0;
+            height: 20px;
+            right: 26px;
+            position: absolute;
+            visibility: visible;
+            width: 20px;
+            cursor: pointer;
+        }
+
+.clear:after, .page:after {
+    clear: both;
+    content: ".";
+    display: block;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+
+.sharer_div .social_links {
+    height: 121px;
+    padding: 15px 13px;
+    visibility: hidden;
+    width: 303px;
+}
+
+.sharer_div .rightSocialLinks {
+    height: auto;
+    margin-top: 11px;
+    width: 55px;
+}
+
+.sharer_div .leftSocialLinks, .sharer_div .rightSocialLinks {
+    float: left;
+}
+
+.leftSocialLinks, .rightSocialLinks ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.leftSocialLinks {
+    margin: 22px 0 0 -2px;
+    width: 250px;
+}
+
+.rightSocialLinks ul {
+    margin: 10px 0 0 -2px;
+    width: 55px;
+    padding: 0px 1px;
+}
+
+.social_links ul li {
+    list-style: none;
+    float: left;
+    height: 50px;
+    width: 50px;
+    font-size: 9px;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.rightSocialLinks {
+    background-color: #E3E3E3;
+    width: 55px;
+}
+
+    .rightSocialLinks ul li {
+        float: none;
+    }
+
+    .leftSocialLinks li span, .rightSocialLinks li span {
+        clear: both;
+        width: 55px;
+        float: left;
+        font-family: Arial,Helvetica,sans-serif;
+        font-size: 10px;
+    }
+	.fotborder {border-top: none !important;}
+.linktext {
+    font-size: 36px;
+    margin-left: 5px;
+    text-indent: -9999px;
+    visibility: hidden;
+}
+#userreg {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 4px solid #D6D6D6;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 3px 3px 6px #666666;
+    margin: 0 auto;
+    padding: 20px;
+    width: 700;
+}
+
+
+.sharer_div .pointer {
+    left: 210px !important;
+}
+
+.sharer_div .close {
+    right: 6px;
+    width: 13px;
+}
+.share-link{^width:100px;}
+
+#spclcomment {background-color: #666666; border: 1px solid #CCCCCC;border-radius: 10px 10px 10px 10px; display: none;height: auto;padding: 5px; position: absolute;right: 0;top: 30px; z-index: 9;}
+
+.close-spcl-pop { background-color: #CCCCCC;border-radius: 10px 10px 10px 10px;color: #000000 !important;font: bold 12px/20px arial;height: 20px;position: absolute;right: 10px;text-align: center; top: 10px;width: 20px;}
+.dontdivspac{top: -12px!important;}
+.sharer_div .pointer {left: 250px!important;}
+.sharer_div .close { background-color:#EEEEEE!important; border-radius: 12px 12px 12px 12px;cursor: pointer;height: 14px;position: absolute;right: 9px!important;top: 13px!important; visibility: visible;width: 13px;}
+.spclcomment {
+    right: -5px !important;
+    top: 40px !important;
+}
+.frm-listing{font: bold 20px/24px Arial;}
+	.frm-listing ul{width: 565px;}
+	.frm-img{width: 310px;}
+	.frm-stilltxt{ text-align:center}
+	.form-txt{font: 18px Arial;}
+	.frm-tell{font: normal 18px Arial;}
+	.socialcont {
+		position: absolute;
+		right: 0;
+		top: 0px;
+		width: 150px;
+		z-index: 999999999;
+	}
+	.socialdiv {
+		bottom: 0px;
+		position: relative;
+		right: 0;
+	}
+	.lft {
+		float: left;
+	}
+	.imgs {
+		margin: 0 2px;
+	}
+
+	.fb, .tw, .email {
+		background-image: url("http://specials.indiatoday.com/words-of-love/sprite.png");
+		background-repeat: no-repeat;
+		cursor: pointer;
+		height: 32px;
+		width: 36px;
+	}
+	.fb {
+		background-position: -224px -8px;
+	}
+	.email {
+		background-position: -304px -8px;
+	}
+	.tw {
+		background-position: -264px -8px;
+	}
+	#surfercommt {
+		float: left;
+		width: 660px;
+	}
+	.form-txt{ float:left; clear:both; padding:10px; margin:10px 0 0 0; text-align:center;}
+	.points,.qlist{ float:left; width:100%; clear:both; padding:0; margin:0; font:16px/26px Arial;}
+	.points li{ width:100%; float:left; list-style:none;}
+	.qlist li { width:60px; float:left; list-style:none; border:2px solid #000;margin-right: 10px; color:#000; font:bold 16px/18px arial;}
+	.qlist { width:30%; margin-left:370px;}
+.numbering {
+    float: left;
+    width: 33%;
+}
+.litext {
+    float: right;
+    width: 65%;
+}
+.storylist{font: bold 18px/38px Arial; color: #222; float:left; width:100%; clear:both;}
+
+#resultpopup ul li {
+    border-bottom: 1px solid #000000;
+    float: left;
+    list-style: none outside none;
+    padding: 5px 0;
+    width: 95%;
+}
+#enrollfrm ul{ padding:0; margin:0 0 0 25px; float:left; width:93%;}
+#resultpopup{ float:left}
+
+
+
+.post_comment {
+    border-bottom: 2px dotted #CCCCCC;
+    color: #000000;
+    float: left;
+    font: 12px/18px georgia;
+    margin: 5px 0;
+    padding: 0;
+    width: 100%;
+}
+
+.readsurfer {
+    background-color: #FFFFFF;
+    color: #000000;
+    font: bold 12px Georgia;
+}
+#surfercommt {
+    float: left;
+    width: 660px;
+}
+
+.post_comment .posted_time_stamp {
+    color: #7C7C7C;
+    font: 11px verdana;
+    margin: 5px 0 5px;
+}
+element.style {
+    border-bottom: 0 none;
+}
+.post_comment h6 {
+    float: right;
+    font: 9px georgia;
+    margin: 10px 0 0;
+    padding: 0;
+    text-align: right;
+    width: 100%;
+}
+.newtext {
+    bottom: 10px;
+    float: left;
+    margin-top: 20px;
+    right: 0;
+    text-align: center;
+    width: 95%;
+}
+.closebutton_bottom,.closebutton {
+    background-image: url('/staticpages/main/images/close.png');
+    background-repeat: no-repeat;
+	position:absolute; right:0;
+    height: 16px;
+    width: 16px;
+    float: left; cursor:pointer;
+}
+.bottom_part{ float:left; width:1000px; float:left; margin-top: 0px; position:relative}
+.mapped_image_bottom{position:absolute; z-index:7777; display:none; top:125px;}
+.bottom_arrow{width: 25px;height: 9px;background:url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/specials/pak_election/images/up_small.png') no-repeat scroll 0 -10px transparent;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+/*******Connect with India Today (Start)***********/
+.rediff_con, .google_con, .twitter_con, .facebook_con, .feed_con, .sms_con, .mobile_con, .livetv_con, .andriod_con, .apple_con, .nokia_con, .bb_con, .windows_con, .samsung_con, .pinterest_con, .sapce-line {
+    background-image: url("/staticpages/main/images/India-Today-Sprites1.png");
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+    height: 45px;
+    width: 50px;
+}
+
+.facebook_con {
+    background-position: -5px -98px;
+}
+
+.twitter_con {
+    background-position: -72px -98px;
+}
+
+.google_con {
+    background-position: -140px -98px;
+}
+
+.rediff_con {
+    background-position: -210px -98px;
+}
+.feed_con {
+    background-position: -279px -98px;
+}
+
+.sms_con {
+    background-position: -348px -98px;
+	cursor: pointer;
+}
+.mobile_con {
+    background-position: -415px -98px;
+	cursor: pointer;
+}
+.livetv_con {
+    background-position: -485px -98px;
+}
+
+.andriod_con {
+    background-position: -554px -98px;
+}
+
+.apple_con {
+    background-position: -621px -98px;
+}
+
+.nokia_con {
+    background-position: -690px -98px;
+}
+
+.bb_con {
+    background-position: -761px -98px;
+}
+
+.windows_con {
+    background-position: -826px -98px;
+}
+
+.samsung_con {
+    background-position: -894px -98px;
+}
+.pinterest_con {
+    background-position: -656px -153px;
+}
+
+.itconnect_links {
+    background-image: none !important;
+    background-position: left bottom;
+    background-repeat: repeat-x;
+    float: left;
+    height: 55px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.itconnect_links li {
+    float: left;
+    list-style-type: none;
+    margin-right: 0;
+}
+
+
+.connect_container {
+    clear: both;
+    width: 100%;
+    /*height: 116px;*/
+    float: left;
+	position: relative;
+}
+
+.connect_left {
+    background: url(/staticpages/main/microsites/social/images/left-img_big.jpg) no-repeat scroll left top transparent;
+    width: 19px;
+    height: 116px;
+    float: left;
+}
+
+.connect_text {
+    clear: both;
+    width: 100%;
+    margin-left: -1px;
+}
+
+.connect_spacer {
+    clear: both;
+    width: 100%;
+    height: 19px;
+}
+
+.connect_link_box {
+    clear: both;
+    width: 100%;
+    float: left;
+}
+.connect_text strong {
+    background-color: black;
+    display: inline-block;
+    color: white;
+    line-height: 24px;
+    font: bold 14px/24px Arial;
+    float: left;
+}
+
+.connect_text .round-close {
+    background-image: url('/staticpages/main/images/India-Today-Sprites1.png');
+    background-repeat: no-repeat;
+    height: 24px;
+    width: 8px;
+    background-position: -988px -98px;
+    float: left;
+}
+
+.large-connect .sapce-line {
+    background-position: -819px -149px;
+    float: left;
+    height: 45px;
+    margin: 0 9px 0 10px;
+    width: 2px;
+}
+
+/*******Connect with India Today (End)***********/
+
+/***********************************************************/
+			/** Social Popup (start) **/
+/***********************************************************/
+.social-popup-larg { position: absolute; display: none; z-index: 9999; /* top: 50px; left: 30%; */ }
+
+.social-popup-larg .padded15 {padding: 15px;}
+
+.lb-close,.social-popup-larg .popup-top, .social-popup-larg .popup-bottom, .social-popup-larg .close-social-popup-larg, .social-popup-larg .sms52424 {
+background-image: url(/staticpages/main/images/Social-band-at-bottom_sprites.png);background-repeat: no-repeat;}
+
+
+.lb-close,.social-popup-larg a.close-social-popup-larg {width: 22px;height: 22px;background-position: -111px -81px; position: absolute; top: -10px;right: -5px;text-decoration: none;text-indent: -11110px;}
+
+
+.lb-close{ right: -20px;top: -5px; z-index: 9999999;}
+.txt-phone-popup{font: 14px/20px arial;text-align: center;}
+.social-popup-larg .sms52424 {float: left;width: 70px;height: 85px;background-position: -37px -80px; margin-left: 155px;}
+.social-popup-larg .sms51424-text { float: right; width: 175px; font: normal 14px/17px Arial-Black; color: #535353; }
+.social-popup-larg .clearfx { clear: both;}
+.social-popup-larg .red-color {color: #ef1820;}
+
+#sms-popup-larg{bottom: 57px; left: 245px; }
+#phone-popup-larg{bottom: 57px; left: 375px;}
+
+#sms-popup-larg .popup-top {width: 413px; height: 11px;background-position: -45px -10px;position: relative;}
+#sms-popup-larg .popup-center { width: 411px; border-left: 1px solid #000000; border-right: 1px solid #000000; background-color: #fff;}
+#sms-popup-larg .popup-bottom {width: 413px;height: 32px;background-position: -45px -33px;}
+
+#phone-popup-larg .popup-top {width: 294px; height: 11px;background-position: -164px -81px;position: relative;}
+#phone-popup-larg .popup-center { 	width: 292px; border-left: 1px solid #000000; border-right: 1px solid #000000; background-color: #fff;}
+#phone-popup-larg .popup-bottom {width: 294px;height: 27px;background-position: -164px -102px;}
+
+/***********************************************************/
+			/** Social Popup (End) **/
+/***********************************************************/
+.videotitle{ clear:both; width:98%; float:left; padding:5px; text-transform:capitalize;font-family: 'Roboto Condensed', serif; font-size: 48px; background:#ccc;font:bold 20px/22px 'Roboto Condensed' ; text-align:left;}
+.lb-container iframe{ clear:both; margin-top:5px; float:left;}
+
+#lightbox {z-index: 55555555;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-weight: normal;
+    left: 0;
+    line-height: 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+	 text-shadow: none;
+}
+.lb-outerContainer {
+    background-color: white; border:1px solid #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    height: 250px;
+    margin: 0 auto;
+    position: relative;
+    width: 250px;
+}.lb-outerContainer:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+.lb-container {float: left;
+    padding: 10px; width:70%;
+}#lightbox img {
+    height: auto;
+    width: auto;
+}.lb-dataContainer:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+.lb-dataContainer {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin: 0 auto;
+    padding-top: 5px;
+    width: 100%;
+}
+.lb-data {
+    color: #BBBBBB;
+    padding: 0 10px;
+}
+.lb-data .lb-close {
+    float: right; cursor:pointer;
+    outline: medium none;
+    padding-bottom: 0.7em;
+    width: 35px;
+}
+#lightbox a img {
+    border: medium none; cursor:pointer;
+}
+#lightboxOverlay {
+    background-color: black;
+    display: none;
+    left: 0;
+    opacity: 0.85;
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+}
+.movie_box{width:55%;float:left;}
+.movie_name,.movie_text{ width:100%; clear:left; float:left; text-align:left;}
+.movie_text{font:15px/20px Arial;}
+.movie_name{font:bold 15px/20px Arial; margin-top:20px;}
+.movie_img{width:39%;float:right;}
+.image_over_text{font:15px/16px arial; position:absolute; cursor:pointer; z-index:22222;}
+.zindex,map area,map,area{ z-index:999999999999!important;}
