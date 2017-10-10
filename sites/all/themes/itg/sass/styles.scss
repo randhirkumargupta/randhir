@@ -11841,6 +11841,9 @@ h1.about-us-heading {
                 @include display-inline;
                 padding-right: 20px;
             }
+            br {
+                display: none;
+            }
         }
         .ltv-and-ss {
             position: absolute;
