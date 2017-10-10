@@ -1,0 +1,318 @@
+body { margin:0; padding:0; font-family:Arial; font-size:12px;background-color:#000000}
+#itgd_links
+{float:left; text-align:center; width:100%; font:bold 11px arial; color:#ffffff; line-height:20px;border-bottom:0px solid #D9D9D9; margin-top:0; padding-top:0; background-color:#767575;}
+#itgd_links a
+{border:0px solid #000; font:bold 11px arial; color:#ffffff; text-decoration:none; margin:0 10px;}
+a{ text-decoration:none; color:#204fa4}
+a:hover {text-decoration:underline; color:#204fa4}
+.bt-t-link{font-size:11px;color:#D71920;font-family:arial,verdana;font-weight:bold;text-align:center; margin-top:0px;}
+.bt-t-link a{color:#204FA4; text-decoration:none;}
+.bt-t-link a:hover {color:#D71920; text-decoration:none;}
+
+.toptxt{ font:bold 12px verdana; line-height:12px; color:#ffffff; }
+.toptxt a{ font:bold 12px verdana; line-height:12px; color:#ffffff; text-decoration:none; }
+.toptxt a:hover{ font:bold 12px verdana; line-height:12px; color:#002F5E; text-decoration:underline; }
+
+.toptxtmag{ font:bold 12px verdana; line-height:14px; color:#c3161c; margin-top:4px; }
+.toptxtmag a{ font:bold 12px verdana; line-height:14px; color:#c3161c; text-decoration:none; margin-top:4px; }
+.toptxtmag a:hover{ font:bold 12px verdana; line-height:14px; color:#c3161c; text-decoration:underline; margin-top:4px; }
+
+.toplink { font:bold 11px arial; color:#204FA4; text-align:center; }
+.toplink a{ font:bold 11px arial; color:#204FA4; text-align:center; text-decoration:none }
+.toplink a:hover{ font:bold 11px arial; color:#D71920; text-align:center; text-decoration:none }
+.bt-date{font-family:arial,verdana;font-size:11px;color:#ffffff;padding-left:20px;}
+
+.bt-top-links{font-size:11px;color:#ffffff;font-family:arial,verdana;text-transform:uppercase;text-align:center;padding-top:4px;}
+.bt-top-links a{color:#FFFFFF; text-decoration:none;padding-left:5px;padding-right:5px;}
+.bt-top-links a:hover {color:#204FA4; text-decoration:none;}
+
+.bt-t-link1{font-size:11px;color:#204FA4;font-family:arial,verdana;text-align:right;padding-right:15px;}
+.bt-t-link1 a{color:#204FA4; text-decoration:none;padding-left:2px;padding-right:2px;}
+.bt-t-link1 a:hover {color:#000000; text-decoration:none;}
+
+.txtfld {font-size:11px; font-family:verdana; BORDER-RIGHT: #A4A4A4 1px solid; BORDER-TOP:1px solid #A4A4A4; BORDER-LEFT: 1px solid #A4A4A4; BORDER-BOTTOM: 1px solid #A4A4A4;}
+
+.sectionheadtxt{ font:normal 28px Tahoma; color:#333131; padding:0;}
+
+.top-text{font-size:11px;color:#000000;font-family:arial,verdana;}
+
+.bt-right-head {font-size:18px;color:#b80a61;font-family:verdana;font-weight:bold;padding-left:15px;}
+.bt-right-head1 {font-size:19px;color:#b80a61;font-family:verdana;font-weight:bold;text-decoration:none;}
+.bt-right-head1 a{font-size:19px;color:#b80a61;font-family:verdana;font-weight:bold;text-decoration:none;}
+.bt-right-head1 a:hover{color:#000000;text-decoration:none;}
+.bt-right-text {font-size:12px;color:#000000;font-family:arial,verdana;line-height:18px;list-style-image: url(/staticpages/special/sexsurvey2010/images/arrow.jpg);}
+.bt-right-sub-head{font-size:11px;color:#909090;font-family:arial,verdana;font-weight:bold;padding-top:4px;text-decoration:none}
+.bt-right-sub-head a{font-size:11px;color:#909090;font-family:arial,verdana;font-weight:bold;padding-top:4px;text-decoration:none}
+.bt-right-sub-head a:hover{color:#204fa4;text-decoration:none;}
+
+.bt-textbold {font-size:11px;color:#000000;font-family:arial,verdana;font-weight:bold;line-height:17px;padding-top:10px;}
+.bt-right-more {font-size:9px;color:#204FA4;font-family:arial,verdana;text-align:right;padding-right:5px;}
+.bt-right-more a{color:#204FA4; text-decoration:none;}
+.bt-right-more a:hover {color:#000000; text-decoration:none;}
+.txtfld1 {font-size:11px; font-family:verdana; BORDER-RIGHT: #A4A4A4 1px solid; BORDER-TOP: 1px solid #A4A4A4; BORDER-LEFT: 1px solid #A4A4A4; BORDER-BOTTOM: 1px solid #A4A4A4;}
+.bt-talk {font-size:20px;color:#204FA4;font-family:georgia,arial,verdana;padding-left:20px;padding-right:20px;}
+.bt-talk-new {font-size:15px;color:#204FA4;font-family:georgia,arial,verdana;padding-top:5px;}
+.bt-talk-new1 {font-size:17px;color:#ff0000;font-family:georgia,arial,verdana;}
+.bt-sub-head1 {font-size:12px;color:#204FA4;font-family:arial,verdana;font-weight:bold;padding-top:4px;padding-bottom:3px;text-decoration:none;}
+.bt-sub-head1 a{font-size:12px;color:#204FA4;font-family:arial,verdana;font-weight:bold;padding-top:4px;padding-bottom:3px;text-decoration:none;}
+.bt-sub-head1 a:hover{color:#000000;}
+.bt-sub-head1 {font-size:12px;color:#204FA4;font-family:arial,verdana;font-weight:bold;padding-top:4px;padding-bottom:3px;}
+.bt-sub-head1 a{font-size:12px;color:#204FA4;font-family:arial,verdana;font-weight:bold;padding-top:4px;padding-bottom:3px;text-decoration:none;}
+.bt-sub-head1 a:hover{color:#000000;}
+
+.bt-right-text1 {font-size:12px;color:#000000;font-family:arial,verdana;line-height:17px;padding-right:20px;}
+
+.bt-right-tt1 {font-size:12px;color:#204FA4;font-family:arial,verdana;padding-right:10px;line-height:17px;padding-top:5px;}
+.bt-right-tt1 a{color:#204FA4;text-decoration:none;}
+.bt-right-tt1 a:hover{color:#000000;}
+
+.bt-surfer-text {font-size:11px;color:#959595;font-family:arial,verdana;line-height:17px;}
+.bt-surfers-head {font-size:18px;color:#EC1C24;font-family:arial,verdana;font-weight:bold;padding-left:0px;text-decoration:none;}
+
+.bt-surfers-head a{font-size:18px;color:#EC1C24;font-family:arial,verdana;font-weight:bold;padding-left:0px;text-decoration:none;}
+.bt-surfers-head a:hover{color:#EC1C24;text-decoration:underline;}
+.pagination { font: bold 10px arial; color:#204fa4; }
+.pagination a{ font: bold 10px arial; color:#204fa4; text-decoration:none; }
+.pagination a:hover{ font: bold 10px arial; color:#204fa4; text-decoration:underline; }
+
+.bt-section-head {font-size:18px;color:#000000;font-family:arial,verdana;font-weight:bold;padding-left:2px;}
+.bredcrum {font-size:11px;color:#999999;font-family:arial,verdana;font-weight:normal;padding-top:4px;padding-bottom:12px;}
+.bredcrum a{font-size:11px;color:#999999;font-family:arial,verdana;font-weight:normal;padding-top:4px;padding-bottom:12px;text-decoration:none;font-weight:bold;}
+.bredcrum a:hover{color:#204fa4;text-decoration:none;}
+.pageinition {font-size:11px;color:#204fa4;font-family:arial,verdana;line-height:17px;padding-right:5px;padding-top:10px;}
+.pageinition a{font-size:11px;color:#204fa4;font-family:arial,verdana;line-height:17px;padding-right:5px;padding-top:10px; text-decoration:none;}
+.pageinition a:hover{color:#000000;}
+
+img, img a { border:none; text-decoration:none; }
+/*a:active, a:visited{outline:none; }*/
+form{margin:0; padding:0;}
+#maindiv { width:1004px; float:left; /*overflow:hidden;*/ border:0px solid #000; }
+
+#footerdiv { width:1004px !important; float:left;  margin:0px 0 20px 0; _margin:0px 0 20px 0; $margin:0px 0 20px 0; border-top:1px solid #95999A; }
+#footerdiv #google_ad_footer { margin:20px auto;  border:0px solid #000; text-align:center;}
+#footerdiv #footer_menu {  width:70%; /*background:url(//staticpages/special/sexsurvey2010/images/section-links-bg.jpg) repeat-x left top;*/ border:1px solid #BDD9E5; border-width:1px 0px 1px 0px; margin:0 auto; padding:0;height:18px; color:#4C4C4C; font-size:11px; font-family:Tahoma; text-align:center; font-weight:bold;}
+#footerdiv #footer_menu .moduletable
+{border:0px solid #000; width:100%; text-align:center }
+#footerdiv #footer_menu a:link,
+#footerdiv #footer_menu a:visited,
+#footerdiv #footer_menu a:hover { color:#4C4C4C; text-decoration:none; line-height:16px; }
+#footerdiv #footer_menu span { line-height:16px; margin:0 15px;}
+#footerdiv #copyrights
+{float:left; padding:10px 0;  font:normal 11px arial; color:#4B4B4B; text-align:center; width:100%; border:0px solid #000;}
+#footerdiv #copyrights a
+{text-decoration:none; color:#022F59; }
+#footerdiv #copyrights a:hover
+{text-decoration:underline; }
+#footerdiv #itgd_group_links
+{border:0px solid #000; margin:0 auto 15px auto; width:99%; font:normal 11px arial; color:#6277A4; line-height:18px; text-align:center; }
+#footerdiv #itgd_group_links b
+{width:auto; font:bold 11px Arial; color:#E31D36; border:0px solid #000; margin:0; line-height:18px; }
+#footerdiv #itgd_group_links strong
+{color:#494949; margin:0 0 0 5px;}
+#footerdiv #itgd_group_links a
+{text-decoration:none; color:#6277A4; margin:0 5px;}
+#footerdiv #itgd_group_links a:hover
+{text-decoration:underline; }
+
+.normal14txt { font:normal 14px arial; color:#000000; line-height:20px;}
+.normal14txt a{ font:normal 14px arial; color:#000000; line-height:20px; text-decoration:none}
+.normal14txt a:hover{ font:normal 14px arial; color:#000000; line-height:20px; text-decoration:underline;}
+
+.add {
+color: #999999;
+letter-spacing:1px;
+padding:0px 0 2px 0;
+font:normal 11px arial;
+
+}
+.normaltext{font:normal 12px arial; line-height:18px; padding:0 7px 0 7px;}
+.redboldtext{ font:bold 18px arial; color:#EC1C24; padding:0 0 0 8px;}
+
+.redboldtext2{ font:bold 16px arial; color:#EC1C24; }
+.blueboldtext{font:bold 14px arial; color:#002F5E; padding:0 0 5px 0;}
+.blueboldtext a{font:bold 14px arial; color:#002F5E; padding:0 0 5px 0; text-decoration:none;}
+.blueboldtext a:hover{font:bold 14px arial; color:#002F5E; padding:0 0 5px 0; text-decoration:underline;}
+
+
+
+
+.red12text{font:bold 12px arial; color:#b80a61; line-height:18px}
+.red12text a{font:bold 12px arial; color:#b80a61; line-height:18px; text-decoration:none;}
+.red12text a:hover{font:bold 12px arial; color:#b80a61; line-height:18px; text-decoration:underline;}
+
+.blue12text{font:bold 12px arial; color:#002F5E; line-height:18px}
+.blue12text a{ text-decoration:none;color:#002F5E;}
+.blue12text a:hover{ text-decoration:underline;color:#002F5E;}
+
+.blue13text{font:bold 13px arial; color:#002F5E; line-height:20px}
+.blue13text a{ text-decoration:none;color:#002F5E;}
+.blue13text a:hover{ text-decoration:underline;color:#002F5E;}
+
+.blue9text{font:normal 9px arial; color:#002F5E; text-align:right; margin:5px 7px 0 0;}
+.blue9text a{ color:#002F5E; text-align:right; margin:5px 7px 0 0; text-decoration:none;}
+.blue9text a:hover{ color:#002F5E; text-align:right; margin:5px 7px 0 0; text-decoration:underline;}
+
+.blue12normaltext{font:normal 12px arial; color:#002F5E; line-height:18px}
+.blue12normaltext a{ text-decoration:none;color:#002F5E;}
+.blue12normaltext a:hover{ text-decoration:underline;color:#002F5E;}
+.maintextchunk { font: normal 14px arial; line-height:22px;  padding:5px 0 5px 15px;}
+
+
+.VideoHeadline{font: bold 12px arial; color:#b80a61; line-height:20px; text-transform:uppercase;}
+
+.bt-blogs {
+	font-family: Georgia ;
+	font-size: 16px;
+	color: #d71920;
+	font-weight: bold;
+	text-decoration: none;
+}
+.mreblogs {
+	font-family: TAHOMA;
+	font-size: 9px;
+	font-weight: normal;
+	color: #002F5E;
+	text-decoration: none;
+}
+.treadmill {
+	font-family: arial;
+	font-size: 13px;
+	font-weight: bold;
+	color: #002F5E;
+	text-decoration: none;
+	padding-left:5px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.treadmill a{
+	font-family: arial;
+	font-size: 13px;
+	font-weight: bold;
+	color: #002F5E;
+	text-decoration: none;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-decoration:none;
+}
+.treadmill a:hover{
+	color: #002F5E;
+	text-decoration: none;
+	}
+	
+.tread {
+	font-family: arial;
+	font-size: 13px;
+	font-weight: bold;
+	color: #002F5E;
+	text-decoration: none;
+	padding-left:5px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.tread a{
+	font-family: arial;
+	font-size: 13px;
+	font-weight: bold;
+	color: #002F5E;
+	text-decoration: none;
+	padding-left:5px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.tread a:hover{
+	color: #b80a61;
+	text-decoration: none;
+	}
+.by {
+	font-family: arial;
+	font-size: 13px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #002F5E;
+}
+.min {
+	font-family: arial;
+	font-size: 13px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #002F5E;
+	padding-left:4px;
+	padding-bottom:5px;
+	font-weight:bold;
+}
+.min:hover {
+	text-decoration: underline;
+	color: #002F5E;
+}
+
+.text {
+	font-family: arial;
+	font-size: 13px;
+	font-weight: normal;
+	text-decoration: none;
+	color: #000000;
+}
+.comment {
+	font-family: arial;
+	font-size: 9px;
+	font-weight: normal;
+	color: #002F5E;
+	text-decoration: none;
+}
+.mustRead {
+	padding-left: 5px;
+}
+.plus {
+	padding-left: 5px;
+}
+.plus1 {
+	padding-top: 5px;
+}
+.vSpacer7 {
+	OVERFLOW: hidden; HEIGHT: 7px
+}
+.vSpacer5 {
+	OVERFLOW: hidden; HEIGHT: 5px
+}
+
+.next-link {font-size:16px;color:#000000;font-family:arial,verdana;font-weight:bold;text-transform:uppercase;}
+.next-link a{color:#204fa4;text-decoration:none;}
+.next-link a:hover{color:#204fa4;text-decoration:none;}
+
+.next-link1 {font-size:17px;color:#000000;font-family:arial,verdana;font-weight:bold;text-align:right;text-transform:uppercase;}
+.next-link1 a{color:#204fa4;text-decoration:none;}
+.next-link1 a:hover{color:#204fa4;text-decoration:none;}
+
+.next-title {font-size:14px;color:#B80A61;font-family:arial,verdana;font-weight:bold;text-align:center;padding:2px; 0px 8px 0px;}
+.next-title a{color:#B80A61;text-decoration:none;}
+.next-title a:hover{color:#B80A61;text-decoration:none;}
+
+
+.svy_forum_cont {font:normal 14px arial; color:#000000; line-height:20px; margin-right:5px;}
+.svy_img {border:1px solid #cccccc; margin-right:3px; margin-top:4px; margin-left:5px;}
+.svy_date {font:bold 11px tahoma; color:#939292; line-height:15px; margin-bottom:5px;}
+.svy_more {font:bold 11px arial; color:#020202; line-height:15px; text-align:right;}
+.svy_more a { text-decoration:none; color:#020202;}
+.svy_more a:hover { text-decoration:underline; color:#020202;}
+.svy_cont_tw {margin:10px 5px 0px 10px; width:178px; border:1px solid #cccccc; padding:0px; background-color:#ffffff; float:left;}
+.svy_image {margin:5px 0px 5px 5px; float:left;}
+.svy_tw_txt {font:normal 14px Arial; padding:5px; float:left; width:147px;}
+.svy_tw_head {font:bold 14px arial; color:#000000;}
+.svy_tw_head a { color:#000000; text-decoration:none;}
+.svy_tw_head a:hover { color:#000000; text-decoration:underline;}
+.svy_tw_box {margin-top:5px;margin-bottom:5px;}
+.svy_bot_txt {font:bold 18px Arial; color:#FF5500; line-height:22px; text-align:center; float:left; width:99%; padding-bottom:5px;}
+.svy_bot_txt a { text-decoration:none; color:#ff5500;}
+.svy_bot_txt a:hover { text-decoration:underline; color:#ff5500;}
+.svy_froum_bot {text-align:center; font:bold 12px arial; color:#ffffff; line-height:18px;}
+.svy_froum_bot a { text-decoration:none; color:#ffffff;}
+.svy_froum_bot a:hover { text-decoration:underline; color:#ffffff;}
+
+.featuredbox { border-bottom:5px solid #FF4700; padding-bottom:8px;}
+.leadtopimg {background-image:url('/staticpages/special/sexsurvey2010/images/lead_top.gif'); background-position:top left; background-repeat:no-repeat;}
+.leadcenter {background-image:url('/staticpages/special/sexsurvey2010/images/lead_top_v.gif'); background-position:top left; background-repeat:repeat-x;}
+.leadhead {font:normal 30px Tahoma; color:#000000; line-height:32px; text-align:center;}
+.leadtxt14 {font:normal 14px Arial; line-height:20px;}
+.leadtxt14 a {text-decoration:none; color:#204fa4;}
+.leadtxt14 a:hover {text-decoration:underline; color:#204fa4;}
+.leadimg {margin-top:4px; margin-right:10px;}

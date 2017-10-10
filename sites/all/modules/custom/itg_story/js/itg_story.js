@@ -20,7 +20,7 @@
                 jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();
                 jQuery("#edit-field-story-reporter-und-0-remove-button").hide();
             }
-            $("#edit-field-itg-content-publish-date").hide();
+            //$("#edit-field-itg-content-publish-date").hide();
             $(".form-item-field-story-configurations-und-breaking-news").hide('');
             $("label[for='edit-field-story-configurations-und-tv']").html("Associate Story with TV");
             // enable check box of developing story based on condition 

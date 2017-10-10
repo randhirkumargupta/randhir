@@ -1881,6 +1881,14 @@
     .sport-home-layout-page .right-side .col-md-12 {
         min-height: 100%;
     }
+    .featured_photo_carousel .flexslider .flex-direction-nav a:before,
+    .tech-block_5 .flexslider .flex-direction-nav a:before,
+    .auto-block_5 .flexslider .flex-direction-nav a:before {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 20px;
+    }
 }
 
 @media all and (min-width: 680px) {
@@ -3449,14 +3457,6 @@
         #main .row {
             overflow: hidden;
         }
-    }
-    .featured_photo_carousel .flexslider .flex-direction-nav a:before,
-    .tech-block_5 .flexslider .flex-direction-nav a:before,
-    .auto-block_5 .flexslider .flex-direction-nav a:before {
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        font-size: 20px;
     }
 }
 

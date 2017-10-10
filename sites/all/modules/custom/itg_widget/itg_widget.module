@@ -34,14 +34,14 @@ function itg_widget_init() {
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
     global $base_url, $user;
     $arg = arg();
-    if(($arg[0] != 'node') && ($arg[1] != 'add' && $arg[2] != 'edit')) {
+    //if(($arg[0] != 'node') && ($arg[1] != 'add' && $arg[2] != 'edit')) {
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
     $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
     drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
-    }
+    //}
 }
 
 /**
@@ -2056,12 +2056,17 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
 
             $node_load_data = unserialize($widget_data->node_data);
             $node_smily_data = array('field_story_short_headline_value' => $node_load_data->field_story_short_headline['und'][0]['value'],
-                                  'field_emoji_position_value' => $node_load_data->field_emoji_position['und'][0]['value'],
-                                  'field_emoji_2_value' => $node_load_data->field_emoji_2['und'][0]['value'],
-                                  'field_emoji_value' => $node_load_data->field_emoji['und'][0]['value'],
-                                  'title' => $node_load_data->title,
-                               );
-            
+                'field_emoji_position_value' => array(
+                  $node_load_data->field_emoji_position['und'][0]['value'],
+                  $node_load_data->field_emoji_position['und'][1]['value'],
+                ),
+                'field_emoji_2_value' => $node_load_data->field_emoji_2['und'][0]['value'],
+                'field_emoji_value' => $node_load_data->field_emoji['und'][0]['value'],
+                'title' => $node_load_data->title,
+                'ad_title' => $node_load_data->field_story_new_title['und'][0]['value'],
+                'ad_url' => $node_load_data->field_story_redirection_url_titl['und'][0]['value'],
+                'nid' => $node_load_data->nid,
+             );
             $uri = $node_load_data->field_story_extra_large_image['und'][0]['uri'];
             $li_file_uri = $node_load_data->field_story_large_image['und'][0]['uri'];
             $mi_file_uri = $node_load_data->field_story_medium_image['und'][0]['uri'];
