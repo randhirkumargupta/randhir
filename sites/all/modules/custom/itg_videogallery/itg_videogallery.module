@@ -211,7 +211,18 @@ function itg_videogallery_block_view($delta = '') {
       }
       break;
     case 'itg_other_videogallery_section':
-      $block['content'] = _get_other_videos_from_primary_category();
+      if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+        $node = menu_get_object();
+        if ($node->type == 'videogallery') {
+          $block['content'] = _get_other_videos_from_primary_category();
+        }
+        else {
+          $block['content'] = '';
+        }
+      }
+      else {
+        $block['content'] = '';
+      }
       break;
     // Trending videos ordering reordering widget case
     case 'itg_trending_videos_widget_tab':
