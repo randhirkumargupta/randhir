@@ -460,7 +460,7 @@ function cricket_live_blog_content_callback() {
   else {
     print json_encode(array('status' => 'error'));
   }
-  die;
+  drupal_exit();
 }
 
 /**
