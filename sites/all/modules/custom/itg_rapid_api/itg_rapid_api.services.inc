@@ -4035,7 +4035,7 @@ function itg_rapid_api_change_password($token) {
             $account_err['status_message'] = "Invalid User_ID";
             return $account_err;
         }
-        $token = $params['auth_token'];
+        $token = trim($params['auth_token']);
     if (!drupal_valid_token($token, 'services')) {
        $account_err['status_code'] = "0";
             $account_err['status_message'] = "Invalid token";
