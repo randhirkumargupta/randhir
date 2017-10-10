@@ -729,9 +729,9 @@ function itg_story_after_build($form, &$form_state) {
   else {
     $reporter_id = $form['#node']->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
   }
-  $add_byline_link = l('Add Byline', 'byline/nojs/add', array( 'attributes' => array('class' => array( 'ctools-use-modal', 'add-byline-link' )) ));
+  //$add_byline_link = l('Add Byline', 'byline/nojs/add', array( 'attributes' => array('class' => array( 'ctools-use-modal', 'add-byline-link' )) ));
   $form['field_story_reporter']['#prefix'] = '<div class="multi_reporter">';
-  $form['field_story_reporter']['#suffix'] = '<a class="multi-byline" data-tag="save">' . t('Add') . '</a>'.$add_byline_link.'</div><div class="byline-list"><ul class="byline-ul">' . itg_byline_info($reporter_id) . '</ul><span class="add-more save-byline">' . t('Save') . '</span></div><span class="success-byline"></span>';
+  $form['field_story_reporter']['#suffix'] = '<a class="multi-byline" data-tag="save">' . t('Add') . '</a><a href="/byline/nojs/add" class="ctools-use-modal add-byline-link ctools-use-modal-processed" style="position:absolute;right:70px;top:4px;">Add Byline</a></div><div class="byline-list"><ul class="byline-ul">' . itg_byline_info($reporter_id) . '</ul><span class="add-more save-byline">' . t('Save') . '</span></div><span class="success-byline"></span>';
 
   $form['original_image_fids'] = array(
     '#type' => 'hidden',
