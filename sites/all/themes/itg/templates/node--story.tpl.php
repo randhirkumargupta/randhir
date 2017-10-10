@@ -1090,6 +1090,7 @@ if (!empty($content)):
           ?>
           <div id="other-comment">
             <?php
+            // block for comment
             $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
             print render($block['content']);
             ?>
