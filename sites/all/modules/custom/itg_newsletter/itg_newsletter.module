@@ -504,10 +504,8 @@ function itg_newsletter_node_presave($node) {
     if (isset($node->body[LANGUAGE_NONE][0]['value'])) {
       if (strpos($node->body[LANGUAGE_NONE][0]['value'], '[UNSUBSCRIBEURL]')) {
         $node->body[LANGUAGE_NONE][0]['value'] = $node->body[LANGUAGE_NONE][0]['value'];
-        p($node->body[LANGUAGE_NONE][0]['value']);
       } else {
         $node->body[LANGUAGE_NONE][0]['value'] = $node->body[LANGUAGE_NONE][0]['value'] . '[UNSUBSCRIBEURL]';
-        p($node->body[LANGUAGE_NONE][0]['value']);
       }
     }
   }
