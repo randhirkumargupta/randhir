@@ -269,7 +269,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
       }
     }
   }
-  if (!isset($form['field_event_highlights']['#tabwise'])) {
+  /*if (!isset($form['field_event_highlights']['#tabwise'])) {
     foreach ($form_state['values']['field_event_highlights'][LANGUAGE_NONE] as $key => $event_highlights) {
       if (is_numeric($key)) {
         if (!empty($form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'])) {
@@ -282,7 +282,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
         }
       }
     }
-  }
+  }*/
 
 
   $start_date = strtotime($form_state['values']['field_event_start_date'][LANGUAGE_NONE][0]['value']);
@@ -1306,7 +1306,7 @@ function itg_event_backend_get_session_sponsor($daywise) {
 
 /**
  * Implement function to get associated story
- * @return array
+ * @return arrayy
  */
 function itg_event_backend_get_session_story_title($daywise, $font_color) {
 
@@ -1322,6 +1322,30 @@ function itg_event_backend_get_session_story_title($daywise, $font_color) {
   foreach ($result as $value) {
     $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
     $story_nid = $daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id'];
+    $story_title = itg_common_get_node_title($story_nid);
+    $story_detail = itg_event_get_story_details($story_nid);
+    $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
+    $session['story_details'][] = $story_detail;
+  }
+  return $session;
+}
+
+/**
+ * Implement function to get associated story
+ * @return array
+ */
+function itg_event_backend_get_session_story_title_move_field($daywise, $font_color) { 
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_event_media', 'media', 'n.nid = media.entity_id');
+  $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_event_media_value');
+  $query->fields('daywise', array('field_daywise_event_value'));
+  $query->fields('media', array('field_event_media_value'));
+  $query->condition('daywise.field_daywise_event_value', $daywise, '=');
+  $result = $query->execute();
+
+  foreach ($result as $value) {
+    $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
+    $story_nid = $daywise_detail[$value->field_event_media_value]->field_associate_story_event_new[LANGUAGE_NONE][0]['target_id'];
     $story_title = itg_common_get_node_title($story_nid);
     $story_detail = itg_event_get_story_details($story_nid);
     $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));

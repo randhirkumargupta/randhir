@@ -13530,7 +13530,7 @@ body.taxonomy-form-term-tags {
 }
 
 .ftp-center #itg_video_content .video-ftp {
-    width: 50%;
+    width: 100%;
 }
 
 .ftp-center #itg_video_content .internal-video-tab {
@@ -14294,6 +14294,17 @@ div.ctools-modal-content {
     }
 }
 
-[id*="field-event-tabs-values"]>tbody>tr>td {
-    width: 800px;
+[id*="field-event-tabs-values"] {
+    >tbody>tr>td {
+        width: 800px;
+    }
+    .form-submit[value="Remove"] {
+        margin-top: 15px;
+    }
+}
+
+[id*="event-backend-node-form"] {
+    .form-field-name-field-event-tabs {
+        margin-top: 15px;
+    }
 }

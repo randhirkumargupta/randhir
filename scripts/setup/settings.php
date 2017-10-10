@@ -291,9 +291,9 @@ $databases['sso_db']['default'] = array(
       'prefix' => '',
 );
 // end setting for UAT
-
+/*
 //for production setting
-/*$databases['default']['default'] = array(
+$databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'  
   'slave' => array('slave1','slave2'), // optional, defaults to 'autoslave'

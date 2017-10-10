@@ -32,7 +32,7 @@
               <p title="<?php echo $node_data['title'] ?>" class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
                 <?php 
                 if(function_exists('itg_common_get_smiley_title')) {
-                  echo l(itg_common_get_smiley_title($node_data['nid'], 0, 60), "node/" . $node_data['nid'] , array('html' => TRUE , "attributes" => array("title" =>$node_data['title'])));
+                  echo l(itg_common_get_smiley_title($node_data['node_obj'], 0, 60), "node/" . $node_data['nid'] , array('html' => TRUE , "attributes" => array("title" =>$node_data['title'])));
                 } else {
                   echo l(mb_strimwidth($node_data['title'], 0, 70, ".."), "node/" . $node_data['nid'] , array("attributes" => array("title" =>$node_data['title'])));
                 }

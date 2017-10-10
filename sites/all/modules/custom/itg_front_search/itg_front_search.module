@@ -383,7 +383,7 @@ function itg_front_search_views_pre_render(&$view) {
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1, 'scope' => 'footer'));
 
-    $bundle_name = array('story' => 'STORIES', 'photogallery' => 'PHOTO', 'video' => 'VIDEO');
+    $bundle_name = array('story' => 'STORIES', 'gallery' => 'PHOTO', 'video' => 'VIDEO');
     $search_url = 'archives';
     $archive_search = '';
     $archive_url = '';
