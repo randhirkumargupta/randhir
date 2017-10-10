@@ -1,0 +1,29 @@
+Location: http://indiatoday.intoday.in/pagenotfound.jsp [following]
+--2017-05-04 21:13:30--  http://indiatoday.intoday.in/pagenotfound.jsp
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: 40954 (40K) [text/html]
+Saving to: ‘indiatoday.intoday.in/category/top-stories/120/1.html’
+
+
+
+2017-05-04 21:13:31 (124 KB/s) - ‘indiatoday.intoday.in/category/top-stories/120/1.html’ saved [40954/40954]
+
+--2017-05-04 21:13:31--  http://indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav/1/176699.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav/1/176699.html’
+
+
+
+2017-05-04 21:13:33 (121 KB/s) - ‘indiatoday.intoday.in/video/up-assembly-polls-results-akhilesh-yadav/1/176699.html’ saved [147165]
+
+--2017-05-04 21:13:33--  http://indiatoday.intoday.in/gallery/assembly-polls-2012-business-booms-in-poll-bound-states/1/6375.html
+Reusing existing connection to indiatoday.intoday.in:80.
+HTTP request sent, awaiting response... 200 ‘wget-log’
+Length: unspecified [text/html]
+Saving to: ‘indiatoday.intoday.in/gallery/assembly-polls-2012-business-booms-in-poll-bound-states/1/6375.html’
+
+     0K .......... .......... .......... .......... ..........  118M
+    50K .......... .......... .......... .......... ..........  117M

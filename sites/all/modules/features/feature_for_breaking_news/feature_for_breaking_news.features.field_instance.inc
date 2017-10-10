@@ -832,7 +832,11 @@ function feature_for_breaking_news_field_default_field_instances() {
   // 'node-breaking_news-field_live_blog_timeline_active'.
   $field_instances['node-breaking_news-field_live_blog_timeline_active'] = array(
     'bundle' => 'breaking_news',
-    'default_value' => NULL,
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -854,7 +858,7 @@ function feature_for_breaking_news_field_default_field_instances() {
     'exclude_cv' => 0,
     'field_name' => 'field_live_blog_timeline_active',
     'label' => 'Time Line active',
-    'required' => 0,
+    'required' => 1,
     'settings' => array(
       'exclude_cv' => FALSE,
       'user_register_form' => FALSE,
@@ -865,6 +869,48 @@ function feature_for_breaking_news_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 54,
+    ),
+  );
+
+  // Exported field_instance: 'node-breaking_news-field_match_id'.
+  $field_instances['node-breaking_news-field_match_id'] = array(
+    'bundle' => 'breaking_news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 45,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_match_id',
+    'label' => 'Match ID',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 55,
     ),
   );
 
