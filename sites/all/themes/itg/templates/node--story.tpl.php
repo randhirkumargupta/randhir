@@ -492,7 +492,7 @@ if (!empty($content)):
                             print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
                         }
                         else {
-                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                          $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                             if (file_exists($story_image)) {
                                 $file_uri = file_create_url($story_image);
@@ -533,15 +533,27 @@ if (!empty($content)):
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
-                      $icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
-                                    <i class="fa fa-camera"></i></span>';
+                     //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
+                                    //<i class="fa fa-camera"></i></span>';
                     }
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
 
                     print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">        
-                                    ' . $icon_detail . '</a>';
+                                    <span class="story-photo-icon">';
+                    ?>
+                    <?php
+                    if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
+                                <i class="fa fa-play-circle"></i>
+                                <?php
+                            }
+                            else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                                ?>
+                                <i class="fa fa-camera"></i>
+                                <?php
+                            }
+                            print '</span></a>';
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
