@@ -316,7 +316,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
     case 'itg_widgets_custom_variables':
       $form['tid_videos'] = array(
         '#type' => 'textfield',
-        '#title' => 'Tid of videos',
+        '#title' => 'Tid of video section',
         '#default_value' => variable_get('tid_videos'),
         '#size' => 20,
         '#maxlength' => 20,
