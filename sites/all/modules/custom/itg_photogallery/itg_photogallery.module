@@ -18,7 +18,7 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'itg_widgets_custom_variables') {
     $form['tid_photogallery'] = array(
       '#type' => 'textfield',
-      '#title' => 'Tid of Photogallery Section',
+      '#title' => 'Tid of photo section',
       '#default_value' => variable_get('tid_photogallery'),
       '#size' => 20,
       '#maxlength' => 20,
