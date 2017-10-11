@@ -140,6 +140,48 @@
     #block-itg-widget-featured-video-carousel-r {
         background: #171717;
         padding: 30px 0 0 0;
+        .slick-slide {
+            position: relative;
+        }
+        .slick-prev,
+        .slick-next {
+            font: normal normal normal 14px/1 FontAwesome;
+            cursor: pointer;
+            width: 50px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 0 90px 90px 0;
+            left: 10px;
+            font-size: 0;
+            position: absolute;
+            top: 50%;
+            z-index: 9;
+            border: none;
+            margin-top: -50px;
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+            &:before {
+                content: '\f053';
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: 30px;
+                padding-left: 0;
+                left: 0;
+                position: absolute;
+                top: 16px;
+            }
+        }
+        .slick-next {
+            border-radius: 90px 0px 0px 90px;
+            right: 10px;
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+            &:before {
+                content: '\f054';
+                right: 0;
+            }
+        }
     }
     .itg-region {
         padding: 0;
@@ -1685,6 +1727,19 @@
     /* css end tech page */
     #block-itg-msi-magazine-calendar {
         margin: 0;
+    }
+    #block-itg-widget-featured-photo-carousel-r,
+    #block-itg-widget-featured-video-carousel-r {
+        .slick-prev,
+        .slick-next {
+            width: 24px;
+            height: 48px;
+            margin-top: -12px;
+            &:before {
+                font-size: 20px;
+                top: 16px;
+            }
+        }
     }
 }
 

@@ -165,11 +165,6 @@
                     jQuery("#edit-field-story-source-type-und-0-value").val("");
                 }
             });
-
-            // story discription iframe wrap in div
-            var tagIframe = jQuery('.story-section .story-right .description');
-            tagIframe.find('iframe').removeAttr('height', 'width').wrap('<div class="iframe-video"></div>');
-
         }
 
     };

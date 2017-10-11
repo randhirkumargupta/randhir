@@ -1041,8 +1041,14 @@ jQuery(document).ready(function () {
 });
 
 jQuery(document).ready(function (e) {
-    // code for video slider play video.
+    // story discription iframe wrap in div
+    var tagIframe = jQuery('.story-section .story-right .description');
+    tagIframe.find('iframe').removeAttr('height').removeAttr('width').wrap('<div class="iframe-video"></div>');
 
+    // iframe wrap with div
+    jQuery('.big-news .live-tv-big-story').find('iframe').removeAttr('height').removeAttr('width');
+
+    // code for video slider play video.
     jQuery('.thumb-video').click(function () {
         var getvideoindex = jQuery(this).attr('data-image-index');
         var getvideofid = jQuery(this).attr('data-image-fid');
