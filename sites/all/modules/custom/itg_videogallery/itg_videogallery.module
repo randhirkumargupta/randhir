@@ -5052,6 +5052,7 @@ function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previou
  */
 
 function get_header_tab_related_video_block_content() {
+  global $base_url;
   $arg = arg();
   if ($arg[1] == null)
     return false;
@@ -5081,10 +5082,14 @@ function get_header_tab_related_video_block_content() {
         }
         $related_video_duration = $related_data->sm_field_video_duration[0];
         $img_alt = strip_tags($related_title);
+        $url = $related_data->url;
+        if(empty($url)){
+          $url = "/" . drupal_get_path_alias('node/' . $current_entity_id);
+        }
         $related_image = '<img class="related-default" alt="' . $img_alt . '" src="' . $related_image_url . '">';
         if (!empty($related_title)) {
           $related_video .= "<li class='related_content_tabs'><figure><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";
-          $related_video .= "</figure></a><p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
+          $related_video .= "</figure></a><p class='title'>" . l($related_title, $url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
         }
     }
     $related_video .= "</ul></div>";
