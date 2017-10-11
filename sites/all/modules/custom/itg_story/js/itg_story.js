@@ -164,7 +164,7 @@
                 if (!jQuery(this).is(':checked')) {
                     jQuery("#edit-field-story-source-type-und-0-value").val("");
                 }
-            });			
+            });
             jQuery('.plupload_start').on('click', function () {
                 $('#story-node-form').ajaxComplete(function (event, request, settings) {
                     if (jQuery('input[name="field_story_technology[und][0][field_technology_sample_photo][und][0][fid]"]').val() == 0) {
@@ -173,12 +173,6 @@
                     }
                 });
             });
-<<<<<<< Updated upstream
-=======
-            // story discription iframe wrap in div
-            var tagIframe = jQuery('.story-section .story-right .description');
-            tagIframe.find('iframe').removeAttr('height', 'width').wrap('<div class="iframe-video"></div>');
->>>>>>> Stashed changes
         }
 
     };
