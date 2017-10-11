@@ -3978,6 +3978,16 @@ function itg_rapid_api_resend_otp($token, $user_id) {
     $HTTP_RAW_POST_DATA;
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+      // raw input validation
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = authtokenValidation_rapid($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+    if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    }
     //$params = $_POST;
      $rand = rand();
     $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
@@ -4336,6 +4346,16 @@ function itg_rapid_api_edit_profile($token) {
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
     //echo "hi";p($result_obj->uid);die();
+      // raw input validation
+    $validation_error = array();
+    $validation_error_str = "";
+    $validation_error = authtokenValidation_rapid($params);
+    $validation_error_str = implode(", ", $validation_error['custom_error']);
+    if ($validation_error_str) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "$validation_error_str";
+        return $account_err;
+    }
     if (!$result_obj->uid) {
         $account_err['status_code'] = "0";
         $account_err['status_message'] = "Invalid User_ID";
