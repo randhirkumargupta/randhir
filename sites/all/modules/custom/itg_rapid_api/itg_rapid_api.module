@@ -1747,6 +1747,16 @@ function deviceTokenReset_Rapid($params){
     $token_updated->condition('uid', $user_data->uid);
     $token_updated->execute();
     
+    // blank session id
+    
+    $session_updated = db_update('sessions');
+    $session_updated->fields(array(
+      'sid' => "",
+      
+    ));
+    $session_updated->condition('uid', $user_data->uid);
+    $session_updated->execute();
+    
 }
 
 /**
