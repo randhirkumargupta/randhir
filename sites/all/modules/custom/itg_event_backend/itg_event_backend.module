@@ -2477,7 +2477,7 @@ function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font
     if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
       if($key == 0) {
         if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
-          $flash_back_link_top = l('...', $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$tab_menu_font")));
+          $flash_back_link_top = l('<i class="fa fa-ellipsis-h" aria-hidden="true"></i>', $path_alias, array('html' => TRUE, 'query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$tab_menu_font")));
         }
       }
       if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
@@ -2487,7 +2487,7 @@ function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font
       $external_url = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
        if($key == 0) {
          if(!empty($value->field_tab_url[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
-          $flash_back_link_top =  l('...', $external_url, array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$tab_menu_font")));
+          $flash_back_link_top =  l('<i class="fa fa-ellipsis-h" aria-hidden="true"></i>', $external_url, array('html' => TRUE, 'external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$tab_menu_font")));
          }
        }
        if(!empty($value->field_tab_url[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
