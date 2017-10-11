@@ -259,6 +259,7 @@ function itg_get_megareview_company($byline_id) {
  * @param string $title
  */
 function itg_mega_review_filter_callback($title) {
+  
   if (strlen(trim($title)) > 0) {
     $content_type = arg(1);
     $state = trim(arg(2));
@@ -277,13 +278,10 @@ function itg_mega_review_filter_callback($title) {
     $query->condition('n.type', $content_type, '=');
     $query->condition('n.status', $status);
     $query->range(0, 20);
-
     $result = $query->execute();
-
     while ($record = $result->fetchAssoc()) {
       $options[$record['title']] = $record['title'];
     }
-
     drupal_json_output($options);
   }
 }
