@@ -302,7 +302,6 @@ function itg_preprocess_html(&$vars) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
-
   $arg = arg();
   global $base_url;
   if (!empty(arg(1)) && is_numeric(arg(1))) {
@@ -423,6 +422,7 @@ function itg_html_head_alter(&$head_elements) {
         $head_elements['metatag_keywords_0'] = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
+            
           '#attributes' => array(
             'name' => 'news_keyword',
             'content' => $meta_keywords
@@ -467,6 +467,9 @@ function itg_html_head_alter(&$head_elements) {
       }
     }
   }
+  $head_elements['metatag_description_0']['#weight'] = -1000;
+  $head_elements['metatag_keywords_0']['#weight'] = -999;
+  $head_elements['system_meta_content_type']['#weight'] = -998;
 }
 
 /**
