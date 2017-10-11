@@ -2715,7 +2715,7 @@ function get_rhs_block_display_condtion($delta = '') {
                 if ($arg[0] == 'gethomecarddata') {
                     return TRUE;
                 }
-                if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'poll' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && ($page_argument[0]->type == 'story' || $page_argument[0]->type == 'quiz')) || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
+                if ((!empty($arg[1]) && in_array($arg[1], $top_takes_node_array)) || $arg[0] == 'blog' || $arg[0] == 'poll' || $arg[0] == 'itg_active_polls' || $arg[0] == 'itg-quiz' || $arg[0] == 'program' || $arg[0] == 'programmes' || $arg[0] == 'topic' || $arg[0] == 'advance_search' || $arg[0] == 'itg-layout-manager' || $arg[0] == 'insert-layout-setting-ajax' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'blog') || (!empty($page_argument[0]->type) && ($page_argument[0]->type == 'story' || $page_argument[0]->type == 'quiz')) || $page_argument[0]->type == 'survey' || (!empty($page_argument[0]->type) && $page_argument[0]->type == 'breaking_news') || $display_block == TRUE) {
                     return TRUE;
                 }
                 break;
@@ -2759,7 +2759,7 @@ function insert_all_node_in_widegt_table() {
  * {@inheritdoc}
  */
 function itg_widget_node_insert($node) {
-    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
+    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news') {
         if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
@@ -2830,7 +2830,7 @@ function itg_widget_node_insert($node) {
                 }
             }
         }
-        if ($node->status == 0) {
+        if ($node->status == 0 && !empty($node->op)) {
             itg_widget_handle_unpublished_node($node->nid);
         }
     }
@@ -2940,14 +2940,17 @@ function get_max_weight_for_special($type) {
  * {@inheritdoc}
  */
 function itg_widget_node_update($node) {
-    itg_watchdog("status_test" , array($node->nid , $node->status));
-    if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery') {
-        $arg = arg();
+    itg_watchdog("status_test" , array($node->nid , $node->status , $node->revision , $node->op));
+    if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news')) {
+      $arg = arg();
         if (itg_workflow_stop_node_update_batch_for_widgets()) {
             return;
         }
 
         if (isset($arg[1]) && $arg[1] != 'add') {
+          if($node->field_story_source_type['und'][0]['value'] != 'migrated') {
+            __itg_widget_helper_data_insert($node->nid);
+          }
             watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
@@ -2961,16 +2964,15 @@ function itg_widget_node_update($node) {
               ->condition('content_type', $node->type)
               ->condition('widget', 'section_wise_widget')
               ->condition('nid', $nid)->execute();
-
             foreach ($cat_id as $category) {
                 manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
                 manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
             }
         }
     }
-    if ($node->status == 0 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
+    /*if ($node->status == 0 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
         itg_widget_handle_unpublished_node($node->nid);
-    }
+    }*/
 }
 
 /**

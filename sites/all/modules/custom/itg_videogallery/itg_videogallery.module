@@ -1870,10 +1870,10 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
         $query->condition('content_type', 'video_gallery', '=');
         $video_data = $query->execute()->fetchAll();
         if (count($video_data) <= 0) {
-          $node = node_load($nid[0]);
-          if (!empty($node)) {
-            $node->status = 0;
-            node_save($node);
+          $node_data = node_load($nid[0]);
+          if (!empty($node_data)) {
+            $node_data->status = 0;
+            node_save($node_data);
           }
         }
       }
@@ -1960,10 +1960,10 @@ function itg_videogallery_remove_video_id_parent_site_delete_or_unpublish() {
         $query->condition('content_type', 'video_gallery', '=');
         $video_data = $query->execute()->fetchAll();
         if (count($video_data) <= 0) {
-          $node = node_load($nid[0]);
-          if (!empty($node)) {
-            $node->status = 0;
-            node_save($node);
+          $node_data = node_load($nid[0]);
+          if (!empty($node_data)) {
+            $node_data->status = 0;
+            node_save($node_data);
           }
         }
       }

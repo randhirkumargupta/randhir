@@ -1,0 +1,121 @@
+<html>
+<head>
+<script type="text/javascript" src="/staticpages/special/sexsurvey2010/lib/jquery-1.2.3.pack.js"></script>
+
+<script type="text/javascript" src="/staticpages/special/sexsurvey2010/lib/jquery.jcarousel.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="/staticpages/special/sexsurvey2010/lib/jquery.jcarousel.css" />
+<link rel="stylesheet" type="text/css" href="/staticpages/special/sexsurvey2010/skins/tango/skin.css" />
+
+<style type="text/css">
+body { margin:0; padding:0;}
+.jcarousel-control {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.jcarousel-control a {
+    font-size: 75%;
+    text-decoration: none;
+    padding: 0 5px;
+    margin: 0 0 5px 0;
+    border: 1px solid #fff;
+    color: #eee;
+    background-color: #4088b8;
+    font-weight: bold;
+}
+
+.jcarousel-control a:focus,
+.jcarousel-control a:active {
+    outline: none;
+}
+
+.jcarousel-scroll {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.jcarousel-scroll form {
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel-scroll select {
+    font-size: 75%;
+}
+
+#mycarousel-next,
+#mycarousel-prev {
+    cursor: pointer;
+    margin-bottom: -10px;
+    text-decoration: underline;
+    font-size: 11px;
+}
+
+ul { margin:0; padding:0;}
+
+</style>
+
+<script type="text/javascript">
+
+function mycarousel_initCallback(carousel) {
+    jQuery('.jcarousel-control a').bind('click', function() {
+        carousel.scroll(jQuery.jcarousel.intval(jQuery(this).text()));
+        return false;
+    });
+
+    jQuery('.jcarousel-scroll select').bind('change', function() {
+        carousel.options.scroll = jQuery.jcarousel.intval(this.options[this.selectedIndex].value);
+        return false;
+    });
+
+    jQuery('#mycarousel-next').bind('click', function() {
+        carousel.next();
+        return false;
+    });
+
+    jQuery('#mycarousel-prev').bind('click', function() {
+        carousel.prev();
+        return false;
+    });
+};
+
+jQuery(document).ready(function() {
+    jQuery("#mycarousel").jcarousel({
+        scroll: 1,
+        initCallback: mycarousel_initCallback,
+        buttonNextHTML: null,
+        buttonPrevHTML: null
+    });
+});
+
+</script>
+</head>
+<body>
+<div id="wrap" style="border:0px solid red;">
+    <div id="mycarousel" class="jcarousel-skin-tango">
+      <ul >
+      <li style="background-image:none"><a href="http://wonderwoman.intoday.in/wonderwoman/story/87181/Lover/what-she-wants-more-of-in-bed.html" target="_blank"><img src="/staticpages/special/sexsurvey2010/images/sutra_img1.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a><span>
+	  <center><a href="http://wonderwoman.intoday.in/wonderwoman/story/87181/Lover/what-she-wants-more-of-in-bed.html" target="_blank">What she wants in bed </a></center></span>      </li>
+      <li style="background-image:none"><a href="http://wonderwoman.intoday.in/wonderwoman/story1/87161/Lover/sex-tricks-to-hit-the-high-notes.html" target="_blank"><img src="/staticpages/special/sexsurvey2010/images/sex-positions.jpg" width="150" height="150" border="0" /></a>
+	  <span>
+	  <center><a href="http://wonderwoman.intoday.in/wonderwoman/story1/87161/Lover/sex-tricks-to-hit-the-high-notes.html" target="_blank">7 sex positions</a></center></span></li>
+       <li style="background-image:none"><a href="http://cosmo.intoday.in/cosmopolitan/story.jsp?sid=8087" target="_blank"><img src="/staticpages/special/sexsurvey2010/images/men-sex.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a>
+	   <span>
+	   <center>
+	     <a href="http://cosmo.intoday.in/cosmopolitan/story.jsp?sid=8087" target="_blank">12 lies about men &amp; sex </a>
+	   </center></span></li>
+      <li style="background-image:none"><a href="http://cosmo.intoday.in/cosmopolitan/gallery.jsp?gid=7529" target="_blank"><img src="/staticpages/special/sexsurvey2010/images/men-lying.jpg" width="150" height="150" border="0" /></a>
+	  <span>
+	  <center><a href="http://cosmo.intoday.in/cosmopolitan/gallery.jsp?gid=7529" target="_blank">Is your man lying?</a></center></span></li> 
+	  <li style="background-image:none"><a href="http://menshealth.intoday.in/menshealth/story.jsp?contentid=3038&sid=5&cid=19" target="_blank"><img src="/staticpages/special/sexsurvey2010/images/sutra_img2.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a>
+	  <span>
+	  <center><a href="http://menshealth.intoday.in/menshealth/story.jsp?contentid=3038&sid=5&cid=19" target="_blank">What women want in bed</a></center></span></li>
+    </ul>
+
+ 
+
+  </div>
+
+</div>
+</body>
+</html>
