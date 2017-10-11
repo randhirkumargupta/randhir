@@ -3981,7 +3981,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
       // raw input validation
     $validation_error = array();
     $validation_error_str = "";
-    $validation_error = authtokenValidation_rapid($params);
+    $validation_error = resentotpValidation_rapid($params);
     $validation_error_str = implode(", ", $validation_error['custom_error']);
     if ($validation_error_str) {
         $account_err['status_code'] = "0";
