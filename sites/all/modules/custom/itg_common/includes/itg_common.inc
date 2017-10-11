@@ -520,15 +520,16 @@ function itg_common_get_latest_byline($nid , $status) {
         ->condition('s.nid', $nid, '=')
         ->condition('s.publish_status', $status, '=');
     $query->orderBy("byline_weight", "ASC");
-    $query->range(0, 1);
+    $query->range(0, 10);
     $result = $query->execute();
-    $byline_id = $result->fetchField();
+    /*$byline_id = $result->fetchField();
     if ($byline_id) {
       return $byline_id;
     }
     else {
       return FALSE;
-    }
+    }*/
+    return $result->fetchAll(PDO::FETCH_ASSOC);
   }
 }
 
@@ -543,4 +544,37 @@ function itg_get_fb_share($id , $type) {
       ->condition('n.node_id' , $id)
       ->execute();
   return $result->rowCount();
+}
+
+/**
+ * itg_get_multi_byline_details
+ */
+function itg_get_multi_byline_details($byline_id) {
+  $options = '';
+  $id_arr = array();
+  foreach ($byline_id as $key => $value) {
+    $id_arr[] = $value['byline_id'];
+  }
+  if (!empty($id_arr)) {
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_extra_large_image', 're', 'n.nid = re.entity_id');
+    $query->leftJoin('field_data_field_reporter_twitter_handle', 'frq', 'n.nid = frq.entity_id');
+    $query->fields('n');
+    $query->fields('frq', array('field_reporter_twitter_handle_value'));
+    $query->fields('re', array('field_story_extra_large_image_fid'));
+    $query->condition('n.nid', $id_arr, 'IN');
+    $query->condition('n.type', 'reporter', '=');
+    //$query->range(0, 1);
+    //field_reporter_profile_type_value
+    $result = $query->execute();
+    $key = 0;
+    while ($record = $result->fetchAssoc()) {
+      $options[$key]['nid'] = $record['nid'];
+      $options[$key]['title'] = $record['title'];
+      $options[$key]['extra_large_image'] = $record['field_story_extra_large_image_fid'];
+      $options[$key]['twitter_handle'] = $record['field_reporter_twitter_handle_value'];
+      ++$key;
+    }
+  }
+  return $options;
 }
