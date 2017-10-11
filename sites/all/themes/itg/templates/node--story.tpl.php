@@ -154,7 +154,10 @@ if (!empty($content)):
             ?>
           </li>
           <li class="mail-to-author"><a title ="Mail to author" href="mailto:<?php echo ITG_SUPPORT_EMAIL; ?>"><i class="fa fa-envelope"></i><?php //print t('Mail to author');      ?></a></li>
-          <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
+<?php 
+$whatsapp = $node->title . $actual_link;
+$whatsapp_text = urlencode($whatsapp); ?>          
+<li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
           <?php if ($config_name == 'vukkul') { ?>
             <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
           <?php } if ($config_name == 'other') { ?> 
