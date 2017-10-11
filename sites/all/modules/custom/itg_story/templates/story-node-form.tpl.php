@@ -74,6 +74,7 @@
                 <?php print drupal_render($form['field_associate_photo_gallery']); ?>
                 <?php print drupal_render($form['field_story_associate_video']); ?>
                 <?php print drupal_render($form['field_story_external_url']); ?>
+                <?php print drupal_render($form['field_technology_photogallery']); ?>
             </div>
         </div>
         <div id="ExpertChunk" class="itg-form-section-wrapper">
@@ -99,7 +100,9 @@
         <div id="StoryTech" class="itg-form-section-wrapper">
             <h2 class="story-title"><?php print t('Story Technology'); ?></h2> 
             <div class="itg-form-section hide">
+                <?php print drupal_render($form['upload']); ?>
                 <?php print drupal_render($form['field_story_technology']); ?>
+                <?php print drupal_render($form['field_technology_photogallery']); ?>
                 <?php print drupal_render($form['field_story_technology_rating']); ?>
                 <?php print drupal_render($form['field_story_tech_review_chunk']); ?>
             </div>

@@ -118,9 +118,9 @@ $uri = base64_encode($actual_link);
                                       <div class="bounce2"></div>
                                       <div class="bounce3"></div>
                                   </div></div>
-                              <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
+                              <div class="<?php echo $hide_player; ?> iframe-video" id="video_palyer_container"> <div class = "video-iframe-wrapper">
 
-                                      <div class="iframe-video1 video-iframe-wrapper" id="video_0">
+                                      <div class=" video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
                                             print theme('internal_video_player', array("data" => $videoids[0]->fid));
@@ -137,7 +137,7 @@ $uri = base64_encode($actual_link);
                                                   {
                                                       video: '<?php print $vide_dm_id; ?>',
                                                       width: '600px',
-                                                      height: '450px',
+                                                      height: '100%',
                                                       params: {
                                                           autoplay: <?php echo $autoplay; ?>,
                                                           controls: 1,

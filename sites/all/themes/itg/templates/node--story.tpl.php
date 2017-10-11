@@ -495,7 +495,7 @@ $whatsapp_text = urlencode($whatsapp); ?>
                             print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
                         }
                         else {
-                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                          $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                             if (file_exists($story_image)) {
                                 $file_uri = file_create_url($story_image);
@@ -536,15 +536,27 @@ $whatsapp_text = urlencode($whatsapp); ?>
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
-                      $icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
-                                    <i class="fa fa-camera"></i></span>';
+                     //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
+                                    //<i class="fa fa-camera"></i></span>';
                     }
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
 
                     print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">        
-                                    ' . $icon_detail . '</a>';
+                                    <span class="story-photo-icon">';
+                    ?>
+                    <?php
+                    if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
+                                <i class="fa fa-play-circle"></i>
+                                <?php
+                            }
+                            else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                                ?>
+                                <i class="fa fa-camera"></i>
+                                <?php
+                            }
+                            print '</span></a>';
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
@@ -742,6 +754,18 @@ $whatsapp_text = urlencode($whatsapp); ?>
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
+                // Code for Tech Photo gallery
+                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {				  
+                  if (!empty($node->field_technology_photogallery['und'])) {
+                    $tech_gallery_images = $node->field_technology_photogallery['und'][0]['entity']->field_gallery_image;
+                    $tech_gallery_alias = drupal_get_path_alias('node/' . $node->field_technology_photogallery['und'][0]['entity']->nid);
+                    $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias);
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
+                  }
+                  else {
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+                  }
+                }
                 //Code for the listicle token
                 if (strpos($story_body, '[ITG:LISTICLES]')) {
                   $listicle_output = '';
@@ -806,11 +830,11 @@ $whatsapp_text = urlencode($whatsapp); ?>
               if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
                 ?>
                 <div class="story-tech-chunk">
-                    <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
-                    <span class="tech-rating">
-                    <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
-                    </span>
-                <?php } ?>
+                    <?php //if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                    <!--<span class="tech-rating">-->
+                    <?php //echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
+                    <!--</span>-->
+                <?php //} ?>
                 <?php print render($content['field_story_tech_review_chunk']); ?>
                 </div>
           <?php } ?>
@@ -1081,6 +1105,7 @@ $whatsapp_text = urlencode($whatsapp); ?>
           ?>
           <div id="other-comment">
             <?php
+            // block for comment
             $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
             print render($block['content']);
             ?>

@@ -1,0 +1,19 @@
+body{margin:0;padding:0;}
+h1.section_title{margin-top:0; padding:0;  color:#C90C1D; font: bold 24px/30px Arial; text-transform:capitalize; text-align:left; background:url(../images/dot.gif) repeat-x scroll center bottom}
+#leftsponsors {width:200px; float:left;}
+#sponsorsdetails{float:left; margin-left:20px; width:460px;}
+.mainul, .innerul{margin:0 0 2px 0; padding:0;}
+.mainul li.mainli, .innerul li.innerli, .innerul li.innerli_a{width:200px;list-style:none;}
+.mainul li .mainlitop{background:url(staticpages/main/images/black-band-bg.gif) no-repeat; height:19px; font:14px Myriadpro, Arial, Helvetica, sans-serif;color:#FFFFFF;padding-left:10px;}
+
+.innerul li.innerli_a{background:url(/staticpages/main/images/grey-band-bg.gif) top no-repeat; border:1px solid #E1E1E1; border-top:none; font:15px Arial; font-weight:bold; color:#505050; padding:3px 0 3px 10px; width:188px;}
+
+
+.innerul li.innerli a{background:url(/staticpages/main/images/grey-band-bg.gif) top no-repeat; border:1px solid #E1E1E1; border-top:none; font:15px Arial; font-weight:bold; color:#505050; padding:3px 0 3px 10px; width:188px; display:block; text-decoration:none;}
+	
+.innerul li.innerli a:hover{text-decoration:none; background:url(/staticpages/main/images/highlite-band-bg.gif) top no-repeat;  border:1px solid #BB0500; border-top:none; font:15px Arial; font-weight:bold; color:#FFFFFF;}
+
+
+
+.innerul li.redli{background:url(/staticpages/main/images/highlite-band-bg.gif) top no-repeat; border:1px solid #BB0500; border-top:none; font:15px Arial; font-weight:bold; padding:3px 0 3px 10px; color:#FFFFFF; width:188px;}
+.innerul li.redli a{color:#FFFFFF; text-decoration:none;}

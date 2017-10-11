@@ -118,6 +118,29 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
       $add_title = t('Create ') . $node_type;
       drupal_set_title($add_title);
     }
+    $form['field_byline_company'][LANGUAGE_NONE]['#ajax'] = array(
+          'callback' => 'change_byline_department_ajax_callback',
+          'wrapper' => 'dropdown-byline_departent',
+        );
+    $form['field_byline_department']['#prefix'] = '<div id="dropdown-byline_departent">';
+    $form['field_byline_department']['#suffix'] = '</div>';
+    if (isset($form_state['node']) && isset($form_state['node']->field_byline_company) && !empty($form_state['node']->field_byline_company[LANGUAGE_NONE][0]['tid'])) {
+        $company_tid = $form_state['node']->field_byline_company[LANGUAGE_NONE][0]['tid'];
+    }
+    if (isset($form_state['values']) && !empty($form_state['values']['field_byline_company'][LANGUAGE_NONE][0]['tid'])) {
+        $company_tid = $form_state['values']['field_byline_company'][LANGUAGE_NONE][0]['tid'];
+    }
+    $byline_dept_arr_opt = array();
+    if (!empty($company_tid)) {
+        $byline_dept_arr = get_byline_department_by_company($company_tid);
+        if (!empty($byline_dept_arr)) {
+            foreach ($byline_dept_arr as $key => $value) {
+                $byline_dept_arr_opt[trim($value->entity_id)] = trim($value->name);
+            }
+            $form['field_byline_department'][LANGUAGE_NONE]['#options'] = $byline_dept_arr_opt;
+        }
+    }   
+    $form['field_byline_department'][LANGUAGE_NONE]['#options'] = $byline_dept_arr_opt;
 
     $form['#after_build'][] = 'itg_reporter_after_build';
 
@@ -466,4 +489,35 @@ function itg_reporter_node_validate($node, $form, &$form_state) {
       form_set_error('field_reporter_profile_type', 'Profile is required.');
     }
   }
+}
+
+/**
+ * Function for ajax callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function change_byline_department_ajax_callback($form, &$form_state) {
+   return $form['field_byline_department'];
+}
+
+
+/**
+ * Function is used to get byline company from byline department
+ * @param int $tid
+ * @return boolean or array
+ */
+function get_byline_department_by_company($tid = null) {
+    if (empty($tid)) {
+        return FALSE;
+    }
+    $query = db_select('field_data_field_byline_company', 'bc');
+    $query->fields('bc', array('entity_id'));
+    $query->fields('ttd', array('name'));
+    $query->join('taxonomy_term_data', 'ttd', 'bc.entity_id = ttd.tid');
+    $query->condition('bc.field_byline_company_tid', $tid, '=');
+    $query->condition('bc.bundle', 'byline_department', '=');
+    $query->condition('bc.entity_type', 'taxonomy_term', '=');
+    $query_result = $query->execute()->fetchAll();
+    return $query_result;
 }

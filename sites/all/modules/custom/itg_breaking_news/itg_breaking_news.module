@@ -221,6 +221,14 @@ function itg_breaking_news_form_alter(&$form, &$form_state, $form_id) {
         ':input[name="field_type[und]"]' => array('value' => 'Live Blog'),
       )
     );
+    
+    // Hide/show hMatch id based on type
+    $form['field_match_id']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_type[und]"]' => array('value' => 'Cricket Live Blog'),
+      )
+    );
+    
     // Hide/show coverage field based on type
     $form['field_breaking_coverage_end_time']['#states'] = array(
       'visible' => array(
@@ -472,7 +480,7 @@ function cricket_live_blog_content_callback() {
   else {
     print json_encode(array('status' => 'error'));
   }
-  die;
+  drupal_exit();
 }
 
 /**
@@ -542,8 +550,7 @@ function get_commentary_data_db_callback($nid, $page = 0) {
  * @return boolean/array
  */
 function get_commentary_data_db($nid, $page) {
-  $data = FALSE;
-  if (db_table_exists('field_data_field_breaking_content_details')) {
+  $data = FALSE;  
     if (isset($nid) && !empty($nid)) {
       $query = db_select('field_data_field_breaking_content_details', 'bcd');
       $query->addField('bt', 'field_breaking_tile_value', 'Commentary');
@@ -561,6 +568,5 @@ function get_commentary_data_db($nid, $page) {
         return theme('cricket_live_blog_commentary', array('data' => $query_result));
       }
     }
-  }
   return $data;
 }

@@ -39,7 +39,7 @@
                 <?php //echo l(mb_strimwidth($title, 0, 100, ".."), $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}")) ?>
               <?php
             if (function_exists('itg_common_get_smiley_title')) {
-              echo l(itg_common_get_smiley_title($node_data['nid'], 0, 90), "node/" . $node_data['nid'], array("html" => TRUE));
+              echo l(itg_common_get_smiley_title($node_data['node_obj'], 0, 90), "node/" . $node_data['nid'], array("html" => TRUE));
             }
             else {
               echo l(mb_strimwidth(strip_tags($title), 0, 100, ".."), "node/" . $node_data['nid']);

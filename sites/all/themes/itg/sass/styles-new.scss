@@ -441,6 +441,7 @@ input[type="text"] {
     padding: 0;
     font-weight: 600;
     margin-bottom: 5px;
+    height: auto;
     a {
         color: #323232;
     }
@@ -448,7 +449,7 @@ input[type="text"] {
 
 .sidebar-section-photo {
     .itg-widget {
-        margin: 35px 0;
+        /*margin: 35px 0; for video page sidebar */
         position: relative;
     }
 }
@@ -567,7 +568,6 @@ input[type="text"] {
 }
 
 .featured-news .featured-post h3 {
-    max-height: 96px;
     overflow: hidden;
     margin-top: 5px;
     line-height: 22px;

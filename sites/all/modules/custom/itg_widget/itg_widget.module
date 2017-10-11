@@ -34,14 +34,14 @@ function itg_widget_init() {
 // This is use in case of nodequeue in case of custom table we calls a callback funtion.
     global $base_url, $user;
     $arg = arg();
-    if(($arg[0] != 'node') && ($arg[1] != 'add' && $arg[2] != 'edit')) {
+    //if(($arg[0] != 'node') && ($arg[1] != 'add' && $arg[2] != 'edit')) {
     $settings = array();
     $settings['base_url'] = $base_url;
     $settings['setttl'] = variable_get('akamai_timeout_section_card', 0);
     $settings['actual_ttl'] = variable_get('akamai_timeout_section_card_ttl', 0);
     drupal_add_js(array('itg_widget' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_widget.js', array('type' => 'file', 'scope' => 'footer'));
-    }
+    //}
 }
 
 /**
@@ -290,13 +290,13 @@ function itg_content_inactive_videogallery() {
   $itg_result = $itg_query->execute()->fetchAll();
   itg_watchdog("nodes_expiry" , $itg_result);
   foreach ($itg_result as $itg_val) {
-    $node = node_load($itg_val->nid);
+    $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
-    $node->status = 0;
+    $node_data->status = 0;
       if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
         itg_videogallery_node_publish_to_unpublish($node->nid);
       }
-    node_save($node);
+    node_save($node_data);
     itg_widget_handle_unpublished_node($node->nid);
   }
   itg_watchdog("nodes_expiry" , $nodeid);
@@ -454,7 +454,8 @@ function itg_widget_block_view($delta = '') {
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
             //$block['subject'] = t('');
             $info['widget'] = 'big_story_format_widget';
-            $data = itg_widget_big_story_block_data($info);
+            $data = itg_widget_big_story_block_data($info);            
+            
             foreach ($data as $big_story_data) {
                 if (isset($big_story_data['is_live_tv']) && !empty($big_story_data['is_live_tv'])) {
                     $live_tv_flag = TRUE;
@@ -1987,33 +1988,33 @@ function __itg_check_nid_in_widget($nid) {
 function __itg_widget_helper_data_insert($nid) {
     if ($nid) {
         __itg_widget_helper_data_delete($nid);
-        $node_load_data = node_load($nid);
+        $node_load_data = node_load($nid , null , TRUE);
         itg_watchdog("widget_update" , array(
               'nid' => $nid,
               'node_status' => $node_load_data->status,
               'node_type' => $node_load_data->type,
-            ));
-        if($node_load_data->status) {
-            try {
-                db_insert('itg_widget_helper')
-                  ->fields(array(
-                    'nid',
-                    'node_data',
-                    'node_status',
-                    'node_type',
-                    )
-                  )
-                  ->values(
-                    array(
-                      'nid' => $nid,
-                      'node_data' => serialize($node_load_data),
-                      'node_status' => $node_load_data->status,
-                      'node_type' => $node_load_data->type,
-                    )
-                  )->execute();
-            } catch (Exception $ex) {
-                drupal_set_message($ex->getMessage(), 'error');
-            }
+            )
+        );
+        try {
+          itg_watchdog("helper_insert" , $node_load_data->field_emoji_position);
+            db_insert('itg_widget_helper')
+              ->fields(array(
+                'nid',
+                'node_data',
+                'node_status',
+                'node_type',
+                )
+              )
+              ->values(
+                array(
+                  'nid' => $nid,
+                  'node_data' => serialize($node_load_data),
+                  'node_status' => $node_load_data->status,
+                  'node_type' => $node_load_data->type,
+                )
+              )->execute();
+        } catch (Exception $ex) {
+            drupal_set_message($ex->getMessage(), 'error');
         }
     }
 }
@@ -2023,6 +2024,7 @@ function __itg_widget_helper_data_insert($nid) {
  * @param int $nid
  */
 function __itg_widget_helper_data_delete($nid) {
+  itg_watchdog("helper_delete" , $nid);
     if ($nid) {
         try {
             db_delete('itg_widget_helper')->condition("nid", $nid)->execute();
@@ -2062,7 +2064,18 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
         foreach ($result as $widget_data) {
 
             $node_load_data = unserialize($widget_data->node_data);
-
+            $node_smily_data = array('field_story_short_headline_value' => $node_load_data->field_story_short_headline['und'][0]['value'],
+                'field_emoji_position_value' => array(
+                  $node_load_data->field_emoji_position['und'][0]['value'],
+                  $node_load_data->field_emoji_position['und'][1]['value'],
+                ),
+                'field_emoji_2_value' => $node_load_data->field_emoji_2['und'][0]['value'],
+                'field_emoji_value' => $node_load_data->field_emoji['und'][0]['value'],
+                'title' => $node_load_data->title,
+                'ad_title' => $node_load_data->field_story_new_title['und'][0]['value'],
+                'ad_url' => $node_load_data->field_story_redirection_url_titl['und'][0]['value'],
+                'nid' => $node_load_data->nid,
+             );
             $uri = $node_load_data->field_story_extra_large_image['und'][0]['uri'];
             $li_file_uri = $node_load_data->field_story_large_image['und'][0]['uri'];
             $mi_file_uri = $node_load_data->field_story_medium_image['und'][0]['uri'];
@@ -2113,7 +2126,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               'field_story_medium_image_title' => $node_load_data->field_story_medium_image_title['und'][0]['title'],
               'field_story_small_image_alt' => $node_load_data->field_story_small_image_alt['und'][0]['alt'],
               'field_story_small_image_title' => $node_load_data->field_story_small_image_title['und'][0]['title'],
-              'node_obj' => $node_load_data,
+              'node_obj' => $node_smily_data,
             );
         }
     }

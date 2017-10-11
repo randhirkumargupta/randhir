@@ -1326,7 +1326,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                   echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
                 }
                 ?>
-                <?php echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 100), "node/" . $nid); ?>
+                <?php echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 100), "node/" . $nid,array('html'=>TRUE)); ?>
             </p>
 
             <?php
