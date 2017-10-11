@@ -1562,11 +1562,19 @@ function itg_story_add_byline_popup($ajax) {
     // If the form has been submitted, there may be additional instructions
     // such as dismissing the modal popup.
     if (!empty($form_state['executed'])) {
+      if (!empty($form_state['values']['field_reporter_profile_type'])) {
+        $reporter_type = '(' . $form_state['values']['field_reporter_profile_type']['und'][0]['value'] . ')';
+      }
+      if (!empty($form_state['values']['field_reporter_email_id'])) {
+        $reporter_email = '(' . $form_state['values']['field_reporter_email_id']['und'][0]['value'] . ')';
+      }
+      $name_format = $form_state['values']['title'] . $reporter_type . $reporter_email . '{' . $form_state['values']['nid'] . '}';
       $output = array();
       $output[] = ctools_modal_command_display(
           t('Node created'), 'Node creation successful.');/** Add success message */
       $output[] = ctools_modal_command_dismiss(); //Close modal automatically
-      $output[] = ctools_ajax_command_reload(); //reload parent window 
+      $output[] = ctools_ajax_command_reload(); //reload parent window
+      $output[] = ajax_command_invoke('#edit-field-story-reporter-und-0-target-id', 'val', array($name_format));
     };
     // Return the ajax instructions to the browser via ajax_render().
     print ajax_render($output);
