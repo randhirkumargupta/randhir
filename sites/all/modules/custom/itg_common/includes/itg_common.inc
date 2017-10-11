@@ -522,13 +522,6 @@ function itg_common_get_latest_byline($nid , $status) {
     $query->orderBy("byline_weight", "ASC");
     $query->range(0, 10);
     $result = $query->execute();
-    /*$byline_id = $result->fetchField();
-    if ($byline_id) {
-      return $byline_id;
-    }
-    else {
-      return FALSE;
-    }*/
     return $result->fetchAll(PDO::FETCH_ASSOC);
   }
 }
@@ -564,8 +557,6 @@ function itg_get_multi_byline_details($byline_id) {
     $query->fields('re', array('field_story_extra_large_image_fid'));
     $query->condition('n.nid', $id_arr, 'IN');
     $query->condition('n.type', 'reporter', '=');
-    //$query->range(0, 1);
-    //field_reporter_profile_type_value
     $result = $query->execute();
     $key = 0;
     while ($record = $result->fetchAssoc()) {
