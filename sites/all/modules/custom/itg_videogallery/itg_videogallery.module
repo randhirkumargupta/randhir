@@ -5052,10 +5052,11 @@ function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previou
  */
 
 function get_header_tab_related_video_block_content() {
-  if (arg(1) == null)
-    return false;
   $arg = arg();
+  if ($arg[1] == null)
+    return false;
   $related_content = itg_get_related_content($arg[1]);
+   
   if (!empty($related_content)) {
     if (function_exists('itg_get_related_story_id')) {
       $related_result = itg_get_related_story_id($related_content);
@@ -5064,8 +5065,6 @@ function get_header_tab_related_video_block_content() {
     foreach ($related_result as $site_hash_key) {
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
-
-      if (!empty($related_data)) {
         $display_title = get_related_display_title($arg[1], $current_entity_id);
         if (!empty($display_title)) {
           $display_title = $display_title;
@@ -5084,10 +5083,9 @@ function get_header_tab_related_video_block_content() {
         $img_alt = strip_tags($related_title);
         $related_image = '<img class="related-default" alt="' . $img_alt . '" src="' . $related_image_url . '">';
         if (!empty($related_title)) {
-          $related_video .= "<li class='related_content_tabs'><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<span class='videolengh'><i class='fa fa-play-circle'></i> " . $related_video_duration . "</span>" . $related_image;
-          $related_video .= "</a><p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
+          $related_video .= "<li class='related_content_tabs'><figure><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";
+          $related_video .= "</figure></a><p class='title'>" . l($related_title, $related_data->url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
         }
-      }
     }
     $related_video .= "</ul></div>";
     return $related_video;
