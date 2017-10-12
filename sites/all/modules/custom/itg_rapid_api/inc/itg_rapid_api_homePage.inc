@@ -1138,8 +1138,9 @@ function homePageJsonPoll() {
                                     }
                                 ]
                             }';
-    
-    $n_polls = json_decode($poll_json, true);
+    $json_poll_data=json_encode($poll_json,JSON_FORCE_OBJECT);
+    $n_polls = json_decode($json_poll_data, true);
+    //var_dump($n_polls);die();
 
     $data_magazine['id'] = "7";
     $data_magazine['order'] = "7";
