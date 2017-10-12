@@ -1116,30 +1116,30 @@ function homePageJsonPoll() {
    // $n_polls_data = polls_open_list(0);
     //$n_polls = $n_polls_data['data'];
     
-    $poll_json = " {
-                                \"p_id\": \"837283\",
-                                \"p_is_sponsored\": \"\",
-                                \"p_sponsored_icon\": \"\",
-                                \"p_sponsored_link\": \"\",
-                                \"p_publish_datetime\": \"2017-08-25 15:30:00\",
-                                \"p_title\": \"BJP says Supreme Court's triple talaq verdict will end communal appeasement politics.\",
-                                \"p_image\": \"http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/card_14618248577791503655685.jpg\",
-                                \"p_share_link\": \"https://peg3z.app.goo.gl/qYPfjFjqTea5uHLR2\",
-                                \"p_option\": [
+    $poll_json = '{
+                                "p_id": "837283",
+                                "p_is_sponsored": "",
+                                "p_sponsored_icon": "",
+                                "p_sponsored_link": "",
+                                "p_publish_datetime": "2017-08-25 15:30:00",
+                                "p_title": "BJP says Supreme Court\'s triple talaq verdict will end communal appeasement politics.",
+                                "p_image": "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/card_14618248577791503655685.jpg",
+                                "p_share_link": "https://peg3z.app.goo.gl/qYPfjFjqTea5uHLR2",
+                                "p_option": [
                                     {
-                                        \"o_id\": \"1031148\",
-                                        \"o_title\": \"\",
-                                        \"o_image\": \"http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/I-agree1981503655508.jpg\"
+                                        "o_id": "1031148",
+                                        "o_title": "",
+                                        "o_image": "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/I-agree1981503655508.jpg"
                                     },
                                     {
-                                        \"o_id\": \"1031149\",
-                                        \"o_title\": \"\",
-                                        \"o_image\": \"http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/22167215-disagree-rubber-stamp-over-a-white-background9401503655569.jpg\"
+                                        "o_id": "1031149",
+                                        "o_title": "",
+                                        "o_image": "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/22167215-disagree-rubber-stamp-over-a-white-background9401503655569.jpg"
                                     }
                                 ]
-                            }";
-    //$n_polls = json_decode($poll_json);
-    $n_polls = (array) json_decode($poll_json);
+                            }';
+    
+    $n_polls = json_decode($poll_json, true);
 
     $data_magazine['id'] = "7";
     $data_magazine['order'] = "7";
