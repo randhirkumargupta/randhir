@@ -1115,6 +1115,27 @@ function homePageJsonPoll() {
     //$n_magazine = getMagazineList(); // homepage.inc
    // $n_polls_data = polls_open_list(0);
     //$n_polls = $n_polls_data['data'];
+    $n_polls['p_id'] = "837283";
+    $n_polls['p_is_sponsored'] = "";
+    $n_polls['p_sponsored_icon'] = "";
+    $n_polls['p_sponsored_link'] = "";
+    $n_polls['p_publish_datetime'] = "2017-08-25 15:30:00";
+    $n_polls['p_title'] = "BJP says Supreme Court\'s triple talaq verdict will end communal appeasement politics.";
+    $n_polls['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/card_14618248577791503655685.jpg";
+    $n_polls['p_share_link'] = "https://peg3z.app.goo.gl/qYPfjFjqTea5uHLR2";
+    
+    $poll_option = array();
+    $poll_option[0]['o_id'] = "1031148";
+    $poll_option[0]['o_title'] = "";
+    $poll_option[0]['o_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/I-agree1981503655508.jpg";
+    
+    $poll_option[1]['o_id'] = "1031149";
+    $poll_option[1]['o_title'] = "";
+    $poll_option[1]['o_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/22167215-disagree-rubber-stamp-over-a-white-background9401503655569.jpg";
+    
+    
+    $n_polls['p_option'] = $poll_option;
+    
     
     $poll_json = '{
                                 "p_id": "837283",
@@ -1139,7 +1160,7 @@ function homePageJsonPoll() {
                                 ]
                             }';
     
-    $n_polls = (array) json_decode($poll_json, true);
+    //$n_polls = (array) json_decode($poll_json, true);
     
 
     $data_magazine['id'] = "7";
@@ -1178,6 +1199,8 @@ function homePageJsonPoll() {
 
     $data_magazine['news'] = (array) $data_newslist;
     $data_magazine = (array) $data_magazine;
+    
+    //var_dump($data_magazine); die();
 
     return $data_magazine;
 }
