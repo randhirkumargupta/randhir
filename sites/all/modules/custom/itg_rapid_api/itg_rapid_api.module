@@ -1843,3 +1843,44 @@ function formateNodeBodyToken($n_body){
     $data['poll_id'] = $poll_id;
     return $data;
 }
+/**
+ * function for  getTechPros
+ * @pram $content_org
+ *
+ * @return array
+ */
+function getTechProsImg($content_org) {
+    //include 'simple_html_dom.php';
+    $str_html = str_get_html($content_org);
+    $img_str = "";
+    foreach($str_html->find('ul[class="pron-cons-img]') as $element){  
+        $img_str = $element;
+    }
+    $str_html2 = str_get_html($img_str);
+    foreach($str_html2->find('img') as $element){  
+        $img_str_img = $element;
+    }
+    $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
+    $src = $xpath->evaluate("string(//img/@src)");
+    //echo $src; die();
+    return $src;
+}
+
+/**
+ * function for  getTechPros
+ * @pram $content_org
+ *
+ * @return array
+ */
+function getTechProsh2($content_org) {
+    //include 'simple_html_dom.php';
+    $str_html = str_get_html($content_org);
+    $h2 = "";
+    foreach($str_html->find('h2') as $element){  
+        $h2 = $element;
+    }
+    $h2 = ltrim($h2, "<h2>");
+    $h2 = rtrim($h2, "</h2>");
+    
+    return $h2;
+}
