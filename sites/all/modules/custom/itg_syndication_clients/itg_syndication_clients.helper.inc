@@ -95,3 +95,10 @@ function getmsn_story_section_array(){
   );
   return $msn_story;
 }
+
+function get_cabbytabby_feed_videos_array(){
+  $cabbytabby_feed_videos = array(
+    '1207580' => 'sosorry.xml'
+  );
+  return $cabbytabby_feed_videos;
+}
