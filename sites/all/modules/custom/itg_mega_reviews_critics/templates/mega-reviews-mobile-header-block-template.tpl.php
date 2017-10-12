@@ -16,7 +16,11 @@ if (function_exists('itg_story_global_comment_last_record')) {
 <div class="comment-mobile desktop-hide">
     <ul>
         <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> <?php print t('Mail to author'); ?></a></li>
-        <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
+         <?php 
+            $whatsapp = $node->title . " ". $actual_link;
+            $whatsapp_text = urlencode($whatsapp); 
+          ?>          
+          <li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
         <?php
         if ($config_name == 'vukkul') {
             ?>
