@@ -1724,7 +1724,7 @@ function itg_event_backend_vukkul_content($nid) {
   $n_title = "Event: " . $node->title;
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($event_author_name);
-  drupal_add_js('http://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
+  drupal_add_js('https://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
   $output = '<script type="text/javascript">
 
                var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
