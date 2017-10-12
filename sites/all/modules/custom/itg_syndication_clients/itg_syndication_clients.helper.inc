@@ -102,3 +102,17 @@ function get_cabbytabby_feed_videos_array(){
   );
   return $cabbytabby_feed_videos;
 }
+
+function getproquest_feed_story_client_array(){
+  $story_sectios = array(
+    '1206578' => 'india.xml',
+    '1206793' => 'food-drink.xml',
+    '1206572' => 'mailtoday.xml',
+    '1206638' => 'mustread.xml',
+    '1206688' => 'technology.xml',
+    '1206584' => 'topstories.xml',
+    '1206589' => 'travel.xml',
+    '1206577' => 'world.xml',
+  );
+  return $story_sectios;
+}
