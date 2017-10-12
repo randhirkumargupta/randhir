@@ -53,6 +53,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_proquest_feed_story.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rssfeeds/ola/video'] = array(
+    'page callback' => 'itg_ola_feed_videos_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_ola_feed_videos.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 

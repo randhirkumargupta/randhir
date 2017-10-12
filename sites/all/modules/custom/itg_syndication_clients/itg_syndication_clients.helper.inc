@@ -103,6 +103,13 @@ function get_cabbytabby_feed_videos_array(){
   return $cabbytabby_feed_videos;
 }
 
+function get_ola_feed_videos_array(){
+  $cabbytabby_feed_videos = array(
+    '1207580' => 'sosorry.xml'
+  );
+  return $cabbytabby_feed_videos;
+}
+
 function getproquest_feed_story_client_array(){
   $story_sectios = array(
     '1206578' => 'india.xml',
