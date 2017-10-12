@@ -74,7 +74,7 @@
                         if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
                           $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
                           $video_kicker = get_video_kicker_by_nid($nid);
-                           drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
+                           drupal_add_js('https://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
                            print '<div class="uploaded-video-list flexslider"><ul class="slides">';
                             foreach ($videoids as $keys => $video_value) {
                           if ($keys != 0) {

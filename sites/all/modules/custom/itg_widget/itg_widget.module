@@ -1226,7 +1226,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
             $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
         }
         //drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
-        echo "<script src='http://content.jwplatform.com/libraries/V30NJ3Gt.js'></script>";
+        echo "<script src='https://content.jwplatform.com/libraries/V30NJ3Gt.js'></script>";
         $hide_player = "";
         $description_slider = "";
         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
