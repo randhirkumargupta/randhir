@@ -29,8 +29,8 @@ function itg_photogallery_menu() {
  */
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 	global $user;
+    $arg = arg();
 	if ($form_id == 'photogallery_node_form') {
-
 		// Filed collection add class.
 
 		foreach ($form['field_gallery_image']['und'] as $delta => $field) {
@@ -45,7 +45,7 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 		$form['field_photogallery_configuration']['und']['#title'] = NULL;
 
 		// checked comment box by default
-		if (!isset($form['#node']->nid)) {
+		if ($arg[0] == 'node' && $arg[1] == "add") {
 			$form['field_photogallery_configuration'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
 		}
 
@@ -74,11 +74,11 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 			),
 		);
 
-		$form['field_story_comment_question']['#states'] = array(
-			'visible' => array(
-				':input[name="field_photogallery_configuration[und][commentbox]"]' => array('checked' => TRUE),
-			)
-		);
+//		$form['field_story_comment_question']['#states'] = array(
+//			'visible' => array(
+//				':input[name="field_photogallery_configuration[und][commentbox]"]' => array('checked' => TRUE),
+//			)
+//		);
 
 		if (!isset($_REQUEST['destination'])) {
 			$destination = '';
