@@ -115,7 +115,6 @@ function get_primary_category_node($nid) {
     $query = db_select('field_data_field_primary_category', 'pc');
     $query->fields('pc', array('field_primary_category_value'));
     $query->condition('pc.entity_id', $nid, '=');
-    $query->condition('pc.bundle', 'story', '=');
     $query->condition('pc.entity_type', 'node', '=');
     $query_result = $query->execute()->fetchAll();
     if (!empty($query_result) && !empty($query_result[0]->field_primary_category_value)) {
