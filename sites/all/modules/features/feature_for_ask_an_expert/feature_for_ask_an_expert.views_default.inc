@@ -168,7 +168,9 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    6 => '6',
     21 => '21',
+    10 => '10',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -438,7 +440,7 @@ else
     15 => 0,
     18 => 0,
   );
-  $handler->display->display_options['path'] = 'ask-an-expert-backend';
+  $handler->display->display_options['path'] = 'ask-an-expert-inqueue-content';
 
   /* Display: Ask an expert question answer */
   $handler = $view->new_display('page', 'Ask an expert question answer', 'page_1');
@@ -545,7 +547,9 @@ else
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
+    6 => '6',
     21 => '21',
+    10 => '10',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';

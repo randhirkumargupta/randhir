@@ -195,9 +195,9 @@
 //      });
 
       // Hiding add more options from answer choices if Answer Type is Rating
-      $("#edit-field-survey-add-questions-und-0-field-survey-answer-type-und").on('change', function(){
-          var selvalue = $(this).val();
-          if(selvalue == "rating") {
+      $("body").on('change', '#edit-field-survey-add-questions-und-0-field-survey-answer-type-und', function() {
+          var selvalue = $( "#edit-field-survey-add-questions-und-0-field-survey-answer-type-und option:selected" ).text();
+          if(selvalue == "Rating") {
             $('#edit-field-survey-add-questions-und-0-field-survey-answer-option-2').hide();
           } else {
             $('#edit-field-survey-add-questions-und-0-field-survey-answer-option-2').show();

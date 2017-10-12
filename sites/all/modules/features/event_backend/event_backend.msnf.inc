@@ -193,14 +193,14 @@ function event_backend_msnf_step_info() {
   $msnf->entity_type = 'node';
   $msnf->bundle = 'event_backend';
   $msnf->data = array(
-    'label' => 'Step6-Media',
+    'label' => 'Step6-Coverage',
     'weight' => '6',
     'children' => array(
       0 => 'field_event_media',
     ),
     'format_type' => 'default',
     'format_settings' => array(
-      'label' => 'Step6-Media',
+      'label' => 'Step6-Coverage',
       'instance_settings' => array(
         'skip_non_required' => 1,
         'hide_if_empty' => 0,

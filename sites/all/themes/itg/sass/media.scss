@@ -1683,6 +1683,9 @@
         }
     }
     /* css end tech page */
+    #block-itg-msi-magazine-calendar {
+        margin: 0;
+    }
 }
 
 @media only screen and (max-width:767px) {
@@ -1889,6 +1892,39 @@
         line-height: 30px;
         font-size: 20px;
     }
+    /* css start add by arun */
+    .live-block #cricketblog .batBollDetails .batsmanDetails {
+        width: 100%
+    }
+    .live-block #cricketblog .batBollDetails .bollerDetails {
+        width: 100%
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .sectiontime {
+        font-size: 13px;
+    }
+    .live-block #cricketblog .batBollDetails .bollerDetails .sectiontime {
+        font-size: 13px;
+    }
+    .live-block h1 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+    .live-block #cricketblog .batBollDetails {
+        padding: 5px;
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator {
+        padding-right: 14px;
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator:before {
+        right: 8px;
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator {
+        padding-right: 14px;
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator:before {
+        right: 8px;
+    }
+    /* css end add by arun */
 }
 
 @media all and (min-width: 680px) {
@@ -2530,6 +2566,9 @@
     }
     #content .node-event_registration-form .form-actions .form-submit {
         margin: 0;
+    }
+    .election-page .election-graph-5 {
+        margin-top: -20px;
     }
 }
 
@@ -3633,6 +3672,10 @@
     #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
         padding: 32.4px 5px 20.2px 10px !important;
     }
+    .live-block h1 {
+        font-size: 30px;
+        line-height: 36px;
+    }
 }
 
 @media (max-width: 800px) {
@@ -3684,6 +3727,30 @@
     }
     #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
         padding: 10px!important;
+    }
+    .story-photo-list-wrapper .slick-next {
+        right: -18px;
+    }
+    .tech-pros-cons-main h2 {
+        margin-left: 0%;
+        overflow: hidden;
+        width: 100%;
+    }
+    ul.pron-cons-img {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    ul.pron-cons-img li img {
+        margin-right: 0;
+        margin-top: 0px;
+        width: 100%;
+    }
+    ul.tech-pros {
+        margin-left: 6%;
+    }
+    ul.tech-pros,
+    ul.tech-cons {
+        width: 46%;
     }
 }
 
