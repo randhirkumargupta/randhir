@@ -18,6 +18,9 @@ if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
     
   }
 }
+
+$event_section = $host_node->field_event_section['und'][0]['target_id'];
+$flag = TRUE;
 $banner_image = file_create_url($host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
 $banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
 $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';
@@ -25,6 +28,21 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
 <div id="page">
   <div class="event-sidebar">
     <header class="header" id="header" role="banner">
+        <?php if(isset($event_section) && !empty($event_section)):?>
+        <?php
+          $tpl_name = 'section_header_' . $event_section . '_block';
+          if(!empty(theme($tpl_name))){
+            $menu_data = get_event_menu($host_node);
+            $data['menu_manager'] = $menu_data;
+            $return_data['data'] = $data;
+            $return_data['is_event'] = TRUE;
+            $return_data['template_name'] = $tpl_name;
+            print  theme($tpl_name, array('data' => $return_data));
+            $flag = FALSE;
+          }
+        ?>
+        <?php endif;?>
+        <?php if($flag):?>
             <section class="header-top">
                 <div class="event-header-banner">
                   <img src="<?php echo $banner_image; ?>" alt="">
@@ -61,6 +79,7 @@ $menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['r
               <div class="event-menu" style="background: <?php print $menu_background_color; ?>"> <?php print render($page['header_event']); ?></div>
                     
             </section>
+        <?php endif;?>
         </header>
     <?php
       // Render the sidebars to see if there's anything in them.
