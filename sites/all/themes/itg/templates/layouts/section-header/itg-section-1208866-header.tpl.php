@@ -1,6 +1,7 @@
 <?php
 global $base_url;
 ?>
+<div id="section-header-event-1208866" class="mind-rocks-youth-summit-2017">
 <div class="header-ads header_ltop_container">
   <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
@@ -55,72 +56,4 @@ global $base_url;
   </nav>
 
 </div>
-
-<style>
-.logo{display:none;}
-#block-itg-layout-manager-header-block, .header_ltop_container{
-	background: #e7e7e7 url(http://media2.intoday.in/indiatoday/salaamcricket/2017/images/header-bg.jpg) no-repeat 0 0;
-    padding: 10px 0 0px;
-}
-.header_ltop_container .main_logo{
-	float: left;
-    margin-top: 33px;
-	}
-.header_ltop_container .topRight{
-	margin: 0px 0 0 0;
-    padding: 0px;
-}
-.header_ltop_container .photosec{
-	    float: left;
-    margin-top: 52px;
-}
-.header_ltop_container .brandLogo ul{
-	    margin: 0px;
-    padding: 0px;
-    list-style: none;
-}
-.header_ltop_container .brandLogo ul li{
-	    margin: 0px 5px 0 0;
-    padding: 0px;
-    display: inline-block;
-}
-.header_ltop_container .brandLogo{
-	margin: 94px 0 0 0px;
-    padding: 0px;
-    float: left;
-    text-align: center;
-}
-.navigation{
-	margin-top: 0px!important; 
-}
-.navigation .menu li a:after{
-	background: #000;
-}
-
-.navigation .menu li a{
-	    color: #e0e0e0;
-	text-transform: uppercase;
-    font-weight: 500;
-    padding: 0 10px;
-    border-top: none;
-    height: 37px;
-    white-space: nowrap;
-    position: relative;
-    font-size: 14px;
-    font-size: 0.875rem;
-    line-height: 37px;
-}
-.navigation .menu li{
-	    float: left;
-}
-.navigation .menu, .navigation .menu li ul{
-	list-style-type: none;
-}
-.navigation .menu{
-	margin-right: 50px;
-    max-width: 985px;
-}
-
-.navigation{    background: #000!important;}
-</style>
-
+</div>
