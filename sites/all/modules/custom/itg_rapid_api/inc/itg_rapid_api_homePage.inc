@@ -1116,7 +1116,7 @@ function homePageJsonPoll() {
    // $n_polls_data = polls_open_list(0);
     //$n_polls = $n_polls_data['data'];
     
-    $poll_json = " {
+    $poll_json = " [
                                 \"p_id\": \"837283\",
                                 \"p_is_sponsored\": \"\",
                                 \"p_sponsored_icon\": \"\",
@@ -1137,7 +1137,7 @@ function homePageJsonPoll() {
                                         \"o_image\": \"http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/22167215-disagree-rubber-stamp-over-a-white-background9401503655569.jpg\"
                                     }
                                 ]
-                            }";
+                            ]";
     //$n_polls = json_decode($poll_json);
     $n_polls = (array) json_decode($poll_json,true);
 
