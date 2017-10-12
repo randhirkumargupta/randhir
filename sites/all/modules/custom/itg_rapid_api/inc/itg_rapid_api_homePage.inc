@@ -1115,6 +1115,7 @@ function homePageJsonPoll() {
     //$n_magazine = getMagazineList(); // homepage.inc
    // $n_polls_data = polls_open_list(0);
     //$n_polls = $n_polls_data['data'];
+    $n_polls = array();
     $n_polls['p_id'] = "837283";
     $n_polls['p_is_sponsored'] = "";
     $n_polls['p_sponsored_icon'] = "";
