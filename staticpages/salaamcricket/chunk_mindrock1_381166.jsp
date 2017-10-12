@@ -68,7 +68,7 @@ function changeRating1(contentId,content_type,action,part_id, upc, dwnc)
 	upc = document.getElementById('upcount'+part_id).firstChild.nodeValue;
 	downc = document.getElementById('downcount'+part_id).firstChild.nodeValue;
 	totalc = upc+downc;
-	url="http://indiatoday.intoday.in/highlights/rating_data_highlights.jsp?content_id="+contentId+"&content_type="+content_type+"&action="+action+"&upcount="+upc+"&downcount="+downc+"&totalcount="+totalc+"&part_id="+part_id;
+	url="/highlights/rating_data_highlights.jsp?content_id="+contentId+"&content_type="+content_type+"&action="+action+"&upcount="+upc+"&downcount="+downc+"&totalcount="+totalc+"&part_id="+part_id;
 	http2.open("GET", url, true);
 	http2.onreadystatechange = handleHttpResponse2;
 	http2.send(null);
@@ -124,7 +124,7 @@ function changeRating1(contentId,content_type,action,part_id, upc, dwnc)
 	<link href="http://businesstoday.intoday.in/budget/jquery.mCustomScrollbar.css" rel="stylesheet" />
 </head>
 <body>
-<!-- <div class="strheadline"><div class="headertext"><a href="http://indiatoday.intoday.in/story/mind-rocks-youth-summit-2013---highlights/1/259679.html" target="_blank">HIGHLIGHTS</a></div></div> -->
+<!-- <div class="strheadline"><div class="headertext"><a href="/story/mind-rocks-youth-summit-2013---highlights/1/259679.html" target="_blank">HIGHLIGHTS</a></div></div> -->
 <div class="clear"></div>
 	<!-- content block -->
 	<div id="content_1" class="content">

@@ -207,9 +207,9 @@ section#left {
 <li><a style="cursor:pointer">WOMAN SUMMIT ARCHIVE</a>
 <ul style="width:232px; margin-top:32px;">
 <li><a href="http://indiatoday.intoday.in/womansummit/delhi/2013/index.php" target="_blank" style="width:232px; border-top:1px solid #fff;">2013</a></li>
-<li><a href="http://indiatoday.in/womansummit/2011/index.php" target="_blank" style="width:232px; border-top:1px solid #fff;">2011</a></li>
-<li><a href="http://indiatoday.in/womansummit/2010/index.php?issueid=34" target="_blank" style="width:232px; border-top:1px solid #fff;">2010</a></li>
-<li><a href="http://indiatoday.in/womansummit/2009/index.php?issueid=33" target="_blank" style="width:232px; border-top:1px solid #fff;">2009</a></li>
+<li><a href="/womansummit/2011/index.php" target="_blank" style="width:232px; border-top:1px solid #fff;">2011</a></li>
+<li><a href="/womansummit/2010/index.php?issueid=34" target="_blank" style="width:232px; border-top:1px solid #fff;">2010</a></li>
+<li><a href="/womansummit/2009/index.php?issueid=33" target="_blank" style="width:232px; border-top:1px solid #fff;">2009</a></li>
 </ul>
 </li>-->
 </ul>
@@ -1192,7 +1192,7 @@ scrolling="no"></iframe>
     <div class="venueaddredd">
       <div itemtype="http://data-vocabulary.org/Event" itemscope="">
         <div style="font: bold 20px/24px Arial-Black; color: #fef200;">VENUE DETAILS</div>
-        <!-- <a itemprop="http://indiatoday.in/womansummit/index.php" href="http://indiatoday.in/womansummit/index.php" style=" text-decoration:none;">-->
+        <!-- <a itemprop="http://indiatoday.in/womansummit/index.php" href="/womansummit/index.php" style=" text-decoration:none;">-->
         <span itemprop="summary" style="font:bold 17px/17px arial; text-transform:uppercase;color: #000;">India Today Woman Summit & Awards 2014</span>
         <!--</a>-->
         <br>

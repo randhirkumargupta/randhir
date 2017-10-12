@@ -206,9 +206,9 @@ section#left {
 <li><a style="cursor:pointer">WOMAN SUMMIT ARCHIVE</a>
 <ul style="width:232px; margin-top:32px;">
 <li><a href="http://indiatoday.intoday.in/womansummit/delhi/2013/index.php" target="_blank" style="width:232px; border-top:1px solid #fff;">2013</a></li>
-<li><a href="http://indiatoday.in/womansummit/2011/index.php" target="_blank" style="width:232px; border-top:1px solid #fff;">2011</a></li>
-<li><a href="http://indiatoday.in/womansummit/2010/index.php?issueid=34" target="_blank" style="width:232px; border-top:1px solid #fff;">2010</a></li>
-<li><a href="http://indiatoday.in/womansummit/2009/index.php?issueid=33" target="_blank" style="width:232px; border-top:1px solid #fff;">2009</a></li>
+<li><a href="/womansummit/2011/index.php" target="_blank" style="width:232px; border-top:1px solid #fff;">2011</a></li>
+<li><a href="/womansummit/2010/index.php?issueid=34" target="_blank" style="width:232px; border-top:1px solid #fff;">2010</a></li>
+<li><a href="/womansummit/2009/index.php?issueid=33" target="_blank" style="width:232px; border-top:1px solid #fff;">2009</a></li>
 </ul>
 </li>-->
 </ul>

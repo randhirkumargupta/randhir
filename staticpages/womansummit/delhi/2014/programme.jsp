@@ -561,7 +561,7 @@
         <div class="pritepart pborder">
           <div class="pleft" style="float: none; width: 100%">
             <!--<div class="psession">Session Careers <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
-            <div class="psessiontitle">Size Doesn’t Matter Talent Does</div>
+            <div class="psessiontitle">Size Doesnï¿½t Matter Talent Does</div>
             <!--<div class="ptext">The bonafide drama queen of Indian Television and film producer, Kapoor has always broken new ground whether through her TV serials or Bollywood ventures. What are her inspirations? Whom does she rely on? Kapoor reveals how she always knows what audiences really want. </div>-->
             <table width="100%" cellspacing="5" cellpadding="0" border="0">
               <tbody>
@@ -762,7 +762,7 @@
     <div class="venueaddredd">
       <div itemtype="http://data-vocabulary.org/Event" itemscope="">
         <div style="font: bold 20px/24px Arial-Black; color: #fef200;">VENUE DETAILS</div>
-        <!-- <a itemprop="http://indiatoday.in/womansummit/index.php" href="http://indiatoday.in/womansummit/index.php" style=" text-decoration:none;">-->
+        <!-- <a itemprop="http://indiatoday.in/womansummit/index.php" href="/womansummit/index.php" style=" text-decoration:none;">-->
         <span itemprop="summary" style="font:bold 17px/17px arial; text-transform:uppercase;color: #000;">India Today Woman Summit & Awards 2014</span>
         <!--</a>-->
         <br>

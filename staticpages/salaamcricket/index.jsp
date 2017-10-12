@@ -144,8 +144,8 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 0;float:left}
    <div class="menu">
      <ul>
          <li><a href="index.jsp" id="home">Home</a></li>
-         <!--<li><a href="http://indiatoday.intoday.in/cricket_conclave/aboutus.jsp" id="about">About</a></li>-->
-         
+         <!--<li><a href="/cricket_conclave/aboutus.jsp" id="about">About</a></li>-->
+
          <li><a href="/salaamcricket/sponsor.jsp" id="sponsors">Sponsors</a></li>
          <li><a href="/salaamcricket/speakers.jsp" id="speakers">Speakers</a></li>
          <li><a href="/salaamcricket/programme.jsp" id="programme">Programme</a></li>
@@ -180,7 +180,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 0;float:left}
 <style>
 .mindr-consubrtbox img{display:none;}
 .mindr-headline ul{margin:0; padding:0;}
-</style>	
+</style>
 <style>
 body{margin:0; padding:0; font-family:roboto; font-size:12px; background:#e5e5e5}
 a {color:black; text-decoration:none;}
@@ -256,7 +256,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
     <div class="live_title"> <span class="leftlivetitle">Rocking <span style="font-weight:100;">Sessions</span></span> <span style="width:225px; text-align:right;" class="liveupdatedate"> <span class="datemh">SATURDAY, 6<sup>th</sup> SEPTEMBER, 2014</span></span>
       <div class="clear"></div>
     </div>
-    <div class="livepage"> 
+    <div class="livepage">
       <!--   <iframe src="chunk_live.html" frameborder="0" scrolling="no" height="70" width="470"></iframe>-->
       <div class="clear"></div>
       <iframe width="470" height="300" frameborder="0" allowfullscreen="" src="http://www.youtube.com/embed/CUXnY6txI8A?feature=player_detailpage"></iframe>
@@ -264,18 +264,18 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
     </div>
   </div>
   <div class="highlight" style="width:200px; display:none">
-    <div class="highlight_head" style="padding-bottom:10px; margin-bottom:10px;"> <span class="highlighttitle" style="font-size:22px;">Highlights</span> <span class="highlight_more" style="width:49px;"><a href="http://indiatoday.intoday.in/story/mindrocks-delhi-2014-highlights/1/381166.html" target="_blank()">see all..</a></span>
+    <div class="highlight_head" style="padding-bottom:10px; margin-bottom:10px;"> <span class="highlighttitle" style="font-size:22px;">Highlights</span> <span class="highlight_more" style="width:49px;"><a href="/story/mindrocks-delhi-2014-highlights/1/381166.html" target="_blank()">see all..</a></span>
       <div class="clear"></div>
     </div>
     <iframe width="200" scrolling="no" height="253" frameborder="0" style="overflow-x: hidden;" src="/salaamcricket/chunk_mindrock1_381166.jsp" id="highlight"></iframe>
   </div>
   <div class="clear"></div>
-  
+
   <!--  <div style="margin:15px 0 0 0">
 
    <div class="clear"></div>
    </div> -->
-  
+
   <div id="contabbing">
     <div class="main-pro-head bott-marg">
       <h3><span class="side_chunk_title-red">session</span> wise coverage</h3>
@@ -287,18 +287,18 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
           <div class="mindr-contimeln">11.00 - 11.15 </div>
           <div class="conritepart">
             <div class="consubrtpart">
-              <div class="mindr-sessiontitle"><a href="http://indiatoday.intoday.in/video/mind-rocks-2013-begins-with-rockstart-concert-in-new-delhi/1/310933.html" style="text-decoration:none; color:#000;">Welcome Address </a></div>
+              <div class="mindr-sessiontitle"><a href="/video/mind-rocks-2013-begins-with-rockstart-concert-in-new-delhi/1/310933.html" style="text-decoration:none; color:#000;">Welcome Address </a></div>
               <div class="concomm">
               <div class="consubleftbox">
                   <!--<div class="mindr-headline">
-                  <ul><li><a target="_blank" href="http://indiatoday.intoday.in/story/india-today-roundtable-india-us-natural-strategic-allies-aroon-purie/1/392986.html">India, US natural strategic allies: Aroon Purie</a></li>
+                  <ul><li><a target="_blank" href="/story/india-today-roundtable-india-us-natural-strategic-allies-aroon-purie/1/392986.html">India, US natural strategic allies: Aroon Purie</a></li>
                                 </ul>
                                 </div>-->
                   <div class="clear"></div>
                   <div class="consubleftbox links">
-                  <!-- <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/aroon-purie-welcome-address-at-mind-rocks/1/7699.html#photo1">Session Photos</a> |-->
-                  
-                   <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/salaam-cricket-aroon-purie-welcome-address-india-today-conclave/1/396425.html"> Session Video</a></div>
+                  <!-- <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/aroon-purie-welcome-address-at-mind-rocks/1/7699.html#photo1">Session Photos</a> |-->
+
+                   <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/salaam-cricket-aroon-purie-welcome-address-india-today-conclave/1/396425.html"> Session Video</a></div>
                 </div>
                 <div class="right">
                   <div class="mindr-consubrtbox"><img width="72" height="72" border="0" align="left" title="Aroon Puri" class="imgs" alt="Aroon Purie" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2013/speaker/aroon.jpg">
@@ -320,11 +320,11 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
               <div class="mindr-sessiontitle"><a href="" style="text-decoration:none; color:#000;">Pressures of the World Cup</a></div>
               <div class="concomm">
                 <div class="consubleftbox">
-                  <div class="mindr-headline"><ul><li><a target="_blank" href="http://indiatoday.intoday.in/story/salaam-cricket-2014-sourav-ganguly-arjuna-ranatunga-clive-lloyd/1/396427.html"> Indians won't buckle under pressure, says Sourav </a></li>
+                  <div class="mindr-headline"><ul><li><a target="_blank" href="/story/salaam-cricket-2014-sourav-ganguly-arjuna-ranatunga-clive-lloyd/1/396427.html"> Indians won't buckle under pressure, says Sourav </a></li>
                                 </ul></div>
                   <div class="clear"></div>
-                  <div class="consubleftbox links"> 
-                    <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/salaam-cricket-sourav-ganguly-clive-lloyd-arjuna-ranatunga/1/13162.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/salaam-cricket-clive-lloyd-arjuna-ranatunga-allan-border-sourav-ganguly-world-cup-india-today-conclave/1/396471.html
+                  <div class="consubleftbox links">
+                    <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/salaam-cricket-sourav-ganguly-clive-lloyd-arjuna-ranatunga/1/13162.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/salaam-cricket-clive-lloyd-arjuna-ranatunga-allan-border-sourav-ganguly-world-cup-india-today-conclave/1/396471.html
 ">Session Video</a> </div>
                 </div>
                 <div class="right">
@@ -362,13 +362,13 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
               <div class="mindr-sessiontitle">Silly Point with Vikram Sathaye </div>
               <div class="concomm">
                 <div class="consubleftbox">
-                  <!--<div class="mindr-headline"><ul><li> <a target="_blank" href="http://indiatoday.intoday.in/story/india-today-roundtable-ram-madhav-says-get-used-to-india-that-will-not-bend/1/392989.html">Get used to India that'll not bend: Ram Madhav</a></li>
+                  <!--<div class="mindr-headline"><ul><li> <a target="_blank" href="/story/india-today-roundtable-ram-madhav-says-get-used-to-india-that-will-not-bend/1/392989.html">Get used to India that'll not bend: Ram Madhav</a></li>
                                 </ul></div>-->
                   <div class="clear"></div>
-                  <div class="consubleftbox links"> 
-                    <!--<img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/india-today-roundtable-ram-madhav-unleashing-asias-next-superpower/1/12914.html">Session Photos</a> | -->
-                    
-                    <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/salaam-cricket-vikram-sathaye-comedian-imitates-famous-cricketers-india-today-conclave/1/396435.html">Session Video</a></div>
+                  <div class="consubleftbox links">
+                    <!--<img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/india-today-roundtable-ram-madhav-unleashing-asias-next-superpower/1/12914.html">Session Photos</a> | -->
+
+                    <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/salaam-cricket-vikram-sathaye-comedian-imitates-famous-cricketers-india-today-conclave/1/396435.html">Session Video</a></div>
                 </div>
                 <div class="right">
                   <div class="clear"></div>
@@ -389,11 +389,11 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
               <div class="mindr-sessiontitle">Thunder Down Under</div>
               <div class="concomm">
                 <div class="consubleftbox">
-                  <div class="mindr-headline"><ul><li><a target="_blank" href="http://indiatoday.intoday.in/story/salaam-cricket-ricky-ponting-allan-border-steve-waugh-thunder-down-under/1/396452.html"> Attitude is positive aggressive cricket, say Aus legends </a></li>
+                  <div class="mindr-headline"><ul><li><a target="_blank" href="/story/salaam-cricket-ricky-ponting-allan-border-steve-waugh-thunder-down-under/1/396452.html"> Attitude is positive aggressive cricket, say Aus legends </a></li>
                                 </ul></div>
                   <div class="clear"></div>
-                  <div class="consubleftbox links"> 
-                    <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/salaam-cricket-2014-allan-border-steve-waugh-ricky-ponting/1/13166.html ">Session Photos</a> <!--| <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/india-today-global-roundtable-ram-madhav-bjp-rss-fdi-new-york-india-today-group/1/392994.html">Session Video</a>--></div>
+                  <div class="consubleftbox links">
+                    <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/salaam-cricket-2014-allan-border-steve-waugh-ricky-ponting/1/13166.html ">Session Photos</a> <!--| <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/india-today-global-roundtable-ram-madhav-bjp-rss-fdi-new-york-india-today-group/1/392994.html">Session Video</a>--></div>
                 </div>
                 <div class="right">
                   <div class="mindr-consubrtbox"><img width="72" height="72" border="0" align="left" title="Ram Madhav" class="imgs" alt="Ram Madhav" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2013/speaker/aroon.jpg">
@@ -430,13 +430,13 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
                <div class="consubleftbox">
                   <div class="mindr-headline">
                     <ul>
-                      <li><a target="_blank" href="http://indiatoday.intoday.in/story/salaam-cricket-aamer-sohail-ajay-jadeja-murali-kartik-sourav-ganguly/1/396439.html">Dhoni's team shouldn't worry about Pakistan in World Cup: Aamer Sohail at Salaam Cricket</a></li>
+                      <li><a target="_blank" href="/story/salaam-cricket-aamer-sohail-ajay-jadeja-murali-kartik-sourav-ganguly/1/396439.html">Dhoni's team shouldn't worry about Pakistan in World Cup: Aamer Sohail at Salaam Cricket</a></li>
                     </ul>
                   </div>
-                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/salaam-cricket-sourav-ganguly-aamer-sohail-madan-lal-ajay-jadeja-india-today/1/13163.html">Session Photos</a>  | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/salaam-cricket-sourav-ganguly-aamer-sohail-madan-lal-ajay-jadeja-india-today-conclave/1/396460.html">Session Video</a> 
+                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/salaam-cricket-sourav-ganguly-aamer-sohail-madan-lal-ajay-jadeja-india-today/1/13163.html">Session Photos</a>  | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/salaam-cricket-sourav-ganguly-aamer-sohail-madan-lal-ajay-jadeja-india-today-conclave/1/396460.html">Session Video</a>
                   </div>
                 </div>
-                <div class="right">                  
+                <div class="right">
                   <div class="clear"></div>
                   <div class="mindr-consubrtbox"><img width="72" height="72" border="0" align="left" title="Husain Haqqani" class="imgs" alt="Husain Haqqani" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2013/speaker/aroon.jpg">
                     <div class="mindr-consubhead  marg-top">Sourav Ganguly</div>
@@ -503,11 +503,11 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
                 <!--<div class="consubleftbox">
                   <div class="mindr-headline">
                     <ul>
-                      <li><a target="_blank" href="http://indiatoday.intoday.in/story/india-today-global-roundtable-frank-wisner-jairam-ramesh-mark-brunner/1/392995.html
+                      <li><a target="_blank" href="/story/india-today-global-roundtable-frank-wisner-jairam-ramesh-mark-brunner/1/392995.html
 ">Modi, Obama should work towards free trade regime: Frank Wisner </a></li>
                    </ul>
                   </div>
-                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/india-today-global-roundtable-re-booting-indo-us-ties--frank-wisner-mark-brunner-siddharth-nath-singh/1/12917.html">Session Photos</a>  | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/rebooting-india-us-ties-india-today-global-roundtable-frank-wisner-jairam-ramesh-mark-brunner-sidharth-nath-singh/1/393001.html">Session Video</a>
+                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/india-today-global-roundtable-re-booting-indo-us-ties--frank-wisner-mark-brunner-siddharth-nath-singh/1/12917.html">Session Photos</a>  | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/rebooting-india-us-ties-india-today-global-roundtable-frank-wisner-jairam-ramesh-mark-brunner-sidharth-nath-singh/1/393001.html">Session Video</a>
                   </div>
                 </div>-->
                 <div class="right">
@@ -535,13 +535,13 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
                 <div class="consubleftbox">
                   <div class="mindr-headline">
                     <ul>
-                      <li><a target="_blank" href="http://indiatoday.intoday.in/story/salaam-cricket-sunil-gavaskar-steve-waugh-india-in-australia/1/396474.html">
+                      <li><a target="_blank" href="/story/salaam-cricket-sunil-gavaskar-steve-waugh-india-in-australia/1/396474.html">
  Sunil Gavaskar says India must take 20 wickets to beat Aus</a></li>
                     </ul>
                   </div>
-                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html"> Session Photos </a> <!-- | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="
-http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-roundtable-evan-feigenbaum-bruce-jones-lisa-curtis-samir-saran/1/393006.html
-">Session Video</a>--> 
+                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a href="/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html"> Session Photos </a> <!-- | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="
+/video/indias-role-in-the-world-india-today-global-roundtable-evan-feigenbaum-bruce-jones-lisa-curtis-samir-saran/1/393006.html
+">Session Video</a>-->
                    </div>
                 </div>
                 <div class="right">
@@ -564,7 +564,7 @@ http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-r
           </div>
           <div class="clear"></div>
         </div>
-        
+
         <div class="contabbox">
           <div class="mindr-contimeln">15.45 - 16.00</div>
           <div class="conritepart">
@@ -584,10 +584,10 @@ http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-r
                 <!--<div class="consubleftbox">
                   <div class="mindr-headline">
                     <ul>
-                      <li><a target="_blank" href="http://indiatoday.intoday.in/story/jagdish-bhagwati-india-today-global-roundtable-modi-hasnt-disappointed-me/1/393005.html">Modi hasn't disappointed so far: Jagdish Bhagwati </a></li>
+                      <li><a target="_blank" href="/story/jagdish-bhagwati-india-today-global-roundtable-modi-hasnt-disappointed-me/1/393005.html">Modi hasn't disappointed so far: Jagdish Bhagwati </a></li>
                     </ul>
                   </div>
-                  <div class="consubleftbox links"> <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/aroon-purie-jagdish-bhagwati-india-today-global-roundtable-new-york-india-todday-group/1/12920.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/the-golden-bird-takes-flight-ndia-today-global-roundtable-jagdish-bhagwati-aroon-purie-new-york/1/393010.html">Session Video</a> 
+                  <div class="consubleftbox links"> <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/aroon-purie-jagdish-bhagwati-india-today-global-roundtable-new-york-india-todday-group/1/12920.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/the-golden-bird-takes-flight-ndia-today-global-roundtable-jagdish-bhagwati-aroon-purie-new-york/1/393010.html">Session Video</a>
                   </div>
                 </div>-->
                 <div class="right">
@@ -619,12 +619,12 @@ http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-r
           </div>
           <div class="clear"></div>
         </div>
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
         <div class="contabbox">
           <div class="mindr-contimeln">16.30 - 17.15</div>
           <div class="conritepart">
@@ -634,14 +634,14 @@ http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-r
                 <!--<div class="consubleftbox">
                   <div class="mindr-headline">
                     <ul>
-                      <li><a target="_blank" href="http://indiatoday.intoday.in/story/india-today-global-roundtable-dial-india-for-investment/1/393018.html
+                      <li><a target="_blank" href="/story/india-today-global-roundtable-dial-india-for-investment/1/393018.html
 ">India's software has changed, not hardware: Gita Gopinath</a></li>
                     </ul>
                   </div>
-                  <div class="consubleftbox links"> <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/dial-india-for-investment--india-today-global-roundtable/1/12922.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/india-today-global-roundtable-ajit-gulabchand-ajay-shriram-prakash-p.-hinduja-rajiv-modi-chandrajit-banerjee-gita-gopinath-jayant-sinha-kanwal-rekhi-aroon-purie/1/393024.html">Session Video</a> 
+                  <div class="consubleftbox links"> <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/dial-india-for-investment--india-today-global-roundtable/1/12922.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/india-today-global-roundtable-ajit-gulabchand-ajay-shriram-prakash-p.-hinduja-rajiv-modi-chandrajit-banerjee-gita-gopinath-jayant-sinha-kanwal-rekhi-aroon-purie/1/393024.html">Session Video</a>
                   </div>
                 </div>-->
-                <div class="right"> 
+                <div class="right">
                   <div class="mindr-consubrtbox"><img width="72" height="72" border="0" align="left" title="Sunil Bharti Mittal" class="imgs" alt="Sunil Bharti Mittal" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2013/speaker/aroon.jpg">
                     <div class="mindr-consubhead  marg-top">Kapil Dev</div>
                     <div>Former World Cup Winning Captain , India</div>
@@ -688,14 +688,14 @@ http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-r
                 <!--<div class="consubleftbox">
                   <div class="mindr-headline">
                     <ul>
-                      <li><a target="_blank" href="http://indiatoday.intoday.in/story/india-today-global-roundtable-dial-india-for-investment/1/393018.html
+                      <li><a target="_blank" href="/story/india-today-global-roundtable-dial-india-for-investment/1/393018.html
 ">India's software has changed, not hardware: Gita Gopinath</a></li>
                     </ul>
                   </div>
-                  <div class="consubleftbox links"> <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/dial-india-for-investment--india-today-global-roundtable/1/12922.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/india-today-global-roundtable-ajit-gulabchand-ajay-shriram-prakash-p.-hinduja-rajiv-modi-chandrajit-banerjee-gita-gopinath-jayant-sinha-kanwal-rekhi-aroon-purie/1/393024.html">Session Video</a> 
+                  <div class="consubleftbox links"> <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/dial-india-for-investment--india-today-global-roundtable/1/12922.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/india-today-global-roundtable-ajit-gulabchand-ajay-shriram-prakash-p.-hinduja-rajiv-modi-chandrajit-banerjee-gita-gopinath-jayant-sinha-kanwal-rekhi-aroon-purie/1/393024.html">Session Video</a>
                   </div>
                 </div>-->
-                <div class="right"> 
+                <div class="right">
                   <div class="mindr-consubrtbox"><img width="72" height="72" border="0" align="left" title="Sunil Bharti Mittal" class="imgs" alt="Sunil Bharti Mittal" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2013/speaker/aroon.jpg">
                     <div class="mindr-consubhead  marg-top">Sunil Gavaskar</div>
                     <div>Former Captain, India</div>
@@ -761,7 +761,7 @@ http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-r
           </div>
           <div class="clear"></div>
         </div>
-        
+
         <div class="contabbox">
           <div class="mindr-contimeln">19.15 - 21.00</div>
           <div class="conritepart">
@@ -771,14 +771,14 @@ http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-r
                 <!--<div class="consubleftbox">
                   <div class="mindr-headline">
                     <ul>
-                      <li><a target="_blank" href="http://indiatoday.intoday.in/story/india-today-global-roundtable-dial-india-for-investment/1/393018.html
+                      <li><a target="_blank" href="/story/india-today-global-roundtable-dial-india-for-investment/1/393018.html
 ">India's software has changed, not hardware: Gita Gopinath</a></li>
                     </ul>
                   </div>
-                  <div class="consubleftbox links"> <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="http://indiatoday.intoday.in/gallery/dial-india-for-investment--india-today-global-roundtable/1/12922.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="http://indiatoday.intoday.in/video/india-today-global-roundtable-ajit-gulabchand-ajay-shriram-prakash-p.-hinduja-rajiv-modi-chandrajit-banerjee-gita-gopinath-jayant-sinha-kanwal-rekhi-aroon-purie/1/393024.html">Session Video</a> 
+                  <div class="consubleftbox links"> <img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a target="_blank" href="/gallery/dial-india-for-investment--india-today-global-roundtable/1/12922.html">Session Photos</a> | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="/video/india-today-global-roundtable-ajit-gulabchand-ajay-shriram-prakash-p.-hinduja-rajiv-modi-chandrajit-banerjee-gita-gopinath-jayant-sinha-kanwal-rekhi-aroon-purie/1/393024.html">Session Video</a>
                   </div>
                 </div>-->
-                <div class="right"> 
+                <div class="right">
                   <div class="mindr-consubrtbox"><img width="72" height="72" border="0" align="left" title="Sunil Bharti Mittal" class="imgs" alt="Sunil Bharti Mittal" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2013/speaker/aroon.jpg">
                     <div class="mindr-consubhead  marg-top">Clive Lloyd</div>
                     <div>1975 & 1979 Champion </div>
@@ -832,8 +832,8 @@ http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-r
           </div>
           <div class="clear"></div>
         </div>
-        
-        
+
+
         <!--<div class="contabbox">
           <div class="mindr-contimeln">18.30 to 20.30</div>
           <div class="conritepart">
@@ -865,7 +865,7 @@ http://indiatoday.intoday.in/video/indias-role-in-the-world-india-today-global-r
 <!--<div class="side_chunk">
 <div class="side_chunk_title">
 	<span class="side_chunk_title-red">from the</span> chairman</div>
-    
+
     <div class="chairman">We are a country hungry for capital, we are hungry for growth, we are hungry for energy, we are hungry for education, we are hungry for opportunity and above all we are hungry for strong clear honest leadership wherever it<br> comes from. We are <br />
 a country straining<br> at the leash. We need<br> a leader who can bring<br>
   everyone together<br> to
@@ -878,7 +878,7 @@ country.
 	    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/play-button.png" style="float:right; margin-top:-5px">
     	<span>Aroon Purie,</span> Chairman<br>
 		The India Today Group
-        
+
     </div>
 </div>-->
 
@@ -899,20 +899,20 @@ country.
 <h2 style="color:#de1e2b; margin-bottom:15px;">Photos</h2>
 
 <ul class="short_vidoes">
-	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-sourav-ganguly-clive-lloyd-arjuna-ranatunga/1/13162.html
+	<li><a href="/gallery/salaam-cricket-sourav-ganguly-clive-lloyd-arjuna-ranatunga/1/13162.html
 " target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/1_98_101814093659.jpg" /></a></li>
-	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-2014-allan-border-steve-waugh-ricky-ponting/1/13166.html" target="_blank">
+	<li><a href="/gallery/salaam-cricket-2014-allan-border-steve-waugh-ricky-ponting/1/13166.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/2_98_101814093659.jpg" /></a></li>
-	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-sourav-ganguly-aamer-sohail-madan-lal-ajay-jadeja-india-today/1/13163.html" target="_blank">
+	<li><a href="/gallery/salaam-cricket-sourav-ganguly-aamer-sohail-madan-lal-ajay-jadeja-india-today/1/13163.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/3_98_101814093659.jpg" />
     </a></li>
-	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html" target="_blank">
+	<li><a href="/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/4_98_101814093659.jpg" />
     </a></li>
-	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-all-the-best-india/1/13171.html" target="_blank">
+	<li><a href="/gallery/salaam-cricket-all-the-best-india/1/13171.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/5_98_101814093659.jpg" />
     </a></li>
-	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-winning-the-world-cup---start-of-a-revolution/1/13172.html" target="_blank">
+	<li><a href="/gallery/salaam-cricket-winning-the-world-cup---start-of-a-revolution/1/13172.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/6_98_101814093659.jpg" />
     </a></li>
 </ul>
@@ -923,10 +923,10 @@ country.
 <h2 style="color:#de1e2b; margin-bottom:15px;">Short & Crisp Videos</h2>
 
 <ul class="short_vidoes">
-	<li><a href="http://indiatoday.intoday.in/video/salaam-cricket-allan-border-mohd-azharuddin-aaj-tak/1/396487.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/azhar_98_101814080844.jpg" /></a></li>
-	<li><a href="http://indiatoday.intoday.in/video/aamer-sohail-salaam-cricket-pakistan-cricket-team-world-cup-india-today-conclave/1/396479.html" target="_blank">
+	<li><a href="/video/salaam-cricket-allan-border-mohd-azharuddin-aaj-tak/1/396487.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/azhar_98_101814080844.jpg" /></a></li>
+	<li><a href="/video/aamer-sohail-salaam-cricket-pakistan-cricket-team-world-cup-india-today-conclave/1/396479.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/aamir-snippets_98_101814080844.jpg" /></a></li>
-	<li><a href="http://indiatoday.intoday.in/video/salaam-cricket-sourav-ganguly-aaj-tak/1/396490.html" target="_blank">
+	<li><a href="/video/salaam-cricket-sourav-ganguly-aaj-tak/1/396490.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/saurabv_98_101814080844.jpg" />
     </a></li>
 </ul>
@@ -934,7 +934,7 @@ country.
 </div>
 
 
-   
+
 </div>
 
 
@@ -952,15 +952,15 @@ country.
             <area shape="rect" coords="539,2,678,51" href="kutchina.jsp">
           </map>
   </div>
-        
+
     </div>
 <div class="clear"></div>
 <div id="footer1" style="display:block !important; margin:0 auto">
 	<iframe width="100%" scrolling="no" height="166" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
     </div>
-    
-	
-    
+
+
+
 </div>
 
 <div class="copyright">Copyright © 2014 Living Media India Limited. For reprint rights: Syndications Today. </div>

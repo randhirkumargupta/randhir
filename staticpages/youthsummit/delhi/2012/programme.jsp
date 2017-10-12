@@ -191,7 +191,7 @@
         <div class="ptimeln">
             10.00 to 10.30
             <!--<div>
-                <a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=1">
+                <a href="/youthsummit/delhi/2012/askquestion.jsp?id=1">
                     <img src="/staticpages/main/images/Ask-Your-Question-1.gif" border="0" alt="Ask your question" />
                 </a>
             </div>-->
@@ -199,7 +199,7 @@
         </div>
         <div class="pritepart pborder">
             <div class="pleft" style="float: none; width: 100%">
-                <!--<div class="psession">Inaugural Session <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=0"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
+                <!--<div class="psession">Inaugural Session <a href="/specials/youthsummit/askquestion.jsp?id=0"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
                 <div class="psessiontitle">Betaji to Netaji: My Journey</div>
                 <div class="ptext">A promising political heir who spearheading the revival of the Samajwadi Party in Uttar Pradesh, Akhilesh Yadav has seen both extreme highs and dismal lows. UP&rsquo;s youngest chief minister ever talks about his meteoric rise in politics, what it takes to run India&rsquo;s most populous state, and what fuels his never-say-die spirit. </div>
                 <table cellpadding="0" cellspacing="5" width="100%" border="0">
@@ -253,7 +253,7 @@
         <div class="ptimeln">
             10.30 to 12.30
             <!--<div>
-                <a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=2">
+                <a href="/youthsummit/delhi/2012/askquestion.jsp?id=2">
                     <img src="/staticpages/main/images/Ask-Your-Question-1.gif" border="0" alt="Ask your question" />
                 </a>
             </div>-->
@@ -427,14 +427,14 @@ Deeply passionate about their chosen path, they will share their experiences on 
             <div class="ptimeln">
                 12.30 to 13.30
                   <!--<div>
-                      <a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=3">
+                      <a href="/youthsummit/delhi/2012/askquestion.jsp?id=3">
                           <img src="/staticpages/main/images/Ask-Your-Question-1.gif" border="0" alt="Ask your question" />
                       </a>
                   </div>-->
             </div>
             <div class="pritepart pborder">
                 <div class="pleft" style="float: none; width: 100%">
-                    <!--<div class="psession">Lunch Keynote Session <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=2"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
+                    <!--<div class="psession">Lunch Keynote Session <a href="/specials/youthsummit/askquestion.jsp?id=2"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
                     <div class="psessiontitle">Guts and Glory: Medal winners from the Olympics on the journey from dream to reality</div>
                     <div class="ptext">What does it take to be a world-class sports star? To be able to maintain high levels of focus while under pressure? Olympic Medal winners tell us their unique stories of grit and determination and reveal what it feels like when you finally achieve your goal. </div>
                     <table cellpadding="0" cellspacing="10" width="100%" border="0">
@@ -559,7 +559,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
             <div class="pritepart pborder">
 
                 <div class="pleft" style="float: none; width: 100%">
-                    <!--<div class="psession">Session Careers <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
+                    <!--<div class="psession">Session Careers <a href="/specials/youthsummit/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
                     <div class="psessiontitle">The Knock-out Punch: Lights, Camera, Drama</div>
                     <div class="ptext">From being the son of a stuntman, to a popular action star, to now being one of Bollywood&rsquo;s most versatile actors&mdash;Ajay Devgan has seen it all. He tells us what it takes to survive in Bollywood and how he manages to deliver a power packed performance every time. </div>
                     <table cellpadding="0" cellspacing="5" width="100%" border="0">
@@ -616,7 +616,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
             </div>
             <div class="pritepart pborder">
                 <div class="pleft" style="float: none; width: 100%">
-                    <!--<div class="psession">Session Careers <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
+                    <!--<div class="psession">Session Careers <a href="/specials/youthsummit/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
                     <div class="psessiontitle">The Raaz of Relationships: Commitment in the time of Casual Love</div>
                     <div class="ptext">In a rapidly evolving society where ideologies are fluid and reality is not black and white but fifty shades of grey, is there such a thing as true love? Do soul mates exist? Is there space for marriage? Bollywood stars talk about what it takes to remain committed in these tumultuous times. </div>
                     <table cellpadding="0" cellspacing="10" width="100%" border="0">
@@ -711,7 +711,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
             </div>
             <div class="pritepart pborder">
                 <div class="pleft" style="float: none; width: 100%">
-                    <!--<div class="psession">Session Careers <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
+                    <!--<div class="psession">Session Careers <a href="/specials/youthsummit/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
                     <div class="psessiontitle">Saas, Bahu Aur Ekta: Inside the Real World of an Entertainment Powerhouse </div>
                     <div class="ptext">The bonafide drama queen of Indian Television and film producer, Kapoor has always broken new ground whether through her TV serials or Bollywood ventures. What are her inspirations? Whom does she rely on? Kapoor reveals how she always knows what audiences really want. </div>
                     <table cellpadding="0" cellspacing="5" width="100%" border="0">
@@ -765,7 +765,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
             </div>
             <div class="pritepart pborder">
                 <div class="pleft" style="float: none; width: 100%">
-                    <!--<div class="psession">Session Careers <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
+                    <!--<div class="psession">Session Careers <a href="/specials/youthsummit/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
                     <div class="psessiontitle">Your India, Your Today: How to make your vote and Voice Count </div>
                     <div class="ptext">You want change, you have the ideas, but how do you make it happen? A social activist and a politician tell us why every person in the country can contribute to nation building and how change is possible. As long as you have the will to make it happen.</div>
                     <table cellpadding="0" cellspacing="5" width="100%" border="0">
@@ -841,7 +841,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
             </div>
             <div class="pritepart pborder">
                 <div class="pleft" style="float: none; width: 100%">
-                    <!--<div class="psession">Clash of the Titans: Make Cricket, Not War <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=6"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
+                    <!--<div class="psession">Clash of the Titans: Make Cricket, Not War <a href="/specials/youthsummit/askquestion.jsp?id=6"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
                     <div class="psessiontitle">A New Innings: Building Tomorrow's Team</div>
                     <div class="ptext">
                         <!--What, except for a game, can bridge the gap between two nations that are not willing to let go of their political baggage? India and Pakistan may not have a lot in common but they do share a unifying love for cricket. Two former captains from each side talk about what makes the game so special and how it can help bring the two countries together. -->
@@ -956,7 +956,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
             </div>
             <div class="pritepart pborder">
                 <div class="pleft" style="float: none; width: 100%">
-                    <!--<div class="psession">Session Politics <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=7"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
+                    <!--<div class="psession">Session Politics <a href="/specials/youthsummit/askquestion.jsp?id=7"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
                     <div class="psessiontitle">Why India is Still a Global Star: How Young People can Plug into the Indian Economy</div>
                     <div class="ptext">What does it take to shine in the corporate world and be a super professional? Is a trust fund the only answer? Can you make it big if the only thing that you have is the will to succeed? A management visionary talks about how to make that giant leap from being a nobody to a somebody. </div>
                     <table cellpadding="0" cellspacing="5" width="100%" border="0">
@@ -1014,7 +1014,7 @@ Deeply passionate about their chosen path, they will share their experiences on 
             </div>
             <div class="pritepart pborder">
                 <div class="pleft" style="float: none; width: 100%">
-                    <!--<div class="psession">Session Politics <a href="http://indiatoday.intoday.in/specials/youthsummit/askquestion.jsp?id=7"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
+                    <!--<div class="psession">Session Politics <a href="/specials/youthsummit/askquestion.jsp?id=7"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>-->
                     <div class="psessiontitle">A Perfect World: Movies and Music, Life and Work</div>
                     <div class="ptext">
                         <!--What does it take to shine in the corporate world and be a super professional? Is a trust fund the only answer? Can you make it big if the only thing that you have is the will to succeed? A management visionary talks about how to make that giant leap from being a nobody to a somebody.-->
