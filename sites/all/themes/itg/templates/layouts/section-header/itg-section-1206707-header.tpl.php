@@ -1,6 +1,7 @@
 <?php
 global $base_url;
 ?>
+<div id="section-header-event-1206707" class="india-today-woman-summit">
 <div class="header-ads header_ltop_container">
   <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
@@ -55,7 +56,7 @@ global $base_url;
   </nav>
 
 </div>
-
+</div>
 <style>
 .logo{display:none;}
 #block-itg-layout-manager-header-block, .header_ltop_container{
@@ -123,4 +124,3 @@ global $base_url;
 
 .navigation{    background: #000!important;}
 </style>
-
