@@ -260,7 +260,7 @@ function is_section_event($tid) {
 
 function is_node_section_header_event($nid) {
   $tid = FALSE;
-  if (!empty($tid)) {
+  if (!empty($nid)) {
     $query = db_select('field_data_field_event_section', 'fs');
     $query->fields('fs', array('field_event_section_target_id'));
     $query->condition('fs.entity_id', $nid, '=');
