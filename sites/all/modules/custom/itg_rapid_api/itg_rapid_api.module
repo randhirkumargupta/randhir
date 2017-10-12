@@ -1851,7 +1851,7 @@ function formateNodeBodyToken($n_body){
  */
 function getTechProsImg($content_org) {
     //include 'simple_html_dom.php';
-    $h2 = "";
+    $src = "";
     if($content_org){
         $str_html = str_get_html($content_org);
         $img_str = "";
