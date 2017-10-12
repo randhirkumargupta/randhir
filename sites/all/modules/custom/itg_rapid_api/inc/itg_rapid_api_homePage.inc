@@ -1175,7 +1175,8 @@ function homePageJsonPoll() {
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
 
-    $data_magazine['news'] = $data_newslist;
+    $data_magazine['news'] = (array) $data_newslist;
+    $data_magazine = (array) $data_magazine;
 
     return $data_magazine;
 }
