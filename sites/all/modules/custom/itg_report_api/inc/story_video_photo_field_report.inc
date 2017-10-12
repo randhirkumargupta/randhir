@@ -81,7 +81,7 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
         $sum = 0;
        // p($story_cont);die();
         //$sum = array_sum($story_cont) + array_sum($video_cont) + array_sum($photo_cont);
-        $sum = $story_cont['total_records_between_inhouse'] + $story_cont['total_records_between_agency'];
+        $sum += $story_cont['total_records_between_inhouse'] + $story_cont['total_records_between_agency'];
         $sum += $video_cont['total_records_between_inhouse'] + $video_cont['total_records_between_agency'];
         $sum += $photo_cont['total_records_between_inhouse'] + $photo_cont['total_records_between_agency'];
 
