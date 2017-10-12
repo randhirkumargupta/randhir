@@ -260,6 +260,7 @@ function is_section_event($tid) {
 
 function get_section_header_menu_and_content($arg) {
   if (is_valid_node_header_section($arg) || is_valid_category_header_section($arg) || ($arg[0] == 'taxonomy' && is_event_section_category($arg[2]))) {
+     drupal_add_css(drupal_get_path('theme', 'itg') .'/css/section-header.css',array('type' => 'file', 'media' => 'all', 'preprocess' => true, 'every_page' => true) );
     switch ($arg[0]) {
       case 'taxonomy':
         $tid = $arg[2];
@@ -383,5 +384,6 @@ function get_event_menu($nid) {
   }
   $menu['event_start_date'] = $event_start_date;
   $menu['event_location'] = $event_location;
+  $menu['event_title'] = $node->title;
   return $menu;
 }
