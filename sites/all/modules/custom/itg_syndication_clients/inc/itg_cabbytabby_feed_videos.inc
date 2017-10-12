@@ -37,9 +37,7 @@ function itg_genrate_cabbytabby_feed_videos_syndication($section_id = NULL, $fil
     $query->groupBy('n.nid')->range(0, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_cabbytabby_feed_videos_syndication_xml($result, $section_id, $section_name);
-    header("Content-type: text/xml");
-    echo $xml;
-    $xml_path = 'sites/default/files/bsb/videos/';
+    $xml_path = 'sites/default/files/rss-feeds/ver1.0/cabbytabby/71dea842/it/videos/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);

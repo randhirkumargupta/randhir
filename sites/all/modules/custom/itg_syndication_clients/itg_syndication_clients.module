@@ -47,6 +47,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_cabbytabby_feed_videos.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rssfeeds/proquest/story'] = array(
+    'page callback' => 'itg_proquest_feed_story_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_proquest_feed_story.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
