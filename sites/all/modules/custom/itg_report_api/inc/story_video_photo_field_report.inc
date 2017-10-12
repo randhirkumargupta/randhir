@@ -78,12 +78,22 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
         $story_cont = countStory($start_date, $end_date, $value['tid']);
         $video_cont = countVideo($start_date, $end_date, $value['tid']);
         $photo_cont = countPhoto($start_date, $end_date, $value['tid']);
-        $sum = 0;
+        $sum_between = 0;
+        $sum_today= 0;
+        $sum_yesteday = 0;
        // p($story_cont);die();
         //$sum = array_sum($story_cont) + array_sum($video_cont) + array_sum($photo_cont);
-        $sum += $story_cont['total_records_between_inhouse'] + $story_cont['total_records_between_agency'];
-        $sum += $video_cont['total_records_between_inhouse'] + $video_cont['total_records_between_agency'];
-        $sum += $photo_cont['total_records_between_inhouse'] + $photo_cont['total_records_between_agency'];
+        $sum_between += $story_cont['total_records_between_inhouse'] + $story_cont['total_records_between_agency'];
+        $sum_between += $video_cont['total_records_between_inhouse'] + $video_cont['total_records_between_agency'];
+        $sum_between += $photo_cont['total_records_between_inhouse'] + $photo_cont['total_records_between_agency'];
+        
+        $sum_today += $story_cont['total_records_today_inhouse'] + $story_cont['total_records_today_agency'];
+        $sum_today += $video_cont['total_records_today_inhouse'] + $video_cont['total_records_today_agency'];
+        $sum_today += $photo_cont['total_records_today_inhouse'] + $photo_cont['total_records_today_agency'];
+        
+        $sum_yesteday += $story_cont['total_records_yesterday_inhouse'] + $story_cont['total_records_yesterday_agency'];
+        $sum_yesteday += $video_cont['total_records_yesterday_inhouse'] + $video_cont['total_records_yesterday_agency'];
+        $sum_yesteday += $photo_cont['total_records_yesterday_inhouse'] + $photo_cont['total_records_yesterday_agency'];
 
         $term_name = $value['name'];
         $term_tid = $value['tid'];
@@ -93,21 +103,21 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
             $between_list_count[$term_name]['inhouse'] = $story_cont['total_records_between_inhouse'];
         }
         else{
-            if($sum > 0)
+            if($sum_between > 0)
             $between_list_count[$term_name]['inhouse'] = 0;
         }
         if ($story_cont['total_records_today_inhouse'] > 0) {
             $today_list_count[$term_name]['inhouse'] = $story_cont['total_records_today_inhouse'];
         }
         else{
-            if($sum > 0)
+            if($sum_today > 0)
             $today_list_count[$term_name]['inhouse'] = 0;
         }
         if ($story_cont['total_records_yesterday_inhouse'] > 0) {
             $yesterday_list_count[$term_name]['inhouse'] = $story_cont['total_records_yesterday_inhouse'];
         }
         else{
-           if($sum > 0)
+           if($sum_yesteday > 0)
            $yesterday_list_count[$term_name]['inhouse'] = 0;
         }
 
@@ -116,21 +126,21 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
             $between_list_count[$term_name]['agency'] = $story_cont['total_records_between_agency'];
         }
         else{
-            if($sum > 0)
+            if($sum_between > 0)
             $between_list_count[$term_name]['agency'] = 0;
         }
         if ($story_cont['total_records_today_agency'] > 0) {
             $today_list_count[$term_name]['agency'] = $story_cont['total_records_today_agency'];
         }
         else{
-            if($sum > 0)
+            if($sum_today > 0)
             $today_list_count[$term_name]['agency'] = 0;
         }
         if ($story_cont['total_records_yesterday_agency'] > 0) {
             $yesterday_list_count[$term_name]['agency'] = $story_cont['total_records_yesterday_agency'];
         }
         else{
-            if($sum > 0)
+            if($sum_yesteday > 0)
            $yesterday_list_count[$term_name]['agency'] = 0;
         }
 
@@ -139,21 +149,21 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
             $between_list_count[$term_name]['video'] = $video_cont['total_records_between'];
         }
         else{
-            if($sum > 0)
+            if($sum_between > 0)
             $between_list_count[$term_name]['video'] = 0;
         }
         if ($video_cont['total_records_today'] > 0) {
             $today_list_count[$term_name]['video'] = $video_cont['total_records_today'];
         }
         else{
-            if($sum > 0)
+            if($sum_today > 0)
             $today_list_count[$term_name]['video'] = 0;
         }
         if ($video_cont['total_records_yesterday'] > 0) {
             $yesterday_list_count[$term_name]['video'] = $video_cont['total_records_yesterday'];
         }
         else{
-            if($sum > 0)
+            if($sum_yesteday > 0)
             $yesterday_list_count[$term_name]['video'] = 0;
         }
 
@@ -162,21 +172,21 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
             $between_list_count[$term_name]['photo'] = $photo_cont['total_records_between'];
         }
         else{
-            if($sum > 0)
+            if($sum_between > 0)
             $between_list_count[$term_name]['photo'] = 0;
         }
         if ($photo_cont['total_records_today'] > 0) {
             $today_list_count[$term_name]['photo'] = $photo_cont['total_records_today'];
         }
         else{
-            if($sum > 0)
+            if($sum_today > 0)
             $today_list_count[$term_name]['photo'] = 0;
         }
         if ($photo_cont['total_records_yesterday'] > 0) {
             $yesterday_list_count[$term_name]['photo'] = $photo_cont['total_records_yesterday'];
         }
         else{
-            if($sum > 0)
+            if($sum_yesteday > 0)
              $yesterday_list_count[$term_name]['photo'] = 0;
         }
     }
