@@ -1573,7 +1573,7 @@ function itg_story_add_byline_popup($ajax) {
       $output[] = ctools_modal_command_display(
           t('Node created'), 'Node creation successful.');/** Add success message */
       $output[] = ctools_modal_command_dismiss(); //Close modal automatically
-      $output[] = ctools_ajax_command_reload(); //reload parent window
+      //$output[] = ctools_ajax_command_reload(); //reload parent window
       $output[] = ajax_command_invoke('#edit-field-story-reporter-und-0-target-id', 'val', array($name_format));
     };
     // Return the ajax instructions to the browser via ajax_render().
