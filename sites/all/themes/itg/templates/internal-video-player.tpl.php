@@ -19,8 +19,8 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
-<div id="setupplayer" style="width:<?php echo $width . 'px'; ?>;">
-    <div id="videoplayer"> </div></div>
+
+    <div id="videoplayer"> </div>
 <script type="text/javascript">
   var myUserAgent = navigator.userAgent;
   var myUserAgent = navigator.userAgent;
@@ -49,8 +49,8 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
                       }]
               }],
           primary: "html5",
-          width: "622",
-          height: "442",
+          width: "100%",
+          height: "100%",
           aspectratio: "16:9",
           "stretching": "exactfit",
           androidhls: "true",

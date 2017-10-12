@@ -3,6 +3,39 @@
 @import "itg-variables";
 @import "itg-mixins";
 @import "_progressbar";
+@font-face {
+    font-family: 'RobotoSlab-Regular';
+    src: url('../fonts/RobotoSlab-Regular.eot');
+    src: local('/'), url('../fonts/RobotoSlab-Regular.woff') format('woff'), url('../fonts/RobotoSlab-Regular.ttf') format('truetype'), url('../fonts/RobotoSlab-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/Roboto-Regular.eot');
+    src: local('/'), url('../fonts/Roboto-Regular.woff') format('woff'), url('../fonts/Roboto-Regular.ttf') format('truetype'), url('../fonts/Roboto-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/*@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../fonts/Roboto-Medium.eot');
+    src: local('/'), url('../fonts/Roboto-Medium.woff') format('woff'), url('../fonts/Roboto-Medium.ttf') format('truetype'), url('../fonts/Roboto-Medium.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/Roboto-Bold.eot');
+    src: local('/'), url('../fonts/Roboto-Bold.woff') format('woff'), url('../fonts/Roboto-Bold.ttf') format('truetype'), url('../fonts/Roboto-Bold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}*/
+
 
 /* Global CSS */
 
@@ -21,7 +54,8 @@ h1,
 h2,
 h3,
 h4 {
-    @include itg-font($itg-roboto, $itg-font-medium);
+    @include itg-font($itg-roboto,
+    $itg-font-medium);
     word-wrap: break-word;
 }
 
@@ -53,7 +87,8 @@ h4 {
 
 h4.heading {
     color: $heading-blue-color;
-    @include itg-font($itg-roboto, $itg-font-bold);
+    @include itg-font($itg-roboto,
+    $itg-font-bold);
     text-transform: uppercase;
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
@@ -281,7 +316,8 @@ img {
 }
 
 .widget-title {
-    @include story-tag(22px, 22px);
+    @include story-tag(22px,
+    22px);
 }
 
 .success-message,
@@ -376,7 +412,8 @@ header {
     .login-link {
         text-align: right;
         a {
-            @include itg-font(null, $itg-font-regular);
+            @include itg-font(null,
+            $itg-font-regular);
             margin-right: 10px;
         }
     }
@@ -423,7 +460,11 @@ header {
                         &:before {
                             content: '';
                             background: url(../images/live-icon.png) no-repeat;
-                            @include pos(absolute, -11px, null, null, 20px);
+                            @include pos(absolute,
+                            -11px,
+                            null,
+                            null,
+                            20px);
                             width: 28px;
                             height: 19px;
                         }
@@ -431,7 +472,9 @@ header {
                 }
                 a {
                     padding: 0 35px;
-                    @include font(27px, null, null);
+                    @include font(27px,
+                    null,
+                    null);
                     text-transform: uppercase;
                     &.active,
                     &:hover {
@@ -448,14 +491,22 @@ header {
             @include float(right);
             a {
                 .fa {
-                    @include font(23px, null, null);
+                    @include font(23px,
+                    null,
+                    null);
                     &.fa-mobile {
-                        @include font(27px, null, null);
+                        @include font(27px,
+                        null,
+                        null);
                     }
                 }
             }
             .globle-search {
-                @include pos(absolute, -5px, 40px, null, null);
+                @include pos(absolute,
+                -5px,
+                40px,
+                null,
+                null);
                 @include transition(all 0.5s ease-in-out);
                 width: 0px;
                 overflow: hidden;
@@ -484,14 +535,17 @@ header {
                 a {
                     color: $itg-nav-fontcolor;
                     text-transform: uppercase;
-                    @include itg-font(null, $itg-font-medium);
+                    @include itg-font(null,
+                    $itg-font-medium);
                     padding: 0 10px;
                     /*                        border-right: 1px solid $itg-nav-bordercolor;*/
                     border-top: none;
                     height: 37px;
                     white-space: nowrap;
                     @include pos(relative);
-                    @include font($itg-nav-fontsize, 37px, null);
+                    @include font($itg-nav-fontsize,
+                    37px,
+                    null);
                     @extend .dib;
                     &.sponsored-active {
                         background: #ffc106;
@@ -596,7 +650,6 @@ header {
             @extend .pdlr-30;
             @extend .no-underline;
             background-color: #ddd;
-            font-weight: bold;
             color: #333;
             transition: all 300ms;
             font-weight: 400;
@@ -1400,12 +1453,18 @@ footer {
             margin-right: 50px;
         }
         .footer-social-link {
-            @include font(24px, null, null);
+            @include font(24px,
+            null,
+            null);
             vertical-align: middle;
             @include float(right);
             padding-right: 50px;
             .globle-search {
-                @include pos(absolute, 3px, 45px, null, null);
+                @include pos(absolute,
+                3px,
+                45px,
+                null,
+                null);
                 @include transition(all 0.5s ease-in-out);
                 width: 0px;
                 overflow: hidden;
@@ -1443,7 +1502,11 @@ footer {
             }
         }
         .footer-expand-icon {
-            @include pos(absolute, 0, 15px, null, null);
+            @include pos(absolute,
+            0,
+            15px,
+            null,
+            null);
             width: 50px;
             @include text-align(center);
             height: 37px;
@@ -1467,7 +1530,8 @@ footer {
             }
         }
         h4 {
-            @include itg-font($itg-roboto, $itg-font-medium);
+            @include itg-font($itg-roboto,
+            $itg-font-medium);
             color: $white-color;
             text-transform: uppercase;
             margin-bottom: 5px;
@@ -1692,7 +1756,9 @@ footer {
     }
     p {
         color: #adacac;
-        @include font(16px, 20px, null);
+        @include font(16px,
+        20px,
+        null);
         margin-bottom: 15px;
     }
     .share-new {
@@ -1708,7 +1774,9 @@ footer {
                 a {
                     padding: 0 10px;
                     border-right: 1px solid #606060;
-                    @include font(16px, 15px, null);
+                    @include font(16px,
+                    15px,
+                    null);
                     @include display-inline;
                     cursor: pointer;
                 }
@@ -1724,11 +1792,18 @@ footer {
         max-height: 106px;
         overflow: auto;
         li {
-            @include before-icon-list(6px, 6px, 5px, 0, #ffffff, 50%);
+            @include before-icon-list(6px,
+            6px,
+            5px,
+            0,
+            #ffffff,
+            50%);
             padding-left: 15px;
             margin-bottom: 15px;
             a {
-                @include font(16px, null, $itg-font-medium);
+                @include font(16px,
+                null,
+                $itg-font-medium);
                 &:hover {
                     color: #adacac;
                 }
@@ -1736,7 +1811,8 @@ footer {
         }
     }
     .story-tag {
-        @include story-tag(26px, 26px);
+        @include story-tag(26px,
+        26px);
         margin: 10px 0 0 10px;
     }
 }
@@ -1861,7 +1937,7 @@ footer {
 .section-ordering {
     a {
         &:not(.video-icon) {
-            display: inline;
+            display: inline-block;
         }
         &.pic-no-icon {
             display: block;
@@ -1872,8 +1948,14 @@ footer {
         @include font(20px);
     }
     p {
-        @include font(14px, 18px);
-        @include before-icon-list(5px, 5px, 18px, 0px, $red-bg, 100%);
+        @include font(14px,
+        18px);
+        @include before-icon-list(5px,
+        5px,
+        18px,
+        0px,
+        $red-bg,
+        100%);
         border-top: 1px solid $border-color;
         padding: 12px 0 12px 12px;
     }
@@ -1903,7 +1985,11 @@ footer {
     @extend .list-none;
     border: 1px solid $border-color;
     padding-top: 10px;
-    @include listing-with-image(trending-videos-list, left, 10px, pic, title);
+    @include listing-with-image(trending-videos-list,
+    left,
+    10px,
+    pic,
+    title);
     li {
         .pic {
             @extend .video-icon;
@@ -1921,6 +2007,15 @@ footer {
 .trending-list {
     .top-takes-video-container {
         border: 1px solid $border-color;
+    }
+}
+
+.top-takes-video-container.home-top-takes {
+    ul {
+        padding-top: 10px;
+    }
+    .top-takes-list {
+        padding: 10px;
     }
 }
 
@@ -1973,7 +2068,11 @@ footer {
     .views-widget {
         @include pos(relative);
         .s-link {
-            @include pos(absolute, 0px, 0px, null, null);
+            @include pos(absolute,
+            0px,
+            0px,
+            null,
+            null);
             a {
                 width: 50px;
                 height: 46px;
@@ -1981,7 +2080,8 @@ footer {
                 @include display-inline;
                 color: $white-color;
                 @include text-align(center);
-                @include font(20px, 40px);
+                @include font(20px,
+                40px);
                 cursor: pointer;
                 &#search_button {
                     margin-right: 1px;
@@ -2039,7 +2139,11 @@ footer {
                 border-left: 12px solid transparent;
                 border-right: 12px solid transparent;
                 border-bottom: 12px solid whitesmoke;
-                @include pos(absolute, -11px, 40px, null, null);
+                @include pos(absolute,
+                -11px,
+                40px,
+                null,
+                null);
             }
         }
     }
@@ -2062,10 +2166,12 @@ footer {
             }
             .views-field-label {
                 h2 {
-                    @include font(22px, 28px);
+                    @include font(22px,
+                    28px);
                     margin-top: -5px;
                     a {
-                        @include font(22px, 28px);
+                        @include font(22px,
+                        28px);
                     }
                 }
             }
@@ -2096,7 +2202,9 @@ footer {
         @include itg-font($itg-roboto);
         border-bottom: 1px solid $border-color;
         .count {
-            @include font(19px, 22px, $itg-font-medium);
+            @include font(19px,
+            22px,
+            $itg-font-medium);
             color: #737373;
             padding-bottom: 20px;
             display: block;
@@ -2157,7 +2265,11 @@ footer {
     ul {
         @include clearfix;
         @extend .list-none;
-        @include listing-with-image(dont-miss-listing, left, 15px, dm-pic, dm-detail);
+        @include listing-with-image(dont-miss-listing,
+        left,
+        15px,
+        dm-pic,
+        dm-detail);
         .dont-miss-listing {
             @include float(left);
             @include calculate-width(2);
@@ -2174,14 +2286,17 @@ footer {
                     color: #048cb9;
                     margin-bottom: 5px;
                     text-transform: uppercase;
-                    @include font(12px, null, 700);
+                    @include font(12px,
+                    null,
+                    700);
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     max-width: 100%;
                 }
                 p {
-                    @include font(14px, 18px);
+                    @include font(14px,
+                    18px);
                     color: #333;
                 }
             }
@@ -2262,7 +2377,9 @@ footer {
         @extend .list-none;
     }
     h1 {
-        @include font(24px, 30px, 700);
+        @include font(24px,
+        30px,
+        700);
         i {
             font-size: 13px;
             color: #f40000;
@@ -2350,14 +2467,17 @@ footer {
             margin: -5px 0 0 10px;
             ul {
                 margin-bottom: 5px;
-                @include font(12px, 12px);
+                @include font(12px,
+                12px);
                 @include clearfix;
                 li {
                     @include float(left);
                     padding: 0 5px;
                     span.share-count {
                         display: block;
-                        @include font(44px, 44px, 500);
+                        @include font(44px,
+                        44px,
+                        500);
                         color: #bebebe;
                     }
                     &:last-child {
@@ -2369,7 +2489,9 @@ footer {
                     }
                     &.title {
                         color: #6b6b6b;
-                        @include font(12px, 20px, $itg-font-bold);
+                        @include font(12px,
+                        20px,
+                        $itg-font-bold);
                     }
                     &.mailto {
                         text-transform: uppercase;
@@ -2438,14 +2560,22 @@ footer {
             h4 {
                 text-transform: uppercase;
                 margin-bottom: 8px;
-                @include font(18px, null, 700);
+                @include font(18px,
+                null,
+                700);
             }
             ul {
                 li {
-                    @include before-icon-list(5px, 5px, 13px, 0px, $red-color, 50%);
+                    @include before-icon-list(5px,
+                    5px,
+                    13px,
+                    0px,
+                    $red-color,
+                    50%);
                     color: #575757;
                     padding: 5px 0px 5px 12px;
-                    @include font(12px, 18px);
+                    @include font(12px,
+                    18px);
                     word-wrap: break-word;
                 }
             }
@@ -2477,7 +2607,11 @@ footer {
             }
             .photoby {
                 text-align: left;
-                @include pos(absolute, null, null, 0, 0);
+                @include pos(absolute,
+                null,
+                null,
+                0,
+                0);
                 width: 100%;
                 .story-img-rating {
                     background: #b00808;
@@ -2506,7 +2640,8 @@ footer {
         }
         .description {
             padding-top: 25px;
-            @include font(15px, 27px);
+            @include font(15px,
+            27px);
             word-wrap: break-word;
             p {
                 padding: 10px 0;
@@ -2539,7 +2674,12 @@ footer {
             }
             ul {
                 li {
-                    @include before-icon-list(5px, 5px, 6px, 0px, $red-color, 100%);
+                    @include before-icon-list(5px,
+                    5px,
+                    6px,
+                    0px,
+                    $red-color,
+                    100%);
                     @include font(13px);
                     margin-bottom: 10px;
                     padding-left: 15px;
@@ -2709,6 +2849,9 @@ footer {
                     font-size: 13px;
                     color: #8d8d8d;
                     font-weight: 300;
+                    +.description {
+                        margin-top: 0;
+                    }
                 }
             }
         }
@@ -2720,7 +2863,9 @@ footer {
         background: url(../images/snap-post-icon.png) no-repeat 15px 20px #f5f5f5;
         background-size: 40px;
         .discription {
-            @include font(14px, 22px, 700);
+            @include font(14px,
+            22px,
+            700);
         }
         .agbutton {
             margin-top: 20px;
@@ -2794,7 +2939,9 @@ footer {
             span {
                 display: block;
                 &.share-count {
-                    @include font(26px, null, $itg-font-bold);
+                    @include font(26px,
+                    null,
+                    $itg-font-bold);
                     color: #bebebe;
                 }
             }
@@ -2819,7 +2966,9 @@ footer {
                 line-height: 35px;
                 a {
                     color: #1a3c8d;
-                    @include font(14px, 35px, $itg-font-bold);
+                    @include font(14px,
+                    35px,
+                    $itg-font-bold);
                 }
             }
             i.fa-facebook,
@@ -3111,9 +3260,6 @@ footer {
         }
     }
     .story-tech-chunk {
-        background: #f3f3f3;
-        padding: 10px;
-        position: relative;
         padding-right: 100px;
         .tech-rating {
             width: 88px;
@@ -3172,21 +3318,27 @@ footer {
                 width: 24px;
                 height: 24px;
                 @include display-inline;
-                @include font(16px, 24px);
+                @include font(16px,
+                24px);
                 @include text-align(center);
                 border-radius: 100%;
                 margin: 5px 12px 0 0;
             }
         }
         .buzz-discription {
-            @include font(16px, 22px);
+            @include font(16px,
+            22px);
             @include itg-font($itg-roboto);
             word-wrap: break-word;
         }
         .buzz-img {
             @include pos(relative);
             .social-share {
-                @include pos(absolute, null, null, 0, null);
+                @include pos(absolute,
+                null,
+                null,
+                0,
+                null);
                 z-index: 1;
                 ul {
                     @include clearfix;
@@ -3319,7 +3471,11 @@ footer {
 
 .may-be-suggest-container {
     ul {
-        @include listing-with-image(may-we-suggest, right, 10px, pic, title);
+        @include listing-with-image(may-we-suggest,
+        right,
+        10px,
+        pic,
+        title);
         @extend .list-none;
         .pic {
             width: 88px;
@@ -3371,7 +3527,11 @@ footer {
 .top-takes-video-container {
     ul {
         @extend .list-none;
-        @include listing-with-image(top-takes-video, right, 10px, pic, title);
+        @include listing-with-image(top-takes-video,
+        right,
+        10px,
+        pic,
+        title);
         li {
             &.top-takes-video {
                 padding: 10px 0;
@@ -3419,7 +3579,11 @@ footer {
     @include sidebar-heading;
     ul {
         @extend .list-none;
-        @include listing-with-image(watch-right-now-list, right, 5px, pic, title);
+        @include listing-with-image(watch-right-now-list,
+        right,
+        5px,
+        pic,
+        title);
         li.watch-right-now-list {
             .pic {
                 width: 88px;
@@ -3493,7 +3657,8 @@ footer {
                 li {
                     @include display-inline;
                     color: #fff;
-                    @include font(30px, 94px);
+                    @include font(30px,
+                    94px);
                     padding-left: 25px;
                     i {
                         color: #777777;
@@ -3550,7 +3715,8 @@ footer {
                         border-radius: 5px;
                         @include display-inline;
                         @include text-align(center);
-                        @include font(22px, 60px);
+                        @include font(22px,
+                        60px);
                         color: #000;
                         box-shadow: 1px 7px 15px #2f2f2f;
                         background: transparent;
@@ -3618,7 +3784,9 @@ footer {
 /*Start category wise content list css*/
 
 h1.category-heading {
-    @include font(25px, 40px, 700);
+    @include font(25px,
+    40px,
+    700);
     border-top: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
 }
@@ -3644,7 +3812,11 @@ h1.category-heading {
 .view-blog-listing,
 .page-podcast .view-podcasts-listing,
 .page-podcasts-listing .view-podcasts-listing {
-    @include listing-with-image(catagory-listing, left, 10px, pic, detail);
+    @include listing-with-image(catagory-listing,
+    left,
+    10px,
+    pic,
+    detail);
     .catagory-listing {
         padding: 20px 0;
         .pic {
@@ -3653,11 +3825,14 @@ h1.category-heading {
         .detail {
             h3 {
                 margin-bottom: 10px;
-                @include font(15px, 22px, $itg-font-regular);
+                @include font(15px,
+                22px,
+                $itg-font-regular);
                 color: #323232;
             }
             p {
-                @include font(14px, 19px);
+                @include font(14px,
+                19px);
                 color: #696969;
                 display: none;
             }
@@ -3720,7 +3895,11 @@ h1.category-heading {
 /*Start anchors listing css*/
 
 .view-widget-anchors-listing {
-    @include listing-with-image(anchor-listing, left, 22px, pic, detail);
+    @include listing-with-image(anchor-listing,
+    left,
+    22px,
+    pic,
+    detail);
     @include pager;
     .anchor-listing {
         padding: 20px 0;
@@ -3732,10 +3911,13 @@ h1.category-heading {
             overflow: initial;
             h3 {
                 margin-bottom: 5px;
-                @include font(18px, null, $itg-font-bold);
+                @include font(18px,
+                null,
+                $itg-font-bold);
             }
             p {
-                @include font(14px, 22px);
+                @include font(14px,
+                22px);
                 color: #323232;
                 @include itg-font($itg-roboto);
             }
@@ -3828,7 +4010,9 @@ h1.category-heading {
         color: #818181;
         line-height: 22px;
         a.active {
-            @include font(22px, 30px, 700);
+            @include font(22px,
+            30px,
+            700);
             color: #33363b;
         }
         a {
@@ -3921,13 +4105,20 @@ h1.category-heading {
     .live-hightlight {
         h3 {
             text-transform: uppercase;
-            @include font(16px, null, 700);
+            @include font(16px,
+            null,
+            700);
             margin-top: 30px;
             margin-bottom: 7px;
         }
         ul {
             li {
-                @include before-icon-list(5px, 5px, 6px, 0px, #cf0408, 50%);
+                @include before-icon-list(5px,
+                5px,
+                6px,
+                0px,
+                #cf0408,
+                50%);
                 padding: 0 0 12px 10px;
             }
         }
@@ -3937,7 +4128,9 @@ h1.category-heading {
         padding-bottom: 30px;
         h3 {
             text-transform: uppercase;
-            @include font(16px, null, 700);
+            @include font(16px,
+            null,
+            700);
             margin-top: 30px;
             padding-bottom: 35px;
         }
@@ -4047,7 +4240,11 @@ h1.category-heading {
 .tech-block_5,
 .auto-block_5 {
     .widget-title {
-        @include pos(absolute, 10px, null, null, 10px);
+        @include pos(absolute,
+        10px,
+        null,
+        null,
+        10px);
     }
     .data-holder {
         max-width: 750px;
@@ -4084,7 +4281,9 @@ h1.category-heading {
                         padding: 5px;
                         background: #000;
                         color: $white-color;
-                        @include font(13px, 18px, $itg-font-medium);
+                        @include font(13px,
+                        18px,
+                        $itg-font-medium);
                         width: auto;
                         max-height: 45px;
                         min-height: 45px;
@@ -4097,22 +4296,23 @@ h1.category-heading {
                         }
                     }
                     .flex-count {
-                        @include pos(absolute, null, null, 49px, 0px);
+                        @include pos(absolute,
+                        null,
+                        null,
+                        49px,
+                        0px);
                         @include display-inline;
                         background: #000;
                         opacity: .5;
                         color: $white-color;
-                        @include font(12px, 23px);
+                        @include font(12px,
+                        23px);
                         margin-bottom: 0;
                         padding: 0 10px;
                         height: 23px;
                     }
                 }
             }
-        }
-        .flex-control-nav,
-        .flex-direction-nav {
-            display: none;
         }
         .flex-count {
             @include display-inline;
@@ -4338,7 +4538,9 @@ h1.category-heading {
     .active-poll-title {
         overflow: hidden;
         h2 {
-            @include font(20px, 26px, null);
+            @include font(20px,
+            26px,
+            null);
             margin-bottom: 5px;
         }
     }
@@ -4388,13 +4590,19 @@ h1.category-heading {
         border-left: 1px solid #dfdfdf;
         padding-left: 25px;
         span {
-            @include story-tag(22px, 22px);
+            @include story-tag(22px,
+            22px);
             margin-bottom: 20px;
             display: inline-block;
         }
         .related-stories {
             li {
-                @include before-icon-list(5px, 5px, 5px, 0, #959595, 50%);
+                @include before-icon-list(5px,
+                5px,
+                5px,
+                0,
+                #959595,
+                50%);
                 padding-left: 10px;
                 padding-bottom: 25px;
                 word-wrap: break-word;
@@ -4469,7 +4677,9 @@ h1.category-heading {
         .detail-content {
             color: #8a8a8a;
             h4 {
-                @include font(18px, 24px, $itg-font-bold);
+                @include font(18px,
+                24px,
+                $itg-font-bold);
                 margin-bottom: 10px;
                 color: $black-color;
             }
@@ -5083,7 +5293,11 @@ h1.category-heading {
 .rhs-section-ordering {
     ul {
         @extend .list-none;
-        @include listing-with-image(rhs-section-item-container, left, 10px, pic, title);
+        @include listing-with-image(rhs-section-item-container,
+        left,
+        10px,
+        pic,
+        title);
         li {
             &.rhs-section-item-container {
                 padding: 10px 0;
@@ -5159,12 +5373,18 @@ h1.category-heading {
 /* CSS For Program Page */
 
 .programe-container {
-    @include listing-with-image(program-row, left, 10px, pic, program-right);
+    @include listing-with-image(program-row,
+    left,
+    10px,
+    pic,
+    program-right);
     .program-row {
         font-family: $itg-roboto;
         background-color: #f5f5f5;
         .programe-title {
-            @include font(20px, null, 700);
+            @include font(20px,
+            null,
+            700);
             color: #33363b;
         }
         .programe-timing {
@@ -5300,10 +5520,12 @@ h1.category-heading {
             }
             .views-field-label {
                 h2 {
-                    @include font(22px, 28px);
+                    @include font(22px,
+                    28px);
                     margin-top: -5px;
                     a {
-                        @include font(22px, 28px);
+                        @include font(22px,
+                        28px);
                     }
                 }
             }
@@ -5352,7 +5574,9 @@ h1.category-heading {
     .attachment {
         @include itg-font($itg-roboto);
         .count {
-            @include font(19px, 22px, $itg-font-medium);
+            @include font(19px,
+            22px,
+            $itg-font-medium);
             color: #737373;
             padding-bottom: 20px;
             display: block;
@@ -5369,7 +5593,9 @@ h1.category-heading {
                 @include display-inline;
                 color: #747474;
                 text-transform: uppercase;
-                @include font(16px, 24px, $itg-font-regular);
+                @include font(16px,
+                24px,
+                $itg-font-regular);
                 &:nth-child(1) {
                     padding-left: 0;
                     border-left: 0;
@@ -5495,7 +5721,11 @@ h1.category-heading {
         font-weight: 700;
         font-family: $itg-robotoslab;
     }
-    @include listing-with-image(detail, right, 10px, pic, discription);
+    @include listing-with-image(detail,
+    right,
+    10px,
+    pic,
+    discription);
     .pic a {
         display: block;
     }
@@ -5510,7 +5740,8 @@ h1.category-heading {
 #block-itg-msi-magazine-calendar {
     padding: 50px 0px 20px 0px;
     .calendar-title {
-        @include story-tag(22px, 22px);
+        @include story-tag(22px,
+        22px);
     }
     ul {
         @extend .list-none;
@@ -5552,7 +5783,11 @@ h1.category-heading {
         border-left: 1px solid transparent;
         width: 25%;
         height: 34px;
-        @include pos(absolute, null, null, 0, 0);
+        @include pos(absolute,
+        null,
+        null,
+        0,
+        0);
         cursor: pointer;
         color: #7c7c7c;
         i {
@@ -5577,7 +5812,8 @@ h1.category-heading {
     padding: 50px 0px 20px 0px;
     font-family: $itg-roboto;
     h2 {
-        @include story-tag(22px, 22px);
+        @include story-tag(22px,
+        22px);
         font-size: 14px;
         font-weight: normal;
         @include display-inline;
@@ -5597,7 +5833,9 @@ h1.category-heading {
                 color: #193984;
                 display: block;
                 margin-top: 5px;
-                @include font(12px, null, 500);
+                @include font(12px,
+                null,
+                500);
                 text-transform: uppercase;
             }
             &:nth-child(2n+1) {
@@ -5641,8 +5879,13 @@ h1.category-heading {
             padding-top: 10px;
             @include pos(relative);
             .web-excl {
-                @include story-tag(22px, 22px);
-                @include pos(absolute, 10px, null, null, 10px);
+                @include story-tag(22px,
+                22px);
+                @include pos(absolute,
+                10px,
+                null,
+                null,
+                10px);
             }
             h2 {
                 margin-top: 10px;
@@ -5656,7 +5899,8 @@ h1.category-heading {
             background: $white-color;
             border: 1px solid $border-color;
             .latest-issue {
-                @include story-tag(22px, 22px);
+                @include story-tag(22px,
+                22px);
             }
             .issue-title {
                 background: #9d9d9d;
@@ -5687,7 +5931,9 @@ h1.category-heading {
                 }
             }
             .issue-subscribe-link {
-                @include font(22px, null, 700);
+                @include font(22px,
+                null,
+                700);
                 text-transform: uppercase;
                 color: #444444;
                 margin-top: 10px;
@@ -5731,6 +5977,9 @@ h1.category-heading {
     }
     .section-ordering {
         @include pos(relative);
+        a {
+            display: block;
+        }
     }
     span.widget-title {
         @include pos(absolute);
@@ -5811,7 +6060,9 @@ section.sidebar {
 .view-so-sorry {
     margin-bottom: 40px;
     h2 {
-        @include font(21px, null, 300);
+        @include font(21px,
+        null,
+        300);
         color: #db1314;
         text-transform: uppercase;
         span {
@@ -5867,20 +6118,30 @@ section.sidebar {
     border-bottom: none;
 }
 
-#block-views-so-sorry-most-watched {
+#block-views-so-sorry-most-watched,
+.sport_ipl-ipl_video {
     margin-top: 50px;
-    .view-so-sorry {
+    .view-so-sorry,
+    .view-sport-ipl {
         .view-content {
             @include photo-scroll;
         }
     }
 }
 
+.sport_ipl-ipl_video {
+    margin-top: 0;
+}
+
 .view-display-id-so_sorry_page {
     margin: -15px;
     @include pos(relative);
     h1 {
-        @include pos(relative, null, null, 0, 0);
+        @include pos(relative,
+        null,
+        null,
+        0,
+        0);
         @include calculate-width(1);
         color: $white-color;
         padding: 7px 15px;
@@ -5965,7 +6226,9 @@ section.sidebar {
 #block-itg-widget-so-sorry-front-politoons {
     .politoons-sosorry {
         h2 {
-            @include font(20px, null, 300);
+            @include font(20px,
+            null,
+            300);
             color: #db1314;
             text-transform: uppercase;
             margin-bottom: 20px;
@@ -5984,7 +6247,9 @@ section.sidebar {
         }
         span.title {
             display: block;
-            @include font(12px, null, 500);
+            @include font(12px,
+            null,
+            500);
             color: #000;
             font-family: $itg-roboto;
             text-transform: uppercase;
@@ -6104,7 +6369,11 @@ section.sidebar {
     #block-itg-front-end-common-recommended-anonymous-user {
         ul.common-list {
             padding: 0 15px;
-            @include listing-with-image(recom-listing, left, 15px, pic, detail);
+            @include listing-with-image(recom-listing,
+            left,
+            15px,
+            pic,
+            detail);
             li.recom-listing {
                 padding: 0 0 30px 0;
                 .pic {
@@ -6112,7 +6381,9 @@ section.sidebar {
                 }
             }
             h4 {
-                @include font(12px, null, 700);
+                @include font(12px,
+                null,
+                700);
                 color: #048cb9;
                 text-transform: uppercase;
             }
@@ -6275,7 +6546,11 @@ section.sidebar {
         .pic {
             @include pos(relative);
             span {
-                @include pos(absolute, null, null, 0, 0);
+                @include pos(absolute,
+                null,
+                null,
+                0,
+                0);
                 background: rgba(0, 0, 0, 0.56);
                 color: #fff;
                 @include itg-font($itg-roboto);
@@ -6372,6 +6647,8 @@ section.sidebar {
         }
     }
     .auto-tips-n-tricks {
+        height: 402px;
+        overflow: auto;
         ul {
             list-style: none;
             li {
@@ -6427,7 +6704,9 @@ section.sidebar {
                 color: #fff;
             }
             .detail .flex-caption {
-                @include font(18px, 24px, $itg-font-medium);
+                @include font(18px,
+                24px,
+                $itg-font-medium);
                 padding: 10px;
                 min-height: 68px;
                 max-height: auto;
@@ -6435,7 +6714,11 @@ section.sidebar {
             }
         }
         .flexslider .slides li .detail .flex-count {
-            @include pos(absolute, null, null, 78px, 0px);
+            @include pos(absolute,
+            null,
+            null,
+            78px,
+            0px);
         }
     }
     /*End photo section slider*/
@@ -7372,6 +7655,9 @@ section.sidebar {
                 &.active {
                     color: #fff;
                 }
+                i {
+                    font-size: 24px;
+                }
             }
             ul {
                 position: absolute;
@@ -7379,7 +7665,7 @@ section.sidebar {
                 z-index: 1;
                 left: 0;
                 top: 50px;
-                width: 200px;
+                width: 178px;
                 display: none;
                 max-height: 200px;
                 overflow: auto;
@@ -8277,9 +8563,13 @@ section.sidebar {
         }
     }
     .section_wise_order-edu-tips-and-trick {
-        overflow: auto;
+        /*overflow: auto;*/
         border: 1px solid #ddd;
         padding: 10px;
+        .auto-tips-n-tricks {
+            height: 220px;
+            overflow: auto;
+        }
     }
     .auto-tips-n-tricks {
         ul {
@@ -8560,12 +8850,6 @@ section.sidebar {
     .widget-title {
         @include blue-title;
     }
-    .siderbar-sport {
-        .widget-title,
-        .h2.block-title {
-            display: none;
-        }
-    }
     .droppable {
         overflow: hidden;
     }
@@ -8608,7 +8892,6 @@ section.sidebar {
                     position: absolute;
                 }
                 .itg-listing {
-                    padding-top: 20px;
                     border: none;
                 }
             }
@@ -9502,6 +9785,7 @@ section.sidebar {
     .election-graph-5 {
         display: inline-block;
         width: 100%;
+        margin-top: -60px;
     }
     .left-side {
         .itg-415-layout {
@@ -9634,8 +9918,6 @@ section.sidebar {
     }
     .key-candidate {
         font-family: $itg-roboto;
-        max-height: 282px;
-        overflow: auto;
         .most_popular {
             border: none;
         }
@@ -9644,6 +9926,8 @@ section.sidebar {
         }
         .list-state {
             margin: 0 0px 20px 0px;
+            white-space: nowrap;
+            overflow: auto;
             span {
                 cursor: pointer;
                 display: inline-block;
@@ -9662,6 +9946,8 @@ section.sidebar {
         .key-candidate-detail {
             font-family: $itg-roboto;
             display: none;
+            max-height: 282px;
+            overflow: auto;
             ul {
                 @include clearfix;
                 border-bottom: 1px solid $border-color;
@@ -9756,7 +10042,7 @@ section.sidebar {
         #map-state {
             position: absolute;
             right: 0;
-            top: -16px;
+            top: -40px;
             height: 20px;
             line-height: 20px;
             padding: 0;
@@ -9777,6 +10063,12 @@ section.sidebar {
                 left: 50%;
                 margin-top: -48px;
                 margin-left: -110px;
+            }
+        }
+        .map-box {
+            h4 {
+                min-height: 28px;
+                padding-right: 150px;
             }
         }
     }
@@ -10802,8 +11094,7 @@ h1.about-us-heading {
     margin: 20px 0 10px 0;
     .fun-facts,
     .social-share {
-        display: inline-block;
-        vertical-align: top;
+        display: block;
         h2,
         ul {
             display: inline;
@@ -10816,7 +11107,7 @@ h1.about-us-heading {
     .social-share {
         ul {
             margin-top: 3px;
-            padding-left: 10px !important;
+            padding-left: 0px !important;
             display: inline-block;
             li {
                 a {
@@ -11550,6 +11841,9 @@ h1.about-us-heading {
                 cursor: pointer;
                 @include display-inline;
                 padding-right: 20px;
+            }
+            br {
+                display: none;
             }
         }
         .ltv-and-ss {
@@ -13459,8 +13753,17 @@ span.see-picture {
     height: calc(100% - 22px);
 }
 
-.top_stories_ordering .widget-title {
-    padding: 5px 7px 1px 7px;
+.top_stories_ordering,
+.special-top-news {
+    .widget-title {
+        padding: 5px 7px 1px 7px;
+    }
+}
+
+.special-top-news {
+    .itg-listing-wrapper {
+        height: 100%;
+    }
 }
 
 .data-holder {
@@ -13857,6 +14160,291 @@ span.story-sponsor-powered-text::last-word {
     line-height: 18px;
 }
 
+#cricketblog .bolg-content .row {
+    padding: 15px 0;
+    border-bottom: 1px solid #E4E4E4;
+    position: relative
+}
+
+#cricketblog h2 {
+    font: 300 16px/20px roboto;
+    color: #767676;
+    margin-bottom: 15px
+}
+
+#cricketblog .batBollDetails {
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    background: #d00b26;
+    height: 109px
+}
+
+#cricketblog .bolg-content .row span.sectiontime {
+    width: 50%;
+    font-size: 14px;
+    color: #111;
+    display: block;
+    line-height: 17px;
+    font-style: normal;
+    margin-bottom: 5px;
+    font-weight: 500
+}
+
+.float-left {
+    float: left
+}
+
+.live-block h1 {
+    font-weight: 900;
+    color: #000;
+    font-size: 42px;
+}
+
+.live-block h1 span {
+    color: #db0306
+}
+
+.live-block #cricketblog img {
+    width: 100%
+}
+
+.live-block .bolg-content#bolgcontent p {
+    color: #474747;
+    line-height: 26px;
+}
+
+.live-block .bolg-content#bolgcontent p span {
+    font-weight: 700;
+    margin-right: 4px;
+    color: #000;
+}
+
+.live-block #cricketblog .bolg-content .para-live-blog {
+    padding: 24px 0;
+    border-bottom: 1px solid #E4E4E4;
+    position: relative;
+    float: left;
+    width: 100%
+}
+
+.live-block #cricketblog .batBollDetails {
+    padding: 10px;
+    margin-top: 0
+}
+
+.live-block #cricketblog .batBollDetails .sectiontime {
+    color: #fff;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.live-block #cricketblog .batBollDetails {
+    height: 100%;
+    float: left;
+    width: 100%;
+    box-sizing: border-box
+}
+
+.live-block #cricketblog .batBollDetails .batsmanDetails {
+    float: left;
+    width: 50%
+}
+
+.live-block #cricketblog .batBollDetails .bollerDetails {
+    float: right;
+    width: 50%
+}
+
+.live-block #cricketblog .batBollDetails .batsmanDetails span,
+.live-block #cricketblog .batBollDetails .bollerDetails span {
+    margin-bottom: 0
+}
+
+.live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator {
+    float: left;
+    position: relative;
+    padding-right: 20px;
+}
+
+.live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator:before {
+    position: absolute;
+    right: 10px;
+    border-right: 1px solid #fff;
+    content: "";
+    height: 12px;
+    width: 1px;
+    top: 3px;
+}
+
+.live-block #cricketblog .batBollDetails .batsmanDetails .batsman_detail.batRun {
+    margin-left: 20px;
+}
+
+.live-block #cricketblog .batBollDetails .bollerDetails .bollNameSaperator {
+    float: left;
+    position: relative;
+    padding-right: 20px;
+}
+
+.live-block #cricketblog .batBollDetails .bollerDetails .bollNameSaperator:before {
+    position: absolute;
+    right: 10px;
+    border-right: 1px solid #fff;
+    content: "";
+    height: 12px;
+    width: 1px;
+    top: 3px;
+}
+
+.live-block #cricketblog .batBollDetails .bollerDetails .batsman_detail.overball {
+    margin-left: 20px;
+}
+
+.live-block #cricketblog .batBollDetails .bollerDetails .bowler_detail.overball {
+    margin-left: 20px;
+}
+
+.story-section .story-tech-chunk .tech-rating {
+    width: 88px;
+    height: 33px;
+    background: #b00808;
+    color: #fff;
+    font-size: 28px;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    text-align: center;
+    line-height: 33px;
+    font-weight: 700;
+}
+
+.tech-pros-cons-main h2 {
+    font-size: 28px;
+    line-height: 45px;
+    color: #000;
+    font-weight: bold;
+    padding: 0 0 0 10px;
+    float: left;
+    margin-left: 42%;
+    width: 58%;
+    margin-bottom: 10px;
+}
+
+.tech-pros-cons-main h2 strong {
+    font-size: 30px;
+    line-height: 35px;
+    color: #fff;
+    background-color: #b00808;
+    float: right;
+    padding: 0 10px;
+}
+
+ul.pron-cons-img {
+    width: 42%;
+    float: left;
+}
+
+ul.tech-pron-cons-img {
+    width: 41.66666667%;
+    float: left;
+}
+
+ul.tech-pros {
+    list-style: disc;
+    width: 27%;
+    float: left;
+    margin-left: 4%;
+}
+
+ul.tech-cons {
+    list-style: disc;
+    width: 27%;
+    float: left;
+}
+
+ul.tech-cons li,
+ul.tech-pros li {
+    font-size: 14px;
+    line-height: 26px;
+    color: #939393;
+    float: left;
+    width: 100%;
+}
+
+ul.tech-cons li span,
+ul.tech-pros li span {
+    color: #b00808;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 24px;
+    list-style: outside none none;
+    margin-left: -14px;
+    text-transform: uppercase;
+}
+
+ul.tech-cons li:first-child,
+ul.tech-pros li:first-child {
+    list-style: none;
+}
+
+ul.pron-cons-img li img {
+    margin-right: 10%;
+    margin-top: -53px;
+    width: 92%;
+}
+
+.tech-pros-cons-main {
+    width: 100%;
+    float: left;
+    padding: 10px;
+    background-color: #edebec
+}
+
+.tech-photos .tech-photos-head-section {
+    display: block;
+}
+
+.tech-photos .tech-photos-head-section .tech-photos-count {
+    color: #B5B5B5;
+    font-size: 13px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.tech-photos .tech-photo-item {
+    width: 30%;
+    display: inline-block;
+    margin-right: 3%;
+    position: relative;
+}
+
+.tech-photos .tech-photo-item .tech-photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+}
+
+.tech-photos .tech-photo-item .tech-photo-overlay a .tech-photo-seemore {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 22px;
+}
+
+.tech-photos .tech-photo-item .tech-photo-overlay a,
+.tech-photos .tech-photo-item .tech-photo-overlay a span:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
 
 /*css end add by arun */
 
@@ -13924,3 +14512,22 @@ span.story-sponsor-powered-text::last-word {
 
 
 /* css end loader */
+
+.sso-main-content {
+    >.messages.error {
+        text-align: center;
+        ul {
+            list-style-type: none;
+        }
+    }
+}
+
+#ui-datepicker-div {
+    z-index: 9999 !important;
+}
+
+.cheaper_dearer {
+    .budget-predictor-img {
+        max-height: 130px;
+    }
+}

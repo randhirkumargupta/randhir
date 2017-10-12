@@ -382,6 +382,7 @@ input[type="text"] {
 
 .itg-h321-section {
     .tech_reviews,
+    .tech_reviews-block_5,
     .auto_reviews,
     .dont_miss {
         height: 100%;
@@ -440,6 +441,7 @@ input[type="text"] {
     padding: 0;
     font-weight: 600;
     margin-bottom: 5px;
+    height: auto;
     a {
         color: #323232;
     }
@@ -447,7 +449,7 @@ input[type="text"] {
 
 .sidebar-section-photo {
     .itg-widget {
-        margin: 35px 0;
+        /*margin: 35px 0; for video page sidebar */
         position: relative;
     }
 }
@@ -566,7 +568,6 @@ input[type="text"] {
 }
 
 .featured-news .featured-post h3 {
-    max-height: 96px;
     overflow: hidden;
     margin-top: 5px;
     line-height: 22px;
@@ -1995,6 +1996,9 @@ input[type="text"] {
             &:hover {
                 box-shadow: 0 0 5px 0 #999;
             }
+        }
+        &:after {
+            display: none;
         }
     }
 }
@@ -3730,6 +3734,7 @@ body {
         width: 200px;
         text-align: left;
         margin-right: 7px;
+        margin-bottom: 10px;
         >label {
             display: block;
             text-align: left;
@@ -6450,7 +6455,6 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             li {
                 display: inline-block;
                 vertical-align: top;
-                margin-right: 2px;
                 max-width: 96px;
                 a {
                     padding: 10px;

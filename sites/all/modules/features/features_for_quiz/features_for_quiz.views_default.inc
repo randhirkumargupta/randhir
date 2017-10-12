@@ -183,7 +183,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Date */
+  /* Field: Content: Survey Start Date  */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -196,7 +196,7 @@ function features_for_quiz_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Timeline */
+  /* Field: Content: Survey End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -275,7 +275,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
-  /* Field: Content: Quiz Expiry Date */
+  /* Field: Content: Survey Expiry Date */
   $handler->display->display_options['fields']['field_survey_expity_date_1']['id'] = 'field_survey_expity_date_1';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['table'] = 'field_data_field_survey_expity_date';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['field'] = 'field_survey_expity_date';
@@ -584,7 +584,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Date */
+  /* Field: Content: Survey Start Date  */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -597,7 +597,7 @@ function features_for_quiz_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Timeline */
+  /* Field: Content: Survey End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -685,7 +685,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
-  /* Field: Content: Quiz Expiry Date */
+  /* Field: Content: Survey Expiry Date */
   $handler->display->display_options['fields']['field_survey_expity_date_1']['id'] = 'field_survey_expity_date_1';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['table'] = 'field_data_field_survey_expity_date';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['field'] = 'field_survey_expity_date';
@@ -783,14 +783,14 @@ function features_for_quiz_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Timeline (field_survey_end_date) */
+  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value']['id'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value']['field'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_survey_end_date_value']['group'] = 2;
   $handler->display->display_options['filters']['field_survey_end_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Timeline (field_survey_end_date) */
+  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['id'] = 'field_survey_end_date_value_1';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['field'] = 'field_survey_end_date_value';
@@ -980,7 +980,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Date */
+  /* Field: Content: Survey Start Date  */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -993,7 +993,7 @@ function features_for_quiz_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Timeline */
+  /* Field: Content: Survey End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -1081,7 +1081,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class="edit-link">[edit_node]</span>';
-  /* Field: Content: Quiz Expiry Date */
+  /* Field: Content: Survey Expiry Date */
   $handler->display->display_options['fields']['field_survey_expity_date_1']['id'] = 'field_survey_expity_date_1';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['table'] = 'field_data_field_survey_expity_date';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['field'] = 'field_survey_expity_date';
@@ -1189,14 +1189,14 @@ function features_for_quiz_views_default_views() {
     15 => 0,
     18 => 0,
   );
-  /* Filter criterion: Content: Timeline (field_survey_end_date) */
+  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value']['id'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value']['field'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['operator'] = '>=';
   $handler->display->display_options['filters']['field_survey_end_date_value']['group'] = 2;
   $handler->display->display_options['filters']['field_survey_end_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Timeline (field_survey_end_date) */
+  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['id'] = 'field_survey_end_date_value_1';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['field'] = 'field_survey_end_date_value';
@@ -1394,7 +1394,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['field_story_category']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_story_category']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_story_category']['delta_offset'] = '0';
-  /* Field: Content: Date */
+  /* Field: Content: Survey Start Date  */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -1407,7 +1407,7 @@ function features_for_quiz_views_default_views() {
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Content: Timeline */
+  /* Field: Content: Survey End Date */
   $handler->display->display_options['fields']['field_survey_end_date']['id'] = 'field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['fields']['field_survey_end_date']['field'] = 'field_survey_end_date';
@@ -1495,7 +1495,7 @@ function features_for_quiz_views_default_views() {
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Actions';
   $handler->display->display_options['fields']['nothing']['exclude'] = TRUE;
-  /* Field: Content: Quiz Expiry Date */
+  /* Field: Content: Survey Expiry Date */
   $handler->display->display_options['fields']['field_survey_expity_date_1']['id'] = 'field_survey_expity_date_1';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['table'] = 'field_data_field_survey_expity_date';
   $handler->display->display_options['fields']['field_survey_expity_date_1']['field'] = 'field_survey_expity_date';
@@ -1595,14 +1595,14 @@ function features_for_quiz_views_default_views() {
     1 => '1',
   );
   $handler->display->display_options['filters']['field_quuiz_publish_value']['group'] = 1;
-  /* Filter criterion: Content: Timeline (field_survey_end_date) */
+  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value']['id'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value']['field'] = 'field_survey_end_date_value';
   $handler->display->display_options['filters']['field_survey_end_date_value']['operator'] = '<';
   $handler->display->display_options['filters']['field_survey_end_date_value']['group'] = 2;
   $handler->display->display_options['filters']['field_survey_end_date_value']['default_date'] = 'now';
-  /* Filter criterion: Content: Timeline (field_survey_end_date) */
+  /* Filter criterion: Content: Survey End Date (field_survey_end_date) */
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['id'] = 'field_survey_end_date_value_1';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['table'] = 'field_data_field_survey_end_date';
   $handler->display->display_options['filters']['field_survey_end_date_value_1']['field'] = 'field_survey_end_date_value';

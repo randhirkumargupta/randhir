@@ -1,0 +1,108 @@
+<div class="popup-mobile">
+<div class="mobile-close">X</div>
+<div class="mobile-box">
+  <p>
+  
+        
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+
+<style>
+.form-container{ width:360px; height:320px; margin:0 auto; padding:10px; border:1px solid #ccc; position:relative}
+.form-container h3{ font-size:16px; font-family:Arial, Helvetica, sans-serif;}
+.form-container h4{ font-size:14px; font-family:Arial, Helvetica, sans-serif;  margin: 0;padding:0; padding-bottom:10px}
+.form-container div label{font-size:16px; font-family:Arial, Helvetica, sans-serif;margin-right:16px; float:left; width:55px;}
+.form-container div.gap{margin-bottom:20px; float:left;}
+.form-container div input[type="text"]{/* float:left; */width:250px; height:18px; line-height:18px; background:#CCC; color:#000; border:0; padding:3px;}
+.form-container div input[type=text]:focus{ outline:none; border:none;}
+.form-container div input[type=text]:active{ background:#CCC;}
+.captcha img {float: left;  margin-left: 69px; margin-right:15px;}
+.captcha-input {width: 115px !important; margin-top: -13px;}
+.botton a{padding:8px 18px; background:#03acf1; text-decoration:none; text-align:center; color:#FFFFFF;  clear: both; margin-top: 40px;
+  float: left; margin-left: 110px; font-family:Arial, Helvetica, sans-serif} 
+.close a {position: absolute;right: 5px;top: 5px;float: right;font-size: 23px;border-radius: 100%;border: 1px solid #31b8f2;text-align: center;
+  width: 28px;height: 28px;display: block;text-decoration: none; font-family:Arial, Helvetica, sans-serif;}
+  .close a:hover{color:#000; text-decoration:none;}
+  .error_msg{ font-size:11px;  color:#c00; display:block;}
+  .botton input[type="submit"] {
+  padding: 8px 18px;
+  background: #03acf1;
+  text-decoration: none;
+  text-align: center;
+  color: #FFFFFF;
+  clear: both;    
+  margin-top: 40px;
+  float: left;
+  margin-left: 110px;
+  font-family: Arial, Helvetica, sans-serif;
+  border:0;
+}
+//.form-container div.gap {
+//  margin-bottom: 10px;
+//  float: left;
+//}
+.error_msg {
+  font-size: 11px;
+  color: #c00;
+  padding-bottom: 1px;
+  display: block;
+  margin-bottom: 10px;
+  margin-left: 71px;
+}
+</style>
+</head>
+
+<body >
+<script src="/staticpages/applications/js/ValidateNew.js"></script>
+<div class="form-container">
+  
+    <!--<div class="close"><a href="#">x</a></div> onLoad="loadCaptchaImg()"-->
+
+
+  <h3>Please fill the details below to get the link:</h3>
+    
+    <form action="#" name="app" id="app" onSubmit="Javascript :return validate()" method="post">
+      
+        <div class="gap">
+            <label>Name</label>
+            <input type="text" name="name" id="name" />
+        </div>
+        <span class="error_msg" id="name_err"></span>
+        <div class="gap">
+            <label>Email</label>
+            <input type="text" name="email" id="email" />
+        </div>
+        <span class="error_msg" id="email_err"></span>
+        <div class="gap">
+            <label>Phone</label>
+            <input type="text" name="phone" id="phone" maxlength="10" onKeyPress="Javascript:return numchk(this);"/>
+        </div>
+        <span class="error_msg" id="phone_err"></span>
+        <div class="captcha">
+          <!--<img height="45" width="87" align="middle" style="margin-top: 6px;" id="captcha">-->
+      <input type="hidden" value="at" name="source" id="source"/>
+            <!--<input type="text" value="null" name="key" id="key"/>-->
+           
+              <!--<h4>Insert Captcha</h4>
+                <input type="text" name="captchaval" id="captchaval" class="captcha-input" maxlength="5"/>
+                <span class="error_msg" id="captcha_err" style="margin-top:0; float:none; width:auto;"></span>-->
+           
+        </div>
+        
+        <div class="botton"><input type="submit" value="Send Me the Link" /></div>
+        
+    </form>
+    
+    
+</div>
+
+</body>
+</html>
+ 
+      
+    </p>
+  <br/>
+</div>
+</div>

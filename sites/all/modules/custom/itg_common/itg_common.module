@@ -20,9 +20,6 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
 function itg_common_init() {
   global $user, $base_url, $theme;
   $arg = arg();
-  
-
-  //p(node_load(21014));
   // condition for archive story redirect
   $ctype_tab = array('Story', 'photogallery', 'Videogallery');
   if ($arg[0] == 'archives' && !empty($arg[1]) && in_array($arg[1], $ctype_tab) && empty($arg[2])) {
@@ -126,6 +123,21 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['itg-akamai-load-my-account'] = array(
+    'title' => 'Akamai Load My Account',
+    'description' => 'Akamai Load My Account',
+    'page callback' => 'itg_akamai_load_my_account',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_akamai.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['get-amp-search-keyword'] = array(
+    'page callback' => 'itg_get_amp_search_result',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -163,7 +175,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     'views-exposed-form-searchimage-search-publish-video', 
     );
   if( in_array($form['#id'], $solr_video_video_id)) {
-    
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/bootstrap.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery.snippet.min.js', array('scope' => 'footer'));
@@ -174,13 +187,14 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 		   effect: 'climb'
 	     }); jQuery('body').on('click','.play-video',function () {
           var getvideo_id = $(this).attr('data-video-id');
+          var getvideo_repo = $(this).attr('data-type-repo');
           jQuery.ajax({
           url: Drupal.settings.basePath + 'dailymotion-video-play',
           type: 'post',
           beforeSend: function (xhr) {
               jQuery('#widget-ajex-loader').show();
           },
-          data: {'videoid': getvideo_id,'width':400,'height':260},
+          data: {'videoid': getvideo_id, 'getvideo_repo':getvideo_repo,'width':400,'height':260},
           success: function (data) {
               jQuery('#video_play_div').html(data);
               jQuery('#widget-ajex-loader').hide();
@@ -212,13 +226,14 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 		   effect: 'climb'
 	     }); jQuery('.play-video').click(function () {
       var getvideo_id = $(this).attr('data-video-id');
+      var getvideo_repo = $(this).attr('data-type-repo');
       jQuery.ajax({
           url: Drupal.settings.basePath + 'internal-video-play',
           type: 'post',
           beforeSend: function (xhr) {
               jQuery('#widget-ajex-loader').show();
           },
-          data: {'videodata': getvideo_id, 'width': 400, 'height': 260},
+          data: {'videodata': getvideo_id, 'getvideo_repo':getvideo_repo, 'width': 400, 'height': 260},
           success: function (data) {
               jQuery('#video_play_div').html(data);
               jQuery('#widget-ajex-loader').hide();
@@ -313,7 +328,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     }
 
     // hide source relation and type field from other users 
-    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'poll_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'survey_node_form' || $form_id == 'mega_review_critic_node_form') {
+    if ($form_id == 'podcast_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'recipe_node_form' || $form_id == 'photogallery_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'poll_node_form' || $form_id == 'breaking_news_node_form' || $form_id == 'survey_node_form' || $form_id == 'mega_review_critic_node_form' || $form_id == 'quiz_node_form') {
       if($user->uid != 1) {
       $form['field_story_source_id']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
@@ -322,6 +337,8 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       $form['field_common_related_content']['#attributes']['class'][] = 'element-hidden';
       $form['field_cm_related_content_detail']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_magazine_kicker_text']['#attributes']['class'][] = 'element-hidden';
+      $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
+      $form['field_itg_content_publish_date']['#attributes']['class'][] = 'element-hidden';
       }
 
       // add common hidden type field
@@ -781,7 +798,7 @@ function itg_common_node_presave($node) {
         if ($node->op == 'Publish') {
           $node->status = 1;
         }
-        elseif ($node->op == 'Save as Draft' || $node->status == 0) {
+        if ($node->op == 'Save as Draft') {
           $node->status = 0;
         }
       }
@@ -1016,15 +1033,15 @@ function itg_content_inactive() {
   $itg_result = $itg_query->execute()->fetchAll();
   itg_watchdog("nodes_expiry" , $itg_result);
   foreach ($itg_result as $itg_val) {
-    $node = node_load($itg_val->nid);
+    $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
-    $node->status = 0;
+    $node_data->status = 0;
 //    if($node->type == 'videogallery') {
 //      if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
 //        itg_videogallery_node_publish_to_unpublish($node->nid);
 //      }
 //    }
-    node_save($node);
+    node_save($node_data);
     itg_widget_handle_unpublished_node($node->nid);
   }
   itg_watchdog("nodes_expiry" , $nodeid);
@@ -1060,34 +1077,33 @@ function itg_is_special_page() {
  * @return string
  *   Returns node title.
  */
-function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
-  // Condition is to make free title on home page ITG-3774
+function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
+// Condition is to make free title on home page ITG-3774
   //if(drupal_is_front_page() || itg_is_special_page()) {
     $max_limit = 10000;
   //}
+    
   $arg = arg();
   $titlte = "";
   $positions_array = array();
   $left_smiles = "";
   $right_smiles = "";
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
-  $query->fields('n', array('title'));
-  $query->fields('emoji', array('field_emoji_value'));
-  $query->fields('sh', array('field_story_short_headline_value'));
-  $query->fields('emoji_2', array('field_emoji_2_value'));
-  $query->fields('emoji_pos', array('field_emoji_position_value'));
-  $query->condition('n.nid', $nid);
-  $query->condition('n.type', 'story');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $result = [];
+  if (!empty($node_obj) && is_numeric($node_obj) && (int) $node_obj) {
+   $result[] = get_field_value_for_smily($node_obj);
+   
+  } else {
+      $result[] = array(
+        'field_story_short_headline_value' => $node_obj['field_story_short_headline_value'],
+        'field_emoji_position_value' => $node_obj['field_emoji_position_value'],
+        'field_emoji_2_value' => $node_obj['field_emoji_2_value'],
+        'field_emoji_value' => $node_obj['field_emoji_value'],
+        'title' => $node_obj['title'],
+      );
+  }
   if (!empty($result[0]['field_story_short_headline_value'])) {
-    foreach ($result as $positions) {
-      if (!empty($positions['field_emoji_position_value'])) {
-        $positions_array[] = $positions['field_emoji_position_value'];
-      }
+    foreach ($result[0]['field_emoji_position_value'] as $positions) {
+        $positions_array[] = $positions;
     }
     if (in_array('left', $positions_array)) {
       if (!empty($result[0]['field_emoji_2_value'])) {
@@ -1138,11 +1154,7 @@ function itg_common_get_smiley_title($nid, $min_limit = 0, $max_limit = 255, $is
     }
   }
   else {
-    $query = db_select('node', 'n');
-    $query->fields("n", array("title"));
-    $query->condition('n.nid', $nid);
-    $result = $query->execute()->fetchField();
-    return ucfirst(mb_strimwidth($result, $min_limit, $max_limit, ".."));
+    return ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
   }
 }
 
@@ -1481,7 +1493,8 @@ function itg_common_url_friendly_path($pathdata) {
  */
 function _is_sponsor_story_article($nid) {
   $is_sponsor = FALSE;
-  if (isset($nid)) {
+  //code commented by shravan
+  /*if (isset($nid)) {
     $type_query = db_select('node', 'n');
     $type_query->fields('n', array('type'));
     $type_query->condition('n.nid', $nid, '=');
@@ -1502,7 +1515,7 @@ function _is_sponsor_story_article($nid) {
         }
       }
     }
-  }
+  }*/
   return $is_sponsor;
 }
 
@@ -1659,19 +1672,13 @@ function itg_common_global_alt_title($field_machine_name, $fid = NULL) {
  * Implements itg_common_get_addontitle().
  * @param int $nid;
  */
-function itg_common_get_addontitle($nid) {
-  if (!empty($nid)) {
-    $addon_list = array();
-    $query = db_select('field_data_field_story_new_title', 'addon');
-    $query->join('field_data_field_story_redirection_url_titl', 'addurl', 'addurl.entity_id = addon.entity_id');
-    $query->fields('addon', array('field_story_new_title_value'))
-          ->fields('addurl', array('field_story_redirection_url_titl_value'));
-    $query->condition('addon.entity_id', $nid);
-    $result = $query->execute();
-    while ($record = $result->fetchAssoc()) {
-      $addon_list['ad_title'] = $record['field_story_new_title_value'];
-      $addon_list['ad_url'] = $record['field_story_redirection_url_titl_value'];
-    }
+function itg_common_get_addontitle($node_obj) {
+  if (!empty($node_obj)) {
+     $addon_list = array();
+    //while ($record = $result->fetchAssoc()) {
+      $addon_list['ad_title'] = $node_obj['ad_title'];
+      $addon_list['ad_url'] = $node_obj['ad_url'];
+    //}
 
     return $addon_list;
   }
@@ -1694,3 +1701,285 @@ function itg_common_taxonomy_get_parents($tid) {
 
     return isset($parents[$tid]) ? $parents[$tid] : array();
 }
+
+
+/**
+ * Implements itg_custom_amp_body_filter();
+ */
+function itg_custom_amp_body_filter($fullReplacesBodyText) {
+  
+  $fullReplacesBodyText = trim(preg_replace('/mce_href=[^>]*/', '', $fullReplacesBodyText));
+
+  $fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));
+
+  $fullReplacesBodyText = trim(preg_replace('/style=[^>]*/', '', $fullReplacesBodyText));
+
+  $fullReplacesBodyText = trim(preg_replace('/<style(.*)\/style>/', '', $fullReplacesBodyText));
+
+  preg_match_all('/<img.*src=\"(.*)\".*>/isU', $fullReplacesBodyText, $matches);
+
+  $i = 0;
+  foreach ($matches[0] as $images) {
+
+    $src = $matches[1][$i];
+    list($width, $height, $type, $attr) = getimagesize($src);
+
+    $layout_responsive = ($width > 300) ? 'layout="responsive"' : '';
+    $img = ' <amp-img  src="' . $src . '" alt="" height="' . $height . '" width="' . $width . '" ' . $layout_responsive . '></amp-img>  ';
+
+
+    $fullReplacesBodyText = str_replace($images, $img, $fullReplacesBodyText);
+
+    $i++;
+  }
+
+  preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $fullReplacesBodyText, $iframes);
+
+  foreach ($iframes[0] as $iframes) {
+    preg_match('/src="([^"]+)"/', $iframes, $match);
+    $frame_url = parse_url($match[1]);
+    if ($frame_url['scheme'] != 'https') {
+      $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
+    }
+    else {
+    $frame = '<amp-iframe width="200" height="100"
+    sandbox="allow-scripts allow-same-origin"
+    layout="responsive"
+    frameborder="0"
+    src="' . $match[1] . '">
+    </amp-iframe>';
+      $fullReplacesBodyText = str_replace($iframes, $frame, $fullReplacesBodyText);
+    }
+  }
+  
+  preg_match_all('/<style.*><\/style>/isU', $fullReplacesBodyText, $styles);
+    
+  foreach ($styles[0] as $style) {
+    $fullReplacesBodyText = str_replace($style, "", $fullReplacesBodyText);
+  }
+
+  $value_mambots = '"mambots/';
+  $string_value_mambots_replace = '"http://indiatoday.intoday.in/mambots/';
+  $fullReplacesBodyText = str_replace($value_mambots, $string_value_mambots_replace, $fullReplacesBodyText);
+  $fullReplacesBodyText = str_replace(array("<br/>", "<br>"), "", $fullReplacesBodyText);
+
+
+  $result = array();
+  $fullReplacesBodyText = $bodystr = stripcslashes($fullReplacesBodyText);
+  
+    // code to replace embed twitter
+  preg_match_all("'<blockquote class=\"twitter-tweet\"(.*)>(.*)</blockquote>'siU", $bodystr, $result);
+
+  if (!empty($result)) {
+    foreach ($result[0] as $value1) {
+      $Twitterdataid = itg_get_twitter_embeded_id($value1);
+      if ($Twitterdataid != 0) {
+       $amp_twitter = '<amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter>'; //data-cards="hidden"
+        $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
+        $value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script(.*)src=\"//platform.twitter.com/widgets.js\"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+      }
+    }
+  }
+  
+  // code to replace embed twitter video
+  preg_match_all("'<blockquote class=\"twitter-video\"(.*)>(.*)</blockquote>'siU", $bodystr, $result);
+  if (!empty($result)) {
+    foreach ($result[0] as $value1) {
+      $Twitterdataid = itg_get_twitter_embeded_video_id($value1);
+      $Twitterdataid = preg_replace('/\?.*/', '', $Twitterdataid);
+      if ($Twitterdataid != 0) {
+        //$ampTwitterValue1 = str_replace("<blockquote", "<blockquote placeholder ", $value1);
+        // echo $Twitterdataid; die();
+        $amp_twitter = '<p><amp-twitter width="486" height="657" layout="responsive" data-tweetid="' . $Twitterdataid . '" >' . $ampTwitterValue1 . '</amp-twitter></p>'; //data-cards="hidden"
+        //echo $amp_twitter; die();
+        $fullReplacesBodyText = str_replace($value1, $amp_twitter, $fullReplacesBodyText);
+        
+        $value2 = '<script src="//platform.twitter.com/widgets.js" async="" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" charset="utf-8" src="//platform.twitter.com/widgets.js"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script(.*)src=\"//platform.twitter.com/widgets.js\"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+      }
+    }
+  }
+  
+  // code to replace instagram
+  preg_match_all("'<blockquote class=\"instagram-media\"(.*)>(.*)</blockquote>'siU", $fullReplacesBodyText, $result);
+  if (!empty($result)) {
+    foreach ($result as $key => $value) {
+      foreach ($value as $key1 => $value1) {
+        $instagramcode = itg_get_instagram_shortcode($value1);
+        if ($instagramcode) {
+          $amp_instagram = '<p><amp-instagram data-shortcode="' . $instagramcode . '" width="381" height="500" layout="responsive"></amp-instagram></p>'; //data-cards="hidden"
+          
+          $fullReplacesBodyText = str_replace($value1, $amp_instagram, $fullReplacesBodyText);
+          $value2 = '<script src="//platform.instagram.com/en_US/embeds.js" async="" defer="" ></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+
+          $value2 = '<script async="" defer="" src="//platform.instagram.com/en_US/embeds.js" ></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        }
+      }
+    }
+  }
+  
+  return $fullReplacesBodyText;
+}
+
+/**
+ * Implements itg_get_instagram_shortcode();
+ */
+function itg_get_instagram_shortcode($bodystr) {
+
+  preg_match("'<blockquote class=\"instagram-media\"(.*)</blockquote>'si", $bodystr, $match);
+  if ($match) {
+    preg_match_all('/<a href="(.*)">/', $bodystr, $a);
+    $hrefs = array();
+    $dom = new DOMDocument();
+    $dom->loadHTML($match[1]);
+    $tags = $dom->getElementsByTagName('a');
+    foreach ($tags as $tag) {
+      if (strpos($tag->getAttribute('href'),'instagram') !== false) {
+      $hrefs[] = $tag->getAttribute('href');
+      }
+    }
+    $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+    $twitterurl_embedded_url_refined_url = str_replace("https://www.instagram.com/", "", $twitterurl_embedded_url);
+    $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+    $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 2];
+    return $twitter_url_emb_id;
+  }
+  return false;
+}
+
+/**
+ * Implements itg_get_twitter_embeded_id().
+ */
+function itg_get_twitter_embeded_id($bodystr) {
+  preg_match("'<blockquote class=\"twitter-tweet\"(.*)>(.*)</blockquote>'si", $bodystr, $match);
+  if ($match) {
+    preg_match_all('/<a href="(.*)">/', $bodystr, $a);
+
+    $hrefs = array();
+    try {
+      $dom = new DOMDocument();
+      $dom->loadHTML($match[1]);
+
+      $tags = $dom->getElementsByTagName('a');
+      foreach ($tags as $tag) {
+        if (strpos($tag->getAttribute('href'),'twitter') !== false) {
+        $hrefs[] = $tag->getAttribute('href');
+        }
+      }
+      $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+      $twitterurl_embedded_url_refined_url = str_replace("https://twitter.com/", "", $twitterurl_embedded_url);
+      $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+      $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 1];
+    }
+    catch (Exception $e) {
+      $twitter_url_emb_id = 0;
+    }
+    return $twitter_url_emb_id;
+  }
+  return 0;
+}
+
+/*
+ * Implements itg_get_twitter_embeded_video_id().
+ */
+function itg_get_twitter_embeded_video_id($bodystr) {
+  preg_match("'<blockquote class=\"twitter-video\"(.*)>(.*)</blockquote>'si", $bodystr, $match);
+  if ($match) {
+    preg_match_all('/<a href="(.*)">/', $bodystr, $a);
+    $hrefs = array();
+    try {
+      $dom = new DOMDocument();
+      $dom->loadHTML($match[1]);
+
+      $tags = $dom->getElementsByTagName('a');
+      foreach ($tags as $tag) {
+        $hrefs[] = $tag->getAttribute('href');
+      }
+
+      $twitterurl_embedded_url = $hrefs[count($hrefs) - 1];
+      $twitterurl_embedded_url_refined_url = str_replace("https://twitter.com/", "", $twitterurl_embedded_url);
+      $break_twitter_url_arr = explode("/", $twitterurl_embedded_url_refined_url);
+      $twitter_url_emb_id = $break_twitter_url_arr[count($break_twitter_url_arr) - 1];
+    }
+    catch (Exception $e) {
+      $twitter_url_emb_id = 0;
+    }
+    return $twitter_url_emb_id;
+  }
+  return 0;
+}
+
+/**
+ * Function is used to prepare node title with emoji.
+ * 
+ * @param type $nid
+ * @return type
+ */
+function get_field_value_for_smily($nid) {
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
+  $query->fields('n', array('title'));
+  $query->fields('emoji', array('field_emoji_value'));
+  $query->fields('sh', array('field_story_short_headline_value'));
+  $query->fields('emoji_2', array('field_emoji_2_value'));
+  $query->fields('emoji_pos', array('field_emoji_position_value'));
+  $query->condition('n.nid', $nid);
+  //$query->condition('n.type', 'story');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return array(
+    'field_story_short_headline_value' => $result[0]['field_story_short_headline_value'],
+    'field_emoji_position_value' => array($result[0]['field_emoji_position_value'] , $result[1]['field_emoji_position_value']),
+    'field_emoji_2_value' => $result[0]['field_emoji_2_value'],
+    'field_emoji_value' => $result[0]['field_emoji_value'],
+    'title' => $result[0]['title'],
+  );
+}
+
+/**
+ * Implements itg_get_amp_search_result().
+ */
+function itg_get_amp_search_result() {
+  if (isset($_GET['search'])) {
+    $name = isset($_GET['search']) ? $_GET['search'] : '';
+    $searchurl = FRONT_URL . '/topic/' . $name;
+    drupal_goto($searchurl);
+  }
+}
+

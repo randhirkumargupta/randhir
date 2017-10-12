@@ -269,7 +269,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
       }
     }
   }
-  if (!isset($form['field_event_highlights']['#tabwise'])) {
+  /*if (!isset($form['field_event_highlights']['#tabwise'])) {
     foreach ($form_state['values']['field_event_highlights'][LANGUAGE_NONE] as $key => $event_highlights) {
       if (is_numeric($key)) {
         if (!empty($form_state['values']['field_event_highlights'][LANGUAGE_NONE][$key]['field_associate_story_event_high'][LANGUAGE_NONE][0]['target_id'])) {
@@ -282,7 +282,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
         }
       }
     }
-  }
+  }*/
 
 
   $start_date = strtotime($form_state['values']['field_event_start_date'][LANGUAGE_NONE][0]['value']);
@@ -697,22 +697,6 @@ function itg_event_backend_after_build($form, &$form_state) {
       ':input[name="field_event_type[und]"]' => array('value' => 'paid'),
     ),
   );
-  $form['field_story_new_title']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
-    ),
-  );
-  $form['field_news_title']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
-    ),
-  );
-  $form['field_tab_description']['#states'] = array(
-    'visible' => array(
-      ':input[name="field_tab_on_off[und][1]"]' => array('checked' => TRUE),
-    ),
-  );
-
   $form['field_no_of_tickets']['#states'] = array(
     'visible' => array(
       array(':input[name="field_event_type[und]"]' => array('value' => 'paid')),
@@ -967,7 +951,7 @@ function itg_event_backend_block_view($delta = '') {
       $block['content'] = theme('itg_event_backend_tab_form_display_block', array('data' => ''));
       break;
     case 'event_header_menu':
-      $block['content'] = theme('event_header_menu', array('data' => ''));
+      $block['content'] = theme('event_header_menu', array('data' => itg_event_backend_get_event_node('node')));
       break;
     case 'event_header_adds':
       $block['content'] = theme('event_header_adds', array('data' => ''));
@@ -1322,7 +1306,7 @@ function itg_event_backend_get_session_sponsor($daywise) {
 
 /**
  * Implement function to get associated story
- * @return array
+ * @return arrayy
  */
 function itg_event_backend_get_session_story_title($daywise, $font_color) {
 
@@ -1338,6 +1322,30 @@ function itg_event_backend_get_session_story_title($daywise, $font_color) {
   foreach ($result as $value) {
     $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
     $story_nid = $daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id'];
+    $story_title = itg_common_get_node_title($story_nid);
+    $story_detail = itg_event_get_story_details($story_nid);
+    $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
+    $session['story_details'][] = $story_detail;
+  }
+  return $session;
+}
+
+/**
+ * Implement function to get associated story
+ * @return array
+ */
+function itg_event_backend_get_session_story_title_move_field($daywise, $font_color) { 
+  $query = db_select('node', 'n');
+  $query->join('field_data_field_event_media', 'media', 'n.nid = media.entity_id');
+  $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_event_media_value');
+  $query->fields('daywise', array('field_daywise_event_value'));
+  $query->fields('media', array('field_event_media_value'));
+  $query->condition('daywise.field_daywise_event_value', $daywise, '=');
+  $result = $query->execute();
+
+  foreach ($result as $value) {
+    $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
+    $story_nid = $daywise_detail[$value->field_event_media_value]->field_associate_story_event_new[LANGUAGE_NONE][0]['target_id'];
     $story_title = itg_common_get_node_title($story_nid);
     $story_detail = itg_event_get_story_details($story_nid);
     $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
@@ -2422,4 +2430,51 @@ function itg_event_backend_tokens($type, $tokens, array $data = array(), array $
         }
     }
     return $replacements;
+}
+
+/**
+ * Implement function for Tab Title
+ */
+function itg_event_backend_tab_title($node, $tab_sef) {
+
+   foreach ($node->field_event_tabs['und'] as $imagecollection){
+    $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    if($tab_sef == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_name'] = $value->field_tab_name[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_title'] = $value->field_tab_title[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_sef_url_radio'] = $value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_sef'] = $value->field_tab_sef[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_url'] = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
+    $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_description'] = $value->field_tabs_description[LANGUAGE_NONE][0]['value'];
+    }
+  }
+  return $tab_value;
+}
+
+/**
+ * Implement function for Tab menu
+ */
+function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font) {
+    $path_alias = drupal_get_path_alias('node/'.  $node->nid);
+    $flash_back_link = '<ul>';
+    $flash_back_link_top = '';
+    $key = 0;
+   foreach ($node->field_event_tabs['und'] as $imagecollection){
+    $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
+      if($key == 0) {
+        $flash_back_link_top = l('...', $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$tab_menu_font")));
+      }
+      $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$menu_font_color"))) . '</li>';
+    }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
+       if($key == 0) {
+         $flash_back_link_top =  l('...', $value->field_tab_url[LANGUAGE_NONE][0]['value'], array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$tab_menu_font")));
+       }
+      $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $value->field_tab_url[LANGUAGE_NONE][0]['value'], array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
+    }
+    $key++;
+  }
+  $flash_back_link .= '</ul>';
+  $all_link = array('tab_top_menu' => $flash_back_link_top, 'tab_menu' => $flash_back_link);
+  return $all_link;
 }

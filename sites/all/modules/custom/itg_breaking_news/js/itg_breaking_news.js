@@ -29,7 +29,7 @@
       // type check for add form
       $("#edit-field-type-und").change(function () {
         
-        if (this.value == 'Live Blog') {
+        if (this.value == 'Live Blog' || this.value == 'Cricket Live Blog') {
           $(".field-name-field-mark-as-breaking-band").hide();
           $(".field-name-field-breaking-publish-time").hide();
           $(".form-item-field-section-und").hide();
@@ -90,7 +90,7 @@
       });
 
       // type check for edit form
-      if (type == 'Live Blog') {
+      if (type == 'Live Blog' || type == 'Cricket Live Blog') {
         $(".field-name-field-mark-as-breaking-band").hide();
         $(".field-name-field-breaking-publish-time").hide();
         $(".form-item-field-section-und").hide();

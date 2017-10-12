@@ -25,20 +25,17 @@
 <?php 
 if (function_exists(itg_story_clone_data))
 {
-  
-  $emoji_title = itg_story_clone_data($row->entity_id, '');
-  $clone_arr_response = $emoji_title->response->docs[0];
-  $position = $clone_arr_response->sm_field_emoji_position[0];
-  $emoji_image = $clone_arr_response->sm_field_custom_emoji[0];
+ 
+  $related_data = itg_get_related_story_content($row->entity_id);
+  $position = $related_data->sm_field_emoji_position[0];
+  $emoji_image = $related_data->sm_field_custom_emoji[0];
   preg_match_all('/<img[^>]*>/s', $emoji_image, $images);
   $smilies = implode("", $images[0]);
-  $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
-  if (strpos($clone_arr_response->url, BACKEND_URL) !== false) {
-    $front_url = str_replace(BACKEND_URL, FRONT_URL, $clone_arr_response->url);
+  $label = html_entity_decode($related_data->label, ENT_QUOTES);
+  if (function_exists('itg_apache_solr_get_site_url')) {
+    $hash_url = itg_apache_solr_get_site_url();
   }
-  else {
-    $front_url = $clone_arr_response->url;
-  }
+  $front_url = $hash_url[$related_data->hash] . '/' . $related_data->path_alias;
 }
 if(!empty($position) && $position == 'left') {
   ?>

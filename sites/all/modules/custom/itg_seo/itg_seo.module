@@ -228,16 +228,25 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
  * itg_seo_latest_headlines()
  */
 function itg_seo_latest_headlines() {
-  $query = db_select('node', 'n')
-      ->fields('n', array('title', 'nid'))
-      ->condition('n.status', 1)
-      ->condition('n.type', 'story')
-      ->range(0, 4)
-      ->orderBy('n.created', 'DESC');
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_photo_see_pic_link', 'se', 'n.nid = se.entity_id');
+      $query->fields('n', array('title', 'nid'));
+      $query->fields('se', array('field_photo_see_pic_link_value'));
+      $query->condition('n.status', 1);
+      //->condition('n.type', 'story')
+      $query->condition('n.type', array('story','photogallery','videogallery'),'IN');
+      $query->range(0, 4);
+      $query->orderBy('n.created', 'DESC');
   $result = $query->execute()->fetchAll();
   $headlines = array();
   foreach ($result as $key => $val) {
-    $headlines[$val->nid] = $val->title;
+    if(!empty($val->field_photo_see_pic_link_value)) {
+    $title = '<span class="see_pic_not_found">'.$val->field_photo_see_pic_link_value.' : </span>'.$val->title;
+    } else {
+    $title =  $val->title;
+    }
+    $headlines[$val->nid] = $title;
+   
   }
   return $headlines;
 }
