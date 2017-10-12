@@ -56,6 +56,17 @@ global $base_url;
   </nav>
 
 </div>
+
+<div class="event-add-header">
+                
+<?php 
+ 
+   $block = block_load('itg_ads', ADS_HEADER);
+   $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+   print render($render_array);
+						  
+  ?>
+  </div>   
 </div>
 <style>
 .logo{display:none;}
