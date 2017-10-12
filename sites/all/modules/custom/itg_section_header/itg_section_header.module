@@ -305,17 +305,17 @@ function get_section_header_menu_and_content($arg) {
         break;
       case 'node':
         $nid = $arg[1];        
-        $event_tid = is_node_section_header_event($nid);
-        if ($event_tid) {
-          $tpl_name = 'section_header_' . $event_tid . '_block';
-          $menu_data = get_event_menu($nid);
+        $primary_tid = get_primary_category_node($nid);
+        $event_nid = is_section_event($primary_tid);
+        if ($event_nid) {
+          $tpl_name = 'section_header_' . $primary_tid . '_block';
+          $menu_data = get_event_menu($event_nid);
           $data['menu_manager'] = $menu_data;
           $return_data['data'] = $data;
           $return_data['is_event'] = TRUE;
           $return_data['template_name'] = $tpl_name;
           return $return_data;
         }
-        $primary_tid = get_primary_category_node($nid);
         break;
       default:
         return FALSE;
