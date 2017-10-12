@@ -46,7 +46,7 @@
  <div class="topbgstar">
 <div class="cont-area">
 <div style="width:1003px !important; float:left">
-	<a href="http://indiatoday.in/womansummit"><div class="logo"></div></a>
+	<a href="/womansummit"><div class="logo"></div></a>
     
     <div style="float:left">
       <div class="woman-logo" style="background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/2013/images/title.png) no-repeat 0 0 !important;"></div>
@@ -154,7 +154,7 @@ section#left {
 </style>
 	<div  id="nav-menulink">
 <ul>
-<li><a href="http://indiatoday.in/womansummit/">HOME</a></li>
+<li><a href="/womansummit/">HOME</a></li>
 <li><a href="/womansummit/delhi/2013/speakers.jsp">SPEAKERS</a></li>
 <li><a href="/womansummit/delhi/2013/programme.jsp">PROGRAMME</a></li>
 <li><a href="/womansummit/delhi/2013/sponsors.jsp">EVENT SPONSORS</a></li>

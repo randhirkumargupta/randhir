@@ -144,7 +144,7 @@
 		<p class="introtext" style="font-family: arial; font-size: 12px; line-height: 15px; text-align: left;"><b>Session: </b><span class="session-name"><a href="/youthsummit/delhi/2012/programme.jsp">Guts and Glory: Medal winners from the Olympics on the journey from dream to reality</a></span><br>
 		<b> <b>On September 7, 2012-12.30 to 13.30 hrs</b></b></p>
 		<!-- <div>
-                <a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=3"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
+                <a href="/youthsummit/delhi/2012/askquestion.jsp?id=3"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
             </div> -->
 		<br />   
         <p> He is the only Indian to have won back-to-back individual Olympic Medals. He won a silver medal in the Men's 66kg Freestyle Wrestling event at the 2012 London Olympics and a bronze medal in Men's 66kg Freestyle Wrestling at the 2008 Beijing Olympics. He is also a recipient of the <em>Rajiv Gandhi</em><em> Khel Ratna</em> - India's highest honour for sportspersons. </p>

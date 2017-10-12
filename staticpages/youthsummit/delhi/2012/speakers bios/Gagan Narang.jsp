@@ -144,7 +144,7 @@
 		<p class="introtext" style="font-family: arial; font-size: 12px; line-height: 15px; text-align: left;"><b>Session: </b><span class="session-name"><a href="/youthsummit/delhi/2012/programme.jsp">Guts and Glory: Medal winners from the Olympics on the journey from dream to reality</a></span><br>
 		<b> On September 7, 2012-12.30 to 13.30 hrs</b></p>
 		<!-- <div>
-                <a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=3"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
+                <a href="/youthsummit/delhi/2012/askquestion.jsp?id=3"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
             </div> -->
 		<br />   
 Ace Indian shooter Gagan Narang, 29, won a bronze medal in the Men's 10 m air rifle event at the 2012 Summer Olympics in London. Narang is considered one of the best air rifle shooters in the world and was the first Indian to qualify for the London Olympics. In a pre-Olympic event in Hannover, Germany, Narang broke the current world record of 703.1 by scoring 704.3.</div>

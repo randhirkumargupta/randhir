@@ -65,8 +65,8 @@ a:hover{ text-decoration:underline;}
 </div>
 
 <div id="dropmenu1" class="dropmenudiv_a">
-<!--<a href="http://indiatoday.in/womansummit/index.php?issueid=34" target="_blank">2010</a>
-<a href="http://indiatoday.in/womansummit/index.php?issueid=33" target="_blank">2009</a>-->
+<!--<a href="/womansummit/index.php?issueid=34" target="_blank">2010</a>
+<a href="/womansummit/index.php?issueid=33" target="_blank">2009</a>-->
 <a href="/womansummit/2010/index.php?issueid=34" target="_blank">2010</a>
 <a href="/womansummit/2009/index.php?issueid=33" target="_blank">2009</a>
 </div>
@@ -107,12 +107,12 @@ cssdropdown.startchrome("chromemenu")
     <td width="156" rowspan="2" valign="top">
                   <h2>At the 3rd India Today Woman Summit, Aroon Purie, Editor-in-Chief of The India Today Group, in his inaugural speech welcomed the guests attending the summit. He said that it is a different energy every year to attend and organize the Summit. He also added that women are special - they are caring, warm and emotional in their approach to everything in life.<br>
                     <!--<br />
-                    <strong><a href="http://indiatoday.in/womansummit/2010/index.php?issueid=34" target="_blank">Flashback: 
+                    <strong><a href="/womansummit/2010/index.php?issueid=34" target="_blank">Flashback: 
                 2010 Summit</a></strong>--></h2>                </td>
   </tr>
   <tr>
     <td valign="top">
-                 <!-- <h2 style="margin:0; padding:5px 0 5px 0;"><a href="http://indiatoday.in/womansummit/2010/index.php?option=com_magazine&opt=section&sectionid=10&issueid=34&assid=2680&Itemid=1" target="_blank">Snapshots 
+                 <!-- <h2 style="margin:0; padding:5px 0 5px 0;"><a href="/womansummit/2010/index.php?option=com_magazine&opt=section&sectionid=10&issueid=34&assid=2680&Itemid=1" target="_blank">Snapshots 
                     of 2010 Summit: Winners all the way</a></h2>   -->             </td>
   </tr>
 </table></td>
@@ -189,20 +189,20 @@ cssdropdown.startchrome("chromemenu")
   <tr>
    <td width="248" colspan="2"><h3>FROM THE CHAIRMAN</h3>    </td>
   </tr>
-  <tr><td width="130"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
+  <tr><td width="130"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
     <td width="118" valign="top" style="font:normal 12px georgia; color:#969696; line-height:22px;"><strong style="font:bold 12px georgia; color:#000000">Aroon Purie</strong><br>
 							Chairman <!--&amp; <br>Editor-in-Chief--><br>
                             <span style="color:#942c4f">The India Today Group</span></td>
   </tr>
    <tr>
-   <td width="248" colspan="2"><div align="left"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
+   <td width="248" colspan="2"><div align="left"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
 
 			<div><div style="border: 0px solid rgb(0, 0, 0); margin: 5px 0pt 5px 15px; float: left; width: 90%; font-family: Georgia; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0); text-align: center; line-height: 18px;">The INDIA TODAY WOMAN SUMMIT & AWARDS 
 
 
 2011, now in its third year, will be an all day journey into the lives of some of the nation&rsquo;s most successful cadres. Women, who have strived to challenge the conventional roles assigned to them by forming identities that are independent of their home space. Whether it is being a jet setting CEO or an aggressive entrepreneur, they have made it acceptable for the coming generation to break away and follow their heart. The summit will not only acknowledge the contribution of these women but will also allow the newer generation of women, to learn, share and experience what it takes to be the best.</div>
 	          </strong></div></div>
-             <div align="right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
+             <div align="right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
   </tr>
   
    

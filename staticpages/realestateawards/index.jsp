@@ -84,9 +84,9 @@ jQuery(document).ready(function() {
                     });
 				</script>
                 
-                <!--<li><a href="http://media2.intoday.in/indiatoday/realstate/Form-for-Commercial-IT.pdf" target="_blank">Download Commercial Form</a></li>
-                <li><a href="http://media2.intoday.in/indiatoday/realstate/Form-for-Residential-Apartment.pdf" target="_blank">Download Residential Form</a></li>
-                <li><a href="http://media2.intoday.in/indiatoday/realstate/Form-for-Villas.pdf" target="_blank">Download Villas Form</a></li>-->
+                <!--<li><a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/realstate/Form-for-Commercial-IT.pdf" target="_blank">Download Commercial Form</a></li>
+                <li><a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/realstate/Form-for-Residential-Apartment.pdf" target="_blank">Download Residential Form</a></li>
+                <li><a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/realstate/Form-for-Villas.pdf" target="_blank">Download Villas Form</a></li>-->
 
             </ul>
             <div class="clear"></div>
@@ -150,13 +150,13 @@ var zflag_nid="821"; var zflag_cid="1140/1137"; var zflag_sid="2"; var zflag_wid
     	<div class="center-cont">
         <ul id="mycarousel" class="jcarousel-skin-tango">
 <li>
-   <div class="speakers posrel other-height"><img src="http://media2.intoday.in/indiatoday/realstate/sp1.jpg" border="0" > <div class="sliderdecp">Kamal Nath<br><span>Union Minister for Urban Development</span></div>  </div>
+   <div class="speakers posrel other-height"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/realstate/sp1.jpg" border="0" > <div class="sliderdecp">Kamal Nath<br><span>Union Minister for Urban Development</span></div>  </div>
 	</li>
     <li>
-     <div class="speakers posrel other-height"><img src="http://media2.intoday.in/indiatoday/realstate/sp5.jpg" border="0" > <div class="sliderdecp">Bhupinder Singh  Hooda
+     <div class="speakers posrel other-height"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/realstate/sp5.jpg" border="0" > <div class="sliderdecp">Bhupinder Singh  Hooda
 <br><span>Chief Minister, Haryana</span></div> </div></li>
      <li>
-	<div class="speakers posrel other-height"><img src="http://media2.intoday.in/indiatoday/realstate/sp12.jpg" border="0" > <div class="sliderdecp">Ajay Maken<br><span>General Secretary, AICC and former Union Minister for HUPA</span></div> </div>
+	<div class="speakers posrel other-height"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/realstate/sp12.jpg" border="0" > <div class="sliderdecp">Ajay Maken<br><span>General Secretary, AICC and former Union Minister for HUPA</span></div> </div>
 	</li>
   
      <li>

@@ -143,7 +143,7 @@
 			<p class="introtext" style="font-family: arial; font-size: 12px; line-height: 15px; text-align: left;"><b>Session: </b><span class="session-name"><a href="/youthsummit/delhi/2012/programme.jsp">How I Made It: 20 Minute Performances by Youth Icons</a></span> <br>
 			<b>On September 7, 2012-10.30 to 12.30 hrs</b></p>
 			<!--
-			<div><a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=2"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a></div> -->
+			<div><a href="/youthsummit/delhi/2012/askquestion.jsp?id=2"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a></div> -->
 			<br />   
 			What started as a tiny business run from the servant's quarters of his fathers house, Naukri.com is India's leading job site today. With leading venture capitalists eager to buy into Bikchandani's vision, the job portal became the first Internet company to be listed on the Indian stock exchange. With a market capitalization of over Rs 3,000 crore and 2,100 employees, Bikchandani's story is a perfect example of what the spirit of enterprise can achieve.
 		</div>

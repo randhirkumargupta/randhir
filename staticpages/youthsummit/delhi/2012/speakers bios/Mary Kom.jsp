@@ -144,7 +144,7 @@
 		<p class="introtext" style="font-family: arial; font-size: 12px; line-height: 15px; text-align: left;"><b>Session: </b><span class="session-name"><a href="/youthsummit/delhi/2012/programme.jsp">Guts and Glory: Medal winners from the Olympics on the journey from dream to reality</a></span><br>
 		<b> <b>On September 7, 2012-12.30 to 13.30 hrs</b></b></p>
 		<!-- <div>
-                <a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=3"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
+                <a href="/youthsummit/delhi/2012/askquestion.jsp?id=3"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
             </div> -->
 		<br />   
         <p> She is the only woman boxer to have won a medal in each one of the six World Championships and has more than three Asian titles and eleven National titles under her belt. Kom is the only Indian woman boxer to have qualified for the 2012 Summer Olympics, competing in the flyweight (51kg) category and winning the bronze medal. She has also been ranked as No. 4 AIBA World Women's Ranking Flyweight category.</p>
