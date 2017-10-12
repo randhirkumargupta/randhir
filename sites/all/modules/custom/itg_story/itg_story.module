@@ -754,6 +754,23 @@ function itg_story_after_build($form, &$form_state) {
   // ADD js for multiple byline
   drupal_add_js(array('itg_byline' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_byline.js', array('scope' => 'footer'));
+  
+  //Reporter node form Popup
+  // get anchor id based on category name
+  $tid = ANCHOR_TID;
+  $tid_poli = POLITICIAN_TID;
+  $tid_repo = REPORTER_TID;
+  $reporter_settings = array();
+  $reporter_settings['base_url'] = $base_url;
+  $reporter_settings['uid'] = $user->uid;
+  $reporter_settings['politician'] = $tid_poli;
+  $reporter_settings['anchor'] = $tid;
+  $reporter_settings['reporter'] = $tid_repo;
+  $reporter_settings['ntype'] = $form['type']['#value'];
+  drupal_add_js(array('itg_reporter' => array('settings' => $reporter_settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_reporter') . '/js/itg_reporter.js', array('scope' => 'footer'));
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
   return $form;
 }
 
