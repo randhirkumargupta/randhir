@@ -110,6 +110,21 @@ function get_ola_feed_videos_array(){
   return $cabbytabby_feed_videos;
 }
 
+function get_dekkho_feed_videos_array(){
+  $video_sectios = array(
+    '1207304' => 'lifestyle.xml',
+    '1207978' => 'auto_today.xml',
+    '1208177' => 'education.xml',
+    '1207580' => 'sosorry.xml',
+    '1207303' => 'bollywood_movie_reviews.xml',
+    '1206955' => 'india.xml',
+    '1208164' => 'worldspecial.xml',
+    '1206957' => 'sportscricket.xml',
+    '1207872' => 'moneytoday.xml'
+  );
+  return $video_sectios;
+}
+
 function getproquest_feed_story_client_array(){
   $story_sectios = array(
     '1206578' => 'india.xml',

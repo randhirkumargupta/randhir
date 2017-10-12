@@ -59,6 +59,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_ola_feed_videos.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rssfeeds/dekkho/video'] = array(
+    'page callback' => 'itg_dekkho_feed_videos_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_dekkho_feed_videos.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -71,8 +77,8 @@ function itg_syndication_clients_install() {
   file_prepare_directory($bsbdir, FILE_CREATE_DIRECTORY);
 }
 
-function slugify($text) {  
-  $text = preg_replace('~&~', 'and', $text);  
+function slugify($text) {
+  $text = preg_replace('~&~', 'and', $text);
   $text = preg_replace('~[^\pL\d]+~u', '-', $text);
   $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
   $text = preg_replace('~[^-\w]+~', '', $text);
@@ -217,7 +223,6 @@ function get_releted_content_by_nid($nid = NULL) {
   return $related_content;
 }
 
-
 function get_node_metatags_by_nid($nid = NULL) {
   if (empty($nid))
     return FALSE;
@@ -225,14 +230,14 @@ function get_node_metatags_by_nid($nid = NULL) {
   return $result;
 }
 
-function genrate_uniqui_guid(){
+function genrate_uniqui_guid() {
   return md5(uniqid(rand(), true));
 }
 
-function get_byline_name_by_nid($nid = NULL){
+function get_byline_name_by_nid($nid = NULL) {
   $byline = '';
   if (!empty($nid)) {
-    
+
     $query = db_select('itg_multi_byline_info', 'bi');
     $query->leftJoin('node', 'n', 'bi.byline_id=n.nid');
     $query->fields('n', array('title'));
@@ -476,7 +481,7 @@ function video_detail_formats($nid, $source_type) {
     $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
     $videoparts_3gp = str_replace(".mp4", ".3gp", $video_path_mp4);
     $video_detail[$video_status]['flv_url'] = $flv_url;
-    $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;    
+    $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
   }
   return $video_detail;
 }
@@ -527,8 +532,6 @@ function get_nid_is_syndications($nid) {
   return $flag;
 }
 
-
-
 /**
  * function for generate Empty image xml tag
  *
@@ -539,9 +542,8 @@ function empty_get_img_tag_detail() {
   return $imgtag;
 }
 
-
-function get_itg_video_transcoding($nid){
-  if(empty($nid))
+function get_itg_video_transcoding($nid) {
+  if (empty($nid))
     return '';
   $query = db_select('itg_video_transcoding', 'tra');
   $query->fields('tra', array('file_size', 'video_duration'));
