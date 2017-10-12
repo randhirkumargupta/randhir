@@ -95,13 +95,13 @@ function genrate_cabbytabby_feed_videos_syndication_xml($result = NULL, $section
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<description><![CDATA[' . $value['field_story_expert_description_value'] . ']]></description>';
       $xml .= '<pubDate>' . $created_date . '</pubDate>';
-      $xml .= '<category>' . $catname . '</category>';
+      $xml .= '<category><![CDATA[' . $catname . ']]></category>';
       $xml .= '<enclosure url="'.$video_url.'" type="video/mp4"/>';
       $xml .= '<media:content url="'.$video_url.'" type="video/mp4" duration="'.$duration.'">';
       $xml .= '<media:category>'.$catname.'</media:category>';
       $xml .= '<media:tags><![CDATA['.$tags.']]></media:tags>';
       $xml .= '<media:keywords><![CDATA['.$key_words.']]></media:keywords>';
-      $xml .= '<media:thumbnail><![CDATA[' . $small_img['imag_url'] . ']]></media:thumbnail>';
+      $xml .= '<media:thumbnail url="' . $small_img['imag_url'] . '"></media:thumbnail>';
       $xml .= '<media:credit role="producer" scheme="urn:ebu"><![CDATA[' . $byline . ']]></media:credit>';
       $xml .= '</media:content>';
       $xml .= '</item>';
