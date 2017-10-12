@@ -632,7 +632,7 @@ function getPollLData($res) {
  * @return array
  */
 function getTechProsImg($content_org) {
-    include 'simple_html_dom.php';
+    //include 'simple_html_dom.php';
     $str_html = str_get_html($content_org);
     $img_str = "";
     foreach($str_html->find('ul[class="pron-cons-img]') as $element){  
@@ -655,7 +655,7 @@ function getTechProsImg($content_org) {
  * @return array
  */
 function getTechProsh2($content_org) {
-    include 'simple_html_dom.php';
+    //include 'simple_html_dom.php';
     $str_html = str_get_html($content_org);
     $h2 = "";
     foreach($str_html->find('h2') as $element){  
