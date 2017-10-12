@@ -368,7 +368,7 @@ function homePageJsonTopstories() {
             $data_newslist[$home_list_count]['n_template_id'] = "";
             $data_newslist[$home_list_count]['n_type'] = "story";
             $data_newslist[$home_list_count]['n_is_developing'] = "$is_developing";
-            $data_newslist[$home_list_count]['n_is_sponsored'] = "false";
+            $data_newslist[$home_list_count]['n_is_sponsored'] = "0";
             $data_newslist[$home_list_count]['n_share_link'] = "$firebase_url";
             $data_newslist[$home_list_count]['n_title'] = "$title";
             $data_newslist[$home_list_count]['n_description'] = "$field_story_kicker_text_value";
@@ -1138,7 +1138,7 @@ function homePageJsonPoll() {
                                     }
                                 ]
                             }";
-    $n_polls = json_decode($poll_json, true);
+    $n_polls = json_decode($poll_json);
 
     $data_magazine['id'] = "7";
     $data_magazine['order'] = "7";
