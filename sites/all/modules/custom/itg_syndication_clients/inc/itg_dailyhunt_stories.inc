@@ -71,3 +71,8 @@ function genrate_dailyhunt_story_syndication_xml($result = NULL) {
   }
   return $xml;
 }
+
+
+function itg_dailyhunt_feed_breakingnews_syndication(){
+  
+}
