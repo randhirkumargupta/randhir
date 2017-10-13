@@ -61,7 +61,7 @@ function generateStoryDeatilList($id) {
     $polls = getPollsData($poll_id);
     //p($polls);die();
     $polls_d = array();
-    $polls_d = $polls['data'][0];
+    $polls_d = (array) $polls['data'][0];
     $load_city = taxonomy_term_load($node->field_stroy_city['und'][0]['tid']);
     $location = $load_city->name;
     $term = taxonomy_term_load($tid);
