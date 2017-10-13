@@ -284,7 +284,20 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     }
   }*/
 
+  if(!empty($form_state['values']['field_event_tabs'])){
+    foreach ($form_state['values']['field_event_tabs'][LANGUAGE_NONE] as $key => $event_tabs) {
+      if (is_numeric($key)) {
+        if ($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url') {
+          if((strpos($url, 'http') !== 0) && !filter_var($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_URL)) {
+              form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter valid Tab External URL.'));  
+            }
+        }
+      }
+    }
+  }
 
+  
+  
   $start_date = strtotime($form_state['values']['field_event_start_date'][LANGUAGE_NONE][0]['value']);
   $end_date = strtotime($form_state['values']['field_event_close_date'][LANGUAGE_NONE][0]['value']);
   $registration_close = strtotime($form_state['values']['field_registration_close_date'][LANGUAGE_NONE][0]['value']);
@@ -1711,7 +1724,7 @@ function itg_event_backend_vukkul_content($nid) {
   $n_title = "Event: " . $node->title;
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($event_author_name);
-  drupal_add_js('http://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
+  drupal_add_js('https://vuukle.com/js/vuukle.js', array('type' => 'external', 'scope' => 'footer'));
   $output = '<script type="text/javascript">
 
                var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
@@ -2463,14 +2476,23 @@ function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font
     $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
     if($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_sef') {
       if($key == 0) {
-        $flash_back_link_top = l('...', $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$tab_menu_font")));
+        if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+          $flash_back_link_top = l('<i class="fa fa-ellipsis-h" aria-hidden="true"></i>', $path_alias, array('html' => TRUE, 'query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$tab_menu_font")));
+        }
       }
-      $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$menu_font_color"))) . '</li>';
+      if(!empty($value->field_tab_sef[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+        $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $path_alias, array('query' => array('tab' => $value->field_tab_sef[LANGUAGE_NONE][0]['value']), 'attributes' => array("style" => "color:$menu_font_color"))) . '</li>';
+      }
     }elseif($value->field_tab_sef_tab_url[LANGUAGE_NONE][0]['value'] == 'tab_url') {
+      $external_url = $value->field_tab_url[LANGUAGE_NONE][0]['value'];
        if($key == 0) {
-         $flash_back_link_top =  l('...', $value->field_tab_url[LANGUAGE_NONE][0]['value'], array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$tab_menu_font")));
+         if(!empty($value->field_tab_url[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+          $flash_back_link_top =  l('<i class="fa fa-ellipsis-h" aria-hidden="true"></i>', $external_url, array('html' => TRUE, 'external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$tab_menu_font")));
+         }
        }
-      $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $value->field_tab_url[LANGUAGE_NONE][0]['value'], array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
+       if(!empty($value->field_tab_url[LANGUAGE_NONE][0]['value']) && !empty($value->field_tab_name[LANGUAGE_NONE][0]['value'])){
+          $flash_back_link .= '<li>' . l(t($value->field_tab_name[LANGUAGE_NONE][0]['value']), $external_url, array('external' => TRUE, 'attributes' => array('target' => '_blank', "style" => "color:$menu_font_color"))) . '</li>';
+       }
     }
     $key++;
   }

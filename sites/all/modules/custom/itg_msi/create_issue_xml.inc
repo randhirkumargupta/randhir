@@ -129,7 +129,12 @@ function _create_issue_process($fid, $node_info, $parent_node) {
     }
     if ($node_info['supplement']) {
       $supplement = trim((string) $xml->Supplement);
-      $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = _get_nid_from_title($supplement);
+      if(!empty(_get_nid_from_title($supplement))) {
+        $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = _get_nid_from_title($supplement);
+      }
+      else {
+        $node->field_story_select_supplement;
+      }
     }
 
     $publish_date = date('Y-m-d');

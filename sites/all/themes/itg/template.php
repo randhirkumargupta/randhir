@@ -91,6 +91,10 @@ function itg_preprocess_node(&$variables) {
     drupal_add_js(drupal_get_path('theme', 'itg') . '/js/story_altr.js');
   }
   // Code ends for Akamai Purposes (Self refresh content)
+  if (!empty($node) && $node->type == 'story' && arg(2) === null && (isset($node->field_story_technology[LANGUAGE_NONE]))) {
+    drupal_add_css(drupal_get_path('theme', 'itg') . "/css/prettyPhoto.css");
+    drupal_add_js(drupal_get_path('theme', 'itg') . "/js/jquery.prettyPhoto.js");
+  }
 }
 
 /**
@@ -245,7 +249,7 @@ function itg_breadcrumb($variables) {
     if (arg(0) == 'topic' || arg(0) == 'advance_search') {
       if (!empty(arg(1)) || !empty($_GET['keyword'])) {
         if (arg(0) == 'topic') {
-          $s_name = arg(1);
+          $s_name = str_replace("-", " ", arg(1));
         }
         else if (arg(0) == 'advance_search') {
           $s_name = $_GET['keyword'];
@@ -298,7 +302,6 @@ function itg_preprocess_html(&$vars) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
-
   $arg = arg();
   global $base_url;
   if (!empty(arg(1)) && is_numeric(arg(1))) {
@@ -419,6 +422,7 @@ function itg_html_head_alter(&$head_elements) {
         $head_elements['metatag_keywords_0'] = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
+            
           '#attributes' => array(
             'name' => 'news_keyword',
             'content' => $meta_keywords
@@ -463,6 +467,9 @@ function itg_html_head_alter(&$head_elements) {
       }
     }
   }
+  $head_elements['metatag_description_0']['#weight'] = -1000;
+  $head_elements['metatag_keywords_0']['#weight'] = -999;
+  $head_elements['system_meta_content_type']['#weight'] = -998;
 }
 
 /**

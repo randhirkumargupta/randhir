@@ -8,6 +8,20 @@ module_load_include('inc', 'itg_photogallery', 'includes/views_handler_itg_photo
  */
 
 /**
+ * Implements hook_menu().
+ * @return array
+ */
+function itg_photogallery_menu() {
+  $items['photo-workbench-title-list/%/%/autocomplete'] = array(
+    'page callback' => 'itg_photogallery_get_workbench_title',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_photogallery_filter.inc',
+  );
+  return $items;
+}
+
+/**
  * Implements hook_form_alter().
  * @param array $form
  * @param array $form_state
@@ -15,8 +29,8 @@ module_load_include('inc', 'itg_photogallery', 'includes/views_handler_itg_photo
  */
 function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 	global $user;
+    $arg = arg();
 	if ($form_id == 'photogallery_node_form') {
-
 		// Filed collection add class.
 
 		foreach ($form['field_gallery_image']['und'] as $delta => $field) {
@@ -31,7 +45,7 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 		$form['field_photogallery_configuration']['und']['#title'] = NULL;
 
 		// checked comment box by default
-		if (!isset($form['#node']->nid)) {
+		if ($arg[0] == 'node' && $arg[1] == "add") {
 			$form['field_photogallery_configuration'][LANGUAGE_NONE]['#default_value'] = array('commentbox');
 		}
 
@@ -60,11 +74,11 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 			),
 		);
 
-		$form['field_story_comment_question']['#states'] = array(
-			'visible' => array(
-				':input[name="field_photogallery_configuration[und][commentbox]"]' => array('checked' => TRUE),
-			)
-		);
+//		$form['field_story_comment_question']['#states'] = array(
+//			'visible' => array(
+//				':input[name="field_photogallery_configuration[und][commentbox]"]' => array('checked' => TRUE),
+//			)
+//		);
 
 		if (!isset($_REQUEST['destination'])) {
 			$destination = '';
@@ -660,7 +674,8 @@ function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $f
 	//Get the Form Id
 	if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-3' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-8' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-9' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-7' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-4') {
 		//$form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
-		$form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
+		//$form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
+		$form['title']['#autocomplete_path'] = 'photo-workbench-title-list/photogallery/' . arg(0) . '/autocomplete';
 		$form['title']['#attributes'] = array('placeholder' => t('Title'));
 		$form['nid']['#autocomplete_path'] = 'content-nid-list/photogallery/autocomplete';
 		$form['nid']['#attributes'] = array('placeholder' => t('Gallery ID'));

@@ -5,6 +5,7 @@
  * 
  * {@inheritdoc}
  */
+module_load_include('inc', 'itg_seo', 'includes/views_handler_itg_seo');
 module_load_include('inc', 'itg_seo', 'includes/itg_seo_rich_snippet');
 module_load_include('inc', 'itg_seo', 'includes/itg_redirect_url');
 module_load_include('inc', 'itg_seo', 'includes/itg_sef_redirect_url');
@@ -504,6 +505,26 @@ function itg_seo_theme_registry_alter(&$theme_registry) {
   $theme_registry['views_data_export_xml_body']['theme path'] = drupal_get_path('module', 'itg_seo') . '/templates';
   $theme_registry['views_data_export_xml_body']['path'] = drupal_get_path('module', 'itg_seo') . '/templates';
   $theme_registry['views_data_export_xml_body']['template'] = 'views-data-export-xml-body';
+}
+
+
+/**
+ * Implements hook_views_data().
+ */
+function itg_seo_views_data() {
+	$data['itg_seo']['table']['group'] = t('Get Meta Description');
+	$data['itg_seo']['table']['join'] = array(
+		// #global is a special flag which let's a table appear all the time.
+		'#global' => array(),
+	);
+	$data['itg_seo']['custom_handler'] = array(
+		'title' => t('Get Meta Description'),
+		'help' => t('Get Meta Description'),
+		'field' => array(
+			'handler' => 'views_handler_itg_seo',
+		),
+	);
+	return $data;
 }
 
 /**
