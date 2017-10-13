@@ -38,8 +38,8 @@ function itg_genrate_dailyhunt_story_syndication($section_id = NULL, $file_name)
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     $xml = genrate_dailyhunt_story_syndication_xml($result);
-    $xml_path = 'sites/default/files/rss-feeds/ver1.0/dailyhunt/83951470/it/stories/';
-    $file_path = $xml_path . $file_name;
+    $destination = "public://rss-feeds/ver1.0/dailyhunt/83951470/it/stories/";
+    $file_path = $destination . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);

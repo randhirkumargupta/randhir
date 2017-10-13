@@ -39,7 +39,7 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $xml = genrate_msn_feed_story_syndication_xml($result, $section_name);
 //    header( 'content-type: text/xml' );
 //    print $xml;die;
-    $xml_path = 'sites/default/files/feeds/msnfeeds/';
+    $xml_path = 'public://feeds/msnfeeds/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);

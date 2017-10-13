@@ -43,7 +43,7 @@ function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_bsb_video_syndication_xml($result, $section_id, $section_name);
-    $xml_path = 'sites/default/files/bsb/videos/';
+    $xml_path = 'public://bsb/videos/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -177,7 +177,7 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $video_xml .= get_comment_xml_tag($nid);
   $video_xml .= '</Root>';
   
-  $xml_path = 'sites/default/files/bsb/videos/';
+  $xml_path = 'public://bsb/videos/';
   $file_path = $xml_path . $filename;
   $fp = fopen($file_path, "w");
   fwrite($fp, $video_xml);

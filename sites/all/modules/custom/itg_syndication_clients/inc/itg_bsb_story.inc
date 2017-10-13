@@ -45,7 +45,7 @@ function itg_genrate_bsb_story_syndication($section_id = NULL, $file_name) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     $xml = genrate_bsb_story_syndication_xml($result, $section_name);
-    $xml_path = 'sites/default/files/bsb/';
+    $xml_path = 'public://bsb/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
