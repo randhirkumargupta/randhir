@@ -65,7 +65,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
     $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML . ' ]]> </title>' . "\r\n";
     $xml .= '<description>' . ITG_INDIATODAY_SITENAME_XML . '</description>' . "\r\n";
-    $xml .= '<link>' . $landing_page . '</link>' . "\r\n";
+    $xml .= '<link>' . $landing_page . '?utm_source=rss</link>' . "\r\n";
     $xml .= '</image>' . "\r\n";
     foreach ($result as $data) {
       $xml .= '<item>' . "\r\n";
