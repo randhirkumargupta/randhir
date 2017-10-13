@@ -2,8 +2,8 @@
 #MongoDB
 $conf['mongodb_connections'] = array(
   'default' => array(                             // Connection name/alias
-    //'host' => 'mongodb://10.6.210.117,mongodb://10.6.210.214,mongodb://10.6.210.218',
-    'host' => 'mongodb://10.6.210.19',                      // Omit USER:PASS@ if Mongo isn't configured to use authentication.
+    'host' => 'mongodb://10.6.210.218',
+    //'host' => 'mongodb://10.6.210.19',                      // Omit USER:PASS@ if Mongo isn't configured to use authentication.
     //'host' => 'mongodb://10.6.101.66',//prod
     'db' => 'itgcmsmongo',                   // Database name. Make something up, mongodb will automatically create the database.
     //'connection_options' => array('replicaSet' => 'replicasetname'),
