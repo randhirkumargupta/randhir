@@ -35,7 +35,7 @@
                 $('.form-item-field-constituancy-und-0-value').hide();
                 $('#edit-field-party-name').hide();
             }
-            if(initialhasexist !== undefined){
+            if($('body.page-node-add-reporter').length) {
 				if (initialhasexist) {
 					// $('#edit-field-story-category').show();
 					$('.form-item-itg-section').show();
