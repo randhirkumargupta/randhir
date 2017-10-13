@@ -1,0 +1,214 @@
+@charset "utf-8";
+@media screen and (max-width:1300px){  
+.fixed_sp{ display:none}  
+}
+@media screen and (max-width:1024px){
+.nav_area .top_social ul li { font-size:20px;}	
+.latest_big .latest_area .latest_info h3 { font-size:16px;}
+.latest_small .latest_area .latest_info h3 { font-size:16px;}
+.latest_big .latest_area .latest_info { height:75px;}
+.latest_big , .latest_small{ height:275px;}
+.right_advertis { padding:10px;}
+.right_advertis img, .schedule_table img, .medal_table img { width:100%}
+.plyer_slide_area h2 { font-size:17px;}
+.plyer_info h3 { font-size:20px;}
+.olp_plyer_box { margin-bottom:45px;}
+.olp_plyer_box .carousel-control.left { right:11%}
+.top_story ul li { margin-bottom:10px; padding-bottom:9px; font-size:14px;}
+.top_story { padding-bottom:3px;}
+.fixed_sp { display:none}
+.top_social { margin:65px 0 0 0; padding:0px; overflow:hidden; float:right}
+.top_social ul { margin:0px; padding:0px; list-style:none}
+.top_social ul li { margin:0px 0 0 12px; padding:0px; float:left; font-size:25px; color:#eae9e7}
+.top_social ul li a { color:#eae9e7}
+.top_ad_code { margin:0px 0 40px 0; padding:0px;}
+.top_ad_code img { width:100%}
+.medal_table table th.rk_text, .medal_table table th.total_text { text-align:center}
+.medal_table table { width:320px;}
+.medal_table{width: 100%; white-space: nowrap; overflow-y: hidden; overflow-x: scroll; -webkit-overflow-scrolling: touch;}
+#main_videolanding_page .videosocial a{padding:19px 15px 20px 19px}
+.highlights-chunk + .story_body_text { width:75%; float:right}
+#main_photolisting_page .photo_box_main .photo_mn { height:auto}
+#main_photolisting_page .photo_box_main .txt_mn_area { font-size:15px;}
+#main_photolisting_page .photo_box_main { height:260px;}
+#main_photolisting_page .photo_box_main .photo_mn .photo_icn { top:75px;}
+#main_videolanding_page .videosocial .txt_social{ font-size:12px;}
+#main_videolanding_page .videosocial a{padding:19px 15px 20px 19px}
+#main_videolisting_page .video_box_main .video_mn { height:105px}
+#main_videolisting_page .video_box_main .txt_mn_area { font-size:14px; line-height:22px;}
+.like_dislike_area { width:307px !important}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl { font-size:11px;}
+.latest_big .latest_area .latest_pic img { height:177px;}
+.latest_small .latest_area .latest_pic img { height:156px;}
+.india_olp .latest_big .latest_area .latest_pic img { height:177px;}
+.india_olp .latest_small .latest_area .latest_pic img { height:156px;}
+.photo_slide { margin-top:0px;}
+
+.ftop .top_social ul li a { font-size:19px; padding:0px 10px;}
+.ftop .top_social ul li:last-child { padding-right:0px;}
+
+.page_area .snappost_container .right_snp_l {width: 500px !important;}
+.page_area .snappost_container .right_snp_l .hd_snp_t h3 { font-size:19px;}
+.page_area .snappost_container { margin-bottom:35px;}
+
+
+
+
+}
+
+@media screen and (max-width:900px){
+.logo { width:291px; float:left}
+.top_area { padding:15px 0 10px}
+.latest_big, .latest_small { height:303px;}
+.top_story ul li { padding-bottom:12px; margin-bottom:12px;}
+.view_in_btn { margin-top:0px;}
+.photo_slide { padding-bottom:50px; margin-top:58px}
+.page_area { padding-bottom:50px;}
+.container { padding-left:20px; padding-right:20px;}
+.right_schedule, .right_medal_tally, .right_tweet { padding-left:5px; padding-right:5px;}
+.right_tweet { padding-bottom:0px;}
+.right_tweet iframe { height:410px !important;}
+.right_tweet iframe { width:100% !important}
+.ad-area.india_ad { margin-bottom:30px;}
+.ad-area.india_ad img { width:100%}
+.medal_table .m_icon img { width:auto; margin-right: auto; margin-left: auto;  display: block;}
+.medal_table table { width:100%;}
+#main_photolisting_page .photo_box_main .txt_mn_area { font-size:15px }
+#main_photolisting_page .photo_box_main { height:265px}
+#main_photolisting_page .photo_box_main .photo_mn .photo_icn { top:95px;}
+.like_dislike_area {  width: 350px !important;}
+#main_photolisting_page .photo_box_main { height:auto}
+#main_photolisting_page h1.hdn_h { font-size:25px;}
+#main_photolisting_page .iteam_box { line-height:17px; font-size:12px;}
+#main_photolisting_page h1.hdn_h { font-size:20px;}
+#main_videolisting_page .video_box_main .txt_mn_area { height:auto}
+#main_videolisting_page .video_box_main .video_mn { height:auto}
+#main_photolisting_page .crousel_outer { margin-bottom:0px !important; padding-bottom:0px;}
+#main_photolisting_page .photo_box_main {height: 265px;}
+.highlights-chunk { width:100%; margin-bottom:25px; float:none}
+.highlights-chunk + .story_body_text { width:100%; float:none}
+.story_body_text .highlights-chunk { margin:0px 0 35px 0; float:none; width:100%}
+.story_body_text .highlights-chunk ul li .rgt_hl { float:inherit; width:auto; padding-left:10px}
+#main_story_page .story_mdl .main_shre_pnl .shares_pnl { font-size:13px;}
+#main_photolisting_page .carousel { margin-top:-30px; padding-bottom:16px;}
+#main_photolisting_page h1.hdn_h { margin-bottom:30px;}
+
+.latest_big .latest_area .latest_pic img { /*height:177px;*/ height:auto}
+.latest_small .latest_area .latest_pic img { height:156px;}
+
+.india_olp .latest_big .latest_area .latest_pic img {  /*height:177px;*/ height:auto}
+.india_olp .latest_small .latest_area .latest_pic img { height:156px;}
+
+.ftop .top_social ul li a { padding:0px 8px;}
+.right_tweet{ margin-bottom:20px} 
+
+}
+
+@media screen and (max-width:680px){
+.like_dislike_area { width:300px !important}
+}
+
+@media screen and (max-width:639px){
+.st_social { float:none; text-align:center}
+.like_dislike_area {    float: none;    text-align: center;    width: auto !important;}
+.likedisdiv { padding-bottom:30px !important}
+}
+
+
+@media screen and (max-width:481px){
+.like_dislike_area .lkedislake-text { float:none !important}
+.likedislike-action {    float: none !important;    margin: 27px auto 0;    overflow: hidden;    text-align: center;    width: 150px !important;}
+}
+
+@media screen and (max-width:767px){
+.latest_big, .latest_small { height:auto}
+.photo_slide .carousel-control.left { right:6%}	
+.photo_slide .photo_title { height:auto}
+.photo_slide .photo_title h2 a { padding:10px;}
+.intro_video .video_list { margin-bottom:30px;}
+.intro_video { margin-bottom:45px;}
+.india_olp .latest_big .latest_area .latest_info { height:auto}
+.latest_big .latest_area .latest_info h3 a, .latest_small .latest_area .latest_info h3 a { padding:10px 0 10px 10px; line-height: 22px; font-size: 15px;}
+.olp_plyer_box .carousel-control.left { right:9%}
+.latest_small .latest_area .latest_info { height:auto}
+.latest_big .latest_area .latest_info { height:auto}
+h2.title { font-size:19px;}
+.right_tweet { padding-bottom:0px;}
+.top_story ul li { font-size:15px;}
+.photo_slide .photo_title h2 { font-size:15px; line-height:20px; height:auto}
+.view_btn a { font-size:15px;}
+.intro_video .video_info h3 { font-size:15px; line-height:20px;}
+.view_in_btn { margin-top:30px;}
+.india_olp .latest_small .latest_area .latest_info { height:auto}
+.photo_list .video_list { margin-bottom:25px}
+.right_schedule, .right_medal_tally, .right_tweet { padding-top:30px;}
+.photo_list .video_info h3 { font-size:15px; line-height:20px;}
+.photo_list .video_pic img { height:auto;}
+.video_info { height:auto}
+.latest_small .latest_area .latest_info h3 { height:auto}
+.latest_big .latest_area .latest_info h3 { height:auto}
+.story_body_text .highlights-chunk { margin:0px 0 35px 0; float:none; width:100%}
+.story_body_text .highlights-chunk ul li .rgt_hl { float:inherit; width:auto; padding-left:10px}
+#main_story_page .story_hd h1 { font-size:25px;}
+#main_photolisting_page .photo_box_main { height:auto}
+#main_photolisting_page .photo_box_main .photo_mn .photo_icn { top:74%}
+#main_photolisting_page .carousel { margin-top:0px; padding-bottom:0px;}
+
+.latest_big .latest_area .latest_pic img { height:auto}
+.latest_small .latest_area .latest_pic img { height:auto}
+
+.india_olp .latest_big .latest_area .latest_pic img { height:auto}
+.india_olp .latest_small .latest_area .latest_pic img { height:auto}
+
+.all_tab_area ul li {font-size: 13px;}
+.all_tab_area ul li a { padding:7px 10px}
+.right_advertis { display:none;}
+.photo_slide .photo_info .photo_pic img { height:auto}
+
+.india_photo .video_pic img { height:auto}
+
+.page_area .snappost_container .right_snp_l {
+    margin-left: 18px;
+    width: 75% !important;
+}
+
+.top_ad_code { margin:0px auto; margin-bottom:20px; padding:0px; width:320px;}
+.nav_area { margin-bottom:20px;}
+
+
+.page_area .snappost_container .left_snp_l { float: none;
+    margin: 0 auto;
+    width: 75px;}
+	
+	.page_area .snappost_container .right_snp_l {margin-left: 0;
+    width: 100% !important;}
+	.page_area .snappost_container .right_snp_l .hd_snp_t h3 { text-align:center}
+	.page_area .snappost_container { padding:20px}
+
+}
+
+@media screen and (min-width:481px) and (max-width:639px){
+#main_photolisting_page .iteam_box { left: 4%;}
+#main_photolisting_page .left01, #main_photolisting_page .right01 { top:25%; background-size:100% auto; width:8%}
+}
+
+@media screen and (max-width:481px) {
+	.top_ad_code { margin:0px auto; width:320px;}
+	}
+
+@media screen and (max-width:480px){
+.olp_plyer_box .carousel-control.left { right:14%;}	
+.photo_slide .carousel-control.left { right:12%}
+.plyer_slide_area h2 { font-size:14px;}
+.plyer_info h3 { font-size:16px;}
+.plyer_slide .plyer_point h3 { font-size:16px;}
+#main_photolisting_page .iteam_box { left: 4%;}
+#main_photolisting_page .left01, #main_photolisting_page .right01 { top:25%; background-size:100% auto; width:10%}
+
+}
+
+@media screen and (max-width:320px) {
+.medal_table table .coutry_name { font-size:10px;}
+.top_ad_code { margin:0px 0 20px -20px; padding:0px;}
+
+}

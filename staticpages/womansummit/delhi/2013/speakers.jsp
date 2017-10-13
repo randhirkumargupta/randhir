@@ -166,7 +166,7 @@
       <div class="venueaddredd">
         <div itemtype="http://data-vocabulary.org/Event" itemscope="">
 		<div style="font: bold 20px/24px Arial-Black; color: #fef200;">VENUE DETAILS</div>
-         <!-- <a itemprop="http://indiatoday.in/womansummit/index.php" href="http://indiatoday.in/womansummit/index.php" style=" text-decoration:none;">-->
+         <!-- <a itemprop="http://indiatoday.in/womansummit/index.php" href="/womansummit/index.php" style=" text-decoration:none;">-->
             <span itemprop="summary" style="font:bold 17px/17px arial; text-transform:uppercase;color: #000;">India Today Woman Summit & Awards 2013</span>
           <!--</a>-->
           <br>

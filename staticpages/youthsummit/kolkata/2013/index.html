@@ -98,11 +98,11 @@
         </div>-->
 <div class="ys-nav-2013">
 <ul>
-<!--	<li><a href="http://indiatoday.intoday.in/youthsummit/kolkata/2013/speakers.jsp">Speakers</a></li>-->
+<!--	<li><a href="/youthsummit/kolkata/2013/speakers.jsp">Speakers</a></li>-->
 	<!--<li class="last"><a href="http://subscriptions.intoday.in/subscriptions/youthsummit2013/registration.jsp">Registration</a></li>-->   
-	<!--<li ><a href="http://indiatoday.intoday.in/youthsummit/kolkata/2013/kiit-university.jsp">Sponsors</a></li>
-    <li ><a href="http://indiatoday.intoday.in/youthsummit/kolkata/2013/programme.jsp">Program</a></li>
-    <li class="last"><a href="http://indiatoday.intoday.in/youthsummit/kolkata/2013/mindrockingcontest.jsp">The MindRocking Contest</a></li>-->
+	<!--<li ><a href="/youthsummit/kolkata/2013/kiit-university.jsp">Sponsors</a></li>
+    <li ><a href="/youthsummit/kolkata/2013/programme.jsp">Program</a></li>
+    <li class="last"><a href="/youthsummit/kolkata/2013/mindrockingcontest.jsp">The MindRocking Contest</a></li>-->
     
 	<li class="drop">
 		<a href="Javascript: void(0);" style="margin: 0 25px;">FOLLOW US ON</a><a href="http://www.facebook.com/MindRocks" title="MindRocks" class="fb"></a><a href="http://twitter.com/mindrocks/" title="MindRocks" class="tw"></a>
@@ -147,7 +147,7 @@
     <!--[if IE]>
       <script src="/staticpages/main/js/html5.js"></script>
     <![endif]-->
-<link rel="shortcut icon" href="http://indiatoday.intoday.in/youthsummit/kolkata/2013/images/MR_favicon1.ico" />
+<link rel="shortcut icon" href="/youthsummit/kolkata/2013/images/MR_favicon1.ico" />
 <link type="text/css" rel="stylesheet" href="/youthsummit/kolkata/2013/css/session.css">
 <link type="text/css" rel="stylesheet" href="/youthsummit/kolkata/2013/css/youthsummit2013.css">
 <script src="/staticpages/main/js/sitejs.js" type="text/javascript"></script>

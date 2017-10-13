@@ -85,7 +85,7 @@ cssdropdown.startchrome("chromemenu")
                   <h1><a href="briefs.php">Theme 2010: Taking Charge</a></h1>                </td>
 </tr>
   <tr>
-    <td width="304" valign="top"><a href="briefs.php"><!--<img src="images/kicker_image_070209_115747_IT-WOMAN-SUMMIT-060209-69_300x246.jpg" width="300" height="246"  style="border:1px solid #000000; margin-top:4px;" />--><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/Photo_gallery/021710050830IT-Woman-Summi.jpg" width="300" height="246"  style="border:1px solid #000000; margin-top:4px;" /></a></td>
+    <td width="304" valign="top"><a href="briefs.php"><!--<img src="images/kicker_image_070209_115747_IT-WOMAN-SUMMIT-060209-69_300x246.jpg" width="300" height="246"  style="border:1px solid #000000; margin-top:4px;" />--><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/Photo_gallery/021710050830IT-Woman-Summi.jpg" width="300" height="246"  style="border:1px solid #000000; margin-top:4px;" /></a></td>
     <td width="156" rowspan="2" valign="top">
                   <h2>India Today Woman Summit &amp; Awards is a day-long Conference 
                     ending with awards to felicitate Emerging Women Achievers 
@@ -93,12 +93,12 @@ cssdropdown.startchrome("chromemenu")
                     is 'Taking Charge'. The speakers have been chosen for 
                     their relevance, experience and the insights they bring to 
                     the subject, as much as their position. <br />
-                    <!--<strong><a href="http://indiatoday.in/womansummit/2009/index.php?issueid=33" target="_blank">Flashback: 
+                    <!--<strong><a href="/womansummit/2009/index.php?issueid=33" target="_blank">Flashback: 
                     2009 Summit</a></strong>--></h2>                </td>
   </tr>
   <tr>
     <td valign="top">
-                 <!-- <h2 style="margin:0; padding:5px 0 5px 0;"><a href="http://indiatoday.in/womansummit/2009/index.php?option=com_magazine&opt=section&sectionid=10&issueid=33&assid=2632&Itemid=1" target="_blank">Snapshots 
+                 <!-- <h2 style="margin:0; padding:5px 0 5px 0;"><a href="/womansummit/2009/index.php?option=com_magazine&opt=section&sectionid=10&issueid=33&assid=2632&Itemid=1" target="_blank">Snapshots 
                     of 2009 Summit: Winners all the way</a></h2>-->                </td>
   </tr>
 </table></td>
@@ -173,18 +173,18 @@ cssdropdown.startchrome("chromemenu")
   <tr>
    <td width="248" colspan="2"><h3>FROM THE CHAIRMAN</h3>    </td>
   </tr>
-  <tr><td width="130"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
+  <tr><td width="130"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
     <td width="118" valign="top" style="font:normal 12px georgia; color:#969696; line-height:22px;"><strong style="font:bold 12px georgia; color:#000000">Aroon Purie</strong><br>
 							Chairman <!--&amp; <br>Editor-in-Chief--><br>
                             <span style="color:#942c4f">The India Today Group</span></td>
   </tr>
    <tr>
-   <td width="248" colspan="2"><div align="left"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
+   <td width="248" colspan="2"><div align="left"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
 
 			<div><div style="border: 0px solid rgb(0, 0, 0); margin: 5px 0pt 5px 15px; float: left; width: 90%; font-family: Georgia; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0); text-align: center; line-height: 18px;">The INDIA TODAY WOMAN SUMMIT & AWARDS has been initiated to serve a dual purpose: it acknowledges the contribution of the modern Indian woman to the nation's top management cadres & provides day-long interaction between highly qualified and successful women with those who are ambitious but still striving for the vision, strategies and skills needed to make their mark in today's complex world.<br /> 
  In its second year, the Summit, we believe, is well set to power women to deal with challenges and take charge of their professional and personal lives.</div>
 	          </strong></div></div>
-             <div align="right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
+             <div align="right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
   </tr>
   
    

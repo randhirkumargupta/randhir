@@ -1,3 +1,6 @@
+<style>
+	#modal-content #reporter-node-form .vertical-tabs{display:none;}
+</style>
 <div id="BasicDetails">
     <h2 class="story-title"><?php print t('Quick File'); ?></h2>
     <?php print drupal_render($form['title']); ?>
