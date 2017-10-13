@@ -138,3 +138,25 @@ function getproquest_feed_story_client_array(){
   );
   return $story_sectios;
 }
+
+function get_dailyhunt_sections_for_feed(){
+  $story_sectios = array(
+    '1206599' => 'celebrities.xml',
+    '1206795' => 'fyi.xml',
+    '1206600' => 'gossip.xml',
+    '1206578' => 'india.xml',
+    '1206567' => 'lifestyle.xml',
+    '1206514' => 'magazine.xml',
+    '1206572' => 'mailtoday.xml',
+    '1206533' => 'movies.xml',
+    '1206550' => 'sports.xml',
+    '1206944' => 'supplementsgujarati.xml',
+    '1207249' => 'supplementshyderabad.xml',
+    '1206947' => 'supplementsmumbai.xml',
+    '1206942' => 'supplementsspice.xml',
+    '1206688' => 'technology.xml',
+    '1206796' => 'television.xml',
+    '1206577' => 'world.xml',
+  );
+  return $story_sectios;
+}

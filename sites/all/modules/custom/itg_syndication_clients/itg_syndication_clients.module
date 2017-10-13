@@ -71,6 +71,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_gist_galleries_videos.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rssfeeds/dailyhunt/stories'] = array(
+    'page callback' => 'itg_dailyhunt_feed_stories_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_dailyhunt_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
