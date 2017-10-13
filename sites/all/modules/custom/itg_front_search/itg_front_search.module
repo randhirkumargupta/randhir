@@ -266,10 +266,10 @@ function itg_front_search_views_pre_render(&$view) {
 
 
     if (!empty($_GET['keyword'])) {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $_GET['keyword'] . ' "</span></span>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>" ' . $_GET['keyword'] . ' "</h1></div>';
     }
     else {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </div>';
     }
 
     $bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Video' => 'Videos', 'photogallery' => 'Photos', 'Magazine' => 'Magazine', 'Blog' => 'Blog', 'Podcast' => 'Podcast');
