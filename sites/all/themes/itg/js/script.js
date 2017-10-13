@@ -404,7 +404,10 @@ jQuery(document).ready(function () {
         if (code == 13 && value.length != 0) { //Enter keycode
             //Do something
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
-            var urldata = Drupal.settings.basePath + 'topic/' + jQuery(this).val();
+            keyword = jQuery(this).val();
+            myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            myStr = myStr.replace(/\s+/g, "-");
+            var urldata = Drupal.settings.basePath + 'topic/' + myStr;
             window.location.href = urldata;
         }
         if (value.length != 0) {
@@ -417,6 +420,9 @@ jQuery(document).ready(function () {
     jQuery('.search-icon-search').click(function () {
         search_value = jQuery(this).parent().find('.search-text').val();
         if (search_value.length != 0) {
+            nkeyword = search_value;
+            nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            nmyStr = nmyStr.replace(/\s+/g, "-");
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
             var urldata = Drupal.settings.basePath + 'topic/' + search_value;
             window.location.href = urldata;

@@ -104,7 +104,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       $form['bundle_name']['#value'] = $default_value;
       }
       if(!empty($arg[1])) {
-      $form['keyword']['#value'] = $arg[1];
+      $form['keyword']['#value'] = str_replace("-", " ", $arg[1]);
       }
       $form['keyword']['#attributes'] = array('readonly' => 'readonly');
       
@@ -335,10 +335,10 @@ function itg_front_search_views_pre_render(&$view) {
 //    }
     
     if (!empty($arg[0])) {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $arg[1] . ' "</span></span>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>" ' . str_replace("-", " ", $arg[1]) . ' "</h1></div>';
     }
     else {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </div>';
     }
 
     $bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Video' => 'Videos', 'photogallery' => 'Photos', 'Magazine' => 'Magazine', 'Blog' => 'Blog', 'Podcast' => 'Podcast');
