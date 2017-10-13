@@ -60,6 +60,7 @@ function generateStoryDeatilList($id) {
     $poll_id = $body_with_html_data['poll_id'];
     $polls = getPollsData($poll_id);
     //p($polls);die();
+    $polls_d = array();
     $polls_d = $polls['data'][0];
     $load_city = taxonomy_term_load($node->field_stroy_city['und'][0]['tid']);
     $location = $load_city->name;
@@ -80,16 +81,26 @@ function generateStoryDeatilList($id) {
     $changed = $node->changed;
     $changed_datetime = date("Y-m-d H:i:s", $changed);
     $comment_cont = getCommentsCount($nid);
+    $tag = array();
     $tag = getTag($node);
+    $heighligth = array();
     $heighligth = getHighlight($node);
+    $author = array();
     $author = generateAuthorTag($node);
+    $rating = array();
     $rating = getRating($node);
     $caption = getImgCaption($large_image_fid);
+    $story_tech = array();
     $story_tech = getStoryTechs($node);
+    $listicle_data = array();
     $listicle_data = buildListicleNode($node);
+    $factoid_data = array();
     $factoid_data = buildFactoidNode($node);
+    $buzz_data = array();
     $buzz_data = buildBuzzNode($node);
+    $expertchunk_data = array();
     $expertchunk_data = buildExpertchunkNode($node);
+    
     // custom function for get img byline
     $byline = getImgByline($large_image_fid);
     $published_stamp = $node->workbench_moderation['published']->stamp;
