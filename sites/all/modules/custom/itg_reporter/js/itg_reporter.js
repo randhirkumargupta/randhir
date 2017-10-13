@@ -35,20 +35,18 @@
                 $('.form-item-field-constituancy-und-0-value').hide();
                 $('#edit-field-party-name').hide();
             }
-            if($('body.page-node-add-reporter').length) {
-				if (initialhasexist) {
-					// $('#edit-field-story-category').show();
-					$('.form-item-itg-section').show();
-				  
-				} else {
-					//$('#edit-field-story-category').hide();
-					$('.form-item-itg-section').hide();
-					$('.form-item-itg-category').hide();
-					$('.form-item-itg-sub-category').hide();
-					$('.form-item-itg-sub-sub-category').hide();
-					$('.form-item-itg-sub-sub-sub-category').hide();
-				}
-			}            
+            if (initialhasexist) {
+                // $('#edit-field-story-category').show();
+                $('.form-item-itg-section').show();
+              
+            } else {
+                //$('#edit-field-story-category').hide();
+                $('.form-item-itg-section').hide();
+                $('.form-item-itg-category').hide();
+                $('.form-item-itg-sub-category').hide();
+                $('.form-item-itg-sub-sub-category').hide();
+                $('.form-item-itg-sub-sub-sub-category').hide();
+            }
 
             if (initialhasexist_reporter) {
                 $('#edit-field-reporter-profile-type').show();
@@ -72,21 +70,19 @@
                 var subcelebrity = "Celebrity";
                 var initial_poli = celebrityvalue.indexOf(politician) != -1;
                 var initial_repo = celebrityvalue.indexOf(reporter) != -1;
-                if($('body.page-node-add-reporter').length) {
-					if (hasexist) {
-						//$('#edit-field-story-category').show();
-						$('.form-item-itg-section').show();
-				 
-					} else {
-						//$('#edit-field-story-category').hide();
-						$('.form-item-itg-section').hide();
-						$('.form-item-itg-category').hide();
-						$('.form-item-itg-sub-category').hide();
-						$('.form-item-itg-sub-sub-category').hide();
-						$('.form-item-itg-sub-sub-sub-category').hide();
-						$('.dropbox-remove a').trigger('click');
-					}
-				}                
+                if (hasexist) {
+                    //$('#edit-field-story-category').show();
+                    $('.form-item-itg-section').show();
+             
+                } else {
+                    //$('#edit-field-story-category').hide();
+                    $('.form-item-itg-section').hide();
+                    $('.form-item-itg-category').hide();
+                    $('.form-item-itg-sub-category').hide();
+                    $('.form-item-itg-sub-sub-category').hide();
+                    $('.form-item-itg-sub-sub-sub-category').hide();
+                    $('.dropbox-remove a').trigger('click');
+                }
                 if (initial_poli) {
                     $('#edit-field-constituancy-und-0-value').show();
                     $('#edit-field-party-name-und-0-value').show();
@@ -146,9 +142,7 @@
             $("#reporter-node-form").validate({
                 submitHandler: function(form) {
                     $('input:submit').attr('disabled', 'disabled');
-                    if($('body.page-node-add-reporter').length) {
-						form.submit();
-				    }
+                    form.submit();
                 },
                 onfocusout: function(element) {
                     $(element).valid();
