@@ -52,13 +52,6 @@ if (!empty($content)):
   //get byline id based on order reorder
 
   $byline_id = $content["byline_id"];
-
-  //get byline detail
-  $reporter_node = '';
-  if (!empty($byline_id)) {
-    $reporter_node = node_load($byline_id);
-  }
-
     // for activate_live_tv
     $activate_live_tv = FALSE;
     $is_sponsor_story = FALSE;
@@ -222,12 +215,16 @@ if (!empty($content)):
       <div class="story-left-section">
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {// && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) ?> 
           <div class="story-left">
-            <div class="byline">              
-              <?php if ($sponsor_text == ''): ?>
+            <div class="byline">
+              <?php
+              $byline_detail = $byline_id[0];
+              $extra_large_file = file_load($byline_detail['extra_large_image']);
+                $bylineextra_large_image = $extra_large_file->uri;
+                if ($sponsor_text == ''):?>
                 <div class="profile-pic">
                   <?php
-                  if(!empty($reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-                    $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                  if(!empty($bylineextra_large_image)) {
+                    $file = $bylineextra_large_image;
                     print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                     }
                     else {
@@ -241,39 +238,41 @@ if (!empty($content)):
               <?php else:
                 print $sponsor_text; ?>
               <?php endif; ?>
-              <div class="profile-detail">                  
+              <div class="profile-detail">               
                 <?php if ($sponsor_text == ''): ?>
+                 <?php 
+                 $lbyline_detail = '';
+                 foreach($byline_id as $key => $value) {
+                 ?> 
                   <ul>
-                    <li class="title"><?php if(!empty($reporter_node->title)) { print t($reporter_node->title); } ?></li>
+                    <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?></li>
                     <?php
                       $twitter_handle = '';
-                      if(!empty($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
-                      $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                      if(!empty($value['twitter_handle'])) {
+                      $twitter_handle = $value['twitter_handle'];
                       $twitter_handle = str_replace('@', '', $twitter_handle);
                       }
                       if (!empty($twitter_handle)) {
                       ?>
-                      <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
+                      <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>                
                     <?php } ?>
                     <?php
                     if (!empty($byline_id)) {
-                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
+                      print itg_story_follow_unfollow_print($value['nid'], 'author', 'follow_story', '');
                     }
                     ?>
-                  </ul>
-                <?php endif; ?>
-                <ul class="date-update">
-                  <?php if ($sponsor_text == ''): ?>
+                   <?php if ($sponsor_text == ''): ?>
                     <li class="mailto mhide">
                       <i class="fa fa-envelope-o"></i> &nbsp;<?php
-                      if(!empty($reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'])) {
-                      $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
                       print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Mail To Author') . "</a>";
-                      }
                       ?>
                     </li>
                   <?php endif; ?>
-
+   
+                  </ul>
+                 <?php } ?>
+                <?php endif; ?>
+                <ul class="date-update">
                   <li class="mhide">
                     <span class="share-count">
                       <?php
@@ -365,7 +364,9 @@ if (!empty($content)):
             <div class="byline">
               <div class="profile-pic">
                 <?php
-                $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                $byline_detail = $byline_id[0];
+                $extra_large_file = file_load($byline_detail['extra_large_image']);
+                $file = $extra_large_file->uri;
                 if (!empty($file)) {
                   print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                 }
@@ -376,26 +377,28 @@ if (!empty($content)):
                 ?>
               </div>
               <div class="profile-detail">
-                <ul>
-                  <li class="title"><?php print $reporter_node->title; ?></li>
+                <?php foreach($byline_id as $key => $value) { ?>
+                  <ul>
+                  <li class="title"><?php print $value['title']; ?></li>
                   <?php
                   $twitter_handle = '';
-                  if (isset($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
-                    $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                  if (isset($value['twitter_handle'])) {
+                    $twitter_handle = $value['twitter_handle'];
                   }
                   $twitter_handle = str_replace('@', '', $twitter_handle);
                   if (!empty($twitter_handle)) {
                     ?>
-                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                            ?></li>
+                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>
 
 
                 <?php } ?>
                  <?php
                     if (!empty($byline_id)) {
-                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
+                      print itg_story_follow_unfollow_print($byline_id['nid'], 'author', 'follow_story', '');
                     }
                     ?>  
                 </ul>
+                <?php } ?>  
                 <ul class="date-update">
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
                   <li><?php t('UPDATED'); ?><?php print date('H:i', $node->changed); ?> IST</li>

@@ -1577,6 +1577,7 @@ function itg_videogallery_views_pre_render(&$view) {
 function itg_videogallery_submit_status_message(&$form, $form_state) {
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
+      /* Assign video to widget */
       if (is_array($form['#node']->field_video_assign_to_widget[LANGUAGE_NONE])) {
         $previous_video_assign = $form['#node']->field_video_assign_to_widget[LANGUAGE_NONE];
       }
@@ -1592,6 +1593,7 @@ function itg_videogallery_submit_status_message(&$form, $form_state) {
           itg_video_assign_to_widget($form_state['values']['nid'], $video_widget, $primary_category, $previous_video_assign);
         }
       }
+      /* Assign video to widget */
 
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
@@ -4966,86 +4968,6 @@ function itg_videogallery_get_video_setting_by_bucket_name($bucket_name) {
   return $video_data;
 }
 
-/**
- * function for video assign to widget
- * @param $nid
- * @param array $video_widget
- * @param $cat_id
- * @param $previous_video_assign
- */
-function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previous_video_assign) {
-  if (!empty($video_widget)) {
-    $content_type = 'videogallery';
-    foreach ($video_widget as $widget_val) {
-      $result[$widget_val] = $widget_val;
-      $result_exist = itg_story_widget_data_exist($nid, 'watch_right_now_widget');
-      // for top stories
-      if ($widget_val == 'watch_right_now_widget') {
-        $weight_data = itg_story_widget_max_value('watch_right_now_widget');
-        if (empty($result_exist)) {
-          try {
-            $inserted_data = db_insert('itg_widget_order')->fields([
-              'nid' => $nid,
-              'cat_id' => $cat_id,
-              'content_type' => $content_type,
-              'widget' => 'watch_right_now_widget',
-              'weight' => --$weight_data,
-              'state' => 0,
-            ])->execute();
-          }
-          catch (PDOException $e) {
-            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
-          }
-        }
-      }
-
-      // for feature story
-      if ($widget_val == 'top_takes_video_widget') {
-        $widget = 'top_takes_video_widget';
-        $result_exist = itg_story_widget_data_exist($nid, 'top_takes_video_widget');
-        $weight_data = itg_story_widget_max_value('top_takes_video_widget');
-        if (empty($result_exist)) {
-          try {
-            $inserted_data = db_insert('itg_widget_order')->fields([
-              'nid' => $nid,
-              'cat_id' => 0,
-              'content_type' => $content_type,
-              'widget' => $widget,
-              'weight' => --$weight_data,
-              'state' => 0,
-            ])->execute();
-          }
-          catch (PDOException $e) {
-            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
-          }
-        }
-      }
-    }
-    foreach ($previous_video_assign as $row) {
-      if ($row['value'] != $result[$row['value']]) {
-        if ($row['value'] == 'watch_right_now_widget') {
-          $widget_value = 'watch_right_now_widget';
-        }
-        elseif ($row['value'] == 'top_takes_video_widget') {
-          $widget_value = 'top_takes_video_widget';
-        }
-
-        if ($widget_value) {
-          try {
-            db_delete('itg_widget_order')
-              ->condition('widget', $widget_value)
-              ->condition('nid', $nid)
-              ->execute();
-          }
-          catch (Exception $ex) {
-            drupal_set_message($ex->getMessage());
-          }
-        }
-      }
-    }
-  }
-}
-
 
 /*
  * Function for show related content in block
@@ -5131,3 +5053,33 @@ function get_tid_using_nid_custom($nid) {
   return 0;
 }
 
+/**
+ * function for video assign to widget
+ * @param int $nid
+ * @param array $video_widget
+ * @param type $cat_id
+ * @param type $previous_video_assign
+ */
+function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previous_video_assign) {
+  if (!empty($video_widget) && count($video_widget)) {
+    $result = array();
+    foreach ($video_widget as $widget_name) {
+      if(!empty($widget_name) && $widget_name != '_none') {
+        $result[$widget_name] = $widget_name;
+        $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
+        if (!$is_node_in_widget) {
+            itg_widget_insert_widget_data($nid, $widget_name, 0);
+        }
+      }
+    }
+    itg_widget_delete_old_data_by_limit($widget_name);
+    foreach ($previous_video_assign as $row) {
+      $widget_value = $row['value'];
+      if ($widget_value != $result[$row['value']]) {
+        if (!empty($widget_value)) {
+          itg_widget_delete_data_from_widget($widget_value, $nid);
+        }
+      }
+    }
+  }
+}

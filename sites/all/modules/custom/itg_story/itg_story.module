@@ -324,25 +324,23 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
-  if ($form_state['node']->status == '1') {
-    if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
-      $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
-    }
-    else {
-      $previous_story_assign = '';
-    }
-    $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
-    $primary_category = $form_state['input']['itg_primary_category'];
-    // for story assign to widget
-    if (function_exists('itg_story_assign_to_widget')) {
-      if(is_array($story_widget) && count($story_widget) > 0) {
-        itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, $primary_category, $previous_story_assign, 'story');
-      }
-    }
-  }
-
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
+      /* Assign story to widget */
+      if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_story_assign = '';
+      }
+      $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+      // for story assign to widget
+      if (function_exists('itg_story_assign_to_widget')) {
+        if(is_array($story_widget) && count($story_widget) > 0) {
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, '', $previous_story_assign);
+        }
+      }
+      /* End for Assign story to widget */
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
       drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
@@ -387,144 +385,6 @@ function itg_story_form_custom_callback($form, &$form_state) {
     itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
   }
   //}
-}
-
-/**
- * function for story assign to widget
- * @param int $nid
- * @param array $story_widget
- * @param int $cat_id
- */
-function itg_story_assign_to_widget($nid, array $story_widget, $cat_id, $previous_story_assign, $content_type) {
-  if (!empty($story_widget)) {
-    foreach ($story_widget as $widget_val) {
-      $result[$widget_val] = $widget_val;
-      $result_exist = itg_story_widget_data_exist($nid, 'top_stories_widget');
-      itg_watchdog('assign_widget_val', $widget_val);
-      itg_watchdog('assign_result_exist', $result_exist);
-      // for top stories
-      if ($widget_val == 'top_stories') {
-        $weight_data = itg_story_widget_max_value('top_stories_widget');
-        if (empty($result_exist)) {
-          try {
-            $inserted_data = db_insert('itg_widget_order')->fields([
-              'nid' => $nid,
-              'cat_id' => $cat_id,
-              'content_type' => $content_type,
-              'widget' => 'top_stories_widget',
-              'weight' => --$weight_data,
-              'state' => 0,
-            ])->execute();
-          }
-          catch (PDOException $e) {
-            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
-          }
-        }
-      }
-      // for big story
-      if ($widget_val == 'big_story') {
-        $related_nodes_json = '[]';
-        $widget = 'big_story_format_widget';
-        $result_exist = itg_story_widget_data_exist($nid, 'big_story_format_widget');
-        if (empty($result_exist)) {
-          // Remove first livetv.
-          try {
-            db_delete('itg_widget_order')
-              ->condition('widget', $widget)
-              ->execute();
-          }
-          catch (Exception $ex) {
-            drupal_set_message($ex->getMessage());
-          }
-
-          try {
-            $query = db_insert('itg_widget_order')
-              ->fields(array(
-                'nid' => $nid,
-                'widget' => $widget,
-                'content_type' => $content_type,
-                'cat_id' => 0,
-                'weight' => 0,
-                'extra' => $related_nodes_json,
-              ))
-              ->execute();
-          }
-          catch (Exception $ex) {
-            drupal_set_message($ex->getMessage());
-          }
-        }
-      }
-      // for feature story
-      if ($widget_val == 'featured_story') {
-        $widget = 'home_page_feature_widget';
-        $result_exist = itg_story_widget_data_exist($nid, 'home_page_feature_widget');
-        $weight_data = itg_story_widget_max_value('home_page_feature_widget');
-        if (empty($result_exist)) {
-          try {
-            $inserted_data = db_insert('itg_widget_order')->fields([
-              'nid' => $nid,
-              'cat_id' => 0,
-              'content_type' => $content_type,
-              'widget' => $widget,
-              'weight' => --$weight_data,
-              'state' => 0,
-            ])->execute();
-          }
-          catch (PDOException $e) {
-            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
-          }
-        }
-      }
-      // for feature story
-      if ($widget_val == 'dont_miss') {
-        $widget = 'dont_miss_content_widget';
-        $result_exist = itg_story_widget_data_exist($nid, 'dont_miss_content_widget');
-        $weight_data = itg_story_widget_max_value('dont_miss_content_widget');
-        if (empty($result_exist)) {
-          try {
-            $inserted_data = db_insert('itg_widget_order')->fields([
-              'nid' => $nid,
-              'cat_id' => 0,
-              'content_type' => $content_type,
-              'widget' => $widget,
-              'weight' => --$weight_data,
-              'state' => 0,
-            ])->execute();
-          }
-          catch (PDOException $e) {
-            drupal_set_message(t('Error: %message', ['%message' => $e->getMessage()]), 'error');
-          }
-        }
-      }
-    }
-    foreach ($previous_story_assign as $row) {
-      if ($row['value'] != $result[$row['value']]) {
-        if ($row['value'] == 'top_stories') {
-          $widget_value = 'top_stories_widget';
-        }
-        elseif ($row['value'] == 'featured_story') {
-          $widget_value = 'home_page_feature_widget';
-        }
-        elseif ($row['value'] == 'big_story') {
-          $widget_value = 'big_story_format_widget';
-        }
-        elseif ($row['value'] == 'dont_miss') {
-          $widget_value = 'dont_miss_content_widget';
-        }
-        if ($widget_value) {
-          try {
-            db_delete('itg_widget_order')
-              ->condition('widget', $widget_value)
-              ->condition('nid', $nid)
-              ->execute();
-          }
-          catch (Exception $ex) {
-            drupal_set_message($ex->getMessage());
-          }
-        }
-      }
-    }
-  }
 }
 
 /**
@@ -1163,8 +1023,11 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       $node->content['migrated_count'] = itg_get_migrated_like_count($node->nid);
     }
 
-    if (function_exists('itg_common_get_latest_byline')) {
-      $node->content['byline_id'] = itg_common_get_latest_byline($node->nid, '1');
+    if (function_exists('itg_common_get_latest_byline') && function_exists('itg_get_multi_byline_details')) {
+      if (!empty($node->field_reporter_publish_id['und'][0]['value'])) {
+        $byline = itg_common_get_latest_byline($node->nid, '1');
+        $node->content['byline_id'] = itg_get_multi_byline_details($byline);
+      }
     }
 
     if (isset($node->field_story_type[LANGUAGE_NONE][0]['value']) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
@@ -1833,5 +1696,43 @@ function itg_story_save_original_sample_image($fid) {
       ))->execute();
     }
     return $file->fid;
+  }
+}
+
+/**
+ * function for story assign to widget
+ * @param int $nid
+ * @param array $story_widget
+ * @param int $cat_id
+ */
+function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $previous_story_assign) {
+
+  if (!empty($story_widget) && count($story_widget)) {
+    $result = array();
+    foreach ($story_widget as $widget_name) {
+      if(!empty($widget_name) && $widget_name != '_none') {
+        $result[$widget_name] = $widget_name;
+        $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
+        if (!$is_node_in_widget) {
+          if ($widget_name == 'big_story') {
+            $extra = '[]';
+            itg_widget_insert_widget_data($nid, $widget_name, $category_tid, $extra);
+          }
+          else {
+            itg_widget_insert_widget_data($nid, $widget_name, 0);
+          }
+        }
+      }
+    }
+    itg_widget_delete_old_data_by_limit($widget_name);
+    foreach ($previous_story_assign as $row) {
+      $widget_value = $row['value'];
+      if ($widget_value != $result[$row['value']]) {
+        itg_watchdog('widget_value_inner', $widget_value);
+        if (!empty($widget_value)) {
+          itg_widget_delete_data_from_widget($widget_value, $nid);
+        }
+      }
+    }
   }
 }
