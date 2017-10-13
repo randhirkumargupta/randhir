@@ -121,3 +121,25 @@ function redis_key_delete($key) {
   return $result;
 }
 
+/*
+ * delete redis key_pattern value
+ */
+function redis_key_pattern_delete($key_patt) {
+
+  $redis = redis_connection();
+  $all_redis_key = $redis->keys("*");
+  //p($all_redis_key);die();
+  $flag = 0;
+  foreach ($all_redis_key as $key => $value) {
+    // echo $value; die();
+    if (strpos($value, $key_patt) !== FALSE) {
+      $res = $redis->del($value);
+      if ($res) {
+        $flag++;
+      }
+    }
+  }
+  //echo $flag; die();
+  return $flag;
+}
+
