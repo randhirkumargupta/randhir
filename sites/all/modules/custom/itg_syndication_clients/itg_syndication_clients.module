@@ -65,6 +65,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_dekkho_feed_videos.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rssfeeds/videoelephant/video'] = array(
+    'page callback' => 'itg_videoelephant_feed_videos_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_videoelephant_feed_videos.inc',
+    'type' => MENU_CALLBACK,
+  );
   $items['rssfeeds/gist/galleries'] = array(
     'page callback' => 'itg_gist_feed_galleries_syndication',
     'access arguments' => array('access content'),

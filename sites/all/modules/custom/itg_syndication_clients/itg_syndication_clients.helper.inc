@@ -157,6 +157,21 @@ function get_dailyhunt_sections_for_feed(){
     '1206688' => 'technology.xml',
     '1206796' => 'television.xml',
     '1206577' => 'world.xml',
+    '1206584' => 'latestnews.xml',
+  );
+  return $story_sectios;
+}
+
+function get_videoelephant_feed_videos_array(){
+  $story_sectios = array(
+    '1207304' => 'lifestyle.xml',
+    '1207916' => 'cookery.xml',
+    '1207580' => 'sosorry_polytoons.xml',
+    '1208177' => 'education_today.xml',
+    '1207978' => 'auto_today.xml',
+    '1206955' => 'india.xml',
+    '1208164' => 'world.xml',
+    '1207303' => 'bollywood_movie_reviews.xml'
   );
   return $story_sectios;
 }
