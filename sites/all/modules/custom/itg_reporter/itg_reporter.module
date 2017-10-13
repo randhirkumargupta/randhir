@@ -118,8 +118,9 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
       $add_title = t('Create ') . $node_type;
       drupal_set_title($add_title);
     }
-
-    $form['#after_build'][] = 'itg_reporter_after_build';
+	if (!($form_state['reporter_popup_form'])) {
+      $form['#after_build'][] = 'itg_reporter_after_build';
+	}
 
     $destination = 'byline-list';
     $form['actions']['cancel'] = array(
