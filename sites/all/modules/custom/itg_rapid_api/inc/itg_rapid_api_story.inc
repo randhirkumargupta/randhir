@@ -295,7 +295,7 @@ function getStoryTechs($node) {
     $content = preg_replace('#<div class="tech-cons"(.|\s)+</div>#', '', $content);
     /* remove pros & cons from contents start */
     $tect_img = $node->field_story_technology['und'];
-    $storytech['rating'] = $rating;
+    $storytech['rating'] = "$rating";
     $storytech['content'] = $content;
     foreach ($tect_img as $key => $value) {
         $val_fid = $value['value'];
@@ -307,13 +307,15 @@ function getStoryTechs($node) {
         $listcont++;
     }
     //get tech pros
+    $tech_pros = array();
     $tech_pros = getTechPros($content_org);
     $pros_img = getTechProsImg($content_org);
     $tech_h2 = getTechProsh2($content_org);
-    $storytech['tech-pros-cons-img'] = $pros_img;
-    $storytech['tech-pros-cons-title'] = $tech_h2;
+    $storytech['tech-pros-cons-img'] = "$pros_img";
+    $storytech['tech-pros-cons-title'] = "$tech_h2";
     $storytech['tech-pros'] = $tech_pros;
     //get tech pros
+    $tech_cons = array();
     $tech_cons = getTechCons($content_org);
     $storytech['tech-cons'] = $tech_cons;
     // static photo section
@@ -338,8 +340,8 @@ function buildListicleNode($node) {
     $field_story_templates = $node->field_story_templates['und'][0]['value'];
     // get title
     $field_story_template_guru = $node->field_story_template_guru['und'][0]['value'];
-    $listiclenode['templates'] = $field_story_templates;
-    $listiclenode['title'] = $field_story_template_guru;
+    $listiclenode['templates'] = "$field_story_templates";
+    $listiclenode['title'] = "$field_story_template_guru";
     //listicle loop data
     $field_story_listicle = $node->field_story_listicle['und'];
 
@@ -350,9 +352,9 @@ function buildListicleNode($node) {
         $type = $load_collection->field_story_listicle_type['und'][0]['value'];
         $description = $load_collection->field_story_listicle_description['und'][0]['value'];
         // loop data
-        $listiclenode['data'][$listcont]['description'] = $description;
-        $listiclenode['data'][$listcont]['type'] = $type;
-        $listiclenode['data'][$listcont]['color'] = $color;
+        $listiclenode['data'][$listcont]['description'] = "$description";
+        $listiclenode['data'][$listcont]['type'] = "$type";
+        $listiclenode['data'][$listcont]['color'] = "$color";
         $listcont++;
     }
     return $listiclenode;
@@ -370,7 +372,7 @@ function buildFactoidNode($node) {
     $listcont = 0;
     // get title
     $field_story_factoids_title = $node->field_story_factoids_title['und'][0]['value'];
-    $factoidnode['title'] = $field_story_factoids_title;
+    $factoidnode['title'] = "$field_story_factoids_title";
     // loop data - field_story_template_factoids
     $field_story_template_factoids = $node->field_story_template_factoids['und'];
     foreach ($field_story_template_factoids as $key => $value) {
@@ -402,9 +404,9 @@ function buildBuzzNode($node) {
         $img_url = completeFilePath($img_fid);
         $description = $load_collection->field_buzz_description['und'][0]['value'];
 
-        $buzznode[$listcont]['headLine'] = $headLine;
-        $buzznode[$listcont]['img'] = $img_url;
-        $buzznode[$listcont]['description'] = $description;
+        $buzznode[$listcont]['headLine'] = "$headLine";
+        $buzznode[$listcont]['img'] = "$img_url";
+        $buzznode[$listcont]['description'] = "$description";
         $listcont++;
     }
 
@@ -426,10 +428,10 @@ function buildExpertchunkNode($node) {
     $field_story_expertise = $node->field_story_expertise['und'][0]['value'];
     $img_url = completeFilePath($field_story_expert_image_fid);
 
-    $expert_chunk['name'] = $field_story_expert_name;
-    $expert_chunk['image'] = $img_url;
-    $expert_chunk['expertise'] = $field_story_expertise;
-    $expert_chunk['description'] = $field_story_expert_description;
+    $expert_chunk['name'] = "$field_story_expert_name";
+    $expert_chunk['image'] = "$img_url";
+    $expert_chunk['expertise'] = "$field_story_expertise";
+    $expert_chunk['description'] = "$field_story_expert_description";
 
     return $expert_chunk;
 }
