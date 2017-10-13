@@ -574,7 +574,7 @@ function pollsdatalist($poll_id) {
   foreach ($result as $k => $res) {
     $news2[] = getPollLData($res);
   }
-
+  $data = array();
   $data['data'] = $news2;
   
   return $data;
@@ -611,7 +611,7 @@ function getPollLData($res) {
     $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
     $options2[] = $options;
   }
-
+  $news = array();
   $news['p_id'] = "$poll_nid";
   $news['p_is_sponsored'] = "";
   $news['p_sponsored_icon'] = "";
