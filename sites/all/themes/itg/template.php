@@ -249,7 +249,7 @@ function itg_breadcrumb($variables) {
     if (arg(0) == 'topic' || arg(0) == 'advance_search') {
       if (!empty(arg(1)) || !empty($_GET['keyword'])) {
         if (arg(0) == 'topic') {
-          $s_name = arg(1);
+          $s_name = str_replace("-", " ", arg(1));
         }
         else if (arg(0) == 'advance_search') {
           $s_name = $_GET['keyword'];

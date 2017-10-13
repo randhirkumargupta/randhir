@@ -288,7 +288,7 @@ function _vukkul_block_content() {
   }
   $unique_id = $node->type . '_' . $node->nid;
   $author = base64_encode($reporter_node);
-  drupal_add_js('http://vuukle.com/js/vuukle.js', array('type' => 'external'));
+  drupal_add_js('https://vuukle.com/js/vuukle.js', array('type' => 'external'));
   $output = '<script type="text/javascript">
 
                var UNIQUE_ARTICLE_ID = "' . $unique_id . '";
