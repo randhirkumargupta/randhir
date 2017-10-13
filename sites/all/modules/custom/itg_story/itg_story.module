@@ -289,6 +289,8 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
       break;
     case 'reporter_node_form' :
       if ($form_state['reporter_popup_form']) {
+        // alter label name
+        $form['title']['#title'] = t('Name');
         //$form['field_reporter_twitter_handle']['#access'] = FALSE;
         //$form['field_story_expert_name']['#access'] = FALSE;
         //$form['field_story_new_title']['#access'] = FALSE;
