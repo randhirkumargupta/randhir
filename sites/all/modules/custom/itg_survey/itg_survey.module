@@ -207,11 +207,11 @@ function itg_survey_form_after_build($form , &$form_state) {
   );
 
   // Hide multiple answer options in case of "rating" 
-  for ($ques = 0; $ques <= $form['field_survey_add_questions']['und']['#max_delta']; $ques++) {
-    if ($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_type'][LANGUAGE_NONE]['#default_value'][0] == 'rating') {
-      unset($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_option_2']);
-    }
-  }
+//  for ($ques = 0; $ques <= $form['field_survey_add_questions']['und']['#max_delta']; $ques++) {
+//    if ($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_type'][LANGUAGE_NONE]['#default_value'][0] == 'rating') {
+//      unset($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_option_2']);
+//    }
+//  }
 
   // Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);

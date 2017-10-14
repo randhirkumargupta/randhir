@@ -275,7 +275,8 @@ function update_search_title($title, $combined_data, $uid, $type) {
 function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
   $arg = arg();
   if ($arg[0] == 'topic') {
-    $query->replaceParam("q", $arg[1]);
+    $search_string = str_replace("-", " ", $arg[1]);
+    $query->replaceParam("q", $search_string);
     if (!empty($arg[2])) {
       if ($arg[2] == 'All') {
         $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
