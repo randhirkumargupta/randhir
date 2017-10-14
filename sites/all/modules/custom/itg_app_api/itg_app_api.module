@@ -18,6 +18,7 @@ function itg_app_api_init() {
   module_load_include('inc', 'itg_app_api', 'inc/helper');
   module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_story');
   module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage');
+  
 }
 
 /**
@@ -156,11 +157,37 @@ function itg_app_api_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
 
-  $items['admin/api-configuration/rest-api/livetv-json'] = array(
-    'title' => 'update livetv json',
-    'description' => 'livetv_json',
+  $items['admin/api-configuration/rest-api/livetv-aajtak'] = array(
+    'title' => 'update livetv aajtak',
+    'description' => 'livetv_aajtak',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('livetv_json'),
+    'page arguments' => array('livetv_aajtak'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/api-configuration/rest-api/livetv-indiatoday'] = array(
+    'title' => 'update livetv indiatoday',
+    'description' => 'livetv_indiatoday',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_indiatoday'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/api-configuration/rest-api/livetv-delhiaajtak'] = array(
+    'title' => 'update livetv delhiaajtak',
+    'description' => 'livetv_delhiaajtak',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_delhiaajtak'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/api-configuration/rest-api/livetv-tej'] = array(
+    'title' => 'update livetv tej',
+    'description' => 'livetv_tej',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('livetv_tej'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
@@ -179,6 +206,42 @@ function itg_app_api_menu() {
     'description' => 'otherapps_android_json',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('otherapps_android_json'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  // for static other device
+
+  $items['admin/api-configuration/rest-api/adconfig-android'] = array(
+    'title' => 'update adconfig android json',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('adconfig_android'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/api-configuration/rest-api/adconfig-ipad'] = array(
+    'title' => 'update adconfig ipad json',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('adconfig_ipad'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/api-configuration/rest-api/adconfig-iphone'] = array(
+    'title' => 'update adconfig iphone json',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('adconfig_iphone'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/api-configuration/rest-api/adconfig-tab'] = array(
+    'title' => 'update adconfig tab json',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('adconfig_tab'),
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
@@ -307,12 +370,10 @@ function server_error_master_json() {
  * @pram int $nid
  */
 function getCommentsCount($nid) {
-  // variable declation
-  $query = db_select('comment', 'com');
-  $query->fields('com', array('cid'));
-  $query->condition('com.nid', $nid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return count($result);
+
+  $node_anyalytics = analytics_node_data($nid, 'array');
+  $nc_count = $node_anyalytics['data_count_node_comment'];
+  return $nc_count;
 }
 
 /**
@@ -367,13 +428,52 @@ function livetv_channellist_json() {
 }
 
 // livetv_json form decalation
-function livetv_json() {
+function livetv_aajtak() {
   $form = array();
 
-  $form['livetv_json'] = array(
+  $form['livetv_aajtak'] = array(
     '#type' => 'textarea',
-    '#title' => t('livetv json'),
-    '#default_value' => variable_get('livetv_json'),
+    '#title' => t('livetv aajtak'),
+    '#default_value' => variable_get('livetv_aajtak'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+// livetv_indiatoday form decalation
+function livetv_indiatoday() {
+  $form = array();
+
+  $form['livetv_indiatoday'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv indiatoday'),
+    '#default_value' => variable_get('livetv_indiatoday'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+// livetv_delhiaajtak form decalation
+function livetv_delhiaajtak() {
+  $form = array();
+
+  $form['livetv_delhiaajtak'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv delhiaajtak'),
+    '#default_value' => variable_get('livetv_delhiaajtak'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+// livetv_tej form decalation
+function livetv_tej() {
+  $form = array();
+
+  $form['livetv_tej'] = array(
+    '#type' => 'textarea',
+    '#title' => t('livetv tej'),
+    '#default_value' => variable_get('livetv_tej'),
     '#required' => TRUE,
   );
 
@@ -418,6 +518,7 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
   // user agent for browser
   if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
     $flag = 1;
+    // this condition is for IE11
   }
   // this condition is for IE11
   elseif (preg_match('/Trident/i', $u_agent)) {
@@ -450,9 +551,11 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
   if ($iphone || $android || $palmpre || $ipod || $berry == TRUE) {
     $flag = 1;
   }
-
+  $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification");
   if (arg(0) == "appapi" && count(arg()) == 2) {
-    $result = $path . "/it";
+    if (!in_array(arg(1), $post_res)) {
+      $result = $path . "/it";
+    }
   }
 }
 
@@ -474,8 +577,196 @@ function getStoryType($nid) {
   return $type;
 }
 
+
+
 /**
  * Implements hook_boot().
  */
 function itg_app_api_boot() {}
+
+
+
+// adconfig_android form decalation
+function adconfig_android() {
+  $form = array();
+
+  $form['adconfig_android'] = array(
+    '#type' => 'textarea',
+    '#title' => t('adconfig android'),
+    '#default_value' => variable_get('adconfig_android'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/*
+ * adconfig_ipad form decalation
+ */
+function adconfig_ipad() {
+  $form = array();
+
+  $form['adconfig_ipad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('adconfig ipad'),
+    '#default_value' => variable_get('adconfig_ipad'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/*
+ * adconfig_iphone form decalation
+ */
+function adconfig_iphone() {
+  $form = array();
+
+  $form['adconfig_iphone'] = array(
+    '#type' => 'textarea',
+    '#title' => t('adconfig iphone'),
+    '#default_value' => variable_get('adconfig_iphone'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+/*
+ * adconfig_tab form decalation
+ */
+function adconfig_tab() {
+  $form = array();
+
+  $form['adconfig_tab'] = array(
+    '#type' => 'textarea',
+    '#title' => t('adconfig tab'),
+    '#default_value' => variable_get('adconfig_tab'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
+
+
+
+/**
+ * Function to get total number of nodes in taxonomy.
+ *
+ * @param int $tid
+ *
+ * @return int
+ */
+function count_node_under_tid_service($tid) {
+  $query = db_select('taxonomy_index', 'ti');
+  $query->leftJoin('node', 'n', 'n.nid=ti.nid');
+  $query->addField('ti', 'nid');
+  $query->condition('ti.tid', $tid);
+  $query->condition('n.status', 1);
+  $query->condition('n.type', array('story', 'videogallery', 'photogallery'), 'IN');
+  $query->orderBy('n.created', 'DESC');
+  return $query->execute()->rowCount();
+}
+
+
+
+/**
+ * Call back function for nody body token filter .
+ *
+ * @param string $n_body
+ *
+ * @return string $n_body
+ */
+function formateNodeBodyToken($n_body) {
+  include 'simple_html_dom.php';
+  $token_list = array('div[class=quiz]', 'div[class=poll]', 'div[class=survey]', 'div[class=listicle]', 'div[class=itgimage]', 'iframe', '<p>[ITG:TECH-PHOTOS]</p>', '<p>[ITG:EXPERT-CHUNK]</p>', '<p>[ITG:FACTOIDS]</p>');
+  $data = array();
+  $poll_id = 0;
+
+  $str_html = str_get_html($n_body);
+  // loop on token array
+  foreach ($token_list as $tkey => $tvalue) {
+    if ($tvalue == '<p>[ITG:TECH-PHOTOS]</p>' || $tvalue == '<p>[ITG:EXPERT-CHUNK]</p>' || $tvalue == '<p>[ITG:FACTOIDS]</p>') {
+      $tvalue_replave = "<ITG-NATIVEAPP>" . $tvalue . "<ITG-NATIVEAPP>";
+      $n_body = str_replace($tvalue, $tvalue_replave, $n_body);
+    }
+    else {
+      $node_str = "";
+      $node_ar = array();
+      foreach ($str_html->find($tvalue) as $element) {
+        $node_str .= $element . "$$$$$";
+        // get poll id
+        if ($tvalue == "div[class=poll]") {
+          $poll_id = filter_var($element, FILTER_SANITIZE_NUMBER_INT);
+        }
+      }
+      $node_str = rtrim($node_str, "$$$$$");
+      $node_ar = explode("$$$$$", $node_str);
+
+
+      foreach ($node_ar as $key => $value) {
+        $replace = "<ITG-NATIVEAPP>" . $value . "<ITG-NATIVEAPP>";
+        $n_body = str_replace($value, $replace, $n_body);
+      }
+    }
+  }
+  // add AD block after 1st <p> start
+  $start = strpos($n_body, '<p>');
+  $end = strpos($n_body, '</p>', $start);
+  $paragraph = substr($n_body, $start, $end - $start + 4);
+  $paragraph_rep = $paragraph . "<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>";
+  $n_body = str_replace($paragraph, $paragraph_rep, $n_body);
+  // add AD block after 1st <p> end
+  $data['n_body'] = $n_body;
+  $data['poll_id'] = $poll_id;
+  return $data;
+}
+
+/**
+ * function for  getTechPros
+ * @pram $content_org
+ *
+ * @return array
+ */
+function getTechProsImg($content_org) {
+  //include 'simple_html_dom.php';
+  $src = "";
+  if ($content_org) {
+    $str_html = str_get_html($content_org);
+    $img_str = "";
+    foreach ($str_html->find('ul[class="pron-cons-img]') as $element) {
+      $img_str = $element;
+    }
+    $str_html2 = str_get_html($img_str);
+    foreach ($str_html2->find('img') as $element) {
+      $img_str_img = $element;
+    }
+    $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
+    $src = $xpath->evaluate("string(//img/@src)");
+    //echo $src; die();
+  }
+  return $src;
+}
+
+/**
+ * function for  getTechPros
+ * @pram $content_org
+ *
+ * @return array
+ */
+function getTechProsh2($content_org) {
+  //include 'simple_html_dom.php';
+  $h2 = "";
+  if ($content_org) {
+    $str_html = str_get_html($content_org);
+    $h2 = "";
+    foreach ($str_html->find('h2') as $element) {
+      $h2 = $element;
+    }
+    $h2 = ltrim($h2, "<h2>");
+    $h2 = rtrim($h2, "</h2>");
+  }
+
+  return $h2;
+}
 

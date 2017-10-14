@@ -14,6 +14,7 @@ function itg_app_api_resource() {
    * custom resource for sprit1
    */
   $api = array(
+    
     // hamburger_menu custom resource declaration.....
     'hamburger_menu' => array(
       'operations' => array(
@@ -285,6 +286,7 @@ function itg_app_api_resource() {
         ),
       ),
     ),
+    
     // sprint 2 api start
     // photostorydetail custom resource declaration.....
     'photostorydetail' => array(
@@ -431,7 +433,7 @@ function itg_app_api_resource() {
             'module' => 'itg_app_api',
             'name' => 'itg_app_api.services',
           ),
-          'callback' => 'itg_app_api_livetv_json',
+          'callback' => 'itg_app_api_livetv_indiatoday',
           'access callback' => 'user_access',
           'access arguments' => array('access content'),
           'access arguments append' => FALSE,
@@ -458,7 +460,7 @@ function itg_app_api_resource() {
             'module' => 'itg_app_api',
             'name' => 'itg_app_api.services',
           ),
-          'callback' => 'itg_app_api_livetv_json',
+          'callback' => 'itg_app_api_livetv_aajtak',
           'access callback' => 'user_access',
           'access arguments' => array('access content'),
           'access arguments append' => FALSE,
@@ -485,7 +487,7 @@ function itg_app_api_resource() {
             'module' => 'itg_app_api',
             'name' => 'itg_app_api.services',
           ),
-          'callback' => 'itg_app_api_livetv_json',
+          'callback' => 'itg_app_api_livetv_delhiaajtak',
           'access callback' => 'user_access',
           'access arguments' => array('access content'),
           'access arguments append' => FALSE,
@@ -512,7 +514,7 @@ function itg_app_api_resource() {
             'module' => 'itg_app_api',
             'name' => 'itg_app_api.services',
           ),
-          'callback' => 'itg_app_api_livetv_json',
+          'callback' => 'itg_app_api_livetv_tej',
           'access callback' => 'user_access',
           'access arguments' => array('access content'),
           'access arguments append' => FALSE,
@@ -694,7 +696,7 @@ function itg_app_api_resource() {
       ),
     ),
     // homePage custom resource declaration.....
-    'homePage' => array(
+    'home' => array(
       'operations' => array(
         'retrieve' => array(
           'help' => 'Retrieves storydetail schemes info.',
@@ -720,6 +722,118 @@ function itg_app_api_resource() {
         ),
       ),
     ),
+    
+    // for static other device start
+    // adconfig_android custom resource declaration.....
+    'adconfig_android' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves adconfig_android schemes info.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_app_api',
+            'name' => 'itg_app_api.services',
+          ),
+          'callback' => 'itg_app_api_adconfig_android',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
+    // adconfig_ipad custom resource declaration.....
+    'adconfig_ipad' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves adconfig_ipad schemes info.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_app_api',
+            'name' => 'itg_app_api.services',
+          ),
+          'callback' => 'itg_app_api_adconfig_ipad',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
+    // adconfig_iphone custom resource declaration.....
+    'adconfig_iphone' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves adconfig_iphone schemes info.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_app_api',
+            'name' => 'itg_app_api.services',
+          ),
+          'callback' => 'itg_app_api_adconfig_iphone',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
+    // adconfig_tab custom resource declaration.....
+    'adconfig_tab' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves adconfig_tab schemes info.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_app_api',
+            'name' => 'itg_app_api.services',
+          ),
+          'callback' => 'itg_app_api_adconfig_tab',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
+    
+    
   );
 
   return $api;
@@ -1024,6 +1138,8 @@ function itg_app_api_horizontal_menu($token) {
   return $return_obj;
 }
 
+
+
 // sprint2 function start
 
 /**
@@ -1136,21 +1252,21 @@ function itg_app_api_livetv_channellist_json($token) {
 }
 
 /**
- * Call back function for livetv_json API 
+ * Call back function for livetv_aajtak API 
  * @pram $_GET
  * @return array - The processed information array.
  */
-function itg_app_api_livetv_json($token) {
+function itg_app_api_livetv_aajtak($token) {
 
 
-  $redis_key = "itg_app_api_livetv_json";
+  $redis_key = "itg_app_api_livetv_aajtak";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
-    $jsondata = variable_get('livetv_json');
+    $jsondata = variable_get('livetv_aajtak');
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
@@ -1352,6 +1468,7 @@ function itg_app_api_storydetail($token) {
  * @pram $_GET
  * @return array - The processed information array.
  */
+
 function itg_app_api_homePage($token) {
 
   $redis_key = "itg_app_api_homePage";
@@ -1371,4 +1488,151 @@ function itg_app_api_homePage($token) {
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
+
+
+/**
+ * Call back function for adconfig_android API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_app_api_adconfig_android($token) {
+  $redis_key = "itgd_rapid_adconfig_android";
+  $result_get = getRedis($redis_key);
+
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    $jsondata = variable_get('adconfig_android');
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+
+  $obj = json_decode($jsondata, TRUE);
+  $return_obj = $obj;
+
+  return $return_obj;
+}
+
+/**
+ * Call back function for adconfig_ipad API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_app_api_adconfig_ipad($token) {
+  $redis_key = "itgd_rapid_adconfig_ipad";
+  $result_get = getRedis($redis_key);
+
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    $jsondata = variable_get('adconfig_ipad');
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+
+  $obj = json_decode($jsondata, TRUE);
+  $return_obj = $obj;
+
+  return $return_obj;
+}
+
+/**
+ * Call back function for adconfig_iphone API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_app_api_adconfig_iphone($token) {
+  $redis_key = "itgd_rapid_adconfig_iphone";
+  $result_get = getRedis($redis_key);
+
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    $jsondata = variable_get('adconfig_iphone');
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+
+  $obj = json_decode($jsondata, TRUE);
+  $return_obj = $obj;
+
+  return $return_obj;
+}
+
+/**
+ * Call back function for adconfig_tab API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_app_api_adconfig_tab($token) {
+  $redis_key = "itgd_rapid_aadconfig_tab";
+  $result_get = getRedis($redis_key);
+
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    $jsondata = variable_get('adconfig_tab');
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+
+  $obj = json_decode($jsondata, TRUE);
+  $return_obj = $obj;
+
+  return $return_obj;
+}
+
+/**
+ * Call back function for livetv_delhiaajtak API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_app_api_livetv_delhiaajtak($token) {
+
+
+    $redis_key = "itg_rapid_api_livetv_delhiaajtak";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('livetv_delhiaajtak');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+    return $return_obj;
+}
+
+/**
+ * Call back function for livetv_tej API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_app_api_livetv_tej($token) {
+
+
+    $redis_key = "itg_rapid_api_livetv_tej";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        $jsondata = variable_get('livetv_tej');
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+    return $return_obj;
+}
+
+
 
