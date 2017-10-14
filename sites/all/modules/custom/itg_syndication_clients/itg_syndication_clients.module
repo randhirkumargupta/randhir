@@ -99,12 +99,67 @@ function itg_syndication_clients_menu() {
 }
 
 /**
- * This function is used to create bsb directory on public folder
- * hook_install
+ * Implements hook_cronapi().
+ * {@inheritdoc}
  */
-function itg_syndication_clients_install() {
-  $bsbdir = 'public://bsb';
-  file_prepare_directory($bsbdir, FILE_CREATE_DIRECTORY);
+function itg_syndication_clients_cronapi($op, $job = NULL) {
+  $items['itg-bsb-story-syndication-cron'] = array(
+    'description' => 'Syndication BSB story cron.',
+    'callback' => 'itg_bsb_story_syndication',
+  );
+  $items['itg-bsb-photo-syndication-cron'] = array(
+    'description' => 'Syndication BSB Photo cron.',
+    'callback' => 'itg_bsb_photo_syndication',
+  );
+  $items['itg-bsb-video-syndication-cron'] = array(
+    'description' => 'Syndication BSB Video cron.',
+    'callback' => 'itg_bsb_video_syndication',
+  );
+  $items['itg-indiatoday-yahoo-syndication-cron'] = array(
+    'description' => 'Syndication Yahoo cron.',
+    'callback' => 'itg_indiatoday_yahoo_syndication',
+  );
+  $items['itg-msn-feed-story-syndication-cron'] = array(
+    'description' => 'Syndication MSN story cron.',
+    'callback' => 'itg_msn_feed_story_syndication',
+  );
+  $items['itg-cabbytabby-feed-videos-syndication-cron'] = array(
+    'description' => 'Syndication Cabbytabby video cron.',
+    'callback' => 'itg_cabbytabby_feed_videos_syndication',
+  );
+  $items['itg-proquest-feed-story-syndication-cron'] = array(
+    'description' => 'Syndication Proquest story cron.',
+    'callback' => 'itg_proquest_feed_story_syndication',
+  );
+  $items['itg-ola-feed-videos-syndication-cron'] = array(
+    'description' => 'Syndication Ola Video cron.',
+    'callback' => 'itg_ola_feed_videos_syndication',
+  );
+  $items['itg-dekkho-feed-videos-syndication-cron'] = array(
+    'description' => 'Syndication Dekkho video cron.',
+    'callback' => 'itg_dekkho_feed_videos_syndication',
+  );
+  $items['itg-videoelephant-feed-videos-syndication-cron'] = array(
+    'description' => 'Syndication Video Elephant video cron.',
+    'callback' => 'itg_videoelephant_feed_videos_syndication',
+  );
+  $items['itg-gist-feed-galleries-syndication-cron'] = array(
+    'description' => 'Syndication Gist galleries cron.',
+    'callback' => 'itg_gist_feed_galleries_syndication',
+  );
+  $items['itg-dailyhunt-feed-stories-syndication-cron'] = array(
+    'description' => 'Syndication Dailyhunt stories cron.',
+    'callback' => 'itg_dailyhunt_feed_stories_syndication',
+  );
+  $items['itg-dailyhunt-feed-breakingnews-syndication-cron'] = array(
+    'description' => 'Syndication Dailyhunt breaking news cron.',
+    'callback' => 'itg_dailyhunt_feed_breakingnews_syndication',
+  );
+  $items['itg-scribd-feed-latest-issue-cron'] = array(
+    'description' => 'Syndication Scribd Latest issue cron.',
+    'callback' => 'itg_scribd_feed_latest_issue',
+  );
+  return $items;
 }
 
 function slugify($text) {
