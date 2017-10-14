@@ -3,7 +3,7 @@
 $conf['mongodb_connections'] = array(
   'default' => array(                             // Connection name/alias
     //'host' => 'mongodb://itoday_write:1t0day_wr1te111@10.6.210.218/itgcmsmongo',
-    'host' => 'itoday_write:1t0day_wr1te111@10.6.210.218/itgcmsmongo,itoday_read:1t0day_read110@10.6.210.214/uatreplica,itoday_read:1t0day_read110@10.6.210.117/uatreplica',
+    'host' => 'itoday_write:1t0day_wr1te111@10.6.210.218/itgcmsmongo,itoday_read:1t0day_read110@10.6.210.214,itoday_read:1t0day_read110@10.6.210.117',
     //'host' => 'mongodb://10.6.210.19',                      // Omit USER:PASS@ if Mongo isn't configured to use authentication.
     //'host' => 'mongodb://10.6.101.66',//prod
     'db' => 'itgcmsmongo',                   // Database name. Make something up, mongodb will automatically create the database.
