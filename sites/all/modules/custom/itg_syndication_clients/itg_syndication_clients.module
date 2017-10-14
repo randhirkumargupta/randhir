@@ -89,6 +89,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_dailyhunt_stories.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rssfeeds/scribd/latest_issue'] = array(
+    'page callback' => 'itg_scribd_feed_latest_issue',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_scribd_latest_issue.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -261,7 +267,6 @@ function genrate_uniqui_guid() {
 function get_byline_name_by_nid($nid = NULL) {
   $byline = '';
   if (!empty($nid)) {
-
     $query = db_select('itg_multi_byline_info', 'bi');
     $query->leftJoin('node', 'n', 'bi.byline_id=n.nid');
     $query->fields('n', array('title'));
