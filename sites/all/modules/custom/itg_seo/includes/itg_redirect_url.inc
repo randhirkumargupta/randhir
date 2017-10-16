@@ -99,21 +99,19 @@ function itg_get_parents_taxonomy($tid) {
  * Implements hook_url_inbound_alter().
  */
 function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
+  global $base_url;
   $old_content_id = '';
   $arg = arg();
   $type = 'story'; // use photogallery & videogallery in condition if you have
+  $rss_url = '';
   
   if (!empty($_GET['sId']) && is_numeric($_GET['sId'])) { //code for this URL (story.jsp?sId=877)
     $old_content_id = $_GET['sId'];
   } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content' && arg(0) == 'conclave') {//conclave/index.php?option=com_content&task=view&id=2968&sectionid=15&secid=1&issueid=34&Itemid=1
       $old_content_id = '200'.$_GET['id'];
-  } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content') {//code for this URL (option=com_content)
+  } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content') { //code for this URL (option=com_content)
       $old_content_id = $_GET['id'];
-  } 
-  //else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && strtolower($arg[1]) == 'story') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Story/3578/2/i-am-too-old-for-bwood-gauri-khan.html
-      //$old_content_id = $arg[2];
-  //} 
-  else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Photo') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
+  } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Photo') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
       $old_content_id = $arg[2];
       $type = 'photogallery';
   } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Video') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Video/3578/2/i-am-too-old-for-bwood-gauri-khan.html
@@ -124,25 +122,88 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
-      $table = 'migrate_map_itgcategory'; // We are using table name migration because KT team not store source id in drupal field.
+      $table = 'migrate_map_itgphoto'; // We are using table name migration because KT team not store source id in drupal field.
   } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'photo') && ($arg[2]== 0) && (!empty($arg[3] && is_numeric($arg[3]))) && !empty($arg[4])) {  // Pattern site/photo/0/2/photo.html for category listing
       $old_content_id = $arg[3];
       $type = 'category';
-      $table = 'migrate_map_itgcategory';
+      $table = 'migrate_map_itgphoto';
   } else if ((!empty($arg[0]) && $arg[0] == 'MoreGallery') && ($_GET['gId'] == 0) && (!empty($_GET['photocat']))) {  // Pattern site/photo/0/2/photo.html for category listing
       $old_content_id = $_GET['photocat'];
       $type = 'category';
+      $table = 'migrate_map_itgphoto';
+  } else if ((!empty($arg[0]) && $arg[0] == 'Simply') && ($_GET['secId']) && ($_GET['catId'])) {  // Pattern Simply?secId=20&catId=17
+      $old_content_id = $_GET['catId'];
+      $type = 'category';
       $table = 'migrate_map_itgcategory';
-  }
-  else if ($arg[0] == 'node' && empty($arg[1])) {
+  } else if((((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'article.jsp')) || ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'rss') && (!empty($arg[2]) && $arg[2] == 'article.jsp'))) && ($_GET['sid'] || $_GET['cid'] || $_GET['scid'] || $_GET['sscid'])) {
+      if ($_GET['sid']) {        
+        $old_content_id = $_GET['sid'];
+        $table = 'migrate_map_itgsection';
+      } else if ($_GET['cid']) {        
+        $old_content_id = $_GET['cid'];
+        $table = 'migrate_map_itgcategory';
+      } else if ($_GET['scid']) {        
+        $old_content_id = $_GET['scid'];
+        $table = 'migrate_map_itgsubcategory';
+      } else if ($_GET['sscid']) {        
+        $old_content_id = $_GET['sscid'];
+        $table = 'migrate_map_itgsubsubcategory';
+      }
+      $type = 'rss';
+      $rss_url = 'rss';
+  } else if(((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'gallery.jsp'))) { // Pattern http://indiatoday.intoday.in/rss/gallery.jsp?gid=2 http://indiatoday.intoday.in/rss/gallery.jsp?gid=0 http://indiatoday.intoday.in/rss/gallery.jsp 
+      $old_content_id = 'none';
+      $table = 'none';
+      $type = 'rss';
+      $rss_url = 'rss-gallery';
+      if ($_GET['gid'] > 0) {        
+        $old_content_id = $_GET['gid'];
+        $table = 'migrate_map_itgphoto';
+      }
+  } else if(((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'video.jsp'))) { // Pattern http://indiatoday.intoday.in/rss/video.jsp?vcid=42 http://indiatoday.intoday.in/rss/video.jsp?vcid=0 http://indiatoday.intoday.in/rss/video.jsp
+      $old_content_id = 'none';
+      $table = 'none';
+      $type = 'rss';
+      $rss_url = 'rss-video';
+      if ($_GET['vcid'] > 0) {        
+        $old_content_id = $_GET['vcid'];
+        $table = 'migrate_map_itgcategory';
+      }
+  } else if (($arg[0] == 'index.php' && !empty($_GET['option']) && $_GET['option'] == 'com_magazine')) { // Pattern http://indiatoday.intoday.in/index.php?option=com_magazine&opt=section&sectionid=89&Itemid=1&issueid=95
+      drupal_goto(FRONT_URL);
+  } else if ((!empty ($arg[0]) && $arg[0] == 'calendar') && !empty($arg[1]) && (!empty($arg[2]) && $arg[2] == 'online.html')) {  // Pattern calendar/16-10-2017/online.html
+      $old_content_id = $arg[1];
+      $table = 'none';
+      $type = 'archives';
+      $rss_url = 'archives/story';
+  } else if ((!empty($arg[0]) && ($arg[0] == 'advanced_search.jsp' || $arg[0] == 'archivesearch.jsp')) && (!empty($_GET['searchtext']) || !empty($_GET['searchword']) || !empty($_GET['searchWord']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
+      if ($_GET['searchtext']) {
+         $old_content_id = $_GET['searchtext']; 
+      } elseif($_GET['searchword']) {
+          $old_content_id = $_GET['searchword']; 
+      } elseif ($_GET['searchWord']) {
+          $old_content_id = $_GET['searchWord']; 
+      }
+      $table = 'none';
+      $type = 'archives';
+      $rss_url = 'topic';
+  } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
-  
-  //code for url redirection
+  // Code for url redirection:
   if (!empty($old_content_id)) {
       if ($type == 'category') {
         $content_id = get_new_seccat_by_mig_id($old_content_id, $table);
         $alias = drupal_get_path_alias('taxonomy/term/'.$content_id);
+      } else if($type == 'rss') {
+        if ($old_content_id == 'none') {
+          $alias = $base_url.'/'.$rss_url;
+        } else {
+          $content_id = get_new_seccat_by_mig_id($old_content_id, $table);
+          $alias = $base_url.'/'.$rss_url.'/'.$content_id;
+        }
+      } else if($type == 'archives') {
+          $alias = $base_url.'/'.$rss_url.'/'.$old_content_id;
       } else {
         $content_id = get_new_content_id_by_migrated_id($old_content_id, $type);
         $alias = drupal_get_path_alias('node/'.$content_id);
@@ -154,7 +215,6 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       drupal_not_found();
       drupal_exit();
   }
-  
 }
 
 /**
