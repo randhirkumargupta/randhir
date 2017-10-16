@@ -137,8 +137,33 @@ function itg_common_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  $items['insert_private_ip'] = array(
+    'page callback' => 'itg_common_insert_private_ips',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
   
+  $items['admin/config/development/varnish/aws/config'] = array(
+    'title' => 'Varnish Server Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_common_varnish_aws_setting_form'),
+    'access arguments'   => array('administer search'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'includes/itg_common.inc',
+  );
   return $items;
+}
+
+
+/**
+ * Implements function for get insert private ip
+ * @return array
+ */
+function itg_common_insert_private_ips() {
+  global $user;
+  module_load_include('inc', 'itg_common', 'includes/itg_common_aws_s3_for_lb');
+  $data_video = insert_private_ip_in_varnish();
+
 }
 
 /**
