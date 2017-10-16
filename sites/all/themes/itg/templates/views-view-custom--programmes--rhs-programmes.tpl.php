@@ -55,7 +55,7 @@
                     </div>
                     <div class="discription">
                         <?php if (!empty($row['description'])) : ?>
-                          <?php print l(__html_output_with_tags($row['description']), 'node/' . $recent_video_under_cat, array('html' => TRUE , 'query' => array('category' => $row['tid']))); ?>
+                          <?php print __html_output_with_tags($row['description']); ?>
                         <?php endif; ?>
 
                     </div>
