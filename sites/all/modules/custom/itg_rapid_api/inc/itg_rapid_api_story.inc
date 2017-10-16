@@ -348,8 +348,8 @@ function buildListicleNode($node) {
     foreach ($field_story_listicle as $key => $value) {
         $collection_id = $value['value'];
         $load_collection = field_collection_item_load($collection_id);
-        p($load_collection); die();
-        $color = $load_collection->field_listicle_color['und'][0]['value'];
+       // p($load_collection); die();
+        $color = $load_collection->field_listicle_color_new['und'][0]['value'];
         $type = $load_collection->field_story_listicle_type['und'][0]['value'];
         $description = $load_collection->field_story_listicle_description['und'][0]['value'];
         // loop data
