@@ -119,7 +119,7 @@ function generateStoryDeatilList($id) {
     $data_array['image_caption'] = "$caption";
     $data_array['updated_datetime'] = "$changed_datetime";
     $data_array['published_datetime'] = "$published_date";
-    //$data_array['buzzflag'] = "$buzz_temp_flag";
+    $data_array['buzzflag'] = "$buzz_temp_flag";
     $data_array['location'] = "$location";
     $data_array['director'] = "$director";
     $data_array['movie_plot'] = "$movie_plot";
