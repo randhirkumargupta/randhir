@@ -311,7 +311,7 @@ if (document.body.offsetWidth>=1250) {
 </script>
 
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
+<script src="/staticpages/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
 <script type='text/javascript' src='http://indiatoday.intoday.in/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>

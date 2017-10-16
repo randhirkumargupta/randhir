@@ -2,7 +2,7 @@
 
 <style>
 popin_example1, .popin_select_template {
-    background-image: url("http://www.jscharts.com//images/ex_popin_bg.jpg");
+    background-image: url("http://www.jscharts.com/images/ex_popin_bg.jpg");
     text-align: center;
 	border:1px solid red;
 	width:600px;
