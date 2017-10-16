@@ -259,17 +259,6 @@
   'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
 );*/
 
-$databases['default']['default'] = array (
-  'driver' => 'autoslave',
-  'master' => array('master', 'slave1', 'slave2'),
-  'slave' => array('slave1', 'slave2', 'master'),
-  'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
-  'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
-  'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
-  'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
-  'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'") // For MySQL InnoDB, make sure isolation level doesn't interfere with our intentions. Defaults to empty.
-);
-
 $databases['default']['master'][] = array (
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_write',
@@ -280,7 +269,7 @@ $databases['default']['master'][] = array (
   'prefix' => '',
 );
 
-$databases['default']['slave1'][] = array (
+$databases['default']['slave'][] = array (
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_read',
   'password' => '!tgd@!t@re@d@102',
@@ -291,7 +280,7 @@ $databases['default']['slave1'][] = array (
   'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
 );
 
-$databases['default']['slave2'][] = array (
+$databases['default']['slave'][] = array (
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_read',
   'password' => '!tgd@!t@re@d@102',
@@ -300,6 +289,17 @@ $databases['default']['slave2'][] = array (
   'driver' => 'mysql',
   'prefix' => '',
   'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
+);
+
+$databases['default']['default'] = array (
+  'driver' => 'autoslave',
+  'master' => array('master'),
+  'slave' => array('slave'),
+  'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
+  'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
+  'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
+  'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
+  'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'") // For MySQL InnoDB, make sure isolation level doesn't interfere with our intentions. Defaults to empty.
 );
 
 /*$databases['default']['master'] = array(
