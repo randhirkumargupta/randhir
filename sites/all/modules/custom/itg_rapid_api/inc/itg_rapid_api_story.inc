@@ -101,6 +101,13 @@ function generateStoryDeatilList($id) {
     $expertchunk_data = array();
     $expertchunk_data = buildExpertchunkNode($node);
     
+    //$field_story_select_templates = $node->field_story_select_templates['und'][0]['value'];
+    if (count($buzz_data) > 0) {
+        $buzz_temp_flag = "1";
+    } else {
+        $buzz_temp_flag = "0";
+    }
+    
     // custom function for get img byline
     $byline = getImgByline($large_image_fid);
     $published_stamp = $node->workbench_moderation['published']->stamp;
