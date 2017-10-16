@@ -168,6 +168,7 @@ function my_custom_ajax_callback() {
     $final_link = str_replace("&width=900&height=700&iframe=true", "", $_POST['dta']);
     $final_with_title = $final_link . '&sname=' . $_POST['search_name'];
     $related_res = '<li><a class= "def-cur-pointer" onclick="showrelatedpopup(' . "'" . $final_with_title . "'" . ')">' . $_POST['search_name'] . '</a></li>';
+    cache_clear_all('itg_related:related_form_block', 'cache_block', TRUE);
   }
 
   if ($result !== FALSE) {
@@ -208,10 +209,15 @@ function itg_related_views_pre_render(&$view) {
       }
 
       $key = $related_result->hash;
+      if(!empty($hash[$key])) {
       $related_result->site = $hash[$key];
-
+      }
+      if(isset($related_result->sm_vid_Tags)) {
       $related_result->sm_vid_Tags = implode(', ', $related_result->sm_vid_Tags);
+      }
+      if(isset($related_result->sm_vid_Category_Management)) {
       $related_result->sm_vid_Category_Management = implode(', ', $related_result->sm_vid_Category_Management);
+      }
     }
   }
 }
@@ -269,7 +275,8 @@ function update_search_title($title, $combined_data, $uid, $type) {
 function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
   $arg = arg();
   if ($arg[0] == 'topic') {
-    $query->replaceParam("q", $arg[1]);
+    $search_string = str_replace("-", " ", $arg[1]);
+    $query->replaceParam("q", $search_string);
     if (!empty($arg[2])) {
       if ($arg[2] == 'All') {
         $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
@@ -286,6 +293,11 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       if($arg[2] == 'Magazine') {
       $str .= 'sm_field_custom_issue_based:(' . $source_name . ')';
       }
+      $query->replaceParam("fq", '(' . $str . ')');
+    } else {
+      $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
+      $def_bun = implode(' OR ', $bundle_name);
+      $str = 'bundle_name:(' . $def_bun . ')';
       $query->replaceParam("fq", '(' . $str . ')');
     }
     //pr($query->getSolrParams());
@@ -310,12 +322,14 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
       $str .= 'dm_field_itg_content_publish_dat:(' . $date_val_str . ')';
     }
 
-    $ctype_tab = array('story', 'photogallery', 'video');
+    $ctype_tab = array('story', 'gallery', 'video');
 
     // case if arg(1) contain either type or date
     if (!empty($arg[1]) && in_array($arg[1], $ctype_tab)) {
       if ($arg[1] == 'story' || $arg[1] == 'video') {
         $type = ucwords($arg[1]);
+      } else if($arg[1] == 'gallery') {
+        $type = 'photogallery';
       }
       else {
         $type = $arg[1];
@@ -342,6 +356,8 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     if (!empty($arg[1]) && !empty($arg[2])) {
       if ($arg[1] == 'story' || $arg[1] == 'video') {
         $type = ucwords($arg[1]);
+      } else if($arg[1] == 'gallery') {
+        $type = 'photogallery';
       }
       else {
         $type = $arg[1];
@@ -355,7 +371,13 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
     }
 
     $query->replaceParam("fq", '(' . $str . ')');
-   
+   //pr($query->getSolrParams());
+  }
+  else if ($arg[0] == 'related-content' && !empty($_GET['width'])) {
+      $bundle_name = array('story', 'blog', 'photogallery', 'videogallery', 'podcast', 'breaking_news');
+      $def_bun = implode(' OR ', $bundle_name);
+      $str = 'bundle_name:(' . $def_bun . ')';
+      $query->replaceParam("fq", '(' . $str . ')');
   }
   else {
     $page_condition = array('related-content', 'advance_search', 'searchimage', 'clone-story', 'search-unpublish-video','search-unpublish-internal-video','search-unpublish-internal-video-singal', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio','solr-unpublish-video');
@@ -409,6 +431,10 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
               $type = ' AND ';
               $val_str1 = 'Story';
               $str = 'bundle_name:(' . $val_str1 . ')'.$type;
+              if(!empty($_GET['sm_field_itg_common_by_line_name'])) {
+              $byline_string = '"' . $_GET['sm_field_itg_common_by_line_name'] . '"';
+              $str .= 'sm_field_itg_common_by_line_name:(' . $byline_string . ')'.$type;
+              }
               $str .= 'sm_field_custom_issue_based:(' . $source_name . ')';
               $query->replaceParam("fq", '(' . $str . ')');
               
@@ -416,7 +442,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
             else {
               $val_str = implode(' OR ', $val);
               if ($val_str == 'All') {
-                $bundle_name = array('Story', 'Blog', 'photogallery', 'Videogallery', 'Podcast', 'Magazine');
+                $bundle_name = array('Story', 'Blog', 'photogallery', 'Video', 'Podcast');
                 $val_str = implode(' OR ', $bundle_name);
               }
               else {
@@ -484,20 +510,21 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
 //        $query->addParam("fq", '(' . $str . ')');
 //      }
       else if ($_GET['q'] == 'search-unpublish-video' || $_GET['q'] == 'search-unpublish-internal-video' || $_GET['q'] == 'search-unpublish-internal-video-singal'  || $_GET['q'] == 'search-unpublish-video-radio') {
-    $search_query_url_dm = array('search-unpublish-video' , 'search-unpublish-video-radio' );
-       if(in_array($_GET['q'], $search_query_url_dm)) {
-        $video_type = 'DM';
-      }
-       $search_query_url_internal = array('search-unpublish-internal-video' , 'search-unpublish-internal-video-singal' );
-      if(in_array($_GET['q'], $search_query_url_internal)) {
-        $video_type = 'INTERNAL';
-      }
+        $search_query_url_dm = array('search-unpublish-video' , 'search-unpublish-video-radio' );
+//       if(in_array($_GET['q'], $search_query_url_dm)) {
+//        $video_type = 'DM';
+//       }
+//       $search_query_url_internal = array('search-unpublish-internal-video' , 'search-unpublish-internal-video-singal' );
+//      if(in_array($_GET['q'], $search_query_url_internal)) {
+//        $video_type = 'INTERNAL';
+//      }
         
         $hashvalue = $_GET['hash'];
         $str = "";
         if (!empty($hashvalue)) {
           $hashvalue = implode(' OR ', $hashvalue);
-          $str_has = 'hash:(' . $hashvalue . ') AND sm_field_video_type:(' . $video_type . ')';
+          //$str_has = 'hash:(' . $hashvalue . ') AND sm_field_video_type:(' . $video_type . ')';
+           $str_has = 'hash:(' . $hashvalue . ')';
         }
         else {
           if (function_exists('itg_apache_solr_get_site_hash')) {
@@ -505,7 +532,8 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
           }
 
           $hashvalue = implode(' OR ', array_keys($hash));
-          $str_has = 'hash:(' . $hashvalue . ') AND sm_field_video_type:(' . $video_type . ')';
+          //$str_has = 'hash:(' . $hashvalue . ') AND sm_field_video_type:(' . $video_type . ')';
+           $str_has = 'hash:(' . $hashvalue . ')';
         }
         if (isset($_GET['sm_field_video_used'])) {
           $video_val = $_GET['sm_field_video_used'];
@@ -595,7 +623,7 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
         }
       }
     }
-    //pr($query->getSolrParams());
+   // pr($query->getSolrParams());
   }
 }
 
@@ -635,7 +663,7 @@ function itg_related_save_search() {
 
   $related_html.= '</ul>';
 
-  print $related_html;
+  return $related_html;
 }
 
 /**
@@ -660,6 +688,7 @@ function itg_related_block_view($delta = '') {
   $data = '';
   switch ($delta) {
     case 'related_form_block':
+      $data = itg_related_save_search();
       $block['content'] = theme('related_form_display_block', array('data' => $data));
       break;
   }

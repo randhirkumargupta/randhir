@@ -25,7 +25,8 @@ if($source_type != 'migrated') { ?>
     <div class="gray-bg"><?php print t('Career Graph'); ?></div>
     <div class="black-bg"><?php print $actor[$key]['name']; ?></div>
     <?php print $actor_pic; ?>
-  </div>  
+  </div>
+<div class="dots-know-more"><?php print t('Click on dots to know more'); ?></div>
   <div id="container_<?php echo $key; ?>" style="min-width: 290px; height: 400px; margin: 0 auto"></div>
 
 <?php endforeach; ?>
@@ -48,13 +49,14 @@ foreach ($output as $key => $value) {
     if (!empty($graph_data[3])) {
       $grapg_file = file_load($graph_data[3]);
       $uri = $grapg_file->uri;
-      $graph_pic_url = '<img src="' . file_create_url($uri) . '" alt="' .  $graph_data[2] . '" />';
+      //$graph_pic_url = '<img src="' . file_create_url($uri) . '" alt="' .  $graph_data[2] . '" />';
       if(function_exists('itg_common_global_alt_title')) {
         $img_attr = itg_common_global_alt_title('field_movie_graph_image', $graph_data[3]);
       }
     }
     else {
-      $graph_pic_url = '';
+      //$graph_pic_url = '';
+      $uri = '';
     }
     
     if ($graph_data[1] == "") {

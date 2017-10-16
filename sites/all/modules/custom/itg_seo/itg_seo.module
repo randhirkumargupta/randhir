@@ -5,6 +5,7 @@
  * 
  * {@inheritdoc}
  */
+module_load_include('inc', 'itg_seo', 'includes/views_handler_itg_seo');
 module_load_include('inc', 'itg_seo', 'includes/itg_seo_rich_snippet');
 module_load_include('inc', 'itg_seo', 'includes/itg_redirect_url');
 module_load_include('inc', 'itg_seo', 'includes/itg_sef_redirect_url');
@@ -228,16 +229,25 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
  * itg_seo_latest_headlines()
  */
 function itg_seo_latest_headlines() {
-  $query = db_select('node', 'n')
-      ->fields('n', array('title', 'nid'))
-      ->condition('n.status', 1)
-      ->condition('n.type', 'story')
-      ->range(0, 4)
-      ->orderBy('n.created', 'DESC');
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_photo_see_pic_link', 'se', 'n.nid = se.entity_id');
+      $query->fields('n', array('title', 'nid'));
+      $query->fields('se', array('field_photo_see_pic_link_value'));
+      $query->condition('n.status', 1);
+      //->condition('n.type', 'story')
+      $query->condition('n.type', array('story','photogallery','videogallery'),'IN');
+      $query->range(0, 4);
+      $query->orderBy('n.created', 'DESC');
   $result = $query->execute()->fetchAll();
   $headlines = array();
   foreach ($result as $key => $val) {
-    $headlines[$val->nid] = $val->title;
+    if(!empty($val->field_photo_see_pic_link_value)) {
+    $title = '<span class="see_pic_not_found">'.$val->field_photo_see_pic_link_value.' : </span>'.$val->title;
+    } else {
+    $title =  $val->title;
+    }
+    $headlines[$val->nid] = $title;
+   
   }
   return $headlines;
 }
@@ -300,7 +310,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_link .= ' / ' . l("Podcast", "podcast") . ' / ' . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'poll') {
-    $section_link .= ' / Poll';
+    $section_link .= ' / Polls';
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'blog') {
     $section_link .= ' / ' . l('Blog', 'blog') . ' / ' . $node_title;
@@ -413,7 +423,7 @@ function itg_seo_node_update($node) {
     return;
   }
   if (isset($node->op) && is_valid_content_type_for_sef_url($node->type)) {
-    if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+    if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
       $newpath = itg_common_custompath_insert_load($node);
       $node->path['alias'] = $newpath;
       $path = array(
@@ -450,16 +460,6 @@ function itg_seo_node_update($node) {
       );
       path_save($path);
     }
-  }
-  // custom alias conditions for migration
-  if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && in_array($node->type, $ctype_array)) {
-    $newpath = itg_common_custompath_migrated_load($node, 'update_migrated');
-      $node->path['alias'] = $newpath;
-      $path = array(
-        'source' => "node/{$node->nid}",
-        'alias' => $newpath, // Any alias that you want to set.
-      );
-      path_save($path);
   }
 }
 
@@ -505,6 +505,26 @@ function itg_seo_theme_registry_alter(&$theme_registry) {
   $theme_registry['views_data_export_xml_body']['theme path'] = drupal_get_path('module', 'itg_seo') . '/templates';
   $theme_registry['views_data_export_xml_body']['path'] = drupal_get_path('module', 'itg_seo') . '/templates';
   $theme_registry['views_data_export_xml_body']['template'] = 'views-data-export-xml-body';
+}
+
+
+/**
+ * Implements hook_views_data().
+ */
+function itg_seo_views_data() {
+	$data['itg_seo']['table']['group'] = t('Get Meta Description');
+	$data['itg_seo']['table']['join'] = array(
+		// #global is a special flag which let's a table appear all the time.
+		'#global' => array(),
+	);
+	$data['itg_seo']['custom_handler'] = array(
+		'title' => t('Get Meta Description'),
+		'help' => t('Get Meta Description'),
+		'field' => array(
+			'handler' => 'views_handler_itg_seo',
+		),
+	);
+	return $data;
 }
 
 /**

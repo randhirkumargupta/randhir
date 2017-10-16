@@ -36,6 +36,7 @@
                             //parent.jQuery("#" + video_field_id + "-button").mousedown();
                             parent.jQuery('form').ajaxComplete(function (event, request, settings) {
                                 try {
+
                                     parent.jQuery.colorbox.close();
                                 } catch (err) {
                                 }
@@ -60,12 +61,34 @@
                 var image_fids = [];
                 var selected_check_boxes_values = new Array();
                 var selected_check_boxes_index = 0;
+                var selected_data_video_type = new Array();
                 $("#video_iframe").contents().find("input:checkbox[class=form-radio]:checked").each(function () {
                     selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
+                    var video_type_atr = $(this).attr('data-video-type');
+                    selected_data_video_type.push(video_type_atr);
+                });
+                var unique = selected_data_video_type.filter(function (itm, i, selected_data_video_type) {
+                    return i == selected_data_video_type.indexOf(itm);
                 });
                 if (selected_check_boxes_index == 0) {
                     alert("Please select video file.");
                 } else {
+                    if (unique.length > 1) {
+                        alert("Please select same plateform video.");
+                        return false;
+                    }
+                    var getvideo_type = parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
+                    if (getvideo_type != "") {
+                        if (unique[0] == 'DM' && getvideo_type == 'INTERNAL') {
+                            alert("Please remove Internal plateform Video ");
+                            return false;
+
+                        }
+                        if (unique[0] == 'INTERNAL' && getvideo_type == 'DM') {
+                            alert("Please remove Dailymotion plateform Video ");
+                            return false;
+                        }
+                    }
                     jQuery('#loader-data img').show().parent().addClass('loader_overlay');
                     jQuery.ajax({
                         url: base_url + '/solr-video-make-fid',
@@ -78,7 +101,6 @@
                             for (var x in parsed) {
                                 video_fids.push(parsed[x]);
                             }
-
                             parent.jQuery('#edit-field-video-upload-add-more-number').val(video_fids.length);
                             parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(video_fids.join());
                             // parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(image_fids.join());
@@ -88,6 +110,12 @@
                             parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                             parent.jQuery('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
                                 try {
+                                    if (unique[0] == 'DM') {
+                                        parent.jQuery('#edit-field-video-repo-type-und-0-value').val('DM');
+                                    }
+                                    if (unique[0] == 'INTERNAL') {
+                                        parent.jQuery('#edit-field-video-repo-type-und-0-value').val('INTERNAL');
+                                    }
                                     parent.jQuery.colorbox.close();
                                 } catch (err) {
 
@@ -137,12 +165,158 @@
                             parent.jQuery.colorbox.close();
                         },
                         error: function (xhr, desc, err) {
-                           
+
                         }
                     });
                 }
 
             });
+
+
+
+            $(".ftp-server-internal .asso-filed-internal").click(function (e) {
+                // Getting selected videos from checkboxes        
+                var video_fids = [];
+                var image_fids = [];
+                var selected_check_boxes_values = new Array();
+                var selected_check_boxes_index = 0;
+                $("#video_iframe_internal").contents().find("input:checkbox[class=form-radio]:checked").each(function () {
+                    selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
+                });
+                if (selected_check_boxes_index == 0) {
+                    alert("Please select video file.");
+                } else {
+                    var getvideo_tyepe = parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
+                    if (getvideo_tyepe != "") {
+                        if (getvideo_tyepe == 'DM') {
+                            alert("Please remove DM plateform Video ");
+                            return false;
+                        }
+
+                    }
+                    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                    jQuery.ajax({
+                        url: base_url + '/solr-video-make-fid',
+                        type: 'post',
+                        data: {'checkvalue': selected_check_boxes_values},
+                        success: function (data) {
+                            var as = JSON.parse(data);
+                            var parsed = JSON.parse(data);
+
+                            for (var x in parsed) {
+                                video_fids.push(parsed[x]);
+                            }
+                            parent.jQuery('#edit-field-video-upload-add-more-number').val(video_fids.length);
+                            parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(video_fids.join());
+                            // parent.jQuery('#edit-field-video-upload-file-entity-holder-nums').val(image_fids.join());
+
+                            jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                            //  parent.jQuery("input[name='" + video_field_file + "'").val(vid);
+                            parent.jQuery("[name='field_video_upload_add_more']").mousedown();
+                            parent.jQuery('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
+                                try {
+                                    parent.jQuery('#edit-field-video-repo-type-und-0-value').val('INTERNAL');
+
+                                    parent.jQuery.colorbox.close();
+                                } catch (err) {
+
+                                }
+
+                            });
+
+                        }
+
+                    });
+                }
+            });
+
+
+
+            $(".ftp-server-internal .asso-filed_single_internal").click(function (e) {
+                jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                var video_fids = [];
+                var selected_check_boxes_values = new Array();
+                var selected_check_boxes_index = 0;
+                $("#video_iframe_internal").contents().find("input:radio[class=form-radio]:checked").each(function () {
+                    selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
+                });
+                if (selected_check_boxes_index == 0) {
+                    alert("Please select video file.");
+                } else {
+                    // jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                    var getbtnmane = $(this).attr('btn_name');
+
+                    jQuery.ajax({
+                        url: base_url + '/solr-video-make-fid',
+                        type: 'post',
+                        data: {'checkvalue': selected_check_boxes_values},
+                        success: function (data) {
+
+                            var as = JSON.parse(data);
+                            var parsed = JSON.parse(data);
+
+                            for (var x in parsed) {
+                                video_fids.push(parsed[x]);
+                            }
+                            parent.jQuery('[name="' + getbtnmane + '[fid]"]').val(parsed[0]);
+                            parent.jQuery("body").find("input[name='" + getbtnmane + "[filefield_itg_image_video][button]").trigger('mousedown');
+                            //parent.jQuery("#" + video_field_id + "-button").mousedown();
+                            parent.jQuery('form').ajaxComplete(function (event, request, settings) {
+                                try {
+                                    setTimeout(function () {
+                                        parent.jQuery.colorbox.close();
+                                    }, 4000);
+                                } catch (err) {
+                                }
+                            });
+                        }
+                    });
+
+                }
+            });
+
+            $(".ftp-server-internal .asso-with-ckeditor-internal").click(function (e) {
+
+                // Getting selected videos from checkboxes
+                var selected_check_boxes_values = new Array();
+                var selected_check_boxes_index = 0;
+                $("#video_iframe_internal").contents().find("input:checkbox[class=form-radio]:checked").each(function () {
+                    selected_check_boxes_values[selected_check_boxes_index++] = $(this).val();
+                });
+                if (selected_check_boxes_index == 0) {
+                    alert("Please select video file.");
+                } else {
+                    jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+                    //var base_url = Drupal.settings.basePath;
+                    var base_url = Drupal.settings.baseUrl.baseUrl;
+//
+//                    jQuery.ajax({
+//                        url: base_url + '/solr-video-make-fid',
+//                        type: 'post',
+//                        data: {'checkvalue': selected_check_boxes_values},
+//                        success: function (data) {
+//
+//
+//                        }
+//
+//                    });
+
+                    jQuery.ajax({
+                        url: base_url + '/get-file-details',
+                        type: 'post',
+                        data: {'checkvalue': selected_check_boxes_values},
+                        success: function (data) {
+                            parent.jQuery("body", parent.document).find('input.cke_dialog_ui_input_text').val(data);
+                            parent.jQuery.colorbox.close();
+                        },
+                        error: function (xhr, desc, err) {
+
+                        }
+                    });
+                }
+
+            });
+
 
 
 
@@ -152,6 +326,7 @@
                 $(".ftp-server").hide();
                 $(".video_filters").hide();
                 $('.video-ftp').removeClass('active');
+                $(".ftp-server-internal").hide();
                 $(this).addClass('active');
             });
             $(".video-ftp").click(function () {
@@ -159,8 +334,10 @@
                 $('#video_text_search').val('');
                 $(".ftp-server").show();
                 $(".video_filters").show();
+                $(".ftp-server-internal").hide();
                 $(this).addClass('active');
                 $('.video-local').removeClass('active');
+                $('.internal-video-tab').removeClass('active');
                 $('.used-unused-select').val('unused');
                 $('.used-unused-select').trigger('change');
 
@@ -218,7 +395,7 @@ jQuery('document').ready(function () {
 
             },
             error: function (xhr, desc, err) {
-                
+
             }
         });
 
@@ -241,7 +418,7 @@ jQuery('document').ready(function () {
 
             },
             error: function (xhr, desc, err) {
-              
+
             }
         });
 
@@ -251,6 +428,14 @@ jQuery('document').ready(function () {
     jQuery(".browse-local").click(function (e) {
         var videogallery_new_file_hold = parseInt(jQuery('input[name="videogallery_new_file[fid]"]').val());
         if (parseInt(jQuery('input[name="videogallery_new_file[fid]"]').val()) != 0) {
+            var getvideo_tyepe = parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
+            if (getvideo_tyepe != "") {
+                if (getvideo_tyepe == 'INTERNAL') {
+                    alert("Please remove Internal plateform Video ");
+                    return false;
+                }
+
+            }
             parent.jQuery('#edit-field-video-upload-add-more-number').val(1);
             parent.jQuery("[name='field_video_upload[file_entity_holder_nums]']").val(videogallery_new_file_hold);
             var getbtnmane = jQuery(this).attr('btn_name');
@@ -269,9 +454,10 @@ jQuery('document').ready(function () {
                 parent.jQuery("[name='field_video_upload_add_more']").mousedown();
                 parent.jQuery('#videogallery-node-form').ajaxComplete(function (event, request, settings) {
                     try {
+                        parent.jQuery('#edit-field-video-repo-type-und-0-value').val('DM');
                         parent.jQuery.colorbox.close();
                     } catch (err) {
-
+                        parent.jQuery('#edit-field-video-repo-type-und-0-value').val('DM');
                         parent.jQuery.colorbox.close();
                     }
 

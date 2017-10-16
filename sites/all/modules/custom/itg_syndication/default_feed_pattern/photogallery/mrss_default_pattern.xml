@@ -8,8 +8,8 @@
         <generator>FeedCreator 1.7.2</generator>
         <image>
             <url> {{{web_logo_url}}} </url>
-            <title> {{{web_site_name}}} | {{{section_category_name}}} </title>
-            <link> {{{section_category_name}}} </link>
+            <title> {{{web_site_name}}} |  Photos | {{{section_category_name}}} </title>
+            <link> {{{category_url}}}</link>
             <description> {{{web_site_name}}} </description>
         </image>
         <item>

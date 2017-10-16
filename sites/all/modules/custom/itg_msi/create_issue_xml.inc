@@ -61,7 +61,6 @@ function _create_issue_process($fid, $node_info, $parent_node) {
   $xml_file = file_load($fid);
   $fileuri = file_create_url($xml_file->uri);
   $xml = simplexml_load_file($fileuri, 'SimpleXMLElement', LIBXML_NOCDATA);
-
   if (!empty($xml)) {
     //Get XML unique UID
     foreach ($xml->attributes() as $key => $value) {
@@ -129,7 +128,13 @@ function _create_issue_process($fid, $node_info, $parent_node) {
       $node->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'] = $node_info['magazine'];
     }
     if ($node_info['supplement']) {
-      $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = $node_info['supplement'];
+      $supplement = trim((string) $xml->Supplement);
+      if(!empty(_get_nid_from_title($supplement))) {
+        $node->field_story_select_supplement[LANGUAGE_NONE][0]['target_id'] = _get_nid_from_title($supplement);
+      }
+      else {
+        $node->field_story_select_supplement;
+      }
     }
 
     $publish_date = date('Y-m-d');

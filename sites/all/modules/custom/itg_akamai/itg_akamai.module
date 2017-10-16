@@ -145,14 +145,14 @@ function itg_akamai_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  $items['itg-akamai-load-my-account'] = array(
+  /*$items['itg-akamai-load-my-account'] = array(
     'title' => 'Akamai Load My Account',
     'description' => 'Akamai Load My Account',
     'page callback' => 'itg_akamai_load_my_account',
     'access arguments' => array('access content'),
     'file' => 'includes/itg_akamai.helper.inc',
     'type' => MENU_CALLBACK,
-  );
+  );*/
 
   return $items;
 }
@@ -284,52 +284,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     }
     return $request_success_flag;
   }
-}
-
-/**
- * Return all system and alias paths for the provided URL.
- *
- * @param $url
- *   The URL to find all aliases
- * @param object $node
- *   (optional) The Node for the URL being cleared if one exists, NULL otherwise.
- *
- * @return array
- *    An array of all paths aliased to the provided URL.
- */
-function itg_akamai_get_all_paths($url, $node = NULL) {
-  global $language;
-
-  // If it is not a node path, get the system path.
-  if (strpos($url, 'node') !== 0) {
-    $source = drupal_lookup_path('source', $url);
-  }
-  if (!isset($source) || !$source) {
-    $source = $url;
-  }
-  $source = preg_replace("/^\//", "", $source);
-  $paths[] = $source;
-
-
-  $result = db_query('SELECT alias FROM {url_alias} WHERE source = :source AND language IN (:language, :language_none) ORDER BY pid desc  limit 0,1', array(
-    ':source' => $source,
-    ':language' => isset($language->language) ? $language->language : '',
-    ':language_none' => LANGUAGE_NONE,
-  ));
-
-  foreach ($result as $record) {
-    $paths[] = $record->alias;
-  }
-
-  // If this is the frontpage, add a blank to clear the root doc.
-  if ($source == variable_get('site_frontpage', 'node')) {
-    $paths[] = '';
-  }
-
-  // Allow other modules to add/modify paths to be cleared.
-  //drupal_alter('akamai_paths', $paths, $node);
-
-  return $paths;
 }
 
 /**
@@ -740,17 +694,19 @@ function akamai_max_age($age = NULL) {
  */
 function itg_akamai_exit() {
   global $theme;
-  if ($theme == FRONT_THEME_NAME) {
-    $max_age = akamai_max_age();
-    if (!empty($max_age)) {
-      $formated_expire_date = itg_akamai_set_expiration_date($max_age);
-      drupal_add_http_header('Edge-control', 'cache-maxage=' . $max_age . 's');
-      drupal_add_http_header('Cache-Control', 'public, max-age=' . $max_age);
-      drupal_add_http_header('Expires', $formated_expire_date);
-    }
-    else if ($max_age == 0) {
-      drupal_add_http_header('Edge-control', 'no-store');
-      drupal_add_http_header('Cache-Control', 'no-store');
+  if (!drupal_is_front_page()) {
+    if ($theme == FRONT_THEME_NAME) {
+      $max_age = akamai_max_age();
+      if (!empty($max_age)) {
+        $formated_expire_date = itg_akamai_set_expiration_date($max_age);
+        drupal_add_http_header('Edge-control', 'cache-maxage=' . $max_age . 's');
+        drupal_add_http_header('Cache-Control', 'public, max-age=' . $max_age);
+        drupal_add_http_header('Expires', $formated_expire_date);
+      }
+      else if ($max_age == 0) {
+        drupal_add_http_header('Edge-control', 'no-store');
+        drupal_add_http_header('Cache-Control', 'no-store');
+      }
     }
   }
 }
@@ -1037,6 +993,7 @@ function itg_akamai_init() {
           }
         }
       }
+      //drupal_add_js(drupal_get_path('module', 'itg_akamai') . '/js/itg_akamai.js', array('scope' => 'footer'));
     } // End of theme conditon
   }
 }

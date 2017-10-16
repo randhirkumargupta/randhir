@@ -51,7 +51,7 @@ function itg_poll_get_all_current_poll() {
   $polls_info['related_nodes'] = $related_nodes;
   $polls_info['poll_banner_image'] = $poll_banner_image;
   $polls_info['title'] = $node->title;
-  $polls_info['updated'] = t('Updated: ') . date('M d Y - h:i A' , $node->changed);
+  $polls_info['updated'] = t('Updated: ') . date('M d Y  h:i A' , $node->changed);
   $polls_info['poll_image_exist_class'] = $poll_image_exist_class;
   $polls_info['related_content'] = $related_result;
   $polls_info['nid'] = $node->nid;
@@ -69,10 +69,12 @@ function itg_poll_get_all_current_poll_qry_paging($limit = FALSE) {
     $cur_date = date('Y-m-d H:i:s');
     $query = db_select('node' , 'n');
     $query->leftjoin('field_data_field_poll_start_date' , 'sd' , 'n.nid = sd.entity_id');
+    $query->leftjoin('field_data_field_poll_end_date' , 'ed' , 'n.nid = ed.entity_id');
     $query->fields('n' , array('nid'));
     $query->condition('n.type' , 'poll' , '=');
     $query->condition('n.status' , 1 , '=');
     $query->condition('sd.field_poll_start_date_value' , $cur_date , '<=');
+    $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value' , $cur_date , '>='));
     $query->orderBy('n.created' , 'DESC');
     if ($limit) {
       $query->range(0 , 1);
@@ -106,6 +108,7 @@ function itg_poll_get_all_current_poll_qry() {
     }
     $query->condition('n.status' , 1 , '=');
     $query->condition('sd.field_poll_start_date_value' , $cur_date , '<=');
+    $query->condition(db_or()->isNull('ed.field_poll_end_date_value')->condition('ed.field_poll_end_date_value' , $cur_date , '>='));
     $query->orderBy('n.created' , 'DESC');
     $data = array();
     $result = $query->execute();

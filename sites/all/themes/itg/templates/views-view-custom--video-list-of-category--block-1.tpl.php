@@ -25,7 +25,7 @@ if (isset($_GET['category'])) {
       </figure>
 
       <span class="posted-on"><?php print $row['created']; ?></span>
-        <?php $title = $row['title']; ?>'
+        <?php $title = $row['title']; ?>
         <p title="<?php print strip_tags($row['title']); ?>">
         <?php print html_entity_decode(l(html_entity_decode(strip_tags($title)), 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => arg(2)), 'html' => TRUE))); ?>
         </p>

@@ -724,10 +724,21 @@ function replace_charcters_for_syndication_file($original_string) {
 }
 
 /**
+ * Implements hook_js_alter().
+ */
+function itg_syndication_js_alter(&$js) {
+  foreach ($js as $path => &$values) {
+    $arg = arg();
+    if ($arg[0] == 'node' && $arg[1] == 'add' && $arg[2] == 'syndication-feed-from-pattern') {
+      $values['preprocess'] = FALSE;
+    }
+  }
+}
+/**
  * {@inheritdocs}
  */
 function itg_syndication_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
-  if($form['#term']['vocabulary_machine_name'] == 'client_title') {
+  if($form_state['input']['op'] != 'Delete' && $form['#term']['vocabulary_machine_name'] == 'client_title') {
     $form['#validate'][] =  'itg_syndication_client_title_validate';
   }
 }
@@ -762,6 +773,7 @@ function itg_syndication_get_rules_detaiils() {
       $field_syndication_mode = $entity[$id]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
       $field_syndication_time = $entity[$id]->field_syndication_time[LANGUAGE_NONE][0]['value'];
       $field_syndication_num_of_feeds = $entity[$id]->field_syndication_num_of_feeds[LANGUAGE_NONE][0]['value'];
+      $min = $entity[$id]->field_minute[LANGUAGE_NONE][0]['value'];
       $field_syndication_frequency = $entity[$id]->field_syndication_frequency[LANGUAGE_NONE][0]['value'];
       $magazine_load = node_load($entity[$id]->field_syndication_magazine[LANGUAGE_NONE][0]['value']);
       $field_syndication_magazine = $magazine_load->title;
@@ -773,6 +785,7 @@ function itg_syndication_get_rules_detaiils() {
         'feed_time' => $field_syndication_time,
         'feed_num' => $field_syndication_num_of_feeds,
         'feed_frequency' => $field_syndication_frequency,
+        'feed_frequency_value' => $min,
         'feed_magazine' => $field_syndication_magazine,
         'node_obj' => $node_data,
       );

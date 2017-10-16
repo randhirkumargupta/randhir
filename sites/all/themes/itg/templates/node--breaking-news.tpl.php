@@ -104,7 +104,50 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
     <?php
     if (!empty($content)):
       $type = $node->field_type['und']['0']['value'];
-      if ($type == 'Live Blog' || $type == 'Breaking News') {
+      if ($type == 'Cricket Live Blog') {
+        $settings = array(
+          'base_url' => $base_url,
+          'nid'=> $node->nid,
+          'match_id' => (empty($node->field_match_id['und'][0]['value'])? FALSE:$node->field_match_id['und'][0]['value'])
+        );
+        drupal_add_js(array('itg_cricket_live_blog' => array('settings' => $settings)), array('type' => 'setting'));
+        drupal_add_js(drupal_get_path('module', 'itg_breaking_news') . '/js/itg_cricket_live_blog.js', array('scope' => 'footer'));
+        $embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+        if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
+            $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
+        }
+        else {
+            $title = '<h1><span>' . $type . '</span>: ' . $node->title . '</h1>';
+        }
+        print $title;
+        ?>
+                <p class="short-discription"> <?php print ($node->field_common_short_description[LANGUAGE_NONE][0]['value']) ?></p>
+                <div class="social-share">
+                    <ul>
+                        <li><a class="share" href="javascript:void(0)"><i class="fa fa-share-alt"></i></a></li>
+                        <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop('<?php print $share_page_link; ?>', '<?php print $share_title; ?>', '<?php print $share_desc; ?>', '<?php print $share_image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+                        <li><a title="share on twitter" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" class="user-activity twitter def-cur-pointer" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+                        <li><a title="share on google+" class="user-activity google def-cur-pointer" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $share_page_link; ?>')"></a></li>
+
+                    </ul>
+                </div>
+                <div class="stryimg" id="cricketblog" >
+                    <img  alt="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']; ?>" title="<?php print $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']; ?>" src="<?php print $embed_image; ?>">
+                    <div class="bolg-content" id="bolgcontent">
+                        <?php if(!empty($node->field_match_id['und'][0]['value'])):?>
+                          <?php if(function_exists('get_commentary_data_db')){ ?>
+                          <?php print get_cricket_live_blog_data($node->field_match_id['und'][0]['value'], 50); ?>
+                          <?php } ?>
+                        <?php else:?>
+                        <?php if(function_exists('get_commentary_data_db')){
+                                  print get_commentary_data_db($node->nid,0);                          
+                              } 
+                        ?>
+                        <?php endif;?>
+                    </div>       
+                </div>
+        <?php
+	  } else if ($type == 'Live Blog' || $type == 'Breaking News') {
         if (!empty($node->field_constituancy[LANGUAGE_NONE][0]['value'])) {
           $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
         }
@@ -189,8 +232,11 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
           </div>
                 <?php } ?>
         <div class="timeline">
-            <h3><?php print t('Timeline'); ?></h3>
-            <input id="slider-range" class="irs-hidden-input" readonly="">
+          <?php
+            if (!empty($node->field_live_blog_timeline_active[LANGUAGE_NONE]['0']['value'])) { ?>
+                <h3><?php print t('Timeline'); ?></h3>
+                <input id="slider-range" class="irs-hidden-input" readonly="">
+            <?php } ?>
     <?php
     if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
       $breaking_output .= '';
@@ -202,12 +248,17 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
       rsort($field_collection_ids);
       }
       // code for slider first/ last time
-        $slider_last_item = entity_load('field_collection_item', array(reset($field_collection_ids)));
-        $slider_last_time = date("H:i", strtotime($slider_last_item[reset($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));
-        $slider_first_item = entity_load('field_collection_item', array(end($field_collection_ids)));
-        $slider_first_time = date("H:i", strtotime($slider_first_item[end($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));
-        
-      foreach ($field_collection_ids as $breaking_item) {
+			$slider_last_item = entity_load('field_collection_item', array(reset($field_collection_ids)));
+			$slider_last_time = date("H:i A", strtotime($slider_last_item[reset($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));
+			$slider_first_item = entity_load('field_collection_item', array(end($field_collection_ids)));
+			$slider_first_time = date("H:i A", strtotime($slider_first_item[end($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));
+
+			$settings = array();
+			$settings['last'] = $slider_last_time;
+			$settings['first'] = $slider_first_time;
+			drupal_add_js(array('itg_front_end_common' => array('settings' => $settings)), array('type' => 'setting'));
+
+			foreach ($field_collection_ids as $breaking_item) {
         $breaking_output .= '<div class="breaking-section">';
         $field_collection_id = $breaking_item;
         $entity = entity_load('field_collection_item', array($field_collection_id));

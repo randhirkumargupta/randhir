@@ -106,6 +106,10 @@ function itg_octopus_api_rfa_dashboard() {
   $pagination = '';
   $current_rundown = '';
 
+  //get count 
+
+  $row_count = itg_octopus_api_rfa_dashboard_count();
+
   $query = db_select('itg_rfa', 'rfa')->extend('PagerDefault')->limit(50);
   $query->fields('rfa');
 
@@ -178,10 +182,44 @@ function itg_octopus_api_rfa_dashboard() {
            </div>';
   $output .= render($itg_octopus_api_form);
   $output .= '<div class="octopus-pagination"><ul class="pager">' . $pagination . '</ul></div>';
-  $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . count($rows) . ')</span></div>';
+  $output .= '<div class="octopus-pagination"><span style="float:right;">Count(' . $row_count . ')</span></div>';
   $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table')), 'empty' => 'No results found'));
   $output .= theme('pager');
   return $output;
+}
+
+/**
+ *  itg_octopus_api_rfa_dashboard_count
+ */
+function itg_octopus_api_rfa_dashboard_count() {
+  $query = db_select('itg_rfa', 'rfa');
+  $query->fields('rfa');
+
+  if (isset($_GET['source']) && !empty($_GET['source'])) { // source
+    $query->condition('rfa.source', $_GET['source'], '=');
+  }
+
+  if (isset($_GET['rfaid']) && !empty($_GET['rfaid'])) { // rfaid
+    $query->condition('rfa.rundown_id', $_GET['rfaid'], '=');
+  }
+
+  if (isset($_GET['text']) && !empty($_GET['text'])) { // text
+    $query->condition('rfa.text', $_GET['text'], '=');
+  }
+
+  $start_date = isset($_GET['start_date']) && !empty($_GET['start_date']) && $_GET['start_date'] != ' ' ? trim($_GET['start_date']) : '';
+  $end_date = isset($_GET['end_date']) && !empty($_GET['end_date']) && $_GET['end_date'] != ' ' ? trim($_GET['end_date']) : '';
+
+  if (isset($start_date) && !empty($start_date)) { // start date
+    $query->condition('rfa.created_date', strtotime($start_date), '>=');
+  }
+
+  if (isset($end_date) && !empty($end_date)) { // end date
+    $query->condition('rfa.created_date', strtotime($end_date), '<=');
+  }
+
+  $query->orderBy('rfa.id', 'DESC');
+  return $result_count = $query->execute()->rowCount();
 }
 
 /**

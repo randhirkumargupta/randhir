@@ -91,7 +91,7 @@ function ugc_comment_form($form, &$form_state) {
   $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   if (function_exists('itg_sso_url'))
   {
-    $social = '<a href="http://'.PARENT_SSO.'/saml_login/other/'.$uri.'" title="social-share"><span><i class="fa fa-facebook-square" aria-hidden="true"></i></span><span><i class="fa fa-twitter-square" aria-hidden="true"></i></span><span><i class="fa fa-google-plus-square" aria-hidden="true"></i></span><span><i class="fa fa-linkedin-square" aria-hidden="true"></i></span></a>';
+    $social = '<a href="'.PARENT_SSO.'/saml_login/other/'.$uri.'" title="social-share"><span><i class="fa fa-facebook-square" aria-hidden="true"></i></span><span><i class="fa fa-twitter-square" aria-hidden="true"></i></span><span><i class="fa fa-google-plus-square" aria-hidden="true"></i></span><span><i class="fa fa-linkedin-square" aria-hidden="true"></i></span></a>';
   }
   $fname = '';
   if (!empty($user_fields->field_first_name['und']['0']['value']))
@@ -502,14 +502,9 @@ function itg_ugc_get_user_email($text) {
 function itg_get_comment_question($nid) {
   if (!empty($nid)) {
     $db_or = db_or();
-    $db_or->condition('uc.bundle', 'story');
-    $db_or->condition('uc.bundle', 'videogallery');
-    $db_or->condition('uc.bundle', 'photogallery');
-    $db_or->condition('uc.bundle', 'blog');
-    $db_or->condition('uc.bundle', 'podcast');
     $query = db_select('field_data_field_story_comment_question', 'uc')
         ->fields('uc', array('field_story_comment_question_value'))
-        ->condition($db_or)
+        ->condition('uc.bundle', array('story', 'videogallery', 'photogallery', 'blog', 'podcast'),'IN')
         ->condition('uc.entity_id', $nid);
 
     return $query->execute()->fetchField();

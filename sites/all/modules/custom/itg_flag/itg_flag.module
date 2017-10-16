@@ -11,23 +11,21 @@
  * Implements hook_init()
  */
 function itg_flag_init() {
-  global $user, $base_url;  
+  global $user, $base_url, $theme;  
+ 
+  
   $settings['base_url'] = $base_url;
   $settings['uid'] = $user->uid;
   $settings['default_image'] = $base_url.'/sites/all/themes/itg/images/itg_image647x363.jpg';
   // Get facebook share app id
   if(!empty(variable_get('itg_sharing_app_id'))) {
-  $settings['fb_app'] = variable_get('itg_sharing_app_id');
-  }
-  if (isset($_GET['referral_key']) && !empty($_GET['referral_key'])) {
-    $_SESSION['referral_key'] = check_plain($_GET['referral_key']);
-    drupal_add_js('jQuery(document).ready(function() {                  
-                 jQuery(".register-icon").trigger("click");             
-          });', array('type' => 'inline', 'scope' => 'footer'));
+    $settings['fb_app'] = variable_get('itg_sharing_app_id');
   }
   
   drupal_add_js(array('itg_flag' => array('settings' => $settings)), array('type' => 'setting'));
-  drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1, 'scope' => 'footer'));
+  if ($theme == FRONT_THEME_NAME) {
+    drupal_add_js(drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js', array('weight' => 1, 'scope' => 'footer'));
+  }
 }
 
 /**
@@ -56,6 +54,12 @@ function itg_flag_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+  $items['story-login-follow-callback'] = array(
+    'page callback' => 'itg_story_login_follow_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -77,7 +81,13 @@ function itg_flag_details() {
   }
   else {
     if (function_exists('itg_get_migrated_like_count')) {
-      $migrated_count = itg_get_migrated_like_count(ltrim($nd_id, '0'));
+      if($datatype == 'photogallery') {
+        $step_nid = ltrim($nd_id, '0');
+        $step_nid = substr($step_nid, 0, -4);;
+        $migrated_count = itg_get_migrated_like_count($step_nid);
+      } else {
+      $migrated_count = itg_get_migrated_like_count(ltrim($nd_id, '0')); 
+      }
     }
 
     if ($typ == 'like_count') {
@@ -90,16 +100,15 @@ function itg_flag_details() {
     if (function_exists('itg_flag_get_count')) {
     $pre_count = itg_flag_get_count($nd_id, $typ);
     }
-  $nid = itg_flag_get_nid($nd_id);
-  if (!empty($pre_count[$typ])) {
-    $pre_count = $pre_count[$typ] + 1;
-    $mig_count = $pre_mig_count + $pre_count;
-  }
-  else {
-    
-    $pre_count = 1;
-    $mig_count = $pre_mig_count + $pre_count;
-  }
+    $nid = itg_flag_get_nid($nd_id);
+    if (!empty($pre_count[$typ])) {
+      $pre_count = $pre_count[$typ] + 1;
+      $mig_count = $pre_mig_count + $pre_count;
+    }
+    else {
+      $pre_count = 1;
+      $mig_count = $pre_mig_count + $pre_count;
+    }
   
   if (!empty($nid)) {
     itg_flag_upd_count($nd_id, $typ, $pre_count);
@@ -135,7 +144,7 @@ function itg_flag_details() {
         $response = array('type' => $typ, 'count' => $mig_count, 'nd_id' => $nd_id, 'chk' => 'sty');
       }
       if ($dtag == 'dsty') {
-        $response = array('type' => $typ, 'count' => $pre_count, 'nd_id' => $nd_id, 'chk' => 'dsty');
+        $response = array('type' => $typ, 'count' => $mig_count, 'nd_id' => $nd_id, 'chk' => 'dsty');
       }
     }
     else {
@@ -164,7 +173,7 @@ function itg_user_activity_front() {
     // check connection
     if ($con) {
       if ($user_activity == 'twitter_share' || $user_activity == 'google_share' || $user_activity == 'fb_follow' || $user_activity == 'twitter_follow' || $user_activity == 'google_follow') {
-       if ($user->uid || $dtag == 'survey') { 
+       if ($user->uid || $dtag == 'survey' || $dtag == 'story') { 
           $people = $con->front_user_activity;
           $qry = array("nid" => $nd_id, "uid" => $user->uid, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus ,"timestamp" =>time());
           $result = $people->insert($qry);
@@ -186,12 +195,23 @@ function itg_user_activity_front() {
         $people = $con->front_user_activity;
         $get_previous_info = itg_get_front_activity_info($nd_id, $dtag, $user->uid, $user_activity, $status = '');
         if (empty($get_previous_info['nid'])) {
-          $actual_data = node_load($nd_id);
-          $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
-          $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
-          $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-          $path = $actual_data->path['source'];
-          $qry = array("nid" => $nd_id, "uid" => $user->uid, "title" => $actual_data->title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" =>time());
+          if($dtag == 'tag') {
+            $term = taxonomy_term_load($nd_id);
+            $actual_title = $term->name;
+            $primary_cat_id = '';
+            $primary_cat_name = '';
+            $extra_image = null;
+            $path = '';
+          } else {
+            $actual_data = node_load($nd_id);
+            $actual_title = $actual_data->title;
+            $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
+            $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
+            $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+            $path = $actual_data->path['source'];
+          }
+
+          $qry = array("nid" => $nd_id, "uid" => $user->uid, "title" => $actual_title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $dtag, "activity" => $user_activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" =>time());
           $result = $people->insert($qry);
           $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $dtag);
           print json_encode($response);
@@ -259,9 +279,11 @@ function itg_user_activity_front_highlight() {
  * Implements itg_fb_share_callback().
  */
 function itg_fb_share_callback() {
+  watchdog('fb_insert_callback', '<pre>'.print_r(arg(), true).'</pre>');
   $arg = arg();
   $count = 0;
   if (!empty($arg[1])) {
+    watchdog('fb_insert', $arg[1]);
     $query = db_select('itg_node_share_count', 'insc')
         ->fields('insc', array('share_count'))
         ->condition('insc.nid', $arg[1], '=');
@@ -271,5 +293,34 @@ function itg_fb_share_callback() {
     }
     $count = $count + 1;
     itg_report_get_node_share($arg[1], $count);
+  }
+  
+  if (!empty($arg[1]) && $arg[2] > 0) {
+    watchdog('fb_mongo_insert', $arg[2]);
+    $activity_date = date('d-m-Y');
+    $activity_date_time = date('d-m-Y h:i:s');
+    $con = mongodb();
+    if ($con) {
+      $get_previous_info = itg_common_mongo_activity_fb_count($arg[2], 'front_user_activity', $arg[1], 'facebook_share');
+      if ($get_previous_info < 1) {
+        $people = $con->front_user_activity;
+        $qry = array("nid" => $arg[1], "uid" => $arg[2], "activity" => 'facebook_share', "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => '1', "timestamp" => time());
+        $result = $people->insert($qry);
+      }
+    }
+  }
+}
+
+/**
+ * Implements itg_story_login_follow_callback().
+ */
+function itg_story_login_follow_callback(){
+  global $user;
+  if($user->uid == 0) {
+   $response = array('anony' => 'true');
+   print json_encode($response); 
+  } else {
+   $response = array('loggedin' => 'true');
+   print json_encode($response); 
   }
 }

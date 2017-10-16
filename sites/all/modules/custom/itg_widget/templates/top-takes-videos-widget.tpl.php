@@ -1,7 +1,9 @@
-<?php if (!empty($data)) : global $base_url; ?>
-  <div class="top-takes-video-container">
-    <?php
-    $is_fron_page = drupal_is_front_page();
+<?php if (!empty($data)) : global $base_url; 
+$home_top_takes = "home-top-takes";
+$is_fron_page = drupal_is_front_page();
+?>
+  <div class="top-takes-video-container <?php if (!empty($is_fron_page)) { print $home_top_takes; }  ?>">
+    <?php    
     if (empty($is_fron_page)) {
       ?><h3><span><?php print t("Top Takes") ?></span></h3><?php } ?>
     <ul>  
@@ -24,7 +26,7 @@
             <p title="<?php echo $video_data['title']; ?>" class="title top-takes-<?php echo $video_data['nid'] ?>">
             <?php 
             if(function_exists('itg_common_get_smiley_title')) {
-              echo l(itg_common_get_smiley_title($video_data['nid'], 0, 130), "node/" . $video_data['nid'] , array('html' => TRUE , "attributes" => array("title" => $video_data['title']))); 
+              echo l(itg_common_get_smiley_title($video_data['node_obj'], 0, 130), "node/" . $video_data['nid'] , array('html' => TRUE , "attributes" => array("title" => $video_data['title']))); 
             }
             else {
               echo l(mb_strimwidth($video_data['title'], 0, 140, ".."), "node/" . $video_data['nid'] , array("attributes" => array("title" => $video_data['title']))); 

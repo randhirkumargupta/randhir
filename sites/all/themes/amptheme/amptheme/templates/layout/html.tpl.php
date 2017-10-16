@@ -52,6 +52,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,600" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
     <script async custom-element="amp-dailymotion" src="https://cdn.ampproject.org/v0/amp-dailymotion-0.1.js"></script>
     <script async custom-element="amp-jwplayer" src="https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js"></script>
@@ -61,8 +62,9 @@
     <script async custom-element="amp-facebook" src="https://cdn.ampproject.org/v0/amp-facebook-0.1.js"></script>
     <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
     <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+    <script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
 
@@ -106,7 +108,7 @@
       .related-story ul li .tile{float: left; width: 75%; padding-right: 10px;}
       .related-story ul li .tile a{color: #000; text-decoration: none;}
       .related-story ul li > a{float: right; width: 25%;}
-      .photo-slide{position: relative;}
+      .photo-slide{position: relative; text-align: center;}
       .photo-slide .caption{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #222; color: #aeaeae; font-size: 12px; font-family: 'Roboto'; padding: 5px 10px;}
       .story-right{padding-bottom: 30px;}
       .carousel-preview{white-space: nowrap; overflow: auto;}
@@ -671,7 +673,6 @@
       .custom-amp-ad{text-align: center;}
     </style>
     <?php //endif;  ?>
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
   </head>
   <body class="<?php print $classes; ?>" <?php print $attributes; ?>>
     <?php //if (!empty($amp_skip_link)):  ?>

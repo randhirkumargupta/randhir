@@ -30,8 +30,9 @@ function itg_sso_reg_init() {
     drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_change_email.js', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
   }
-
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js', array('scope' => 'footer'));  
+  if($theme == FRONT_THEME_NAME) {
+  //drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js', array('scope' => 'footer', 'defer' => TRUE));
+  }
 }
 
 /**
@@ -139,6 +140,13 @@ function itg_sso_reg_menu() {
   $items['sso-refer-history-del/%'] = array(
     'title' => 'Delete refer a friend',
     'page callback' => 'itg_refer_friend_history_callback',
+    'access arguments' => array('access SSo email history'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  $items['del-history-table-data'] = array(
+    'title' => 'Delete history table data',
+    'page callback' => 'itg_del_history_table_data',
     'access arguments' => array('access SSo email history'),
     'type' => MENU_CALLBACK,
   );
@@ -506,4 +514,17 @@ function itg_sso_reg_tokens($type, $tokens, array $data = array(), array $option
   }
 
 	return $replacements;
+}
+
+/*
+ * Implements itg_del_history_table_data().
+ */
+function itg_del_history_table_data() {
+  try {
+  $result = db_truncate('itg_sso_email_history')->execute();
+  $redirect_url = 'admin/config/people/sso-email-history';
+  drupal_goto($redirect_url);
+  } catch (Exception $e) {
+  watchdog('Email history table not truncate', '<pre>' . $e->getMessage() . '</pre>');  
+  }
 }

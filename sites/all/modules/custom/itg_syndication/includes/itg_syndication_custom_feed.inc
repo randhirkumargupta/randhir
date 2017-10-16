@@ -8,17 +8,17 @@
 //define(DEFAULT_URL, "http://");
 
 function isValidFeed($feed_type, $body) {
-  $return = FALSE;
-  switch ($feed_type) {
-    case 'xml':
-    case 'rss':
-    case 'mrss':
-      if (isValidXml($body)) {
-        $return = TRUE;
-      }
-      break;
-  }
-  return $return;
+    $return = FALSE;
+    switch ($feed_type) {
+        case 'xml':
+        case 'rss':
+        case 'mrss':
+            if (isValidXml($body)) {
+                $return = TRUE;
+            }
+            break;
+    }
+    return $return;
 }
 
 /**
@@ -26,104 +26,104 @@ function isValidFeed($feed_type, $body) {
  * @param array $data
  */
 function generate_custom_pattern_feed($data) {
-  $error = array();
-  $nids = isset($data['syndication']) ? unserialize($data['syndication']) : array();
-  $client = isset($data['client_title']) ? $data['client_title'] : "";
-  $content_type = isset($data['web_property']) ? $data['web_property'] : "";
-  $section_id = isset($data['section_id']) ? $data['section_id'] : "";
-  $frequency = isset($data['frequency']) ? $data['frequency'] : "";
-  $section_name = "";
-  if (!empty($section_id)) {
-    $section_name_obj = get_term_name_from_tid($section_id);
-    $section_name = $section_name_obj->name;
-  }
-  // As known magazine is story content.
-  if ($content_type == 'magazine') {
-    $content_type = 'story';
-  }
-  $feed_type = isset($data['feed_type']) ? $data['feed_type'] : "";
-  if (count($data) && (!empty($nids) && !empty($client) && !empty($content_type))) {
-    /* get pattern of specific client for specific content_type */
-    $pattern = get_client_feed_pattern($client, $content_type, $feed_type);
-    /* Create Directory if does not exists */
-    if (!empty($section_name)) {
-      // Handled for Syndication rules
-      $url_friendly_path = itg_common_url_friendly_path("$feed_type/$client");
-      $feed_dir = "public://$url_friendly_path";
-    } else {
-      $feed_dir = "public://$feed_type/$client/$content_type";
+    $error = array();
+    $nids = isset($data['syndication']) ? unserialize($data['syndication']) : array();
+    $client = isset($data['client_title']) ? $data['client_title'] : "";
+    $content_type = isset($data['web_property']) ? $data['web_property'] : "";
+    $section_id = isset($data['section_id']) ? $data['section_id'] : "";
+    $frequency = isset($data['frequency']) ? $data['frequency'] : "";
+    $section_name = "";
+    if (!empty($section_id)) {
+        $section_name_obj = get_term_name_from_tid($section_id);
+        $section_name = $section_name_obj->name;
     }
-    $feed_dir = str_replace(" ", "-", $feed_dir); // code by shravan
-    file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
-    $today = date('Y-M-d-h-m-s');
-    /* Iterate for nodes */
-    if (!empty($pattern['field_syndication_xml_formate_xml'])) {
-      $default_pattern = $pattern['field_syndication_xml_formate_xml'];
-      // $feed = feed_starting_tags($feed_type);
-      // Header Text start here for syndication file.
-      if (!empty($pattern['field_syndication_header_value'])) {
-        $feed .= '<header>';
-        $feed .= "<![CDATA[ " . htmlspecialchars($pattern['field_syndication_header_value'], ENT_XML1, 'UTF-8') . " ]]>";
-        $feed .= '</header>';
-      }
-      // Process all the selected nodes.
-      foreach ($nids as $nid) {
-        $feed .= get_custom_feeds_files($nid, $pattern['field_syndication_xml_formate_xml'], $feed_type);
-      }
-      // Add footer tag here for syndication file.
-      if (!empty($pattern['field_syndication_footer_value'])) {
-        $feed .= '<footer>';
-        $feed .= "<![CDATA[ " . htmlspecialchars($pattern['field_syndication_footer_value'], ENT_XML1, 'UTF-8') . " ]]>";
-        $feed .= '</footer>';
-      }
-      $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed);
-      return $file_path_feed;
-    } else {
-      //$feed = feed_starting_tags($feed_type);
-      $default_pattern = get_default_feed_pattern($feed_type, $content_type);
-      foreach ($nids as $nid) {
-        $feed .= get_custom_feeds_files($nid, $default_pattern, $feed_type);
-      }
-      $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed);
-      return $file_path_feed;
+    // As known magazine is story content.
+    if ($content_type == 'magazine') {
+        $content_type = 'story';
     }
-  }
-  if (empty($section_id)) {
-    exit;
-  }
+    $feed_type = isset($data['feed_type']) ? $data['feed_type'] : "";
+    if (count($data) && (!empty($nids) && !empty($client) && !empty($content_type))) {
+        /* get pattern of specific client for specific content_type */
+        $pattern = get_client_feed_pattern($client, $content_type, $feed_type);
+        /* Create Directory if does not exists */
+        if (!empty($section_name)) {
+            // Handled for Syndication rules
+            $url_friendly_path = itg_common_url_friendly_path("$feed_type/$client");
+            $feed_dir = "public://$url_friendly_path";
+        } else {
+            $feed_dir = "public://$feed_type/$client/$content_type";
+        }
+        $feed_dir = str_replace(" ", "-", $feed_dir); // code by shravan
+        file_prepare_directory($feed_dir, FILE_CREATE_DIRECTORY);
+        $today = date('Y-M-d-h-m-s');
+        /* Iterate for nodes */
+        if (!empty($pattern['field_syndication_xml_formate_xml'])) {
+            $default_pattern = $pattern['field_syndication_xml_formate_xml'];
+            // $feed = feed_starting_tags($feed_type);
+            // Header Text start here for syndication file.
+            if (!empty($pattern['field_syndication_header_value'])) {
+                $feed .= '<header>';
+                $feed .= "<![CDATA[ " . htmlspecialchars($pattern['field_syndication_header_value'], ENT_XML1, 'UTF-8') . " ]]>";
+                $feed .= '</header>';
+            }
+            // Process all the selected nodes.
+            foreach ($nids as $nid) {
+                $feed .= get_custom_feeds_files($nid, $pattern['field_syndication_xml_formate_xml'], $feed_type);
+            }
+            // Add footer tag here for syndication file.
+            if (!empty($pattern['field_syndication_footer_value'])) {
+                $feed .= '<footer>';
+                $feed .= "<![CDATA[ " . htmlspecialchars($pattern['field_syndication_footer_value'], ENT_XML1, 'UTF-8') . " ]]>";
+                $feed .= '</footer>';
+            }
+            $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed);
+            return $file_path_feed;
+        } else {
+            //$feed = feed_starting_tags($feed_type);
+            $default_pattern = get_default_feed_pattern($feed_type, $content_type);
+            foreach ($nids as $nid) {
+                $feed .= get_custom_feeds_files($nid, $default_pattern, $feed_type);
+            }
+            $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed);
+            return $file_path_feed;
+        }
+    }
+    if (empty($section_id)) {
+        exit;
+    }
 }
 
 function _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $content_type, $frequency, $feed_dir, $feed) {
-  if ($feed_type == 'rss' || $feed_type == 'mrss' || $feed_type == 'xml') {
-    $final_feed = get_full_feed_after_replace_items_tags_wtih_dollers($default_pattern, $feed);
-    $var_array = get_vars_from_feed_pattern($final_feed, $feed_type);
-    $feed = replace_other_then_item_tags($var_array, $final_feed);
-  }
-  // prety output xml
-  $dom = new DOMDocument(1.0, 'UTF-8');
-  $dom->preserveWhiteSpace = FALSE;
-  $dom->loadXML($feed);
-  $dom->formatOutput = true;
-  $feed = $dom->saveXML($dom->documentElement);
-  $filename = sydication_pattren_file_name("$client - $today", $feed_type, $section_name, $content_type, $frequency, $feed_type);
-  $feed = html_entity_decode($feed);
-  $file_path_feed = sydication_feed_file_path($feed, $feed_dir, $filename, $section_name);
-  return $file_path_feed;
+    if ($feed_type == 'rss' || $feed_type == 'mrss' || $feed_type == 'xml') {
+        $final_feed = get_full_feed_after_replace_items_tags_wtih_dollers($default_pattern, $feed);
+        $var_array = get_vars_from_feed_pattern($final_feed, $feed_type);
+        $feed = replace_other_then_item_tags($var_array, $final_feed);
+    }
+    // prety output xml
+    $dom = new DOMDocument(1.0, 'UTF-8');
+    $dom->preserveWhiteSpace = FALSE;
+    $dom->loadXML($feed);
+    $dom->formatOutput = true;
+    $feed = $dom->saveXML($dom->documentElement);
+    $filename = sydication_pattren_file_name("$client - $today", $feed_type, $section_name, $content_type, $frequency, $feed_type);
+    $feed = html_entity_decode($feed);
+    $file_path_feed = sydication_feed_file_path($feed, $feed_dir, $filename, $section_name);
+    return $file_path_feed;
 }
 
 function replace_other_then_item_tags($var_array, $final_feed) {
-  $variables = $var_array[0];
-  $patterns = array();
-  $replacements = array();
-  foreach ($variables as $feed_var) {
-    // get real field name between three curly brakets
-    preg_match_all('/{{{(.*?)}}}/', $feed_var, $matches);
-    $field_name = $matches[1][0];
-    $replacement_value = get_predefine_variables_value('', $field_name);
-    $patterns[] = '/' . $feed_var . '/';
-    $replacements[] = $replacement_value;
-  }
-  return preg_replace($patterns, $replacements, $final_feed);
+    $variables = $var_array[0];
+    $patterns = array();
+    $replacements = array();
+    foreach ($variables as $feed_var) {
+        // get real field name between three curly brakets
+        preg_match_all('/{{{(.*?)}}}/', $feed_var, $matches);
+        $field_name = $matches[1][0];
+        $replacement_value = get_predefine_variables_value('', $field_name);
+        $patterns[] = '/' . $feed_var . '/';
+        $replacements[] = $replacement_value;
+    }
+    return preg_replace($patterns, $replacements, $final_feed);
 }
 
 /**
@@ -134,16 +134,16 @@ function replace_other_then_item_tags($var_array, $final_feed) {
  * @return string
  */
 function get_full_feed_after_replace_items_tags_wtih_dollers($text, $feed) {
-  preg_match_all('/<item>(.*?)<\/item>/s', $text, $tag_inside_item);
-  // Item inside text got here
-  $tags_inside_item_tag = $tag_inside_item[1][0];
-  $only_item_text = '<item>' . $tags_inside_item_tag . '</item>';
-  // Logic goes here
-  // In this logic item tags are replaced by $$$.
-  // After getting proper data of variables then $$$ will be replace by feed items.
-  $position_of_items = str_replace($only_item_text, "$$$", $text);
-  // Now i got item feed structure , then now replcae $$$ with item feed
-  return str_replace("$$$", $feed, $position_of_items);
+    preg_match_all('/<item>(.*?)<\/item>/s', $text, $tag_inside_item);
+    // Item inside text got here
+    $tags_inside_item_tag = $tag_inside_item[1][0];
+    $only_item_text = '<item>' . $tags_inside_item_tag . '</item>';
+    // Logic goes here
+    // In this logic item tags are replaced by $$$.
+    // After getting proper data of variables then $$$ will be replace by feed items.
+    $position_of_items = str_replace($only_item_text, "$$$", $text);
+    // Now i got item feed structure , then now replcae $$$ with item feed
+    return str_replace("$$$", $feed, $position_of_items);
 }
 
 /**
@@ -153,13 +153,13 @@ function get_full_feed_after_replace_items_tags_wtih_dollers($text, $feed) {
  * @return string
  */
 function feed_starting_tags($feed_type) {
-  $tags = "";
-  switch ($feed_type) {
-    case 'xml':
-      $tags = "<root>";
-      break;
-  }
-  return $tags;
+    $tags = "";
+    switch ($feed_type) {
+        case 'xml':
+            $tags = "<root>";
+            break;
+    }
+    return $tags;
 }
 
 /**
@@ -169,13 +169,13 @@ function feed_starting_tags($feed_type) {
  * @return string
  */
 function feed_ending_tags($feed_type) {
-  $tags = "";
-  switch ($feed_type) {
-    case 'xml':
-      $tags = "</root>";
-      break;
-  }
-  return $tags;
+    $tags = "";
+    switch ($feed_type) {
+        case 'xml':
+            $tags = "</root>";
+            break;
+    }
+    return $tags;
 }
 
 /**
@@ -186,18 +186,18 @@ function feed_ending_tags($feed_type) {
  * @return string
  */
 function sydication_pattren_file_name($name, $extention, $section = "", $content_type = "", $frequency = "", $feed_type = "") {
-  if ($extention == 'xml' || $extention == 'rss' || $extention == 'mrss') {
-    $extention = 'xml';
-  }
-  if (empty($section)) {
-    $filename = $name . '.' . $extention;
-    $filename = str_replace(" ", "-", $filename); // code by shravan
-  } else {
-    $feed_type = strtolower($feed_type);
-    // Handled for Syndication Rules.
-    $filename = itg_common_url_friendly_path("$section-$content_type") . "-$frequency-$feed_type-feed.$extention";
-  }
-  return $filename;
+    if ($extention == 'xml' || $extention == 'rss' || $extention == 'mrss') {
+        $extention = 'xml';
+    }
+    if (empty($section)) {
+        $filename = $name . '.' . $extention;
+        $filename = str_replace(" ", "-", $filename); // code by shravan
+    } else {
+        $feed_type = strtolower($feed_type);
+        // Handled for Syndication Rules.
+        $filename = itg_common_url_friendly_path("$section-$content_type") . "-$frequency-$feed_type-feed.$extention";
+    }
+    return $filename;
 }
 
 /**
@@ -209,17 +209,17 @@ function sydication_pattren_file_name($name, $extention, $section = "", $content
  * @return string
  */
 function sydication_feed_file_path($feed, $feed_dir, $filename, $section_name) {
-  if (!empty($section_name)) {
-    // Handled for Syndication Rules.
-    $file = file_save_data($feed, "$feed_dir/" . $filename, FILE_EXISTS_REPLACE);
-  } else {
-    $file = file_save_data($feed, "$feed_dir/" . $filename);
-  }
-  $path = file_create_url($feed_dir);
-  $file_path['file_path'] = $path . '/' . $filename;
-  $file_path['file_name'] = $filename;
-  $file_path['real_path'] = $feed_dir . "/" . $filename;
-  return $file_path;
+    if (!empty($section_name)) {
+        // Handled for Syndication Rules.
+        $file = file_save_data($feed, "$feed_dir/" . $filename, FILE_EXISTS_REPLACE);
+    } else {
+        $file = file_save_data($feed, "$feed_dir/" . $filename);
+    }
+    $path = file_create_url($feed_dir);
+    $file_path['file_path'] = $path . '/' . $filename;
+    $file_path['file_name'] = $filename;
+    $file_path['real_path'] = $feed_dir . "/" . $filename;
+    return $file_path;
 }
 
 /**
@@ -230,26 +230,26 @@ function sydication_feed_file_path($feed, $feed_dir, $filename, $section_name) {
  * @param string $pattern
  */
 function get_client_feed_pattern($client, $content_type, $feed_type) {
-  $pattern = "";
-  if (isset($client) && isset($content_type) && isset($feed_type)) {
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_syndication_xml_formate', 'fdb', 'fdb.entity_id=n.nid');
-    $query->leftJoin('field_data_field_syndication_feed_content', 'sfc', 'sfc.entity_id=n.nid');
-    $query->leftJoin('field_data_field_syndication_feed_clients', 'fsfc', 'fsfc.entity_id=n.nid');
-    $query->leftJoin('field_data_field_syndication_feed_type', 'fsft', 'fsft.entity_id=n.nid');
-    $query->leftJoin('field_data_field_syndication_header', 'fsfh', 'fsfh.entity_id=n.nid');
-    $query->leftJoin('field_data_field_syndication_footer', 'fsff', 'fsff.entity_id=n.nid');
-    $query->fields('fdb', array('field_syndication_xml_formate_xml'));
-    $query->fields('fsff', array('field_syndication_footer_value'));
-    $query->fields('fsfh', array('field_syndication_header_value'));
-    $query->condition('fsfc.field_syndication_feed_clients_value', $client);
-    $query->condition('sfc.field_syndication_feed_content_value', $content_type);
-    $query->condition('fsft.field_syndication_feed_type_value', $feed_type);
-    $query->condition('n.status', '1');
-    $query->orderBy('created', 'DESC');
-    $pattern = $query->execute()->fetchAssoc();
-  }
-  return $pattern;
+    $pattern = "";
+    if (isset($client) && isset($content_type) && isset($feed_type)) {
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_syndication_xml_formate', 'fdb', 'fdb.entity_id=n.nid');
+        $query->leftJoin('field_data_field_syndication_feed_content', 'sfc', 'sfc.entity_id=n.nid');
+        $query->leftJoin('field_data_field_syndication_feed_clients', 'fsfc', 'fsfc.entity_id=n.nid');
+        $query->leftJoin('field_data_field_syndication_feed_type', 'fsft', 'fsft.entity_id=n.nid');
+        $query->leftJoin('field_data_field_syndication_header', 'fsfh', 'fsfh.entity_id=n.nid');
+        $query->leftJoin('field_data_field_syndication_footer', 'fsff', 'fsff.entity_id=n.nid');
+        $query->fields('fdb', array('field_syndication_xml_formate_xml'));
+        $query->fields('fsff', array('field_syndication_footer_value'));
+        $query->fields('fsfh', array('field_syndication_header_value'));
+        $query->condition('fsfc.field_syndication_feed_clients_value', $client);
+        $query->condition('sfc.field_syndication_feed_content_value', $content_type);
+        $query->condition('fsft.field_syndication_feed_type_value', $feed_type);
+        $query->condition('n.status', '1');
+        $query->orderBy('created', 'DESC');
+        $pattern = $query->execute()->fetchAssoc();
+    }
+    return $pattern;
 }
 
 /**
@@ -258,44 +258,44 @@ function get_client_feed_pattern($client, $content_type, $feed_type) {
  * @param string $pattren
  */
 function get_custom_feeds_files($nid = NULL, $text = NULL, $feed_type = NULL) {
-  $is_not_future_node_flag = is_not_future_node($nid);
-  $data_array = array();
-  $feed_data = '';
-  if (!empty($nid) && !empty($text) && $is_not_future_node_flag) {
-    // extract fields name from text string
-    $var_array = get_vars_from_feed_pattern($text, $feed_type);
-    $node = node_load($nid);
-    $isValidXml = isValidXml($text);
-    if ($isValidXml) {
-      // validate fields w.r.t content type
-      $content_type = $node->type;
-      foreach ($var_array[1] as $field_name) {
-        if (!isValidField($field_name, $content_type)) {
-          $message[] = $field_name . " is not a valid field in " . $content_type;
-          drupal_set_message($field_name . " is not a valid field in for node " . $nid . $content_type, "error");
+    $is_not_future_node_flag = is_not_future_node($nid);
+    $data_array = array();
+    $feed_data = '';
+    if (!empty($nid) && !empty($text) && $is_not_future_node_flag) {
+        // extract fields name from text string
+        $var_array = get_vars_from_feed_pattern($text, $feed_type);
+        $node = node_load($nid);
+        $isValidXml = isValidXml($text);
+        if ($isValidXml) {
+            // validate fields w.r.t content type
+            $content_type = $node->type;
+            foreach ($var_array[1] as $field_name) {
+                if (!isValidField($field_name, $content_type)) {
+                    $message[] = $field_name . " is not a valid field in " . $content_type;
+                    drupal_set_message($field_name . " is not a valid field in for node " . $nid . $content_type, "error");
+                }
+            }
+            // Remove other then item tags
+            if ($feed_type == 'rss' || $feed_type == 'mrss' || $feed_type == 'xml') {
+                preg_match_all('/<item>(.*?)<\/item>/s', $text, $tag_inside_item);
+
+                // Item inside text got here
+                $tags_inside_item_tag = $tag_inside_item[1][0];
+
+                $only_item_text = '<item>' . $tags_inside_item_tag . '</item>';
+
+                // Logic goes here
+                // In this logic item tags are replaced by $$$.
+                // After getting proper data of variables then $$$ will be replace by feed items.
+                $position_of_items = str_replace($only_item_text, "$$$", $text);
+                return get_generated_feed($message, $var_array, $node, $data_array, $only_item_text, $feed_type);
+            }
+        } else {
+            drupal_set_message(t("Not a valid formet"));
         }
-      }
-      // Remove other then item tags
-      if ($feed_type == 'rss' || $feed_type == 'mrss' || $feed_type == 'xml') {
-        preg_match_all('/<item>(.*?)<\/item>/s', $text, $tag_inside_item);
-
-        // Item inside text got here
-        $tags_inside_item_tag = $tag_inside_item[1][0];
-
-        $only_item_text = '<item>' . $tags_inside_item_tag . '</item>';
-
-        // Logic goes here
-        // In this logic item tags are replaced by $$$.
-        // After getting proper data of variables then $$$ will be replace by feed items.
-        $position_of_items = str_replace($only_item_text, "$$$", $text);
-        return get_generated_feed($message, $var_array, $node, $data_array, $only_item_text, $feed_type);
-      }
     } else {
-      drupal_set_message(t("Not a valid formet"));
+        drupal_set_message(t("Either node ids not found or pattrens not found"));
     }
-  } else {
-    drupal_set_message(t("Either node ids not found or pattrens not found"));
-  }
 }
 
 /**
@@ -305,53 +305,53 @@ function get_custom_feeds_files($nid = NULL, $text = NULL, $feed_type = NULL) {
  * @return string
  */
 function itg_syndication_get_syndication_image($node, $field_name) {
-  $return_value_for_sydiation = "";
-  switch ($field_name) {
-    case 'field_story_extra_large_image':
-    case 'field_story_large_image':
-    case 'field_story_medium_image':
-    case 'field_story_small_image':
-    case 'field_story_extra_small_image':
-      // Get here image syndication value.
-      $fid = $node->{$field_name}['und'][0]['fid'];
-      $flag = itg_syndication_image_info_syndicate_flag($fid);
-      if ($flag) {
-        if (!empty($node->{$field_name}['und'][0]['uri'])) {
-          $file_url = file_create_url($node->{$field_name}['und'][0]['uri']);
-          $return_value_for_sydiation = $file_url;
-        } else {
-          $return_value_for_sydiation = get_default_image_of_field($field_name);
-        }
-      } else {
-        $return_value_for_sydiation = get_default_image_of_field($field_name);
-      }
-      break;
+    $return_value_for_sydiation = "";
+    switch ($field_name) {
+        case 'field_story_extra_large_image':
+        case 'field_story_large_image':
+        case 'field_story_medium_image':
+        case 'field_story_small_image':
+        case 'field_story_extra_small_image':
+            // Get here image syndication value.
+            $fid = $node->{$field_name}['und'][0]['fid'];
+            $flag = itg_syndication_image_info_syndicate_flag($fid);
+            if ($flag) {
+                if (!empty($node->{$field_name}['und'][0]['uri'])) {
+                    $file_url = file_create_url($node->{$field_name}['und'][0]['uri']);
+                    $return_value_for_sydiation = $file_url;
+                } else {
+                    $return_value_for_sydiation = get_default_image_of_field($field_name);
+                }
+            } else {
+                $return_value_for_sydiation = get_default_image_of_field($field_name);
+            }
+            break;
 
-    default:
-      $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $field_name)[0];
-      break;
-  }
-  return $return_value_for_sydiation;
+        default:
+            $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $field_name)[0];
+            break;
+    }
+    return $return_value_for_sydiation;
 }
 
 function get_default_image_of_field($field_name) {
-  global $base_url;
-  $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
-  switch ($field_name) {
-    case 'field_story_large_image':
-      $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image483x271.jpg';
-      break;
-    case 'field_story_medium_image':
-      $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg';
-      break;
-    case 'field_story_small_image':
-      $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image170x127.jpg';
-      break;
-    case 'field_story_extra_small_image':
-      $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg';
-      break;
-  }
-  return $default_image;
+    global $base_url;
+    $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
+    switch ($field_name) {
+        case 'field_story_large_image':
+            $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image483x271.jpg';
+            break;
+        case 'field_story_medium_image':
+            $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg';
+            break;
+        case 'field_story_small_image':
+            $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image170x127.jpg';
+            break;
+        case 'field_story_extra_small_image':
+            $default_image = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg';
+            break;
+    }
+    return $default_image;
 }
 
 /**
@@ -360,15 +360,15 @@ function get_default_image_of_field($field_name) {
  * @return int
  */
 function itg_syndication_image_info_syndicate_flag($fid) {
-  $row_count = 0;
-  if ($fid) {
-    $row_count = db_select('image_info', 'ii')
-        ->fields('ii', array("fid"))
-        ->condition('ii.fid', $fid)
-        ->condition('ii.image_syndicate', 1)
-        ->execute()->rowCount();
-  }
-  return $row_count;
+    $row_count = 0;
+    if ($fid) {
+        $row_count = db_select('image_info', 'ii')
+            ->fields('ii', array("fid"))
+            ->condition('ii.fid', $fid)
+            ->condition('ii.image_syndicate', 1)
+            ->execute()->rowCount();
+    }
+    return $row_count;
 }
 
 /**
@@ -386,91 +386,91 @@ function itg_syndication_image_info_syndicate_flag($fid) {
  * @return string
  */
 function get_generated_feed($message, $var_array, $node, $data_array, $text) {
-  //process if there is no error message
-  if (empty($message)) {
-    $iteration = count($var_array[0]);
-    for ($i = 0; $i < $iteration; $i++) {
-      //$data_array[] = get_node_field_values($node, $var_array[1][$i]);
-      $return_value_for_sydiation = '';
-      //Fix for sydication images repeated value.
-      if ($var_array[1][$i] == 'field_gallery_image') {
-        $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+    //process if there is no error message
+    if (empty($message)) {
+        $iteration = count($var_array[0]);
+        for ($i = 0; $i < $iteration; $i++) {
+            //$data_array[] = get_node_field_values($node, $var_array[1][$i]);
+            $return_value_for_sydiation = '';
+            //Fix for sydication images repeated value.
+            if ($var_array[1][$i] == 'field_gallery_image') {
+                $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
 
-        // handle case for creting multiple media tag. if there is multiple images
-        $tags_start = "";
-        $count_synd = count($field_gallery_image['field_gallery_image']) - 1;
-        // Create multiple media tag if images count are more then 1
-        // In case of only 1 , its working fine.
-        // condition for counting images in file_gallery_image
-        if (count($field_gallery_image['field_gallery_image']) > 1) {
-          foreach ($field_gallery_image['field_gallery_image'] as $tag_key => $synd_images) {
-            if ($tag_key == 0) {
-              $tags_start .= $synd_images . '"/>';
-            } elseif ($tag_key < $count_synd) {
-              $tags_start .= '<media:thumbnail url="' . $synd_images . '"/>';
-            } elseif ($tag_key == $count_synd) {
-              $tags_start .= '<media:thumbnail url="' . $synd_images;
-            }
-          }
-          $return_value_for_sydiation[0] = $tags_start;
-        }
-      } elseif ($var_array[1][$i] == 'field_video_upload') {
-        $field_video_upload = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+                // handle case for creting multiple media tag. if there is multiple images
+                $tags_start = "";
+                $count_synd = count($field_gallery_image['field_gallery_image']) - 1;
+                // Create multiple media tag if images count are more then 1
+                // In case of only 1 , its working fine.
+                // condition for counting images in file_gallery_image
+                if (count($field_gallery_image['field_gallery_image']) > 1) {
+                    foreach ($field_gallery_image['field_gallery_image'] as $tag_key => $synd_images) {
+                        if ($tag_key == 0) {
+                            $tags_start .= $synd_images . '"/>';
+                        } elseif ($tag_key < $count_synd) {
+                            $tags_start .= '<media:thumbnail url="' . $synd_images . '"/>';
+                        } elseif ($tag_key == $count_synd) {
+                            $tags_start .= '<media:thumbnail url="' . $synd_images;
+                        }
+                    }
+                    $return_value_for_sydiation[0] = $tags_start;
+                }
+            } elseif ($var_array[1][$i] == 'field_video_upload') {
+                $field_video_upload = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
 
-        // handle case for creting multiple media tag. if there is multiple images
-        $tags_start = "";
-        $count_synd = count($field_video_upload['field_video_upload']) - 1;
-        // Create multiple media tag if images count are more then 1
-        // In case of only 1 , its working fine.
-        // condition for counting images in file_gallery_image
-        if (count($field_video_upload['field_video_upload']) > 1) {
-          foreach ($field_video_upload['field_video_upload'] as $tag_key => $video_swf_url) {
-            if ($tag_key == 0) {
-              $tags_start .= $video_swf_url . '"/>';
-            } elseif ($tag_key < $count_synd) {
-              $tags_start .= '<media:content url="' . $video_swf_url . '"/>';
-            } elseif ($tag_key == $count_synd) {
-              $tags_start .= '<media:content url="' . $video_swf_url;
+                // handle case for creting multiple media tag. if there is multiple images
+                $tags_start = "";
+                $count_synd = count($field_video_upload['field_video_upload']) - 1;
+                // Create multiple media tag if images count are more then 1
+                // In case of only 1 , its working fine.
+                // condition for counting images in file_gallery_image
+                if (count($field_video_upload['field_video_upload']) > 1) {
+                    foreach ($field_video_upload['field_video_upload'] as $tag_key => $video_swf_url) {
+                        if ($tag_key == 0) {
+                            $tags_start .= $video_swf_url . '"/>';
+                        } elseif ($tag_key < $count_synd) {
+                            $tags_start .= '<media:content url="' . $video_swf_url . '"/>';
+                        } elseif ($tag_key == $count_synd) {
+                            $tags_start .= '<media:content url="' . $video_swf_url;
+                        }
+                    }
+                    $return_value_for_sydiation[0] = $tags_start;
+                }
+            } else if (in_array($var_array[1][$i], pre_define_variables())) {
+                $return_value_for_sydiation[0] = get_predefine_variables_value($node, $var_array[1][$i]);
             }
-          }
-          $return_value_for_sydiation[0] = $tags_start;
+            //Fix for sydication images repeated value.
+            elseif ($var_array[1][$i] == 'field_gallery_image') {
+                $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+                $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_gallery_image']);
+            } elseif ($var_array[1][$i] == 'field_video_upload') {
+                $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+                $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_video_upload']);
+            } elseif ($var_array[1][$i] == 'field_story_highlights') {
+                $field_story_highlights = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+                $return_value_for_sydiation[0] = $field_story_highlights[0];
+            } elseif ($var_array[1][$i] == 'field_story_itg_tags' || $var_array[1][$i] == 'field_stroy_city' || $var_array[1][$i] == 'field_story_listicle') {
+                $field_story_itg_tags = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+                $return_value_for_sydiation[0] = implode(",", $field_story_itg_tags);
+            } elseif ($var_array[1][$i] == 'field_story_reporter') {
+                $field_story_itg_tags = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+                $bylines = _get_byline_from_nid($node->nid);
+                $return_value_for_sydiation[0] = implode(",", $bylines);
+            } else {
+                if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
+                    $return_value_for_sydiation[0] = itg_syndication_get_syndication_image($node, $var_array[1][$i]);
+                } else {
+                    $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+                }
+            }
+            $data_array[] = $return_value_for_sydiation;
         }
-      } else if (in_array($var_array[1][$i], pre_define_variables())) {
-        $return_value_for_sydiation[0] = get_predefine_variables_value($node, $var_array[1][$i]);
-      }
-      //Fix for sydication images repeated value.
-      elseif ($var_array[1][$i] == 'field_gallery_image') {
-        $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-        $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_gallery_image']);
-      } elseif ($var_array[1][$i] == 'field_video_upload') {
-        $field_gallery_image = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-        $return_value_for_sydiation[0] = implode(',', $field_gallery_image['field_video_upload']);
-      } elseif ($var_array[1][$i] == 'field_story_highlights') {
-        $field_story_highlights = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-        $return_value_for_sydiation[0] = $field_story_highlights[0];
-      } elseif ($var_array[1][$i] == 'field_story_itg_tags' || $var_array[1][$i] == 'field_stroy_city' || $var_array[1][$i] == 'field_story_listicle') {
-        $field_story_itg_tags = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-        $return_value_for_sydiation[0] = implode(",", $field_story_itg_tags);
-      } elseif ($var_array[1][$i] == 'field_story_reporter') {
-        $field_story_itg_tags = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
-        $bylines = _get_byline_from_nid($node->nid);
-        $return_value_for_sydiation[0] = implode(",", $bylines);
-      } else {
-        if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery') {
-          $return_value_for_sydiation[0] = itg_syndication_get_syndication_image($node, $var_array[1][$i]);
-        } else {
-          $return_value_for_sydiation = get_required_data_field_get_items('node', $node, $var_array[1][$i]);
+        if (count($var_array[0])) {
+            foreach ($var_array[0] as $key => $pattren) {
+                $text = replace_variables_with_values($data_array, $key, $text, $pattren);
+            }
+            return $text;
         }
-      }
-      $data_array[] = $return_value_for_sydiation;
     }
-    if (count($var_array[0])) {
-      foreach ($var_array[0] as $key => $pattren) {
-        $text = replace_variables_with_values($data_array, $key, $text, $pattren);
-      }
-      return $text;
-    }
-  }
 }
 
 /**
@@ -481,13 +481,13 @@ function get_generated_feed($message, $var_array, $node, $data_array, $text) {
  * @return array
  */
 function get_node_field_values($node, $variable) {
-  $predefine_variables = pre_define_variables();
-  if (in_array($variable, $predefine_variables)) {
-    $data_array[] = get_predefine_variables_value($node, $variable);
-  } else {
-    $data_array = get_required_data_field_get_items('node', $node, $variable);
-  }
-  return $data_array;
+    $predefine_variables = pre_define_variables();
+    if (in_array($variable, $predefine_variables)) {
+        $data_array[] = get_predefine_variables_value($node, $variable);
+    } else {
+        $data_array = get_required_data_field_get_items('node', $node, $variable);
+    }
+    return $data_array;
 }
 
 /**
@@ -499,101 +499,110 @@ function get_node_field_values($node, $variable) {
  * @return string
  */
 function get_predefine_variables_value($node = '', $variable) {
-  global $base_url;
-  $value = 'Not Found';
-  switch ($variable) {
-    case 'node_published_date':
-      if (isset($node->field_itg_content_publish_date['und'][0]['value']) && !empty($node->field_itg_content_publish_date['und'][0]['value'])) {
-        $published_date = strtotime($node->field_itg_content_publish_date['und'][0]['value']);
-      } else {
-        $published_date = $node->created;
-      }
-      $value = "<![CDATA[" . gmdate('D, d M Y H:i:s T', $published_date) . "]]>";
-      break;
-    case 'node_last_updated_date':
-      $changed_date  = $node->changed;
-      $value = "<![CDATA[ " . gmdate('D, d M Y H:i:s T', $changed_date) . " ]]>";
-      break;
-    case 'node_author':
-      $user_profile_data = user_load($node->uid);
-      $value = $user_profile_data->mail . '(' . $user_profile_data->name . ')';
-      break;
-    case 'node_permalink':
-      $node_alise_url = "<![CDATA[ " . $base_url . '/' . drupal_get_path_alias("node/$node->nid") . "]]>";
-      $value = $node_alise_url;
-      break;
-    case 'mrss_node_permalink':
-      $node_alise_url = $base_url . '/' . drupal_get_path_alias("node/$node->nid");
-      $value = $node_alise_url;
-      break;
-    case 'node_title':
-      $value = "<![CDATA[" . $node->title . "]]>";
-      break;
-    case 'web_site_name':
-      $value = "<![CDATA[" . t('India Today') . "]]>";
-      break;
-    case 'section_category_name':
-      $section_name = '';
-      if (!empty($_GET['shs_term_node_tid_depth'])) {
-        $section_tid = $_GET['shs_term_node_tid_depth'];
-        $section_array = get_term_name_from_tid($section_tid);
-        $section_name = $section_array->name;
-      }
-      $value = "<![CDATA[ " . $section_name . " ]]>";
-      break;
-    case 'section_category_sub_sub_category':
-      $section_name = '';
-      if (!empty($_GET['shs_term_node_tid_depth'])) {
-        $section_tid = $_GET['shs_term_node_tid_depth'];
-        $section_array = _get_all_parent_terms($section_tid);
-        $section_name = "<![CDATA[ " . implode("," , $section_array['title']) . " ]]>";
-      }
-      $value = $section_name;
-      break;
-    case 'website_url':
-      $value = t('http://indiatoday.intoday.in');
-      break;
-    case 'xml_creation_date':
-      $value = gmdate('D, d M Y H:i:s T', time());
-      break;
-    case 'web_logo_url':
-      $value = theme_get_setting('logo', 'itg');
-      break;
-    case 'current_year':
-      $value = date('Y');
-      break;
-    case 'copy_right_symbol':
-      $value = html_entity_decode('&copy');
-      break;
-  }
-  return $value;
+    global $base_url;
+    $value = 'Not Found';
+    switch ($variable) {
+        case 'node_published_date':
+            if (isset($node->field_itg_content_publish_date['und'][0]['value']) && !empty($node->field_itg_content_publish_date['und'][0]['value'])) {
+                $published_date = strtotime($node->field_itg_content_publish_date['und'][0]['value']);
+            } else {
+                $published_date = $node->created;
+            }
+            $value = "<![CDATA[" . gmdate('D, d M Y H:i:s T', $published_date) . "]]>";
+            break;
+        case 'node_last_updated_date':
+            $changed_date = $node->changed;
+            $value = "<![CDATA[ " . gmdate('D, d M Y H:i:s T', $changed_date) . " ]]>";
+            break;
+        case 'node_author':
+            $user_profile_data = user_load($node->uid);
+            $value = $user_profile_data->mail . '(' . $user_profile_data->name . ')';
+            break;
+        case 'node_permalink':
+            $node_alise_url = "<![CDATA[ " . $base_url . '/' . drupal_get_path_alias("node/$node->nid") . "]]>";
+            $value = $node_alise_url;
+            break;
+        case 'mrss_node_permalink':
+            $node_alise_url = $base_url . '/' . drupal_get_path_alias("node/$node->nid");
+            $value = $node_alise_url;
+            break;
+        case 'node_title':
+            $value = "<![CDATA[" . $node->title . "]]>";
+            break;
+        case 'web_site_name':
+            $value = "<![CDATA[" . t('India Today') . "]]>";
+            break;
+        case 'section_category_name':
+            $section_name = '';
+            if (!empty($_GET['shs_term_node_tid_depth'])) {
+                $section_tid = $_GET['shs_term_node_tid_depth'];
+                $section_array = get_term_name_from_tid($section_tid);
+                $section_name = $section_array->name;
+            }
+            $value = "<![CDATA[ " . $section_name . " ]]>";
+            break;
+        case 'category_url':
+            $section_name = '';
+            if (!empty($_GET['shs_term_node_tid_depth'])) {
+                $term_id = $_GET['shs_term_node_tid_depth'];
+                $alise = $base_url . "/" . drupal_get_path_alias("taxonomy/term/$term_id");
+            }
+            $value = "<![CDATA[ " . $alise . " ]]>";
+            break;
+        case 'section_category_sub_sub_category':
+            $section_name = '';
+            if (!empty($_GET['shs_term_node_tid_depth'])) {
+                $section_tid = $_GET['shs_term_node_tid_depth'];
+                $section_array = _get_all_parent_terms($section_tid);
+                $section_name = "<![CDATA[ " . implode(",", $section_array['title']) . " ]]>";
+            }
+            $value = $section_name;
+            break;
+        case 'website_url':
+            $value = t('http://indiatoday.intoday.in');
+            break;
+        case 'xml_creation_date':
+            $value = gmdate('D, d M Y H:i:s T', time());
+            break;
+        case 'web_logo_url':
+            $value = theme_get_setting('logo', 'itg');
+            break;
+        case 'current_year':
+            $value = date('Y');
+            break;
+        case 'copy_right_symbol':
+            $value = html_entity_decode('&copy');
+            break;
+    }
+    return $value;
 }
 
 // Some predefine varliabes
 function pre_define_variables() {
-  return array(
-    'node_published_date',
-    'node_author',
-    'node_permalink',
-    'node_title',
-    'web_site_name',
-    'section_category_name',
-    'website_url',
-    'xml_creation_date',
-    'web_logo_url',
-    'current_year',
-    'mrss_node_permalink',
-    'copy_right_symbol',
-    'section_category_sub_sub_category',
-    'node_last_updated_date'
-  );
+    return array(
+      'node_published_date',
+      'node_author',
+      'node_permalink',
+      'node_title',
+      'web_site_name',
+      'section_category_name',
+      'website_url',
+      'xml_creation_date',
+      'web_logo_url',
+      'current_year',
+      'mrss_node_permalink',
+      'copy_right_symbol',
+      'section_category_sub_sub_category',
+      'node_last_updated_date',
+      'category_url',
+    );
 }
 
 // Function is used to replace the values on appropriate array key
 function replace_variables_with_values($data_array, $key, $text, $pattren) {
-  $replacement = is_array($data_array[$key]) ? implode(", ", $data_array[$key]) : "";
-  $new_text = str_replace($pattren, $replacement, $text);
-  return $new_text;
+    $replacement = is_array($data_array[$key]) ? implode(", ", $data_array[$key]) : "";
+    $new_text = str_replace($pattren, $replacement, $text);
+    return $new_text;
 }
 
 /**
@@ -602,16 +611,16 @@ function replace_variables_with_values($data_array, $key, $text, $pattren) {
  * @return array $field_info which has all the fields name on perticular file type
  */
 function fieldsArray($content_type) {
-  $field_info = array();
-  $content_type_fields = field_info_instances('node', $content_type);
-  foreach ($content_type_fields as $field) {
-    $field_info[] = $field['field_name'];
-  }
+    $field_info = array();
+    $content_type_fields = field_info_instances('node', $content_type);
+    foreach ($content_type_fields as $field) {
+        $field_info[] = $field['field_name'];
+    }
 
-  foreach (pre_define_variables() as $variables) {
-    $field_info[] = $variables;
-  }
-  return $field_info;
+    foreach (pre_define_variables() as $variables) {
+        $field_info[] = $variables;
+    }
+    return $field_info;
 }
 
 /**
@@ -620,12 +629,12 @@ function fieldsArray($content_type) {
  * @return array $matches
  */
 function get_vars_from_feed_pattern($text, $feed_type) {
-  $matches = array();
+    $matches = array();
 
-  if (isset($text)) {
-    preg_match_all('/{{{(.*?)}}}/', $text, $matches);
-  }
-  return $matches;
+    if (isset($text)) {
+        preg_match_all('/{{{(.*?)}}}/', $text, $matches);
+    }
+    return $matches;
 }
 
 /**
@@ -634,13 +643,13 @@ function get_vars_from_feed_pattern($text, $feed_type) {
  * @param boolen $flag
  */
 function isValidField($field_name, $content_type) {
-  $flag = FALSE;
-  if (isset($field_name) && isset($content_type)) {
-    if (in_array($field_name, fieldsArray($content_type))) {
-      $flag = TRUE;
+    $flag = FALSE;
+    if (isset($field_name) && isset($content_type)) {
+        if (in_array($field_name, fieldsArray($content_type))) {
+            $flag = TRUE;
+        }
     }
-  }
-  return $flag;
+    return $flag;
 }
 
 /**
@@ -649,11 +658,11 @@ function isValidField($field_name, $content_type) {
  * @return boolen $errors
  */
 function isValidXml($xml) {
-  libxml_use_internal_errors(true);
-  $doc = new DOMDocument('1.0', 'utf-8');
-  $doc->loadXML($xml);
-  $errors = libxml_get_errors();
-  return empty($errors);
+    libxml_use_internal_errors(true);
+    $doc = new DOMDocument('1.0', 'utf-8');
+    $doc->loadXML($xml);
+    $errors = libxml_get_errors();
+    return empty($errors);
 }
 
 /**
@@ -664,107 +673,107 @@ function isValidXml($xml) {
  * @return array $required_value
  */
 function get_required_data_field_get_items($entity_type, $entity, $field_name) {
-  $field_item = field_get_items($entity_type, $entity, $field_name);
-  if (is_array($field_item) && count($field_item)) {
-    foreach ($field_item as $delta => $values) {
-      $keys = array_keys($values);
-      $key_delta = $keys[0];
-      switch ($key_delta) {
-        case 'tid':
+    $field_item = field_get_items($entity_type, $entity, $field_name);
+    if (is_array($field_item) && count($field_item)) {
+        foreach ($field_item as $delta => $values) {
+            $keys = array_keys($values);
+            $key_delta = $keys[0];
+            switch ($key_delta) {
+                case 'tid':
 //          if ($field_name == 'field_stroy_city') {
 //            p($key_delta);
 //          }
-          $tid_value = taxonomy_term_load($values['tid']);
-          $required_value[] = $tid_value->name;
-          break;
-        case 'fid':
+                    $tid_value = taxonomy_term_load($values['tid']);
+                    $required_value[] = $tid_value->name;
+                    break;
+                case 'fid':
 //          if ($field_name == 'field_stroy_city') {
 //            p($key_delta);
 //          }
-          $fid_value = $values['fid'];
-          $file_load = file_load($fid_value);
-          $file_url = file_create_url($file_load->uri);
-          $required_value[] = (strlen($file_url) > 8) ? $file_url : 'http://';
-          break;
-        case 'uid':
+                    $fid_value = $values['fid'];
+                    $file_load = file_load($fid_value);
+                    $file_url = file_create_url($file_load->uri);
+                    $required_value[] = (strlen($file_url) > 8) ? $file_url : 'http://';
+                    break;
+                case 'uid':
 //          if ($field_name == 'field_story_reporter') {
 //            p($key_delta);
 //          }
-          $uid_values = entity_load('user', $values['uid']);
-          $required_value = $uid_values->name;
-          break;
-        case 'value':
+                    $uid_values = entity_load('user', $values['uid']);
+                    $required_value = $uid_values->name;
+                    break;
+                case 'value':
 //          if ($field_name == 'field_story_reporter') {
 //            p($key_delta);
 //          }
-          /* Its very importent to convert text into xml standard so using htmlspecialchars with ENT_XML1 */
-          if ($field_name == 'field_gallery_image') {
-            $temp_requred_value = array();
-            foreach ($entity->field_gallery_image['und'] as $key => $fid) {
-              /* Loop Only once */
-              $value = $entity->field_gallery_image['und'][$key]['value'];
-              $field_collection_item = entity_load('field_collection_item', array($value));
-              // Only Synicated images ar required
-              if ($field_collection_item[$value]->field_image_syndication['und'][0]['value'] == 'yes') {
-                $field_collection_item_uri = $field_collection_item[$value]->field_images[LANGUAGE_NONE][0]['uri'];
-                $temp_requred_value[] = file_create_url($field_collection_item_uri);
-              }
+                    /* Its very importent to convert text into xml standard so using htmlspecialchars with ENT_XML1 */
+                    if ($field_name == 'field_gallery_image') {
+                        $temp_requred_value = array();
+                        foreach ($entity->field_gallery_image['und'] as $key => $fid) {
+                            /* Loop Only once */
+                            $value = $entity->field_gallery_image['und'][$key]['value'];
+                            $field_collection_item = entity_load('field_collection_item', array($value));
+                            // Only Synicated images ar required
+                            if ($field_collection_item[$value]->field_image_syndication['und'][0]['value'] == 'yes') {
+                                $field_collection_item_uri = $field_collection_item[$value]->field_images[LANGUAGE_NONE][0]['uri'];
+                                $temp_requred_value[] = file_create_url($field_collection_item_uri);
+                            }
+                        }
+                        $required_value['field_gallery_image'] = $temp_requred_value;
+                    }
+                    if ($field_name == 'field_story_listicle') {
+                        $temp_requred_value = array();
+                        foreach ($entity->field_story_listicle['und'] as $key => $fid) {
+                            $value = $entity->field_story_listicle['und'][$key]['value'];
+                            $field_collection_item = entity_load('field_collection_item', array($value));
+                            $field_story_listicle_description = $field_collection_item[$value]->field_story_listicle_description[LANGUAGE_NONE][0]['value'];
+                            $temp_requred_value[] = $field_story_listicle_description;
+                        }
+                        $required_value['field_story_listicle_description'] = implode(",", $temp_requred_value);
+                    }
+                    // Handel case to videogallery.
+                    elseif ($field_name == 'field_video_upload') {
+                        // prevent for dublicate.
+                        $temp_requred_value_1 = array();
+                        foreach ($entity->field_video_upload['und'] as $key => $vid) {
+                            /* Loop Only once */
+                            $value = $entity->field_video_upload['und'][$key]['value'];
+                            $field_collection_item = entity_load('field_collection_item', array($value));
+                            if (!empty($field_collection_item[$value]->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'])) {
+                                // Only Synicated images ar required
+                                $field_collection_item_fid = $field_collection_item[$value]->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'];
+                                $daily_motion_video_id = db_select('dailymotion_response_details', 'drd')
+                                    ->fields('drd', array('video_id'))
+                                    ->condition('drd.fid', $field_collection_item_fid)
+                                    ->execute()->fetchCol();
+                                //Create dailmition video url.
+                                $daily_motion_video_url = "http://www.dailymotion.com/swf/video/$daily_motion_video_id[0]";
+                                $temp_requred_value_1[] = $daily_motion_video_url;
+                            }
+                        }
+                        $required_value['field_video_upload'] = $temp_requred_value_1;
+                    } elseif ($field_name == 'body') {
+                        // Function to remove image have data-syndication='no' image.
+                        $body_field_value = remove_img_tags($field_item[0]['value']);
+                        if (function_exists('remove_extra_tag_in_body')) {
+                            $required_value[] = "<![CDATA[ " . remove_extra_tag_in_body(htmlspecialchars($body_field_value, ENT_XML1, 'UTF-8')) . " ]]>";
+                        } else {
+                            $required_value[] = "<![CDATA[ " . htmlspecialchars($body_field_value, ENT_XML1, 'UTF-8') . " ]]>";
+                        }
+                    } elseif ($field_name == 'field_story_highlights') {
+                        $field_story_highlights = array();
+                        foreach ($field_item as $value) {
+                            $field_story_highlights[] = "<![CDATA[ " . htmlspecialchars($value['value'], ENT_XML1, 'UTF-8') . " ]]>";
+                        }
+                        $required_value[] = implode(",", $field_story_highlights);
+                    } else {
+                        $required_value[] = "<![CDATA[ " . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . " <br clear='all' /> ]]>";
+                    }
+                    break;
             }
-            $required_value['field_gallery_image'] = $temp_requred_value;
-          }
-          if ($field_name == 'field_story_listicle') {
-            $temp_requred_value = array();
-            foreach ($entity->field_story_listicle['und'] as $key => $fid) {
-              $value = $entity->field_story_listicle['und'][$key]['value'];
-              $field_collection_item = entity_load('field_collection_item', array($value));
-              $field_story_listicle_description = $field_collection_item[$value]->field_story_listicle_description[LANGUAGE_NONE][0]['value'];
-              $temp_requred_value[] = $field_story_listicle_description;
-            }
-            $required_value['field_story_listicle_description'] = implode(",", $temp_requred_value);
-          }
-          // Handel case to videogallery.
-          elseif ($field_name == 'field_video_upload') {
-            // prevent for dublicate.
-            $temp_requred_value_1 = array();
-            foreach ($entity->field_video_upload['und'] as $key => $vid) {
-              /* Loop Only once */
-              $value = $entity->field_video_upload['und'][$key]['value'];
-              $field_collection_item = entity_load('field_collection_item', array($value));
-              if (!empty($field_collection_item[$value]->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'])) {
-                // Only Synicated images ar required
-                $field_collection_item_fid = $field_collection_item[$value]->field_videogallery_video_upload[LANGUAGE_NONE][0]['fid'];
-                $daily_motion_video_id = db_select('dailymotion_response_details', 'drd')
-                    ->fields('drd', array('video_id'))
-                    ->condition('drd.fid', $field_collection_item_fid)
-                    ->execute()->fetchCol();
-                //Create dailmition video url.
-                $daily_motion_video_url = "http://www.dailymotion.com/swf/video/$daily_motion_video_id[0]";
-                $temp_requred_value_1[] = $daily_motion_video_url;
-              }
-            }
-            $required_value['field_video_upload'] = $temp_requred_value_1;
-          } elseif ($field_name == 'body') {
-            // Function to remove image have data-syndication='no' image.
-            $body_field_value = remove_img_tags($field_item[0]['value']);
-            if (function_exists('remove_extra_tag_in_body')) {
-              $required_value[] = "<![CDATA[ " . remove_extra_tag_in_body(htmlspecialchars($body_field_value, ENT_XML1, 'UTF-8')) . " ]]>";
-            } else {
-              $required_value[] = "<![CDATA[ " . htmlspecialchars($body_field_value, ENT_XML1, 'UTF-8') . " ]]>";
-            }
-          } elseif ($field_name == 'field_story_highlights') {
-            $field_story_highlights = array();
-            foreach ($field_item as $value) {
-              $field_story_highlights[] = "<![CDATA[ " . htmlspecialchars($value['value'], ENT_XML1, 'UTF-8') . " ]]>";
-            }
-            $required_value[] = implode(",", $field_story_highlights);
-          } else {
-            $required_value[] = "<![CDATA[ " . htmlspecialchars($field_item[0]['value'], ENT_XML1, 'UTF-8') . " <br clear='all' /> ]]>";
-          }
-          break;
-      }
+        }
     }
-  }
-  return $required_value;
+    return $required_value;
 }
 
 /**
@@ -772,15 +781,15 @@ function get_required_data_field_get_items($entity_type, $entity, $field_name) {
  * @return array
  */
 function itg_syndication_theme() {
-  return array(
-    'syndication_feed_variables' => array(
-      'template' => '/templates/sydication_feed_variables',
-    ),
-    'syndication_feed_from_pattern_node_form' => array(
-      'render element' => 'form',
-      'template' => 'templates/syndication_feed_from_pattern_node_form',
-    ),
-  );
+    return array(
+      'syndication_feed_variables' => array(
+        'template' => '/templates/sydication_feed_variables',
+      ),
+      'syndication_feed_from_pattern_node_form' => array(
+        'render element' => 'form',
+        'template' => 'templates/syndication_feed_from_pattern_node_form',
+      ),
+    );
 }
 
 /**
@@ -790,10 +799,10 @@ function itg_syndication_theme() {
  * @return string in feed format
  */
 function get_default_feed_pattern($feed_type, $content_type) {
-  $feed_assoc_array = "";
-  $default_pattern = "";
-  $labelsArray = get_lebels_of_content_type_fields($content_type);
-  switch ($feed_type) {
+    $feed_assoc_array = "";
+    $default_pattern = "";
+    $labelsArray = get_lebels_of_content_type_fields($content_type);
+    switch ($feed_type) {
 //    case "xml":
 //      foreach ($labelsArray as $field_name => $label) {
 //        $label_trim = str_replace(' ', '', $label);
@@ -803,14 +812,14 @@ function get_default_feed_pattern($feed_type, $content_type) {
 //      }
 //      $default_pattern = assocArrayToXML($content_type, $feed_assoc_array);
 //      break;
-    case "rss":
-    case "xml":
-    case "mrss":
-      $default_pattern_file_path = drupal_get_path('module', 'itg_syndication') . "/default_feed_pattern/$content_type/" . $feed_type . "_default_pattern.xml";
-      $default_pattern = file_get_contents($default_pattern_file_path);
-      break;
-  }
-  return $default_pattern;
+        case "rss":
+        case "xml":
+        case "mrss":
+            $default_pattern_file_path = drupal_get_path('module', 'itg_syndication') . "/default_feed_pattern/$content_type/" . $feed_type . "_default_pattern.xml";
+            $default_pattern = file_get_contents($default_pattern_file_path);
+            break;
+    }
+    return $default_pattern;
 }
 
 /**
@@ -820,8 +829,8 @@ function get_default_feed_pattern($feed_type, $content_type) {
  * @return xml $customXML
  */
 function assocArrayToXML($root_element_name, $xml_array) {
-  $xml = new SimpleXMLElement("<{$root_element_name}></{$root_element_name}>");
-  $function = create_function('$function,$xml_child,$xml_array', ' 
+    $xml = new SimpleXMLElement("<{$root_element_name}></{$root_element_name}>");
+    $function = create_function('$function,$xml_child,$xml_array', ' 
             foreach($xml_array as $tags=>$element) { 
                 if(is_array($element)) { 
                     $child=$xml_child->addChild($tags); 
@@ -830,10 +839,10 @@ function assocArrayToXML($root_element_name, $xml_array) {
                     $xml_child->addChild($tags,$element); 
                 } 
             }');
-  $function($function, $xml, $xml_array);
-  $real_xml = $xml->asXML();
-  $customXML = substr($real_xml, strpos($real_xml, '?' . '>') + 2);
-  return $customXML;
+    $function($function, $xml, $xml_array);
+    $real_xml = $xml->asXML();
+    $customXML = substr($real_xml, strpos($real_xml, '?' . '>') + 2);
+    return $customXML;
 }
 
 /**
@@ -842,15 +851,15 @@ function assocArrayToXML($root_element_name, $xml_array) {
  * @return string $tags
  */
 function get_lebels_of_content_type_fields($content_type) {
-  $fieldsArray = array();
-  $tags = array();
-  if (isset($content_type)) {
-    $fieldsArray = fieldsArray($content_type);
-    foreach ($fieldsArray as $key => $field_name) {
-      $tags[$field_name] = get_lebel_of_field('node', $content_type, $field_name);
+    $fieldsArray = array();
+    $tags = array();
+    if (isset($content_type)) {
+        $fieldsArray = fieldsArray($content_type);
+        foreach ($fieldsArray as $key => $field_name) {
+            $tags[$field_name] = get_lebel_of_field('node', $content_type, $field_name);
+        }
     }
-  }
-  return $tags;
+    return $tags;
 }
 
 /**
@@ -861,13 +870,13 @@ function get_lebels_of_content_type_fields($content_type) {
  * @return string $label
  */
 function get_lebel_of_field($entity_type = 'node', $bundle_name, $field_name) {
-  if (isset($entity_type) && isset($bundle_name) && isset($field_name)) {
-    $info = field_info_instance($entity_type, $field_name, $bundle_name);
-    $label = $info['label'];
-    return $label;
-  } else {
-    return;
-  }
+    if (isset($entity_type) && isset($bundle_name) && isset($field_name)) {
+        $info = field_info_instance($entity_type, $field_name, $bundle_name);
+        $label = $info['label'];
+        return $label;
+    } else {
+        return;
+    }
 }
 
 /**
@@ -877,62 +886,62 @@ function get_lebel_of_field($entity_type = 'node', $bundle_name, $field_name) {
  * @param string $form_id
  */
 function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$form, &$form_state, $form_id) {
-  $data = array();
-  $predefine_variables_markup = "";
+    $data = array();
+    $predefine_variables_markup = "";
 
-  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', array('type' => 'file', 'scope' => 'footer'));
-  /* JS library  added to beutify xml pattern */
-  drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', array('type' => 'file', 'scope' => 'footer'));
-  /* check for default value */
-  $client = $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#entity']->field_syndication_feed_clients[LANGUAGE_NONE][0]['value'];
-  if (isset($client)) {
-    $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#default_value'] = $client;
-  }
-  /* Client list */
-  $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#options'] = itg_syndication_get_client("yes");
-  $form['field_syndication_feed_clients']['#validated'] = TRUE;
-  if (!empty($form['field_syndication_feed_content']['und']['#options']['photogallery'])) {
-    $form['field_syndication_feed_content']['und']['#options']['photogallery'] = t('Photogallery');
-  }
-  /* Check if nid exists then set predefine variables */
-  if (isset($form_state['build_info']['args'][0]->nid)) {
-    $content_type = $form_state['build_info']['args'][0]->field_syndication_feed_content['und'][0]['value'];
-    $predefine_variables_markup = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
-  }
-  $form['pre_define_vars'] = array(
-    '#type' => 'markup',
-    '#prefix' => '<div id="pre_define_vars_replace_wrapper">',
-    '#suffix' => '</div>',
-    '#markup' => $predefine_variables_markup,
-  );
-  $form['actions']['cancle'] = array(
-    '#markup' => l(t('Cancel'), 'syndication-feed-pattern-listing', array(
-      'attributes' => array(
-        'class' => 'button'
-      )
-    )),
-    '#weight' => 21,
-    '#value' => t('Cancel')
-  );
+    drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/itg_syndication_custom_feed.js', array('type' => 'file', 'scope' => 'footer'));
+    /* JS library  added to beutify xml pattern */
+    drupal_add_js(drupal_get_path('module', 'itg_syndication') . '/js/jquery.format.js', array('type' => 'file', 'scope' => 'footer'));
+    /* check for default value */
+    $client = $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#entity']->field_syndication_feed_clients[LANGUAGE_NONE][0]['value'];
+    if (isset($client)) {
+        $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#default_value'] = $client;
+    }
+    /* Client list */
+    $form['field_syndication_feed_clients'][LANGUAGE_NONE]['#options'] = itg_syndication_get_client("yes");
+    $form['field_syndication_feed_clients']['#validated'] = TRUE;
+    if (!empty($form['field_syndication_feed_content']['und']['#options']['photogallery'])) {
+        $form['field_syndication_feed_content']['und']['#options']['photogallery'] = t('Photogallery');
+    }
+    /* Check if nid exists then set predefine variables */
+    if (isset($form_state['build_info']['args'][0]->nid)) {
+        $content_type = $form_state['build_info']['args'][0]->field_syndication_feed_content['und'][0]['value'];
+        $predefine_variables_markup = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
+    }
+    $form['pre_define_vars'] = array(
+      '#type' => 'markup',
+      '#prefix' => '<div id="pre_define_vars_replace_wrapper">',
+      '#suffix' => '</div>',
+      '#markup' => $predefine_variables_markup,
+    );
+    $form['actions']['cancle'] = array(
+      '#markup' => l(t('Cancel'), 'syndication-feed-pattern-listing', array(
+        'attributes' => array(
+          'class' => 'button'
+        )
+      )),
+      '#weight' => 21,
+      '#value' => t('Cancel')
+    );
 
-  $form['field_syndication_feed_type'][LANGUAGE_NONE]['#ajax'] = array(
-    'callback' => 'get_default_feed_pattern_callback',
-    'wrapper' => 'syndication_form', //body-wrapper',
-  );
+    $form['field_syndication_feed_type'][LANGUAGE_NONE]['#ajax'] = array(
+      'callback' => 'get_default_feed_pattern_callback',
+      'wrapper' => 'syndication_form', //body-wrapper',
+    );
 
-  $form['field_syndication_feed_content'][LANGUAGE_NONE]['#ajax'] = array(
-    'callback' => '_pre_define_vars_callback',
-    'method' => 'replace', // the data would replace the field
-    'effect' => 'fade',
-    'event' => 'change', // On change of the selection this action would take place
-  );
-  // Add a new submit function for redirecting after submit
-  $form['actions']['submit']['#submit'][] = 'node_save_redirect_submit';
-  // Add extra validation
-  $form['#validate'][] = 'itg_syndication_form_syndication_feed_from_pattern_node_form_validate';
-  $form['#prefix'] = "<div id='syndication_form'>";
-  $form['#suffix'] = "</div>";
-  unset($form['actions']['preview']);
+    $form['field_syndication_feed_content'][LANGUAGE_NONE]['#ajax'] = array(
+      'callback' => '_pre_define_vars_callback',
+      'method' => 'replace', // the data would replace the field
+      'effect' => 'fade',
+      'event' => 'change', // On change of the selection this action would take place
+    );
+    // Add a new submit function for redirecting after submit
+    $form['actions']['submit']['#submit'][] = 'node_save_redirect_submit';
+    // Add extra validation
+    $form['#validate'][] = 'itg_syndication_form_syndication_feed_from_pattern_node_form_validate';
+    $form['#prefix'] = "<div id='syndication_form'>";
+    $form['#suffix'] = "</div>";
+    unset($form['actions']['preview']);
 }
 
 /**
@@ -941,34 +950,34 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_alter(&$fo
  * @param array $form_state
  */
 function itg_syndication_form_syndication_feed_from_pattern_node_form_validate(&$form, &$form_state) {
-  $arg = arg();
-  $invalid_vars = array();
-  $node = (object) $form_state['values'];
-  $content_type = $node->field_syndication_feed_content['und'][0]['value'];
-  $feed_type = $node->field_syndication_feed_type['und'][0]['value'];
-  $client_title = $node->field_syndication_feed_clients['und'][0]['value'];
-  $xml_pattern = $node->field_syndication_xml_formate['und'][0]['xml'];
-  /* Check only if new node is bening craeted */
-  if (isset($arg[0]) && isset($arg[1]) && $arg[0] == 'node' && $arg[1] == 'add') {
-    $query = db_select('field_data_field_syndication_feed_clients', 'client');
-    $query->leftJoin('field_data_field_syndication_feed_content', 'content_type', 'content_type.entity_id=client.entity_id');
-    $query->leftJoin('field_data_field_syndication_feed_type', 'feed_type', 'feed_type.entity_id=client.entity_id');
-    $query->condition('client.field_syndication_feed_clients_value', $client_title);
-    $query->condition('content_type.field_syndication_feed_content_value', $content_type);
-    $query->condition('feed_type.field_syndication_feed_type_value', $feed_type);
-    $query->fields('client', array('entity_id'));
-    $result = $query->execute()->fetchAll();
+    $arg = arg();
+    $invalid_vars = array();
+    $node = (object) $form_state['values'];
+    $content_type = $node->field_syndication_feed_content['und'][0]['value'];
+    $feed_type = $node->field_syndication_feed_type['und'][0]['value'];
+    $client_title = $node->field_syndication_feed_clients['und'][0]['value'];
+    $xml_pattern = $node->field_syndication_xml_formate['und'][0]['xml'];
+    /* Check only if new node is bening craeted */
+    if (isset($arg[0]) && isset($arg[1]) && $arg[0] == 'node' && $arg[1] == 'add') {
+        $query = db_select('field_data_field_syndication_feed_clients', 'client');
+        $query->leftJoin('field_data_field_syndication_feed_content', 'content_type', 'content_type.entity_id=client.entity_id');
+        $query->leftJoin('field_data_field_syndication_feed_type', 'feed_type', 'feed_type.entity_id=client.entity_id');
+        $query->condition('client.field_syndication_feed_clients_value', $client_title);
+        $query->condition('content_type.field_syndication_feed_content_value', $content_type);
+        $query->condition('feed_type.field_syndication_feed_type_value', $feed_type);
+        $query->fields('client', array('entity_id'));
+        $result = $query->execute()->fetchAll();
 
-    if (count($result) >= 1) {
-      form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Pattern already exists for this client");
+        if (count($result) >= 1) {
+            form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Pattern already exists for this client");
+        }
+        watchdog('debug', "Total " . count($result) . " results founds for combination");
     }
-    watchdog('debug', "Total " . count($result) . " results founds for combination");
-  }
 
-  // For retaing value of markup field.
-  $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
-  #check for all valid variables
-  is_all_vars_valid($xml_pattern, $content_type);
+    // For retaing value of markup field.
+    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
+    #check for all valid variables
+    is_all_vars_valid($xml_pattern, $content_type);
 }
 
 /**
@@ -977,22 +986,22 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_validate(&
  * @param type $content_type
  */
 function is_all_vars_valid($xml_pattern, $content_type) {
-  drupal_add_js('jQuery(document).ready(function(){
+    drupal_add_js('jQuery(document).ready(function(){
             jQuery(".vertical-tabs").css("display","none");
         });', array('type' => 'inline', 'scope' => 'footer'));
-  // extract fields name from text string
-  $var_array = get_vars_from_feed_pattern($xml_pattern);
-  foreach ($var_array[1] as $field_name) {
-    if (!isValidField($field_name, $content_type)) {
-      $invalid_vars[] = $field_name;
-      watchdog('syndication', "invalid variables found");
+    // extract fields name from text string
+    $var_array = get_vars_from_feed_pattern($xml_pattern);
+    foreach ($var_array[1] as $field_name) {
+        if (!isValidField($field_name, $content_type)) {
+            $invalid_vars[] = $field_name;
+            watchdog('syndication', "invalid variables found");
+        }
     }
-  }
-  if (!empty($invalid_vars)) {
-    $invalid_vars_str = implode("<b>, </b>", $invalid_vars);
-    form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Invalid variables are $invalid_vars_str");
-  }
-  watchdog('syndication', "Variable validation pass");
+    if (!empty($invalid_vars)) {
+        $invalid_vars_str = implode("<b>, </b>", $invalid_vars);
+        form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Invalid variables are $invalid_vars_str");
+    }
+    watchdog('syndication', "Variable validation pass");
 }
 
 /**
@@ -1001,10 +1010,10 @@ function is_all_vars_valid($xml_pattern, $content_type) {
  * @param array $form_state
  */
 function node_save_redirect_submit($form, &$form_state) {
-  $arg = arg();
-  if (!isset($_GET['destination'])) {
-    drupal_goto("syndication-feed-pattern-listing");
-  }
+    $arg = arg();
+    if (!isset($_GET['destination'])) {
+        drupal_goto("syndication-feed-pattern-listing");
+    }
 }
 
 /**
@@ -1013,22 +1022,22 @@ function node_save_redirect_submit($form, &$form_state) {
  * @param array $form_state
  */
 function _pre_define_vars_callback(&$form, &$form_state) {
-  // current selected content type.
-  $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
-  // current feed type/
-  $feed_type = $form_state['values']['field_syndication_feed_type']['und'][0]['value'];
-  // change markup of variables as per content type foield is selected
-  $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
-  // Get feeds pattern as per feed type and content type.  
-  $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
-  $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
-  // Commands to replace both variables and value of pattern in field.
-  $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
-  $commands[] = ajax_command_replace("#pre_define_vars_replace_wrapper", render($form['pre_define_vars']));
-  return array(
-    '#type' => 'ajax',
-    '#commands' => $commands,
-  );
+    // current selected content type.
+    $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
+    // current feed type/
+    $feed_type = $form_state['values']['field_syndication_feed_type']['und'][0]['value'];
+    // change markup of variables as per content type foield is selected
+    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
+    // Get feeds pattern as per feed type and content type.  
+    $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
+    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
+    // Commands to replace both variables and value of pattern in field.
+    $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
+    $commands[] = ajax_command_replace("#pre_define_vars_replace_wrapper", render($form['pre_define_vars']));
+    return array(
+      '#type' => 'ajax',
+      '#commands' => $commands,
+    );
 }
 
 /**
@@ -1038,51 +1047,51 @@ function _pre_define_vars_callback(&$form, &$form_state) {
  * @return commands
  */
 function get_default_feed_pattern_callback($form, &$form_state) {
-  $feed_type = $form_state['values']['field_syndication_feed_type']['und'][0]['value'];
-  $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
-  if (!isset($content_type) && empty($content_type)) {
-    $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Pleaes Select Content Type</span>');
-    drupal_get_messages();
-    return array('#type' => 'ajax', '#commands' => $commands);
-  } else {
-    $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
+    $feed_type = $form_state['values']['field_syndication_feed_type']['und'][0]['value'];
     $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
-    $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
-    $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
-    return array(
-      '#type' => 'ajax',
-      '#commands' => $commands,
-    );
-  }
+    if (!isset($content_type) && empty($content_type)) {
+        $commands[] = ajax_command_replace('.poll-ans-error', '<span class="poll-ans-error error">Pleaes Select Content Type</span>');
+        drupal_get_messages();
+        return array('#type' => 'ajax', '#commands' => $commands);
+    } else {
+        $default_xml_pattern = get_default_feed_pattern($feed_type, $content_type);
+        $content_type = $form_state['values']['field_syndication_feed_content']['und'][0]['value'];
+        $form['pre_define_vars']['#markup'] = theme('syndication_feed_variables', array("data" => fieldsArray($content_type), "content_type" => $content_type));
+        $commands[] = ajax_command_invoke(NULL, "feed_pattern", array($default_xml_pattern));
+        return array(
+          '#type' => 'ajax',
+          '#commands' => $commands,
+        );
+    }
 }
 
 function _get_byline_from_nid($nid) {
-  $final_result = array();
-  $query = db_select('itg_multi_byline_info', 'bi');
-  $query->leftJoin('users', 'u', 'u.uid=bi.byline_id');
-  $query->fields('u', array('name'));
-  $query->condition('bi.nid', $nid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  if (!empty($result)) {
-    foreach ($result as $data) {
-      $final_result[] = $data['name'];
+    $final_result = array();
+    $query = db_select('itg_multi_byline_info', 'bi');
+    $query->leftJoin('users', 'u', 'u.uid=bi.byline_id');
+    $query->fields('u', array('name'));
+    $query->condition('bi.nid', $nid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($result)) {
+        foreach ($result as $data) {
+            $final_result[] = $data['name'];
+        }
     }
-  }
-  return $final_result;
+    return $final_result;
 }
 
 function _get_byline_from_nid_for_kindle($nid) {
-  $final_result = array();
-  $query = db_select('itg_multi_byline_info', 'bi');
-  $query->leftJoin('node', 'n', 'n.nid=bi.byline_id');
-  $query->fields('n', array('title'));
-  $query->condition('bi.nid', $nid);
-  $query->groupBy('bi.byline_id');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  if (!empty($result)) {
-    foreach ($result as $data) {
-      $final_result[] = $data['title'];
+    $final_result = array();
+    $query = db_select('itg_multi_byline_info', 'bi');
+    $query->leftJoin('node', 'n', 'n.nid=bi.byline_id');
+    $query->fields('n', array('title'));
+    $query->condition('bi.nid', $nid);
+    $query->groupBy('bi.byline_id');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($result)) {
+        foreach ($result as $data) {
+            $final_result[] = $data['title'];
+        }
     }
-  }
-  return $final_result;
+    return $final_result;
 }

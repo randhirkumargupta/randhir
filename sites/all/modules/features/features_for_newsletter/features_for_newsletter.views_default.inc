@@ -327,10 +327,19 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Template';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Field: Title */
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node_1']['id'] = 'edit_node_1';
+  $handler->display->display_options['fields']['edit_node_1']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node_1']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node_1']['label'] = 'Template';
+  $handler->display->display_options['fields']['edit_node_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node_1']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node_1']['alter']['make_link'] = TRUE;
+  /* Field: Field: Subject Line */
   $handler->display->display_options['fields']['field_news_title']['id'] = 'field_news_title';
   $handler->display->display_options['fields']['field_news_title']['table'] = 'field_data_field_news_title';
   $handler->display->display_options['fields']['field_news_title']['field'] = 'field_news_title';
@@ -380,7 +389,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Survey Start Date  */
+  /* Field: Content: Date */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -405,6 +414,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
   /* Field: Content: Edit link */
@@ -412,6 +422,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
   /* Field: Global: Custom text */
@@ -426,7 +437,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['nid']['label'] = 'Template Id';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Field: Title (field_news_title) */
+  /* Filter criterion: Field: Subject Line (field_news_title) */
   $handler->display->display_options['filters']['field_news_title_value']['id'] = 'field_news_title_value';
   $handler->display->display_options['filters']['field_news_title_value']['table'] = 'field_data_field_news_title';
   $handler->display->display_options['filters']['field_news_title_value']['field'] = 'field_news_title_value';
@@ -610,9 +621,18 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Template';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node_1']['id'] = 'edit_node_1';
+  $handler->display->display_options['fields']['edit_node_1']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node_1']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node_1']['label'] = 'Template';
+  $handler->display->display_options['fields']['edit_node_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node_1']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node_1']['alter']['make_link'] = TRUE;
   /* Field: Content: Newsletter Type */
   $handler->display->display_options['fields']['field_newsl_newsletter_type']['id'] = 'field_newsl_newsletter_type';
   $handler->display->display_options['fields']['field_newsl_newsletter_type']['table'] = 'field_data_field_newsl_newsletter_type';
@@ -662,6 +682,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = 'View';
+  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<span class="view-link">[view_node]</span>';
   /* Field: Content: Edit link */
@@ -669,6 +690,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['text'] = '<span class ="views-action-separator"> | </span> <span class="edit-link">[edit_node]</span>';
   /* Field: Global: Custom text */
@@ -769,7 +791,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '0';
-  /* Filter criterion: Content: op_flag (field_op_flag) */
+  /* Filter criterion: Content: State Flag (field_op_flag) */
   $handler->display->display_options['filters']['field_op_flag_value']['id'] = 'field_op_flag_value';
   $handler->display->display_options['filters']['field_op_flag_value']['table'] = 'field_data_field_op_flag';
   $handler->display->display_options['filters']['field_op_flag_value']['field'] = 'field_op_flag_value';
@@ -906,7 +928,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['counter']['label'] = 'S.No';
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Field: Title */
+  /* Field: Field: Subject Line */
   $handler->display->display_options['fields']['field_news_title']['id'] = 'field_news_title';
   $handler->display->display_options['fields']['field_news_title']['table'] = 'field_data_field_news_title';
   $handler->display->display_options['fields']['field_news_title']['field'] = 'field_news_title';

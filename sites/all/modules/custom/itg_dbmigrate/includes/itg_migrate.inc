@@ -115,8 +115,17 @@ function itg_dbmigrate_migrate_api() {
        'itg_issue' => array(
         'title' => t('Itg issue Imports'),
       ),
-      'itg_supplements' => array(
+       'itg_supplement' => array(
         'title' => t('Itg Supplement Imports'),
+      ),
+      'itg_supplements' => array(
+        'title' => t('Itg supplements new script Imports'),
+      ),
+      'itg_cast' => array(
+        'title' => t('Itg Cast for mega review Imports'),
+      ),
+      'itg_breaking_news' => array(
+        'title' => t('Itg breaking news, Live blog, cricket live blog, news live blog Imports'),
       ),
       /*'itg_magazine' => array(
         'title' => t('Itg magazine Imports'),
@@ -129,9 +138,6 @@ function itg_dbmigrate_migrate_api() {
       'itg_sponsor' => array(
         'title' => t('Itg sponsor Imports'),
       ),
-      'itg_sbreaking_news' => array(
-        'title' => t('Itg breaking news Imports'),
-      ),
       'itg_cooking_tips' => array(
         'title' => t('Itg Cooking Tips Imports'),
       ),
@@ -140,15 +146,14 @@ function itg_dbmigrate_migrate_api() {
       ),
       'itg_recipe' => array(
         'title' => t('Itg recipe Imports'),//pending
-      ),
+      ),*/
       'itg_megareview' => array(
         'title' => t('Itg Megareview Imports'),
-      ),*/
+      ),
 
       'itg_best_college' => array(
         'title' => t('Itg Best College Migration'),
-      ),
-
+      ),  
     ),
 
     // Here we register the individual migrations. The keys (ItgCategory, ItgStory
@@ -225,7 +230,18 @@ function itg_dbmigrate_migrate_api() {
         'class_name' => 'ItgSupplementsMigration',
         'group_name' => 'itg_supplement',
       ),
-     
+      'ItgSupplement' => array(
+        'class_name' => 'ItgSupplementMigration',
+        'group_name' => 'itg_supplement',
+      ),
+       'ItgCast' => array(
+        'class_name' => 'ItgCastMigration',
+        'group_name' => 'itg_cast',
+      ),
+     'ItgBreakingNews' => array(
+        'class_name' => 'ItgBreakingNewsMigration',
+        'group_name' => 'itg_breaking_news',
+      ),
       /*'ItgMagazine' => array(
         'class_name' => 'ItgMagazineMigration',
         'group_name' => 'itg_magazine',
@@ -239,10 +255,7 @@ function itg_dbmigrate_migrate_api() {
         'class_name' => 'ItgSponsorMigration',
         'group_name' => 'itg_sponsor',
       ),
-      'ItgBreakingNews' => array(
-        'class_name' => 'ItgBreakingNewsMigration',
-        'group_name' => 'itg_sbreaking_news',
-      ),
+      
       'ItgCookingTips' => array(
         'class_name' => 'ItgCookingTipsMigration',
         'group_name' => 'itg_cooking_tips',
@@ -254,12 +267,11 @@ function itg_dbmigrate_migrate_api() {
       'ItgRecipe' => array(
         'class_name' => 'ItgRecipeMigration',
         'group_name' => 'itg_recipe',
-      ),
+      ),*/
       'ItgMegareview' => array(
         'class_name' => 'ItgMegareviewMigration',
         'group_name' => 'itg_megareview',
-      ),*/
-
+      ),
     ),
 
   );

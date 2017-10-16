@@ -21,16 +21,16 @@ function itg_octopus_api_menu() {
     'file' => 'includes/itg_octopus_api.inc',
   );
 
-  $items['itg-generate-octopus-notification'] = array(
-    'title' => 'api callback menu',
-    'page callback' => 'itg_generate_octopus_notification',
-    'access arguments' => array('administer itg octopus'),
-  );
+//  $items['itg-generate-octopus-notification'] = array(
+//    'title' => 'api callback menu',
+//    'page callback' => 'itg_generate_octopus_notification',
+//    'access arguments' => array('administer itg octopus'),
+//  );
 
   $items['rundown-listing'] = array(
     'title' => 'Rundown Listing',
     'page callback' => 'itg_octopus_api_rundown_listing',
-    'access arguments' => array('administer itg octopus'),
+    'access arguments' => array('access content'),
     'file' => 'includes/itg_octopus_api.inc',
   );
 
@@ -128,7 +128,7 @@ function itg_octopus_api_menu() {
   $items['rfa-dashboard'] = array(
     'title' => 'RFA Dashboard',
     'page callback' => 'itg_octopus_api_rfa_dashboard',
-    'access arguments' => array('administer itg octopus'),
+    'access arguments' => array('access content'),
     'file' => 'includes/itg_octopus_rfa.inc',
   );
 
@@ -515,7 +515,7 @@ function itg_octopus_get_slug_notification() {
   $user_last_login = db_query("SELECT login from {users} WHERE uid = :uid", array(":uid" => $user->uid))->fetchField();
   $read_o_ids = itg_octopus_get_slug_notif_read_data($user_last_login, $user->uid);
   $query = db_select('itg_octopus_notification', 'ios');
-  $query->fields('ios', array('id', 'type', 'msg', 'hyperlink', 'query_string'));
+  $query->fields('ios', array('id', 'type', 'msg', 'hyperlink', 'query_string', 'time'));
   $query->condition('ios.time', (int) $user_last_login, '>=');
   if (!empty($read_o_ids)) {
     $query->condition('ios.id', $read_o_ids, 'NOT IN');
@@ -526,13 +526,45 @@ function itg_octopus_get_slug_notification() {
   $html = '<ul>';
   $count = 0;
   while ($chunk = $result->fetchObject()) {
-    $hyperlink = $chunk->hyperlink;
-    if (isset($chunk->query_string) && !empty($chunk->query_string)) {
-      $query_array = (array) json_decode($chunk->query_string)->parm;
+    if ($chunk->type == 'task'){
+      $get_id = explode("/", $chunk->hyperlink);
+      $nodeuid = db_query("SELECT field_task_team_member_target_id from {field_data_field_task_team_member} WHERE entity_id = :nid", array(":nid" => $get_id[1]))->fetchField();
+      if ($user->uid == $nodeuid) {
+        $hyperlink = $chunk->hyperlink;
+        if (isset($chunk->query_string) && !empty($chunk->query_string)) {
+          $query_array = (array) json_decode($chunk->query_string)->parm;
+        }
+        $query_array['onotify'] = base64_encode($chunk->id);
+        $html .= '<li>' . l($chunk->msg, $hyperlink, array('query' => $query_array)) . '</li>';
+        ++$count;
+      }
     }
-    $query_array['onotify'] = base64_encode($chunk->id);
-    $html .= '<li>' . l($chunk->msg, $hyperlink, array('query' => $query_array)) . '</li>';
-    ++$count;
+    // 
+    elseif ($chunk->type == 'print') {
+      $print_date = date('Y-m-d H:i:s', $chunk->time);
+      $end = date('Y-m-d H:i:s', strtotime('+1 day'));
+      $get_id = explode("/", $chunk->hyperlink);
+      $nodeuid = db_query("SELECT uid from {node} WHERE nid = :nid", array(":nid" => $get_id[1]))->fetchField();
+      if ($user->uid == $nodeuid && $print_date <= $end) {
+        $hyperlink = $chunk->hyperlink;
+        if (isset($chunk->query_string) && !empty($chunk->query_string)) {
+          $query_array = (array) json_decode($chunk->query_string)->parm;
+        }
+        $query_array['onotify'] = base64_encode($chunk->id);
+        $html .= '<li>' . l($chunk->msg, $hyperlink, array('query' => $query_array)) . '</li>';
+        ++$count;
+      }
+    }
+    else {
+      $hyperlink = $chunk->hyperlink;
+      if (isset($chunk->query_string) && !empty($chunk->query_string)) {
+        $query_array = (array) json_decode($chunk->query_string)->parm;
+      }
+      $query_array['onotify'] = base64_encode($chunk->id);
+      $html .= '<li>' . l($chunk->msg, $hyperlink, array('query' => $query_array)) . '</li>';
+      ++$count;
+    }
+    
   }
 
   if ($count == 0) {

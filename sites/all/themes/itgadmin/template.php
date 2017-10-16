@@ -442,6 +442,10 @@ function itgadmin_preprocess_page(&$vars) {
     , 'election-graph-widget-list'
     , 'dailymotion-video-play'
     , 'solr-unpublish-video'
+    , 'search-unpublish-internal-video'
+    , 'search-publish-internal-video'
+    , 'search-publish-internal-video-singal'
+    , 'search-unpublish-internal-video-singal'
   );
 
   if (in_array(arg(0) , $page_url_except_header_footer) || (arg(0) == 'itg-layout-manager' && arg(2) == 'preview')) {
@@ -495,3 +499,72 @@ function itgadmin_preprocess_node(&$variables) {
     $variables['content'] = $itg_survey_survey_form;
   }
 }
+
+/**
+ * Implementation of hook_js_alter().
+ * {@inheritdoc}
+ * @param array $variables
+ * @return string
+ */
+function itgadmin_js_alter(&$javascript) {
+  //itg admin JS alter
+  $arg = arg();
+  $javascript['sites/all/themes/itgadmin/js/script.js']['scope'] = 'footer';
+  $javascript['sites/all/libraries/colorpicker/js/colorpicker.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/jquery_colorpicker/js/jquery_colorpicker.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/autocomplete_deluxe/autocomplete_deluxe.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itgadmin/js/slick.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/workbench_moderation/js/workbench_moderation.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/pathauto/pathauto.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/metatag/metatag.vertical-tabs.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itgadmin/js/jquery.flexslider.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/autologout/autologout.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/token/token.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/date/date_popup/jquery.timeentry.pack.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/date/date_popup/date_popup.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/clientside_validation/jquery-validate/jquery.validate.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/custom/itg_story/js/autocomplete.limit.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/filefield_sources/filefield_sources.js']['scope'] = 'footer';
+  $javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.core.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.widget.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.button.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.mouse.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.draggable.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.position.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.resizable.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.dialog.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.datepicker.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.menu.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/ui/minified/jquery.ui.autocomplete.min.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']['scope'] = 'footer';
+//  $javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']['scope'] = 'footer';
+
+  /* group for unset image js file 
+  if(($arg[0] != 'node') && ($arg[1] != 'add' && $arg[2] != 'edit')) {
+  unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);  
+  }*/
+  
+  /* group for colorbox js */
+ $unset_array = array('mydraft-story', 'itg-menu-manager', 'in-queue-story', 'published-story', 'expired-story', 'unpublished-story', 'archive-story', 'ugc-published-story');
+  if(in_array($arg[0], $unset_array)) {
+  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+  unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
+  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
+  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
+  unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
+ }
+}
+

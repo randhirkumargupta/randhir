@@ -759,7 +759,7 @@ function itg_poll_get_past_data($nid) {
       $poll_manipulate_val = isset($temp_ents->field_poll_manipulate_value[LANGUAGE_NONE]) ? $temp_ents->field_poll_manipulate_value[LANGUAGE_NONE][0]['value'] : '';
 
       if (isset($polls_answer_image) && $polls_answer_image > 0) {
-        $poll_image = theme('image_style' , array('style_name' => 'thumbnail' , 'path' => file_load($polls_answer_image)->uri));
+        $poll_image = theme('image_style' , array('style_name' => 'widget_small' , 'path' => file_load($polls_answer_image)->uri));
       }
 
       $preoptioncnt = isset($optionarr[$temp_ent_id]->optionCnt) ? $optionarr[$temp_ent_id]->optionCnt : 0;
@@ -790,7 +790,7 @@ function itg_poll_get_past_data($nid) {
     return '<ul class="past-poll">' . $outputnew . '</ul>';
   }
   else {
-    return '<p class="get-result">You will get the result after poll compilation</p>';
+    return '<p class="get-result">You will get the result after poll completion</p>';
   }
 }
 
@@ -1022,15 +1022,15 @@ function itg_poll_form_home_page_ajax_submit($form , &$form_state) {
  * Implements hook_query_TAG_alter()
  */
 function itg_poll_query_poll_landing_past_poll_alter(QueryAlterableInterface $query) {
-  $cur_date = date('Y-m-d H:i:s');
-  $query->leftJoin('field_data_field_poll_end_date' , 'o' , 'node.nid = o.entity_id');
-  $or = db_or();
-  $db_and = db_and();
-  //$or->condition('node.status', 0, '=');
-  $db_and->isNotNull('o.field_poll_end_date_value');
-  $db_and->condition('o.field_poll_end_date_value' , $cur_date , '<');
-  $or->condition($db_and);
-  $query->condition($or);
+//  $cur_date = date('Y-m-d H:i:s');
+//  $query->leftJoin('field_data_field_poll_end_date' , 'o' , 'node.nid = o.entity_id');
+//  $or = db_or();
+//  $db_and = db_and();
+//  //$or->condition('node.status', 0, '=');
+//  $db_and->isNotNull('o.field_poll_end_date_value');
+//  $db_and->condition('o.field_poll_end_date_value' , $cur_date , '<');
+//  $or->condition($db_and);
+//  $query->condition($or);
 }
 
 /**

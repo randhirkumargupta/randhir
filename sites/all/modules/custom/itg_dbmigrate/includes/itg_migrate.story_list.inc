@@ -127,6 +127,8 @@ class ItgStoryListMigration extends XMLMigration {
       'tech_pros' => t('tech_pros'),
       'bigimage' => t('bigimage'),
       'metadescription' => t('metadescription'),
+      'id' => t('id'),
+      'external_url' => t('external_url'),
     );
 
 
@@ -148,7 +150,8 @@ class ItgStoryListMigration extends XMLMigration {
       )
         ), MigrateDestinationNode::getKeySchema()
     );
-    $xml_folder = $file_path.'/migrate/xml_file/stories';
+    $xml_folder = $file_path.'/migrate/xml_file/xml_file_chunk/story';
+
     $list_url = $xml_folder . '/index.xml';
 
 
@@ -178,10 +181,10 @@ class ItgStoryListMigration extends XMLMigration {
     //code for date
     $this->addFieldMapping('created', 'createddate')->xpath('createddate');   
     $this->addFieldMapping('uid', 'createdby')->xpath('createdby')
-        ->defaultValue(1);    
+        ->defaultValue(970);    
     $this->addFieldMapping('changed', 'modifieddate')->xpath('modifieddate');
     $this->addFieldMapping('field_story_schedule_date_time', 'publisheddate')->xpath('publisheddate');
-    $this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate');
+    //$this->addFieldMapping('field_itg_content_publish_date', 'publisheddate')->xpath('publisheddate');
     //$this->addFieldMapping('field_story_expires', 'storyexpires')->xpath('storyexpires');
     //$this->addFieldMapping('field_story_expiry_date', 'storyexpirydate')->xpath('storyexpirydate');
 
@@ -192,8 +195,8 @@ class ItgStoryListMigration extends XMLMigration {
     $this->addFieldMapping('field_story_magazine_story_issue', 'story_issue')->xpath('story_issue');
     $this->addFieldMapping('field_story_select_magazine', 'select_magazine')->xpath('select_magazine');
     $this->addFieldMapping('field_story_select_supplement', 'select_supplement')->xpath('select_supplement');
-    $this->addFieldMapping('field_story_issue_date', 'issue_date')->xpath('issue_date'); //for issue date migration*/
-    //$this->addFieldMapping('field_poll_start_date', 'associatetvdate')->xpath('associatetvdate');
+   // $this->addFieldMapping('field_story_issue_date', 'issue_date')->xpath('issue_date'); //for issue date migration*/
+    //$this->addFieldMapping('field_poll_start_date', 'associatetvdate')->xpath('associatetvdate'); // always blank according santosh not migrate
     
     $this->addFieldMapping('title', 'longheadline')->xpath('longheadline');
     $this->addFieldMapping('field_story_short_headline', 'shortheadline')->xpath('shortheadline');
@@ -343,6 +346,9 @@ class ItgStoryListMigration extends XMLMigration {
         ->defaultValue('migrated');
     //$this->addFieldMapping('field_story_category', 'category')->xpath('categories/category');
     $this->addFieldMapping('field_story_mosimage', 'mosimage')->xpath('mosimage/image');
+    $this->addFieldMapping('field_story_source_id', 'id')->xpath('id'); // source id
+    $this->addFieldMapping('field_story_external_url', 'external_url')->xpath('external_url'); // source id
+    
     
     $this->addUnmigratedDestinations(array('promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new', 'body:summary', 'field_common_by_line_reporter_id', 'field_common_related_content', 'field_emoji', 'field_emoji:format', 'field_emoji_position', 'field_facebook_animated_image:file_class',
       'field_facebook_animated_image:destination_dir',
@@ -411,7 +417,7 @@ class ItgStoryListMigration extends XMLMigration {
       'field_story_featured_name:create_term',
       'field_story_featured_name:ignore_case',
       'field_story_highlights',
-      'field_story_issue_date:timezone',
+     // 'field_story_issue_date:timezone',
       'field_story_issue_date:rrule',
       'field_story_issue_date:to',
       'field_story_itg_tags',
@@ -458,7 +464,7 @@ class ItgStoryListMigration extends XMLMigration {
       'field_story_small_image:source_dir',
       'field_story_small_image:urlencode',
       'field_story_social_media_integ',
-      'field_story_source_id',
+      //'field_story_source_id',
       'field_story_tech_image_gallery:file_class',
       //'field_story_tech_image_gallery:preserve_files',
       'field_story_tech_image_gallery:destination_dir',
@@ -576,6 +582,37 @@ class ItgStoryListMigration extends XMLMigration {
   }
 
   public function prepareRow($row) {
+    if(empty((string) $row->xml->metatags->sefurl)) {
+       $row->xml->metatags->sefurl =  itg_common_custompath_insert_val(trim((string) $row->xml->longheadline));
+    }
+
+   if (isset($row->xml->select_magazine) && !empty($row->xml->select_magazine)) {
+      $issue_source_id = (int) $row->xml->select_magazine;
+      $result_supplement ='';
+      $result_issue_sourceid = $issue_source_id;
+      if(isset($row->xml->primarycategory) && !empty($row->xml->primarycategory) && !empty($row->xml->story_issue)) {
+        // if parent term equal source id = 20# & destid = 1206499 then supplement value 
+        $pquery = db_select('taxonomy_term_hierarchy', 'th');
+        $pquery->fields('th', array('parent'));
+        $pquery->condition('tid', (int) $row->xml->primarycategory, '=');
+        $parent_tid_result = $pquery->execute()->fetchField();
+        if($parent_tid_result == 1206499) { // 20 # 1206499 id for supplement
+          $query = db_select('migrate_map_itgcategory', 'category');
+          $query->fields('category', array('sourceid1'));
+          $query->condition('destid1', (int) $row->xml->primarycategory, '=');
+          $result_supplement = $query->execute()->fetchField();
+          $supplement_id = $result_supplement.'A'.$result_issue_sourceid;
+          $supplement_destid = get_itg_destination_id('migrate_map_itgsupplements', $supplement_id);
+          if(!empty($supplement_destid)) {
+            $row->xml->select_supplement = $supplement_destid;
+          }
+        }
+      }
+      
+      $row->xml->select_magazine = 573; // magazine indiatoday by mail
+   }
+   
+   
     if(empty($row->xml->modifieddate) || ((string) $row->xml->modifieddate == 0)) {
       $row->xml->modifieddate = $row->xml->createddate;
     }
@@ -762,10 +799,10 @@ class ItgStoryListMigration extends XMLMigration {
           $final_option[]['value'] = 'medium_style_comment';
         }
         if ((string) $option->setfeature == 1) {
-          $final_option[]['value'] = 'display_lock';
+          $final_option[]['value'] = 'set_as_featured';
         }
         if ((string) $option->displaylock == 1) {
-          $final_option[]['value'] = 'set_as_featured';
+          $final_option[]['value'] = 'display_lock';
         }
         if ((string) $option->associatetv == 1) {
           $final_option[]['value'] = 'tv';
@@ -785,6 +822,10 @@ class ItgStoryListMigration extends XMLMigration {
 
   public function prepare($node, stdClass $row) {
     $node->teaser = (string) $row->xml->storybody;
+     // Issue based
+    if(isset($row->xml->issue_date) && !empty($row->xml->issue_date)) {
+        $node->field_story_issue_date[LANGUAGE_NONE][0]['value'] = $row->xml->issue_date;
+    }
     if (!empty($row->quotes_new)) {
       $node->field_story_template_quotes[LANGUAGE_NONE] = $row->quotes_new;
     }
@@ -812,6 +853,21 @@ class ItgStoryListMigration extends XMLMigration {
     }
     if(!empty($row->featuredname)){
       $node->field_story_featured_name[LANGUAGE_NONE][0]['tid'] = (string) $row->featuredname;
+    }
+    
+    // Publish Time
+    // publish time for photo
+    $published_date = '';
+    if (!empty((int) $row->xml->publisheddate)) {
+      $published_date = (int) $row->xml->publisheddate;
+    }
+    else {
+      $published_date = (int) $row->xml->createddate;
+    }
+    if(!empty($published_date)) {
+      $mod_time = $published_date;
+      $modi_time = date('Y-m-d H:i:s', $mod_time);
+      $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = $modi_time;
     }
   }
 
@@ -899,7 +955,15 @@ class ItgStoryListMigration extends XMLMigration {
    if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
      itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
    }
-
+   $fid = '';
+   $caption_text = '';
+   if (!empty((string) $row->xml->kicker_image_caption)) {
+              $caption_text = (string) $row->xml->kicker_image_caption;
+              $fid = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
+              if (!empty($fid) && !empty($caption_text)) {
+                image_caption_insert_db($caption_text, $fid);
+              }
+            }
    
    //code for order set
    //if (isset($row->xml->ordering)) {
@@ -946,7 +1010,7 @@ class ItgStoryListMigration extends XMLMigration {
         }
       }
     }
-    
+    $gall_id = '';
     if(!empty($gal_id)){
       $gall_id = serialize($gal_id);
     }
@@ -955,7 +1019,7 @@ class ItgStoryListMigration extends XMLMigration {
       ->fields(array(
           'source_id' => (string) $row->xml->id,
           'nid' => $node->nid,
-          'modified_by' => (string) $row->xml->modifiedby,
+          'modified_by' => (int) $row->xml->modifiedby,
           'modified_date' => (string) $row->xml->modifieddate,
           'gallery_position' => 'story',
           'gallery_id' => $gall_id,

@@ -3,14 +3,17 @@
   <?php
   $url = "#";
   $more_link = "";
+  $section_cat_id = '';
   global $base_url;
   foreach ($rows as $key => $row) :
-    $section_cat_id = trim($row['cat_id_1']);
-    if ($key == 0) {
-      $url = l("More »", 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE));
-    }
-    if ($key > 3) {
-      continue;
+    if (isset($row['cat_id'])) {
+      $section_cat_id = trim($row['cat_id']);
+      if ($key == 0) {
+        $url = l("More »", 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id), 'html' => TRUE));
+      }
+      if ($key > 3) {
+        continue;
+      }
     }
     ?>
     <li class="col-md-3 content-id-<?php print $row['nid'] ?>">          

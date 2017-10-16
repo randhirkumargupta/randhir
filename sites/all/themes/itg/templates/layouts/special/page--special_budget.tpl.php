@@ -137,8 +137,8 @@ if (!empty($device[0])) {
                       </div>      
                   </div>    
                 <?php endif; ?>
-                <div class="row">
-                    <div class="col-md-12 budget-top-block">
+                <div class="row budget-top-block">
+                    <div class="col-md-12">
                 <?php
                 $display_title = "";
                 if($widget_data['itg-block-2']['block_title'] == "")

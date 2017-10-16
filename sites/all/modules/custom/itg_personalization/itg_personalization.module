@@ -7,6 +7,7 @@ module_load_all_includes('inc', 'includes/itg_personalization.helper');
 module_load_all_includes('inc', 'includes/itg_personalization_profile.edit');
 module_load_all_includes('inc', 'includes/itg_personalization_refer.friend');
 module_load_all_includes('inc', 'includes/personalization_content_list');
+module_load_all_includes('inc', 'includes/personalization_follow_unfollow');
 
 /**
  * Implements hook_permission().
@@ -68,6 +69,13 @@ function itg_personalization_menu() {
     'page callback' => 'itg_following_details_callback',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+  );
+  $items['user-remove-follow-activity'] = array(
+    'title' => '',
+    'page callback' => 'itg_personalization_remove_activity',
+    'access arguments' => array('access personalization all content link'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/personalization_follow_unfollow.inc',
   );
 
   return $items;
@@ -211,6 +219,12 @@ function itg_personalization_block_info() {
     'info' => t('Personalized Following'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+
+  $blocks['personalization_manage_follow'] = array(
+    'info' => t('Personalized Manage Follow'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
   return $blocks;
 }
 
@@ -238,6 +252,10 @@ function itg_personalization_getmenu_title() {
       case 'my-following':        
         $sticky_title = t('Following');
         $data_tab = $arg[1];
+        break;
+      case 'my-followers':
+        $sticky_title = t('Following');
+        $data_tab = $arg[1];
     }
     $data['menu_title'] = $sticky_title;
     $data['data_tab'] = $data_tab;
@@ -257,7 +275,7 @@ function itg_personalization_block_view($delta = '') {
   $change_pass_url = '';
   if ($delta == 'personalization_edit_profile') {
     $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-    $change_pass_url = 'http://' . PARENT_SSO . '/sso/change-password/' . $uri;
+    $change_pass_url = PARENT_SSO . '/sso/change-password/' . $uri;
   }
   $block = array();
   $output = '<ul class="profile-edit-tab">';
@@ -313,6 +331,10 @@ function itg_personalization_block_view($delta = '') {
       $data['tab'] = $output;
       $data['form'] = drupal_get_form('itg_personalization_refer_a_friend_form');
       $block['content'] = theme('personalization_edit_profile', array('data' => $data));
+      break;
+    case 'personalization_manage_follow':
+      $block['content'] = _personalization_manage_follow_content();
+      break;
   }
 
   return $block;
@@ -660,13 +682,13 @@ function _personalization_show_content() {
         $output.= '<a title = "Unflag" href="javascript:" class="user-activity" data-rel="' . $value['nid'] . '" data-tag="' . $value['ntype'] . '" data-activity="read_later" data-status="0" class="def-cur-pointer"><i class="fa fa-times" aria-hidden="true"></i><span class="flag-throbber"></span></a>';
       }
 
-      $output.= '</span><a href="javascript:" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>';
-        $output.= '<span class="personal-social-share-links">';
-        $output.= '<a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop(' . "'" .  $actual_link . "'" . ', ' . "'" . $fbSocial_share_title . "'" . ', ' . "'" . $fbdesc . "'" . ', ' . "'" . $file . "'" . ')"><i class="fa fa-facebook"></i></a>';
-        $output.= '<a href="javascript:;" title = "share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(\'' . urlencode($fbSocial_share_title) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a>';
-        $output.= '<a href="javascript:;" title="share on google+" class="google def-cur-pointer" onclick="return googleplusbtn(' . "'" . urlencode($actual_link) . "'" . ')"><i class="fa fa-google-plus" aria-hidden="true"></i></a>';                  
-        $output.= '</span>';
-        $output.= '</div></div><a href="' . $n_url . '">' . $value['title'] . '</a>  </li>';
+       $output.= '</span><a href="javascript:" class="personal-share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>';
+       $output.= '<span class="personal-social-share-links">';
+       $output.= '<a href="javascript:;" title = "share on facebook" class="def-cur-pointer facebook" onclick="fbpop(' . "'" .  $actual_link . "'" . ', ' . "'" . $fbSocial_share_title . "'" . ', ' . "'" . $fbdesc . "'" . ', ' . "'" . $file . "'" . ',' . "'" . $base_url . "'" . ',' . "'" . $value['nid'] . "'" . ')"><i class="fa fa-facebook"></i></a>';
+       $output.= '<a href="javascript:;" title = "share on twitter" class="twitter def-cur-pointer" onclick="twitter_popup(\'' . urlencode($fbSocial_share_title) . ',' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a>';
+       $output.= '<a href="javascript:;" title="share on google+" class="google def-cur-pointer" onclick="return googleplusbtn(' . "'" . urlencode($actual_link) . "'" . ')"><i class="fa fa-google-plus" aria-hidden="true"></i></a>';                  
+       $output.= '</span>';
+       $output.= '</div></div><a href="' . $n_url . '">' . $value['title'] . '</a>  </li>';
       }
         
       } // close for foreach
@@ -828,4 +850,190 @@ function itg_personalization_refer_friend_existence($mail) {
   return $record = $result->fetchAll(PDO::FETCH_ASSOC);
 }
 
+/**
+ * Manage follow/unfollow in personalization page.
+ * @return string
+ */
+function _personalization_manage_follow_content() {
+  global $user;
+  if (function_exists('mongodb'))
+  {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cursor = $people->find(array('uid' => $user->uid, 'status' => '1'));
+    $output = '';
+
+    foreach ($cursor as $row) {
+      $result[$row['ntype']][] = $row;
+    } // close for foreach
+    $cnt_anchor = count($result['anchor']) -1;
+    $cnt_author = count($result['author']) -1;
+    $cnt_tag = count($result['tag']) -1;
+    $output.= "<div class='itg-personalization-text'>".t('Here you can view all the Authors and Topics currently being followed by you.')."</div>";
+    $output.= '<div class="personal-list"><div class="personal-follow"><a class="letter" id="follow-author" href="#">Author</a><a class="letter" id="follow-topics" href="#">Topics</a><a class="letter activetab" id="follow-anchor" href="#">Anchor</a></div>';
+    foreach ($result as $key => $rows) {
+      if(is_array($rows) && count($rows) > 0) {
+        foreach ($rows as $id => $value) {
+          // for author
+          if ($key == 'author') {
+            if ($id == '0') {
+              $output .= '<ul class="personal-lists-col follow-author">';
+              $output .= "<li class='mhide'><h3>Author</h3></li>";
+            }
+            if ($value['title']) {
+              $output .= "<li class='follow-author'><button class='btn btn-sm btn-dang er delete_class' id='".$value['nid'] ."' >X</button><span>" . $value['title'] . "</span></li>";
+            }
+            if ($id == $cnt_author) {
+              $output .= '</ul>';
+
+            }
+
+          }
+          // for tag
+          if ($key == 'tag') {
+            if ($id == '0') {
+
+              $output .= '<ul class="personal-lists-col follow-topics">';
+              $output .= "<li class='mhide'><h3>Topics</h3></li>";
+            }
+            $output .= "<li class='follow-topics'><button class='btn btn-sm btn-dang er delete_class' id='".$value['nid'] ."' >X</button><span>" . $value['title'] . "</span></li>";
+            if ($id == $cnt_tag) {
+              $output .= '</ul>';
+
+            }
+
+          }
+          // for anchor
+          if ($key == 'anchor') {
+            if ($id == '0') {
+              $output .= '<ul class="personal-lists-col follow-anchor">';
+              $output .= "<li class='mhide'><h3>Anchor</h3></li>";
+            }
+            $output .= "<li><button class='btn btn-sm btn-danger delete_class' id='".$value['nid']."' >X</button><span>" . $value['title'] . "</span></li>";
+            if ($id == $cnt_anchor) {
+              $output .= '</ul>';
+
+            }
+
+          }
+        }
+      }
+    }
+    return $output .= '</div>';
+  }
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_personalization_cronapi($op, $job = NULL) {
+  $items['personalization_follow_mail'] = array(
+    'description' => 'send follow story to Mail by author / topic.',
+    'weight' => 5,
+    'callback' => 'itg_personalization_send_follow_mail',
+  );
+  $items['personalization_follow_mail_anchor'] = array(
+    'description' => 'send follow story to Mail by anchor.',
+    'weight' => 5,
+    'callback' => 'itg_personalization_follow_mail_for_anchor',
+  );
+  return $items;
+}
+
+
+/**
+ * Implements callback function for 'itg_personalization_send_follow_mail'
+ * @return bool
+ */
+function itg_personalization_send_follow_mail() {
+  module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+  $data = _get_following_user_story();
+
+  if (!empty($data)) {
+    $story_url = $data['node_url'];
+    foreach ($data['author'] as $follow_user) {
+      $node_type = $obj = (object) array('type' => 'story');
+      $uname = user_load($follow_user);
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
+        $mail_body_author = str_replace('[itg_mail_token:itg_account_user_fname]', $uname->name, $mail_data->field_mail_body_follow_story[LANGUAGE_NONE][0]['value']);
+        $mail_content_title = str_replace('[itg_mail_token:itg_node_title]', $type, $mail_body_author);
+        $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
+        $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+      }
+
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => $mail_subject,
+      );
+
+      $to = itg_get_user_email_by_id($follow_user);
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      }
+    }
+
+    // for topic
+    foreach ($data['tag'] as $follow_user) {
+      $node_type = $obj = (object) array('type' => 'story');
+      $uname = user_load($follow_user);
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
+        $mail_body_author = str_replace('[itg_mail_token:itg_account_user_fname]', $uname->name, $mail_data->field_mail_body_follow_story[LANGUAGE_NONE][0]['value']);
+        $mail_content_title = str_replace('[itg_mail_token:itg_node_title]', $type, $mail_body_author);
+        $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
+        $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+      }
+
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => $mail_subject,
+      );
+
+      $to = itg_get_user_email_by_id($follow_user);
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      }
+    }
+  }
+  return TRUE;
+}
+
+/**
+ * Implements callback function for 'itg_personalization_follow_mail_for_anchor'
+ * @return bool
+ */
+function itg_personalization_follow_mail_for_anchor() {
+  module_load_include('inc', 'itg_ugc', 'include/itg_follow_story_mail');
+  $data = _get_following_user_anchor();
+  if (!empty($data)) {
+    $story_url = $data['node_url'];
+    foreach ($data['anchor'] as $follow_user) {
+      $node_type = $obj = (object) array('type' => 'story');
+      $uname = user_load($follow_user);
+      if (function_exists('itg_mail_templates_get_mailcontent')) {
+        $mail_data = itg_mail_templates_get_mailcontent($node_type, 'Follow Story');
+        $mail_body_author = str_replace('[itg_mail_token:itg_account_user_fname]', $uname->name, $mail_data->field_mail_body_follow_story[LANGUAGE_NONE][0]['value']);
+        $mail_content_title = str_replace('[itg_mail_token:itg_node_title]', $type, $mail_body_author);
+        $mail_contents = str_replace('[itg_mail_token:itg_node_title_link]', $story_url, $mail_content_title);
+        $mail_subject = $mail_data->field_mail_subject_follwo_story[LANGUAGE_NONE][0]['value'];
+      }
+
+      $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_contents);
+      $params = array(
+        'body' => $mail_content,
+        'subject' => $mail_subject,
+      );
+      $to = itg_get_user_email_by_id($follow_user);
+      if (!empty($to)) {
+        $mail = drupal_mail('itg_ugc_user', 'send_mail_to_follow_story_user', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+      }
+    }
+
+  }
+  return TRUE;
+}
 

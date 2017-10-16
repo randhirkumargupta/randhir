@@ -207,11 +207,11 @@ function itg_survey_form_after_build($form , &$form_state) {
   );
 
   // Hide multiple answer options in case of "rating" 
-  for ($ques = 0; $ques <= $form['field_survey_add_questions']['und']['#max_delta']; $ques++) {
-    if ($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_type'][LANGUAGE_NONE]['#default_value'][0] == 'rating') {
-      unset($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_option_2']);
-    }
-  }
+//  for ($ques = 0; $ques <= $form['field_survey_add_questions']['und']['#max_delta']; $ques++) {
+//    if ($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_type'][LANGUAGE_NONE]['#default_value'][0] == 'rating') {
+//      unset($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_option_2']);
+//    }
+//  }
 
   // Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
@@ -746,7 +746,10 @@ function itg_survey_send_mail_for_notification($nid) {
     'body' => $mail_content ,
     'subject' => 'India Today | Survey Expired' ,
   );
-  $user_email_str = $user->mail;
+  if (isset($user->status) && $user->status == 1) {
+    $user_email_str = $user->mail;
+  }
+
   drupal_mail('itg_survey_send_notification' , 'send_survey_noti' , $user_email_str , language_default() , $params , 'no-reply@kelltontech.com' , TRUE);
 
   // Update mail status after sending notification      
@@ -1020,10 +1023,10 @@ function itg_survey_survey_form_validate($form , &$form_state) {
         if ($form_detail['question_skip' . $ques_num] !== 'yes') {
           $txt_ans_flag = FALSE;
           for ($text_field = 0; $text_field < $form_detail['textfield_total_count']; $text_field++) {
-            if ($form_detail['answer_option' . $ques_num . '_' . $text_field] !== '') {
+            if (trim($form_detail['answer_option' . $ques_num . '_' . $text_field]) !== '') {
               $txt_ans_flag = TRUE;
             }
-          }
+          }          
           if (!$txt_ans_flag) {
             form_set_error('answer_option' . $ques_num , t('Question "@questiontitle" is required.' , array('@questiontitle' => $form_detail['question' . $ques_num])));
           }

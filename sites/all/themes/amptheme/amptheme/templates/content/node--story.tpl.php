@@ -307,7 +307,11 @@ if (!empty($content)):
               </div>
               <div class="description">
                 <?php
+                if(function_exists('itg_custom_amp_body_filter')) {
+                $story_body = itg_custom_amp_body_filter($node->body['und'][0]['value']);
+                } else {
                 $story_body = $node->body['und'][0]['value'];
+                }
                 // check video is delete form video content   
                 if (function_exists('itg_videogallery_remove_delete_video_form_body_html_body')) {
                   itg_videogallery_remove_delete_video_form_body_html_body($story_body);
@@ -375,7 +379,7 @@ if (!empty($content)):
                   $story_body = str_replace('[ITG:SURVEY:'.$survey_nid.']', '', $story_body);
                 }
                 
-                $movie_html = itg_story_movie_image_plugin_data($node->nid, 'amp');
+                $movie_html = $content['amp_movie_plugin'];
                 if (strpos($story_body, '[ITG:TECH-PHOTOS]')) {
                   if (!empty($node->field_story_technology['und'])) {
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', $movie_html, $story_body);
@@ -450,7 +454,7 @@ if (!empty($content)):
                <?php
                  if (!empty($node->field_photo_story)) {
                    //$output = itg_story_photo_story_html($node->nid);
-                   $output = itg_story_photo_amp_html($node->nid);
+                   $output = $content['amp_photo_story_html'];
                    print $output;
                  }
                  ?>
@@ -458,7 +462,7 @@ if (!empty($content)):
             <?php
             if (!empty($node->field_photo_story)) {
               //$html_output = itg_story_photo_story_bottom_html($node->nid);
-              $html_output = itg_story_photo_amp_bottom_html($node->nid);
+              $html_output = $content['amp_photo_story_bottom_html'];
               print $html_output;
             }
             ?>

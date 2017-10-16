@@ -27,16 +27,16 @@ function itg_fia_xml_node_feed($query) {
   foreach ($nodes as $node) {
     if ($node->workbench_moderation['current']->state == 'published') {
       $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
-      $pubdate = date('Y-m-d h:i:s+05:30', $node->workbench_moderation['current']->timestamp);
+      $pubdate = date('Y-m-d\Th:i:s\Z', $node->workbench_moderation['current']->timestamp);
     } else {
       $op_pub = date('F j, h:i a', $node->created);
-      $pubdate = date('Y-m-d h:i:s+5:30', $node->created);
+      $pubdate = date('Y-m-d\Th:i:s\Z', $node->created);
     }
     $guid = $node->nid . " at " . $base_url;
     $op_modified = date('F j, h:i a', $node->changed);
-    $modified = date('Y-m-d h:i:s+5:30', $node->changed);
+    $modified = date('Y-m-d\Th:i:s\Z', $node->changed);
     $auth_name = get_author_name($node->nid);
-    $desc = $node->field_story_long_head_line[LANGUAGE_NONE][0]['value'];
+    $desc = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
     $embed_code_data = $node->field_social_embed_code[LANGUAGE_NONE][0]['value'];
     $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
@@ -101,7 +101,7 @@ function itg_fia_xml_node_feed($query) {
             $get_script .= '<figure><img src="' . $imgs_path . '" /></figure>';
           }
         }
-        $full_script_slider[$gall_position] = '<figure class="op-slideshow">' . $get_script . '</figure>';
+        $full_script_slider[$gall_position][] = '<figure class="op-slideshow">' . $get_script . '</figure>';
       }
     }
     
@@ -204,23 +204,40 @@ function itg_fia_xml_node_feed($query) {
     // Creating Slideshow for facebook instant article data
     if (!empty($imgs_path)) {
       $slider_keys = array_keys($full_script_slider);
-      foreach ($slider_keys as $xx => $sliderkey) {
-        $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey];
-      }
-    }
-    
-    // Creating Social Embed Code for facebook instant article data
-    if (!empty($embed_code_data)) {
-      if (in_array($embed_code_pos, $bk)) {
-        $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] .
-          '<figure class="op-interactive">' . $embed_code_data . '</figure>';
-      } else {
-        $last_postion = end($bk);
-        $body_vals[$last_postion] = $body_vals[$last_postion] .
-          '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+      foreach ($slider_keys as $k => $sliderkey) {
+        $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey][0];
       }
     }
 
+    // Creating Social Embed Code for facebook instant article data
+    if (!empty($embed_code_data)) {
+      if (in_array($embed_code_pos, $bk)) {
+        $eic = substr_count($embed_code_data, '<iframe');
+        if ($eic > 1) {
+          $newiframe = str_replace(" />", "></iframe>", $embed_code_data);
+          $fie = explode("<iframe", $newiframe);
+          unset($fie[0]);
+          foreach ($fie as $fie_key => $fie_val) {
+            $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . '<figure class="op-interactive"><iframe ' . $fie_val . '</figure>';
+          }
+        } else {
+          $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+        }
+      } else {
+        $last_postion = end($bk);
+        $eic = substr_count($embed_code_data, '<iframe');
+        if ($eic > 1) {
+          $newiframe = str_replace(" />", "></iframe>", $embed_code_data);
+          $fie = explode("<iframe", $newiframe);
+          unset($fie[0]);
+          foreach ($fie as $fie_key => $fie_val) {
+            $body_vals[$last_postion] = $body_vals[$last_postion] . '<figure class="op-interactive"><iframe ' . $fie_val . '</figure>';
+          }
+        } else {
+          $body_vals[$last_postion] = $body_vals[$last_postion] . '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+        }
+      }
+    }
     $node_body = implode("<p>", $body_vals);
     $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
@@ -234,16 +251,11 @@ function itg_fia_xml_node_feed($query) {
       'link' => $base_url . '/' . current_path(),
   );
 
-  header("Content-Type: text/xml");
-  $output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>";
-  $output .= "<rss version='2.0' xml:base='" . $xml_base . "' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:atom='http://www.w3.org/2005/Atom'>";
+  $output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>\n";
+  $output .= "<rss version='2.0' xml:base='" . $xml_base . "' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:atom='http://www.w3.org/2005/Atom'>\n";
   $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items);
-  $dom = new DOMDocument;
-  $dom->preserveWhiteSpace = false;
-  $dom->formatOutput = true;
-  $dom->loadXML($output);
-  echo $dom->saveXML();
-  exit;
+  drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');
+  print $output;
 }
 
 /**
@@ -251,15 +263,15 @@ function itg_fia_xml_node_feed($query) {
  */
 function itg_fia_xml_format_rss_channel($title, $link, $items) {
 
-  $output = "<channel>";
-  $output .= "<title>" . $title . "</title>";
-  $output .= "<link>" . check_url($link) . "</link>";
-  $output .= "<description>" . t("Facebook Instant Articles feed") . "</description>";
-  $output .= "<language>en</language>";
-  $output .= "<atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />";
+  $output = "  <channel>\n";
+  $output .= "    <title>" . $title . "</title>\n";
+  $output .= "    <link>" . check_url($link) . "</link>\n";
+  $output .= "    <description>" . t("Facebook Instant Articles feed") . "</description>\n";
+  $output .= "    <language>en</language>\n";
+  $output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />\n";
   $output .= $items;
-  $output .= "</channel>";
-  $output .= "</rss>";
+  $output .= "  </channel>\n";
+  $output .= "</rss>\n";
 
   return $output;
 }
@@ -268,64 +280,60 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
  * Creates the xml item.
  */
 function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
-
-  $output = "<item>";
-  $output .= "<title>" . $title . "</title>";
-  $output .= "<link>" . check_url($link) . "</link>";
-  $output .= "<guid>" . $guid . "</guid>";
-  $output .= "<pubDate><![CDATA[" . $pubdate . "]]></pubDate>";
-  $output .= "<author>" . $name . "</author>";
-  $output .= "<description>" . $desc . "</description>";
-  $output .= "<contentencoded>";
-  $output .= "<![CDATA[";
-  $output .= "<!doctype html>";
-  $output .= "<html lang='en' prefix='op: http://media.facebook.com/op#'>";
-  $output .= "<head>";
-  $output .= "<meta charset='utf-8'>";
-  $output .= "<meta property ='fb:op-recirculation-ads' content=placement_id=".'xxxxxx'.">";
-  $output .= "<meta property='fb:use_automatic_ad_placement' content='enable=true ad_density=default'>";
-  $output .= "<meta property='op:markup_version' content='v1.0'>";
-  $output .= "<meta property='og:title' content='" . $title . "'>";
-  $output .= "<meta property='og:description' content='" . $desc . "'>";
-  
-  
-  $output .= "<link rel='canonical' href='" . $link . "'>";
-  $output .= "<link rel='stylesheet' title='default' href='#'>";
-  $output .= "<meta property='op:markup_version' content='v1.0'>";
-  $output .= "</head>";
-  $output .= "<body>";
-  $output .= "<article>";
-  $output .= "<header>";
+  $output = "    <item>\n";
+  $output .= "      <title>" . $title . "</title>\n";
+  $output .= "      <link>" . check_url($link) . "</link>\n";
+  $output .= "      <guid>" . $guid . "</guid>\n";
+  $output .= "      <pubDate><![CDATA[" . $pubdate . "]]></pubDate>\n";
+  $output .= "      <author>" . $name . "</author>\n";
+  $output .= "      <description>" . $desc . "</description>\n";
+  $output .= "    <content:encoded>\n";
+  $output .= "    <![CDATA[\n";
+  $output .= "    <!doctype html>\n";
+  $output .= "    <html lang='en' prefix='op: http://media.facebook.com/op#'>\n";
+  $output .= "    <head>\n";
+  $output .= "    <meta charset='utf-8'>\n";
+  $output .= "    <meta property ='fb:op-recirculation-ads' content=placement_id=".'xxxxxx'.">\n";
+  $output .= "    <meta property='fb:use_automatic_ad_placement' content='enable=true ad_density=default'>\n";
+  $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
+  $output .= "    <meta property='og:title' content='" . $title . "'>\n";
+  $output .= "    <meta property='og:description' content='" . $desc . "'>\n";
+  $output .= "    <link rel='canonical' href='" . $link . "'>\n";
+  $output .= "    <link rel='stylesheet' title='default' href='#'>";
+  $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
+  $output .= "    </head>\n\n";
+  $output .= "    <body>\n";
+  $output .= "    <article>\n";
+  $output .= "    <header>\n";
   // <!-- The header image shown inside your article --> 
-  $output .= "<figure data-feedback='fb:likes, fb:comments'>";
-  $output .= "<img src='" . $fb_instant_image . "' />";
-  $output .= "<figcaption class='op-vertical-below'>";
-  $output .= "<h1>" . "CAPTION GOES HERE" . "</h1>";
-  $output .= "</figcaption>";
-  $output .= "</figure>";
-  $output .= "<h1>" . $title . "</h1>";
-  $output .= "<h2>" . $kicker . "</h2>";
+  $output .= "    <figure data-feedback='fb:likes, fb:comments'>";
+  $output .= "     <img src='" . $fb_instant_image . "' />";
+  $output .= "     <figcaption class='op-vertical-below'>";
+  $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>";
+  $output .= "     </figcaption>";
+  $output .= "    </figure>";
+  $output .= "    <h1>" . $title . "</h1>";
+  $output .= "    <h2>" . $kicker . "</h2>";
   // <!-- A kicker for your article -->
-  $output .= "<h3 class='op-kicker'>" . $kicker . "</h3>";
+  $output .= "      <h3 class='op-kicker'>" . $kicker . "</h3>\n";
   // <!-- The author of your article -->
-  $output .= "<address>" . $name . "</address>";
-  $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
-  $output .= "<time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
-  $output .= "</header>";
-  
-  $output .= "<div property='content:encoded'>" . $node_body_content . "</div>";
-  $output .= "<footer>";
+  $output .= "      <address>" . $name . "</address>\n";
+  $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
+  $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>\n";
+  $output .= "    </header>\n\n";
+  $output .= "    <div property='content:encoded'>" . $node_body_content . "</div>\n";
+  $output .= "    <footer>\n";
   // <!-- Credits for your article -->
-  $output .= "<aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>";
+  $output .= "    <aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>\n";
   // <!-- Copyright details for your article -->
-  $output .= "<small>© Facebook</small>";
-  $output .= "</footer>";
-  $output .= "</article>";
-  $output .= "</body>";
-  $output .= "</html>";
-  $output .= "]]>";
-  $output .= "</contentencoded>";
-  $output .= "</item>";
+  $output .= "    <small>© Facebook</small>\n";
+  $output .= "    </footer>\n\n";
+  $output .= "    </article>\n\n";
+  $output .= "    </body>\n\n";
+  $output .= "    </html>\n\n";
+  $output .= "    ]]>\n\n";
+  $output .= "    </content:encoded>\n\n";
+  $output .= "    </item>\n\n";
   return $output;
 }
 

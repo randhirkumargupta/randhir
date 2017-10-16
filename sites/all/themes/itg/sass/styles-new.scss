@@ -244,6 +244,12 @@ input[type="text"] {
                         border: 1px solid #fff;
                     }
                 }
+                &:first-child {
+                    padding-left: 0;
+                }
+                &:last-child {
+                    padding-right: 0;
+                }
             }
         }
     }
@@ -376,6 +382,7 @@ input[type="text"] {
 
 .itg-h321-section {
     .tech_reviews,
+    .tech_reviews-block_5,
     .auto_reviews,
     .dont_miss {
         height: 100%;
@@ -433,6 +440,8 @@ input[type="text"] {
     font-size: 16px;
     padding: 0;
     font-weight: 600;
+    margin-bottom: 5px;
+    height: auto;
     a {
         color: #323232;
     }
@@ -440,7 +449,7 @@ input[type="text"] {
 
 .sidebar-section-photo {
     .itg-widget {
-        margin: 35px 0;
+        /*margin: 35px 0; for video page sidebar */
         position: relative;
     }
 }
@@ -559,7 +568,6 @@ input[type="text"] {
 }
 
 .featured-news .featured-post h3 {
-    max-height: 96px;
     overflow: hidden;
     margin-top: 5px;
     line-height: 22px;
@@ -589,11 +597,12 @@ input[type="text"] {
     height: 100%;
 }
 
-.itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
+
+/*.itg-layout-container .top-colum-3 .itg-widget-parent .droppable,
 .itg-layout-container .itg-top-section .top-colum-2 .droppable,
 .itg-layout-container .itg-top-section .top-colum-1 .droppable {
     margin-bottom: 50px;
-}
+}*/
 
 #block-block-1 {
     border-top: 1px solid #ddd;
@@ -1689,6 +1698,10 @@ input[type="text"] {
                         margin-top: -3px;
                         line-height: 18px;
                         padding-left: 0;
+                        line-height: 20px;
+                        a {
+                            color: #0783ec;
+                        }
                         &:before {
                             content: '|';
                             margin: 0 5px 0 0;
@@ -1983,6 +1996,9 @@ input[type="text"] {
             &:hover {
                 box-shadow: 0 0 5px 0 #999;
             }
+        }
+        &:after {
+            display: none;
         }
     }
 }
@@ -2399,6 +2415,7 @@ body.has-cart-popup {
                 .form-type-checkbox {
                     >label {
                         height: 127px;
+                        margin-bottom: 20px;
                     }
                 }
             }
@@ -3717,6 +3734,7 @@ body {
         width: 200px;
         text-align: left;
         margin-right: 7px;
+        margin-bottom: 10px;
         >label {
             display: block;
             text-align: left;
@@ -5048,6 +5066,15 @@ article.node-mega-review-critic {
     }
     +.vukkul-comment {
         margin-top: 50px;
+    }
+    .dots-know-more {
+        text-align: right;
+        padding: 15px;
+        background: #f7f7f7;
+        font-family: roboto;
+        font-size: 13px;
+        font-weight: 600;
+        color: #818181;
     }
 }
 
@@ -6428,7 +6455,6 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
             li {
                 display: inline-block;
                 vertical-align: top;
-                margin-right: 2px;
                 max-width: 96px;
                 a {
                     padding: 10px;
@@ -7293,3 +7319,52 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
         right: 3px;
     }
 }
+
+
+/*css start by arun */
+
+.block-itg-personalization .personal-menu-tab-mobile .tab-text {
+    display: block;
+    color: #4f4f4f;
+    font: 400 14px/24px Roboto;
+    padding: 8px 8px 8px 40px;
+    background-color: #e7e5e6;
+    height: 36px;
+    background: url(../images/followunB.gif) no-repeat 0 5px;
+    margin-left: 10px;
+}
+
+
+/*css end by arun */
+
+
+/*css Mega Review || Mobile */
+
+#block-itg-mega-reviews-critics-mega-review-mobile-header {
+    .comment-mobile {
+        background: #1c1c1c;
+        font-family: $itg-roboto;
+        text-align: right;
+        ul {
+            @include display-inline;
+            li {
+                @include display-inline;
+                a {
+                    color: #c0c0c0;
+                    padding: 10px 5px;
+                    display: block;
+                    text-transform: uppercase;
+                    i {
+                        font-size: 16px;
+                    }
+                }
+            }
+            &.social-share {
+                display: none;
+            }
+        }
+    }
+}
+
+
+/*css end Mega Review || Mobile  */

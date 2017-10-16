@@ -27,9 +27,9 @@ class ItgIssueMigration extends XMLMigration {
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
     
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/issue-supplement-scp/issue-suppliments/';
     
-    $items_url = $xml_folder . 'all_issue.xml';
+    $items_url = $xml_folder . 'indiatoday_issue_2017.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -66,8 +66,8 @@ class ItgIssueMigration extends XMLMigration {
     // (ex. xpath=name is equivalent to a full xpath of
     // /categories/category/name)
     
-    $this->addFieldMapping('title', 'issue_date')->xpath('issue_date');
-    $this->addFieldMapping('field_issue_title', 'issue_date')->xpath('issue_date');
+    //$this->addFieldMapping('title', 'issue_date')->xpath('issue_date');
+    //$this->addFieldMapping('field_issue_title', 'issue_date')->xpath('issue_date');
     $this->addFieldMapping('field_issue_magazine', 'magazine')->xpath('magazine');
     $this->addFieldMapping('status', 'publish')->xpath('publish');
     
@@ -117,13 +117,28 @@ class ItgIssueMigration extends XMLMigration {
 //      $node->field_issue_supplement[LANGUAGE_NONE][]['target_id'] = $new_supplement;
 //    }
     
+    $issue_date = '';
+    if (!empty((int) $row->xml->issue_date)) {
+      $issue_date = (int) $row->xml->issue_date;
+    }
+    else {
+      $issue_date = (int) $row->xml->issue_date;
+    }
+    if(!empty($issue_date)) {
+      $mod_time = $issue_date;
+      $modi_time = date('Y-m-d 00:00:00', $mod_time);
+      $node->field_issue_title[LANGUAGE_NONE][0]['value'] = $modi_time;
+      $node->title = $modi_time;
+    }
+    
     $node->uid = 970; //siteadmin;
   }
   public function complete($entity, $row) {
   print $row->xml->id.' ';
     if(!empty($row->xml->weburl)){
-      $year = date('Y', (string) $row->xml->issue_date);
-      $new_redirect = 'calendar/'.$entity->nid.'/'.$year.'/magazine.html';
+      $year = date('d-m-Y', (string) $row->xml->issue_date);
+      //$new_redirect = 'calendar/'.$entity->nid.'/'.$year.'/magazine.html';
+      $new_redirect = 'magazine/'.$year;
       $source = explode('indiatoday.intoday.in/', (string) $row->xml->weburl);
       $redirect = new StdClass();
       redirect_object_prepare($redirect);

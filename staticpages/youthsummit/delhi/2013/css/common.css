@@ -1,0 +1,340 @@
+@font-face {
+    font-family: 'Arial-Black';
+    src: url('/staticpages/main/font/ab.eot');
+    src: url('/staticpages/main/font/ab.eot?#iefix') format('embedded-opentype'),
+         url('/staticpages/main/font/ab.woff') format('woff'),
+         url('/staticpages/main/font/ab.ttf') format('truetype'),
+         url('/staticpages/main/font/ab.svg#"Arial-Black"') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+/* CSS Reset */
+	body { padding:0px; margin:0px;  font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#383838; line-height:20px; background:#d6d6d6 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/main_bg.jpg) center top repeat-y;}
+.contest_bg {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/header.jpg) center top no-repeat; width:100%}
+	.speakers_bg {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/speakers-head.jpg) center top no-repeat; }
+	.sponcer_bg {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/sponsors.jpg) center top no-repeat;}
+	a { text-decoration:underline; color:#383838}
+	a:hover { text-decoration:none; color:#383838}
+	p, h1, h2, h3, ul, form { padding:0px; margin:0px}
+	#main_container { width:961px; padding-top:360px; margin:0 auto;}
+	.nobg { background-image:none}
+	/*.nav {clear:both; padding-bottom:55px; display:block}
+	.nav ul { }
+	.nav ul li { font-weight:bold; list-style:none; text-transform:uppercase; display:inline;}
+	.nav ul li a { color:#383838; text-decoration:none; padding:5px 15px;  padding:5px 14px\9; float:left}
+	.nav ul li a:hover { color:#fff; text-decoration:none; background:#828282; border-radius:3px;  }
+	.nav ul li a.active{ color:#fff; text-decoration:none; background:#828282; border-radius:3px;  }*/
+	h1 { font-size:20px; font-weight:bold; color:#b92e70; text-transform:uppercase; overflow:hidden; border-bottom:1px solid #ccc;  height:25px; }
+	h2 { font-size:18px; color:#d30011; text-align:center; line-height:26px; }
+	
+	h1 span { font-size:16px; color:#383838; float:right; font-weight:normal; text-transform:capitalize; margin-bottom:15px; }
+	.fee-area { background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/bg1.gif) left top no-repeat; width:921px; height:161px; color:#fff; padding:20px;}
+	.fee-area p { padding:3px 0px}
+	.fee-area div { font-size:12px; line-height:16px; padding-top:6px;}
+	td { height:40px; }
+	td input, select, TEXTAREA { width:236px; height:30px; padding:2px; background:#eaeaea; border:1px solid #c8c8c8; border-radius:5px;}
+	.submit { width:125px; height:40px; text-align:center; line-height:40px; color:#fff; text-transform:uppercase; background:#b72f6f; border:none; font-weight:bold; font-size:22px;}
+	.help_sec { background:#393939; overflow:hidden; font-size:14px; color:#fff;}
+	.help_sec .help { background:#b92f6d url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/arrow3.gif) 96px center no-repeat; padding:10px 55px 10px 10px; font-weight:bold; color:#fff; text-transform:uppercase; float:left; line-height:25px;  }
+	.help_sec .fl { width:350px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/line.gif) right center no-repeat; line-height:18px; float:left; padding-left:30px; font-size:14px; padding-top:6px}
+	.help_sec .fr { width:350px; line-height:18px; float:left; padding-left:30px; font-size:14px; padding-top:6px}
+	.help_sec .fr a { color:#fff; text-decoration:none;}
+	.help_sec .fr a:hover { color:#fff; text-decoration:underline;}
+	
+	#footer-out { width:100%; position:fixed; bottom:0px; background:#f6ed22; left:0px; box-shadow: 0px 0px 5px #333; } 
+	#footer { background:#f6ed22; padding:10px 20px 5px; overflow:hidden; width:950px; margin:0 auto;   } 
+	.timer { width:300px; float:left; margin-right:15px;}
+ .add { width:355px; float:left; margin-right:15px; background:#fff url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/jp-scroll.gif) left 3px no-repeat; padding-left:110px; height:63px; }
+ .social_icon { width:130px; float:left; margin-left:20px; margin-top:16px;}
+ #mycarousel li img { display:block;}
+ 
+ /*.........Sponcers............*/
+ .fl { float:left;}
+.clr { clear:both}
+.big-logo { text-align:center; margin:10px; }
+.big-logo a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/jp.gif); width:260px; height:260px; margin:0 auto }
+.big-logo a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/jp1.gif);}
+
+.sp_logoarea { padding-left:20px; overflow:hidden; padding-bottom:40px; margin-bottom:50px }
+.title { float:left; text-align:center; color:#393939; font-size:15px; margin-bottom:40px}
+
+.aiesec { text-align:center; margin:10px 20px 0px; float:left}
+.aiesec a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/aiesec.gif); width:190px; height:190px; }
+.aiesec a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/aiesec1.gif);}
+.aiesec a.active {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/aiesec1.gif);}
+
+.eclectic { text-align:center; margin:10px 20px 0px; float:left}
+.eclectic a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/eclectic.gif); width:190px; height:190px; }
+.eclectic a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/eclectic1.gif);}
+.eclectic a.active {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/eclectic1.gif);}
+
+.coolage { text-align:center; margin:10px 20px 0px; float:left}
+.coolage a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/coolage.gif); width:190px; height:190px; }
+.coolage a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/coolage1.gif);}
+
+.ooh { text-align:center; margin:10px 20px 0px; float:left}
+.ooh a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh.gif); width:190px; height:190px; }
+.ooh a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ooh1.gif);}
+
+.ht { text-align:center; margin:10px 20px 0px; float:left}
+.ht a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ht.gif); width:190px; height:190px; }
+.ht a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/ht1.gif);}
+
+.buzz { text-align:center; margin:10px 20px 0px; float:left}
+.buzz a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/buzz-town.gif); width:190px; height:190px; }
+.buzz a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/buzz-town1.gif);}
+
+.oye { text-align:center; margin:10px 20px 0px; float:left}
+.oye a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/oye.gif); width:190px; height:190px; }
+.oye a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/oye1.gif);}
+
+.india-today { text-align:center; margin:10px 20px 0px; float:left}
+.india-today a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/it.gif); width:190px; height:190px; }
+.india-today a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/it1.gif);}
+
+.learn-today { text-align:center; margin:10px 20px 0px; float:left}
+.learn-today a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/learn-today.gif); width:190px; height:190px; }
+.learn-today a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/learn-today1.gif);}
+
+.blink { text-align:center; margin:10px 20px 0px;}
+.blink a { text-indent:-999px; overflow:hidden; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/blinck.gif); width:190px; height:190px; margin:0 auto; }
+.blink a:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/blinck1.gif);}
+.presenting { float:left; margin-right:15px;}
+.list_carousel {
+   width:340px; overflow:hidden;
+}
+.list_carousel ul {
+    display: block;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.list_carousel li {
+    
+    display: block;
+    float: left;
+    font-size: 40px;
+    height: 44px;
+    margin: 6px;
+    padding: 0;
+    text-align: center;
+}
+
+.nav > ul > li.drop {
+    margin: 0;
+    position: relative;
+}
+.active { background-color:#B92E70}
+.deactive { background-color:#333333}
+.nav {clear:both; padding-bottom:55px; display:block}
+.nav ul { }
+.nav ul li { font-weight:bold; list-style:none; text-transform:uppercase; display:inline;}
+.nav ul li a { color:#383838; text-decoration:none; padding:5px 15px;  padding:5px 14px\9; float:left}
+.nav ul li a:hover { color:#fff; text-decoration:none; background:#828282; border-radius:3px;  }
+.nav ul li a.active{ color:#fff; text-decoration:none; background:#828282; border-radius:3px;  }
+.nav ul li , .nav ul li{float:left; margin:0 10px}
+.nav ul li:hover {color:#fff; text-decoration:none; background:#828282; border-radius:3px;}
+.nav ul li a { float:left}
+.nav > ul > li.drop:hover{background-position: 175px 7px;}
+.nav > ul > li.drop a:hover{color: #222;}
+.nav ul ul li { background-color:#666666}
+.nav > ul > li > ul.ddchild{margin: 0; padding: 0; list-style-type: none; background-color: #5e5e5e; position: absolute; width: 170px; display: none; top:30px; z-index:999;}
+ul.ddchild > li{border-bottom: solid 1px #fff; width:100%;}
+ul.ddchild > li a{padding: 0 10px; font: bold 14px/30px Arial; color: #fff; text-decoration: none;}
+.nav ul ul li { margin:0;}
+
+/*--contest page --*/
+
+.contest_body {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/contest-bg.jpg); padding:40px; overflow:hidden; }
+.ct_head { font-family:Arial, Helvetica, sans-serif; text-transform:uppercase; font-size:22px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Logo-story.png) left center no-repeat; padding:30px 0 30px 300px; line-height:26px; margin-bottom:50px; }
+.ct_left { width:530px; float:left;}
+.left_img { float:left; margin-right:15px; border:1px solid #fff;}
+h3 {font: normal 20px/22px "Arial-Black", Gadget, sans-serif; font-weight:bold; text-transform:uppercase; padding-bottom:3px}
+h3 span { font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:normal;}
+.ct_right { width:326px; float:right;}
+.contest_body ul { padding:0px; margin:0px;}
+.contest_body ul li { list-style-type:none; display:inline-block; margin:0 3px 0px 0;}
+.contest_body ul li a { padding:0px; margin:0px; display:inline-block;}
+.contest_body ul li a img { border:1px solid #fff}
+.btn { padding:5px; border:1px solid #fff;}
+
+.sharetxt {font:normal 20px arial; color:#272727; text-transform:uppercase;width:100px; float:left;margin-top: 5px;}
+.sharefb {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/FB_color.png) no-repeat top left; width:35px; height:34px; float:left;display:block;margin-right:8px; text-indent:-9999px;}
+.sharefb:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/FB_grey.png) no-repeat top left;}
+.sharetwt {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Twitter_color.png) no-repeat top left; width:35px; height:34px; float:left;display:block;margin-right:8px; text-indent:-9999px;}
+.sharetwt:hover {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Twitter_grey.png) no-repeat top left;}
+.votenow {background-color:#fff400; font:normal 20px/29px Arial-Black; padding:0 3px; color:#525252; border:none; border-radius:5px; float:right;cursor:pointer;}
+.viewall {
+    background-color: #EFEFEF;
+    border: medium none;
+    border-radius:3px;
+    color: #525252;
+    cursor: pointer;
+    float: right;
+    font: 16px/29px arial;
+    padding: 2px 5px;
+	margin-top:5px;
+}
+.sharecont {padding-bottom:10px; border-bottom:1px solid #6d6e70; margin-bottom:3px;}
+.slideshow {}
+.slideshow h5 { overflow:hidden;  width:469px; float:left}
+.belt_outer { width:470px; overflow:hidden; height:110px;}
+.belt { overflow:hidden; position:relative; height:110px; margin-top:-18px; }
+.nextdiv {width:224px;float:left; }
+.prevdiv {width:224px; border-right:1px solid #6d6e70; padding-right:10px; margin-right:10px; float:left;}
+	.shprevarrow {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Arrow_LFT.png") no-repeat scroll left top transparent;
+    display: block;
+    float: left;
+    height: 43px;
+    margin-right: 10px;
+    margin-top: 20px;
+    text-indent: -9999px;
+    width: 18px;
+	opacity:
+}
+
+.shnextarrow {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Arrow_RT.png") no-repeat scroll left top transparent;
+    display: block;
+    float: right;
+    height: 43px;
+    margin-left: 10px;
+    margin-top: 20px;
+    text-indent: -9999px;
+    width: 18px;
+}
+.bottomtxt {float:left; width:220px; text-align:left; margin-top:10px;}
+.lft {float:left;}
+.input {width:100%; float:left;padding:3px 5px; font:normal 20px/24px arial; color:#666666; border:0; background:#efefef; border:1px solid #fff; margin-bottom:1px}
+.textarea {
+    background: none repeat scroll 0 0 #EFEFEF;
+    border: 1px solid #FFFFFF;
+    border-radius: 0 0 0 0;
+    color: #666666;
+    float: left;
+    font: 20px/24px arial;
+    height: 126px;
+    margin-top: 0;
+    padding: 1px 0;
+    width: 277px;
+	resize:none;
+}
+.boderno { border-bottom:none;}
+
+.ct_head1 {
+    padding: 74px 0 74px 0px;
+	width:255px;
+	margin: 0 auto 50px;
+	}
+.youth-icons { margin-bottom:50px; display:inline-block}
+.youth-icons ul { padding:0px; margin:0px 0 0px 0;}
+.youth-icons ul li { text-align:center; width:250px; list-style-type:none;  padding: 0 20px;}
+.gr-line { background:#525252; height:2px; width:290px;}
+h4 {   font-size: 34px;
+    font-weight: bold;
+    margin: -11px 0;
+    padding: 0;
+    text-align: center;}
+.nm_now1 { background:#fff500; padding:7PX 7PX;  border-radius:5px; font-size: 30px; color:#525252; font-weight:bolder; width:225px; text-align:center; border:none}
+.nm_now1 a {color:#525252; text-decoration:none;}
+.nm_now1 a:hover {color:#000; text-decoration:none;}
+
+#FileUpload {
+    position: relative;
+	float:right;
+}
+#BrowserHidden {
+    height: 175px;
+    opacity: 0;
+    position: relative;
+    text-align: right;
+    width: 190px;
+    z-index: 2;
+}
+
+#BrowserVisible {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2013/delhi/Add-photo.jpg")left top no-repeat;
+    height: 175px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 190px;
+    z-index: 0;
+}
+
+#input { background:#efefef; border:1px solid #fff;}
+.nm_now {
+    background: none repeat scroll 0 0 #FFF500;
+    border-radius: 5px 5px 5px 5px;
+    color: #525252;
+    font-size: 30px;
+    font-weight: bolder;
+    margin: 30px auto 0;
+    padding: 15px 5px;
+    text-align: center;
+    width: 210px;
+}
+.nm_now a {color:#525252; text-decoration:none}
+.nm_now a:hover {color:#525252; text-decoration:none}
+
+
+/*--Speakes Page */
+
+.sp_nav > ul > li.drop {
+    margin: 0;
+    position: relative;
+}
+.sp_active { background-color:#82b534}
+.deactive { background-color:#333333}
+.sp_nav {clear:both; padding-bottom:55px; display:block}
+.sp_nav ul { }
+.sp_nav ul li { font-weight:bold; list-style:none; text-transform:uppercase; display:inline;}
+.sp_nav ul li a { color:#383838; text-decoration:none; padding:5px 10px; float:left}
+.sp_nav ul li a:hover { color:#fff; text-decoration:none; background:#82b534; border-radius:3px;  }
+.sp_nav ul li a.sp_active{ color:#fff; text-decoration:none; background:#82b534; border-radius:3px;  }
+.sp_nav ul li , .nav ul li{float:left; margin:0 5px}
+.sp_nav ul li:hover {color:#fff; text-decoration:none; background:#828282; border-radius:3px;}
+.sp_nav ul li a { float:left}
+.sp_nav > ul > li.drop:hover{background-position: 175px 7px;}
+.sp_nav > ul > li.drop a:hover{color: #222;}
+.sp_nav ul ul li { background-color:#666666}
+.sp_nav > ul > li > ul.ddchild{margin: 0; padding: 0; list-style-type: none; background-color: #5e5e5e; position: absolute; width: 170px; display: none; top:30px; z-index:999;}
+ul.ddchild > li{border-bottom: solid 1px #fff; width:100%;}
+ul.ddchild > li a{padding: 0 10px; font: bold 14px/30px Arial; color: #fff; text-decoration: none;}
+.sp_nav ul ul li { margin:0;}
+
+.speaker_body { padding:25PX 0PX 100px 0; overflow:hidden; display:block }
+.speaker_body h3  { color:#82b534}
+.speakers { width:170px; height:240px; float:left; text-align:center; font-size:16px; padding:0px 10px;}
+.speakers a { color:#383838; text-decoration:none;}
+.speakers a:hover { color:#383838; text-decoration:underline;}
+
+.nav > ul > li.drop1 {
+    margin: 0;
+    position: relative;
+}
+.nav > ul > li > ul.ddchild1 {
+    background-color: #5E5E5E;
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 30px;
+    width: 175px;
+    z-index: 999;
+}
+ul.ddchild1 > li {
+    border-bottom: 1px solid #FFFFFF;
+    width: 100%;
+}
+ul.ddchild1 > li a {
+    color: #FFFFFF;
+    font: bold 14px/30px Arial;
+    padding: 0 0px 0 10px;
+    text-decoration: none;
+	width:165px;
+}
+
+.RFID, .Singchana, .bindas {margin:10px 20px 0px;}

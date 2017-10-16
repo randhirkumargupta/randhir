@@ -285,40 +285,13 @@ function mobilecheck() {
 var is_mobile = mobilecheck() ? true : false;
 //common function for mobile end
 
-// Code started  for handling Akamai Part
-
-jQuery(document).ready(function () {
-    try {
-        jQuery.ajax({
-            url: Drupal.settings.itg_widget.settings.base_url + '/itg-akamai-load-my-account',
-            type: 'post',
-            data: '',
-            beforeSend: function () {
-            },
-            success: function (userdata) {
-                if (userdata.length != 0) {
-                    jQuery('.user-menu').html(userdata);
-                }
-            },
-            error: function (xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
-            }
-        });
-    } catch (e) {
-
-    }
-});
-// Code ends for handling Akamai part
-
-
 jQuery(document).ready(function () {
 
     var numLatestVideo = jQuery(".view-video-landing-header.view-display-id-block_1 ul.photo-list li").length;
     var winWidth = window.innerWidth;
     if (winWidth > 680) {
-        //~ var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
-        //~ jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", 190 + "px");
+        // var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
+        // jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", 190 + "px");
         jQuery(".defalt-bar").mCustomScrollbar({
             axis: "y",
         });
@@ -351,39 +324,6 @@ jQuery(document).ready(function () {
     jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
     jQuery(".special-top-news .itg-listing-wrapper").mCustomScrollbar();
 
-    //header menu add icon for mobile
-    jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
-
-
-
-    //ITG footer
-    footerMain();
-    function footerMain() {
-        //footer toggal script
-        jQuery('.footer-expand-icon').click(function () {
-            jQuery('.footer-toggle').slideToggle();
-            jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
-            jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
-        });
-        //footer add more link
-        //        jQuery('.footer-bottom .cell ul').each(function () {
-        //            var countList = jQuery(this).children('li').length;
-        //            if (countList > 8) {
-        //                jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
-        //                jQuery(this).append("<li><span class='more-link'>More</span></li>");
-        //            }
-        //        });
-        //        jQuery('.footer-bottom .more-link').click(function () {
-        //            jQuery(this).parents('ul').find('li.hidelist').slideToggle();
-        //            jQuery(this).toggleClass('active');
-        //            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
-        //            if (jQuery(this).hasClass('active')) {
-        //                jQuery('.footer-bottom .more-link').text('Less');
-        //            } else {
-        //                jQuery('.footer-bottom .more-link').text('More');
-        //            }
-        //        });
-    }
     jQuery('body').on('click', '.personal-share', function () {
         jQuery('.personal-social-share-links').slideToggle();
     });
@@ -464,7 +404,10 @@ jQuery(document).ready(function () {
         if (code == 13 && value.length != 0) { //Enter keycode
             //Do something
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
-            var urldata = Drupal.settings.basePath + 'topic/' + jQuery(this).val();
+            keyword = jQuery(this).val();
+            myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            myStr = myStr.replace(/\s+/g, "-");
+            var urldata = Drupal.settings.basePath + 'topic/' + myStr;
             window.location.href = urldata;
         }
         if (value.length != 0) {
@@ -477,14 +420,21 @@ jQuery(document).ready(function () {
     jQuery('.search-icon-search').click(function () {
         search_value = jQuery(this).parent().find('.search-text').val();
         if (search_value.length != 0) {
+            nkeyword = search_value;
+            nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            nmyStr = nmyStr.replace(/\s+/g, "-");
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
             var urldata = Drupal.settings.basePath + 'topic/' + search_value;
             window.location.href = urldata;
         }
     });
 
+    //ITG header
     headerMain();
     function headerMain() {
+        //header menu add icon for mobile
+        jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+
         //var logotxt = $('.container.header-logo').html();
         jQuery('.container.header-logo').prependTo('.itg-logo-container');
 
@@ -517,6 +467,41 @@ jQuery(document).ready(function () {
         jQuery('.head-live-tv .mobile-user').click(function () {
             jQuery(this).next('ul.menu').toggle();
         });
+
+        if (is_mobile) {
+            jQuery('.head-live-tv .user-icon').click(function () {
+                jQuery(this).next('ul.menu').toggle();
+            });
+        }
+    }
+
+    //ITG footer
+    footerMain();
+    function footerMain() {
+        //footer toggal script
+        jQuery('.footer-expand-icon').click(function () {
+            jQuery('.footer-toggle').slideToggle();
+            jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
+            jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
+        });
+        //footer add more link
+        //        jQuery('.footer-bottom .cell ul').each(function () {
+        //            var countList = jQuery(this).children('li').length;
+        //            if (countList > 8) {
+        //                jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
+        //                jQuery(this).append("<li><span class='more-link'>More</span></li>");
+        //            }
+        //        });
+        //        jQuery('.footer-bottom .more-link').click(function () {
+        //            jQuery(this).parents('ul').find('li.hidelist').slideToggle();
+        //            jQuery(this).toggleClass('active');
+        //            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
+        //            if (jQuery(this).hasClass('active')) {
+        //                jQuery('.footer-bottom .more-link').text('Less');
+        //            } else {
+        //                jQuery('.footer-bottom .more-link').text('More');
+        //            }
+        //        });
     }
 
     //Add header for so-sorry page
@@ -582,6 +567,16 @@ jQuery(document).ready(function () {
     });
     var largest = Math.max.apply(Math, arrayOne);
     jQuery(".factoids-slider li").css('height', largest + "px");
+    //PrettyPhoto
+    if (jQuery.isFunction(jQuery("a[rel^='prettyPhoto']").prettyPhoto)) {
+        jQuery("a[rel^='prettyPhoto']").prettyPhoto({
+            default_width: 1077,
+            default_height: 770,
+            show_title: false,
+            deeplinking: false,
+            allow_expand: false,
+        });
+    }
 
 });
 
@@ -901,9 +896,14 @@ jQuery(document).ready(function () {
         }
     });
     // jQuery code to show embed code popup
-    jQuery('.show-embed-code-link').on('click', '.embed-link', function () {
+    jQuery('.show-embed-code-link .embed-link').click(function (e) {
         jQuery(this).toggleClass('active');
         jQuery(this).next('.show-embed-code-div').stop().fadeToggle();
+        e.stopPropagation();
+        return false;
+    });
+    jQuery(document).click(function () {
+        jQuery('.show-embed-code-div').hide();
     });
 });
 
@@ -1066,6 +1066,16 @@ jQuery(document).ready(function (e) {
         load_video_in_slider(getvideofid, ajaxpath, getvideoindex)
 
     });
+
+
+    jQuery('.migrate-thumb-video').click(function () {
+        var getvideoimage = jQuery(this).attr('data-image');
+        var getvideonid = jQuery(this).attr('data-nid');
+        var getvideourl = jQuery(this).attr('data-video-url');
+        var ajaxpath = Drupal.settings.basePath + 'getvideoplayer-migrated';
+        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl)
+
+    });
     jQuery('.itg-embed-photo-slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -1176,6 +1186,30 @@ function load_video_in_slider(fid, path, getvideoindex) {
         data: { 'fid': fid, 'tabindex': getvideoindex },
         success: function (data) {
             jQuery('#video_palyer_container').html(data);
+            jQuery('.loading-video').hide();
+
+        },
+        complete: function () {
+        },
+        error: function (xhr, desc, err) {
+            console.log(xhr);
+            console.log("Details: " + desc + "\nError:" + err);
+        }
+    });
+
+}
+
+function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl) {
+
+    jQuery.ajax({
+        url: ajaxpath,
+        type: 'get',
+        beforeSend: function () {
+            jQuery('.loading-video').show();
+        },
+        data: { 'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl },
+        success: function (data) {
+            jQuery('#migrate_video_palyer_container').html(data);
             jQuery('.loading-video').hide();
 
         },

@@ -53,6 +53,12 @@ function itg_videogallery_ftp_video_form($form) {
     '#default_value' => variable_get('ftp_root_folder', ''),
     '#required' => TRUE,
   );
+    $form['xml_root_folder'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Video XML Folder'),
+    '#default_value' => variable_get('xml_root_folder', ''),
+    '#required' => TRUE,
+  );
   
   return system_settings_form($form);
 }
@@ -101,6 +107,13 @@ function itg_videogallery_s3_video_form($form) {
     '#default_value' => variable_get('aws_bucket', ''),
     '#required' => TRUE,
   );
+  
+  $form['api_bucket'] = array(
+    '#type' => 'textfield',
+    '#title' => t('API S3 Bucket'),
+    '#default_value' => variable_get('api_bucket', ''),
+  );
+  
   $form['aws_video_dm_data'] = array(
     '#type' => 'textfield',
     '#title' => t('AWS S3 Video DM Data Folder'),

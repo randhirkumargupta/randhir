@@ -189,7 +189,7 @@ if ($theme != 'itgadmin') {
               <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
               <div class="itg-widget-parent m-bottom40">
                 <div class="itg-widget">
-                  <div class="ad-widget droppable">
+                  <div class="ad-widget">
                     <div class="sidebar-ad">
                       <?php
                       $block = block_load('itg_ads', ADS_RHS1);

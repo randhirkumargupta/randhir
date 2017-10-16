@@ -2,7 +2,8 @@
   <div class="iframe-video1 video-iframe-wrapper" id="video_0">
       <span>Video Play Automatically After Publishing On Dailymotion</span>
   </div>
-<?php }
+<?php
+}
 else {
   ?>
 
@@ -10,12 +11,12 @@ else {
   </div>
   <script src="https://api.dmcdn.net/all.js"></script>
   <script>
-  
+
     var player_0 = DM.player(
             document.querySelector('#video_0'),
             {
                 video: '<?php print $video_data[0]->video_embedded_url; ?>',
-                width: '600px',
+                width: '100%',
                 height: '450px',
                 params: {
                     autoplay: 1,
@@ -31,4 +32,4 @@ else {
     });
   </script>
   <?php
-} 
+}

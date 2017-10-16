@@ -135,20 +135,26 @@ function itg_category_manager_import_tag_form($form , $form_state) {
  * {@inheritdoc}
  */
 function itg_category_manager_import_tag_form_submit($form , $form_state) {
+  module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   // Check to make sure that the file was uploaded to the server properly
   $uri = db_query("SELECT uri FROM {file_managed} WHERE fid = :fid" , array(
     ':fid' => $form_state['values']['import'] ,
       ))->fetchField();
-  if (!empty($uri)) {
-    if (file_exists(drupal_realpath($uri))) {
+  $file_array = explode("public://", $uri);
+  $file_path = $file_array[1];
+  $csv_content = itg_tag_import_from_file($file_path);
+  if (!empty($csv_content)) {
       // Open the csv
-      $handle = fopen(drupal_realpath($uri) , "r");
       // Go through each row in the csv and run a function on it. In this case we are parsing by '|' (pipe) characters.
       // If you want commas are any other character, replace the pipe with it.
-      while (($data = fgetcsv($handle , 0 , ',' , '"')) !== FALSE) {
+      foreach($csv_content as $data) {
+        $tmp_data = array();
+        $tmp_data[0] = trim($data[0]);
+        $tmp_data[1] = trim($data[1]);
+        $tmp_data[2] = trim($data[2]);
         $operations[] = array(
           'itg_category_manager_tag_import_batch_processing' , // The function to run on each row
-          array($data) , // The row in the csv
+          array($tmp_data) , // The row in the csv
         );
       }
       // Once everything is gathered and ready to be processed... well... process it!
@@ -161,7 +167,6 @@ function itg_category_manager_import_tag_form_submit($form , $form_state) {
       );
       batch_set($batch);
       fclose($handle);
-    }
   }
   else {
     drupal_set_message(t('There was an error uploading your file. Please contact a System administator.') , 'error');
@@ -327,17 +332,17 @@ function itg_category_manager_form($form , &$form_state) {
  * @return boolean
  */
 function itg_category_manager_term_state($tid , $vid = CATEGORY_MANAGMENT) {
-  $itg_query = db_select('itg_category_manager' , 'itg')
-      ->fields('itg' , array('status'))
-      ->condition('tid' , $tid , '=')
-      ->condition('vid' , $vid , '=');
-  $itg_result = $itg_query->execute()->fetchField();
-
-  $flag = FALSE;
-  if (isset($itg_result) && $itg_result == 1) {
-    $flag = TRUE;
-  }
-  //$flag = TRUE;
+//  $itg_query = db_select('itg_category_manager' , 'itg')
+//      ->fields('itg' , array('status'))
+//      ->condition('tid' , $tid , '=')
+//      ->condition('vid' , $vid , '=');
+//  $itg_result = $itg_query->execute()->fetchField();
+//
+//  $flag = FALSE;
+//  if (isset($itg_result) && $itg_result == 1) {
+//    $flag = TRUE;
+//  }
+  $flag = TRUE;
 
   return $flag;
 }
@@ -941,7 +946,10 @@ function itg_category_manager_entity_update($entity , $type) {
       'body' => $mail_content ,
       'subject' => t('India Today | ' . $entity->name . ' Category Updated!') ,
     );
-    $to = "itoday135@gmail.com"; // SEO team mail id
+    
+    $rid = array(SEO);
+    $user_email = get_email_by_roll($rid);
+    $to = implode(",", $user_email);
     $mail = drupal_mail('itg_category_manager_seo_team' , 'send_mail_to_seo' , $to , language_default() , $params , 'haripal.rao@kelltontech.com' , TRUE);
     if ($mail['result']) {
       return TRUE;
@@ -1351,6 +1359,7 @@ function itg_category_manager_form_alter(&$form , &$form_state , $form_id) {
 }
 
 function itg_categor_form_edit_category_radio($form , &$form_state) {
+  $type = '';
   if (arg(0) == 'node' && arg(1) == 'add') {
     $type = arg(2);
   }

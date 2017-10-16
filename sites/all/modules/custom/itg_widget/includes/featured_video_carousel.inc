@@ -15,7 +15,7 @@ module_load_include('inc', 'itg_widget', 'itg_widget.helper');
 function itg_widget_featured_video_carousel_data($info, $slider_type) {
     $data = '';
     if (is_array($info)) {
-       // watchdog('Widget', 'inside Home page feature query');
+        // watchdog('Widget', 'inside Home page feature query');
         $result = itg_widget_get_widget_data_data($info);
         return itg_widget_featured_video_carousel_data_fetch($result, $slider_type);
     }
@@ -45,8 +45,12 @@ function itg_widget_featured_video_carousel_data_fetch($result, $slider_type) {
     foreach ($result as $key => $data) {
         $node = node_load($data['nid']);
         // $data_render[$data['entity_id']]['file_url'] = theme('image_style', array('style_name' => $style, 'path' => $node->field_story_extra_large_image[$node->language][0]['uri']));
-        $file_uri = $data['uri'];
-        $data_render[$data['nid']]['file_url'] = file_create_url($file_uri);
+        if (!empty($data['uri'])) {
+            $file_uri = file_create_url($data['uri']);
+        } else {
+            $file_uri = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg";
+        }
+        $data_render[$data['nid']]['file_url'] = $file_uri;
         $data_render[$data['nid']]['count'] = count($node->field_videogallery_video_upload[$node->language]);
         $data_render[$data['nid']]['caption'] = $node->field_story_extra_large_image[$node->language][0]['title'];
         $data_render[$data['nid']]['node_url'] = $base_url . '/' . drupal_get_path_alias('node/' . $data['nid']);

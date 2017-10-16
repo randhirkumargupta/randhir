@@ -34,6 +34,44 @@ function syndication_feature_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_minute'.
+  $field_bases['field_minute'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_minute',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        5 => 5,
+        10 => 10,
+        15 => 15,
+        20 => 20,
+        25 => 25,
+        30 => 30,
+        35 => 35,
+        40 => 40,
+        45 => 45,
+        50 => 50,
+        55 => 55,
+        60 => 60,
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
+  );
+
   // Exported field_base: 'field_syndication_client_title'.
   $field_bases['field_syndication_client_title'] = array(
     'active' => 1,
@@ -259,6 +297,7 @@ function syndication_feature_field_default_field_bases() {
         'Daily' => 'Daily',
         'Weekly' => 'Weekly',
         'Monthly' => 'Monthly',
+        'Minute' => 'Minutes',
       ),
       'allowed_values_function' => '',
     ),

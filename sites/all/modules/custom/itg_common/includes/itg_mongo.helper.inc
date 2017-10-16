@@ -86,7 +86,13 @@ function itg_flag_get_count($nid, $type) {
     $cond = array('nid' => (int)$nid);
     $cursor = $people->find($cond);
     foreach ($cursor as $document) {
-      $data[$type] = $document[$type];
+      if (!empty($type)) {
+        $data[$type] = $document[$type];
+      }
+      else {
+        $data['like_count'] = $document['like_count'];
+        $data['dislike_count'] = $document['dislike_count'];
+      }
     }
     return $data;
   }
@@ -202,6 +208,26 @@ function itg_common_mongo_activity_user_count($uid, $collection, $event = NULL, 
     } else {
     $cond = array('uid' => $uid, 'activity' => $event, 'status' => $status);
     }
+    $cursor = $people->count($cond);
+    return $cursor;
+  } else {
+    return 0;
+  }
+  
+}
+
+/**
+ * Implements itg_common_mongo_activity_fb_count().
+ * @param int $uid
+ * @param string $collection
+ * @param int $nid
+ * @param string $event
+ */
+function itg_common_mongo_activity_fb_count($uid, $collection, $nid, $event) {
+  if (function_exists('mongodb') && !empty($uid)) {
+    $con = mongodb();
+    $people = $con->$collection;
+    $cond = array('uid' => $uid, 'activity' => $event, 'nid' => $nid);
     $cursor = $people->count($cond);
     return $cursor;
   } else {
