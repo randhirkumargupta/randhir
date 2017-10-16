@@ -135,7 +135,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 0;float:left}
 
 <div class="con bottom-shadow bg-white cf">
  <div class="wrapper salam-cricket-header cf">
-   <div class="logo"><a href="/salaamcricket/index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/Salaam-cricket-Logo.png" border="0"></a></div>
+   <div class="logo"><a href="/salaamcricket/2014/index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/Salaam-cricket-Logo.png" border="0"></a></div>
    <div class="nav-area">
    <div class="itgd-logo"><a href="http://www.indiatodaygroup.com/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/itg-logo.gif"></a></div>
    <div class="cf">&nbsp;</div>
@@ -143,7 +143,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 0;float:left}
      <ul>
          <li><a href="index.jsp" id="home">Home</a></li>
          <!--<li><a href="/cricket_conclave/aboutus.jsp" id="about">About</a></li>-->
-         
+
          <li><a href="/salaamcricket/sponsor.jsp" id="sponsors">Sponsors</a></li>
          <li><a href="/salaamcricket/speakers.jsp" id="speakers">Speakers</a></li>
          <li><a href="/salaamcricket/programme.jsp" id="programme">Programme</a></li>
@@ -178,7 +178,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 0;float:left}
 <div class="clear"></div>
 	<div class="sponsor_section">
 
-    
+
     	<table cellpadding="5" cellspacing="5"  width="650" border="0" style="display:block;">
         	<tr>
                 <td width="205"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/associate-sponsors_140x70.gif" usemap="#Map3" /></td>
@@ -186,19 +186,19 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 0;float:left}
             	<td width="100"><a href="kutchina.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/partners_kutchina.gif" border="0"  /></a></td><td width="20"></td>
             	<td width="88"><a href="priyagold.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/snack-partners.gif" border="0"  /></a></td>
             </tr>
-            
+
             <tr>
             	<td width="140"><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/Reliance-fresh-140.gif" border="0"  /></a></td>
             </tr>
-            
-            
+
+
             <tr>
                <!-- <td><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/yupptv.png" /></td>-->
               <td>&nbsp;</td>
            	  <td>&nbsp;</td></td>
            	  <td></td>
-            	
-            	
+
+
             </tr>
         </table>
     </div>
@@ -225,7 +225,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 0;float:left}
 <!--<div class="side_chunk">
 <div class="side_chunk_title">
 	<span class="side_chunk_title-red">from the</span> chairman</div>
-    
+
     <div class="chairman">We are a country hungry for capital, we are hungry for growth, we are hungry for energy, we are hungry for education, we are hungry for opportunity and above all we are hungry for strong clear honest leadership wherever it<br> comes from. We are <br />
 a country straining<br> at the leash. We need<br> a leader who can bring<br>
   everyone together<br> to
@@ -238,7 +238,7 @@ country.
 	    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/globalevent/play-button.png" style="float:right; margin-top:-5px">
     	<span>Aroon Purie,</span> Chairman<br>
 		The India Today Group
-        
+
     </div>
 </div>-->
 
@@ -294,7 +294,7 @@ country.
 </div>
 
 
-   
+
 </div>
 
 
@@ -312,15 +312,15 @@ country.
             <area shape="rect" coords="539,2,678,51" href="kutchina.jsp">
           </map>
   </div>
-        
+
     </div>
 <div class="clear"></div>
 <div id="footer1" style="display:block !important; margin:0 auto">
 	<iframe width="100%" scrolling="no" height="166" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/common_it_footer.html"></iframe>
     </div>
-    
-	
-    
+
+
+
 </div>
 
 <div class="copyright">Copyright © 2014 Living Media India Limited. For reprint rights: Syndications Today. </div>

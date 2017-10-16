@@ -107,7 +107,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 0;float:left}
 
 <div class="con bottom-shadow bg-white cf">
  <div class="wrapper salam-cricket-header cf">
-   <div class="logo"><a href="/salaamcricket/index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/Salaam-cricket-Logo.png" border="0"></a></div>
+   <div class="logo"><a href="/salaamcricket/2014/index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/Salaam-cricket-Logo.png" border="0"></a></div>
    <div class="nav-area">
    <div class="itgd-logo"><a href="http://www.indiatodaygroup.com/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/salaam_cricket/itg-logo.gif"></a></div>
    <div class="cf">&nbsp;</div>

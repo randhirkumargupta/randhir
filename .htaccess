@@ -461,6 +461,14 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
 	RewriteCond %{REQUEST_URI} !/movies/housefull3 [NC]
 	RewriteCond %{REQUEST_URI} !/movies/neerja [NC]
 	RewriteCond %{REQUEST_URI} !/movies/baar-baar-dekho [NC]
+	RewriteCond %{REQUEST_URI} !/fifa2014 [NC]
+        RewriteCond %{REQUEST_URI} !/interactive [NC]
+        RewriteCond %{REQUEST_URI} !/ipl2014 [NC]
+        RewriteCond %{REQUEST_URI} !/ipl2015 [NC]
+        RewriteCond %{REQUEST_URI} !/presidential-poll-2017 [NC]
+        RewriteCond %{REQUEST_URI} !/turn-off-your-ad-blocker [NC]
+        RewriteCond %{REQUEST_URI} !/voter-helpline [NC]
+	RewriteCond %{REQUEST_URI} !/cannes2014.jsp [NC]
 ####### End saticpages phase 3 End #########
 
   RewriteRule ^ index.php [L]
@@ -958,6 +966,21 @@ mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
 	RewriteRule ^movies/housefull3$ /staticpages/movies/housefull3/housefull3.html? [L]
 	RewriteRule ^movies/mirzya$ /staticpages/movies/mirzya/mirzya.html? [L]
 	RewriteRule ^movies/neerja$ /staticpages/movies/neerja/neerja.html? [L]
+	RewriteRule ^fifa2014$ /staticpages/fifa2014/index.html? [L]
+	RewriteRule ^fifa2014/(.*) /staticpages/fifa2014/$1 [L]
+        RewriteRule ^interactive$ /staticpages/interactive/index.html? [L]
+	RewriteRule ^interactive/(.*) /staticpages/interactive/$1 [L]
+        RewriteRule ^ipl2014$ /staticpages/ipl2014/index.jsp? [L]
+	RewriteRule ^ipl2014/(.*) /staticpages/ipl2014/$1 [L]
+        RewriteRule ^ipl2015$ /staticpages/ipl2015/index.jsp? [L]
+	RewriteRule ^ipl2015/(.*) /staticpages/ipl2015/$1 [L]
+        RewriteRule ^presidential-poll-2017$ /staticpages/presidential-poll-2017/index.html? [L]
+	RewriteRule ^presidential-poll-2017/(.*) /staticpages/presidential-poll-2017/$1 [L]
+        RewriteRule ^turn-off-your-ad-blocker$ /staticpages/turn-off-your-ad-blocker/index.html? [L]
+        RewriteRule ^turn-off-your-ad-blocker/(.*) /staticpages/turn-off-your-ad-blocker/$1 [L]
+        RewriteRule ^voter-helpline$ /staticpages/voter-helpline/index.html? [L]
+        RewriteRule ^voter-helpline/(.*) /staticpages/voter-helpline/$1 [L]
+        RewriteRule ^cannes2014.jsp$ /staticpages/cannes2014.jsp [L]	
 	####### End saticpages phase 3 #########
 	
 
