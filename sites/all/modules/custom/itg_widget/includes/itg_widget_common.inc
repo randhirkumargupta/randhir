@@ -56,15 +56,18 @@ function remove_extra_data() {
  * 
  * @param string $widget_name
  * @param string $content_type
- * @param int $cat_tid
+ * @param int $cat_tid (extra where condition to delete widget) Added
  * @param int $nid
  */
 function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, $nid) {
   if (!empty($widget_name) && !empty($nid)) {
     $num = db_delete('itg_widget_order')
         ->condition('nid', $nid)
-        ->condition('widget', $widget_name)
-        ->execute();
+        ->condition('widget', $widget_name);
+    if (is_numeric($cat_tid) && !empty($cat_tid)) {
+      $num->condition('cat_id', $cat_tid);
+    }
+    $num->execute();
     if (function_exists("_itg_widget_delete_node_data_from_helper_table")) {
       _itg_widget_delete_node_data_from_helper_table($nid);
     }
