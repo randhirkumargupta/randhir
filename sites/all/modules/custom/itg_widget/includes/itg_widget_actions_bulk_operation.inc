@@ -83,6 +83,10 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
     cache_clear_all('itg_widget:big_story_format', 'cache_block', TRUE);
   }
   ######################## WIDGET CHANGES ###################
+  elseif ( $widget_name == "sectopn_top_stories_widget" && $current_display == "page" ) {
+    itg_save_section_top_story_widget_data($form_state , $widget_name);
+    //cache_clear_all('itg_widget:section_top_stories_ordering', 'cache_block', TRUE);
+  }
   elseif ( $widget_name == "top_stories_widget" && $current_display == "page_1" ) {
     itg_widget_save_bulk_operation_widget_data($form_state , $widget_name);
     cache_clear_all('itg_widget:top_stories_ordering', 'cache_block', TRUE);
@@ -239,4 +243,16 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
   return array(
     'form_values' => $form_state['values'] ,
   );
+}
+
+function itg_widget_categories_wise_node_group_validate($form , &$form_state){
+  $view_name = $form_state['build_info']['args'][0]->name;
+  $widget = _get_widget_name("views_form_" . $view_name . "_page" , $current_display);
+  if($widget == 'section_top_stories_widget'){
+	$category_id = $_GET['category_tid'];
+	if(empty($category_id) || $category_id == 0){
+		drupal_set_message(t('Please select Category!'), 'error');
+		drupal_goto('section-wise-top-story-widget-order-reorder');
+	}  
+  }	
 }

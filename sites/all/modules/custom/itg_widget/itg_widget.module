@@ -1476,21 +1476,25 @@ function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extr
     }
 }
 
-/**
+/** 
  * Function gives count of node with perticular widget.
  * 
  * @param int $nid
  * @param string $widget
+ * @param int $cat_id (Added: add category filter for widget)
  * 
  * @return int
  */
-function itg_widget_check_node_in_widget($nid, $widget) {
+function itg_widget_check_node_in_widget($nid, $widget, $cat_id = NULL) {
     $count = 0;
     if (!empty($nid) && !empty($widget)) {
         $query = db_select('itg_widget_order', 'iwo')
           ->fields('iwo', array('nid'))
           ->condition('iwo.nid', $nid)
           ->condition('iwo.widget', $widget);
+        if (is_numeric($cat_id) && !empty($cat_id)) {
+			$query->condition('cat_id', $cat_id);
+		}
         $count = $query->execute()->rowCount();
     }
     return $count;
@@ -1789,7 +1793,9 @@ function _get_widget_name($view_name, $page_name) {
         $widget = 'video_carousel_list_widget';
     } elseif ($page_name == 'dont_miss_content') {
         $widget = 'dont_miss_content_widget';
-    }
+    } elseif ($view_name == "views_form_section_wise_top_story_widget_order_reorder_page" && $page_name == "page") {
+        $widget = 'section_top_stories_widget';
+    } 
     return $widget;
 }
 
@@ -2145,4 +2151,26 @@ function is_widget_views($view) {
         $flag = TRUE;
     }
     return $flag;
+}
+
+/*
+ * Function to use insert data into custom table.
+ *
+ * @param array $dont_miss_content
+ */
+function itg_save_section_top_story_widget_data($form_state, $widget_name) {
+    $selected_node = $form_state['selection'];
+    $category_id = $_GET['category_tid'];
+    if(empty($category_id) || $category_id == 0){
+		return;
+	}
+    if (count($selected_node)) {
+        foreach ($selected_node as $node) {
+			$is_node_in_widget = itg_widget_check_node_in_widget($node, $widget_name, $category_id);
+            if (!$is_node_in_widget) {
+                itg_widget_insert_widget_data($node, $widget_name, $category_id);
+            }
+        }
+        //itg_widget_delete_old_data_by_limit($widget_name, $category_id);
+    }
 }
