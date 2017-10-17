@@ -219,10 +219,10 @@ function get_syndication_content_details() {
   $itg_query->fields('ts', array('scheduler_time'));
   $itg_query->fields('ts', array('id'));
   $itg_query->fields('ts', array('fid'));
-  $itg_query->condition('ts.scheduler_time', $current_time, '<');
+ // $itg_query->condition('ts.scheduler_time', $current_time, '<');
   $itg_query->condition('ts.status', 1, '=');
   $itg_query->condition('ts.cron_type', $cron_type, '=');
-  $itg_query->condition(db_or()->condition('ts.expiry_date', '')->condition('ts.expiry_date', $current_time, '>'));
+ // $itg_query->condition(db_or()->condition('ts.expiry_date', '')->condition('ts.expiry_date', $current_time, '>'));
 
   $itg_result = $itg_query->execute()->fetchAll();
   foreach ($itg_result as $itg_val) {

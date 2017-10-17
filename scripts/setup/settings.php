@@ -751,8 +751,9 @@ $local_settings = dirname(__FILE__) . '/local.settings.php';
 if (file_exists($local_settings)) {
   include $local_settings;
 }
-
+//MongoCursor::$slaveOkay = true;
 $conf['image_allow_insecure_derivatives'] = TRUE;
 $conf['block_cache_bypass_node_grants'] = TRUE;
+//$base_url = 'https://'.$_SERVER['SERVER_NAME'];
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;

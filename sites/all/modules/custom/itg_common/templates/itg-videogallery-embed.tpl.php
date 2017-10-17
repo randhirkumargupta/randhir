@@ -105,7 +105,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
       if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
       }
-      drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', array('type' => 'external', 'scope' => 'footer'));
+      drupal_add_js('https://content.jwplatform.com/libraries/V30NJ3Gt.js', array('type' => 'external', 'scope' => 'footer'));
       $hide_player = "";
       $description_slider = "";
       $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';

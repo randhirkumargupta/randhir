@@ -52,13 +52,6 @@ if (!empty($content)):
   //get byline id based on order reorder
 
   $byline_id = $content["byline_id"];
-
-  //get byline detail
-  $reporter_node = '';
-  if (!empty($byline_id)) {
-    $reporter_node = node_load($byline_id);
-  }
-
     // for activate_live_tv
     $activate_live_tv = FALSE;
     $is_sponsor_story = FALSE;
@@ -154,7 +147,11 @@ if (!empty($content)):
             ?>
           </li>
           <li class="mail-to-author"><a title ="Mail to author" href="mailto:<?php echo ITG_SUPPORT_EMAIL; ?>"><i class="fa fa-envelope"></i><?php //print t('Mail to author');      ?></a></li>
-          <li><a href="#" title = "whatsapp"><i class="fa fa-whatsapp"></i></a></li>
+          <?php 
+            $whatsapp = $node->title . " ". $actual_link;
+            $whatsapp_text = urlencode($whatsapp); 
+          ?>          
+          <li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
           <?php if ($config_name == 'vukkul') { ?>
             <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
           <?php } if ($config_name == 'other') { ?> 
@@ -218,12 +215,16 @@ if (!empty($content)):
       <div class="story-left-section">
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {// && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) ?> 
           <div class="story-left">
-            <div class="byline">              
-              <?php if ($sponsor_text == ''): ?>
+            <div class="byline">
+              <?php
+              $byline_detail = $byline_id[0];
+              $extra_large_file = file_load($byline_detail['extra_large_image']);
+                $bylineextra_large_image = $extra_large_file->uri;
+                if ($sponsor_text == ''):?>
                 <div class="profile-pic">
                   <?php
-                  if(!empty($reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-                    $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                  if(!empty($bylineextra_large_image)) {
+                    $file = $bylineextra_large_image;
                     print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                     }
                     else {
@@ -237,39 +238,41 @@ if (!empty($content)):
               <?php else:
                 print $sponsor_text; ?>
               <?php endif; ?>
-              <div class="profile-detail">                  
+              <div class="profile-detail">               
                 <?php if ($sponsor_text == ''): ?>
+                 <?php 
+                 $lbyline_detail = '';
+                 foreach($byline_id as $key => $value) {
+                 ?> 
                   <ul>
-                    <li class="title"><?php if(!empty($reporter_node->title)) { print t($reporter_node->title); } ?></li>
+                    <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?></li>
                     <?php
                       $twitter_handle = '';
-                      if(!empty($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
-                      $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                      if(!empty($value['twitter_handle'])) {
+                      $twitter_handle = $value['twitter_handle'];
                       $twitter_handle = str_replace('@', '', $twitter_handle);
                       }
                       if (!empty($twitter_handle)) {
                       ?>
-                      <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                             ?></li>                
+                      <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>                
                     <?php } ?>
                     <?php
                     if (!empty($byline_id)) {
-                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
+                      print itg_story_follow_unfollow_print($value['nid'], 'author', 'follow_story', '');
                     }
                     ?>
-                  </ul>
-                <?php endif; ?>
-                <ul class="date-update">
-                  <?php if ($sponsor_text == ''): ?>
+                   <?php if ($sponsor_text == ''): ?>
                     <li class="mailto mhide">
                       <i class="fa fa-envelope-o"></i> &nbsp;<?php
-                      if(!empty($reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'])) {
-                      $email = $reporter_node->field_reporter_email_id[LANGUAGE_NONE][0]['value'];
                       print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Mail To Author') . "</a>";
-                      }
                       ?>
                     </li>
                   <?php endif; ?>
-
+   
+                  </ul>
+                 <?php } ?>
+                <?php endif; ?>
+                <ul class="date-update">
                   <li class="mhide">
                     <span class="share-count">
                       <?php
@@ -361,7 +364,9 @@ if (!empty($content)):
             <div class="byline">
               <div class="profile-pic">
                 <?php
-                $file = $reporter_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                $byline_detail = $byline_id[0];
+                $extra_large_file = file_load($byline_detail['extra_large_image']);
+                $file = $extra_large_file->uri;
                 if (!empty($file)) {
                   print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                 }
@@ -372,26 +377,28 @@ if (!empty($content)):
                 ?>
               </div>
               <div class="profile-detail">
-                <ul>
-                  <li class="title"><?php print $reporter_node->title; ?></li>
+                <?php foreach($byline_id as $key => $value) { ?>
+                  <ul>
+                  <li class="title"><?php print $value['title']; ?></li>
                   <?php
                   $twitter_handle = '';
-                  if (isset($reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'])) {
-                    $twitter_handle = $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];
+                  if (isset($value['twitter_handle'])) {
+                    $twitter_handle = $value['twitter_handle'];
                   }
                   $twitter_handle = str_replace('@', '', $twitter_handle);
                   if (!empty($twitter_handle)) {
                     ?>
-                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script><?php //print $reporter_node->field_reporter_twitter_handle[LANGUAGE_NONE][0]['value'];                                            ?></li>
+                    <li class="twitter"><a title="Follow on Twitter" href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>
 
 
                 <?php } ?>
                  <?php
                     if (!empty($byline_id)) {
-                      print itg_story_follow_unfollow_print($byline_id, 'author', 'follow_story', '');
+                      print itg_story_follow_unfollow_print($byline_id['nid'], 'author', 'follow_story', '');
                     }
                     ?>  
                 </ul>
+                <?php } ?>  
                 <ul class="date-update">
                   <li><?php print date('F j, Y', $node->created); ?>   </li>
                   <li><?php t('UPDATED'); ?><?php print date('H:i', $node->changed); ?> IST</li>
@@ -492,7 +499,7 @@ if (!empty($content)):
                             print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
                         }
                         else {
-                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                          $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                             if (file_exists($story_image)) {
                                 $file_uri = file_create_url($story_image);
@@ -533,15 +540,27 @@ if (!empty($content)):
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
-                      $icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
-                                    <i class="fa fa-camera"></i></span>';
+                     //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
+                                    //<i class="fa fa-camera"></i></span>';
                     }
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
 
                     print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">        
-                                    ' . $icon_detail . '</a>';
+                                    <span class="story-photo-icon">';
+                    ?>
+                    <?php
+                    if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'video') { ?>
+                                <i class="fa fa-play-circle"></i>
+                                <?php
+                            }
+                            else if ($node->field_story_associate_lead[LANGUAGE_NONE][0]['value'] == 'gallery') {
+                                ?>
+                                <i class="fa fa-camera"></i>
+                                <?php
+                            }
+                            print '</span></a>';
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
                         $urltags = addhttp($tagval->tag_url);
@@ -739,6 +758,18 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
+                // Code for Tech Photo gallery
+                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {				  
+                  if (!empty($node->field_technology_photogallery['und'])) {
+                    $tech_gallery_images = $node->field_technology_photogallery['und'][0]['entity']->field_gallery_image;
+                    $tech_gallery_alias = drupal_get_path_alias('node/' . $node->field_technology_photogallery['und'][0]['entity']->nid);
+                    $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias);
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
+                  }
+                  else {
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+                  }
+                }
                 //Code for the listicle token
                 if (strpos($story_body, '[ITG:LISTICLES]')) {
                   $listicle_output = '';
@@ -803,11 +834,11 @@ if (!empty($content)):
               if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
                 ?>
                 <div class="story-tech-chunk">
-                    <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
-                    <span class="tech-rating">
-                    <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
-                    </span>
-                <?php } ?>
+                    <?php //if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                    <!--<span class="tech-rating">-->
+                    <?php //echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
+                    <!--</span>-->
+                <?php //} ?>
                 <?php print render($content['field_story_tech_review_chunk']); ?>
                 </div>
           <?php } ?>
@@ -1078,6 +1109,7 @@ if (!empty($content)):
           ?>
           <div id="other-comment">
             <?php
+            // block for comment
             $block = module_invoke('itg_ugc_comment', 'block_view', 'ugc_form_comment_block');
             print render($block['content']);
             ?>

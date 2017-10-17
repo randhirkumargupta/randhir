@@ -132,6 +132,12 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  $items['get-amp-search-keyword'] = array(
+    'page callback' => 'itg_get_amp_search_result',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -332,6 +338,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       $form['field_cm_related_content_detail']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_magazine_kicker_text']['#attributes']['class'][] = 'element-hidden';
       $form['field_story_node_identity']['#attributes']['class'][] = 'element-hidden';
+      $form['field_itg_content_publish_date']['#attributes']['class'][] = 'element-hidden';
       }
 
       // add common hidden type field
@@ -791,7 +798,7 @@ function itg_common_node_presave($node) {
         if ($node->op == 'Publish') {
           $node->status = 1;
         }
-        elseif ($node->op == 'Save as Draft' || $node->status == 0) {
+        if ($node->op == 'Save as Draft') {
           $node->status = 0;
         }
       }
@@ -1026,15 +1033,15 @@ function itg_content_inactive() {
   $itg_result = $itg_query->execute()->fetchAll();
   itg_watchdog("nodes_expiry" , $itg_result);
   foreach ($itg_result as $itg_val) {
-    $node = node_load($itg_val->nid);
+    $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
-    $node->status = 0;
+    $node_data->status = 0;
 //    if($node->type == 'videogallery') {
 //      if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
 //        itg_videogallery_node_publish_to_unpublish($node->nid);
 //      }
 //    }
-    node_save($node);
+    node_save($node_data);
     itg_widget_handle_unpublished_node($node->nid);
   }
   itg_watchdog("nodes_expiry" , $nodeid);
@@ -1071,27 +1078,32 @@ function itg_is_special_page() {
  *   Returns node title.
  */
 function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
-  // Condition is to make free title on home page ITG-3774
+// Condition is to make free title on home page ITG-3774
   //if(drupal_is_front_page() || itg_is_special_page()) {
     $max_limit = 10000;
   //}
+    
   $arg = arg();
   $titlte = "";
   $positions_array = array();
   $left_smiles = "";
   $right_smiles = "";
-  $result = array(
-    'field_story_short_headline_value' => $node_obj->field_story_short_headline['und'][0]['value'],
-    'field_emoji_position_value' => $node_obj->field_emoji_position['und'][0]['value'],
-    'field_emoji_2_value' => $node_obj->field_emoji_2['und'][0]['value'],
-    'field_emoji_value' => $node_obj->field_emoji['und'][0]['value'],
-    'title' => $node_obj->title,
-  );
+  $result = [];
+  if (!empty($node_obj) && is_numeric($node_obj) && (int) $node_obj) {
+   $result[] = get_field_value_for_smily($node_obj);
+   
+  } else {
+      $result[] = array(
+        'field_story_short_headline_value' => $node_obj['field_story_short_headline_value'],
+        'field_emoji_position_value' => $node_obj['field_emoji_position_value'],
+        'field_emoji_2_value' => $node_obj['field_emoji_2_value'],
+        'field_emoji_value' => $node_obj['field_emoji_value'],
+        'title' => $node_obj['title'],
+      );
+  }
   if (!empty($result[0]['field_story_short_headline_value'])) {
-    foreach ($result as $positions) {
-      if (!empty($positions['field_emoji_position_value'])) {
-        $positions_array[] = $positions['field_emoji_position_value'];
-      }
+    foreach ($result[0]['field_emoji_position_value'] as $positions) {
+        $positions_array[] = $positions;
     }
     if (in_array('left', $positions_array)) {
       if (!empty($result[0]['field_emoji_2_value'])) {
@@ -1142,7 +1154,7 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
     }
   }
   else {
-    return ucfirst(mb_strimwidth($node_obj->title, $min_limit, $max_limit, ".."));
+    return ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
   }
 }
 
@@ -1664,8 +1676,8 @@ function itg_common_get_addontitle($node_obj) {
   if (!empty($node_obj)) {
      $addon_list = array();
     //while ($record = $result->fetchAssoc()) {
-      $addon_list['ad_title'] = $node_obj->field_story_new_title['und'][0]['value'];
-      $addon_list['ad_url'] = $node_obj->field_story_redirection_url_titl['und'][0]['value'];//$record['field_story_redirection_url_titl_value'];
+      $addon_list['ad_title'] = $node_obj['ad_title'];
+      $addon_list['ad_url'] = $node_obj['ad_url'];
     //}
 
     return $addon_list;
@@ -1832,6 +1844,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
           $fullReplacesBodyText = str_replace($value1, $amp_instagram, $fullReplacesBodyText);
           $value2 = '<script src="//platform.instagram.com/en_US/embeds.js" async="" defer="" ></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+          $value2 = '<script async defer src="//platform.instagram.com/en_US/embeds.js"></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
 
           $value2 = '<script async="" defer="" src="//platform.instagram.com/en_US/embeds.js" ></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
@@ -1929,4 +1943,88 @@ function itg_get_twitter_embeded_video_id($bodystr) {
     return $twitter_url_emb_id;
   }
   return 0;
+}
+
+/**
+ * Function for getting content by section
+ * @param int $section_id
+ * @param string $type
+ * @return array
+ */
+function itg_common_get_content_by_section($section_id, $type) {
+  $item_per_page = 4;
+  $table = 'itg_widget_order_section';
+  if (strtolower($type) == 'all') {
+    $table = 'itg_widget_order';
+  }
+  $db_query = db_select($table, 'iwo')->extend('PagerDefault')->limit($item_per_page);
+  $db_query->join('node', 'n', 'n.nid = iwo.nid');
+  $db_query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $db_query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+  if ($type == 'videogallery') {
+    $db_query->leftJoin('field_data_field_video_duration', 'fdv', 'fdv.entity_id=n.nid');
+  }
+  $db_query->fields('n', array('nid', 'title', 'created'));
+  $db_query->fields('eli_file', array('uri'));
+  if ($type == 'videogallery') {
+    $db_query->fields('fdv', array('field_video_duration_value'));
+  }
+  $db_query->condition('iwo.widget', 'section_wise_widget');
+  $db_query->condition('iwo.content_type', $type);
+  $db_query->condition('iwo.cat_id', $section_id);
+  $db_query->orderBy('iwo.weight', 'DESC');
+  $result = $db_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Function for counting the images in photogallery.
+ * @param type $nid
+ * @return type
+ */
+function itg_common_count_images_in_photogallery($nid) {
+  $query = db_select('field_data_field_gallery_image', 'fdg')
+      ->fields('fdg', array('field_gallery_image_value'))
+      ->condition('fdg.entity_id', $nid);
+  $result = $query->execute()->rowCount();
+  return $result;
+}
+
+/* Function is used to prepare node title with emoji.
+ * 
+ * @param type $nid
+ * @return type
+ */
+function get_field_value_for_smily($nid) {
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
+  $query->fields('n', array('title'));
+  $query->fields('emoji', array('field_emoji_value'));
+  $query->fields('sh', array('field_story_short_headline_value'));
+  $query->fields('emoji_2', array('field_emoji_2_value'));
+  $query->fields('emoji_pos', array('field_emoji_position_value'));
+  $query->condition('n.nid', $nid);
+  //$query->condition('n.type', 'story');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return array(
+    'field_story_short_headline_value' => $result[0]['field_story_short_headline_value'],
+    'field_emoji_position_value' => array($result[0]['field_emoji_position_value'] , $result[1]['field_emoji_position_value']),
+    'field_emoji_2_value' => $result[0]['field_emoji_2_value'],
+    'field_emoji_value' => $result[0]['field_emoji_value'],
+    'title' => $result[0]['title'],
+  );
+}
+
+/**
+ * Implements itg_get_amp_search_result().
+ */
+function itg_get_amp_search_result() {
+  if (isset($_GET['search'])) {
+    $name = isset($_GET['search']) ? $_GET['search'] : '';
+    $searchurl = FRONT_URL . '/topic/' . $name;
+    drupal_goto($searchurl);
+  }
 }

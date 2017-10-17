@@ -1,0 +1,18 @@
+@media screen and (max-width: 800px) {
+#header{ height:auto;}
+.header{ width:100%; padding-bottom:45px;}
+.logo{ float:none; margin:0 auto;}
+.top_ad{ width:728px; margin:0 auto; float:none;}
+#container{ width:100%;}
+.left-container{ float:none; margin:0 auto;}
+.right-container{ width:657px; margin:0 auto; float:none;}
+.colum{ min-height:375px; margin-right:20px;}
+.colum:nth-child(2n){ margin-right:0px;}
+#bottom_ad{ width:100%;}
+.index-footer .footertag img.btm-itlogo{ margin-left:-135px;}
+.index-footer{ width:100%;}
+.footertag nav, footer nav{ width:94.3%;}
+.btm-arrow{ display:none;}
+.nav_padding{ padding:8px 6px;}
+#container .wapper{ margin:0!important; padding:0!important;}
+}

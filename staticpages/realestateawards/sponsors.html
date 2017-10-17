@@ -1,0 +1,111 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link href="http://businesstoday.intoday.in/bt-mindrush/style.css" rel="stylesheet" type="text/css">
+
+<style>
+#leftsponsors {width:200px; float:left;}
+#sponsorsdetails{float:left; margin-left:20px; width:450px;}
+.mainul, .innerul{margin:0 0 2px 0; padding:0;}
+.mainul li.mainli, .innerul li.innerli, .innerul li.innerli_a{width:200px;list-style:none;background-color: #DBDCDE;}
+.mainul li .mainlitop{background: #acacac; color: #FFFFFF; font: bold 14px/30px Myriadpro,Arial,Helvetica,sans-serif;  height: 30px; padding-left: 10px;}
+.innerul li.innerli_a{border:1px solid #E1E1E1; border-top:none; font:bold 12px Arial; color:#6a6a6a; padding:5px 0 5px 10px; width:188px;}
+.innerul li.innerli a{border:1px solid #E1E1E1; border-top:none; font:bold 12px Arial; color:#6a6a6a; padding:5px 0 5px 10px; width:188px; display:block; text-decoration:none;}
+.innerul li.innerli a:hover{text-decoration:none; background:none;  border:1px solid #ED1C24; background-color:#ED1C24; border-top:none; color:#FFFFFF;}
+.innerul li.redli{border:1px solid #ED1C24; border-top:none; font:bold 12px Arial; padding:5px 0 5px 10px; color:#FFFFFF; width:188px; background: url("http://media2.intoday.in/btmt/images/arrow1.jpg") no-repeat scroll 178px 6px #ED1C24;}
+.innerul li.redli a{color:#FFFFFF; text-decoration:none;}
+.compName {
+    color: #ED1C24;
+    font-family: arial;
+    font-size: 22px;
+    font-weight: normal;
+    padding: 5px 0 0;
+}
+
+</style>
+<script>
+function changeColor(colo) {
+	//alert(colo);
+	var col = document.getElementById(colo);
+	var col1 = document.getElementById("id_1");
+	var col2 = document.getElementById("id_2");
+	var col3 = document.getElementById("id_3");
+	var col4 = document.getElementById("id_4");
+	var col5 = document.getElementById("id_5");
+	var col6 = document.getElementById("id_6");
+	
+	
+	
+	col1.className="innerli";
+	col2.className="innerli";
+	col3.className="innerli";
+	col4.className="innerli";
+	col5.className="innerli";
+	col6.className="innerli";
+	
+
+	col.className = 'redli';
+
+	if($('#'+colo).attr('frameheight')!='' && $('#'+colo).attr('frameheight')!=undefined) {
+		$('#sponser').height($('#'+colo).attr('frameheight'));
+	}
+
+}
+</script>
+<div>
+	    <table width="730" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+            <div id="sponsorspage">
+            	<div id="leftsponsors">
+                	<ul class="mainul">
+                    	<li class="mainli">
+                        	<div class="mainlitop">Presenting Sponsor</div>
+                            <ul class="innerul">
+                            	<li class="redli" id="id_1" frameheight="800"><a href="lotus-green.html" target="sponser" onClick="javascript:changeColor('id_1')">Lotus Greens</a></li>
+                            </ul>
+                        </li>
+                      <!--  <li class="mainli">
+                        	<div class="mainlitop">Bespoke Gift Partner</div>
+                            <ul class="innerul">
+                            	<li class="innerli" id='id_6' frameheight="400"><a href="da-milano.html" target="sponser" onClick="javascript:changeColor('id_6')" >Da Milano</a></li>
+                            </ul>
+                        </li>
+                        <li class="mainli">
+                        	<div class="mainlitop">TV Partner</div>
+                            <ul class="innerul">
+                            	<li class="innerli" id='id_2' frameheight="400"><a href="headlinestoday.html" target="sponser" onClick="javascript:changeColor('id_2')" >Headlines Today</a></li>
+                            </ul>
+                        </li>
+                         <li class="mainli">
+                        	<div class="mainlitop">News Paper Partner</div>
+                            <ul class="innerul">
+                            	<li class="innerli" id='id_3' frameheight="460"><a href="mailtoday.html" target="sponser" onClick="javascript:changeColor('id_3')" >Mail Today</a></li>
+                            </ul>
+                        </li> 
+                         <li class="mainli">
+                        	<div class="mainlitop">Online Partner</div>
+                            <ul class="innerul">
+                            	<li class="innerli" id='id_4' frameheight="400"><a href="intoday.html" target="sponser" onClick="javascript:changeColor('id_4')" >India Today Group Digital</a></li>
+                            </ul>
+                        </li> 
+                        <li class="mainli">
+                        	<div class="mainlitop">Radio Partner</div>
+                            <ul class="innerul">
+                            	<li class="innerli" id='id_5' frameheight="400"><a href="oye.html" target="sponser" onClick="javascript:changeColor('id_5')" >Oye! 104.8 FM</a></li>
+                            </ul>
+                        </li>-->
+                        
+                        
+                        
+                        
+                    </ul>
+                </div>
+                <div id="sponsorsdetails" >
+                	<iframe id="sponser" style="height: 800px;" name="sponser" src="/realestateawards/lotus-green.html" width="440" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </td>
+      </tr>
+    </table>
+</div>
+

@@ -118,9 +118,9 @@ $uri = base64_encode($actual_link);
                                       <div class="bounce2"></div>
                                       <div class="bounce3"></div>
                                   </div></div>
-                              <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
+                              <div class="<?php echo $hide_player; ?> iframe-video" id="video_palyer_container"> <div class = "video-iframe-wrapper">
 
-                                      <div class="iframe-video1 video-iframe-wrapper" id="video_0">
+                                      <div class=" video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
                                             print theme('internal_video_player', array("data" => $videoids[0]->fid));
@@ -137,7 +137,7 @@ $uri = base64_encode($actual_link);
                                                   {
                                                       video: '<?php print $vide_dm_id; ?>',
                                                       width: '600px',
-                                                      height: '450px',
+                                                      height: '100%',
                                                       params: {
                                                           autoplay: <?php echo $autoplay; ?>,
                                                           controls: 1,
@@ -383,15 +383,186 @@ $uri = base64_encode($actual_link);
                       print render($render_array);
                       ?>
                   </div>
-                  <div class="latest_video">
-                      <?php echo views_embed_view('video_landing_header', 'block_1'); ?>
-                  </div>
+                  <div class="latest_video video_header_tabs">
+                        <?php //echo views_embed_view('video_landing_header', 'block_1');?>
+                        <?php
+                        if (function_exists('itg_get_related_content')) {
+                          $related_content = itg_get_related_content(arg(1));
+                          $_flag = true;
+                          if (empty($related_content)) {
+                            $_flag = false;
+                          }
+                        }
+                        ?>
+                        <div class="tab-buttons">
+                            <span class="<?php echo ($_flag ? 'active' : ''); ?>" data-id="tab-data-1">
+                                <?php
+                                print 'Related';
+                                ?>
+                            </span>
+                            <span class="<?php echo (!$_flag ? 'active' : ''); ?>" data-id="tab-data-2">
+                                <?php
+                                print 'Trending Videos';
+                                ?>
+                            </span>
+                        </div>
+                        <div class="itg-widget-child tab-data tab-data-1 <?php echo ($_flag ? '' : 'hide'); ?>">						
+                            <?php
+                            if (module_exists('itg_videogallery')) {
+                              $related_content_tab = block_load('itg_videogallery', 'itg_videogallery_tab_realted');
+                              $render_array = _block_get_renderable_array(_block_render_blocks(array($related_content_tab)));
+                              print render($render_array);
+                            }
+                            ?>
+                        </div>
+                        <div class="itg-widget-child tab-data tab-data-2 <?php echo (!$_flag ? '' : 'hide'); ?>">
+                            <?php
+                            if (module_exists('itg_widget')) {
+                              $watch_right_now = block_load('itg_videogallery', 'itg_trending_videos_widget_tab');
+                              $render_array = _block_get_renderable_array(_block_render_blocks(array($watch_right_now)));
+                              print render($render_array);
+                            }
+                            ?>
+                        </div>
+                    </div>
               </div>
           </div>
       </div>
   </div>
 <?php endforeach; ?>
+<style>
+.other_video_category h3{
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #bb0a0a;
+            position: relative;
+    }
+    .other_video_category h3 span{
+            padding-top: 0;
+            padding-left: 0;
+            background: #fff;
+            z-index: 1;
+            position: relative;
+            padding: 45px 20px 10px 0px;
+            display: inline-block;
+    }
+    .other_video_category h3:before{
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            bottom: 20px;
+            height: 5px;
+            margin-top: -2px;
+            background: #ddd;
+    }
+    #block-itg-videogallery-itg-videogallery-menu-content ul{
+        list-style: none;
+        white-space: nowrap;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        border-bottom: 1px solid #d9d9d9;
+        overflow: auto;
+    }
+    #block-itg-videogallery-itg-videogallery-menu-content ul li{
+        display: inline-block;
+        vertical-align: top;
+        border-right: 0;
+        text-transform: uppercase;
+        padding-right: 30px;
+    }
+    #block-itg-videogallery-itg-videogallery-menu-content ul li a{
+        display: block;
+        margin: 0;
+        padding: 10px 5px 3px;
+        border-bottom: 3px solid transparent;
+        font-family: Roboto;
+        font-weight: 500;
+        color: #969696;
+    }
+    #block-itg-videogallery-itg-videogallery-menu-content{
+            margin-top: 22px;
+            float: left;
+            width: 100%;
+            margin-bottom: 22px;
+    }
 
+        @media (min-width: 768px){
+        #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content{    float: left;  width: 100%; overflow-x: scroll;}
+        #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content ul.photo-list li{ width:200px; float:left; padding:0;}
+        #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-footer{display:none}
+        #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content .photo-list li:nth-child(4n+1){clear: inherit;}
+        #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .other_video_category h3{ float:left}
+                #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content .photo-list{width:1600px;margin-left: 3px;}
+    }
+    @media (max-width: 767px){
+       #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-footer{display:block}
+   
+    }
+       
+        @media only screen and (max-width: 767px) {
+            #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content .photo-list li:nth-of-type(1n+5) {display: none;}
+        #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .load-more-video-dec{ text-align:center; }
+
+        #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .load-more-video-dec a.add-more-video-dec{display: inline-block; vertical-align: top; padding: 10px 20px; font: 14px/18px Roboto; color: #666; background-color: #d1d1d1; border-radius: 5px; margin: 0 10px; text-transform: uppercase;}
+
+        }
+        #block-itg-videogallery-itg-other-videogallery-section .photo-list img{width: 170px;height: 127px;}
+
+.video-header-right .video_header_tabs .tab-data-2 h3{
+    display:none;
+}
+.video-header-right .trending-videos{ border:0px;}
+#related-video-tab ul li.related_content_tab .pic,.video-header-right .trending-videos li.trending-videos-list .pic{
+        width: 170px;
+            float: right;
+    margin-left: 5px;
+        position: relative;
+}
+#related-video-tab ul li, .trending-videos ul li{
+        padding: 15px 24px 15px 0px;
+        border-bottom: 1px solid #aaa9a9;overflow: hidden;
+}   
+#related-video-tab ul li.related_content_tab .title,.video-header-right .trending-videos li.trending-videos-list p{
+    display: block;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 19px;
+    color: #aaa9a9;
+}
+#related-video-tab ul li.related_content_tab .title a, .trending-videos li.trending-videos-list p a{color: #aaa9a9;}
+.latest_video .tab-buttons {background: #000; border-radius: 0;padding: 5px 0 0 5px;}
+.latest_video .tab-buttons.tab-buttons span{border:0px;background:none;width: auto; padding:5px 10px; height:26px; line-height:18px;font-weight: 500;font-size: 12px; color: #fff; font-size: 12px; width: auto; border-radius: 0;}
+.latest_video .tab-buttons span.active{ border: 0px; background: #363636; color: #fff;height:26px; line-height:18px; font-size: 12px; width: auto; border-radius: 0;}
+.video-header-right .related_content_tab span.videolengh{bottom: 0;left: 0; position: absolute;padding: 3px;background-color: rgba(0, 0, 0, 0.5);color: #fff;font-size: 12px;font-family: Roboto;}
+.video-landing-header .upload-date span{ font-size:12px; font-weight:600; margin: 10px 0; display: block;}
+.video-landing-header .top-section p{margin-bottom:10px}
+.latest_video.video_header_tabs .tab-data-1{height:475px;overflow-y: auto;}
+.latest_video.video_header_tabs .tab-data-2{height:475px;overflow-y: auto;}
+.video_header_tabs #related-video-tab ul li.related_content_tab .related-default{width:170px;height:127px;}
+.video_header_tabs .trending-videos ul li .trending-videos-list img{width:170px;height:127px;}
+</style>
+<script>
+Drupal.behaviors.myModuleTest = {
+  attach: function (context, settings) {
+    jQuery('#block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-footer .load-more-video-dec').click(function(){
+        if(jQuery(this).children('a').text().trim() == 'Load More'){
+            jQuery("#block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content .photo-list li").show();
+            jQuery(this).html('<a href="javascript:void(0)" class="add-more-video-dec">Load Less<i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a>');
+        }else{
+            jQuery('#block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content .photo-list li').hide();
+            jQuery('#block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content .photo-list li:lt(4)').show();
+            jQuery(this).html('<a href="javascript:void(0)" class="add-more-video-dec">Load More<i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>');
+        }
+       
+       
+    });
+  }
+};
+</script>
 <script>
   jQuery(document).ready(function () {
 
