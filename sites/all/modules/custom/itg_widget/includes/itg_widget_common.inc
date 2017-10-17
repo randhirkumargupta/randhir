@@ -767,6 +767,9 @@ function itg_widget_theme() {
     'podcast_banner' => array(
       'template' => 'templates/podcast-banner',
     ),
+    'section_manual_order_widget_data' => array(
+      'template' => 'templates/section-manual-order-widget-data',
+    ),
   );
   return $themes;
 }

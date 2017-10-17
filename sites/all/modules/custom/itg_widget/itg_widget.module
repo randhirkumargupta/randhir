@@ -436,6 +436,10 @@ function itg_widget_block_info() {
     $blocks['auto_master_form_widget'] = array(
       'info' => t('Widget: Auto Master Form'),
     );
+    
+    $blocks['section_manual_order_widget'] = array(
+      'info' => t('Widget: Section Manual Widget'),
+    );
     return $blocks;
 }
 
@@ -957,7 +961,26 @@ function itg_widget_block_view($delta = '') {
             if (module_exists('itg_auto_search')) {
                 $block['content'] = drupal_get_form('auto_master_form');
             }
-            break;
+        break;
+        case 'section_manual_order_widget':
+			global $theme;
+			if (isset($_GET['section']) && !empty($_GET['section'])) {
+			  $selction_name = 'section';
+			}
+			else {
+			  $selction_name = 'section_name';
+			}
+			if (isset($_GET[$selction_name])) {
+			  $cat_id = $_GET[$selction_name];
+			}
+			if ($theme == FRONT_THEME_NAME) {
+			  $cat_id = arg(2);
+			}
+			
+            $data = get_view_nodes_form_custom_table_review_widgets('section_manual_order_widget', $cat_id, 18, 0);
+
+            $block['content'] = theme("section_manual_order_widget_data", array("data" => $data));
+        break;
     }
 
 
