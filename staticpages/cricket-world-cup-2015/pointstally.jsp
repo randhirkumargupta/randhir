@@ -162,13 +162,13 @@ $('.right-arrow').click(function(){
                       <li class="item-14"><a href="http://indiatoday.intoday.in/story/icc-world-cup-2015-cricket-team-profiles-united-arab-emirates-uae/1/414598.html" title="UAE">United Arab Emirates</a></li>
                     </ol>
                 </div></li>
-        		<li><a href="http://indiatoday.intoday.in/cricket-world-cup-2015/keyplayer.jsp">key players</a></li>
+        		<li><a href="/cricket-world-cup-2015/keyplayer.jsp">key players</a></li>
         		<li><a href="http://indiatoday.intoday.in/gallerylist/icc-world-cup-2015-photos/1/140.html">photos</a></li>
         		<li><a href="http://indiatoday.intoday.in/videolist/world-cup-2015/1/966.html">Videos</a></li>
-        		<li><a href="http://indiatoday.intoday.in/cricket-world-cup-2015/schedule.jsp">Schedule</a></li>
-        		<li><a href="http://indiatoday.intoday.in/cricket-world-cup-2015/pointstally.jsp">Points Tally</a></li>
-        		<li><a href="http://indiatoday.intoday.in/cricket-world-cup-2015/venues.jsp">Venues</a></li>
-        		<li><a href="http://indiatoday.intoday.in/cricket-world-cup-2015/indiaatworldcup.jsp">india at the world cup</a></li>
+        		<li><a href="/cricket-world-cup-2015/schedule.jsp">Schedule</a></li>
+        		<li><a href="/cricket-world-cup-2015/pointstally.jsp">Points Tally</a></li>
+        		<li><a href="/cricket-world-cup-2015/venues.jsp">Venues</a></li>
+        		<li><a href="/cricket-world-cup-2015/indiaatworldcup.jsp">india at the world cup</a></li>
         		 
 				<div class="clr"></div>
                  
