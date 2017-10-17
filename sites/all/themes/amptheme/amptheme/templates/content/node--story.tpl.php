@@ -391,8 +391,10 @@ if (!empty($content)):
                 if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
                   print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
                 }
-
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                //code for listicle story
+                if (strpos($story_body, '[ITG:LISTICLES]')) {
+                  $listicle_output = '';
+                  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
                   $buzz_output.= '';
                   $num = 1;
                   foreach ($node->field_story_listicle['und'] as $buzz_item) {
@@ -419,12 +421,14 @@ if (!empty($content)):
                     $listicle_output.= '</div>';
                     $num++;
                   }
-                  print $listicle_output;
+                  //print $listicle_output;
+                  print $story_body = str_replace('[ITG:LISTICLES]', $listicle_output, $story_body);
                 }
-                else {
+                }else {
                   // Print story body
                   print $story_body;
                 }
+                
                ?>
               </div>
               <!-- render story technology chunk -->
