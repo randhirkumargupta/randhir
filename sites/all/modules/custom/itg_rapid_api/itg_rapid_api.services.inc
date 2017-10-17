@@ -3296,6 +3296,20 @@ function itg_rapid_api_homePage($token) {
 
 function itg_rapid_api_testing($token) {
 
+    $data = '';
+    global $base_url;
+
+        $options = array(
+                        'method' => 'GET',
+                        'data' => $data,
+                        'timeout' => 30,
+                        'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+                );
+        $value = "home-page-feed";
+        $url = $base_url."/".$value;
+        echo $url; die();
+        $result = drupal_http_request($url, $options);
+    
 // code for check POST method only start   
     $user = user_load(1989);
     echo "<pre>";
