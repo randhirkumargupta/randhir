@@ -3307,7 +3307,9 @@ function itg_rapid_api_testing($token) {
                 );
         $value = "home-page-feed";
         $url = $base_url."/".$value;
-        echo $url; die();
+        //echo $url; die();
+        $res = callAPI('GET', $url, $data = false);
+        p($res);die();
         $result = drupal_http_request($url, $options);
     
 // code for check POST method only start   
