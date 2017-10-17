@@ -235,7 +235,7 @@ class ItgCricketliveblog extends XMLMigration {
       }
       field_attach_update('node', $node);
     }
-    ordering_set_of_content($node, (300 - (int) $row->xml->id));
+    ordering_set_of_content($node, $row->xml->id);
   }
 
 }
