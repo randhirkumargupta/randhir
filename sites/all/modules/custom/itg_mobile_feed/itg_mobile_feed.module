@@ -1087,6 +1087,7 @@ function itg_mobile_feed_xml_feed_url_cron() {
                         'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
                 );
         $url = $base_url."/".$value;
-        $result = drupal_http_request($url, $options);
+        //$result = drupal_http_request($url, $options);
+        $res = callAPI('GET', $url, $data = false);
     }
 }
