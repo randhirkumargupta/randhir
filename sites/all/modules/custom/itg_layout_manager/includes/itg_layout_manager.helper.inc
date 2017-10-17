@@ -340,7 +340,7 @@ function get_layout_details($section_name, $template_name, $status) {
 
         $data[$itg_val->block_name] = $result;
     }
-
+exit;
     return $data;
 }
 
