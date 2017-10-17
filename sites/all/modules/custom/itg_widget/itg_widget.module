@@ -1794,7 +1794,7 @@ function _get_widget_name($view_name, $page_name) {
     } elseif ($page_name == 'dont_miss_content') {
         $widget = 'dont_miss_content_widget';
     } elseif ($view_name == "views_form_section_wise_top_story_widget_order_reorder_page" && $page_name == "page") {
-        $widget = 'section_top_stories_widget';
+        $widget = 'section_manual_order_widget';
     } 
     return $widget;
 }

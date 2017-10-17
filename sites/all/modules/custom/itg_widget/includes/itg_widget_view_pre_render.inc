@@ -40,7 +40,7 @@ function itg_widget_views_pre_render(&$view) {
       if(isset($_GET['category_tid']) && !empty($_GET['category_tid'])){
         $section_wise_query = $color_box_query;
         $section_wise_query['category_tid'] = $_GET['category_tid'];
-        $header_content .= l(t('Section Wise Top Story Widget'), 'section-manual-order-widget-listing', array('query' => $section_wise_query, 'attributes' => $color_box_class));
+        $header_content .= l(t('Section manual order widget'), 'section-manual-order-widget-listing', array('query' => $section_wise_query, 'attributes' => $color_box_class));
       }      
       $view->attachment_before = $header_content;
     }

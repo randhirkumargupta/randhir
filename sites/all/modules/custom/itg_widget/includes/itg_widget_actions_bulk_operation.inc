@@ -248,7 +248,7 @@ function itg_widget_categories_wise_node_group_submit($form , &$form_state) {
 function itg_widget_categories_wise_node_group_validate($form , &$form_state){
   $view_name = $form_state['build_info']['args'][0]->name;
   $widget = _get_widget_name("views_form_" . $view_name . "_page" , $current_display);
-  if($widget == 'section_top_stories_widget'){
+  if($widget == 'section_manual_order_widget'){
 	$category_id = $_GET['category_tid'];
 	if(empty($category_id) || $category_id == 0){
 		drupal_set_message(t('Please select Category!'), 'error');
