@@ -328,10 +328,7 @@ function get_layout_details($section_name, $template_name, $status) {
 
         if (isset($itg_val->widget_name)) {
             // get widget block
-            echo $itg_val->widget_name.'@';
-            if ($itg_val->widget_name == 'section_wise_order') {
-            //$widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url, $itg_val->block_name);
-            }
+            $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url, $itg_val->block_name);            
         } else {
             $widget = '<p>Drag template widgets here !</p>';
         }
@@ -340,7 +337,7 @@ function get_layout_details($section_name, $template_name, $status) {
 
         $data[$itg_val->block_name] = $result;
     }
-//exit;
+
     return $data;
 }
 
