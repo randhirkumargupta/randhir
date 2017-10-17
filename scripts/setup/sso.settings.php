@@ -1,4 +1,7 @@
 <?php
+//error_reporting(E_ALL);
+//ini_set('display_errors', TRUE);
+//ini_set('display_startup_errors', TRUE);
 
 /**
  * @file
@@ -212,7 +215,21 @@
  *   );
  * @endcode
  */
-$databases = array();
+$databases = array (
+  'default' => 
+  array (
+    'default' => 
+    array (
+      'database' => 'IndiaToday_sso',
+      'username' => 'itgd_it_write',
+      'password' => '!tgd@!t@wr!te@101',
+      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+      'port' => '3306',
+      'driver' => 'mysql',
+      'prefix' => '',
+    ),
+  ),
+);
 
 /**
  * Access control for update.php script.
@@ -244,7 +261,7 @@ $update_free_access = FALSE;
  *   $drupal_hash_salt = file_get_contents('/home/example/salt.txt');
  *
  */
-$drupal_hash_salt = '';
+$drupal_hash_salt = 'aPQg92feKIjaZYbT5M0rvWxCctMHiUU3GBjNkEaRNLM';
 
 /**
  * Base URL (optional).
@@ -387,19 +404,19 @@ ini_set('session.cookie_lifetime', 2000000);
  * Be aware, however, that it is likely that this would allow IP
  * address spoofing unless more advanced precautions are taken.
  */
-# $conf['reverse_proxy'] = TRUE;
+$conf['reverse_proxy'] = TRUE;
 
 /**
  * Specify every reverse proxy IP address in your environment.
  * This setting is required if $conf['reverse_proxy'] is TRUE.
  */
-# $conf['reverse_proxy_addresses'] = array('a.b.c.d', ...);
+$conf['reverse_proxy_addresses'] = array('10.6.210.193', '10.6.210.12');
 
 /**
  * Set this value if your proxy server sends the client IP in a header
  * other than X-Forwarded-For.
  */
-# $conf['reverse_proxy_header'] = 'HTTP_X_CLUSTER_CLIENT_IP';
+$conf['reverse_proxy_header'] = 'HTTP_X_CLUSTER_CLIENT_IP';
 
 /**
  * Page caching:
