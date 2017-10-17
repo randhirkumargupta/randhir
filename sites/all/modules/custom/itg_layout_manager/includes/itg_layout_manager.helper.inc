@@ -328,7 +328,7 @@ function get_layout_details($section_name, $template_name, $status) {
 
         if (isset($itg_val->widget_name)) {
             // get widget block
-            if ($itg_val->widget_name != 'section_wise_order') {
+            if ($itg_val->widget_name == 'section_wise_order') {
             $widget = get_itg_widget($itg_val->widget_name, $itg_val->widget_info, $filter_url, $itg_val->block_name);
             }
         } else {
