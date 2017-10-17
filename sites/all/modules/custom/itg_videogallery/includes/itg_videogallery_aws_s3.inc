@@ -95,6 +95,7 @@ function itg_video_get_s3_video_del($path) {
  * @argument struing $bitrate_url, $video_name
  * @return $result array
  */
+
 function itg_video_send_dm_to_s3($bitrate_url, $video_name) {
   $bucket = variable_get('aws_bucket');
   $aws_access_key = variable_get('aws_access_key');
