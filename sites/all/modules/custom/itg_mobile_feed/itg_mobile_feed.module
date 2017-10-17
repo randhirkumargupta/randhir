@@ -1005,3 +1005,88 @@ function redis_cache_pattern_manager_submit($form,&$form_state){
   }
 
 }
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+
+function itg_mobile_feed_cronapi($op, $job = NULL) {
+  $items['xml_feed_url_cron'] = array(
+    'description' => 'cron for update all xml feed.',
+    'callback' => 'itg_mobile_feed_xml_feed_url_cron',
+  );
+  return $items;
+  
+}
+
+/**
+ * Implements function for cron for update all xml feed
+*/
+
+function itg_mobile_feed_xml_feed_url_cron() {
+    global $base_url;
+    $xml_feed_url = array();
+    $xml_feed_url[] = "home-page-feed";
+    $xml_feed_url[] = "program-section-page-feed";
+    $xml_feed_url[] = "program-category-page-feed/1206960";
+    $xml_feed_url[] = "program-category-page-feed/1207605";
+    $xml_feed_url[] = "program-category-page-feed/1207722";
+    $xml_feed_url[] = "program-category-page-feed/1207726";
+    $xml_feed_url[] = "program-category-page-feed/1207728";
+    $xml_feed_url[] = "program-category-page-feed/1207755";
+    $xml_feed_url[] = "program-category-page-feed/1207797";
+    $xml_feed_url[] = "program-category-page-feed/1207827";
+    $xml_feed_url[] = "program-category-page-feed/1207972";
+    //$xml_feed_url[] = "sites/default/files/videos/programmes1.xml";
+    $xml_feed_url[] = "root-category-content-page-feed/1206578";
+    $xml_feed_url[] = "root-category-content-page-feed/1206550";
+    $xml_feed_url[] = "root-category-content-page-feed/1206577";
+    $xml_feed_url[] = "root-category-content-page-feed/1206795";
+    $xml_feed_url[] = "root-category-content-page-feed/1206533";
+    $xml_feed_url[] = "root-category-content-page-feed/1206567";
+    $xml_feed_url[] = "root-category-content-page-feed/1207414";
+    $xml_feed_url[] = "root-category-content-page-feed/1206689";
+    $xml_feed_url[] = "root-category-content-page-feed/1206688";
+    $xml_feed_url[] = "photo-section-page-feed";
+    $xml_feed_url[] = "photo-category-page-feed/1206578";
+    $xml_feed_url[] = "photo-category-page-feed/1206749";
+    $xml_feed_url[] = "photo-category-page-feed/1206749";
+    $xml_feed_url[] = "photo-category-page-feed/1206550";
+    $xml_feed_url[] = "photo-category-page-feed/1206577";
+    $xml_feed_url[] = "photo-category-page-feed/1206567";
+    $xml_feed_url[] = "photo-category-page-feed/1206749";
+    $xml_feed_url[] = "photo-category-page-feed/1206550";
+    $xml_feed_url[] = "photo-category-page-feed/1206577";
+    $xml_feed_url[] = "photo-category-page-feed/1206567";
+    $xml_feed_url[] = "photo-category-page-feed/1206533";
+    $xml_feed_url[] = "photo-category-page-feed/1206676";
+    $xml_feed_url[] = "photo-category-page-feed/1206719";
+    $xml_feed_url[] = "video-section-page-feed";
+    $xml_feed_url[] = "video-category-page-feed/1206578";
+    $xml_feed_url[] = "video-category-page-feed/1206577";
+    $xml_feed_url[] = "video-category-page-feed/1207580";
+    $xml_feed_url[] = "video-category-page-feed/1206749";
+    $xml_feed_url[] = "video-category-page-feed/1206533";
+    $xml_feed_url[] = "video-category-page-feed/1206567";
+    //$xml_feed_url[] = "sites/default/files/xml_it/videos/video_sports.xml";
+    //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/it-event.xml";
+    //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/aboutus.xml";
+    //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/contactus.xml";
+    $xml_feed_url[] = "story-detail-page-feed/664";
+    $xml_feed_url[] = "video-detail-page-feed/18815";
+    $xml_feed_url[] = "photo-detail-page-feed/626";
+    
+    foreach ($array as $key => $value) {    
+        $data = '';
+
+        $options = array(
+                        'method' => 'GET',
+                        'data' => $data,
+                        'timeout' => 30,
+                        'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+                );
+        $url = $base_url."/".$value;
+        $result = drupal_http_request($url, $options);
+    }
+}
