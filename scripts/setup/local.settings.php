@@ -2,9 +2,12 @@
 #MongoDB
 $conf['mongodb_connections'] = array(
   'default' => array(                             // Connection name/alias
+    //'host' => 'mongodb://itoday_write:1t0day_wr1te111@10.6.210.218/itgcmsmongo',
+    'host' => 'mongodb://itoday_write:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo',
     //'host' => 'mongodb://10.6.210.19',                      // Omit USER:PASS@ if Mongo isn't configured to use authentication.
-    'host' => 'mongodb://10.6.101.66',//prod
-    'db' => 'itgcmsmongo'                   // Database name. Make something up, mongodb will automatically create the database.
+    //'host' => 'mongodb://10.6.101.66',//prod
+    'db' => 'itgcmsmongo',                   // Database name. Make something up, mongodb will automatically create the database.
+    'connection_options' => array('replicaSet' => 'uatreplica'),
   ),
 );
 
@@ -49,12 +52,12 @@ $conf['memcache_storage_key_prefix'] = 'itgmem';
 //$conf['session_inc'] = 'sites/all/modules/contrib/memcache_storage/includes/session.inc';
 
 // setting for UAT
-/*$conf['memcache_servers'] = array(
+$conf['memcache_servers'] = array(
   'itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
-);*/
+);
 
 // setting for production
-$conf['memcache_servers'] = array(
+/*$conf['memcache_servers'] = array(
   'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
-);
+);*/
 

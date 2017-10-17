@@ -20,8 +20,9 @@ function add_nofollow_in_body($bodytext) {
  * Updating rich snippet for node type story, videogallery and mega review critic
  */
 function itg_seo_node_data($node) {
+  $arg = arg();
   global $base_url, $theme_key; 
-
+  
   // Adding noindex, nofollow for making content search engin friendly
   if($node->type == 'story') {
     if(isset($node->field_story_configurations[LANGUAGE_NONE])) {
@@ -79,19 +80,19 @@ function itg_seo_node_data($node) {
     if (isset($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
       $get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
     }
-    if(!empty($get_author_name) && ($get_author_name > 0)){
+    if(!empty($get_author_name) && is_numeric($get_author_name)){
       $auth_name = itg_get_story_author_name($get_author_name);
     } else {
-      $auth_name = '';
+      $auth_name = 'India Today';
     }
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-    $imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    $largimage = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']); //explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     }
-    $largimage = '';
-    if(isset($imgarray[1])) {
-    $largimage = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
-    }
+    // $largimage = '';
+    // if(isset($imgarray[1])) {
+    // $largimage = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
+    // }
 
     $markup = array(
         '#type' => 'markup',
@@ -114,8 +115,8 @@ function itg_seo_node_data($node) {
                     "logo": {
                     "@type": "ImageObject",
                     "url": "' . $logo . '",
-                    "width": 109,
-                    "height": 90
+                    "width": 600,
+                    "height": 60
                     }
                     },
                     "image": {
@@ -203,11 +204,9 @@ function itg_seo_node_data($node) {
           "description":"' . $description . '",
           "thumbnailUrl": "' . $thumbnail_url . '",
             "duration":"' . $video_duration . '",
-            "name": "IndiaToday",
             "genre":"",  
             "inLanguage":"",
             "thumbnail": "' . $thumbnail_url . '",
-            "thumbnailUrl": "' . $thumbnail_url . '",
             "playerType":"Dailymotion",
             "uploadDate":"' . $createdate . '",
             "contentURL":"' . $contenturl . '",
@@ -233,6 +232,21 @@ function itg_seo_node_data($node) {
           }        
  
         </script>  ',
+    );
+    drupal_add_html_head($markup, 'sd_json');
+  }
+  
+  // Adding Rich Snippet Script at home page for search
+  if ($arg[0] == 'node' && is_numeric($arg[1]) && $arg[1] == 2) {
+    $target = $base_url . '/search?q={search_term}';
+    $markup = array(
+      '#type' => 'markup',
+      '#markup' => '<script type="application/ld+json"> {'
+      . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "' . $base_url . '",    '
+      . '"potentialAction": {      "@type": "SearchAction",      '
+      . '"target": "' . $target . '",      '
+      . '"query-input": "required name=search_term"    } } '
+      . '</script>',
     );
     drupal_add_html_head($markup, 'sd_json');
   }

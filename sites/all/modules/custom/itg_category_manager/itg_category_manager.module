@@ -167,6 +167,7 @@ function itg_category_manager_import_tag_form_submit($form , $form_state) {
       );
       batch_set($batch);
       fclose($handle);
+      batch_process('tags-listing');
   }
   else {
     drupal_set_message(t('There was an error uploading your file. Please contact a System administator.') , 'error');

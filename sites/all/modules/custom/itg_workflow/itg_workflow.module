@@ -1002,18 +1002,29 @@ function itg_workflow_node_update($node) {
       }
     }
     unset($_SESSION['node_preview_unique'][$node->nid]);
-    
-    if ($node->type == 'story' && $node->workbench_moderation['current']->state == 'published' || $node->workbench_moderation['current']->state == 'draft') {
+     
+    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery' && $node->workbench_moderation['current']->state == 'published' || $node->workbench_moderation['current']->state == 'draft') {
       
       $node_state = $node->workbench_moderation['current']->state;
       $query = db_select('node', 'n');
       if (!empty($node_state) && $node_state == 'published') {
         $query->condition('n.status', 0, '=');
-      } elseif (!empty($node_state) && $node_state == 'draft') {
+      } 
+      elseif (!empty($node_state) && $node_state == 'draft') {
         $query->condition('n.status', 1, '=');
       }
       $query->fields('n', array('title', 'nid'));
-      $query->condition('n.type', 'story', '=');
+      
+      if (isset($node->type) && $node->type == 'story') {
+        $query->condition('n.type', 'story', '=');
+      } 
+      elseif (isset($node->type) && $node->type == 'photogallery') {
+        $query->condition('n.type', 'photogallery', '=');
+      } 
+      elseif(isset($node->type) && $node->type == 'videogallery') {
+        $query->condition('n.type', 'videogallery', '=');
+      }
+      
       $query->condition('n.nid', $node->nid, '=');
       $result = $query->execute();
       $num_of_results = $result->rowCount();

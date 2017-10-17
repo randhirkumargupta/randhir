@@ -98,6 +98,8 @@ function editorpick_feature_views_default_views() {
   /* Display: Editor Pick View */
   $handler = $view->new_display('views_data_export', 'Editor Pick View', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xml';
   $handler->display->display_options['style_options']['provide_file'] = 0;
   $handler->display->display_options['style_options']['parent_sort'] = 0;
@@ -109,7 +111,39 @@ function editorpick_feature_views_default_views() {
     'body' => 'body',
     'path' => 'path',
     'created' => 'created',
+    'custom_handler' => 'custom_handler',
   );
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Get Meta Description: Get Meta Description */
+  $handler->display->display_options['fields']['custom_handler']['id'] = 'custom_handler';
+  $handler->display->display_options['fields']['custom_handler']['table'] = 'itg_seo';
+  $handler->display->display_options['fields']['custom_handler']['field'] = 'custom_handler';
+  $handler->display->display_options['fields']['custom_handler']['label'] = 'description';
+  $handler->display->display_options['fields']['custom_handler']['element_label_colon'] = FALSE;
+  /* Field: Content: Path */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['label'] = 'link';
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'pubDate';
+  $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'editors_pick';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['path'] = 'rss/indiatoday_editors_pic.xml';
   $export['ediror_pick'] = $view;
 

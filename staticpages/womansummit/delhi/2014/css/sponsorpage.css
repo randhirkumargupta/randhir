@@ -1,0 +1,9 @@
+body {margin-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 0px;}
+.heading{ font-family:arial; font-size:12px; color:#F57921; line-height:16px;text-decoration:none;}
+.heading a{ color:#204fa4; font-weight:bold; text-decoration:none;}
+.heading a:hover{ color:#204fa4; text-decoration:underline;}
+.headSpons{ font-family:arial; font-size:13px; color:#000000; line-height:16px; font-weight:bold;text-decoration:none;}
+.headSpon{ font-family:arial; font-size:12px; color:#000000; line-height:16px; font-weight:bold;text-decoration:none; padding:5px 0 5px 0;}
+.compName{ font-family:arial; font-size:22px; color:#F57921; font-weight:normal; padding:5px 0 0 0;}
+.sponText{color: #000000;    font-family: arial;    font-size: 14px;    line-height: 19px;    text-align: justify;    text-decoration: none;}
+.sponText p {  margin: 0 0 10px;   padding: 0;}
