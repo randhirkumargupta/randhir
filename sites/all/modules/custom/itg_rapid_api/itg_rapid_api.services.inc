@@ -3295,7 +3295,7 @@ function itg_rapid_api_homePage($token) {
 }
 
 function itg_rapid_api_testing($token) {
-
+itg_mobile_feed_xml_feed_url_cron(); die();
     $data = '';
     global $base_url;
 
