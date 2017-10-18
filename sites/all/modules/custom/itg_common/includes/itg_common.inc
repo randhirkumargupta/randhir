@@ -28,6 +28,52 @@ function itg_common_dropdown_supplement($id = '') {
 }
 
 /**
+ * Impelements form for configuration.
+ * {@inheritdoc}
+ */
+function itg_common_varnish_aws_setting_form($form) {
+  $form['varnish_aws_access_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Access Key'),
+    '#default_value' => variable_get('varnish_aws_access_key', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_aws_secret_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Secret Key'),
+    '#default_value' => variable_get('varnish_aws_secret_key', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_aws_region'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Region'),
+    '#default_value' => variable_get('varnish_aws_region', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_DNSName'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish DNS'),
+    '#default_value' => variable_get('varnish_DNSName', ''),
+    '#required' => TRUE,
+  );
+   $form['varnish_aws_target_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Target ARN'),
+    '#default_value' => variable_get('varnish_aws_target_id', ''),
+    '#required' => TRUE,
+  );
+   $form['varnish_aws_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Varnish AWS Type'),
+    '#default_value' => variable_get('varnish_aws_type', ''),
+     '#options' => array('target'=>t('Target Groups'),'LB'=> t('Load Balancer')),
+    '#required' => TRUE,
+  );
+  return system_settings_form($form);
+}
+
+
+/**
  * Helper function to populate the second dropdown.
  * @param string $id
  * @return array $data

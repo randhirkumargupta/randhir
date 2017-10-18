@@ -71,9 +71,7 @@ function generate_custom_pattern_feed($data) {
             // $feed = feed_starting_tags($feed_type);
             // Header Text start here for syndication file.
             if (!empty($pattern['field_syndication_header_value'])) {
-                $feed .= '<header>';
                 $feed .= "<![CDATA[ " . htmlspecialchars($pattern['field_syndication_header_value'], ENT_XML1, 'UTF-8') . " ]]>";
-                $feed .= '</header>';
             }
             // Process all the selected nodes.
             foreach ($nids as $nid) {
@@ -81,9 +79,7 @@ function generate_custom_pattern_feed($data) {
             }
             // Add footer tag here for syndication file.
             if (!empty($pattern['field_syndication_footer_value'])) {
-                $feed .= '<footer>';
                 $feed .= "<![CDATA[ " . htmlspecialchars($pattern['field_syndication_footer_value'], ENT_XML1, 'UTF-8') . " ]]>";
-                $feed .= '</footer>';
             }
             $file_path_feed = _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $category_name,  $content_type, $frequency, $feed_dir, $feed);
             return $file_path_feed;

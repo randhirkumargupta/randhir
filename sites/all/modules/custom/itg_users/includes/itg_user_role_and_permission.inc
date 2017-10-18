@@ -33,6 +33,9 @@ function itg_user_role_and_permissions() {
                 <th>' . t('Copy Desk Designer') . '</th>
                 <th>' . t('Photographer') . '</th>
                 <th>' . t('Marketing Manager') . '</th>
+                <th>' . t('Ads Manager') . '</th>
+                <th>' . t('Syndication') . '</th>
+                <th>' . t('Mobile Vas') . '</th>
             </thead>
             <tbody>
                 <tr>
@@ -43,6 +46,9 @@ function itg_user_role_and_permissions() {
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -76,6 +82,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>' . t('Un publish') . '</th>
@@ -85,6 +94,9 @@ function itg_user_role_and_permissions() {
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -118,6 +130,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>' . t('Section/category creation') . '</th>
@@ -128,6 +143,9 @@ function itg_user_role_and_permissions() {
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -160,6 +178,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>' . t('User creation') . '</th>
@@ -169,6 +190,9 @@ function itg_user_role_and_permissions() {
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -202,6 +226,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>' . t('Question Answer & Post Reply') . '</th>
@@ -223,6 +250,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>' . t('Content Creation for VAS') . '</th>
@@ -232,6 +262,9 @@ function itg_user_role_and_permissions() {
                     <td>' . t('No') . '</td>
                     <td>' . t('No') . '</td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -265,6 +298,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>' . t('Yes') . '</td>
                 </tr>
                 <tr>
                     <th>' . t('Newsletter creation') . '</th>
@@ -277,6 +313,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td>' . t('No') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -307,6 +346,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>' . t('Review Idea Approve /Reject') . '</th>
@@ -322,6 +364,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td>' . t('No') . '</td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -349,6 +394,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>' . t('Mark Task Completion') . '</th>
@@ -369,6 +417,9 @@ function itg_user_role_and_permissions() {
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -391,6 +442,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>' . t('Social Media Add/Edit for all Content Type') . '</th>
@@ -402,6 +456,9 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -433,6 +490,57 @@ function itg_user_role_and_permissions() {
                     <td>' . t('No') . '</td>
                     <td>' . t('No') . '</td>
                     <td>' . t('Yes') . '</td>
+                    <td>' . t('Yes') . '</td>
+                    <td>' . t('Yes') . '</td>
+                    <td>' . t('Yes') . '</td>
+                </tr>
+                <tr>
+                    <th>' . t('Ads') . '</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>' . t('Yes') . '</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>' . t('Syndication') . '</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>' . t('Yes') . '</td>
                 </tr>
             </tbody>
 
@@ -441,5 +549,4 @@ function itg_user_role_and_permissions() {
         </div>
       </div>';
   return $rol_per;
-
 }

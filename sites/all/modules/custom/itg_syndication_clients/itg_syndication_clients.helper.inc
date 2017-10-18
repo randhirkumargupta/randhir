@@ -4,6 +4,10 @@
  * @file
  * The ITG Syndication clients for store configuration
  */
+<<<<<<< HEAD
+=======
+
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
 function getbsb_client_array() {
   $story = array(
     '1206533' => 'it-story-movies.xml',
@@ -36,29 +40,48 @@ function getbsb_client_array() {
   return $story;
 }
 
+<<<<<<< HEAD
 function getbsb_client_photo_array() {
+=======
+
+function getbsb_client_photo_array(){
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $photo = array(
     '1208655' => 'cinema-superfast-photos.xml',
   );
   return $photo;
 }
 
+<<<<<<< HEAD
 function getbsb_client_video_array() {
+=======
+function getbsb_client_video_array(){
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $video = array(
     '1206552' => 'video_latest.xml',
   );
   return $video;
 }
 
+<<<<<<< HEAD
 function getindiatoday_yahoo_client_array() {
   $yahoo_story = array(
     'ids' => array(1206533, 1206567, 1206688, 1206689, 1206572, 1206578),
+=======
+function getindiatoday_yahoo_client_array(){
+  $yahoo_story = array(
+    'ids' => array(1206533,1206567,1206688,1206689,1206572,1206578),
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
     'filename' => 'top-indiatoday.xml'
   );
   return $yahoo_story;
 }
 
+<<<<<<< HEAD
 function getmsn_story_section_array() {
+=======
+function getmsn_story_section_array(){
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $msn_story = array(
     '1206589' => 'msn/indiatoday/story-travel.xml',
     '1206793' => 'msn/indiatoday/story-food.xml',
@@ -94,21 +117,33 @@ function getmsn_story_section_array() {
   return $msn_story;
 }
 
+<<<<<<< HEAD
 function get_cabbytabby_feed_videos_array() {
+=======
+function get_cabbytabby_feed_videos_array(){
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $cabbytabby_feed_videos = array(
     '1207580' => 'sosorry.xml'
   );
   return $cabbytabby_feed_videos;
 }
 
+<<<<<<< HEAD
 function get_ola_feed_videos_array() {
+=======
+function get_ola_feed_videos_array(){
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $cabbytabby_feed_videos = array(
     '1207580' => 'sosorry.xml'
   );
   return $cabbytabby_feed_videos;
 }
 
+<<<<<<< HEAD
 function get_dekkho_feed_videos_array() {
+=======
+function get_dekkho_feed_videos_array(){
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $video_sectios = array(
     '1207304' => 'lifestyle.xml',
     '1207978' => 'auto_today.xml',
@@ -123,7 +158,11 @@ function get_dekkho_feed_videos_array() {
   return $video_sectios;
 }
 
+<<<<<<< HEAD
 function getproquest_feed_story_client_array() {
+=======
+function getproquest_feed_story_client_array(){
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $story_sectios = array(
     '1206578' => 'india.xml',
     '1206793' => 'food-drink.xml',
@@ -137,7 +176,11 @@ function getproquest_feed_story_client_array() {
   return $story_sectios;
 }
 
+<<<<<<< HEAD
 function get_dailyhunt_sections_for_feed() {
+=======
+function get_dailyhunt_sections_for_feed(){
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $story_sectios = array(
     '1206599' => 'celebrities.xml',
     '1206795' => 'fyi.xml',
@@ -160,7 +203,11 @@ function get_dailyhunt_sections_for_feed() {
   return $story_sectios;
 }
 
+<<<<<<< HEAD
 function get_videoelephant_feed_videos_array() {
+=======
+function get_videoelephant_feed_videos_array(){
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $story_sectios = array(
     '1207304' => 'lifestyle.xml',
     '1207916' => 'cookery.xml',
@@ -172,4 +219,8 @@ function get_videoelephant_feed_videos_array() {
     '1207303' => 'bollywood_movie_reviews.xml'
   );
   return $story_sectios;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6

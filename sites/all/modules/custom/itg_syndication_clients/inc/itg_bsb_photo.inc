@@ -70,7 +70,11 @@ function generate_photo_detail_xml($nid, $title, $section_id, $section_name, $ph
 
   $gallery_img_fc = get_all_associated_photos($nid);
   $image_count = count($gallery_img_fc);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
   $photo_xml .= '<Root>';
   $photo_xml .= '<idgallery>' . $nid . '</idgallery>';
@@ -80,7 +84,11 @@ function generate_photo_detail_xml($nid, $title, $section_id, $section_name, $ph
   $photo_xml .= '<totalpics>' . $image_count . '</totalpics>';
   $photo_xml .= '<weburl><![CDATA[' . $content_url . ']]></weburl>';
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   foreach ($gallery_img_fc as $photo) {
     $byline = $photo['title'];
     $large_image = '';

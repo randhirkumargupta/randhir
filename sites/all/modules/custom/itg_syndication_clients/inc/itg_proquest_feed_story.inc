@@ -17,20 +17,32 @@ function itg_proquest_feed_story_syndication() {
 function itg_genrate_proquest_feed_story_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
     $section_name = get_term_name_by_tid($section_id);
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
     $type = array('story');
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');
     $query->orderBy('n.created', 'DESC');
@@ -63,12 +75,21 @@ function genrate_proquest_feed_story_syndication_xml($result = NULL, $category) 
       $article_type = slugify(preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($category)));
       $xml .= '<article>';
       $xml .= '<magazine>India Today</magazine>';
+<<<<<<< HEAD
       $xml .= '<articletype>' . $article_type . '</articletype>';
       $xml .= '<edition>' . $publish_date . '</edition>';
       $xml .= '<page></page>';
       $xml .= '<frequency></frequency>';
       $xml .= '<author></author>';
       $xml .= '<byline>' . $byline . '</byline>';
+=======
+      $xml .= '<articletype>'.$article_type.'</articletype>';
+      $xml .= '<edition>'.$publish_date.'</edition>';
+      $xml .= '<page></page>';
+      $xml .= '<frequency></frequency>';
+      $xml .= '<author></author>';
+      $xml .= '<byline>'.$byline.'</byline>';
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
       $xml .= '<volumenumber></volumenumber>';
       $xml .= '<intellectualpropertyowner>Living Media India Limited</intellectualpropertyowner>';
       $xml .= '<headline><![CDATA[' . $value['title'] . ']]></headline>';

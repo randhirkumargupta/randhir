@@ -16,7 +16,11 @@ function itg_bsb_video_syndication() {
  */
 function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
+<<<<<<< HEAD
     $section_name = 'Latest Videos'; //get_terms_name_by_ids(array($section_id));
+=======
+    $section_name = 'Latest Videos';//get_terms_name_by_ids(array($section_id));
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
 //    $section_name = $section_name[0]['name'];
     $type = array('videogallery');
     $query = db_select('node', 'n');
@@ -55,7 +59,11 @@ function genrate_bsb_video_syndication_xml($result = NULL, $section_id, $categor
   $xml = '';
   $xml .= '<Root>';
   $xml .= '<id>1</id>';
+<<<<<<< HEAD
   $xml .= '<title>' . $category . '</title>';
+=======
+  $xml .= '<title>'.$category.'</title>';
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
 
   if (!empty($result)) {
     $xml .= '<start_index>0</start_index>';
@@ -124,7 +132,11 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $video_xml .= '<mediaid></mediaid><uurl></uurl>';
   $source_type = $result['field_story_source_type_value'];
   $videotag = video_detail_formats($nid, $source_type);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   if (!empty($videotag['migrated'])) { //migrated video
     $video_xml .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
   }
@@ -176,10 +188,19 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $video_xml .= '</related>';
   $video_xml .= get_comment_xml_tag($nid);
   $video_xml .= '</Root>';
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   $xml_path = 'public://bsb/videos/';
   $file_path = $xml_path . $filename;
   $fp = fopen($file_path, "w");
   fwrite($fp, $video_xml);
   fclose($fp);
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6

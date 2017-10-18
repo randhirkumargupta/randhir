@@ -40,7 +40,11 @@ function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $fi
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     $xml = genrate_indiatoday_yahoo_story_syndication_xml($result);
+<<<<<<< HEAD
     $xml_path = 'public://files/Yahoo/';
+=======
+    $xml_path = 'public://indiatoday/Yahoo/';
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);

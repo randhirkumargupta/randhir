@@ -51,6 +51,7 @@ function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $c
   $xml = '';
   $xml .= '<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">';
   $xml .= '<channel>';
+<<<<<<< HEAD
   $xml .= '<title><![CDATA[' . $category . ']]></title>';
   $xml .= '<link><![CDATA[feeds]]></link>';
   $xml .= '<description><![CDATA[OlaPlay MRSS Feed]]></description>';
@@ -58,6 +59,15 @@ function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $c
 
   if (!empty($result)) {
 
+=======
+  $xml .= '<title><![CDATA['.$category.']]></title>';
+  $xml .= '<link><![CDATA[feeds]]></link>';
+  $xml .= '<description><![CDATA[OlaPlay MRSS Feed]]></description>';
+  $xml .= '<pubDate><![CDATA['.$xml_pub_date.']]></pubDate>';
+  
+  if (!empty($result)) {
+    
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
     foreach ($result as $value) {
       $nid = $value['nid'];
       $video_file_name = 'video' . $nid . '.xml';
@@ -71,6 +81,7 @@ function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $c
       $tags = get_content_tags($nid, TRUE);
       $byline = get_byline_name_by_nid($nid);
       $key_words = '';
+<<<<<<< HEAD
       if (!empty($meta_tags['data'])) {
         $meta_tags = unserialize($meta_tags['data']);
         $key_words = $meta_tags['keywords']['value'];
@@ -81,6 +92,18 @@ function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $c
         $duration = $video_data[0]->video_duration;
       }
 
+=======
+      if(!empty($meta_tags['data'])){
+        $meta_tags = unserialize($meta_tags['data']);
+        $key_words = $meta_tags['keywords']['value'];
+      }
+      
+      $duration= '';
+      if(count($video_data) > 0){
+        $duration = $video_data[0]->video_duration;
+      }
+      
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
       $video_url = '';
       if (!empty($videotag['migrated'])) { //migrated video
         $video_url = $videotag['migrated']['video_path_mp4'];
@@ -89,16 +112,28 @@ function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $c
         $video_url = $videotag['dailymotion']['bitate_url']['videoparts_mp4'];
       }
       $xml .= '<item>';
+<<<<<<< HEAD
       $xml .= '<guid isPermaLink="false">' . $nid . '</guid>';
+=======
+      $xml .= '<guid isPermaLink="false">'.$nid.'</guid>';
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<description><![CDATA[' . $value['field_story_expert_description_value'] . ']]></description>';
       $xml .= '<pubDate>' . $created_date . '</pubDate>';
       $xml .= '<category><![CDATA[' . $catname . ']]></category>';
+<<<<<<< HEAD
       $xml .= '<enclosure url="' . $video_url . '" type="video/mp4"/>';
       $xml .= '<media:content url="' . $video_url . '" type="video/mp4" duration="' . $duration . '">';
       $xml .= '<media:category>' . $catname . '</media:category>';
       $xml .= '<media:tags><![CDATA[' . $tags . ']]></media:tags>';
       $xml .= '<media:keywords><![CDATA[' . $key_words . ']]></media:keywords>';
+=======
+      $xml .= '<enclosure url="'.$video_url.'" type="video/mp4"/>';
+      $xml .= '<media:content url="'.$video_url.'" type="video/mp4" duration="'.$duration.'">';
+      $xml .= '<media:category>'.$catname.'</media:category>';
+      $xml .= '<media:tags><![CDATA['.$tags.']]></media:tags>';
+      $xml .= '<media:keywords><![CDATA['.$key_words.']]></media:keywords>';
+>>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
       $xml .= '<media:thumbnail url="' . $small_img['imag_url'] . '"></media:thumbnail>';
       $xml .= '<media:credit role="producer" scheme="urn:ebu"><![CDATA[' . $byline . ']]></media:credit>';
       $xml .= '</media:content>';
