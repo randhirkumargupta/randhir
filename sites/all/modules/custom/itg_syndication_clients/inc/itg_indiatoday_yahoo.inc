@@ -38,9 +38,9 @@ function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $fi
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
+     
     $xml = genrate_indiatoday_yahoo_story_syndication_xml($result);
-    $xml_path = 'public://indiatoday/Yahoo/';
+    $xml_path = 'public://indiatoday/yahoo/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -54,7 +54,6 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
     global $base_url;
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
     $xml .= '<channel>';
-
     foreach ($result as $key => $value) {
       $guid = genrate_uniqui_guid();
       $publish_date = date("Y-m-d\TH:i:s P", strtotime($value['field_itg_content_publish_date_value']));
@@ -82,6 +81,10 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $xml .= '<media:thumbnail url="' . $small_img["imag_url"] . '" type="image/' . $small_img["mime_type"] . '"/>';
       $xml .= '<category>' . $section_name . '></category>';
       $xml .= '</item>';
+    }
+    $load_xml = simplexml_load_file("http://feeds.intoday.in/indiatoday/yahoo/top-businesstoday.xml");
+    foreach($load_xml->children()->children() as $load_xml_item){
+      $xml.= $load_xml_item->asXML();
     }
     $xml .= '</channel>';
     $xml .= '</rss>';
