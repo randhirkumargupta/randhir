@@ -95,8 +95,6 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_scribd_latest_issue.inc',
     'type' => MENU_CALLBACK,
   );
-<<<<<<< HEAD
-=======
   $items['ucbrowser/indiatoday-new'] = array(
     'page callback' => 'itg_uc_browser_feed_latest_story',
     'access arguments' => array('access content'),
@@ -109,7 +107,6 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_zuppit_latest_story.inc',
     'type' => MENU_CALLBACK,
   );
->>>>>>> c4c0c905dca8304947d5f8ba62aaf62cb0e960f6
   return $items;
 }
 
