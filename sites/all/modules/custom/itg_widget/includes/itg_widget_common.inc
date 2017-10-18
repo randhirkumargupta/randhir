@@ -770,6 +770,9 @@ function itg_widget_theme() {
     'section_manual_order_widget_data' => array(
       'template' => 'templates/section-manual-order-widget-data',
     ),
+    'movie_section_manual_widget_data' => array(
+      'template' => 'templates/movie-section-manual-widget-data',
+    ),
   );
   return $themes;
 }
