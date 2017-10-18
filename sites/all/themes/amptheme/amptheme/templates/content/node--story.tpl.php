@@ -424,6 +424,8 @@ if (!empty($content)):
                   }
                   //print $listicle_output;
                   print $story_body = str_replace('[ITG:LISTICLES]', $listicle_output, $story_body);
+                }else{
+                  print $story_body = str_replace('[ITG:LISTICLES]', '', $story_body);
                 }
                 }else {
                   // Print story body
