@@ -142,9 +142,7 @@
             $("#reporter-node-form").validate({
                 submitHandler: function(form) {
                     $('input:submit').attr('disabled', 'disabled');
-                    if($('body.page-node-add-reporter').length) {
-						form.submit();
-				    }
+                    form.submit();
                 },
                 onfocusout: function(element) {
                     $(element).valid();
