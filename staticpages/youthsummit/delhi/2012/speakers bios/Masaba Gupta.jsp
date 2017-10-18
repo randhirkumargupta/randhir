@@ -144,7 +144,7 @@
 		<p class="introtext" style="font-family: arial; font-size: 12px; line-height: 15px; text-align: left;"><b>Session:</b> How I Made It: 20 Minute Performances by Youth Icons</a></span><br>
 		<b> <b>On September 7, 2012-10.30 to 12.30 hrs</b></b></p>
 		<!-- <div>
-                <a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=2"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
+                <a href="/youthsummit/delhi/2012/askquestion.jsp?id=2"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
             </div>
 			-->
 			<br />   

@@ -144,7 +144,7 @@
 		<p class="introtext" style="font-family: arial; font-size: 12px; line-height: 15px; text-align: left;"><b>Session: </b><span class="session-name"><a href="/youthsummit/delhi/2012/programme.jsp">Guts and Glory: Medal winners from the Olympics on the journey from dream to reality</a></span><br>
 		<b> <b>On September 7, 2012-12.30 to 13.30 hrs</b></b></p>
 		<!-- <div>
-                <a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=3"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
+                <a href="/youthsummit/delhi/2012/askquestion.jsp?id=3"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
             </div> -->
 		<br />   
         <p> Vijay Kumar made headlines when he bagged a silver medal in 25m Rapid Fire Pistol event at the 2012 Summer Olympics. A Subedar with the Indian Army, he was coached by Pavel Smirnov from Russia. In May 2011, he became one of the 11 shooters from India to book a place at the London Olympics when he won a silver medal at the shooting World Cup in Fort Benning, USA. He has won more than 20 international medals and 75 national medals. </p>

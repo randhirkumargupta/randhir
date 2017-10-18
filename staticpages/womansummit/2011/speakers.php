@@ -69,8 +69,8 @@
 </div>
 
 <div id="dropmenu1" class="dropmenudiv_a">
-<!--<a href="http://indiatoday.in/womansummit/index.php?issueid=34" target="_blank">2010</a>
-<a href="http://indiatoday.in/womansummit/index.php?issueid=33" target="_blank">2009</a>-->
+<!--<a href="/womansummit/index.php?issueid=34" target="_blank">2010</a>
+<a href="/womansummit/index.php?issueid=33" target="_blank">2009</a>-->
 <a href="/womansummit/2010/index.php?issueid=34" target="_blank">2010</a>
 <a href="/womansummit/2009/index.php?issueid=33" target="_blank">2009</a>
 </div>
@@ -146,7 +146,7 @@ cssdropdown.startchrome("chromemenu")
 		<div style="float: left;">
        
                    <!-- <div id="google_add_middle">
-        			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/google_add_middle.jpg"  />
+        			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/google_add_middle.jpg"  />
         			</div>-->
           
                   						<div class="speakers_speak">
@@ -203,13 +203,13 @@ cssdropdown.startchrome("chromemenu")
 		<div style="float: right;">
        
                    <!-- <div id="google_add_middle">
-        			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/google_add_middle.jpg"  />
+        			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/google_add_middle.jpg"  />
         			</div>-->
                    <div style="border: 0px solid rgb(0, 0, 0); margin: 0px 10px 0px 0px; float: right; width: 480px; text-align: right; font-family: tahoma; font-style: normal; font-variant: normal; font-weight: bold; font-size: 11px; line-height: normal; font-size-adjust: none; font-stretch: normal; -x-system-font: none;">
 	 1 <a href="speakers1.php">2</a> <a linkindex="58" href="speakers2.php" class="pagenate_link">3 </a><a linkindex="60" href="speakers1.php" class="pagenate_link">Next </a><img src="images/pagenate_bullet.jpg" width="6" height="5" hspace="2" border="0"> <a linkindex="61" href="speakers2.php" class="pagenate_link">Last</a><img src="images/pagenate_bullet.jpg" hspace="3" border="0"> 	 </div>
 
 		                    <!-- <div id="google_add_middle">
-        			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/google_add_middle.jpg"  />
+        			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/google_add_middle.jpg"  />
         			</div>-->
           
                   
@@ -281,20 +281,20 @@ cssdropdown.startchrome("chromemenu")
   <tr>
    <td width="248" colspan="2"><h3>FROM THE CHAIRMAN</h3>    </td>
   </tr>
-  <tr><td width="130"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
+  <tr><td width="130"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/stories/kicker_image_071108_041144_ap-08_120.jpg"  /></td>
     <td width="118" valign="top" style="font:normal 12px georgia; color:#969696; line-height:22px;"><strong style="font:bold 12px georgia; color:#000000">Aroon Purie</strong><br>
 							Chairman <!--&amp; <br>Editor-in-Chief--><br>
                             <span style="color:#942c4f">The India Today Group</span></td>
   </tr>
    <tr>
-   <td width="248" colspan="2"><div align="left"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
+   <td width="248" colspan="2"><div align="left"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/top_comma.jpg" style="padding: 10px 0px 0px 10px;"></div>
 
 			<div><div style="border: 0px solid rgb(0, 0, 0); margin: 5px 0pt 5px 15px; float: left; width: 90%; font-family: Georgia; font-style: normal; font-variant: normal; font-weight: normal; font-size: 12px; font-size-adjust: none; font-stretch: normal; -x-system-font: none; color: rgb(0, 0, 0); text-align: center; line-height: 18px;">The INDIA TODAY WOMAN SUMMIT & AWARDS 
 
 
 2011, now in its third year, will be an all day journey into the lives of some of the nation&rsquo;s most successful cadres. Women, who have strived to challenge the conventional roles assigned to them by forming identities that are independent of their home space. Whether it is being a jet setting CEO or an aggressive entrepreneur, they have made it acceptable for the coming generation to break away and follow their heart. The summit will not only acknowledge the contribution of these women but will also allow the newer generation of women, to learn, share and experience what it takes to be the best.</div>
 	          </strong></div></div>
-             <div align="right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit//images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
+             <div align="right"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/womansummit/images/bottom_comma.jpg" style="padding: 5px 10px 0px 0px;"></div>    </td>
   </tr>
   
    

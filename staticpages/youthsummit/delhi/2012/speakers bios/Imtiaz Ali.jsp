@@ -144,7 +144,7 @@
 		<p class="introtext" style="font-family: arial; font-size: 12px; line-height: 15px; text-align: left;"><b>Session: </b><span class="session-name"><a href="/youthsummit/delhi/2012/programme.jsp">How I Made It: 20 Minute Performances by Youth Icons</a></span><br>
 		<b> On September 7, 2012-10.30 to 12.30 hrs</b></p>
 		<!--<div>
-                <a href="http://indiatoday.intoday.in/youthsummit/delhi/2012/askquestion.jsp?id=2"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
+                <a href="/youthsummit/delhi/2012/askquestion.jsp?id=2"><img src="http://indiatoday.intoday.in/youthsummit2012/images/Ask-Your-Question-2.gif" border="0" alt="Ask your question" /> </a>
             </div>--><br />   
 A film maker, actor and writer, Ali made his directorial debut with the film <em>Socha Na Tha</em> in 2005 but it was his second film <em>Jab We Met </em>(2007) that brought him commercial success and fame. He is known for his penchant for love stories, a theme which has remained consistent in his latest films <em>Love Aaj Kal </em>(2009) and <em>Rockstar</em> (2011). </div>
 				<div class="story_other_stories" style="border-top: 1px solid rgb(51, 51, 51);">

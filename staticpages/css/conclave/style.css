@@ -1,0 +1,29 @@
+
+.text {font-family: Arial, Helvetica, sans-serif; font-size: 8.5pt; font-weight: normal; text-decoration: none}
+.text1 {  font-family: Arial, Helvetica, sans-serif; font-size: 10pt; font-weight: normal; text-decoration: none}
+
+.head {font-family: Arial, Helvetica, sans-serif; font-size: 11pt; text-decoration: none}
+
+.footer-head {font-family: Arial, Helvetica, sans-serif; font-size: 8pt; font-weight: bold;}
+
+a:hover {text-decoration: underline}
+
+.links {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; font-weight: bold; color: #FF0000; text-decoration: none}
+
+.textred { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; text-decoration: none ; color: #FF0000}
+
+.links1 {font-family: Arial, Helvetica, sans-serif; font-size: 8pt; font-weight: bold; color: #FF0000; text-decoration: none}
+
+.heading {font-family: Arial, Helvetica, sans-serif; font-size: 12pt; color:#ff0000;}
+
+.head1 {font-family: Arial, Helvetica, sans-serif; font-size: 8.5pt; color:#ff0000;text-decoration:none;}
+.head1 a {text-decoration:none; color:#CC0000}
+.head1 a:hover{text-decoration:underline; color:#CC0000}
+
+.head2 {font-family: Arial, Helvetica, sans-serif; font-size: 10pt; color:#ff0000;}
+
+
+.top-links {font-family: Arial, Helvetica, sans-serif; font:normal 10px #ffffff;}
+.top-links a {text-decoration:none; color:#ffffff; font-weight:normal;}
+.top-links a:hover{text-decoration:none; color:#ffffff}
+.top-links a:visited {text-decoration:none; color:#ffffff; font-weight:normal;}
