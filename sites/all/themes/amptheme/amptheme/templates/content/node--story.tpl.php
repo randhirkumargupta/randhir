@@ -388,13 +388,14 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
-                if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-                  print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
-                }
+                
                 //code for listicle story
                 if (strpos($story_body, '[ITG:LISTICLES]')) {
                   $listicle_output = '';
                   if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                    $listicle_output.= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                  }
                   $buzz_output.= '';
                   $num = 1;
                   foreach ($node->field_story_listicle['und'] as $buzz_item) {
