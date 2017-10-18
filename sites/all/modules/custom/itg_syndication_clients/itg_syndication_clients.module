@@ -95,6 +95,18 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_scribd_latest_issue.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['ucbrowser/indiatoday-new'] = array(
+    'page callback' => 'itg_uc_browser_feed_latest_story',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_uc_browser_latest_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['clients/indiatoday-zuppit-top'] = array(
+    'page callback' => 'itg_zuppit_feed_latest_story',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_zuppit_latest_story.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
