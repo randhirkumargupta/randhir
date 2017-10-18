@@ -31,3 +31,15 @@ if (empty($_GET['category'])) {
    }
 }
 ?>
+
+<script>
+
+$('.video_landing_menu').slick({
+  dots: false,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 1,
+  centerMode: true,
+  variableWidth: true
+});
+</script>
