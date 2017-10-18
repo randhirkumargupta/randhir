@@ -20,8 +20,8 @@ function videoDetailPageFeed() {
   }
 
 
-  echo $output;
-  die();
+//  echo $output;
+//  die();
 }
 
 /**

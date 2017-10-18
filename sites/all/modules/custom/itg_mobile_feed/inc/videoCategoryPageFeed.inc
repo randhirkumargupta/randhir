@@ -63,8 +63,8 @@ function videoCategoryPageFeed() {
     }
   }
   //return $return_flag;
-  header('Content-Type: application/xml; charset=utf-8');
-  echo $output;  die();
+//  header('Content-Type: application/xml; charset=utf-8');
+//  echo $output;  die();
 }
 
 /**

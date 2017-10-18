@@ -67,7 +67,7 @@ function breakingNewsPageFeed() {
     $feed_file_name = "breakingnews.xml";
     $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
   }
-  header('Content-Type: application/xml; charset=utf-8');
-  echo $output;
-  die();
+//  header('Content-Type: application/xml; charset=utf-8');
+//  echo $output;
+//  die();
 }

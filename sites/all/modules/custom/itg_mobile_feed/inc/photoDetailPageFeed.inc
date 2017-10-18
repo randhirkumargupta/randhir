@@ -17,8 +17,8 @@ function photoDetailPageFeed() {
   else {
     $output = generatePhotoDetailPageFeed(arg(1));
   }
-  echo $output;
-  die();
+//  echo $output;
+//  die();
 }
 
 /**

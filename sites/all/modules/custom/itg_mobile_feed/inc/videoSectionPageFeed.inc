@@ -82,7 +82,7 @@ function videoSectionPageFeed() {
     $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
-  header('Content-Type: application/xml; charset=utf-8');
-  echo $output;
-  die();
+//  header('Content-Type: application/xml; charset=utf-8');
+//  echo $output;
+//  die();
 }

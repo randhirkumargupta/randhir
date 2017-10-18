@@ -110,8 +110,8 @@ function generate_notification_all($params) {
   if (isset($app_output) && $app_output != '') {
     $return_flag .= writeFeedFile($term_feed_path, $app_file_name, $app_output);
   }
-  echo $return_flag;
-  die();
+//  echo $return_flag;
+//  die();
 }
 
 /**

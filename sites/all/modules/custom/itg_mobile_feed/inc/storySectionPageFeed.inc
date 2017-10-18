@@ -74,7 +74,7 @@ function storySectionPageFeed() {
     $file_name = "storysectionlisting.xml";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
-  header('Content-Type: application/xml; charset=utf-8');
-  echo $output;
-  die();
+//  header('Content-Type: application/xml; charset=utf-8');
+//  echo $output;
+//  die();
 }
