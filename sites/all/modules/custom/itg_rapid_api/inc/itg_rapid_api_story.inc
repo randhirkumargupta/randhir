@@ -364,11 +364,11 @@ function buildListicleNode($node) {
     $field_story_templates = $node->field_story_templates['und'][0]['value'];
     // get title
     $field_story_template_guru = $node->field_story_template_guru['und'][0]['value'];
-    
-    $listiclenode['title'] = "$field_story_template_guru";
+    $listcont = 0;
+    $listiclenode[$listcont]['title'] = "$field_story_template_guru";
     //listicle loop data
     $field_story_listicle = $node->field_story_listicle['und'];
-
+    $listcont = 1;
     foreach ($field_story_listicle as $key => $value) {
         $collection_id = $value['value'];
         $load_collection = field_collection_item_load($collection_id);
