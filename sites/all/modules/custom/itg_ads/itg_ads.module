@@ -1130,6 +1130,14 @@ function itg_ads_get_renderable_prev_data($prev_raw_data) {
   return $renderable_data;
 }
 
+/*
+ * Function used to replace Ads code with key value pattern from section, category
+ * and detail page like Story, photo & detail.
+ * @param Array $arg
+ * @param Array $data
+ * @param Object $node_object
+ * @return Array
+ */
 function get_ads_headerscript_section($arg, $data, $node_object){
 	$return = FALSE;
 	if ($arg[0] == "taxonomy" && $arg[1] == "term" && is_numeric($arg[2])) {
