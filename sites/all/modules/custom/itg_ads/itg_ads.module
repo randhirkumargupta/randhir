@@ -1147,13 +1147,14 @@ function get_ads_headerscript_section($arg, $data, $node_object){
 		}
 	} else if ($arg[0] == "node" && is_numeric($arg[1])) {
 		$term_data = array_reverse($data);
+    $taxname1 = preg_replace('/\s+/', '', $term_data[0]->name);
     //p($term_data);
 		if (empty($node_object)) {
 			$node_object = menu_get_object();
 		}
 		if (count($term_data) > 1 && !empty($term_data[0]->name)) {
-			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
-			$return['category_geader_s'] = $term_data[0]->name.$node_object->type;
+			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
+			$return['category_geader_s'] = $taxname1.$node_object->type;
 		} else {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
 			$return['category_geader_s'] = 'ROS';
