@@ -496,8 +496,22 @@ function getTechPros($content_org) {
     $pros_img = getTechProsImg($content_org);
     $tech_h2 = getTechProsh2($content_org);
     
+    if($tech_h2){
+        $str_html = str_get_html($tech_h2);
+        $rate = "";
+        foreach($str_html->find('strong') as $element){  
+            $rate = $element;
+            //$rate_dup = $rate;
+        }
+        $rate = ltrim($rate, "<strong>");
+        $rate = rtrim($rate, "</strong>");
+    }
+   
+    $tech_h2 = strip_tags($tech_h2);
+    $tech_h2 = str_replace($rate, "", $tech_h2);
+    
     $techpross_data['label'] = "$tech_h2";
-    $techpross_data['rating'] = "$tech_h2";
+    $techpross_data['rating'] = "$rate";
     $techpross_data['img_url'] = "$pros_img";
     
     $techpross_data['pros']['label'] = "GOOD STUFF";
