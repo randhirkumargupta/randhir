@@ -151,7 +151,7 @@ function generateStoryDeatilList($id) {
     $data_array['factoids'] = $factoid_data;
     $data_array['buzz'] = $buzz_data;
     $data_array['tech-photo'] = $story_tech;
-    $data_array['expert-chunk'] = $expertchunk_data;
+    //$data_array['expert-chunk'] = $expertchunk_data;
     $data_array['polls'] = $polls_d;
     $data_array['author'] = $author;
     $data_array['rating'] = $rating;
