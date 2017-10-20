@@ -108,6 +108,12 @@ function generateStoryDeatilList($id) {
         $buzz_temp_flag = "0";
     }
     
+    if (count($story_tech) > 0) {
+        $tech_temp_flag = "1";
+    } else {
+        $tech_temp_flag = "0";
+    }
+    
     // custom function for get img byline
     $byline = getImgByline($large_image_fid);
     $published_stamp = $node->workbench_moderation['published']->stamp;
@@ -127,6 +133,7 @@ function generateStoryDeatilList($id) {
     $data_array['updated_datetime'] = "$changed_datetime";
     $data_array['published_datetime'] = "$published_date";
     $data_array['buzzflag'] = "$buzz_temp_flag";
+    $data_array['techflag'] = "$tech_temp_flag";
     $data_array['location'] = "$location";
     $data_array['director'] = "$director";
     $data_array['movie_plot'] = "$movie_plot";
@@ -357,7 +364,7 @@ function buildListicleNode($node) {
     $field_story_templates = $node->field_story_templates['und'][0]['value'];
     // get title
     $field_story_template_guru = $node->field_story_template_guru['und'][0]['value'];
-    $listiclenode['templates'] = "$field_story_templates";
+    
     $listiclenode['title'] = "$field_story_template_guru";
     //listicle loop data
     $field_story_listicle = $node->field_story_listicle['und'];
@@ -370,9 +377,10 @@ function buildListicleNode($node) {
         $type = $load_collection->field_story_listicle_type['und'][0]['value'];
         $description = $load_collection->field_story_listicle_description['und'][0]['value'];
         // loop data
-        $listiclenode['data'][$listcont]['description'] = "$description";
-        $listiclenode['data'][$listcont]['type'] = "$type";
-        $listiclenode['data'][$listcont]['color'] = "$color";
+        $listiclenode[$listcont]['templates'] = "$field_story_templates";
+        $listiclenode[$listcont]['description'] = "$description";
+        $listiclenode[$listcont]['type'] = "$type";
+        $listiclenode[$listcont]['color'] = "$color";
         $listcont++;
     }
     return $listiclenode;
