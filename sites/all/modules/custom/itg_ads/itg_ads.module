@@ -1142,8 +1142,8 @@ function get_ads_headerscript_section($arg, $data, $node_object){
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
 			$return['category_geader_s'] = (!empty($term_data[1]->name) ? $taxname1.$taxname2 : 'ROS');
 		} else {
-			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
-			$return['category_geader_s'] = 'Home';
+			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
+			$return['category_geader_s'] = $taxname1.'Home';
 		}
 	} else if ($arg[0] == "node" && is_numeric($arg[1])) {
 		$term_data = array_reverse($data);
@@ -1154,9 +1154,9 @@ function get_ads_headerscript_section($arg, $data, $node_object){
 		}
 		if (count($term_data) > 1 && !empty($term_data[0]->name)) {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
-			$return['category_geader_s'] = $taxname1.$node_object->type;
+			$return['category_geader_s'] = $taxname1.ucfirst($node_object->type);
 		} else {
-			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
+			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
 			$return['category_geader_s'] = 'ROS';
 		}
 	}
