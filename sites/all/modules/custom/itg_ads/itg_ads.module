@@ -1135,17 +1135,19 @@ function get_ads_headerscript_section($arg, $data, $node_object){
 	$return = FALSE;
 	if ($arg[0] == "taxonomy" && $arg[1] == "term" && is_numeric($arg[2])) {
 		$term_data = array_reverse($data);
-    p($term_data);
-		if (count($term_data) > 1){
-			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
-			$return['category_geader_s'] = (!empty($term_data[1]->name) ? $term_data[1]->name : 'ROS');
+    //p($term_data);
+		if (count($term_data) > 1) {
+      $taxname1 = preg_replace('/\s+/', '', $term_data[0]->name);
+      $taxname2 = preg_replace('/\s+/', '', $term_data[1]->name);
+			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
+			$return['category_geader_s'] = (!empty($term_data[1]->name) ? $taxname1.$taxname2 : 'ROS');
 		} else {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
 			$return['category_geader_s'] = 'Home';
 		}
 	} else if ($arg[0] == "node" && is_numeric($arg[1])) {
 		$term_data = array_reverse($data);
-    p($term_data);
+    //p($term_data);
 		if (empty($node_object)) {
 			$node_object = menu_get_object();
 		}
