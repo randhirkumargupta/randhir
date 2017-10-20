@@ -916,7 +916,7 @@ function get_header_body_start_end_code() {
   else if ($arg[0] == 'node' && is_numeric($arg[1])) {
     $node_object = menu_get_object();
     $tid = isset($node_object->field_primary_category[$node_object->language][0]['value']) ? $node_object->field_primary_category[$node_object->language][0]['value'] : NULL;
-
+    p($tid);
     if (isset($tid) && !empty($tid)) {
       $taxonomy_array = taxonomy_get_parents_all($tid);
       $terms = array_reverse($taxonomy_array);
