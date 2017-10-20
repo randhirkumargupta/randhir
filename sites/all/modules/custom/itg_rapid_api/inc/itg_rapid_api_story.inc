@@ -82,24 +82,24 @@ function generateStoryDeatilList($id) {
     $changed_datetime = date("Y-m-d H:i:s", $changed);
     $comment_cont = getCommentsCount($nid);
     $tag = array();
-    $tag = getTag($node);
+    $tag = (array) getTag($node);
     $heighligth = array();
-    $heighligth = getHighlight($node);
+    $heighligth = (array) getHighlight($node);
     $author = array();
-    $author = generateAuthorTag($node);
+    $author = (array) generateAuthorTag($node);
     $rating = array();
-    $rating = getRating($node);
+    $rating = (array) getRatings($node);
     $caption = getImgCaption($large_image_fid);
     $story_tech = array();
-    $story_tech = getStoryTechs($node);
+    $story_tech = (array) getStoryTechs($node);
     $listicle_data = array();
-    $listicle_data = buildListicleNode($node);
+    $listicle_data = (array) buildListicleNode($node);
     $factoid_data = array();
-    $factoid_data = buildFactoidNode($node);
+    $factoid_data = (array) buildFactoidNode($node);
     $buzz_data = array();
-    $buzz_data = buildBuzzNode($node);
+    $buzz_data = (array) buildBuzzNode($node);
     $expertchunk_data = array();
-    $expertchunk_data = buildExpertchunkNode($node);
+    $expertchunk_data = (array) buildExpertchunkNode($node);
     
     //$field_story_select_templates = $node->field_story_select_templates['und'][0]['value'];
     if (count($buzz_data) > 0) {
@@ -208,6 +208,16 @@ function getRating($node) {
 //    $rating['r_cur_value'] = "$field_story_rating";
 //    $rating['r_upper_range'] = "$field_story_rating";
 //    $rating['r_is_star_rating'] = "$field_story_rating";
+
+    return $rating;
+}
+
+function getRatings($node) {
+    $rating = array();
+    $field_story_rating = $node->field_story_rating['und'][0]['value'];
+    $rating['r_cur_value'] = "$field_story_rating";
+    $rating['r_upper_range'] = "$field_story_rating";
+    $rating['r_is_star_rating'] = "$field_story_rating";
 
     return $rating;
 }
