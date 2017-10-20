@@ -398,12 +398,14 @@ function buildFactoidNode($node) {
     $listcont = 0;
     // get title
     $field_story_factoids_title = $node->field_story_factoids_title['und'][0]['value'];
-    $factoidnode['title'] = "$field_story_factoids_title";
+    $listcont = 0;
+    $factoidnode[$listcont]['title'] = "$field_story_factoids_title";
+    $listcont = 1;
     // loop data - field_story_template_factoids
     $field_story_template_factoids = $node->field_story_template_factoids['und'];
     foreach ($field_story_template_factoids as $key => $value) {
         $factoids = $value['value'];
-        $factoidnode['data'][$listcont]['Factoids'] = $factoids;
+        $factoidnode[$listcont]['description'] = $factoids;
         $listcont++;
     }
     return $factoidnode;
