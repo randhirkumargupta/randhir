@@ -514,7 +514,8 @@ function getTechPros($content_org) {
     $techpross_data['rating'] = "$rate";
     $techpross_data['img_url'] = "$pros_img";
     
-    $techpross_data['pros']['label'] = "GOOD STUFF";
+    $tech_pros_label = getTechProsLabel($content_org, $flag = 0);
+    $techpross_data['pros']['label'] = "$tech_pros_label";
     
     foreach ($techpross_ar as $key => $value) {
        $value = rtrim($value, '\r\n'); 
@@ -522,7 +523,7 @@ function getTechPros($content_org) {
        $listcont++;
     }
     if(count($techpross_data['pros']['data']) < 0){
-        $techpross_data['pros']['label'] = "";
+        //$techpross_data['pros']['label'] = "";
     }
     $tech_cons = array();
     $tech_cons = getTechCons($content_org);
@@ -578,7 +579,8 @@ function getTechCons($content_org) {
     $techpross_ar = explode("\r\n\t",$techpross_fi);
     $listcont = 0;
     $techpross_data = array();
-    $techpross_data['label'] = "BAD STUFF";
+    $tech_cons_label = getTechProsLabel($content_org, $flag = 1);
+    $techpross_data['label'] = "$tech_cons_label";
     foreach ($techpross_ar as $key => $value) {
        $value = rtrim($value, '\r\n'); 
        $techpross_data['data'][$listcont]['title'] = $value; 
@@ -586,7 +588,7 @@ function getTechCons($content_org) {
     }
     
     if(count($techpross_data['data']) < 0){
-        $techpross_data['label'] = "";
+        //$techpross_data['label'] = "";
     }
     
     
@@ -704,5 +706,33 @@ function getPollLData($res) {
 
   $news['p_option'] = $options2;
   return $news;
+}
+
+/**
+ * function for  getTechProsLabel
+ * @pram $content_org
+ *
+ * @return array
+ */
+function getTechProsLabel($content_org, $flag = 0) {
+    //include 'simple_html_dom.php';
+    $h2 = "";
+    if($content_org){
+        $str_html = str_get_html($content_org);
+        $h2 = "";
+        $lcont = 0;
+        foreach($str_html->find('span') as $element){  
+            $h2 = $element;
+            $lcont++;
+            if($flag == 0 && $lcont == 1){
+                break;
+            }
+        }
+        $h2 = ltrim($h2, "<span>");
+        $h2 = rtrim($h2, "</span>");
+    }
+    //echo $h2; die();
+    return $h2;
+    
 }
 
