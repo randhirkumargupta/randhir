@@ -102,6 +102,11 @@ function generateStoryDeatilList($id) {
     $expertchunk_data = array();
     $expertchunk_data = (array) buildExpertchunkNode($node);
     
+    $content = $node->field_story_tech_review_chunk['und'][0]['value'];
+    $content_org = $content; // pros & cons function
+    $tech_pros = array();
+    $tech_pros =  (array) getTechPros($content_org);
+    
     //$field_story_select_templates = $node->field_story_select_templates['und'][0]['value'];
     if (count($buzz_data) > 0) {
         $buzz_temp_flag = "1";
@@ -151,7 +156,9 @@ function generateStoryDeatilList($id) {
     $data_array['listicles'] = $listicle_data;
     $data_array['factoids'] = $factoid_data;
     $data_array['buzz'] = $buzz_data;
-    $data_array['tech-photo'] = $story_tech;
+    $data_array['tech_photo_gallery']['p_id'] = "";
+    $data_array['tech_photos'] = $story_tech;
+    $data_array['tech_pros_cons'] = $tech_pros;
     //$data_array['expert-chunk'] = $expertchunk_data;
     $data_array['polls'] = $polls_d;
     $data_array['author'] = $author;
@@ -320,8 +327,8 @@ function getStoryTechs($node) {
     $content = preg_replace('#<div class="tech-cons"(.|\s)+</div>#', '', $content);
     /* remove pros & cons from contents start */
     $tect_img = $node->field_story_technology['und'];
-    $storytech['rating'] = "$rating";
-    $storytech['content'] = $content;
+    //$storytech['tech_photo_gallery']['p_id'] = "";
+    
     foreach ($tect_img as $key => $value) {
         $val_fid = $value['value'];
         $load_collection = field_collection_item_load($val_fid);
@@ -332,21 +339,15 @@ function getStoryTechs($node) {
         $listcont++;
     }
     //get tech pros
-    $tech_pros = array();
-    $tech_pros = getTechPros($content_org);
-    $pros_img = getTechProsImg($content_org);
-    $tech_h2 = getTechProsh2($content_org);
-    $storytech['tech-pros-cons-img'] = "$pros_img";
-    $storytech['tech-pros-cons-title'] = "$tech_h2";
-    $storytech['tech-pros'] = $tech_pros;
+    
+    
+    //$storytech['tech_pros_cons'] = $tech_pros;
     //get tech pros
-    $tech_cons = array();
-    $tech_cons = getTechCons($content_org);
-    $storytech['tech-cons'] = $tech_cons;
+    
     // static photo section
 
-    $storytech['photos']['p_id'] = "358749";
-    $storytech['photos']['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/intoday-mag2_54441497856379.jpeg";
+    //$storytech['photos']['p_id'] = "358749";
+    //$storytech['photos']['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/intoday-mag2_54441497856379.jpeg";
 
     return $storytech;
 }
@@ -472,7 +473,7 @@ function buildExpertchunkNode($node) {
  * @return array
  */
 function getTechPros($content_org) {
-    $techpross = array();
+     $techpross = array();
     $listcont = 0;
     $html = $content_org;
     $dom = new DOMDocument();
@@ -492,11 +493,23 @@ function getTechPros($content_org) {
     $techpross_ar = explode("\r\n\t",$techpross_fi);
     $listcont = 0;
     $techpross_data = array();
+    $pros_img = getTechProsImg($content_org);
+    $tech_h2 = getTechProsh2($content_org);
+    
+    $techpross_data['label'] = "$tech_h2";
+    $techpross_data['rating'] = "$tech_h2";
+    $techpross_data['img_url'] = "$pros_img";
+    
+    $techpross_data['pros']['label'] = "GOOD STUFF";
+    
     foreach ($techpross_ar as $key => $value) {
-        $value = rtrim($value, '\r\n'); 
-       $techpross_data[$listcont]['pros'] = $value; 
+       $value = rtrim($value, '\r\n'); 
+       $techpross_data['pros']['data'][$listcont]['title'] = $value; 
        $listcont++;
     }
+    $tech_cons = array();
+    $tech_cons = getTechCons($content_org);
+    $techpross_data['cons'] = $tech_cons; 
     
     return $techpross_data;
 }
@@ -525,6 +538,8 @@ function getTechPros_bk($content_org) {
  * @return array
  */
 function getTechCons($content_org) {
+    
+    
 
     $techpross = array();
     $listcont = 0;
@@ -546,9 +561,10 @@ function getTechCons($content_org) {
     $techpross_ar = explode("\r\n\t",$techpross_fi);
     $listcont = 0;
     $techpross_data = array();
+    $techpross_data['label'] = "BAD STUFF";
     foreach ($techpross_ar as $key => $value) {
        $value = rtrim($value, '\r\n'); 
-       $techpross_data[$listcont]['cons'] = $value; 
+       $techpross_data['data'][$listcont]['title'] = $value; 
        $listcont++;
     }
     
