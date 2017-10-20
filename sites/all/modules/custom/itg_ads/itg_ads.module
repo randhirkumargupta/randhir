@@ -948,19 +948,22 @@ function get_header_body_start_end_code() {
     if ($device_information == 'website') {
       if (isset($ads_object->field_ads_headerscript[$ads_object->language])) {
         foreach ($ads_object->field_ads_headerscript[$ads_object->language] as $header) {
-		  $section_header_s = 'ROS';
-		  $category_header_s = 'ROS';
-		  if($header_section = get_ads_headerscript_section($arg, $taxonomy_array, $node_object)){
-			$section_geader_s = $header_section['section_header_s'];
-			$category_geader_s = $header_section['category_geader_s'];
-		  }
-		  
-		  if (strpos($header['value'], '[ITGD:ads:1]')) {
-			 $header['value'] = str_replace('[ITGD:ads:1]', $section_geader_s, $header['value']);
-		  }
-		  if (strpos($header['value'], '[ITGD:ads:2]')) {
-			 $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
-		  }
+          
+          if ($templatedata == 'Rest' && strpos($header['value'], '[ITGD:ads:1]')) {
+            $section_header_s = 'ROS';
+            $category_header_s = 'ROS';
+            if($header_section = get_ads_headerscript_section($arg, $taxonomy_array, $node_object)){
+              $section_geader_s = $header_section['section_header_s'];
+              $category_geader_s = $header_section['category_geader_s'];
+            }
+            if (strpos($header['value'], '[ITGD:ads:1]')) {
+              $header['value'] = str_replace('[ITGD:ads:1]', $section_geader_s, $header['value']);
+            }
+            if (strpos($header['value'], '[ITGD:ads:2]')) {
+              $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
+            }
+          }
+          
           $adsheaderbody['header'][] = $header['value'];
         }
       }
@@ -969,6 +972,22 @@ function get_header_body_start_end_code() {
     if ($device_information == 'mobile') {
       if (isset($ads_object->field_ads_headerscript_mob[$ads_object->language])) {
         foreach ($ads_object->field_ads_headerscript_mob[$ads_object->language] as $header) {
+          
+          if ($templatedata == 'Rest' && strpos($header['value'], '[ITGD:ads:1]')) {
+            $section_header_s = 'ROS';
+            $category_header_s = 'ROS';
+            if($header_section = get_ads_headerscript_section($arg, $taxonomy_array, $node_object)){
+              $section_geader_s = $header_section['section_header_s'];
+              $category_geader_s = $header_section['category_geader_s'];
+            }
+            if (strpos($header['value'], '[ITGD:ads:1]')) {
+              $header['value'] = str_replace('[ITGD:ads:1]', $section_geader_s, $header['value']);
+            }
+            if (strpos($header['value'], '[ITGD:ads:2]')) {
+              $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
+            }
+          }
+          
           $adsheaderbody['header'][] = $header['value'];
         }
       }
@@ -1114,25 +1133,26 @@ function itg_ads_get_renderable_prev_data($prev_raw_data) {
 
 function get_ads_headerscript_section($arg, $data, $node_object){
 	$return = FALSE;
-	if($arg[0] == "taxonomy" && $arg[1] == "term" && is_numeric($arg[2])){
+	if ($arg[0] == "taxonomy" && $arg[1] == "term" && is_numeric($arg[2])) {
 		$term_data = array_reverse($data);
-		if(count($term_data) > 1){
+    p($term_data);
+		if (count($term_data) > 1){
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
 			$return['category_geader_s'] = (!empty($term_data[1]->name) ? $term_data[1]->name : 'ROS');
-		}else{
+		} else {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
 			$return['category_geader_s'] = 'Home';
 		}
-		
-	}else if($arg[0] == "node" && is_numeric($arg[1])){
+	} else if ($arg[0] == "node" && is_numeric($arg[1])) {
 		$term_data = array_reverse($data);
-		if(empty($node_object)){
+    p($term_data);
+		if (empty($node_object)) {
 			$node_object = menu_get_object();
 		}
-		if(count($term_data) > 1 && !empty($term_data[0]->name)){
+		if (count($term_data) > 1 && !empty($term_data[0]->name)) {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
 			$return['category_geader_s'] = $term_data[0]->name.$node_object->type;
-		}else{
+		} else {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $term_data[0]->name : 'ROS');
 			$return['category_geader_s'] = 'ROS';
 		}
