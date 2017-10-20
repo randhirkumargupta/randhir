@@ -60,8 +60,9 @@ function generateStoryDeatilList($id) {
     $poll_id = $body_with_html_data['poll_id'];
     $polls = getPollsData($poll_id);
     //p($polls);die();
-    $polls_d = array();
-    $polls_d = (array) $polls['data'][0];
+    $polls_d = array();  
+    $polls_d = (array) $polls;
+    //p($polls_d);die();
     $load_city = taxonomy_term_load($node->field_stroy_city['und'][0]['tid']);
     $location = $load_city->name;
     $term = taxonomy_term_load($tid);
@@ -592,7 +593,7 @@ function getPollsData($poll_id){
 
 function pollsdatalist($poll_id) {
 
-
+  $news2 = array();
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
   $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
@@ -611,14 +612,14 @@ function pollsdatalist($poll_id) {
   $query->condition('n.nid', $poll_id);
   
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
+  $lcont = 0;
   foreach ($result as $k => $res) {
-    $news2[] = getPollLData($res);
+    $news2[$lcont] = getPollLData($res);
+    $lcont++;
   }
-  $data = array();
-  $data['data'] = $news2;
   
-  return $data;
+  
+  return $news2;
 }
 
 /*
@@ -645,12 +646,13 @@ function getPollLData($res) {
   $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   $options2 = array();
-
+  $lcont = 0;
   foreach ($result_option as $p => $pv) {
     $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
     $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
     $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
-    $options2[] = $options;
+    $options2[$lcont] = $options;
+    $lcont++;
   }
   $news = array();
   $news['p_id'] = "$poll_nid";
