@@ -507,6 +507,9 @@ function getTechPros($content_org) {
        $techpross_data['pros']['data'][$listcont]['title'] = $value; 
        $listcont++;
     }
+    if(count($techpross_data['pros']['data']) < 0){
+        $techpross_data['pros']['label'] = "";
+    }
     $tech_cons = array();
     $tech_cons = getTechCons($content_org);
     $techpross_data['cons'] = $tech_cons; 
@@ -567,6 +570,11 @@ function getTechCons($content_org) {
        $techpross_data['data'][$listcont]['title'] = $value; 
        $listcont++;
     }
+    
+    if(count($techpross_data['data']) < 0){
+        $techpross_data['label'] = "";
+    }
+    
     
     return $techpross_data;
 }
