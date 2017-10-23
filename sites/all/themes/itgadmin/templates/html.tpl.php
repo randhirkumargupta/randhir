@@ -20,10 +20,9 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
   <link href="<?php print $base_path; ?>sites/all/themes/itgadmin/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-  <?php print $styles; ?>
-  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js" type="text/javascript"></script>
+  <?php print $styles; ?>  
   <?php print $scripts; ?>
-  
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js" type="text/javascript"></script>
   <?php if ($add_html5_shim and !$add_respond_js): ?>
     <?php elseif ($add_html5_shim and $add_respond_js): ?>
      <?php elseif ($add_respond_js): ?>
