@@ -1953,6 +1953,7 @@ function itg_bestcollege_citywiseranking_migrate($line, $session_nid, &$context)
     // Query failed; recover based on $e->getMessage()
     drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
     itg_watchdog('bestcollege_citywiseranking_fail', $line);
+    watchdog('bestcollege_citywiseranking_error', $e->getMessage());
   }
 }
 
@@ -2122,6 +2123,7 @@ function itg_bestcollege_readyrecknor_emerging_migrate($line, $session_nid, &$co
     // Query failed; recover based on $e->getMessage()
     drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
     itg_watchdog('readyrecknor_emerging_fail', $line);
+    watchdog('readyrecknor_emerging_error', $e->getMessage());
   }
 }
 
@@ -2185,6 +2187,7 @@ function itg_bestcollege_readyrecnor_directory_migrate($line, $session_nid, &$co
     // Query failed; recover based on $e->getMessage()
     drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
     itg_watchdog('readyrecnor_directory_fail', $line);
+    watchdog('readyrecnor_directory_error', $e->getMessage());
   }
 }
 
