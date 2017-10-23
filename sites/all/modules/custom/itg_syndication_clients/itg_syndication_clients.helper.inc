@@ -7,6 +7,7 @@
 
 function getbsb_client_array() {
   $story = array(
+    '1206584' => 'indiatoday_stories.xml',
     '1206533' => 'it-story-movies.xml',
     '1206550' => 'it-story-sports.xml',
     '1206567' => 'it-story-lifestyle.xml',
@@ -48,6 +49,13 @@ function getbsb_client_photo_array(){
 function getbsb_client_video_array(){
   $video = array(
     '1206552' => 'video_latest.xml',
+    '1206952' => 'video_entertainment.xml',
+    '1206955' => 'video_india.xml',
+    '1206956' => 'video_world.xml',
+    '1206957' => 'video_sports.xml',
+    '1206959' => 'video_business.xml',
+    '1207303' => 'video_movies.xml',
+    '1207304' => 'video_lifestyle.xml',
   );
   return $video;
 }

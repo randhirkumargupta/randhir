@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 /**
  * @file
@@ -28,8 +28,13 @@ function itg_genrate_bsb_story_syndication($section_id = NULL, $file_name) {
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
-
-    $query->condition('ti.tid', $section_id, '=');
+	
+	if($section_id == '1206584'){
+		$query->condition('ti.tid', array(1206584, 1206567, 1206578, 1206533), 'IN');
+	}else{
+		$query->condition('ti.tid', $section_id, '=');
+	}
+    
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
