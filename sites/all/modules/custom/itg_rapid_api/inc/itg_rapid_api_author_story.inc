@@ -819,3 +819,77 @@ function anchor_programm_data_list($anchor_id, $type ,$cpageno) {
    $data['lcount'] = count($prog2);
    return $data;
  }
+
+ 
+ /*
+ * Get the list of stories of a particular author
+ */
+function follow_author_data_responce($user_id, $author_id, $type) {
+    // variable decalartion
+
+    $data = array();
+    $output_array = array();
+    $data_array = array();
+    $updated_datetime = "";
+    $ntype = 'author';
+    $activity = $type;
+    if($activity == 'follow_story'){
+      $dstatus = '1';
+    }elseif ($activity == 'Unfollow') {
+      $dstatus = '0';
+    }
+    
+    $activity_date = date('d-m-Y');
+    $activity_date_time = date('d-m-Y h:i:s');
+  
+    
+    if (function_exists('mongodb')) {
+      $con = mongodb();
+      if ($con) {
+        $people = $con->front_user_activity;
+          $get_previous_info = itg_get_front_activity_info($author_id, $ntype, $user_id, $activity, '');
+          if (empty($get_previous_info['nid'])) {
+          if($dtag == 'tag') {
+            $term = taxonomy_term_load($author_id);
+            $actual_title = $term->name;
+            $primary_cat_id = '';
+            $primary_cat_name = '';
+            $extra_image = null;
+            $path = '';
+          } else {
+            $actual_data = node_load($author_id);
+            $actual_title = $actual_data->title;
+            $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
+            $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
+            $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+            $path = $actual_data->path['source'];
+          }
+
+          $qry = array("nid" => $author_id, "uid" => $user_id, "title" => $actual_title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $ntype, "activity" => $activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" =>time());
+          $result = $people->insert($qry);
+          $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $ntype);
+        }else {
+            $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time , "timestamp" =>time()));
+            $people->update(array("nid" => $author_id, "activity" => $activity, "uid" => $user_id), $newdata);
+            $response = array("success" => $dstatus, 'activity' => $activity, 'type' => $ntype);
+        }
+      }
+    }
+
+    if(!empty($response)){
+      $data['id'] = $author_id;
+      $data['is_saved'] = $response['success'];
+      $data['limit_crossed'] = '1';
+    }    
+
+    if (!empty($response)) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+        $output_array['data'] = $data;
+    } else {
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+        $output_array['data'] = $data;
+    }
+    return $output_array;
+}

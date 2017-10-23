@@ -550,7 +550,7 @@ function itg_rapid_api_url_inbound_alter(&$result, $path, $path_language) {
     if ($iphone || $android || $palmpre || $ipod || $berry == true) {
         $flag = 1;
     }
-    $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification");
+    $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list");
     if (arg(0) == "appapi" && count(arg()) == 2) {
         if (!in_array(arg(1), $post_res)) {
             $result = $path . "/it";
@@ -1889,4 +1889,33 @@ function getTechProsh2($content_org) {
     }
     
     return $h2;
+}
+
+/**
+ * @param int $nid of the author or anchor
+ * @param string $type author or anchor
+ * @return $status boolean True|False
+ */
+function valid_anchor_author($nid,$type){
+  //echo $nid; echo "<br>";echo $type; die();
+  $node = node_load($nid);// reporter 285750 , anchor 285903
+  $occupation_tids = array();
+  //p($node);die();
+  foreach($node->field_celebrity_pro_occupation['und'] as $data){
+    $occupation_tids[] = $data['tid'];
+  }
+  if($type == 'author'){
+    if(in_array('285750', $occupation_tids)){
+      $status = TRUE;
+    }else{
+      $status = FALSE;
+    }  
+  }elseif($type == 'anchor'){
+    if(in_array('285903', $occupation_tids)){
+      $status = TRUE;
+    }else{
+      $status = FALSE;
+    }
+  }
+  return $status;
 }

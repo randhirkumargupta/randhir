@@ -2433,6 +2433,151 @@ function itg_rapid_api_resource() {
                 ),
             ),
         ),
+        
+        // follow/unfollow API
+        
+        // follow_anchor custom resource declaration.....
+        
+        'follow_anchor' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow Anchor and return Responce based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'follow_anchor_responce',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'author_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Node Id',
+                            'type' => 'array',
+                        ),
+                      array(
+                            'name' => 'type',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'type follow or unfollow',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        
+        // follow_author custom resource declaration.....
+        'follow_author' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow Author and return Responce based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'follow_author_responce',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'author_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Node Id',
+                            'type' => 'array',
+                        ),
+                      array(
+                            'name' => 'type',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'type follow or unfollow',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        
+        // anchor_follow_list custom resource declaration.....
+        'anchor_follow_list' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow Anchor list based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_anchor_follow_list',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        
+                      
+                    ),
+                ),
+            ),
+        ),
+        
+        // author_follow_list custom resource declaration.....
+        'author_follow_list' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow author list based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_author_follow_list',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        
+                      
+                    ),
+                ),
+            ),
+        ),
+        
+        
     );
 
     return $api;
@@ -5324,3 +5469,273 @@ function itg_rapid_api_authtoken_verification($token) {
 
     return $res;
 }
+
+/*
+ * Follow or unfollow anchor
+ */
+function follow_anchor_responce($token, $user_id, $node_id) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $anchor_id = $params['anchor_id'];
+    $type = $params['type'];
+    $message_array = array();
+    //p($params);die();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id) && $anchor_id != '' && $type != '') {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    if(!valid_anchor_author($anchor_id,'anchor')){
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Anchor Id is not valid.";
+        $message_array['data'] = array();
+    }
+    if($type == 'follow_story' || $type == 'Unfollow'){
+    }else{
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Type is not valid it shoud be either follow_story or Unfollow";
+        $message_array['data'] = array();
+    }
+
+    // check args
+    if ($args != '0') {
+        $jsondata = follow_author_data_responce($user_id, $author_id,$type);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
+/*
+ * Follow or unfollow author
+ *
+ */
+function follow_author_responce($token, $user_id, $node_id) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $author_id = $params['author_id'];
+    $type = $params['type'];
+    
+    $message_array = array();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id) && $author_id != '' && $type != '') {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    if(!valid_anchor_author($author_id,'author')){
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Author Id is not valid.";
+        $message_array['data'] = array();
+    }
+    if($type == 'follow_story' || $type == 'Unfollow'){
+    }else{
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Type is not valid it shoud be either follow_story or Unfollow";
+        $message_array['data'] = array();
+    }
+
+    // check args
+    if ($args != '0') {
+        $jsondata = follow_author_data_responce($user_id, $author_id,$type);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
+
+/*
+ * Follow anchor list
+ *
+ */
+function itg_rapid_api_anchor_follow_list($token) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $author_id = $params['author_id'];
+    $type = $params['type'];
+    
+    $message_array = array();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id)) {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    
+   echo "kumar";die();
+
+    // check args
+    if ($args != '0') {
+        $jsondata = list_author_anchor_data_responce($user_id);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
+/*
+ * Follow author list
+ *
+ */
+function itg_rapid_api_author_follow_list($token) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $author_id = $params['author_id'];
+    $type = $params['type'];
+    
+    $message_array = array();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id)) {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    
+   echo "andy"; die();
+
+    // check args
+    if ($args != '0') {
+        $jsondata = list_author_anchor_data_responce($user_id);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
+/**
+ * Helper function to get previous insert record. 
+ * @param int $uid 
+ */
+function list_author_anchor_data_responce($uid) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cond = array('uid' => $uid);
+    $cursor = $people->find($cond);
+    foreach ($cursor as $document) {
+      $data['nid'] = $document['nid'];
+      $data['status'] = $document['status'];
+    }
+    //return $data;
+    p($data);die();
+  }
+  
+  if(!empty($response)){
+      $data['id'] = $author_id;
+      $data['is_saved'] = $response['success'];
+      $data['limit_crossed'] = '1';
+    }    
+
+    if (!empty($response)) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+        $output_array['data'] = $data;
+    } else {
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+        $output_array['data'] = $data;
+    }
+    return $output_array;
+  
+}
+
+
