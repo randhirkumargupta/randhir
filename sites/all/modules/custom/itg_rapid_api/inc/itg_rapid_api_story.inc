@@ -159,7 +159,7 @@ function generateStoryDeatilList($id) {
     $data_array['tech_photo_gallery']['p_id'] = "";
     $data_array['tech_photos'] = $story_tech;
     $data_array['tech_pros_cons'] = $tech_pros;
-    //$data_array['expert-chunk'] = $expertchunk_data;
+    $data_array['expert-chunk'] = $expertchunk_data;
     $data_array['polls'] = $polls_d;
     $data_array['author'] = $author;
     $data_array['rating'] = $rating;
