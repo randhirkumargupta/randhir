@@ -32,6 +32,26 @@ function itg_zuppit_feed_latest_story(){
   $json_output['error'] = NULL;  
   $json_output['data']['size'] = count($result);
   $json_output['data']['nextPage'] = $base_url.'/ucbrowser/story/feed/??pageNumber='.($page_number+1).'&pagesize='.$pagesize.'&partner='.$partner;
+  // For Top key
+  $top_stories = get_top_story_for_zupit();
+  $json_output['data']['top'] = array();
+  foreach($top_stories as $top_story){
+    $pub_date = strtotime($top_story['field_itg_content_publish_date_value']);
+    $larg_img = get_image_info_by_fid($top_story['field_story_large_image_fid']);
+    $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $top_story['nid']);
+    $category_name = get_term_name_by_tid($top_story['field_primary_category_value']);
+    $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($top_story['field_story_kicker_text_value']));
+    $json_output['data']['top'][] = array(
+      'id'=>$top_story['nid'],
+      'title'=>$top_story['title'],
+      'category'=>$category_name,
+      'short_introtext'=>$kicker_text,
+      'url'=>$content_url,
+      'kicker_image'=>$larg_img['imag_url'],
+      'publishTime'=>$pub_date
+    );
+  }
+  // For Rows key
   $json_output['data']['rows'] = array();
   foreach($result as $value){
     $nid = $value['nid'];
@@ -66,4 +86,27 @@ function itg_zuppit_feed_latest_story(){
   }
   drupal_json_output($json_output);
   drupal_exit();
+}
+
+function get_top_story_for_zupit(){
+  $type = array('story');
+  $query = db_select('node', 'n');
+    
+  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_large_image', 'sli', 'sli.entity_id=n.nid');  
+  $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+
+  $query->fields('n', array('nid', 'title'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('sli', array('field_story_large_image_fid'));  
+  $query->fields('pc', array('field_primary_category_value'));  
+  $query->fields('synopsis', array('field_story_kicker_text_value'));
+
+  $query->condition('n.status', 1);
+  $query->condition('n.type', $type, 'IN');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 10);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
 }
