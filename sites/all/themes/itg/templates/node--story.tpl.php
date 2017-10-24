@@ -1,6 +1,7 @@
 <script type="text/javascript">var __at__ = 0;</script>
 <?php
 global $base_url, $user;
+print "test page";
 if (!empty($content)):
 
   // get related content associated with story
