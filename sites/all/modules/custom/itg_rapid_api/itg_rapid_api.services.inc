@@ -5716,7 +5716,7 @@ function list_author_anchor_data_responce($uid) {
       $data['status'] = $document['status'];
     }
     //return $data;
-    p($data);die();
+    //p($data);die();
   }
   
   if(!empty($response)){
