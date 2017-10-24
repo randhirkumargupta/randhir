@@ -5711,9 +5711,11 @@ function list_author_anchor_data_responce($uid) {
     $people = $con->front_user_activity;
     $cond = array('uid' => $uid);
     $cursor = $people->find($cond);
+    $loopc = 0;
     foreach ($cursor as $document) {
-      $data['nid'] = $document['nid'];
-      $data['status'] = $document['status'];
+      $data[$loopc]['nid'] = $document['nid'];
+      $data[$loopc]['status'] = $document['status'];
+      $loopc++;
     }
     //return $data;
     p($data);die();
