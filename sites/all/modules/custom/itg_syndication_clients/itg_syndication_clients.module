@@ -107,6 +107,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_zuppit_latest_story.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss/syndication-article'] = array(
+    'page callback' => 'itg_rss_syndication_article',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_syndication_article.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -660,4 +666,12 @@ function get_itg_video_transcoding($nid) {
   $query->condition('tra.nid', $nid);
   $result = $query->execute()->fetchAll();
   return $result;
+}
+
+function not_found_syndication_xml() {
+  $xml = '<Error>
+      <Code>'.t('AccessDenied').'</Code>
+      <Message>'.t('No items Found').'</Message>
+  </Error>';
+  return $xml;
 }
