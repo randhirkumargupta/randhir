@@ -5724,7 +5724,7 @@ function list_author_anchor_data_responce($uid) {
   $anchor_list = array();
   $anchor_data = array();
   $anchor_c = 0;
-  
+  $data = array_unique($data);
   foreach ($data as $key => $value) {
       if($value['nid']){
           $node_data = node_load($value['nid']);
