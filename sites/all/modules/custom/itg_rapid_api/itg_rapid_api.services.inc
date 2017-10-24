@@ -5481,7 +5481,7 @@ function follow_anchor_responce($token, $user_id, $node_id) {
     $user_load = user_load_by_name($user_name);
     $user_id = $user_load->uid;
     $authtoken_id = $params['authtoken_id'];
-    $anchor_id = $params['anchor_id'];
+    $author_id = $anchor_id = $params['anchor_id'];
     $type = $params['type'];
     $message_array = array();
     //p($params);die();
