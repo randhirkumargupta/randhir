@@ -430,6 +430,8 @@ DirectoryIndex index.php index.html index.htm
         RewriteCond %{REQUEST_URI} !/turn-off-your-ad-blocker [NC]
         RewriteCond %{REQUEST_URI} !/voter-helpline [NC]
 	RewriteCond %{REQUEST_URI} !/cannes2014.jsp [NC]
+        RewriteCond %{REQUEST_URI} !/scorecard/matchcenter.jsp [NC]
+        RewriteCond %{REQUEST_URI} !/people/narendra-modi/17737.html
 ####### End saticpages phase 3 End #########
 
   RewriteRule ^ index.php [L]
@@ -820,6 +822,7 @@ DirectoryIndex index.php index.html index.htm
 	RewriteRule ^healthy-eating.jsp$ /staticpages/healthy-eating.jsp [L]
 	RewriteRule ^high-mighty.jsp$ /staticpages/high-mighty.jsp [L]
 	RewriteRule ^high-mighty-guide.jsp$ /staticpages/high-mighty-guide.jsp [L]
+        RewriteRule ^hltapp.jsp$ /staticpages/hltapp.jsp [L]
 	RewriteRule ^index.html$ /staticpages/index.html [L]
 	RewriteRule ^indiatodaycovers2011.jsp$ /staticpages/indiatodaycovers2011.jsp [L]
 	RewriteRule ^indiatodaycovers2012.jsp$ /staticpages/indiatodaycovers2012.jsp [L]
@@ -835,7 +838,7 @@ DirectoryIndex index.php index.html index.htm
 	RewriteRule ^lokmanya-tilak.jsp$ /staticpages/lokmanya-tilak.jsp [L]
 	RewriteRule ^match-fixing.jsp$ /staticpages/match-fixing.jsp [L]
 	RewriteRule ^mcdheadline2017.jsp$ /staticpages/mcdheadline2017.jsp [L]
-	RewriteRule ^mjakbar.jsp$ /staticpages/mjakbar.jsp [L]
+	RewriteRule ^mjakbar.html$ /staticpages/mjakbar.html [L]
 	RewriteRule ^modi-3-year-survey.jsp$ /staticpages/modi-3-year-survey.jsp [L]
 	RewriteRule ^musharraf.jsp$ /staticpages/musharraf.jsp [L]
 	RewriteRule ^nelson-mandela.jsp$ /staticpages/nelson-mandela.jsp [L]
@@ -857,7 +860,7 @@ DirectoryIndex index.php index.html index.htm
 	RewriteRule ^shashi-kapoor.jsp$ /staticpages/shashi-kapoor.jsp [L]
 	RewriteRule ^sholay-slide.jsp$ /staticpages/sholay-slide.jsp [L]
 	RewriteRule ^sonakshi.jsp$ /staticpages/sonakshi.jsp [L]
-	RewriteRule ^srilanka-vs-ltte.jsp$ /staticpages/srilanka-vs-ltte.jsp [L]
+        RewriteRule ^srilanka-vs-ltte.jsp$ /staticpages/srilanka-vs-ltte.jsp [L]
 	RewriteRule ^syrian-troops.jsp$ /staticpages/syrian-troops.jsp [L]
         RewriteRule ^story_fb.html$ /staticpages/story_fb.html [L]
 	RewriteRule ^staticcontent_chunk.jsp$ /staticpages/staticcontent_chunk.jsp [L]
@@ -899,6 +902,7 @@ DirectoryIndex index.php index.html index.htm
         RewriteRule ^yearender2014/(.*) /staticpages/yearender2014/$1 [L]
         RewriteRule ^education/(.*) /staticpages/education/$1 [L]
 	RewriteRule ^electionscorecard/(.*) /staticpages/electionscorecard/$1 [L]
+        RewriteRule ^euro2016$ /staticpages/euro2016/index.jsp? [L]
         RewriteRule ^euro2016/(.*) /staticpages/euro2016/$1 [L]
         RewriteRule ^sexsurvey$ /staticpages/sexsurvey/sexsurvey.html? [L]
 	RewriteRule ^sexsurvey/(.*) /staticpages/sexsurvey/$1 [L]
@@ -941,7 +945,9 @@ DirectoryIndex index.php index.html index.htm
         RewriteRule ^turn-off-your-ad-blocker/(.*) /staticpages/turn-off-your-ad-blocker/$1 [L]
         RewriteRule ^voter-helpline$ /staticpages/voter-helpline/index.html? [L]
         RewriteRule ^voter-helpline/(.*) /staticpages/voter-helpline/$1 [L]
-        RewriteRule ^cannes2014.jsp$ /staticpages/cannes2014.jsp [L]	
+        RewriteRule ^cannes2014.jsp$ /staticpages/cannes2014.jsp [L]
+        RewriteRule ^scorecard/matchcenter.jsp$ /staticpages/scorecard/matchcenter.jsp [L]
+        RewriteRule ^people/narendra-modi/17737.html$ /staticpages/people/narendra-modi/17737.html [L]	
 	####### End saticpages phase 3 #########
 	
 

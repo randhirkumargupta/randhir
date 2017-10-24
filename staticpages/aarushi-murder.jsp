@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Aarushi-Hemraj murder:  Trial and error</title>
 <meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/specials/images/aarushi-300x350.jpg">
-<link href="staticpages/css/common.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/common.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" language="javascript" src="staticpages/js/ajaxinclude.js"></script>
 <style>
 body { background: none !important}
@@ -289,7 +289,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 <div id="wholecontent">
 
 <section style="position: relative;">
-<link href="staticpages/css/article.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/article.css" type="text/css" rel="stylesheet">
 <style>
 
 #itgd_links {float:left;}

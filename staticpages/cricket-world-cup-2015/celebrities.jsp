@@ -46,7 +46,7 @@ $(document).ready(function(e) {
 	$('.video_area ul').css('width', wd);
 	var counter = 1;
 	 $('.left-arrow').hide();
-	
+
 $('.right-arrow').click(function(){
 	if(counter < len )
 	{
@@ -55,12 +55,12 @@ $('.right-arrow').click(function(){
 		 		})
 		counter += 1;
 		$('.left-arrow').show();
-	   
+
 	}
 	else
 	{
 	  $('.right-arrow').hide();
-	} 
+	}
 });
 
 
@@ -76,19 +76,19 @@ $('.right-arrow').click(function(){
 					})
 			counter -= 1;
 			$('.right-arrow').show();
-		 
-		} 
+
+		}
 	});
 
 });
 </script>
 <style>
-	.celebplayer-box{width:960px; height:600px; text-align:center}	
+	.celebplayer-box{width:960px; height:600px; text-align:center}
 </style>
 </head>
 
 <body>
- 
+
 
 
 
@@ -100,11 +100,11 @@ $('.right-arrow').click(function(){
 <script src="js/ajaxinclude.js"></script>
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <script href="/cricket-world-cup-2015/js/wc2015.js" type="text/javascript"></script>			 <!--For live purpose -->
-	
+
 
 	<div id="top_nav">
 	    <div class="itgd_links">
-	        <ul> 
+	        <ul>
 	        <li class="last"><a rel="nofollow" target="_blank" href="http://indiatodaygroup.com/">THE INDIA TODAY GROUP</a></li>
 	        <li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.indiatoday.in/">India Today</a></li>
 	        <li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.aajtak.in/">Aaj Tak</a></li>
@@ -135,16 +135,16 @@ $('.right-arrow').click(function(){
            			</a>
            		</div>
            	</div>
-            
+
             <div style="float:right; visibility:hidden; height:151px;"><a href="http://youtu.be/aYNYSLPz6mI" target="_blank">
             <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/our-expert.png" style="float:right;margin-top:7px;" /></a></div>
 
-            
+
 		</div>
 		<div class="nav-top">
-        	<ul>     
-        		<li><a href="http://indiatoday.intoday.in/subcategory/updates/1/288.html">Updates</a></li>
-        		<li><a href="javascript:void(0)" id="team">Teams</a><div class="team-container"> 
+        	<ul>
+        		<li><a href="/cricket-world-cup-2015/288.html">Updates</a></li>
+        		<li><a href="javascript:void(0)" id="team">Teams</a><div class="team-container">
                     <ol class="col-1">
                       <li class="item-1"><a href="http://indiatoday.intoday.in/story/icc-world-cup-2015-cricket-team-profiles-england/1/414608.html" title="England">England</a></li>
                       <li class="item-2"><a href="http://indiatoday.intoday.in/story/icc-world-cup-2015-cricket-team-profiles-australia/1/414610.html" title="Australia">Australia</a></li>
@@ -157,7 +157,7 @@ $('.right-arrow').click(function(){
                       <li class="item-7"><a href="http://indiatoday.intoday.in/story/icc-world-cup-2015-cricket-team-profiles-scotland/1/414603.html" title="Scotland">Scotland</a></li>
                       <li class="item-8"><a href="http://indiatoday.intoday.in/story/icc-world-cup-2015-cricket-team-profiles-south-africa/1/414601.html" title="SA">South Africa</a></li>
                       <li class="item-9"><a href="http://indiatoday.intoday.in/>story/icc-world-cup-2015-cricket-team-profiles-india/1/414607.html" title="India">India</a></li>
-                      <li class="item-10"><a href="http://indiatoday.intoday.in/story/icc-world-cup-2015-cricket-team-profiles-pakistan/1/414604.html" title="PAK">Pakistan</a></li>                      
+                      <li class="item-10"><a href="http://indiatoday.intoday.in/story/icc-world-cup-2015-cricket-team-profiles-pakistan/1/414604.html" title="PAK">Pakistan</a></li>
                     </ol>
                     <ol class="col-3">
                       <li class="item-11"><a href="http://indiatoday.intoday.in/story/icc-world-cup-2015-cricket-team-profiles-west-indies/1/414597.html" title="West Indies">West Indies</a></li>
@@ -173,9 +173,9 @@ $('.right-arrow').click(function(){
         		<li><a href="/cricket-world-cup-2015/pointstally.jsp">Points Tally</a></li>
         		<li><a href="/cricket-world-cup-2015/venues.jsp">Venues</a></li>
         		<li><a href="/cricket-world-cup-2015/indiaatworldcup.jsp">india at the world cup</a></li>
-        		 
+
 				<div class="clr"></div>
-                 
+
             </ul>
         </div>
 	</div>
@@ -194,9 +194,9 @@ $('.right-arrow').click(function(){
 				var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
 				</script>
 				<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-				<!-- end ZEDO for channel: IT Home Page Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->	     
+				<!-- end ZEDO for channel: IT Home Page Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
 		    </div>
-	
+
 	<div id="left-panel" style="float: left;width: 100%;">
 		<div class="keyplayer-box-section" style="width: 970px;padding: 10px;background: #f6f6f6;margin-top: 10px;float: left;">
 			<div class="celebplayer-box flt" style="width:100%; margin:20px  auto; height:713px; overflow:hidden;">
@@ -205,11 +205,11 @@ $('.right-arrow').click(function(){
 		</div>
 		<div class="clr"></div>
     </div>
-    <!--left-panel end-->    
+    <!--left-panel end-->
 </div>
 <div class="clr"></div>
 <!--wrapper end-->
-	
+
 <style>
 .r_tooltip {
 width: 410px;
@@ -258,7 +258,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 <div class="bt-timeline-frame">
 	<div class="number-crunch"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricketwc2015/wc_crunching.gif"></div>
    <div class="bt-timeline-outer">
-   
+
      <a href="javascript:void(0);" id="bt-pre">pre</a>
      <a href="javascript:void(0);" id="bt-next">next</a>
 
@@ -273,7 +273,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
              		<div class="down-arow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricket-world-cup-2015/down-arrow.png" /></div>
              	</div>
             </li>
-            <li>23             
+            <li>23
             	<div class="tooltip" style="display:none">
                 <a href="javascript:void(0)" class="closepopup">close</a>
 	             	<div class="text-section">
@@ -282,7 +282,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 	             	<div class="down-arow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricket-world-cup-2015/down-arrow.png" /></div>
              	</div>
             </li>
-            <li>18             
+            <li>18
              	<div class="tooltip" style="display:none">
                 <a href="javascript:void(0)" class="closepopup">close</a>
 	             	<div class="text-section">
@@ -291,7 +291,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 	             	<div class="down-arow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricket-world-cup-2015/down-arrow.png" /></div>
              	</div>
             </li>
-            <li>49             
+            <li>49
              	<div class="tooltip" style="display:none">
                 <a href="javascript:void(0)" class="closepopup">close</a>
 	             	<div class="text-section">
@@ -300,7 +300,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 	             	<div class="down-arow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricket-world-cup-2015/down-arrow.png" /></div>
              	</div>
             </li>
-            <li>33             
+            <li>33
              	<div class="tooltip" style="display:none">
                 <a href="javascript:void(0)" class="closepopup">close</a>
 	             	<div class="text-section">
@@ -309,7 +309,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 	             	<div class="down-arow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricket-world-cup-2015/down-arrow.png" /></div>
              	</div>
             </li>
-            <li>43             
+            <li>43
              	<div class="tooltip r_tooltip" style="display:none">
                 <a href="javascript:void(0)" class="closepopup">close</a>
 	             	<div class="text-section">
@@ -318,7 +318,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 	             	<div class="down-arow right-arrow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricket-world-cup-2015/down-arrow.png" /></div>
              	</div>
             </li>
-            <li>31             
+            <li>31
              	<div class="tooltip r_tooltip" style="display:none">
                 <a href="javascript:void(0)" class="closepopup">close</a>
 	             	<div class="text-section">
@@ -327,25 +327,25 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 	             	<div class="down-arow right-arrow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/cricket-world-cup-2015/down-arrow.png" /></div>
              	</div>
             </li>
-          
-          
-       
-      
-        
-      
+
+
+
+
+
+
 		</ul>
 		<div class="clr"></div>
     </div>
-    
+
     </div>
  </div>
-    
+
 </div>
 
 <div class="footer-worldcup">
 	<div class="footer-inner">
 		<div class="footer-left">
-			<div class="footer-ad">    
+			<div class="footer-ad">
 				<script language="JavaScript">
 					var zflag_nid="821"; var zflag_cid="1150/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
 				</script>
@@ -360,7 +360,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 		            <li><a href="http://www.wecare24x7.in/">we care</a></li>
 		            <li><a href="http://specials.indiatoday.com/common/privacypolicy/privacy.phtml">privacy policy</a></li>
 		            <li><a href="http://specials.indiatoday.com/common/termsandconditions.phtml">terms and conditions</a></li>
-				</ul>     
+				</ul>
       		</div>
 		</div>
      	<div class="footer-right">
@@ -371,11 +371,11 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
        		</ul>
      	</div>
      	<div class="clr"></div>
-        
+
         <div id="copyrights">
         Copyright with Living Media India Limited; all rights reserved.
     </div>
-	</div>  
+	</div>
 </div>
 
 <script src="http://indiatoday.intoday.in/cricket-world-cup-2015/js/worlcup2015.js" type="text/javascript"></script>
@@ -383,4 +383,4 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 .footer-inner { width:1000px; padding-left:0; }
 </style>
 </body>
-</html>             
+</html>

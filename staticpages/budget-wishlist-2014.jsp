@@ -78,7 +78,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 
 <!-- disable iPhone inital scale -->
 <meta name="viewport" content="width=device-width; initial-scale=1.0" />
-<link href="staticpages/css/homepage-new.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/css/homepage-new.css" type="text/css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
 <link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' />
 <!-- html5.js for IE less than 9 -->
@@ -89,9 +89,9 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 <!--[if lt IE 9]>
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
-<link href="staticpages/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
-<link href="staticpages/css/responsive.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/css/responsive.css" type="text/css" rel="stylesheet" />
 <link rel="canonical" href="http://indiatoday.intoday.in/" /> 
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.indiatoday.in" />

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Shashi Kapoor born as Balbir Raj Prithviraj Kapoor, is an award-winning Indian film actor and film producer. Know his life, films and theatre." />
 <meta name="keywords" content="shashi kapoor, shashi kapoor best films, shashi kapoor leading leadies, shashi kapoor songs, shashi kapoor dialogues, shashi kapoor life, shashi kapoor jennifer kendal, shashi kapoor karan kapoor, shashi kapoor kunal kapoor, shashi kapoor sanjana kapoor" />
-<link href="staticpages/css/homepage.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/homepage.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 <link rel="shortcut icon" href="http://indiatoday.intoday.in/images/favicon.ico" />
 <script type="text/javascript" language="javascript" src="staticpages/js/ajaxinclude.js"></script>
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="staticpages/css/ie.css" media="screen" /><![endif]-->
-<link href="staticpages/css/common.css" rel="stylesheet" type="text/css">
+<link href="/staticpages/css/common.css" rel="stylesheet" type="text/css">
 <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="http://indiatoday.intoday.in/js/html5.js"></script><![endif]-->
 <div id="itgd_links">
 <ul>

@@ -53,7 +53,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 	</script><script src="//static.chartbeat.com/js/chartbeat_mab.js"></script><style>
         .safagiri_common_chunk{ margin-bottom:30px!important;height: 615px;}
         
-        </style></head><body><link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/navigation-2016.css" rel="stylesheet"/><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"><script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery-1.11.3.min.js"></script><div id="toppanel" class="clearfix"><div class="container"><div class="page_pusher_h"><script language="JavaScript">
+        </style></head><body><link href="/staticpages/css/navigation-2016.css" rel="stylesheet"/><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"><script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery-1.11.3.min.js"></script><div id="toppanel" class="clearfix"><div class="container"><div class="page_pusher_h"><script language="JavaScript">
 var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="31"; 
 </script><script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script></div><script language="JavaScript">
 	var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="32";

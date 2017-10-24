@@ -6,8 +6,8 @@
 <meta name="description" content="Reviews of John Day starring Naseeruddin Shah, Randeep Hooda, Shernaz Patel, Elena Kazan." />
 <meta name="keywords" content="John Day, Naseeruddin Shah, Randeep Hooda, Shernaz Patel, Elena Kazan, Bollywood, Movie review, John Day review, Videos, Photos" />
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-<link href="staticpages/css/homepage.css" type="text/css" rel="stylesheet">
-<link href="staticpages/css/article.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/homepage.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/article.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 <link rel="shortcut icon" href="http://indiatoday.intoday.in/images/favicon.ico" />
 <script type="text/javascript" language="javascript" src="staticpages/js/ajaxinclude.js"></script>
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="staticpages/css/ie.css" media="screen" /><![endif]-->
-<link href="staticpages/css/common.css" rel="stylesheet" type="text/css">
+<link href="/staticpages/css/common.css" rel="stylesheet" type="text/css">
 <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="http://indiatoday.intoday.in/js/html5.js"></script><![endif]-->
 <div id="itgd_links">
 <ul>

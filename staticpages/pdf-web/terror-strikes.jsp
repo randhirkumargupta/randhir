@@ -284,7 +284,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 		<div class="article firstzone_lefttop">
 			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/5_15_1994-Pan-Islamic_Fundamentalism.pdf">1994: The Jihad Factory</a></div>
 
-	    <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/5_15_1994-Pan-Islamic_Fundamentalism.pdf"><img border="0"  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013september/5_15_1994-pan-islamic-fundamentalism-1-335x447_090313044926.jpg"></a>
+	    <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/5_15_1994-Pan-Islamic_Fundamentalism.pdf"><img border="0"  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013september/3-18-2013-The-Big-Story-Snooping-Secret-World-of-Super-Snoopers.jpg"></a>
 
 		  <div class="clear"></div>
 

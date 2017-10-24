@@ -5,7 +5,7 @@
 
 <!DOCTYPE html><html lang="en">
   <head>
-<base href="http://indiatoday.intoday.in/"/>
+<base href="/"/>
 <title>Akbar Ka Durbar, Ask your question to MJ Akbar - India Today</title>
 <meta name="description" content="MJ Akbar, Akbar Ka Durbar, ask your question to MJ Akbar, MJ Akbar editorial director of India Today " />
 <meta name="keywords" content="India Today offers Akbar Ka Durbar where surfers can ask questions to India Today Editorial Director MJ Akbar." />
@@ -18,7 +18,7 @@
 <!--[if IE]>
   <script src="js/html5.js"></script>
 <![endif]-->
-<link href="staticpages/css/homepage.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/homepage.css" type="text/css" rel="stylesheet">
 
 </head>
 
@@ -33,7 +33,7 @@
 <link rel="shortcut icon" href="http://indiatoday.intoday.in/images/favicon.ico" />
 <script type="text/javascript" language="javascript" src="staticpages/js/ajaxinclude.js"></script>
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="staticpages/css/ie.css" media="screen" /><![endif]-->
-<link href="staticpages/css/common.css" rel="stylesheet" type="text/css">
+<link href="/staticpages/css/common.css" rel="stylesheet" type="text/css">
 <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="http://indiatoday.intoday.in/js/html5.js"></script><![endif]-->
 <div id="itgd_links">
 <ul>

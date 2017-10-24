@@ -266,7 +266,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/Assam+biharFloods.pdf">1987: Raining Havoc</a></div>
 			
 			  
-      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/Assam+biharFloods.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013june/assam+biharfloods-1-335x447_062713034605.jpg" /></a>
+      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/Assam+biharFloods.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2013june/rooneyfb-story_88_061716044815.jpg" /></a>
       <div class="clear"></div>
 	
 	  </div>

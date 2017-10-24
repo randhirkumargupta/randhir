@@ -18,7 +18,7 @@
 <link rel="shortcut icon" href="http://indiatoday.intoday.in/images/favicon.ico" />
 <script type="text/javascript" language="javascript" src="staticpages/js/ajaxinclude.js"></script>
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="staticpages/css/ie.css" media="screen" /><![endif]-->
-<link href="staticpages/css/common.css" rel="stylesheet" type="text/css">
+<link href="/staticpages/css/common.css" rel="stylesheet" type="text/css">
 <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="http://indiatoday.intoday.in/js/html5.js"></script><![endif]-->
 <div id="itgd_links">
 <ul>
@@ -196,7 +196,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 </header>
 <section style="position: relative;">
-<link href="staticpages/css/article.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/article.css" type="text/css" rel="stylesheet">
 <style>
 
 #itgd_links {float:left;}

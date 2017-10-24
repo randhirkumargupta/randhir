@@ -169,7 +169,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 		</div>
 		<div class="nav-top">
         	<ul>
-        		<li><a href="http://indiatoday.intoday.in/subcategory/updates/1/288.html">Updates</a></li>
+        		<li><a href="/cricket-world-cup-2015/288.html">Updates</a></li>
         		<li><a href="javascript:void(0)" id="team">Teams</a><div class="team-container">
                     <ol class="col-1">
                       <li class="item-1"><a href="http://indiatoday.intoday.in/story/icc-world-cup-2015-cricket-team-profiles-england/1/414608.html" title="England">England</a></li>

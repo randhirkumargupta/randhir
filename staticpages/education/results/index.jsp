@@ -39,7 +39,7 @@ Description ? India Today Education - Find updates on jobs in India, results of 
 </head>
 <body>
 <style>
-#headerblock h1{background:url("http://media2.intoday.in/indiatoday/education/images/logo.png") no-repeat scroll center center rgba(0, 0, 0, 0) !important}
+#headerblock h1{background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/logo.png") no-repeat scroll center center rgba(0, 0, 0, 0) !important}
 </style>
 
 <script src="http://indiatoday.intoday.in/js/sitejs.js"></script>
@@ -116,10 +116,10 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
             
 			
             
-           <img src="http://media2.intoday.in/indiatoday/education/images/logo.png" usemap="#Map" style="margin-top:15px;">
+           <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/logo.png" usemap="#Map" style="margin-top:15px;">
             <map name="Map">
               <area shape="rect" coords="35,2,187,31" href="http://indiatoday.intoday.in/">
-              <area shape="rect" coords="1,34,219,78" href="http://indiatoday.intoday.in/education/">
+              <area shape="rect" coords="1,34,219,78" href="/education">
             </map>
             
 		
@@ -165,15 +165,15 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
 		<div class="lft homeimg" style="height:31px;"><a href="http://indiatoday.intoday.in/education/" title="Home"><img src="http://indiatoday.intoday.in/education/images/home-icon.png" width="40" height="38" border="0"></a></div>
         <div id="topNav">
         	<ul>
-                <li style="padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/category/news/1/526.html" title="News">News</a></li>
-                <li style="padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/category/results-notification/1/527.html" title="Results Notification">Notification</a></li>				
-				<li style="position: relative;padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/quiz/" title="Quiz">Quiz</a></li>                
-                <li style="position: relative;padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/videos" title="Education Videos" style="color:#F00 !important;"><strong>Videos</strong></a>
+                <li style="padding-left:6px;padding-right:6px;"><a href="/education/526.html" title="News">News</a></li>
+                <li style="padding-left:6px;padding-right:6px;"><a href="/education/527.html" title="Results Notification">Notification</a></li>				
+				<li style="position: relative;padding-left:6px;padding-right:6px;"><a href="/education/quiz/" title="Quiz">Quiz</a></li>                
+                <li style="position: relative;padding-left:6px;padding-right:6px;"><a href="/education/videos" title="Education Videos" style="color:#F00 !important;"><strong>Videos</strong></a>
                 	
               	</li>
                 <li style="position: relative;padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/careermatch/" title="Career Match">Career Match</a></li>              	
-				<li style="padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/category/government-jobs/1/734.html" title="Government Jobs">Government Jobs</a></li>                      
-              	<li class="last" style="padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/categorylist/current-affairs/1/908.html" title="Current Affairs">Current Affairs</a></li>
+				<li style="padding-left:6px;padding-right:6px;"><a href="/education/734.html" title="Government Jobs">Government Jobs</a></li>                      
+              	<li class="last" style="padding-left:6px;padding-right:6px;"><a href="/education/908.html" title="Current Affairs">Current Affairs</a></li>
 				<li><a href="http://www.learntoday.in" title="Online Courses" target="_blank">Online Courses</a></li>   
           	</ul>
             <div class="search">
@@ -185,12 +185,12 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
             <div class="clear"></div>
         </div>  
         <div class="clear"></div>
-        <!--  <iframe width="1003" height="55" frameborder="0" style="margin:10px auto 0 auto; width:1003px; display:block;" scrolling="no" src="http://media2.intoday.in/microsites/sponsor/worldcup-spons.html"></iframe> -->
+        <!--  <iframe width="1003" height="55" frameborder="0" style="margin:10px auto 0 auto; width:1003px; display:block;" scrolling="no" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/sponsor/worldcup-spons.html"></iframe> -->
    <!--  <div class="sponserd_outer_all_1">
-     <iframe width="1003" height="90" frameborder="0" style="margin:10px auto 0 auto; width:1003px; display:block;" scrolling="no" src="http://media2.intoday.in/microsites/sponsor/ipl2016/Sponsor_IT.html"></iframe> 
+     <iframe width="1003" height="90" frameborder="0" style="margin:10px auto 0 auto; width:1003px; display:block;" scrolling="no" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/sponsor/ipl2016/Sponsor_IT.html"></iframe> 
        </div>-->
      <!--<div class="sponserd_outer_all_1">
-     <iframe width="1003" height="90" frameborder="0" style="margin:10px auto 0 auto; width:1003px; display:block;" scrolling="no" src="http://media2.intoday.in/aajtak/best-college-sponsor/sponsor.html"></iframe> 
+     <iframe width="1003" height="90" frameborder="0" style="margin:10px auto 0 auto; width:1003px; display:block;" scrolling="no" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/best-college-sponsor/sponsor.html"></iframe> 
        </div>-->
          <script>
  	function validatesearch(modsearch)
@@ -269,7 +269,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
 <div style="margin-bottom:10px;" align="center">
 </div>
         <div id="footer">
-                <iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+                <iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/common_it_footer.html"></iframe>
 <div class="clear"></div>
                 
 				<div class="clear"></div>

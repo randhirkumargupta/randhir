@@ -6,7 +6,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
 <meta charset="utf-8">
-<base href="http://indiatoday.intoday.in/"/>
+<base href="/"/>
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 <title>Your Take On Union Budget 2014</title>
 <meta name="description" content="Union Budget 2014 - Business Today brings to you the latest news on the union finance budget for fiscal year 2014-15." />
@@ -21,13 +21,13 @@
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css'>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
-<link href="staticpages/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
-<link href="staticpages/css/homepage-new.css" type="text/css" rel="stylesheet">
-<link href="staticpages/css/responsive.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/css/homepage-new.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/responsive.css" type="text/css" rel="stylesheet" />
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <link href="staticpages/css/ie8.css" type="text/css" rel="stylesheet">
+    <link href="/staticpages/css/ie8.css" type="text/css" rel="stylesheet">
 <![endif]-->
 <!-- css3-mediaqueries.js for IE less than 9 -->
 <!--[if lt IE 9]>

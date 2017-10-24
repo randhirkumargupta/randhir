@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Reviews of Besharam starring Ranbir Kapoor, Pallavi Sharda, Rishi Kapoor and Neetu Kapoor." />
 <meta name="keywords" content="Besharam, Ranbir Kapoor, Pallavi Sharda, Rishi Kapoor and Neetu Kapoor, Bollywood, Movie review, Besharam review, Videos, Photos" />
-<link href="staticpages/css/homepage.css" type="text/css" rel="stylesheet">
-<link href="staticpages/css/article.css" type="text/css" rel="stylesheet">
-<link href="staticpages/css/common.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/homepage.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/article.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/common.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" language="javascript" src="staticpages/js/ajaxinclude.js"></script>
 <link href="/staticpages/css/homepage-new.css" rel="stylesheet" type="text/css">
 <style>
