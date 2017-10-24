@@ -121,6 +121,7 @@ if ($theme != 'itgadmin') {
                                     <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id" placeholder="Enter Title" />
                                   </div>
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-1"><i class="fa fa-times"></i></a></span>
                                 </div>  
                               <?php } ?>    
                     <div class="data-holder" id="itg-block-1">
@@ -169,6 +170,7 @@ if ($theme != 'itgadmin') {
                                     <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />
                                   </div>
                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                               <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-3"><i class="fa fa-times"></i></a></span>
                                 </div>  
                               <?php } ?>                   
                             <div class="data-holder"  id="itg-block-3">
@@ -216,6 +218,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-4']['block_title']; ?>" name="itg-block-4" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-4"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -257,6 +260,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-5"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -295,6 +299,7 @@ if ($theme != 'itgadmin') {
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                        
                                         </div>
                                     <?php } ?>  
 
@@ -346,6 +351,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-16']['block_title']; ?>" name="itg-block-16" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-16"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -382,6 +388,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-17']['block_title']; ?>" name="itg-block-17" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-17"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -415,6 +422,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-18']['block_title']; ?>" name="itg-block-18" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-18"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -456,6 +464,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-7']['block_title']; ?>" name="itg-block-7" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-7"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -492,6 +501,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-8']['block_title']; ?>" name="itg-block-8" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                   <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-8"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -551,6 +561,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-10']['block_title']; ?>" name="itg-block-10" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-10"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -587,6 +598,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-11']['block_title']; ?>" name="itg-block-11" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-11"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -623,6 +635,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-12']['block_title']; ?>" name="itg-block-12" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                   <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-12"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -662,6 +675,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-13']['block_title']; ?>" name="itg-block-13" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-13"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -698,6 +712,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-14']['block_title']; ?>" name="itg-block-14" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-14"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   
@@ -734,6 +749,7 @@ if ($theme != 'itgadmin') {
                         <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-15']['block_title']; ?>" name="itg-block-15" class="block_title_id" placeholder="Enter Title" />
                       </div>
                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                   <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-15"><i class="fa fa-times"></i></a></span>
                     </div>
                    <?php } ?>  
                   

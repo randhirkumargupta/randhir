@@ -163,6 +163,7 @@ else {
                           <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-2']['block_title']; ?>" name="itg-block-2" class="block_title_id" placeholder="Enter Title" />
                         </div>
                         <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                     <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-2"><i class="fa fa-times"></i></a></span>
                       </div>
 <?php } ?>  
 
@@ -218,7 +219,8 @@ else {
                           <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />
                         </div>
                         <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                      </div>
+                     
+                      <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-3"><i class="fa fa-times"></i></a></span></div>
                     <?php } ?>  
 
                     <div class="data-holder" id="itg-block-3">
@@ -269,6 +271,7 @@ else {
                           <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-4']['block_title']; ?>" name="itg-block-4" class="block_title_id" placeholder="Enter Title" />
                         </div>
                         <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                      <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-4"><i class="fa fa-times"></i></a></span>
                       </div>
                     <?php } ?>  
 
