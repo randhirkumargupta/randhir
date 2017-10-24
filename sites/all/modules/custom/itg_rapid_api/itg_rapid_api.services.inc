@@ -5733,11 +5733,12 @@ function list_author_anchor_data_responce($uid) {
             $a_title = $node_data->title;
             $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
             $a_profile_image = completeFilePath($a_profile_image_fid);
+            $a_follower_count = get_follower_count($a_id);
             
             $anchor_list[$anchor_c]['a_id'] = "$a_id";
             $anchor_list[$anchor_c]['a_title'] = "$a_title";
             $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
-            $anchor_list[$anchor_c]['a_follower_count'] = "";
+            $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
             $anchor_c++;
           }
       }
@@ -5756,6 +5757,26 @@ function list_author_anchor_data_responce($uid) {
     }
     return $output_array;
   
+}
+/**
+ * Helper function to get follower_count. 
+ * @param int $a_id 
+ * @return int $count
+ */
+
+function get_follower_count($a_id){
+    $count = 0;
+    if (function_exists('mongodb')) {
+        $con = mongodb();
+        $people = $con->front_user_activity;
+        $cond = array('nid' => $a_id);
+        $cursor = $people->find($cond);
+        $loopc = 0;
+        foreach ($cursor as $document) {          
+          $count++;
+        }
+    }
+    return $count;
 }
 
 
