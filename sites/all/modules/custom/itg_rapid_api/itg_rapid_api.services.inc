@@ -5718,7 +5718,7 @@ function list_author_anchor_data_responce($uid) {
       $loopc++;
     }
     //return $data;
-    p($data);die();
+    
   }
   
   if(!empty($response)){
