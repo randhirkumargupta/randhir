@@ -3440,7 +3440,8 @@ function itg_rapid_api_homePage($token) {
 }
 
 function itg_rapid_api_testing($token) {
-itg_mobile_feed_xml_feed_url_cron(); die();
+    
+p(node_load(145));die();
     $data = '';
     global $base_url;
 
@@ -5721,16 +5722,32 @@ function list_author_anchor_data_responce($uid) {
     
   }
   $anchor_list = array();
+  $anchor_data = array();
+  $anchor_c = 0;
   
   foreach ($data as $key => $value) {
-      p($value);die();
+      if($value['nid']){
+          $node_data = node_load($value['nid']);
+          if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
+            $a_id = $node_data->nid;
+            $a_title = $node_data->title;
+            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
+            $a_profile_image = completeFilePath($a_profile_image_fid);
+            
+            $anchor_list[$anchor_c]['a_id'] = "$a_id";
+            $anchor_list[$anchor_c]['a_title'] = "$a_title";
+            $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
+            $anchor_list[$anchor_c]['a_follower_count'] = "";
+            $anchor_c++;
+          }
+      }
   }
-  
+  $anchor_data['anchor'] = $anchor_list;
 
-    if (!empty($response)) {
+    if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
-        $output_array['data'] = $data;
+        $output_array['data'] = $anchor_data;
     } else {
         $data = array();
         $output_array['status_code'] = "0";
@@ -5740,5 +5757,7 @@ function list_author_anchor_data_responce($uid) {
     return $output_array;
   
 }
+
+
 
 
