@@ -5636,7 +5636,7 @@ function itg_rapid_api_anchor_follow_list($token) {
         $message_array['data'] = array();
     }
     
-   echo "kumar";die();
+   //echo "kumar";die();
 
     // check args
     if ($args != '0') {
@@ -5688,7 +5688,7 @@ function itg_rapid_api_author_follow_list($token) {
         $message_array['data'] = array();
     }
     
-   echo "andy"; die();
+   //echo "andy"; die();
 
     // check args
     if ($args != '0') {
