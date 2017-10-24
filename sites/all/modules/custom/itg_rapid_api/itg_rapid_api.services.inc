@@ -5720,18 +5720,19 @@ function list_author_anchor_data_responce($uid) {
     //return $data;
     
   }
+  $anchor_list = array();
   
-  if(!empty($response)){
-      $data['id'] = $author_id;
-      $data['is_saved'] = $response['success'];
-      $data['limit_crossed'] = '1';
-    }    
+  foreach ($data as $key => $value) {
+      p($value);die();
+  }
+  
 
     if (!empty($response)) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
         $output_array['data'] = $data;
     } else {
+        $data = array();
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
         $output_array['data'] = $data;
