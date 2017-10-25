@@ -6206,19 +6206,9 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
   foreach ($data as $key => $value) {
       if($value['nid']){
           $node_data = node_load($value['nid']); // 837259
-          p($node_data);die();
+          //p($node_data);die();
           if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
-            $a_id = $node_data->nid;
-            $a_title = $node_data->title;
-            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];      
-            
-            
-            $a_profile_image = completeFilePath($a_profile_image_fid);
-            $a_follower_count = get_follower_count($a_id);
-            $a_is_following = $value['status'];
-            $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value']; 
-            $a_location = "";
-            $a_desc = $node_data->body['und'][0]['value'];
+            $a_id = $node_data->nid;            
             
             $anchor_list[$anchor_c]['a_id'] = "$a_id";
             
@@ -6226,11 +6216,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
           }
       }
   }
-  $anchor_data['id'] = "$uid";
-  $anchor_data['display_label'] = "Anchors";
-  $anchor_data['anchor_count'] = "$anchor_c";
-  $anchor_data['anchor_display_count'] = "25";
-  $anchor_data['anchor_pagination_cap'] = "25";
+
   
   $anchor_data['anchor'] = $anchor_list;
 
