@@ -405,7 +405,7 @@ jQuery(document).ready(function () {
             //Do something
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
             keyword = jQuery(this).val();
-            myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             myStr = myStr.replace(/\s+/g, "-");
             var urldata = Drupal.settings.basePath + 'topic/' + myStr;
             window.location.href = urldata;
@@ -421,7 +421,7 @@ jQuery(document).ready(function () {
         search_value = jQuery(this).parent().find('.search-text').val();
         if (search_value.length != 0) {
             nkeyword = search_value;
-            nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             nmyStr = nmyStr.replace(/\s+/g, "-");
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
             var urldata = Drupal.settings.basePath + 'topic/' + search_value;
@@ -818,10 +818,6 @@ jQuery(document).ready(function () {
             jQuery(this).css('opacity', '1');
         });
 
-        //event page navigation
-        jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
-            jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
-        });
         jQuery('.event-search-icon').click(function () {
             jQuery('.event-search input').css('width', '180px');
         });
@@ -837,6 +833,11 @@ jQuery(document).ready(function () {
             e.preventDefault();
         });
     }
+
+    //event page navigation
+    jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
+        jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
+    });
 
     //story page social share for mobile
     var getclick;
@@ -1057,6 +1058,9 @@ jQuery(document).ready(function () {
 });
 
 jQuery(document).ready(function (e) {
+    // iframe wrap with div
+    jQuery('.big-news .live-tv-big-story').find('iframe').removeAttr('height').removeAttr('width');
+
     // code for video slider play video.
 
     jQuery('.thumb-video').click(function () {

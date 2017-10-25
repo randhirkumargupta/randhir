@@ -13,8 +13,8 @@ jQuery(document).ready(function () {
       infinite: true,
       autoplay: true,
       dots: true,
-      prevArrow: false,
-      nextArrow: false
+      prevArrow: true,
+      nextArrow: true
     });
   }
 });
