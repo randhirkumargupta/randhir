@@ -6128,19 +6128,21 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
   $anchor_list = array();
   $anchor_data = array();
   $anchor_c = 0;
-  //$data = array_unique($data);
+  //$data = array_unique($data); field_reporter_twitter_handle]
   foreach ($data as $key => $value) {
       if($value['nid']){
-          $node_data = node_load($value['nid']);
+          $node_data = node_load(837259);
           p($node_data);die();
           if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
             $a_id = $node_data->nid;
             $a_title = $node_data->title;
-            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
+            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];      
+            
+            
             $a_profile_image = completeFilePath($a_profile_image_fid);
             $a_follower_count = get_follower_count($a_id);
             $a_is_following = $value['status'];
-            $a_twitter_handler = "";
+            $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value']; 
             $a_location = "";
             $a_desc = "";
             
