@@ -251,15 +251,9 @@
 
 
 // setting for UAT
-/*$databases['default']['default'] = array(
-  'driver' => 'autoslave',
-  'master' => 'master', // optional, defaults to 'master'
-  'slave' => 'autoslave', // optional, defaults to 'autoslave'  
-// Always use "master" for tables "semaphore" and "sessions"
-  'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
-);*/
+//#####################################################################################
 
-$databases['default']['master'][] = array (
+/*$databases['default']['master'][] = array (
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_write',
   'password' => '!tgd@!t@wr!te@101',
@@ -300,9 +294,19 @@ $databases['default']['default'] = array (
   'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
   'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
   'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'") // For MySQL InnoDB, make sure isolation level doesn't interfere with our intentions. Defaults to empty.
+);*/
+
+//#####################################################################################
+$databases['default']['default'] = array(
+  'driver' => 'autoslave',
+  'master' => 'master', // optional, defaults to 'master'
+  'slave' => 'autoslave', // optional, defaults to 'autoslave'  
+// Always use "master" for tables "semaphore" and "sessions"
+  'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
 );
 
-/*$databases['default']['master'] = array(
+
+$databases['default']['master'] = array(
   //'database' => 'indiatoday_migrate',
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_write',
@@ -322,7 +326,7 @@ $databases['default']['autoslave'] = array(
   'port' => '3306',
   'driver' => 'mysql',
   'prefix' => '',
-);*/
+);
 
 $databases['sso_db']['default'] = array(
   'database' => 'IndiaToday_sso',
@@ -334,6 +338,7 @@ $databases['sso_db']['default'] = array(
       'prefix' => '',
 );
 // end setting for UAT
+
 /*
 //for production setting
 $databases['default']['default'] = array(
