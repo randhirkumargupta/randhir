@@ -293,6 +293,9 @@ function get_layout_details($section_name, $template_name, $status) {
         $filter_url = $itg_val->filter_url;
         // for widget display name
         if (!empty($itg_val->widget_name)) {
+            if(($template_name == 'page--special_news') && ($itg_val->widget_info == 'custom|undefined')){
+              $itg_val->widget_info = 'custom|news-section';
+            }
             $widget_info_array = explode('|', $itg_val->widget_info);
 
             if (!empty($widget_info_array[1]) && $widget_info_array[1] != "undefined") {
