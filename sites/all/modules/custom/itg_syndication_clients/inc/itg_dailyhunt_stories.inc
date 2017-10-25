@@ -89,7 +89,7 @@ function itg_dailyhunt_feed_breakingnews_syndication(){
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');
     $query->orderBy('n.created', 'DESC');
-    $query->groupBy('n.nid')->range(0, 3);
+    $query->groupBy('n.nid')->range(0, 1);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
     $destination = "public://indiatoday/";
