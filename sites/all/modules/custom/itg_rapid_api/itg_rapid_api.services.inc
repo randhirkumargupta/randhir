@@ -2664,6 +2664,64 @@ function itg_rapid_api_resource() {
             ),
         ),
         
+        // follow_topic custom resource declaration.....
+        'follow_topic' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'follow_topic list based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_follow_topic',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        
+                      
+                    ),
+                ),
+            ),
+        ),
+        
+         // user_follow_topic_list custom resource declaration.....
+        'user_follow_topic_list' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow anchor list based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_user_follow_topic_list',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        
+                      
+                    ),
+                ),
+            ),
+        ),
+        
         
     );
 
@@ -6192,7 +6250,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
     $cursor = $people->find($cond);
     $loopc = 0;
     foreach ($cursor as $document) {
-        p($document);die();
+     
       $data[$loopc]['nid'] = $document['nid'];
       $data[$loopc]['status'] = $document['status'];
       $loopc++;
@@ -6251,6 +6309,203 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
     }
     return $output_array;
   
+}
+
+/*
+ * Follow topics list
+ *
+ */
+function itg_rapid_api_follow_topic($token) {
+    
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $author_id = $anchor_id = $params['topic_id'];
+    $isfollow = $params['isfollow'];
+    if($isfollow == 1){
+        $type = "follow_story";
+    }
+    else{
+        $type = "Unfollow";
+    }
+    
+    $message_array = array();
+    //p($params);die();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id) && $anchor_id != '' && $type != '') {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    if(!valid_anchor_author($anchor_id,'anchor')){
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Anchor Id is not valid.";
+        $message_array['data'] = array();
+    }
+    if($type == 'follow_story' || $type == 'Unfollow'){
+    }else{
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "Type is not valid it shoud be either follow_story or Unfollow";
+        $message_array['data'] = array();
+    }
+
+    // check args
+    if ($args != '0') {
+        $jsondata = follow_topic_data_responce($user_id, $author_id,$type);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
+/*
+ * Followed anchor list by uid
+ *
+ */
+function itg_rapid_api_user_follow_topic_list($token) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $cpageno = $params['cpageno'];
+    $showall = $params['showall'];
+    
+    $message_array = array();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id)) {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    
+   //echo "andy"; die();
+
+    // check args
+    if ($args != '0') {
+        $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
+
+ /*
+ * Get the list of stories of a particular author
+ */
+function follow_topic_data_responce($user_id, $author_id, $type) {
+    // variable decalartion
+
+    $data = array();
+    $output_array = array();
+    $data_array = array();
+    $updated_datetime = "";
+    $ntype = 'tag';
+    $activity = $type;
+    if($activity == 'follow_story'){
+      $dstatus = '1';
+    }elseif ($activity == 'Unfollow') {
+      $dstatus = '0';
+    }
+    
+    $activity_date = date('d-m-Y');
+    $activity_date_time = date('d-m-Y h:i:s');
+  
+    
+    if (function_exists('mongodb')) {
+      $con = mongodb();
+      if ($con) {
+        $people = $con->front_user_activity;
+          $get_previous_info = itg_get_front_activity_info($author_id, $ntype, $user_id, $activity, '');
+          if (empty($get_previous_info['nid'])) {
+          if($dtag == 'tag') {
+            $term = taxonomy_term_load($author_id);
+            $actual_title = $term->name;
+            $primary_cat_id = '';
+            $primary_cat_name = '';
+            $extra_image = null;
+            $path = '';
+          } else {
+            $actual_data = node_load($author_id);
+            $actual_title = $actual_data->title;
+            $primary_cat_id = $actual_data->field_primary_category[LANGUAGE_NONE][0]['value'];
+            $primary_cat_name = taxonomy_term_load($actual_data->field_primary_category[LANGUAGE_NONE][0]['value']);
+            $extra_image = $actual_data->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+            $path = $actual_data->path['source'];
+          }
+
+          $qry = array("nid" => $author_id, "uid" => $user_id, "title" => $actual_title, "path" => $path, "image" => $extra_image, "primary_category_id" => $primary_cat_id, "primary_category_name" => $primary_cat_name->name, "ntype" => $ntype, "activity" => $activity, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time, "status" => $dstatus, "timestamp" =>time());
+          $result = $people->insert($qry);
+          $response = array('success' => $dstatus, 'activity' => $user_activity, 'type' => $ntype);
+        }else {
+            $newdata = array('$set' => array("status" => $dstatus, "activity_date" => $activity_date, "activity_date_time" => $activity_date_time , "timestamp" =>time()));
+            $people->update(array("nid" => $author_id, "activity" => $activity, "uid" => $user_id), $newdata);
+            $response = array("success" => $dstatus, 'activity' => $activity, 'type' => $ntype);
+        }
+      }
+    }
+
+    if(!empty($response)){
+      $data['id'] = $author_id;
+      $data['is_saved'] = $response['success'];
+      $data['limit_crossed'] = '1';
+    }    
+
+    if (!empty($response)) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+        $output_array['data'] = $data;
+    } else {
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+        $output_array['data'] = $data;
+    }
+    return $output_array;
 }
 
 
