@@ -31,7 +31,7 @@ function itg_genrate_rss_it_latest_issue_syndication($issue_result = NULL) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story', '=');
     $query->groupBy('n.nid');
-    $query->orderBy('n.created', 'DESC')->range(0, 30);
+    $query->orderBy('n.created', 'DESC');
     $query->fields('dbody', array('body_value'));
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('n', array('nid', 'title', 'created'));
