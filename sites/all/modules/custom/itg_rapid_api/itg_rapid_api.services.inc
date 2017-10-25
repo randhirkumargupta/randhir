@@ -6358,12 +6358,12 @@ function itg_rapid_api_follow_topic($token) {
         $message_array['status_message'] = "invalid token";
         $message_array['data'] = array();
     }
-    if(!valid_anchor_author($anchor_id,'anchor')){
-        $args = '0';
-        $message_array['status_code'] = "0";
-        $message_array['status_message'] = "Anchor Id is not valid.";
-        $message_array['data'] = array();
-    }
+//    if(!valid_anchor_author($anchor_id,'anchor')){
+//        $args = '0';
+//        $message_array['status_code'] = "0";
+//        $message_array['status_message'] = "Anchor Id is not valid.";
+//        $message_array['data'] = array();
+//    }
     if($type == 'follow_story' || $type == 'Unfollow'){
     }else{
         $args = '0';
