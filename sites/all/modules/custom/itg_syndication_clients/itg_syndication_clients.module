@@ -137,6 +137,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_article_news_republic.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-education/article-news-republic'] = array(
+    'page callback' => 'itg_rss_education_article_news_republic',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_article_news_republic.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
