@@ -98,7 +98,6 @@ function generate_custom_pattern_feed($data) {
 }
 
 function _get_feed_file_url_for_syndication($feed_type, $default_pattern, $client, $today, $section_name, $category_name, $content_type, $frequency, $feed_dir, $feed) {
-  }
     if ($feed_type == 'rss' || $feed_type == 'mrss' || $feed_type == 'xml') {
         $final_feed = get_full_feed_after_replace_items_tags_wtih_dollers($default_pattern, $feed);
         $var_array = get_vars_from_feed_pattern($final_feed, $feed_type);
