@@ -6200,6 +6200,8 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
     
   }
   $anchor_list = array();
+  $author_list = array();
+  $topics_list = array();
   $anchor_data = array();
   $anchor_c = 0;
   //$data = array_unique($data); field_reporter_twitter_handle]
@@ -6207,10 +6209,24 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
       if($value['nid']){
           $node_data = node_load($value['nid']); // 837259
           //p($node_data);die();
-          if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
+          if($node_data->type=="anchor" ){
             $a_id = $node_data->nid;            
             
             $anchor_list[$anchor_c]['a_id'] = "$a_id";
+            
+            $anchor_c++;
+          }
+          elseif($node_data->type=="author"){
+            $a_id = $node_data->nid;            
+            
+            $author_list[$anchor_c]['a_id'] = "$a_id";
+            
+            $anchor_c++;
+          }
+          else{
+            $a_id = $node_data->nid;            
+            
+            $topics_list[$anchor_c]['t_id'] = "$a_id";
             
             $anchor_c++;
           }
@@ -6219,6 +6235,8 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
 
   
   $anchor_data['anchor'] = $anchor_list;
+  $anchor_data['author'] = $author_list;
+  $anchor_data['topic'] = $topics_list;
 
     if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
