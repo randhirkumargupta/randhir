@@ -604,12 +604,12 @@ tweetmeme_url = '/sex-survey-2012/index.jsp';
                 </tr>
                 <tr>
                     <td width="86" align="left" valign="top">
-                        <a href="/story/making-love-out-of-nothing-at-all/1/235187.html">
+                        <a href="http://indiatoday.intoday.in/story/making-love-out-of-nothing-at-all/1/235187.html">
                             <img src="images/ayushmann-khurrana.jpg" width="79" height="79" border="0" align="left" /></a>
                     </td>
                     <td valign="TOP" class="normalltxt" style="line-height: 18px;">
-                      <div style="font:bold 12px arial;color:#975731;"><a href="/story/making-love-out-of-nothing-at-all/1/235187.html">Ayushmann Khurrana</a></div>
-                        <div><a href="/story/making-love-out-of-nothing-at-all/1/235187.html" target="_blank" style="line-height: 18px;">Making love out of nothing at all</a></div>
+                      <div style="font:bold 12px arial;color:#975731;"><a href="http://indiatoday.intoday.in/story/making-love-out-of-nothing-at-all/1/235187.html">Ayushmann Khurrana</a></div>
+                        <div><a href="http://indiatoday.intoday.in/story/making-love-out-of-nothing-at-all/1/235187.html" target="_blank" style="line-height: 18px;">Making love out of nothing at all</a></div>
 
                     </td>
                 </tr>
@@ -619,12 +619,12 @@ tweetmeme_url = '/sex-survey-2012/index.jsp';
                  </tr>
                  <tr>
                     <td width="86" align="left" valign="top">
-                        <a href="/story/desperately-seeking-satisfaction/1/235192.html">
+                        <a href="http://indiatoday.intoday.in/story/desperately-seeking-satisfaction/1/235192.html">
                             <img src="images/ira-raja.jpg" width="79" height="79" border="0" align="left" /></a>
                     </td>
                     <td valign="TOP" class="normalltxt" style="line-height: 18px;">
-                      <div style="font:bold 12px arial;color:#975731;"><a href="/story/desperately-seeking-satisfaction/1/235192.html">Ira Raja</a></div>
-                        <div><a href="/story/desperately-seeking-satisfaction/1/235192.html">Desperately seeking satisfaction</a></div>
+                      <div style="font:bold 12px arial;color:#975731;"><a href="http://indiatoday.intoday.in/story/desperately-seeking-satisfaction/1/235192.html">Ira Raja</a></div>
+                        <div><a href="http://indiatoday.intoday.in/story/desperately-seeking-satisfaction/1/235192.html">Desperately seeking satisfaction</a></div>
 
                     </td>
                 </tr>
@@ -634,12 +634,12 @@ tweetmeme_url = '/sex-survey-2012/index.jsp';
                  </tr>
                  <tr>
                     <td width="86" align="left" valign="top">
-                        <a href="/story/an-embarrassment-of-choices/1/235235.html%20">
+                        <a href="http://indiatoday.intoday.in/story/an-embarrassment-of-choices/1/235235.html%20">
                             <img src="images/tulika-mehrotra.jpg" width="79" height="79" border="0" align="left" /></a>
                     </td>
                     <td valign="TOP" class="normalltxt" style="line-height: 18px;">
-                      <div style="font:bold 12px arial;color:#975731;"><a href="/story/an-embarrassment-of-choices/1/235235.html%20">Tulika Mehrotra</a></div>
-                        <div><a href="/story/an-embarrassment-of-choices/1/235235.html%20">An embarrassment of choices</a></div>
+                      <div style="font:bold 12px arial;color:#975731;"><a href="http://indiatoday.intoday.in/story/an-embarrassment-of-choices/1/235235.html%20">Tulika Mehrotra</a></div>
+                        <div><a href="http://indiatoday.intoday.in/story/an-embarrassment-of-choices/1/235235.html%20">An embarrassment of choices</a></div>
 
                     </td>
                 </tr>
@@ -649,12 +649,12 @@ tweetmeme_url = '/sex-survey-2012/index.jsp';
                  </tr>
                  <tr>
                     <td width="86" align="left" valign="top">
-                        <a href="/story/the-pleasure-of-pursuit/1/235188.html">
+                        <a href="http://indiatoday.intoday.in/story/the-pleasure-of-pursuit/1/235188.html">
                             <img src="images/tishani-doshi.jpg" width="79" height="79" border="0" align="left" /></a>
                     </td>
                     <td valign="TOP" class="normalltxt" style="line-height: 18px;">
-                      <div style="font:bold 12px arial;color:#975731;"><a href="/story/the-pleasure-of-pursuit/1/235188.html">Tishani Doshi</a></div>
-                        <div><a href="/story/the-pleasure-of-pursuit/1/235188.html">The pleasure of pursuit</a></div>
+                      <div style="font:bold 12px arial;color:#975731;"><a href="http://indiatoday.intoday.in/story/the-pleasure-of-pursuit/1/235188.html">Tishani Doshi</a></div>
+                        <div><a href="http://indiatoday.intoday.in/story/the-pleasure-of-pursuit/1/235188.html">The pleasure of pursuit</a></div>
 
                     </td>
                 </tr>
@@ -664,12 +664,12 @@ tweetmeme_url = '/sex-survey-2012/index.jsp';
                  </tr>
                  <tr>
                     <td width="86" align="left" valign="top">
-                        <a href="/story/how-debra-winger-ended-my-world-of-innocence/1/235229.html">
+                        <a href="http://indiatoday.intoday.in/story/how-debra-winger-ended-my-world-of-innocence/1/235229.html">
                             <img src="images/siddharth-chowdhury.jpg" width="79" height="79" border="0" align="left" /></a>
                     </td>
                     <td valign="TOP" class="normalltxt" style="line-height: 18px;">
-                      <div style="font:bold 12px arial;color:#975731;"><a href="/story/how-debra-winger-ended-my-world-of-innocence/1/235229.html">Siddharth Chowdhury</a></div>
-                        <div><a href="/story/how-debra-winger-ended-my-world-of-innocence/1/235229.html">How Debra Winger ended my world of innocence</a></div>
+                      <div style="font:bold 12px arial;color:#975731;"><a href="http://indiatoday.intoday.in/story/how-debra-winger-ended-my-world-of-innocence/1/235229.html">Siddharth Chowdhury</a></div>
+                        <div><a href="http://indiatoday.intoday.in/story/how-debra-winger-ended-my-world-of-innocence/1/235229.html">How Debra Winger ended my world of innocence</a></div>
 
                     </td>
                 </tr>
@@ -685,8 +685,8 @@ tweetmeme_url = '/sex-survey-2012/index.jsp';
   <tr>
     <td bgcolor="#F7E3D1">
     	    <div class="bt-textbold-a">Best pictures from India Today Sex Surveys</div>
-            <div align="center"><a href="/gallery/sex-secrets-truths/1/8279.html"><img src="images/Best-pictures-image.jpg" border="0"></a></div>
-            <div class="clicknow"><a href="/gallery/sex-secrets-truths/1/8279.html">Click Now &raquo;</a></div>
+            <div align="center"><a href="http://indiatoday.intoday.in/gallery/sex-secrets-truths/1/8279.html"><img src="images/Best-pictures-image.jpg" border="0"></a></div>
+            <div class="clicknow"><a href="http://indiatoday.intoday.in/gallery/sex-secrets-truths/1/8279.html">Click Now &raquo;</a></div>
       </td>
   </tr>
 </table></td></tr>
@@ -832,8 +832,8 @@ tweetmeme_url = '/sex-survey-2012/index.jsp';
   <tr>
     <td bgcolor="#F7E3D1">
     	    <div class="bt-textbold-a">India Today Sex Survey Covers</div>
-            <div align="center"  style="margin-top:10px;"><a href="/gallery/india-today-sex-survey-covers/1/8280.html"><img src="images/Covers.jpg" border="0"></a></div>
-            <div class="clicknow"><a href="/gallery/india-today-sex-survey-covers/1/8280.html">Click Now &raquo;</a></div>
+            <div align="center"  style="margin-top:10px;"><a href="http://indiatoday.intoday.in/gallery/india-today-sex-survey-covers/1/8280.html"><img src="images/Covers.jpg" border="0"></a></div>
+            <div class="clicknow"><a href="http://indiatoday.intoday.in/gallery/india-today-sex-survey-covers/1/8280.html">Click Now &raquo;</a></div>
       </td>
   </tr>
 </table>

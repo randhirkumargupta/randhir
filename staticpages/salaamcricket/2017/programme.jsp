@@ -262,10 +262,10 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-welcome-address-women-gender/1/911835.html" target="_blank" title="Men can never be like women: Kallie Purie"><span class="story_ltop_icon"></span>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-welcome-address-women-gender/1/911835.html" target="_blank" title="Men can never be like women: Kallie Purie"><span class="story_ltop_icon"></span>
                                   <p>Men can never be like women: Kallie Purie</p>  
                                   </a> </div>-->
-                  <div class="rpt_s"><!-- <a href="#" title=""><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <!--<a href="/video/woman-india-today-woman-summit-welcome-address-lifest/1/911708.html" target="_blank" title="Welcome address"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> --></div>
+                  <div class="rpt_s"><!-- <a href="#" title=""><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <!--<a href="http://indiatoday.intoday.in/video/woman-india-today-woman-summit-welcome-address-lifest/1/911708.html" target="_blank" title="Welcome address"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> --></div>
                 </div>
               </div>
             </div>
@@ -297,10 +297,10 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-2017-politics-gender-meenakshi-lekhi-k-kavitha/1/911744.html" target="_blank" title="Gender is not so much of an issue in politics anymore: K Kavitha"><span class="story_ltop_icon"></span>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2017-politics-gender-meenakshi-lekhi-k-kavitha/1/911744.html" target="_blank" title="Gender is not so much of an issue in politics anymore: K Kavitha"><span class="story_ltop_icon"></span>
                                   <p>Gender is not so much of an issue in politics anymore: K Kavitha</p>  
                                   </a> </div>--> 
-                  <!--<div class="rpt_s"><a href="/gallery/india-today-woman-summit-2017-battling-bias-supriya-sule-meenakshi-lekhi-sushmita-dev-praniti-shinde-k-kavitha/1/19201.html" title="Battling Bias | Why Women Won't Shut Down, Shut Up" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="/video/india-today-woman-summit-2017-meenakshi-lekhi-supriya-sule-sushmita-dev-k-kavitha-praniti-shinde/1/911793.html" target="_blank" title="Why women won't shut down, shut up"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>--> 
+                  <!--<div class="rpt_s"><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-battling-bias-supriya-sule-meenakshi-lekhi-sushmita-dev-praniti-shinde-k-kavitha/1/19201.html" title="Battling Bias | Why Women Won't Shut Down, Shut Up" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="http://indiatoday.intoday.in/video/india-today-woman-summit-2017-meenakshi-lekhi-supriya-sule-sushmita-dev-k-kavitha-praniti-shinde/1/911793.html" target="_blank" title="Why women won't shut down, shut up"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>--> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -388,10 +388,10 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-2017-shahid-kapoor-women-gender-bollywood/1/911810.html" target="_blank" title="I'm a worst-case scenario person: Shahid Kapoor"><span class="story_ltop_icon"></span>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-2017-shahid-kapoor-women-gender-bollywood/1/911810.html" target="_blank" title="I'm a worst-case scenario person: Shahid Kapoor"><span class="story_ltop_icon"></span>
                                   <p>I'm a worst-case scenario person: Shahid Kapoor</p>
                                   </a> </div>--> 
-                  <!--<div class="rpt_s"> <a href="/gallery/india-today-woman-summit-2017-shahid-kapoor-feminist-substance-abuse-gender-marriage-bollywood/1/19195.html#photo2" title="The Perfect Co-Star - In Reel And Real Life" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a>  | <a href="/video/shahid-kapoor-india-today-woman-summit/1/912257.html" title="Men and women can co-exist if they understand each other: Shahid Kapoor at India Today Woman Summit" target="_blank"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-shahid-kapoor-feminist-substance-abuse-gender-marriage-bollywood/1/19195.html#photo2" title="The Perfect Co-Star - In Reel And Real Life" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a>  | <a href="http://indiatoday.intoday.in/video/shahid-kapoor-india-today-woman-summit/1/912257.html" title="Men and women can co-exist if they understand each other: Shahid Kapoor at India Today Woman Summit" target="_blank"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -448,12 +448,12 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-religion-women-right-to-pray/1/911942.html
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-religion-women-right-to-pray/1/911942.html
 
 " target="_blank" title="When all are born out of a woman, how can she be considered impure: Trupti Desai "><span class="story_ltop_icon"></span>
                                   <p> When all are born out of a woman, how can she be considered impure: Trupti Desai </p> 
                                   </a> </div>
-                                <div class="rpt_s"> <a href="/gallery/india-today-woman-summit-2017-right-to-pray-sharifa-khanum-trupti-desai/1/19199.html" title=" Right To Pray | Are Women Children Of A Lesser God?" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="/video/india-today-woman-summit-woman-right-to-pray-trupti-desai-sharifa-khanum/1/911837.html" target="_blank" title="Are women, children of a lesser god?"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>--> 
+                                <div class="rpt_s"> <a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-right-to-pray-sharifa-khanum-trupti-desai/1/19199.html" title=" Right To Pray | Are Women Children Of A Lesser God?" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="http://indiatoday.intoday.in/video/india-today-woman-summit-woman-right-to-pray-trupti-desai-sharifa-khanum/1/911837.html" target="_blank" title="Are women, children of a lesser god?"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>--> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -528,11 +528,11 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-tapsee-pannu-fight-like-a-woman/1/912241.html" title="I fight like a woman, I am no less empowered in strength: Tapsee Pannu" target="_blank"><span class="story_ltop_icon"></span>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-tapsee-pannu-fight-like-a-woman/1/912241.html" title="I fight like a woman, I am no less empowered in strength: Tapsee Pannu" target="_blank"><span class="story_ltop_icon"></span>
                                   <p>I fight like a woman, I am no less empowered in strength: Tapsee Pannu</p>
                                   </a> </div>
-                                <div class="rpt_s"> <a href="/gallery/india-today-woman-summit-2017-fight-like-a-girl-taapsee-pannu/1/19200.html" title="Fight Like A Girl | Punch Like A Woman" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | 
-                                <a href="/video/tapsee-pannu-woman-fight-like-a-woman-defence-india-today-woman-summit/1/911980.html" title="Fight like a girl, says Tapsee Pannu" target="_blank"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>--> 
+                                <div class="rpt_s"> <a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-fight-like-a-girl-taapsee-pannu/1/19200.html" title="Fight Like A Girl | Punch Like A Woman" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | 
+                                <a href="http://indiatoday.intoday.in/video/tapsee-pannu-woman-fight-like-a-woman-defence-india-today-woman-summit/1/911980.html" title="Fight like a girl, says Tapsee Pannu" target="_blank"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>--> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -604,10 +604,10 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-jasleen-royal-bollywood-singer-music-youtube/1/911864.html" title="Jasleen Royal gets candid about her musical journey" target="_blank"><span class="story_ltop_icon"></span>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-jasleen-royal-bollywood-singer-music-youtube/1/911864.html" title="Jasleen Royal gets candid about her musical journey" target="_blank"><span class="story_ltop_icon"></span>
                                   <p>Jasleen Royal gets candid about her musical journey</p>
                                   </a> </div>
-                                <div class="rpt_s"><a href="/gallery/india-today-woman-summit-2017-soul-song-jasleen-royal-karan-johar-dear-zindagi/1/19198.html" title="Soul Song | The Music Of Joy" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="/video/jasleen-royal-soul-song-musician-young-india-today-woman-summit/1/912065.html" target="_blank" title="Jasleen Royal talks about battling challenges as an industry outsider"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
+                                <div class="rpt_s"><a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-soul-song-jasleen-royal-karan-johar-dear-zindagi/1/19198.html" title="Soul Song | The Music Of Joy" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="http://indiatoday.intoday.in/video/jasleen-royal-soul-song-musician-young-india-today-woman-summit/1/912065.html" target="_blank" title="Jasleen Royal talks about battling challenges as an industry outsider"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -664,10 +664,10 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-feminism-gender-richa-chadha-bani-j/1/911998.html" title="Feminism is not a biological thing: Richa Chadha" target="_blank"><span class="story_ltop_icon"></span>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-feminism-gender-richa-chadha-bani-j/1/911998.html" title="Feminism is not a biological thing: Richa Chadha" target="_blank"><span class="story_ltop_icon"></span>
                                   <p>Feminism is not a biological thing: Richa Chadha</p>
                                   </a> </div>
-                                <div class="rpt_s"> <a href="/gallery/india-today-woman-summit-2017-fierce-friendly-free-feminism/1/19197.html" target="_blank" title="Fierce, friendly, free Feminism"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="/video/india-today-woman-summit-richa-chadda-bani-j-feminism-sanya-malhotra-patriachy/1/912103.html" target="_blank" title="What exactly is feminism?"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
+                                <div class="rpt_s"> <a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-fierce-friendly-free-feminism/1/19197.html" target="_blank" title="Fierce, friendly, free Feminism"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="http://indiatoday.intoday.in/video/india-today-woman-summit-richa-chadda-bani-j-feminism-sanya-malhotra-patriachy/1/912103.html" target="_blank" title="What exactly is feminism?"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -747,10 +747,10 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-laxmi-saa-deepa-malik-deepa-karamakar/1/912159.html" title="I'm a survivor, not a victim: Laxmi Saa" target="_blank"><span class="story_ltop_icon"></span>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-laxmi-saa-deepa-malik-deepa-karamakar/1/912159.html" title="I'm a survivor, not a victim: Laxmi Saa" target="_blank"><span class="story_ltop_icon"></span>
                                   <p>I'm a survivor, not a victim: Laxmi Saa</p>
                                   </a> </div>
-                                <div class="rpt_s"> <a href="/gallery/india-today-woman-summit-2017-making-the-most-of-lifes-lemons/1/19203.html" title="Making the most of life's lemons" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="/video/deepa-karmarkar-national-gymnast-woman-laxmi-agarwal-acid-attack-survivor-india-today-woman-summit/1/912152.html" target="_blank" title="I am not a victim but a survivor, says Laxmi Saa"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
+                                <div class="rpt_s"> <a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-making-the-most-of-lifes-lemons/1/19203.html" title="Making the most of life's lemons" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="http://indiatoday.intoday.in/video/deepa-karmarkar-national-gymnast-woman-laxmi-agarwal-acid-attack-survivor-india-today-woman-summit/1/912152.html" target="_blank" title="I am not a victim but a survivor, says Laxmi Saa"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -784,10 +784,10 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-mythology-durga/1/912024.html" title="All women today should fight like Durga: Rama Vaidyanathan" target="_blank"><span class="story_ltop_icon"></span>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-mythology-durga/1/912024.html" title="All women today should fight like Durga: Rama Vaidyanathan" target="_blank"><span class="story_ltop_icon"></span>
                                   <p>All women today should fight like Durga: Rama Vaidyanathan</p>
                                   </a> </div>
-                                <div class="rpt_s"> <a href="#" title=""><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="/video/mythology-rama-vaidyanathan-bharatnatyam-navjot-randhawa-woman-india-today-woman-summit/1/912255.html" title="Mythology cannot shackle liberal women today" target="_blank"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>--> 
+                                <div class="rpt_s"> <a href="#" title=""><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="http://indiatoday.intoday.in/video/mythology-rama-vaidyanathan-bharatnatyam-navjot-randhawa-woman-india-today-woman-summit/1/912255.html" title="Mythology cannot shackle liberal women today" target="_blank"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>--> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

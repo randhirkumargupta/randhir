@@ -88,7 +88,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
     </div>
   </div>
   <div class="highlight" style="width:200px; display:none">
-    <div class="highlight_head" style="padding-bottom:10px; margin-bottom:10px;"> <span class="highlighttitle" style="font-size:22px;">Highlights</span> <span class="highlight_more" style="width:49px;"><a href="/story/mindrocks-delhi-2014-highlights/1/381166.html" target="_blank()">see all..</a></span>
+    <div class="highlight_head" style="padding-bottom:10px; margin-bottom:10px;"> <span class="highlighttitle" style="font-size:22px;">Highlights</span> <span class="highlight_more" style="width:49px;"><a href="http://indiatoday.intoday.in/story/mindrocks-delhi-2014-highlights/1/381166.html" target="_blank()">see all..</a></span>
       <div class="clear"></div>
     </div>
     <iframe width="200" scrolling="no" height="253" frameborder="0" style="overflow-x: hidden;" src="/highlights/chunk_mindrock1.jsp?id=381166" id="highlight"></iframe>
@@ -111,7 +111,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
           <div class="mindr-contimeln">11.00 - 11.15 </div>
           <div class="conritepart">
             <div class="consubrtpart">
-              <div class="mindr-sessiontitle"><a href="/video/mind-rocks-2013-begins-with-rockstart-concert-in-new-delhi/1/310933.html" style="text-decoration:none; color:#000;">Welcome Address </a></div>
+              <div class="mindr-sessiontitle"><a href="http://indiatoday.intoday.in/video/mind-rocks-2013-begins-with-rockstart-concert-in-new-delhi/1/310933.html" style="text-decoration:none; color:#000;">Welcome Address </a></div>
               <div class="concomm">
               <div class="consubleftbox">
                   <!--<div class="mindr-headline">
@@ -363,7 +363,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
  Sunil Gavaskar says India must take 20 wickets to beat Aus</a></li>
                     </ul>
                   </div>
-                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a href="/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html"> Session Photos </a> <!-- | <img border="0" src="/images/video_icon.gif"><a target="_blank" href="
+                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html"> Session Photos </a> <!-- | <img border="0" src="/images/video_icon.gif"><a target="_blank" href="
 /video/indias-role-in-the-world-india-today-global-roundtable-evan-feigenbaum-bruce-jones-lisa-curtis-samir-saran/1/393006.html
 ">Session Video</a>--> 
                    </div>

@@ -838,8 +838,8 @@ Modi's popularity has started worrying the Congress, AAP other parties.</p>
  
 	<div class="posrel">
 	<div class="subhead"><h2><a href="/gallerylist/election/1/117.html">POLL PIC</a></h2></div>
-	<a href="/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sushma-new_350_052814010833.jpg" alt="Photos: NDA government takes charge" title="Photos: NDA government takes charge"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div>
-	<div class="innerbox"><a href="/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html" >Photos: NDA government takes charge</a>
+	<a href="http://indiatoday.intoday.in/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sushma-new_350_052814010833.jpg" alt="Photos: NDA government takes charge" title="Photos: NDA government takes charge"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div>
+	<div class="innerbox"><a href="http://indiatoday.intoday.in/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html" >Photos: NDA government takes charge</a>
 
 <div class="clear"></div>
 <div class="share-story"><div class="share-icon" url="/gallery/narendra-modi-cabinet-ministers-take-charge/1/11872.html" ctitle="Photos: NDA government takes charge"></div><ul id="11872" style="border:none"></ul></div>
@@ -850,7 +850,7 @@ Modi's popularity has started worrying the Congress, AAP other parties.</p>
  
 	<div class="posrel">
 	<div class="subhead"><h2><a href="/videolist/elections/1/787.html">VIDEO DISPATCHES</a></h2></div>
-	<a href="/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/jaya-video_300x193_052215024730.jpg" alt="null" title="null"   border="0" class="images" /><span class='pmedia-play-icon sp_bg'></span></a></div><div class="innerbox"><a href="/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html" >Jayalalithaa makes first public appearance in 217 days</a>
+	<a href="http://indiatoday.intoday.in/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/jaya-video_300x193_052215024730.jpg" alt="null" title="null"   border="0" class="images" /><span class='pmedia-play-icon sp_bg'></span></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html" >Jayalalithaa makes first public appearance in 217 days</a>
 
 <div class="clear"></div>
 <div class="share-story"><div class="share-icon" url="/video/jayalalithaa-tamil-nadu-first-appearance-in-217-days/1/439629.html" ctitle="Jayalalithaa makes first public appearance in 217 days"></div><ul id="439629" style="border:none"></ul></div>
@@ -908,7 +908,7 @@ Modi's popularity has started worrying the Congress, AAP other parties.</p>
 <div class="sosorry-vidcont">
 <div class="sosorryvid">
 
-<a href="/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/so-sorry-video_305_100817092736.jpg" alt="So Sorry" title="So Sorry" width="269" border="0"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sosorry/video-icon.png" class="vidsorry"></a></div><h3><a href="/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html">Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights</a></h3>
+<a href="http://indiatoday.intoday.in/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/so-sorry-video_305_100817092736.jpg" alt="So Sorry" title="So Sorry" width="269" border="0"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/sosorry/video-icon.png" class="vidsorry"></a></div><h3><a href="http://indiatoday.intoday.in/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html">Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights</a></h3>
 
 <div class="more"><a href="http://sosorry.in/" target="_blank()">View More</a></div>
 <div class="clear"></div>

@@ -107,7 +107,7 @@
                       <td valign="top" width="55"><img height="50" border="0" align="middle" width="50" src="images/mj.jpg" alt="M.J. Akbar" title="M.J. Akbar"></td>
                         <td valign="top">
                         <div class="prj_profilebyline"><strong>M.J. Akbar</strong><br />Editorial Director, India Today</div>
-                        <div class="storydiv"><a href="/story/india-today-aspire-education-summit-2012-education-is-the-prescription-for-poverty/1/170740.html">'Education is the prescription for poverty'</a> <a href="/gallery/mj-akbar-welcome-address-at-india-today-aspire-education-summit-2012/1/6426.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>
+                        <div class="storydiv"><a href="http://indiatoday.intoday.in/story/india-today-aspire-education-summit-2012-education-is-the-prescription-for-poverty/1/170740.html">'Education is the prescription for poverty'</a> <a href="http://indiatoday.intoday.in/gallery/mj-akbar-welcome-address-at-india-today-aspire-education-summit-2012/1/6426.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>
                         </td>
                       </tr>
                     </table>
@@ -137,7 +137,7 @@
                             <td valign="top" width="55"><img height="50" border="0" align="middle" width="50" src="images/kapil.jpg" alt="Kapil Sibal" title="Kapil Sibal"></td>
                             <td valign="top">
                             <div class="prj_profilebyline"><strong>Kapil Sibal<span class="star"></span></strong><br />Union HRD Minister </div>
-                            <div class="storydiv"><a href="/story/kapil-sibal-at-india-today-aspire-education-summit-2012/1/170787.html">Need inclusivity in education: Sibal</a><br /><a href="/gallery/kapil-sibal-at-india-today-aspire-education-summit-2012/1/6427.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>
+                            <div class="storydiv"><a href="http://indiatoday.intoday.in/story/kapil-sibal-at-india-today-aspire-education-summit-2012/1/170787.html">Need inclusivity in education: Sibal</a><br /><a href="http://indiatoday.intoday.in/gallery/kapil-sibal-at-india-today-aspire-education-summit-2012/1/6427.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>
                             </td>
                           </tr>
                         </table>
@@ -186,7 +186,7 @@
                             <td valign="top" width="55"><img height="50" border="0" align="middle" width="50" src="images/shiv.jpg" alt="Shiv Nadar" title="Shiv Nadar"></td>
                             <td valign="top">
                             <div class="prj_profilebyline"><strong>Shiv Nadar<span class="star"></span></strong><br />Founder & Chairman, HCL, Shiv Nadar Foundation  </div>
-                            <div class="storydiv"><a href="/story/shiv-nadar-at-india-today-aspire-education-summit-2012/1/170810.html">'Need Mayos and Doons for rural poor'</a><br /><a href="/gallery/aspire-education-summit-2012-shiv-nadar-dhiraj-nayyar/1/6430.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>
+                            <div class="storydiv"><a href="http://indiatoday.intoday.in/story/shiv-nadar-at-india-today-aspire-education-summit-2012/1/170810.html">'Need Mayos and Doons for rural poor'</a><br /><a href="http://indiatoday.intoday.in/gallery/aspire-education-summit-2012-shiv-nadar-dhiraj-nayyar/1/6430.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>
                             </td>
                           </tr>
                         </table>
@@ -227,7 +227,7 @@
                
                 <div class="ptext">Resurrecting the Tradition of World Class Education in India
 </div>      
- <div class="storydiv" style="margin:5px 0 0 0;"><a href="/story/former-ncert-chief-krishna-kumar-at-aspire-education-summit-2012/1/170891.html">'Dignity of teachers slipping'</a></div>    
+ <div class="storydiv" style="margin:5px 0 0 0;"><a href="http://indiatoday.intoday.in/story/former-ncert-chief-krishna-kumar-at-aspire-education-summit-2012/1/170891.html">'Dignity of teachers slipping'</a></div>    
             </div>
             <div class="pright" style="float:none; width:100%;margin-top:10px;">
                 <table border="0" cellspacing="0" cellpadding="0" width="100%" style="float:left;">
@@ -310,7 +310,7 @@
                 <div class="psessiontitle">The Gap Between Theory and Reality</div>                            
                 <div class="ptext">Teachers, Training, Technology: the three Ts we need to Tap 
 </div>        
-<div class="storydiv"><a href="/story/aspire-education-summit-2012-session-notes-the-gap-between-theory-and-reality/1/170900.html">'A good teacher needs to be a good learner in spirit'</a> | <a href="/story/india-today-aspire-2012-question-and-answers-session/1/170905.html">Q&A</a> | <a href="/gallery/aspire-india-today-education-summit-2012/1/6429.html"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"> Photos</a></div>
+<div class="storydiv"><a href="http://indiatoday.intoday.in/story/aspire-education-summit-2012-session-notes-the-gap-between-theory-and-reality/1/170900.html">'A good teacher needs to be a good learner in spirit'</a> | <a href="http://indiatoday.intoday.in/story/india-today-aspire-2012-question-and-answers-session/1/170905.html">Q&A</a> | <a href="http://indiatoday.intoday.in/gallery/aspire-india-today-education-summit-2012/1/6429.html"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"> Photos</a></div>
             </div>
           <div class="pright" style="float:none; width:100%;margin-top:10px;">
                 <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -381,7 +381,7 @@
            
 			      <div class="psession">Session: Higher Education</div>
                 <div class="psessiontitle">The Big Connect </div>
-                <div class="storydiv" style="margin:5px 0 0 0;"><a href="/story/delhi-university-vice-chancellor-dinesh-singh-education-summit/1/170913.html">'Not all varsity tie-ups work'</a> | <a href="/gallery/aspire-education-summit-2012-the-big-connect/1/6435.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>                     
+                <div class="storydiv" style="margin:5px 0 0 0;"><a href="http://indiatoday.intoday.in/story/delhi-university-vice-chancellor-dinesh-singh-education-summit/1/170913.html">'Not all varsity tie-ups work'</a> | <a href="http://indiatoday.intoday.in/gallery/aspire-education-summit-2012-the-big-connect/1/6435.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>                     
                 <!--<div class="ptext">Do students really benefit from collaborations with overseas universities or is it just an admission gimmick?</div>-->
             </div>
             <div class="pright" style="float:none; width:100%;margin-top:10px;">
@@ -460,7 +460,7 @@
             
 			<div class="psession">Session: School Education </div>
                 <div class="psessiontitle">Great Expectations</div>
-                <div class="storydiv" style="margin:5px 0 0 0;"><a href="/story/higher-education-fails-to-meet-demand/1/170906.html">Higher education fails to meet demand</a> | <a href="/gallery/aspire-education-summit-2012-great-expectations/1/6434.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>                              
+                <div class="storydiv" style="margin:5px 0 0 0;"><a href="http://indiatoday.intoday.in/story/higher-education-fails-to-meet-demand/1/170906.html">Higher education fails to meet demand</a> | <a href="http://indiatoday.intoday.in/gallery/aspire-education-summit-2012-great-expectations/1/6434.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div>                              
                <!-- <div class="ptext">What after a 100 per cent? Marks vs Intellect</div>-->
             </div>
             <div class="pright" style="float:none; width:100%;margin-top:10px;">
@@ -533,7 +533,7 @@
 			<div class="psession">Session: Higher Education<</div>
                 <div class="psessiontitle">Lesson One</div>
               <div class="ptext">Survival tactics in the corporate jungle</div>
-              <div class="storydiv" style="margin:5px 0 0 0;"><a href="/story/aspire-education-summit-suneel-galgotia-sanjeev-bikhchandani-ashok-reddy/1/170922.html">Education stuck in mediocrity: Naukri.com founder</a> | <a href="/gallery/aspire-education-summit-2012-survival-tactics-session/1/6433.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div> 
+              <div class="storydiv" style="margin:5px 0 0 0;"><a href="http://indiatoday.intoday.in/story/aspire-education-summit-suneel-galgotia-sanjeev-bikhchandani-ashok-reddy/1/170922.html">Education stuck in mediocrity: Naukri.com founder</a> | <a href="http://indiatoday.intoday.in/gallery/aspire-education-summit-2012-survival-tactics-session/1/6433.html"><img src="http://conclave.intoday.in/conclave/images/photo_icon.jpg" border="0"> Photos</a></div> 
             </div>
             <div class="pright" style="float:none; width:100%;margin-top:10px;">
                 <table border="0" cellspacing="0" cellpadding="0" width="100%" style="float:left;">
@@ -600,7 +600,7 @@
             <div class="pleft" style="float:none; width:100%">
 			<div class="psession">Session: School Education </div>
                 <div class="psessiontitle">Redefining the Classroom</div>
-                <div class="storydiv" style="margin:5px 0 0 0;"><a href="/story/taking-benefits-of-education-to-the-fringes/1/170924.html">Taking benefits of education to the fringes</a></div>                             
+                <div class="storydiv" style="margin:5px 0 0 0;"><a href="http://indiatoday.intoday.in/story/taking-benefits-of-education-to-the-fringes/1/170924.html">Taking benefits of education to the fringes</a></div>                             
                 <!--<div class="ptext">The road to change is always tough and it requires grit, conviction and above all determination. Hear it from the challenger who is helping bring about sweeping change in our country. </div>-->
             </div>
             <div class="pright" style="float:none; width:100%;margin-top:10px;">
@@ -658,7 +658,7 @@
         <div class="pritepart pborder">
             <div class="pleft" style="float:none; width:100%">
                 <div class="psession"><strong>Awards ceremony</strong></div>
-                <div class="storydiv" style="margin:5px 0 0 0;"><a href="/story/india-today-aspire-education-summit-awards/1/170904.html">India Today honours the best in education</a></div>   
+                <div class="storydiv" style="margin:5px 0 0 0;"><a href="http://indiatoday.intoday.in/story/india-today-aspire-education-summit-awards/1/170904.html">India Today honours the best in education</a></div>   
             </div>
             <div class="pright" style="float:none; width:100%;margin-top:10px;">
                 <!--<table border="0" cellspacing="0" cellpadding="0" width="100%">

@@ -48,10 +48,10 @@ if(document.getElementsByTagName("head").length>0)document.getElementsByTagName(
 else if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
 })();
 </script>
-<!--FB Claim URL // 22 june 2017--> 
+<!--FB Claim URL // 22 june 2017-->
 <meta property="fb:pages" content="23230437118" />
-<!--End FB Claim URL --> 
-  
+<!--End FB Claim URL -->
+
 <base href="http://indiatoday.intoday.in/"/>
 <title></title>
 <meta name="description" content="" />
@@ -88,15 +88,15 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 
 <div id="toppanel" class="clearfix">
   <div class="container">
-  
 
-    	   
+
+
 <!--<div style="margin:20px auto; width:1003px;" >-->
 <div class="page_pusher_h" >
 <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Page Pusher 1x1 - 1 x 1 -->
 <script language="JavaScript">
-var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="31"; 
+var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="31";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Page Pusher 1x1 - 1 x 1 -->
@@ -108,17 +108,17 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 	var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="32";
 	</script>
 	<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-	<!-- end ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Skinning 1x1 - 1 x 1 -->	
+	<!-- end ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Skinning 1x1 - 1 x 1 -->
 
 
-	
+
    <!-- <div style="width:1003px; margin:0 auto">
-    
+
     </div>-->
 
 
-    <div class="top_menu">  
-      <ul> 
+    <div class="top_menu">
+      <ul>
         <li><a href="http://indiatoday.intoday.in/section/114/1/india.html" >India</a></li>
         <li><a href="http://indiatoday.intoday.in/section/113/1/world.html"  class="mainlevel" >World</a></li>
         <li><a href="http://indiatoday.intoday.in/videos"  class="mainlevel" >Videos</a></li>
@@ -135,19 +135,19 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
  	<li><a href="http://www.cosmopolitan.in/" target="_blank" class="mainlevel" >Cosmopolitan </a></li>
         <!--<li><a href="http://indiatoday.magicbricks.com" target="_blank" class="mainlevel"  onclick="ga('send', 'event', 'MAGICBRICKS', 'click','1', 1, {'nonInteraction': 1});return true;">Real Estate</a></li>-->
       </ul>
-    </div> 
-    
+    </div>
+
     <div class="wrapper" style="margin:10px auto;">
     <style>
 	/*.ad_bn{ margin:0 !important;width: 728px !important;    margin-top: 10px !important;float: right !important;}*/
-	.ad_bn{ width: 728px !important;    margin-top: 10px !important;}  
+	.ad_bn{ width: 728px !important;    margin-top: 10px !important;}
 	.clearfix_h{ clear:both;}
-	</style>    
-    <span id="div1"></span> 
-    	    <!--  Header Ad --><div class="row ad_bn" style="height:90px;"> 
-          
-							
-						
+	</style>
+    <span id="div1"></span>
+    	    <!--  Header Ad --><div class="row ad_bn" style="height:90px;">
+
+
+
 <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
 <script>
   var googletag = googletag || {};
@@ -163,17 +163,17 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
   });
 </script>
 
-	
+
 <!-- /1007232/Indiatoday_ROS_DesktopMasthead_728x90 -->
 <div id='div-gpt-ad-1496915828862-0' style='height:90px; width:728px; display:block !important;'>
 <script>
 googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0'); });
 </script>
 </div>
-					
-              
+
+
     </div>
-    <div class="clearfix_h"></div>   
+    <div class="clearfix_h"></div>
   </div>
   </div>
   <!-- Main Navigation -->
@@ -206,17 +206,17 @@ var siteurl="http://indiatoday.intoday.in/";
       <div class="container">
         <div class="wrapper">
           <div class="top-menu">
-            <ul>             
+            <ul>
               <li class="navtog">
               <div class="openNav" title="Menu">
               <div class="icon"></div>
               </div>
-              
+
               <div class="sub_topnav">
                  <div class="mainnavigation-slider">
                    <!--<div class="topsocial"><a href="http://www.facebook.com/indiatoday" class="facebook" title="facebook">facebook</a><a href="http://www.twitter.com/indiatoday" class="twitter" title="twitter">twitter</a><a href="http://www.google.com/+indiatoday" class="gplus" title="google+">google plus</a><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" class="rss" title="Rss">rss</a><a href="http://m.indiatoday.in/" class="mobiledev"></a></div>-->
                    <div class="menucover">
-        <ul>        	
+        <ul>
         	<li><a href="http://indiatoday.intoday.in/news.html" title="Breaking News">NEWS LIST</a></li>
 	      	<li><a href="http://indiatoday.intoday.in/section/114/1/india.html" title="India News">INDIA</a></li>
 	      	<li><a href="http://indiatoday.intoday.in/section/113/1/world.html" title="World News">WORLD</a></li>
@@ -235,7 +235,7 @@ var siteurl="http://indiatoday.intoday.in/";
 	        <li><a href="http://indiatoday.intoday.in/breakingnews.html" title="News Indox">News Inbox</a></li>
 	        <li><a href="http://indiatoday.intoday.in/section/120/1/top-stories.html" title="Top News">Top News</a></li>
 	        <li><a href="http://indiatoday.intoday.in/section/175/1/must-read.html?source=homernmore" title="Most Read">Most Read</a></li>
-	        <li><a href="http://indiatoday.intoday.in/section/178/1/editors-picks.html?source=homernmore" title="Editor picks">Editor's Picks</a></li>	       
+	        <li><a href="http://indiatoday.intoday.in/section/178/1/editors-picks.html?source=homernmore" title="Editor picks">Editor's Picks</a></li>
 	        <li><a href="http://indiatoday.intoday.in/understand/index.jsp" title="Funalytics">Funalytics</a></li>
 	        <li><a href="http://dailyo.in/" title="Dailyo">Opinion</a></li>
 	        <li><a href="http://indiatoday.intoday.in/section/213/1/home-right.html" title="Hot Right Now">Hot Right Now</a></li>
@@ -263,17 +263,17 @@ var siteurl="http://indiatoday.intoday.in/";
                         <li><a href="javascript:void(0);" onclick="getmenu(214,0,'story',this);" title="Cricket">Cricket <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(67,0,'story',this);" title="Movies">Movies <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(230,0,'story',this);" title="Auto">Auto <i class="fa fa-angle-down"></i></a></li>
-                        <li><a href="javascript:void(0);" onclick="getmenu(84,0,'story',this);" title="Sports">Sports <i class="fa fa-angle-down"></i></a></li>  
+                        <li><a href="javascript:void(0);" onclick="getmenu(84,0,'story',this);" title="Sports">Sports <i class="fa fa-angle-down"></i></a></li>
                          <li><a href="javascript:void(0);" onclick="getmenu(86,0,'video',this);" title="Videos">videos <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(2,0,'photo',this);" title="Photos">Photos <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(214,0,'story',this);" title="Cricket">Cricket <i class="fa fa-angle-down"></i></a></li>
-                        <li><a href="javascript:void(0);" onclick="getmenu(67,0,'story',this);" title="Movies">Movies <i class="fa fa-angle-down"></i></a></li>			   
+                        <li><a href="javascript:void(0);" onclick="getmenu(67,0,'story',this);" title="Movies">Movies <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(214,0,'story',this);" title="Cricket">Cricket <i class="fa fa-angle-down"></i></a></li>
                       </ul>
                     </div>
-                    
+
                     <div class="drop-box-right">
-                      
+
                     </div>
                   </li>
                 </ul>-->
@@ -283,32 +283,32 @@ var siteurl="http://indiatoday.intoday.in/";
             <a href="http://indiatoday.intoday.in/livetv.jsp" title="Live Tv">
             <!--<img class="navliveicon redicon" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/live_iconnav.png" alt="India Today Live TV">
             <img class="navliveicon whiteicon" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/LIVE_White.png" alt="India Today Live TV">-->TV</a>
-              
+
               </li>
               <li class="magazine   ">
         			<a href="http://indiatoday.intoday.in/calendar" title="Magazine">MAGAZINE</a>
-              
+
               </li>
               <!--<li  class="search_togle"><a href="http://indiatoday.intoday.in/advanced_search.jsp" title="Search">Search</a></li>-->
-              
+
               <li  class="search_togle">
 <form action="http://indiatoday.intoday.in/advanced_search.jsp" method="get" name="searchform1" onsubmit="return validatesearch('searchword');" style="margin:0;padding:0;">
                     <div class="searchbox">
-               <input type="text" class="input-box" name="searchword" id="searchword" value="Type here" onblur="if(this.value=='') this.value='Type here';" onfocus="if(this.value=='Type here') this.value='';"> 
+               <input type="text" class="input-box" name="searchword" id="searchword" value="Type here" onblur="if(this.value=='') this.value='Type here';" onfocus="if(this.value=='Type here') this.value='';">
 
                         <div class="search">Search</div>
                         <div class="icon-search"></div>
                     </div>
 </form>
               </li>
-              
+
             </ul>
           </div>
         </div>
         <div class="clearfix"></div>
       </div>
     </div>
-          
+
     <!--
 
 <style>
@@ -342,12 +342,12 @@ var siteurl="http://indiatoday.intoday.in/";
 
 
  -->
-    
+
     <div class="static-content">
-    
-    
-    
-    
+
+
+
+
     <ul>
       <li>
             <!--<div class="static"><a href="http://specials.indiatoday.com/specials/educomp/" mce_href="http://specials.indiatoday.com/specials/educomp/">Educomp India Today Awards</a></div>-->
@@ -355,7 +355,7 @@ var siteurl="http://indiatoday.intoday.in/";
            <div class="scroll-arrow-left"><i class="fa fa-angle-left ll"></i></div>
         <div class="drop-box-left">
           <ul>
-         
+
 
 <li><a mce_href="http://yads.zedo.com/ads2/c?a=2520674;g=0;c=821003063;i=0;x=23040;n=821;s=2;k=http://my.monsterindia.com/create_account.html?spl=IN_Alliance_LMG&amp;WT.mc_n=mktal_sk_LMG_IN " style="color:red" target="_blank" rel="nofollow" href="http://yads.zedo.com/ads2/c?a=2520674;g=0;c=821003063;i=0;x=23040;n=821;s=2;k=http://my.monsterindia.com/create_account.html?spl=IN_Alliance_LMG&amp;WT.mc_n=mktal_sk_LMG_IN ">Jobs</a></li>
 <!-- <li><a target="_blank" style="color:red" href="http://indiatoday.intoday.in/best-universities/">Best Universities 2017</a></li> -->
@@ -377,37 +377,37 @@ var siteurl="http://indiatoday.intoday.in/";
             <li><a href="/section/113/1/world.html" onmouseover="getmenu(113,0,'story',this);" title="World">World <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/galleries" onmouseover="getmenu(2,0,'photo',this);" title="Photos">Photos <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/videos" onmouseover="getmenu(86,0,'video',this);" title="Videos">videos <i class="fa fa-angle-down"></i></a></li>
-            
+
             <li><a href="/section/214/1/cricket.html" onmouseover="getmenu(214,0,'story',this);" title="Cricket">Cricket <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/technology/" onmouseover="getmenu(229,0,'story',this);" title="Technology">Tech <i class="fa fa-angle-down"></i></a></li>
  		<li><a href="/section/343/1/fyi.html" onmouseover="getmenu(343,0,'story',this);" title="fyi">FYI <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/230/1/auto.html" onmouseover="getmenu(230,0,'story',this);" title="Auto">Auto <i class="fa fa-angle-down"></i></a></li>
-            <li><a href="/section/103/1/lifestyle.html" onmouseover="getmenu(103,0,'story',this);" title="Lifestyle">Lifestyle <i class="fa fa-angle-down"></i></a></li>	
+            <li><a href="/section/103/1/lifestyle.html" onmouseover="getmenu(103,0,'story',this);" title="Lifestyle">Lifestyle <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/125/1/travel.html" onmouseover="getmenu(125,0,'story',this);" title="Travel">Travel <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/84/1/sports.html" onmouseover="getmenu(84,0,'story',this);" title="Sports">Sports <i class="fa fa-angle-down"></i></a></li>
             <li><a href="javascript:void(0);" onmouseover="getmenu(386,0,'story',this);" title="Politics">Politics <i class="fa fa-angle-down"></i></a></li>
-            <li><a href="/section/341/1/food.html" onmouseover="getmenu(341,0,'story',this);" title="Food">Food <i class="fa fa-angle-down"></i></a></li>			
+            <li><a href="/section/341/1/food.html" onmouseover="getmenu(341,0,'story',this);" title="Food">Food <i class="fa fa-angle-down"></i></a></li>
             <li><a href="http://indiatoday.intoday.in/education" target="_blank" onmouseover="getmenu(204,0,'story',this);" title="Education">Education <i class="fa fa-angle-down"></i></a></li>
             <li><a href="http://businesstoday.intoday.in/" target="_blank" onmouseover="getmenu(110,0,'story',this);" title="Business">Business <i class="fa fa-angle-down"></i></a></li>
-            <li><a href="http://indiatoday.intoday.in/money/" target="_blank"  onmouseover="getmenu(340,0,'story',this);" title="Money">Money <i class="fa fa-angle-down"></i></a></li>  
+            <li><a href="http://indiatoday.intoday.in/money/" target="_blank"  onmouseover="getmenu(340,0,'story',this);" title="Money">Money <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/120/1/top-stories.html" onmouseover="getmenu(120,0,'story',this);" title="Top news">Top news <i class="fa fa-angle-down"></i></a></li>
-            <li><a href="http://dailyo.in/" target="_blank"  title="Opinion">Opinion </a></li>						
+            <li><a href="http://dailyo.in/" target="_blank"  title="Opinion">Opinion </a></li>
             <li><a href="/section/175/1/must-read.html?source=homernmore" onmouseover="getmenu(175,0,'story',this);" title="Most Read">Most Read <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/178/1/editors-picks.html" onmouseover="getmenu(178,0,'story',this);" title="Editor's Pick">Editor's Pick <i class="fa fa-angle-down"></i></a></li>
             <li class="no-dropbox"><a href="http://indiatoday.intoday.in/understand/index.jsp" target ="_blank" title="Funalytics">Funalytics </a></li>
 	<li class="no-dropbox"><a href="http://www.cosmopolitan.in/" target ="_blank" title="Cosmopolitan">Cosmopolitan  </a></li>
           </ul>
         </div>
-        
+
         <div class="drop-box-right" style="display:none;">
-          
+
         </div>
       </li>
     </ul>
-    
+
     </div>
 
- 
+
 <style>
 .bihar_elec_banner{ margin:0 auto}
 .container_bestcol{ width:1002px; margin:0 auto;}
@@ -416,24 +416,24 @@ var siteurl="http://indiatoday.intoday.in/";
 .container_bestcol{ width:100%;}
 .container_bestcol .iframe_bestcol{ float:left;height:118px;}
 }
-#conclaceamt{width:1000px; margin:15px auto 0 auto; }    
+#conclaceamt{width:1000px; margin:15px auto 0 auto; }
 @media screen and (max-width:800px){
-#conclaceamt{width:100%; margin:15px auto 0 auto; }    
+#conclaceamt{width:100%; margin:15px auto 0 auto; }
 }
 
 </style>
 <!--<div class="container_bestcol">
 <iframe class="iframe_bestcol" frameborder="0" scrolling="no" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/best-college-sponsor/sponsor.html"></iframe>
-</div>-->                  
+</div>-->
 
 <!--<div class="clearfix"></div>
- <div id="conclaceamt"><iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>      
- <div class="clearfix"></div>--> 
-              
+ <div id="conclaceamt"><iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>
+ <div class="clearfix"></div>-->
+
   </div>
 </div>
 <div id="main_container" style="position:relative;" class="category_outer">
-<div id="wapper" style="border:0px solid red;">	
+<div id="wapper" style="border:0px solid red;">
 <div class="strleft">
 <div class="phvidpathway"><div class="path lft"><div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="lft pathone"><a itemprop="url" href="section/84/1/sports.html"><span itemprop="title">Sports</span></a></div><div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="lft pathtwo"><a href="category/commonwealth-games-2010/1/197.html" itemprop="url"><span itemprop="title">&nbsp;/&nbsp;Commonwealth Games 2010</span></a></div><div itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb" class="lft paththree" style='text-decoration: none;color: #a8a8a8;font-size: 14px;font-weight: 400;position:relative;top:1px'>&nbsp;/&nbsp;Hockey - CWG <img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/bed-arrow.png"></div></div>
 <a href="http://indiatoday.intoday.in/site/rss/article.jsp?scid=56" target="_blank"><img src="http://indiatoday.intoday.in/images/rss_feed.jpg" class="sectoprss" align="right" border="0" height="14" width="16"></a>
@@ -443,59 +443,59 @@ var siteurl="http://indiatoday.intoday.in/";
 <div class="headline-new">Hockey - CWG</div>
 
 
-			<div class="sectionpartdiv"><div class="boldbluetext"><a href="/story/india-lose-mens-hockey-final-08-to-aus/1/116392.html">India lose men's hockey final 0-8 to Aus</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt"><P>An aggressive Australia defeat India in men's hockey final.</P></div></div>
+			<div class="sectionpartdiv"><div class="boldbluetext"><a href="http://indiatoday.intoday.in/story/india-lose-mens-hockey-final-08-to-aus/1/116392.html">India lose men's hockey final 0-8 to Aus</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt"><P>An aggressive Australia defeat India in men's hockey final.</P></div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/hockey-india-australia-lock-horns/1/116340.html">India, Australia lock horns</a></div><div class="bylinetext">Mail Today Bureau</div><div class="normaltaxt">India will bank on the positive momentum generated in the past few games and a partisan home crowd to secure the coveted gold medal in men's hockey at the Commonwealth Games.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/hockey-india-australia-lock-horns/1/116340.html">India, Australia lock horns</a></div><div class="bylinetext">Mail Today Bureau</div><div class="normaltaxt">India will bank on the positive momentum generated in the past few games and a partisan home crowd to secure the coveted gold medal in men's hockey at the Commonwealth Games.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/we-must-convert-penalty-corners/1/116337.html">India must convert penalty corners</a></div><div class="bylinetext">Pargat Singh</div><div class="normaltaxt">The Aussies tend to go for full court press in the first 10 minutes of each half and we need to keep them in check during that period.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/we-must-convert-penalty-corners/1/116337.html">India must convert penalty corners</a></div><div class="bylinetext">Pargat Singh</div><div class="normaltaxt">The Aussies tend to go for full court press in the first 10 minutes of each half and we need to keep them in check during that period.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/india-banking-on-crowd-support-to-win-hockey-gold-/1/116278.html">Hockey final: India banking on fans</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">India have already scripted history by ensuring themselves at least a silver medal.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/india-banking-on-crowd-support-to-win-hockey-gold-/1/116278.html">Hockey final: India banking on fans</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">India have already scripted history by ensuring themselves at least a silver medal.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/singh-is-indeed-the-king-on-the-hockey-field/1/116235.html">'Singh is indeed the king on the hockey field'</a></div><div class="bylinetext">S. Kannan</div><div class="normaltaxt">India defeats England and enters men's final in hockey.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/singh-is-indeed-the-king-on-the-hockey-field/1/116235.html">'Singh is indeed the king on the hockey field'</a></div><div class="bylinetext">S. Kannan</div><div class="normaltaxt">India defeats England and enters men's final in hockey.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/crowd-pressure-got-on-to-english-nerves/1/116216.html">Hockey: 'Crowd pressure worked against Eng'</a></div><div class="bylinetext">Pargat Singh</div><div class="normaltaxt">India's win against England was crucial and definitely a morale boosting victory. </div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/crowd-pressure-got-on-to-english-nerves/1/116216.html">Hockey: 'Crowd pressure worked against Eng'</a></div><div class="bylinetext">Pargat Singh</div><div class="normaltaxt">India's win against England was crucial and definitely a morale boosting victory. </div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/cwg-india-rides-on-bharat-in-hockey-semis/1/116215.html">CWG: India rides on Bharat in hockey semis</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">India win first ever medal in men's hockey at the Commonwealth Games by beating England 5-4 in semi-finals.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/cwg-india-rides-on-bharat-in-hockey-semis/1/116215.html">CWG: India rides on Bharat in hockey semis</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">India win first ever medal in men's hockey at the Commonwealth Games by beating England 5-4 in semi-finals.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/india-goalie-chetri-says-cwg-semifinal-his-best-moment/1/116208.html">Best moment of my career: Chetri</a></div><div class="bylinetext">PTI</div><div class="normaltaxt">India's hero in the hockey SF against England, Chetri says this was his finest moment. </div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/india-goalie-chetri-says-cwg-semifinal-his-best-moment/1/116208.html">Best moment of my career: Chetri</a></div><div class="bylinetext">PTI</div><div class="normaltaxt">India's hero in the hockey SF against England, Chetri says this was his finest moment. </div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/india-beat-england-to-enter-mens-hockey-final/1/116188.html">India storm into men's hockey final</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">England beaten 5-4 in penalty shootout; Chetri's stop makes the difference. </div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/india-beat-england-to-enter-mens-hockey-final/1/116188.html">India storm into men's hockey final</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">England beaten 5-4 in penalty shootout; Chetri's stop makes the difference. </div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/india-to-take-on-england-in-hockey-semifinal/1/116068.html">India to take on Eng in hockey semis</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">India has never won a men's hockey medal in the three editions in which the sport has featured.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/india-to-take-on-england-in-hockey-semifinal/1/116068.html">India to take on Eng in hockey semis</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">India has never won a men's hockey medal in the three editions in which the sport has featured.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/womens-hockey-india-beat-canada-30-but-finish-5th/1/116018.html">Women's hockey: India finish 5th</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">In a classification match, India beat Canada 3-0.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/womens-hockey-india-beat-canada-30-but-finish-5th/1/116018.html">Women's hockey: India finish 5th</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">In a classification match, India beat Canada 3-0.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/training-camps-are-a-deciding-factor-in-ensuring-a-win/1/115950.html">Besides talent, training camps decide the game</a></div><div class="bylinetext">Nirupama Sanjeev</div><div class="normaltaxt">India managed to reach the finals of the singles events in tennis, but results of doubles and mixed events aren't quite impressive.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/training-camps-are-a-deciding-factor-in-ensuring-a-win/1/115950.html">Besides talent, training camps decide the game</a></div><div class="bylinetext">Nirupama Sanjeev</div><div class="normaltaxt">India managed to reach the finals of the singles events in tennis, but results of doubles and mixed events aren't quite impressive.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/hockey-mens-team-to-face-england-in-semisfinals-in-quest-for-first-cwg-medal/1/115947.html">India defeat Pak 7-4 in hockey</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">India defeat Pakistan 7-4 and avenged its defeat of 1982. Will now&nbsp;face England in the semi-finals.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/hockey-mens-team-to-face-england-in-semisfinals-in-quest-for-first-cwg-medal/1/115947.html">India defeat Pak 7-4 in hockey</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">India defeat Pakistan 7-4 and avenged its defeat of 1982. Will now&nbsp;face England in the semi-finals.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/india-was-able-to-pull-it-off-against-pakistan-as-it-had-a-weak-defence/1/115944.html">Pak's weak defence ensures India a win</a></div><div class="bylinetext">Joaquim Caravalho</div><div class="normaltaxt">Though India was able to defeat Pakistan, it needs to improve its deep defence which can ensure it a win against England.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/india-was-able-to-pull-it-off-against-pakistan-as-it-had-a-weak-defence/1/115944.html">Pak's weak defence ensures India a win</a></div><div class="bylinetext">Joaquim Caravalho</div><div class="normaltaxt">Though India was able to defeat Pakistan, it needs to improve its deep defence which can ensure it a win against England.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/cwg-stakes-high-for-hosts-as-india-take-on-pak-in-hockey-match/1/115808.html">Spectators wait for Indo-Pak hockey clash</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">The two countries will take on each other to secure a spot in the semi-finals.<BR></div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/cwg-stakes-high-for-hosts-as-india-take-on-pak-in-hockey-match/1/115808.html">Spectators wait for Indo-Pak hockey clash</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">The two countries will take on each other to secure a spot in the semi-finals.<BR></div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/cwg-all-eyes-on-indiapak-hockey-match/1/115806.html">All eyes on India-Pak hockey match</a></div><div class="bylinetext">S. Kannan</div><div class="normaltaxt">As the two teams face off at the Major Dhyan Chand National Stadium on Sunday, it again brings into focus the stock of Indian hockey.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/cwg-all-eyes-on-indiapak-hockey-match/1/115806.html">All eyes on India-Pak hockey match</a></div><div class="bylinetext">S. Kannan</div><div class="normaltaxt">As the two teams face off at the Major Dhyan Chand National Stadium on Sunday, it again brings into focus the stock of Indian hockey.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/inconsistency-troubles-hockey-team/1/115730.html">Inconsistency troubles hockey team</a></div><div class="bylinetext">Pargat Singh</div><div class="normaltaxt">Lack of consistency has always been the bane of Indian hockey and it was evident once again in the match against Australia.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/inconsistency-troubles-hockey-team/1/115730.html">Inconsistency troubles hockey team</a></div><div class="bylinetext">Pargat Singh</div><div class="normaltaxt">Lack of consistency has always been the bane of Indian hockey and it was evident once again in the match against Australia.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/australian-eves-thrash-india-12/1/115430.html">India run into Aussie wall on field</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">Australia thrash India 1-2. After a 1-1 draw with Scotland, India&nbsp;now has one point from two matches as the Aussies look to make it to the semi-finals.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/australian-eves-thrash-india-12/1/115430.html">India run into Aussie wall on field</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">Australia thrash India 1-2. After a 1-1 draw with Scotland, India&nbsp;now has one point from two matches as the Aussies look to make it to the semi-finals.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/womens-hockey-australia-dash-indias-medal-hopes/1/115344.html">Women's hockey: Aus dash India hopes</a></div><div class="bylinetext">PTI</div><div class="normaltaxt">India go&nbsp;down fighting 1-2 in a Pool A match here. </div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/womens-hockey-australia-dash-indias-medal-hopes/1/115344.html">Women's hockey: Aus dash India hopes</a></div><div class="bylinetext">PTI</div><div class="normaltaxt">India go&nbsp;down fighting 1-2 in a Pool A match here. </div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/hockey-players-take-the-plunge/1/115229.html">Swimming pool for hockey players</a></div><div class="bylinetext">Mail Today Bureau</div><div class="normaltaxt">Hockey players enjoy luxuries of swimming pool at the Games Village.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/hockey-players-take-the-plunge/1/115229.html">Swimming pool for hockey players</a></div><div class="bylinetext">Mail Today Bureau</div><div class="normaltaxt">Hockey players enjoy luxuries of swimming pool at the Games Village.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/pak-start-with-confident-win/1/115210.html">Pak start with confident win</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">After finishing as wooden spooners in the World Cup earlier this year, the road to redemption for Pakistan hockey starts at the same venue where they suffered their worst nightmare.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/pak-start-with-confident-win/1/115210.html">Pak start with confident win</a></div><div class="bylinetext">Tushar Bhaduri</div><div class="normaltaxt">After finishing as wooden spooners in the World Cup earlier this year, the road to redemption for Pakistan hockey starts at the same venue where they suffered their worst nightmare.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/hockey-india-beat-malaysia-32/1/115179.html">Hockey: India beat Malaysia 3-2</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">A goal in the last few minutes took India to a 3-2 win over Malaysia in the men's hockey category of the CWG.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/hockey-india-beat-malaysia-32/1/115179.html">Hockey: India beat Malaysia 3-2</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">A goal in the last few minutes took India to a 3-2 win over Malaysia in the men's hockey category of the CWG.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/cwg-cullen-inspires-england-to-41-win-over-wales-/1/115122.html">CWG Hockey: England beat Wales 4-1</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">Christa Cullen of England smashed a hat-trick in&nbsp;the Pool B women's hockey match.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/cwg-cullen-inspires-england-to-41-win-over-wales-/1/115122.html">CWG Hockey: England beat Wales 4-1</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">Christa Cullen of England smashed a hat-trick in&nbsp;the Pool B women's hockey match.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/glitches-are-a-part-of-big-events/1/114200.html">'Glitches are a part of big events'</a></div><div class="bylinetext">Baidurjo Bhose</div><div class="normaltaxt">Indian triple jumper Renjith Maheshwary believes no major sporting event can be 100 per cent organised and according to plan.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/glitches-are-a-part-of-big-events/1/114200.html">'Glitches are a part of big events'</a></div><div class="bylinetext">Baidurjo Bhose</div><div class="normaltaxt">Indian triple jumper Renjith Maheshwary believes no major sporting event can be 100 per cent organised and according to plan.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/visitors-make-a-beeline-for-indian-food/1/114161.html">Visitors prefer Indian cuisine</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">The quality of Indian cuisines availabe at the Games Village attract foreign delegates and athletes.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/visitors-make-a-beeline-for-indian-food/1/114161.html">Visitors prefer Indian cuisine</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">The quality of Indian cuisines availabe at the Games Village attract foreign delegates and athletes.</div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/sa-delegation-finds-snake-in-cwg-village-room/1/114101.html">SA team finds snake in CWG Village room</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">Threat to players' lives, says SA envoy. They're fussing, says Milkha Singh. </div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/sa-delegation-finds-snake-in-cwg-village-room/1/114101.html">SA team finds snake in CWG Village room</a></div><div class="bylinetext">ITGD Bureau</div><div class="normaltaxt">Threat to players' lives, says SA envoy. They're fussing, says Milkha Singh. </div></div>
 
-			<div class="sectionpartdiv"><div class="secheadtext"><a href="/story/indias-medal-hopefuls-are-raring-to-rock/1/114069.html">India's medal hopefuls raring to rock</a></div><div class="bylinetext">S. Kannan</div><div class="normaltaxt">Strong Indian contingent will be hoping that they don't leave their home fans disappointed once the Games take off.</div></div>
+			<div class="sectionpartdiv"><div class="secheadtext"><a href="http://indiatoday.intoday.in/story/indias-medal-hopefuls-are-raring-to-rock/1/114069.html">India's medal hopefuls raring to rock</a></div><div class="bylinetext">S. Kannan</div><div class="normaltaxt">Strong Indian contingent will be hoping that they don't leave their home fans disappointed once the Games take off.</div></div>
 
 </div>
 
@@ -506,13 +506,13 @@ var siteurl="http://indiatoday.intoday.in/";
 
 
 		<div id="rosRightColumn">
- 
+
 		<div class="right-ad rt-colum" id="zedoads1" data-zedoads="300x250/subcategory.jsp_RightnavMR1" >
 
 						<!-- Javascript tag: --><!-- begin ZEDO for channel:  IT Sport Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
 						<script language="JavaScript">var zflag_nid="821"; var zflag_cid="1158/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";</script>
 						<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-						<!-- end ZEDO for channel:  IT Sport Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->          
+						<!-- end ZEDO for channel:  IT Sport Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
 
 		</div>
 
@@ -523,15 +523,15 @@ var siteurl="http://indiatoday.intoday.in/";
  						zmt_mtag = zmt_get_tag(821,"933466");
  						p933466_1 = zmt_mtag.zmt_get_placement("zt_933466_1", "933466", "1" , "2210" , "19" , "2" ,"300", "100");
  						zmt_mtag.zmt_set_async();
- 						zmt_mtag.zmt_load(zmt_mtag); 
+ 						zmt_mtag.zmt_load(zmt_mtag);
 					}
 				</script>
 				<script type="text/javascript" src="http://xp1.zedo.com/client/xp1/fmos.js" async ></script>
-				<!-- Ad Slot 1 tag: --><!-- begin ZEDO for channel: IT 300x100 ROS, Publisher: India Today, Ad Dimension: 300x100 Medium Rectangle-300x100 --> 
+				<!-- Ad Slot 1 tag: --><!-- begin ZEDO for channel: IT 300x100 ROS, Publisher: India Today, Ad Dimension: 300x100 Medium Rectangle-300x100 -->
  				<div id="zt_933466_1" style="display:show"><script id="zt_933466_1" language="javascript">if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined') {     zmt_mtag.zmt_render_placement(p933466_1);	}</script></div>
- 				<!-- end ZEDO for channel:  IT 300x100 ROS, Publisher: India Today, Ad Dimension: 300x100 Medium Rectangle-300x100 --> 
+ 				<!-- end ZEDO for channel:  IT 300x100 ROS, Publisher: India Today, Ad Dimension: 300x100 Medium Rectangle-300x100 -->
   			</div>
-   
+
 				<div class="rt-colum"><script>
 $(document).ready(function() {
 	$("#tab2").hide();
@@ -543,7 +543,7 @@ $(document).ready(function() {
 		$("#taba").removeClass("grey");
 		$("#tabbb").addClass("grey");
 		$("#tabb").addClass("grey");
-	});	
+	});
 	$("#tabb").click(function(){
 		$("#tab2").show().slideDown(300);
 		$("#tab1").hide().slideUp(300);
@@ -552,7 +552,7 @@ $(document).ready(function() {
 		$("#tabb").removeClass("grey");
 		$("#taba").addClass("grey");
 	});
-	
+
 	$("#tabbb").click(function(){
 		$("#tab2").hide().slideUp(300);
 		$("#tab1").hide().slideUp(300);
@@ -561,7 +561,7 @@ $(document).ready(function() {
 		$("#tabb").addClass("grey");
 		$("#taba").addClass("grey");
 	});
-	
+
 });
 </script>
 
@@ -573,20 +573,20 @@ $(document).ready(function() {
 <div  class='boxcont last noshadow blkbg debate'><div class='tabhead' id="taba"><h3><a href="javascript:void(0);" data-tb-region="homeRightfeaturedTOP News">TOP News</a></h3></div> <div class='tabhead grey' id="tabb" style="left: 135px; "><h3><a href="javascript:void(0);" data-tb-region=" homeRightfeaturedMost Read">Most Read</a></h3></div><div class='tabhead grey' id="tabbb" style="left: 135px;"><h3><a href="javascript:void(0);" homeRightfeaturedEditor Picks"> Editor's Picks</a></h3></div><div class="clear"></div><div id="tab1" data-tb-region="top-news-tab"><ul class="topstr-list gap topmarging"><li data-tb-region-item><a href="http://indiatoday.intoday.in/technology/story/this-nokia-9-mockup-looks-sassy-but-it-is-too-curvy-to-be-true/1/1062750.html">This Nokia 9 mockup looks sassy, but it's too curvy to be true</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/radhe-maa-delhi-police-station-grand-welcome-sho-suspended/1/1062748.html">Radhe Maa defends SHO, says she went there to use loo, sat on his seat by mistake</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/abhinav-bharat-member-plea-mahatma-gandhi-assassination-supreme-court-amicus-curiae/1/1062738.html">Plea seeks reopening of Gandhi murder probe, SC appoints amicus curiae</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/doklam-doka-la-xi-jinping-cpc-congress-india/1/1062737.html">Doklam again: How Jinping's ambition and CPC Congress politics fuel border tension</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/technology/story/blackberry-motion-is-the-upcoming-full-touch-screen-from-tcl-leak-hints-at-fingerprint-sensor-and-1080p-display/1/1062732.html">  BlackBerry Motion aka Krypton leak shows all touch screen phone in all of its glory</a></li> </ul><div class='more'><a href="http://indiatoday.intoday.in/section/268/1/latest-of-the-lot.html" target="_blank()">More</a></div></div><div id="tab2" data-tb-region="most-read-tab" ><ul class="topstr-list gap topmarging"><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/doklam-doka-la-xi-jinping-cpc-congress-india/1/1062737.html">Doklam again: How Jinping's ambition and CPC Congress politics fuel border tension</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/las-vegas-shootout-stephen-paddock-route-91-harvest-music-festival-mandalay-bay-resort/1/1062654.html">Las Vegas gunman Stephen Paddock may have scoped out other music festivals</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/election-commission-simultaneous-polls-lok-sabha-vidhan-sabha-narendra-modi-niti-aayog/1/1061959.html">Election Commission is ready for simultaneous Lok Sabha, state polls but is India ready?</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/las-vegas-shooting-mandalay-bay-gunman-stephen-paddock-girlfriend-unaware-of-plot/1/1061839.html">Las Vegas shooting: Gunman Stephen Paddock's girlfriend denies knowledge of plot</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/las-vegas-shooting-gunman-stephen-paddock-mandalay-bay-hotel-and-casino/1/1061048.html">Vegas shooting: Gunman transferred $100K overseas days before attack</a></li> </ul><div class='more'><a href="http://indiatoday.intoday.in/section/175/1/must-read.html?source=homernmore" target="_blank()">More</a></div></div><div id="tab3" data-tb-region="editors-picks-tab"><ul class="topstr-list gap topmarging"><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/abhinav-bharat-member-plea-mahatma-gandhi-assassination-supreme-court-amicus-curiae/1/1062738.html">Plea seeks reopening of Gandhi murder probe, SC appoints amicus curiae</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/doklam-doka-la-xi-jinping-cpc-congress-india/1/1062737.html">Doklam again: How Jinping's ambition and CPC Congress politics fuel border tension</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/idnian-air-force-helicopter-crashes-in-arunachal-pradesh/1/1062689.html">7 dead as Indian Air Force helicopter crash near in Arunachal, inquiry ordered</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/indian-air-force-pakistan-tactical-nuclear-weapons-nasr-bs-dhanoa/1/1062672.html">Does the Air Force have a plan to take out Pakistan's tactical nuclear weapons?</a></li><li data-tb-region-item><a href="http://indiatoday.intoday.in/story/rahul-gandhi-to-narendra-modi-dont-blame-pessimists-accept-you-have-failed/1/1062235.html">Rahul Gandhi to Modi: Don't blame pessimists, accept you have failed to deliver</a></li> </ul><div class='more'><a href="http://indiatoday.intoday.in/section/178/1/editors-picks.html?source=homernmore" target="_blank()">More</a></div></div></div>
 
 
-</div>  
- 
-     			<div class="rt-colum"> 
+</div>
+
+     			<div class="rt-colum">
      				 <h2><a href="http://indiatoday.intoday.in/galleries" title="PHOTOS" data-tb-region="homeRightfeaturedPHOTOS" >PHOTOS</a></h2><div class="photo-slider"><div class="photobelt"><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/elle-beauty-awards-2017-malaika-arora-richa-chadha-athiya-shetty-bani-j-diana-penty-tamannaah-bhatia-best-worst-red-carpet-looks-stunning-hot-fashion-lifest/1/20194.html" title="Malaika Arora's white serenity to Richa Chadha's weird white look: Here are the best and worst-dressed celebs from last night"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage-300_100517040214.jpg" alt="Malaika Arora's white serenity to Richa Chadha's weird white look: Here are the best and worst-dressed celebs from last night" title="Malaika Arora's white serenity to Richa Chadha's weird white look: Here are the best and worst-dressed celebs from last night" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/elle-beauty-awards-2017-malaika-arora-richa-chadha-athiya-shetty-bani-j-diana-penty-tamannaah-bhatia-best-worst-red-carpet-looks-stunning-hot-fashion-lifest/1/20194.html" title="Malaika Arora's white serenity to Richa Chadha's weird white look: Here are the best and worst-dressed celebs from last night"><span class="photo-icon spritbg"></span>Malaika Arora's white serenity to Richa Chadha's weird white look: Here are the best and worst-dressed celebs from last night</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/meet-lucinda-nicholas-the-stunner-of-bigg-boss-11-salman-khan-lifetv/1/20189.html" title="Meet Lucinda Nicholas, the stunner of Bigg Boss 11"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_100417124336.jpg" alt="Meet Lucinda Nicholas, the stunner of Bigg Boss 11" title="Meet Lucinda Nicholas, the stunner of Bigg Boss 11" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/meet-lucinda-nicholas-the-stunner-of-bigg-boss-11-salman-khan-lifetv/1/20189.html" title="Meet Lucinda Nicholas, the stunner of Bigg Boss 11"><span class="photo-icon spritbg"></span>Meet Lucinda Nicholas, the stunner of Bigg Boss 11</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/happy-birthday-shweta-tiwari-5-times-the-actress-stunned-us-with-her-gorgeous-avatars-lifetv/1/20188.html" title="Happy Birthday, Shweta Tiwari: 5 times the actress stunned us with her gorgeous avatars"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_100417120826.jpg" alt="Happy Birthday, Shweta Tiwari: 5 times the actress stunned us with her gorgeous avatars" title="Happy Birthday, Shweta Tiwari: 5 times the actress stunned us with her gorgeous avatars" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/happy-birthday-shweta-tiwari-5-times-the-actress-stunned-us-with-her-gorgeous-avatars-lifetv/1/20188.html" title="Happy Birthday, Shweta Tiwari: 5 times the actress stunned us with her gorgeous avatars"><span class="photo-icon spritbg"></span>Happy Birthday, Shweta Tiwari: 5 times the actress stunned us with her gorgeous avatars</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/bigg-boss-11-nominations-shilpa-shinde-zubair-khan-arshi-khan-bandgi-kalra-jyoti-kumari-lifetv/1/20186.html" title="Bigg Boss 11 nominations: Shilpa Shinde, Zubair Khan pay the price for picking fights?"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_100317040424.jpg" alt="Bigg Boss 11 nominations: Shilpa Shinde, Zubair Khan pay the price for picking fights?" title="Bigg Boss 11 nominations: Shilpa Shinde, Zubair Khan pay the price for picking fights?" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/bigg-boss-11-nominations-shilpa-shinde-zubair-khan-arshi-khan-bandgi-kalra-jyoti-kumari-lifetv/1/20186.html" title="Bigg Boss 11 nominations: Shilpa Shinde, Zubair Khan pay the price for picking fights?"><span class="photo-icon spritbg"></span>Bigg Boss 11 nominations: Shilpa Shinde, Zubair Khan pay the price for picking fights?</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/taapsee-pannu-judwaa-2-promotional-events-socks-looks-weird-lovely-tacky-style-lifest/1/20193.html" title="These pictures are proof Taapsee Pannu has an obsession with socks"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_100417055108.jpg" alt="These pictures are proof Taapsee Pannu has an obsession with socks" title="These pictures are proof Taapsee Pannu has an obsession with socks" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/taapsee-pannu-judwaa-2-promotional-events-socks-looks-weird-lovely-tacky-style-lifest/1/20193.html" title="These pictures are proof Taapsee Pannu has an obsession with socks"><span class="photo-icon spritbg"></span>These pictures are proof Taapsee Pannu has an obsession with socks</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/ranbir-kapoor-happy-birthday-style-dapper-formals-elegant-hot-sizzling-fashion-lifest/1/20168.html" title="7 times birthday boy Ranbir Kapoor was the most dapper man in the room"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_092817105615.jpg" alt="7 times birthday boy Ranbir Kapoor was the most dapper man in the room" title="7 times birthday boy Ranbir Kapoor was the most dapper man in the room" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/ranbir-kapoor-happy-birthday-style-dapper-formals-elegant-hot-sizzling-fashion-lifest/1/20168.html" title="7 times birthday boy Ranbir Kapoor was the most dapper man in the room"><span class="photo-icon spritbg"></span>7 times birthday boy Ranbir Kapoor was the most dapper man in the room</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/happy-birthday-ranbir-kapoor-mahira-khan-deepika-padukone-katrina-kaif-sonam-kapoor/1/20169.html" title="Ranbir Kapoor turns 35: Mahira Khan to Deepika Padukone, the women in his life"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_092817110508.jpg" alt="Ranbir Kapoor turns 35: Mahira Khan to Deepika Padukone, the women in his life" title="Ranbir Kapoor turns 35: Mahira Khan to Deepika Padukone, the women in his life" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/happy-birthday-ranbir-kapoor-mahira-khan-deepika-padukone-katrina-kaif-sonam-kapoor/1/20169.html" title="Ranbir Kapoor turns 35: Mahira Khan to Deepika Padukone, the women in his life"><span class="photo-icon spritbg"></span>Ranbir Kapoor turns 35: Mahira Khan to Deepika Padukone, the women in his life</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/ranbir-kapoor-birthday-bash-shah-rukh-khan-aamir-alia-bhatt-sidharth-malhotra-arjun-kapoor/1/20170.html" title="Shah Rukh Khan to Alia Bhatt to Aamir Khan: B-Town joins Ranbir Kapoor for his birthday bash"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_092817120447.jpg" alt="Shah Rukh Khan to Alia Bhatt to Aamir Khan: B-Town joins Ranbir Kapoor for his birthday bash" title="Shah Rukh Khan to Alia Bhatt to Aamir Khan: B-Town joins Ranbir Kapoor for his birthday bash" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/ranbir-kapoor-birthday-bash-shah-rukh-khan-aamir-alia-bhatt-sidharth-malhotra-arjun-kapoor/1/20170.html" title="Shah Rukh Khan to Alia Bhatt to Aamir Khan: B-Town joins Ranbir Kapoor for his birthday bash"><span class="photo-icon spritbg"></span>Shah Rukh Khan to Alia Bhatt to Aamir Khan: B-Town joins Ranbir Kapoor for his birthday bash</a></div></div></div><a class="spritbg" id="photoprev" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotonext', 'click','ITRightPhotonext', 1, {'nonInteraction': 1});return true;" style="display: block;">Prev</a><a class="spritbg" id="photonext" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotoprev', 'click','ITRightPhotoprev', 1, {'nonInteraction': 1});return true;">Next</a></div>
-  
+
  				</div>
- 
-  		<div class="rt-colum watchright_now"> 
- 
-   				<h2><a href="http://indiatoday.intoday.in/videolist/watch-right-now/1/993.html">Watch Right Now</a></h2>   
-    			 <div class="watch_chunk_container padding-reduce"><ul>	 
-	
+
+  		<div class="rt-colum watchright_now">
+
+   				<h2><a href="http://indiatoday.intoday.in/videolist/watch-right-now/1/993.html">Watch Right Now</a></h2>
+    			 <div class="watch_chunk_container padding-reduce"><ul>
+
 <li>
-<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/exclusive-first-image-of-honeypreet-insan-rampura-jail/1/1062646.html" title="Exclusive: First image of Honeypreet Insan in Panchkula jail"> 
+<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/exclusive-first-image-of-honeypreet-insan-rampura-jail/1/1062646.html" title="Exclusive: First image of Honeypreet Insan in Panchkula jail">
 <div class="watch_chunk_left">
 <img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/honey-prison-88_100617020745.jpg" title="First images of Honeypreet in Rampura jail" alt="First images of Honeypreet in Rampura jail" />
 <span class="ytb_icon_red"></span>
@@ -594,11 +594,11 @@ $(document).ready(function() {
 <div class="watch_chunk_right">
 Exclusive: First image of Honeypreet Insan in Panchkula jail
 </div>
-</a> 
+</a>
 </div>
 </li>
 <li>
-<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/gauri-lankesh-murder-special-investigation-team-no-arrests-made/1/1062642.html" title="Gauri Lankesh murder: A month later, senior journalist's killers still roam free"> 
+<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/gauri-lankesh-murder-special-investigation-team-no-arrests-made/1/1062642.html" title="Gauri Lankesh murder: A month later, senior journalist's killers still roam free">
 <div class="watch_chunk_left">
 <img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gauri-lankesh_video-88_090517101613_100617123200.jpg" title="Gauri Lankesh" alt="Gauri Lankesh" />
 <span class="ytb_icon_red"></span>
@@ -606,11 +606,11 @@ Exclusive: First image of Honeypreet Insan in Panchkula jail
 <div class="watch_chunk_right">
 Gauri Lankesh murder: A month later, senior journalist's killers still roam free
 </div>
-</a> 
+</a>
 </div>
 </li>
 <li>
-<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/honeypreet-insan-manohar-lal-khattar-haryana-punjab-police/1/1062284.html" title="Honeypreet arrest: Haryana CM Khattar blames Punjab Police for delay"> 
+<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/honeypreet-insan-manohar-lal-khattar-haryana-punjab-police/1/1062284.html" title="Honeypreet arrest: Haryana CM Khattar blames Punjab Police for delay">
 <div class="watch_chunk_left">
 <img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/khattar-for-video-88_100617123600.jpg" title="Manohar Lal Khattar (Screengrab courtesy: ANI)" alt="Manohar Lal Khattar (Screengrab courtesy: ANI)" />
 <span class="ytb_icon_red"></span>
@@ -618,11 +618,11 @@ Gauri Lankesh murder: A month later, senior journalist's killers still roam free
 <div class="watch_chunk_right">
 Honeypreet arrest: Haryana CM Khattar blames Punjab Police for delay
 </div>
-</a> 
+</a>
 </div>
 </li>
 <li>
-<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/simultaneous-assembly-and-lok-sabha-elections-election-commission/1/1061960.html" title="Can hold simultaneous Assembly and Lok Sabha elections post September 2018: EC"> 
+<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/simultaneous-assembly-and-lok-sabha-elections-election-commission/1/1061960.html" title="Can hold simultaneous Assembly and Lok Sabha elections post September 2018: EC">
 <div class="watch_chunk_left">
 <img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/op-rawat-video-88_100517011554.jpg" title="O P Rawat" alt="O P Rawat" />
 <span class="ytb_icon_red"></span>
@@ -630,34 +630,34 @@ Honeypreet arrest: Haryana CM Khattar blames Punjab Police for delay
 <div class="watch_chunk_right">
 Can hold simultaneous Assembly and Lok Sabha elections post September 2018: EC
 </div>
-</a> 
+</a>
 </div>
 </li></ul></div>
 
 
-  		</div> 
-      	<div class="rt-colum">   
+  		</div>
+      	<div class="rt-colum">
 
 				 	<h2><a href="/sosorry">So sorry</a></h2>     <div class="showing">
-      <div class="list-showing" data-tb-region-item > <a href="/video/narendra-modi-a-prime-minister-who-loves-cleanliness/1/1059947.html" title="Narendra Modi: A prime minister who loves cleanliness"><img width="313" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/images/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/so-sorry-video-305_100217035159.jpg" alt="So Sorry" title="So Sorry" /></a>
-       <div class="captionWicon"><a href="/video/narendra-modi-a-prime-minister-who-loves-cleanliness/1/1059947.html" title="Narendra Modi: A prime minister who loves cleanliness"><span class="video-icon spritbg"></span>Narendra Modi: A prime minister who loves cleanliness</a></div>
-       </div>       </div>  
-   
+      <div class="list-showing" data-tb-region-item > <a href="http://indiatoday.intoday.in/video/narendra-modi-a-prime-minister-who-loves-cleanliness/1/1059947.html" title="Narendra Modi: A prime minister who loves cleanliness"><img width="313" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/images/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/so-sorry-video-305_100217035159.jpg" alt="So Sorry" title="So Sorry" /></a>
+       <div class="captionWicon"><a href="http://indiatoday.intoday.in/video/narendra-modi-a-prime-minister-who-loves-cleanliness/1/1059947.html" title="Narendra Modi: A prime minister who loves cleanliness"><span class="video-icon spritbg"></span>Narendra Modi: A prime minister who loves cleanliness</a></div>
+       </div>       </div>
+
   		</div>
-  
+
   		<div class="rt-colum ad-withborder" id="zedoadsmarket" data-zedoads="300x250/subcategory.jsp_MarketingMR1">
   			<!-- Javascript tag: --><!-- begin ZEDO for channel:  IT ROS Marketng Rightnav MR1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
 			<script language="JavaScript">var zflag_nid="821"; var zflag_cid="2425"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";</script>
 			<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 			<!-- end ZEDO for channel:  IT ROS Marketng Rightnav MR1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
   		</div>
-  		<div class="rt-colum"> 
- 
+  		<div class="rt-colum">
+
      			<h2><a href="http://indiatoday.intoday.in/videolist/top-takes/1/1005.html">Top Takes</a></h2>
-    			 <div class="watch_chunk_container"><ul>	 
-	
+    			 <div class="watch_chunk_container"><ul>
+
 <li>
-<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/google-pixel-2-jimmy-fallon-miley-cyrus-pandas-birthday/1/1062314.html" title="It's Gone Viral: Miley Cyrus' photo-bombing spree; Pandas celebrate birthday; more"> 
+<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/google-pixel-2-jimmy-fallon-miley-cyrus-pandas-birthday/1/1062314.html" title="It's Gone Viral: Miley Cyrus' photo-bombing spree; Pandas celebrate birthday; more">
 <div class="watch_chunk_left">
 <img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/its-gone-viral-for-video_88_100517065256.jpg" title="It's Gone Viral" alt="It's Gone Viral" />
 <span class="ytb_icon_red"></span>
@@ -665,11 +665,11 @@ Can hold simultaneous Assembly and Lok Sabha elections post September 2018: EC
 <div class="watch_chunk_right">
 It's Gone Viral: Miley Cyrus' photo-bombing spree; Pandas celebrate birthday; more
 </div>
-</a> 
+</a>
 </div>
 </li>
 <li>
-<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/election-commission-simultaneous-assembly-and-lok-sabha-polls-narendra-modi/1/1062296.html" title="EC to be ready for simultaneous Lok Sabha, Assembly polls by September 2018"> 
+<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/election-commission-simultaneous-assembly-and-lok-sabha-polls-narendra-modi/1/1062296.html" title="EC to be ready for simultaneous Lok Sabha, Assembly polls by September 2018">
 <div class="watch_chunk_left">
 <img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/election-commision-story-88_100517102530_100517062348.jpg" title="The Election Commission will be ready to hold Lok Sabha and Assembly elections together by September 2018. (Photo: Reuters)" alt="The Election Commission will be ready to hold Lok Sabha and Assembly elections together by September 2018. (Photo: Reuters)" />
 <span class="ytb_icon_red"></span>
@@ -677,11 +677,11 @@ It's Gone Viral: Miley Cyrus' photo-bombing spree; Pandas celebrate birthday; mo
 <div class="watch_chunk_right">
 EC to be ready for simultaneous Lok Sabha, Assembly polls by September 2018
 </div>
-</a> 
+</a>
 </div>
 </li>
 <li>
-<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/honeypreet-insan-ram-rahim-singh-interrogated-chest-pain-panchkula-hospitalised/1/1061287.html" title="Honeypreet complained of chest pain during questioning after arrest"> 
+<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/honeypreet-insan-ram-rahim-singh-interrogated-chest-pain-panchkula-hospitalised/1/1061287.html" title="Honeypreet complained of chest pain during questioning after arrest">
 <div class="watch_chunk_left">
 <img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/honeypreet-video-88_100417034303.jpg" title="Honeypreet Insan in police custody." alt="Honeypreet Insan in police custody." />
 <span class="ytb_icon_red"></span>
@@ -689,11 +689,11 @@ EC to be ready for simultaneous Lok Sabha, Assembly polls by September 2018
 <div class="watch_chunk_right">
 Honeypreet complained of chest pain during questioning after arrest
 </div>
-</a> 
+</a>
 </div>
 </li>
 <li>
-<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/cisf-jawan-fires-in-air-at-delhi-metro-station-to-control-violent-crowd/1/1061202.html" title="CISF jawan fires in air at Delhi Metro station to control violent crowd"> 
+<div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/cisf-jawan-fires-in-air-at-delhi-metro-station-to-control-violent-crowd/1/1061202.html" title="CISF jawan fires in air at Delhi Metro station to control violent crowd">
 <div class="watch_chunk_left">
 <img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/cisf-video_88_100417022103.jpg" title="CISF" alt="CISF" />
 <span class="ytb_icon_red"></span>
@@ -701,7 +701,7 @@ Honeypreet complained of chest pain during questioning after arrest
 <div class="watch_chunk_right">
 CISF jawan fires in air at Delhi Metro station to control violent crowd
 </div>
-</a> 
+</a>
 </div>
 </li></ul></div>
 
@@ -714,26 +714,26 @@ CISF jawan fires in air at Delhi Metro station to control violent crowd
 <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT ROS Marketng Rightnav MR2 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
 <script language="JavaScript">
-var zflag_nid="821"; var zflag_cid="2426"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; 
+var zflag_nid="821"; var zflag_cid="2426"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel:  IT ROS Marketng Rightnav MR2 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
   </div>
 
-    <div class="rt-colum ipdagap ad-withborder" >   
-	 		
+    <div class="rt-colum ipdagap ad-withborder" >
+
 	<!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT Sport Rightnav MR 2 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
 <script language="JavaScript">
-var zflag_nid="821"; var zflag_cid="1159/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9"; 
+var zflag_nid="821"; var zflag_cid="1159/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel:  IT Sport Rightnav MR 2 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
-	    
-</div>   
- 
-<div class="rt-colum" style="margin-top:10px;" > 
- 
+
+</div>
+
+<div class="rt-colum" style="margin-top:10px;" >
+
 
 </div>
 
@@ -741,7 +741,7 @@ var zflag_nid="821"; var zflag_cid="1159/1137"; var zflag_sid="2"; var zflag_wid
     <!-- Javascript tag  -->
 <!-- begin ZEDO for channel: �IT�ROS�300x600 , publisher: India�Today , Ad Dimension: Half�Page - 300 x 600 -->
 <script language="JavaScript">
-var zflag_nid="821"; var zflag_cid="2376/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="600"; var zflag_sz="26"; 
+var zflag_nid="821"; var zflag_cid="2376/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="600"; var zflag_sz="26";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel: �IT�ROS�300x600 , publisher: India�Today , Ad Dimension: Half�Page - 300 x 600 -->
@@ -756,7 +756,7 @@ var zflag_nid="821"; var zflag_cid="2376/1137"; var zflag_sid="2"; var zflag_wid
 
 		<script type="text/javascript">ajaxinclude("/chunk_trends.jsp");</script>
 
-<div class="below-footer_h"> 
+<div class="below-footer_h">
   <div class="new_nav">
     <ul>
       <li><a href="http://indiatoday.intoday.in/news.html">NEWS</a></li>
@@ -778,21 +778,21 @@ var zflag_nid="821"; var zflag_cid="2376/1137"; var zflag_sid="2"; var zflag_wid
 </div>
 <div class="below-footer_h ads_f">
   <div class="footer_ads_h" >
-    
+
 	<div class="footer_left_h">
-	
-	
-					
+
+
+
 				<!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT Sport  Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
 <script language="JavaScript">
-var zflag_nid="821"; var zflag_cid="1157/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; 
+var zflag_nid="821"; var zflag_cid="1157/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-<!-- end ZEDO for channel:  IT Sport  Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->								
+<!-- end ZEDO for channel:  IT Sport  Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
 </div>
-	
-	
+
+
     <div class="footer_right_h">
       <div class="socials_footer_links_h">
         <ul>
@@ -808,7 +808,7 @@ var zflag_nid="821"; var zflag_cid="1157/1137"; var zflag_sid="2"; var zflag_wid
           <li><a href="http://indiatoday.intoday.in/site/rssFeed.jsp">
             <div class="rss_h"></div>
             </a></li>
-          <li><a href="http://indiatoday.intoday.in/applications/indiatoday.jsp"> 
+          <li><a href="http://indiatoday.intoday.in/applications/indiatoday.jsp">
             <div class="mbl_h"></div>
             </a></li>
         </ul>
@@ -816,7 +816,7 @@ var zflag_nid="821"; var zflag_cid="1157/1137"; var zflag_sid="2"; var zflag_wid
     </div>
   </div>
   <div class="clearfix"></div>
-  
+
 </div>
 
 <div class="footer-main-wrapper">
@@ -856,7 +856,7 @@ var zflag_nid="821"; var zflag_cid="1157/1137"; var zflag_sid="2"; var zflag_wid
     <li><a href="http://aajtak.intoday.in" target="_blank">Aaj Tak</a></li>
     <li><a href="http://aajtak.intoday.in/dilliaajtak/" target="_blank">Delhi Aaj Tak</a></li>
     <li><a href="http://aajtak.intoday.in/tez/" target="_blank">Tez</a></li>
-    <li><a href="http://indiatoday.intoday.in/livetv.jsp" target="_blank">India Today TV</a></li>   
+    <li><a href="http://indiatoday.intoday.in/livetv.jsp" target="_blank">India Today TV</a></li>
   </ul>
   <h3>Radio</h3>
   <ul>
@@ -875,7 +875,7 @@ var zflag_nid="821"; var zflag_cid="1157/1137"; var zflag_sid="2"; var zflag_wid
   <ul>
   <!--   <li><a href="http://www.bagittoday.com/" target="_blank">Bag It Today</a> </li> -->
     <li> <a href="http://www.indiatodaydiaries.com/" target="_blank">India Today Diaries</a></li>
-  </ul>  
+  </ul>
 </div>
 <div class="ft_lnks_h">
 <h3>Events</h3>
@@ -914,7 +914,7 @@ var zflag_nid="821"; var zflag_cid="1157/1137"; var zflag_sid="2"; var zflag_wid
   <ul>
     <li> <a href="http://www.indiatodayimages.com/" target="_blank">India Today Images</a></li>
   </ul>
-  
+
   <h3> Useful Links</h3>
   <ul>
     <li> <a href="http://www.dailyo.in/" target="_blank">Dailyo</a></li>
@@ -936,38 +936,38 @@ var zflag_nid="821"; var zflag_cid="1157/1137"; var zflag_sid="2"; var zflag_wid
 
 <div id="leftrightads">
 
-<div style="left:-170px;" class="leftad" >              
+<div style="left:-170px;" class="leftad" >
 <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
 <script type="text/javascript">
-var zflag_nid="821"; var zflag_cid="1142/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+var zflag_nid="821"; var zflag_cid="1142/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7";
 </script>
 <script type="text/javascript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
-</div>          
-<div class="rightad" >               
+</div>
+<div class="rightad" >
  <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT Homepage SkyScraper Ex right , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
 <script type="text/javascript">
-var zflag_nid="821"; var zflag_cid="1143/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+var zflag_nid="821"; var zflag_cid="1143/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7";
 </script>
 <script type="text/javascript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-<!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->    
-</div> </div> 
+<!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
+</div> </div>
 
 
 
-<script type="text/javascript"> winscreen(); $(window).resize(function() { 
-winscreen(); }); function winscreen(){ if (document.body.offsetWidth>=1250) { if 
-(document.getElementById("leftrightads") != null || 
-document.getElementById("leftrightads") != undefined) 
-{document.getElementById("leftrightads").style.display="block"; var lft = 
-((document.body.offsetWidth-1000)/2); 
-document.getElementById("leftrightads").style.left=lft+'px'; } } else { if 
-(document.getElementById("leftrightads") != null || 
-document.getElementById("leftrightads") != undefined){ 
+<script type="text/javascript"> winscreen(); $(window).resize(function() {
+winscreen(); }); function winscreen(){ if (document.body.offsetWidth>=1250) { if
+(document.getElementById("leftrightads") != null ||
+document.getElementById("leftrightads") != undefined)
+{document.getElementById("leftrightads").style.display="block"; var lft =
+((document.body.offsetWidth-1000)/2);
+document.getElementById("leftrightads").style.left=lft+'px'; } } else { if
+(document.getElementById("leftrightads") != null ||
+document.getElementById("leftrightads") != undefined){
 document.getElementById("leftrightads").style.display="none"; }} }
-var myUserAgent = navigator.userAgent.toLowerCase(); 
+var myUserAgent = navigator.userAgent.toLowerCase();
 if(myUserAgent.match('ipad')) { $('.leftad, .rightad').remove(); }
 </script>
 
@@ -988,9 +988,9 @@ if(myUserAgent.match('ipad')) { $('.leftad, .rightad').remove(); }
         var e = document.createElement('script');
         e.setAttribute('language', 'javascript');
         e.setAttribute('type', 'text/javascript');
-         
+
 		 e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
-		
+
         document.body.appendChild(e);
       }
       var oldonload = window.onload;
@@ -1005,8 +1005,8 @@ if(myUserAgent.match('ipad')) { $('.leftad, .rightad').remove(); }
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jshome-2016.js" type="text/javascript"></script>
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
-$(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.leftad').offset().top - parseFloat($('.leftad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.leftad a').addClass('fixed');} else {$('.leftad a').removeClass('fixed');}});}}); 
-$(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.rightad').offset().top - parseFloat($('.rightad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.rightad a').addClass('fixed-r');} else {$('.rightad a').removeClass('fixed-r');}});}}); 
+$(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.leftad').offset().top - parseFloat($('.leftad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.leftad a').addClass('fixed');} else {$('.leftad a').removeClass('fixed');}});}});
+$(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.rightad').offset().top - parseFloat($('.rightad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.rightad a').addClass('fixed-r');} else {$('.rightad a').removeClass('fixed-r');}});}});
 </script>
 
 
@@ -1029,17 +1029,17 @@ unruly.native.siteId = 321603
 	if (document.getElementById(adsId)!=undefined){
 		if($('#'+adsId).height()==0 || $('#'+adsId).height()=='0'){
 		ga('send','event','Adblock',c,'true'); //ga('send','_trackEvent','WriteAdblock','true');
-		}	
+		}
 	}else{
 	if(c!=undefined){
 		ga('send','event','Adblock',c,'false'); //ga('send','_trackEvent','WriteAdblock','false');
 	}
 	//ga('send', 'event', 'Test_AdDisplay', 'No',c);
-	//ga('send', 'event', 'Adblock', 'Yes', 'AdblockYes'); alert('Yes'); 
-	}} 
-    
+	//ga('send', 'event', 'Adblock', 'Yes', 'AdblockYes'); alert('Yes');
+	}}
+
    </script>
-   
+
 <!-- Begin ZEDO -->
 <script language="JavaScript">
 var zzp=new Image();
@@ -1050,9 +1050,7 @@ zzp.src="http://m4.zedo.com/log/p.gif?a=2520674;c=821003063;x=23040;n=821;e=i;i=
 <!-- End ZEDO -->
 <!-- Start Lotame -->
 <script src="http://tags.crwdcntrl.net/c/9709/cc_af.js"></script>
-<!-- End Lotame --> 
+<!-- End Lotame -->
 
 </body>
 </html>
-
-

@@ -46,10 +46,10 @@
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <div class="rpt_s"> <a href="/story/aaj-tak-salaam-cricket-2017/1/967250.html" target="_blank" title="Kalli Purie delivers opening address at Aaj Tak Salaam Cricket 2017: Full text"><span class="story_ltop_icon"></span>
+                  <div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/aaj-tak-salaam-cricket-2017/1/967250.html" target="_blank" title="Kalli Purie delivers opening address at Aaj Tak Salaam Cricket 2017: Full text"><span class="story_ltop_icon"></span>
                                   <p>Kalli Purie delivers opening address at Aaj Tak Salaam Cricket 2017</p>  
                                   </a> </div>
-                  <div class="rpt_s"> <!--<a href="#" title=""><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="/video/aaj-tak-salaam-cricket-2017/1/967306.html" target="_blank" title="Kalli Purie delivers opening address at Aaj Tak Salaam Cricket 2017"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>
+                  <div class="rpt_s"> <!--<a href="#" title=""><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="http://indiatoday.intoday.in/video/aaj-tak-salaam-cricket-2017/1/967306.html" target="_blank" title="Kalli Purie delivers opening address at Aaj Tak Salaam Cricket 2017"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>
                 </div>
               </div>
             </div>
@@ -82,10 +82,10 @@
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <div class="rpt_s"> <a href="/story/salaam-cricket-2017-sunil-gavaskar-australia-mentally-toughest/1/967316.html" target="_blank" title="Australia mentally toughest team, India almost on par, says Sunil Gavaskar "><span class="story_ltop_icon"></span>
+                  <div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/salaam-cricket-2017-sunil-gavaskar-australia-mentally-toughest/1/967316.html" target="_blank" title="Australia mentally toughest team, India almost on par, says Sunil Gavaskar "><span class="story_ltop_icon"></span>
                                   <p>Australia mentally toughest team, India almost on par, says Sunil Gavaskar </p>  
                                   </a> </div> 
-                  <div class="rpt_s"><!--<a href="/gallery/india-today-woman-summit-2017-battling-bias-supriya-sule-meenakshi-lekhi-sushmita-dev-praniti-shinde-k-kavitha/1/19201.html" title="Battling Bias | Why Women Won't Shut Down, Shut Up" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="/video/aaj-tak-salaam-cricket-2017-sunil-gavaskar/1/967391.html" target="_blank" title="Salaam Cricket 2017: Australia mentally toughest team, India almost on par, says Sunil Gavaskar"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div> 
+                  <div class="rpt_s"><!--<a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-battling-bias-supriya-sule-meenakshi-lekhi-sushmita-dev-praniti-shinde-k-kavitha/1/19201.html" title="Battling Bias | Why Women Won't Shut Down, Shut Up" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="http://indiatoday.intoday.in/video/aaj-tak-salaam-cricket-2017-sunil-gavaskar/1/967391.html" target="_blank" title="Salaam Cricket 2017: Australia mentally toughest team, India almost on par, says Sunil Gavaskar"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -122,10 +122,10 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <div class="rpt_s"> <a href="/story/salaam-cricket-2017-sachin-tendulkar-brian-lara-best-batsmen-shayne-warne/1/967372.html" target="_blank" title="Salaam Cricket 2017: Sachin Tendulkar, Brian Lara best batsmen of my time, says Shane Warne"><span class="story_ltop_icon"></span>
+                  <div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/salaam-cricket-2017-sachin-tendulkar-brian-lara-best-batsmen-shayne-warne/1/967372.html" target="_blank" title="Salaam Cricket 2017: Sachin Tendulkar, Brian Lara best batsmen of my time, says Shane Warne"><span class="story_ltop_icon"></span>
                                   <p>Sachin Tendulkar, Brian Lara best batsmen of my time, says Shane Warne</p>
                                   </a> </div> 
-                  <!--<div class="rpt_s"> <a href="/gallery/india-today-woman-summit-2017-shahid-kapoor-feminist-substance-abuse-gender-marriage-bollywood/1/19195.html#photo2" title="The Perfect Co-Star - In Reel And Real Life" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a>  |-->  <a href="/video/aaj-tak-salaam-cricket-2017-shane-warne-sachin-tendulkar-brian-lara-best-batsmen-india-australia/1/967473.html" title="Salaam Cricket 2017: Sachin, Lara best batsmen of my time, says Shane Warne" target="_blank"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-shahid-kapoor-feminist-substance-abuse-gender-marriage-bollywood/1/19195.html#photo2" title="The Perfect Co-Star - In Reel And Real Life" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a>  |-->  <a href="http://indiatoday.intoday.in/video/aaj-tak-salaam-cricket-2017-shane-warne-sachin-tendulkar-brian-lara-best-batsmen-india-australia/1/967473.html" title="Salaam Cricket 2017: Sachin, Lara best batsmen of my time, says Shane Warne" target="_blank"> <span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>
                 </div>
               
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -182,12 +182,12 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <div class="rpt_s"> <a href="/story/salaam-cricket-2017-shane-warne-sourav-ganguly/1/967521.html
+                  <div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/salaam-cricket-2017-shane-warne-sourav-ganguly/1/967521.html
 
 " target="_blank" title="Salaam Cricket 2017: Shane Warne, Sourav Ganguly recall old cricket memories and 'sledge' each other"><span class="story_ltop_icon"></span>
                                   <p> Salaam Cricket 2017: Shane Warne, Sourav Ganguly recall old cricket memories and 'sledge' each other </p> 
                                   </a> </div>
-                                <div class="rpt_s"> <!--<a href="/gallery/india-today-woman-summit-2017-right-to-pray-sharifa-khanum-trupti-desai/1/19199.html" title=" Right To Pray | Are Women Children Of A Lesser God?" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="/video/salaam-cricket-2017-sourav-ganguly-michael-clarke-shane-warne/1/967571.html" target="_blank" title="Salaam Cricket 2017: Lucky to play with and against Warne and Ganguly, says Clarke"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div> 
+                                <div class="rpt_s"> <!--<a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-right-to-pray-sharifa-khanum-trupti-desai/1/19199.html" title=" Right To Pray | Are Women Children Of A Lesser God?" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="http://indiatoday.intoday.in/video/salaam-cricket-2017-sourav-ganguly-michael-clarke-shane-warne/1/967571.html" target="_blank" title="Salaam Cricket 2017: Lucky to play with and against Warne and Ganguly, says Clarke"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -262,11 +262,11 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <div class="rpt_s"> <a href="/story/salaam-cricket-2017-yuvraj-singh-ms-dhoni-mohammad-azharuddin/1/967523.html" title="Salaam Cricket 2017: Yuvraj Singh and MS Dhoni not the same finishers anymore, says Mohammad Azharuddin" target="_blank"><span class="story_ltop_icon"></span>
+                  <div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/salaam-cricket-2017-yuvraj-singh-ms-dhoni-mohammad-azharuddin/1/967523.html" title="Salaam Cricket 2017: Yuvraj Singh and MS Dhoni not the same finishers anymore, says Mohammad Azharuddin" target="_blank"><span class="story_ltop_icon"></span>
                                   <p>Salaam Cricket 2017: Yuvraj Singh and MS Dhoni not the same finishers anymore, says Mohammad Azharuddin</p>
                                   </a> </div>
-                                <div class="rpt_s"><!-- <a href="/gallery/india-today-woman-summit-2017-fight-like-a-girl-taapsee-pannu/1/19200.html" title="Fight Like A Girl | Punch Like A Woman" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |-->  
-                                <a href="/video/salaam-cricket-2017-kumar-sangakkara-michael-clarke/1/967626.html" title="Salaam Cricket 2017: Clarke's influence on Australian team will spur others on, says Sangakkara" target="_blank"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>
+                                <div class="rpt_s"><!-- <a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-fight-like-a-girl-taapsee-pannu/1/19200.html" title="Fight Like A Girl | Punch Like A Woman" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |-->  
+                                <a href="http://indiatoday.intoday.in/video/salaam-cricket-2017-kumar-sangakkara-michael-clarke/1/967626.html" title="Salaam Cricket 2017: Clarke's influence on Australian team will spur others on, says Sangakkara" target="_blank"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -338,10 +338,10 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <div class="rpt_s"> <a href="/story/salaam-cricket-2017-anil-kumble-harbhajan-singh/1/967651.html" title="Salaam Cricket 2017: Don't think Anil Kumble can have problems with anyone, says Harbhajan Singh" target="_blank"><span class="story_ltop_icon"></span>
+                  <div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/salaam-cricket-2017-anil-kumble-harbhajan-singh/1/967651.html" title="Salaam Cricket 2017: Don't think Anil Kumble can have problems with anyone, says Harbhajan Singh" target="_blank"><span class="story_ltop_icon"></span>
                                   <p>Salaam Cricket 2017: Don't think Anil Kumble can have problems with anyone, says Harbhajan Singh</p>
                                   </a> </div>
-                                <div class="rpt_s"><!--<a href="/gallery/india-today-woman-summit-2017-soul-song-jasleen-royal-karan-johar-dear-zindagi/1/19198.html" title="Soul Song | The Music Of Joy" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="/video/salaam-cricket-2017-virat-kumble-anil-kumble-harbhajan-singh/1/967826.html" target="_blank" title="Salaam Cricket 2017: Don't think Anil Kumble can have problems with anyone, says Harbhajan Singh"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div> 
+                                <div class="rpt_s"><!--<a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-soul-song-jasleen-royal-karan-johar-dear-zindagi/1/19198.html" title="Soul Song | The Music Of Joy" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="http://indiatoday.intoday.in/video/salaam-cricket-2017-virat-kumble-anil-kumble-harbhajan-singh/1/967826.html" target="_blank" title="Salaam Cricket 2017: Don't think Anil Kumble can have problems with anyone, says Harbhajan Singh"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -398,10 +398,10 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <div class="rpt_s"> <a href="/story/india-much-stronger-than-pakistan-now-say-mohammad-azharuddin-and-aamer-sohail/1/967759.html" title="India much stronger than Pakistan now, say Mohammad Azharuddin and Aamer Sohail" target="_blank"><span class="story_ltop_icon"></span>
+                  <div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-much-stronger-than-pakistan-now-say-mohammad-azharuddin-and-aamer-sohail/1/967759.html" title="India much stronger than Pakistan now, say Mohammad Azharuddin and Aamer Sohail" target="_blank"><span class="story_ltop_icon"></span>
                                   <p>India much stronger than Pakistan now, say Mohammad Azharuddin and Aamer Sohail</p>
                                   </a> </div>
-                                <div class="rpt_s"> <!--<a href="/gallery/india-today-woman-summit-2017-fierce-friendly-free-feminism/1/19197.html" target="_blank" title="Fierce, friendly, free Feminism"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="/video/salaam-cricket-2017-mohammad-azharuddin-aamer-sohail-icc-champions-trophy-india-vs-pakistan/1/967862.html" target="_blank" title="India much stronger than Pakistan now, say Mohammad Azharuddin and Aamer Sohail"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div> 
+                                <div class="rpt_s"> <!--<a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-fierce-friendly-free-feminism/1/19197.html" target="_blank" title="Fierce, friendly, free Feminism"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="http://indiatoday.intoday.in/video/salaam-cricket-2017-mohammad-azharuddin-aamer-sohail-icc-champions-trophy-india-vs-pakistan/1/967862.html" target="_blank" title="India much stronger than Pakistan now, say Mohammad Azharuddin and Aamer Sohail"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -481,10 +481,10 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <!--<div class="rpt_s"> <a href="/story/india-today-woman-summit-laxmi-saa-deepa-malik-deepa-karamakar/1/912159.html" title="I'm a survivor, not a victim: Laxmi Saa" target="_blank"><span class="story_ltop_icon"></span>
+                  <!--<div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/india-today-woman-summit-laxmi-saa-deepa-malik-deepa-karamakar/1/912159.html" title="I'm a survivor, not a victim: Laxmi Saa" target="_blank"><span class="story_ltop_icon"></span>
                                   <p>I'm a survivor, not a victim: Laxmi Saa</p>
                                   </a> </div>
-                                <div class="rpt_s"> <a href="/gallery/india-today-woman-summit-2017-making-the-most-of-lifes-lemons/1/19203.html" title="Making the most of life's lemons" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="/video/deepa-karmarkar-national-gymnast-woman-laxmi-agarwal-acid-attack-survivor-india-today-woman-summit/1/912152.html" target="_blank" title="I am not a victim but a survivor, says Laxmi Saa"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
+                                <div class="rpt_s"> <a href="http://indiatoday.intoday.in/gallery/india-today-woman-summit-2017-making-the-most-of-lifes-lemons/1/19203.html" title="Making the most of life's lemons" target="_blank"><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> | <a href="http://indiatoday.intoday.in/video/deepa-karmarkar-national-gymnast-woman-laxmi-agarwal-acid-attack-survivor-india-today-woman-summit/1/912152.html" target="_blank" title="I am not a victim but a survivor, says Laxmi Saa"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a></div>--> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -518,7 +518,7 @@ Winning Indian Team
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="session_left"> 
-                  <div class="rpt_s"> <a href="/story/salaam-cricket-2017-11-legendary-cricket-captains/1/967877.html" title="Cricket 2017: Are batsmen better captains than bowlers? 11 legendary skippers discuss
+                  <div class="rpt_s"> <a href="http://indiatoday.intoday.in/story/salaam-cricket-2017-11-legendary-cricket-captains/1/967877.html" title="Cricket 2017: Are batsmen better captains than bowlers? 11 legendary skippers discuss
 
 " target="_blank"><span class="story_ltop_icon"></span>
 
@@ -526,7 +526,7 @@ Winning Indian Team
 
 </p>
                                   </a> </div>
-                                <div class="rpt_s"> <!--<a href="#" title=""><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="/video/salaam-cricket-2017-sunil-gavaskar-mohammad-azharuddin-sourav-ganguly-graeme-smith/1/967905.html" title="Salaam Cricket 2017: Legendary captains analyse how cricket has changed with time" target="_blank"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div> 
+                                <div class="rpt_s"> <!--<a href="#" title=""><span class="photo_ltop_icon"></span><span class="pink_col">Session Photo</span></a> |--> <a href="http://indiatoday.intoday.in/video/salaam-cricket-2017-sunil-gavaskar-mohammad-azharuddin-sourav-ganguly-graeme-smith/1/967905.html" title="Salaam Cricket 2017: Legendary captains analyse how cricket has changed with time" target="_blank"><span class="video_ltop_icon"></span><span class="pink_col">Session Video</span></a> </div> 
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

@@ -311,13 +311,13 @@ h5 a { text-decoration:none!Important;}
 
 
 
-<div class='home-box'><div class='story-title story1'><h3><a href="/category/election-express/1/851.html">CONVERSATIONS</a></h3></div><div class='share'><a href='#'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_express/images/share.jpg'></a></div><div class='home-box-img'><a href="/story/live-election-express-in-varanasi/1/360084.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ee-varanasi_story_350_051014104343.jpg" width='305'></a></div><div class='home-box-title'><h3><a href="/story/live-election-express-in-varanasi/1/360084.html">Day 36: Catch political updates in Varanasi with Election Express</a></h3></div>		
+<div class='home-box'><div class='story-title story1'><h3><a href="/category/election-express/1/851.html">CONVERSATIONS</a></h3></div><div class='share'><a href='#'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_express/images/share.jpg'></a></div><div class='home-box-img'><a href="http://indiatoday.intoday.in/story/live-election-express-in-varanasi/1/360084.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ee-varanasi_story_350_051014104343.jpg" width='305'></a></div><div class='home-box-title'><h3><a href="http://indiatoday.intoday.in/story/live-election-express-in-varanasi/1/360084.html">Day 36: Catch political updates in Varanasi with Election Express</a></h3></div>		
 <div class="share-story"><div class="share-icon" url="/story/live-election-express-in-varanasi/1/360084.html" ctitle="Day 36: Catch political updates in Varanasi with Election Express" style="display: block;"></div><ul id="360084" style="border: none; display: none;"></ul></div></div> 
 
 
   
 
-<div class='home-box'><div class='story-title story1'><h3><a href="http://indiatoday.intoday.in/videolist/election-express/1/850.html">VISUALLY YOURS</a></h3></div><div class='share'><a href='#'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_express/images/share.jpg'></a></div><li><div class='video-slider-content'><div class='home-box-img'><a href="/video/election-express-maninagar-divided-over-modis-invitation-to-nawaz/1/363143.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modi-3-video_300x193_052314062337.jpg"></a></div><div class='home-box-title'><h3><a href="/video/election-express-maninagar-divided-over-modis-invitation-to-nawaz/1/363143.html">Election Express: Maninagar divided over Modi's invitation to Nawaz</a></h3></div>		
+<div class='home-box'><div class='story-title story1'><h3><a href="http://indiatoday.intoday.in/videolist/election-express/1/850.html">VISUALLY YOURS</a></h3></div><div class='share'><a href='#'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_express/images/share.jpg'></a></div><li><div class='video-slider-content'><div class='home-box-img'><a href="http://indiatoday.intoday.in/video/election-express-maninagar-divided-over-modis-invitation-to-nawaz/1/363143.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modi-3-video_300x193_052314062337.jpg"></a></div><div class='home-box-title'><h3><a href="http://indiatoday.intoday.in/video/election-express-maninagar-divided-over-modis-invitation-to-nawaz/1/363143.html">Election Express: Maninagar divided over Modi's invitation to Nawaz</a></h3></div>		
 
 
 <div class="share-story">
@@ -334,7 +334,7 @@ h5 a { text-decoration:none!Important;}
 
 
 
-<div class='home-box'><div class='story-title story1'><h3><a href="/category/election-express/1/851.html">BUSPOST</a></h3></div><div class='share'><a href='#'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_express/images/share.jpg'></a></div><div class='home-box-img'><a href="/story/election-express-bus-post-sign-off-yourvote2014-poll-rallies/1/361471.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bus1_350_051214064944.jpg" width='305'></a></div><div class='home-box-title'><h3><a href="/story/election-express-bus-post-sign-off-yourvote2014-poll-rallies/1/361471.html">ElectionExpress: Saw India the way it is, not the way we want to see it!</a></h3></div>		
+<div class='home-box'><div class='story-title story1'><h3><a href="/category/election-express/1/851.html">BUSPOST</a></h3></div><div class='share'><a href='#'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_express/images/share.jpg'></a></div><div class='home-box-img'><a href="http://indiatoday.intoday.in/story/election-express-bus-post-sign-off-yourvote2014-poll-rallies/1/361471.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bus1_350_051214064944.jpg" width='305'></a></div><div class='home-box-title'><h3><a href="http://indiatoday.intoday.in/story/election-express-bus-post-sign-off-yourvote2014-poll-rallies/1/361471.html">ElectionExpress: Saw India the way it is, not the way we want to see it!</a></h3></div>		
 
 <div class="share-story">
   <div class="share-icon" url="/story/election-express-bus-post-sign-off-yourvote2014-poll-rallies/1/361471.html" ctitle="ElectionExpress: Saw India the way it is, not the way we want to see it!" style="display: block;"></div>
@@ -408,7 +408,7 @@ var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_wid
 	</div>
   </div>
 </div>
-<div class="copyright_footer"><div class="container"><div class="footer-text">Copyright © 2014 Living Media India Limited. For reprint rights: <a target="_blank" href="http://www.syndicationstoday.com/">Syndications Today.</a></div></div></div></footer>
+<div class="copyright_footer"><div class="container"><div class="footer-text">Copyright ï¿½ 2014 Living Media India Limited. For reprint rights: <a target="_blank" href="http://www.syndicationstoday.com/">Syndications Today.</a></div></div></div></footer>
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]--> 

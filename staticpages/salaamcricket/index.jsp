@@ -264,7 +264,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
     </div>
   </div>
   <div class="highlight" style="width:200px; display:none">
-    <div class="highlight_head" style="padding-bottom:10px; margin-bottom:10px;"> <span class="highlighttitle" style="font-size:22px;">Highlights</span> <span class="highlight_more" style="width:49px;"><a href="/story/mindrocks-delhi-2014-highlights/1/381166.html" target="_blank()">see all..</a></span>
+    <div class="highlight_head" style="padding-bottom:10px; margin-bottom:10px;"> <span class="highlighttitle" style="font-size:22px;">Highlights</span> <span class="highlight_more" style="width:49px;"><a href="http://indiatoday.intoday.in/story/mindrocks-delhi-2014-highlights/1/381166.html" target="_blank()">see all..</a></span>
       <div class="clear"></div>
     </div>
     <iframe width="200" scrolling="no" height="253" frameborder="0" style="overflow-x: hidden;" src="/salaamcricket/chunk_mindrock1_381166.jsp" id="highlight"></iframe>
@@ -287,7 +287,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
           <div class="mindr-contimeln">11.00 - 11.15 </div>
           <div class="conritepart">
             <div class="consubrtpart">
-              <div class="mindr-sessiontitle"><a href="/video/mind-rocks-2013-begins-with-rockstart-concert-in-new-delhi/1/310933.html" style="text-decoration:none; color:#000;">Welcome Address </a></div>
+              <div class="mindr-sessiontitle"><a href="http://indiatoday.intoday.in/video/mind-rocks-2013-begins-with-rockstart-concert-in-new-delhi/1/310933.html" style="text-decoration:none; color:#000;">Welcome Address </a></div>
               <div class="concomm">
               <div class="consubleftbox">
                   <!--<div class="mindr-headline">
@@ -539,7 +539,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
  Sunil Gavaskar says India must take 20 wickets to beat Aus</a></li>
                     </ul>
                   </div>
-                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a href="/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html"> Session Photos </a> <!-- | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="
+                  <div class="consubleftbox links"><img border="0" src="http://conclave.intoday.in/conclave/images/photo_icon.jpg"><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html"> Session Photos </a> <!-- | <img border="0" src="/staticpages/main/images/video_icon.gif"><a target="_blank" href="
 /video/indias-role-in-the-world-india-today-global-roundtable-evan-feigenbaum-bruce-jones-lisa-curtis-samir-saran/1/393006.html
 ">Session Video</a>-->
                    </div>
@@ -899,20 +899,20 @@ country.
 <h2 style="color:#de1e2b; margin-bottom:15px;">Photos</h2>
 
 <ul class="short_vidoes">
-	<li><a href="/gallery/salaam-cricket-sourav-ganguly-clive-lloyd-arjuna-ranatunga/1/13162.html
+	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-sourav-ganguly-clive-lloyd-arjuna-ranatunga/1/13162.html
 " target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/1_98_101814093659.jpg" /></a></li>
-	<li><a href="/gallery/salaam-cricket-2014-allan-border-steve-waugh-ricky-ponting/1/13166.html" target="_blank">
+	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-2014-allan-border-steve-waugh-ricky-ponting/1/13166.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/2_98_101814093659.jpg" /></a></li>
-	<li><a href="/gallery/salaam-cricket-sourav-ganguly-aamer-sohail-madan-lal-ajay-jadeja-india-today/1/13163.html" target="_blank">
+	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-sourav-ganguly-aamer-sohail-madan-lal-ajay-jadeja-india-today/1/13163.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/3_98_101814093659.jpg" />
     </a></li>
-	<li><a href="/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html" target="_blank">
+	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-india-in-australia-sunil-gavaskar-steve-waugh/1/13167.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/4_98_101814093659.jpg" />
     </a></li>
-	<li><a href="/gallery/salaam-cricket-all-the-best-india/1/13171.html" target="_blank">
+	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-all-the-best-india/1/13171.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/5_98_101814093659.jpg" />
     </a></li>
-	<li><a href="/gallery/salaam-cricket-winning-the-world-cup---start-of-a-revolution/1/13172.html" target="_blank">
+	<li><a href="http://indiatoday.intoday.in/gallery/salaam-cricket-winning-the-world-cup---start-of-a-revolution/1/13172.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2004October/6_98_101814093659.jpg" />
     </a></li>
 </ul>
@@ -923,10 +923,10 @@ country.
 <h2 style="color:#de1e2b; margin-bottom:15px;">Short & Crisp Videos</h2>
 
 <ul class="short_vidoes">
-	<li><a href="/video/salaam-cricket-allan-border-mohd-azharuddin-aaj-tak/1/396487.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/azhar_98_101814080844.jpg" /></a></li>
-	<li><a href="/video/aamer-sohail-salaam-cricket-pakistan-cricket-team-world-cup-india-today-conclave/1/396479.html" target="_blank">
+	<li><a href="http://indiatoday.intoday.in/video/salaam-cricket-allan-border-mohd-azharuddin-aaj-tak/1/396487.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/azhar_98_101814080844.jpg" /></a></li>
+	<li><a href="http://indiatoday.intoday.in/video/aamer-sohail-salaam-cricket-pakistan-cricket-team-world-cup-india-today-conclave/1/396479.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/aamir-snippets_98_101814080844.jpg" /></a></li>
-	<li><a href="/video/salaam-cricket-sourav-ganguly-aaj-tak/1/396490.html" target="_blank">
+	<li><a href="http://indiatoday.intoday.in/video/salaam-cricket-sourav-ganguly-aaj-tak/1/396490.html" target="_blank">
     <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014October/saurabv_98_101814080844.jpg" />
     </a></li>
 </ul>

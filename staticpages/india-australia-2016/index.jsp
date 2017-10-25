@@ -299,28 +299,28 @@
                   <div class='belts'>
                      <ul class='cf'>
                         <li>
-                           <a href="/gallery/india-vs-australia-3rd-t20i-in-sydney-photo-gallery/1/16890.html" title="India vs Australia: 3rd T20I in Sydney"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/win-thumb_305_013116074035.jpg" alt="India vs Australia: 3rd T20I in Sydney" title="India vs Australia: 3rd T20I in Sydney"><span class="pmedia-image-icon sp_bg"></span></a>
-                           <div class='caption'><a href="/gallery/india-vs-australia-3rd-t20i-in-sydney-photo-gallery/1/16890.html" title="India vs Australia: 3rd T20I in Sydney">India vs Australia: 3rd T20I in Sydney</a></div>
+                           <a href="http://indiatoday.intoday.in/gallery/india-vs-australia-3rd-t20i-in-sydney-photo-gallery/1/16890.html" title="India vs Australia: 3rd T20I in Sydney"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/win-thumb_305_013116074035.jpg" alt="India vs Australia: 3rd T20I in Sydney" title="India vs Australia: 3rd T20I in Sydney"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <div class='caption'><a href="http://indiatoday.intoday.in/gallery/india-vs-australia-3rd-t20i-in-sydney-photo-gallery/1/16890.html" title="India vs Australia: 3rd T20I in Sydney">India vs Australia: 3rd T20I in Sydney</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/india-vs-australia-2nd-t20-in-melbourne-photo-gallery/1/16880.html" title="India vs Australia: 2nd T20 in Melbourne"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/rohit-thumb_305_012916053024.jpg" alt="India vs Australia: 2nd T20 in Melbourne" title="India vs Australia: 2nd T20 in Melbourne"><span class="pmedia-image-icon sp_bg"></span></a>
-                           <div class='caption'><a href="/gallery/india-vs-australia-2nd-t20-in-melbourne-photo-gallery/1/16880.html" title="India vs Australia: 2nd T20 in Melbourne">India vs Australia: 2nd T20 in Melbourne</a></div>
+                           <a href="http://indiatoday.intoday.in/gallery/india-vs-australia-2nd-t20-in-melbourne-photo-gallery/1/16880.html" title="India vs Australia: 2nd T20 in Melbourne"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/rohit-thumb_305_012916053024.jpg" alt="India vs Australia: 2nd T20 in Melbourne" title="India vs Australia: 2nd T20 in Melbourne"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <div class='caption'><a href="http://indiatoday.intoday.in/gallery/india-vs-australia-2nd-t20-in-melbourne-photo-gallery/1/16880.html" title="India vs Australia: 2nd T20 in Melbourne">India vs Australia: 2nd T20 in Melbourne</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/india-vs-australia-1st-t20-in-adelaide-photo-gallery/1/16860.html" title="India vs Australia: 1st T20 in Adelaide"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/kohli-thumb_305_012616043354.jpg" alt="India vs Australia: 1st T20 in Adelaide" title="India vs Australia: 1st T20 in Adelaide"><span class="pmedia-image-icon sp_bg"></span></a>
-                           <div class='caption'><a href="/gallery/india-vs-australia-1st-t20-in-adelaide-photo-gallery/1/16860.html" title="India vs Australia: 1st T20 in Adelaide">India vs Australia: 1st T20 in Adelaide</a></div>
+                           <a href="http://indiatoday.intoday.in/gallery/india-vs-australia-1st-t20-in-adelaide-photo-gallery/1/16860.html" title="India vs Australia: 1st T20 in Adelaide"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/kohli-thumb_305_012616043354.jpg" alt="India vs Australia: 1st T20 in Adelaide" title="India vs Australia: 1st T20 in Adelaide"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <div class='caption'><a href="http://indiatoday.intoday.in/gallery/india-vs-australia-1st-t20-in-adelaide-photo-gallery/1/16860.html" title="India vs Australia: 1st T20 in Adelaide">India vs Australia: 1st T20 in Adelaide</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/sydney-odi-manish-pandey-helps-india-to-consolation-win/1/16844.html" title="Sydney ODI: Manish Pandey helps India to consolation win"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_305_012416044314.jpg" alt="Sydney ODI: Manish Pandey helps India to consolation win" title="Sydney ODI: Manish Pandey helps India to consolation win"><span class="pmedia-image-icon sp_bg"></span></a>
-                           <div class='caption'><a href="/gallery/sydney-odi-manish-pandey-helps-india-to-consolation-win/1/16844.html" title="Sydney ODI: Manish Pandey helps India to consolation win">Sydney ODI: Manish Pandey helps India to consolation win</a></div>
+                           <a href="http://indiatoday.intoday.in/gallery/sydney-odi-manish-pandey-helps-india-to-consolation-win/1/16844.html" title="Sydney ODI: Manish Pandey helps India to consolation win"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_305_012416044314.jpg" alt="Sydney ODI: Manish Pandey helps India to consolation win" title="Sydney ODI: Manish Pandey helps India to consolation win"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <div class='caption'><a href="http://indiatoday.intoday.in/gallery/sydney-odi-manish-pandey-helps-india-to-consolation-win/1/16844.html" title="Sydney ODI: Manish Pandey helps India to consolation win">Sydney ODI: Manish Pandey helps India to consolation win</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/4th-odi-kohli-dhawan-centuries-in-vain-as-india-lose-again/1/16817.html" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_305_012016073843.jpg" alt="4th ODI: Kohli, Dhawan centuries in vain as India lose again" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again"><span class="pmedia-image-icon sp_bg"></span></a>
-                           <div class='caption'><a href="/gallery/4th-odi-kohli-dhawan-centuries-in-vain-as-india-lose-again/1/16817.html" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again">4th ODI: Kohli, Dhawan centuries in vain as India lose again</a></div>
+                           <a href="http://indiatoday.intoday.in/gallery/4th-odi-kohli-dhawan-centuries-in-vain-as-india-lose-again/1/16817.html" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_305_012016073843.jpg" alt="4th ODI: Kohli, Dhawan centuries in vain as India lose again" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <div class='caption'><a href="http://indiatoday.intoday.in/gallery/4th-odi-kohli-dhawan-centuries-in-vain-as-india-lose-again/1/16817.html" title="4th ODI: Kohli, Dhawan centuries in vain as India lose again">4th ODI: Kohli, Dhawan centuries in vain as India lose again</a></div>
                         </li>
                         <li>
-                           <a href="/gallery/brisbane-odi-australia-crush-india-by-7-wickets/1/16798.html" title="Brisbane ODI: Australia crush India by 7 wickets"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/rohit-thumb_305_011616043939.jpg" alt="Brisbane ODI: Australia crush India by 7 wickets" title="Brisbane ODI: Australia crush India by 7 wickets"><span class="pmedia-image-icon sp_bg"></span></a>
-                           <div class='caption'><a href="/gallery/brisbane-odi-australia-crush-india-by-7-wickets/1/16798.html" title="Brisbane ODI: Australia crush India by 7 wickets">Brisbane ODI: Australia crush India by 7 wickets</a></div>
+                           <a href="http://indiatoday.intoday.in/gallery/brisbane-odi-australia-crush-india-by-7-wickets/1/16798.html" title="Brisbane ODI: Australia crush India by 7 wickets"><img align="left" class="imgs" width="210" height="155" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/rohit-thumb_305_011616043939.jpg" alt="Brisbane ODI: Australia crush India by 7 wickets" title="Brisbane ODI: Australia crush India by 7 wickets"><span class="pmedia-image-icon sp_bg"></span></a>
+                           <div class='caption'><a href="http://indiatoday.intoday.in/gallery/brisbane-odi-australia-crush-india-by-7-wickets/1/16798.html" title="Brisbane ODI: Australia crush India by 7 wickets">Brisbane ODI: Australia crush India by 7 wickets</a></div>
                         </li>
                      </ul>
                   </div>
@@ -341,22 +341,22 @@
                      <ul class='cf'>
                         <li>
                            <div class='video-slider-content'>
-                              <a href="/video/team-india-to-play-two-warm-up-matches-against-wa-xi/1/565505.html"><img width="323" height="180" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/thumb_305_010816010009.jpg"></a>
-                              <a href="/video/team-india-to-play-two-warm-up-matches-against-wa-xi/1/565505.html">
+                              <a href="http://indiatoday.intoday.in/video/team-india-to-play-two-warm-up-matches-against-wa-xi/1/565505.html"><img width="323" height="180" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/thumb_305_010816010009.jpg"></a>
+                              <a href="http://indiatoday.intoday.in/video/team-india-to-play-two-warm-up-matches-against-wa-xi/1/565505.html">
                                  <p>Team India to play two warm-up matches against WA XI</p>
                               </a>
                            </div>
                            <div class='video-slider-content vrtl'>
-                              <a href="/video/bcci-honours-virat-kohli-syed-kirmani-in-glittering-award-ceremony/1/563286.html"><img width="323" height="180" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kohli-video_305_010516094657.jpg"></a>
-                              <a href="/video/bcci-honours-virat-kohli-syed-kirmani-in-glittering-award-ceremony/1/563286.html">
+                              <a href="http://indiatoday.intoday.in/video/bcci-honours-virat-kohli-syed-kirmani-in-glittering-award-ceremony/1/563286.html"><img width="323" height="180" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kohli-video_305_010516094657.jpg"></a>
+                              <a href="http://indiatoday.intoday.in/video/bcci-honours-virat-kohli-syed-kirmani-in-glittering-award-ceremony/1/563286.html">
                                  <p>BCCI honours Virat Kohli, Syed Kirmani in glittering award ceremony</p>
                               </a>
                            </div>
                         </li>
                         <li>
                            <div class='video-slider-content'>
-                              <a href="/video/mahendra-singh-dhoni-ready-for-batting-pressure/1/563285.html"><img width="323" height="180" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/dhoni-video_305_010516094600.jpg"></a>
-                              <a href="/video/mahendra-singh-dhoni-ready-for-batting-pressure/1/563285.html">
+                              <a href="http://indiatoday.intoday.in/video/mahendra-singh-dhoni-ready-for-batting-pressure/1/563285.html"><img width="323" height="180" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/dhoni-video_305_010516094600.jpg"></a>
+                              <a href="http://indiatoday.intoday.in/video/mahendra-singh-dhoni-ready-for-batting-pressure/1/563285.html">
                                  <p>Mahendra Singh Dhoni ready for batting pressure</p>
                               </a>
                            </div>

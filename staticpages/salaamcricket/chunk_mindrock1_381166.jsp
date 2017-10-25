@@ -124,7 +124,7 @@ function changeRating1(contentId,content_type,action,part_id, upc, dwnc)
 	<link href="http://businesstoday.intoday.in/budget/jquery.mCustomScrollbar.css" rel="stylesheet" />
 </head>
 <body>
-<!-- <div class="strheadline"><div class="headertext"><a href="/story/mind-rocks-youth-summit-2013---highlights/1/259679.html" target="_blank">HIGHLIGHTS</a></div></div> -->
+<!-- <div class="strheadline"><div class="headertext"><a href="http://indiatoday.intoday.in/story/mind-rocks-youth-summit-2013---highlights/1/259679.html" target="_blank">HIGHLIGHTS</a></div></div> -->
 <div class="clear"></div>
 	<!-- content block -->
 	<div id="content_1" class="content">

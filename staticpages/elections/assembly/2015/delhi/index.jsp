@@ -630,8 +630,8 @@ IndiaToday.in
 
 	<div class="posrel">
 	<!--<div class="subhead"><h2><a href="/gallerylist/delhi-elections-2015/1/139.html">POLL PIC</a></h2></div>-->
-	<a href="/gallery/aap-delhi-election-win-kejriwal-poor-men-on-streets-india/1/14163.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/1_350_021115083630.jpg" alt="Meanwhile, life goes on for the Aam Aadmi in Delhi" title="Meanwhile, life goes on for the Aam Aadmi in Delhi"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div>
-	<div class="innerbox"><a href="/gallery/aap-delhi-election-win-kejriwal-poor-men-on-streets-india/1/14163.html" >Meanwhile, life goes on for the Aam Aadmi in Delhi</a>
+	<a href="http://indiatoday.intoday.in/gallery/aap-delhi-election-win-kejriwal-poor-men-on-streets-india/1/14163.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/1_350_021115083630.jpg" alt="Meanwhile, life goes on for the Aam Aadmi in Delhi" title="Meanwhile, life goes on for the Aam Aadmi in Delhi"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div>
+	<div class="innerbox"><a href="http://indiatoday.intoday.in/gallery/aap-delhi-election-win-kejriwal-poor-men-on-streets-india/1/14163.html" >Meanwhile, life goes on for the Aam Aadmi in Delhi</a>
 
 <div class="clear"></div>
 
@@ -642,8 +642,8 @@ IndiaToday.in
 
 	<div class="posrel">
 	<!--<div class="subhead"><h2><a href="/gallerylist/delhi-elections-2015/1/139.html">POLL PIC</a></h2></div>-->
-	<a href="/gallery/delhi-elections-bjp-kiran-bedi-congress-office-deserted-aap-celebrations/1/14158.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/11_bjp_qamar-4thumb_350_021015112305.jpg" alt="11 pictures of deserted BJP and Congress offices in Delhi" title="11 pictures of deserted BJP and Congress offices in Delhi"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div>
-	<div class="innerbox"><a href="/gallery/delhi-elections-bjp-kiran-bedi-congress-office-deserted-aap-celebrations/1/14158.html" >11 pictures of deserted BJP and Congress offices in Delhi</a>
+	<a href="http://indiatoday.intoday.in/gallery/delhi-elections-bjp-kiran-bedi-congress-office-deserted-aap-celebrations/1/14158.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/11_bjp_qamar-4thumb_350_021015112305.jpg" alt="11 pictures of deserted BJP and Congress offices in Delhi" title="11 pictures of deserted BJP and Congress offices in Delhi"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div>
+	<div class="innerbox"><a href="http://indiatoday.intoday.in/gallery/delhi-elections-bjp-kiran-bedi-congress-office-deserted-aap-celebrations/1/14158.html" >11 pictures of deserted BJP and Congress offices in Delhi</a>
 
 <div class="clear"></div>
 
@@ -654,8 +654,8 @@ IndiaToday.in
 
 	<div class="posrel">
 	<!--<div class="subhead"><h2><a href="/gallerylist/delhi-elections-2015/1/139.html">POLL PIC</a></h2></div>-->
-	<a href="/gallery/delhi-election-results-aap-arvind-kejriwal-family-celebrations-wife-hug/1/14157.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ak1_350_021015085433.jpg" alt="This is how Arvind Kejriwal celebrated AAP's landslide victory with his family" title="This is how Arvind Kejriwal celebrated AAP's landslide victory with his family"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div>
-	<div class="innerbox"><a href="/gallery/delhi-election-results-aap-arvind-kejriwal-family-celebrations-wife-hug/1/14157.html" >This is how Arvind Kejriwal celebrated AAP's landslide victory with his family</a>
+	<a href="http://indiatoday.intoday.in/gallery/delhi-election-results-aap-arvind-kejriwal-family-celebrations-wife-hug/1/14157.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ak1_350_021015085433.jpg" alt="This is how Arvind Kejriwal celebrated AAP's landslide victory with his family" title="This is how Arvind Kejriwal celebrated AAP's landslide victory with his family"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div>
+	<div class="innerbox"><a href="http://indiatoday.intoday.in/gallery/delhi-election-results-aap-arvind-kejriwal-family-celebrations-wife-hug/1/14157.html" >This is how Arvind Kejriwal celebrated AAP's landslide victory with his family</a>
 
 <div class="clear"></div>
 
@@ -670,7 +670,7 @@ IndiaToday.in
 
 	<div class="posrel">
 	<!--<div class="subhead"><h2><a href="/videolist/delhi-elections-2015/1/963.html">VIDEO DISPATCHES</a></h2></div>-->
-	<a href="/video/arvind-kejriwal-delhi-chief-minister-aap/1/419089.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/oath_video_300_021415124329_021615121025.jpg" alt="null" title="null"   border="0" class="images" /><span class='pmedia-play-icon sp_bg'></span></a></div><div class="innerbox"><a href="/video/arvind-kejriwal-delhi-chief-minister-aap/1/419089.html" >AAP sweeps Delhi: The rise and rise of Arvind Kejriwal</a>
+	<a href="http://indiatoday.intoday.in/video/arvind-kejriwal-delhi-chief-minister-aap/1/419089.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/oath_video_300_021415124329_021615121025.jpg" alt="null" title="null"   border="0" class="images" /><span class='pmedia-play-icon sp_bg'></span></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/video/arvind-kejriwal-delhi-chief-minister-aap/1/419089.html" >AAP sweeps Delhi: The rise and rise of Arvind Kejriwal</a>
 
 <div class="clear"></div>
 
@@ -681,7 +681,7 @@ IndiaToday.in
 
 	<div class="posrel">
 	<!--<div class="subhead"><h2><a href="/videolist/delhi-elections-2015/1/963.html">VIDEO DISPATCHES</a></h2></div>-->
-	<a href="/video/delhi-elections-kejriwal-aap/1/418224.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kejri-video_300_021015111148.jpg" alt="null" title="null"   border="0" class="images" /><span class='pmedia-play-icon sp_bg'></span></a></div><div class="innerbox"><a href="/video/delhi-elections-kejriwal-aap/1/418224.html" >Statehood for Delhi is AAP's top agenda</a>
+	<a href="http://indiatoday.intoday.in/video/delhi-elections-kejriwal-aap/1/418224.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/kejri-video_300_021015111148.jpg" alt="null" title="null"   border="0" class="images" /><span class='pmedia-play-icon sp_bg'></span></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/video/delhi-elections-kejriwal-aap/1/418224.html" >Statehood for Delhi is AAP's top agenda</a>
 
 <div class="clear"></div>
 
@@ -692,7 +692,7 @@ IndiaToday.in
 
 	<div class="posrel">
 	<!--<div class="subhead"><h2><a href="/videolist/delhi-elections-2015/1/963.html">VIDEO DISPATCHES</a></h2></div>-->
-	<a href="/video/delhi-elections-arvind-kejriwal-aap-chief-minister-oath/1/418223.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/vishwas-193_021015115808.jpg" alt="null" title="null"   border="0" class="images" /><span class='pmedia-play-icon sp_bg'></span></a></div><div class="innerbox"><a href="/video/delhi-elections-arvind-kejriwal-aap-chief-minister-oath/1/418223.html" >Kejriwal to take oath on February 14</a>
+	<a href="http://indiatoday.intoday.in/video/delhi-elections-arvind-kejriwal-aap-chief-minister-oath/1/418223.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/vishwas-193_021015115808.jpg" alt="null" title="null"   border="0" class="images" /><span class='pmedia-play-icon sp_bg'></span></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/video/delhi-elections-arvind-kejriwal-aap-chief-minister-oath/1/418223.html" >Kejriwal to take oath on February 14</a>
 
 <div class="clear"></div>
 

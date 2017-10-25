@@ -282,7 +282,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
 
 <div id="main_content_left">
 
-<!--<div><a href="/gallery/india-today-global-round-table-narendra-modi-new-york-india-today-group/1/12913.html
+<!--<div><a href="http://indiatoday.intoday.in/gallery/india-today-global-round-table-narendra-modi-new-york-india-today-group/1/12913.html
 "><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/Purie_Bhagwati-3-.jpg" width="640" height="405" /></a></div>-->
 
 <!--<iframe width="640" height="440" src="//www.youtube.com/embed/FVxNpiSfD90?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>-->
@@ -306,7 +306,7 @@ h2{font:bold 24px/33px roboto;color:#00000;margin:0;padding:0 5px;float:left}
     </div>
   </div>
   <div class="highlight" style="width:200px; display:none">
-    <div class="highlight_head" style="padding-bottom:10px; margin-bottom:10px;"> <span class="highlighttitle" style="font-size:22px;">Highlights</span> <span class="highlight_more" style="width:49px;"><a href="/story/mindrocks-delhi-2014-highlights/1/381166.html" target="_blank()">see all..</a></span>
+    <div class="highlight_head" style="padding-bottom:10px; margin-bottom:10px;"> <span class="highlighttitle" style="font-size:22px;">Highlights</span> <span class="highlight_more" style="width:49px;"><a href="http://indiatoday.intoday.in/story/mindrocks-delhi-2014-highlights/1/381166.html" target="_blank()">see all..</a></span>
       <div class="clear"></div>
     </div>
     <iframe width="200" scrolling="no" height="253" frameborder="0" style="overflow-x: hidden;" src="staticpages/static-highlights/global_chunk_mindrock.jsp" id="highlight"></iframe>
