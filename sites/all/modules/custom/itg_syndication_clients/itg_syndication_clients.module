@@ -113,6 +113,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_syndication_article.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss/article'] = array(
+    'page callback' => 'itg_rss_article',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_article.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 

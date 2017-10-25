@@ -43,7 +43,7 @@ function itg_rss_syndication_article() {
     $xml = not_found_syndication_xml();
   }
   header('Content-Type: text/xml');
-  echo $xml;
+  print $xml;
   drupal_exit();
 }
 
