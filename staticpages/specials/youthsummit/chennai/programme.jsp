@@ -269,7 +269,7 @@ etc.
         <!-- <div class="ptimeln">12.15 to 13.30</div> -->
         <!-- <div class="pritepart pborder">
             <div class="pleft" style="float:none; width:100%">
-                <div class="psession">Session Cricket <a href="http://indiatoday.intoday.in/specials/youthsummit/chennai/askquestion.jsp?id=2"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>
+                <div class="psession">Session Cricket <a href="/specials/youthsummit/chennai/askquestion.jsp?id=2"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>
                 <div class="psessiontitle">Talent Spotting </div>                            
                 <div class="ptext">The greatest find of 2011 and India's premier talent spotter on what makes a great cricketer.
 </div>        
@@ -487,7 +487,7 @@ etc.
         <div class="ptimeln">14.30 to 15.20</div>
         <div class="pritepart pborder">
             <div class="pleft" style="float:none; width:100%">
-			<div class="psession">Session Cinema <a href="http://indiatoday.intoday.in/specials/youthsummit/chennai/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>
+			<div class="psession">Session Cinema <a href="/specials/youthsummit/chennai/askquestion.jsp?id=4"><img align="right" src="/specials/youthsummit/images/Ask-Your-Question.gif" border="0"></a></div>
                 <div class="psessiontitle">Be Your Best</div>                            
                 <div class="ptext">How do you balance real life with fame? How do you blend commerce with art? How do you make films that will amuse and enlighten?</div>
             </div>

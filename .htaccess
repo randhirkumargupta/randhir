@@ -432,6 +432,9 @@ DirectoryIndex index.php index.html index.htm
 	RewriteCond %{REQUEST_URI} !/cannes2014.jsp [NC]
         RewriteCond %{REQUEST_URI} !/scorecard/matchcenter.jsp [NC]
         RewriteCond %{REQUEST_URI} !/people/narendra-modi/17737.html
+        RewriteCond %{REQUEST_URI} !/intoday
+        RewriteCond %{REQUEST_URI} !/money
+        RewriteCond %{REQUEST_URI} !/swachhbharat
 ####### End saticpages phase 3 End #########
 
   RewriteRule ^ index.php [L]
@@ -947,7 +950,13 @@ DirectoryIndex index.php index.html index.htm
         RewriteRule ^voter-helpline/(.*) /staticpages/voter-helpline/$1 [L]
         RewriteRule ^cannes2014.jsp$ /staticpages/cannes2014.jsp [L]
         RewriteRule ^scorecard/matchcenter.jsp$ /staticpages/scorecard/matchcenter.jsp [L]
-        RewriteRule ^people/narendra-modi/17737.html$ /staticpages/people/narendra-modi/17737.html [L]	
+        RewriteRule ^people/narendra-modi/17737.html$ /staticpages/people/narendra-modi/17737.html [L]
+        RewriteRule ^intoday$ /staticpages/intoday/index.html [L]
+        RewriteRule ^intoday/(.*)$ /staticpages/intoday/$1 [L]
+        RewriteRule ^money$ /staticpages/money/index.html [L]
+        RewriteRule ^money/(.*)$ /staticpages/money/$1 [L]
+        RewriteRule ^swachhbharat$ /staticpages/swachhbharat/index.html [L]
+        RewriteRule ^swachhbharat/(.*)$ /staticpages/swachhbharat/$1 [L]	
 	####### End saticpages phase 3 #########
 	
 

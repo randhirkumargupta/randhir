@@ -1,9 +1,6 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-    <link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>
-    <title>Back to basics Quiz: Are you an all-rounder and remember everything that was taught in school?</title>
-    
 		<script>
 window._newsroom = window._newsroom || [];
 !function (e, f, u) {
@@ -16,13 +13,9 @@ document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indi
   
   
 		<meta charset="utf-8">
-		<meta name="keywords" content="Back to basics Quiz: Are you an all-rounder and remember everything that was taught in school?" />
-		<meta name="description" content="Education Today brings to you a series of quizzes to check everything from the words of nursery rhymes to the conversations in mathematics, that was taught at school. The 'Back to basics' quiz takes you back to school!">
-		<meta name="og:title" content="Back to basics Quiz: Are you an all-rounder and remember everything that was taught in school?" />
-		<meta name="og:description" content="Education Today brings to you a series of quizzes to check everything from the words of nursery rhymes to the conversations in mathematics, that was taught at school. The 'Back to basics' quiz takes you back to school!" />
-		<meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/quiz/i-quizz-band.png">
-		<meta property="og:url" content="http://indiatoday.intoday.in/education/quiz/">
-	
+		<title>India Today Education - Breaking News, Results, Exams, Education Updates and Notifications</title>
+		<meta name="description" content="Education Today  - get the latest update on school, Colleges, b schools, registration, scholarships, exam results and Industry Updates only from Education Today." />
+		<meta name="keywords" content="Breaking News, Results, Exams, Education Updates, Notifications, Board Exams, Board Exam results, Board Exam paper leak, CAT exam, CAT results, Bank exams, Scholarships, Fellowships, education in India, Study Abroad, Career counselling, jobs, Jobs in India, Government jobs, Media jobs, Recruitment, Bank Recruitment, PO Exams, SSC" />
 		<link href="../css/style-sheet.css" rel="stylesheet" type="text/css">
 		<style>
 			body{ background:#FFFFFF;}
@@ -38,46 +31,6 @@ document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indi
 			.fixed-r { position: fixed!Important; top: 10px !Important; }
 			.fix-r { position: fixed!Important; top: 160px !Important; }
 		</style>
-		<link rel="canonical" href="/education/quiz/" /> 
-        
-<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
-<script>
-  var googletag = googletag || {};
-  googletag.cmd = googletag.cmd || [];
-</script>
-
-<script>
-  googletag.cmd.push(function() {
-    googletag.defineSlot('/1007232/Indiatoday_ROS_DesktopMasthead_728x90', [728, 90], 'div-gpt-ad-1507120650515-0').addService(googletag.pubads());
-    googletag.defineSlot('/1007232/Indiatoday_ROS_Desktop_ATF_300x250', [300, 250], 'div-gpt-ad-1507120650515-1').addService(googletag.pubads());    
-    googletag.defineSlot('/1007232/Indiatoday_ROS_Desktop_BTF_300x250', [300, 250], 'div-gpt-ad-1507120650515-3').addService(googletag.pubads());
-    googletag.defineSlot('/1007232/Indiatoday_ROS_Desktop_BTF_728x90', [728, 90], 'div-gpt-ad-1507120650515-4').addService(googletag.pubads());
-	
-	
-	googletag.pubads().setTargeting('category', ['Education','Educationquiz-Home']);
-	
-	
-    googletag.pubads().enableSingleRequest();
-    googletag.pubads().collapseEmptyDivs();
-    googletag.enableServices();
-  });
-</script>
-
-
-<script type="text/javascript">
- var zmt_mtag;
-function zd_get_placements(){
- zmt_mtag = zmt_get_tag(821,"1270");
- p1270_1 = zmt_mtag.zmt_get_placement("zt_1270_1", "1270", "1" , "2044" , "54" , "2" ,"1", "1");
- p1270_2 = zmt_mtag.zmt_get_placement("zt_1270_2", "1270", "2" , "2044" , "31" , "2" ,"1", "1");
-
- zmt_mtag.zmt_set_async();
- zmt_mtag.zmt_load(zmt_mtag); 
-} 
-</script> 
-<script type="text/javascript" src="https://saxp.zedo.com/sclient/tt3/fmos.js" async ></script>
-
- 
 	</head>
 	<body>
 		
@@ -144,7 +97,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/logo.png" usemap="#Map" style="margin-top:15px;">
             <map name="Map">
               <area shape="rect" coords="35,2,187,31" href="http://indiatoday.intoday.in/">
-              <area shape="rect" coords="1,34,219,78" href="/education">
+              <area shape="rect" coords="1,34,219,78" href="http://indiatoday.intoday.in/education/">
             </map>
             
             <div class="topad">
@@ -256,66 +209,87 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-0');
 		<div id="wrapper">
 			<div id="leftrightads" style="display: block; left:1;">
 				<div class="leftad">
-					
+					<!-- Javascript tag: -->
+					<!-- begin ZEDO for channel:  ET Homepage SkyScraper Ex Left , publisher: Education Today Web , Ad Dimension: Wide Skyscraper - 160 x 600 -->
+					<script language="JavaScript">
+						var zflag_nid="821"; var zflag_cid="2147"; var zflag_sid="26"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+					</script>
+					<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+					<!-- end ZEDO for channel:  ET Homepage SkyScraper Ex Left , publisher: Education Today Web , Ad Dimension: Wide Skyscraper - 160 x 600 -->
 				</div>
 				<div class="rightad">
-					
-				</div>              
+					<!-- Javascript tag: -->
+					<!-- begin ZEDO for channel:  ET Homepage SkyScraper Ex Right , publisher: Education Today Web , Ad Dimension: Wide Skyscraper - 160 x 600 -->
+					<script language="JavaScript">
+						var zflag_nid="821"; var zflag_cid="2148"; var zflag_sid="26"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+					</script>
+					<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+					<!-- end ZEDO for channel:  ET Homepage SkyScraper Ex Right , publisher: Education Today Web , Ad Dimension: Wide Skyscraper - 160 x 600 -->
+			   </div>              
 			</div>
 			<section class="main">
 				<section class="left">
-					<ul>
-						
-<style>
-	.topheader1 { background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/Left.png) left top no-repeat;}
-	.topheader1 a {color:#fff; text-shadow: 1px 1px 0 #000;}
-	.topheader-arrow1 {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/Right.png) right top no-repeat; width:15px;}
-	.upd-time { text-transform:uppercase; color:#d72e35; font-size:12px}
+					<link href='http://fonts.googleapis.com/css?family=Roboto:500,400italic,100,300,700,300italic,400' rel='stylesheet' type='text/css'>
 
+
+
+<style>                   
+	#left-quiz-section{ width:675px; margin:0 auto;font-family:Roboto; background:#FFFFFF;}
+	.q-header{margin-bottom:10px;}
+	.left-quiz-section{padding:10px;}
+	.q-message{width:650px;  background:#fffde8; font-family:roboto; font-size:45px; font-weight:100; color:#858384; padding:10px;}
+
+	.q-message span{ color:#f34f4d; font-weight:bold;}
+	.social-icon{ margin-top:25px;}
+	.social-icon  h3{ font-weight:300; margin:0; padding:0; color:#858384}
+	.social-box{ background:#fafafa; padding:10px 15px; float:left;}
+	.social-box li {
+		list-style:none; float:left; margin-right:20px;
+	}
 </style>
 
-<div class='boxcont'>
-	<div class='topheader topheader1'>
-		<h2><a href="/education/quiz/">Quiz</a></h2>
-	</div>
-	<div class='topheader-arrow topheader-arrow1'>&nbsp;</div>
-	<div class='clr' style='height:2px;'></div>
-	<div class='mag8in'>
-		<div class='clr news'>
-			<ul>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/brandsquiz.jsp" style="font-size: 24px;">Brand War</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/dancemusicquiz.jsp" style="font-size: 24px;">Dance & Music</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;">
-	  				<span style="font-size: 24px;">Food </span> &nbsp;&nbsp;
-	  				<a href="/education/quiz/food.jsp" style="font-size: 16px; " class="part">Part 1</a> |
-	  				<a href="/education/quiz/foodquiz.jsp"  style="font-size: 16px;  ">Part 2</a>
-  				</li>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/geographyquiz.jsp" style="font-size: 24px;">Geography</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/grammarquiz.jsp" style="font-size: 24px;">Grammar</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/nurseryquiz.jsp" style="font-size: 24px;">Nursery Rhymes</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/personalityquiz.jsp" style="font-size: 24px;">Famous Personalities</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/scalequiz.jsp" style="font-size: 24px;">Scale</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/singularquiz.jsp" style="font-size: 24px;">Singular & Plural</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/solarsystemquiz.jsp" style="font-size: 24px;">Solar System</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/tourismquiz.jsp" style="font-size: 24px;">Tourism</a></li>
-				<li style="margin-top: 30px;margin-bottom: 40px;">
-                	<span style="font-size: 24px;">Wildlife </span> &nbsp;&nbsp;
-  					<a href="/education/quiz/wildlife.jsp" style="font-size: 16px;" class="part">Part 1</a> |
-  					<a href="/education/quiz/wildlifequiz.jsp"  style="font-size: 16px; ">Part 2</a>
-  				</li>
-  				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/generalsciencequiz.jsp" style="font-size: 24px;">General Science</a></li>
-  				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/nationalquiz.jsp" style="font-size: 24px;">National</a></li>
-  				<li style="margin-top: 30px;margin-bottom: 40px;"><a href="/education/quiz/cinemaquiz.jsp" style="font-size: 24px;">Indian Cinema</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class='clr'></div>
-</div>      
-
-
-               
-
-					</ul>
+<div id="left-quiz-section">
+	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/quiz/result.png" />
+    <div class="left-quiz-section">    	
+         <div class="q-message">
+        	
+        			<span>You need to brush your skills!</span><br/>
+        	
+        	Your <span>0 out of 7 (0/7) </span> answers are correct.
+        	
+        </div>
+        <div class="social-icon">
+        	<h3>Related Quizzes:</h3>
+        	<div style="margin-left: 145px; margin-top: -30px; margin-bottom: -10px;margin-right:-17px;">
+        		
+        	</div>
+        </div>
+        <div class="social-icon">
+        	<h3>SHARE IT ON</h3>
+            <ul class="social-box">
+            	<li>
+            		<a href="https://www.facebook.com/dialog/feed?app_id=613580381995012&amp;display=popup&amp;caption='Back%20to%20basics'%20Quiz:%20Are%20you%20an%20all-rounder%20and%20remember%20everything%20that%20was%20taught%20in%20school?&amp;description=Education%20Today%20brings%20to%20you%20a%20series%20of%20quizzes%20to%20check%20everything%20from%20the%20words%20of%20nursery%20rhymes%20to%20the%20conversations%20in%20mathematics,%20that%20was%20taught%20at%20school.%20The%20'Back%20to%20basics'%20quiz%20takes%20you%20back%20to%20school!&amp;link=http://indiatoday.intoday.in/education/&amp;redirect_uri=http://indiatoday.intoday.in/education/&amp;picture=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/quiz/i-quizz-band.png" target="_blank">
+            			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/quiz/facebook.png" />
+            		</a>
+            	</li>
+            	<li>
+            		<a href="http://twitter.com/?status='Back%20to%20basics'%20Quiz:%20Are%20you%20an%20all-rounder%20and%20remember%20everything%20that%20was%20taught%20in%20school? http://indiatoday.intoday.in/education/  via @it_india" target="_blank">
+            			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/quiz/twitter.png" />
+            		</a>
+            	</li>
+            	<li>
+            		<a onclick="javascript:window.open(this.href,'Back to basics Quiz: Are you an all-rounder and remember everything that was taught in school?', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" href="https://plus.google.com/share?url=http://indiatoday.intoday.in/education/" target="_blank">
+            			<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/quiz/google-plus.png" />
+            		</a>
+            	</li>
+            </ul>
+        </div>
+        <div class="clr"></div>
+    
+    </div>
+    <!--left-quiz-section end-->
+</div>
+<!--##left-quiz-section end##-->
 				</section>
 				
 <section class="right">
@@ -490,11 +464,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 
 		</div>
 		<script type="text/javascript">
-			var google_tag_params = {
-				ecomm_prodid: 'REPLACE_WITH_VALUE',
-				ecomm_pagetype: 'REPLACE_WITH_VALUE',
-				ecomm_totalvalue: 'REPLACE_WITH_VALUE'
-			};
+			var google_tag_params = { ecomm_prodid: 'REPLACE_WITH_VALUE', ecomm_pagetype: 'REPLACE_WITH_VALUE', ecomm_totalvalue: 'REPLACE_WITH_VALUE' };
 		</script>
 		<script type="text/javascript">
 			/* <![CDATA[ */
@@ -509,18 +479,5 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 				<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/968745904/?value=0&amp;guid=ON&amp;script=0"/>
 			</div>
 		</noscript>
-
-		<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/quiz/jquery.screwdefaultbuttonsV2.js"></script>
-		<script>
-		$( document).ready(function(e) {
-			$(function(){
-				$('input:radio').screwDefaultButtons({
-					image: 'url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/quiz/radio.png")',
-					width: 17,
-					height: 17
-				});
-			});
-		});
-		</script>
 	</body>
-</html>
+</html>  

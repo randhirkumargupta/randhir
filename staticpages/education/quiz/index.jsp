@@ -3,7 +3,7 @@
 	<head>
     <link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>
     <title>Back to basics Quiz: Are you an all-rounder and remember everything that was taught in school?</title>
-    
+
 		<script>
 window._newsroom = window._newsroom || [];
 !function (e, f, u) {
@@ -13,8 +13,8 @@ f.parentNode.insertBefore(e, f);
 }(document.createElement('script'),
 document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indiatoday/newsroom.js');
 </script>
-  
-  
+
+
 		<meta charset="utf-8">
 		<meta name="keywords" content="Back to basics Quiz: Are you an all-rounder and remember everything that was taught in school?" />
 		<meta name="description" content="Education Today brings to you a series of quizzes to check everything from the words of nursery rhymes to the conversations in mathematics, that was taught at school. The 'Back to basics' quiz takes you back to school!">
@@ -22,7 +22,7 @@ document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indi
 		<meta name="og:description" content="Education Today brings to you a series of quizzes to check everything from the words of nursery rhymes to the conversations in mathematics, that was taught at school. The 'Back to basics' quiz takes you back to school!" />
 		<meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/quiz/i-quizz-band.png">
 		<meta property="og:url" content="http://indiatoday.intoday.in/education/quiz/">
-	
+
 		<link href="../css/style-sheet.css" rel="stylesheet" type="text/css">
 		<style>
 			body{ background:#FFFFFF;}
@@ -38,8 +38,8 @@ document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indi
 			.fixed-r { position: fixed!Important; top: 10px !Important; }
 			.fix-r { position: fixed!Important; top: 160px !Important; }
 		</style>
-		<link rel="canonical" href="/education/quiz/" /> 
-        
+		<link rel="canonical" href="/education/quiz/" />
+
 <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
 <script>
   var googletag = googletag || {};
@@ -49,14 +49,14 @@ document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indi
 <script>
   googletag.cmd.push(function() {
     googletag.defineSlot('/1007232/Indiatoday_ROS_DesktopMasthead_728x90', [728, 90], 'div-gpt-ad-1507120650515-0').addService(googletag.pubads());
-    googletag.defineSlot('/1007232/Indiatoday_ROS_Desktop_ATF_300x250', [300, 250], 'div-gpt-ad-1507120650515-1').addService(googletag.pubads());    
+    googletag.defineSlot('/1007232/Indiatoday_ROS_Desktop_ATF_300x250', [300, 250], 'div-gpt-ad-1507120650515-1').addService(googletag.pubads());
     googletag.defineSlot('/1007232/Indiatoday_ROS_Desktop_BTF_300x250', [300, 250], 'div-gpt-ad-1507120650515-3').addService(googletag.pubads());
     googletag.defineSlot('/1007232/Indiatoday_ROS_Desktop_BTF_728x90', [728, 90], 'div-gpt-ad-1507120650515-4').addService(googletag.pubads());
-	
-	
+
+
 	googletag.pubads().setTargeting('category', ['Education','Educationquiz-Home']);
-	
-	
+
+
     googletag.pubads().enableSingleRequest();
     googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
@@ -72,15 +72,15 @@ function zd_get_placements(){
  p1270_2 = zmt_mtag.zmt_get_placement("zt_1270_2", "1270", "2" , "2044" , "31" , "2" ,"1", "1");
 
  zmt_mtag.zmt_set_async();
- zmt_mtag.zmt_load(zmt_mtag); 
-} 
-</script> 
+ zmt_mtag.zmt_load(zmt_mtag);
+}
+</script>
 <script type="text/javascript" src="https://saxp.zedo.com/sclient/tt3/fmos.js" async ></script>
 
- 
+
 	</head>
 	<body>
-		
+
 <style>
 #headerblock h1{background:url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/logo.png") no-repeat scroll center center rgba(0, 0, 0, 0) !important}
 </style>
@@ -110,12 +110,12 @@ function zd_get_placements(){
 
 
 <div class="ad" style="width:1003px; margin:0 auto; text-align:center;">
-				
-                
 
-<!-- begin ZEDO for channel:- IT RichMedia Ros, Publisher: India Today, Ad Dimension: Page Pusher 1x1-1x1 --> 
- <div id="zt_1270_2" style="display:show"> 
- <script id="zt_1270_2" language="javascript"> 
+
+
+<!-- begin ZEDO for channel:- IT RichMedia Ros, Publisher: India Today, Ad Dimension: Page Pusher 1x1-1x1 -->
+ <div id="zt_1270_2" style="display:show">
+ <script id="zt_1270_2" language="javascript">
 
 if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined')
 {
@@ -125,10 +125,10 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
  </div>
  <!-- end ZEDO for channel: - IT RichMedia Ros, Publisher: India Today, Ad Dimension: Page Pusher 1x1-1x1 -->
 
-                
-   
 
-				
+
+
+
 				</div>
 
 <div id="itlinks">
@@ -138,15 +138,15 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
     </div>
 	<div id="headerblock">
         	<div style="margin-bottom:15px; height:108px;">
-            
-			
-            
+
+
+
            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/logo.png" usemap="#Map" style="margin-top:15px;">
             <map name="Map">
               <area shape="rect" coords="35,2,187,31" href="http://indiatoday.intoday.in/">
-              <area shape="rect" coords="1,34,219,78" href="/education">
+              <area shape="rect" coords="1,34,219,78" href="http://indiatoday.intoday.in/education/">
             </map>
-            
+
             <div class="topad">
             	<div class="adtext">Advertisement</div>
                 <div class="ad">
@@ -156,16 +156,16 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-0'); });
 </script></div></div>
             </div>
-            
+
             <div class="clear"></div>
-        </div>    
+        </div>
         <div>
 		<div class="lft homeimg" style="height:31px;"><a href="http://indiatoday.intoday.in/education/" title="Home"><img src="http://indiatoday.intoday.in/education/images/home-icon.png" width="40" height="38" border="0"></a></div>
         <div id="topNav">
         	<ul>
                 <li><a href="/education/526.html" title="News">News</a></li>
-                <li><a href="/education/527.html" title="Results Notification">Notification</a></li>   
-				
+                <li><a href="/education/527.html" title="Results Notification">Notification</a></li>
+
 				<li style="position: relative;">
               		<a href="/education/quiz/" title="Quiz">
               			<i class="icon">
@@ -173,7 +173,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-0');
               			</i>Quiz
               		</a>
               	</li>
-                
+
               	<li style="position: relative;">
               		<a href="http://indiatoday.intoday.in/education/careermatch/" title="Career Match">
               			<i class="icon">
@@ -181,8 +181,8 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-0');
               			</i>Career Match
               		</a>
               	</li>
-              	
-				<li><a href="/education/734.html" title="Government Jobs">Government Jobs</a></li>                      
+
+				<li><a href="/education/734.html" title="Government Jobs">Government Jobs</a></li>
               	<li class="last"><a href="/education/908.html" title="Current Affairs"><i class="icon">
               				<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/learntoday/careermatch/image/new.png" width="25" height="19" />
               			</i>Current Affairs</a></li>
@@ -195,9 +195,9 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-0');
 				</form>
             </div>
             <div class="clear"></div>
-        </div>  
+        </div>
         <div class="clear"></div>
-       
+
          <script>
  	function validatesearch(modsearch)
 	{
@@ -223,11 +223,11 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-0');
 		return true;
 	}
  </script>
- 
-         
-        </div>     
-               
-</div> 
+
+
+        </div>
+
+</div>
  <!-- Begin comScore Tag -->
 <script >
   var _comscore = _comscore || [];
@@ -256,16 +256,16 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-0');
 		<div id="wrapper">
 			<div id="leftrightads" style="display: block; left:1;">
 				<div class="leftad">
-					
+
 				</div>
 				<div class="rightad">
-					
-				</div>              
+
+				</div>
 			</div>
 			<section class="main">
 				<section class="left">
 					<ul>
-						
+
 <style>
 	.topheader1 { background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/Left.png) left top no-repeat;}
 	.topheader1 a {color:#fff; text-shadow: 1px 1px 0 #000;}
@@ -310,18 +310,18 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-0');
 		</div>
 	</div>
 	<div class='clr'></div>
-</div>      
+</div>
 
 
-               
+
 
 					</ul>
 				</section>
-				
+
 <section class="right">
 	<div class="ad rightmargin">
 		<div class="adtext">Advertisement</div>
-		
+
 			<!-- /1007232/Indiatoday_ROS_Desktop_ATF_300x250 -->
 <div id='div-gpt-ad-1507120650515-1' style='height:250px; width:300px;'>
 <script>
@@ -329,11 +329,11 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-1');
 </script>
 </div>
 			<div style="margin-top:0px">
-			
+
 			</div>
-		
+
 	</div>
-            
+
     <div class="rightmargin">
      	<p class="blueheader">STAY CONNECTED WITH US ON</p>
         <a title="Facebook" rel="nofollow" target="_blank" href="http://www.facebook.com/indiatoday"><span class="fb-icon"></span></a>
@@ -343,19 +343,19 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-1');
         <a title="RSS" rel="nofollow" target="_blank" href="http://indiatoday.intoday.in/education/rssFeed.jsp"><span class="rss-icon"></span></a>
         <a title="Mobile" rel="nofollow" target="_blank" href="http://m.indiatoday.in/"><span class="mobile-icon"></span></a>
         <a title="Live TV" target="_blank" href="http://indiatoday.intoday.in/livetv.jsp"><span class="tv-icon"></span></a>
-        <div class="clear"></div>	
+        <div class="clear"></div>
     </div>
 	<div class="clr"></div>
     <script type='text/javascript'>ajaxinclude('../newsletter.jsp')</script>
-    <div style="margin-top:30px;"></div> 
-    <div class="clr"></div>                  
+    <div style="margin-top:30px;"></div>
+    <div class="clr"></div>
     <div class="clr"></div>
     <div class="boxshadow_300">
-		<div class="boxcont">               
+		<div class="boxcont">
 			<div class="topheader">India's Best B-Schools</div>
 			<div class="topheader-arrow"></div>
 			<div class="clr"></div>
-			
+
 
 
 
@@ -375,18 +375,14 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-1');
 
 
 
-			<div class="clr"></div> 
+			<div class="clr"></div>
 		</div>
 	</div>
-    
-
-
-
-<div class="boxshadow_300">   <div class="boxcont">     <div class="topheader online-t">Online Courses</div>     <div class="topheader-arrow"></div>     <div class="clr"></div>     <div class="mag8in">       <div class="imgbox">         <div> <a href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" mce_href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/Become-a-TV-News-Anchor_200_88.jpg" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/Become-a-TV-News-Anchor_200_88.jpg" title="" alt="" class="imgrepeat" border="0"></a></div>         <div class="clr"></div>         <div class="caption"><a href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" mce_href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" target="_blank">AAj Tak TV anchoring one day workshop</a></div>       </div>       <div class="imgbox">         <div> <a href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" mce_href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/HTML5_200_88.jpg" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/HTML5_200_88.jpg" title="" alt="" class="imgrepeat" border="0"> </a></div>         <div class="clr"></div>         <div class="caption"><a href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" mce_href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" target="_blank">Become a HTML5 Developer</a></div>       </div>       <div class="imgbox">         <div> <a href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" mce_href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/thumb_200_88.jpg" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/thumb_200_88.jpg" title="" alt="" class="imgrepeat" border="0"></a></div>         <div class="clr"></div>         <div class="caption"><a href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" mce_href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" target="_blank">Become an online Content Writer</a></div>       </div>       <div class="clr"></div>       <div class="clr"></div>       <div class="more"><a href="http://www.learntoday.in/courses?source=eduportal" target="_blank">more...</a></div>     </div>     <div class="clr"></div>   </div> </div> 
 
 
 
 
+<div class="boxshadow_300">   <div class="boxcont">     <div class="topheader online-t">Online Courses</div>     <div class="topheader-arrow"></div>     <div class="clr"></div>     <div class="mag8in">       <div class="imgbox">         <div> <a href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" mce_href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/Become-a-TV-News-Anchor_200_88.jpg" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/Become-a-TV-News-Anchor_200_88.jpg" title="" alt="" class="imgrepeat" border="0"></a></div>         <div class="clr"></div>         <div class="caption"><a href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" mce_href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" target="_blank">AAj Tak TV anchoring one day workshop</a></div>       </div>       <div class="imgbox">         <div> <a href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" mce_href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/HTML5_200_88.jpg" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/HTML5_200_88.jpg" title="" alt="" class="imgrepeat" border="0"> </a></div>         <div class="clr"></div>         <div class="caption"><a href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" mce_href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" target="_blank">Become a HTML5 Developer</a></div>       </div>       <div class="imgbox">         <div> <a href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" mce_href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/thumb_200_88.jpg" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/thumb_200_88.jpg" title="" alt="" class="imgrepeat" border="0"></a></div>         <div class="clr"></div>         <div class="caption"><a href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" mce_href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" target="_blank">Become an online Content Writer</a></div>       </div>       <div class="clr"></div>       <div class="clr"></div>       <div class="more"><a href="http://www.learntoday.in/courses?source=eduportal" target="_blank">more...</a></div>     </div>     <div class="clr"></div>   </div> </div>
 
 
 
@@ -398,13 +394,17 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-1');
 
 
 
-	<div class="clr"></div> 
+
+
+
+
+	<div class="clr"></div>
     <div class=" boxshadow_300_even">
 		<div class="boxcont">
 			<div class="topheader">India's Best Colleges</div>
 			<div class="topheader-arrow"></div>
 			<div class="clr"></div>
-			
+
 
 
 
@@ -440,7 +440,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-3');
 </section>
 				<div class="clr"></div>
 			</section>
-			
+
 <footer>
 <div style="margin-bottom:10px;" align="center">
 
@@ -450,13 +450,13 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-3');
 googletag.cmd.push(function() { googletag.display('div-gpt-ad-1507120650515-4'); });
 </script>
 </div>
-				
-                
-                
- <!-- Ad Slot 1 tag: --> 
- <!-- begin ZEDO for channel:- IT RichMedia Ros, Publisher: India Today, Ad Dimension: Overlay 1x1-1x1 --> 
- <div id="zt_1270_1" style="display:show"> 
- <script id="zt_1270_1" language="javascript"> 
+
+
+
+ <!-- Ad Slot 1 tag: -->
+ <!-- begin ZEDO for channel:- IT RichMedia Ros, Publisher: India Today, Ad Dimension: Overlay 1x1-1x1 -->
+ <div id="zt_1270_1" style="display:show">
+ <script id="zt_1270_1" language="javascript">
 
 if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined')
 {
@@ -464,7 +464,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 }
  </script>
  </div>
- <!-- end ZEDO for channel: - IT RichMedia Ros, Publisher: India Today, Ad Dimension: Overlay 1x1-1x1 --> 
+ <!-- end ZEDO for channel: - IT RichMedia Ros, Publisher: India Today, Ad Dimension: Overlay 1x1-1x1 -->
 
 </div>
 
@@ -476,17 +476,17 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
         <div id="footer">
                 <iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/common_it_footer.html"></iframe>
 <div class="clear"></div>
-                
+
 				<div class="clear"></div>
-                
+
             </div>
         </footer>
 				<script type='text/javascript' src='http://indiatoday.intoday.in/education/js/ajaxfunction.js' ></script>
 
-		
+
         <script type="text/javascript" src="http://indiatoday.intoday.in/education/js/jquery.scroll.min.js"></script>
         <script type="text/javascript" src="http://indiatoday.intoday.in/education/js/common.js"></script>
-		
+
 
 		</div>
 		<script type="text/javascript">

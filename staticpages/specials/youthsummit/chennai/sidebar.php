@@ -208,9 +208,9 @@
     <div class="clear profilediv"></div>
   </div>
   <!--<div class="profile">
-      <a href="http://indiatoday.intoday.in/specials/youthsummit/chennai/Sushil-Kumar.jsp"><img src="/staticpages/specials/youthsummit/chennai/images/Sushil-Kumar_50.jpg" width="50" height="50" alt="Sushil Kumar" title="Sushil Kumar" border="0" align="middle"></a>
+      <a href="/specials/youthsummit/chennai/Sushil-Kumar.jsp"><img src="/staticpages/specials/youthsummit/chennai/images/Sushil-Kumar_50.jpg" width="50" height="50" alt="Sushil Kumar" title="Sushil Kumar" border="0" align="middle"></a>
 <div class="proright">
-            <div class="name"> <a href="http://indiatoday.intoday.in/specials/youthsummit/chennai/Sushil-Kumar.jsp">KBC 5 winner</a></div>
+            <div class="name"> <a href="/specials/youthsummit/chennai/Sushil-Kumar.jsp">KBC 5 winner</a></div>
       <div class="profilebyline">Sushil Kumar</div>
 <div class="profiletext">
                 Winner of Kaun Banega Crorepati 
@@ -219,7 +219,7 @@
         <div class="clear profilediv"></div> 
 </div>-->
   <!--<div class="profile">
-    <div class="name"><a target="_blank" href="http://indiatoday.intoday.in/specials/youthsummit/chennai/speakers.jsp">Click for More Speaker Profiles.</a></div>
+    <div class="name"><a target="_blank" href="/specials/youthsummit/chennai/speakers.jsp">Click for More Speaker Profiles.</a></div>
     <div class="clear profilediv"></div>
   </div>-->
 </div>
