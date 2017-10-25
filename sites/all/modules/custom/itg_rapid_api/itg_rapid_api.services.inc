@@ -5483,7 +5483,14 @@ function follow_anchor_responce($token, $user_id, $node_id) {
     $user_id = $user_load->uid;
     $authtoken_id = $params['authtoken_id'];
     $author_id = $anchor_id = $params['anchor_id'];
-    $type = $params['type'];
+    $isfollow = $params['isfollow'];
+    if($isfollow == 1){
+        $type = "follow_story";
+    }
+    else{
+        $type = "Unfollow";
+    }
+    
     $message_array = array();
     //p($params);die();
 
@@ -5546,7 +5553,14 @@ function follow_author_responce($token, $user_id, $node_id) {
     $user_id = $user_load->uid;
     $authtoken_id = $params['authtoken_id'];
     $author_id = $params['author_id'];
-    $type = $params['type'];
+    $isfollow = $params['isfollow'];
+    if($isfollow == 1){
+        $type = "follow_story";
+    }
+    else{
+        $type = "Unfollow";
+    }
+
     
     $message_array = array();
 
