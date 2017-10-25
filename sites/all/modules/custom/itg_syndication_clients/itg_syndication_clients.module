@@ -125,6 +125,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_education_rss_article.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss/it-latest-issue'] = array(
+    'page callback' => 'itg_rss_it_latest_issue_article',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_it_latest_issue_article.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -202,6 +208,11 @@ function itg_syndication_clients_cronapi($op, $job = NULL) {
     'description' => 'Syndication Scribd Latest issue cron.',
     'callback' => 'itg_scribd_feed_latest_issue',
     'file' => 'inc/itg_scribd_latest_issue.inc',
+  );
+  $items['itg-it-latest-issue-cron'] = array(
+    'description' => 'Syndication IT Latest issue cron.',
+    'callback' => 'itg_rss_it_latest_issue_article',
+    'file' => 'inc/itg_rss_it_latest_issue_article.inc',
   );
   return $items;
 }
