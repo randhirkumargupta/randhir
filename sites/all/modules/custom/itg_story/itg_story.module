@@ -1158,7 +1158,6 @@ function itg_story_photo_amp_html($node) {
 
       $entity_obj = entity_load('field_collection_item', array($val['value']));
       $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-
       $photo_story_img = image_style_url('photo_story_771x432', $photo_story_img_path);
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
@@ -1166,11 +1165,17 @@ function itg_story_photo_amp_html($node) {
       if (function_exists('itg_story_get_image_info')) {
         $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
       }
+      $photo_story_src_set = '';
+      if (!empty($photo_story_img_path)) {
+        $photo_image_uri = file_create_url($photo_story_img_path);
+        $photo_image_data = getimagesize($photo_image_uri);
+        $photo_story_src_set = $photo_image_uri . ' ' . $photo_image_data[0] . 'w';
+      }
       $html .='<div class="slide"><div class="photo-slide"><amp-img src="' . $photo_story_img . '?image=' . $i . '"
       width="771"
       height="432"
       layout="responsive"
-      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
+      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '" srcset="'.$photo_story_src_set.'"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
       <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><amp-fit-text>' . $photo_story_desc . '</amp-fit-text></div>';
       $i++;
     }
@@ -1200,11 +1205,17 @@ function itg_story_photo_amp_bottom_html($node) {
       $photo_story_file_name = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['filename'];
       $photo_story_img_title = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
+      $photo_story_src_set = '';
+      if (!empty($photo_story_img_path)) {
+        $photo_image_uri = file_create_url($photo_story_img_path);
+        $photo_image_data = 88;
+        $photo_story_src_set = ', ' . $photo_image_uri . ' ' . $photo_image_data . 'w';
+      }
       $html .= '<button on="tap:carousel-with-preview.goToSlide(index=' . $index . ')">
       <amp-img src="' . $photo_story_img . '?image=' . $slide . '"
         width="88"
         height="66"
-       alt="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><span class="counter">' . $slide . '</span>
+       alt="' . $photo_story_img_title . '" srcset="'.$photo_story_src_set.'"><div fallback>offline</div></amp-img><span class="counter">' . $slide . '</span>
     </button>';
       $index++;
       $slide++;
