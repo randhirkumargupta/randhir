@@ -557,14 +557,14 @@ function itgadmin_js_alter(&$javascript) {
   }*/
   
   /* group for colorbox js */
- $unset_array = array('mydraft-story', 'itg-menu-manager', 'in-queue-story', 'published-story', 'expired-story', 'unpublished-story', 'archive-story', 'ugc-published-story');
-  if(in_array($arg[0], $unset_array)) {
-  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
-  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
-  unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
-  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
-  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
-  unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
- }
+// $unset_array = array('mydraft-story', 'itg-menu-manager', 'in-queue-story', 'published-story', 'expired-story', 'unpublished-story', 'archive-story', 'ugc-published-story');
+//  if(in_array($arg[0], $unset_array)) {
+//  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+//  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
+//  unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
+//  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
+//  unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
+//  unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
+// }
 }
 
