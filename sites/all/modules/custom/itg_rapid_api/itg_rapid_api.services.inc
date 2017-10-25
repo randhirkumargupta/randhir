@@ -6132,6 +6132,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
   foreach ($data as $key => $value) {
       if($value['nid']){
           $node_data = node_load($value['nid']);
+          p($node_data);die();
           if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
             $a_id = $node_data->nid;
             $a_title = $node_data->title;
