@@ -40,21 +40,21 @@
 <!-- disable iPhone inital scale -->
 <meta name="viewport" content="width=device-width; initial-scale=1.0" />
 <link href="/staticpages/css/homepage-new.css" type="text/css" rel="stylesheet" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' />
 
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> 
-<![endif]-->  
-<!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- css3-mediaqueries.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
 <link href="/staticpages/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
 <link href="/staticpages/css/responsive.css" type="text/css" rel="stylesheet" />
-<link rel="canonical" href="http://indiatoday.intoday.in/" /> 
+<link rel="canonical" href="http://indiatoday.intoday.in/" />
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
 <link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.indiatoday.in" />
 <script type="text/javascript">
@@ -69,7 +69,7 @@ function canonicalUrlRedirection() {
 		}
 		if (canonicalUrl != "") {
 			window.location.href = canonicalUrl;
-		
+
 	}
 }
 var redirectagent=navigator.userAgent.toLowerCase();
@@ -91,15 +91,15 @@ canonicalUrlRedirection();
 $(document).ready(function(e) {
     	setTimeout(function(){
 		$('#newsflash').html('<iframe width="300" style="margin-bottom:10px; padding-bottom:10px;" scrolling="no" height="341" frameborder="0" id="livetv_video1" allowfullscreen="" src="http://indiatoday.intoday.in/chunk_liveblog.jsp"></iframe>');
-		},5000);	
+		},5000);
 });
 </script>
-<style type="text/css"> 
+<style type="text/css">
 img{
 filter: grayscale(100%);
--webkit-filter: grayscale(100%); 
+-webkit-filter: grayscale(100%);
 -moz-filter: grayscale(100%);
--ms-filter: grayscale(100%); 
+-ms-filter: grayscale(100%);
 -o-filter: grayscale(100%);
 filter: url(#greyscale);
 filter: gray;
@@ -107,9 +107,9 @@ filter: gray;
 }
 
 img:hover,.rightad img,.leftad img,#top_ad img, .color-chunk, .htl-logo img, .logoit-holi img,#busleft img,#busright img, .top-box img {filter: grayscale(0);
--webkit-filter: grayscale(0); 
+-webkit-filter: grayscale(0);
 -moz-filter: grayscale(0);
--ms-filter: grayscale(0); 
+-ms-filter: grayscale(0);
 -o-filter: grayscale(0);
 filter: none;
 }
@@ -129,7 +129,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 .logoit-holi { float:left;}
 </style>
 
-<div class="redborder"> 
+<div class="redborder">
 <header>
 
 <div class="htl-logo" id="top-ad">
@@ -155,7 +155,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="section/114/1/india.html" >India</a></h2>
 <div  class="lifestyle india_bb"><div class='life-news'><a href="http://indiatoday.intoday.in/story/j-jayalalithaa-tamil-nadu-chief-minister-chennai-railway-station-blast-police/1/358465.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/jayalalithaa_167_050114115629.jpg'>Jayalalithaa condemns twin blasts at Chennai station</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/rapes-kerala-rape-case-kerala-pastor-sajan-mathai-minor-girl-kerala-church-scandal-ranni-mundakkayam-police/1/358464.html"><img width='167' height='133' title='Rapes' alt='Rapes' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rape_stry_167_050114115009.jpg'>Pastor arrested for raping minor girl in Kerala</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/special-team-to-probe-explosions-tamil-nadu-police-chief/1/358445.html"><img width='167' height='133' title='Police have mounted a massive search operation in all the trains following the blast incident.' alt='Police have mounted a massive search operation in all the trains following the blast incident.' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/chennai-3-_167_050114102435.jpg'>Special team to probe explosions: Tamil Nadu police chief</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/twin-blasts-at-chennai-central-station-bangalore-guwahati-express-platform-9/1/358436.html"><img width='167' height='133' title='The explosions took place in the Bangalore-Guwahati Express on platform 9.' alt='The explosions took place in the Bangalore-Guwahati Express on platform 9.' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/chennai-new-story_167_050114112617.jpg'>Two suspects detained for Chennai station blasts</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/breaking-news-coverage-on-india-today-on-may-1-2014/1/358435.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/it-top-nav-logo.png'>Tamil Nadu Police nab a suspect who was hiding inside Guwahati Express</a></div></div>
- 
+
 
 
 </li>
@@ -163,7 +163,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="section/113/1/world.html" >World</a></h2>
 <div  class="lifestyle world_bb"><div class='life-news'><a href="http://indiatoday.intoday.in/story/mad-magazines-al-feldstein-dies-at-88/1/358457.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/al_story_167_050114111606.jpg'>Mad magazine&apos;s Al Feldstein dies at 88</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/-terrorism-gen-raheel-sharif-army-chief-jugular-vein-of-pakistan-unsc-pakistan-kashmir/1/358453.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gen-raheel-sharif_167_050114110049.jpg'>Kashmir our jugular vein, says Pak army chief</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/bomb-evacuation-us-school-police-san-antonio-weapon-campus/1/358446.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/tomball-high-school_167_050114103703.jpg'>Bomb threat causes evacuation in US school</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/china-attack-three-killed-79-injured-in-attack-at-train-station/1/358429.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/china_167_050114063100.jpg'>Three killed, 79 injured in attack at train station in China</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/spin-cycle-astronomers-detect-distant-planet-that-whirls-madly/1/358417.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/it-top-nav-logo.png'>Spin cycle: Astronomers detect distant planet that whirls madly</a></div></div>
- 
+
 
 
 </li>
@@ -171,7 +171,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="videos" >Videos</a></h2>
 <div  class="lifestyle video_bb"><div class='life-news'><a href='http://indiatoday.intoday.in/video/gen-raheel-sharif-army-chief-jugular-vein-of-pakistan-unsc-pakistan-kashmir/1/358460.html'><div style='position:relative; padding-left:13px; float:left;'><img width='167' height='133' title='' alt=''  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gen-raheel-sharif_179_050114112125.jpg'><img class='vidsorry' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video-icon-small.png'></div>Kashmir our jugular vein, says Pak army chief</a></div><div class='life-news'><a href='http://indiatoday.intoday.in/video/chennai-railway-station-blast-guwahati-bangalore-express-train-passenger-express-train/1/358443.html'><div style='position:relative; padding-left:13px; float:left;'><img width='167' height='133' title='' alt=''  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/chennai-blast---video_179-2_050114100706.jpg'><img class='vidsorry' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video-icon-small.png'></div>Twin blasts at Chennai railway station, 1 killed</a></div><div class='life-news'><a href='http://indiatoday.intoday.in/video/election-express-caste-equations-in-hajipur/1/358433.html'><div style='position:relative; padding-left:13px; float:left;'><img width='167' height='133' title='' alt=''  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/caste_179_050114070204.jpg'><img class='vidsorry' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video-icon-small.png'></div>Election Express: Caste equations in Hajipur</a></div><div class='life-news'><a href='http://indiatoday.intoday.in/video/election-express-when-the-night-is-still-young/1/358432.html'><div style='position:relative; padding-left:13px; float:left;'><img width='167' height='133' title='' alt=''  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ee_179_050114070947.jpg'><img class='vidsorry' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video-icon-small.png'></div>Election Express: When the night is still young</a></div><div class='life-news'><a href='http://indiatoday.intoday.in/video/i-am-supporting-modi-for-development-says-paswan-election-express/1/358431.html'><div style='position:relative; padding-left:13px; float:left;'><img width='167' height='133' title='' alt=''  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/paswan_179_050114065432.jpg'><img class='vidsorry' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/video-icon-small.png'></div>I am supporting Modi for development, says Paswan</a></div></div>
- 
+
 
 
 </li>
@@ -179,7 +179,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="galleries" >Photos</a></h2>
 <div  class="lifestyle photo_bb"><div class='life-news'><a href='http://indiatoday.intoday.in/gallery/kings-xi-punjab-beat-kolkata-knight-riders-in-low-scoring-ipl-7-tie/1/11638.html'><div style='position:relative; padding-left:13px; float:left'><img width='167' height='133' title='Kings XI Punjab beat Kolkata by 23 runs in low-scoring tie' alt='Kings XI Punjab beat Kolkata by 23 runs in low-scoring tie'  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/4-thumb_179_042614114551.jpg'><img class='mediaimg' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png'></div>Kings XI Punjab beat Kolkata by 23 runs in low-scoring tie</a></div><div class='life-news'><a href='http://indiatoday.intoday.in/gallery/guwahati-express-blasts-chennai-railway-station-blasts-ied-home-ministry-railway-ministry/1/11662.html'><div style='position:relative; padding-left:13px; float:left'><img width='167' height='133' title='Twin blasts rock Guwahati Express at Chennai station' alt='Twin blasts rock Guwahati Express at Chennai station'  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/chennai_new-7-_210_050114103933.jpg'><img class='mediaimg' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png'></div>Twin blasts rock Guwahati Express at Chennai station</a></div><div class='life-news'><a href='http://indiatoday.intoday.in/gallery/election-express-live-patna-bihar-gaya-dhanbad/1/11657.html'><div style='position:relative; padding-left:13px; float:left'><img width='167' height='133' title='Election Express heads to Patna' alt='Election Express heads to Patna'  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ee1_179_043014120538.jpg'><img class='mediaimg' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png'></div>Election Express heads to Patna</a></div><div class='life-news'><a href='http://indiatoday.intoday.in/gallery/elections-2014-7th-phase-of-lok-sabha-polls-gujarat-bihar-punjab-uttar-pradesh-andhra-pradeshs-west-bengal-j-k-polls/1/11656.html'><div style='position:relative; padding-left:13px; float:left'><img width='167' height='133' title='Voting photos: From Punjab to Bihar, Gujarat to UP' alt='Voting photos: From Punjab to Bihar, Gujarat to UP'  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/bihar_voters-_210_043014112927.jpg'><img class='mediaimg' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png'></div>Voting photos: From Punjab to Bihar, Gujarat to UP</a></div><div class='life-news'><a href='http://indiatoday.intoday.in/gallery/lalu-prasad-yadav-calls-narendra-modi-an-executioner/1/11661.html'><div style='position:relative; padding-left:13px; float:left'><img width='167' height='133' title='Lalu calls Modi an executioner' alt='Lalu calls Modi an executioner'  src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/photo2_179_043014105924.jpg'><img class='mediaimg' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png'></div>Lalu calls Modi an executioner</a></div></div>
- 
+
 
 
 </li>
@@ -187,7 +187,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="section/214/1/cricket.html" >Cricket</a></h2>
 <div  class="lifestyle cricket_bb"><div class='life-news'><a href="http://indiatoday.intoday.in/story/mi-vs-srh-mumbai-end-horrible-uae-leg-with-5th-defeat-in-a-row/1/358415.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/mumbai_167_050114011601.jpg'>MI vs SRH: Mumbai end horrible UAE leg with 5th defeat in a row</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/mumbai-indians-vs-sunrisers-hyderabad-mivssrh-preview-ipl-7/1/358263.html"><img width='167' height='133' title='Picture for representational purposes only' alt='Picture for representational purposes only' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/mumbai_167_041614022549_043014081412.jpg'>Match preview: Mumbai Indians look to end winless run</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/ipl-2014-live-score-kolkata-knight-riders-vs-rajasthan-royals-match-19-abu-dhabi/1/358218.html"><img width='167' height='133' title='RR & KKR logos' alt='RR & KKR logos' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rr-vs-kkr_167_042914065847.jpg'>Rajasthan clinch Super Over thriller against Kolkata in IPL 7</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/knight-riders-keen-to-reverse-form/1/358091.html"><img width='167' height='133' title='Kolkata Knight Riders captain Gautam Gambhir' alt='Kolkata Knight Riders captain Gautam Gambhir' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gautam-gambhir-story-10_167_042914091945.jpg'>Match preview: Knight Riders keen to reverse form</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/ipl-spot-fixing-scandal/1/358170.html"><img width='167' height='133' title='N. Srinivasan. PTI' alt='N. Srinivasan. PTI' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/srini+pti+story_167_042914031552.jpg'>IPL spot-fixing scandal: BCCI opposes probe by Mudgal panel, SC reserves its order</a></div></div>
- 
+
 
 
 </li>
@@ -195,7 +195,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="section/67/1/movies.html" >Movies</a></h2>
 <div  class="lifestyle movies_bb"><div class='life-news'><a href="http://indiatoday.intoday.in/story/bhoothnath-returns-now-tax-free-in-uttar-pradesh/1/358466.html"><img width='167' height='133' title='Still from Bhoothnath Returns' alt='Still from Bhoothnath Returns' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/amitabh-167_050114114852.jpg'>Bhoothnath Returns now tax free in Uttar Pradesh</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/sonam-kapoor-khoobsurat-to-release-sep-19/1/358461.html"><img width='167' height='133' title='Sonam Kapoor' alt='Sonam Kapoor' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sonam-kapoor_167_050114114024.jpg'>Sonam Kapoor&apos;s Khoobsurat to release Sep 19</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/salman-khan-akshay-kumar-in-fugly-title-track/1/358369.html"><img width='167' height='133' title='Salman Khan and Akshay Kumar in a still from the song' alt='Salman Khan and Akshay Kumar in a still from the song' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/fugly_167_043014045651.jpg'>Watch: Salman, Akshay share screen space in Fugly title track</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/sonakshi-sinha-shah-rukh-khan-sonam-kapoor-facebook-10-million/1/358352.html"><img width='167' height='133' title='SRK-Sonakshi-Sonam' alt='SRK-Sonakshi-Sonam' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sona_167_043014033249.jpg'>Sonakshi beats SRK, Sonam on Facebook, gets 10 million likes</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/saif-ritiesh-and-ram-kapoor-don-female-avatar-for-humshakals/1/358309.html"><img width='167' height='133' title='Still from Humshakals' alt='Still from Humshakals' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/humshakal_167_043014124725.jpg'>Saif, Ritiesh and Ram Kapoor don female avatar for Humshakals</a></div></div>
- 
+
 
 
 </li>
@@ -203,15 +203,15 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="section/230/1/auto.html" >Auto</a></h2>
 <div  class="lifestyle auto_bb"><div class='life-news'><a href="http://indiatoday.intoday.in/story/google-driverless-cars-are-mastering-city-streets/1/358177.html"><img width='167' height='133' title='Google driverless car' alt='Google driverless car' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/driverlesscar--story_167_042914034659.jpg'>Google&apos;s driverless cars are mastering city streets</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/honda-launches-activa-125/1/358011.html"><img width='167' height='133' title='Activa 125 launch' alt='Activa 125 launch' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/automaticscooter-story_167_042814054101.jpg'>Honda launches Activa 125, its first 125cc automatic scooter</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/manjeet-ral-nindy-kaur-rdb-singer-exclusive-interview-whistle-baja-heropanti-tamachey-pe-disco/1/356850.html"><img width='167' height='133' title='Manjeet Ral' alt='Manjeet Ral' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/manjeet_167_042114044552.jpg'>Manjeet Ral back again, to wow audience with Whistle Baja</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/audi-a3-declared-2014-world-car-of-the-year/1/356421.html"><img width='167' height='133' title='Audi A3' alt='Audi A3' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/audia3--story_167_041814051434.jpg'>Audi A3 declared 2014 world car of the year</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/maruti-to-recall-103311-units-of-ertiga-swift-dzire/1/355173.html"><img width='167' height='133' title='Maruti Suzuki India said the recall will impact 13,593 units of Ertiga.' alt='Maruti Suzuki India said the recall will impact 13,593 units of Ertiga.' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ertiga_167_041114033325.jpg'>Maruti to recall 1,03,311 units of Ertiga, Swift, DZire</a></div></div>
- 
 
 
-</li> 
+
+</li>
 <li class="sports_b " >
 
 <h2><a href="section/84/1/sports.html" >Sports</a></h2>
 <div  class="lifestyle sports_bb"><div class='life-news'><a href="http://indiatoday.intoday.in/story/mi-vs-srh-mumbai-end-horrible-uae-leg-with-5th-defeat-in-a-row/1/358415.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/mumbai_167_050114011601.jpg'>MI vs SRH: Mumbai end horrible UAE leg with 5th defeat in a row</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/mumbai-indians-vs-sunrisers-hyderabad-mivssrh-preview-ipl-7/1/358263.html"><img width='167' height='133' title='Picture for representational purposes only' alt='Picture for representational purposes only' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/mumbai_167_041614022549_043014081412.jpg'>Match preview: Mumbai Indians look to end winless run</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/real-madrid-stuns-bayern-munich-4-0-storms-into-champions-league-final/1/358250.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ronaldo_167_043014025147.jpg'>Real Madrid storms into Champions League final</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/la-clippers-owner-donald-sterling-banned-for-life-by-nba/1/358245.html"><img width='167' height='133' title='Stiviano & Sterling' alt='Stiviano & Sterling' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sterling-167_043014124316.jpg'>LA Clippers owner Donald Sterling banned for life by NBA</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/ipl-2014-live-score-kolkata-knight-riders-vs-rajasthan-royals-match-19-abu-dhabi/1/358218.html"><img width='167' height='133' title='RR & KKR logos' alt='RR & KKR logos' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rr-vs-kkr_167_042914065847.jpg'>Rajasthan clinch Super Over thriller against Kolkata in IPL 7</a></div></div>
- 
+
 
 
 </li>
@@ -219,7 +219,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="section/103/1/lifestyle.html" >Lifestyle</a></h2>
 <div  class="lifestyle lifestyle_bb"><div class='life-news'><a href="http://indiatoday.intoday.in/story/alia-bhatt-turns-angel-for-animals-peta/1/358328.html"><img width='167' height='133' title='Alia Bhatt' alt='Alia Bhatt' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/alia-story_167_043014022408.jpg'>Alia Bhatt turns angel for PETA, promotes pet adoption</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/they-call-it-decolletage/1/358298.html"><img width='167' height='133' title='Kangana Ranaut' alt='Kangana Ranaut' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/30fir23-7_167_043014114958.jpg'>They call it decolletage</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/shruti-haasan-flaunts-bridal-look-on-harper-bazaar-cover/1/358221.html"><img width='167' height='133' title='Shruti Haasan' alt='Shruti Haasan' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/shruti_167_043014045410.jpg'>Shruti Haasan flaunts bridal look on Harper&apos;s Bazaar cover</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/eye-summer-care-summer-problems-galore-eye-care/1/358134.html"><img width='167' height='133' title='Eye care in summers' alt='Eye care in summers' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/29fir24-1_167_042914123324.jpg'>Eyeing summer with care</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/google-celebrates-ustaad-alla-rakhas-95th-birth-anniversary-with-tabla-doodle/1/358112.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/google_167_042914112152.jpg'>Google marks Ustad Alla Rakha&apos;s 95th birth anniversary with doodle</a></div></div>
- 
+
 
 
 </li>
@@ -227,7 +227,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="section/229/1/technology.html">Tech</a></h2>
 <div  class="lifestyle lifestyle_bb"><div class='life-news'><a href="http://indiatoday.intoday.in/story/google-to-replace-nexus-phones-with-android-silver/1/358358.html"><img width='167' height='133' title='Google Nexus 5' alt='Google Nexus 5' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/nexus5-story_167_043014035308.jpg'>Google to replace Nexus with Android Silver: Report</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/india-born-rajeev-suri-named-nokia-ceo/1/358248.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/nokia_167_042614092017_043014015741.jpg'>India-born Rajeev Suri named Nokia CEO</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/htc-one-m8-goes-on-sale-in-india/1/358220.html"><img width='167' height='133' title='New HTC One' alt='New HTC One' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/htcm8-story_167_042914070730.jpg'>New HTC One goes on sale in India, available for Rs 47,689</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/samsung-galaxy-k-zoom-launched/1/358115.html"><img width='167' height='133' title='Galaxy K Zoom' alt='Galaxy K Zoom' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/galaxy-k--story_167_042914113008.jpg'>The Galaxy K Zoom, Samsung&apos;s first selfie phone gets official</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/google-driverless-cars-are-mastering-city-streets/1/358177.html"><img width='167' height='133' title='Google driverless car' alt='Google driverless car' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/driverlesscar--story_167_042914034659.jpg'>Google&apos;s driverless cars are mastering city streets</a></div></div>
- 
+
 
 
 </li>
@@ -235,7 +235,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 
 <h2><a href="http://indiatoday.intoday.in/education/"  >Education</a></h2>
 <div  class="lifestyle edu_bb"><div class='life-news'><a href="http://indiatoday.intoday.in/story/wbscte-jexpo-2014-results-declared/1/358467.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/1328091810_education11_167_050114120400.jpg'>WBSCTE JEXPO 2014 Results declared</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/viteee-2014-results-top-10-rank-holders-are-boys/1/358440.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/education-one-liner_167_050114095921.jpg'>VITEEE 2014 results: Top 10 rank holders</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/viteee-2014-results-can-be-checked-online/1/358437.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/education_167_050114092427.jpg'>VITEEE 2014: Results declared</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/bangalore-university-to-introduce-four-year-undergraduate-program/1/358390.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/education_167_043014061657.jpg'>Bangalore University to introduce four-year undergraduate programme</a></div><div class='life-news'><a href="http://indiatoday.intoday.in/story/goa-university-2014-mca-admissions/1/358385.html"><img width='167' height='133' title='' alt='' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif' data-ak='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/news-1_167_043014060027.jpg'>Goa University 2014: MCA admissions</a></div></div>
- 
+
 
 
 </li>
@@ -254,13 +254,13 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 <div class="search-inner">
 <form action="http://indiatoday.intoday.in/advanced_search.jsp" method="get" name="searchform1" onsubmit="return validate1();" style="margin:0;padding:0;">
 <input name="option" value="com_search" type="hidden">
-<input type="text" class="input-box" name="searchword" id="mod_search_searchword"  value="Type Your search" onblur="if(this.value=='') this.value='Type Your search';" onfocus="if(this.value=='Type Your search') this.value='';"> 
+<input type="text" class="input-box" name="searchword" id="mod_search_searchword"  value="Type Your search" onblur="if(this.value=='') this.value='Type Your search';" onfocus="if(this.value=='Type Your search') this.value='';">
 <input name="" type="submit" class="submit-btn" value="search" />
-</form> 
+</form>
 </div>
 </div>
  </div>
- 
+
 <div class="clear"></div>
 <div class="submenu"><p><a style="color:#ED1C24" href="http://indiatoday.intoday.in/elections/index.jsp">Elections 2014</a>|<a href="http://indiatoday.intoday.in/ipl2014/" style="color:#ED1C24">IPL</a>|<a href="http://indiatoday.intoday.in/calendar/" mce_href="http://indiatoday.intoday.in/calendar/">From India Today</a>|<a href="http://indiatoday.intoday.in/section/108/1/mail-today.html" mce_href="http://indiatoday.intoday.in/section/108/1/mail-today.html">From Mail Today</a>|<a href="http://www.bagittoday.com/" mce_href="http://www.bagittoday.com/">Shopping</a>|<a href="http://indiatoday.intoday.in/understand/index.jsp" mce_href="http://indiatoday.intoday.in/understand/index.jsp">Funalytics</a>|<a href="http://indiatoday.intoday.in/sosorry/" mce_href="http://indiatoday.intoday.in/sosorry/">So Sorry</a>| <a href="http://indiatoday.intoday.in/breakingnews.html" mce_href="http://indiatoday.intoday.in/breakingnews.html">Breaking News</a>|<a href="http://businesstoday.intoday.in/cooleststartups/2014/" mce_href="http://businesstoday.intoday.in/cooleststartups/2014/">India's Coolest Start-ups</a></p></div>
 <div class="clear"></div>
@@ -276,7 +276,7 @@ nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
 var zflag_nid="821"; var zflag_cid="1138/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-<!-- end ZEDO for channel: IT Home Page Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->	
+<!-- end ZEDO for channel: IT Home Page Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
 
 </div>
 <div class="clear"></div>
@@ -313,7 +313,7 @@ $(document).ready(function(e) {
 <script>
 hmelection1();
 </script>
-   <div class="clr"></div> 
+   <div class="clr"></div>
 </div>
     <!--box-poll-shadow end-->
 </div>
@@ -331,7 +331,7 @@ hmelection1();
     z-index: -2;
 	top:0px!Important;
 }
-	
+
 .bottomview {background-image: url("http://d13.zedo.com/OzoDB/a/i/1932624/V1/Vogue-Skining2.jpg");
     background-position: center top;
     background-repeat: no-repeat;
@@ -355,7 +355,7 @@ var scTop = $(window).scrollTop()
 				 $('#zdimg1398845193').removeClass('bottomview');
 				$('#zdTLCont1398845193, #zdTRCont1398845193').removeClass('botclose');
 				$('#zdTLCont1398845193, #zdTRCont1398845193').addClass('topclose');
-				
+
             }
 			else
 			{
@@ -367,7 +367,7 @@ var scTop = $(window).scrollTop()
 });
 
 $(document).ready(function() {
-	
+
 	setTimeout(function(){
 		$('#zdimg1398845193').addClass('bottomview');
 		$('#zdTLCont1398845193, #zdTRCont1398845193').addClass('botclose');
@@ -403,26 +403,26 @@ $(document).ready(function() {
                                 <div class="clear"></div>
                             </div>
                             <iframe width="200" scrolling="no" height="320" frameborder="0" style="overflow-x: hidden;" src="http://indiatoday.intoday.in/highlights/chunk_mindrock.jsp?id=310848" id="highlight"></iframe>
-                              
+
                         </div>
-                 
-             </div>    
+
+             </div>
 <!--end highlight chunk-->
 
 
 
- 
- </div> 
+
+ </div>
 <div class="centerdiv">
 <div class="viewmore" style="display:none;">View more</div>
 </div>
- <div class="divclear"></div> 
+ <div class="divclear"></div>
 <div class="leftbar">
 <div class="boxcont">
 <div class="box">
 <div class="posrel">
 <div class="subhead india"><h2><a href="http://indiatoday.intoday.in/section/114/1/india.html">India</a></h2></div>
-  
+
 <a href="story/fir-registered-against-modi-for-violating-code-of-conduct-in-ahmedabad/1/358393.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modi9_350_043014080921.jpg" alt="Narendra Modi" title="Narendra Modi"  border="0" class="images "  /></a>
 
 </div>
@@ -441,7 +441,7 @@ $(document).ready(function() {
 <div class="box">
 <div class="posrel">
 <div class="subhead movies"><h2><a href="http://indiatoday.intoday.in/section/67/1/movies.html">Movies</a></h2></div>
-  
+
 <a href="story/shah-rukh-khan-main-hoon-na-farah-khan/1/358438.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/farah_350_050114093553.jpg" alt="Farah-SRK" title="Farah-SRK"  border="0" class="images "  /></a>
 
 </div>
@@ -460,7 +460,7 @@ $(document).ready(function() {
 <div class="box">
 <div class="posrel">
 <div class="subhead movies"><h2><a href="http://indiatoday.intoday.in/section/67/1/movies.html">Movies</a></h2></div>
-  
+
 <a href="story/salman-khan-ex-girlfriend-sangeeta-bijlani/1/358444.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_350_050114101513.jpg" alt="Sangeeta Bijlani, Salman Khan" title="Sangeeta Bijlani, Salman Khan"  border="0" class="images "  /></a>
 
 </div>
@@ -487,7 +487,7 @@ $(document).ready(function() {
 <div class="box">
 <div class="posrel">
 <div class="subhead movies"><h2><a href="http://indiatoday.intoday.in/section/67/1/movies.html">Movies</a></h2></div>
-  
+
 <a href="story/ranbir-kapoor-katrina-kaif-asheish-shah/1/358462.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ranbir-kat_350_050114114209.jpg" alt="Ranbir Kapoor-Katrina Kaif" title="Ranbir Kapoor-Katrina Kaif"  border="0" class="images " /></a>
 
 </div>
@@ -506,7 +506,7 @@ $(document).ready(function() {
 <div class="box">
 <div class="posrel">
 <div class="subhead india"><h2><a href="http://indiatoday.intoday.in/section/114/1/india.html">India</a></h2></div>
-  
+
 <a href="story/love-and-politicians-make-a-dangerous-cocktail/1/358394.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/geetika-anuradha_350_043014063102.jpg" alt="Geetika Sharma and Anuradha Bali" title="Geetika Sharma and Anuradha Bali"  border="0" class="images " /></a>
 
 </div>
@@ -525,9 +525,9 @@ $(document).ready(function() {
 <div class="box">
 <div class="posrel">
 <div class="subhead active"><h2><a href="http://indiatoday.intoday.in/elections/">Elections</a></h2></div>
-  
+
 <a href="story/chintalnar-chhattisgarh-lok-sabha-polls-2014/1/357534.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bastar-may5-2_350_042614124724.jpg" alt="Residents of Mukram village in Chhattisgarh" title="Residents of Mukram village in Chhattisgarh"  border="0" class="images " /></a>
- 
+
 <h3><a href="story/chintalnar-chhattisgarh-lok-sabha-polls-2014/1/357534.html" >Inside Chhattisgarh's no vote zone</a></h3></div>
 <div class="innerbox inner-st">
 According to data collected during last year's Assembly polls, 15 polling booths across villages which fall under the Konta Assembly constituency recorded zero polling percentage.
@@ -544,13 +544,13 @@ According to data collected during last year's Assembly polls, 15 polling booths
 <div class="box">
 <div class="posrel">
 <div class="subhead sports"><h2><a href="http://indiatoday.intoday.in/section/84/1/sports.html">Sports</a></h2></div>
-  
+
 <a href="story/mi-vs-srh-mumbai-end-horrible-uae-leg-with-5th-defeat-in-a-row/1/358415.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/mumbai_350_050114011601.jpg" alt="" title=""  border="0" class="images " /></a>
- 
+
 <h3><a href="story/mi-vs-srh-mumbai-end-horrible-uae-leg-with-5th-defeat-in-a-row/1/358415.html" >MI vs SRH: Mumbai end horrible UAE leg with 5th defeat in a row</a></h3></div>
 <div class="innerbox inner-st">
-After losing three quick wickets, Mumbai fought back but all they could 
-manage was 157 for seven in the end.  <a href="http://indiatoday.intoday.in/ipl2014/index.jsp" mce_href="http://indiatoday.intoday.in/ipl2014/index.jsp" target="_blank"><b>FULL COVERAGE</b></a> 
+After losing three quick wickets, Mumbai fought back but all they could
+manage was 157 for seven in the end.  <a href="http://indiatoday.intoday.in/ipl2014/index.jsp" mce_href="http://indiatoday.intoday.in/ipl2014/index.jsp" target="_blank"><b>FULL COVERAGE</b></a>
 <div class="clear"></div>
 <div class="share-story">
 <div class="share-icon" url="story/mi-vs-srh-mumbai-end-horrible-uae-leg-with-5th-defeat-in-a-row/1/358415.html" ctitle="MI vs SRH: Mumbai end horrible UAE leg with 5th defeat in a row"></div>
@@ -566,8 +566,8 @@ manage was 157 for seven in the end.  <a href="http://indiatoday.intoday.in/ipl2
 <div class="divclear"></div>
 </div>
 
- 
-		 	
+
+
 
 <div class="homeright">
 
@@ -589,8 +589,8 @@ manage was 157 for seven in the end.  <a href="http://indiatoday.intoday.in/ipl2
 </div>
 
 
-  
-  
+
+
   <div class="colum">
     <div class="leftspac ipdwidth">
       <div class="hotrightnow-head red ">
@@ -598,13 +598,13 @@ manage was 157 for seven in the end.  <a href="http://indiatoday.intoday.in/ipl2
       </div>
       <ul>
       	<li>
-		
-			
+
+
 			<iframe width="300" height="295" scrolling="no" frameborder="0" allowtransparency="true" src="http://election2014live.intoday.in/elections/aajtak/candidates_vip_eng.php?hwidth=300&hheight=290" style="margin-top:10px;"></iframe></li>
 
-			
-		
-		
+
+
+
       </ul>
       <div class="clr"></div>
     </div>
@@ -627,31 +627,31 @@ manage was 157 for seven in the end.  <a href="http://indiatoday.intoday.in/ipl2
 
 
 
-<div class="colum"> 
+<div class="colum">
 <a href="http://indiatoday.intoday.in/elections/index.jsp">
 <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/it/election-2014-banner.gif" style="margin:20px 0px 20px;">
 </a>
 </div>
 
- 
+
  <div class="colum">
-   
+
 <div class="leftspac ipdwidth"><div class="hotrightnow-head red "><h3>Videos</h3></div>
 
 <li class="hotrightnow_lft"><a href="/video/gen-raheel-sharif-army-chief-jugular-vein-of-pakistan-unsc-pakistan-kashmir/1/358460.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gen-raheel-sharif_179_050114112125.jpg"></a><a href="/video/gen-raheel-sharif-army-chief-jugular-vein-of-pakistan-unsc-pakistan-kashmir/1/358460.html">Kashmir our jugular vein, says Pak army chief</a><span class='small-play-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="/video/chennai-railway-station-blast-guwahati-bangalore-express-train-passenger-express-train/1/358443.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/chennai-blast---video_179-2_050114100706.jpg"></a><a href="/video/chennai-railway-station-blast-guwahati-bangalore-express-train-passenger-express-train/1/358443.html">Twin blasts at Chennai railway station, 1 killed</a><span class='small-play-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="/video/election-express-caste-equations-in-hajipur/1/358433.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/caste_179_050114070204.jpg"></a><a href="/video/election-express-caste-equations-in-hajipur/1/358433.html">Election Express: Caste equations in Hajipur</a><span class='small-play-icon1 sp_bg'></span></li><div class='clr'></div><div class='more'><a href="/videos" target="_blank">More</a></div></div>
 
  </div>
- 
- 
- <div class="colum"> 
-   
+
+
+ <div class="colum">
+
 <div class="leftspac ipdwidth"><div class="hotrightnow-head red "><h3>Photos</h3></div>
 
-<li class="hotrightnow_lft"><a href="/gallery/kings-xi-punjab-beat-kolkata-knight-riders-in-low-scoring-ipl-7-tie/1/11638.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/4-thumb_179_042614114551.jpg"></a><a href="/gallery/kings-xi-punjab-beat-kolkata-knight-riders-in-low-scoring-ipl-7-tie/1/11638.html">Kings XI Punjab beat Kolkata by 23 runs in low-scoring tie</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="/gallery/guwahati-express-blasts-chennai-railway-station-blasts-ied-home-ministry-railway-ministry/1/11662.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/chennai_new-7-_210_050114103933.jpg"></a><a href="/gallery/guwahati-express-blasts-chennai-railway-station-blasts-ied-home-ministry-railway-ministry/1/11662.html">Twin blasts rock Guwahati Express at Chennai station</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="/gallery/election-express-live-patna-bihar-gaya-dhanbad/1/11657.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ee1_179_043014120538.jpg"></a><a href="/gallery/election-express-live-patna-bihar-gaya-dhanbad/1/11657.html">Election Express heads to Patna</a><span class='small-image-icon1 sp_bg'></span></li><div class='clr'></div><div class='more'><a href="/galleries" target="_blank">More</a></div></div> 
-  
+<li class="hotrightnow_lft"><a href="/gallery/kings-xi-punjab-beat-kolkata-knight-riders-in-low-scoring-ipl-7-tie/1/11638.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/4-thumb_179_042614114551.jpg"></a><a href="/gallery/kings-xi-punjab-beat-kolkata-knight-riders-in-low-scoring-ipl-7-tie/1/11638.html">Kings XI Punjab beat Kolkata by 23 runs in low-scoring tie</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="/gallery/guwahati-express-blasts-chennai-railway-station-blasts-ied-home-ministry-railway-ministry/1/11662.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/chennai_new-7-_210_050114103933.jpg"></a><a href="/gallery/guwahati-express-blasts-chennai-railway-station-blasts-ied-home-ministry-railway-ministry/1/11662.html">Twin blasts rock Guwahati Express at Chennai station</a><span class='small-image-icon1 sp_bg'></span></li><li class="hotrightnow_lft"><a href="/gallery/election-express-live-patna-bihar-gaya-dhanbad/1/11657.html"><img align="left" class="imgs" width="125" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ee1_179_043014120538.jpg"></a><a href="/gallery/election-express-live-patna-bihar-gaya-dhanbad/1/11657.html">Election Express heads to Patna</a><span class='small-image-icon1 sp_bg'></span></li><div class='clr'></div><div class='more'><a href="/galleries" target="_blank">More</a></div></div>
+
  </div>
-  
-  
+
+
 
 </div>
 
@@ -688,14 +688,14 @@ manage was 157 for seven in the end.  <a href="http://indiatoday.intoday.in/ipl2
 			}
 		}
 	}
-		
+
 	//$(document).ready(function(e) {
 		/*$(window).scroll(function(){
 			if($(window).scrollTop() >= $(document).height() - $(window).height()-800 && scrollcomplete=='no') {
 				cardloads();
 			}
 		});*/
-  
+
 		if($(window).height() > $('#cardsDisplaygetting').offset().top) {
 			cardloads();
 		} else if($(window).scrollTop() >= 3000) {//($('#cardsDisplaygetting').offset().top-($('#loadmoreview').height()+100))) {
@@ -717,7 +717,7 @@ manage was 157 for seven in the end.  <a href="http://indiatoday.intoday.in/ipl2
 
 <div class="index-footer">
 
- 
+
 <footer style="margin-top:15px;" >
 <div class="bottomad">
 
@@ -789,7 +789,7 @@ manage was 157 for seven in the end.  <a href="http://indiatoday.intoday.in/ipl2
 #leftrightads .leftad {
     left: -168px;
 	top:199px;
-	
+
 }
 #leftrightads .rightad {
     left: 1005px;
@@ -828,10 +828,10 @@ $(function () {
 		$('.leftad .divs').removeClass('fix');
       }
     });
-  } 
+  }
 });
 	</script>
-    
+
   <script type="text/javascript">
 $(function () {
   var msie6 = $.browser == 'msie' && $.browser.version < 7;
@@ -847,21 +847,21 @@ $(function () {
 		$('.rightad .divs').removeClass('fix-r');
       }
     });
-  } 
+  }
 });
 	</script>
 
 
 <div id="leftrightads">
 	<div class="leftad">
-  <div class="div">   
- 
+  <div class="div">
 
-   
+
+
   </div>
-  
+
        <div class="divs">
-	  
+
 
 
 	    </div>
@@ -869,19 +869,19 @@ $(function () {
 	</div>
 	<div class="rightad">
 	<div class="div">
-   
+
 
     </div>
 	<div class="divs">
-    
-	
+
+
 
 	   </div>
 	</div>
 </div>
 
- 
- 
+
+
 <script>
 winscreen();
 $(window).resize(function() {
@@ -895,8 +895,8 @@ if (document.body.offsetWidth>=1250) {
 			var lft = ((document.body.offsetWidth-1000)/2);
 			document.getElementById("leftrightads").style.left=lft+'px';
 		}
-	} 
-	else { 
+	}
+	else {
 		if (document.getElementById("leftrightads") != null || document.getElementById("leftrightads") != undefined){
 		document.getElementById("leftrightads").style.display="none"; }}
 }
@@ -908,8 +908,8 @@ if (document.body.offsetWidth>=1250) {
 		}
 </script>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script>
+<script src="/staticpages/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
@@ -921,8 +921,8 @@ if (document.body.offsetWidth>=1250) {
 
 
 </div>
-</div> 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg">    
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
     <filter id="greyscale">
      <feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0
                                           0.3333 0.3333 0.3333 0 0
@@ -944,4 +944,3 @@ if (document.body.offsetWidth>=1250) {
 
 </body>
 </html>
-

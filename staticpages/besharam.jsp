@@ -727,7 +727,7 @@ nav ul {
 </div>
 
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
+<script src="/staticpages/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
 </div>
 </body>
