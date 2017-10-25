@@ -6405,8 +6405,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
     $user_load = user_load_by_name($user_name);
     $user_id = $user_load->uid;
     $authtoken_id = $params['authtoken_id'];
-    $cpageno = $params['cpageno'];
-    $showall = $params['showall'];
+   
     
     $message_array = array();
 
@@ -6437,7 +6436,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
 
     // check args
     if ($args != '0') {
-        $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
+        $jsondata = list_user_follow_topic_list($user_id);
     } else {
         $jsondata = $message_array;
     }
@@ -6517,6 +6516,52 @@ function follow_topic_data_responce($user_id, $author_id, $type) {
         $output_array['data'] = $data;
     }
     return $output_array;
+}
+
+
+/**
+ * Helper function to get previous insert record. 
+ * @param int $uid 
+ */
+function list_user_follow_topic_list($uid) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cond = array('uid' => $uid);
+    $cursor = $people->find($cond);
+    $loopc = 0;
+    
+    foreach ($cursor as $document) {
+      
+      if($document['ntype'] == "tag"){
+          $data[$loopc]['it'] = $document['nid'];
+          $data[$loopc]['title'] = $document['title'];
+          $data[$loopc]['topic_follow_count'] = "";
+          $loopc++;
+      }
+      
+    }
+    //return $data;
+    
+  }
+  
+
+  
+  $anchor_data['topic'] = $data;
+
+    if ($loopc > 0) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+        $output_array['data'] = $anchor_data;
+    } else {
+        $data = array();
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+        $output_array['data'] = $data;
+    }
+    return $output_array;
+  
 }
 
 
