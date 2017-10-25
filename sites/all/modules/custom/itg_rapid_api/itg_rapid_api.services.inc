@@ -6131,8 +6131,8 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
   //$data = array_unique($data); field_reporter_twitter_handle]
   foreach ($data as $key => $value) {
       if($value['nid']){
-          $node_data = node_load(837259);
-          p($node_data);die();
+          $node_data = node_load($value['nid']); // 837259
+          //p($node_data);die();
           if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
             $a_id = $node_data->nid;
             $a_title = $node_data->title;
@@ -6144,7 +6144,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $a_is_following = $value['status'];
             $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value']; 
             $a_location = "";
-            $a_desc = "";
+            $a_desc = $node_data->body['und'][0]['value'];
             
             $anchor_list[$anchor_c]['a_id'] = "$a_id";
             $anchor_list[$anchor_c]['a_title'] = "$a_title";
@@ -6152,7 +6152,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $anchor_list[$anchor_c]['a_is_following'] = "$a_is_following";
             $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
             $anchor_list[$anchor_c]['a_twitter_handler'] = "$a_twitter_handler";
-            $anchor_list[$anchor_c]['a_location'] = "$a_location";
+            $anchor_list[$anchor_c]['a_location'] = "";
             $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
             $anchor_c++;
           }
