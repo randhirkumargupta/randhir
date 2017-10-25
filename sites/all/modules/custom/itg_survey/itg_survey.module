@@ -836,6 +836,16 @@ function itg_survey_pqs_generatetokens() {
     $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
     $query->orderBy('n.created', 'DESC'); //ORDER BY created
   }
+  elseif ($type == 'mega_review_critic'){
+	$title_text = arg(3);
+    $query = db_select('node' , 'n');
+    $query->fields('n' , array('nid' , 'title'));
+    $query->condition('n.type' , $type , '=');
+    if(isset($title_text) && !empty($title_text)){
+	  $query->condition('n.title' , '%' . db_like($title_text) . '%' , 'LIKE');
+	}    
+    $query->condition('n.status' , 1 , '=');
+  }
   $data = array();
   $result = $query->execute();
   // Fetch node title and nid
@@ -846,7 +856,13 @@ function itg_survey_pqs_generatetokens() {
     else {
       $title = $record['title'];
     }
-    $options['[ITG:' . strtoupper($type) . ':' . $record['nid'] . ']'] = $title;
+    if($type == 'mega_review_critic'){
+		$iframe = '<iframe src="'.$base_url.'/mega-review/embed/'.$record['nid'].'" width="100%" class="embed-megareview" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>';
+		$options[$iframe] = $title;
+	}
+	else{
+	  $options['[ITG:' . strtoupper($type) . ':' . $record['nid'] . ']'] = $title;
+	}
   }
   $form = array();
   $form['pqs-listing-heading'] = array(

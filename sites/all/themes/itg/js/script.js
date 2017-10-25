@@ -1222,3 +1222,8 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
     });
 
 }
+
+// Resize megareview iframe.
+function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
