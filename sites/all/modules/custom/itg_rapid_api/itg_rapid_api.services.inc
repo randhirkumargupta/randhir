@@ -5944,8 +5944,8 @@ function itg_rapid_api_anchor_list($token) {
     $user_load = user_load_by_name($user_name);
     $user_id = $user_load->uid;
     $authtoken_id = $params['authtoken_id'];
-    $author_id = $params['author_id'];
-    $type = $params['type'];
+    $cpageno = $params['cpageno'];
+    $showall = $params['showall'];
     
     $message_array = array();
 
@@ -5976,7 +5976,7 @@ function itg_rapid_api_anchor_list($token) {
 
     // check args
     if ($args != '0') {
-        $jsondata = list_author_anchor_data_responce($user_id);
+        $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
     } else {
         $jsondata = $message_array;
     }
@@ -6085,6 +6085,83 @@ function list_itg_rapid_api_author_list($uid, $cpageno) {
   $anchor_data['author_pagination_cap'] = "25";
   
   $anchor_data['author'] = $anchor_list;
+
+    if ($anchor_c > 0) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+        $output_array['data'] = $anchor_data;
+    } else {
+        $data = array();
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+        $output_array['data'] = $data;
+    }
+    return $output_array;
+  
+}
+
+/**
+ * Helper function to get previous insert record. 
+ * @param int $uid 
+ */
+function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    if($showall == 1){
+        $cond = array('uid' => $uid);
+    }
+    else{
+        $cond = array();
+    }
+    $cursor = $people->find($cond);
+    $loopc = 0;
+    foreach ($cursor as $document) {
+      $data[$loopc]['nid'] = $document['nid'];
+      $data[$loopc]['status'] = $document['status'];
+      $loopc++;
+    }
+    //return $data;
+    
+  }
+  $anchor_list = array();
+  $anchor_data = array();
+  $anchor_c = 0;
+  //$data = array_unique($data);
+  foreach ($data as $key => $value) {
+      if($value['nid']){
+          $node_data = node_load($value['nid']);
+          if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
+            $a_id = $node_data->nid;
+            $a_title = $node_data->title;
+            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
+            $a_profile_image = completeFilePath($a_profile_image_fid);
+            $a_follower_count = get_follower_count($a_id);
+            $a_is_following = $value['status'];
+            $a_twitter_handler = "";
+            $a_location = "";
+            $a_desc = "";
+            
+            $anchor_list[$anchor_c]['a_id'] = "$a_id";
+            $anchor_list[$anchor_c]['a_title'] = "$a_title";
+            $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
+            $anchor_list[$anchor_c]['a_is_following'] = "$a_is_following";
+            $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
+            $anchor_list[$anchor_c]['a_twitter_handler'] = "$a_twitter_handler";
+            $anchor_list[$anchor_c]['a_location'] = "$a_location";
+            $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
+            $anchor_c++;
+          }
+      }
+  }
+  $anchor_data['id'] = "$uid";
+  $anchor_data['display_label'] = "Anchors";
+  $anchor_data['anchor_count'] = "$anchor_c";
+  $anchor_data['anchor_display_count'] = "25";
+  $anchor_data['anchor_pagination_cap'] = "25";
+  
+  $anchor_data['anchor'] = $anchor_list;
 
     if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
