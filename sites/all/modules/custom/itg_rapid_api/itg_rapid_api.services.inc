@@ -6216,7 +6216,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
             
             $anchor_c++;
           }
-          elseif($node_data->type=="author"){
+          elseif($node_data->type=="reporter"){
             $a_id = $node_data->nid;            
             
             $author_list[$anchor_c]['a_id'] = "$a_id";
