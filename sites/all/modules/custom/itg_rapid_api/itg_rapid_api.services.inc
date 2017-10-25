@@ -5996,8 +5996,7 @@ function itg_rapid_api_get_the_user_follow_status($token) {
     $user_load = user_load_by_name($user_name);
     $user_id = $user_load->uid;
     $authtoken_id = $params['authtoken_id'];
-    $author_id = $params['author_id'];
-    $type = $params['type'];
+    
     
     $message_array = array();
 
@@ -6028,7 +6027,7 @@ function itg_rapid_api_get_the_user_follow_status($token) {
 
     // check args
     if ($args != '0') {
-        $jsondata = list_author_anchor_data_responce($user_id);
+        $jsondata = list_itg_rapid_api_get_the_user_follow_status($user_id);
     } else {
         $jsondata = $message_array;
     }
@@ -6154,6 +6153,75 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $anchor_list[$anchor_c]['a_twitter_handler'] = "$a_twitter_handler";
             $anchor_list[$anchor_c]['a_location'] = "";
             $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
+            $anchor_c++;
+          }
+      }
+  }
+  $anchor_data['id'] = "$uid";
+  $anchor_data['display_label'] = "Anchors";
+  $anchor_data['anchor_count'] = "$anchor_c";
+  $anchor_data['anchor_display_count'] = "25";
+  $anchor_data['anchor_pagination_cap'] = "25";
+  
+  $anchor_data['anchor'] = $anchor_list;
+
+    if ($anchor_c > 0) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+        $output_array['data'] = $anchor_data;
+    } else {
+        $data = array();
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+        $output_array['data'] = $data;
+    }
+    return $output_array;
+  
+}
+
+/**
+ * Helper function to get previous insert record. 
+ * @param int $uid 
+ */
+function list_itg_rapid_api_get_the_user_follow_status($uid) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cond = array('uid' => $uid);
+    $cursor = $people->find($cond);
+    $loopc = 0;
+    foreach ($cursor as $document) {
+      $data[$loopc]['nid'] = $document['nid'];
+      $data[$loopc]['status'] = $document['status'];
+      $loopc++;
+    }
+    //return $data;
+    
+  }
+  $anchor_list = array();
+  $anchor_data = array();
+  $anchor_c = 0;
+  //$data = array_unique($data); field_reporter_twitter_handle]
+  foreach ($data as $key => $value) {
+      if($value['nid']){
+          $node_data = node_load($value['nid']); // 837259
+          p($node_data);die();
+          if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
+            $a_id = $node_data->nid;
+            $a_title = $node_data->title;
+            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];      
+            
+            
+            $a_profile_image = completeFilePath($a_profile_image_fid);
+            $a_follower_count = get_follower_count($a_id);
+            $a_is_following = $value['status'];
+            $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value']; 
+            $a_location = "";
+            $a_desc = $node_data->body['und'][0]['value'];
+            
+            $anchor_list[$anchor_c]['a_id'] = "$a_id";
+            
             $anchor_c++;
           }
       }
