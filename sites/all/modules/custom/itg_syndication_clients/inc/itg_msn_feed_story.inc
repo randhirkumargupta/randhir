@@ -22,8 +22,10 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
@@ -35,10 +37,7 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 20);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    
     $xml = genrate_msn_feed_story_syndication_xml($result, $section_name);
-//    header( 'content-type: text/xml' );
-//    print $xml;die;
     $xml_path = 'public://feeds/msnfeeds/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");

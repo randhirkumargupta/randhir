@@ -4,6 +4,7 @@ function itg_rss_article_news_republic() {
 
   $sid = $_GET['sid'];
   $query = db_select('node', 'n');
+  $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
@@ -11,6 +12,8 @@ function itg_rss_article_news_republic() {
   $query->fields('dbody', array('body_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('kt', array('field_story_kicker_text_value'));
+  
+  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   if (!empty($sid)) {
@@ -70,6 +73,7 @@ function itg_rss_education_article_news_republic() {
 
   $cid = (isset($_GET['cid']) ? $_GET['cid'] : 1207013); // other wise Education Today category
   $query = db_select('node', 'n');
+  $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
@@ -77,6 +81,7 @@ function itg_rss_education_article_news_republic() {
   $query->fields('dbody', array('body_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('kt', array('field_story_kicker_text_value'));
+  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   if (!empty($cid)) {

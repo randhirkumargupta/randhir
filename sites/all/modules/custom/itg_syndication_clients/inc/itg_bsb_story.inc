@@ -22,6 +22,7 @@ function itg_genrate_bsb_story_syndication($section_id = NULL, $file_name) {
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_short_headline', 'sheadline', 'sheadline.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_itg_tags', 'story_tags', 'story_tags.entity_id=n.nid');
@@ -34,6 +35,7 @@ function itg_genrate_bsb_story_syndication($section_id = NULL, $file_name) {
 	}else{
 		$query->condition('ti.tid', $section_id, '=');
 	}
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
@@ -48,7 +50,6 @@ function itg_genrate_bsb_story_syndication($section_id = NULL, $file_name) {
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 30);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     $xml = genrate_bsb_story_syndication_xml($result, $section_name);
     $xml_path = 'public://bsb/';
     $file_path = $xml_path . $file_name;

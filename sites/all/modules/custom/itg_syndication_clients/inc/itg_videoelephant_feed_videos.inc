@@ -20,16 +20,17 @@ function itg_genrate_videoelephant_feed_videos_syndication($section_id = NULL, $
     $type = array('videogallery');
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_expert_description', 'sed', 'sed.entity_id=n.nid');
-
 
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('sst', array('field_story_source_type_value'));
     $query->fields('sed', array('field_story_expert_description_value'));
 
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');

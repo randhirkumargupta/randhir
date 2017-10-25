@@ -21,15 +21,15 @@ function itg_genrate_bsb_photo_syndication($section_id = NULL, $file_name) {
     $type = array('photogallery');
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
-
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->condition('ti.tid', $section_id, '=');
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->fields('n', array('nid', 'title', 'created'));
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     $xml = genrate_bsb_photo_syndication_xml($result, $section_id, $section_name);
     $xml_path = 'public://bsb/photos/';
     $file_path = $xml_path . $file_name;

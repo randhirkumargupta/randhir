@@ -23,10 +23,12 @@ function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {
     $issue_title = date('F d, Y', strtotime($issue_result[0]['title']));  
     $title = $issue_result[0]['title'];
     $query = db_select('node', 'n');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->join('field_data_field_story_issue_date', 'isuue', 'n.nid=isuue.entity_id');
     $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('isuue.field_story_issue_date_value', $title, '=');    
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story', '=');

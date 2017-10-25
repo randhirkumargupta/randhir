@@ -19,6 +19,7 @@ function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $fi
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
@@ -32,13 +33,13 @@ function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $fi
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('ti', array('tid'));
 
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_ids, 'IN');
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-     
     $xml = genrate_indiatoday_yahoo_story_syndication_xml($result);
     $xml_path = 'public://indiatoday/yahoo/';
     $file_path = $xml_path . $file_name;

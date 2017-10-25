@@ -15,6 +15,7 @@ function itg_genrate_gist_photo_syndication() {
  
     $type = array('photogallery');
     $query = db_select('node', 'n');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
@@ -23,6 +24,8 @@ function itg_genrate_gist_photo_syndication() {
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('ssi', array('field_story_small_image_fid'));
+    
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');
     $query->orderBy('n.created', 'DESC');

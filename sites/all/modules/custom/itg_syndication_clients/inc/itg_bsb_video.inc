@@ -21,6 +21,7 @@ function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
     $type = array('videogallery');
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
     $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
@@ -35,7 +36,7 @@ function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
     $query->fields('sc', array('field_story_courtesy_value'));
     $query->fields('sst', array('field_story_source_type_value'));
 
-
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');

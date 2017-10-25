@@ -91,7 +91,8 @@ function itg_zuppit_feed_latest_story(){
 function get_top_story_for_zupit(){
   $type = array('story');
   $query = db_select('node', 'n');
-    
+  
+  $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');  
   $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_large_image', 'sli', 'sli.entity_id=n.nid');  
@@ -103,6 +104,7 @@ function get_top_story_for_zupit(){
   $query->fields('pc', array('field_primary_category_value'));  
   $query->fields('synopsis', array('field_story_kicker_text_value'));
 
+  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
   $query->condition('n.type', $type, 'IN');
   $query->orderBy('n.created', 'DESC');

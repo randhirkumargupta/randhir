@@ -6,7 +6,6 @@ function itg_education_rss_article() {
   $cat_name = get_term_name_by_tid($cid);
   $type = array('story');
   $query = db_select('node', 'n');
-
   $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
   $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
   $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
