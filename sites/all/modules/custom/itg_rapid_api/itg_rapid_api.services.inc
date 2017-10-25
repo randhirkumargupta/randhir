@@ -2577,6 +2577,93 @@ function itg_rapid_api_resource() {
             ),
         ),
         
+        // author_list custom resource declaration.....
+        'author_list' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow author list based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_author_list',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        
+                      
+                    ),
+                ),
+            ),
+        ),
+        
+        // anchor_list custom resource declaration.....
+        'anchor_list' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow anchor list based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_anchor_list',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        
+                      
+                    ),
+                ),
+            ),
+        ),
+        
+        // get_the_user_follow_status custom resource declaration.....
+        'get_the_user_follow_status' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Follow anchor and author etc list based on userid.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_rapid_api',
+                        'name' => 'itg_rapid_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_get_the_user_follow_status',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'user_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User id',
+                            'type' => 'array',
+                        ),
+                        
+                      
+                    ),
+                ),
+            ),
+        ),
+        
         
     );
 
@@ -5791,6 +5878,226 @@ function get_follower_count($a_id){
         }
     }
     return $count;
+}
+
+/*
+ * Followed author list by uid
+ *
+ */
+function itg_rapid_api_author_list($token) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $cpageno = $params['cpageno'];
+    
+    
+    $message_array = array();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id)) {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    
+   //echo "andy"; die();
+
+    // check args
+    if ($args != '0') {
+        $jsondata = list_itg_rapid_api_author_list($user_id, $cpageno);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
+/*
+ * Followed anchor list by uid
+ *
+ */
+function itg_rapid_api_anchor_list($token) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $author_id = $params['author_id'];
+    $type = $params['type'];
+    
+    $message_array = array();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id)) {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    
+   //echo "andy"; die();
+
+    // check args
+    if ($args != '0') {
+        $jsondata = list_author_anchor_data_responce($user_id);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
+/*
+ * Followed add data list by uid
+ *
+ */
+function itg_rapid_api_get_the_user_follow_status($token) {
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+    $user_name = $params['user_id']; //user name of the logend in user
+    $user_load = user_load_by_name($user_name);
+    $user_id = $user_load->uid;
+    $authtoken_id = $params['authtoken_id'];
+    $author_id = $params['author_id'];
+    $type = $params['type'];
+    
+    $message_array = array();
+
+    $args = '0';
+    if ($user_id != '0' && isset($authtoken_id)) {
+        $args = '1';
+    } else {
+        $message_array['status_code'] = '0';
+        $message_array['status_message'] = "Argument are missing";
+        $message_array['data'] = array();
+    }
+
+    if ($user_id == '') {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "User does not exist";
+        $message_array['data'] = array();
+    }
+
+    if (!drupal_valid_token($authtoken_id, 'services')) {
+        $args = '0';
+        $message_array['status_code'] = "0";
+        $message_array['status_message'] = "invalid token";
+        $message_array['data'] = array();
+    }
+    
+   //echo "andy"; die();
+
+    // check args
+    if ($args != '0') {
+        $jsondata = list_author_anchor_data_responce($user_id);
+    } else {
+        $jsondata = $message_array;
+    }
+
+    return $jsondata;
+}
+
+/**
+ * Helper function to get previous insert record. 
+ * @param int $uid 
+ */
+function list_itg_rapid_api_author_list($uid, $cpageno) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cond = array('uid' => $uid);
+    $cursor = $people->find($cond);
+    $loopc = 0;
+    foreach ($cursor as $document) {
+      $data[$loopc]['nid'] = $document['nid'];
+      $data[$loopc]['status'] = $document['status'];
+      $loopc++;
+    }
+    //return $data;
+    
+  }
+  $anchor_list = array();
+  $anchor_data = array();
+  $anchor_c = 0;
+  //$data = array_unique($data);
+  foreach ($data as $key => $value) {
+      if($value['nid'] && $value['status'] == 1){
+          $node_data = node_load($value['nid']);
+          if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
+            $a_id = $node_data->nid;
+            $a_title = $node_data->title;
+            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
+            $a_profile_image = completeFilePath($a_profile_image_fid);
+            $a_follower_count = get_follower_count($a_id);
+            
+            $anchor_list[$anchor_c]['a_id'] = "$a_id";
+            $anchor_list[$anchor_c]['a_title'] = "$a_title";
+            $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
+            $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
+            $anchor_c++;
+          }
+      }
+  }
+  $anchor_data['id'] = "$uid";
+  $anchor_data['title'] = "Authors";
+  $anchor_data['author_count'] = "$anchor_c";
+  $anchor_data['author_display_count'] = "25";
+  $anchor_data['author_pagination_cap'] = "25";
+  
+  $anchor_data['author'] = $anchor_list;
+
+    if ($anchor_c > 0) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+        $output_array['data'] = $anchor_data;
+    } else {
+        $data = array();
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+        $output_array['data'] = $data;
+    }
+    return $output_array;
+  
 }
 
 
