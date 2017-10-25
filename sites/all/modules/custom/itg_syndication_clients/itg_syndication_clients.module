@@ -119,6 +119,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_article.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-education/article'] = array(
+    'page callback' => 'itg_education_rss_article',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_education_rss_article.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -676,8 +682,21 @@ function get_itg_video_transcoding($nid) {
 
 function not_found_syndication_xml() {
   $xml = '<Error>
-      <Code>'.t('AccessDenied').'</Code>
-      <Message>'.t('No items Found').'</Message>
+      <Code>' . t('AccessDenied') . '</Code>
+      <Message>' . t('No items Found') . '</Message>
   </Error>';
   return $xml;
+}
+
+function get_parent_category_name_by_tid($tid = NULL) {
+  $tname = '';
+  $query = db_select('taxonomy_term_data', 'ttd');
+  $query->leftJoin('taxonomy_term_hierarchy', 'tth', 'tth.parent = ttd.tid');
+  $query->fields('ttd', array('name'));
+  $query->condition('tth.tid', $tid);
+  $result = $query->execute()->fetchAll();
+  if (count($result) > 0) {
+    $tname = $result[0]->name;
+  }
+  return $tname;
 }
