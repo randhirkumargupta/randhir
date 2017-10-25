@@ -310,6 +310,32 @@ function itg_widgets_custom_variables() {
 		'#attributes' => array('placeholder' => t('Enter limit for Newsletter Item')),
 		'#default_value' => variable_get('newsletter_content_limit'),
 	);
+  
+  $form['api_info'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable agency feed'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('api_info'), // for default checked and false is not checked
+  );
 
-	return system_settings_form($form);
+  $form["api_content_limit"] = array(
+    "#type" => "select",
+    "#title" => t("Select agency feed node limit"),
+    "#default_value" => variable_get("api_content_limit", "5"),
+    "#options" => array(
+      "5" => t("5"),
+      "10" => t("10"),
+      "20" => t("20"),
+      "50" => t("50"),
+      "100" => t("100"),
+      "500" => t("500"),
+      "1000" => t("1000"),
+      "2000" => t("2000"),
+      "5000" => t("5000"),
+      "10000" => t("10000"),
+      "25000" => t("25000"),
+    ),
+  );
+  
+  return system_settings_form($form);
 }
