@@ -6192,6 +6192,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
     $cursor = $people->find($cond);
     $loopc = 0;
     foreach ($cursor as $document) {
+        p($document);die();
       $data[$loopc]['nid'] = $document['nid'];
       $data[$loopc]['status'] = $document['status'];
       $loopc++;
