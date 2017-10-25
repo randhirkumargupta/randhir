@@ -294,6 +294,21 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 function itg_story_form_custom_callback($form, &$form_state) {
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
+      /* Assign story to widget */
+      if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_story_assign = '';
+      }
+      $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+      // for story assign to widget
+      if (function_exists('itg_story_assign_to_widget')) {
+        if (is_array($story_widget) && count($story_widget) > 0) {
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, '', $previous_story_assign);
+        }
+      }
+      /* End for Assign story to widget */
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
       drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
@@ -1551,5 +1566,43 @@ function itg_story_save_original_sample_image($fid) {
       ))->execute();
     }
     return $file->fid;
+  }
+}
+
+/**
+ * function for story assign to widget
+ * @param int $nid
+ * @param array $story_widget
+ * @param int $cat_id
+ */
+function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $previous_story_assign) {
+
+  if (!empty($story_widget) && count($story_widget)) {
+    $result = array();
+    foreach ($story_widget as $widget_name) {
+      if (!empty($widget_name) && $widget_name != '_none') {
+        $result[$widget_name] = $widget_name;
+        $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
+        if (!$is_node_in_widget) {
+          if ($widget_name == 'big_story') {
+            $extra = '[]';
+            itg_widget_insert_widget_data($nid, $widget_name, $category_tid, $extra);
+          }
+          else {
+            itg_widget_insert_widget_data($nid, $widget_name, 0);
+          }
+        }
+      }
+    }
+    itg_widget_delete_old_data_by_limit($widget_name);
+    foreach ($previous_story_assign as $row) {
+      $widget_value = $row['value'];
+      if ($widget_value != $result[$row['value']]) {
+        itg_watchdog('widget_value_inner', $widget_value);
+        if (!empty($widget_value)) {
+          itg_widget_delete_data_from_widget($widget_value, $nid);
+        }
+      }
+    }
   }
 }
