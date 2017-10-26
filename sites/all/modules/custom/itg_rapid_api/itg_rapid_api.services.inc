@@ -6582,7 +6582,7 @@ function list_user_follow_topic_list($uid) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->front_user_activity;
-    $cond = array('uid' => $uid, 'ntype' => 'tag', 'status' => 1);
+    $cond = array('uid' => $uid, 'ntype' => 'tag', 'status' => '1');
     $cursor = $people->find($cond);
     $loopc = 0;
     
