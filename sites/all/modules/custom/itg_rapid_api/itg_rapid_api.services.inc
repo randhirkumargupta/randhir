@@ -6582,19 +6582,19 @@ function list_user_follow_topic_list($uid) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->front_user_activity;
-    $cond = array('uid' => $uid);
+    $cond = array('uid' => $uid, 'ntype' => 'tag', 'status' => 1);
     $cursor = $people->find($cond);
     $loopc = 0;
     
     foreach ($cursor as $document) {
       
-      if($document['ntype'] == "tag"){
+    //  if($document['ntype'] == "tag" && $document['status'] == 1){
           $topic_follow_count = get_follower_count($document['nid']);
           $data[$loopc]['id'] = $document['nid'];
           $data[$loopc]['title'] = $document['title'];
           $data[$loopc]['topic_follow_count'] = "$topic_follow_count";
           $loopc++;
-      }
+    //  }
       
     }
     //return $data;
