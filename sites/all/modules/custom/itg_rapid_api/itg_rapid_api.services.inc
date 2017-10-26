@@ -5779,8 +5779,7 @@ function itg_rapid_api_anchor_follow_list($token) {
     $user_load = user_load_by_name($user_name);
     $user_id = $user_load->uid;
     $authtoken_id = $params['authtoken_id'];
-    $author_id = $params['author_id'];
-    $type = $params['type'];
+    
     
     $message_array = array();
 
@@ -5811,7 +5810,7 @@ function itg_rapid_api_anchor_follow_list($token) {
 
     // check args
     if ($args != '0') {
-        $jsondata = list_author_anchor_data_responce($user_id);
+        $jsondata = list_anchor_data_responce($user_id);
     } else {
         $jsondata = $message_array;
     }
@@ -5863,7 +5862,7 @@ function itg_rapid_api_author_follow_list($token) {
 
     // check args
     if ($args != '0') {
-        $jsondata = list_author_anchor_data_responce($user_id);
+        $jsondata = list_author_data_responce($user_id);
     } else {
         $jsondata = $message_array;
     }
@@ -5875,7 +5874,7 @@ function itg_rapid_api_author_follow_list($token) {
  * Helper function to get previous insert record. 
  * @param int $uid 
  */
-function list_author_anchor_data_responce($uid) {
+function list_anchor_data_responce($uid) {
   $data = '';
   if (function_exists('mongodb')) {
     $con = mongodb();
@@ -5883,36 +5882,32 @@ function list_author_anchor_data_responce($uid) {
     $cond = array('uid' => $uid);
     $cursor = $people->find($cond);
     $loopc = 0;
+    $anchor_list = array();
+    $anchor_data = array();
     foreach ($cursor as $document) {
-      $data[$loopc]['nid'] = $document['nid'];
-      $data[$loopc]['status'] = $document['status'];
-      $loopc++;
-    }
-    //return $data;
-    
-  }
-  $anchor_list = array();
-  $anchor_data = array();
-  $anchor_c = 0;
-  //$data = array_unique($data);
-  foreach ($data as $key => $value) {
-      if($value['nid'] && $value['status'] == 1){
-          $node_data = node_load($value['nid']);
-          if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
+      
+      
+      if($document['ntype'] == "anchor" && $document['status'] == 1){
+            $node_data = node_load($document['nid']);
             $a_id = $node_data->nid;
             $a_title = $node_data->title;
             $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
             $a_profile_image = completeFilePath($a_profile_image_fid);
             $a_follower_count = get_follower_count($a_id);
             
-            $anchor_list[$anchor_c]['a_id'] = "$a_id";
-            $anchor_list[$anchor_c]['a_title'] = "$a_title";
-            $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
-            $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
-            $anchor_c++;
+            $anchor_list[$loopc]['a_id'] = "$a_id";
+            $anchor_list[$loopc]['a_title'] = "$a_title";
+            $anchor_list[$loopc]['a_profile_image'] = "$a_profile_image";
+            $anchor_list[$loopc]['a_follower_count'] = "$a_follower_count";
+            $loopc++;
           }
-      }
+      
+    }
+    //return $data;
+    
   }
+  
+  
   $anchor_data['anchor'] = $anchor_list;
 
     if ($anchor_c > 0) {
@@ -5928,6 +5923,61 @@ function list_author_anchor_data_responce($uid) {
     return $output_array;
   
 }
+
+/**
+ * Helper function to get previous insert record. 
+ * @param int $uid 
+ */
+function list_author_data_responce($uid) {
+  $data = '';
+  if (function_exists('mongodb')) {
+    $con = mongodb();
+    $people = $con->front_user_activity;
+    $cond = array('uid' => $uid);
+    $cursor = $people->find($cond);
+    $loopc = 0;
+    $anchor_list = array();
+    $anchor_data = array();
+    foreach ($cursor as $document) {
+      
+      
+      if($document['ntype'] == "author" && $document['status'] == 1){
+            $node_data = node_load($document['nid']);
+            $a_id = $node_data->nid;
+            $a_title = $node_data->title;
+            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
+            $a_profile_image = completeFilePath($a_profile_image_fid);
+            $a_follower_count = get_follower_count($a_id);
+            
+            $anchor_list[$loopc]['a_id'] = "$a_id";
+            $anchor_list[$loopc]['a_title'] = "$a_title";
+            $anchor_list[$loopc]['a_profile_image'] = "$a_profile_image";
+            $anchor_list[$loopc]['a_follower_count'] = "$a_follower_count";
+            $loopc++;
+          }
+      
+    }
+    //return $data;
+    
+  }
+  
+  
+  $anchor_data['anchor'] = $anchor_list;
+
+    if ($anchor_c > 0) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+        $output_array['data'] = $anchor_data;
+    } else {
+        $data = array();
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+        $output_array['data'] = $data;
+    }
+    return $output_array;
+  
+}
+
 /**
  * Helper function to get follower_count. 
  * @param int $a_id 
