@@ -259,7 +259,7 @@
   'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
 );*/
 
-$databases['default']['master'][] = array (
+/*$databases['default']['master'][] = array (
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_write',
   'password' => '!tgd@!t@wr!te@101',
@@ -300,7 +300,7 @@ $databases['default']['default'] = array (
   'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
   'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
   'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'") // For MySQL InnoDB, make sure isolation level doesn't interfere with our intentions. Defaults to empty.
-);
+);*/
 
 /*$databases['default']['master'] = array(
   //'database' => 'indiatoday_migrate',
@@ -324,7 +324,7 @@ $databases['default']['autoslave'] = array(
   'prefix' => '',
 );*/
 
-$databases['sso_db']['default'] = array(
+/*$databases['sso_db']['default'] = array(
   'database' => 'IndiaToday_sso',
       'username' => 'itgd_it_write',
       'password' => '!tgd@!t@wr!te@101',
@@ -332,7 +332,7 @@ $databases['sso_db']['default'] = array(
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
-);
+);*/
 // end setting for UAT
 /*
 //for production setting
@@ -388,7 +388,7 @@ $databases['sso_db']['default'] = array(
 //end production setting
 
 // Use locking that supports force master
-$conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
+//$conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
 
 //$conf['cache_default_class'] = 'AutoslaveCache';
 //$conf['autoslave_cache_default_class'] = 'ConsistentCache';
@@ -409,7 +409,21 @@ $databases = array (
   ),
 );
 */
-
+$databases = array (
+  'default' => 
+  array (
+    'default' => 
+    array (
+      'database' => 'IndiaToday_sso',
+      'username' => 'itgd_it_write',
+      'password' => '!tgd@!t@wr!te@101',
+      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+      'port' => '3306',
+      'driver' => 'mysql',
+      'prefix' => '',
+    ),
+  ),
+);
 // Workaround for Drush (Drush doesn't support non-pdo database drivers).
 // Workaround for update.php (similar problem as Drush).
 if (drupal_is_cli() || basename($_SERVER['PHP_SELF']) == 'update.php') {
@@ -790,11 +804,11 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
 /**
  * Include a local settings file if it exists.
  */
-$local_settings = dirname(__FILE__) . '/local.settings.php';
-if (file_exists($local_settings)) {
-  include $local_settings;
-}
-MongoCursor::$slaveOkay = true;
+//$local_settings = dirname(__FILE__) . '/local.settings.php';
+//if (file_exists($local_settings)) {
+  //include $local_settings;
+//}
+//MongoCursor::$slaveOkay = true;
 $conf['image_allow_insecure_derivatives'] = TRUE;
 $conf['block_cache_bypass_node_grants'] = TRUE;
 //$base_url = 'https://'.$_SERVER['SERVER_NAME'];
