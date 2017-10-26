@@ -6233,18 +6233,20 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
     $con = mongodb();
     $people = $con->front_user_activity;
     if($showall == 1){
-        $cond = array('uid' => $uid);
+        $cond = array('uid' => $uid, 'ntype' => 'anchor', 'status' => '1');
     }
     else{
-        $cond = array();
+        $cond = array('ntype' => 'anchor');
+        $cond->distinct('nid');
     }
+    
     $cursor = $people->find($cond);
     $loopc = 0;
     $anchor_c = 0;
     $anchor_list = array();
     $anchor_data = array();
     foreach ($cursor as $document) {
-      if($document['status'] == 1 && $document['ntype'] == 'anchor'){
+      //if($document['status'] == 1 && $document['ntype'] == 'anchor'){
               
             $node_data = node_load($document['nid']);
             
@@ -6270,7 +6272,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
             $anchor_c++;
            
-          }
+         // }
     }
     //return $data;
     
