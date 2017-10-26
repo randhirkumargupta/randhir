@@ -7,3 +7,5 @@ files:
     destination: /opt/httpd/vhosts/indiatodayonline.in/httpdocs/sites/default/
   - source: scripts/setup/settings.php
     destination: /opt/httpd/vhosts/indiatodayonline.in/httpdocs/sites/default/
+  - source : simplesamlphp
+    destination: /opt/httpd/vhosts/indiatodayonline.in/
