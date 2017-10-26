@@ -6582,9 +6582,10 @@ function list_user_follow_topic_list($uid) {
     foreach ($cursor as $document) {
       
       if($document['ntype'] == "tag"){
+          $topic_follow_count = get_follower_count($document['nid']);
           $data[$loopc]['id'] = $document['nid'];
           $data[$loopc]['title'] = $document['title'];
-          $data[$loopc]['topic_follow_count'] = "";
+          $data[$loopc]['topic_follow_count'] = "$topic_follow_count";
           $loopc++;
       }
       
