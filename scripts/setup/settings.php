@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @file
  * Drupal site-specific configuration file.
@@ -309,7 +310,7 @@ $databases['sso_db']['default'] = array(
 );*/
 // end setting for UAT
 //#####################################################################################
-
+//shravan
 //for production setting
 $databases['default']['master'][] = array (
   'database' => 'indiatoday',
