@@ -69,8 +69,8 @@ $config = array(
 
  // The filesystem path of the Drupal directory.
  //'drupalroot' => '/var/www/simplesamlphp/www/drupal-sso',
- 'drupalroot' => '/var/www/html/',
-
+ //'drupalroot' => '/var/www/html/',
+ 'drupalroot' => '/opt/httpd/vhosts/indiatodayonline.in/httpdocs/',
  // Whether to turn on debug
  'debug' => true,
 
