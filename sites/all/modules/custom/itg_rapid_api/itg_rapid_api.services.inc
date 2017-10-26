@@ -6072,6 +6072,7 @@ function itg_rapid_api_anchor_list($token) {
     $message_array = array();
 
     $args = '0';
+    if($params['user_id']){
     if ($user_id != '0' && isset($authtoken_id)) {
         $args = '1';
     } else {
@@ -6092,6 +6093,10 @@ function itg_rapid_api_anchor_list($token) {
         $message_array['status_code'] = "0";
         $message_array['status_message'] = "invalid token";
         $message_array['data'] = array();
+    }
+    }
+    else{
+        $args = 1;
     }
     
    //echo "andy"; die();
