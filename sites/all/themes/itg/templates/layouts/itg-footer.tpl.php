@@ -109,6 +109,7 @@ global $base_url;
   </div>
 <!--animation emoji for hightlight end-->
 <?php
+echo time();
 if(!empty($sso_msg)) {
   print '<div class = "activate-message">
          <div class = "message-body">
