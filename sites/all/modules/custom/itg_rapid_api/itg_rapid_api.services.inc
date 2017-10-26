@@ -6510,9 +6510,9 @@ function follow_topic_data_responce($user_id, $author_id, $type) {
     $updated_datetime = "";
     $ntype = 'tag';
     $activity = $type;
-    if($activity == 'follow_story'){
+    if($type == 'follow_story'){
       $dstatus = '1';
-    }elseif ($activity == 'Unfollow') {
+    }elseif ($type == 'Unfollow') {
       $dstatus = '0';
     }
     
