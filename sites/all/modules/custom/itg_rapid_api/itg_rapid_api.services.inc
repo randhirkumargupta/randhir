@@ -6550,7 +6550,7 @@ function follow_topic_data_responce($user_id, $author_id, $type) {
     if(!empty($response)){
       $data['id'] = $author_id;
       $data['is_saved'] = $response['success'];
-      $data['limit_crossed'] = '1';
+      $data['limit_crossed'] = '0';
     }    
 
     if (!empty($response)) {
