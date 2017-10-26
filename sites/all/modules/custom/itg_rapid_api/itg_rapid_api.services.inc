@@ -6229,7 +6229,7 @@ function itg_rapid_api_get_user_status($uid, $ntype, $nid) {
     $people = $con->front_user_activity;
     if(!empty($uid)){
         $cond = array('uid' => $uid, 'ntype' => $ntype, 'nid' => $nid);
-        $cursor = $people->findOne($cond);
+        $cursor = $people->find($cond);
         return $cursor['status'];
     }
 }
