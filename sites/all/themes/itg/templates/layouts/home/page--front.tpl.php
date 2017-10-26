@@ -998,35 +998,7 @@ if ($theme != 'itgadmin') {
   </div>
   <?php
 }
-if ($theme != 'itgadmin') {
-  drupal_add_js("jQuery(document).ready(function() {
-       jQuery('.add-more-block').on('click', function() {
-                jQuery(this).hide();
-                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').slideDown( 1000);
-                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.removes-more-block').show();
-                jQuery(this).parent().parent('.itg-common-section').next('.show-on-add').find('.add-more-block').show();
-                 if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').next('.itg-common-section').is(':visible')) {
-                  jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').find('.add-more-block').hide();
-                }
-            });
-            jQuery('.add-more-block').each(function() {
 
-                if (jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').is(':visible')) {
-                    jQuery(this).hide();
-                }
-                if(jQuery(this).parent().parent('.itg-common-section').next('.itg-common-section').html() ==null)
-                {
-                    jQuery(this).remove();
-                }
-            });
-             jQuery('.removes-more-block').on('click', function() {
-                jQuery(this).hide();
-                 jQuery(this).parent('.itg-common-section').hide();
-                jQuery(this).parent('.itg-common-section').prev('.itg-common-section').find('.add-more-block').show();
-            });
-      
-    });", array('type' => 'inline', 'scope' => 'footer'));
-}
 ?>
 <?php if ($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
   <script>
