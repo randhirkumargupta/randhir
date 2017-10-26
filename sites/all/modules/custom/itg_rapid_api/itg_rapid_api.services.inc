@@ -6234,13 +6234,19 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
     $people = $con->front_user_activity;
     if($showall == 1){
         $cond = array('uid' => $uid, 'ntype' => 'anchor', 'status' => '1');
+        $query = $people->find($cond);
     }
     else{
-        $cond = array('ntype' => 'anchor');
-        $cond->distinct('nid');
+        $query = array('ntype' => 'anchor');
+        
+        //$cursor = $people->find({ distinct: "nid", key: "name", $query } );
+        $query = $people->find($cond);
+        $cond->distinct('nid', $query);
+         
+        //find ( { distinct: "nid", key: "name", query: { "status":"1","nid":"1989" } } ).pretty();
     }
     
-    $cursor = $people->find($cond);
+    
     $loopc = 0;
     $anchor_c = 0;
     $anchor_list = array();
@@ -6257,7 +6263,8 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             
             $a_profile_image = completeFilePath($a_profile_image_fid);
             $a_follower_count = get_follower_count($a_id);
-            $a_is_following = $value['status'];
+            $a_is_following = $document['status'];
+            $a_is_userid = $document['uid'];
             $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value']; 
             $a_location = "";
             $a_desc = $node_data->body['und'][0]['value'];
@@ -6265,6 +6272,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $anchor_list[$anchor_c]['a_id'] = "$a_id";
             $anchor_list[$anchor_c]['a_title'] = "$a_title";
             $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
+            $anchor_list[$anchor_c]['a_is_userid'] = "$a_is_userid";
             $anchor_list[$anchor_c]['a_is_following'] = "$a_is_following";
             $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
             $anchor_list[$anchor_c]['a_twitter_handler'] = "$a_twitter_handler";
