@@ -5992,8 +5992,11 @@ function get_follower_count($a_id){
         $cond = array('nid' => $a_id);
         $cursor = $people->find($cond);
         $loopc = 0;
-        foreach ($cursor as $document) {          
-          $count++;
+        foreach ($cursor as $document) { 
+            if($document['status'] == 1){
+                $count++;
+            }
+          
         }
     }
     return $count;
