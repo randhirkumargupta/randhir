@@ -6341,7 +6341,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
             $anchor_c1++;
           }
           elseif($value['ntype']=="tag"){
-            $a_id = $node_data->nid;            
+            $a_id = $value['nid'];            
             
             $topics_list[$anchor_c2]['t_id'] = "$a_id";
             
