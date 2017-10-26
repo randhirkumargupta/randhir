@@ -490,9 +490,9 @@ function itg_user_role_and_permissions() {
                     <td>' . t('No') . '</td>
                     <td>' . t('No') . '</td>
                     <td>' . t('Yes') . '</td>
-                    <td>' . t('Yes') . '</td>
-                    <td>' . t('Yes') . '</td>
-                    <td>' . t('Yes') . '</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <th>' . t('Ads') . '</th>
@@ -514,8 +514,8 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -539,8 +539,8 @@ function itg_user_role_and_permissions() {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
                     <td>' . t('Yes') . '</td>
+                    <td></td>
                 </tr>
             </tbody>
 
