@@ -5688,7 +5688,7 @@ function follow_anchor_responce($token, $user_id, $node_id) {
 
     // check args
     if ($args != '0') {
-        $jsondata = follow_author_data_responce($user_id, $author_id,$type);
+        $jsondata = follow_anchor_data_responce($user_id, $author_id,$type);
     } else {
         $jsondata = $message_array;
     }
