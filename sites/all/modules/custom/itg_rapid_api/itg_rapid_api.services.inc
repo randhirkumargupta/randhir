@@ -5910,7 +5910,7 @@ function list_anchor_data_responce($uid) {
   
   $anchor_data['anchor'] = $anchor_list;
 
-    if ($anchor_c > 0) {
+    if ($loopc > 0) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
         $output_array['data'] = $anchor_data;
@@ -5964,7 +5964,7 @@ function list_author_data_responce($uid) {
   
   $anchor_data['anchor'] = $anchor_list;
 
-    if ($anchor_c > 0) {
+    if ($loopc > 0) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
         $output_array['data'] = $anchor_data;
