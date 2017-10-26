@@ -201,8 +201,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                       if (isset($widget_data[$blockid]['block_title'])) {
                                         $cls = 'active';
                                       } 
-                                    ?>
+                                    ?>                                       
                                         <a class="droppable <?php print $cls; ?>" data-tabwidget_display="region-section-content" id="<?php print $blockid; ?>" href="javascript:;">
+                                            
                                             <div class="data-holder" id="<?php print $blockid; ?>">
                                         <?php
                                         if (isset($widget_data[$blockid]['block_title'])) {
@@ -212,7 +213,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                           echo 'Drag Category';
                                         }
                                         ?>
+                                                <span class="delete-block-widget" delete-block-id="<?php print $blockid; ?>"><i class="fa fa-times"></i></span>
                                             </div>
+                                            
                                         </a>
                                     </li>
 
