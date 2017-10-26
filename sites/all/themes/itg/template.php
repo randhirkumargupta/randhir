@@ -467,9 +467,38 @@ function itg_html_head_alter(&$head_elements) {
       }
     }
   }
+  if ($default_mobile_metatags) {
+    $head_elements['viewport'] = array(
+      '#tag' => 'meta',
+      '#type' => 'html_tag',
+      '#attributes' => array(
+        'name' => 'viewport',
+        'content' => 'width=device-width, minimum-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+      ),
+    );
+  }
+  
   $head_elements['metatag_description_0']['#weight'] = -1000;
   $head_elements['metatag_keywords_0']['#weight'] = -999;
   $head_elements['system_meta_content_type']['#weight'] = -998;
+  $head_elements['og_locale']['#weight'] = -997;
+  $head_elements['og_sitename']['#weight'] = -996;
+  $head_elements['twitter_tag2']['#weight'] = -995;
+  $head_elements['twitter_tag3']['#weight'] = -994;
+  $head_elements['twitter_tag1']['#weight'] = -993;
+  $head_elements['twitter_tag0']['#weight'] = -992;
+  $head_elements['twitter_tag4']['#weight'] = -991;
+  $head_elements['fb_og_type']['#weight'] = -990;
+  $head_elements['og_description']['#weight'] = -989;
+  $head_elements['fb_og_title']['#weight'] = -988;
+  $head_elements['fb_og_url']['#weight'] = -987;
+  $head_elements['twitter_tag5']['#weight'] = -986;
+  $head_elements['system_meta_generator']['#weight'] = -985;
+  $head_elements['twitter_tag5']['#weight'] = -984;
+  $head_elements['fia_pagesid']['#weight'] = -983;
+  $head_elements['og_publish_time']['#weight'] = -982;
+  $head_elements['metatag_generator_0']['#weight'] = -981;
+  $head_elements['viewport']['#weight'] = -980;
 }
 
 /**
