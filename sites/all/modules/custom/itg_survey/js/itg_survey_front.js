@@ -4,7 +4,7 @@
 
 (function($) {
   Drupal.behaviors.itg_survey = {
-    attach: function(context, settings) {      
+    attach: function(context, settings) {
       // Hide title form take survey page
       var surveyStr = $(location).attr('href');
       if (surveyStr.indexOf("itg-survey") > 0) {
@@ -25,3 +25,10 @@ jQuery(document).ready(function () {
         });
     }
 });
+
+// Scroll page to top.
+(function($) {
+  $.fn.itgScrollTop = function(data) {
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
+  };
+})(jQuery);
