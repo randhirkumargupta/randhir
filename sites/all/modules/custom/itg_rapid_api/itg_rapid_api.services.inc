@@ -5962,7 +5962,7 @@ function list_author_data_responce($uid) {
   }
   
   
-  $anchor_data['anchor'] = $anchor_list;
+  $anchor_data['author'] = $anchor_list;
 
     if ($loopc > 0) {
         $output_array['status_code'] = "1";
@@ -6555,7 +6555,7 @@ function follow_topic_data_responce($user_id, $author_id, $type) {
 
     if(!empty($response)){
       $data['id'] = $author_id;
-      $data['is_saved'] = $response['success'];
+      $data['is_saved'] = 1; //$response['success'];
       $data['limit_crossed'] = '0';
     }    
 
