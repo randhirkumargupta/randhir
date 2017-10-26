@@ -59,6 +59,58 @@ function itg_api_cronapi($op, $job = NULL) {
 }
 
 /**
+ * Implements hook_menu().
+ *  only for debugging purpose
+ * @return array
+ */
+function itg_api_menu() {
+  
+  $items['ty-pti'] = array(
+    'page callback' => 'itg_pti_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_pti.inc',
+  );
+  
+  $items['ty-ani'] = array(
+    'page callback' => 'itg_ani_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_ani.inc',
+  );
+  
+  $items['ty-ians'] = array(
+    'page callback' => 'itg_ians_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_ians.inc',
+  );
+  
+  $items['ty-mail-today'] = array(
+    'page callback' => 'itg_api_mail_today_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_mail_today.inc',
+  );
+  
+  $items['ty-reuters'] = array(
+    'page callback' => 'itg_reuters_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_reuters.inc',
+  );
+  
+  $items['ty-ap'] = array(
+    'page callback' => 'itg_ap_content',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_api_ap.inc',
+  );
+  
+  return $items;
+}
+
+/**
  * Implements hook_permission.
  *
  * {@inheritdoc}
@@ -294,6 +346,23 @@ function itg_custom_byline_create($uniqueid = NULL, $bylineid) {
           'byline_weight' => 0,
           'created' => REQUEST_TIME
         ))
+        ->execute();
+  }
+}
+
+/**
+ * Implements hook_node_delete()
+ * {@inheritdoc}
+ */
+function itg_api_node_delete($node) {
+  if ($node->type == 'story' && !empty($node->nid)) {
+    // delete node from custom xml table
+    db_delete('itg_api_xml_info')
+        ->condition('nid', $node->nid)
+        ->execute();
+    // delete byline from custom tabe incase of node delete
+    db_delete('itg_multi_byline_info')
+        ->condition('nid', $node->nid)
         ->execute();
   }
 }

@@ -17,7 +17,7 @@
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <!--<link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>-->
-  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+  <!--<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>-->
   <script type="text/javascript">
     if (window.location.hash && window.location.hash == '#_=_') {
         window.location.hash = '';
@@ -56,5 +56,14 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
+    <script type='text/javascript'>
+var _comscore = _comscore || [];
+_comscore.push(
+{ c1: "2", c2: "8549097" }
+);
+(function()
+{ var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); }
+)();
+</script><noscript><img src="http://b.scorecardresearch.com/p?c1=2&ac2=8549097&cv=2.0&cj=1"/></noscript>
 </body>
-</html>
+</html> 

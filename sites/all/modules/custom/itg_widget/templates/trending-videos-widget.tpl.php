@@ -17,7 +17,7 @@
         <?php } ?>
         <p title="<?php echo $entity['title']; ?>">
         <?php if (!empty($entity['title'])) : ?>
-          <?php echo l(itg_common_get_smiley_title($entity['nid'], 0, 120, ".."), "node/" . $entity['nid'] , array("attributes" => array("title" => $entity['title']))) ?>
+          <?php echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 120, ".."), "node/" . $entity['nid'] , array("attributes" => array("title" => _widget_title($entity['title'])))) ?>
         <?php endif; ?>
         </p>
       </li>

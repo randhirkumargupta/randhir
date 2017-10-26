@@ -274,6 +274,13 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_photo_story']['und'][0]['remove_button']['#prefix'] = '<div style="display:none;"';
         $form['field_photo_story']['und'][0]['remove_button']['#suffix'] = '</div>';
       }
+      $form['upload'] = array(
+        '#type' => 'plupload',
+        '#weight' => 21,
+        '#upload_validators' => array(
+          'file_validate_extensions' => array("png gif jpg jpeg"),
+        ),
+      );
       break;
   }
 
@@ -866,7 +873,15 @@ function itg_story_node_view($node, $view_mode, $langcode) {
           $config[] = $value['value'];
         }
       }
-      if (in_array('lock_story', $config)) {
+      
+      if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+        $get_backend_url = explode("/", BACKEND_URL);
+        $referer_url = explode("/", $_SERVER['HTTP_REFERER']);
+        if (in_array('lock_story', $config) && $referer_url[2] != $get_backend_url[2]) {
+          drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+        }
+      } 
+      elseif (in_array('lock_story', $config)) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
     }
@@ -922,8 +937,11 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       $node->content['migrated_count'] = itg_get_migrated_like_count($node->nid);
     }
 
-    if (function_exists('itg_common_get_latest_byline')) {
-      $node->content['byline_id'] = itg_common_get_latest_byline($node->nid, '1');
+    if (function_exists('itg_common_get_latest_byline') && function_exists('itg_get_multi_byline_details')) {
+      if (!empty($node->field_reporter_publish_id['und'][0]['value'])) {
+        $byline = itg_common_get_latest_byline($node->nid, '1');
+        $node->content['byline_id'] = itg_get_multi_byline_details($byline);
+      }
     }
 
     if (isset($node->field_story_type[LANGUAGE_NONE][0]['value']) && $node->field_story_type[LANGUAGE_NONE][0]['value'] == 'photo_story') {
@@ -943,7 +961,12 @@ function itg_story_node_view($node, $view_mode, $langcode) {
 
     if (function_exists('itg_common_get_smiley_title')) {
       if (!empty($node->field_emoji[LANGUAGE_NONE][0]['value']) || !empty($node->field_emoji_2[LANGUAGE_NONE][0]['value'])) {
-        $node->content['story_title'] = itg_common_get_smiley_title($node->nid, 0, 255, TRUE);
+       $node_smiley_array = array('field_story_short_headline_value' => $node->field_story_short_headline['und'][0]['value'],
+                                  'field_emoji_position_value' => $node->field_emoji_position['und'][0]['value'],
+                                  'field_emoji_2_value' => $node->field_emoji_2['und'][0]['value'],
+                                  'field_emoji_value' => $node->field_emoji['und'][0]['value'],
+                                  'title' => $node->title);
+        $node->content['story_title'] = itg_common_get_smiley_title($node_smiley_array, 0, 255, TRUE);
       }
       else {
         $node->content['story_title'] = $node->title;
@@ -1003,6 +1026,8 @@ function itg_story_movie_image_plugin_data($node_obj, $source = NULL) {
         // store the actual image path
         $sample_img_path = $entity[$val['value']]->field_technology_sample_photo['und'][0]['uri'];
         $sample_img = image_style_url('video_landing_page_170_x_127', $sample_img_path);
+        $ori_img_fid = $entity[$val['value']]->field_technology_sample_photo['und'][0]['fid'];
+        $href_sample_img = itg_story_sample_image_path($ori_img_fid);
         // store image title
         $sample_title = mb_strimwidth($entity[$val['value']]->field_technology_photo_title['und'][0]['value'], 0, 35, "..");
         // generate html 
@@ -1011,7 +1036,7 @@ function itg_story_movie_image_plugin_data($node_obj, $source = NULL) {
           $html .='<amp-img height="127" width="170" alt="sample photo" src="' . $sample_img . '"></amp-img>';
         }
         else {
-          $html .= '<img src="' . $sample_img . '"  alt=""/>';
+          $html .= '<a rel="prettyPhoto[gallery2]" href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt=""/></a>';
         }
         $html .= '<span class="smp-date">' . $dty . '</span>';
         $html .= '<p>' . $sample_title . '</p>';
@@ -1141,7 +1166,6 @@ function itg_story_photo_amp_html($node) {
 
       $entity_obj = entity_load('field_collection_item', array($val['value']));
       $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
-
       $photo_story_img = image_style_url('photo_story_771x432', $photo_story_img_path);
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
       $photo_story_img_title = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['title'];
@@ -1149,11 +1173,17 @@ function itg_story_photo_amp_html($node) {
       if (function_exists('itg_story_get_image_info')) {
         $getImageInfo = itg_story_get_image_info($entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid']);
       }
+      $photo_story_src_set = '';
+      if (!empty($photo_story_img_path)) {
+        $photo_image_uri = file_create_url($photo_story_img_path);
+        $photo_image_data = getimagesize($photo_image_uri);
+        $photo_story_src_set = $photo_image_uri . ' ' . $photo_image_data[0] . 'w';
+      }
       $html .='<div class="slide"><div class="photo-slide"><amp-img src="' . $photo_story_img . '?image=' . $i . '"
       width="771"
       height="432"
       layout="responsive"
-      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
+      alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '" srcset="'.$photo_story_src_set.'"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
       <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><amp-fit-text>' . $photo_story_desc . '</amp-fit-text></div>';
       $i++;
     }
@@ -1183,11 +1213,17 @@ function itg_story_photo_amp_bottom_html($node) {
       $photo_story_file_name = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['filename'];
       $photo_story_img_title = $entity_obj[$photo_story[$i]['value']]->field_photo_story_image['und'][0]['title'];
       $photo_story_img = image_style_url('photo_story_small_88x66', $photo_story_img_path);
+      $photo_story_src_set = '';
+      if (!empty($photo_story_img_path)) {
+        $photo_image_uri = file_create_url($photo_story_img_path);
+        $photo_image_data = 88;
+        $photo_story_src_set = ', ' . $photo_image_uri . ' ' . $photo_image_data . 'w';
+      }
       $html .= '<button on="tap:carousel-with-preview.goToSlide(index=' . $index . ')">
       <amp-img src="' . $photo_story_img . '?image=' . $slide . '"
         width="88"
         height="66"
-       alt="' . $photo_story_img_title . '"><div fallback>offline</div></amp-img><span class="counter">' . $slide . '</span>
+       alt="' . $photo_story_img_title . '" srcset="'.$photo_story_src_set.'"><div fallback>offline</div></amp-img><span class="counter">' . $slide . '</span>
     </button>';
       $index++;
       $slide++;
@@ -1289,7 +1325,8 @@ function _sponsor_category_setting() {
 function _is_external_url_story_article($nid) {
   
   $is_external_url = FALSE;
-  if (isset($nid)) {
+  //commented by shravan and discussed with shashank
+ /* if (isset($nid)) {
     if (db_table_exists('field_data_field_story_external_url')) {
       $type_query = db_select('node', 'n');
       $type_query->fields('n', array('type'));
@@ -1308,6 +1345,230 @@ function _is_external_url_story_article($nid) {
         }
       }
     }
-  }
+  }*/
   return $is_external_url;
+}
+
+/**
+ * Function return tech photogallery html
+ * @param Array $tech_photo_arr
+ * @return string
+ */
+function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias) {
+  $count = 0;
+  $output = '';
+  $output .= '<div class="tech-photos">';
+  $output .= '<div class="tech-photos-head-section"><h3 class="tech-photo-head">Photos</h3>';
+  $output .= '<span class="tech-photos-count">' . count($tech_gallery_images[LANGUAGE_NONE]) . ' Photos</span></div>';
+  foreach ($tech_gallery_images[LANGUAGE_NONE] as $num => $val) {
+    if ($count == 3) {
+      break;
+    }
+    $photo_img_alt = '';
+    $photo_img_title = '';
+    $gallery_entity = entity_load('field_collection_item', array($val['value']));
+    $photo_img_path = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['uri'];
+    $photo_img = image_style_url('video_landing_page_170_x_127', $photo_img_path);
+    $photo_img_alt = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['alt'];
+    $photo_img_title = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['title'];
+    $output .= '<div class="tech-photo-item">';
+    $output .= '<a href="/' . $tech_gallery_alias . '" target="_blank">';
+    $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
+    $output .= '</a>';
+    if ($count == 2) {
+      $output .= '<div class="tech-photo-overlay">';
+      $output .= '<a href="/' . $tech_gallery_alias . '" target="_blank" title="More"><span class="tech-photo-seemore"> +SEE MORE</span> </a>';
+      $output .= '</div>';
+    }
+    $output .= '</div>';
+    $count++;
+  }
+  $output .= '</div>';
+  return $output;
+}
+
+/**
+ * Function return original image fid
+ * @param Integer $ori_fid
+ * @return string
+ */ 
+function itg_story_sample_image_path($ori_fid){
+  $query = db_select('itg_all_orignal_image', 'ioi');
+  $query->fields('ioi', array('url'));
+  $query->condition('fid', $ori_fid, '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+/**
+ * Implements hook_field_attach_form().
+ * {@inheritdoc}
+ */
+function itg_story_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
+  $options = array('language' => field_valid_language($langcode));
+  // Merge default options.
+  $default_options = array(
+    'default' => FALSE,
+    'deleted' => FALSE,
+    'language' => NULL,
+  );
+  $options += $default_options;
+  list($a, $b, $bundle) = entity_extract_ids($entity_type, $entity);
+
+  $instances = _field_invoke_get_instances($entity_type, $bundle, $options);
+  // Iterate through the instances.
+  $return = array();
+  foreach ($instances as $instance) {
+    $field = field_info_field_by_id($instance['field_id']);
+    $field_name = $field['field_name'];
+    //If we are looking at our field type and specific widget type, and we are multiple entries
+    if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection") && ($field['field_name'] == 'field_story_technology')) {
+      if ($field['bundles']['node'][0] == "story") {
+        drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/upload.js', array('weight' => 2, 'scope' => 'footer'));
+        // Check just in case the button is here, and add another #submit function
+        if (isset($form[$field['field_name']]['und']['add_more'])) {
+          // add a simple select list, this defaults to numb 3
+          $form[$field['field_name']]['add_more_number'] = array(
+            '#type' => 'select',
+            '#options' => drupal_map_assoc(range(0, 20)),
+            '#default_value' => 1,
+            '#attributes' => array('style' => 'display:none;'),
+          );
+          $form[$field['field_name']]['und']['add_more']['#submit'][] = 'itg_story_field_add_more_submit';
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_submit().
+ * @global object $user
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_story_field_add_more_submit($form, &$form_state) {
+  global $user;
+  $button = $form_state['triggering_element'];
+  // Go one level up in the form, to the widgets container.
+  $element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
+  $field_name = $element['#field_name'];
+  $langcode = $element['#language'];
+  $parents = $element['#field_parents'];
+
+  // Alter the number of widgets to show. items_count = 0 means 1.
+  $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
+  //get the number from the select
+  $numbtoadd = $form[$field_name]['add_more_number']['#value'];
+  if ($numbtoadd) {
+    $field_state['items_count'] += $numbtoadd - 1;
+    field_form_set_state($parents, $field_name, $langcode, $form_state, $field_state);
+    $form_state['rebuild'] = TRUE;
+  }
+  $node = drupal_rebuild_form('story_node_form', $form_state, $old_form = NULL);
+  $filedir = ITG_IMAGE_FOLDER . 'story/' . date('Ym') . '/';
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  }
+  chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  $fids = array();
+  foreach ($node['upload']['#value'] as $img) {
+    // Save media file.
+    $scheme = variable_get('file_default_scheme', 'public') . '://';
+    $source = $img['tmppath'];
+
+    $directory = $filedir;
+    $destination = file_stream_wrapper_uri_normalize($scheme . $directory . $img['name']);
+    $destination = file_unmanaged_move($source, $destination, FILE_EXISTS_RENAME);
+    global $user;
+    // Create the file object.
+    $uri = file_stream_wrapper_uri_normalize($destination);
+    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+    $file = new StdClass;
+    $file->uid = $user->uid;
+    $file->filename = basename($uri);
+    $file->uri = $uri;
+    $file->filemime = file_get_mimetype($uri);
+    $file->filesize = @filesize($uri);
+    $file->timestamp = REQUEST_TIME;
+    // $file->status = FILE_STATUS_PERMANENT;
+    $file->is_new = TRUE;
+    $file->status = FILE_STATUS_PERMANENT;
+    $fids[] = file_save($file);
+    file_usage_add($file, 'file', 'itg_image_repository', $file->fid);
+  }
+  $key_val = 0;
+  foreach ($fids as $file_id) {
+
+    $file_ids[$key_val]['fid'] = $file_id->fid;
+    $file_ids[$key_val]['filename'] = $file_id->filename;
+    $key_val++;
+  }
+  $i = 0;
+  foreach ($form_state['field']['field_story_technology']['und']['entity'] as $key => $filed_collection) {
+    if (!isset($filed_collection->field_technology_sample_photo['und'])) {
+      $ori_fid = itg_story_save_original_sample_image($file_ids[$i]['fid']);
+      if ($ori_fid) {
+        $form_state['field']['field_story_technology']['und']['entity'][$key]->field_technology_sample_photo['und'][0]['fid'] = $ori_fid;
+      }
+      $i++;
+    }
+  }
+}
+
+/**
+ * 
+ * @global object $user
+ * @param integer $fid
+ * @return integer fid
+ */
+function itg_story_save_original_sample_image($fid) {
+  global $user;
+  $content_type = 'story';
+  $filedir = ITG_IMAGE_FOLDER . $content_type . '/' . date('Ym');
+  if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+    mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  }
+  chmod(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+  $file_image = file_load($fid);
+  $file_url_orignal = file_create_url($file_image->uri);
+  $image = image_load($file_image->uri);
+  if (!empty($image)) {
+    $image_exten = end(explode('.', $file_image->uri));
+    $filepath = file_default_scheme() . '://' . $filedir;
+    $image_width = EXTRA_LARGE_IMAGE_WIDTH;
+    $image_height = EXTRA_LARGE_IMAGE_HEIGHT;
+    if ($image->info['width'] < $image_width || $image->info['height'] < $image_height) {
+      $scaled = image_scale($image, $image_width, $image_height, true);
+    }
+    else {
+      $scaled = image_scale_and_crop($image, $image_width, $image_height);
+    }
+    $image_name_orignal = $file_image->filename;
+    $image_name_orignal = substr($image_name_orignal, 0, (strrpos($image_name_orignal, ".")));
+    $image_name = $image_name_orignal . '-' . $image_width . 'x' . $image_height;
+    $image_name = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $image_name);
+    $sav = image_save($image, $filepath . '/' . $image_name . '.' . $image_exten);
+    $uri = $filepath . '/' . $image_name . '.' . $image_exten;
+    $wrapper = file_stream_wrapper_get_instance_by_uri($uri);
+    $file = new StdClass;
+    $file->uid = $user->uid;
+    $file->filename = basename($uri);
+    $file->uri = $uri;
+    $file->filemime = file_get_mimetype($uri);
+    $file->filesize = @filesize($uri);
+    $file->timestamp = REQUEST_TIME;
+    $file->is_new = TRUE;
+    $file->status = FILE_STATUS_PERMANENT;
+    $file = file_save($file);
+    file_usage_add($file, 'file', 'field_collection_item', 1);
+    if ($file->fid) {
+      db_insert('itg_all_orignal_image')->fields(array(
+        'fid' => $file->fid,
+        'orignal_fid' => $fid,
+        'url' => $file_url_orignal
+      ))->execute();
+    }
+    return $file->fid;
+  }
 }

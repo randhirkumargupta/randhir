@@ -118,9 +118,9 @@ $uri = base64_encode($actual_link);
                                       <div class="bounce2"></div>
                                       <div class="bounce3"></div>
                                   </div></div>
-                              <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
+                              <div class="<?php echo $hide_player; ?> iframe-video" id="video_palyer_container"> <div class = "video-iframe-wrapper">
 
-                                      <div class="iframe-video1 video-iframe-wrapper" id="video_0">
+                                      <div class=" video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
                                             print theme('internal_video_player', array("data" => $videoids[0]->fid));
@@ -137,7 +137,7 @@ $uri = base64_encode($actual_link);
                                                   {
                                                       video: '<?php print $vide_dm_id; ?>',
                                                       width: '600px',
-                                                      height: '450px',
+                                                      height: '100%',
                                                       params: {
                                                           autoplay: <?php echo $autoplay; ?>,
                                                           controls: 1,
@@ -383,15 +383,53 @@ $uri = base64_encode($actual_link);
                       print render($render_array);
                       ?>
                   </div>
-                  <div class="latest_video">
-                      <?php echo views_embed_view('video_landing_header', 'block_1'); ?>
-                  </div>
+                  <div class="latest_video video_header_tabs">
+                        <?php //echo views_embed_view('video_landing_header', 'block_1');?>
+                        <?php
+                        if (function_exists('itg_get_related_content')) {
+                          $related_content = itg_get_related_content(arg(1));
+                          $_flag = true;
+                          if (empty($related_content)) {
+                            $_flag = false;
+                          }
+                        }
+                        ?>
+                        <div class="tab-buttons">
+                            <span class="<?php echo ($_flag ? 'active' : ''); ?>" data-id="tab-data-1">
+                                <?php
+                                print 'Related';
+                                ?>
+                            </span>
+                            <span class="<?php echo (!$_flag ? 'active' : ''); ?>" data-id="tab-data-2">
+                                <?php
+                                print 'Trending Videos';
+                                ?>
+                            </span>
+                        </div>
+                        <div class="itg-widget-child tab-data tab-data-1 <?php echo ($_flag ? '' : 'hide'); ?>">						
+                            <?php
+                            if (module_exists('itg_videogallery')) {
+                              $related_content_tab = block_load('itg_videogallery', 'itg_videogallery_tab_realted');
+                              $render_array = _block_get_renderable_array(_block_render_blocks(array($related_content_tab)));
+                              print render($render_array);
+                            }
+                            ?>
+                        </div>
+                        <div class="itg-widget-child tab-data tab-data-2 <?php echo (!$_flag ? '' : 'hide'); ?>">
+                            <?php
+                            if (module_exists('itg_widget')) {
+                              $watch_right_now = block_load('itg_videogallery', 'itg_trending_videos_widget_tab');
+                              $render_array = _block_get_renderable_array(_block_render_blocks(array($watch_right_now)));
+                              print render($render_array);
+                            }
+                            ?>
+                        </div>
+                    </div>
               </div>
           </div>
       </div>
   </div>
 <?php endforeach; ?>
-
 <script>
   jQuery(document).ready(function () {
 

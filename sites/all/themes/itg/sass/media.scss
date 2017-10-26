@@ -73,8 +73,12 @@
     }
     /*defalt add for special pages START*/
     .itg-layout-container .ad-widget {
-        height: 295px;
-        padding: 20px;
+        height: 250px;
+        padding: 0px;
+    }
+    section.sidebar .block-itg-ads {
+        padding: 0;
+        border-bottom: none;
     }
     /*defalt add for special pages END*/
     /* css for dont miss*/
@@ -104,11 +108,6 @@
         .auto-block-2 {
             height: 520px;
             margin-bottom: 50px;
-        }
-        .auto-block-2 {
-            .special-top-news {
-                overflow: auto;
-            }
         }
         .auto-block-3 {
             .ad-widget {
@@ -141,6 +140,48 @@
     #block-itg-widget-featured-video-carousel-r {
         background: #171717;
         padding: 30px 0 0 0;
+        .slick-slide {
+            position: relative;
+        }
+        .slick-prev,
+        .slick-next {
+            font: normal normal normal 14px/1 FontAwesome;
+            cursor: pointer;
+            width: 50px;
+            height: 100px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 0 90px 90px 0;
+            left: 10px;
+            font-size: 0;
+            position: absolute;
+            top: 50%;
+            z-index: 9;
+            border: none;
+            margin-top: -50px;
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+            &:before {
+                content: '\f053';
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: 30px;
+                padding-left: 0;
+                left: 0;
+                position: absolute;
+                top: 16px;
+            }
+        }
+        .slick-next {
+            border-radius: 90px 0px 0px 90px;
+            right: 10px;
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+            &:before {
+                content: '\f054';
+                right: 0;
+            }
+        }
     }
     .itg-region {
         padding: 0;
@@ -416,11 +457,6 @@
         }
     }
     /*poll page css end*/
-    /*education page css start*/
-    .education-layout-page .auto-block-2 .special-top-news {
-        overflow: scroll;
-    }
-    /*education page css end*/
     /*for all special pages start*/
     .widget-wrapper {
         max-height: 100%;
@@ -822,7 +858,6 @@
     .itg-common-section .droppable,
     .sport-home-layout-page .itg-layout-615 .auto-block-1,
     .sport-home-layout-page .itg-layout-375 .droppable,
-    .sport-home-layout-page .itg-layout-615 .auto-block-2,
     .sport-home-layout-page .itg-layout-615 .droppable,
     .sport-home-layout-page .itg-layout-225 .droppable,
     .sport-home-layout-page .itg-layout-485 .droppable,
@@ -834,7 +869,6 @@
     .movie-layout-page .itg-layout-580 .itg-widget-child .droppable,
     .movie-layout-page .itg-layout-580 .droppable,
     .movie-layout-page .itg-layout-580 .droppable .auto-block-1,
-    .movie-layout-page .itg-layout-580 .droppable .auto-block-2,
     .auto-layout-page .auto-block-1,
     .election-page .right-side .itg-484 .droppable {
         height: auto;
@@ -848,13 +882,6 @@
                 }
             }
         }
-    }
-    .tech-layout-page .auto-block-1,
-    .tech-layout-page .auto-block-2,
-    .auto-layout-page .auto-block-1,
-    .auto-layout-page .auto-block-2 {
-        height: auto;
-        min-height: auto;
     }
     .itg-top-section .featured-news {
         padding-bottom: 0px;
@@ -1687,6 +1714,8 @@
                 height: inherit;
                 border: 1px solid #e4e4e4;
                 color: #5c5c5c;
+                margin-bottom: 0;
+                border-radius: 5px 5px 0 0;
             }
         }
         #block-itg-widget-tech-most-read {
@@ -1696,6 +1725,22 @@
         }
     }
     /* css end tech page */
+    #block-itg-msi-magazine-calendar {
+        margin: 0;
+    }
+    #block-itg-widget-featured-photo-carousel-r,
+    #block-itg-widget-featured-video-carousel-r {
+        .slick-prev,
+        .slick-next {
+            width: 24px;
+            height: 48px;
+            margin-top: -12px;
+            &:before {
+                font-size: 20px;
+                top: 16px;
+            }
+        }
+    }
 }
 
 @media only screen and (max-width:767px) {
@@ -1891,6 +1936,50 @@
     .home_page_poll_widget_block .poll-data .active-poll-title {
         height: auto;
     }
+    .sport-home-layout-page .right-side .col-md-12 {
+        min-height: 100%;
+    }
+    .featured_photo_carousel .flexslider .flex-direction-nav a:before,
+    .tech-block_5 .flexslider .flex-direction-nav a:before,
+    .auto-block_5 .flexslider .flex-direction-nav a:before {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 20px;
+    }
+    /* css start add by arun */
+    .live-block #cricketblog .batBollDetails .batsmanDetails {
+        width: 100%
+    }
+    .live-block #cricketblog .batBollDetails .bollerDetails {
+        width: 100%
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .sectiontime {
+        font-size: 13px;
+    }
+    .live-block #cricketblog .batBollDetails .bollerDetails .sectiontime {
+        font-size: 13px;
+    }
+    .live-block h1 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+    .live-block #cricketblog .batBollDetails {
+        padding: 5px;
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator {
+        padding-right: 14px;
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .batNameSaperator:before {
+        right: 8px;
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator {
+        padding-right: 14px;
+    }
+    .live-block #cricketblog .batBollDetails .batsmanDetails .ballNameSaperator:before {
+        right: 8px;
+    }
+    /* css end add by arun */
 }
 
 @media all and (min-width: 680px) {
@@ -2533,6 +2622,9 @@
     #content .node-event_registration-form .form-actions .form-submit {
         margin: 0;
     }
+    .election-page .election-graph-5 {
+        margin-top: -20px;
+    }
 }
 
 @media only screen and (max-width:680px) {
@@ -2717,6 +2809,10 @@
     }
     .story-section .story-right.photo-story .multiple-photo {
         padding: 0;
+        .slick-next,
+        .slick-prev {
+            display: none;
+        }
     }
     .poll-banner.image-poll-list .poll-list .voting-data .past-poll {
         margin: 0;
@@ -2752,6 +2848,9 @@
         top: 40px;
         font-size: 18px;
         line-height: 37px;
+    }
+    #block-itg-layout-manager-header-block .head-live-tv .globle-search.active {
+        width: 108px;
     }
 }
 
@@ -3628,6 +3727,10 @@
     #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
         padding: 32.4px 5px 20.2px 10px !important;
     }
+    .live-block h1 {
+        font-size: 30px;
+        line-height: 36px;
+    }
 }
 
 @media (max-width: 800px) {
@@ -3679,6 +3782,30 @@
     }
     #block-views-video-landing-header-block .video-header-left .social-likes ul li a {
         padding: 10px!important;
+    }
+    .story-photo-list-wrapper .slick-next {
+        right: -18px;
+    }
+    .tech-pros-cons-main h2 {
+        margin-left: 0%;
+        overflow: hidden;
+        width: 100%;
+    }
+    ul.pron-cons-img {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    ul.pron-cons-img li img {
+        margin-right: 0;
+        margin-top: 0px;
+        width: 100%;
+    }
+    ul.tech-pros {
+        margin-left: 6%;
+    }
+    ul.tech-pros,
+    ul.tech-cons {
+        width: 46%;
     }
 }
 
@@ -4132,6 +4259,58 @@
 @media only screen and (min-width: 769px) {
     .story-section .story-right {
         width: 79%;
+    }
+}
+
+@media (min-width: 768px) {
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .view- content {
+        float: left;
+        width: 100%;
+        overflow-x: scroll;
+    }
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .view- content ul.photo-list li {
+        width: 200px;
+        float: left;
+        padding: 0;
+    }
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .view- footer {
+        display: none
+    }
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .view- content .photo-list li:nth-child(4n+1) {
+        clear: inherit;
+    }
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .other_video_category h3 {
+        float: left
+    }
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .view- content .photo-list {
+        width: 1600px;
+        margin-left: 3px;
+    }
+}
+
+@media (max-width: 767px) {
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .view- footer {
+        display: block
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .view- content .photo-list li:nth-of-type(1n+5) {
+        display: none;
+    }
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .load- more-video- dec {
+        text-align: center;
+    }
+    #block-itg- videogallery-itg- other-videogallery- section .view-display- id-block_4 .load- more-video- dec a.add-more- video-dec {
+        display: inline-block;
+        vertical-align: top;
+        padding: 10px 20px;
+        font: 14px/18px Roboto;
+        color: #666;
+        background-color: #d1d1d1;
+        border-radius: 5px;
+        margin: 0 10px;
+        text-transform: uppercase;
     }
 }
 

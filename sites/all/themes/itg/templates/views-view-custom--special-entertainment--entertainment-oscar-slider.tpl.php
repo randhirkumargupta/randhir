@@ -2,6 +2,7 @@
     <div class="top-slider">
         <ul>
             <?php
+             global $base_url;
             foreach ($rows as $index => $row) {
                 
                     $video_class = "";
@@ -17,9 +18,10 @@
                   $img = $row['field_story_extra_large_image'];
                   
                 }else{
-                  global $base_url;
-                  $img = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg' alt='' />";
+                 
+                  $img = "<img height='443' width ='755' src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg' alt='' />";
                 }
+
                 ?>
             <li class="<?php echo $first_image; ?> image-tab-<?php echo $index; ?> common-img"><?php print l($img, 'node/'.$row['nid'], array('html' => TRUE)); ?><?php if (strtolower($row['type']) == 'videogallery') {print '<span class="osccar-play-icon"><i class="fa fa-play" aria-hidden="true"></i></span>';}?></li>
             <?php }; ?>

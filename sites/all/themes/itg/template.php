@@ -91,6 +91,10 @@ function itg_preprocess_node(&$variables) {
     drupal_add_js(drupal_get_path('theme', 'itg') . '/js/story_altr.js');
   }
   // Code ends for Akamai Purposes (Self refresh content)
+  if (!empty($node) && $node->type == 'story' && arg(2) === null && (isset($node->field_story_technology[LANGUAGE_NONE]))) {
+    drupal_add_css(drupal_get_path('theme', 'itg') . "/css/prettyPhoto.css");
+    drupal_add_js(drupal_get_path('theme', 'itg') . "/js/jquery.prettyPhoto.js");
+  }
 }
 
 /**
@@ -245,7 +249,7 @@ function itg_breadcrumb($variables) {
     if (arg(0) == 'topic' || arg(0) == 'advance_search') {
       if (!empty(arg(1)) || !empty($_GET['keyword'])) {
         if (arg(0) == 'topic') {
-          $s_name = arg(1);
+          $s_name = str_replace("-", " ", arg(1));
         }
         else if (arg(0) == 'advance_search') {
           $s_name = $_GET['keyword'];
@@ -298,7 +302,6 @@ function itg_preprocess_html(&$vars) {
  * page head alter for update the meta keywords
  */
 function itg_html_head_alter(&$head_elements) {
-
   $arg = arg();
   global $base_url;
   if (!empty(arg(1)) && is_numeric(arg(1))) {
@@ -419,6 +422,7 @@ function itg_html_head_alter(&$head_elements) {
         $head_elements['metatag_keywords_0'] = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
+            
           '#attributes' => array(
             'name' => 'news_keyword',
             'content' => $meta_keywords
@@ -463,6 +467,38 @@ function itg_html_head_alter(&$head_elements) {
       }
     }
   }
+  if ($default_mobile_metatags) {
+    $head_elements['viewport'] = array(
+      '#tag' => 'meta',
+      '#type' => 'html_tag',
+      '#attributes' => array(
+        'name' => 'viewport',
+        'content' => 'width=device-width, minimum-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+      ),
+    );
+  }
+  
+  $head_elements['metatag_description_0']['#weight'] = -1000;
+  $head_elements['metatag_keywords_0']['#weight'] = -999;
+  $head_elements['system_meta_content_type']['#weight'] = -998;
+  $head_elements['og_locale']['#weight'] = -997;
+  $head_elements['og_sitename']['#weight'] = -996;
+  $head_elements['twitter_tag2']['#weight'] = -995;
+  $head_elements['twitter_tag3']['#weight'] = -994;
+  $head_elements['twitter_tag1']['#weight'] = -993;
+  $head_elements['twitter_tag0']['#weight'] = -992;
+  $head_elements['twitter_tag4']['#weight'] = -991;
+  $head_elements['fb_og_type']['#weight'] = -990;
+  $head_elements['og_description']['#weight'] = -989;
+  $head_elements['fb_og_title']['#weight'] = -988;
+  $head_elements['fb_og_url']['#weight'] = -987;
+  $head_elements['twitter_tag5']['#weight'] = -986;
+  $head_elements['system_meta_generator']['#weight'] = -985;
+  $head_elements['twitter_tag5']['#weight'] = -984;
+  $head_elements['fia_pagesid']['#weight'] = -983;
+  $head_elements['og_publish_time']['#weight'] = -982;
+  $head_elements['metatag_generator_0']['#weight'] = -981;
+  $head_elements['viewport']['#weight'] = -980;
 }
 
 /**

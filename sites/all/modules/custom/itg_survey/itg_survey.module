@@ -10,7 +10,7 @@
 
 /**
  * Implements hook_permission
- * 
+ *
  * {@inheritdoc}
  */
 function itg_survey_permission() {
@@ -23,7 +23,7 @@ function itg_survey_permission() {
 
 /**
  * Implements hook_menu
- * 
+ *
  * {@inheritdoc}
  */
 function itg_survey_menu() {
@@ -60,7 +60,7 @@ function itg_survey_menu() {
 
 /**
  * Implements hook_theme
- * 
+ *
  * {@inheritdoc}
  */
 function itg_survey_theme() {
@@ -83,7 +83,7 @@ function itg_survey_theme() {
 
 /**
  * Implements hook_form_alter
- * 
+ *
  * {@inheritdoc}
  */
 function itg_survey_form_alter(&$form , &$form_state , $form_id) {
@@ -189,7 +189,7 @@ function itg_survey_form_after_build($form , &$form_state) {
       $type = $node->type;
       $nid = arg(1);
     }
-  }  
+  }
 
   // Array used in itg_survey.js
   $settings = array();
@@ -206,12 +206,12 @@ function itg_survey_form_after_build($form , &$form_state) {
     drupal_get_path('module' , 'itg_astro') . '/js/jquery.validate.min.js' ,
   );
 
-  // Hide multiple answer options in case of "rating" 
-  for ($ques = 0; $ques <= $form['field_survey_add_questions']['und']['#max_delta']; $ques++) {
-    if ($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_type'][LANGUAGE_NONE]['#default_value'][0] == 'rating') {
-      unset($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_option_2']);
-    }
-  }
+  // Hide multiple answer options in case of "rating"
+//  for ($ques = 0; $ques <= $form['field_survey_add_questions']['und']['#max_delta']; $ques++) {
+//    if ($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_type'][LANGUAGE_NONE]['#default_value'][0] == 'rating') {
+//      unset($form['field_survey_add_questions']['und'][$ques]['field_survey_answer_option_2']);
+//    }
+//  }
 
   // Unset metatag description
   unset($form['metatags']['intro_text']['#markup']);
@@ -239,7 +239,7 @@ function itg_survey_views_pre_render(&$view) {
 
 /**
  * Implement hook_form_views_exposed_form_alter
- * 
+ *
  * {@inheritdoc}
  */
 function itg_survey_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
@@ -252,7 +252,7 @@ function itg_survey_form_views_exposed_form_alter(&$form , &$form_state , $form_
 
 /**
  * Implement hook_node_presave
- *  
+ *
  * {@inheritdoc}
  */
 function itg_survey_node_presave($node) {
@@ -264,7 +264,7 @@ function itg_survey_node_presave($node) {
    */
 
   //p($node->type);
-  
+
   if ($node->type == 'survey' || $node->type == 'quiz') {
     if ($node->op == 'Publish') {
       $node->field_supp_publish[LANGUAGE_NONE][0]['value'] = 1;
@@ -285,15 +285,15 @@ function itg_survey_node_presave($node) {
 
 /**
  * Implement hook_node_insert
- *  
+ *
  * {@inheritdoc}
  */
 function itg_survey_node_insert($node) {
-    //set custom path alias  
+    //set custom path alias
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
-  
+
   if ($node->type == 'survey') {
     // Insert in to survey notification table
     itg_survey_insert_notification_details($node->nid , strtotime($node->field_survey_end_date[LANGUAGE_NONE][0]['value']) , 'insert');
@@ -308,7 +308,7 @@ function itg_survey_node_insert($node) {
 
 /**
  * Implement hook_node_update
- *  
+ *
  * {@inheritdoc}
  */
 function itg_survey_node_update($node) {
@@ -321,7 +321,7 @@ function itg_survey_node_update($node) {
 
 /**
  * Implement hook_node_validate
- *  
+ *
  * {@inheritdoc}
  */
 function itg_survey_node_validate($node , $form , &$form_state) {
@@ -470,7 +470,7 @@ function itg_survey_vote_percentage($nid , $ques_id , $answer) {
 }
 
 /**
- * 
+ *
  * @param int $nid
  * @param int $ques_id
  * @param string $answer
@@ -603,7 +603,7 @@ function itg_survey_show_survey_result($nid) {
 
 /**
  * Return name as per dropdown used on view survey page
- * 
+ *
  * @param string $name
  */
 function itg_survey_get_answer_type_name($name) {
@@ -663,10 +663,10 @@ function itg_survey_node_access($node , $op , $account) {
 }
 
 /**
- * Insert survey expiry date in to notification table 
- * 
+ * Insert survey expiry date in to notification table
+ *
  * Send mail before 24 hours of survey expiration
- * 
+ *
  * @param int $nid
  * @param string $expiry_date
  */
@@ -752,7 +752,7 @@ function itg_survey_send_mail_for_notification($nid) {
 
   drupal_mail('itg_survey_send_notification' , 'send_survey_noti' , $user_email_str , language_default() , $params , 'no-reply@kelltontech.com' , TRUE);
 
-  // Update mail status after sending notification      
+  // Update mail status after sending notification
   db_update('itg_survey_ntf')
       ->fields(array(
         'status' => 'Y' ,
@@ -1026,7 +1026,7 @@ function itg_survey_survey_form_validate($form , &$form_state) {
             if (trim($form_detail['answer_option' . $ques_num . '_' . $text_field]) !== '') {
               $txt_ans_flag = TRUE;
             }
-          }          
+          }
           if (!$txt_ans_flag) {
             form_set_error('answer_option' . $ques_num , t('Question "@questiontitle" is required.' , array('@questiontitle' => $form_detail['question' . $ques_num])));
           }
@@ -1059,7 +1059,7 @@ function itg_survey_survey_form_submit($form , &$form_state) {
     $user_type = 'anonymous';
   }
 
-  // Set a session for a survey (Will be same for all questions during a survey) 
+  // Set a session for a survey (Will be same for all questions during a survey)
   if (!isset($_SESSION['survey_unique_key'])) {
     $_SESSION['survey_unique_key'] = user_password(6);
   }
@@ -1212,7 +1212,7 @@ function itg_survey_survey_form_submit($form , &$form_state) {
         ))
         ->execute();
 
-    // Update table and set survey_info(status) = 1(means this survey has been completed by a user) 
+    // Update table and set survey_info(status) = 1(means this survey has been completed by a user)
     db_update('itg_survey_detail')
         ->fields(array(
           'survey_info' => 1 ,
@@ -1251,6 +1251,12 @@ function itg_survey_survey_form_submit($form , &$form_state) {
 function survey_form_ajax_handler(&$form , &$form_state) {
   $commands = array();
   $commands[] = ajax_command_replace('#messages' , '<div id="messages">' . theme('status_messages') . '</div>');
+  $commands[] = ajax_command_invoke('body', 'itgScrollTop', array(
+    array(
+      'item1' => 0,
+      'item2' => 0,
+    ),
+  ));
   return array(
     '#type' => 'ajax' ,
     '#commands' => $commands);

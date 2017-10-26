@@ -14302,3 +14302,84 @@ div.ctools-modal-content {
         margin-top: 15px;
     }
 }
+
+[id*="event-backend-node-form"] {
+    .form-field-name-field-event-tabs {
+        margin-top: 15px;
+    }
+}
+
+.node-story-form .form-type-plupload {
+    margin: 70px 20px 10px 220px;
+}
+
+
+/* css start Url Redirect page */
+
+.page-admin-config-search-redirect {
+    .action-links {
+        list-style-type: none;
+        a {
+            border-radius: 1px;
+            border: 1px solid #1fb5ad;
+            background-color: #1fb5ad;
+            box-shadow: 0 0 5px #3a8a82;
+            padding: 0 20px;
+            line-height: 32px;
+            height: 36px;
+            text-transform: uppercase;
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
+
+#redirect-list-form {
+    .table {
+        .links {
+            list-style-type: none;
+            li {
+                display: inline-block;
+                vertical-align: top;
+                +li {
+                    margin-left: 10px;
+                }
+                &.edit,
+                &.delete {
+                    a {
+                        &:after {
+                            width: 20px;
+                            height: 20px;
+                            font: normal normal normal 18px/20px FontAwesome;
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                        }
+                    }
+                }
+                &.edit {
+                    a {
+                        &:after {
+                            content: '\f044';
+                        }
+                    }
+                }
+                &.delete {
+                    a {
+                        &:after {
+                            content: '\f1f8';
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* css end Url Redirect page */

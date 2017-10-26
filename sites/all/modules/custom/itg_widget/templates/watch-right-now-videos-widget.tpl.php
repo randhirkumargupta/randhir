@@ -24,7 +24,7 @@
             <p class="title" title="<?php echo $video_data['title'] ?>">
                 <?php 
                 if(function_exists('itg_common_get_smiley_title')) {
-                  echo l(itg_common_get_smiley_title($video_data['nid'], 0, 60), "node/" . $video_data['nid'] , array('html' => TRUE , 'attributes' => array("title" => $video_data['title'])));
+                  echo l(itg_common_get_smiley_title($video_data['node_obj'], 0, 60), "node/" . $video_data['nid'] , array('html' => TRUE , 'attributes' => array("title" => _widget_title($video_data['title']))));
                 } else {
                   echo l(mb_strimwidth($video_data['title'], 0, 70, ".."), "node/" . $video_data['nid'] , array('attributes' => array("title" => $video_data['title'])));
                 }
