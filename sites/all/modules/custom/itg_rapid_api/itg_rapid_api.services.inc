@@ -6319,6 +6319,8 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
   $topics_list = array();
   $anchor_data = array();
   $anchor_c = 0;
+  $anchor_c1 = 0;
+  $anchor_c2 = 0;
   //$data = array_unique($data); field_reporter_twitter_handle]
   foreach ($data as $key => $value) {
       if($value['nid']){
@@ -6334,16 +6336,16 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
           elseif($value['ntype']=="author"){
             $a_id = $node_data->nid;            
             
-            $author_list[$anchor_c]['a_id'] = "$a_id";
+            $author_list[$anchor_c1]['a_id'] = "$a_id";
             
-            $anchor_c++;
+            $anchor_c1++;
           }
           elseif($value['ntype']=="tag"){
             $a_id = $node_data->nid;            
             
-            $topics_list[$anchor_c]['t_id'] = "$a_id";
+            $topics_list[$anchor_c2]['t_id'] = "$a_id";
             
-            $anchor_c++;
+            $anchor_c2++;
           }
       }
   }
