@@ -105,13 +105,21 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
               $active_cls = $menu_link_data['active_cls'];
               $url_type = $menu_link_data['url_type'];
               $style_tag = '';
-              $color_value = '';
+              $color_value = 'transparent';
               if(!empty($sponsored_class)) {
                 $color_value = $menu_data['db_data']['bk_color'];
               }
               ?>
               <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>">
-                  <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?>
+                  <?php print l($link_text, $link_url, array(
+                    'html' => true, 
+                    'attributes' => array(
+                      'style' => array("background : $color_value" ) ,
+                      'target' => $target,
+                      'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+                      )
+                    )
+                  ); ?>
               </li>
               <?php
             }
