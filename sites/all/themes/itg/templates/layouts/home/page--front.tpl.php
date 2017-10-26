@@ -75,7 +75,7 @@ if ($theme != 'itgadmin') {
               <a id="main-content"></a>
               <?php print render($title_prefix); ?>
               <?php if ($title): ?>
-                <h1 class="page__title title" id="page-title"><?php // print $title;                   ?></h1>
+                <h1 class="page__title title" id="page-title"><?php // print $title;                    ?></h1>
               <?php endif; ?>
               <?php print render($title_suffix); ?>
               <?php print $messages; ?>
@@ -137,6 +137,13 @@ if ($theme != 'itgadmin') {
                             <div class="widget-help-text">Template widgets ( <strong>Home Page Feature</strong> )</div>
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
+                                    <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+                                      <div class="widget-settings">
+
+                                          <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-1"><i class="fa fa-times"></i></a></span>
+
+                                      </div>  
+                                    <?php } ?>   
                                     <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
                                         <div class="data-holder" id="itg-block-1">
                                             <?php
