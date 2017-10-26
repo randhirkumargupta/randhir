@@ -6,4 +6,4 @@ files:
   - source: scripts/setup/local.settings.php
     destination: /var/www/html/sites/default/
   - source: scripts/setup/settings.php
-destination: /var/www/html/sites/default/
+    destination: /var/www/html/sites/default/
