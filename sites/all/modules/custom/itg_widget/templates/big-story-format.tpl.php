@@ -28,13 +28,13 @@ if (!empty($data['node_data'])) :
   $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   ?>
   <!-- Big news Block -->
-  <span class="widget-title"><a title="<?php echo $data['node_data']->title; ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>News</a></span>
+  <span class="widget-title"><a title="<?php echo _widget_title($data['node_data']->title); ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>News</a></span>
   <div class="big-news big-news-content-<?php print $data['node_data']->type ?>">
       <div class="row">
           <div class="big-story-col-1">
               <!-- LIVE TV IS PUT IN PLACE OF EXTRA LARGE IMAGE  -->
               <?php if (!empty($data['live_tv'])) : ?>
-                <div class='live-tv-big-story'> <?php print $data['live_tv']; ?> </div>
+                <div class='live-tv-big-story iframe-video'> <?php print $data['live_tv']; ?> </div>
               <?php else : ?>
                 <!-- EXTRA LARGE IMAGE IS PUT -->
                 <?php if (!empty($data['node_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
@@ -49,7 +49,7 @@ if (!empty($data['node_data'])) :
                   $fb_image = file_create_url($data['node_data']->field_story_extra_large_image['und'][0]['uri']);
                 } else {
                   ?>
-                  <a title="<?php echo $data['node_data']->title; ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
+                  <a title="<?php echo _widget_title($data['node_data']->title); ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
                       <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image647x363.jpg" alt="" />
                   </a>  
 
