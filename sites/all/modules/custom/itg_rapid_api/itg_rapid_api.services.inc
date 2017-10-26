@@ -6509,6 +6509,7 @@ function follow_topic_data_responce($user_id, $author_id, $type) {
     $data_array = array();
     $updated_datetime = "";
     $ntype = 'tag';
+    $dtag = 'tag';
     $activity = "follow_tags";
     if($type == 'follow_story'){
       $dstatus = '1';
