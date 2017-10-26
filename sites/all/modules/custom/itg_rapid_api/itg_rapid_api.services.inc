@@ -6308,6 +6308,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
      
       $data[$loopc]['nid'] = $document['nid'];
       $data[$loopc]['status'] = $document['status'];
+      $data[$loopc]['ntype'] = $document['ntype'];
       $loopc++;
     }
     //return $data;
@@ -6323,21 +6324,21 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
       if($value['nid']){
           $node_data = node_load($value['nid']); // 837259
           //p($node_data);die();
-          if($node_data->type=="anchor" ){
+          if($value['ntype']=="anchor" ){
             $a_id = $node_data->nid;            
             
             $anchor_list[$anchor_c]['a_id'] = "$a_id";
             
             $anchor_c++;
           }
-          elseif($node_data->type=="reporter"){
+          elseif($value['ntype']=="author"){
             $a_id = $node_data->nid;            
             
             $author_list[$anchor_c]['a_id'] = "$a_id";
             
             $anchor_c++;
           }
-          else{
+          elseif($value['ntype']=="tag"){
             $a_id = $node_data->nid;            
             
             $topics_list[$anchor_c]['t_id'] = "$a_id";
