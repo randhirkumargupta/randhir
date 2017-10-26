@@ -6223,14 +6223,22 @@ function list_itg_rapid_api_author_list($uid, $cpageno) {
   
 }
 
+/**
+ * function check user status
+ * @param int $uid
+ * @param string $ntype
+ * @param int $nid
+ * @return int
+ */
 function itg_rapid_api_get_user_status($uid, $ntype, $nid) {
     if (function_exists('mongodb')) {
-    $con = mongodb();
-    $people = $con->front_user_activity;
-    if(!empty($uid)){
-        $cond = array('uid' => $uid, 'ntype' => $ntype, 'nid' => $nid);
-        $cursor = $people->find($cond);
-        return $cursor['status'];
+        $con = mongodb();
+        $people = $con->front_user_activity;
+        if (!empty($uid)) {
+            $cond = array('uid' => $uid, 'ntype' => $ntype, 'nid' => $nid);
+            $cursor = $people->findOne($cond);
+            return $cursor['status'];
+        }
     }
 }
 
@@ -6239,53 +6247,38 @@ function itg_rapid_api_get_user_status($uid, $ntype, $nid) {
  * @param int $uid 
  */
 function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
-  $data = '';
-  if (function_exists('mongodb')) {
-    $con = mongodb();
-    $people = $con->front_user_activity;
-    if($showall == 1){
-        $cond = array('uid' => $uid, 'ntype' => 'anchor', 'status' => '1');
-        $cursor = $people->find($cond);
-    }
-    else{
-        $cond = array('ntype' => 'anchor');
+    $data = '';
+    if (function_exists('mongodb')) {
+        $con = mongodb();
+        $people = $con->front_user_activity;
+        if ($showall == 1) {
+            $cond = array('uid' => $uid, 'ntype' => 'anchor', 'status' => '1');
+            $cursor = $people->find($cond);
+        } else {
+            $cond = array('ntype' => 'anchor');
+            $cursor = $people->find($cond);
+        }
 
-        //$cursor = $people->find({ distinct: "nid", key: "name", $query } );
-        $cursor = $people->find($cond);
-       // $cursor = $people->distinct('nid', $query);
-
-        //find ( { distinct: "nid", key: "name", query: { "status":"1","nid":"1989" } } ).pretty();
-    }
-
-    
-    
-    $loopc = 0;
-    $anchor_c = 0;
-    $anchor_list = array();
-    $anchor_data = array();
-    foreach ($cursor as $document) {
-      //if($document['status'] == 1 && $document['ntype'] == 'anchor'){
-              
+        $loopc = 0;
+        $anchor_c = 0;
+        $anchor_list = array();
+        $anchor_data = array();
+        foreach ($cursor as $document) {
+            //if($document['status'] == 1 && $document['ntype'] == 'anchor'){
             $node_data = node_load($document['nid']);
-            
             $a_id = $node_data->nid;
             $a_title = $node_data->title;
-            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];      
-            
+            $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
             $a_is_following = '0';
-            if(!empty($uid)) {
+            if (!empty($uid)) {
                 $user_status = itg_rapid_api_get_user_status($uid, 'anchor', $document['nid']);
                 $a_is_following = !empty($user_status) ? $user_status : '0';
             }
-           
             $a_profile_image = completeFilePath($a_profile_image_fid);
             $a_follower_count = get_follower_count($a_id);
-            
-            
-            $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value']; 
+            $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value'];
             $a_location = "";
             $a_desc = $node_data->body['und'][0]['value'];
-            
             $anchor_list[$anchor_c]['a_id'] = "$a_id";
             $anchor_list[$anchor_c]['a_title'] = "$a_title";
             $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
@@ -6295,20 +6288,19 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $anchor_list[$anchor_c]['a_location'] = "";
             $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
             $anchor_c++;
-           
-         // }
+
+            // }
+        }
+        //return $data;
     }
-    //return $data;
-    
-  }
-  
-  $anchor_data['id'] = "$uid";
-  $anchor_data['display_label'] = "Anchors";
-  $anchor_data['anchor_count'] = "$anchor_c";
-  $anchor_data['anchor_display_count'] = "50";
-  $anchor_data['anchor_pagination_cap'] = "50";
-  
-  $anchor_data['anchor'] = $anchor_list;
+
+    $anchor_data['id'] = "$uid";
+    $anchor_data['display_label'] = "Anchors";
+    $anchor_data['anchor_count'] = "$anchor_c";
+    $anchor_data['anchor_display_count'] = "50";
+    $anchor_data['anchor_pagination_cap'] = "50";
+
+    $anchor_data['anchor'] = $anchor_list;
 
     if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
@@ -6321,7 +6313,6 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
         $output_array['data'] = $data;
     }
     return $output_array;
-  
 }
 
 /**
