@@ -6163,51 +6163,47 @@ function itg_rapid_api_get_the_user_follow_status($token) {
  */
 function list_itg_rapid_api_author_list($uid, $cpageno) {
   $data = '';
+  $anchor_list = array();
+  $anchor_data = array();
   if (function_exists('mongodb')) {
     $con = mongodb();
     $people = $con->front_user_activity;
     $cond = array('uid' => $uid);
     $cursor = $people->find($cond);
     $loopc = 0;
-    foreach ($cursor as $document) {
-      $data[$loopc]['nid'] = $document['nid'];
-      $data[$loopc]['status'] = $document['status'];
-      $loopc++;
-    }
-    //return $data;
-    
-  }
-  $anchor_list = array();
-  $anchor_data = array();
-  $anchor_c = 0;
-  //$data = array_unique($data);
-  foreach ($data as $key => $value) {
-      if($value['nid'] && $value['status'] == 1){
-          $node_data = node_load($value['nid']);
-          if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
+    foreach ($cursor as $document) {    
+      
+          
+          if($document['status'] == 1 && $document['ntype'] == 'author'){
+            $node_data = node_load($document['nid']);
             $a_id = $node_data->nid;
             $a_title = $node_data->title;
             $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
             $a_profile_image = completeFilePath($a_profile_image_fid);
             $a_follower_count = get_follower_count($a_id);
             
-            $anchor_list[$anchor_c]['a_id'] = "$a_id";
-            $anchor_list[$anchor_c]['a_title'] = "$a_title";
-            $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
-            $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
-            $anchor_c++;
+            $anchor_list[$loopc]['a_id'] = "$a_id";
+            $anchor_list[$loopc]['a_title'] = "$a_title";
+            $anchor_list[$loopc]['a_profile_image'] = "$a_profile_image";
+            $anchor_list[$loopc]['a_follower_count'] = "$a_follower_count";
+            $loopc++;
           }
-      }
+      
+    }
+    //return $data;
+    
   }
+  
+  
   $anchor_data['id'] = "$uid";
   $anchor_data['title'] = "Authors";
-  $anchor_data['author_count'] = "$anchor_c";
+  $anchor_data['author_count'] = "$loopc";
   $anchor_data['author_display_count'] = "25";
   $anchor_data['author_pagination_cap'] = "25";
   
   $anchor_data['author'] = $anchor_list;
 
-    if ($anchor_c > 0) {
+    if ($loopc > 0) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
         $output_array['data'] = $anchor_data;
@@ -6238,23 +6234,14 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
     }
     $cursor = $people->find($cond);
     $loopc = 0;
+    $anchor_c = 0;
+    $anchor_list = array();
+    $anchor_data = array();
     foreach ($cursor as $document) {
-      $data[$loopc]['nid'] = $document['nid'];
-      $data[$loopc]['status'] = $document['status'];
-      $loopc++;
-    }
-    //return $data;
-    
-  }
-  $anchor_list = array();
-  $anchor_data = array();
-  $anchor_c = 0;
-  //$data = array_unique($data); field_reporter_twitter_handle]
-  foreach ($data as $key => $value) {
-      if($value['nid']){
-          $node_data = node_load($value['nid']); // 837259
-          //p($node_data);die();
-          if($node_data->type=="anchor" || $node_data->type=="author" || $node_data->type=="reporter"){
+      if($document['status'] == 1 && $document['ntype'] == 'anchor'){
+              
+            $node_data = node_load($document['nid']);
+            
             $a_id = $node_data->nid;
             $a_title = $node_data->title;
             $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];      
@@ -6276,9 +6263,13 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $anchor_list[$anchor_c]['a_location'] = "";
             $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
             $anchor_c++;
+           
           }
-      }
+    }
+    //return $data;
+    
   }
+  
   $anchor_data['id'] = "$uid";
   $anchor_data['display_label'] = "Anchors";
   $anchor_data['anchor_count'] = "$anchor_c";
