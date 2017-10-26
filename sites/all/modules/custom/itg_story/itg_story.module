@@ -1584,7 +1584,7 @@ function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $p
         $result[$widget_name] = $widget_name;
         $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
         if (!$is_node_in_widget) {
-          if ($widget_name == 'big_story') {
+          if ($widget_name == 'big_story_format_widget') {
             $extra = '[]';
             itg_widget_insert_widget_data($nid, $widget_name, $category_tid, $extra);
           }
