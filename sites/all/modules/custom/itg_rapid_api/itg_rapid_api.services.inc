@@ -6097,6 +6097,7 @@ function itg_rapid_api_anchor_list($token) {
     }
     else{
         $args = 1;
+        $showall = 0;
     }
     
    //echo "andy"; die();
