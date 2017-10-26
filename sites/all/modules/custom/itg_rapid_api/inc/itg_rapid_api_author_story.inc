@@ -832,7 +832,7 @@ function follow_author_data_responce($user_id, $author_id, $type) {
     $data_array = array();
     $updated_datetime = "";
     $ntype = 'author';
-    $activity = $type;
+    $activity = 'follow_story';
     if($type == 'follow_story'){
       $dstatus = '1';
     }elseif ($type == 'Unfollow') {
@@ -905,7 +905,7 @@ function follow_anchor_data_responce($user_id, $author_id, $type) {
     $data_array = array();
     $updated_datetime = "";
     $ntype = 'anchor';
-    $activity = $type;
+    $activity = "follow_anchor";
     if($type == 'follow_story'){
       $dstatus = '1';
     }elseif ($type == 'Unfollow') {
