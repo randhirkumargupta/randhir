@@ -34,7 +34,7 @@ if (!empty($data['node_data'])) :
           <div class="big-story-col-1">
               <!-- LIVE TV IS PUT IN PLACE OF EXTRA LARGE IMAGE  -->
               <?php if (!empty($data['live_tv'])) : ?>
-                <div class='live-tv-big-story'> <?php print $data['live_tv']; ?> </div>
+                <div class='live-tv-big-story iframe-video'> <?php print $data['live_tv']; ?> </div>
               <?php else : ?>
                 <!-- EXTRA LARGE IMAGE IS PUT -->
                 <?php if (!empty($data['node_data']->field_story_extra_large_image['und'][0]['uri'])) { ?>
