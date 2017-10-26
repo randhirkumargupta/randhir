@@ -6279,8 +6279,8 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
   $anchor_data['id'] = "$uid";
   $anchor_data['display_label'] = "Anchors";
   $anchor_data['anchor_count'] = "$anchor_c";
-  $anchor_data['anchor_display_count'] = "25";
-  $anchor_data['anchor_pagination_cap'] = "25";
+  $anchor_data['anchor_display_count'] = "50";
+  $anchor_data['anchor_pagination_cap'] = "50";
   
   $anchor_data['anchor'] = $anchor_list;
 
