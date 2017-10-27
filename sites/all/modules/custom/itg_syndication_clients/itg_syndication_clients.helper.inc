@@ -195,5 +195,17 @@ function get_hltapps_sections($type) {
         'election.xml' => '1206719'
       );
       break;
+    case 'video':
+      return array(
+        'topten.xml' => array('section'=> '-1', 'limit' => 10),
+        'news.xml' => array('section'=> '-1', 'limit' => 25),
+        'india.xml' => array('section'=> '1206519', 'limit' => 25),
+        'world.xml' => array('section'=> '1206520', 'limit' => 25),
+        'so-sorry.xml' => array('section'=> '1207580', 'limit' => 25),
+        'entertainment.xml' => array('section'=> '1206516', 'limit' => 25),
+        'business.xml' => array('section'=> '1206523', 'limit' => 25),
+        'election.xml' => array('section'=> '1207655', 'limit' => 25)
+      );
+      break;
   }
 }
