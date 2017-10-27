@@ -1402,11 +1402,11 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     else if (!empty ($vbo_state) && $vbo_state == 'pub-unpub'){
       if ($vbo_update == 'published') {
         $subject_line_upd = 'unpublished';
-        $body_htwo = ucwords($content_type) . 'UNPUBLISHED';
+        $body_htwo = strtoupper($content_type) . ' UNPUBLISHED';
       } 
       elseif($vbo_update == 'draft') {
         $subject_line_upd = 'published';
-        $body_htwo = ucwords($content_type) . 'PUBLISHED';
+        $body_htwo = strtoupper($content_type) . ' PUBLISHED';
       }
       $to_mail = implode(',', $to);
       $subject = 'A new ' . $content_type . ' has been ' . $subject_line_upd . ', please find details below.';
