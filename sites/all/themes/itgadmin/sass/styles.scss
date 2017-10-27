@@ -11150,6 +11150,11 @@ div.node {
             padding: 0;
         }
     }
+    .button {
+        +.button {
+            margin-left: 10px;
+        }
+    }
 }
 
 .view-key-candidate {
@@ -14338,18 +14343,24 @@ div.ctools-modal-content {
 }
 
 #redirect-list-form {
-    .table {
+    fieldset {
+        margin: 20px 0;
+    }
+    table {
         .links {
             list-style-type: none;
             li {
                 display: inline-block;
                 vertical-align: top;
+                padding: 0 5px;
+                line-height: 14px;
                 +li {
-                    margin-left: 10px;
+                    border-left: 1px solid #000;
                 }
                 &.edit,
                 &.delete {
                     a {
+                        padding-left: 20px;
                         &:after {
                             width: 20px;
                             height: 20px;
@@ -14359,6 +14370,7 @@ div.ctools-modal-content {
                             position: absolute;
                             left: 0;
                             top: 0;
+                            display: none;
                         }
                     }
                 }

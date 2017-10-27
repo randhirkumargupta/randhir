@@ -2211,6 +2211,12 @@ footer {
             span {
                 color: $red-color;
             }
+            h1 {
+                font-size: 19px;
+                font-weight: 500;
+                color: #bb0a0a;
+                display: inline-block;
+            }
         }
         .search-menu {
             padding-bottom: 20px;
@@ -14804,3 +14810,13 @@ ul.pron-cons-img li img {
 
 
 /* css end by arun/itg */
+
+
+/*css start added by rajveer singh gangwar */
+
+.page-itg-not-found h1.page__title {
+    display: none
+}
+
+
+/*css end added by rajveer singh gangwar */
