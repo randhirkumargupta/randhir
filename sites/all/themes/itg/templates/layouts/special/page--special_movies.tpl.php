@@ -436,7 +436,7 @@ if ($theme != 'itgadmin') {
   <!--Photo slider and Watch now section starts here-->
   <?php if (isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
     <div class="row itg-h450-section">
-        <div class="col-md-8 col-sm-12 col-xs-12 mt-50">
+        <div class="col-md-8 col-sm-12 col-xs-12 mt-50 rhs-movie-list">
           <div class="widget-help-text">Special widgets ( <strong>Photo carousel</strong> )</div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -539,7 +539,7 @@ if ($theme != 'itgadmin') {
                 </div>               
             </div>  
         </div>
-         <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
+         <div class="col-md-4 col-sm-12 col-xs-12 mt-50 rhs-movie-list">
            <div class="widget-help-text"><?php print t('Special widgets');?> ( <strong><?php print t('Movies latest'); ?></strong> )</div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
