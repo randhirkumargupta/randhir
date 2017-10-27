@@ -71,12 +71,13 @@ if ($theme != 'itgadmin') {
         endif;
     ?>
     <!-- Movies top section -->
-    <div class="row itg-top-section movies-top-section itg-layout-580">
-        
+    <div class="movies-top-section">
+      <div class="container">
+    <div class="row itg-top-section itg-layout-580">
         <div class="top-block">
         <div class="col-md-8">
           <div class="widget-help-text">Special widgets ( <strong>Manual Top Story</strong> )</div>
-            <div class="">
+            <div class="backbg">
               <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                   <div id="movie-new-block" class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name'].$widget_data['itg-block-1']['widget_display_name']; ?>">
@@ -105,9 +106,9 @@ if ($theme != 'itgadmin') {
               </div>
             </div>
         </div>
-            <div class="col-md-4">
+            <div class="col-md-4 ">
               <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
-            <div class="auto-block-3">
+            <div class="auto-block-3 backbg">
                 <div class="row">
                 <div class="itg-widget-parent m-bottom40 col-md-12 col-sm-6 col-xs-12">
                   <div class="itg-widget">
@@ -127,7 +128,9 @@ if ($theme != 'itgadmin') {
                 </div>
                 </div>
             </div>
-        </div>
+        </div>            
+      </div>
+    </div>
     <!-- Movies top section ends -->
     <main id="main" class="container pos-rel">
       <?php print render($page['vertical_menu']); ?>
