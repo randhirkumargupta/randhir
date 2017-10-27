@@ -499,6 +499,10 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['og_publish_time']['#weight'] = -982;
   $head_elements['metatag_generator_0']['#weight'] = -981;
   $head_elements['viewport']['#weight'] = -980;
+  $head_elements['og_image_type']['#weight'] = -979;
+  $head_elements['og_image_height']['#weight'] = -978;
+  $head_elements['og_image_width']['#weight'] = -977;
+  $head_elements['og_image']['#weight'] = -976;
 }
 
 /**
