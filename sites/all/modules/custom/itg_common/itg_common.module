@@ -2003,6 +2003,7 @@ function get_field_value_for_smily($nid) {
  * Implements itg_get_amp_search_result().
  */
 function itg_get_amp_search_result() {
+  /* For loggin user */
   if (isset($_GET['search'])) {
     $name = isset($_GET['search']) ? $_GET['search'] : '';
     $searchurl = FRONT_URL . '/topic/' . $name;
