@@ -282,33 +282,126 @@ function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $v
   fclose($fpd);
 }
 
-function itg_genrate_hltapps_photos_syndication($result, $section_name, $section_id){
-  global $base_url;
-  $xml = '<root>';
-  $xml .= '<id>'.$section_id.'</id>';  
-  $xml .= '<title>'.$section_name.'</title>';
-  $xml .= '<itemcount>'.count($result).'</itemcount>';
+/**
+ * menu callback for Hltapps Photo syndication
+ */
+function itg_genrate_hltapps_photos_syndication($section_id = NULL, $file_name, $limit = 25) {
+  if (!empty($section_id)) {
+    $section_name = get_term_name_by_tid($section_id);
+    $type = array('photogallery');
+    $query = db_select('node', 'n');
+    $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->leftJoin('field_data_field_story_large_image', 'sli', 'sli.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    
+    $query->condition('ti.tid', $section_id, '=');
+    $query->fields('n', array('nid', 'title', 'created'));
+    $query->fields('npd', array('field_itg_content_publish_date_value'));
+    $query->fields('synopsis', array('field_story_kicker_text_value'));
+    $query->fields('sli', array('field_story_large_image_fid'));
+    $query->fields('ssi', array('field_story_small_image_fid'));
+    $query->condition('n.status', 1);
+    $query->condition('n.type', $type, 'IN');
+    $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid')->range(0, $limit);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $xml = genrate_hltapps_photos_xml($result, $section_name, $section_id);
+    $xml_path = 'public://hltapps/photos/';
+    $file_path = $xml_path . $file_name;
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+    
+  }
+}
+
+function genrate_hltapps_photos_xml($result, $section_name, $section_id){
+  $xml = '';
   if (!empty($result)) {
+    global $base_url;
+    $total_count = count($result);
+    $xml .= '<root>';
+    $xml .= '<id>'.$section_id.'</id>';
+    $xml .= '<title><![CDATA['.$section_name.']]></title>';
+    $xml .= '<itemcount>' . $total_count . '</itemcount>';
+
     foreach ($result as $value) {
       $nid = $value['nid'];
-      $video_file_name = 'video' . $nid . '.xml';
+      $photo_detail_file_name = 'photo'.$nid . '.xml';      
       $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
-      $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
       $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<shortdescription><![CDATA[' . $kicker_text . ']]></shortdescription>';
-      $xml .= '<sectionname>' . $primary_cat . '</sectionname>';
       $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
-      $xml .= '<url>'.$video_file_name.'</url>';
-      $xml .= '<web-url><![CDATA[' . $content_url . ']]></web-url>';
+      $xml .= '<url>'.$photo_detail_file_name.'</url>';
+      $xml .= '<weburl><![CDATA[' . $content_url . ']]></weburl>';
       $xml .= '<createddate>'.$created_date.'</createddate>';
       $xml .= '</item>';
-      genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $video_file_name);
+      
+      generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $photo_detail_file_name);
     }
+    $xml .= '</root>';
   }
-  $xml .= '</root>';
   return $xml;
+}
+
+function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $photo_detail_file_name){
+  global $base_url;
+  $nid = $value['nid'];
+  $gallery_img_fc = get_all_associated_photos($nid);
+  $image_count = count($gallery_img_fc);
+  $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
+  $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+  $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
+  $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
+  
+  $photo_xml .= '<root>';
+  $photo_xml .= '<id>' . $nid . '</id>';
+  $photo_xml .= '<sectionid>' . $section_id . '</sectionid>';
+  $photo_xml .= '<sectionname>' . $section_name . '</sectionname>';
+  $photo_xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
+  $photo_xml .= '<itemscount>' . $image_count . '</itemscount>';
+  $photo_xml .= '<createddate>' . $created_date . '</createddate>';
+  $photo_xml .= '<longdescription><![CDATA[' . $value['field_story_kicker_text_value'] . ']]></longdescription>';
+  $photo_xml .= '<images>';
+  $photo_xml .= '<image>';
+  $photo_xml .= '<thumbimage><![CDATA[' . $small_img["imag_url"] . ' ]]></thumbimage>';
+  $photo_xml .= '<largeimage><![CDATA[' . $large_img["imag_url"] . ' ]]></largeimage>';
+  $photo_xml .= '</image>';
+  $photo_xml .= '</images>';
+  $photo_xml .= '<weburl><![CDATA[' . $content_url . ']]></weburl>';
+  $byline = get_byline_name_by_nid($nid);
+ 
+  foreach ($gallery_img_fc as $photo) {
+    $byline = $photo['title'];
+    $large_image = '';
+    if (!empty($photo['field_images_fid'])) {
+      $large_image = get_image_info_by_fid($photo['field_images_fid']);
+    }
+    $small_image = '';
+    if (!empty($photo['field_photo_small_image_fid'])) {
+      $small_image = get_image_info_by_fid($photo['field_photo_small_image_fid']);
+    }
+
+    $photo_xml .= '<item>';
+    $photo_xml .= '<imageid>' . $photo['field_gallery_image_value'] . '</imageid>';
+    $photo_xml .= '<thumbimage>' . $small_image['imag_url'] . '</thumbimage>';
+    $photo_xml .= '<largeimage>' . $large_image['imag_url'] . '</largeimage>';
+    $photo_xml .= '<caption><![CDATA[' . $photo['field_image_caption_value'] . ']]></caption>';
+    $photo_xml .= '<byline><![CDATA[' . $byline . ']]></byline>';
+    $photo_xml .= '<alttext><![CDATA[' . $large_image['alt'] . ']]></alttext>';
+    $photo_xml .= '</item>';
+  }
+  $photo_xml .=  get_comment_xml_tag($nid);  
+  $photo_xml .= '</root>';
+  $xml_path = 'public://hltapps/photos/';
+  $file_path = $xml_path . $photo_detail_file_name;
+  $fp1 = fopen($file_path, "w");
+  fwrite($fp1, $photo_xml);
+  fclose($fp1);
 }

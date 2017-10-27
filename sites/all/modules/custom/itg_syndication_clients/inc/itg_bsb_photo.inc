@@ -108,26 +108,3 @@ function generate_photo_detail_xml($nid, $title, $section_id, $section_name, $ph
   fclose($fp);
 }
 
-/**
- * Function is used to get all gallery images.
- * @param int $nid
- * @return array
- */
-function get_all_associated_photos($nid) {
-  $query = db_select('field_data_field_gallery_image', 'gi');
-  $query->join('field_data_field_images', 'fi', 'fi.entity_id=gi.field_gallery_image_value');
-  $query->leftjoin('field_data_field_photo_small_image', 'gsi', 'gsi.entity_id=gi.field_gallery_image_value');
-  $query->leftjoin('field_data_field_image_caption', 'ic', 'ic.entity_id=gi.field_gallery_image_value');
-  $query->leftjoin('field_data_field_photo_byline', 'pb', 'pb.entity_id=gi.field_gallery_image_value');
-  $query->leftjoin('node', 'byline', 'byline.nid=pb.field_photo_byline_target_id');
-  $query->condition('gi.entity_id', $nid, '=');
-  $query->condition('gi.entity_type', 'node', '=');
-  $query->condition('gi.bundle', 'photogallery', '=');
-  $query->fields('gi', array('field_gallery_image_value'));
-  $query->fields('fi', array('field_images_fid'));
-  $query->fields('gsi', array('field_photo_small_image_fid'));
-  $query->fields('byline', array('title'));
-  $query->fields('ic', array('field_image_caption_value'));
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $result;
-}

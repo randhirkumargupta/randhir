@@ -206,6 +206,16 @@ function get_hltapps_sections($type) {
         'business.xml' => array('section'=> '1206959', 'limit' => 25),
         'election.xml' => array('section'=> '1207655', 'limit' => 25)
       );
+    case 'photo':
+      return array(
+        'india.xml' => array('section'=> '1208560', 'limit' => 25),
+        'world.xml' => array('section'=> '1208562', 'limit' => 25),
+        'sports.xml' => array('section'=> '1208561', 'limit' => 25),
+        'entertainment.xml' => array('section'=> '1208559', 'limit' => 25),
+        'business.xml' => array('section'=> '1208558', 'limit' => 25),
+        'must-see.xml' => array('section'=> '1208598', 'limit' => 25),
+        'election.xml' => array('section'=> '1208667', 'limit' => 25)
+      );
       break;
   }
 }
