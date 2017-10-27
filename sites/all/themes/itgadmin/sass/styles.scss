@@ -11150,6 +11150,11 @@ div.node {
             padding: 0;
         }
     }
+    .button {
+        +.button {
+            margin-left: 10px;
+        }
+    }
 }
 
 .view-key-candidate {
@@ -14312,3 +14317,81 @@ div.ctools-modal-content {
 .node-story-form .form-type-plupload {
     margin: 70px 20px 10px 220px;
 }
+
+
+/* css start Url Redirect page */
+
+.page-admin-config-search-redirect {
+    .action-links {
+        list-style-type: none;
+        a {
+            border-radius: 1px;
+            border: 1px solid #1fb5ad;
+            background-color: #1fb5ad;
+            box-shadow: 0 0 5px #3a8a82;
+            padding: 0 20px;
+            line-height: 32px;
+            height: 36px;
+            text-transform: uppercase;
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
+
+#redirect-list-form {
+    fieldset {
+        margin: 20px 0;
+    }
+    table {
+        .links {
+            list-style-type: none;
+            li {
+                display: inline-block;
+                vertical-align: top;
+                padding: 0 5px;
+                line-height: 14px;
+                +li {
+                    border-left: 1px solid #000;
+                }
+                &.edit,
+                &.delete {
+                    a {
+                        padding-left: 20px;
+                        &:after {
+                            width: 20px;
+                            height: 20px;
+                            font: normal normal normal 18px/20px FontAwesome;
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            display: none;
+                        }
+                    }
+                }
+                &.edit {
+                    a {
+                        &:after {
+                            content: '\f044';
+                        }
+                    }
+                }
+                &.delete {
+                    a {
+                        &:after {
+                            content: '\f1f8';
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* css end Url Redirect page */

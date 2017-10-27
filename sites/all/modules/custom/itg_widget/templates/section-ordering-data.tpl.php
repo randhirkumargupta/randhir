@@ -1399,8 +1399,8 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                           }
                           ?>
                           <?php
-                          if (function_exists('itg_common_get_smiley_title')) {
-                            echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 70), "node/" . $nid, array("html" => TRUE));
+                          if ($entity['field_story_kicker_text_value'] != "") {
+                            echo l($entity['field_story_kicker_text_value'], "node/" . $nid, array("html" => TRUE));
                           }
                           else {
                             echo l(mb_strimwidth($desc, 0, 80, ".."), "node/" . $nid);

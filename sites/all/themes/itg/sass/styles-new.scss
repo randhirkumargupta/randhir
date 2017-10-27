@@ -1606,6 +1606,9 @@ input[type="text"] {
                 top: 6px;
                 width: 6px;
             }
+            span.see_pic_not_found {
+                color: #d12019;
+            }
             &+li {
                 margin-top: 20px;
             }
@@ -7367,4 +7370,4 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 }
 
 
-/*css end Mega Review || Mobile  */
+/*css end Mega Review || Mobile */
