@@ -2625,6 +2625,22 @@
     .election-page .election-graph-5 {
         margin-top: -20px;
     }
+    .page-sso-change-password form#itg-sso-reg-password-form {
+        max-width: 100%;
+        padding: 20px;
+    }
+    .password-strength {
+        width: 17em;
+        float: none;
+        margin: 1.4em 0;
+    }
+    div.password-confirm {
+        float: none;
+        margin-top: 0;
+    }
+    div.form-item div.password-suggestions {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width:680px) {
