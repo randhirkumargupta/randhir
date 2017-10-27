@@ -236,7 +236,7 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
         foreach($options_array as $option) {
           $options[$option->value] = $option->text;
         }
-        $form['field_story_category']['und']['#options'] = $options;
+        $form['field_story_category']['und']['#default_value'] = $options;
       }
     }
   }
