@@ -3141,6 +3141,10 @@
             .count {
                 @include font(30px);
                 line-height: 36px;
+                h1 {
+                    @include font(30px);
+                    line-height: 36px;
+                }
             }
         }
         .views-exposed-widget .caln {

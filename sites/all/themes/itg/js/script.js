@@ -903,6 +903,9 @@ jQuery(document).ready(function () {
         e.stopPropagation();
         return false;
     });
+    jQuery('.show-embed-code-div').click(function (e) {
+        e.stopPropagation();
+    });
     jQuery(document).click(function () {
         jQuery('.show-embed-code-div').hide();
     });
@@ -1058,6 +1061,10 @@ jQuery(document).ready(function () {
 });
 
 jQuery(document).ready(function (e) {
+    // story discription iframe wrap in div
+    var tagIframe = jQuery('.story-section .story-right .description');
+    tagIframe.find('iframe').removeAttr('height').removeAttr('width').wrap('<div class="iframe-video"></div>');
+
     // iframe wrap with div
     jQuery('.big-news .live-tv-big-story').find('iframe').removeAttr('height').removeAttr('width');
 
