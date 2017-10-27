@@ -72,7 +72,7 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
                 }
                 ?>
                 <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>">
-                  <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value"), 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type))));
+                  <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type))));
                   ?>
                 </li>
                 <?php
