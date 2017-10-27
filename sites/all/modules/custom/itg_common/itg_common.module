@@ -151,6 +151,14 @@ function itg_common_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'includes/itg_common.inc',
   );
+  
+  $items['akamai-user'] = array(
+    'title' => 'Logged in akamai user',
+    'page callback' => 'itg_sso_itgredirect',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -2011,3 +2019,13 @@ function itg_get_amp_search_result() {
   }
 }
 
+/**
+ * function itg_sso_itgredirect().
+ */
+function itg_sso_itgredirect() {
+  drupal_add_http_header('Cache-Control', 'no-store');
+  watchdog('user_page', 'pass');
+  $arg = arg();
+  $redirect = base64_decode($arg[1]);
+  drupal_goto($redirect);
+}
