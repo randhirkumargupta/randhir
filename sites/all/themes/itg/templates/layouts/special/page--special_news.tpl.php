@@ -117,7 +117,7 @@ if ($theme != 'itgadmin') {
 	<!-- Left 8 Block Section -->
     <div class="col-md-8 col-sm-8">
 		<div class="col-md-12 col-sm-12">		
-			<h2 class="news-head">Top Headlines</h3>
+			<h2 class="news-head"><span>Top Headlines</span></h2>
 			<?php
 				$info['widget'] = 'home_page_feature_widget';
 				$info['order'] = 'ASC';
