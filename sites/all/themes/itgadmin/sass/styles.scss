@@ -14352,12 +14352,15 @@ div.ctools-modal-content {
             li {
                 display: inline-block;
                 vertical-align: top;
+                padding: 0 5px;
+                line-height: 14px;
                 +li {
-                    margin-left: 10px;
+                    border-left: 1px solid #000;
                 }
                 &.edit,
                 &.delete {
                     a {
+                        padding-left: 20px;
                         &:after {
                             width: 20px;
                             height: 20px;
@@ -14367,6 +14370,7 @@ div.ctools-modal-content {
                             position: absolute;
                             left: 0;
                             top: 0;
+                            display: none;
                         }
                     }
                 }
