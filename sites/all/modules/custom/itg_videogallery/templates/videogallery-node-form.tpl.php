@@ -98,6 +98,7 @@
                     <?php print drupal_render($form['field_story_expires']); ?> 
                     <?php print drupal_render($form['field_story_expiry_date']); ?> 
                     <?php print drupal_render($form['field_common_related_content']); ?>
+                    <?php print drupal_render($form['field_video_assign_to_widget']); ?>
                 </div>
             </div>
             <div id="SocialMedia" class="itg-sidebar-form-section image-repo-browse">
