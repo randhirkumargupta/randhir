@@ -89,31 +89,9 @@ function homePageJsonPackagelist() {
                 $tid_list[] = $value->tid;
             }
         }
-
-        // section for photo
-        $tid_buzz_india = 1208615;
-        $term_tree = "";
-         if ($tid_buzz_india > 0) {
-                    $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid_buzz_india, $max_depth = NULL, $load_entities = FALSE);
-                } 
-                $term_tree_count = count($term_tree);
-                if ($term_tree_count) {
-                    foreach ($term_tree as $key => $value) {
-                        $tid_list[] = $value->tid;
-                    }
-                }
-        // section for vedio        
-        $tid_popular_now = 1208615;
-        $term_tree = "";
-         if ($tid_popular_now > 0) {
-                    $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid_popular_now, $max_depth = NULL, $load_entities = FALSE);
-                } 
-                $term_tree_count = count($term_tree);
-                if ($term_tree_count) {
-                    foreach ($term_tree as $key => $value) {
-                        $tid_list[] = $value->tid;
-                    }
-                }
+        $tid_list[] = 1208615;
+        $tid_list[] = 1207974;
+        
         // code vid=14  end
 
         $data_news['id'] = "1";
