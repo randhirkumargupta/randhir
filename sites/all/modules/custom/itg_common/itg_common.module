@@ -2027,5 +2027,13 @@ function itg_sso_itgredirect() {
   watchdog('user_page', 'pass');
   $arg = arg();
   $redirect = base64_decode($arg[1]);
+  print 'Please wait';
+  
+//  drupal_add_js('
+//    jQuery(document).ready(function () {
+//    window.location = "'.$redirect.'";
+//  });', 'inline');
+  
+  //header('Location: ' . $redirect);
   drupal_goto($redirect);
 }
