@@ -113,7 +113,7 @@ function varnish_expire_cache($paths, $wildcards = array()) {
       }
     }
   }
-
+  watchdog('path', '<pre>' . print_r($paths, true) . '</pre>');
   if (module_exists('expire') && variable_get('expire_include_base_url', constant('EXPIRE_INCLUDE_BASE_URL'))) {
     // Sort the URLs by domain and batch by domain.
     $host_buckets = array();
@@ -159,7 +159,7 @@ function varnish_purge($host, $pattern) {
   $version = floatval(variable_get('varnish_version', 2.1));
   $command = $version >= 3 ? "ban" : "purge";
   $bantype = variable_get('varnish_bantype', VARNISH_DEFAULT_BANTYPE);
-
+  watchdog('$bantype', '<pre>' .print_r($bantype, true)  . '</pre>');
   // Modify the patterns to remove base url and base path.
   $patterns = explode('|', $pattern);
   foreach ($patterns as $num => $single_pattern) {
@@ -169,24 +169,33 @@ function varnish_purge($host, $pattern) {
     $patterns[$num] = $single_pattern;
   }
   $pattern = implode('|', $patterns);
+  watchdog('$pattern', '<pre>' .print_r($pattern, true)  . '</pre>');
 
   // Get list of domains to ban
   $front_domains = variable_get('varnish_front_domains', '');
   $fronts = explode(' ', $front_domains);
+	
   switch ($bantype) {
     case VARNISH_BANTYPE_NORMAL:
+		  watchdog('$pattern1_'.VARNISH_BANTYPE_NORMAL, '<pre>' .print_r(array("$command req.http.host ~ $host && req.url ~ \"$pattern\""), true)  . '</pre>');
+
       _varnish_terminal_run(array("$command req.http.host ~ $host && req.url ~ \"$pattern\""));
       if ($front_domains) {
         foreach ($fronts as $value) {
+   		  watchdog('$pattern111_'.VARNISH_BANTYPE_NORMAL, '<pre>' .print_r(array("$command req.http.host ~ $value && req.url ~ \"$pattern\""), true)  . '</pre>');
           _varnish_terminal_run(array("$command req.http.host ~ $value && req.url ~ \"$pattern\""));
         }
       }
       break;
 
     case VARNISH_BANTYPE_BANLURKER:
+				  watchdog('$pattern2_'.VARNISH_BANTYPE_BANLURKER, '<pre>' .print_r(array("$command req.http.host ~ $host && req.url ~ \"$pattern\""), true)  . '</pre>');
+
       _varnish_terminal_run(array("$command obj.http.x-host ~ $host && obj.http.x-url  ~ \"$pattern\""));
       if ($front_domains) {
         foreach ($fronts as $value) {
+			   		  watchdog('$pattern211_'.VARNISH_BANTYPE_BANLURKER, '<pre>' .print_r(array("$command req.http.host ~ $value && req.url ~ \"$pattern\""), true)  . '</pre>');
+
           _varnish_terminal_run(array("$command obj.http.x-host ~ $value && obj.http.x-url ~ \"$pattern\""));
         }
       }
@@ -213,6 +222,9 @@ function varnish_purge($host, $pattern) {
  *   The paths (no leading slash) to purge for this host.
  */
 function varnish_purge_paths($host, array $paths) {
+	watchdog('path1', '<pre>' . print_r($paths, true) . '</pre>');
+	watchdog('$host1', '<pre>' . print_r($host, true) . '</pre>');
+
   // Subtract the hostname length from the global length limit.
   // Note we use strlen() because we're counting bytes, not characters.
   $length_limit = variable_get('varnish_cmdlength_limit', 7500) - strlen($host);
@@ -387,7 +399,6 @@ function _varnish_execute_command($client, $command) {
   // Send command and get response.
   $result = socket_write($client, "$command\n");
   $status = _varnish_read_socket($client);
-  watchdog('Varnish Success data', '<pre>' . print_r( $status, true) .'</pre>');
   if ($status['code'] != 200) {
     watchdog('varnish', 'Recieved status code @code running %command. Full response text: @error', array(
       '@code' => $status['code'],
