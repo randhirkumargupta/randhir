@@ -155,6 +155,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_hltapps_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['hltapps/photos'] = array(
+    'page callback' => 'itg_rss_hltapps_photos',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
