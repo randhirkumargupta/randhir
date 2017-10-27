@@ -2037,6 +2037,5 @@ global $user;
   watchdog('user_page', 'pass');
   $arg = arg();
   $redirect = base64_decode($arg[1]);
-  pr($user);
-  //drupal_goto($redirect);
+  drupal_goto($redirect);
 }
