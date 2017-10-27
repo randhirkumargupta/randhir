@@ -70,42 +70,8 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
-    
-    <main id="main" class="container pos-rel">
-      <?php print render($page['vertical_menu']); ?>
-      <section id="content" role="main">
-        <?php print render($page['highlighted']); ?>
-        <?php print $breadcrumb; ?>
-        <a id="main-content"></a>
-        <?php print render($title_prefix); ?>
-        <?php if ($title): ?>
-          <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
-        <?php endif; ?>
-         <div class="front-end-breadcrumb">
-            <?php print render($page['front_end_breadcrumb']);?>
-         </div>
-        <?php print render($title_suffix); ?>
-        <?php print $messages; ?>
-        <?php print render($tabs); ?>
-        <?php print render($page['help']); ?>
-        <?php if ($action_links): ?>
-          <ul class="action-links"><?php print render($action_links); ?></ul>
-        <?php endif; ?>       
-        
-<?php } ?>
-<!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
- 
-
-<div class="itg-layout-container <?php echo $itg_class; ?> movie-layout-page ">
-    <!-- Breaking news band -->    
-    <?php if (!empty($page['breaking_news'])): ?>
-    <div class="row">
-        <div class="col-md-12">
-          <?php print render($page['breaking_news']); ?>
-        </div>      
-    </div>    
-    <?php endif; ?>
-     <div class="row itg-top-section itg-layout-580">
+    <!-- Movies top section -->
+    <div class="row itg-top-section movies-top-section itg-layout-580">
         
         <div class="top-block">
         <div class="col-md-8">
@@ -162,6 +128,41 @@ if ($theme != 'itgadmin') {
                 </div>
             </div>
         </div>
+    <!-- Movies top section ends -->
+    <main id="main" class="container pos-rel">
+      <?php print render($page['vertical_menu']); ?>
+      <section id="content" role="main">
+        <?php print render($page['highlighted']); ?>
+        <?php print $breadcrumb; ?>
+        <a id="main-content"></a>
+        <?php print render($title_prefix); ?>
+        <?php if ($title): ?>
+          <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
+        <?php endif; ?>
+         <div class="front-end-breadcrumb">
+            <?php print render($page['front_end_breadcrumb']);?>
+         </div>
+        <?php print render($title_suffix); ?>
+        <?php print $messages; ?>
+        <?php print render($tabs); ?>
+        <?php print render($page['help']); ?>
+        <?php if ($action_links): ?>
+          <ul class="action-links"><?php print render($action_links); ?></ul>
+        <?php endif; ?>       
+        
+<?php } ?>
+<!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
+ 
+
+<div class="itg-layout-container <?php echo $itg_class; ?> movie-layout-page ">
+    <!-- Breaking news band -->    
+    <?php if (!empty($page['breaking_news'])): ?>
+    <div class="row">
+        <div class="col-md-12">
+          <?php print render($page['breaking_news']); ?>
+        </div>      
+    </div>    
+    <?php endif; ?>
     
   <!--Common section strat here-->
   <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || isset($widget_data['itg-block-6']['widget_name']) || $theme == 'itgadmin') { ?>
