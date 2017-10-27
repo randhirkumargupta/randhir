@@ -9,3 +9,10 @@ files:
     destination: /opt/httpd/vhosts/indiatodayonline.in/httpdocs/sites/default/
   - source : simplesamlphp
     destination: /opt/httpd/vhosts/indiatodayonline.in/simplesamlphp
+permissions:
+  - object: /opt/httpd/vhosts/indiatodayonline.in/simplesamlphp/log/simplesamlphp.log
+    group: root
+    owner: root
+    mode: 777
+    type:
+      - file
