@@ -178,11 +178,11 @@ function simplesamlphp_auth_loginpage() {
     if (!empty($arg[2])) {
       $redirect = base64_decode($arg[2]);
       $remove_fb_append_parameter = str_replace('#_=_', '', $redirect);
-      $previous_url = 'akamai-user/'.base64_encode($remove_fb_append_parameter);
+      $previous_url = FRONT_URL.'/akamai-user/'.base64_encode($remove_fb_append_parameter);
       drupal_goto($previous_url);
     }
     else {
-      $previous_url = 'akamai-user/'.base64_encode(FRONT_URL);
+      $previous_url = FRONT_URL.'/akamai-user/'.base64_encode(FRONT_URL);
       drupal_goto($previous_url);
     }
 //    if (!empty($arg[2])) {
