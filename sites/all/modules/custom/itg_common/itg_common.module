@@ -2032,10 +2032,11 @@ function _widget_title($string , $is_for_attribute = TRUE) {
  * function itg_sso_itgredirect().
  */
 function itg_sso_itgredirect() {
+global $user;
   drupal_add_http_header('Cache-Control', 'no-store');
   watchdog('user_page', 'pass');
   $arg = arg();
   $redirect = base64_decode($arg[1]);
-  pr(arg());
+  pr($user);
   //drupal_goto($redirect);
 }
