@@ -98,6 +98,7 @@ function homePageJsonPackagelist() {
         $data_news['title'] = "Lifestyle";
         $data_news['label'] = "Lifestyle";
         $data_news['show_label'] = "0";
+        $data_news['n_template_id'] = "1";
 
 
         // select node belong from current term id or child term id
@@ -195,7 +196,7 @@ function homePageJsonPackagelist() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            $data_newslist[$listcount]['n_template_id'] = "";
+            //$data_newslist[$listcount]['n_template_id'] = "";
             $data_newslist[$listcount]['n_type'] = "$type";
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -310,6 +311,7 @@ function homePageJsonTopstories() {
     $data_topstories['title'] = "Top Stories";
     $data_topstories['label'] = "Top Stories";
     $data_topstories['show_label'] = "0";
+    $data_topstories['n_template_id'] = "1";
 
     // xml tag wring for features widget..
     foreach ($result as $key => $value) {
@@ -365,7 +367,7 @@ function homePageJsonTopstories() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$home_list_count]['n_id'] = "$nid";
-            $data_newslist[$home_list_count]['n_template_id'] = "";
+            //$data_newslist[$home_list_count]['n_template_id'] = "";
             $data_newslist[$home_list_count]['n_type'] = "story";
             $data_newslist[$home_list_count]['n_is_developing'] = "$is_developing";
             $data_newslist[$home_list_count]['n_is_sponsored'] = "0";
@@ -447,6 +449,7 @@ function homePageJsonNewslist_india() {
         $data_news['title'] = "India";
         $data_news['label'] = "India";
         $data_news['show_label'] = "0";
+        $data_news['n_template_id'] = "1";
 
 
         // select node belong from current term id or child term id
@@ -651,6 +654,7 @@ function homePageJsonNewslist_world() {
         $data_news['title'] = "World";
         $data_news['label'] = "World";
         $data_news['show_label'] = "0";
+        $data_news['n_template_id'] = "3";
 
 
         // select node belong from current term id or child term id
@@ -829,7 +833,7 @@ function homePageJsonMagazine() {
         $is_developing = 1;
     }
     $data_newslist[0]['n_id'] = "";
-    $data_newslist[0]['n_template_id'] = "";
+    //$data_newslist[0]['n_template_id'] = "";
     $data_newslist[0]['n_type'] = "";
     $data_newslist[0]['n_is_developing'] = "$is_developing";
     $data_newslist[0]['n_is_sponsored'] = "";
@@ -1154,7 +1158,7 @@ function homePageJsonPoll() {
         $is_developing = 1;
     }
     $data_newslist[0]['n_id'] = "";
-    $data_newslist[0]['n_template_id'] = "";
+    //$data_newslist[0]['n_template_id'] = "";
     $data_newslist[0]['n_type'] = "";
     $data_newslist[0]['n_is_developing'] = "$is_developing";
     $data_newslist[0]['n_is_sponsored'] = "";
@@ -1237,6 +1241,7 @@ function homePageJsonNewslist_lifestyle() {
         $data_news['title'] = "Lifestyle";
         $data_news['label'] = "Lifestyle";
         $data_news['show_label'] = "0";
+        $data_news['n_template_id'] = "2";
 
 
         // select node belong from current term id or child term id
@@ -1334,7 +1339,7 @@ function homePageJsonNewslist_lifestyle() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            $data_newslist[$listcount]['n_template_id'] = "2";
+            //$data_newslist[$listcount]['n_template_id'] = "2";
             $data_newslist[$listcount]['n_type'] = "$type";
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
