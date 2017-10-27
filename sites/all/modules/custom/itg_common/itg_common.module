@@ -2036,5 +2036,6 @@ function itg_sso_itgredirect() {
   watchdog('user_page', 'pass');
   $arg = arg();
   $redirect = base64_decode($arg[1]);
-  drupal_goto($redirect);
+  pr(arg());
+  //drupal_goto($redirect);
 }
