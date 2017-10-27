@@ -4,7 +4,6 @@
  * @file
  * The ITG Syndication clients for store configuration
  */
-
 function getbsb_client_array() {
   $story = array(
     '1206584' => 'indiatoday_stories.xml',
@@ -38,15 +37,14 @@ function getbsb_client_array() {
   return $story;
 }
 
-
-function getbsb_client_photo_array(){
+function getbsb_client_photo_array() {
   $photo = array(
     '1208655' => 'cinema-superfast-photos.xml',
   );
   return $photo;
 }
 
-function getbsb_client_video_array(){
+function getbsb_client_video_array() {
   $video = array(
     '1206552' => 'video_latest.xml',
     '1206952' => 'video_entertainment.xml',
@@ -60,15 +58,15 @@ function getbsb_client_video_array(){
   return $video;
 }
 
-function getindiatoday_yahoo_client_array(){
+function getindiatoday_yahoo_client_array() {
   $yahoo_story = array(
-    'ids' => array(1206533,1206567,1206688,1206689,1206572,1206578),
+    'ids' => array(1206533, 1206567, 1206688, 1206689, 1206572, 1206578),
     'filename' => 'top-indiatoday.xml'
   );
   return $yahoo_story;
 }
 
-function getmsn_story_section_array(){
+function getmsn_story_section_array() {
   $msn_story = array(
     '1206589' => 'msn/indiatoday/story-travel.xml',
     '1206793' => 'msn/indiatoday/story-food.xml',
@@ -104,21 +102,21 @@ function getmsn_story_section_array(){
   return $msn_story;
 }
 
-function get_cabbytabby_feed_videos_array(){
+function get_cabbytabby_feed_videos_array() {
   $cabbytabby_feed_videos = array(
     '1207580' => 'sosorry.xml'
   );
   return $cabbytabby_feed_videos;
 }
 
-function get_ola_feed_videos_array(){
+function get_ola_feed_videos_array() {
   $cabbytabby_feed_videos = array(
     '1207580' => 'sosorry.xml'
   );
   return $cabbytabby_feed_videos;
 }
 
-function get_dekkho_feed_videos_array(){
+function get_dekkho_feed_videos_array() {
   $video_sectios = array(
     '1207304' => 'lifestyle.xml',
     '1207978' => 'auto_today.xml',
@@ -133,7 +131,7 @@ function get_dekkho_feed_videos_array(){
   return $video_sectios;
 }
 
-function getproquest_feed_story_client_array(){
+function getproquest_feed_story_client_array() {
   $story_sectios = array(
     '1206578' => 'india.xml',
     '1206793' => 'food-drink.xml',
@@ -147,7 +145,7 @@ function getproquest_feed_story_client_array(){
   return $story_sectios;
 }
 
-function get_dailyhunt_sections_for_feed(){
+function get_dailyhunt_sections_for_feed() {
   $story_sectios = array(
     '1206599' => 'celebrities.xml',
     '1206795' => 'fyi.xml',
@@ -170,7 +168,7 @@ function get_dailyhunt_sections_for_feed(){
   return $story_sectios;
 }
 
-function get_videoelephant_feed_videos_array(){
+function get_videoelephant_feed_videos_array() {
   $story_sectios = array(
     '1207304' => 'lifestyle.xml',
     '1207916' => 'cookery.xml',
@@ -182,4 +180,20 @@ function get_videoelephant_feed_videos_array(){
     '1207303' => 'bollywood_movie_reviews.xml'
   );
   return $story_sectios;
+}
+
+function get_hltapps_sections($type) {
+  switch ($type) {
+    case 'story':
+      return array(
+        'topnews.xml' => '-1',
+        'india.xml' => '1206578',
+        'entertainment.xml' => '1206749',
+        'world.xml' => '1206577',
+        'sports.xml' => '1206550',
+        'business.xml' => '1206574',
+        'election.xml' => '1206719'
+      );
+      break;
+  }
 }

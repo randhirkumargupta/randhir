@@ -143,6 +143,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_article_news_republic.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['hltapps/stories'] = array(
+    'page callback' => 'itg_rss_hltapps_stories',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
