@@ -498,25 +498,7 @@
       .footer-bottom-menu ul li{
         padding: 3px 0;
       }
-      /*#footer amp-accordion h2{
-        width: 40px;
-        height: 49px;
-        text-align: center;
-        padding: 0;
-        border: none;
-        background: #000;
-        margin-top: -50px;
-        z-index: 99;
-        position: absolute !important;
-        right: 0;
-        top: 0;
-      }
-      #footer amp-accordion h2 span.show-more, #footer amp-accordion h2 span.show-less {
-        line-height: 48px;
-      }
-      #footer amp-accordion h2[aria-expanded="true"] span.show-more, #footer amp-accordion h2[aria-expanded="false"] span.show-less {
-        display: none;
-      }*/
+      
       .copyright{
         color: #a6a6a6;
         padding: 10px 12px;
