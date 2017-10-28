@@ -164,7 +164,7 @@ if (!empty($content)):
                 if(!empty($node->field_story_large_image[LANGUAGE_NONE][0]['uri'])) {
                   $large_image_uri = file_create_url($node->field_story_large_image[LANGUAGE_NONE][0]['uri']);
                   $large_image_data = getimagesize($large_image_uri);
-                  $large_image_src_set = $large_image_uri . ' ' . $large_image_data[0] . 'w';
+                  $large_image_src_set = ', ' .$large_image_uri . ' ' . $large_image_data[0] . 'w';
                 }
                 $medium_image_src_set = '';
                 if(!empty($node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
@@ -213,8 +213,8 @@ if (!empty($content)):
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
-                        . '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>'
+                    //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
+                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>'
                         . '<span class="story-photo-icon">';
                     ?>        
 
@@ -227,7 +227,7 @@ if (!empty($content)):
                       <!--<i class="fa fa-camera"></i>-->
                       <?php
                     }
-                    print '</span></a>';
+                    print '</span>';
                     }
                   }
                   ?>
@@ -253,15 +253,15 @@ if (!empty($content)):
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
-                      $icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
-                                    <i class="fa fa-camera"></i></span>';
+                      //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
+                                    //<i class="fa fa-camera"></i></span>';
                     }
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
                     
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>        
-                                    '.$icon_detail.'</a>';
+                    //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
+                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>';
                     
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
