@@ -873,7 +873,8 @@ function itg_story_node_view($node, $view_mode, $langcode) {
           $config[] = $value['value'];
         }
       }
-      
+      //pr(BACKEND_URL);
+      //p($_SERVER);
       if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
         $get_backend_url = explode("/", BACKEND_URL);
         $referer_url = explode("/", $_SERVER['HTTP_REFERER']);
