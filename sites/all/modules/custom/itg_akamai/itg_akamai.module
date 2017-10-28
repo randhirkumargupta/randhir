@@ -1010,7 +1010,7 @@ function itg_akamai_get_ttl_for_custom_url($url_part) {
 
   // Getting all the data 
   $actual_data = array();
-  if (isset($result->fetchObject())) {
+  if (isset($result)) {
     foreach ($result->fetchObject() as $data) {
       $actual_data[] = $data;
     }
