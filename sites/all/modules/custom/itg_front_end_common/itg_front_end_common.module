@@ -154,7 +154,7 @@ function itg_front_end_common_block_view($delta = '') {
       $data = get_personlization_front_block_data(FALSE);
       $block['content'] = theme("personlization_front_end", array("data" => $data));
       if($user->uid == 0) {
-        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
+        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('type' => 'file', 'scope' => 'footer', 'weight' => 5));
       /*drupal_add_js('jQuery(document).ready(function() {
     jQuery(".recommended-slider").slick({
       slidesToShow: 3,
