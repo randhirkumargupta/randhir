@@ -88,7 +88,7 @@ function get_itg_widget($widget_name, $widget_info = 'custom', $filter_url = NUL
     $widget_info = explode('|', $widget_info);
 
     if (isset($widget_name) && $widget_name == 'section_wise_order') {
-        return  //create_setion_widgets($filter_url, $widget_info[1], $block_id);
+        return ;  //create_setion_widgets($filter_url, $widget_info[1], $block_id);
     } else if (isset($widget_name) && $widget_name == 'custom_html_widgets') {
         return get_html_custom_widget($filter_url);
     } else if (isset($widget_name) && $widget_name == 'election_graph_xml') {
