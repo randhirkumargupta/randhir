@@ -164,7 +164,7 @@ if (!empty($content)):
                 if(!empty($node->field_story_large_image[LANGUAGE_NONE][0]['uri'])) {
                   $large_image_uri = file_create_url($node->field_story_large_image[LANGUAGE_NONE][0]['uri']);
                   $large_image_data = getimagesize($large_image_uri);
-                  $large_image_src_set = $large_image_uri . ' ' . $large_image_data[0] . 'w';
+                  $large_image_src_set = ', ' .$large_image_uri . ' ' . $large_image_data[0] . 'w';
                 }
                 $medium_image_src_set = '';
                 if(!empty($node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
