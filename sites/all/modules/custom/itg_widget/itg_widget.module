@@ -2060,24 +2060,24 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
                   $node_load_data->field_emoji_position['und'][0]['value'],
                   $node_load_data->field_emoji_position['und'][1]['value'],
                 ),
-                'field_emoji_2_value' => $node_load_data->field_emoji_2['und'][0]['value'],
-                'field_emoji_value' => $node_load_data->field_emoji['und'][0]['value'],
-                'title' => $node_load_data->title,
-                'ad_title' => $node_load_data->field_story_new_title['und'][0]['value'],
-                'ad_url' => $node_load_data->field_story_redirection_url_titl['und'][0]['value'],
-                'nid' => $node_load_data->nid,
+                'field_emoji_2_value' => isset($node_load_data->field_emoji_2['und'][0]['value']) ? $node_load_data->field_emoji_2['und'][0]['value'] : "",
+                'field_emoji_value' => isset($node_load_data->field_emoji['und'][0]['value']) ? $node_load_data->field_emoji['und'][0]['value'] : "",
+                'title' => isset($node_load_data->title) ? $node_load_data->title : "",
+                'ad_title' => isset($node_load_data->field_story_new_title['und'][0]['value']) ? $node_load_data->field_story_new_title['und'][0]['value'] : "",
+                'ad_url' => isset($node_load_data->field_story_redirection_url_titl['und'][0]['value']) ? $node_load_data->field_story_redirection_url_titl['und'][0]['value'] : "",
+                'nid' => isset($node_load_data->nid) ? $node_load_data->nid : "",
              );
-            $uri = $node_load_data->field_story_extra_large_image['und'][0]['uri'];
-            $li_file_uri = $node_load_data->field_story_large_image['und'][0]['uri'];
-            $mi_file_uri = $node_load_data->field_story_medium_image['und'][0]['uri'];
-            $esi_file_uri = $node_load_data->field_story_extra_small_image['und'][0]['uri'];
-            $si_file_uri = $node_load_data->field_story_small_image['und'][0]['uri'];
-            $widget_image_uri_alt = $node_load_data->field_story_extra_small_image['und'][0]['alt'];
-            $widget_image_uri_title = $node_load_data->field_story_extra_small_image['und'][0]['title'];
-            $field_story_kicker_text = $node_load_data->field_story_kicker_text['und'][0]['value'];
-            $field_story_short_headline_value = $node_load_data->field_story_short_headline['und'][0]['value'];
-            $field_video_duration_value = isset($node_load_data->field_video_duration_value['und'][0]['value'])?$node_load_data->field_video_duration_value['und'][0]['value']:"";
-            $field_photo_see_pic_link_value = $node_load_data->field_photo_see_pic_link_value['und'][0]['value'];
+            $uri = isset($node_load_data->field_story_extra_large_image['und'][0]['uri']) ? $node_load_data->field_story_extra_large_image['und'][0]['uri'] : "";
+            $li_file_uri = isset($node_load_data->field_story_large_image['und'][0]['uri']) ? $node_load_data->field_story_large_image['und'][0]['uri'] : "";
+            $mi_file_uri = isset($node_load_data->field_story_medium_image['und'][0]['uri']) ? $node_load_data->field_story_medium_image['und'][0]['uri'] : "";
+            $esi_file_uri = isset($node_load_data->field_story_extra_small_image['und'][0]['uri']) ? $node_load_data->field_story_extra_small_image['und'][0]['uri'] : "";
+            $si_file_uri = isset($node_load_data->field_story_small_image['und'][0]['uri']) ? $node_load_data->field_story_small_image['und'][0]['uri'] : "";
+            $widget_image_uri_alt = isset($node_load_data->field_story_extra_small_image['und'][0]['alt']) ? $node_load_data->field_story_extra_small_image['und'][0]['alt'] : "";
+            $widget_image_uri_title = isset($node_load_data->field_story_extra_small_image['und'][0]['title']) ? $node_load_data->field_story_extra_small_image['und'][0]['title'] : "";
+            $field_story_kicker_text = isset($node_load_data->field_story_kicker_text['und'][0]['value']) ? $node_load_data->field_story_kicker_text['und'][0]['value'] : "";
+            $field_story_short_headline_value = isset($node_load_data->field_story_short_headline['und'][0]['value']) ? $node_load_data->field_story_short_headline['und'][0]['value'] : "";
+            $field_video_duration_value = isset($node_load_data->field_video_duration_value['und'][0]['value']) ? $node_load_data->field_video_duration_value['und'][0]['value'] : "";
+            $field_photo_see_pic_link_value = isset($node_load_data->field_photo_see_pic_link_value['und'][0]['value']) ? $node_load_data->field_photo_see_pic_link_value['und'][0]['value'] : "";
 
             $nid = $node_load_data->nid;
             if ($node_load_data->type == 'story') {
@@ -2111,12 +2111,12 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               'mi_file_uri' => $mi_file_uri,
               'li_file_uri' => $li_file_uri,
               'si_file_uri' => $si_file_uri,
-              'field_story_large_image_alt' => $node_load_data->field_story_large_image_alt['und'][0]['alt'],
-              'field_story_large_image_title' => $node_load_data->field_story_large_image_title['und'][0]['title'],
-              'field_story_medium_image_alt' => $node_load_data->field_story_medium_image_alt['und'][0]['alt'],
-              'field_story_medium_image_title' => $node_load_data->field_story_medium_image_title['und'][0]['title'],
-              'field_story_small_image_alt' => $node_load_data->field_story_small_image_alt['und'][0]['alt'],
-              'field_story_small_image_title' => $node_load_data->field_story_small_image_title['und'][0]['title'],
+              'field_story_large_image_alt' => isset($node_load_data->field_story_large_image_alt['und'][0]['alt']) ? $node_load_data->field_story_large_image_alt['und'][0]['alt'] : "",
+              'field_story_large_image_title' => isset($node_load_data->field_story_large_image_title['und'][0]['title']) ? $node_load_data->field_story_large_image_title['und'][0]['title'] : "",
+              'field_story_medium_image_alt' => isset($node_load_data->field_story_medium_image_alt['und'][0]['alt']) ? $node_load_data->field_story_medium_image_alt['und'][0]['alt'] : "",
+              'field_story_medium_image_title' => isset($node_load_data->field_story_medium_image_title['und'][0]['title']) ? $node_load_data->field_story_medium_image_title['und'][0]['title'] : "",
+              'field_story_small_image_alt' => isset($node_load_data->field_story_small_image_alt['und'][0]['alt']) ? $node_load_data->field_story_small_image_alt['und'][0]['alt'] : "",
+              'field_story_small_image_title' => isset($node_load_data->field_story_small_image_title['und'][0]['title']) ? $node_load_data->field_story_small_image_title['und'][0]['title'] : "",
               'node_obj' => $node_smily_data,
             );
         }

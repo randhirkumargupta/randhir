@@ -546,11 +546,13 @@ function itg_sso_itgredirect() {
   $arg = arg();
   $redirect = base64_decode($arg[1]);
   watchdog('redirect_sso', $redirect);
-  print 'Please wait while redirecting';
   //drupal_goto($redirect);
+  print 'Please wait while redirecting';
+  
   drupal_add_js('
   jQuery(document).ready(function () {
-    window.location.href = "'.$redirect.'";
+    window.location.href = "' . $redirect . '";
   });', 'inline');
-return 'Login';
+  
+  return 'Login';
 }

@@ -1185,7 +1185,7 @@ function itg_story_photo_amp_html($node) {
       height="432"
       layout="responsive"
       alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '" srcset="'.$photo_story_src_set.'"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
-      <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><amp-fit-text>' . $photo_story_desc . '</amp-fit-text></div>';
+      <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><span>' . $photo_story_desc . '</span></div>';
       $i++;
     }
     $html .= '</amp-carousel>';
