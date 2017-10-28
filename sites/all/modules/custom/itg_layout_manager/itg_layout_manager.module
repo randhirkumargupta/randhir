@@ -861,11 +861,11 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $section = 'home_page';
     $template_name = 'page--front';
 
-   $data = get_layout_details($section, $template_name, 'front');
+    $data = get_layout_details($section, $template_name, 'front');
 
-    //$data['big_story'] = get_itg_widget('big_story_format');
-    //$data['personlization'] = get_itg_widget('personlization');
-    //$data['non_personlization'] = get_itg_widget('recommended_anonymous_user');
+    $data['big_story'] = get_itg_widget('big_story_format');
+    $data['personlization'] = get_itg_widget('personlization');
+    $data['non_personlization'] = get_itg_widget('recommended_anonymous_user');
     $vars['widget_data'] = $data;
     drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_more_section_card.js', array('scope' => 'footer'));
   }
