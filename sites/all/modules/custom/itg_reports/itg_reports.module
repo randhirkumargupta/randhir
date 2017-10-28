@@ -673,11 +673,15 @@ function itg_reports_user_login(&$edit , $account) {
  */
 function itg_reports_node_view($node , $view_mode , $langcode) {
   global $user;
-  module_load_include('inc' , 'itg_reports' , 'includes/section-wise-breakup-report');
-  if (isset($node->field_story_category[LANGUAGE_NONE])) {
-    $nodes_catagories = $node->field_story_category[LANGUAGE_NONE];
-    foreach ($nodes_catagories as $cat) {
-      itg_reports_save_section_wise_report_data((int) $cat['tid'] , $user->uid , $node);
+  $is_fron_page = drupal_is_front_page();
+  
+  if (empty($is_fron_page)) {    
+    module_load_include('inc' , 'itg_reports' , 'includes/section-wise-breakup-report');
+    if (isset($node->field_story_category[LANGUAGE_NONE])) {
+      $nodes_catagories = $node->field_story_category[LANGUAGE_NONE];
+      foreach ($nodes_catagories as $cat) {
+        itg_reports_save_section_wise_report_data((int) $cat['tid'] , $user->uid , $node);
+      }
     }
   }
 }
