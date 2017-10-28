@@ -2055,10 +2055,12 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
         foreach ($result as $widget_data) {
 
             $node_load_data = unserialize($widget_data->node_data);
+            $emoji_position1 = isset($node_load_data->field_emoji_position['und'][0]['value']) ? $node_load_data->field_emoji_position['und'][0]['value'] : "";
+            $emoji_position2 = isset($node_load_data->field_emoji_position['und'][1]['value']) ? $node_load_data->field_emoji_position['und'][1]['value'] : "";
             $node_smily_data = array('field_story_short_headline_value' => $node_load_data->field_story_short_headline['und'][0]['value'],
                 'field_emoji_position_value' => array(
-                  $node_load_data->field_emoji_position['und'][0]['value'],
-                  $node_load_data->field_emoji_position['und'][1]['value'],
+                  $emoji_position1,
+                  $emoji_position2,
                 ),
                 'field_emoji_2_value' => isset($node_load_data->field_emoji_2['und'][0]['value']) ? $node_load_data->field_emoji_2['und'][0]['value'] : "",
                 'field_emoji_value' => isset($node_load_data->field_emoji['und'][0]['value']) ? $node_load_data->field_emoji['und'][0]['value'] : "",
