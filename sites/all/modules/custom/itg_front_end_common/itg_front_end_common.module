@@ -199,7 +199,7 @@ _taboola.push({article:"auto"});
 e.async = 1;
 e.src = u;
 f.parentNode.insertBefore(e, f);
-}(document.createElement("script"), document.getElementsByTagName("script")[0], "http://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js");
+}(document.createElement("script"), document.getElementsByTagName("script")[0], "https://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js");
 </script>
 <div class="divclear"></div>
 <div class="nocontent">
@@ -235,7 +235,7 @@ _taboola.push({article:'auto'});
 e.async = 1;
 e.src = u;
 f.parentNode.insertBefore(e, f);
-}(document.createElement('script'), document.getElementsByTagName('script')[0], 'http://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js');
+}(document.createElement('script'), document.getElementsByTagName('script')[0], 'https://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js');
 </script><div id='taboola-right-rail-thumbnails-2nd'></div>
 <script type='text/javascript'>
 window._taboola = window._taboola || [];
