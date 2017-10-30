@@ -860,23 +860,26 @@ function itg_workflow_node_view($node, $view_mode, $langcode) {
   global $theme;
   global $user;
   // code for redirect_url
-  if (arg(0) == 'node' && is_numeric(arg(1))) {
-    if (function_exists('itg_get_node_redirect_url')) {
-      itg_get_node_redirect_url($node, $view_mode);
+  $is_fron_page = drupal_is_front_page();
+  if (empty($is_fron_page)) {
+    if (arg(0) == 'node' && is_numeric(arg(1))) {
+      if (function_exists('itg_get_node_redirect_url')) {
+        itg_get_node_redirect_url($node, $view_mode);
+      }
     }
-  }
-  if($theme != FRONT_THEME_NAME) {
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-      $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
-    }
-  }else {
-        module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
-        if (isset($_GET['preview_log']) && ($_GET['preview_log'] == $node->nid) && _is_preview_log_submit_true($user)) {
+    if ($theme != FRONT_THEME_NAME) {
+      if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+        $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
+      }
+    } else {
+          module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
+          if (isset($_GET['preview_log']) && ($_GET['preview_log'] == $node->nid) && _is_preview_log_submit_true($user)) {
             $preview_id = _get_unique_id_for_node_field();
             $user_id = $user->uid;
             itg_workflow_preview_db_merge($preview_id, $user_id, 0);
-        }
-    }
+          }
+      }
+  }
 }
 
 /**

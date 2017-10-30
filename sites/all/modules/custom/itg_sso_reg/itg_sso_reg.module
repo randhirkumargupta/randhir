@@ -151,6 +151,14 @@ function itg_sso_reg_menu() {
     'type' => MENU_CALLBACK,
   );
   
+  
+  $items['akamai-user'] = array(
+    'title' => 'Logged in akamai user',
+    'page callback' => 'itg_sso_itgredirect',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -527,4 +535,24 @@ function itg_del_history_table_data() {
   } catch (Exception $e) {
   watchdog('Email history table not truncate', '<pre>' . $e->getMessage() . '</pre>');  
   }
+}
+
+/**
+ * function itg_sso_itgredirect().
+ */
+function itg_sso_itgredirect() {
+  drupal_add_http_header('Cache-Control', 'no-store');
+  watchdog('user_page', 'pass');
+  $arg = arg();
+  $redirect = base64_decode($arg[1]);
+  watchdog('redirect_sso', $redirect);
+  //drupal_goto($redirect);
+  print 'Please wait while redirecting';
+  
+  drupal_add_js('
+  jQuery(document).ready(function () {
+    window.location.href = "' . $redirect . '";
+  });', 'inline');
+  
+  return 'Login';
 }
