@@ -6303,7 +6303,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
     $anchor_data['anchor_pagination_cap'] = "50";
 
     $anchor_data['anchor'] = $anchor_list;
-    $anchor_list = array_unique($anchor_list);
+    $anchor_data = array_unique($anchor_data);
 
     if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
