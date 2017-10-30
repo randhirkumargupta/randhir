@@ -141,8 +141,9 @@ function itg_reporter_form_alter(&$form, &$form_state, $form_id) {
         }
     }   
     $form['field_byline_department'][LANGUAGE_NONE]['#options'] = $byline_dept_arr_opt;
-
-    $form['#after_build'][] = 'itg_reporter_after_build';
+    if (!($form_state['reporter_popup_form'])) {
+      $form['#after_build'][] = 'itg_reporter_after_build';
+    }
 
     $destination = 'byline-list';
     $form['actions']['cancel'] = array(

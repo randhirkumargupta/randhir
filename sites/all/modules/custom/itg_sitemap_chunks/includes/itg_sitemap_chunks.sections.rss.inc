@@ -8,7 +8,7 @@
 function itg_sitemap_chunks_get_rss_of_cat_with_order() {
   $arg = arg();
   $section_tid = NULL;
-  if (!empty($arg[1])) {
+  if (isset($arg[1])) {
     $section_tid = $arg[1];
   }
   if (!is_null($section_tid)) {
@@ -175,13 +175,13 @@ function itg_sitemap_chunks_common_rss_for_home_page($rss_nids) {
     $xml .= '<channel>' . "\r\n";
     $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' | ' . $headling . ' ]]> </title>' . "\r\n";
     $xml .= '<description>' . t('India Today') . '</description>' . "\r\n";
-    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
+    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/?utm_source=rss ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s T', time()) . ' </lastBuildDate>' . "\r\n";
     $xml .= '<generator>' . t('FeedCreator 1.7.2') . '</generator>' . "\r\n";
     $xml .= '<image>' . "\r\n";
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
     $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML . ' ]]> </title>' . "\r\n";
-    $xml .= '<link> <![CDATA[ ' . $landing_link . ' ]]> </link>' . "\r\n";
+    $xml .= '<link> <![CDATA[ ' . $landing_link . '?utm_source=rss ]]> </link>' . "\r\n";
     $xml .= '<description>' . ITG_INDIATODAY_SITENAME_XML . '</description>' . "\r\n";
     $xml .= '</image>' . "\r\n";
     $xml .= itg_sitemap_print_section_rss($result);
@@ -207,8 +207,10 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
 // Get all child of section.
 //  $childrens = taxonomy_get_children_all($section_tid, CATEGORY_MANAGMENT);
 // Include section too in childern and combine into single array.
-  $childrens[] = $section_tid;
-  sort($childrens);
+  if($section_tid != 0){
+    $childrens[] = $section_tid;
+    sort($childrens);
+  }
   try {
     $query = db_select('node', 'n');
     $query->leftJoin('itg_widget_order_section', 'wos', 'n.nid=wos.nid');
@@ -257,7 +259,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
       $xml .= '<title><![CDATA[' . ITG_INDIATODAY_SITENAME_XML . ' ]]></title>' . "\r\n";
     }
     $xml .= '<description><![CDATA[' . t('India Today') . ' ]]></description>' . "\r\n";
-    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
+    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/?utm_source=rss ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate><![CDATA[ ' . gmdate('D, d M Y H:i:s T', time()) . ' ]]></lastBuildDate>' . "\r\n";
     $xml .= '<generator><![CDATA[ ' . t('FeedCreator 1.7.2') . ' ]]></generator>' . "\r\n";
     $xml .= '<image>' . "\r\n";
@@ -267,7 +269,7 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
     } else {
       $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]></title>' . "\r\n";
     }
-    $xml .= '<link> <![CDATA[ ' . $base_url . '/' . drupal_get_path_alias("taxonomy/term/" . $section_tid) . ' ]]></link>' . "\r\n";
+    $xml .= '<link> <![CDATA[ ' . $base_url . '/' . drupal_get_path_alias("taxonomy/term/" . $section_tid) . '?utm_source=rss ]]></link>' . "\r\n";
     $xml .= '<description> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]></description>' . "\r\n";
     $xml .= '</image>' . "\r\n";
     $xml .= itg_sitemap_print_section_rss($result);
@@ -331,7 +333,7 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
       $xml .= '<title><![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]></title>' . "\r\n";
     }
     $xml .= '<description><![CDATA[ ' . t('India Today') . ' ]]></description>' . "\r\n";
-    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
+    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/?utm_source=rss ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate><![CDATA[ ' . gmdate('D, d M Y H:i:s T', time()) . ' ]]></lastBuildDate>' . "\r\n";
     $xml .= '<generator><![CDATA[ ' . t('FeedCreator 1.7.2') . ' ]]></generator>' . "\r\n";
     $xml .= '<image>';
@@ -339,9 +341,9 @@ function itg_sitemap_chunks_get_rss_of_mixed_content() {
     $xml .= '<title><![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]></title>' . "\r\n";
     $xml .= '<description><![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' ]]></description>' . "\r\n";
     if (!empty($section_tid)) {
-      $xml .= '<link> <![CDATA[ ' . $base_url . '/' . drupal_get_path_alias("taxonomy/term/" . $section_tid) . ' ]]></link>' . "\r\n";
+      $xml .= '<link> <![CDATA[ ' . $base_url . '/' . drupal_get_path_alias("taxonomy/term/" . $section_tid) . '?utm_source=rss ]]></link>' . "\r\n";
     } else {
-      $xml .= '<link><![CDATA[ ' . $base_url . ' ]]></link>' . "\r\n";
+      $xml .= '<link><![CDATA[ ' . $base_url . '?utm_source=rss ]]></link>' . "\r\n";
     }
     $xml .= '</image>' . "\r\n";
     $xml .= itg_sitemap_print_section_rss($result);
@@ -396,7 +398,7 @@ function itg_sitemap_print_section_rss($result) {
       if (isset($data['name']) && !empty($data['name'])) {
         $xml .= '<sectionname> <![CDATA[ ' . $data['name'] . ' ]]></sectionname>' . "\r\n";
       }
-      $xml .= '<link> <![CDATA[ ' . check_url($node_link) . ' ]]></link>' . "\r\n";
+      $xml .= '<link> <![CDATA[ ' . check_url($node_link) . '?utm_source=rss ]]></link>' . "\r\n";
       if ($arg[0] == 'rss-gallery') {
         $description = $data['title'];
         $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" align="left" hspace="2" height="82" width="107" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . '<br clear="all" /> ]]></description>' . "\r\n";
