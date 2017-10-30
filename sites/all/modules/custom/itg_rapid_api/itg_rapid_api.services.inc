@@ -6266,6 +6266,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
         foreach ($cursor as $document) {
             //if($document['status'] == 1 && $document['ntype'] == 'anchor'){
             $node_data = node_load($document['nid']);
+            
             $a_id = $node_data->nid;
             $a_title = $node_data->title;
             $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
@@ -6279,6 +6280,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value'];
             $a_location = "";
             $a_desc = $node_data->body['und'][0]['value'];
+            
             $anchor_list[$anchor_c]['a_id'] = "$a_id";
             $anchor_list[$anchor_c]['a_title'] = "$a_title";
             $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
@@ -6301,6 +6303,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
     $anchor_data['anchor_pagination_cap'] = "50";
 
     $anchor_data['anchor'] = $anchor_list;
+    $anchor_list = array_unique($anchor_list);
 
     if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
@@ -6313,6 +6316,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
         $output_array['data'] = $data;
     }
     return $output_array;
+  
 }
 
 /**
