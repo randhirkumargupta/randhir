@@ -916,7 +916,6 @@ function get_header_body_start_end_code() {
   else if ($arg[0] == 'node' && is_numeric($arg[1])) {
     $node_object = menu_get_object();
     $tid = isset($node_object->field_primary_category[$node_object->language][0]['value']) ? $node_object->field_primary_category[$node_object->language][0]['value'] : NULL;
-
     if (isset($tid) && !empty($tid)) {
       $taxonomy_array = taxonomy_get_parents_all($tid);
       $terms = array_reverse($taxonomy_array);
@@ -948,6 +947,20 @@ function get_header_body_start_end_code() {
     if ($device_information == 'website') {
       if (isset($ads_object->field_ads_headerscript[$ads_object->language])) {
         foreach ($ads_object->field_ads_headerscript[$ads_object->language] as $header) {
+          if (strpos($header['value'], '[ITGD:ads:1]') && strpos($header['value'], '[ITGD:ads:2]')) {
+            $section_header_s = 'ROS';
+            $category_header_s = 'ROS';
+            if($header_section = get_ads_headerscript_section($arg, $taxonomy_array, $node_object)){
+              $section_geader_s = $header_section['section_header_s'];
+              $category_geader_s = $header_section['category_geader_s'];
+            }
+            if (strpos($header['value'], '[ITGD:ads:1]')) {
+              $header['value'] = str_replace('[ITGD:ads:1]', $section_geader_s, $header['value']);
+            }
+            if (strpos($header['value'], '[ITGD:ads:2]')) {
+              $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
+            }
+          }
           $adsheaderbody['header'][] = $header['value'];
         }
       }
@@ -956,6 +969,20 @@ function get_header_body_start_end_code() {
     if ($device_information == 'mobile') {
       if (isset($ads_object->field_ads_headerscript_mob[$ads_object->language])) {
         foreach ($ads_object->field_ads_headerscript_mob[$ads_object->language] as $header) {
+          if (strpos($header['value'], '[ITGD:ads:1]') && strpos($header['value'], '[ITGD:ads:2]')) {
+            $section_header_s = 'ROS';
+            $category_header_s = 'ROS';
+            if($header_section = get_ads_headerscript_section($arg, $taxonomy_array, $node_object)){
+              $section_geader_s = $header_section['section_header_s'];
+              $category_geader_s = $header_section['category_geader_s'];
+            }
+            if (strpos($header['value'], '[ITGD:ads:1]')) {
+              $header['value'] = str_replace('[ITGD:ads:1]', $section_geader_s, $header['value']);
+            }
+            if (strpos($header['value'], '[ITGD:ads:2]')) {
+              $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
+            }
+          }
           $adsheaderbody['header'][] = $header['value'];
         }
       }
@@ -1097,4 +1124,42 @@ function itg_ads_get_renderable_prev_data($prev_raw_data) {
     $renderable_data['code'][$chunks_data['field_ads_placeholder'][LANGUAGE_NONE]][] = array('device' => $chunks_data['field_ads_device_selection'][LANGUAGE_NONE], 'code' => $chunks_data['field_ads_ad_code'][LANGUAGE_NONE][0]['value']);
   }
   return $renderable_data;
+}
+
+/*
+ * Function used to replace Ads code with key value pattern from section, category
+ * and detail page like Story, photo & detail.
+ * @param Array $arg
+ * @param Array $data
+ * @param Object $node_object
+ * @return Array
+ */
+function get_ads_headerscript_section($arg, $data, $node_object){
+	$return = FALSE;
+	if ($arg[0] == "taxonomy" && $arg[1] == "term" && is_numeric($arg[2])) {
+		$term_data = array_reverse($data);
+    $taxname1 = preg_replace('/\s+/', '', $term_data[0]->name);
+		if (count($term_data) > 1) {
+      $taxname2 = preg_replace('/\s+/', '', $term_data[1]->name);
+			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
+			$return['category_geader_s'] = (!empty($term_data[1]->name) ? $taxname1.$taxname2 : 'ROS');
+		} else {
+			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
+			$return['category_geader_s'] = $taxname1.'Home';
+		}
+	} else if ($arg[0] == "node" && is_numeric($arg[1])) {
+		$term_data = array_reverse($data);
+    $taxname1 = preg_replace('/\s+/', '', $term_data[0]->name);
+		if (empty($node_object)) {
+			$node_object = menu_get_object();
+		}
+		if (count($term_data) > 1 && !empty($term_data[0]->name)) {
+			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
+			$return['category_geader_s'] = $taxname1.ucfirst($node_object->type);
+		} else {
+			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
+			$return['category_geader_s'] = 'ROS';
+		}
+	}
+	return $return;
 }
