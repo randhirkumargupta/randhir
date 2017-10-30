@@ -344,14 +344,14 @@ function itg_sso_logout_form_submit(&$form, &$form_state) {
  */
 function itguser_logout() {
   global $user;
-  
-  if (isset($_COOKIE['itg_forced_login'])) {
+  user_cookie_delete('itg_forced_login');
+ /* if (isset($_COOKIE['itg_forced_login'])) {
     unset($_COOKIE['itg_forced_login']);
     setcookie('itg_forced_login', null, -1, '/');
   }
   echo 'shravan';
   p($_COOKIE);
-  exit;
+  exit;*/
   if ($user->uid > 0) {
     $domains = variable_get('signout-domain', '');
     $domain_array = explode(',', $domains);
