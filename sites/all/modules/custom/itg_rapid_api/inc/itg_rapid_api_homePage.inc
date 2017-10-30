@@ -218,7 +218,7 @@ function homePageJsonPackagelist() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
-            $data_newslist[$listcount]['n_photo'] = (array) $photolist;
+            $data_newslist[$listcount]['n_photo'] = (object) $photolist;
             // re-insalize photolist
             $photolist = array();
 
@@ -227,7 +227,7 @@ function homePageJsonPackagelist() {
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
             }
-            $data_newslist[$listcount]['n_video'] = (array) $videolist;
+            $data_newslist[$listcount]['n_video'] = (object) $videolist;
             // re-insalize vediolist
             $videolist = array();
 
@@ -235,9 +235,9 @@ function homePageJsonPackagelist() {
             $n_rating = getRating($node); // story.inc
             $n_magazine = array(); // homepage.inc
 
-            $data_newslist[$listcount]['n_polls'] = $n_polls;
-            $data_newslist[$listcount]['n_rating'] = $n_rating;
-            $data_newslist[$listcount]['n_magazine'] = $n_magazine;
+            $data_newslist[$listcount]['n_polls'] = (object) $n_polls;
+            $data_newslist[$listcount]['n_rating'] = (object) $n_rating;
+            $data_newslist[$listcount]['n_magazine'] = (object) $n_magazine;
 
             $listcount++;
         }
@@ -383,11 +383,11 @@ function homePageJsonTopstories() {
             $data_newslist[$home_list_count]['n_large_image'] = "$file_medium_img_url";
             $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
             $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
-            $data_newslist[$home_list_count]['n_photo'] = $n_photo;
-            $data_newslist[$home_list_count]['n_video'] = $n_video;
-            $data_newslist[$home_list_count]['n_polls'] = $n_polls;
-            $data_newslist[$home_list_count]['n_rating'] = $n_rating;
-            $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
+            $data_newslist[$home_list_count]['n_photo'] = (object) $n_photo;
+            $data_newslist[$home_list_count]['n_video'] = (object) $n_video;
+            $data_newslist[$home_list_count]['n_polls'] = (object) $n_polls;
+            $data_newslist[$home_list_count]['n_rating'] = (object) $n_rating;
+            $data_newslist[$home_list_count]['n_magazine'] = (object) $n_magazine;
             $home_list_count++;
         }
     }
@@ -569,7 +569,7 @@ function homePageJsonNewslist_india() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
-            $data_newslist[$listcount]['n_photo'] = (array) $photolist;
+            $data_newslist[$listcount]['n_photo'] = (object) $photolist;
             // re-insalize photolist
             $photolist = array();
 
@@ -578,7 +578,7 @@ function homePageJsonNewslist_india() {
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
             }
-            $data_newslist[$listcount]['n_video'] = (array) $videolist;
+            $data_newslist[$listcount]['n_video'] = (object) $videolist;
             // re-insalize vediolist
             $videolist = array();
 
@@ -586,9 +586,9 @@ function homePageJsonNewslist_india() {
             $n_rating = getRating($node); // story.inc
             $n_magazine = array(); // homepage.inc
 
-            $data_newslist[$listcount]['n_polls'] = $n_polls;
-            $data_newslist[$listcount]['n_rating'] = $n_rating;
-            $data_newslist[$listcount]['n_magazine'] = $n_magazine;
+            $data_newslist[$listcount]['n_polls'] = (object) $n_polls;
+            $data_newslist[$listcount]['n_rating'] = (object) $n_rating;
+            $data_newslist[$listcount]['n_magazine'] = (object) $n_magazine;
 
             $listcount++;
         }
@@ -774,7 +774,7 @@ function homePageJsonNewslist_world() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
-            $data_newslist[$listcount]['n_photo'] = (array) $photolist;
+            $data_newslist[$listcount]['n_photo'] = (object) $photolist;
             // re-insalize photolist
             $photolist = array();
 
@@ -783,7 +783,7 @@ function homePageJsonNewslist_world() {
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
             }
-            $data_newslist[$listcount]['n_video'] = (array) $videolist;
+            $data_newslist[$listcount]['n_video'] = (object) $videolist;
             // re-insalize vediolist
             $videolist = array();
 
@@ -849,11 +849,11 @@ function homePageJsonMagazine() {
     $data_newslist[0]['n_large_image'] = "";
     $data_newslist[0]['n_image_credit'] = "";
     $data_newslist[0]['n_updated_datetime'] = "";
-    $data_newslist[0]['n_photo'] = $n_photo;
-    $data_newslist[0]['n_video'] = $n_video;
-    $data_newslist[0]['n_polls'] = $n_polls;
-    $data_newslist[0]['n_rating'] = $n_rating;
-    $data_newslist[0]['n_magazine'] = $n_magazine;
+    $data_newslist[0]['n_photo'] = (object) $n_photo;
+    $data_newslist[0]['n_video'] = (object) $n_video;
+    $data_newslist[0]['n_polls'] = (object) $n_polls;
+    $data_newslist[0]['n_rating'] = (object) $n_rating;
+    $data_newslist[0]['n_magazine'] = (object) $n_magazine;
 
     $data_magazine['news'] = (array) $data_newslist;
 
@@ -1174,11 +1174,11 @@ function homePageJsonPoll() {
     $data_newslist[0]['n_large_image'] = "";
     $data_newslist[0]['n_image_credit'] = "";
     $data_newslist[0]['n_updated_datetime'] = "";
-    $data_newslist[0]['n_photo'] = $n_photo;
-    $data_newslist[0]['n_video'] = $n_video;
-    $data_newslist[0]['n_polls'] = $n_polls;
-    $data_newslist[0]['n_rating'] = $n_rating;
-    $data_newslist[0]['n_magazine'] = $n_magazine;
+    $data_newslist[0]['n_photo'] = (object) $n_photo;
+    $data_newslist[0]['n_video'] = (object) $n_video;
+    $data_newslist[0]['n_polls'] = (object) $n_polls;
+    $data_newslist[0]['n_rating'] = (object) $n_rating;
+    $data_newslist[0]['n_magazine'] = (object) $n_magazine;
 
     $data_magazine['news'] =  (array) $data_newslist;
     //$data_magazine = (array) $data_magazine;
@@ -1361,7 +1361,7 @@ function homePageJsonNewslist_lifestyle() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
-            $data_newslist[$listcount]['n_photo'] = (array) $photolist;
+            $data_newslist[$listcount]['n_photo'] = (object) $photolist;
             // re-insalize photolist
             $photolist = array();
 
@@ -1370,7 +1370,7 @@ function homePageJsonNewslist_lifestyle() {
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
             }
-            $data_newslist[$listcount]['n_video'] = (array) $videolist;
+            $data_newslist[$listcount]['n_video'] = (object) $videolist;
             // re-insalize vediolist
             $videolist = array();
 
@@ -1378,9 +1378,9 @@ function homePageJsonNewslist_lifestyle() {
             $n_rating = getRating($node); // story.inc
             $n_magazine = array(); // homepage.inc
 
-            $data_newslist[$listcount]['n_polls'] = $n_polls;
-            $data_newslist[$listcount]['n_rating'] = $n_rating;
-            $data_newslist[$listcount]['n_magazine'] = $n_magazine;
+            $data_newslist[$listcount]['n_polls'] = (object) $n_polls;
+            $data_newslist[$listcount]['n_rating'] = (object) $n_rating;
+            $data_newslist[$listcount]['n_magazine'] = (object) $n_magazine;
 
             $listcount++;
         }
