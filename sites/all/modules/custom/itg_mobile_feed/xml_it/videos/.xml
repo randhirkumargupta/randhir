@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Root>
+<id>286531</id>
+                        <title><![CDATA[common]]></title>
+                        <description><![CDATA[]]></description>
+                        <itemcount>2</itemcount>
+<item>
+                    <title><![CDATA[Videogallery 20 Feb 2017 Part 3]]></title>
+                    <shortdescription><![CDATA[]]></shortdescription>
+                    <thumbimage><![CDATA[http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/14875915881487591588.jpg]]></thumbimage>
+                    <url>video232.xml</url>
+                    <createddate>February 20, 2017</createddate>
+                </item><item>
+                    <title><![CDATA[Videogallery 20 Feb 2017 Part 2]]></title>
+                    <shortdescription><![CDATA[]]></shortdescription>
+                    <thumbimage><![CDATA[http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/14875915691487591569.jpg]]></thumbimage>
+                    <url>video231.xml</url>
+                    <createddate>February 20, 2017</createddate>
+                </item>
+
+</Root>
