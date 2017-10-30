@@ -6263,6 +6263,8 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
         $anchor_c = 0;
         $anchor_list = array();
         $anchor_data = array();
+        $anchor_list_dump = array();
+        
         foreach ($cursor as $document) {
             //if($document['status'] == 1 && $document['ntype'] == 'anchor'){
             $node_data = node_load($document['nid']);
@@ -6281,15 +6283,22 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $a_location = "";
             $a_desc = $node_data->body['und'][0]['value'];
             
-            $anchor_list[$anchor_c]['a_id'] = "$a_id";
-            $anchor_list[$anchor_c]['a_title'] = "$a_title";
-            $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
-            $anchor_list[$anchor_c]['a_is_following'] = "$a_is_following";
-            $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
-            $anchor_list[$anchor_c]['a_twitter_handler'] = "$a_twitter_handler";
-            $anchor_list[$anchor_c]['a_location'] = "";
-            $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
-            $anchor_c++;
+            $dup_flag = 0;            
+            $dup_flag = searchIn2DArray($id, $array);
+            if($dup_flag == 2){
+            
+                $anchor_list[$anchor_c]['a_id'] = "$a_id";
+                $anchor_list[$anchor_c]['a_title'] = "$a_title";
+                $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
+                $anchor_list[$anchor_c]['a_is_following'] = "$a_is_following";
+                $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
+                $anchor_list[$anchor_c]['a_twitter_handler'] = "$a_twitter_handler";
+                $anchor_list[$anchor_c]['a_location'] = "";
+                $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
+
+                $anchor_list_dump[]['a_id'] = $a_id;
+                $anchor_c++;
+            }
 
             // }
         }
@@ -6302,7 +6311,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
     $anchor_data['anchor_display_count'] = "50";
     $anchor_data['anchor_pagination_cap'] = "50";
 
-    $anchor_list = removeduplicatefrommiltiD($anchor_list);
+    //$anchor_list = removeduplicatefrommiltiD($anchor_list);
     $anchor_data['anchor'] = $anchor_list;
     //$anchor_data = array_unique($anchor_data);
     
@@ -6660,6 +6669,17 @@ function removeduplicatefrommiltiD($array){
     }
     
     return $copy;
+}
+
+
+//search in 2-d array
+function searchIn2DArray($id, $array) {
+   foreach ($array as $key => $val) {
+       if ($val['a_id'] === $id) {
+           return 1;
+       }
+   }
+   return 2;
 }
 
 
