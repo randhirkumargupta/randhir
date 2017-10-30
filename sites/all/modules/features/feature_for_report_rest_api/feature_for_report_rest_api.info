@@ -1,0 +1,9 @@
+name = Feature For Report Rest API
+description = Feature For Report Rest API
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = itg_mobile_feed
+dependencies[] = rest_server
+dependencies[] = services
+features[features_api][] = api:2
