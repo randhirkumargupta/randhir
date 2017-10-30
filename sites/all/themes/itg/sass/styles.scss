@@ -1716,8 +1716,11 @@ footer {
             display: none;
         }
         iframe {
-            width: 100%;
-            height: 45vh;
+            /*width: 100%;
+            height: 45vh;*/
+            .jwplayer {
+                position: inherit;
+            }
         }
         i {
             position: absolute;
@@ -14814,6 +14817,16 @@ ul.pron-cons-img li img {
     color: #fff;
     font-size: 12px;
     font-family: Roboto;
+}
+
+#modal-content #reporter-node-form .vertical-tabs {
+    display: none;
+}
+
+.add-byline-link.ctools-use-modal {
+    position: absolute;
+    right: 70px;
+    top: 4px;
 }
 
 
