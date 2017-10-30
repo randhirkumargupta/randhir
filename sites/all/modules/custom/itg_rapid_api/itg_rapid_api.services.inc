@@ -6302,8 +6302,10 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
     $anchor_data['anchor_display_count'] = "50";
     $anchor_data['anchor_pagination_cap'] = "50";
 
+    $anchor_list = removeduplicatefrommiltiD($anchor_list);
     $anchor_data['anchor'] = $anchor_list;
-    $anchor_data = array_unique($anchor_data);
+    //$anchor_data = array_unique($anchor_data);
+    
 
     if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
@@ -6638,6 +6640,26 @@ function list_user_follow_topic_list($uid) {
     }
     return $output_array;
   
+}
+
+// function for remove duplicate from milti-D array
+
+function removeduplicatefrommiltiD($array){
+    $copy = $array; // create copy to delete dups from
+    $usedEmails = array(); // used emails
+
+    for( $i=0; $i<count($array); $i++ ) {
+
+        if ( in_array( $array[$i][2], $usedEmails ) ) {
+            unset($copy[$i]);
+        }
+        else {
+            $usedEmails[] = $array[$i][2];
+        }
+
+    }
+    
+    return $copy;
 }
 
 
