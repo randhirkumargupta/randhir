@@ -235,7 +235,7 @@ function get_hltapps_sections($type) {
       );
       break;
     case 'mixed':
-      
+      return array()
       break;
   }
 }
