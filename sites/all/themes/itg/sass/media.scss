@@ -174,12 +174,14 @@
         .slick-next {
             border-radius: 90px 0px 0px 90px;
             right: 10px;
+            left: auto;
             &:hover {
                 background-color: rgba(255, 255, 255, 0.6);
             }
             &:before {
                 content: '\f054';
                 right: 0;
+                left: auto;
             }
         }
     }
@@ -2624,6 +2626,22 @@
     }
     .election-page .election-graph-5 {
         margin-top: -20px;
+    }
+    .page-sso-change-password form#itg-sso-reg-password-form {
+        max-width: 100%;
+        padding: 20px;
+    }
+    .password-strength {
+        width: 17em;
+        float: none;
+        margin: 1.4em 0;
+    }
+    div.password-confirm {
+        float: none;
+        margin-top: 0;
+    }
+    div.form-item div.password-suggestions {
+        width: 100%;
     }
 }
 

@@ -1044,9 +1044,9 @@ function total_poll_count_content($poll_id) {
           ->condition('p.poll_id' , $poll_id)->execute()->rowCount();
 }
 
-function itg_poll_node_view($node , $view_mode , $langcode) {
-  global $user;
+function itg_poll_node_view($node , $view_mode , $langcode) {  
   if ($node->type == 'poll') {
+    global $user;
     if (empty($user->uid) || array_key_exists(FRONT_USER , $user->roles)) {
       //drupal_access_denied();
       return;
