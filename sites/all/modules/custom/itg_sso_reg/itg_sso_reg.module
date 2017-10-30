@@ -350,7 +350,7 @@ function itguser_logout() {
     setcookie('itg_forced_login', null, -1, '/');
   }
   echo 'shravan';
-  p($_COOKIE['itg_forced_login']);
+  p($_COOKIE);
   exit;
   if ($user->uid > 0) {
     $domains = variable_get('signout-domain', '');
