@@ -168,7 +168,7 @@ if ($theme != 'itgadmin') {
     <?php endif; ?>
     <?php if ($theme == 'itgadmin'): ?>
     <!-- Movies top section -->
-    <div class="row itg-top-section itg-layout-580">
+    <div class="row itg-top-section itg-layout-375">
         <div class="top-block">
         <div class="col-md-8">
           <div class="widget-help-text">Special widgets ( <strong>Manual Top Story</strong> )</div>
