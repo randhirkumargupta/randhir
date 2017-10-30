@@ -16,7 +16,6 @@ $videoids = "";
 if (function_exists('get_video_in_fieldcollection_by_nid')) {
   $videoids = get_video_in_fieldcollection_by_nid($nid);
 
-  // p($videoids);
 }
 $argum = base64_encode(arg(1));
 $useragent = $_SERVER['HTTP_USER_AGENT'];
