@@ -234,5 +234,8 @@ function get_hltapps_sections($type) {
         'in-da-club.xml' => array('section'=> '1208173', 'limit' => 25),
       );
       break;
+    case 'mixed':
+      
+      break;
   }
 }

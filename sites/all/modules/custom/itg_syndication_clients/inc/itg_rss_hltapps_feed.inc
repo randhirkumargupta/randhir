@@ -32,6 +32,13 @@ function itg_rss_hltapps_photos() {
   }
 }
 
+function itg_rss_hltapps_mixed_rss_feed(){
+  $sections = get_hltapps_sections('mixed');
+  foreach ($sections as $file_name => $section) {
+    itg_genrate_hltapps_mixed_feed_syndication($section['section'], $file_name, $section['limit']);
+  }
+}
+
 /**
  * menu callback for Hltapps story syndication
  */
@@ -492,4 +499,8 @@ function genrate_hltapps_programme_xml($result, $section_name, $section_id){
   }
   $xml .= '</root>';
   return $xml;
+}
+
+function itg_genrate_hltapps_mixed_feed_syndication($sections = NULL, $file_name){
+  
 }
