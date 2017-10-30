@@ -184,13 +184,13 @@ function simplesamlphp_auth_loginpage() {
       } else {
       $previous_url = $parse['host'].'/akamai-user/'.base64_encode($remove_fb_append_parameter);  
       }*/
-      $previous_url = 'http://'.$parse['host'].'/akamai-user/'.base64_encode($remove_fb_append_parameter);
+      $previous_url = 'https://'.$parse['host'].'/akamai-user/'.base64_encode($remove_fb_append_parameter);
       drupal_goto($previous_url);
     }
     else {
       // default condition
       //drupal_goto(FRONT_URL)
-      $previous_url = 'http://uat-it.indiatodayonline.in/akamai-user/'.base64_encode(FRONT_URL);
+      $previous_url = 'https://uat-it.indiatodayonline.in/akamai-user/'.base64_encode(FRONT_URL);
       drupal_goto($previous_url);;
     }
 //    if (!empty($arg[2])) {
