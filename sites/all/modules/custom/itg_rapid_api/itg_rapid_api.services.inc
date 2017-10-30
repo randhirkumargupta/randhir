@@ -6284,7 +6284,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
             $a_desc = $node_data->body['und'][0]['value'];
             
             $dup_flag = 0;            
-            $dup_flag = searchIn2DArray($id, $array);
+            $dup_flag = searchIn2DArray($a_id, $anchor_list_dump);
             if($dup_flag == 2){
             
                 $anchor_list[$anchor_c]['a_id'] = "$a_id";
