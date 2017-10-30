@@ -24,6 +24,12 @@ function itg_breaking_news_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK
   );
+  $items['breakingnews'] = array(
+    'title' => 'Breaking News',
+    'page callback' => 'redirect_breakingnews_to_latest_node',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK
+  );
   return $items;
 }
 
@@ -584,4 +590,22 @@ function get_commentary_data_db($nid, $page) {
       }
     }
   return $data;
+}
+
+/**
+ * Redirect to latest node of breaking news
+ * if user hit the breakingnews url
+ */
+function redirect_breakingnews_to_latest_node() {
+  $latestnid = '';
+  $latestnid_query = db_select('node', 'n');
+  $latestnid_query->fields('n', array('nid'));
+  $latestnid_query->condition('n.type', 'breaking_news');
+  $latestnid_query->condition('n.status', 1);
+  $latestnid_query->orderBy('n.changed', 'DESC');
+  $latestnid_query->range(0, 1);
+  $latestnid = $latestnid_query->execute()->fetchField();
+  if (is_numeric($latestnid)) {
+    drupal_goto('node/' . $latestnid);
+  }
 }
