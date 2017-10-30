@@ -1086,7 +1086,7 @@ if (!empty($content)):
             <div id="vuukle-emote"></div>
             <?php
               if (function_exists('taboola_view')) {
-                taboola_view();
+                //taboola_view();
               }
 
               if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
@@ -1098,7 +1098,7 @@ if (!empty($content)):
             <div id="vuukle_div"></div>
             <?php
             if (function_exists('vukkul_view')) {
-              vukkul_view();
+              //vukkul_view();
             }
             ?>
 
