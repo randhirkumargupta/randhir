@@ -549,7 +549,7 @@ function homePageJsonNewslist_india() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            $data_newslist[$listcount]['n_template_id'] = "1";
+            //$data_newslist[$listcount]['n_template_id'] = "1";
             $data_newslist[$listcount]['n_type'] = "$type";
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -754,7 +754,7 @@ function homePageJsonNewslist_world() {
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
-            $data_newslist[$listcount]['n_template_id'] = "3";
+            //$data_newslist[$listcount]['n_template_id'] = "3";
             $data_newslist[$listcount]['n_type'] = "$type";
             $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
             $data_newslist[$listcount]['n_is_sponsored'] = "0";
