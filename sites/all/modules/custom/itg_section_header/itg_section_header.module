@@ -395,7 +395,7 @@ function get_event_menu($nid) {
     if (!empty($flash_old)) {
       $flash_old_event = $flash_old['menu'];
     }
-    $menu['menu'][] = '<li>' . l('Flashback', 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
+    $menu['flashback_menu'][] = '<li>' . l('Flashback', 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
   }
   $menu['event_start_date'] = $event_start_date;
   $menu['event_location'] = $event_location;
