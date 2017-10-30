@@ -448,7 +448,7 @@ if (!empty($content)):
                       $listicle_output.= '<span>' . $num . '</span>';
                     }
                     if (isset($type)) {
-                      $listicletype = '<span class="listicle-type" style="color: #' . $color . '">' . $type . ': </span>';
+                      $listicletype = '<span class="listicle-type">' . $type . ': </span>';
                     }
                     $listicle_output.= '<div class="listicle-description">' . $listicletype . $description . '</div>';
                     $listicle_output.= '</div>';
