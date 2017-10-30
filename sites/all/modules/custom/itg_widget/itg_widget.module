@@ -1457,10 +1457,12 @@ function itg_widget_delete_data_from_widget($widget_name, $nid = 0, $stateid = 0
  * @param string $category_tid
  */
 function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extra = NULL, $state = NULL) {
-    try {
-        $max_weight = get_min_weight_for_special($widget_name, $category_tid);
-        $node_load_data = itg_widget_get_required_node_data_for_widget($node);
-        db_insert('itg_widget_order')
+  try {
+    $max_weight = get_min_weight_for_special($widget_name, $category_tid);
+    $node_load_data = itg_widget_get_required_node_data_for_widget($node);
+    itg_watchdog('node_load_data', $node_load_data);
+    if (!empty($widget_name) && $widget_name != '_none') {
+      db_insert('itg_widget_order')
           ->fields(array(
             'nid' => $node,
             'widget' => $widget_name,
@@ -1471,9 +1473,11 @@ function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extr
             'weight' => --$max_weight,
           ))
           ->execute();
-    } catch (Exception $ex) {
-        drupal_set_message($ex->getMessage());
     }
+  }
+  catch (Exception $ex) {
+    drupal_set_message($ex->getMessage());
+  }
 }
 
 /**
@@ -1859,13 +1863,28 @@ function itg_widget_query_category_wise_content_list_alter(QueryAlterableInterfa
  * 
  */
 function _get_content_type_for_widget($widget_name) {
-    $content_type = array('story', 'videogallery', 'photogallery');
-    switch ($widget_name) {
-        case 'top_stories_widget':
-            $content_type = array('story');
-            break;
-    }
-    return $content_type;
+  $content_type = array('story', 'videogallery', 'photogallery');
+  switch ($widget_name) {
+    case 'top_stories_widget':
+      $content_type = array('story', 'breaking_news');
+      break;
+    case 'dont_miss_content_widget':
+      $content_type = array('story', 'videogallery', 'photogallery', 'breaking_news');
+      break;
+    case 'we_may_suggest_widget':
+      $content_type = array('story', 'videogallery', 'photogallery', 'breaking_news');
+      break;
+    case 'home_page_feature_widget':
+      $content_type = array('story', 'videogallery', 'photogallery', 'breaking_news');
+      break;
+    case 'most_popular_widget':
+      $content_type = array('story', 'breaking_news');
+      break;
+    case 'big_story_format_widget':
+      $content_type = array('story', 'videogallery', 'photogallery', 'breaking_news');
+      break;
+  }
+  return $content_type;
 }
 
 function _get_custom_weight_from_table() {
