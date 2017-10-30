@@ -542,6 +542,8 @@ function itg_del_history_table_data() {
  */
 function itg_sso_itgredirect() {
   drupal_add_http_header('Cache-Control', 'no-store');
+  $expire = time() + 86400;
+  setcookie("itg_user_login", "true", $expire);
   watchdog('user_page', 'pass');
   $arg = arg();
   $redirect = base64_decode($arg[1]);
