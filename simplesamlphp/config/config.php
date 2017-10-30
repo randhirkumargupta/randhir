@@ -306,7 +306,7 @@ $config = array(
     /*
      * Option to override the default settings for the session cookie name
      */
-    'session.cookie.name' => 'itgssoid',
+    'session.cookie.name' => 'SimpleSAMLSessionID',
 
     /*
      * Expiration time for the session cookie, in seconds.
