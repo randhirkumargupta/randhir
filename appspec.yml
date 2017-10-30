@@ -2,8 +2,10 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/html/
+    destination: /opt/httpd/vhosts/indiatodayonline.in/httpdocs/
   - source: scripts/setup/local.settings.php
-    destination: /var/www/html/sites/default/
+    destination: /opt/httpd/vhosts/indiatodayonline.in/httpdocs/sites/default/
   - source: scripts/setup/settings.php
-    destination: /var/www/html/sites/default/
+    destination: /opt/httpd/vhosts/indiatodayonline.in/httpdocs/sites/default/
+  - source : simplesamlphp
+    destination: /opt/httpd/vhosts/indiatodayonline.in/simplesamlphp
