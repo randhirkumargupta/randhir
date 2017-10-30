@@ -154,7 +154,7 @@ function itg_front_end_common_block_view($delta = '') {
       $data = get_personlization_front_block_data(FALSE);
       $block['content'] = theme("personlization_front_end", array("data" => $data));
       if($user->uid == 0) {
-        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
+        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('type' => 'file', 'scope' => 'footer', 'weight' => 5));
       /*drupal_add_js('jQuery(document).ready(function() {
     jQuery(".recommended-slider").slick({
       slidesToShow: 3,
@@ -199,7 +199,7 @@ _taboola.push({article:"auto"});
 e.async = 1;
 e.src = u;
 f.parentNode.insertBefore(e, f);
-}(document.createElement("script"), document.getElementsByTagName("script")[0], "http://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js");
+}(document.createElement("script"), document.getElementsByTagName("script")[0], "https://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js");
 </script>
 <div class="divclear"></div>
 <div class="nocontent">
@@ -235,7 +235,7 @@ _taboola.push({article:'auto'});
 e.async = 1;
 e.src = u;
 f.parentNode.insertBefore(e, f);
-}(document.createElement('script'), document.getElementsByTagName('script')[0], 'http://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js');
+}(document.createElement('script'), document.getElementsByTagName('script')[0], 'https://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js');
 </script><div id='taboola-right-rail-thumbnails-2nd'></div>
 <script type='text/javascript'>
 window._taboola = window._taboola || [];
@@ -539,11 +539,11 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
  */
 function itg_get_related_content($nid) {
   if(!empty($nid)) {
-  $query = db_select('field_data_field_common_related_content', 'tt');
-  $query->fields('tt', array('field_common_related_content_value'));
-  $query->condition('tt.entity_id', $nid, '=');
-  $related_result = $query->execute()->fetchField();
-  return $related_result;
+    $query = db_select('field_data_field_common_related_content', 'tt');
+    $query->fields('tt', array('field_common_related_content_value'));
+    $query->condition('tt.entity_id', $nid, '=');
+    $related_result = $query->execute()->fetchField();
+    return $related_result;
   }
 }
 

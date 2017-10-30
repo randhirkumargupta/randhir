@@ -425,7 +425,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_form_section_wise_content_ordering_list_page') {
     $type_in_url = $_GET['type'];
     $actual_weight_type = 'All';
-    $types = array("story", "videogallery", "photogallery");
+    $types = array("story", "videogallery", "photogallery", "breaking_news");
     if (in_array($type_in_url, $types)) {
       $actual_weight_type = $type_in_url;
     }
@@ -1936,23 +1936,23 @@ function itg_widget_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'reporter' && drupal_is_front_page() == FALSE) {
     $cat_array = itg_widget_anchor_landing_menu(arg(1));
     $first_key = key($cat_array);
-// Category view on landing page
+    // Category view on landing page
     drupal_add_js("jQuery('.anchor-detail-menu .tab-buttons span').click(function(){
-var section_id = jQuery(this).attr('value');
-jQuery('.anchor-detail-menu .tab-buttons span a').removeClass('active');
-jQuery('#edit-field-story-category-tid').val(section_id); 
-jQuery('#edit-field-story-category-tid').trigger('change');
-jQuery(this).find('a').addClass('active');
-});", array('type' => 'inline', 'scope' => 'footer'));
-    drupal_add_js("jQuery(document).ready(function(){
-jQuery('#edit-field-story-category-tid').val(" . $first_key . "); 
-jQuery('#edit-field-story-category-tid').trigger('change');
-jQuery('.anchor-detail-menu .tab-buttons span').each(function() {
-if(jQuery(this).attr('value') == " . $first_key . "){
-jQuery(this).addClass('active');
-}
-});
-});", array('type' => 'inline', 'scope' => 'footer'));
+      var section_id = jQuery(this).attr('value');
+      jQuery('.anchor-detail-menu .tab-buttons span a').removeClass('active');
+      jQuery('#edit-field-story-category-tid').val(section_id); 
+      jQuery('#edit-field-story-category-tid').trigger('change');
+      jQuery(this).find('a').addClass('active');
+      });", array('type' => 'inline', 'scope' => 'footer'));
+          drupal_add_js("jQuery(document).ready(function(){
+      jQuery('#edit-field-story-category-tid').val(" . $first_key . "); 
+      jQuery('#edit-field-story-category-tid').trigger('change');
+      jQuery('.anchor-detail-menu .tab-buttons span').each(function() {
+      if(jQuery(this).attr('value') == " . $first_key . "){
+      jQuery(this).addClass('active');
+      }
+      });
+      });", array('type' => 'inline', 'scope' => 'footer'));
   }
 }
 
