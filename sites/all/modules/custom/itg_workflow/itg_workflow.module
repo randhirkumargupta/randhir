@@ -857,8 +857,8 @@ function itg_workflow_node_access($node, $op, $account) {
  */
 function itg_workflow_node_view($node, $view_mode, $langcode) {
     
-  global $theme;
-  global $user;
+  global $theme, $user;
+  
   // code for redirect_url
   $is_fron_page = drupal_is_front_page();
   if (empty($is_fron_page)) {
