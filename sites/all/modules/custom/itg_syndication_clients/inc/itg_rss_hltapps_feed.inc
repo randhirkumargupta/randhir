@@ -18,6 +18,13 @@ function itg_rss_hltapps_videos() {
   }
 }
 
+function itg_rss_hltapps_programme() {
+  $sections = get_hltapps_sections('programme');
+  foreach ($sections as $file_name => $section) {
+    itg_genrate_hltapps_programme_syndication($section['section'], $file_name, $section['limit']);
+  }
+}
+
 function itg_rss_hltapps_photos() {
   $sections = get_hltapps_sections('photo');
   foreach ($sections as $file_name => $section) {
@@ -231,6 +238,7 @@ function genrate_hltapps_videos_xml($result, $section_name, $section_id){
 }
 
 function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $video_file_name){
+  global $base_url;
   if($section_name == 'Top Ten'){
     $section_name = 'Videos';
   }
@@ -404,4 +412,84 @@ function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $
   $fp1 = fopen($file_path, "w");
   fwrite($fp1, $photo_xml);
   fclose($fp1);
+}
+
+
+
+/**
+ * menu callback for Hltapps Programme syndication
+ */
+function itg_genrate_hltapps_programme_syndication($section_id = NULL, $file_name, $limit = 25) {
+  if (!empty($section_id)) {
+    $section_name = get_term_name_by_tid($section_id);
+    
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_large_image', 'sli', 'sli.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_courtesy', 'sc', 'sc.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
+     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+
+    if (!empty($section_id) && $section_id != -1) {
+      $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+      $query->condition('ti.tid', $section_id, '=');
+    }else{
+      $section_id = 1;
+    }
+
+    $query->fields('npd', array('field_itg_content_publish_date_value'));
+    $query->fields('synopsis', array('field_story_kicker_text_value'));
+    $query->fields('sli', array('field_story_large_image_fid'));
+    $query->fields('n', array('nid', 'title', 'created'));
+    $query->fields('ssi', array('field_story_small_image_fid'));
+    $query->fields('pc', array('field_primary_category_value'));
+    $query->fields('sc', array('field_story_courtesy_value'));
+    $query->fields('sst', array('field_story_source_type_value'));
+    
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'videogallery', '=');
+    $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid')->range(0, $limit);
+
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $xml = genrate_hltapps_programme_xml($result, $section_name, $section_id);
+    $xml_path = 'public://hltapps/videos/';
+    $file_path = $xml_path . $file_name;
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+    
+  }
+}
+
+function genrate_hltapps_programme_xml($result, $section_name, $section_id){
+  global $base_url;
+  $section_desc = get_term_description_by_tid($section_id);
+  $xml = '<root>';
+  $xml .= '<id>'.$section_id.'</id>';  
+  $xml .= '<title><![CDATA['.$section_name.']]></title>';
+  $xml .= '<description><![CDATA['.$section_desc.']]></description>';
+  $xml .= '<itemcount>'.count($result).'</itemcount>';
+  
+  if (!empty($result)) {
+    foreach ($result as $value) {
+      $nid = $value['nid'];
+      $video_file_name = 'video' . $nid . '.xml';
+      $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
+      $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
+      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+      $xml .= '<item>';
+      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
+      $xml .= '<shortdescription><![CDATA[' . $kicker_text . ']]></shortdescription>';
+      $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
+      $xml .= '<url>'.$video_file_name.'</url>';
+      $xml .= '<createddate>'.$created_date.'</createddate>';
+      $xml .= '</item>';
+      genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $video_file_name);
+    }
+  }
+  $xml .= '</root>';
+  return $xml;
 }

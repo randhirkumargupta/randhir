@@ -216,6 +216,23 @@ function get_hltapps_sections($type) {
         'must-see.xml' => array('section'=> '1208598', 'limit' => 25),
         'election.xml' => array('section'=> '1208667', 'limit' => 25)
       );
+    case 'programme':
+      return array(
+        'sports-today.xml' => array('section'=> '1206960', 'limit' => 25),
+        'news-today.xml' => array('section'=> '1207797', 'limit' => 25),
+        'to-the-point.xml' => array('section'=> '1207722', 'limit' => 25),
+        'newsroom.xml' => array('section'=> '1207827', 'limit' => 25),
+        'first-up.xml' => array('section'=> '1207755', 'limit' => 25),
+        'popular-show.xml' => array('section'=> '1208908', 'limit' => 25),
+        'person-of-interest.xml' => array('section'=> '1208898', 'limit' => 25),
+        'india-first.xml' => array('section'=> '1208095', 'limit' => 25),
+        'peoples-court.xml' => array('section'=> '1208900', 'limit' => 25),
+        //'lunch-break-.xml' => array('section'=> '1403', 'limit' => 25),
+        '5ive-live-.xml' => array('section'=> '1208902', 'limit' => 25),
+        'auto-today.xml' => array('section'=> '1207972', 'limit' => 25),
+        'long-story.xml' => array('section'=> '1208061', 'limit' => 25),
+        'in-da-club.xml' => array('section'=> '1208173', 'limit' => 25),
+      );
       break;
   }
 }

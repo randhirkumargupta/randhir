@@ -161,6 +161,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_hltapps_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['hltapps/programme'] = array(
+    'page callback' => 'itg_rss_hltapps_programme',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -765,4 +771,19 @@ function get_all_associated_photos($nid) {
   $query->fields('ic', array('field_image_caption_value'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result;
+}
+
+
+function get_term_description_by_tid($tid = NULL) {
+  $tdescription = '';
+  if (!empty($tid)) {
+    $query = db_select('taxonomy_term_data', 'ttd');
+    $query->fields('ttd', array('description'));
+    $query->condition('ttd.tid', $tid, '=');
+    $tname = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($tname) > 0) {
+      $tdescription = $tname[0]['description'];
+    }
+  }
+  return $tdescription;
 }

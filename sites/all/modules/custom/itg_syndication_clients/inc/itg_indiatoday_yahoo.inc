@@ -84,9 +84,11 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $xml .= '</item>';
     }
     $load_xml = simplexml_load_file("http://feeds.intoday.in/indiatoday/yahoo/top-businesstoday.xml");
-    foreach($load_xml->children()->children() as $load_xml_item){
-      $xml.= $load_xml_item->asXML();
-    }
+    if(!empty($load_xml->children()->children())){
+      foreach($load_xml->children()->children() as $load_xml_item){
+        $xml.= $load_xml_item->asXML();
+      }
+    }    
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
