@@ -349,7 +349,7 @@ function itguser_logout() {
     unset($_COOKIE['itg_forced_login']);
     setcookie('itg_forced_login', null, -1, '/');
   }
-  
+  exit;
   if ($user->uid > 0) {
     $domains = variable_get('signout-domain', '');
     $domain_array = explode(',', $domains);
