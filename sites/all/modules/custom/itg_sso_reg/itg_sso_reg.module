@@ -21,6 +21,11 @@ function itg_sso_reg_init() {
      drupal_goto(FRONT_URL);
   }
   
+  if ($user->uid > 0) {
+     $expire = time() + 86400;
+     setcookie("itg_user_login", "true", $expire);
+  }
+  
   if (array_key_exists(FRONT_USER, $user->roles) && $arg[0] == 'sso-user') {
     // make configuration for js file
     $settings = array();
@@ -542,8 +547,6 @@ function itg_del_history_table_data() {
  */
 function itg_sso_itgredirect() {
   drupal_add_http_header('Cache-Control', 'no-store');
-  $expire = time() + 86400;
-  setcookie("itg_user_login", "true", $expire);
   watchdog('user_page', 'pass');
   $arg = arg();
   $redirect = base64_decode($arg[1]);
