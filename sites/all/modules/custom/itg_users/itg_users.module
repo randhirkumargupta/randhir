@@ -391,7 +391,10 @@ function itg_users_views_pre_render(&$view) {
  *
  */
 function itg_users_user_logout($account) {
-  unset($_COOKIE['itg_forced_login']);
+  if (isset($_COOKIE['itg_forced_login'])) {
+    unset($_COOKIE['itg_forced_login']);
+    setcookie('itg_forced_login', null, -1, '/');
+  }
   $_GET['destination'] = 'user';
 }
 
