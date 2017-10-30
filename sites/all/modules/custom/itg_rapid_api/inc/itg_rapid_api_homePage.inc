@@ -218,7 +218,7 @@ function homePageJsonPackagelist() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
-            $data_newslist[$listcount]['n_photo'] = $photolist;
+            $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
             $photolist = array();
 
@@ -227,7 +227,7 @@ function homePageJsonPackagelist() {
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
             }
-            $data_newslist[$listcount]['n_video'] = $videolist;
+            $data_newslist[$listcount]['n_video'] = (array) $videolist;
             // re-insalize vediolist
             $videolist = array();
 
@@ -569,7 +569,7 @@ function homePageJsonNewslist_india() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
-            $data_newslist[$listcount]['n_photo'] = $photolist;
+            $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
             $photolist = array();
 
@@ -578,7 +578,7 @@ function homePageJsonNewslist_india() {
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
             }
-            $data_newslist[$listcount]['n_video'] = $videolist;
+            $data_newslist[$listcount]['n_video'] = (array) $videolist;
             // re-insalize vediolist
             $videolist = array();
 
@@ -774,7 +774,7 @@ function homePageJsonNewslist_world() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
-            $data_newslist[$listcount]['n_photo'] = $photolist;
+            $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
             $photolist = array();
 
@@ -783,7 +783,7 @@ function homePageJsonNewslist_world() {
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
             }
-            $data_newslist[$listcount]['n_video'] = $videolist;
+            $data_newslist[$listcount]['n_video'] = (array) $videolist;
             // re-insalize vediolist
             $videolist = array();
 
@@ -1361,7 +1361,7 @@ function homePageJsonNewslist_lifestyle() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
-            $data_newslist[$listcount]['n_photo'] = $photolist;
+            $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
             $photolist = array();
 
@@ -1370,7 +1370,7 @@ function homePageJsonNewslist_lifestyle() {
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
             }
-            $data_newslist[$listcount]['n_video'] = $videolist;
+            $data_newslist[$listcount]['n_video'] = (array) $videolist;
             // re-insalize vediolist
             $videolist = array();
 
