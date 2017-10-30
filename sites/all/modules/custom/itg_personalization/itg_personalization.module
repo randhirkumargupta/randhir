@@ -818,6 +818,7 @@ function itg_following_details_callback() {
 function itg_personalization_user_login(&$edit, $account) {
   global $user;
   if ($user->uid > 0) {
+  watchdog('user_id_sso', $user->uid);
     $expire = time() + 86400;
     setcookie("itg_user_login", "true", $expire);
   }
