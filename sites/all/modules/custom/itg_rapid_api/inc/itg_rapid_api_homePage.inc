@@ -243,7 +243,7 @@ function homePageJsonPackagelist() {
         }
     }
 
-    $data_news['news'] = $data_newslist;
+    $data_news['news'] = (array) $data_newslist;
 
     return $data_news;
 }
@@ -392,7 +392,7 @@ function homePageJsonTopstories() {
         }
     }
 
-    $data_topstories['news'] = $data_newslist;
+    $data_topstories['news'] = (array) $data_newslist;
     return $data_topstories;
 }
 
@@ -594,7 +594,7 @@ function homePageJsonNewslist_india() {
         }
     }
 
-    $data_news['news'] = $data_newslist;
+    $data_news['news'] = (array) $data_newslist;
 
     return $data_news;
 }
@@ -799,7 +799,7 @@ function homePageJsonNewslist_world() {
         }
     }
 
-    $data_news['news'] = $data_newslist;
+    $data_news['news'] = (array) $data_newslist;
 
     return $data_news;
 }
@@ -855,7 +855,7 @@ function homePageJsonMagazine() {
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
 
-    $data_magazine['news'] = $data_newslist;
+    $data_magazine['news'] = (array) $data_newslist;
 
     return $data_magazine;
 }
@@ -1180,7 +1180,7 @@ function homePageJsonPoll() {
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
 
-    $data_magazine['news'] =  $data_newslist;
+    $data_magazine['news'] =  (array) $data_newslist;
     //$data_magazine = (array) $data_magazine;
     
     //var_dump($data_magazine); die();
@@ -1386,7 +1386,7 @@ function homePageJsonNewslist_lifestyle() {
         }
     }
 
-    $data_news['news'] = $data_newslist;
+    $data_news['news'] = (array) $data_newslist;
 
     return $data_news;
 }
