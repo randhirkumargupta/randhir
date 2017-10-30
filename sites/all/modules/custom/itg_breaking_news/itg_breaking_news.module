@@ -599,9 +599,13 @@ function get_commentary_data_db($nid, $page) {
 function redirect_breakingnews_to_latest_node() {
   $latestnid = '';
   $latestnid_query = db_select('node', 'n');
+  $latestnid_query->leftJoin('field_data_field_type', 'ft', 'ft.entity_id = n.nid');
   $latestnid_query->fields('n', array('nid'));
   $latestnid_query->condition('n.type', 'breaking_news');
   $latestnid_query->condition('n.status', 1);
+  $latestnid_query->condition('ft.field_type_value', 'Breaking News');
+  $latestnid_query->condition('ft.bundle', 'breaking_news');
+  $latestnid_query->condition('ft.entity_type', 'node');
   $latestnid_query->orderBy('n.changed', 'DESC');
   $latestnid_query->range(0, 1);
   $latestnid = $latestnid_query->execute()->fetchField();
