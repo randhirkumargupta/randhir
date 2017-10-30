@@ -190,7 +190,7 @@ function itg_widget_menu() {
       'page arguments' => array(1, 2, 3, 4),
       'access arguments' => array('administer nodequeue'),
     );
-    
+
     $items['purge-widget-data/%'] = array(
       'page callback' => '__itg_widget_helper_data_insert',
       'page arguments' => array(1),
@@ -262,7 +262,7 @@ function itg_widget_cronapi($op, $job = NULL) {
       'description' => 'Delete unpublised nodes from database itg_widget_order_table. It may be heavy cron so please run in midnight',
       'callback' => 'itg_widget_remove_unpublised_node',
     );
-    
+
     $items['tig-content-expiry-videogallery'] = array(
       'description' => 'Content expiry for video content',
       'callback' => 'itg_content_inactive_videogallery',
@@ -276,9 +276,9 @@ function itg_content_inactive_videogallery() {
 
   $current_time = date("Y-m-d H:i:s");
   //set content type
-  //$content_type = array('story', 'videogallery'); 
+  //$content_type = array('story', 'videogallery');
   $content_type = array("videogallery");
-  
+
   $itg_query = db_select('node', 'n');
   $itg_query->leftJoin('field_data_field_story_expiry_date', 'expiry', 'n.nid = expiry.entity_id');
   $itg_query->fields('expiry', array('field_story_expiry_date_value'));
@@ -454,8 +454,8 @@ function itg_widget_block_view($delta = '') {
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_big_story');
             //$block['subject'] = t('');
             $info['widget'] = 'big_story_format_widget';
-            $data = itg_widget_big_story_block_data($info);            
-            
+            $data = itg_widget_big_story_block_data($info);
+
             foreach ($data as $big_story_data) {
                 if (isset($big_story_data['is_live_tv']) && !empty($big_story_data['is_live_tv'])) {
                     $live_tv_flag = TRUE;
@@ -627,7 +627,7 @@ function itg_widget_block_view($delta = '') {
             drupal_add_js($base_url . '/sites/all/themes/itg/js/jquery.mousewheel.min.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
 
             drupal_add_js("jQuery(document).ready(function () {
-            var winWidth = jQuery(window).width();            
+            var winWidth = jQuery(window).width();
             console.log(winWidth);
             if(winWidth > 1024){
             jQuery('.carousel').carousel({
@@ -638,8 +638,8 @@ function itg_widget_block_view($delta = '') {
                 buttonNav: 'none'
               });
             }else{
-                jQuery('.carousel .slides').slick({                    
-                    infinite: true,    
+                jQuery('.carousel .slides').slick({
+                    infinite: true,
                     autoplay:true,
                     dots: true,
                     prevArrow: false,
@@ -719,7 +719,7 @@ function itg_widget_block_view($delta = '') {
         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-        <li><a href="#"><i class="fa fa-rss"></i></a></li>        
+        <li><a href="#"><i class="fa fa-rss"></i></a></li>
     </ul>
 </div>';
             break;
@@ -753,11 +753,14 @@ function itg_widget_block_view($delta = '') {
             break;
         case 'graph_election':
             drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
+            drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/jquery.min.1.8.2.js', array('type' => 'file', 'scope' => 'header'));
+            drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/csv_graph.js', array('type' => 'file', 'scope' => 'header'));
+            drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/csv_graph.css', array('type' => 'file', 'scope' => 'footer'));
             $data = itg_widget_get_graph_data($info);
             foreach ($data as $index => $row) {
                 $jsondata = file_get_contents($row->field_election_constituency_tall_value);
                 drupal_add_js(' jQuery(function() {
-                   
+
             var ids = "container_' . $index . '";
             var data =' . $jsondata . ';
             var combined = [];
@@ -968,7 +971,7 @@ function itg_widget_block_view($delta = '') {
 
 /**
  * Function returns data for cutom tables widgets.
- * 
+ *
  * @param string $widget_name
  * @param int $range_max
  * @param int $range_min
@@ -982,12 +985,20 @@ function itg_widget_get_graph_data() {
         $cat_id = arg(2);
     }
     $itg_query = db_select('node', 'n');
-    $itg_query->join('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
-    $itg_query->join('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
-    $itg_query->leftJoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
+    $itg_query->innerjoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
+    $itg_query->innerjoin('field_data_field_election_svg_json_url', 'sju', 'n.nid = sju.entity_id');
+    $itg_query->innerjoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
+    $itg_query->innerjoin('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
+    $itg_query->innerjoin('field_data_field_graph_type', 'gt', 'n.nid = gt.entity_id');
+
+
+    $itg_query->innerjoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
     $itg_query->fields('n', array('nid'));
     $itg_query->fields('frq', array('field_election_constituency_tall_value'));
-    $itg_query->fields('astw', array('field_election_state_tid'))
+    $itg_query->fields('astw', array('field_election_state_tid'));
+     $itg_query->fields('cju', array('field_election_chart_json_url_value'));
+    $itg_query->fields('sju', array('field_election_svg_json_url_value'));
+    $itg_query->fields('gt', array('field_graph_type_value'))
       ->condition('type', 'election_graph_xml')
       ->condition('ast.field_section_tid', $cat_id, '=')
       ->condition('status', 1);
@@ -1026,7 +1037,7 @@ function is_valid_json($string) {
 
 /**
  * Function returns data for cutom tables widgets.
- * 
+ *
  * @param string $widget_name
  * @param int $range_max
  * @param int $range_min
@@ -1055,7 +1066,7 @@ function itg_widget_get_graph_data_by_nid($nid) {
 
 /**
  * Function returns data for cutom tables widgets.
- * 
+ *
  * @param string $widget_name
  * @param int $range_max
  * @param int $range_min
@@ -1260,7 +1271,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
             $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
             ?>
                 <div class="iframe-video-embed">
-                    <div id="videoplayer_<?php echo $keys; ?>"></div> 
+                    <div id="videoplayer_<?php echo $keys; ?>"></div>
                     <script type="text/javascript">
                         jwplayer('videoplayer_<?php echo $keys; ?>').setup({
                             playlist: [{
@@ -1306,9 +1317,9 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
 
 /**
  * Function responsible for big story live tv activation or deactivation
- * 
+ *
  * @param type $flag
- * 
+ *
  */
 function itg_widget_big_story_live_tv_flag($flag) {
     $action = FALSE;
@@ -1366,7 +1377,7 @@ function itg_widget_delete_big_story_live_tv() {
 
 /**
  * This function use for make home page map.
- * 
+ *
  */
 function itg_widget_election_graph_for_section_card($nid) {
 
@@ -1478,10 +1489,10 @@ function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extr
 
 /**
  * Function gives count of node with perticular widget.
- * 
+ *
  * @param int $nid
  * @param string $widget
- * 
+ *
  * @return int
  */
 function itg_widget_check_node_in_widget($nid, $widget) {
@@ -1498,10 +1509,10 @@ function itg_widget_check_node_in_widget($nid, $widget) {
 
 /**
  * Function delete old data from widget after limit.
- * 
+ *
  * @param int $nid
  * @param string $widget
- * 
+ *
  * @return int
  */
 function itg_widget_delete_old_data_by_limit($widget, $category = NULL) {
@@ -1544,7 +1555,7 @@ function itg_widget_get_primary_cat($nid, $is_rss = FALSE) {
 
 /**
  * Implements HOOK_NODE_DELETE
- * 
+ *
  * {@inheritdoc}
  * @param array $node
  */
@@ -1562,7 +1573,7 @@ function itg_widget_handle_unpublished_node($nid, $magazin_widget_condition = TR
             __itg_widget_helper_data_delete($nid);
         }
         // List of all widget.
-        // IF number of widget is increses then increse this list.  
+        // IF number of widget is increses then increse this list.
         // Delete query for itg_widget_query.
         // Widgets are define above from which node is to be delete.
         try {
@@ -1751,7 +1762,7 @@ function itg_widget_get_widget_name_from_views($view_name, $view_current_display
 
 /**
  * Function used to get widget name
- * 
+ *
  * {@inheritdoc}
  */
 function _get_widget_name($view_name, $page_name) {
@@ -1856,7 +1867,7 @@ function itg_widget_query_category_wise_content_list_alter(QueryAlterableInterfa
 
 /**
  * _get_content_type_for_widget
- * 
+ *
  */
 function _get_content_type_for_widget($widget_name) {
     $content_type = array('story', 'videogallery', 'photogallery');
@@ -2046,7 +2057,7 @@ function _itg_widget_get_old_data() {
 
 /**
  * Main function for widget data display.
- * 
+ *
  * @param array $result
  * @return array
  */
