@@ -64,6 +64,6 @@ _comscore.push(
 (function()
 { var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); }
 )();
-</script><noscript><img src="http://b.scorecardresearch.com/p?c1=2&ac2=8549097&cv=2.0&cj=1"/></noscript>
+</script><noscript><img alt="" src="http://b.scorecardresearch.com/p?c1=2&ac2=8549097&cv=2.0&cj=1"/></noscript>
 </body>
 </html> 

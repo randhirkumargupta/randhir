@@ -58,14 +58,14 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
     $xml .= '<channel>' . "\r\n";
     $xml .= '<title> <![CDATA[ ' . ITG_INDIATODAY_SITENAME_XML . ' | ' . $heading . ' ]]> </title>' . "\r\n";
     $xml .= '<description>' . t('India Today') . '</description>' . "\r\n";
-    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/ ]]></link>' . "\r\n";
+    $xml .= '<link><![CDATA[ http://indiatoday.intoday.in/?utm_source=rss ]]></link>' . "\r\n";
     $xml .= '<lastBuildDate>' . gmdate('D, d M Y H:i:s T', time()) . ' </lastBuildDate>' . "\r\n";
     $xml .= '<generator>'.t('FeedCreator 1.7.2').'</generator>' . "\r\n";
     $xml .= '<image>' . "\r\n";
     $xml .= '<url>' . theme_get_setting('logo', 'itg') . '</url>' . "\r\n";
     $xml .= '<title> <![CDATA[  ' . ITG_INDIATODAY_SITENAME_XML . ' ]]> </title>' . "\r\n";
     $xml .= '<description>' . ITG_INDIATODAY_SITENAME_XML . '</description>' . "\r\n";
-    $xml .= '<link>' . $landing_page . '</link>' . "\r\n";
+    $xml .= '<link>' . $landing_page . '?utm_source=rss</link>' . "\r\n";
     $xml .= '</image>' . "\r\n";
     foreach ($result as $data) {
       $xml .= '<item>' . "\r\n";
@@ -84,7 +84,7 @@ function itg_sitemap_chunks_get_rss_of_blogs() {
       }
       $published_date = date('D, d M Y H:i:s T', $db_date);
       $xml .= '<title> <![CDATA[ ' . html_entity_decode($node_title) . ' ]]></title>' . "\r\n";
-      $xml .= '<link> <![CDATA[ ' . $node_link . ' ]]></link>' . "\r\n";
+      $xml .= '<link> <![CDATA[ ' . $node_link . '?utm_source=rss ]]></link>' . "\r\n";
       $xml .='<description> <![CDATA[  <a href="' . $node_link . '"> <img align="left" hspace="2" height="180" width="305" alt="" border="0" src="' . $node_extra_large_image_url . '"> </a> ' . $description . ']]></description>';
       $xml .= '<pubDate> ' . $published_date . '</pubDate>' . "\r\n";
       $xml .= '</item>' . "\r\n";

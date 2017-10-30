@@ -153,9 +153,43 @@ if (!empty($content)):
                 </div>-->
               <?php } ?>                      
               <?php
+              // code for srcset
+                $extra_large_image_src_set = '';
+                if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+                 $extra_large_image_uri = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+                 $extra_large_image_data = getimagesize($extra_large_image_uri);
+                 $extra_large_image_src_set = $extra_large_image_uri . ' ' . $extra_large_image_data[0] . 'w';
+                }
+                $large_image_src_set = '';
+                if(!empty($node->field_story_large_image[LANGUAGE_NONE][0]['uri'])) {
+                  $large_image_uri = file_create_url($node->field_story_large_image[LANGUAGE_NONE][0]['uri']);
+                  $large_image_data = getimagesize($large_image_uri);
+                  $large_image_src_set = ', ' .$large_image_uri . ' ' . $large_image_data[0] . 'w';
+                }
+                $medium_image_src_set = '';
+                if(!empty($node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
+                  $medium_image_uri = file_create_url($node->field_story_medium_image[LANGUAGE_NONE][0]['uri']);
+                  $medium_image_data = getimagesize($medium_image_uri);
+                  $medium_image_src_set = ', ' .$medium_image_uri . ' ' . $medium_image_data[0] . 'w';
+                }
+                $small_image_src_set = '';
+                if(!empty($node->field_story_small_image[LANGUAGE_NONE][0]['uri'])) {
+                  $small_image_uri = file_create_url($node->field_story_small_image[LANGUAGE_NONE][0]['uri']);
+                  $small_image_data = getimagesize($small_image_uri);
+                  $small_image_src_set = ', ' .$small_image_uri . ' ' . $small_image_data[0] . 'w';
+                }
+                $extra_small_image_src_set = '';
+                if(!empty($node->field_story_extra_small_image[LANGUAGE_NONE][0]['uri'])) {
+                  $extra_small_image_uri = file_create_url($node->field_story_extra_small_image[LANGUAGE_NONE][0]['uri']);
+                  $extra_small_image_data = getimagesize($extra_small_image_uri);
+                  $extra_small_image_src_set = ', ' .$extra_small_image_uri . ' ' . $extra_small_image_data[0] . 'w';
+                }
+                
+                $image_repo_srcset = $extra_large_image_src_set.$large_image_src_set.$medium_image_src_set.$small_image_src_set.$extra_small_image_src_set;
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 ?>
                 <div class="stryimg" ><?php
+                
                   if (empty($widget_data) && empty($node->field_story_template_guru['und'][0]['value'])) {
                     $story_image = '';
                     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
@@ -167,7 +201,7 @@ if (!empty($content)):
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
-                    print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>';
+                    print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>';
                   }
                   else {
                     if(empty($node->field_story_template_guru['und'][0]['value'])) {
@@ -179,8 +213,8 @@ if (!empty($content)):
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
-                        . '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>'
+                    //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
+                       print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>'
                         . '<span class="story-photo-icon">';
                     ?>        
 
@@ -193,7 +227,7 @@ if (!empty($content)):
                       <!--<i class="fa fa-camera"></i>-->
                       <?php
                     }
-                    print '</span></a>';
+                    print '</span>';
                     }
                   }
                   ?>
@@ -219,15 +253,15 @@ if (!empty($content)):
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
-                      $icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
-                                    <i class="fa fa-camera"></i></span>';
+                      //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
+                                    //<i class="fa fa-camera"></i></span>';
                     }
                     else {
                       $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
                     }
                     
-                    print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '"><div fallback>offline</div></amp-img>        
-                                    '.$icon_detail.'</a>';
+                    //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
+                      print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>';
                     
                     if (!empty($getimagetags)) {
                       foreach ($getimagetags as $key => $tagval) {
@@ -492,7 +526,14 @@ if (!empty($content)):
             
             $share_image = file_create_url($share_uri);
             //$img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
-            $img = '<amp-img height="539" width="770" layout="responsive"  alt="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['alt'].'" title="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['title'].'" src="' . image_style_url("buzz_image", $buzz_imguri) . '"><div fallback>offline</div></amp-img>';
+                $buzz_image_src_set = '';
+                if(!empty($buzz_imguri)) {
+                 $buzz_image_uri = file_create_url($buzz_imguri);
+                 $buzz_image_data = getimagesize($buzz_image_uri);
+                 $buzz_image_src_set = $buzz_image_uri . ' ' . $buzz_image_data[0] . 'w';
+                }
+            
+            $img = '<amp-img height="539" width="770" layout="responsive"  alt="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['alt'].'" title="'.$entity[$field_collection_id]->field_buzz_image['und'][0]['title'].'" src="' . image_style_url("buzz_image", $buzz_imguri) . '" srcset="'.$buzz_image_src_set.'"><div fallback>offline</div></amp-img>';
             if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
               $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
               if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {

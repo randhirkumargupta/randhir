@@ -110,8 +110,7 @@
 
                 });
                 var getthisvalue = $(this).val();
-
-                if (getthisvalue != "" && getthisvalue != 'undefined') {
+                if (getthisvalue != "" && getthisvalue != 'undefined' && getthisvalue != 0 ) {
                     $.ajax({
                         url: Drupal.settings.basePath + 'getsection_content',
                         type: 'post',
@@ -125,11 +124,15 @@
                                     $(this).attr("selected", "selected");
                                 }
                             });
+                            
                         },
                         error: function (xhr, desc, err) {
                            
                         }
                     });
+                    jQuery("#edit-field-cm-select-type-und option").css("pointer-events", "none");
+                }else {
+                    jQuery("#edit-field-cm-select-type-und option").css("pointer-events", "auto");
                 }
 
             })
