@@ -32,10 +32,10 @@ function itg_rss_hltapps_photos() {
   }
 }
 
-function itg_rss_hltapps_mixed_rss_feed(){
+function itg_rss_hltapps_mixed_rss_feed() {
   $sections = get_hltapps_sections('mixed');
   foreach ($sections as $file_name => $section) {
-    itg_genrate_hltapps_mixed_feed_syndication($section['section'], $file_name, $section['limit']);
+    itg_genrate_hltapps_mixed_feed_syndication($section['section'], $file_name, $section['title']);
   }
 }
 
@@ -62,7 +62,8 @@ function itg_genrate_hltapps_stories_syndication($section_id = NULL, $file_name)
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
-    }else{
+    }
+    else {
       $section_id = 1;
     }
 
@@ -130,9 +131,9 @@ function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, 
   $courtesy = $value['field_story_courtesy_value'];
   $xml_detail = '<root>';
   $xml_detail .= '<item>';
-  $xml_detail .= '<id>'.$value["nid"].'</id>';
-  $xml_detail .= '<sectionid>'.$section_id.'</sectionid>';
-  $xml_detail .= '<sectionname>'.$category.'</sectionname>';
+  $xml_detail .= '<id>' . $value["nid"] . '</id>';
+  $xml_detail .= '<sectionid>' . $section_id . '</sectionid>';
+  $xml_detail .= '<sectionname>' . $category . '</sectionname>';
   $xml_detail .= '<title><![CDATA[ ' . $value["title"] . ' ]]></title>';
   $xml_detail .= '<credit><![CDATA[ ' . $byline . ' ]]></credit>';
   $xml_detail .= '<createddate> ' . $publish_date . ' </createddate>';
@@ -156,7 +157,6 @@ function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, 
   fclose($fpd);
 }
 
-
 /**
  * menu callback for Hltapps story syndication
  */
@@ -164,10 +164,11 @@ function itg_genrate_hltapps_videos_syndication($section_id = NULL, $file_name, 
   if (!empty($section_id)) {
     if ($section_id != -1) {
       $section_name = get_term_name_by_tid($section_id);
-    }else if ($file_name == "topten.xml"){
+    }
+    else if ($file_name == "topten.xml") {
       $section_name = 'Top Ten';
     }
-    else if ($file_name == "news.xml"){
+    else if ($file_name == "news.xml") {
       $section_name = 'news';
     }
 
@@ -177,13 +178,14 @@ function itg_genrate_hltapps_videos_syndication($section_id = NULL, $file_name, 
     $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_courtesy', 'sc', 'sc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
-     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
 
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
-    }else{
+    }
+    else {
       $section_id = 1;
     }
 
@@ -195,7 +197,7 @@ function itg_genrate_hltapps_videos_syndication($section_id = NULL, $file_name, 
     $query->fields('pc', array('field_primary_category_value'));
     $query->fields('sc', array('field_story_courtesy_value'));
     $query->fields('sst', array('field_story_source_type_value'));
-    
+
     $query->condition('n.status', 1);
     $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
@@ -208,17 +210,16 @@ function itg_genrate_hltapps_videos_syndication($section_id = NULL, $file_name, 
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
-    
   }
 }
 
-function genrate_hltapps_videos_xml($result, $section_name, $section_id){
+function genrate_hltapps_videos_xml($result, $section_name, $section_id) {
   global $base_url;
   $xml = '<root>';
-  $xml .= '<id>'.$section_id.'</id>';  
-  $xml .= '<title>'.$section_name.'</title>';
-  $xml .= '<itemcount>'.count($result).'</itemcount>';
-  
+  $xml .= '<id>' . $section_id . '</id>';
+  $xml .= '<title>' . $section_name . '</title>';
+  $xml .= '<itemcount>' . count($result) . '</itemcount>';
+
   if (!empty($result)) {
     foreach ($result as $value) {
       $nid = $value['nid'];
@@ -233,9 +234,9 @@ function genrate_hltapps_videos_xml($result, $section_name, $section_id){
       $xml .= '<shortdescription><![CDATA[' . $kicker_text . ']]></shortdescription>';
       $xml .= '<sectionname>' . $primary_cat . '</sectionname>';
       $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
-      $xml .= '<url>'.$video_file_name.'</url>';
+      $xml .= '<url>' . $video_file_name . '</url>';
       $xml .= '<web-url><![CDATA[' . $content_url . ']]></web-url>';
-      $xml .= '<createddate>'.$created_date.'</createddate>';
+      $xml .= '<createddate>' . $created_date . '</createddate>';
       $xml .= '</item>';
       genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $video_file_name);
     }
@@ -244,9 +245,9 @@ function genrate_hltapps_videos_xml($result, $section_name, $section_id){
   return $xml;
 }
 
-function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $video_file_name){
+function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $video_file_name) {
   global $base_url;
-  if($section_name == 'Top Ten'){
+  if ($section_name == 'Top Ten') {
     $section_name = 'Videos';
   }
   $nid = $value['nid'];
@@ -260,7 +261,7 @@ function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $v
   $source_type = $value['field_story_source_type_value'];
   $videotag = video_detail_formats($nid, $source_type);
   $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
-  
+
   $video_xml = '<root>';
   $video_xml .= '<item>';
   $video_xml .= '<id>' . $value['nid'] . '</id>';
@@ -287,7 +288,7 @@ function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $v
   $video_xml .= '</image>';
   $video_xml .= '</images>';
   $video_xml .= '<weburl><![CDATA[' . $content_url . ']]></weburl>';
-  $video_xml .= get_comment_xml_tag($value['nid']);  
+  $video_xml .= get_comment_xml_tag($value['nid']);
   $video_xml .= '</item>';
   $video_xml .= '</root>';
   $xml_path = 'public://hltapps/videos/';
@@ -310,7 +311,7 @@ function itg_genrate_hltapps_photos_syndication($section_id = NULL, $file_name, 
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    
+
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
@@ -328,23 +329,22 @@ function itg_genrate_hltapps_photos_syndication($section_id = NULL, $file_name, 
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
-    
   }
 }
 
-function genrate_hltapps_photos_xml($result, $section_name, $section_id){
+function genrate_hltapps_photos_xml($result, $section_name, $section_id) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
     $total_count = count($result);
     $xml .= '<root>';
-    $xml .= '<id>'.$section_id.'</id>';
-    $xml .= '<title><![CDATA['.$section_name.']]></title>';
+    $xml .= '<id>' . $section_id . '</id>';
+    $xml .= '<title><![CDATA[' . $section_name . ']]></title>';
     $xml .= '<itemcount>' . $total_count . '</itemcount>';
 
     foreach ($result as $value) {
       $nid = $value['nid'];
-      $photo_detail_file_name = 'photo'.$nid . '.xml';      
+      $photo_detail_file_name = 'photo' . $nid . '.xml';
       $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
@@ -353,11 +353,11 @@ function genrate_hltapps_photos_xml($result, $section_name, $section_id){
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<shortdescription><![CDATA[' . $kicker_text . ']]></shortdescription>';
       $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
-      $xml .= '<url>'.$photo_detail_file_name.'</url>';
+      $xml .= '<url>' . $photo_detail_file_name . '</url>';
       $xml .= '<weburl><![CDATA[' . $content_url . ']]></weburl>';
-      $xml .= '<createddate>'.$created_date.'</createddate>';
+      $xml .= '<createddate>' . $created_date . '</createddate>';
       $xml .= '</item>';
-      
+
       generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $photo_detail_file_name);
     }
     $xml .= '</root>';
@@ -365,7 +365,7 @@ function genrate_hltapps_photos_xml($result, $section_name, $section_id){
   return $xml;
 }
 
-function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $photo_detail_file_name){
+function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $photo_detail_file_name) {
   global $base_url;
   $nid = $value['nid'];
   $gallery_img_fc = get_all_associated_photos($nid);
@@ -374,7 +374,7 @@ function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $
   $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
   $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
-  
+
   $photo_xml .= '<root>';
   $photo_xml .= '<id>' . $nid . '</id>';
   $photo_xml .= '<sectionid>' . $section_id . '</sectionid>';
@@ -391,7 +391,7 @@ function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $
   $photo_xml .= '</images>';
   $photo_xml .= '<weburl><![CDATA[' . $content_url . ']]></weburl>';
   $byline = get_byline_name_by_nid($nid);
- 
+
   foreach ($gallery_img_fc as $photo) {
     $byline = $photo['title'];
     $large_image = '';
@@ -412,7 +412,7 @@ function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $
     $photo_xml .= '<alttext><![CDATA[' . $large_image['alt'] . ']]></alttext>';
     $photo_xml .= '</item>';
   }
-  $photo_xml .=  get_comment_xml_tag($nid);  
+  $photo_xml .= get_comment_xml_tag($nid);
   $photo_xml .= '</root>';
   $xml_path = 'public://hltapps/photos/';
   $file_path = $xml_path . $photo_detail_file_name;
@@ -421,28 +421,27 @@ function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $
   fclose($fp1);
 }
 
-
-
 /**
  * menu callback for Hltapps Programme syndication
  */
 function itg_genrate_hltapps_programme_syndication($section_id = NULL, $file_name, $limit = 25) {
   if (!empty($section_id)) {
     $section_name = get_term_name_by_tid($section_id);
-    
+
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_large_image', 'sli', 'sli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
     $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_courtesy', 'sc', 'sc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
-     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
 
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
-    }else{
+    }
+    else {
       $section_id = 1;
     }
 
@@ -454,7 +453,7 @@ function itg_genrate_hltapps_programme_syndication($section_id = NULL, $file_nam
     $query->fields('pc', array('field_primary_category_value'));
     $query->fields('sc', array('field_story_courtesy_value'));
     $query->fields('sst', array('field_story_source_type_value'));
-    
+
     $query->condition('n.status', 1);
     $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
@@ -467,19 +466,18 @@ function itg_genrate_hltapps_programme_syndication($section_id = NULL, $file_nam
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
-    
   }
 }
 
-function genrate_hltapps_programme_xml($result, $section_name, $section_id){
+function genrate_hltapps_programme_xml($result, $section_name, $section_id) {
   global $base_url;
   $section_desc = get_term_description_by_tid($section_id);
   $xml = '<root>';
-  $xml .= '<id>'.$section_id.'</id>';  
-  $xml .= '<title><![CDATA['.$section_name.']]></title>';
-  $xml .= '<description><![CDATA['.$section_desc.']]></description>';
-  $xml .= '<itemcount>'.count($result).'</itemcount>';
-  
+  $xml .= '<id>' . $section_id . '</id>';
+  $xml .= '<title><![CDATA[' . $section_name . ']]></title>';
+  $xml .= '<description><![CDATA[' . $section_desc . ']]></description>';
+  $xml .= '<itemcount>' . count($result) . '</itemcount>';
+
   if (!empty($result)) {
     foreach ($result as $value) {
       $nid = $value['nid'];
@@ -491,8 +489,8 @@ function genrate_hltapps_programme_xml($result, $section_name, $section_id){
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<shortdescription><![CDATA[' . $kicker_text . ']]></shortdescription>';
       $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
-      $xml .= '<url>'.$video_file_name.'</url>';
-      $xml .= '<createddate>'.$created_date.'</createddate>';
+      $xml .= '<url>' . $video_file_name . '</url>';
+      $xml .= '<createddate>' . $created_date . '</createddate>';
       $xml .= '</item>';
       genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $video_file_name);
     }
@@ -501,6 +499,94 @@ function genrate_hltapps_programme_xml($result, $section_name, $section_id){
   return $xml;
 }
 
-function itg_genrate_hltapps_mixed_feed_syndication($sections = NULL, $file_name){
-  
+function itg_genrate_hltapps_mixed_feed_syndication($sections = NULL, $file_name, $feed_name) {
+  $categories_id = array();
+  $type = array('story', 'videogallery', 'photogallery');
+  if ($sections != -1) {
+    foreach ($sections as $key => $value) {
+      $categories_id[] = $value;
+    }
+  }
+  $categories_id = array_unique($categories_id);
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_large_image', 'sli', 'sli.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_courtesy', 'sc', 'sc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+
+  if (count($categories_id) > 0) {
+    $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->condition('ti.tid', $categories_id, 'IN');
+  }
+  $query->fields('dbody', array('body_value'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('synopsis', array('field_story_kicker_text_value'));
+  $query->fields('sli', array('field_story_large_image_fid'));
+  $query->fields('n', array('nid', 'title', 'created', 'type'));
+  $query->fields('ssi', array('field_story_small_image_fid'));
+  $query->fields('pc', array('field_primary_category_value'));
+  $query->fields('sc', array('field_story_courtesy_value'));
+  $query->fields('sst', array('field_story_source_type_value'));
+
+  $query->condition('n.status', 1);
+  $query->condition('n.type', $type, 'IN');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 24);
+
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+//    print strtr((string) $query, $query->arguments());die;
+  $xml = genrate_hltapps_mixed_feed($result, $sections, $feed_name);
+  $xml_path = 'public://hltapps/';
+  $file_path = $xml_path . $file_name;
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
+}
+
+function genrate_hltapps_mixed_feed($result, $sections, $feed_name) {
+  if (!empty($result)) {
+    $xml = '<root>';
+    $xml .= '<id>10</id>';
+    $xml .= '<title>' . $feed_name . '</title>';
+    $xml .= '<itemcount>' . count($result) . '</itemcount>';
+    foreach ($result as $value) {
+      $nid = $value['nid'];
+
+      if ($value['type'] == 'story') {
+        $section_id = $sections['story'];
+        $category = get_term_name_by_tid($section_id);
+        $detail_file_name = 'stories/story' . $nid . '.xml';
+        genrate_hltapps_stories_detail_xml($value, $category, $detail_file_name, $section_id);
+      }
+      else if ($value['type'] == 'videogallery') {
+        $section_id = $sections['video'];
+        $section_name = get_term_name_by_tid($section_id);
+        $detail_file_name = 'videos/video' . $nid . '.xml';
+        genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $detail_file_name);
+      }
+      else if ($value['type'] == 'photogallery') {
+        $section_id = $sections['video'];
+        $section_name = get_term_name_by_tid($section_id);
+        $detail_file_name = 'photos/photo' . $nid . '.xml';
+        generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $detail_file_name);
+      }
+
+      $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
+      $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
+      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+      $xml .= '<item>';
+      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
+      $xml .= '<shortdescription><![CDATA[' . $kicker_text . ']]></shortdescription>';
+      $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
+      $xml .= '<url>' . $detail_file_name . '</url>';
+      $xml .= '<createddate>' . $created_date . '</createddate>';
+      $xml .= '</item>';
+    }
+    $xml .= '</root>';
+    return $xml;
+  }
 }

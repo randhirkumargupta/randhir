@@ -197,45 +197,82 @@ function get_hltapps_sections($type) {
       break;
     case 'video':
       return array(
-        'topten.xml' => array('section'=> '-1', 'limit' => 10),
-        'news.xml' => array('section'=> '-1', 'limit' => 25),
-        'india.xml' => array('section'=> '1206955', 'limit' => 25),
-        'world.xml' => array('section'=> '1206956', 'limit' => 25),
-        'so-sorry.xml' => array('section'=> '1207580', 'limit' => 25),
-        'entertainment.xml' => array('section'=> '1206952', 'limit' => 25),
-        'business.xml' => array('section'=> '1206959', 'limit' => 25),
-        'election.xml' => array('section'=> '1207655', 'limit' => 25)
+        'topten.xml' => array('section' => '-1', 'limit' => 10),
+        'news.xml' => array('section' => '-1', 'limit' => 25),
+        'india.xml' => array('section' => '1206955', 'limit' => 25),
+        'world.xml' => array('section' => '1206956', 'limit' => 25),
+        'so-sorry.xml' => array('section' => '1207580', 'limit' => 25),
+        'entertainment.xml' => array('section' => '1206952', 'limit' => 25),
+        'business.xml' => array('section' => '1206959', 'limit' => 25),
+        'election.xml' => array('section' => '1207655', 'limit' => 25)
       );
     case 'photo':
       return array(
-        'india.xml' => array('section'=> '1208560', 'limit' => 25),
-        'world.xml' => array('section'=> '1208562', 'limit' => 25),
-        'sports.xml' => array('section'=> '1208561', 'limit' => 25),
-        'entertainment.xml' => array('section'=> '1208559', 'limit' => 25),
-        'business.xml' => array('section'=> '1208558', 'limit' => 25),
-        'must-see.xml' => array('section'=> '1208598', 'limit' => 25),
-        'election.xml' => array('section'=> '1208667', 'limit' => 25)
+        'india.xml' => array('section' => '1208560', 'limit' => 25),
+        'world.xml' => array('section' => '1208562', 'limit' => 25),
+        'sports.xml' => array('section' => '1208561', 'limit' => 25),
+        'entertainment.xml' => array('section' => '1208559', 'limit' => 25),
+        'business.xml' => array('section' => '1208558', 'limit' => 25),
+        'must-see.xml' => array('section' => '1208598', 'limit' => 25),
+        'election.xml' => array('section' => '1208667', 'limit' => 25)
       );
     case 'programme':
       return array(
-        'sports-today.xml' => array('section'=> '1206960', 'limit' => 25),
-        'news-today.xml' => array('section'=> '1207797', 'limit' => 25),
-        'to-the-point.xml' => array('section'=> '1207722', 'limit' => 25),
-        'newsroom.xml' => array('section'=> '1207827', 'limit' => 25),
-        'first-up.xml' => array('section'=> '1207755', 'limit' => 25),
-        'popular-show.xml' => array('section'=> '1208908', 'limit' => 25),
-        'person-of-interest.xml' => array('section'=> '1208898', 'limit' => 25),
-        'india-first.xml' => array('section'=> '1208095', 'limit' => 25),
-        'peoples-court.xml' => array('section'=> '1208900', 'limit' => 25),
+        'sports-today.xml' => array('section' => '1206960', 'limit' => 25),
+        'news-today.xml' => array('section' => '1207797', 'limit' => 25),
+        'to-the-point.xml' => array('section' => '1207722', 'limit' => 25),
+        'newsroom.xml' => array('section' => '1207827', 'limit' => 25),
+        'first-up.xml' => array('section' => '1207755', 'limit' => 25),
+        'popular-show.xml' => array('section' => '1208908', 'limit' => 25),
+        'person-of-interest.xml' => array('section' => '1208898', 'limit' => 25),
+        'india-first.xml' => array('section' => '1208095', 'limit' => 25),
+        'peoples-court.xml' => array('section' => '1208900', 'limit' => 25),
         //'lunch-break-.xml' => array('section'=> '1403', 'limit' => 25),
-        '5ive-live-.xml' => array('section'=> '1208902', 'limit' => 25),
-        'auto-today.xml' => array('section'=> '1207972', 'limit' => 25),
-        'long-story.xml' => array('section'=> '1208061', 'limit' => 25),
-        'in-da-club.xml' => array('section'=> '1208173', 'limit' => 25),
+        '5ive-live-.xml' => array('section' => '1208902', 'limit' => 25),
+        'auto-today.xml' => array('section' => '1207972', 'limit' => 25),
+        'long-story.xml' => array('section' => '1208061', 'limit' => 25),
+        'in-da-club.xml' => array('section' => '1208173', 'limit' => 25),
       );
       break;
     case 'mixed':
-      return array()
+      return array(
+        'news-mixed-view.xml' => array(
+          'section' => -1,
+          'title' => 'News Mixed View'
+        ),
+        'india-mixed-view.xml' => array(
+          'section' => array(
+            'story' => 1206578,
+            'video' => 1206955,
+            'photo' => 1208560,
+          ),
+          'title' => 'India Mixed View'
+        ),
+        'world-mixed-view.xml' => array(
+          'section' => array(
+            'story' => 1206577,
+            'video' => 1206956,
+            'photo' => 1208562,
+          ),
+          'title' => 'World Mixed View'
+        ),
+        'sosorry-mixed-view.xml' => array(
+          'section' => array(
+            'story' => 1709237,
+            'video' => 1709237,
+            'photo' => 1709237
+          ),
+          'title' => 'So Sorry Mixed View'
+        ),
+        'entertainment-mixed-view.xml' => array(
+          'section' => array(
+            'story' => 1206749,
+            'video' => 1206952,
+            'photo' => 1208559,
+          ),
+          'title' => 'Entertainment Mixed View'
+        )
+      );
       break;
   }
 }
