@@ -21,14 +21,7 @@ else {
 }
 $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 ?>
-<div class="header-ads">
-  <?php
-  $block = block_load('itg_ads', ADS_HEADER);
-  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-  print render($render_array);
-  ?>
-</div>                               
-
+                             
 <div class="head-live-tv desktop-hide">
   <ul>    
     <li class="search-icon-parent">
@@ -81,6 +74,17 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
     </div>
     <div class="main-nav">
       <?php print drupal_render($data['itg_top_manu_header']); ?>
+        <!----------logo start -->
+		<?php $logo_itg = theme_get_setting('logo', 'itg'); ?>
+		  <div class="container header-logo1">	  
+			<?php if ($logo_itg): ?>
+			<div class="logo">
+				<a href="<?php print $base_url; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo_itg; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+			</div>
+			<?php endif; ?>
+		  </div>
+		<!----------logo end -->
+      <?php print drupal_render($data['itg_top_manu_header_second']); ?>
     </div>
   </div>
   <nav class="navigation">
@@ -124,7 +128,25 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
   </nav>
 
   <div class="menu-login mhide">
-    <div class="container ">   
+    <div class="container ">
+	 <div class="social-nav mhide">
+		  <ul class="social-nav mhide">
+			<li><a href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
+			<li><a href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
+			<li><a href="https://plus.google.com/+indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="google_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+			<li><a href="<?php echo $base_url .'/rss' ?>" title=""><i class="fa fa-rss"></i></a></li>
+			<li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
+			<li><a href="#" title=""><i class="fa fa-volume-up"></i></a></li>
+			<li class="search-icon-parent">
+			  <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
+			  <a href="javascript:void(0)" class="search-icon-search" title=""><i class="fa fa-search"></i></a>
+			  <div class="globle-search">
+				<input class="search-text" placeholder="Type here" type="text" value="" />
+			  </div>
+			</li>                            
+		  </ul>
+		</div>
+			   
       <div class="user-menu">
         <?php
         if ($_GET['q'] != 'user') {
@@ -151,3 +173,10 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
 
 </div>
 
+<div class="header-ads">
+  <?php
+  $block = block_load('itg_ads', ADS_HEADER);
+  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+  print render($render_array);
+  ?>
+</div>  
