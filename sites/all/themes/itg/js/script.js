@@ -1211,6 +1211,7 @@ function load_video_in_slider(fid, path, getvideoindex) {
 }
 
 function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl) {
+
     jQuery.ajax({
         url: ajaxpath,
         type: 'get',
@@ -1230,4 +1231,17 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
             console.log("Details: " + desc + "\nError:" + err);
         }
     });
+
 }
+
+// Adding js for google analytocs for home page photo carousel
+jQuery(document).ready(function() {
+    if ( window.location.pathname == '/' ){
+        // adding onclick attribute for ga code for photo carousel for next button
+        jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'homephotocarouselnext', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-next a').attr("href", "#homephotocarouselnext");
+        // adding onclick attribute for ga code for photo carousel for prev button
+        jQuery('div.flexslider li.flex-nav-prev a').attr('onclick', "ga('send', 'event', 'homephotocarouselprev', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#homephotocarouselprev");
+    }
+});
