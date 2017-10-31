@@ -260,7 +260,7 @@ $uri = base64_encode($actual_link);
                           <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                               <div class="show-embed-code-div">
                                   <div class="copy-sample-code">
-                                      <textarea readonly><iframe allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>
+                                      <textarea readonly><iframe scrolling="no" allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>
                                   </div>
                               </div>
                           </li>
@@ -331,7 +331,7 @@ $uri = base64_encode($actual_link);
                               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                   <div class="show-embed-code-div">
                                       <div class="copy-sample-code">
-                                          <textarea readonly><iframe allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>    
+                                          <textarea readonly><iframe scrolling="no" allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>    
                                       </div>
                                   </div>
                               </li>
