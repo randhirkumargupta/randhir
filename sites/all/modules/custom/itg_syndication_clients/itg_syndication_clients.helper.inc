@@ -287,6 +287,7 @@ function get_hltapps_sections($type) {
 
 function get_vuclip_sections(){
   return array(
+      'videsectionlist_program_sosorry.xml' => array('section' => '1207580', 'limit' => 25),
       'videsectionlist_program_tothepoint.xml' => array('section' => '1207722', 'limit' => 25),
       'videsectionlist_program_couching-with-koel.xml' => array('section' => '1207810', 'limit' => 25),
     );
