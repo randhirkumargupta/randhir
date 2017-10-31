@@ -221,7 +221,13 @@ if ($theme != 'itgadmin') {
                                           print 'Tab 1';
                                         }
                                         else {
-                                          print $widget_data['itg-block-5']['block_title'];
+                                        ?>
+                                      <a href="#<?php print trim(str_replace(" ", "",$widget_data['itg-block-5']['block_title'])); ?>" onclick="ga('send', 'event', '<?php print trim(str_replace(" ", "",$widget_data['itg-block-5']['block_title']))."Tab"; ?>', 'click','1', 1, {'nonInteraction': 1});return true;">
+                                        <?php  
+                                        print $widget_data['itg-block-5']['block_title']; 
+                                        ?>
+                                      </a>
+                                      <?php
                                         }
                                         ?>
                                     </span>
@@ -231,7 +237,13 @@ if ($theme != 'itgadmin') {
                                           print 'Tab 1';
                                         }
                                         else {
-                                          print $widget_data['itg-block-6']['block_title'];
+                                        ?>
+                                      <a href="#<?php print trim(str_replace(" ", "",$widget_data['itg-block-6']['block_title'])); ?>" onclick="ga('send', 'event', '<?php print trim(str_replace(" ", "",$widget_data['itg-block-6']['block_title']))."Tab"; ?>', 'click','1', 1, {'nonInteraction': 1});return true;">
+                                        <?php  
+                                        print $widget_data['itg-block-6']['block_title']; 
+                                        ?>
+                                      </a>
+                                        <?php
                                         }
                                         ?>
                                     </span>

@@ -308,8 +308,6 @@ function itg_html_head_alter(&$head_elements) {
     $arg_data = node_load(arg(1));
     if ($arg_data->type == 'page' && $arg_data->nid == 2) {
       // canonical for home page
-      $path = current_path();
-      $path_alias = drupal_lookup_path('alias', $path);
       $home_canonical = $base_url . '/' . $arg_data->path['alias'];
       $head_elements['canonical'] = array(
         '#type' => 'html_tag',
