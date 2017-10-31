@@ -124,7 +124,7 @@ define('VIDEO_PROPERTY', variable_get('video_property'));
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
 define('SITEMAP_BUCKET', variable_get('itg_sitemap_chunks_s3_bucket_folder_name' , 'sitemapxml_other'));
 //define('PARENT_SSO', variable_get('parent_sso'));
-define('PARENT_SSO', 'itgd-dev-sso.indiatodayonline.in');
+define('PARENT_SSO', 'http://itgd-dev-sso.indiatodayonline.in');
 define('FRONT_URL_VIDEO', variable_get('FRONT_URL_VIDEO'));
 define('FRONT_URL', variable_get('itg_front_url'));
 define('BACKEND_URL', variable_get('itg_backend_url'));
