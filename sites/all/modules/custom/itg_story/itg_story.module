@@ -935,8 +935,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
           $config[] = $value['value'];
         }
       }
-      //pr(BACKEND_URL);
-      //p($_SERVER);
+      
       if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
         $get_backend_url = explode("/", BACKEND_URL);
         $referer_url = explode("/", $_SERVER['HTTP_REFERER']);
@@ -954,12 +953,12 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     }
     
     if (!empty($node->field_story_technology['und'])) {
-    $node->content['movie_plugin'] = itg_story_movie_image_plugin_data($node);
+      $node->content['movie_plugin'] = itg_story_movie_image_plugin_data($node);
     }
     
     if(!empty($node->field_photo_story) && $node->field_story_type[LANGUAGE_NONE][0]['value']== 'photo_story') {
-    $node->content['photo_story_html'] = itg_story_photo_story_html($node, $primary_cat);
-    $node->content['photo_story_bottom_html'] = itg_story_photo_story_bottom_html($node);
+      $node->content['photo_story_html'] = itg_story_photo_story_html($node, $primary_cat);
+      $node->content['photo_story_bottom_html'] = itg_story_photo_story_bottom_html($node);
     }
     
     /*if ($external_url = _is_external_url_story_article($node->nid)) {
@@ -987,7 +986,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
 
     if (function_exists('itg_msi_get_lock_story_status')) {
        if (in_array('developing_story', $config)) {
-       $node->content['develop_story_status'] =  1; 
+        $node->content['develop_story_status'] =  1; 
        }
       //$node->content['develop_story_status'] = itg_msi_get_lock_story_status($node->nid, 'developing_story');
     }
