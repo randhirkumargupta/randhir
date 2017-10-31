@@ -1,0 +1,102 @@
+<?php
+
+function itg_rss_samsungtv_it_video_feed() {
+  $sections = get_samsungtv_it_sections('video');
+  foreach ($sections as $file_name => $section) {
+    itg_genrate_samsungtv_it_videos_syndication($section['section'], $file_name, $section['limit']);
+  }
+}
+
+/**
+ * menu callback for Hltapps story syndication
+ */
+function itg_genrate_samsungtv_it_videos_syndication($section_id = NULL, $file_name, $limit = 25) {
+  if (!empty($section_id)) {
+    $section_name = get_term_name_by_tid($section_id);
+
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    
+    $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->condition('ti.tid', $section_id, '=');
+
+    $query->fields('npd', array('field_itg_content_publish_date_value'));
+    $query->fields('n', array('nid', 'title', 'created'));
+    $query->fields('ssi', array('field_story_small_image_fid'));
+    $query->fields('sst', array('field_story_source_type_value'));
+
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'videogallery', '=');
+    $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid')->range(0, $limit);
+
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $xml = genrate_samsungtv_it_videos_xml($result, $section_name, $section_id, $file_name);
+    $xml_path = 'public://samsungtv_it/videos/';
+    $file_path = $xml_path . $file_name;
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+  }
+}
+
+function genrate_samsungtv_it_videos_xml($result, $section_name, $section_id, $file_name) {
+  global $base_url;
+  $xml = '<Root>';
+  $xml .= '<sectionid>' . $section_id . '</sectionid>';
+  $xml .= '<sectionname>' . $section_name . '</sectionname>';
+  $xml .= '<totalvideos>' . count($result) . '</totalvideos>';
+
+  if (!empty($result)) {
+    foreach ($result as $value) {
+      $nid = $value['nid'];
+      $video_file_name = 'video' . $nid . '.xml';
+      $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
+      $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
+      $xml .= '<item>';
+      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
+      $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
+      $xml .= '<url>' . $video_file_name . '</url>';
+      $xml .= '<create_date>' . $created_date . '</create_date>';
+      $xml .= '</item>';
+      genrate_samsungtv_it_video_detail_xml($value, $section_id, $section_name, $video_file_name, $file_name);
+    }
+  }
+  $xml .= '</Root>';
+  return $xml;
+}
+
+function genrate_samsungtv_it_video_detail_xml($value, $section_id, $section_name, $video_file_name, $file_name) {
+  global $base_url;
+  
+  $nid = $value['nid'];
+  $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
+  $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
+  $source_type = $value['field_story_source_type_value'];
+  $videotag = video_detail_formats($nid, $source_type);
+  
+  $video_xml = '<Root>';
+  $video_xml .= '<item>';
+  $video_xml .= '<videoid>' . $value['nid'] . '</videoid>';
+  $video_xml .= '<sectionname><![CDATA[' . $section_name . ']]></sectionname>';
+  $video_xml .= '<sectionsource><![CDATA[' . $file_name . ']]></sectionsource>';
+  $video_xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
+  $video_xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
+  
+  if (!empty($videotag['migrated'])) { //migrated video
+    $video_xml .= "<videoparts><part_0>" . $videotag['migrated']['video_path_mp4'] . "</part_0></videoparts>";
+  }
+  elseif (!empty($videotag['dailymotion'])) {
+    $video_xml .= "<videoparts><part_0>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</videoparts>";
+  }
+  $video_xml .= '<createddate>' . $created_date . '</createddate>';
+  $video_xml .= '</item>';
+  $video_xml .= '</Root>';
+  $xml_path = 'public://samsungtv_it/videos/';
+  $file_path = $xml_path . $video_file_name;
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $video_xml);
+  fclose($fpd);
+}

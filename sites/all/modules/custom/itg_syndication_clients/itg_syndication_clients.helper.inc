@@ -302,3 +302,12 @@ function get_mauj_sections(){
         'videsectionlist_latestvideo.xml' => array('section' => -1, 'limit' => 25)
     );
 }
+
+function get_samsungtv_it_sections(){
+  return array(
+        'india.xml' => array('section' => 1206955, 'limit' => 25),
+        'world.xml' => array('section' => 1206956, 'limit' => 25),
+        'business.xml' => array('section' => 1206959, 'limit' => 25),
+        'entertainment.xml' => array('section' => 1206952, 'limit' => 25)
+    );
+}
