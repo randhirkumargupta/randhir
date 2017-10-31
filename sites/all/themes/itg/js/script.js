@@ -948,7 +948,7 @@ var menuBuilder = function () {
             jQuery(this).removeClass('hide');
         } else {
             if (jQuery('.all-menu').length === 0) {
-                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
+                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)" onclick="ga("send", "event", "TrendingVideosTab", "click","1", 1, {"nonInteraction": 1});return true;"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
                 clickHere = 1;
             }
             if (jQuery('#newlist').length === 0) {
@@ -1233,3 +1233,15 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
     });
 
 }
+
+// Adding js for google analytocs for home page photo carousel
+jQuery(document).ready(function() {
+    if ( window.location.pathname == '/' ){
+        // adding onclick attribute for ga code for photo carousel for next button
+        jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'homephotocarouselnext', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-next a').attr("href", "#homephotocarouselnext");
+        // adding onclick attribute for ga code for photo carousel for prev button
+        jQuery('div.flexslider li.flex-nav-prev a').attr('onclick', "ga('send', 'event', 'homephotocarouselprev', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#homephotocarouselprev");
+    }
+});
