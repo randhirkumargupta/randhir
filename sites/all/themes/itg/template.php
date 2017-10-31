@@ -290,12 +290,12 @@ function itg_preprocess_html(&$vars) {
   }
   
   // Code for setting page header title for home page
-  if (!empty(arg(1)) && is_numeric(arg(1))) {
+  /*if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
     if ($arg_data->type == 'page' && $arg_data->nid == 2 && isset($arg_data->metatags[LANGUAGE_NONE]['title']['value']) && !empty($arg_data->metatags[LANGUAGE_NONE]['title']['value'])) {
       $vars['head_title'] = $arg_data->metatags[LANGUAGE_NONE]['title']['value'] . ' | IndiaToday';
     }
-  }
+  }*/
 }
 
 /**

@@ -344,7 +344,15 @@ function itg_sso_logout_form_submit(&$form, &$form_state) {
  */
 function itguser_logout() {
   global $user;
-
+  setrawcookie("itg_forced_login", "null", -1,'/','.indiatodayonline.in');
+  //user_cookie_delete('itg_forced_login');
+ /* if (isset($_COOKIE['itg_forced_login'])) {
+    unset($_COOKIE['itg_forced_login']);
+    setcookie('itg_forced_login', null, -1, '/');
+  }
+  echo 'shravan';
+  p($_COOKIE);
+  exit;*/
   if ($user->uid > 0) {
     $domains = variable_get('signout-domain', '');
     $domain_array = explode(',', $domains);
@@ -545,9 +553,14 @@ function itg_sso_itgredirect() {
   watchdog('user_page', 'pass');
   $arg = arg();
   $redirect = base64_decode($arg[1]);
+  watchdog('redirect_sso', $redirect);
   //drupal_goto($redirect);
+  print 'Please wait while redirecting';
+  
   drupal_add_js('
   jQuery(document).ready(function () {
-    window.location.href = "'.$redirect.'";
+    window.location.href = "' . $redirect . '";
   });', 'inline');
+  
+  return 'Login';
 }

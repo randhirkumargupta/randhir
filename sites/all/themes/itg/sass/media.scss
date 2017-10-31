@@ -174,12 +174,14 @@
         .slick-next {
             border-radius: 90px 0px 0px 90px;
             right: 10px;
+            left: auto;
             &:hover {
                 background-color: rgba(255, 255, 255, 0.6);
             }
             &:before {
                 content: '\f054';
                 right: 0;
+                left: auto;
             }
         }
     }
@@ -2494,7 +2496,8 @@
                 width: 110px;
                 float: none;
                 i {
-                    display: none;
+                    display: block;
+                    font-size: 12px;
                 }
             }
         }

@@ -6080,6 +6080,11 @@ div.node {
     .btn:last-child {
         margin-right: 0;
     }
+    .button {
+        +.button {
+            margin-left: 10px;
+        }
+    }
 }
 
 .action-with-title {
@@ -14360,7 +14365,6 @@ div.ctools-modal-content {
                 &.edit,
                 &.delete {
                     a {
-                        padding-left: 20px;
                         &:after {
                             width: 20px;
                             height: 20px;
@@ -14395,3 +14399,23 @@ div.ctools-modal-content {
 
 
 /* css end Url Redirect page */
+
+
+/* css added by rajveer singh gangwar */
+
+#views-exposed-form-section-wise-content-ordering-list-dont-miss-content,
+#views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget,
+#views-exposed-form-story-widget-most-popular-widget,
+#views-exposed-form-story-widget-page-2,
+#views-exposed-form-story-widget-trending-videos-widget,
+#views-exposed-form-story-widget-top-takes-video-widget,
+#views-exposed-form-story-widget-watch-right-now-widget,
+#views-exposed-form-home-page-feature-widget-page-2,
+#views-exposed-form-photo-carousel-widget-photo-carousel,
+#views-exposed-form-photo-carousel-widget-video-carousel,
+#views-exposed-form-so-sorry-so-sorry-videos-widget {
+    display: none;
+}
+
+
+/* css added by rajveer singh gangwar end */
