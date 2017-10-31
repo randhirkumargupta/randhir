@@ -173,6 +173,24 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_hltapps_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['hltapps/videos/livenow_listing'] = array(
+    'page callback' => 'itg_rss_hltapps_livenow_listing_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['msn/hlt/videos'] = array(
+    'page callback' => 'itg_rss_msn_hlt_videos_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['headlinestoday/vuclip/videsectionlist_program'] = array(
+    'page callback' => 'itg_rss_vuclip_videsectionlist_program_videos_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_vuclip_videsectionlist_program_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 

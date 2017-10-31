@@ -274,5 +274,20 @@ function get_hltapps_sections($type) {
         )
       );
       break;
+    case 'msn_hlt_video':
+      return array(
+        'india.xml' => array('section' => '1206955', 'limit' => 15),
+        'world.xml' => array('section' => '1206956', 'limit' => 15),
+        'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
+        'entertainment.xml' => array('section' => '1206952', 'limit' => 15)
+      );
   }
+}
+
+
+function get_vuclip_sections(){
+  return array(
+      'videsectionlist_program_tothepoint.xml' => array('section' => '1207722', 'limit' => 25),
+      'videsectionlist_program_couching-with-koel.xml' => array('section' => '1207810', 'limit' => 25),
+    );
 }
