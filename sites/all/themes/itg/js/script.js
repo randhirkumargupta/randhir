@@ -1245,3 +1245,8 @@ jQuery(document).ready(function() {
         jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#homephotocarouselprev");
     }
 });
+
+// Resize megareview iframe.
+function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}
