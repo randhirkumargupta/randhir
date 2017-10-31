@@ -290,12 +290,12 @@ function itg_preprocess_html(&$vars) {
   }
   
   // Code for setting page header title for home page
-  if (!empty(arg(1)) && is_numeric(arg(1))) {
+  /*if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
     if ($arg_data->type == 'page' && $arg_data->nid == 2 && isset($arg_data->metatags[LANGUAGE_NONE]['title']['value']) && !empty($arg_data->metatags[LANGUAGE_NONE]['title']['value'])) {
       $vars['head_title'] = $arg_data->metatags[LANGUAGE_NONE]['title']['value'] . ' | IndiaToday';
     }
-  }
+  }*/
 }
 
 /**
@@ -308,8 +308,6 @@ function itg_html_head_alter(&$head_elements) {
     $arg_data = node_load(arg(1));
     if ($arg_data->type == 'page' && $arg_data->nid == 2) {
       // canonical for home page
-      $path = current_path();
-      $path_alias = drupal_lookup_path('alias', $path);
       $home_canonical = $base_url . '/' . $arg_data->path['alias'];
       $head_elements['canonical'] = array(
         '#type' => 'html_tag',
@@ -499,6 +497,10 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['og_publish_time']['#weight'] = -982;
   $head_elements['metatag_generator_0']['#weight'] = -981;
   $head_elements['viewport']['#weight'] = -980;
+  $head_elements['og_image_type']['#weight'] = -979;
+  $head_elements['og_image_height']['#weight'] = -978;
+  $head_elements['og_image_width']['#weight'] = -977;
+  $head_elements['og_image']['#weight'] = -976;
 }
 
 /**
