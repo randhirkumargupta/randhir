@@ -290,5 +290,15 @@ function get_vuclip_sections(){
       'videsectionlist_program_sosorry.xml' => array('section' => '1207580', 'limit' => 25),
       'videsectionlist_program_tothepoint.xml' => array('section' => '1207722', 'limit' => 25),
       'videsectionlist_program_couching-with-koel.xml' => array('section' => '1207810', 'limit' => 25),
+      'videsectionlist_program_news_today_at_nine.xml' => array('section' => '1207722', 'limit' => 25),
+    );
+}
+
+function get_mauj_sections(){
+  return array(
+        'videsectionlist_world.xml' => array('section' => '1206956', 'limit' => 25),
+        'videsectionlist_movie.xml' => array('section' => '1207303', 'limit' => 25),
+        'videsectionlist_sosorry.xml' => array('section' => '1207580', 'limit' => 25),
+        'videsectionlist_latestvideo.xml' => array('section' => -1, 'limit' => 25)
     );
 }
