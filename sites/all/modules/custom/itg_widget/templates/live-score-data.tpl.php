@@ -1,5 +1,10 @@
 <?php
-if (!empty($data)) : global $base_url; ?>
+if (!empty($data)) : global $base_url;
+  $parts = parse_url($data['match_link']);
+  parse_str($parts['query'], $query);
+  $match_id = $query['matchid'];
+
+?>
 <div class="live-scorecard">
     <div class="team-detail"> <h4><?php echo $data['team1sabbr'] . ' <span>vs</span> ' . $data['team2sabbr']; ?> <?php echo $data['desc']; ?></h4>
             
@@ -11,7 +16,7 @@ if (!empty($data)) : global $base_url; ?>
             <span class="crrrunrate">Crr <?php echo $data['currentscore']->crr; ?>  <span class="crrrunover">(<?php echo $data['currentscore']->batteamovers; ?> Over)</span></span>           
         </div>
         <span><?php print t('Live: Commentary'); ?></span> |
-            <span><?php print t('Full Scorecard');?> |</span>
+            <a href="scorecard/matchcenter/<?php echo $match_id; ?>" target="_blank"><span><?php print t('Full Scorecard');?> |</span></a>
             <span><?php print t('Graphs'); ?></span>       
     </div>
 <?php else : ?>
