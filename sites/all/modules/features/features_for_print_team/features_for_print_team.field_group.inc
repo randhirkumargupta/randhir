@@ -125,10 +125,10 @@ function features_for_print_team_field_group_info() {
     'weight' => '3',
     'children' => array(
       0 => 'field_pti_idea_status',
-      1 => 'field_pti_words_limit',
-      2 => 'field_survey_end_date',
-      3 => 'field_pti_mark_as_complete',
-      4 => 'field_story_rating',
+      1 => 'field_pti_mark_as_complete',
+      2 => 'field_pti_words_limit',
+      3 => 'field_story_rating',
+      4 => 'field_survey_end_date',
     ),
     'format_type' => 'div',
     'format_settings' => array(
