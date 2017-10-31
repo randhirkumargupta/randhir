@@ -1,10 +1,24 @@
 <?php
 
 function itg_rss_samsungtv_it_video_feed() {
-  $sections = get_samsungtv_it_sections('video');
+  $sections = get_samsungtv_it_sections();
   foreach ($sections as $file_name => $section) {
     itg_genrate_samsungtv_it_videos_syndication($section['section'], $file_name, $section['limit']);
   }
+}
+
+function itg_rss_samsungtv_it_livenow_listing_feed(){
+  $sections = get_samsungtv_it_live_now_sections();
+  itg_genrate_samsungtv_it_live_now_syndication($sections);
+}
+
+function itg_rss_samsungtv_it_video_home_feed() {
+  $xml = get_samsung_it_home_static_xml();
+  $xml_path = 'public://samsungtv_it/videos/';
+  $file_path = $xml_path . 'home.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
 }
 
 /**
@@ -18,7 +32,7 @@ function itg_genrate_samsungtv_it_videos_syndication($section_id = NULL, $file_n
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    
+
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $section_id, '=');
 
@@ -70,13 +84,13 @@ function genrate_samsungtv_it_videos_xml($result, $section_name, $section_id, $f
 
 function genrate_samsungtv_it_video_detail_xml($value, $section_id, $section_name, $video_file_name, $file_name) {
   global $base_url;
-  
+
   $nid = $value['nid'];
   $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
   $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
   $source_type = $value['field_story_source_type_value'];
   $videotag = video_detail_formats($nid, $source_type);
-  
+
   $video_xml = '<Root>';
   $video_xml .= '<item>';
   $video_xml .= '<videoid>' . $value['nid'] . '</videoid>';
@@ -84,7 +98,7 @@ function genrate_samsungtv_it_video_detail_xml($value, $section_id, $section_nam
   $video_xml .= '<sectionsource><![CDATA[' . $file_name . ']]></sectionsource>';
   $video_xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
   $video_xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
-  
+
   if (!empty($videotag['migrated'])) { //migrated video
     $video_xml .= "<videoparts><part_0>" . $videotag['migrated']['video_path_mp4'] . "</part_0></videoparts>";
   }
@@ -99,4 +113,80 @@ function genrate_samsungtv_it_video_detail_xml($value, $section_id, $section_nam
   $fpd = fopen($file_path, "w");
   fwrite($fpd, $video_xml);
   fclose($fpd);
+}
+
+function get_samsung_it_home_static_xml() {
+  $xml = "<Root>
+          <sectionid>1</sectionid>
+          <sectionname>Home</sectionname>
+          <sectioncount>7</sectioncount>
+          <item>
+          <title>Live Now on Channel</title>
+          <url>livenow-listing.xml</url>
+          </item>
+          <item>
+          <title>India</title>
+          <url>india.xml</url>
+          </item>
+          <item>
+          <title>World</title>
+          <url>world.xml</url>
+          </item>
+          <item>
+          <title>Business</title>
+          <url>business.xml</url>
+          </item>
+          <item>
+          <title>Entertainment</title>
+          <url>entertainment.xml</url>
+          </item>
+          <item>
+          <title>Programmes</title>
+          <url>programms.xml</url>
+          </item>
+          </Root>";
+  return $xml;
+}
+
+
+function itg_genrate_samsungtv_it_live_now_syndication($sections){
+    $query = db_select('taxonomy_term_data', 't');
+    $query->leftJoin('itg_category_manager', 'cm', 'cm.tid = t.tid');
+    $query->leftJoin('field_data_field_program_timing_in_days', 'ptin', 'ptin.entity_id = t.tid');
+    $query->leftJoin('field_data_field_user_city', 'fuc', 'fuc.entity_id = t.tid');
+    $query->leftJoin('field_data_field_sponser_logo', 'fsl', 'fsl.entity_id = t.tid');
+    $query->fields('t', array('tid', 'name'));
+    $query->fields('ptin', array('field_program_timing_in_days_value'));
+    $query->fields('fuc', array('field_user_city_value'));
+    $query->fields('fsl', array('field_sponser_logo_fid'));
+    $query->condition('cm.status', 1, '=');
+    $query->condition('t.tid', $sections, 'IN');
+    
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $xml = genrate_samsungtv_it_live_now_xml($result);
+    $xml_path = 'public://samsungtv_it/videos/';
+    $file_path = $xml_path . 'livenow-listing.xml';
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+}
+
+function genrate_samsungtv_it_live_now_xml($result){
+  $xml = '<Root>';
+  $xml .= '<sectionid>1</sectionid>';
+  $xml .= '<section>Live Now on Channel</section>';
+  $xml .= '<sectioncount>'.count($result).'</sectioncount>';
+  foreach ($result as $key => $value) {
+    $url = slugify($value['name']);
+    $cat_img = get_image_info_by_fid($value['field_sponser_logo_fid']);
+    $xml .= '<item>';
+    $xml .= '<title><![CDATA['.$value['name'].']]></title>';
+    $xml .= '<scheduletime>'.$value['field_user_city_value'].'</scheduletime>';
+    $xml .= '<scheduleday>'.$value['field_program_timing_in_days_value'].'</scheduleday>';
+    $xml .= '<url><![CDATA['.$url.'.xml]]></url>';
+    $xml .= '<sectionimage><![CDATA['.$cat_img['imag_url'].']]></sectionimage>';
+    $xml .= '</item>';
+  }
+  $xml .= '</Root>';
+  return $xml;
 }

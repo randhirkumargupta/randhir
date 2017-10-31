@@ -311,3 +311,9 @@ function get_samsungtv_it_sections(){
         'entertainment.xml' => array('section' => 1206952, 'limit' => 25)
     );
 }
+
+function get_samsungtv_it_live_now_sections(){
+  return array(
+    1206958,1206971,1206967,1206961,1206963,1206965,1206968,1206960
+  );
+}
