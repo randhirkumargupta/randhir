@@ -1211,7 +1211,6 @@ function load_video_in_slider(fid, path, getvideoindex) {
 }
 
 function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl) {
-
     jQuery.ajax({
         url: ajaxpath,
         type: 'get',
@@ -1231,5 +1230,4 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
             console.log("Details: " + desc + "\nError:" + err);
         }
     });
-
 }
