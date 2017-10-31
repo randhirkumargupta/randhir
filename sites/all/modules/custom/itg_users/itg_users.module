@@ -391,10 +391,7 @@ function itg_users_views_pre_render(&$view) {
  *
  */
 function itg_users_user_logout($account) {
-  if (isset($_COOKIE['itg_forced_login'])) {
-    unset($_COOKIE['itg_forced_login']);
-    setcookie('itg_forced_login', null, -1, '/');
-  }
+  setrawcookie("itg_forced_login", "null", -1,'/','.indiatodayonline.in');
   $_GET['destination'] = 'user';
 }
 
