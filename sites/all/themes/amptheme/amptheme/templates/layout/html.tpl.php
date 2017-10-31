@@ -291,6 +291,36 @@
         z-index: 10;
         overflow: hidden;
       }
+      .red-star[data-value="0.5"]{
+        width:10%;
+      }
+      .red-star[data-value="1"]{
+        width:20%;
+      }
+      .red-star[data-value="1.5"]{
+        width:30%;
+      }
+      .red-star[data-value="2"]{
+        width:40%;
+      }
+      .red-star[data-value="2.5"]{
+        width:50%;
+      }
+      .red-star[data-value="3"]{
+        width:60%;
+      }
+      .red-star[data-value="3.5"]{
+        width:70%;
+      }
+      .red-star[data-value="4"]{
+        width:80%;
+      }
+      .red-star[data-value="4.5"]{
+        width:90%;
+      }
+      .red-star[data-value="5"]{
+        width:100%;
+      }
       .story-section .story-movie .movie-detail div + div {
         margin-top: 15px;
       }
