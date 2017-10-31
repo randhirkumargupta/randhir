@@ -522,6 +522,17 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
             'content' => $og_path,
           )
         );
+      
+      if (!empty(variable_get('custom_canonical_amp'))) {
+        $amp_canonical = $base_url . '/' . $node->path['alias'];
+        $head_elements = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array('rel' => 'canonical', 'href' => $amp_canonical),
+        );
+        drupal_add_html_head($head_elements, 'canonical');
+      }
+
       drupal_add_html_head($fb_og_url, 'fb_og_url');
       drupal_add_html_head($og_description, 'og_description');
       drupal_add_html_head($fb_og_title, 'fb_og_title');
