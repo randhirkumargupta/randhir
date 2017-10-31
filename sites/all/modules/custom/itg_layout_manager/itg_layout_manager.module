@@ -776,7 +776,7 @@ function itg_layout_clean_url($string) {
 }
 
 /**
- * Implements hook_manager_preprocess_page().
+ * Implements itg_layout_gethomecarddata_new_pre().
  * {@inheritdoc}
  */
 function itg_layout_gethomecarddata_new_pre($sectinno) {
@@ -812,7 +812,7 @@ function itg_layout_gethomecarddata_new_pre($sectinno) {
 }
 
 /**
- * Implements hook_manager_preprocess_page().
+ * Implements itg_layout_getsectioncarddata_new_pre().
  * {@inheritdoc}
  */
 function itg_layout_getsectioncarddata_new_pre($sectinno, $section) {
@@ -867,6 +867,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $data['personlization'] = get_itg_widget('personlization');
     $data['non_personlization'] = get_itg_widget('recommended_anonymous_user');
     $vars['widget_data'] = $data;
+    drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_more_section_card.js', array('scope' => 'footer'));
   }
 
   //section template display on front

@@ -6080,6 +6080,11 @@ div.node {
     .btn:last-child {
         margin-right: 0;
     }
+    .button {
+        +.button {
+            margin-left: 10px;
+        }
+    }
 }
 
 .action-with-title {
@@ -11150,6 +11155,11 @@ div.node {
             padding: 0;
         }
     }
+    .button {
+        +.button {
+            margin-left: 10px;
+        }
+    }
 }
 
 .view-key-candidate {
@@ -14338,14 +14348,19 @@ div.ctools-modal-content {
 }
 
 #redirect-list-form {
-    .table {
+    fieldset {
+        margin: 20px 0;
+    }
+    table {
         .links {
             list-style-type: none;
             li {
                 display: inline-block;
                 vertical-align: top;
+                padding: 0 5px;
+                line-height: 14px;
                 +li {
-                    margin-left: 10px;
+                    border-left: 1px solid #000;
                 }
                 &.edit,
                 &.delete {
@@ -14359,6 +14374,7 @@ div.ctools-modal-content {
                             position: absolute;
                             left: 0;
                             top: 0;
+                            display: none;
                         }
                     }
                 }
@@ -14383,3 +14399,23 @@ div.ctools-modal-content {
 
 
 /* css end Url Redirect page */
+
+
+/* css added by rajveer singh gangwar */
+
+#views-exposed-form-section-wise-content-ordering-list-dont-miss-content,
+#views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget,
+#views-exposed-form-story-widget-most-popular-widget,
+#views-exposed-form-story-widget-page-2,
+#views-exposed-form-story-widget-trending-videos-widget,
+#views-exposed-form-story-widget-top-takes-video-widget,
+#views-exposed-form-story-widget-watch-right-now-widget,
+#views-exposed-form-home-page-feature-widget-page-2,
+#views-exposed-form-photo-carousel-widget-photo-carousel,
+#views-exposed-form-photo-carousel-widget-video-carousel,
+#views-exposed-form-so-sorry-so-sorry-videos-widget {
+    display: none;
+}
+
+
+/* css added by rajveer singh gangwar end */
