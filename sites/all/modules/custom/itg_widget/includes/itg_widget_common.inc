@@ -1073,7 +1073,6 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
     case 'views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget-list':
     case 'views-exposed-form-yearender-top-news-and-top-videos-yearend-left-widget-list':
     case 'views-exposed-form-most-read-widget-most-read-widget-list':
-    case 'views-exposed-form-section-wise-top-story-widget-order-reorder-page-1':
       $form['items_per_page']['#options'] = array(
         '10' => 10,
         '20' => 20,
