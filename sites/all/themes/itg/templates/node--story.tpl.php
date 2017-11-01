@@ -205,8 +205,8 @@ if (!empty($content)):
                 <div class="profile-pic">
                   <?php
                   if(!empty($bylineextra_large_image)) {
-                    $file = $bylineextra_large_image;
-                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                      $file = $bylineextra_large_image;
+                      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                     }
                     else {
                       $file = 'default_images/user-default.png';
@@ -1059,3 +1059,18 @@ if (!empty($content)):
       </div>            
     </div>
 <?php endif; ?>
+<?php
+$bylines = "";
+ if(function_exists('_get_byline_from_nid_for_kindle')) {
+   $bylines = implode(",", _get_byline_from_nid_for_kindle($node->nid));
+ }
+?>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)}
+  ,i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-795349-17', 'auto');
+  ga('set', 'dimension1', '<?php echo $bylines ?>');
+  ga('send', 'pageview');
+</script>

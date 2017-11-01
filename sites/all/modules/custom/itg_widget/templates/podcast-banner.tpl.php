@@ -7,7 +7,7 @@ $podcast_audio_element_id = array();
         <div class="col-md-8">
             <div class="podcast-header-container">
                 <div class="podcast-header-top">
-                    <h1 title="<?php print $podcast_title ?>"><?php print mb_strimwidth($podcast_title , 0 , 65 , "..") ?></h1>
+                    <h1 title="<?php print $podcast_title ?>"><?php print $podcast_title; ?></h1>
                     <script src="<?php print $base_url . '/' . drupal_get_path('module' , 'itg_podcast'); ?>/jwplayer/jwplayer.js"></script>
                     <script>jwplayer.key = "Cbz5fuKQAlYHtZgBSR0G/4GgYFO7YTb0k8Ankg==";</script>
                     <div class="slider-header">

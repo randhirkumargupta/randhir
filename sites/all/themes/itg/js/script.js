@@ -386,7 +386,9 @@ jQuery(document).ready(function () {
 
 // code to copy serach text into search page
 jQuery(document).ready(function () {
-
+    jQuery(".tab-buttons span").on('click' , function() {
+        comscoreBeacon();
+    })
     var elmt = jQuery('.search-text');
     jQuery('.search-text').keypress(function (e) {
         el = jQuery(this);
@@ -1235,13 +1237,13 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
 }
 
 // Adding js for google analytocs for home page photo carousel
-jQuery(document).ready(function() {
+jQuery(window).load(function () {
     if ( window.location.pathname == '/' ){
         // adding onclick attribute for ga code for photo carousel for next button
-        jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'homephotocarouselnext', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'homephotocarouselNext', 'click','1', 1, {'nonInteraction': 1});return true;");
         jQuery('div.flexslider li.flex-nav-next a').attr("href", "#homephotocarouselnext");
         // adding onclick attribute for ga code for photo carousel for prev button
-        jQuery('div.flexslider li.flex-nav-prev a').attr('onclick', "ga('send', 'event', 'homephotocarouselprev', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-prev a').attr('onclick', "ga('send', 'event', 'homephotocarouselPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
         jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#homephotocarouselprev");
     }
 });
