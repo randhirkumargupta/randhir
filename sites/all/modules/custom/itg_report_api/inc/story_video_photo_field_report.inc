@@ -365,8 +365,6 @@ function countStory($start_date, $end_date, $tid) {
   $total_records_yesterday = count($result);
 
   /* syndication node count start */
-
-
   //story count between
   $query = "";
   $result = "";
@@ -404,18 +402,13 @@ function countStory($start_date, $end_date, $tid) {
   $syndication_records_yesterday = count($result);
 
   /* syndication node count end */
-
-
   // today count array merging
-
   $total_records['total_records_between_inhouse'] = $total_records_between - $syndication_records_between;
   $total_records['total_records_today_inhouse'] = $total_records_today - $syndication_records_today;
   $total_records['total_records_yesterday_inhouse'] = $total_records_yesterday - $syndication_records_today;
-
   $total_records['total_records_between_agency'] = $syndication_records_between;
   $total_records['total_records_today_agency'] = $syndication_records_today;
   $total_records['total_records_yesterday_agency'] = $syndication_records_today;
-
   return $total_records;
 }
 

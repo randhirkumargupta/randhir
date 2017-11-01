@@ -53,10 +53,8 @@ function author_report_tvtn($start_date) {
   $data['auhtorwise_data']['month'] = "$month_total";
   $data['auhtorwise_data']['year'] = "$year_total";
   $data['auhtorwise_data']['site_id'] = "$site_id";
-
   //auhtor_data
   $author_list = getAuthorList_Report();
-
   // start loop on author list array
   $author_loop_cont = 0;
   $auhtor_data = array();
@@ -266,7 +264,6 @@ function getContentCountByDate($start_date) {
     //$start_date_timestamp = strtotime($start_date);
     $query_cont->condition('n.created', $start_date, ">=");
   }
-
   //$query_cont->condition('n.status', 1);
   $result_cont = $query_cont->execute()->fetchAll();
   //return $query->countQuery()->execute()->fetchField();
@@ -285,12 +282,9 @@ function getAuthorList_Report() {
   global $base_url;
   $list = array();
   $total_cont = 0;
-
-
   $query = db_select('users', 'u');
   $query->leftJoin('users_roles', 'ur', 'ur.uid=u.uid');
   $query->fields('u', array('uid', 'name', 'mail', 'status'));
-
   //$query->condition('ur.rid', 1, '<>')->condition('ur.rid', 25, '<>')->orderBy('u.name', 'DESC')->groupBy('u.uid');
   $query->orderBy('u.name', 'DESC')->groupBy('u.uid');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

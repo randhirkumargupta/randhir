@@ -92,9 +92,6 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
   //secrtion data report
   $section_data = array();
   $section_data = getSectionCountData_report($start_date, $end_date);
-
-
-
   $data['section_data'] = $section_data;
   return $data;
 }
