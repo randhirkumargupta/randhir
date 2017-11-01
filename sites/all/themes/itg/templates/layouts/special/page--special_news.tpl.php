@@ -139,8 +139,11 @@ if ($theme != 'itgadmin') {
 					<?php endif; ?>
 				<?php } ?>
 		</div>
+		<div class="col-md-12 col-sm-12 mt-50">
+		  <h3> News </h3>
+		</div>
 		<!-- First News section Card -->
-        <div class="col-md-6 col-sm-6 col-xs-12 mt-50">
+        <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="widget-help-text"><?php print t('News section card'); ?></div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -173,7 +176,7 @@ if ($theme != 'itgadmin') {
             </div>  
         </div>
 		<!-- Second News section Card-->
-        <div class="col-md-6 col-sm-6 col-xs-12 mt-50">
+        <div class="col-md-6 col-sm-6 col-xs-12">
           <div class="widget-help-text"><?php print t('News section card'); ?></div>
             <div class="itg-widget">
               <div class="droppable <?php print $gray_bg_layout; ?>">
