@@ -273,7 +273,7 @@ function itg_personalization_block_view($delta = '') {
   global $user;
   // create url for edit profile
   $change_pass_url = '';
-  if ($delta == 'personalization_edit_profile') {
+  if ($delta == 'personalization_edit_profile' || $delta == 'personalization_refer_friend') {
     $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     $change_pass_url = PARENT_SSO . '/sso/change-password/' . $uri;
   }
