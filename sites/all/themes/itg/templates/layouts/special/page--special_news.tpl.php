@@ -139,8 +139,8 @@ if ($theme != 'itgadmin') {
 					<?php endif; ?>
 				<?php } ?>
 		</div>
-		<div class="col-md-12 col-sm-12 mt-50">
-		  <h3> News </h3>
+		<div class="col-md-12 col-sm-12 mt-30">
+		  <h3 class="news-heading"> News </h3>
 		</div>
 		<!-- First News section Card -->
         <div class="col-md-6 col-sm-6 col-xs-12">
