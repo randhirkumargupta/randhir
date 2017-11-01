@@ -2006,13 +2006,13 @@ function get_field_value_for_smily($nid) {
  * Implements itg_get_amp_search_result().
  */
 function itg_get_amp_search_result() {
+  /* For loggin user */
   if (isset($_GET['search'])) {
     $name = isset($_GET['search']) ? $_GET['search'] : '';
     $searchurl = FRONT_URL . '/topic/' . $name;
     drupal_goto($searchurl);
   }
 }
-
 
 function _widget_title($string , $is_for_attribute = TRUE) {
   if($is_for_attribute) {
@@ -2022,4 +2022,3 @@ function _widget_title($string , $is_for_attribute = TRUE) {
   //return preg_replace('#\W#', " ", $string );
   }
 }
-
