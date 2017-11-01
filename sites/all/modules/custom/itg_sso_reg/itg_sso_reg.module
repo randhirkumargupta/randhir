@@ -8,7 +8,6 @@ module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_change_password');
 module_load_include('inc', 'itg_sso_reg', 'includes/sso_user_email_mobile_change_form');
 module_load_include('inc', 'itg_common', 'includes/itg_common.helper');
 
-
 /*
  * Implement hook_init
  */
@@ -150,7 +149,6 @@ function itg_sso_reg_menu() {
     'access arguments' => array('access SSo email history'),
     'type' => MENU_CALLBACK,
   );
-  
   
   $items['akamai-user'] = array(
     'title' => 'Logged in akamai user',
