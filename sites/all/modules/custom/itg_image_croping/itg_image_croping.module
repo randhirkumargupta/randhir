@@ -316,7 +316,7 @@ function itg_image_croping_change_image_aspect_ratio() {
   $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, $aspect_ratio));
 
   drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
-  type' => 'file', 'scope' => 'content'));
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
   $aspect_ratio_data = itg_image_croping_data_aspect_ratio($aspect_ratio, $image_height, $image_width);
   print theme('image_repository', array('data' => $file,
     'field_name' => $field_name,
@@ -374,7 +374,7 @@ function itg_image_croping_ajax_make_ajax() {
   $drupal_form = drupal_render(drupal_get_form('itg_image_croping_crop_form', $field_name, $imagedata, $image_height, $image_width, '', $_POST['content_type'], $is_solr));
 
   drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
-  type' => 'file', 'scope' => 'content'));
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
   print theme('image_repository', array('data' => $file,
     'field_name' => $field_name,
     'image_height' => $image_height,

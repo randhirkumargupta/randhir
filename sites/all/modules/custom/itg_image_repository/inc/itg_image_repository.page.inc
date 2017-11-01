@@ -48,15 +48,15 @@ function itg_image_repository_content($user, $scheme = NULL, $jsop = NULL) {
   //itg_image_repository_process_profile($itg_image_repository); //get active directory content
   //Before creating the content let's add main files required for itg_image_repository to function properly.
   $path = drupal_get_path('module', 'itg_image_repository');
-  drupal_add_js($path . '/js/jquery.form.js', array( 'scope' => 'footer'));
-  drupal_add_js($path . '/js/itg_image_repository.js', array( 'scope' => 'header'));
-  drupal_add_js($path . '/js/itg_image_repository_extras.js', array( 'scope' => 'footer'));
+  drupal_add_js($path . '/js/jquery.form.js', array('scope' => 'footer', 'cache' => FALSE));
+  drupal_add_js($path . '/js/itg_image_repository.js', array('scope' => 'header', 'cache' => FALSE));
+  drupal_add_js($path . '/js/itg_image_repository_extras.js', array('scope' => 'footer', 'cache' => FALSE));
   drupal_add_js($path . '/js/dropzone.js');
 
-  drupal_add_css($path . '/css/itg_image_repository-content.css');
-  drupal_add_css($path . '/css/dropzone.css');
-  drupal_add_js($path . '/js/imce.js');
-  drupal_add_js($path . '/js/imce_extras.js', array( 'scope' => 'footer'));
+  drupal_add_css($path . '/css/itg_image_repository-content.css', array('cache' => FALSE));
+  drupal_add_css($path . '/css/dropzone.css', array('cache' => FALSE));
+  drupal_add_js($path . '/js/imce.js', array('cache' => FALSE));
+  drupal_add_js($path . '/js/imce_extras.js', array('scope' => 'footer', 'cache' => FALSE));
 
   //process forms.
   $itg_image_repository_ref = array('itg_image_repository' => &$itg_image_repository);
@@ -100,7 +100,7 @@ function itg_image_repository_js($user, $scheme, $jsop = '') {
   //data
   if ($itg_image_repository = itg_image_repository_initiate_profile($user, $scheme)) {
 
-    module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.js', array( 'scope' => 'footer'));
+    module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.js', array('scope' => 'footer'));
     if (function_exists($func = 'itg_image_repository_js_' . $jsop)) {
       $response['data'] = $func($itg_image_repository);
     }

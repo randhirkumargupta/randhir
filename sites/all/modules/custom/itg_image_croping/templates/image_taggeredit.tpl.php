@@ -20,7 +20,7 @@
 
 <?php
 drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_imageedit.js', array('
-  type' => 'file', 'scope' => 'footer'));
+  type' => 'file', 'scope' => 'footer', 'cache' => FALSE));
 
 print $js = drupal_get_js('footer');
 ?>
