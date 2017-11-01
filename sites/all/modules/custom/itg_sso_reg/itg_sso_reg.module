@@ -17,9 +17,9 @@ function itg_sso_reg_init() {
   global $user, $base_url, $theme;
   $arg = arg();
   // condition to redirect backend user in case of sso
-  if (array_key_exists(FRONT_USER, $user->roles) && $base_url == BACKEND_URL) {
-     drupal_goto(FRONT_URL);
-  }
+//  if (array_key_exists(FRONT_USER, $user->roles) && $base_url == BACKEND_URL) {
+//     drupal_goto(FRONT_URL);
+//  }
   
   if (array_key_exists(FRONT_USER, $user->roles) && $arg[0] == 'sso-user') {
     // make configuration for js file
