@@ -6,7 +6,6 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-
 ?>
 <?php if($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 <script>
@@ -16,7 +15,6 @@ window.addEventListener("message", function(ev) {
         ev.source.postMessage({ message: "deliverResult", result: true }, "*");
     }
 });
-
 </script>
 <?php } ?>
 <div id="page">
@@ -158,4 +156,3 @@ window.addEventListener("message", function(ev) {
 </div>
 
 <?php print render($page['bottom']); ?>
-<?php global $base_url; ?>

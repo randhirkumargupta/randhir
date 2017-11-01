@@ -386,7 +386,9 @@ jQuery(document).ready(function () {
 
 // code to copy serach text into search page
 jQuery(document).ready(function () {
-
+    jQuery(".tab-buttons span").on('click' , function() {
+        comscoreBeacon();
+    })
     var elmt = jQuery('.search-text');
     jQuery('.search-text').keypress(function (e) {
         el = jQuery(this);
