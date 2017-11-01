@@ -306,6 +306,31 @@ function itg_html_head_alter(&$head_elements) {
   global $base_url;
   if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
+    // adding meta description tag if no meta description comes along with node data
+    if (!isset($arg_data->metatags[LANGUAGE_NONE]['description'])) {
+        $head_elements['metatag_description'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'description',
+            'content' => '',
+          ),
+          '#weight' => -1000,
+        );
+    } 
+    // adding meta keywords tag if no meta keywords comes along with node data
+    if (!isset($arg_data->metatags[LANGUAGE_NONE]['keywords'])) {
+        $head_elements['news_keyword'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'news_keyword',
+            'content' => '',
+          ),
+          '#weight' => -999,
+        );
+    }
+    
     if ($arg_data->type == 'page' && $arg_data->nid == 2) {
       // canonical for home page
       $home_canonical = $base_url . '/' . $arg_data->path['alias'];
@@ -473,12 +498,13 @@ function itg_html_head_alter(&$head_elements) {
         'name' => 'viewport',
         'content' => 'width=device-width, minimum-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
       ),
+      '#weight' => -980,
     );
   }
-  
+  unset($head_elements['system_meta_content_type']);
   $head_elements['metatag_description_0']['#weight'] = -1000;
   $head_elements['metatag_keywords_0']['#weight'] = -999;
-  $head_elements['system_meta_content_type']['#weight'] = -998;
+//  $head_elements['system_meta_content_type']['#weight'] = -998;
   $head_elements['og_locale']['#weight'] = -997;
   $head_elements['og_sitename']['#weight'] = -996;
   $head_elements['twitter_tag2']['#weight'] = -995;
@@ -496,7 +522,7 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['fia_pagesid']['#weight'] = -983;
   $head_elements['og_publish_time']['#weight'] = -982;
   $head_elements['metatag_generator_0']['#weight'] = -981;
-  $head_elements['viewport']['#weight'] = -980;
+//  $head_elements['viewport']['#weight'] = -980;
   $head_elements['og_image_type']['#weight'] = -979;
   $head_elements['og_image_height']['#weight'] = -978;
   $head_elements['og_image_width']['#weight'] = -977;
