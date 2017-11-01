@@ -127,10 +127,6 @@ function itg_category_manager_import_tag_form($form , $form_state) {
     '#type' => 'submit' ,
     '#value' => t('Import') ,
   );
-  $form['reset'] = array(
-    '#type' => 'markup' ,
-    '#markup' => l('Reset' , "import-tag-file-uploader" , array("attributes" => array("class" => array("btn btn-primary form-submit")))) ,
-  );
   return $form;
 }
 

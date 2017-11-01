@@ -131,7 +131,6 @@ function syndication_feature_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
-      'Syndication' => 'Syndication',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -145,7 +144,6 @@ function syndication_feature_user_default_permissions() {
       'Editor' => 'Editor',
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
-      'Syndication' => 'Syndication',
     ),
     'module' => 'node',
   );
@@ -156,7 +154,6 @@ function syndication_feature_user_default_permissions() {
     'roles' => array(
       'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
-      'Syndication' => 'Syndication',
     ),
     'module' => 'node',
   );
@@ -173,7 +170,6 @@ function syndication_feature_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
-      'Syndication' => 'Syndication',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -190,7 +186,6 @@ function syndication_feature_user_default_permissions() {
       'Section Editor/Anchor' => 'Section Editor/Anchor',
       'Site Admin' => 'Site Admin',
       'Subeditor/Sr.Sub' => 'Subeditor/Sr.Sub',
-      'Syndication' => 'Syndication',
     ),
     'module' => 'node',
   );
@@ -201,7 +196,6 @@ function syndication_feature_user_default_permissions() {
     'roles' => array(
       'Editor' => 'Editor',
       'Site Admin' => 'Site Admin',
-      'Syndication' => 'Syndication',
     ),
     'module' => 'node',
   );

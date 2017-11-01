@@ -33,7 +33,6 @@ function syndication_feature_views_default_views() {
     20 => '20',
     10 => '10',
     9 => '9',
-    29 => '29',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -418,7 +417,6 @@ function syndication_feature_views_default_views() {
     20 => '20',
     10 => '10',
     9 => '9',
-    29 => '29',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -939,7 +937,6 @@ function syndication_feature_views_default_views() {
     6 => '6',
     20 => '20',
     10 => '10',
-    29 => '29',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
