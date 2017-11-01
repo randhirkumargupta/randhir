@@ -110,7 +110,7 @@ list($width, $height) = getimagesize($url);
   <input type="hidden" value="<?php echo $width; ?>" id="imcwidth">
 </div>
 <?php drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_fieldmapping.js', array('
-  type' => 'file', 'scope' => 'content'));
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
 ?>
 <?php
 print $js = drupal_get_css('content');

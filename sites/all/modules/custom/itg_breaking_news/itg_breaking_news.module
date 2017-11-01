@@ -252,6 +252,21 @@ function itg_breaking_news_form_custom_callback($form, &$form_state) {
   // REDIRECTION FOR APPLY BUTTON
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
+      /* Assign story to widget */
+      if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_story_assign = '';
+      }
+      $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+      // for story assign to widget
+      if (function_exists('itg_story_assign_to_widget')) {
+        if (is_array($story_widget) && count($story_widget) > 0) {
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, '', $previous_story_assign);
+        }
+      }
+      /* End for Assign story to widget */
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
       drupal_goto('node/' . $form_state['values']['nid'] . '/edit');

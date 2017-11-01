@@ -290,12 +290,12 @@ function itg_preprocess_html(&$vars) {
   }
   
   // Code for setting page header title for home page
-  if (!empty(arg(1)) && is_numeric(arg(1))) {
+  /*if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
     if ($arg_data->type == 'page' && $arg_data->nid == 2 && isset($arg_data->metatags[LANGUAGE_NONE]['title']['value']) && !empty($arg_data->metatags[LANGUAGE_NONE]['title']['value'])) {
       $vars['head_title'] = $arg_data->metatags[LANGUAGE_NONE]['title']['value'] . ' | IndiaToday';
     }
-  }
+  }*/
 }
 
 /**
@@ -304,118 +304,14 @@ function itg_preprocess_html(&$vars) {
 function itg_html_head_alter(&$head_elements) {
   $arg = arg();
   global $base_url;
-  if (!empty(arg(1)) && is_numeric(arg(1))) {
-    $arg_data = node_load(arg(1));
-    if ($arg_data->type == 'page' && $arg_data->nid == 2) {
-      // canonical for home page
-      $path = current_path();
-      $path_alias = drupal_lookup_path('alias', $path);
-      $home_canonical = $base_url . '/' . $arg_data->path['alias'];
-      $head_elements['canonical'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#attributes' => array('rel' => 'canonical', 'href' => $home_canonical),
-      );
-      // meta name description for home page
-      $meta_description = $arg_data->metatags[LANGUAGE_NONE]['description']['value'];
-      if (isset($meta_description) && !empty($meta_description)) {
-        $head_elements['metatag_description'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'meta',
-          '#attributes' => array(
-            'name' => 'description',
-            'content' => $meta_description,
-          ),
-        );
-      }
-    }
-
-    if ($arg_data->type == 'videogallery') {
-      if (is_array($arg_data->field_video_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_video_configurations[LANGUAGE_NONE])) {
-        $configurableopt = $arg_data->field_video_configurations[LANGUAGE_NONE];
-        foreach ($configurableopt as $key => $value) {
-          $opt_value[] = $value['value'];
-        }
-        if (in_array("google_standout", $opt_value)) {
-          $standout_path = $base_url . '/' . $arg_data->path['alias'];
-          $head_elements['google_standout'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'link',
-            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
-          );
-        }
-      }
-    }
-    else if ($arg_data->type == 'photogallery') {
-      if (is_array($arg_data->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_photogallery_configuration[LANGUAGE_NONE])) {
-        $configurableopt = $arg_data->field_photogallery_configuration[LANGUAGE_NONE];
-        foreach ($configurableopt as $key => $value) {
-          $opt_value[] = $value['value'];
-        }
-        if (in_array("google_standout", $opt_value)) {
-          $standout_path = $base_url . '/' . $arg_data->path['alias'];
-          $head_elements['google_standout'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'link',
-            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
-          );
-        }
-      }
-    }
-    else if ($arg_data->type == 'podcast') {
-      if (is_array($arg_data->field_podcast_configuration[LANGUAGE_NONE]) && !empty($arg_data->field_podcast_configuration[LANGUAGE_NONE])) {
-        $configurableopt = $arg_data->field_podcast_configuration[LANGUAGE_NONE];
-        foreach ($configurableopt as $key => $value) {
-          $opt_value[] = $value['value'];
-        }
-        if (in_array("google_standout", $opt_value)) {
-          $standout_path = $base_url . '/' . $arg_data->path['alias'];
-          $head_elements['google_standout'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'link',
-            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
-          );
-        }
-      }
-    }
-    else if ($arg_data->type == 'story') {
-      if (is_array($arg_data->field_story_configurations[LANGUAGE_NONE]) && !empty($arg_data->field_story_configurations[LANGUAGE_NONE])) {
-        $configurableopt = $arg_data->field_story_configurations[LANGUAGE_NONE];
-        foreach ($configurableopt as $key => $value) {
-          $opt_value[] = $value['value'];
-        }
-        if (in_array("google_standout", $opt_value)) {
-          $standout_path = $base_url . '/' . $arg_data->path['alias'];
-          $head_elements['google_standout'] = array(
-            '#type' => 'html_tag',
-            '#tag' => 'link',
-            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
-          );
-        }
-      }
-    }
-  }
+  
   // Updating meta name keywords to news_keyword sitewide
   $meta_name_keyword = array_keys($head_elements);
   if (in_array('metatag_keywords_0', $meta_name_keyword)) {
     $head_elements['metatag_keywords_0']['#name'] = 'news_keyword';
   }
-  else {
-    if ($arg[0] == 'node' && is_numeric($arg[1])) {
-      $node = node_load($arg[1]);
-      $meta_keywords = isset($node->metatags[LANGUAGE_NONE]['keywords']['value']) ? $node->metatags[LANGUAGE_NONE]['keywords']['value'] : '';
-      if (!empty($meta_keywords)) {
-        $head_elements['metatag_keywords_0'] = array(
-          '#type' => 'html_tag',
-          '#tag' => 'meta',
-          '#attributes' => array(
-            'name' => 'news_keyword',
-            'content' => $meta_keywords
-          ),
-        );
-      }
-    }
-    elseif ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
+
+  if ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
       $term = taxonomy_term_load($arg[2]);
       $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
       if (!empty($meta_keywords)) {
@@ -466,10 +362,42 @@ function itg_html_head_alter(&$head_elements) {
         }
       }
     }
+  
+  if ($default_mobile_metatags) {
+    $head_elements['viewport'] = array(
+      '#tag' => 'meta',
+      '#type' => 'html_tag',
+      '#attributes' => array(
+        'name' => 'viewport',
+        'content' => 'width=device-width, minimum-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+      ),
+      '#weight' => -980,
+    );
   }
+  unset($head_elements['system_meta_content_type']);
   $head_elements['metatag_description_0']['#weight'] = -1000;
   $head_elements['metatag_keywords_0']['#weight'] = -999;
-  $head_elements['system_meta_content_type']['#weight'] = -998;
+  $head_elements['og_locale']['#weight'] = -997;
+  $head_elements['og_sitename']['#weight'] = -996;
+  $head_elements['twitter_tag2']['#weight'] = -995;
+  $head_elements['twitter_tag3']['#weight'] = -994;
+  $head_elements['twitter_tag1']['#weight'] = -993;
+  $head_elements['twitter_tag0']['#weight'] = -992;
+  $head_elements['twitter_tag4']['#weight'] = -991;
+  $head_elements['fb_og_type']['#weight'] = -990;
+  $head_elements['og_description']['#weight'] = -989;
+  $head_elements['fb_og_title']['#weight'] = -988;
+  $head_elements['fb_og_url']['#weight'] = -987;
+  $head_elements['twitter_tag5']['#weight'] = -986;
+  $head_elements['system_meta_generator']['#weight'] = -985;
+  $head_elements['twitter_tag5']['#weight'] = -984;
+  $head_elements['fia_pagesid']['#weight'] = -983;
+  $head_elements['og_publish_time']['#weight'] = -982;
+  $head_elements['metatag_generator_0']['#weight'] = -981;
+  $head_elements['og_image_type']['#weight'] = -979;
+  $head_elements['og_image_height']['#weight'] = -978;
+  $head_elements['og_image_width']['#weight'] = -977;
+  $head_elements['og_image']['#weight'] = -976;
 }
 
 /**

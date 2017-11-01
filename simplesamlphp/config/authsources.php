@@ -75,6 +75,7 @@ $config = array(
  'debug' => true,
 
  // the URL of the Drupal logout page
+
  'drupal_logout_url' => 'http://prod-sso.indiatodayonline.in/user/logout',
 
  // the URL of the Drupal login page
@@ -253,7 +254,6 @@ $config = array(
         'authtwitter:Twitter',
         'key' => 'TNq0xMrcHjANFPap1bMymAPai',
         'secret' => 'o6tK6hxXAHkNXlgSEx6vxgT3pWstcKrgzIskf5SZhlIB7wAWFf',
-
         // Forces the user to enter their credentials to ensure the correct users account is authorized.
         // Details: https://dev.twitter.com/docs/api/1/get/oauth/authenticate
         'force_login' => FALSE,

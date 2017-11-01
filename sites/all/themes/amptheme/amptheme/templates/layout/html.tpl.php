@@ -54,6 +54,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
     <script async custom-element="amp-dailymotion" src="https://cdn.ampproject.org/v0/amp-dailymotion-0.1.js"></script>
     <script async custom-element="amp-jwplayer" src="https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js"></script>
     <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
@@ -290,6 +291,36 @@
         z-index: 10;
         overflow: hidden;
       }
+      .red-star[data-value="0.5"]{
+        width:10%;
+      }
+      .red-star[data-value="1"]{
+        width:20%;
+      }
+      .red-star[data-value="1.5"]{
+        width:30%;
+      }
+      .red-star[data-value="2"]{
+        width:40%;
+      }
+      .red-star[data-value="2.5"]{
+        width:50%;
+      }
+      .red-star[data-value="3"]{
+        width:60%;
+      }
+      .red-star[data-value="3.5"]{
+        width:70%;
+      }
+      .red-star[data-value="4"]{
+        width:80%;
+      }
+      .red-star[data-value="4.5"]{
+        width:90%;
+      }
+      .red-star[data-value="5"]{
+        width:100%;
+      }
       .story-section .story-movie .movie-detail div + div {
         margin-top: 15px;
       }
@@ -497,25 +528,7 @@
       .footer-bottom-menu ul li{
         padding: 3px 0;
       }
-      #footer amp-accordion h2{
-        width: 40px;
-        height: 49px;
-        text-align: center;
-        padding: 0;
-        border: none;
-        background: #000;
-        margin-top: -50px;
-        z-index: 99;
-        position: absolute !important;
-        right: 0;
-        top: 0;
-      }
-      #footer amp-accordion h2 span.show-more, #footer amp-accordion h2 span.show-less {
-        line-height: 48px;
-      }
-      #footer amp-accordion h2[aria-expanded="true"] span.show-more, #footer amp-accordion h2[aria-expanded="false"] span.show-less {
-        display: none;
-      }
+      
       .copyright{
         color: #a6a6a6;
         padding: 10px 12px;
@@ -671,6 +684,168 @@
       }
       .search-form input[type="search"]:focus + input[type="submit"] + a.search{color: #666;}
       .custom-amp-ad{text-align: center;}
+
+    /* define some contants for photogallery */
+    .collapsible-captions {
+      --caption-height: 32px;
+      --image-height: 300px;
+      --caption-padding: 1rem;
+      --button-size: 28px;
+      --caption-color: #f5f5f5;;
+      --caption-bg-color: #000;
+      background: var(--caption-bg-color);
+    }
+    .collapsible-captions * {
+      /* disable chrome touch highlight */
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      box-sizing: border-box;
+    }
+    /* see https://ampbyexample.com/advanced/how_to_support_images_with_unknown_dimensions/ */
+    .collapsible-captions .fixed-height-container {
+      position: relative;
+      width: 100%;
+      height: var(--image-height);
+    }
+    .collapsible-captions amp-img img {
+      object-fit: contain;
+    }
+    .collapsible-captions figure {
+      margin: 0;
+      padding: 0;
+    }
+    /* single line caption */
+    .collapsible-captions figcaption {
+      position: absolute;
+      bottom: 0;
+      margin: 0;
+      width: 100%;
+      /* inital height is one line */
+      max-height: var(--caption-height);
+      line-height: var(--caption-height);
+      padding: 0 var(--button-size);
+      /* cut text after first line and show an ellipsis */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* animate expansion */
+      transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      /* overlay the carousel icons */
+      z-index: 1000;
+      /* some styling */
+      color: var(--caption-color);
+      background: var(--caption-bg-color);      
+    }
+    /* expanded caption */
+    .collapsible-captions figcaption.expanded {
+      /* add padding and show all of the text */
+      padding: var(--button-size);
+      line-height: inherit;
+      white-space: normal;
+      text-overflow: auto;
+      max-height: calc(var(--caption-height) + var(--image-height));
+      /* show scrollbar in case caption is larger than image */
+      overflow: auto;
+    }
+    /* don't show focus highlights in chrome */
+    .collapsible-captions figcaption:focus {
+      outline: none;
+      border: none;
+    }
+    /* the expand/collapse icon */
+    .collapsible-captions figcaption span {
+      display: block;
+      position: absolute;
+      top: calc((var(--caption-height) - var(--button-size)) / 2);
+      right: 2px;
+      width: var(--button-size);
+      height: var(--button-size);
+      line-height: var(--button-size);
+      text-align: center;
+      font-size: 12px;
+      color: inherit;
+      cursor: pointer; 
+    }
+    
+    /* define some contants for footer-latest */
+    .footer-latest {
+      --caption-height: 42px;
+      --image-height: 300px;
+      --caption-padding: 1rem;
+      --button-size: 28px;
+      --caption-color: #f5f5f5;;
+      --caption-bg-color: #000;
+      background: var(--caption-bg-color);
+    }
+    .footer-latest * {
+      /* disable chrome touch highlight */
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      box-sizing: border-box;
+    }
+    /* see https://ampbyexample.com/advanced/how_to_support_images_with_unknown_dimensions/ */
+    .footer-latest .fixed-height-container {
+      position: relative;
+      width: 100%;
+      height: var(--image-height);
+    }
+    .footer-latest amp-img img {
+      object-fit: contain;
+    }
+    .footer-latest figure {
+      margin: 0;
+      padding: 0;
+    }
+    /* single line caption */
+    .footer-latest figcaption {
+      position: absolute;
+      bottom: 0;
+      margin: 0;
+      width: 100%;
+      /* inital height is one line */
+      max-height: var(--caption-height);
+      line-height: var(--caption-height);
+      padding: 0 var(--button-size);
+      /* cut text after first line and show an ellipsis */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* animate expansion */
+      transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      /* overlay the carousel icons */
+      z-index: 1000;
+      /* some styling */
+      color: var(--caption-color);
+      background: var(--caption-bg-color);      
+    }
+    /* expanded caption */
+    .footer-latest figcaption.expanded1 {
+      /* add padding and show all of the text */
+      padding: var(--button-size);
+      line-height: inherit;
+      white-space: normal;
+      text-overflow: auto;
+      max-height: calc(var(--caption-height) + var(--image-height));
+      /* show scrollbar in case caption is larger than image */
+      overflow: auto;
+    }
+    /* don't show focus highlights in chrome */
+    .footer-latest figcaption:focus {
+      outline: none;
+      border: none;
+    }
+    /* the expand/collapse icon */
+    .footer-latest figcaption span {
+      display: block;
+      position: absolute;
+      top: calc((var(--caption-height) - var(--button-size)) / 2);
+      right: 2px;
+      width: var(--button-size);
+      height: var(--button-size);
+      line-height: var(--button-size);
+      text-align: center;
+      font-size: 12px;
+      color: inherit;
+      cursor: pointer; 
+    }
     </style>
     <?php //endif;  ?>
   </head>

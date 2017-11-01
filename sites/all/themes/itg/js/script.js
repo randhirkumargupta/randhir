@@ -405,7 +405,7 @@ jQuery(document).ready(function () {
             //Do something
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
             keyword = jQuery(this).val();
-            myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             myStr = myStr.replace(/\s+/g, "-");
             var urldata = Drupal.settings.basePath + 'topic/' + myStr;
             window.location.href = urldata;
@@ -421,7 +421,7 @@ jQuery(document).ready(function () {
         search_value = jQuery(this).parent().find('.search-text').val();
         if (search_value.length != 0) {
             nkeyword = search_value;
-            nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             nmyStr = nmyStr.replace(/\s+/g, "-");
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
             var urldata = Drupal.settings.basePath + 'topic/' + search_value;
@@ -818,10 +818,6 @@ jQuery(document).ready(function () {
             jQuery(this).css('opacity', '1');
         });
 
-        //event page navigation
-        jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
-            jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
-        });
         jQuery('.event-search-icon').click(function () {
             jQuery('.event-search input').css('width', '180px');
         });
@@ -837,6 +833,11 @@ jQuery(document).ready(function () {
             e.preventDefault();
         });
     }
+
+    //event page navigation
+    jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
+        jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
+    });
 
     //story page social share for mobile
     var getclick;
@@ -902,6 +903,9 @@ jQuery(document).ready(function () {
         e.stopPropagation();
         return false;
     });
+    jQuery('.show-embed-code-div').click(function (e) {
+        e.stopPropagation();
+    });
     jQuery(document).click(function () {
         jQuery('.show-embed-code-div').hide();
     });
@@ -944,7 +948,7 @@ var menuBuilder = function () {
             jQuery(this).removeClass('hide');
         } else {
             if (jQuery('.all-menu').length === 0) {
-                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
+                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)" onclick="ga("send", "event", "ParentMenu", "click","1", 1, {"nonInteraction": 1});return true;"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
                 clickHere = 1;
             }
             if (jQuery('#newlist').length === 0) {
@@ -1057,6 +1061,13 @@ jQuery(document).ready(function () {
 });
 
 jQuery(document).ready(function (e) {
+    // story discription iframe wrap in div
+    var tagIframe = jQuery('.story-section .story-right .description');
+    tagIframe.find('iframe').removeAttr('height').removeAttr('width').wrap('<div class="iframe-video"></div>');
+
+    // iframe wrap with div
+    jQuery('.big-news .live-tv-big-story').find('iframe').removeAttr('height').removeAttr('width');
+
     // code for video slider play video.
 
     jQuery('.thumb-video').click(function () {
@@ -1222,3 +1233,15 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
     });
 
 }
+
+// Adding js for google analytocs for home page photo carousel
+jQuery(document).ready(function() {
+    if ( window.location.pathname == '/' ){
+        // adding onclick attribute for ga code for photo carousel for next button
+        jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'homephotocarouselnext', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-next a').attr("href", "#homephotocarouselnext");
+        // adding onclick attribute for ga code for photo carousel for prev button
+        jQuery('div.flexslider li.flex-nav-prev a').attr('onclick', "ga('send', 'event', 'homephotocarouselprev', 'click','1', 1, {'nonInteraction': 1});return true;");
+        jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#homephotocarouselprev");
+    }
+});

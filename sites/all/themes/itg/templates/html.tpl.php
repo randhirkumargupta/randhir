@@ -14,6 +14,7 @@
 <!--[if (gte IE 9)|(gt IEMobile 7)]><!--><html <?php print $html_attributes . $rdf_namespaces; ?> ><!--<![endif]-->
 
 <head>
+  <meta charset="utf-8" />
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
   <!--<link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>-->
@@ -25,11 +26,6 @@
         e.preventDefault(); // no page reload
     }
   </script>
-  <?php if ($default_mobile_metatags): ?>
-<!--    <meta name="MobileOptimized" content="width">
-    <meta name="HandheldFriendly" content="true">-->
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <?php endif; ?>
   <!--[if IEMobile]><meta http-equiv="cleartype" content="on"><![endif]-->
   <?php print $styles; ?>
   <?php print $scripts; ?>
@@ -64,6 +60,6 @@ _comscore.push(
 (function()
 { var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); }
 )();
-</script><noscript><img src="http://b.scorecardresearch.com/p?c1=2&ac2=8549097&cv=2.0&cj=1"/></noscript>
+</script><noscript><img alt="" src="http://b.scorecardresearch.com/p?c1=2&ac2=8549097&cv=2.0&cj=1"/></noscript>
 </body>
 </html> 

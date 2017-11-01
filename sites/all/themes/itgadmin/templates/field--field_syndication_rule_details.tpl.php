@@ -21,6 +21,13 @@ foreach ($field_collection_data as $data) {
     echo "</tr>";
     echo "<tr>";
   }
+  if($data['category']) {
+    echo "<tr>";
+    echo "<th>Select Category: </th>";
+    echo "<td>" . $data['category'] . "</td>";
+    echo "</tr>";
+    echo "<tr>";
+  }
   echo "<th>Select Feed type: </th>";
   echo "<td>" . $data['feed_type'] . "</td>";
   echo "</tr>";
@@ -34,7 +41,12 @@ foreach ($field_collection_data as $data) {
     $content_type = $data['content_type'];
     $feed_type = strtolower($data['feed_type']);
     $frequency = strtolower($data['feed_frequency']);
-    $url_friendly_path = itg_common_url_friendly_path("$feed_type/$client/$section_name-$content_type");
+    if (!empty($category)) {
+      $url_friendly_path = itg_common_url_friendly_path("$feed_type/$client/$section_name-$category-$content_type");
+    } else {
+      $url_friendly_path = itg_common_url_friendly_path("$feed_type/$client/$section_name-$content_type");
+    }
+
     $feed_dir = "public://$url_friendly_path-$frequency-$feed_type-feed.xml";
     echo "<a target='_blank' href='" . file_create_url($feed_dir) . "'>" . file_create_url($feed_dir) . "</a>";
   } else {

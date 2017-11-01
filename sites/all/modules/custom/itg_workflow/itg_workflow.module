@@ -857,26 +857,29 @@ function itg_workflow_node_access($node, $op, $account) {
  */
 function itg_workflow_node_view($node, $view_mode, $langcode) {
     
-  global $theme;
-  global $user;
+  global $theme, $user;
+  
   // code for redirect_url
-  if (arg(0) == 'node' && is_numeric(arg(1))) {
-    if (function_exists('itg_get_node_redirect_url')) {
-      itg_get_node_redirect_url($node, $view_mode);
+  $is_fron_page = drupal_is_front_page();
+  if (empty($is_fron_page)) {
+    if (arg(0) == 'node' && is_numeric(arg(1))) {
+      if (function_exists('itg_get_node_redirect_url')) {
+        itg_get_node_redirect_url($node, $view_mode);
+      }
     }
-  }
-  if($theme != FRONT_THEME_NAME) {
-    if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
-      $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
-    }
-  }else {
-        module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
-        if (isset($_GET['preview_log']) && ($_GET['preview_log'] == $node->nid) && _is_preview_log_submit_true($user)) {
+    if ($theme != FRONT_THEME_NAME) {
+      if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
+        $node->moderation_history_block = views_embed_view('view_moderation_history', 'block_2');
+      }
+    } else {
+          module_load_include('inc', 'itg_workflow', 'includes/itg_workflow_preview_log');
+          if (isset($_GET['preview_log']) && ($_GET['preview_log'] == $node->nid) && _is_preview_log_submit_true($user)) {
             $preview_id = _get_unique_id_for_node_field();
             $user_id = $user->uid;
             itg_workflow_preview_db_merge($preview_id, $user_id, 0);
-        }
-    }
+          }
+      }
+  }
 }
 
 /**
@@ -1126,42 +1129,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     $node_url = l($node->title, FRONT_URL . '/node/' . $node->nid);
   }
 
-
-  if ($event == 'update' && $vbo_state == 'pub-unpub') {
-    if ($vbo_update == 'published') {
-      $subject_line_upd = 'unpublished';
-      $body_htwo = 'STORY UNPUBLISHED';
-    } 
-    elseif($vbo_update == 'draft') {
-      $subject_line_upd = 'published';
-      $body_htwo = 'STORY PUBLISHED';
-    }
-    $to_mail = implode(',', $to);
-    $subject = 'A new ' . $content_type . ' has been ' . $subject_line_upd . ', please find details below.';
-    $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
-                      <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
-                          <tr>
-                              <td style="background-color:#ececec;">
-                                  <img src="template_logo.png" alt="Indiatoday" />
-                              </td>
-                          </tr>
-                          <tr>
-                              <td style="padding: 10px 20px;">
-                                  <h2 style="font-size: 18px; margin: 20px 0 30px;">' . $body_htwo . ' :</h2>
-                                  <strong style="font-size: 16px;">Dear SEO Team,</strong>
-                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . ucwords($content_type) . ' <strong style="color: #000;">title.</strong></p>
-                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . $node_url . '</p>
-                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;">has been ' . $subject_line_upd . '.</p>
-                                  <p style="font-size: 16px; color: #595959; margin: 20px 0;"><strong style="color: #000;">Thanks,</strong><br>India Today Team</p>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td style="background-color: #000; font-size: 11px; color: #7c7c7c; padding: 10px; text-align: center; font-weight: bold;">COPYRIGHT &copy; 2017 LIVING MEDIA INDIA LIMITED. ALL RIGHT RESERVED.</td>
-                          </tr>
-                      </table>
-                  </div>';
-  } 
-  elseif ($event == 'create' && $review == 'published') {
+  if ($event == 'create' && $review == 'published') {
     $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
     $to_mail = $author_mail[0];
 
@@ -1434,7 +1402,40 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $mail_content = $mail_node_author;
       }
     }
-
+    else if (!empty ($vbo_state) && $vbo_state == 'pub-unpub'){
+      if ($vbo_update == 'published') {
+        $subject_line_upd = 'unpublished';
+        $body_htwo = strtoupper($content_type) . ' UNPUBLISHED';
+      } 
+      elseif($vbo_update == 'draft') {
+        $subject_line_upd = 'published';
+        $body_htwo = strtoupper($content_type) . ' PUBLISHED';
+      }
+      $to_mail = implode(',', $to);
+      $subject = 'A new ' . $content_type . ' has been ' . $subject_line_upd . ', please find details below.';
+      $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
+                        <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
+                            <tr>
+                                <td style="background-color:#ececec;">
+                                    <img src="template_logo.png" alt="Indiatoday" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 20px;">
+                                    <h2 style="font-size: 18px; margin: 20px 0 30px;">' . $body_htwo . ' :</h2>
+                                    <strong style="font-size: 16px;">Dear SEO Team,</strong>
+                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . ucwords($content_type) . ' <strong style="color: #000;">title.</strong></p>
+                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . $node_url . '</p>
+                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;">has been ' . $subject_line_upd . '.</p>
+                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;"><strong style="color: #000;">Thanks,</strong><br>India Today Team</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #000; font-size: 11px; color: #7c7c7c; padding: 10px; text-align: center; font-weight: bold;">COPYRIGHT &copy; 2017 LIVING MEDIA INDIA LIMITED. ALL RIGHT RESERVED.</td>
+                            </tr>
+                        </table>
+                    </div>';
+    }
   }
   
   $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);

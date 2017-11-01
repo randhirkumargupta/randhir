@@ -180,7 +180,8 @@ function get_content_id_for_syndication($data, $created_date) {
         $itg_query->condition('n.created', $created_date, '>');
         $itg_query->condition('n.type', $data['content_type']);
         $itg_query->condition('syndication.field_story_syndication_value', 'Yes');
-        $itg_query->condition('cat.field_story_category_tid', $data['section_id']); //for multi section
+        $section_id =  !empty($data['category_id']) ? $data['category_id'] : $data['section_id'];
+        $itg_query->condition('cat.field_story_category_tid', $section_id); //for multi section
         $delivery_mode_array = explode(': ', $data['delivery_mode']);
         if(!empty($data['num_of_feeds'])) {
             $itg_query->range(0, $data['num_of_feeds']);
@@ -200,6 +201,7 @@ function get_content_id_for_syndication($data, $created_date) {
         'feed_type' => $data['feed_type'],
         'fid' => $data['fid'],
         'section_id' => $data['section_id'],
+        'category_id' => $data['category_id'],
         'syndication' => serialize($content_id),
         'frequency' => strtolower($data['frequency']),
     );
@@ -222,7 +224,8 @@ function save_cron_details_of_syndication($node) {
         //add code for multi section
         $section_id = $field_collection_item[$val['value']]->field_syndication_select_section[LANGUAGE_NONE][0]['tid'];
         //end
-
+        //add code for category
+        $category_id = $field_collection_item[$val['value']]->field_syndication_sc_category[LANGUAGE_NONE][0]['tid'];
         $feed_type = $field_collection_item[$val['value']]->field_syndication_feed_type[LANGUAGE_NONE][0]['value'];
         $syndication_mode = $field_collection_item[$val['value']]->field_syndication_mode[LANGUAGE_NONE][0]['value'];
         $content_type = $field_collection_item[$val['value']]->field_syndication_content_type[LANGUAGE_NONE][0]['value'];
@@ -242,6 +245,7 @@ function save_cron_details_of_syndication($node) {
 
         $details_array = array('client_name' => $client_name,
             'section_id' => $section_id,
+            'category_id' => $category_id,
             'feed_type' => $feed_type,
             'syndication_mode' => $syndication_mode,
             'content_type' => $content_type,

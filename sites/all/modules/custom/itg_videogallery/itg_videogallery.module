@@ -158,6 +158,22 @@ function itg_videogallery_block_info() {
     'info' => t('Video landing page menu'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['itg_videogallery_tab_realted'] = array(
+    'info' => t('Video header related content'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['itg_videogallery_menu_content'] = array(
+    'info' => t('Video landing Link page menu'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['itg_other_videogallery_section'] = array(
+    'info' => t('Other Video Gallery from primary Category'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['itg_trending_videos_widget_tab'] = array(
+    'info' => t('Trending videos for video tab'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -176,6 +192,47 @@ function itg_videogallery_block_view($delta = '') {
       break;
     case 'videogallery_menu_video_block':
       $block['content'] = theme('videogallery_menu_video_block', array('data' => $data));
+      break;
+    case 'itg_videogallery_tab_realted':
+      $block['content'] = get_header_tab_related_video_block_content();
+      break;
+    case 'itg_videogallery_menu_content':
+      if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+        $node = menu_get_object();
+        if ($node->type == 'videogallery') {
+          $block['content'] = theme('itg_videogallery_menu_content_theme', array('data' => $data));
+        }
+        else {
+          $block['content'] = '';
+        }
+      }
+      else {
+        $block['content'] = '';
+      }
+      break;
+    case 'itg_other_videogallery_section':
+      if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+        $node = menu_get_object();
+        if ($node->type == 'videogallery') {
+          drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_videogallery_front.js', array('weight' => 1, 'scope' => 'footer'));
+          $block['content'] = _get_other_videos_from_primary_category();
+        }
+        else {
+          $block['content'] = '';
+        }
+      }
+      else {
+        $block['content'] = '';
+      }
+      break;
+    // Trending videos ordering reordering widget case
+    case 'itg_trending_videos_widget_tab':
+      $info['widget'] = 'trending_videos_widget';
+      $info['order'] = 'ASC';
+      $info['max_limit'] = 3;
+      $info['min_limit'] = 3;
+      $data = itg_widget_get_widget_data_data($info);
+      $block['content'] = theme("trending_videos_tab", array("data" => $data));
       break;
   }
 
@@ -235,6 +292,15 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
       'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
       'variables' => array('data' => NULL),
     ),
+    'itg_videogallery_menu_content_theme' => array(
+      'template' => 'videogallery-link-menu-landing-template',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates',
+      'variables' => array('data' => NULL),
+    ),
+    'trending_videos_tab' => array(
+      'template' => 'trending-videos-tab',
+      'path' => drupal_get_path('module', 'itg_videogallery') . '/templates'
+    )
   );
   return $themes;
 }
@@ -248,6 +314,15 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
 function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   switch ($form_id) {
+    case 'itg_widgets_custom_variables':
+      $form['tid_videos'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Tid of video section',
+        '#default_value' => variable_get('tid_videos'),
+        '#size' => 20,
+        '#maxlength' => 20,
+      );
+      break;
     case 'videogallery_node_form':
       $arg = arg(2);
       $form['field_story_expert_description']['und'][0]['#format'] = 'full_html';
@@ -1053,10 +1128,10 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
     $private = 'false';
   }
   if (strtolower($exclue_ads) == 'yes') {
-    $exclude_ads_flag = 1;
+    $exclude_ads_flag = 'true';
   }
   else {
-    $exclude_ads_flag = 0;
+    $exclude_ads_flag = 'false';
   }
 
   $video_desc = itg_videogallery_clean_string($video_desc);
@@ -1068,7 +1143,6 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   }
 // Tags assign to node and thumbnail
   if (!empty($tags_value) && !empty($video_title)) {
-
     $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&title=' . $video_title . '&description=' . $video_desc . '&advertising_instream_blocked=' . $exclude_ads_flag);
   }
   elseif (empty($tags_value) && !empty($video_title)) {
@@ -1483,6 +1557,16 @@ function itg_videogallery_views_pre_render(&$view) {
       $view->attachment_before = $header_content_video;
     }
   }
+  if ($view->name == "video_list_of_category" && $view->current_display == 'block_4') {
+    if (isset($view->args[0])) {
+      $cat_name = itg_videogallery_get_tname($view->args[0]);
+      $header_content_video = '<div class="other_video_category"><h3><span>Other Videos from ' . $cat_name . '</span></h3></div>';
+      $view->attachment_before = $header_content_video;
+    }else{
+      $header_content_video = '<div class="other_video_category"><h3><span>Other Videos from category</span></h3></div>';
+      $view->attachment_before = $header_content_video;
+    }
+  }
 }
 
 /**
@@ -1493,6 +1577,23 @@ function itg_videogallery_views_pre_render(&$view) {
 function itg_videogallery_submit_status_message(&$form, $form_state) {
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
+      /* Assign video to widget */
+      if (is_array($form['#node']->field_video_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_video_assign = $form['#node']->field_video_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_video_assign = '';
+      }
+
+      // for story assign to widget
+      if (function_exists('itg_video_assign_to_widget')) {
+        $video_widget = $form_state['input']['field_video_assign_to_widget'][LANGUAGE_NONE];
+        $primary_category = $form_state['input']['itg_primary_category'];
+        if (is_array($video_widget) && count($video_widget) > 0) {
+          itg_video_assign_to_widget($form_state['values']['nid'], $video_widget, $primary_category, $previous_video_assign);
+        }
+      }
+      /* Assign video to widget */
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
       drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
@@ -3667,6 +3768,7 @@ function get_video_in_fieldcollection_by_nid($nid) {
   $query->fields('thumb_img', array('field_video_thumbnail_fid' , 'field_video_thumbnail_alt', 'field_video_thumbnail_title'));
   $query->fields('desc_inc', array('field_video_title_value'));
   $query->condition('up_video.entity_id', $nid);
+  $query->groupBy('isvi.solr_video_id');
   $query->orderBy('up_video.delta', 'ASC');
   $result = $query->execute()->fetchAll();
   return $result;
@@ -3932,6 +4034,7 @@ function itg_videogallery_ftp_video_post($sid, $template, $widget_name) {
 /**
  * {@inheritdoc}
  */
+/*
 function itg_videogallery_node_view($node, $view_mode, $langcode) {
   $os = array("search_index", "amp");
  
@@ -3979,6 +4082,7 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
     $node->view_output = $view_output;
   }
 }
+*/
 
 /**
  * Implements hook_views_query_alter()
@@ -4852,7 +4956,7 @@ function itg_videogallery_get_play_video_in_video_info($video_data) {
  */
 
 function itg_videogallery_get_video_setting_by_bucket_name($bucket_name) {
-  $query = db_select('node', 'n');
+   $query = db_select('node', 'n');
    $query->join('field_data_field_hls_domain', 'fdfhd', 'fdfhd.entity_id = n.nid');
    $query->join('field_data_field_progressive_domain', 'fdfpd', 'fdfpd.entity_id = n.nid');
    $query->fields('fdfhd', array('field_hls_domain_value'));
@@ -4862,4 +4966,118 @@ function itg_videogallery_get_video_setting_by_bucket_name($bucket_name) {
    $video_data = $query->execute()->fetchAll();
  
   return $video_data;
+}
+
+/**
+ * Function for show related content in block
+ * @return boolean|string
+ */
+function get_header_tab_related_video_block_content() {
+  global $base_url;
+  $arg = arg();
+  if ($arg[1] == null)
+    return false;
+  $related_content = itg_get_related_content($arg[1]);
+
+  if (!empty($related_content)) {
+    if (function_exists('itg_get_related_story_id')) {
+      $related_result = itg_get_related_story_id($related_content);
+    }
+    $related_video .= "<div id='related-video-tab'><ul class='video-list'>";
+    foreach ($related_result as $site_hash_key) {
+      $current_entity_id = $site_hash_key;
+      $related_data = itg_get_related_story_content($current_entity_id);
+      $display_title = get_related_display_title($arg[1], $current_entity_id);
+      if (!empty($display_title)) {
+        $display_title = $display_title;
+      }
+      else {
+        $display_title = $related_data->label;
+      }
+      $related_title = html_entity_decode(htmlentities($display_title)); //mb_strimwidth($display_title, 0, 80, "..");
+      if (empty($related_data->sm_field_custom_story_small_large_url[0])) {
+        $related_image_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+      }
+      else {
+        $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
+      }
+      $related_video_duration = $related_data->sm_field_video_duration[0];
+      $img_alt = strip_tags($related_title);
+      $url = $related_data->url;
+      if (empty($url)) {
+        $url = "/" . drupal_get_path_alias('node/' . $current_entity_id);
+      }
+      $related_image = '<img class="related-default" alt="' . $img_alt . '" src="' . $related_image_url . '">';
+      if (!empty($related_title)) {
+        $related_video .= "<li class='related_content_tabs'><figure><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";
+        $related_video .= "</figure></a><p class='title'>" . l($related_title, $url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
+      }
+    }
+    $related_video .= "</ul></div>";
+    return $related_video;
+  }
+  else {
+    return false;
+  }
+}
+
+/**
+ * Function to show Other video gallery from node primary category
+ * @return array or empty
+ */
+function _get_other_videos_from_primary_category() {
+  if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+    $tid = get_tid_using_nid_custom(arg(1));
+    return views_embed_view('video_list_of_category', 'block_4', $tid);
+  }
+  else {
+    return '';
+  }
+}
+
+/**
+ * Get Primary category Tid using nid without node load
+ * @param int $nid
+ * @return int
+ */
+function get_tid_using_nid_custom($nid) {
+  if (isset($nid)) {
+    $query = db_select('field_data_field_primary_category', 'ttd');
+    $query->fields('ttd', array('field_primary_category_value'));
+    $query->condition('ttd.entity_id', $nid, '=');
+    $result = $query->execute()->fetchField();
+    return $result;
+  }
+  return 0;
+}
+
+/**
+ * function for video assign to widget
+ * @param $nid
+ * @param array $video_widget
+ * @param $cat_id
+ * @param $previous_video_assign
+ */
+function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previous_video_assign) {
+  if (!empty($video_widget) && count($video_widget)) {
+    $result = array();
+    foreach ($video_widget as $widget_name) {
+      if (!empty($widget_name) && $widget_name != '_none') {
+        $result[$widget_name] = $widget_name;
+        $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
+        if (!$is_node_in_widget) {
+          itg_widget_insert_widget_data($nid, $widget_name, 0);
+        }
+      }
+    }
+    itg_widget_delete_old_data_by_limit($widget_name);
+    foreach ($previous_video_assign as $row) {
+      $widget_value = $row['value'];
+      if ($widget_value != $result[$row['value']]) {
+        if (!empty($widget_value)) {
+          itg_widget_delete_data_from_widget($widget_value, $nid);
+        }
+      }
+    }
+  }
 }
