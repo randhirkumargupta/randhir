@@ -10,18 +10,15 @@
  * @return array
  */
 function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
-
   $output_array = array();
   $data_array = array();
   $photo_list_array = array();
   $updated_datetime = "";
-
   $term = taxonomy_term_load($tid);
   $term_name = $term->name;
   if (!$tid) {
     $term_name = "Latest";
   }
-
   // list array building
   $data = generateVideoCategoryList($tid, $pageno);
   if ($data['lcount'] > 0) {
@@ -34,9 +31,7 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
   }
   $datacount = $data['lcount'];
   $data_up_time = $data['updated_datetime'];
-
   //data array building
-
   $data_array['id'] = "$tid";
   $data_array['title'] = "$term_name";
   $data_array['layout_id'] = "0";
@@ -92,13 +87,10 @@ function generateVideoCategoryList($tid, $pageno) {
         $tid_list[] = $value->tid;
       }
     }
-
     // code vid=14  end
     // select node belong from current term id or child term id
-
     // filter user data list
     $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350, 1148, 2573);
-
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
@@ -146,9 +138,7 @@ function generateVideoCategoryList($tid, $pageno) {
     $query->fields('fvu', array('field_video_upload_value'));
     $query->fields('fpc', array('field_primary_category_value'));
     $query->fields('ffd', array('field_story_expert_description_value'));
-
     //end
-
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
@@ -156,9 +146,7 @@ function generateVideoCategoryList($tid, $pageno) {
     $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     foreach ($result as $reskey => $resvalue) {
-
       // node feed tag
       $title = $resvalue['title'];
       $type = $resvalue['type'];
@@ -254,14 +242,9 @@ function generateVideoCategoryList($tid, $pageno) {
       $listcount++;
     }
   }
-
-
-
   $data['lcount'] = $listcount;
   $data['data'] = $photo_list_array;
   $data['updated_datetime'] = $changed_datetime;
-
-
   return $data;
 }
 
@@ -271,7 +254,6 @@ function generateVideoCategoryList($tid, $pageno) {
  * @return string $qry
  */
 function fid_videoid($video_fid) {
-
   $qry = db_select('dailymotion_response_details', 'dr')->fields('dr', array('video_id'))->condition('dr.fid', $video_fid)->execute()->fetchField();
   return $qry;
 }
@@ -282,10 +264,7 @@ function fid_videoid($video_fid) {
  * @return array
  */
 function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
-
-
   // variable decalartion
-
   $output_array = array();
   $data_array = array();
   $photo_list_array = array();
@@ -311,7 +290,6 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
   $data_up_time = $data['updated_datetime'];
 
   //data array building
-
   $data_array['id'] = "$tid";
   $data_array['title'] = "$term_name";
   $data_array['layout_id'] = "0";
@@ -372,9 +350,7 @@ function generateProgramCategoryList($tid, $pageno) {
         $tid_list[] = $value->tid;
       }
     }
-
     // select node belong from current term id or child term id
-
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
@@ -432,10 +408,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $reskey => $resvalue) {
-
       // node feed tag
-
-
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
@@ -530,14 +503,9 @@ function generateProgramCategoryList($tid, $pageno) {
       $listcount++;
     }
   }
-
-
-
   $data['lcount'] = $listcount;
   $data['data'] = $photo_list_array;
   $data['updated_datetime'] = $changed_datetime;
-
-
   return $data;
 }
 
@@ -547,10 +515,7 @@ function generateProgramCategoryList($tid, $pageno) {
  * @return array
  */
 function programCategoryListlPageRerourceValue($token) {
-
-
   // variable decalartion
-
   $output_array = array();
   $data_array = array();
   $program_list_array = array();
@@ -631,7 +596,6 @@ function generateProgramSectionList($Program_section_list) {
  */
 
 function getLatestNodeTime($tid) {
-
   $query = db_select('taxonomy_index', 'txi');
   $query->fields('txi', array('created'));
   $query->condition('txi.tid', $tid);

@@ -10,7 +10,6 @@
  * @return array
  */
 function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
-
   // variable decalartion
   $output_array = array();
   $data_array = array();
@@ -139,10 +138,7 @@ function generateNewsCategoryList($tid, $pageno) {
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('fpc', array('field_primary_category_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-
-
     //end
-
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
@@ -172,8 +168,6 @@ function generateNewsCategoryList($tid, $pageno) {
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
       $file_ext_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
-
-
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -212,11 +206,8 @@ function generateNewsCategoryList($tid, $pageno) {
       $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
       if ($type == "photogallery") {
         $node_data = node_load($nid);
-
         $img_data = $node_data->field_gallery_image['und'][0];
         $fc = field_collection_field_get_entity($img_data);
-
-        //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
         $fid = $fc->field_api_image['und'][0]['fid'];
         $uri = $fc->field_images['und'][0]['uri'];
         $source_data = $node_data->field_story_source_type['und'][0]['value'];
@@ -271,7 +262,6 @@ function generateNewsCategoryList($tid, $pageno) {
       $listcount++;
     }
   }
-
   $data['lcount'] = $listcount;
   $data['data'] = $news_list_array;
   $data['updated_datetime'] = $changed_datetime;
@@ -291,10 +281,7 @@ function getPhotolist($nid) {
   $galleryimg = $node->field_gallery_image['und'];
   $lcont = 0;
   foreach ($galleryimg as $key => $value) {
-
-
     $fc = field_collection_field_get_entity($value);
-    //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
     $fid = $fc->field_image_id['und'][0]['value'];
     if (!$fid > 0) {
       $fid = $fc->field_images['und'][0]['fid'];
@@ -331,10 +318,7 @@ function getPhotolist($nid) {
 function getVideolist($nid) {
   // variable declaration
   $videolist = array();
-
   // select node belong from current nid
-
-
   $query = db_select('node', 'n');
   //join  for field value
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -380,8 +364,6 @@ function getVideolist($nid) {
   foreach ($result as $reskey => $resvalue) {
 
     // node feed tag
-
-
     $title = $resvalue['title'];
     $type = $resvalue['type'];
     $nid = $resvalue['nid'];
@@ -493,7 +475,6 @@ function getNodeShareCount($nid) {
  * @return an Associated array with count all these values.
  */
 function analytics_node_data($nid, $total) {
-
   if (function_exists('mongodb')) {
     $con = mongodb();
     $analytics_data_array = array();
@@ -567,7 +548,6 @@ function analytics_node_data($nid, $total) {
       $analytics_data_array['data_count_node_share'] = $data_count_node_share_number;
       //END
     }
-
     if ($total == 'total') {
       // return the total count
       // Caculate sum of all data.
@@ -580,7 +560,6 @@ function analytics_node_data($nid, $total) {
       
     }
     else {
-      
       return $analytics_data_array;
     }
   }
@@ -588,32 +567,25 @@ function analytics_node_data($nid, $total) {
 
 /**
  * Get photo story list on
- *
  * @param type $nid
- *
  * @return type
  */
 function getPhotostorylist($nid) {
   $photolist = array();
   $photolist_loop = array();
   $node = node_load($nid);
-
   $galleryimg = $node->field_photo_story['und'];
   $lcont = 0;
   foreach ($galleryimg as $key => $value) {
-
     $fc = field_collection_field_get_entity($value);
     $fid = $fc->field_photo_story_image['und'][0]['fid'];
-
     $uri = $fc->field_photo_story_image['und'][0]['filename'];
     $file_uri = file_create_url($uri);
     $fid_file = $fid;
     $img_url = completeFilePath($fid_file);
     $photo_tags = getPhotostoryPhotodetail($fid);
-
     $caption = $photo_tags[0]['image_caption'];
     $byline = $photo_tags[0]['image_photo_grapher'];
-
     $photolist_loop[$lcont]['np_id'] = "$fid";
     $photolist_loop[$lcont]['np_image'] = "$img_url";
     $photolist_loop[$lcont]['np_credit'] = "$byline";
@@ -645,7 +617,6 @@ function getPhotostoryPhotodetail($fid) {
  * @return $type
  */
 function customNodeCountChildNews($tid, $type, $child_count = TRUE) {
-
   $tids = array($tid);
   if ($child_count) {
     $tids = array_merge($tids, term_get_children_ids($tid));

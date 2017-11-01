@@ -38,7 +38,6 @@ function homePageJson() {
   $data['data'][4] = $data_news_world;
   $data['data'][5] = $data_magazine;
   $data['data'][6] = $data_poll;
-
   return $data;
 }
 
@@ -48,7 +47,6 @@ function homePageJson() {
  * @return array
  */
 function homePageJsonPackagelist() {
-
   global $base_url;
   $data_news = array();
   $data_newslist = array();
@@ -91,20 +89,14 @@ function homePageJsonPackagelist() {
         $tid_list[] = $value->tid;
       }
     }
-
     // code vid=14  end
-
     $data_news['id'] = "1";
     $data_news['order'] = "1";
     $data_news['type'] = "packagelist";
     $data_news['title'] = "Lifestyle";
     $data_news['label'] = "Lifestyle";
     $data_news['show_label'] = "0";
-
-
-
     // select node belong from current term id or child term id
-
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
@@ -137,22 +129,15 @@ function homePageJsonPackagelist() {
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-
-
     //end
-
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     foreach ($result as $reskey => $resvalue) {
-
       // node feed tag
-
-
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
@@ -214,9 +199,7 @@ function homePageJsonPackagelist() {
       $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
       $data_newslist[$listcount]['n_image_credit'] = "$byline";
       $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
       // photo list array
-
       if ($type == "photogallery") {
         $photolist = getPhotolist($nid);
       }
@@ -247,9 +230,7 @@ function homePageJsonPackagelist() {
       $listcount++;
     }
   }
-
   $data_news['news'] = $data_newslist;
-
   return $data_news;
 }
 
@@ -306,12 +287,9 @@ function homePageJsonTopstories() {
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
   $query->fields('ti', array('tid'));
-
-
   //end
   $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
   $data_topstories['id'] = "2";
   $data_topstories['order'] = "2";
   $data_topstories['type'] = "newslist";
@@ -357,10 +335,6 @@ function homePageJsonTopstories() {
     }
     //json tag writing
     if ($type == "story") {
-      // news list
-      //      $n_photo = getPhotolist($nid);
-      //      $n_video = getVideolist($nid);
-      //      $n_polls = getPolllist($node);
       $n_rating = getRating($node);
       $n_magazine = array();
 
@@ -450,19 +424,14 @@ function homePageJsonNewslist_india() {
         $tid_list[] = $value->tid;
       }
     }
-
     // code vid=14  end
-
     $data_news['id'] = "3";
     $data_news['order'] = "3";
     $data_news['type'] = "newslist";
     $data_news['title'] = "India";
     $data_news['label'] = "India";
     $data_news['show_label'] = "0";
-
-
     // select node belong from current term id or child term id
-
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
@@ -495,22 +464,14 @@ function homePageJsonNewslist_india() {
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-
-
     //end
-
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     foreach ($result as $reskey => $resvalue) {
-
       // node feed tag
-
-
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
@@ -546,7 +507,6 @@ function homePageJsonNewslist_india() {
       else {
         $changed_datetime = "";
       }
-
       // custom function for get img caption
       $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
       // custom function for get img byline
@@ -572,18 +532,14 @@ function homePageJsonNewslist_india() {
       $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
       $data_newslist[$listcount]['n_image_credit'] = "$byline";
       $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
       // photo list array
-
       if ($type == "photogallery") {
         $photolist = getPhotolist($nid);
       }
       $data_newslist[$listcount]['n_photo'] = $photolist;
       // re-insalize photolist
       $photolist = array();
-
       // video list array
-
       if ($type == "videogallery") {
         $videolist = getVideolist($nid);
       }
@@ -661,19 +617,14 @@ function homePageJsonNewslist_world() {
         $tid_list[] = $value->tid;
       }
     }
-
     // code vid=14  end
-
     $data_news['id'] = "5";
     $data_news['order'] = "5";
     $data_news['type'] = "newslist";
     $data_news['title'] = "World";
     $data_news['label'] = "World";
     $data_news['show_label'] = "0";
-
-
     // select node belong from current term id or child term id
-
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
@@ -706,22 +657,14 @@ function homePageJsonNewslist_world() {
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-
-
     //end
-
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     foreach ($result as $reskey => $resvalue) {
-
       // node feed tag
-
-
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
@@ -937,12 +880,7 @@ function getMagazineList() {
     $issue[$loop_count]['story'] = $story;
     $loop_count++;
   }
-
-
   $magazine['issue'] = $issue;
-
-  
-
   return $magazine;
 }
 
@@ -953,11 +891,9 @@ function getMagazineList() {
  */
 function getMagazineStory($issue_date) {
   $story = array();
-
   // select issue stories
   $range_min = 0;
   $range_max = 5;
-
   $query = db_select('node', 'n');
   //join  for field value
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -1075,9 +1011,6 @@ function getMagazineStory($issue_date) {
     $story[$loop_count]['s_pcategory_title'] = "$term_name";
     $loop_count++;
   }
-
-
-
   return $story;
 }
 
@@ -1140,7 +1073,7 @@ function homePageJsonPoll() {
   $n_polls = array();
   $n_rating = array();
   $n_magazine = array();
-
+  // This API is static in nature because it dependent of Middleware and will be dynamic once middleware introduce.
   // homepage.inc
   //$n_magazine = getMagazineList();
   // $n_polls_data = polls_open_list(0);
@@ -1260,19 +1193,14 @@ function homePageJsonNewslist_lifestyle() {
         $tid_list[] = $value->tid;
       }
     }
-
     // code vid=14  end
-
     $data_news['id'] = "4";
     $data_news['order'] = "4";
     $data_news['type'] = "newslist";
     $data_news['title'] = "Lifestyle";
     $data_news['label'] = "Lifestyle";
     $data_news['show_label'] = "0";
-
-
     // select node belong from current term id or child term id
-
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
@@ -1297,18 +1225,13 @@ function homePageJsonNewslist_lifestyle() {
     $query->fields('mi_file', array('uri'));
     $query->fields('si_file', array('uri'));
     $query->fields('esi_file', array('uri'));
-
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
-
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-
-
     //end
-
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
@@ -1317,10 +1240,7 @@ function homePageJsonNewslist_lifestyle() {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $reskey => $resvalue) {
-
       // node feed tag
-
-
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
@@ -1338,7 +1258,6 @@ function homePageJsonNewslist_lifestyle() {
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
       $comment_cont = getCommentsCount($nid);
-
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
 
@@ -1391,9 +1310,7 @@ function homePageJsonNewslist_lifestyle() {
       $data_newslist[$listcount]['n_photo'] = $photolist;
       // re-insalize photolist
       $photolist = array();
-
       // video list array
-
       if ($type == "videogallery") {
         $videolist = getVideolist($nid);
       }
@@ -1411,13 +1328,10 @@ function homePageJsonNewslist_lifestyle() {
       $data_newslist[$listcount]['n_polls'] = $n_polls;
       $data_newslist[$listcount]['n_rating'] = $n_rating;
       $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-
       $listcount++;
     }
   }
-
   $data_news['news'] = $data_newslist;
-
   return $data_news;
 }
 

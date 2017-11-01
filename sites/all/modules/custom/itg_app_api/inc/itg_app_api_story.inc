@@ -10,12 +10,9 @@
  */
 function StoryDetailPageRerourceValue($id) {
   // variable decalartion
-
   $output_array = array();
   $data_array = array();
   $photo_list_array = array();
-
-
   // list array building
   $data = generateStoryDeatilList($id);
   if (!empty($data['data']['title'])) {
@@ -26,9 +23,7 @@ function StoryDetailPageRerourceValue($id) {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
-
   $output_array['data'] = $data['data'];
-
   return $output_array;
 }
 
