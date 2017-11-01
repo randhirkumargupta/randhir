@@ -66,6 +66,16 @@ function getindiatoday_yahoo_client_array() {
   return $yahoo_story;
 }
 
+function getindiatoday_yahoo_client_sections() {
+  $video = array(
+    'top' => 'top-indiatoday-20170407.xml',
+    '1206533' => 'movies.xml',
+    '1206689' => 'auto.xml',
+    '1206567' => 'lifestyle.xml'
+  );
+  return $video;
+}
+
 function getmsn_story_section_array() {
   $msn_story = array(
     '1206589' => 'msn/indiatoday/story-travel.xml',

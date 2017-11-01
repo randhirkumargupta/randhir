@@ -227,6 +227,18 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_micromax_videsectionlist_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['indiatoday/yahoo/static/section'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_static_section_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/yahoo/static/mailtoday'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_static_mailtoday_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
