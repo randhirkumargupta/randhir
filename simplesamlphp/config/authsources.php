@@ -76,10 +76,10 @@ $config = array(
 
  // the URL of the Drupal logout page
 
- 'drupal_logout_url' => 'http://prod-sso.indiatodayonline.in/user/logout',
+ 'drupal_logout_url' => 'http://uat-sso.indiatodayonline.in/user/logout',
 
  // the URL of the Drupal login page
- 'drupal_login_url' => 'http://prod-sso.indiatodayonline.in/user',
+ 'drupal_login_url' => 'http://uat-sso.indiatodayonline.in/user',
 
  // Which attributes should be retrieved from the Drupal site.
 
@@ -225,9 +225,9 @@ $config = array(
         'authfacebook:Facebook',
         // Register your Facebook application on http://www.facebook.com/developers
         // App ID or API key (requests with App ID should be faster; https://github.com/facebook/php-sdk/issues/214)
-        'api_key' => '818014665028782',
+        'api_key' => '265688930492076',
         // App Secret
-        'secret' => 'ffd844186f58362fb53ccf4fbb46221d',
+        'secret' => '6ae376197bd3fdd68a135890b79ff608',
         // which additional data permissions to request from user
         // see http://developers.facebook.com/docs/authentication/permissions/ for the full list
         'req_perms' => 'email,user_birthday,public_profile',
@@ -252,8 +252,8 @@ $config = array(
     //  http://twitter.com/oauth_clients
     'twitter' => array(
         'authtwitter:Twitter',
-        'key' => 'TNq0xMrcHjANFPap1bMymAPai',
-        'secret' => 'o6tK6hxXAHkNXlgSEx6vxgT3pWstcKrgzIskf5SZhlIB7wAWFf',
+        'key' => 'zSOZD3vMS0JGOvQs2e7zcS5Y0',
+        'secret' => 'P3978MuHRkGWYIPXAToj3WpkAY0ICByDskZIZkgCt3GV8GR6aP',
         // Forces the user to enter their credentials to ensure the correct users account is authorized.
         // Details: https://dev.twitter.com/docs/api/1/get/oauth/authenticate
         'force_login' => FALSE,
