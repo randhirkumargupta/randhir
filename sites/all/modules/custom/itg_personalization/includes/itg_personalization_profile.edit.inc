@@ -230,11 +230,12 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   ),
   );
   
-  if($form_state['values']['user_state'] != '_none') {
+  /*if($form_state['values']['user_state'] != '_none') {
     $city = get_city_by_state($form_state['values']['user_state']);
   } else {
     $city = get_city_by_state($user_detail->field_personalization_state['und'][0]['tid']);
-  }
+  }*/
+  $city = get_city_by_state();
   $default_city = '';
   if (!empty($user_detail->field_personalization_city['und'][0]['tid'])) {
     $default_city = $user_detail->field_personalization_city['und'][0]['tid'];
@@ -243,8 +244,8 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   }
   $form['user_city'] = array(
     '#type' => 'select',
-    '#prefix' => '<div id="city-wrapper">',
-    '#suffix' => '</div>',
+    //'#prefix' => '<div id="city-wrapper">',
+    //'#suffix' => '</div>',
     '#default_value' => $default_city, 
     '#title' => t('City'),
     '#options' => $city,
