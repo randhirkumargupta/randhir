@@ -97,10 +97,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               'external' => TRUE,
                               'attributes' => array(
                                 'data-anchor' => $widget_data[$blockid]['cat_id'],
-                                'class' => 'active',
-                                'onclick' => 'ga("send", "event", "'.trim(str_replace(" ", "", $widget_data[$blockid]['block_title'])).'Tab", "click","1", 1, {"nonInteraction": 1});return true;'
+                                'class' => 'active'
                               ),
-                             )
+                                    )
                             );
                             ?>
 
