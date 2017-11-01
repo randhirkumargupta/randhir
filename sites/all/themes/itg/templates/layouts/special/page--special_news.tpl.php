@@ -346,7 +346,8 @@ if ($theme != 'itgadmin') {
         <h3><span>Latest Photo Galleries</span></h3>
         <ul class="photo-list">
 		<?php
-			$gallery_items = itg_common_get_content_by_section('1208521', 'photogallery');
+		    $photo_sectionid = variable_get('tid_photogallery', 1208521);
+			$gallery_items = itg_common_get_content_by_section($photo_sectionid, 'photogallery');
 			foreach($gallery_items as $item_key => $item_val){
 				if ((!empty($item_val['uri']) && isset($item_val['uri']))) {
 					$image = theme('image_style',array('path' => $item_val['uri'], 'style_name' => 'video_landing_page_170_x_127'));
@@ -376,7 +377,8 @@ if ($theme != 'itgadmin') {
 		<h3><span>Latest Video Galleries</span></h3>
         <ul class="photo-list">
 		<?php
-			$gallery_items = itg_common_get_content_by_section('1206552', 'videogallery');
+		    $video_sectionid = variable_get('tid_videos', 1206552);
+			$gallery_items = itg_common_get_content_by_section($video_sectionid, 'videogallery');
 			foreach($gallery_items as $item_key => $item_val){
 				if ((!empty($item_val['uri']) && isset($item_val['uri']))) {
 					$image = theme('image_style',array('path' => $item_val['uri'], 'style_name' => 'video_landing_page_170_x_127'));
