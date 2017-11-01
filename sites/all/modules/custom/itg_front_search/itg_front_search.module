@@ -55,7 +55,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       $hash = itg_apache_solr_get_site_hash();
     }
     
-    $form['tm_vid_14_names']['#maxlength'] = '255';
+    $form['tm_vid_14_names']['#maxlength'] = '1024';
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
