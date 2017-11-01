@@ -20,7 +20,11 @@ function itg_indiatoday_yahoo_static_section_syndication() {
 }
 
 function itg_indiatoday_yahoo_static_mailtoday_syndication() {
-  itg_genrate_indiatoday_yahoo_static_mailtoday_syndication(1206572);  
+  itg_genrate_indiatoday_yahoo_static_mailtoday_syndication(1206572);    
+}
+
+function itg_indiatoday_yahoo_static_latest_stories_syndication() {
+  itg_genrate_indiatoday_yahoo_static_latest_stories_syndication();    
 }
 
 /**
@@ -256,6 +260,81 @@ function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $sec
       $xml .= '<pubDate>' . $publish_date . '></pubDate>';
       $xml .= '<guid>' . $guid . '</guid>';
       $xml .= '<description><![CDATA[' . $body . ']]></description>';
+      $xml .= '<category>' . $section_name . '></category>';
+      $xml .= '<keywords><![CDATA[' . $keywords . ']]></keywords>';
+      $xml .= '</item>';
+    }
+    $xml .= '</channel>';
+    $xml .= '</rss>';
+  }
+  return $xml;  
+}
+
+function itg_genrate_indiatoday_yahoo_static_latest_stories_syndication(){
+    $type = array('story');
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+    
+    $query->fields('n', array('nid', 'title', 'created'));
+    $query->fields('dbody', array('body_value'));
+    $query->fields('npd', array('field_itg_content_publish_date_value'));
+    $query->fields('pc', array('field_primary_category_value'));
+    $query->fields('synopsis', array('field_story_kicker_text_value'));
+    
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    $query->condition('n.status', 1);
+    $query->condition('n.type', $type, 'IN');
+    $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid')->range(0, 25);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $xml = genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result);
+    $xml_path = 'public://indiatoday/yahoo/';
+    $file_path = $xml_path . 'latest-stories.xml';
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+}
+
+function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result){
+   if (!empty($result)) {
+    global $base_url;
+    $last_node = end($result);
+    $last_node_url = $base_url . "/" . drupal_get_path_alias('node/' . $last_node['nid']);
+    $last_pub_date = date("F d, Y H:i:s P", strtotime($last_node['field_itg_content_publish_date_value']));
+    $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
+    $xml .= '<channel>';
+    $xml .= '<title><![CDATA[ INDIA TODAY ]]></title>';
+    $xml .= '<description><![CDATA[ INDIA TODAY ]]></description>';
+    $xml .= '<link><![CDATA[ '.$base_url.' ]]></link>';
+    $xml .= '<pubDate>'.$last_pub_date.'</pubDate>';
+    $xml .= '<image>';
+    $xml .= '<title><![CDATA[ INDIA TODAY ]]></title>';
+    $xml .= '<link><![CDATA[ '.$last_node_url.' ]]></link>';
+    $xml .= '<url><![CDATA[ '.$base_url.' ]]></url>';
+    $xml .= '</image>';
+    $xml .= '<language>en</language>';
+    foreach ($result as $key => $value) {
+      $guid = genrate_uniqui_guid();
+      $publish_date = date("Ymd\THis", strtotime($value['field_itg_content_publish_date_value']));
+      $body = remove_extra_tag_in_body($value["body_value"]);
+      $section_name = get_term_name_by_tid($value['field_primary_category_value']);
+      $metatags = get_node_metatags_by_nid($value['nid']);
+      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $keywords = '';
+      if ($metatags) {
+        $keywords = $metatags['keywords']['value'];
+      }
+      $xml .= '<item>';
+      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
+      $xml .= '<link><![CDATA[ '.$url.' ]]></link>';
+      $xml .= '<pubDate>' . $publish_date . '></pubDate>';
+      $xml .= '<guid>' . $url . '</guid>';
+      $xml .= '<description><![CDATA[' . $value['field_story_kicker_text_value'] . ']]></description>';
+      $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';
       $xml .= '<category>' . $section_name . '></category>';
       $xml .= '<keywords><![CDATA[' . $keywords . ']]></keywords>';
       $xml .= '</item>';

@@ -239,6 +239,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_indiatoday_yahoo.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['indiatoday/yahoo/static/latest_stories'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_static_latest_stories_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
