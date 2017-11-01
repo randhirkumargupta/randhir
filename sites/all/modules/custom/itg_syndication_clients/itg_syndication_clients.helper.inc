@@ -284,47 +284,54 @@ function get_hltapps_sections($type) {
   }
 }
 
-
-function get_vuclip_sections(){
+function get_vuclip_sections() {
   return array(
-      'videsectionlist_program_sosorry.xml' => array('section' => '1207580', 'limit' => 25),
-      'videsectionlist_program_tothepoint.xml' => array('section' => '1207722', 'limit' => 25),
-      'videsectionlist_program_couching-with-koel.xml' => array('section' => '1207810', 'limit' => 25),
-      'videsectionlist_program_news_today_at_nine.xml' => array('section' => '1207722', 'limit' => 25),
-    );
-}
-
-function get_mauj_sections(){
-  return array(
-        'videsectionlist_world.xml' => array('section' => '1206956', 'limit' => 25),
-        'videsectionlist_movie.xml' => array('section' => '1207303', 'limit' => 25),
-        'videsectionlist_sosorry.xml' => array('section' => '1207580', 'limit' => 25),
-        'videsectionlist_latestvideo.xml' => array('section' => -1, 'limit' => 25)
-    );
-}
-
-function get_samsungtv_it_sections(){
-  return array(
-        'india.xml' => array('section' => 1206955, 'limit' => 25),
-        'world.xml' => array('section' => 1206956, 'limit' => 25),
-        'business.xml' => array('section' => 1206959, 'limit' => 25),
-        'entertainment.xml' => array('section' => 1206952, 'limit' => 25)
-    );
-}
-
-function get_samsungtv_it_live_now_sections(){
-  return array(
-    1206958,1206971,1206967,1206961,1206963,1206965,1206968,1206960
+    'videsectionlist_program_sosorry.xml' => array('section' => '1207580', 'limit' => 25),
+    'videsectionlist_program_tothepoint.xml' => array('section' => '1207722', 'limit' => 25),
+    'videsectionlist_program_couching-with-koel.xml' => array('section' => '1207810', 'limit' => 25),
+    'videsectionlist_program_news_today_at_nine.xml' => array('section' => '1207722', 'limit' => 25),
   );
 }
 
+function get_mauj_sections() {
+  return array(
+    'videsectionlist_world.xml' => array('section' => '1206956', 'limit' => 25),
+    'videsectionlist_movie.xml' => array('section' => '1207303', 'limit' => 25),
+    'videsectionlist_sosorry.xml' => array('section' => '1207580', 'limit' => 25),
+    'videsectionlist_latestvideo.xml' => array('section' => -1, 'limit' => 25)
+  );
+}
 
-function get_elections2017_election_finals_sections(){
+function get_samsungtv_it_sections() {
+  return array(
+    'india.xml' => array('section' => 1206955, 'limit' => 25),
+    'world.xml' => array('section' => 1206956, 'limit' => 25),
+    'business.xml' => array('section' => 1206959, 'limit' => 25),
+    'entertainment.xml' => array('section' => 1206952, 'limit' => 25)
+  );
+}
+
+function get_samsungtv_it_live_now_sections() {
+  return array(
+    1206958, 1206971, 1206967, 1206961, 1206963, 1206965, 1206968, 1206960
+  );
+}
+
+function get_elections2017_election_finals_sections() {
   return array(
     '1208078' => 'UP',
     '1208079' => 'punjab',
     '1208170' => 'Goa',
     '1208181' => 'Manipur',
     '1208183' => 'uttarakhand',
+  );
+}
+
+function get_micromax_videsectionlist_sections() {
+  return array(
+    'videsectionlist_sosorry.json' => array('section' => '1207580', 'limit' => 25),
+    'videsectionlist_lifestyle.json' => array('section' => '1207304', 'limit' => 25),
+    'videsectionlist_cricket.json' => array('section' => '1207443', 'limit' => 25),
+    'videsectionlist_business.json' => array('section' => '1206959', 'limit' => 25)
   );
 }
