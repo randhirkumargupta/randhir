@@ -38,7 +38,7 @@ function itg_access_denied() {
 }
 
 /**
- * Call template file for not found page
+ * Call template file for not found page 
  * 
  * @return array
  */
@@ -46,8 +46,6 @@ function itg_not_found() {
   //$video_id = decryptForEmbed("jthgoy4f1c");
   //p($video_id);
   //var_dump($video_id);
-
-  
   if (function_exists(itg_seo_latest_headlines)) {
     $latest_headlines = itg_seo_latest_headlines();
   }
