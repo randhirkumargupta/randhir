@@ -317,3 +317,14 @@ function get_samsungtv_it_live_now_sections(){
     1206958,1206971,1206967,1206961,1206963,1206965,1206968,1206960
   );
 }
+
+
+function get_elections2017_election_finals_sections(){
+  return array(
+    '1208078' => 'UP',
+    '1208079' => 'punjab',
+    '1208170' => 'Goa',
+    '1208181' => 'Manipur',
+    '1208183' => 'uttarakhand',
+  );
+}

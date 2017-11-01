@@ -215,6 +215,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['xml/election2017/election-finals'] = array(
+    'page callback' => 'itg_rss_elections2017_election_finals_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_elections2017_election_finals_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -481,13 +487,66 @@ function get_byline_name_by_nid($nid = NULL) {
  * @return array
  */
 function get_img_tag_detail($result) {
-  if (empty($result[field_story_medium_image_fid]))
-    return FALSE;
+  if (empty($result[field_story_medium_image_fid])){
+    return empty_get_img_tag_detail();
+  }
 
   $highres = get_image_info_by_fid($result['field_story_medium_image_fid']);
   $lowres = get_image_info_by_fid($result['field_story_small_image_fid']);
   $imgtag = "<bodyimages><image><lowres><![CDATA[" . $lowres['imag_url'] . "]]></lowres><highres><![CDATA[" . $highres['imag_url'] . "]]></highres><caption>" . $highres['caption'] . "</caption></image></bodyimages>";
   return $imgtag;
+}
+
+function get_video_embed_tags($body){
+  if(empty($body)){
+    return emptygetVideoTag();
+  }
+  $doc = new DOMDocument();
+  $doc->loadHTML($body);
+  $xpath = new DOMXPath($doc);
+  // find your image
+  $nodelist = $xpath->query("//iframe");
+  // gets the 1st image
+  $node = $nodelist->item(0);
+  if ($node->attributes->length > 0) {
+    //It has Youtube video
+    $src = 'http:' . $node->attributes->getNamedItem('src')->nodeValue;
+  }
+  elseif ($add_video != '') {
+    //It has uploaded video
+    if (strpos($add_video, "dailymotion_video_dir") > 0) {
+      // It has Daily Motion Video
+      $video_name = substr(strstr($add_video, 'dir/'), 4);
+      $video_node = dailymotion_video_name_to_nid($video_name);
+      $video_field = node_load($video_node);
+      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+      $src = $add_video;
+    }
+    else {
+      //It is Migrated video
+      $video_nid = migrated_video_to_nid($add_video);
+      $video_field = node_load($video_nid);
+      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+      $src = $add_video;
+    }
+  }
+  if ($src) {
+    $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
+  }else{
+    $videotag = emptygetVideoTag();    
+  }
+  return $videotag;
+}
+
+/**
+ * function for generate Empty video xml tag
+ *
+ * @return array
+ */
+function emptygetVideoTag() {
+  $videotag = "";
+  $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+  return $videotag;
 }
 
 /**
@@ -636,9 +695,24 @@ function related_content_node_type($node_list = "", $type) {
     $count++;
   }
   $type_ar['nid'] = $related_ar;
-  $type_ar['related_story_xml'] = $related_story_xml;
-  $type_ar['related_video_xml'] = $related_video_xml;
-  $type_ar['related_photo_xml'] = $related_photo_xml;
+  if(empty($related_story_xml)){
+    $type_ar['related_story_xml'] = get_empty_related_story_tag();
+  }else{
+    $type_ar['related_story_xml'] = $related_story_xml;
+  }
+  
+  if(empty($related_photo_xml)){
+    $type_ar['related_photo_xml'] = get_empty_related_photo_tag();
+  }else{
+    $type_ar['related_photo_xml'] = $related_photo_xml;
+  }
+  
+  if(empty($related_video_xml)){
+    $type_ar['related_video_xml'] = get_empty_related_video_tag();
+  }else{
+    $type_ar['related_video_xml'] = $related_video_xml;
+  }
+  
   return $type_ar;
 }
 
