@@ -57,7 +57,6 @@ function homePageFeed() {
  */
 function bigStoryWidgetData() {
   global $home_list_count;
-
   $output = "";
   $big_story_block_data = array();
   $widget_name = "big_story_format_widget";
@@ -100,9 +99,7 @@ function bigStoryWidgetData() {
  * @return string $output
  */
 function homePageFeaturesWidgetData() {
-
   global $home_list_count;
-
   $output = "";
   $widget_name = "home_page_feature_widget";
   $range_max = 10 - $home_list_count;

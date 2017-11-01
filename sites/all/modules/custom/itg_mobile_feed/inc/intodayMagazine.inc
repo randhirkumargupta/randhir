@@ -72,11 +72,7 @@ function generateIntodayMagazinePage($tid) {
   $order_by = 'ASC';
   $type = "story"; {
     $listcount = 0;
-
-
-
     $query = db_select('taxonomy_index', 'ti');
-
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -102,24 +98,17 @@ function generateIntodayMagazinePage($tid) {
     $query->fields('mi_file', array('uri'));
     $query->fields('si_file', array('uri'));
     $query->fields('esi_file', array('uri'));
-
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
-
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
-
-
     $query->condition('n.status', 1)->condition('n.type', $type)->groupBy('n.nid')->orderBy('n.created', 'DESC')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     foreach ($result as $reskey => $resvalue) {
-
       $listcount++;
       $title = isset($resvalue['title']) ? $resvalue['title'] : '';
-
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
       $node_load = node_load($resvalue['nid']);
@@ -130,9 +119,7 @@ function generateIntodayMagazinePage($tid) {
       $loop_file_name = "fromindiatodaymagazine" . $nid . ".xml";
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-
       $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
-
       $create_date = date("F d, Y", $created);
       $create_datetime = date(DATE_ATOM, $created);
       $output .= "<article><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><kickerimage><![CDATA[" . $file_medium_img_url . "]]></kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
@@ -141,7 +128,6 @@ function generateIntodayMagazinePage($tid) {
   }
   $data['lcount'] = $listcount;
   $data['data'] = $output;
-
   return $data;
 }
 

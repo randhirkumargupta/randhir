@@ -53,7 +53,6 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     $output = "Nid is missing";
   }
   else {
-
     //check into redis
     $redis_key = "itgd_photo" . $nid;
     $result_get = getRedis($redis_key);

@@ -27,51 +27,42 @@ function itg_mobile_feed_menu() {
     'file' => 'inc/storySectionPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-
-
   $items['photo-section-page-feed'] = array(
     'page callback' => 'photoSectionPageFeed',
     'access arguments' => array('access content'),
     'file' => 'inc/photoSectionPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-
   $items['video-section-page-feed'] = array(
     'page callback' => 'videoSectionPageFeed',
     'access arguments' => array('access content'),
     'file' => 'inc/videoSectionPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-
   $items['story-category-page-feed'] = array(
     'page callback' => 'storyCategoryPageFeed',
     'access arguments' => array('access content'),
     'file' => 'inc/storyCategoryPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-
   $items['photo-category-page-feed'] = array(
     'page callback' => 'photocategoryPageFeed',
     'access arguments' => array('access content'),
     'file' => 'inc/photocategoryPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-
   $items['video-category-page-feed'] = array(
     'page callback' => 'videoCategoryPageFeed',
     'access arguments' => array('access content'),
     'file' => 'inc/videoCategoryPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-
-
   $items['story-detail-page-feed'] = array(
     'page callback' => 'storyDetailPageFeed',
     'access arguments' => array('access content'),
     'file' => 'inc/storyDetailPageFeed.inc',
     'type' => MENU_CALLBACK,
   );
-
   $items['photo-detail-page-feed'] = array(
     'page callback' => 'photoDetailPageFeed',
     'access arguments' => array('access content'),
@@ -141,7 +132,6 @@ function itg_mobile_feed_menu() {
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
-
   $items['admin/api-configuration/feed-api/tid-config'] = array(
     'title' => 'Feed Taxonomy Configuration',
     'description' => 'Static Tid Configuration for XML Feeds',
@@ -150,7 +140,6 @@ function itg_mobile_feed_menu() {
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
-
   $items['admin/api-configuration/feed-api/redis-config'] = array(
     'title' => 'Redis Server Configuration',
     'description' => 'Redis Server Configuration',
@@ -159,7 +148,6 @@ function itg_mobile_feed_menu() {
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
-
   return $items;
 }
 
@@ -168,28 +156,24 @@ function itg_mobile_feed_menu() {
  */
 function redis_server_config() {
   $form = array();
-
   $form['redis_server_host'] = array(
     '#type' => 'textfield',
     '#title' => t('Redis Server Hostname'),
     '#default_value' => variable_get('redis_server_host'),
     '#description' => t('Enter Redis Server Hostname'),
   );
-
   $form['redis_server_port'] = array(
     '#type' => 'textfield',
     '#title' => t('Redis Server Port No'),
     '#default_value' => variable_get('redis_server_port'),
     '#description' => t('Enter Redis Server Port Number'),
   );
-
   $form['redis_server_timeout'] = array(
     '#type' => 'textfield',
     '#title' => t('Redis Server timeout Time'),
     '#default_value' => variable_get('redis_server_timeout'),
     '#description' => t('Enter Redis Server timeout in second'),
   );
-
   return system_settings_form($form);
 }
 
@@ -198,51 +182,44 @@ function redis_server_config() {
  */
 function feed_tid_config() {
   $form = array();
-
   $form['photo_sec_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's of Photo Section"),
     '#default_value' => variable_get('photo_sec_tid'),
     '#description' => t("Enter Photo Section Term Id With Comma Seperated"),
   );
-
   $form['video_sec_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's of Video Section"),
     '#default_value' => variable_get('video_sec_tid'),
     '#description' => t("Enter Video Section Term Id With Comma Seperated"),
   );
-
   $form['program_sec_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's of Program Section"),
     '#default_value' => variable_get('program_sec_tid'),
     '#description' => t("Enter Program Section Term Id With Comma Seperated"),
   );
-
   $form['left_main_tid'] = array(
     '#type' => 'textarea',
     '#title' => t("Term Id's Left Main Section"),
     '#default_value' => variable_get('left_main_tid'),
     '#description' => t("Enter Left Main Section Term Id With Comma Seperated"),
   );
-
   $form['itg_feed_magazine_tid'] = array(
     '#type' => 'textfield',
     '#title' => t('Magazine Term id'),
     '#default_value' => variable_get('itg_feed_magazine_tid'),
     '#description' => t("Enter Magazine Term id"),
   );
-
   return system_settings_form($form);
 }
 
 /*
- * creage form for redis cache delete by admin
+ * create form for redis cache delete by admin
  */
 function redis_cache_manager() {
   $form = array();
-
   $form['redis_cache'] = array(
     '#type' => 'textfield',
     '#title' => t('Remove Redis Cache Key'),
@@ -254,7 +231,6 @@ function redis_cache_manager() {
     '#type' => 'submit',
     '#value' => t('Delete'),
   );
-
   return $form;
 }
 
@@ -305,13 +281,11 @@ function getMobileFeedXmlHeader() {
 function getMobileFeedXmlFooter() {
   $output = "";
   $output = "</Root>";
-
   return $output;
 }
 
 /**
  *  function for return xml feed file header only for program section
- *
  * @return string
  */
 function program_section_page_feed_header() {
@@ -322,14 +296,11 @@ function program_section_page_feed_header() {
 
 /**
  *  function for return xml feed file footer only for program section
- *
  * @return string
- *
  */
 function program_section_page_feed_footer() {
   $output = "";
   $output = "</root>";
-
   return $output;
 }
 
@@ -339,7 +310,6 @@ function program_section_page_feed_footer() {
  * @return array
  */
 function relatedContentNodeType($node_list = "", $type) {
-
   $file_name = "";
   $term_feed_path = "";
   $type_ar = array('photos' => 'NO', 'videos' => 'NO', 'stories' => 'NO');
@@ -566,7 +536,6 @@ function term_get_children_ids($tid) {
  * @return string $final_url
  */
 function nodeCategoryFrontUrl($tid, $type) {
-
   $final_url = "";
   if ($type == 'term') {
     $source = "taxonomy/term/" . $tid;
@@ -581,7 +550,6 @@ function nodeCategoryFrontUrl($tid, $type) {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $final_url = $result[0]['alias'];
   if ($result[0]['alias'] == "") {
-
     $query = db_select('itg_sef_url', 'isu');
     $query->fields('isu', array('sef_url'));
     $query->condition('isu.tid', $tid);
@@ -658,14 +626,10 @@ function getNodeFeedTag($tid, $type, $count) {
   foreach ($term_list as $key => $value) {
     $tid_list[] = $value->tid;
   }
-
-
   $output = "";
-
   $range_max = $count;
   $range_min = 0;
   $order_by = 'ASC';
-
   $query = db_select('taxonomy_index', 'ti');
   $query->leftJoin('node', 'n', 'n.nid=ti.nid');
   //join  for field value
@@ -698,14 +662,11 @@ function getNodeFeedTag($tid, $type, $count) {
   $query->fields('kt', array('field_story_kicker_text_value'));
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
-
-
   //end
   $query->condition('ti.tid', $tid)->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
 
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
-
     // varibale for feed tag
     $title = $resvalue['title'];
     $type = $resvalue['type'];
@@ -808,7 +769,6 @@ function getBodyDataForAndroid($str) {
   //remove iframe..
   $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
   $mob_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
-
   return $mob_str;
 }
 
@@ -938,20 +898,14 @@ function emptygetRelatedNodeXmlTag() {
   $title = '';
   $url = '';
   $img_url = '';
-
   $story_tag .= "<story><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></story>";
-
   $photo_tag .= "<photo><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></photo>";
-
   $video_tag .= "<video><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></video>";
   $output .= "<related>";
-
   $output .= "<stories>" . $story_tag . "</stories>";
-
   $output .= "<photos>" . $photo_tag . "</photos>";
   $output .= "<videos>" . $video_tag . "</videos>";
   $output .= "</related>";
-
   return $output;
 }
 
@@ -973,7 +927,6 @@ function redis_cache_pattern_manager() {
     '#type' => 'submit',
     '#value' => t('Delete'),
   );
-
   return $form;
 }
 
@@ -981,7 +934,6 @@ function redis_cache_pattern_manager() {
  * redis cache apttern form submit
  */
 function redis_cache_pattern_manager_submit($form, &$form_state) {
-
   $key_patt = $form_state['values']['redis_cache_pattern'];
   $responce = redis_key_pattern_delete($key_patt);
   if ($responce == '0' || $responce == 0) {

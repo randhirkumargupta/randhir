@@ -16,8 +16,6 @@ function storyDetailPageFeed() {
   else {
     $output = generateStoryDetailPageFeed(arg(1));
   }
-
-
   echo $output;
   die();
 }
@@ -29,7 +27,6 @@ function storyDetailPageFeed() {
  * @return string $return_flag
  */
 function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
-
   $imgtag = "";
   if (!$file_name) {
     $file_name = "story" . $nid . ".xml";

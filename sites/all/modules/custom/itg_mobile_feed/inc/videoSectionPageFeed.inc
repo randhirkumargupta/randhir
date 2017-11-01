@@ -38,9 +38,7 @@ function videoSectionPageFeed() {
     foreach ($section_list as $key => $value) {
       $node_count = customNodeCount('videogallery', $value);
       $term_status = itg_category_manager_term_state(trim($value), CATEGORY_MANAGMENT);
-
       if ($node_count > 0 && $term_status == 1) {
-
         $value = trim($value);
         $term = taxonomy_term_load($value);
         $term_name = $term->name;

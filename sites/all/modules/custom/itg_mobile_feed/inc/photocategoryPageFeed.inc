@@ -93,9 +93,7 @@ function generatePhotoCategoryPage($tid) {
     $order_by = 'ASC';
     $type = "photogallery"; {
       $listcount = 0;
-
       // select node belong from current term id or child term id
-
       $query = db_select('taxonomy_index', 'ti');
       $query->leftJoin('node', 'n', 'n.nid=ti.nid');
       //join  for field value

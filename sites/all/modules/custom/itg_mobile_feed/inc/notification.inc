@@ -134,16 +134,13 @@ function get_web_url($nid) {
  * @return string $output
  */
 function default_xml_feed() {
-
   $totalarticle = count(message_data());
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index><footersharemsg>" . $config['footersharemsg'] . "</footersharemsg>";
   $output .= notifications_article();
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
@@ -152,11 +149,9 @@ function default_xml_feed() {
  * @return string $output
  */
 function ipad_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
@@ -278,13 +273,11 @@ function chrome_notification_xml() {
             $section = '';
           }
         }
-
         $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><url>" . $url . "</url><weburl>" . $web_url . "</weburl ><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
@@ -293,15 +286,12 @@ function chrome_notification_xml() {
  * @return string $output
  */
 function safari_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
-
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
@@ -309,7 +299,6 @@ function safari_notification_xml() {
       $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
       $cat = taxonomy_term_load($primary_cat);
       $section = $cat->name;
-
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -349,14 +338,11 @@ function safari_notification_xml() {
             $section = '';
           }
         }
-
         $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
-
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
@@ -365,19 +351,15 @@ function safari_notification_xml() {
  * @return string $output
  */
 function amazon_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
-
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
-
       $android_header = $data->android_header;
       $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
       $cat = taxonomy_term_load($primary_cat);
@@ -428,7 +410,6 @@ function amazon_notification_xml() {
     }
   }
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
@@ -437,15 +418,12 @@ function amazon_notification_xml() {
  * @return string $output
  */
 function windows8_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
-
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
@@ -498,9 +476,7 @@ function windows8_notification_xml() {
       }
     }
   }
-
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
@@ -509,19 +485,15 @@ function windows8_notification_xml() {
  * @return string $output
  */
 function osx_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
-
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
-
       $android_header = $data->android_header;
       $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
       $cat = taxonomy_term_load($primary_cat);

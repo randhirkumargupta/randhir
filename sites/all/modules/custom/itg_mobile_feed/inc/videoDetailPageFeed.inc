@@ -10,15 +10,12 @@
  */
 function videoDetailPageFeed() {
   $output = "";
-
   if (count(arg()) < 2) {
     $output = "Please pass video node nid in url";
   }
   else {
     $output = generateVideoDetailPageFeed(arg(1));
   }
-
-
   echo $output;
   die();
 }
@@ -30,10 +27,7 @@ function videoDetailPageFeed() {
  * @return string $return_flag
  */
 function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = '', $type) {
-
   $imgtag = "";
-
-
   if (!$file_name) {
     $file_name = "video" . $nid . ".xml";
   }
@@ -59,15 +53,11 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
   else {
     //check into redis
     $redis_key = "itgd_video" . $nid;
-
     $result_get = getRedis($redis_key);
-
-
     if ($result_get['key_value'] != "") {
       $output = $result_get['key_value'];
     }
     else {
-
       global $base_url;
       $ttl = DEFAULT_REDIS_EXPIRE_TIME;
       $node = node_load($nid);
@@ -89,10 +79,8 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
       $syndications = getNidIsSyndications($nid);
       $field_video_upload = $node->field_video_upload['und'][0]['value'];
       $file_id = file_usage($field_video_upload);
-
       $load_collection = field_collection_item_load($field_video_upload);
       $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
-
       // get video path
       //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
       $metatags_title = $node->metatags;
@@ -113,10 +101,7 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
       elseif (!empty($videotag['dailymotion'])) {
         $output .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
       }
-
-
       $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[" . $metatags_title . "]]></metakeyword><metadescription><![CDATA[" . $metatags_description . "]]></metadescription><weburl>" . $weburl . "</weburl>";
-
       //get body img tag
       $imgtag = getImgTagDetail($node);
       if ($imgtag) {
@@ -210,8 +195,6 @@ function getImgTagDetail($node) {
   $caption = getImgCaption($field_story_small_image);
   $imgtag = "";
   $imgtag = "<bodyimages><image><lowres><![CDATA[" . $highres . "]]></lowres><highres><![CDATA[" . $highres . "]]></highres><caption>" . $caption . "</caption></image></bodyimages>";
-
-
   return $imgtag;
 }
 
@@ -220,7 +203,6 @@ function getImgTagDetail($node) {
  * @return string $imgtag
  */
 function emptygetImgTagDetail() {
-
   $imgtag = "";
   $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
   return $imgtag;
@@ -283,8 +265,6 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
   $video_path_info['dailymtion_flag'] = $dailymtion_flag;
   $video_path_info['video_path_mp4'] = $dailymotion_path;
   $video_path_info['filesize'] = $filesize;
-
-
   return $video_path_info;
 }
 
@@ -309,8 +289,6 @@ function getDailymotionPath($fid, $filename) {
   $filename_ar = explode(".", $filename);
   $final_filename = $filename_ar[0];
   $final_filename = str_replace("_", "-", $final_filename);
-
-
   //$video_path = "https://www.dailymotion.com/video/".$video_id."_public-dailymotion-".$type."-".$final_filename."-".$ext."_".$channel."";
   $video_path = "https://www.dailymotion.com/video/" . $video_id . "";
   return $video_path;
@@ -323,13 +301,10 @@ function getDailymotionPath($fid, $filename) {
  * @return array $video_detail
  */
 function video_detail_formats($nid, $source_type) {
-
   $video_detail = array();
-
   if ($source_type != 'migrated') {
     $video_status = 'dailymotion';
     $videoids = get_video_in_fieldcollection_by_nid($nid);
-
     foreach ($videoids as $keys => $video_value) {
       if ($video_value->video_id != '') {
         $video_id = $video_value->video_id;

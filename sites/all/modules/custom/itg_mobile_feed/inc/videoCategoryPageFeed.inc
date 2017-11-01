@@ -98,10 +98,7 @@ function generateVideoCategoryPage($tid) {
     $order_by = 'ASC';
     $type = "videogallery"; {
       $listcount = 0;
-
-
       // select node belong from current term id or child term id
-
       $query = db_select('taxonomy_index', 'ti');
       $query->leftJoin('node', 'n', 'n.nid=ti.nid');
       //join  for field value
@@ -136,18 +133,12 @@ function generateVideoCategoryPage($tid) {
       $query->fields('vd', array('field_video_duration_value'));
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
       $query->fields('fss', array('field_story_syndication_value'));
-
-
       //end
       $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
-
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
       foreach ($result as $reskey => $resvalue) {
-
         // node feed tag
         $listcount++;
-
         $title = $resvalue['title'];
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
