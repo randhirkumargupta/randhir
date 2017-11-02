@@ -108,7 +108,7 @@ $argum = base64_encode(arg(1));
                         print $row['field_images'];
                       }
                       else {
-                        print '<img height="448" width="650" src="' . $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg" alt="" />';
+                        print '<img height="448" width="650" src="' . $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg" alt="" title="" />';
                       }
                       ?>                    
                   </figure>
@@ -124,7 +124,7 @@ $argum = base64_encode(arg(1));
                         print $row['field_photo_small_image'];
                       }
                       else {
-                        print '<img  src="' . $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" alt="" />';
+                        print '<img  src="' . $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" alt="" title="" />';
                       }
                       ?>
                   </li>
