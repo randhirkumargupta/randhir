@@ -1417,7 +1417,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
                         <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
                             <tr>
                                 <td style="background-color:#ececec;">
-                                    <img src="template_logo.png" alt="Indiatoday" />
+                                    <img src="template_logo.png" alt="Indiatoday" title="Indiatoday" />
                                 </td>
                             </tr>
                             <tr>
