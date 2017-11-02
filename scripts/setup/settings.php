@@ -362,9 +362,9 @@ $databases = array (
     'default' => 
     array (
       'database' => 'IndiaToday_sso',
-      'username' => 'itgd_it_write',
-      'password' => '!tgd@!t@wr!te@101',
-      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+      'username' => 'prod_it_write',
+      'password' => 'pr0d_!t@64',
+      'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
       'port' => '3306',
       'driver' => 'mysql',
       'prefix' => '',
