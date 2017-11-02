@@ -9,7 +9,7 @@
  *
  * @return string
  */
-function anchorRSSFeed() {
+function anchor_rss_feed() {
     global $base_url;
     //$data = views_get_view_result('widget_anchors_listing', 'page_1');
     //p($data);die;
