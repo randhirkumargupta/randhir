@@ -26,7 +26,7 @@ if (function_exists('itg_common_mongo_activity_user_count')) {
       <div class="user-name">
         <?php print $data['full_name']; ?>
       </div>  
-      <div class="user-logout desktop-hide"><a href="#">Logout</a></div>    
+      <div class="user-logout desktop-hide"><a href="javascript:void(0)" id="myhref">Logout</a></div>    
     </div>  
     <div class="personalized-user-info">
       <span>
