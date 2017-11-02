@@ -6332,6 +6332,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                         font-size: 15px;
                         line-height: 18px;
                     }
+                    .user-logout {
+                        a {
+                            font-family: $itg-roboto;
+                            color: #8d8d8d;
+                        }
+                    }
                 }
                 .personalized-user-info {
                     border: none;

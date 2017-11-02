@@ -12331,6 +12331,10 @@ span.smilies-title {
     h1 {
         color: #a1a1a1;
         font-size: 14px;
+        line-height: inherit;
+        font-weight: normal;
+        display: inline-block;
+        font-family: $itg-roboto;
     }
     .container {
         div.lft {
