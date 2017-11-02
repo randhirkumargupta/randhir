@@ -411,7 +411,9 @@ function itg_loyalty_reward_product_expiry_notification_callback() {
   module_load_include('inc', 'itg_loyalty_reward', 'includes/itg_loyalty_reward_mail');
 
   $rid = array(SITE_ADMIN, MARKETING_MANAGER);
+  if(function_exists('get_email_by_roll')) {
   $user_email = get_email_by_roll($rid);
+  }
   $query = db_select('field_data_field_lrp_product_count', 'flpc');
   $query->fields('flpc', array('entity_id'));
   $query->condition('flpc.field_lrp_product_count_value', 0, '=');
