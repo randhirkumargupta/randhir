@@ -3,13 +3,13 @@
 $conf['mongodb_connections'] = array(
   'default' => array(                             // Connection name/alias
     //'host' => 'mongodb://prod_write:Pr0d_wr1te654@10.6.100.102/itgcmsmongo',
-    'host' => 'mongodb://itoday_write:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo',// uat
-   // 'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo', //prod
+    // 'host' => 'mongodb://itoday_write:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo',// uat
+    'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo', //prod
     //'host' => 'mongodb://10.6.210.19',                      // Omit USER:PASS@ if Mongo isn't configured to use authentication.
     //'host' => 'mongodb://10.6.101.66',//prod
     'db' => 'itgcmsmongo',                   // Database name. Make something up, mongodb will automatically create the database.
-    'connection_options' => array('replicaSet' => 'uatreplica'),
- //   'connection_options' => array('replicaSet' => 'prodreplica'),
+   // 'connection_options' => array('replicaSet' => 'uatreplica'),
+    'connection_options' => array('replicaSet' => 'prodreplica'),
   ),
 );
 
