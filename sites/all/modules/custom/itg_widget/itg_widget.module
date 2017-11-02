@@ -641,9 +641,7 @@ function itg_widget_block_view($delta = '') {
                 jQuery('.carousel .slides').slick({                    
                     infinite: true,    
                     autoplay:true,
-                    dots: true,
-                    prevArrow: false,
-                    nextArrow: false
+                    dots: true                    
                 });
             }
           });", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
@@ -1191,9 +1189,9 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
                 }
                 ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->solr_video_id; ?>"><?php
                 if ($video_value->solr_video_thumb != "") {
-                    $newimageds .= '<li><img data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" /></li>';
+                    $newimageds .= '<li><img data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title="" /></li>';
                 } else {
-                    $newimageds .= '<li><img data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88" alt="" /></li>';
+                    $newimageds .= '<li><img data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/default_for_all.png" height="66" width="88" alt="" title="" /></li>';
                 }
                 $ads_flag = 0;
                 if ($video_value->field_include_ads_value == 'yes') {
@@ -1244,9 +1242,9 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
             }
             $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
             if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
-                $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $image_url . '" height="66" width="88" alt=""></li>';
+                $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $image_url . '" height="66" width="88" alt="" title=""></li>';
             } else {
-                $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
+                $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt="" title=""></li>';
             }
             $ads_flag = 0;
             if ($video_value->field_include_ads_value == 'yes') {

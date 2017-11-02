@@ -90,25 +90,26 @@ global $base_url;
 
 <!--animation emoji for hightlight-->
 <div id="smily">
-     <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
-    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
-    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
-    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>       
+  <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" title="" /></div>    
+    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" title="" /></div>    
+    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" title="" /></div>    
+    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" title="" /></div>       
   </div>
   <div id="smilysad">
-   <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
-    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
-    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
-    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>  
+   <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" title="" /></div>
+    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" title="" /></div>
+    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" title="" /></div>
+    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" title="" /></div>  
   </div>
   <div id="wgmf">
-    <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
-    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
-    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
-    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+    <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" title="" /></div>
+    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" title="" /></div>
+    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" title="" /></div>
+    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" title="" /></div>
   </div>
 <!--animation emoji for hightlight end-->
 <?php
+echo 'shravan'.time();
 if(!empty($sso_msg)) {
   print '<div class = "activate-message">
          <div class = "message-body">

@@ -1128,10 +1128,10 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
     $private = 'false';
   }
   if (strtolower($exclue_ads) == 'yes') {
-    $exclude_ads_flag = 1;
+    $exclude_ads_flag = 'true';
   }
   else {
-    $exclude_ads_flag = 0;
+    $exclude_ads_flag = 'false';
   }
 
   $video_desc = itg_videogallery_clean_string($video_desc);
@@ -1143,7 +1143,6 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   }
 // Tags assign to node and thumbnail
   if (!empty($tags_value) && !empty($video_title)) {
-
     $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&title=' . $video_title . '&description=' . $video_desc . '&advertising_instream_blocked=' . $exclude_ads_flag);
   }
   elseif (empty($tags_value) && !empty($video_title)) {
@@ -3262,7 +3261,7 @@ function itg_videogallery_send_video_exception_notification($nid, $video_ids) {
                       <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
                           <tr>
                               <td style="background-color:#ececec;">
-                                  <img src="template_logo.png" alt="Indiatoday" />
+                                  <img src="template_logo.png" alt="Indiatoday" title="Indiatoday" />
                               </td>
                           </tr>
                           <tr>
@@ -3769,6 +3768,7 @@ function get_video_in_fieldcollection_by_nid($nid) {
   $query->fields('thumb_img', array('field_video_thumbnail_fid' , 'field_video_thumbnail_alt', 'field_video_thumbnail_title'));
   $query->fields('desc_inc', array('field_video_title_value'));
   $query->condition('up_video.entity_id', $nid);
+  $query->groupBy('isvi.solr_video_id');
   $query->orderBy('up_video.delta', 'ASC');
   $result = $query->execute()->fetchAll();
   return $result;
@@ -5007,7 +5007,7 @@ function get_header_tab_related_video_block_content() {
       if (empty($url)) {
         $url = "/" . drupal_get_path_alias('node/' . $current_entity_id);
       }
-      $related_image = '<img class="related-default" alt="' . $img_alt . '" src="' . $related_image_url . '">';
+      $related_image = '<img class="related-default" alt="' . $img_alt . '" title="" src="' . $related_image_url . '">';
       if (!empty($related_title)) {
         $related_video .= "<li class='related_content_tabs'><figure><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";
         $related_video .= "</figure></a><p class='title'>" . l($related_title, $url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";

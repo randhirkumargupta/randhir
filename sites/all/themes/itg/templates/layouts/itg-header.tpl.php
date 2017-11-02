@@ -17,7 +17,7 @@ if (!empty($get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri'])) {
 }
 else {
   $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
-  $user_pic = "<img src=$file width='30' height='30' alt='user-image' />";
+  $user_pic = "<img src=$file width='30' height='30' alt='user-image' title='user-image' />";
 }
 $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 ?>
@@ -38,7 +38,7 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
         <input class="search-text" placeholder="Type here" type="text" value="" />
       </div>
     </li>
-    <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" /></a></li> 
+    <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" title="Live Tv" /></a></li> 
     <li> 
       <?php
         if ($_GET['q'] != 'user') {
@@ -64,9 +64,9 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
   <div class="container top-nav">                  
     <div class="social-nav mhide">
       <ul class="social-nav mhide">
-        <li><a href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="https://plus.google.com/+indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="google_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+          <li><a rel="nofollow" href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
+        <li><a rel="nofollow" href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a rel="nofollow" href="https://plus.google.com/+indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="google_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-google-plus"></i></a></li>
         <li><a href="<?php echo $base_url .'/rss' ?>" title=""><i class="fa fa-rss"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-volume-up"></i></a></li>
@@ -109,15 +109,25 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
               if(!empty($sponsored_class)) {
                 $color_value = $menu_data['db_data']['bk_color'];
               }
+              if($menu_link_data['url_type'] == 'url-type-external') {
+                $attribute_array = array(
+                      'style' => array("background : $color_value" ) ,
+                      'target' => $target,
+                      'rel' => 'nofollow',
+                      'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+                      );
+              } else {
+                $attribute_array = array(
+                      'style' => array("background : $color_value" ) ,
+                      'target' => $target,
+                      'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+                      );
+              }
               ?>
               <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>">
                   <?php print l($link_text, $link_url, array(
                     'html' => true, 
-                    'attributes' => array(
-                      'style' => array("background : $color_value" ) ,
-                      'target' => $target,
-                      'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
-                      )
+                    'attributes' => $attribute_array,
                     )
                   ); ?>
               </li>

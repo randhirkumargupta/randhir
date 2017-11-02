@@ -30,7 +30,7 @@ if ($theme != 'itgadmin') {
               <div class="container header-logo">
                   <?php if ($logo): ?>
                     <div class="logo">
-                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" class="header__logo-image" /></a>
                     </div>
                   <?php endif; ?>         
               </div>
@@ -201,7 +201,13 @@ if ($theme != 'itgadmin') {
                                           print 'Tab 1';
                                         }
                                         else {
-                                          print $widget_data['itg-block-5']['block_title'];
+                                        ?>
+                                      <a href="#<?php print trim(str_replace(" ", "",$widget_data['itg-block-5']['block_title'])); ?>" onclick="ga('send', 'event', '<?php print trim(str_replace(" ", "",$widget_data['itg-block-5']['block_title']))."Tab"; ?>', 'click','1', 1, {'nonInteraction': 1});return true;">
+                                        <?php  
+                                        print $widget_data['itg-block-5']['block_title']; 
+                                        ?>
+                                      </a>
+                                      <?php
                                         }
                                         ?>
                                     </span>
@@ -211,7 +217,13 @@ if ($theme != 'itgadmin') {
                                           print 'Tab 1';
                                         }
                                         else {
-                                          print $widget_data['itg-block-6']['block_title'];
+                                        ?>
+                                      <a href="#<?php print trim(str_replace(" ", "",$widget_data['itg-block-6']['block_title'])); ?>" onclick="ga('send', 'event', '<?php print trim(str_replace(" ", "",$widget_data['itg-block-6']['block_title']))."Tab"; ?>', 'click','1', 1, {'nonInteraction': 1});return true;">
+                                        <?php  
+                                        print $widget_data['itg-block-6']['block_title']; 
+                                        ?>
+                                      </a>
+                                        <?php
                                         }
                                         ?>
                                     </span>

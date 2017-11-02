@@ -44,7 +44,7 @@ $resultdata = array_unique($consti);
                         <?php
                         }
                         else {
-                            print "<li><img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' alt='' /></li>";
+                            print "<li><img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' alt='' title='' /></li>";
                         }
                         ?>
 

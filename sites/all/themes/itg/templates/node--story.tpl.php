@@ -205,8 +205,8 @@ if (!empty($content)):
                 <div class="profile-pic">
                   <?php
                   if(!empty($bylineextra_large_image)) {
-                    $file = $bylineextra_large_image;
-                    print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                      $file = $bylineextra_large_image;
+                      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                     }
                     else {
                       $file = 'default_images/user-default.png';
@@ -702,7 +702,7 @@ if (!empty($content)):
                     $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
                   }
                   //}
-                  $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" /></div></div>';
+                  $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" title="" /></div></div>';
                   if (!empty($node->field_story_expert_description)) {
                     $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                   }
