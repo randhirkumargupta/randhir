@@ -1792,6 +1792,9 @@ function itg_widget_get_widget_name_from_views($view_name, $view_current_display
     if ($view_name == 'section_wise_content_ordering_list' && $view_current_display == 'we_may_suggest_widget') {
         $widget_name = "we_may_suggest_widget";
     }
+    if ($view_name == 'section_wise_top_story_widget_order_reorder' && $view_current_display == 'page_1') {
+        $widget_name = "section_manual_order_widget";
+    }
     return $widget_name;
 }
 
@@ -1852,7 +1855,8 @@ function itg_widget_order_reorder_form() {
       'views_form_photo_carousel_widget_photo_carousel', // photo carousel
       'views_form_photo_carousel_widget_video_carousel',
       'views_form_widget_anchors_listing_anchors_listing_widget',
-      'views_form_section_wise_content_ordering_list_we_may_suggest_widget'
+      'views_form_section_wise_content_ordering_list_we_may_suggest_widget',
+      'views_form_section_wise_top_story_widget_order_reorder_page_1'
     );
     return $forms;
 }
