@@ -1398,6 +1398,7 @@ function itg_menu_manager_form_views_exposed_form_alter(&$form, &$form_state, $f
  */
 function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array(), $amp = NULL) {
     global $base_url;
+    module_load_include('inc', 'itg_widget', 'includes/itg_widget_so_sorry');
     $menu_link_data_array = array();
     $parent_key_of_third_level = !empty($load_parent) ? $load_parent[0] : 0;
     $title_array = explode("[tid", $menu_data['db_data']['title']);
@@ -1408,6 +1409,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
     $display_icon = isset($menu_data['db_data']['display_icon']) ? $menu_data['db_data']['display_icon'] : "";
     $db_target = isset($menu_data['db_data']['target']) ? $menu_data['db_data']['target'] : "";
     $tid = isset($menu_data['db_data']['tid']) ? $menu_data['db_data']['tid'] : 0;
+    $uri = itg_widget_get_logo_from_tid($tid);
     $active_cls = $parent_class = "notactive";
     $icon_fid = (int) $menu_data['db_data']['menu_name'];
     $display_icon_attribute = $display_icon;
@@ -1497,6 +1499,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
     $menu_link_data_array['link_title_for_vertical'] = $link_title_for_vertical;
     $menu_link_data_array['url_type'] = "url-type-" . $url_type;
     $menu_link_data_array['display_icon'] = $display_icon_attribute;
+    $menu_link_data_array['icon_path'] = $uri[0];
     return $menu_link_data_array;
 }
 
