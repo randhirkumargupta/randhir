@@ -370,7 +370,7 @@ function homePageJsonTopstories() {
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$home_list_count]['n_id'] = "$nid";
             //$data_newslist[$home_list_count]['n_template_id'] = "";
-            $data_newslist[$home_list_count]['n_type'] = "story";
+            $data_newslist[$home_list_count]['n_type'] = "$type";
             $data_newslist[$home_list_count]['n_is_developing'] = "$is_developing";
             $data_newslist[$home_list_count]['n_is_sponsored'] = "0";
             $data_newslist[$home_list_count]['n_share_link'] = "$firebase_url";
