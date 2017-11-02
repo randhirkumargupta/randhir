@@ -230,7 +230,7 @@ function get_rss_feed_footer() {
  * 
  */
 
-function get_thumbnail_by_fid($fid = NULL){
+function get_thumbnails_by_fid($fid = NULL){
     if(!empty($fid)){
         $file_obj = file_load($fid);
         $image_data = image_style_url('image170x127', $file_obj->uri);

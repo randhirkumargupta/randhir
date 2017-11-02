@@ -105,7 +105,7 @@ function get_video_item_rss($section_id, $term_name, $section_url) {
         $body_value = $resvalue['field_story_expert_description_value'];
         $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
         $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
-        $image_data = get_thumbnail_by_fid($field_story_extra_large_image_fid);
+        $image_data = get_thumbnails_by_fid($field_story_extra_large_image_fid);
         $img_url = $image_data->imageurl;
         $created = $resvalue['created'];
         date_default_timezone_set("GMT");

@@ -77,7 +77,7 @@ function get_video_sitemap_item() {
         $body_value = $resvalue['field_story_short_headline_value'];
         $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
         $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
-        $image_data = get_thumbnail_by_fid($field_story_extra_large_image_fid);
+        $image_data = get_thumbnails_by_fid($field_story_extra_large_image_fid);
         $img_url = $image_data->imageurl;
         $created = $resvalue['created'];
         $created_date = date("Y-M-d\TH:i:sP", $created);  
