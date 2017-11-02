@@ -1,7 +1,7 @@
 <?php
 
-
-/**
+variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/indiatodayonline.in/simplesamlphp');
+  /**
  * @file
  * Drupal site-specific configuration file.
  *
