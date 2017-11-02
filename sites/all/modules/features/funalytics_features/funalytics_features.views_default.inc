@@ -384,7 +384,7 @@ function funalytics_features_views_default_views() {
     ),
     'nothing' => array(
       'align' => '',
-      'separator' => ' ',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
   );
@@ -599,7 +599,7 @@ function funalytics_features_views_default_views() {
     ),
     'nothing' => array(
       'align' => '',
-      'separator' => '',
+      'separator' => '| ',
       'empty_column' => 0,
     ),
   );

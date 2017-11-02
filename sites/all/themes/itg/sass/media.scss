@@ -151,13 +151,14 @@
             height: 100px;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 0 90px 90px 0;
-            left: 10px;
+            left: 0px;
             font-size: 0;
             position: absolute;
             top: 50%;
             z-index: 9;
             border: none;
             margin-top: -50px;
+            right: auto;
             &:hover {
                 background-color: rgba(255, 255, 255, 0.6);
             }
@@ -168,12 +169,13 @@
                 padding-left: 0;
                 left: 0;
                 position: absolute;
-                top: 16px;
+                top: 50%;
+                margin-top: -10px;
             }
         }
         .slick-next {
             border-radius: 90px 0px 0px 90px;
-            right: 10px;
+            right: 0px;
             left: auto;
             &:hover {
                 background-color: rgba(255, 255, 255, 0.6);
@@ -2496,7 +2498,8 @@
                 width: 110px;
                 float: none;
                 i {
-                    display: none;
+                    display: block;
+                    font-size: 12px;
                 }
             }
         }

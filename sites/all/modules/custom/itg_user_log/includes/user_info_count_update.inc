@@ -348,8 +348,9 @@ function itg_array_sort($array, $on, $order = SORT_ASC) {
  * @global array $user
  * @param array $node
  */
-function itg_logged_in_user_node_insert_data($node) {
-  global $user;
+function itg_logged_in_user_node_insert_data($node, $section_tids) {
+  global $user, $base_root;
+  
   $user_roles = $user->roles;
   if (in_array('Front User', $user_roles)) {
     $user_roles = 'Front User';
@@ -360,13 +361,14 @@ function itg_logged_in_user_node_insert_data($node) {
   if (function_exists('mongodb')) {
     $con = mongodb();
     if ($con) {
-      $section_tids = taxonomy_get_parents_all($node->field_primary_category[LANGUAGE_NONE][0]['value']);
-      $section_tids = array_reverse($section_tids);
+      //$section_tids = taxonomy_get_parents_all($node->field_primary_category[LANGUAGE_NONE][0]['value']);
+      //$section_tids = array_reverse($section_tids);
       $people = $con->pagedetails;
       $qry = array(
         "nid" => $node->nid,
         "title" => $node->title,
-        "url" => url(drupal_get_path_alias('node/' . $node->nid), array('absolute' => TRUE)),
+        //"url" => url(drupal_get_path_alias('node/' . $node->nid), array('absolute' => TRUE)),
+        "url" => $base_root . request_uri(),
         "uid" => ($user->uid) ? $user->uid : 0,
         "email" => ($user->mail) ? $user->mail : "",
         "section" => $section_tids[0]->tid,

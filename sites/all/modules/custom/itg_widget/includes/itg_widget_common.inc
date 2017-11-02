@@ -425,7 +425,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_form_section_wise_content_ordering_list_page') {
     $type_in_url = $_GET['type'];
     $actual_weight_type = 'All';
-    $types = array("story", "videogallery", "photogallery");
+    $types = array("story", "videogallery", "photogallery", "breaking_news");
     if (in_array($type_in_url, $types)) {
       $actual_weight_type = $type_in_url;
     }
@@ -1267,9 +1267,18 @@ function itg_widget_views_api() {
  */
 function itg_widget_views_query_alter(&$view, &$query) {
 
-
   global $user;
   global $theme;
+  if($view->name == 'past_polls' && $view->current_display == 'block') {
+    // Handle case for pass poll i.e. current poll should not display in pas poll.
+    if(function_exists('itg_poll_get_all_current_poll_qry_paging')) {
+      module_load_include("inc", "itg_poll"  ,"includes/itg_poll_current_poll");
+      $current_poll = itg_poll_get_all_current_poll_qry_paging();
+      foreach($current_poll as $poll_nid) {
+        $query->add_where(0, 'node.nid', $poll_nid, '!=');
+      }
+    }
+  }
   if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
 
     foreach ($query->table_queue as $queue => $queue_value) {

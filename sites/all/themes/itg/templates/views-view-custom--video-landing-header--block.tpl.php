@@ -16,7 +16,6 @@ $videoids = "";
 if (function_exists('get_video_in_fieldcollection_by_nid')) {
   $videoids = get_video_in_fieldcollection_by_nid($nid);
 
-  // p($videoids);
 }
 $argum = base64_encode(arg(1));
 $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -261,7 +260,7 @@ $uri = base64_encode($actual_link);
                           <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                               <div class="show-embed-code-div">
                                   <div class="copy-sample-code">
-                                      <textarea readonly><iframe allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>
+                                      <textarea readonly><iframe scrolling="no" allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>
                                   </div>
                               </div>
                           </li>
@@ -332,7 +331,7 @@ $uri = base64_encode($actual_link);
                               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                   <div class="show-embed-code-div">
                                       <div class="copy-sample-code">
-                                          <textarea readonly><iframe allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>    
+                                          <textarea readonly><iframe scrolling="no" allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>    
                                       </div>
                                   </div>
                               </li>
@@ -396,14 +395,18 @@ $uri = base64_encode($actual_link);
                         ?>
                         <div class="tab-buttons">
                             <span class="<?php echo ($_flag ? 'active' : ''); ?>" data-id="tab-data-1">
+                              <a href="#Related" onclick="ga('send', 'event', 'RelatedvideoTab', 'click','1', 1, {'nonInteraction': 1});return true;">
                                 <?php
                                 print 'Related';
                                 ?>
+                              </a>
                             </span>
                             <span class="<?php echo (!$_flag ? 'active' : ''); ?>" data-id="tab-data-2">
+                              <a href="#TrendingVideos" onclick="ga('send', 'event', 'TrendingVideosTab', 'click','1', 1, {'nonInteraction': 1});return true;">
                                 <?php
                                 print 'Trending Videos';
                                 ?>
+                              </a>
                             </span>
                         </div>
                         <div class="itg-widget-child tab-data tab-data-1 <?php echo ($_flag ? '' : 'hide'); ?>">						
