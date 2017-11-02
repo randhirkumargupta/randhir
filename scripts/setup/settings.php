@@ -755,7 +755,7 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
  */
 $local_settings = dirname(__FILE__) . '/local.settings.php';
 if (file_exists($local_settings)) {
-  // include $local_settings;
+   include $local_settings;
 }
 
 $conf['image_suppress_itok_output'] = TRUE;
