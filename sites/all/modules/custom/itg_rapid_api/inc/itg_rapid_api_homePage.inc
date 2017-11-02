@@ -57,7 +57,6 @@ function homePageJsonPackagelist() {
     $n_polls = array();
     $n_rating = array();
     $tid = HOME_PAGE_JSON_NEWS_LIST_LIFE_STYLE;
-    $tid = 286531;
     $node_count = "";
     $output = "";
     $data = array();
@@ -90,8 +89,8 @@ function homePageJsonPackagelist() {
                 $tid_list[] = $value->tid;
             }
         }
-        //$tid_list[] = 1208615; // buz to india
-        //$tid_list[] = 1207974; // popular_now
+        $tid_list[] = 1208615; // buz to india
+        $tid_list[] = 1207974; // popular_now
         
         // code vid=14  end
 
