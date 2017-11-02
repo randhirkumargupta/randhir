@@ -1,5 +1,5 @@
 <?php
-#MongoDB
+
 $conf['mongodb_connections'] = array(
   'default' => array(                             // Connection name/alias
     //'host' => 'mongodb://itoday_write:1t0day_wr1te111@10.6.210.218/itgcmsmongo',
