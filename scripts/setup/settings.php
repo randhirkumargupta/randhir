@@ -215,7 +215,7 @@
  */
 
 
-
+$conf['error_level'] = 2;
 
 
 //for master and slave setting
