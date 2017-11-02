@@ -154,7 +154,7 @@
             left: 0px;
             font-size: 0;
             position: absolute;
-            top: 50%;
+            top: 40%;
             z-index: 9;
             border: none;
             margin-top: -50px;
@@ -1747,6 +1747,21 @@
     }
 }
 
+@media only screen and (max-width:768px) {
+    #block-itg-widget-featured-photo-carousel-r .slick-prev:before,
+    #block-itg-widget-featured-photo-carousel-r .slick-next:before,
+    #block-itg-widget-featured-video-carousel-r .slick-prev:before,
+    #block-itg-widget-featured-video-carousel-r .slick-next:before {
+        margin-top: 0;
+    }
+    #block-itg-widget-featured-photo-carousel-r .slick-prev,
+    #block-itg-widget-featured-photo-carousel-r .slick-next,
+    #block-itg-widget-featured-video-carousel-r .slick-prev,
+    #block-itg-widget-featured-video-carousel-r .slick-next {
+        top: 35%;
+    }
+}
+
 @media only screen and (max-width:767px) {
     /*css start oscar-layout-page */
     .oscar-layout-page .oscar-news {
@@ -2695,7 +2710,8 @@
         padding: 5px 10px;
     }
     #block-views-video-landing-header-block .video-header-right .ads {
-        margin: 10px 0;
+        margin: 10px auto;
+        display: block;
         float: none;
     }
     /*    sosory css start */
@@ -2872,6 +2888,12 @@
     }
     #block-itg-layout-manager-header-block .head-live-tv .globle-search.active {
         width: 108px;
+    }
+    #block-itg-widget-featured-photo-carousel-r .slick-prev,
+    #block-itg-widget-featured-photo-carousel-r .slick-next,
+    #block-itg-widget-featured-video-carousel-r .slick-prev,
+    #block-itg-widget-featured-video-carousel-r .slick-next {
+        top: 15%;
     }
 }
 
