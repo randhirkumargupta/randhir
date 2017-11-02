@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(-1);
+
 variable_set('simplesamlphp_auth_installdir', '/opt/httpd/vhosts/indiatodayonline.in/simplesamlphp');
 variable_set('drupalauth4ssp_setup', '/opt/httpd/vhosts/indiatodayonline.in/simplesamlphp');
 
@@ -625,3 +623,6 @@ ini_set('session.cookie_lifetime', 2000000);
  * Remove the leading hash signs to enable.
  */
 # $conf['locale_custom_
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(-1);
