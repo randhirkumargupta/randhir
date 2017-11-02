@@ -1031,7 +1031,19 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
       drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
       $form['#validate'][] = 'custom_section_wise_validate';
       break;
-
+    case 'views-exposed-form-section-wise-top-story-widget-order-reorder-page-1':
+      $category_tid = $_GET['category_tid'];
+      $form['category_tid'] = array(
+	    '#type' => 'hidden',
+		'#default_value' => isset($category_tid) ? $category_tid : 0,
+	  );
+      $form['Cancel'] = array(
+        '#type' => 'markup',
+        '#prefix' => '<div class="views-reset-button">',
+        '#markup' => l(t('Reset'), 'section-manual-order-widget-listing', array("attributes" => array("class" => array("button", "form-submit")), "query" => array("category_tid" => $category_tid))),
+        '#suffix' => '</div>',
+      );
+      break;
     case 'views-exposed-form-bitrates-videos-page':
 
       $form['Cancel'] = array(
