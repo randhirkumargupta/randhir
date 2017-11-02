@@ -405,7 +405,7 @@ jQuery(document).ready(function () {
             //Do something
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
             keyword = jQuery(this).val();
-            myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             myStr = myStr.replace(/\s+/g, "-");
             var urldata = Drupal.settings.basePath + 'topic/' + myStr;
             window.location.href = urldata;
@@ -421,7 +421,7 @@ jQuery(document).ready(function () {
         search_value = jQuery(this).parent().find('.search-text').val();
         if (search_value.length != 0) {
             nkeyword = search_value;
-            nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g,"");
+            nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             nmyStr = nmyStr.replace(/\s+/g, "-");
             //var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
             var urldata = Drupal.settings.basePath + 'topic/' + search_value;
@@ -433,7 +433,8 @@ jQuery(document).ready(function () {
     headerMain();
     function headerMain() {
         //header menu add icon for mobile
-        jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
+        jQuery('.main-nav').first().prepend('<div class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
+        jQuery('.main-nav ul').first().prepend('<li class="desktop-hide"><a href="javascript:void(0)"></a></li>');
 
         //var logotxt = $('.container.header-logo').html();
         jQuery('.container.header-logo').prependTo('.itg-logo-container');
@@ -459,6 +460,10 @@ jQuery(document).ready(function () {
             }
             jQuery(this).parent().find('.globle-search').toggleClass('active');
         });
+
+         jQuery('.share-icon-default').on('click', function(e) {    
+                jQuery(this).parent().find('.social-dropdown').toggleClass('active');
+            });
 
         jQuery('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function () {
             jQuery('#newlist').hide();
@@ -818,10 +823,6 @@ jQuery(document).ready(function () {
             jQuery(this).css('opacity', '1');
         });
 
-        //event page navigation
-        jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
-            jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
-        });
         jQuery('.event-search-icon').click(function () {
             jQuery('.event-search input').css('width', '180px');
         });
@@ -837,6 +838,11 @@ jQuery(document).ready(function () {
             e.preventDefault();
         });
     }
+
+    //event page navigation
+    jQuery('#block-menu-menu-event-menu a.mobile-nav').click(function () {
+        jQuery('#block-menu-menu-event-menu ul.menu').slideToggle();
+    });
 
     //story page social share for mobile
     var getclick;
@@ -902,6 +908,9 @@ jQuery(document).ready(function () {
         e.stopPropagation();
         return false;
     });
+    jQuery('.show-embed-code-div').click(function (e) {
+        e.stopPropagation();
+    });
     jQuery(document).click(function () {
         jQuery('.show-embed-code-div').hide();
     });
@@ -937,7 +946,7 @@ var menuBuilder = function () {
         jQuery('#newlist').html('');
     }
     jQuery('.all-menu').remove();
-    jQuery('.second-level-menu.menu li').each(function () {
+    jQuery('.second-level-menu.menu li.nav-items').each(function () {
         liLength = jQuery(this).outerWidth(true);
         Totalwidth = Totalwidth + liLength;
         if (Totalwidth <= menuWidth) {
@@ -1057,6 +1066,13 @@ jQuery(document).ready(function () {
 });
 
 jQuery(document).ready(function (e) {
+    // story discription iframe wrap in div
+    var tagIframe = jQuery('.story-section .story-right .description');
+    tagIframe.find('iframe').removeAttr('height').removeAttr('width').wrap('<div class="iframe-video"></div>');
+
+    // iframe wrap with div
+    jQuery('.big-news .live-tv-big-story').find('iframe').removeAttr('height').removeAttr('width');
+
     // code for video slider play video.
 
     jQuery('.thumb-video').click(function () {
