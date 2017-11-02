@@ -109,7 +109,7 @@ function itg_common_custompath_insert_load($node) {
             if($node_CT == 'photogallery') {
                 $node_CT = 'photo';
             } elseif($node_CT == 'videogallery') {
-                $node_CT = 'videos';
+                $node_CT = 'video';
             }
             $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
             $newpath = itg_common_custompath_insert_val($pathdata);
@@ -391,7 +391,7 @@ function itg_common_custompath_migrated_load($node, $val = NULL) {
             if($node_CT == 'photogallery') {
                 $node_CT = 'photo';
             } elseif($node_CT == 'videogallery') {
-                $node_CT = 'videos';
+                $node_CT = 'video';
             }
             $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
             $newpath = itg_common_custompath_insert_val($pathdata);
@@ -634,7 +634,7 @@ function itg_migrate_custompath($node, $published_date, $node_sef) {
             } elseif($node_CT == 'photogallery') {
                 $node_CT = 'photo';
             } elseif($node_CT == 'videogallery') {
-                $node_CT = 'videos';
+                $node_CT = 'video';
             }
             $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
             $newpath = itg_common_custompath_insert_val($pathdata);

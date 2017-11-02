@@ -153,12 +153,20 @@ function itg_sitemap_chunks_for_section($section_tid) {
  * @return string
  */
 function itg_sitemap_get_sitemap($total_links) {
+   $arg = arg();
+   $is_live_blog = FALSE;
+   if($arg[0] == 'liveblog-sitemap.xml') {
+    $is_live_blog = TRUE;
+   }
     header('Content-type: application/xml');
     $xml = '<?xml version="1.0" encoding="UTF-8"?>';
     $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">';
     foreach($total_links as $total_link) {
         $xml .= '<url>';
         $xml .= '<loc> <![CDATA[' . $total_link['url'] . ' ]]> </loc>';
+        if($is_live_blog) {
+          $xml .= '<lastmod> <![CDATA[' . $total_link['news_changed_date'] . ' ]]> </lastmod>';
+        }
         $xml .= '<news:news>';
         // Publication tag start
         $xml .= '<news:publication>';
@@ -263,7 +271,7 @@ function itg_sitemap_get_previous_time($section_data) {
 function itg_sitemap_get_section_sitemap_required_data($nid) {
     $final_data = array();
     $query = db_select('node', 'n');
-    $query->fields('n', array('title', 'nid', 'created'));
+    $query->fields('n', array('title', 'nid', 'created' ,'changed'));
     $query->condition('nid', $nid);
     $query->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -274,6 +282,7 @@ function itg_sitemap_get_section_sitemap_required_data($nid) {
         $final_data['news_language'] = $GLOBALS['language']->language;
         $final_data['url'] = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data['nid']);
         $final_data['news_publication_date'] = date('c', $data['created']);
+        $final_data['news_changed_date'] = date('c', $data['changed']);
     }
     return $final_data;
 }
@@ -456,12 +465,13 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
                                 $path = FRONT_URL . '/' . drupal_get_path_alias('node/' . $data->nid);
                                 $xml .= '<url>';
                                 $xml .= '<loc> <![CDATA[ ' . $path . ' ]]> </loc>';
+                                $xml .= '<lastmod> <![CDATA[ ' . date('c', $data->changed) . ' ]]> </lastmod>';
                                 $xml .= '</url>';
                                 $var_to_save .= '<url>';
                                 $var_to_save .= '<loc> <![CDATA[ ' . $path . ' ]]> </loc>';
+                                $var_to_save .= '<lastmod> <![CDATA[ ' . date('c', $data->changed) . ' ]]> </lastmod>';
                                 $var_to_save .= '</url>';
                             }
-                            $xml .= '</urlset>';
                             // If current year xml is processing then we
                             if($isRecreate) {
                                 $old_xml = '<?xml version="1.0" encoding="UTF-8"?>';

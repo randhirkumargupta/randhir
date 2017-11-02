@@ -259,6 +259,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   $form['zip_code'] = array(
     '#title' => t('Pincode'),
     '#type' => 'textfield',
+    '#maxlength' => 6,
     '#attributes' => array('placeholder' => 'E.g., 122016'),
     '#default_value' => $user_detail->field_user_pincode['und'][0]['value'],
   );
