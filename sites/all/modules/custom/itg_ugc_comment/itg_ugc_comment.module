@@ -327,7 +327,7 @@ function getmycomments($data) {
   else
   {
     $image = $base_url . '/sites/all/themes/itg/images/user-default.png';
-    $user_pic = "<img src=$image width='50' height='50' alt='user-image' />";
+    $user_pic = "<img src=$image width='50' height='50' alt='user-image' title='' />";
   }
   $image = $base_url . '/sites/all/themes/itg/images/user-default.png';
   $contect .= "<div class='itg-comment'>

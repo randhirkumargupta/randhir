@@ -65,7 +65,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2" style="text-align: center;padding: 10px;"><img src="' . $banner . '" alt="" /></td></tr>';
+  <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2" style="text-align: center;padding: 10px;"><img src="' . $banner . '" alt="" title="" /></td></tr>';
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
           <table cellspacing="0" cellpadding="0" style="width: 100%;">';
@@ -85,7 +85,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
     }
     $link = 'node/' . $news_detail->nid;
     $content .= '<tr class="node-'.$news_detail->nid.'">
-               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title , $link , array('attributes' => array('target' => '_blank'))) . '</h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>

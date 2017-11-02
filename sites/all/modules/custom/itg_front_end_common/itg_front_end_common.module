@@ -578,7 +578,7 @@ function _related_video_block_content() {
         
         if (!empty($related_title)) {
         $img_alt = strip_tags($related_title);
-        $related_video.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' /></a>";
+        $related_video.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
         $related_video.= "<span class='tile'>" . l($related_title, $front_url, array('html'=>TRUE, "attributes" => array("target" => "_blank","title" => $related_title))) . "</span></li>";
         }
       //}
@@ -637,7 +637,7 @@ function _related_photo_block_content() {
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         if (!empty($related_title)) {
         $img_alt = strip_tags($related_title);
-        $related_photo.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' /></a>";
+        $related_photo.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
         $related_photo.= "<span class='tile'>" . l($related_title, $front_url, array('html'=>TRUE, "attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
         }
       //}
@@ -669,13 +669,13 @@ function itg_front_end_common_views_pre_render(&$view) {
         }
         else {
           $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-          $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' alt='' />";
+          $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' alt='' title='' />";
         }
       }
 
       if (empty($image)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' alt='' />";
+        $related_result->sm_thumb_video_landing_page_170_x_127_story_small_image[0] = "<img src='$img_url' alt='' title='' />";
       }
     }
   }
@@ -694,13 +694,13 @@ function itg_front_end_common_views_pre_render(&$view) {
         }
         else {
           $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-          $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default' alt='default-image' />";
+          $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default' alt='default-image' title='default-image' />";
         }
       }
 
       if (empty($image)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
-        $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default' alt='default-image' />";
+        $related_story_result->sm_thumb_video_landing_page_170_x_127_field_story_extra_large_image[0] = "<img src='$img_url' class='related-default' alt='default-image' title='default-image' />";
       }
     }
   }
@@ -799,7 +799,7 @@ function _related_story_left_block_content() {
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         if (!empty($related_title)) {
         $img_alt = strip_tags($related_title);  
-        $related_story.= "<li class='col-md-12'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' /></a>";
+        $related_story.= "<li class='col-md-12'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
         $related_story.= "<span class='tile'>" . l($related_title, $front_url, array('html'=>TRUE, "attributes" => array("target" => "_blank","title" => $related_title))) . "</span></li>";
       }
       
@@ -852,7 +852,7 @@ function _related_story_bottom_block_content() {
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         if (!empty($related_title)) {
           $img_alt = strip_tags($related_title);
-          $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' /></a>";
+          $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
           $related_story.= "<span class='tile'>" . l($related_title, $front_url, array('html'=>TRUE, "attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
         }
       //}
@@ -944,7 +944,7 @@ function _related_podcast_bottom_block_content() {
       $front_url = $hash_url[$related_data->hash] . '/' . $related_data->path_alias;
       if (!empty($related_title)) {
         $img_alt = strip_tags($related_title);
-        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' /></a>";
+        $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
         $related_story.= "<span class='tile'>" . l($related_title, $front_url, array('html' => TRUE, "attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
       }
 
@@ -1010,7 +1010,7 @@ function _latest_from_aajtak() {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
         }
         
-        $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'"/></a>';
+        $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'" title="" /></a>';
         $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
       }
       $i++;
@@ -1048,7 +1048,7 @@ function _latest_from_businesstoday() {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
         }
         
-        $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'"/></a>';
+        $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'" title="" /></a>';
         $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
       }
       $i++;

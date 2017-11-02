@@ -587,7 +587,7 @@ function itg_loyalty_reward_block_view($delta = '') {
       }
       else {
         $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
-        $user_pic = "<img src=$file width='200' height='200' alt='user-image' />";
+        $user_pic = "<img src=$file width='200' height='200' alt='user-image' title='user-image' />";
         $data['profile_pic'] = $user_pic;
       }
       // Load user name    
