@@ -1577,6 +1577,23 @@ function itg_videogallery_views_pre_render(&$view) {
 function itg_videogallery_submit_status_message(&$form, $form_state) {
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
+      /* Assign video to widget */
+      if (is_array($form['#node']->field_video_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_video_assign = $form['#node']->field_video_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_video_assign = '';
+      }
+
+      // for story assign to widget
+      if (function_exists('itg_video_assign_to_widget')) {
+        $video_widget = $form_state['input']['field_video_assign_to_widget'][LANGUAGE_NONE];
+        $primary_category = $form_state['input']['itg_primary_category'];
+        if (is_array($video_widget) && count($video_widget) > 0) {
+          itg_video_assign_to_widget($form_state['values']['nid'], $video_widget, $primary_category, $previous_video_assign);
+        }
+      }
+      /* Assign video to widget */
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
       drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
@@ -5032,4 +5049,35 @@ function get_tid_using_nid_custom($nid) {
     return $result;
   }
   return 0;
+}
+
+/**
+ * function for video assign to widget
+ * @param $nid
+ * @param array $video_widget
+ * @param $cat_id
+ * @param $previous_video_assign
+ */
+function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previous_video_assign) {
+  if (!empty($video_widget) && count($video_widget)) {
+    $result = array();
+    foreach ($video_widget as $widget_name) {
+      if (!empty($widget_name) && $widget_name != '_none') {
+        $result[$widget_name] = $widget_name;
+        $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
+        if (!$is_node_in_widget) {
+          itg_widget_insert_widget_data($nid, $widget_name, 0);
+        }
+      }
+    }
+    itg_widget_delete_old_data_by_limit($widget_name);
+    foreach ($previous_video_assign as $row) {
+      $widget_value = $row['value'];
+      if ($widget_value != $result[$row['value']]) {
+        if (!empty($widget_value)) {
+          itg_widget_delete_data_from_widget($widget_value, $nid);
+        }
+      }
+    }
+  }
 }

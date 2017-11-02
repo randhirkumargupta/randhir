@@ -152,13 +152,6 @@ function itg_common_menu() {
     'file' => 'includes/itg_common.inc',
   );
   
-  $items['akamai-user'] = array(
-    'title' => 'Logged in akamai user',
-    'page callback' => 'itg_sso_itgredirect',
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
-  );
-  
   return $items;
 }
 
@@ -1882,6 +1875,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
 
           $value2 = '<script async="" defer="" src="//platform.instagram.com/en_US/embeds.js" ></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+          $value2 = '<script async="" defer="defer" src="//platform.instagram.com/en_US/embeds.js"></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         }
       }
     }
@@ -2028,13 +2023,3 @@ function _widget_title($string , $is_for_attribute = TRUE) {
   }
 }
 
-/**
- * function itg_sso_itgredirect().
- */
-function itg_sso_itgredirect() {
-  drupal_add_http_header('Cache-Control', 'no-store');
-  watchdog('user_page', 'pass');
-  $arg = arg();
-  $redirect = base64_decode($arg[1]);
-  drupal_goto($redirect);
-}

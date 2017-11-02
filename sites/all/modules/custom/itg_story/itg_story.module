@@ -94,6 +94,14 @@ function itg_story_menu() {
     'file' => 'includes/itg_story.helper.inc',
     'type' => MENU_CALLBACK,
   );
+  
+  $items['byline/%ctools_js/add'] = array(
+    'title' => 'Add Byline',
+    'page callback' => 'itg_story_add_byline_popup',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   return $items;
 }
@@ -281,6 +289,32 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
           'file_validate_extensions' => array("png gif jpg jpeg"),
         ),
       );
+      //Byline popup
+      // Load the modal library and add the modal javascript.
+      ctools_include('modal');
+      ctools_modal_add_js();
+      break;
+    case 'reporter_node_form' :
+      if ($form_state['reporter_popup_form']) {
+        // alter label name
+        $form['title']['#title'] = t('Name');
+        //$form['field_reporter_twitter_handle']['#access'] = FALSE;
+        //$form['field_story_expert_name']['#access'] = FALSE;
+        //$form['field_story_new_title']['#access'] = FALSE;
+        $form['field_constituancy']['#access'] = FALSE;
+        $form['field_party_name']['#access'] = FALSE;
+        $form['field_reporter_movie_name']['#access'] = FALSE;
+        $form['field_story_category']['#access'] = FALSE;
+        $form['field_story_extra_large_image']['#access'] = FALSE;
+        $form['body']['#access'] = FALSE;
+        $form['field_reporter_facebook_id']['#access'] = FALSE;
+        $form['field_career_graph_cast']['#access'] = FALSE;
+        $form['field_old_content_source_id']['#access'] = FALSE;
+        $form['category_holder']['#access'] = FALSE;
+        $form['path_alias']['#access'] = FALSE;
+        $form['actions']['preview']['#access'] = FALSE;
+        $form['actions']['cancel']['#access'] = FALSE;
+      }
       break;
   }
 
@@ -294,6 +328,21 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
 function itg_story_form_custom_callback($form, &$form_state) {
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
+      /* Assign story to widget */
+      if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_story_assign = '';
+      }
+      $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+      // for story assign to widget
+      if (function_exists('itg_story_assign_to_widget')) {
+        if (is_array($story_widget) && count($story_widget) > 0) {
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, '', $previous_story_assign);
+        }
+      }
+      /* End for Assign story to widget */
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
       drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
@@ -520,8 +569,9 @@ function itg_story_after_build($form, &$form_state) {
   else {
     $reporter_id = $form['#node']->field_reporter_unique_id[LANGUAGE_NONE][0]['value'];
   }
+  $add_byline_link = l('Add Byline', 'byline/nojs/add', array( 'attributes' => array('class' => array( 'ctools-use-modal', 'add-byline-link' )) ));
   $form['field_story_reporter']['#prefix'] = '<div class="multi_reporter">';
-  $form['field_story_reporter']['#suffix'] = '<a class="multi-byline" data-tag="save">' . t('Add') . '</a></div><div class="byline-list"><ul class="byline-ul">' . itg_byline_info($reporter_id) . '</ul><span class="add-more save-byline">' . t('Save') . '</span></div><span class="success-byline"></span>';
+  $form['field_story_reporter']['#suffix'] = '<a class="multi-byline" data-tag="save">' . t('Add') . '</a>'.$add_byline_link.'</div><div class="byline-list"><ul class="byline-ul">' . itg_byline_info($reporter_id) . '</ul><span class="add-more save-byline">' . t('Save') . '</span></div><span class="success-byline"></span>';
 
   $form['original_image_fids'] = array(
     '#type' => 'hidden',
@@ -544,6 +594,18 @@ function itg_story_after_build($form, &$form_state) {
   // ADD js for multiple byline
   drupal_add_js(array('itg_byline' => array('settings' => $settings)), array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_byline.js', array('scope' => 'footer'));
+  
+  //Reporter node form Popup
+  // get anchor id based on category name
+  $tid_repo = REPORTER_TID;
+  $reporter_settings = array();
+  $reporter_settings['base_url'] = $base_url;
+  $reporter_settings['uid'] = $user->uid;
+  $reporter_settings['reporter'] = $tid_repo;
+  drupal_add_js(array('itg_reporter' => array('settings' => $reporter_settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_reporter.js', array('scope' => 'footer'));
+  $form['#attached']['js'] = array(
+    drupal_get_path('module', 'itg_astro') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
   return $form;
 }
 
@@ -891,12 +953,12 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     }
     
     if (!empty($node->field_story_technology['und'])) {
-    $node->content['movie_plugin'] = itg_story_movie_image_plugin_data($node);
+      $node->content['movie_plugin'] = itg_story_movie_image_plugin_data($node);
     }
     
     if(!empty($node->field_photo_story) && $node->field_story_type[LANGUAGE_NONE][0]['value']== 'photo_story') {
-    $node->content['photo_story_html'] = itg_story_photo_story_html($node, $primary_cat);
-    $node->content['photo_story_bottom_html'] = itg_story_photo_story_bottom_html($node);
+      $node->content['photo_story_html'] = itg_story_photo_story_html($node, $primary_cat);
+      $node->content['photo_story_bottom_html'] = itg_story_photo_story_bottom_html($node);
     }
     
     /*if ($external_url = _is_external_url_story_article($node->nid)) {
@@ -924,7 +986,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
 
     if (function_exists('itg_msi_get_lock_story_status')) {
        if (in_array('developing_story', $config)) {
-       $node->content['develop_story_status'] =  1; 
+        $node->content['develop_story_status'] =  1; 
        }
       //$node->content['develop_story_status'] = itg_msi_get_lock_story_status($node->nid, 'developing_story');
     }
@@ -1184,7 +1246,7 @@ function itg_story_photo_amp_html($node) {
       height="432"
       layout="responsive"
       alt="' . $photo_story_img_alt . '" title="' . $photo_story_img_title . '" srcset="'.$photo_story_src_set.'"><div fallback>offline</div></amp-img><div class="caption">' . $getImageInfo[0]->image_photo_grapher . '</div></div>
-      <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><amp-fit-text>' . $photo_story_desc . '</amp-fit-text></div>';
+      <div class="image-alt">' . $getImageInfo[0]->image_caption . '</div><span>' . $photo_story_desc . '</span></div>';
       $i++;
     }
     $html .= '</amp-carousel>';
@@ -1570,5 +1632,94 @@ function itg_story_save_original_sample_image($fid) {
       ))->execute();
     }
     return $file->fid;
+  }
+}
+
+/**
+ * function for story assign to widget
+ * @param int $nid
+ * @param array $story_widget
+ * @param int $cat_id
+ */
+function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $previous_story_assign) {
+  if (!empty($story_widget) && count($story_widget)) {
+    $result = array();
+    foreach ($story_widget as $widget_name) {
+      if (!empty($widget_name) && $widget_name != '_none') {
+        $result[$widget_name] = $widget_name;
+        $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
+        if (!$is_node_in_widget) {
+          if ($widget_name == 'big_story_format_widget') {
+            $extra = '[]';
+            itg_widget_insert_widget_data($nid, $widget_name, $category_tid, $extra);
+          }
+          else {
+            itg_widget_insert_widget_data($nid, $widget_name, 0);
+          }
+        }
+      }
+    }
+    itg_widget_delete_old_data_by_limit($widget_name);
+    foreach ($previous_story_assign as $row) {
+      $widget_value = $row['value'];
+      if ($widget_value != $result[$row['value']]) {
+        itg_watchdog('widget_value_inner', $widget_value);
+        if (!empty($widget_value)) {
+          itg_widget_delete_data_from_widget($widget_value, $nid);
+        }
+      }
+    }
+  }
+}  
+    
+/**
+ * Add byline menu page callback
+ * @global object $user
+ * @param type $ajax
+ */
+function itg_story_add_byline_popup($ajax) {
+  global $user;
+  if ($ajax) {
+    ctools_include('ajax');
+    ctools_include('modal');
+
+    ctools_include('node.pages', 'node', '');
+    $node = (object) array(
+          'uid' => $user->uid,
+          'name' => (isset($user->name) ? $user->name : ''),
+          'type' => 'reporter',
+          'language' => LANGUAGE_NONE,
+    );
+
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('Add Byline'),
+      'reporter_popup_form' => 1,
+    );
+    $form_state['build_info']['args'] = array($node);
+    // Use ctools to generate ajax instructions for the browser to create
+    // a form in a modal popup.
+    $output = ctools_modal_form_wrapper('reporter_node_form', $form_state);
+
+    // If the form has been submitted, there may be additional instructions
+    // such as dismissing the modal popup.
+    if (!empty($form_state['executed'])) {
+      if (!empty($form_state['values']['field_reporter_profile_type'])) {
+        $reporter_type = '(' . $form_state['values']['field_reporter_profile_type']['und'][0]['value'] . ')';
+      }
+      if (!empty($form_state['values']['field_reporter_email_id'])) {
+        $reporter_email = '(' . $form_state['values']['field_reporter_email_id']['und'][0]['value'] . ')';
+      }
+      $name_format = $form_state['values']['title'] . $reporter_type . $reporter_email . '{' . $form_state['values']['nid'] . '}';
+      $output = array();
+      $output[] = ctools_modal_command_display(
+          t('Node created'), 'Node creation successful.');/** Add success message */
+      $output[] = ctools_modal_command_dismiss(); //Close modal automatically
+      //$output[] = ctools_ajax_command_reload(); //reload parent window
+      $output[] = ajax_command_invoke('#edit-field-story-reporter-und-0-target-id', 'val', array($name_format));
+    };
+    // Return the ajax instructions to the browser via ajax_render().
+    print ajax_render($output);
+    drupal_exit();
   }
 }

@@ -776,7 +776,7 @@ function itg_layout_clean_url($string) {
 }
 
 /**
- * Implements hook_manager_preprocess_page().
+ * Implements itg_layout_gethomecarddata_new_pre().
  * {@inheritdoc}
  */
 function itg_layout_gethomecarddata_new_pre($sectinno) {
@@ -812,7 +812,7 @@ function itg_layout_gethomecarddata_new_pre($sectinno) {
 }
 
 /**
- * Implements hook_manager_preprocess_page().
+ * Implements itg_layout_getsectioncarddata_new_pre().
  * {@inheritdoc}
  */
 function itg_layout_getsectioncarddata_new_pre($sectinno, $section) {

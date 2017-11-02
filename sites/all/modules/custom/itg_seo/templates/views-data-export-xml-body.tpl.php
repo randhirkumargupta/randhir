@@ -13,7 +13,7 @@
 ?>
 <?php
   global $base_url;
-  $logo = $base_url . '/' . drupal_get_path('theme', 'itg') . '/logo.png';
+  $logo = $base_url . '/' . drupal_get_path('theme', 'itg') . '/googleeditorspics.png';
 ?>
 <<?php print "channel"; ?>>
 <<?php print $xml_tag['path']; ?>><![CDATA[<?php print $base_url; ?>]]></<?php print $xml_tag['path']; ?>>

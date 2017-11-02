@@ -317,7 +317,7 @@ function itg_widgets_custom_variables() {
       '#required'=> FALSE,
       '#default_value' => variable_get('api_info'), // for default checked and false is not checked
   );
-
+  
   $form["api_content_limit"] = array(
     "#type" => "select",
     "#title" => t("Select agency feed node limit"),
@@ -336,6 +336,14 @@ function itg_widgets_custom_variables() {
       "25000" => t("25000"),
     ),
   );
+  
+  $form['custom_canonical_amp'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable custom canonical for amp'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('custom_canonical_amp'), // for default checked and false is not checked
+  );
+
   
   return system_settings_form($form);
 }

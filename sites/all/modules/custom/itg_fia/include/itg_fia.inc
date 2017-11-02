@@ -27,14 +27,14 @@ function itg_fia_xml_node_feed($query) {
   foreach ($nodes as $node) {
     if ($node->workbench_moderation['current']->state == 'published') {
       $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
-      $pubdate = date('Y-m-d\Th:i:s\Z', $node->workbench_moderation['current']->timestamp);
+      $pubdate = date('Y-m-d h:i:s\+05:30', $node->workbench_moderation['current']->timestamp);
     } else {
       $op_pub = date('F j, h:i a', $node->created);
-      $pubdate = date('Y-m-d\Th:i:s\Z', $node->created);
+      $pubdate = date('Y-m-d h:i:s\+05:30', $node->created);
     }
     $guid = $node->nid . " at " . $base_url;
     $op_modified = date('F j, h:i a', $node->changed);
-    $modified = date('Y-m-d\Th:i:s\Z', $node->changed);
+    $modified = date('Y-m-d h:i:s\+05:30', $node->changed);
     $auth_name = get_author_name($node->nid);
     $desc = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];

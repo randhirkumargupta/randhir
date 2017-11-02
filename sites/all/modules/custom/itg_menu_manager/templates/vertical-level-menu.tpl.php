@@ -35,8 +35,28 @@
           if(!empty($sponsored_class)) {
             $color_value = $menu_data['db_data']['bk_color'];
           }
+          if($menu_link_data['url_type'] == 'url-type-external') {
+            $attribute_array = array(
+            'style' => array("background : $color_value" ) , 
+            'target' => $target, 
+            'rel' => 'nofollow', 
+            'title' => $menu_link_data['link_title_for_vertical'], 
+            'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+            );
+            
+          } else {
+            $attribute_array = array(
+            'style' => array("background : $color_value" ) , 
+            'target' => $target, 
+            'title' => $menu_link_data['link_title_for_vertical'], 
+            'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
+            );
+          }
         ?>
-        <li><?php print l($icon . $link_title_display, $link_url, array("html" => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'title' => $menu_link_data['link_title_for_vertical'], 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?></li>
+        <li><?php print l($icon . $link_title_display, $link_url, array(
+          "html" => true, 
+          'attributes' => $attribute_array,
+          )); ?></li>
         <?php
       endforeach;
       ?>
