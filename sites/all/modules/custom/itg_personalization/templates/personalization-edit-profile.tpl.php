@@ -9,7 +9,7 @@
 <?php print $data['tab']; ?>
 <?php print render($data['form']); ?>
 <div class="profile-ajax-loader" style="display: none">
-    <img class="profile-ajax-loader" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
+    <img class="profile-loader" align="center" src="<?php echo $base_url; ?>/sites/all/themes/itgadmin/images/loader.svg" alt="Loading..." />
 </div>
 <?php
 $arg = arg();
