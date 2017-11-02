@@ -191,61 +191,25 @@ function itg_front_end_common_block_view($delta = '') {
  * Implements taboola block content
  */
 function _taboola_block_content() {
-$output = '<div class="taboola">
-        <script type="text/javascript">
-window._taboola = window._taboola || [];
-_taboola.push({article:"auto"});
-!function (e, f, u) {
-e.async = 1;
-e.src = u;
-f.parentNode.insertBefore(e, f);
-}(document.createElement("script"), document.getElementsByTagName("script")[0], "https://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js");
-</script>
-<div class="divclear"></div>
-<div class="nocontent">
-    <div id="taboola-below-main-column"></div>
-    <script type="text/javascript">
-      window._taboola = window._taboola || [];
-      _taboola.push({mode: "thumbs-2r", container: "taboola-below-main-column", placement: "below-main-column"});
-    </script>
-    <div id="taboola-text-2-columns"></div>
-    <script type="text/javascript">
-      window._taboola = window._taboola || [];
-      _taboola.push({mode: "hybrid-text-links-2c", container: "taboola-text-2-columns", placement: "text-2-columns", target_type: "mix"});
-    </script>
-    <script type="text/javascript">
-      window._taboola = window._taboola || [];
-      _taboola.push({flush: true});
-    </script>
-</div>
-</div>
-';
-return $output;
+  $output = '';
+  if (!empty(variable_get('taboola_bottom_block'))) {
+    $output = variable_get('taboola_bottom_block');
+  } else {
+    $output = 'Please add taboola script in setting page.';
+  }
+  return $output;
 }
 
 /**
  * Implements May be recommend block content
  */
 function _may_be_recommend_block_content() {
-  $output = "<div class='may-be-recommend'><h3><span>".t('May we recommend')."</span></h3>
-        <script type='text/javascript'>
-window._taboola = window._taboola || [];
-_taboola.push({article:'auto'});
-!function (e, f, u) {
-e.async = 1;
-e.src = u;
-f.parentNode.insertBefore(e, f);
-}(document.createElement('script'), document.getElementsByTagName('script')[0], 'https://cdn.taboola.com/libtrc/indiatoday-indiatoday/loader.js');
-</script><div id='taboola-right-rail-thumbnails-2nd'></div>
-<script type='text/javascript'>
-window._taboola = window._taboola || [];
-_taboola.push(
-{ mode: 'organic-thumbnails-rr', container: 'taboola-right-rail-thumbnails-2nd', placement: 'Right Rail Article Thumbnails 2nd', target_type: 'mix' }
-
-);
-</script>
-</div>
-";
+  $output = '';
+  if (!empty(variable_get('third_party_may_recommend_block'))) {
+    $output = variable_get('third_party_may_recommend_block');
+  } else {
+    $output = 'Please add may be recommed script in setting page.';
+  }
   return $output;
 }
 

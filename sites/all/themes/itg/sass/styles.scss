@@ -2601,7 +2601,7 @@ footer {
             .saved-photogallery {
                 background: #fff none repeat scroll 0 0;
                 box-shadow: 0 0 8px #666;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 font-size: 22px;
                 font-weight: 700;
                 height: 160px;
@@ -2725,7 +2725,7 @@ footer {
                     a {
                         color: #404040;
                         font-size: 11px;
-                        font-family: roboto;
+                        font-family: $itg-roboto;
                         position: relative;
                         &:before {
                             content: '';
@@ -2852,13 +2852,13 @@ footer {
                         background-color: #222;
                         color: #a1a1a1;
                         font-size: 13px;
-                        font-family: Roboto;
+                        font-family: $itg-roboto;
                     }
                 }
                 .photo-description {
                     padding: 10px 0;
                     border-bottom: 1px solid #ddd;
-                    font-family: Roboto;
+                    font-family: $itg-roboto;
                     font-size: 13px;
                     color: #8d8d8d;
                     font-weight: 300;
@@ -3059,7 +3059,7 @@ footer {
         text-align: center;
         padding: 15px 0;
         color: #929292;
-        font-family: roboto;
+        font-family: $itg-roboto;
         font-size: 16px;
         font-weight: 700;
         #name-dv {
@@ -4577,7 +4577,7 @@ h1.category-heading {
             font-size: 14px;
             margin-top: 10px;
             height: 22px;
-            font-family: Roboto;
+            font-family: $itg-roboto;
             font-weight: 600;
         }
         .error {
@@ -4594,7 +4594,7 @@ h1.category-heading {
         }
         label {
             color: #33363b;
-            font-family: roboto;
+            font-family: $itg-roboto;
             font-size: 14px;
             text-transform: capitalize;
         }
@@ -5107,7 +5107,7 @@ h1.category-heading {
                 margin: 0;
                 padding: 10px 5px 3px;
                 border-bottom: 3px solid transparent;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 font-weight: 500;
                 color: #969696;
                 &:hover,
@@ -5185,7 +5185,7 @@ h1.category-heading {
                             background-color: rgba(0, 0, 0, .5);
                             color: #fff;
                             font-size: 12px;
-                            font-family: Roboto;
+                            font-family: $itg-roboto;
                             .fa {
                                 font-size: 14px;
                                 margin-right: 5px;
@@ -6213,7 +6213,7 @@ section.sidebar {
         a {
             background: #db0e0f;
             color: #fff;
-            font-family: roboto;
+            font-family: $itg-roboto;
             text-transform: uppercase;
             padding: 10px 15px;
             border-radius: 30px 0px 0px 30px;
@@ -6422,7 +6422,7 @@ section.sidebar {
                         padding: 13px 10px;
                         font-size: 18px;
                         line-height: 24px;
-                        font-family: roboto;
+                        font-family: $itg-roboto;
                         font-weight: 500;
                     }
                 }
@@ -6544,7 +6544,7 @@ section.sidebar {
             background: #d6d6d6;
             @include display-inline;
             padding: 5px 10px;
-            font-family: roboto;
+            font-family: $itg-roboto;
             border-radius: 3px;
             margin-bottom: 50px;
         }
@@ -7472,7 +7472,7 @@ section.sidebar {
     }
     .views-row {
         @include text-align(center);
-        font-family: roboto;
+        font-family: $itg-roboto;
         color: #ef2a24;
         font-weight: 700;
         text-transform: uppercase;
@@ -7900,7 +7900,7 @@ section.sidebar {
             .views-field-field-story-new-title {
                 font-size: 11px;
                 font-weight: 700;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 color: #000;
                 margin-top: 10px;
                 text-transform: uppercase;
@@ -7926,7 +7926,7 @@ section.sidebar {
             li {
                 border-radius: 0;
                 color: #000;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 font-weight: normal;
                 padding: 15px 10px;
                 span {
@@ -8357,7 +8357,7 @@ section.sidebar {
             padding: 5px 10px;
             color: #fff;
             font-weight: 500;
-            font-family: roboto;
+            font-family: $itg-roboto;
             border-radius: 4px;
         }
         #field-erf-registration-fee-add-more-wrapper {
@@ -8381,7 +8381,7 @@ section.sidebar {
         /* padding: 0;
         background: transparent;
         border: none;*/
-        font-family: roboto;
+        font-family: $itg-roboto;
         font-size: 12px;
         color: #707070;
         ul {
@@ -8791,7 +8791,7 @@ section.sidebar {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -10127,7 +10127,7 @@ section.sidebar {
         }
         table {
             font-size: 13px;
-            font-family: roboto;
+            font-family: $itg-roboto;
             th {
                 text-align: center;
                 border-bottom: 10px solid #FFF;
@@ -10186,7 +10186,7 @@ section.sidebar {
             tspan {
                 &:nth-child(1) {
                     font-weight: 900;
-                    font-family: roboto;
+                    font-family: $itg-roboto;
                     font-size: 42px;
                     color: #515151;
                 }
@@ -10242,7 +10242,7 @@ section.sidebar {
             svg {
                 >text {
                     fill: #009ef0 !important;
-                    font-family: Roboto;
+                    font-family: $itg-roboto;
                 }
             }
         }
@@ -10252,7 +10252,7 @@ section.sidebar {
             margin-top: 50px;
             table {
                 width: 100%;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 th,
                 td {
                     padding: 3px;
@@ -10299,7 +10299,7 @@ div#playerContainer {
                 font-size: 13px;
                 padding: 20px 15px;
                 display: block;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 position: relative;
                 border-bottom: 1px solid #1a1a1a;
                 i {
@@ -10476,7 +10476,7 @@ div#playerContainer {
         .vertical-menu {
             max-width: 58px;
             span {
-                font-family: roboto;
+                font-family: $itg-roboto;
                 font-weight: 600;
                 text-transform: uppercase;
                 padding: 5px 5px;
@@ -10667,7 +10667,7 @@ h1.about-us-heading {
     .or-share-detail {
         text-align: center;
         font-size: 16px;
-        font-family: roboto;
+        font-family: $itg-roboto;
         color: #777777;
         margin: 25px 0;
     }
@@ -10775,7 +10775,7 @@ h1.about-us-heading {
     .view-header {
         font-size: 30px;
         color: #fff;
-        font-family: roboto;
+        font-family: $itg-roboto;
         background: #353535;
         font-weight: 700;
         height: 50px;
@@ -10937,7 +10937,7 @@ h1.about-us-heading {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -10993,7 +10993,7 @@ h1.about-us-heading {
                 font-size: 12px;
                 color: #6b6b6b;
                 text-transform: uppercase;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 font-weight: 600;
             }
         }
@@ -11256,7 +11256,7 @@ h1.about-us-heading {
 
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"],
 .ask-question-sidebar {
-    font-family: roboto;
+    font-family: $itg-roboto;
     border-bottom: 1px solid #ddd;
     @include sidebar-heading;
     ul {
@@ -11374,7 +11374,7 @@ h1.about-us-heading {
             display: inline-block;
             color: #fff;
             text-align: center;
-            font-family: roboto;
+            font-family: $itg-roboto;
             margin-right: 10px;
             position: absolute;
             top: 20px;
@@ -11490,7 +11490,7 @@ h1.about-us-heading {
             color: #fff;
             margin: 0 -15px;
             border-bottom: 5px solid #fff;
-            font-family: roboto;
+            font-family: $itg-roboto;
         }
     }
     .col-list-1 {
@@ -11819,7 +11819,7 @@ h1.about-us-heading {
 
 .breakingnew-home {
     margin-bottom: 30px;
-    font-family: roboto;
+    font-family: $itg-roboto;
     @include clearfix;
     @include pos(relative);
     .title {
@@ -12068,7 +12068,7 @@ h1.about-us-heading {
                 background-color: rgba(0, 0, 0, 0.5);
                 color: #fff;
                 font-size: 12px;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 i {
                     font-size: 14px;
                 }
@@ -12319,14 +12319,22 @@ span.smilies-title {
     position: relative;
     z-index: 9998;
     color: #a1a1a1;
-    font-family: roboto;
+    font-family: $itg-roboto;
     padding-top: 15px;
     a {
         color: #a1a1a1;
-        font-family: roboto;
+        font-family: $itg-roboto;
         &:hover {
             text-decoration: underline;
         }
+    }
+    h1 {
+        color: #a1a1a1;
+        font-size: 14px;
+        line-height: inherit;
+        font-weight: normal;
+        display: inline-block;
+        font-family: $itg-roboto;
     }
     .container {
         div.lft {
@@ -12387,7 +12395,7 @@ span.smilies-title {
     text-transform: capitalize;
     font-size: 18px;
     border-radius: 3px;
-    font-family: roboto;
+    font-family: $itg-roboto;
     pointer-events: auto;
 }
 
@@ -12517,7 +12525,7 @@ span.smilies-title {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -13497,7 +13505,7 @@ span.close_btt {
         padding: 10px 0 10px 45px;
         font-size: 16px;
         font-weight: 300;
-        font-family: Roboto;
+        font-family: $itg-roboto;
         color: #aaa;
         margin: 28px 0;
         .fa {
@@ -13539,7 +13547,7 @@ span.close_btt {
             width: 220px;
             a {
                 color: #ddd;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 font-size: 12px;
                 &:hover {
                     text-decoration: underline;
@@ -13552,7 +13560,7 @@ span.close_btt {
         margin: 20px 0 0;
         border-top: 1px solid #666;
         color: #666;
-        font-family: Roboto;
+        font-family: $itg-roboto;
         font-size: 12px;
         text-align: center;
     }
@@ -13618,7 +13626,7 @@ span.close_btt {
             a {
                 font-size: 16px;
                 line-height: 28px;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 font-weight: 500;
                 color: #666;
                 padding-left: 30px;
@@ -13901,7 +13909,7 @@ body.page-taxonomy-term #main .row {
     margin-top: -45px;
     color: #83b1cb;
     text-transform: uppercase;
-    font-family: roboto;
+    font-family: $itg-roboto;
     font-size: 12px;
     position: relative;
     z-index: 9999;
@@ -13924,7 +13932,7 @@ body.page-taxonomy-term #main .row {
 
 .story-sponsor-powered-text {
     color: #83b1cb;
-    font-family: roboto;
+    font-family: $itg-roboto;
     font-size: 14px;
 }
 
@@ -13935,7 +13943,7 @@ span.story-sponsor-powered-text::last-word {
 
 .story-sponsor-impact {
     color: #83b1cb;
-    font-family: roboto;
+    font-family: $itg-roboto;
     font-size: 12px;
     text-transform: uppercase;
     font-weight: bold;
@@ -14590,7 +14598,7 @@ ul.pron-cons-img li img {
     background: #ddd;
 }
 
-#block-itg- photogallery-photogallery- link-menu- block ul {
+#block-itg-photogallery-photogallery-link-menu-block ul {
     list-style: none;
     white-space: nowrap;
     display: inline-block;
@@ -14600,7 +14608,7 @@ ul.pron-cons-img li img {
     overflow: auto;
 }
 
-#block-itg- photogallery-photogallery- link-menu- block ul li {
+#block-itg-photogallery-photogallery-link-menu-block ul li {
     display: inline-block;
     vertical-align: top;
     border-right: 0;
@@ -14608,17 +14616,17 @@ ul.pron-cons-img li img {
     padding-right: 30px;
 }
 
-#block-itg- photogallery-photogallery- link-menu- block ul li a {
+#block-itg-photogallery-photogallery-link-menu-block ul li a {
     display: block;
     margin: 0;
     padding: 10px 5px 3px;
     border-bottom: 3px solid transparent;
-    font-family: Roboto;
+    font-family: $itg-roboto;
     font-weight: 500;
     color: #969696;
 }
 
-#block-itg- photogallery-photogallery- link-menu- block {
+#block-itg-photogallery-photogallery-link-menu-block {
     margin-top: 22px;
 }
 
@@ -14650,7 +14658,7 @@ ul.pron-cons-img li img {
     background: #ddd;
 }
 
-#block-itg- videogallery-itg- videogallery-menu- content ul {
+#block-itg-videogallery-itg-videogallery-menu-content ul {
     list-style: none;
     white-space: nowrap;
     display: inline-block;
@@ -14660,7 +14668,7 @@ ul.pron-cons-img li img {
     overflow: auto;
 }
 
-#block-itg- videogallery-itg- videogallery-menu- content ul li {
+#block-itg-videogallery-itg-videogallery-menu-content ul li {
     display: inline-block;
     vertical-align: top;
     border-right: 0;
@@ -14668,53 +14676,53 @@ ul.pron-cons-img li img {
     padding-right: 30px;
 }
 
-#block-itg- videogallery-itg- videogallery-menu- content ul li a {
+#block-itg-videogallery-itg-videogallery-menu-content ul li a {
     display: block;
     margin: 0;
     padding: 10px 5px 3px;
     border-bottom: 3px solid transparent;
-    font-family: Roboto;
+    font-family: $itg-roboto;
     font-weight: 500;
     color: #969696;
 }
 
-#block-itg- videogallery-itg- videogallery-menu- content {
+#block-itg-videogallery-itg-videogallery-menu-content {
     margin-top: 22px;
     float: left;
     width: 100%;
     margin-bottom: 22px;
 }
 
-#block-itg- videogallery-itg- other-videogallery- section .photo-list img {
+#block-itg-videogallery-itg-other-videogallery-section .photo-list img {
     width: 170px;
     height: 127px;
 }
 
-.video-header- right .video_header_tabs .tab-data-2 h3 {
+.video-header-right .video_header_tabs .tab-data-2 h3 {
     display: none;
 }
 
-.video-header- right .trending-videos {
+.video-header-right .trending-videos {
     border: 0px;
 }
 
-#related-video- tab ul li.related_content_tab .pic,
-.video-header- right .trending-videos li.trending-videos- list .pic {
+#related-video-tab ul li.related_content_tab .pic,
+.video-header-right .trending-videos li.trending-videos-list .pic {
     width: 170px;
     float: right;
     margin-left: 5px;
     position: relative;
 }
 
-#related-video- tab ul li,
+#related-video-tab ul li,
 .trending-videos ul li {
     padding: 15px 24px 15px 0px;
     border-bottom: 1px solid #aaa9a9;
     overflow: hidden;
 }
 
-#related-video- tab ul li.related_content_tab .title,
-.video-header- right .trending-videos li.trending-videos- list p {
+#related-video-tab ul li.related_content_tab .title,
+.video-header-right .trending-videos li.trending-videos-list p {
     display: block;
     overflow: hidden;
     word-wrap: break-word;
@@ -14724,8 +14732,8 @@ ul.pron-cons-img li img {
     color: #aaa9a9;
 }
 
-#related-video- tab ul li.related_content_tab .title a,
-.trending-videos li.trending-videos- list p a {
+#related-video-tab ul li.related_content_tab .title a,
+.trending-videos li.trending-videos-list p a {
     color: #aaa9a9;
 }
 
@@ -14735,7 +14743,7 @@ ul.pron-cons-img li img {
     padding: 5px 0 0 5px;
 }
 
-.latest_video .tab-buttons.tab- buttons span {
+.latest_video .tab-buttons.tab-buttons span {
     border: 0px;
     background: none;
     width: auto;
@@ -14750,6 +14758,10 @@ ul.pron-cons-img li img {
     border-radius: 0;
 }
 
+.latest_video .tab-buttons.tab-buttons span a {
+    color: #fff;
+}
+
 .latest_video .tab-buttons span.active {
     border: 0px;
     background: #363636;
@@ -14761,7 +14773,7 @@ ul.pron-cons-img li img {
     border-radius: 0;
 }
 
-.video-header- right .related_content_tab span.videolengh {
+.video-header-right .related_content_tab span.videolengh {
     bottom: 0;
     left: 0;
     position: absolute;
@@ -14769,17 +14781,17 @@ ul.pron-cons-img li img {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-size: 12px;
-    font-family: Roboto;
+    font-family: $itg-roboto;
 }
 
-.video-landing- header .upload-date span {
+.video-landing-header .upload-date span {
     font-size: 12px;
     font-weight: 600;
     margin: 10px 0;
     display: block;
 }
 
-.video-landing- header .top-section p {
+.video-landing-header .top-section p {
     margin-bottom: 10px
 }
 
@@ -14793,26 +14805,26 @@ ul.pron-cons-img li img {
     overflow-y: auto;
 }
 
-.video_header_tabs #related-video- tab ul li.related_content_tab .related- default {
+.video_header_tabs #related-video-tab ul li.related_content_tab .related-default {
     width: 170px;
     height: 127px;
 }
 
-.video_header_tabs .trending-videos ul li .trending-videos- list img {
+.video_header_tabs .trending-videos ul li .trending-videos-list img {
     width: 170px;
     height: 127px;
 }
 
-#block-itg- videogallery-itg- videogallery-tab- realted .related_content_tabs .title a {
+#block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs .title a {
     color: #aaa9a9;
 }
 
-#block-itg- videogallery-itg- videogallery-tab- realted .related_content_tabs figure a {
+#block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figure a {
     position: relative;
     float: right;
 }
 
-#block-itg- videogallery-itg- videogallery-tab- realted .related_content_tabs figcaption {
+#block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figcaption {
     bottom: 0;
     left: 0;
     position: absolute;
@@ -14820,7 +14832,7 @@ ul.pron-cons-img li img {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-size: 12px;
-    font-family: Roboto;
+    font-family: $itg-roboto;
 }
 
 #modal-content #reporter-node-form .vertical-tabs {
