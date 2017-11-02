@@ -367,7 +367,8 @@ function buildListicleNode($node) {
     // get title
     $field_story_template_guru = $node->field_story_template_guru['und'][0]['value'];
     $listcont = 0;
-    $listiclenode[$listcont]['title'] = "$field_story_template_guru";
+    //$listiclenode[$listcont]['title'] = "$field_story_template_guru";
+    $listiclenode['title'] = "$field_story_template_guru";
     //listicle loop data
     $field_story_listicle = $node->field_story_listicle['und'];
     $listcont = 1;
@@ -401,7 +402,8 @@ function buildFactoidNode($node) {
     // get title
     $field_story_factoids_title = $node->field_story_factoids_title['und'][0]['value'];
     $listcont = 0;
-    $factoidnode[$listcont]['title'] = "$field_story_factoids_title";
+    //$factoidnode[$listcont]['title'] = "$field_story_factoids_title";
+    $factoidnode['title'] = "$field_story_factoids_title";
     $listcont = 1;
     // loop data - field_story_template_factoids
     $field_story_template_factoids = $node->field_story_template_factoids['und'];
