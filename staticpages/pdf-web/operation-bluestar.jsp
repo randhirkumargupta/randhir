@@ -1,21 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base href="/staticpages/pdf-web/" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Operation Bluestar</title>
 <meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg">
-<script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
+<script type="text/javascript" language="javascript" src="js/ajaxinclude.js"></script>
 <style>
 body { background: none !important}
 </style>
-<link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
+<link href="css/common.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 <script src="http://cdn51.vizury.com/pam/api/pam.js?name=PAM_IND_PC_IndiaToday&id=7075&v=1.2&geo=ap"></script>
-<script src="/staticpages/main/js/jquery.min.1.8.2.js" type="text/javascript"></script>
-<script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
 
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
 <style>
@@ -84,7 +83,7 @@ header {
     font: bold 12px/15px roboto;
 }
 .logoit {
-    background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -10px -154px rgba(0, 0, 0, 0);
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -10px -154px rgba(0, 0, 0, 0);
     height: 70px;
     text-indent: -9999px;
     width: 329px;
@@ -104,7 +103,7 @@ nav {
     width: 1000px;
 }
 .sp_bg {
-    background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 .app a {
     display: block;
@@ -204,7 +203,7 @@ background:#ffffff;
 <div class="header-tag">
 <div class="htl-logo">
 <!--<div class="htl-text">In Association with</div>
-<img width="265" height="35" border="0" usemap="#Map" src="/staticpages/main/images/ITG-branding.png">
+<img width="265" height="35" border="0" usemap="#Map" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ITG-branding.png">
 <map id="Map" name="Map">
   <area target="_blank" href="http://indiatoday.intoday.in/" coords="1,1,77,34" shape="rect">
   <area target="_blank" href="http://headlinestoday.intoday.in/" coords="87,2,165,34" shape="rect">
@@ -227,18 +226,18 @@ background:#ffffff;
 <nav>
 <ul>
 <li class="home-icon sp_bg" style="border-top:2px solid #E70009;"><a href="http://indiatoday.intoday.in" ></a></li>
-<li style="border-top:2px solid #F25109;"><a href="/section/114/1/india.html" >India</a></li>
-<li style="border-top:2px solid #0038F0;"><a href="/section/113/1/world.html" >World</a></li>
-<li style="border-top:2px solid #ED1C24;"><a href="/videos">Videos</a></li>
-<li style="border-top:2px solid #760108;"><a href="/galleries">Photos</a></li>
-<li style="border-top:2px solid #98D702;"><a href="/section/214/1/cricket.html" >Cricket</a></li>
-<li style="border-top:2px solid #800B80;"><a href="/section/67/1/movies.html" >Movies</a></li>
-<li style="border-top:2px solid #FFCC01;"><a href="/auto/" >Auto</a></li>
-<li style="border-top:2px solid #00A53C;"><a href="/section/84/1/sports.html" >Sports</a></li>
-<li style="border-top:2px solid #F70164; padding-right:3px;"><a href="/section/103/1/lifestyle.html" >Lifestyle</a></li>
+<li style="border-top:2px solid #F25109;"><a href="http://indiatoday.intoday.in/section/114/1/india.html" >India</a></li>
+<li style="border-top:2px solid #0038F0;"><a href="http://indiatoday.intoday.in/section/113/1/world.html" >World</a></li>
+<li style="border-top:2px solid #ED1C24;"><a href="http://indiatoday.intoday.in/videos">Videos</a></li>
+<li style="border-top:2px solid #760108;"><a href="http://indiatoday.intoday.in/galleries">Photos</a></li>
+<li style="border-top:2px solid #98D702;"><a href="http://indiatoday.intoday.in/section/214/1/cricket.html" >Cricket</a></li>
+<li style="border-top:2px solid #800B80;"><a href="http://indiatoday.intoday.in/section/67/1/movies.html" >Movies</a></li>
+<li style="border-top:2px solid #FFCC01;"><a href="http://indiatoday.intoday.in/auto/" >Auto</a></li>
+<li style="border-top:2px solid #00A53C;"><a href="http://indiatoday.intoday.in/section/84/1/sports.html" >Sports</a></li>
+<li style="border-top:2px solid #F70164; padding-right:3px;"><a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html" >Lifestyle</a></li>
 
-<li style="border-top:2px solid #e5e5e5;" ><a href="/technology/" >Tech</a>
-<li style="border-top:2px solid #f88000;" ><a href="/education/" class="edu" >Education</a></li>
+<li style="border-top:2px solid #e5e5e5;" ><a href="http://indiatoday.intoday.in/technology/" >Tech</a>
+<li style="border-top:2px solid #f88000;" ><a href="http://indiatoday.intoday.in/education/" class="edu" >Education</a></li>
 <li style="border-top:2px solid #2d2d8d;" ><a href="http://businesstoday.intoday.in/" class="edu" >Business</a></li>
 </ul>
 <div class="clear"></div>
@@ -337,16 +336,16 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 <div class="socialdiv">
 <div style="color: #000;font: bold 14px/18px Arial; text-align: right;">SHARE</div>
 	<a rel="nofollow" target="_new" title="Twitter" href="http://twitter.com/?status=Operation Bluestar%20http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp%20via%20%40indiatoday"><span class="imgs tw lft"></span></a>
-	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=/pdf-web/op-bluestar.jsp&p[title]=Operation Bluestar&s=100&p[summary]=Here are some India Today stories from the archives capturing the mood of a scarred state.&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg"><span class="imgs fb lft"></span></a>
+	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp&p[title]=Operation Bluestar&s=100&p[summary]=Here are some India Today stories from the archives capturing the mood of a scarred state.&p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2014January/6-25-2012-the-big-story-bhindranwale-memorial-remembrance-of-things-past-1_300x350_013114051847.jpg"><span class="imgs fb lft"></span></a>
 	<a rel="nofollow" title="Share" onclick="javascript: document.getElementById('customShare').style.display='block';" href="javascript:void('0');"><span class="imgs shr lft"></span></a>
 </div>
 
 <div align="right" class="shareRdiv">
 
 <div style="width: 329px; height: 151px; display: none; margin-left: -320px; ^margin-top: 20px" id="customShare" class="sharer_div">
-<div class="close" onclick="document.getElementById('customShare').style.display='none';">&nbsp;X&nbsp;</div><div class="clear social_links" style="visibility: visible;"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/socialicons_new.gif" style="margin-left: 25px; float: left;" usemap="#dontmiss"><map name="dontmiss"><area shape="rect" coords="4,2,50,48" href="http://www.facebook.com/sharer.php?u=/pdf-web/op-bluestar.jsp" target="_blank"><area shape="rect" coords="8,53,44,100" href="http://twitter.com/?status=Operation Bluestar
-%20http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp%20via%20%40indiatoday"><area shape="rect" coords="103,1,146,48" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=/pdf-web/op-bluestar.jsp&amp;title=Operation Bluestar" target="_blank"><area shape="rect" coords="155,0,193,50" href="http://digg.com/submit?phase=2&amp;url=/pdf-web/op-bluestar.jsp&amp;title=Operation Bluestar" target="_blank"><area shape="rect" coords="204,2,247,49" href="http://www.newsvine.com/_tools/seed&amp;save?u=/pdf-web/op-bluestar.jsp&amp;h=Operation Bluestar" target="_blank"><area shape="rect" coords="63,52,96,102" href="http://cgi.fark.com/cgi/fark/farkit.pl?u=/pdf-web/op-bluestar.jsp&amp;h=Operation Bluestar" target="_blank"><area shape="rect" coords="105,51,156,100" href="http://view.nowpublic.com/?src=/pdf-web/op-bluestar.jsp" target="_blank"><area shape="rect" coords="160,52,196,100" href="http://reddit.com/submit?url=/pdf-web/op-bluestar.jsp&amp;title=Operation Bluestar" target="_blank">
-  <area target="_blank" href="javascript:void(&quot;0&quot;);" onclick="javascript:window.open(&quot;/content_Email.jsp?email=0&amp;title=Operation Bluestar&amp;URL=/pdf-web/op-bluestar.jsp&quot;,&quot;window&quot;, &quot;status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390&quot;); event.returnValue=false; return false;" coords="60,2,90,49" shape="rect">
+<div class="close" onclick="document.getElementById('customShare').style.display='none';">&nbsp;X&nbsp;</div><div class="clear social_links" style="visibility: visible;"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/socialicons_new.gif" style="margin-left: 25px; float: left;" usemap="#dontmiss"><map name="dontmiss"><area shape="rect" coords="4,2,50,48" href="http://www.facebook.com/sharer.php?u=http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp" target="_blank"><area shape="rect" coords="8,53,44,100" href="http://twitter.com/?status=Operation Bluestar
+%20http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp%20via%20%40indiatoday"><area shape="rect" coords="103,1,146,48" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp&amp;title=Operation Bluestar" target="_blank"><area shape="rect" coords="155,0,193,50" href="http://digg.com/submit?phase=2&amp;url=http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp&amp;title=Operation Bluestar" target="_blank"><area shape="rect" coords="204,2,247,49" href="http://www.newsvine.com/_tools/seed&amp;save?u=http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp&amp;h=Operation Bluestar" target="_blank"><area shape="rect" coords="63,52,96,102" href="http://cgi.fark.com/cgi/fark/farkit.pl?u=http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp&amp;h=Operation Bluestar" target="_blank"><area shape="rect" coords="105,51,156,100" href="http://view.nowpublic.com/?src=http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp" target="_blank"><area shape="rect" coords="160,52,196,100" href="http://reddit.com/submit?url=http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp&amp;title=Operation Bluestar" target="_blank">
+  <area target="_blank" href="javascript:void(&quot;0&quot;);" onclick="javascript:window.open(&quot;http://indiatoday.intoday.in/content_Email.jsp?email=0&amp;title=Operation Bluestar&amp;URL=http://indiatoday.intoday.in/pdf-web/op-bluestar.jsp&quot;,&quot;window&quot;, &quot;status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390&quot;); event.returnValue=false; return false;" coords="60,2,90,49" shape="rect">
 </map></div></div>
 </div>
 
@@ -414,26 +413,25 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 
 
 </section>
-<div style="margin-left:23%">
-
+<div style="text-align:left;margin-left:15%">
 <script src="http://vuukle.com/js/vuukle.js"></script>
  <div class="vukkul-comment">
   <div id="vuukle-emote"></div>
   <div id="vuukle_div"></div>
           <script type="text/javascript">
-               var UNIQUE_ARTICLE_ID = "static_operation-bluestar";
+               var UNIQUE_ARTICLE_ID = "static_vivekananda";
                var SECTION_TAGS =  "";
-               var ARTICLE_TITLE = "operation-bluestar";
+               var ARTICLE_TITLE = "vivekananda";
                var GA_CODE = "UA-795349-17";
                var VUUKLE_API_KEY = "dc34b5cc-453d-468a-96ae-075a66cd9eb7";
                var TRANSLITERATE_LANGUAGE_CODE = ""; //"en" for English, "hi" for hindi
                var VUUKLE_COL_CODE = "d00b26";
-               var ARTICLE_AUTHORS = "abc";
+               var ARTICLE_AUTHORS = "";
                create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
           </script>
 </div>
 
-         </div>
+</div>
 
 <style>
 
@@ -478,7 +476,7 @@ nav ul {
     padding: 0 !important;
 }
 .home a {
-    background: url("/staticpages/main/images/sprite-image.png") no-repeat scroll -311px -95px rgba(0, 0, 0, 0);
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/sprite-image.png") no-repeat scroll -311px -95px rgba(0, 0, 0, 0);
     display: inline-block;
     height: 43px;
     text-indent: -9999px;
@@ -536,19 +534,19 @@ nav ul {
 <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btm-logo.jpg" height="43" border="0" style="float:left;" >
 <nav class="nav">
 <ul>
-<div class="home" style="background:none"><a href="/index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-cion.jpg" height="43"  border="0"></a></div>
-<li ><a href="/news.html" >News</a></li>
-<li ><a href="/section/114/1/india.html" >India</a>
-<li ><a href="/section/113/1/world.html" >World</a>
-<li ><a href="/videos" >Videos</a></li>
-<li ><a href="/galleries" >Photos</a></li>
-<li ><a href="/section/214/1/cricket.html" >Cricket</a></li>
-<li ><a href="/section/67/1/movies.html" >Movies</a></li>
-<li ><a href="/auto" >Auto</a></li>
-<li ><a href="/section/84/1/sports.html" >Sports</a></li>
-<li ><a href="/section/103/1/lifestyle.html" >Lifestyle</a></li>
-<li ><a href="/technology" >Tech</a></li>
-<li ><a href="/education" >Education</a></li>
+<div class="home" style="background:none"><a href="http://indiatoday.intoday.in/index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-cion.jpg" height="43"  border="0"></a></div>
+<li ><a href="http://indiatoday.intoday.in/news.html" >News</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/114/1/india.html" >India</a>
+<li ><a href="http://indiatoday.intoday.in/section/113/1/world.html" >World</a>
+<li ><a href="http://indiatoday.intoday.in/videos" >Videos</a></li>
+<li ><a href="http://indiatoday.intoday.in/galleries" >Photos</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/214/1/cricket.html" >Cricket</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/67/1/movies.html" >Movies</a></li>
+<li ><a href="http://indiatoday.intoday.in/auto" >Auto</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/84/1/sports.html" >Sports</a></li>
+<li ><a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html" >Lifestyle</a></li>
+<li ><a href="http://indiatoday.intoday.in/technology" >Tech</a></li>
+<li ><a href="http://indiatoday.intoday.in/education" >Education</a></li>
 <li ><a href="http://businesstoday.intoday.in/"  target="_blank" >business</a></li>
 
 </ul>
@@ -557,7 +555,7 @@ nav ul {
 
 <div class="searc-icon1"><img style="margin-bottom:-5px;" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btn-down-arrow.jpg"/>
 <div id="footer1" style=" background-color:#fff">
-	<iframe width="98%" scrolling="no" height="210" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
+	<iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/common_it_footer.html"></iframe>
     </div>
   </div>
   </div>

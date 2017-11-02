@@ -16,7 +16,7 @@ if (function_exists('itg_story_global_comment_last_record')) {
 <div class="comment-mobile desktop-hide">
     <ul>
         <li class="mail-to-author"><a title ="Mail to author" href="mailto:support@indiatoday.in"><i class="fa fa-envelope"></i> <?php print t('Mail to author'); ?></a></li>
-         <?php 
+        <?php 
             $whatsapp = $node->title . " ". $actual_link;
             $whatsapp_text = urlencode($whatsapp); 
           ?>          

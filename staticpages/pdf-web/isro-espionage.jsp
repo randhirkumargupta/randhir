@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<base href="/staticpages/pdf-web/" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>The ISRO spy scandal and how it fizzled out</title>
 <meta property="og:image" content="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/specials/images/isro.jpg">
@@ -14,13 +13,13 @@
 
 
 <script src="//pagead2.googlesyndication.com/pagead/js/google_top_exp.js"></script>
-<link rel="stylesheet" href="/staticpages/main/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
 
-<link rel="shortcut icon" href="/staticpages/main/images/favicon.ico" />
-<script type="text/javascript" language="javascript" src="/js/ajaxinclude.js"></script>
+<link rel="shortcut icon" href="http://indiatoday.intoday.in/images/favicon.ico" />
+<script type="text/javascript" language="javascript" src="js/ajaxinclude.js"></script>
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
-<link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
-<!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="/js/html5.js"></script><![endif]-->
+<link href="css/common.css" rel="stylesheet" type="text/css">
+<!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="http://indiatoday.intoday.in/js/html5.js"></script><![endif]-->
 <div id="itgd_links">
 <ul>
 <li class="last">
@@ -44,14 +43,14 @@
 <div class="topbg">
 		<div id="lefttop">
 
-	<script type="text/javascript">ajaxinclude("/staticpages/pdf-web/updatedtime_chunk.jsp")</script>
+	<script type="text/javascript">ajaxinclude("/updatedtime_chunk.jsp")</script>
 
 
-<div id="logo"><a href="http://indiatoday.intoday.in/"><img src="/images/it.png" alt="India Today" width="262" height="80" title="India Today"></a></div>
+<div id="logo"><a href="http://indiatoday.intoday.in/"><img src="http://indiatoday.intoday.in/images/it.png" alt="India Today" width="262" height="80" title="India Today"></a></div>
 
 			<div id="sitelogo">
         		<div>In Association With</div>
-	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="/staticpages/main/images/mailtoday.gif" alt="" /></a></span>
+	        		 <span class="mail-today"> <a href="http://mailtoday.in/" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/mailtoday.gif" alt="" /></a></span>
 				    <span class="business-today"><a href="http://www.businesstoday.in/" target="_blank">Business Today</a></span>
 				    <span class="in-today"><a href="http://indiatoday.intoday.in/" target="_blank">India Today</a></span>
 				    <span class="aajtak"><a href="http://www.aajtak.in/" target="_blank">AajTak</a></span>
@@ -86,60 +85,60 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
         	<li><a href="http://indiatoday.intoday.in/" >Home</a></li>
             <li>
 
-				<a href="/news.html">News</a>
+				<a href="http://indiatoday.intoday.in/news.html">News</a>
 
 			</li>
-            <li><a href="/section/114/1/india.html" >India</a></li>
-            <li><a href="/videos">Videos</a></li>
-            <li><a href="/galleries">Photos</a></li>
-            <li><a href="/section/214/1/cricket.html" >Cricket</a></li>
-            <li><a href="/section/67/1/movies.html" >Movies</a></li>
-			<li><a href="/section/230/1/auto.html">Auto</a></li>
+            <li><a href="http://indiatoday.intoday.in/section/114/1/india.html" >India</a></li>
+            <li><a href="http://indiatoday.intoday.in/videos">Videos</a></li>
+            <li><a href="http://indiatoday.intoday.in/galleries">Photos</a></li>
+            <li><a href="http://indiatoday.intoday.in/section/214/1/cricket.html" >Cricket</a></li>
+            <li><a href="http://indiatoday.intoday.in/section/67/1/movies.html" >Movies</a></li>
+			<li><a href="http://indiatoday.intoday.in/section/230/1/auto.html">Auto</a></li>
 
             <!--<li><a href="section/84/1/sports.html" >Sport</a></li>-->
-            <li><a href="/section/103/1/lifestyle.html" >Lifestyle</a></li>
+            <li><a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html" >Lifestyle</a></li>
             <li><a href="javascript:void(0);">Events</a>
 			<ul class="sub_menu">
         			<li><a target="_blank" href="http://indiatodayconclave.com" rel="nofollow">India Today Conclave</a></li>
-					<li><a target="_blank" href="/youthsummit" rel="nofollow">Youth Summit</a></li>
-					<li><a target="_blank" href="/womansummit" rel="nofollow">Woman Summit</a></li>
+					<li><a target="_blank" href="http://indiatoday.intoday.in/youthsummit" rel="nofollow">Youth Summit</a></li>
+					<li><a target="_blank" href="http://indiatoday.intoday.in/womansummit" rel="nofollow">Woman Summit</a></li>
 			</ul>
 			</li>
 
         	<li><a href="#">Magazine</a>
         		<ul class="sub_menu">
-        			<li><a href="/section/30/1/cover-story.html" rel="nofollow">Cover Story</a></li>
-					<li><a href="/section/36/1/nation.html" rel="nofollow">Nation</a></li>
-					<li><a href="/section/21/1/states.html" rel="nofollow">States</a></li>
-					<li><a href="/section/34/1/economy.html" rel="nofollow">Economy</a></li>
-					<li><a href="/section/146/1/glass-house.html" rel="nofollow">Glass House</a></li>
-					<li><a href="/section/41/1/sport.html" rel="nofollow">Sport</a></li>
-					<li><a href="/section/145/1/up-front.html" rel="nofollow">Up Front</a></li>
-					<li><a href="/section/141/1/profile.html" rel="nofollow">Profile</a></li>
-					<li><a href="/section/144/1/byword.html" rel="nofollow">Byword</a></li>
-					<li><a href="/section/149/1/glossary.html" rel="nofollow">Glossary</a></li>
-					<li class="seled"><a href="/archive" rel="nofollow">Archives</a></li>
+        			<li><a href="http://indiatoday.intoday.in/section/30/1/cover-story.html" rel="nofollow">Cover Story</a></li>
+					<li><a href="http://indiatoday.intoday.in/section/36/1/nation.html" rel="nofollow">Nation</a></li>
+					<li><a href="http://indiatoday.intoday.in/section/21/1/states.html" rel="nofollow">States</a></li>
+					<li><a href="http://indiatoday.intoday.in/section/34/1/economy.html" rel="nofollow">Economy</a></li>
+					<li><a href="http://indiatoday.intoday.in/section/146/1/glass-house.html" rel="nofollow">Glass House</a></li>
+					<li><a href="http://indiatoday.intoday.in/section/41/1/sport.html" rel="nofollow">Sport</a></li>
+					<li><a href="http://indiatoday.intoday.in/section/145/1/up-front.html" rel="nofollow">Up Front</a></li>
+					<li><a href="http://indiatoday.intoday.in/section/141/1/profile.html" rel="nofollow">Profile</a></li>
+					<li><a href="http://indiatoday.intoday.in/section/144/1/byword.html" rel="nofollow">Byword</a></li>
+					<li><a href="http://indiatoday.intoday.in/section/149/1/glossary.html" rel="nofollow">Glossary</a></li>
+					<li class="seled"><a href="http://indiatoday.intoday.in/archive" rel="nofollow">Archives</a></li>
 					<li><a href="#">Supplements</a>
         		<ul>
-        			<li><a href="/Simply?secId=20&amp;catId=16" rel="nofollow">Home</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=17" rel="nofollow">Aspire</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=28" rel="nofollow">Spice</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=18" rel="nofollow">Woman</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=19" rel="nofollow">Simply Delhi</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=30" rel="nofollow">Simply Chennai</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=31" rel="nofollow">Simply Gujarati</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=32" rel="nofollow">Simply Kolkata</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=33" rel="nofollow">Simply Punjabi</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=34" rel="nofollow">Simply Mumbai</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=35" rel="nofollow">Simply Bangalore</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=358" rel="nofollow">Simply Hyderabad</a></li>
-					<li><a href="/Simply?secId=20&amp;catId=359" rel="nofollow">Simply Pune</a></li>
+        			<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=16" rel="nofollow">Home</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=17" rel="nofollow">Aspire</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=28" rel="nofollow">Spice</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=18" rel="nofollow">Woman</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=19" rel="nofollow">Simply Delhi</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=30" rel="nofollow">Simply Chennai</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=31" rel="nofollow">Simply Gujarati</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=32" rel="nofollow">Simply Kolkata</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=33" rel="nofollow">Simply Punjabi</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=34" rel="nofollow">Simply Mumbai</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=35" rel="nofollow">Simply Bangalore</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=358" rel="nofollow">Simply Hyderabad</a></li>
+					<li><a href="http://indiatoday.intoday.in/Simply?secId=20&amp;catId=359" rel="nofollow">Simply Pune</a></li>
         		</ul>
         	</li>
         		</ul>
         	</li>
-        	<li class="last"><a href="/shoppingit.html" target="_blank" rel="nofollow">Shopping</a></li>
-        	<li><a href="/site/livetv.jsp" style="color:#DB1820">Live TV</a></li>
+        	<li class="last"><a href="http://indiatoday.intoday.in/shoppingit.html" target="_blank" rel="nofollow">Shopping</a></li>
+        	<li><a href="http://indiatoday.intoday.in/site/livetv.jsp" style="color:#DB1820">Live TV</a></li>
         </ul>
 	</div>
 </div>
@@ -238,15 +237,15 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 <div style="color: #000;font: bold 14px/18px Arial; text-align: right;">SHARE</div>
 	<a rel="nofollow" target="_new" title="Twitter" href="http://twitter.com/?status=The ISRO espionage case
 %20http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp%20via%20%40indiatoday"><span class="imgs tw lft"></span></a>
-	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=/pdf-web/isro-espionage.jsp&p[title]=The ISRO spy scandal and how it fizzled out &s=100&p[summary]=The ISRO spy scandal and how it fizzled out &p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/specials/images/isro.jpg"><span class="imgs fb lft"></span></a>
+	<a rel="nofollow" target="_new" title="Facebook" href="http://www.facebook.com/sharer/sharer.php?p[url]=http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp&p[title]=The ISRO spy scandal and how it fizzled out &s=100&p[summary]=The ISRO spy scandal and how it fizzled out &p[images][0]=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/specials/images/isro.jpg"><span class="imgs fb lft"></span></a>
 	<a rel="nofollow" title="Share" onclick="javascript: document.getElementById('customShare').style.display='block';" href="javascript:void('0');"><span class="imgs shr lft"></span></a>
 </div>
 
 <div align="right" class="shareRdiv">
 
 <div style="width: 329px; height: 151px; display: none; margin-left: -320px; ^margin-top: 20px" id="customShare" class="sharer_div">
-<div class="close" onclick="document.getElementById('customShare').style.display='none';">&nbsp;X&nbsp;</div><div class="clear social_links" style="visibility: visible;"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/socialicons_new.gif" style="margin-left: 25px; float: left;" usemap="#dontmiss"><map name="dontmiss"><area shape="rect" coords="4,2,50,48" href="http://www.facebook.com/sharer.php?u=/pdf-web/isro-espionage.jsp" target="_blank"><area shape="rect" coords="8,53,44,100" href="http://twitter.com/?status=The ISRO spy scandal and how it fizzled out %20http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp%20via%20%40indiatoday"><area shape="rect" coords="103,1,146,48" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="155,0,193,50" href="http://digg.com/submit?phase=2&amp;url=/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="204,2,247,49" href="http://www.newsvine.com/_tools/seed&amp;save?u=/pdf-web/isro-espionage.jsp&amp;h=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="63,52,96,102" href="http://cgi.fark.com/cgi/fark/farkit.pl?u=/pdf-web/isro-espionage.jsp&amp;h=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="105,51,156,100" href="http://view.nowpublic.com/?src=/pdf-web/isro-espionage.jsp" target="_blank"><area shape="rect" coords="160,52,196,100" href="http://reddit.com/submit?url=/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank">
-  <area target="_blank" href="javascript:void(&quot;0&quot;);" onclick="javascript:window.open(&quot;/content_Email.jsp?email=0&amp;title=The ISRO spy scandal and how it fizzled out &amp;URL=/pdf-web/isro-espionage.jsp&quot;,&quot;window&quot;, &quot;status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390&quot;); event.returnValue=false; return false;" coords="60,2,90,49" shape="rect">
+<div class="close" onclick="document.getElementById('customShare').style.display='none';">&nbsp;X&nbsp;</div><div class="clear social_links" style="visibility: visible;"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/socialicons_new.gif" style="margin-left: 25px; float: left;" usemap="#dontmiss"><map name="dontmiss"><area shape="rect" coords="4,2,50,48" href="http://www.facebook.com/sharer.php?u=http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp" target="_blank"><area shape="rect" coords="8,53,44,100" href="http://twitter.com/?status=The ISRO spy scandal and how it fizzled out %20http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp%20via%20%40indiatoday"><area shape="rect" coords="103,1,146,48" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="155,0,193,50" href="http://digg.com/submit?phase=2&amp;url=http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="204,2,247,49" href="http://www.newsvine.com/_tools/seed&amp;save?u=http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp&amp;h=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="63,52,96,102" href="http://cgi.fark.com/cgi/fark/farkit.pl?u=http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp&amp;h=The ISRO spy scandal and how it fizzled out " target="_blank"><area shape="rect" coords="105,51,156,100" href="http://view.nowpublic.com/?src=http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp" target="_blank"><area shape="rect" coords="160,52,196,100" href="http://reddit.com/submit?url=http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp&amp;title=The ISRO spy scandal and how it fizzled out " target="_blank">
+  <area target="_blank" href="javascript:void(&quot;0&quot;);" onclick="javascript:window.open(&quot;http://indiatoday.intoday.in/content_Email.jsp?email=0&amp;title=The ISRO spy scandal and how it fizzled out &amp;URL=http://indiatoday.intoday.in/pdf-web/isro-espionage.jsp&quot;,&quot;window&quot;, &quot;status=no,resize=no,toolbar=no,scrollbars=no,width=478,height=390&quot;); event.returnValue=false; return false;" coords="60,2,90,49" shape="rect">
 </map></div></div>
 </div>
 
@@ -323,45 +322,41 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 </section>
-<div style="text-align:center;margin-left:15%">
-
-
+<div style="text-align:left;margin-left:15%">
 <script src="http://vuukle.com/js/vuukle.js"></script>
  <div class="vukkul-comment">
   <div id="vuukle-emote"></div>
   <div id="vuukle_div"></div>
           <script type="text/javascript">
-               var UNIQUE_ARTICLE_ID = "static_isro-espionage";
+               var UNIQUE_ARTICLE_ID = "static_vivekananda";
                var SECTION_TAGS =  "";
-               var ARTICLE_TITLE = "isro-espionage";
+               var ARTICLE_TITLE = "vivekananda";
                var GA_CODE = "UA-795349-17";
                var VUUKLE_API_KEY = "dc34b5cc-453d-468a-96ae-075a66cd9eb7";
                var TRANSLITERATE_LANGUAGE_CODE = ""; //"en" for English, "hi" for hindi
                var VUUKLE_COL_CODE = "d00b26";
-               var ARTICLE_AUTHORS = "abc";
+               var ARTICLE_AUTHORS = "";
                create_vuukle_platform(VUUKLE_API_KEY, UNIQUE_ARTICLE_ID, "0", SECTION_TAGS, ARTICLE_TITLE, TRANSLITERATE_LANGUAGE_CODE , "1", "", GA_CODE, VUUKLE_COL_CODE, ARTICLE_AUTHORS);
           </script>
 </div>
 
+</div>
 
-
-         </div>
-
-<div class="fotborder"><footer><script type="text/javascript">ajaxinclude("/staticpages/pdf-web/chunk_social_strip.html")</script>
+<div class="fotborder"><footer><script type="text/javascript">ajaxinclude("/chunk_social_strip.html")</script>
 <div class="clear"></div>
 <div class="footband">
 <ul>
 	<li><a href="http://indiatoday.intoday.in/">Home</a></li>
-	<li><a href="/news.html">News</a></li>
-	<li><a href="/section/114/1/india.html">India</a></li>
-	<li><a href="/videos">Videos</a></li>
-	<li><a href="/galleries">Photos</a></li>
-	<li><a href="/section/67/1/movies.html">Movies</a></li>
-	<li><a href="/section/84/1/sports.html">Sport</a></li>
-	<li><a href="/section/103/1/lifestyle.html">Lifestyle</a></li>
-	<li><a href="/section/20/1/supplements.html">Supplements</a></li>
-	<li><a href="/calendar/0/2012/magazine.html">Magazine</a></li>
-	<li><a href="/games/game.php">Games</a></li>
+	<li><a href="http://indiatoday.intoday.in/news.html">News</a></li>
+	<li><a href="http://indiatoday.intoday.in/section/114/1/india.html">India</a></li>
+	<li><a href="http://indiatoday.intoday.in/videos">Videos</a></li>
+	<li><a href="http://indiatoday.intoday.in/galleries">Photos</a></li>
+	<li><a href="http://indiatoday.intoday.in/section/67/1/movies.html">Movies</a></li>
+	<li><a href="http://indiatoday.intoday.in/section/84/1/sports.html">Sport</a></li>
+	<li><a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html">Lifestyle</a></li>
+	<li><a href="http://indiatoday.intoday.in/section/20/1/supplements.html">Supplements</a></li>
+	<li><a href="http://indiatoday.intoday.in/calendar/0/2012/magazine.html">Magazine</a></li>
+	<li><a href="http://indiatoday.intoday.in/games/game.php">Games</a></li>
 	<li><a rel="nofollow" target="_blank" href="http://indiatoday.freeads.in/">Classifieds</a></li>
 	<li class="last"><a target="_blank" href="http://www.bagittoday.com/" rel="nofollow">Shopping</a></li>
 </ul>
@@ -403,12 +398,12 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 </div>
 <div id="footer">
-               <iframe width="990" scrolling="no" height="165" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"></iframe>
+               <iframe width="990" scrolling="no" height="165" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/common_it_footer.html"></iframe>
             </div>
 
     <div style="display:none;" class="bott-popup" id="videopopup">
   <div class="bott-popup-inn" id="userreg">
-    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="/staticpages/main/microsites/specials/close.png"></a></div>
+    <div class="bott-popinn"><a id="cancelpopup" href="javascript:void(0);"><img border="0"  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/specials/close.png"></a></div>
         <div class="bottspecinn"></div>
     <div id="enrollfrm">
 
@@ -419,15 +414,15 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-  <script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
-   <script type="text/javascript" src="/staticpages/main/js/jquery.tinyscrollbar.min.js"></script>
+  <script type='text/javascript' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.js' ></script>
+   <script type="text/javascript" src="http://indiatoday.intoday.in/js/jquery.tinyscrollbar.min.js"></script>
 
 
 
 
 
 
-<script type='text/javascript' src='/js/copypaste_common.js' ></script>
+<script type='text/javascript' src='http://indiatoday.intoday.in/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 
 
@@ -436,18 +431,18 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-<script type='text/javascript' src='/staticpages/main/js/jquery.min.js' ></script>
+<script type='text/javascript' src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.js' ></script>
 
 
 
-<script type="text/javascript" language="javascript" src="/staticpages/main/js/common.js"></script>
-<script type='text/javascript' src="/staticpages/main/js/script.js' ></script>
+<script type="text/javascript" language="javascript" src="http://indiatoday.intoday.in/js/common.js"></script>
+<script type='text/javascript' src='http://indiatoday.intoday.in/js/script.js' ></script>
 
 
 
 
 
-<script src="/staticpages/main/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
+<script src="http://indiatoday.intoday.in/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
 //$(function() {
 	$(document).find("img[data-original]").lazyload();
@@ -456,7 +451,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 //});
 </script>
 
-<script language="javascript" type="text/javascript" src="/staticpages/main//js/on-the-stand.js" ></script>
+<script language="javascript" type="text/javascript" src="http://indiatoday.intoday.in/js/on-the-stand.js" ></script>
 
 
 
@@ -546,7 +541,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="leftad">
 
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600-1.jpg"> </a></div> -->
+   <!--  <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/160x600-1.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
 
 	 <div class="divs">
@@ -563,7 +558,7 @@ var zflag_nid="821"; var zflag_cid="1220/1137"; var zflag_sid="2"; var zflag_wid
 	<div class="rightad">
 
     <!---START ADDED BY LALIT ON 25-OCT-2013 --->
-    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="/staticpages/main/images/160x600.jpg"> </a></div> -->
+    <!-- <div class="div"> <a href="http://agenda.aajtak.in/" target="_blank"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/160x600.jpg"> </a></div> -->
      <!---ENDS ADDED BY LALIT ON 25-OCT-2013 --->
 
 	 <div class="divs">
@@ -649,10 +644,3 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 </body>
 </html>
-
-
-
-
-
-
-

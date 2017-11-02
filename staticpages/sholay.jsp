@@ -170,7 +170,7 @@ if (document.cookie.indexOf("iphone_redirect=false") == -1) window.location = "h
 
 <link rel="shortcut icon" href="http://indiatoday.intoday.in/images/favicon.ico" />
 <script type="text/javascript" language="javascript" src="/staticpages/js/ajaxinclude.js"></script>
-<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="staticpages/css/ie.css" media="screen" /><![endif]-->
 <link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
 <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="/staticpages/main/js/html5.js"></script><![endif]-->
 <div id="itgd_links">

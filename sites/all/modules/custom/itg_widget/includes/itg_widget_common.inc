@@ -408,13 +408,14 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
       drupal_add_css(".form-item-field-story-syndication-value-1 {display:none !important}", "inline");
     }
 
-    unset($form[$sydication_field_name]['#options']);
-    $form[$sydication_field_name]['#options']['all'] = '- Any -';
-    $form[$sydication_field_name]['#options']['or'] = 'Yes';
-    $form[$sydication_field_name]['#options']['not'] = 'No';
 
-    drupal_add_css('.form-item-field-story-syndication-value-1 , .form-item-field-story-syndication-value {display:none;}', array('type' => 'inline'));
-    drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
+        unset($form[$sydication_field_name]['#options']);
+        $form[$sydication_field_name]['#options']['all'] = '- Any -';
+        $form[$sydication_field_name]['#options']['or'] = 'Yes';
+        $form[$sydication_field_name]['#options']['not'] = 'No';
+
+        drupal_add_css('.form-item-field-story-syndication-value-1 , .form-item-field-story-syndication-value {display:none;}', array('type' => 'inline'));
+        drupal_add_css('.views-widget-filter-field_story_syndication_value_1 , .views-widget-filter-field_story_syndication_value {display:inline-block !important;}', array('type' => 'inline'));
 
     $url_chunk = explode("?", $_SERVER['REQUEST_URI']);
     $url_chunk_array = explode('/', $url_chunk[0]);
@@ -3011,13 +3012,15 @@ function get_max_weight_for_special($type) {
  * {@inheritdoc}
  */
 function itg_widget_node_update($node) {
-  itg_watchdog("status_test", array($node->nid, $node->status, $node->revision, $node->op));
-  if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news')) {
-    $arg = arg();
-    if (itg_workflow_stop_node_update_batch_for_widgets()) {
-      return;
-    }
-
+    itg_watchdog("status_test" , array($node->nid , $node->status , $node->revision , $node->op));
+    if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news')) {
+      if($node->status == 1 && $node->field_story_source_type['und'][0]['value'] != 'migrated') {
+        __itg_widget_helper_data_insert($node->nid);
+      }  
+      $arg = arg();
+        if (itg_workflow_stop_node_update_batch_for_widgets()) {
+            return;
+        }
     if (isset($arg[1]) && $arg[1] != 'add') {
       if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
         __itg_widget_helper_data_insert($node->nid);

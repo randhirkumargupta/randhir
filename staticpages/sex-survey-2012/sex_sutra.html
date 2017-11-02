@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="js/jquery-1.2.3.pack.js"></script>
+<script type="text/javascript" src="js/jquery.jcarousel.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.jcarousel.css" />
+<link rel="stylesheet" type="text/css" href="css/skin.css" />
+
+<style type="text/css">
+body { margin:0; padding:0;}
+.jcarousel-control {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.jcarousel-control a {
+    font-size: 75%;
+    text-decoration: none;
+    padding: 0 5px;
+    margin: 0 0 5px 0;
+    border: 1px solid #fff;
+    color: #eee;
+    background-color: #4088b8;
+    font-weight: bold;
+}
+
+.jcarousel-control a:focus,
+.jcarousel-control a:active {
+    outline: none;
+}
+
+.jcarousel-scroll {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.jcarousel-scroll form {
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel-scroll select {
+    font-size: 75%;
+}
+
+#mycarousel-next,
+#mycarousel-prev {
+    cursor: pointer;
+    margin-bottom: -10px;
+    text-decoration: underline;
+    font-size: 11px;
+}
+
+ul { margin:0; padding:0;}
+.arrowimg {background:url(images/Sex-Survey-Sprites.png) no-repeat scroll 0 0 transparent;}
+.arrowimg {
+    background-position: -10px -144px;
+    float: left;
+    height: 50px;
+    position: absolute;
+    top: -8px;
+    width: 40px;z-index: 9;
+}
+.posrel {position:relative}
+.headline {margin-left:40px; color:#ee1619; font:normal 16px/20px arial black;}
+.headline a {color:#ee1619; text-decoration:none;}
+.headline a:hover {text-decoration:underline;}
+.headbg {background:#EDEBEC; padding:2px 4px;}
+.topmarg {margin-top:8px;}
+</style>
+
+<script type="text/javascript">
+
+function mycarousel_initCallback(carousel) {
+    jQuery('.jcarousel-control a').bind('click', function() {
+        carousel.scroll(jQuery.jcarousel.intval(jQuery(this).text()));
+        return false;
+    });
+
+    jQuery('.jcarousel-scroll select').bind('change', function() {
+        carousel.options.scroll = jQuery.jcarousel.intval(this.options[this.selectedIndex].value);
+        return false;
+    });
+
+    jQuery('#mycarousel-next').bind('click', function() {
+        carousel.next();
+        return false;
+    });
+
+    jQuery('#mycarousel-prev').bind('click', function() {
+        carousel.prev();
+        return false;
+    });
+};
+
+jQuery(document).ready(function() {
+    jQuery("#mycarousel").jcarousel({
+        scroll: 1,
+        initCallback: mycarousel_initCallback,
+        buttonNextHTML: null,
+        buttonPrevHTML: null
+    });
+});
+
+</script>
+</head>
+<body>
+<div class="topmarg">
+<div class="headbg"><div class="posrel"><span class="arrowimg"></span><span class="headline">Sex Survey: In-depth</span></div></div>
+<div id="wrap" style="border:0px solid red;">
+	<div id="mycarousel" class="jcarousel-skin-tango">
+    	<ul >
+            <li style="background-image:none">
+                <a href="http://wonderwoman.intoday.in/story1/92674/Lover/bring-back-the-fire.html" target="_blank"><img src="images/sutraimg/Bring-back-the-fire_150x150.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a>
+                <span><center><a href="http://wonderwoman.intoday.in/story1/92674/Lover/bring-back-the-fire.html" target="_blank">Bring back the fire</a></center></span>
+            </li>
+            <li style="background-image:none">
+                <a href="http://wonderwoman.intoday.in/photo/7-sex-moves-hell-never,-ever-forget/1/619.html" target="_blank"><img src="images/sutraimg/sex_moves_150x150.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a>
+                <span><center><a href="http://wonderwoman.intoday.in/photo/7-sex-moves-hell-never,-ever-forget/1/619.html" target="_blank">Sex moves he'll never forget</a></center></span>
+            </li>
+            <li style="background-image:none">
+                <a href="http://wonderwoman.intoday.in/story1/91903/Lover/risky-sex-moves-to-avoid.html" target="_blank"><img src="images/sutraimg/dangerous_150x150.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a>
+                <span><center><a href="http://wonderwoman.intoday.in/story1/91903/Lover/risky-sex-moves-to-avoid.html" target="_blank">Dangerous sex</a></center></span>
+            </li>
+            <li style="background-image:none">
+                <a href="http://wonderwoman.intoday.in/story/92786/Lover/relationship-rules-changing-nowadays.html" target="_blank"><img src="images/sutraimg/older_women_150x150.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a>
+                <span><center><a href="http://wonderwoman.intoday.in/story/92786/Lover/relationship-rules-changing-nowadays.html" target="_blank">Why men desire older women?</a></center></span>
+            </li>
+            <li style="background-image:none">
+                <a href="http://wonderwoman.intoday.in/story1/91840/Lover/why-spend-more-time-kissing.html" target="_blank"><img src="images/sutraimg/lips_unlock_150x150.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a>
+                <span><center><a href="http://wonderwoman.intoday.in/story1/91840/Lover/why-spend-more-time-kissing.html" target="_blank">Don't let your lips unlock</a></center></span>
+            </li>
+            <li style="background-image:none">
+                <a href="http://wonderwoman.intoday.in/story1/91003/Lover/teach-him-to-satisfy-your-more.html" target="_blank"><img src="images/sutraimg/wicked_desires_150x150.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a>
+                <span><center><a href="http://wonderwoman.intoday.in/story1/91003/Lover/teach-him-to-satisfy-your-more.html" target="_blank">Satisfying wicked desires</a></center></span>
+            </li>
+            <li style="background-image:none">
+                <a href="http://wonderwoman.intoday.in/story1/Tappercentintopercentyourpercentseductivepercentpower/1/84436.html" target="_blank"><img src="images/sutraimg/seduction_150x150.jpg" width="150" height="150" border="0" style="margin:0 5px 0 0" /></a>
+                <span><center><a href="http://wonderwoman.intoday.in/story1/Tappercentintopercentyourpercentseductivepercentpower/1/84436.html" target="_blank">Seduction secrets to wow your man!</a></center></span>
+            </li>
+    	</ul>
+	</div>
+</div></div>
+</body>
+</html>
