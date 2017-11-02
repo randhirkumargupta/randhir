@@ -4077,7 +4077,8 @@ div#forgot-field-heading {
     }
 }
 
-#widget-ajex-loader {
+#widget-ajex-loader,
+.profile-ajax-loader {
     background: rgba(0, 0, 0, .5);
     position: fixed;
     left: 0;
