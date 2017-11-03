@@ -208,7 +208,6 @@ function get_hltapps_sections($type) {
     case 'video':
       return array(
         'topten.xml' => array('section' => '-1', 'limit' => 10),
-        'programmes.xml' => array('section' => '-1', 'limit' => 10),
         'news.xml' => array('section' => '-1', 'limit' => 25),
         'india.xml' => array('section' => '1206955', 'limit' => 25),
         'world.xml' => array('section' => '1206956', 'limit' => 25),
