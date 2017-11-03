@@ -10,7 +10,7 @@
  */
 define('APIKEY', 'b88b53a80447bacd974fea36f91c8695');
 define('NETCORE_LIST_ID', 4); //itgdev
-define('NETCORE_URL', 'https://api.exacttouch.com/API/mailing/');
+define('NETCORE_URL', 'http://api.exacttouch.com/API/mailing/');
 
 /*$data['name'] = 'itgdev';
 $data['description'] = 'list for itgdev';
