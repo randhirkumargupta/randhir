@@ -7,6 +7,7 @@
  * Provides customizations and functions for workflow.
  *
  */
+module_load_include('inc', 'itg_workflow', 'includes/workflow-mail-content');
 
 /**
  * Implements hook_permissions().
@@ -35,124 +36,38 @@ function itg_workflow_menu() {
     'page callback' => 'itg_workflow_logs_detailis',
     'access arguments' => array('administer itg_preview_log settings'),
     'type' => MENU_CALLBACK,
+    'file' => 'includes/workflow-logs-detailis.inc',
   );
 
   $items['preview-content-logs-report/nid/autocomplete'] = array(
     'page callback' => 'itg_workflow_content_nid',
     'access arguments' => array('administer itg_preview_log settings'),
-    'type' => MENU_CALLBACK
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/workflow-logs-detailis.inc',
   );
 
   $items['preview-content-logs-report/title/autocomplete'] = array(
     'page callback' => 'itg_workflow_content_title',
     'access arguments' => array('administer itg_preview_log settings'),
-    'type' => MENU_CALLBACK
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/workflow-logs-detailis.inc',
   );
 
   $items['preview-content-logs-report/username/autocomplete'] = array(
     'page callback' => 'itg_workflow_content_username',
     'access arguments' => array('administer itg_preview_log settings'),
-    'type' => MENU_CALLBACK
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/workflow-logs-detailis.inc',
   );
 
   $items['preview-content-logs-report/email/autocomplete'] = array(
     'page callback' => 'itg_workflow_content_email',
     'access arguments' => array('administer itg_preview_log settings'),
-    'type' => MENU_CALLBACK
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/workflow-logs-detailis.inc',
   );
 
   return $items;
-}
-
-/**
- * Autocomplete for node id.
- * @param int $nid
- */
-function itg_workflow_content_nid($nid) {
-  $matches = array();
-  $content_type = itg_workflow_valid_content_type();
-  $itg_query = db_select("node", "n");
-  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-  $itg_query->fields('n', array('nid'));
-  $itg_query->condition('n.nid', '%' . db_like($nid) . '%', 'LIKE');
-  $itg_query->condition('n.type', array($content_type), 'IN');
-  $itg_query->isNull('iwf.nid');
-  $itg_query->range(0, 50);
-  $return = $itg_query->execute();
-
-  foreach ($return as $row) {
-    $matches[$row->nid] = check_plain($row->nid);
-  }
-
-  drupal_json_output($matches);
-}
-
-/**
- * Autocompelte helper for title.
- * @param title $title
- */
-function itg_workflow_content_title($title) {
-  $matches = array();
-  $content_type = itg_workflow_valid_content_type();
-  $itg_query = db_select("node", "n");
-  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-  $itg_query->fields('n', array('title'));
-  $itg_query->condition('n.title', '%' . db_like($title) . '%', 'LIKE');
-  $itg_query->condition('n.type', array($content_type), 'IN');
-  $itg_query->isNull('iwf.nid');
-  $itg_query->range(0, 50);
-  $return = $itg_query->execute();
-  foreach ($return as $row) {
-    $matches[$row->title] = check_plain($row->title);
-  }
-
-  drupal_json_output($matches);
-}
-
-/**
- * Autocompelte helper for title.
- * @param string $username
- */
-function itg_workflow_content_username($username) {
-  $matches = array();
-  $content_type = itg_workflow_valid_content_type();
-  $itg_query = db_select("node", "n");
-  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-  $itg_query->leftJoin('users', 'u', 'u.uid=n.uid');
-  $itg_query->fields('u', array('name'));
-  $itg_query->condition('u.name', '%' . db_like($username) . '%', 'LIKE');
-  $itg_query->condition('n.type', array($content_type), 'IN');
-  $itg_query->isNull('iwf.nid');
-  $itg_query->range(0, 50);
-  $return = $itg_query->execute();
-  foreach ($return as $row) {
-    $matches[$row->name] = check_plain($row->name);
-  }
-
-  drupal_json_output($matches);
-}
-
-/**
- * Autocompelte helper for email.
- * @param title $email.
- */
-function itg_workflow_content_email($email) {
-  $matches = array();
-  $content_type = itg_workflow_valid_content_type();
-  $itg_query = db_select("node", "n");
-  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-  $itg_query->leftJoin('users', 'u', 'u.uid=n.uid');
-  $itg_query->fields('u', array('mail'));
-  $itg_query->condition('u.mail', '%' . db_like($email) . '%', 'LIKE');
-  $itg_query->condition('n.type', array($content_type), 'IN');
-  $itg_query->isNull('iwf.nid');
-  $itg_query->range(0, 50);
-  $return = $itg_query->execute();
-  foreach ($return as $row) {
-    $matches[$row->mail] = check_plain($row->mail);
-  }
-
-  drupal_json_output($matches);
 }
 
 /**
@@ -253,103 +168,6 @@ function itg_workflow_preview_log_filter_form_submit($form, &$form_state) {
   );
 }
 
-/**
- * Implements itg_workflow_logs_detailis().
- * {@inheritdoc}
- */
-function itg_workflow_logs_detailis() {
-  // configure the table header columns
-  $header = array(
-    array('data' => t('ID')),
-    array('data' => t('Nid')),
-    array('data' => t('Title')),
-    array('data' => t('Created By')),
-    array('data' => t('Published by')),
-    array('data' => t('Type')),
-    array('data' => t('Created Date')),
-    array('data' => t('Modified Date')),
-    array('data' => t('Action')),
-  );
-
-  if (isset($_GET['items_per_page'])) {
-    $items_per_page = $_GET['items_per_page'];
-  }
-  else {
-    $items_per_page = 20;
-  }
-
-  $itg_query = db_select('node', 'n')->extend('PagerDefault')->limit($items_per_page);
-  $itg_query->leftJoin('itg_workflow_preview_log', 'iwf', 'iwf.nid=n.nid');
-  $itg_query->leftJoin('workbench_moderation_node_history', 'wbh', 'wbh.nid=n.nid');
-  $itg_query->leftJoin('users', 'user', 'user.uid=n.uid');
-  $itg_query->leftJoin('users', 'wbh_user', 'wbh_user.uid=wbh.uid');
-  $itg_query->condition("wbh.published", 1);
-  $itg_query->condition("wbh.is_current", 1);
-  $itg_query->condition("wbh.state", "published");
-
-  if (!isset($_GET['type']) || (isset($_GET['type']) && $_GET['type'] == "All")) {
-    $itg_query->condition("n.type", array("story", "videogallery", "blog", "photogallery"), "IN");
-  }
-  else {
-    $itg_query->condition("n.type", $_GET['type']);
-  }
-
-  if (isset($_GET['nid']) && !empty($_GET['nid'])) {
-    $itg_query->condition("n.nid", $_GET['nid']);
-  }
-
-  if (isset($_GET['username']) && !empty($_GET['username'])) {
-    $or = db_or()->condition("wbh_user.name", $_GET['username'])->condition("user.name", $_GET['username']);
-    $itg_query->condition($or);
-  }
-
-  if (isset($_GET['email']) && !empty($_GET['email'])) {
-    $itg_query->condition("user.mail", $_GET['email']);
-  }
-
-  if (isset($_GET['title']) && !empty($_GET['title'])) {
-    $title_chunk_array = explode(" ", $_GET['title']);
-    foreach ($title_chunk_array as $title_chunk) {
-      $itg_query->condition('title', '%' . db_like($title_chunk) . '%', 'LIKE');
-    }
-  }
-  $itg_query->condition('n.status', 1);
-  $itg_query->fields('n', array('nid', 'title', 'uid', 'type', 'created', 'changed'));
-  $itg_query->fields('user', array('name'));
-  $itg_query->fields('wbh_user', array('name'));
-  $itg_query->fields('wbh', array('uid'));
-  $itg_query->fields('iwf', array('nid'));
-  $itg_query->isNull('iwf.nid');
-  $itg_query->orderBy('n.nid', "DESC");
-  $itg_result = $itg_query->execute()->fetchAll();
-
-  $rows = array();
-  $count = 0;
-  foreach ($itg_result as $row) {
-    $rows[] = array(
-      array('data' => $count + 1),
-      array('data' => $row->nid),
-      array('data' => $row->title),
-      array('data' => l($row->name, "user/$row->uid")),
-      array('data' => l($row->wbh_user_name, "user/$row->wbh_uid")),
-      array('data' => $row->type),
-      array('data' => date('d/m/Y', $row->created)),
-      array('data' => date('d/m/Y', $row->changed)),
-      array('data' => l("<span class='view-link'>View</span>", "node/$row->nid", array("html" => TRUE, "attributes" => array("target" => "_blank")))),
-    );
-    $count++;
-  }
-  $filter_form = drupal_get_form('itg_workflow_preview_log_filter_form');
-  $output = render($filter_form);
-  $output .= '<div class="view"><div class="attachment"><span class="count">Count (' . count($itg_result) . ') </span>';
-  $output .= '</div></div>';
-  $output .= theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table', 'preview-log-table')), 'empty' => 'No result found.'));
-
-  // add the pager
-  $output .= theme('pager');
-
-  return $output;
-}
 
 /**
  * Implements hook_form_alter().
@@ -1106,362 +924,6 @@ function itg_workflow_stop_email_during_bulk_operation($request) {
   return TRUE;
 }
 
-
-/**
- * Get Mail content
- * @global String $base_url
- * @param object $node
- * @param string $event
- * @param string $to
- * @param string $user_name
- * @param string $current_user_name
- * @return 
- */
-function workflow_get_mail_content($node, $event, $to, $user_name, $current_user_name, $vbo_state, $vbo_update) {
-  global $base_url;
-  $author_mail = array();
-  $content_type = $node->type;
-  $review = $node->workbench_moderation_state_new;
-  if ($review == 'needs_review' || $review == 'rejected' || $review == 'needs_modification') {
-    $node_url = l($node->title, $base_url . '/node/' . $node->nid . '/edit');
-  }
-  else {
-    $node_url = l($node->title, FRONT_URL . '/node/' . $node->nid);
-  }
-
-  if ($event == 'create' && $review == 'published') {
-    $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
-    $to_mail = $author_mail[0];
-
-    if (function_exists('itg_mail_templates_get_mailcontent')) {
-      $mail_data = itg_mail_templates_get_mailcontent($content_type, 'create');
-      $mail_data_cat = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
-
-      if ($mail_data_cat == 'blog') {
-        $subject = $mail_data->field_mail_subject_blog[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_blog[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-      elseif ($mail_data_cat == 'story') {
-        $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-      elseif ($mail_data_cat == 'photogallery') {
-        $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-      elseif ($mail_data_cat == 'podcast') {
-        $subject = $mail_data->field_mail_subject_podcast[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_podcast[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-      elseif ($mail_data_cat == 'videogallery') {
-        $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-      $mail_content = $mail_node_author;
-    }
-  }
-  elseif ($event == 'create' && $review == 'needs_review') {
-    $to_mail = implode(',', $to);
-    if (function_exists('itg_mail_templates_get_mailcontent')) {
-      $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
-      $mail_data_cat = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
-
-      if ($mail_data_cat == 'blog') {
-        $subject = $mail_data->field_mail_subject_blog[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_blog[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-      elseif ($mail_data_cat == 'story') {
-        $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-      elseif ($mail_data_cat == 'photogallery') {
-        $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-      elseif ($mail_data_cat == 'podcast') {
-        $subject = $mail_data->field_mail_subject_podcast[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_podcast[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-      elseif ($mail_data_cat == 'videogallery') {
-        $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
-        $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
-        $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-        $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-        $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-      }
-
-      $mail_content = $mail_node_author;
-    }
-  }
-  elseif ($event == 'update') {
-    if ($review == 'needs_review') {
-      $to_mail = implode(',', $to);
-      if (function_exists('itg_mail_templates_get_mailcontent')) {
-        $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
-        $mail_data_cat = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
-
-        if ($mail_data_cat == 'blog') {
-          $subject = $mail_data->field_mail_subject_blog[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_blog[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'story') {
-          $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'photogallery') {
-          $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'podcast') {
-          $subject = $mail_data->field_mail_subject_podcast[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_podcast[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'videogallery') {
-          $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-
-        $mail_content = $mail_node_author;
-      }
-    }
-    else if ($review == 'rejected') {
-      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
-      $to_mail = $author_mail[0];
-
-      if (function_exists('itg_mail_templates_get_mailcontent')) {
-        $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
-        $mail_data_cat = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
-
-        if ($mail_data_cat == 'blog') {
-          $subject = $mail_data->field_mail_subject_blog[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_blog[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'story') {
-          $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'photogallery') {
-          $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'podcast') {
-          $subject = $mail_data->field_mail_subject_podcast[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_podcast[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'videogallery') {
-          $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        $mail_content = $mail_node_author;
-      }
-    }
-    else if ($review == 'needs_modification') {
-      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
-      $to_mail = $author_mail[0];
-
-      if (function_exists('itg_mail_templates_get_mailcontent')) {
-        $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
-        $mail_data_cat = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
-        if ($mail_data_cat == 'blog') {
-          $subject = $mail_data->field_mail_subject_blog[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_blog[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'story') {
-          $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'photogallery') {
-          $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'podcast') {
-          $subject = $mail_data->field_mail_subject_podcast[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_podcast[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'videogallery') {
-          $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        $mail_content = $mail_node_author;
-      }
-    }
-    else if ($review == 'published') {
-      $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
-      $to_mail = $author_mail[0];
-
-      if (function_exists('itg_mail_templates_get_mailcontent')) {
-        $mail_data = itg_mail_templates_get_mailcontent($content_type, 'update');
-        $mail_data_cat = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
-        if ($mail_data_cat == 'blog') {
-          $subject = $mail_data->field_mail_subject_blog[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_blog[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'story') {
-          $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'photogallery') {
-          $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'podcast') {
-          $subject = $mail_data->field_mail_subject_podcast[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_podcast[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        elseif ($mail_data_cat == 'videogallery') {
-          $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
-          $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
-          $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
-          $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
-          $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
-        }
-        $mail_content = $mail_node_author;
-      }
-    }
-    else if (!empty ($vbo_state) && $vbo_state == 'pub-unpub'){
-      if ($vbo_update == 'published') {
-        $subject_line_upd = 'unpublished';
-        $body_htwo = strtoupper($content_type) . ' UNPUBLISHED';
-      } 
-      elseif($vbo_update == 'draft') {
-        $subject_line_upd = 'published';
-        $body_htwo = strtoupper($content_type) . ' PUBLISHED';
-      }
-      $to_mail = implode(',', $to);
-      $subject = 'A new ' . $content_type . ' has been ' . $subject_line_upd . ', please find details below.';
-      $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
-                        <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
-                            <tr>
-                                <td style="background-color:#ececec;">
-                                    <img src="template_logo.png" alt="Indiatoday" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 10px 20px;">
-                                    <h2 style="font-size: 18px; margin: 20px 0 30px;">' . $body_htwo . ' :</h2>
-                                    <strong style="font-size: 16px;">Dear SEO Team,</strong>
-                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . ucwords($content_type) . ' <strong style="color: #000;">title.</strong></p>
-                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . $node_url . '</p>
-                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;">has been ' . $subject_line_upd . '.</p>
-                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;"><strong style="color: #000;">Thanks,</strong><br>India Today Team</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="background-color: #000; font-size: 11px; color: #7c7c7c; padding: 10px; text-align: center; font-weight: bold;">COPYRIGHT &copy; 2017 LIVING MEDIA INDIA LIMITED. ALL RIGHT RESERVED.</td>
-                            </tr>
-                        </table>
-                    </div>';
-    }
-  }
-  
-  $mail_content = preg_replace("/\[([^\[\]]++|(?R))*+\]/", "", $mail_content);
-  $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-              <html xmlns:v="urn:schemas-microsoft-com:vml">
-                <head><title></title></head>
-                <body style="margin:0; padding:0;">';
-  $content .= $mail_content;
-  $content .= '</body>';
-  $content .= '</html>';
-  
-  $params = array(
-    'body' => $content,
-    'subject' => $subject,
-  );
-  
-  $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
-  if ($mail['result']) {
-    return TRUE;
-  }
-  else {
-    $error_msg = 'Failed to send the email!';
-    watchdog('canvas-email', $error_msg, array(), WATCHDOG_ALERT);
-    return FALSE;
-  }
-}
 
 /**
  * Implements hook_mail

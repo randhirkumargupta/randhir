@@ -356,7 +356,30 @@ function itg_widgets_custom_variables() {
 		'#default_value' => variable_get('third_party_may_recommend_block'),
 	);
   
+  $form['disable_third_party_api'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Disable third party api'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('disable_third_party_api'), // for default checked and false is not checked
+  );
   
+  $form['amp_photo_ad'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Amp photo ad script'),
+		'#default_value' => variable_get('amp_photo_ad'),
+	);
+  
+  $form['amp_video_ad'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Amp video ad script'),
+		'#default_value' => variable_get('amp_video_ad'),
+	);
+  
+  $form['amp_story_ad'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Amp story ad script'),
+		'#default_value' => variable_get('amp_story_ad'),
+	);
   
   return system_settings_form($form);
 }

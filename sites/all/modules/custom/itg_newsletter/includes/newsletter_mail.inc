@@ -141,7 +141,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body><table cellspacing="0" cellpadding="0" style="width: 600px; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" width="100%" height="100px" /></td></tr>';
+  <body><table cellspacing="0" cellpadding="0" style="width: 600px; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial"><tr><td colspan="2"><img src="' . $banner . '" alt="" title="" width="100%" height="100px" /></td></tr>';
 
   $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
@@ -176,7 +176,7 @@ function itg_get_newsletter_mail_content($node, $template_node) {
     }
     if ($flag) {
       $news_content .= '<tr>
-               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="' . $link . '" target ="_blank">' . $title . '</a></h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>
@@ -240,7 +240,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body><table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 auto; border: 5px solid #d9d9d9; font-family: Arial">
-    <tr><td colspan="2"><img src="' . $banner . '" alt="" width="100%" height="100px" /></td></tr>';
+    <tr><td colspan="2"><img src="' . $banner . '" alt="" title="" width="100%" height="100px" /></td></tr>';
 
     $content .= '<tr>
         <td colspan="2" style="padding: 10px 20px;">
@@ -260,7 +260,7 @@ function itg_get_newsletter_mail_content_stories($template_node, $news_content =
       }
       $link = FRONT_URL . '/node/' . $news_detail->nid;
       $content .= '<tr>
-               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" /></td>
+               <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 100px" src="' . $thumbnail . '" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;"><a href="' . $link . '" target ="_blank">' . $title . '</a></h2>
                 <p style="margin: 0; font-size: 14px;">' . t($kicker) . '.</p>

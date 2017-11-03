@@ -332,7 +332,7 @@ function auto_master_form($form, $form_state) {
       drupal_get_path('module', 'itg_auto_search') . '/css/itg_auto_search.css',
     );
     $form['logo'] = array(
-      '#markup' => '<img src="' . $base_url . '/' . drupal_get_path('module', 'itg_auto_search') . '/images/auto-master-logo.jpg" alt="">',
+      '#markup' => '<img src="' . $base_url . '/' . drupal_get_path('module', 'itg_auto_search') . '/images/auto-master-logo.jpg" alt="" title="">',
       '#prefix' => '<div class="master-logo flt">',
       '#suffix' => '</div>',
     );
@@ -376,7 +376,7 @@ function auto_master_form($form, $form_state) {
         $form['auto_price_range']['#options'] = $auto_price_range_op;
     }
     $form['break_point'] = array(
-      '#markup' => '<img src="' . $base_url . '/' . drupal_get_path('module', 'itg_auto_search') . '/images/chunk-break-up.jpg" alt="">',
+      '#markup' => '<img src="' . $base_url . '/' . drupal_get_path('module', 'itg_auto_search') . '/images/chunk-break-up.jpg" alt="" title="">',
       '#prefix' => '<div class="break-point">',
       '#suffix' => '</div>',
     );

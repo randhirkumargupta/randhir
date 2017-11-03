@@ -346,7 +346,7 @@
                       } else {
                       $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg';
                       }
-                      $large_image = '<img src="' . $final_image . '" alt="image">';
+                      $large_image = '<img src="' . $final_image . '" alt="image" title="image">';
                       print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
                       ?>
               <?php $video_date = format_date($video_node->created, 'custom', 'D, d M, Y'); ?>
@@ -375,7 +375,7 @@
                       } else {
                        $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg'; 
                       }
-                      $small_image = '<img src="' . $final_image . '" alt="image">';
+                      $small_image = '<img src="' . $final_image . '" alt="image" title="image">';
                       $image_count = count($photo_node->field_gallery_image['und']);
                       print l($small_image, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
                       ?>

@@ -50,7 +50,7 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
               <div class="col-md-6 col-sm-6 col-xs-6">
                   <?php
                   if (!empty($src) && isset($uri)) {
-                    print l("<img src='" . $src . "' />" , "taxonomy/term/" . arg(2) , array("html" => TRUE));
+                    print l("<img src='" . $src . "' alt='' title='' />" , "taxonomy/term/" . arg(2) , array("html" => TRUE));
                   }
                   ?>
               </div>

@@ -57,10 +57,10 @@ $uri = base64_encode($actual_link);
                                 $vid = itg_videogallery_get_videoid($row['fid']);
                               }
                               if ($video_value->solr_video_thumb != "") {
-                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
+                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title="" onclick="ga("send", "event", "Video_'.$video_value->solr_video_id.'Thumb", "click","1", 1, {"nonInteraction": 1});return true;"></li>';
                               }
                               else {
-                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
+                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt="" title="" onclick="ga("send", "event", "Video_'.$video_value->solr_video_id.'Thumb", "click","1", 1, {"nonInteraction": 1});return true;"></li>';
                               }
                               ?>
                                       <div class="iframe-video1 video-iframe-wrapper" id="video_<?php echo $keys; ?>">
@@ -94,10 +94,10 @@ $uri = base64_encode($actual_link);
                               }
                             }
                             if ($video_value->solr_video_thumb != "") {
-                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt=""></li>';
+                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title="" onclick="ga("send", "event", "Video_'.$video_value->solr_video_id.'Thumb", "click","1", 1, {"nonInteraction": 1});return true;"></li>';
                             }
                             else {
-                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
+                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt="" title="" onclick="ga("send", "event", "Video_'.$video_value->solr_video_id.'Thumb", "click","1", 1, {"nonInteraction": 1});return true;"></li>';
                             }
                             $ads_flag = 1;
                             if ($video_value->field_include_ads_value == 'yes') {
@@ -187,11 +187,11 @@ $uri = base64_encode($actual_link);
                           $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 
                           if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
-                            $newimageds.= '<li><img class="migrate-thumb-video" data-image ="' . $image_url . '" data-nid = "' . $nid . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . $image_url . '" height="66" width="88" alt=""></li>';
+                            $newimageds.= '<li><img class="migrate-thumb-video" data-image ="' . $image_url . '" data-nid = "' . $nid . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . $image_url . '" height="66" width="88" alt="" title="" onclick="ga("send", "event", "Video_'.$nid.'Thumb", "click","1", 1, {"nonInteraction": 1});return true;"></li>';
                           }
                           else {
                             $image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg";
-                            $newimageds.= '<li><img class="migrate-thumb-video" data-nid = "' . $nid . '" data-image ="' . $image_url . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt=""></li>';
+                            $newimageds.= '<li><img class="migrate-thumb-video" data-nid = "' . $nid . '" data-image ="' . $image_url . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt="" title="" onclick="ga("send", "event", "Video_'.$nid.'Thumb", "click","1", 1, {"nonInteraction": 1});return true;"></li>';
                           }
                           ?>
 
