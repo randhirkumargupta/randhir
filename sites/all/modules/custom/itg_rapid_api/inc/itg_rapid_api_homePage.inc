@@ -86,7 +86,7 @@ function homePageJsonPackagelist() {
         $term_tree_count = count($term_tree);
         if ($term_tree_count) {
             foreach ($term_tree as $key => $value) {
-                $tid_list[] = $value->tid;
+                //$tid_list[] = $value->tid;
             }
         }
         $tid_list[] = 1208615; // buz to india
