@@ -287,6 +287,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_sselections2016_westbengal.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rssfeed/breakingnewsOctober072017-dailyhunt'] = array(
+    'page callback' => 'itg_rss_breakingnewsOctober072017_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_dailyhunt_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
