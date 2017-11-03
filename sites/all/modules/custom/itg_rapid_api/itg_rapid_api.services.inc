@@ -6687,6 +6687,7 @@ function searchIn2DArray($id, $array) {
 }
 
 function tokenValidator($uid, $token){
+    echo $uid; echo "<br>"; echo $token;die();
     $query = db_select('itg_app_device', 'app');   
     $query->fields('app', array('uid'));   
     $query->condition('app.uid', $uid);
