@@ -8,7 +8,7 @@ if (!empty($data['node_data'])) :
   $has_ajax = "";
   $photo_icon = "";
   $video_icon = "";
-  $image = "<img src='" . $base_url . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' alt='' />";
+  $image = "<img src='" . $base_url . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' alt='' title='' />";
   $share_desc = $share_desc_fb = "";
   if ($data['node_data']->type == 'videogallery') {
     $is_videogallery = TRUE;
@@ -50,7 +50,7 @@ if (!empty($data['node_data'])) :
                 } else {
                   ?>
                   <a title="<?php echo _widget_title($data['node_data']->title); ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
-                      <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image647x363.jpg" alt="" />
+                    <img width="647" height="363" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image647x363.jpg" alt="" title="" />
                   </a>  
 
                   <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading" />          

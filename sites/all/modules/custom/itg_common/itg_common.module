@@ -63,35 +63,41 @@ function itg_common_menu() {
     'page callback' => 'itg_custom_lock_delete',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
   $items['itg-dev-node-dpm'] = array(
     'page callback' => 'itg_custom_dev_node_dpm',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
 
   $items['photogallery-embed'] = array(
     'page callback' => 'itg_photogallery_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
 
   $items['video/%/embed/%'] = array(
     'page callback' => 'itg_videogallery_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
+  
   $items['photo/%/embed/%'] = array(
     'page callback' => 'itg_photo_embed',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
-  );
-  
+    'file' => 'includes/itg_common.main.inc',
+  );  
 
   $items['funalytics-popup'] = array(
     'page callback' => 'itg_funalytics_popup',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
 
   $items['third-party-widget-config'] = array(
@@ -114,13 +120,13 @@ function itg_common_menu() {
   $items['get-magazine-issue'] = array(
     'page callback' => 'itg_get_magazine_issue_callback',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
+    'type' => MENU_CALLBACK,    
   );
 
   $items['get-supplement-issue'] = array(
     'page callback' => 'itg_get_supplement_issue_callback',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
+    'type' => MENU_CALLBACK,    
   );
   
   $items['itg-akamai-load-my-account'] = array(
@@ -136,11 +142,13 @@ function itg_common_menu() {
     'page callback' => 'itg_get_amp_search_result',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
   $items['insert_private_ip'] = array(
     'page callback' => 'itg_common_insert_private_ips',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.main.inc',
   );
   
   $items['admin/config/development/varnish/aws/config'] = array(
@@ -153,18 +161,6 @@ function itg_common_menu() {
   );
   
   return $items;
-}
-
-
-/**
- * Implements function for get insert private ip
- * @return array
- */
-function itg_common_insert_private_ips() {
-  global $user;
-  module_load_include('inc', 'itg_common', 'includes/itg_common_aws_s3_for_lb');
-  $data_video = insert_private_ip_in_varnish();
-
 }
 
 /**
@@ -269,7 +265,6 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
       });
   });", array('type' => 'inline', 'scope' => 'footer'));
   }
-  
   
   
   if ($theme == 'itgadmin') {
@@ -477,9 +472,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     $emoji3_src = $base_url . "/" . drupal_get_path('theme', 'itgadmin') . "/images/highlights_icons/WGMF.png";
     foreach ($form['field_highlights']['und'] as $key => $value) {
       if (is_numeric($key)) {
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img  src='" . $emoji1_src . "' alt='' />";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img  src='" . $emoji2_src . "' alt='' >";
-        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img  src='" . $emoji3_src . "' alt='' >";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_1']['und']['#title'] = "<img  src='" . $emoji1_src . "' alt='' title='' />";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_2']['und']['#title'] = "<img  src='" . $emoji2_src . "' alt='' title='' />";
+        $form['field_highlights']['und'][$key]['field_field_emoji_highlights_3']['und']['#title'] = "<img  src='" . $emoji3_src . "' alt='' title='' />";
       }
     }
   }
@@ -722,8 +717,6 @@ function itg_common_cancel_button($form, &$form_state) {
 
   return $form;
 }
-
-
 
 /**
  * Add preview button
@@ -1184,18 +1177,6 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
   }
 }
 
-/**
- * Implement for lock delete on cancle button
- */
-function itg_custom_lock_delete() {
-  if (!empty($_GET['nid'])) {
-    if (function_exists('content_lock_release')) {
-      content_lock_release($_GET['nid'], $user->uid);
-    }
-  }
-  exit;
-}
-
 /** Implements itg_apache_solr_get_site_hash();
  */
 function itg_apache_solr_get_site_hash() {
@@ -1247,48 +1228,6 @@ function itg_draft_form_custom_callback($form, &$form_state) {
   }
 }
 
-/**
- * Helper function to get photogallery.
- */
-function itg_photogallery_embed() {
-  if (!empty($_GET['gid'])) {
-    $data = node_load($_GET['gid']);
-    return theme('itg_photogallery_embed', array('data' => $data));
-  }
-}
-
-/**
- * Helper function to get videogallery.
- */
-function itg_videogallery_embed() {
-  $arg = arg(3);
-  if (!empty($arg)) {
-    $gid = base64_decode($arg);
-    if (function_exists('get_video_in_fieldcollection_by_nid')) {
-      $videoids = get_video_in_fieldcollection_by_nid($gid);
-    }
-    return theme('itg_videogallery_embed', array('data' => $videoids));
-  }
-}
-
-/**
- * Helper function to get videogallery.
- */
-function itg_photo_embed() {
-  $arg = arg(3);
-  if (!empty($arg)) {
-    $gid = base64_decode($arg);
-    $data = node_load($gid);
-    return theme('itg_photo_embed', array('data' => $data));
-  }
-}
-
-/**
- * callback for funalytics-popup.
- */
-function itg_funalytics_popup() {
-  echo views_embed_view('front_funalytics_list', 'block_1');
-}
 
 /**
  * 
@@ -1667,17 +1606,7 @@ function _widget_batch_urls() {
   );
 }
 
-/**
- * Implements itg_custom_dev_node_dpm().
- *   callbck for debugging node load
- */
-function itg_custom_dev_node_dpm(){
-  $arg = arg();
-  if($arg[0] == 'itg-dev-node-dpm' && !empty($arg[1])) {
-    $node = node_load($arg[1]);
-    p($node);
-  }
-}
+
 
 /*
  * Implements itg_common_global_alt_title().
@@ -2002,16 +1931,7 @@ function get_field_value_for_smily($nid) {
   );
 }
 
-/**
- * Implements itg_get_amp_search_result().
- */
-function itg_get_amp_search_result() {
-  if (isset($_GET['search'])) {
-    $name = isset($_GET['search']) ? $_GET['search'] : '';
-    $searchurl = FRONT_URL . '/topic/' . $name;
-    drupal_goto($searchurl);
-  }
-}
+
 
 
 function _widget_title($string , $is_for_attribute = TRUE) {
