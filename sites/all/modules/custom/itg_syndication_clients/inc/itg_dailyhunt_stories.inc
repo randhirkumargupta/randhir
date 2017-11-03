@@ -63,8 +63,8 @@ function genrate_dailyhunt_story_syndication_xml($result = NULL) {
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
       $xml .= '<pubdate><![CDATA[' . $publish_date . ']]></pubdate>';
-      $xml .= '<image>'. $medium_img['imag_url'] . '</image>';
-      $xml .= '<youtubeEmbedURL></youtubeEmbedURL>';      
+      $xml .= '<image>' . $medium_img['imag_url'] . '</image>';
+      $xml .= '<youtubeEmbedURL></youtubeEmbedURL>';
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<content><![CDATA[' . $body . ']]></content>';
       $xml .= '</item>';
@@ -74,34 +74,103 @@ function genrate_dailyhunt_story_syndication_xml($result = NULL) {
   return $xml;
 }
 
-
-function itg_dailyhunt_feed_breakingnews_syndication(){
+function itg_rss_breakingnewsOctober072017_syndication() {
   $type = array('breaking_news');
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    $query->join('field_data_field_type', 'ft', 'ft.entity_id=n.nid');
-    
-    $query->fields('n', array('nid', 'title', 'created', 'changed'));
-    $query->fields('npd', array('field_itg_content_publish_date_value'));
-    
-    $query->condition('ft.field_type_value', 'Breaking News', '=');
-    $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
-    $query->orderBy('n.created', 'DESC');
-    $query->groupBy('n.nid')->range(0, 1);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    
-    $destination = "public://indiatoday/";
-    $xml = get_breaking_news_root_xml($result, $destination);
-    $file_path = $destination . 'breakingnewscategorypageurl.xml';
-    $fp = fopen($file_path, "w");
-    fwrite($fp, $xml);
-    fclose($fp);
-    
+//  $end_time = strtotime(date('Y-m-d', strtotime('+1 day', strtotime('07-10-2017'))));
+  $end_time = strtotime(date('Y-m-d', strtotime('+1 day', strtotime('19-09-2017'))));
+  $start_time = strtotime(date('Y-m-d', strtotime('-1 day', strtotime('19-09-2017'))));
+  
+  $query = db_select('node', 'n');
+  
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->join('field_data_field_type', 'ft', 'ft.entity_id=n.nid');
+
+  $query->fields('n', array('nid', 'title', 'created', 'changed'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+
+  $query->condition('ft.field_type_value', 'Breaking News', '=');
+  $query->condition('n.created', array($start_time, $end_time), 'BETWEEN');
+  $query->condition('n.status', 1);
+  $query->condition('n.type', $type, 'IN');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $destination = "public://indiatoday/";
+  $xml = genrate_breaking_news_7oct2017($result);
+  $file_path = $destination . 'breakingnewsOctober072017-dailyhunt.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
 }
 
-function get_breaking_news_root_xml($result, $file_path){
+function genrate_breaking_news_7oct2017($result){
+  $xml_detail = '';  
+  if (!empty($result)) {
+    $result = $result[0];
+    $nid = $result['nid'];
+      $publish_date = date("D, j M Y H:i", strtotime($result['field_itg_content_publish_date_value']));
+      $updated_date = date("D, j M Y H:i", $result['changed']);
+      $query = db_select('field_data_field_breaking_content_details', 'bcd');
+      $query->leftJoin('field_data_field_breaking_tile', 'bt', '(bt.entity_id = bcd.field_breaking_content_details_value)');
+      $query->leftJoin('field_data_field_breaking_publish_time', 'bpt', '(bpt.entity_id = bcd.field_breaking_content_details_value)');
+
+      $query->fields('bt', array('field_breaking_tile_value'));
+      $query->fields('bpt', array('field_breaking_publish_time_value'));
+
+      $query->condition('bcd.entity_id', $nid, '=');
+      $query->condition('bcd.bundle', 'breaking_news', '=');
+      $query->condition('bcd.entity_type', 'node', '=');
+      $query->condition('bt.bundle', 'field_breaking_content_details', '=');
+      $query->condition('bt.entity_type', 'field_collection_item', '=');
+      $query_result = $query->execute()->fetchAll();
+
+      $xml_detail = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
+      $xml_detail .= '<channel>';
+      $xml_detail .= '<item>';
+      $xml_detail .= '<pubDate>' . $publish_date . '</pubDate>';
+      $xml_detail .= '<updatedDate>' . $updated_date . '</updatedDate>';
+      $xml_detail .= '<title><![CDATA[' . $result['title'] . ']]></title>';
+      foreach ($query_result as $_value) {
+        $time = '';
+        if (!empty($_value->field_breaking_publish_time_value)) {
+          $time = date("H.i A", strtotime($_value->field_breaking_publish_time_value)) . '>>';
+        }
+        $xml_detail .= '<headline><![CDATA[ ' . $time . $_value->field_breaking_tile_value . ' ]]></headline>';
+      }
+      $xml_detail .= '</item>';
+      $xml_detail .= '</channel>';
+      $xml_detail .= '</rss>';
+  }
+  return $xml_detail;
+}
+
+function itg_dailyhunt_feed_breakingnews_syndication() {
+  $type = array('breaking_news');
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->join('field_data_field_type', 'ft', 'ft.entity_id=n.nid');
+
+  $query->fields('n', array('nid', 'title', 'created', 'changed'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+
+  $query->condition('ft.field_type_value', 'Breaking News', '=');
+  $query->condition('n.status', 1);
+  $query->condition('n.type', $type, 'IN');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 3);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  $destination = "public://indiatoday/";
+  $xml = get_breaking_news_root_xml($result, $destination);
+  $file_path = $destination . 'breakingnewscategorypageurl.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
+}
+
+function get_breaking_news_root_xml($result, $file_path) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
@@ -111,9 +180,9 @@ function get_breaking_news_root_xml($result, $file_path){
     foreach ($result as $key => $value) {
       $publish_date = date("D, j M Y H:i", strtotime($value['field_itg_content_publish_date_value']));
       $updated_date = date("D, j M Y H:i", $value['changed']);
-      $filename = 'breakingnews'.date('FdY').'-dailyhunt.xml';
-      $file_path = "public://indiatoday/".$filename;
-      
+      $filename = 'breakingnews' . date('FdY') . '-dailyhunt.xml';
+      $file_path = "public://indiatoday/" . $filename;
+
       $xml .= '<pubDate>' . $publish_date . '</pubDate>';
       $xml .= '<updatedDate>' . $updated_date . '</updatedDate>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
@@ -127,42 +196,41 @@ function get_breaking_news_root_xml($result, $file_path){
   return $xml;
 }
 
-function genrate_breaking_news_lists($nid, $file_path, $title, $pub_date, $change_date){
+function genrate_breaking_news_lists($nid, $file_path, $title, $pub_date, $change_date) {
   if (isset($nid) && !empty($nid)) {
-      $query = db_select('field_data_field_breaking_content_details', 'bcd');      
-      $query->leftJoin('field_data_field_breaking_tile', 'bt', '(bt.entity_id = bcd.field_breaking_content_details_value)');      
-      $query->leftJoin('field_data_field_breaking_publish_time', 'bpt', '(bpt.entity_id = bcd.field_breaking_content_details_value)');      
-      
-      $query->fields('bt', array('field_breaking_tile_value'));      
-      $query->fields('bpt', array('field_breaking_publish_time_value'));      
-      
-      $query->condition('bcd.entity_id', $nid, '=');
-      $query->condition('bcd.bundle', 'breaking_news', '=');
-      $query->condition('bcd.entity_type', 'node', '=');
-      $query->condition('bt.bundle', 'field_breaking_content_details', '=');
-      $query->condition('bt.entity_type', 'field_collection_item', '=');
-      $query_result = $query->execute()->fetchAll();
-      
-      $xml_detail = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
-      $xml_detail .= '<channel>';
-      $xml_detail .= '<item>';
-      $xml_detail .= '<pubDate>'.$pub_date.'</pubDate>';
-      $xml_detail .= '<updatedDate>'.$change_date.'</updatedDate>';
-      $xml_detail .= '<title>'.$title.'</title>';
-      foreach($query_result as $_value){
-        $time = '';
-        if(!empty($_value->field_breaking_publish_time_value)){
-          $time = date("H.i A", strtotime($_value->field_breaking_publish_time_value)).'>>';
-        }
-        $xml_detail .= '<headline><![CDATA[ '.$time.$_value->field_breaking_tile_value.' ]]></headline>';        
-      }
-      $xml_detail .= '</item>';
-      $xml_detail .= '</channel>';
-      $xml_detail .= '</rss>';
-      $file_detail = $file_path;
-      $fp1 = fopen($file_detail, "w");
-      fwrite($fp1, $xml_detail);
-      fclose($fp1);      
-    }
-}
+    $query = db_select('field_data_field_breaking_content_details', 'bcd');
+    $query->leftJoin('field_data_field_breaking_tile', 'bt', '(bt.entity_id = bcd.field_breaking_content_details_value)');
+    $query->leftJoin('field_data_field_breaking_publish_time', 'bpt', '(bpt.entity_id = bcd.field_breaking_content_details_value)');
 
+    $query->fields('bt', array('field_breaking_tile_value'));
+    $query->fields('bpt', array('field_breaking_publish_time_value'));
+
+    $query->condition('bcd.entity_id', $nid, '=');
+    $query->condition('bcd.bundle', 'breaking_news', '=');
+    $query->condition('bcd.entity_type', 'node', '=');
+    $query->condition('bt.bundle', 'field_breaking_content_details', '=');
+    $query->condition('bt.entity_type', 'field_collection_item', '=');
+    $query_result = $query->execute()->fetchAll();
+
+    $xml_detail = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
+    $xml_detail .= '<channel>';
+    $xml_detail .= '<item>';
+    $xml_detail .= '<pubDate>' . $pub_date . '</pubDate>';
+    $xml_detail .= '<updatedDate>' . $change_date . '</updatedDate>';
+    $xml_detail .= '<title><![CDATA[' . $title . ']]></title>';
+    foreach ($query_result as $_value) {
+      $time = '';
+      if (!empty($_value->field_breaking_publish_time_value)) {
+        $time = date("H.i A", strtotime($_value->field_breaking_publish_time_value)) . '>>';
+      }
+      $xml_detail .= '<headline><![CDATA[ ' . $time . $_value->field_breaking_tile_value . ' ]]></headline>';
+    }
+    $xml_detail .= '</item>';
+    $xml_detail .= '</channel>';
+    $xml_detail .= '</rss>';
+    $file_detail = $file_path;
+    $fp1 = fopen($file_detail, "w");
+    fwrite($fp1, $xml_detail);
+    fclose($fp1);
+  }
+}

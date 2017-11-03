@@ -345,3 +345,10 @@ function get_micromax_videsectionlist_sections() {
     'videsectionlist_business.json' => array('section' => '1206959', 'limit' => 25)
   );
 }
+
+
+function getelections2016_westbenga_sections(){
+  return array(
+    1206846 => 'assemblyelections2016-westbengal.xml'
+  );
+}
