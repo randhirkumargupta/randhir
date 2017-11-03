@@ -70,6 +70,7 @@ function get_node_firebase_weburl($nid) {
     $firebase_url = "";
     $alias = drupal_get_path_alias('node/' . $nid . '');
     $weburl = $base_url . "/" . $alias;
-    $firebase_url = firebase_short_url($weburl);
-    return $firebase_url;
+    //$firebase_url = firebase_short_url($weburl);
+    //return $firebase_url;
+    return $weburl;
 }
