@@ -62,7 +62,7 @@ margin-left: 117;
 <!-- <script src="http://indiatoday.intoday.in/commentbox/js/ajaxinclude.js" type="text/javascript"></script> -->
 
 
-<link href="jquery.mCustomScrollbar.css" rel="stylesheet" />
+<link href="/voter-election/css/jquery.mCustomScrollbar.css" rel="stylesheet" />
 </head>
 
 <body>

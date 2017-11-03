@@ -7,7 +7,7 @@
     <META NAME="keywords"
     CONTENT="india today, state of states conclave, state of states summit, state summit, india today state summit, state of states conclave 2012, india today state of states conclave">
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-    <LINK HREF="stylesheet.css" REL="stylesheet" TYPE="text/css">
+    <LINK HREF="/state-of-the-states/2015/stylesheet.css" REL="stylesheet" TYPE="text/css">
   </HEAD>
 
 
@@ -99,10 +99,10 @@
   <li>
     Flashback 2011-2014
     <ul>
-    <li><a href="http://indiatoday.intoday.in/state-of-the-states/2014/index.jsp" target="_blank">2014</a></li>
-      <li><a href="http://indiatoday.intoday.in/state-of-the-states/2013/index.jsp" target="_blank">2013</a></li>
+    <li><a href="/state-of-the-states/2014/index.jsp" target="_blank">2014</a></li>
+      <li><a href="/state-of-the-states/2013/index.jsp" target="_blank">2013</a></li>
       <li><a href="http://indiatoday.intoday.in/state-of-the-states/index.jsp" target="_blank">2012</a></li>
-      <li><a href="http://indiatoday.intoday.in/state-of-the-states/2011/" target="_blank">2011</a></li>
+      <li><a href="/state-of-the-states/2011/" target="_blank">2011</a></li>
       <li><a href="http://indiatoday.intoday.in/category/coverage-2010/1/390.html" target="_blank">2010</a></li>
       <li><a href="http://indiatoday.intoday.in/category/coverage-2009/1/391.html" target="_blank">2009</a></li>
 

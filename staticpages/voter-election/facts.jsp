@@ -6,8 +6,8 @@
 <title>Election Fun Facts</title>
 <meta name="description" content="Fun facts about general elections in India since 1952" />
 <meta name="keywords" content="Online elections, first virtual elections, lok sabha 2014 elections, Lok Sabha polls, elections, India Today online election, FAQs, election facts, election news, election fun facts, polls" />
-<link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
-<link href="jquery.mCustomScrollbar.css" rel="stylesheet" />
+<link href="/voter-election/css/common.css" rel="stylesheet" type="text/css">
+<link href="/voter-election/css/jquery.mCustomScrollbar.css" rel="stylesheet" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 </head>
 <script>
@@ -45,7 +45,7 @@
 </div>
 <!--top-->
 
-<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/css/voter-helpline.css" rel="stylesheet" />
+<link href="/voter-election/css/voter-helpline.css" rel="stylesheet" />
 
 <div class="voter-helpline-container" >
 <div class="vote-header">

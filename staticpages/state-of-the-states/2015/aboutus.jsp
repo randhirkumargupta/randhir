@@ -2,14 +2,14 @@
 	<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 	<HEAD>
     <TITLE>India Today: The State of States Conclave 2012</TITLE>
-    <META NAME="description" 
+    <META NAME="description"
     CONTENT="India Today State of States Conclave 2012: state of states conclave 2012">
-    <META NAME="keywords" 
+    <META NAME="keywords"
     CONTENT="india today, state of states conclave, state of states summit, state summit, india today state summit, state of states conclave 2012, india today state of states conclave">
     <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-    <LINK HREF="stylesheet.css" REL="stylesheet" TYPE="text/css">
+    <LINK HREF="/state-of-the-states/2015/stylesheet.css" REL="stylesheet" TYPE="text/css">
   </HEAD>
-  
+
 
 
 
@@ -19,7 +19,7 @@
       <script src="http://indiatoday.intoday.in/js/html5.js"></script>
     <![endif]-->
 <link rel="shortcut icon" href="http://indiatoday.intoday.in/state-of-the-states/images/SOS_favicon.ico" />
-<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" 
+<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0"
     ALIGN="CENTER">
       <TR>
         <TD BGCOLOR="#4B4B4B">
@@ -43,7 +43,7 @@
         <TD BGCOLOR="#ffffff" HEIGHT="1"></TD>
       </TR>
     </TABLE>
-    <TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" 
+    <TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0"
     ALIGN="CENTER">
       <TR>
         <TD background="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/state-of-the-states/2014/images/bg.jpg">
@@ -65,7 +65,7 @@
                     <TD WIDTH="119"><IMG SRC="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/state-of-the-states/2014/images/s1.jpg" BORDER="0" WIDTH="119" HEIGHT="52"></TD>
                     <TD BGCOLOR="#FFFFFF"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/state-of-the-states/2015/images/slide.jpg" width="399" height="52" usemap="#Map" border="0" />
 <!--<SCRIPT LANGUAGE="javascript" SRC="scroll1.js"></SCRIPT>--></TD>
-                    
+
                     <TD WIDTH="17"><IMG SRC="http://indiatoday.intoday.in/state-of-the-states/images/s2.jpg" BORDER="0" WIDTH="17" HEIGHT="52"></TD>
                   </TR>
                 </TABLE></TD>
@@ -99,16 +99,16 @@
   <li>
     Flashback 2011-2014
     <ul>
-    <li><a href="http://indiatoday.intoday.in/state-of-the-states/2014/index.jsp" target="_blank">2014</a></li>
-      <li><a href="http://indiatoday.intoday.in/state-of-the-states/2013/index.jsp" target="_blank">2013</a></li>
+    <li><a href="/state-of-the-states/2014/index.jsp" target="_blank">2014</a></li>
+      <li><a href="/state-of-the-states/2013/index.jsp" target="_blank">2013</a></li>
       <li><a href="http://indiatoday.intoday.in/state-of-the-states/index.jsp" target="_blank">2012</a></li>
-      <li><a href="http://indiatoday.intoday.in/state-of-the-states/2011/" target="_blank">2011</a></li>
+      <li><a href="/state-of-the-states/2011/" target="_blank">2011</a></li>
       <li><a href="http://indiatoday.intoday.in/category/coverage-2010/1/390.html" target="_blank">2010</a></li>
       <li><a href="http://indiatoday.intoday.in/category/coverage-2009/1/391.html" target="_blank">2009</a></li>
-	  
+
     </ul>
   </li>
-  
+
 </ul>
 </div>
 	  </div>
@@ -147,15 +147,15 @@
 	pageTracker._trackPageLoadTime();
 	} catch(err) {}</script>
 
-    
+
     <div style="background-color:#000">
-    <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0" 
+    <TABLE WIDTH="1003" BORDER="0" CELLPADDING="0" CELLSPACING="0"
     ALIGN="CENTER">
       <TR>
         <TD VALIGN="TOP" width="660"><BR>
         <BR>
        <div class="clear"></div>
-	  
+
 	  <div class="side_chunk_title"> About this state of the state conclave 2014</div>
 <div class="normalgreytxt">
 <p>In 2003,  India Today undertook a study to track the performance of the Indian states analyzing which states made the most of liberalization and which fell away. </p>
@@ -164,19 +164,19 @@
 <p>Based on the India Today rankings, Chief Ministers, as representatives of  the Best Ranked States, are felicitated at the event</p>
 <p>Over the previous years, the event has been attended by highest rung of India�s ruling class, which includes the President, the Finance Minister, the Deputy Prime Minister, Chief Ministers of the States and also high profile leaders of industry.</p>
 
-</div>	  
+</div>
 	   <!--<DIV>
-		
-		  
+
+
         </DIV>-->
         <div class="clear"></div>
         </TD>
         <TD VALIGN="TOP" WIDTH="15"></TD>
         <TD VALIGN="TOP" WIDTH="300">
-           
+
         <br>
 <div class="side_chunk">
-  
+
 
     <div class="side_chunk_title">Venue Details</div>
     <div class="venue">
@@ -195,7 +195,7 @@
 <!--
 <div class="side_chunk">
     <div class="side_chunk_title">
-        Past Coverage          
+        Past Coverage
   </div>
   <div class="profile">
       <a href="http://indiatoday.intoday.in/category/coverage-2009/1/391.html"><img src="http://indiatoday.intoday.in/state-of-the-states/images/2011-sos.jpg" width="100" height="100" alt="Kapil Sibal" title="Kapil Sibal" border="0" align="middle" /></a>
@@ -206,7 +206,7 @@
             <div class="profilebyline"><img src="http://indiatoday.intoday.in/state-of-the-states/images/listarrow.gif" border="0" align="left" class="imgs" /><a href="http://indiatoday.intoday.in/story/india-today-state-of-states-conclave-2011-jaipal-reddy-bc-khanduri/1/158640.html" target="_blank">Corruption can be ended</a></div>
             <div class="profilebyline"><img src="http://indiatoday.intoday.in/state-of-the-states/images/listarrow.gif" border="0" align="left" class="imgs" /><a href="http://indiatoday.intoday.in/story/india-today-state-of-states-conclave-2011-pranab-mukherjee/1/158644.html" target="_blank">High growth is a must</a></div>
             <div class="profilebyline"><img src="http://indiatoday.intoday.in/state-of-the-states/images/listarrow.gif" border="0" align="left" class="imgs" /><a href="http://indiatoday.intoday.in/story/india-today-state-of-states-conclave-2011-prithviraj-chavan-tarun-gogoi/1/158642.html" target="_blank">One size doesn't fit all</a></div>
-            
+
             </div>
         <div class="clear profilediv"></div>
   </div>
@@ -221,7 +221,7 @@
                     </div>
         <div class="clear profilediv"></div>
   </div>
-    
+
 
 </div>
 -->
@@ -232,7 +232,7 @@
 	<div class="photovidbox">
     	<a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-awards-tamil-nadu-goa-win-top-honours/1/13284.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/state-of-the-states/2014/images/2014_winner.jpg" width="295" height="158" /></a>
      </div>
-     
+
      <br>
      <br>
 
@@ -240,7 +240,7 @@
 
     <div class="side_chunk_title">
         Previous Snapshots
-    </div>        
+    </div>
     <div class="snapsheader">Photos</div>
 
     <div>
@@ -252,11 +252,11 @@
                 <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2011/1/5810.html">Awards function 2011</a> </div>
         </div>
 
-        <div class="clear"></div>	
+        <div class="clear"></div>
     </div>
-    
-      <div class="clear">&nbsp;</div>	
-    
+
+      <div class="clear">&nbsp;</div>
+
     <div>
 	<div class="photovidbox">
           <a href="http://indiatoday.intoday.in/gallery/india-today-state-of-states-conclave-2010/1/3884.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2011October/awards-function-2010_102111031314.jpg"  width="140" height="140" alt="Aroon Purie and Hamid Ansari" title="Aroon Purie and Hamid Ansari" border="0" /></a>
@@ -267,13 +267,13 @@
           <div class="stcaption"><a href="http://indiatoday.intoday.in/gallery/it+state+of+the+states+awards/1/1887.html">Awards function 2009</a> </div>
         </div>
 
-        <div class="clear"></div>	
+        <div class="clear"></div>
     </div>
-    
-    
-    
-    
-    
+
+
+
+
+
     <div class="snapsheader">Videos</div>
     <div>
         <div class="photovidbox">
@@ -285,15 +285,15 @@
   <div class="stcaption"><a href="http://indiatoday.intoday.in/video/punjab+delhi+are+best+states/1/61699.html">'Punjab, Delhi are best states'</a> </div>
 </div>
       <div class="clear"></div>
-    </div>       
-</div> 
+    </div>
+</div>
 
         </TD>
-        
+
       </TR>
     </TABLE>
     </div>
-	
+
     <DIV>
     <div class="footerbg">
 		<div class="presenting">
@@ -301,7 +301,7 @@
         <map name="Map" id="Map">
           <area shape="rect" coords="145,9,279,96" href="http://www.srei.com/" target="_blank" />
           <area shape="rect" coords="461,10,543,95" href="http://indiatoday.intoday.in/livetv.jsp" target="_blank" />
-        </map> 
+        </map>
 		</div>
 	</div>
 <div class="clear"></div>
@@ -313,13 +313,7 @@
 
 
 
-   
+
 	</div>
   </BODY>
 </HTML>
-
-
-
-
-
-
