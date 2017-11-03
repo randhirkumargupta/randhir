@@ -225,7 +225,7 @@ function simplesamlphp_auth_init() {
   global $_simplesamlphp_auth_saml_version;
   global $myval;
 
-  if (!empty(variable_get('itg_backend_url'))) {
+  /*if (!empty(variable_get('itg_backend_url'))) {
     $backend_variable = variable_get('itg_backend_url');
     $backend_var_url = parse_url($backend_variable);
     $base_uri_host = parse_url($base_url);
@@ -233,7 +233,7 @@ function simplesamlphp_auth_init() {
     if ($backend_var_url['host'] == $base_uri_host['host']) {
       return;
     }
-  }
+  }*/
 
   if (!_simplesamlphp_auth_isEnabled(TRUE)) {
     // Exit without initializing.
