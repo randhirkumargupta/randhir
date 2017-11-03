@@ -5618,7 +5618,7 @@ function itg_rapid_api_authtoken_verification($token) {
         $token_val_flag = 0;
         $token_val_flag = tokenValidator($params['user_id'], $token);
         //if (!drupal_valid_token($token, 'services')) {
-        if ($token_val_flag) {
+        if (!$token_val_flag) {
             
             $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
@@ -6694,7 +6694,7 @@ function tokenValidator($uname, $token){
     $query->condition('app.uid', $uid);
     $query->condition('app.token', $token);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    echo $result[0]['uid']; die();
+    //echo $result[0]['uid']; die();
     if($result[0]['uid'] == $uid){
         return 1;
     }
