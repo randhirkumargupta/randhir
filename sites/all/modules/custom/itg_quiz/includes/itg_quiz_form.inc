@@ -200,7 +200,7 @@ function itg_quiz_quiz_form($form, &$form_state, $node_id = NULL) {
       if ($question_detail[$question_arr['value']]->field_question_media[LANGUAGE_NONE][0]['value'] == 'Photo') {
           $question_media_uri = $question_detail[$question_arr['value']]->field_question_image[LANGUAGE_NONE][0]['uri'];
           $extra_large_image_url = image_style_url("image750x447", $question_media_uri);
-          $question_media = '<div class="quiz-image"><img src="' . $extra_large_image_url . '" width="750" alt="" /></div>';
+          $question_media = '<div class="quiz-image"><img src="' . $extra_large_image_url . '" width="750" alt="" title="" /></div>';
       }
 
       // Submit button text

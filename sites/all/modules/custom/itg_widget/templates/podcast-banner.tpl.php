@@ -32,10 +32,10 @@ $podcast_audio_element_id = array();
                                     $podcat_uri = image_style_url("widget_small" , $podcast_image);
                                     if(function_exists('url_exists') && url_exists($podcat_uri)) {
                                     ?>
-                                    <img src="<?php print image_style_url("widget_small" , $podcast_image); ?>" alt="" />
+                                  <img src="<?php print image_style_url("widget_small" , $podcast_image); ?>" alt="" title="" />
                                     <?php
                                     } else {
-                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+                                    print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' title='' />";
                                     }
                                     ?>
                                 </div>
@@ -75,7 +75,7 @@ $podcast_audio_element_id = array();
                             } else {
                               $extra_large_final_image = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg';
                             }
-                            $very_small_image = '<img class="podcast-thumb-img" src="' . $extra_large_final_image . '" alt="" />';
+                            $very_small_image = '<img class="podcast-thumb-img" src="' . $extra_large_final_image . '" alt="" title="" />';
                             $podcast_thumbnail .= "<div class='podcast-nav-item'> $very_small_image </div>";
                           }
                         endif;
