@@ -1055,7 +1055,7 @@ function itg_ugc_view_content($unique_id) {
           }
           if (!empty($final_view['image'])) {
             $file = file_load($final_view['image']);
-            $output.= '<li>' . '<strong>Image :</strong><span> <img src="' . file_create_url($file->uri) . '" alt="' . file_create_url($file->uri) . '"/></span></li>';
+            $output.= '<li>' . '<strong>Image :</strong><span> <img src="' . file_create_url($file->uri) . '" alt="' . file_create_url($file->uri) . '" title="" /></span></li>';
           }
           if (!empty($final_view['multiple_image'])) {
             $myimgArray = explode(',', $final_view['multiple_image']);
@@ -1064,7 +1064,7 @@ function itg_ugc_view_content($unique_id) {
             foreach ($myimgArray as $key => $value) {
               $file = file_load($value);
               $caption = 'caption : ' . $myimgcaption[$key];
-              $output.= '<li>' . '<strong>Image' . $img_no . ' :</strong><span> <img src="' . file_create_url($file->uri) . '" alt="' . file_create_url($file->uri) . '"/></span><span>' . $caption . '</span></li>';
+              $output.= '<li>' . '<strong>Image' . $img_no . ' :</strong><span> <img src="' . file_create_url($file->uri) . '" alt="' . file_create_url($file->uri) . '" title="" /></span><span>' . $caption . '</span></li>';
               $img_no++;
             }
           }

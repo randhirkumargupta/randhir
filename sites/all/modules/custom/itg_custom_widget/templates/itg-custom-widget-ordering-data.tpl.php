@@ -15,14 +15,14 @@
         <?php if ($count == 0) : ?>
           <?php if (!empty($extra_large_image_url)) { ?>
             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img  src="<?php print $extra_large_image_url ?>" alt="" />
+              <img  src="<?php print $extra_large_image_url ?>" alt="" title="" />
             </a>
             <?php
           }
           else {
             ?>
             <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" />
+              <img  height="208" width="370" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image370x208.jpg" alt="" title="" />
             </a>
           <?php } ?>
           <h3 class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">              
