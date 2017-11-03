@@ -305,6 +305,6 @@ function itg_api_mail_today_content() {
     }
   }
   else {
-    print 'Enable agency feed from configuration';
+    watchdog('Agency_configuration_warning', 'Enable agency feed from configuration');
   }
 }
