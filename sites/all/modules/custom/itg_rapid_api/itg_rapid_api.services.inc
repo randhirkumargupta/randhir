@@ -6690,7 +6690,7 @@ function tokenValidator($uid, $token){
     $query = db_select('itg_app_device', 'app');   
     $query->fields('app', array('uid'));   
     $query->condition('app.uid', $uid);
-    $query->condition('uid.token', $token);
+    $query->condition('app.token', $token);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     p($result);die();
     if($result[0]['uid'] == $uid){
