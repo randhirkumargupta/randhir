@@ -350,7 +350,14 @@ function getStoryTechs($node) {
     //$storytech['photos']['p_id'] = "358749";
     //$storytech['photos']['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/intoday-mag2_54441497856379.jpeg";
     $storytech_fi[] = (array) $storytech;
-    return $storytech_fi;
+    if(count($storytech_fi)){
+        return $storytech_fi;
+    }
+    else{
+       $dump = array();
+      return $dump;  
+    }
+    
 }
 
 /**
