@@ -367,11 +367,12 @@ function buildListicleNode($node) {
     // get title
     $field_story_template_guru = $node->field_story_template_guru['und'][0]['value'];
     $listcont = 0;
+    $listiclenode[$listcont]['templates'] = "$field_story_templates";
     $listiclenode[$listcont]['title'] = "$field_story_template_guru";
     //$listiclenode['title'] = "$field_story_template_guru";
     //listicle loop data
     $field_story_listicle = $node->field_story_listicle['und'];
-    $listcont = 1;
+   //$listcont = 1;
     foreach ($field_story_listicle as $key => $value) {
         $collection_id = $value['value'];
         $load_collection = field_collection_item_load($collection_id);
@@ -380,10 +381,10 @@ function buildListicleNode($node) {
         $type = $load_collection->field_story_listicle_type['und'][0]['value'];
         $description = $load_collection->field_story_listicle_description['und'][0]['value'];
         // loop data
-        $listiclenode[$listcont]['templates'] = "$field_story_templates";
-        $listiclenode[$listcont]['description'] = "$description";
-        $listiclenode[$listcont]['type'] = "$type";
-        $listiclenode[$listcont]['color'] = "$color";
+        //$listiclenode[$listcont]['templates'] = "$field_story_templates";
+        $listiclenode['data'][$listcont]['description'] = "$description";
+        $listiclenode['data'][$listcont]['type'] = "$type";
+        $listiclenode['data'][$listcont]['color'] = "$color";
         $listcont++;
     }
     return $listiclenode;
@@ -404,12 +405,12 @@ function buildFactoidNode($node) {
     $listcont = 0;
     $factoidnode[$listcont]['title'] = "$field_story_factoids_title";
     //$factoidnode['title'] = "$field_story_factoids_title";
-    $listcont = 1;
+    //$listcont = 1;
     // loop data - field_story_template_factoids
     $field_story_template_factoids = $node->field_story_template_factoids['und'];
     foreach ($field_story_template_factoids as $key => $value) {
         $factoids = $value['value'];
-        $factoidnode[$listcont]['description'] = $factoids;
+        $factoidnode['data'][$listcont]['description'] = $factoids;
         $listcont++;
     }
     return $factoidnode;
