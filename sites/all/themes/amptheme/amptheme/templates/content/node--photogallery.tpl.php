@@ -69,15 +69,11 @@
 ?>
   </div>
 </div>
+<?php if(!empty(variable_get('amp_photo_ad'))) { ?>
 <div class="custom-amp-ad">
-<amp-ad width=300 height=250
-    type="doubleclick"
-    data-slot="/1007232/Indiatoday_AMP_Mobile_Photo_ATF_300x250"
-    data-multi-size-validation="false">
-  <div placeholder></div>
-  <div fallback></div>
-</amp-ad>  
+<?php print variable_get('amp_photo_ad'); ?> 
 </div>
+<?php } ?>
 <div class="amp-other-gallery">
 <?php
 // get all node id related to current node primary category

@@ -14,7 +14,7 @@ foreach ($view->result as $item): ?>
   <div class="pic">
    <?php if (empty($item->_field_data['nid']['entity']->field_story_extra_large_image['und'][0]['uri'])) { ?>
             <?php
-              $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt=''/>";
+              $img = "<img width='170' height='127'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' title=''/>";
               print l($img, 'node/' . $item->nid, array('html' => TRUE));
               
            } 

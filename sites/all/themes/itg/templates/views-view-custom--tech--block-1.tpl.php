@@ -25,7 +25,7 @@
                 print $row['field_story_large_image'];
               }
               else {
-                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' />";
+                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' alt='' title='' />";
               }
               ?> 
 
@@ -51,7 +51,7 @@
                 print $row['field_story_medium_image'];
               }
               else {
-                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' />";
+                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' title='' />";
               }
               ?>
               <h3 title="<?php echo strip_tags($desc); ?>">

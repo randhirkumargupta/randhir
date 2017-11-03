@@ -1,6 +1,9 @@
 <?php
 global $base_url, $user;
-
+if(!empty(variable_get('itg_front_url'))) {
+   $parse_scheme = parse_url(variable_get('itg_front_url'));
+   $scheme = $parse_scheme['scheme']."://";
+}
 if (!empty($data['itg_main_manu_header'])) {
   foreach ($data['itg_main_manu_header'] as $key => $val) {
     if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
@@ -19,7 +22,7 @@ else {
   $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
   $user_pic = "<img src=$file width='30' height='30' alt='user-image' title='user-image' />";
 }
-$uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+$uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 ?>
 <div class="header-ads">
   <?php
@@ -42,7 +45,7 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
     <li> 
       <?php
         if ($_GET['q'] != 'user') {
-          $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+          $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
           if ($user->uid == 0) {
           ?>
           <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
@@ -64,9 +67,9 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
   <div class="container top-nav">                  
     <div class="social-nav mhide">
       <ul class="social-nav mhide">
-        <li><a href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="https://plus.google.com/+indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="google_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+          <li><a rel="nofollow" href="https://www.facebook.com/IndiaToday/" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="fb_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-facebook"></i></a></li>
+        <li><a rel="nofollow" href="https://twitter.com/indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="twitter_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a rel="nofollow" href="https://plus.google.com/+indiatoday" class="user-activity def-cur-pointer" data-rel="1" data-tag="homepage" data-activity="google_follow" data-status="1" title="Follow us" target="_blank"><i class="fa fa-google-plus"></i></a></li>
         <li><a href="<?php echo $base_url .'/rss' ?>" title=""><i class="fa fa-rss"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-mobile"></i></a></li>
         <li><a href="#" title=""><i class="fa fa-volume-up"></i></a></li>
@@ -146,7 +149,7 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
       <div class="user-menu">
         <?php
         if ($_GET['q'] != 'user') {
-          $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+          $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
           if ($user->uid == 0) {
           ?>
           <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
