@@ -4366,8 +4366,8 @@ function itg_rapid_api_change_password($token) {
         $token = $params['auth_token']; 
         $token_val_flag = 0;
         $token_val_flag = tokenValidator($params['user_id'], $token);
-        //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+        if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
             $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
             return $res;
@@ -4686,8 +4686,8 @@ function itg_rapid_api_edit_profile($token) {
     $token = $params['authtoken_id'];
     $token_val_flag = 0;
         $token_val_flag = tokenValidator($params['user_id'], $token);
-        //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+        if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
     } else {
@@ -4729,8 +4729,8 @@ function itg_rapid_api_edit_user_image($token) {
     
 $token_val_flag = 0;
         $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-        //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+        if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
     } else {
@@ -4809,8 +4809,8 @@ function itg_rapid_api_get_login_user_detail($token) {
     $token = $params['authtoken_id'];
     $token_val_flag = 0;
         $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
-        //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+        if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
         $data['status_code'] = "0";
         $data['status_message'] = "invalid token";
     } else {
@@ -4901,8 +4901,8 @@ function itg_rapid_api_log_out($token) {
     
     $token_val_flag = 0;
         $token_val_flag = tokenValidator($params['user_id'], $token);
-        //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+        if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
             $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
             return $res;
@@ -5633,8 +5633,8 @@ function itg_rapid_api_authtoken_verification($token) {
         }
         $token_val_flag = 0;
         $token_val_flag = tokenValidator($params['user_id'], $token);
-        //if (!drupal_valid_token($token, 'services')) {
-        if (!$token_val_flag) {
+        if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
             
             $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
