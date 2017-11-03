@@ -6687,11 +6687,10 @@ function searchIn2DArray($id, $array) {
 }
 
 function tokenValidator($uid, $token){
-    echo "andy here";die();
-    $query = db_select('itg_app_device', 'app');    
-    $query->fields('app', 'uid');
+    $query = db_select('itg_app_device', 'app');   
+    $query->fields('app', array('uid'));   
     $query->condition('app.uid', $uid);
-    $query->condition('app.token', $token);    
+    $query->condition('uid.token', $token);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     p($result);die();
     if($result[0]['uid'] == $uid){
@@ -6700,6 +6699,9 @@ function tokenValidator($uid, $token){
     else{
         return 0;
     }
+    
+    
+   
 }
 
 
