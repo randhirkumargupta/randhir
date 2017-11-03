@@ -8,7 +8,7 @@ foreach ($rows as $row): ?>
         print $row['field_sponser_logo'];
       }
       else {
-        print "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' />";
+        print "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' alt='' title='' />";
       }
       ?>
   </div>
