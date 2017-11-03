@@ -12,6 +12,29 @@ function itg_rss_samsungtv_it_livenow_listing_feed(){
   itg_genrate_samsungtv_it_live_now_syndication($sections);
 }
 
+function itg_rss_samsungtv_it_videobreakingnews_feed(){
+    $type = array('breaking_news');
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->join('field_data_field_type', 'ft', 'ft.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+    
+    $query->fields('n', array('nid', 'title', 'created', 'changed'));
+    $query->fields('ssi', array('field_story_small_image_fid'));
+    $query->condition('ft.field_type_value', 'Breaking News', '=');
+    $query->condition('n.status', 1);
+    $query->condition('n.type', $type, 'IN');
+    $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid')->range(0, 1);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $xml = itg_genrate_samsungtv_it_breakingnews_syndication($result);
+    $xml_path = 'public://samsungtv_it/videos/';
+    $file_path = $xml_path . 'breakingnews.xml';
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+}
+
 function itg_rss_samsungtv_it_video_home_feed() {
   $xml = get_samsung_it_home_static_xml();
   $xml_path = 'public://samsungtv_it/videos/';
@@ -189,4 +212,71 @@ function genrate_samsungtv_it_live_now_xml($result){
   }
   $xml .= '</Root>';
   return $xml;
+}
+
+function itg_genrate_samsungtv_it_breakingnews_syndication($result){
+  if (!empty($result)) {
+    
+    $xml = '<Root>';
+    $xml .= get_samsung_breaking_news_lists($result);
+    $xml .= '</Root>';
+    return $xml;
+  }
+}
+
+function get_samsung_breaking_news_lists($result){
+  $result = $result[0];
+  $nid = $result['nid'];
+  $query = db_select('field_data_field_breaking_content_details', 'bcd');      
+  $query->leftJoin('field_data_field_breaking_tile', 'bt', '(bt.entity_id = bcd.field_breaking_content_details_value)');      
+  $query->leftJoin('field_data_field_breaking_publish_time', 'bpt', '(bpt.entity_id = bcd.field_breaking_content_details_value)');      
+
+  $query->fields('bt', array('field_breaking_tile_value'));      
+  $query->fields('bpt', array('field_breaking_publish_time_value'));      
+
+  $query->condition('bcd.entity_id', $nid, '=');
+  $query->condition('bcd.bundle', 'breaking_news', '=');
+  $query->condition('bcd.entity_type', 'node', '=');
+  $query->condition('bt.bundle', 'field_breaking_content_details', '=');
+  $query->condition('bt.entity_type', 'field_collection_item', '=');
+  $query_result = $query->execute()->fetchAll();
+  if(count($query_result) <= 0){
+    return "<item>
+          <enable>0</enable>
+          <id/>
+          <title/>
+          <credit/>
+          <createddate/>
+          <createdtime/>
+          <city/>
+          <courtesy/>
+          <thumbimage/>
+          <longdescription/>
+          </item>";    
+  }
+  
+  
+  $breaking_xml = '';
+  $publish_date = date("D, j M Y H:i", $result['created']);
+  $small_img = get_image_info_by_fid($result['field_story_small_image_fid']);
+  foreach($query_result as $value){
+    $time = '';
+    if(!empty($value->field_breaking_publish_time_value)){
+      $time = date("H.i A", strtotime($value->field_breaking_publish_time_value)).'>>';
+    }
+    $breaking_xml .= '<item>';
+    $breaking_xml .= '<enable>1</enable>';
+    $breaking_xml .= '<id>'.$nid.'</id>';
+    $breaking_xml .= '<title>'.$value->field_breaking_tile_value.'</title>';
+    $breaking_xml .= '<credit></credit>';
+    $breaking_xml .= '<createddate>'.$publish_date.'</createddate>';
+    $breaking_xml .= '<createdtime>'.$time.'</createdtime>';
+    $breaking_xml .= '<city></city>';
+    $breaking_xml .= '<courtesy></courtesy>';
+    $breaking_xml .= '<thumbimage>'.$small_img["imag_url"].'</thumbimage>';
+    $breaking_xml .= '<longdescription></longdescription>';
+    $breaking_xml .= '</item>';
+  }
+  
+  return $breaking_xml;
 }
