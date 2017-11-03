@@ -61,7 +61,7 @@ function homePageJsonPackagelist() {
     $output = "";
     $data = array();
     $tid_list = array();
-    $tid_list[] = $tid;
+    //$tid_list[] = $tid;
     $listcount = 0;
     $range_max = 10;
     //$photolist = array();
