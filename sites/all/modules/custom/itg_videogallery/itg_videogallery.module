@@ -314,13 +314,20 @@ function itg_videogallery_theme($existing, $type, $theme, $path) {
 function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url;
   switch ($form_id) {
-    case 'itg_widgets_custom_variables':
+    case 'itg_widgets_custom_variables':  
       $form['tid_videos'] = array(
         '#type' => 'textfield',
         '#title' => 'Tid of video section',
         '#default_value' => variable_get('tid_videos'),
         '#size' => 20,
         '#maxlength' => 20,
+      );
+      $form['mail_template_emails'] = array(
+        '#type' => 'textarea',
+        '#title' => 'Story/Photo/Video Mail Template Emails',
+        '#default_value' => variable_get('mail_template_emails'),
+        '#size' => 10,
+        //'#maxlength' => 20,
       );
       break;
     case 'videogallery_node_form':
