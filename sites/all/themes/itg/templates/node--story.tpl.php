@@ -18,7 +18,8 @@ if (!empty($content)):
     $class_listicle = ' listicle-feedback';//buzz-feedback
   }
   // prepare url for sharing
-  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+  $scheme = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://";
+  $actual_link = $scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   $uri = base64_encode($actual_link);
   $short_url = shorten_url($actual_link, 'goo.gl');
   $fb_title = addslashes($node->title);
@@ -1028,7 +1029,7 @@ if (!empty($content)):
             <div id="vuukle-emote"></div>
             <?php
               if (function_exists('taboola_view')) {
-                //taboola_view();
+                taboola_view();
               }
               if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
                 if (!empty($node->field_story_comment_question['und'][0]['value'])) {
@@ -1039,7 +1040,7 @@ if (!empty($content)):
             <div id="vuukle_div"></div>
             <?php
             if (function_exists('vukkul_view')) {
-              //vukkul_view();
+              vukkul_view();
             }
             ?>
           </div>
