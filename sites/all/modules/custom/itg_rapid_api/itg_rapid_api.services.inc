@@ -5623,8 +5623,7 @@ function itg_rapid_api_authtoken_verification($token) {
             $res['status_message'] = "";
         }
     }
-$res['status_code'] = "1";
-            $res['status_message'] = "$token";
+
     return $res;
 }
 
