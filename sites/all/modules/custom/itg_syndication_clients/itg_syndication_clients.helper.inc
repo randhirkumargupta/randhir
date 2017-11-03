@@ -197,6 +197,7 @@ function get_hltapps_sections($type) {
     case 'story':
       return array(
         'topnews.xml' => '-1',
+        'programmes.xml' => '-1',
         'india.xml' => '1206578',
         'entertainment.xml' => '1206749',
         'world.xml' => '1206577',
