@@ -221,6 +221,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rssfeed/indiatoday/breakingnews'] = array(
+    'page callback' => 'itg_rss_indiatoday_videobreakingnews_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   $items['xml/election2017/election-finals'] = array(
     'page callback' => 'itg_rss_elections2017_election_finals_feed',
     'access arguments' => array('access content'),
@@ -267,6 +273,12 @@ function itg_syndication_clients_menu() {
     'page callback' => 'itg_rss_conclave_story_syndication',
     'access arguments' => array('access content'),
     'file' => 'inc/itg_rss_feed_conclave_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/newsfromindiatoday'] = array(
+    'page callback' => 'itg_rss_newsfromindiatoday_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_newsfromindiatoday_story.inc',
     'type' => MENU_CALLBACK,
   );
   return $items;

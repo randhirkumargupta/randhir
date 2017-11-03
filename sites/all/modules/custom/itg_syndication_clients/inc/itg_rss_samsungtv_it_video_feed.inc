@@ -35,6 +35,29 @@ function itg_rss_samsungtv_it_videobreakingnews_feed(){
     fclose($fp);
 }
 
+function itg_rss_indiatoday_videobreakingnews_feed(){
+    $type = array('breaking_news');
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->join('field_data_field_type', 'ft', 'ft.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+    
+    $query->fields('n', array('nid', 'title', 'created', 'changed'));
+    $query->fields('ssi', array('field_story_small_image_fid'));
+    $query->condition('ft.field_type_value', 'Breaking News', '=');
+    $query->condition('n.status', 1);
+    $query->condition('n.type', $type, 'IN');
+    $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid')->range(0, 1);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $xml = itg_genrate_samsungtv_it_breakingnews_syndication($result);
+    $xml_path = 'public://indiatoday/';
+    $file_path = $xml_path . 'breakingnews.xml';
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+}
+
 function itg_rss_samsungtv_it_video_home_feed() {
   $xml = get_samsung_it_home_static_xml();
   $xml_path = 'public://samsungtv_it/videos/';
