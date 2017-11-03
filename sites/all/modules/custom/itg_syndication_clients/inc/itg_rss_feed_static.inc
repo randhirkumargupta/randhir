@@ -12,8 +12,43 @@ function itg_rss_feed_static_syndication() {
   genrate_static_indiatoday_assembly_election_2015_stories();
   genrate_static_msn_stories_railway_budget();
   genrate_static_msn_stories_columns();
+  genrate_static_assembly_election_2015_photos();
 }
 
+function genrate_static_assembly_election_2015_photos(){
+$xml = <<<XML
+    <Root>
+<idsection>16302</idsection>
+<section>elections</section>
+<totalgalleries>5</totalgalleries>
+<start_index>0</start_index>
+<end_index>5</end_index>
+<gallery>
+<galleryid>16302</galleryid>
+<title>
+<![CDATA[
+JD(U) supporters celebrate the Mahagathbandhans victory
+]]>
+</title>
+<thumbimage>
+<![CDATA[
+http://media2.intoday.in/indiatoday/images/Photo_gallery/thumb_180_110815012708.jpg
+]]>
+</thumbimage>
+<weburl>
+<![CDATA[
+http://indiatoday.intoday.in/gallery/bihar-elections-jdu-supporters-celebrate-the-mahagathbandhans-victory/1/16302.html
+]]>
+</weburl>
+<create_date>2015-11-08T13:31:19+05:30</create_date>
+</gallery>
+</Root>
+XML;
+$xml_path = 'public://elections/assembly_election_2015/elections-16302-photos.xml';
+  $fp = fopen($xml_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
+}
 function genrate_static_msn_stories_columns(){
 $xml = <<<XML
 <rss xmlns:media="http://www.msn.com/en-in/" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
