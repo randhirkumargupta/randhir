@@ -242,6 +242,30 @@ function homePageJsonPackagelist() {
             $listcount++;
         }
     }
+    
+    $st_story = array();
+$test = array();
+$st_story['n_id'] = "820494";
+$st_story['n_type'] = "story";
+$st_story['n_is_developing'] = "0";
+$st_story['n_is_sponsored'] = "0";
+$st_story['n_share_link'] = "http://itgdrapid.indiatodayonline.in/magazine/auto-special/story/20151005-money-matters-petrol-vs-diesel-820494-2015-09-23";
+$st_story['n_title'] = "Current trends have narrowed the gap between petrol and diesel, so does buying a diesel car still make sense?";
+$st_story['n_description'] = "The basic premise should be to go in for a petrol car and then depending\n on the number of kilometres you drive every month switch to a \ndiesel-engined car.";
+$st_story['n_pcategory_id'] = "1206799";
+$st_story['n_pcategory_name'] = "AUTO SPECIAL";
+$st_story['n_comment_count'] = "0";
+$st_story['n_small_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/diesel_story_180_092815032739.jpg";
+$st_story['n_large_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/diesel_story_300_092815032739.jpg";
+$st_story['n_image_credit'] = "";
+$st_story['n_photo'] = $test;
+$st_story['n_video'] = $test;
+$st_story['n_polls'] = $test;
+$st_story['n_rating'] = $test;
+$st_story['n_magazine'] = $test;
+    
+    $data_newslist[$listcount] = $st_story;
+    
 
     $data_news['news'] = (array) $data_newslist;
 
