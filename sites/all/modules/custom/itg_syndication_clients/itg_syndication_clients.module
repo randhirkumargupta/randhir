@@ -281,6 +281,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_newsfromindiatoday_story.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rssfeed/rsselections2016-westbengal'] = array(
+    'page callback' => 'itg_rss_rsselections2016_westbengal_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_sselections2016_westbengal.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
