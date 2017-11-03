@@ -6722,6 +6722,17 @@ function tokenValidator($uname, $token){
    
 }
 
+function resetToken($uname, $token){
+    $time_now = time();
+    $user_load = user_load_by_name($uname);
+    $uid = $user_load->uid;
+    db_update('itg_app_device')
+    ->expression('token', 'token + :token', array(':token' => $time_now))
+    ->condition('uid', $uid)
+    ->condition('token', $token)
+    ->execute();
+}
+
 
 
 
