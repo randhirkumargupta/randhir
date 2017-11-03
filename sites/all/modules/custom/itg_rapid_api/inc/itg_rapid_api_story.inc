@@ -317,7 +317,6 @@ function story_body_with_html($node) {
  */
 function getStoryTechs($node) {
     $storytech = array();
-    $storytech_fi = array();
     $listcont = 0;
     $tect_img = array();
     $rating = $node->field_story_technology_rating['und'][0]['value'];
@@ -349,8 +348,8 @@ function getStoryTechs($node) {
 
     //$storytech['photos']['p_id'] = "358749";
     //$storytech['photos']['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/intoday-mag2_54441497856379.jpeg";
-    $storytech_fi = (array) $storytech;
-    return $storytech_fi;
+
+    return $storytech;
 }
 
 /**
