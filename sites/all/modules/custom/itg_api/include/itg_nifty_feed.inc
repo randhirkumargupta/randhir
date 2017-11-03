@@ -24,6 +24,6 @@ function itg_nifty_feed() {
       chmod($file, 777);
     }
   }
-  print 'Saved Successfully';
+  watchdog('Nifty_FEED', 'Nifty feed saved successfully');
 }
 
