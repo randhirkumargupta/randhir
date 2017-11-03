@@ -5615,7 +5615,11 @@ function itg_rapid_api_authtoken_verification($token) {
             $account_err['status_message'] = "Invalid User_ID";
             return $account_err;
         }
-        if (!drupal_valid_token($token, 'services')) {
+        $token_val_flag = 0;
+        $token_val_flag = tokenValidator($params['user_id'], $token);
+        //if (!drupal_valid_token($token, 'services')) {
+        if ($token_val_flag) {
+            
             $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
         } else {
@@ -6680,6 +6684,20 @@ function searchIn2DArray($id, $array) {
        }
    }
    return 2;
+}
+
+function tokenValidator($uid, $token){
+    $query = db_select('itg_app_device', 'app');    
+    $query->fields('app', 'uid');
+    $query->condition('app.uid', $uid);
+    $query->condition('app.token', $token);    
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if($result[0]['uid'] == $uid){
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 
