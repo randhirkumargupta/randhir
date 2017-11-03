@@ -335,8 +335,8 @@ function getStoryTechs($node) {
         $load_collection = field_collection_item_load($val_fid);
         $photo_ttile = $load_collection->field_technology_photo_title['und'][0]['value'];
         $img_url = completeFilePath($load_collection->field_technology_sample_photo['und'][0]['fid']);
-        $storytech['data'][$listcont]['title'] = $photo_ttile;
-        $storytech['data'][$listcont]['img'] = $img_url;
+        $storytech[$listcont]['title'] = $photo_ttile;
+        $storytech[$listcont]['img'] = $img_url;
         $listcont++;
     }
     //get tech pros
