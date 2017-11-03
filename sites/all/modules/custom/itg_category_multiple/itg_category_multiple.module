@@ -769,7 +769,7 @@ function get_parent_structure_by_for_all($tids) {
         foreach ($category_data as $chunk_data) {
           $return_data_chunk[$chunk_data['tid']] = get_parent_complete_structure($chunk_data['parent_data']);
         }
-        p($return_data_chunk);die();
+        //p($return_data_chunk);die();
         $primaryhtml = get_parent_structure_in_complete($new_tids, $return_data_chunk);
         return $primaryhtml;
       }
