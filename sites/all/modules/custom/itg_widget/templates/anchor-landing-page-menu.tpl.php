@@ -1,6 +1,5 @@
 <script>
   function sent_ga_request_anchor(value) {
-    alert(value);
     ga("send", "event", value , "click","1", 1, {
       "nonInteraction": 1}
       );
