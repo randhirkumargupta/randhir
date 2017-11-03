@@ -293,6 +293,6 @@ function itg_ap_content() {
     }
   }
   else {
-    print 'Enable agency feed from configuration';
+    watchdog('Agency_configuration_warning', 'Enable agency feed from configuration');
   }
 }
