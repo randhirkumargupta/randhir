@@ -6694,7 +6694,7 @@ function tokenValidator($uname, $token){
     $query->condition('app.uid', $uid);
     $query->condition('app.token', $token);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    
+    echo $result[0]['uid']; die();
     if($result[0]['uid'] == $uid){
         return 1;
     }
