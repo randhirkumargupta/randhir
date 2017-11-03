@@ -192,10 +192,11 @@ function itg_front_end_common_block_view($delta = '') {
  */
 function _taboola_block_content() {
   $output = '';
-  if (!empty(variable_get('taboola_bottom_block'))) {
+  if (!empty(variable_get('taboola_bottom_block')) && empty(variable_get('disable_third_party_api'))) {
     $output = variable_get('taboola_bottom_block');
   } else {
-    $output = 'Please add taboola script in setting page.';
+    $output = '';
+    watchdog('taboola script', 'Please add taboola script in setting page.');
   }
   return $output;
 }
@@ -205,11 +206,13 @@ function _taboola_block_content() {
  */
 function _may_be_recommend_block_content() {
   $output = '';
-  if (!empty(variable_get('third_party_may_recommend_block'))) {
-    $output = variable_get('third_party_may_recommend_block');
-  } else {
-    $output = 'Please add may be recommed script in setting page.';
-  }
+    if (!empty(variable_get('third_party_may_recommend_block')) && empty(variable_get('disable_third_party_api'))) {
+      $output = '<div class="may-be-recommend"><h3><span>' . t('May we recommend') . '</span></h3>' . variable_get('third_party_may_recommend_block') . '</div>';
+    }
+    else {
+      $output = '';
+      watchdog('may be recommed script', 'Please add may be recommed script in setting page.');
+    }
   return $output;
 }
 
@@ -217,22 +220,20 @@ function _may_be_recommend_block_content() {
  * Implements _amp_story_ad_block().
  */
 function _amp_story_ad_block() {
- 
-  $output = '<amp-ad width=300 height=250
-    type="doubleclick"
-    data-slot="/1007232/Indiatoday_AMP_Mobile_Story_ATF_300x250"
-    data-multi-size-validation="false">
-  <div placeholder></div>
-  <div fallback></div>
-</amp-ad>';
-  return $output; 
+  $output = '';
+  if (!empty(variable_get('amp_story_ad'))) {
+    $output = variable_get('amp_story_ad');
+  } else {
+    $output = '';
+   watchdog('Amp story ad block', 'Please add script in setting page.'); 
+  }
+  return $output;
 }
 
 /**
  * Implements vukkul block content
  */
 function _vukkul_block_content() {
-
   $page_id = arg(1);
   $node = node_load($page_id);
   $byline_id = isset($node->field_story_reporter[LANGUAGE_NONE][0]['target_id']) ? $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] : '';
@@ -282,18 +283,20 @@ function _vukkul_block_content() {
  * Implements taboola view
  */
 function taboola_view() {
-
+if (empty(variable_get('disable_third_party_api'))) {
   $block = module_invoke('itg_front_end_common', 'block_view', 'taboola_block');
   print render($block['content']);
+}
 }
 
 /**
  * Implements May be recommend view
  */
 function may_be_recommend_view() {
-
+if (empty(variable_get('disable_third_party_api'))) {
   $block = module_invoke('itg_front_end_common', 'block_view', 'may_be_recommend_block');
   print render($block['content']);
+}
 }
 
 
@@ -302,9 +305,10 @@ function may_be_recommend_view() {
  * Implements vukkul view
  */
 function vukkul_view() {
-
+if (empty(variable_get('disable_third_party_api'))) {
   $block = module_invoke('itg_front_end_common', 'block_view', 'vukkul_block');
   print render($block['content']);
+}
 }
 
 
@@ -988,76 +992,82 @@ function _latest_from_pti() {
  * Implements latest form aajtak block content
  */
 function _latest_from_aajtak() {
-  global $base_url;
-  $url = variable_get('aaj_tak_json_url');
-  $JSON = file_get_contents($url);
-  // You can decode it to process it in PHP
-  $aajtak_data = json_decode($JSON);
-  $related_dt = '';
-  if (!empty($aajtak_data[0]->id)) {
-    $related_dt = '<span class="widget-title">' . t('LATEST FROM AAJ TAK') . '</span>';
-  }
-  if (!empty($aajtak_data[0]->id)) {
-    $related_dt.= "<ul>";
-    $i = 0;
-    foreach ($aajtak_data as $key => $value) {
-      if (!empty($value->title)) {
-        $related_title = mb_strimwidth($value->title, 0, 200, "..");
-        $path = $value->story_url;
-        if(url_exists($value->thumb_image)) {
-          $img_url = $value->thumb_image;
-        } else {
-        $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
-        }
-        
-        $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'" title="" /></a>';
-        $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
-      }
-      $i++;
-      if ($i == 5)
-      break;
+  if (empty(variable_get('disable_third_party_api'))) {
+    global $base_url;
+    $url = variable_get('aaj_tak_json_url');
+    $JSON = file_get_contents($url);
+    // You can decode it to process it in PHP
+    $aajtak_data = json_decode($JSON);
+    $related_dt = '';
+    if (!empty($aajtak_data[0]->id)) {
+      $related_dt = '<span class="widget-title">' . t('LATEST FROM AAJ TAK') . '</span>';
     }
-    $related_dt.= "</ul>";
+    if (!empty($aajtak_data[0]->id)) {
+      $related_dt.= "<ul>";
+      $i = 0;
+      foreach ($aajtak_data as $key => $value) {
+        if (!empty($value->title)) {
+          $related_title = mb_strimwidth($value->title, 0, 200, "..");
+          $path = $value->story_url;
+          if (url_exists($value->thumb_image)) {
+            $img_url = $value->thumb_image;
+          }
+          else {
+            $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+          }
+
+          $related_dt.= '<li class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
+          $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
+        }
+        $i++;
+        if ($i == 5)
+          break;
+      }
+      $related_dt.= "</ul>";
+    }
+    return $related_dt;
   }
-  return $related_dt;
 }
 
 /**
  * Implements latest form business today block content
  */
 function _latest_from_businesstoday() {
-  global $base_url;
-  $url = variable_get('business_today_json_url');
-  $JSON = file_get_contents($url);
-  // You can decode it to process it in PHP
-  $business_data = json_decode($JSON);
-  $related_dt = '';
-  if (!empty($business_data[0]->id)) {
-    $related_dt = '<span class="widget-title">' . t('LATEST FROM BUSINESS TODAY') . '</span>';
-  }
-  if (!empty($business_data[0]->id)) {
-    $related_dt.= "<ul>";
-    $i = 0;
-    foreach ($business_data as $key => $value) {
-      if (!empty($value->title)) {
-        $related_title = mb_strimwidth($value->title, 0, 200, "..");
-        $path = $value->story_url;
-        if(url_exists($value->thumb_image)) {
-          $img_url = $value->thumb_image;
-        } else {
-            $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
-        }
-        
-        $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'" title="" /></a>';
-        $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
-      }
-      $i++;
-      if ($i == 5)
-      break;
+  if (empty(variable_get('disable_third_party_api'))) {
+    global $base_url;
+    $url = variable_get('business_today_json_url');
+    $JSON = file_get_contents($url);
+    // You can decode it to process it in PHP
+    $business_data = json_decode($JSON);
+    $related_dt = '';
+    if (!empty($business_data[0]->id)) {
+      $related_dt = '<span class="widget-title">' . t('LATEST FROM BUSINESS TODAY') . '</span>';
     }
-    $related_dt.= "</ul>";
+    if (!empty($business_data[0]->id)) {
+      $related_dt.= "<ul>";
+      $i = 0;
+      foreach ($business_data as $key => $value) {
+        if (!empty($value->title)) {
+          $related_title = mb_strimwidth($value->title, 0, 200, "..");
+          $path = $value->story_url;
+          if (url_exists($value->thumb_image)) {
+            $img_url = $value->thumb_image;
+          }
+          else {
+            $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
+          }
+
+          $related_dt.= '<li class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
+          $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
+        }
+        $i++;
+        if ($i == 5)
+          break;
+      }
+      $related_dt.= "</ul>";
+    }
+    return $related_dt;
   }
-  return $related_dt;
 }
 
 /**
