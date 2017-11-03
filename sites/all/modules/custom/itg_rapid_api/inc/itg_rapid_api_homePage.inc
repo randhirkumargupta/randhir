@@ -242,7 +242,7 @@ function homePageJsonPackagelist() {
             $listcount++;
         }
     }
-    
+  /*  
     $st_story = array();
 $test = array();
 $st_story['n_id'] = "820494";
@@ -265,6 +265,7 @@ $st_story['n_rating'] = $test;
 $st_story['n_magazine'] = $test;
     
     $data_newslist[$listcount] = $st_story;
+    */
     
 
     $data_news['news'] = (array) $data_newslist;
