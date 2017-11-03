@@ -1,6 +1,6 @@
 <?php
 global $base_url, $user;
-
+$scheme = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://";
 if (!empty($data['itg_main_manu_header'])) {
   foreach ($data['itg_main_manu_header'] as $key => $val) {
     if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
@@ -19,7 +19,7 @@ else {
   $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
   $user_pic = "<img src=$file width='30' height='30' alt='user-image' title='user-image' />";
 }
-$uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+$uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 ?>
 <div class="header-ads">
   <?php
@@ -42,7 +42,7 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
     <li> 
       <?php
         if ($_GET['q'] != 'user') {
-          $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+          $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
           if ($user->uid == 0) {
           ?>
           <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
@@ -146,7 +146,7 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
       <div class="user-menu">
         <?php
         if ($_GET['q'] != 'user') {
-          $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+          $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
           if ($user->uid == 0) {
           ?>
           <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri;?>" class="user-icon sso-click"><i class="fa fa-user"></i></a>
