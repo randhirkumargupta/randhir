@@ -5589,7 +5589,7 @@ function itg_rapid_api_authtoken_verification($token) {
     $HTTP_RAW_POST_DATA;
     //$params = $_POST;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    //p($params);die();
+    p($params);die();
 
     $token = $params['auth_token'];
     $data = array();
