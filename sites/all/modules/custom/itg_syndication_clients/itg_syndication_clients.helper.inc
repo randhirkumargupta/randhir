@@ -197,7 +197,6 @@ function get_hltapps_sections($type) {
     case 'story':
       return array(
         'topnews.xml' => '-1',
-        'programmes.xml' => '-1',
         'india.xml' => '1206578',
         'entertainment.xml' => '1206749',
         'world.xml' => '1206577',
@@ -209,6 +208,7 @@ function get_hltapps_sections($type) {
     case 'video':
       return array(
         'topten.xml' => array('section' => '-1', 'limit' => 10),
+        'programmes.xml' => array('section' => '-1', 'limit' => 10),
         'news.xml' => array('section' => '-1', 'limit' => 25),
         'india.xml' => array('section' => '1206955', 'limit' => 25),
         'world.xml' => array('section' => '1206956', 'limit' => 25),
