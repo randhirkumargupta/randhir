@@ -335,8 +335,8 @@ function getStoryTechs($node) {
         $load_collection = field_collection_item_load($val_fid);
         $photo_ttile = $load_collection->field_technology_photo_title['und'][0]['value'];
         $img_url = completeFilePath($load_collection->field_technology_sample_photo['und'][0]['fid']);
-        $storytech[$listcont]['title'] = $photo_ttile;
-        $storytech[$listcont]['img'] = $img_url;
+        $storytech['data'][$listcont]['title'] = $photo_ttile;
+        $storytech['data'][$listcont]['img'] = $img_url;
         $listcont++;
     }
     //get tech pros
@@ -349,7 +349,7 @@ function getStoryTechs($node) {
 
     //$storytech['photos']['p_id'] = "358749";
     //$storytech['photos']['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/intoday-mag2_54441497856379.jpeg";
-    $storytech_fi['data'] = $storytech;
+    $storytech_fi = (array) $storytech;
     return $storytech_fi;
 }
 
