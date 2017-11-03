@@ -671,6 +671,16 @@
       }
       .search-form input[type="search"]:focus + input[type="submit"] + a.search{color: #666;}
       .custom-amp-ad{text-align: center;}
+      .live-block .breaking-section.breaking-section{
+		border-top: 1px solid #ddd;
+		}
+		.live-block .breaking-section{
+		padding: 10px 0;
+		 line-height: 22px;
+		}
+		#live-blog-amp-share h2[aria-expanded="false"] .show-less{opacity: 0;}
+		#live-blog-amp-share h2[aria-expanded="true"] .show-more{opacity: 0;}
+		#live-blog-amp-share .i-amphtml-accordion-header{border:none;background-color:#fff;}
     </style>
     <?php //endif;  ?>
   </head>
