@@ -13,7 +13,6 @@ $short_url = shorten_url($actual_link, 'goo.gl');
 $share_desc = '';
 $src = '';
 ?>
-
 <?php
 global $theme;
 global $base_url;
@@ -23,7 +22,6 @@ if (arg(2) == 'preview') {
   $preview = 'preview';
 }
 $highlights = itg_widget_highlights_block_data();
-
 $device = itg_live_tv_company('web');
 if (!empty($device[0])) {
   $live_tv_get_details = node_load($device[0]);
@@ -32,14 +30,11 @@ if (!empty($device[0])) {
     $live_url = '<iframe frameborder="0" style="z-index:4" class="media__video--responsive" id="livetv_video1" scrolling="no" allowfullscreen="" src="<?php print $live_url; ?>"></iframe>';
   }
 }
-
-
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
 ?>
 <script src="<?php echo $base_url; ?>/sites/all/themes/itg/js/election_map.js"></script>
-
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>
   <div id="page">
@@ -52,7 +47,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                     </div>
                   <?php endif; ?>         
               </div>
-
               <?php if ($site_name || $site_slogan): ?>
                 <div class="header__name-and-slogan" id="name-and-slogan">
                     <?php if ($site_name): ?>
@@ -60,7 +54,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                           <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="header__site-link" rel="home"><span><?php print $site_name; ?></span></a>
                       </h1>
                     <?php endif; ?>
-
                     <?php if ($site_slogan): ?>
                       <div class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></div>
                     <?php endif; ?>
@@ -86,21 +79,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               <?php endif; ?>
               -->
               <?php print render($page['header']); ?>
-
           </section>
-
       </header>
       <?php
       // Render the sidebars to see if there's anything in them.
       $sidebar_first = render($page['sidebar_first']);
       $sidebar_second = render($page['sidebar_second']);
-
       $cls = 'col-md-12';
       if ($sidebar_first || $sidebar_second):
         $cls = 'col-md-9';
       endif;
       ?>
-
       <main id="main" class="container pos-rel">
           <?php print render($page['vertical_menu']); ?>
           <section id="content" role="main">
@@ -121,7 +110,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
               <?php if ($action_links): ?>
                 <ul class="action-links"><?php print render($action_links); ?></ul>
               <?php endif; ?>       
-
             <?php } ?>
             <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
             <?php //print render($page['content']);    ?>
@@ -153,9 +141,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <li><a title="share on google+" onclick="return googleplusbtn(' . "'" . $actual_link . "'" . ')" class="google def-cur-pointer"></a></li>
                     </ul>
                 </div></div></div>';
-
                 $graphdata = itg_widget_get_graph_data();
-
                 if (count($graphdata) > 2) {
                   ?>
                   <div class="row election-graph election-graph-<?php echo count($graphdata); ?>">
@@ -163,13 +149,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                       $block = module_invoke('itg_widget', 'block_view', 'graph_election');
                       print render($block['content']);
                       ?>
-
                   </div>
-
                 <?php } ?>
                 <div class="row">
                     <div class="col-md-8 col-sm-12 col-sx-12 election-graph left-side">
-
                         <?php if (count($graphdata) <= 2) {
                           ?>
                           <div class="row itg-415-layout">
@@ -177,8 +160,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               $block = module_invoke('itg_widget', 'block_view', 'graph_election');
                               print render($block['content']);
                               ?>
-
-
                           </div>
                         <?php } ?>
                         <?php if ($theme == 'itgadmin' || (!empty($live_url) || $highlights['node_data']->field_story_highlights['und'][0]['value'] != "" )) { ?>
@@ -203,7 +184,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                 </div>
                                               <?php } ?>  
-
                                               <div class="data-holder" id="itg-block-3">
                                                   <?php print $live_url; ?>
                                               </div>
@@ -242,7 +222,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   }
                                                   ?>
                                               </div>
-
                                           </div>             
                                       </div>
                                   </div>
@@ -266,8 +245,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                     $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
                                     if (!empty($terms)) {
                                       ?>
-
-
                                       <div class="droppable <?php print $gray_bg_layout; ?>">
                                           <div class="widget-wrapper map-box <?php print $widget_data['itg-block-5']['widget_name']; ?>">
                                               <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
@@ -286,18 +263,14 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 </div>
                                                 <?php
                                               }
-                                              ?>  
-                                              
-
+                                              ?>                                          
                                               <div class="data-holder pos-rel" id="itg-block-5">
                                                 <select id="map-state" name="map_state">
-
                                                   <?php
                                                   $countf = 0;
                                                   $svgurl = "";
                                                   $mapgurl = "";
                                                   $colorurl = "";
-
                                                   foreach ($terms as $values) {
                                                     if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
                                                       if ($countf == 0) {
@@ -340,7 +313,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-5"><i class="fa fa-times"></i></a></span>
                                                 </div>
   <?php } ?>  
-
                                               <div class="data-holder" data-widget-style="election-other-story" id="itg-block-5">
                                                   <?php
                                                   if (isset($widget_data['itg-block-5']['widget'])) {
@@ -353,7 +325,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                               </div>
                                           </div>             
                                       </div>
-
 <?php } ?>
                                 </div>
                             </div>
@@ -378,7 +349,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                               <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-6"><i class="fa fa-times"></i></a></span>
                                               </div>
 <?php } ?>  
-
                                             <div class="data-holder" data-widget-style="election-other-story" id="itg-block-6">
                                                 <?php
                                                 if (isset($widget_data['itg-block-6']['widget'])) {
@@ -416,7 +386,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                               <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-7"><i class="fa fa-times"></i></a></span>
                                               </div>
 <?php } ?>  
-
                                             <div class="data-holder" id="itg-block-7">
                                                 <?php
                                                 if (isset($widget_data['itg-block-7']['widget'])) {
@@ -454,7 +423,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-8"><i class="fa fa-times"></i></a></span>
                                               </div>
 <?php } ?>  
-
                                             <div class="data-holder" id="itg-block-8">
                                                 <?php
                                                 if (isset($widget_data['itg-block-8']['widget'])) {
@@ -470,9 +438,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>    
                     <div class="col-md-4 col-sm-12 col-sx-12 right-side">        
                         <?php
@@ -484,8 +449,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         }
                         ?>
                         <div class="row">
-
-
                             <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6 mt-50">
                               <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>
                                 <div class="itg-widget election-topadd">
@@ -496,12 +459,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                             $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                                             print render($render_array);
                                             ?></div>
-
                                     </div>
-
                                 </div>
                             </div> 
-
                             <div class="itg-325 mt-50 <?php echo $key_candidate_extra_block; ?> col-md-12 col-sm-6">
                               <div class="widget-help-text">Special widgets ( <strong>Key candidate</strong> )</div>
                                 <div class="itg-widget">
@@ -558,7 +518,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                               <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-10"><i class="fa fa-times"></i></a></span>
                                               </div>
 <?php } ?>  
-
                                             <div class="data-holder" id="itg-block-10" data-widget-style="election-so-sorry">
                                                 <?php
                                                 if (isset($widget_data['itg-block-10']['widget'])) {
@@ -594,7 +553,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                               <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-11"><i class="fa fa-times"></i></a></span>
                                               </div>
 <?php } ?>  
-
                                             <div class="data-holder" id="itg-block-11">
                                                 <?php
                                                 // $block = module_invoke('itg_widget', 'block_view', 'budget_tweets');
@@ -648,7 +606,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                              <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-12"><i class="fa fa-times"></i></a></span>
                                               </div>
 <?php } ?>  
-
                                             <div class="data-holder" id="itg-block-12">
                                                 <?php
                                                 if (isset($widget_data['itg-block-12']['widget'])) {
@@ -668,15 +625,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 </div>
                 <!--End of Common add more section--> 
             </div>
-
             <!--------------------------------Code for Front tpl---------------------------------------->
             <?php if ($theme != 'itgadmin') { ?>
   <?php //print $feed_icons;        ?>
           </section>
-
   <?php if (false) { ?> 
             <div id="navigation">
-
                     <?php if ($main_menu): ?>
                   <nav id="main-menu" role="navigation" tabindex="-1">
                       <?php
@@ -698,23 +652,13 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                       ?>
                   </nav>
                 <?php endif; ?>
-
     <?php print render($page['navigation']); ?>
-
             </div>
   <?php } ?>
-
-
       </main>
-
-
   <?php print render($page['footer']); ?>
-
-
   </div>
-
   <?php print render($page['bottom']); ?>
-
 <?php } ?>
 <?php if ($theme == 'itgadmin') { ?>
   <div class="itg-ajax-loader">
