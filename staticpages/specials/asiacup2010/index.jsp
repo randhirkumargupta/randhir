@@ -134,7 +134,7 @@ document.write("<small><font color='#ffffff' face='Arial'>"+dayarray[day]+", "+m
     <td width="10" id="topldLbg" style="background-image:url(images/lead-box_left.gif); background-position:top left; background-repeat:repeat-y;"></td>
     <td width="298" align="left" valign="top"  id="topldCbg" bgcolor="#E3E3E3" >
     <div class="leadleft" id="topldCDotbg">
-    <div class="leadleftimg"><a href="/gallery/Asia+Cup:+A+Brief+History/1/3234.html" target="_blank"><img src="images/gal_history.jpg" width="275" height="336" border="0" align="left" class="imgborder"></a></div>
+    <div class="leadleftimg"><a href="http://indiatoday.intoday.in/gallery/Asia+Cup:+A+Brief+History/1/3234.html" target="_blank"><img src="images/gal_history.jpg" width="275" height="336" border="0" align="left" class="imgborder"></a></div>
     <div class="leadPtxt"><b>Asia Cup: A Brief History</b></div>
     <div class="leadmore"><a href="/gallerylist/sports/1/4.html" target="_blank">more photos &raquo;</a></div>
     </div>
@@ -741,7 +741,7 @@ GA_googleFillSlot("IT_Special_MRec");
 
 
      <div class="normaltext" style="padding-left:0;">Pakistan have had it surprisingly rough in the Asian championship, while Sri Lanka have dominated the last four editions. </div>
-    <div class="moretext" style="padding-top:5px; width:288px;"><a href="/gallery/Asia+Cup:+A+Brief+History/1/3234.html" target="_blank"><strong>Also see</strong>: Asia Cup's history in pics &raquo;</a></div>    </td>
+    <div class="moretext" style="padding-top:5px; width:288px;"><a href="http://indiatoday.intoday.in/gallery/Asia+Cup:+A+Brief+History/1/3234.html" target="_blank"><strong>Also see</strong>: Asia Cup's history in pics &raquo;</a></div>    </td>
   </tr>
 
         <td height="8"></td>

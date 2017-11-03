@@ -45,9 +45,9 @@ if(document.getElementsByTagName("head").length>0)document.getElementsByTagName(
 else if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
 })();
 </script>
-<!--FB Claim URL // 22 june 2017--> 
+<!--FB Claim URL // 22 june 2017-->
 <meta property="fb:pages" content="23230437118" />
-<!--End FB Claim URL --> 
+<!--End FB Claim URL -->
 
 <meta charset="utf-8">
 <title>Oscar 2015</title>
@@ -56,7 +56,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js' ></script>
 <!-- disable iPhone inital scale -->
 <meta name="viewport" content="width=device-width; initial-scale=1.0">
-<link href="staticpages/css/homepage-new.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/css/homepage-new.css" type="text/css" rel="stylesheet" />
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -66,9 +66,9 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
 
-<link href="staticpages/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/css/jquery.bxslider.css" type="text/css" rel="stylesheet" />
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css'>
-<link href="staticpages/css/responsive.css" type="text/css" rel="stylesheet" />
+<link href="/staticpages/css/responsive.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" language="javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
 
 <script>
@@ -79,25 +79,25 @@ $(document).ready(function(e) {
 	$('.video_area ul').css('width', wd);
 	var counter = 1;
 	 $('.left-arrow').hide();
-	
+
 $('.right-arrow').click(function(){
 	if(counter < len )
 	{
 		 $('.belt ul').animate({
 					left : '-=666px'
 		 		})
-				
+
 	var li_height = $('.video_area ul li:eq('+counter+')').height();
 			$('.video_area ul').css('height', li_height);
-			
+
 		counter += 1;
 		$('.left-arrow').show();
-	   
+
 	}
 	else
 	{
 	  $('.right-arrow').hide();
-	} 
+	}
 });
 
 
@@ -111,19 +111,19 @@ $('.right-arrow').click(function(){
 			 $('.belt ul').animate({
 						left : '+=666px'
 					})
-					
+
 			$('.right-arrow').show();
 
-					
+
 			counter -= 1;
 			var counters = counter-1;
 			//alert(counter);
 			var li_heightb = $('.video_area ul li:eq('+counters+')').height();
 			$('.video_area ul').css('height', li_heightb);
 			//alert(li_heightb);
-			
-		 
-		} 
+
+
+		}
 	});
 
 });
@@ -267,7 +267,7 @@ top:1px !important;
 
 <body>
 <div id="top-web" class="itgd_links">
-<ul> 
+<ul>
 <li class="last"><a rel="nofollow" target="_blank" href="http://indiatodaygroup.com/">THE INDIA TODAY GROUP</a></li>
 <li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.indiatoday.in/">India Today</a></li>
 <li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.aajtak.in/">Aaj Tak</a></li>
@@ -302,64 +302,64 @@ top:1px !important;
 var zflag_nid="821"; var zflag_cid="1150/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-<!-- end ZEDO for channel: IT Movie Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->			
+<!-- end ZEDO for channel: IT Movie Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
 </div>
 </div>
 
 <div class="clear"></div>
 
 <div id="wapper" >
-	<div class="homeleft">    
+	<div class="homeleft">
     <div class="video_area">
    	  <div class="y-headings">TOP STORIES</div>
       <div class="right-arrow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/oscar/2014/rightarrow.png" width="29" height="26"></div>
-      <div class="left-arrow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/oscar/2014/leftarrow.png" width="29" height="26"></div>      
+      <div class="left-arrow"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/oscar/2014/leftarrow.png" width="29" height="26"></div>
 		<div class="belt">
           <ul style="height:573px;">
-		  
-  <li><a href="story/john-travolta-scarlett-johansson-kiss-creepy-academy-awards-oscars-2015/1/421492.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/scarlett_650_022815111841.jpg" alt="John Travolta and Scarlett Johansson" title="John Travolta and Scarlett Johansson"  width="666"   border="0" /></a>
-   <div class="slider-content"><b><a href="story/john-travolta-scarlett-johansson-kiss-creepy-academy-awards-oscars-2015/1/421492.html"  >There is nothing creepy about John Travolta, says Scarlett Johansson</a></b>
-  Now Scarlett Johansson has spoken out to defend John Travolta, stating 
-there's "nothing creepy" about the actor. Although the exchange looked 
-awkward, but Johansson insists it was a "pleasure", reports 
+
+  <li><a href="http://indiatoday.intoday.in/story/john-travolta-scarlett-johansson-kiss-creepy-academy-awards-oscars-2015/1/421492.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/scarlett_650_022815111841.jpg" alt="John Travolta and Scarlett Johansson" title="John Travolta and Scarlett Johansson"  width="666"   border="0" /></a>
+   <div class="slider-content"><b><a href="http://indiatoday.intoday.in/story/john-travolta-scarlett-johansson-kiss-creepy-academy-awards-oscars-2015/1/421492.html"  >There is nothing creepy about John Travolta, says Scarlett Johansson</a></b>
+  Now Scarlett Johansson has spoken out to defend John Travolta, stating
+there's "nothing creepy" about the actor. Although the exchange looked
+awkward, but Johansson insists it was a "pleasure", reports
 femalefirst.co.uk.</div></li>
 
-  <li><a href="story/oscars-2015-lupita-nyongo-pearl-dress-stolen/1/421404.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_650_022715053722.jpg" alt="Lupita Nyong'O" title="Lupita Nyong'O"  width="666"   border="0" /></a>
-   <div class="slider-content"><b><a href="story/oscars-2015-lupita-nyongo-pearl-dress-stolen/1/421404.html"  >Oscars 2015: Lupita Nyong'o's $1,50,000 red carpet dress stolen</a></b>
+  <li><a href="http://indiatoday.intoday.in/story/oscars-2015-lupita-nyongo-pearl-dress-stolen/1/421404.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_650_022715053722.jpg" alt="Lupita Nyong'O" title="Lupita Nyong'O"  width="666"   border="0" /></a>
+   <div class="slider-content"><b><a href="http://indiatoday.intoday.in/story/oscars-2015-lupita-nyongo-pearl-dress-stolen/1/421404.html"  >Oscars 2015: Lupita Nyong'o's $1,50,000 red carpet dress stolen</a></b>
   12 years a slave actress Lupita Nyong'o has lost her pearl-decorated dress that she wore to the 87th annual Academy Awards.<br /></div></li>
 
-  <li><a href="story/academy-awards-edward-snowden-wikileaks-oscars-treason-laughed-neil-patrick-harris-joke/1/420893.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_650_022515040651.jpg" alt="Edward Snowden (L) and Neil Patrick Harris" title="Edward Snowden (L) and Neil Patrick Harris"  width="666"   border="0" /></a>
-   <div class="slider-content"><b><a href="story/academy-awards-edward-snowden-wikileaks-oscars-treason-laughed-neil-patrick-harris-joke/1/420893.html"  >Treason Tales: Edward Snowden 'laughed' at Harris' Oscar joke</a></b>
-  Edward Snowden, who was the subject of Laura Poitras' Oscar-winning 
-documentary feature Citizenfour, says he 'laughed' when the Academy 
-Awards 2015 host Neil Patrick Harris said he could not be here tonight 
+  <li><a href="http://indiatoday.intoday.in/story/academy-awards-edward-snowden-wikileaks-oscars-treason-laughed-neil-patrick-harris-joke/1/420893.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_650_022515040651.jpg" alt="Edward Snowden (L) and Neil Patrick Harris" title="Edward Snowden (L) and Neil Patrick Harris"  width="666"   border="0" /></a>
+   <div class="slider-content"><b><a href="http://indiatoday.intoday.in/story/academy-awards-edward-snowden-wikileaks-oscars-treason-laughed-neil-patrick-harris-joke/1/420893.html"  >Treason Tales: Edward Snowden 'laughed' at Harris' Oscar joke</a></b>
+  Edward Snowden, who was the subject of Laura Poitras' Oscar-winning
+documentary feature Citizenfour, says he 'laughed' when the Academy
+Awards 2015 host Neil Patrick Harris said he could not be here tonight
 for some treason.</div></li>
    </ul>
-        </div>    
-        
-            
+        </div>
+
+
         </div>
         <div class="divclear"></div>
-        
+
         <!-- 4 stories starts -->
-        
+
 		<div class="leftbar"><div class="boxcont"><div class="box">
- 
-	<div class="posrel"><a href="story/academy-awards-interstellar-visual-effects-vfx-oscars-2015-nasa-tweet-indian-namit-malhotra/1/420843.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/interstellar-story_350_022515010656.jpg" alt="A still from Christopher Nolan's Interstellar" title="A still from Christopher Nolan's Interstellar"   border="0" class="images" /></a></div><div class="innerbox"><a href="story/academy-awards-interstellar-visual-effects-vfx-oscars-2015-nasa-tweet-indian-namit-malhotra/1/420843.html"  >Interstellar Effect: From Oscars to NASA, all in awe of a Mumbaiite</a>
+
+	<div class="posrel"><a href="http://indiatoday.intoday.in/story/academy-awards-interstellar-visual-effects-vfx-oscars-2015-nasa-tweet-indian-namit-malhotra/1/420843.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/interstellar-story_350_022515010656.jpg" alt="A still from Christopher Nolan's Interstellar" title="A still from Christopher Nolan's Interstellar"   border="0" class="images" /></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/story/academy-awards-interstellar-visual-effects-vfx-oscars-2015-nasa-tweet-indian-namit-malhotra/1/420843.html"  >Interstellar Effect: From Oscars to NASA, all in awe of a Mumbaiite</a>
 
 <div class="clear"></div>
 <div class="share-story"><div class="share-icon" url="story/academy-awards-interstellar-visual-effects-vfx-oscars-2015-nasa-tweet-indian-namit-malhotra/1/420843.html" ctitle="Interstellar Effect: From Oscars to NASA, all in awe of a Mumbaiite"></div><ul id="420843" style="border:none"></ul></div>
 </div></div></div><div class="divclear"></div>
 <div class="boxcont"><div class="box">
- 
-	<div class="posrel"><a href="story/reese-witherspoon-grabs-jennifer-anistons-butt-oscars-2015-academy-awards/1/420696.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_350-2_022415034048.jpg" alt="Collage of Jennifer Aniston and Reese Witherspoon" title="Collage of Jennifer Aniston and Reese Witherspoon"   border="0" class="images" /></a></div><div class="innerbox"><a href="story/reese-witherspoon-grabs-jennifer-anistons-butt-oscars-2015-academy-awards/1/420696.html"  >Oscars 2015: Reese Witherspoon grabs Jennifer Aniston's butt</a>
+
+	<div class="posrel"><a href="http://indiatoday.intoday.in/story/reese-witherspoon-grabs-jennifer-anistons-butt-oscars-2015-academy-awards/1/420696.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_350-2_022415034048.jpg" alt="Collage of Jennifer Aniston and Reese Witherspoon" title="Collage of Jennifer Aniston and Reese Witherspoon"   border="0" class="images" /></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/story/reese-witherspoon-grabs-jennifer-anistons-butt-oscars-2015-academy-awards/1/420696.html"  >Oscars 2015: Reese Witherspoon grabs Jennifer Aniston's butt</a>
 
 <div class="clear"></div>
 <div class="share-story"><div class="share-icon" url="story/reese-witherspoon-grabs-jennifer-anistons-butt-oscars-2015-academy-awards/1/420696.html" ctitle="Oscars 2015: Reese Witherspoon grabs Jennifer Aniston's butt"></div><ul id="420696" style="border:none"></ul></div>
 </div></div></div><div class="divclear"></div>
 <div class="boxcont"><div class="box">
- 
-	<div class="posrel"><a href="story/academy-awards-oscars-2015-neil-patrick-harris-lady-gaga/1/420635.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/harris-story-350_022415113022.jpg" alt="Neil Patrick Harris" title="Neil Patrick Harris"   border="0" class="images" /></a></div><div class="innerbox"><a href="story/academy-awards-oscars-2015-neil-patrick-harris-lady-gaga/1/420635.html"  >Bland show: Oscars viewership drops by 16%, Patrick to be blamed?</a>
+
+	<div class="posrel"><a href="http://indiatoday.intoday.in/story/academy-awards-oscars-2015-neil-patrick-harris-lady-gaga/1/420635.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/harris-story-350_022415113022.jpg" alt="Neil Patrick Harris" title="Neil Patrick Harris"   border="0" class="images" /></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/story/academy-awards-oscars-2015-neil-patrick-harris-lady-gaga/1/420635.html"  >Bland show: Oscars viewership drops by 16%, Patrick to be blamed?</a>
 
 <div class="clear"></div>
 <div class="share-story"><div class="share-icon" url="story/academy-awards-oscars-2015-neil-patrick-harris-lady-gaga/1/420635.html" ctitle="Bland show: Oscars viewership drops by 16%, Patrick to be blamed?"></div><ul id="420635" style="border:none"></ul></div>
@@ -369,23 +369,23 @@ for some treason.</div></li>
 
 
 <div class="middlebar"><div class="boxcont"><div class="box">
- 
-		<div class="posrel"><a href="story/oscars-2015-academy-awards-lady-gaga-crystal-gown-1600/1/420717.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gagastorry_350_022415043406.jpg" alt="Lady Gaga" title="Lady Gaga"   border="0" class="images" /></a></div><div class="innerbox"><a href="story/oscars-2015-academy-awards-lady-gaga-crystal-gown-1600/1/420717.html"  >Oscars 2015: Gaga's crystal embellished gown took 1600 hours to make</a>
- 
+
+		<div class="posrel"><a href="http://indiatoday.intoday.in/story/oscars-2015-academy-awards-lady-gaga-crystal-gown-1600/1/420717.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gagastorry_350_022415043406.jpg" alt="Lady Gaga" title="Lady Gaga"   border="0" class="images" /></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/story/oscars-2015-academy-awards-lady-gaga-crystal-gown-1600/1/420717.html"  >Oscars 2015: Gaga's crystal embellished gown took 1600 hours to make</a>
+
 <div class="clear"></div><div class="share-story"><div class="share-icon" url="story/oscars-2015-academy-awards-lady-gaga-crystal-gown-1600/1/420717.html" ctitle="Oscars 2015: Gaga's crystal embellished gown took 1600 hours to make"></div><ul id="420717" style="border:none"></ul></div>
 </div></div></div>
 <div class="divclear"></div>
 <div class="boxcont"><div class="box">
- 
-		<div class="posrel"><a href="story/oscars-2015-lady-gaga-gloves-academy-awards-twitter-meme-jokes/1/420668.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_350_022415013157.jpg" alt="Lady Gaga" title="Lady Gaga"   border="0" class="images" /></a></div><div class="innerbox"><a href="story/oscars-2015-lady-gaga-gloves-academy-awards-twitter-meme-jokes/1/420668.html"  >Oscars 2015: Twitter cracks jokes on Lady Gaga's gloves</a>
- 
+
+		<div class="posrel"><a href="http://indiatoday.intoday.in/story/oscars-2015-lady-gaga-gloves-academy-awards-twitter-meme-jokes/1/420668.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_350_022415013157.jpg" alt="Lady Gaga" title="Lady Gaga"   border="0" class="images" /></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/story/oscars-2015-lady-gaga-gloves-academy-awards-twitter-meme-jokes/1/420668.html"  >Oscars 2015: Twitter cracks jokes on Lady Gaga's gloves</a>
+
 <div class="clear"></div><div class="share-story"><div class="share-icon" url="story/oscars-2015-lady-gaga-gloves-academy-awards-twitter-meme-jokes/1/420668.html" ctitle="Oscars 2015: Twitter cracks jokes on Lady Gaga's gloves"></div><ul id="420668" style="border:none"></ul></div>
 </div></div></div>
 <div class="divclear"></div>
 <div class="boxcont"><div class="box">
- 
-		<div class="posrel"><a href="story/academy-awards-2015-diversity-race-issue-oscars-winners/1/420632.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/neil_350_022415110608.jpg" alt="Neil Patrick Harris on the Oscars 2015 stage" title="Neil Patrick Harris on the Oscars 2015 stage"   border="0" class="images" /></a></div><div class="innerbox"><a href="story/academy-awards-2015-diversity-race-issue-oscars-winners/1/420632.html"  >Academy Awards 2015: Diversity storm in the Oscars' teacup</a>
- 
+
+		<div class="posrel"><a href="http://indiatoday.intoday.in/story/academy-awards-2015-diversity-race-issue-oscars-winners/1/420632.html" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/neil_350_022415110608.jpg" alt="Neil Patrick Harris on the Oscars 2015 stage" title="Neil Patrick Harris on the Oscars 2015 stage"   border="0" class="images" /></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/story/academy-awards-2015-diversity-race-issue-oscars-winners/1/420632.html"  >Academy Awards 2015: Diversity storm in the Oscars' teacup</a>
+
 <div class="clear"></div><div class="share-story"><div class="share-icon" url="story/academy-awards-2015-diversity-race-issue-oscars-winners/1/420632.html" ctitle="Academy Awards 2015: Diversity storm in the Oscars' teacup"></div><ul id="420632" style="border:none"></ul></div>
 </div></div></div>
 <div class="divclear"></div>
@@ -397,15 +397,15 @@ for some treason.</div></li>
   <!-- 2 galleries start -->
 <div class="leftbar">
 <div class="boxcont"><div class="box">
- 
-	<div class="posrel"><a href="/gallery/lupita-nyongo-rosamund-scarlett-johanson-red-carpet-best-dressed/1/14251.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage6_350_022315112302.jpg" alt="Oscars 2015: Red carpet favourites" title="Oscars 2015: Red carpet favourites"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div><div class="innerbox"><a href="/gallery/lupita-nyongo-rosamund-scarlett-johanson-red-carpet-best-dressed/1/14251.html" >Oscars 2015: Red carpet favourites</a>
+
+	<div class="posrel"><a href="http://indiatoday.intoday.in/gallery/lupita-nyongo-rosamund-scarlett-johanson-red-carpet-best-dressed/1/14251.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage6_350_022315112302.jpg" alt="Oscars 2015: Red carpet favourites" title="Oscars 2015: Red carpet favourites"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/gallery/lupita-nyongo-rosamund-scarlett-johanson-red-carpet-best-dressed/1/14251.html" >Oscars 2015: Red carpet favourites</a>
 
 <div class="clear"></div>
 <div class="share-story"><div class="share-icon" url="/gallery/lupita-nyongo-rosamund-scarlett-johanson-red-carpet-best-dressed/1/14251.html" ctitle="Oscars 2015: Red carpet favourites"></div><ul id="14251" style="border:none"></ul></div>
 </div></div></div><div class="divclear"></div>
 <div class="boxcont"><div class="box">
- 
-	<div class="posrel"><a href="/gallery/oscars-2015-meet-the-winners-jk-simmons-ida-whiplash/1/14249.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage5_350_022315105413.jpg" alt="And the Oscar goes to: Winners' list" title="And the Oscar goes to: Winners' list"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div><div class="innerbox"><a href="/gallery/oscars-2015-meet-the-winners-jk-simmons-ida-whiplash/1/14249.html" >And the Oscar goes to: Winners' list</a>
+
+	<div class="posrel"><a href="http://indiatoday.intoday.in/gallery/oscars-2015-meet-the-winners-jk-simmons-ida-whiplash/1/14249.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage5_350_022315105413.jpg" alt="And the Oscar goes to: Winners' list" title="And the Oscar goes to: Winners' list"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/gallery/oscars-2015-meet-the-winners-jk-simmons-ida-whiplash/1/14249.html" >And the Oscar goes to: Winners' list</a>
 
 <div class="clear"></div>
 <div class="share-story"><div class="share-icon" url="/gallery/oscars-2015-meet-the-winners-jk-simmons-ida-whiplash/1/14249.html" ctitle="And the Oscar goes to: Winners' list"></div><ul id="14249" style="border:none"></ul></div>
@@ -414,15 +414,15 @@ for some treason.</div></li>
 </div>
 <div class="middlebar">
 <div class="boxcont"><div class="box">
- 
-	<div class="posrel"><a href="/gallery/oscars-2015-neil-patrick-harris-strips-underpants-birdman-los-angeles/1/14250.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/neil-thumb_350_022315085928.jpg" alt="Oscars 2015: Neil Patrick Harris' undies moment and more" title="Oscars 2015: Neil Patrick Harris' undies moment and more"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div><div class="innerbox"><a href="/gallery/oscars-2015-neil-patrick-harris-strips-underpants-birdman-los-angeles/1/14250.html" >Oscars 2015: Neil Patrick Harris' undies moment and more</a>
+
+	<div class="posrel"><a href="http://indiatoday.intoday.in/gallery/oscars-2015-neil-patrick-harris-strips-underpants-birdman-los-angeles/1/14250.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/neil-thumb_350_022315085928.jpg" alt="Oscars 2015: Neil Patrick Harris' undies moment and more" title="Oscars 2015: Neil Patrick Harris' undies moment and more"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/gallery/oscars-2015-neil-patrick-harris-strips-underpants-birdman-los-angeles/1/14250.html" >Oscars 2015: Neil Patrick Harris' undies moment and more</a>
 
 <div class="clear"></div>
 <div class="share-story"><div class="share-icon" url="/gallery/oscars-2015-neil-patrick-harris-strips-underpants-birdman-los-angeles/1/14250.html" ctitle="Oscars 2015: Neil Patrick Harris' undies moment and more"></div><ul id="14250" style="border:none"></ul></div>
 </div></div></div><div class="divclear"></div>
 <div class="boxcont"><div class="box">
- 
-	<div class="posrel"><a href="/gallery/oscars-2015-red-carpet-arrivals/1/14248.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_022315061645.jpg" alt="Oscars 2015: Dazzling Red Carpet arrivals" title="Oscars 2015: Dazzling Red Carpet arrivals"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div><div class="innerbox"><a href="/gallery/oscars-2015-red-carpet-arrivals/1/14248.html" >Oscars 2015: Dazzling Red Carpet arrivals</a>
+
+	<div class="posrel"><a href="http://indiatoday.intoday.in/gallery/oscars-2015-red-carpet-arrivals/1/14248.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_022315061645.jpg" alt="Oscars 2015: Dazzling Red Carpet arrivals" title="Oscars 2015: Dazzling Red Carpet arrivals"   border="0" class="images" /><span class='pmedia-image-icon sp_bg'></span></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/gallery/oscars-2015-red-carpet-arrivals/1/14248.html" >Oscars 2015: Dazzling Red Carpet arrivals</a>
 
 <div class="clear"></div>
 <div class="share-story"><div class="share-icon" url="/gallery/oscars-2015-red-carpet-arrivals/1/14248.html" ctitle="Oscars 2015: Dazzling Red Carpet arrivals"></div><ul id="14248" style="border:none"></ul></div>
@@ -430,21 +430,21 @@ for some treason.</div></li>
 
 </div><div class="divclear"></div>
  <!-- 2 galleries end -->
- 
- 
+
+
   <!-- 2 static cards start -->
 <!-- <div class="leftbar">
  <div class="boxcont"><div class="box">
- 
-	<div class="posrel"><a href="/story/ben-afflecks-argo-bags-best-film-oscar/1/251688.html"><img border="0" class="images" title="Ben Affleck" alt="Ben Affleck" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ben-affleck_350_022513054618.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ben-affleck_350_022513054618.jpg" style="display: inline;"></a></div><div class="innerbox"><a href="/story/ben-afflecks-argo-bags-best-film-oscar/1/251688.html">Ben Affleck's Argo bags best film Oscar</a>
+
+	<div class="posrel"><a href="http://indiatoday.intoday.in/story/ben-afflecks-argo-bags-best-film-oscar/1/251688.html"><img border="0" class="images" title="Ben Affleck" alt="Ben Affleck" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ben-affleck_350_022513054618.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/ben-affleck_350_022513054618.jpg" style="display: inline;"></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/story/ben-afflecks-argo-bags-best-film-oscar/1/251688.html">Ben Affleck's Argo bags best film Oscar</a>
 
 <div class="clear"></div>
 <div class="share-story"><div ctitle="Ben Affleck's Argo bags best film Oscar" url="/story/ben-afflecks-argo-bags-best-film-oscar/1/251688.html" class="share-icon"></div><ul style="border:none" id="8807"></ul></div>
 </div></div></div>
  </div>
 <div class="middlebar">
-<div class="boxcont"><div class="box"> 
-	<div class="posrel"><a href="/gallery/best-and-worst-dressed-at-the-oscars-2013/1/8807.html"><img border="0" class="images" title="Oscars red carpet: Hits and misses" alt="Oscars red carpet: Hits and misses" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_022613045530.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_022613045530.jpg" style="display: inline;"><span class="pmedia-image-icon sp_bg"></span></a></div><div class="innerbox"><a href="/gallery/best-and-worst-dressed-at-the-oscars-2013/1/8807.html">Oscars red carpet: Hits and misses</a>
+<div class="boxcont"><div class="box">
+	<div class="posrel"><a href="http://indiatoday.intoday.in/gallery/best-and-worst-dressed-at-the-oscars-2013/1/8807.html"><img border="0" class="images" title="Oscars red carpet: Hits and misses" alt="Oscars red carpet: Hits and misses" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_022613045530.jpg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_022613045530.jpg" style="display: inline;"><span class="pmedia-image-icon sp_bg"></span></a></div><div class="innerbox"><a href="http://indiatoday.intoday.in/gallery/best-and-worst-dressed-at-the-oscars-2013/1/8807.html">Oscars red carpet: Hits and misses</a>
 <div class="clear"></div>
 <div class="share-story"><div ctitle="Oscars red carpet: Hits and misses" url="/gallery/best-and-worst-dressed-at-the-oscars-2013/1/8807.html" class="share-icon"></div><ul style="border:none" id="8807"></ul></div>
 </div></div></div>
@@ -454,7 +454,7 @@ for some treason.</div></li>
 
   <div class="homeright">
   <div class="colum">
-   <div class="breaking-news"> 
+   <div class="breaking-news">
     				<!-- Javascript tag: -->
 <!-- begin ZEDO for channel: IT Movie Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
 <script language="JavaScript">
@@ -462,32 +462,32 @@ var zflag_nid="821"; var zflag_cid="1152/1137"; var zflag_sid="2"; var zflag_wid
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel: IT Movie Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
-  </div>  
   </div>
-  
+  </div>
+
     <div class="colum">
     	<div class="nomination-img">
-        <a href="http://indiatoday.intoday.in/oscar2014.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/it/blast-from-past-2014.jpg" border="0"  width="299" ></a> 
-        
+        <a href="http://indiatoday.intoday.in/oscar2014.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/it/blast-from-past-2014.jpg" border="0"  width="299" ></a>
+
         </div>
     </div>
- 
+
 
      <div class="colum" style="margin-top:20px;">
     	<div class="nomination-img">
          <a href="http://indiatoday.intoday.in/gallery/oscar-awards-best-dressed-women-hollywood/1/11277.html">
         <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/banners/it/best-dressed-women-hollywood.jpg" width="299"  border="0"> </a>
-        
+
         </div>
     </div>
-  
-  
-  
-  
-   
+
+
+
+
+
    <div class="colum" style="margin-top:20px;">
    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/oscar/2014/twitr.jpg" width="299" height="54">
-   
+
 <div style="width:277px; border:11px solid #31cbfd; height:600px; background:#fff; margin:-3px 0 20px 0;">
 
             <a class="twitter-timeline"  href="https://twitter.com/hashtag/Oscars2015" data-widget-id="568310377281114112">#Oscars2015 Tweets</a>
@@ -495,14 +495,14 @@ var zflag_nid="821"; var zflag_cid="1152/1137"; var zflag_sid="2"; var zflag_wid
 
 
  	</div>
-    </div> 
-   	  	  
-  </div>        
+    </div>
+
+  </div>
 <div class="clr">&nbsp;</div>
 
-  
-  	
-  
+
+
+
 <footer style="margin:0px auto;" >
 <div id="footer1" style="display:block !important">
 	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe>
@@ -552,9 +552,9 @@ $('.leftad a').removeClass('fixed');
 }
 });
 }
-}); 
+});
             </script>
-            
+
             <script type="text/javascript">
 $(function () {
 var msie6 = $.browser == 'msie' && $.browser.version < 7;
@@ -569,39 +569,39 @@ $('.rightad a').removeClass('fixed-r');
 }
 });
 }
-}); 
+});
             </script>
 
 
 <div id="leftrightads">
             <div style="left:-170px;" class="leftad">
-              
+
 <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
 <script language="JavaScript">
-var zflag_nid="821"; var zflag_cid="1142/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+var zflag_nid="821"; var zflag_cid="1142/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
-                 
+
              </div>
-             
-<div class="rightad">               
+
+<div class="rightad">
            <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT Homepage SkyScraper Ex right , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
 <script language="JavaScript">
-var zflag_nid="821"; var zflag_cid="1143/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+var zflag_nid="821"; var zflag_cid="1143/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-<!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->    
-               
+<!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
+
              </div>
-             
+
 </div>
 
 
- 
- 
+
+
 <script>
 winscreen();
 $(window).resize(function() {
@@ -615,8 +615,8 @@ if (document.body.offsetWidth>=1250) {
 			var lft = ((document.body.offsetWidth-1000)/2);
 			document.getElementById("leftrightads").style.left=lft+'px';
 		}
-	} 
-	else { 
+	}
+	else {
 		if (document.getElementById("leftrightads") != null || document.getElementById("leftrightads") != undefined){
 		document.getElementById("leftrightads").style.display="none"; }}
 }
@@ -628,10 +628,10 @@ if (document.body.offsetWidth>=1250) {
 		}
 </script>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.lazyload.js?v=4" type="text/javascript" charset="utf-8"></script>
+<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script>
+<script src="/staticpages/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
-<script type='text/javascript' src='http://indiatoday.intoday.in/js/copypaste_common.js' ></script>
+<script type='text/javascript' src='/staticpages/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 <img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">
 <script src="http://tags.crwdcntrl.net/c/9709/cc_af.js"></script>
@@ -644,38 +644,3 @@ if (document.body.offsetWidth>=1250) {
 <script type='text/javascript' src='http://apis.google.com/js/plusone.js'></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

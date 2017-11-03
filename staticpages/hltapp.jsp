@@ -55,7 +55,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 		<link rel="stylesheet" type="text/css"	href="staticpages/css/jquery.mCustomScrollbar.min.css" />
 	</head>
 	<body>		
-		<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/navigation-2016.css" rel="stylesheet" />
+		<link href="/staticpages/css/navigation-2016.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 

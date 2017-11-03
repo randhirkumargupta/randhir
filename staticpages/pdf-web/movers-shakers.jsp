@@ -366,9 +366,9 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-7-2002-Newsmaker-2001-Osama-bin-Laden.pdf">2002: Osama bin Laden</a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-7-2002-Newsmaker-2001-Osama-bin-Laden.pdf">2002: Osama bin Laden</a></div>
 
-      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-7-2002-Newsmaker-2001-Osama-bin-Laden.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-7-2002-Newsmaker-2001-Osama-bin-Laden-1.jpg" /></a>
+      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-7-2002-Newsmaker-2001-Osama-bin-Laden.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-7-2002-Newsmaker-2001-Osama-bin-Laden-1.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
@@ -377,9 +377,9 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-6-2003-Newsmaker-2002-Narendra-Modi-Master-Divider.pdf ">2003: Narendra Modi</a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-6-2003-Newsmaker-2002-Narendra-Modi-Master-Divider.pdf ">2003: Narendra Modi</a></div>
 
-      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-6-2003-Newsmaker-2002-Narendra-Modi-Master-Divider.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-6-2003-Newsmaker-2002-Narendra-Modi-Master-Divider-1.jpg" /></a>
+      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-6-2003-Newsmaker-2002-Narendra-Modi-Master-Divider.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-6-2003-Newsmaker-2002-Narendra-Modi-Master-Divider-1.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
@@ -387,18 +387,18 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 <div class="clear"></div>
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-5-2009-Cover-Story-Newsmaker-2008-The-Terrorist.pdf">2009: The Terrorist</a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-5-2009-Cover-Story-Newsmaker-2008-The-Terrorist.pdf">2009: The Terrorist</a></div>
 
-      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-5-2009-Cover-Story-Newsmaker-2008-The-Terrorist.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-5-2009-Cover-Story-Newsmaker-2008-The-Terrorist.jpg" /></a>
+      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-5-2009-Cover-Story-Newsmaker-2008-The-Terrorist.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-5-2009-Cover-Story-Newsmaker-2008-The-Terrorist.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>
 </div>
 <div class="left-column">
 		<div class="article firstzone_lefttop">
-			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-2-2012-Cover-Story-Other-Newsmakers-2011-Glory-And-Gutter.pdf">2011: Other Newsmakers</a></div>
+			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-2-2012-Cover-Story-Other-Newsmakers-2011-Glory-And-Gutter.pdf">2011: Other Newsmakers</a></div>
 
-      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-2-2012-Cover-Story-Other-Newsmakers-2011-Glory-And-Gutter.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday//indiatoday/images/1-2-2012-Cover-Story-Other-Newsmakers-2011-Glory-And-Gutter-1.jpg" /></a>
+      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-2-2012-Cover-Story-Other-Newsmakers-2011-Glory-And-Gutter.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/1-2-2012-Cover-Story-Other-Newsmakers-2011-Glory-And-Gutter-1.jpg" /></a>
       <div class="clear"></div>
 
 

@@ -127,25 +127,25 @@
             <div class="swiper-container">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <h2><a href="http://indiatoday.intoday.in/ipl2017/news" title="News">News </a></h2>
+                  <h2><a href="/ipl2017/news" title="News">News </a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="http://indiatoday.intoday.in/scorecard/matchcenter.jsp" title="Scorecard">Scorecard </a></h2>
+                  <h2><a href="/scorecard/matchcenter.jsp" title="Scorecard">Scorecard </a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="http://indiatoday.intoday.in/ipl2017/photos" title="Photos">Photos</a></h2>
+                  <h2><a href="/ipl2017/photos" title="Photos">Photos</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="http://indiatoday.intoday.in/ipl2017/videos" title="Videos">videos</a></h2>
+                  <h2><a href="/ipl2017/videos" title="Videos">videos</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="http://indiatoday.intoday.in/ipl2017/team" title="Teams">Teams</a></h2>
+                  <h2><a href="/ipl2017/team" title="Teams">Teams</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="http://indiatoday.intoday.in/ipl2017/schedule" title="Schedule">Schedule</a></h2>
+                  <h2><a href="/ipl2017/schedule" title="Schedule">Schedule</a></h2>
                 </div>
                 <div class="swiper-slide">
-                  <h2><a href="http://indiatoday.intoday.in/ipl2017/venues" title="Venues">Venues</a></h2>
+                  <h2><a href="/ipl2017/venues" title="Venues">Venues</a></h2>
                 </div>
                 <div class="swiper-slide">
                   <h2><a href="http://indiatoday.intoday.in/ipl2017/story/indian-premier-league-2017-key-players/1/911803.html" title="Key Players">Key Players</a></h2>
@@ -461,14 +461,14 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 			<div class="ftop">
           		<div class="swiper-container">
             		<div class="swiper-wrapper">
-              			<div class="swiper-slide"><h2><a href="http://indiatoday.intoday.in/ipl2017/news" title="News" >News </a></h2></div>
-              			<!--<div class="swiper-slide"><h2><a href="http://indiatoday.intoday.in/ipl2017/photos" title="Photos" >Photos</a></div>-->
-              			<div class="swiper-slide"><h2><a href="http://indiatoday.intoday.in/ipl2017/team" title="Teams" >Teams</a></h2></div>
-              			<div class="swiper-slide"><h2><a href="http://indiatoday.intoday.in/ipl2017/schedule" title="Schedule" >Schedule</a></h2></div>
-              			<div class="swiper-slide"><h2><a href="http://indiatoday.intoday.in/ipl2017/venues" title="Venues" >Venues</a></h2></div>
+              			<div class="swiper-slide"><h2><a href="/ipl2017/news" title="News" >News </a></h2></div>
+              			<!--<div class="swiper-slide"><h2><a href="/ipl2017/photos" title="Photos" >Photos</a></div>-->
+              			<div class="swiper-slide"><h2><a href="/ipl2017/team" title="Teams" >Teams</a></h2></div>
+              			<div class="swiper-slide"><h2><a href="/ipl2017/schedule" title="Schedule" >Schedule</a></h2></div>
+              			<div class="swiper-slide"><h2><a href="/ipl2017/venues" title="Venues" >Venues</a></h2></div>
               			<div class="swiper-slide"><h2><a href="http://indiatoday.intoday.in/story/indian-premier-league-2017-key-players/1/911803.html" title="Key Players" >Key Players</a></h2></div>
               			<div class="swiper-slide"><h2><a href="http://indiatoday.intoday.in/ipl2017/pointstally" title="Points Tally" >Points Tally</a></h2></div>
-              			<!--<div class="swiper-slide"><h2><a href="http://indiatoday.intoday.in/ipl2017/videos" title="Videos" >Videos</a></h2></div>-->
+              			<!--<div class="swiper-slide"><h2><a href="/ipl2017/videos" title="Videos" >Videos</a></h2></div>-->
 			            <div class="swiper-slide"><a href="http://www.facebook.com/indiatoday" target="_blank" title="Facebook"><i class="fa fa-facebook">&nbsp;</i></a></div>
 			            <div class="swiper-slide"><a href="http://www.twitter.com/indiatoday" target="_blank" title="Twitter"><i class="fa fa-twitter">&nbsp;</i></a></div>
 			            <div class="swiper-slide"><a href="http://www.google.com/+indiatoday" target="_blank" title="Google+"><i class="fa fa-google-plus">&nbsp;</i></a></div>

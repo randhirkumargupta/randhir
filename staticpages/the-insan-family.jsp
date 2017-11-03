@@ -48,9 +48,9 @@
          <link rel="apple-touch-icon" sizes="114x114" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/apple-icon-114x114.png"/>
          <link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico'/>
 
-         <link href="staticpages/css/it-common-15-New1.css" rel="stylesheet" />
-         <link href="staticpages/css/it-responsive-15-New1.css" rel="stylesheet" />
-         <link href="staticpages/css/custom-photo-scroll.css" rel="stylesheet" />
+         <link href="/staticpages/css/it-common-15-New1.css" rel="stylesheet" />
+         <link href="/staticpages/css/it-responsive-15-New1.css" rel="stylesheet" />
+         <link href="/staticpages/css/custom-photo-scroll.css" rel="stylesheet" />
 <!-- For IE Edge browsers -->
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <!-- For WINDOWS MOBILE FIX -->
@@ -157,7 +157,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 
  </head>
       <body>
-         <link href="staticpages/css/navigation-2016.css" rel="stylesheet" />
+         <link href="/staticpages/css/navigation-2016.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 

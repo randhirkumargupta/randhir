@@ -1,5 +1,3 @@
-<compress:html removeIntertagSpaces="true">             
-
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -58,9 +56,9 @@ if(document.getElementsByTagName("head").length>0)document.getElementsByTagName(
 else if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
 })();
 </script>
-<!--FB Claim URL // 22 june 2017--> 
+<!--FB Claim URL // 22 june 2017-->
 <meta property="fb:pages" content="23230437118" />
-<!--End FB Claim URL --> 
+<!--End FB Claim URL -->
 
 		<!--<script type="text/javascript">
 	 		var zmt_mtag;
@@ -72,9 +70,9 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 				p561900_4 = zmt_mtag.zmt_get_placement("zt_561900_4", "561900", "4" , "3097" , "95" , "2" ,"320", "50");
 				p561900_5 = zmt_mtag.zmt_get_placement("zt_561900_5", "561900", "5" , "3098" , "95" , "2" ,"320", "50");
 				zmt_mtag.zmt_set_async();
-	 			zmt_mtag.zmt_load(zmt_mtag); 
+	 			zmt_mtag.zmt_load(zmt_mtag);
 			}
-		</script> 
+		</script>
 		<script type="text/javascript" src="http://xp1.zedo.com/client/xp1/fmos.js" async ></script>-->
 	</head>
 <body>
@@ -91,9 +89,9 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 				p561900_4 = zmt_mtag.zmt_get_placement("zt_561900_4", "561900", "4" , "3097" , "95" , "2" ,"320", "50");
 				p561900_5 = zmt_mtag.zmt_get_placement("zt_561900_5", "561900", "5" , "3098" , "95" , "2" ,"320", "50");
 				zmt_mtag.zmt_set_async();
-	 			zmt_mtag.zmt_load(zmt_mtag); 
+	 			zmt_mtag.zmt_load(zmt_mtag);
 			}
-		</script> 
+		</script>
 		<script type="text/javascript" src="http://xp1.zedo.com/client/xp1/fmos.js" async ></script>
 
 <section class="top_area">
@@ -102,7 +100,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
           <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="logo">
             <a href="http://indiatoday.intoday.in/"><img src="/ipl2016/images/logo.png" alt="IPL 2016"></a>
-              <a href="http://indiatoday.intoday.in/ipl2016"> <h1 class="ipl_logo">IPL <span>2016</span></h1></a>
+              <a href="/ipl2016"> <h1 class="ipl_logo">IPL <span>2016</span></h1></a>
             </div>
             <div class="top_social hidden-lg  hidden-md  hidden-xs">
               <ul>
@@ -117,17 +115,17 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
           <div class="col-lg-8 col-md-8 col-sm-12 hidden-xs">
           	<!-- Start For Ad code -->
             <div class="top_advertis">
-            	<!-- Ad Slot 1 tag: --><!-- begin ZEDO for channel: IPL, Publisher: India Today, Ad Dimension: Super Banner-728x90 --> 
+            	<!-- Ad Slot 1 tag: --><!-- begin ZEDO for channel: IPL, Publisher: India Today, Ad Dimension: Super Banner-728x90 -->
  				<div id="zt_561900_1" style="display:show"><script id="zt_561900_1" language="javascript">if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined') { zmt_mtag.zmt_render_placement(p561900_1); } </script> </div>
-				<!-- end ZEDO for channel:  IPL, Publisher: India Today, Ad Dimension: Super Banner-728x90 --> 
+				<!-- end ZEDO for channel:  IPL, Publisher: India Today, Ad Dimension: Super Banner-728x90 -->
 			</div>
             <!-- End for Ad code -->
-          </div>                
+          </div>
         </div>
       </div>
     </section>
-    <!--end top area -->              
-    
+    <!--end top area -->
+
     <section class="nav_area">
       <div class="container">
         <div class="row">
@@ -187,20 +185,20 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
   	  						var action = siteURL + "advanced_search.jsp?searchword="+srchtextvalue.value;
   	  						document.searchform1.action = action;
   	  						document.searchform1.submit();
-  						}  						
+  						}
   					}
 				</script>
           </div>
         </div>
       </div>
-    
+
     </section>
     <!--end navigation-->
-    
-       <!-- Ad Slot 3 tag: --> 
- <!-- begin ZEDO for channel: IPL_WAP, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 --> 
- <div id="zt_561900_3" style="display:show; text-align:center; margin-top:5px;" align="center" data-zedoads="300x50/ipl2016/ipl2016-pointstallydesc.jsp_topmobile"> 
- <script id="zt_561900_3" language="javascript"> 
+
+       <!-- Ad Slot 3 tag: -->
+ <!-- begin ZEDO for channel: IPL_WAP, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 -->
+ <div id="zt_561900_3" style="display:show; text-align:center; margin-top:5px;" align="center" data-zedoads="300x50/ipl2016/ipl2016-pointstallydesc.jsp_topmobile">
+ <script id="zt_561900_3" language="javascript">
 
 if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined')
 {
@@ -208,7 +206,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 }
  </script>
  </div>
- <!-- end ZEDO for channel:  IPL_WAP, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 --> 
+ <!-- end ZEDO for channel:  IPL_WAP, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 -->
   <div class="container">
   <div class="row">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -217,17 +215,17 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 </div>
 </div>
 
-  
+
 
 
 
 
 
 	    <!-- End IPL 2016 Top Navigation -->
-	    
+
 	</header>
 	<!--end header-->
-  
+
 	<section class="page_area">
 		<div class="container">
 			<div class="row">
@@ -243,7 +241,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 					</div>
 	        	</div>
 	        	<!-- End left side-->
-	        	<!-- End IPL 2016 Video Chunk --><!-- Ad Slot 4 tag: --><!-- begin ZEDO for channel: IPL_WAP_Middle, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 --> 
+	        	<!-- End IPL 2016 Video Chunk --><!-- Ad Slot 4 tag: --><!-- begin ZEDO for channel: IPL_WAP_Middle, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 -->
 				<div id="zt_561900_4" style="display:show ; text-align:center; margin-bottom:5px;" align="center"> <script id="zt_561900_4" language="javascript"> if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined') { zmt_mtag.zmt_render_placement(p561900_4); } </script> </div>
 				<!-- end ZEDO for channel:  IPL_WAP_Middle, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 -->
 	        	<!-- Start IPL 2016 Right Navigation -->
@@ -252,29 +250,29 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 		<!-- Start Right Advertisement -->
     	<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
         	<div class="right_advertis">
-           		<div class="ad_cont_h" id="zedoads1" data-zedoads="300x250/ipl2016/ipl2016-pointstallydesc.jsp_RightnavMR1"> 
-                	
- <!-- Ad Slot 2 tag: --> 
- <!-- begin ZEDO for channel: IPL, Publisher: India Today, Ad Dimension: Medium Rectangle-300x250 --> 
- <div id="zt_561900_2" style="display:show"> 
- <script id="zt_561900_2" language="javascript"> 
+           		<div class="ad_cont_h" id="zedoads1" data-zedoads="300x250/ipl2016/ipl2016-pointstallydesc.jsp_RightnavMR1">
+
+ <!-- Ad Slot 2 tag: -->
+ <!-- begin ZEDO for channel: IPL, Publisher: India Today, Ad Dimension: Medium Rectangle-300x250 -->
+ <div id="zt_561900_2" style="display:show">
+ <script id="zt_561900_2" language="javascript">
 
 if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined')
 {
      zmt_mtag.zmt_render_placement(p561900_2);
 }
- </script> 
+ </script>
  </div>
- <!-- end ZEDO for channel:  IPL, Publisher: India Today, Ad Dimension: Medium Rectangle-300x250 --> 
+ <!-- end ZEDO for channel:  IPL, Publisher: India Today, Ad Dimension: Medium Rectangle-300x250 -->
            		</div>
 			</div>
        	</div>
        	<!-- End Right Advertisement -->
- 		
+
 
  		<!-- Start Expert Opinion Chunk -->
  		<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-			
+
 
 
 
@@ -282,7 +280,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 		<div class="poll_area">
 			<div class="head_title"><h2>EXPERT OPINION</h2></div>
 			<div class="keyplayer_box">
-				<div id="keyplayer_area" class="carousel slide" data-ride="carousel"> 
+				<div id="keyplayer_area" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <div class="carousel-inner" role="listbox">
 
@@ -412,7 +410,7 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 					<a class="right carousel-control" href="#keyplayer_area" role="button" data-slide="next" onclick="ga('send', 'event', 'IPL2016Expertopinionnext', 'click','Expertopinionnext', 1, {'nonInteraction': 1});return true;"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
 				</div>
 				<div class="btn_more">
-					<a href="/ipl2016/videos">More Videos <img class="arrow-class" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/more-arrow.jpg"></a> / 
+					<a href="/ipl2016/videos">More Videos <img class="arrow-class" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/more-arrow.jpg"></a> /
 					<a href="/ipl2016/category/expert-opinion/1/1210.html">more Stories<img class="arrow-class" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/world-t20-2016/images/more-arrow.jpg"></a>
 					<a href="/ipl2016/category/expert-opinion/1/1210.html"></a>
 				</div>
@@ -422,8 +420,8 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 
 		</div>
  		<!-- End Expert Column Opinion -->
- 		
- 		
+
+
  		<!-- Start IPL 2016 Scoreboard -->
 		<!-- <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
    			<div class="scorecard_area">
@@ -435,25 +433,25 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
    			</div>
  		</div>
  		<!-- End IPL 2016 Scoreboard -->
- 		
- 		
- 		
-		 		
-		
- 		 
+
+
+
+
+
+
  	<!--	<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-			 Start IPL 2016 Points Tally 
-			<div class="head_title"><a href="/ipl2016/scorecard/leaguetracker.jsp" target="_blank"><h2>MATCH TRACKER</h2></a></div>			
+			 Start IPL 2016 Points Tally
+			<div class="head_title"><a href="/ipl2016/scorecard/leaguetracker.jsp" target="_blank"><h2>MATCH TRACKER</h2></a></div>
 		</div>
  		 -->
  		<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
 			<iframe id="siTopBatsmenWdt" width="300" height="480" frameborder="0"></iframe><script>document.getElementById('siTopBatsmenWdt').src="https://assets-indiatoday.sportz.io/cricket/widgets/top-batsmen.html?seriesId=2569"+window.location.search;</script>
 		</div>
-		
+
 		<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
 			<iframe id="siTopBowlersWdt" width="300" height="480" frameborder="0"></iframe><script>document.getElementById('siTopBowlersWdt').src="https://assets-indiatoday.sportz.io/cricket/widgets/top-bowlers.html?seriesId=2569"+window.location.search;</script>
 		</div>
- 		
+
  		<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
    			<div class="ipl_tweet">
                 <div class="head_title ipl_title">
@@ -463,9 +461,9 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
    			</div>
  		</div>
- 		<!-- End IPL 2016 Tweet Chunk --> 
-        
-              
+ 		<!-- End IPL 2016 Tweet Chunk -->
+
+
  		<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
 	 		<!-- Start IPL 2016 Points Tally -->
 	 		<style>
@@ -484,11 +482,11 @@ h2 { font-size: 16px; }
 @media screen and (max-width:767px){
 	.blast-from-the-past { margin-bottom:110px;}
 	}
-	
+
 @media screen and (min-width:482px) and (max-width:640px){
 	.blast-from-the-past { margin-bottom:150px;}
 	}
-	
+
 @media screen and (min-width:320px) and (max-width:481px){
 	.blast-from-the-past { margin-bottom:210px;}
 	}
@@ -521,10 +519,10 @@ h2 { font-size: 16px; }
 </div>
 	 		<!-- End IPL 2016 Points Tally -->
  		</div>
- 		<!-- Ad Slot 5 tag: --> 
- <!-- begin ZEDO for channel: IPL_WAP_Bottom, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 --> 
- <div id="zt_561900_5" style="display:show; text-align:center;" align="center"> 
- <script id="zt_561900_5" language="javascript"> 
+ 		<!-- Ad Slot 5 tag: -->
+ <!-- begin ZEDO for channel: IPL_WAP_Bottom, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 -->
+ <div id="zt_561900_5" style="display:show; text-align:center;" align="center">
+ <script id="zt_561900_5" language="javascript">
 
 if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='undefined')
 {
@@ -532,28 +530,28 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
 }
  </script>
  </div>
- <!-- end ZEDO for channel:  IPL_WAP_Bottom, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 --> 
- 		
- 		 
- 		 
- 		 
- 		 
- 		
+ <!-- end ZEDO for channel:  IPL_WAP_Bottom, Publisher: India Today, Ad Dimension: 320x50 Mobile-320x50 -->
+
+
+
+
+
+
  		<!-- Start IPL 2016 Tweet Chunk -->
- 		
- 		
- 		
- 		
+
+
+
+
         <div class="clearfix"></div>
   </div>
 </div>
-	        	<!-- End IPL 2016 Right Navigation --> 
+	        	<!-- End IPL 2016 Right Navigation -->
 			</div>
 		</div>
 	</section>
 	<!-- End page -->
 	<!-- Start IPL 2016 Footer Navigation -->
-	
+
 <footer class="footer_wraper">
 	<div class="outer_footer hidden-xs">
 		<div class="container">
@@ -678,19 +676,17 @@ if(typeof zmt_mtag !='undefined' && typeof zmt_mtag.zmt_render_placement !='unde
     </div>
     <div class="footer_mob hidden-lg hidden-md hidden-sm"> </div>
 </footer>
-	<!-- End IPL 2016 Footer Navigation --> 
-	<!--end footer--> 
+	<!-- End IPL 2016 Footer Navigation -->
+	<!--end footer-->
 </div>
-<!--end wraper--> 
+<!--end wraper-->
 
-<!-- jQuery Bootstrap--> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
+<!-- jQuery Bootstrap-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
-<!-- Swiper JS --> 
-<script src="js/swiper.min.js"></script> 
+<!-- Swiper JS -->
+<script src="js/swiper.min.js"></script>
 <script type="text/javascript" src="js/custom.js"></script>
 </body>
 </html>
-
-</compress:html>

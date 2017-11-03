@@ -1,12 +1,6 @@
-
-
-
-
-
-
 <!DOCTYPE html><html lang="en">
-  <head>
-    <meta charset="utf-8">
+<head>
+<meta charset="utf-8">
 <title>6 iconic non-human, characters from Sholay</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Sholay's characters are etched in our memories, thanks to some brilliant acting and incredible dialogues. But some of them were silent and yet played their part in making the movie a classic. Here are six of them:" />
@@ -103,7 +97,7 @@ a:hover,a:active {color:#599100;text-decoration:underline;}
 <link rel="shortcut icon" href="http://indiatoday.intoday.in/images/favicon.ico" />
 <script type="text/javascript" language="javascript" src="staticpages/js/ajaxinclude.js"></script>
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="staticpages/css/ie.css" media="screen" /><![endif]-->
-<link href="staticpages/css/common.css" rel="stylesheet" type="text/css">
+<link href="/staticpages/css/common.css" rel="stylesheet" type="text/css">
 <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="http://indiatoday.intoday.in/js/html5.js"></script><![endif]-->
 <div id="itgd_links">
 <ul>
@@ -301,7 +295,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 
-		<a href="http://indiatoday.intoday.in/sholay-slide.jsp?slide=2" class='next'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/gallery_button_right.png' alt='Next'></a>
+		<a href="/sholay-slide.jsp?slide=2" class='next'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/gallery_button_right.png' alt='Next'></a>
 
 </div>
 <div style="clear:both; margin:10px 0;"></div>

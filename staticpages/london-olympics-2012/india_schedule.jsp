@@ -58,7 +58,7 @@ GA_googleFetchAds();
 <div class="headercont">
 	<div id="lefttop">
             <div id="logo">
-            	<a href="/london-olympics-2012/"><img src="/london-olympics-2012/images/OLYMPIC-LOGO-MAST.png" alt="India Today" width="193" border="0" height="126" title="India Today"></a>  
+            	<a href="/london-olympics-2012/"><img src="/london-olympics-2012/images/OLYMPIC-LOGO-MAST.png" alt="India Today" width="193" border="0" height="126" title="India Today"></a>
             </div>
             <div id="date">
             <script type="text/javascript">
@@ -66,15 +66,15 @@ ajaxinclude("/updatedtime_chunk.jsp");
 </script>
             </div>
         </div>
-        
+
         <div id="righttop">
         <div class="ad">Advertisement</div>
 			<div id="ad" style="height: 90px;">
-			
-			
+
+
 <div id='loading' align="center" style="width:728px; margin-top:10px;"><!--<img src='loading.gif' />--></div>
 <div id='content' style='display:none'>
-	
+
 <!-- IT_Olympics_ROS_Top_LB -->
 <script type='text/javascript'>
 GA_googleFillSlot("IT_Olympics_ROS_Top_LB");
@@ -82,19 +82,19 @@ GA_googleFillSlot("IT_Olympics_ROS_Top_LB");
 
 	</div>
 
-			
-			
+
+
 			</div>
-            
+
             <div class="navigation">
   <ul>
-        <li><a href="http://indiatoday.intoday.in/london-olympics-2012/">Home</a></li> 
-        <li><a href="http://indiatoday.intoday.in/subcategory/india-today-@-the-olympics/1/182.html">Exclusives</a></li> 
-        <li><a href="http://indiatoday.intoday.in/subcategory/latest-news---london-olympics-2012/1/184.html">News</a></li> 
-        <li><a href="http://indiatoday.intoday.in/gallerylist/olympics-2012-india-today-exclusive-pictures/1/70.html">Photos</a></li> 
-        <li><a href="http://indiatoday.intoday.in/london-olympics-2012/medal-tally.jsp" target="_blank">Medals</a></li> 
-        <li><a href="http://indiatoday.intoday.in/london-olympics-2012/schedule.jsp">Schedule</a></li> 
-        <li><a href="http://indiatoday.intoday.in/subcategory/expert-corner/1/181.html">columns</a></li> 
+        <li><a href="/london-olympics-2012/">Home</a></li>
+        <li><a href="http://indiatoday.intoday.in/subcategory/india-today-@-the-olympics/1/182.html">Exclusives</a></li>
+        <li><a href="http://indiatoday.intoday.in/subcategory/latest-news---london-olympics-2012/1/184.html">News</a></li>
+        <li><a href="http://indiatoday.intoday.in/gallerylist/olympics-2012-india-today-exclusive-pictures/1/70.html">Photos</a></li>
+        <li><a href="/london-olympics-2012/medal-tally.jsp" target="_blank">Medals</a></li>
+        <li><a href="/london-olympics-2012/schedule.jsp">Schedule</a></li>
+        <li><a href="http://indiatoday.intoday.in/subcategory/expert-corner/1/181.html">columns</a></li>
         <li class="last"><a href="http://indiatoday.intoday.in/videolist/olympics-2012/1/559.html">Videos</a></li>
     </ul>
 </div>
@@ -132,7 +132,7 @@ GA_googleFillSlot("IT_Olympics_ROS_Top_LB");
 
 
 
- 
+
  </header>
 
 	<section id="left">
@@ -148,16 +148,16 @@ GA_googleFillSlot("IT_Olympics_ROS_Top_LB");
                     <div class="searchbartitle">Search For More Sports News</div>
                    <form action="/advanced_search.jsp" method="post" name="searchform" onsubmit="return validate1();">
                         <input type="text" name="searchword"  size="60" />
-                        <input type="image" name="submit" align="absmiddle" src="http://indiatoday.intoday.in/images/go-red.gif" width="32" height="24"> 
+                        <input type="image" name="submit" align="absmiddle" src="http://indiatoday.intoday.in/images/go-red.gif" width="32" height="24">
 	<input type="hidden" value="text" name="search_type" />
- 	<input type="hidden" value="all" name="searchphrase" /> 
-	<input type="hidden" value="newest" name="ordering" />	
-	
+ 	<input type="hidden" value="all" name="searchphrase" />
+	<input type="hidden" value="newest" name="ordering" />
+
 	<input type="hidden" value="84" name="section" />
-                  </form> 
+                  </form>
                 </div>
-                
-                    
+
+
                 <div class="clear"></div>
     </div>
             <footer>
@@ -181,7 +181,7 @@ GA_googleFillSlot("IT_Olympics_ROS_Top_LB");
                 <div id="copyrights">
                     Copyright &copy; 2013 Living Media India Limited. For reprint rights: <a href="http://www.syndicationstoday.com/" target="_blank">Syndications Today.</a>
                 </div>
-            </div> 
+            </div>
 
 
 
@@ -196,9 +196,7 @@ GA_googleFillSlot("IT_Olympics_ROS_Top_LB");
 
 </div>
 
- 
+
 
 </body>
 </html>
-
-

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Dilip Kumar better known as Tragedy King, and was described as the ultimate method actor by Satyajit Ray. Amitabh Bachchan also described Dilip Kumar as the greatest actor ever." />
 <meta name="keywords" content="dilip kumar, best films dilip kumar, dilip kumar leading ladies, dilip kumar life, dilip kumar achievement, dilip kumar songs, dilip kumar dialogues, dilip kumar films, dadasaheb phalke award dilip kumar, dilip kumar devdas, dilip kumar ganga jamuna" />
-<link href="staticpages/css/homepage.css" type="text/css" rel="stylesheet">
+<link href="/staticpages/css/homepage.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 <link rel="shortcut icon" href="http://indiatoday.intoday.in/images/favicon.ico" />
 <script type="text/javascript" language="javascript" src="staticpages/js/ajaxinclude.js"></script>
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="staticpages/css/ie.css" media="screen" /><![endif]-->
-<link href="staticpages/css/common.css" rel="stylesheet" type="text/css">
+<link href="/staticpages/css/common.css" rel="stylesheet" type="text/css">
 <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="http://indiatoday.intoday.in/js/html5.js"></script><![endif]-->
 <div id="itgd_links">
 <ul>

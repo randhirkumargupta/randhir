@@ -171,7 +171,7 @@ tweetmeme_url = '/sex-survey-2013/index.jsp';
     <td bgcolor="#F7E3D1">
     	    <div class="bt-textbold-a">India Today Sex Survey Cover 2013</div>
             <div align="center"  style="margin-top:10px;"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/it-cover.jpg" border="0"></div>
-            <!--<div class="clicknow"><a href="/gallery/india-today-sex-survey-covers/1/8280.html">Click Now &raquo;</a></div>-->
+            <!--<div class="clicknow"><a href="http://indiatoday.intoday.in/gallery/india-today-sex-survey-covers/1/8280.html">Click Now &raquo;</a></div>-->
       </td>
   </tr>
 </table>

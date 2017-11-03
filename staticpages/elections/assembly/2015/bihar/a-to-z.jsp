@@ -747,8 +747,8 @@ Violence returns to Kannur, 5 CPM workers, 4 cops injured in country-made bomb a
   </div>
     <div class="rt-colum">
   	 	<h2><a href="/sosorry">So sorry</a></h2>     <div class="showing">
-      <div class="list-showing" data-tb-region-item > <a href="/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html" title="Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights"><img width="313" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/images/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/so-sorry-video_305_100817092736.jpg" alt="So Sorry" title="So Sorry" /></a>
-       <div class="captionWicon"><a href="/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html" title="Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights"><span class="video-icon spritbg"></span>Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights</a></div>
+      <div class="list-showing" data-tb-region-item > <a href="http://indiatoday.intoday.in/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html" title="Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights"><img width="313" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/images/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/so-sorry-video_305_100817092736.jpg" alt="So Sorry" title="So Sorry" /></a>
+       <div class="captionWicon"><a href="http://indiatoday.intoday.in/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html" title="Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights"><span class="video-icon spritbg"></span>Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights</a></div>
        </div>       </div>
 
   </div>

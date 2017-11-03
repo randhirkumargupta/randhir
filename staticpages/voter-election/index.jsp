@@ -6,23 +6,20 @@
 <title>Election News</title>
 <meta name="description" content="News of assembly and general elections" />
 <meta name="keywords" content="Online elections, first virtual elections, lok sabha 2014 elections, Lok Sabha polls, elections, India Today online election, FAQs, election facts, election news, election fun facts, polls" />
-<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/css/jquery.mCustomScrollbar1.css" rel="stylesheet" />
-<link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
+<link href="/voter-election/css/jquery.mCustomScrollbar1.css" rel="stylesheet" />
+<link href="/voter-election/css/common.css" rel="stylesheet" type="text/css">
 
 <body>
 
 <!--top-->
 <header>
-
-
-
 <script src="//pagead2.googlesyndication.com/pagead/js/google_top_exp.js"></script>
-<link rel="stylesheet" href="/staticpages/main/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="/voter-election/css/autosuggest_inquisitor.css" type="text/css" media="screen" charset="utf-8" />
 
 <link rel="shortcut icon" href="/staticpages/main/images/favicon.ico" />
 <script type="text/javascript" language="javascript" src="/staticpages/main/js/ajaxinclude.js"></script>
 <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
-<link href="/staticpages/main/css/common.css" rel="stylesheet" type="text/css">
+<link href="/voter-election/css/common.css" rel="stylesheet" type="text/css">
 <!-- The below script Makes IE understand the new html5 tags are there and applies our CSS to it --><!--[if IE]><script src="/staticpages/main/js/html5.js"></script><![endif]-->
 <div id="itgd_links">
 <ul>
@@ -199,7 +196,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 
 
 </header>
-<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/css/voter-helpline.css" rel="stylesheet" />
+<link href="/voter-election/css/voter-helpline.css" rel="stylesheet" />
 
 <div class="voter-helpline-container" >
 <div class="vote-header">

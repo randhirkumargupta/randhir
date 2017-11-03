@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -49,9 +44,9 @@ if(document.getElementsByTagName("head").length>0)document.getElementsByTagName(
 else if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
 })();
 </script>
-<!--FB Claim URL // 22 june 2017--> 
+<!--FB Claim URL // 22 june 2017-->
 <meta property="fb:pages" content="23230437118" />
-<!--End FB Claim URL --> 
+<!--End FB Claim URL -->
 
 <script>
 window._newsroom = window._newsroom || [];
@@ -62,10 +57,10 @@ f.parentNode.insertBefore(e, f);
 }(document.createElement('script'),
 document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indiatoday/newsroom.js');
 </script>
-  
-   
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<base href="http://indiatoday.intoday.in/" />
+<base href="/" />
 <title>JAYALALITHAA Homage 1948-2016</title>
 <meta name="description" content="JAYALALITHAA Homage 1948-2016">
 <meta name="keywords" content="JAYALALITHAA Homage 1948-2016" />
@@ -74,7 +69,7 @@ document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indi
 <link rel="stylesheet" type="text/css" href="/staticpages/css/it-inner-15.css" />
 <link rel="stylesheet" type="text/css" href="/staticpages/css/it-common-15.css" />
 <link rel="stylesheet" type="text/css" href="/staticpages/css/it-responsive-15.css" />
-<!-- <link href="staticpages/css/common.css" rel="stylesheet" type="text/css"> -->
+<!-- <link href="/staticpages/css/common.css" rel="stylesheet" type="text/css"> -->
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -96,7 +91,7 @@ document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indi
 <div class="skinnin-ad-container">
 
 
-<link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/navigation-2016.css" rel="stylesheet" />
+<link href="/staticpages/css/navigation-2016.css" rel="stylesheet" />
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 
@@ -104,15 +99,15 @@ document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indi
 
 <div id="toppanel" class="clearfix">
   <div class="container">
-  
 
-    	   
+
+
 <!--<div style="margin:20px auto; width:1003px;" >-->
 <div class="page_pusher_h" >
 <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Page Pusher 1x1 - 1 x 1 -->
 <script language="JavaScript">
-var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="31"; 
+var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="31";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Page Pusher 1x1 - 1 x 1 -->
@@ -124,17 +119,17 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 	var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_width="1"; var zflag_height="1"; var zflag_sz="32";
 	</script>
 	<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-	<!-- end ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Skinning 1x1 - 1 x 1 -->	
+	<!-- end ZEDO for channel:  IT RichMedia Ros , publisher: India Today , Ad Dimension: Skinning 1x1 - 1 x 1 -->
 
 
-	
+
    <!-- <div style="width:1003px; margin:0 auto">
-    
+
     </div>-->
 
 
-    <div class="top_menu">  
-      <ul> 
+    <div class="top_menu">
+      <ul>
         <li><a href="http://indiatoday.intoday.in/section/114/1/india.html" >India</a></li>
         <li><a href="http://indiatoday.intoday.in/section/113/1/world.html"  class="mainlevel" >World</a></li>
         <li><a href="http://indiatoday.intoday.in/videos"  class="mainlevel" >Videos</a></li>
@@ -151,16 +146,16 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
  	<li><a href="http://www.cosmopolitan.in/" target="_blank" class="mainlevel" >Cosmopolitan </a></li>
         <!--<li><a href="http://indiatoday.magicbricks.com" target="_blank" class="mainlevel"  onclick="ga('send', 'event', 'MAGICBRICKS', 'click','1', 1, {'nonInteraction': 1});return true;">Real Estate</a></li>-->
       </ul>
-    </div> 
-    
+    </div>
+
     <div class="wrapper" style="margin:10px auto;">
     <style>
 	/*.ad_bn{ margin:0 !important;width: 728px !important;    margin-top: 10px !important;float: right !important;}*/
-	.ad_bn{ width: 728px !important;    margin-top: 10px !important;}  
+	.ad_bn{ width: 728px !important;    margin-top: 10px !important;}
 	.clearfix_h{ clear:both;}
-	</style>    
-    <span id="div1"></span> 
-    	    <!--  Header Ad --><div class="row ad_bn" style="height:90px;"> 			
+	</style>
+    <span id="div1"></span>
+    	    <!--  Header Ad --><div class="row ad_bn" style="height:90px;">
 
 <script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
 <script>
@@ -177,17 +172,17 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
   });
 </script>
 
-	
+
 <!-- /1007232/Indiatoday_ROS_DesktopMasthead_728x90 -->
 <div id='div-gpt-ad-1496915828862-0' style='height:90px; width:728px; display:block !important;'>
 <script>
 googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0'); });
 </script>
 </div>
-	
+
 
     </div>
-    <div class="clearfix_h"></div>   
+    <div class="clearfix_h"></div>
   </div>
   </div>
   <!-- Main Navigation -->
@@ -220,17 +215,17 @@ var siteurl="http://indiatoday.intoday.in/";
       <div class="container">
         <div class="wrapper">
           <div class="top-menu">
-            <ul>             
+            <ul>
               <li class="navtog">
               <div class="openNav" title="Menu">
               <div class="icon"></div>
               </div>
-              
+
               <div class="sub_topnav">
                  <div class="mainnavigation-slider">
                    <!--<div class="topsocial"><a href="http://www.facebook.com/indiatoday" class="facebook" title="facebook">facebook</a><a href="http://www.twitter.com/indiatoday" class="twitter" title="twitter">twitter</a><a href="http://www.google.com/+indiatoday" class="gplus" title="google+">google plus</a><a href="http://indiatoday.intoday.in/site/rssFeed.jsp" class="rss" title="Rss">rss</a><a href="http://m.indiatoday.in/" class="mobiledev"></a></div>-->
                    <div class="menucover">
-        <ul>        	
+        <ul>
         	<li><a href="http://indiatoday.intoday.in/news.html" title="Breaking News">NEWS LIST</a></li>
 	      	<li><a href="http://indiatoday.intoday.in/section/114/1/india.html" title="India News">INDIA</a></li>
 	      	<li><a href="http://indiatoday.intoday.in/section/113/1/world.html" title="World News">WORLD</a></li>
@@ -249,7 +244,7 @@ var siteurl="http://indiatoday.intoday.in/";
 	        <li><a href="http://indiatoday.intoday.in/breakingnews.html" title="News Indox">News Inbox</a></li>
 	        <li><a href="http://indiatoday.intoday.in/section/120/1/top-stories.html" title="Top News">Top News</a></li>
 	        <li><a href="http://indiatoday.intoday.in/section/175/1/must-read.html?source=homernmore" title="Most Read">Most Read</a></li>
-	        <li><a href="http://indiatoday.intoday.in/section/178/1/editors-picks.html?source=homernmore" title="Editor picks">Editor's Picks</a></li>	       
+	        <li><a href="http://indiatoday.intoday.in/section/178/1/editors-picks.html?source=homernmore" title="Editor picks">Editor's Picks</a></li>
 	        <li><a href="http://indiatoday.intoday.in/understand/index.jsp" title="Funalytics">Funalytics</a></li>
 	        <li><a href="http://dailyo.in/" title="Dailyo">Opinion</a></li>
 	        <li><a href="http://indiatoday.intoday.in/section/213/1/home-right.html" title="Hot Right Now">Hot Right Now</a></li>
@@ -277,17 +272,17 @@ var siteurl="http://indiatoday.intoday.in/";
                         <li><a href="javascript:void(0);" onclick="getmenu(214,0,'story',this);" title="Cricket">Cricket <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(67,0,'story',this);" title="Movies">Movies <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(230,0,'story',this);" title="Auto">Auto <i class="fa fa-angle-down"></i></a></li>
-                        <li><a href="javascript:void(0);" onclick="getmenu(84,0,'story',this);" title="Sports">Sports <i class="fa fa-angle-down"></i></a></li>  
+                        <li><a href="javascript:void(0);" onclick="getmenu(84,0,'story',this);" title="Sports">Sports <i class="fa fa-angle-down"></i></a></li>
                          <li><a href="javascript:void(0);" onclick="getmenu(86,0,'video',this);" title="Videos">videos <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(2,0,'photo',this);" title="Photos">Photos <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(214,0,'story',this);" title="Cricket">Cricket <i class="fa fa-angle-down"></i></a></li>
-                        <li><a href="javascript:void(0);" onclick="getmenu(67,0,'story',this);" title="Movies">Movies <i class="fa fa-angle-down"></i></a></li>			   
+                        <li><a href="javascript:void(0);" onclick="getmenu(67,0,'story',this);" title="Movies">Movies <i class="fa fa-angle-down"></i></a></li>
                         <li><a href="javascript:void(0);" onclick="getmenu(214,0,'story',this);" title="Cricket">Cricket <i class="fa fa-angle-down"></i></a></li>
                       </ul>
                     </div>
-                    
+
                     <div class="drop-box-right">
-                      
+
                     </div>
                   </li>
                 </ul>-->
@@ -297,32 +292,32 @@ var siteurl="http://indiatoday.intoday.in/";
             <a href="http://indiatoday.intoday.in/livetv.jsp" title="Live Tv">
             <!--<img class="navliveicon redicon" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/live_iconnav.png" alt="India Today Live TV">
             <img class="navliveicon whiteicon" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/LIVE_White.png" alt="India Today Live TV">-->TV</a>
-              
+
               </li>
               <li class="magazine   ">
         			<a href="http://indiatoday.intoday.in/calendar" title="Magazine">MAGAZINE</a>
-              
+
               </li>
               <!--<li  class="search_togle"><a href="http://indiatoday.intoday.in/advanced_search.jsp" title="Search">Search</a></li>-->
-              
+
               <li  class="search_togle">
 <form action="http://indiatoday.intoday.in/advanced_search.jsp" method="get" name="searchform1" onsubmit="return validatesearch('searchword');" style="margin:0;padding:0;">
                     <div class="searchbox">
-               <input type="text" class="input-box" name="searchword" id="searchword" value="Type here" onblur="if(this.value=='') this.value='Type here';" onfocus="if(this.value=='Type here') this.value='';"> 
+               <input type="text" class="input-box" name="searchword" id="searchword" value="Type here" onblur="if(this.value=='') this.value='Type here';" onfocus="if(this.value=='Type here') this.value='';">
 
                         <div class="search">Search</div>
                         <div class="icon-search"></div>
                     </div>
 </form>
               </li>
-              
+
             </ul>
           </div>
         </div>
         <div class="clearfix"></div>
       </div>
     </div>
-          
+
     <!--
 
 <style>
@@ -356,12 +351,12 @@ var siteurl="http://indiatoday.intoday.in/";
 
 
  -->
-    
+
     <div class="static-content">
-    
-    
-    
-    
+
+
+
+
     <ul>
       <li>
             <!--<div class="static"><a href="http://specials.indiatoday.com/specials/educomp/" mce_href="http://specials.indiatoday.com/specials/educomp/">Educomp India Today Awards</a></div>-->
@@ -369,7 +364,7 @@ var siteurl="http://indiatoday.intoday.in/";
            <div class="scroll-arrow-left"><i class="fa fa-angle-left ll"></i></div>
         <div class="drop-box-left">
           <ul>
-         
+
 
 <li><a mce_href="http://yads.zedo.com/ads2/c?a=2520674;g=0;c=821003063;i=0;x=23040;n=821;s=2;k=http://my.monsterindia.com/create_account.html?spl=IN_Alliance_LMG&amp;WT.mc_n=mktal_sk_LMG_IN " style="color:red" target="_blank" rel="nofollow" href="http://yads.zedo.com/ads2/c?a=2520674;g=0;c=821003063;i=0;x=23040;n=821;s=2;k=http://my.monsterindia.com/create_account.html?spl=IN_Alliance_LMG&amp;WT.mc_n=mktal_sk_LMG_IN ">Jobs</a></li>
 <!-- <li><a target="_blank" style="color:red" href="http://indiatoday.intoday.in/best-universities/">Best Universities 2017</a></li> -->
@@ -391,37 +386,37 @@ var siteurl="http://indiatoday.intoday.in/";
             <li><a href="/section/113/1/world.html" onmouseover="getmenu(113,0,'story',this);" title="World">World <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/galleries" onmouseover="getmenu(2,0,'photo',this);" title="Photos">Photos <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/videos" onmouseover="getmenu(86,0,'video',this);" title="Videos">videos <i class="fa fa-angle-down"></i></a></li>
-            
+
             <li><a href="/section/214/1/cricket.html" onmouseover="getmenu(214,0,'story',this);" title="Cricket">Cricket <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/technology/" onmouseover="getmenu(229,0,'story',this);" title="Technology">Tech <i class="fa fa-angle-down"></i></a></li>
  		<li><a href="/section/343/1/fyi.html" onmouseover="getmenu(343,0,'story',this);" title="fyi">FYI <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/230/1/auto.html" onmouseover="getmenu(230,0,'story',this);" title="Auto">Auto <i class="fa fa-angle-down"></i></a></li>
-            <li><a href="/section/103/1/lifestyle.html" onmouseover="getmenu(103,0,'story',this);" title="Lifestyle">Lifestyle <i class="fa fa-angle-down"></i></a></li>	
+            <li><a href="/section/103/1/lifestyle.html" onmouseover="getmenu(103,0,'story',this);" title="Lifestyle">Lifestyle <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/125/1/travel.html" onmouseover="getmenu(125,0,'story',this);" title="Travel">Travel <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/84/1/sports.html" onmouseover="getmenu(84,0,'story',this);" title="Sports">Sports <i class="fa fa-angle-down"></i></a></li>
             <li><a href="javascript:void(0);" onmouseover="getmenu(386,0,'story',this);" title="Politics">Politics <i class="fa fa-angle-down"></i></a></li>
-            <li><a href="/section/341/1/food.html" onmouseover="getmenu(341,0,'story',this);" title="Food">Food <i class="fa fa-angle-down"></i></a></li>			
+            <li><a href="/section/341/1/food.html" onmouseover="getmenu(341,0,'story',this);" title="Food">Food <i class="fa fa-angle-down"></i></a></li>
             <li><a href="http://indiatoday.intoday.in/education" target="_blank" onmouseover="getmenu(204,0,'story',this);" title="Education">Education <i class="fa fa-angle-down"></i></a></li>
             <li><a href="http://businesstoday.intoday.in/" target="_blank" onmouseover="getmenu(110,0,'story',this);" title="Business">Business <i class="fa fa-angle-down"></i></a></li>
-            <li><a href="http://indiatoday.intoday.in/money/" target="_blank"  onmouseover="getmenu(340,0,'story',this);" title="Money">Money <i class="fa fa-angle-down"></i></a></li>  
+            <li><a href="http://indiatoday.intoday.in/money/" target="_blank"  onmouseover="getmenu(340,0,'story',this);" title="Money">Money <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/120/1/top-stories.html" onmouseover="getmenu(120,0,'story',this);" title="Top news">Top news <i class="fa fa-angle-down"></i></a></li>
-            <li><a href="http://dailyo.in/" target="_blank"  title="Opinion">Opinion </a></li>						
+            <li><a href="http://dailyo.in/" target="_blank"  title="Opinion">Opinion </a></li>
             <li><a href="/section/175/1/must-read.html?source=homernmore" onmouseover="getmenu(175,0,'story',this);" title="Most Read">Most Read <i class="fa fa-angle-down"></i></a></li>
             <li><a href="/section/178/1/editors-picks.html" onmouseover="getmenu(178,0,'story',this);" title="Editor's Pick">Editor's Pick <i class="fa fa-angle-down"></i></a></li>
             <li class="no-dropbox"><a href="http://indiatoday.intoday.in/understand/index.jsp" target ="_blank" title="Funalytics">Funalytics </a></li>
 	<li class="no-dropbox"><a href="http://www.cosmopolitan.in/" target ="_blank" title="Cosmopolitan">Cosmopolitan  </a></li>
           </ul>
         </div>
-        
+
         <div class="drop-box-right" style="display:none;">
-          
+
         </div>
       </li>
     </ul>
-    
+
     </div>
 
- 
+
 <style>
 .bihar_elec_banner{ margin:0 auto}
 .container_bestcol{ width:1002px; margin:0 auto;}
@@ -430,20 +425,20 @@ var siteurl="http://indiatoday.intoday.in/";
 .container_bestcol{ width:100%;}
 .container_bestcol .iframe_bestcol{ float:left;height:118px;}
 }
-#conclaceamt{width:1000px; margin:15px auto 0 auto; }    
+#conclaceamt{width:1000px; margin:15px auto 0 auto; }
 @media screen and (max-width:800px){
-#conclaceamt{width:100%; margin:15px auto 0 auto; }    
+#conclaceamt{width:100%; margin:15px auto 0 auto; }
 }
 
 </style>
 <!--<div class="container_bestcol">
 <iframe class="iframe_bestcol" frameborder="0" scrolling="no" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/best-college-sponsor/sponsor.html"></iframe>
-</div>-->                  
+</div>-->
 
 <!--<div class="clearfix"></div>
- <div id="conclaceamt"><iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>      
- <div class="clearfix"></div>--> 
-              
+ <div id="conclaceamt"><iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>
+ <div class="clearfix"></div>-->
+
   </div>
 </div>
 
@@ -457,7 +452,7 @@ var siteurl="http://indiatoday.intoday.in/";
 			$('.off_candle').hide();
 			$('.jaya_candle h2').hide();
 			$('.oncandle').show();
-		
+
 		});
 	});
 </script>
@@ -466,7 +461,7 @@ var siteurl="http://indiatoday.intoday.in/";
 	.jaya_banner { width:880px; margin:0 auto; font-family:roboto; font-weight:900; color:#fff; font-size:55px; text-align:center; text-shadow:2px 2px 0 #000; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/images/jayalalithaa/banner.png) left top no-repeat; padding:74px 0 28px 120px; text-transform:uppercase  }
 	.candle_are { width:960px; margin:0 auto; font-family:roboto; background:#1c1c1c; color:#fff; overflow:hidden; padding:20px;}
 	.jaya_content_area { background:#000000; border-radius:5px; padding:20px; overflow:hidden }
-	
+
 	.jaya_click { width:150px; text-align:center; padding:10px 20px; margin:0 auto; background:#eaa317; border-radius:5px; color:#000; font-weight:bold; font-size:18px; box-shadow:6px 6px 0 #7d5301; cursor:pointer;  }
 	.jata_text { width:570px; float:left; color:#aaaaaa; padding-right:50px; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/images/jayalalithaa/seprator.png) right center no-repeat;}
 	.jaya_candle h2 { text-align:center; text-transform:uppercase; color:#fff; font-weight:300; font-size:20px }
@@ -477,7 +472,7 @@ var siteurl="http://indiatoday.intoday.in/";
 	.jaya_candle .counter { color:#eaa317; font-size:25px; text-align:center; padding:15px; font-weight:300;}
 	.clr { clear:both}
 	.jaya_share {color:#aaaaaa; text-align:center }
-	
+
 	@media screen and  (max-width:800px){
 		.jaya_banner { width:83%; font-size:40px;}
 		.candle_are { padding:2%; width:96%;}
@@ -493,7 +488,7 @@ var siteurl="http://indiatoday.intoday.in/";
 
 
 
-<div class="jata_text">Tamil Nadu's 'Puratchi Thalaivi' (Revolutionary Leader), Jayalalithaa Jayaraman, passed away today following a massive cardiac arrest at Chennai's Apollo Hospital, where she was admitted since September 22 this year. 'Amma' - as she was popularly known by the state she ruled for six terms - was 68. 
+<div class="jata_text">Tamil Nadu's 'Puratchi Thalaivi' (Revolutionary Leader), Jayalalithaa Jayaraman, passed away today following a massive cardiac arrest at Chennai's Apollo Hospital, where she was admitted since September 22 this year. 'Amma' - as she was popularly known by the state she ruled for six terms - was 68.
 <br />
 <br />
 
@@ -509,7 +504,7 @@ The Amma aura, that dominated the Tamil Nadu politics for nearly three decades, 
 </div>
 
 
-<script type="text/javascript">ajaxinclude("jayalalitha-ajay-click.jsp")</script>	
+<script type="text/javascript">ajaxinclude("jayalalitha-ajay-click.jsp")</script>
 
 </div>
 
@@ -528,7 +523,7 @@ The Amma aura, that dominated the Tamil Nadu politics for nearly three decades, 
 
 
 
-<div class="below-footer_h"> 
+<div class="below-footer_h">
   <div class="new_nav">
     <ul>
       <li><a href="http://indiatoday.intoday.in/news.html">NEWS</a></li>
@@ -550,22 +545,22 @@ The Amma aura, that dominated the Tamil Nadu politics for nearly three decades, 
 </div>
 <div class="below-footer_h ads_f">
   <div class="footer_ads_h" >
-    
+
 	<div class="footer_left_h">
-	
-	
-		
+
+
+
 			<!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT ROS  Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
 <script language="JavaScript">
-var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14"; 
+var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
 </script>
 <script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel:  IT ROS  Bottomnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
 
 </div>
-	
-	
+
+
     <div class="footer_right_h">
       <div class="socials_footer_links_h">
         <ul>
@@ -581,7 +576,7 @@ var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_wid
           <li><a href="http://indiatoday.intoday.in/site/rssFeed.jsp">
             <div class="rss_h"></div>
             </a></li>
-          <li><a href="http://indiatoday.intoday.in/applications/indiatoday.jsp"> 
+          <li><a href="http://indiatoday.intoday.in/applications/indiatoday.jsp">
             <div class="mbl_h"></div>
             </a></li>
         </ul>
@@ -589,7 +584,7 @@ var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_wid
     </div>
   </div>
   <div class="clearfix"></div>
-  
+
 </div>
 
 <div class="footer-main-wrapper">
@@ -629,7 +624,7 @@ var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_wid
     <li><a href="http://aajtak.intoday.in" target="_blank">Aaj Tak</a></li>
     <li><a href="http://aajtak.intoday.in/dilliaajtak/" target="_blank">Delhi Aaj Tak</a></li>
     <li><a href="http://aajtak.intoday.in/tez/" target="_blank">Tez</a></li>
-    <li><a href="http://indiatoday.intoday.in/livetv.jsp" target="_blank">India Today TV</a></li>   
+    <li><a href="http://indiatoday.intoday.in/livetv.jsp" target="_blank">India Today TV</a></li>
   </ul>
   <h3>Radio</h3>
   <ul>
@@ -648,7 +643,7 @@ var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_wid
   <ul>
   <!--   <li><a href="http://www.bagittoday.com/" target="_blank">Bag It Today</a> </li> -->
     <li> <a href="http://www.indiatodaydiaries.com/" target="_blank">India Today Diaries</a></li>
-  </ul>  
+  </ul>
 </div>
 <div class="ft_lnks_h">
 <h3>Events</h3>
@@ -687,7 +682,7 @@ var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_wid
   <ul>
     <li> <a href="http://www.indiatodayimages.com/" target="_blank">India Today Images</a></li>
   </ul>
-  
+
   <h3> Useful Links</h3>
   <ul>
     <li> <a href="http://www.dailyo.in/" target="_blank">Dailyo</a></li>
@@ -709,38 +704,38 @@ var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_wid
 
 <div id="leftrightads">
 
-<div style="left:-170px;" class="leftad" >              
+<div style="left:-170px;" class="leftad" >
 <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
 <script type="text/javascript">
-var zflag_nid="821"; var zflag_cid="1142/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+var zflag_nid="821"; var zflag_cid="1142/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7";
 </script>
 <script type="text/javascript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
 <!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
-</div>          
-<div class="rightad" >               
+</div>
+<div class="rightad" >
  <!-- Javascript tag: -->
 <!-- begin ZEDO for channel:  IT Homepage SkyScraper Ex right , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
 <script type="text/javascript">
-var zflag_nid="821"; var zflag_cid="1143/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7"; 
+var zflag_nid="821"; var zflag_cid="1143/1137"; var zflag_sid="2"; var zflag_width="160"; var zflag_height="600"; var zflag_sz="7";
 </script>
 <script type="text/javascript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
-<!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->    
-</div> </div> 
+<!-- end ZEDO for channel:  IT Homepage SkyScraper Ex Left , publisher: India Today , Ad Dimension: Wide Skyscraper - 160 x 600 -->
+</div> </div>
 
 
 
-<script type="text/javascript"> winscreen(); $(window).resize(function() { 
-winscreen(); }); function winscreen(){ if (document.body.offsetWidth>=1250) { if 
-(document.getElementById("leftrightads") != null || 
-document.getElementById("leftrightads") != undefined) 
-{document.getElementById("leftrightads").style.display="block"; var lft = 
-((document.body.offsetWidth-1000)/2); 
-document.getElementById("leftrightads").style.left=lft+'px'; } } else { if 
-(document.getElementById("leftrightads") != null || 
-document.getElementById("leftrightads") != undefined){ 
+<script type="text/javascript"> winscreen(); $(window).resize(function() {
+winscreen(); }); function winscreen(){ if (document.body.offsetWidth>=1250) { if
+(document.getElementById("leftrightads") != null ||
+document.getElementById("leftrightads") != undefined)
+{document.getElementById("leftrightads").style.display="block"; var lft =
+((document.body.offsetWidth-1000)/2);
+document.getElementById("leftrightads").style.left=lft+'px'; } } else { if
+(document.getElementById("leftrightads") != null ||
+document.getElementById("leftrightads") != undefined){
 document.getElementById("leftrightads").style.display="none"; }} }
-var myUserAgent = navigator.userAgent.toLowerCase(); 
+var myUserAgent = navigator.userAgent.toLowerCase();
 if(myUserAgent.match('ipad')) { $('.leftad, .rightad').remove(); }
 </script>
 
@@ -761,9 +756,9 @@ if(myUserAgent.match('ipad')) { $('.leftad, .rightad').remove(); }
         var e = document.createElement('script');
         e.setAttribute('language', 'javascript');
         e.setAttribute('type', 'text/javascript');
-         
+
 		 e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
-		
+
         document.body.appendChild(e);
       }
       var oldonload = window.onload;
@@ -778,8 +773,8 @@ if(myUserAgent.match('ipad')) { $('.leftad, .rightad').remove(); }
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jshome-2016.js" type="text/javascript"></script>
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
-$(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.leftad').offset().top - parseFloat($('.leftad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.leftad a').addClass('fixed');} else {$('.leftad a').removeClass('fixed');}});}}); 
-$(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.rightad').offset().top - parseFloat($('.rightad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.rightad a').addClass('fixed-r');} else {$('.rightad a').removeClass('fixed-r');}});}}); 
+$(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.leftad').offset().top - parseFloat($('.leftad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.leftad a').addClass('fixed');} else {$('.leftad a').removeClass('fixed');}});}});
+$(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.rightad').offset().top - parseFloat($('.rightad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.rightad a').addClass('fixed-r');} else {$('.rightad a').removeClass('fixed-r');}});}});
 </script>
 
 
@@ -802,17 +797,17 @@ unruly.native.siteId = 321603
 	if (document.getElementById(adsId)!=undefined){
 		if($('#'+adsId).height()==0 || $('#'+adsId).height()=='0'){
 		ga('send','event','Adblock',c,'true'); //ga('send','_trackEvent','WriteAdblock','true');
-		}	
+		}
 	}else{
 	if(c!=undefined){
 		ga('send','event','Adblock',c,'false'); //ga('send','_trackEvent','WriteAdblock','false');
 	}
 	//ga('send', 'event', 'Test_AdDisplay', 'No',c);
-	//ga('send', 'event', 'Adblock', 'Yes', 'AdblockYes'); alert('Yes'); 
-	}} 
-    
+	//ga('send', 'event', 'Adblock', 'Yes', 'AdblockYes'); alert('Yes');
+	}}
+
    </script>
-   
+
 <!-- Begin ZEDO -->
 <script language="JavaScript">
 var zzp=new Image();
@@ -828,7 +823,7 @@ zzp.src="http://m4.zedo.com/log/p.gif?a=2520674;c=821003063;x=23040;n=821;e=i;i=
 <script>
 $(function() {
 		$(document).find("img[data-original]").lazyload({
-	      failure_limit : 20 
+	      failure_limit : 20
 	    });
 	});
 
@@ -846,9 +841,8 @@ page_request.setRequestHeader("If-Modified-Since","Thu, 1 Jan 1970 00:00:00 GMT"
 writecontent(page_request)}
 function writecontent(page_request){if(window.location.href.indexOf("http")==-1||page_request.status==200)
 document.write(page_request.responseText)}
-		
+
  </script>
 </body>
 
 </html>
-

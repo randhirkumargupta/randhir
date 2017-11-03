@@ -54,7 +54,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <title>SIMSREE's parent institute, Sydenham College is one of the most renowned Commerce Colleges in India</title>
 <meta name="keywords" content="college,  Sydenham College, Commerce Colleges, Indian colleges ">
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
-<link href="http://indiatoday.intoday.in/education/css/style-sheet.css" rel="stylesheet" />
+<link href="/education/css/style-sheet.css" rel="stylesheet" />
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 $(document).ready(function(e) {
@@ -232,10 +232,10 @@ ul li {
 	font-size: 20px;
 }
 #acc li.down {
-	background: url('http://media2.intoday.in/indiatoday/test/arrow-down.png') no-repeat 99%
+	background: url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/test/arrow-down.png') no-repeat 99%
 }
 #acc li.right {
-	background: url('http://media2.intoday.in/indiatoday/test/arrow-right.png') no-repeat 99%
+	background: url('http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/test/arrow-right.png') no-repeat 99%
 }
 div#sec {
 	display: none;
@@ -396,7 +396,7 @@ input.universal-txt-field {
     <h1>Education News</h1>
     </a>
     <div class="topad">
-      <div class="ad"> <img src="http://media2.intoday.in/indiatoday/test/add.png"> 
+      <div class="ad"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/test/add.png"> 
         <!-- begin ZEDO for channel: ET Home Page Topnav LB , publisher: Education Today Web , Ad Dimension: Super Banner - 728 x 90 --> 
         <!-- end ZEDO for channel: ET Home Page Topnav LB , publisher: Education Today Web , Ad Dimension: Super Banner - 728 x 90 --> 
         
@@ -408,11 +408,11 @@ input.universal-txt-field {
     <div class="lft homeimg" style="height:31px;"><a href="http://indiatoday.intoday.in/education/" title="Home"><img src="http://indiatoday.intoday.in/education/images/home-icon.png" width="40" height="38" border="0"></a></div>
     <div id="topNav">
       <ul>
-        <li><a href="http://indiatoday.intoday.in/education/category/news/1/526.html" title="News">News</a></li>
-        <li><a href="http://indiatoday.intoday.in/education/category/results-notification/1/527.html" title="Results Notification">Notification</a></li>
+        <li><a href="/education/526.html" title="News">News</a></li>
+        <li><a href="/education/527.html" title="Results Notification">Notification</a></li>
         <li><a href="http://indiatoday.intoday.in/education/category/exam-tips-and-trick/1/731.html" title="Exam Tips">Exam Tips</a></li>
         <li><a href="http://indiatoday.intoday.in/education/category/scholarship/1/503.html" title="Scholarships">Scholarships</a></li>
-        <li><a href="http://indiatoday.intoday.in/education/category/government-jobs/1/734.html" title="Government Jobs">Government Jobs</a></li>
+        <li><a href="/education/734.html" title="Government Jobs">Government Jobs</a></li>
         <li class="last"><a href="http://indiatoday.intoday.in/education/categorylist/plan-your-career/1/544.html" title="Plan Your Career">Plan Your Career</a></li>
         <li><a href="http://www.learntoday.in/courses?source=eduportal" title="Online Courses" target="_blank">Online Courses</a></li>
       </ul>
@@ -448,11 +448,11 @@ input.universal-txt-field {
         <div id="slider-area">
           <div class="img-border">
             <ul style="width: 2600px; left: 0;">
-              <li><a href="#"><img src="http://media2.intoday.in/indiatoday/images/Sydenham/Brouhaha.jpg" alt="" width="650" height="350" border="0"></a></li>
-              <li><a href="#"><img src="http://media2.intoday.in/indiatoday/images/Sydenham/Simshree-mumbai.jpg" alt="" width="650" height="350" border="0"></a></li>
-              <li><a href="#"><img src="http://media2.intoday.in/indiatoday/images/Sydenham/simsree.jpg" alt="" width="650" height="350" border="0"></a></li>
-              <li><a href="#"><img src="http://media2.intoday.in/indiatoday/images/Sydenham/sydenham_college_logo.jpg" alt="" width="650" height="350" border="0"></a></li>
-              <li><a href="#"><img src="http://media2.intoday.in/indiatoday/images/Sydenham/sydenhyamcollege_photo.jpg" alt="" width="650" height="350" border="0"></a></li>
+              <li><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Sydenham/Brouhaha.jpg" alt="" width="650" height="350" border="0"></a></li>
+              <li><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Sydenham/Simshree-mumbai.jpg" alt="" width="650" height="350" border="0"></a></li>
+              <li><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Sydenham/simsree.jpg" alt="" width="650" height="350" border="0"></a></li>
+              <li><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Sydenham/sydenham_college_logo.jpg" alt="" width="650" height="350" border="0"></a></li>
+              <li><a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Sydenham/sydenhyamcollege_photo.jpg" alt="" width="650" height="350" border="0"></a></li>
             </ul>
           </div>
           <!--<div class="cap-area">
@@ -479,7 +479,7 @@ input.universal-txt-field {
               <li id="4" class=""></li>
             </ul>
           </div>
-          <div class="shed"><img src="http://media2.intoday.in/indiatoday/images/ipl-images/Top_chunk.png" width="618" height="30" alt=""></div>
+          <div class="shed"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/Top_chunk.png" width="618" height="30" alt=""></div>
         </div>
         <div style="background:white; padding:5px; margin-bottom:10px;">
           <h2 style="margin:5px 0;">Course Offered</h2>
@@ -543,7 +543,7 @@ SIMSREE in continuation with the Sydenham Education tradition was founded in 198
 </div>
 <li>RECENT RANKINGS</li>
 <div id="sec">
-<img src="http://media2.intoday.in/indiatoday/images/edu/edu.jpg" style="margin-left:20px;"><br/>
+<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/edu/edu.jpg" style="margin-left:20px;"><br/>
 1.	CRISIL: A** at National Level. A*** at Maharashtra Level, for both PG and MMS<br/>
 2.	The Week: Overall Rank: 20th, West Zone Rank: 8th<br/>
 3.	B School Affaire and Dewang Mehta Awards: Best B-School for innovation in leadership<br/>
@@ -714,7 +714,7 @@ function validatesignin()
     }
 	
 	 else {
-	$("#applynow").html( "<img src='http://media2.intoday.in/indiatoday/images/Sydenham/ajax-loader.gif' alt='Please wait...'>");
+	$("#applynow").html( "<img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Sydenham/ajax-loader.gif' alt='Please wait...'>");
 	}
 var fullform2 = $('#userDetail2').serialize();		
 			$.ajax({
@@ -1111,17 +1111,17 @@ Female
           <div class="clr"></div>
           <div class="mag8in">
             <div class="imgbox">
-              <div> <a href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" mce_href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" target="_blank"><img src="http://media2.intoday.in/learntoday/images/Become-a-TV-News-Anchor_200_88.jpg" mce_src="http://media2.intoday.in/learntoday/images/Become-a-TV-News-Anchor_200_88.jpg" title="" alt="" class="imgrepeat" border="0"></a></div>
+              <div> <a href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" mce_href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/Become-a-TV-News-Anchor_200_88.jpg" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/Become-a-TV-News-Anchor_200_88.jpg" title="" alt="" class="imgrepeat" border="0"></a></div>
               <div class="clr"></div>
               <div class="caption"><a href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" mce_href="http://www.learntoday.in/course/tv-anchoring-certificate-course.html-4.html" target="_blank">AAj Tak TV anchoring one day workshop</a></div>
             </div>
             <div class="imgbox">
-              <div> <a href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" mce_href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" target="_blank"><img src="http://media2.intoday.in/learntoday/images/HTML5_200_88.jpg" mce_src="http://media2.intoday.in/learntoday/images/HTML5_200_88.jpg" title="" alt="" class="imgrepeat" border="0"> </a></div>
+              <div> <a href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" mce_href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/HTML5_200_88.jpg" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/HTML5_200_88.jpg" title="" alt="" class="imgrepeat" border="0"> </a></div>
               <div class="clr"></div>
               <div class="caption"><a href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" mce_href="http://www.learntoday.in/course/Become-a-HTML5-Developer-Programmer-13.html" target="_blank">Become a HTML5 Developer</a></div>
             </div>
             <div class="imgbox">
-              <div> <a href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" mce_href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" target="_blank"><img src="http://media2.intoday.in/learntoday/images/thumb_200_88.jpg" mce_src="http://media2.intoday.in/learntoday/images/thumb_200_88.jpg" title="" alt="" class="imgrepeat" border="0"></a></div>
+              <div> <a href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" mce_href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/thumb_200_88.jpg" mce_src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/learntoday/images/thumb_200_88.jpg" title="" alt="" class="imgrepeat" border="0"></a></div>
               <div class="clr"></div>
               <div class="caption"><a href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" mce_href="http://www.learntoday.in/course/SEO-Writing-Online-Web-Content-Writing-6.html" target="_blank">Become an online Content Writer</a></div>
             </div>
@@ -1140,7 +1140,7 @@ Female
           <div class="clr"></div>
           <div class="mag8in">
             <div class="subhead"><b>IIM-Bangalore</b></div>
-            <div class="kiker"><img class="img8marg" src="http://media2.intoday.in/indiatoday/images/stories/2012june/iim-144_060512040323.jpg" mce_src="images/dummy.jpg" align="left" border="0"><b>Rank 1:</b> IIM-B is one of the most important centres of management research with a huge knowledge database. </div>
+            <div class="kiker"><img class="img8marg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012june/iim-144_060512040323.jpg" mce_src="images/dummy.jpg" align="left" border="0"><b>Rank 1:</b> IIM-B is one of the most important centres of management research with a huge knowledge database. </div>
             <div class="clr"></div>
             <div class="prev5marg">
               <div class="yer"><b>Previous Years:</b></div>
@@ -1172,7 +1172,7 @@ Female
           <div class="clr"></div>
           <div class="mag8in">
             <div class="subhead"><b>Science: St. Stephen's College</b></div>
-            <div class="kiker"><img class="img8marg" src="http://media2.intoday.in/indiatoday/images/stories/2012june/stephens-144_060512040333.jpg" mce_src="images/dummy.jpg" align="left" border="0">With the establishment of DU in 1922, it became one of its three original constituent colleges. </div>
+            <div class="kiker"><img class="img8marg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012june/stephens-144_060512040333.jpg" mce_src="images/dummy.jpg" align="left" border="0">With the establishment of DU in 1922, it became one of its three original constituent colleges. </div>
             <div class="clr"></div>
             <div class="col-txtcolor subhead"><a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Arts&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Arts&amp;Y=2012" target="_blank">Arts</a> <span class="seprator">|</span> <a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Commerce&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Commerce&amp;Y=2012" target="_blank">Commerce</a> <span class="seprator">|</span> <a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Science&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Science&amp;Y=2012" target="_blank">Science</a> <span class="seprator">|</span> <a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Law&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Law&amp;Y=2012" target="_blank">Law</a> <br>
               <a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Medicine&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Medicine&amp;Y=2012" target="_blank">Medicine</a> <span class="seprator">|</span> <a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Engineering&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Engineering&amp;Y=2012" target="_blank">Engineering</a></div>
@@ -1207,17 +1207,17 @@ Female
           <div class="clr"></div>
           <div class="mag8in">
             <div class="imgbox">
-              <div> <a href="http://indiatoday.intoday.in/video/india-today-lists-india-best-colleges-in-2013/1/280319.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/stories/best-colleges_88_061513012927.jpg" class="imgrepeat" alt="" title="" border="0"> <span class="must-watch-icon"></span></a></div>
+              <div> <a href="http://indiatoday.intoday.in/video/india-today-lists-india-best-colleges-in-2013/1/280319.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/best-colleges_88_061513012927.jpg" class="imgrepeat" alt="" title="" border="0"> <span class="must-watch-icon"></span></a></div>
               <div class="clr"></div>
               <div class="caption"><a href="http://indiatoday.intoday.in/video/india-today-lists-india-best-colleges-in-2013/1/280319.html">India Today lists India's best colleges in 2013</a></div>
             </div>
             <div class="imgbox">
-              <div> <a href="http://indiatoday.intoday.in/video/india-today-best-colleges-2013-st-stephens-prinicpal-thampu/1/280078.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/stories/valson_88_061413122637.jpg" class="imgrepeat" alt="" title="" border="0"> <span class="must-watch-icon"></span></a></div>
+              <div> <a href="http://indiatoday.intoday.in/video/india-today-best-colleges-2013-st-stephens-prinicpal-thampu/1/280078.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/valson_88_061413122637.jpg" class="imgrepeat" alt="" title="" border="0"> <span class="must-watch-icon"></span></a></div>
               <div class="clr"></div>
               <div class="caption"><a href="http://indiatoday.intoday.in/video/india-today-best-colleges-2013-st-stephens-prinicpal-thampu/1/280078.html">We take pride in our study culture, says Principal Thampu</a></div>
             </div>
             <div class="imgbox">
-              <div> <a href="http://indiatoday.intoday.in/video/india-today-best-colleges-2013-visva-bharati/1/280090.html" target="_blank"><img src="http://media2.intoday.in/indiatoday/images/stories/visva-bharati_3_88_061413010035.jpg" class="imgrepeat" alt="" title="" border="0"> <span class="must-watch-icon"></span></a></div>
+              <div> <a href="http://indiatoday.intoday.in/video/india-today-best-colleges-2013-visva-bharati/1/280090.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/visva-bharati_3_88_061413010035.jpg" class="imgrepeat" alt="" title="" border="0"> <span class="must-watch-icon"></span></a></div>
               <div class="clr"></div>
               <div class="caption"><a href="http://indiatoday.intoday.in/video/india-today-best-colleges-2013-visva-bharati/1/280090.html">Environment at Visva-Bharati is unique and close to nature, say students</a></div>
             </div>
@@ -1234,7 +1234,7 @@ Female
   <footer>
     <div style="margin-bottom:10px;" align="center"> </div>
     <div id="footer">
-      <iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"></iframe>
+      <iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/common_it_footer.html"></iframe>
       <div class="clear"></div>
       <div class="clear"></div>
     </div>

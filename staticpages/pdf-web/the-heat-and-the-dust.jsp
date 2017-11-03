@@ -356,7 +356,7 @@ var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_wid
 <div class="left-column">
 		<div class="article firstzone_lefttop">
 			<div class="main_heading"><a class="lead" target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/2014/12-31-1979-Mrs-Gandhi-Style-And-Stamina.pdf">1979: Indira's Itinerary</a></div>
-      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/2014/12-31-1979-Mrs-Gandhi-Style-And-Stamina.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/2014/12-31-1979-Mrs-Gandhi-Style-And-Stamina-1.jpg" /></a>
+      <a target="_blank" href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/2014/12-31-1979-Mrs-Gandhi-Style-And-Stamina.pdf"><img border="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/2014/4-30-1980-Samba-Spy-Case-Nagging-Doubts.jpg" /></a>
       <div class="clear"></div>
 
 	  </div>

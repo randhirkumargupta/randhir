@@ -358,7 +358,7 @@ height: 200px;
      <li><a href="/pledge/index.jsp">HOME</a></li>
            <li><a href="/pledge/letter-from-the-editor.jsp">Letter from the Editor</a></li>
       <li><a href="/pledge/programme.jsp">PROGRAMME</a></li>
-      <li><a href="/gallery/rani-mukerji-at-i-am-shakti-launch-event/1/12561.html">PHOTOS</a></li>
+      <li><a href="http://indiatoday.intoday.in/gallery/rani-mukerji-at-i-am-shakti-launch-event/1/12561.html">PHOTOS</a></li>
         <li><a href="/videolist/i-am-shakti/1/914.html">VIDEOS</a></li>
         <!-- <li><a href="#">BLOGS</a></li>-->
           <li><a href="/pledge/sponsors.jsp">SPONSORS</a></li>

@@ -231,23 +231,23 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
    	<h2><a href="http://indiatoday.intoday.in/gallerylist/cannes-film-festival-2013/1/104.html">Photos</a></h2>
      	
      	<div class='img fl'>
-				<div class="caption f_cap">Cannes 2013 Redux: And the Palm de Hawww! goes to.....This year's worst-dressed celebs <a href="/gallery/cannes-2013-worst-dressed-celebs/1/9445.html">see</a></div>
-        		<a href="/gallery/cannes-2013-worst-dressed-celebs/1/9445.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300x350_052813051810.jpg" width="300" height="350" border="0"/></a> 
+				<div class="caption f_cap">Cannes 2013 Redux: And the Palm de Hawww! goes to.....This year's worst-dressed celebs <a href="http://indiatoday.intoday.in/gallery/cannes-2013-worst-dressed-celebs/1/9445.html">see</a></div>
+        		<a href="http://indiatoday.intoday.in/gallery/cannes-2013-worst-dressed-celebs/1/9445.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300x350_052813051810.jpg" width="300" height="350" border="0"/></a> 
 				<div class="icon"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon.png" width="39" height="37" alt="" /></div>
 		</div>
 		<div class='img fr'>
-				<div class="caption f_cap">Cannes 2013: A recap <a href="/gallery/cannes-film-festival-2013-wrap-up/1/9440.html">see</a></div>
-        		<a href="/gallery/cannes-film-festival-2013-wrap-up/1/9440.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/vidya-200x350_052813115017.jpg" width="300" height="350" border="0"/></a> 
+				<div class="caption f_cap">Cannes 2013: A recap <a href="http://indiatoday.intoday.in/gallery/cannes-film-festival-2013-wrap-up/1/9440.html">see</a></div>
+        		<a href="http://indiatoday.intoday.in/gallery/cannes-film-festival-2013-wrap-up/1/9440.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/vidya-200x350_052813115017.jpg" width="300" height="350" border="0"/></a> 
 				<div class="icon"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon.png" width="39" height="37" alt="" /></div>
 		</div>
 		<div class='img fl'>
-				<div class="caption f_cap">Bold and beautiful at Cannes 2013 <a href="/gallery/bold-and-beautiful-at-cannes-2013/1/9437.html">see</a></div>
-        		<a href="/gallery/bold-and-beautiful-at-cannes-2013/1/9437.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/2752013-md-hr-18-4_300x350_052713054107.jpg" width="300" height="350" border="0"/></a> 
+				<div class="caption f_cap">Bold and beautiful at Cannes 2013 <a href="http://indiatoday.intoday.in/gallery/bold-and-beautiful-at-cannes-2013/1/9437.html">see</a></div>
+        		<a href="http://indiatoday.intoday.in/gallery/bold-and-beautiful-at-cannes-2013/1/9437.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/2752013-md-hr-18-4_300x350_052713054107.jpg" width="300" height="350" border="0"/></a> 
 				<div class="icon"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon.png" width="39" height="37" alt="" /></div>
 		</div>
 		<div class='img fr'>
-				<div class="caption f_cap">Cannes 2013: Hits and misses of Aishwarya's looks <a href="/gallery/cannes-2013-ash-returns-with-a-bang/1/9418.html">see</a></div>
-        		<a href="/gallery/cannes-2013-ash-returns-with-a-bang/1/9418.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ash-col_300x350_052413012723.jpg" width="300" height="350" border="0"/></a> 
+				<div class="caption f_cap">Cannes 2013: Hits and misses of Aishwarya's looks <a href="http://indiatoday.intoday.in/gallery/cannes-2013-ash-returns-with-a-bang/1/9418.html">see</a></div>
+        		<a href="http://indiatoday.intoday.in/gallery/cannes-2013-ash-returns-with-a-bang/1/9418.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ash-col_300x350_052413012723.jpg" width="300" height="350" border="0"/></a> 
 				<div class="icon"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon.png" width="39" height="37" alt="" /></div>
 		</div>
 		

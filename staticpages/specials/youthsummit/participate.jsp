@@ -18,7 +18,7 @@
     <!--[if IE]>
       <script src="http://indiatoday.intoday.in/js/html5.js"></script>
     <![endif]-->
-<link rel="shortcut icon" href="http://indiatoday.intoday.in/specials/youthsummit/images/MR_favicon1.ico" />
+<link rel="shortcut icon" href="/specials/youthsummit/images/MR_favicon1.ico" />
 <link type="text/css" rel="stylesheet" href="specials/youthsummit/css/session.css">
 <link type="text/css" rel="stylesheet" href="specials/youthsummit/css/youthsummit2011.css">
 <script src="http://indiatoday.intoday.in/js/sitejs.js" type="text/javascript"></script>
@@ -31,30 +31,30 @@
             <img src="http://indiatoday.intoday.in/youthsummit2012/images/ita.jpg" height="83" border="0"/>
         </div>
         <div id="banner">
-            <a href="http://indiatoday.intoday.in/specials/youthsummit/"><img src="http://indiatoday.intoday.in/specials/youthsummit/images/logo.jpg" alt="Youth Smmit" width="155" height="130" border="0" align="left" title="India Today Youth Summit 2011 - Mind Rocks"/></a>
+            <a href="/specials/youthsummit/"><img src="http://indiatoday.intoday.in/specials/youthsummit/images/logo.jpg" alt="Youth Smmit" width="155" height="130" border="0" align="left" title="India Today Youth Summit 2011 - Mind Rocks"/></a>
             <img src="http://indiatoday.intoday.in/specials/youthsummit/images/top-banner-trans-black.gif" alt="Youth Smmit" width="600" height="110" border="0" align="absmiddle" title="India Today Youth Summit 2011 - Mind Rocks" class="topbanner"/>
 
         </div>
 		<ul id="navigation">
-        	 <li ><a href="http://indiatoday.intoday.in/specials/youthsummit/index.jsp">Home</a></li>
+        	 <li ><a href="/specials/youthsummit/index.jsp">Home</a></li>
              <li class="dividernav">&nbsp;</li>
-             <li ><a href="http://indiatoday.intoday.in/specials/youthsummit/themes.jsp">Theme</a></li>
+             <li ><a href="/specials/youthsummit/themes.jsp">Theme</a></li>
              <li class="dividernav">&nbsp;</li>
-             <li ><a href="http://indiatoday.intoday.in/specials/youthsummit/concept.jsp">Concept</a></li>
+             <li ><a href="/specials/youthsummit/concept.jsp">Concept</a></li>
              <li class="dividernav">&nbsp;</li>
-             <li ><a href="http://indiatoday.intoday.in/specials/youthsummit/programme.jsp">Programme</a></li>
+             <li ><a href="/specials/youthsummit/programme.jsp">Programme</a></li>
              <li class="dividernav">&nbsp;</li>
-             <li ><a href="http://indiatoday.intoday.in/specials/youthsummit/sponsors.jsp">Sponsors</a></li>
+             <li ><a href="/specials/youthsummit/sponsors.jsp">Sponsors</a></li>
              <li class="dividernav">&nbsp;</li>
-             <li ><a href="http://indiatoday.intoday.in/specials/youthsummit/speakers.jsp">Speakers</a></li>
+             <li ><a href="/specials/youthsummit/speakers.jsp">Speakers</a></li>
              <li class="dividernav">&nbsp;</li>
              <li ><a href="http://specials.intoday.in/survey/mindrocks/moveit.jsp?source=fbook">Winners</a></li>
              <li class="dividernav">&nbsp;</li>
-             <li ><a href="http://indiatoday.intoday.in/specials/youthsummit/downloads.jsp">Downloads</a></li>
+             <li ><a href="/specials/youthsummit/downloads.jsp">Downloads</a></li>
              <li class="dividernav">&nbsp;</li>
-             <li ><a href="http://indiatoday.intoday.in/specials/youthsummit/Contact.jsp">Contact</a></li>
+             <li ><a href="/specials/youthsummit/Contact.jsp">Contact</a></li>
              <li class="dividernav">&nbsp;</li>
-             <li><a href="http://indiatoday.intoday.in/specials/youthsummit/chennai/">Youth Summit Chennai</a></li>
+             <li><a href="/specials/youthsummit/chennai/">Youth Summit Chennai</a></li>
         </ul>
 
 		<!-- Begin comScore Tag -->

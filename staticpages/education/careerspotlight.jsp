@@ -104,7 +104,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/logo.png" usemap="#Map" style="margin-top:15px;">
             <map name="Map">
               <area shape="rect" coords="35,2,187,31" href="http://indiatoday.intoday.in/">
-              <area shape="rect" coords="1,34,219,78" href="http://indiatoday.intoday.in/education/">
+              <area shape="rect" coords="1,34,219,78" href="/education">
             </map>
             
 		
@@ -150,15 +150,15 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
 		<div class="lft homeimg" style="height:31px;"><a href="http://indiatoday.intoday.in/education/" title="Home"><img src="http://indiatoday.intoday.in/education/images/home-icon.png" width="40" height="38" border="0"></a></div>
         <div id="topNav">
         	<ul>
-                <li style="padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/category/news/1/526.html" title="News">News</a></li>
-                <li style="padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/category/results-notification/1/527.html" title="Results Notification">Notification</a></li>				
-				<li style="position: relative;padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/quiz/" title="Quiz">Quiz</a></li>                
-                <li style="position: relative;padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/videos" title="Education Videos" style="color:#F00 !important;"><strong>Videos</strong></a>
+                <li style="padding-left:6px;padding-right:6px;"><a href="/education/526.html" title="News">News</a></li>
+                <li style="padding-left:6px;padding-right:6px;"><a href="/education/527.html" title="Results Notification">Notification</a></li>				
+				<li style="position: relative;padding-left:6px;padding-right:6px;"><a href="/education/quiz/" title="Quiz">Quiz</a></li>                
+                <li style="position: relative;padding-left:6px;padding-right:6px;"><a href="/education/videos" title="Education Videos" style="color:#F00 !important;"><strong>Videos</strong></a>
                 	
               	</li>
                 <li style="position: relative;padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/careermatch/" title="Career Match">Career Match</a></li>              	
-				<li style="padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/category/government-jobs/1/734.html" title="Government Jobs">Government Jobs</a></li>                      
-              	<li class="last" style="padding-left:6px;padding-right:6px;"><a href="http://indiatoday.intoday.in/education/categorylist/current-affairs/1/908.html" title="Current Affairs">Current Affairs</a></li>
+				<li style="padding-left:6px;padding-right:6px;"><a href="/education/734.html" title="Government Jobs">Government Jobs</a></li>                      
+              	<li class="last" style="padding-left:6px;padding-right:6px;"><a href="/education/908.html" title="Current Affairs">Current Affairs</a></li>
 				<li><a href="http://www.learntoday.in" title="Online Courses" target="_blank">Online Courses</a></li>   
           	</ul>
             <div class="search">
@@ -271,7 +271,7 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
 </style>
 
 
-<div class='boxcont'><div class='topheader topheader1'><h2><a href="http://indiatoday.intoday.in/education/category/news/1/526.html">News</a></h2></div><div class='topheader-arrow topheader-arrow1'>&nbsp;</div><div class='clr' style='height:2px;'></div><div class='mag8in'><div class='clr news'><ul><li><a href="http://indiatoday.intoday.in/education/story/top-50-schools-in-india/1/1064767.html">Fortune India: This school has been identified as one of top 50 institutes in India</a> <span class="upd-time">&nbsp;updated 17:47 ist</span></li><li><a href="http://indiatoday.intoday.in/education/story/ibps-office-assistant-prelims-result-2017/1/1064715.html">IBPS Office Assistant Prelims Result 2017: Declared at ibps.in</a> <span class="upd-time">&nbsp;updated 17:34 ist</span></li><li><a href="http://indiatoday.intoday.in/education/story/india-international-science-festival/1/1064610.html">India International Science Festival 2017 to kick off at Chennai on October 13</a> <span class="upd-time">&nbsp;updated 16:53 ist</span></li><li><a href="http://indiatoday.intoday.in/education/story/aadhaar-card/1/1064548.html">Aadhaar enrolment drive launched for 14 lakh J&amp;K students</a> <span class="upd-time">&nbsp;updated 14:10 ist</span></li><li><a href="http://indiatoday.intoday.in/education/story/muslim-from-amu-hindu-from-bhu-should-be-dropped/1/1064531.html">'Muslim' from AMU, 'Hindu' from BHU should be dropped, says UGC </a> <span class="upd-time">&nbsp;updated 16:12 ist</span></li></ul></div><div class='more'><a href="http://indiatoday.intoday.in/education/category/news/1/526.html">more...</a></div></div><div class='clr'></div></div>
+<div class='boxcont'><div class='topheader topheader1'><h2><a href="/education/526.html">News</a></h2></div><div class='topheader-arrow topheader-arrow1'>&nbsp;</div><div class='clr' style='height:2px;'></div><div class='mag8in'><div class='clr news'><ul><li><a href="http://indiatoday.intoday.in/education/story/top-50-schools-in-india/1/1064767.html">Fortune India: This school has been identified as one of top 50 institutes in India</a> <span class="upd-time">&nbsp;updated 17:47 ist</span></li><li><a href="http://indiatoday.intoday.in/education/story/ibps-office-assistant-prelims-result-2017/1/1064715.html">IBPS Office Assistant Prelims Result 2017: Declared at ibps.in</a> <span class="upd-time">&nbsp;updated 17:34 ist</span></li><li><a href="http://indiatoday.intoday.in/education/story/india-international-science-festival/1/1064610.html">India International Science Festival 2017 to kick off at Chennai on October 13</a> <span class="upd-time">&nbsp;updated 16:53 ist</span></li><li><a href="http://indiatoday.intoday.in/education/story/aadhaar-card/1/1064548.html">Aadhaar enrolment drive launched for 14 lakh J&amp;K students</a> <span class="upd-time">&nbsp;updated 14:10 ist</span></li><li><a href="http://indiatoday.intoday.in/education/story/muslim-from-amu-hindu-from-bhu-should-be-dropped/1/1064531.html">'Muslim' from AMU, 'Hindu' from BHU should be dropped, says UGC </a> <span class="upd-time">&nbsp;updated 16:12 ist</span></li></ul></div><div class='more'><a href="/education/526.html">more...</a></div></div><div class='clr'></div></div>
 
                     </div>
                 </div>
