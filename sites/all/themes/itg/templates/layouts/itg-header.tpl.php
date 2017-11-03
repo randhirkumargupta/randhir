@@ -1,6 +1,9 @@
 <?php
 global $base_url, $user;
-$scheme = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://";
+if(!empty(variable_get('itg_front_url'))) {
+   $parse_scheme = parse_url(variable_get('itg_front_url'));
+   $scheme = $parse_scheme['scheme']."://";
+}
 if (!empty($data['itg_main_manu_header'])) {
   foreach ($data['itg_main_manu_header'] as $key => $val) {
     if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
