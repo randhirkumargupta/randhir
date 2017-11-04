@@ -85,12 +85,10 @@ function itg_seo_node_data($node) {
     }
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-    $largimage = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']); //explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+      $largimage = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']); //explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    } else {
+      $largimage = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
-    // $largimage = '';
-    // if(isset($imgarray[1])) {
-    // $largimage = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
-    // }
 
     $markup = array(
         '#type' => 'markup',
