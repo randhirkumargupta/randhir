@@ -42,7 +42,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
       </div>
     </li>
     <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" title="Live Tv" /></a></li> 
-    <li> 
+    <li class="user-menu"> 
       <?php
         if ($_GET['q'] != 'user') {
           $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
