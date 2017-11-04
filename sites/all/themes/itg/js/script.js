@@ -950,7 +950,7 @@ var menuBuilder = function () {
             jQuery(this).removeClass('hide');
         } else {
             if (jQuery('.all-menu').length === 0) {
-                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)" onclick="ga("send", "event", "ParentMenu", "click","1", 1, {"nonInteraction": 1});return true;"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
+                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)" onclick="ga(\'send\', \'event\', \'ParentMenu\', \'click\',\'1\', 1, {\'nonInteraction\': 1});return true;"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
                 clickHere = 1;
             }
             if (jQuery('#newlist').length === 0) {
