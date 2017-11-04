@@ -672,7 +672,7 @@ function itg_akamai_cache_akamai_other($form, &$form_state) {
   );
 
   $form['markup_data'] = [
-    '#markup' => t('Enter Page Name, suffix URL and TTL, you can enter 0 for no-cache.'),
+    '#markup' => t('Enter Page Name, suffix URL and TTL, you can enter 0 for no-store.'),
   ];
 
   $form['field_container'] = [
