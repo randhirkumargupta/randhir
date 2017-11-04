@@ -55,7 +55,7 @@
                     </div>
                     <div class="discription">
                         <?php if (!empty($row['description'])) : ?>
-                          <?php print __html_output_with_tags($row['description']); ?>
+                          <?php print html_entity_decode($row['description']); ?>
                         <?php endif; ?>
 
                     </div>
