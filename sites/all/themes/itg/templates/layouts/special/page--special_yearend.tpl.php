@@ -9,19 +9,16 @@
 //$preview = $widget_data['preview'];
 //p($widget_data);
 ?>
-
 <?php
 global $theme;
 $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
-
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
 ?>
-
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>
   <div id="page">
@@ -34,7 +31,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
             </div>
   <?php endif; ?>         
         </div>
-
   <?php if ($site_name || $site_slogan): ?>
           <div class="header__name-and-slogan" id="name-and-slogan">
           <?php if ($site_name): ?>
@@ -42,7 +38,6 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                 <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="header__site-link" rel="home"><span><?php print $site_name; ?></span></a>
               </h1>
     <?php endif; ?>
-
             <?php if ($site_slogan): ?>
               <div class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></div>
             <?php endif; ?>
@@ -68,21 +63,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         <?php endif; ?>
         -->
         <?php print render($page['header']); ?>
-
       </section>
-
     </header>
   <?php
   // Render the sidebars to see if there's anything in them.
   $sidebar_first = render($page['sidebar_first']);
   $sidebar_second = render($page['sidebar_second']);
-
   $cls = 'col-md-12';
   if ($sidebar_first || $sidebar_second):
     $cls = 'col-md-9';
   endif;
   ?>
-
     <main id="main" class="container pos-rel">
   <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
@@ -103,10 +94,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         <?php if ($action_links): ?>
           <ul class="action-links"><?php print render($action_links); ?></ul>
         <?php endif; ?>       
-
       <?php } ?>
       <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
-
 <?php
 $itg_class = 'itg-admin';
 if ($theme != 'itgadmin') {
@@ -126,24 +115,22 @@ if ($theme != 'itgadmin') {
           <div class="col-md-8 col-sm-12 col-sx-12 left-side">
             <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Yearender featured'); ?></strong> )</div>
             <div class="itg-643">
-
               <div class="itg-widget">
                 <div class="droppable <?php print $gray_bg_layout; ?>">
                   <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">                                  
                     <div class="data-holder" id="itg-block-1">
-<?php
-if (isset($widget_data['itg-block-1']['widget'])) {
-  print $widget_data['itg-block-1']['widget'];
-}
-else {
-  print '<div class="widget-placeholder"><span>' . t('Yearender featured') . '</span></div>';
-}
-?>
+                        <?php
+                        if (isset($widget_data['itg-block-1']['widget'])) {
+                          print $widget_data['itg-block-1']['widget'];
+                        }
+                        else {
+                          print '<div class="widget-placeholder"><span>' . t('Yearender featured') . '</span></div>';
+                        }
+                        ?>
                     </div>
                   </div>             
                 </div>               
               </div>  
-
             </div> 
             <div class="itg-1550 mt-50">
               <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Yearender Galleries'); ?></strong> )</div>
@@ -166,7 +153,6 @@ else {
                      <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-2"><i class="fa fa-times"></i></a></span>
                       </div>
 <?php } ?>  
-
                     <div class="data-holder" id="itg-block-2">
 <?php
 if (isset($widget_data['itg-block-2']['widget'])) {
@@ -180,9 +166,6 @@ else {
                   </div>             
                 </div>               
               </div>  
-
-
-
             </div> 
           </div>    
           <div class="col-md-4 col-sm-12 col-sx-12 right-side">    
@@ -199,7 +182,6 @@ else {
                   </div>
                 </div>
               </div>
-
             </div> 
             <div class="itg-785 mt-50">
               <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Top News'); ?></strong> )</div>
@@ -218,11 +200,9 @@ else {
                           <?php } ?>
                           <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-3']['block_title']; ?>" name="itg-block-3" class="block_title_id" placeholder="Enter Title" />
                         </div>
-                        <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                     
+                        <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>                     
                       <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-3"><i class="fa fa-times"></i></a></span></div>
                     <?php } ?>  
-
                     <div class="data-holder" id="itg-block-3">
                       <?php
                       if (isset($widget_data['itg-block-3']['widget'])) {
@@ -236,8 +216,6 @@ else {
                   </div>             
                 </div>               
               </div>  
-
-
             </div> 
             <div class="mt-50">
               <div class="widget-help-text"><?php print t('Non Draggable'); ?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
@@ -252,7 +230,6 @@ else {
                 </div>
               </div>
             </div> 
-
             <div class="itg-628 mt-50">
               <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Top videos'); ?></strong> )</div>
               <div class="itg-widget">
@@ -274,7 +251,6 @@ else {
                       <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-4"><i class="fa fa-times"></i></a></span>
                       </div>
                     <?php } ?>  
-
                     <div class="data-holder" id="itg-block-4">
                       <?php
                       if (isset($widget_data['itg-block-4']['widget'])) {
@@ -291,24 +267,14 @@ else {
             </div>                 
           </div>    
         </div>
-
         <!--End of Common add more section-->  
-
-
       </div>
-
-
-
-
-
       <!--------------------------------Code for Front tpl---------------------------------------->
       <?php if ($theme != 'itgadmin') { ?>
   <?php //print $feed_icons;   ?>
       </section>
-
   <?php if (false) { ?> 
         <div id="navigation">
-
             <?php if ($main_menu): ?>
             <nav id="main-menu" role="navigation" tabindex="-1">
               <?php
@@ -330,22 +296,13 @@ else {
               ?>
             </nav>
           <?php endif; ?>
-
     <?php print render($page['navigation']); ?>
-
         </div>
   <?php } ?>
-
     </main>
-
-
   <?php print render($page['footer']); ?>
-
-
   </div>
-
   <?php print render($page['bottom']); ?>
-
 <?php } ?>
 <?php if ($theme == 'itgadmin') { ?>
   <div class="itg-ajax-loader">

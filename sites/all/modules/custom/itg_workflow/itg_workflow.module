@@ -951,26 +951,6 @@ function itg_workflow_mail($key, &$message, $params) {
 }
 
 /**
- * Get email by roll
- * @param string $key
- * @param string $message
- * @param array $params
- */
-function get_email_by_roll($id) {
-  $query = db_select('users', 'u');
-  $query->fields('u', array('mail'));
-  $query->join('users_roles', 'ur', 'ur.uid = u.uid');
-  $query->condition('ur.rid', $id, IN);
-  $query->condition('u.status', 1);
-  $result = $query->execute();
-
-  foreach ($result as $val) {
-    $value[] = $val->mail;
-  }
-  return $value;
-}
-
-/**
  * Implements hook_views_api().
  *
  * This tells drupal that there is Views integration file named

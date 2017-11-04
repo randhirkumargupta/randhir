@@ -492,3 +492,18 @@ function itg_js_alter(&$javascript) {
   $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
 }
+
+function itg_image($variables) {
+  $attributes = $variables['attributes'];
+  // unset done for seo validation.
+  unset($attributes['typeof']);
+  $attributes['src'] = file_create_url($variables['path']);
+
+  foreach (array('width', 'height', 'alt', 'title') as $key) {
+
+    if (isset($variables[$key])) {
+      $attributes[$key] = $variables[$key];
+    }
+  }
+  return '<img' . drupal_attributes($attributes) . ' />';
+}

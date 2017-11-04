@@ -12,7 +12,11 @@
  */
 function itg_personalization_edit_profile_form($form, &$form_state) {
   global $user;
-  $scheme = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://";
+  
+  if(!empty(variable_get('itg_front_url'))) {
+   $parse_scheme = parse_url(variable_get('itg_front_url'));
+   $scheme = $parse_scheme['scheme']."://";
+  }
   $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   //prepare url for change mobile and email
   $edit_email_url = $edit_email_link= $edit_mobile_url = $edit_mobile_link = '';
