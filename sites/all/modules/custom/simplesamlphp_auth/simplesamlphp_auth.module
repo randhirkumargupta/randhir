@@ -224,14 +224,15 @@ function simplesamlphp_auth_init() {
   global $_simplesamlphp_auth_saml_config;
   global $_simplesamlphp_auth_saml_version;
   global $myval;
-
+  
+  $front_login = TRUE;
   if (!empty(variable_get('itg_backend_url'))) {
     $backend_variable = variable_get('itg_backend_url');
     $backend_var_url = parse_url($backend_variable);
     $base_uri_host = parse_url($base_url);
 
     if ($backend_var_url['host'] == $base_uri_host['host']) {
-      return;
+      $front_login  = FALSE;
     }
   }
 
@@ -283,7 +284,7 @@ function simplesamlphp_auth_init() {
   //pr($_simplesamlphp_auth_saml_attributes);
   if ($user->uid == 0) {
     // User is not logged in to Drupal.
-    if ($_simplesamlphp_auth_as->isAuthenticated()) {
+    if ($_simplesamlphp_auth_as->isAuthenticated() && $front_login) {
       // User is logged in - SimpleSAMLphp (but not Drupal).
       // Get unique identifier from saml attributes.
       $authname = _simplesamlphp_auth_get_authname();
