@@ -156,9 +156,28 @@ function generateStoryDeatilList($id) {
     $data_array['desc_withhtml'] = "$body_with_html";
     $data_array['tag'] = $tag;
     $data_array['highlight'] = $heighligth;
-    $data_array['listicles'] = $listicle_data;
-    $data_array['factoids'] = $factoid_data;
-    $data_array['buzz'] = $buzz_data;
+    if(count($listicle_data['data'])){
+        $data_array['listicles'] = $listicle_data;
+    }
+    else{
+        $listicle_data = array();
+        $data_array['listicles'] = $listicle_data;
+    }
+    if(count($factoid_data['data'])){
+        $data_array['factoids'] = $factoid_data;
+    }
+    else{
+        $factoid_data = array();
+        $data_array['factoids'] = $factoid_data;
+    }
+    if($buzz_temp_flag){
+        $data_array['buzz'] = $buzz_data;
+    }
+    else{
+        $buzz_data = array();
+        $data_array['buzz'] = $buzz_data;
+    }
+    
     if($tech_photo_gallery){
         $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
     }
