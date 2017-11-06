@@ -115,7 +115,7 @@ function get_article_item_rss($section_id, $term_name, $section_url) {
         $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
         date_default_timezone_set("GMT");
         $created_date = date("D, d M Y H:i:s e", $created);
-        $output .= '<item><title><![CDATA[' . $title . ']]></title><link><![CDATA[' . $url . '?utm_source=rss]]></link><description><![CDATA[<a href="' . $url . '?utm_source=rss"><img src="' . $img_url . '" align="left" hspace="2" height="180" width="305" alt="" border="0"/></a>' . $field_story_kicker_text_value . ']]></description><pubDate>' . $created_date . ' GMT</pubDate></item>';
+        $output .= '<item><title><![CDATA[' . $title . ']]></title><link><![CDATA[' . $url . '/?utm_source=rss]]></link><description><![CDATA[<a href="' . $url . '/?utm_source=rss"><img src="' . $img_url . '" align="left" hspace="2" height="180" width="305" alt="" border="0"/></a>' . $field_story_kicker_text_value . ']]></description><pubDate>' . $created_date . ' GMT</pubDate></item>';
     }
     return $output;
 }

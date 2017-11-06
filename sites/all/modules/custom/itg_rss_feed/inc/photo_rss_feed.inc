@@ -113,9 +113,9 @@ function get_photo_item_rss($section_id, $term_name, $section_url) {
         
         $output .= '<item>';
         $output .= '<title><![CDATA[' . $title . ']]></title>';
-        $output .= '<link><![CDATA[' . $url . ']]></link>';
-        $output .= '<description><![CDATA[ <a href="' . $url . '"><img src="' . $img_url . '" align="left" hspace="2" height="82" width="107" alt="" border="0"/></a>]]>'.$title.'</description>';
-        $output .= '<media:description type="html"><![CDATA[ <a href="' . $url . '"><img src="' . $img_url . '" /></a><br/>]]></media:description>';
+        $output .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>';
+        $output .= '<description><![CDATA[ <a href="' . $url . '?utm_source=rss"><img src="' . $img_url . '" align="left" hspace="2" height="82" width="107" alt="" border="0"/></a>]]>'.$title.'</description>';
+        $output .= '<media:description type="html"><![CDATA[ <a href="' . $url . '?utm_source=rss"><img src="' . $img_url . '" /></a><br/>]]></media:description>';
         $output .= '<media:thumbnail url="' . $img_url . '" />';
         $output .= '<media:content medium="image" type="'.$image_mime_type.'" url="'.$img_url.'" />';
         $output .= '<media:copyright>© '.$copyright_yr.' India Today Group. All Rights Reserved.</media:copyright>';

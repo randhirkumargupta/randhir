@@ -82,7 +82,7 @@ function get_home_top_article_item_rss() {
         date_default_timezone_set("GMT");
         $created_date = date("D, d M Y H:i:s e", $created);
         $output .= '<item><title><![CDATA[' . $title . ']]></title>';
-        $output .= '<link><![CDATA[' . $url . ']]></link>';
+        $output .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>';
         $output .= '<description><![CDATA[' . $field_story_kicker_text_value . ']]></description>';
         $output .= '<pubDate>' . $created_date . ' GMT</pubDate>';
         $output .= '</item>';
