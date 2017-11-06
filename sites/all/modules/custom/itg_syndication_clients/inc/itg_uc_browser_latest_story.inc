@@ -42,7 +42,7 @@ function itg_uc_browser_feed_latest_story(){
     $tags = get_content_tags($value['nid']);
     $tagarr = array();
     foreach($tags as $tag){
-      $tagarr[] = ['name'];
+      $tagarr[] = $tag['name'];
     }
     $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
     $key_words = '';
