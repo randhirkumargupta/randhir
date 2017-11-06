@@ -926,7 +926,8 @@
         line-height: 30px;
         display: block;
         position: relative;
-        margin-top: 15px
+        margin-top: 15px;
+        float: right;
     }
     #block-itg-menu-manager-third-level-menu .select-menu:after {
         content: '';
@@ -947,7 +948,7 @@
         float: none;
         width: 95px;
         top: 45px;
-        left: 15px;
+        right: 15px;
         display: none
     }
     #block-itg-menu-manager-third-level-menu ul.third-level-menu li {
@@ -955,7 +956,7 @@
     }
     #block-itg-menu-manager-third-level-menu ul.third-level-menu li a {
         font-weight: 500;
-        font-size: 11px;
+        font-size: 10px;
         height: 30px;
         line-height: 30px;
         padding: 0 8px 0 8px
@@ -3682,7 +3683,7 @@
     #block-itg-layout-manager-header-block .main-nav .desktop-hide{width:20px; height:20px; position: relative; float: left; padding-left: 10px;}
     #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall{margin: 0 auto;width: 347px;}
     /* new main menu dropdown */
-    #block-itg-layout-manager-header-block .navigation{width:85%;border-right: 1px solid #ccc; background: #f9f9f9; box-shadow: 0 3px 3px #ccc; height: calc(100vh - 60px); position: absolute; z-index: 9999990;overflow-x: hidden; }
+    #block-itg-layout-manager-header-block .navigation{width:85%;border-right: 1px solid #ccc; background: #f9f9f9; box-shadow: 0 3px 3px #ccc; height: calc(90vh - 60px); position: absolute; z-index: 9999990;overflow-x: hidden; }
     #block-itg-layout-manager-header-block .navigation .container{height: 100%;overflow-x: hidden;overflow-y: scroll;}
 
     #block-itg-layout-manager-header-block .navigation .second-level-menu.menu li{border-top:1px solid #ccc;}

@@ -417,7 +417,7 @@ jQuery(document).ready(function () {
             el.closest('.search-icon-parent').find('.search-icon-default').show().next().hide();
         }
     });
-    jQuery('.search-icon-search').click(function () {
+    jQuery('.search-icon-search, .search-icon-default').click(function () {
         search_value = jQuery(this).parent().find('.search-text').val();
         if (search_value.length != 0) {
             nkeyword = search_value;
