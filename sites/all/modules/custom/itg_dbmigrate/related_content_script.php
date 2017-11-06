@@ -124,7 +124,7 @@ function check_updated_node_related($content_id) {
     $query = db_select('itg_not_update_related_content', 'sfuus');
     $query->fields('sfuus', array('xml_content_id'));
     $query->condition('xml_content_id', $content_id, '=');
-    $query->condition('c_type', 'related_check_duplicate_conclave_story', '=');
+    //$query->condition('c_type', 'related_check_duplicate_conclave_story', '=');
     $result = $query->execute()->fetchField();
     return $result;
 }
