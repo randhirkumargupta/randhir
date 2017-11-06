@@ -18,7 +18,8 @@ if (!empty($content)):
     $class_listicle = ' listicle-feedback';//buzz-feedback
   }
   // prepare url for sharing
-  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+  $scheme = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://";
+  $actual_link = $scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   $uri = base64_encode($actual_link);
   $short_url = shorten_url($actual_link, 'goo.gl');
   $fb_title = addslashes($node->title);
@@ -702,7 +703,7 @@ if (!empty($content)):
                     $expertDetailsImage = $base_url . '/sites/all/themes/itg/images/user-default-expert.jpg';
                   }
                   //}
-                  $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" /></div></div>';
+                  $expertDetails .= '<div class="right-side col-md-4 col-sm-4 col-xs-4"><img src="' . $expertDetailsImage . '" alt="" title="" /></div></div>';
                   if (!empty($node->field_story_expert_description)) {
                     $expertDetails .= '<h2>' . $node->field_story_expert_description['und'][0]['value'] . '</h2>';
                   }
@@ -1028,7 +1029,7 @@ if (!empty($content)):
             <div id="vuukle-emote"></div>
             <?php
               if (function_exists('taboola_view')) {
-                //taboola_view();
+                taboola_view();
               }
               if ($config_name == 'vukkul' && in_array('commentbox', $config)) {
                 if (!empty($node->field_story_comment_question['und'][0]['value'])) {
@@ -1039,7 +1040,7 @@ if (!empty($content)):
             <div id="vuukle_div"></div>
             <?php
             if (function_exists('vukkul_view')) {
-              //vukkul_view();
+              vukkul_view();
             }
             ?>
           </div>
@@ -1059,18 +1060,3 @@ if (!empty($content)):
       </div>            
     </div>
 <?php endif; ?>
-<?php
-$bylines = "";
- if(function_exists('_get_byline_from_nid_for_kindle')) {
-   $bylines = implode(",", _get_byline_from_nid_for_kindle($node->nid));
- }
-?>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)}
-  ,i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-795349-17', 'auto');
-  ga('set', 'dimension1', '<?php echo $bylines ?>');
-  ga('send', 'pageview');
-</script>

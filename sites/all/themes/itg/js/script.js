@@ -386,7 +386,7 @@ jQuery(document).ready(function () {
 
 // code to copy serach text into search page
 jQuery(document).ready(function () {
-    jQuery(".tab-buttons span").on('click' , function() {
+    jQuery(".tab-buttons span, .video_landing_menu a").on('click' , function() {
         comscoreBeacon();
     })
     var elmt = jQuery('.search-text');
@@ -950,7 +950,7 @@ var menuBuilder = function () {
             jQuery(this).removeClass('hide');
         } else {
             if (jQuery('.all-menu').length === 0) {
-                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)" onclick="ga("send", "event", "ParentMenu", "click","1", 1, {"nonInteraction": 1});return true;"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
+                jQuery(this).after('<li class="all-menu"><a class="" href="javascript:void(0)" onclick="ga(\'send\', \'event\', \'ParentMenu\', \'click\',\'1\', 1, {\'nonInteraction\': 1});return true;"><i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i></li>');
                 clickHere = 1;
             }
             if (jQuery('#newlist').length === 0) {
@@ -1246,4 +1246,17 @@ jQuery(window).load(function () {
         jQuery('div.flexslider li.flex-nav-prev a').attr('onclick', "ga('send', 'event', 'homephotocarouselPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
         jQuery('div.flexslider li.flex-nav-prev a').attr("href", "#homephotocarouselprev");
     }
+
+    // For Prev button in slider thumbnails    
+    jQuery('div.slick-thumbs ul.slick-thumbs-slider button.slick-prev').attr('onclick', "ga('send', 'event', 'SliderThumbPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
+    // For Next button in slider thumbnails
+    jQuery('div.slick-thumbs ul.slick-thumbs-slider button.slick-next').attr('onclick', "ga('send', 'event', 'SliderThumbNext', 'click','1', 1, {'nonInteraction': 1});return true;");
+    // For Slider Main Prev
+    jQuery('div.col-md-8 ul.slickslide button.slick-prev').attr('onclick', "ga('send', 'event', 'SliderMainPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
+    // For Slider Main Next
+    jQuery('div.col-md-8 ul.slickslide button.slick-next').attr('onclick', "ga('send', 'event', 'SliderMainNext', 'click','1', 1, {'nonInteraction': 1});return true;");
+    // For Slider Counter Next
+    jQuery('div.col-md-4 div.other-details-main ul.counterslide button.slick-next').attr('onclick', "ga('send', 'event', 'CounterSliderNext', 'click','1', 1, {'nonInteraction': 1});return true;");
+    // For Slider Counter Prev
+    jQuery('div.col-md-4 div.other-details-main ul.counterslide button.slick-prev').attr('onclick', "ga('send', 'event', 'CounterSliderPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
 });

@@ -17,7 +17,7 @@
                         print $row['field_story_small_image'];
                     }
                     else {
-                        print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' />";
+                        print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image170x127.jpg' alt='' title='' />";
                     }
                     ?>   </a>
                 <p title="<?php echo html_entity_decode(strip_tags($desc));?>>

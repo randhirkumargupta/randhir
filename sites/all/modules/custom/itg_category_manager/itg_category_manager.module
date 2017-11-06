@@ -584,7 +584,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form , &$form_stat
                 ':input[name="term_state"]' => array('checked' => FALSE) ,
               ) ,
             ) ,
-            '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module' , 'views') . '/images/status-active.gif" alt="" /></div>' ,
+            '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module' , 'views') . '/images/status-active.gif" alt="" title="" /></div>' ,
           );
         }
         else {

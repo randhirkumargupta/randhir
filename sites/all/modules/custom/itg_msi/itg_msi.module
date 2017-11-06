@@ -31,18 +31,21 @@ function itg_msi_menu() {
         'page callback' => 'itg_msi_check_duplicate_title',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_msi.inc',
     );
 
     $items['content/%/autocomplete'] = array(
         'page callback' => 'itg_msi_autocomplete_content',
         'access arguments' => array('access itg story'),
         'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_msi.inc',
     );
 
     $items['get_tid'] = array(
         'page callback' => 'itg_msi_get_term_from_name',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_msi.inc',
     );
 
     return $items;
@@ -675,37 +678,6 @@ function _submit_handler_for_redirect($form, &$form_state) {
 }
 
 /**
- * Functionality to check title is duplicate OR not
- * Call through ajax function
- */
-function itg_msi_check_duplicate_title() {
-    $type = arg(1);
-    $nid = arg(2);
-    $title = $_POST['title'];
-    $itgQuery = db_select('node', 'itg');
-
-    if (empty($nid)) {
-        $itgQuery->fields('itg', array('title'))
-                ->condition('title', $title, '=')
-                ->condition('type', $type, '=');
-    }
-    else {
-        $itgQuery->fields('itg', array('title'))
-                ->condition('title', $title, '=')
-                ->condition('type', $type, '=')
-                ->condition('nid', $nid, '!=');
-    }
-
-    $itgResult = $itgQuery->execute()->fetchObject();
-    if (isset($itgResult->title) && strcasecmp($title, $itgResult->title) == 0) {
-        echo ($type == 'astro') ? 'false' : drupal_json_encode(array('Code' => 1));
-    }
-    else {
-        echo ($type == 'astro') ? 'true' : drupal_json_encode(array('Code' => 0));
-    }
-}
-
-/**
  * Get tid using term name and vocubulary name
  * @param String $term_name
  * @param String $vocabulary_name
@@ -729,30 +701,6 @@ function itg_msi_get_nid_using_title_type($title, $type) {
         $nid = $entity_arr[$key]->nid;
     }
     return $nid;
-}
-
-/**
- * Autocomplete on title(date field) of issue listing
- * @param string $title
- */
-function itg_msi_autocomplete_content($title) {
-
-    if (strlen(trim($title)) > 0) {
-        $content_type = arg(1);
-        $options = '';
-        $title = strtolower(trim($title));
-        $query = db_select('field_data_field_issue_title', 'c');
-        $query->fields('c', array('field_issue_title_value'));
-        $query->condition('field_issue_title_value', '%' . $title . '%', 'LIKE');
-        $query->condition('c.bundle', $content_type, '=');
-        $query->range(0, 20);
-
-        $result = $query->execute();
-        while ($record = $result->fetchAssoc()) {
-            $options[date('Y-m-d', strtotime($record['field_issue_title_value']))] = date('m/d/Y', strtotime($record['field_issue_title_value']));
-        }
-        drupal_json_output($options);
-    }
 }
 
 /**

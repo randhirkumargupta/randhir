@@ -168,3 +168,194 @@ function associate_photo_video_content() {
         print '</div>';
     }
 }
+
+
+/**
+ * Implements itg_story_byline().
+ * @param string $title
+ */
+function itg_story_byline($title) {
+  $options = '';
+  $title = strtolower(trim($title));
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
+  $query->leftJoin('field_data_field_reporter_profile_type', 'frq', 'n.nid = frq.entity_id');
+  $query->fields('n');
+  $query->fields('frq', array('field_reporter_profile_type_value'));
+  $query->fields('re', array('field_reporter_email_id_value'));
+  $query->condition('n.title', '%' . $title . '%', 'LIKE');
+  $query->condition('n.type', 'reporter', '=');
+  $query->range(0, 20);
+  //field_reporter_profile_type_value
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    if (!empty($record['field_reporter_profile_type_value'])) {
+      $reporter_type = '(' . $record['field_reporter_profile_type_value'] . ')';
+    }
+    if (!empty($record['field_reporter_email_id_value'])) {
+      $reporter_email = '(' . $record['field_reporter_email_id_value'] . ')';
+    }
+    $name_format = $record['title'] . $reporter_type . $reporter_email . '{' . $record['nid'] . '}';
+    $options[$name_format] = $name_format;
+  }
+  drupal_json_output($options);
+}
+
+/**
+ * Implements itg_story_byline_save().
+ */
+function itg_story_byline_save() {
+
+  $trigger_event = $_POST['byline_event'];
+  
+  preg_match_all('/{(.*?)}/', $_POST['nd_id'], $matches);
+  if($trigger_event == 'unpublish') {  
+    $byline_nid = trim($matches[1][0]);
+  } else {
+    $byline_nid = $_POST['nd_id'];
+  }
+  $nid = $_POST['nd_id'];
+  $unique_id = $_POST['unique_id'];
+  $byline_arr = itg_get_byline_detail($byline_nid);
+  $byline_name = $byline_arr[0]['title'];
+  $byline_type = $byline_arr[0]['field_reporter_profile_type_value'];
+  $previous_byline = itg_get_previous_byline_detail($unique_id, $byline_nid);
+
+  if ($trigger_event == 'unpublish') {
+    if (!empty($byline_nid) && empty($previous_byline)) {
+      $qry = db_insert('itg_multi_byline_info')
+          ->fields(array(
+            'byline_id' => $byline_nid,
+            'uniqueid' => $unique_id,
+            'created' => REQUEST_TIME
+          ))
+          ->execute();
+      $remove = '<a href="javascript:void(0)" data-val="' . $byline_nid . '" data-tag="' . $qry . '" class="remove-byline">' . t('Remove') . '</a>';
+      if (!empty($byline_type)) {
+        $byline_type = '<span>' . $byline_type . '</span>';
+      }
+      $byline_res = '<li id="' . $qry . '"><i class="fa fa-arrows" aria-hidden="true"></i><input type="checkbox" name="bylinepublish" data-tag="' . $qry . '" value="' . $byline_nid . '" class="byline_publish"><span>' . t('Publish') . '</span><span>' . $byline_name . '</span>' . $byline_type . '<span>' . $remove . '</span></li>';
+      $response = array('msg' => 'success', 'lnk' => $byline_res);
+      print json_encode($response);
+    }
+    else
+    {
+      $response = array('msg' => 'error', 'description' => 'alreadyexist');
+      print json_encode($response);
+    }
+  }
+
+  if ($trigger_event == 'publish' && !empty($previous_byline)) {
+
+    $status = $_POST['status'];
+   
+    if (!empty($nid) && !empty($unique_id)) {
+      db_update('itg_multi_byline_info')
+          ->fields(array(
+            'publish_status' => $status,
+          ))
+          ->condition('id', $_POST['bl_id'], '=')
+          ->condition('uniqueid', $unique_id, '=')
+          ->execute();
+      $response = array('msg' => 'success', 'response' => 'true');
+      print json_encode($response);
+    }
+    else {
+      $response = array('msg' => 'error', 'description' => 'alreadyupdate');
+      print json_encode($response);
+    }
+  }
+
+  if ($trigger_event == 'remove' && !empty($nid)) {
+    db_delete('itg_multi_byline_info')
+        ->condition('id', $nid)
+        ->execute();
+    $response = array('msg' => 'delete', 'byline' => $nid);
+    print json_encode($response);
+  }
+}
+
+
+/**
+ * Add byline menu page callback
+ * @global object $user
+ * @param type $ajax
+ */
+function itg_story_add_byline_popup($ajax) {
+  global $user;
+  if ($ajax) {
+    ctools_include('ajax');
+    ctools_include('modal');
+
+    ctools_include('node.pages', 'node', '');
+    $node = (object) array(
+          'uid' => $user->uid,
+          'name' => (isset($user->name) ? $user->name : ''),
+          'type' => 'reporter',
+          'language' => LANGUAGE_NONE,
+    );
+
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('Add Byline'),
+      'reporter_popup_form' => 1,
+    );
+    $form_state['build_info']['args'] = array($node);
+    // Use ctools to generate ajax instructions for the browser to create
+    // a form in a modal popup.
+    $output = ctools_modal_form_wrapper('reporter_node_form', $form_state);
+
+    // If the form has been submitted, there may be additional instructions
+    // such as dismissing the modal popup.
+    if (!empty($form_state['executed'])) {
+      if (!empty($form_state['values']['field_reporter_profile_type'])) {
+        $reporter_type = '(' . $form_state['values']['field_reporter_profile_type']['und'][0]['value'] . ')';
+      }
+      if (!empty($form_state['values']['field_reporter_email_id'])) {
+        $reporter_email = '(' . $form_state['values']['field_reporter_email_id']['und'][0]['value'] . ')';
+      }
+      $name_format = $form_state['values']['title'] . $reporter_type . $reporter_email . '{' . $form_state['values']['nid'] . '}';
+      $output = array();
+      $output[] = ctools_modal_command_display(
+          t('Node created'), 'Node creation successful.');/** Add success message */
+      $output[] = ctools_modal_command_dismiss(); //Close modal automatically
+      //$output[] = ctools_ajax_command_reload(); //reload parent window
+      $output[] = ajax_command_invoke('#edit-field-story-reporter-und-0-target-id', 'val', array($name_format));
+    };
+    // Return the ajax instructions to the browser via ajax_render().
+    print ajax_render($output);
+    drupal_exit();
+  }
+}
+
+/**
+ * Breaking news create after story create.
+ */
+function itg_story_create_breaking_news() {
+  global $user;
+  $title = $_POST['title'];
+  $node = new stdClass();
+  $node->title = $title;
+  $node->type = "breaking_news";
+
+  node_object_prepare($node); //Invokes hook_prepare() and hook_node_prepare().
+
+  $node->language = LANGUAGE_NONE;
+  $node->field_content_type[LANGUAGE_NONE][0]['value'] = 'Story';
+  $node->field_type[LANGUAGE_NONE][0]['value'] = 'Breaking News';
+  $node->field_breaking_display_on[LANGUAGE_NONE][0]['value'] = 'home';
+  $node->uid = $user->uid;
+  $node->status = 1; //(1 or 0): Published or not
+  $node->promote = 0; //(1 or 0): Promoted to front page
+  $node->comment = 0; // 0 = Comments disabled, 1 = read only, 2 = read/write
+  $field_collection_item = entity_create('field_collection_item', array('field_name' => 'field_breaking_content_details'));
+  $field_collection_item->setHostEntity('node', $node);
+  $field_collection_item->field_breaking_tile[LANGUAGE_NONE][0]['value'] = $title;
+  $field_collection_item->field_mark_as_breaking_band[LANGUAGE_NONE][0]['value'] = '1';
+  $field_collection_item->save();
+  node_save($node);
+
+  $response = array('story_nid' => $node->nid);
+  print json_encode($response);
+}

@@ -20,25 +20,13 @@ function itg_fia_menu() {
     'access callback' => 'user_access',
     'page arguments' => array('itg_fia_config_form'),
     'type' => MENU_LOCAL_TASK,
+    'file' => 'include/itg_fia.inc',
     'weight' => 100,
   );
 
   return $items;
 }
 
-/*
- * ITG FIA Configuration form
- */
-function itg_fia_config_form($form, &$form_state) {
-  $form['itg_fia_config'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Add the App Id'),
-    '#description' => t('Add Your Facebook Application Id'),
-    '#default_value' => variable_get('itg_fia_config'),
-  );
-  $form = system_settings_form($form);
-  return $form;
-}
 
 /**
  * Implements hook_html_head_alter().
