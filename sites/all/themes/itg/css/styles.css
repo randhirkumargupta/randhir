@@ -16543,6 +16543,8 @@ ul.pron-cons-img li img {
 }
 
 /* New Header by ITGD */
+.hidden-desktop{ display: none; }
+#block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile{ display: none; }
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu li.desktop-hide{ display: none; }
 #block-itg-ads-ads-super-banner-top-nav-728x90{ text-align: center; padding-top:10px; margin-bottom:10px; }
 #block-itg-layout-manager-header-block .top-nav .main-nav ul.menu{ float: left; }

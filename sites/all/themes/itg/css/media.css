@@ -469,7 +469,7 @@
     #block-itg-ads-ads-super-banner-top-nav-728x90{ margin-bottom: 20px; } /* New Header by ITGD */
     #block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile{ display: block; padding:5px 0 5px 15px; }
     #block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile .globle-search{    font-family: 'Open Sans',sans-serif;
-    width:88%; float: left; margin-right:15px;}
+    width:85%; float: left; margin-right:10px;}
     #block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile .globle-search input{ width:100%;padding: 5px 10px;
     border: 1px solid #ccc; }
     #block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile a{border-top:0px;}
@@ -3676,17 +3676,37 @@
         width: 79%
     }
 }
-@media only screen and (max-width:767px) {
-    #block-itg-layout-manager-header-block .main-nav .nav-container-menu{width: calc(100% - 18px); margin: 0 auto;overflow: hidden;}
-    #block-itg-layout-manager-header-block .main-nav .desktop-hide{width: 18px; height: 18px; position: relative; float: left; }
+@media only screen and (max-width:768px) {
+    #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile{ display: block; }
+    #block-itg-layout-manager-header-block .main-nav .nav-container-menu{width: calc(100% - 35px); margin: 0 auto;overflow: hidden;}
+    #block-itg-layout-manager-header-block .main-nav .desktop-hide{width:20px; height:20px; position: relative; float: left; padding-left: 10px;}
     #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall{margin: 0 auto;width: 347px;}
     /* new main menu dropdown */
-    #block-itg-layout-manager-header-block .navigation{width:85%;border-right: 1px solid #ccc; background: #f9f9f9; box-shadow: 0 3px 3px #ccc; height: 100%; overflow-x: hidden; overflow: scroll;
-    }
+    #block-itg-layout-manager-header-block .navigation{width:85%;border-right: 1px solid #ccc; background: #f9f9f9; box-shadow: 0 3px 3px #ccc; height: calc(100vh - 60px); position: absolute; z-index: 9999990;overflow-x: hidden; }
+    #block-itg-layout-manager-header-block .navigation .container{height: 100%;overflow-x: hidden;overflow-y: scroll;}
+
     #block-itg-layout-manager-header-block .navigation .second-level-menu.menu li{border-top:1px solid #ccc;}
-    #block-itg-layout-manager-header-block .navigation .second-level-menu.menu li a{border-top:0px; color: #666;font-size: 14px; font-weight:300;}
+    #block-itg-layout-manager-header-block .navigation .second-level-menu.menu li a{border-top:0px; color: #666;font-size: 14px; font-weight:300;height: 35px;}
     #block-itg-layout-manager-header-block .navigation .container{ padding:0px; }
-    
+    #block-itg-layout-manager-header-block .navigation .container .user-menus .fa.fa-user{background: red; border-radius: 100%;padding:5px 0; color: #fff;
+    width:25px; height:25px; text-align: center; margin-right:6px;}
+     #block-itg-layout-manager-header-block .navigation .container .user-menus {padding-top: 5px;}
+     .hidden-desktop{ display:inline-block }
+     #block-itg-layout-manager-header-block .navigation .second-level-menu.menu li .menu-icons{width: 21px; height: 18px;margin: 0px 10px 0px 0px;position: relative;
+    top: 9px;}
+     #block-itg-layout-manager-header-block .navigation .second-level-menu.menu li .menu-icons img{ width:100% }
+     #block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile a{float: left; text-align: center; padding: 0; width: 20px;}
+
+     .mobile-nav .bar1, .mobile-nav .bar2, .mobile-nav .bar3 { width: 20px; height: 2px; background-color: rgb(94, 94, 94); margin: 4px 0px;transition: 0.4s;}
+.change .bar1 {transform: rotate(-45deg) translate(-4px, 4px);}
+.change .bar2{opacity: 0;}
+.change .bar3 {transform: rotate(45deg) translate(-4px, -5px);} 
+.logged-in #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile .user-menus > a{float: left; padding: 0 0 0 10px;}
+.logged-in #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile ul.menu{width: calc(100% - 43px);float: right;}
+.logged-in #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile ul.menu li{ border:0px;width: auto;float: left; }
+.logged-in #block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile ul.menu li a{padding: 0 10px;float: left;}
+
+
 }
 @media only screen and (max-width: 378px) {
     #block-itg-layout-manager-header-block{padding-top: 10px; background: #fff;}
