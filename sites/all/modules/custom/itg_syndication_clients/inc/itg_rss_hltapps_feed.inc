@@ -128,6 +128,7 @@ function genrate_hltapps_stories_xml($result = NULL, $category, $section_id) {
 }
 
 function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, $section_id) {
+  global $base_url;
   $publish_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
   $updated_date = date("H:i", strtotime($value['changed']));
   $byline = get_byline_name_by_nid($value['nid']);
