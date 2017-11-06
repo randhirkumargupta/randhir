@@ -111,7 +111,7 @@ function itg_personalization_home_page() {
   );
   } else {
     $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
-    $user_pic = "<img src=$file width='200' height='200' alt='user-image' />";
+    $user_pic = "<img src=$file width='200' height='200' alt='user-image' title='user-image' />";
     $data['profile_pic'] = $user_pic;
   }
   // Load user name    
@@ -273,7 +273,7 @@ function itg_personalization_block_view($delta = '') {
   global $user;
   // create url for edit profile
   $change_pass_url = '';
-  if ($delta == 'personalization_edit_profile') {
+  if ($delta == 'personalization_edit_profile' || $delta == 'personalization_refer_friend') {
     $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     $change_pass_url = PARENT_SSO . '/sso/change-password/' . $uri;
   }
@@ -668,7 +668,7 @@ function _personalization_show_content() {
       else
       {
         $file = $base_url . '/sites/all/themes/itg/images/itg_image370x208.jpg';
-        $type_image = '<img src="' . $file . '" alt="itg_image370x208.jpg"/>';
+        $type_image = '<img src="' . $file . '" alt="itg_image370x208.jpg" title="itg_image370x208.jpg" />';
       }
       $n_url = url($value['path'], array('absolute' => TRUE));
       $output.= '<li class="col-md-4">  
@@ -817,6 +817,11 @@ function itg_following_details_callback() {
  */
 function itg_personalization_user_login(&$edit, $account) {
   global $user;
+  if ($user->uid > 0) {
+  watchdog('itg_forced_login', $user->uid);
+    $expire = time() + 86400;
+    setrawcookie("itg_forced_login", "itg_user" . $user->uid, $expire,'/','.indiatodayonline.in');
+  }
   $user_mail = $user->mail;
   $uids = itg_personalization_refer_friend_existence($user_mail);
   if (!empty($uids)) {

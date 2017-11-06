@@ -473,3 +473,46 @@ function get_use_category_on_tpl($section_id, $cate_id) {
 
   return $id;
 }
+
+/**
+ * This function use for make state election page
+ */
+function itg_state_election() {
+  global $base_url;
+
+  $section = arg(1);
+  $state = arg(2);
+  drupal_add_js(drupal_get_path('theme', 'itg') . '/js/election_map.js', array('scope' => 'header'));
+  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+  foreach ($terms as $values) {
+    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
+
+      $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+      $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+      $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
+      $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
+    }
+  }
+
+
+  make_graph();
+
+  return theme('itg_state_election', array('widget_data' => $data, 'map_data' => $urlarray));
+}
+
+/**
+ * callback for section card refresh
+ */
+function itg_section_card_refresh() {
+  $data = explode("_", $_REQUEST['card_val']);
+  $section_id = $data[1];
+  $widget_style = '';
+  $block_id = $data[2];
+  $data = create_setion_widgets($section_id, $widget_style, $block_id);
+  if (function_exists('itg_akamai_setting_ttl_for_section_cart')) {
+    itg_akamai_setting_ttl_for_section_cart();
+  }
+  echo $data;
+  exit;
+}

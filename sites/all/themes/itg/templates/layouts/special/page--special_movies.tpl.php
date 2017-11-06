@@ -8,21 +8,17 @@
  */
 global $theme, $user;
 $preview = NULL;
-
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
-
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
-
 $itg_class = 'itg-admin';
 if ($theme != 'itgadmin') {
   $itg_class = 'itg-front';
 }
 ?>
-
 <!--------------------------------Code for Front tpl---------------------------------------->
 <?php if ($theme != 'itgadmin') { ?>
   <div id="page">
@@ -31,11 +27,10 @@ if ($theme != 'itgadmin') {
               <div class="container header-logo">
                   <?php if ($logo): ?>
                     <div class="logo">
-                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" class="header__logo-image" /></a>
                     </div>
                   <?php endif; ?>         
               </div>
-
               <?php if ($site_name || $site_slogan): ?>
                 <div class="header__name-and-slogan" id="name-and-slogan">
                     <?php if ($site_name): ?>
@@ -49,25 +44,18 @@ if ($theme != 'itgadmin') {
                     <?php endif; ?>
                 </div>
               <?php endif; ?>
-
-
-
               <?php print render($page['header']); ?>
-
           </section>
-
       </header>
       <?php
       // Render the sidebars to see if there's anything in them.
       $sidebar_first = render($page['sidebar_first']);
       $sidebar_second = render($page['sidebar_second']);
-
       $cls = 'col-md-12';
       if ($sidebar_first || $sidebar_second):
         $cls = 'col-md-9';
       endif;
       ?>
-
       <main id="main" class="container pos-rel">
           <?php print render($page['vertical_menu']); ?>
           <section id="content" role="main">
@@ -88,11 +76,8 @@ if ($theme != 'itgadmin') {
               <?php if ($action_links): ?>
                 <ul class="action-links"><?php print render($action_links); ?></ul>
               <?php endif; ?>       
-
             <?php } ?>
             <!--------------------------------Code for Front tpl and admin tpl---------------------------------------->
-
-
             <div class="itg-layout-container <?php echo $itg_class; ?> movie-layout-page ">
                 <!-- Breaking news band -->    
                 <?php if (!empty($page['breaking_news'])): ?>
@@ -103,7 +88,6 @@ if ($theme != 'itgadmin') {
                   </div>    
                 <?php endif; ?>
                 <div class="row itg-top-section itg-layout-580">
-
                     <div class="top-block">
                         <div class="col-md-8">
                             <div class="widget-help-text">Special widgets ( <strong>Automated Top Story</strong> )</div>
@@ -121,7 +105,6 @@ if ($theme != 'itgadmin') {
                                                   </div>
                                                   <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                   <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-1"><i class="fa fa-times"></i></a></span>
-
                                               </div>  
                                             <?php } ?>    
                                             <div class="data-holder" id="itg-block-1">
@@ -154,7 +137,6 @@ if ($theme != 'itgadmin') {
                                                     ?>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="itg-widget trending-list col-md-12 col-sm-6 col-xs-12">    
@@ -172,7 +154,6 @@ if ($theme != 'itgadmin') {
                                                           </div>
                                                           <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                                           <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-3"><i class="fa fa-times"></i></a></span>
-
                                                       </div>  
                                                     <?php } ?>                   
                                                     <div class="data-holder" data-widget-style="standpoint" id="itg-block-3">
@@ -188,18 +169,15 @@ if ($theme != 'itgadmin') {
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <!--Common section strat here-->
                 <?php if (isset($widget_data['itg-block-4']['widget_name']) || isset($widget_data['itg-block-5']['widget_name']) || isset($widget_data['itg-block-6']['widget_name']) || $theme == 'itgadmin') { ?>
                   <div class="row itg-common-section">
-
                       <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
                           <div class="widget-help-text">Section Card</div>
                           <div class="itg-widget">
@@ -217,10 +195,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-4"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-4">
                                           <?php
                                           if (isset($widget_data['itg-block-4']['widget'])) {
@@ -235,7 +211,6 @@ if ($theme != 'itgadmin') {
                               </div>               
                           </div>  
                       </div>
-
                       <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
                           <div class="widget-help-text">Section Card</div>
                           <div class="itg-widget">
@@ -253,10 +228,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-5"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-5">
                                           <?php
                                           if (isset($widget_data['itg-block-5']['widget'])) {
@@ -271,7 +244,6 @@ if ($theme != 'itgadmin') {
                               </div>               
                           </div>
                       </div>
-
                       <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
                           <div class="widget-help-text">Section Card</div>
                           <div class="itg-widget">
@@ -289,10 +261,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-6"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-6">
                                           <?php
                                           if (isset($widget_data['itg-block-6']['widget'])) {
@@ -307,15 +277,10 @@ if ($theme != 'itgadmin') {
                               </div>               
                           </div>          
                       </div>
-
                   </div>
                 <?php } ?>
-
-
-
                 <?php if (isset($widget_data['itg-block-10']['widget_name']) || isset($widget_data['itg-block-11']['widget_name']) || isset($widget_data['itg-block-12']['widget_name']) || $theme == 'itgadmin') { ?>
                   <div class="row itg-common-section">
-
                       <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
                           <div class="widget-help-text">Section Card</div>
                           <div class="itg-widget">
@@ -333,10 +298,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-10"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-10">
                                           <?php
                                           if (isset($widget_data['itg-block-10']['widget'])) {
@@ -351,7 +314,6 @@ if ($theme != 'itgadmin') {
                               </div>               
                           </div>  
                       </div>
-
                       <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
                           <div class="widget-help-text"><?php print t('Section Card'); ?></div>
                           <div class="itg-widget">
@@ -369,10 +331,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-11"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-11">
                                           <?php
                                           if (isset($widget_data['itg-block-11']['widget'])) {
@@ -387,7 +347,6 @@ if ($theme != 'itgadmin') {
                               </div>               
                           </div>
                       </div>
-
                       <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
                           <div class="widget-help-text">Section Card</div>
                           <div class="itg-widget">
@@ -405,10 +364,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-12"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-12">
                                           <?php
                                           if (isset($widget_data['itg-block-12']['widget'])) {
@@ -423,14 +380,9 @@ if ($theme != 'itgadmin') {
                               </div>               
                           </div>          
                       </div>
-
                   </div>
                 <?php } ?>
-
-
-
                 <!--End of Common section-->
-
                 <!--Don't miss and Ad section starts here-->
                 <?php if (isset($widget_data['itg-block-7']['widget_name']) || $theme == 'itgadmin') { ?>  
                   <div class="row itg-h321-section">
@@ -451,10 +403,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-7"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-7">
                                           <?php
                                           if (isset($widget_data['itg-block-7']['widget'])) {
@@ -486,7 +436,6 @@ if ($theme != 'itgadmin') {
                   </div>
                 <?php } ?>
                 <!--End of Don't miss and Ad section-->  
-
                 <!--Photo slider and Watch now section starts here-->
                 <?php if (isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
                   <div class="row itg-h450-section">
@@ -507,10 +456,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-8"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-8">
                                           <?php
                                           if (isset($widget_data['itg-block-8']['widget'])) {
@@ -542,10 +489,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-9"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-9">
                                           <?php
                                           if (isset($widget_data['itg-block-9']['widget'])) {
@@ -563,7 +508,6 @@ if ($theme != 'itgadmin') {
                   </div>
                 <?php } ?>
                 <!--Photo slider and Watch now section starts here--> 
-
                 <!--  Tech 2nd last row start here-->
                 <?php if (isset($widget_data['itg-block-13']['widget_name']) || isset($widget_data['itg-block-14']['widget_name']) || $theme == 'itgadmin') { ?>
                   <div class="row itg-h385-section">
@@ -584,10 +528,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-13"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-13" data-widget-style="movies-celebrities" >
                                           <?php
                                           if (isset($widget_data['itg-block-13']['widget'])) {
@@ -619,10 +561,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-14"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-14" >
                                           <?php
                                           if (isset($widget_data['itg-block-14']['widget'])) {
@@ -640,7 +580,6 @@ if ($theme != 'itgadmin') {
                   </div>
                 <?php } ?>
                 <!--Tech 2nd last row End here-->
-
                 <!--Tech last row start here-->
                 <?php if (isset($widget_data['itg-block-15']['widget_name']) || isset($widget_data['itg-block-16']['widget_name']) || $theme == 'itgadmin') { ?>
                   <div class="row itg-h396-section">
@@ -661,10 +600,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-15"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-15" data-widget-style="movies-lifestyle">
                                           <?php
                                           if (isset($widget_data['itg-block-15']['widget'])) {
@@ -696,10 +633,8 @@ if ($theme != 'itgadmin') {
                                             </div>
                                             <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-16"><i class="fa fa-times"></i></a></span>
-
                                         </div>
                                       <?php } ?>  
-
                                       <div class="data-holder" id="itg-block-16" data-widget-style="movies-latest">
                                           <?php
                                           if (isset($widget_data['itg-block-16']['widget'])) {
@@ -717,18 +652,13 @@ if ($theme != 'itgadmin') {
                   </div>
                 <?php } ?>
                 <!--  Tech last row End here--> 
-
-
             </div>
-
             <!--------------------------------Code for Front tpl---------------------------------------->
             <?php if ($theme != 'itgadmin') { ?>
               <?php //print $feed_icons;  ?>
           </section>
-
           <?php if (false) { ?> 
             <div id="navigation">
-
                 <?php if ($main_menu): ?>
                   <nav id="main-menu" role="navigation" tabindex="-1">
                       <?php
@@ -750,26 +680,17 @@ if ($theme != 'itgadmin') {
                       ?>
                   </nav>
                 <?php endif; ?>
-
                 <?php print render($page['navigation']); ?>
-
             </div>
           <?php } ?>
-
           <?php if ($sidebar_first || $sidebar_second): ?>
             <aside class="sidebars">
             </aside>
           <?php endif; ?>
       </main>
-
-
       <?php print render($page['footer']); ?>
-
-
   </div>
-
   <?php print render($page['bottom']); ?>
-
 <?php } ?>
 <?php if ($theme == 'itgadmin') { ?>
   <div class="itg-ajax-loader">

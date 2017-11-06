@@ -18,6 +18,7 @@ function itg_front_search_menu() {
     'page callback' => 'itg_get_reporter_list',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'include/itg_front_search.inc',
   );
 
   return $items;
@@ -55,6 +56,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       $hash = itg_apache_solr_get_site_hash();
     }
     
+    $form['tm_vid_14_names']['#maxlength'] = '1024';
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
@@ -266,7 +268,7 @@ function itg_front_search_views_pre_render(&$view) {
 
 
     if (!empty($_GET['keyword'])) {
-      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>" ' . $_GET['keyword'] . ' "</h1></div>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>' . $_GET['keyword'] . '</h1></div>';
     }
     else {
       $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </div>';
@@ -335,7 +337,7 @@ function itg_front_search_views_pre_render(&$view) {
 //    }
     
     if (!empty($arg[0])) {
-      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>" ' . str_replace("-", " ", $arg[1]) . ' "</h1></div>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>' . str_replace("-", " ", $arg[1]) . '</h1></div>';
     }
     else {
       $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </div>';
@@ -553,27 +555,6 @@ function itg_get_all_bylineinfo($reporter_unique_id) {
     }
     return $val;
   }
-}
-
-/**
- * Implement itg_get_reporter_list
- * @param string $name
- */
-function itg_get_reporter_list($name) { 
-
-  $reporter_name = db_select('node', 'n');
-  $reporter_name->join('field_data_field_celebrity_pro_occupation', 'rpn', 'n.nid = rpn.entity_id');
-  $reporter_name->fields('n', array('title', 'nid'));
-  //$reporter_name->condition('field_celebrity_pro_occupation_tid', $term->tid, '=');
-  $reporter_name->condition('n.type', 'reporter', '=');
-  $reporter_name->condition('n.title', '%' . $name . '%', 'LIKE');
-  $result = $reporter_name->execute();
-
-  while ($record = $result->fetchAssoc()) {
-    $r_title = strtolower($record['title']);
-    $options[$r_title] = $r_title;
-  }
-  drupal_json_output($options);
 }
 
 /**

@@ -1,70 +1,79 @@
 <div class="black-box">
   <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
   <div class="amp-photo-slider">
-  <?php
-  global $base_url;
-   if (!empty($node->field_gallery_image[LANGUAGE_NONE])) {
-      $html = '';
-      $html .='<amp-carousel id="carousel-with-preview"
-      width="753"
-      height="647"
-      layout="responsive"
-      type="slides">';
-      $i= 1;
-      $srcset = '';
-    foreach ($node->field_gallery_image['und'] as $photo_item) {
-     //$buzz_output.= '<div class="buzz-section">';
-      $field_collection_id = $photo_item['value'];
-      $entity = entity_load('field_collection_item', array($field_collection_id));
-      $file = file_load($entity[$field_collection_id]->field_images['und'][0]['fid']);
-      $small_file = file_load($entity[$field_collection_id]->field_photo_small_image['und'][0]['fid']);
-      $caption = $entity[$field_collection_id]->field_image_caption['und'][0]['value'];
-      $amp_image = file_create_url($file->uri);
-      $small_amp_image = file_create_url($small_file->uri);
-      $data = getimagesize($amp_image);
-      $width = $data[0];
-      $height = $data[1];
-      
-      if($height > 363) {
-       $height = 363;
-       $width = 647;
-      }
-      
-      if (!empty($small_file->uri)) {
-      $small_data = getimagesize($small_amp_image);
-      if ($small_data[1] > 363) {
-        $small_width = 647;
-      }
-      else {
-        $small_width = $small_data[0];
-      }
-      $small_src_set = ', ' . $small_amp_image . ' ' . $small_width . 'w';
-    }
+      <?php
+      global $base_url;
+      if (!empty($node->field_gallery_image[LANGUAGE_NONE])) {
+        $html = '';
+        ?>
+        <amp-carousel class="collapsible-captions"
+                      height="363"
+                      layout="fixed-height"
+                      type="slides">
+                          <?php
+                          $i = 1;
+                          $srcset = '';
+                          foreach ($node->field_gallery_image['und'] as $photo_item) {
+                            //$buzz_output.= '<div class="buzz-section">';
+                            $field_collection_id = $photo_item['value'];
+                            $entity = entity_load('field_collection_item', array($field_collection_id));
+                            $file = file_load($entity[$field_collection_id]->field_images['und'][0]['fid']);
+                            $small_file = file_load($entity[$field_collection_id]->field_photo_small_image['und'][0]['fid']);
+                            $caption = $entity[$field_collection_id]->field_image_caption['und'][0]['value'];
+                            $amp_image = file_create_url($file->uri);
+                            $small_amp_image = file_create_url($small_file->uri);
+                            $data = getimagesize($amp_image);
+                            $width = $data[0];
+                            $height = $data[1];
 
-    $srcset = $amp_image.' '.$width.'w'.$small_src_set;
-    //photgallery_landing_slider_753x543
-    //print '<amp-img height="363" width="647" layout="responsive"  alt="" title="" src="' . $amp_image . '"></amp-img>';
-      $html .='<figure><div class="slide"><div class="photo-slide"><amp-img src="'.image_style_url("photo_slider_753x543", $file->uri).'"
-        width="'.$width.'"
-        height="'.$height.'" layout="responsive" srcset="'.$srcset.'"><div fallback>offline</div></amp-img><div class="caption"><i class="fa fa-camera" aria-hidden="true"></i> '.$i.' of '.count($node->field_gallery_image['und']).'</div></div>
-        <figcaption>'.$caption.'</figcaption></div></figure>';
-        $i++;
-    }
-    $html .= '</amp-carousel>';
-    print $html;
+                            if ($height > 363) {
+                              $height = 363;
+                              $width = 647;
+                            }
+
+                            if (!empty($small_file->uri)) {
+                              $small_data = getimagesize($small_amp_image);
+                              if ($small_data[1] > 363) {
+                                $small_width = 647;
+                              }
+                              else {
+                                $small_width = $small_data[0];
+                              }
+                              $small_src_set = ', ' . $small_amp_image . ' ' . $small_width . 'w';
+                            }
+
+                            $srcset = $amp_image . ' ' . $width . 'w' . $small_src_set;
+                            ?>
+              <figure>
+                  <div class="fixed-height-container">
+                      <amp-img src="<?php print image_style_url("photo_slider_753x543", $file->uri); ?>"
+                               
+                                layout="fill" srcset="<?php print $srcset; ?>"><div fallback>offline</div>
+                      </amp-img>   
+                  </div>
+                  
+                  <figcaption on="tap:AMP.setState({expanded: !expanded})"
+                              tabindex="0"
+                              role="button"
+                              [class]="expanded ? 'expanded' : ''"><?php print $caption; ?>
+                      <span [text]="expanded ? '&#9660;' : '&#9650;'">&#9650;</span>
+                  </figcaption>
+              </figure>
+    <?php
   }
   ?>
+
+        </amp-carousel>
+  <?php
+}
+?>
   </div>
 </div>
+<?php if(!empty(variable_get('amp_photo_ad'))) { ?>
 <div class="custom-amp-ad">
-<amp-ad width=300 height=250
-    type="doubleclick"
-    data-slot="/1007232/Indiatoday_AMP_Mobile_Photo_ATF_300x250"
-    data-multi-size-validation="false">
-  <div placeholder></div>
-  <div fallback></div>
-</amp-ad>  
+<?php print variable_get('amp_photo_ad'); ?> 
 </div>
+<?php } ?>
 <div class="amp-other-gallery">
 <?php
 // get all node id related to current node primary category
@@ -86,11 +95,11 @@ if (function_exists('get_other_gallery_amp')) {
       if (!empty($value['field_story_small_image_fid'])) {
         $file = file_load($value['field_story_small_image_fid']);
         $small_image = file_create_url($file->uri);
-        $other_src_set = $small_image . ' ' . $small_width . 'w';
+        $other_src_set = $small_image . ' ' . $small_width . ' w';
       }
       else {
         $small_image = $base_url . '/' . path_to_theme() . '/images/itg_image170x127.jpg';
-        $other_src_set = $small_image . ' ' . $small_width . 'w';
+        $other_src_set = $small_image . ' ' . $small_width . ' w';
       }
       
       $alias = drupal_get_path_alias('node/'.$value['nid']);

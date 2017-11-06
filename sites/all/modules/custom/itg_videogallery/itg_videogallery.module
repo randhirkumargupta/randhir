@@ -1128,10 +1128,10 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
     $private = 'false';
   }
   if (strtolower($exclue_ads) == 'yes') {
-    $exclude_ads_flag = 1;
+    $exclude_ads_flag = 'true';
   }
   else {
-    $exclude_ads_flag = 0;
+    $exclude_ads_flag = 'false';
   }
 
   $video_desc = itg_videogallery_clean_string($video_desc);
@@ -1143,7 +1143,6 @@ function itg_videogallery_update_tags_video_private($tags_value, $video_id, $pri
   }
 // Tags assign to node and thumbnail
   if (!empty($tags_value) && !empty($video_title)) {
-
     $api->post('/video/' . $video_id . '?tags=' . $tags_value . '&private=' . $private . '&title=' . $video_title . '&description=' . $video_desc . '&advertising_instream_blocked=' . $exclude_ads_flag);
   }
   elseif (empty($tags_value) && !empty($video_title)) {
@@ -1578,6 +1577,23 @@ function itg_videogallery_views_pre_render(&$view) {
 function itg_videogallery_submit_status_message(&$form, $form_state) {
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
+      /* Assign video to widget */
+      if (is_array($form['#node']->field_video_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_video_assign = $form['#node']->field_video_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_video_assign = '';
+      }
+
+      // for story assign to widget
+      if (function_exists('itg_video_assign_to_widget')) {
+        $video_widget = $form_state['input']['field_video_assign_to_widget'][LANGUAGE_NONE];
+        $primary_category = $form_state['input']['itg_primary_category'];
+        if (is_array($video_widget) && count($video_widget) > 0) {
+          itg_video_assign_to_widget($form_state['values']['nid'], $video_widget, $primary_category, $previous_video_assign);
+        }
+      }
+      /* Assign video to widget */
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
       drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
@@ -3245,7 +3261,7 @@ function itg_videogallery_send_video_exception_notification($nid, $video_ids) {
                       <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
                           <tr>
                               <td style="background-color:#ececec;">
-                                  <img src="template_logo.png" alt="Indiatoday" />
+                                  <img src="template_logo.png" alt="Indiatoday" title="Indiatoday" />
                               </td>
                           </tr>
                           <tr>
@@ -3752,6 +3768,7 @@ function get_video_in_fieldcollection_by_nid($nid) {
   $query->fields('thumb_img', array('field_video_thumbnail_fid' , 'field_video_thumbnail_alt', 'field_video_thumbnail_title'));
   $query->fields('desc_inc', array('field_video_title_value'));
   $query->condition('up_video.entity_id', $nid);
+  $query->groupBy('isvi.solr_video_id');
   $query->orderBy('up_video.delta', 'ASC');
   $result = $query->execute()->fetchAll();
   return $result;
@@ -4990,7 +5007,7 @@ function get_header_tab_related_video_block_content() {
       if (empty($url)) {
         $url = "/" . drupal_get_path_alias('node/' . $current_entity_id);
       }
-      $related_image = '<img class="related-default" alt="' . $img_alt . '" src="' . $related_image_url . '">';
+      $related_image = '<img class="related-default" alt="' . $img_alt . '" title="" src="' . $related_image_url . '">';
       if (!empty($related_title)) {
         $related_video .= "<li class='related_content_tabs'><figure><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";
         $related_video .= "</figure></a><p class='title'>" . l($related_title, $url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
@@ -5032,4 +5049,35 @@ function get_tid_using_nid_custom($nid) {
     return $result;
   }
   return 0;
+}
+
+/**
+ * function for video assign to widget
+ * @param $nid
+ * @param array $video_widget
+ * @param $cat_id
+ * @param $previous_video_assign
+ */
+function itg_video_assign_to_widget($nid, array $video_widget, $cat_id, $previous_video_assign) {
+  if (!empty($video_widget) && count($video_widget)) {
+    $result = array();
+    foreach ($video_widget as $widget_name) {
+      if (!empty($widget_name) && $widget_name != '_none') {
+        $result[$widget_name] = $widget_name;
+        $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
+        if (!$is_node_in_widget) {
+          itg_widget_insert_widget_data($nid, $widget_name, 0);
+        }
+      }
+    }
+    itg_widget_delete_old_data_by_limit($widget_name);
+    foreach ($previous_video_assign as $row) {
+      $widget_value = $row['value'];
+      if ($widget_value != $result[$row['value']]) {
+        if (!empty($widget_value)) {
+          itg_widget_delete_data_from_widget($widget_value, $nid);
+        }
+      }
+    }
+  }
 }

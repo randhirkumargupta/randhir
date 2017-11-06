@@ -354,7 +354,8 @@ jQuery(document).ready(function () {
         }
     });
     
-    jQuery('body').on('click', '.story-login-follow', function (event) {
+    // call back for submit story in case of akamai
+    jQuery('body').on('click', '.story-login-follow, .photo-login-akamai', function (event) {
     //jQuery('.story-login-follow').click(function (event) {
         var post_data = "";
             jQuery.ajax({
@@ -380,6 +381,7 @@ jQuery(document).ready(function () {
             });
         
     });
+
 });
 
 // jquery for delete follow / unfollow

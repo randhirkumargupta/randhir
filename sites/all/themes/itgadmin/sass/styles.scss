@@ -2354,9 +2354,10 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-story-technology-values"],
 [id*="field-photo-story-values"],
 [id*="field-story-listicle-values"],
-[id*="field-event-tabs-values"] {
+[id*="field-event-tabs-values"],
+[id*="field-add-member-values"] { 
     @extend .itg-add-another-item;
-}
+} 
 
 .field-name-field-story-reporter,
 .form-field-name-field-story-reporter {
@@ -6080,6 +6081,11 @@ div.node {
     .btn:last-child {
         margin-right: 0;
     }
+    .button {
+        +.button {
+            margin-left: 10px;
+        }
+    }
 }
 
 .action-with-title {
@@ -8447,7 +8453,8 @@ div.node {
 [id*="field-video-anchor-values"],
 [id*="field-story-template-quotes-values"],
 [id*="field-story-template-factoids-values"],
-[id*="field-story-template-guru-values"] {
+[id*="field-story-template-guru-values"],
+[id*="field-add-member-values"] {
     tbody tr {
         td {
             border: none;
@@ -9173,7 +9180,8 @@ div.node {
 
 .node-story-form,
 .node-videogallery-form,
-.node-photogallery-form {
+.node-photogallery-form,
+.node-type-print-team-integration {
     font-family: Roboto;
     margin: 0;
     .ajax-progress {
@@ -9298,7 +9306,8 @@ div.node {
     [id*="field-story-template-buzz-values"],
     [id*="field-story-template-guru-values"],
     [id*="field-video-anchor-values"],
-    [id*="field-story-listicle-values"] {
+    [id*="field-story-listicle-values"],
+    [id*="field-add-member-values"] {
         thead {
             padding-left: 20px;
             padding-right: 10px;
@@ -9336,7 +9345,7 @@ div.node {
                 height: 28px;
                 margin: 0;
                 padding: 0;
-                text-indent: -9999px;
+                text-indent: -9999px; 
                 width: 28px;
             }
         }
@@ -9424,7 +9433,8 @@ div.node {
     .form-field-type-text,
     .form-field-name-field-story-reporter,
     .form-field-name-field-video-anchor,
-    .form-field-type-field-collection {
+    .form-field-type-field-collection,
+    .form-field-name-field-add-member {
         position: relative;
     }
     .vertical-tabs ul.vertical-tabs-list {
@@ -11148,6 +11158,11 @@ div.node {
             display: inline-block;
             vertical-align: top;
             padding: 0;
+        }
+    }
+    .button {
+        +.button {
+            margin-left: 10px;
         }
     }
 }
@@ -14338,14 +14353,19 @@ div.ctools-modal-content {
 }
 
 #redirect-list-form {
-    .table {
+    fieldset {
+        margin: 20px 0;
+    }
+    table {
         .links {
             list-style-type: none;
             li {
                 display: inline-block;
                 vertical-align: top;
+                padding: 0 5px;
+                line-height: 14px;
                 +li {
-                    margin-left: 10px;
+                    border-left: 1px solid #000;
                 }
                 &.edit,
                 &.delete {
@@ -14359,6 +14379,7 @@ div.ctools-modal-content {
                             position: absolute;
                             left: 0;
                             top: 0;
+                            display: none;
                         }
                     }
                 }
@@ -14383,3 +14404,31 @@ div.ctools-modal-content {
 
 
 /* css end Url Redirect page */
+
+
+/* css added by rajveer singh gangwar */
+
+#views-exposed-form-section-wise-content-ordering-list-dont-miss-content,
+#views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget,
+#views-exposed-form-story-widget-most-popular-widget,
+#views-exposed-form-story-widget-page-2,
+#views-exposed-form-story-widget-trending-videos-widget,
+#views-exposed-form-story-widget-top-takes-video-widget,
+#views-exposed-form-story-widget-watch-right-now-widget,
+#views-exposed-form-home-page-feature-widget-page-2,
+#views-exposed-form-photo-carousel-widget-photo-carousel,
+#views-exposed-form-photo-carousel-widget-video-carousel,
+#views-exposed-form-so-sorry-so-sorry-videos-widget {
+    display: none;
+}
+
+
+/* css added by rajveer singh gangwar end */
+
+
+.node-type-print-team-integration [id*="field-add-member-values"] + div.clearfix{
+    right: 560px;
+}
+.node-type-print-team-integration fieldset.date-combo .container-inline-date .date-padding .form-item{
+    padding: 0;
+}
