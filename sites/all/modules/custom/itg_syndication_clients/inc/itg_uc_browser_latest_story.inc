@@ -40,6 +40,10 @@ function itg_uc_browser_feed_latest_story(){
     $meta_tags = get_node_metatags_by_nid($value['nid']);
     $city = get_content_city($value['nid']);
     $tags = get_content_tags($value['nid']);
+    $tagarr = array();
+    foreach($tags as $tag){
+      $tagarr[] = ['name'];
+    }
     $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
     $key_words = '';
     $description = '';
@@ -59,7 +63,7 @@ function itg_uc_browser_feed_latest_story(){
       'subcategory'=>'',
       'keywords'=>$key_words,
       'description'=>$description,
-      'tags'=>$tags,
+      'tags'=>$tagarr,
       'summary'=>$value["title"],
       'detailUrl'=>$url,
       'pages'=>array(

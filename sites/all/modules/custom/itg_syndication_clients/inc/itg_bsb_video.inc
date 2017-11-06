@@ -55,8 +55,9 @@ function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
 function genrate_bsb_video_syndication_xml($result = NULL, $section_id, $category) {
   $xml = '';
   $xml .= '<Root>';
-  $xml .= '<id>1</id>';
-  $xml .= '<title>'.$category.'</title>';
+  $xml .= '<idsection>1</idsection>';
+  $xml .= '<section>'.$category.'</section>';
+  $xml .= '<totalvideos>'.count($result).'</totalvideos>';
 
   if (!empty($result)) {
     $xml .= '<start_index>0</start_index>';

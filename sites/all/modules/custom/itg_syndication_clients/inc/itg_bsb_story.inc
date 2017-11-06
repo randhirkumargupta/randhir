@@ -84,7 +84,7 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
       $xml .= '<place><![CDATA[' . $place . ']]></place>';
       $xml .= '<keywords><![CDATA[' . $keyword . ']]></keywords>';
       $xml .= '<url><![CDATA[' . $url . ']]></url>';
-      $xml .= '<category><![CDATA[' . $category . ']]></category>';
+      $xml .= '<category>' . $category . '</category>';
       $xml .= '<synopsis><![CDATA[' . $kicker_text . ']]></synopsis>';
       $xml .= '<detail><![CDATA[' . $body . ']]></detail>';
 
