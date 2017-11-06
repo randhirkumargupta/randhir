@@ -498,12 +498,16 @@ function itg_image($variables) {
   // unset done for seo validation.
   unset($attributes['typeof']);
   $attributes['src'] = file_create_url($variables['path']);
-
-  foreach (array('width', 'height', 'alt', 'title') as $key) {
-
-    if (isset($variables[$key])) {
-      $attributes[$key] = $variables[$key];
-    }
-  }
+  
+  $attributes['width'] = !empty($variables['width']) ? $variables['width'] : " ";
+  $attributes['alt'] = !empty($variables['alt']) ? $variables['alt'] : " ";
+  $attributes['title'] = !empty($variables['title']) ? $variables['title'] : " ";
+  $attributes['height'] = !empty($variables['height']) ? $variables['height'] : " ";
+//  foreach (array('width', 'height', 'alt', 'title') as $key) {
+//
+//    if (isset($variables[$key])) {
+//      $attributes[$key] = !empty($variables[$key]) ? $variables[$key] : "asdasdasd";
+//    }
+//  }
   return '<img' . drupal_attributes($attributes) . ' />';
 }
