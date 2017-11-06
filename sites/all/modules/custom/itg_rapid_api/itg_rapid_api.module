@@ -1808,7 +1808,7 @@ function formateNodeBodyToken($n_body){
     $str_html = str_get_html($n_body);
    // loop on token array
     foreach ($token_list as $tkey => $tvalue){
-        if($tvalue == '<p>[ITG:TECH-PHOTOS]</p>' || $tvalue == '<p>[ITG:EXPERT-CHUNK]</p>' || $tvalue == '<p>[ITG:FACTOIDS]</p>'){
+        if($tvalue == '<p>[ITG:TECH-PHOTOS]</p>' || $tvalue == '<p>[ITG:EXPERT-CHUNK]</p>' || $tvalue == '<p>[ITG:FACTOIDS]</p>' || $tvalue == '<p>[ITG:LISTICLES]</p>'){
             $tvalue_replave = "<ITG-NATIVEAPP>".$tvalue."<ITG-NATIVEAPP>";
             $n_body = str_replace($tvalue,$tvalue_replave,$n_body);
         }
