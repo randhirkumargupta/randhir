@@ -163,7 +163,8 @@ function generateStoryDeatilList($id) {
         $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
     }
     else{
-        $data_array['tech_photo_gallery'] = "";
+        $tech_photo_gallery = array();
+        $data_array['tech_photo_gallery'] = $tech_photo_gallery;
     }
     
     $data_array['tech_photos'] = $story_tech;
@@ -508,6 +509,7 @@ function getTechPros($content_org) {
     $xpath = new DOMXPath($dom);
     $nodes = $xpath->query('//*[@class="tech-pros"]');
     //$nodes = $xpath->query('//ul[class="tech-pros"]');
+    $listcont_flag = 0;
     
     $data = array();
     for ($i = 0; $i < $nodes->length; $i++) {
@@ -548,6 +550,9 @@ function getTechPros($content_org) {
        $value = rtrim($value, '\r\n'); 
        $techpross_data['pros']['data'][$listcont]['title'] = $value; 
        $listcont++;
+       if($value){
+           $listcont_flag = 1;
+       }
     }
     if(count($techpross_data['pros']['data']) < 0){
         //$techpross_data['pros']['label'] = "";
@@ -555,7 +560,7 @@ function getTechPros($content_org) {
     $tech_cons = array();
     $tech_cons = getTechCons($content_org);
     $techpross_data['cons'] = $tech_cons; 
-    $techpross_data['listcont'] = $listcont; 
+    $techpross_data['listcont'] = $listcont_flag; 
     
     return $techpross_data;
 }
