@@ -359,3 +359,127 @@ function itg_story_create_breaking_news() {
   $response = array('story_nid' => $node->nid);
   print json_encode($response);
 }
+
+/**
+ * Function for embeding megareview node in Story.
+ * @global type $base_url
+ * @param object $node
+ */
+function itg_story_mega_review_node_embed($node) {
+  //$node = node_load($node_id);
+  // config for sharing
+  global $base_url;
+  $nid = $node->nid;
+  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+  $short_url = shorten_url($actual_link, 'goo.gl');
+  $fb_title = addslashes($node->title);
+  $share_desc = '';
+  $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+
+  // get global comment config
+  /* if (function_exists('global_comment_last_record')) {      
+    $last_record = global_comment_last_record();
+    $config_name = trim($last_record[0]->config_name);
+    } */
+
+  // get facebook share count 
+  if (function_exists('itg_total_share_count')) {
+    $tot_count = itg_total_share_count($actual_link);
+  }
+  if (function_exists('itg_report_get_node_share')) {
+    $tot_count = itg_report_get_node_share($nid, $tot_count);
+  }
+  $cast_name = $node->field_mega_review_cast['und'][0]['entity']->title;
+  $director = $node->field_mega_review_director['und'][0]['value'];
+  $plot = $node->field_mega_review_movie_plot['und'][0]['value'];
+  $display = array('label' => 'hidden');
+  $theme_path = drupal_get_path('theme', 'itg');
+  $external_review = $internal_review = FALSE;
+  $average_ratings = 0;
+  $num_of_ratings = 0;
+  $node_alias = url(drupal_get_path_alias('node/' . $node->nid), array('absolute' => TRUE));
+  foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection) {
+    $reviews = entity_load('field_collection_item', array($field_collection['value']));
+    if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'internal'):
+      $internal = render(field_view_field('field_collection_item', $reviews[$field_collection['value']], 'field_story_reporter', $display));
+      $internal_rating = $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20;
+      $internal_review .= '<p>' . strip_tags($internal) . '</p>';
+      $internal_review .= '<span class="other-reviews-rating" data-star-value="' . $internal_rating . '%"></span>';
+    endif;
+    if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] == 'external'):
+      $external = render(field_view_field('field_collection_item', $reviews[$field_collection['value']], 'field_story_reporter', $display));
+      $external_rating = $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'] * 20;
+      $external_review .= '<p>' . strip_tags($external) . '</p>';
+      $external_review .= '<span class="other-reviews-rating" data-star-value="' . $external_rating . '%"></span>';
+    endif;
+    $average_ratings += $reviews[$field_collection['value']]->field_story_rating[LANGUAGE_NONE][0]['value'];
+    ++$num_of_ratings;
+  }
+  $average_rating = (float) $average_ratings / $num_of_ratings;
+  $average_rating = round($average_rating, 1);
+  $average_rating = itg_common_round_rating($average_rating);
+  $average_rating = $average_rating * 20;
+  $output = '';
+  $output .= '<article class="node node-mega-review-critic view-mode-full clearfix">';
+  $output .= '<script>if (typeof(jQuery) == "undefined") {';
+  $output .= 'var iframeBody = document.getElementsByTagName("body")[0];';
+  $output .= 'var jQuery = function (selector) { return parent.jQuery(selector, iframeBody); };';
+  $output .= 'var $ = jQuery;}';
+  $output .= '</script>';
+  $output .= '<link type="text/css" rel="Stylesheet" href="' . $base_url . '/' . $theme_path . '/css/itgd-style.css" />';
+  $output .= '<link type="text/css" rel="Stylesheet" href="' . $base_url . '/' . $theme_path . '/css/font-awesome.css" />';
+  $output .= '<link type="text/css" rel="Stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab" />';
+  $output .= '<link type="text/css" rel="Stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />';
+  $output .= '<script type="text/javascript" src="' . $base_url . '/' . drupal_get_path('module', 'itg_flag') . '/js/itg_flag.js" ></script>';
+  $output .= '<div class="embed-mega-review">';
+  $output .= '<a href="' . $node_alias . '" target="_blank"><h1>' . $node->title . '</h1></a>';
+  $output .= '<div class="movie-description">';
+  $output .= render(field_view_field('node', $node, 'field_story_movie_description', $display));
+  $output .= '</div>';
+  $output .= '<div class="rating-and-social-wrapper"><div class="movie-rating" data-star-value="' . $average_rating . '%"></div><div class="social-info">';
+  $output .= '<span class="share-count"><i>';
+  if (!empty($tot_count)) {
+    $output .= $tot_count;
+  }
+  else {
+    $output .= 0;
+  }
+  $output .= '</i>SHARES</span>';
+  $output .= '<span><a title="share on google+" class="user-activity def-cur-pointer" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="google_share" onclick="return googleplusbtn(\'' . $node_alias . '\')" data-status="1"><i class="fa fa-google-plus"></i></a></span>';
+  $output .= '<span><a class="def-cur-pointer" title ="share on facebook" onclick="fbpop(\'' . $actual_link . ', ' . $fb_title . ', ' . $share_desc . ', ' . $image . ', ' . $base_url . ', ' . $node->nid . '\')"><i class="fa fa-facebook"></i></a></span>';
+  $output .= '<span><a class="user-activity def-cur-pointer" rel="' . $node->nid . '" data-tag="' . $node->type . '" data-activity="twitter_share" data-status="1" title="share on twitter" onclick="twitter_popup(\'' . urlencode($node->title) . ', ' . urlencode($short_url) . '\')"><i class="fa fa-twitter"></i></a></span>';
+  $output .= '<span>';
+  /* if ($config_name == 'vukkul') {
+    $output .= '<a class= "def-cur-pointer" onclick ="scrollToAnchor("vuukle-emotevuukle_div");" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>';
+    }
+    if ($config_name == 'other') {
+    $output .=  '<a class= "def-cur-pointer" onclick ="scrollToAnchor("other-comment");" title="comment"><i class="fa fa-comment" aria-hidden="true"></i></a>';
+    } */
+  $output .= '</span>';
+  $output .= '</div></div>';
+  $output .= '<div class="movie-review-wrapper">';
+  $output .= '<div class="movie-trailer">' . render(field_view_field('node', $node, 'field_mega_review_youtube_url', $display)) . '</div>';
+  $output .= '<div class="movie-review-text">';
+  //if (!empty($cast_name)):
+  $output .= '<div class="review-row"><dfn class="review-label">' . t('Cast :') . '</dfn><span class="review-txt">' . render(field_view_field('node', $node, 'field_mega_review_cast', $display)) . '</span></div>';
+  //endif;
+  if (!empty($director)):
+    $output .= '<div class="review-row"><dfn class="review-label">' . t('Director :') . '</dfn><span class="review-txt">' . $director . '</span></div>';
+  endif;
+  if (!empty($plot)):
+    $output .= '<div class="review-row"><dfn class="review-label">' . t('Plot :') . '</dfn><span class="review-txt">' . $plot . '</span></div>';
+  endif;
+  $output .= '<div class="movie-reviewer our-review">';
+  $output .= '<h3>OUR REVIEWERS</h3>';
+  $output .= $internal_review;
+  $output .= '</div>';
+  $output .= '<div class="movie-reviewer movie-reviewer-other">';
+  $output .= '<h3>OTHER REVIEWERS</h3>';
+  $output .= $external_review;
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= '</div>';
+  $output .= '</article>';
+  print $output;
+}

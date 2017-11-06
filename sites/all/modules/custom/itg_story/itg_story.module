@@ -105,6 +105,14 @@ function itg_story_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_story.inc',
   );
+  
+  $items['mega-review/embed/%node'] = array(
+    'page callback' => 'itg_story_mega_review_node_embed',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
 
   return $items;
 }
