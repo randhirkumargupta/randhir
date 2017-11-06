@@ -104,9 +104,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   $arg = arg();
   $type = 'story'; // use photogallery & videogallery in condition if you have
   $rss_url = '';
-  
+  $query_alias = '';
+  $paging = array();
   if (!empty($_GET['sId']) && is_numeric($_GET['sId'])) { //code for this URL (story.jsp?sId=877)
     $old_content_id = $_GET['sId'];
+  } else if ((!empty ($arg[0]) && $arg[0] == 'content_Email.jsp') && (!empty($_GET['sid']) && is_numeric($_GET['sid']))) {
+    $old_content_id = $_GET['sid'];
+  } else if ((!empty ($arg[0]) && $arg[0] == 'articlePrint.jsp') && (!empty($_GET['aid']) && is_numeric($_GET['aid']))) {
+    $old_content_id = $_GET['aid'];
   } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content' && arg(0) == 'conclave') {//conclave/index.php?option=com_content&task=view&id=2968&sectionid=15&secid=1&issueid=34&Itemid=1
       $old_content_id = '200'.$_GET['id'];
   } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content') { //code for this URL (option=com_content)
@@ -135,19 +140,31 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $old_content_id = $_GET['catId'];
       $type = 'category';
       $table = 'migrate_map_itgcategory';
-  } else if((((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'article.jsp')) || ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'rss') && (!empty($arg[2]) && $arg[2] == 'article.jsp'))) && ($_GET['sid'] || $_GET['cid'] || $_GET['scid'] || $_GET['sscid'])) {
-      if ($_GET['sid']) {        
-        $old_content_id = $_GET['sid'];
-        $table = 'migrate_map_itgsection';
-      } else if ($_GET['cid']) {        
-        $old_content_id = $_GET['cid'];
-        $table = 'migrate_map_itgcategory';
-      } else if ($_GET['scid']) {        
-        $old_content_id = $_GET['scid'];
-        $table = 'migrate_map_itgsubcategory';
-      } else if ($_GET['sscid']) {        
-        $old_content_id = $_GET['sscid'];
-        $table = 'migrate_map_itgsubsubcategory';
+  } else if(!empty($arg[0]) && (!empty($arg[1]) && $arg[1] == 'category') && !empty($arg[2]) && (!empty($arg[3]) && is_numeric($arg[3])) && (!empty($arg[4]) && (strpos($arg[4], 'html')))) { // Pattern http://indiatoday.intoday.in/auto/category/cars/1/1186.html
+      $lastarg = explode(".", $arg[4]);
+      $old_content_id = $lastarg[0];
+      $table = 'migrate_map_itgcategory';
+      $type = 'category';
+      $query_alias = $arg[3];
+  } else if((((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'article.jsp')) || ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'rss') && (!empty($arg[2]) && $arg[2] == 'article.jsp')))) {      
+      if (!empty($_GET['sid']) || !empty($_GET['cid']) || !empty($_GET['scid']) || !empty($_GET['sscid'])) {
+        if ($_GET['sid']) {        
+          $old_content_id = $_GET['sid'];
+          $table = 'migrate_map_itgsection';
+        } else if ($_GET['cid']) {        
+          $old_content_id = $_GET['cid'];
+          $table = 'migrate_map_itgcategory';
+        } else if ($_GET['scid']) {        
+          $old_content_id = $_GET['scid'];
+          $table = 'migrate_map_itgsubcategory';
+        } else if ($_GET['sscid']) {        
+          $old_content_id = $_GET['sscid'];
+          $table = 'migrate_map_itgsubsubcategory';
+        }
+      }
+      else {
+        $old_content_id = 'nzero';
+        $table = 'none';
       }
       $type = 'rss';
       $rss_url = 'rss';
@@ -187,6 +204,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $table = 'none';
       $type = 'archives';
       $rss_url = 'topic';
+  } else if ((!empty($arg[0]) && ($arg[0] == 'feedback.jsp')) && (!empty($_GET['refUrl']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
+      $refurl = $_GET['refUrl'];
+      drupal_goto($refurl);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter.jsp')) && (!empty($_GET['matchid']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
+      $matchid = $_GET['matchid'];
+      $newmatchurl = $base_url.'/scorecard/matchcenter/'.$matchid;
+      drupal_goto($newmatchurl);
   } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
@@ -195,9 +219,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($type == 'category') {
         $content_id = get_new_seccat_by_mig_id($old_content_id, $table);
         $alias = drupal_get_path_alias('taxonomy/term/'.$content_id);
+        if (!empty($query_alias)) {
+          $paging = array('query' => array('page' => $query_alias));
+        }
       } else if($type == 'rss') {
         if ($old_content_id == 'none') {
           $alias = $base_url.'/'.$rss_url;
+        } else if ($old_content_id == 'nzero') {
+          $alias = $base_url.'/'.$rss_url.'/0';
         } else {
           $content_id = get_new_seccat_by_mig_id($old_content_id, $table);
           $alias = $base_url.'/'.$rss_url.'/'.$content_id;
@@ -210,7 +239,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       }
       //$alias = get_redirect_url($content_id);
       if (isset($alias)) {
-        drupal_goto($alias);
+        drupal_goto($alias, $paging);
       }
       drupal_not_found();
       drupal_exit();
