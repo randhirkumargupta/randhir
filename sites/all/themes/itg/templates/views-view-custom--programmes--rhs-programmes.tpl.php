@@ -47,7 +47,7 @@
                           <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
                         <?php else : ?>
                           <?php
-                          $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' alt='' />";
+                          $img = "<img width='88' height='66'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg' alt='' title='' />";
                           ?>
                           <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
 
@@ -55,7 +55,7 @@
                     </div>
                     <div class="discription">
                         <?php if (!empty($row['description'])) : ?>
-                          <?php print __html_output_with_tags($row['description']); ?>
+                          <?php print html_entity_decode($row['description']); ?>
                         <?php endif; ?>
 
                     </div>

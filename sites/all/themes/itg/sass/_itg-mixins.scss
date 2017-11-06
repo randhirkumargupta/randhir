@@ -659,8 +659,11 @@ $root-font-size: 16px;
             }
         }
     }
-    .iframe-video iframe {
-        border: 5px solid #171717;
+    .iframe-video {
+        padding-bottom: 66.5%;
+        iframe {
+            border: 5px solid #171717;
+        }
     }
 }
 

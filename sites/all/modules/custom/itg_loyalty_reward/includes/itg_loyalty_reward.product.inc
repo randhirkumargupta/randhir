@@ -399,7 +399,7 @@ function _get_order_item() {
         'path' => $product['product']['image']['uri'],
           )
       );*/
-      $product_pic = '<img src="'.$product['product']['product_image'].'" alt="product_image" />';
+      $product_pic = '<img src="'.$product['product']['product_image'].'" alt="product_image" title="product_image" />';
       $output = '<div class="checkout-details">';
       $output = '<div class="checkout-inner">';
       //$output .= $product_pic . '<div class="checkout-inner-details"><div><span>Magzine ID: </span><strong>' . $product['product']['title'] . '</strong></div>';

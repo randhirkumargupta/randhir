@@ -224,49 +224,6 @@
 // setting for UAT
 //#####################################################################################
 
-/*$databases['default']['master'][] = array (
-  'database' => 'indiatoday_migrate',
-  'username' => 'itgd_it_write',
-  'password' => '!tgd@!t@wr!te@101',
-  'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-);
-
-$databases['default']['slave'][] = array (
-  'database' => 'indiatoday_migrate',
-  'username' => 'itgd_it_read',
-  'password' => '!tgd@!t@re@d@102',
-  'host' => 'itgd-drupal-db-dev-replica.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '',
-  'driver' => 'mysql',
-  'prefix' => '',
-  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
-);
-
-$databases['default']['slave'][] = array (
-  'database' => 'indiatoday_migrate',
-  'username' => 'itgd_it_read',
-  'password' => '!tgd@!t@re@d@102',
-  'host' => 'itgd-drupal-db-dev-replica-2.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '',
-  'driver' => 'mysql',
-  'prefix' => '',
-  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
-);
-
-$databases['default']['default'] = array (
-  'driver' => 'autoslave',
-  'master' => array('master'),
-  'slave' => array('slave'),
-  'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
-  'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
-  'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
-  'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
-  'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'") // For MySQL InnoDB, make sure isolation level doesn't interfere with our intentions. Defaults to empty.
-);*/
-
 // one slave setting
 $databases['default']['default'] = array(
   'driver' => 'autoslave',
@@ -310,7 +267,7 @@ $databases['sso_db']['default'] = array(
 );
 // end setting for UAT
 //#####################################################################################
-//shravan
+
 //for production setting
 /*$databases['default']['master'][] = array (
   'database' => 'indiatoday',
@@ -761,6 +718,9 @@ MongoCursor::$slaveOkay = true;
 $conf['image_suppress_itok_output'] = TRUE;
 $conf['image_allow_insecure_derivatives'] = TRUE;
 $conf['block_cache_bypass_node_grants'] = TRUE;
-//$base_url = 'https://'.$_SERVER['SERVER_NAME'];
+$base_url = 'https://'.$_SERVER['SERVER_NAME'];
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(-1);

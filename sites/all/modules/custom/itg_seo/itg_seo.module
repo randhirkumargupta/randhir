@@ -276,11 +276,13 @@ function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
 function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_url = NULL) {
   $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
   $title_val = '';
+  $arg = arg();
   if (isset($entity_object->title)) {
     $title_val = ucfirst(mb_strimwidth($entity_object->title, 0, 100));
   }
 
-  $node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span></div>';
+  //$node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span></div>';
+  $node_title = t($title_val);
   $section_link = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
       . l('<span itemprop="title">News</span>', '<front>', array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
 
@@ -292,10 +294,18 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   if (!empty($id)) {
     $section_tids = taxonomy_get_parents_all($id);
     $section_tids = array_reverse($section_tids);
-    foreach ($section_tids as $chunks) {
+    
+    if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]) && count($section_tids) == 1) {
       $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
-          . l('<span itemprop="title">' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
+          .'<h1>' . itg_seo_get_term_name_by_tid($arg[2]) . '</h1></div>';
     }
+    else {
+      foreach ($section_tids as $chunks) {
+        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
+            . l('<span itemprop="title">' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
+      }
+    }
+    
   }
   if (!empty($entity_object->type) && $entity_object->type == 'story') {
     $section_link .= ' / ' . $node_title;
@@ -330,11 +340,66 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   return $section_link;
 }
 
+/**
+ * This function is used to get term name.
+ * @param int $tid
+ * @return array
+ */
+function itg_seo_get_term_name_by_tid($tid) {
+    return db_select('taxonomy_term_data', 't')
+            ->fields('t', array('name'))
+            ->condition('tid', $tid)
+            ->execute()
+            ->fetchField();
+}
 /*
  * Implements hook_node_view
  */
 
 function itg_seo_node_view($node, $view_mode, $langcode) {
+  global $base_url;
+  
+
+  // adding meta description tag if no meta description comes along with node data
+   if (!isset($node->metatags[LANGUAGE_NONE]['description'])) {
+       $metatag_description1 = array(
+         '#type' => 'html_tag',
+         '#tag' => 'meta',
+         '#attributes' => array(
+           'name' => 'description',
+           'content' => '',
+         ),
+         '#weight' => -1000,
+       );
+       drupal_add_html_head($metatag_description1, 'description');
+   }
+   
+  // adding meta keywords tag if no meta keywords comes along with node data
+  if (!isset($arg_data->metatags[LANGUAGE_NONE]['keywords'])) {
+      $news_keyword = array(
+        '#type' => 'html_tag',
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'news_keyword',
+          'content' => '',
+        ),
+        '#weight' => -999,
+      );
+      drupal_add_html_head($news_keyword, 'news_keyword');
+  }
+  
+  $meta_keywords = isset($node->metatags[LANGUAGE_NONE]['keywords']['value']) ? $node->metatags[LANGUAGE_NONE]['keywords']['value'] : '';
+  if (!empty($meta_keywords)) {
+    $head_elements['metatag_keywords_0'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'news_keyword',
+        'content' => $meta_keywords
+      ),
+    );
+  }
+
   $is_frontpage = drupal_is_front_page();
   if (empty($is_frontpage)) {
     $field_names = variable_get('itg_nofollow_fields');
@@ -346,6 +411,42 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
       }
     }
     itg_seo_node_data($node);
+  } 
+  else {
+    // Adding Rich Snippet Script at home page for search
+      $target = $base_url . '/search?q={search_term}';
+      $markup = array(
+        '#type' => 'markup',
+        '#markup' => '<script type="application/ld+json"> {'
+        . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "' . $base_url . '",    '
+        . '"potentialAction": {      "@type": "SearchAction",      '
+        . '"target": "' . $target . '",      '
+        . '"query-input": "required name=search_term"    } } '
+        . '</script>',
+      );
+      drupal_add_html_head($markup, 'sd_json');
+      
+      // canonical for home page
+      $home_canonical = $base_url . '/' . $node->path['alias'];
+      $canonical = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#attributes' => array('rel' => 'canonical', 'href' => $home_canonical),
+      );
+      drupal_add_html_head($canonical, 'canonical');
+      // meta name description for home page
+      $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
+      if (isset($meta_description) && !empty($meta_description)) {
+        $metatag_description = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',
+          '#attributes' => array(
+            'name' => 'description',
+            'content' => $meta_description,
+          ),
+        );
+        drupal_add_html_head($metatag_description, 'description');
+      }
   }
 }
 

@@ -486,7 +486,7 @@ function itg_sitemap_chunks_setting_form() {
 
     foreach($content_type as $ct) {
         $form["itg_sitemap_chunks_number_$ct"] = array(
-            '#type' => 'hidden',
+            '#type' => 'textfield',
             '#title' => t("Number of Chunk <b> $ct </b>"),
             '#default_value' => variable_get("itg_sitemap_chunks_number_$ct"),
             '#size' => 20,
@@ -494,13 +494,13 @@ function itg_sitemap_chunks_setting_form() {
         );
         
         $form["itg_sitemap_chunks_last_processed_node_xml_$ct"] = array(
-            '#type' => 'hidden',
+            '#type' => 'textarea',
             '#title' => t('Last Processed ' . $ct . ' XML'),
             '#default_value' => variable_get("itg_sitemap_chunks_last_processed_node_xml_$ct", 0),
         );
         
         $form["itg_sitemap_chunks_last_processed_node_$ct"] = array(
-            '#type' => 'hidden',
+            '#type' => 'textfield',
             '#title' => t("Last Processed Node ID $ct"),
             '#default_value' => variable_get("itg_sitemap_chunks_last_processed_node_$ct", 0),
             '#size' => 20,

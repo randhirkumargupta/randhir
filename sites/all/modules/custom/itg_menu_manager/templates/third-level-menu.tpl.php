@@ -50,7 +50,7 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
               <div class="col-md-6 col-sm-6 col-xs-6">
                   <?php
                   if (!empty($src) && isset($uri)) {
-                    print l("<img src='" . $src . "' />" , "taxonomy/term/" . arg(2) , array("html" => TRUE));
+                    print l("<img src='" . $src . "' alt='' title='' />" , "taxonomy/term/" . arg(2) , array("html" => TRUE));
                   }
                   ?>
               </div>
@@ -79,8 +79,30 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
                               $color_value = $menu_data['db_data']['bk_color'];
                             }
                             $background_color_style = ($color_value == '') ? "" : "background : $color_value";
+                            
+                            if($menu_link_data['url_type'] == 'url-type-external') {
+                              $attribute_array = array(
+                                    'style' => array( $background_color_style ),  
+                                    'target' => $target , 
+                                    'rel' => 'nofollow', 
+                                    'class' => array("third-level-child" , "third-level-child-$key" , $active , $image_class , $url_type)
+                                    );
+                            } else {
+                              $attribute_array = array(
+                                    'style' => array( $background_color_style ),  
+                                    'target' => $target , 
+                                    'class' => array("third-level-child" , "third-level-child-$key" , $active , $image_class , $url_type)
+                                    );
+                            }
+                            
                             ?>
-                            <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>"><?php print l($link_text , $link_url , array('html' => true , 'attributes' => array('style' => array( $background_color_style ),  'target' => $target , 'class' => array("third-level-child" , "third-level-child-$key" , $active , $image_class , $url_type)))); ?></li>
+                            <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>">
+                              <?php print l($link_text , $link_url , 
+                                array(
+                                  'html' => true , 
+                                  'attributes' => $attribute_array,
+                                )
+                              ); ?></li>
                             <?php
                           }
                         endforeach;

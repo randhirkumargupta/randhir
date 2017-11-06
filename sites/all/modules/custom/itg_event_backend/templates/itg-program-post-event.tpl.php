@@ -68,7 +68,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
                 );
               }
               else {
-                $story_img = "<img width='364' height='205'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/event_post_default.jpg' alt='' />";
+                $story_img = "<img width='364' height='205'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/event_post_default.jpg' alt='' title='' />";
               }
               if (!empty($detail['nid'])) {
                 $output_story_img = l($story_img, 'node/' . $detail['nid'], array('html' => TRUE));
@@ -98,7 +98,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
               $output_media .= '<br>';
             }
             if (empty($output_story_img)) {
-              $story_img = "<img width='364' height='205'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/event_post_default.jpg' alt='' />";
+              $story_img = "<img width='364' height='205'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/event_post_default.jpg' alt='' title='' />";
               $output_story_img = $story_img;
             }
              if (!empty($session_result) ||  !empty($output_story_title)) {
