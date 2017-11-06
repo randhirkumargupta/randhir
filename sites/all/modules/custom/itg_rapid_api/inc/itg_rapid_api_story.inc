@@ -126,6 +126,8 @@ function generateStoryDeatilList($id) {
 
     $published_date = date("Y-m-d H:i:s", $published_stamp);
     $firebase_url = get_node_firebase_weburl($nid);
+    
+    $tech_photo_gallery = $node->field_technology_photogallery['und'][0]['target_id'];
 
     //data array building
 
@@ -156,7 +158,7 @@ function generateStoryDeatilList($id) {
     $data_array['listicles'] = $listicle_data;
     $data_array['factoids'] = $factoid_data;
     $data_array['buzz'] = $buzz_data;
-    $data_array['tech_photo_gallery']['p_id'] = "";
+    $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
     $data_array['tech_photos'] = $story_tech;
     $data_array['tech_pros_cons'] = $tech_pros;
     $data_array['expert-chunk'] = $expertchunk_data;
