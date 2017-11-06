@@ -124,6 +124,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $type = 'videogallery';
   } else if ((!empty($arg[0]) && $arg[0] == 'gallerylist') && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern gallerylist/photos-television/6/163.html
       $photo_cat = $arg[3];
+      $query_alias = $arg[2];
       $photo_cat_explode = explode('.html', $photo_cat);
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
@@ -134,6 +135,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $table = 'migrate_map_itgphoto';
   } else if ((!empty($arg[0]) && $arg[0] == 'MoreGallery') && ($_GET['gId'] == 0) && (!empty($_GET['photocat']))) {  // Pattern site/photo/0/2/photo.html for category listing
       $old_content_id = $_GET['photocat'];
+      $query_alias = $_GET['page'];
       $type = 'category';
       $table = 'migrate_map_itgphoto';
   } else if ((!empty($arg[0]) && $arg[0] == 'Simply') && ($_GET['secId']) && ($_GET['catId'])) {  // Pattern Simply?secId=20&catId=17
