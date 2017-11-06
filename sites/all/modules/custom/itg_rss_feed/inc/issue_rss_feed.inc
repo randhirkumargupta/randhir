@@ -106,9 +106,9 @@ function get_issue_article_item_rss($issue_title = NULL, $issue_url = NULL) {
         $created_date = date("D, d M Y H:i:s e", $created);
         $output .= '<item><title><![CDATA[' . $title . ']]></title>';
         $output .= '<sectionname>'.$story_section_name.'</sectionname>';
-        $output .= '<link><![CDATA[' . $url . ']]></link>';
+        $output .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>';
         $output .= '<description><![CDATA[' . $field_story_kicker_text_value . ']]></description>';
-        $output .= '<pubDate>' . $created_date . ' GMT</pubDate>';
+        $output .= '<pubDate>' . $created_date . '</pubDate>';
         $output .= '</item>';
     }
     return $output;

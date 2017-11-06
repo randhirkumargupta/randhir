@@ -112,11 +112,11 @@ function get_video_item_rss($section_id, $term_name, $section_url) {
         $created_date = date("D, d M Y H:i:s e", $created);  
         $output .= '<item>';
         $output .= '<title><![CDATA[' . $title . ']]></title>';
-        $output .= '<link><![CDATA[' . $url . ']]></link>';
-        $output .= '<description><a href="'.$url.'"><img src="'.$img_url.'" align="left" hspace="2" height="82" width="107" alt="" border="0" /></a><![CDATA[' . $body_value . ']]></description>';
+        $output .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>';
+          $output .= '<description><a href="'.$url.'?utm_source=rss"><img src="'.$img_url.'" align="left" hspace="2" height="82" width="107" alt="" border="0" /></a><![CDATA[' . $body_value . ']]></description>';
         $output .= '<pubDate>' . $created_date . '></pubDate>';
-        $output .= '<media:content type="video/quicktime" expression="full" url= "' . $url . '">';
-        $output .= '<media:category scheme="'. $url . '">' . $term_name . '</media:category>';
+        $output .= '<media:content type="video/quicktime" expression="full" url= "' . $url . '?utm_source=rss">';
+        $output .= '<media:category scheme="'. $url . '?utm_source=rss">' . $term_name . '</media:category>';
         $output .= '<media:text type="plain">' . $title . '</media:text>';
         $output .= '<media:rating scheme="urn:simple">nonadult</media:rating>';
         $output .= '<media:thumbnail width="107" height="82" url="' . $img_url . '"/>';

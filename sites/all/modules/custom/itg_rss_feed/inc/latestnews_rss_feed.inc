@@ -13,6 +13,8 @@ function latestnews_rss_feed() {
     global $base_url;
     $output = "";
     $redis_key = "itgd_rss_latestnewsRSSFeed";
+    $top_stories_section = 1206584;
+    $section_url = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $top_stories_section);
 //    $result_get = getRedis($redis_key);
 
     if (FALSE && $result_get['key_value'] != "") {
@@ -22,7 +24,7 @@ function latestnews_rss_feed() {
         //anchorRSSFeed writing...
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $output .= get_rss_feed_header();
-        $output .= get_rss_feed_sub_header_latestnews();
+        $output .= get_rss_feed_sub_header_latestnews($section_url);
         $output .= get_latest_news_item_rss();
         $output .= get_rss_feed_footer();
         // set into redis
