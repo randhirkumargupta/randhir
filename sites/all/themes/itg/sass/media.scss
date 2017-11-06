@@ -1682,7 +1682,7 @@
     }
     /*election page css end*/
     #block-itg-menu-manager-third-level-menu {
-        z-index: 999999;
+        /*z-index: 999999;*/
         position: relative;
     }
     .view-front-end-global-search .searh-all-filters .views-exposed-widget.views-submit-button {
@@ -2654,13 +2654,6 @@
         float: none;
         margin: 1.4em 0;
     }
-    div.password-confirm {
-        float: none;
-        margin-top: 0;
-    }
-    div.form-item div.password-suggestions {
-        width: 100%;
-    }
 }
 
 @media only screen and (max-width:680px) {
@@ -2733,6 +2726,13 @@
             margin-bottom: 10px;
             margin-top: 0;
         }
+    }
+    div.password-confirm {
+        float: none;
+        margin-top: 0;
+    }
+    div.form-item div.password-suggestions {
+        width: 100%;
     }
     /* css end change password sso */
 }
