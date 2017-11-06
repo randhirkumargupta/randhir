@@ -136,6 +136,7 @@ function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, 
   $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
   $courtesy = $value['field_story_courtesy_value'];
+  $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
   $xml_detail = '<root>';
   $xml_detail .= '<item>';
   $xml_detail .= '<id>' . $value["nid"] . '</id>';
@@ -154,6 +155,7 @@ function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, 
   $xml_detail .= '<largeimage><![CDATA[' . $large_img["imag_url"] . ' ]]></largeimage>';
   $xml_detail .= '</image>';
   $xml_detail .= '</images>';
+  $xml_detail .= '<weburl><![CDATA[ ' . $url . ' ]]></weburl>';  
   $xml_detail .= get_comment_xml_tag($value['nid']);
   $xml_detail .= '</item>';
   $xml_detail .= '</root>';
@@ -222,9 +224,13 @@ function itg_genrate_hltapps_videos_syndication($section_id = NULL, $file_name, 
 
 function genrate_hltapps_videos_xml($result, $section_name, $section_id) {
   global $base_url;
+  
   $xml = '<root>';
   $xml .= '<id>' . $section_id . '</id>';
   $xml .= '<title><![CDATA[' . $section_name . ']]></title>';
+  if($section_id == 1){
+   $xml .= '<description><![CDATA[ About India & world News. ]]></description>'; 
+  }
   $xml .= '<itemcount>' . count($result) . '</itemcount>';
 
   if (!empty($result)) {
