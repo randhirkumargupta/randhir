@@ -828,7 +828,7 @@ jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-
  * {@inheritdoc}
  */
 function itg_photogallery_node_view($node, $view_mode, $langcode) {
-  if ($node->type == 'photogallery') {
+  if ($node->type == 'photogallery' && !empty(variable_get('photo_block_refresh'))) {
     $settings = array();
     $settings['photo_nid'] = $node->nid;
     drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));

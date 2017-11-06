@@ -8,7 +8,6 @@
 
 jQuery(document).ready(function () {
     var photo_nid = Drupal.settings.itg_photogallery.settings.photo_nid;
-    console.log(photo_nid);
     try {
         jQuery.ajax({
             url: Drupal.settings.itg_widget.settings.base_url + '/itg-photo-block-refresh/'+ photo_nid,
