@@ -18,6 +18,15 @@ function itg_photogallery_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_photogallery_filter.inc',
   );
+  
+  $items['itg-photo-block-refresh/%'] = array(
+    'title' => 'photogallery block refresh',
+    'description' => 'photogallery block refresh',
+    'page callback' => 'itg_photo_block_refresh',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_photo_block_refresh.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -813,6 +822,19 @@ jQuery('.region-sidebar-second').find(\"[id^='block-itg-ads-ads-medium-rectangl-
 	}
 }
 */
+
+/**
+ *Implement hook_node_view().
+ * {@inheritdoc}
+ */
+function itg_photogallery_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'photogallery') {
+    $settings = array();
+    $settings['photo_nid'] = $node->nid;
+    drupal_add_js(array('itg_photogallery' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_photogallery') . '/js/itg_photogallery_block_refresh.js', array('scope' => 'footer'));
+  }
+}
 
 /**
  * Implement widget alter()
