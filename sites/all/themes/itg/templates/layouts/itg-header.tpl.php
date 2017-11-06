@@ -1,6 +1,9 @@
 <?php
 global $base_url, $user;
-$scheme = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://";
+if(!empty(variable_get('itg_front_url'))) {
+   $parse_scheme = parse_url(variable_get('itg_front_url'));
+   $scheme = $parse_scheme['scheme']."://";
+}
 if (!empty($data['itg_main_manu_header'])) {
   foreach ($data['itg_main_manu_header'] as $key => $val) {
     if (isset($val['#localized_options']['attributes']['title']) && $val['#localized_options']['attributes']['title'] == 1) {
@@ -39,7 +42,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
       </div>
     </li>
     <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" title="Live Tv" /></a></li> 
-    <li> 
+    <li class="user-menu"> 
       <?php
         if ($_GET['q'] != 'user') {
           $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);

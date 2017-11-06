@@ -333,3 +333,63 @@ function itg_update_newsletter_cron_tbl($nid) {
     field_attach_update('node', $node_load_data);
   }
 }
+
+/**
+ * Get Newsletter content using nid
+ * Used on newsletter form
+ */
+function itg_newsletter_content_data() {
+
+  $getnid = $_POST['content_id'];
+  if (isset($getnid) && !empty($getnid)) {
+    $query = db_select('node', 'n');
+//    $query->join('workbench_moderation_node_history', 'mnh', 'n.nid = mnh.nid');
+    $query->fields('n', array('nid'));
+    $query->condition('n.status', 1, '=');
+    $query->condition('n.type', 'story', '=');
+    $query->condition('n.nid', $getnid, '=');
+//    $query->condition('mnh.state', 'published', '=');
+    $result = $query->execute();
+    $record_nid = $result->rowCount();
+    $record_nid = $result->fetchField();
+    if (!empty($record_nid)) {
+      $node = node_load($record_nid);
+      if ($node->type == 'story') {
+        $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+      } else {
+        $kicker = '';
+      }
+      $file_id = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
+      $file_data = _itg_get_extra_large_img_alt_and_title_from_tid($file_id , $getnid);
+      echo drupal_json_encode(array('title' => $node->title, 'kicker' => $kicker, 'file_data' => $file_data  ,'fid' => $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']));
+      exit;
+    }
+  }
+}
+
+/**
+ * Implements page callback
+ * @return json
+ */
+function itg_newsletter_content_subject_headline($title) {
+    if (strlen(trim($title)) > 0) {
+      $content_type = arg(1);
+      $options = '';
+      $title = strtolower(trim($title));
+      $query = db_select('node', 'n');
+      $query->leftJoin('field_data_field_news_title' , 'nt' , 'nt.entity_id=n.nid');
+      $query->fields('nt', array('field_news_title_value'));
+      $query->condition('nt.field_news_title_value', '%' . $title . '%', 'LIKE');
+      $query->condition('n.type', 'newsletter', '=');
+      $query->condition('n.status', 1);
+      $query->range(0, 20);
+      $query->orderBy('nt.field_news_title_value');
+      $result = $query->execute();
+
+      while ($record = $result->fetchAssoc()) {
+          $options[$record['field_news_title_value']] = $record['field_news_title_value'];
+      }
+
+      drupal_json_output($options);
+  }
+}
