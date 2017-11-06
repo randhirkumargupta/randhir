@@ -995,7 +995,7 @@ function itg_akamai_init() {
           akamai_max_age($max_age);
         }
         catch (Exception $e) {
-          
+          watchdog('ITG Akamai', 'Error:' . $e->getMessage());
         }
       }
       // Setting TTL for Akamai including all internal pages, ie. Home, Program, Speaker, Registration and Sponser
