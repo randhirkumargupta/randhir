@@ -40,7 +40,7 @@ $uri = !empty($section_banner_data->field_cm_category_banner['und'][0]['uri']) ?
 if (!empty($uri)) {
   $src = file_create_url($uri);
 }
-$field_cm_category_color = isset($section_banner_data->field_cm_category_color['und'][0]['rgb']) ? $section_banner_data->field_cm_category_color['und'][0]['rgb'] : "#595959";
+$field_cm_category_color = isset($section_banner_data->field_cm_category_color['und'][0]['rgb']) ? $section_banner_data->field_cm_category_color['und'][0]['rgb'] : "#000";
 ?>
 <?php if (!empty($data[0]['db_data']) || (!empty($src) && isset($uri))) {
   ?>

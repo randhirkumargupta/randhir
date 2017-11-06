@@ -46,8 +46,8 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
   <nav class="navigation">
     <div class="container">
       <ul class="second-level-menu before-load menu">
-            <li>
-               <div class="user-menu">
+            <li class="userlogin-icon-parent-mobile">
+               <div class="user-menus">
                  <?php
                  if ($_GET['q'] != 'user') {
                    $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
@@ -79,41 +79,53 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
         $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
         // Contion to check fucntion isset.
         $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
+         ?>
+         <li class="nav-items ripple-effect hidden-desktop"><a href="<?php print $base_url ?>" class="second-level-child"><span class='menu-icons hidden-desktop'><img class='itg-user-icon-home' src='https://prod-it.indiatodayonline.in/sites/all/themes/itg/images/default_for_all_48_32.jpeg' alt='' /></span> <?php print t('Home'); ?> </a></li>
+         <?php          
         if (!empty($menu_manager)) {
           foreach ($menu_manager as $key => $menu_data) :         
             if (function_exists('itg_menu_manager_get_menu')) {
               // Logic to exclude inactive category.
               $menu_link_data = itg_menu_manager_get_menu($menu_data, arg(), $load_parent);
               $image_class = $menu_link_data['image_class'];
-              $link_text = $menu_link_data['link_text'];
               $link_url = $menu_link_data['link_url'];
+              $link_text = $menu_link_data['link_text'];
               $target = $menu_link_data['target'];
               $active = $menu_link_data['active'];
               $sponsored_class = $menu_link_data['sponsored_class'];
               $parent_class = $menu_link_data['parent_class'];
               $active_cls = $menu_link_data['active_cls'];
               $url_type = $menu_link_data['url_type'];
+              $icon_path = $menu_link_data['icon_path'];
               $style_tag = '';
               $color_value = '';
               if(!empty($sponsored_class)) {
                 $color_value = $menu_data['db_data']['bk_color'];
               }
+			if (!empty($icon_path)) {
+				$link_text_icon  = "<span class='menu-icons hidden-desktop'><img class='itg-user-icon' width='48' height='32' src='" . file_create_url($icon_path) . "'  /></span>";
+			} else {
+				$link_text_icon  = "<span class='menu-icons hidden-desktop'><img class='itg-user-icon' src='https://prod-it.indiatodayonline.in/sites/all/themes/itg/images/default_for_all_48_32.jpeg' alt='' /></span>";
+			}
+			$link_title_for_vertical = $link_text_icon . $menu_link_data['link_title_for_vertical'];
+			module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
+			$detect = new Mobile_Detect;
               ?>
-              <li <?php echo $style_tag; ?> class="nav-items <?php print $image_class; ?>">
+              <li <?php echo $style_tag; ?> class="nav-items <?php if (!$detect->isMobile()) { print $image_class; } ?>">
+                  <?php if (!$detect->isMobile()) { ?>
                   <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?>
+                  <?php } else { ?> 
+                  <?php print l($link_title_for_vertical, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?>
+                  <?php } ?> 
               </li>
+
               <?php
             }
           endforeach;
         }
         ?>
       </ul>
-      <?php //print drupal_render($data['itg_main_manu_header']);    ?>            
-           
-  
-
-    
-
+      
 <div class="menu-login mhide">
   
       <div class="social-nav mhide">
