@@ -188,6 +188,7 @@ function generateStoryDeatilList($id) {
     
     $data_array['tech_photos'] = $story_tech;
     if($tech_pros['listcont'] > 0){
+        unset($tech_pros['listcont']);
         $data_array['tech_pros_cons'] = $tech_pros;
     }
     else{
