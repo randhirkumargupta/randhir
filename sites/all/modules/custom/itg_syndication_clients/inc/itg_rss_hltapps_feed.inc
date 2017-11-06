@@ -224,7 +224,7 @@ function genrate_hltapps_videos_xml($result, $section_name, $section_id) {
   global $base_url;
   $xml = '<root>';
   $xml .= '<id>' . $section_id . '</id>';
-  $xml .= '<title>' . $section_name . '</title>';
+  $xml .= '<title><![CDATA[' . $section_name . ']]></title>';
   $xml .= '<itemcount>' . count($result) . '</itemcount>';
 
   if (!empty($result)) {
@@ -233,13 +233,13 @@ function genrate_hltapps_videos_xml($result, $section_name, $section_id) {
       $video_file_name = 'video' . $nid . '.xml';
       $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
-      $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
+      //$primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
       $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<shortdescription><![CDATA[' . $kicker_text . ']]></shortdescription>';
-      $xml .= '<sectionname>' . $primary_cat . '</sectionname>';
+      //$xml .= '<sectionname>' . $primary_cat . '</sectionname>';
       $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
       $xml .= '<url>' . $video_file_name . '</url>';
       $xml .= '<web-url><![CDATA[' . $content_url . ']]></web-url>';

@@ -102,7 +102,7 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       }
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
-      $xml .= '<link><![CDATA[' . $url . ']]></link>';
+      $xml .= '<link>' . $url . '</link>';
       $xml .= '<category>' . $section_name . '></category>';
       $xml .= '<pubDate>' . $publish_date . '></pubDate>';
       $xml .= '<guid>' . $guid . '</guid>';
