@@ -746,17 +746,11 @@ function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
 
         // Setting configuration for Event so that for Akamai TTL visibility
         if ($form['#node']->type == 'event_backend') {
-          try {
+          if (isset($form['#steps']['step_configuration']->children)) {
             $form['#steps']['step_configuration']->children[] = 'akamai_timeout';
           }
-          catch (Exception $e) {
-            
-          }
-          try {
+          if (isset($form['#step_children']['akamai_timeout'])) {
             $form['#step_children']['akamai_timeout'] = 'step_configuration';
-          }
-          catch (Exception $e) {
-            
           }
         }
       }
