@@ -52,7 +52,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
        <?php
           } else {
        ?>
-        <a href="javascript:void(0)" class="user-icon"><?php print $user_pic; ?></a>  
+        <a href="javascript:void(0)" class="user-icon loginicon"><?php print $user_pic; ?></a>  
         <?php  
           }
         }
