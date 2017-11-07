@@ -193,7 +193,8 @@ function generateStoryDeatilList($id) {
     }
     else{        
         //$tech_pros_emp = new stdClass(); 
-       $photolist = getPhotostorylist(1);
+       $photolist = getBalanklist(1);
+       
             if (count($photolist) == 0) {
                 $photolist = (object) $photolist;
             }
@@ -795,11 +796,34 @@ function getTechProsLabel($content_org, $flag = 0) {
 }
 
 
-function blankobj() {
-    // variable decalaration
+function getBalanklist($nid) {
     $photolist = array();
     $photolist_loop = array();
-    $photolist[0] = (array) $photolist_loop;
+    $node = node_load($nid);
+    
+    $galleryimg = $node->field_photo_story['und'];
+    $lcont = 0;
+    foreach ($galleryimg as $key => $value) {
+
+      $fc = field_collection_field_get_entity($value);
+      $fid = $fc->field_photo_story_image['und'][0]['fid'];
+     
+      $uri = $fc->field_photo_story_image['und'][0]['filename'];
+      $file_uri = file_create_url($uri);
+      $fid_file = $fid;
+      $img_url = completeFilePath($fid_file);
+      $photo_tags = getPhotostoryPhotodetail($fid);
+      
+      $caption = $photo_tags[0]['image_caption'];
+      $byline = $photo_tags[0]['image_photo_grapher'];
+      
+        $photolist_loop[$lcont]['np_id'] = "$fid";
+        $photolist_loop[$lcont]['np_image'] = "$img_url";
+        $photolist_loop[$lcont]['np_credit'] = "$byline";
+        $photolist_loop[$lcont]['np_caption'] = "$caption";
+        $lcont++;
+    }
+    $photolist = $photolist_loop;
     return $photolist;
 }
 
