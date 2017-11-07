@@ -568,7 +568,7 @@ function itg_octopus_get_slug_notification() {
   }
 
   if ($count == 0) {
-    $html .= '<li>' . l(t('Sorry no content available'), 'rundown-listing') . '</li>';
+    $html .= '<li>' . l(t('Sorry no content available'), '<front>') . '</li>';
   }
 
   $html .= '</ul>';
