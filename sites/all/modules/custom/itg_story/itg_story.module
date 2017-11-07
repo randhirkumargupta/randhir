@@ -105,6 +105,15 @@ function itg_story_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/itg_story.inc',
   );
+  
+  $items['itg-read-later-refresh/%'] = array(
+    'title' => 'Read later refresh',
+    'description' => 'Read later refresh',
+    'page callback' => 'itg_story_readlater_block_refresh',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_story_readlater_refresh.inc',
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -1038,6 +1047,15 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       }
     }
     
+    // code for akamai read later refresh
+    if (!empty(variable_get('photo_block_refresh'))) {
+    $settings = array();
+    $settings['story_nid'] = $node->nid;
+    drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_readlater_refresh.js', array('scope' => 'footer'));
+    }
+    
+    // end here
 
     // code for amp page
     if ($view_mode == 'amp') {
