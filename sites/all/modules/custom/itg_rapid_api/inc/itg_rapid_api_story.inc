@@ -199,7 +199,8 @@ function generateStoryDeatilList($id) {
                 $photolist = (object) $photolist;
             }
             
-        $data_array['tech_pros_cons'] = $photolist;
+        //$data_array['tech_pros_cons'] = $photolist;
+        $data_array[] = $photolist;
     }
     
     $data_array['expert-chunk'] = $expertchunk_data;
@@ -799,7 +800,7 @@ function getTechProsLabel($content_org, $flag = 0) {
 function getBalanklist($nid) {
     $photolist = array();
     $photolist_loop = array();    
-    $photolist['photos'] = $photolist_loop;
+    $photolist['tech_pros_cons'] = $photolist_loop;
     return $photolist;
 }
 
