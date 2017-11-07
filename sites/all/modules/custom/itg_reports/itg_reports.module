@@ -66,6 +66,15 @@ function itg_reports_menu() {
     'type' => MENU_CALLBACK ,
     'file' => 'includes/itg_users_reports.inc' ,
   );
+  
+  // Menu form active users reports.
+  $items['itg-content-created-between-date-range'] = array(
+    'page callback' => 'drupal_get_form' ,
+    'page arguments' => array('itg_report_created_date_range') ,
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK ,
+    'file' => 'includes/itg-content-created-between-date-range.inc' ,
+  );
 
   // Menu for section wise breakup.
   $items['itg-section-wise-breakup-report'] = array(
