@@ -4,7 +4,6 @@
  * {@inheritdoc}
  */
 function itg_newsletter_content_preview_data_before_download() {
-  
   echo itg_newsletter_content_preview_data(FALSE);
 }
 
@@ -35,7 +34,6 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
   }
   
   if (arg(2) == 'select_section') {
-    
     $content_limit = variable_get('newsletter_content_limit');
     if (isset($content_limit) && is_numeric($content_limit)) {
       $renge = $content_limit;
@@ -109,7 +107,6 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
         <table cellspacing="0" cellpadding="0" style="width: 100%; text-align: center; font-size: 14px;">' . $footer . '</table>
       </td>
     </tr>';
-
   $content .= '</table><p>&nbsp;</p><p>Thanks,</p><p>India Today Group</p>';
   if (!$download_action) {
     $node = node_load($_GET['nid']);
