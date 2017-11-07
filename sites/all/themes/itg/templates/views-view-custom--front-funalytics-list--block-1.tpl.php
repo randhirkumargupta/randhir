@@ -25,7 +25,7 @@ $short_url = shorten_url($row->url, 'goo.gl');
 													if($row['field_itg_funalytics_image']){
 														print $row['field_itg_funalytics_image'];
 													}else{
-                            ?>	<img  src="<?php echo $base_url. '/sites/all/themes/itg/images/itg_image370x208.jpg';?>" alt="" title="">
+                            ?>	<img  src="<?php echo  image_style_url("anchors_landing", drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg');?>" alt="" title="">
 													<?php
 													}	
 												?>

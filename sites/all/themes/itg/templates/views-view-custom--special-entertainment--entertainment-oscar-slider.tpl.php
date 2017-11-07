@@ -19,7 +19,7 @@
                   
                 }else{
                  
-                  $img = "<img height='443' width ='755' src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg' alt='' title='' />";
+                  $img = "<img height='443' width ='755' src='" .  image_style_url("image_750x363", drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg')."' alt='' title='' />";
                 }
 
                 ?>

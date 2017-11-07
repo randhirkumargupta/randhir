@@ -470,7 +470,7 @@ if (!empty($content)):
                                 $file_uri = file_create_url($story_image);
                             }
                             else {
-                                $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                                $file_uri =  image_style_url("image_647x363", drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg');
                             }
                             print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
                         }
@@ -481,7 +481,7 @@ if (!empty($content)):
                                 $file_uri = file_create_url($story_image);
                             }
                             else {
-                                $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                                $file_uri =  image_style_url("image_647x363", drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg');
                             }
                             print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
                             ?>
@@ -518,7 +518,7 @@ if (!empty($content)):
                                     //<i class="fa fa-camera"></i></span>';
                     }
                     else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                      $file_uri =  image_style_url("image_647x363", drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg');
                     }
                     print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">        
                                     <span class="story-photo-icon">';
