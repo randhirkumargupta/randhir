@@ -30,9 +30,11 @@ class ItgAkamaiUtility {
 
       try {
         foreach ($data as $fields) {
-          $akamai_activity = db_insert('itg_akamai_log')
-              ->fields($fields)
-              ->execute();
+          if(is_array($fields)) {
+            $akamai_activity = db_insert('itg_akamai_log')
+                ->fields($fields)
+                ->execute();
+          }
         }
       }
       catch (Exception $e) {
