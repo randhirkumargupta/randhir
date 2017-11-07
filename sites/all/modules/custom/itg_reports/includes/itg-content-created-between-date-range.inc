@@ -1,19 +1,22 @@
 <?php
 
+define('REPORT_PER_PAGE', 50);
+
 function itg_report_created_date_range($form, $form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_reports') . '/js/itg_reports.js', array('type' => 'file', 'scope' => 'footer'));
-
+  drupal_add_css("#ui-datepicker-div {display:none} " , 'inline');
   $form['content_type'] = array(
     '#type' => 'select',
     '#title' => 'Content Type',
     '#options' => array(
       'All' => 'All',
-      'story' => 'Stroy',
+      'story' => 'Story',
       'videogallery' => 'Videogallery',
       'photogallery' => 'Photogallery',
       'podcast' => 'Podcast',
       'mega_review_critic' => 'Mega Review & Critic',
     ),
+    '#default_value' => isset($_GET['content_type']) ? $_GET['content_type'] : "All",
   );
   // Range1
   $form['range1'] = array(
@@ -26,7 +29,7 @@ function itg_report_created_date_range($form, $form_state) {
     '#title' => t('Date from'),
     '#default_value' => (!empty($_GET['rg1_date_from'])) ? $_GET['rg1_date_from'] : date('Y-m-d', strtotime('-1day')),
     '#attributes' => array('readonly' => 'readonly'),
-    );
+  );
   $form['range1']['rg1_date_to'] = array(
     '#type' => 'textfield',
     '#title' => t('Date to'),
@@ -129,13 +132,20 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
   } else {
     $query->condition('n.type', array("story", "videogallery", "photogallery", "podcast", "mega_review_critic"));
   }
-  $query->range($page, 50);
+  $query->range($page, REPORT_PER_PAGE);
   $query->orderBy('n.nid', 'DESC');
+  $query->condition('n.status', 1);
   $data = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   $count_query = db_select('node', 'n');
   $count_query->fields('n', array('nid'));
   $count_query->condition('n.created', array($start_date_timstamp, $end_date_timestamp), 'BETWEEN');
+  if (isset($_GET['content_type']) && strtolower($_GET['content_type']) != 'all') {
+    $count_query->condition('n.type', $_GET['content_type']);
+  } else {
+    $count_query->condition('n.type', array("story", "videogallery", "photogallery", "podcast", "mega_review_critic"));
+  }
+  $count_query->condition('n.status', 1);
   $row_count = $count_query->execute()->rowCount();
 
   $header = array(
@@ -152,13 +162,13 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
       array('data' => $count + 1),
       array('data' => $row['type']),
       array('data' => $row['title']),
-      array('data' => $base_url . url('node/' . $row['nid'])),
+      array('data' => FRONT_URL . url('node/' . $row['nid'])),
     );
     $count++;
   }
 
   $final_output['row_count'] = $row_count;
-  $final_output['pagger'] = _create_pagnation(range(0, $row_count));
+  $final_output['pagger'] = _create_pagnation($row_count);
   $final_output['table'] = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('views-table', 'date-wise-content-report')), 'empty' => 'No result found.'));
 
   return $final_output;
@@ -171,12 +181,30 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
  * @return string
  */
 function _create_pagnation($total_rows) {
-  module_load_include('php', 'itg_reports', 'includes/pagination');
-  $pagination = new pagination;
-  $item_per_page = 50;
-  $pagination->generate($total_rows, $item_per_page);
-  $pageNumbers = '<div class="numbers">' . $pagination->links() . '</div>';
-  return $pageNumbers;
+  global $base_url;
+  //include pagination class file
+  module_load_include('php', 'itg_reports', 'includes/pagination_new');
+  $data_url = array(
+    'q' => 'itg-content-created-between-date-range',
+    'rg1_date_from' => $_GET['rg1_date_from'],
+    'rg1_date_to' => $_GET['rg1_date_to'],
+    'rg2_date_from' => $_GET['rg2_date_from'],
+    'rg2_date_to' => $_GET['rg2_date_to'],
+  );
+//initialize pagination class
+  $pagConfig = array(
+    'baseURL' => $base_url . "?" . http_build_query($data_url),
+    'totalRows' => $total_rows,
+    'perPage' => REPORT_PER_PAGE
+  );
+  $pagination = new Pagination($pagConfig);
+  return $pagination->createLinks();
+//  module_load_include('php', 'itg_reports', 'includes/pagination');
+//  $pagination = new pagination;
+//  $item_per_page = 50;
+//  $pagination->generate($total_rows, $item_per_page);
+//  $pageNumbers = '<div class="numbers">' . $pagination->links() . '</div>';
+//  return $pageNumbers;
 }
 
 /**
@@ -194,7 +222,7 @@ function __form_markup_dispay_report() {
   $report1_data = itg_report_created_date_range_display_report($rg1_date_from, $rg1_date_to);
   $report2_data = itg_report_created_date_range_display_report($rg2_date_from, $rg2_date_to);
 
-  $div .= '<div class="col-md-12">';
+  $div .= '<div class="row">';
   $div .= '<div class="col-md-6">';
   $div .= '<div class="pull-right"> Count (' . $report1_data['row_count'] . ') Between date <b> ' . $rg1_date_from . ' </b> , <b> ' . $rg1_date_to . ' </b> </div>';
   $div .= $report1_data['table'];
@@ -204,6 +232,7 @@ function __form_markup_dispay_report() {
   $div .= $report2_data['table'];
   $div .= '</div>';
   $div .= '</div>';
+  $div .= '<div class="row">';
   $div .= '<div class="col-md-12">';
   if ($report1_data['row_count'] > $report2_data['row_count']) {
     $final_output_pagger = $report1_data['pagger'];
@@ -211,6 +240,7 @@ function __form_markup_dispay_report() {
     $final_output_pagger = $report2_data['pagger'];
   }
   $div .= $final_output_pagger;
+  $div .= '</div>';
   $div .= '</div>';
   return $div;
 }
