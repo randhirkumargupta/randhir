@@ -794,7 +794,7 @@ function blankobj() {
     // variable decalaration
     $photolist = array();
     $photolist_loop = array();
-    $photolist[0]['photos'] = (array) $photolist_loop;
+    $photolist[0] = (array) $photolist_loop;
     return $photolist;
 }
 
