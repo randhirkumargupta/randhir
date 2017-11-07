@@ -106,7 +106,7 @@ if (!empty($node->field_blog_configuration['und'])) {
     print "<img src='" . $src . "' alt='" . $alt . "' title='" . $title . "'>";
     ?>
   <?php else : ?>
-  <img src="<?php print $base_url. "/" . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg" ?>" alt="" title="">
+  <img src="<?php print  image_style_url("blog_landing_image", drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg');?>" ?>" alt="" title="">
   <?php endif; ?>
   
   <!-- Long description -->

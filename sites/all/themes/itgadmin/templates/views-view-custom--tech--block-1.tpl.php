@@ -24,7 +24,7 @@
               if ($row['field_story_large_image'] != "") {
                 print $row['field_story_large_image'];
               } else {
-                print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' />";
+                print "<img  src='" .  image_style_url("magazine_top_story_483x271", drupal_get_path('theme', 'itg') . '/images/itg_image483x271.jpg') ."' alt='' title='' />";
               }
               ?> 
 
