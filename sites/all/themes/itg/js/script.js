@@ -471,7 +471,9 @@ jQuery(document).ready(function () {
         });
 
         if (is_mobile) {
-            jQuery('.head-live-tv .user-icon').click(function () {
+            //jQuery('.head-live-tv .user-icon').click(function () {
+            jQuery(document).on('click','.head-live-tv .user-icon', function (e) {
+                e.preventDefault();
                 jQuery(this).next('ul.menu').toggle();
             });
         }
