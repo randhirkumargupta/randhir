@@ -109,6 +109,7 @@ features[field_instance][] = node-videogallery-field_video_kicker
 features[field_instance][] = node-videogallery-field_video_repo_type
 features[field_instance][] = node-videogallery-field_video_status_flag
 features[field_instance][] = node-videogallery-field_video_upload
+features[image][] = image_647x363
 features[image][] = video_landing_page_170_x_127
 features[node][] = itg_delete_solr_video
 features[node][] = videogallery

@@ -18,7 +18,7 @@ $changed = $row['changed'];
 
 <div class="col-md-4 col-sm-6 col-xs-1">
 <div class="funalytics-tile">
-  <div class="pic"><a class="funalytic-popup" data-nid="<?php echo $row['counter']?>" href="javascript:;"><?php if (empty($file->uri)){?> <img  src="<?php echo $base_url. '/sites/all/themes/itg/images/itg_image370x208.jpg';?>"> <?php } else{  $img = $file->uri; print theme('image_style', array('path' => $img,'style_name' => 'anchors_landing'));}  ?></a></a></div><div class="funalytics-text">
+  <div class="pic"><a class="funalytic-popup" data-nid="<?php echo $row['counter']?>" href="javascript:;"><?php if (empty($file->uri)){?> <img  src="<?php echo  image_style_url("anchors_landing", drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg');?>"> <?php } else{  $img = $file->uri; print theme('image_style', array('path' => $img,'style_name' => 'anchors_landing'));}  ?></a></a></div><div class="funalytics-text">
       <div class="updated-date"><?php print $changed; ?></div>
       <div class="title"><?php print $row['title']; ?></div>
       <div class="social-share">

@@ -21,7 +21,7 @@
           $url = image_style_url("politoons", $uri);
           $image = "<img src='" . $url . "' alt='' title='' />";
         } else {
-          $url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image88x66.jpg";
+          $url = image_style_url("widget_very_small", drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg');
           $image = "<img src='" . $url . "' width='88' height='88' alt='' title='' />";
         }
         ?>
