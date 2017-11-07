@@ -17,11 +17,11 @@ function itg_story_readlater_block_refresh() {
     }
     if (empty($opt['status']) || $opt['status'] == 0) {
 
-      $buzz_html .= '<a title = "Read Laterq" href = "javascript:void(0)" class = "user-activity" data-rel ="' . $arg[1] . '" data-tag = "story" data-activity = "read_later" data-status = "1" class = "def-cur-pointer"><i class = "fa fa-bookmark"></i><span>READ LATER</span></a>';
+      $buzz_html .= '<a title = "Read Later" href = "javascript:void(0)" class = "user-activity" data-rel ="' . $arg[1] . '" data-tag = "story" data-activity = "read_later" data-status = "1" class = "def-cur-pointer"><i class = "fa fa-bookmark"></i><span>READ LATER</span></a>';
     }
     else {
 
-      $buzz_html .= '<a title = "Read Laterq" href="javascript:void(0)" class="def-cur-pointer unflag-action active"><i class="fa fa-bookmark"></i><span>READ LATER</span></a>';
+      $buzz_html .= '<a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action active"><i class="fa fa-bookmark"></i><span>READ LATER</span></a>';
     }
   }
   else {
@@ -33,11 +33,11 @@ function itg_story_readlater_block_refresh() {
   if ($user->uid > 0) {
     if (empty($opt['status']) || $opt['status'] == 0) {
 
-      $default_html .= '<span> <a title = "Read Later left" href="javascript:void(0)" class="user-activity" data-rel="'.$arg[1].'" data-tag="story" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i>READ LATER</a><span class="flag-throbber">&nbsp;</span></span>';
+      $default_html .= '<span> <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="'.$arg[1].'" data-tag="story" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i>READ LATER</a><span class="flag-throbber">&nbsp;</span></span>';
     }
     else {
 
-      $default_html .= '<span> <a title = "Read Later left" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i>READ LATER</a><span class="flag-throbber">&nbsp;</span></span>';
+      $default_html .= '<span> <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i>READ LATER</a><span class="flag-throbber">&nbsp;</span></span>';
     }
   }
   else {
