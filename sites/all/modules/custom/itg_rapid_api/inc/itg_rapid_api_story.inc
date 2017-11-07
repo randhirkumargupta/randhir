@@ -160,14 +160,14 @@ function generateStoryDeatilList($id) {
         $data_array['listicles'] = $listicle_data;
     }
     else{
-        $listicle_data = array();
+        $listicle_data = (object) array();
         $data_array['listicles'] = $listicle_data;
     }
     if(count($factoid_data['data'])){
         $data_array['factoids'] = $factoid_data;
     }
     else{
-        $factoid_data = array();
+        $factoid_data = (object) array();
         $data_array['factoids'] = $factoid_data;
     }
     if($buzz_temp_flag){
@@ -182,7 +182,7 @@ function generateStoryDeatilList($id) {
         $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
     }
     else{
-        $tech_photo_gallery = array();
+        $tech_photo_gallery = (object) array();
         $data_array['tech_photo_gallery'] = $tech_photo_gallery;
     }
     
@@ -192,7 +192,7 @@ function generateStoryDeatilList($id) {
         $data_array['tech_pros_cons'] = $tech_pros;
     }
     else{
-        $tech_pros_emp = array();
+        $tech_pros_emp = (object) array();
         $data_array['tech_pros_cons'] = $tech_pros_emp;
     }
     
