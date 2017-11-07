@@ -221,6 +221,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     }
 
     $paths = itg_akamai_send_for_host_mapping($paths);
+
     //$paths = itg_akamai_send_for_host_mapping_for_amp($paths);  // Preparing data for AMP URLs
 
     $paths_data = $paths;
@@ -276,6 +277,13 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 
       // Passing / Saving akamai purging log to drupal watchdog 
       watchdog('ITG-Akamai log', 'Url have been purged successfully! Data =>' . json_encode($data_for_log));
+
+      // Sending for Recaching
+      if (module_exists('httprl')) {
+        module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
+        akamai_recacher_crawler($paths);
+      }
+      // End code for Recaching
     }
     catch (Exception $e) {
       $response_data_decoded = json_decode($e->getMessage());
@@ -295,7 +303,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
  */
 function itg_akamai_send_for_host_mapping($paths) {
   $host = variable_get('itg_akamai_mapping_host');
-
   $lastchar = substr($host, -1);
 
   if ($lastchar != '/') {
@@ -548,9 +555,9 @@ function itg_akamai_node_update($node) {
     // Checking akamai permission for logged in user
     if (user_access("administer itg akamai")) {
       // Setting metadata for the TTL for each node id 
-      //if ($node->status == 1) { // Akamai setting for node content level if node is published 
-      itg_akamai_content_setting($node);
-      //}
+      if ($node->status == 1) { // Akamai setting for node content level if node is published 
+        itg_akamai_content_setting($node);
+      }
     }
   }
 }
