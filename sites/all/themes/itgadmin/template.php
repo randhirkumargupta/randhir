@@ -223,9 +223,13 @@ function itgadmin_node_preview($variables) {
   // Do we need to preview trimmed version of post as well as full version?
   if ($trimmed != $full) {
     //drupal_set_message(t('The trimmed version of your post shows what your post looks like when promoted to the main page or when exported for syndication.<span class="no-js"> You can insert the delimiter "&lt;!--break--&gt;" (without the quotes) to fine-tune where your post gets split.</span>'));
-    $output .= '<h3>' . t('Preview trimmed version') . '</h3>';
+    if ($node->type != 'newsletter') {
+      $output .= '<h3>' . t('Preview trimmed version') . '</h3>';
+    }
     $output .= $trimmed;
-    $output .= '<h3>' . t('Preview full version') . '</h3>';
+    if ($node->type != 'newsletter') {
+     $output .= '<h3>' . t('Preview full version') . '</h3>';
+    }
     $output .= $full;
     if ($node->type == 'newsletter') {
       $selectedTemplatenid = $node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'];

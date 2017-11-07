@@ -34,6 +34,13 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
   }
   
   if (arg(2) == 'select_section') {
+    
+    $content_limit = variable_get('newsletter_content_limit');
+    if (isset($content_limit) && is_numeric($content_limit)) {
+      $renge = $content_limit;
+    } else {
+      $renge = 20;
+    }
     $selectedCid = arg(3);
     $getTids = explode("," , $selectedCid);
     if (is_array($getTids) && !empty($getTids)) {
@@ -48,7 +55,7 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
       $query->condition('fsc.field_story_category_tid' , $cat_array , 'IN');
       $query->orderBy('n.nid' , 'DESC');
       $query->groupBy('n.nid');
-      $query->range(0 , 20);
+      $query->range(0 , $renge);
       $result = $query->execute();
       while ($records = $result->fetchAssoc()) {
         $story_nodes[] = $records['nid'];

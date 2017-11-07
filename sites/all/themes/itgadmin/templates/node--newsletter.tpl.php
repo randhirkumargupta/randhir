@@ -42,10 +42,10 @@
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
  
-        <div class="field">
-          <div class="field-label"><?php print t('Template:'); ?></div>
-          <div class="field-items"><?php echo ucfirst(itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'])); ?></div>
-        </div>
+<!--        <div class="field">
+          <div class="field-label"><?php // print t('Template:'); ?></div>
+          <div class="field-items"><?php // echo ucfirst(itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'])); ?></div>
+        </div>-->
       <?php
       if (isset($node->op) && $node->op == 'Preview') {
         if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') { ?>
@@ -86,24 +86,21 @@
         $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
         $headline = $template_node->field_newst_header_headline[LANGUAGE_NONE][0]['value'];
         $logo = image_style_url("thumbnail", $template_node->field_newst_logo[LANGUAGE_NONE][0]['uri']);
-        $banner = $template_node->field_newst_banner[LANGUAGE_NONE][0]['uri'];
+        $banner = file_create_url($template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
         $footer = $template_node->body[LANGUAGE_NONE][0]['value'];
        ?>
       <div class="newsletter-templates">
       <div class="newsletter-header">
-       <div class="newsletter-headline"><?php echo $headline; ?></div>
-       <div class="newsletter-logo"><img src="<?php echo $logo; ?>" /></div>
-       <div class="newsletter-banner"><img src="<?php echo str_replace('public://', $base_url.'/sites/default/files/',$banner ); ?>" alt="" /></div>
+       <!--<div class="newsletter-headline"><?php // echo $headline; ?></div>-->
+       <!--<div class="newsletter-logo"><img src="<?php // echo $logo; ?>" /></div>-->
+       <div class="newsletter-banner"><img src="<?php print $banner ?>" alt="" title="" /></div>
       </div>
         <div class="newsletter-list-parent">
        <?php
         foreach ($node->field_newsl_add_news[LANGUAGE_NONE] as $news_arr) {
-          
           $content_id = $news_arr['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
-
           $title = $news_arr['field_news_title'][LANGUAGE_NONE][0]['value'];
           $kicker = $news_arr['field_news_kicker'][LANGUAGE_NONE][0]['value'];
-          
           if($news_arr['field_news_thumbnail'][LANGUAGE_NONE][0]['fid']){
           $file = file_load($news_arr['field_news_thumbnail'][LANGUAGE_NONE][0]['fid']);
           $thumbnail = image_style_url("thumbnail", $file->uri); 
@@ -111,7 +108,6 @@
           else {
             $thumbnail = $base_url.'/'.drupal_get_path('module', 'itg_newsletter').'/image/no-image.png';
           }
-
           
           if($news_arr['field_news_type'][LANGUAGE_NONE][0]['value'] == 'internal') {
               $link = 'node/'.$news_arr['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
@@ -126,7 +122,7 @@
           <div class="newsletter-list">
             <div class="newsletter-thumbnail"><img style="width:100px; height: 100px" src="<?php echo $thumbnail; ?>" /></div>  
             <div class="title-kicker">
-              <div class="newsletter-title"><?php echo $title; ?></div>
+              <div class="newsletter-title"><?php print l($title , $link , array('attributes' => array('target' => '_blank'))); ?></div>
               <div class="newsletter-kicker"><?php echo $kicker; ?></div>
             </div>
           </div>
@@ -134,6 +130,7 @@
         </div>  
          <div class="newsletter-footer"><?php echo $footer; ?></div>
       </div>
+      <p>&nbsp;</p><p>Thanks,</p><p>&nbsp;</p><p>India Today Group</p><p>&nbsp;</p>
         <?php } 
       } else { ?>
          <div class="field">
