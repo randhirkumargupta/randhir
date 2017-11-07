@@ -364,8 +364,9 @@ function itg_related_apachesolr_query_alter(DrupalSolrQueryInterface $query) {
   else if ($arg[0] == 'related-content' && !empty($_GET['width'])) {
       $bundle_name = array('story', 'blog', 'photogallery', 'videogallery', 'podcast', 'breaking_news');
       $def_bun = implode(' OR ', $bundle_name);
-      $str = 'bundle_name:(' . $def_bun . ')';
+      $str = 'bundle:(' . $def_bun . ')';
       $query->replaceParam("fq", '(' . $str . ')');
+      //pr($query->getSolrParams());
   }
   else {
     $page_condition = array('related-content', 'advance_search', 'searchimage', 'clone-story', 'search-unpublish-video','search-unpublish-internal-video','search-unpublish-internal-video-singal', 'search-unpublish-video-radio', 'search-publish-video', 'search-publish-video-radio','solr-unpublish-video');
