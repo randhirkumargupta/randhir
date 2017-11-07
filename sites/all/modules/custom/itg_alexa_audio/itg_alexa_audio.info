@@ -1,0 +1,4 @@
+name = ITG Alexa Audio Upload
+description = "ITG Alexa Audio Upload"
+core = 7.x
+package = ITG
