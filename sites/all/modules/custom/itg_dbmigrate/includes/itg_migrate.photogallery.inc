@@ -7,10 +7,11 @@
  */
 class ItgPhotogalleryMigration extends XMLMigration {
 
+  public $photo_consvalue;
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Photogallery)');
-
+    $this->photo_consvalue = $this->read_folder_xml_photo();
     // "fields" from an XML feed, so we pass an explicit list of source fields
     $fields = array(
       'title' => t('title'),
@@ -88,7 +89,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
     // This can also be an URL instead of a local file path.
     $file_path = DRUPAL_ROOT . '/' . 'sites/default/files';
 
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
+     $xml_folder = $file_path . '/' . 'migrate/xml_file/migrate_xml/xml_for_migrate/' . $this->photo_consvalue . '/';
 
     $items_url = $xml_folder . 'indiatoday-galleries.xml';
 
@@ -457,8 +458,43 @@ class ItgPhotogalleryMigration extends XMLMigration {
         $data_category[]['tid'] = $chunk_data;
       }
     }
-    $row->category_new = $data_category;
+    
+    //category according drupal id
+    
+    $drupal_id_category = '';
+    if (isset($row->xml->content_mapping->content_mapping_category) && !empty($row->xml->content_mapping->content_mapping_category)) {
+      $drupal_category_array = array();
+      $xm_cat = '';
+      $drupal_tid_array = array();
+      foreach ($row->xml->content_mapping->content_mapping_category as $xm_cat) {
+        $drupal_category_array = explode('#', $xm_cat);
+        $k = 1;
+        foreach ($drupal_category_array as $drupal_individal_cat) {
 
+          $array_count = $k;
+          $drupal_source_cid = (string) $drupal_individal_cat;
+
+          //$table_name = itg_migrate_category_table($array_count);
+          if ($k != 1) {
+            $str = '#';
+          }
+          $drupal_tid_array[] = $drupal_source_cid;
+          $k++;
+        }
+      }
+      $drupal_all_category = array_unique($drupal_tid_array);
+      foreach ($drupal_all_category as $chunk_data) {
+        $drupal_id_category[]['tid'] = $chunk_data;
+      }
+    }
+    $final_mix_category = '';
+    if((!empty($drupal_id_category) && isset($drupal_id_category)) && (!empty($data_category) && isset($data_category))){
+      $final_mix_category = array_merge($drupal_id_category, $data_category);
+    }else{
+      $final_mix_category = $data_category;
+    }
+    
+    $row->category_new = $final_mix_category;
 
     // Story tags migration
     $data_tags = '';
@@ -489,11 +525,16 @@ class ItgPhotogalleryMigration extends XMLMigration {
     $row->final_social_checkbox = $final_social;
 
     // Primary category
-    if (isset($row->xml->primary_category) && !empty($row->xml->primary_category)) {
+   /* if (isset($row->xml->primary_category) && !empty($row->xml->primary_category)) {
       $category_primary_array = explode('#', $row->xml->primary_category);
       $last_primary_value = end($category_primary_array);
       $source_cid = (string) $last_primary_value;
       $orignal_pcategory = get_itg_destination_id('migrate_map_itgphoto', $source_cid);
+      $row->xml->primary_category = $orignal_pcategory;
+    }*/
+    
+    if (isset($row->xml->primary_category) && !empty($row->xml->primary_category)) {
+      $orignal_pcategory = (int) $row->xml->primary_category;
       $row->xml->primary_category = $orignal_pcategory;
     }
 
@@ -734,5 +775,31 @@ class ItgPhotogalleryMigration extends XMLMigration {
       field_attach_update('node', $node);
     }
   }
+  
+  public function read_folder_xml_photo() {
+    $path_xml = 'sites/default/files/migrate/xml_file/migrate_xml/xml_for_migrate/';
+    $files = scandir($path_xml);
+    if ($files[0] == '.') {
+      unset($files[0]);
+    }
+    if ($files[1] == '..') {
+      unset($files[1]);
+    }
+    $result = array_values($files);
 
+    return $result[0];
+  }
+
+  public function postImport() {
+    parent::postImport();
+    // mail send if Photo failed.
+    $content = failed_record_xml_id('migrate_map_itgphotogallery');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Photo',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+  }
 }

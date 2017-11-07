@@ -346,3 +346,18 @@ function get_author_name($auid) {
   $author_name = db_query("SELECT title from {node} n WHERE n.nid = :nid", array(":nid" => $get_author_id))->fetchField();
   return $author_name;
 }
+
+/*
+ * ITG FIA Configuration form
+ */
+function itg_fia_config_form($form, &$form_state) {
+  $form['itg_fia_config'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Add the App Id'),
+    '#description' => t('Add Your Facebook Application Id'),
+    '#default_value' => variable_get('itg_fia_config'),
+  );
+  $form = system_settings_form($form);
+  return $form;
+}
+
