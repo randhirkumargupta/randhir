@@ -121,7 +121,7 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
   $end_date_timestamp = mktime(23, 59, 59, $e_month, $e_day, $e_year);
 
   $query = db_select('node', 'n');
-  $query->fields('n', array('title', 'type'));
+  $query->fields('n', array('title', 'type' ,'nid'));
   $query->condition('n.created', array($start_date_timstamp, $end_date_timestamp), 'BETWEEN');
 
   if (isset($_GET['content_type']) && strtolower($_GET['content_type']) != 'all') {
