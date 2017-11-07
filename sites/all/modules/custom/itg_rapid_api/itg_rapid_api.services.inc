@@ -3552,7 +3552,7 @@ function itg_rapid_api_storydetail($token) {
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
-    $jsondata = json_decode($jsondata, false);
+    $jsondata = json_decode($jsondata, true);
     return $jsondata;
 }
 
