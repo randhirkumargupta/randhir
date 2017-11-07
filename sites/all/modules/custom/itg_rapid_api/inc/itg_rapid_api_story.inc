@@ -192,15 +192,9 @@ function generateStoryDeatilList($id) {
         $data_array['tech_pros_cons'] = $tech_pros;
     }
     else{        
-        //$tech_pros_emp = new stdClass(); 
-       $photolist = getBalanklist(1);
-       
-            if (count($photolist) == 0) {
-                $photolist = (object) $photolist;
-            }
-            
-        //$data_array['tech_pros_cons'] = $photolist;
-        $data_array[] = $photolist;
+        $tech_pros_emp = new stdClass(); 
+        $tech_pros_emp->id = "";
+        $data_array[] = $tech_pros_emp;
     }
     
     $data_array['expert-chunk'] = $expertchunk_data;
