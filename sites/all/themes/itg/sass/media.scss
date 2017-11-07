@@ -154,7 +154,7 @@
             left: 0px;
             font-size: 0;
             position: absolute;
-            top: 50%;
+            top: 40%;
             z-index: 9;
             border: none;
             margin-top: -50px;
@@ -1682,7 +1682,7 @@
     }
     /*election page css end*/
     #block-itg-menu-manager-third-level-menu {
-        z-index: 999999;
+        /*z-index: 999999;*/
         position: relative;
     }
     .view-front-end-global-search .searh-all-filters .views-exposed-widget.views-submit-button {
@@ -1744,6 +1744,21 @@
                 top: 16px;
             }
         }
+    }
+}
+
+@media only screen and (max-width:768px) {
+    #block-itg-widget-featured-photo-carousel-r .slick-prev:before,
+    #block-itg-widget-featured-photo-carousel-r .slick-next:before,
+    #block-itg-widget-featured-video-carousel-r .slick-prev:before,
+    #block-itg-widget-featured-video-carousel-r .slick-next:before {
+        margin-top: 0;
+    }
+    #block-itg-widget-featured-photo-carousel-r .slick-prev,
+    #block-itg-widget-featured-photo-carousel-r .slick-next,
+    #block-itg-widget-featured-video-carousel-r .slick-prev,
+    #block-itg-widget-featured-video-carousel-r .slick-next {
+        top: 35%;
     }
 }
 
@@ -2639,13 +2654,6 @@
         float: none;
         margin: 1.4em 0;
     }
-    div.password-confirm {
-        float: none;
-        margin-top: 0;
-    }
-    div.form-item div.password-suggestions {
-        width: 100%;
-    }
 }
 
 @media only screen and (max-width:680px) {
@@ -2695,8 +2703,10 @@
         padding: 5px 10px;
     }
     #block-views-video-landing-header-block .video-header-right .ads {
-        margin: 10px 0;
+        margin: 10px auto;
+        display: block;
         float: none;
+        margin-bottom: 0 !important;
     }
     /*    sosory css start */
     #block-views-so-sorry-the-remix,
@@ -2717,10 +2727,23 @@
             margin-top: 0;
         }
     }
+    div.password-confirm {
+        float: none;
+        margin-top: 0;
+    }
+    div.form-item div.password-suggestions {
+        width: 100%;
+    }
     /* css end change password sso */
 }
 
 @media only screen and (max-width:480px) {
+    #block-itg-widget-featured-photo-carousel-r .slick-prev,
+    #block-itg-widget-featured-photo-carousel-r .slick-next,
+    #block-itg-widget-featured-video-carousel-r .slick-prev,
+    #block-itg-widget-featured-video-carousel-r .slick-next {
+        top: 23%;
+    }
     #block-views-anchor-landing-page-block {
         .anchor-left {
             @include calculate-width(1);
@@ -2872,6 +2895,12 @@
     }
     #block-itg-layout-manager-header-block .head-live-tv .globle-search.active {
         width: 108px;
+    }
+    #block-itg-widget-featured-photo-carousel-r .slick-prev,
+    #block-itg-widget-featured-photo-carousel-r .slick-next,
+    #block-itg-widget-featured-video-carousel-r .slick-prev,
+    #block-itg-widget-featured-video-carousel-r .slick-next {
+        top: 15%;
     }
 }
 

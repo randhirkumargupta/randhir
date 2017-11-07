@@ -34,7 +34,7 @@
                 {
 
                     $.ajax({
-                        'url': base_url + '/ajaxcallback',
+                        'url': base_url + '/related-ajaxcallback',
                         'data': post,
                         'type': 'POST',
                         'success': function (data)

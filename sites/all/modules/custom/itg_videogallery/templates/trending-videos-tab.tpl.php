@@ -12,7 +12,7 @@
             else {
               ?>
               <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
-                  <img src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
+                <img src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" title="" />
               </a>
             <?php } ?>
             <p title="<?php echo $entity['title']; ?>">

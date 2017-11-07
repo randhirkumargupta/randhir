@@ -69,15 +69,11 @@
 ?>
   </div>
 </div>
+<?php if(!empty(variable_get('amp_photo_ad'))) { ?>
 <div class="custom-amp-ad">
-<amp-ad width=300 height=250
-    type="doubleclick"
-    data-slot="/1007232/Indiatoday_AMP_Mobile_Photo_ATF_300x250"
-    data-multi-size-validation="false">
-  <div placeholder></div>
-  <div fallback></div>
-</amp-ad>  
+<?php print variable_get('amp_photo_ad'); ?> 
 </div>
+<?php } ?>
 <div class="amp-other-gallery">
 <?php
 // get all node id related to current node primary category
@@ -99,11 +95,11 @@ if (function_exists('get_other_gallery_amp')) {
       if (!empty($value['field_story_small_image_fid'])) {
         $file = file_load($value['field_story_small_image_fid']);
         $small_image = file_create_url($file->uri);
-        $other_src_set = $small_image . ' ' . $small_width . 'w';
+        $other_src_set = $small_image . ' ' . $small_width . ' w';
       }
       else {
         $small_image = $base_url . '/' . path_to_theme() . '/images/itg_image170x127.jpg';
-        $other_src_set = $small_image . ' ' . $small_width . 'w';
+        $other_src_set = $small_image . ' ' . $small_width . ' w';
       }
       
       $alias = drupal_get_path_alias('node/'.$value['nid']);

@@ -98,7 +98,7 @@ function itg_fia_xml_node_feed($query) {
           if (!empty($get_fcv->field_api_image_fid)) {
             $file = file_load($get_fcv->field_api_image_fid);
             $imgs_path = file_create_url($file->uri);
-            $get_script .= '<figure><img src="' . $imgs_path . '" /></figure>';
+            $get_script .= '<figure><img src="' . $imgs_path . '" alt="" title="" /></figure>';
           }
         }
         $full_script_slider[$gall_position][] = '<figure class="op-slideshow">' . $get_script . '</figure>';
@@ -120,7 +120,7 @@ function itg_fia_xml_node_feed($query) {
       if (in_array($audio_pos, $bk)) {
         $body_vals[$audio_pos] = $body_vals[$audio_pos] .
           '<figure>
-             <img src="' . $img_path . '">
+             <img src="' . $img_path . '" alt="" title="">
              <audio title="audio title" autoplay="autoplay" muted="muted">
                <source src="' . $audio_url . '">
             </audio>
@@ -129,7 +129,7 @@ function itg_fia_xml_node_feed($query) {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] .
           '<figure>
-             <img src="' . $img_path . '">
+             <img src="' . $img_path . '" alt="" title="">
              <audio title="audio title" autoplay="autoplay" muted="muted">
               <source src="' . $audio_url . '">
             </audio>
@@ -142,13 +142,13 @@ function itg_fia_xml_node_feed($query) {
       if (in_array($img_position, $bk)) {
         $body_vals[$img_position] = $body_vals[$img_position] .
           '<figure>
-            <img src="' . $img_path . '" />
+            <img src="' . $img_path . '" alt="" title="" />
           </figure>';
       } else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] .
           '<figure>
-            <img src="' . $img_path . '" />
+            <img src="' . $img_path . '" alt="" title="" />
           </figure>';
       }
     }
@@ -307,7 +307,7 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
   $output .= "    <header>\n";
   // <!-- The header image shown inside your article --> 
   $output .= "    <figure data-feedback='fb:likes, fb:comments'>";
-  $output .= "     <img src='" . $fb_instant_image . "' />";
+  $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";
   $output .= "     <figcaption class='op-vertical-below'>";
   $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>";
   $output .= "     </figcaption>";
@@ -346,3 +346,18 @@ function get_author_name($auid) {
   $author_name = db_query("SELECT title from {node} n WHERE n.nid = :nid", array(":nid" => $get_author_id))->fetchField();
   return $author_name;
 }
+
+/*
+ * ITG FIA Configuration form
+ */
+function itg_fia_config_form($form, &$form_state) {
+  $form['itg_fia_config'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Add the App Id'),
+    '#description' => t('Add Your Facebook Application Id'),
+    '#default_value' => variable_get('itg_fia_config'),
+  );
+  $form = system_settings_form($form);
+  return $form;
+}
+

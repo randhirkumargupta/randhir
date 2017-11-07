@@ -7,7 +7,7 @@
 
 <div id="container">
     <div id="imgtag">
-        <img id="" src="<?php echo $url;?>" alt="" /> 
+      <img id="" src="<?php echo $url;?>" alt="" title="" /> 
         <div id="tagbox">
         </div>
     </div> 

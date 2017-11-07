@@ -61,19 +61,21 @@ function itg_story_menu() {
     'page callback' => 'itg_story_create_breaking_news',
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
-    'file' => 'includes/itg_story.helper.inc',
+    'file' => 'includes/itg_story.inc',
   );
 
   $items['byline/autocomplete'] = array(
     'page callback' => 'itg_story_byline',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
   );
 
   $items['multibyline-save'] = array(
     'page callback' => 'itg_story_byline_save',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
   );
 
   $items['admin/config/administration/sponsor_category'] = array(
@@ -101,6 +103,7 @@ function itg_story_menu() {
     'page arguments' => array(1),
     'access callback' => TRUE,
     'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_story.inc',
   );
 
   return $items;
@@ -1098,7 +1101,7 @@ function itg_story_movie_image_plugin_data($node_obj, $source = NULL) {
           $html .='<amp-img height="127" width="170" alt="sample photo" src="' . $sample_img . '"></amp-img>';
         }
         else {
-          $html .= '<a rel="prettyPhoto[gallery2]" href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt=""/></a>';
+          $html .= '<a rel="prettyPhoto[gallery2]" href="'.$href_sample_img.'"><img src="' . $sample_img . '"  alt="" title=""/></a>';
         }
         $html .= '<span class="smp-date">' . $dty . '</span>';
         $html .= '<p>' . $sample_title . '</p>';
@@ -1669,57 +1672,5 @@ function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $p
         }
       }
     }
-  }
-}  
-    
-/**
- * Add byline menu page callback
- * @global object $user
- * @param type $ajax
- */
-function itg_story_add_byline_popup($ajax) {
-  global $user;
-  if ($ajax) {
-    ctools_include('ajax');
-    ctools_include('modal');
-
-    ctools_include('node.pages', 'node', '');
-    $node = (object) array(
-          'uid' => $user->uid,
-          'name' => (isset($user->name) ? $user->name : ''),
-          'type' => 'reporter',
-          'language' => LANGUAGE_NONE,
-    );
-
-    $form_state = array(
-      'ajax' => TRUE,
-      'title' => t('Add Byline'),
-      'reporter_popup_form' => 1,
-    );
-    $form_state['build_info']['args'] = array($node);
-    // Use ctools to generate ajax instructions for the browser to create
-    // a form in a modal popup.
-    $output = ctools_modal_form_wrapper('reporter_node_form', $form_state);
-
-    // If the form has been submitted, there may be additional instructions
-    // such as dismissing the modal popup.
-    if (!empty($form_state['executed'])) {
-      if (!empty($form_state['values']['field_reporter_profile_type'])) {
-        $reporter_type = '(' . $form_state['values']['field_reporter_profile_type']['und'][0]['value'] . ')';
-      }
-      if (!empty($form_state['values']['field_reporter_email_id'])) {
-        $reporter_email = '(' . $form_state['values']['field_reporter_email_id']['und'][0]['value'] . ')';
-      }
-      $name_format = $form_state['values']['title'] . $reporter_type . $reporter_email . '{' . $form_state['values']['nid'] . '}';
-      $output = array();
-      $output[] = ctools_modal_command_display(
-          t('Node created'), 'Node creation successful.');/** Add success message */
-      $output[] = ctools_modal_command_dismiss(); //Close modal automatically
-      //$output[] = ctools_ajax_command_reload(); //reload parent window
-      $output[] = ajax_command_invoke('#edit-field-story-reporter-und-0-target-id', 'val', array($name_format));
-    };
-    // Return the ajax instructions to the browser via ajax_render().
-    print ajax_render($output);
-    drupal_exit();
   }
 }
