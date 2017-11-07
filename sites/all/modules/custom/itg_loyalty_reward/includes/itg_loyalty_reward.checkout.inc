@@ -77,6 +77,7 @@ function itg_loyalty_reward_address_form($form, &$form_state) {
     );
     $form['zip_code'] = array(
       '#type' => 'textfield',
+      '#maxlength' => 6,
       '#attributes' => array(
         'placeholder' => t('Pincode'),
       ),
