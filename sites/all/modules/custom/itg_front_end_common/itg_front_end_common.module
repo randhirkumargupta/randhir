@@ -352,7 +352,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
   $os = array("search_index");
   $key = '';
   if (!in_array($view_mode, $os)) {
-    if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview') {
+    if ($node->type == 'breaking_news' && !empty($node->nid) && $node->op != 'Preview' && !empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
       drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2, 'scope' => 'footer'));
     }
     
