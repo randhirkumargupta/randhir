@@ -381,5 +381,12 @@ function itg_widgets_custom_variables() {
 		'#default_value' => variable_get('amp_story_ad'),
 	);
   
+  $form['photo_block_refresh'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable photogallery block refresh in case of akamai'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('photo_block_refresh'), // for default checked and false is not checked
+  );
+  
   return system_settings_form($form);
 }

@@ -61,6 +61,7 @@ $argum = base64_encode(arg(1));
                         </div>
                     </div>
                 </li>
+                <div class = "photo-refresh-top">
                 <?php global $user; ?>
                 <?php
                 if ($user->uid > 0) {
@@ -85,11 +86,13 @@ $argum = base64_encode(arg(1));
                   <?php
                 }
                 ?>
+                </div>  
                 <?php if ($user->uid > 0): ?>
-                  <li><a class="def-cur-pointer" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
+                  <li><a class="def-cur-pointer photo-login-akamai" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
                 <?php else: ?>
                   <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                 <?php endif; ?>
+               <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   
             </ul>
         </div>
     </div>
@@ -212,17 +215,18 @@ $argum = base64_encode(arg(1));
                         </div>
                     </li>
                     <?php if ($user->uid > 0): ?>
-                      <li class="mhide"><a class="def-cur-pointer" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
+                      <li class="mhide"><a class="def-cur-pointer photo-login-akamai" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
                     <?php else: ?>
                       <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                     <?php endif; ?>
+                    <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   
+                    <div class = "photo-refresh-bottom">
                     <?php global $user; ?>
                     <?php
                     if ($user->uid > 0) {
                       if (function_exists(itg_get_front_activity_info)) {
                         $opt = itg_get_front_activity_info($photo_node->nid, $photo_node->type, $user->uid, 'read_later', $status = '');
                       }
-
                       if (empty($opt['status']) || $opt['status'] == 0) {
                         ?> 
                         <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
@@ -240,6 +244,7 @@ $argum = base64_encode(arg(1));
                       <?php
                     }
                     ?>
+                      </div>      
                 </ul>
             </div>
 

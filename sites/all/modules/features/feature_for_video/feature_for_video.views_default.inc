@@ -948,7 +948,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['field_itg_content_publish_date']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_itg_content_publish_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_itg_content_publish_date']['settings'] = array(
-    'format_type' => 'itg_poll_formate',
+    'format_type' => 'video_landing_header_date',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
