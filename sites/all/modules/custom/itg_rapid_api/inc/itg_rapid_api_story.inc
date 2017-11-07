@@ -195,7 +195,7 @@ function generateStoryDeatilList($id) {
         $tech_pros_emp = new stdClass();  
         //$tech_pros_emp = (object) null;
         //$tech_pros_emp = array(new stdClass);
-        $data_array['tech_pros_cons'] = new stdClass();
+        $data_array['tech_pros_cons'] = new stdClass;
         
     }
     
