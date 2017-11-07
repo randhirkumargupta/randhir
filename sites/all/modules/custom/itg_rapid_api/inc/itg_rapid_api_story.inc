@@ -192,8 +192,7 @@ function generateStoryDeatilList($id) {
         $data_array['tech_pros_cons'] = $tech_pros;
     }
     else{
-        $tech_pros_emp = array();
-        $tech_pros_emp = (object) $tech_pros_emp;           
+        $tech_pros_emp = blankobj();    
         $data_array['tech_pros_cons'] = $tech_pros_emp;
     }
     
@@ -788,5 +787,14 @@ function getTechProsLabel($content_org, $flag = 0) {
     //echo $h2; die();
     return $h2;
     
+}
+
+
+function blankobj() {
+    // variable decalaration
+    $photolist = array();
+    $photolist_loop = array();
+    $photolist[0]['photos'] = (array) $photolist_loop;
+    return $photolist;
 }
 
