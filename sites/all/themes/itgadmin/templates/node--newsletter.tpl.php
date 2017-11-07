@@ -41,46 +41,89 @@
 
   <?php if (!empty($content)): ?>
     <div class='<?php print $hook ?>-content clearfix <?php if (!empty($is_prose)) print 'prose' ?>'>
- 
-<!--        <div class="field">
-          <div class="field-label"><?php // print t('Template:'); ?></div>
-          <div class="field-items"><?php // echo ucfirst(itg_common_get_node_title($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'])); ?></div>
-        </div>-->
       <?php
-      if (isset($node->op) && $node->op == 'Preview') {
-        if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') { ?>
-          <div class="field">
-            <div class="field-label"><?php print t('Frequency:'); ?></div>
-            <div class="field-items"><?php echo ucwords($node->field_newsl_frequency[LANGUAGE_NONE][0]['value']); ?></div>
-          </div>
-      <?php if($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'daily') { ?>
-          <div class="field">
-            <div class="field-label"><?php print t('Time:'); ?></div>
-            <div class="field-items"><?php echo $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
-          </div>
-      <?php } if ($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'weekly') { ?>
-          <div class="field">
-            <div class="field-label"><?php print t('Time:'); ?></div>
-            <div class="field-items"><?php echo $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
-          </div>
-          <div class="field">
-            <div class="field-label"><?php print t('Day:'); ?></div>
-            <div class="field-items"><?php echo $node->field_newsl_day[LANGUAGE_NONE][0]['value']; ?></div>
-          </div>
-      <?php } if($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'monthly') { ?>
-         <div class="field">
-            <div class="field-label"><?php print t('Time:'); ?></div>
-            <div class="field-items"><?php echo $node->field_newsl_time[LANGUAGE_NONE][0]['value'].':00'; ?></div>
-          </div>
-          <div class="field">
-            <div class="field-label"><?php print t('Date:'); ?></div>
-            <div class="field-items"><?php echo $node->field_newsl_date[LANGUAGE_NONE][0]['value']; ?></div>
-          </div>
-      <?php } ?>
-          <div class="field">
-            <div class="field-label"><?php print t('Newsletter Content:'); ?></div>
-            <div class="field-items"><?php echo ucwords(str_replace('_', ' ', $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'])).' news'; ?></div>
-          </div>
+        if (isset($node->op) && $node->op == 'Preview') {
+          if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic') { 
+            $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
+            $banner = file_create_url($template_node->field_newst_banner[LANGUAGE_NONE][0]['uri']);
+            $footer = $template_node->body[LANGUAGE_NONE][0]['value'];
+            if($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'daily') { 
+              $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+              $cron_time = date('m/d/Y', $current_date) . ' ' . $gettime . ':00';
+              $scheduled_time = strtotime($cron_time);
+              $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 day');
+            }elseif ($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'weekly') { 
+              $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+              $cron_time = date('m/d/Y', $current_date) . ' ' . $gettime . ':00';
+              $scheduled_time = strtotime($cron_time);
+              $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 days');
+            } elseif($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'monthly') { 
+              $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+              $cron_time = date('m/d/Y', $current_date) . ' ' . $gettime . ':00';
+              $scheduled_time = strtotime($cron_time);
+              $previoustimestamp = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 month');
+            } 
+            if ($node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'] == 'select_section') {
+              if (!empty($node->field_story_category[LANGUAGE_NONE])) {
+                  foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
+                    $cat_array[] = $values['tid'];
+                  }
+              }
+              // $cat_array = array(1206686, 1206620); //for testing purpose
+              if (function_exists('itg_newsletter_get_section_stories')) {
+                $story_nodes = itg_newsletter_get_section_stories($cat_array , $scheduled_time , $previoustimestamp, $node);
+              }
+            }
+            elseif ($node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'] == 'top_20_shared') {
+              if (function_exists('_get_most_popular_nodes_based_on_top_20_shared')) {
+                $story_nodes = _get_most_popular_nodes_based_on_top_20_shared($previoustimestamp);
+              }
+            }
+            elseif ($node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'] == 'top_20_trending') {
+              if (function_exists('_get_most_popular_nodes_based_on_top_20_trending')) {
+                $story_nodes = _get_most_popular_nodes_based_on_top_20_trending($previoustimestamp);
+              }
+            }
+            elseif ($node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'] == 'top_20_most_viewed') {
+              if (function_exists('_get_most_popular_nodes_based_on_top_20_most_viewed')) {
+                $story_nodes = _get_most_popular_nodes_based_on_top_20_most_viewed($previoustimestamp);
+              }
+            }
+      ?>
+      <div class="newsletter-templates">
+        <div class="newsletter-header">
+          <div class="newsletter-banner"><img src="<?php print $banner ?>" alt="" title="" /></div>
+        </div>
+        <div class="newsletter-list-parent">
+        <?php 
+        if (!empty($story_nodes)) {
+          foreach ($story_nodes as $new_array) {
+            $news_detail = node_load($new_array);
+            $title = $news_detail->title;
+            $kicker = $news_detail->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+            if ($news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) {
+              $thumbnail = image_style_url("thumbnail", $news_detail->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+               if(empty(file_get_contents($thumbnail))) {
+                $thumbnail = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/newlatter_default_350X350.jpg';
+              }
+            }
+            else {
+              $thumbnail = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/newlatter_default_350X350.jpg';
+            }
+            $link = 'node/' . $news_detail->nid;
+        ?>
+        <div class="newsletter-list">
+          <div class="newsletter-thumbnail"><img style="width:100px; height: 100px" src="<?php echo $thumbnail; ?>" /></div>  
+            <div class="title-kicker">
+              <div class="newsletter-title"><?php print l($title , $link , array('attributes' => array('target' => '_blank'))); ?></div>
+              <div class="newsletter-kicker"><?php echo $kicker; ?></div>
+            </div>
+        </div>
+        <?php } } ?>
+        </div>
+        <div class="newsletter-footer"><?php echo $footer; ?></div>
+      </div>
+      <p>&nbsp;</p><p>Thanks,</p><p>&nbsp;</p><p>India Today Group</p><p>&nbsp;</p>
         <?php } else {
         
         $template_node = node_load($node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id']);
@@ -91,8 +134,6 @@
        ?>
       <div class="newsletter-templates">
       <div class="newsletter-header">
-       <!--<div class="newsletter-headline"><?php // echo $headline; ?></div>-->
-       <!--<div class="newsletter-logo"><img src="<?php // echo $logo; ?>" /></div>-->
        <div class="newsletter-banner"><img src="<?php print $banner ?>" alt="" title="" /></div>
       </div>
         <div class="newsletter-list-parent">

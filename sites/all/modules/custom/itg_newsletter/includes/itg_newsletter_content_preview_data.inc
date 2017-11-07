@@ -4,6 +4,7 @@
  * {@inheritdoc}
  */
 function itg_newsletter_content_preview_data_before_download() {
+  
   echo itg_newsletter_content_preview_data(FALSE);
 }
 
@@ -61,7 +62,9 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
         $story_nodes[] = $records['nid'];
       }
     }
-  } 
+  } else {
+    $story_nodes = explode(',', arg(2));
+  }
   $banner = file_create_url($tmplateLoad->field_newst_banner[LANGUAGE_NONE][0]['uri']);
   $footerData = $tmplateLoad->body[LANGUAGE_NONE][0]['value'];
   $footer = preg_replace("/[0-9]{4}/" , date('Y') , $footerData);
