@@ -192,8 +192,8 @@ function generateStoryDeatilList($id) {
         $data_array['tech_pros_cons'] = $tech_pros;
     }
     else{
-        $tech_pros_emp =  array(0=>array());
-        $data_array['tech_pros_cons'] = $tech_pros_emp;
+        //$tech_pros_emp =  array(0=>array());
+        $data_array['tech_pros_cons'] = "{}";
     }
     
     $data_array['expert-chunk'] = $expertchunk_data;
