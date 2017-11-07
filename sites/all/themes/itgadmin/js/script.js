@@ -67,6 +67,11 @@ jQuery(document).ready(function () {
 //        }
 //    });
 
+    jQuery("select#fake-soruce-type").on("change", function () {
+        var soruce_type = jQuery(this).val();
+        jQuery("#edit-field-story-source-type-value-1").val(soruce_type);
+    });
+
 });
 
 // code for add loader in solr ajex view.

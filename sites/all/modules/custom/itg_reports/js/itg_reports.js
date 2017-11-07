@@ -95,6 +95,7 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function () {
+    jQuery("#edit-rg1-date-from").focus();
     //jQuery("#ui-datepicker-div").style('display','none');
     //jQuery('#edit-field-story-archive-value-wrapper').hide();
     if (jQuery('#edit-field-story-archive-value').val() == 'Yes') {
