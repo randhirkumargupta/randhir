@@ -799,7 +799,7 @@ function getTechProsLabel($content_org, $flag = 0) {
 function getBalanklist($nid) {
     $photolist = array();
     $photolist_loop = array();    
-    $photolist[0] = $photolist_loop;
+    $photolist[''] = $photolist_loop;
     return $photolist;
 }
 
