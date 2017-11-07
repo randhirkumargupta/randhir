@@ -53,13 +53,13 @@ function genrate_gist_photo_syndication_xml($result = NULL) {
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ India Today | Photos | Exclusive Photo ]]></title>';
     $xml .= '<description>India Today</description>';
-    $xml .= '<link><![CDATA['.$base_url.']]></link>';
+    $xml .= '<link><![CDATA['.$base_url.'/?utm_source=rss]]></link>';
     $xml .= '<lastBuildDate>'.$xml_pub_date.'</lastBuildDate>';
     $xml .= '<generator>FeedCreator 1.7.2</generator>';
     $xml .= '<image>';
     $xml .= '<url>'.$logo.'</url>';
     $xml .= '<title><![CDATA[ India Today | Photos | Exclusive Photo ]]></title>';
-    $xml .= '<link><![CDATA[ '.$cat_link.' ]]></link>';
+    $xml .= '<link><![CDATA[ '.$cat_link.'?utm_source=rss ]]></link>';
     $xml .= '<description>India Today</description>';
     $xml .= '</image>';
 
@@ -71,7 +71,7 @@ function genrate_gist_photo_syndication_xml($result = NULL) {
       $publish_date = date("D, j M Y H:i:s P", strtotime($photo['field_itg_content_publish_date_value']));
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $photo['title'] . ']]></title>';
-      $xml .= '<link><![CDATA[' . $url . ']]></link>';
+      $xml .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>';
       $xml .= '<description><![CDATA[' . $photo['title'] . ']]></description>';
       $xml .= '<media:description type="html"><![CDATA[' . $photo['title'] . ']]></media:description>';
       $xml .= '<media:thumbnail url="'.$small_img["imag_url"].'"></media:thumbnail>';
