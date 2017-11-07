@@ -436,7 +436,6 @@ function itg_akamai_page_cache_control_form() {
   $form = array();
   $nid = arg(1);
 
-
   $is_front_page = drupal_is_front_page();
 
   if ($is_front_page) {
@@ -500,8 +499,7 @@ function itg_akamai_page_cache_control_form_submit($form, &$form_state) {
  * cache. Clear base node/% url as well as aliases.
  */
 function itg_akamai_node_update($node) {
-
-
+  global $base_url;
   // Skipping batch for widget only
   if (function_exists('itg_workflow_stop_node_update_batch_for_widgets')) {
     if (itg_workflow_stop_node_update_batch_for_widgets()) {
@@ -514,17 +512,13 @@ function itg_akamai_node_update($node) {
   if (in_array($node->type, $mapping)) { //p($node);
     //if (user_access("purge itg akamai cache")) {
     //if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $url = drupal_get_path_alias('node/' . $node->nid);
     // Checking if URL alias changed removing Old one.
-    $current_url = NULL;
     $previous_url = NULL;
-    if (function_exists('itg_common_custompath_insert_load')) {
-      $current_url = itg_common_custompath_insert_load($node);
-    }
-    else {
-      $current_url = $node->path['alias'];
-    }
+    $current_url = NULL;
+    $current_url = $base_url . url('node/' . $node->nid);
     $previous_url = $node->path['old_alias'];
+    watchdog('$current_url', $current_url);
+    watchdog('$previous_url', $current_url);
 
     $amp_types = itg_akamai_amp_cc_mapping();
 
@@ -570,11 +564,13 @@ function itg_akamai_node_update($node) {
  */
 function itg_akamai_node_delete($node) {
   $mapping = itg_akamai_getting_mapped_content_type();
-
+  global $base_url;
   if (in_array($node->type, $mapping)) {
     if (user_access("purge itg akamai cache")) {
       //if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      $url = drupal_get_path_alias('node/' . $node->nid);
+      //$url = drupal_get_path_alias('node/' . $node->nid);
+      $url = $base_url . url('node/' . $node->nid);
+
       $action = array(
         'action' => 'remove',
       );
