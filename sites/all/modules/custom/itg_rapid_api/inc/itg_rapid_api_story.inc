@@ -167,14 +167,14 @@ function generateStoryDeatilList($id) {
         $data_array['factoids'] = $factoid_data;
     }
     else{
-        $factoid_data = (object) array();
+        $factoid_data = new stdClass();
         $data_array['factoids'] = $factoid_data;
     }
     if($buzz_temp_flag){
         $data_array['buzz'] = $buzz_data;
     }
     else{
-        $buzz_data = array();
+        $buzz_data = new stdClass();
         $data_array['buzz'] = $buzz_data;
     }
     
@@ -182,7 +182,7 @@ function generateStoryDeatilList($id) {
         $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
     }
     else{
-        $tech_photo_gallery = (object) array();
+        $tech_photo_gallery = new stdClass();
         $data_array['tech_photo_gallery'] = $tech_photo_gallery;
     }
     
@@ -191,10 +191,9 @@ function generateStoryDeatilList($id) {
         unset($tech_pros['listcont']);
         $data_array['tech_pros_cons'] = $tech_pros;
     }
-    else{
-        $tech_pros_emp = blankobj(); 
-        $tech_pros_emp = (object) $tech_pros_emp;
-        $data_array[0]['tech_pros_cons'] = $tech_pros_emp;
+    else{        
+        $tech_pros_emp = new stdClass();
+        $data_array['tech_pros_cons'] = $tech_pros_emp;
     }
     
     $data_array['expert-chunk'] = $expertchunk_data;
