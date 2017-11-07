@@ -17,5 +17,5 @@
 define('DRUPAL_ROOT', getcwd());
 
 require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
-drupal_bootstrap(DRUPAL_BOOTSTRAP_PAGE_CACHE);
+drupal_bootstrap(DRUPAL_BOOTSTRAP_PAGE_HEADER);
 menu_execute_active_handler();
