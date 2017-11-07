@@ -4,7 +4,7 @@ define('REPORT_PER_PAGE', 50);
 
 function itg_report_created_date_range($form, $form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_reports') . '/js/itg_reports.js', array('type' => 'file', 'scope' => 'footer'));
-
+  drupal_add_css("#ui-datepicker-div {display:none} " , 'inline');
   $form['content_type'] = array(
     '#type' => 'select',
     '#title' => 'Content Type',
