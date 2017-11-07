@@ -193,7 +193,7 @@ function generateStoryDeatilList($id) {
     }
     else{        
         $tech_pros_emp = new stdClass(); 
-        $tech_pros_emp->id = "";
+        //$tech_pros_emp->id = "";
         $data_array['tech_pros_cons'] = $tech_pros_emp;
     }
     
@@ -202,7 +202,7 @@ function generateStoryDeatilList($id) {
     $data_array['author'] = $author;
     $data_array['rating'] = $rating;
 
-    $data['data'] = $data_array;
+    $data[0]['data'] = $data_array;
     return $data;
 }
 
