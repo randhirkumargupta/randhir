@@ -192,7 +192,8 @@ function generateStoryDeatilList($id) {
         $data_array['tech_pros_cons'] = $tech_pros;
     }
     else{        
-        $tech_pros_emp[] = new stdClass();
+        //$tech_pros_emp = new stdClass();
+        $tech_pros_emp = (object) blankobj();
         $data_array['tech_pros_cons'] = $tech_pros_emp;
     }
     
@@ -794,7 +795,7 @@ function blankobj() {
     // variable decalaration
     $photolist = array();
     $photolist_loop = array();
-    $photolist[0]['photos'] = (array) $photolist_loop;
+    $photolist[0] = (array) $photolist_loop;
     return $photolist;
 }
 
