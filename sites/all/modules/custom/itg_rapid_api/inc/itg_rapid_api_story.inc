@@ -823,7 +823,7 @@ function getBalanklist($nid) {
         $photolist_loop[$lcont]['np_caption'] = "$caption";
         $lcont++;
     }
-    $photolist = $photolist_loop;
+    $photolist[] = $photolist_loop;
     return $photolist;
 }
 
