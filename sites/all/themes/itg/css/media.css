@@ -351,6 +351,7 @@
     .sport-home-layout-page .itg-layout-615 .auto-block-2 {
         height: 510px
     }
+	.navigation{ display: block !important}
 }
 @media only screen and (max-width: 991px) {
     .education-layout-page .itg-layout-672 .droppable,
@@ -3557,6 +3558,7 @@
     .story-section .story-right .description .itgvideo>iframe {
         min-height: 400px
     }
+	#block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo{margin-left: 10px;}
 }
 @media all and (max-width: 992px) and (min-width: 768px) {
     .story-section .story-right .description .itgvideo>iframe {
@@ -3683,7 +3685,7 @@
     #block-itg-layout-manager-header-block .main-nav .desktop-hide{width:20px; height:20px; position: relative; float: left; padding-left: 10px;}
     #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall{margin: 0 auto;width: 347px;}
     /* new main menu dropdown */
-    #block-itg-layout-manager-header-block .navigation{width:85%;border-right: 1px solid #ccc; background: #f9f9f9; box-shadow: 0 3px 3px #ccc; height: calc(90vh - 60px); position: absolute; z-index: 9999990;overflow-x: hidden; }
+    #block-itg-layout-manager-header-block .navigation{width:85%;border-right: 1px solid #ccc; background: #f9f9f9; box-shadow: 0 3px 3px #ccc; height: calc(76vh - 70px); position: absolute; z-index: 9999990;overflow-x: hidden; }
     #block-itg-layout-manager-header-block .navigation .container{height: 100%;overflow-x: hidden;overflow-y: scroll;}
 
     #block-itg-layout-manager-header-block .navigation .second-level-menu.menu li{border-top:1px solid #ccc;}
@@ -3709,6 +3711,11 @@
 
 
 }
+
+@media only screen and (max-width: 767px) {
+
+ #block-itg-layout-manager-header-block .navigation{width:85%;border-right: 1px solid #ccc; background: #f9f9f9; box-shadow: 0 3px 3px #ccc; height: calc(100vh - 60px);
+}
 @media only screen and (max-width: 378px) {
     #block-itg-layout-manager-header-block{padding-top: 10px; background: #fff;}
     #block-itg-layout-manager-header-block .top-nav .main-nav li a{font-size: 13px;font-weight: normal;}
@@ -3718,4 +3725,5 @@
     }
     #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall{margin: 0 auto;width:265px;}
     #block-itg-layout-manager-header-block .logo { width: 55px; position: absolute; top:15px; }
+	
 }
