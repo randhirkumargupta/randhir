@@ -69,12 +69,12 @@ function akamai_recacher_crawler($dburls) {
         $messages = '<ul>' . implode('', $messages) . '</ul>';
         $boodschap = t('Attempted re-caching the following URLs:') . '</br>' . $messages;
         if ($someerror === FALSE) {
-          watchdog('Akamai Recacher', $boodschap, NULL, WATCHDOG_INFO);
+          watchdog('Akamai Recacher1', $boodschap, NULL, WATCHDOG_INFO);
         }
         else {
           // If there is at least one unsuccessful re-caching, elevate the
           // watchdog reporting level.
-          watchdog('Akamai Recacher', $boodschap, NULL, WATCHDOG_WARNING);
+          watchdog('Akamai Recacher2', $boodschap, NULL, WATCHDOG_WARNING);
         }
       }
     // End the lock.
