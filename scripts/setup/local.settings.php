@@ -1,12 +1,11 @@
 <?php
 #MongoDB 
 $conf['mongodb_connections'] = array(
-  'default' => array(                             // Connection name/alias    
+  'default' => array(
+    //'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo',
     'host' => 'mongodb://itoday_write:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo',// uat
-    //'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo',//prod    
-    'db' => 'itgcmsmongo',                   // Database name. Make something up, mongodb will automatically create the database.
+    'db' => 'itgcmsmongo',
     'connection_options' => array('replicaSet' => 'uatreplica'),
-    //'connection_options' => array('replicaSet' => 'prodreplica'),
   ),
 );
 
