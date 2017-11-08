@@ -347,7 +347,6 @@ function itg_category_multiple_menu() {
  * Implements itg_category_multiple_find()
  */
 function itg_category_multiple_find() {
-  global $node_form_id;
   $render_data = array();
   
   $render_data['b_cat_opt'] = '';
@@ -360,7 +359,6 @@ function itg_category_multiple_find() {
   $render_data['b_sub_sub_sub_cat'] = '';
   
   $category = $_POST['type'];
-  $node_form_id = $_POST['node_form_id'];
   switch ($category) {
     case 'itg_section[]':
 
@@ -722,10 +720,11 @@ function get_categoryies_send_for_convert_to_int($tids) {
  * @return string $html
  */
 function get_parent_structure_in_ordered($tids, $return_data_chunk) {
-  global $all_tid_arr; $node_form_id;
+  global $all_tid_arr;
   $html = '';
   $photo_sectionid = variable_get('tid_photogallery', 1208521);
-  $video_sectionid = variable_get('tid_videos', 1206552);
+  $video_sectionid = variable_get('tid_videos', 1206552);  
+  $node_form_id = $_POST['node_form_id'];
   foreach ($tids as $key => $chunk_val) {
     $is_disable = '';
 	if((($node_form_id == 'photogallery-node-form') || ($node_form_id == 'videogallery-node-form')) && (($all_tid_arr[$chunk_val] === $photo_sectionid) || ($all_tid_arr[$chunk_val] === $video_sectionid))){
