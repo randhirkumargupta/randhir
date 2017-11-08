@@ -59,7 +59,7 @@ ini_set('session.cookie_lifetime', 2000000);
 //  'itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
 //);
 
-$conf = array(
+/*$conf = array(
   // Enable memcache caching backend.
   'cache_inc' => './sites/all/modules/memcache/memcache.inc',
   'memcache_servers' => array(
@@ -75,4 +75,4 @@ $conf = array(
   ),
 );
 
-$conf['path_inc'] = './sites/all/modules/contrib/pathcache/path.inc';
+$conf['path_inc'] = './sites/all/modules/contrib/pathcache/path.inc';*/
