@@ -37,11 +37,11 @@ ini_set('session.cookie_lifetime', 2000000);
 #$conf['queue_default_class'] = 'MongoDBQueue';
 
 # Memcache specific settings
-//$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
-//$conf['cache_default_class'] = 'MemCacheDrupal';
-//$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
-//$conf['cache_class_cache_update'] = 'DrupalDatabaseCache';
-//$conf['memcache_stampede_protection'] = TRUE;
+$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
+$conf['cache_default_class'] = 'MemCacheDrupal';
+$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+$conf['cache_class_cache_update'] = 'DrupalDatabaseCache';
+$conf['memcache_stampede_protection'] = TRUE;
 
 //$conf['memcache_storage_debug'] = TRUE;
 //$conf['memcache_extension'] = 'Memcache';
@@ -50,9 +50,9 @@ ini_set('session.cookie_lifetime', 2000000);
 //$conf['session_inc'] = 'sites/all/modules/contrib/memcache_storage/includes/session.inc';
 
 // setting for UAT
-/*$conf['memcache_servers'] = array(
+$conf['memcache_servers'] = array(
   'itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
-);*/
+);
 
 // setting for production
 // $conf['memcache_servers'] = array(
