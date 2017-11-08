@@ -55,7 +55,24 @@ $conf['memcache_stampede_protection'] = TRUE;
 );*/
 
 // setting for production
- $conf['memcache_servers'] = array(
-  'itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
+// $conf['memcache_servers'] = array(
+//  'itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
+//);
+
+$conf = array(
+  // Enable memcache caching backend.
+  'cache_inc' => './sites/all/modules/memcache/memcache.inc',
+  'memcache_servers' => array(
+    'itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
+  ),
+  'memcache_bins' => array(
+    'cache' => 'default',
+    'cache_filter' => 'default',
+    'cache_menu' => 'default',
+    'cache_page' => 'default',
+    'cache_pathdst' => 'default',
+    'cache_pathsrc' => 'default',
+  ),
 );
 
+$conf['path_inc'] = './sites/all/modules/contrib/pathcache/path.inc';
