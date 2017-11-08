@@ -23,7 +23,7 @@ $follow_status = $content["follow_status"];
       }
       else {
         ?>
-      <img width="370" height="208" src="<?php print  image_style_url("anchors_landing", drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg');?>" alt="" title=""/>
+      <img width="370" height="208" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title=""/>
       <?php } ?>
     </div>
     <div class="anchor-right" >

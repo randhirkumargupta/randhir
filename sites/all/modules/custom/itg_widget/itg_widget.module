@@ -1195,7 +1195,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
             if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
                 $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $image_url . '" height="66" width="88" alt="" title=""></li>';
             } else {
-                $default_image = image_style_url("widget_very_small", drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg');
+                $default_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
                 $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $default_image .'" height="66" width="88" alt="" title=""></li>';
             }
             $ads_flag = 0;

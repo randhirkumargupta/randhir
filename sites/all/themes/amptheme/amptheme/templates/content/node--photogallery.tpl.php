@@ -98,7 +98,7 @@ if (function_exists('get_other_gallery_amp')) {
         $other_src_set = $small_image . ' ' . $small_width . ' w';
       }
       else {
-        $small_image =  image_style_url("widget_small", drupal_get_path('theme', 'itg') . '/images/itg_image170x127.jpg');
+        $small_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
         $other_src_set = $small_image . ' ' . $small_width . ' w';
       }
       

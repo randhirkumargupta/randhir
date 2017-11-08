@@ -320,3 +320,15 @@ function itg_dbmigrate_mail($key, &$message, $params) {
       break;
   }
 }
+
+/**
+ * Implement function for folder structure
+ */
+function __insert_orignal_image($uri, $fid) {
+  $file_uri = file_create_url($uri);
+  db_insert('itg_all_orignal_image')->fields(array(
+    'fid' => $fid,
+    'orignal_fid' => $fid,
+    'url' => $file_url
+  ))->execute();
+}
