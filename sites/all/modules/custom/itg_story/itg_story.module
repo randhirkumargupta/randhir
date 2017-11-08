@@ -114,6 +114,15 @@ function itg_story_menu() {
     'file' => 'includes/itg_story_readlater_refresh.inc',
     'type' => MENU_CALLBACK,
   );
+  
+  $items['itg-follow-story-refresh/%'] = array(
+    'title' => 'Follow story refresh home page',
+    'description' => 'Follow story refresh home page',
+    'page callback' => 'itg_follow_story_refresh',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_follow_story_refresh.inc',
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
