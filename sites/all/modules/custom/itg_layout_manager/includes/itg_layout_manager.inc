@@ -61,6 +61,13 @@ function itg_layout_list() {
   else {
     $items_per_page = 20;
   }
+	
+	if (isset($_GET['page'])) {
+    $pages = $_GET['page'];
+  }
+  else {
+    $pages = 0;
+  }
 
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl')->extend('PagerDefault')->limit($items_per_page);
   $itg_query->fields('layout_tpl', array('id', 'section_name', 'template_name', 'layout_type', 'status', 'created_date'));
@@ -68,6 +75,7 @@ function itg_layout_list() {
   $itg_query->fields('ttd', array('name'));
   $itg_query->groupBy('layout_tpl.section_name');
   $itg_query->condition('layout_tpl.layout_type', arg(1));
+	$itg_query->orderBy('layout_tpl.id', 'DESC');
   if (!empty($_GET['section']) && $_GET['section'] != '_none') {
     $itg_query->condition('layout_tpl.section_name', $_GET['section']);
   }
@@ -84,7 +92,7 @@ function itg_layout_list() {
     $delete_link = l(t('Delete'), 'itg-deletelayout/' . $row->section_name, array('query' => array('destination' => 'itg-layout-list/'.arg(1)), 'attributes' => array('class' => 'layout_delete_conformation')));
     $itg_action = $edit_link . ' / ' . $delete_link;
     $rows[] = array(
-      array('data' => $count + 1),
+      array('data' => ($items_per_page * $pages + $count + 1)),
       array('data' => $row->name),
       array('data' => $row->template_name),
       array('data' => $row->layout_type),
