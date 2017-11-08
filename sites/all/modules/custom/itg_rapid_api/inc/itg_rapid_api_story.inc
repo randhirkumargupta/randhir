@@ -197,7 +197,7 @@ function generateStoryDeatilList($id) {
         $data_array['tech_pros_cons'] = $tech_pros_emp;
         
     }
-    if(trim($expertchunk_data['name']) == "" && trim(expertchunk_data['image']) == "" && trim(expertchunk_data['expertise']) == "" && trim(expertchunk_data['description']) == ""){
+    if(trim($expertchunk_data['name']) == "" && trim($expertchunk_data['image']) == "" && trim($expertchunk_data['expertise']) == "" && trim($expertchunk_data['description']) == ""){
         $expertchunk_data = new stdClass();
         $data_array['expert-chunk'] = $expertchunk_data;
     }
