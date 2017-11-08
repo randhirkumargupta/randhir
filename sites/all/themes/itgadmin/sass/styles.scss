@@ -14434,13 +14434,42 @@ div.ctools-modal-content {
 }
 
 #itg-report-created-date-range {
+    text-align: right;
     fieldset {
         border: 1px solid #ccc;
-        margin: 20px 0px;
+        margin: 20px 0 40px;
+        float: left;
+        width: 49%;
+        text-align: left;
+        +fieldset {
+            float: right;
+        }
+        input[type="text"] {
+            width: auto;
+        }
+        label {
+            width: auto;
+            margin-right: 10px;
+        }
+        legend {
+            font-weight: 700;
+        }
     }
     .form-item.form-type-select {
         margin-left: 0;
         padding-left: 0;
+        text-align: left;
+    }
+    .fieldset-wrapper {
+        .form-item {
+            float: left;
+            width: 50%;
+            padding: 0 10px;
+            text-align: left;
+        }
+    }
+    .row {
+        margin-top: 40px;
     }
 }
 
@@ -14450,9 +14479,8 @@ div.ctools-modal-content {
     color: #000;
     a {
         padding: 0 5px;
-        border: 1px solid #1fb5ad;
-        background-color: #1fb5ad;
-        color: #fff;
+        /* background-color: #1fb5ad; */
+        color: #000;
     }
     b {
         padding: 2px 6px;
