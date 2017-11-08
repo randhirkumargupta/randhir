@@ -134,7 +134,6 @@ function cache_get_multiple(array &$cids, $bin = 'cache') {
  * @see cache_get()
  */
 function cache_set($cid, $data, $bin = 'cache', $expire = CACHE_PERMANENT) {
-  echo "Cache Set Hit: " . $cid . "<br>";
   return _cache_get_object($bin)->set($cid, $data, $expire);
 }
 
@@ -157,7 +156,6 @@ function cache_set($cid, $data, $bin = 'cache', $expire = CACHE_PERMANENT) {
  *   by $cid. If $wildcard is TRUE and $cid is '*', the entire cache is emptied.
  */
 function cache_clear_all($cid = NULL, $bin = NULL, $wildcard = FALSE) {
-  echo "Clear Cache: " . $cid . "<br>";
   if (!isset($cid) && !isset($bin)) {
     // Clear the block cache first, so stale data will
     // not end up in the page cache.
