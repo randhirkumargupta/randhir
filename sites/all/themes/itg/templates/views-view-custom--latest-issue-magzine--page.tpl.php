@@ -98,7 +98,7 @@
             $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
           }
           else {
-            $img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt='' title='' />";
+            $img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg') ."' alt='' title='' />";
           }
           if (!empty($lock_story)) {
             $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
@@ -159,7 +159,7 @@
             $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '" alt="" title="" />';
           }
           else {
-            $supp_img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt='' title='' />";
+            $supp_img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg') ."' alt='' title='' />";
           }
           if (!empty($lock_story)) {
             $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));

@@ -291,7 +291,8 @@ function failed_record_xml_id($table) {
 }
 
 function mail_user_send() {
-  $to_mail = 'vedprakash.pareek@kelltontech.com, vedmona@gmail.com';  
+   $to_mail = '<vedprakash.pareek@kelltontech.com>,<vedmona@gmail.com>,<sanjayanchal@gmail.com>,<santoshkumarjena@gmail.com>';
+  return $to_mail;
 }
 
 

@@ -2355,9 +2355,9 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-photo-story-values"],
 [id*="field-story-listicle-values"],
 [id*="field-event-tabs-values"],
-[id*="field-add-member-values"] { 
+[id*="field-add-member-values"] {
     @extend .itg-add-another-item;
-} 
+}
 
 .field-name-field-story-reporter,
 .form-field-name-field-story-reporter {
@@ -9345,7 +9345,7 @@ div.node {
                 height: 28px;
                 margin: 0;
                 padding: 0;
-                text-indent: -9999px; 
+                text-indent: -9999px;
                 width: 28px;
             }
         }
@@ -14406,7 +14406,7 @@ div.ctools-modal-content {
 /* css end Url Redirect page */
 
 
-/* css added by rajveer singh gangwar */
+/* css added by rajveer singh gangwar start */
 
 #views-exposed-form-section-wise-content-ordering-list-dont-miss-content,
 #views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget,
@@ -14425,10 +14425,39 @@ div.ctools-modal-content {
 
 /* css added by rajveer singh gangwar end */
 
-
-.node-type-print-team-integration [id*="field-add-member-values"] + div.clearfix{
+.node-type-print-team-integration [id*="field-add-member-values"]+div.clearfix {
     right: 560px;
 }
-.node-type-print-team-integration fieldset.date-combo .container-inline-date .date-padding .form-item{
+
+.node-type-print-team-integration fieldset.date-combo .container-inline-date .date-padding .form-item {
     padding: 0;
+}
+
+#itg-report-created-date-range {
+    fieldset {
+        border: 1px solid #ccc;
+        margin: 20px 0px;
+    }
+    .form-item.form-type-select {
+        margin-left: 0;
+        padding-left: 0;
+    }
+}
+
+.pagination {
+    margin: 40px auto;
+    text-align: center;
+    color: #000;
+    a {
+        padding: 0 5px;
+        border: 1px solid #1fb5ad;
+        background-color: #1fb5ad;
+        color: #fff;
+    }
+    b {
+        padding: 2px 6px;
+        border: 1px solid #ccc;
+        background: #1fb5ad;
+        color: #fff;
+    }
 }

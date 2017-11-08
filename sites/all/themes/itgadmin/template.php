@@ -223,18 +223,32 @@ function itgadmin_node_preview($variables) {
   // Do we need to preview trimmed version of post as well as full version?
   if ($trimmed != $full) {
     //drupal_set_message(t('The trimmed version of your post shows what your post looks like when promoted to the main page or when exported for syndication.<span class="no-js"> You can insert the delimiter "&lt;!--break--&gt;" (without the quotes) to fine-tune where your post gets split.</span>'));
-    $output .= '<h3>' . t('Preview trimmed version') . '</h3>';
+    if ($node->type != 'newsletter') {
+      $output .= '<h3>' . t('Preview trimmed version') . '</h3>';
+    }
     $output .= $trimmed;
-    $output .= '<h3>' . t('Preview full version') . '</h3>';
+    if ($node->type != 'newsletter') {
+     $output .= '<h3>' . t('Preview full version') . '</h3>';
+    }
     $output .= $full;
     if ($node->type == 'newsletter') {
       $selectedTemplatenid = $node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'];
-      $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
-      foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
-        $cat_array[] = $values['tid'];
+      if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic'){
+        $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
+        foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
+          $cat_array[] = $values['tid'];
+        }
+        // $cat_array = array(1206686, 1206620); // for testing purpose
+        $tid_val = implode(',' , $cat_array);
+        $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val , array('attributes' => array('class' => 'download-html') , 'html' => true));
+      } 
+      else {
+        foreach($node->field_newsl_add_news[LANGUAGE_NONE] as $k => $v){
+          $manual_nids[] = $v['field_news_cid'][LANGUAGE_NONE][0]['target_id'];
+        }
+        $manualnids = implode(',' , $manual_nids);
+        $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $manualnids , array('attributes' => array('class' => 'download-html') , 'html' => true));
       }
-      $tid_val = implode(',' , $cat_array);
-      $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val , array('attributes' => array('class' => 'download-html') , 'html' => true));
     }
   }
   else {
