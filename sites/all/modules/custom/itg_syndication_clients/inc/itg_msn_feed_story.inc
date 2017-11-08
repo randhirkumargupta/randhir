@@ -6,7 +6,7 @@
  */
 function itg_msn_feed_story_syndication() {
   $sections = getmsn_story_section_array();
-  foreach ($sections as $section_id => $file_name) {
+  foreach ($sections as $file_name => $section_id) {
     itg_genrate_msn_feed_story_syndication($section_id, $file_name);
   }
 }
