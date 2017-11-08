@@ -51,7 +51,7 @@ echo "Lock Required <br>";
   $expire = (int) max($timeout, 1);
 
   if (isset($locks[$name])) {
-
+   echo "Lock Replace";
     // Try to extend the expiration of a lock we already acquired.
     $success = MemcacheStorageAPI::replace($name, _lock_id(), $expire, 'semaphore');
 
