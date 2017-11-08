@@ -1262,8 +1262,7 @@ function itg_akamai_amp_cc_mapping() {
  * Getting Domain without protocal
  */
 function itg_akamai_getting_domain_without_protocal() {
-  global $base_url;
-  $strn = str_replace('http://', '', $base_url);
+  $strn = str_replace('http://', '', FRONT_URL);
   $strn = str_replace('https://', '', $strn);
   return $strn;
 }
