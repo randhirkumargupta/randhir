@@ -987,7 +987,7 @@ function variable_get($name, $default = NULL) {
  */
 function variable_set($name, $value) {
   global $conf;
-
+  echo "Variable: " . $name . "Value: " . $value . "<br><br>";
   db_merge('variable')->key(array('name' => $name))->fields(array('value' => serialize($value)))->execute();
 
   cache_clear_all('variables', 'cache_bootstrap');
