@@ -49,7 +49,7 @@ function akamai_recacher_crawler($dburls) {
 //  p($request);
   $codes = array();
   $messages = array();
-
+  watchdog('$request_for_httrl', '<pre>' . print_r($request, true) .'<pre>');
   foreach ($request as $url => $probe) {
     if($probe->code == 200){
      $messages[] = '<li>successful (' . $probe->code . '): ' . $url . '</li>';
