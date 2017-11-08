@@ -68,7 +68,7 @@ class Pagination{
         if ($numPages == 1){
             if ($this->showCount){
                 $info = 'Showing : ' . $this->totalRows;
-                return $info;
+                return '<div style="display:none">' . $info . '</div>';
             }else{
                 return '';
             }
@@ -100,7 +100,7 @@ class Pagination{
         
            $info .= ' of ' . $this->totalRows . ' | ';
         
-           $output .= $info;
+           $output .= '';
         }
         
         $this->numLinks = (int)$this->numLinks;

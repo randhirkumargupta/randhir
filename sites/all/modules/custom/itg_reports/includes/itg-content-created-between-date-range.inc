@@ -28,12 +28,12 @@ function itg_report_created_date_range($form, $form_state) {
     '#type' => 'textfield',
     '#title' => t('Date from'),
     '#default_value' => (!empty($_GET['rg1_date_from'])) ? $_GET['rg1_date_from'] : date('Y-m-d', strtotime('-1day')),
-    '#attributes' => array('readonly' => 'readonly'),
+    '#attributes' => array('readonly' => 'readonly' , 'size'=>0),
   );
   $form['range1']['rg1_date_to'] = array(
     '#type' => 'textfield',
     '#title' => t('Date to'),
-    '#attributes' => array('readonly' => 'readonly'),
+    '#attributes' => array('readonly' => 'readonly' , 'size'=>0),
     '#default_value' => (!empty($_GET['rg1_date_to'])) ? $_GET['rg1_date_to'] : date('Y-m-d', strtotime('-1day')),
   );
   // Range 2
@@ -44,13 +44,13 @@ function itg_report_created_date_range($form, $form_state) {
   $form['range2']['rg2_date_from'] = array(
     '#type' => 'textfield',
     '#title' => t('Date from'),
-    '#attributes' => array('readonly' => 'readonly'),
+    '#attributes' => array('readonly' => 'readonly' , 'size'=>0),
     '#default_value' => (!empty($_GET['rg2_date_from'])) ? $_GET['rg2_date_from'] : date('Y-m-d'),
   );
   $form['range2']['rg2_date_to'] = array(
     '#type' => 'textfield',
     '#title' => t('Date to'),
-    '#attributes' => array('readonly' => 'readonly'),
+    '#attributes' => array('readonly' => 'readonly' , 'size'=>0),
     '#default_value' => (!empty($_GET['rg2_date_to'])) ? $_GET['rg2_date_to'] : date('Y-m-d'),
   );
 
@@ -233,11 +233,11 @@ function __form_markup_dispay_report() {
 
   $div .= '<div class="row">';
   $div .= '<div class="col-md-6">';
-  $div .= '<div class="pull-right"> Count (' . $report1_data['row_count'] . ') Between date <b> ' . $rg1_date_from . ' </b> , <b> ' . $rg1_date_to . ' </b> </div>';
+  $div .= '<div class="pull-right"> Range1 Count: <b>' . $report1_data['row_count'] . '</b> </div>';
   $div .= $report1_data['table'];
   $div .= '</div>';
   $div .= '<div class="col-md-6">';
-  $div .= '<div class="pull-right"> Count (' . $report2_data['row_count'] . ') Between date <b> ' . $rg2_date_from . ' </b> , <b> ' . $rg2_date_to . ' </b></div>';
+  $div .= '<div class="pull-right">Range2 Count: <b>' . $report2_data['row_count'] . '</b> </div>';
   $div .= $report2_data['table'];
   $div .= '</div>';
   $div .= '</div>';
