@@ -2448,7 +2448,7 @@ function itg_poll_home_page_polls_select($nid) {
       $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
     }
     else {
-      $poll_banner_image = '<img src ="' .  image_style_url("home_page_poll_images_style", drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg') . '" alt="" title="" />';
+      $poll_banner_image = '<img src ="' .  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg') . '" alt="" title="" />';
     }
 
     $poll_image_exist_class = '';
