@@ -932,8 +932,7 @@ function variable_initialize($conf = array()) {
     }
     else {
       // Proceed with variable rebuild.
-      $variables = array_map('unserialize', db_query('SELECT name, value FROM {variable}')->fetchAllKeyed());
-      echo "Setting Variables Cache while initialization." . "<br>";
+      $variables = array_map('unserialize', db_query('SELECT name, value FROM {variable}')->fetchAllKeyed());      
       cache_set('variables', $variables, 'cache_bootstrap');
       lock_release($name);
     }
