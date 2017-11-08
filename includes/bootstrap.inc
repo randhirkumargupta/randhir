@@ -924,7 +924,7 @@ function variable_initialize($conf = array()) {
   else {
     // Cache miss. Avoid a stampede.
     $name = 'variable_init';
-    if (!lock_acquire($name, 1)) {
+    if (!lock_acquire($name)) {
       // Another request is building the variable cache.
       // Wait, then re-run this function.
       lock_wait($name);
