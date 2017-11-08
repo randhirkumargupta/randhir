@@ -282,10 +282,11 @@ $uri = base64_encode($actual_link);
                             <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                           <?php } ?>
                           <?php if ($user->uid > 0): ?>
-                            <li><a class="def-cur-pointer" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content?source=video"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+                            <li><a class="def-cur-pointer video-login-akamai" title="Submit Video" href="javascript:"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                           <?php else: ?>
                             <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                           <?php endif; ?>
+                            <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i></span></a>
 
                       </ul>
                   </div>
@@ -353,10 +354,11 @@ $uri = base64_encode($actual_link);
                                 <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                               <?php } ?>
                               <?php if ($user->uid > 0): ?>
-                                <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+                                <li><a class="def-cur-pointer video-login-akamai" title="Submit Video" href="javascript:"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                               <?php else: ?>
                                 <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                               <?php endif; ?>
+                              <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i></span></a>  
 
                           </ul>
                       </div>
