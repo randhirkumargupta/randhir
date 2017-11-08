@@ -918,7 +918,7 @@ function drupal_get_filename($type, $name, $filename = NULL) {
 function variable_initialize($conf = array()) {
   // NOTE: caching the variables improves performance by 20% when serving
   // cached pages.
-  if ($cached = cache_get('variables', 'cache_bootstrap')) {
+  if ($cached = cache_get('variables')) {
     $variables = $cached->data;
   }
   else {
