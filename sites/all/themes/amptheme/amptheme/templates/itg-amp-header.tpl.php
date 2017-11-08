@@ -4,23 +4,8 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
 ?>
 
 <header role="banner" id="header">
-  <a href="<?php print $base_url; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-    <amp-img src="<?php print $base_url; ?>/sites/all/themes/amptheme/amptheme/logo.png" alt="<?php print t('Home'); ?>" height="58" width = "71"></amp-img>
-  </a>
- <form method="GET"
-  class="search-form"
-  action=<?php print $search_url; ?>
-  target="_top">
-    <input type="search" 
-      placeholder="Search..."
-      name="search">
-  <input type="submit" name="submitlogin"
-    value="OK"
-    class="ampstart-btn caps">
-  <a href="#" class="search" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>
-</form>
-  <nav id="navbar">
-    <amp-accordion disable-session-states>
+<nav id="navbar">
+<amp-accordion disable-session-states>
       <section>
         <h2>
           <span class="show-more"><i class="fa fa-bars"></i></span>
@@ -99,9 +84,54 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
         </ul>
       </section>
     </amp-accordion>
+
+<div class="container top-nav">                  
+    <div class="main-nav">
+       <div class="nav-container-menu">
+         <div class="nav-centerall">
+          <?php print drupal_render($data['itg_top_manu_header']); ?>
+             <!--logo start -->
+            <?php $logo_itg = theme_get_setting('logo', 'itg'); ?>
+              <div class="container headeritg-logo">    
+              <?php if ($logo_itg): ?>
+              <div class="logo">
+                  <a href="<?php print $base_url; ?>" title="<?php //print t('Home'); ?>" rel="home" id="logo">
+                      <amp-img src="<?php print $base_url; ?>/sites/all/themes/amptheme/amptheme/logo.png" alt="<?php  t('Home'); ?>" height="51" width = "106"></amp-img>
+                  </a>
+              </div>
+              <?php endif; ?>
+              </div>
+            <!--logo end -->
+            <?php print drupal_render($data['itg_top_manu_header_second']); ?>
+            </div>
+       </div>
+    </div>
+  </div>
+  </nav>
+</header>
+
+
+
+  <!--<a href="<?php //print $base_url; ?>" title="<?php //print t('Home'); ?>" rel="home" id="logo">
+    <amp-img src="<?php //print $base_url; ?>/sites/all/themes/amptheme/amptheme/logo.png" alt="<?php // t('Home'); ?>" height="58" width = "71"></amp-img>
+  </a>-->
+<!--  <form method="GET"
+  class="search-form"
+  action=<?php //print $search_url; ?>
+  target="_top">
+    <input type="search" 
+      placeholder="Search..."
+      name="search">
+  <input type="submit" name="submitlogin"
+    value="OK"
+    class="ampstart-btn caps">
+  <a href="#" class="search" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>
+</form> -->
+<!--   <nav id="navbar">
+    
     <div class="nav-right">
-<!--      <div class="phone"><i class="fa fa-phone" aria-hidden="true"></i></div>
-      <div class="comment"><i class="fa fa-comment" aria-hidden="true"></i></div>-->
+      <div class="phone"><i class="fa fa-phone" aria-hidden="true"></i></div>
+      <div class="comment"><i class="fa fa-comment" aria-hidden="true"></i></div>
       <div class="social-share">
       <amp-accordion disable-session-states>
         <section>
@@ -110,17 +140,17 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
             <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
           </h2>
           <div class="share-link">
-            <a href="<?php print $twitter_url; ?>" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-            <a href="<?php print $fb_url; ?>" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-            <a href="<?php print $google_url;?>" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
+            <a href="<?php //print $twitter_url; ?>" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+            <a href="<?php //print $fb_url; ?>" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+            <a href="<?php //print $google_url;?>" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
           </div>
         </section>
       </amp-accordion>
       </div>
     </div>
   </nav>
+ -->
 
-</header>
 <?php if($title[0]['type'] == 'story') { ?>
 <div class="story_ad_block custom-amp-ad">
             <?php
