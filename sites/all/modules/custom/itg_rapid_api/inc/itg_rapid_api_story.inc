@@ -287,7 +287,7 @@ function getRating($node) {
 
 function getRatings($node) {
     $rating = array();
-    $field_story_rating = $node->field_story_rating['und'][0]['value'];
+    $field_story_rating = trim($node->field_story_rating['und'][0]['value']);
     $rating['r_cur_value'] = "$field_story_rating";
     $rating['r_upper_range'] = "$field_story_rating";
     $rating['r_is_star_rating'] = "$field_story_rating";
@@ -521,11 +521,11 @@ function buildBuzzNode($node) {
 function buildExpertchunkNode($node) {
     $expert_chunk = array();
     // get data
-    $field_story_expert_description = $node->field_story_expert_description['und'][0]['value'];
-    $field_story_expert_image_fid = $node->field_story_expert_image['und'][0]['fid'];
-    $field_story_expert_name = $node->field_story_expert_name['und'][0]['value'];
-    $field_story_expertise = $node->field_story_expertise['und'][0]['value'];
-    $img_url = completeFilePath($field_story_expert_image_fid);
+    $field_story_expert_description = trim($node->field_story_expert_description['und'][0]['value']);
+    $field_story_expert_image_fid = trim($node->field_story_expert_image['und'][0]['fid']);
+    $field_story_expert_name = trim($node->field_story_expert_name['und'][0]['value']);
+    $field_story_expertise = trim($node->field_story_expertise['und'][0]['value']);
+    $img_url = trim(completeFilePath($field_story_expert_image_fid));
 
     $expert_chunk['name'] = "$field_story_expert_name";
     $expert_chunk['image'] = "$img_url";
