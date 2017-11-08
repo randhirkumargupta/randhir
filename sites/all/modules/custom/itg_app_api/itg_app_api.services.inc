@@ -1,4 +1,12 @@
 <?php
+
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_photo');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_video');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_news');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_magazine');  
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_story');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage');
+
 /**
  * @file
  * INC file for APP API Schemes Services.
