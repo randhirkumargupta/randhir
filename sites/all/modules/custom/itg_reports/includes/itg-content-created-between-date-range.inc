@@ -159,7 +159,7 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
     array('data' => t('S.No')),
     array('data' => t('Type')),
     array('data' => t('Titte')),
-    array('data' => t('Created Date')),
+    array('data' => '<span title="d-M-Y H:i:s">'. t('Created Date') . '</span>'),
     array('data' => t('Url')),
   );
 
@@ -170,7 +170,7 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
       array('data' => $count + 1),
       array('data' => $row['type']),
       array('data' => $row['title']),
-      array('data' => date('d-M-Y h:i:s')),
+      array('data' => date('d-M-Y H:i:s' , $row['created'])),
       array('data' => FRONT_URL . url('node/' . $row['nid'])),
     );
     $count++;
