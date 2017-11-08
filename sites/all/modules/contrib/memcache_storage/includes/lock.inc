@@ -46,12 +46,11 @@ function _lock_id() {
  */
 function lock_acquire($name, $timeout = 30.0) {
   global $locks;
-echo "Lock Required <br>";
+
   // Insure that the timeout is at least 1 second.
   $expire = (int) max($timeout, 1);
 
-  if (isset($locks[$name])) {
-   echo "Lock Replace";
+  if (isset($locks[$name])) {   
     // Try to extend the expiration of a lock we already acquired.
     $success = MemcacheStorageAPI::replace($name, _lock_id(), $expire, 'semaphore');
 
@@ -60,8 +59,7 @@ echo "Lock Required <br>";
       unset($locks[$name]);
     }
   }
-  else {
-    echo "Adding New Lock<br>";
+  else {    
 
     // Add new lock.
     if(MemcacheStorageAPI::add($name, _lock_id(), $expire, 'semaphore')) {
