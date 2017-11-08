@@ -595,6 +595,7 @@ class MemCacheDrupal implements DrupalCacheInterface {
     if ($cached = cache_get('variables', 'cache_bootstrap')) {
       $variables = $cached->data;
       $variables[$name] = $value;
+      echo "Memcache Variables Set Hit";
       cache_set('variables', $variables, 'cache_bootstrap');
     }
     // If the variables aren't cached, there's no need to do anything.
