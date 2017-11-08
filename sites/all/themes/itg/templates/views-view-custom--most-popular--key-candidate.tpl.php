@@ -43,7 +43,7 @@ $resultdata = array_unique($consti);
                     <?php
                   }
                   else {
-                    print "<li><img width='88' height='66'  src='" . image_style_url("widget_very_small", drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg')."' alt='' title='' /></li>";
+                    print "<li><img width='88' height='66'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg')."' alt='' title='' /></li>";
                         }
                         ?>
 
