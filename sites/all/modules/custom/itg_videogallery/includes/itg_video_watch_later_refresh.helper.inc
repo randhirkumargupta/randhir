@@ -8,7 +8,7 @@ function itg_video_watch_later_refresh() {
   $arg = arg();
   if ($user->uid > 0) {
     if (function_exists(itg_get_front_activity_info)) {
-                                  $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
+     $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
     }
     if (empty($opt['status']) || $opt['status'] == 0) {
 
