@@ -26,6 +26,12 @@ function itg_breaking_news_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'include/itg_breaking_news.inc',
   );
+  $items['breakingnews'] = array(
+    'title' => 'Breaking News',
+    'page callback' => 'redirect_breakingnews_to_latest_node',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK
+  );
   return $items;
 }
 
@@ -470,6 +476,28 @@ function itg_breaking_news_views_query_alter(&$view, &$query) {
   }
   if (isset($view->name) && $view->name === 'breaking_news' && $view->current_display == 'block_2') {
     $query->add_where(5, 'node.created', strtotime(date('d-m-Y 00:00:00')), '>=');
+  }
+}
+
+/**
+ * Redirect to latest node of breaking news
+ * if user hit the breakingnews url
+ */
+function redirect_breakingnews_to_latest_node() {
+  $latestnid = '';
+  $latestnid_query = db_select('node', 'n');
+  $latestnid_query->leftJoin('field_data_field_type', 'ft', 'ft.entity_id = n.nid');
+  $latestnid_query->fields('n', array('nid'));
+  $latestnid_query->condition('n.type', 'breaking_news');
+  $latestnid_query->condition('n.status', 1);
+  $latestnid_query->condition('ft.field_type_value', 'Breaking News');
+  $latestnid_query->condition('ft.bundle', 'breaking_news');
+  $latestnid_query->condition('ft.entity_type', 'node');
+  $latestnid_query->orderBy('n.changed', 'DESC');
+  $latestnid_query->range(0, 1);
+  $latestnid = $latestnid_query->execute()->fetchField();
+  if (is_numeric($latestnid)) {
+    drupal_goto('node/' . $latestnid);
   }
 }
 
