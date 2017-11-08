@@ -760,10 +760,14 @@ function itg_widget_block_view($delta = '') {
             $block['content'] = theme("tech_most_read", array("data" => $data));
             break;
         case 'graph_election':
+        global $theme;
+          
             drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'footer'));
-            drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/jquery.min.1.8.2.js', array('type' => 'file', 'scope' => 'header'));
-            drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/csv_graph.js', array('type' => 'file', 'scope' => 'header'));
-            drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/csv_graph.css', array('type' => 'file', 'scope' => 'footer'));
+            if ($theme != 'itgadmin'){
+             drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/jquery.min.1.8.2.js', array('type' => 'file', 'scope' => 'header'));
+            }
+            drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/dot_graph.js', array('type' => 'file', 'scope' => 'header'));
+            drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/dot_graph.css', array('type' => 'file', 'scope' => 'footer'));
             $data = itg_widget_get_graph_data($info);
             foreach ($data as $index => $row) {
                 $jsondata = file_get_contents($row->field_election_constituency_tall_value);

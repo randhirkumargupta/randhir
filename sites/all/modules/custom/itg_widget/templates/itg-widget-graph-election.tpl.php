@@ -28,7 +28,7 @@
   }
   // Start high chart Graph
   foreach ($data as $index => $row):
-    if($row->field_graph_type_value == 'Dot Chart'){
+    if($row->field_graph_type_value == 'Graph'){
 
     ?>
     <div class="<?php echo $classrow; ?> mt-50">
@@ -80,7 +80,7 @@
         </div>
       </div>
     </div>
-    <?php }elseif ($row->field_graph_type_value == 'SVG Graph') { ?>
+    <?php }elseif ($row->field_graph_type_value == 'Dot Graph') { ?>
 
       <div class="<?php echo $classrow; ?> mt-50">
        <?php
