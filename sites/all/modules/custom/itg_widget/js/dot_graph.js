@@ -1,3 +1,7 @@
+/**
+ * @file dot_graph.js
+ * This is used for drawing the dot graph in election template
+ */
 
 function hmelectioninner(a, x, chart_path) {
     if (x = 1) {
