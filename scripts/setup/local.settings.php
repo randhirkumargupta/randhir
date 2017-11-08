@@ -55,6 +55,6 @@ $conf['memcache_storage_key_prefix'] = 'itgmem';
 
 // setting for production
  $conf['memcache_servers'] = array(
-  'itgd-cmsl-mem-prod-1.yissgx.0001.aps1.cache.amazonaws.com:11211' => 'default',
+  'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
 );
 
