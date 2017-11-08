@@ -42,7 +42,7 @@ $video_data = "";
     foreach ($rows as $id => $row) {
       $image_path = $row['sm_field_video_thumb_url'];
       if (empty($row['sm_field_video_thumb_url'])) {
-        $image_path = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg';
+        $image_path = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
       }
       if ($row['sm_field_video_used'] == 1) {
         if (VIDEO_PROPERTY == $row['sm_field_property']) {

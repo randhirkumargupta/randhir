@@ -195,6 +195,11 @@ function itg_common_permission() {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url, $theme;
   $arg = arg();
+	
+	if($form_id == 'election_graph_xml_node_form'){
+		$form['#after_build'][] = 'itg_common_cancel_button';
+		
+	}
 
    $solr_video_video_id = array('views-exposed-form-searchimage-page-1' , 
       'views-exposed-form-searchimage-search-unpublish-video' ,
