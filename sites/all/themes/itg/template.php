@@ -483,14 +483,22 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
 
 //itg theme JS alter    
-  $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
+  /*$javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';
   //$javascript['sites/all/themes/itg/js/bootstrap.min.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';*/
+  foreach($javascript as $k => &$j) {
+  if ($j['data'] == 'misc/drupal.js' || $j['type'] == 'setting' || (is_string($j['data']) && (preg_match('/jquery/i',$j['data']) || preg_match('/admin_menu/i',$j['data'])))
+) {
+  $j['scope'] = 'header';
+} else {
+  $j['scope'] = 'footer';
+  }
+  }
 }
 
 function itg_image($variables) {

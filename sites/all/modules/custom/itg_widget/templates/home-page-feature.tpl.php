@@ -8,7 +8,8 @@
         </a>
       <?php else : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
-          <img width="483" height="271" src="<?php print image_style_url("magazine_top_story_483x271", drupal_get_path('theme', 'itg') . '/images/itg_image483x271.jpg');?>" alt="" title="" />
+          <img width="483" height="271" src="<?php print  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image483x271.jpg'); ?>" alt="" title="" />
+
         </a>
       <?php endif; ?>
 
