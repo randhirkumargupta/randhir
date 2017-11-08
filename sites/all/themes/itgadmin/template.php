@@ -232,15 +232,52 @@ function itgadmin_node_preview($variables) {
     }
     $output .= $full;
     if ($node->type == 'newsletter') {
+      $previoustimestamp = itg_newsletter_get_previous_time($node->nid);
       $selectedTemplatenid = $node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'];
       if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic'){
         $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
-        foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
-          $cat_array[] = $values['tid'];
+        $current_nid = $node->nid;
+        if ($newletterContents == 'top_20_trending') {
+          if (function_exists('_get_most_popular_nodes_based_on_top_20_trending')) {
+            $story_nodes = _get_most_popular_nodes_based_on_top_20_trending($previoustimestamp);
+            foreach ($story_nodes as $new_array) {
+              $news_detail = node_load($new_array);
+              $manual_nids[] = $news_detail->nid;
+            }
+          }
+          $manualnids = implode(',' , $manual_nids);
+          $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $manualnids . '/' . $current_nid, array('attributes' => array('class' => 'download-html') , 'html' => true));
+        } 
+        elseif ($newletterContents == 'top_20_shared') {
+          if (function_exists('_get_most_popular_nodes_based_on_top_20_shared')) {
+            $story_nodes = _get_most_popular_nodes_based_on_top_20_shared($previoustimestamp);
+            foreach ($story_nodes as $new_array) {
+              $news_detail = node_load($new_array);
+              $manual_nids[] = $news_detail->nid;
+            }
+          }
+          $manualnids = implode(',' , $manual_nids);
+          $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $manualnids . '/' . $current_nid, array('attributes' => array('class' => 'download-html') , 'html' => true));
+        } 
+        elseif ($newletterContents == 'top_20_most_viewed') {
+          if (function_exists('_get_most_popular_nodes_based_on_top_20_most_viewed')) {
+            $story_nodes = _get_most_popular_nodes_based_on_top_20_most_viewed($previoustimestamp);
+            foreach ($story_nodes as $new_array) {
+              $news_detail = node_load($new_array);
+              $manual_nids[] = $news_detail->nid;
+            }
+          }
+          $manualnids = implode(',' , $manual_nids);
+          $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $manualnids . '/' . $current_nid, array('attributes' => array('class' => 'download-html') , 'html' => true));
         }
-        // $cat_array = array(1206686, 1206620); // for testing purpose
-        $tid_val = implode(',' , $cat_array);
-        $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val , array('attributes' => array('class' => 'download-html') , 'html' => true));
+        elseif ($newletterContents == 'select_section') {
+          foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
+            $cat_array[] = $values['tid'];
+          }  
+          // $cat_array = array(1206686, 1206620); // for testing purpose
+          $tid_val = implode(',' , $cat_array);
+          $output .= l(t('Download HTML') , 'newsletter_data_preview/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val  . '/' . $current_nid, array('attributes' => array('class' => 'download-html') , 'html' => true));
+        }
       } 
       else {
         foreach($node->field_newsl_add_news[LANGUAGE_NONE] as $k => $v){
