@@ -21,6 +21,8 @@ function akamai_recacher_crawler($dburls) {
   }
 
   //p($dburls);
+  //
+  $host_domain = itg_akamai_getting_domain_without_protocal();
   // Default HTTP request options for anonymous users.
   $recacher_role_options['anonymous'] = array(
     'timeout' => 90,
@@ -31,7 +33,7 @@ function akamai_recacher_crawler($dburls) {
     // Accept-Encoding is crucial - this is how most browsers, but also
     // GoogleBot, request content.
     // If we leave it out, most browsers would still find the cache cold!
-    'headers' => array('Accept-Encoding' => 'gzip'),
+    'headers' => array('Accept-Encoding' => 'gzip','Host'=>$host_domain),
   );
 
   foreach ($dburls as $dburl) {
