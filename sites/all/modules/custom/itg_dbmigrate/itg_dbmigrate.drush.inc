@@ -366,7 +366,34 @@ function related_testing() {
       if(!empty($content)) {
       $params = array(
       'body' => $content,
-      'subject' => 'Failed Content in Story test',
+      'subject' => 'Failed Content in Story',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+  $content = failed_record_xml_id('migrate_map_itgvideogallery');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Video',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+  $content = failed_record_xml_id('migrate_map_itgphotogallery');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Photo',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+    //Last process folder mail.
+  $last_process_folder = read_folder_last_xml_mail_status();
+      if(!empty($last_process_folder)) {
+//        $last_time = explode('_', $last_process_folder);
+//        $human_time = date('d-m-Y H:i:s', $last_time[1]);
+      $params = array(
+      'body' => 'Last Migrated Folder name: '.$last_process_folder, //. ' </br > Folder Date & Time : '.$human_time,
+      'subject' => 'completed folder name',
     );
       $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     }
@@ -381,4 +408,18 @@ function related_content_tack($content_id, $content_type, $r_content_id, $r_cont
             'related_content_type' => $r_content_type,
           ))
           ->execute();
+}
+
+function read_folder_last_xml_mail_status() {
+  $path_xml = 'sites/default/files/migrate/xml_file/migrate_xml/xml_complete/';
+  $files = scandir($path_xml);
+  if ($files[0] == '.') {
+    unset($files[0]);
+  }
+  if ($files[1] == '..') {
+    unset($files[1]);
+  }
+  $result = array_values($files);
+
+  return end($result);
 }

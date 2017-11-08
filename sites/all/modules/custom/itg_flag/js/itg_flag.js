@@ -355,7 +355,7 @@ jQuery(document).ready(function () {
     });
     
     // call back for submit story in case of akamai
-    jQuery('body').on('click', '.story-login-follow, .photo-login-akamai', function (event) {
+    jQuery('body').on('click', '.story-login-follow, .photo-login-akamai, .video-login-akamai', function (event) {
     //jQuery('.story-login-follow').click(function (event) {
         var post_data = "";
             jQuery.ajax({
