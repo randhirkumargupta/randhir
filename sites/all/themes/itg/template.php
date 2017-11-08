@@ -492,7 +492,7 @@ function itg_js_alter(&$javascript) {
   $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';*/
   foreach($javascript as $k => &$j) {
-  if ($j['data'] == 'misc/drupal.js' || $j['type'] == ' setting' || (is_string($j['data']) && (preg_match('/jquery/i',$j['data']) || preg_match('/admin_menu/i',$j['data'])))
+  if ($j['data'] == 'misc/drupal.js' || $j['type'] == 'setting' || (is_string($j['data']) && (preg_match('/jquery/i',$j['data']) || preg_match('/admin_menu/i',$j['data'])))
 ) {
   $j['scope'] = 'header';
 } else {
