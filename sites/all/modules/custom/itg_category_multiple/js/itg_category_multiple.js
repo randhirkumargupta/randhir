@@ -70,6 +70,7 @@ $(document).ready(function() {
                     b_sub_cat: JSON.stringify($('#edit-itg-sub-category').val()),
                     b_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-category').val()),
                     b_sub_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-sub-category').val()),
+                    node_form_id: $(this).closest("form").attr('id'),
                 },
                 success: function(html) {
                     //console.log(html);
@@ -171,6 +172,7 @@ $(document).ready(function() {
                     b_sub_cat: JSON.stringify($('#edit-itg-sub-category').val()),
                     b_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-category').val()),
                     b_sub_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-sub-category').val()),
+                    node_form_id: $(this).closest("form").attr('id'),
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
@@ -263,6 +265,7 @@ $(document).ready(function() {
                     b_sub_cat: JSON.stringify($('#edit-itg-sub-category').val()),
                     b_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-category').val()),
                     b_sub_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-sub-category').val()),
+                    node_form_id: $(this).closest("form").attr('id'),
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
@@ -342,6 +345,7 @@ $(document).ready(function() {
                     b_sub_cat: JSON.stringify($('#edit-itg-sub-category').val()),
                     b_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-category').val()),
                     b_sub_sub_sub_cat: JSON.stringify($('#edit-itg-sub-sub-sub-category').val()),
+                    node_form_id: $(this).closest("form").attr('id'),
                 },
                 success: function(html) {
                     var item = JSON.parse(html);
@@ -407,7 +411,8 @@ $(document).ready(function() {
                     sub_sub_category: JSON.stringify($('#edit-itg-sub-sub-category').val()),
                     sub_sub_sub_category: JSON.stringify(categoryies),
                     type: $(this).attr('name'),
-                            pcat: $('#edit-field-primary-category-und-0-value').attr('value')
+                    pcat: $('#edit-field-primary-category-und-0-value').attr('value'),
+                    node_form_id: $(this).closest("form").attr('id'),
 
                 },
                 success: function(html) {
