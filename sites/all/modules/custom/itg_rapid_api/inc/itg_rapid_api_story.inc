@@ -174,7 +174,7 @@ function generateStoryDeatilList($id) {
         $data_array['buzz'] = $buzz_data;
     }
     else{
-        $buzz_data = new stdClass();
+        $buzz_data = array();
         $data_array['buzz'] = $buzz_data;
     }
     
@@ -197,11 +197,30 @@ function generateStoryDeatilList($id) {
         $data_array['tech_pros_cons'] = $tech_pros_emp;
         
     }
+    if($expertchunk_data['name'] == "" && expertchunk_data['image'] == "" && expertchunk_data['expertise'] == "" && expertchunk_data['description'] == ""){
+        $expertchunk_data = new stdClass();
+        $data_array['expert-chunk'] = $expertchunk_data;
+    }
+    else{
+        $data_array['expert-chunk'] = $expertchunk_data;
+    }
     
-    $data_array['expert-chunk'] = $expertchunk_data;
     $data_array['polls'] = $polls_d;
-    $data_array['author'] = $author;
-    $data_array['rating'] = $rating;
+    if($author['a_id'] == "" && $author['a_title'] == "" && $author['a_image'] == "" && $author['a_twitter_handler'] == ""){
+        $author = new stdClass();
+        $data_array['author'] = $author;
+    }
+    else{
+        
+        $data_array['author'] = $author;
+    }
+    if($rating['r_cur_value'] == "" && $rating['r_upper_range'] == "" && $rating['r_is_star_rating'] == ""){
+        $rating = new stdClass();
+        $data_array['rating'] = $rating;
+    }
+    else{
+        $data_array['rating'] = $rating;
+    }
 
     $data['data'] = $data_array;
     return $data;
