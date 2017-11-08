@@ -46,7 +46,7 @@ function _lock_id() {
  */
 function lock_acquire($name, $timeout = 30.0) {
   global $locks;
-
+echo "Lock Required <br>";
   // Insure that the timeout is at least 1 second.
   $expire = (int) max($timeout, 1);
 
@@ -61,6 +61,7 @@ function lock_acquire($name, $timeout = 30.0) {
     }
   }
   else {
+    echo "Adding New Lock<br>";
 
     // Add new lock.
     if(MemcacheStorageAPI::add($name, _lock_id(), $expire, 'semaphore')) {
