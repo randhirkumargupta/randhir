@@ -56,6 +56,6 @@ $conf['memcache_stampede_protection'] = TRUE;
 
 // setting for production
  $conf['memcache_servers'] = array(
-  'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
+  'itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
 );
 
