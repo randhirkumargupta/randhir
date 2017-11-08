@@ -71,7 +71,7 @@ function itg_akamai_settings() {
     '#description' => t('Akamai Client Secret'),
     '#required' => TRUE,
   );
-
+  
   $form['itg_config_fieldset']['itg_akamai_access_token'] = array(
     '#type' => 'textfield',
     '#title' => t('Akamai Access Token'),
@@ -79,13 +79,13 @@ function itg_akamai_settings() {
     '#description' => t('Akamai Access Token'),
     '#required' => TRUE,
   );
-
+   
   $nodes_list = node_type_get_types();
   $nodes_list_array = array();
   foreach ($nodes_list as $key => $value) {
     $nodes_list_array[$key] = $value->name;
   }
-
+   
   $form['itg_config_fieldset']['itg_akamai_cc_conf_list'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Select Content Type List for Akamai'),

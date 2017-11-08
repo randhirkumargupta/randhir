@@ -142,6 +142,15 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+  
+  $items['itg-video-watch-later-refresh/%'] = array(
+    'title' => 'videogallery watch later block refresh',
+    'description' => 'videogallery watch later block refresh',
+    'page callback' => 'itg_video_watch_later_refresh',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_video_watch_later_refresh.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -4083,6 +4092,19 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
   }
 }
 */
+
+/**
+ *Implement hook_node_view().
+ * {@inheritdoc}
+ */
+function itg_videogallery_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'videogallery' && !empty(variable_get('photo_block_refresh'))) {
+    $settings = array();
+    $settings['video_nid'] = $node->nid;
+    drupal_add_js(array('itg_videogallery' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_videogallery_watchlater_refresh.js', array('scope' => 'footer'));
+  }
+}
 
 /**
  * Implements hook_views_query_alter()

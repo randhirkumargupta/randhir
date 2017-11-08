@@ -260,4 +260,63 @@ jQuery(document).ready(function () {
         changeYear: true,
         dateFormat: 'dd-mm-yy',
     });
+
+    jQuery("#edit-rg1-date-from").datepicker({
+        maxDate: new Date(),
+        minDate: new Date(1970, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+        onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() + 1);
+
+            var dt1 = new Date(selected);
+            dt1.setDate(dt1.getDate());
+
+            jQuery("#edit-rg1-date-to").datepicker("option", "minDate", dt1);
+            jQuery("#edit-rg2-date-from").datepicker("option", "minDate", dt);
+        },
+    });
+    jQuery("#edit-rg1-date-to").datepicker({
+        maxDate: new Date(),
+        minDate: new Date(1970, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+        beforeShow: function (input, inst) {
+            var selected = jQuery("#edit-rg1-date-from").val();
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate());
+            jQuery("#edit-rg2-date-to").datepicker("option", "minDate", dt);
+        }
+    });
+    jQuery("#edit-rg2-date-from").datepicker({
+        maxDate: new Date(),
+        minDate: new Date(1970, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+        onSelect: function (selected) {
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate());
+            jQuery("#edit-rg2-date-to").datepicker("option", "minDate", dt);
+        },
+        // Handle case for select if not clicked on range1 from date.
+        beforeShow: function (input, inst) {
+            var selected = jQuery("#edit-rg1-date-from").val();
+            console.log(selected);
+            var dt = new Date(selected);
+            dt.setDate(dt.getDate() + 1);
+            // assign +1 selected date to range2 from date popup calender.
+            jQuery("#edit-rg2-date-from").datepicker("option", "minDate", dt);
+        }
+    });
+    jQuery("#edit-rg2-date-to").datepicker({
+        maxDate: new Date(),
+        minDate: new Date(1970, 01, 01),
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'yy-mm-dd',
+    });
 });

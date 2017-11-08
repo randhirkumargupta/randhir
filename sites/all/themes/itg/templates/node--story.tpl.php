@@ -114,7 +114,7 @@ if (!empty($content)):
     <div class='<?php print $classes ?>'>      
       <div class="comment-mobile desktop-hide">
         <ul>
-          <li class="later">
+         <li class="later buzz-akamai-refresh-read-later">
             <?php
             if ($user->uid > 0) {
               if (empty($opt['status']) || $opt['status'] == 0) {
@@ -296,23 +296,26 @@ if (!empty($content)):
                   <?php } if ($config_name == 'other') { ?> 
                     <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                     <?php
-                  }
+                  } ?>
+                  <li class="left-later  not-buzz-case">
+                  <?php  
                   if ($user->uid > 0) {
                     if (empty($opt['status']) || $opt['status'] == 0) {
                       ?> 
-                      <li class="left-later"><span> <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                      <span> <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span>
                       <?php
                     }
                     else {
                       ?>
-                      <li><span> <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span></li>
+                      <span> <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i><?php print t('READ LATER'); ?></a><span class="flag-throbber">&nbsp;</span></span>
                       <?php
                     }
                   }
                   else {
-                    print '<li>' . $itg_sso_url . '</li>';
+                    print $itg_sso_url;
                   }
                   ?>
+                </li>
                 </ul>
               </div>
             </div>
@@ -404,7 +407,7 @@ if (!empty($content)):
     <?php if ($config_name == 'other'): ?> 
                     <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
                     <?php endif; ?>
-                  <li class="later">
+                  <li class="later buzz-akamai-refresh-read-later">
                     <?php
                     if ($user->uid > 0) {
                       if (empty($opt['status']) || $opt['status'] == 0) {
@@ -423,7 +426,7 @@ if (!empty($content)):
                     }
                     ?>
                   </li>
-                </ul>
+                 </ul>
               </div>
             </div>
           </div>
@@ -470,7 +473,7 @@ if (!empty($content)):
                                 $file_uri = file_create_url($story_image);
                             }
                             else {
-                                $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                                $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                             }
                             print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
                         }
@@ -481,7 +484,7 @@ if (!empty($content)):
                                 $file_uri = file_create_url($story_image);
                             }
                             else {
-                                $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                                $file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                             }
                             print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
                             ?>
@@ -518,7 +521,7 @@ if (!empty($content)):
                                     //<i class="fa fa-camera"></i></span>';
                     }
                     else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                      $file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                     }
                     print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">        
                                     <span class="story-photo-icon">';

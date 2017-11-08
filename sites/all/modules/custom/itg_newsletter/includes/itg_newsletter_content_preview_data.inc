@@ -34,6 +34,12 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
   }
   
   if (arg(2) == 'select_section') {
+    $content_limit = variable_get('newsletter_content_limit');
+    if (isset($content_limit) && is_numeric($content_limit)) {
+      $renge = $content_limit;
+    } else {
+      $renge = 20;
+    }
     $selectedCid = arg(3);
     $getTids = explode("," , $selectedCid);
     if (is_array($getTids) && !empty($getTids)) {
@@ -48,13 +54,15 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
       $query->condition('fsc.field_story_category_tid' , $cat_array , 'IN');
       $query->orderBy('n.nid' , 'DESC');
       $query->groupBy('n.nid');
-      $query->range(0 , 20);
+      $query->range(0 , $renge);
       $result = $query->execute();
       while ($records = $result->fetchAssoc()) {
         $story_nodes[] = $records['nid'];
       }
     }
-  } 
+  } else {
+    $story_nodes = explode(',', arg(2));
+  }
   $banner = file_create_url($tmplateLoad->field_newst_banner[LANGUAGE_NONE][0]['uri']);
   $footerData = $tmplateLoad->body[LANGUAGE_NONE][0]['value'];
   $footer = preg_replace("/[0-9]{4}/" , date('Y') , $footerData);
@@ -99,7 +107,6 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
         <table cellspacing="0" cellpadding="0" style="width: 100%; text-align: center; font-size: 14px;">' . $footer . '</table>
       </td>
     </tr>';
-
   $content .= '</table><p>&nbsp;</p><p>Thanks,</p><p>India Today Group</p>';
   if (!$download_action) {
     $node = node_load($_GET['nid']);
