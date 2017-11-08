@@ -23,6 +23,7 @@ function akamai_recacher_crawler($dburls) {
   //p($dburls);
   //
   $host_domain = itg_akamai_getting_domain_without_protocal();
+  watchdog('$host_domain', $host_domain);
   // Default HTTP request options for anonymous users.
   $recacher_role_options['anonymous'] = array(
     'timeout' => 90,
