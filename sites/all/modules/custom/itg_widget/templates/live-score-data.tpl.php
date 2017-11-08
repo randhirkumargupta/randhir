@@ -16,7 +16,10 @@ if (!empty($data)) : global $base_url;
             <span class="crrrunrate">Crr <?php echo $data['currentscore']->crr; ?>  <span class="crrrunover">(<?php echo $data['currentscore']->batteamovers; ?> Over)</span></span>           
         </div>
         <span><?php print t('Live: Commentary'); ?></span> |
-            <a href="scorecard/matchcenter/<?php echo $match_id; ?>" target="_blank"><span><?php print t('Full Scorecard');?> |</span></a>
+            <?php 
+            $search_url = "scorecard/matchcenter/" . $match_id;
+            print l(t('Full Scorecard'), $search_url , array('attributes' => array('target' => '_blank', 'class' => array($arch_class))));
+            ?> |</span></a>
             <span><?php print t('Graphs'); ?></span>       
     </div>
 <?php else : ?>
