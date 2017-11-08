@@ -575,7 +575,6 @@ class MemCacheDrupal implements DrupalCacheInterface {
    */
   public function variable_set($name, $value) {
     global $conf;
-    echo "Variable Set in Memcache: " . $name . "<br>";
 
     // When lots of writes happen in a short period of time db_merge can throw
     // errors. This should only happen if another request has written the variable
