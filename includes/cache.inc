@@ -134,6 +134,7 @@ function cache_get_multiple(array &$cids, $bin = 'cache') {
  * @see cache_get()
  */
 function cache_set($cid, $data, $bin = 'cache', $expire = CACHE_PERMANENT) {
+  echo "Cache Set Hit: " . $cid . "<br>";
   return _cache_get_object($bin)->set($cid, $data, $expire);
 }
 
