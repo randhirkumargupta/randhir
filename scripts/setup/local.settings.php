@@ -37,15 +37,16 @@ ini_set('session.cookie_lifetime', 2000000);
 #$conf['queue_default_class'] = 'MongoDBQueue';
 
 # Memcache specific settings
-$conf['cache_backends'][] = 'sites/all/modules/contrib/memcache_storage/memcache_storage.inc';
-$conf['cache_default_class'] = 'MemcacheStorage';
+$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
+$conf['cache_default_class'] = 'MemCacheDrupal';
 $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
 $conf['cache_class_cache_update'] = 'DrupalDatabaseCache';
+$conf['memcache_stampede_protection'] = TRUE;
 
-$conf['memcache_storage_debug'] = TRUE;
-$conf['memcache_extension'] = 'Memcache';
+//$conf['memcache_storage_debug'] = TRUE;
+//$conf['memcache_extension'] = 'Memcache';
 
-$conf['memcache_storage_key_prefix'] = 'itgmem';
+//$conf['memcache_storage_key_prefix'] = 'itgmem';
 //$conf['session_inc'] = 'sites/all/modules/contrib/memcache_storage/includes/session.inc';
 
 // setting for UAT
