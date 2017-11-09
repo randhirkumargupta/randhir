@@ -211,10 +211,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 
     $paths = array_map('trim', $paths);
 
-    $paths = array_map(function($item) {
-      return rtrim($item, '/\\');
-    }, $paths);
-
     // Sending for clearing cache for varnish before hitting to Varnish
     if (module_exists('varnish')) {
       if (function_exists('varnish_expire_cache')) {
@@ -223,7 +219,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     }
 
     global $base_url;
-    //pr($paths);
+
     $varnish_paths = itg_akamai_varnish_host_mapping($paths);
 
 
@@ -287,11 +283,9 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 
       // Sending for Recaching
       if (module_exists('httprl')) {
-        //pr($varnish_paths);
         $varnish_paths = array_map(function($item) {
           return rtrim($item, '/\\');
         }, $varnish_paths);
-        //p($varnish_paths);
         module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
         if (isset($varnish_paths) && !empty($varnish_paths)) {
           akamai_recacher_crawler($varnish_paths);
