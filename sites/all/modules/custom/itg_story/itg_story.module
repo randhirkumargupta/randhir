@@ -958,7 +958,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       }
       
       if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
-        watchdog('Get HTTP REFERER if set', '<pre>'.print_r($_SERVER['HTTP_REFERER'], true).'</pre>');
+        watchdog('Get HTTP REFERER if set', '<pre>'.print_r($_SERVER, true).'</pre>');
         $get_backend_url = explode("/", BACKEND_URL);
         $referer_url = explode("/", $_SERVER['HTTP_REFERER']);
         if (in_array('lock_story', $config) && ($referer_url[2] != $get_backend_url[2])) {
