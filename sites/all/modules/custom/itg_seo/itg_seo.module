@@ -82,7 +82,6 @@ function itg_seo_theme() {
       'variables' => array('data' => NULL),
     ),
   );
-
   return $themes;
 }
 

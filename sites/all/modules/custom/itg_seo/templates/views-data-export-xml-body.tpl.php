@@ -36,7 +36,9 @@
   $rev_path1 = array_reverse($getpath);
   $split_path = explode("-", $rev_path1[0]);
   $rev_path2 = array_reverse($split_path);
-  $auth_name = itg_seo_editors_pick_data($rev_path2[3]);
+  if (function_exists('itg_seo_editors_pick_data')) {
+    $auth_name = itg_seo_editors_pick_data($rev_path2[3]);
+  }
 ?>
 <<?php print "author"; ?>><![CDATA[<?php print $auth_name; ?>]]></<?php print "author"; ?>>
 </<?php print $item_node; ?>>
