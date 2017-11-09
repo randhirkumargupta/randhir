@@ -5,6 +5,13 @@
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
  */
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_photo');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_video');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_news');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_magazine');
+  //module_load_include('inc', 'itg_app_api', 'inc/helper');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_story');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage');
 /**
  * Function for APP API resource declaration. 
  */
