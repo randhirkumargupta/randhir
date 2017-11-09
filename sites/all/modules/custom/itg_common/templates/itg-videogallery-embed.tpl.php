@@ -36,10 +36,10 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                   $vid = itg_videogallery_get_videoid($row['fid']);
                 }
                 if ($video_value->solr_video_thumb != "") {
-                  $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title=""></li>';
+                  $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-used-on ="embed" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title=""></li>';
                 }
                 else {
-                  $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt="" title=""></li>';
+                  $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-used-on ="embed" data-image-fid="' . $video_value->fid . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt="" title=""></li>';
                 }
                 $ads_flag = 1;
                 if ($video_value->field_include_ads_value == 'yes') {
@@ -52,7 +52,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                           <div class="iframe-video1 video-iframe-wrapper" id="video_0">
                               <?php
                               if ($videoids[0]->video_repo_type == 'INTERNAL') {
-                                print theme('internal_video_player', array("data" => $videoids[0]->fid));
+                                print theme('internal_video_player', array("data" => $videoids[0]->fid , 'used_on' =>'embed'));
                               }
                               ?>
                           </div>

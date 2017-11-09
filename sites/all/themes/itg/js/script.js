@@ -1077,8 +1077,9 @@ jQuery(document).ready(function (e) {
     jQuery('.thumb-video').click(function () {
         var getvideoindex = jQuery(this).attr('data-image-index');
         var getvideofid = jQuery(this).attr('data-image-fid');
+         var getvideousedon = jQuery(this).attr('data-used-on');
         var ajaxpath = Drupal.settings.basePath + 'getvideoplayer';
-        load_video_in_slider(getvideofid, ajaxpath, getvideoindex)
+        load_video_in_slider(getvideofid, ajaxpath, getvideoindex,getvideousedon)
 
     });
 
@@ -1190,7 +1191,7 @@ function navigationResize() {
 }
 
 
-function load_video_in_slider(fid, path, getvideoindex) {
+function load_video_in_slider(fid, path, getvideoindex,getvideousedon) {
 
     jQuery.ajax({
         url: path,
@@ -1198,7 +1199,7 @@ function load_video_in_slider(fid, path, getvideoindex) {
         beforeSend: function () {
             jQuery('.loading-video').show();
         },
-        data: { 'fid': fid, 'tabindex': getvideoindex },
+        data: { 'fid': fid, 'tabindex': getvideoindex,'getvideousedon':getvideousedon },
         success: function (data) {
             jQuery('#video_palyer_container').html(data);
             jQuery('.loading-video').hide();

@@ -97,11 +97,11 @@ $uri = base64_encode($actual_link);
                             }
                             if ($video_value->solr_video_thumb != "") {
                               $ga_data = "ga('send', 'event', 'Video_".$video_value->solr_video_id."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
-                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-used-on ="video" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
                             }
                             else {
                               $ga_data = "ga('send', 'event', 'Video_".$video_value->solr_video_id."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
-                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-image-fid="' . $video_value->fid . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') .'" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-used-on ="video"  data-image-fid="' . $video_value->fid . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') .'" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
                             }
                             $ads_flag = 1;
                             if ($video_value->field_include_ads_value == 'yes') {
@@ -126,7 +126,7 @@ $uri = base64_encode($actual_link);
                                       <div class=" video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
-                                            print theme('internal_video_player', array("data" => $videoids[0]->fid));
+                                            print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' =>'video'));
                                           }
                                           ?>
                                       </div>
