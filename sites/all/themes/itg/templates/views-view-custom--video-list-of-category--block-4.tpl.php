@@ -12,16 +12,16 @@
     <li>
         <div class="tile">
       <figure>
-  <?php //print l($img, 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
-  <?php print l($img, 'node/' . $row['nid'], array('html' => TRUE)); ?>
+  <?php //print l($img, 'node/' . $row['nid_1'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
+  <?php print l($img, 'node/' . $row['nid_1'], array('html' => TRUE)); ?>
         <figcaption><i class="fa fa-play-circle" ></i> <?php print $row['field_video_duration']; ?></figcaption>
 
       </figure>
 
       <span class="posted-on"><?php print $row['created']; ?></span>
       <p title="<?php print strip_tags($row['title']); ?>">
-        <?php //print l($row['title'], 'node/' . $row['nid'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
-        <?php print l($row['title'], 'node/' . $row['nid'], array('html' => TRUE)); ?>
+        <?php //print l($row['title'], 'node/' . $row['nid_1'], array('query' => array('category' => $section_cat_id, 'sid' => $_GET['sid']), 'html' => TRUE)); ?>
+        <?php print l($row['title'], 'node/' . $row['nid_1'], array('html' => TRUE)); ?>
       </p>
         </div>
     </li>
