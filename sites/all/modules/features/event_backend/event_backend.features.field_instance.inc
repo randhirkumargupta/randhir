@@ -1270,7 +1270,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 19,
+      'weight' => 18,
     ),
   );
 
@@ -1315,7 +1315,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 20,
+      'weight' => 19,
     ),
   );
 
@@ -1399,7 +1399,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 17,
+      'weight' => 16,
     ),
   );
 
@@ -1485,7 +1485,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 15,
+      'weight' => 14,
     ),
   );
 
@@ -1614,7 +1614,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 13,
     ),
   );
 
@@ -1657,7 +1657,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 16,
+      'weight' => 15,
     ),
   );
 
@@ -1741,7 +1741,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 27,
+      'weight' => 26,
     ),
   );
 
@@ -1819,7 +1819,169 @@ function event_backend_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 21,
+      'weight' => 20,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_e_from_chairman_image'.
+  $field_instances['node-event_backend-field_e_from_chairman_image'] = array(
+    'bundle' => 'event_backend',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 61,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 1,
+    'field_name' => 'field_e_from_chairman_image',
+    'label' => 'Chairman Image',
+    'required' => 0,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'exclude_cv' => FALSE,
+      'file_directory' => '',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'image',
+      'settings' => array(
+        'filefield_sources' => array(
+          'filefield_sources' => array(
+            'attach' => 0,
+            'clipboard' => 0,
+            'imce' => 0,
+            'itg_image_repository' => 'itg_image_repository',
+            'itg_image_video' => 0,
+            'plupload' => 0,
+            'reference' => 0,
+            'remote' => 0,
+            'upload' => 0,
+          ),
+          'source_attach' => array(
+            'absolute' => 0,
+            'attach_mode' => 'move',
+            'path' => 'file_attach',
+          ),
+          'source_imce' => array(
+            'imce_mode' => 0,
+          ),
+          'source_reference' => array(
+            'autocomplete' => 0,
+            'search_all_fields' => 0,
+          ),
+        ),
+        'imce_filefield_on' => 0,
+        'preview_image_style' => 'thumbnail',
+        'progress_indicator' => 'throbber',
+      ),
+      'type' => 'image_image',
+      'weight' => 36,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_e_from_chairman_title'.
+  $field_instances['node-event_backend-field_e_from_chairman_title'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 60,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_e_from_chairman_title',
+    'label' => 'Chairman Title',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 35,
+    ),
+  );
+
+  // Exported field_instance: 'node-event_backend-field_e_from_the_chairman'.
+  $field_instances['node-event_backend-field_e_from_the_chairman'] = array(
+    'bundle' => 'event_backend',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 59,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_e_from_the_chairman',
+    'label' => 'From the chairman',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 34,
     ),
   );
 
@@ -1862,7 +2024,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 25,
+      'weight' => 24,
     ),
   );
 
@@ -1906,7 +2068,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 26,
+      'weight' => 25,
     ),
   );
 
@@ -1945,7 +2107,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 22,
+      'weight' => 21,
     ),
   );
 
@@ -1988,7 +2150,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 23,
+      'weight' => 22,
     ),
   );
 
@@ -2031,7 +2193,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 29,
+      'weight' => 28,
     ),
   );
 
@@ -2074,7 +2236,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 28,
+      'weight' => 27,
     ),
   );
 
@@ -2405,7 +2567,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'field_collection',
       'settings' => array(),
       'type' => 'field_collection_embed',
-      'weight' => 32,
+      'weight' => 31,
     ),
   );
 
@@ -2447,7 +2609,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 30,
+      'weight' => 29,
     ),
   );
 
@@ -2573,7 +2735,7 @@ function event_backend_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 18,
+      'weight' => 17,
     ),
   );
 
@@ -2898,7 +3060,7 @@ function event_backend_field_default_field_instances() {
         'rows' => 4,
       ),
       'type' => 'text_textarea',
-      'weight' => 31,
+      'weight' => 30,
     ),
   );
 
@@ -3268,6 +3430,8 @@ function event_backend_field_default_field_instances() {
   t('Associate Sponsors');
   t('Associate Story');
   t('Audio');
+  t('Chairman Image');
+  t('Chairman Title');
   t('Choose Sponsor');
   t('Content Font Colour');
   t('Daywise');
@@ -3287,6 +3451,7 @@ function event_backend_field_default_field_instances() {
   t('Event URL');
   t('Flashback');
   t('Force Registration Open');
+  t('From the chairman');
   t('Group Registration Fee (for 10 members)');
   t('Group Registration Fee (for 5 members)');
   t('Heading Background Colour');

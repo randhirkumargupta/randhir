@@ -47,13 +47,60 @@
             <?php print $content; ?>
             <?php if($field == 'nothing_1') {
                 $node = node_load($row['nid']);
+                $previoustimestamp = itg_newsletter_get_previous_time($node->nid);
                 $selectedTemplatenid = $node->field_newsl_select_template[LANGUAGE_NONE][0]['target_id'];
-                $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
-                foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
-                  $cat_array[] = $values['tid'];
+                $current_nid = $node->nid;
+                if($node->field_newsl_newsletter_type[LANGUAGE_NONE][0]['value'] == 'automatic'){
+                  $newletterContents = $node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'];
+                  if ($newletterContents == 'top_20_trending') {
+                    if (function_exists('_get_most_popular_nodes_based_on_top_20_trending')) {
+                      $story_nodes = _get_most_popular_nodes_based_on_top_20_trending($previoustimestamp);
+                      foreach ($story_nodes as $new_array) {
+                        $news_detail = node_load($new_array);
+                        $manual_nids[] = $news_detail->nid;
+                      }
+                    }
+                    $manualnids = implode(',' , $manual_nids);
+                    echo l( '<span class="preview-class">' .t(' preview') . '</span>' , 'newsletter-data-preview-before-download/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $manualnids . '/' . $current_nid, array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true" , "nid" => $node->nid) , 'html' => true));
+                  } 
+                  elseif ($newletterContents == 'top_20_shared') {
+                    if (function_exists('_get_most_popular_nodes_based_on_top_20_shared')) {
+                      $story_nodes = _get_most_popular_nodes_based_on_top_20_shared($previoustimestamp);
+                      foreach ($story_nodes as $new_array) {
+                        $news_detail = node_load($new_array);
+                        $manual_nids[] = $news_detail->nid;
+                      }
+                    }
+                    $manualnids = implode(',' , $manual_nids);
+                    echo l( '<span class="preview-class">' .t(' preview') . '</span>' , 'newsletter-data-preview-before-download/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $manualnids . '/' . $current_nid, array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true" , "nid" => $node->nid) , 'html' => true));
+                  } 
+                  elseif ($newletterContents == 'top_20_most_viewed') {
+                    if (function_exists('_get_most_popular_nodes_based_on_top_20_most_viewed')) {
+                      $story_nodes = _get_most_popular_nodes_based_on_top_20_most_viewed($previoustimestamp);
+                      foreach ($story_nodes as $new_array) {
+                        $news_detail = node_load($new_array);
+                        $manual_nids[] = $news_detail->nid;
+                      }
+                    }
+                    $manualnids = implode(',' , $manual_nids);
+                    echo l( '<span class="preview-class">' .t(' preview') . '</span>' , 'newsletter-data-preview-before-download/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $manualnids . '/' . $current_nid, array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true" , "nid" => $node->nid) , 'html' => true));
+                  } 
+                  elseif ($newletterContents == 'select_section') {
+                    foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
+                      $cat_array[] = $values['tid'];
+                    }
+                    $tid_val = implode(',' , $cat_array);
+                    echo  l( '<span class="view-link">' .t(' preview') . '</span>' , 'newsletter-data-preview-before-download/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val . '/' . $current_nid, array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true" , "nid" => $node->nid) , 'html' => true));
+                  }
+                } 
+                else {
+                  foreach($node->field_newsl_add_news[LANGUAGE_NONE] as $k => $v){
+                    $load_fc = field_collection_item_load($v['value']);
+                    $manual_nids[] = $load_fc->field_news_cid[LANGUAGE_NONE][0]['target_id'];
+                  }
+                  $manualnids = implode(',' , $manual_nids);
+                  echo l( '<span class="preview-class">' .t(' preview') . '</span>' , 'newsletter-data-preview-before-download/' . $selectedTemplatenid . '/' . $manualnids , array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true" , "nid" => $node->nid) , 'html' => true));                  
                 }
-                $tid_val = implode(',' , $cat_array);
-                echo  l( '<span class="view-link">' .t(' preview') . '</span>' , 'newsletter-data-preview-before-download/' . $selectedTemplatenid . '/' . $newletterContents . '/' . $tid_val , array("attributes" => array("class" => array("colorbox-load")) ,  "query"=>array("width" => "900", "height" => "600", "iframe" => "true" , "nid" => $node->nid) , 'html' => true));
              } ?>
           </td>
         <?php endforeach; ?>
