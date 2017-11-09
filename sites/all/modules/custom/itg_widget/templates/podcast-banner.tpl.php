@@ -19,7 +19,7 @@ $podcast_audio_element_id = array();
                         }
                         ?>
                         <!-- Header slider -->
-                        <?php //echo '<pre>';print_r($podcast_banner_array);
+                        <?php 
                         $podcast_thumbnail = "";
                         if (!empty($podcast_banner_array)) :
                           foreach ($podcast_banner_array as $podcast_id => $podcast_array) {
