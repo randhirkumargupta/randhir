@@ -648,3 +648,21 @@ function itg_seo_pathauto_alias_alter(&$alias, array &$context) {
     itg_custom_pathauto_state_save($node_type, $node_id, $pathauto_state);
   }
 }
+
+/**
+ * Get the editor's pick author name
+ * 
+ * @param int $ids
+ *  Node id of the story node
+ * @param string as $author_name
+ *  Returns a string as author name
+ */
+function itg_seo_editors_pick_data($ids){
+  $query = db_select('itg_multi_byline_info', 'mbi');
+  $query->leftJoin('node', 'n', 'mbi.byline_id = n.nid');
+    $query->fields('n', array('title'));
+    $query->condition('mbi.publish_status', 1);
+    $query->condition('mbi.nid', $ids);
+  $author_name = $query->execute()->fetchField();
+  return $author_name;
+}
