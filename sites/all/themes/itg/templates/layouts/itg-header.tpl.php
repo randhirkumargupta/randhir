@@ -57,8 +57,8 @@ $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
                 <?php
                    } else {
                 ?>
-                 <a href="<?php print $base_url; ?>/personalization/edit-profile/general-settings" class="user-icon"><?php print $user_pic; ?></a>  
-                 <?php  
+                       <a href="javascript:void(0)" class="user-icon loginicon"><?php print $user_pic; ?></a>
+                     <?php
                    }
                  }
                  ?>
