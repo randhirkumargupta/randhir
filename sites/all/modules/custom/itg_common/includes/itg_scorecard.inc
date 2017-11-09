@@ -1,0 +1,44 @@
+<?php
+
+/*
+ * Inc file scorecard functions
+ *
+ *
+ */
+
+/**
+ * Page callback for scorecard.
+ * @param string $matchid
+ * @return string
+ * Implements itg_common_get_scorecard().
+ */
+function itg_common_get_scorecard($matchid) {
+  module_load_include('inc', 'itg_widget', 'includes/itg_widget_live_score');
+  $data = live_score();
+  $teamsabbr = $data['team1'] . " vs " . $data['team2'];
+  $year = substr($data['date'], 4, 4);
+  $title = $teamsabbr . " : Live Score, Cricket Commentary, Match Stats- India Today";
+  $description = $teamsabbr . ": Get " . $teamsabbr ." Live Score, Full Scorecard, Ball by Ball cricket commentary and match stats. Visit IndiaToday.com";
+  $keywords = $teamsabbr . ", " . $teamsabbr . " " . $year . ", " . $teamsabbr . " live score, " . $teamsabbr . $year." full scorecard, " . $teamsabbr . " match commentary, " .$teamsabbr . " " . $year . " match result, ball by ball commentary, india today";
+  drupal_set_title($title);
+  $html_head = array(
+    'description' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'description',
+        'content' => $description,
+      ),
+    ),
+    'keywords' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' => 'keywords',
+        'content' => $keywords,
+      ),
+    ),
+  );
+  foreach ($html_head as $key => $data) {
+    drupal_add_html_head($data, $key);
+  }
+  return '<iframe id="si-scorecard" width="100%" height="740" src="https://assets-indiatoday.sportz.io/cricket/matchcentre.html?matchid=' . $matchid . '" frameborder="0"></iframe>';
+}

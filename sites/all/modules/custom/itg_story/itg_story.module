@@ -114,6 +114,15 @@ function itg_story_menu() {
     'file' => 'includes/itg_story_readlater_refresh.inc',
     'type' => MENU_CALLBACK,
   );
+  
+  $items['itg-follow-story-refresh/%'] = array(
+    'title' => 'Follow story refresh home page',
+    'description' => 'Follow story refresh home page',
+    'page callback' => 'itg_follow_story_refresh',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_follow_story_refresh.inc',
+    'type' => MENU_CALLBACK,
+  );
 
   return $items;
 }
@@ -951,7 +960,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       if (isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
         $get_backend_url = explode("/", BACKEND_URL);
         $referer_url = explode("/", $_SERVER['HTTP_REFERER']);
-        if (in_array('lock_story', $config) && $referer_url[2] != $get_backend_url[2]) {
+        if (in_array('lock_story', $config) && ($referer_url[2] != $get_backend_url[2])) {
           drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
         }
       } 
