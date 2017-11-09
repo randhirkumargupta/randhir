@@ -19,8 +19,11 @@ function akamai_recacher_crawler($dburls) {
     //lock_release(__FUNCTION__);
     return 0;
   }
-
+  
   //p($dburls);
+  //
+  $host_domain = itg_akamai_getting_domain_without_protocal();
+  watchdog('$host_domain', $host_domain);
   // Default HTTP request options for anonymous users.
   $recacher_role_options['anonymous'] = array(
     'timeout' => 90,
@@ -31,7 +34,7 @@ function akamai_recacher_crawler($dburls) {
     // Accept-Encoding is crucial - this is how most browsers, but also
     // GoogleBot, request content.
     // If we leave it out, most browsers would still find the cache cold!
-    'headers' => array('Accept-Encoding' => 'gzip'),
+    'headers' => array('Accept-Encoding' => 'gzip','Host'=>$host_domain),
   );
 
   foreach ($dburls as $dburl) {
@@ -46,7 +49,7 @@ function akamai_recacher_crawler($dburls) {
 //  p($request);
   $codes = array();
   $messages = array();
-
+  watchdog('$request_for_httrl', '<pre>' . print_r($request, true) .'<pre>');
   foreach ($request as $url => $probe) {
     if($probe->code == 200){
      $messages[] = '<li>successful (' . $probe->code . '): ' . $url . '</li>';
@@ -55,7 +58,7 @@ function akamai_recacher_crawler($dburls) {
    }
   }
 
-  watchdog('recache complete status', '<pre>' . print_r($codes, true) . '</pre>');
+  //watchdog('recache complete status', '<pre>' . print_r($codes, true) . '</pre>');
 
   // Report success and issue a warning for URLs that did not return code 200.
  

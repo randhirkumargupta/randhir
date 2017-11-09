@@ -584,6 +584,7 @@ function itg_layout_manager_block_view($delta = '') {
           'calendar/0/0/magazine.html' => t('Magazine'),
           'rss' => t('RSS'),
           'poll' => t('Polls'),
+          'sitemap' => t('Sitemap'),
         );
         if (function_exists('frontend_breadcrumb_display')) {
           if (arg(0) == 'calendar') {
