@@ -553,12 +553,12 @@ if (!empty($content)):
                   if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) {
                     ?>
                     <div class="photoby">
-                        <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                        <?php if (!empty($node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'])) { ?>
                         <div class="story-img-rating">
                           <?php
                           // added technology rating field value for story technology
-                          $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
-                          echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
+                          $tech_rating = $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'];
+                          echo $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'] . '/10';
                           ?>
                         </div>
                       <?php } ?>
