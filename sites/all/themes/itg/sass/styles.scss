@@ -13811,10 +13811,13 @@ span.see-picture {
     .view-front-end-global-search .view-content .itg-search-list>.search-detail,
     .view-front-end-global-search .view-content .itg-search-list>.social-share {
         overflow: initial;
-        padding-left: 154px;
+        padding-left: 0px;
     }
     .view-front-end-global-search .view-content .itg-search-list>.views-field {
         padding-left: 154px;
+    }
+    .view-front-end-global-search .view-content .search-pic {
+        float: left;
     }
 }
 
@@ -14563,11 +14566,12 @@ ul.pron-cons-img li img {
     z-index: 9999 !important;
 }
 
-.cheaper_dearer {
+
+/*.cheaper_dearer {
     .budget-predictor-img {
         max-height: 130px;
     }
-}
+}*/
 
 
 /* css add by arun/itg */
@@ -14690,7 +14694,7 @@ ul.pron-cons-img li img {
 
 #block-itg-videogallery-itg-videogallery-menu-content {
     margin-top: 22px;
-    float: left;
+    /*float: left;*/
     width: 100%;
     margin-bottom: 22px;
 }
