@@ -19,11 +19,13 @@ $podcast_audio_element_id = array();
                         }
                         ?>
                         <!-- Header slider -->
-                        <?php
+                        <?php //echo '<pre>';print_r($podcast_banner_array);
                         $podcast_thumbnail = "";
                         if (!empty($podcast_banner_array)) :
                           foreach ($podcast_banner_array as $podcast_id => $podcast_array) {
                             $podcast_image = $podcast_banner_array[$podcast_id]['image']['uri'];
+														$podcast_image_alt = $podcast_banner_array[$podcast_id]['image']['alt'];
+														$podcast_image_title = $podcast_banner_array[$podcast_id]['image']['title'];
                             $description = $podcast_banner_array[$podcast_id]['desc'];
                             ?>
                             <div class="podcast-slide">
@@ -32,7 +34,7 @@ $podcast_audio_element_id = array();
                                     $podcat_uri = image_style_url("widget_small", $podcast_image);
                                     if (function_exists('url_exists') && url_exists($podcat_uri)) {
                                       ?>
-                                      <img src="<?php print image_style_url("widget_small", $podcast_image); ?>" alt="" title="" />
+                                      <img src="<?php print image_style_url("widget_small", $podcast_image); ?>" alt="<?php print $podcast_image_alt; ?>" title="<?php print $podcast_image_title; ?>" />
                                       <?php
                                     }
                                     else {
@@ -70,14 +72,20 @@ $podcast_audio_element_id = array();
                             </div>
 
                             <?php
+														$flag = 0;
                             $extra_large_image_url = image_style_url("widget_very_small", $podcast_image);
                             if (function_exists('url_exists') && url_exists($extra_large_image_url)) {
                               $extra_large_final_image = $extra_large_image_url;
+															$flag = 1;
                             }
                             else {
                               $extra_large_final_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
                             }
-                            $very_small_image = '<img class="podcast-thumb-img" src="' . $extra_large_final_image . '" alt="" title="" />';
+														if($flag == 1){
+															$very_small_image = '<img class="podcast-thumb-img" src="' . $extra_large_final_image . '" alt="'.$podcast_image_alt.'" title="'.$podcast_image_title.'" />';
+														}else{
+															$very_small_image = '<img class="podcast-thumb-img" src="' . $extra_large_final_image . '" alt="" title="" />';
+														}
                             $podcast_thumbnail .= "<div class='podcast-nav-item'> $very_small_image </div>";
                           }
                         endif;
