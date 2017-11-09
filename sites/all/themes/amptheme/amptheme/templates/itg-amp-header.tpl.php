@@ -96,7 +96,7 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
               <?php if ($logo_itg): ?>
               <div class="logo">
                   <a href="<?php print $base_url; ?>" title="<?php //print t('Home'); ?>" rel="home" id="logo">
-                      <amp-img src="<?php print $base_url; ?>/sites/all/themes/amptheme/amptheme/logo.png" alt="<?php  t('Home'); ?>" height="51" width = "106"></amp-img>
+                      <amp-img src="<?php print $base_url; ?>/sites/all/themes/amptheme/amptheme/logo.png" alt="<?php  t('Home'); ?>" height="30" width = "70"></amp-img>
                   </a>
               </div>
               <?php endif; ?>

@@ -77,22 +77,15 @@
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
       .node-type-videogallery #main-wrapper, .node-type-photogallery #main-wrapper{padding: 0;}
-      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 0; z-index: 9999;}
-      #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
-      #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
-      #navbar h2{
-        width: 20px;
-        text-align: center;
-        background: transparent;
-        border: none;
-        padding: 3px 0;
-        color: #fff;
-        height: 28px;
-      }
+      #header{position: relative; margin-bottom: 0; z-index: 9999; box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+    height:45px;}
+      #logo{margin: 12px 5px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
+      #navbar{/*position: absolute; left: 0; bottom: 0;*/ width: 100%; position: relative; /*height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 15px;*/}
+      #navbar h2{width: 20px; text-align: center; background: transparent; border: none; padding: 3px 0; color: rgb(94, 94, 94); height: 28px; top:-4px; left: 5px;}
       #navbar amp-accordion h2 span{position: absolute; left: 0; top: 3px;}
       #navbar h2[aria-expanded="false"] .show-less{opacity: 0;}
       #navbar h2[aria-expanded="true"] .show-more{opacity: 0;}
-      .header-menu{ left: 0; top: 0; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
+      .header-menu{position: absolute !important; left: 0; top: 47px; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
       .header-menu li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
       .header-menu li:first-child a{border-top: none;}
       .posted-by{margin: 10px 0; font-size: 12px; color: #8c8c8c; font-family: 'Roboto';}
@@ -681,6 +674,33 @@
 		#live-blog-amp-share h2[aria-expanded="false"] .show-less{opacity: 0;}
 		#live-blog-amp-share h2[aria-expanded="true"] .show-more{opacity: 0;}
 		#live-blog-amp-share .i-amphtml-accordion-header{border:none;background-color:#fff;}
+    #live-blog-amp-share .show-less{position: relative; left: -18px}
+    #live-blog-amp-share .social-share a{margin-right:5px;}
+    #live-blog-amp-share .social-share .fa-twitter-square{color: #03a4d2; font-size: 30px;}
+    #live-blog-amp-share .social-share .fa-facebook-official{color: #09488b;font-size: 30px;}
+    #live-blog-amp-share .social-share .fa-google-plus-square{font-size: 30px;color: #b00808;}
+    #live-blog-amp-share .social-share .i-amphtml-accordion-content{top: -5px; left: 25px; position: absolute !important;}
+    .i-amphtml-layout-size-defined{width: 490px; margin: 0 auto}
+
+    /***** New Header css by itgd ****/
+    .i-amphtml-layout-container{ position: absolute; }
+    #header .top-nav {padding: 0px; margin: 25px auto 15px auto; float: none; zoom: 1; background: transparent;}
+    #header a {color: #a9a9a9; font-family: "Roboto"; text-decoration: none; font-size:16px; margin:12px 0;}
+    .mobile-nav .bar1, .mobile-nav .bar2, .mobile-nav .bar3 {width: 20px; height: 2px; background-color: rgb(94, 94, 94); margin: 4px 0px; transition: 0.4s;}
+    #header .main-nav .nav-container-menu {width: calc(100% - 58px); margin: 0 auto;/*overflow: hidden;*/}
+    #header .main-nav .nav-container-menu .nav-centerall {margin: 0 auto; width:280px;}
+    #header .top-nav .main-nav ul.menu {float: left;}
+    #header .top-nav ul {list-style-type: none;}
+    #header .top-nav .main-nav ul.menu li.desktop-hide {display: none;}
+    #header .top-nav .main-nav li.desktop-hide {display: inline-block;}
+    #header .top-nav .main-nav li.desktop-hide {display: none;}
+    #header .main-nav .desktop-hide {width: 20px; height: 20px; position: relative; float: left; padding-left: 10px;}
+    #header .main-nav .desktop-hide {position: absolute; width: 38px; height: 38px;}
+    #header .top-nav ul li {display: inline-block;vertical-align: top; margin:0 5px;} 
+    #header .headeritg-logo {float: left; width:70px;text-align: center;height: 40px;}
+    #header .logo {width:70px; position: absolute;top:-10px;}
+    #header .logo a {display: block; overflow: visible; margin:0;}
+
     </style>
     <?php //endif;  ?>
   </head>
