@@ -65,7 +65,7 @@ $conf = array(
 'cache_class_cache_form' => 'DrupalDatabaseCache',
 //  'session_inc' => './sites/all/modules/memcache/memcache-session.inc',
   'memcache_servers' => array(
-   'localhost:11211' => 'default',   
+   'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',   
   ),
   'memcache_bins' => array(
     'cache' => 'default',
