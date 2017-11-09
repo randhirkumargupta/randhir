@@ -1,15 +1,5 @@
 <?php
-#MongoDB 
-$conf['mongodb_connections'] = array(
-  'default' => array(
-    //'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo',
-    'host' => 'mongodb://itoday_write:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo',// uat
-    'db' => 'itgcmsmongo',
-    'connection_options' => array('replicaSet' => 'uatreplica'),
-  ),
-);
-
-
+include_once('./includes/cache.inc');
 
 ini_set('session.gc_probability', 1);
 ini_set('session.gc_divisor', 100);
@@ -58,7 +48,6 @@ $conf['memcache_servers'] = array(
  /*$conf['memcache_servers'] = array(
   'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
 );*/
-
 $conf = array(
 'cache_backends' => array('sites/all/modules/memcache/memcache.inc'),
 'cache_default_class' => 'MemCacheDrupal',
@@ -79,7 +68,17 @@ $conf = array(
   ),
 );
 $conf['memcache_key_prefix'] = 'itgmem';
+
 $conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
 
-include_once('./includes/cache.inc');
+#MongoDB 
+$conf['mongodb_connections'] = array(
+  'default' => array(
+    //'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo',
+    'host' => 'mongodb://itoday_write:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo',// uat
+    'db' => 'itgcmsmongo',
+    'connection_options' => array('replicaSet' => 'uatreplica'),
+  ),
+);
+
 
