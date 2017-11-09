@@ -6053,7 +6053,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
 /* Responsive CSS */
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: 767px) {
+    .featured_photo_carousel .flexslider,
+    .tech-block_5 .flexslider,
+    .auto-block_5 .flexslider {
+        max-width: 100%;
+    }
     .featured_photo_carousel .flexslider .slides li,
     .tech-block_5 .flexslider .slides li,
     .auto-block_5 .flexslider .slides li {

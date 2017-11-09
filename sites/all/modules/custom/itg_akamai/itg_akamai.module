@@ -211,6 +211,10 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 
     $paths = array_map('trim', $paths);
 
+    $paths = array_map(function($item) {
+      return rtrim($item, '/\\');
+    }, $paths);
+
     // Sending for clearing cache for varnish before hitting to Varnish
     if (module_exists('varnish')) {
       if (function_exists('varnish_expire_cache')) {
@@ -218,8 +222,12 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       }
     }
 
-    $paths = itg_akamai_send_for_host_mapping($paths);
+    global $base_url;
+    //pr($paths);
+    $varnish_paths = itg_akamai_varnish_host_mapping($paths);
 
+
+    $paths = itg_akamai_send_for_host_mapping($paths);
     //$paths = itg_akamai_send_for_host_mapping_for_amp($paths);  // Preparing data for AMP URLs
 
     $paths_data = $paths;
@@ -279,8 +287,15 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 
       // Sending for Recaching
       if (module_exists('httprl')) {
+        //pr($varnish_paths);
+        $varnish_paths = array_map(function($item) {
+          return rtrim($item, '/\\');
+        }, $varnish_paths);
+        //p($varnish_paths);
         module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
-        akamai_recacher_crawler($paths);
+        if (isset($varnish_paths) && !empty($varnish_paths)) {
+          akamai_recacher_crawler($varnish_paths);
+        }
       }
       // End code for Recaching
     }
@@ -314,6 +329,31 @@ function itg_akamai_send_for_host_mapping($paths) {
     foreach ($paths as $paths_chunk) {
       if (!empty($paths_chunk))
         $path_new_array[] = $host . $paths_chunk;
+    }
+  }
+  return $path_new_array;
+}
+
+/**
+ * For Varnish Host mapping purposes
+ * @param array $paths
+ */
+function itg_akamai_varnish_host_mapping($paths) {
+  $host = variable_get('varnish_control_terminal', '127.0.0.1:6082');
+  $hosts = explode(' ', $host);
+  $final_host = array();
+  foreach ($hosts as $host_chunk) {
+    $fip = str_replace(":6082", "", $host_chunk);
+    $final_host[] = 'http://' . $fip . '/';
+  }
+
+  $path_new_array = array();
+
+  if (isset($paths) && !empty($paths)) {
+    foreach ($paths as $paths_chunk) {
+      foreach ($final_host as $final_host_c) {
+        $path_new_array[] = $final_host_c . $paths_chunk;
+      }
     }
   }
   return $path_new_array;
@@ -1225,4 +1265,13 @@ function itg_akamai_cc_button_purge($entity_data) {
  */
 function itg_akamai_amp_cc_mapping() {
   return array('story', 'photogallery', 'videogallery');
+}
+
+/**
+ * Getting Domain without protocal
+ */
+function itg_akamai_getting_domain_without_protocal() {
+  $strn = str_replace('http://', '', FRONT_URL);
+  $strn = str_replace('https://', '', $strn);
+  return $strn;
 }

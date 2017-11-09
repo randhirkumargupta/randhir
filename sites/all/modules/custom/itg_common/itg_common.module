@@ -117,6 +117,14 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['scorecard/matchcenter/%'] = array(
+    'page callback' => 'itg_common_get_scorecard',
+    'access callback' => TRUE,
+    'page arguments' => array(2),
+    'file' => 'includes/itg_scorecard.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   $items['get-magazine-issue'] = array(
     'page callback' => 'itg_get_magazine_issue_callback',
     'access callback' => TRUE,
@@ -195,6 +203,11 @@ function itg_common_permission() {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url, $theme;
   $arg = arg();
+	
+	if($form_id == 'election_graph_xml_node_form'){
+		$form['#after_build'][] = 'itg_common_cancel_button';
+		
+	}
 
    $solr_video_video_id = array('views-exposed-form-searchimage-page-1' , 
       'views-exposed-form-searchimage-search-unpublish-video' ,

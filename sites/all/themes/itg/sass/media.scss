@@ -73,8 +73,10 @@
     }
     /*defalt add for special pages START*/
     .itg-layout-container .ad-widget {
-        height: 250px;
-        padding: 0px;
+        height: 272px;
+        padding: 10px;
+        width: 300px;
+        margin: 0 auto;
     }
     section.sidebar .block-itg-ads {
         padding: 0;
@@ -111,8 +113,10 @@
         }
         .auto-block-3 {
             .ad-widget {
-                height: 245px;
+                height: 272px;
                 padding: 10px;
+                width: 300px;
+                margin: 0 auto;
             }
             .itg-widget-child {
                 .droppable {
@@ -262,7 +266,8 @@
     .top-block .top-colum-1 {
         width: 38%;
     }
-    .top-block .top-colum-3 {
+    .top-block .top-colum-3,
+    .top-block .auto-block-3 {
         @include calculate-width(1);
         margin-top: 50px;
         >.itg-widget-parent {
@@ -274,6 +279,9 @@
             @include float(right);
             width: 48%;
         }
+    }
+    .top-block .auto-block-3 {
+        margin-top: 0;
     }
     .big-news .big-story-col-1,
     .big-news .big-story-col-2 {
@@ -354,6 +362,9 @@
             &:nth-child(1) {
                 font-size: 16px;
             }
+        }
+        .election-graph-5 {
+            margin-top: -170px;
         }
     }
     /*Election page css end*/
@@ -874,7 +885,10 @@
     .movie-layout-page .itg-layout-580 .droppable,
     .movie-layout-page .itg-layout-580 .droppable .auto-block-1,
     .auto-layout-page .auto-block-1,
-    .election-page .right-side .itg-484 .droppable {
+    .election-page .right-side .itg-484 .droppable,
+    .tech-layout-page .auto-block-1,
+    .auto-layout-page .auto-block-1,
+    {
         height: auto;
         min-height: auto;
     }
@@ -2200,7 +2214,8 @@
     .big-news .big-story-col-2 {
         padding-top: 15px;
     }
-    .top-block .top-colum-3 {
+    .top-block .top-colum-3,
+    .top-block .auto-block-3 {
         >.itg-widget-parent {
             @include float(none);
             @include calculate-width(1);

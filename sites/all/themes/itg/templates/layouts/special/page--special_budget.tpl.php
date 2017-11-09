@@ -611,7 +611,7 @@ if (!empty($device[0])) {
                       </div>
                       <div class="col-md-4 mt-50">
                           <div class="row">
-                              <div class="col-md-12 col-sm-6 col-xs-12"> 
+                              <div class="col-md-12 col-sm-12 col-xs-12"> 
                                   <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>
                                   <div class="itg-widget-parent">
                                       <div class="itg-widget">

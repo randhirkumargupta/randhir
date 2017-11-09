@@ -65,9 +65,9 @@
             } 
             if ($node->field_newsl_newsletter_content[LANGUAGE_NONE][0]['value'] == 'select_section') {
               if (!empty($node->field_story_category[LANGUAGE_NONE])) {
-                  foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
-                    $cat_array[] = $values['tid'];
-                  }
+                foreach ($node->field_story_category[LANGUAGE_NONE] as $key => $values) {
+                  $cat_array[] = $values['tid'];
+                }
               }
               // $cat_array = array(1206686, 1206620); //for testing purpose
               if (function_exists('itg_newsletter_get_section_stories')) {
