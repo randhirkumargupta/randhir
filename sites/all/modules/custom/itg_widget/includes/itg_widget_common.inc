@@ -1434,7 +1434,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
     // AS most viewed Result is only four. This logic is implemented by section widget.
     // No need to remove feature/remix because its already removed from mostwatch views_query_alter.
-    $most_viewed = views_get_view_result('so_sorry', 'most_watched');
+    //$most_viewed = views_get_view_result('so_sorry', 'most_watched');
     $feature_nid = __get_sosorry_video_nid('feature');
     $remix_nid = __get_sosorry_video_nid('remix');
     if (!empty($feature_nid)) {
@@ -1443,9 +1443,9 @@ function itg_widget_views_query_alter(&$view, &$query) {
     if (!empty($remix_nid)) {
       $query->add_where(0, 'node.nid', $remix_nid, '!=');
     }
-    foreach ($most_viewed as $nids) {
-      $query->add_where(0, 'node.nid', $nids->nid, '!=');
-    }
+//    foreach ($most_viewed as $nids) {
+//      $query->add_where(0, 'node.nid', $nids->nid, '!=');
+//    }
   }
 
 
