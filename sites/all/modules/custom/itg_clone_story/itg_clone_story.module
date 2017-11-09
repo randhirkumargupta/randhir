@@ -224,7 +224,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_itg_tags'][LANGUAGE_NONE]['#default_value'] = $tags_explode;
 
         /* Techonology */
-        $form['field_story_technology_rating'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_story_technology_rating[LANGUAGE_NONE][0]['value']);
+        $form['field_story_tech_pros_cons_ratin'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value']);
         $form['field_story_tech_review_chunk'][LANGUAGE_NONE][0]['#default_value'] = $overall_data->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'];
       }
   }
