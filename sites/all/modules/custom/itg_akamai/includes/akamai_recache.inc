@@ -19,7 +19,7 @@ function akamai_recacher_crawler($dburls) {
     //lock_release(__FUNCTION__);
     return 0;
   }
-
+  
   //p($dburls);
   //
   $host_domain = itg_akamai_getting_domain_without_protocal();
@@ -58,7 +58,7 @@ function akamai_recacher_crawler($dburls) {
    }
   }
 
-  watchdog('recache complete status', '<pre>' . print_r($codes, true) . '</pre>');
+  //watchdog('recache complete status', '<pre>' . print_r($codes, true) . '</pre>');
 
   // Report success and issue a warning for URLs that did not return code 200.
  

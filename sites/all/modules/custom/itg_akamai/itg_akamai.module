@@ -283,6 +283,9 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 
       // Sending for Recaching
       if (module_exists('httprl')) {
+        $varnish_paths = array_map(function($item) {
+          return rtrim($item, '/\\');
+        }, $varnish_paths);
         module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
         if (isset($varnish_paths) && !empty($varnish_paths)) {
           akamai_recacher_crawler($varnish_paths);
