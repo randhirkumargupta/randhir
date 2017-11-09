@@ -1,12 +1,4 @@
 <?php
-#MongoDB 
-$conf['mongodb_connections'] = array(
-  'default' => array(
-    'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo',
-    'db' => 'itgcmsmongo',
-    'connection_options' => array('replicaSet' => 'prodreplica'),
-  ),
-);
 
 include_once('./includes/cache.inc');
 
@@ -37,11 +29,11 @@ ini_set('session.cookie_lifetime', 2000000);
 #$conf['queue_default_class'] = 'MongoDBQueue';
 
 # Memcache specific settings
-$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
+/*$conf['cache_backends'][] = 'sites/all/modules/memcache/memcache.inc';
 $conf['cache_default_class'] = 'MemCacheDrupal';
 $conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
 $conf['cache_class_cache_update'] = 'DrupalDatabaseCache';
-$conf['memcache_stampede_protection'] = TRUE;
+$conf['memcache_stampede_protection'] = TRUE;*/
 
 //$conf['memcache_storage_debug'] = TRUE;
 //$conf['memcache_extension'] = 'Memcache';
@@ -55,24 +47,38 @@ $conf['memcache_stampede_protection'] = TRUE;
 //);
 
 // setting for production
- $conf['memcache_servers'] = array(
+ /*$conf['memcache_servers'] = array(
   'itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
-);
+);*/
 
-/*$conf = array(
-  // Enable memcache caching backend.
-  'cache_inc' => 'sites/all/modules/memcache/memcache.inc',
+$conf = array(
+'cache_backends' => array('sites/all/modules/memcache/memcache.inc'),
+'cache_default_class' => 'MemCacheDrupal',
+'cache_class_cache_form' => 'DrupalDatabaseCache',
+//  'session_inc' => './sites/all/modules/memcache/memcache-session.inc',
   'memcache_servers' => array(
-    'itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',
+   'itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',   
   ),
   'memcache_bins' => array(
     'cache' => 'default',
     'cache_filter' => 'default',
     'cache_menu' => 'default',
     'cache_page' => 'default',
+   // 'session' => 'session',
+    'users' => 'default',
     'cache_pathdst' => 'default',
     'cache_pathsrc' => 'default',
   ),
 );
+$conf['memcache_key_prefix'] = 'itgmem';
+$conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
 
-$conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';*/
+
+#MongoDB 
+$conf['mongodb_connections'] = array(
+  'default' => array(
+    'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo',
+    'db' => 'itgcmsmongo',
+    'connection_options' => array('replicaSet' => 'prodreplica'),
+  ),
+);
