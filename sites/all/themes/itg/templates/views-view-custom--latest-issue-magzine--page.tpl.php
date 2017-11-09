@@ -106,7 +106,7 @@
           }
           else {
             $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
-            $title = l($value->title, 999, 'node/' . $value->nid);
+            $title = l($value->title, 'node/' . $value->nid);
           }
         }
         elseif ($key > 0 && $key < 3) {
