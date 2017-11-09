@@ -4,7 +4,7 @@ define('REPORT_PER_PAGE', 50);
 
 function itg_report_created_date_range($form, $form_state) {
   drupal_add_js(drupal_get_path('module', 'itg_reports') . '/js/itg_reports.js', array('type' => 'file', 'scope' => 'footer'));
-  drupal_add_css("#ui-datepicker-div {display:none} " , 'inline');
+  drupal_add_css("#ui-datepicker-div {display:none} ", 'inline');
   $form['content_type'] = array(
     '#type' => 'select',
     '#title' => 'Content Type',
@@ -28,12 +28,12 @@ function itg_report_created_date_range($form, $form_state) {
     '#type' => 'textfield',
     '#title' => t('Date from'),
     '#default_value' => (!empty($_GET['rg1_date_from'])) ? $_GET['rg1_date_from'] : date('Y-m-d', strtotime('-1day')),
-    '#attributes' => array('readonly' => 'readonly'),
+    '#attributes' => array('readonly' => 'readonly' , 'size'=>0),
   );
   $form['range1']['rg1_date_to'] = array(
     '#type' => 'textfield',
     '#title' => t('Date to'),
-    '#attributes' => array('readonly' => 'readonly'),
+    '#attributes' => array('readonly' => 'readonly' , 'size'=>0),
     '#default_value' => (!empty($_GET['rg1_date_to'])) ? $_GET['rg1_date_to'] : date('Y-m-d', strtotime('-1day')),
   );
   // Range 2
@@ -44,13 +44,13 @@ function itg_report_created_date_range($form, $form_state) {
   $form['range2']['rg2_date_from'] = array(
     '#type' => 'textfield',
     '#title' => t('Date from'),
-    '#attributes' => array('readonly' => 'readonly'),
+    '#attributes' => array('readonly' => 'readonly' , 'size'=>0),
     '#default_value' => (!empty($_GET['rg2_date_from'])) ? $_GET['rg2_date_from'] : date('Y-m-d'),
   );
   $form['range2']['rg2_date_to'] = array(
     '#type' => 'textfield',
     '#title' => t('Date to'),
-    '#attributes' => array('readonly' => 'readonly'),
+    '#attributes' => array('readonly' => 'readonly' , 'size'=>0),
     '#default_value' => (!empty($_GET['rg2_date_to'])) ? $_GET['rg2_date_to'] : date('Y-m-d'),
   );
 
@@ -105,8 +105,15 @@ function itg_report_created_date_range_submit($form, $form_state) {
  */
 function itg_report_created_date_range_display_report($start_date, $end_date) {
   global $base_url;
-  $page = isset($_GET['page']) ? $_GET['page'] : 0;
-
+  $page = 1;
+  if (!empty($_GET['page'])) {
+    $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
+    if (false === $page) {
+      $page = 1;
+    }
+  }
+  $offset = ($page - 1) * REPORT_PER_PAGE;
+  
   $final_output = [];
   //Create proper timestemp for start date.
   $s_date_time_stamp = strtotime($start_date);
@@ -124,7 +131,7 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
   $end_date_timestamp = mktime(23, 59, 59, $e_month, $e_day, $e_year);
 
   $query = db_select('node', 'n');
-  $query->fields('n', array('title', 'type' ,'nid'));
+  $query->fields('n', array('title', 'type', 'nid', 'created'));
   $query->condition('n.created', array($start_date_timstamp, $end_date_timestamp), 'BETWEEN');
 
   if (isset($_GET['content_type']) && strtolower($_GET['content_type']) != 'all') {
@@ -132,7 +139,7 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
   } else {
     $query->condition('n.type', array("story", "videogallery", "photogallery", "podcast", "mega_review_critic"));
   }
-  $query->range($page, REPORT_PER_PAGE);
+  $query->range($offset, REPORT_PER_PAGE);
   $query->orderBy('n.nid', 'DESC');
   $query->condition('n.status', 1);
   $data = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -147,11 +154,12 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
   }
   $count_query->condition('n.status', 1);
   $row_count = $count_query->execute()->rowCount();
-
+  
   $header = array(
     array('data' => t('S.No')),
     array('data' => t('Type')),
     array('data' => t('Titte')),
+    array('data' => '<span title="d-M-Y H:i:s">'. t('Created Date') . '</span>'),
     array('data' => t('Url')),
   );
 
@@ -162,6 +170,7 @@ function itg_report_created_date_range_display_report($start_date, $end_date) {
       array('data' => $count + 1),
       array('data' => $row['type']),
       array('data' => $row['title']),
+      array('data' => date('d-M-Y H:i:s' , $row['created'])),
       array('data' => FRONT_URL . url('node/' . $row['nid'])),
     );
     $count++;
@@ -224,11 +233,11 @@ function __form_markup_dispay_report() {
 
   $div .= '<div class="row">';
   $div .= '<div class="col-md-6">';
-  $div .= '<div class="pull-right"> Count (' . $report1_data['row_count'] . ') Between date <b> ' . $rg1_date_from . ' </b> , <b> ' . $rg1_date_to . ' </b> </div>';
+  $div .= '<div class="pull-right"> Range1 Count: <b>' . $report1_data['row_count'] . '</b> </div>';
   $div .= $report1_data['table'];
   $div .= '</div>';
   $div .= '<div class="col-md-6">';
-  $div .= '<div class="pull-right"> Count (' . $report2_data['row_count'] . ') Between date <b> ' . $rg2_date_from . ' </b> , <b> ' . $rg2_date_to . ' </b></div>';
+  $div .= '<div class="pull-right">Range2 Count: <b>' . $report2_data['row_count'] . '</b> </div>';
   $div .= $report2_data['table'];
   $div .= '</div>';
   $div .= '</div>';
