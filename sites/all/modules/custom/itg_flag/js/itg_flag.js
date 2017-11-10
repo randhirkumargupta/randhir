@@ -3,7 +3,7 @@
  * Contains all functionality related to Flag Management
  */
 
-(function ($) {
+/*(function ($) {
     Drupal.behaviors.itg_flag = {
         attach: function (context, settings) {
             var uid = settings.itg_flag.settings.uid;
@@ -11,7 +11,7 @@
         }
 
     };
-})(jQuery, Drupal, this, this.document);
+})(jQuery, Drupal, this, this.document);*/
 
 // script for facebook sharing
 var app = Drupal.settings.itg_flag.settings.fb_app;

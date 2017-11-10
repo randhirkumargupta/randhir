@@ -1288,3 +1288,8 @@ jQuery(window).load(function () {
     // For Slider Counter Prev
     jQuery('div.col-md-4 div.other-details-main ul.counterslide button.slick-prev').attr('onclick', "ga('send', 'event', 'CounterSliderPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
 });
+
+// Resize megareview iframe.
+function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}

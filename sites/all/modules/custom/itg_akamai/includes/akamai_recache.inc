@@ -10,9 +10,6 @@
  */
 function akamai_recacher_crawler($dburls) {
   //if (lock_acquire(__FUNCTION__)) {
-//$dburls = array();
-//$dburls[] = 'node/';
-//p($dburls);
   // Only continue if there any URLs found.
   if (empty($dburls)) {
     watchdog('Akamai Recacher', 'No URLs needed to be crawled.', array(), WATCHDOG_INFO);
@@ -20,10 +17,8 @@ function akamai_recacher_crawler($dburls) {
     return 0;
   }
   
-  //p($dburls);
-  //
-  $host_domain = itg_akamai_getting_domain_without_protocal();
-  watchdog('$host_domain', $host_domain);
+   $host_domain = itg_akamai_getting_domain_without_protocal();
+  //watchdog('$host_domain', $host_domain);
   // Default HTTP request options for anonymous users.
   $recacher_role_options['anonymous'] = array(
     'timeout' => 90,
@@ -46,10 +41,9 @@ function akamai_recacher_crawler($dburls) {
 
   // Execute request.
   $request = httprl_send_request();
-//  p($request);
   $codes = array();
   $messages = array();
-  watchdog('$request_for_httrl', '<pre>' . print_r($request, true) .'<pre>');
+  //watchdog('$request_for_httrl', '<pre>' . print_r($request, true) .'<pre>');
   foreach ($request as $url => $probe) {
     if($probe->code == 200){
      $messages[] = '<li>successful (' . $probe->code . '): ' . $url . '</li>';
@@ -64,7 +58,7 @@ function akamai_recacher_crawler($dburls) {
  
   if (!empty($messages)) {
     $messages = '<ul>' . implode('', $messages) . '</ul>';
-     watchdog('Akamai Recacher', $messages);
+     //watchdog('Akamai Recacher', $messages);
   }
   // End the lock.
   //lock_release(__FUNCTION__);

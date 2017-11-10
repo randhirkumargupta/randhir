@@ -1,0 +1,68 @@
+diff --git a/sites/all/modules/contrib/varnish/varnish.module b/sites/all/modules/contrib/varnish/varnish.module
+index 438e884..0fc2a20 100644
+--- a/sites/all/modules/contrib/varnish/varnish.module
++++ b/sites/all/modules/contrib/varnish/varnish.module
+@@ -4,7 +4,6 @@
+  * @file
+  * Common functions used for the module.
+  */
+-
+ define('VARNISH_NO_CLEAR', 0);
+ define('VARNISH_DEFAULT_CLEAR', 1);
+ // Requires Expire.module to be enabled.
+@@ -276,11 +275,10 @@ function theme_varnish_status($variables) {
+       ));
+       $version = $variables['version'];
+       if ($version < 3) {
+-        $items[] = t('!status_icon Varnish running. Observe more detailed statistics !link.',
+-          array(
+-            '!status_icon' => $icon,
+-            '!link' => l(t('here'), 'admin/reports/varnish'),
+-          )
++        $items[] = t('!status_icon Varnish running. Observe more detailed statistics !link.', array(
++          '!status_icon' => $icon,
++          '!link' => l(t('here'), 'admin/reports/varnish'),
++            )
+         );
+       }
+       else {
+@@ -316,7 +314,6 @@ function _varnish_get_host() {
+   return $parts['host'];
+ }
+ 
+-
+ /**
+  * Helper function that sends commands to Varnish.
+  *
+@@ -348,7 +345,12 @@ function _varnish_terminal_run($commands) {
+         '@server' => $server,
+         '@port' => $port,
+         '%error' => socket_strerror(socket_last_error($client)),
+-        ), WATCHDOG_ERROR);
++          ), WATCHDOG_ERROR);
++      drupal_set_message(t('Varnish::Unable to connect to server socket @server:@port: %error', array(
++        '@server' => $server,
++        '@port' => $port,
++        '%error' => socket_strerror(socket_last_error($client)),
++          )), 'error');
+       $ret[$terminal] = FALSE;
+       // If a varnish server is unavailable, move on to the next in the list.
+       continue;
+@@ -368,6 +370,7 @@ function _varnish_terminal_run($commands) {
+         $status = _varnish_read_socket($client);
+         if ($status['code'] != 200) {
+           watchdog('varnish', 'Authentication to server failed!', array(), WATCHDOG_ERROR);
++          drupal_set_message('Varnish::Authentication to server failed!','error');
+         }
+       }
+     }
+@@ -391,8 +394,7 @@ function _varnish_execute_command($client, $command) {
+     watchdog('varnish', 'Recieved status code @code running %command. Full response text: @error', array(
+       '@code' => $status['code'],
+       '%command' => $command,
+-      '@error' => $status['msg']),
+-    WATCHDOG_ERROR);
++      '@error' => $status['msg']), WATCHDOG_ERROR);
+     return FALSE;
+   }
+   else {
