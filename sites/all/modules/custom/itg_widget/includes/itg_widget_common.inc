@@ -3210,12 +3210,17 @@ function itg_widget_get_site_hash_from_solr($site_prefix) {
  * @return string
  */
 function itg_get_link_from_hash_and_entity_solr_search($entity_id, $hash) {
-  $solr = apachesolr_get_solr();
-  $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id and hash: $hash"));
-  $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
-  $query->addParam('qf', 'entity_id'); // Only search in title
-  $resp_search = $query->search();
-  return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id and hash: $hash"));
+    $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'entity_id'); // Only search in title
+    $resp_search = $query->search();
+    return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+  }
 }
 
 /**
