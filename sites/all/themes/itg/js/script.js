@@ -32,7 +32,7 @@
                     beforeSend: function () {
                         // jQuery('#widget-ajex-loader').show();
                     },
-                    data: { 'section_ids': section_ids, },
+                    data: {'section_ids': section_ids, },
                     success: function (data) {
                         if (data == "") {
                             jQuery('.no-more-card').show();
@@ -71,7 +71,7 @@
                     beforeSend: function () {
                         // jQuery('#widget-ajex-loader').show();
                     },
-                    data: { 'section_ids': section_ids, getsectionid: getsectionid },
+                    data: {'section_ids': section_ids, getsectionid: getsectionid},
                     success: function (data) {
                         if (data == "") {
                             jQuery('.no-more-card').show();
@@ -232,9 +232,9 @@
             // jQuery code to get url parameters
             var getUrlParameter = function getUrlParameter(sParam) {
                 var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-                    sURLVariables = sPageURL.split('&'),
-                    sParameterName,
-                    i;
+                        sURLVariables = sPageURL.split('&'),
+                        sParameterName,
+                        i;
 
                 for (i = 0; i < sURLVariables.length; i++) {
                     sParameterName = sURLVariables[i].split('=');
@@ -386,7 +386,7 @@ jQuery(document).ready(function () {
 
 // code to copy serach text into search page
 jQuery(document).ready(function () {
-    jQuery(".tab-buttons span, .video_landing_menu a").on('click' , function() {
+    jQuery(".tab-buttons span, .video_landing_menu a").on('click', function () {
         comscoreBeacon();
     })
     var elmt = jQuery('.search-text');
@@ -472,7 +472,7 @@ jQuery(document).ready(function () {
 
         if (is_mobile) {
             //jQuery('.head-live-tv .user-icon').click(function () {
-            jQuery(document).on('click','.head-live-tv .loginicon', function (e) {
+            jQuery(document).on('click', '.head-live-tv .loginicon', function (e) {
                 e.preventDefault();
                 jQuery(this).next('ul.menu').toggle();
             });
@@ -485,7 +485,7 @@ jQuery(document).ready(function () {
         //footer toggal script
         jQuery('.footer-expand-icon').click(function () {
             jQuery('.footer-toggle').slideToggle();
-            jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
+            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
             jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
         });
         //footer add more link
@@ -588,7 +588,7 @@ jQuery(window).load(function () {
     // jQuery code to set offset of photo section page
     var menuOffset = jQuery('.itg-region').offset();
     if (jQuery('.video_landing_menu li').children().hasClass('set-offset')) {
-        jQuery("body,html").animate({ scrollTop: menuOffset.top - 100 }, 300);
+        jQuery("body,html").animate({scrollTop: menuOffset.top - 100}, 300);
     }
 });
 
@@ -624,7 +624,7 @@ jQuery(document).ready(function () {
             beforeSend: function () {
                 jQuery('#widget-ajex-loader').show();
             },
-            data: { 'state_id': getstate_id, },
+            data: {'state_id': getstate_id, },
             success: function (data) {
                 var obj = jQuery.parseJSON(data);
                 jQuery('#widget-ajex-loader').hide();
@@ -762,9 +762,9 @@ jQuery(document).ready(function () {
 
         // Setup
         var posX = jQuery(this).offset().left,
-            posY = jQuery(this).offset().top,
-            buttonWidth = jQuery(this).width(),
-            buttonHeight = jQuery(this).height();
+                posY = jQuery(this).offset().top,
+                buttonWidth = jQuery(this).width(),
+                buttonHeight = jQuery(this).height();
 
         // Add the element
         jQuery(this).prepend("<span class='ripple'></span>");
@@ -847,9 +847,9 @@ jQuery(document).ready(function () {
     var getclick;
     jQuery('.comment-mobile .share-icon').toggle(function () {
         getclick = jQuery(this).parents('.comment-mobile').find('.social-share');
-        getclick.css({ 'display': 'inline-block' });
+        getclick.css({'display': 'inline-block'});
     }, function () {
-        getclick.css({ 'display': 'none' });
+        getclick.css({'display': 'none'});
     });
 
 
@@ -922,15 +922,15 @@ function smilyanimation(facetype) {
     var facethree = jQuery('#' + facetype + ' .face3');
     var facefour = jQuery('#' + facetype + ' .face4');
     jQuery('#' + facetype).fadeIn(function () {
-        faceone.animate({ top: '100px', left: '800px' }, 3000);
-        facetwo.animate({ top: '300px', left: '600px' }, 3000);
-        facethree.animate({ top: '600px', right: '800px' }, 3000);
-        facefour.animate({ top: '400px', right: '400px' }, 3000, function () {
+        faceone.animate({top: '100px', left: '800px'}, 3000);
+        facetwo.animate({top: '300px', left: '600px'}, 3000);
+        facethree.animate({top: '600px', right: '800px'}, 3000);
+        facefour.animate({top: '400px', right: '400px'}, 3000, function () {
             jQuery('#' + facetype).fadeOut(500, function () {
-                faceone.css({ top: '500px', left: '400px' });
-                facetwo.css({ top: '0px', left: '200px' });
-                facethree.css({ top: '0px', right: '200px' });
-                facefour.css({ top: '100px', right: '600px' });
+                faceone.css({top: '500px', left: '400px'});
+                facetwo.css({top: '0px', left: '200px'});
+                facethree.css({top: '0px', right: '200px'});
+                facefour.css({top: '100px', right: '600px'});
             });
         });
     });
@@ -998,7 +998,7 @@ jQuery(document).ready(function () {
 
     });
 
-    jQuery('#modalCarousel').carousel({ interval: false });
+    jQuery('#modalCarousel').carousel({interval: false});
 
     jQuery('#modalCarousel').on('slid.bs.carousel', function () {
         jQuery('.modal-title').html(jQuery(this).find('.active').attr("title"));
@@ -1008,7 +1008,7 @@ jQuery(document).ready(function () {
     jQuery('.dtv ul li').click(function () {
         var at = jQuery(this).children('img').attr("pr");
         var img_src = jQuery(this).children('img').attr('src');
-        jQuery('.active > a > img').attr({ 'src': img_src });
+        jQuery('.active > a > img').attr({'src': img_src});
     });
 
     //    jQuery(window).bind({
@@ -1020,7 +1020,7 @@ jQuery(document).ready(function () {
     jQuery(window).load(function () {
         var sticky = jQuery('.region-vertical-menu');
         //var sticky_sidebar = jQuery('.region-sidebar-second');
-        sticky.stickyMojo({ footerID: '#footer', contentID: '#main' });
+        sticky.stickyMojo({footerID: '#footer', contentID: '#main'});
         //sticky_sidebar.stickyMojo({footerID: '#footer', contentID: '#main'});
     });
 });
@@ -1041,20 +1041,20 @@ jQuery(document).ready(function () {
             if (content_ht > el_height) {
                 if (el_height > win_height) {
                     if (jQuery(this).scrollTop() >= fix_point && jQuery(this).scrollTop() <= footer_offset_top) {
-                        el.css({ "position": "fixed", "bottom": "0" });
+                        el.css({"position": "fixed", "bottom": "0"});
                     } else if (jQuery(this).scrollTop() >= footer_offset_top) {
-                        el.css({ "position": "absolute", "bottom": "0" });
+                        el.css({"position": "absolute", "bottom": "0"});
                     } else {
-                        el.css({ "position": "static" });
+                        el.css({"position": "static"});
                     }
                 } else {
                     var diff = footer_offset_top + win_height - el_height - 50;
                     if (jQuery(this).scrollTop() >= el_offset.top && jQuery(this).scrollTop() <= diff) {
-                        el.css({ "position": "fixed", "top": "0", "height": el_height });
+                        el.css({"position": "fixed", "top": "0", "height": el_height});
                     } else if (jQuery(this).scrollTop() >= footer_offset_top) {
-                        el.css({ "position": "absolute", "top": "auto", "bottom": "0" });
+                        el.css({"position": "absolute", "top": "auto", "bottom": "0"});
                     } else {
-                        el.css({ "position": "static" });
+                        el.css({"position": "static"});
                     }
                 }
             }
@@ -1077,9 +1077,10 @@ jQuery(document).ready(function (e) {
     jQuery('.thumb-video').click(function () {
         var getvideoindex = jQuery(this).attr('data-image-index');
         var getvideofid = jQuery(this).attr('data-image-fid');
-         var getvideousedon = jQuery(this).attr('data-used-on');
+        var getvideousedon = jQuery(this).attr('data-used-on');
+        var video_title = jQuery(this).attr('data-video-title');
         var ajaxpath = Drupal.settings.basePath + 'getvideoplayer';
-        load_video_in_slider(getvideofid, ajaxpath, getvideoindex,getvideousedon)
+        load_video_in_slider(getvideofid, ajaxpath, getvideoindex, getvideousedon,video_title)
 
     });
 
@@ -1171,10 +1172,10 @@ function navigationResize() {
     jQuery('.third-level-menu li.more').before(jQuery('#overflow > li'));
 
     var $navItemMore = jQuery('.third-level-menu > li.more'),
-        $navItems = jQuery('.third-level-menu > li:not(.more)'),
-        navItemMoreWidth = navItemWidth = $navItemMore.width(),
-        windowWidth = jQuery('.third-level-menu').width(),
-        navItemMoreLeft, offset, navOverflowWidth;
+            $navItems = jQuery('.third-level-menu > li:not(.more)'),
+            navItemMoreWidth = navItemWidth = $navItemMore.width(),
+            windowWidth = jQuery('.third-level-menu').width(),
+            navItemMoreLeft, offset, navOverflowWidth;
 
     $navItems.each(function () {
         navItemWidth += jQuery(this).width();
@@ -1191,7 +1192,7 @@ function navigationResize() {
 }
 
 
-function load_video_in_slider(fid, path, getvideoindex,getvideousedon) {
+function load_video_in_slider(fid, path, getvideoindex, getvideousedon,video_title) {
 
     jQuery.ajax({
         url: path,
@@ -1199,7 +1200,7 @@ function load_video_in_slider(fid, path, getvideoindex,getvideousedon) {
         beforeSend: function () {
             jQuery('.loading-video').show();
         },
-        data: { 'fid': fid, 'tabindex': getvideoindex,'getvideousedon':getvideousedon },
+        data: {'fid': fid, 'tabindex': getvideoindex, 'getvideousedon': getvideousedon , 'video_title':video_title},
         success: function (data) {
             jQuery('#video_palyer_container').html(data);
             jQuery('.loading-video').hide();
@@ -1223,7 +1224,7 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
         beforeSend: function () {
             jQuery('.loading-video').show();
         },
-        data: { 'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl },
+        data: {'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl},
         success: function (data) {
             jQuery('#migrate_video_palyer_container').html(data);
             jQuery('.loading-video').hide();
@@ -1241,7 +1242,7 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
 
 // Adding js for google analytocs for home page photo carousel
 jQuery(window).load(function () {
-    if ( window.location.pathname == '/' ){
+    if (window.location.pathname == '/') {
         // adding onclick attribute for ga code for photo carousel for next button
         jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'homephotocarouselNext', 'click','1', 1, {'nonInteraction': 1});return true;");
         jQuery('div.flexslider li.flex-nav-next a').attr("href", "#homephotocarouselnext");

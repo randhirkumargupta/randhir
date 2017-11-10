@@ -15,7 +15,6 @@ $image = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NON
 $videoids = "";
 if (function_exists('get_video_in_fieldcollection_by_nid')) {
   $videoids = get_video_in_fieldcollection_by_nid($nid);
-
 }
 $argum = base64_encode(arg(1));
 $useragent = $_SERVER['HTTP_USER_AGENT'];
@@ -33,9 +32,9 @@ $uri = base64_encode($actual_link);
           <div class="row">
               <div class="col-md-12">
                   <h1 class="video-heading"><?php print $row['title']; ?></h1><?php
-                  global $user;
-                  if (in_array('Social Media', $user->roles)) {
-                    ?>
+  global $user;
+  if (in_array('Social Media', $user->roles)) {
+    ?>
                     <a class="def-cur-pointer colorbox-load promote-btn" title="promote" href="<?php print $base_url; ?>/itg-social-media-promote/<?php echo $video_node->nid; ?>?width=850&height=850&iframe=true&type=<?php print $video_node->type; ?>"><span>promote</span></a>   
                   <?php } ?>
 
@@ -57,12 +56,12 @@ $uri = base64_encode($actual_link);
                                 $vid = itg_videogallery_get_videoid($row['fid']);
                               }
                               if ($video_value->solr_video_thumb != "") {
-                                $ga_data = "ga('send', 'event', 'Video_".$video_value->solr_video_id."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
-                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                                $ga_data = "ga('send', 'event', 'Video_" . $video_value->solr_video_id . "Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
+                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title="" onclick="' . $ga_data . '"></li>';
                               }
                               else {
-                                $ga_data = "ga('send', 'event', 'Video_".$video_value->solr_video_id."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
-                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') .'" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                                $ga_data = "ga('send', 'event', 'Video_" . $video_value->solr_video_id . "Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
+                                $newimageds.= '<li><img class="thumb-video" data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') . '" height="66" width="88" alt="" title="" onclick="' . $ga_data . '"></li>';
                               }
                               ?>
                                       <div class="iframe-video1 video-iframe-wrapper" id="video_<?php echo $keys; ?>">
@@ -96,12 +95,12 @@ $uri = base64_encode($actual_link);
                               }
                             }
                             if ($video_value->solr_video_thumb != "") {
-                              $ga_data = "ga('send', 'event', 'Video_".$video_value->solr_video_id."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
-                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-used-on ="video" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                              $ga_data = "ga('send', 'event', 'Video_" . $video_value->solr_video_id . "Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
+                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-video-title = "'.$fb_title.'" data-used-on ="video" data-image-fid="' . $video_value->fid . '"  data-image-index="' . $keys . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . $video_value->solr_video_thumb . '" height="66" width="88" alt="" title="" onclick="' . $ga_data . '"></li>';
                             }
                             else {
-                              $ga_data = "ga('send', 'event', 'Video_".$video_value->solr_video_id."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
-                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-used-on ="video"  data-image-fid="' . $video_value->fid . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') .'" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                              $ga_data = "ga('send', 'event', 'Video_" . $video_value->solr_video_id . "Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
+                              $newimageds.= '<li><img class="thumb-video image_index_' . $keys . '" data-video-title = "'.$fb_title.'" data-used-on ="video"  data-image-fid="' . $video_value->fid . '" data-tag="video_' . $video_value->solr_video_id . '" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') . '" height="66" width="88" alt="" title="" onclick="' . $ga_data . '"></li>';
                             }
                             $ads_flag = 1;
                             if ($video_value->field_include_ads_value == 'yes') {
@@ -126,7 +125,7 @@ $uri = base64_encode($actual_link);
                                       <div class=" video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
-                                            print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' =>'video'));
+                                            print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'video', 'title' => $fb_title));
                                           }
                                           ?>
                                       </div>
@@ -191,13 +190,13 @@ $uri = base64_encode($actual_link);
                           $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 
                           if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
-                            $ga_data = "ga('send', 'event', 'Video_".$nid."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
-                            $newimageds.= '<li><img class="migrate-thumb-video" data-image ="' . $image_url . '" data-nid = "' . $nid . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . $image_url . '" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                            $ga_data = "ga('send', 'event', 'Video_" . $nid . "Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
+                            $newimageds.= '<li><img class="migrate-thumb-video" data-image ="' . $image_url . '" data-nid = "' . $nid . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . $image_url . '" height="66" width="88" alt="" title="" onclick="' . $ga_data . '"></li>';
                           }
                           else {
-                            $ga_data = "ga('send', 'event', 'Video_".$nid."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
-                            $image_url =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
-                            $newimageds.= '<li><img class="migrate-thumb-video" data-nid = "' . $nid . '" data-image ="' . $image_url . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') .'" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                            $ga_data = "ga('send', 'event', 'Video_" . $nid . "Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
+                            $image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
+                            $newimageds.= '<li><img class="migrate-thumb-video" data-nid = "' . $nid . '" data-image ="' . $image_url . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') . '" height="66" width="88" alt="" title="" onclick="' . $ga_data . '"></li>';
                           }
                           ?>
 
@@ -228,16 +227,16 @@ $uri = base64_encode($actual_link);
                   <div class="social-likes mhide">
                       <ul>
                           <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                                      if (function_exists(itg_flag_get_count)) {
-                                        $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                      }
-                                      // get migrated count 
-                                      if (function_exists('itg_get_migrated_like_count')) {
-                                        $migrated_count = itg_get_migrated_like_count(arg(1));
-                                      }
-                                      print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                      ?></span></a></li>
-                          <?php
+                    if (function_exists(itg_flag_get_count)) {
+                      $like_count = itg_flag_get_count(arg(1), 'like_count');
+                    }
+                    // get migrated count 
+                    if (function_exists('itg_get_migrated_like_count')) {
+                      $migrated_count = itg_get_migrated_like_count(arg(1));
+                    }
+                    print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                      ?></span></a></li>
+                                      <?php
                           if ($user->uid > 0) {
                             if (function_exists(itg_get_front_activity_info)) {
                               $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -299,16 +298,16 @@ $uri = base64_encode($actual_link);
                       <div class="social-likes desktop-hide">
                           <ul>
                               <li><a href="#" title ="Like"><i class="fa fa-heart"></i> <span id="vno-of-likes_<?php print arg(1); ?>"><?php
-                                          if (function_exists(itg_flag_get_count)) {
-                                            $like_count = itg_flag_get_count(arg(1), 'like_count');
-                                          }
-                                          // get migrated count 
-                                          if (function_exists('itg_get_migrated_like_count')) {
-                                            $migrated_count = itg_get_migrated_like_count(arg(1));
-                                          }
-                                          print $like_count['like_count'] + $migrated_count[0]['like_count'];
-                                          ?></span></a></li>
-                              <?php
+                if (function_exists(itg_flag_get_count)) {
+                  $like_count = itg_flag_get_count(arg(1), 'like_count');
+                }
+                // get migrated count 
+                if (function_exists('itg_get_migrated_like_count')) {
+                  $migrated_count = itg_get_migrated_like_count(arg(1));
+                }
+                print $like_count['like_count'] + $migrated_count[0]['like_count'];
+                  ?></span></a></li>
+                                          <?php
                               if ($user->uid > 0) {
                                 if (function_exists(itg_get_front_activity_info)) {
                                   $opt = itg_get_front_activity_info($video_node->nid, $video_node->type, $user->uid, 'read_later', $status = '');
@@ -379,7 +378,7 @@ $uri = base64_encode($actual_link);
                       </div>
                   </div>
               </div>
-              <?php //$row['field_story_expert_description'];                  ?>
+              <?php //$row['field_story_expert_description'];                   ?>
               <div class="col-md-4 video-header-right">
                   <div class="ads">
                       <?php
@@ -389,51 +388,53 @@ $uri = base64_encode($actual_link);
                       ?>
                   </div>
                   <div class="latest_video video_header_tabs">
-                        <?php //echo views_embed_view('video_landing_header', 'block_1');?>
-                        <?php
-                        if (function_exists('itg_get_related_content')) {
-                          $related_content = itg_get_related_content(arg(1));
-                          $_flag = true;
-                          if (empty($related_content)) {
-                            $_flag = false;
-                          }
+                      <?php //echo views_embed_view('video_landing_header', 'block_1'); ?>
+                      <?php
+                      if (function_exists('itg_get_related_content')) {
+                        $related_content = itg_get_related_content(arg(1));
+                        $_flag = true;
+                        if (empty($related_content)) {
+                          $_flag = false;
                         }
-                        ?>
-                        <div class="tab-buttons">
-                            <span class="<?php echo ($_flag ? 'active' : ''); ?>" data-id="tab-data-1">
-                              <a href="#Related" onclick="ga('send', 'event', 'RelatedvideoTab', 'click','1', 1, {'nonInteraction': 1});return true;">
-                                <?php
-                                print 'Related';
-                                ?>
+                      }
+                      ?>
+                      <div class="tab-buttons">
+                          <span class="<?php echo ($_flag ? 'active' : ''); ?>" data-id="tab-data-1">
+                              <a href="#Related" onclick="ga('send', 'event', 'RelatedvideoTab', 'click', '1', 1, {'nonInteraction': 1});
+                                  return true;">
+                                  <?php
+                                  print 'Related';
+                                  ?>
                               </a>
-                            </span>
-                            <span class="<?php echo (!$_flag ? 'active' : ''); ?>" data-id="tab-data-2">
-                              <a href="#TrendingVideos" onclick="ga('send', 'event', 'TrendingVideosTab', 'click','1', 1, {'nonInteraction': 1});return true;">
-                                <?php
-                                print 'Trending Videos';
-                                ?>
+                          </span>
+                          <span class="<?php echo (!$_flag ? 'active' : ''); ?>" data-id="tab-data-2">
+                              <a href="#TrendingVideos" onclick="ga('send', 'event', 'TrendingVideosTab', 'click', '1', 1, {'nonInteraction': 1});
+                                  return true;">
+                                  <?php
+                                  print 'Trending Videos';
+                                  ?>
                               </a>
-                            </span>
-                        </div>
-                        <div class="itg-widget-child tab-data tab-data-1 <?php echo ($_flag ? '' : 'hide'); ?>">						
-                            <?php
-                            if (module_exists('itg_videogallery')) {
-                              $related_content_tab = block_load('itg_videogallery', 'itg_videogallery_tab_realted');
-                              $render_array = _block_get_renderable_array(_block_render_blocks(array($related_content_tab)));
-                              print render($render_array);
-                            }
-                            ?>
-                        </div>
-                        <div class="itg-widget-child tab-data tab-data-2 <?php echo (!$_flag ? '' : 'hide'); ?>">
-                            <?php
-                            if (module_exists('itg_widget')) {
-                              $watch_right_now = block_load('itg_videogallery', 'itg_trending_videos_widget_tab');
-                              $render_array = _block_get_renderable_array(_block_render_blocks(array($watch_right_now)));
-                              print render($render_array);
-                            }
-                            ?>
-                        </div>
-                    </div>
+                          </span>
+                      </div>
+                      <div class="itg-widget-child tab-data tab-data-1 <?php echo ($_flag ? '' : 'hide'); ?>">						
+                          <?php
+                          if (module_exists('itg_videogallery')) {
+                            $related_content_tab = block_load('itg_videogallery', 'itg_videogallery_tab_realted');
+                            $render_array = _block_get_renderable_array(_block_render_blocks(array($related_content_tab)));
+                            print render($render_array);
+                          }
+                          ?>
+                      </div>
+                      <div class="itg-widget-child tab-data tab-data-2 <?php echo (!$_flag ? '' : 'hide'); ?>">
+                          <?php
+                          if (module_exists('itg_widget')) {
+                            $watch_right_now = block_load('itg_videogallery', 'itg_trending_videos_widget_tab');
+                            $render_array = _block_get_renderable_array(_block_render_blocks(array($watch_right_now)));
+                            print render($render_array);
+                          }
+                          ?>
+                      </div>
+                  </div>
               </div>
           </div>
       </div>

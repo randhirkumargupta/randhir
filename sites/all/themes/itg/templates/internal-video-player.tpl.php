@@ -38,7 +38,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
       jwplayer('videoplayer').setup({
           //var multipart=0;
           playlist: [{
-                  title: "",
+                  title: "<?php echo stripcslashes($title); ?>",
                   'image': "<?php echo $player_content['player_image']; ?>",
                   sources: [
                       {
@@ -61,8 +61,8 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
               client: "googima", skipoffset: 5,
               schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
-              idstring: "",
-              label: "73d673"
+              idstring: "<?php echo stripcslashes($title); ?>",
+              label: "<?php echo $player_content["ga_code"];?>"
           }
       });
   }
@@ -90,7 +90,6 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
       playerInstance.play();
 
   });
-
-  var duration = jwplayer().getDuration();
+ ga('create', '<?php echo $player_content["ga_code"];?>', 'auto');
 </script>
 <script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.gaevent.js'; ?>"></script>

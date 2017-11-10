@@ -2748,9 +2748,10 @@ function itg_videogallery_getvideoplayer() {
   $fid= $_GET['fid'];
   $getvideousedon= $_GET['getvideousedon'];
   $tabindex = $_GET['tabindex'];
+  $video_title = $_GET['video_title'];
   $video_data = itg_videogallery_get_video_info_by_fid($fid);
   if($video_data[0]->video_repo_type == 'INTERNAL') {
-    print theme('internal_video_player' , array("data" => $fid , 'used_on' =>$getvideousedon)); 
+   print theme('internal_video_player' , array("data" => $fid , 'used_on' =>$getvideousedon,'title' => $video_title)); 
   }else {
   print theme('itg_videogallery_getvideoplayer' , array('video_data' => $video_data , 'tabindex' => $tabindex));
   }
@@ -4950,6 +4951,20 @@ if(!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
 }else {
   $retrun_array['dfp_tags'] =  JWPLAYER_DFP_TAG;
 }
+
+if(!empty($dfp_data)) {
+  if($used_on == 'embed' && !empty($dfp_data[0]->ga_tag_extarnal)) {
+     $retrun_array['ga_code'] =  $dfp_data[0]->ga_tag_extarnal;
+  }else {
+    $retrun_array['ga_code'] = ITG_GA_CODE;
+  }
+  if($used_on != 'embed' && !empty($dfp_data[0]->ga_tag_internal)) {
+     $retrun_array['ga_code'] =  $dfp_data[0]->ga_tag_internal;
+  }else {
+    $retrun_array['ga_code'] = ITG_GA_CODE;
+  }
+}
+
   return $retrun_array;
 }
 
