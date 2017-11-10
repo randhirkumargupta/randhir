@@ -332,8 +332,17 @@ function itg_syndication_clients_theme() {
       'hltapps_photo_sectionslist' => array(
         'template' => 'templates/hltapps_photo_sectionslist_template',
       ),
-      'hltapps_photo_sectionslist' => array(
-        'template' => 'templates/hltapps_photo_sectionslist_template',
+      'hltapps_static_about_us' => array(
+        'template' => 'templates/hltapps_static_about_us_template',
+      ),
+      'hltapps_static_livetv_text' => array(
+        'template' => 'templates/hltapps_static_livetv_text_template',
+      ),
+      'hltapps_static_playbook_ad' => array(
+        'template' => 'templates/hltapps_static_playbook_ad_template',
+      ),
+      'hltapps_static_bb_ad' => array(
+        'template' => 'templates/hltapps_static_bb_ad_template',
       )
     );
 }

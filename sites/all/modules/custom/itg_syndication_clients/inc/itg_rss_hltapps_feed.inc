@@ -80,6 +80,10 @@ function itg_rss_hltappsstaticfeeds() {
   itg_generate_hltapps_static_feed_sectionslist();
   itg_generate_hltapps_static_feed_video_sectionslist();
   itg_generate_hltapps_static_feed_photo_sectionslist();
+  itg_generate_hltapps_static_feed_about_us();
+  itg_generate_hltapps_static_feed_livetv_text();
+  itg_generate_hltapps_static_feed_playbook_ad();
+  itg_generate_hltapps_static_feed_bb_ad();
 }
 
 /**
@@ -89,7 +93,6 @@ function itg_rss_hltappsstaticfeeds() {
 function itg_rss_programme_static() {
   itg_generate_hltapps_programme_static(get_hltapps_sections('programmes'));
 }
-
 
 /**
  * menu callback
@@ -117,8 +120,6 @@ function itg_rss_breakingnews_feed() {
   fwrite($fp, $xml);
   fclose($fp);
 }
-
-
 
 /**
  * 
@@ -970,12 +971,10 @@ function genrate_msn_hlt_video_detail_xml($value, $section_id, $section_name, $v
   fclose($fpd);
 }
 
-
 /**
  * Function is used to generate static xml feed for hltapps homesectionslist
  */
-
-function itg_generate_hltapps_static_feed_homesectionslist(){
+function itg_generate_hltapps_static_feed_homesectionslist() {
   $data = array();
   $xml = theme('hltapps_homesectionslist', array('data' => $data));
   $xml_path = 'public://hltapps/';
@@ -988,8 +987,7 @@ function itg_generate_hltapps_static_feed_homesectionslist(){
 /**
  * Function is used to generate static xml feed for hltapps homesectionslist
  */
-
-function itg_generate_hltapps_static_feed_sectionslist(){
+function itg_generate_hltapps_static_feed_sectionslist() {
   $data = array();
   $xml = theme('hltapps_sectionslist', array('data' => $data));
   $xml_path = 'public://hltapps/';
@@ -1002,8 +1000,7 @@ function itg_generate_hltapps_static_feed_sectionslist(){
 /**
  * Function is used to generate static xml feed for hltapps video sectionslist
  */
-
-function itg_generate_hltapps_static_feed_video_sectionslist(){
+function itg_generate_hltapps_static_feed_video_sectionslist() {
   $data = array();
   $xml = theme('hltapps_video_sectionslist', array('data' => $data));
   $xml_path = 'public://hltapps/videos/';
@@ -1016,8 +1013,7 @@ function itg_generate_hltapps_static_feed_video_sectionslist(){
 /**
  * Function is used to generate static xml feed for hltapps photo sectionslist
  */
-
-function itg_generate_hltapps_static_feed_photo_sectionslist(){
+function itg_generate_hltapps_static_feed_photo_sectionslist() {
   $data = array();
   $xml = theme('hltapps_photo_sectionslist', array('data' => $data));
   $xml_path = 'public://hltapps/photos/';
@@ -1027,8 +1023,59 @@ function itg_generate_hltapps_static_feed_photo_sectionslist(){
   fclose($fpd);
 }
 
+/**
+ * Function is used to generate static xml feed for hltapps about us
+ */
+function itg_generate_hltapps_static_feed_about_us() {
+  $data = array();
+  $xml = theme('hltapps_static_about_us', array('data' => $data));
+  $xml_path = 'public://hltapps/aboutapp/';
+  $file_path = $xml_path . 'aboutus.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
 
-function itg_generate_hltapps_programme_static($section_id){
+/**
+ * Function is used to generate static xml feed for hltapps livetv_text
+ */
+function itg_generate_hltapps_static_feed_livetv_text() {
+  $data = array();
+  $xml = theme('hltapps_static_livetv_text', array('data' => $data));
+  $xml_path = 'public://hltapps/api/';
+  $file_path = $xml_path . 'livetv_text.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+/**
+ * Function is used to generate static xml feed for hltapps playback ad
+ */
+function itg_generate_hltapps_static_feed_playbook_ad() {
+  $data = array();
+  $xml = theme('hltapps_static_playbook_ad', array('data' => $data));
+  $xml_path = 'public://hltapps/ads/';
+  $file_path = $xml_path . 'playbook_ad.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+/**
+ * Function is used to generate static xml feed for hltapps BB ad
+ */
+function itg_generate_hltapps_static_feed_bb_ad() {
+  $data = array();
+  $xml = theme('hltapps_static_bb_ad', array('data' => $data));
+  $xml_path = 'public://hltapps/ads/';
+  $file_path = $xml_path . 'bb_ad.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+function itg_generate_hltapps_programme_static($section_id) {
   $sections = get_parent_category_name_by_tid($section_id);
   global $base_url;
   $fixed_sections = get_hltapps_sections('programme');
