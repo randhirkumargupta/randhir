@@ -328,7 +328,6 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
 // Photogallery slider javascript
       jQuery(document).ready(function () {
           jQuery(".slick-arrow , li.slick-slide").on("click", function () {
-            comscoreBeacon();
               var active_slide = jQuery(".slick-active").attr("data-slick-index");
               var current_url = window.location.href.split('?')[0];
               if (active_slide > 0) {

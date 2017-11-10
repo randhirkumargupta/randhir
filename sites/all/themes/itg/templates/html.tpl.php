@@ -94,5 +94,12 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
+    <script>
+      jQuery(document).ready(function () {
+        jQuery(".tab-buttons span , .video_landing_menu a , .slick-arrow, .slick-slide, .pager a").on('click' , function() {
+            comscoreBeacon();
+        });
+      });
+    </script>
 </body>
 </html> 

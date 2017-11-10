@@ -365,12 +365,22 @@ function itg_widget_keycandidate_form_submit($form, $form_state) {
   drupal_goto('special-key-candidate-widget-contents', array('query' => $query));
 }
 
+function so_sorry_politoons_so_sorry_politoons_afterbuild($form, $form_state) {
+  $form['#submit'][] = 'sosorry_politoons_draggable_custom_submit'; 
+  return $form;
+}
+
+function sosorry_politoons_draggable_custom_submit(&$form, $form_state) {
+  cache_clear_all('so_sorry_politoons:', 'cache_views_data', TRUE);
+}
 /**
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
-
+  if($form_id == 'views_form_so_sorry_politoons_so_sorry_politoons') {
+    $form['#after_build'][] = 'so_sorry_politoons_so_sorry_politoons_afterbuild';
+  }
   if ($form['#id'] == 'taxonomy-form-term') {
     //drupal_add_css("#edit-field-set-as-featured-cate {display:none !important}" , "inline");
   }
