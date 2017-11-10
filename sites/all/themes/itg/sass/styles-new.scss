@@ -498,7 +498,7 @@ input[type="text"] {
         font-size: 16px;
         text-align: center;
         z-index: 9;
-        display: none;
+        display: block !important;
     }
     .slide-icon.scroll-arrow-right {
         left: 0;
