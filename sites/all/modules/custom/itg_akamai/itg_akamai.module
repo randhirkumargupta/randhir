@@ -842,8 +842,8 @@ function itg_akamai_add_cc_button($form, &$form_state) {
  * @param type $node
  */
 function itg_akamai_node_insert($node) {
-   $mapping = itg_akamai_getting_mapped_content_type();
-   if (in_array($node->type, $mapping)) { 
+  $mapping = itg_akamai_getting_mapped_content_type();
+  if (in_array($node->type, $mapping)) {
     $current_url = NULL;
     if (function_exists('itg_common_custompath_insert_load')) {
       $current_url = itg_common_custompath_insert_load($node);
@@ -857,10 +857,18 @@ function itg_akamai_node_insert($node) {
       $current_url = itg_akamai_send_for_host_mapping_for_amp($current_url);
     }
     // This line has been added for testing
-    itg_akamai_clear_url($current_url, array(), $node);
-    
+    $varnish_paths = itg_akamai_varnish_host_mapping($current_url);
+    if (module_exists('httprl')) {
+      $varnish_paths = array_map(function($item) {
+        return rtrim($item, '/\\');
+      }, $varnish_paths);
+      module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
+      if (isset($varnish_paths) && !empty($varnish_paths)) {
+        akamai_recacher_crawler($varnish_paths);
+      }
     }
-  
+  }
+
   // Setting metadata for the TTL for each node id 
   if (user_access("administer itg akamai")) {
     if ($node->status == 1) { // Akamai setting for node content level if node is published 
