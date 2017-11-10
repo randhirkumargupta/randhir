@@ -275,7 +275,7 @@ function is_node_section_header_event($nid) {
 
 function get_section_header_menu_and_content($arg) {
   if (is_valid_node_header_section($arg) || is_valid_category_header_section($arg) || ($arg[0] == 'taxonomy' && is_event_section_category($arg[2]))) {
-     drupal_add_css(drupal_get_path('theme', 'itg') .'/css/section-header.css',array('type' => 'file', 'media' => 'all', 'preprocess' => true, 'every_page' => true) );
+     drupal_add_css(drupal_get_path('theme', 'itg') .'/css/section-header.css');
     switch ($arg[0]) {
       case 'taxonomy':
         $tid = $arg[2];
@@ -395,7 +395,7 @@ function get_event_menu($nid) {
     if (!empty($flash_old)) {
       $flash_old_event = $flash_old['menu'];
     }
-    $menu['menu'][] = '<li>' . l('Flashback', 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
+    $menu['flashback_menu'][] = '<li>' . l('Flashback', 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
   }
   $menu['event_start_date'] = $event_start_date;
   $menu['event_location'] = $event_location;
