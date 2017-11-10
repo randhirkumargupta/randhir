@@ -40,7 +40,8 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
           'movies-lifestyle' => 7,
           'movies-celebrities' => 7,
           'oscar-news' => 5,
-          'oscar-features' => 6);
+          'oscar-features' => 6,
+          'news-section' => 8);
 
         if (array_key_exists($widget_style, $rangearray)) {
             $range = $rangearray[$widget_style];

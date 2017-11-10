@@ -1993,6 +1993,51 @@ function get_email_by_roll($id) {
 }
 
 /**
+ * Function for getting content by section
+ * @param int $section_id
+ * @param string $type
+ * @return array
+ */
+function itg_common_get_content_by_section($section_id, $type) {
+  $item_per_page = 4;
+  $table = 'itg_widget_order_section';
+  if (strtolower($type) == 'all') {
+    $table = 'itg_widget_order';
+  }
+  $db_query = db_select($table, 'iwo')->extend('PagerDefault')->limit($item_per_page);
+  $db_query->join('node', 'n', 'n.nid = iwo.nid');
+  $db_query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $db_query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+  if ($type == 'videogallery') {
+    $db_query->leftJoin('field_data_field_video_duration', 'fdv', 'fdv.entity_id=n.nid');
+  }
+  $db_query->fields('n', array('nid', 'title', 'created'));
+  $db_query->fields('eli_file', array('uri'));
+  if ($type == 'videogallery') {
+    $db_query->fields('fdv', array('field_video_duration_value'));
+  }
+  $db_query->condition('iwo.widget', 'section_wise_widget');
+  $db_query->condition('iwo.content_type', $type);
+  $db_query->condition('iwo.cat_id', $section_id);
+  $db_query->orderBy('iwo.weight', 'DESC');
+  $result = $db_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Function for counting the images in photogallery.
+ * @param type $nid
+ * @return type
+ */
+function itg_common_count_images_in_photogallery($nid) {
+  $query = db_select('field_data_field_gallery_image', 'fdg')
+      ->fields('fdg', array('field_gallery_image_value'))
+      ->condition('fdg.entity_id', $nid);
+  $result = $query->execute()->rowCount();
+  return $result;
+}
+
+/**
  * itg_fronturl_check
  * 
  */
