@@ -1,3 +1,7 @@
+/**
+ * @file dot_graph.js
+ * This is used for drawing the dot graph in election template
+ */
 
 function hmelectioninner(a, x, chart_path) {
     if (x = 1) {
@@ -27,7 +31,7 @@ function hmelection(a, type, json_path, chart_path) {
     var b = a;
     var feedURL = json_path;
     //console.log(feedURL);
-    $.ajax({
+    jQuery.ajax({
         type: "GET",
         url: feedURL,
         dataType: "jsonp",
@@ -36,7 +40,7 @@ function hmelection(a, type, json_path, chart_path) {
         jsonpCallback: 'ehmfh_' + a.replace("-", ""),
         success: function (data) {
             //console.log(data.loksabha.htm);
-            $("#hmelect-" + a).html(data.loksabha.htm);
+            jQuery("#hmelect-" + a).html(data.loksabha.htm);
             //console.log("#hmelect-"+data.loksabha.htm);
             hmelectioninner(b, 1, chart_path);
         }
