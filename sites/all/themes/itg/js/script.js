@@ -386,10 +386,6 @@ jQuery(document).ready(function () {
 
 // code to copy serach text into search page
 jQuery(document).ready(function () {
-//    jQuery(".tab-buttons span", ".video_landing_menu a", ".slick-arrow , li.slick-slide").on('click' , function() {
-//        alert("test");
-//        //comscoreBeacon();
-//    })
     var elmt = jQuery('.search-text');
     jQuery('.search-text').keypress(function (e) {
         el = jQuery(this);
@@ -473,7 +469,7 @@ jQuery(document).ready(function () {
 
         if (is_mobile) {
             //jQuery('.head-live-tv .user-icon').click(function () {
-            jQuery(document).on('click','.head-live-tv .loginicon', function (e) {
+            jQuery(document).on('click', '.head-live-tv .loginicon', function (e) {
                 e.preventDefault();
                 jQuery(this).next('ul.menu').toggle();
             });
@@ -1135,6 +1131,32 @@ jQuery(document).ready(function (e) {
             }
         ]
     });
+
+    /* start photo/ video next/pre icon*/
+    var t = jQuery(".itg-region ul li").length,
+        e = jQuery(".itg-region ul li").outerWidth(true),
+        o = e * t;
+    jQuery(".itg-region ul").css("width", o + 100);
+    var s = 0;
+    jQuery(".scroll-arrow-left").click(function () {
+        if (0 == s)
+            jQuery(this).show();
+        else {
+            var t = jQuery(".itg-region ul li").eq(s - 1).outerWidth(true);
+            jQuery(".itg-region ul").animate({
+                left: "+=" + t
+            }), s -= 1, jQuery(".scroll-arrow-right").fadeIn()
+        }
+    }), jQuery(".scroll-arrow-right").click(function () {
+        if (t - 7 >= s) {
+            var e = jQuery(".itg-region ul li").eq(s).outerWidth();
+            jQuery(".itg-region ul").animate({
+                left: "-=" + e
+            }), s += 1
+        } else
+            jQuery(".scroll-arrow-right").fadeOut()
+    })
+    /* end photo/ video next/pre icon*/
 });
 //function setSidebarHeight() {
 //    var sticky_sidebar = jQuery('.region-sidebar-second');
@@ -1241,7 +1263,7 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
 
 // Adding js for google analytocs for home page photo carousel
 jQuery(window).load(function () {
-    if ( window.location.pathname == '/' ){
+    if (window.location.pathname == '/') {
         // adding onclick attribute for ga code for photo carousel for next button
         jQuery('div.flexslider li.flex-nav-next a').attr('onclick', "ga('send', 'event', 'homephotocarouselNext', 'click','1', 1, {'nonInteraction': 1});return true;");
         jQuery('div.flexslider li.flex-nav-next a').attr("href", "#homephotocarouselnext");
