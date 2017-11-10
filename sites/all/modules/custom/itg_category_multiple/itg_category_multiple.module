@@ -318,6 +318,13 @@ function itg_category_multiple_after_build($form, &$form_state) {
     );
     $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
     $form['category_holder']['itg_primary_category']['#options'] = $itg_primary_category;
+  };
+  if (($form['#id'] == 'photogallery-node-form') || ($form['#id'] == 'videogallery-node-form') && (!empty($itg_primary_category))) {
+    foreach ($itg_primary_category as $option_id => $option_val) {
+      if (strpos($option_val, 'Photo') !== false || strpos($option_val, 'Videos') !== false) {
+        $form['category_holder']['itg_primary_category']['#option_attributes'] [$option_id] = array('disabled' => 'true');
+      }
+    }
   }
   drupal_add_js(drupal_get_path('module', 'itg_category_multiple') . '/js/itg_category_multiple.js', array('scope' => 'footer'));
   return $form;
