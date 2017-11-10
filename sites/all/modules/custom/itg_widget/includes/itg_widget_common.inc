@@ -2815,7 +2815,7 @@ function insert_all_node_in_widegt_table() {
  * {@inheritdoc}
  */
 function itg_widget_node_insert($node) {
-  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news') {
+  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic') {
     if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
       $nid = $node->nid;
       $cat_id = $node->field_story_category['und'];
@@ -3000,7 +3000,7 @@ function get_max_weight_for_special($type) {
  */
 function itg_widget_node_update($node) {
   itg_watchdog("status_test", array($node->nid, $node->status, $node->revision, $node->op));
-  if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news')) {
+  if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic')) {
     $arg = arg();
     if (itg_workflow_stop_node_update_batch_for_widgets()) {
       return;
