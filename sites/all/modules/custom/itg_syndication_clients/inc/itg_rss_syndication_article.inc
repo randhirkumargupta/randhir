@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * menu callback
+ * function for generate syndicaton articles
+ * @global string $base_url
+ */
 function itg_rss_syndication_article() {
   global $base_url;
   $clients = array('Hotoday', 'inshorts', 'newshunt', 'dailyhunt', 'funkey'); // fixed client
@@ -47,48 +52,58 @@ function itg_rss_syndication_article() {
   drupal_exit();
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param int $sid
+ * @param string $section_name
+ * @param int $fulltext
+ * @return string
+ */
 function get_syndication_client_feed_xml($result, $sid, $section_name, $fulltext) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
     $last_build_date = end($result);
     $last_build_date = date("D, j M Y H:i:s P", strtotime($last_build_date['field_itg_content_publish_date_value']));
-    $logo = theme_get_setting('logo'); 
-    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/'.$sid);
+    $logo = theme_get_setting('logo');
+    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
     $xml .= '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
-    $xml .= '<title><![CDATA[ India Today | '.$section_name.']]></title>';
+    $xml .= '<title><![CDATA[ India Today | ' . $section_name . ']]></title>';
     $xml .= '<description>India Today</description>';
-    $xml .= '<link><![CDATA[ '.$base_url.']]></link>';
-    $xml .= '<lastBuildDate>'.$last_build_date.'</lastBuildDate>';
+    $xml .= '<link><![CDATA[ ' . $base_url . ']]></link>';
+    $xml .= '<lastBuildDate>' . $last_build_date . '</lastBuildDate>';
     $xml .= '<generator>FeedCreator 1.7.2</generator>';
     $xml .= '<image>';
-    $xml .= '<url>'.$logo.'</url>';
-    $xml .= '<title><![CDATA[ India Today | '.$section_name.']]></title>';
-    $xml .= '<link><![CDATA['.$cat_link.']]></link>';
+    $xml .= '<url>' . $logo . '</url>';
+    $xml .= '<title><![CDATA[ India Today | ' . $section_name . ']]></title>';
+    $xml .= '<link><![CDATA[' . $cat_link . ']]></link>';
     $xml .= '<description>India Today</description>';
     $xml .= '</image>';
     foreach ($result as $key => $value) {
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $xml .= '<item>';
-      $xml .= '<title><![CDATA['.$value['title'].']]></title>';
-      $xml .= '<link><![CDATA['.$url.']]></link>';
+      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
+      $xml .= '<link><![CDATA[' . $url . ']]></link>';
       if ($fulltext == 1) {
         $body = remove_extra_tag_in_body($value["body_value"]);
-        $xml .= '<description><![CDATA['.$body.']]></description>';
+        $xml .= '<description><![CDATA[' . $body . ']]></description>';
       }
       else {
         $kicker_text = $value['field_story_kicker_text_value'];
-        $xml .= '<description><![CDATA['.$kicker_text.']]></description>';
+        $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       }
-      $xml .= '<pubDate>'.$pub_date.'</pubDate>';
+      $xml .= '<pubDate>' . $pub_date . '</pubDate>';
       $xml .= '</item>';
     }
     $xml .= '</channel>';
     $xml .= '</rss>';
     return $xml;
-  }else{
+  }
+  else {
     return not_found_syndication_xml();
-  }  
+  }
 }

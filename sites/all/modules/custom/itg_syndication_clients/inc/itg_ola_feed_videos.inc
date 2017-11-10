@@ -12,8 +12,11 @@ function itg_ola_feed_videos_syndication() {
 }
 
 /**
- * menu callback for bsb story syndication
+ * Function for Generate OLA xml feed
+ * @param int $section_id
+ * @param string $file_name
  */
+
 function itg_genrate_ola_feed_videos_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
     $section_name = 'OlaPlay';
@@ -47,6 +50,14 @@ function itg_genrate_ola_feed_videos_syndication($section_id = NULL, $file_name)
   }
 }
 
+/**
+ * 
+ * @param array $result
+ * @param int $section_id
+ * @param string $category
+ * @return string
+ */
+
 function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $category) {
   $xml_pub_date = end($result);
   $xml_pub_date = date("Y-m-d H:i:s", $xml_pub_date['created']);
@@ -58,8 +69,7 @@ function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $c
   $xml .= '<description><![CDATA[OlaPlay MRSS Feed]]></description>';
   $xml .= '<pubDate><![CDATA['.$xml_pub_date.']]></pubDate>';
   
-  if (!empty($result)) {
-    
+  if (!empty($result)) {    
     foreach ($result as $value) {
       $nid = $value['nid'];
       $video_file_name = 'video' . $nid . '.xml';
@@ -76,8 +86,7 @@ function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $c
       if(!empty($meta_tags['data'])){
         $meta_tags = unserialize($meta_tags['data']);
         $key_words = $meta_tags['keywords']['value'];
-      }
-      
+      }      
       $duration= '';
       if(count($video_data) > 0){
         $duration = $video_data[0]->video_duration;

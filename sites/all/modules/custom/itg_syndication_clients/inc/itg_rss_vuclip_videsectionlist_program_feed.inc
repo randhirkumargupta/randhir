@@ -4,6 +4,11 @@
  * @file
  * The ITG Syndication clients for vuclip
  */
+
+/**
+ * menu callback
+ * Function for generate vuclip programme video feed
+ */
 function itg_rss_vuclip_videsectionlist_program_videos_feed() {
   $sections = get_vuclip_sections();
   foreach ($sections as $file_name => $section) {
@@ -11,6 +16,10 @@ function itg_rss_vuclip_videsectionlist_program_videos_feed() {
   }
 }
 
+/**
+ * menu callback
+ * Function for generate mauj video feed
+ */
 function itg_rss_mauj_videsectionlist_program_videos_feed() {
   $sections = get_mauj_sections();
   foreach ($sections as $file_name => $section) {
@@ -19,7 +28,10 @@ function itg_rss_mauj_videsectionlist_program_videos_feed() {
 }
 
 /**
- * menu callback for vuclip Programme syndication
+ * 
+ * @param int $section_id
+ * @param string $file_name
+ * @param int $limit
  */
 function itg_genrate_vuclip_programme_syndication($section_id = NULL, $file_name, $limit = 25) {
   if (!empty($section_id)) {
@@ -57,6 +69,14 @@ function itg_genrate_vuclip_programme_syndication($section_id = NULL, $file_name
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $section_name
+ * @param int $section_id
+ * @return string
+ */
 function genrate_vuclip_programme_xml($result, $section_name, $section_id) {
   global $base_url;
   $xml = '<rss xmlns:media="http://search.yahoo.com/mrss" version="2.0">';
@@ -83,11 +103,11 @@ function genrate_vuclip_programme_xml($result, $section_name, $section_id) {
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       if (!empty($videotag['migrated'])) { //migrated video  
-       $xml .= '<link><![CDATA[' . $videotag['migrated']['video_path_mp4'] . ']]></link>';
+        $xml .= '<link><![CDATA[' . $videotag['migrated']['video_path_mp4'] . ']]></link>';
       }
       elseif (!empty($videotag['dailymotion'])) {
         $xml .= '<link><![CDATA[' . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . ']]></link>';
-      } 
+      }
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<pubDate>' . $created_date . '</pubDate>';
       if (!empty($videotag['migrated'])) { //migrated video  
@@ -115,13 +135,19 @@ function genrate_vuclip_programme_xml($result, $section_name, $section_id) {
   return $xml;
 }
 
-function itg_genrate_mauj_video_syndication($section_id = NULL, $file_name, $limit = 25){
+/**
+ * 
+ * @param int $section_id
+ * @param string $file_name
+ * @param int $limit
+ */
+function itg_genrate_mauj_video_syndication($section_id = NULL, $file_name, $limit = 25) {
   if (!empty($section_id)) {
-    
+
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    
+
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
@@ -146,7 +172,13 @@ function itg_genrate_mauj_video_syndication($section_id = NULL, $file_name, $lim
   }
 }
 
-function genrate_mauj_programme_xml($result){
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @return string
+ */
+function genrate_mauj_programme_xml($result) {
   global $base_url;
   $xml = '<rss xmlns:media="http://search.yahoo.com/mrss" version="2.0">';
   $xml .= '<channel>';
@@ -165,11 +197,11 @@ function genrate_mauj_programme_xml($result){
       $xml .= '<id>' . $nid . '</id>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       if (!empty($videotag['migrated'])) { //migrated video  
-       $xml .= '<link><![CDATA[' . $videotag['migrated']['video_path_mp4'] . ']]></link>';
+        $xml .= '<link><![CDATA[' . $videotag['migrated']['video_path_mp4'] . ']]></link>';
       }
       elseif (!empty($videotag['dailymotion'])) {
         $xml .= '<link><![CDATA[' . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . ']]></link>';
-      }     
+      }
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<pubDate>' . $created_date . '</pubDate>';
       $xml .= '</item>';

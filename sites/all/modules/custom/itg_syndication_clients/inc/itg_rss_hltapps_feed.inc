@@ -4,6 +4,11 @@
  * @file
  * The ITG Syndication clients for Hltapps
  */
+
+/**
+ * menu callback
+ * Function for generate Hltapps story feed
+ */
 function itg_rss_hltapps_stories() {
   $sections = get_hltapps_sections('story');
   foreach ($sections as $file_name => $section_id) {
@@ -11,6 +16,10 @@ function itg_rss_hltapps_stories() {
   }
 }
 
+/**
+ * menu callback
+ * Function for generate Hltapps video feed
+ */
 function itg_rss_hltapps_videos() {
   $sections = get_hltapps_sections('video');
   foreach ($sections as $file_name => $section) {
@@ -18,6 +27,10 @@ function itg_rss_hltapps_videos() {
   }
 }
 
+/**
+ * menu callback
+ * Function for generate Hltapps programme feed
+ */
 function itg_rss_hltapps_programme() {
   $sections = get_hltapps_sections('programme');
   foreach ($sections as $file_name => $section) {
@@ -25,6 +38,10 @@ function itg_rss_hltapps_programme() {
   }
 }
 
+/**
+ * menu callback
+ * Function for generate Hltapps photo feed
+ */
 function itg_rss_hltapps_photos() {
   $sections = get_hltapps_sections('photo');
   foreach ($sections as $file_name => $section) {
@@ -32,6 +49,10 @@ function itg_rss_hltapps_photos() {
   }
 }
 
+/**
+ * menu callback
+ * Function for generate Hltapps mixed feed
+ */
 function itg_rss_hltapps_mixed_rss_feed() {
   $sections = get_hltapps_sections('mixed');
   foreach ($sections as $file_name => $section) {
@@ -39,6 +60,10 @@ function itg_rss_hltapps_mixed_rss_feed() {
   }
 }
 
+/**
+ * menu callback
+ * Function for generate Hlt video feed
+ */
 function itg_rss_msn_hlt_videos_feed() {
   $sections = get_hltapps_sections('msn_hlt_video');
   foreach ($sections as $file_name => $section) {
@@ -47,7 +72,9 @@ function itg_rss_msn_hlt_videos_feed() {
 }
 
 /**
- * menu callback for Hltapps story syndication
+ * 
+ * @param int $section_id
+ * @param string $file_name
  */
 function itg_genrate_hltapps_stories_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
@@ -97,6 +124,14 @@ function itg_genrate_hltapps_stories_syndication($section_id = NULL, $file_name)
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $category
+ * @param int $section_id
+ * @return string
+ */
 function genrate_hltapps_stories_xml($result = NULL, $category, $section_id) {
   $xml = '';
   if (!empty($result)) {
@@ -127,6 +162,14 @@ function genrate_hltapps_stories_xml($result = NULL, $category, $section_id) {
   return $xml;
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $value
+ * @param string $category
+ * @param string $xml_story_file
+ * @param int $section_id
+ */
 function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, $section_id) {
   global $base_url;
   $publish_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
@@ -156,7 +199,7 @@ function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, 
   $xml_detail .= '<largeimage><![CDATA[' . $large_img["imag_url"] . ' ]]></largeimage>';
   $xml_detail .= '</image>';
   $xml_detail .= '</images>';
-  $xml_detail .= '<weburl><![CDATA[ ' . $url . ' ]]></weburl>';  
+  $xml_detail .= '<weburl><![CDATA[ ' . $url . ' ]]></weburl>';
   $xml_detail .= get_comment_xml_tag($value['nid']);
   $xml_detail .= '</item>';
   $xml_detail .= '</root>';
@@ -168,7 +211,10 @@ function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, 
 }
 
 /**
- * menu callback for Hltapps story syndication
+ * 
+ * @param int $section_id
+ * @param string $file_name
+ * @param int $limit
  */
 function itg_genrate_hltapps_videos_syndication($section_id = NULL, $file_name, $limit = 25) {
   if (!empty($section_id)) {
@@ -223,14 +269,22 @@ function itg_genrate_hltapps_videos_syndication($section_id = NULL, $file_name, 
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $section_name
+ * @param int $section_id
+ * @return string
+ */
 function genrate_hltapps_videos_xml($result, $section_name, $section_id) {
   global $base_url;
-  
+
   $xml = '<root>';
   $xml .= '<id>' . $section_id . '</id>';
   $xml .= '<title><![CDATA[' . $section_name . ']]></title>';
-  if($section_id == 1){
-   $xml .= '<description><![CDATA[ About India & world News. ]]></description>'; 
+  if ($section_id == 1) {
+    $xml .= '<description><![CDATA[ About India & world News. ]]></description>';
   }
   $xml .= '<itemcount>' . count($result) . '</itemcount>';
 
@@ -259,6 +313,14 @@ function genrate_hltapps_videos_xml($result, $section_name, $section_id) {
   return $xml;
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $value
+ * @param int $section_id
+ * @param string $section_name
+ * @param string $video_file_name
+ */
 function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $video_file_name) {
   global $base_url;
   if ($section_name == 'Top Ten') {
@@ -313,7 +375,10 @@ function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $v
 }
 
 /**
- * menu callback for Hltapps Photo syndication
+ * 
+ * @param int $section_id
+ * @param string $file_name
+ * @param int $limit
  */
 function itg_genrate_hltapps_photos_syndication($section_id = NULL, $file_name, $limit = 25) {
   if (!empty($section_id)) {
@@ -346,6 +411,14 @@ function itg_genrate_hltapps_photos_syndication($section_id = NULL, $file_name, 
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $section_name
+ * @param int $section_id
+ * @return string
+ */
 function genrate_hltapps_photos_xml($result, $section_name, $section_id) {
   $xml = '';
   if (!empty($result)) {
@@ -379,6 +452,14 @@ function genrate_hltapps_photos_xml($result, $section_name, $section_id) {
   return $xml;
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $value
+ * @param int $section_id
+ * @param string $section_name
+ * @param string $photo_detail_file_name
+ */
 function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $photo_detail_file_name) {
   global $base_url;
   $nid = $value['nid'];
@@ -436,7 +517,10 @@ function generate_hltapps_photo_detail_xml($value, $section_id, $section_name, $
 }
 
 /**
- * menu callback for Hltapps Programme syndication
+ * 
+ * @param int $section_id
+ * @param string $file_name
+ * @param int $limit
  */
 function itg_genrate_hltapps_programme_syndication($section_id = NULL, $file_name, $limit = 25) {
   if (!empty($section_id)) {
@@ -483,6 +567,14 @@ function itg_genrate_hltapps_programme_syndication($section_id = NULL, $file_nam
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $section_name
+ * @param int $section_id
+ * @return string
+ */
 function genrate_hltapps_programme_xml($result, $section_name, $section_id) {
   global $base_url;
   $section_desc = get_term_description_by_tid($section_id);
@@ -513,6 +605,12 @@ function genrate_hltapps_programme_xml($result, $section_name, $section_id) {
   return $xml;
 }
 
+/**
+ * 
+ * @param array $sections
+ * @param string $file_name
+ * @param string $feed_name
+ */
 function itg_genrate_hltapps_mixed_feed_syndication($sections = NULL, $file_name, $feed_name) {
   $categories_id = array();
   $type = array('story', 'videogallery', 'photogallery');
@@ -561,6 +659,13 @@ function itg_genrate_hltapps_mixed_feed_syndication($sections = NULL, $file_name
   fclose($fp);
 }
 
+/**
+ * 
+ * @param array $result
+ * @param array $sections
+ * @param string $feed_name
+ * @return string
+ */
 function genrate_hltapps_mixed_feed($result, $sections, $feed_name) {
   if (!empty($result)) {
     $xml = '<root>';
@@ -605,6 +710,10 @@ function genrate_hltapps_mixed_feed($result, $sections, $feed_name) {
   }
 }
 
+/**
+ * Function for generate livenow-listing.xml feed
+ * @global string $base_url
+ */
 function itg_rss_hltapps_livenow_listing_feed() {
   global $base_url;
   $fixed_sections = get_hltapps_sections('programme');
@@ -645,6 +754,12 @@ function itg_rss_hltapps_livenow_listing_feed() {
   fclose($fp);
 }
 
+/**
+ * Function term children from tid
+ * @param int $tid
+ * @param int $vid
+ * @return array
+ */
 function get_childrens_from_tids($tid, $vid) {
   $query = db_select('taxonomy_term_data', 't');
   $query->join('taxonomy_term_hierarchy', 'h', 'h.tid = t.tid');
@@ -663,6 +778,12 @@ function get_childrens_from_tids($tid, $vid) {
   return $result;
 }
 
+/**
+ * 
+ * @param int $section_id
+ * @param string $file_name
+ * @param int $limit
+ */
 function itg_genrate_msn_hlt_videos_feed_syndication($section_id = NULL, $file_name, $limit = 15) {
   if (!empty($section_id)) {
     $section_name = get_term_name_by_tid($section_id);
@@ -703,6 +824,14 @@ function itg_genrate_msn_hlt_videos_feed_syndication($section_id = NULL, $file_n
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $section_name
+ * @param int $section_id
+ * @return string
+ */
 function genrate_msn_hlt_videos_xml($result, $section_name, $section_id) {
   global $base_url;
   $xml = '<root>';
@@ -733,6 +862,14 @@ function genrate_msn_hlt_videos_xml($result, $section_name, $section_id) {
   return $xml;
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $value
+ * @param int $section_id
+ * @param string $section_name
+ * @param string $video_file_name
+ */
 function genrate_msn_hlt_video_detail_xml($value, $section_id, $section_name, $video_file_name) {
   global $base_url;
 

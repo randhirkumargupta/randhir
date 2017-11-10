@@ -8,25 +8,34 @@ function itg_indiatoday_yahoo_syndication() {
   $sections = getindiatoday_yahoo_client_array();
   itg_genrate_indiatoday_yahoo_story_syndication($sections['ids'], $sections['filename']);
 }
+
 /**
- * @file
- * The ITG Syndication clients for BSB Story
+ * Menu callback
  */
 function itg_indiatoday_yahoo_static_section_syndication() {
   $sections = getindiatoday_yahoo_client_sections();
   foreach ($sections as $key => $value) {
     itg_genrate_indiatoday_yahoo_static_section_syndication($key, $value);
-  }  
+  }
 }
 
+/**
+ * Menu callback
+ */
 function itg_indiatoday_yahoo_static_mailtoday_syndication() {
-  itg_genrate_indiatoday_yahoo_static_mailtoday_syndication(1206572);    
+  itg_genrate_indiatoday_yahoo_static_mailtoday_syndication(1206572);
 }
 
+/**
+ * Menu callback
+ */
 function itg_indiatoday_yahoo_static_latest_stories_syndication() {
-  itg_genrate_indiatoday_yahoo_static_latest_stories_syndication();    
+  itg_genrate_indiatoday_yahoo_static_latest_stories_syndication();
 }
 
+/**
+ * Menu callback
+ */
 function itg_indiatoday_yahoo_static_latest_issue_syndication() {
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title', 'created'));
@@ -35,13 +44,13 @@ function itg_indiatoday_yahoo_static_latest_issue_syndication() {
   $query->orderBy('n.nid', "DESC");
   $query->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  itg_genrate_indiatoday_yahoo_static_latest_issue_syndication($result);    
+  itg_genrate_indiatoday_yahoo_static_latest_issue_syndication($result);
 }
 
-
-
 /**
- * menu callback for bsb story syndication
+ * Function for generate Yahoo story feed
+ * @param int $section_ids
+ * @param string $file_name
  */
 function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $file_name) {
   if (!empty($section_ids)) {
@@ -80,6 +89,12 @@ function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $fi
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @return string
+ */
 function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
   $xml = '';
   if (!empty($result)) {
@@ -115,20 +130,21 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $xml .= '</item>';
     }
     $load_xml = simplexml_load_file("http://feeds.intoday.in/indiatoday/yahoo/top-businesstoday.xml");
-    if(!empty($load_xml->children()->children())){
-      foreach($load_xml->children()->children() as $load_xml_item){
-        $xml.= $load_xml_item->asXML();
+    if (!empty($load_xml->children()->children())) {
+      foreach ($load_xml->children()->children() as $load_xml_item) {
+        $xml .= $load_xml_item->asXML();
       }
-    }    
+    }
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
   return $xml;
 }
 
-
 /**
- * menu callback for bsb story syndication
+ * 
+ * @param int $section_id
+ * @param string $file_name
  */
 function itg_genrate_indiatoday_yahoo_static_section_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
@@ -140,23 +156,22 @@ function itg_genrate_indiatoday_yahoo_static_section_syndication($section_id = N
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
-    
-    if($section_id != 'top'){
+
+    if ($section_id != 'top') {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->fields('ti', array('tid'));
       $query->condition('ti.tid', $section_id, '=');
     }
-    
+
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('ssi', array('field_story_small_image_fid'));
-    
 
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
-    
+
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');
     $query->orderBy('n.created', 'DESC');
@@ -171,7 +186,13 @@ function itg_genrate_indiatoday_yahoo_static_section_syndication($section_id = N
   }
 }
 
-
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param int $section_id
+ * @return string
+ */
 function genrate_indiatoday_yahoo_static_section_syndication_xml($result = NULL, $section_id) {
   if (!empty($result)) {
     global $base_url;
@@ -182,12 +203,13 @@ function genrate_indiatoday_yahoo_static_section_syndication_xml($result = NULL,
       $publish_date = date("Y-m-d\TH:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
-      if($section_id != 'top'){
+      if ($section_id != 'top') {
         $section_name = get_term_name_by_tid($section_id);
-      }else{
+      }
+      else {
         $section_name = get_term_name_by_tid($value['tid']);
       }
-      
+
       $metatags = get_node_metatags_by_nid($value['nid']);
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
@@ -215,7 +237,11 @@ function genrate_indiatoday_yahoo_static_section_syndication_xml($result = NULL,
   return $xml;
 }
 
-function itg_genrate_indiatoday_yahoo_static_mailtoday_syndication($section_id){
+/**
+ * 
+ * @param int $section_id
+ */
+function itg_genrate_indiatoday_yahoo_static_mailtoday_syndication($section_id) {
   if (!empty($section_id)) {
     $type = array('story');
     $query = db_select('node', 'n');
@@ -223,11 +249,11 @@ function itg_genrate_indiatoday_yahoo_static_mailtoday_syndication($section_id){
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    
+
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
-    
+
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
@@ -244,7 +270,14 @@ function itg_genrate_indiatoday_yahoo_static_mailtoday_syndication($section_id){
   }
 }
 
-function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $section_id){
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param int $section_id
+ * @return string
+ */
+function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $section_id) {
   if (!empty($result)) {
     global $base_url;
     $last_pub_date = end($result);
@@ -253,7 +286,7 @@ function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $sec
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ MAIL TODAY ]]></title>';
     $xml .= '<description><![CDATA[ MAIL TODAY ]]></description>';
-    $xml .= '<pubDate>'.$last_pub_date.'</pubDate>';
+    $xml .= '<pubDate>' . $last_pub_date . '</pubDate>';
     $xml .= '<image>';
     $xml .= '<title><![CDATA[ MAIL TODAY ]]></title>';
     $xml .= '</image>';
@@ -280,40 +313,49 @@ function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $sec
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
-  return $xml;  
+  return $xml;
 }
 
-function itg_genrate_indiatoday_yahoo_static_latest_stories_syndication(){
-    $type = array('story');
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
-    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
-    
-    $query->fields('n', array('nid', 'title', 'created'));
-    $query->fields('dbody', array('body_value'));
-    $query->fields('npd', array('field_itg_content_publish_date_value'));
-    $query->fields('pc', array('field_primary_category_value'));
-    $query->fields('synopsis', array('field_story_kicker_text_value'));
-    
-    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
-    $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
-    $query->orderBy('n.created', 'DESC');
-    $query->groupBy('n.nid')->range(0, 25);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $xml = genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result);
-    $xml_path = 'public://indiatoday/yahoo/';
-    $file_path = $xml_path . 'latest-stories.xml';
-    $fp = fopen($file_path, "w");
-    fwrite($fp, $xml);
-    fclose($fp);
+/**
+ * Generate latest-stories.xml xml feed
+ */
+function itg_genrate_indiatoday_yahoo_static_latest_stories_syndication() {
+  $type = array('story');
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+
+  $query->fields('n', array('nid', 'title', 'created'));
+  $query->fields('dbody', array('body_value'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('pc', array('field_primary_category_value'));
+  $query->fields('synopsis', array('field_story_kicker_text_value'));
+
+  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+  $query->condition('n.status', 1);
+  $query->condition('n.type', $type, 'IN');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 25);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $xml = genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result);
+  $xml_path = 'public://indiatoday/yahoo/';
+  $file_path = $xml_path . 'latest-stories.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
 }
 
-function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result){
-   if (!empty($result)) {
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @return string
+ */
+function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result) {
+  if (!empty($result)) {
     global $base_url;
     $last_node = end($result);
     $last_node_url = $base_url . "/" . drupal_get_path_alias('node/' . $last_node['nid']);
@@ -322,12 +364,12 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ INDIA TODAY ]]></title>';
     $xml .= '<description><![CDATA[ INDIA TODAY ]]></description>';
-    $xml .= '<link><![CDATA[ '.$base_url.' ]]></link>';
-    $xml .= '<pubDate>'.$last_pub_date.'</pubDate>';
+    $xml .= '<link><![CDATA[ ' . $base_url . ' ]]></link>';
+    $xml .= '<pubDate>' . $last_pub_date . '</pubDate>';
     $xml .= '<image>';
     $xml .= '<title><![CDATA[ INDIA TODAY ]]></title>';
-    $xml .= '<link><![CDATA[ '.$last_node_url.' ]]></link>';
-    $xml .= '<url><![CDATA[ '.$base_url.' ]]></url>';
+    $xml .= '<link><![CDATA[ ' . $last_node_url . ' ]]></link>';
+    $xml .= '<url><![CDATA[ ' . $base_url . ' ]]></url>';
     $xml .= '</image>';
     $xml .= '<language>en</language>';
     foreach ($result as $key => $value) {
@@ -343,7 +385,7 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
       }
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
-      $xml .= '<link><![CDATA[ '.$url.' ]]></link>';
+      $xml .= '<link><![CDATA[ ' . $url . ' ]]></link>';
       $xml .= '<pubDate>' . $publish_date . '></pubDate>';
       $xml .= '<guid>' . $url . '</guid>';
       $xml .= '<description><![CDATA[' . $value['field_story_kicker_text_value'] . ']]></description>';
@@ -355,37 +397,41 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
     $xml .= '</channel>';
     $xml .= '</rss>';
   }
-  return $xml;  
+  return $xml;
 }
 
-function itg_genrate_indiatoday_yahoo_static_latest_issue_syndication($issue_result){
-   $title = $issue_result[0]['title'];  
-    $type = array('story');
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
-    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');      
-    $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
-    $query->join('field_data_field_story_issue_date', 'isuue', 'n.nid=isuue.entity_id');
-    
-    $query->fields('ti', array('tid'));
-    $query->fields('n', array('nid', 'title', 'created'));
-    $query->fields('dbody', array('body_value'));
-    $query->fields('npd', array('field_itg_content_publish_date_value'));
-    $query->fields('synopsis', array('field_story_kicker_text_value'));
-    
-    $query->condition('isuue.field_story_issue_date_value', $title, '=');    
-    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
-    $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
-    $query->orderBy('n.created', 'DESC');
-    $query->groupBy('n.nid')->range(0, 25);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $xml = genrate_indiatoday_yahoo_static_section_syndication_xml($result, 'top');
-    $xml_path = 'public://indiatoday/yahoo/';
-    $file_path = $xml_path . 'indiatoday-magazine-latest-issue-rss-feed.xml';
-    $fp = fopen($file_path, "w");
-    fwrite($fp, $xml);
-    fclose($fp);
+/**
+ * Function is used to generate indiatoday-magazine-latest-issue-rss-feed.xml feed
+ * @param array $issue_result
+ */
+function itg_genrate_indiatoday_yahoo_static_latest_issue_syndication($issue_result) {
+  $title = $issue_result[0]['title'];
+  $type = array('story');
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+  $query->join('field_data_field_story_issue_date', 'isuue', 'n.nid=isuue.entity_id');
+
+  $query->fields('ti', array('tid'));
+  $query->fields('n', array('nid', 'title', 'created'));
+  $query->fields('dbody', array('body_value'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('synopsis', array('field_story_kicker_text_value'));
+
+  $query->condition('isuue.field_story_issue_date_value', $title, '=');
+  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+  $query->condition('n.status', 1);
+  $query->condition('n.type', $type, 'IN');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 25);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $xml = genrate_indiatoday_yahoo_static_section_syndication_xml($result, 'top');
+  $xml_path = 'public://indiatoday/yahoo/';
+  $file_path = $xml_path . 'indiatoday-magazine-latest-issue-rss-feed.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
 }

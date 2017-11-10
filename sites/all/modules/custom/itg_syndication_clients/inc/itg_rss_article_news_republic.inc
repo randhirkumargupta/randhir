@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Function is used to generate story feed
+ */
 function itg_rss_article_news_republic() {
 
   $sid = $_GET['sid'];
@@ -12,7 +15,7 @@ function itg_rss_article_news_republic() {
   $query->fields('dbody', array('body_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('kt', array('field_story_kicker_text_value'));
-  
+
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
@@ -29,6 +32,12 @@ function itg_rss_article_news_republic() {
   drupal_exit();
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @return string
+ */
 function get_rss_article_news_republic_xml($result) {
   $xml = '';
   if (!empty($result)) {
@@ -67,8 +76,9 @@ function get_rss_article_news_republic_xml($result) {
   }
 }
 
-
-
+/**
+ * Function for geerate Education repblic feed
+ */
 function itg_rss_education_article_news_republic() {
 
   $cid = (isset($_GET['cid']) ? $_GET['cid'] : 1207013); // other wise Education Today category
@@ -97,6 +107,12 @@ function itg_rss_education_article_news_republic() {
   drupal_exit();
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @return string
+ */
 function get_rss_education_article_news_republic_xml($result) {
   $xml = '';
   if (!empty($result)) {

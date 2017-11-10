@@ -12,7 +12,9 @@ function itg_cabbytabby_feed_videos_syndication() {
 }
 
 /**
- * menu callback for bsb story syndication
+ * Function is used to generate Cabbytabby feed
+ * @param int $section_id
+ * @param string $file_name
  */
 function itg_genrate_cabbytabby_feed_videos_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
@@ -30,7 +32,7 @@ function itg_genrate_cabbytabby_feed_videos_syndication($section_id = NULL, $fil
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('sst', array('field_story_source_type_value'));
     $query->fields('sed', array('field_story_expert_description_value'));
-    
+
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
@@ -47,19 +49,26 @@ function itg_genrate_cabbytabby_feed_videos_syndication($section_id = NULL, $fil
   }
 }
 
+/**
+ * 
+ * @param array $result
+ * @param int $section_id
+ * @param string$category
+ * @return string
+ */
 function genrate_cabbytabby_feed_videos_syndication_xml($result = NULL, $section_id, $category) {
   $xml_pub_date = end($result);
   $xml_pub_date = date("Y-m-d H:i:s", $xml_pub_date['created']);
   $xml = '';
   $xml .= '<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">';
   $xml .= '<channel>';
-  $xml .= '<title><![CDATA['.$category.']]></title>';
+  $xml .= '<title><![CDATA[' . $category . ']]></title>';
   $xml .= '<link><![CDATA[feeds]]></link>';
   $xml .= '<description><![CDATA[CabbyTabby MRSS Feed]]></description>';
-  $xml .= '<pubDate><![CDATA['.$xml_pub_date.']]></pubDate>';
-  
+  $xml .= '<pubDate><![CDATA[' . $xml_pub_date . ']]></pubDate>';
+
   if (!empty($result)) {
-    
+
     foreach ($result as $value) {
       $nid = $value['nid'];
       $video_file_name = 'video' . $nid . '.xml';
@@ -73,16 +82,16 @@ function genrate_cabbytabby_feed_videos_syndication_xml($result = NULL, $section
       $tags = get_content_tags($nid, TRUE);
       $byline = get_byline_name_by_nid($nid);
       $key_words = '';
-      if(!empty($meta_tags['data'])){
+      if (!empty($meta_tags['data'])) {
         $meta_tags = unserialize($meta_tags['data']);
         $key_words = $meta_tags['keywords']['value'];
       }
-      
-      $duration= '';
-      if(count($video_data) > 0){
+
+      $duration = '';
+      if (count($video_data) > 0) {
         $duration = $video_data[0]->video_duration;
       }
-      
+
       $video_url = '';
       if (!empty($videotag['migrated'])) { //migrated video
         $video_url = $videotag['migrated']['video_path_mp4'];
@@ -91,16 +100,16 @@ function genrate_cabbytabby_feed_videos_syndication_xml($result = NULL, $section
         $video_url = $videotag['dailymotion']['bitate_url']['videoparts_mp4'];
       }
       $xml .= '<item>';
-      $xml .= '<guid isPermaLink="false">'.$nid.'</guid>';
+      $xml .= '<guid isPermaLink="false">' . $nid . '</guid>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<description><![CDATA[' . $value['field_story_expert_description_value'] . ']]></description>';
       $xml .= '<pubDate>' . $created_date . '</pubDate>';
       $xml .= '<category><![CDATA[' . $catname . ']]></category>';
-      $xml .= '<enclosure url="'.$video_url.'" type="video/mp4"/>';
-      $xml .= '<media:content url="'.$video_url.'" type="video/mp4" duration="'.$duration.'">';
-      $xml .= '<media:category>'.$catname.'</media:category>';
-      $xml .= '<media:tags><![CDATA['.$tags.']]></media:tags>';
-      $xml .= '<media:keywords><![CDATA['.$key_words.']]></media:keywords>';
+      $xml .= '<enclosure url="' . $video_url . '" type="video/mp4"/>';
+      $xml .= '<media:content url="' . $video_url . '" type="video/mp4" duration="' . $duration . '">';
+      $xml .= '<media:category>' . $catname . '</media:category>';
+      $xml .= '<media:tags><![CDATA[' . $tags . ']]></media:tags>';
+      $xml .= '<media:keywords><![CDATA[' . $key_words . ']]></media:keywords>';
       $xml .= '<media:thumbnail url="' . $small_img['imag_url'] . '"></media:thumbnail>';
       $xml .= '<media:credit role="producer" scheme="urn:ebu"><![CDATA[' . $byline . ']]></media:credit>';
       $xml .= '</media:content>';

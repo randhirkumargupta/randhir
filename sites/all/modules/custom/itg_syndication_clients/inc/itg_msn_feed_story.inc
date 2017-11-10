@@ -12,7 +12,9 @@ function itg_msn_feed_story_syndication() {
 }
 
 /**
- * menu callback for bsb story syndication
+ * Function is used to Generate MSN xml feed
+ * @param int $section_id
+ * @param string $file_name
  */
 function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
@@ -24,13 +26,13 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
-    
+
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
-    
+
 
     $query->condition('n.status', 1);
     $query->condition('n.type', $type, 'IN');
@@ -46,6 +48,13 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param Array $result
+ * @param string $category
+ * @return string
+ */
 function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
   $xml = '';
   if (!empty($result)) {
@@ -55,22 +64,22 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
     $xml .= '<NewsEnvelope>';
     $xml .= '<DateAndTime>' . $current_date . '</DateAndTime>';
     $xml .= '</NewsEnvelope>';
-    
+
     foreach ($result as $key => $value) {
-      
+
       $nid = $value['nid'];
       $publish_date = date("Ymd\THisP", $value['created']);
       $modify_date = date("Ymd\THisP", $value['changed']);
       $reporter = get_byline_name_by_nid($nid);
-      if(empty($reporter)){
+      if (empty($reporter)) {
         $reporter = 'IndiaToday.in';
-      }      
+      }
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
 
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $title = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['title']));
-      
+
       $year = date('Y');
       $xml .= '<NewsItem LinkType="normal">';
       $xml .= '<Identification>';
