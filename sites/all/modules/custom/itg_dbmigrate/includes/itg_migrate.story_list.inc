@@ -579,6 +579,8 @@ class ItgStoryListMigration extends XMLMigration {
   public function prepareRow($row) {
     if (!empty($row->xml->createdby) && isset($row->xml->createdby)) {
       $row->xml->createdby = get_itg_destination_id('migrate_map_itguser', (int) $row->xml->createdby);
+    }else{
+      $row->xml->createdby = 970;
     }
 
     if (empty((string) $row->xml->metatags->sefurl)) {

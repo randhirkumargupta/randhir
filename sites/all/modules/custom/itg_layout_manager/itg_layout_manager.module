@@ -832,7 +832,7 @@ function itg_layout_getsectioncarddata_new_pre($sectinno, $section) {
  * {@inheritdoc}
  */
 function itg_layout_manager_preprocess_page(&$vars) {
-  global $theme;
+  global $user, $theme;
   $arg = arg();
 
   $is_fron_page = drupal_is_front_page();
@@ -847,6 +847,10 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $data['personlization'] = get_itg_widget('personlization');
     $data['non_personlization'] = get_itg_widget('recommended_anonymous_user');
     $vars['widget_data'] = $data;
+    if($user->uid == 0) {
+      //js for recommended_anonymous_user
+      drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('type' => 'file', 'scope' => 'footer', 'weight' => 5));
+    } 
     drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_more_section_card.js', array('scope' => 'footer'));
   }
 

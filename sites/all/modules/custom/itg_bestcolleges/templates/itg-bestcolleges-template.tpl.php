@@ -2,8 +2,10 @@
 /**
  * @file : itg-bestcolleges-template.tpl.php
  */
-$comment_value = variable_get('COMMENT_CONFIG');
-$config_name = $comment_value[0]->config_name;
+if (function_exists('itg_story_global_comment_last_record')) {
+  $comment_value = itg_story_global_comment_last_record();
+  $config_name = $comment_value[0]->config_name;
+}
 $arg = arg();
 ?>
 <?php global $base_url;?>

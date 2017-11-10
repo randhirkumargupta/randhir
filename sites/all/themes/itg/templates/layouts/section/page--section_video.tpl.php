@@ -78,8 +78,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
         $cls = 'col-md-9';
       endif;
       ?>
-      <div class="itg-region">
+      
           <div class="container pos-rel">
+          <div class="itg-region">
               <div class="slide-icon scroll-arrow-right"><i class="fa fa-angle-left ll"></i></div>
               <ul class="video_landing_menu">
                   <?php for ($count = 1; $count < 21; $count++) { ?>
