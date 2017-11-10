@@ -224,7 +224,14 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
         '#validated' => TRUE,
         '#options' => $itg_primary_category,
         '#default_value' => $default_value_of_primary_cat,
-      );
+      );      
+      if (($form_id == 'photogallery_node_form') || ($form_id == 'videogallery_node_form') && (!empty($itg_primary_category))) {
+        foreach ($itg_primary_category as $option_id => $option_val) {
+          if (strpos($option_val, 'Photo') !== false || strpos($option_val, 'Videos') !== false) {
+            $form['category_holder']['itg_primary_category']['#option_attributes'] [$option_id] = array('disabled' => 'true');
+          }
+        }
+      }      
       // Hiding story extra field 
       if (isset($form['field_story_extra_data'][LANGUAGE_NONE][0]['value']['#type'])) {
         $form['field_story_extra_data'][LANGUAGE_NONE][0]['value']['#type'] = 'hidden';
