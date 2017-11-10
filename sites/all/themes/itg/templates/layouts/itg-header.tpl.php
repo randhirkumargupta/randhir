@@ -19,7 +19,7 @@ if (!empty($get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri'])) {
   $user_pic = theme('image_style', array('style_name' => 'user_header_image_30x30', 'path' => $get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri']));
 }
 else {
-  $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
+  $file = drupal_get_path('theme', 'itg').'/images/default-user.png';
   $user_pic = "<img src=$file width='30' height='30' alt='user-image' title='user-image' />";
 }
 $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
@@ -52,7 +52,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
        <?php
           } else {
        ?>
-        <a href="javascript:void(0)" class="user-icon"><?php print $user_pic; ?></a>  
+        <a href="javascript:void(0)" class="user-icon loginicon"><?php print $user_pic; ?></a>  
         <?php  
           }
         }

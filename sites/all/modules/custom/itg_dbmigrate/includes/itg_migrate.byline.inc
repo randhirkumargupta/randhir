@@ -8,10 +8,11 @@
 //http://feeds.intoday.in/migration/byline-master.xml
 
 class ItgBylineMigration extends XMLMigration {
+  public $byline_consvalue;
   public function __construct($arguments) {
     parent::__construct($arguments);
     $this->description = t('XML feed (multi items) of content (Byline)');
-    
+    $this->byline_consvalue = $this->read_folder_xml_byline(); // get current folder name
     
     
     // "fields" from an XML feed, so we pass an explicit list of source fields
@@ -43,10 +44,10 @@ class ItgBylineMigration extends XMLMigration {
     // This can also be an URL instead of a local file path.
     $file_path = 'sites/default/files';
     
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/movie-review-xmls-19-06-2017/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/migrate_xml/xml_for_migrate/' . $this->byline_consvalue . '/';
+
+    $items_url = $xml_folder . 'byline-master.xml';
     
-    //$items_url = $xml_folder . 'byline-master.xml';
-    $items_url = $xml_folder . 'reviewer_master.xml';
     
     // This is the xpath identifying the items to be migrated, relative to the
     // document.
@@ -156,5 +157,32 @@ class ItgBylineMigration extends XMLMigration {
      ordering_set_for_byline($entity->nid, $row->xml->ordering);
    }
    
+  }
+  
+   public function read_folder_xml_byline() {
+    $path_xml = 'sites/default/files/migrate/xml_file/migrate_xml/xml_for_migrate/';
+    $files = scandir($path_xml);
+    if ($files[0] == '.') {
+      unset($files[0]);
+    }
+    if ($files[1] == '..') {
+      unset($files[1]);
+    }
+    $result = array_values($files);
+
+    return $result[0];
+  }
+  
+  public function postImport() {
+    parent::postImport();
+    // mail send if city failed.
+    $content = failed_record_xml_id('migrate_map_itgbyline');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Byline',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
   }
 }

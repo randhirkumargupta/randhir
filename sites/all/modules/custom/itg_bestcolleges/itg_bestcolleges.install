@@ -756,12 +756,12 @@ function itg_bestcolleges_schema() {
     $schema['bestcolleges_zonecampuswiseranking'] = array(
       'description' => 'TODO: please describe this table!',
       'fields' => array(
-       'id' => array(
-         'description' => 'TODO: please describe this field!',
-         'type' => 'int',
-         'not null' => TRUE,
-         'default' => 0,
-       ),
+        'id' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'serial',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
        'city' => array(
          'description' => 'TODO: please describe this field!',
          'type' => 'varchar',
