@@ -19,7 +19,9 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
  */
 function itg_common_init() {
   global $user, $base_url, $theme;
-  $arg = arg();
+  $arg = arg();  
+  
+  
   // condition for archive story redirect
   $ctype_tab = array('Story', 'photogallery', 'Videogallery');
   if ($arg[0] == 'archives' && !empty($arg[1]) && in_array($arg[1], $ctype_tab) && empty($arg[2])) {
@@ -1986,4 +1988,19 @@ function get_email_by_roll($id) {
     $value[] = $val->mail;
   }
   return $value;
+}
+
+/**
+ * itg_fronturl_check
+ * 
+ */
+function itg_fronturl_check() {
+  global $base_url;
+  $baseUrl = explode('//', $base_url);
+  $fUrl = explode('//', FRONT_URL);  
+  if ($baseUrl[1] == $fUrl[1]) {
+    return true;
+  } else {
+      return false;
+  }
 }
