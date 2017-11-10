@@ -370,7 +370,7 @@ function itg_story_mega_review_node_embed($node) {
   // config for sharing
   global $base_url;
   $nid = $node->nid;
-  $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+  $actual_link = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   $short_url = shorten_url($actual_link, 'goo.gl');
   $fb_title = addslashes($node->title);
   $share_desc = '';
