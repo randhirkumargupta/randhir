@@ -72,6 +72,55 @@ function itg_rss_msn_hlt_videos_feed() {
 }
 
 /**
+ * menu callback
+ * Function for generate Hltapps static feed
+ */
+function itg_rss_hltappsstaticfeeds() {
+  itg_generate_hltapps_static_feed_homesectionslist();
+  itg_generate_hltapps_static_feed_sectionslist();
+  itg_generate_hltapps_static_feed_video_sectionslist();
+  itg_generate_hltapps_static_feed_photo_sectionslist();
+}
+
+/**
+ * menu callback
+ * Function for generate Hltapps programme static feed
+ */
+function itg_rss_programme_static() {
+  itg_generate_hltapps_programme_static(get_hltapps_sections('programmes'));
+}
+
+
+/**
+ * menu callback
+ * Function for generate Hltapps breakingnews static feed
+ */
+function itg_rss_breakingnews_feed() {
+  $type = array('breaking_news');
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->join('field_data_field_type', 'ft', 'ft.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+
+  $query->fields('n', array('nid', 'title', 'created', 'changed'));
+  $query->fields('ssi', array('field_story_small_image_fid'));
+  $query->condition('ft.field_type_value', 'Breaking News', '=');
+  $query->condition('n.status', 1);
+  $query->condition('n.type', $type, 'IN');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $xml = itg_genrate_samsungtv_it_breakingnews_syndication($result);
+  $xml_path = 'public://hltapps/';
+  $file_path = $xml_path . 'breakingnews.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
+}
+
+
+
+/**
  * 
  * @param int $section_id
  * @param string $file_name
@@ -723,7 +772,7 @@ function itg_rss_hltapps_livenow_listing_feed() {
     $fixed_section[] = $value['section'];
     $fixed_section_files[$value['section']] = $key;
   }
-  $programme_childs = get_childrens_from_tids(1206553);
+  $programme_childs = get_childrens_from_tids(get_hltapps_sections('programmes'));
   $xml = '<root>';
   $xml .= '<sectionid>1</sectionid>';
   $xml .= '<section><![CDATA[ live now on channel ]]></section>';
@@ -919,4 +968,102 @@ function genrate_msn_hlt_video_detail_xml($value, $section_id, $section_name, $v
   $fpd = fopen($file_path, "w");
   fwrite($fpd, $video_xml);
   fclose($fpd);
+}
+
+
+/**
+ * Function is used to generate static xml feed for hltapps homesectionslist
+ */
+
+function itg_generate_hltapps_static_feed_homesectionslist(){
+  $data = array();
+  $xml = theme('hltapps_homesectionslist', array('data' => $data));
+  $xml_path = 'public://hltapps/';
+  $file_path = $xml_path . 'homesectionslist.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+/**
+ * Function is used to generate static xml feed for hltapps homesectionslist
+ */
+
+function itg_generate_hltapps_static_feed_sectionslist(){
+  $data = array();
+  $xml = theme('hltapps_sectionslist', array('data' => $data));
+  $xml_path = 'public://hltapps/';
+  $file_path = $xml_path . 'sectionslist.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+/**
+ * Function is used to generate static xml feed for hltapps video sectionslist
+ */
+
+function itg_generate_hltapps_static_feed_video_sectionslist(){
+  $data = array();
+  $xml = theme('hltapps_video_sectionslist', array('data' => $data));
+  $xml_path = 'public://hltapps/videos/';
+  $file_path = $xml_path . 'sectionslist.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+/**
+ * Function is used to generate static xml feed for hltapps photo sectionslist
+ */
+
+function itg_generate_hltapps_static_feed_photo_sectionslist(){
+  $data = array();
+  $xml = theme('hltapps_photo_sectionslist', array('data' => $data));
+  $xml_path = 'public://hltapps/photos/';
+  $file_path = $xml_path . 'sectionslist.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+
+function itg_generate_hltapps_programme_static($section_id){
+  $sections = get_parent_category_name_by_tid($section_id);
+  global $base_url;
+  $fixed_sections = get_hltapps_sections('programme');
+  $fixed_section = array();
+  $fixed_section_files = array();
+  foreach ($fixed_sections as $key => $value) {
+    $fixed_section[] = $value['section'];
+    $fixed_section_files[$value['section']] = $key;
+  }
+  $programme_childs = get_childrens_from_tids($sections);
+  $xml = '<root>';
+  $xml .= '<id>1</id>';
+  $xml .= '<section><![CDATA[ programmes ]]></section>';
+  $xml .= '<sectioncount>' . count($programme_childs) . '</sectioncount>';
+  foreach ($programme_childs as $key => $value) {
+    if (!in_array($value['tid'], $fixed_section)) {
+      $file_name = slugify($value['name']) . '.xml';
+      itg_genrate_hltapps_programme_syndication($value['tid'], $file_name, 25);
+    }
+    else {
+      $file_name = $fixed_section_files[$value['tid']];
+    }
+    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $value['tid']);
+    $cat_img = get_image_info_by_fid($value['field_sponser_logo_fid']);
+    $xml .= '<item>';
+    $xml .= '<title><![CDATA[ ' . $value['name'] . ' ]]></title>';
+    $xml .= '<url>' . $file_name . '</url>';
+    $xml .= '<weburl><![CDATA[ ' . $cat_link . ' ]]></weburl>';
+    $xml .= '<sectionimage> ' . $cat_img['imag_url'] . ' </sectionimage>';
+    $xml .= '</item>';
+  }
+  $xml .= '</root>';
+  $xml_path = 'public://hltapps/videos/';
+  $file_path = $xml_path . 'programmes.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
 }

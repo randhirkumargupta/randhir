@@ -293,7 +293,49 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_dailyhunt_stories.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['hltapps/staticfeeds'] = array(
+    'page callback' => 'itg_rss_hltappsstaticfeeds',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/programme_static'] = array(
+    'page callback' => 'itg_rss_programme_static',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/breakingnews-feed'] = array(
+    'page callback' => 'itg_rss_breakingnews_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
+}
+
+/**
+ * hook_theme
+ * @return array
+ */
+function itg_syndication_clients_theme() {
+    return array(
+      'hltapps_homesectionslist' => array(
+        'template' => 'templates/hltapps_homesectionslist_template',
+      ),
+      'hltapps_sectionslist' => array(
+        'template' => 'templates/hltapps_sectionslist_template',
+      ),
+      'hltapps_video_sectionslist' => array(
+        'template' => 'templates/hltapps_video_sectionslist_template',
+      ),
+      'hltapps_photo_sectionslist' => array(
+        'template' => 'templates/hltapps_photo_sectionslist_template',
+      ),
+      'hltapps_photo_sectionslist' => array(
+        'template' => 'templates/hltapps_photo_sectionslist_template',
+      )
+    );
 }
 
 /**
@@ -379,6 +421,11 @@ function itg_syndication_clients_cronapi($op, $job = NULL) {
   return $items;
 }
 
+/**
+ * Function for generate slug from String
+ * @param string $text
+ * @return string
+ */
 function slugify($text) {
   $text = preg_replace('~&~', 'and', $text);
   $text = preg_replace('~[^\pL\d]+~u', '-', $text);
@@ -393,6 +440,11 @@ function slugify($text) {
   return $text;
 }
 
+/**
+ * Function is used to get term name by Tids
+ * @param int $tids
+ * @return boolean / array
+ */
 function get_terms_name_by_ids($tids = array()) {
   if (count($tids) <= 0)
     return FALSE;
@@ -404,6 +456,11 @@ function get_terms_name_by_ids($tids = array()) {
   return $result;
 }
 
+/**
+ * Function is used to get Image Detail by Fid
+ * @param int $fid
+ * @return array $image_data
+ */
 function get_image_info_by_fid($fid = NULL) {
   $image_data = array();
   if (!empty($fid)) {
@@ -424,6 +481,12 @@ function get_image_info_by_fid($fid = NULL) {
   return $image_data;
 }
 
+/**
+ * Function is used to get Image thumbnail
+ * @param int $fid
+ * @param string $style
+ * @return boolean / string
+ */
 function get_thumbnail_by_fid($fid = NULL, $style = NULL) {
   if (!empty($fid)) {
     $file_obj = file_load($fid);
@@ -438,6 +501,11 @@ function get_thumbnail_by_fid($fid = NULL, $style = NULL) {
   return FALSE;
 }
 
+/**
+ * Function is used to get Term name.
+ * @param int $tid
+ * @return string
+ */
 function get_term_name_by_tid($tid = NULL) {
   $tname = '';
   if (!empty($tid)) {
@@ -452,6 +520,11 @@ function get_term_name_by_tid($tid = NULL) {
   return $tname;
 }
 
+/**
+ * Function is used to get node City
+ * @param int $nid
+ * @return string
+ */
 function get_content_city($nid = NULL) {
   $city = '';
   if (!empty($nid)) {
@@ -468,6 +541,11 @@ function get_content_city($nid = NULL) {
   return $city;
 }
 
+/**
+ * Function is used to get Byline
+ * @param int $nid
+ * @return string
+ */
 function get_byline_by_nid($nid = NULL) {
   $city = '';
   if (!empty($nid)) {
@@ -484,6 +562,12 @@ function get_byline_by_nid($nid = NULL) {
   return $city;
 }
 
+/**
+ * Function is used to get node tags
+ * @param int $nid
+ * @param boolean $isStr
+ * @return array / string
+ */
 function get_content_tags($nid = NULL, $isStr = FALSE) {
   $tags = array();
   if (!empty($nid)) {
@@ -504,6 +588,11 @@ function get_content_tags($nid = NULL, $isStr = FALSE) {
   return $tags;
 }
 
+/**
+ * Function is used to get related content from node
+ * @param int $nid
+ * @return array $related_content
+ */
 function get_releted_content_by_nid($nid = NULL) {
   $related_content = array();
   if (!empty($nid)) {
@@ -526,17 +615,32 @@ function get_releted_content_by_nid($nid = NULL) {
   return $related_content;
 }
 
+/**
+ * Function is used to get node metatags
+ * @param int $nid
+ * @return boolean / array
+ */
 function get_node_metatags_by_nid($nid = NULL) {
-  if (empty($nid))
+  if (empty($nid)) {
     return FALSE;
+  }
   $result = db_select('metatag', 'mt')->fields('mt', array('data'))->condition('mt.entity_id', $nid, '=')->execute()->fetchAssoc();
   return $result;
 }
 
+/**
+ * Function is used to generate unique String
+ * @return String
+ */
 function genrate_uniqui_guid() {
   return md5(uniqid(rand(), true));
 }
 
+/**
+ * Function is used to get Node byline
+ * @param int $nid
+ * @return String
+ */
 function get_byline_name_by_nid($nid = NULL) {
   $byline = '';
   if (!empty($nid)) {
@@ -555,22 +659,26 @@ function get_byline_name_by_nid($nid = NULL) {
 
 /**
  * function for generate image xml tag
- *
- * @return array
+ * @param array $result
+ * @return string
  */
 function get_img_tag_detail($result) {
-  if (empty($result[field_story_medium_image_fid])){
+  if (empty($result[field_story_medium_image_fid])) {
     return empty_get_img_tag_detail();
   }
-
   $highres = get_image_info_by_fid($result['field_story_medium_image_fid']);
   $lowres = get_image_info_by_fid($result['field_story_small_image_fid']);
   $imgtag = "<bodyimages><image><lowres><![CDATA[" . $lowres['imag_url'] . "]]></lowres><highres><![CDATA[" . $highres['imag_url'] . "]]></highres><caption>" . $highres['caption'] . "</caption></image></bodyimages>";
   return $imgtag;
 }
 
-function get_video_embed_tags($body){
-  if(empty($body)){
+/**
+ * Function is used to get Video embed tags.
+ * @param array $body
+ * @return String
+ */
+function get_video_embed_tags($body) {
+  if (empty($body)) {
     return emptygetVideoTag();
   }
   $doc = new DOMDocument();
@@ -604,15 +712,15 @@ function get_video_embed_tags($body){
   }
   if ($src) {
     $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
-  }else{
-    $videotag = emptygetVideoTag();    
+  }
+  else {
+    $videotag = emptygetVideoTag();
   }
   return $videotag;
 }
 
 /**
  * function for generate Empty video xml tag
- *
  * @return array
  */
 function emptygetVideoTag() {
@@ -623,7 +731,6 @@ function emptygetVideoTag() {
 
 /**
  * function for generate comment xml tag
- *
  * @return array
  */
 function get_comment_xml_tag($nid) {
@@ -639,7 +746,6 @@ function get_comment_xml_tag($nid) {
   $comment_tag = "";
   $output = "";
   $comments_list = comment_get_thread($node, $mode, $comments_per_page);
-
   // writng comments tag
   foreach ($comments_list as $key => $value) {
     $cid = $value;
@@ -666,8 +772,7 @@ function get_comment_xml_tag($nid) {
 
 /**
  * function for generate Empty comment xml tag
- *
- *
+ * @return string
  */
 function emptyget_comment_xml_tag() {
   $commenttext = "";
@@ -677,29 +782,40 @@ function emptyget_comment_xml_tag() {
   $email = "";
   // writng comments tag
   $comment_tag .= "<comment><commenttext>" . $commenttext . "</commenttext><name>" . $name . "</name><createddate>" . $create_date . "</createddate><createddatetime>" . $create_datetime . "</createddatetime><email>" . $email . "</email></comment>";
-
   $output .= "<comments>";
   $output .= $comment_tag;
   $output .= "</comments>";
   return $output;
 }
 
+/**
+ * function for generate Empty comment xml tag
+ * @return string
+ */
 function get_empty_related_story_tag() {
   return "<story><title></title><url></url><thumbimage></thumbimage></story>";
 }
 
+/**
+ * function for generate Empty comment xml tag
+ * @return string
+ */
 function get_empty_related_video_tag() {
   return "<video><title></title><url></url><thumbimage></thumbimage></video>";
 }
 
+/**
+ * function for generate Empty comment xml tag
+ * @return string
+ */
 function get_empty_related_photo_tag() {
   return "<photo><title></title><url></url><thumbimage></thumbimage></photo>";
 }
 
 /**
  * common function for return related content node type
- *
  * @return array
+ * @pram $node_list
  * @pram $type
  */
 function related_content_node_type($node_list = "", $type) {
@@ -767,24 +883,27 @@ function related_content_node_type($node_list = "", $type) {
     $count++;
   }
   $type_ar['nid'] = $related_ar;
-  if(empty($related_story_xml)){
+  if (empty($related_story_xml)) {
     $type_ar['related_story_xml'] = get_empty_related_story_tag();
-  }else{
+  }
+  else {
     $type_ar['related_story_xml'] = $related_story_xml;
   }
-  
-  if(empty($related_photo_xml)){
+
+  if (empty($related_photo_xml)) {
     $type_ar['related_photo_xml'] = get_empty_related_photo_tag();
-  }else{
+  }
+  else {
     $type_ar['related_photo_xml'] = $related_photo_xml;
   }
-  
-  if(empty($related_video_xml)){
+
+  if (empty($related_video_xml)) {
     $type_ar['related_video_xml'] = get_empty_related_video_tag();
-  }else{
+  }
+  else {
     $type_ar['related_video_xml'] = $related_video_xml;
   }
-  
+
   return $type_ar;
 }
 
@@ -870,6 +989,11 @@ function dailymotion_download_video_uri($video_id) {
   return $result[0]['field_video_url_value'];
 }
 
+/**
+ * Function is to get node favorite status
+ * @param type $nid
+ * @return string
+ */
 function get_nid_is_favorite($nid) {
   $flag = "";
   $result = db_select('field_data_field_featured', 'ffd')->fields('ffd', array('field_featured_value'))->condition('ffd.entity_id', $nid, '=')->execute()->fetchAssoc();
@@ -885,7 +1009,6 @@ function get_nid_is_favorite($nid) {
 /**
  * function get nid is syndications
  * @pram $tid
- *
  * @return type
  */
 function get_nid_is_syndications($nid) {
@@ -904,17 +1027,22 @@ function get_nid_is_syndications($nid) {
 
 /**
  * function for generate Empty image xml tag
- *
- *
+ * @return string
  */
 function empty_get_img_tag_detail() {
   $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
   return $imgtag;
 }
 
+/**
+ * Function is used to get Video Transcoding 
+ * @param int $nid
+ * @return array
+ */
 function get_itg_video_transcoding($nid) {
-  if (empty($nid))
+  if (empty($nid)) {
     return '';
+  }
   $query = db_select('itg_video_transcoding', 'tra');
   $query->fields('tra', array('file_size', 'video_duration'));
   $query->condition('tra.nid', $nid);
@@ -922,6 +1050,10 @@ function get_itg_video_transcoding($nid) {
   return $result;
 }
 
+/**
+ * function is used get error xml
+ * @return string
+ */
 function not_found_syndication_xml() {
   $xml = '<Error>
       <Code>' . t('AccessDenied') . '</Code>
@@ -930,6 +1062,11 @@ function not_found_syndication_xml() {
   return $xml;
 }
 
+/**
+ * function is used to get parent category name
+ * @param int $tid
+ * @return string
+ */
 function get_parent_category_name_by_tid($tid = NULL) {
   $tname = '';
   $query = db_select('taxonomy_term_data', 'ttd');
@@ -967,7 +1104,11 @@ function get_all_associated_photos($nid) {
   return $result;
 }
 
-
+/**
+ * Function is used to get term description
+ * @param int $tid
+ * @return string
+ */
 function get_term_description_by_tid($tid = NULL) {
   $tdescription = '';
   if (!empty($tid)) {
@@ -980,4 +1121,100 @@ function get_term_description_by_tid($tid = NULL) {
     }
   }
   return $tdescription;
+}
+
+
+/**
+ * function is used to get parent category name
+ * @param int $tid
+ * @return string
+ */
+function get_all_children_by_tid($tid = NULL) {
+  $tname = '';
+  $query = db_select('taxonomy_term_data', 'ttd');
+  $query->leftJoin('taxonomy_term_hierarchy', 'tth', 'tth.parent = ttd.tid');
+  $query->fields('ttd', array('name'));
+  $query->condition('tth.tid', $tid);
+  $result = $query->execute()->fetchAll();
+  if (count($result) > 0) {
+    $tname = $result[0]->name;
+  }
+  return $tname;
+}
+
+/**
+ * 
+ * @param array $result
+ * @return string
+ */
+function itg_genrate_samsungtv_it_breakingnews_syndication($result) {
+  if (!empty($result)) {
+
+    $xml = '<Root>';
+    $xml .= get_samsung_breaking_news_lists($result);
+    $xml .= '</Root>';
+    return $xml;
+  }
+}
+
+/**
+ * 
+ * @param array $result
+ * @return string
+ */
+function get_samsung_breaking_news_lists($result) {
+  $result = $result[0];
+  $nid = $result['nid'];
+  $query = db_select('field_data_field_breaking_content_details', 'bcd');
+  $query->leftJoin('field_data_field_breaking_tile', 'bt', '(bt.entity_id = bcd.field_breaking_content_details_value)');
+  $query->leftJoin('field_data_field_breaking_publish_time', 'bpt', '(bpt.entity_id = bcd.field_breaking_content_details_value)');
+
+  $query->fields('bt', array('field_breaking_tile_value'));
+  $query->fields('bpt', array('field_breaking_publish_time_value'));
+
+  $query->condition('bcd.entity_id', $nid, '=');
+  $query->condition('bcd.bundle', 'breaking_news', '=');
+  $query->condition('bcd.entity_type', 'node', '=');
+  $query->condition('bt.bundle', 'field_breaking_content_details', '=');
+  $query->condition('bt.entity_type', 'field_collection_item', '=');
+  $query_result = $query->execute()->fetchAll();
+  if (count($query_result) <= 0) {
+    return "<item>
+          <enable>0</enable>
+          <id/>
+          <title/>
+          <credit/>
+          <createddate/>
+          <createdtime/>
+          <city/>
+          <courtesy/>
+          <thumbimage/>
+          <longdescription/>
+          </item>";
+  }
+
+
+  $breaking_xml = '';
+  $publish_date = date("D, j M Y H:i", $result['created']);
+  $small_img = get_image_info_by_fid($result['field_story_small_image_fid']);
+  foreach ($query_result as $value) {
+    $time = '';
+    if (!empty($value->field_breaking_publish_time_value)) {
+      $time = date("H.i A", strtotime($value->field_breaking_publish_time_value)) . '>>';
+    }
+    $breaking_xml .= '<item>';
+    $breaking_xml .= '<enable>1</enable>';
+    $breaking_xml .= '<id>' . $nid . '</id>';
+    $breaking_xml .= '<title>' . $value->field_breaking_tile_value . '</title>';
+    $breaking_xml .= '<credit></credit>';
+    $breaking_xml .= '<createddate>' . $publish_date . '</createddate>';
+    $breaking_xml .= '<createdtime>' . $time . '</createdtime>';
+    $breaking_xml .= '<city></city>';
+    $breaking_xml .= '<courtesy></courtesy>';
+    $breaking_xml .= '<thumbimage>' . $small_img["imag_url"] . '</thumbimage>';
+    $breaking_xml .= '<longdescription></longdescription>';
+    $breaking_xml .= '</item>';
+  }
+
+  return $breaking_xml;
 }
