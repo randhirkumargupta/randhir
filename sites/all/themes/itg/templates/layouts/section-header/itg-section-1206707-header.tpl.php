@@ -4,7 +4,7 @@ $theme_path = drupal_get_path('theme', 'itg');
 $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images/'
 
 ?>
-<div id="section-header-event-1206707" class="india-today-woman-summit">
+<div id="section-header-event-1206707" class="india-today-woman-summit clearfix">
     <div class="header-ads header_ltop_container">
         <div class="container">
           <div class="row">
@@ -59,29 +59,24 @@ $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images
     </div>         
   </nav>
 
+</div> 
 </div>
-
-<div class="event-add-header">
+<div class="add-header">
                 
 <?php 
  
    $block = block_load('itg_ads', ADS_HEADER);
    $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
    print render($render_array);
-						  
+              
   ?>
-  </div>   
-</div>
-
+  </div>
 <style>
 /*=========Only For This TPL Css Start*/
-#section-header-event-1206707{ margin-top:-20px;float: left; width: 100%; background: #ffd0f6;}
-
-
-
-/*=========Only For This TPL Css End*/
-
-.page-node-986777 header{ clear: both;overflow: hidden; }
+.page-node-986777 header:after { content: "."; display: block;height: 0; clear: both;visibility: hidden;}
+#section-header-event-1206707{ margin-top:-20px;width: 100%; background: #ffd0f6;}
+#block-itg-ads-ads-super-banner-top-nav-728x90--2 {text-align: center; padding-top: 10px;margin-bottom: 10px;}
+.page-node-986777 header{ clear: both; }
 #section-header-event-1206707{ padding:36px 0 0px}
 #section-header-event-1206707 .main_logo img{max-width: inherit;}
 #section-header-event-1206707 .main_logo{ text-align: left}
@@ -94,50 +89,31 @@ $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images
 #section-header-event-1206707 .header-logo{ display: none}
 #section-header-event-1206707 .navigation__event{ margin-top:10px; background:#000}
 #section-header-event-1206707 .navigation__event .menu{ margin-left:30px;max-width: 100%; list-style:none; margin:0;width: 75%; display: inline-block;}
-#section-header-event-1206707 .navigation__event .flashback-menu{ float: right; position: relative; list-style:none;}
+#section-header-event-1206707 .navigation__event .flashback-menu{ float: right; position: relative; list-style:none; display: block;}
 #section-header-event-1206707 .navigation__event .menu li{ position: relative; display: inline-block;  list-style:none;}
 #section-header-event-1206707 .navigation__event .menu li a{ display: block; padding:0 20px;}
 #section-header-event-1206707 .navigation__event .menu li a:after{ display: none}
 #section-header-event-1206707 .navigation__event .menu li a{ color:#fff; line-height:45px;font-size: 16px; font-weight: normal}
-#section-header-event-1206707 .navigation__event .flashback-menu li ul{ display: none; position: absolute; top:42px; left:-215px;  background:#000; z-index: 55555;list-style:none; width:300px; max-width:300px; height:100%;max-height:100%; overflow:visible;}
+#section-header-event-1206707 .navigation__event .flashback-menu li ul{ display: none; position: absolute; top:42px; left:-215px;  background:#000; z-index: 55555;list-style:none; width:300px; max-width:300px;max-height:100%; overflow:visible;}
 #section-header-event-1206707 .navigation__event .flashback-menu li a{ line-height: 45px; font-size: 16px; font-weight: normal;}
 #section-header-event-1206707 .navigation__event .flashback-menu li:hover ul{ display: block}
 #section-header-event-1206707 .navigation__event .flashback-menu li ul li{ list-style: none; float: left; width:100%; box-sizing: border-box; padding:5px; display: block;border-bottom: 1px solid #ccc;}
 .block-itg-ads > div{ width:768px; margin: 0 auto }
 /*Humbarger Menu*/
-.mobileHumbarger {
-   display: none;
-    cursor: pointer;
-	 margin-top:5px;
-}
-
-.bar1, .bar2, .bar3 {
-    width: 35px;
-    height: 5px;
-    background-color: #fff;
-    margin: 6px 0;
-    transition: 0.4s;
-}
-
-.change .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
-    transform: rotate(-45deg) translate(-9px, 6px) ;
-}
-
+.mobileHumbarger {display: none;cursor: pointer;margin-top:5px;}
+.bar1, .bar2, .bar3 { width: 35px; height: 5px; background-color: #fff; margin: 6px 0; transition: 0.4s;}
+.change .bar1 { -webkit-transform: rotate(-45deg) translate(-9px, 6px) ; transform: rotate(-45deg) translate(-9px, 6px) ;}
 .change .bar2 {opacity: 0;}
-
-.change .bar3 {
-    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
-    transform: rotate(45deg) translate(-8px, -8px) ;
-}
-#section-header-event-1206707  .mobile-nav{ display: none; }
-
+.change .bar3 { -webkit-transform: rotate(45deg) translate(-8px, -8px) ;transform: rotate(45deg) translate(-8px, -8px) ;}
+#section-header-event-1206707 .mobile-nav{ display: none; }
+#section-header-event-1206707 #block-menu-menu-event-menu ul li ul{max-height: 500px; overflow: visible;}
+#section-header-event-1206707 .navigation__event .flashback-menu li ul li a{ line-height:22px; font-size:15px; }
 @media only screen and (max-width:1024px){
 #section-header-event-1206707 .navigation__event{ display: block}
 #section-header-event-1206707 .navigation__event .menu{ margin-left:0px;}
 #section-header-event-1206707 .navigation__event .menu li{ width: auto;border-bottom: 1px solid #4a4646;}
 #section-header-event-1206707 .navigation__event .menu li ul li a{ font-size:14px; line-height:30px; height:30px; padding:0; border-top:0px;}
-	
+.block-itg-ads > div{ width:100%; text-align: center; }
 }
 
 
@@ -164,6 +140,10 @@ $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images
 #section-header-event-1206707 .navigation__event .menu li{ border:0px;}
 #section-header-event-1206707 .navigation__event .menu{ position: relative}
 #section-header-event-1206707  .mobile-nav{color: #fff;font-size: 26px;height: 40px; line-height: 40px; display: block;}
+#section-header-event-1206707 .navigation__event .flashback-menu{ position: absolute; right:15px; top:0px; }
+#section-header-event-1206707 .navigation__event .flashback-menu li a{ line-height:37px; }
+#section-header-event-1206707 .navigation__event .flashback-menu li ul{ top:40px; left:-173px; }
 }
 
+/*=========Only For This TPL Css End*/
 </style>
