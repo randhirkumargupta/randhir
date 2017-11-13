@@ -57,7 +57,6 @@ function fbpop(overrideLink, overrideTitle, overrideDescription, overrideImage, 
     },
     function (response) {
         var front_uid = Drupal.settings.itg_flag.settings.uid;
-        console.log(response);
         jQuery.ajax({
                 //url: base_url + '/earn-loyalty-point/' + node_id + '/share',
                 url: base_url + '/fb-share-callback/' + node_id + '/' + front_uid,
@@ -374,7 +373,6 @@ jQuery(document).ready(function () {
                     }
                     if (obj.loggedin == 'true') {
                       var uri = Drupal.settings.baseUrl.baseUrl+'/post-ugc-content';
-                      console.log(uri);
                       window.location.href = uri;
                     }
                 }
