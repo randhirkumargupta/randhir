@@ -12,6 +12,21 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
           <span class="show-less"><i class="fa fa-times"></i></span>
         </h2>
         <ul class="header-menu">
+            <li class="search-section-amp">
+                <form method="GET"
+                      class="search-form"
+                      action=<?php print $search_url; ?>
+                      target="_top">
+                    <input type="search"
+                           placeholder="Search..."
+                           name="search">
+                    <input type="submit" name="submitlogin"
+                           value="OK"
+                           class="ampstart-btn caps">
+                    <a href="#" class="search" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>
+                </form>
+            </li>
+
           <?php
           $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
           // Contion to check fucntion isset.
@@ -41,6 +56,15 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
                 $url_type = $menu_link_data['url_type'];
                 $style_tag = '';
                 $color_value = '';
+                $icon_path = $menu_link_data['icon_path'];
+
+                if (!empty($icon_path)) {
+                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img class='itg-user-icon' width='48' height='32' src='" . file_create_url($icon_path) . "'  /></span>";
+                } else {
+                  $default_image = $base_url . '/sites/all/themes/itg/images/default_for_all_48_32.jpeg';
+                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img class='itg-user-icon' width='48' height='32' src=$default_image alt='' /></span>";
+                }
+                $link_text = $link_text_icon . $menu_link_data['link_title_for_vertical'];
                 if (!empty($sponsored_class)) {
                   $color_value = $menu_data['db_data']['bk_color'];
                 }
