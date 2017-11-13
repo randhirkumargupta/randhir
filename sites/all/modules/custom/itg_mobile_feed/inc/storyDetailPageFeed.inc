@@ -264,6 +264,9 @@ function getImgTag($node) {
   $imgtag = "";
   $src = "";
   $img_caption_val = "";
+  $story_large_fid = $node->field_story_large_image_fid['und'][0]['fid'];
+  $story_large_img = completeFilePath($story_large_fid);
+  
 
   $html = $node->body['und']['0']['value'];
   $doc = new DOMDocument();
@@ -278,32 +281,18 @@ function getImgTag($node) {
   $node = $nodelist->item(0);
   if ($node->attributes->length > 0) {
     //It has img
-    //echo "andy"; die();
+    
     $src = $node->attributes->getNamedItem('src')->nodeValue;
-    p($node); die();
+  
     //$img_caption_val = getStringBetween($html, '<div class="body_caption">', '</div>');
   }
   
   if ($src) {
     $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
+  }else{
+    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $story_large_img . "]]></lowres><highres><![CDATA[" . $story_large_img . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
   }
   return $imgtag;
 }
 
-function getImgTag_bk($node) {
-    module_load_include('php','itg_rapid_api', 'inc/simple_html_dom');
-    $imgtag = "";
-    $src = "";
-    $img_caption_val = "";
-    $html = $node->body['und']['0']['value'];
-    $str_html = str_get_html($html);
-    $tvalue = "div[class=itgimage]";
-    $node_str = "";
-    $node_ar = array();
-    foreach ($str_html->find($tvalue) as $element) {
-        echo $element;
-        die();
-    } if ($src) {
-        $imgtag = "" . $img_caption_val . "";
-    } return $imgtag;
-}
+
