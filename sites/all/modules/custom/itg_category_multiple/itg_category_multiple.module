@@ -225,7 +225,14 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
         '#validated' => TRUE,
         '#options' => $itg_primary_category,
         '#default_value' => $default_value_of_primary_cat,
-      );
+      );      
+      if (($form_id == 'photogallery_node_form') || ($form_id == 'videogallery_node_form') && (!empty($itg_primary_category))) {
+        foreach ($itg_primary_category as $option_id => $option_val) {
+          if (strpos($option_val, 'Photo') !== false || strpos($option_val, 'Videos') !== false) {
+            $form['category_holder']['itg_primary_category']['#option_attributes'] [$option_id] = array('disabled' => 'true');
+          }
+        }
+      }
       // Hiding story extra field 
       if (isset($form['field_story_extra_data'][LANGUAGE_NONE][0]['value']['#type'])) {
         $form['field_story_extra_data'][LANGUAGE_NONE][0]['value']['#type'] = 'hidden';
@@ -313,6 +320,13 @@ function itg_category_multiple_after_build($form, &$form_state) {
     $itg_primary_category = get_parent_structure_by_for_all(array_filter($complete_structure));
     $form['category_holder']['itg_primary_category']['#options'] = $itg_primary_category;
   }
+  if (($form['#id'] == 'photogallery-node-form') || ($form['#id'] == 'videogallery-node-form') && (!empty($itg_primary_category))) {
+    foreach ($itg_primary_category as $option_id => $option_val) {
+      if (strpos($option_val, 'Photo') !== false || strpos($option_val, 'Videos') !== false) {
+        $form['category_holder']['itg_primary_category']['#option_attributes'] [$option_id] = array('disabled' => 'true');
+      }
+    }
+  }
   drupal_add_js(drupal_get_path('module', 'itg_category_multiple') . '/js/itg_category_multiple.js', array('scope' => 'footer'));
   return $form;
 }
@@ -382,6 +396,7 @@ function get_categoryies_by_tid($tids) {
  * @return string
  */
 function get_parent_structure_by_tid($tids) {
+  global $all_tid_arr;
   if (function_exists('mongodb')) {
     $con = mongodb();
     $primaryhtml = '';
@@ -393,6 +408,8 @@ function get_parent_structure_by_tid($tids) {
         $new_tids = get_categoryies_send_for_convert_to_int($tids);
         $category_data = $people->find(array("tid" => array('$in' => $new_tids)));
         foreach ($category_data as $chunk_data) {
+          $parent_tid = end($chunk_data['parent_data']);
+          $all_tid_arr[$chunk_data['tid']] = $parent_tid['tid'];
           $return_data_chunk[$chunk_data['tid']] = get_parent_complete_structure($chunk_data['parent_data']);
         }
         $primaryhtml = get_parent_structure_in_ordered($new_tids, $return_data_chunk);
@@ -476,9 +493,17 @@ function get_categoryies_send_for_convert_to_int($tids) {
  * @return string $html
  */
 function get_parent_structure_in_ordered($tids, $return_data_chunk) {
+  global $all_tid_arr;
   $html = '';
+  $photo_sectionid = variable_get('tid_photogallery', 1208521);
+  $video_sectionid = variable_get('tid_videos', 1206552);
+  $node_form_id = $_POST['node_form_id'];
   foreach ($tids as $key => $chunk_val) {
-    $html.='<option value="' . $chunk_val . '">' . $return_data_chunk[$chunk_val] . '</option>';
+    $is_disable = '';
+    if ((($node_form_id == 'photogallery-node-form') || ($node_form_id == 'videogallery-node-form')) && (($all_tid_arr[$chunk_val] === $photo_sectionid) || ($all_tid_arr[$chunk_val] === $video_sectionid))) {
+      $is_disable = 'disabled = disabled';
+    }
+    $html.='<option ' . $is_disable . ' value="' . $chunk_val . '">' . $return_data_chunk[$chunk_val] . '</option>';
   }
   return $html;
 }
