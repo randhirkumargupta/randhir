@@ -12,7 +12,9 @@ function itg_bsb_photo_syndication() {
 }
 
 /**
- * menu callback for bsb story syndication
+ * function is used to generate BSB story xml
+ * @param int $section_id
+ * @param string $file_name
  */
 function itg_genrate_bsb_photo_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
@@ -39,6 +41,14 @@ function itg_genrate_bsb_photo_syndication($section_id = NULL, $file_name) {
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param int $section_id
+ * @param string $section_name
+ * @return string
+ */
 function genrate_bsb_photo_syndication_xml($result = NULL, $section_id, $section_name) {
   $xml = '';
   if (!empty($result)) {
@@ -65,12 +75,20 @@ function genrate_bsb_photo_syndication_xml($result = NULL, $section_id, $section
   return $xml;
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param int $nid
+ * @param string $title
+ * @param int $section_id
+ * @param string $section_name
+ * @param string $photo_detail_file_name
+ */
 function generate_photo_detail_xml($nid, $title, $section_id, $section_name, $photo_detail_file_name) {
   global $base_url;
 
   $gallery_img_fc = get_all_associated_photos($nid);
   $image_count = count($gallery_img_fc);
-  
   $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
   $photo_xml .= '<Root>';
   $photo_xml .= '<idgallery>' . $nid . '</idgallery>';
@@ -79,8 +97,6 @@ function generate_photo_detail_xml($nid, $title, $section_id, $section_name, $ph
   $photo_xml .= '<section>' . $section_name . '</section>';
   $photo_xml .= '<totalpics>' . $image_count . '</totalpics>';
   $photo_xml .= '<weburl><![CDATA[' . $content_url . ']]></weburl>';
-
- 
   foreach ($gallery_img_fc as $photo) {
     $byline = $photo['title'];
     $large_image = '';
@@ -91,7 +107,6 @@ function generate_photo_detail_xml($nid, $title, $section_id, $section_name, $ph
     if (!empty($photo['field_photo_small_image_fid'])) {
       $small_image = get_image_info_by_fid($photo['field_photo_small_image_fid']);
     }
-
     $photo_xml .= '<item>';
     $photo_xml .= '<imageid>' . $photo['field_gallery_image_value'] . '</imageid>';
     $photo_xml .= '<image><![CDATA[' . $small_image['imag_url'] . ']]></image>';
@@ -107,4 +122,3 @@ function generate_photo_detail_xml($nid, $title, $section_id, $section_name, $ph
   fwrite($fp, $photo_xml);
   fclose($fp);
 }
-

@@ -2,14 +2,16 @@
 
 /**
  * @file
- * The ITG Syndication clients for BSB Story
+ * The ITG Syndication
  */
 function itg_rss_newsfromindiatoday_syndication() {
   itg_genrate_newsfromindiatoday_syndication(1206578, 'newsfromindiatoday.xml');
 }
 
 /**
- * menu callback for bsb story syndication
+ * Function for generate newsfromindiatoday feed
+ * @param int $section_id
+ * @param string $file_name
  */
 function itg_genrate_newsfromindiatoday_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
@@ -25,10 +27,10 @@ function itg_genrate_newsfromindiatoday_syndication($section_id = NULL, $file_na
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
-	
+
     $query->condition('ti.tid', $section_id, '=');
-	  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
-    
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
@@ -51,6 +53,13 @@ function itg_genrate_newsfromindiatoday_syndication($section_id = NULL, $file_na
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $category
+ * @return string
+ */
 function genrate_bsb_story_syndication_xml($result = NULL, $category) {
   $xml = '';
   if (!empty($result)) {
@@ -71,15 +80,15 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
       $xml .= '<description><![CDATA[' . $value['field_story_short_headline_value'] . ']]></description>';
-      $xml .= '<ContentItem Href="'.$small_img['imag_url'].'"><![CDATA[ <MediaType FormalName="Picture" /> <MimeType FormalName="image/jpg"/><Property FormalName="caption" value="'.$small_img["caption"].'"/>]]></ContentItem>';
+      $xml .= '<ContentItem Href="' . $small_img['imag_url'] . '"><![CDATA[ <MediaType FormalName="Picture" /> <MimeType FormalName="image/jpg"/><Property FormalName="caption" value="' . $small_img["caption"] . '"/>]]></ContentItem>';
       $xml .= '<revision_number>1</revision_number>';
       $xml .= '<pubdate><![CDATA[' . $publish_date . ']]></pubdate>';
       $xml .= '<story_id><![CDATA[' . $value['nid'] . ']]></story_id>';
       $xml .= '<headline><![CDATA[' . $value['field_story_short_headline_value'] . ']]></headline>';
       $xml .= '<abstract><![CDATA[' . $kicker_text . ']]></abstract>';
       $xml .= '<keywords><![CDATA[' . $keyword . ']]></keywords>';
-      $xml .= '<subject_matter><![CDATA[' . $value['field_story_short_headline_value'] . ']]></subject_matter>';      
-      $xml .= '<body><![CDATA[' . $body . ']]></body>';      
+      $xml .= '<subject_matter><![CDATA[' . $value['field_story_short_headline_value'] . ']]></subject_matter>';
+      $xml .= '<body><![CDATA[' . $body . ']]></body>';
       $xml .= '<image_caption><![CDATA[' . $medium_img['caption'] . ']]></image_caption>';
       $xml .= '<short_caption><![CDATA[' . $small_img['caption'] . ']]></short_caption>';
       $xml .= '<story_type><![CDATA[Picture]]></story_type>';

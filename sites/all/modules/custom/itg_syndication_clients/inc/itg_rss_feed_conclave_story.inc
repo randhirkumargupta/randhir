@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Function for GEnerate Conclave story feed
+ * @global string $base_url
+ */
 function itg_rss_conclave_story_syndication() {
   global $base_url;
   $sid = 1206584; // need to change conclave category
@@ -34,6 +38,14 @@ function itg_rss_conclave_story_syndication() {
   fclose($fp);
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param int $sid
+ * @param string $section_name
+ * @return string
+ */
 function get_rss_conclave_story_sid_xml($result, $sid, $section_name) {
   $xml = '';
   if (!empty($result)) {
@@ -44,12 +56,12 @@ function get_rss_conclave_story_sid_xml($result, $sid, $section_name) {
     $xml .= '<atom:link type="application/rss+xml" rel="self" href="http://feeds.intoday.in/xml/conclave/stories/conclave_story.xml"/>';
     $xml .= '<title>India Today - Jio</title>';
     $xml .= '<link>http://conclave.intoday.in/</link>';
-    $xml .= '<description>Conclave updates from '.$base_url.' for Jio </description>';
+    $xml .= '<description>Conclave updates from ' . $base_url . ' for Jio </description>';
     $xml .= '<language>en-gb</language><copyright></copyright><docs>http://conclave.intoday.in/</docs>';
     $xml .= '<image>';
     $xml .= '<title>India Today - Jio</title>';
     $xml .= '<link>http://conclave.intoday.in/</link>';
-    $xml .= '<url>'.$logo.'</url>';
+    $xml .= '<url>' . $logo . '</url>';
     $xml .= '</image>';
     foreach ($result as $key => $value) {
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
@@ -57,12 +69,12 @@ function get_rss_conclave_story_sid_xml($result, $sid, $section_name) {
       $kicker_text = $value['field_story_kicker_text_value'];
       $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
       $xml .= '<item>';
-      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';     
+      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
       $xml .= '<guid><![CDATA[' . $url . ']]></guid>';
       $xml .= '<pubDate><![CDATA[' . $pub_date . ']]></pubDate>';
-      $xml .= '<media:content url="'.$large_img["imag_url"].'" medium="image" height="350" width="225"></media:content>';
+      $xml .= '<media:content url="' . $large_img["imag_url"] . '" medium="image" height="350" width="225"></media:content>';
       $xml .= '</item>';
     }
     $xml .= '</channel>';

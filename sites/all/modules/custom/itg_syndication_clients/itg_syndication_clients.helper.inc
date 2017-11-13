@@ -4,6 +4,11 @@
  * @file
  * The ITG Syndication clients for store configuration
  */
+
+/**
+ * Function is used to get BSB Story tids and File
+ * @return array
+ */
 function getbsb_client_array() {
   $story = array(
     '1206584' => 'indiatoday_stories.xml',
@@ -37,6 +42,10 @@ function getbsb_client_array() {
   return $story;
 }
 
+/**
+ * Function is used to get BSB Photo tids and File
+ * @return array
+ */
 function getbsb_client_photo_array() {
   $photo = array(
     '1208655' => 'cinema-superfast-photos.xml',
@@ -44,6 +53,10 @@ function getbsb_client_photo_array() {
   return $photo;
 }
 
+/**
+ * Function is used to get BSB Video tids and File
+ * @return array
+ */
 function getbsb_client_video_array() {
   $video = array(
     '1206552' => 'video_latest.xml',
@@ -58,6 +71,10 @@ function getbsb_client_video_array() {
   return $video;
 }
 
+/**
+ * Function is used to get Yahoo tids and File
+ * @return array
+ */
 function getindiatoday_yahoo_client_array() {
   $yahoo_story = array(
     'ids' => array(1206533, 1206567, 1206688, 1206689, 1206572, 1206578),
@@ -66,6 +83,10 @@ function getindiatoday_yahoo_client_array() {
   return $yahoo_story;
 }
 
+/**
+ * Function is used to get Yahoo video tids and File
+ * @return array
+ */
 function getindiatoday_yahoo_client_sections() {
   $video = array(
     'top' => 'top-indiatoday-20170407.xml',
@@ -76,10 +97,14 @@ function getindiatoday_yahoo_client_sections() {
   return $video;
 }
 
+/**
+ * Function is used to get msn story tids and File
+ * @return array
+ */
 function getmsn_story_section_array() {
   $msn_story = array(
     'msn/indiatoday/story-travel.xml' => 1206589,
-    'msn/indiatoday/story-food.xml'  => 1206793,
+    'msn/indiatoday/story-food.xml' => 1206793,
     'msn/indiatoday/story-lifestyle.xml' => 1206567,
     'msn/indiatoday/story-cricket.xml' => 1206676,
     'msn/indiatoday/latest-news.xml' => 1206578,
@@ -112,6 +137,10 @@ function getmsn_story_section_array() {
   return $msn_story;
 }
 
+/**
+ * Function is used to get Cabbytabby Video tids and File
+ * @return array
+ */
 function get_cabbytabby_feed_videos_array() {
   $cabbytabby_feed_videos = array(
     '1207580' => 'sosorry.xml'
@@ -119,6 +148,10 @@ function get_cabbytabby_feed_videos_array() {
   return $cabbytabby_feed_videos;
 }
 
+/**
+ * Function is used to get Ola tids and File
+ * @return array
+ */
 function get_ola_feed_videos_array() {
   $cabbytabby_feed_videos = array(
     '1207580' => 'sosorry.xml'
@@ -126,6 +159,10 @@ function get_ola_feed_videos_array() {
   return $cabbytabby_feed_videos;
 }
 
+/**
+ * Function is used to get Dekho Video tids and File
+ * @return array
+ */
 function get_dekkho_feed_videos_array() {
   $video_sectios = array(
     '1207304' => 'lifestyle.xml',
@@ -141,6 +178,10 @@ function get_dekkho_feed_videos_array() {
   return $video_sectios;
 }
 
+/**
+ * Function is used to get Proquest Story tids and File
+ * @return array
+ */
 function getproquest_feed_story_client_array() {
   $story_sectios = array(
     '1206578' => 'india.xml',
@@ -155,6 +196,10 @@ function getproquest_feed_story_client_array() {
   return $story_sectios;
 }
 
+/**
+ * Function is used to get Dailyhunt story tids and File
+ * @return array
+ */
 function get_dailyhunt_sections_for_feed() {
   $story_sectios = array(
     '1206599' => 'celebrities.xml',
@@ -170,6 +215,7 @@ function get_dailyhunt_sections_for_feed() {
     '1207249' => 'supplementshyderabad.xml',
     '1206947' => 'supplementsmumbai.xml',
     '1206942' => 'supplementsspice.xml',
+    '1206499' => 'supplementshome.xml',
     '1206688' => 'technology.xml',
     '1206796' => 'television.xml',
     '1206577' => 'world.xml',
@@ -178,6 +224,10 @@ function get_dailyhunt_sections_for_feed() {
   return $story_sectios;
 }
 
+/**
+ * Function is used to get Video Elephant Video tids and File
+ * @return array
+ */
 function get_videoelephant_feed_videos_array() {
   $story_sectios = array(
     '1207304' => 'lifestyle.xml',
@@ -192,6 +242,10 @@ function get_videoelephant_feed_videos_array() {
   return $story_sectios;
 }
 
+/**
+ * Function is used to get Hltapps tids and File
+ * @return array
+ */
 function get_hltapps_sections($type) {
   switch ($type) {
     case 'story':
@@ -202,6 +256,7 @@ function get_hltapps_sections($type) {
         'world.xml' => '1206577',
         'sports.xml' => '1206550',
         'business.xml' => '1206574',
+        'so-sorry.xml' => '1709237',
         'election.xml' => '1206719'
       );
       break;
@@ -292,9 +347,16 @@ function get_hltapps_sections($type) {
         'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
         'entertainment.xml' => array('section' => '1206952', 'limit' => 15)
       );
+      break;
+    case 'programmes':
+      return 1206553;
   }
 }
 
+/**
+ * Function is used to get VUClip Video tids and File
+ * @return array
+ */
 function get_vuclip_sections() {
   return array(
     'videsectionlist_program_sosorry.xml' => array('section' => '1207580', 'limit' => 25),
@@ -304,6 +366,10 @@ function get_vuclip_sections() {
   );
 }
 
+/**
+ * Function is used to get Mauj Video tids and File
+ * @return array
+ */
 function get_mauj_sections() {
   return array(
     'videsectionlist_world.xml' => array('section' => '1206956', 'limit' => 25),
@@ -313,6 +379,10 @@ function get_mauj_sections() {
   );
 }
 
+/**
+ * Function is used to get Samsung Video tids and File
+ * @return array
+ */
 function get_samsungtv_it_sections() {
   return array(
     'india.xml' => array('section' => 1206955, 'limit' => 25),
@@ -322,12 +392,20 @@ function get_samsungtv_it_sections() {
   );
 }
 
+/**
+ * Function is used to get Samsung Video tids and File
+ * @return array
+ */
 function get_samsungtv_it_live_now_sections() {
   return array(
     1206958, 1206971, 1206967, 1206961, 1206963, 1206965, 1206968, 1206960
   );
 }
 
+/**
+ * Function is used to get Election 2017 tids and File
+ * @return array
+ */
 function get_elections2017_election_finals_sections() {
   return array(
     '1208078' => 'UP',
@@ -338,6 +416,10 @@ function get_elections2017_election_finals_sections() {
   );
 }
 
+/**
+ * Function is used to get Micromax Video tids and File
+ * @return array
+ */
 function get_micromax_videsectionlist_sections() {
   return array(
     'videsectionlist_sosorry.json' => array('section' => '1207580', 'limit' => 25),
@@ -347,8 +429,11 @@ function get_micromax_videsectionlist_sections() {
   );
 }
 
-
-function getelections2016_westbenga_sections(){
+/**
+ * Function is used to get Electio 2017 Video tids and File
+ * @return array
+ */
+function getelections2016_westbenga_sections() {
   return array(
     1206846 => 'assemblyelections2016-westbengal.xml'
   );

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Function for generate static xml feed
+ */
 function itg_rss_feed_static_syndication() {
   genrate_static_indiatoday_event_main();
   genrate_static_indiatoday_versioncontrol_android();
@@ -15,8 +18,11 @@ function itg_rss_feed_static_syndication() {
   genrate_static_assembly_election_2015_photos();
 }
 
-function genrate_static_assembly_election_2015_photos(){
-$xml = <<<XML
+/**
+ * Generate elections-16302-photos.xml feed
+ */
+function genrate_static_assembly_election_2015_photos() {
+  $xml = <<<XML
     <Root>
 <idsection>16302</idsection>
 <section>elections</section>
@@ -44,25 +50,32 @@ http://indiatoday.intoday.in/gallery/bihar-elections-jdu-supporters-celebrate-th
 </gallery>
 </Root>
 XML;
-$xml_path = 'public://elections/assembly_election_2015/elections-16302-photos.xml';
-  $fp = fopen($xml_path, "w");
-  fwrite($fp, $xml);
-  fclose($fp);
-}
-function genrate_static_msn_stories_columns(){
-$xml = <<<XML
-<rss xmlns:media="http://www.msn.com/en-in/" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
-<channel></channel>
-</rss>
-XML;
-$xml_path = 'public://msn/stories/columns-msn.xml';
+  $xml_path = 'public://elections/assembly_election_2015/elections-16302-photos.xml';
   $fp = fopen($xml_path, "w");
   fwrite($fp, $xml);
   fclose($fp);
 }
 
+/**
+ * Generate columns-msn.xml static feed
+ */
+function genrate_static_msn_stories_columns() {
+  $xml = <<<XML
+<rss xmlns:media="http://www.msn.com/en-in/" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel></channel>
+</rss>
+XML;
+  $xml_path = 'public://msn/stories/columns-msn.xml';
+  $fp = fopen($xml_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
+}
+
+/**
+ * function for generate static railway-budget-msn.xml
+ */
 function genrate_static_msn_stories_railway_budget() {
-$xml = <<<XML
+  $xml = <<<XML
 <rss xmlns:media="http://www.msn.com/en-in/" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><item><title><![CDATA[
 You may have to pay more for rail journeys. Here's why
 ]]></title><link>
@@ -79,15 +92,17 @@ Union Budget 2017-18, speedy train journeys, rail fare, Gatimaan Express, Rajdha
 ]]></keywords><media:content url="http://media2.intoday.in/btmt/images/stories/railway-ap21_660_020217013854.jpg" type="image/jpg"/><media:thumbnail url="http://media2.intoday.in/btmt/images/stories/railway-ap21_80_020217013854.jpg" type="image/jpg"/><category>railway-budget</category></item></channel></rss>
 XML;
 
-$xml_path = 'public://msn/stories/railway-budget-msn.xml';
- $fp = fopen($xml_path, "w");
- fwrite($fp, $xml);
- fclose($fp);
+  $xml_path = 'public://msn/stories/railway-budget-msn.xml';
+  $fp = fopen($xml_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
 }
-    
-    
-function genrate_static_indiatoday_assembly_election_2015_stories(){
-$xml = <<<XML
+
+/**
+ * Function is for elections-stories.xml feed
+ */
+function genrate_static_indiatoday_assembly_election_2015_stories() {
+  $xml = <<<XML
     <Root><idsection>264</idsection><section>Elections</section><totalarticle>25</totalarticle><start_index>0</start_index><end_index>25</end_index><item><storyid>527639</storyid><headline><![CDATA[
 Nitish sworn in as Bihar CM, Lalu's sons join his jumbo ministry
 ]]></headline><credit><![CDATA[ IndiaToday.in ]]></credit><date>2015-11-20T16:58:43+05:30</date><city><![CDATA[ New Delhi ]]></city><courtesy><![CDATA[ ]]></courtesy><kicker><![CDATA[
@@ -493,6 +508,9 @@ XML;
   fclose($fp);
 }
 
+/**
+ * Function for generate elections-videos.xml feed
+ */
 function genrate_static_indiatoday_assembly_election_2015_videos() {
   $xml = "<Root><idsection>1087</idsection><section>bihar polls 2015</section><totalvideos>25</totalvideos><start_index>0</start_index><end_index>25</end_index><item><title>
 Famous father, unknown son: Nitish junior talks to India Today
@@ -675,6 +693,9 @@ http://feeds.intoday.in/elections/assembly_election_2015/elections-519311-videos
   fclose($fp);
 }
 
+/**
+ * Function for generate static xml
+ */
 function genrate_static_indiatoday_assembly_election_2015_photos() {
   $xml = "<Root><idsection>117</idsection><section>elections</section><totalgalleries>25</totalgalleries><start_index>0</start_index><end_index>25</end_index><gallery><galleryid>16378</galleryid><title><![CDATA[ Nitish Kumar sworn-in as Bihar Chief Minister ]]></title><url>
   http://feeds.intoday.in/elections/assembly_election_2015/elections-16378-photos.xml
@@ -765,6 +786,9 @@ function genrate_static_indiatoday_assembly_election_2015_photos() {
   fclose($fp);
 }
 
+/**
+ * Function for generate aboutus xml static
+ */
 function genrate_static_indiatoday_aboutus() {
   $xml = "<Root>
           <item>
@@ -789,6 +813,9 @@ function genrate_static_indiatoday_aboutus() {
   fclose($fp);
 }
 
+/**
+ * Function is for generate Ads_ad xml static
+ */
 function genrate_static_indiatoday_ads_ad() {
   $xml = "<Root>
           <ads>
@@ -809,6 +836,9 @@ function genrate_static_indiatoday_ads_ad() {
   fclose($fp);
 }
 
+/**
+ * Function is for generate COntact us static feed
+ */
 function genrate_static_indiatoday_contactus() {
   $xml = "<Root>
           <item>
@@ -830,6 +860,9 @@ function genrate_static_indiatoday_contactus() {
   fclose($fp);
 }
 
+/**
+ * Function for generate version control xml static
+ */
 function genrate_static_indiatoday_versioncontrol_iphone() {
   $xml = "<response>
         <content>
@@ -847,6 +880,9 @@ function genrate_static_indiatoday_versioncontrol_iphone() {
   fclose($fp);
 }
 
+/**
+ * Function for generate android version control xml
+ */
 function genrate_static_indiatoday_versioncontrol_android() {
   $xml = "<response>
           <content>
@@ -864,6 +900,9 @@ function genrate_static_indiatoday_versioncontrol_android() {
   fclose($fp);
 }
 
+/**
+ * Function for event static xml
+ */
 function genrate_static_indiatoday_event_main() {
   $xml = "<xml>
           <event>

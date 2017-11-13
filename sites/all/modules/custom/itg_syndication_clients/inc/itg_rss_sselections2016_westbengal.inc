@@ -2,18 +2,19 @@
 
 /**
  * @file
- * The ITG Syndication clients for BSB Story
+ * The ITG Syndication clients for westbengal election
  */
 function itg_rss_rsselections2016_westbengal_syndication() {
   $sections = getelections2016_westbenga_sections();
   foreach ($sections as $key => $value) {
     itg_genrate_rsselections2016_westbengal_syndication($key, $value);
   }
-  
 }
 
 /**
- * menu callback for bsb story syndication
+ * Function for generate ections2016 westbengal xml feed
+ * @param int $section_id
+ * @param string $file_name
  */
 function itg_genrate_rsselections2016_westbengal_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
@@ -25,10 +26,10 @@ function itg_genrate_rsselections2016_westbengal_syndication($section_id = NULL,
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
-	
+
     $query->condition('ti.tid', $section_id, '=');
-	  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
-    
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('smi', array('field_story_medium_image_fid'));
@@ -48,16 +49,24 @@ function itg_genrate_rsselections2016_westbengal_syndication($section_id = NULL,
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param int $section_id
+ * @param string $section_name
+ * @return string
+ */
 function genrate_rsselections2016_westbengal_syndication_xml($result = NULL, $section_id, $section_name) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
     $xml = '<Root>';
-    $xml .= '<idsection>'.$section_id.'</idsection>';
-    $xml .= '<section>'.$section_name.'</section>';
-    $xml .= '<totalarticle>'.count($result).'</totalarticle>';
+    $xml .= '<idsection>' . $section_id . '</idsection>';
+    $xml .= '<section>' . $section_name . '</section>';
+    $xml .= '<totalarticle>' . count($result) . '</totalarticle>';
     $xml .= '<start_index>0</start_index>';
-    $xml .= '<end_index>'.count($result).'</end_index>';
+    $xml .= '<end_index>' . count($result) . '</end_index>';
     foreach ($result as $key => $value) {
       $publish_date = date("M d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $create_datetime = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));

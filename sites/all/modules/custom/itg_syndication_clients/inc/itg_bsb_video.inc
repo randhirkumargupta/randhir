@@ -12,11 +12,13 @@ function itg_bsb_video_syndication() {
 }
 
 /**
- * menu callback for bsb story syndication
+ * Function is used to generate BSB video xml
+ * @param int $section_id
+ * @param string $file_name
  */
 function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
-    $section_name = 'Latest Videos';//get_terms_name_by_ids(array($section_id));
+    $section_name = 'Latest Videos'; //get_terms_name_by_ids(array($section_id));
 //    $section_name = $section_name[0]['name'];
     $type = array('videogallery');
     $query = db_select('node', 'n');
@@ -27,8 +29,6 @@ function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
     $query->leftJoin('field_data_field_primary_category', 'pc', 'pc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_courtesy', 'sc', 'sc.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
-
-
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('smi', array('field_story_medium_image_fid'));
     $query->fields('ssi', array('field_story_small_image_fid'));
@@ -52,12 +52,19 @@ function itg_genrate_bsb_video_syndication($section_id = NULL, $file_name) {
   }
 }
 
+/**
+ * 
+ * @param array $result
+ * @param int $section_id
+ * @param string $category
+ * @return string
+ */
 function genrate_bsb_video_syndication_xml($result = NULL, $section_id, $category) {
   $xml = '';
   $xml .= '<Root>';
   $xml .= '<idsection>1</idsection>';
-  $xml .= '<section>'.$category.'</section>';
-  $xml .= '<totalvideos>'.count($result).'</totalvideos>';
+  $xml .= '<section>' . $category . '</section>';
+  $xml .= '<totalvideos>' . count($result) . '</totalvideos>';
 
   if (!empty($result)) {
     $xml .= '<start_index>0</start_index>';
@@ -94,6 +101,16 @@ function genrate_bsb_video_syndication_xml($result = NULL, $section_id, $categor
   return $xml;
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $section_id
+ * @param string $category
+ * @param string $filename
+ * @param array $small_img
+ * @param array $related
+ */
 function genrate_video_detail_xml($result, $section_id, $category, $filename, $small_img, $related) {
 
   global $base_url;
@@ -126,7 +143,7 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $video_xml .= '<mediaid></mediaid><uurl></uurl>';
   $source_type = $result['field_story_source_type_value'];
   $videotag = video_detail_formats($nid, $source_type);
-  
+
   if (!empty($videotag['migrated'])) { //migrated video
     $video_xml .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
   }
@@ -152,9 +169,7 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   else {
     $video_xml .= get_empty_related_story_tag();
   }
-
   $video_xml .= '</stories>';
-
   $video_xml .= '<photos>';
   if (!empty($related['related_photo_xml'])) {
     $video_xml .= $related['related_photo_xml'];
@@ -162,9 +177,7 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   else {
     $video_xml .= get_empty_related_photo_tag();
   }
-
   $video_xml .= '</photos>';
-
   $video_xml .= '<videos>';
 
   if (!empty($related['related_video_xml'])) {
@@ -178,12 +191,10 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $video_xml .= '</related>';
   $video_xml .= get_comment_xml_tag($nid);
   $video_xml .= '</Root>';
-  
+
   $xml_path = 'public://bsb/videos/';
   $file_path = $xml_path . $filename;
   $fp = fopen($file_path, "w");
   fwrite($fp, $video_xml);
   fclose($fp);
 }
-
-

@@ -4,6 +4,10 @@
  * @file
  * The ITG Syndication clients for Hltapps
  */
+
+/**
+ * Menu callback
+ */
 function itg_rss_elections2017_election_finals_feed() {
   $sections = get_elections2017_election_finals_sections();
   $xml = '';
@@ -26,11 +30,14 @@ function itg_rss_elections2017_election_finals_feed() {
 }
 
 /**
- * menu callback for Hltapps story syndication
+ * 
+ * @param int $section_id
+ * @param string $section_name
+ * @return string
  */
 function itg_genrate_elections2017_election_finals_syndication($section_id = NULL, $section_name) {
   $xml_d = '';
-  if (!empty($section_id)) {    
+  if (!empty($section_id)) {
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
@@ -65,12 +72,20 @@ function itg_genrate_elections2017_election_finals_syndication($section_id = NUL
   return $xml_d;
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param string $category
+ * @param int $section_id
+ * @return string
+ */
 function genrate_elections2017_election_finals_xml($result = NULL, $category, $section_id) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
     $xml = '<state>';
-    $xml .= '<name>'.$category.'</name>';
+    $xml .= '<name>' . $category . '</name>';
     foreach ($result as $key => $value) {
       $nid = $value['nid'];
       $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $value["nid"]);
@@ -84,13 +99,18 @@ function genrate_elections2017_election_finals_xml($result = NULL, $category, $s
       $xml .= '</nlink>';
       genrate_elections2017_election_finals_detail_xml($value, $category, $xml_story_file, $section_id);
     }
-    $xml .= '<tally>'. get_state_tally($category).'</tally>';
+    $xml .= '<tally>' . get_state_tally($category) . '</tally>';
     $xml .= '</state>';
   }
   return $xml;
 }
 
-function get_state_tally($state){
+/**
+ * function used to get static xml url
+ * @param string $state
+ * @return string
+ */
+function get_state_tally($state) {
   switch ($state) {
     case 'UP':
       return 'http://electionresults.intoday.in/elections/2017/xml/party-tally/uttar_pradesh-assembly-party-tally-itapp.xml';
@@ -112,6 +132,14 @@ function get_state_tally($state){
   }
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $value
+ * @param string $category
+ * @param string $xml_story_file
+ * @param int $section_id
+ */
 function genrate_elections2017_election_finals_detail_xml($value, $category, $xml_story_file, $section_id) {
   global $base_url;
   $date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
@@ -131,7 +159,7 @@ function genrate_elections2017_election_finals_detail_xml($value, $category, $xm
   $xml_detail .= '<headline><![CDATA[ ' . $value["title"] . ' ]]></headline>';
   $xml_detail .= '<credit><![CDATA[ ' . $byline . ' ]]></credit>';
   $xml_detail .= '<date> ' . $date . '</date>';
-  $xml_detail .= '<datetime> ' . $publish_date . ' </datetime>'; 
+  $xml_detail .= '<datetime> ' . $publish_date . ' </datetime>';
   $xml_detail .= '<city><![CDATA[' . $place . ' ]]></city>';
   $xml_detail .= '<courtesy><![CDATA[' . $courtesy . ' ]]></courtesy>';
   $xml_detail .= '<body><![CDATA[' . $body . ' ]]></body>';

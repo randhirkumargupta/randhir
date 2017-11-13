@@ -4,6 +4,11 @@
  * @file
  * The ITG Syndication clients for MSN Photo
  */
+
+/**
+ * menu callback
+ * Function for generate msn photo feed
+ */
 function itg_rss_msn_photos_feed() {
   $type = array('photogallery');
   $query = db_select('node', 'n');
@@ -27,7 +32,12 @@ function itg_rss_msn_photos_feed() {
   fclose($fp);
 }
 
-
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @return string
+ */
 function genrate_msn_photo_syndication_xml($result = NULL) {
   $xml = '';
   if (!empty($result)) {
@@ -47,8 +57,8 @@ function genrate_msn_photo_syndication_xml($result = NULL) {
       $xml .= '<largeimage><![CDATA[' . $large_img['imag_url'] . ']]></largeimage>';
       $xml .= '<caption><![CDATA[' . $large_img['caption'] . ']]></caption>';
       $xml .= '<create_datetime>' . $created_date . '</create_datetime>';
-      $xml .= '<galleries>'. get_msn_photo_gallery_xml($nid).'</galleries>';
-      $xml .= '<weburl><![CDATA[' . $url . ']]></weburl>'; 
+      $xml .= '<galleries>' . get_msn_photo_gallery_xml($nid) . '</galleries>';
+      $xml .= '<weburl><![CDATA[' . $url . ']]></weburl>';
       $xml .= '</item>';
     }
     $xml .= '</Root>';
@@ -56,6 +66,11 @@ function genrate_msn_photo_syndication_xml($result = NULL) {
   return $xml;
 }
 
+/**
+ * Function for get xml tag of photo
+ * @param int $nid
+ * @return string
+ */
 function get_msn_photo_gallery_xml($nid) {
   $photo_xml = '';
   $gallery_img_fc = get_all_associated_photos($nid);
@@ -63,7 +78,7 @@ function get_msn_photo_gallery_xml($nid) {
     $small_image = '';
     if (!empty($photo['field_photo_small_image_fid'])) {
       $small_image = get_image_info_by_fid($photo['field_photo_small_image_fid']);
-    }    
+    }
     $photo_xml .= '<gallery>';
     $photo_xml .= '<image><![CDATA[' . $small_image['imag_url'] . ']]></image>';
     $photo_xml .= '<caption><![CDATA[' . $photo['field_image_caption_value'] . ']]></caption>';
@@ -71,4 +86,3 @@ function get_msn_photo_gallery_xml($nid) {
   }
   return $photo_xml;
 }
-

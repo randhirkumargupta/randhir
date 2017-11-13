@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * unction for Generate Article xml feed
+ * @global string $base_url
+ */
 function itg_rss_article() {
   global $base_url;
   $sid = (isset($_GET['sid']) ? $_GET['sid'] : 1206584); // other wise top story section
@@ -31,6 +35,14 @@ function itg_rss_article() {
   drupal_exit();
 }
 
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @param int $sid
+ * @param string $section_name
+ * @return string
+ */
 function get_rss_feed_from_sid_xml($result, $sid, $section_name) {
   $xml = '';
   if (!empty($result)) {
