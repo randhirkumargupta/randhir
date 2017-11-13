@@ -777,10 +777,16 @@ function _related_story_left_block_content() {
     $related_result = itg_get_related_story_id($related_content);
   }
   if(!empty($related_result)) {
-  $related_story = '<h3>Related</h3>';
-  $related_story.= "<div class='row'><ul>";
+  //$related_story = '<h3>Related</h3>';
+  //$related_story.= "<div class='row'><ul>";
   $i = 0;
+  $counter = 0;
   foreach ($related_result as $site_hash_key) {
+    if ($counter == 0) {
+        $related_story = '<h3>'.t('Related').'</h3>';
+        $related_story.= "<div class='row'><ul>";
+      }
+      ++$counter;
     $current_entity_id = $site_hash_key;
     $related_data = itg_get_related_story_content($current_entity_id);
     if (!empty($related_data)) {
@@ -828,10 +834,14 @@ function _related_story_bottom_block_content() {
     $related_result = itg_get_related_story_id($related_content);
   }
   if (!empty($related_result)) {
-    $related_story = '<h3><span>Related</span></h3>';
-    $related_story.= "<div class='row'><ul>";
     $i = 0;
+    $counter = 0;
     foreach ($related_result as $site_hash_key) {
+      if ($counter == 0) {
+        $related_story = '<h3><span>'.t('Related').'</span></h3>';
+        $related_story.= "<div class='row'><ul>";
+      }
+      ++$counter;
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
       if (!empty($related_data)) {

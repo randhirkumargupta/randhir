@@ -40,6 +40,8 @@ function mongodb($alias = 'default') {
       throw $e;
     }
   }
+  watchdog('mongo1', '<pre>' . print_r($mongo_objects) .'<pre>');
+  watchdog('mongo2', '<pre>' . print_r($mongo_objects[$host][$db]) .'<pre>');
   return $mongo_objects[$host][$db];
 }
 
