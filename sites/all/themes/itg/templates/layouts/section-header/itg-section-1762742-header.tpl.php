@@ -106,6 +106,8 @@ $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images
 
 			$menu_manager = !empty($data['data']['menu_manager']) ? $data['data']['menu_manager'] : '';
 
+			echo '<a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a>';
+
 			print  drupal_render(menu_tree_output($menu_manager));        
 
 		}
