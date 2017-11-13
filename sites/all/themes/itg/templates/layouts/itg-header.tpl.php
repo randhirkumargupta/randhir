@@ -84,10 +84,10 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
               $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
               // Contion to check fucntion isset.
               $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
-              $default_image = $base_url . '/sites/all/themes/itg/images/default_for_all_48_32.jpeg';
+              $default_image = drupal_get_path('theme', 'itg').'/images/default_for_all_48_32.jpeg';
               ?>
                 <li class="nav-items ripple-effect hidden-desktop">
-                    <a href="<?php print $base_url ?>" class="second-level-child">
+                    <a href="<?php print $base_url ?>" class="second-level-child">`
                         <span class='menu-icons hidden-desktop'><img class='itg-user-icon-home' src="<?php print $default_image ?>" alt='' /></span>
                         <?php print t('Home'); ?>
                     </a>
