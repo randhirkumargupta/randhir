@@ -75,7 +75,7 @@ $conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
 $conf['mongodb_connections'] = array(
   'default' => array(
     //'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo',
-    'host' => 'mongodb://itoday_write1:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo',// uat
+    'host' => 'mongodb://itoday_write:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo',// uat
     'db' => 'itgcmsmongo',
     'connection_options' => array('replicaSet' => 'uatreplica'),
   ),
