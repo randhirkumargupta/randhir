@@ -273,11 +273,12 @@ function getImgTag($node) {
   $xpath = new DOMXPath($doc);
   // find your image
   $nodelist = $xpath->query("//img");
-  p($nodelist);die();
+  
   // gets the 1st image
   $node = $nodelist->item(0);
   if ($node->attributes->length > 0) {
     //It has img
+      echo "andy"; die();
     $src = $node->attributes->getNamedItem('src')->nodeValue;
     //$img_caption_val = getStringBetween($html, '<div class="body_caption">', '</div>');
   }
