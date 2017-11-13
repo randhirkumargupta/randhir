@@ -335,6 +335,7 @@ function itg_story_add_byline_popup($ajax) {
 function itg_story_create_breaking_news() {
   global $user;
   $title = $_POST['title'];
+  $publish_time = date('Y-m-d H:i');
   $node = new stdClass();
   $node->title = $title;
   $node->type = "breaking_news";
@@ -353,6 +354,7 @@ function itg_story_create_breaking_news() {
   $field_collection_item->setHostEntity('node', $node);
   $field_collection_item->field_breaking_tile[LANGUAGE_NONE][0]['value'] = $title;
   $field_collection_item->field_mark_as_breaking_band[LANGUAGE_NONE][0]['value'] = '1';
+  $field_collection_item->field_breaking_publish_time[LANGUAGE_NONE][0]['value'] = $publish_time;
   $field_collection_item->save();
   node_save($node);
 
