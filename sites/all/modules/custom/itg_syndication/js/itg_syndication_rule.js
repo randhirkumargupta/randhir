@@ -16,7 +16,6 @@
     // Our function name is prototyped as part of the Drupal.ajax namespace, adding to the commands:
     Drupal.ajax.prototype.commands.syndication_rules_section_update = function (ajax, response, status) {
 //    alert(response);
-        console.log(response.selectedValue);
         //alert(response.selectedValue.length);
         jQuery("#" + response.selector_id + " select").html(response.selectedValue);
 //        jQuery.each(response.selectedValue, function () {

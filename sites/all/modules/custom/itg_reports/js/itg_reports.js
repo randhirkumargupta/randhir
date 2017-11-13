@@ -203,7 +203,6 @@ jQuery(document).ready(function () {
             var dateParts = selected.split("-");
             var dt = new Date(dateParts[1] + '/' + dateParts[0] + '/' + dateParts[2]);
             dt.setDate(dt.getDate());
-            console.log(dt);
             jQuery("#views-exposed-form-section-wiser-breakup-report-page #edit-week1-date-to").datepicker("option", "minDate", dt);
         }
     });
@@ -219,7 +218,6 @@ jQuery(document).ready(function () {
             var dateParts = selected.split("-");
             var dt = new Date(dateParts[1] + '/' + dateParts[0] + '/' + dateParts[2]);
             dt.setDate(dt.getDate());
-            console.log(dt);
             jQuery("#views-exposed-form-section-wiser-breakup-report-page #edit-week2-date-from").datepicker("option", "minDate", dt);
         }
     });
@@ -235,7 +233,6 @@ jQuery(document).ready(function () {
             var dateParts = selected.split("-");
             var dt = new Date(dateParts[1] + '/' + dateParts[0] + '/' + dateParts[2]);
             dt.setDate(dt.getDate());
-            console.log(dt);
             jQuery("#views-exposed-form-section-wiser-breakup-report-page #edit-week2-date-to").datepicker("option", "minDate", dt);
         }
     });
@@ -305,7 +302,6 @@ jQuery(document).ready(function () {
         // Handle case for select if not clicked on range1 from date.
         beforeShow: function (input, inst) {
             var selected = jQuery("#edit-rg1-date-from").val();
-            console.log(selected);
             var dt = new Date(selected);
             dt.setDate(dt.getDate() + 1);
             // assign +1 selected date to range2 from date popup calender.
