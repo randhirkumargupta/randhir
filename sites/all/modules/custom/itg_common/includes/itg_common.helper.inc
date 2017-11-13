@@ -76,7 +76,8 @@ define('ITG_SUPPORT_EMAIL', 'support@indiatoday.in');
 define('ITG_IMAGE_FOLDER', 'indiatoday/images/');
 define('ITG_NEWSLETTER_EMAIL', 'care@intoday.in');
 define('ITG_NEWSLETTER_FROMNAME', 'India Today');
-
+define('JWPLAYER_DFP_TAG','https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]');
+define('ITG_GA_CODE', 'UA-795349-17');
 
 
 /**
@@ -111,6 +112,21 @@ define('FRONT_THEME_NAME', 'itg');
 define('AMP_THEME_NAME', 'amptheme');
 define('EXTRA_SECTION_CARDS', 21);
 define('SECTION_TAB', 20);
+$extra_large_image_style = array('photgallery_landing_slider_753x543', 'big_story_widget' ,'photo_slider_753x543', 'image_750x363', 'photogallery_slide');
+define('EXTRA_LARGE_IMAGE_STYLES', $extra_large_image_style);
+
+$large_image_style = array('magazine_top_story_483x271');
+define('LARGE_IMAGE_STYLES', $large_image_style);
+
+$medium_image_style = array('home_page_feature_small', 'section_ordering_widget' , 'anchors_landing', 'magazine_top_three_story_237x133');
+define('MEDIUM_IMAGE_STYLES', $medium_image_style);
+
+$small_image_style = array('image170x127' , 'video_landing_page_170_x_127');
+define('SMALL_IMAGE_STYLES', $small_image_style);
+
+$small_extra_image_style = array('widget_very_small' , 'image88x66scale' , 'photo_landing_slider_thumb_88_86' );
+define('SMALL_EXTRA_IMAGE_STYLES', $small_extra_image_style);
+
 //define('CATEGORY_MANAGMENT', 4);
 define('CATEGORY_MANAGMENT', variable_get('category_manager_vid'));
 define('CITY_MANAGMENT', variable_get('city_manager_vid'));
@@ -122,7 +138,7 @@ define('VIDEO_MAIN_URL', 'http://medias3d.intoday.in');
 define('VIDEO_BITRATE_URL', 'http://indiatoday-vh.akamaihd.net/i');
 define('VIDEO_PROPERTY', variable_get('video_property'));
 define('NEWSLETTER_EDUCATION_TID', variable_get('newsletter_education_tid'));
-define('SITEMAP_BUCKET', variable_get('itg_sitemap_chunks_s3_bucket_folder_name' , 'sitemapxml_other'));
+define('SITEMAP_BUCKET', variable_get('itg_sitemap_chunks_s3_bucket_folder_name', 'sitemapxml_other'));
 define('PARENT_SSO', variable_get('parent_sso'));
 define('FRONT_URL_VIDEO', variable_get('FRONT_URL_VIDEO'));
 define('FRONT_URL', variable_get('itg_front_url'));
