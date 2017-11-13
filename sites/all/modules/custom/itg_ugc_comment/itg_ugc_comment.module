@@ -367,6 +367,7 @@ function getmycomments($data) {
 function totalcomments($page_id) {
   if (function_exists('mongodb')) {
     $con = mongodb();
+    echo '$'.$con.'$';
     if (isset($con)) {
     echo '@@@';
     exit;
