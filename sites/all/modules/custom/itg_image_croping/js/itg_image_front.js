@@ -58,8 +58,6 @@ var mTimer=null;
 
                     },
                     error: function(xhr, desc, err) {
-                        console.log(xhr);
-                        console.log("Details: " + desc + "\nError:" + err);
                     }
                 });
             } else {
@@ -128,8 +126,6 @@ var mTimer=null;
                      hideloader();
                     },
                     error: function(xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
                     }
                     }); 
           

@@ -33,7 +33,6 @@
                     var email = get_param;
                     var post = "&email=" + email+ "&otp=" + otp+ "&source=reset";
                 }
-               console.log(otp);
                if (get_param != '') {
                     $("#forgototpclickme").text("Resend OTP");
                     
