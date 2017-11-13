@@ -206,16 +206,18 @@ function itg_registered_user_display_report($user_id) {
       // Get nodes which use is visited.
       if (function_exists('mongodb')) {
         $con = mongodb();
-        $people = $con->pagedetails;
-        // Handle case from current date.
-        $date_from = strtotime('-1 day' , $_GET['date_from']);
-        $date_to = strtotime('+1 day' , $_GET['date_to']);
-        $condition = array(
-          'viewtime' => array('$gte' => (int) $date_from , '$lte' => (int) $date_to) ,
-          'uid' => $user_id ,
-          'section' => (string) $personalized_term ,
-        );
-        $views_nodes['under_personalized_section'][$personalized_term] = $people->find($condition)->count();
+        if (isset($con)) {
+          $people = $con->pagedetails;
+          // Handle case from current date.
+          $date_from = strtotime('-1 day', $_GET['date_from']);
+          $date_to = strtotime('+1 day', $_GET['date_to']);
+          $condition = array(
+            'viewtime' => array('$gte' => (int) $date_from, '$lte' => (int) $date_to),
+            'uid' => $user_id,
+            'section' => (string) $personalized_term,
+          );
+          $views_nodes['under_personalized_section'][$personalized_term] = $people->find($condition)->count();
+        }
       }
     }
 
@@ -226,25 +228,26 @@ function itg_registered_user_display_report($user_id) {
     //Get nodes which is not under personalized sections.
     if (function_exists('mongodb')) {
       $con = mongodb();
-      $people = $con->pagedetails;
-      // Handle case from current date.
-      $date_from = strtotime('-1 day' , $_GET['date_from']);
-      $date_to = strtotime('+1 day' , $_GET['date_to']);
-      $condition = array(
-        'viewtime' => array('$gte' => (int) $date_from , '$lte' => (int) $date_to) ,
-        'uid' => $user_id ,
-        'section' => array(
-          '$nin' => $personalized_section ,
-        ) ,
-      );
-      $result_data = $people->find($condition);
+      if (isset($con)) {
+        $people = $con->pagedetails;
+        // Handle case from current date.
+        $date_from = strtotime('-1 day', $_GET['date_from']);
+        $date_to = strtotime('+1 day', $_GET['date_to']);
+        $condition = array(
+          'viewtime' => array('$gte' => (int) $date_from, '$lte' => (int) $date_to),
+          'uid' => $user_id,
+          'section' => array(
+            '$nin' => $personalized_section,
+          ),
+        );
+        $result_data = $people->find($condition);
 
-      foreach ($result_data as $mongo_result) {
-        $counter['other_personalized_section'][$mongo_result['section']][] = $mongo_result['nid'];
-        $views_nodes['other_personalized_section'][$mongo_result['section']] = sizeof($counter['other_personalized_section'][$mongo_result['section']]);
+        foreach ($result_data as $mongo_result) {
+          $counter['other_personalized_section'][$mongo_result['section']][] = $mongo_result['nid'];
+          $views_nodes['other_personalized_section'][$mongo_result['section']] = sizeof($counter['other_personalized_section'][$mongo_result['section']]);
+        }
       }
     }
-
     // Chart to display nodes viewed by users.
     //if ($_GET['report_type'] == 'personalized') {
     $chart = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>';
