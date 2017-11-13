@@ -278,8 +278,9 @@ function getImgTag($node) {
   $node = $nodelist->item(0);
   if ($node->attributes->length > 0) {
     //It has img
-      echo "andy"; die();
+    //echo "andy"; die();
     $src = $node->attributes->getNamedItem('src')->nodeValue;
+    p($node); die();
     //$img_caption_val = getStringBetween($html, '<div class="body_caption">', '</div>');
   }
   
