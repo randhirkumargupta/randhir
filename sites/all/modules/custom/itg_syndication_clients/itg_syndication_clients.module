@@ -41,6 +41,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_msn_feed_story.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['feeds/msnfeeds/staticstory'] = array(
+    'page callback' => 'itg_rss_msnstaticfeeds',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_msn_feed_story.inc',
+    'type' => MENU_CALLBACK,
+  );
   $items['rssfeeds/cabbytabby/videos'] = array(
     'page callback' => 'itg_cabbytabby_feed_videos_syndication',
     'access arguments' => array('access content'),
@@ -343,6 +349,18 @@ function itg_syndication_clients_theme() {
       ),
       'hltapps_static_bb_ad' => array(
         'template' => 'templates/hltapps_static_bb_ad_template',
+      ),
+      'hltapps_static_api_livetv' => array(
+        'template' => 'templates/hltapps_static_api_livetv_template',
+      ),
+      'hltapps_static_api' => array(
+        'template' => 'templates/hltapps_static_api',
+      ),
+      'msn_static_stories_what_to_expect' => array(
+        'template' => 'templates/msn_static_stories_what_to_expect',
+      ),
+      'msn_static_stories_top_news' => array(
+        'template' => 'templates/msn_static_stories_top_news',
       )
     );
 }

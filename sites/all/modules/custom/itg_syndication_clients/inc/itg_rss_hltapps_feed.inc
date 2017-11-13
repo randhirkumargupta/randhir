@@ -84,6 +84,8 @@ function itg_rss_hltappsstaticfeeds() {
   itg_generate_hltapps_static_feed_livetv_text();
   itg_generate_hltapps_static_feed_playbook_ad();
   itg_generate_hltapps_static_feed_bb_ad();
+  itg_generate_hltapps_static_api_livetv();
+  itg_generate_hltapps_static_api();
 }
 
 /**
@@ -1074,6 +1076,39 @@ function itg_generate_hltapps_static_feed_bb_ad() {
   fwrite($fpd, $xml);
   fclose($fpd);
 }
+
+/**
+ * Function is used to generate static xml feed for hltapps api livetv
+ */
+function itg_generate_hltapps_static_api_livetv() {
+  $data = array();
+  $xml = theme('hltapps_static_api_livetv', array('data' => $data));
+  $xml_path = 'public://hltapps/api/';
+  $file_path = $xml_path . 'livetv.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+/**
+ * Function is used to generate static xml feed for hltapps api
+ */
+function itg_generate_hltapps_static_api() {
+  $data = array();
+  $xml = theme('hltapps_static_api', array('data' => $data));
+  $xml_path = 'public://hltapps/';
+  $file_path = $xml_path . 'api.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+
+/**
+ * Function for generate progamme feed
+ * @global string $base_url
+ * @param int $section_id
+ */
 
 function itg_generate_hltapps_programme_static($section_id) {
   $sections = get_parent_category_name_by_tid($section_id);

@@ -215,6 +215,7 @@ function get_dailyhunt_sections_for_feed() {
     '1207249' => 'supplementshyderabad.xml',
     '1206947' => 'supplementsmumbai.xml',
     '1206942' => 'supplementsspice.xml',
+    '1206499' => 'supplementshome.xml',
     '1206688' => 'technology.xml',
     '1206796' => 'television.xml',
     '1206577' => 'world.xml',
