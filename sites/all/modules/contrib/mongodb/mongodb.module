@@ -42,6 +42,7 @@ function mongodb($alias = 'default') {
       $mongo_objects[$host][$db]->connection = $mongo;
     }
     catch (MongoConnectionException $e) {
+    return false;
     echo "Mongo DB Exception Found";
       $mongo_objects[$host][$db] = new mongoDummy;
       throw $e;
