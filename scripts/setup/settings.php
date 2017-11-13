@@ -259,6 +259,7 @@ $databases['default']['autoslave'] = array(
   'port' => '3306',
   'driver' => 'mysql',
   'prefix' => '',
+  'readonly' => TRUE
 );
 
 $databases['sso_db']['default'] = array(
