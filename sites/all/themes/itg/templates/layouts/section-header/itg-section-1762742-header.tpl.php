@@ -4,7 +4,7 @@ $theme_path = drupal_get_path('theme', 'itg');
 $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images/'
 
 ?>
-<div id="section-header-event-1762742" class="india-today-woman-summit clearfix">
+<div id="section-header-event-1762742" class="india-today-woman-summit clearfix section-header">
     <div class="header-ads header_ltop_container">
         <div class="container">
           <div class="row">

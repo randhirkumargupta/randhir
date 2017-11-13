@@ -4,7 +4,7 @@ $theme_path = drupal_get_path('theme', 'itg');
 $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images/'
 
 ?>
-<div id="section-header-event-1206707" class="india-today-woman-summit clearfix">
+<div id="section-header-event-1206707" class="india-today-woman-summit clearfix section-header">
     <div class="header-ads header_ltop_container">
         <div class="container">
           <div class="row">
@@ -122,10 +122,7 @@ $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images
 @media only screen and (max-width:800px){
 #section-header-event-1206707 .navigation__event .menu li ul{ right:0; left: inherit;}
 #section-header-event-1206707{ padding:10px 0 0}
-#section-header-event-1206707 .topRight h1{font-size: 30px;  line-height: 35px; margin-top: 15px;}
-	
-	
-	
+#section-header-event-1206707 .topRight h1{font-size: 30px;  line-height: 35px; margin-top: 15px;}	
 }
 
 
@@ -148,3 +145,6 @@ $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images
 
 /*=========Only For This TPL Css End*/
 </style>
+<script>
+
+</script>
