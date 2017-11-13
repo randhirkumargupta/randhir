@@ -227,8 +227,8 @@
 // one slave setting
 $databases['default']['default'] = array(
   'driver' => 'autoslave',
-  'master' => 'master', // optional, defaults to 'master'
-  'slave' => 'autoslave', // optional, defaults to 'autoslave'  
+  'master' => array('master', 'autoslave'), // optional, defaults to 'master'
+  'slave' => array('autoslave', 'master'), // optional, defaults to 'autoslave'  
 // Always use "master" for tables "semaphore" and "sessions"
   'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
 );
