@@ -38,7 +38,7 @@ function mongodb($alias = 'default') {
     }
     catch (MongoConnectionException $e) {
       watchdog("Mongo", "Mongo DB Instances Down.");
-      return false;    
+      return;    
    }
   }
   
