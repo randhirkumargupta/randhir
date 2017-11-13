@@ -260,7 +260,7 @@ function emptygetImgTag() {
  *
  * @return array
  */
-function getImgTag_bk($node) {
+function getImgTag($node) {
   $imgtag = "";
   $src = "";
   $img_caption_val = "";
@@ -273,6 +273,7 @@ function getImgTag_bk($node) {
   $xpath = new DOMXPath($doc);
   // find your image
   $nodelist = $xpath->query("//img");
+  p($nodelist);die();
   // gets the 1st image
   $node = $nodelist->item(0);
   if ($node->attributes->length > 0) {
@@ -287,7 +288,7 @@ function getImgTag_bk($node) {
   return $imgtag;
 }
 
-function getImgTag($node) {
+function getImgTag_bk($node) {
     module_load_include('php','itg_rapid_api', 'inc/simple_html_dom');
     $imgtag = "";
     $src = "";
