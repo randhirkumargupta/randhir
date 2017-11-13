@@ -783,7 +783,7 @@ function _related_story_left_block_content() {
   foreach ($related_result as $site_hash_key) {
     $current_entity_id = $site_hash_key;
     $related_data = itg_get_related_story_content($current_entity_id);
-    //if (!empty($related_data)) {
+    if (!empty($related_data)) {
       $display_title = get_related_display_title($arg[1], $current_entity_id);
       if(!empty($display_title)) {
         $display_title = $display_title;
@@ -806,7 +806,7 @@ function _related_story_left_block_content() {
         $related_story.= "<span class='tile'>" . l($related_title, $front_url, array('html'=>TRUE, "attributes" => array("target" => "_blank","title" => $related_title))) . "</span></li>";
       }
       
-    //}
+    }
     $i++;
     if ($i == 10)
       break;
@@ -834,7 +834,7 @@ function _related_story_bottom_block_content() {
     foreach ($related_result as $site_hash_key) {
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
-      //if (!empty($related_data)) {
+      if (!empty($related_data)) {
         $display_title = get_related_display_title($arg[1], $current_entity_id);
         if (!empty($display_title)) {
           $display_title = $display_title;
@@ -858,7 +858,7 @@ function _related_story_bottom_block_content() {
           $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
           $related_story.= "<span class='tile'>" . l($related_title, $front_url, array('html'=>TRUE, "attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
         }
-      //}
+      }
       $i++;
       if ($i == 4)
         break;
