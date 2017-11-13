@@ -11,7 +11,7 @@ module_load_include('inc', 'itg_mobile_feed', 'inc/photoDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/storyDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/videoDetailPageFeed');
 module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
-module_load_include('php','itg_rapid_api', 'inc/simple_html_dom');
+
 
 /**
  * Implements hook_menu().

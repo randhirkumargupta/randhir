@@ -260,7 +260,7 @@ function emptygetImgTag() {
  *
  * @return array
  */
-function getImgTag($node) {
+function getImgTag_bk($node) {
   $imgtag = "";
   $src = "";
   $img_caption_val = "";
@@ -287,7 +287,8 @@ function getImgTag($node) {
   return $imgtag;
 }
 
-function getImgTag_bk($node) {
+function getImgTag($node) {
+    module_load_include('php','itg_rapid_api', 'inc/simple_html_dom');
     $imgtag = "";
     $src = "";
     $img_caption_val = "";
