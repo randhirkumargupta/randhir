@@ -366,11 +366,8 @@ function getmycomments($data) {
  */
 function totalcomments($page_id) {
   if (function_exists('mongodb')) {
-    $con = mongodb();
-    echo '$'.$con.'$';
-    if (isset($con)) {
-    echo '@@@';
-    exit;
+    $con = mongodb();    
+    if (!empty($con)) {    
       $reply_comment = $con->itgcms_comment;
       $count = $reply_comment->count(array('page_id' => "$page_id"));
       return $count;
