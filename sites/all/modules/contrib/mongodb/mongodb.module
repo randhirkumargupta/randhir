@@ -31,18 +31,19 @@ function mongodb($alias = 'default') {
   $db = $connection['db'];
   
   if (!isset($mongo_objects[$host][$db])) {
-    try {
+    //try {
       watchdog('mongo1', '<pre>' . print_r($host, true) .'<pre>');
       watchdog('mongo2', '<pre>' . print_r($options, true) .'<pre>');
+      watchdog('mongo4', '<pre>' . print_r($options, true) .'<pre>');
       $mongo = new MongoClient($host, $options);
       watchdog('mongo3', '<pre>' . print_r($mongo, true) .'<pre>');
-      $mongo_objects[$host][$db] = $mongo->selectDB($db);
-      $mongo_objects[$host][$db]->connection = $mongo;
-    }
-    catch (MongoConnectionException $e) {
-      $mongo_objects[$host][$db] = new mongoDummy;
-      throw $e;
-    }
+      //$mongo_objects[$host][$db] = $mongo->selectDB($db);
+      //$mongo_objects[$host][$db]->connection = $mongo;
+    //}
+    //catch (MongoConnectionException $e) {
+      //$mongo_objects[$host][$db] = new mongoDummy;
+      //throw $e;
+   // }
   }
   
   return $mongo_objects[$host][$db];
