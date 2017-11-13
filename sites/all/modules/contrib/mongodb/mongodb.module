@@ -32,20 +32,14 @@ function mongodb($alias = 'default') {
   
   if (!isset($mongo_objects[$host][$db])) {
     try {
-      watchdog('mongo1', '<pre>' . print_r($host, true) .'<pre>');
-      watchdog('mongo2', '<pre>' . print_r($options, true) .'<pre>');
-      echo "Trying Mongo Connection";
       $mongo = new MongoClient($host, $options);
-      echo "Mongo Connection Found";
       $mongo_objects[$host][$db] = $mongo->selectDB($db);
-      echo "Selected DB";
       $mongo_objects[$host][$db]->connection = $mongo;
     }
     catch (MongoConnectionException $e) {
-    return false;
-    echo "Mongo DB Exception Found";
       $mongo_objects[$host][$db] = new mongoDummy;
-      throw $e;
+      watchdog("Mongo Connection", "Mongo DB instaces are down.");
+      return false;    
    }
   }
   
