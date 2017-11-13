@@ -260,7 +260,7 @@ function emptygetImgTag() {
  *
  * @return array
  */
-function getImgTag($node) {
+function getImgTag_bk($node) {
   $imgtag = "";
   $src = "";
   $img_caption_val = "";
@@ -285,4 +285,21 @@ function getImgTag($node) {
     $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
   }
   return $imgtag;
+}
+
+function getImgTag($node) {
+    $imgtag = "";
+    $src = "";
+    $img_caption_val = "";
+    $html = $node->body['und']['0']['value'];
+    $str_html = str_get_html($html);
+    $tvalue = "div[class=stryimg]";
+    $node_str = "";
+    $node_ar = array();
+    foreach ($str_html->find($tvalue) as $element) {
+        echo $element;
+        die();
+    } if ($src) {
+        $imgtag = "" . $img_caption_val . "";
+    } return $imgtag;
 }
