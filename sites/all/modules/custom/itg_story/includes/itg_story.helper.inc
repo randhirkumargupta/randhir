@@ -3,6 +3,11 @@
 /*
  * Inc file contains the helper functions
  */
+ 
+define('ADMINISTRATOR_ROLE_ID', 3);
+define('EDITOR_ROLE_ID', 6);
+define('SITEADMIN_ROLE_ID', 10);
+
 /**
  * Get breakingnews  id
  * @param int $breaking_id
