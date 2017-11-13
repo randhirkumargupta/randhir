@@ -1158,7 +1158,7 @@ function get_ads_headerscript_section($arg, $data, $node_object){
 			$return['category_geader_s'] = $taxname1.ucfirst($node_object->type);
 		} else {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
-			$return['category_geader_s'] = 'ROS';
+			$return['category_geader_s'] = (!empty($taxname1) ? ($taxname1.ucfirst($node_object->type)) : 'ROS');
 		}
 	}
 	return $return;

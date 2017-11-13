@@ -473,12 +473,16 @@ function itg_common_get_story_status($nid) {
  * @param int $entity_id
  */
 function itg_get_related_story_content($entity_id) {
-  if (function_exists('apachesolr_get_solr')) {
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if (function_exists('apachesolr_get_solr') && $ping) {
     $solr = apachesolr_get_solr();
-    $query = apachesolr_drupal_query("custom" , array('q' => "entity_id:$entity_id"));
-    $query->addParam('rows' , '4'); // How many rows of result to display default it is 10.
-    $query->addParam('qf' , 'entity_id'); // Only search in id
-    $query->addParam('bs_status' , 'true'); // Only search in title
+    //pr($solr);
+    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id"));
+    $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'entity_id'); // Only search in id
+    $query->addParam('bs_status', 'true'); // Only search in title
     $resp_search = $query->search();
     return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
   }
