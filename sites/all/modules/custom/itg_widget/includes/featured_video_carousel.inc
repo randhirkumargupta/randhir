@@ -48,7 +48,7 @@ function itg_widget_featured_video_carousel_data_fetch($result, $slider_type) {
         if (!empty($data['uri'])) {
             $file_uri = file_create_url($data['uri']);
         } else {
-            $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
+            $file_uri =  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg'));
         }
         $data_render[$data['nid']]['file_url'] = $file_uri;
         $data_render[$data['nid']]['count'] = count($node->field_videogallery_video_upload[$node->language]);

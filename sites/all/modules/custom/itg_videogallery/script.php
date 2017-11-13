@@ -6,7 +6,6 @@ $args = drush_get_arguments(); // Get the arguments.
 /*
  * This temp function
  */
-itg_common_node_for_video_update_image();
 
 function all_insert_orignal_image($uri, $fid) {
   $file_uri = file_create_url($uri);
@@ -33,12 +32,22 @@ function check_node_is_maped($nid) {
   return $result;
 }
 
+//itg_common_node_for_byline_update_image();
+//itg_common_node_for_supplement_update_image();
+//itg_common_node_for_issue_update_image();
+//itg_common_node_for_video_update_image();
+//itg_common_node_for_photogallery_update_image();
+
+itg_common_node_for_story_update_image();
+
+//itg_common_node_for_mega_review_critic_update_image();
+
 function itg_common_node_for_video_update_image() {
-  $result = db_select('node', 'n')
-      ->fields('n', array('nid'))
-      ->condition('type', 'videogallery', ' = ')
-      ->execute()
-      ->fetchAll();
+  $query = db_select('migrate_map_itgvideogallery', 'n');
+  $query->addField('n', 'destid1', 'nid');
+  $query->groupBy('n.destid1')->range(2000, 10);
+  $result = $query->execute()->fetchAll();
+
   foreach ($result as $res) {
     $extra_large_image = array();
     $large_image = array();
@@ -59,18 +68,34 @@ function itg_common_node_for_video_update_image() {
       if (isset($extra_large_image['uri']) && !empty($extra_large_image['uri'])) {
         $file_image = file_create_url($extra_large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $extra_large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'video_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $extra_large_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $extra_large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $extra_large_image['fid']);
       }
       // large image
       $large_image['fid'] = $node->field_story_large_image['und'][0]['fid'];
@@ -78,18 +103,34 @@ function itg_common_node_for_video_update_image() {
       if (isset($large_image['uri']) && !empty($large_image['uri'])) {
         $file_image = file_create_url($large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'video_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $large_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $large_image['fid']);
       }
       // medium image
       $medium_image['fid'] = $node->field_story_medium_image['und'][0]['fid'];
@@ -97,18 +138,34 @@ function itg_common_node_for_video_update_image() {
       if (isset($medium_image['uri']) && !empty($medium_image['uri'])) {
         $file_image = file_create_url($medium_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $medium_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'video_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $medium_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $medium_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $medium_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $medium_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $medium_image['fid']);
       }
       // small image
       $small_image['fid'] = $node->field_story_small_image['und'][0]['fid'];
@@ -116,19 +173,34 @@ function itg_common_node_for_video_update_image() {
       if (isset($small_image['uri']) && !empty($small_image['uri'])) {
         $file_image = file_create_url($small_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'video_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-        }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $small_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')
+                ->execute();
 
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $small_image['fid']);
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $small_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $small_image['fid']);
+          }
+        }
       }
       //extra small image
       $extra_small_image['fid'] = $node->field_story_extra_small_image['und'][0]['fid'];
@@ -136,19 +208,34 @@ function itg_common_node_for_video_update_image() {
       if (isset($extra_small_image['uri']) && !empty($extra_small_image['uri'])) {
         $file_image = file_create_url($extra_small_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $extra_small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'video_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-        }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $extra_small_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')
+                ->execute();
 
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $extra_small_image['fid']);
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $extra_small_image['fid']);
+          }
+        }
       }
       //FAcebook  image
       $facebook_image['fid'] = $node->field_story_facebook_image['und'][0]['fid'];
@@ -156,18 +243,34 @@ function itg_common_node_for_video_update_image() {
       if (isset($facebook_image['uri']) && !empty($facebook_image['uri'])) {
         $file_image = file_create_url($facebook_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $facebook_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'video_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $facebook_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $facebook_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $facebook_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $facebook_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $facebook_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $facebook_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $facebook_image['fid']);
       }
       //Tweet  image
       $tweet_image['fid'] = $node->field_story_tweet_image['und'][0]['fid'];
@@ -175,18 +278,34 @@ function itg_common_node_for_video_update_image() {
       if (isset($tweet_image['uri']) && !empty($tweet_image['uri'])) {
         $file_image = file_create_url($tweet_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $tweet_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'video_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $tweet_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $tweet_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $tweet_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $tweet_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $tweet_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $tweet_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $tweet_image['fid']);
       }
       //Tweet  image
       $player_image['fid'] = $node->field_story_player_image['und'][0]['fid'];
@@ -194,51 +313,37 @@ function itg_common_node_for_video_update_image() {
       if (isset($player_image['uri']) && !empty($player_image['uri'])) {
         $file_image = file_create_url($player_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $player_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'video_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $player_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $player_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $player_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $player_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $player_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $player_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $player_image['fid']);
       }
-      //Image style create
-//    $extralarge_image_fid = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($extralarge_image_fid)) {
-//      $file = file_load($extralarge_image_fid);
-//      itg_story_crate_image_style(EXTRA_LARGE_IMAGE_STYLES, $file->uri);
-//    }
-//
-//    $large_image_fid = $node->field_story_large_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($large_image_fid)) {
-//      $file_large = file_load($large_image_fid);
-//      itg_story_crate_image_style(LARGE_IMAGE_STYLES, $file_large->uri);
-//    }
-//
-//    $medium_image_fid = $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($medium_image_fid)) {
-//      $file_meduim = file_load($medium_image_fid);
-//      itg_story_crate_image_style(MEDIUM_IMAGE_STYLES, $file_meduim->uri);
-//    }
-//
-//    $small_image_fid = $node->field_story_small_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($small_image_fid)) {
-//      $file_small = file_load($small_image_fid);
-//      itg_story_crate_image_style(SMALL_IMAGE_STYLES, $file_small->uri);
-//    }
-//
-//    $small_extra_image_fid = $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($small_extra_image_fid)) {
-//      $file_extra_small = file_load($small_extra_image_fid);
-//      itg_story_crate_image_style(SMALL_EXTRA_IMAGE_STYLES, $file_extra_small->uri);
-//    }
-      _insert_node_sucecss($node->nid,$node_type);
-      print $node->nid .',';
+      _insert_node_sucecss($node->nid, $node_type);
+      print $node->nid . ',';
     }
   }
 }
@@ -247,7 +352,7 @@ function itg_common_node_for_video_update_image() {
 function itg_common_node_for_byline_update_image() {
   $result = db_select('node', 'n')
       ->fields('n', array('nid'))
-      ->condition('type', 'reporter', ' = ')
+      ->condition('type', 'reporter', ' = ')->range(0, 500)
       ->execute()
       ->fetchAll();
   foreach ($result as $res) {
@@ -261,7 +366,6 @@ function itg_common_node_for_byline_update_image() {
     $player_image = array();
     $check_node = check_node_is_maped($res->nid);
     if (empty($check_node)) {
-
       $node = node_load($res->nid);
 
       $node_created_date = $node->created;
@@ -273,7 +377,7 @@ function itg_common_node_for_byline_update_image() {
         $file_image = file_create_url($extra_large_image['uri']);
         $imagedata = file_get_contents($file_image);
         $image_name = end(explode('/', $extra_large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'reporter_test' . '/' . $time_folder;
+        $filedir = ITG_IMAGE_FOLDER . 'reporter' . '/' . $time_folder;
         if (!file_exists(file_default_scheme() . '://' . $filedir)) {
           mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
         }
@@ -285,8 +389,8 @@ function itg_common_node_for_byline_update_image() {
             ->execute();
         all_insert_orignal_image($file, $extra_large_image['fid']);
       }
-      _insert_node_sucecss($node->nid,$node_type);
-        print $res->nid . ',';
+      _insert_node_sucecss($node->nid, $node_type);
+      print $res->nid . ',';
     }
   }
 }
@@ -296,11 +400,11 @@ function itg_common_node_for_byline_update_image() {
  */
 
 function itg_common_node_for_photogallery_update_image() {
-  $result = db_select('node', 'n')
-      ->fields('n', array('nid'))
-      ->condition('type', 'photogallery', ' = ')
-      ->execute()
-      ->fetchAll();
+  $query = db_select('migrate_map_itgphotogallery', 'n');
+  $query->addField('n', 'destid1', 'nid');
+  $query->groupBy('n.destid1')->range(0, 10);
+
+  $result = $query->execute()->fetchAll();
   foreach ($result as $res) {
     $extra_large_image = array();
     $large_image = array();
@@ -327,18 +431,33 @@ function itg_common_node_for_photogallery_update_image() {
           if (isset($fid_uri) && !empty($fid_uri)) {
             $file_image = file_create_url($fid_uri);
             $imagedata = file_get_contents($file_image);
-            $image_name = end(explode('/', $fid_uri));
-            $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-            if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-              mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+            if (!empty($imagedata)) {
+              $image_name = end(explode('/', $fid_uri));
+              $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+              if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+                mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+              }
+              $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+              $insert_count = db_select('file_managed', 'sr')
+                  ->fields('sr')
+                  ->condition('sr.uri', $file_path)
+                  ->execute()
+                  ->rowCount();
+              if ($insert_count) {
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+              }
+              else {
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+              }
+              if ($file) {
+                $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_uri, '=')
+                    ->execute();
+                $inserted_data = db_update('file_managed')->fields(array(
+                      'uri' => $file))->condition('fid', $fid_gall, '=')
+                    ->execute();
+                all_insert_orignal_image($file, $fid_gall);
+              }
             }
-            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-            $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_uri, '=')
-                ->execute();
-            $inserted_data = db_update('file_managed')->fields(array(
-                  'uri' => $file))->condition('fid', $fid_gall, '=')
-                ->execute();
-            all_insert_orignal_image($file, $fid_gall);
           }
 
           $fid_gall_small = $photo_details[$col]->field_photo_small_image['und'][0]['fid'];
@@ -346,19 +465,32 @@ function itg_common_node_for_photogallery_update_image() {
           if (isset($fid_uri_small) && !empty($fid_uri_small)) {
             $file_image = file_create_url($fid_uri_small);
             $imagedata = file_get_contents($file_image);
-            $image_name = end(explode('/', $fid_uri_small));
+            if (!empty($imagedata)) {
+              $image_name = end(explode('/', $fid_uri_small));
 
-            $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-            if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-              mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+              $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+              if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+                mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+              }
+              $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+              $insert_count = db_select('file_managed', 'sr')
+                  ->fields('sr')
+                  ->condition('sr.uri', $file_path)
+                  ->execute()
+                  ->rowCount();
+              if ($insert_count) {
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+              }
+              else {
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+              }
+              $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_uri_small, '=')
+                  ->execute();
+              $inserted_data = db_update('file_managed')->fields(array(
+                    'uri' => $file))->condition('fid', $fid_gall_small, '=')
+                  ->execute();
+              all_insert_orignal_image($file, $fid_gall_small);
             }
-            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-            $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_uri_small, '=')
-                ->execute();
-            $inserted_data = db_update('file_managed')->fields(array(
-                  'uri' => $file))->condition('fid', $fid_gall_small, '=')
-                ->execute();
-            all_insert_orignal_image($file, $fid_gall_small);
           }
 
           $fid_gall_api = $photo_details[$col]->field_api_image['und'][0]['fid'];
@@ -366,18 +498,33 @@ function itg_common_node_for_photogallery_update_image() {
           if (isset($fid_uri_api) && !empty($fid_uri_api)) {
             $file_image = file_create_url($fid_uri_api);
             $imagedata = file_get_contents($file_image);
-            $image_name = end(explode('/', $fid_uri_api));
-            $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-            if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-              mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+            if (!empty($imagedata)) {
+              $image_name = end(explode('/', $fid_uri_api));
+              $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+              if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+                mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+              }
+              $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+              $insert_count = db_select('file_managed', 'sr')
+                  ->fields('sr')
+                  ->condition('sr.uri', $file_path)
+                  ->execute()
+                  ->rowCount();
+              if ($insert_count) {
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+              }
+              else {
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+              }
+              if ($file) {
+                $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_uri_api, '=')
+                    ->execute();
+                $inserted_data = db_update('file_managed')->fields(array(
+                      'uri' => $file))->condition('fid', $fid_gall_api, '=')
+                    ->execute();
+                all_insert_orignal_image($file, $fid_gall_api);
+              }
             }
-            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-            $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_uri_api, '=')
-                ->execute();
-            $inserted_data = db_update('file_managed')->fields(array(
-                  'uri' => $file))->condition('fid', $fid_gall_api, '=')
-                ->execute();
-            all_insert_orignal_image($file, $fid_gall_api);
           }
         }
       }
@@ -386,18 +533,34 @@ function itg_common_node_for_photogallery_update_image() {
       if (isset($extra_large_image['uri']) && !empty($extra_large_image['uri'])) {
         $file_image = file_create_url($extra_large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $extra_large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $extra_large_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $extra_large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $extra_large_image['fid']);
       }
       // large image
       $large_image['fid'] = $node->field_story_large_image['und'][0]['fid'];
@@ -405,18 +568,34 @@ function itg_common_node_for_photogallery_update_image() {
       if (isset($large_image['uri']) && !empty($large_image['uri'])) {
         $file_image = file_create_url($large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $large_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $large_image['fid']);
       }
       // medium image
       $medium_image['fid'] = $node->field_story_medium_image['und'][0]['fid'];
@@ -424,18 +603,34 @@ function itg_common_node_for_photogallery_update_image() {
       if (isset($medium_image['uri']) && !empty($medium_image['uri'])) {
         $file_image = file_create_url($medium_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $medium_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $medium_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $medium_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $medium_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $medium_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $medium_image['fid']);
       }
       // small image
       $small_image['fid'] = $node->field_story_small_image['und'][0]['fid'];
@@ -443,19 +638,34 @@ function itg_common_node_for_photogallery_update_image() {
       if (isset($small_image['uri']) && !empty($small_image['uri'])) {
         $file_image = file_create_url($small_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-        }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $small_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')
+                ->execute();
 
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $small_image['fid']);
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $small_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $small_image['fid']);
+          }
+        }
       }
       //extra small image
       $extra_small_image['fid'] = $node->field_story_extra_small_image['und'][0]['fid'];
@@ -463,19 +673,34 @@ function itg_common_node_for_photogallery_update_image() {
       if (isset($extra_small_image['uri']) && !empty($extra_small_image['uri'])) {
         $file_image = file_create_url($extra_small_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $extra_small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-        }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $extra_small_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')
+                ->execute();
 
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $extra_small_image['fid']);
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $extra_small_image['fid']);
+          }
+        }
       }
       //FAcebook  image
       $facebook_image['fid'] = $node->field_story_facebook_image['und'][0]['fid'];
@@ -483,18 +708,34 @@ function itg_common_node_for_photogallery_update_image() {
       if (isset($facebook_image['uri']) && !empty($facebook_image['uri'])) {
         $file_image = file_create_url($facebook_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $facebook_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $facebook_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $facebook_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $facebook_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $facebook_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $facebook_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $facebook_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $facebook_image['fid']);
       }
       //Tweet  image
       $tweet_image['fid'] = $node->field_story_tweet_image['und'][0]['fid'];
@@ -502,52 +743,37 @@ function itg_common_node_for_photogallery_update_image() {
       if (isset($tweet_image['uri']) && !empty($tweet_image['uri'])) {
         $file_image = file_create_url($tweet_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $tweet_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'photogallery_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-        }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $tweet_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $tweet_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $tweet_image['fid']);
-      }
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $tweet_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'photogallery' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $tweet_image['uri'], '=')
+                ->execute();
 
-//    //Image style create
-//    $extralarge_image_fid = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($extralarge_image_fid)) {
-//      $file = file_load($extralarge_image_fid);
-//      itg_story_crate_image_style(EXTRA_LARGE_IMAGE_STYLES, $file->uri);
-//    }
-//
-//    $large_image_fid = $node->field_story_large_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($large_image_fid)) {
-//      $file_large = file_load($large_image_fid);
-//      itg_story_crate_image_style(LARGE_IMAGE_STYLES, $file_large->uri);
-//    }
-//
-//    $medium_image_fid = $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($medium_image_fid)) {
-//      $file_meduim = file_load($medium_image_fid);
-//      itg_story_crate_image_style(MEDIUM_IMAGE_STYLES, $file_meduim->uri);
-//    }
-//
-//    $small_image_fid = $node->field_story_small_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($small_image_fid)) {
-//      $file_small = file_load($small_image_fid);
-//      itg_story_crate_image_style(SMALL_IMAGE_STYLES, $file_small->uri);
-//    }
-//
-//    $small_extra_image_fid = $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($small_extra_image_fid)) {
-//      $file_extra_small = file_load($small_extra_image_fid);
-//      itg_story_crate_image_style(SMALL_EXTRA_IMAGE_STYLES, $file_extra_small->uri);
-//    }
-      _insert_node_sucecss($node->nid,$node_type);
-      print $node->nid . ',';
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $tweet_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $tweet_image['fid']);
+          }
+        }
+      }
+      _insert_node_sucecss($node->nid, $node_type);
+      print $res->nid . ',';
     }
   }
 }
@@ -563,7 +789,7 @@ function itg_common_node_for_photogallery_update_image() {
 function itg_common_node_for_issue_update_image() {
   $result = db_select('node', 'n')
       ->fields('n', array('nid'))
-      ->condition('type', 'issue', ' = ')
+      ->condition('type', 'issue', ' = ')->range(0, 500)
       ->execute()
       ->fetchAll();
   foreach ($result as $res) {
@@ -582,42 +808,78 @@ function itg_common_node_for_issue_update_image() {
       if (isset($issue_large_image['uri']) && !empty($issue_large_image['uri'])) {
         $file_image = file_create_url($issue_large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $issue_large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'issue_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $issue_large_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'issue' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $issue_large_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $issue_large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $issue_large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $issue_large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $issue_large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $issue_large_image['fid']);
       }
 
       // Issue small cover image
       $issue_small_image['fid'] = $node->field_issue_small_cover_image['und'][0]['fid'];
       $issue_small_image['uri'] = $node->field_issue_small_cover_image['und'][0]['uri'];
+
+
       if (isset($issue_small_image['uri']) && !empty($issue_small_image['uri'])) {
-        $file_image = file_create_url($issue_small_image['uri']);
-        $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $issue_small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'issue_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if ($issue_large_image['fid'] != $issue_small_image['fid']) {
+          $file_image = file_create_url($issue_small_image['uri']);
+          $imagedata = file_get_contents($file_image);
+
+          if (!empty($imagedata)) {
+            $image_name = end(explode('/', $issue_small_image['uri']));
+            $filedir = ITG_IMAGE_FOLDER . 'issue' . '/' . $time_folder;
+            if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+              mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+            }
+            $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+            $insert_count = db_select('file_managed', 'sr')
+                ->fields('sr')
+                ->condition('sr.uri', $file_path)
+                ->execute()
+                ->rowCount();
+            if ($insert_count) {
+              $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+            }
+            else {
+              $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+            }
+            if ($file) {
+              $inserted_data = db_delete('s3fs_file')->condition('uri', $issue_small_image['uri'], '=')
+                  ->execute();
+
+              $inserted_data = db_update('file_managed')->fields(array(
+                    'uri' => $file))->condition('fid', $issue_small_image['fid'], '=')
+                  ->execute();
+              all_insert_orignal_image($file, $issue_small_image['fid']);
+            }
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $issue_small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $issue_small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $issue_small_image['fid']);
       }
-      _insert_node_sucecss($node->nid,$node_type); 
+      _insert_node_sucecss($node->nid, $node_type);
       print $res->nid . ',';
-      
     }
   }
 }
@@ -629,7 +891,7 @@ function itg_common_node_for_issue_update_image() {
 function itg_common_node_for_supplement_update_image() {
   $result = db_select('node', 'n')
       ->fields('n', array('nid'))
-      ->condition('type', 'supplement', ' = ')
+      ->condition('type', 'supplement', ' = ')->range(0, 500)
       ->execute()
       ->fetchAll();
   foreach ($result as $res) {
@@ -647,41 +909,75 @@ function itg_common_node_for_supplement_update_image() {
       if (isset($supp_large_image['uri']) && !empty($supp_large_image['uri'])) {
         $file_image = file_create_url($supp_large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $supp_large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'supplement_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $supp_large_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'supplement' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $supp_large_image['uri'], '=')
+                ->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $supp_large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $supp_large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $supp_large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $supp_large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $supp_large_image['fid']);
       }
 
       // Issue small cover image
       $supp_small_image['fid'] = $node->field_issue_supp_small_image['und'][0]['fid'];
       $supp_small_image['uri'] = $node->field_issue_supp_small_image['und'][0]['uri'];
       if (isset($supp_small_image['uri']) && !empty($supp_small_image['uri'])) {
-        $file_image = file_create_url($supp_small_image['uri']);
-        $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $supp_small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'supplement_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if ($supp_large_image['fid'] != $supp_small_image['fid']) {
+          $file_image = file_create_url($supp_small_image['uri']);
+          $imagedata = file_get_contents($file_image);
+          if (!empty($imagedata)) {
+            $image_name = end(explode('/', $supp_small_image['uri']));
+            $filedir = ITG_IMAGE_FOLDER . 'supplement' . '/' . $time_folder;
+            if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+              mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+            }
+            $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+            $insert_count = db_select('file_managed', 'sr')
+                ->fields('sr')
+                ->condition('sr.uri', $file_path)
+                ->execute()
+                ->rowCount();
+            if ($insert_count) {
+              $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+            }
+            else {
+              $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+            }
+            if ($file) {
+              $inserted_data = db_delete('s3fs_file')->condition('uri', $supp_small_image['uri'], '=')
+                  ->execute();
+
+              $inserted_data = db_update('file_managed')->fields(array(
+                    'uri' => $file))->condition('fid', $supp_small_image['fid'], '=')
+                  ->execute();
+              all_insert_orignal_image($file, $supp_small_image['fid']);
+            }
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $supp_small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $supp_small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $supp_small_image['fid']);
       }
-      _insert_node_sucecss($node->nid,$node_type);
-        print $res->nid . ',';
+      _insert_node_sucecss($node->nid, $node_type);
+      print $res->nid . ',';
     }
   }
 }
@@ -692,7 +988,7 @@ function itg_common_node_for_supplement_update_image() {
 function itg_common_node_for_mega_review_critic_update_image() {
   $result = db_select('node', 'n')
       ->fields('n', array('nid'))
-      ->condition('type', 'mega_review_critic', ' = ')
+      ->condition('type', 'mega_review_critic', ' = ')->range(0, 500)
       ->execute()
       ->fetchAll();
   foreach ($result as $res) {
@@ -709,103 +1005,174 @@ function itg_common_node_for_mega_review_critic_update_image() {
       $node_type = $node->type;
 
       $extra_large_image['fid'] = $node->field_story_extra_large_image['und'][0]['fid'];
-      $extra_large_image['uri'] = $node->field_story_extra_large_image['und'][0]['uri'];
+      $extra_large_image['uri'] = $node->field_story_extra_large_image ['und'][0]['uri'];
       if (isset($extra_large_image['uri']) && !empty($extra_large_image['uri'])) {
         $file_image = file_create_url($extra_large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $extra_large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $extra_large_image ['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array('uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $extra_large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $extra_large_image['fid']);
       }
       // large image
       $large_image['fid'] = $node->field_story_large_image['und'][0]['fid'];
-      $large_image['uri'] = $node->field_story_large_image['und'][0]['uri'];
+      $large_image['uri'] = $node->field_story_large_image ['und'][0]['uri'];
       if (isset($large_image['uri']) && !empty($large_image['uri'])) {
         $file_image = file_create_url($large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $large_image ['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $large_image['fid']);
       }
       // medium image
       $medium_image['fid'] = $node->field_story_medium_image['und'][0]['fid'];
-      $medium_image['uri'] = $node->field_story_medium_image['und'][0]['uri'];
+      $medium_image['uri'] = $node->field_story_medium_image ['und'][0]['uri'];
       if (isset($medium_image['uri']) && !empty($medium_image['uri'])) {
         $file_image = file_create_url($medium_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $medium_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $medium_image ['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $medium_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $medium_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $medium_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $medium_image['fid']);
       }
       // small image
       $small_image['fid'] = $node->field_story_small_image['und'][0]['fid'];
-      $small_image['uri'] = $node->field_story_small_image['und'][0]['uri'];
+      $small_image['uri'] = $node->field_story_small_image ['und'][0]['uri'];
       if (isset($small_image['uri']) && !empty($small_image['uri'])) {
         $file_image = file_create_url($small_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-        }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $small_image ['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')->execute();
 
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $small_image['fid']);
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $small_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $small_image['fid']);
+          }
+        }
       }
       //extra small image
       $extra_small_image['fid'] = $node->field_story_extra_small_image['und'][0]['fid'];
-      $extra_small_image['uri'] = $node->field_story_extra_small_image['und'][0]['uri'];
+      $extra_small_image['uri'] = $node->field_story_extra_small_image ['und'][0]['uri'];
       if (isset($extra_small_image['uri']) && !empty($extra_small_image['uri'])) {
         $file_image = file_create_url($extra_small_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $extra_small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-        }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $extra_small_image ['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'mega_review_critic' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')->execute();
 
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $extra_small_image['fid']);
+            $inserted_data = db_update('file_managed')->fields(array('uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $extra_small_image['fid']);
+          }
+        }
       }
-      _insert_node_sucecss($node->nid,$node_type);
-        print $res->nid . ',';
+      _insert_node_sucecss($node->nid, $node_type);
+      print $res->nid . ',';
     }
   }
 }
@@ -815,11 +1182,12 @@ function itg_common_node_for_mega_review_critic_update_image() {
  */
 
 function itg_common_node_for_story_update_image() {
-  $result = db_select('node', 'n')
-      ->fields('n', array('nid'))
-      ->condition('type', 'story', ' = ')
-      ->execute()
-      ->fetchAll();
+
+  $query = db_select('migrate_map_itgstorylist', 'n');
+  $query->addField('n', 'destid1', 'nid');
+  $query->join('field_data_field_story_category', 'fdfsc', 'fdfsc.entity_id = n.destid1');
+  $query->condition('fdfsc.field_story_category_tid', '1206640', '!= ')->groupBy('n.destid1')->range(2000, 10);
+  $result = $query->execute()->fetchAll();
   foreach ($result as $res) {
     $extra_large_image = array();
     $large_image = array();
@@ -847,22 +1215,39 @@ function itg_common_node_for_story_update_image() {
           $col = $collection['value'];
           $buzz_image_details = entity_load('field_collection_item', array($col));
           $fid_buzz = $buzz_image_details[$col]->field_buzz_image['und'][0]['fid'];
-          $fid_buzz_uri = $buzz_image_details[$col]->field_buzz_image['und'][0]['uri'];
+          $fid_buzz_uri = $buzz_image_details [$col]->field_buzz_image['und'][0]['uri'];
           if (isset($fid_buzz_uri) && !empty($fid_buzz_uri)) {
             $file_image_buzz = file_create_url($fid_buzz_uri);
             $imagedata = file_get_contents($file_image_buzz);
-            $image_name = end(explode('/', $fid_buzz_uri));
-            $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-            if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-              mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+            if (!empty($imagedata)) {
+              $image_name = end(explode('/', $fid_buzz_uri));
+              $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+              if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+                mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+              }
+
+              $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+              $insert_count = db_select('file_managed', 'sr')
+                  ->fields('sr')
+                  ->condition('sr.uri', $file_path)
+                  ->execute()
+                  ->rowCount();
+              if ($insert_count) {
+                $image_name = urlencode($image_name);
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+              }
+              else {
+                $image_name = urlencode($image_name);
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+              }
+              if ($file) {
+                $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_buzz_uri, '=')->execute();
+                $inserted_data = db_update('file_managed')->fields(array(
+                      'uri' => $file))->condition('fid', $fid_buzz, '=')
+                    ->execute();
+                all_insert_orignal_image($file, $fid_buzz);
+              }
             }
-            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-            $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_buzz_uri, '=')
-                ->execute();
-            $inserted_data = db_update('file_managed')->fields(array(
-                  'uri' => $file))->condition('fid', $fid_buzz, '=')
-                ->execute();
-            all_insert_orignal_image($file, $fid_buzz);
           }
         }
       }
@@ -873,22 +1258,38 @@ function itg_common_node_for_story_update_image() {
           $col = $collection['value'];
           $buzz_image_details = entity_load('field_collection_item', array($col));
           $fid_buzz = $buzz_image_details[$col]->field_technology_sample_photo['und'][0]['fid'];
-          $fid_buzz_uri = $buzz_image_details[$col]->field_technology_sample_photo['und'][0]['uri'];
+          $fid_buzz_uri = $buzz_image_details[$col]->field_technology_sample_photo ['und'][0]['uri'];
           if (isset($fid_buzz_uri) && !empty($fid_buzz_uri)) {
             $file_image_buzz = file_create_url($fid_buzz_uri);
             $imagedata = file_get_contents($file_image_buzz);
-            $image_name = end(explode('/', $fid_buzz_uri));
-            $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-            if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-              mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+            if (!empty($imagedata)) {
+              $image_name = end(explode('/', $fid_buzz_uri));
+              $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+              if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+                mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+              }
+              $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+              $insert_count = db_select('file_managed', 'sr')
+                  ->fields('sr')
+                  ->condition('sr.uri', $file_path)
+                  ->execute()
+                  ->rowCount();
+              if ($insert_count) {
+                $image_name = urlencode($image_name);
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+              }
+              else {
+                $image_name = urlencode($image_name);
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+              }
+              if ($file) {
+                $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_buzz_uri, '=')->execute();
+                $inserted_data = db_update('file_managed')->fields(array(
+                      'uri' => $file))->condition('fid', $fid_buzz, '=')
+                    ->execute();
+                all_insert_orignal_image($file, $fid_buzz);
+              }
             }
-            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-            $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_buzz_uri, '=')
-                ->execute();
-            $inserted_data = db_update('file_managed')->fields(array(
-                  'uri' => $file))->condition('fid', $fid_buzz, '=')
-                ->execute();
-            all_insert_orignal_image($file, $fid_buzz);
           }
         }
       }
@@ -901,268 +1302,436 @@ function itg_common_node_for_story_update_image() {
           $col = $collection['value'];
           $photo_story_image_details = entity_load('field_collection_item', array($col));
           $fid_photo_story = $photo_story_image_details[$col]->field_photo_story_image['und'][0]['fid'];
-          $fid_photo_story_uri = $photo_story_image_details[$col]->field_photo_story_image['und'][0]['uri'];
+          $fid_photo_story_uri = $photo_story_image_details[$col]->field_photo_story_image ['und'][0]['uri'];
           if (isset($fid_photo_story_uri) && !empty($fid_photo_story_uri)) {
             $file_image_photo = file_create_url($fid_buzz_uri);
             $imagedata = file_get_contents($file_image_photo);
-            $image_name = end(explode('/', $fid_photo_story_uri));
-            $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-            if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-              mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+            if (!empty($imagedata)) {
+              $image_name = end(explode('/', $fid_photo_story_uri));
+              $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+              if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+                mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+              }
+
+              $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+              $insert_count = db_select('file_managed', 'sr')
+                  ->fields('sr')
+                  ->condition('sr.uri', $file_path)
+                  ->execute()
+                  ->rowCount();
+              if ($insert_count) {
+                $image_name = urlencode($image_name);
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+              }
+              else {
+                $image_name = urlencode($image_name);
+                $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+              }
+              if ($file) {
+                $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_photo_story_uri, '=')->execute();
+                $inserted_data = db_update('file_managed')->fields(array(
+                      'uri' => $file))->condition('fid', $fid_photo_story, '=')
+                    ->execute();
+                all_insert_orignal_image($file, $fid_photo_story);
+              }
             }
-            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-            $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_photo_story_uri, '=')
-                ->execute();
-            $inserted_data = db_update('file_managed')->fields(array(
-                  'uri' => $file))->condition('fid', $fid_photo_story, '=')
-                ->execute();
-            all_insert_orignal_image($file, $fid_photo_story);
           }
         }
       }
 
       $extra_large_image['fid'] = $node->field_story_extra_large_image['und'][0]['fid'];
-      $extra_large_image['uri'] = $node->field_story_extra_large_image['und'][0]['uri'];
+      $extra_large_image['uri'] = $node->field_story_extra_large_image ['und'][0]['uri'];
       if (isset($extra_large_image['uri']) && !empty($extra_large_image['uri'])) {
         $file_image = file_create_url($extra_large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $extra_large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $extra_large_image ['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array('uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $extra_large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $extra_large_image['fid']);
       }
       // large image
       $large_image['fid'] = $node->field_story_large_image['und'][0]['fid'];
-      $large_image['uri'] = $node->field_story_large_image['und'][0]['uri'];
+      $large_image['uri'] = $node->field_story_large_image ['und'][0]['uri'];
       if (isset($large_image['uri']) && !empty($large_image['uri'])) {
         $file_image = file_create_url($large_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $large_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $large_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $large_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $large_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $large_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $large_image['fid']);
       }
       // medium image
       $medium_image['fid'] = $node->field_story_medium_image['und'][0]['fid'];
-      $medium_image['uri'] = $node->field_story_medium_image['und'][0]['uri'];
+      $medium_image['uri'] = $node->field_story_medium_image ['und'][0]['uri'];
       if (isset($medium_image['uri']) && !empty($medium_image['uri'])) {
         $file_image = file_create_url($medium_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $medium_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $medium_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $medium_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $medium_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $medium_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $medium_image['fid']);
       }
       // small image
       $small_image['fid'] = $node->field_story_small_image['und'][0]['fid'];
-      $small_image['uri'] = $node->field_story_small_image['und'][0]['uri'];
+      $small_image['uri'] = $node->field_story_small_image ['und'][0]['uri'];
       if (isset($small_image['uri']) && !empty($small_image['uri'])) {
         $file_image = file_create_url($small_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-        }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $small_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')->execute();
 
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $small_image['fid']);
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $small_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $small_image['fid']);
+          }
+        }
       }
       //extra small image
       $extra_small_image['fid'] = $node->field_story_extra_small_image['und'][0]['fid'];
-      $extra_small_image['uri'] = $node->field_story_extra_small_image['und'][0]['uri'];
+      $extra_small_image['uri'] = $node->field_story_extra_small_image ['und'][0]['uri'];
       if (isset($extra_small_image['uri']) && !empty($extra_small_image['uri'])) {
         $file_image = file_create_url($extra_small_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $extra_small_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $extra_small_image ['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count)
+            $image_name = urlencode($image_name);
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        else {
+          $image_name = urlencode($image_name);
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        }
+        if ($file) {
+          $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')->execute();
 
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $extra_small_image['fid']);
+          $inserted_data = db_update('file_managed')->fields(array('uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
+              ->execute();
+          all_insert_orignal_image($file, $extra_small_image['fid']);
+        }
       }
+
       //FAcebook  image
       $facebook_image['fid'] = $node->field_story_facebook_image['und'][0]['fid'];
-      $facebook_image['uri'] = $node->field_story_facebook_image['und'][0]['uri'];
+      $facebook_image['uri'] = $node->field_story_facebook_image ['und'][0]['uri'];
       if (isset($facebook_image['uri']) && !empty($facebook_image['uri'])) {
         $file_image = file_create_url($facebook_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $facebook_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $facebook_image ['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $facebook_image['uri'], '=')->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $facebook_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $facebook_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $facebook_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $facebook_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $facebook_image['fid']);
       }
+
+     
       //Tweet  image
       $tweet_image['fid'] = $node->field_story_tweet_image['und'][0]['fid'];
-      $tweet_image['uri'] = $node->field_story_tweet_image['und'][0]['uri'];
+      $tweet_image['uri'] = $node->field_story_tweet_image ['und'][0]['uri'];
       if (isset($tweet_image['uri']) && !empty($tweet_image['uri'])) {
         $file_image = file_create_url($tweet_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $tweet_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $tweet_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $tweet_image['uri'], '=')->execute();
+
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $tweet_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $tweet_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $tweet_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $tweet_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $tweet_image['fid']);
       }
 
       $animated_image['fid'] = $node->field_facebook_animated_image['und'][0]['fid'];
-      $animated_image['uri'] = $node->field_facebook_animated_image['und'][0]['uri'];
+      $animated_image['uri'] = $node->field_facebook_animated_image ['und'][0]['uri'];
       if (isset($animated_image['uri']) && !empty($animated_image['uri'])) {
         $file_image = file_create_url($animated_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $animated_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $animated_image ['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $animated_image['uri'], '=')->execute();
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $animated_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $animated_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $animated_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $animated_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $animated_image['fid']);
       }
 
       $expert_image['fid'] = $node->field_story_expert_image['und'][0]['fid'];
-      $expert_image['uri'] = $node->field_story_expert_image['und'][0]['uri'];
+      $expert_image['uri'] = $node->field_story_expert_image ['und'][0]['uri'];
       if (isset($expert_image['uri']) && !empty($expert_image['uri'])) {
         $file_image = file_create_url($expert_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $expert_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $expert_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $expert_image['uri'], '=')->execute();
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $expert_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $expert_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $expert_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $expert_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $expert_image['fid']);
       }
 
       $quote_image['fid'] = $node->field_story_quote_image['und'][0]['fid'];
-      $quote_image['uri'] = $node->field_story_quote_image['und'][0]['uri'];
+      $quote_image['uri'] = $node->field_story_quote_image ['und'][0]['uri'];
       if (isset($quote_image['uri']) && !empty($quote_image['uri'])) {
         $file_image = file_create_url($quote_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $quote_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $quote_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $quote_image['uri'], '=')->execute();
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $quote_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $quote_image['fid']);
+          }
         }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $quote_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $quote_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $quote_image['fid']);
       }
 
       $big_image['fid'] = $node->field_story_big_image['und'][0]['fid'];
-      $big_image['uri'] = $node->field_story_big_image['und'][0]['uri'];
-      if (isset($quote_image['uri']) && !empty($big_image['uri'])) {
+      $big_image['uri'] = $node->field_story_big_image ['und'][0]['uri'];
+      if (isset($big_image['uri']) && !empty($big_image['uri'])) {
         $file_image = file_create_url($big_image['uri']);
         $imagedata = file_get_contents($file_image);
-        $image_name = end(explode('/', $big_image['uri']));
-        $filedir = ITG_IMAGE_FOLDER . 'story_test' . '/' . $time_folder;
-        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
-        }
-        $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-        $inserted_data = db_delete('s3fs_file')->condition('uri', $big_image['uri'], '=')
-            ->execute();
-        $inserted_data = db_update('file_managed')->fields(array(
-              'uri' => $file))->condition('fid', $big_image['fid'], '=')
-            ->execute();
-        all_insert_orignal_image($file, $big_image['fid']);
-      }
+        if (!empty($imagedata)) {
+          $image_name = end(explode('/', $big_image['uri']));
+          $filedir = ITG_IMAGE_FOLDER . 'story' . '/' . $time_folder;
+          if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+            mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+          }
+          $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
 
-      //Image style create
-//    $extralarge_image_fid = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($extralarge_image_fid)) {
-//      $file = file_load($extralarge_image_fid);
-//      itg_story_crate_image_style(EXTRA_LARGE_IMAGE_STYLES, $file->uri);
-//    }
-//
-//    $large_image_fid = $node->field_story_large_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($large_image_fid)) {
-//      $file_large = file_load($large_image_fid);
-//      itg_story_crate_image_style(LARGE_IMAGE_STYLES, $file_large->uri);
-//    }
-//
-//    $medium_image_fid = $node->field_story_medium_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($medium_image_fid)) {
-//      $file_meduim = file_load($medium_image_fid);
-//      itg_story_crate_image_style(MEDIUM_IMAGE_STYLES, $file_meduim->uri);
-//    }
-//
-//    $small_image_fid = $node->field_story_small_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($small_image_fid)) {
-//      $file_small = file_load($small_image_fid);
-//      itg_story_crate_image_style(SMALL_IMAGE_STYLES, $file_small->uri);
-//    }
-//
-//    $small_extra_image_fid = $node->field_story_extra_small_image[LANGUAGE_NONE][0]['fid'];
-//    if (!empty($small_extra_image_fid)) {
-//      $file_extra_small = file_load($small_extra_image_fid);
-//      itg_story_crate_image_style(SMALL_EXTRA_IMAGE_STYLES, $file_extra_small->uri);
-//    }
-      _insert_node_sucecss($node->nid,$node_type);
+          $insert_count = db_select('file_managed', 'sr')
+              ->fields('sr')
+              ->condition('sr.uri', $file_path)
+              ->execute()
+              ->rowCount();
+          if ($insert_count) {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+          }
+          else {
+            $image_name = urlencode($image_name);
+            $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+          }
+          if ($file) {
+            $inserted_data = db_delete('s3fs_file')->condition('uri', $big_image['uri'], '=')->execute();
+            $inserted_data = db_update('file_managed')->fields(array(
+                  'uri' => $file))->condition('fid', $big_image['fid'], '=')
+                ->execute();
+            all_insert_orignal_image($file, $big_image['fid']);
+          }
+        }
+      }
+      _insert_node_sucecss($node->nid, $node_type);
       print $res->nid . ',';
     }
   }
