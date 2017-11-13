@@ -9,6 +9,7 @@
 function itg_analytics_get_node_analytics_data($nid) {
   if (function_exists('mongodb')) {
     $con = mongodb();
+    if(isset($con)) {
     $analytics_data_array = array();
     $data_count_node_view = array();
     $data_count_node_like = array();
@@ -88,6 +89,7 @@ function itg_analytics_get_node_analytics_data($nid) {
     }
 
     return $final_count_result;
+  }
   }
   return 0;
 }
