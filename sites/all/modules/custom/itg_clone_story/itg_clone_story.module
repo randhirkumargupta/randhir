@@ -234,7 +234,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
 
     $form['bundle_name']['#value'] = 'Story';
     $form['bundle_name']['#attributes']['class'][] = 'element-hidden';
-    $form['entity_id']['#autocomplete_path'] = 'searchauto/autocompleteid';
+    //$form['entity_id']['#autocomplete_path'] = 'searchauto/autocompleteid';
     $form['keyword']['#autocomplete_path'] = 'searchauto/autocompletelabel';
     if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
