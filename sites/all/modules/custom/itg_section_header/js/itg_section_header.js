@@ -14,7 +14,3 @@ jQuery('.multi-right-block').click(function (event) {
 	}
 	jQuery('.blocks-ul').html(html);
 });
-
-jQuery('.section-header .navigation__event .mobile-nav').click(function(){
-	jQuery('.section-header .navigation__event .menu').toggle();
-});

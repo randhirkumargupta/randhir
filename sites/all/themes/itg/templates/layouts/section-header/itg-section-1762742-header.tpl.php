@@ -148,3 +148,10 @@ $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images
 
 /*=========Only For This TPL Css End*/
 </style>
+<script>
+
+jQuery('.section-header .navigation__event .mobile-nav').click(function(){
+	jQuery('.section-header .navigation__event .menu').toggle();
+});
+
+</script>
