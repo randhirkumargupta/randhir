@@ -455,7 +455,9 @@ class ItgPhotogalleryMigration extends XMLMigration {
       $tid_array[] = 1208521; // photo section
       $all_category = array_unique($tid_array);
       foreach ($all_category as $chunk_data) {
-        $data_category[]['tid'] = $chunk_data;
+         if(!empty($chunk_data) && is_numeric($chunk_data)) {
+          $data_category[]['tid'] = $chunk_data;
+         }
       }
     }
     
@@ -483,8 +485,10 @@ class ItgPhotogalleryMigration extends XMLMigration {
         }
       }
       $drupal_all_category = array_unique($drupal_tid_array);
-      foreach ($drupal_all_category as $chunk_data) {
-        $drupal_id_category[]['tid'] = $chunk_data;
+      foreach ($drupal_all_category as $chunk_datas) {
+        if(!empty($chunk_datas) && is_numeric($chunk_datas)) {
+          $drupal_id_category[]['tid'] = $chunk_datas;
+        }
       }
     }
     $final_mix_category = '';

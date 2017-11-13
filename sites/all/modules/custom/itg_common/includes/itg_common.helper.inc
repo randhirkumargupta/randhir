@@ -150,10 +150,11 @@ define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.asp
 //define('FRONT_URL', 'http://localhost/itg-cms');
 //define('BACKEND_URL', 'http://192.168.14.45/itg-cms');
 // set comment config in variable
-if (function_exists('global_comment_last_record')) {
-  variable_set('COMMENT_CONFIG', global_comment_last_record());
-}
+//if (function_exists('global_comment_last_record')) {
+  //variable_set('COMMENT_CONFIG', global_comment_last_record());
+//}
 
+define('taxonomy_terms_per_page_admin' , 20);
 /**
  * Function for debugging arrays and objects.
  * @param $arg

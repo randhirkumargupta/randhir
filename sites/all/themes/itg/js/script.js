@@ -1136,6 +1136,32 @@ jQuery(document).ready(function (e) {
             }
         ]
     });
+
+    /* start photo/ video next/pre icon*/
+    var t = jQuery(".itg-region ul li").length,
+        e = jQuery(".itg-region ul li").outerWidth(true),
+        o = e * t;
+    jQuery(".itg-region ul").css("width", o + 100);
+    var s = 0;
+    jQuery(".scroll-arrow-left").click(function () {
+        if (0 == s)
+            jQuery(this).show();
+        else {
+            var t = jQuery(".itg-region ul li").eq(s - 1).outerWidth(true);
+            jQuery(".itg-region ul").animate({
+                left: "+=" + t
+            }), s -= 1, jQuery(".scroll-arrow-right").fadeIn()
+        }
+    }), jQuery(".scroll-arrow-right").click(function () {
+        if (t - 7 >= s) {
+            var e = jQuery(".itg-region ul li").eq(s).outerWidth();
+            jQuery(".itg-region ul").animate({
+                left: "-=" + e
+            }), s += 1
+        } else
+            jQuery(".scroll-arrow-right").fadeOut()
+    })
+    /* end photo/ video next/pre icon*/
 });
 //function setSidebarHeight() {
 //    var sticky_sidebar = jQuery('.region-sidebar-second');
@@ -1264,3 +1290,8 @@ jQuery(window).load(function () {
     // For Slider Counter Prev
     jQuery('div.col-md-4 div.other-details-main ul.counterslide button.slick-prev').attr('onclick', "ga('send', 'event', 'CounterSliderPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
 });
+
+// Resize megareview iframe.
+function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+}

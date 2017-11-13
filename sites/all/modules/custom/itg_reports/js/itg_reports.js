@@ -288,7 +288,7 @@ jQuery(document).ready(function () {
             var selected = jQuery("#edit-rg1-date-from").val();
             var dt = new Date(selected);
             dt.setDate(dt.getDate());
-            jQuery("#edit-rg2-date-to").datepicker("option", "minDate", dt);
+            jQuery("#edit-rg1-date-to").datepicker("option", "minDate", dt);
         }
     });
     jQuery("#edit-rg2-date-from").datepicker({
