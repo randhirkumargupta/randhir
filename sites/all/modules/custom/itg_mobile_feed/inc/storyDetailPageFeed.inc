@@ -266,6 +266,7 @@ function getImgTag($node) {
   $img_caption_val = "";
   $story_large_fid = $node->field_story_large_image_fid['und'][0]['fid'];
   $story_large_img = completeFilePath($story_large_fid);
+  p($node); die();
   
 
   $html = $node->body['und']['0']['value'];
@@ -292,6 +293,7 @@ function getImgTag($node) {
   }else{
     $imgtag = "<bodyimages><image><lowres><![CDATA[" . $story_large_img . "]]></lowres><highres><![CDATA[" . $story_large_img . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
   }
+  $imgtag = "<bodyimages><image><lowres><![CDATA[" . $story_large_img . "]]></lowres><highres><![CDATA[" . $story_large_img . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
   return $imgtag;
 }
 
