@@ -1091,3 +1091,11 @@ function itg_mobile_feed_xml_feed_url_cron() {
         $res = callAPI('GET', $url, $data = false);
     }
 }
+
+/**
+ * XML Parse by HTML Tags
+ * 
+ */
+function xmlEscape($string) {
+    return str_replace(array('&', '<', '>', '\'', '"'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;'), $string);
+}

@@ -134,7 +134,7 @@ function generateLeftMainCategoryPage($tid, $term_name) {
 
         $listcount++;
 
-        $title = $resvalue['title'];
+        $title = xmlEscape($resvalue['title']);
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $created = $resvalue['created'];
