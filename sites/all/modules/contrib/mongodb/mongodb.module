@@ -29,9 +29,13 @@ function mongodb($alias = 'default') {
   $host = $connection['host'];
   $options = $connection['connection_options'] +  array('connect' => TRUE);
   $db = $connection['db'];
+  
   if (!isset($mongo_objects[$host][$db])) {
     try {
+      watchdog('mongo1', '<pre>' . print_r($host, true) .'<pre>');
+      watchdog('mongo2', '<pre>' . print_r($options, true) .'<pre>');
       $mongo = new MongoClient($host, $options);
+      watchdog('mongo3', '<pre>' . print_r($mongo, true) .'<pre>');
       $mongo_objects[$host][$db] = $mongo->selectDB($db);
       $mongo_objects[$host][$db]->connection = $mongo;
     }
@@ -40,8 +44,7 @@ function mongodb($alias = 'default') {
       throw $e;
     }
   }
-  watchdog('mongo1', '<pre>' . print_r($mongo_objects, true) .'<pre>');
-  watchdog('mongo2', '<pre>' . print_r($mongo_objects[$host][$db], true) .'<pre>');
+  
   return $mongo_objects[$host][$db];
 }
 
