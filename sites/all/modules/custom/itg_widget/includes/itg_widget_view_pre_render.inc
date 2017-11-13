@@ -320,4 +320,9 @@ function itg_widget_views_pre_render(&$view) {
 //      drupal_goto('user-selection');
 //    }
   }
+  elseif ($view->name == "alexa_audio_clips" && $view->current_display == 'page') {
+    $alexa_query['destination'] = 'alexa-audio-clips';
+    $header_content .= l(t('Add new Alexa audio clip'), 'node/add/alexa-audio-clips', array('query' => $alexa_query));
+    $view->attachment_before = $header_content;
+  }
 }

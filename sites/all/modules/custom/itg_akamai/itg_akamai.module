@@ -275,23 +275,10 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 
       $data_for_log = ItgAkamaiUtility::itgAkamaiGetDataForLog($paths_data, $data, $response->getBody(), $user->uid, $response_data_decoded->httpStatus, $response_data_decoded->purgeId);
       $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
-
       $request_success_flag = 1;
 
       // Passing / Saving akamai purging log to drupal watchdog 
       watchdog('ITG-Akamai log', 'Url have been purged successfully! Data =>' . json_encode($data_for_log));
-
-      // Sending for Recaching
-      if (module_exists('httprl')) {
-        $varnish_paths = array_map(function($item) {
-          return rtrim($item, '/\\');
-        }, $varnish_paths);
-        module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
-        if (isset($varnish_paths) && !empty($varnish_paths)) {
-          akamai_recacher_crawler($varnish_paths);
-        }
-      }
-      // End code for Recaching
     }
     catch (Exception $e) {
       $response_data_decoded = json_decode($e->getMessage());
@@ -301,6 +288,19 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       drupal_set_message(t("OOPS unable to purge URL and error is :" . $e->getMessage()), 'error');
       $request_success_flag = 0;
     }
+
+    // Sending for Recaching
+    if (module_exists('httprl')) {
+      $varnish_paths = array_map(function($item) {
+        return rtrim($item, '/\\');
+      }, $varnish_paths);
+      module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
+      if (isset($varnish_paths) && !empty($varnish_paths)) {
+        akamai_recacher_crawler($varnish_paths);
+      }
+    }
+    // End code for Recaching
+
     return $request_success_flag;
   }
 }
@@ -842,10 +842,39 @@ function itg_akamai_add_cc_button($form, &$form_state) {
  * @param type $node
  */
 function itg_akamai_node_insert($node) {
-  // Setting metadata for the TTL for each node id 
-  if (user_access("administer itg akamai")) {
-    if ($node->status == 1) { // Akamai setting for node content level if node is published 
+  if ($node->status == 1) {
+    $mapping = itg_akamai_getting_mapped_content_type();
+    if (in_array($node->type, $mapping)) {
+      $current_url = NULL;
+      if (function_exists('itg_common_custompath_insert_load')) {
+        $current_url = itg_common_custompath_insert_load($node);
+      }
+      else {
+        $current_url = $node->path['alias'];
+      }
+      $amp_types = itg_akamai_amp_cc_mapping();
+      // Adding AMP urls for node types
+      if (in_array($node->type, $amp_types)) {
+        $current_url = itg_akamai_send_for_host_mapping_for_amp($current_url);
+      }
+      // This line has been added for testing
+      $varnish_paths = itg_akamai_varnish_host_mapping($current_url);
+      if (module_exists('httprl')) {
+        $varnish_paths = array_map(function($item) {
+          return rtrim($item, '/\\');
+        }, $varnish_paths);
+        module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
+        if (isset($varnish_paths) && !empty($varnish_paths)) {
+          akamai_recacher_crawler($varnish_paths);
+        }
+      }
+    }
+
+    // Setting metadata for the TTL for each node id 
+    if (user_access("administer itg akamai")) {
+      //if ($node->status == 1) { // Akamai setting for node content level if node is published 
       itg_akamai_content_setting($node);
+      //}
     }
   }
 }

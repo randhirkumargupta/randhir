@@ -252,9 +252,11 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
  * @param string $type
  */
 function itg_story_clone_data($keyword, $type) {
-
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
   // apachesolr_site_hash();
-  if (!empty($keyword)) {
+  if (!empty($keyword) && $ping) {
     $solr = apachesolr_get_solr();
     $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$keyword"));
     $query->addParam('rows', '10'); // How many rows of result to display default it is 10.
