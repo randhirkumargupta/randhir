@@ -293,7 +293,7 @@ function getImgTag($node) {
     $img_caption_val = "";
     $html = $node->body['und']['0']['value'];
     $str_html = str_get_html($html);
-    $tvalue = "<img>";
+    $tvalue = "div[class=itgimage]";
     $node_str = "";
     $node_ar = array();
     foreach ($str_html->find($tvalue) as $element) {
