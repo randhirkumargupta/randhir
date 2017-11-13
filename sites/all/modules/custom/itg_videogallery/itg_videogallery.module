@@ -142,6 +142,27 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+
+   $items['itg-dfp-tags-setting'] = array (
+		   'page callback'		=>	'drupal_get_form',
+		   'title'				=>	'DFP Tags Configuration ', 
+		   'page arguments' => array('itg_videogallery_dfp_tags_setting_form'),
+       'access arguments' => array('authorized user ftp credin'),
+       'file' => 'includes/itg_videogallery.inc',
+		    'type'				=>	MENU_NORMAL_ITEM
+		   );
+   
+   $items['itg-dfp-tags-list'] = array(
+    'title' => 'DFP Tags List',
+    'description' => 'DFP Tags List',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_videogallery_dfp_tags_list'),
+    'access arguments' => array('authorized user ftp credin'),
+       'file' => 'includes/itg_videogallery.inc',
+		    'type'				=>	MENU_NORMAL_ITEM
+		   );
+
+
   
   $items['itg-video-watch-later-refresh/%'] = array(
     'title' => 'videogallery watch later block refresh',
@@ -151,6 +172,7 @@ function itg_videogallery_menu() {
     'file' => 'includes/itg_video_watch_later_refresh.helper.inc',
     'type' => MENU_CALLBACK,
   );
+
   return $items;
 }
 
@@ -2755,10 +2777,12 @@ function itg_videogallery_getvideoplayer_migrated() {
  */
 function itg_videogallery_getvideoplayer() {
   $fid= $_GET['fid'];
+  $getvideousedon= $_GET['getvideousedon'];
   $tabindex = $_GET['tabindex'];
+  $video_title = $_GET['video_title'];
   $video_data = itg_videogallery_get_video_info_by_fid($fid);
   if($video_data[0]->video_repo_type == 'INTERNAL') {
-    print theme('internal_video_player' , array("data" => $fid)); 
+   print theme('internal_video_player' , array("data" => $fid , 'used_on' =>$getvideousedon,'title' => $video_title)); 
   }else {
   print theme('itg_videogallery_getvideoplayer' , array('video_data' => $video_data , 'tabindex' => $tabindex));
   }
@@ -4386,7 +4410,7 @@ function videogallery_new_fileupload_form($form, &$form_state) {
 function file_validate_name(stdClass $file) {
   $errors = array();
 //generate file name 
-  $new_filename = time() . $file->filename;
+  $new_filename = $file->filename;
   $new_filename = preg_replace('/\s+/', '_', $new_filename);
   $file->filename = $new_filename;
 
@@ -4945,7 +4969,7 @@ if(count($bitrates) == 1) {
  * Implements itg_videogallery_make_url_for_jwpalyer
  * @parm array $video_data
  */
-function itg_videogallery_make_parm_for_jwpalyer($video_data) {
+function itg_videogallery_make_parm_for_jwpalyer($video_data,$used_on) {
   global $base_url;
   $retrun_array = array();
   if(!empty($video_data)) {
@@ -4959,9 +4983,46 @@ function itg_videogallery_make_parm_for_jwpalyer($video_data) {
    $retrun_array['bitrate_url'] = $bitrate_url; 
    $retrun_array['player_image'] = $base_url . "/" . drupal_get_path('theme', 'itg').'/images/itg_image370x208.jpg';
   }
+  $dfp_data = itg_videogallery_get_dfp_tags ($video_data['in']['website'] , $video_data['in']['client']);
+if(!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
+  if($used_on == 'embed') {
+          $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_internal;
+
+  }else{
+      $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags;
+
+  }
+}else {
+  $retrun_array['dfp_tags'] =  JWPLAYER_DFP_TAG;
+}
+
+if(!empty($dfp_data)) {
+  if($used_on == 'embed' && !empty($dfp_data[0]->ga_tag_extarnal)) {
+     $retrun_array['ga_code'] =  $dfp_data[0]->ga_tag_extarnal;
+  }else {
+    $retrun_array['ga_code'] = ITG_GA_CODE;
+  }
+  if($used_on != 'embed' && !empty($dfp_data[0]->ga_tag_internal)) {
+     $retrun_array['ga_code'] =  $dfp_data[0]->ga_tag_internal;
+  }else {
+    $retrun_array['ga_code'] = ITG_GA_CODE;
+  }
+}
+
   return $retrun_array;
 }
 
+/**
+ * 
+ */
+function itg_videogallery_get_dfp_tags($website , $client) {
+  $query = db_select('itg_dfp_tags_setting', 'idts');
+  $query->fields('idts');
+  $query->condition('wesbite', strtolower($website), '=');
+  $query->condition('client', strtolower($client), '=');
+  $video_data = $query->execute()->fetchAll();
+  return $video_data;
+}
 
 /**
  * This function use for make video bitrate url:

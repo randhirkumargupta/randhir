@@ -32,7 +32,7 @@ if ($widget_style == 'auto-road-trip') {
                   else {
                     ?>
                     <a class="pic <?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                        <img  height="66" width="88" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');?>" alt="" />
+                        <img  height="66" width="88" src="<?php print file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));?>" alt="" />
                     </a>
                   <?php }
                   ?>
@@ -128,7 +128,7 @@ else if ($widget_style == 'buying-guid') {
                 $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
               }
               else {
-                $extra_large_image_url =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
+                $extra_large_image_url =  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));
               }
 
 
@@ -249,7 +249,7 @@ else if ($widget_style == 'in-depth') {
                   $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                 }
                 else {
-                  $extra_large_image_url =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
+                  $extra_large_image_url =  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));
                 }
                 ?>
 
@@ -277,7 +277,7 @@ else if ($widget_style == 'in-depth') {
                   $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                 }
                 else {
-                  $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
+                  $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));
                 }
                 ?>
                 <ul>
@@ -325,7 +325,7 @@ else if ($widget_style == 'in-depth') {
                       $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                     }
                     else {
-                      $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
+                      $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));
                     }
                     ?>
 
@@ -385,7 +385,7 @@ else if ($widget_style == 'movies-celebrities') {
                   $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                 }
                 else {
-                  $extra_large_image_url =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
+                  $extra_large_image_url =  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));
                 }
                 ?>
 
@@ -448,7 +448,7 @@ else if ($widget_style == 'movies-celebrities') {
                       $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                     }
                     else {
-                      $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
+                      $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));
                     }
                     ?>
 
@@ -508,7 +508,7 @@ else if ($widget_style == 'movies-lifestyle') {
                   $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                 }
                 else {
-                  $extra_large_image_url =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
+                  $extra_large_image_url =  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));
                 }
                 ?>
 
@@ -573,7 +573,7 @@ else if ($widget_style == 'movies-lifestyle') {
                       $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                     }
                     else {
-                      $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
+                      $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));
                     }
                     ?>
 
@@ -632,7 +632,7 @@ else if ($widget_style == 'oscar-news') {
                   $extra_large_image_url = image_style_url("anchors_landing", $entity['mi_file_uri']);
                 }
                 else {
-                  $extra_large_image_url =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
+                  $extra_large_image_url =  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));
                 }
                 ?>
                 <div class="col-md-12">
@@ -663,7 +663,7 @@ else if ($widget_style == 'oscar-news') {
                   $extra_large_image_url = image_style_url("widget_small", $entity['si_file_uri']);
                 }
                 else {
-                  $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
+                  $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image170x127.jpg'));
                 }
                 ?>
                 <div class="col-md-6 col-sm-3 col-xs-6">                   
@@ -719,7 +719,7 @@ else if ($widget_style == 'standpoint') {
       $extra_large_image_url = image_style_url("section_ordering_widget", $entity['uri']);
     }
     else {
-      $extra_large_image_url =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
+      $extra_large_image_url =  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));
     }
     ?>
 
@@ -773,7 +773,7 @@ else if ($widget_style == 'oscar-features') {
             $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
           }
           else {
-            $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
+            $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));
           }
           ?>
           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -831,7 +831,7 @@ else if ($widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' 
                     $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                   }
                   else {
-                    $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
+                    $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));
                   }
                   ?>
 
@@ -890,7 +890,7 @@ else if ($widget_style == 'home-shows') {
                     $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
                   }
                   else {
-                    $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
+                    $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));
                   }
                   ?>
 
@@ -951,7 +951,7 @@ else if ($widget_style == 'home-watch') {
                         $extra_large_image_url = image_style_url("image170x127", $entity['si_file_uri']);
                       }
                       else {
-                        $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
+                        $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image170x127.jpg'));
                       }
                       ?>
 
@@ -1009,7 +1009,7 @@ else if ($widget_style == 'budget-decoded') {
                     $extra_large_image_url = image_style_url("anchors_landing", $entity['si_file_uri']);
                   }
                   else {
-                    $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
+                    $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));
                   }
                   ?>
 
@@ -1078,7 +1078,7 @@ else if ($widget_style == 'sport-column') {
                   }
                   else {
                     ?>
-                    <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> </a></span>
+                    <span class="pic  <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">  <img  height="66" width="88" src="<?php print file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>" /> </a></span>
 
                   <?php }
                   ?>
@@ -1137,7 +1137,7 @@ else if ($widget_style == 'election-so-sorry') {
               else {
                 ?>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                    <img  height="208" width="370" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
+                    <img  height="208" width="370" src="<?php print file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
                 </a>
               <?php } ?>
               <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['title'] ?> ">
@@ -1198,7 +1198,7 @@ else if ($widget_style == 'talking-point') {
                     $extra_large_image_url = image_style_url("widget_very_small", $reporter->field_story_extra_large_image['und'][0]['uri']);
                   }
                   else {
-                    $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
+                    $extra_large_image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));
                   }
                   ?>
 
@@ -1210,7 +1210,7 @@ else if ($widget_style == 'talking-point') {
                   }
                   else {
                     ?>
-                <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');?>" alt="" title="" /></a></span>
+                <span class="pic <?php echo $video_class; ?>"> <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$entity->nid"); ?>">   <img width="88" height="66" src="<?php print file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));?>" alt="" title="" /></a></span>
 
                   <?php }
                   ?>
@@ -1373,7 +1373,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                   else {
                     ?>
                     <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                      <img class="defalt-placeholder-magazin"  height="140" width="100" src="<?php print  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="" />
+                      <img class="defalt-placeholder-magazin"  height="140" width="100" src="<?php print  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));?>" alt="" title="" />
                     </a>
                   <?php } ?>
                   <div class="small-detail">
@@ -1533,7 +1533,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
               else {
                 ?>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                  <img  height="208" width="370" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');?>" alt="" title="" />
+                  <img  height="208" width="370" src="<?php print file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));?>" alt="" title="" />
                 </a>
               <?php } ?>
               <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">

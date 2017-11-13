@@ -50,7 +50,7 @@ if (!empty($data['node_data'])) :
                 } else {
                   ?>
                   <a title="<?php echo _widget_title($data['node_data']->title); ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>
-                    <img width="647" height="363" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');?>" alt="" title="" />
+                    <img width="647" height="363" src="<?php print file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg'));?>" alt="" title="" />
                   </a>  
 
                   <img class="loading-popup" src="<?php echo drupal_get_path('theme', 'itg') . '/images/tab-loading.gif' ?>" alt="loading" />          

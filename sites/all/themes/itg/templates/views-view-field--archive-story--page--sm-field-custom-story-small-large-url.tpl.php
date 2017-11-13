@@ -36,7 +36,7 @@ $related_data = itg_get_related_story_content($row->entity_id);
 <a href="<?php print $front_url; ?>" title="<?php print $related_data->label; ?>" target="_blank"><img alt="<?php print $related_data->label; ?>" style="width: 170px; height: 127px" src="<?php print $related_data->sm_field_custom_story_small_large_url[0]; ?>" title="<?php print $related_data->label; ?>"/></a>  
   
 <?php }  else {
-  $default_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
+  $default_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image170x127.jpg'));
 ?>
 <a href="<?php print $front_url; ?>" title="<?php print $related_data->label; ?>" target="_blank"><img alt="default_image" src="<?php print $default_url; ?>" title="default_image" /></a>
 <?php
