@@ -475,52 +475,56 @@ function itg_get_recommended_data($section) {
 
   if (function_exists('mongodb')) {
     $con = mongodb();
-    $sections = explode(',' , $section);
-    $data = array();
-    $ar_document = array();
+    if (isset($con)) {
+      $sections = explode(',', $section);
+      $data = array();
+      $ar_document = array();
 
-    foreach ($sections as $tid) {
-      $people = $con->pagedetails;
-      $cond = array('section' => $tid);
-      $cursor = $people->count($cond);
-      $data[$tid] = $cursor;
-    }
-    
-    arsort($data);
-    $three = array_slice($data , 0 , 4 , true);
-    
-    foreach ($three as $key => $value) {
-      $people = $con->pagedetails;
-      $cursor = $con->command(
-          array(
-            "distinct" => "pagedetails" ,
-            "key" => "section" ,
-            "query" => array('section' => (string) $key)
-      ));
-      foreach ($cursor['values'] as $document) {
-        $ar_document[] = (int) $document;
+      foreach ($sections as $tid) {
+        $people = $con->pagedetails;
+        $cond = array('section' => $tid);
+        $cursor = $people->count($cond);
+        $data[$tid] = $cursor;
       }
+
+      arsort($data);
+      $three = array_slice($data, 0, 4, true);
+
+      foreach ($three as $key => $value) {
+        $people = $con->pagedetails;
+        $cursor = $con->command(
+            array(
+              "distinct" => "pagedetails",
+              "key" => "section",
+              "query" => array('section' => (string) $key)
+        ));
+        foreach ($cursor['values'] as $document) {
+          $ar_document[] = (int) $document;
+        }
+      }
+      return $ar_document;
     }
-    return $ar_document;
   }
 }
 
 /**
  * Helper function to get title and url by nid
  */
-function itg_user_log_get_details($nid , $collection) {
+function itg_user_log_get_details($nid, $collection) {
   $data = '';
   if (function_exists('mongodb')) {
     $con = mongodb();
-    $people = $con->$collection;
-    $cond = array('nid' => $nid);
-    $cursor = $people->find($cond);
-    foreach ($cursor as $document) {
-      $data['title'] = $document['title'];
-      $data['url'] = $document['url'];
-      $data['section'] = $document['section'];
+    if (isset($con)) {
+      $people = $con->$collection;
+      $cond = array('nid' => $nid);
+      $cursor = $people->find($cond);
+      foreach ($cursor as $document) {
+        $data['title'] = $document['title'];
+        $data['url'] = $document['url'];
+        $data['section'] = $document['section'];
+      }
+      return $data;
     }
-    return $data;
   }
 }
 
@@ -530,10 +534,12 @@ function itg_user_log_get_details($nid , $collection) {
 function itg_user_log_get_sections($c_name) {
   if (function_exists('mongodb')) {
     $con = mongodb();
-    $people = $con->may_we_recommend_data;
-    $cond = array('unique_id' => (int) $c_name);
-    $cursor = $people->findOne($cond , array('section'));
-    return $cursor['section'];
+    if (isset($con)) {
+      $people = $con->may_we_recommend_data;
+      $cond = array('unique_id' => (int) $c_name);
+      $cursor = $people->findOne($cond, array('section'));
+      return $cursor['section'];
+    }
   }
 }
 

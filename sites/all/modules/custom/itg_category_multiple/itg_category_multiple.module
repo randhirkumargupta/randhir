@@ -586,8 +586,10 @@ function itg_category_multiple_taxonomy_term_update($term) {
     $id = $term->tid;
     if (function_exists('mongodb') && !empty($id)) {
       $con = mongodb();
+      if($con) {
       $people = $con->taxonomy_term_data_mongo;
       $people->remove(array("tid" => (int) $id));
+      }
     }
     // Inserting data into taxonomy 
     if (function_exists('mongodb')) {
@@ -633,8 +635,10 @@ function itg_category_multiple_taxonomy_term_delete($term) {
     $id = $term->tid;
     if (function_exists('mongodb') && !empty($id)) {
       $con = mongodb();
+      if ($con) {
       $people = $con->taxonomy_term_data_mongo;
       $people->remove(array("tid" => (int) $id));
+      }
     }
   }
 }
