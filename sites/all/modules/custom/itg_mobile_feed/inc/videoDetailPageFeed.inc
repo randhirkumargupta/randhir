@@ -366,11 +366,11 @@ function getDailymotionPath($fid, $filename) {
         $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
         $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);        //m3u8        
         $m3u8_tags = mcu8_tags($nid);
-        echo "<pre>";print_r($m3u8_tags);echo "</pre>";
+        
         $m3 = implode(',', $m3u8_tags);
         
         $new_m3 = ','.$m3.',.mp4.csmil/master.m3u8';    
-        echo $new_m3;
+        
         $videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
         $videoparts_m3u8 = str_replace('http://medias3d.intoday.in', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
         //end         
@@ -380,7 +380,7 @@ function getDailymotionPath($fid, $filename) {
         $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
         //$output .= "" . $videoparts_3gp . "" . $video_path_mp4 . "" . $videoparts_3gp . "" . $flv_url . "" . $videoparts_3gp . "";         
     }
-p($video_detail);
+
     return $video_detail;
 }
 /**
