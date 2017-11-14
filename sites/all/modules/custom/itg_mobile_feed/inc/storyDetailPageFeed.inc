@@ -264,7 +264,7 @@ function getImgTag($node) {
   $imgtag = "";
   $src = "";
   $img_caption_val = "";
-  $story_large_fid = $node->field_story_large_image_fid['und'][0]['fid'];
+  $story_large_fid = $node->field_story_extra_large_image['und'][0]['fid'];
   $story_large_img = completeFilePath($story_large_fid);
   
 
