@@ -293,7 +293,7 @@ function getImgTag($node) {
   }else{
     $imgtag = "<bodyimages><image><lowres><![CDATA[" . $story_large_img . "]]></lowres><highres><![CDATA[" . $story_large_img . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
   }
-  return $imgtag;
+  return $imgtag; 
 }
 
 
