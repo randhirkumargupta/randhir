@@ -362,7 +362,7 @@ function getDailymotionPath($fid, $filename) {
         } $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
         $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
         $rr = explode('/', $video_path_mp4);
-        p($rr);
+        print_r($rr);
         $mp4_last_fname = end($rr);
         $gp_file_path = '3gp/' . $mp4_last_fname . '';
         $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
