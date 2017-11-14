@@ -17,8 +17,7 @@ $you_will_love_these = array_slice($rows, 4);
                             </a>
                           <?php else : ?>
                             <a href="<?php print $base_url . '/' . "sosorry/ " . $value['nid'] . "" ?>" class="pic">
-
-                                <img width='170' height='127'  src='<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg'); ?>' alt='' title='' />
+                                <img width='170' height='127'  src='<?php print file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image170x127.jpg'));?>' alt='' title='' />
                             </a>
                           <?php endif; ?>
                           <figcaption><i class="fa fa-play-circle"></i> <?php print $value['field_video_duration']; ?></figcaption>
@@ -46,8 +45,7 @@ $you_will_love_these = array_slice($rows, 4);
                             </a>
                           <?php else : ?>
                             <a href="<?php print $base_url . '/' . "sosorry/ " . $value['nid'] . "" ?>" class="pic">
-
-                                <img width='170' height='127'  src='<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg'); ?>' alt='' title='' />
+                              <img width='170' height='127'  src='<?php print file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image170x127.jpg'));?>' alt='' title='' />
                             </a>
                           <?php endif; ?>
                           <figcaption><i class="fa fa-play-circle"></i> <?php print $value['field_video_duration']; ?></figcaption>

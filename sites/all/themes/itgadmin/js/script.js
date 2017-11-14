@@ -391,8 +391,6 @@ jQuery(document).ready(function () {
                     }, 2000);
                 },
                 error: function (xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
                 }
             });
         });
@@ -714,14 +712,12 @@ jQuery(document).ready(function () {
                 $(this).parents('td').find('.field-name-field-syndication-time').show();
             }
             if (radioCheck == true && radioVal == 'Minute') {
-                console.log(radioVal);
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
                 $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
                 $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
                 $(this).parents('td').find('.field-name-field-minute').show();
                 $(this).parents('td').find('.field-name-field-minute select').show();
                 var time_val = $(this).parents('td').find('.field-name-field-syndication-time input').val();
-                console.log(time_val);
                 if(time_val == "" || time_val.length <=0) {
                     $(this).parents('td').find('.field-name-field-syndication-time').hide();
                     $(this).parents('td').find('.field-name-field-syndication-time input').val("00:00");
@@ -1100,8 +1096,6 @@ jQuery(document).ready(function () {
             complete: function () {
             },
             error: function (xhr, desc, err) {
-//                console.log(xhr);
-//                console.log("Details: " + desc + "\nError:" + err);
             }
         });
     });

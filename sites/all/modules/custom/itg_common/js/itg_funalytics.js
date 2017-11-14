@@ -14,13 +14,11 @@
                 var loader_html = '<div id="funalytics-ajex-loader"><img class="widget-loader" src="sites/all/themes/itg/images/loader.svg" alt="Loading..." title="" /></div>';
                 $("#funalytics_popup_display").html(loader_html);
                 var slick_goto = $(this).attr('data-nid');
-                //console.log(goto);
                 $.ajax({
                     url: base_url + "/funalytics-popup",
                     method: 'post',
                     data: {},
                     success: function (data) {
-                        //console.log(goto);
                         $("#funalytics_popup_display").html(data);
                         var s = "jQuery('.funalytics-slider').slick({initialSlide: " + slick_goto + ", slidesToShow: 1, slidesToScroll: 1,infinite: false, prevArrow: \"<button class = 'slick-prev'><i class = 'fa fa-angle-left'></i></button>\", nextArrow: \"<button class = 'slick-next'><i class = 'fa fa-angle-right'></i></button>\"});";
                         setTimeout(s);

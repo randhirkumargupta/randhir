@@ -1332,14 +1332,15 @@ function itg_event_backend_get_session_story_title($daywise, $font_color) {
   $query->fields('eh', array('field_event_highlights_value'));
   $query->condition('pt.field_programe_title_value', $daywise, '=');
   $result = $query->execute();
-
+  $key = 0;
   foreach ($result as $value) {
     $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
     $story_nid = $daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id'];
     $story_title = itg_common_get_node_title($story_nid);
     $story_detail = itg_event_get_story_details($story_nid);
-    $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
-    $session['story_details'][] = $story_detail;
+    $session[$key]['story_title'] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
+    $session[$key]['story_details'] = $story_detail;
+    $key++;
   }
   return $session;
 }
@@ -1356,14 +1357,15 @@ function itg_event_backend_get_session_story_title_move_field($daywise, $font_co
   $query->fields('media', array('field_event_media_value'));
   $query->condition('daywise.field_daywise_event_value', $daywise, '=');
   $result = $query->execute();
-
+  $key = 0;
   foreach ($result as $value) {
     $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
     $story_nid = $daywise_detail[$value->field_event_media_value]->field_associate_story_event_new[LANGUAGE_NONE][0]['target_id'];
     $story_title = itg_common_get_node_title($story_nid);
     $story_detail = itg_event_get_story_details($story_nid);
-    $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
-    $session['story_details'][] = $story_detail;
+    $session[$key]['story_title'] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
+    $session[$key]['story_details'] = $story_detail;
+    $key++;
   }
   return $session;
 }

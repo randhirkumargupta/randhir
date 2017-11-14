@@ -344,7 +344,7 @@
                       if(!empty($video_node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
                       $final_image = image_style_url("anchors_landing",$video_node->field_story_medium_image[LANGUAGE_NONE][0]['uri']);
                       } else {
-                      $final_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
+                      $final_image = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'));
                       }
                       $large_image = '<img src="' . $final_image . '" alt="image" title="image">';
                       print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
@@ -373,7 +373,7 @@
                       if(!empty($photo_node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
                       $final_image = image_style_url("anchors_landing",$photo_node->field_story_medium_image[LANGUAGE_NONE][0]['uri']);
                       } else {
-                       $final_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg'); 
+                       $final_image = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg')); 
                       }
                       $small_image = '<img src="' . $final_image . '" alt="image" title="image">';
                       $image_count = count($photo_node->field_gallery_image['und']);

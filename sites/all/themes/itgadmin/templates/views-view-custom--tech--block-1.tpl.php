@@ -24,7 +24,7 @@
               if ($row['field_story_large_image'] != "") {
                 print $row['field_story_large_image'];
               } else {
-                print "<img  src='" .  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image483x271.jpg') ."' alt='' title='' />";
+                print "<img  src='" .  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image483x271.jpg')) ."' alt='' title='' />";
               }
               ?> 
 
