@@ -393,7 +393,7 @@ function getDailymotionPath($fid, $filename) {
         $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
         //$output .= "" . $videoparts_3gp . "" . $video_path_mp4 . "" . $videoparts_3gp . "" . $flv_url . "" . $videoparts_3gp . "";         
     }
-
+p($video_detail);
     return $video_detail;
 }
 /**
