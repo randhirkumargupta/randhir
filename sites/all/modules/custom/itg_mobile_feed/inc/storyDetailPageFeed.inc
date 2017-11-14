@@ -288,7 +288,7 @@ function getImgTag($node) {
   
     //$img_caption_val = getStringBetween($html, '<div class="body_caption">', '</div>');
   }
-  //$src = "";
+  $src = "";
   if ($src) {
     $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
   }else{
