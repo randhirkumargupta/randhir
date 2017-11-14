@@ -68,6 +68,7 @@ function itg_videogallery_ftp_video_form($form) {
  * {@inheritdoc}
  */
 function itg_videogallery_s3_video_form($form) {
+
   $form['aws_access_key'] = array(
     '#type' => 'textfield',
     '#title' => t('AWS S3 Access Key'),
@@ -131,10 +132,23 @@ function itg_videogallery_s3_video_form($form) {
 }
 
 /**
+ * 
+ */
+function _get_dfp_tags_by_id($id) {
+  $query = db_select('itg_dfp_tags_setting', 'idts');
+  $query->fields('idts');
+  $query->condition('id', $id, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
  * Impelements form for ITG DFP Tags .
  * {@inheritdoc}
  */
 function itg_videogallery_dfp_tags_setting_form($form, &$form_state) {
+
+  $data_form = _get_dfp_tags_by_id(arg(1));
   $website_options = array(
     'indiatoday' => 'Indiatoday',
     'idaplex' => 'Idaplex',
@@ -143,37 +157,49 @@ function itg_videogallery_dfp_tags_setting_form($form, &$form_state) {
     '#type' => 'select',
     '#title' => t('Website'),
     '#options' => $website_options,
+    '#default_value' => ($data_form[0]->wesbite) ? $data_form[0]->wesbite : '',
     '#required' => TRUE
   );
 
   $client_options = array(
     'internal' => 'Internal',
     'ruptly' => 'Ruptly',
+    'amazon' => 'Amazon'
   );
   $form['client'] = array(
     '#type' => 'select',
     '#title' => t('Client'),
     '#options' => $client_options,
+    '#default_value' => ($data_form[0]->client) ? $data_form[0]->client : '',
     '#required' => TRUE,
   );
   $form['dfp_tags'] = array(
     '#type' => 'textarea',
+    '#default_value' => ($data_form[0]->dfp_tags) ? $data_form[0]->dfp_tags : '',
     '#title' => t('Page DFP Tags '),
+  );
+  $form['hidden_id'] = array(
+    '#type' => 'hidden',
+    '#default_value' => ($data_form[0]->id) ? $data_form[0]->id : '',
   );
   $form['dfp_tags_internal'] = array(
     '#type' => 'textarea',
+    '#default_value' => ($data_form[0]->dfp_tags_internal) ? $data_form[0]->dfp_tags_internal : '',
     '#title' => t('Embed DFP Tags Internal'),
   );
   $form['dfp_tags_external'] = array(
     '#type' => 'textarea',
+    '#default_value' => ($data_form[0]->dfp_tags_external) ? $data_form[0]->dfp_tags_external : '',
     '#title' => t('Embed DFP Tags External'),
   );
   $form['ga_tag_internal'] = array(
     '#type' => 'textfield',
+    '#default_value' => ($data_form[0]->ga_tag_internal) ? $data_form[0]->ga_tag_internal : '',
     '#title' => t('GA Tags Internal'),
   );
   $form['ga_tag_extarnal'] = array(
     '#type' => 'textfield',
+    '#default_value' => ($data_form[0]->ga_tag_extarnal) ? $data_form[0]->ga_tag_extarnal : '',
     '#title' => t('GA Tags External'),
   );
   $form['submit'] = array(
@@ -198,20 +224,38 @@ function itg_videogallery_dfp_tags_setting_form_submit($form, &$form_state) {
   $dfp_tags_external = $form_state['values']['dfp_tags_external'];
   $ga_tag_internal = $form_state['values']['ga_tag_internal'];
   $ga_tag_extarnal = $form_state['values']['ga_tag_extarnal'];
-  $result = db_merge('itg_dfp_tags_setting')
-      ->key(array('wesbite' => $wesbite, 'client' => $client))
-      ->fields(array(
-        'wesbite' => $wesbite,
-        'client' => $client,
-        'dfp_tags' => $dfp_tags,
-        'dfp_tags_internal' => $dfp_tags_internal,
-        'dfp_tags_external' => $dfp_tags_external,
-        'ga_tag_internal' => $ga_tag_internal,
-        'ga_tag_extarnal' => $ga_tag_extarnal
-      ))
-      ->execute();
-  drupal_set_message(t('DFP Tags Configuration Saved successfully '));
-  drupal_goto('itg-dfp-tags-list');
+  if ($form_state['values']['hidden_id'] > 0) {
+     $result = db_update('itg_dfp_tags_setting')
+        ->condition('id', $form_state['values']['hidden_id'], '=')
+        ->fields(array(
+          'wesbite' => $wesbite,
+          'client' => $client,
+          'dfp_tags' => $dfp_tags,
+          'dfp_tags_internal' => $dfp_tags_internal,
+          'dfp_tags_external' => $dfp_tags_external,
+          'ga_tag_internal' => $ga_tag_internal,
+          'ga_tag_extarnal' => $ga_tag_extarnal
+        ))
+        ->execute();
+    drupal_set_message(t('DFP Tags Configuration update successfully '));
+    drupal_goto('itg-dfp-tags-list');
+  }
+  else {
+    $result = db_merge('itg_dfp_tags_setting')
+        ->key(array('wesbite' => $wesbite, 'client' => $client))
+        ->fields(array(
+          'wesbite' => $wesbite,
+          'client' => $client,
+          'dfp_tags' => $dfp_tags,
+          'dfp_tags_internal' => $dfp_tags_internal,
+          'dfp_tags_external' => $dfp_tags_external,
+          'ga_tag_internal' => $ga_tag_internal,
+          'ga_tag_extarnal' => $ga_tag_extarnal
+        ))
+        ->execute();
+    drupal_set_message(t('DFP Tags Configuration Saved successfully '));
+    drupal_goto('itg-dfp-tags-list');
+  }
 }
 
 /**

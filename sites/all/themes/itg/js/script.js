@@ -1089,8 +1089,9 @@ jQuery(document).ready(function (e) {
         var getvideoimage = jQuery(this).attr('data-image');
         var getvideonid = jQuery(this).attr('data-nid');
         var getvideourl = jQuery(this).attr('data-video-url');
+         var getvideousedon = jQuery(this).attr('data-used-on');
         var ajaxpath = Drupal.settings.basePath + 'getvideoplayer-migrated';
-        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl)
+        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl,getvideousedon)
 
     });
     jQuery('.itg-embed-photo-slider').slick({
@@ -1250,7 +1251,7 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
         beforeSend: function () {
             jQuery('.loading-video').show();
         },
-        data: {'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl},
+        data: {'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl,'getvideousedon':getvideousedon},
         success: function (data) {
             jQuery('#migrate_video_palyer_container').html(data);
             jQuery('.loading-video').hide();

@@ -13,7 +13,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
 }
 ?>
 <div class="itg-embed-wrapper">
-    <h1 class="embed-title"><?php print $title; ?></h1>
+<!--    <h1 class="embed-title"><?php// print $title; ?></h1>-->
     <?php
     if (!empty($videoids) && $video_node->field_story_source_type[LANGUAGE_NONE][0]['value'] != "migrated") {
       $hide_player = "";
@@ -102,89 +102,53 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
     ?>
     <?php
     if ($video_node->field_story_source_type[LANGUAGE_NONE][0]['value'] == "migrated") {
-      if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
-        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-      }
-      drupal_add_js('https://content.jwplatform.com/libraries/V30NJ3Gt.js', array('type' => 'external', 'scope' => 'footer'));
-      $hide_player = "";
-      $description_slider = "";
-      $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
-      $description_slider = '<div class="video-slider-description"><ul>';
-      foreach ($videoids as $keys => $video_value) {
-        if ($keys != 0) {
-          $hide_player = 'hide-player';
-          $autoplay = 0;
-        }
-        else {
-          $autoplay = 1;
-        }
-        ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
-        if (module_exists('itg_videogallery')) {
-          $vid = itg_videogallery_get_videoid($row['fid']);
-        }
-        $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-        if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
-          $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $image_url . '" height="66" width="88" alt="" title=""></li>';
-        }
-        else {
-          $newimageds .= '<li><img data-tag="video_' . $video_value->video_id . '" src="' . $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" height="66" width="88" alt="" title=""></li>';
-        }
-        $ads_flag = 0;
-        if ($video_value->field_include_ads_value == 'yes') {
-          $ads_flag = 1;
-        }
-        $allbitrates = array();
-        foreach ($video_node->field_multi_bitrate[LANGUAGE_NONE] as $bitratevalue) {
-          $allbitrates[] = end(explode('@', $bitratevalue['value']));
-        }
-        $usebitrates = implode(',', $allbitrates);
-        $getvideo_bitrate_url = itg_videogallery_make_bitrate_url($video_value->field_migrated_video_url_value, $usebitrates);
-        ?>
-            <div class="iframe-video-embed">
-                <div id="videoplayer_<?php echo $keys; ?>"></div> 
-                <script type="text/javascript">
-                  jwplayer('videoplayer_<?php echo $keys; ?>').setup({
-                      playlist: [{
-                              title: "<?php print $row['title']; ?>",
-                              image: "<?php echo $image_url; ?>",
-                              sources: [
-    //                      {
-                                  //                        file: "<?php echo $getvideo_bitrate_url; ?>"
-                                  //                      },
-                                  {
-                                      file: "<?php print $video_value->field_migrated_video_url_value; ?>"
-                                  }]
-                          }],
-                      primary: "flash",
-                      width: "100%",
-                      aspectratio: "16:9",
-                      "stretching": "exactfit",
-                      androidhls: "true",
-                      fallback: "false",
-                      hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
-                      sharing: {
-                          code: encodeURI("<iframe src='<?php echo $videocopy_url; ?>' width='648' height='396' frameborder='0' scrolling='no' />"),
-                          link: "<?php echo $path_aleas; ?>",
-                          heading: "Share video"
-                      },
-                      advertising: {
-                          client: "vast",
-                          skipoffset: 5,
-                          schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
+     
+                        if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
+                          $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+                          $video_kicker = get_video_kicker_by_nid($nid);
+                        }
 
-                      },
-                      ga: {
-                          idstring: "<?php print $row['title']; ?>",
-                      }
-                  });
-                </script>
-            </div>
-        </div>
-        <?php
-        $description_slider .= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_videogallery_description_value) . '</p></li>';
-      }
-      $description_slider .= '</ul></div>';
-      $newimageds .= '</ul></div></div></div>';
+                        $hide_player = "";
+                        $description_slider = "";
+                        $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images "><ul >';
+                        $description_slider = '<div class="video-slider-description"><ul>';
+                        foreach ($videoids as $keys => $video_value) {
+                          ?> <div class="<?php echo $hide_player; ?>" id="video_<?php echo $video_value->video_id; ?>"><?php
+                          if (module_exists('itg_videogallery')) {
+                            $vid = itg_videogallery_get_videoid($row['fid']);
+                          }
+                          $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+
+                          if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
+                            $ga_data = "ga('send', 'event', 'Video_".$nid."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
+                            $newimageds.= '<li><img class="migrate-thumb-video" data-image ="' . $image_url . '" data-used-on ="embed" data-nid = "' . $nid . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . $image_url . '" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                          }
+                          else {
+                            $ga_data = "ga('send', 'event', 'Video_".$nid."Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
+                            $image_url =  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg'));
+                            $newimageds.= '<li><img class="migrate-thumb-video" data-nid = "' . $nid . '" data-used-on ="embed" data-image ="' . $image_url . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg')) .'" height="66" width="88" alt="" title="" onclick="'.$ga_data.'"></li>';
+                          }
+                          ?>
+
+                              <?php if ($keys == 0) { ?>
+                                <div class="iframe-video">
+                                    <div style="display:none" class="loading-video"><div class="spinner">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div></div>
+                                    <div  id="migrate_video_palyer_container">
+                                        <?php print theme('migrated_video_player', array("url" => $video_value->field_migrated_video_url_value, 'nid' => $nid, 'image' => $image_url ,'used_on' => 'video', 'title' => $fb_title)); ?>
+                                    </div> 
+                                </div>
+                              <?php } ?>
+                          </div>
+
+                          <?php
+                          $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_kicker[0]->field_video_kicker_value) . '</p></li>';
+                        }
+                        $description_slider.='</ul></div>';
+                        $newimageds.='</ul></div></div></div>';
     }
     ?>
 
