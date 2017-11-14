@@ -320,6 +320,7 @@ function features_for_story_field_default_field_bases() {
         'ugc' => 'ugc',
         'breaking_news' => 'Breaking News',
         'manage-budget-predictor' => 'Budget-Predictor',
+        'mega_review_critic' => 'Mega review Critic',
       ),
       'allowed_values_function' => '',
     ),
@@ -369,7 +370,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 600,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1611,7 +1612,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -1664,7 +1665,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 1000,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2093,7 +2094,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2352,7 +2353,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2903,7 +2904,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2927,7 +2928,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 500,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -2951,7 +2952,7 @@ function features_for_story_field_default_field_bases() {
     'locked' => 0,
     'module' => 'text',
     'settings' => array(
-      'max_length' => 255,
+      'max_length' => 1000,
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -3182,6 +3183,44 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_technology_photogallery'.
+  $field_bases['field_technology_photogallery'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_technology_photogallery',
+    'field_permissions' => array(
+      'type' => 2,
+    ),
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'photogallery' => 'photogallery',
+        ),
+      ),
+      'target_type' => 'node',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
   );
 
   // Exported field_base: 'field_technology_sample_photo'.
