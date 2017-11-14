@@ -353,8 +353,7 @@ function getDailymotionPath($fid, $filename) {
     $dailymotion_download = dailymotion_download_video_uri($video_id);
     $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
     }
- elseif ($source_type == 'migrated') {
-     
+    elseif ($source_type == 'migrated') {
         $video_status = 'migrated';
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
         foreach ($videoids as $keys => $video_value) {
@@ -362,16 +361,24 @@ function getDailymotionPath($fid, $filename) {
         } $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
         $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
         $rr = explode('/', $video_path_mp4);
-        
         $mp4_last_fname = end($rr);
         $gp_file_path = '3gp/' . $mp4_last_fname . '';
         $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
-        $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);
+        $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);        //m3u8        
+        $m3u8_tags = mcu8_tags($nid);
+        echo "<pre>";print_r($m3u8_tags);echo "</pre>";
+        $m3 = implode(',', $m3u8_tags);
+        $new_m3 = $m3 . '.mp4.csmil/master.m3u8';
+        echo $new_m3;
+        $videoparts_m3u8 = str_replace('512.mp4', $new_m3, $video_path_mp4);        //end         
+        $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
         $video_detail[$video_status]['flv_url'] = $flv_url;
-        $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;    //$output .= "" . $videoparts_3gp . "" . $video_path_mp4 . "" . $videoparts_3gp . "" . $flv_url . "" . $videoparts_3gp . "";  
-        }
-        
-        return $video_detail;
+        $video_detail[$video_status]['m3u8'] = $videoparts_m3u8;
+        $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
+        //$output .= "" . $videoparts_3gp . "" . $video_path_mp4 . "" . $videoparts_3gp . "" . $flv_url . "" . $videoparts_3gp . "";         
+    }
+p($video_detail);
+    return $video_detail;
 }
 /**
  * Get the dailymotion download video url
@@ -386,3 +393,16 @@ function dailymotion_download_video_uri($video_id){
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['field_video_url_value'];
 } 
+/**
+ * function for getmcu8 url of vedio
+ * @param type $nid
+ * @return type
+ */
+function mcu8_tags($nid) {
+    $nid = 17378;
+    $query = db_select('field_data_field_multi_bitrate', 'mvr');
+    $query->fields('mvr', array('field_multi_bitrate_value'));
+    $query->condition('mvr.entity_id', $nid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result[0]['field_multi_bitrate_value'];
+}
