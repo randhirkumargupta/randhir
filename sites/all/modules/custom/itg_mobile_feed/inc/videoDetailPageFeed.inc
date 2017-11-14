@@ -107,7 +107,7 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
       $videotag = video_detail_formats($nid,$source_type);
 
       if (!empty($videotag['migrated'])) { //migrated video
-        $output .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
+        $output .= "<videoparts><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['video_path_mp4'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
       }elseif (!empty($videotag['dailymotion'])) {
         $output .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>".$videotag['dailymotion']['filsize']."</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
       }
@@ -358,7 +358,10 @@ function getDailymotionPath($fid, $filename) {
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
         foreach ($videoids as $keys => $video_value) {
             $video_path_mp4 = $video_value->field_migrated_video_url_value;
-        } $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
+        } 
+        $video_path_mp4 = str_replace('http://medias3d.intoday.in/', 'http://indiatoday-pdelivery.akamaized.net/', $video_path_mp4);
+        $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
+        
         $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
         $rr = explode('/', $video_path_mp4);
         $mp4_last_fname = end($rr);
@@ -367,9 +370,19 @@ function getDailymotionPath($fid, $filename) {
         $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);        //m3u8        
         $m3u8_tags = mcu8_tags($nid);
         
-        $m3 = implode(',', $m3u8_tags);
+        if (!empty($m3u8_tags)) {
+            $m3 = implode(',', $m3u8_tags);
+            $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+            $videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
+        } else {
+            $m3 = "";
+            $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+            $videoparts_m3u = str_replace('.mp4', $new_m3, $video_path_mp4);
+        }
+
+       
         
-        $new_m3 = ','.$m3.',.mp4.csmil/master.m3u8';    
+           
         
         $videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
         $videoparts_m3u8 = str_replace('http://medias3d.intoday.in', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
