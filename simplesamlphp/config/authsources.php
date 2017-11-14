@@ -75,10 +75,10 @@ $config = array(
  'debug' => true,
 
  // the URL of the Drupal logout page
- 'drupal_logout_url' => 'http://uat-sso.indiatodayonline.in/user/logout',
+ 'drupal_logout_url' => 'https://uat-sso.indiatodayonline.in/user/logout',
 
  // the URL of the Drupal login page
- 'drupal_login_url' => 'http://uat-sso.indiatodayonline.in/user',
+ 'drupal_login_url' => 'https://uat-sso.indiatodayonline.in/user',
 
  // Which attributes should be retrieved from the Drupal site.
 
