@@ -11,7 +11,7 @@ module_load_include('inc', 'itg_story', 'includes/itg_story.helper');
 module_load_include('inc', 'itg_story', 'includes/itg_story.byline');
 
 /**
- * Implements hiook_menu().
+ * Implements hook_menu().
  * @return array
  */
 function itg_story_menu() {
