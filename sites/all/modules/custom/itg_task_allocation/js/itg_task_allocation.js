@@ -95,8 +95,6 @@ jQuery(document).ready(function() {
                 jQuery('.itg-final-bell-notice').html(final_data.html);
             },
             error: function(xhr, desc, err) {
-                console.log(xhr);
-                console.log("Details: " + desc + "\nError:" + err);
             }
         });
 

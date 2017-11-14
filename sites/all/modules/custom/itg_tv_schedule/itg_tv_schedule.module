@@ -206,7 +206,7 @@ function itg_tv_schedule_uploadmongo($file_id) {
         // execute when appropriate file uploaded 
         // connection with database
         $db = mongodb();
-        if ($db) {
+        if (isset($db)) {
             $people = $db->tv_schedule;
             $ret = $people->remove();
         }
@@ -441,25 +441,27 @@ function isItValidDate($date) {
   * Helper function to return date by day
   */
  function get_tv_schedule_date($day, $type) {
-   if (function_exists('mongodb')) {
+  if (function_exists('mongodb')) {
     $db = mongodb();
-    $people = $db->tv_schedule;
-    $date = $final_id;
-    if($type == 'yes') {
-      $cond = array('day' => $day);
-    }
-    if($type == 'no') {
-      $cond = array('program date' => $day);
-    }
-    $cursor = $people->find($cond);
-    foreach ($cursor as $document) {
-      if($type == 'yes') {
-        $data['program'] = $document['program date'];
+    if (isset($db)) {
+      $people = $db->tv_schedule;
+      $date = $final_id;
+      if ($type == 'yes') {
+        $cond = array('day' => $day);
       }
-      if($type == 'no') {
-       $data['program'] = $document['day']; 
+      if ($type == 'no') {
+        $cond = array('program date' => $day);
       }
+      $cursor = $people->find($cond);
+      foreach ($cursor as $document) {
+        if ($type == 'yes') {
+          $data['program'] = $document['program date'];
+        }
+        if ($type == 'no') {
+          $data['program'] = $document['day'];
+        }
+      }
+      return $data;
     }
-    return $data;
   }
- }
+}

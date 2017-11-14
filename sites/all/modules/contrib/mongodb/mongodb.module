@@ -29,6 +29,7 @@ function mongodb($alias = 'default') {
   $host = $connection['host'];
   $options = $connection['connection_options'] +  array('connect' => TRUE);
   $db = $connection['db'];
+  
   if (!isset($mongo_objects[$host][$db])) {
     try {
       $mongo = new MongoClient($host, $options);
@@ -36,10 +37,11 @@ function mongodb($alias = 'default') {
       $mongo_objects[$host][$db]->connection = $mongo;
     }
     catch (MongoConnectionException $e) {
-      $mongo_objects[$host][$db] = new mongoDummy;
-      throw $e;
-    }
+      watchdog("Mongo", "Mongo DB Instances Down.");
+      return;    
+   }
   }
+  
   return $mongo_objects[$host][$db];
 }
 

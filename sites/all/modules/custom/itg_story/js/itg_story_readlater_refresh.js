@@ -34,5 +34,17 @@ jQuery(document).ready(function () {
     } catch (e) {
 
     }
+    
+    // code for comment refresh
+    try {
+        var u_name = Drupal.settings.itg_story.settings.u_name;
+        var u_mail = Drupal.settings.itg_story.settings.u_mail;
+        jQuery('#edit-fname').val(u_name);
+        jQuery('#edit-askname').val(u_name);
+        jQuery('#edit-femail').val(u_mail);
+        jQuery('#edit-askemail').val(u_mail);
+    } catch (e) {
+
+    }
 });
 // Code ends for handling photo block refresh part
