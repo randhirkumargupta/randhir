@@ -2,7 +2,7 @@
 global $base_url;
 $theme_path = drupal_get_path('theme', 'itg');
 $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images/'
-
+$scriptFlag = FALSE;
 ?>
 <div id="section-header-event-1762742" class="india-today-woman-summit clearfix section-header">
     <div class="header-ads header_ltop_container">
@@ -51,6 +51,7 @@ $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images
 			  </div>
 			<?php
 		}else if($data['data']['menu_manager']){
+			$scriptFlag = TRUE;
 			$menu_manager = !empty($data['data']['menu_manager']) ? $data['data']['menu_manager'] : '';
 			echo '<a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a>';
 			print  drupal_render(menu_tree_output($menu_manager));        
@@ -148,10 +149,10 @@ $imag_path = $base_url.'/'.$theme_path.'/templates/layouts/section-header/images
 
 /*=========Only For This TPL Css End*/
 </style>
+<?php if($scriptFlag):?>
 <script>
-
 jQuery('.section-header .navigation__event .mobile-nav').click(function(){
 	jQuery('.section-header .navigation__event .menu').toggle();
 });
-
 </script>
+<?php endif;?>
