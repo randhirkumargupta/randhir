@@ -6,7 +6,8 @@ foreach ($rows as $row): ?>
     print $row['field_story_extra_large_image'];
   }
   else {
-    $img = "<img width='103' height='103'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/imgpsh_fullsize103x103.png' alt='' title='' />";
+    //$img = "<img width='103' height='103'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/imgpsh_fullsize103x103.png' alt='' title='' />";
+    $img = "<img width='103' height='103' src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize103x103.png')) . "' alt='' title='' />";
     $host_url = itg_event_get_host_name();
     print l($img, $host_url . '/speaker-details', array('query' => array('speaker' => $row['nid']), 'html' => TRUE));
   }

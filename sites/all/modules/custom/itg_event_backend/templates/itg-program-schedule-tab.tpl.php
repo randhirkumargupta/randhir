@@ -74,12 +74,12 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
               }
               $story_title = itg_event_backend_get_session_story_title_move_field($media, $content_font_color);
               $output_story_title = '';
-              foreach ($story_title['story_title'] as $title) {
+              /*foreach ($story_title['story_title'] as $title) {
                 if (!empty($title)) {
                   $output_story_title = '<p><i class="fa fa-story-title"></i>' . $title . '</p>';
                 }
-              }
-
+              }*/
+              $output_story_title = '<p><i class="fa fa-story-title"></i>' . $story_title[0]['story_title'] . '</p>';
               $output_media = '';
               $max = max(array(count($session_result['photo']), count($session_result['video']), count($session_result['audio'])));
               for ($i = 0; $i < $max; $i++) {
@@ -109,7 +109,9 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
                                 $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . ' alt="" title="" />';
                               }
                               else {
-                                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' title='' />";
+                                //$img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' title='' />";
+                               $img = "<img width='72' height='72' src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image72x72.jpg')) . "' alt='' title='' />";
+                                //$img = "<img width='72' height='72' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image72x72.jpg') . "' alt='' title='' />";
                               }
 
                               print '<div class="speaker-image">' . l($img, $baseurl . 'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)) . '</div>';
