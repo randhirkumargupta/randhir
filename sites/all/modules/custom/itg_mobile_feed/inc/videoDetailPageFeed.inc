@@ -404,6 +404,10 @@ function mcu8_tags($nid) {
     $query->fields('mvr', array('field_multi_bitrate_value'));
     $query->condition('mvr.entity_id', $nid);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    //return $result[0]['field_multi_bitrate_value'];
-    return $result;
+    
+    $tags = array();
+    foreach ($result as $data) {
+        $tags[] = $data['field_multi_bitrate_value'];
+    } 
+    return $tags;
 }
