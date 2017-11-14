@@ -156,7 +156,9 @@ function get_section_blocks($tid) {
     $query->condition('sb.entity_type', 'taxonomy_term', '=');
     $query_result = $query->execute()->fetchAll();
     foreach ($query_result as $result) {
-      $blocks[] = $result->field_section_right_side_block_moddelta;
+      if($result->field_section_right_side_block_moddelta != '_none'){
+        $blocks[] = $result->field_section_right_side_block_moddelta; 
+      }
     }
   }
   return $blocks;
@@ -306,7 +308,10 @@ function get_section_header_menu_and_content($arg) {
       case 'node':
         $nid = $arg[1];        
         $primary_tid = get_primary_category_node($nid);
-        $event_nid = is_section_event($primary_tid);
+        if (!is_section_header($primary_tid)) {
+          return FALSE;
+        }
+        $event_nid = is_section_event($primary_tid);        
         if ($event_nid) {
           $tpl_name = 'section_header_' . $primary_tid . '_block';
           $menu_data = get_event_menu($event_nid);
