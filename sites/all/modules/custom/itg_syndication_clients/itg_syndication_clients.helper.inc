@@ -215,6 +215,7 @@ function get_dailyhunt_sections_for_feed() {
     '1207249' => 'supplementshyderabad.xml',
     '1206947' => 'supplementsmumbai.xml',
     '1206942' => 'supplementsspice.xml',
+    '1206499' => 'supplementshome.xml',
     '1206688' => 'technology.xml',
     '1206796' => 'television.xml',
     '1206577' => 'world.xml',
@@ -255,6 +256,7 @@ function get_hltapps_sections($type) {
         'world.xml' => '1206577',
         'sports.xml' => '1206550',
         'business.xml' => '1206574',
+        'so-sorry.xml' => '1709237',
         'election.xml' => '1206719'
       );
       break;
@@ -345,6 +347,9 @@ function get_hltapps_sections($type) {
         'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
         'entertainment.xml' => array('section' => '1206952', 'limit' => 15)
       );
+      break;
+    case 'programmes':
+      return 1206553;
   }
 }
 

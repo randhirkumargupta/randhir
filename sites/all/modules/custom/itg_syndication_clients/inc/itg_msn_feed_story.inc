@@ -12,6 +12,43 @@ function itg_msn_feed_story_syndication() {
 }
 
 /**
+ * menu callback
+ * Function for generate msn static feed
+ */
+function itg_rss_msnstaticfeeds() {
+ itg_generate_msn_static_stories_what_to_expect();
+ itg_generate_msn_static_stories_top_news();
+}
+
+/**
+ * Generate static msn stories feed
+ */
+
+function itg_generate_msn_static_stories_what_to_expect(){
+  $data = array();
+  $xml = theme('msn_static_stories_what_to_expect', array('data' => $data));
+  $xml_path = 'public://msn/stories/';
+  $file_path = $xml_path . 'what-to-expect-msn.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+/**
+ * Generate static msn stories feed
+ */
+
+function itg_generate_msn_static_stories_top_news(){
+  $data = array();
+  $xml = theme('msn_static_stories_top_news', array('data' => $data));
+  $xml_path = 'public://msn/stories/';
+  $file_path = $xml_path . 'top-news-msn.xml';
+  $fpd = fopen($file_path, "w");
+  fwrite($fpd, $xml);
+  fclose($fpd);
+}
+
+/**
  * Function is used to Generate MSN xml feed
  * @param int $section_id
  * @param string $file_name
