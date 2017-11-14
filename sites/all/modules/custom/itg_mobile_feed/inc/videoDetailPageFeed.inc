@@ -371,7 +371,9 @@ function getDailymotionPath($fid, $filename) {
         
         $new_m3 = ','.$m3.',.mp4.csmil/master.m3u8';    
         echo $new_m3;
-        $videoparts_m3u8 = str_replace('512.mp4', $new_m3, $video_path_mp4);        //end         
+        $videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
+        $videoparts_m3u8 = str_replace('http://medias3d.intoday.in', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
+        //end         
         $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
         $video_detail[$video_status]['flv_url'] = $flv_url;
         $video_detail[$video_status]['m3u8'] = $videoparts_m3u8;
