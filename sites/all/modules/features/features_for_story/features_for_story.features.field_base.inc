@@ -321,6 +321,7 @@ function features_for_story_field_default_field_bases() {
         'breaking_news' => 'Breaking News',
         'manage-budget-predictor' => 'Budget-Predictor',
         'mega_review_critic' => 'Mega review Critic',
+        'bestcolleges' => 'Bestcolleges',
       ),
       'allowed_values_function' => '',
     ),
@@ -3193,7 +3194,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_technology_photogallery',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'indexes' => array(
       'target_id' => array(
