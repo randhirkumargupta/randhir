@@ -151,7 +151,7 @@ function generateVideoCategoryPage($tid) {
       // node feed tag
       $listcount++;
 
-      $title = $resvalue['title'];
+      $title = xmlEscape($resvalue['title']);
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
       $created = $resvalue['created'];
