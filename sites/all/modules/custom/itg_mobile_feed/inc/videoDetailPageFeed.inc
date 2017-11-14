@@ -107,7 +107,7 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
       $videotag = video_detail_formats($nid,$source_type);
 
       if (!empty($videotag['migrated'])) { //migrated video
-        $output .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
+        $output .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
       }elseif (!empty($videotag['dailymotion'])) {
         $output .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>".$videotag['dailymotion']['filsize']."</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
       }
@@ -376,7 +376,7 @@ function getDailymotionPath($fid, $filename) {
         //end         
         $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
         $video_detail[$video_status]['flv_url'] = $flv_url;
-        $video_detail[$video_status]['m3u8'] = $videoparts_m3u8;
+        $video_detail[$video_status]['videoparts_m3u8'] = $videoparts_m3u8;
         $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
         //$output .= "" . $videoparts_3gp . "" . $video_path_mp4 . "" . $videoparts_3gp . "" . $flv_url . "" . $videoparts_3gp . "";         
     }
@@ -403,7 +403,7 @@ function dailymotion_download_video_uri($video_id){
  */
 
 function mcu8_tags($nid) {
-    $nid = 17378;
+    //$nid = 17378;
     $query = db_select('field_data_field_multi_bitrate', 'mvr');
     $query->fields('mvr', array('field_multi_bitrate_value'));
     $query->condition('mvr.entity_id', $nid);
