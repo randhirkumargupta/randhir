@@ -354,7 +354,7 @@ function getDailymotionPath($fid, $filename) {
     $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
     }
  elseif ($source_type == 'migrated') {
-     echo "andy";
+     
         $video_status = 'migrated';
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
         foreach ($videoids as $keys => $video_value) {
@@ -362,7 +362,7 @@ function getDailymotionPath($fid, $filename) {
         } $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
         $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
         $rr = explode('/', $video_path_mp4);
-        print_r($rr);
+        
         $mp4_last_fname = end($rr);
         $gp_file_path = '3gp/' . $mp4_last_fname . '';
         $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
@@ -370,7 +370,7 @@ function getDailymotionPath($fid, $filename) {
         $video_detail[$video_status]['flv_url'] = $flv_url;
         $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;    //$output .= "" . $videoparts_3gp . "" . $video_path_mp4 . "" . $videoparts_3gp . "" . $flv_url . "" . $videoparts_3gp . "";  
         }
-        p($video_detail);die();
+        
         return $video_detail;
 }
 /**

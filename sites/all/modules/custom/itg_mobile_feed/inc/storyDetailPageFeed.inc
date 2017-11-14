@@ -261,7 +261,7 @@ function emptygetImgTag() {
  * @return array
  */
 function getImgTag($node) {
-    p($node);
+    //p($node);
   $imgtag = "";
   $src = "";
   $img_caption_val = "";
