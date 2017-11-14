@@ -1057,12 +1057,15 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     
     // code for akamai read later refresh
     if (!empty(variable_get('photo_block_refresh'))) {
-    $settings = array();
-    $settings['story_nid'] = $node->nid;
-    drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
-    drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_readlater_refresh.js', array('scope' => 'footer'));
+      $fname_token = '[custom:fname]';
+      $settings = array();
+      $settings['story_nid'] = $node->nid;
+      $settings['u_mail'] = $user->mail;
+      $settings['u_name'] = token_replace($fname_token);
+      drupal_add_js(array('itg_story' => array('settings' => $settings)), array('type' => 'setting'));
+      drupal_add_js(drupal_get_path('module', 'itg_story') . '/js/itg_story_readlater_refresh.js', array('scope' => 'footer'));
     }
-    
+
     // end here
 
     // code for amp page
