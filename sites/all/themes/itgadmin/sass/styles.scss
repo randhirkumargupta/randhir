@@ -11316,10 +11316,7 @@ div.node {
                             color: #2f2f2f;
                             @extend .dib;
                             @extend .of-hide;
-                            text-overflow: ellipsis;
                             @extend .vtop;
-                            white-space: nowrap;
-                            width: 82px;
                         }
                     }
                     .file-size {
@@ -14406,7 +14403,7 @@ div.ctools-modal-content {
 /* css end Url Redirect page */
 
 
-/* css added by rajveer singh gangwar start */
+/* css added by rajveer  singh gangwar start */
 
 #views-exposed-form-section-wise-content-ordering-list-dont-miss-content,
 #views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget,
@@ -14418,12 +14415,17 @@ div.ctools-modal-content {
 #views-exposed-form-home-page-feature-widget-page-2,
 #views-exposed-form-photo-carousel-widget-photo-carousel,
 #views-exposed-form-photo-carousel-widget-video-carousel,
-#views-exposed-form-so-sorry-so-sorry-videos-widget {
-    display: none;
+#views-exposed-form-so-sorry-so-sorry-videos-widget,
+#views-exposed-form-widget-anchors-listing-anchors-listing-widget,
+#views-exposed-form-key-candidate-special-key-candidate-widget-list .views-widget-per-page,
+#itg-widget-issuewidgetlist-filter-form .form-item-items-per-page,
+#views-exposed-form-category-of-stroy-base-magazin-widget-issue-magazin-widget-list .form-item-items-per-page,
+#views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget-list .form-item-items-per-page {
+    display: none !important;
 }
 
 
-/* css added by rajveer singh gangwar end */
+/* css added by rajveer singh gangwar end  */
 
 .node-type-print-team-integration [id*="field-add-member-values"]+div.clearfix {
     right: 560px;

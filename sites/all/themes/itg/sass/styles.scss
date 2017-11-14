@@ -3274,7 +3274,7 @@ footer {
         }
     }
     .story-tech-chunk {
-        padding-right: 100px;
+        /* padding-right: 100px; remove buy ITG arun*/
         .tech-rating {
             width: 88px;
             height: 33px;
@@ -8925,7 +8925,7 @@ section.sidebar {
     }
     .itg-layout-225 {
         .droppable {
-            height: 225px;
+            min-height: 225px;
         }
         .widget-title {
             margin-bottom: 10px;
@@ -14811,12 +14811,12 @@ ul.pron-cons-img li img {
     overflow-y: auto;
 }
 
-.video_header_tabs #related-video-tab ul li.related_content_tab .related-default {
+.video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {
     width: 170px;
     height: 127px;
 }
 
-.video_header_tabs .trending-videos ul li .trending-videos-list img {
+.video_header_tabs .trending-videos li.trending-videos-list img {
     width: 170px;
     height: 127px;
 }
@@ -14831,7 +14831,7 @@ ul.pron-cons-img li img {
 }
 
 #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figcaption {
-    bottom: 0;
+    bottom: 11px;
     left: 0;
     position: absolute;
     padding: 5px;
