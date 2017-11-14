@@ -46,6 +46,7 @@
   <head>
     <meta charset="utf-8">
     <title><?php print $head_title; ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php print $head; ?>
     <?php include $amptheme_path_file . '/templates/amp-css/amp-boilerplate-styles-min.inc' ?>
     <?php include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
@@ -65,6 +66,7 @@
     <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
     <script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
 
@@ -682,11 +684,11 @@
 
     /***** New Header css by itgd ****/
     .i-amphtml-layout-container{ position: absolute; width: 100%;}
-    #header .top-nav {padding: 0px; margin: 25px auto 15px auto; float: none; zoom: 1; background: transparent;}
+    #header .top-nav {padding: 0px 0 0 5px; margin: 25px auto 15px auto; float: none; zoom: 1; background: transparent;}
     #header a {color: #a9a9a9; font-family: "Roboto"; text-decoration: none; font-size:16px; margin:0px 0;}
     .mobile-nav .bar1, .mobile-nav .bar2, .mobile-nav .bar3 {width: 20px; height: 2px; background-color: rgb(94, 94, 94); margin: 4px 0px; transition: 0.4s;}
-    #header .main-nav .nav-container-menu {width: calc(100% - 58px); margin: 0 auto;/*overflow: hidden;*/}
-    #header .main-nav .nav-container-menu .nav-centerall {margin: 0 auto; width:280px;}
+    #header .main-nav .nav-container-menu {width: calc(100% - 28px); margin: 0 auto;/*overflow: hidden;*/}
+    /*#header .main-nav .nav-container-menu .nav-centerall {margin: 0 auto; width:280px;}*/
     #header .top-nav .main-nav ul.menu {float: left;}
     #header .top-nav ul {list-style-type: none;}
     #header .top-nav .main-nav ul.menu li.desktop-hide {display: none;}
@@ -704,6 +706,20 @@
     .search-section-amp{height: 35px;}
     .fa-search{position: relative; top: 10px; right: 5px;}
     ul.header-menu li:first-child{margin:5px 0;}
+
+    #header .top-nav ul.menu li a{    padding: 0 6px; font-size: 13px; text-transform: uppercase;font-weight: 500;}
+    #header .top-nav ul.menu li.last.leaf{ position:  relative; }
+    #header .top-nav .top-first-menu ul.menu li.last.leaf:after{ content: ""; position:  absolute; width: 5px; height: 5px; border-radius: 100%;
+    background: #c00; display: inline-block; top:8px; left: 0px; box-shadow: 0 0 0 rgba(214,2,12,.8); border-radius: 50%;
+    background: #c00; animation: pulse 1.7s infinite; content: "";}
+    
+    #header .top-nav ul li{ margin:0px 3px; }
+    #header .logo`{ width: 55px; }
+    .container.top-nav .main-nav .nav-container-menu .nav-centerall{    width: 296px; margin: 0 auto;}
+
+
+
+
     </style>
     <?php //endif;  ?>
   </head>

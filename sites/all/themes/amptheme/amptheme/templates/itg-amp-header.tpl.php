@@ -113,7 +113,9 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
     <div class="main-nav">
        <div class="nav-container-menu">
          <div class="nav-centerall">
+         <div class="top-first-menu">
           <?php print drupal_render($data['itg_top_manu_header']); ?>
+          </div>
              <!--logo start -->
             <?php $logo_itg = theme_get_setting('logo', 'itg'); ?>
               <div class="container headeritg-logo">    
