@@ -353,20 +353,22 @@ function getDailymotionPath($fid, $filename) {
     $dailymotion_download = dailymotion_download_video_uri($video_id);
     $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
     }
-  elseif ($source_type == 'migrated') {
-    $video_status = 'migrated';
-    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-    foreach ($videoids as $keys => $video_value) {
-      $video_path_mp4 = $video_value->field_migrated_video_url_value;
-    }
-    $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
-    $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
-    $videoparts_3gp = str_replace(".mp4", ".3gp", $video_path_mp4);
-    $video_detail[$video_status]['flv_url'] = $flv_url;
-    $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
-    //$output .= "<videoparts><part>" . $videoparts_3gp . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $video_path_mp4 . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videoparts_3gp . "</part></videoparts_m3u8><flvvideoparts><part>" . $flv_url . "</part></flvvideoparts><videoparts_3gp><part>" . $videoparts_3gp . "</part></videoparts_3gp>";
-  }
-  return $video_detail;
+ elseif ($source_type == 'migrated') {
+        $video_status = 'migrated';
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+            $video_path_mp4 = $video_value->field_migrated_video_url_value;
+        } $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
+        $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
+        $rr = explode('/', $video_path_mp4);
+        $mp4_last_fname = end($rr);
+        $gp_file_path = '3gp/' . $mp4_last_fname . '';
+        $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
+        $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);
+        $video_detail[$video_status]['flv_url'] = $flv_url;
+        $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;    //$output .= "" . $videoparts_3gp . "" . $video_path_mp4 . "" . $videoparts_3gp . "" . $flv_url . "" . $videoparts_3gp . "";  
+        }
+        return $video_detail;
 }
 /**
  * Get the dailymotion download video url
