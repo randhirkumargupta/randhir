@@ -96,7 +96,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       }
       //get video tag
       $imgtag = getImgTag($node);
-      echo $imgtag; die();
+      
       if ($imgtag) {
         $output .= $imgtag;
       }
@@ -294,7 +294,7 @@ function getImgTag($node) {
   }else{
     $imgtag = "<bodyimages><image><lowres><![CDATA[" . $story_large_img . "]]></lowres><highres><![CDATA[" . $story_large_img . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
   }
-  return $imgtag."_hi"; 
+  return $imgtag; 
 }
 
 
