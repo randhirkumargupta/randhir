@@ -110,8 +110,8 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
                               }
                               else {
                                 //$img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' title='' />";
-                               $img = "<img width='72' height='72' src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image72x72.jpg')) . "' alt='' title='' />";
-                                //$img = "<img width='72' height='72' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image72x72.jpg') . "' alt='' title='' />";
+                               //$img = "<img width='72' height='72' src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image72x72.jpg')) . "' alt='' title='' />";
+                                $img = "<img width='72' height='72' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image72x72.jpg') . "' alt='' title='' />";
                               }
 
                               print '<div class="speaker-image">' . l($img, $baseurl . 'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)) . '</div>';

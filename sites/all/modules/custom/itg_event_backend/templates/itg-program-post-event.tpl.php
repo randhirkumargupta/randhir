@@ -66,7 +66,8 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
               );
             }
             else {
-              $story_img = "<img width='364' height='205' src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/event_post_default.jpg')) . "' alt='' title='' />";
+             // $story_img = "<img width='364' height='205' src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/event_post_default.jpg')) . "' alt='' title='' />";
+              $story_img = "<img width='364' height='205' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/event_post_default.jpg') . "' alt='' title='' />";
             }
             if (!empty($story_title[0]['story_details']['nid'])) {
               $output_story_img = l($story_img, 'node/' . $story_title[0]['story_details']['nid'], array('html' => TRUE));
