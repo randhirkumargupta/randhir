@@ -407,7 +407,7 @@ function mcu8_tags($nid) {
     $query->condition('mvr.entity_id', $nid);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $tags = array();
-    if ($result->rowCount() > 0) {
+    if (count($result) > 0) {
         foreach ($result as $data) {
             $first_char = strstr($data['field_multi_bitrate_value'], '@', true);
             if ($first_char == 'B' || $first_char == 'M') {
