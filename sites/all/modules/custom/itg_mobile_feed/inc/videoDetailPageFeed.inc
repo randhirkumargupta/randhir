@@ -368,7 +368,8 @@ function getDailymotionPath($fid, $filename) {
         $m3u8_tags = mcu8_tags($nid);
         echo "<pre>";print_r($m3u8_tags);echo "</pre>";
         $m3 = implode(',', $m3u8_tags);
-        $new_m3 = $m3 . '.mp4.csmil/master.m3u8';
+        
+        $new_m3 = ','.$m3.',.mp4.csmil/master.m3u8';    
         echo $new_m3;
         $videoparts_m3u8 = str_replace('512.mp4', $new_m3, $video_path_mp4);        //end         
         $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
@@ -398,16 +399,20 @@ function dailymotion_download_video_uri($video_id){
  * @param type $nid
  * @return type
  */
+
 function mcu8_tags($nid) {
     $nid = 17378;
     $query = db_select('field_data_field_multi_bitrate', 'mvr');
     $query->fields('mvr', array('field_multi_bitrate_value'));
     $query->condition('mvr.entity_id', $nid);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    
     $tags = array();
-    foreach ($result as $data) {
-        $tags[] = $data['field_multi_bitrate_value'];
-    } 
-    return $tags;
+    if ($result->rowCount() > 0) {
+        foreach ($result as $data) {
+            $first_char = strstr($data['field_multi_bitrate_value'], '@', true);
+            if ($first_char == 'B' || $first_char == 'M') {
+                $tags[] = substr(strstr($data['field_multi_bitrate_value'], '@'), 1);
+            }
+        }
+    } return $tags;
 }
