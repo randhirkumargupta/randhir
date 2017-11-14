@@ -85,8 +85,8 @@
       #navbar amp-accordion h2 span{position: absolute; left: 0; top: 3px;}
       #navbar h2[aria-expanded="false"] .show-less{opacity: 0;}
       #navbar h2[aria-expanded="true"] .show-more{opacity: 0;}
-      .header-menu{position: absolute !important; left: 0; top: 47px; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
-      .header-menu li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
+      .header-menu{position: absolute !important; left: 0; top: 47px; list-style: none; width: 270px; background-color: #a41615; z-index: 10;}
+      .header-menu li a{padding: 0px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto'; height: 35px;}
       .header-menu li:first-child a{border-top: none;}
       .posted-by{margin: 10px 0; font-size: 12px; color: #8c8c8c; font-family: 'Roboto';}
       .stryimg{position: relative;}
@@ -612,32 +612,33 @@
         color: #8d8d8d;
         font-family: Roboto;
       }
-      .search-form {
+      /*.search-form {
         position: absolute;
         right: 10px;
         top: 10px;
-      }
+      }*/
       .search-form input[type="search"] {
         height: 28px;
-        width: 30px;
+        width: 225px;
         padding-right: 35px;
         padding-left: 10px;
         position: absolute;
-        right: 0;
-        top: 0;
+        left: 10px;
+        top: 5px;
         background-color: transparent;
         transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
         cursor: pointer;
         z-index: 3;
-        opacity: 0;
+        opacity: 1;
+        border:1px solid #ccc;
       }
-      .search-form input[type="search"]:focus{
+      /*.search-form input[type="search"]:focus{
         z-index: 1;
         width: 200px;
         cursor: text;
         background-color: #fff;
         opacity: 1;
-      }
+      }*/
       .search-form input[type="submit"] {
         position: absolute;
         top: 0;
@@ -662,15 +663,12 @@
         padding-top: 3px;
         text-align: center;
       }
-      .search-form input[type="search"]:focus + input[type="submit"] + a.search{color: #666;}
+      /*.search-form input[type="search"]:focus + input[type="submit"] + a.search{color: #666;}*/
       .custom-amp-ad{text-align: center;}
       .live-block .breaking-section.breaking-section{
 		border-top: 1px solid #ddd;
 		}
-		.live-block .breaking-section{
-		padding: 10px 0;
-		 line-height: 22px;
-		}
+		.live-block .breaking-section{padding: 10px 0; line-height: 22px; margin-top: 35px;}
 		#live-blog-amp-share h2[aria-expanded="false"] .show-less{opacity: 0;}
 		#live-blog-amp-share h2[aria-expanded="true"] .show-more{opacity: 0;}
 		#live-blog-amp-share .i-amphtml-accordion-header{border:none;background-color:#fff;}
@@ -683,9 +681,9 @@
     .i-amphtml-layout-size-defined{width: 490px; margin: 0 auto}
 
     /***** New Header css by itgd ****/
-    .i-amphtml-layout-container{ position: absolute; }
+    .i-amphtml-layout-container{ position: absolute; width: 100%;}
     #header .top-nav {padding: 0px; margin: 25px auto 15px auto; float: none; zoom: 1; background: transparent;}
-    #header a {color: #a9a9a9; font-family: "Roboto"; text-decoration: none; font-size:16px; margin:12px 0;}
+    #header a {color: #a9a9a9; font-family: "Roboto"; text-decoration: none; font-size:16px; margin:0px 0;}
     .mobile-nav .bar1, .mobile-nav .bar2, .mobile-nav .bar3 {width: 20px; height: 2px; background-color: rgb(94, 94, 94); margin: 4px 0px; transition: 0.4s;}
     #header .main-nav .nav-container-menu {width: calc(100% - 58px); margin: 0 auto;/*overflow: hidden;*/}
     #header .main-nav .nav-container-menu .nav-centerall {margin: 0 auto; width:280px;}
@@ -700,7 +698,12 @@
     #header .headeritg-logo {float: left; width:70px;text-align: center;height: 40px;}
     #header .logo {width:70px; position: absolute;top:-10px;}
     #header .logo a {display: block; overflow: visible; margin:0;}
-
+    .navimgamp{width: 21px; height: 20px; margin: 0 10px 0 0; position: relative; display: inline-block; top: 5px;}
+    ul.i-amphtml-accordion-content{background: #fff; border-right: 1px solid #ccc;}
+    ul.i-amphtml-accordion-content li{border-bottom: 1px solid #ccc; width: 270px;}
+    .search-section-amp{height: 35px;}
+    .fa-search{position: relative; top: 10px; right: 5px;}
+    ul.header-menu li:first-child{margin:5px 0;}
     </style>
     <?php //endif;  ?>
   </head>
