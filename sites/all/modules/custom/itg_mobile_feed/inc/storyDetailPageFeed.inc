@@ -153,12 +153,10 @@ function getVideoTag($node) {
   $nodelist = $xpath->query("//iframe");
   // gets the 1st image
   $node = $nodelist->item(0);
-  print_r($node);
-  echo $add_video = getStringBetween($html, '<div class="itgvideo">', '</div>');
+  $add_video = getStringBetween($html, '<div class="itgvideo">', '</div>');
   if ($node->attributes->length > 0) {
     //It has Youtube video
-    echo "Test";
-    echo $src = 'http:' . $node->attributes->getNamedItem('src')->nodeValue;
+     $src = 'http:' . $node->attributes->getNamedItem('src')->nodeValue;
     //$src = '';
   }elseif ($add_video != '') {
     //It has uploaded video
@@ -181,10 +179,10 @@ function getVideoTag($node) {
   else {
     
   }
-echo $src; die();
+
   if ($src) {
-    //$videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
-     $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+    $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
+     //$videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
   }
   return $videotag;
 }
