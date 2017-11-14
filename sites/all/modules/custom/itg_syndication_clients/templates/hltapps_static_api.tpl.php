@@ -1,0 +1,15 @@
+<root>
+<commentapi>
+<url>
+http://feeds.intoday.in/feeds/hlt-apps/savecomment-api.jsp
+</url>
+<params>
+<param-name>comment</param-name>
+<param-name>name</param-name>
+<param-name>contentid</param-name>
+<param-name>email</param-name>
+<param-name>contenttype</param-name>
+<param-name>contentsource</param-name>
+</params>
+</commentapi>
+</root>
