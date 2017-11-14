@@ -156,7 +156,7 @@ function getVideoTag($node) {
   $add_video = getStringBetween($html, '<div class="itgvideo">', '</div>');
   if ($node->attributes->length > 0) {
     //It has Youtube video
-     $src = 'http:' . $node->attributes->getNamedItem('src')->nodeValue;
+     $src =  $node->attributes->getNamedItem('src')->nodeValue;
     //$src = '';
   }elseif ($add_video != '') {
     //It has uploaded video
