@@ -406,7 +406,9 @@ function itg_ask_expert_block_view($delta = '') {
             $arg = arg();
 
             if ($arg[0] == 'node' && is_numeric($arg[1])) {
+                if(function_exists('itg_common_get_type_category')) {
                 $node_data = itg_common_get_type_category($arg[1]);
+                }
                 $type = $node_data[0]['type'];
                 $primary_category = $node_data[0]['field_primary_category_value'];
                 if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
