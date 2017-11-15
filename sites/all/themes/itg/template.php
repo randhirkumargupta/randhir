@@ -519,17 +519,3 @@ function itg_image($variables) {
 //  }
   return '<img' . drupal_attributes($attributes) . ' />';
 }
-
-/**
- * Implements hook_page_alter().
- */
-function itg_page_alter(&$page) {
-  if (!empty($_SESSION['messages']['error'])) {    
-    $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
-    $key = array_search($msg, $_SESSION['messages']['error']);
-    
-    if ($key !== FALSE) {
-      unset($_SESSION['messages']['status'][$key]);     
-    }
-  }
-}
