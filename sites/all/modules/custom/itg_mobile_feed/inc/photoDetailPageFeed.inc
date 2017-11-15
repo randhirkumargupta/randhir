@@ -27,6 +27,7 @@ function photoDetailPageFeed() {
  * @return array
  */
 function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
+  p("test123");
   $imgtag = "";
 
   if (!$file_name) {
