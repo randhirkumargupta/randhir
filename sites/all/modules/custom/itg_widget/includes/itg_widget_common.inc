@@ -365,12 +365,22 @@ function itg_widget_keycandidate_form_submit($form, $form_state) {
   drupal_goto('special-key-candidate-widget-contents', array('query' => $query));
 }
 
+function so_sorry_politoons_so_sorry_politoons_afterbuild($form, $form_state) {
+  $form['#submit'][] = 'sosorry_politoons_draggable_custom_submit'; 
+  return $form;
+}
+
+function sosorry_politoons_draggable_custom_submit(&$form, $form_state) {
+  cache_clear_all('so_sorry_politoons:', 'cache_views_data', TRUE);
+}
 /**
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
-
+  if($form_id == 'views_form_so_sorry_politoons_so_sorry_politoons') {
+    $form['#after_build'][] = 'so_sorry_politoons_so_sorry_politoons_afterbuild';
+  }
   if ($form['#id'] == 'taxonomy-form-term') {
     //drupal_add_css("#edit-field-set-as-featured-cate {display:none !important}" , "inline");
   }
@@ -1434,7 +1444,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
     // AS most viewed Result is only four. This logic is implemented by section widget.
     // No need to remove feature/remix because its already removed from mostwatch views_query_alter.
-    $most_viewed = views_get_view_result('so_sorry', 'most_watched');
+    //$most_viewed = views_get_view_result('so_sorry', 'most_watched');
     $feature_nid = __get_sosorry_video_nid('feature');
     $remix_nid = __get_sosorry_video_nid('remix');
     if (!empty($feature_nid)) {
@@ -1443,9 +1453,9 @@ function itg_widget_views_query_alter(&$view, &$query) {
     if (!empty($remix_nid)) {
       $query->add_where(0, 'node.nid', $remix_nid, '!=');
     }
-    foreach ($most_viewed as $nids) {
-      $query->add_where(0, 'node.nid', $nids->nid, '!=');
-    }
+//    foreach ($most_viewed as $nids) {
+//      $query->add_where(0, 'node.nid', $nids->nid, '!=');
+//    }
   }
 
 
