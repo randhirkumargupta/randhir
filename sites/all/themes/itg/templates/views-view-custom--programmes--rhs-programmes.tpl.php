@@ -19,7 +19,8 @@
             <li>
                 <h4>
                     <?php if (!empty($row['field_cm_display_title'])) : ?>
-                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                      <?php //print l(__html_output_with_tags($row['field_cm_display_title']), 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'node/' . $recent_video_under_cat, array('html' => TRUE)); ?>
                     <?php endif; ?>
                 </h4>
                 <span class="time">
@@ -44,12 +45,14 @@
                           <?php
                           $img = $row['field_sponser_logo'];
                           ?>
-                          <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                          <?php //print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                          <?php print l($img, 'node/' . $recent_video_under_cat, array('html' => TRUE)); ?>
                         <?php else : ?>
                           <?php
                           $img = "<img width='88' height='66'  src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg')) ."' alt='' title='' />";
                           ?>
-                          <?php print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                          <?php print l($img, 'node/' . $recent_video_under_cat, array('html' => TRUE)); ?>
+                          <?php //print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
 
                         <?php endif; ?>
                     </div>

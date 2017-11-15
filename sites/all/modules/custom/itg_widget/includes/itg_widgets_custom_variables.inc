@@ -388,5 +388,11 @@ function itg_widgets_custom_variables() {
       '#default_value' => variable_get('photo_block_refresh'), // for default checked and false is not checked
   );
   
+  $form['solr_down'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Custom message when solr is down'),
+		'#default_value' => variable_get('solr_down'),
+	);
+  
   return system_settings_form($form);
 }

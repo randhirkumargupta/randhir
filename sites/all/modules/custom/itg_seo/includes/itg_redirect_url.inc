@@ -102,6 +102,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   global $base_url;
   $old_content_id = '';
   $arg = arg();
+  
   $type = 'story'; // use photogallery & videogallery in condition if you have
   $rss_url = '';
   $query_alias = '';
@@ -114,7 +115,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
     $old_content_id = $_GET['aid'];
   } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content' && arg(0) == 'conclave') {//conclave/index.php?option=com_content&task=view&id=2968&sectionid=15&secid=1&issueid=34&Itemid=1
       $old_content_id = '200'.$_GET['id'];
-  } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content') { //code for this URL (option=com_content)
+  } else if (!empty($_GET['option']) && $path == INDEX_PAGE_URL && $_GET['option'] == 'com_content') { //code for this URL (index.php?option=com_content)
       $old_content_id = $_GET['id'];
   } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Photo') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
       $old_content_id = $arg[2];
