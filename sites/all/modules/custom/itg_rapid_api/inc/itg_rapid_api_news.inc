@@ -139,10 +139,12 @@ function generateNewsCategoryList($tid, $pageno) {
 
 
         //end
-
+        $d1=date('Y-m-d', strtotime("-90 days"));
+        $d2=date(strtotime($d1));
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
+        $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

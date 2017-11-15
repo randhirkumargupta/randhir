@@ -94,7 +94,7 @@ function homePageJsonPackagelist() {
         
         // code vid=14  end
 
-        $data_news['id'] = "1";
+        $data_news['id'] = "0";
         $data_news['order'] = "1";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "Packagelist";
@@ -332,7 +332,7 @@ function homePageJsonTopstories() {
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-    $data_topstories['id'] = "2";
+    $data_topstories['id'] = "0";
     $data_topstories['order'] = "2";
     $data_topstories['type'] = "newslist";
     $data_topstories['title'] = "Top Stories";
@@ -470,7 +470,7 @@ function homePageJsonNewslist_india() {
 
         // code vid=14  end
 
-        $data_news['id'] = "3";
+        $data_news['id'] = "1206578";
         $data_news['order'] = "3";
         $data_news['type'] = "newslist";
         $data_news['title'] = "India";
@@ -675,7 +675,7 @@ function homePageJsonNewslist_world() {
 
         // code vid=14  end
 
-        $data_news['id'] = "5";
+        $data_news['id'] = "1206577";
         $data_news['order'] = "5";
         $data_news['type'] = "newslist";
         $data_news['title'] = "World";
@@ -846,7 +846,7 @@ function homePageJsonMagazine() {
     $n_magazine_data = magazineCoverstoriesPageRerourceValueList();
     $n_magazine = $n_magazine_data['data'];
 
-    $data_magazine['id'] = "6";
+    $data_magazine['id'] = "0";
     $data_magazine['order'] = "6";
     $data_magazine['type'] = "magazine";
     $data_magazine['title'] = "From The Magazine";
@@ -1171,7 +1171,7 @@ function homePageJsonPoll() {
     
    
 
-    $data_magazine['id'] = "7";
+    $data_magazine['id'] = "0";
     $data_magazine['order'] = "7";
     $data_magazine['type'] = "poll";
     $data_magazine['title'] = "poll";
@@ -1226,7 +1226,7 @@ function homePageJsonNewslist_lifestyle() {
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $tid = HOME_PAGE_JSON_NEWS_LIST_INDIA;
+    $tid = HOME_PAGE_JSON_NEWS_LIST_LIFE_STYLE;
     $node_count = "";
     $output = "";
     $data = array();
@@ -1262,7 +1262,7 @@ function homePageJsonNewslist_lifestyle() {
 
         // code vid=14  end
 
-        $data_news['id'] = "4";
+        $data_news['id'] = "1206567";
         $data_news['order'] = "4";
         $data_news['type'] = "newslist";
         $data_news['title'] = "Lifestyle";
