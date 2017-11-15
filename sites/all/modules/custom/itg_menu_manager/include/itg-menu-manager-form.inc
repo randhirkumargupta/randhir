@@ -344,11 +344,15 @@ function itg_menu_manager_form_validate($form, &$form_state) {
  * {@inheritdoc}
  */
 function itg_menu_manager_form_submit($form, &$form_state) {
-    cache_clear_all('menu_level_data', 'cache', TRUE);
-    cache_clear_all('itg_layout_manager:header_block', 'cache', TRUE);
-    cache_clear_all('itg_menu_manager:vertical_menu', 'cache', TRUE);
-    cache_clear_all('itg_menu_manager:second_level_menu', 'cache', TRUE);
-    cache_clear_all('itg_menu_manager:third_level_menu', 'cache', TRUE);
+    //START Logic to clear cache
+    $block_cache = array(
+      'itg_layout_manager:header_block',
+      'itg_menu_manager:vertical_menu',
+      'itg_menu_manager:second_level_menu',
+      'itg_menu_manager:third_level_menu'
+    );
+    itg_common_cache_clear($block_cache);
+    //END Logic to clear cache
     $edit_id = (null !== filter_input(INPUT_GET, 'edit_id')) ? filter_input(INPUT_GET, 'edit_id') : 0;
     $values = $form_state['values'];
     $display_icon = $values['display_icon'];

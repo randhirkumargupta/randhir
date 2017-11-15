@@ -2071,3 +2071,11 @@ function itg_common_exit() {
     }
   }
 }
+
+function itg_common_cache_clear($cache_array = array()) {
+  if(!empty($cache_array)) {
+    foreach($cache_array as $cache) {
+      cache_clear_all($cache, 'cache', TRUE);
+    }
+  }
+}
