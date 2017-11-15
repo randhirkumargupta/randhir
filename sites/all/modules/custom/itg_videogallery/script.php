@@ -40,13 +40,22 @@ function check_node_is_maped($nid) {
   return $result;
 }
 
+function check_node_is_maped_all($type) {
+  $result = db_select('itg_image_mapnode', 'n')
+      ->fields('n', array('id'))
+      ->condition('type', $type, ' = ')
+      ->execute()
+      ->fetchField();
+  return $result;
+}
+
 //itg_common_node_for_byline_update_image();
 //itg_common_node_for_supplement_update_image();
 //itg_common_node_for_issue_update_image();
-itg_common_node_for_video_update_image();
-//itg_common_node_for_photogallery_update_image();
+//itg_common_node_for_video_update_image();
 
-//itg_common_node_for_story_update_image();
+//itg_common_node_for_photogallery_update_image();
+itg_common_node_for_story_update_image();
 //itg_common_node_for_mega_review_critic_update_image();
 
 function itg_common_node_for_video_update_image() {
@@ -1284,7 +1293,8 @@ function itg_common_node_for_photogallery_update_image() {
  */
 
 function itg_common_node_for_story_update_image() {
-
+  $data_list = check_node_is_maped_all('story');
+  p($data_list);
   $query = db_select('migrate_map_itgstorylist', 'n');
   $query->addField('n', 'destid1', 'nid');
   $query->join('field_data_field_story_category', 'fdfsc', 'fdfsc.entity_id = n.destid1');

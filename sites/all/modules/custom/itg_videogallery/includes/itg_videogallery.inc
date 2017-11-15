@@ -265,9 +265,12 @@ function itg_videogallery_dfp_tags_setting_form_submit($form, &$form_state) {
  */
 function itg_videogallery_dfp_tags_list() {
 
-  $form['fieldset'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'DFP Tags List',
+//  $form['fieldset'] = array(
+//    '#type' => 'fieldset',
+//    '#title' => 'DFP Tags List',
+//  );
+ $form['fieldset'] = array(
+    '#markup' => l(t('Add'), '/itg-dfp-tags-setting', array('attributes' => array('class' => 'btn-submit'))),
   );
 
   $form['markup'] = array(
