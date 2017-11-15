@@ -1096,8 +1096,39 @@ function itg_mobile_feed_xml_feed_url_cron() {
 
 /**
  * XML Parse by HTML Tags
- * 
+ * $string String
+ * Return String 
  */
 function xmlEscape($string) {
     return str_replace(array('&', '<', '>', '\'', '"'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;'), $string);
+}
+
+/* Get The migrated video properties
+ * args $nid
+ * return migrated video properties
+ */
+function migrated_video_transcoding($nid){
+    //$nid = '840162';
+    $query = db_select('itg_video_transcoding', 'vt');
+    $query->fields('vt', array('file_size','bitrate_type','bitrate'));
+    $query->condition('vt.nid', $nid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $video_size = '';
+    
+    foreach ($result as $data){
+      if($data['bitrate'] == '364'){
+        if($data['file_size'] != ''){
+          $video_size = $data['file_size'];
+        }else{
+          $video_size = '0';
+        }
+      }elseif ($data['bitrate'] == '512') {
+        if($data['file_size'] != ''){
+          $video_size = $data['file_size'];
+        }else{
+          $video_size = '0';
+        }
+      }
+    }
+    return $video_size;
 }
