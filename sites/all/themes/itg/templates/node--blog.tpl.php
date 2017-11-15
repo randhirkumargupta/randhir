@@ -106,7 +106,7 @@ if (!empty($node->field_blog_configuration['und'])) {
     print "<img src='" . $src . "' alt='" . $alt . "' title='" . $title . "'>";
     ?>
   <?php else : ?>
-  <img src="<?php print file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg'));?>" ?>" alt="" title="">
+  <img src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');?>" ?>" alt="" title="">
   <?php endif; ?>
   
   <!-- Long description -->

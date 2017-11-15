@@ -111,7 +111,7 @@ $argum = base64_encode(arg(1));
                         print $row['field_images'];
                       }
                       else {
-                        print '<img height="448" width="650" src="' . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg')).'" alt="" title="" />';
+                        print '<img height="448" width="650" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg').'" alt="" title="" />';
                       }
                       ?>                    
                   </figure>
@@ -127,7 +127,7 @@ $argum = base64_encode(arg(1));
                         print $row['field_photo_small_image'];
                       }
                       else {
-                        print '<img  src="' . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg')).'" alt="" title="" />';
+                        print '<img  src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg').'" alt="" title="" />';
                       }
                       ?>
                   </li>

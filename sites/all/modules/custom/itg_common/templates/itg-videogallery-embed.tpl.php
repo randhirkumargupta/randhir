@@ -125,8 +125,8 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
         }
         else {
           $ga_data = "ga('send', 'event', 'Video_" . $nid . "Thumb', 'click','1', 1, {'nonInteraction': 1});return true;";
-          $image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg'));
-          $newimageds.= '<li><img class="migrate-thumb-video" data-nid = "' . $nid . '" data-used-on ="embed" data-image ="' . $image_url . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg')) . '" height="66" width="88" alt="" title="" onclick="' . $ga_data . '"></li>';
+          $image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
+          $newimageds.= '<li><img class="migrate-thumb-video" data-nid = "' . $nid . '" data-used-on ="embed" data-image ="' . $image_url . '" data-video-url="' . $video_value->field_migrated_video_url_value . '" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') . '" height="66" width="88" alt="" title="" onclick="' . $ga_data . '"></li>';
         }
         ?>
 
