@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * implement hook_migrate_api()
+ * @return array
+ */
+function itg_funalytics_import_migrate_api() {
+    $api = array(
+      'api' => 2,
+      'groups' => array(
+        'itg_funanlytics' => array(
+          'title' => t('Itg Funanlytics Imports'),
+        )
+      ),
+      'migrations' => array(
+        'ItgFunanlytics' => array('class_name' => 'ItgFunanlyticsMigration', 'group_name' => 'itg_funanlytics'),
+      ),
+    );
+    return $api;
+}
