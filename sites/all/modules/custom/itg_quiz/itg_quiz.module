@@ -895,7 +895,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
           $output .= '</div>';
           drupal_set_message($output, 'message');
         } else {
-          $output = '<div class = "quiz-contest-result-container"> <div class="quiz-question-thankyou-msg">You have not attempted any Question</div></div>';
+          $output = '<div class = "quiz-contest-result-container"> <div class="quiz-question-thankyou-msg">You have not attempted any Question.<br />Please select atleast one Question to View Results..</div></div>';
           drupal_set_message($output, 'message');
         }
         
