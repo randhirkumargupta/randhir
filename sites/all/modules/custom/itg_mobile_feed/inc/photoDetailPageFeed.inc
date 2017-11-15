@@ -28,10 +28,7 @@ function photoDetailPageFeed() {
  */
 function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
   $imgtag = "";
-  print_r($nid);
-  echo "<br>";
-  print_r($type);
-  die("tets");
+  
   if (!$file_name) {
     $file_name = "photo" . $nid . ".xml";
   }
@@ -58,7 +55,6 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     $output = "Nid is missing";
   }
   else {
-
     //check into redis
     $redis_key = "itgd_photo" . $nid;
     $result_get = getRedis($redis_key);
@@ -83,8 +79,8 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $output .= getMobileFeedXmlHeader();
       $output .= "<idgallery>" . $nid . "</idgallery><gallery><![CDATA[" . $title . "]]></gallery><idsection>" . $tid . "</idsection><section>" . $term_name . "</section><totalpics>" . $toptlapics . "</totalpics><weburl><![CDATA[" . $weburl . "]]></weburl>";
       //get gallery img tag
-      $imgtag = getGalleryImgTag($nid);
-      die("Test");
+      $imgtag = getGalleryImgTag($node);
+      
       if ($imgtag) {
         $output .= $imgtag;
       }
@@ -122,8 +118,9 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
  *
  * @return array
  */
-function getGalleryImgTag($galleryimg) {
+function getGalleryImgTag($node) {
   $output = "";
+  $galleryimg = $node->field_gallery_image['und'];
   if (count($galleryimg) > 0) {
     $output = "";
     foreach ($galleryimg as $key => $value) {
@@ -134,14 +131,13 @@ function getGalleryImgTag($galleryimg) {
       }
       $uri = $fc->field_images['und'][0]['uri'];
       $file_uri = file_create_url($uri);
-      $fid_file = $fid;
-      $img_url = completeFilePath($fid_file);
+      
+      //$img_url = completeFilePath($fid);
       $caption = $fc->field_image_caption['und'][0]['value'];
       $byline = $fc->field_credit['und'][0]['value'];
-      $photo_story_img = image_style_url('photo_slider_753x543', $uri);
-      $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $photo_story_img . "]]></image><largeimage><![CDATA[" . $photo_story_img . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
+      //$photo_story_img = image_style_url('photo_slider_753x543', $uri);
+      $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $file_uri . "]]></image><largeimage><![CDATA[" . $file_uri . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
     }
-    p($output);
     /*foreach ($galleryimg as $key => $value) {
       $fid = $value['value'];
       $fid_file = $value['revision_id'];
