@@ -81,6 +81,7 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $output .= "<idgallery>" . $nid . "</idgallery><gallery><![CDATA[" . $title . "]]></gallery><idsection>" . $tid . "</idsection><section>" . $term_name . "</section><totalpics>" . $toptlapics . "</totalpics><weburl><![CDATA[" . $weburl . "]]></weburl>";
       //get gallery img tag
       $imgtag = getGalleryImgTag($nid);
+      die("Test");
       if ($imgtag) {
         $output .= $imgtag;
       }
