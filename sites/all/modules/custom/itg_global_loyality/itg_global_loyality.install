@@ -35,8 +35,8 @@ function itg_global_loyality_schema() {
       ),
       'nid' => array(
         'description' => 'Node id.',
-        'type' => 'int',
-        'unsigned' => TRUE,
+        'type' => 'varchar',
+        'length' => 255,
         'not null' => TRUE,
         'default' => 0,
       ),

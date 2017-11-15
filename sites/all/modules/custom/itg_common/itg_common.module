@@ -2056,21 +2056,17 @@ function itg_fronturl_check() {
 /**
  * Implements hook_exit().
  */
-function itg_common_exit() {
+/*function itg_common_exit() {
   global $theme;
   if (!empty($_SESSION['messages']['error']) && $theme == FRONT_THEME_NAME) {    
     $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
     $key = array_search($msg, $_SESSION['messages']['error']);
     
     if ($key !== FALSE) {
-      unset($_SESSION['messages']['status'][$key]);
-      // Remove the empty status message wrapper if no other messages have been set.
-      /*if (empty($_SESSION['messages']['status'])) {
-       unset($_SESSION['messages']['status']);
-      }*/
+      unset($_SESSION['messages']['status'][$key]);     
     }
   }
-}
+}*/
 
 function itg_common_cache_clear($cache_array = array()) {
   if(!empty($cache_array)) {
