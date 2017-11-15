@@ -94,7 +94,7 @@ function genrate_vuclip_programme_xml($result, $section_name, $section_id) {
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $body = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['body_value']));
       $source_type = $value['field_story_source_type_value'];
-      $videotag = video_detail_formats($nid, $source_type);
+      $videotag = itg_video_detail_formats($nid, $source_type);
       $metatags = get_node_metatags_by_nid($nid);
       $keywords = '';
       if ($metatags) {
@@ -192,7 +192,7 @@ function genrate_mauj_programme_xml($result) {
       $nid = $value['nid'];
       $created_date = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
       $source_type = $value['field_story_source_type_value'];
-      $videotag = video_detail_formats($nid, $source_type);
+      $videotag = itg_video_detail_formats($nid, $source_type);
       $xml .= '<item>';
       $xml .= '<id>' . $nid . '</id>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';

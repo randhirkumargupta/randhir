@@ -387,7 +387,7 @@ function genrate_hltapps_video_detail_xml($value, $section_id, $section_name, $v
   $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
   $source_type = $value['field_story_source_type_value'];
-  $videotag = video_detail_formats($nid, $source_type);
+  $videotag = itg_video_detail_formats($nid, $source_type);
   $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
 
   $video_xml = '<root>';
@@ -934,7 +934,7 @@ function genrate_msn_hlt_video_detail_xml($value, $section_id, $section_name, $v
   $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
   $source_type = $value['field_story_source_type_value'];
-  $videotag = video_detail_formats($nid, $source_type);
+  $videotag = itg_video_detail_formats($nid, $source_type);
   $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
 
   $video_xml = '<root>';
