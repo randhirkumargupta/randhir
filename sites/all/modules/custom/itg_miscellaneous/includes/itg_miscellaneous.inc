@@ -245,3 +245,7 @@ function itg_change_text_field_max_length($field_name, $new_length) {
   // cache clean by field modyfie
   cache_clear_all();
 }
+
+function itg_sso_nid_callback() {
+db_query("ALTER TABLE  `itg_global_loyality_point` CHANGE  `nid`  `nid` VARCHAR( 255 ) NOT NULL DEFAULT  '0'");
+}
