@@ -81,11 +81,10 @@
           foreach ($rows as $index => $row) {
             if (strtolower($row['type']) == 'story') {
                 if (function_exists('itg_common_get_addontitle')) {
-                  $add_on_data = itg_common_get_addontitle($row['nid']);
                   $pipelinetext = "";
                   $pipelineclass = "";
-                  if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
-                    $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+                  if (!empty($row['field_story_new_title']) && !empty($row['field_story_redirection_url_titl'])) {
+                    $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $row['field_story_redirection_url_titl'] . '" title="' . $row['field_story_new_title'] . '">' . ucfirst($row['field_story_new_title']) . '</a>';
                     $pipelineclass = 'pipeline-added';
                     
                   }
