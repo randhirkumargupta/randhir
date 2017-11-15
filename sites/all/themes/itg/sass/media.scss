@@ -75,7 +75,7 @@
     .itg-layout-container .ad-widget {
         height: 272px;
         padding: 10px;
-        width: 300px;
+        width: 322px;
         margin: 0 auto;
     }
     section.sidebar .block-itg-ads {
@@ -500,6 +500,11 @@
     #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
         width: 55px;
         height: 55px;
+    }
+    .education-layout-page {
+        .widget-wrapper {
+            height: 100%;
+        }
     }
 }
 

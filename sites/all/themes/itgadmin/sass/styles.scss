@@ -14492,6 +14492,9 @@ div.ctools-modal-content {
     }
 }
 
+
+/*css start add by rajveer */
+
 .page-node-add-alexa-audio-clips .vertical-tabs {
     display: none
 }
@@ -14504,4 +14507,17 @@ div.ctools-modal-content {
     position: absolute;
     right: 70px;
     top: 4px;
+}
+
+
+/*css end add by rajveer */
+
+[id*="itg-videogallery-dfp-tags-list"] {
+    table {
+        @extend .views-table;
+    }
+    a {
+        float: right;
+        margin-bottom: 20px;
+    }
 }

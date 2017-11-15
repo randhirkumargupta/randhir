@@ -8489,6 +8489,7 @@ section.sidebar {
         -moz-box-shadow: 0 0 5px #d4cdcd;
         -webkit-box-shadow: 0 0 5px #d4cdcd;
         box-shadow: 0 0 5px #d4cdcd;
+        margin: 2px 0;
         .section-ordering {
             h3 {
                 padding: 10px;
@@ -14722,7 +14723,7 @@ ul.pron-cons-img li img {
 }
 
 #related-video-tab ul li,
-.trending-videos ul li {
+.video_header_tabs .trending-videos li {
     padding: 15px 24px 15px 0px;
     border-bottom: 1px solid #aaa9a9;
     overflow: hidden;
@@ -14740,7 +14741,7 @@ ul.pron-cons-img li img {
 }
 
 #related-video-tab ul li.related_content_tab .title a,
-.trending-videos li.trending-videos-list p a {
+.video_header_tabs .trending-videos li.trending-videos-list p a {
     color: #aaa9a9;
 }
 
