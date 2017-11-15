@@ -5131,10 +5131,7 @@ function get_header_tab_related_video_block_content() {
       }
       $related_video_duration = $related_data->sm_field_video_duration[0];
       $img_alt = strip_tags($related_title);
-      $url = $related_data->url;
-      if (empty($url)) {
-        $url = "/" . drupal_get_path_alias('node/' . $current_entity_id);
-      }
+      $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
       $related_image = '<img class="related-default" alt="' . $img_alt . '" title="" src="' . $related_image_url . '">';
       if (!empty($related_title)) {
         $related_video .= "<li class='related_content_tabs'><figure><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";

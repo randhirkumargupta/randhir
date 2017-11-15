@@ -382,9 +382,6 @@ jQuery(document).ready(function () {
 
 // code to copy serach text into search page
 jQuery(document).ready(function () {
-    jQuery(".tab-buttons span, .video_landing_menu a").on('click', function () {
-        comscoreBeacon();
-    })
     var elmt = jQuery('.search-text');
     jQuery('.search-text').keypress(function (e) {
         el = jQuery(this);
@@ -505,7 +502,7 @@ jQuery(document).ready(function () {
     }
 
     //Add header for so-sorry page
-    jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
+    //jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
     jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title, #defalt-section-top-block .widget-title').prependTo('.auto-block-2 .special-top-news');
 
 

@@ -328,17 +328,28 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
 // Photogallery slider javascript
       jQuery(document).ready(function () {
           jQuery(".slick-arrow , li.slick-slide").on("click", function () {
-            comscoreBeacon();
               var active_slide = jQuery(".slick-active").attr("data-slick-index");
-              var current_url = window.location.href.split('?')[0];
+              var current_url = window.location.href.split('/');
+              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
               if (active_slide > 0) {
-                  window.history.pushState("", "", current_url + "?photo=" + active_slide);
+                  //window.history.pushState(null, null, real_node_url + "/" + active_slide);
+                  ChangeUrl("page", real_node_url +"/"+active_slide);
               } else {
                   // If frist slide then put pull without query string.
-                  window.history.pushState("", "", current_url);
+                  window.history.pushState(null, null, real_node_url);
               }
           });
       });
+      
+    function ChangeUrl(page, url) {
+        if (typeof (history.pushState) != "undefined") {
+            var obj = { Page: page, Url: url };
+            history.pushState(obj, obj.Page, obj.Url);
+        } else {
+            alert("Browser does not support HTML5.");
+        }
+    }
+    
   });
   // Photogallery slider javascript
   // Handle Thumb for active set class

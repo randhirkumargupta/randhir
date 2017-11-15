@@ -144,6 +144,7 @@ define('FRONT_URL_VIDEO', variable_get('FRONT_URL_VIDEO'));
 define('FRONT_URL', variable_get('itg_front_url'));
 define('BACKEND_URL', variable_get('itg_backend_url'));
 define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
+define('INDEX_PAGE_URL', 'node/2');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 //define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
 //define('BACKEND_URL', 'http://itgd-mum-lb-dev-backend-app-678057722.ap-south-1.elb.amazonaws.com');

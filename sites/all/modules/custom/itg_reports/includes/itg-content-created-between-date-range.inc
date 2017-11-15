@@ -7,7 +7,7 @@ function itg_report_created_date_range($form, $form_state) {
   drupal_add_css("#ui-datepicker-div {display:none} ", 'inline');
   $form['content_type'] = array(
     '#type' => 'select',
-    '#title' => 'Content Type',
+    '#title' => 'Select Content Type',
     '#options' => array(
       'All' => 'All',
       'story' => 'Story',
@@ -208,12 +208,6 @@ function _create_pagnation($total_rows) {
   );
   $pagination = new Pagination($pagConfig);
   return $pagination->createLinks();
-//  module_load_include('php', 'itg_reports', 'includes/pagination');
-//  $pagination = new pagination;
-//  $item_per_page = 50;
-//  $pagination->generate($total_rows, $item_per_page);
-//  $pageNumbers = '<div class="numbers">' . $pagination->links() . '</div>';
-//  return $pageNumbers;
 }
 
 /**

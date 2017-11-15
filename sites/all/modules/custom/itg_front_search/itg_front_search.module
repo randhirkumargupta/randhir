@@ -336,6 +336,15 @@ function itg_front_search_views_pre_render(&$view) {
 //      drupal_add_html_head($markup, 'sd_json');
 //    }
     
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+        if (!$ping) {
+         $down_msg = variable_get('solr_down'); 
+        } else {
+         $down_msg = 'No Record Found !'; 
+        }
+        
+    $view->empty['area']->options['content'] = $down_msg;
+    
     if (!empty($arg[0])) {
       $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>' . str_replace("-", " ", $arg[1]) . '</h1></div>';
     }

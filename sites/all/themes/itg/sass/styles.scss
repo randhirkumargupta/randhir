@@ -1966,6 +1966,10 @@ footer {
         border-top: 1px solid $border-color;
         padding: 12px 0 12px 12px;
     }
+    img {
+        width: 100%;
+        max-height: 208px;
+    }
 }
 
 
@@ -3274,7 +3278,7 @@ footer {
         }
     }
     .story-tech-chunk {
-        padding-right: 100px;
+        /* padding-right: 100px; remove buy ITG arun*/
         .tech-rating {
             width: 88px;
             height: 33px;
@@ -7971,6 +7975,7 @@ section.sidebar {
                     @include float(none);
                     padding-right: 0;
                     font-family: $itg-robotoslab;
+                    line-height: initial;
                     .bottom-links {
                         margin-top: 10px;
                         a {
@@ -8488,6 +8493,7 @@ section.sidebar {
         -moz-box-shadow: 0 0 5px #d4cdcd;
         -webkit-box-shadow: 0 0 5px #d4cdcd;
         box-shadow: 0 0 5px #d4cdcd;
+        margin: 2px 0;
         .section-ordering {
             h3 {
                 padding: 10px;
@@ -8925,7 +8931,7 @@ section.sidebar {
     }
     .itg-layout-225 {
         .droppable {
-            height: 225px;
+            min-height: 225px;
         }
         .widget-title {
             margin-bottom: 10px;
@@ -14721,7 +14727,7 @@ ul.pron-cons-img li img {
 }
 
 #related-video-tab ul li,
-.trending-videos ul li {
+.video_header_tabs .trending-videos li {
     padding: 15px 24px 15px 0px;
     border-bottom: 1px solid #aaa9a9;
     overflow: hidden;
@@ -14739,7 +14745,7 @@ ul.pron-cons-img li img {
 }
 
 #related-video-tab ul li.related_content_tab .title a,
-.trending-videos li.trending-videos-list p a {
+.video_header_tabs .trending-videos li.trending-videos-list p a {
     color: #aaa9a9;
 }
 
@@ -14811,12 +14817,12 @@ ul.pron-cons-img li img {
     overflow-y: auto;
 }
 
-.video_header_tabs #related-video-tab ul li.related_content_tab .related-default {
+.video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {
     width: 170px;
     height: 127px;
 }
 
-.video_header_tabs .trending-videos ul li .trending-videos-list img {
+.video_header_tabs .trending-videos li.trending-videos-list img {
     width: 170px;
     height: 127px;
 }
@@ -14831,7 +14837,7 @@ ul.pron-cons-img li img {
 }
 
 #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figcaption {
-    bottom: 0;
+    bottom: 11px;
     left: 0;
     position: absolute;
     padding: 5px;

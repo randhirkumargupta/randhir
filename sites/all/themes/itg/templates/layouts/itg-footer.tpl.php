@@ -113,7 +113,7 @@ $wgmf_big = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/i
   </div>
 <!--animation emoji for hightlight end-->
 <?php
-echo 'shravan'.time();
+echo time();
 if(!empty($sso_msg)) {
   print '<div class = "activate-message">
          <div class = "message-body">
