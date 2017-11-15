@@ -27,9 +27,11 @@ function photoDetailPageFeed() {
  * @return array
  */
 function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
-  p("test123");
   $imgtag = "";
-
+  print_r($nid);
+  echo "<br>";
+  print_r($type);
+  die("tets");
   if (!$file_name) {
     $file_name = "photo" . $nid . ".xml";
   }
