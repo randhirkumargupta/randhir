@@ -953,7 +953,6 @@ function itg_story_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_story_node_view($node, $view_mode, $langcode) {
-
   if ($node->type == 'story' && $view_mode != 'search_index') {
     global $user, $theme;
     // for lock story
@@ -964,7 +963,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
           $config[] = $value['value'];
         }
       }
-      if (in_array('lock_story' , $config)) {
+      if (in_array('lock_story' , $config) && empty($_GET['preview_log'])) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
     }
