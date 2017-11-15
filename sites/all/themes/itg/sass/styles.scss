@@ -7971,6 +7971,7 @@ section.sidebar {
                     @include float(none);
                     padding-right: 0;
                     font-family: $itg-robotoslab;
+                    line-height: initial;
                     .bottom-links {
                         margin-top: 10px;
                         a {
