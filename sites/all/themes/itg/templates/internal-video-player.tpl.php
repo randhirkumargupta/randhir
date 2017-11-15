@@ -31,14 +31,14 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
   var autoplay = "true";
   var mp4videoFlagJS = 1;
   //$(document).ready(function() {	
-
+//stripcslashes($title);
   function loadplayerjw() {
       var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
       //var playerInstance = jwplayer('videoplayer');
       jwplayer('videoplayer').setup({
           //var multipart=0;
           playlist: [{
-                  title: "<?php echo stripcslashes($title); ?>",
+                  title: "",
                   'image': "<?php echo $player_content['player_image']; ?>",
                   sources: [
                       {
@@ -61,7 +61,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
               client: "googima", skipoffset: 5,
               schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
-              idstring: "<?php echo stripcslashes($title); ?>",
+              idstring: "",
               label: "<?php echo $player_content["ga_code"];?>"
           }
       });

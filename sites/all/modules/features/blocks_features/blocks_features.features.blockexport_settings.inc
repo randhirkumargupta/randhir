@@ -2553,7 +2553,7 @@ node/*/edit',
   'visibility' => 0,
   'pages' => '',
   'title' => '<none>',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 182,
@@ -17939,7 +17939,7 @@ snappost/*',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1241,
@@ -18654,7 +18654,7 @@ magazine/*',
   'pages' => 'magazine
 magazine/*',
   'title' => '',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1289,
@@ -19171,7 +19171,7 @@ sosorry/*',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1325,
@@ -19298,15 +19298,15 @@ sosorry/*',
   'module' => 'views',
   'delta' => 'so_sorry-most_watched',
   'theme' => 'itg',
-  'status' => 1,
+  'status' => 0,
   'weight' => -82,
-  'region' => 'content_bottom',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'sosorry
 sosorry/*',
   'title' => '<none>',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1334,
@@ -19411,7 +19411,7 @@ sosorry/*',
   'pages' => 'sosorry
 sosorry/*',
   'title' => '<none>',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1341,
@@ -19516,7 +19516,7 @@ sosorry/*',
   'pages' => 'sosorry
 sosorry/*',
   'title' => '<none>',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1348,
@@ -29007,7 +29007,7 @@ history
 loyalty-redemption-history
 checkout-page',
   'title' => '<none>',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 2008,
@@ -33348,7 +33348,7 @@ funalytics/*',
   'visibility' => 0,
   'pages' => '<front>',
   'title' => '',
-  'cache' => -1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 2307,
@@ -42956,7 +42956,7 @@ sponsor-details
 event/*/speaker-details
 event/*/sponsor-details',
   'title' => '',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 2971,
@@ -42991,6 +42991,34 @@ event/*/speaker-details
 event/*/sponsor-details',
   'title' => '',
   'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2973,
+  'module' => 'views',
+  'delta' => 'page_published_report-block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2974,
+  'module' => 'views',
+  'delta' => 'page_published_report-block_1',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
 );
   $export['block_custom'][] = array(
   'bid' => 1,

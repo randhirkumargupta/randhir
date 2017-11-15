@@ -141,17 +141,22 @@
      <div class="bottom-movie-desc"><?php print $bottom_desc; ?></div>
     <div class="other-reviews">
         <!-- Print reviews -->
-        <?php $average_ratings = 0; ?>
-        <?php $num_of_ratings = 0; ?>
-      <!------------------------------------------------------------------------------------------------------->
+     
+        <?php
+          $average_ratings = 0;
+          $num_of_ratings = 0;
+          $our_counter = 0;
+        ?>
+      
         <?php $external_review = $internal_review = FALSE; ?>
         <?php foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection):$reviews = entity_load('field_collection_item', array($field_collection['value']));    
 
          if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] != 'external') { ?>
           <div class="other-reviews-row">
-              <!-- Review Headline -->
-              
-              
+           
+              <?php if($our_counter == 0) { print '<h2>' . t('Our Reviewers') . '</h2>'; }
+                ++$our_counter;
+              ?>
               <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline[LANGUAGE_NONE][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link[LANGUAGE_NONE][0]['value']); ?></h2>
               <div class="other-reviews-posted-on">
                   <!-- Byline reporter -->

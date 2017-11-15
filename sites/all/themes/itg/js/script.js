@@ -382,9 +382,6 @@ jQuery(document).ready(function () {
 
 // code to copy serach text into search page
 jQuery(document).ready(function () {
-    jQuery(".tab-buttons span, .video_landing_menu a").on('click', function () {
-        comscoreBeacon();
-    })
     var elmt = jQuery('.search-text');
     jQuery('.search-text').keypress(function (e) {
         el = jQuery(this);
@@ -505,7 +502,7 @@ jQuery(document).ready(function () {
     }
 
     //Add header for so-sorry page
-    jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
+    //jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
     jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title, #defalt-section-top-block .widget-title').prependTo('.auto-block-2 .special-top-news');
 
 
@@ -1083,8 +1080,9 @@ jQuery(document).ready(function (e) {
         var getvideoimage = jQuery(this).attr('data-image');
         var getvideonid = jQuery(this).attr('data-nid');
         var getvideourl = jQuery(this).attr('data-video-url');
+         var getvideousedon = jQuery(this).attr('data-used-on');
         var ajaxpath = Drupal.settings.basePath + 'getvideoplayer-migrated';
-        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl)
+        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl,getvideousedon)
 
     });
     jQuery('.itg-embed-photo-slider').slick({
@@ -1242,7 +1240,7 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
         beforeSend: function () {
             jQuery('.loading-video').show();
         },
-        data: {'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl},
+        data: {'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl,'getvideousedon':getvideousedon},
         success: function (data) {
             jQuery('#migrate_video_palyer_container').html(data);
             jQuery('.loading-video').hide();

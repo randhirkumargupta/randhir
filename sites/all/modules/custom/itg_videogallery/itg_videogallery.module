@@ -2767,8 +2767,9 @@ function itg_videogallery_getsolr_data_for_internal_video($video_id) {
 function itg_videogallery_getvideoplayer_migrated() {
   $image= $_GET['video_image'];
   $video_url = $_GET['video_url'];
+  $getvideousedon = $_GET['getvideousedon'];
   $nid = $_GET['nid'];
-   print theme('migrated_video_player', array("url" =>$video_url, 'nid' => $nid, 'image' => $image));
+   print theme('migrated_video_player', array("url" =>$video_url, 'nid' => $nid, 'image' => $image, 'used_on'=>$getvideousedon));
 }
 
 
@@ -4918,7 +4919,7 @@ function itg_videogallery_get_all_draft_video_of_video_content() {
  * This function use for get video bitrate url
  * 
  */
-function itg_videogallery_get_video_bitrate_by_url($url,$nid) {
+function itg_videogallery_get_video_bitrate_by_url($url,$nid,$used_on) {
   $return_array = array();
   $query = db_select('itg_video_transcoding', 'ivt');
   $query->fields('ivt');
@@ -4944,7 +4945,32 @@ function itg_videogallery_get_video_bitrate_by_url($url,$nid) {
   }else {
     $return_array['bitrate_url'] = "";
   }
-  //p($return_array);
+   $dfp_data = itg_videogallery_get_dfp_tags ($video_data1[0]->website , $video_data1[0]->transcoding_source);
+   
+if(!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
+  if($used_on == 'embed') {
+          $return_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_internal;
+
+  }else{
+      $return_array['dfp_tags'] =  $dfp_data[0]->dfp_tags;
+
+  }
+}else {
+  $return_array['dfp_tags'] =  JWPLAYER_DFP_TAG;
+}
+
+if(!empty($dfp_data)) {
+  if($used_on == 'embed' && !empty($dfp_data[0]->ga_tag_extarnal)) {
+     $return_array['ga_code'] =  $dfp_data[0]->ga_tag_extarnal;
+  }else {
+    $return_array['ga_code'] = ITG_GA_CODE;
+  }
+  if($used_on != 'embed' && !empty($dfp_data[0]->ga_tag_internal)) {
+     $return_array['ga_code'] =  $dfp_data[0]->ga_tag_internal;
+  }else {
+    $return_array['ga_code'] = ITG_GA_CODE;
+  }
+}
    return $return_array;
   }
 
@@ -5105,10 +5131,7 @@ function get_header_tab_related_video_block_content() {
       }
       $related_video_duration = $related_data->sm_field_video_duration[0];
       $img_alt = strip_tags($related_title);
-      $url = $related_data->url;
-      if (empty($url)) {
-        $url = "/" . drupal_get_path_alias('node/' . $current_entity_id);
-      }
+      $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
       $related_image = '<img class="related-default" alt="' . $img_alt . '" title="" src="' . $related_image_url . '">';
       if (!empty($related_title)) {
         $related_video .= "<li class='related_content_tabs'><figure><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";
