@@ -1291,7 +1291,6 @@ function itg_common_node_for_photogallery_update_image() {
 /*
  * This function use for update image in photogallery
  */
-
 function itg_common_node_for_story_update_image() {
   $data_list = check_node_is_maped_all('story');
   $query = db_select('migrate_map_itgstorylist', 'n');
