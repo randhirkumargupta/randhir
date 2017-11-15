@@ -1,4 +1,5 @@
 <?php
+
 /*
  * INC file for Set the Firebase API Configuration & Static variable declaratrion
  * 
