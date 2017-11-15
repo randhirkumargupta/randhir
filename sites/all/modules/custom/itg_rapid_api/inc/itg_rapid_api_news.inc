@@ -139,7 +139,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
 
         //end
-        $d1=date('Y-m-d', strtotime("-365 days"));
+        $d1=date('Y-m-d', strtotime("-90 days"));
         $d2=date(strtotime($d1));
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
