@@ -75,7 +75,7 @@
     .itg-layout-container .ad-widget {
         height: 272px;
         padding: 10px;
-        width: 300px;
+        width: 322px;
         margin: 0 auto;
     }
     section.sidebar .block-itg-ads {
@@ -500,6 +500,11 @@
     #block-views-program-schedule-block-1 .content-list ul.profile-detail li.image img {
         width: 55px;
         height: 55px;
+    }
+    .education-layout-page {
+        .widget-wrapper {
+            height: 100%;
+        }
     }
 }
 
@@ -3882,6 +3887,29 @@
     #block-views-video-landing-header-block .video-header-right {
         margin-top: 25px;
     }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content {
+        float: left;
+        width: 100%;
+        overflow-x: scroll;
+    }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content ul.photo-list li {
+        width: 200px;
+        float: left;
+        padding: 0;
+    }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-footer {
+        display: none
+    }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content .photo-list li:nth-child(4n+1) {
+        clear: inherit;
+    }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .other_video_category h3 {
+        float: left
+    }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content .photo-list {
+        width: 1600px;
+        margin-left: 3px;
+    }
 }
 
 @media (min-width: 320px) {
@@ -3894,6 +3922,26 @@
 @media (max-width: 767px) {
     #block-views-video-landing-header-block .latest_video {
         padding: 30px 0;
+    }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-footer {
+        display: block
+    }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content .photo-list li:nth-of-type(1n+5) {
+        display: none;
+    }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .load-more-video-dec {
+        text-align: center;
+    }
+    #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .load-more-video-dec a.add-more-video-dec {
+        display: inline-block;
+        vertical-align: top;
+        padding: 10px 20px;
+        font: 14px/18px Roboto;
+        color: #666;
+        background-color: #d1d1d1;
+        border-radius: 5px;
+        margin: 0 10px;
+        text-transform: uppercase;
     }
 }
 
