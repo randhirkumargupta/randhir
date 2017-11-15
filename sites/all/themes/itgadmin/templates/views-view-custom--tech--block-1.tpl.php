@@ -76,6 +76,7 @@
           <ul class="itg-listing">   
             <?php
             foreach ($rows as $index => $row) {
+           
                if (strtolower($row['type']) == 'story') {
                 if (function_exists('itg_common_get_addontitle')) {
                   //$add_on_data = itg_common_get_addontitle($row['nid']);
