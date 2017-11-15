@@ -27,6 +27,7 @@ function __node_for_video_update_image($nid) {
   $tweet_image = array();
   $player_image = array();
   $node = node_load($nid);
+
   $node_created_date = $node->created;
   $time_folder = date('Ym', $node_created_date);
   $node_type = $node->type;
@@ -35,18 +36,39 @@ function __node_for_video_update_image($nid) {
   if (isset($extra_large_image['uri']) && !empty($extra_large_image['uri'])) {
     $file_image = file_create_url($extra_large_image['uri']);
     $imagedata = file_get_contents($file_image);
-    $image_name = end(explode('/', $extra_large_image['uri']));
-    $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
-    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+    if ($imagedata === FALSE) {
+      _insert_failed_image($res->nid, $extra_large_image['fid']);
     }
-    $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-    $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')
-        ->execute();
-    $inserted_data = db_update('file_managed')->fields(array(
-          'uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
-        ->execute();
-    __insert_orignal_image($file, $extra_large_image['fid']);
+    else {
+      if (!empty($imagedata)) {
+        $image_name = end(explode('/', $extra_large_image['uri']));
+        $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        }
+        $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+        $insert_count = db_select('file_managed', 'sr')
+            ->fields('sr')
+            ->condition('sr.uri', $file_path)
+            ->execute()
+            ->rowCount();
+        if ($insert_count) {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+        }
+        else {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        }
+        if ($file) {
+          $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_large_image['uri'], '=')
+              ->execute();
+
+          $inserted_data = db_update('file_managed')->fields(array(
+                'uri' => $file))->condition('fid', $extra_large_image['fid'], '=')
+              ->execute();
+          all_insert_orignal_image($file, $extra_large_image['fid']);
+        }
+      }
+    }
   }
   // large image
   $large_image['fid'] = $node->field_story_large_image['und'][0]['fid'];
@@ -54,18 +76,39 @@ function __node_for_video_update_image($nid) {
   if (isset($large_image['uri']) && !empty($large_image['uri'])) {
     $file_image = file_create_url($large_image['uri']);
     $imagedata = file_get_contents($file_image);
-    $image_name = end(explode('/', $large_image['uri']));
-    $filedir = ITG_IMAGE_FOLDER . 'video_test' . '/' . $time_folder;
-    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+    if ($imagedata === FALSE) {
+      _insert_failed_image($res->nid, $large_image['fid']);
     }
-    $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-    $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')
-        ->execute();
-    $inserted_data = db_update('file_managed')->fields(array(
-          'uri' => $file))->condition('fid', $large_image['fid'], '=')
-        ->execute();
-    __insert_orignal_image($file, $large_image['fid']);
+    else {
+      if (!empty($imagedata)) {
+        $image_name = end(explode('/', $large_image['uri']));
+        $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        }
+        $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+        $insert_count = db_select('file_managed', 'sr')
+            ->fields('sr')
+            ->condition('sr.uri', $file_path)
+            ->execute()
+            ->rowCount();
+        if ($insert_count) {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+        }
+        else {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        }
+        if ($file) {
+          $inserted_data = db_delete('s3fs_file')->condition('uri', $large_image['uri'], '=')
+              ->execute();
+
+          $inserted_data = db_update('file_managed')->fields(array(
+                'uri' => $file))->condition('fid', $large_image['fid'], '=')
+              ->execute();
+          all_insert_orignal_image($file, $large_image['fid']);
+        }
+      }
+    }
   }
   // medium image
   $medium_image['fid'] = $node->field_story_medium_image['und'][0]['fid'];
@@ -73,18 +116,39 @@ function __node_for_video_update_image($nid) {
   if (isset($medium_image['uri']) && !empty($medium_image['uri'])) {
     $file_image = file_create_url($medium_image['uri']);
     $imagedata = file_get_contents($file_image);
-    $image_name = end(explode('/', $medium_image['uri']));
-    $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
-    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+    if ($imagedata === FALSE) {
+      _insert_failed_image($res->nid, $medium_image['fid']);
     }
-    $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-    $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')
-        ->execute();
-    $inserted_data = db_update('file_managed')->fields(array(
-          'uri' => $file))->condition('fid', $medium_image['fid'], '=')
-        ->execute();
-    __insert_orignal_image($file, $medium_image['fid']);
+    else {
+      if (!empty($imagedata)) {
+        $image_name = end(explode('/', $medium_image['uri']));
+        $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        }
+        $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+        $insert_count = db_select('file_managed', 'sr')
+            ->fields('sr')
+            ->condition('sr.uri', $file_path)
+            ->execute()
+            ->rowCount();
+        if ($insert_count) {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+        }
+        else {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        }
+        if ($file) {
+          $inserted_data = db_delete('s3fs_file')->condition('uri', $medium_image['uri'], '=')
+              ->execute();
+
+          $inserted_data = db_update('file_managed')->fields(array(
+                'uri' => $file))->condition('fid', $medium_image['fid'], '=')
+              ->execute();
+          all_insert_orignal_image($file, $medium_image['fid']);
+        }
+      }
+    }
   }
   // small image
   $small_image['fid'] = $node->field_story_small_image['und'][0]['fid'];
@@ -92,19 +156,39 @@ function __node_for_video_update_image($nid) {
   if (isset($small_image['uri']) && !empty($small_image['uri'])) {
     $file_image = file_create_url($small_image['uri']);
     $imagedata = file_get_contents($file_image);
-    $image_name = end(explode('/', $small_image['uri']));
-    $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
-    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+    if ($imagedata === FALSE) {
+      _insert_failed_image($res->nid, $small_image['fid']);
     }
-    $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+    else {
+      if (!empty($imagedata)) {
+        $image_name = end(explode('/', $small_image['uri']));
+        $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        }
+        $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+        $insert_count = db_select('file_managed', 'sr')
+            ->fields('sr')
+            ->condition('sr.uri', $file_path)
+            ->execute()
+            ->rowCount();
+        if ($insert_count) {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+        }
+        else {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        }
+        if ($file) {
+          $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')
+              ->execute();
 
-    $inserted_data = db_delete('s3fs_file')->condition('uri', $small_image['uri'], '=')
-        ->execute();
-    $inserted_data = db_update('file_managed')->fields(array(
-          'uri' => $file))->condition('fid', $small_image['fid'], '=')
-        ->execute();
-    __insert_orignal_image($file, $small_image['fid']);
+          $inserted_data = db_update('file_managed')->fields(array(
+                'uri' => $file))->condition('fid', $small_image['fid'], '=')
+              ->execute();
+          all_insert_orignal_image($file, $small_image['fid']);
+        }
+      }
+    }
   }
   //extra small image
   $extra_small_image['fid'] = $node->field_story_extra_small_image['und'][0]['fid'];
@@ -112,19 +196,39 @@ function __node_for_video_update_image($nid) {
   if (isset($extra_small_image['uri']) && !empty($extra_small_image['uri'])) {
     $file_image = file_create_url($extra_small_image['uri']);
     $imagedata = file_get_contents($file_image);
-    $image_name = end(explode('/', $extra_small_image['uri']));
-    $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
-    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+    if ($imagedata === FALSE) {
+      _insert_failed_image($res->nid, $extra_small_image['fid']);
     }
-    $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+    else {
+      if (!empty($imagedata)) {
+        $image_name = end(explode('/', $extra_small_image['uri']));
+        $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        }
+        $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+        $insert_count = db_select('file_managed', 'sr')
+            ->fields('sr')
+            ->condition('sr.uri', $file_path)
+            ->execute()
+            ->rowCount();
+        if ($insert_count) {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+        }
+        else {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        }
+        if ($file) {
+          $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')
+              ->execute();
 
-    $inserted_data = db_delete('s3fs_file')->condition('uri', $extra_small_image['uri'], '=')
-        ->execute();
-    $inserted_data = db_update('file_managed')->fields(array(
-          'uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
-        ->execute();
-    __insert_orignal_image($file, $extra_small_image['fid']);
+          $inserted_data = db_update('file_managed')->fields(array(
+                'uri' => $file))->condition('fid', $extra_small_image['fid'], '=')
+              ->execute();
+          all_insert_orignal_image($file, $extra_small_image['fid']);
+        }
+      }
+    }
   }
   //FAcebook  image
   $facebook_image['fid'] = $node->field_story_facebook_image['und'][0]['fid'];
@@ -132,18 +236,39 @@ function __node_for_video_update_image($nid) {
   if (isset($facebook_image['uri']) && !empty($facebook_image['uri'])) {
     $file_image = file_create_url($facebook_image['uri']);
     $imagedata = file_get_contents($file_image);
-    $image_name = end(explode('/', $facebook_image['uri']));
-    $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
-    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+    if ($imagedata === FALSE) {
+      _insert_failed_image($res->nid, $facebook_image['fid']);
     }
-    $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-    $inserted_data = db_delete('s3fs_file')->condition('uri', $facebook_image['uri'], '=')
-        ->execute();
-    $inserted_data = db_update('file_managed')->fields(array(
-          'uri' => $file))->condition('fid', $facebook_image['fid'], '=')
-        ->execute();
-    __insert_orignal_image($file, $facebook_image['fid']);
+    else {
+      if (!empty($imagedata)) {
+        $image_name = end(explode('/', $facebook_image['uri']));
+        $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        }
+        $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+        $insert_count = db_select('file_managed', 'sr')
+            ->fields('sr')
+            ->condition('sr.uri', $file_path)
+            ->execute()
+            ->rowCount();
+        if ($insert_count) {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+        }
+        else {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        }
+        if ($file) {
+          $inserted_data = db_delete('s3fs_file')->condition('uri', $facebook_image['uri'], '=')
+              ->execute();
+
+          $inserted_data = db_update('file_managed')->fields(array(
+                'uri' => $file))->condition('fid', $facebook_image['fid'], '=')
+              ->execute();
+          all_insert_orignal_image($file, $facebook_image['fid']);
+        }
+      }
+    }
   }
   //Tweet  image
   $tweet_image['fid'] = $node->field_story_tweet_image['und'][0]['fid'];
@@ -151,18 +276,39 @@ function __node_for_video_update_image($nid) {
   if (isset($tweet_image['uri']) && !empty($tweet_image['uri'])) {
     $file_image = file_create_url($tweet_image['uri']);
     $imagedata = file_get_contents($file_image);
-    $image_name = end(explode('/', $tweet_image['uri']));
-    $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
-    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+    if ($imagedata === FALSE) {
+      _insert_failed_image($res->nid, $tweet_image['fid']);
     }
-    $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-    $inserted_data = db_delete('s3fs_file')->condition('uri', $tweet_image['uri'], '=')
-        ->execute();
-    $inserted_data = db_update('file_managed')->fields(array(
-          'uri' => $file))->condition('fid', $tweet_image['fid'], '=')
-        ->execute();
-    __insert_orignal_image($file, $tweet_image['fid']);
+    else {
+      if (!empty($imagedata)) {
+        $image_name = end(explode('/', $tweet_image['uri']));
+        $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        }
+        $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+        $insert_count = db_select('file_managed', 'sr')
+            ->fields('sr')
+            ->condition('sr.uri', $file_path)
+            ->execute()
+            ->rowCount();
+        if ($insert_count) {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+        }
+        else {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        }
+        if ($file) {
+          $inserted_data = db_delete('s3fs_file')->condition('uri', $tweet_image['uri'], '=')
+              ->execute();
+
+          $inserted_data = db_update('file_managed')->fields(array(
+                'uri' => $file))->condition('fid', $tweet_image['fid'], '=')
+              ->execute();
+          all_insert_orignal_image($file, $tweet_image['fid']);
+        }
+      }
+    }
   }
   //Tweet  image
   $player_image['fid'] = $node->field_story_player_image['und'][0]['fid'];
@@ -170,18 +316,39 @@ function __node_for_video_update_image($nid) {
   if (isset($player_image['uri']) && !empty($player_image['uri'])) {
     $file_image = file_create_url($player_image['uri']);
     $imagedata = file_get_contents($file_image);
-    $image_name = end(explode('/', $player_image['uri']));
-    $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
-    if (!file_exists(file_default_scheme() . '://' . $filedir)) {
-      mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+    if ($imagedata === FALSE) {
+      _insert_failed_image($res->nid, $player_image['fid']);
     }
-    $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
-    $inserted_data = db_delete('s3fs_file')->condition('uri', $player_image['uri'], '=')
-        ->execute();
-    $inserted_data = db_update('file_managed')->fields(array(
-          'uri' => $file))->condition('fid', $player_image['fid'], '=')
-        ->execute();
-    __insert_orignal_image($file, $player_image['fid']);
+    else {
+      if (!empty($imagedata)) {
+        $image_name = end(explode('/', $player_image['uri']));
+        $filedir = ITG_IMAGE_FOLDER . 'video' . '/' . $time_folder;
+        if (!file_exists(file_default_scheme() . '://' . $filedir)) {
+          mkdir(file_default_scheme() . '://' . $filedir, 0777, TRUE);
+        }
+        $file_path = file_default_scheme() . '://' . $filedir . '/' . $image_name;
+        $insert_count = db_select('file_managed', 'sr')
+            ->fields('sr')
+            ->condition('sr.uri', $file_path)
+            ->execute()
+            ->rowCount();
+        if ($insert_count) {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
+        }
+        else {
+          $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
+        }
+        if ($file) {
+          $inserted_data = db_delete('s3fs_file')->condition('uri', $player_image['uri'], '=')
+              ->execute();
+
+          $inserted_data = db_update('file_managed')->fields(array(
+                'uri' => $file))->condition('fid', $player_image['fid'], '=')
+              ->execute();
+          all_insert_orignal_image($file, $player_image['fid']);
+        }
+      }
+    }
   }
 }
 

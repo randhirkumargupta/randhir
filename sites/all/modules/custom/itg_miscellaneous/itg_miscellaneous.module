@@ -90,6 +90,13 @@ function itg_miscellaneous_menu() {
     'access callback' => TRUE,
   );
   
+  $items['alter-sso-nid'] = array(
+    'title' => 'sso nid callback menu',
+    'page callback' => 'itg_sso_nid_callback',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_miscellaneous.inc',
+  );
+  
 
   
   return $items;
