@@ -142,7 +142,7 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $video_xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
   $video_xml .= '<mediaid></mediaid><uurl></uurl>';
   $source_type = $result['field_story_source_type_value'];
-  $videotag = video_detail_formats($nid, $source_type);
+  $videotag = itg_video_detail_formats($nid, $source_type);
 
   if (!empty($videotag['migrated'])) { //migrated video
     $video_xml .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";

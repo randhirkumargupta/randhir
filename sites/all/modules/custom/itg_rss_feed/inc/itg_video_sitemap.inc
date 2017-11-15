@@ -62,7 +62,7 @@ function get_video_sitemap_item() {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $output = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">';
   foreach ($result as $reskey => $resvalue) {
-    $videotag = video_detail_formats($resvalue['nid'], $resvalue['field_story_source_type_value']);
+    $videotag = _itg_rss_video_detail_formats($resvalue['nid'], $resvalue['field_story_source_type_value']);
     $duration = 0;
     $video_dur = explode(':', $videotag->video_duration);
     if (count($video_dur) > 1) {
@@ -103,7 +103,7 @@ function get_video_sitemap_item() {
  * @param string $source_type
  * @return array
  */
-function video_detail_formats($nid, $source_type) {
+function _itg_rss_video_detail_formats($nid, $source_type) {
   $video_detail = array();
   if ($source_type != 'migrated') {
     $videoids = itg_get_video_in_fieldcollection_by_nid($nid);
