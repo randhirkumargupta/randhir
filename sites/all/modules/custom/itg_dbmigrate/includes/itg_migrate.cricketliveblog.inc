@@ -197,18 +197,7 @@ class ItgCricketliveblog extends XMLMigration {
       $node->field_match_id[LANGUAGE_NONE][0]['value'] = $row->match_id_new;
     }
     
-    // manage title
-    $data_brifcase = '';
-    $constituancy = '';
-    if (isset($row->xml->title) && !empty($row->xml->title)) {
-	  $_title = explode(':', $row->xml->title);
-      $title = reset($_title);
-      if(count($_title) > 1){
-		  $constituancy = end($_title);
-	  }
-    }
-    $node->title = $title;    
-    $node->field_constituancy[LANGUAGE_NONE][0]['value'] = $constituancy;
+    $node->field_constituancy[LANGUAGE_NONE][0]['value'] = '';
     $modified_time = (int) $row->xml->modifieddate; // TIme migrate as IST
     $mod_time = $modified_time;
     $modi_time = date('Y-m-d h:i:s', $mod_time);
