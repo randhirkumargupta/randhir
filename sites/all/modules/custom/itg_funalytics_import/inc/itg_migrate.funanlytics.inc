@@ -26,7 +26,7 @@ class ItgFunanlyticsMigration extends XMLMigration {
     // $file_path = drupal_realpath('public://');
     $file_path = 'sites/default/files';
 
-    $xml_folder = $file_path . '/' . 'migrate/xml_file/funalytics/';
+    $xml_folder = $file_path . '/' . 'migrate/xml_file/';
 
     //$items_url = $xml_folder . 'tech_liveblog.xml';
     $items_url = $xml_folder . 'itg_funalytics.xml';
