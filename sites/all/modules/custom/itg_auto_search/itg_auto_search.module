@@ -29,8 +29,28 @@ function itg_auto_search_menu() {
       'page arguments' => array('import_auto_form'),
       'access callback' => TRUE
     );
+    $items['deletecricketlive'] = array(
+      'title' => 'Auto', 
+      'description' => 'Auto compare',
+      'page callback' => 'deletecricketlive', 
+      'page arguments' => array('import_auto_form'),
+      'access callback' => TRUE
+    );
     return $items;
 }
+
+function deletecricketlive(){
+	$query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_type', 'dbody', 'dbody.entity_id=n.nid');
+    $query->condition('n.type', 'breaking_news', '=');
+    $query->condition('dbody.field_type_value', 'Cricket Live Blog', '=');
+    $query->fields('n', array('nid', 'title', 'created'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $reskey => $resvalue) {
+		node_delete($resvalue['nid']);
+	}
+}
+
 
 /**
  * This function is used in auto compare callback.
