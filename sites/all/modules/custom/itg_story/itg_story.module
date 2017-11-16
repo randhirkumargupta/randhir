@@ -319,13 +319,13 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
         ),
       );
       // Google standout chekbox modifications.
-      $approved_roleid = array(ADMINISTRATOR_ROLE_ID, EDITOR_ROLE_ID, SITEADMIN_ROLE_ID);
+      $approved_roleid = array(ADMINISTRATOR, EDITOR, SITE_ADMIN);
       $check = array();
       $check = array_intersect($approved_roleid, array_keys($user->roles));
       if (empty($check)) {
         unset($form['field_story_configurations'][LANGUAGE_NONE]['#options']['google_standout']);
       }
-      if ((isset($form['#node']->nid)) && (in_array(EDITOR_ROLE_ID, array_keys($user->roles)))) {
+      if ((isset($form['#node']->nid)) && (in_array(EDITOR, array_keys($user->roles)))) {
         foreach ($form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] as $key => $val) {
           if ($val == 'google_standout') {
             $form['field_story_configurations'][LANGUAGE_NONE]['google_standout']['#attributes']['disabled'] = 'disabled';
