@@ -20,10 +20,12 @@ function add_nofollow_in_body($bodytext) {
  * Updating rich snippet for node type story, videogallery and mega review critic
  */
 function itg_seo_node_data($node) {
+  $arg = arg();
   global $base_url, $theme_key; 
-
-  // Adding noindex, nofollow for making content search engin friendly
-  if($node->type == 'story') {
+  
+  // Rich Snippet for Story
+  if ($node->type == 'story') {
+    // Adding noindex, nofollow for making content search engin friendly
     if(isset($node->field_story_configurations[LANGUAGE_NONE])) {
       $configurableopt = $node->field_story_configurations[LANGUAGE_NONE];
     }
@@ -62,11 +64,8 @@ function itg_seo_node_data($node) {
       drupal_add_html_head($element, 'robots');
      }
     }
-  } 
-  
-  
-  // Rich Snippet for Story
-  if ($node->type == 'story') {
+    
+    // Rich Snippet for Story
     $mainEntityOfPage = $base_url . '/' . $node->path['alias'];
     $headline = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
     if (is_array($node->workbench_moderation) && !empty($node->workbench_moderation) && $node->workbench_moderation['current']->state == 'published') {
@@ -79,18 +78,16 @@ function itg_seo_node_data($node) {
     if (isset($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
       $get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
     }
-    if(!empty($get_author_name) && ($get_author_name > 0)){
+    if(!empty($get_author_name) && is_numeric($get_author_name)){
       $auth_name = itg_get_story_author_name($get_author_name);
     } else {
-      $auth_name = '';
+      $auth_name = 'India Today';
     }
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-    $imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-    }
-    $largimage = '';
-    if(isset($imgarray[1])) {
-    $largimage = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
+      $largimage = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']); //explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    } else {
+      $largimage = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg';
     }
 
     $markup = array(
@@ -114,8 +111,8 @@ function itg_seo_node_data($node) {
                     "logo": {
                     "@type": "ImageObject",
                     "url": "' . $logo . '",
-                    "width": 109,
-                    "height": 90
+                    "width": 600,
+                    "height": 60
                     }
                     },
                     "image": {
@@ -128,10 +125,25 @@ function itg_seo_node_data($node) {
     );
 
     drupal_add_html_head($markup, 'sd_json');
+    
+    if (is_array($node->field_story_configurations[LANGUAGE_NONE]) && !empty($node->field_story_configurations[LANGUAGE_NONE])) {
+        $configurableopt = $node->field_story_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $node->path['alias'];
+          $google_standout = array(
+            '#type' => 'html_tag',
+            '#tag' => 'link',
+            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+        }
+        drupal_add_html_head($google_standout, 'standout');
+    }
   }
-
   // Rich Snippet for Movie Review
-  if ($node->type == 'mega_review_critic') {
+  elseif ($node->type == 'mega_review_critic') {
     $pathalias = drupal_get_path_alias('node/' . $node->nid);
     $pageurl = $base_url . '/' . $pathalias;
     $megreview_value = $node->field_mega_review_review[LANGUAGE_NONE];
@@ -177,9 +189,8 @@ function itg_seo_node_data($node) {
 
     drupal_add_html_head($markup, 'sd_json');
   }
-
   // Rich Snippet for Videos Rich Snippet
-  if ($node->type == 'videogallery') {
+  elseif ($node->type == 'videogallery') {
     $video_time = explode(':', $node->field_video_duration[LANGUAGE_NONE][0]['value']);
     $video_duration = t("PT" . $video_time[0] . "M" . $video_time[1] . "S");
     $name = $node->field_story_short_headline[LANGUAGE_NONE][0]['value'];
@@ -203,11 +214,9 @@ function itg_seo_node_data($node) {
           "description":"' . $description . '",
           "thumbnailUrl": "' . $thumbnail_url . '",
             "duration":"' . $video_duration . '",
-            "name": "IndiaToday",
             "genre":"",  
             "inLanguage":"",
             "thumbnail": "' . $thumbnail_url . '",
-            "thumbnailUrl": "' . $thumbnail_url . '",
             "playerType":"Dailymotion",
             "uploadDate":"' . $createdate . '",
             "contentURL":"' . $contenturl . '",
@@ -235,7 +244,57 @@ function itg_seo_node_data($node) {
         </script>  ',
     );
     drupal_add_html_head($markup, 'sd_json');
-  }
+    
+    if (is_array($node->field_video_configurations[LANGUAGE_NONE]) && !empty($node->field_video_configurations[LANGUAGE_NONE])) {
+        $configurableopt = $node->field_video_configurations[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $node->path['alias'];
+          $google_standout = array(
+            '#type' => 'html_tag',
+            '#tag' => 'link',
+            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+          drupal_add_html_head($google_standout, 'standout');
+        }
+      }
+  } 
+  elseif ($node->type == 'photogallery') {
+      if (is_array($node->field_photogallery_configuration[LANGUAGE_NONE]) && !empty($node->field_photogallery_configuration[LANGUAGE_NONE])) {
+        $configurableopt = $node->field_photogallery_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $node->path['alias'];
+          $google_standout = array(
+            '#type' => 'html_tag',
+            '#tag' => 'link',
+            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+          drupal_add_html_head($google_standout, 'standout');
+        }
+      }
+    } 
+    else if ($node->type == 'podcast') {
+      if (is_array($node->field_podcast_configuration[LANGUAGE_NONE]) && !empty($node->field_podcast_configuration[LANGUAGE_NONE])) {
+        $configurableopt = $node->field_podcast_configuration[LANGUAGE_NONE];
+        foreach ($configurableopt as $key => $value) {
+          $opt_value[] = $value['value'];
+        }
+        if (in_array("google_standout", $opt_value)) {
+          $standout_path = $base_url . '/' . $node->path['alias'];
+          $google_standout = array(
+            '#type' => 'html_tag',
+            '#tag' => 'link',
+            '#attributes' => array('rel' => 'standout', 'href' => $standout_path),
+          );
+          drupal_add_html_head($google_standout, 'standout');
+        }
+      }
+    }
 }
 
 /*

@@ -17,9 +17,9 @@ function itg_sso_reg_init() {
   global $user, $base_url, $theme;
   $arg = arg();
   // condition to redirect backend user in case of sso
-  if (array_key_exists(FRONT_USER, $user->roles) && $base_url == BACKEND_URL) {
-     drupal_goto(FRONT_URL);
-  }
+//  if (array_key_exists(FRONT_USER, $user->roles) && $base_url == BACKEND_URL) {
+//     drupal_goto(FRONT_URL);
+//  }
   
   if (array_key_exists(FRONT_USER, $user->roles) && $arg[0] == 'sso-user') {
     // make configuration for js file
@@ -31,7 +31,7 @@ function itg_sso_reg_init() {
     drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/jquery.validate.min.js', array('scope' => 'footer'));
   }
   if($theme == FRONT_THEME_NAME) {
-  drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js', array('scope' => 'footer'));
+  //drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_popup.js', array('scope' => 'footer', 'defer' => TRUE));
   }
 }
 
@@ -148,6 +148,14 @@ function itg_sso_reg_menu() {
     'title' => 'Delete history table data',
     'page callback' => 'itg_del_history_table_data',
     'access arguments' => array('access SSo email history'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  
+  $items['akamai-user'] = array(
+    'title' => '',
+    'page callback' => 'itg_sso_itgredirect',
+    'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
   
@@ -336,7 +344,8 @@ function itg_sso_logout_form_submit(&$form, &$form_state) {
  */
 function itguser_logout() {
   global $user;
-
+  setrawcookie("itg_forced_login", "null", -1,'/','.indiatodayonline.in');
+  
   if ($user->uid > 0) {
     $domains = variable_get('signout-domain', '');
     $domain_array = explode(',', $domains);
@@ -527,4 +536,24 @@ function itg_del_history_table_data() {
   } catch (Exception $e) {
   watchdog('Email history table not truncate', '<pre>' . $e->getMessage() . '</pre>');  
   }
+}
+
+/**
+ * function itg_sso_itgredirect().
+ */
+function itg_sso_itgredirect() {
+  drupal_add_http_header('Cache-Control', 'no-store');
+  watchdog('user_page', 'pass');
+  $arg = arg();
+  $redirect = base64_decode($arg[1]);
+  watchdog('redirect_sso', $redirect);
+  //drupal_goto($redirect);
+  //print 'Please wait while redirecting';
+  
+  drupal_add_js('
+  jQuery(document).ready(function () {
+    window.location.href = "' . $redirect . '";
+  });', 'inline');
+  
+  return 'Please wait';
 }

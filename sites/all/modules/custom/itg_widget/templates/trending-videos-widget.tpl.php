@@ -12,12 +12,12 @@
         else {
           ?>
           <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
-            <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
+            <img height="66" width="88" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');?>" alt="" title="" />
           </a>
         <?php } ?>
         <p title="<?php echo $entity['title']; ?>">
         <?php if (!empty($entity['title'])) : ?>
-          <?php echo l(itg_common_get_smiley_title($entity['nid'], 0, 120, ".."), "node/" . $entity['nid'] , array("attributes" => array("title" => $entity['title']))) ?>
+          <?php echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 120, ".."), "node/" . $entity['nid'] , array("attributes" => array("title" => _widget_title($entity['title'])))) ?>
         <?php endif; ?>
         </p>
       </li>

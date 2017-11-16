@@ -18,6 +18,7 @@ function itg_front_search_menu() {
     'page callback' => 'itg_get_reporter_list',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'include/itg_front_search.inc',
   );
 
   return $items;
@@ -55,6 +56,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       $hash = itg_apache_solr_get_site_hash();
     }
     
+    $form['tm_vid_14_names']['#maxlength'] = '1024';
     $form['hash']['#type'] = 'select';
     $form['hash']['#options'] = $hash;
     $form['hash']['#size'] = 5;
@@ -104,7 +106,7 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       $form['bundle_name']['#value'] = $default_value;
       }
       if(!empty($arg[1])) {
-      $form['keyword']['#value'] = $arg[1];
+      $form['keyword']['#value'] = str_replace("-", " ", $arg[1]);
       }
       $form['keyword']['#attributes'] = array('readonly' => 'readonly');
       
@@ -223,19 +225,19 @@ function itg_front_search_views_pre_render(&$view) {
 
     global $user, $base_url;
 
-    if (isset($view->name) && ($view->name == "front_end_global_search")) {
-      $target = $base_url . '/' . current_path() . '?keyword={' . $_GET['keyword'] . '}';
-      $markup = array(
-        '#type' => 'markup',
-        '#markup' => '<script type="application/ld+json"> {'
-        . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "' . $base_url . '",    '
-        . '"potentialAction": {      "@type": "SearchAction",      '
-        . '"target": "' . $target . '",      '
-        . '"query-input": "required name=' . $_GET['keyword'] . '"    } } '
-        . '</script>',
-      );
-      drupal_add_html_head($markup, 'sd_json');
-    }
+//    if (isset($view->name) && ($view->name == "front_end_global_search")) {
+//      $target = $base_url . '/' . current_path() . '?keyword={' . $_GET['keyword'] . '}';
+//      $markup = array(
+//        '#type' => 'markup',
+//        '#markup' => '<script type="application/ld+json"> {'
+//        . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "' . $base_url . '",    '
+//        . '"potentialAction": {      "@type": "SearchAction",      '
+//        . '"target": "' . $target . '",      '
+//        . '"query-input": "required name=' . $_GET['keyword'] . '"    } } '
+//        . '</script>',
+//      );
+//      drupal_add_html_head($markup, 'sd_json');
+//    }
 
     $settings = array();
     $settings['base_url'] = $base_url;
@@ -266,10 +268,10 @@ function itg_front_search_views_pre_render(&$view) {
 
 
     if (!empty($_GET['keyword'])) {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $_GET['keyword'] . ' "</span></span>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>' . $_GET['keyword'] . '</h1></div>';
     }
     else {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </div>';
     }
 
     $bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Video' => 'Videos', 'photogallery' => 'Photos', 'Magazine' => 'Magazine', 'Blog' => 'Blog', 'Podcast' => 'Podcast');
@@ -320,25 +322,34 @@ function itg_front_search_views_pre_render(&$view) {
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1, 'scope' => 'footer'));
 
-     if (isset($view->name) && ($view->name == "front_end_global_search"  && $view->current_display == 'page_1')) {
-      $target = $base_url . '/topic/' . $arg[1];
-      $markup = array(
-        '#type' => 'markup',
-        '#markup' => '<script type="application/ld+json"> {'
-        . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "' . $base_url . '",    '
-        . '"potentialAction": {      "@type": "SearchAction",      '
-        . '"target": "' . $target . '",      '
-        . '"query-input": "required name=' . $arg[1] . '"    } } '
-        . '</script>',
-      );
-      drupal_add_html_head($markup, 'sd_json');
-    }
+//     if (isset($view->name) && ($view->name == "front_end_global_search"  && $view->current_display == 'page_1')) {
+//      $target = $base_url . '/topic/' . $arg[1];
+//      $markup = array(
+//        '#type' => 'markup',
+//        '#markup' => '<script type="application/ld+json"> {'
+//        . '    "@context": "http://schema.org",    "@type": "WebSite",    "url": "' . $base_url . '",    '
+//        . '"potentialAction": {      "@type": "SearchAction",      '
+//        . '"target": "' . $target . '",      '
+//        . '"query-input": "required name=' . $arg[1] . '"    } } '
+//        . '</script>',
+//      );
+//      drupal_add_html_head($markup, 'sd_json');
+//    }
+    
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+        if (!$ping) {
+         $down_msg = variable_get('solr_down'); 
+        } else {
+         $down_msg = 'No Record Found !'; 
+        }
+        
+    $view->empty['area']->options['content'] = $down_msg;
     
     if (!empty($arg[0])) {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<span>" ' . $arg[1] . ' "</span></span>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>' . str_replace("-", " ", $arg[1]) . '</h1></div>';
     }
     else {
-      $front_search = '<span class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </span>';
+      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </div>';
     }
 
     $bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Video' => 'Videos', 'photogallery' => 'Photos', 'Magazine' => 'Magazine', 'Blog' => 'Blog', 'Podcast' => 'Podcast');
@@ -383,7 +394,7 @@ function itg_front_search_views_pre_render(&$view) {
     drupal_add_js(array('itg_front_search' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_front_search') . '/js/itg_front_search.js', array('weight' => 1, 'scope' => 'footer'));
 
-    $bundle_name = array('story' => 'STORIES', 'photogallery' => 'PHOTO', 'video' => 'VIDEO');
+    $bundle_name = array('story' => 'STORIES', 'gallery' => 'PHOTO', 'video' => 'VIDEO');
     $search_url = 'archives';
     $archive_search = '';
     $archive_url = '';
@@ -553,27 +564,6 @@ function itg_get_all_bylineinfo($reporter_unique_id) {
     }
     return $val;
   }
-}
-
-/**
- * Implement itg_get_reporter_list
- * @param string $name
- */
-function itg_get_reporter_list($name) { 
-
-  $reporter_name = db_select('node', 'n');
-  $reporter_name->join('field_data_field_celebrity_pro_occupation', 'rpn', 'n.nid = rpn.entity_id');
-  $reporter_name->fields('n', array('title', 'nid'));
-  //$reporter_name->condition('field_celebrity_pro_occupation_tid', $term->tid, '=');
-  $reporter_name->condition('n.type', 'reporter', '=');
-  $reporter_name->condition('n.title', '%' . $name . '%', 'LIKE');
-  $result = $reporter_name->execute();
-
-  while ($record = $result->fetchAssoc()) {
-    $r_title = strtolower($record['title']);
-    $options[$r_title] = $r_title;
-  }
-  drupal_json_output($options);
 }
 
 /**

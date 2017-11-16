@@ -61,6 +61,13 @@ function itg_layout_list() {
   else {
     $items_per_page = 20;
   }
+	
+	if (isset($_GET['page'])) {
+    $pages = $_GET['page'];
+  }
+  else {
+    $pages = 0;
+  }
 
   $itg_query = db_select('itg_layout_tpl', 'layout_tpl')->extend('PagerDefault')->limit($items_per_page);
   $itg_query->fields('layout_tpl', array('id', 'section_name', 'template_name', 'layout_type', 'status', 'created_date'));
@@ -68,6 +75,7 @@ function itg_layout_list() {
   $itg_query->fields('ttd', array('name'));
   $itg_query->groupBy('layout_tpl.section_name');
   $itg_query->condition('layout_tpl.layout_type', arg(1));
+	$itg_query->orderBy('layout_tpl.id', 'DESC');
   if (!empty($_GET['section']) && $_GET['section'] != '_none') {
     $itg_query->condition('layout_tpl.section_name', $_GET['section']);
   }
@@ -84,7 +92,7 @@ function itg_layout_list() {
     $delete_link = l(t('Delete'), 'itg-deletelayout/' . $row->section_name, array('query' => array('destination' => 'itg-layout-list/'.arg(1)), 'attributes' => array('class' => 'layout_delete_conformation')));
     $itg_action = $edit_link . ' / ' . $delete_link;
     $rows[] = array(
-      array('data' => $count + 1),
+      array('data' => ($items_per_page * $pages + $count + 1)),
       array('data' => $row->name),
       array('data' => $row->template_name),
       array('data' => $row->layout_type),
@@ -472,4 +480,47 @@ function get_use_category_on_tpl($section_id, $cate_id) {
   $id = $itg_query->execute()->fetchField();
 
   return $id;
+}
+
+/**
+ * This function use for make state election page
+ */
+function itg_state_election() {
+  global $base_url;
+
+  $section = arg(1);
+  $state = arg(2);
+  drupal_add_js(drupal_get_path('theme', 'itg') . '/js/election_map.js', array('scope' => 'header'));
+  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+  foreach ($terms as $values) {
+    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
+
+      $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+      $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+      $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
+      $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
+    }
+  }
+
+
+  make_graph();
+
+  return theme('itg_state_election', array('widget_data' => $data, 'map_data' => $urlarray));
+}
+
+/**
+ * callback for section card refresh
+ */
+function itg_section_card_refresh() {
+  $data = explode("_", $_REQUEST['card_val']);
+  $section_id = $data[1];
+  $widget_style = '';
+  $block_id = $data[2];
+  $data = create_setion_widgets($section_id, $widget_style, $block_id);
+  if (function_exists('itg_akamai_setting_ttl_for_section_cart')) {
+    itg_akamai_setting_ttl_for_section_cart();
+  }
+  echo $data;
+  exit;
 }

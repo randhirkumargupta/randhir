@@ -99,27 +99,154 @@ function itg_get_parents_taxonomy($tid) {
  * Implements hook_url_inbound_alter().
  */
 function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
+  global $base_url;
   $old_content_id = '';
+  $arg = arg();
   
+  $type = 'story'; // use photogallery & videogallery in condition if you have
+  $rss_url = '';
+  $query_alias = '';
+  $paging = array();
   if (!empty($_GET['sId']) && is_numeric($_GET['sId'])) { //code for this URL (story.jsp?sId=877)
     $old_content_id = $_GET['sId'];
+  } else if ((!empty ($arg[0]) && $arg[0] == 'content_Email.jsp') && (!empty($_GET['sid']) && is_numeric($_GET['sid']))) {
+    $old_content_id = $_GET['sid'];
+  } else if ((!empty ($arg[0]) && $arg[0] == 'articlePrint.jsp') && (!empty($_GET['aid']) && is_numeric($_GET['aid']))) {
+    $old_content_id = $_GET['aid'];
   } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content' && arg(0) == 'conclave') {//conclave/index.php?option=com_content&task=view&id=2968&sectionid=15&secid=1&issueid=34&Itemid=1
       $old_content_id = '200'.$_GET['id'];
-  } else if (!empty($_GET['option']) && $_GET['option'] == 'com_content') {//code for this URL (option=com_content)
+  } else if (!empty($_GET['option']) && $path == INDEX_PAGE_URL && $_GET['option'] == 'com_content') { //code for this URL (index.php?option=com_content)
       $old_content_id = $_GET['id'];
+  } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Photo') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Photo/3578/2/i-am-too-old-for-bwood-gauri-khan.html
+      $old_content_id = $arg[2];
+      $type = 'photogallery';
+  } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'Video') && (!empty($arg[2]) && is_numeric($arg[2]))) {  // Pattern site/Video/3578/2/i-am-too-old-for-bwood-gauri-khan.html
+      $old_content_id = $arg[2];
+      $type = 'videogallery';
+  } else if ((!empty($arg[0]) && $arg[0] == 'gallerylist') && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern gallerylist/photos-television/6/163.html
+      $photo_cat = $arg[3];
+      $query_alias = $arg[2];
+      $photo_cat_explode = explode('.html', $photo_cat);
+      $old_content_id = $photo_cat_explode[0];
+      $type = 'category';
+      $table = 'migrate_map_itgphoto'; // We are using table name migration because KT team not store source id in drupal field.
+  } else if ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'photo') && ($arg[2]== 0) && (!empty($arg[3] && is_numeric($arg[3]))) && !empty($arg[4])) {  // Pattern site/photo/0/2/photo.html for category listing
+      $old_content_id = $arg[3];
+      $type = 'category';
+      $table = 'migrate_map_itgphoto';
+  } else if ((!empty($arg[0]) && $arg[0] == 'MoreGallery') && ($_GET['gId'] == 0) && (!empty($_GET['photocat']))) {  // Pattern site/photo/0/2/photo.html for category listing
+      $old_content_id = $_GET['photocat'];
+      $query_alias = $_GET['page'];
+      $type = 'category';
+      $table = 'migrate_map_itgphoto';
+  } else if ((!empty($arg[0]) && $arg[0] == 'Simply') && ($_GET['secId']) && ($_GET['catId'])) {  // Pattern Simply?secId=20&catId=17
+      $old_content_id = $_GET['catId'];
+      $type = 'category';
+      $table = 'migrate_map_itgcategory';
+  } else if(!empty($arg[0]) && (!empty($arg[1]) && $arg[1] == 'category') && !empty($arg[2]) && (!empty($arg[3]) && is_numeric($arg[3])) && (!empty($arg[4]) && (strpos($arg[4], 'html')))) { // Pattern http://indiatoday.intoday.in/auto/category/cars/1/1186.html
+      $lastarg = explode(".", $arg[4]);
+      $old_content_id = $lastarg[0];
+      $table = 'migrate_map_itgcategory';
+      $type = 'category';
+      $query_alias = $arg[3];
+  } else if((((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'article.jsp')) || ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'rss') && (!empty($arg[2]) && $arg[2] == 'article.jsp')))) {      
+      if (!empty($_GET['sid']) || !empty($_GET['cid']) || !empty($_GET['scid']) || !empty($_GET['sscid'])) {
+        if ($_GET['sid']) {        
+          $old_content_id = $_GET['sid'];
+          $table = 'migrate_map_itgsection';
+        } else if ($_GET['cid']) {        
+          $old_content_id = $_GET['cid'];
+          $table = 'migrate_map_itgcategory';
+        } else if ($_GET['scid']) {        
+          $old_content_id = $_GET['scid'];
+          $table = 'migrate_map_itgsubcategory';
+        } else if ($_GET['sscid']) {        
+          $old_content_id = $_GET['sscid'];
+          $table = 'migrate_map_itgsubsubcategory';
+        }
+      }
+      else {
+        $old_content_id = 'nzero';
+        $table = 'none';
+      }
+      $type = 'rss';
+      $rss_url = 'rss';
+  } else if(((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'gallery.jsp'))) { // Pattern http://indiatoday.intoday.in/rss/gallery.jsp?gid=2 http://indiatoday.intoday.in/rss/gallery.jsp?gid=0 http://indiatoday.intoday.in/rss/gallery.jsp 
+      $old_content_id = 'none';
+      $table = 'none';
+      $type = 'rss';
+      $rss_url = 'rss-gallery';
+      if ($_GET['gid'] > 0) {        
+        $old_content_id = $_GET['gid'];
+        $table = 'migrate_map_itgphoto';
+      }
+  } else if(((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'video.jsp'))) { // Pattern http://indiatoday.intoday.in/rss/video.jsp?vcid=42 http://indiatoday.intoday.in/rss/video.jsp?vcid=0 http://indiatoday.intoday.in/rss/video.jsp
+      $old_content_id = 'none';
+      $table = 'none';
+      $type = 'rss';
+      $rss_url = 'rss-video';
+      if ($_GET['vcid'] > 0) {        
+        $old_content_id = $_GET['vcid'];
+        $table = 'migrate_map_itgcategory';
+      }
+  } else if (($arg[0] == 'index.php' && !empty($_GET['option']) && $_GET['option'] == 'com_magazine')) { // Pattern http://indiatoday.intoday.in/index.php?option=com_magazine&opt=section&sectionid=89&Itemid=1&issueid=95
+      drupal_goto(FRONT_URL);
+  } else if ((!empty ($arg[0]) && $arg[0] == 'calendar') && !empty($arg[1]) && (!empty($arg[2]) && $arg[2] == 'online.html')) {  // Pattern calendar/16-10-2017/online.html
+      $old_content_id = $arg[1];
+      $table = 'none';
+      $type = 'archives';
+      $rss_url = 'archives/story';
+  } else if ((!empty($arg[0]) && ($arg[0] == 'advanced_search.jsp' || $arg[0] == 'archivesearch.jsp')) && (!empty($_GET['searchtext']) || !empty($_GET['searchword']) || !empty($_GET['searchWord']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
+      if ($_GET['searchtext']) {
+         $old_content_id = $_GET['searchtext']; 
+      } elseif($_GET['searchword']) {
+          $old_content_id = $_GET['searchword']; 
+      } elseif ($_GET['searchWord']) {
+          $old_content_id = $_GET['searchWord']; 
+      }
+      $table = 'none';
+      $type = 'archives';
+      $rss_url = 'topic';
+  } else if ((!empty($arg[0]) && ($arg[0] == 'feedback.jsp')) && (!empty($_GET['refUrl']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
+      $refurl = $_GET['refUrl'];
+      drupal_goto($refurl);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter.jsp')) && (!empty($_GET['matchid']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
+      $matchid = $_GET['matchid'];
+      $newmatchurl = $base_url.'/scorecard/matchcenter/'.$matchid;
+      drupal_goto($newmatchurl);
+  } else if ($arg[0] == 'node' && empty($arg[1])) {
+      drupal_goto(FRONT_URL);
   }
-  
-  //code for url redirection
+  // Code for url redirection:
   if (!empty($old_content_id)) {
-    $content_id = get_new_content_id_by_migrated_id($old_content_id, 'story');   
-    $alias = get_redirect_url($content_id);
-    if (isset($alias)) {
-      drupal_goto($alias);
-    }
-     drupal_not_found();
-     drupal_exit();
+      if ($type == 'category') {
+        $content_id = get_new_seccat_by_mig_id($old_content_id, $table);
+        $alias = drupal_get_path_alias('taxonomy/term/'.$content_id);
+        if (!empty($query_alias)) {
+          $paging = array('query' => array('page' => $query_alias));
+        }
+      } else if($type == 'rss') {
+        if ($old_content_id == 'none') {
+          $alias = $base_url.'/'.$rss_url;
+        } else if ($old_content_id == 'nzero') {
+          $alias = $base_url.'/'.$rss_url.'/0';
+        } else {
+          $content_id = get_new_seccat_by_mig_id($old_content_id, $table);
+          $alias = $base_url.'/'.$rss_url.'/'.$content_id;
+        }
+      } else if($type == 'archives') {
+          $alias = $base_url.'/'.$rss_url.'/'.$old_content_id;
+      } else {
+        $content_id = get_new_content_id_by_migrated_id($old_content_id, $type);
+        $alias = drupal_get_path_alias('node/'.$content_id);
+      }
+      //$alias = get_redirect_url($content_id);
+      if (isset($alias)) {
+        drupal_goto($alias, $paging);
+      }
+      drupal_not_found();
+      drupal_exit();
   }
-  
 }
 
 /**
@@ -146,4 +273,17 @@ function get_new_content_id_by_migrated_id($sourceid, $type) {
 function get_redirect_url($content_id) {
   $alias = drupal_get_path_alias('node/'.$content_id);
   return $alias; 
+}
+
+/**
+ * Get Drupal Section or category id from ITG old system section or category id
+ * @param int $sourceid
+ * @param string $table
+ * @return int new section or cat id
+ */
+function get_new_seccat_by_mig_id($sourceid, $table) {
+  $query = db_select($table, 'scc');
+  $query->fields('scc', array('destid1'));  
+  $query->condition('sourceid1', $sourceid);
+  return $query->execute()->fetchField();
 }

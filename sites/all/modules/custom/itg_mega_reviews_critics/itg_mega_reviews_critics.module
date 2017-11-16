@@ -7,6 +7,21 @@
  */
 
 /**
+ * Implements hook_menu().
+ *
+ * {@inheridoc}.
+ */
+function itg_mega_reviews_critics_menu() {
+  $items['mega-review-title-list/%/%/autocomplete'] = array(
+    'page callback' => 'itg_mega_review_filter_callback',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_mega_reviews_critics.helper.inc',
+  );
+  return $items;
+}
+
+/**
  * Implements hook_views_pre_render().
  *
  * {@inheritdoc}.
@@ -90,7 +105,8 @@ function itg_mega_reviews_critics_form_after_build($form, &$form_state) {
 function itg_mega_reviews_critics_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
   if ($form['#id'] == 'views-exposed-form-movie-review-list-page' || $form['#id'] == 'views-exposed-form-movie-review-list-page-1') {
-    $form['title']['#autocomplete_path'] = 'content-title-list/mega_review_critic/autocomplete';
+    //$form['title']['#autocomplete_path'] = 'content-title-list/mega_review_critic/autocomplete';
+    $form['title']['#autocomplete_path'] = 'mega-review-title-list/mega_review_critic/' . arg(0) . '/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
     $form['nid']['#autocomplete_path'] = 'content-nid-list/mega_review_critic/autocomplete';
     $form['nid']['#attributes'] = array('placeholder' => t('Review ID'));
@@ -204,6 +220,12 @@ function itg_mega_reviews_critics_theme($existing, $type, $theme, $path) {
       'template' => 'mega-reviews-mobile-header-block-template',
       'path' => drupal_get_path('module', 'itg_mega_reviews_critics') . '/templates',
       'variables' => array('data' => NULL),
+    ),
+    'mega_review_critic_node_form' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'mega-review-critic-node-form',
+      'path' => drupal_get_path('module', 'itg_mega_reviews_critics') . '/templates',
+      'render element' => 'form',
     ),
   );
 

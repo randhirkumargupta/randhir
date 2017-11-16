@@ -2267,6 +2267,51 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_assign_to_widget'.
+  $field_instances['node-story-field_story_assign_to_widget'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 132,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_assign_to_widget',
+    'label' => 'Assign to Widget',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 113,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_associate_lead'.
   $field_instances['node-story-field_story_associate_lead'] = array(
     'bundle' => 'story',
@@ -5789,7 +5834,7 @@ function features_for_story_field_default_field_instances() {
         'weight' => 116,
       ),
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -6697,6 +6742,57 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_technology_photogallery'.
+  $field_instances['node-story-field_technology_photogallery'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 132,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_technology_photogallery',
+    'label' => 'Technology Photogallery',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 113,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-city-field_city_states'.
   $field_instances['taxonomy_term-city-field_city_states'] = array(
     'bundle' => 'city',
@@ -6740,6 +6836,7 @@ function features_for_story_field_default_field_instances() {
   t('Animated Image');
   t('Animated Image Position');
   t('Are you sure you want to Archive?');
+  t('Assign to Widget');
   t('Associate Gallery Id');
   t('Associate Photo Gallery');
   t('Associate Video');
@@ -6853,6 +6950,7 @@ function features_for_story_field_default_field_instances() {
   t('Syndications photo');
   t('Tags');
   t('Tech Review Widget');
+  t('Technology Photogallery');
   t('Technology cons');
   t('Technology image gallery');
   t('Technology pros');

@@ -184,6 +184,25 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['arguments']['term_node_tid_depth']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['term_node_tid_depth']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['term_node_tid_depth']['depth'] = '0';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'breaking_news' => 'breaking_news',
+    'story' => 'story',
+    'videogallery' => 'videogallery',
+    'photogallery' => 'photogallery',
+  );
   $handler->display->display_options['path'] = 'category-wise-content-list';
 
   /* Display: Section Wise Content */
@@ -337,6 +356,8 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
+    'breaking_news' => 'breaking_news',
+    'mega_review_critic' => 'mega_review_critic',
     'story' => 'story',
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',
@@ -518,6 +539,8 @@ function feature_for_category_wise_content_list_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
+    'breaking_news' => 'breaking_news',
+    'mega_review_critic' => 'mega_review_critic',
     'story' => 'story',
     'videogallery' => 'videogallery',
     'photogallery' => 'photogallery',

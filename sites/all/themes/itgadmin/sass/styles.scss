@@ -1109,7 +1109,7 @@ div.form-type-password-confirm {
         }
     }
     .form-actions {
-        padding-left: 250px;
+        /* padding-left: 250px; */
     }
     #edit-mimemail {
         @extend .hide;
@@ -2353,7 +2353,9 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-video-anchor-values"],
 [id*="field-story-technology-values"],
 [id*="field-photo-story-values"],
-[id*="field-story-listicle-values"] {
+[id*="field-story-listicle-values"],
+[id*="field-event-tabs-values"],
+[id*="field-add-member-values"] {
     @extend .itg-add-another-item;
 }
 
@@ -3560,7 +3562,8 @@ div.node {
 [id*="field-program-schedule-values"],
 [id*="field-event-media-values"],
 [id*="field-event-highlights-values"],
-[id*="field-associate-sponsors-values"] {
+[id*="field-associate-sponsors-values"],
+[id*="field-event-tabs-values"] {
     tbody {
         overflow: visible;
         float: left;
@@ -6078,6 +6081,11 @@ div.node {
     .btn:last-child {
         margin-right: 0;
     }
+    .button {
+        +.button {
+            margin-left: 10px;
+        }
+    }
 }
 
 .action-with-title {
@@ -7990,7 +7998,7 @@ div.node {
 #itg_video_content {
     .video-local {
         @extend .fleft;
-        width: 33%;
+        width: 50%;
         cursor: pointer;
         height: 50px;
         background-color: #e4e3e5;
@@ -8008,7 +8016,7 @@ div.node {
     .internal-video-tab {
         text-align: center;
         @extend .fleft;
-        width: 33%;
+        width: 50%;
         cursor: pointer;
         height: 50px;
         background-color: #e4e3e5;
@@ -8445,7 +8453,8 @@ div.node {
 [id*="field-video-anchor-values"],
 [id*="field-story-template-quotes-values"],
 [id*="field-story-template-factoids-values"],
-[id*="field-story-template-guru-values"] {
+[id*="field-story-template-guru-values"],
+[id*="field-add-member-values"] {
     tbody tr {
         td {
             border: none;
@@ -9171,7 +9180,8 @@ div.node {
 
 .node-story-form,
 .node-videogallery-form,
-.node-photogallery-form {
+.node-photogallery-form,
+.node-type-print-team-integration {
     font-family: Roboto;
     margin: 0;
     .ajax-progress {
@@ -9296,7 +9306,8 @@ div.node {
     [id*="field-story-template-buzz-values"],
     [id*="field-story-template-guru-values"],
     [id*="field-video-anchor-values"],
-    [id*="field-story-listicle-values"] {
+    [id*="field-story-listicle-values"],
+    [id*="field-add-member-values"] {
         thead {
             padding-left: 20px;
             padding-right: 10px;
@@ -9422,7 +9433,8 @@ div.node {
     .form-field-type-text,
     .form-field-name-field-story-reporter,
     .form-field-name-field-video-anchor,
-    .form-field-type-field-collection {
+    .form-field-type-field-collection,
+    .form-field-name-field-add-member {
         position: relative;
     }
     .vertical-tabs ul.vertical-tabs-list {
@@ -11148,6 +11160,11 @@ div.node {
             padding: 0;
         }
     }
+    .button {
+        +.button {
+            margin-left: 10px;
+        }
+    }
 }
 
 .view-key-candidate {
@@ -11299,10 +11316,7 @@ div.node {
                             color: #2f2f2f;
                             @extend .dib;
                             @extend .of-hide;
-                            text-overflow: ellipsis;
                             @extend .vtop;
-                            white-space: nowrap;
-                            width: 82px;
                         }
                     }
                     .file-size {
@@ -13528,7 +13542,7 @@ body.taxonomy-form-term-tags {
 }
 
 .ftp-center #itg_video_content .video-ftp {
-    width: 50%;
+    width: 100%;
 }
 
 .ftp-center #itg_video_content .internal-video-tab {
@@ -14066,7 +14080,7 @@ fieldset#edit-xmlsitemap {
                 width: 5%;
             }
             &.search-title-wraper {
-                width: 30%;
+                width: 19%;
             }
             &.search-date-wraper {
                 width: 15%;
@@ -14094,7 +14108,7 @@ fieldset#edit-xmlsitemap {
                     width: 5%;
                 }
                 &.show_video_title {
-                    width: 30%;
+                    width: 19%;
                 }
                 &.file_size_date_time {
                     width: 15%;
@@ -14271,4 +14285,239 @@ div.ctools-modal-content {
 .view-display-id-solr_unpublish_video .solr-unpublish-icon {
     width: 45px;
     display: block;
+}
+
+[id*="itg-category-manager-import-tag-form"] {
+    .import-notes {
+        ul {
+            padding-left: 18px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+    }
+    .form-type-managed-file {
+        padding-left: 0;
+    }
+}
+
+[id*="redirect-list-form"] {
+    fieldset {
+        border: 1px solid #ccc;
+    }
+}
+
+[id*="field-event-tabs-values"] {
+    >tbody>tr>td {
+        width: 800px;
+    }
+    .form-submit[value="Remove"] {
+        margin-top: 15px;
+    }
+}
+
+[id*="event-backend-node-form"] {
+    .form-field-name-field-event-tabs {
+        margin-top: 15px;
+    }
+}
+
+.node-story-form .form-type-plupload {
+    margin: 70px 20px 10px 220px;
+}
+
+
+/* css start Url Redirect page */
+
+.page-admin-config-search-redirect {
+    .action-links {
+        list-style-type: none;
+        a {
+            border-radius: 1px;
+            border: 1px solid #1fb5ad;
+            background-color: #1fb5ad;
+            box-shadow: 0 0 5px #3a8a82;
+            padding: 0 20px;
+            line-height: 32px;
+            height: 36px;
+            text-transform: uppercase;
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
+
+#redirect-list-form {
+    fieldset {
+        margin: 20px 0;
+    }
+    table {
+        .links {
+            list-style-type: none;
+            li {
+                display: inline-block;
+                vertical-align: top;
+                padding: 0 5px;
+                line-height: 14px;
+                +li {
+                    border-left: 1px solid #000;
+                }
+                &.edit,
+                &.delete {
+                    a {
+                        &:after {
+                            width: 20px;
+                            height: 20px;
+                            font: normal normal normal 18px/20px FontAwesome;
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            display: none;
+                        }
+                    }
+                }
+                &.edit {
+                    a {
+                        &:after {
+                            content: '\f044';
+                        }
+                    }
+                }
+                &.delete {
+                    a {
+                        &:after {
+                            content: '\f1f8';
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* css end Url Redirect page */
+
+
+/* css added by rajveer  singh gangwar start */
+
+#views-exposed-form-section-wise-content-ordering-list-dont-miss-content,
+#views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget,
+#views-exposed-form-story-widget-most-popular-widget,
+#views-exposed-form-story-widget-page-2,
+#views-exposed-form-story-widget-trending-videos-widget,
+#views-exposed-form-story-widget-top-takes-video-widget,
+#views-exposed-form-story-widget-watch-right-now-widget,
+#views-exposed-form-home-page-feature-widget-page-2,
+#views-exposed-form-photo-carousel-widget-photo-carousel,
+#views-exposed-form-photo-carousel-widget-video-carousel,
+#views-exposed-form-so-sorry-so-sorry-videos-widget,
+#views-exposed-form-widget-anchors-listing-anchors-listing-widget,
+#views-exposed-form-key-candidate-special-key-candidate-widget-list .views-widget-per-page,
+#itg-widget-issuewidgetlist-filter-form .form-item-items-per-page,
+#views-exposed-form-category-of-stroy-base-magazin-widget-issue-magazin-widget-list .form-item-items-per-page,
+#views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget-list .form-item-items-per-page {
+    display: none !important;
+}
+
+
+/* css added by rajveer singh gangwar end  */
+
+.node-type-print-team-integration [id*="field-add-member-values"]+div.clearfix {
+    right: 560px;
+}
+
+.node-type-print-team-integration fieldset.date-combo .container-inline-date .date-padding .form-item {
+    padding: 0;
+}
+
+#itg-report-created-date-range {
+    text-align: right;
+    fieldset {
+        border: 1px solid #ccc;
+        margin: 20px 0 40px;
+        float: left;
+        width: 49%;
+        text-align: left;
+        +fieldset {
+            float: right;
+        }
+        input[type="text"] {
+            width: auto;
+        }
+        label {
+            width: auto;
+            margin-right: 10px;
+        }
+        legend {
+            font-weight: 700;
+        }
+    }
+    .form-item.form-type-select {
+        margin-left: 0;
+        padding-left: 0;
+        text-align: left;
+    }
+    .fieldset-wrapper {
+        .form-item {
+            float: left;
+            width: 50%;
+            padding: 0 10px;
+            text-align: left;
+        }
+    }
+    .row {
+        margin-top: 40px;
+    }
+}
+
+.pagination {
+    margin: 40px auto;
+    text-align: center;
+    color: #000;
+    a {
+        padding: 0 5px;
+        /* background-color: #1fb5ad; */
+        color: #000;
+    }
+    b {
+        padding: 2px 6px;
+        border: 1px solid #ccc;
+        background: #1fb5ad;
+        color: #fff;
+    }
+}
+
+
+/*css start add by rajveer */
+
+.page-node-add-alexa-audio-clips .vertical-tabs {
+    display: none
+}
+
+#modal-content #reporter-node-form .vertical-tabs {
+    display: none;
+}
+
+.add-byline-link.ctools-use-modal {
+    position: absolute;
+    right: 70px;
+    top: 4px;
+}
+
+
+/*css end add by rajveer */
+
+[id*="itg-videogallery-dfp-tags-list"] {
+    table {
+        @extend .views-table;
+    }
+    a {
+        float: right;
+        margin-bottom: 20px;
+    }
 }

@@ -47,19 +47,19 @@ function itg_videogallery_ftp_video_form($form) {
     '#default_value' => variable_get('dailymotion_ftp_password', ''),
     '#required' => TRUE,
   );
-   $form['ftp_root_folder'] = array(
+  $form['ftp_root_folder'] = array(
     '#type' => 'textfield',
     '#title' => t('Ftp Root Folder'),
     '#default_value' => variable_get('ftp_root_folder', ''),
     '#required' => TRUE,
   );
-    $form['xml_root_folder'] = array(
+  $form['xml_root_folder'] = array(
     '#type' => 'textfield',
     '#title' => t('Video XML Folder'),
     '#default_value' => variable_get('xml_root_folder', ''),
     '#required' => TRUE,
   );
-  
+
   return system_settings_form($form);
 }
 
@@ -68,6 +68,7 @@ function itg_videogallery_ftp_video_form($form) {
  * {@inheritdoc}
  */
 function itg_videogallery_s3_video_form($form) {
+
   $form['aws_access_key'] = array(
     '#type' => 'textfield',
     '#title' => t('AWS S3 Access Key'),
@@ -107,6 +108,13 @@ function itg_videogallery_s3_video_form($form) {
     '#default_value' => variable_get('aws_bucket', ''),
     '#required' => TRUE,
   );
+
+  $form['api_bucket'] = array(
+    '#type' => 'textfield',
+    '#title' => t('API S3 Bucket'),
+    '#default_value' => variable_get('api_bucket', ''),
+  );
+
   $form['aws_video_dm_data'] = array(
     '#type' => 'textfield',
     '#title' => t('AWS S3 Video DM Data Folder'),
@@ -121,4 +129,200 @@ function itg_videogallery_s3_video_form($form) {
   );
 
   return system_settings_form($form);
+}
+
+/**
+ * 
+ */
+function _get_dfp_tags_by_id($id) {
+  $query = db_select('itg_dfp_tags_setting', 'idts');
+  $query->fields('idts');
+  $query->condition('id', $id, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Impelements form for ITG DFP Tags .
+ * {@inheritdoc}
+ */
+function itg_videogallery_dfp_tags_setting_form($form, &$form_state) {
+
+  $data_form = _get_dfp_tags_by_id(arg(1));
+  $website_options = array(
+    'indiatoday' => 'Indiatoday',
+    'idaplex' => 'Idaplex',
+  );
+  $form['wesbite'] = array(
+    '#type' => 'select',
+    '#title' => t('Website'),
+    '#options' => $website_options,
+    '#default_value' => ($data_form[0]->wesbite) ? $data_form[0]->wesbite : '',
+    '#required' => TRUE
+  );
+
+  $client_options = array(
+    'internal' => 'Internal',
+    'ruptly' => 'Ruptly',
+    'amazon' => 'Amazon'
+  );
+  $form['client'] = array(
+    '#type' => 'select',
+    '#title' => t('Client'),
+    '#options' => $client_options,
+    '#default_value' => ($data_form[0]->client) ? $data_form[0]->client : '',
+    '#required' => TRUE,
+  );
+  $form['dfp_tags'] = array(
+    '#type' => 'textarea',
+    '#default_value' => ($data_form[0]->dfp_tags) ? $data_form[0]->dfp_tags : '',
+    '#title' => t('Page DFP Tags '),
+  );
+  $form['hidden_id'] = array(
+    '#type' => 'hidden',
+    '#default_value' => ($data_form[0]->id) ? $data_form[0]->id : '',
+  );
+  $form['dfp_tags_internal'] = array(
+    '#type' => 'textarea',
+    '#default_value' => ($data_form[0]->dfp_tags_internal) ? $data_form[0]->dfp_tags_internal : '',
+    '#title' => t('Embed DFP Tags Internal'),
+  );
+  $form['dfp_tags_external'] = array(
+    '#type' => 'textarea',
+    '#default_value' => ($data_form[0]->dfp_tags_external) ? $data_form[0]->dfp_tags_external : '',
+    '#title' => t('Embed DFP Tags External'),
+  );
+  $form['ga_tag_internal'] = array(
+    '#type' => 'textfield',
+    '#default_value' => ($data_form[0]->ga_tag_internal) ? $data_form[0]->ga_tag_internal : '',
+    '#title' => t('GA Tags Internal'),
+  );
+  $form['ga_tag_extarnal'] = array(
+    '#type' => 'textfield',
+    '#default_value' => ($data_form[0]->ga_tag_extarnal) ? $data_form[0]->ga_tag_extarnal : '',
+    '#title' => t('GA Tags External'),
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Submit',
+  );
+
+  return $form;
+}
+
+/**
+ * {@inheritdoc}
+ * @param type $form
+ * @param type $form_state
+ */
+function itg_videogallery_dfp_tags_setting_form_submit($form, &$form_state) {
+
+  $wesbite = $form_state['values']['wesbite'];
+  $client = $form_state['values']['client'];
+  $dfp_tags = $form_state['values']['dfp_tags'];
+  $dfp_tags_internal = $form_state['values']['dfp_tags_internal'];
+  $dfp_tags_external = $form_state['values']['dfp_tags_external'];
+  $ga_tag_internal = $form_state['values']['ga_tag_internal'];
+  $ga_tag_extarnal = $form_state['values']['ga_tag_extarnal'];
+  if ($form_state['values']['hidden_id'] > 0) {
+     $result = db_update('itg_dfp_tags_setting')
+        ->condition('id', $form_state['values']['hidden_id'], '=')
+        ->fields(array(
+          'wesbite' => $wesbite,
+          'client' => $client,
+          'dfp_tags' => $dfp_tags,
+          'dfp_tags_internal' => $dfp_tags_internal,
+          'dfp_tags_external' => $dfp_tags_external,
+          'ga_tag_internal' => $ga_tag_internal,
+          'ga_tag_extarnal' => $ga_tag_extarnal
+        ))
+        ->execute();
+    drupal_set_message(t('DFP Tags Configuration update successfully '));
+    drupal_goto('itg-dfp-tags-list');
+  }
+  else {
+    $result = db_merge('itg_dfp_tags_setting')
+        ->key(array('wesbite' => $wesbite, 'client' => $client))
+        ->fields(array(
+          'wesbite' => $wesbite,
+          'client' => $client,
+          'dfp_tags' => $dfp_tags,
+          'dfp_tags_internal' => $dfp_tags_internal,
+          'dfp_tags_external' => $dfp_tags_external,
+          'ga_tag_internal' => $ga_tag_internal,
+          'ga_tag_extarnal' => $ga_tag_extarnal
+        ))
+        ->execute();
+    drupal_set_message(t('DFP Tags Configuration Saved successfully '));
+    drupal_goto('itg-dfp-tags-list');
+  }
+}
+
+/**
+ * Custom form defination for DFP Tags list .
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_videogallery_dfp_tags_list() {
+
+//  $form['fieldset'] = array(
+//    '#type' => 'fieldset',
+//    '#title' => 'DFP Tags List',
+//  );
+ $form['fieldset'] = array(
+    '#markup' => l(t('Add'), '/itg-dfp-tags-setting', array('attributes' => array('class' => 'btn-submit'))),
+  );
+
+  $form['markup'] = array(
+    '#markup' => itg_videogallery_dfp_tags_list_data(),
+  );
+
+  return $form;
+}
+
+/**
+ * This method returns the number of rows
+ */
+function itg_videogallery_dfp_tags_list_data() {
+  global $base_url;
+  drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_videogallery_dashbord.js', array('weight' => 1, 'scope' => 'footer'));
+
+  $data = array();
+  $html = '';
+  $rows = array();
+  $header = array(
+    t('Sn no.'),
+    t('Website'),
+    t('Client'),
+    t('Action'),
+  );
+
+  $query = db_select('itg_dfp_tags_setting', 'idts');
+  $query->fields('idts');
+
+  $pagelimit = 20;
+//print strtr((string) $query, $query->arguments());die;
+  $query = $query->extend('PagerDefault')->limit($pagelimit);
+  $query->orderBy('idts.id', 'DESC');
+  $result = $query->execute();
+  $num_of_results = $result->rowCount();
+  $sn = 1;
+  if (isset($_GET['page']) && !empty($_GET['page'])) {
+    $sn = $pagelimit * $_GET['page'] + 1;
+  }
+  while ($record = $result->fetchObject()) {
+    $edit_link = "<a  class='itg-dfp-tags-edit' href='" . $base_url . "/itg-dfp-tags-setting/" . $record->id . "' > Edit </a>";
+    $page_no = $_GET['page'];
+    $rows[] = array(
+      $sn++,
+      ucfirst($record->wesbite),
+      ucfirst($record->client),
+      $edit_link
+    );
+  }
+  $total = count($rows);
+  $html .= theme('table', array('header' => $header, 'rows' => $rows));
+  //$html .= theme('pager');
+  $html .= theme('pager');
+  return $html;
 }

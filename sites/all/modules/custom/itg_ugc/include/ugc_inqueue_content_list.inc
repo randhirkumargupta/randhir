@@ -63,7 +63,7 @@ function itg_ugc_inqueue_form_submit($form, &$form_state) {
 function itg_ugc_inqueue_content() {
   global $base_url;
   $arg = arg();
-  drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', array('type' => 'external' , 'scope' => 'footer'));  
+  drupal_add_js('https://content.jwplatform.com/libraries/V30NJ3Gt.js', array('type' => 'external' , 'scope' => 'footer'));  
 
   # configure the table header columns
   $header = array(
@@ -78,7 +78,7 @@ function itg_ugc_inqueue_content() {
   );
   if (function_exists('mongodb')) {
     $con = mongodb();
-    if ($con) {
+    if (isset($con)) {
       $people = $con->ugc_details;
       $query = array();
       $limit = 0;

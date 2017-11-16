@@ -384,7 +384,7 @@ function funalytics_features_views_default_views() {
     ),
     'nothing' => array(
       'align' => '',
-      'separator' => ' ',
+      'separator' => ' | ',
       'empty_column' => 0,
     ),
   );
@@ -599,7 +599,7 @@ function funalytics_features_views_default_views() {
     ),
     'nothing' => array(
       'align' => '',
-      'separator' => '',
+      'separator' => '| ',
       'empty_column' => 0,
     ),
   );
@@ -646,8 +646,10 @@ function funalytics_features_views_default_views() {
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'View';
   $handler->display->display_options['fields']['nid']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['text'] = '<span class="view-link">View</span>';
+  $handler->display->display_options['fields']['nid']['link_to_node'] = TRUE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';

@@ -27,7 +27,8 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   if ($actual_host_name) {
     $baseurl = $actual_host_name . '/';
   }
-
+  // Tab title
+  if(empty($_GET['tab'])) {
   if ($current_date < $event_close_date) {
     if (!empty($data)) {
       ksort($data);
@@ -68,17 +69,17 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
 
               if ($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
                 $sponsors_data_parent = "sponsors-parent";
-                $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" />';
+                $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" title="" />';
                 $sponsor_tags = '<div class="spncor-tag"><span>' . t("Powered By") . '</span>' . l($sponsor_img, $baseurl . 'sponsor-details', array('attributes' => array('target' => '_blank'), 'query' => array('sponsor' => $sponsor_all_data->nid), 'html' => true)) . '</div>';
               }
-              $story_title = itg_event_backend_get_session_story_title($media, $content_font_color);
+              $story_title = itg_event_backend_get_session_story_title_move_field($media, $content_font_color);
               $output_story_title = '';
-              foreach ($story_title['story_title'] as $title) {
+              /*foreach ($story_title['story_title'] as $title) {
                 if (!empty($title)) {
                   $output_story_title = '<p><i class="fa fa-story-title"></i>' . $title . '</p>';
                 }
-              }
-
+              }*/
+              $output_story_title = '<p><i class="fa fa-story-title"></i>' . $story_title[0]['story_title'] . '</p>';
               $output_media = '';
               $max = max(array(count($session_result['photo']), count($session_result['video']), count($session_result['audio'])));
               for ($i = 0; $i < $max; $i++) {
@@ -105,10 +106,12 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
 
                               $spk_title = '<div class="speaker-title">' . l(t($spk_detail[0]->title), $baseurl . 'speaker-details', array('attributes' => array('style' => 'color:' . $content_font_color), 'query' => array('speaker' => $spk_detail[0]->nid))) . '</div>';
                               if (!empty($spk_detail[0]->uri)) {
-                                $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . ' alt="" />';
+                                $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . ' alt="" title="" />';
                               }
                               else {
-                                $img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' />";
+                                //$img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' title='' />";
+                               //$img = "<img width='72' height='72' src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image72x72.jpg')) . "' alt='' title='' />";
+                                $img = "<img width='72' height='72' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image72x72.jpg') . "' alt='' title='' />";
                               }
 
                               print '<div class="speaker-image">' . l($img, $baseurl . 'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)) . '</div>';
@@ -133,5 +136,14 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
         $output = render($render_array);
         print $output;
       }
-    }
+   
+}else {
+  $tab_url_value = $_GET['tab'];
+  $tab_value = itg_event_backend_tab_title($host_node, $tab_url_value);
+  
+  print '<h2 style="color:'.$font_color.'">'.$tab_value[$tab_url_value]['tab_title'].'</h2>';
+  print '<p style="color:'. $content_font_color.'">'.$tab_value[$tab_url_value]['tab_description'].'</p>';
+  
+}
+ }
     ?>

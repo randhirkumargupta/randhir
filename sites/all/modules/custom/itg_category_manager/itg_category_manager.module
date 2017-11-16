@@ -127,6 +127,10 @@ function itg_category_manager_import_tag_form($form , $form_state) {
     '#type' => 'submit' ,
     '#value' => t('Import') ,
   );
+  $form['reset'] = array(
+    '#type' => 'markup' ,
+    '#markup' => l('Reset' , "import-tag-file-uploader" , array("attributes" => array("class" => array("btn btn-primary form-submit")))) ,
+  );
   return $form;
 }
 
@@ -135,20 +139,26 @@ function itg_category_manager_import_tag_form($form , $form_state) {
  * {@inheritdoc}
  */
 function itg_category_manager_import_tag_form_submit($form , $form_state) {
+  module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   // Check to make sure that the file was uploaded to the server properly
   $uri = db_query("SELECT uri FROM {file_managed} WHERE fid = :fid" , array(
     ':fid' => $form_state['values']['import'] ,
       ))->fetchField();
-  if (!empty($uri)) {
-    if (file_exists(drupal_realpath($uri))) {
+  $file_array = explode("public://", $uri);
+  $file_path = $file_array[1];
+  $csv_content = itg_tag_import_from_file($file_path);
+  if (!empty($csv_content)) {
       // Open the csv
-      $handle = fopen(drupal_realpath($uri) , "r");
       // Go through each row in the csv and run a function on it. In this case we are parsing by '|' (pipe) characters.
       // If you want commas are any other character, replace the pipe with it.
-      while (($data = fgetcsv($handle , 0 , ',' , '"')) !== FALSE) {
+      foreach($csv_content as $data) {
+        $tmp_data = array();
+        $tmp_data[0] = trim($data[0]);
+        $tmp_data[1] = trim($data[1]);
+        $tmp_data[2] = trim($data[2]);
         $operations[] = array(
           'itg_category_manager_tag_import_batch_processing' , // The function to run on each row
-          array($data) , // The row in the csv
+          array($tmp_data) , // The row in the csv
         );
       }
       // Once everything is gathered and ready to be processed... well... process it!
@@ -161,7 +171,7 @@ function itg_category_manager_import_tag_form_submit($form , $form_state) {
       );
       batch_set($batch);
       fclose($handle);
-    }
+      batch_process('tags-listing');
   }
   else {
     drupal_set_message(t('There was an error uploading your file. Please contact a System administator.') , 'error');
@@ -537,7 +547,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form , &$form_stat
 //Non-editable fields in edit mode
       if (arg(3) == 'edit') {
         $form['name']['#attributes'] = array('readonly' => 'readonly');
-        $form['field_cm_redirection_url']['#disabled'] = TRUE;
+        //$form['field_cm_redirection_url']['#disabled'] = TRUE;
         $form['field_cm_hide_cat_from_home']['#disabled'] = TRUE;
         //$form['field_cm_hide_cat_from_search']['#disabled'] = TRUE;
         //$form['field_cm_no_follow']['#disabled'] = TRUE;
@@ -574,7 +584,7 @@ function itg_category_manager_form_taxonomy_form_term_alter(&$form , &$form_stat
                 ':input[name="term_state"]' => array('checked' => FALSE) ,
               ) ,
             ) ,
-            '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module' , 'views') . '/images/status-active.gif" alt="" /></div>' ,
+            '#suffix' => '<div class="term-spinner"><img src="' . $base_url . '/' . drupal_get_path('module' , 'views') . '/images/status-active.gif" alt="" title="" /></div>' ,
           );
         }
         else {

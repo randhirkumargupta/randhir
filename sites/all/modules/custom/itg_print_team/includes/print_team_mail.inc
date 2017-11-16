@@ -22,21 +22,38 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
       $mail_content = str_replace('Click here for more details', 'Click ' . $idea_link . ' for more details', $body_datas);
     }
     $user_emails = itg_print_team_get_approval_user_emails('approval_users');
-    $user_email_ids = implode(",", $user_emails);
+    $umail = array_unique($user_emails);
+    $user_email_ids = implode(",", $umail);
   }
   elseif($source == 'update') {
     $mail_content = itg_print_team_status_mail_content($node);
     $user = user_load($node->uid);
-    $user_email_id[] = $user->mail;
+    if ($user->status == 1) {
+      if (!empty($node->field_add_member[LANGUAGE_NONE])) {
+        foreach ($node->field_add_member[LANGUAGE_NONE] as $mk => $mv){
+          $umails[] = db_query("SELECT mail from {users} WHERE uid = :uid ", array(":uid" => $mv['target_id']))->fetchField();
+        }
+        $mail_content = itg_print_team_status_mail_content($node);
+      }
+      $current_mail[] = $user->mail;
+      $user_email_id = array_merge($current_mail, $umails);
+    }
+    
     $rid = array(PHOTO_COORDINATOR, PHOTO_HEAD, DESIGN_HEAD, COPY_DESK, DESIGNER, PHOTOGRAPHER);
     $user_email = get_email_by_roll($rid);
-    $all_mails = array_merge($user_email_id, $user_email);
-    $user_email_ids = implode(",", $all_mails);
+    if (!empty($user_email_id) && is_array($user_email_id)) {
+      $all_mails = array_merge($user_email_id, $user_email);
+    } else {
+      $all_mails = $user_email;
+    }
+    $umail = array_unique($all_mails);
+    $user_email_ids = implode(",", $umail);
   }
   else {
     $mail_content = itg_print_team_association_mail_content($node, $op_type);
     $user_emails = itg_print_team_get_approval_user_emails('association_users');
-    $user_email_ids = implode(",", $user_emails);
+    $umail = array_unique($user_emails);
+    $user_email_ids = implode(",", $umail);
   }
 
   // Array of email subject and body 
@@ -45,8 +62,6 @@ function itg_print_team_send_idea_status_mail($node, $source, $op_type = FALSE) 
     'body' => $mail_contents,
     'subject' => $mail_subject,
   );
-  // Send mail function
-  // for code email
   $mail = drupal_mail('itg_print_team_status', 'print_team_mail', $user_email_ids, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   if ($mail['result']) {
     return TRUE;

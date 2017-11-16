@@ -5,7 +5,7 @@
  * The ITG Users module.
  * Provides Users functionality and customizations.
  */
-module_load_include('inc', 'itg_users', 'includes/itg_users');
+//module_load_include('inc', 'itg_users', 'includes/itg_users');
 module_load_include('inc', 'itg_users', 'includes/itg_user_role_and_permission');
 /**
  * Implement hook_user_presave
@@ -39,6 +39,7 @@ function itg_users_menu() {
   $items['access-denied'] = array(
     'page callback' => 'itg_users_access_denied',
     'access callback' => TRUE,
+    'file' => 'includes/itg_users.inc',
   );
 
   return $items;
@@ -391,6 +392,7 @@ function itg_users_views_pre_render(&$view) {
  *
  */
 function itg_users_user_logout($account) {
+  setrawcookie("itg_forced_login", "null", -1,'/','.indiatodayonline.in');
   $_GET['destination'] = 'user';
 }
 
@@ -415,6 +417,7 @@ function itg_users_role_delegation($role_array) {
   }
   else if (array_key_exists(SITE_ADMIN, $user->roles)) {
     unset($role_array[3]);
+    unset($role_array[FRONT_USER]);
     $user_array = $role_array;
   }
   else if (array_key_exists(ADMINISTRATOR, $user->roles)) {
@@ -508,7 +511,7 @@ function itg_users_user_login(&$edit, $account) {
   if ($role_count < 3) {
     if (array_key_exists(EXPERT, $account->roles)) {
       if (arg(1) != "reset") {
-        $_GET['destination'] = 'ask-an-expert-backend';
+        $_GET['destination'] = 'ask-an-expert-inqueue-content';
       }
     }
   }  
@@ -676,7 +679,7 @@ function itg_users_user_update(&$edit, $account, $category) {
  */
 function itg_users_user_insert(&$edit, $account, $category) {
   /** do not delete code */
-  global $base_url;
+  global $base_url, $user;
   $mail = $account->mail;
   $uid = $account->uid;
   $roles = $account->roles;
@@ -820,26 +823,7 @@ function itg_users_role_name($rid) {
   return $role_result['name'];
 }
 
-/**
- * Page callback for the access denied page. Does a redirect to login page (Taken from r4032login.module)
- */
-function itg_users_access_denied() {
-  global $user;
-  if ($user->uid) {
-    return MENU_ACCESS_DENIED;
-  }
 
-  // The code in drupal_get_destination() doesn't preserve any query string
-  // on 403 pages, so reproduce the part we want here.
-  $path = $_GET['destination'];
-  $query = drupal_http_build_query(drupal_get_query_parameters(NULL, array('q', 'destination')));
-  if ($query != '') {
-    $path .= '?' . $query;
-  }
-  $destination = array('destination' => $path);
-  header('Location: ' . url('user/login', array('query' => $destination, 'absolute' => TRUE)), TRUE, 302);
-  drupal_exit();
-}
 
 /**
  * Implements hook_js_alter().

@@ -12,6 +12,7 @@ function itg_widget_views_pre_render(&$view) {
   $color_box_class = array("class" => array("colorbox-load"));
   if ($view->name == "static_pages" && $view->current_display == 'page') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+    $header_content .= l(t('Create static page'), 'node/add/page', array('attributes' => array('class' => ''), 'query' => array('destination' => arg(0))));
     $view->attachment_before = $header_content;
   }
   elseif ($view->name == "so_sorry" && $view->current_display == 'so_sorry_videos') {
@@ -318,5 +319,10 @@ function itg_widget_views_pre_render(&$view) {
 //      drupal_set_message(t("Please select section first."), 'error');
 //      drupal_goto('user-selection');
 //    }
+  }
+  elseif ($view->name == "alexa_audio_clips" && $view->current_display == 'page') {
+    $alexa_query['destination'] = 'alexa-audio-clips';
+    $header_content .= l(t('Add new Alexa audio clip'), 'node/add/alexa-audio-clips', array('query' => $alexa_query));
+    $view->attachment_before = $header_content;
   }
 }

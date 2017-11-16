@@ -9,9 +9,9 @@ global $base_url;
         
         <div class="footer-social-link">
             <ul>
-                <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
+                <li><a rel="nofollow" href="#" title=""><i class="fa fa-facebook"></i></a></li>
+                <li><a rel="nofollow" href="#" title=""><i class="fa fa-twitter"></i></a></li>
+                <li><a rel="nofollow" href="#" title=""><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="<?php echo $base_url .'/rss' ?>" title=""><i class="fa fa-rss"></i></a></li>                
                 <li class="search-icon-parent">
                   <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
@@ -84,31 +84,36 @@ global $base_url;
     </section>
 </section>
 <div id="widget-ajex-loader" style="display: none">
-    <img class="widget-loader" src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itgadmin') . '/images/loader.svg'; ?>" alt="Loading..." />
+    <img class="widget-loader" src="<?php echo file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/loader.svg')); ?>" alt="Loading..." />
 </div>
 <div id="iframe-display" style="display: none"></div>
-
+<?php
+$good_big = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'));
+$bad_big = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'));
+$wgmf_big = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'));
+?>
 <!--animation emoji for hightlight-->
 <div id="smily">
-     <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
-    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
-    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>    
-    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'; ?>" alt="" /></div>       
+  <div class="face1 face"><img src="<?php echo $good_big; ?>" alt="" title="" /></div>    
+    <div class="face2 face"><img src="<?php echo $good_big; ?>" alt="" title="" /></div>    
+    <div class="face3 face"><img src="<?php echo $good_big; ?>" alt="" title="" /></div>    
+    <div class="face4 face"><img src="<?php echo $good_big; ?>" alt="" title="" /></div>       
   </div>
   <div id="smilysad">
-   <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
-    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
-    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>
-    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'; ?>" alt="" /></div>  
+   <div class="face1 face"><img src="<?php echo $bad_big; ?>" alt="" title="" /></div>
+    <div class="face2 face"><img src="<?php echo $bad_big; ?>" alt="" title="" /></div>
+    <div class="face3 face"><img src="<?php echo $bad_big; ?>" alt="" title="" /></div>
+    <div class="face4 face"><img src="<?php echo $bad_big; ?>" alt="" title="" /></div>  
   </div>
   <div id="wgmf">
-    <div class="face1 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
-    <div class="face2 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
-    <div class="face3 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
-    <div class="face4 face"><img src="<?php echo $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'; ?>" alt="" /></div>
+    <div class="face1 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
+    <div class="face2 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
+    <div class="face3 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
+    <div class="face4 face"><img src="<?php echo $wgmf_big; ?>" alt="" title="" /></div>
   </div>
 <!--animation emoji for hightlight end-->
 <?php
+echo time();
 if(!empty($sso_msg)) {
   print '<div class = "activate-message">
          <div class = "message-body">

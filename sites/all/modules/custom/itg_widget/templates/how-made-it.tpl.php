@@ -18,7 +18,7 @@
             ?>
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">
-                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
+                <img height="66" width="88" src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" title="" />
               </a>
             </span>
           <?php } ?>
@@ -35,7 +35,7 @@
                 <?php
                 $desc = $entity['title'];
                 if (function_exists('itg_common_get_smiley_title')) {
-                  echo l(itg_common_get_smiley_title($entity['nid'], 0, 70), "node/" . $entity['nid'], array('html' => TRUE));
+                  echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 70), "node/" . $entity['nid'], array('html' => TRUE));
                 }
                 else {
                   echo l(mb_strimwidth($desc, 0, 70, ".."), "node/" . $entity['nid']);

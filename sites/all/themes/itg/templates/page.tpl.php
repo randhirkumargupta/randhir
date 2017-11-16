@@ -6,7 +6,6 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-
 ?>
 <?php if($_SERVER['HTTP_HOST'] == PARENT_SSO) { ?>
 <script>
@@ -16,7 +15,6 @@ window.addEventListener("message", function(ev) {
         ev.source.postMessage({ message: "deliverResult", result: true }, "*");
     }
 });
-
 </script>
 <?php } ?>
 <div id="page">
@@ -25,7 +23,7 @@ window.addEventListener("message", function(ev) {
                 <div class="container header-logo">
               <?php if ($logo): ?>
                 <div class="logo">
-                    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+                  <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" class="header__logo-image" /></a>
                 </div>
                     <?php endif; ?>
                     </div>
@@ -158,4 +156,3 @@ window.addEventListener("message", function(ev) {
 </div>
 
 <?php print render($page['bottom']); ?>
-<?php global $base_url; ?>

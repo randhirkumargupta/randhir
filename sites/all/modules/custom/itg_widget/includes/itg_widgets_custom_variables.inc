@@ -303,6 +303,96 @@ function itg_widgets_custom_variables() {
 		'#attributes' => array('placeholder' => t('Enter see pic limit')),
 		'#default_value' => variable_get('SEE_PIC'),
 	);
+  
+	$form['newsletter_content_limit'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter limit for Newsletter Item'),
+		'#attributes' => array('placeholder' => t('Enter limit for Newsletter Item')),
+		'#default_value' => variable_get('newsletter_content_limit'),
+	);
+  
+  $form['api_info'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable agency feed'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('api_info'), // for default checked and false is not checked
+  );
+  
+  $form["api_content_limit"] = array(
+    "#type" => "select",
+    "#title" => t("Select agency feed node limit"),
+    "#default_value" => variable_get("api_content_limit", "5"),
+    "#options" => array(
+      "5" => t("5"),
+      "10" => t("10"),
+      "20" => t("20"),
+      "50" => t("50"),
+      "100" => t("100"),
+      "500" => t("500"),
+      "1000" => t("1000"),
+      "2000" => t("2000"),
+      "5000" => t("5000"),
+      "10000" => t("10000"),
+      "25000" => t("25000"),
+    ),
+  );
+  
+  $form['custom_canonical_amp'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable custom canonical for amp'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('custom_canonical_amp'), // for default checked and false is not checked
+  );
 
-	return system_settings_form($form);
+  $form['taboola_bottom_block'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Taboola code for bottom block'),
+		'#default_value' => variable_get('taboola_bottom_block'),
+	);
+  
+  $form['third_party_may_recommend_block'] = array(
+		'#type' => 'textarea',
+		'#title' => t('May we recommend (taboola script)'),
+		'#default_value' => variable_get('third_party_may_recommend_block'),
+	);
+  
+  $form['disable_third_party_api'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Disable third party api'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('disable_third_party_api'), // for default checked and false is not checked
+  );
+  
+  $form['amp_photo_ad'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Amp photo ad script'),
+		'#default_value' => variable_get('amp_photo_ad'),
+	);
+  
+  $form['amp_video_ad'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Amp video ad script'),
+		'#default_value' => variable_get('amp_video_ad'),
+	);
+  
+  $form['amp_story_ad'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Amp story ad script'),
+		'#default_value' => variable_get('amp_story_ad'),
+	);
+  
+  $form['photo_block_refresh'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable story, photo and video block refresh in case of akamai'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('photo_block_refresh'), // for default checked and false is not checked
+  );
+  
+  $form['solr_down'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Custom message when solr is down'),
+		'#default_value' => variable_get('solr_down'),
+	);
+  
+  return system_settings_form($form);
 }

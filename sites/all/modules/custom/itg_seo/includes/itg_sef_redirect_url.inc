@@ -5,8 +5,12 @@
  * @param $node object
  * Creating Custom path alias for story, photogallery and videogallery
  */
+function _remove_slash_from_string($string) {
+  return  preg_replace('/\W+/', '-', strtolower($string));
+}
+
 function itg_common_custompath_insert_load($node) {
-    $edited_sef_url = $node->path['alias'];
+    $edited_sef_url = _remove_slash_from_string($node->path['alias']);
     if(!empty($edited_sef_url)) {
         $lencount_sef = strlen($edited_sef_url);
         if($lencount_sef >= 160) {
@@ -19,7 +23,7 @@ function itg_common_custompath_insert_load($node) {
         if($title_lenght >= 160) {
             $node_sef = substr($node->title, 0, 160);
         } else {
-            $node_sef = $node->title;
+            $node_sef = _remove_slash_from_string($node->title);
         }
     }
     if(empty($node->field_itg_content_publish_date['und'][0]['value'])) {
@@ -105,7 +109,7 @@ function itg_common_custompath_insert_load($node) {
             if($node_CT == 'photogallery') {
                 $node_CT = 'photo';
             } elseif($node_CT == 'videogallery') {
-                $node_CT = 'videos';
+                $node_CT = 'video';
             }
             $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
             $newpath = itg_common_custompath_insert_val($pathdata);
@@ -387,7 +391,7 @@ function itg_common_custompath_migrated_load($node, $val = NULL) {
             if($node_CT == 'photogallery') {
                 $node_CT = 'photo';
             } elseif($node_CT == 'videogallery') {
-                $node_CT = 'videos';
+                $node_CT = 'video';
             }
             $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
             $newpath = itg_common_custompath_insert_val($pathdata);
@@ -630,7 +634,7 @@ function itg_migrate_custompath($node, $published_date, $node_sef) {
             } elseif($node_CT == 'photogallery') {
                 $node_CT = 'photo';
             } elseif($node_CT == 'videogallery') {
-                $node_CT = 'videos';
+                $node_CT = 'video';
             }
             $pathdata = $set_hierarchy . '/' . $node_CT . '/' . trim($node_sef) . '-' . $node->nid . '-' . $published_date;
             $newpath = itg_common_custompath_insert_val($pathdata);

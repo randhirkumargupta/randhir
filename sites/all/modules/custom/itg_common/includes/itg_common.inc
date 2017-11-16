@@ -28,6 +28,52 @@ function itg_common_dropdown_supplement($id = '') {
 }
 
 /**
+ * Impelements form for configuration.
+ * {@inheritdoc}
+ */
+function itg_common_varnish_aws_setting_form($form) {
+  $form['varnish_aws_access_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Access Key'),
+    '#default_value' => variable_get('varnish_aws_access_key', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_aws_secret_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Secret Key'),
+    '#default_value' => variable_get('varnish_aws_secret_key', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_aws_region'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Region'),
+    '#default_value' => variable_get('varnish_aws_region', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_DNSName'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish DNS'),
+    '#default_value' => variable_get('varnish_DNSName', ''),
+    '#required' => TRUE,
+  );
+   $form['varnish_aws_target_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Target ARN'),
+    '#default_value' => variable_get('varnish_aws_target_id', ''),
+    '#required' => TRUE,
+  );
+   $form['varnish_aws_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Varnish AWS Type'),
+    '#default_value' => variable_get('varnish_aws_type', ''),
+     '#options' => array('target'=>t('Target Groups'),'LB'=> t('Load Balancer')),
+    '#required' => TRUE,
+  );
+  return system_settings_form($form);
+}
+
+
+/**
  * Helper function to populate the second dropdown.
  * @param string $id
  * @return array $data
@@ -130,6 +176,21 @@ function itg_common_get_node_type($nid) {
       ->condition('n.nid' , $nid , '=');
 
   return $query->execute()->fetchField();
+}
+
+/**
+ * Get node type and primary category from nid
+ * @param int $nid
+ * @return string
+ */
+function itg_common_get_type_category($nid) {
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_primary_category', 'fc', 'n.nid = fc.entity_id');
+  $query->fields('n', array('type'));
+  $query->fields('fc', array('field_primary_category_value'));
+  $query->condition('n.nid', $nid, '=');
+
+  return $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 }
 
 /**
@@ -412,12 +473,16 @@ function itg_common_get_story_status($nid) {
  * @param int $entity_id
  */
 function itg_get_related_story_content($entity_id) {
-  if (function_exists('apachesolr_get_solr')) {
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if (function_exists('apachesolr_get_solr') && $ping) {
     $solr = apachesolr_get_solr();
-    $query = apachesolr_drupal_query("custom" , array('q' => "entity_id:$entity_id"));
-    $query->addParam('rows' , '4'); // How many rows of result to display default it is 10.
-    $query->addParam('qf' , 'entity_id'); // Only search in id
-    $query->addParam('bs_status' , 'true'); // Only search in title
+    //pr($solr);
+    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id"));
+    $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'entity_id'); // Only search in id
+    $query->addParam('bs_status', 'true'); // Only search in title
     $resp_search = $query->search();
     return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
   }
@@ -505,15 +570,9 @@ function itg_common_get_latest_byline($nid , $status) {
         ->condition('s.nid', $nid, '=')
         ->condition('s.publish_status', $status, '=');
     $query->orderBy("byline_weight", "ASC");
-    $query->range(0, 1);
+    $query->range(0, 10);
     $result = $query->execute();
-    $byline_id = $result->fetchField();
-    if ($byline_id) {
-      return $byline_id;
-    }
-    else {
-      return FALSE;
-    }
+    return $result->fetchAll(PDO::FETCH_ASSOC);
   }
 }
 
@@ -528,4 +587,35 @@ function itg_get_fb_share($id , $type) {
       ->condition('n.node_id' , $id)
       ->execute();
   return $result->rowCount();
+}
+
+/**
+ * itg_get_multi_byline_details
+ */
+function itg_get_multi_byline_details($byline_id) {
+  $options = '';
+  $id_arr = array();
+  foreach ($byline_id as $key => $value) {
+    $id_arr[] = $value['byline_id'];
+  }
+  if (!empty($id_arr)) {
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_extra_large_image', 're', 'n.nid = re.entity_id');
+    $query->leftJoin('field_data_field_reporter_twitter_handle', 'frq', 'n.nid = frq.entity_id');
+    $query->fields('n');
+    $query->fields('frq', array('field_reporter_twitter_handle_value'));
+    $query->fields('re', array('field_story_extra_large_image_fid'));
+    $query->condition('n.nid', $id_arr, 'IN');
+    $query->condition('n.type', 'reporter', '=');
+    $result = $query->execute();
+    $key = 0;
+    while ($record = $result->fetchAssoc()) {
+      $options[$key]['nid'] = $record['nid'];
+      $options[$key]['title'] = $record['title'];
+      $options[$key]['extra_large_image'] = $record['field_story_extra_large_image_fid'];
+      $options[$key]['twitter_handle'] = $record['field_reporter_twitter_handle_value'];
+      ++$key;
+    }
+  }
+  return $options;
 }

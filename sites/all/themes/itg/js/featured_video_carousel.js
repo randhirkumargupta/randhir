@@ -12,9 +12,7 @@ jQuery(document).ready(function () {
     jQuery('.carousel .slides').slick({
       infinite: true,
       autoplay: true,
-      dots: true,
-      prevArrow: false,
-      nextArrow: false
+      dots: true
     });
   }
 });

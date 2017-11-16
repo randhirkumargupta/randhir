@@ -79,15 +79,11 @@
   </div>
             <?php } ?>
   </div>
+<?php if(!empty(variable_get('amp_video_ad'))) { ?>
 <div class="custom-amp-ad">
-<amp-ad width=300 height=250
-    type="doubleclick"
-    data-slot="/1007232/Indiatoday_AMP_Mobile_Video_ATF_300x250"
-    data-multi-size-validation="false">
-  <div placeholder></div>
-  <div fallback></div>
-</amp-ad> 
+<?php print variable_get('amp_video_ad'); ?>     
 </div>
+<?php } ?>
 <div class="amp-other-gallery">
   <?php
 // get all node id related to current node primary category
@@ -104,18 +100,21 @@ if (function_exists('get_other_gallery_amp')) {
       if (function_exists('get_amp_video_time')) {
         $video_time = get_amp_video_time($value['entity_id'], 'videogallery', 'field_video_duration');
       }
+      $small_width = 170;
       $entity_id = $value['entity_id'];
       if (!empty($value['field_story_small_image_fid'])) {
         $file = file_load($value['field_story_small_image_fid']);
         $small_image = file_create_url($file->uri);
+        $other_src_set = $small_image . ' ' . $small_width . ' w';
       }
       else {
-        $small_image = $base_url . '/' . path_to_theme() . '/images/itg_image170x127.jpg';
+        $small_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
+        $other_src_set = $small_image . ' ' . $small_width . ' w';
       }
       $alias = drupal_get_path_alias('node/'.$value['nid']);
       $path_alias = $base_url.'/amp/'.$alias;
       $title = l($value['title'], $path_alias, array("attributes" => array("title" => $value['title'])));
-      $amp_image = '<a href="' . $path_alias . '"><amp-img height="127" width="170" layout="responsive"  alt="' . $value['title'] . '" title="' . $value['title'] . '" src="' . $small_image . '"><div fallback>offline</div></amp-img></a>';
+      $amp_image = '<a href="' . $path_alias . '"><amp-img height="127" width="170" layout="responsive"  alt="' . $value['title'] . '" title="' . $value['title'] . '" src="' . $small_image . '" srcset="'.$other_src_set.'"><div fallback>offline</div></amp-img></a>';
       $other_video_gallery .= '<li><div class="other-img">' . $amp_image . '<div class="other-count"><i class="fa fa-play-circle" aria-hidden="true"></i> ' . $video_time[0]['field_video_duration_value'] . '</div></div><div class="other-date">' . date('D, d M, Y', $value['created']) . '</div><div class="other-title">' . $title . '</div></li>';
     }
     $other_video_gallery .= '</ul>';

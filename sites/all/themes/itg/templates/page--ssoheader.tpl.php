@@ -87,7 +87,7 @@ if($arg[0] == 'sso-user') {
     <div class="container">
         <a class="back-to-itg" href="<?php print $shr; ?>" title="<?php print 'Back to the '.$site_name; ?>"><i class="fa fa-angle-left" aria-hidden="true"></i><?php print 'Back to the '.$site_name; ?></a>
         <div class="itg-logo">
-            <img src="<?php print base_path() ?>sites/all/themes/itg/images/span_itg_group.jpg" alt="India Today Group" />     
+          <img src="<?php print base_path() ?>sites/all/themes/itg/images/span_itg_group.jpg" alt="India Today Group" title="India Today Group" />     
         </div>
     </div>
 </div>
@@ -98,7 +98,7 @@ if($arg[0] == 'sso-user') {
 
   <main id="main">
     
-    <section id="content" class="container" role="main">
+    <section id="content" class="container sso-main-content" role="main">
       <?php print $messages; ?>
       <?php print render($page['content']); ?>
       

@@ -102,10 +102,11 @@ if (!empty($node->field_blog_configuration['und'])) {
     $path = $node->field_story_extra_large_image['und'][0]['uri'];
     $src = image_style_url('blog_landing_image', $path);
     $alt = $node->field_story_extra_large_image['und'][0]['alt'];
-    print "<img src='" . $src . "' alt='".$alt."' />";
+    $title = $node->field_story_extra_large_image['und'][0]['title'];
+    print "<img src='" . $src . "' alt='" . $alt . "' title='" . $title . "'>";
     ?>
   <?php else : ?>
-    <img src="<?php print $base_url. "/" . drupal_get_path('theme', 'itg') . "/images/itg_image647x363.jpg" ?>">
+  <img src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');?>" ?>" alt="" title="">
   <?php endif; ?>
   
   <!-- Long description -->

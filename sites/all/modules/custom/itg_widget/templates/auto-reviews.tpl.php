@@ -21,7 +21,7 @@
             ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                <img src="<?php print $base_url . '/' . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg" alt="" />
+                <img src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>" alt="" title="" />
               </a>
             </div>
           <?php } ?>
@@ -36,7 +36,7 @@
               <a title="<?php print $node_data['title']; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/".$node_data["nid"]); ?>">
               <p class="dont-miss-widget dont-miss-<?php echo $node_data['nid'] ?>">
               <?php  if(function_exists('itg_common_get_smiley_title')) {
-                  echo itg_common_get_smiley_title($node_data['nid'], 0, 100);
+                  echo itg_common_get_smiley_title($node_data['node_obj'], 0, 100);
                 }
                 else {
                   echo mb_strimwidth($node_data['title'], 0, 110, "..");

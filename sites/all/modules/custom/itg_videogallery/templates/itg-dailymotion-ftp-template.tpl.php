@@ -16,8 +16,8 @@ else {
 <div id="videoupload">
     <div class="browse-ftp <?php echo $singalcalss; ?>">
         <div id="itg_video_content">
-            <div class="video-ftp active"><?php print t('FTP'); ?></div>
-            <div class="internal-video-tab"><?php print t('Internal'); ?></div>
+            <div class="video-ftp active"><?php print t('DM Videos/ITGD Videos'); ?></div>
+<!--            <div class="internal-video-tab"><?php print t('ITGD Videos'); ?></div>-->
             <?php if ($_GET['input_filed'] != 'ckeditor' && $_GET['no_value'] != 'single') { ?>
               <div class="video-local"><?php print t('Local Browse'); ?></div>
             <?php } ?>
@@ -72,11 +72,11 @@ else {
                 else {
                   ?>
                   <input type="hidden" id="single_add" name="single_add" value="0">
-                  <a href="javascript:void(0)" class = "button asso-filed"><?php print t('Associate Video'); ?></a>
+                  <a href="javascript:void(0)" class = "button btn-submit asso-filed"><?php print t('Associate Video'); ?></a>
                 <?php } ?>
             </div>  
 
-            <div class="ftp-server-internal" style="display:none">
+<!--            <div class="ftp-server-internal" style="display:none">
                 <?php
                 if ($_GET['file_filed_name'] == 'field_upload_video[und][0][fid]' || $_GET['field_name'] == 'field_videogallery_video_upload') {
                   if ($_GET['no_value'] == 'single') {
@@ -121,9 +121,9 @@ else {
                 else {
                   ?>
                   <input type="hidden" id="single_add" name="single_add" value="0">
-                  <a href="javascript:void(0)" class = "button asso-filed-internal"><?php print t('Associate Video'); ?></a>
+                  <a href="javascript:void(0)" class = "button btn-submit asso-filed-internal"><?php print t('Associate Video'); ?></a>
                 <?php } ?>
-            </div>  
+            </div>  -->
 
             <div class="local_browse" style="display: none;">
 

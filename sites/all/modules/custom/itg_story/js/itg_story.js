@@ -10,8 +10,8 @@
             var StoryId = settings.itg_story.settings.storyid;
             if (StoryId == 0) {
                 // jquery to open question field.
-               // jQuery("#edit-field-story-configurations-und-commentbox").trigger("click");
-                
+                // jQuery("#edit-field-story-configurations-und-commentbox").trigger("click");
+
                 // hide remove button of first field on add form
                 jQuery("#edit-field-story-highlights-und-0-remove-button").hide();
                 jQuery("#edit-field-story-template-buzz-und-0-remove-button").hide();
@@ -20,7 +20,7 @@
                 jQuery("#edit-field-story-template-factoids-und-0-remove-button").hide();
                 jQuery("#edit-field-story-reporter-und-0-remove-button").hide();
             }
-            $("#edit-field-itg-content-publish-date").hide();
+            //$("#edit-field-itg-content-publish-date").hide();
             $(".form-item-field-story-configurations-und-breaking-news").hide('');
             $("label[for='edit-field-story-configurations-und-tv']").html("Associate Story with TV");
             // enable check box of developing story based on condition 
@@ -82,15 +82,15 @@
 
             // code for lock story check uncheck based on condition
             $('#edit-field-story-magazine-story-issue-und-magazine-issue-story').click(function () {
-                if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {                    
+                if ($("#edit-field-story-magazine-story-issue-und-magazine-issue-story").is(":checked")) {
                     $('#edit-field-story-configurations-und-lock-story').attr('checked', true);
-                } else {                    
+                } else {
                     $('#edit-field-story-configurations-und-lock-story').attr('checked', false);
                 }
             });
 
             // Code for client Title field value set Null
-            $('#edit-field-story-configurations-und-commentbox').click(function() {
+            $('#edit-field-story-configurations-und-commentbox').click(function () {
                 if ($("#edit-field-story-configurations-und-commentbox").is(":not(:checked)")) {
                     $("#edit-field-story-comment-question-und-0-value").val('');
                 }
@@ -145,13 +145,13 @@
             $('#edit-field-facebook-gallery-associate-und-0-remove-button').hide();
 
             // Code issue date exit or not.
-           // $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').blur(function () {
+            // $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').blur(function () {
             $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').change(function () {
                 var base_url = settings.itg_story.settings.base_url;
                 $.ajax({
                     url: base_url + "/issue-date-check-ajax",
                     method: 'post',
-                    data: {'issue': $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').val()},
+                    data: { 'issue': $('#edit-field-story-issue-date-und-0-value-datepicker-popup-0').val() },
                     success: function (data) {
                         $("#idIssue").remove();
                         $(".form-item-field-story-issue-date-und-0-value-date").append(data);
@@ -164,8 +164,18 @@
                 if (!jQuery(this).is(':checked')) {
                     jQuery("#edit-field-story-source-type-und-0-value").val("");
                 }
+            });			
+            jQuery('.plupload_start').on('click', function () {
+                $('#story-node-form').ajaxComplete(function (event, request, settings) {
+                    if (jQuery('input[name="field_story_technology[und][0][field_technology_sample_photo][und][0][fid]"]').val() == 0) {
+                        jQuery('.form-field-name-field-story-technology .field-multiple-table tbody tr:first .cancel').mousedown();
+                        jQuery(this).off(event);
+                    }
+                });
             });
-
+            // story discription iframe wrap in div
+          //  var tagIframe = jQuery('.story-section .story-right .description');
+           // tagIframe.find('iframe').removeAttr('height', 'width').wrap('<div class="iframe-video"></div>');
         }
 
     };

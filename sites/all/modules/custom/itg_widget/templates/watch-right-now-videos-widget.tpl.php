@@ -17,14 +17,14 @@
           else {
             ?>
             <a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
-              <img alt="" width='170' height='127'  src='<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image170x127.jpg' />
+              <img alt="" title="" width='170' height='127'  src='<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');?>' />
             </a>
           <?php } ?>
             <?php if (!empty($video_data['title'])) : ?>
             <p class="title" title="<?php echo $video_data['title'] ?>">
                 <?php 
                 if(function_exists('itg_common_get_smiley_title')) {
-                  echo l(itg_common_get_smiley_title($video_data['nid'], 0, 60), "node/" . $video_data['nid'] , array('html' => TRUE , 'attributes' => array("title" => $video_data['title'])));
+                  echo l(itg_common_get_smiley_title($video_data['node_obj'], 0, 60), "node/" . $video_data['nid'] , array('html' => TRUE , 'attributes' => array("title" => _widget_title($video_data['title']))));
                 } else {
                   echo l(mb_strimwidth($video_data['title'], 0, 70, ".."), "node/" . $video_data['nid'] , array('attributes' => array("title" => $video_data['title'])));
                 }

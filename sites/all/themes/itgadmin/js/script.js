@@ -67,6 +67,11 @@ jQuery(document).ready(function () {
 //        }
 //    });
 
+    jQuery("select#fake-soruce-type").on("change", function () {
+        var soruce_type = jQuery(this).val();
+        jQuery("#edit-field-story-source-type-value-1").val(soruce_type);
+    });
+
 });
 
 // code for add loader in solr ajex view.
@@ -360,13 +365,14 @@ jQuery(document).ready(function () {
         });
         $('.video-in-form').click(function () {
             var getvideo_id = $(this).attr('data-video-id');
+             var getvideo_repo = $(this).attr('data-type-repo');
             jQuery.ajax({
                 url: Drupal.settings.basePath + 'dailymotion-video-play',
                 type: 'post',
                 beforeSend: function (xhr) {
                     window.parent.jQuery('#widget-ajex-loader').show();
                 },
-                data: {'videoid': getvideo_id},
+                data: {'videoid': getvideo_id,'getvideo_repo':getvideo_repo,},
                 success: function (data) {
 
                     var appenddata = '<div id="smi-popup" class="itg-popup itg-photo-popup">';
@@ -385,8 +391,6 @@ jQuery(document).ready(function () {
                     }, 2000);
                 },
                 error: function (xhr, desc, err) {
-                    console.log(xhr);
-                    console.log("Details: " + desc + "\nError:" + err);
                 }
             });
         });
@@ -708,14 +712,12 @@ jQuery(document).ready(function () {
                 $(this).parents('td').find('.field-name-field-syndication-time').show();
             }
             if (radioCheck == true && radioVal == 'Minute') {
-                console.log(radioVal);
                 $(this).parents('td').find('.field-name-field-syndication-set-day, .field-name-field-syndication-set-day-month').find('select option:selected').prop('selected', false);
                 $(this).parents('td').find('.field-name-field-syndication-set-day').hide();
                 $(this).parents('td').find('.field-name-field-syndication-set-day-month').hide();
                 $(this).parents('td').find('.field-name-field-minute').show();
                 $(this).parents('td').find('.field-name-field-minute select').show();
                 var time_val = $(this).parents('td').find('.field-name-field-syndication-time input').val();
-                console.log(time_val);
                 if(time_val == "" || time_val.length <=0) {
                     $(this).parents('td').find('.field-name-field-syndication-time').hide();
                     $(this).parents('td').find('.field-name-field-syndication-time input').val("00:00");
@@ -1094,8 +1096,6 @@ jQuery(document).ready(function () {
             complete: function () {
             },
             error: function (xhr, desc, err) {
-//                console.log(xhr);
-//                console.log("Details: " + desc + "\nError:" + err);
             }
         });
     });

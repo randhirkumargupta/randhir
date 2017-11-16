@@ -104,7 +104,6 @@ jQuery(document).ready(function () {
     jQuery('.event-form-remove').click(function () {
         var $eventNum = jQuery(".event-form-number");
         var b = $eventNum.val();
-        console.log(b);
         if (b > 1) {
             jQuery("table.field-multiple-table tr td:last").prev().find(".cancel.form-submit").trigger("mousedown");
             jQuery('html, body').animate({
@@ -259,7 +258,6 @@ jQuery(document).ready(function () {
 jQuery(document).ajaxSuccess(function () {
     if (jQuery(".messages--error").length > 1) {
         var error_message_length = jQuery(".messages--error").length;
-        console.log(error_message_length);
         if (error_message_length > 1) {
             jQuery("body").find("#page-title").next(".messages--error").remove();
         }

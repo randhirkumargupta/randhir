@@ -50,10 +50,10 @@
         <div class="field-label"><?php print t('Template Name:'); ?></div>
         <div class="field-items"><?php echo ucwords($node->title); ?></div>
       </div>
-      <div class="field">
-        <div class="field-label"><?php print t('Subject Line:'); ?></div>
-        <div class="field-items"><?php echo ucwords($node->field_news_title[LANGUAGE_NONE][0]['value']); ?></div>
-      </div>
+<!--      <div class="field">
+        <div class="field-label"><?php // print t('Subject Line:'); ?></div>
+        <div class="field-items"><?php // echo ucwords($node->field_news_title[LANGUAGE_NONE][0]['value']); ?></div>
+      </div>-->
        <div class="field">
         <div class="field-label"><?php print t('Header Headline:'); ?></div>
         <div class="field-items"><?php echo ucwords($node->field_newst_header_headline[LANGUAGE_NONE][0]['value']); ?></div>
