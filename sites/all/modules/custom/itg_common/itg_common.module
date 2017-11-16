@@ -503,7 +503,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
   
-  if ($form_id == 'photogallery_node_form' || $form_id == 'podcast_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'videogallery_node_form') {
+  if ($form_id == 'photogallery_node_form' || $form_id == 'podcast_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'mega_review_critic_node_form') {
     $form['#after_build'][] = 'itg_common_add_preview_button';
   }
   

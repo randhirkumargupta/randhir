@@ -808,7 +808,6 @@ function itg_survey_get_mail_content($node , $user) {
  */
 function itg_survey_pqs_generatetokens() {
   $type = arg(2);
-  global $base_url;
   drupal_add_js(drupal_get_path('module' , 'itg_survey') . '/js/itg_associate_story_ckeditor.js' , array('weight' => 1 , 'scope' => 'footer'));
   $cur_date = date('Y-m-d H:i:s');
   if ($type == 'poll') {
@@ -858,7 +857,7 @@ function itg_survey_pqs_generatetokens() {
       $title = $record['title'];
     }
     if ($type == 'mega_review_critic') {
-      $iframe = '<iframe src="' . $base_url . '/mega-review/embed/' . $record['nid'] . '" width="100%" class="embed-megareview" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>';
+      $iframe = '<iframe src="' . FRONT_URL . '/mega-review/embed/' . $record['nid'] . '" width="100%" class="embed-megareview" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>';
       $options[$iframe] = $title;
     }
     else {
