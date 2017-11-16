@@ -309,8 +309,8 @@ $databases['default']['slave'][] = array (
 
 $databases['default']['default'] = array (
   'driver' => 'autoslave',
-  'master' => array('master'),
-  'slave' => array('slave'),
+  'master' => array('master', 'slave'),
+  'slave' => array('slave', 'master'),
   'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
   'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
   //'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
@@ -331,6 +331,7 @@ $databases['sso_db']['default'] = array(
 
 // Use locking that supports force master
 $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
+// $conf['lock_inc'] = 'sites/all/modules/contrib/memcache_storage/includes/lock.inc';
 
 //$conf['cache_default_class'] = 'AutoslaveCache';
 //$conf['autoslave_cache_default_class'] = 'ConsistentCache';
