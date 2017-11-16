@@ -9,7 +9,7 @@
  * @pram array
  * @return array
  */
-function fblogin($data) {
+function fblogin_sso($data) {
   
     $token = $data['token'];
     $app_id_social = $data['app_id'];
@@ -24,11 +24,11 @@ function fblogin($data) {
     if ($user_load->uid) {
         // user exist, next is step for login
         
-        return userloginFB($uname_social, $user_load->uid, $password);
+        return userloginFB_sso($uname_social, $user_load->uid, $password);
     } else {
         // user not exist, next is step for signup
        
-        return userSignupFB($uname_social, $uid_social, $password);
+        return userSignupFB_sso($uname_social, $uid_social, $password);
     }
 }
 
@@ -37,7 +37,7 @@ function fblogin($data) {
  * @pram string $uname, $uidget, $password
  * @return array
  */
-function userloginFB($uname, $uidget, $password) {
+function userloginFB_sso($uname, $uidget, $password) {
     global $user;
     $username = $uname;
 
@@ -99,7 +99,7 @@ function userloginFB($uname, $uidget, $password) {
  * @pram string $uname_social, $uid_social, $password
  * @return array
  */
-function userSignupFB($uname_social, $uid_social, $password) {
+function userSignupFB_sso($uname_social, $uid_social, $password) {
     $mail = $uid_social . "@facebook.com";
     $username = $uname_social;    
     $first_name = "";
@@ -191,7 +191,7 @@ function userSignupFB($uname_social, $uid_social, $password) {
         $account = $e;
     }
     if($account->uid)
-    return userloginFB($uname_social, $account->uid, $password);
+    return userloginFB_sso($uname_social, $account->uid, $password);
     else{
         return $account;
     }

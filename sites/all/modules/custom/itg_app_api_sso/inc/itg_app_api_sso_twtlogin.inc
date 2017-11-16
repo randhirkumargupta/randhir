@@ -9,7 +9,7 @@
  * @pram array
  * @return array
  */
-function twtlogin($data){
+function twtlogin_sso($data){
 
     $token = $data['token'];
     $app_id_social = $data['app_id'];
@@ -21,20 +21,20 @@ function twtlogin($data){
     $user_load = user_load_by_name($uname_social);
     if($user_load->uid){
         // user exist, next is step for login
-        return userloginTWT($uname_social, $user_load->uid, $password);
+        return userloginTWT_sso($uname_social, $user_load->uid, $password);
     }
     else{
         // user not exist, next is step for signup
-        return userSignupTWT($uname_social, $uid_social, $password);
+        return userSignupTWT_sso($uname_social, $uid_social, $password);
     }
 }
 
 /**
- * main function for userloginTWT
+ * main function for userloginTWT_sso
  * @pram string $uname, $uidget, $password
  * @return array
  */
-function userloginTWT($uname, $uidget, $password){
+function userloginTWT_sso($uname, $uidget, $password){
     global $user;
     $username =  $uname; 
     
@@ -92,12 +92,12 @@ function userloginTWT($uname, $uidget, $password){
 }
 
 /**
- * main function for userSignupTWT
+ * main function for userSignupTWT_sso
  * @pram string $uname_social, $uid_social, $password
  * @return array
  */
 
-function userSignupTWT($uname_social, $uid_social, $password){
+function userSignupTWT_sso($uname_social, $uid_social, $password){
     $mail = $uid_social;
     $username = $uname_social;    
     $first_name = "";
@@ -190,7 +190,7 @@ function userSignupTWT($uname_social, $uid_social, $password){
     }
     //return $account;
     if($account->uid)
-        return userloginTWT($uname_social, $account->uid, $password);
+        return userloginTWT_sso($uname_social, $account->uid, $password);
     else{
         return $account;
     }

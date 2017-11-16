@@ -9,7 +9,7 @@
  * @pram array
  * @return array
  */
-function saveUpdatedProfile($data) {
+function saveUpdatedProfile_sso($data) {
     global $user;
     // variable declation
     $responce_object = array();

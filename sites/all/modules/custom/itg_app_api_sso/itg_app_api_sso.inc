@@ -27,7 +27,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_login_request',
+                    'callback' => 'itg_rapid_api_login_request_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -82,7 +82,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_signup',
+                    'callback' => 'itg_rapid_api_signup_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -227,7 +227,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_fblogin',
+                    'callback' => 'itg_rapid_api_fblogin_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -294,7 +294,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_twtlogin',
+                    'callback' => 'itg_rapid_api_twtlogin_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -361,7 +361,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_forgot_password',
+                    'callback' => 'itg_rapid_api_forgot_password_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -389,7 +389,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_otp_verification',
+                    'callback' => 'itg_rapid_api_otp_verification_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -426,7 +426,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_resend_otp',
+                    'callback' => 'itg_rapid_api_resend_otp_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -454,7 +454,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_change_password',
+                    'callback' => 'itg_rapid_api_change_password_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -500,7 +500,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_edit_profile',
+                    'callback' => 'itg_rapid_api_edit_profile_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -600,7 +600,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_edit_user_image',
+                    'callback' => 'itg_rapid_api_edit_user_image_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -646,7 +646,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_get_login_user_detail',
+                    'callback' => 'itg_rapid_api_get_login_user_detail_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -681,9 +681,9 @@ function itg_app_api_sso_resource() {
                     'file' => array(
                         'type' => 'inc',
                         'module' => 'itg_app_api_sso',
-                        'name' => 'itg_app_api_sso.services',
+                        'name' => 'itg_app_api_sso.services_sso',
                     ),
-                    'callback' => 'itg_rapid_api_log_out',
+                    'callback' => 'itg_rapid_api_log_out_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -711,7 +711,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_get_preference',
+                    'callback' => 'itg_rapid_api_get_preference_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -748,7 +748,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_update_preference',
+                    'callback' => 'itg_rapid_api_update_preference_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -795,7 +795,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_check_user',
+                    'callback' => 'itg_rapid_api_check_user_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -831,7 +831,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_get_otp',
+                    'callback' => 'itg_rapid_api_get_otp_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -867,7 +867,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_reset_password',
+                    'callback' => 'itg_rapid_api_reset_password_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -931,7 +931,7 @@ function itg_app_api_sso_resource() {
                         'module' => 'itg_app_api_sso',
                         'name' => 'itg_app_api_sso.services',
                     ),
-                    'callback' => 'itg_rapid_api_testing',
+                    'callback' => 'itg_rapid_api_testing_sso',
                     'access callback' => 'user_access',
                     'access arguments' => array('access content'),
                     'access arguments append' => FALSE,
@@ -962,7 +962,7 @@ function itg_app_api_sso_resource() {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_login_request($token) {
+function itg_rapid_api_login_request_sso($token) {
 
     drupal_session_start();
     $user_id = $username = $_POST['user_id'];
@@ -1004,7 +1004,7 @@ function itg_rapid_api_login_request($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_signup($token) {
+function itg_rapid_api_signup_sso($token) {
 
 
     $first_name = $_POST['first_name'];
@@ -1078,7 +1078,7 @@ function itg_rapid_api_signup($token) {
     try {
 
         $account = user_save(NULL, $edit);
-        updateUsedrProfileAtSignup_rapid($_POST, $action = 1);
+        updateUsedrProfileAtSignup_rapid_sso($_POST, $action = 1);
 
         if (function_exists('itg_personalization_reddem_referfriend')) {
             itg_personalization_reddem_referfriend($_SESSION['referral_key']);
@@ -1120,9 +1120,9 @@ function itg_rapid_api_signup($token) {
  * @pram $_GET
  * @return array - The processed information array.
  */
-function itg_rapid_api_fblogin($token) {
+function itg_rapid_api_fblogin_sso($token) {
 
-    return fblogin($_GET);
+    return fblogin_sso($_GET);
 }
 
 /**
@@ -1130,8 +1130,8 @@ function itg_rapid_api_fblogin($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_twtlogin($token) {
-    return twtlogin($_POST);
+function itg_rapid_api_twtlogin_sso($token) {
+    return twtlogin_sso($_POST);
 }
 
 /**
@@ -1139,7 +1139,7 @@ function itg_rapid_api_twtlogin($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_forgot_password($token) {
+function itg_rapid_api_forgot_password_sso($token) {
 
     $ufname = $user_id = $_POST['user_id'];
     $msg = "";
@@ -1178,7 +1178,7 @@ function itg_rapid_api_forgot_password($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_otp_verification($token) {
+function itg_rapid_api_otp_verification_sso($token) {
 
     $ufname = $user_id = $_POST['user_id'];
     $uotp = $_POST['otp_code'];
@@ -1191,7 +1191,7 @@ function itg_rapid_api_otp_verification($token) {
             $get_user_check_mobile = itg_sso_user_mobile_check($ufname);
         }
         if (function_exists(itg_sso_otp_delete)) {
-            $resp = itg_sso_otp_check_ser($mail, $ufname, $uotp);
+            $resp = itg_sso_otp_check_ser_sso($mail, $ufname, $uotp);
         }
     } else {
         $mobile = "";
@@ -1201,7 +1201,7 @@ function itg_rapid_api_otp_verification($token) {
         // $account = user_load($get_user_check_email);
         // $mail_content = itg_forgot_email_get_mail_content($account, $ufname);
         if (function_exists(itg_sso_otp_delete)) {
-            $resp = itg_sso_otp_check_ser($ufname, $mobile, $uotp);
+            $resp = itg_sso_otp_check_ser_sso($ufname, $mobile, $uotp);
         }
     }
 
@@ -1215,7 +1215,7 @@ function itg_rapid_api_otp_verification($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_resend_otp($token) {
+function itg_rapid_api_resend_otp_sso($token) {
     $ufname = $user_id = $_POST['user_id'];
     $msg = "";
     $data = array();
@@ -1253,7 +1253,7 @@ function itg_rapid_api_resend_otp($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_change_password($token) {
+function itg_rapid_api_change_password_sso($token) {
     $uname = $user_id = $_POST['user_id'];
     $pass = $_POST['new_password'];
     $pass2 = $_POST['confirm_password'];
@@ -1291,8 +1291,8 @@ function itg_rapid_api_change_password($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_edit_profile($token) {
-    $flag = saveUpdatedProfile($_POST);
+function itg_rapid_api_edit_profile_sso($token) {
+    $flag = saveUpdatedProfile_sso($_POST);
     return $flag;
 }
 
@@ -1301,7 +1301,7 @@ function itg_rapid_api_edit_profile($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_edit_user_image($token) {
+function itg_rapid_api_edit_user_image_sso($token) {
     global $user;
     $data = array();
     $user_id = $_POST['user_id'];
@@ -1349,7 +1349,7 @@ function itg_rapid_api_edit_user_image($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_get_login_user_detail($token) {
+function itg_rapid_api_get_login_user_detail_sso($token) {
     $data = array();
     $authtoken_id = $_POST['$_POST'];
     $user_id = $_POST['user_id'];
@@ -1401,7 +1401,7 @@ function itg_rapid_api_get_login_user_detail($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_log_out($token) {
+function itg_rapid_api_log_out_sso($token) {
     global $base_url;
     $data = array();
     $user_id = $_POST['user_id'];
@@ -1431,7 +1431,7 @@ function itg_rapid_api_log_out($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_get_preference($token) {
+function itg_rapid_api_get_preference_sso($token) {
     $user_id = $_POST['user_id'];
     $account = user_load_by_name($user_id);
 
@@ -1485,7 +1485,7 @@ function itg_rapid_api_get_preference($token) {
     $loop_count = 0;
     //get personalization-preferences value
     foreach ($tid_array as $key => $value) {
-        $prefeance = itg_rapid_api_get_personalization_saved_value($value, $user_id);
+        $prefeance = itg_rapid_api_get_personalization_saved_value_sso($value, $user_id);
         $term = taxonomy_term_load($value);
         $term_name = $term->name;
         $data['data']['preference'][$loop_count]['id'] = "$value";
@@ -1502,7 +1502,7 @@ function itg_rapid_api_get_preference($token) {
  * @param int $tid
  * @return array
  */
-function itg_rapid_api_get_personalization_saved_value($tid, $uid) {
+function itg_rapid_api_get_personalization_saved_value_sso($tid, $uid) {
     $query = db_select('itg_widget_order', 'iwo');
     $query->addField('iwo', 'weight');
     $query->condition('iwo.nid', $tid);
@@ -1516,7 +1516,7 @@ function itg_rapid_api_get_personalization_saved_value($tid, $uid) {
  * @return array
  * 	
  */
-function itg_rapid_api_update_preference($token) {
+function itg_rapid_api_update_preference_sso($token) {
     echo "<pre>";
     print_r($_POST);
     echo "</pre>";
@@ -1568,12 +1568,12 @@ function itg_rapid_api_check_user($token) {
 }
 
 /**
- * Implements itg_sso_otp_check_ser
+ * Implements itg_sso_otp_check_ser_sso
  * @param int $mobile
  * @param string $email 
  * @param string $opt 
  */
-function itg_sso_otp_check_ser($mail, $mobile, $opt) {
+function itg_sso_otp_check_ser_sso($mail, $mobile, $opt) {
 //echo $mail; echo "<br>"; echo $mobile;
     $otp_check = db_select('itg_sso_reg_otp_info', 'opti');
     $otp_check->fields('opti', array('mobile', 'email', 'otp'));
@@ -1596,7 +1596,7 @@ function itg_sso_otp_check_ser($mail, $mobile, $opt) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_get_otp($token) {
+function itg_rapid_api_get_otp_sso($token) {
     //$_GET['user_id'] = 'sandy765@mailinator.com'; 
     $uname = $_GET['user_id'];
 
@@ -1619,7 +1619,7 @@ function itg_rapid_api_get_otp($token) {
  * @pram $_POST 
  * @return array - The processed information array.
  */
-function itg_rapid_api_reset_password($token) {
+function itg_rapid_api_reset_password_sso($token) {
     $uname = $user_id = $_POST['user_id'];
     $pass = $_POST['new_password'];
     $pass2 = $_POST['confirm_password'];
@@ -1652,7 +1652,7 @@ function itg_rapid_api_reset_password($token) {
     return $flag;
 }
 
-function itg_rapid_api_testing($token) {
+function itg_rapid_api_testing_sso($token) {
 
     $str = '{
 	"status_code": "0",

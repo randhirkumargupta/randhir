@@ -97,7 +97,7 @@ if(preg_match('/MSIE/i',$u_agent) && !preg_match('/Opera/i',$u_agent))
  * @param int $nid
  * @return String 
  */
-function getStoryType($nid) {  
+function getStoryType_sso($nid) {  
   $query = db_select('node','n');
   $query->Join('field_data_field_story_type','st','st.entity_id = n.nid');
   $query->fields('st',array('field_story_type_value'));
@@ -114,7 +114,7 @@ function getStoryType($nid) {
  * @param binay img file
  * @return int FID
  */
-function uplodaProfileImg_Rapid($profile_image) {
+function uplodaProfileImg_Rapid_sso($profile_image) {
     $profile_img = base64_decode($profile_image);
     $f = finfo_open();
     $mime_type = finfo_buffer($f, $profile_img, FILEINFO_MIME_TYPE);
@@ -147,7 +147,7 @@ function uplodaProfileImg_Rapid($profile_image) {
  * @param array $data 
  * @return object user
  */
-function updateUsedrProfileAtSignup_rapid($data, $action = 1) {
+function updateUsedrProfileAtSignup_rapid_sso($data, $action = 1) {
     global $user;
     
     $location = trim($data['location']);
@@ -165,7 +165,7 @@ function updateUsedrProfileAtSignup_rapid($data, $action = 1) {
     
      // Update dob field.
     if ($profile_image) {
-        $profile_img_fid = uplodaProfileImg_Rapid($profile_image);
+        $profile_img_fid = uplodaProfileImg_Rapid_sso($profile_image);
     }
 
     // Update dob field.

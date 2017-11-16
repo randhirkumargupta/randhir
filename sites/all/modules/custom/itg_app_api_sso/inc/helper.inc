@@ -10,7 +10,7 @@ define('HOME_PAGE_JSON_NEWS_LIST_WORLD',1206577);
 
 //CATEGORY_MANAGMENT; 14
 
-function firebase_config(){
+function firebase_config_sso(){
     $firebase = array(
         'api-key' => 'AIzaSyDjXq0vdDZaa4HgEsdrlfLWXjevvIw7FFk',
         'dynamicLinkDomain' => 'peg3z.app.goo.gl',
@@ -27,7 +27,7 @@ function firebase_config(){
  *  return , shorturl 
  */
 
-function firebase_short_url($url){
+function firebase_short_url_sso($url){
  
 //get Default values  from config
 $fire_base = firebase_config();    
@@ -63,7 +63,7 @@ return $final_result->shortLink;
  *  return , shorturl weburl
  */
 
-function get_node_firebase_weburl($nid){
+function get_node_firebase_weburl_sso($nid){
     // variable declaration
     global $base_url;
     $firebase_url = "";
