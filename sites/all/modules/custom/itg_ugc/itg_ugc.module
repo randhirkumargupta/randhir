@@ -765,7 +765,7 @@ function itg_ugc_node_validate($node, $form, &$form_state) {
     // validate if video field is blank
     if (($type == 'videogallery')) {
       if (empty($upload_video)) {
-        form_set_error('field_astro_video', t("Video field is required."));
+        form_set_error('field_astro_video', t("Video field is required, Only files with the following extensions are allowed: mp4"));
       }
     }
 
