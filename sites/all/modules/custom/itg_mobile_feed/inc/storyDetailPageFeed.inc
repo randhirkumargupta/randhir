@@ -89,7 +89,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       //get video tag
       $videotag = getVideoTag($node);
       if ($videotag) {
-        $output .= $videotag;
+        //$output .= $videotag;
       }
       else {
         $output .= emptygetVideoTag();
@@ -143,7 +143,7 @@ function getVideoTag($node) {
   $src = "";
   $img_url = '';
 
-  $html = $node->body['und']['0']['value'];
+  $html = xmlEscape($node->body['und']['0']['value']);
   $doc = new DOMDocument();
   libxml_use_internal_errors(TRUE);
   // loads your html
