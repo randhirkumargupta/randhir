@@ -14,11 +14,11 @@ function itg_follow_story_refresh() {
     }
     if (!empty($follow_status['nid']) && $follow_status['status'] == '1') {
 
-      print '<a title = "Unfollow Story1" href="javascript:" id="user-activity" data-rel="'.$arg[1].'" data-tag="story" data-activity="follow_story" data-status="0" class="def-cur-pointer">Unfollow Story</a>';
+      print '<a title = "Unfollow Story" href="javascript:" id="user-activity" data-rel="'.$arg[1].'" data-tag="story" data-activity="follow_story" data-status="0" class="def-cur-pointer">Unfollow Story</a>';
     }
     else {
 
-      print '<a title = "Follow the Story1" href="javascript:" id="user-activity" data-rel="'.$arg[1].'" data-tag="story" data-activity="follow_story" data-status="1" class="def-cur-pointer">Follow the Story</a>';
+      print '<a title = "Follow the Story" href="javascript:" id="user-activity" data-rel="'.$arg[1].'" data-tag="story" data-activity="follow_story" data-status="1" class="def-cur-pointer">Follow the Story</a>';
     }
     drupal_exit();
   }
