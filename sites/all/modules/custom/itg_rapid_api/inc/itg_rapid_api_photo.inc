@@ -134,12 +134,14 @@ function generatePhotoCategoryList($tid, $pageno) {
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
         $query->fields('fpc', array('field_primary_category_value'));
 
-
+        $d1 = date('Y-m-d', strtotime("-90 days"));
+        $d2 = date(strtotime($d1));
         //end
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
         //change in query
+        $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
