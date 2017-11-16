@@ -506,6 +506,11 @@
             height: 100%;
         }
     }
+    .view-product .product-wrapper .btn-redeem-points,
+    .view-product .product-wrapper .btn-add-cart {
+        font: 600 12px/18px $itg-roboto;
+        padding: 5px 5px;
+    }
 }
 
 @media only screen and (min-width:991px) and (max-width: 1024px) {
@@ -1163,7 +1168,7 @@
         }
         .select-menu {
             color: #fff;
-            font-family: roboto;
+            font-family: $itg-roboto;
             width: 95px;
             background: #3c3a3b;
             padding-left: 5px;
@@ -1779,6 +1784,20 @@
     #block-itg-widget-featured-video-carousel-r .slick-next {
         top: 35%;
     }
+    .personal-list {
+        padding-top: 0;
+    }
+    .section-order-confirmation {
+        h1 {
+            text-align: center;
+        }
+    }
+    .page-order-confirmation .thankyou-block h2 {
+        font: 500 20px/32px $itg-roboto;
+    }
+    .page-order-confirmation .order-summary-block h3 {
+        font: 500 18px/28px $itg-roboto;
+    }
 }
 
 @media only screen and (max-width:767px) {
@@ -2340,10 +2359,6 @@
                 overflow: auto;
                 white-space: nowrap;
                 li {
-                    width: 145px;
-                    float: none;
-                    display: inline-block;
-                    vertical-align: top;
                     padding: 0 5px;
                     margin-top: 20px;
                     h3 {
@@ -2351,6 +2366,10 @@
                         white-space: pre-wrap;
                         font-size: 12px;
                         line-height: 18px;
+                        .lock {
+                            line-height: initial;
+                            padding-left: 25px;
+                        }
                     }
                 }
             }
@@ -2921,6 +2940,9 @@
     #block-itg-widget-featured-video-carousel-r .slick-prev,
     #block-itg-widget-featured-video-carousel-r .slick-next {
         top: 15%;
+    }
+    .view-personalization-my-preferences #views-form-personalization-my-preferences-block .personalization-low-high span:first-child {
+        margin-left: 125px;
     }
 }
 
@@ -3728,7 +3750,7 @@
 }
 
 #block-views-video-landing-header-block .latest_video .photo-list li .tile p {
-    font: 400 14px/20px "Roboto", sans-serif;
+    font: 400 14px/20px $itg-roboto;
     color: #b4b4b4
 }
 
@@ -3737,7 +3759,7 @@
 }
 
 #block-views-video-landing-header-block .latest_video .view-header h3 {
-    font: 500 14px/35px "Roboto", sans-serif;
+    font: 500 14px/35px $itg-roboto;
     margin-bottom: 10px;
     background: #131313;
     height: 35px;
@@ -3936,7 +3958,7 @@
         display: inline-block;
         vertical-align: top;
         padding: 10px 20px;
-        font: 14px/18px Roboto;
+        font: 14px/18px $itg-roboto;
         color: #666;
         background-color: #d1d1d1;
         border-radius: 5px;
@@ -4199,7 +4221,7 @@
     text-align: justify;
     font-style: italic;
     color: #8d8d8d;
-    font-family: Roboto;
+    font-family: $itg-roboto;
 }
 
 .ticket-type-require label:after {
@@ -4318,7 +4340,7 @@
     .personal-list .personal-follow a {
         display: inline-block;
         padding: 10px 20px;
-        font: normal 16px/18px Roboto;
+        font: normal 16px/18px $itg-roboto;
         color: #000;
         position: relative;
         bottom: -1px;
@@ -4422,7 +4444,7 @@
         display: inline-block;
         vertical-align: top;
         padding: 10px 20px;
-        font: 14px/18px Roboto;
+        font: 14px/18px $itg-roboto;
         color: #666;
         background-color: #d1d1d1;
         border-radius: 5px;
