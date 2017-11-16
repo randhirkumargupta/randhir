@@ -70,7 +70,7 @@ function genrate_micromax_programme_xml($result) {
       $source_type = $value['field_story_source_type_value'];
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
-      $videotag = video_detail_formats($nid, $source_type);
+      $videotag = itg_video_detail_formats($nid, $source_type);
       $json_output['item'][$count]['id'] = $nid;
       $json_output['item'][$count]['title'] = $value['title'];
 

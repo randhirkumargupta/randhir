@@ -23,7 +23,7 @@ global $base_url;
           <?php else : ?>
             <div class="pic">
                 <?php
-                $img = "<img width='88' height='66'  src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'))."' alt='' title='' />";
+                $img = "<img width='88' height='66'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg')."' alt='' title='' />";
                 ?>
                 <?php if ($recent_video_under_cat) : ?>
                   <?php print l($img , 'node/' . $recent_video_under_cat , array('query' => array('category' => $row['tid']) , 'html' => TRUE)); ?>

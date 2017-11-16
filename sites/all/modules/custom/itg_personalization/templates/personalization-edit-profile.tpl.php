@@ -24,7 +24,11 @@ if($arg[0] == 'personalization' && $arg[1] == 'edit-profile') {
       jQuery(".profile-ajax-loader").show();
     });
     jQuery('#itg-personalization-edit-profile-form').on('submit', function() {
-    jQuery(".profile-ajax-loader").show();
+    var ufname = jQuery('#edit-fname').val();
+    var ulname = jQuery('#edit-lname').val();
+    if(ufname != '' && ulname != '') {
+      jQuery(".profile-ajax-loader").show();
+    }
     });
   });
 
