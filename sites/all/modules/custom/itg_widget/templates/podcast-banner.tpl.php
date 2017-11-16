@@ -36,7 +36,7 @@ $podcast_audio_element_id = array();
                                       <?php
                                     }
                                     else {
-                                      print "<img  src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image170x127.jpg'))."' alt='' title='' />";
+                                      print "<img  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg')."' alt='' title='' />";
                                     }
                                     ?>
                                 </div>
@@ -75,7 +75,7 @@ $podcast_audio_element_id = array();
                               $extra_large_final_image = $extra_large_image_url;
                             }
                             else {
-                              $extra_large_final_image = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg'));
+                              $extra_large_final_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
                             }
                             $very_small_image = '<img class="podcast-thumb-img" src="' . $extra_large_final_image . '" alt="" title="" />';
                             $podcast_thumbnail .= "<div class='podcast-nav-item'> $very_small_image </div>";
