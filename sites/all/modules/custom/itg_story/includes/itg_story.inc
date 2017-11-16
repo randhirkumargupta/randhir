@@ -428,6 +428,7 @@ function itg_story_mega_review_node_embed($node) {
   $output .= 'var jQuery = function (selector) { return parent.jQuery(selector, iframeBody); };';
   $output .= 'var $ = jQuery;}';
   $output .= '</script>';
+  $output .= '<link type="text/css" rel="Stylesheet" href="' . $base_url . '/' . $theme_path . '/css/styles-new.css" />';
   $output .= '<link type="text/css" rel="Stylesheet" href="' . $base_url . '/' . $theme_path . '/css/itgd-style.css" />';
   $output .= '<link type="text/css" rel="Stylesheet" href="' . $base_url . '/' . $theme_path . '/css/font-awesome.css" />';
   $output .= '<link type="text/css" rel="Stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab" />';
