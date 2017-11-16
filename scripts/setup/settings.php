@@ -215,17 +215,9 @@
  */
 
 
-
-
-
-//for master and slave setting
-
-
 // setting for UAT
 //#####################################################################################
-
-// one slave setting
-$databases['default']['default'] = array(
+/*$databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'
   'slave' => 'autoslave', // optional, defaults to 'autoslave'  
@@ -234,8 +226,7 @@ $databases['default']['default'] = array(
 );
 
 
-$databases['default']['master'] = array(
-  //'database' => 'indiatoday_migrate',
+$databases['default']['master'] = array(  
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_write',
   'password' => '!tgd@!t@wr!te@101',
@@ -245,8 +236,7 @@ $databases['default']['master'] = array(
   'prefix' => '',
 );
 
-$databases['default']['autoslave'] = array(
-  //'database' => 'indiatoday_migrate',
+$databases['default']['autoslave'] = array(  
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_read',
   'password' => '!tgd@!t@re@d@102',
@@ -264,12 +254,12 @@ $databases['sso_db']['default'] = array(
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
-);
+);*/
 // end setting for UAT
 //#####################################################################################
 
 //for production setting
-/*$databases['default']['master'][] = array (
+$databases['default']['master'][] = array (
   'database' => 'indiatoday',
   'username' => 'prod_it_write',
   'password' => 'pr0d_!t@64',
@@ -320,7 +310,7 @@ $databases['sso_db']['default'] = array(
       'port' => '3306',
       'driver' => 'mysql',
       'prefix' => '',
-);*/
+);
 //end production setting
 
 // Use locking that supports force master
@@ -722,6 +712,6 @@ $conf['block_cache_bypass_node_grants'] = TRUE;
 $base_url = 'https://'.$_SERVER['SERVER_NAME'];
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;
-ini_set('display_errors',1);
+/*ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
-error_reporting(-1);
+error_reporting(-1);*/
