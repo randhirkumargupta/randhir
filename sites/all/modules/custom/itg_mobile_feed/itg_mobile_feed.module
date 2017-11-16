@@ -1029,7 +1029,7 @@ function itg_mobile_feed_cronapi($op, $job = NULL) {
 function itg_mobile_feed_xml_feed_url_cron() {
     global $base_url;
     $xml_feed_url = array();
-    $xml_feed_url[] = "home-page-feed";
+   /* $xml_feed_url[] = "home-page-feed";
     $xml_feed_url[] = "program-section-page-feed";
     $xml_feed_url[] = "program-category-page-feed/1206960";
     $xml_feed_url[] = "program-category-page-feed/1207605";
@@ -1077,7 +1077,9 @@ function itg_mobile_feed_xml_feed_url_cron() {
     //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/contactus.xml";
     $xml_feed_url[] = "story-detail-page-feed/664";
     $xml_feed_url[] = "video-detail-page-feed/18815";
-    $xml_feed_url[] = "photo-detail-page-feed/626";
+    $xml_feed_url[] = "photo-detail-page-feed/626";*/
+    
+    $xml_feed_url[] = "root-category-content-page-feed/1207414";
     
     foreach ($array as $key => $value) {    
         $data = '';
