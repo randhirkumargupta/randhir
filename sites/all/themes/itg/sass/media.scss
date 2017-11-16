@@ -2359,6 +2359,10 @@
                 overflow: auto;
                 white-space: nowrap;
                 li {
+                    width: 145px;
+                    float: none;
+                    display: inline-block;
+                    vertical-align: top;
                     padding: 0 5px;
                     margin-top: 20px;
                     h3 {
