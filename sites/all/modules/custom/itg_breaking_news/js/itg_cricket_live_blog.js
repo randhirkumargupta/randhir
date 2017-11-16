@@ -27,7 +27,6 @@ jQuery(document).ready(function () {
                             if (data.status == 'success') {
                                 jQuery("#bolgcontent").html(data.data);
                             } else {
-                                console.log('error');
                             }
                         }
 
@@ -53,7 +52,6 @@ jQuery(document).ready(function () {
                                 jQuery("#bolgcontent").append(data.data);
                             } else {
                                 clearInterval(db_load_more);
-                                console.log('error');
                             }
                         }
 
@@ -87,7 +85,6 @@ function load_more_after_interval() {
                             jQuery("#bolgcontent").append(data.data);
                         } else {
                             clearInterval(load_more);
-                            console.log('error');
                         }
                     }
 

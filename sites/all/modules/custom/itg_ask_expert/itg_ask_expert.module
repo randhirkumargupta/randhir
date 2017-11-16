@@ -406,7 +406,9 @@ function itg_ask_expert_block_view($delta = '') {
             $arg = arg();
 
             if ($arg[0] == 'node' && is_numeric($arg[1])) {
+                if(function_exists('itg_common_get_type_category')) {
                 $node_data = itg_common_get_type_category($arg[1]);
+                }
                 $type = $node_data[0]['type'];
                 $primary_category = $node_data[0]['field_primary_category_value'];
                 if ($type == 'story' || $type == 'photogallery' || $type == 'videogallery') {
@@ -704,7 +706,7 @@ function user_details_for_section($url, $tid) {
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
                     '#type' => 'markup',
-                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" title="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
                     '#suffix' => '</div>',
                 ),
             );
@@ -713,7 +715,7 @@ function user_details_for_section($url, $tid) {
                 'details' => array(
                     '#prefix' => '<div class="ask-user-detail">',
                     '#type' => 'markup',
-                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
+                    '#markup' => $ourExpert . '<div class="section-user-details"><img class="section-user-image" src="' . $imageUrl . '" alt="" title="" /><div class="section-user-name">' . $ask_fname . ' ' . $ask_lname . '</div></div>',
                 ),
             );
             }

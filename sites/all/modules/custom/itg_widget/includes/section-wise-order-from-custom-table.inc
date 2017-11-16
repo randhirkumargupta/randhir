@@ -40,7 +40,8 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
           'movies-lifestyle' => 7,
           'movies-celebrities' => 7,
           'oscar-news' => 5,
-          'oscar-features' => 6);
+          'oscar-features' => 6,
+          'news-section' => 8);
 
         if (array_key_exists($widget_style, $rangearray)) {
             $range = $rangearray[$widget_style];
@@ -60,7 +61,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
             $valid_content_type = 'photogallery';
             $query = db_select('itg_widget_order_section', 'iwo');
         } else {
-            $valid_content_type = _get_content_type_for_widget($widget_name);
+            //$valid_content_type = _get_content_type_for_widget($widget_name);
             $query = db_select('itg_widget_order', 'iwo');
         }
         if ($widget_style == 'oscar-news' || $widget_style == 'home-watch' || $widget_style == 'sport-column' || $widget_style == 'budget-decoded' || $widget_style == 'auto-road-trip' || $widget_style == 'in-depth' || $widget_style == 'movies-celebrities' || $widget_style == 'movies-lifestyle' || $widget_style == 'oscar-features' || $widget_style == 'tech-tips' || $widget_style == 'india-inc-on-budget' || $widget_style == 'budget-reactions' || $widget_style == 'election-other-story' || $widget_style == 'home-shows' || $widget_style == 'budget-decoded') {
@@ -73,8 +74,9 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
         if ($widget_style == 'standpoint') {
             $image = 'field_story_extra_large_image';
         }
+        
         $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
-        $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
+        //$query->leftJoin('node', 'n', 'n.nid=iwo.nid'); //by shravan 28 oct 2017
         $query->fields('iwo', array('nid', 'weight' , 'extra'));
         $query->fields('wh', array('node_data'));
         $query->condition('iwo.cat_id', $cat_id);
@@ -84,7 +86,9 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
         } else {
             $query->condition('iwo.content_type', 'All');
         }
-        $query->condition('n.type', $valid_content_type)->condition('n.status', 1)
+        $query->condition('wh.node_status', 1)
+        //$query->condition('n.status', 1)
+        //$query->condition('n.type', $valid_content_type)->condition('n.status', 1)
           ->orderBy('iwo.weight', 'DESC')
           ->groupBy('iwo.nid')
           ->range(0, $range);

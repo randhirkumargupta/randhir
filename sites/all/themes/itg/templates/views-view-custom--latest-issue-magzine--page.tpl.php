@@ -95,26 +95,26 @@
         }
         if ($key == 0) {
           if (!empty($value->uri)) {
-            $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt=""/>';
+            $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
           }
           else {
-            $img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt='' />";
+            $img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
           }
           if (!empty($lock_story)) {
             $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
-            $title = l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+            $title = l($value->title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
           }
           else {
             $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
-            $title = l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'node/' . $value->nid);
+            $title = l($value->title, 'node/' . $value->nid);
           }
         }
         elseif ($key > 0 && $key < 3) {
           if (!empty($lock_story)) {
-            $sub_title .= '<p class="lock">' . l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
+            $sub_title .= '<p class="lock">' . l($value->title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
           }
           else {
-            $sub_title .= '<p>' . l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'node/' . $value->nid) . '</p>';
+            $sub_title .= '<p>' . l($value->title, 'node/' . $value->nid) . '</p>';
           }
         }
       }
@@ -156,26 +156,26 @@
         }
         if ($key == 0) {
           if (!empty($s_value->uri)) {
-            $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '" alt="" />';
+            $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '" alt="" title="" />';
           }
           else {
-            $supp_img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt='' />";
+            $supp_img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
           }
           if (!empty($lock_story)) {
             $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
-            $supp_title = l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+            $supp_title = l($s_value->title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
           }
           else {
             $supp_img = l($supp_img_url, 'node/' . $s_value->nid, array('html' => TRUE));
-            $supp_title = l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $s_value->nid);
+            $supp_title = l($s_value->title, 'node/' . $s_value->nid);
           }
         }
         elseif ($key > 0 && $key < 3) {
           if (!empty($lock_story)) {
-            $sup_sub_title .= '<p class="lock">' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
+            $sup_sub_title .= '<p class="lock">' . l($s_value->title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
           }
           else {
-            $sup_sub_title .= '<p>' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $s_value->nid) . '</p>';
+            $sup_sub_title .= '<p>' . l($s_value->title, 'node/' . $s_value->nid) . '</p>';
           }
         }
       }      

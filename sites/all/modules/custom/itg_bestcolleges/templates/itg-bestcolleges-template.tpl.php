@@ -2,8 +2,10 @@
 /**
  * @file : itg-bestcolleges-template.tpl.php
  */
-$comment_value = variable_get('COMMENT_CONFIG');
-$config_name = $comment_value[0]->config_name;
+if (function_exists('itg_story_global_comment_last_record')) {
+  $comment_value = itg_story_global_comment_last_record();
+  $config_name = $comment_value[0]->config_name;
+}
 $arg = arg();
 ?>
 <?php global $base_url;?>
@@ -251,7 +253,7 @@ if(isset($related_image_value['relatedimg_count']) && $related_image_value['rela
      <div class="agbutton story-like-dislike">
           <div id="name-dv"><?php print t('Do You Like This Bestcolleges'); ?>
             <span id="lky"><button title="Like" id="like_count" rel="<?php print $get_val; ?>" data-tag="sty"><i class="fa fa-thumbs-o-up"></i> <span id="<?php print $like; ?>"><?php print $like_count_like; ?></span> </button>
-              <span id="sty-dv" style="display:none">Awesome! </br> Now share the story </br> <a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a>
+              <span id="sty-dv" style="display:none">Awesome! <br/> Now share the story <br/> <a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a>
                 <a title="share on twitter" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
                 <a title="share on google+" class="user-activity" rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a>
                 <?php
@@ -266,10 +268,10 @@ if(isset($related_image_value['relatedimg_count']) && $related_image_value['rela
               <?php
               if ($config_name == 'vukkul') {
                 ?>
-                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><?php print t('comments'); ?></a></span>
+                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?><br/> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><?php print t('comments'); ?></a></span>
 
               <?php } if ($config_name == 'other') { ?>
-                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?></br> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments'); ?></a></span>
+                <span id="dsty-dv" style="display:none"><?php print t('Too bad.'); ?><br/> <?php print t("Tell us what you didn't like in the"); ?> <a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><?php print t('comments'); ?></a></span>
               <?php } ?>
 
             </span>

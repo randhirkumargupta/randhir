@@ -1,3 +1,4 @@
+
 <script type="text/javascript" src="<?php echo base_path() . 'sites/all/modules/custom/itg_image_croping/js/jquery.min.js'; ?>"></script>
 
 <script type="text/javascript" src="<?php echo base_path() . 'sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js'; ?>"></script>
@@ -99,7 +100,7 @@
 
 <?php
 drupal_add_js(drupal_get_path('module', 'itg_image_croping') . '/js/itg_crop.js', array('
-  type' => 'file', 'scope' => 'content'));
+  type' => 'file', 'scope' => 'content', 'cache' => FALSE));
 $imagedata = base64_encode(file_get_contents($data->uri));
 $url = file_create_url($data->uri);
 $image_exten = end(explode('.', $data->uri));

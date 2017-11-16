@@ -12,7 +12,12 @@
  */
 function itg_personalization_edit_profile_form($form, &$form_state) {
   global $user;
-  $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+  
+  if(!empty(variable_get('itg_front_url'))) {
+   $parse_scheme = parse_url(variable_get('itg_front_url'));
+   $scheme = $parse_scheme['scheme']."://";
+  }
+  $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   //prepare url for change mobile and email
   $edit_email_url = $edit_email_link= $edit_mobile_url = $edit_mobile_link = '';
   if (strpos($user->name, '@') != false || is_numeric($user->name)) {
@@ -230,11 +235,12 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   ),
   );
   
-  if($form_state['values']['user_state'] != '_none') {
+  /*if($form_state['values']['user_state'] != '_none') {
     $city = get_city_by_state($form_state['values']['user_state']);
   } else {
     $city = get_city_by_state($user_detail->field_personalization_state['und'][0]['tid']);
-  }
+  }*/
+  $city = get_city_by_state();
   $default_city = '';
   if (!empty($user_detail->field_personalization_city['und'][0]['tid'])) {
     $default_city = $user_detail->field_personalization_city['und'][0]['tid'];
@@ -243,8 +249,8 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   }
   $form['user_city'] = array(
     '#type' => 'select',
-    '#prefix' => '<div id="city-wrapper">',
-    '#suffix' => '</div>',
+    //'#prefix' => '<div id="city-wrapper">',
+    //'#suffix' => '</div>',
     '#default_value' => $default_city, 
     '#title' => t('City'),
     '#options' => $city,
@@ -258,6 +264,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   $form['zip_code'] = array(
     '#title' => t('Pincode'),
     '#type' => 'textfield',
+    '#maxlength' => 6,
     '#attributes' => array('placeholder' => 'E.g., 122016'),
     '#default_value' => $user_detail->field_user_pincode['und'][0]['value'],
   );

@@ -115,43 +115,21 @@ function itg_layout_manager_menu() {
     'page callback' => 'itg_state_election',
     'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_manager.inc',
   );
 
   $items['section-card-refresh'] = array(
     'page callback' => 'itg_section_card_refresh',
     //'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_layout_manager.inc',
   );
 
   return $items;
 }
 
-/**
- * This function use for make state election page
- */
-function itg_state_election() {
-  global $base_url;
-
-  $section = arg(1);
-  $state = arg(2);
-  drupal_add_js(drupal_get_path('theme', 'itg') . '/js/election_map.js', array('scope' => 'header'));
-  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
-  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
-  foreach ($terms as $values) {
-    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
-
-      $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
-      $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
-      $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
-      $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
-    }
-  }
-
-
-  make_graph();
-
-  return theme('itg_state_election', array('widget_data' => $data, 'map_data' => $urlarray));
-}
 
 function make_graph() {
   drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
@@ -606,6 +584,7 @@ function itg_layout_manager_block_view($delta = '') {
           'calendar/0/0/magazine.html' => t('Magazine'),
           'rss' => t('RSS'),
           'poll' => t('Polls'),
+          'sitemap' => t('Sitemap'),
         );
         if (function_exists('frontend_breadcrumb_display')) {
           if (arg(0) == 'calendar') {
@@ -776,7 +755,7 @@ function itg_layout_clean_url($string) {
 }
 
 /**
- * Implements hook_manager_preprocess_page().
+ * Implements itg_layout_gethomecarddata_new_pre().
  * {@inheritdoc}
  */
 function itg_layout_gethomecarddata_new_pre($sectinno) {
@@ -812,7 +791,7 @@ function itg_layout_gethomecarddata_new_pre($sectinno) {
 }
 
 /**
- * Implements hook_manager_preprocess_page().
+ * Implements itg_layout_getsectioncarddata_new_pre().
  * {@inheritdoc}
  */
 function itg_layout_getsectioncarddata_new_pre($sectinno, $section) {
@@ -852,7 +831,7 @@ function itg_layout_getsectioncarddata_new_pre($sectinno, $section) {
  * {@inheritdoc}
  */
 function itg_layout_manager_preprocess_page(&$vars) {
-  global $theme;
+  global $user, $theme;
   $arg = arg();
 
   $is_fron_page = drupal_is_front_page();
@@ -862,10 +841,16 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $template_name = 'page--front';
 
     $data = get_layout_details($section, $template_name, 'front');
+
     $data['big_story'] = get_itg_widget('big_story_format');
     $data['personlization'] = get_itg_widget('personlization');
     $data['non_personlization'] = get_itg_widget('recommended_anonymous_user');
     $vars['widget_data'] = $data;
+    if($user->uid == 0) {
+      //js for recommended_anonymous_user
+      drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('type' => 'file', 'scope' => 'footer', 'weight' => 5));
+    } 
+    drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_more_section_card.js', array('scope' => 'footer'));
   }
 
   //section template display on front
@@ -900,20 +885,4 @@ function itg_layout_manager_preprocess_page(&$vars) {
       unset($vars['page']['content']['system_main']);
     }
   }
-}
-
-/**
- * callback for section card refresh
- */
-function itg_section_card_refresh() {
-  $data = explode("_", $_REQUEST['card_val']);
-  $section_id = $data[1];
-  $widget_style = '';
-  $block_id = $data[2];
-  $data = create_setion_widgets($section_id, $widget_style, $block_id);
-  if (function_exists('itg_akamai_setting_ttl_for_section_cart')) {
-    itg_akamai_setting_ttl_for_section_cart();
-  }
-  echo $data;
-  exit;
 }

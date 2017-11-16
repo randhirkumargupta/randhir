@@ -19,14 +19,14 @@ $is_fron_page = drupal_is_front_page();
           else {
             ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
-              <img height="66" width="88" src="<?php print $base_url . "/" . drupal_get_path('theme', 'itg'); ?>/images/itg_image88x66.jpg" alt="" />
+              <img height="66" width="88" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');?>" alt="" title="" />
             </a>
           <?php } ?>
             <?php if (!empty($video_data['title'])) : ?>
             <p title="<?php echo $video_data['title']; ?>" class="title top-takes-<?php echo $video_data['nid'] ?>">
             <?php 
             if(function_exists('itg_common_get_smiley_title')) {
-              echo l(itg_common_get_smiley_title($video_data['node_obj'], 0, 130), "node/" . $video_data['nid'] , array('html' => TRUE , "attributes" => array("title" => $video_data['title']))); 
+              echo l(itg_common_get_smiley_title($video_data['node_obj'], 0, 130), "node/" . $video_data['nid'] , array('html' => TRUE , "attributes" => array("title" => _widget_title($video_data['title'])))); 
             }
             else {
               echo l(mb_strimwidth($video_data['title'], 0, 140, ".."), "node/" . $video_data['nid'] , array("attributes" => array("title" => $video_data['title']))); 

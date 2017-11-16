@@ -1,0 +1,169 @@
+<?php
+
+/**
+ * @file
+ * ITG Alexa audio module.
+ *
+ * Module for Generate alexa audio file and feed.
+ *
+ */
+
+/**
+ * Implement hook_form_alter()
+ * @param array $form
+ * @param array $form_state
+ * @param string $form_id
+ */
+function itg_alexa_audio_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'alexa_audio_clips_node_form') {
+    $curent_feed = get_last_alexa_feed();
+    if (!empty($curent_feed) && (count($curent_feed) > 0)) {
+      $fid = $curent_feed[0]['field_audio_fid'];
+      $file_obj = file_load($fid);
+      $stream_url = file_create_url($file_obj->uri);
+      $alexa_path = file_create_url("public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/it_audioclip50_time.json");
+      $google_syndication_xml = file_create_url("public://rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/it_audioclip_latest_news.xml");
+      $form['last_audio_url'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Last Uploaded Audio Url"),
+        '#default_value' => $stream_url,
+        '#weight' => 10,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+      $form['alexa_json_path'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Alexa Json Path"),
+        '#default_value' => $alexa_path,
+        '#weight' => 11,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+      $form['google_syndication_xml'] = array(
+        '#type' => 'textfield',
+        '#title' => t("Google Syndicate XML Path"),
+        '#default_value' => $google_syndication_xml,
+        '#weight' => 12,
+        '#size' => 60,
+        '#maxlength' => 256,
+        '#attributes' => array('readonly' => 'readonly'),
+      );
+    }
+
+    $form['actions']['submit']['#submit'][] = 'itg_alexa_audio_form_custom_submit';
+  }
+}
+
+/**
+ * custom submit action for alexa_audio_clips_node_form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_alexa_audio_form_custom_submit($form, &$form_state) {
+  genrate_alexa_audio_json($form_state['values']);
+}
+
+/**
+ * Function to generate JSON file for alexa
+ * @param array $value   
+ */
+function genrate_alexa_audio_json($value) {
+  $audiofid = $value['field_audio']['und'][0]['fid'];
+  $title = $value['title'];
+  $uid = $value['uid'];
+  $date = date('Y-m-d\TH:s:i', strtotime($value['field_event_start_date']['und'][0]['value']));
+  $file_obj = file_load($audiofid);
+  $stream_url = file_create_url($file_obj->uri);
+  $json = array(
+    'uid' => 'itaudiofeed' . $uid,
+    'updateDate' => $date,
+    'titleText' => $title,
+    'mainText' => "",
+    'streamUrl' => $stream_url,
+    'redirectionUrl' => FRONT_URL
+  );
+  $xml_path = 'public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/';
+  $file_path = $xml_path . 'it_audioclip50_time.json';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, json_encode($json));
+  fclose($fp);
+  itgd_genrate_xml_audioclip_latest_news($stream_url, $value['field_event_start_date']['und'][0]['value'], 'itaudiofeed' . $uid);
+}
+
+/**
+ * Function is used to get static xml
+ * @param string $stream_url
+ * @param string $date
+ * @param string $filename
+ */
+function itgd_genrate_xml_audioclip_latest_news($stream_url, $date, $filename) {
+  $date = date("D, d M Y H:s:i", strtotime($date));
+  $c_date = date("Y");
+  $xml = <<<XML
+      <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<channel>
+<title>India Today News Headlines</title>
+<link>http://indiatoday.intoday.in</link>
+<language>en-US</language>
+<copyright>$c_date ITG</copyright>
+<description>
+India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
+</description>
+<itunes:subtitle>
+India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
+</itunes:subtitle>
+<itunes:author>India Today Group</itunes:author>
+<itunes:category text="News and Politics"></itunes:category>
+<itunes:summary>
+India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
+</itunes:summary>
+<itunes:explicit>clean</itunes:explicit>
+<atom:link href="https://feeds.intoday.in/rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/it_audioclip_latest_news.xml" rel="self" type="application/rss+xml"/>
+<itunes:owner>
+<itunes:name>India Today Group</itunes:name>
+<itunes:email>syndicationsteam@intoday.com</itunes:email>
+</itunes:owner>
+<image>
+<title>India Today News Headlines</title>
+<link>http://indiatoday.intoday.in</link>
+<url>
+https://smedia2.intoday.in/conclave/2017-next/images/rightLogo.png
+</url>
+</image>
+<item>
+<title>India Today News Headlines</title>
+<description>
+India Today provides the latest news on politics, entertainment, bollywood, business and sports. Stay tuned for all the breaking news from India and around the world.
+</description>
+<guid isPermaLink="false">$filename</guid>
+<enclosure length="2863763" type="audio/mpeg" url="$stream_url"></enclosure>
+<pubDate>$date GMT</pubDate>
+<itunes:duration>1:29</itunes:duration>
+</item>
+</channel>
+</rss>
+XML;
+  $xml_path = 'public://rss-feeds/ver1.0/google-assistant/a1492caf/indiatoday/audio/';
+  $file_path = $xml_path . 'it_audioclip_latest_news.xml';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
+}
+
+/**
+ * Function is for to get latest insert alexa clip
+ * @return array $result
+ */
+function get_last_alexa_feed() {
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_audio', 'fu', 'fu.entity_id=n.nid');
+  $query->fields('n', array('nid', 'title', 'created'));
+  $query->fields('fu', array('field_audio_fid'));
+  $query->condition('n.status', 1);
+  $query->condition('n.type', "alexa_audio_clips", '=');
+  $query->orderBy('n.created', 'DESC')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}

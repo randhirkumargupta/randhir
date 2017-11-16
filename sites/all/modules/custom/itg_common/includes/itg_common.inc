@@ -28,6 +28,52 @@ function itg_common_dropdown_supplement($id = '') {
 }
 
 /**
+ * Impelements form for configuration.
+ * {@inheritdoc}
+ */
+function itg_common_varnish_aws_setting_form($form) {
+  $form['varnish_aws_access_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Access Key'),
+    '#default_value' => variable_get('varnish_aws_access_key', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_aws_secret_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Secret Key'),
+    '#default_value' => variable_get('varnish_aws_secret_key', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_aws_region'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Region'),
+    '#default_value' => variable_get('varnish_aws_region', ''),
+    '#required' => TRUE,
+  );
+  $form['varnish_DNSName'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish DNS'),
+    '#default_value' => variable_get('varnish_DNSName', ''),
+    '#required' => TRUE,
+  );
+   $form['varnish_aws_target_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Varnish AWS Target ARN'),
+    '#default_value' => variable_get('varnish_aws_target_id', ''),
+    '#required' => TRUE,
+  );
+   $form['varnish_aws_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Varnish AWS Type'),
+    '#default_value' => variable_get('varnish_aws_type', ''),
+     '#options' => array('target'=>t('Target Groups'),'LB'=> t('Load Balancer')),
+    '#required' => TRUE,
+  );
+  return system_settings_form($form);
+}
+
+
+/**
  * Helper function to populate the second dropdown.
  * @param string $id
  * @return array $data
@@ -427,12 +473,16 @@ function itg_common_get_story_status($nid) {
  * @param int $entity_id
  */
 function itg_get_related_story_content($entity_id) {
-  if (function_exists('apachesolr_get_solr')) {
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if (function_exists('apachesolr_get_solr') && $ping) {
     $solr = apachesolr_get_solr();
-    $query = apachesolr_drupal_query("custom" , array('q' => "entity_id:$entity_id"));
-    $query->addParam('rows' , '4'); // How many rows of result to display default it is 10.
-    $query->addParam('qf' , 'entity_id'); // Only search in id
-    $query->addParam('bs_status' , 'true'); // Only search in title
+    //pr($solr);
+    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id"));
+    $query->addParam('rows', '4'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'entity_id'); // Only search in id
+    $query->addParam('bs_status', 'true'); // Only search in title
     $resp_search = $query->search();
     return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
   }

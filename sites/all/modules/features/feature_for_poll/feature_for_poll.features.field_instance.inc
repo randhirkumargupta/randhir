@@ -714,7 +714,7 @@ function feature_for_poll_field_default_field_instances() {
       ),
     ),
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Poll Type',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1086,7 +1086,7 @@ function feature_for_poll_field_default_field_instances() {
     'bundle' => 'poll',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Story url',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1109,6 +1109,11 @@ function feature_for_poll_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'exclude_cv' => FALSE,
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
       'text_processing' => 0,
       'user_register_form' => FALSE,
     ),

@@ -50,6 +50,10 @@ body {
     color: #333;
 }
 
+main {
+    display: block;
+}
+
 h1,
 h2,
 h3,
@@ -1716,8 +1720,11 @@ footer {
             display: none;
         }
         iframe {
-            width: 100%;
-            height: 45vh;
+            /*width: 100%;
+            height: 45vh;*/
+            .jwplayer {
+                position: inherit;
+            }
         }
         i {
             position: absolute;
@@ -1958,6 +1965,10 @@ footer {
         100%);
         border-top: 1px solid $border-color;
         padding: 12px 0 12px 12px;
+    }
+    img {
+        width: 100%;
+        max-height: 208px;
     }
 }
 
@@ -2210,6 +2221,12 @@ footer {
             display: block;
             span {
                 color: $red-color;
+            }
+            h1 {
+                font-size: 19px;
+                font-weight: 500;
+                color: #bb0a0a;
+                display: inline-block;
             }
         }
         .search-menu {
@@ -2588,7 +2605,7 @@ footer {
             .saved-photogallery {
                 background: #fff none repeat scroll 0 0;
                 box-shadow: 0 0 8px #666;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 font-size: 22px;
                 font-weight: 700;
                 height: 160px;
@@ -2712,7 +2729,7 @@ footer {
                     a {
                         color: #404040;
                         font-size: 11px;
-                        font-family: roboto;
+                        font-family: $itg-roboto;
                         position: relative;
                         &:before {
                             content: '';
@@ -2839,18 +2856,19 @@ footer {
                         background-color: #222;
                         color: #a1a1a1;
                         font-size: 13px;
-                        font-family: Roboto;
+                        font-family: $itg-roboto;
                     }
                 }
                 .photo-description {
                     padding: 10px 0;
                     border-bottom: 1px solid #ddd;
-                    font-family: Roboto;
+                    font-family: $itg-roboto;
                     font-size: 13px;
                     color: #8d8d8d;
                     font-weight: 300;
                     +.description {
                         margin-top: 0;
+                        padding-top: 0;
                     }
                 }
             }
@@ -3045,7 +3063,7 @@ footer {
         text-align: center;
         padding: 15px 0;
         color: #929292;
-        font-family: roboto;
+        font-family: $itg-roboto;
         font-size: 16px;
         font-weight: 700;
         #name-dv {
@@ -3260,7 +3278,7 @@ footer {
         }
     }
     .story-tech-chunk {
-        padding-right: 100px;
+        /* padding-right: 100px; remove buy ITG arun*/
         .tech-rating {
             width: 88px;
             height: 33px;
@@ -4563,7 +4581,7 @@ h1.category-heading {
             font-size: 14px;
             margin-top: 10px;
             height: 22px;
-            font-family: Roboto;
+            font-family: $itg-roboto;
             font-weight: 600;
         }
         .error {
@@ -4580,7 +4598,7 @@ h1.category-heading {
         }
         label {
             color: #33363b;
-            font-family: roboto;
+            font-family: $itg-roboto;
             font-size: 14px;
             text-transform: capitalize;
         }
@@ -5093,7 +5111,7 @@ h1.category-heading {
                 margin: 0;
                 padding: 10px 5px 3px;
                 border-bottom: 3px solid transparent;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 font-weight: 500;
                 color: #969696;
                 &:hover,
@@ -5171,7 +5189,7 @@ h1.category-heading {
                             background-color: rgba(0, 0, 0, .5);
                             color: #fff;
                             font-size: 12px;
-                            font-family: Roboto;
+                            font-family: $itg-roboto;
                             .fa {
                                 font-size: 14px;
                                 margin-right: 5px;
@@ -5812,11 +5830,11 @@ h1.category-heading {
     padding: 50px 0px 20px 0px;
     font-family: $itg-roboto;
     h2 {
-        @include story-tag(22px,
-        22px);
-        font-size: 14px;
-        font-weight: normal;
-        @include display-inline;
+        background: transparent;
+        color: #000;
+        font-size: 16px;
+        padding: 0;
+        font-weight: 600;
     }
     ul {
         @include clearfix;
@@ -5879,13 +5897,13 @@ h1.category-heading {
             padding-top: 10px;
             @include pos(relative);
             .web-excl {
-                @include story-tag(22px,
-                22px);
-                @include pos(absolute,
-                10px,
-                null,
-                null,
-                10px);
+                background: transparent;
+                color: #000;
+                font-size: 16px;
+                padding: 0;
+                font-weight: 600;
+                text-transform: uppercase;
+                font-family: $itg-roboto;
             }
             h2 {
                 margin-top: 10px;
@@ -5899,8 +5917,12 @@ h1.category-heading {
             background: $white-color;
             border: 1px solid $border-color;
             .latest-issue {
-                @include story-tag(22px,
-                22px);
+                background: transparent;
+                color: #000;
+                font-size: 16px;
+                padding: 0;
+                font-weight: 600;
+                text-transform: uppercase;
             }
             .issue-title {
                 background: #9d9d9d;
@@ -6195,7 +6217,7 @@ section.sidebar {
         a {
             background: #db0e0f;
             color: #fff;
-            font-family: roboto;
+            font-family: $itg-roboto;
             text-transform: uppercase;
             padding: 10px 15px;
             border-radius: 30px 0px 0px 30px;
@@ -6404,7 +6426,7 @@ section.sidebar {
                         padding: 13px 10px;
                         font-size: 18px;
                         line-height: 24px;
-                        font-family: roboto;
+                        font-family: $itg-roboto;
                         font-weight: 500;
                     }
                 }
@@ -6526,7 +6548,7 @@ section.sidebar {
             background: #d6d6d6;
             @include display-inline;
             padding: 5px 10px;
-            font-family: roboto;
+            font-family: $itg-roboto;
             border-radius: 3px;
             margin-bottom: 50px;
         }
@@ -7454,7 +7476,7 @@ section.sidebar {
     }
     .views-row {
         @include text-align(center);
-        font-family: roboto;
+        font-family: $itg-roboto;
         color: #ef2a24;
         font-weight: 700;
         text-transform: uppercase;
@@ -7882,7 +7904,7 @@ section.sidebar {
             .views-field-field-story-new-title {
                 font-size: 11px;
                 font-weight: 700;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 color: #000;
                 margin-top: 10px;
                 text-transform: uppercase;
@@ -7908,13 +7930,13 @@ section.sidebar {
             li {
                 border-radius: 0;
                 color: #000;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 font-weight: normal;
                 padding: 15px 10px;
                 span {
                     background-color: #8d8d8d;
                     padding: 5px 10px;
-                    color: #fff;
+                    color: #888;
                     font-weight: 900;
                     font-size: 16px;
                     border-radius: 3px;
@@ -7928,6 +7950,7 @@ section.sidebar {
                     box-shadow: 1px -1px 1px #ccc;
                     span {
                         background-color: #ef3c24 !important;
+                        color: #fff;
                     }
                 }
             }
@@ -7952,6 +7975,7 @@ section.sidebar {
                     @include float(none);
                     padding-right: 0;
                     font-family: $itg-robotoslab;
+                    line-height: initial;
                     .bottom-links {
                         margin-top: 10px;
                         a {
@@ -8338,7 +8362,7 @@ section.sidebar {
             padding: 5px 10px;
             color: #fff;
             font-weight: 500;
-            font-family: roboto;
+            font-family: $itg-roboto;
             border-radius: 4px;
         }
         #field-erf-registration-fee-add-more-wrapper {
@@ -8362,7 +8386,7 @@ section.sidebar {
         /* padding: 0;
         background: transparent;
         border: none;*/
-        font-family: roboto;
+        font-family: $itg-roboto;
         font-size: 12px;
         color: #707070;
         ul {
@@ -8469,6 +8493,7 @@ section.sidebar {
         -moz-box-shadow: 0 0 5px #d4cdcd;
         -webkit-box-shadow: 0 0 5px #d4cdcd;
         box-shadow: 0 0 5px #d4cdcd;
+        margin: 2px 0;
         .section-ordering {
             h3 {
                 padding: 10px;
@@ -8541,10 +8566,14 @@ section.sidebar {
         }
     }
     .how-made-it {
+        padding: 10px;
         ul {
             @extend .list-none;
             li {
+                @include clearfix;
                 padding: 10px 0;
+                position: relative;
+                padding-bottom: 50px;
                 .dm-pic {
                     @include float(left);
                     margin-right: 15px;
@@ -8554,6 +8583,9 @@ section.sidebar {
                     .title {
                         font-weight: 700;
                         margin-bottom: 5px;
+                    }
+                    a {
+                        color: #828282;
                     }
                 }
                 +li {
@@ -8765,7 +8797,7 @@ section.sidebar {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -8899,7 +8931,7 @@ section.sidebar {
     }
     .itg-layout-225 {
         .droppable {
-            height: 225px;
+            min-height: 225px;
         }
         .widget-title {
             margin-bottom: 10px;
@@ -9238,9 +9270,9 @@ section.sidebar {
                                     background: rgba(255, 255, 255, 0.74);
                                     font-size: 20px;
                                     font-weight: 700;
-                                    white-space: nowrap;
+                                    /* white-space: nowrap;
                                     overflow: hidden;
-                                    text-overflow: ellipsis;
+                                    text-overflow: ellipsis;*/
                                     max-width: 100%;
                                     min-height: inherit;
                                     color: #000;
@@ -9554,7 +9586,8 @@ section.sidebar {
         }
         .itg-widget-parent {
             .droppable {
-                height: 160px;
+                height: auto;
+                /*160px;*/
             }
         }
         .itg-widget-child {
@@ -9785,7 +9818,7 @@ section.sidebar {
     .election-graph-5 {
         display: inline-block;
         width: 100%;
-        margin-top: -60px;
+        margin-top: -120px;
     }
     .left-side {
         .itg-415-layout {
@@ -10101,7 +10134,7 @@ section.sidebar {
         }
         table {
             font-size: 13px;
-            font-family: roboto;
+            font-family: $itg-roboto;
             th {
                 text-align: center;
                 border-bottom: 10px solid #FFF;
@@ -10160,7 +10193,7 @@ section.sidebar {
             tspan {
                 &:nth-child(1) {
                     font-weight: 900;
-                    font-family: roboto;
+                    font-family: $itg-roboto;
                     font-size: 42px;
                     color: #515151;
                 }
@@ -10216,7 +10249,7 @@ section.sidebar {
             svg {
                 >text {
                     fill: #009ef0 !important;
-                    font-family: Roboto;
+                    font-family: $itg-roboto;
                 }
             }
         }
@@ -10226,7 +10259,7 @@ section.sidebar {
             margin-top: 50px;
             table {
                 width: 100%;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 th,
                 td {
                     padding: 3px;
@@ -10273,7 +10306,7 @@ div#playerContainer {
                 font-size: 13px;
                 padding: 20px 15px;
                 display: block;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 position: relative;
                 border-bottom: 1px solid #1a1a1a;
                 i {
@@ -10450,7 +10483,7 @@ div#playerContainer {
         .vertical-menu {
             max-width: 58px;
             span {
-                font-family: roboto;
+                font-family: $itg-roboto;
                 font-weight: 600;
                 text-transform: uppercase;
                 padding: 5px 5px;
@@ -10641,7 +10674,7 @@ h1.about-us-heading {
     .or-share-detail {
         text-align: center;
         font-size: 16px;
-        font-family: roboto;
+        font-family: $itg-roboto;
         color: #777777;
         margin: 25px 0;
     }
@@ -10749,7 +10782,7 @@ h1.about-us-heading {
     .view-header {
         font-size: 30px;
         color: #fff;
-        font-family: roboto;
+        font-family: $itg-roboto;
         background: #353535;
         font-weight: 700;
         height: 50px;
@@ -10911,7 +10944,7 @@ h1.about-us-heading {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -10967,7 +11000,7 @@ h1.about-us-heading {
                 font-size: 12px;
                 color: #6b6b6b;
                 text-transform: uppercase;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 font-weight: 600;
             }
         }
@@ -11230,7 +11263,7 @@ h1.about-us-heading {
 
 [id*="block-itg-ask-expert-custom-ask-expert-form-block"],
 .ask-question-sidebar {
-    font-family: roboto;
+    font-family: $itg-roboto;
     border-bottom: 1px solid #ddd;
     @include sidebar-heading;
     ul {
@@ -11348,7 +11381,7 @@ h1.about-us-heading {
             display: inline-block;
             color: #fff;
             text-align: center;
-            font-family: roboto;
+            font-family: $itg-roboto;
             margin-right: 10px;
             position: absolute;
             top: 20px;
@@ -11464,7 +11497,7 @@ h1.about-us-heading {
             color: #fff;
             margin: 0 -15px;
             border-bottom: 5px solid #fff;
-            font-family: roboto;
+            font-family: $itg-roboto;
         }
     }
     .col-list-1 {
@@ -11793,7 +11826,7 @@ h1.about-us-heading {
 
 .breakingnew-home {
     margin-bottom: 30px;
-    font-family: roboto;
+    font-family: $itg-roboto;
     @include clearfix;
     @include pos(relative);
     .title {
@@ -12042,7 +12075,7 @@ h1.about-us-heading {
                 background-color: rgba(0, 0, 0, 0.5);
                 color: #fff;
                 font-size: 12px;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 i {
                     font-size: 14px;
                 }
@@ -12293,14 +12326,22 @@ span.smilies-title {
     position: relative;
     z-index: 9998;
     color: #a1a1a1;
-    font-family: roboto;
+    font-family: $itg-roboto;
     padding-top: 15px;
     a {
         color: #a1a1a1;
-        font-family: roboto;
+        font-family: $itg-roboto;
         &:hover {
             text-decoration: underline;
         }
+    }
+    h1 {
+        color: #a1a1a1;
+        font-size: 14px;
+        line-height: inherit;
+        font-weight: normal;
+        display: inline-block;
+        font-family: $itg-roboto;
     }
     .container {
         div.lft {
@@ -12361,7 +12402,7 @@ span.smilies-title {
     text-transform: capitalize;
     font-size: 18px;
     border-radius: 3px;
-    font-family: roboto;
+    font-family: $itg-roboto;
     pointer-events: auto;
 }
 
@@ -12491,7 +12532,7 @@ span.smilies-title {
                 display: inline-block;
                 color: #fff;
                 text-align: center;
-                font-family: roboto;
+                font-family: $itg-roboto;
                 margin-right: 10px;
                 position: absolute;
                 top: 20px;
@@ -13471,7 +13512,7 @@ span.close_btt {
         padding: 10px 0 10px 45px;
         font-size: 16px;
         font-weight: 300;
-        font-family: Roboto;
+        font-family: $itg-roboto;
         color: #aaa;
         margin: 28px 0;
         .fa {
@@ -13513,7 +13554,7 @@ span.close_btt {
             width: 220px;
             a {
                 color: #ddd;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 font-size: 12px;
                 &:hover {
                     text-decoration: underline;
@@ -13526,7 +13567,7 @@ span.close_btt {
         margin: 20px 0 0;
         border-top: 1px solid #666;
         color: #666;
-        font-family: Roboto;
+        font-family: $itg-roboto;
         font-size: 12px;
         text-align: center;
     }
@@ -13592,7 +13633,7 @@ span.close_btt {
             a {
                 font-size: 16px;
                 line-height: 28px;
-                font-family: Roboto;
+                font-family: $itg-roboto;
                 font-weight: 500;
                 color: #666;
                 padding-left: 30px;
@@ -13749,8 +13790,8 @@ span.see-picture {
     color: #086DC7;
 }
 
-.featured_photo_carousel .data-holder {
-    height: calc(100% - 22px);
+.widget-wrapper.featured_photo_carousel .data-holder {
+    height: calc(100% - 27px);
 }
 
 .top_stories_ordering,
@@ -13776,10 +13817,13 @@ span.see-picture {
     .view-front-end-global-search .view-content .itg-search-list>.search-detail,
     .view-front-end-global-search .view-content .itg-search-list>.social-share {
         overflow: initial;
-        padding-left: 154px;
+        padding-left: 0px;
     }
     .view-front-end-global-search .view-content .itg-search-list>.views-field {
         padding-left: 154px;
+    }
+    .view-front-end-global-search .view-content .search-pic {
+        float: left;
     }
 }
 
@@ -13866,16 +13910,17 @@ span.see-picture {
     width: 100%
 }
 
-body.page-taxonomy-term #main .row {
+
+/*body.page-taxonomy-term #main .row {
     overflow: inherit !important;
-}
+}*/
 
 .sponsor-header {
     float: right;
     margin-top: -45px;
     color: #83b1cb;
     text-transform: uppercase;
-    font-family: roboto;
+    font-family: $itg-roboto;
     font-size: 12px;
     position: relative;
     z-index: 9999;
@@ -13898,7 +13943,7 @@ body.page-taxonomy-term #main .row {
 
 .story-sponsor-powered-text {
     color: #83b1cb;
-    font-family: roboto;
+    font-family: $itg-roboto;
     font-size: 14px;
 }
 
@@ -13909,7 +13954,7 @@ span.story-sponsor-powered-text::last-word {
 
 .story-sponsor-impact {
     color: #83b1cb;
-    font-family: roboto;
+    font-family: $itg-roboto;
     font-size: 12px;
     text-transform: uppercase;
     font-weight: bold;
@@ -14118,6 +14163,7 @@ span.story-sponsor-powered-text::last-word {
     padding-bottom: 7px;
     display: block;
     text-transform: uppercase;
+    display: inline-block;
 }
 
 .byline a[title='Unfollow'],
@@ -14526,8 +14572,311 @@ ul.pron-cons-img li img {
     z-index: 9999 !important;
 }
 
-.cheaper_dearer {
+
+/*.cheaper_dearer {
     .budget-predictor-img {
         max-height: 130px;
     }
+}*/
+
+
+/* css add by arun/itg */
+
+.other_photogallery_category h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #bb0a0a;
+    position: relative;
+}
+
+.other_photogallery_category h3 span {
+    padding-top: 0;
+    padding-left: 0;
+    background: #fff;
+    z-index: 1;
+    position: relative;
+    padding: 45px 20px 10px 0px;
+    display: inline-block;
+}
+
+.other_photogallery_category h3:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 20px;
+    height: 5px;
+    margin-top: -2px;
+    background: #ddd;
+}
+
+#block-itg-photogallery-photogallery-link-menu-block ul {
+    list-style: none;
+    white-space: nowrap;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #d9d9d9;
+    overflow: auto;
+}
+
+#block-itg-photogallery-photogallery-link-menu-block ul li {
+    display: inline-block;
+    vertical-align: top;
+    border-right: 0;
+    text-transform: uppercase;
+    padding-right: 30px;
+}
+
+#block-itg-photogallery-photogallery-link-menu-block ul li a {
+    display: block;
+    margin: 0;
+    padding: 10px 5px 3px;
+    border-bottom: 3px solid transparent;
+    font-family: $itg-roboto;
+    font-weight: 500;
+    color: #969696;
+}
+
+#block-itg-photogallery-photogallery-link-menu-block {
+    margin-top: 22px;
+}
+
+.other_video_category h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #bb0a0a;
+    position: relative;
+}
+
+.other_video_category h3 span {
+    padding-top: 0;
+    padding-left: 0;
+    background: #fff;
+    z-index: 1;
+    position: relative;
+    padding: 45px 20px 10px 0px;
+    display: inline-block;
+}
+
+.other_video_category h3:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 20px;
+    height: 5px;
+    margin-top: -2px;
+    background: #ddd;
+}
+
+#block-itg-videogallery-itg-videogallery-menu-content ul {
+    list-style: none;
+    white-space: nowrap;
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #d9d9d9;
+    overflow: auto;
+}
+
+#block-itg-videogallery-itg-videogallery-menu-content ul li {
+    display: inline-block;
+    vertical-align: top;
+    border-right: 0;
+    text-transform: uppercase;
+    padding-right: 30px;
+}
+
+#block-itg-videogallery-itg-videogallery-menu-content ul li a {
+    display: block;
+    margin: 0;
+    padding: 10px 5px 3px;
+    border-bottom: 3px solid transparent;
+    font-family: $itg-roboto;
+    font-weight: 500;
+    color: #969696;
+}
+
+#block-itg-videogallery-itg-videogallery-menu-content {
+    margin-top: 22px;
+    /*float: left;*/
+    width: 100%;
+    margin-bottom: 22px;
+}
+
+#block-itg-videogallery-itg-other-videogallery-section .photo-list img {
+    width: 170px;
+    height: 127px;
+}
+
+.video-header-right .video_header_tabs .tab-data-2 h3 {
+    display: none;
+}
+
+.video-header-right .trending-videos {
+    border: 0px;
+}
+
+#related-video-tab ul li.related_content_tab .pic,
+.video-header-right .trending-videos li.trending-videos-list .pic {
+    width: 170px;
+    float: right;
+    margin-left: 5px;
+    position: relative;
+}
+
+#related-video-tab ul li,
+.video_header_tabs .trending-videos li {
+    padding: 15px 24px 15px 0px;
+    border-bottom: 1px solid #aaa9a9;
+    overflow: hidden;
+}
+
+#related-video-tab ul li.related_content_tab .title,
+.video-header-right .trending-videos li.trending-videos-list p {
+    display: block;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 14px;
+    font-size: 0.875rem;
+    line-height: 19px;
+    color: #aaa9a9;
+}
+
+#related-video-tab ul li.related_content_tab .title a,
+.video_header_tabs .trending-videos li.trending-videos-list p a {
+    color: #aaa9a9;
+}
+
+.latest_video .tab-buttons {
+    background: #000;
+    border-radius: 0;
+    padding: 5px 0 0 5px;
+}
+
+.latest_video .tab-buttons.tab-buttons span {
+    border: 0px;
+    background: none;
+    width: auto;
+    padding: 5px 10px;
+    height: 26px;
+    line-height: 18px;
+    font-weight: 500;
+    font-size: 12px;
+    color: #fff;
+    font-size: 12px;
+    width: auto;
+    border-radius: 0;
+}
+
+.latest_video .tab-buttons.tab-buttons span a {
+    color: #fff;
+}
+
+.latest_video .tab-buttons span.active {
+    border: 0px;
+    background: #363636;
+    color: #fff;
+    height: 26px;
+    line-height: 18px;
+    font-size: 12px;
+    width: auto;
+    border-radius: 0;
+}
+
+.video-header-right .related_content_tab span.videolengh {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    padding: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 12px;
+    font-family: $itg-roboto;
+}
+
+.video-landing-header .upload-date span {
+    font-size: 12px;
+    font-weight: 600;
+    margin: 10px 0;
+    display: block;
+}
+
+.video-landing-header .top-section p {
+    margin-bottom: 10px
+}
+
+.latest_video.video_header_tabs .tab-data-1 {
+    height: 475px;
+    overflow-y: auto;
+}
+
+.latest_video.video_header_tabs .tab-data-2 {
+    height: 475px;
+    overflow-y: auto;
+}
+
+.video_header_tabs #related-video-tab ul li.related_content_tabs .related-default {
+    width: 170px;
+    height: 127px;
+}
+
+.video_header_tabs .trending-videos li.trending-videos-list img {
+    width: 170px;
+    height: 127px;
+}
+
+#block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs .title a {
+    color: #aaa9a9;
+}
+
+#block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figure a {
+    position: relative;
+    float: right;
+}
+
+#block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figcaption {
+    bottom: 11px;
+    left: 0;
+    position: absolute;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 12px;
+    font-family: $itg-roboto;
+}
+
+#modal-content #reporter-node-form .vertical-tabs {
+    display: none;
+}
+
+.add-byline-link.ctools-use-modal {
+    position: absolute;
+    right: 70px;
+    top: 4px;
+}
+
+
+/* css end by arun/itg */
+
+
+/*css start added by rajveer singh gangwar */
+
+.page-itg-not-found h1.page__title {
+    display: none
+}
+
+
+/*css end added by rajveer singh gangwar */
+
+.itg-mosimage {
+    float: left;
+    margin-right: 20px;
+    margin-top: 6px;
+}
+
+.budget-page-layout [id*="twitter-widget"] {
+    margin: 0 auto;
+    display: inherit;
 }

@@ -63,8 +63,6 @@
           var smi_twitter = $('input[name="itg_smi[twitter]"]').is(':checked');
           // Validate video condition.
           if (twitter_condition == 1 && value == 0 && smi_twitter) {
-            console.log('video case');
-            console.log('video fid: ' + value);
             return false;
           }
           else {

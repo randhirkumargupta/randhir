@@ -152,13 +152,15 @@ function itg_get_followers($nid) {
  */
 function itg_story_follow_unfollow_print($nid, $ntype, $activity, $t_name) {
   global $user, $base_url;
-  if ($user->uid > 0) {
-    $follow_status = itg_get_front_activity_info($nid, $ntype, $user->uid, $activity, '');
-    if($t_name) {
-      $tag_label = '<span class="tag-follow"><a target=\"_blank\" href=\"' . $base_url . '/topic/' . $t_name . '\"> ' . $t_name . '</a></span>';
+  $replace_tag_name = str_replace(" ","-","$t_name");
+  if($t_name) {
+      $tag_label = '<span class="tag-follow"><a target=\"_blank\" href="' . FRONT_URL . '/topic/' . $replace_tag_name . '"> ' . $t_name . '</a></span>';
     } else {
       $tag_label = '';
     }
+    
+  if ($user->uid > 0) {
+    $follow_status = itg_get_front_activity_info($nid, $ntype, $user->uid, $activity, '');
     if (!empty($follow_status['nid']) && $follow_status['status'] == '1') {
       $html = "<li class=\"author\"><a title='Unfollow' href='javascript:' id='follow-anchor".$nid."' data-rel='".$nid."' data-tag=\"$ntype\" data-activity=\"$activity\" data-ftitle='Follow' data-untitle='Unfollow' data-status='0' class='follow-activity'>Unfollow</a>".$tag_label."</li>";
     }
@@ -173,7 +175,7 @@ function itg_story_follow_unfollow_print($nid, $ntype, $activity, $t_name) {
     // prepare url for sharing
     $uri = base64_encode($actual_link);
     $sso_url = PARENT_SSO . '/saml_login/other/' . $uri;
-    $html = "<li class=\"author mhide\"><a title='follow' href='".$sso_url."'>Follow</a>".$t_name."</li>";
+    $html = "<li class=\"author mhide\"><a title='follow' href='".$sso_url."'>Follow</a>".$tag_label."</li>";
   }
   print $html;
 }
@@ -202,8 +204,8 @@ function itg_follow_unfollow_print($nid) {
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     // prepare url for sharing
     $uri = base64_encode($actual_link);
-    $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
-    $html = "<li class='follow-activity-anchor'><a title='follow' href='".$sso_url."'>".t('Follow')."</a></li>";
+    $sso_url = PARENT_SSO . '/saml_login/other/' . $uri;
+    $html = "<li class='follow-activity-anchor'><a title='Follow' href='".$sso_url."'>".t('Follow')."</a></li>";
   }
   print $html;
 }

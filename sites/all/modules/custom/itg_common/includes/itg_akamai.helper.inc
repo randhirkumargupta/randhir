@@ -14,9 +14,9 @@ function itg_akamai_load_my_account() {
     }
     else {
       $file = $base_url . '/sites/all/themes/itg/images/default-user.png';
-      $user_pic = "<img src='" . $file . "'width='30' height='30' alt='user-image' />";
+      $user_pic = "<img src='" . $file . "'width='30' height='30' alt='user-image' title='user-image' />";
     }
-    print '<a href="' . $base_url . '/personalization/edit-profile/general-settings" class="user-icon">' . $user_pic . '</a>';
+    print '<a href="' . $base_url . '/personalization/edit-profile/general-settings" class="user-icon loginicon">' . $user_pic . '</a>';
     print '<ul class="menu">
       <li class="menu__item is-leaf first leaf"><a href="' . $base_url . '/personalization/saved-items" class="menu__link itg-akamai-processed">Personalization</a></li>
       <li class="menu__item is-leaf last leaf" id="myhref"><a href="javascript:void(0)" id="myhref" class="menu__link itg-akamai-processed">Log Out</a></li>

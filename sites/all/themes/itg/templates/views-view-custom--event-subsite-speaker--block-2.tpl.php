@@ -5,7 +5,8 @@
      if(!empty($row['field_story_extra_large_image'])){
       print $row['field_story_extra_large_image']; 
      }else{
-       print "<img width='170' height='170'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image170x170.jpg' alt='' />";
+       //print "<img width='170' height='170' src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image170x170.jpg')) . "' alt='' title='' />";
+       print "<img width='170' height='170' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image170x170.jpg') . "' alt='' title='' />";
      }
      ?>
     <h4><?php print $row['title']; ?></h4>

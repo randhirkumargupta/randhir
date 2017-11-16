@@ -149,6 +149,27 @@ function itg_users_cms_user_dashboard() {
 }
 
 /**
+ * Page callback for the access denied page. Does a redirect to login page (Taken from r4032login.module)
+ */
+function itg_users_access_denied() {
+  global $user;
+  if ($user->uid) {
+    return MENU_ACCESS_DENIED;
+  }
+
+  // The code in drupal_get_destination() doesn't preserve any query string
+  // on 403 pages, so reproduce the part we want here.
+  $path = $_GET['destination'];
+  $query = drupal_http_build_query(drupal_get_query_parameters(NULL, array('q', 'destination')));
+  if ($query != '') {
+    $path .= '?' . $query;
+  }
+  $destination = array('destination' => $path);
+  header('Location: ' . url('user/login', array('query' => $destination, 'absolute' => TRUE)), TRUE, 302);
+  drupal_exit();
+}
+
+/**
  * Implements itg_users_block_user
  */
 

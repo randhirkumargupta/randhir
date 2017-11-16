@@ -498,7 +498,7 @@ input[type="text"] {
         font-size: 16px;
         text-align: center;
         z-index: 9;
-        display: none;
+        display: block !important;
     }
     .slide-icon.scroll-arrow-right {
         left: 0;
@@ -1605,6 +1605,9 @@ input[type="text"] {
                 position: absolute;
                 top: 6px;
                 width: 6px;
+            }
+            span.see_pic_not_found {
+                color: #d12019;
             }
             &+li {
                 margin-top: 20px;
@@ -4074,7 +4077,8 @@ div#forgot-field-heading {
     }
 }
 
-#widget-ajex-loader {
+#widget-ajex-loader,
+.profile-ajax-loader {
     background: rgba(0, 0, 0, .5);
     position: fixed;
     left: 0;
@@ -6049,7 +6053,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 
 /* Responsive CSS */
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: 767px) {
+    .featured_photo_carousel .flexslider,
+    .tech-block_5 .flexslider,
+    .auto-block_5 .flexslider {
+        max-width: 100%;
+    }
     .featured_photo_carousel .flexslider .slides li,
     .tech-block_5 .flexslider .slides li,
     .auto-block_5 .flexslider .slides li {
@@ -6327,6 +6336,12 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
                     .user-name {
                         font-size: 15px;
                         line-height: 18px;
+                    }
+                    .user-logout {
+                        a {
+                            font-family: $itg-roboto;
+                            color: #8d8d8d;
+                        }
                     }
                 }
                 .personalized-user-info {
@@ -7367,4 +7382,4 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
 }
 
 
-/*css end Mega Review || Mobile  */
+/*css end Mega Review || Mobile */

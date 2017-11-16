@@ -15,7 +15,6 @@
               if(operator == 'or' || operator == 'empty') {
                 jQuery('#edit-field-featured-value option[value=All]').attr('selected','selected');
               }
-              console.log(jQuery(this).val());
             });
         }
     }

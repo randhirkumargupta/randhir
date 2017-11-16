@@ -948,7 +948,7 @@ allowfullscreen></iframe>';
   $handler->display->display_options['fields']['field_itg_content_publish_date']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_itg_content_publish_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_itg_content_publish_date']['settings'] = array(
-    'format_type' => 'itg_publish_content',
+    'format_type' => 'video_landing_header_date',
     'fromto' => 'both',
     'multiple_number' => '',
     'multiple_from' => '',
@@ -1767,6 +1767,7 @@ print \'Status not found.\';
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['group_type'] = 'count_distinct';
   $handler->display->display_options['fields']['nid']['label'] = 'video ID';
   /* Field: Content: Author uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
@@ -2048,6 +2049,10 @@ print \'Status not found.\';
     20 => '20',
     10 => '10',
   );
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';

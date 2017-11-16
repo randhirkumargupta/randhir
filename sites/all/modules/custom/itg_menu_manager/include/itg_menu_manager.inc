@@ -83,6 +83,15 @@ function remove_from_menu_manager($tid) {
 
   if (is_numeric($tid)) {
     db_delete('itg_menu_manager')->condition('id', $tid)->execute();
+    //START Logic to clear cache
+    $block_cache = array(
+      'itg_layout_manager:header_block',
+      'itg_menu_manager:vertical_menu',
+      'itg_menu_manager:second_level_menu',
+      'itg_menu_manager:third_level_menu'
+    );
+    itg_common_cache_clear($block_cache);
+    //END Logic to clear cache
   }
   drupal_goto($_SERVER['HTTP_REFERER']);
 }

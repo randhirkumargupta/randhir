@@ -61,6 +61,7 @@ $argum = base64_encode(arg(1));
                         </div>
                     </div>
                 </li>
+                <div class = "photo-refresh-top">
                 <?php global $user; ?>
                 <?php
                 if ($user->uid > 0) {
@@ -72,22 +73,26 @@ $argum = base64_encode(arg(1));
                     ?> 
                     <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
                     <?php
-                  } else {
+                  }
+                  else {
                     ?>
                     <li title = "Saved"><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                     <?php
                   }
-                } else {
+                }
+                else {
                   ?>
                   <li><a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-bookmark"></i> <span></span> </a></li>
                   <?php
                 }
                 ?>
+                </div>  
                 <?php if ($user->uid > 0): ?>
-                  <li><a class="def-cur-pointer" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
+                  <li><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                 <?php else: ?>
                   <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                 <?php endif; ?>
+               <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   
             </ul>
         </div>
     </div>
@@ -100,7 +105,15 @@ $argum = base64_encode(arg(1));
                   <figure class="photo-landing-slider-pic" data-img-fid=" <?php print $row['fid']; ?>">
 
 
-                      <?php print $row['field_images']; ?>                    
+                      <?php
+                      if (!empty($row['field_images'])) {
+
+                        print $row['field_images'];
+                      }
+                      else {
+                        print '<img height="448" width="650" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg').'" alt="" title="" />';
+                      }
+                      ?>                    
                   </figure>
               </li>
             <?php endforeach; ?>
@@ -112,8 +125,9 @@ $argum = base64_encode(arg(1));
                       <?php
                       if (!empty($row['field_photo_small_image'])) {
                         print $row['field_photo_small_image'];
-                      } else {
-                        print '<img  height="66" width="88" src="' . $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" alt="" />';
+                      }
+                      else {
+                        print '<img  src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg').'" alt="" title="" />';
                       }
                       ?>
                   </li>
@@ -125,7 +139,8 @@ $argum = base64_encode(arg(1));
               <?php if (!empty($row['field_photo_byline'])) { ?>
                 <p class="photo-by"><?php print t('PHOTO:'); ?> <?php print $row['field_photo_byline']; ?></p>
                 <?php
-              } elseif (!empty($row['field_photo_by'])) {
+              }
+              elseif (!empty($row['field_photo_by'])) {
                 ?>
                 <p class="photo-by"><?php print t('PHOTO:'); ?> <?php print $row['field_photo_by']; ?></p>
               <?php } ?>
@@ -183,14 +198,14 @@ $argum = base64_encode(arg(1));
                       $config_name = trim($last_record[0]->config_name);
                     }
                     // If comment box is checked then only comment icon will come otherwise it will not come.
-                if ($comment_flag) {
-                    if ($config_name == 'vukkul') {
-                      ?>
-                      <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
-                    <?php } if ($config_name == 'other') { ?> 
-                      <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                    if ($comment_flag) {
+                      if ($config_name == 'vukkul') {
+                        ?>
+                        <li><a onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
+                      <?php } if ($config_name == 'other') { ?> 
+                        <li><a onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
+                      <?php } ?>
                     <?php } ?>
-                <?php } ?>
                     <li class="show-embed-code-link">
                         <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                         <div class="show-embed-code-div">
@@ -200,32 +215,36 @@ $argum = base64_encode(arg(1));
                         </div>
                     </li>
                     <?php if ($user->uid > 0): ?>
-                      <li class="mhide"><a class="def-cur-pointer" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
+                      <li class="mhide"><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                     <?php else: ?>
                       <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                     <?php endif; ?>
+                    <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   
+                    <div class = "photo-refresh-bottom">
                     <?php global $user; ?>
                     <?php
                     if ($user->uid > 0) {
                       if (function_exists(itg_get_front_activity_info)) {
                         $opt = itg_get_front_activity_info($photo_node->nid, $photo_node->type, $user->uid, 'read_later', $status = '');
                       }
-
                       if (empty($opt['status']) || $opt['status'] == 0) {
                         ?> 
                         <li class="later" title = "Saved"><a title = "Save" href="javascript:void(0)" class="user-activity" data-rel="<?php print $photo_node->nid; ?>" data-tag="<?php print $photo_node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a></li>
                         <?php
-                      } else {
+                      }
+                      else {
                         ?>
                         <li title = "Saved"><a title = "Save" href="javascript:" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a></li>
                         <?php
                       }
-                    } else {
+                    }
+                    else {
                       ?>
                       <li><a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click"><i class="fa fa-bookmark"></i> <span></span> </a></li>
                       <?php
                     }
                     ?>
+                      </div>      
                 </ul>
             </div>
 
@@ -254,7 +273,7 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
           fade: false,
           asNavFor: '.slick-thumbs-slider, .counterslide, .photo-by-slider',
           // For active slide
-          initialSlide: <?php echo $initial_slide; ?>,
+          initialSlide: <?php echo --$initial_slide; ?>,
       });
       jQuery('.slick-thumbs-slider').slick({
           slidesToShow: 7,
@@ -308,17 +327,46 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
       });
 // Photogallery slider javascript
       jQuery(document).ready(function () {
+        var query_val = get_photo_url_query('photo' , window.location);
+          if(query_val != null) {
+              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+              ChangeUrl("page", real_node_url +"/"+query_val);
+          }
           jQuery(".slick-arrow , li.slick-slide").on("click", function () {
               var active_slide = jQuery(".slick-active").attr("data-slick-index");
-              var current_url = window.location.href.split('?')[0];
+              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
               if (active_slide > 0) {
-                  window.history.pushState("", "", current_url + "?photo=" + active_slide);
+                  ++active_slide;
+                  //window.history.pushState(null, null, real_node_url + "/" + active_slide);
+                  ChangeUrl("page", real_node_url +"/"+active_slide);
               } else {
                   // If frist slide then put pull without query string.
-                  window.history.pushState("", "", current_url);
+                  window.history.pushState(null, null, real_node_url);
               }
           });
       });
+      
+    function ChangeUrl(page, url) {
+        if (typeof (history.pushState) != "undefined") {
+            var obj = { Page: page, Url: url };
+            history.pushState(obj, obj.Page, obj.Url);
+        } else {
+            alert("Browser does not support HTML5.");
+        }
+    }
+    
+    function get_photo_url_query(name, url) {
+        if (!url) {
+          url = window.location.href; 
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    
   });
   // Photogallery slider javascript
   // Handle Thumb for active set class

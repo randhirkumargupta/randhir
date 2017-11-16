@@ -71,7 +71,7 @@ function itg_akamai_settings() {
     '#description' => t('Akamai Client Secret'),
     '#required' => TRUE,
   );
-
+  
   $form['itg_config_fieldset']['itg_akamai_access_token'] = array(
     '#type' => 'textfield',
     '#title' => t('Akamai Access Token'),
@@ -79,13 +79,13 @@ function itg_akamai_settings() {
     '#description' => t('Akamai Access Token'),
     '#required' => TRUE,
   );
-
+   
   $nodes_list = node_type_get_types();
   $nodes_list_array = array();
   foreach ($nodes_list as $key => $value) {
     $nodes_list_array[$key] = $value->name;
   }
-
+   
   $form['itg_config_fieldset']['itg_akamai_cc_conf_list'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Select Content Type List for Akamai'),
@@ -430,7 +430,7 @@ function itg_akamai_cache_akamai_ccpurge() {
  * Ajax menu callback.
  */
 function itg_akamai_cache_akamai_ccpurge_settings($ajax, $type) {
-    return drupal_get_form('akamai_cc_frm_form');
+  return drupal_get_form('akamai_cc_frm_form');
 }
 
 /**
@@ -440,7 +440,7 @@ function akamai_cc_frm_form($form, $form_state) {
   $form = array();
   $type = arg(6);
   $form['#attributes']['class'][] = 'node-form';
-  
+
   $key = $type;
   $name = $type;
 
@@ -672,7 +672,7 @@ function itg_akamai_cache_akamai_other($form, &$form_state) {
   );
 
   $form['markup_data'] = [
-    '#markup' => t('Enter Page Name, suffix URL and TTL, you can enter 0 for no-cache.'),
+    '#markup' => t('Enter Page Name, suffix URL and TTL, you can enter 0 for no-store.'),
   ];
 
   $form['field_container'] = [
@@ -848,7 +848,7 @@ function itg_akamai_cache_akamai_other_submit($form, &$form_state) {
                 ->execute();
           }
           catch (Exception $e) {
-            die($e->getMessage());
+            watchdog('ITG Akamai TTL Error', 'Error:' . $e->getMessage());
           }
           $inserted_count++;
         }
@@ -1104,7 +1104,7 @@ function itg_akamai_cache_get_amp_cc_mapping($alias) {
     }
   }
   catch (Exception $e) {
-    
+    watchdog('ITG Akamai Mapping', 'Error:' . $e->getMessage());
   }
   return $nids;
 }

@@ -16,11 +16,19 @@ function itg_breaking_news_menu() {
   $items['cricket_live_blog_content'] = array(
     'page callback' => 'cricket_live_blog_content_callback',
     'access callback' => TRUE,
-    'type' => MENU_CALLBACK
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_breaking_news.inc',
   );
   $items['cricket_live_blog_content_db/%/%'] = array(
     'page callback' => 'get_commentary_data_db_callback',
     'page arguments' => array(1, 2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'include/itg_breaking_news.inc',
+  );
+  $items['breakingnews'] = array(
+    'title' => 'Breaking News',
+    'page callback' => 'redirect_breakingnews_to_latest_node',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK
   );
@@ -252,6 +260,21 @@ function itg_breaking_news_form_custom_callback($form, &$form_state) {
   // REDIRECTION FOR APPLY BUTTON
   if ($form_state['input']['op'] == 'Apply') {
     if ($form_state['node']->status == '1') {
+      /* Assign story to widget */
+      if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
+        $previous_story_assign = $form['#node']->field_story_assign_to_widget[LANGUAGE_NONE];
+      }
+      else {
+        $previous_story_assign = '';
+      }
+      $story_widget = $form_state['input']['field_story_assign_to_widget'][LANGUAGE_NONE];
+      // for story assign to widget
+      if (function_exists('itg_story_assign_to_widget')) {
+        if (is_array($story_widget) && count($story_widget) > 0) {
+          itg_story_assign_to_widget($form_state['values']['nid'], $story_widget, '', $previous_story_assign);
+        }
+      }
+      /* End for Assign story to widget */
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
       drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
@@ -457,104 +480,24 @@ function itg_breaking_news_views_query_alter(&$view, &$query) {
 }
 
 /**
- * Function for ajax request callback
+ * Redirect to latest node of breaking news
+ * if user hit the breakingnews url
  */
-function cricket_live_blog_content_callback() {
-  $match_id = $_POST['match_id'];
-  if (isset($match_id)) {
-    $html = get_cricket_live_blog_data($match_id);
-    print json_encode(array('status' => 'success', 'data' => $html));
-  }
-  else {
-    print json_encode(array('status' => 'error'));
-  }
-  drupal_exit();
-}
-
-/**
- * function for show Cricket data from json.
- * @param string $match_id
- * @param int $start
- * @param int $total
- * @param int $commentary_id
- * @param boolean $latest
- * @return array
- */
-function get_cricket_live_blog_data($match_id, $limit = NULL) {
-  if (!empty($match_id)) {
-    $api_base_url = 'http://feeds.intoday.in/xml_it/commentary/';
-    $match_commentary = file_get_contents($api_base_url . $match_id . '_ballbyball.json');
-
-    if ($match_commentary) {
-      $commentary = array();
-      $match_commentary = json_decode($match_commentary);
-      $innings = $match_commentary->Match->Innings;
-      if (!is_array($innings)) {
-        $innings = array($innings);
-      }
-      $innings = array_reverse($innings, TRUE);
-
-      if (!is_array($innings)) {
-        $innings = array($innings);
-      }
-      foreach ($innings as $key => $value) {
-        $nodes = array();
-        if (!empty($value->Node)) {
-          $nodes = array_reverse($value->Node);
-        }
-        foreach ($nodes as $node_key => $node_value) {
-          $commentary[] = $node_value;
-        }
-      }
-      if (!empty($limit)) {
-        $commentary = array_slice($commentary, 0, $limit);
-      }
-      return theme('cricket_live_blog_commentary', array('data' => $commentary));
-    }
+function redirect_breakingnews_to_latest_node() {
+  $latestnid = '';
+  $latestnid_query = db_select('node', 'n');
+  $latestnid_query->leftJoin('field_data_field_type', 'ft', 'ft.entity_id = n.nid');
+  $latestnid_query->fields('n', array('nid'));
+  $latestnid_query->condition('n.type', 'breaking_news');
+  $latestnid_query->condition('n.status', 1);
+  $latestnid_query->condition('ft.field_type_value', 'Breaking News');
+  $latestnid_query->condition('ft.bundle', 'breaking_news');
+  $latestnid_query->condition('ft.entity_type', 'node');
+  $latestnid_query->orderBy('n.changed', 'DESC');
+  $latestnid_query->range(0, 1);
+  $latestnid = $latestnid_query->execute()->fetchField();
+  if (is_numeric($latestnid)) {
+    drupal_goto('node/' . $latestnid);
   }
 }
 
-/**
- * Menu callback for load commentary from db
- * @param int $nid
- * @param int $page
- * 
- */
-function get_commentary_data_db_callback($nid, $page = 0) {
-  $data = get_commentary_data_db($nid, $page);
-  if ($data) {
-    print json_encode(array('status' => 'success', 'data' => $data));
-  }
-  else {
-    print json_encode(array('status' => 'error'));
-  }
-  die;
-}
-
-/**
- * 
- * @param int $nid
- * @param int $page
- * @return boolean/array
- */
-function get_commentary_data_db($nid, $page) {
-  $data = FALSE;  
-    if (isset($nid) && !empty($nid)) {
-      $query = db_select('field_data_field_breaking_content_details', 'bcd');
-      $query->addField('bt', 'field_breaking_tile_value', 'Commentary');
-      $query->addExpression($page, 'innings');
-      $query->leftJoin('field_data_field_breaking_tile', 'bt', '(bt.entity_id = bcd.field_breaking_content_details_value)');
-      $query->isNotNull('bcd.field_breaking_content_details_value');
-      $query->condition('bcd.entity_id', $nid, '=');
-      $query->condition('bcd.bundle', 'breaking_news', '=');
-      $query->condition('bcd.entity_type', 'node', '=');
-      $query->condition('bt.bundle', 'field_breaking_content_details', '=');
-      $query->condition('bt.entity_type', 'field_collection_item', '=');
-      $query->range((20 * $page), 20);
-      $query_result = $query->execute()->fetchAll();
-      if (!empty($query_result) && count($query_result) > 0) {
-        return theme('cricket_live_blog_commentary', array('data' => $query_result));
-      }
-    }
-  return $data;
-}

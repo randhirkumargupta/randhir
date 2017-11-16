@@ -141,17 +141,22 @@
      <div class="bottom-movie-desc"><?php print $bottom_desc; ?></div>
     <div class="other-reviews">
         <!-- Print reviews -->
-        <?php $average_ratings = 0; ?>
-        <?php $num_of_ratings = 0; ?>
-      <!------------------------------------------------------------------------------------------------------->
+     
+        <?php
+          $average_ratings = 0;
+          $num_of_ratings = 0;
+          $our_counter = 0;
+        ?>
+      
         <?php $external_review = $internal_review = FALSE; ?>
         <?php foreach ($node->field_mega_review_review[LANGUAGE_NONE] as $field_collection):$reviews = entity_load('field_collection_item', array($field_collection['value']));    
 
          if ($reviews[$field_collection['value']]->field_story_review_type[LANGUAGE_NONE][0]['value'] != 'external') { ?>
           <div class="other-reviews-row">
-              <!-- Review Headline -->
-              
-              
+           
+              <?php if($our_counter == 0) { print '<h2>' . t('Our Reviewers') . '</h2>'; }
+                ++$our_counter;
+              ?>
               <h2><?php print l($reviews[$field_collection['value']]->field_buzz_headline[LANGUAGE_NONE][0]['value'], $reviews[$field_collection['value']]->field_mega_review_url_link[LANGUAGE_NONE][0]['value']); ?></h2>
               <div class="other-reviews-posted-on">
                   <!-- Byline reporter -->
@@ -344,9 +349,9 @@
                       if(!empty($video_node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
                       $final_image = image_style_url("anchors_landing",$video_node->field_story_medium_image[LANGUAGE_NONE][0]['uri']);
                       } else {
-                      $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg';
+                      $final_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
                       }
-                      $large_image = '<img src="' . $final_image . '" alt="image">';
+                      $large_image = '<img src="' . $final_image . '" alt="image" title="image">';
                       print l($large_image, 'node/' . $video_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
                       ?>
               <?php $video_date = format_date($video_node->created, 'custom', 'D, d M, Y'); ?>
@@ -373,9 +378,9 @@
                       if(!empty($photo_node->field_story_medium_image[LANGUAGE_NONE][0]['uri'])) {
                       $final_image = image_style_url("anchors_landing",$photo_node->field_story_medium_image[LANGUAGE_NONE][0]['uri']);
                       } else {
-                       $final_image = $base_url.'/sites/all/themes/itg/images/itg_image370x208.jpg'; 
+                       $final_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg'); 
                       }
-                      $small_image = '<img src="' . $final_image . '" alt="image">';
+                      $small_image = '<img src="' . $final_image . '" alt="image" title="image">';
                       $image_count = count($photo_node->field_gallery_image['und']);
                       print l($small_image, 'node/' . $photo_node->nid, array('html' => TRUE, 'attributes' => array('target' => '_blank')));
                       ?>
