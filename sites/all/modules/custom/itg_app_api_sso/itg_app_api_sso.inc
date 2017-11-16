@@ -1517,10 +1517,9 @@ function itg_rapid_api_get_personalization_saved_value_sso($tid, $uid) {
  * 	
  */
 function itg_rapid_api_update_preference_sso($token) {
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-    exit();
+    
+    return $_POST;
+
 }
 
 /**
