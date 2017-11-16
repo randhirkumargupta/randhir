@@ -70,7 +70,6 @@ function itg_alexa_audio_form_custom_submit($form, &$form_state) {
  * @param array $value   
  */
 function genrate_alexa_audio_json($value) {
-  global $base_url;
   $audiofid = $value['field_audio']['und'][0]['fid'];
   $title = $value['title'];
   $uid = $value['uid'];
@@ -83,7 +82,7 @@ function genrate_alexa_audio_json($value) {
     'titleText' => $title,
     'mainText' => "",
     'streamUrl' => $stream_url,
-    'redirectionUrl' => $base_url
+    'redirectionUrl' => FRONT_URL
   );
   $xml_path = 'public://rss-feeds/ver1.0/alexa/7fb46df8/indiatoday/audio/';
   $file_path = $xml_path . 'it_audioclip50_time.json';
