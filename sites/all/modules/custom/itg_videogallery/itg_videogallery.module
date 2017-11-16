@@ -142,6 +142,37 @@ function itg_videogallery_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
+
+   $items['itg-dfp-tags-setting'] = array (
+		   'page callback'		=>	'drupal_get_form',
+		   'title'				=>	'DFP Tags Configuration ', 
+		   'page arguments' => array('itg_videogallery_dfp_tags_setting_form'),
+       'access arguments' => array('authorized user ftp credin'),
+       'file' => 'includes/itg_videogallery.inc',
+		    'type'				=>	MENU_NORMAL_ITEM
+		   );
+   
+   $items['itg-dfp-tags-list'] = array(
+    'title' => 'DFP Tags List',
+    'description' => 'DFP Tags List',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_videogallery_dfp_tags_list'),
+    'access arguments' => array('authorized user ftp credin'),
+       'file' => 'includes/itg_videogallery.inc',
+		    'type'				=>	MENU_NORMAL_ITEM
+		   );
+
+
+  
+  $items['itg-video-watch-later-refresh/%'] = array(
+    'title' => 'videogallery watch later block refresh',
+    'description' => 'videogallery watch later block refresh',
+    'page callback' => 'itg_video_watch_later_refresh',
+    'access arguments' => array('access content'),
+    'file' => 'includes/itg_video_watch_later_refresh.helper.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   return $items;
 }
 
@@ -1775,28 +1806,33 @@ function itg_videogallery_check_video_url($vid) {
  * @param string $type
  */
 function itg_videogallery_getsolr_data() {
-  $solr = apachesolr_get_solr();
-  if (function_exists('itg_apache_solr_get_site_hash')) {
-    $hash = itg_apache_solr_get_site_hash();
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
   }
-  $all_video_ids = array();
-  $hashvalue = implode(' OR ', array_keys($hash));
-  $str = 'hash:(' . $hashvalue . ')';
-  $query = apachesolr_drupal_query("custom");
-  $query->addParam('rows', '10000'); // How many rows of result to display default it is 10.
-  $query->addParam('qf', 'label'); // Only search in title
-//The bundle which you want to search
-  $query->replaceParam("fq", '(' . $str . ')');
-  $query->addFilter("bundle", "itg_delete_solr_video");
-  $query->setSolrsort('sort_label', 'asc');
-  $resp_search = $query->search();
-  $all_data = $resp_search->response->docs;
-  if (!empty($all_data)) {
-    foreach ($all_data as $datasolr) {
-      $all_video_ids[] = $datasolr->label;
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
     }
+    $all_video_ids = array();
+    $hashvalue = implode(' OR ', array_keys($hash));
+    $str = 'hash:(' . $hashvalue . ')';
+    $query = apachesolr_drupal_query("custom");
+    $query->addParam('rows', '10000'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'label'); // Only search in title
+//The bundle which you want to search
+    $query->replaceParam("fq", '(' . $str . ')');
+    $query->addFilter("bundle", "itg_delete_solr_video");
+    $query->setSolrsort('sort_label', 'asc');
+    $resp_search = $query->search();
+    $all_data = $resp_search->response->docs;
+    if (!empty($all_data)) {
+      foreach ($all_data as $datasolr) {
+        $all_video_ids[] = $datasolr->label;
+      }
+    }
+    return array_reverse($all_video_ids);
   }
-  return array_reverse($all_video_ids);
 }
 
 /**
@@ -1805,39 +1841,44 @@ function itg_videogallery_getsolr_data() {
  * @param string $type
  */
 function itg_videogallery_getsolr_data_publish($all_property = NULL) {
-  $solr = apachesolr_get_solr();
-  if (function_exists('itg_apache_solr_get_site_hash')) {
-    $hash = itg_apache_solr_get_site_hash();
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
   }
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
+    }
 //  $all_video_ids = array();
-  $hashvalue = implode(' OR ', array_keys($hash));
-  $str = 'hash:(' . $hashvalue . ')';
-  $str_pub = 'sm_field_video_used:(0)';
-  $str = $str . ' AND ' . $str_pub;
-  $query = apachesolr_drupal_query("custom");
-  $query->addParam('rows', '100000'); // How many rows of result to display default it is 10.
-  $query->addParam('qf', 'label'); // Only search in title
-  //$query->addParam('qf', 'label');
+    $hashvalue = implode(' OR ', array_keys($hash));
+    $str = 'hash:(' . $hashvalue . ')';
+    $str_pub = 'sm_field_video_used:(0)';
+    $str = $str . ' AND ' . $str_pub;
+    $query = apachesolr_drupal_query("custom");
+    $query->addParam('rows', '100000'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'label'); // Only search in title
+    //$query->addParam('qf', 'label');
 //The bundle which you want to search
-  $query->replaceParam("fq", '(' . $str . ')');
-  $query->addFilter("bundle", "itg_solr_video");
-  $query->setSolrsort('sort_label', 'asc');
-  $resp_search = $query->search();
+    $query->replaceParam("fq", '(' . $str . ')');
+    $query->addFilter("bundle", "itg_solr_video");
+    $query->setSolrsort('sort_label', 'asc');
+    $resp_search = $query->search();
 
-  $all_data = $resp_search->response->docs;
-  if (!empty($all_data)) {
-    foreach ($all_data as $datasolr) {
-      if ($all_property == 'ALL') {
-        $all_video_ids[] = $datasolr->sm_field_video_id[0];
-      }
-      else {
-        if ($datasolr->sm_field_property[0] != VIDEO_PROPERTY) {
+    $all_data = $resp_search->response->docs;
+    if (!empty($all_data)) {
+      foreach ($all_data as $datasolr) {
+        if ($all_property == 'ALL') {
           $all_video_ids[] = $datasolr->sm_field_video_id[0];
+        }
+        else {
+          if ($datasolr->sm_field_property[0] != VIDEO_PROPERTY) {
+            $all_video_ids[] = $datasolr->sm_field_video_id[0];
+          }
         }
       }
     }
+    return $all_video_ids;
   }
-  return $all_video_ids;
 }
 
 /**
@@ -1846,35 +1887,40 @@ function itg_videogallery_getsolr_data_publish($all_property = NULL) {
  * @param string $type
  */
 function itg_videogallery_getsolr_data_unpublish() {
-  $solr = apachesolr_get_solr();
-  if (function_exists('itg_apache_solr_get_site_hash')) {
-    $hash = itg_apache_solr_get_site_hash();
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
   }
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
+    }
 //  $all_video_ids = array();
-  $hashvalue = implode(' OR ', array_keys($hash));
-  $str = 'hash:(' . $hashvalue . ')';
-  $str_pub = 'sm_field_video_used:(0)';
-  $str = $str . ' AND ' . $str_pub;
-  $query = apachesolr_drupal_query("custom");
-  $query->addParam('rows', '100000'); // How many rows of result to display default it is 10.
-  $query->addParam('qf', 'label'); // Only search in title
-  //$query->addParam('qf', 'label');
+    $hashvalue = implode(' OR ', array_keys($hash));
+    $str = 'hash:(' . $hashvalue . ')';
+    $str_pub = 'sm_field_video_used:(0)';
+    $str = $str . ' AND ' . $str_pub;
+    $query = apachesolr_drupal_query("custom");
+    $query->addParam('rows', '100000'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'label'); // Only search in title
+    //$query->addParam('qf', 'label');
 //The bundle which you want to search
-  $query->replaceParam("fq", '(' . $str . ')');
-  $query->addFilter("bundle", "itg_solr_video");
-  $query->setSolrsort('sort_label', 'asc');
-  $resp_search = $query->search();
+    $query->replaceParam("fq", '(' . $str . ')');
+    $query->addFilter("bundle", "itg_solr_video");
+    $query->setSolrsort('sort_label', 'asc');
+    $resp_search = $query->search();
 
-  $all_data = $resp_search->response->docs;
-  if (!empty($all_data)) {
-    foreach ($all_data as $datasolr) {
-      $all_video_ids['unpubliash_video_id'][] = $datasolr->sm_field_video_id[0];
-      if ($datasolr->sm_field_is_replace[0] == 1) {
-        $all_video_ids['replace_video'][] = $datasolr->sm_field_video_id[0];
+    $all_data = $resp_search->response->docs;
+    if (!empty($all_data)) {
+      foreach ($all_data as $datasolr) {
+        $all_video_ids['unpubliash_video_id'][] = $datasolr->sm_field_video_id[0];
+        if ($datasolr->sm_field_is_replace[0] == 1) {
+          $all_video_ids['replace_video'][] = $datasolr->sm_field_video_id[0];
+        }
       }
     }
+    return $all_video_ids;
   }
-  return $all_video_ids;
 }
 
 /**
@@ -2688,27 +2734,31 @@ function itg_videogallery_internal_video_play() {
  * @param string $video_id
  */
 function itg_videogallery_getsolr_data_for_internal_video($video_id) {
-  $solr = apachesolr_get_solr();
-  if (function_exists('itg_apache_solr_get_site_hash')) {
-    $hash = itg_apache_solr_get_site_hash();
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
   }
-  $all_video_ids = array();
-  $hashvalue = implode(' OR ', array_keys($hash));
-  $str = 'hash:(' . $hashvalue . ')';
-  $query = apachesolr_drupal_query("custom");
-  $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
-  $query->addParam('qf', 'sm_field_video_id'); // Only search in title
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    $all_video_ids = array();
+    $hashvalue = implode(' OR ', array_keys($hash));
+    $str = 'hash:(' . $hashvalue . ')';
+    $query = apachesolr_drupal_query("custom");
+    $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'sm_field_video_id'); // Only search in title
 //The bundle which you want to search
-  $query->replaceParam("fq", '(' . $str . ')');
-  $query->addFilter("bundle", "itg_solr_video");
-   $query->addFilter("sm_field_video_id", $video_id);
-  $query->setSolrsort('sort_label', 'desc');
-  $resp_search = $query->search();
-  $all_data = $resp_search->response->docs;
-  if (!empty($all_data)) {
+    $query->replaceParam("fq", '(' . $str . ')');
+    $query->addFilter("bundle", "itg_solr_video");
+    $query->addFilter("sm_field_video_id", $video_id);
+    $query->setSolrsort('sort_label', 'desc');
+    $resp_search = $query->search();
+    $all_data = $resp_search->response->docs;
+    if (!empty($all_data)) {
       return $all_data[0]->sm_field_all_xml_content;
+    }
   }
-
 }
 
 /**
@@ -2717,8 +2767,9 @@ function itg_videogallery_getsolr_data_for_internal_video($video_id) {
 function itg_videogallery_getvideoplayer_migrated() {
   $image= $_GET['video_image'];
   $video_url = $_GET['video_url'];
+  $getvideousedon = $_GET['getvideousedon'];
   $nid = $_GET['nid'];
-   print theme('migrated_video_player', array("url" =>$video_url, 'nid' => $nid, 'image' => $image));
+   print theme('migrated_video_player', array("url" =>$video_url, 'nid' => $nid, 'image' => $image, 'used_on'=>$getvideousedon));
 }
 
 
@@ -2727,10 +2778,12 @@ function itg_videogallery_getvideoplayer_migrated() {
  */
 function itg_videogallery_getvideoplayer() {
   $fid= $_GET['fid'];
+  $getvideousedon= $_GET['getvideousedon'];
   $tabindex = $_GET['tabindex'];
+  $video_title = $_GET['video_title'];
   $video_data = itg_videogallery_get_video_info_by_fid($fid);
   if($video_data[0]->video_repo_type == 'INTERNAL') {
-    print theme('internal_video_player' , array("data" => $fid)); 
+   print theme('internal_video_player' , array("data" => $fid , 'used_on' =>$getvideousedon,'title' => $video_title)); 
   }else {
   print theme('itg_videogallery_getvideoplayer' , array('video_data' => $video_data , 'tabindex' => $tabindex));
   }
@@ -4085,6 +4138,19 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
 */
 
 /**
+ *Implement hook_node_view().
+ * {@inheritdoc}
+ */
+function itg_videogallery_node_view($node, $view_mode, $langcode) {
+  if ($node->type == 'videogallery' && !empty(variable_get('photo_block_refresh'))) {
+    $settings = array();
+    $settings['video_nid'] = $node->nid;
+    drupal_add_js(array('itg_videogallery' => array('settings' => $settings)), array('type' => 'setting'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_videogallery_watchlater_refresh.js', array('scope' => 'footer'));
+  }
+}
+
+/**
  * Implements hook_views_query_alter()
  * {@inheritdoc}
  */
@@ -4345,7 +4411,7 @@ function videogallery_new_fileupload_form($form, &$form_state) {
 function file_validate_name(stdClass $file) {
   $errors = array();
 //generate file name 
-  $new_filename = time() . $file->filename;
+  $new_filename = $file->filename;
   $new_filename = preg_replace('/\s+/', '_', $new_filename);
   $file->filename = $new_filename;
 
@@ -4853,7 +4919,7 @@ function itg_videogallery_get_all_draft_video_of_video_content() {
  * This function use for get video bitrate url
  * 
  */
-function itg_videogallery_get_video_bitrate_by_url($url,$nid) {
+function itg_videogallery_get_video_bitrate_by_url($url,$nid,$used_on,$external = NULL) {
   $return_array = array();
   $query = db_select('itg_video_transcoding', 'ivt');
   $query->fields('ivt');
@@ -4879,7 +4945,31 @@ function itg_videogallery_get_video_bitrate_by_url($url,$nid) {
   }else {
     $return_array['bitrate_url'] = "";
   }
-  //p($return_array);
+   $dfp_data = itg_videogallery_get_dfp_tags ($video_data1[0]->website , $video_data1[0]->transcoding_source);
+   
+if(!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
+   if($external == 1)
+    {
+          $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_external;
+    }else {
+       $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_internal;
+    }
+}else {
+  $return_array['dfp_tags'] =  JWPLAYER_DFP_TAG;
+}
+
+if(!empty($dfp_data)) {
+  if($used_on == 'embed' && !empty($dfp_data[0]->ga_tag_extarnal)) {
+     $return_array['ga_code'] =  $dfp_data[0]->ga_tag_extarnal;
+  }else {
+    $return_array['ga_code'] = ITG_GA_CODE;
+  }
+  if($used_on != 'embed' && !empty($dfp_data[0]->ga_tag_internal)) {
+     $return_array['ga_code'] =  $dfp_data[0]->ga_tag_internal;
+  }else {
+    $return_array['ga_code'] = ITG_GA_CODE;
+  }
+}
    return $return_array;
   }
 
@@ -4904,7 +4994,7 @@ if(count($bitrates) == 1) {
  * Implements itg_videogallery_make_url_for_jwpalyer
  * @parm array $video_data
  */
-function itg_videogallery_make_parm_for_jwpalyer($video_data) {
+function itg_videogallery_make_parm_for_jwpalyer($video_data,$used_on , $external) {
   global $base_url;
   $retrun_array = array();
   if(!empty($video_data)) {
@@ -4918,9 +5008,52 @@ function itg_videogallery_make_parm_for_jwpalyer($video_data) {
    $retrun_array['bitrate_url'] = $bitrate_url; 
    $retrun_array['player_image'] = $base_url . "/" . drupal_get_path('theme', 'itg').'/images/itg_image370x208.jpg';
   }
+  $dfp_data = itg_videogallery_get_dfp_tags ($video_data['in']['website'] , $video_data['in']['client']);
+if(!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
+  
+  if($used_on == 'embed') {
+    if($external == 1)
+    {
+          $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_external;
+    }else {
+       $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_internal;
+    }
+         
+
+  }else{
+      $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags;
+  }
+}else {
+  $retrun_array['dfp_tags'] =  JWPLAYER_DFP_TAG;
+}
+
+if(!empty($dfp_data)) {
+  if($used_on == 'embed' && !empty($dfp_data[0]->ga_tag_extarnal)) {
+     $retrun_array['ga_code'] =  $dfp_data[0]->ga_tag_extarnal;
+  }else {
+    $retrun_array['ga_code'] = ITG_GA_CODE;
+  }
+  if($used_on != 'embed' && !empty($dfp_data[0]->ga_tag_internal)) {
+     $retrun_array['ga_code'] =  $dfp_data[0]->ga_tag_internal;
+  }else {
+    $retrun_array['ga_code'] = ITG_GA_CODE;
+  }
+}
+
   return $retrun_array;
 }
 
+/**
+ * 
+ */
+function itg_videogallery_get_dfp_tags($website , $client) {
+  $query = db_select('itg_dfp_tags_setting', 'idts');
+  $query->fields('idts');
+  $query->condition('wesbite', strtolower($website), '=');
+  $query->condition('client', strtolower($client), '=');
+  $video_data = $query->execute()->fetchAll();
+  return $video_data;
+}
 
 /**
  * This function use for make video bitrate url:
@@ -5003,10 +5136,7 @@ function get_header_tab_related_video_block_content() {
       }
       $related_video_duration = $related_data->sm_field_video_duration[0];
       $img_alt = strip_tags($related_title);
-      $url = $related_data->url;
-      if (empty($url)) {
-        $url = "/" . drupal_get_path_alias('node/' . $current_entity_id);
-      }
+      $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
       $related_image = '<img class="related-default" alt="' . $img_alt . '" title="" src="' . $related_image_url . '">';
       if (!empty($related_title)) {
         $related_video .= "<li class='related_content_tabs'><figure><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";

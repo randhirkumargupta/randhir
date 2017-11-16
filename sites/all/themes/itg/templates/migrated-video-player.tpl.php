@@ -9,14 +9,21 @@ global $base_url;
 <script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
 
 <?php
-
-$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+$refral_site = itg_common_get_domain($_SERVER["HTTP_REFERER"]);
+$external_side = 0;
+if (!empty($refral_site)) {
+  if (strpos($base_url, $refral_site) === false) {
+    $external_side = 1;
+    $used_on = 'embed';
+  }
+}
+$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on ,$external_side);
 
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
 
-    <div id="videoplayer"> </div>
+<div id="videoplayer"> </div>
 <script type="text/javascript">
   var myUserAgent = navigator.userAgent;
   var myUserAgent = navigator.userAgent;
@@ -29,17 +36,18 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
   //$(document).ready(function() {	
 
   function loadplayerjw() {
+      var player_dfp = "<?php echo urlencode($data_video['dfp_tags']); ?>";
 
       // var playerInstance = jwplayer('videoplayer');
       jwplayer('videoplayer').setup({
           //var multipart=0;
           playlist: [{
-                  title: "",
-                  'image': "<?php echo $image; ?>",
+                  title: "", 
+                          'image': "<?php echo $image; ?>",
                   sources: [
                       {
                           file: "<?php echo $data_video['bitrate_url']; ?>"
-                      }, 
+                      },
                       {
                           file: "<?php echo $data_video['file_url']; ?>"
 
@@ -56,10 +64,10 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
           autostart: true,
           advertising: {
               client: "googima", skipoffset: 5,
-              schedule: {"myAds": {"offset": "pre", "tag": "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]"}}},
+              schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
               idstring: "",
-              label: "73d673"
+              label: "<?php echo $player_content["ga_code"]; ?>"
           }
       });
   }
@@ -87,6 +95,6 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
       playerInstance.play();
 
   });
-
-  var duration = jwplayer().getDuration();
+ ga('create', '<?php echo $player_content["ga_code"];?>', 'auto');
 </script>
+<script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.gaevent.js'; ?>"></script>

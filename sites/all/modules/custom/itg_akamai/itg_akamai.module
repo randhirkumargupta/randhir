@@ -174,7 +174,6 @@ function itg_akamai_menu() {
  *    TRUE if it was successfully cleared, FALSE otherwise.
  */
 function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
-
   // To prevent purging for Elysia Cron run
   if (module_exists('elysia_cron')) {
     if (arg(0) == 'admin' && arg(1) == 'config' && arg(2) == 'system' && arg(3) == 'cron' && arg(4) == 'execute') {
@@ -208,7 +207,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       watchdog('akamai', 'No resultant paths to clear for %paths', array('%paths' => implode(', ', $paths_in)), WATCHDOG_NOTICE);
       return FALSE;
     }
-
     $paths = array_unique($paths);
 
     $paths = array_map('trim', $paths);
@@ -219,6 +217,11 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
         varnish_expire_cache($paths);
       }
     }
+
+    global $base_url;
+
+    $varnish_paths = itg_akamai_varnish_host_mapping($paths);
+
 
     $paths = itg_akamai_send_for_host_mapping($paths);
     //$paths = itg_akamai_send_for_host_mapping_for_amp($paths);  // Preparing data for AMP URLs
@@ -261,6 +264,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     }
 
     $request_success_flag = 0;
+
     try {
       $response = $client->post(AKAMAI_API_ENDPOINT, [
         'body' => $data,
@@ -271,7 +275,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
 
       $data_for_log = ItgAkamaiUtility::itgAkamaiGetDataForLog($paths_data, $data, $response->getBody(), $user->uid, $response_data_decoded->httpStatus, $response_data_decoded->purgeId);
       $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
-
       $request_success_flag = 1;
 
       // Passing / Saving akamai purging log to drupal watchdog 
@@ -282,9 +285,22 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       $data_for_log = ItgAkamaiUtility::itgAkamaiSetDataForLog($data, $e->getMessage(), $user->uid, $response_data_decoded->httpStatus, 0);
       $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
       watchdog('ITG-Akamai log', 'OOPS unable to purge URL and error is : ' . $e->getMessage());
-      drupal_set_message(t("OOPS unable to purge URL and error is :$e->getMessage()"), 'error');
+      drupal_set_message(t("OOPS unable to purge URL and error is :" . $e->getMessage()), 'error');
       $request_success_flag = 0;
     }
+
+    // Sending for Recaching
+    if (module_exists('httprl')) {
+      $varnish_paths = array_map(function($item) {
+        return rtrim($item, '/\\');
+      }, $varnish_paths);
+      module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
+      if (isset($varnish_paths) && !empty($varnish_paths)) {
+        akamai_recacher_crawler($varnish_paths);
+      }
+    }
+    // End code for Recaching
+
     return $request_success_flag;
   }
 }
@@ -295,7 +311,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
  */
 function itg_akamai_send_for_host_mapping($paths) {
   $host = variable_get('itg_akamai_mapping_host');
-
   $lastchar = substr($host, -1);
 
   if ($lastchar != '/') {
@@ -308,6 +323,31 @@ function itg_akamai_send_for_host_mapping($paths) {
     foreach ($paths as $paths_chunk) {
       if (!empty($paths_chunk))
         $path_new_array[] = $host . $paths_chunk;
+    }
+  }
+  return $path_new_array;
+}
+
+/**
+ * For Varnish Host mapping purposes
+ * @param array $paths
+ */
+function itg_akamai_varnish_host_mapping($paths) {
+  $host = variable_get('varnish_control_terminal', '127.0.0.1:6082');
+  $hosts = explode(' ', $host);
+  $final_host = array();
+  foreach ($hosts as $host_chunk) {
+    $fip = str_replace(":6082", "", $host_chunk);
+    $final_host[] = 'http://' . $fip . '/';
+  }
+
+  $path_new_array = array();
+
+  if (isset($paths) && !empty($paths)) {
+    foreach ($paths as $paths_chunk) {
+      foreach ($final_host as $final_host_c) {
+        $path_new_array[] = $final_host_c . $paths_chunk;
+      }
     }
   }
   return $path_new_array;
@@ -510,6 +550,7 @@ function itg_akamai_node_update($node) {
     $url = drupal_get_path_alias('node/' . $node->nid);
     // Checking if URL alias changed removing Old one.
     $current_url = NULL;
+    $current_url_c = NULL;
     $previous_url = NULL;
     if (function_exists('itg_common_custompath_insert_load')) {
       $current_url = itg_common_custompath_insert_load($node);
@@ -519,15 +560,17 @@ function itg_akamai_node_update($node) {
     }
     $previous_url = $node->path['old_alias'];
 
+    $current_url_c = $current_url;
     $amp_types = itg_akamai_amp_cc_mapping();
 
     // Adding AMP urls for node types
     if (in_array($node->type, $amp_types)) {
       $current_url = itg_akamai_send_for_host_mapping_for_amp($current_url);
     }
+    // This line has been added for testing
     itg_akamai_clear_url($current_url, array(), $node);
 
-    if ($current_url != $previous_url) {
+    if ($current_url_c != $previous_url) {
       $action = array(
         'action' => 'remove',
       );
@@ -548,9 +591,9 @@ function itg_akamai_node_update($node) {
     // Checking akamai permission for logged in user
     if (user_access("administer itg akamai")) {
       // Setting metadata for the TTL for each node id 
-      //if ($node->status == 1) { // Akamai setting for node content level if node is published 
-      itg_akamai_content_setting($node);
-      //}
+      if ($node->status == 1) { // Akamai setting for node content level if node is published 
+        itg_akamai_content_setting($node);
+      }
     }
   }
 }
@@ -710,6 +753,14 @@ function itg_akamai_exit() {
         drupal_add_http_header('Edge-control', 'no-store');
         drupal_add_http_header('Cache-Control', 'no-store');
       }
+      if (!empty($_SESSION['messages']['error'])) {    
+        $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
+        $key = array_search($msg, $_SESSION['messages']['error']);
+
+        if ($key !== FALSE) {
+          unset($_SESSION['messages']['status'][$key]);     
+        }
+      }
     }
   }
 }
@@ -799,10 +850,39 @@ function itg_akamai_add_cc_button($form, &$form_state) {
  * @param type $node
  */
 function itg_akamai_node_insert($node) {
-  // Setting metadata for the TTL for each node id 
-  if (user_access("administer itg akamai")) {
-    if ($node->status == 1) { // Akamai setting for node content level if node is published 
+  if ($node->status == 1) {
+    $mapping = itg_akamai_getting_mapped_content_type();
+    if (in_array($node->type, $mapping)) {
+      $current_url = NULL;
+      if (function_exists('itg_common_custompath_insert_load')) {
+        $current_url = itg_common_custompath_insert_load($node);
+      }
+      else {
+        $current_url = $node->path['alias'];
+      }
+      $amp_types = itg_akamai_amp_cc_mapping();
+      // Adding AMP urls for node types
+      if (in_array($node->type, $amp_types)) {
+        $current_url = itg_akamai_send_for_host_mapping_for_amp($current_url);
+      }
+      // This line has been added for testing
+      $varnish_paths = itg_akamai_varnish_host_mapping($current_url);
+      if (module_exists('httprl')) {
+        $varnish_paths = array_map(function($item) {
+          return rtrim($item, '/\\');
+        }, $varnish_paths);
+        module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
+        if (isset($varnish_paths) && !empty($varnish_paths)) {
+          akamai_recacher_crawler($varnish_paths);
+        }
+      }
+    }
+
+    // Setting metadata for the TTL for each node id 
+    if (user_access("administer itg akamai")) {
+      //if ($node->status == 1) { // Akamai setting for node content level if node is published 
       itg_akamai_content_setting($node);
+      //}
     }
   }
 }
@@ -1216,4 +1296,13 @@ function itg_akamai_cc_button_purge($entity_data) {
  */
 function itg_akamai_amp_cc_mapping() {
   return array('story', 'photogallery', 'videogallery');
+}
+
+/**
+ * Getting Domain without protocal
+ */
+function itg_akamai_getting_domain_without_protocal() {
+  $strn = str_replace('http://', '', FRONT_URL);
+  $strn = str_replace('https://', '', $strn);
+  return $strn;
 }

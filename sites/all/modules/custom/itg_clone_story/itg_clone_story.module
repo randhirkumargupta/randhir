@@ -224,7 +224,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['field_story_itg_tags'][LANGUAGE_NONE]['#default_value'] = $tags_explode;
 
         /* Techonology */
-        $form['field_story_technology_rating'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_story_technology_rating[LANGUAGE_NONE][0]['value']);
+        $form['field_story_tech_pros_cons_ratin'][LANGUAGE_NONE]['#default_value'] = array($overall_data->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value']);
         $form['field_story_tech_review_chunk'][LANGUAGE_NONE][0]['#default_value'] = $overall_data->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'];
       }
   }
@@ -234,7 +234,7 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
 
     $form['bundle_name']['#value'] = 'Story';
     $form['bundle_name']['#attributes']['class'][] = 'element-hidden';
-    $form['entity_id']['#autocomplete_path'] = 'searchauto/autocompleteid';
+    //$form['entity_id']['#autocomplete_path'] = 'searchauto/autocompleteid';
     $form['keyword']['#autocomplete_path'] = 'searchauto/autocompletelabel';
     if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
@@ -252,9 +252,11 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
  * @param string $type
  */
 function itg_story_clone_data($keyword, $type) {
-
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
   // apachesolr_site_hash();
-  if (!empty($keyword)) {
+  if (!empty($keyword) && $ping) {
     $solr = apachesolr_get_solr();
     $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$keyword"));
     $query->addParam('rows', '10'); // How many rows of result to display default it is 10.

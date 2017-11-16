@@ -198,7 +198,10 @@ function related_story_migration() {
             $relatedcontenttitle = (string) $relatedcontent_data->relatedcontenttitle;
             $related_content_val .= 'IT_' . $relatedcontentid . '|~|';
             $related_content_with_title_val .= 'IT_' . $relatedcontentid . '@' . $c_type . '@' . $relatedcontenttitle . '|~|';
-          }
+          }else{
+          //data save for tracking
+          related_content_tack((int) $xml->id, $relatedcontent_type, (int) $relatedcontent_data->relatedcontentid, $c_type);
+        }
         }
         if (!empty($related_content_val)) {
           $related_content_insert_val = rtrim($related_content_val, '|~|');
@@ -249,7 +252,10 @@ function related_photo_migration() {
             $relatedcontenttitle = (string) $relatedcontent_data->relatedcontenttitle;
             $related_content_val .= 'IT_' . $relatedcontentid . '|~|';
             $related_content_with_title_val .= 'IT_' . $relatedcontentid . '@' . $c_type . '@' . $relatedcontenttitle . '|~|';
-          }
+          }else{
+          //data save for tracking
+          related_content_tack((int) $xml->id, $relatedcontent_type, (int) $relatedcontent_data->relatedcontentid, $c_type);
+        }
         }
         if (!empty($related_content_val)) {
           $related_content_insert_val = rtrim($related_content_val, '|~|');
@@ -299,7 +305,10 @@ function related_video_migration() {
             $relatedcontenttitle = (string) $relatedcontent_data->relatedcontenttitle;
             $related_content_val .= 'IT_' . $relatedcontentid . '|~|';
             $related_content_with_title_val .= 'IT_' . $relatedcontentid . '@' . $c_type . '@' . $relatedcontenttitle . '|~|';
-          }
+          }else{
+          //data save for tracking
+          related_content_tack((int) $xml->id, $relatedcontent_type, (int) $relatedcontent_data->relatedcontentid, $c_type);
+        }
         }
         if (!empty($related_content_val)) {
           $related_content_insert_val = rtrim($related_content_val, '|~|');
@@ -353,9 +362,64 @@ function itg_data_insert_in_field_related_content($nid, $revision_id, $field_nam
  * Implement function for test cron
  */
 function related_testing() {
-  $params = array(
-      'body' => 'Ok Good !!!!',
-      'subject' => 'Successful mail by migration server',
+  $content = failed_record_xml_id('migrate_map_itgstorylist');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Story',
     );
       $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+  $content = failed_record_xml_id('migrate_map_itgvideogallery');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Video',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+  $content = failed_record_xml_id('migrate_map_itgphotogallery');
+      if(!empty($content)) {
+      $params = array(
+      'body' => $content,
+      'subject' => 'Failed Content in Photo',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+    //Last process folder mail.
+  $last_process_folder = read_folder_last_xml_mail_status();
+      if(!empty($last_process_folder)) {
+//        $last_time = explode('_', $last_process_folder);
+//        $human_time = date('d-m-Y H:i:s', $last_time[1]);
+      $params = array(
+      'body' => 'Last Migrated Folder name: '.$last_process_folder, //. ' </br > Folder Date & Time : '.$human_time,
+      'subject' => 'completed folder name',
+    );
+      $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+    }
+}
+
+function related_content_tack($content_id, $content_type, $r_content_id, $r_content_type) {
+  db_insert('related_content_failed')
+          ->fields(array(
+            'content_id' => $content_id,
+            'content_type' => $content_type,
+            'related_content_id' => $r_content_id,
+            'related_content_type' => $r_content_type,
+          ))
+          ->execute();
+}
+
+function read_folder_last_xml_mail_status() {
+  $path_xml = 'sites/default/files/migrate/xml_file/migrate_xml/xml_complete/';
+  $files = scandir($path_xml);
+  if ($files[0] == '.') {
+    unset($files[0]);
+  }
+  if ($files[1] == '..') {
+    unset($files[1]);
+  }
+  $result = array_values($files);
+
+  return end($result);
 }

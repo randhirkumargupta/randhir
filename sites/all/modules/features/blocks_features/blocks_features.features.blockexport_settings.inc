@@ -11259,7 +11259,7 @@ node/*/edit',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 797,
@@ -11273,7 +11273,7 @@ node/*/edit',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 798,
@@ -11287,7 +11287,7 @@ node/*/edit',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 799,
@@ -11315,7 +11315,7 @@ node/*/edit',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 801,
@@ -11329,7 +11329,7 @@ node/*/edit',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 802,
@@ -11343,7 +11343,7 @@ node/*/edit',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => 1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 803,
@@ -19298,15 +19298,15 @@ sosorry/*',
   'module' => 'views',
   'delta' => 'so_sorry-most_watched',
   'theme' => 'itg',
-  'status' => 1,
+  'status' => 0,
   'weight' => -82,
-  'region' => 'content_bottom',
+  'region' => -1,
   'custom' => 0,
   'visibility' => 1,
   'pages' => 'sosorry
 sosorry/*',
   'title' => '<none>',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1334,
@@ -19411,7 +19411,7 @@ sosorry/*',
   'pages' => 'sosorry
 sosorry/*',
   'title' => '<none>',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1341,
@@ -19516,7 +19516,7 @@ sosorry/*',
   'pages' => 'sosorry
 sosorry/*',
   'title' => '<none>',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 1348,
@@ -28939,7 +28939,7 @@ event/*/sponsor-details',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => -1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 2004,
@@ -28953,7 +28953,7 @@ event/*/sponsor-details',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => -1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 2005,
@@ -29007,7 +29007,7 @@ history
 loyalty-redemption-history
 checkout-page',
   'title' => '<none>',
-  'cache' => 8,
+  'cache' => -1,
 );
   $export['block'][] = array(
   'bid' => 2008,
@@ -33348,7 +33348,7 @@ funalytics/*',
   'visibility' => 0,
   'pages' => '<front>',
   'title' => '',
-  'cache' => -1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 2307,
@@ -34186,7 +34186,7 @@ funalytics/*',
   'visibility' => 0,
   'pages' => '',
   'title' => '',
-  'cache' => -1,
+  'cache' => 8,
 );
   $export['block'][] = array(
   'bid' => 2366,
@@ -42915,6 +42915,102 @@ sosorry/*',
   'module' => 'views',
   'delta' => 'video_list_of_category-block_4',
   'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2969,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_2',
+  'theme' => 'amptheme',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'speaker-details
+sponsor-details
+event/*/speaker-details
+event/*/sponsor-details',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2970,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_2',
+  'theme' => 'itg',
+  'status' => 1,
+  'weight' => 0,
+  'region' => 'sidebar_second',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'speaker-details
+sponsor-details
+event/*/speaker-details
+event/*/sponsor-details',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2971,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_2',
+  'theme' => 'itgadmin',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'speaker-details
+sponsor-details
+event/*/speaker-details
+event/*/sponsor-details',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2972,
+  'module' => 'views',
+  'delta' => 'event_photo_slider-block_2',
+  'theme' => 'seven',
+  'status' => 0,
+  'weight' => 0,
+  'region' => '',
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => 'speaker-details
+sponsor-details
+event/*/speaker-details
+event/*/sponsor-details',
+  'title' => '',
+  'cache' => 8,
+);
+  $export['block'][] = array(
+  'bid' => 2973,
+  'module' => 'views',
+  'delta' => 'page_published_report-block',
+  'theme' => 'itg',
+  'status' => 0,
+  'weight' => 0,
+  'region' => -1,
+  'custom' => 0,
+  'visibility' => 0,
+  'pages' => '',
+  'title' => '',
+  'cache' => -1,
+);
+  $export['block'][] = array(
+  'bid' => 2974,
+  'module' => 'views',
+  'delta' => 'page_published_report-block_1',
+  'theme' => 'itg',
   'status' => 0,
   'weight' => 0,
   'region' => -1,

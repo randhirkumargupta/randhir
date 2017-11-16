@@ -156,7 +156,7 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
       '#value' => t('Cancel') ,
     );
     $form['actions']['submit']['#value'] = t('Publish');
-    unset($form['actions']['preview']);
+//    unset($form['actions']['preview']);
     unset($form['title']);
     unset($form['field_newsl_website_name']);
 
@@ -1048,4 +1048,22 @@ function itg_newsletter_published_nids($get_nid){
       return FALSE;
     }
   }
+}
+
+/*
+ * Get Newsletter Previuious time
+ */
+function itg_newsletter_get_previous_time($nids){
+  $node = node_load($nids);
+  if($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'daily') { 
+    $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+    $previoustime = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 day');
+  }elseif ($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'weekly') { 
+    $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+    $previoustime = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 days');
+  } elseif($node->field_newsl_frequency[LANGUAGE_NONE][0]['value'] == 'monthly') { 
+    $gettime = $node->field_newsl_time[LANGUAGE_NONE][0]['value'];
+    $previoustime = strtotime(date('D-m-Y ') . $gettime . ':00' . ' -1 month');
+  } 
+  return $previoustime;
 }

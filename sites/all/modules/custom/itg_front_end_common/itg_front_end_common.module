@@ -153,8 +153,7 @@ function itg_front_end_common_block_view($delta = '') {
       module_load_include('inc', 'itg_widget', 'includes/itg_widget_personalization');
       $data = get_personlization_front_block_data(FALSE);
       $block['content'] = theme("personlization_front_end", array("data" => $data));
-      if($user->uid == 0) {
-        drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('type' => 'file', 'scope' => 'footer', 'weight' => 5));
+      
       /*drupal_add_js('jQuery(document).ready(function() {
     jQuery(".recommended-slider").slick({
       slidesToShow: 3,
@@ -180,7 +179,7 @@ function itg_front_end_common_block_view($delta = '') {
       ]
     });
   });', array("type" => "inline"));*/
-      }
+     
       break;
   }
 
@@ -778,13 +777,19 @@ function _related_story_left_block_content() {
     $related_result = itg_get_related_story_id($related_content);
   }
   if(!empty($related_result)) {
-  $related_story = '<h3>Related</h3>';
-  $related_story.= "<div class='row'><ul>";
+  //$related_story = '<h3>Related</h3>';
+  //$related_story.= "<div class='row'><ul>";
   $i = 0;
+  $counter = 0;
   foreach ($related_result as $site_hash_key) {
+    if ($counter == 0) {
+        $related_story = '<h3>'.t('Related').'</h3>';
+        $related_story.= "<div class='row'><ul>";
+      }
+      ++$counter;
     $current_entity_id = $site_hash_key;
     $related_data = itg_get_related_story_content($current_entity_id);
-    //if (!empty($related_data)) {
+    if (!empty($related_data)) {
       $display_title = get_related_display_title($arg[1], $current_entity_id);
       if(!empty($display_title)) {
         $display_title = $display_title;
@@ -807,7 +812,7 @@ function _related_story_left_block_content() {
         $related_story.= "<span class='tile'>" . l($related_title, $front_url, array('html'=>TRUE, "attributes" => array("target" => "_blank","title" => $related_title))) . "</span></li>";
       }
       
-    //}
+    }
     $i++;
     if ($i == 10)
       break;
@@ -829,13 +834,17 @@ function _related_story_bottom_block_content() {
     $related_result = itg_get_related_story_id($related_content);
   }
   if (!empty($related_result)) {
-    $related_story = '<h3><span>Related</span></h3>';
-    $related_story.= "<div class='row'><ul>";
     $i = 0;
+    $counter = 0;
     foreach ($related_result as $site_hash_key) {
+      if ($counter == 0) {
+        $related_story = '<h3><span>'.t('Related').'</span></h3>';
+        $related_story.= "<div class='row'><ul>";
+      }
+      ++$counter;
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
-      //if (!empty($related_data)) {
+      if (!empty($related_data)) {
         $display_title = get_related_display_title($arg[1], $current_entity_id);
         if (!empty($display_title)) {
           $display_title = $display_title;
@@ -859,7 +868,7 @@ function _related_story_bottom_block_content() {
           $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
           $related_story.= "<span class='tile'>" . l($related_title, $front_url, array('html'=>TRUE, "attributes" => array("target" => "_blank", "title" => $related_title))) . "</span></li>";
         }
-      //}
+      }
       $i++;
       if ($i == 4)
         break;

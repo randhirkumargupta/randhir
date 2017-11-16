@@ -204,8 +204,8 @@ function itg_follow_unfollow_print($nid) {
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     // prepare url for sharing
     $uri = base64_encode($actual_link);
-    $sso_url = PARENT_SSO . 'saml_login/other/' . $uri;
-    $html = "<li class='follow-activity-anchor'><a title='follow' href='".$sso_url."'>".t('Follow')."</a></li>";
+    $sso_url = PARENT_SSO . '/saml_login/other/' . $uri;
+    $html = "<li class='follow-activity-anchor'><a title='Follow' href='".$sso_url."'>".t('Follow')."</a></li>";
   }
   print $html;
 }

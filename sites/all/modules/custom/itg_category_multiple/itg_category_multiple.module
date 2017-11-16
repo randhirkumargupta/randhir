@@ -21,6 +21,7 @@ function itg_category_multiple_form_alter(&$form, &$form_state, $form_id) {
     case 'podcast_node_form': // Podcast
     case 'reporter_node_form': // reporter OR Byline
     case 'breaking_news_node_form': // Breaking News
+    case 'mega_review_critic_node_form': // Mega Review
       $content_type = '';
       $itg_category_multiple_prev_data = '';
       if (isset($form['#node']->type) && !empty($form['#node']->type)) {
@@ -585,8 +586,10 @@ function itg_category_multiple_taxonomy_term_update($term) {
     $id = $term->tid;
     if (function_exists('mongodb') && !empty($id)) {
       $con = mongodb();
+      if($con) {
       $people = $con->taxonomy_term_data_mongo;
       $people->remove(array("tid" => (int) $id));
+      }
     }
     // Inserting data into taxonomy 
     if (function_exists('mongodb')) {
@@ -632,8 +635,10 @@ function itg_category_multiple_taxonomy_term_delete($term) {
     $id = $term->tid;
     if (function_exists('mongodb') && !empty($id)) {
       $con = mongodb();
+      if ($con) {
       $people = $con->taxonomy_term_data_mongo;
       $people->remove(array("tid" => (int) $id));
+      }
     }
   }
 }

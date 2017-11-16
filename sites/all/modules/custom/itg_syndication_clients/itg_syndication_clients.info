@@ -1,0 +1,4 @@
+name = ITG Syndication clients
+description = "ITG Custom module for Syndication clients."
+core = 7.x
+package = ITG

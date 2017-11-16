@@ -365,12 +365,22 @@ function itg_widget_keycandidate_form_submit($form, $form_state) {
   drupal_goto('special-key-candidate-widget-contents', array('query' => $query));
 }
 
+function so_sorry_politoons_so_sorry_politoons_afterbuild($form, $form_state) {
+  $form['#submit'][] = 'sosorry_politoons_draggable_custom_submit'; 
+  return $form;
+}
+
+function sosorry_politoons_draggable_custom_submit(&$form, $form_state) {
+  cache_clear_all('so_sorry_politoons:', 'cache_views_data', TRUE);
+}
 /**
  * {@inheritdoc}
  */
 function itg_widget_form_alter(&$form, &$form_state, $form_id) {
   global $base_url;
-
+  if($form_id == 'views_form_so_sorry_politoons_so_sorry_politoons') {
+    $form['#after_build'][] = 'so_sorry_politoons_so_sorry_politoons_afterbuild';
+  }
   if ($form['#id'] == 'taxonomy-form-term') {
     //drupal_add_css("#edit-field-set-as-featured-cate {display:none !important}" , "inline");
   }
@@ -1328,6 +1338,18 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $view->query->add_field('itg_category_manager', 'status');
     $query->add_where(0, 'itg_category_manager.status', '1', '=');
   }
+  if ($view->name == 'live_tv_programs' && $view->current_display == 'page') {
+    $join = new views_join();
+    $join->table = 'itg_category_manager';
+    $join->field = 'tid';
+    $join->left_table = 'taxonomy_term_data';
+    $join->left_field = 'tid';
+    $join->type = 'LEFT';
+    //add the join the the view query
+    $view->query->add_relationship('itg_category_manager', $join, 'taxonomy_term_data');
+    $view->query->add_field('itg_category_manager', 'status');
+    $query->add_where(0, 'itg_category_manager.status', '1', '=');
+  }
 
   if ($view->name == 'anchor_option_view') {
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
@@ -1434,7 +1456,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $query->where[1]['conditions'][1]['value'] = variable_get('so_sorry_category_id_for_widget');
     // AS most viewed Result is only four. This logic is implemented by section widget.
     // No need to remove feature/remix because its already removed from mostwatch views_query_alter.
-    $most_viewed = views_get_view_result('so_sorry', 'most_watched');
+    //$most_viewed = views_get_view_result('so_sorry', 'most_watched');
     $feature_nid = __get_sosorry_video_nid('feature');
     $remix_nid = __get_sosorry_video_nid('remix');
     if (!empty($feature_nid)) {
@@ -1443,9 +1465,9 @@ function itg_widget_views_query_alter(&$view, &$query) {
     if (!empty($remix_nid)) {
       $query->add_where(0, 'node.nid', $remix_nid, '!=');
     }
-    foreach ($most_viewed as $nids) {
-      $query->add_where(0, 'node.nid', $nids->nid, '!=');
-    }
+//    foreach ($most_viewed as $nids) {
+//      $query->add_where(0, 'node.nid', $nids->nid, '!=');
+//    }
   }
 
 
@@ -1468,6 +1490,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_list') {
+   // p($query->where[1]['conditions']);
     if ($_GET['state'] == 0) {
       if ($query->where[1]['conditions'][3]['field'] == 'itg_widget_order.state') {
         unset($query->where[1]['conditions'][3]);
@@ -2448,7 +2471,7 @@ function itg_poll_home_page_polls_select($nid) {
       $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
     }
     else {
-      $poll_banner_image = '<img src ="' . $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg" alt="" title="" />';
+      $poll_banner_image = '<img src ="' .  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg') . '" alt="" title="" />';
     }
 
     $poll_image_exist_class = '';
@@ -2815,7 +2838,7 @@ function insert_all_node_in_widegt_table() {
  * {@inheritdoc}
  */
 function itg_widget_node_insert($node) {
-  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news') {
+  if ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic') {
     if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
       $nid = $node->nid;
       $cat_id = $node->field_story_category['und'];
@@ -3000,7 +3023,7 @@ function get_max_weight_for_special($type) {
  */
 function itg_widget_node_update($node) {
   itg_watchdog("status_test", array($node->nid, $node->status, $node->revision, $node->op));
-  if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news')) {
+  if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic')) {
     $arg = arg();
     if (itg_workflow_stop_node_update_batch_for_widgets()) {
       return;
@@ -3210,12 +3233,17 @@ function itg_widget_get_site_hash_from_solr($site_prefix) {
  * @return string
  */
 function itg_get_link_from_hash_and_entity_solr_search($entity_id, $hash) {
-  $solr = apachesolr_get_solr();
-  $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id and hash: $hash"));
-  $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
-  $query->addParam('qf', 'entity_id'); // Only search in title
-  $resp_search = $query->search();
-  return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    $query = apachesolr_drupal_query("custom", array('q' => "entity_id:$entity_id and hash: $hash"));
+    $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'entity_id'); // Only search in title
+    $resp_search = $query->search();
+    return isset($resp_search->response->docs[0]) ? $resp_search->response->docs[0] : "";
+  }
 }
 
 /**

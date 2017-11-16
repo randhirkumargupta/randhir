@@ -18,8 +18,12 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
  * {@inheritdoc}
  */
 function itg_common_init() {
+  //$con = mongodb();
+  //watchdog('Mongo connection status', $con->connection->connected);
   global $user, $base_url, $theme;
-  $arg = arg();
+  $arg = arg();  
+  
+  
   // condition for archive story redirect
   $ctype_tab = array('Story', 'photogallery', 'Videogallery');
   if ($arg[0] == 'archives' && !empty($arg[1]) && in_array($arg[1], $ctype_tab) && empty($arg[2])) {
@@ -117,6 +121,14 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['scorecard/matchcenter/%'] = array(
+    'page callback' => 'itg_common_get_scorecard',
+    'access callback' => TRUE,
+    'page arguments' => array(2),
+    'file' => 'includes/itg_scorecard.inc',
+    'type' => MENU_CALLBACK,
+  );
+
   $items['get-magazine-issue'] = array(
     'page callback' => 'itg_get_magazine_issue_callback',
     'access callback' => TRUE,
@@ -169,6 +181,19 @@ function itg_common_menu() {
 }
 
 /**
+ * get domian name
+ */
+
+function itg_common_get_domain($url)
+{
+  $pieces = parse_url($url);
+  $domain = isset($pieces['host']) ? $pieces['host'] : $pieces['path'];
+  if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
+    return $regs['domain'];
+  }
+  return $pieces['host'];
+}
+/**
  * Implements hook_permission().
  */
 function itg_common_permission() {
@@ -195,6 +220,11 @@ function itg_common_permission() {
 function itg_common_form_alter(&$form, &$form_state, $form_id) {
   global $user, $base_url, $theme;
   $arg = arg();
+	
+	if($form_id == 'election_graph_xml_node_form'){
+		$form['#after_build'][] = 'itg_common_cancel_button';
+		
+	}
 
    $solr_video_video_id = array('views-exposed-form-searchimage-page-1' , 
       'views-exposed-form-searchimage-search-unpublish-video' ,
@@ -486,7 +516,7 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
 
   $form['#after_build'][] = 'itg_common_add_js_top_btn';
   
-  if ($form_id == 'photogallery_node_form' || $form_id == 'podcast_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'videogallery_node_form') {
+  if ($form_id == 'photogallery_node_form' || $form_id == 'podcast_node_form' || $form_id == 'blog_node_form' || $form_id == 'story_node_form' || $form_id == 'videogallery_node_form' || $form_id == 'mega_review_critic_node_form') {
     $form['#after_build'][] = 'itg_common_add_preview_button';
   }
   
@@ -1973,4 +2003,88 @@ function get_email_by_roll($id) {
     $value[] = $val->mail;
   }
   return $value;
+}
+
+/**
+ * Function for getting content by section
+ * @param int $section_id
+ * @param string $type
+ * @return array
+ */
+function itg_common_get_content_by_section($section_id, $type) {
+  $item_per_page = 4;
+  $table = 'itg_widget_order_section';
+  if (strtolower($type) == 'all') {
+    $table = 'itg_widget_order';
+  }
+  $db_query = db_select($table, 'iwo')->extend('PagerDefault')->limit($item_per_page);
+  $db_query->join('node', 'n', 'n.nid = iwo.nid');
+  $db_query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $db_query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+  if ($type == 'videogallery') {
+    $db_query->leftJoin('field_data_field_video_duration', 'fdv', 'fdv.entity_id=n.nid');
+  }
+  $db_query->fields('n', array('nid', 'title', 'created'));
+  $db_query->fields('eli_file', array('uri'));
+  if ($type == 'videogallery') {
+    $db_query->fields('fdv', array('field_video_duration_value'));
+  }
+  $db_query->condition('iwo.widget', 'section_wise_widget');
+  $db_query->condition('iwo.content_type', $type);
+  $db_query->condition('iwo.cat_id', $section_id);
+  $db_query->orderBy('iwo.weight', 'DESC');
+  $result = $db_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Function for counting the images in photogallery.
+ * @param type $nid
+ * @return type
+ */
+function itg_common_count_images_in_photogallery($nid) {
+  $query = db_select('field_data_field_gallery_image', 'fdg')
+      ->fields('fdg', array('field_gallery_image_value'))
+      ->condition('fdg.entity_id', $nid);
+  $result = $query->execute()->rowCount();
+  return $result;
+}
+
+/**
+ * itg_fronturl_check
+ * 
+ */
+function itg_fronturl_check() {
+  global $base_url;
+  $baseUrl = explode('//', $base_url);
+  $fUrl = explode('//', FRONT_URL);  
+  if ($baseUrl[1] == $fUrl[1]) {
+    return true;
+  } else {
+      return false;
+  }
+}
+
+
+/**
+ * Implements hook_exit().
+ */
+/*function itg_common_exit() {
+  global $theme;
+  if (!empty($_SESSION['messages']['error']) && $theme == FRONT_THEME_NAME) {    
+    $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
+    $key = array_search($msg, $_SESSION['messages']['error']);
+    
+    if ($key !== FALSE) {
+      unset($_SESSION['messages']['status'][$key]);     
+    }
+  }
+}*/
+
+function itg_common_cache_clear($cache_array = array()) {
+  if(!empty($cache_array)) {
+    foreach($cache_array as $cache) {
+      cache_clear_all($cache, 'cache', TRUE);
+    }
+  }
 }

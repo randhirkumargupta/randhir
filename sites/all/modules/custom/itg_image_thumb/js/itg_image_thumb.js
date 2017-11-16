@@ -14,7 +14,6 @@
                     // fetch position of image element from array
                     var fid =frm[25].value;
 
-                    //console.log(fid);
                     // passing the value using 'POST' method
 
                     var dt = 'fid='+fid;

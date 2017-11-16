@@ -102,7 +102,7 @@
                 <?php print drupal_render($form['upload']); ?>
                 <?php print drupal_render($form['field_story_technology']); ?>
                 <?php print drupal_render($form['field_technology_photogallery']); ?>
-                <?php print drupal_render($form['field_story_technology_rating']); ?>
+                <?php print drupal_render($form['field_story_tech_pros_cons_ratin']); ?>
                 <?php print drupal_render($form['field_story_tech_review_chunk']); ?>
             </div>
         </div>

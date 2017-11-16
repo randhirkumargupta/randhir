@@ -199,7 +199,7 @@ if (!empty($content)):
                       $file_uri = file_create_url($story_image);
                     }
                     else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                      $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                     }
                     print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>';
                   }
@@ -211,7 +211,7 @@ if (!empty($content)):
                       $file_uri = file_create_url($story_image);
                     }
                     else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                      $file_uri =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                     }
                     //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
                        print '<amp-img height="363" width="647" layout="responsive"  alt="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'].'" title="'.$node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'].'" src="' . $file_uri . '" srcset="'.$image_repo_srcset.'"><div fallback>offline</div></amp-img>'
@@ -257,7 +257,7 @@ if (!empty($content)):
                                     //<i class="fa fa-camera"></i></span>';
                     }
                     else {
-                      $file_uri = $base_url . '/sites/all/themes/itg/images/itg_image647x363.jpg';
+                      $file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                     }
                     
                     //print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '">'
@@ -278,12 +278,12 @@ if (!empty($content)):
                   <?php if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE])) { ?>
                     <?php if(empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
                       <div class="photoby">
-                      <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                      <?php if (!empty($node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'])) { ?>
                         <div class="story-img-rating">
                           <?php
                           // added technology rating field value for story technology
-                          $tech_rating = $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'];
-                          echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10';
+                          $tech_rating = $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'];
+                          echo $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'] . '/10';
                           ?>
                         </div>
                       <?php } ?>
@@ -467,9 +467,9 @@ if (!empty($content)):
               if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
                 ?>
                 <div class="story-tech-chunk">
-                  <?php if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) { ?>
+                  <?php if (!empty($node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'])) { ?>
                     <span class="tech-rating">
-                      <?php echo $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'; ?>
+                      <?php echo $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'] . '/10'; ?>
                     </span>
                   <?php } ?>
                   <?php print render($content['field_story_tech_review_chunk']); ?>

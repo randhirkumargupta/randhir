@@ -1,45 +1,71 @@
 <?php
-
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 global $base_url;
 ?>
-  <script type="text/javascript" src="<?php echo $base_url.'/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js';?>"></script>
+<script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
 
 <?php
 $width = 622;
 $height = 446;
+$external_side = 0;
 $data_video = itg_videogallery_get_video_xml_data_by_fid($data);
 $video_all_data = json_decode($data_video[0]->video_xml_data, TRUE);
-$player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
+$refral_site = itg_common_get_domain($_SERVER["HTTP_REFERER"]);
 
+if (!empty($refral_site)) {
+  if (strpos($base_url, $refral_site) === false) {
+    $external_side = 1;
+    $used_on = 'embed';
+  }
+}
+
+$player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on ,$external_side);
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
 
-    <div id="videoplayer"> </div>
+<div id="videoplayer"> </div>
 <script type="text/javascript">
+  function getDomain(url) {
+      if (url) {
+          var match = /(?:https?:\/\/)?(?:\w+:\/)?[^:?#\/\s]*?([^.\s]+\.(?:[a-z]{2,}|co\.uk|org\.uk|ac\.uk|org\.au|com\.au))(?:[:?#\/]|$)/gi
+                  .exec(url);
+          return match ? match[1] : null;
+      } else
+          return null;
+  }
   var myUserAgent = navigator.userAgent;
   var myUserAgent = navigator.userAgent;
   var currentItem = 0;
+
+  var referrer = document.referrer;
+  var ItgdDomain = "";
+  var itgdAds = "";
+  if (referrer.length > 0) {
+      ItgdDomain = getDomain(referrer);
+  }
+  alert(ItgdDomain);
+
+
   //var videoSectionId=321;
   var vdopiavideoid = '15719';
   //var arrPlaylist=[""];
   var autoplay = "true";
   var mp4videoFlagJS = 1;
   //$(document).ready(function() {	
-
+//stripcslashes($title);
   function loadplayerjw() {
-
-    //var playerInstance = jwplayer('videoplayer');
+      var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
+      //var playerInstance = jwplayer('videoplayer');
       jwplayer('videoplayer').setup({
           //var multipart=0;
           playlist: [{
                   title: "",
-                  'image': "<?php echo  $player_content['player_image'];?>",
+                  'image': "<?php echo $player_content['player_image']; ?>",
                   sources: [
                       {
                           file: "<?php echo $player_content['bitrate_url']; ?>"
@@ -59,10 +85,10 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
           autostart: true,
           advertising: {
               client: "googima", skipoffset: 5,
-              schedule: {"myAds": {"offset": "pre", "tag": "https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]"}}},
+              schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
               idstring: "",
-              label: "73d673"
+              label: "<?php echo $player_content["ga_code"]; ?>"
           }
       });
   }
@@ -71,13 +97,13 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
   loadplayerjw();
   playerInstance.on('setupError', function (event) {
       if (event.message == 'Error loading player: No playable sources found') {
-         // document.getElementById("videoplayer").innerHTML = "<span class=flasherror>Install Flash to Watch this Video</span><a target=_blank href=https://get.adobe.com/flashplayer/ class=flashlogo><img src=http://media2intoday.in/images/getadobeflashplayer.gif width="100" alt=''></a>';
+          // document.getElementById("videoplayer").innerHTML = "<span class=flasherror>Install Flash to Watch this Video</span><a target=_blank href=https://get.adobe.com/flashplayer/ class=flashlogo><img src=http://media2intoday.in/images/getadobeflashplayer.gif width="100" alt=''></a>';
       } else {
           loadplayerjw();
       }
   });
 
-           
+
 
 </script>
 
@@ -90,6 +116,6 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
       playerInstance.play();
 
   });
-
-  var duration = jwplayer().getDuration();
+  ga('create', '<?php echo $player_content["ga_code"]; ?>', 'auto');
 </script>
+<script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.gaevent.js'; ?>"></script>

@@ -88,7 +88,7 @@ $argum = base64_encode(arg(1));
                 ?>
                 </div>  
                 <?php if ($user->uid > 0): ?>
-                  <li><a class="def-cur-pointer photo-login-akamai" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
+                  <li><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                 <?php else: ?>
                   <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                 <?php endif; ?>
@@ -111,7 +111,7 @@ $argum = base64_encode(arg(1));
                         print $row['field_images'];
                       }
                       else {
-                        print '<img height="448" width="650" src="' . $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image647x363.jpg" alt="" title="" />';
+                        print '<img height="448" width="650" src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg').'" alt="" title="" />';
                       }
                       ?>                    
                   </figure>
@@ -127,7 +127,7 @@ $argum = base64_encode(arg(1));
                         print $row['field_photo_small_image'];
                       }
                       else {
-                        print '<img  src="' . $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image88x66.jpg" alt="" title="" />';
+                        print '<img  src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg').'" alt="" title="" />';
                       }
                       ?>
                   </li>
@@ -215,7 +215,7 @@ $argum = base64_encode(arg(1));
                         </div>
                     </li>
                     <?php if ($user->uid > 0): ?>
-                      <li class="mhide"><a class="def-cur-pointer photo-login-akamai" title="post content" href="<?php print $base_url; ?>/personalization/my-content"><i class="fa fa-share"></i></a></li>
+                      <li class="mhide"><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                     <?php else: ?>
                       <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                     <?php endif; ?>
@@ -273,7 +273,7 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
           fade: false,
           asNavFor: '.slick-thumbs-slider, .counterslide, .photo-by-slider',
           // For active slide
-          initialSlide: <?php echo $initial_slide; ?>,
+          initialSlide: <?php echo --$initial_slide; ?>,
       });
       jQuery('.slick-thumbs-slider').slick({
           slidesToShow: 7,
@@ -327,18 +327,46 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
       });
 // Photogallery slider javascript
       jQuery(document).ready(function () {
+        var query_val = get_photo_url_query('photo' , window.location);
+          if(query_val != null) {
+              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+              ChangeUrl("page", real_node_url +"/"+query_val);
+          }
           jQuery(".slick-arrow , li.slick-slide").on("click", function () {
-            comscoreBeacon();
               var active_slide = jQuery(".slick-active").attr("data-slick-index");
-              var current_url = window.location.href.split('?')[0];
+              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
               if (active_slide > 0) {
-                  window.history.pushState("", "", current_url + "?photo=" + active_slide);
+                  ++active_slide;
+                  //window.history.pushState(null, null, real_node_url + "/" + active_slide);
+                  ChangeUrl("page", real_node_url +"/"+active_slide);
               } else {
                   // If frist slide then put pull without query string.
-                  window.history.pushState("", "", current_url);
+                  window.history.pushState(null, null, real_node_url);
               }
           });
       });
+      
+    function ChangeUrl(page, url) {
+        if (typeof (history.pushState) != "undefined") {
+            var obj = { Page: page, Url: url };
+            history.pushState(obj, obj.Page, obj.Url);
+        } else {
+            alert("Browser does not support HTML5.");
+        }
+    }
+    
+    function get_photo_url_query(name, url) {
+        if (!url) {
+          url = window.location.href; 
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    
   });
   // Photogallery slider javascript
   // Handle Thumb for active set class

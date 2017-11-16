@@ -688,6 +688,7 @@ function itg_event_backend_after_build($form, &$form_state) {
     $form['actions']['preview']['#access'] = FALSE;
     $form['actions']['delete']['#access'] = FALSE;
     $form['metatags']['#prefix'] = '<h2 id="title-metatags" class="story-title">SEO Meta Tags</h2>';
+    $form['field_e_from_the_chairman']['#prefix'] = '<h2 id="title-from_the_chairman" class="story-title">From the chairman Details</h2>';
   }
   if (isset($form_state['storage']['step']) && ($form_state['storage']['step'] == 'step_program_schedule' || $form_state['storage']['step'] == 'step_sponsor' || $form_state['storage']['step'] == 'step_media' || $form_state['storage']['step'] == 'step_highlights' || $form_state['storage']['step'] == 'step_first' || $form_state['storage']['step'] == 'step_second')) {
     $form['actions']['submit']['#access'] = TRUE;
@@ -973,10 +974,10 @@ function itg_event_backend_block_view($delta = '') {
       $block['content'] = theme('itg_event_sponsor_tab_form_display_block', array('data' => ''));
       break;
     case 'program_tab_block':
-      $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab()));
+      $block['content'] = theme('itg_program_schedule_tab', array('data' => itg_event_backend_program_schedule_tab(), 'host_node' => itg_event_backend_get_event_node('node')));
       break;
     case 'post_event_block':
-      $block['content'] = theme('itg_program_post_event', array('data' => itg_event_backend_program_schedule_tab()));
+      $block['content'] = theme('itg_program_post_event', array('data' => itg_event_backend_program_schedule_tab(), 'host_node' => itg_event_backend_get_event_node('node')));
       break;
     case 'ad_right_sidebar_event':
       $page_name = 'Rest';
@@ -1271,14 +1272,8 @@ function itg_event_backend_occupation_home($spk_id) {
  * @param str $daywise
  * @return array
  */
-function itg_event_backend_get_session_photo_video($daywise) {
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_event_media', 'media', 'n.nid = media.entity_id');
-  $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_event_media_value');
-  $query->fields('daywise', array('field_daywise_event_value'));
-  $query->fields('media', array('field_event_media_value'));
-  $query->condition('daywise.field_daywise_event_value', $daywise, '=');
-  $result = $query->execute();
+function itg_event_backend_get_session_photo_video($daywise, $nid = NULL) { 
+  $result = itg_event_backend_event_field_collection_media($daywise, $nid);
   foreach ($result as $value) {
     $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
     if (!empty($daywise_detail[$value->field_event_media_value]->field_event_photo)) {
@@ -1299,16 +1294,18 @@ function itg_event_backend_get_session_photo_video($daywise) {
  * @param str $daywise
  * @return array
  */
-function itg_event_backend_get_session_sponsor($daywise) {
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_associate_sponsors', 'media', 'n.nid = media.entity_id');
+function itg_event_backend_get_session_sponsor($daywise, $nid = NULL) {
+  //$query = db_select('node', 'n');
+  $query = db_select('field_data_field_associate_sponsors', 'media');
+  //$query->join('field_data_field_associate_sponsors', 'media', 'n.nid = media.entity_id');
   $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_associate_sponsors_value');
   $query->fields('daywise', array('field_daywise_event_value'));
   $query->fields('media', array('field_associate_sponsors_value'));
   $query->condition('daywise.field_daywise_event_value', $daywise, '=');
+  $query->condition('daywise.bundle', 'field_associate_sponsors', '=');
+  $query->condition('media.entity_id', $nid, '=');
   $result = $query->execute();
   foreach ($result as $value) {
-
     $daywise_detail = entity_load('field_collection_item', array($value->field_associate_sponsors_value));
     if (!empty($daywise_detail[$value->field_associate_sponsors_value]->field_choose_sponsor)) {
       $session['sponsor'] = $daywise_detail[$value->field_associate_sponsors_value]->field_choose_sponsor[LANGUAGE_NONE][0]['target_id'];
@@ -1319,52 +1316,37 @@ function itg_event_backend_get_session_sponsor($daywise) {
 
 /**
  * Implement function to get associated story
- * @return arrayy
+ * @return array
  */
-function itg_event_backend_get_session_story_title($daywise, $font_color) {
-
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_event_highlights', 'eh', 'n.nid = eh.entity_id');
-  $query->join('field_data_field_programe_title', 'pt', 'pt.entity_id = eh.field_event_highlights_value');
-  $query->fields('pt', array('field_programe_title_value'));
-  $query->fields('n', array('nid'));
-  $query->fields('eh', array('field_event_highlights_value'));
-  $query->condition('pt.field_programe_title_value', $daywise, '=');
-  $result = $query->execute();
-
+function itg_event_backend_get_session_story_title_move_field($daywise, $font_color, $nid = NULL) { 
+  $result = itg_event_backend_event_field_collection_media($daywise, $nid);
+  $key = 0;
+  $story_title = '';
   foreach ($result as $value) {
-    $daywise_detail = entity_load('field_collection_item', array($value->field_event_highlights_value));
-    $story_nid = $daywise_detail[$value->field_event_highlights_value]->field_associate_story_event_high[LANGUAGE_NONE][0]['target_id'];
-    $story_title = itg_common_get_node_title($story_nid);
+    $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
+    $story_nid = $daywise_detail[$value->field_event_media_value]->field_associate_story_event_new[LANGUAGE_NONE][0]['target_id'];
     $story_detail = itg_event_get_story_details($story_nid);
-    $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
-    $session['story_details'][] = $story_detail;
+    $story_title = $story_detail['title'];
+    $session[$key]['story_title'] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
+    $session[$key]['story_details'] = $story_detail;
+    $key++;
   }
   return $session;
 }
 
 /**
- * Implement function to get associated story
- * @return array
+ * Implement function return fieldcollection
  */
-function itg_event_backend_get_session_story_title_move_field($daywise, $font_color) { 
-  $query = db_select('node', 'n');
-  $query->join('field_data_field_event_media', 'media', 'n.nid = media.entity_id');
+function itg_event_backend_event_field_collection_media($daywise, $nid = NULL) {
+  $query = db_select('field_data_field_event_media', 'media');
   $query->join('field_data_field_daywise_event', 'daywise', 'daywise.entity_id = media.field_event_media_value');
   $query->fields('daywise', array('field_daywise_event_value'));
   $query->fields('media', array('field_event_media_value'));
   $query->condition('daywise.field_daywise_event_value', $daywise, '=');
+  $query->condition('daywise.bundle', 'field_event_media', '=');
+  $query->condition('media.entity_id', $nid, '=');
   $result = $query->execute();
-
-  foreach ($result as $value) {
-    $daywise_detail = entity_load('field_collection_item', array($value->field_event_media_value));
-    $story_nid = $daywise_detail[$value->field_event_media_value]->field_associate_story_event_new[LANGUAGE_NONE][0]['target_id'];
-    $story_title = itg_common_get_node_title($story_nid);
-    $story_detail = itg_event_get_story_details($story_nid);
-    $session['story_title'][] = l(t($story_title), 'node/' . $story_nid, array("attributes" => array("target" => "_blank", "style" => "color: $font_color; width:100%"), 'html' => TRUE));
-    $session['story_details'][] = $story_detail;
-  }
-  return $session;
+  return $result;
 }
 
 /**
@@ -1387,6 +1369,7 @@ function itg_event_get_story_details($nid) {
     $resu['uri'] = $rel->uri;
     $resu['kicker'] = $rel->field_story_kicker_text_value;
     $resu['nid'] = $rel->nid;
+    $resu['title'] = $rel->title;
   }
   return $resu;
 }
@@ -1627,8 +1610,7 @@ function itg_event_backend_get_event_node($whole_node = NULL) {
       if ($arg[0] == 'event') {
         $path = drupal_lookup_path("source", $arg[1] . '/' . $arg[2]);
         $event_nid = explode('/', $path);
-        $node = node_load($event_nid[1]);
-        return $node->nid;
+        return $event_nid[1];
       }
       elseif (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
         return $arg[1];
@@ -1792,11 +1774,6 @@ function itg_event_backend_header_add_block() {
  */
 function itg_event_backend_convert_number_to_words($number) {
 
-  $hyphen = '-';
-  $conjunction = ' and ';
-  $separator = ', ';
-  $negative = 'negative ';
-  $decimal = ' point ';
   $dictionary = array(
     0 => 'zero',
     1 => 'one',
@@ -1819,86 +1796,18 @@ function itg_event_backend_convert_number_to_words($number) {
     18 => 'eighteen',
     19 => 'nineteen',
     20 => 'twenty',
+    21 => 'twenty one',
+    22 => 'twenty two',
+    23 => 'twenty three',
+    24 => 'twenty four',
+    25 => 'twenty five',
+    26 => 'twenty six',
+    27 => 'twenty seven',
+    28 => 'twenty eight',
+    29 => 'twenty nine',
     30 => 'thirty',
-    40 => 'fourty',
-    50 => 'fifty',
-    60 => 'sixty',
-    70 => 'seventy',
-    80 => 'eighty',
-    90 => 'ninety',
-    100 => 'hundred',
-    1000 => 'thousand',
-    1000000 => 'million',
-    1000000000 => 'billion',
-    1000000000000 => 'trillion',
-    1000000000000000 => 'quadrillion',
-    1000000000000000000 => 'quintillion'
   );
-
-  if (!is_numeric($number)) {
-    return false;
-  }
-
-  if (($number >= 0 && (int) $number < 0) || (int) $number < 0 - PHP_INT_MAX) {
-    // overflow
-    trigger_error(
-        'convert_number_to_words only accepts numbers between -' . PHP_INT_MAX . ' and ' . PHP_INT_MAX, E_USER_WARNING
-    );
-    return false;
-  }
-
-  if ($number < 0) {
-    return $negative . convert_number_to_words(abs($number));
-  }
-
-  $string = $fraction = null;
-
-  if (strpos($number, '.') !== false) {
-    list($number, $fraction) = explode('.', $number);
-  }
-
-  switch (true) {
-    case $number < 21:
-      $string = $dictionary[$number];
-      break;
-    case $number < 100:
-      $tens = ((int) ($number / 10)) * 10;
-      $units = $number % 10;
-      $string = $dictionary[$tens];
-      if ($units) {
-        $string .= $hyphen . $dictionary[$units];
-      }
-      break;
-    case $number < 1000:
-      $hundreds = $number / 100;
-      $remainder = $number % 100;
-      $string = $dictionary[$hundreds] . ' ' . $dictionary[100];
-      if ($remainder) {
-        $string .= $conjunction . convert_number_to_words($remainder);
-      }
-      break;
-    default:
-      $baseUnit = pow(1000, floor(log($number, 1000)));
-      $numBaseUnits = (int) ($number / $baseUnit);
-      $remainder = $number % $baseUnit;
-      $string = convert_number_to_words($numBaseUnits) . ' ' . $dictionary[$baseUnit];
-      if ($remainder) {
-        $string .= $remainder < 100 ? $conjunction : $separator;
-        $string .= convert_number_to_words($remainder);
-      }
-      break;
-  }
-
-  if (null !== $fraction && is_numeric($fraction)) {
-    $string .= $decimal;
-    $words = array();
-    foreach (str_split((string) $fraction) as $number) {
-      $words[] = $dictionary[$number];
-    }
-    $string .= implode(' ', $words);
-  }
-
-  return $string;
+return $dictionary[$number];
 }
 
 /**
@@ -2452,6 +2361,7 @@ function itg_event_backend_tab_title($node, $tab_sef) {
 
    foreach ($node->field_event_tabs['und'] as $imagecollection){
     $value = field_collection_item_load($imagecollection['value'], $reset = FALSE);
+    //$value = entity_load('field_collection_item', array($imagecollection['value']));
     if($tab_sef == $value->field_tab_sef[LANGUAGE_NONE][0]['value']) {
     $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_name'] = $value->field_tab_name[LANGUAGE_NONE][0]['value'];
     $tab_value[$value->field_tab_sef[LANGUAGE_NONE][0]['value']]['tab_title'] = $value->field_tab_title[LANGUAGE_NONE][0]['value'];
@@ -2499,4 +2409,20 @@ function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font
   $flash_back_link .= '</ul>';
   $all_link = array('tab_top_menu' => $flash_back_link_top, 'tab_menu' => $flash_back_link);
   return $all_link;
+}
+
+/**
+ * Implement function for return node color
+ */
+function itg_event_backend_page_domain($nid) {
+  //p($nid);
+  $query = db_select('node', 'n');
+  $query->fields('fm', array('uri'));
+  $query->fields('color', array('field_e_menu_bck_color_rgb'));
+  $query->leftjoin('field_data_field_e_event_banner', 'banner', 'banner.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_menu_bck_color', 'color', 'color.entity_id = n.nid');
+  $query->leftjoin('file_managed', 'fm', 'fm.fid = banner.field_e_event_banner_fid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
 }
