@@ -288,7 +288,7 @@ function getStoryTechs($node) {
   $storytech = array();
   $listcont = 0;
   $tect_img = array();
-  $rating = $node->field_story_tech_pros_cons_ratin['und'][0]['value'];
+  $rating = $node->field_story_technology_rating['und'][0]['value'];
   $content = $node->field_story_tech_review_chunk['und'][0]['value'];
   // pros & cons function
   $content_org = $content;

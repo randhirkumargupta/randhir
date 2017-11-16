@@ -5,6 +5,13 @@
  * Contains the resource declarations for the service APIs
  * and other commons functions/hooks. if necessary
  */
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_photo');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_video');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_news');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_magazine');
+  //module_load_include('inc', 'itg_app_api', 'inc/helper');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_story');
+  module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_homePage');
 /**
  * Function for APP API resource declaration. 
  */
@@ -832,6 +839,34 @@ function itg_app_api_resource() {
         ),
       ),
     ),
+      
+      // testing custom resource declaration.....
+        'testing' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves testing schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_testing',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     
     
   );
@@ -1629,6 +1664,28 @@ function itg_app_api_livetv_tej($token) {
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+    return $return_obj;
+}
+
+/**
+ * Call back function for testing API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_testing($token) {
+
+
+
+    $str = '{
+	"status_code": "0",
+	"status_message": "Customised Message",
+	"data": {}
+}';
+
+
+    $jsondata = $str;
     $obj = json_decode($jsondata, true);
     $return_obj = $obj;
     return $return_obj;
