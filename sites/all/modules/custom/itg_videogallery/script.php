@@ -1296,8 +1296,8 @@ function itg_common_node_for_story_update_image() {
  $query = db_select('migrate_map_itgstorylist', 'n');
   $query->addField('n', 'destid1', 'nid');
   $query->join('field_data_field_story_category', 'fdfsc', 'fdfsc.entity_id = n.destid1');
-  $query->condition('fdfsc.field_story_category_tid', '1 206640', '!= ');
-  $query->condition('n.destid1', 206094, '>')->groupBy('n.destid1');
+  $query->condition('fdfsc.field_story_category_tid', '1206640', '!= ');
+  $query->condition('n.destid1', 210434, '>')->groupBy('n.destid1');
   $result = $query->execute()->fetchAll();
 
   foreach ($result as $res) {
