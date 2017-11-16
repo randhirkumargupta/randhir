@@ -2075,3 +2075,16 @@ function itg_common_cache_clear($cache_array = array()) {
     }
   }
 }
+
+/**
+ * Get calnder week start and end date
+ * @param array $week
+ * @param array $year
+ * @return array
+ */
+function _get_calender_week_start_end_date($week, $year) {
+  $dto = new DateTime();
+  $ret['week_start'] = $dto->setISODate($year, $week)->format('Y-m-d');
+  $ret['week_end'] = $dto->modify('+6 days')->format('Y-m-d');
+  return $ret;
+}

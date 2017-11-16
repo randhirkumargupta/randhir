@@ -156,6 +156,11 @@ define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.asp
 //}
 
 define('taxonomy_terms_per_page_admin' , 20);
+// Role id Define
+define('ADMINISTRATOR_ROLE_ID', 3);
+define('EDITOR_ROLE_ID', 6);
+define('SITEADMIN_ROLE_ID', 10);
+
 /**
  * Function for debugging arrays and objects.
  * @param $arg
