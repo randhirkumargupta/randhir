@@ -38,7 +38,6 @@ $conf = array(
 'cache_backends' => array('sites/all/modules/memcache/memcache.inc'),
 'cache_default_class' => 'MemCacheDrupal',
 'cache_class_cache_form' => 'DrupalDatabaseCache',
-//  'session_inc' => './sites/all/modules/memcache/memcache-session.inc',
   'memcache_servers' => array(
    'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',   
   ),
@@ -46,8 +45,7 @@ $conf = array(
     'cache' => 'default',
     'cache_filter' => 'default',
     'cache_menu' => 'default',
-    'cache_page' => 'default',
-   // 'session' => 'session',
+    'cache_page' => 'default',   
     'users' => 'default',
     'cache_pathdst' => 'default',
     'cache_pathsrc' => 'default',
