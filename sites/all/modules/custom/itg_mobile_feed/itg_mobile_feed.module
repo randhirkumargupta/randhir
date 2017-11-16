@@ -818,9 +818,15 @@ function getBodyDataForAndroid($str) {
   // variable declation
   $mob_str = "";
   //remove iframe..
+  $str = html_entity_decode($str);
+  $str = str_replace(array('[ITG:LISTICLES]','[ITG:FACTOIDS]','[ITG:EXPERT-CHUNK]','[ITG:TECH-PHOTOS]','[ITG:TECH-PHOTO-GALLERY]'), array('','','','',''), $str);
+  //if (strpos($str, '[ITG:SURVEY:')) {
+  // $str = str_replace($search, $replace, $subject);
+  //}
+  $str = str_replace('nbsp;',' ',$str);
   $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
-  $mob_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
-
+  //echo $mob_str;
+  //$img_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
   return $mob_str;
 }
 
@@ -1102,7 +1108,7 @@ function itg_mobile_feed_xml_feed_url_cron() {
  * Return String 
  */
 function xmlEscape($string) {
-    return str_replace(array('&', '<', '>', '\'', '"'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;'), $string);
+    return str_replace(array('&', '<', '>', '\'', '"','&nbsp;'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;',' '), $string);
 }
 
 /* Get The migrated video properties
