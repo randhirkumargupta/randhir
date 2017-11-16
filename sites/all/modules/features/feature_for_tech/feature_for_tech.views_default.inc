@@ -108,7 +108,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['exclude'] = TRUE;
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Field: Field: Short description */
+  /* Field: Field: iOS */
   $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
   $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
@@ -148,6 +148,18 @@ function feature_for_tech_views_default_views() {
     'image_style' => 'magazine_top_three_story_237x133',
     'image_link' => '',
   );
+  /* Field: Content: Addon Story Title URL */
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['id'] = 'field_story_redirection_url_titl';
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['table'] = 'field_data_field_story_redirection_url_titl';
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['field'] = 'field_story_redirection_url_titl';
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['label'] = '';
+  $handler->display->display_options['fields']['field_story_redirection_url_titl']['element_label_colon'] = FALSE;
+  /* Field: Content: Designation */
+  $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
+  $handler->display->display_options['fields']['field_story_new_title']['label'] = '';
+  $handler->display->display_options['fields']['field_story_new_title']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Section wise ordering content: weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';

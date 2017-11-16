@@ -1338,6 +1338,18 @@ function itg_widget_views_query_alter(&$view, &$query) {
     $view->query->add_field('itg_category_manager', 'status');
     $query->add_where(0, 'itg_category_manager.status', '1', '=');
   }
+  if ($view->name == 'live_tv_programs' && $view->current_display == 'page') {
+    $join = new views_join();
+    $join->table = 'itg_category_manager';
+    $join->field = 'tid';
+    $join->left_table = 'taxonomy_term_data';
+    $join->left_field = 'tid';
+    $join->type = 'LEFT';
+    //add the join the the view query
+    $view->query->add_relationship('itg_category_manager', $join, 'taxonomy_term_data');
+    $view->query->add_field('itg_category_manager', 'status');
+    $query->add_where(0, 'itg_category_manager.status', '1', '=');
+  }
 
   if ($view->name == 'anchor_option_view') {
     $query->where[1]['conditions'][2]['value'] = variable_get('anchor_id_for_widget');
@@ -2458,7 +2470,7 @@ function itg_poll_home_page_polls_select($nid) {
       $poll_banner_image = theme('image_style', array('style_name' => 'home_page_poll_images_style', 'path' => $node->field_poll_banner[$node->language][0]['uri']));
     }
     else {
-      $poll_banner_image = '<img src ="' .  file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg')) . '" alt="" title="" />';
+      $poll_banner_image = '<img src ="' .  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg') . '" alt="" title="" />';
     }
 
     $poll_image_exist_class = '';

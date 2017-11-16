@@ -172,7 +172,7 @@ function genrate_samsungtv_it_video_detail_xml($value, $section_id, $section_nam
   $created_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
   $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
   $source_type = $value['field_story_source_type_value'];
-  $videotag = video_detail_formats($nid, $source_type);
+  $videotag = itg_video_detail_formats($nid, $source_type);
 
   $video_xml = '<Root>';
   $video_xml .= '<item>';

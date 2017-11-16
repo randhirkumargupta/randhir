@@ -153,7 +153,7 @@ function itg_sso_reg_menu() {
   
   
   $items['akamai-user'] = array(
-    'title' => 'Logged in akamai user',
+    'title' => '',
     'page callback' => 'itg_sso_itgredirect',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
@@ -548,12 +548,12 @@ function itg_sso_itgredirect() {
   $redirect = base64_decode($arg[1]);
   watchdog('redirect_sso', $redirect);
   //drupal_goto($redirect);
-  print 'Please wait while redirecting';
+  //print 'Please wait while redirecting';
   
   drupal_add_js('
   jQuery(document).ready(function () {
     window.location.href = "' . $redirect . '";
   });', 'inline');
   
-  return 'Login';
+  return 'Please wait';
 }
