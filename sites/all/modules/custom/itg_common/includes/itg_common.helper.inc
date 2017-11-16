@@ -156,7 +156,6 @@ define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.asp
 //}
 
 define('taxonomy_terms_per_page_admin' , 20);
-
 /**
  * Function for debugging arrays and objects.
  * @param $arg
