@@ -89,7 +89,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       //get video tag
       $videotag = getVideoTag($node);
       if ($videotag) {
-        //$output .= $videotag;
+        $output .= $videotag;
       }
       else {
         $output .= emptygetVideoTag();
