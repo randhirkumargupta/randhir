@@ -5,11 +5,6 @@
  */
 global $base_url;
 $arg = arg();
-
-if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
-  $host_node = node_load($arg[1]);
-}
-
 $current_date = strtotime(date('Y-m-d  H:i:s'));
 if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
@@ -48,8 +43,8 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
           $output_story_kicker = '';
           foreach ($value as $program) {
             $media = $program["daywise"] . '--' . $program["session_title"] . '--' . $program["start_time"] . '--' . $program["end_time"];
-            $session_result = itg_event_backend_get_session_photo_video($media);
-            $story_title = itg_event_backend_get_session_story_title_move_field($media, $content_font_color);
+            $session_result = itg_event_backend_get_session_photo_video($media, $host_node->nid);
+            $story_title = itg_event_backend_get_session_story_title_move_field($media, $content_font_color, $host_node->nid);
             $output_story_title = '';
             foreach ($story_title as $title) {
 
