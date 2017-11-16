@@ -84,13 +84,13 @@ global $base_url;
     </section>
 </section>
 <div id="widget-ajex-loader" style="display: none">
-    <img class="widget-loader" src="<?php echo file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/loader.svg')); ?>" alt="Loading..." />
+    <img class="widget-loader" src="<?php echo file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/loader.svg'); ?>" alt="Loading..." />
 </div>
 <div id="iframe-display" style="display: none"></div>
 <?php
-$good_big = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/highlights_icons/good-big.png'));
-$bad_big = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/highlights_icons/Bad-big.png'));
-$wgmf_big = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/highlights_icons/wgmf-big.png'));
+  $good_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/highlights_icons/good-big.png');
+  $bad_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/highlights_icons/Bad-big.png');
+  $wgmf_big = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/highlights_icons/wgmf-big.png');
 ?>
 <!--animation emoji for hightlight-->
 <div id="smily">
