@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(0);
+//error_reporting(0);
 set_time_limit(0);
 ini_set('memory_limit', '-1');
 $args = drush_get_arguments(); // Get the arguments.
@@ -45,8 +45,8 @@ function check_node_is_maped_all($type) {
       ->fields('n', array('id'))
       ->condition('type', $type, ' = ')
       ->execute()
-      ->fetchField();
-  return $result;
+      ->fetchAllAssoc('id');
+  return array_keys($result);
 }
 
 //itg_common_node_for_byline_update_image();
@@ -1291,14 +1291,13 @@ function itg_common_node_for_photogallery_update_image() {
 /*
  * This function use for update image in photogallery
  */
-
 function itg_common_node_for_story_update_image() {
   $data_list = check_node_is_maped_all('story');
-  p($data_list);
   $query = db_select('migrate_map_itgstorylist', 'n');
   $query->addField('n', 'destid1', 'nid');
   $query->join('field_data_field_story_category', 'fdfsc', 'fdfsc.entity_id = n.destid1');
-  $query->condition('fdfsc.field_story_category_tid', '1 206640', '!= ')->groupBy('n.destid1')->range(0, 100);
+  $query->condition('fdfsc.field_story_category_tid', '1 206640', '!= ');
+  $query->condition('n.destid1', $data_list, 'NOT IN')->groupBy('n.destid1')->range(0, 100);
   $result = $query->execute()->fetchAll();
   foreach ($result as $res) {
     $extra_large_image = array();

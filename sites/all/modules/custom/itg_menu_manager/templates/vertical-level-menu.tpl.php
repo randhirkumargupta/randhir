@@ -26,7 +26,8 @@
           $url_type = $menu_link_data['url_type'];
           //Check if icon found empty.
           if (empty($icon)) {
-            $image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/default_for_all_48_32.jpeg'));
+            $image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default_for_all_48_32.jpg');
+            //$image_url = file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/default_for_all_48_32.jpeg'));
             //$image_url = $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/default_for_all_48_32.jpeg";
             $icon = "<img src='" . $image_url . "' alt='' title='' />";
           }
