@@ -1676,14 +1676,11 @@ function itg_app_api_livetv_tej($token) {
  */
 function itg_rapid_api_testing($token) {
 
-
-
     $str = '{
 	"status_code": "0",
 	"status_message": "Customised Message",
 	"data": {}
 }';
-
 
     $jsondata = $str;
     $obj = json_decode($jsondata, true);
