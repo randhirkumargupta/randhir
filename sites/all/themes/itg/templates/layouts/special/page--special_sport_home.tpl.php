@@ -339,33 +339,32 @@ if ($theme != 'itgadmin') {
                                 <div class="widget-help-text"><?php print t(' Draggable'); ?> ( <strong><?php print t('Points tally'); ?></strong> )</div>
                                 <div class="itg-widget">
                                     <div class="droppable <?php print $gray_bg_layout; ?>">
-                                        <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'] . $widget_data['itg-block-7']['widget_display_name']; ?>">
+                                        <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'] . $widget_data['itg-block-7']['widget_display_name']; ?>">                      
                                             <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-7']['block_title'])) { ?>
                                               <span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
                                             <?php } ?>
-                                            <!-- for admin  -->
                                             <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                               <div class="widget-settings">
                                                   <div class="widget-title-wrapper">
                                                       <span class="widget-title" data-id="itg-block-7"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
-                                                      <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-7']['block_title']; ?>" name="itg-block-7" class="block_title_id" placeholder="Enter Title" />
+                                                      <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-7']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />
                                                   </div>
-                                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>                                                    
-                                                <?php } ?>  
-                                                <div class="data-holder" id="itg-block-7">
-                                                    <?php //print views_embed_view('sport_ipl', 'points_tally', ""); ?>
-                                                    <?php
-                                                    if (isset($widget_data['itg-block-7']['widget'])) {
-                                                      print $widget_data['itg-block-7']['widget'];
-                                                    }
-                                                    else {
-                                                      print '<div class="widget-placeholder"><span>' . t('Points tally') . '</span></div>';
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>             
-                                        </div>               
-                                    </div>  
+                                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>                                                        <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-7"><i class="fa fa-times"></i></a></span>
+                                                  </span>
+                                              </div>  
+                                            <?php } ?>    
+                                            <div class="data-holder" id="itg-block-7">
+                                                <?php
+                                                if (isset($widget_data['itg-block-7']['widget'])) {
+                                                  print $widget_data['itg-block-7']['widget'];
+                                                }
+                                                else {
+                                                  print '<div class="widget-placeholder"><span>' . t('Points tally') . '</span></div>';
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>                     
+                                    </div> 
                                 </div>
                                 <div class="col-md-12 col-sm-6 itg-layout-375">
                                     <div class="widget-help-text"><?php print t(' Draggable'); ?> ( <strong><?php print t('Top performers'); ?></strong> )</div>
@@ -453,21 +452,22 @@ if ($theme != 'itgadmin') {
                                                       <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>                                                    
                                                   </div>
                                                 <?php } ?>  
-                                                <div class="data-holder" id="itg-block-10"><?php $block = module_invoke('itg_widget', 'block_view', 'ipl_tweets');
-                                                print render($block['content']);
-                                                ?></div>
+                                                <div class="data-holder" id="itg-block-10"><?php
+                                                    $block = module_invoke('itg_widget', 'block_view', 'ipl_tweets');
+                                                    print render($block['content']);
+                                                    ?></div>
                                             </div>             
                                         </div>               
                                     </div>  
                                 </div>
                             </div>
-<?php //}  ?>
+<?php //}   ?>
                         </div>
                     </div>
                 </div>
                 <!--------------------------------Code for Front tpl---------------------------------------->
                 <?php if ($theme != 'itgadmin') { ?>
-          <?php //print $feed_icons;    ?>
+          <?php //print $feed_icons;     ?>
           </section>
               <?php if (false) { ?> 
             <div id="navigation">
