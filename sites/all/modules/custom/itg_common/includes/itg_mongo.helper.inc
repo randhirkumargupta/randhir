@@ -343,7 +343,7 @@ function itg_personalization_get_followed_status($tid) {
     $con = mongodb();
     if (isset($con)) {
       $people = $con->following_personalization;
-      $cond = array('tid' => $tid);
+      $cond = array('tid' => (string)$tid);
       $cursor = $people->count($cond);
       return $cursor;
     }

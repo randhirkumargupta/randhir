@@ -3,24 +3,24 @@
  * @file
  * Returns the HTML for a single Drupal page.
  */
-
 global $base_url;
 $arg = arg();
 if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
-  $host_node = node_load($arg[1]);
+  $nid = $arg[1];
 }elseif($arg[0] == 'event' && !empty($arg[0])){
-  //$path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
   $path = drupal_lookup_path("source", $arg[1].'/'.$arg[2]);
-  $host_node = menu_get_object("node", 1, $path);
+  $nid_id = explode('/', $path);
+  $nid = $nid_id[1];
   if((!empty($arg[2]) && $arg[2] == 'registration') && empty($host_node)){ // unpublish condition
-    $nid = explode('/', $path);
-    $host_node = node_load($nid[1]);
-    
+    $nid_id = explode('/', $path);
+    $nid = $nid_id[1];
   }
 }
-$banner_image = file_create_url($host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri']);
-$banner_image = $host_node->field_e_event_banner[LANGUAGE_NONE][0]['uri'] ? $banner_image : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg';
-$menu_background_color = $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] ? $host_node->field_e_menu_bck_color[LANGUAGE_NONE][0]['rgb'] : '#000';
+$node_value = itg_event_backend_page_domain($nid);
+$banner_image_uri = $node_value[0]->uri;
+$menu_color = $node_value[0]->field_e_menu_bck_color_rgb;
+$banner_image = (!empty($banner_image_uri) ? file_create_url($banner_image_uri) : $base_url.'/'.drupal_get_path('module', 'itg_event_backend').'/event_banner.jpeg');
+$menu_background_color = (!empty($menu_color) ? $menu_color : '#000');
 ?>
 <div id="page">
   <div class="event-sidebar">

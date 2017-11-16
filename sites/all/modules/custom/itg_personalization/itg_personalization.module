@@ -702,11 +702,9 @@ function _personalization_to_be_follow_content() {
   $featured_tag = get_featured_tag();
   $output = '<div class="to_be_follow"><h2>To Be Follow</h2>';
   foreach ($featured_tag as $key => $value) {
-    if (get_featured_tag_status($value['entity_id']) == 'Published' && itg_personalization_get_followed_status($value['entity_id']) == 0) {
-      if (function_exists('get_term_name_from_tid_for_report')) {
-        $link = '<a class="tobe-follow" href="javascript:void(0)" data-tag="follow" data-value="'.$value['entity_id'].'"> Follow</a>';
-        $output .='<div class="featured-name">' . get_term_name_from_tid_for_report($value['entity_id']) . '<span>'.$link.'</span></div>';
-      }
+    if (itg_personalization_get_followed_status($key) == 0) {
+        $link = '<a class="tobe-follow" href="javascript:void(0)" data-tag="follow" data-value="'.$key.'"> Follow</a>';
+        $output .='<div class="featured-name">' . $value . '<span>'.$link.'</span></div>';
     }
   }
   $output .= '</div>';
@@ -754,12 +752,18 @@ function itg_user_fb_share_count($uid, $type) {
  * Helper function to get featured tag
  */
 function get_featured_tag() {
-   $result = db_select('field_data_field_tags_display', 'ts')
-        ->fields('ts', array('entity_id'))
-        ->condition('field_tags_display_value', 'Yes')
-        ->execute();
-    $featured_data = $result->fetchAll(PDO::FETCH_ASSOC);
-    return $featured_data;
+  $query = db_select('field_data_field_tags_display', 'ts');
+  $query->join('field_data_field_tags_status', 'th', 'th.entity_id = ts.entity_id');
+  $query->join('taxonomy_term_data', 'tn', 'tn.tid = ts.entity_id');
+  $query->condition('ts.field_tags_display_value', 'Yes');
+  $query->condition('th.field_tags_status_value', 'Published');
+  $query->fields('ts', array('entity_id'));
+  $query->fields('tn', array('name'));
+  $result = $query->execute();
+  foreach ($result as $row) {
+    $tags_id[$row->entity_id] = $row->name;
+  }
+  return $tags_id;
 }
 
 /**
