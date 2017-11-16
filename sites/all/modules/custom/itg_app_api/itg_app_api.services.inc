@@ -24,7 +24,7 @@ module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_bookmark');
 /**
  * Function for APP API resource declaration. 
  */
-function itg_rapid_api_resource() {
+function itg_app_api_resource() {
 
     $api = array(
         /**
