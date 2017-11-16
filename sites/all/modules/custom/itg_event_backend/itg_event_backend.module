@@ -1302,7 +1302,7 @@ function itg_event_backend_get_session_sponsor($daywise, $nid = NULL) {
   $query->fields('daywise', array('field_daywise_event_value'));
   $query->fields('media', array('field_associate_sponsors_value'));
   $query->condition('daywise.field_daywise_event_value', $daywise, '=');
-  $query->condition('bundle', 'field_associate_sponsors', '=');
+  $query->condition('media.bundle', 'field_associate_sponsors', '=');
   $query->condition('media.entity_id', $nid, '=');
   $result = $query->execute();
   foreach ($result as $value) {
@@ -1343,7 +1343,7 @@ function itg_event_backend_event_field_collection_media($daywise, $nid = NULL) {
   $query->fields('daywise', array('field_daywise_event_value'));
   $query->fields('media', array('field_event_media_value'));
   $query->condition('daywise.field_daywise_event_value', $daywise, '=');
-  $query->condition('daywise.bundle', 'field_event_media', '=');
+  $query->condition('media.bundle', 'field_event_media', '=');
   $query->condition('media.entity_id', $nid, '=');
   $result = $query->execute();
   return $result;
