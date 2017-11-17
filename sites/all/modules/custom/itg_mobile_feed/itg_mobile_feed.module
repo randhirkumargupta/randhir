@@ -728,7 +728,7 @@ function getNodeFeedTag($tid, $type, $count) {
     $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
 
     // create date formating
-    $create_date = date("F d, Y", $created);
+    $create_date = date("Y-m-d H:i:s", $created);
     $create_datetime = date(DATE_ATOM, $created);
     $output .= "<title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage>";
     if ($type == "photogallery") {
@@ -819,6 +819,18 @@ function getBodyDataForAndroid($str) {
   $mob_str = "";
   //remove iframe..
   $str = html_entity_decode($str);
+
+  //$str = str_replace(array('[ITG:LISTICLES]','[ITG:FACTOIDS]','[ITG:EXPERT-CHUNK]','[ITG:TECH-PHOTOS]','[ITG:TECH-PHOTO-GALLERY]'), array('','','','',''), $str);
+  //if (strpos($str, '[ITG:SURVEY:')) {
+  // $str = str_replace($search, $replace, $subject);
+  //}
+  //$caption_text = getStringBetween($str, '<div class="body_caption">', '</div>');
+  $str = str_replace(array('<div class="itgimage">','data-syndication="no"'),array('<div class="itg-mosimage">',''),$str);
+  //$str = str_replace('<div class="body_caption"></div>','',$str);
+  $str = preg_replace('/<div class=\"body_caption\">.*<\/div>/','',$str);
+  $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
+  $body = preg_replace('/\[[^]]+\]/', '', $body);
+
   $str = str_replace(array('[ITG:LISTICLES]','[ITG:FACTOIDS]','[ITG:EXPERT-CHUNK]','[ITG:TECH-PHOTOS]','[ITG:TECH-PHOTO-GALLERY]'), array('','','','',''), $str);
   //if (strpos($str, '[ITG:SURVEY:')) {
   // $str = str_replace($search, $replace, $subject);
@@ -827,6 +839,7 @@ function getBodyDataForAndroid($str) {
   $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
   //echo $mob_str;
   //$img_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
+
   return $mob_str;
 }
 
@@ -1055,6 +1068,9 @@ function itg_mobile_feed_xml_feed_url_cron() {
     $xml_feed_url[] = "root-category-content-page-feed/1206567";
     $xml_feed_url[] = "root-category-content-page-feed/1207414";
     $xml_feed_url[] = "root-category-content-page-feed/1206689";
+    $xml_feed_url[] = "root-category-content-page-feed/1206572";
+    $xml_feed_url[] = "root-category-content-page-feed/1206589";
+    $xml_feed_url[] = "root-category-content-page-feed/1206796";
     $xml_feed_url[] = "root-category-content-page-feed/1206688";
     $xml_feed_url[] = "photo-section-page-feed";
     $xml_feed_url[] = "photo-category-page-feed/1206578";
@@ -1085,7 +1101,7 @@ function itg_mobile_feed_xml_feed_url_cron() {
     $xml_feed_url[] = "video-detail-page-feed/18815";
     $xml_feed_url[] = "photo-detail-page-feed/626";*/
     
-    $xml_feed_url[] = "root-category-content-page-feed/1207414";
+    $xml_feed_url[] = "root-category-content-page-feed/1206666";//Education today
     
     foreach ($array as $key => $value) {    
         $data = '';
