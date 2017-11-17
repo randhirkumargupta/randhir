@@ -262,7 +262,11 @@ $argum = base64_encode(arg(1));
 </div>
 
 <?php
-$initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
+$initial_slide = 0;
+
+if(isset($_GET['photo']) && $_GET['photo']) {
+  $initial_slide = $_GET['photo']-1;
+}
 ?>
 <script>
   jQuery(document).ready(function (e) {
@@ -273,7 +277,7 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
           fade: false,
           asNavFor: '.slick-thumbs-slider, .counterslide, .photo-by-slider',
           // For active slide
-          initialSlide: <?php echo --$initial_slide; ?>,
+          initialSlide: <?php echo $initial_slide; ?>,
       });
       jQuery('.slick-thumbs-slider').slick({
           slidesToShow: 7,
