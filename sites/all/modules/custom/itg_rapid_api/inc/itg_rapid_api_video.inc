@@ -429,7 +429,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $query->fields('fpc', array('field_primary_category_value'));
     $query->fields('ffd', array('field_story_expert_description_value'));
     //end
-    $d1 = date('Y-m-d', strtotime("-90 days"));
+    $d1 = date('Y-m-d', strtotime("-180 days"));
     $d2 = date(strtotime($d1));
     
     if (count($tid_list) > 0) {
