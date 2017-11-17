@@ -1,13 +1,6 @@
 <?php
-
-global $base_url;
-$arg = arg();
-if (!empty($arg1) && is_numeric($arg1)) {
-  $host_node = node_load($arg1);
-}elseif($arg[0] == 'event'){
-  $path = drupal_lookup_path("source", $arg[0].'/'.$arg[1]);
-  $host_node = menu_get_object("node", 1, $path);
-}
+//global $base_url;
+$host_node = itg_event_backend_get_event_node('node');
 $actual_host_name = itg_event_get_host_name();
 
 if($actual_host_name) {
@@ -33,16 +26,15 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
   <?php
   $media = '';
      $media = $row['field_daywise_event'].'--'.$row['field_story_expert_name'].'--'.$row['field_start_time_1'].'--'.$row['field_start_time_2'];
-     $sponsors_data = itg_event_backend_get_session_sponsor($media);
+     $sponsors_data = itg_event_backend_get_session_sponsor($media, $host_node->nid);
      $sponsor_all_data = "";
      $sponsor_tags = "";
       if(!empty($sponsors_data)) {
-         $sponsor_all_data = node_load($sponsors_data['sponsor']);
+         $sponsor_all_data = itg_event_backend_sponsor_details($sponsors_data['sponsor']);
      }
-    
-     if($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
-         $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" title=  />';
-         $sponsor_tags = '<div class="program-sch-sponcor"><div class="div-sponcor"><span>'.t("Powered By").'</span>'.l($sponsor_img,$baseurl.'sponsor-details',  array('attributes' => array('target' => '_blank'),'query' => array('sponsor' => $sponsor_all_data->nid), 'html' => true)).'</div></div>';
+     if($sponsor_all_data[0]->uri != "") {
+         $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data[0]->uri) . ' alt="" title= "'.$sponsor_all_data[0]->title.'" />';
+         $sponsor_tags = '<div class="program-sch-sponcor"><div class="div-sponcor"><span>'.t("Powered By").'</span>'.l($sponsor_img,$baseurl.'sponsor-details',  array('attributes' => array('target' => '_blank'),'query' => array('sponsor' => $sponsor_all_data[0]->nid), 'html' => true)).'</div></div>';
      }
      
      $row_count = count($rows);

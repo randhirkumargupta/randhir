@@ -2426,3 +2426,17 @@ function itg_event_backend_page_domain($nid) {
   $result = $query->execute()->fetchAll();
   return $result;
 }
+
+/**
+ * Implement funciton for sponsor details
+ */
+function itg_event_backend_sponsor_details($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fm', array('uri'));
+  $query->fields('n', array('nid', 'title'));
+  $query->leftjoin('field_data_field_sponser_logo', 'logo', 'logo.entity_id = n.nid');
+  $query->leftjoin('file_managed', 'fm', 'fm.fid = logo.field_sponser_logo_fid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
