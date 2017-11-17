@@ -225,17 +225,12 @@
 //#####################################################################################
 
 // one slave setting
-$databases['default']['default'] = array(
+/*$databases['default']['default'] = array(
   'driver' => 'autoslave',
-  'master' => array('master', 'autoslave'), // optional, defaults to 'master'
-  'slave' => array('autoslave', 'master'), // optional, defaults to 'autoslave'  
-  // Always use "master" for tables "semaphore" and "sessions"
+  'master' => 'master', // optional, defaults to 'master'
+  'slave' => 'autoslave', // optional, defaults to 'autoslave'  
+// Always use "master" for tables "semaphore" and "sessions"
   'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
-  'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'"),
-  'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
-  'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
-  //'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
-  'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
 );
 
 
@@ -259,7 +254,6 @@ $databases['default']['autoslave'] = array(
   'port' => '3306',
   'driver' => 'mysql',
   'prefix' => '',
-  'readonly' => TRUE
 );
 
 $databases['sso_db']['default'] = array(
@@ -270,12 +264,12 @@ $databases['sso_db']['default'] = array(
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
-);
+);*/
 // end setting for UAT
 //#####################################################################################
 
 //for production setting
-/*$databases['default']['master'][] = array (
+$databases['default']['master'][] = array (
   'database' => 'indiatoday',
   'username' => 'prod_it_write',
   'password' => 'pr0d_!t@64',
@@ -309,8 +303,8 @@ $databases['default']['slave'][] = array (
 
 $databases['default']['default'] = array (
   'driver' => 'autoslave',
-  'master' => array('master'),
-  'slave' => array('slave'),
+  'master' => array('master', 'slave'),
+  'slave' => array('slave', 'master'),
   'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
   'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
   //'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
@@ -326,11 +320,12 @@ $databases['sso_db']['default'] = array(
       'port' => '3306',
       'driver' => 'mysql',
       'prefix' => '',
-);*/
+);
 //end production setting
 
 // Use locking that supports force master
 $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
+// $conf['lock_inc'] = 'sites/all/modules/contrib/memcache_storage/includes/lock.inc';
 
 //$conf['cache_default_class'] = 'AutoslaveCache';
 //$conf['autoslave_cache_default_class'] = 'ConsistentCache';
@@ -720,10 +715,13 @@ $local_settings = dirname(__FILE__) . '/local.settings.php';
 if (file_exists($local_settings)) {
    include $local_settings;
 }
-MongoCursor::$slaveOkay = true;
+//MongoCursor::$slaveOkay = true;
 $conf['image_suppress_itok_output'] = TRUE;
 $conf['image_allow_insecure_derivatives'] = TRUE;
 $conf['block_cache_bypass_node_grants'] = TRUE;
 $base_url = 'https://'.$_SERVER['SERVER_NAME'];
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(-1);

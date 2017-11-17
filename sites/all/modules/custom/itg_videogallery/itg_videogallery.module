@@ -4919,7 +4919,7 @@ function itg_videogallery_get_all_draft_video_of_video_content() {
  * This function use for get video bitrate url
  * 
  */
-function itg_videogallery_get_video_bitrate_by_url($url,$nid,$used_on) {
+function itg_videogallery_get_video_bitrate_by_url($url,$nid,$used_on,$external = NULL) {
   $return_array = array();
   $query = db_select('itg_video_transcoding', 'ivt');
   $query->fields('ivt');
@@ -4948,13 +4948,12 @@ function itg_videogallery_get_video_bitrate_by_url($url,$nid,$used_on) {
    $dfp_data = itg_videogallery_get_dfp_tags ($video_data1[0]->website , $video_data1[0]->transcoding_source);
    
 if(!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
-  if($used_on == 'embed') {
-          $return_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_internal;
-
-  }else{
-      $return_array['dfp_tags'] =  $dfp_data[0]->dfp_tags;
-
-  }
+   if($external == 1)
+    {
+          $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_external;
+    }else {
+       $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_internal;
+    }
 }else {
   $return_array['dfp_tags'] =  JWPLAYER_DFP_TAG;
 }
@@ -4995,7 +4994,7 @@ if(count($bitrates) == 1) {
  * Implements itg_videogallery_make_url_for_jwpalyer
  * @parm array $video_data
  */
-function itg_videogallery_make_parm_for_jwpalyer($video_data,$used_on) {
+function itg_videogallery_make_parm_for_jwpalyer($video_data,$used_on , $external) {
   global $base_url;
   $retrun_array = array();
   if(!empty($video_data)) {
@@ -5011,12 +5010,18 @@ function itg_videogallery_make_parm_for_jwpalyer($video_data,$used_on) {
   }
   $dfp_data = itg_videogallery_get_dfp_tags ($video_data['in']['website'] , $video_data['in']['client']);
 if(!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
+  
   if($used_on == 'embed') {
-          $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_internal;
+    if($external == 1)
+    {
+          $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_external;
+    }else {
+       $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags_internal;
+    }
+         
 
   }else{
       $retrun_array['dfp_tags'] =  $dfp_data[0]->dfp_tags;
-
   }
 }else {
   $retrun_array['dfp_tags'] =  JWPLAYER_DFP_TAG;
