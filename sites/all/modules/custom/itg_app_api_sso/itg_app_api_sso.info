@@ -1,0 +1,6 @@
+name = ITG App API Services SSO
+description = Rest WebService APIs for ITG App API SSO.
+core = 7.x
+dependencies[] = services
+dependencies[] = rest_server
+dependencies[] = itg_mobile_feed

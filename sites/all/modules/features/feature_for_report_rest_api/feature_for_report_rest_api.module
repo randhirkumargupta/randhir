@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Code for the Feature For Report Rest API feature.
+ * Code for the feature_for_app_rest_api feature.
  */
 
 include_once 'feature_for_report_rest_api.features.inc';

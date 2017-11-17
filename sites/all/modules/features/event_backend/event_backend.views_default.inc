@@ -3329,8 +3329,6 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['path'] = '[php]/speaker-details?speaker=[nid]';
   $handler->display->display_options['fields']['field_story_extra_large_image']['alter']['absolute'] = TRUE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';

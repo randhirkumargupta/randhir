@@ -712,8 +712,8 @@ function itg_photogallery_byline_photoby($type, $id) {
  */
 function itg_photogallery_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
 
-	//Get the Form Id
-	if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-3' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-8' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-9' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-7' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-4') {
+	//Get the Form Id   
+	if ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-10' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-3' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-8' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-6' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-9' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-7' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-4') {
 		//$form['#after_build'][] = 'itg_breaking_news_views_exposed_after_build';
 		//$form['title']['#autocomplete_path'] = 'content-title-list/photogallery/autocomplete';
 		$form['title']['#autocomplete_path'] = 'photo-workbench-title-list/photogallery/' . arg(0) . '/autocomplete';
