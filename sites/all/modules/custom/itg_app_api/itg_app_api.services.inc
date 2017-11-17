@@ -3193,7 +3193,7 @@ function itg_rapid_api_signup($token) {
     if ($login_type == 0) {
 
         $rand = rand();
-        $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+        $url = PARENT_SSO . "/appapi/check_user/" . $rand;
         $result = callAPI("GET", $url, $data);
         $result_obj = json_decode($result);
 
@@ -3215,7 +3215,7 @@ function itg_rapid_api_signup($token) {
             $method = "POST";
             $data = $params;
             $account = array();
-            $url = SSO_SERVER_URL . "/appapi/signup";
+            $url = PARENT_SSO . "/appapi/signup";
             $result = callAPI($method, $url, $data);
             $result_obj = json_decode($result);
             $uid = $result_obj->uid;
@@ -3270,7 +3270,7 @@ function itg_rapid_api_signup($token) {
 
         $rand = rand();
         $account = array();
-        $url = SSO_SERVER_URL . "/appapi/fblogin/" . $rand;
+        $url = PARENT_SSO . "/appapi/fblogin/" . $rand;
 
         $result = callAPI("GET", $url, $data);
 
@@ -3348,7 +3348,7 @@ function itg_rapid_api_signup($token) {
 
         $rand = rand();
         $account = array();
-        $url = SSO_SERVER_URL . "/appapi/fblogin/" . $rand;
+        $url = PARENT_SSO . "/appapi/fblogin/" . $rand;
 
         $result = callAPI("GET", $url, $data);
 
@@ -3422,7 +3422,7 @@ function itg_rapid_api_login_request($token) {
     }
 
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $data);
     $result_obj = json_decode($result);
     if (!$result_obj->uid) {
@@ -3439,7 +3439,7 @@ function itg_rapid_api_login_request($token) {
         return $account_err;
     }
     $account = array();
-    $url = SSO_SERVER_URL . "/appapi/login_request";
+    $url = PARENT_SSO . "/appapi/login_request";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
     $uid = 0;
@@ -3533,7 +3533,7 @@ function itg_rapid_api_edit_user_image($token) {
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -3561,7 +3561,7 @@ function itg_rapid_api_edit_user_image($token) {
 
         // call sso server api
         $method = "POST";
-        $url = SSO_SERVER_URL . "/appapi/edit_user_image";
+        $url = PARENT_SSO . "/appapi/edit_user_image";
         $result = callAPI($method, $url, $params);
 
         // check mime-type
@@ -3612,7 +3612,7 @@ function itg_rapid_api_log_out($token) {
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     // check valid user_id
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $token = $params['auth_token'];
     $result_obj = json_decode($result);
@@ -3636,7 +3636,7 @@ function itg_rapid_api_log_out($token) {
     {
         // call sso server api
         $method = "POST";
-        $url = SSO_SERVER_URL . "/appapi/log_out";
+        $url = PARENT_SSO . "/appapi/log_out";
         $result = callAPI($method, $url, $params);
         $user_id = $params['user_id'];
         $user = user_load_by_name($user_id);
@@ -3686,7 +3686,7 @@ function itg_rapid_api_change_password($token) {
         return $account_err;
     }
 
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -3705,7 +3705,7 @@ function itg_rapid_api_change_password($token) {
         return $res;
     }
 
-    $url = SSO_SERVER_URL . "/appapi/change_password";
+    $url = PARENT_SSO . "/appapi/change_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
@@ -3770,7 +3770,7 @@ function itg_rapid_api_forgot_password($token) {
 
     // check valid user_id
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -3780,14 +3780,14 @@ function itg_rapid_api_forgot_password($token) {
         return $account_err;
     }
 
-    $url = SSO_SERVER_URL . "/appapi/forgot_password";
+    $url = PARENT_SSO . "/appapi/forgot_password";
     //itg_otp_device_info_insert_rapid($params);
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
     // get_otp & insert into itg_otp_device_info
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/get_otp/" . $rand;
+    $url = PARENT_SSO . "/appapi/get_otp/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj_otp = json_decode($result);
 
@@ -3826,7 +3826,7 @@ function itg_rapid_api_otp_verification($token) {
         return $account_err;
     }
     //$params = $_POST;
-    $url = SSO_SERVER_URL . "/appapi/otp_verification";
+    $url = PARENT_SSO . "/appapi/otp_verification";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
@@ -3888,7 +3888,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
     }
     //$params = $_POST;
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -3898,7 +3898,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
         return $account_err;
     }
 
-    $url = SSO_SERVER_URL . "/appapi/resend_otp";
+    $url = PARENT_SSO . "/appapi/resend_otp";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
@@ -3918,7 +3918,7 @@ function itg_rapid_api_get_login_user_detail($token) {
     $data = array();
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -3989,7 +3989,7 @@ function itg_rapid_api_edit_profile($token) {
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -4017,7 +4017,7 @@ function itg_rapid_api_edit_profile($token) {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "invalid token";
     } else {
-        $url = SSO_SERVER_URL . "/appapi/edit_profile";
+        $url = PARENT_SSO . "/appapi/edit_profile";
         $result = callAPI($method, $url, $params);
         $result_obj = json_decode($result);
 
@@ -4042,7 +4042,7 @@ function itg_rapid_api_get_preference($token) {
     $user_id = $params['user_id'];
     $authtoken_id = $params['authtoken_id'];
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -4112,7 +4112,7 @@ function itg_rapid_api_update_preference($token) {
     }
 
     $rand = rand();
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -4179,7 +4179,7 @@ function itg_rapid_api_reset_password($token) {
         return $account_err;
     }
 
-    $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+    $url = PARENT_SSO . "/appapi/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -4189,7 +4189,7 @@ function itg_rapid_api_reset_password($token) {
         return $account_err;
     }
 
-    $url = SSO_SERVER_URL . "/appapi/reset_password";
+    $url = PARENT_SSO . "/appapi/reset_password";
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
@@ -4253,7 +4253,7 @@ function itg_rapid_api_authtoken_verification($token) {
         return $account_err;
     } else {
         $rand = rand();
-        $url = SSO_SERVER_URL . "/appapi/check_user/" . $rand;
+        $url = PARENT_SSO . "/appapi/check_user/" . $rand;
         $result = callAPI("GET", $url, $params);
         $result_obj = json_decode($result);
 
