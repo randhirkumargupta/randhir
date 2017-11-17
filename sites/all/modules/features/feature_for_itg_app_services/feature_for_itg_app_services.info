@@ -1,10 +1,9 @@
-name = feature_for_app_rest_api
-description = feature_for_app_rest_api
+name = Feature For Rest API
+description = Feature for app api rest services
 core = 7.x
 package = Features
-version = 7.x-1.0
+version = 7.x-1.4
 dependencies[] = ctools
-dependencies[] = itg_app_api
 dependencies[] = itg_mobile_feed
 dependencies[] = rest_server
 dependencies[] = services
