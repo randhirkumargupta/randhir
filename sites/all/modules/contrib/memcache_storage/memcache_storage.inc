@@ -325,6 +325,7 @@ class MemcacheStorage implements DrupalCacheInterface {
     if ($cached = cache_get('variables', 'cache_bootstrap')) {
       $variables = $cached->data;
       $variables[$name] = $value;
+      echo "Memcache Storage Hit" . "<br>";
       cache_set('variables', $variables, 'cache_bootstrap');
     }
 

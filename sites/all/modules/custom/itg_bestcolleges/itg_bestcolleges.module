@@ -121,6 +121,12 @@ function itg_bestcolleges_menu() {
     'access callback' => TRUE,
   );
 
+  $items['bestcollege_remove'] = array(
+    'title' => "Create taxonomy",
+    'page callback' => 'bestcollege_remove',
+    'access callback' => TRUE,
+  );
+
   $items['bestcollege/config'] = array(
     'title' => 'Bestcollege Configuration',
     'page callback' => 'drupal_get_form',
@@ -130,6 +136,19 @@ function itg_bestcolleges_menu() {
     'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+/**
+ * Remove bestcolleges node
+ */
+function bestcollege_remove() {
+  $query = db_select('node', 'n');
+  $query->condition('n.type', 'bestcolleges', '=');
+  $query->fields('n', array('nid'));
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result as $reskey => $resvalue) {
+    node_delete($resvalue['nid']);
+  }
 }
 
 /**
@@ -1512,11 +1531,9 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
       }
     }
     itg_watchdog('bestcollege_master_pass', $line);
-    drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
+    //drupal_set_message(check_plain(t('Pass line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   }
   else {
-    drupal_set_message(check_plain(t('Fail line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
-    drupal_set_message(check_plain(t('Fail line !var stream = !var1')), array('!var' => $line[0], '!var1' => $stream));
     itg_watchdog('bestcollege_master_fail', $line);
   }
 }

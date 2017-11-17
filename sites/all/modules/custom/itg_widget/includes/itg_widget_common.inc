@@ -1490,6 +1490,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
     }
   }
   if ($view->name == 'key_candidate' && $view->current_display == 'special_key_candidate_widget_list') {
+   // p($query->where[1]['conditions']);
     if ($_GET['state'] == 0) {
       if ($query->where[1]['conditions'][3]['field'] == 'itg_widget_order.state') {
         unset($query->where[1]['conditions'][3]);
