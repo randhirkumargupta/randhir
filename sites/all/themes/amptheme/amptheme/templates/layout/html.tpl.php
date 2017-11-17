@@ -860,6 +860,7 @@
     #live-blog-amp-share .social-share .fa-facebook-official{color: #09488b;font-size: 30px;}
     #live-blog-amp-share .social-share .fa-google-plus-square{font-size: 30px;color: #b00808;}    
     #live-blog-amp-share .social-share #_AMP_content_0{top: -5px; left: 25px; position: absolute !important;}
+    .live-block .breaking-section amp-instagram{width: 490px; margin: 0 auto}
     </style>
     <?php //endif;  ?>
   </head>
