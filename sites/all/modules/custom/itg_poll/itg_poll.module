@@ -99,13 +99,10 @@ function alter_submit_status_message(&$form , $form_state) {
 function itg_poll_after_build($form , &$form_state) {
 
   global $user , $base_url;
-  $start_date_time = !empty($form_state['values']['field_poll_start_date']['und'][0]['value']['time']) ? $form_state['values']['field_poll_start_date']['und'][0]['value']['time'] : "00:00";
-  $end_date_time = !empty($form_state['values']['field_poll_end_date']['und'][0]['value']['time']) ? $form_state['values']['field_poll_end_date']['und'][0]['value']['time'] : "00:00";
   $settings = array();
   $settings['base_url'] = $base_url;
   $settings['action_page'] = arg(2);
   $settings['uid'] = $user->uid;
-  //pr($form['field_poll_start_date']);
   drupal_add_js(array('itg_poll' => array('settings' => $settings)) , array('type' => 'setting'));
   drupal_add_js(drupal_get_path('module' , 'itg_poll') . '/js/itg_pollnew.js' , array('weight' => 3 , 'scope' => 'footer'));
 
