@@ -132,7 +132,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         ' . $link_text . '
      </div>';
       drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}", "inline");
-      $form['field_e_associate_highlights']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
+      $form['field_e_event_banner']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
 
     $form['field_config_photo']['#access'] = FALSE;
