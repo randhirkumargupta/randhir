@@ -1130,6 +1130,12 @@ jQuery(document).ready(function () {
     });
 });
 jQuery(document).ready(function () {
+    jQuery("input[name='field_poll_start_date[und][0][value][time]']").keyup(function(){
+      jQuery("input[name='field_poll_start_date[und][0][value][time]']").val(jQuery(this).val() || "00:00");
+    });
+    jQuery("input[name='field_poll_end_date[und][0][value][time]']").keyup(function(){
+      jQuery("input[name='field_poll_end_date[und][0][value][time]']").val(jQuery(this).val() || "00:00");
+    });
     jQuery("#edit-field-newsl-newsletter-content-und-select-section").on('change', function () {
         var CT = jQuery("#edit-field-cm-select-type-und").val();
         if (typeof CT === "undefined" || CT == null || CT == '_none') {
