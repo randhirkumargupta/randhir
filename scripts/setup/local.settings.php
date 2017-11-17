@@ -55,11 +55,11 @@ $conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
 
 #MongoDB 
 //prodreplica and uatreplica
-$conf['mongodb_connections'] = array(
+/*$conf['mongodb_connections'] = array(
   'default' => array(
     'host' => 'mongodb://prod_write:Pr0d_wr1te654@mongodb1,mongodb2,mongodb3/itgcmsmongo',//prod
     //'host' => 'mongodb://itoday_write:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo',// uat
     'db' => 'itgcmsmongo',
     'connection_options' => array('replicaSet' => 'prodreplica'),
   ),
-);
+);*/
