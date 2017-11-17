@@ -29,7 +29,7 @@ ini_set('session.cookie_lifetime', 2000000);
 #$conf['queue_default_class'] = 'MongoDBQueue';
 
 # Memcache specific settings
-
+//itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com
 //uat:itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com:11211
 //prod:itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211
 $conf = array(
@@ -37,7 +37,7 @@ $conf = array(
 'cache_default_class' => 'MemCacheDrupal',
 'cache_class_cache_form' => 'DrupalDatabaseCache',
   'memcache_servers' => array(
-   'itgd-cms-mem-prod-1.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',   
+   'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',   
   ),
   'memcache_bins' => array(
     'cache' => 'default',
