@@ -251,9 +251,9 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
                 $breaking_output .= '<div class="dwrap"><div class="breaking-date">' . $pub_display_time . ' PDT</div>';
                 $breaking_output .= '<div class="breaking-discription">' . itg_custom_amp_body_filter($redirection_url) . '</div>';
                 $breaking_output .= '<div id="live-blog-amp-share"><div class="social-share"><amp-accordion disable-session-states><section><h2><span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span><span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span></h2><div class="share-link">';
-                $breaking_output .= '<a href="<?php print $twitter_url; ?>" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>';
-                $breaking_output .= '<a href="<?php print $fb_url; ?>" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>';
-                $breaking_output .= '<a href="<?php print $google_url;?>" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>';
+                $breaking_output .= '<a href="'.$twitter_url.'" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>';
+                $breaking_output .= '<a href="'.$fb_url.'" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>';
+                $breaking_output .= '<a href="'.$google_url.'" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>';
                 $breaking_output .= '</div></section></amp-accordion></div></div>';
                 $breaking_output .= '</div></div>';
               }
@@ -264,3 +264,14 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
         endif;
         ?>
     </div>
+    <div class="amp-taboola">
+        <amp-embed width=100 height=500
+             type=taboola
+             layout=responsive
+             heights="(min-width:1907px) 39%, (min-width:1200px) 46%, (min-width:780px) 64%, (min-width:480px) 98%, (min-width:460px) 167%, 196%"
+             data-publisher="amp-demo"
+             data-mode="thumbnails-a"
+             data-placement="Ads Example"
+             data-article="auto">
+        </amp-embed>
+        </div>
