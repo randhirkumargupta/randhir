@@ -38,6 +38,6 @@ function get_mapping_array($contenttype = 'story') {
       'contenttype' => 'subsubcategory',
     )
   );
-  
+
   return $arr[$contenttype];
 }

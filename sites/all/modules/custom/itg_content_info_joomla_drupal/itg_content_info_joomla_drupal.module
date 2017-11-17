@@ -67,15 +67,16 @@ function itg_content_mapping_form($form, &$form_state) {
 
     $query = db_select($tablename, 'tbl');
     $query->fields('tbl', array('sourceid1', 'destid1'));
-    
-    if($type == 'node'){
+
+    if ($type == 'node') {
       $query->fields('n', array('nid', 'title'));
       $query->leftJoin('node', 'n', 'tbl.destid1=n.nid');
-    }else{
+    }
+    else {
       $query->fields('ttd', array('tid', 'name'));
       $query->leftJoin('taxonomy_term_data', 'ttd', 'tbl.destid1=ttd.tid');
     }
-    
+
     $query->condition('tbl.sourceid1', $contentid_arr, 'IN');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
@@ -101,12 +102,12 @@ function itg_content_mapping_form($form, &$form_state) {
         $value['sourceid1'],
         $contentid,
         $contenttitle,
-        l($drupal_url, $drupal_url, array('attributes' => array('target'=>'_blank')))
+        l($drupal_url, $drupal_url, array('attributes' => array('target' => '_blank')))
       );
     }
 
-    $not_found = array_diff($contentid_arr , $found);
-    if(count($not_found) > 0){
+    $not_found = array_diff($contentid_arr, $found);
+    if (count($not_found) > 0) {
       $not_found = implode(',', $not_found);
       $form['not_found_table'] = array(
         '#theme' => 'table',
@@ -117,18 +118,17 @@ function itg_content_mapping_form($form, &$form_state) {
         '#empty' => t('Empty Rows')
       );
     }
-    
-    if(count($rows) > 0){
+
+    if (count($rows) > 0) {
       $form['table'] = array(
-      '#theme' => 'table',
-      '#header' => $header,
-      '#rows' => $rows,
-      '#attributes' => array('class' => array("views-table")),
-      '#tree' => TRUE,
-      '#empty' => t('Empty Rows')
-    );
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+        '#attributes' => array('class' => array("views-table")),
+        '#tree' => TRUE,
+        '#empty' => t('Empty Rows')
+      );
     }
-    
   }
   return $form;
 }
