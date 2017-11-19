@@ -3685,7 +3685,7 @@ function itg_rapid_api_change_password($token) {
         $account_err['status_message'] = "$validation_error_str";
         return $account_err;
     }
-
+    $rand = rand();
     $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
@@ -4178,8 +4178,9 @@ function itg_rapid_api_reset_password($token) {
         $account_err['status_message'] = "$validation_error_str";
         return $account_err;
     }
-
+    $rand = rand();
     $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
+    echo $url; die();
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
