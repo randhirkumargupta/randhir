@@ -172,3 +172,194 @@ function pr($arg) {
   print_r($arg);
   print '</pre>';
 }
+
+/**
+ * Function for getting content by section
+ * @param int $section_id
+ * @param string $type
+ * @return array
+ */
+function itg_common_get_content_by_section($section_id, $type) {
+  $item_per_page = 4;
+  $table = 'itg_widget_order_section';
+  if (strtolower($type) == 'all') {
+    $table = 'itg_widget_order';
+  }
+  $db_query = db_select($table, 'iwo')->extend('PagerDefault')->limit($item_per_page);
+  $db_query->join('node', 'n', 'n.nid = iwo.nid');
+  $db_query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $db_query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+  if ($type == 'videogallery') {
+    $db_query->leftJoin('field_data_field_video_duration', 'fdv', 'fdv.entity_id=n.nid');
+  }
+  $db_query->fields('n', array('nid', 'title', 'created'));
+  $db_query->fields('eli_file', array('uri'));
+  if ($type == 'videogallery') {
+    $db_query->fields('fdv', array('field_video_duration_value'));
+  }
+  $db_query->condition('iwo.widget', 'section_wise_widget');
+  $db_query->condition('iwo.content_type', $type);
+  $db_query->condition('iwo.cat_id', $section_id);
+  $db_query->orderBy('iwo.weight', 'DESC');
+  $result = $db_query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Get email by roll
+ * @param string $key
+ * @param string $message
+ * @param array $params
+ */
+function get_email_by_roll($id) {
+  $query = db_select('users', 'u');
+  $query->fields('u', array('mail'));
+  $query->join('users_roles', 'ur', 'ur.uid = u.uid');
+  $query->condition('ur.rid', $id, IN);
+  $query->condition('u.status', 1);
+  $result = $query->execute();
+
+  foreach ($result as $val) {
+    $value[] = $val->mail;
+  }
+  return $value;
+}
+
+/*
+ * Implements _widget_title().
+ */
+function _widget_title($string , $is_for_attribute = TRUE) {
+  if($is_for_attribute) {
+    return str_replace(array('\'', '"' , '>' , '<' , '\/', '/'), '', html_entity_decode($string));
+  } else {
+    return str_replace(array('>' , '<' , '\/', '/'), '', html_entity_decode($string));
+  //return preg_replace('#\W#', " ", $string );
+  }
+}
+
+/**
+ * Function for counting the images in photogallery.
+ * @param type $nid
+ * @return type
+ */
+function itg_common_count_images_in_photogallery($nid) {
+  $query = db_select('field_data_field_gallery_image', 'fdg')
+      ->fields('fdg', array('field_gallery_image_value'))
+      ->condition('fdg.entity_id', $nid);
+  $result = $query->execute()->rowCount();
+  return $result;
+}
+
+/**
+ * itg_fronturl_check
+ * 
+ */
+function itg_fronturl_check() {
+  global $base_url;
+  $baseUrl = explode('//', $base_url);
+  $fUrl = explode('//', FRONT_URL);  
+  if ($baseUrl[1] == $fUrl[1]) {
+    return true;
+  } else {
+      return false;
+  }
+}
+
+/**
+ * Function is used to prepare node title with emoji.
+ * 
+ * @param type $nid
+ * @return type
+ */
+function get_field_value_for_smily($nid) {
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
+  $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
+  $query->fields('n', array('title'));
+  $query->fields('emoji', array('field_emoji_value'));
+  $query->fields('sh', array('field_story_short_headline_value'));
+  $query->fields('emoji_2', array('field_emoji_2_value'));
+  $query->fields('emoji_pos', array('field_emoji_position_value'));
+  $query->condition('n.nid', $nid);
+  //$query->condition('n.type', 'story');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return array(
+    'field_story_short_headline_value' => $result[0]['field_story_short_headline_value'],
+    'field_emoji_position_value' => array($result[0]['field_emoji_position_value'] , $result[1]['field_emoji_position_value']),
+    'field_emoji_2_value' => $result[0]['field_emoji_2_value'],
+    'field_emoji_value' => $result[0]['field_emoji_value'],
+    'title' => $result[0]['title'],
+  );
+}
+
+/**
+ * This function use for remove html special chars
+ */
+function itg_common_remove_extra_html($string) {
+  $return_data = "";
+  if (!empty($string)) {
+    $return_data = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $string);
+  }
+  return $return_data;
+}
+
+/**
+ * Function which returns true is case of special page.
+ */
+function itg_is_special_page() {
+  $flag = FALSE;
+  $arg = arg();
+  if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) {
+    $query = db_select('itg_layout_tpl' ,'tpl');
+    $query->fields("tpl" , array("id"));
+    $query->condition("tpl.status" , 1);
+    $query->condition("tpl.section_name" , $arg[2]);
+    $result = $query->execute()->rowCount();
+    if($result) {
+      $flag = TRUE;
+    }
+  }
+  return $flag;
+}
+
+/**
+ * Implements _occupation_from_tid_for_sef_url.
+ * {@inheritdoc}
+ */
+function _occupation_from_tid_for_sef_url($tid) {
+  $term_data = taxonomy_term_load($tid);
+  return $term_data->name;
+}
+
+/*
+ * get_other_gallery_amp
+ *  @param int $primary_category
+ */
+function get_other_gallery_amp($primary_category, $nid, $bundle, $limit) {
+   if (!empty($primary_category)) {
+    $query = db_select('field_data_field_primary_category', 'fg');
+    $query->leftjoin('node', 'n', 'n.nid = fg.entity_id');
+    $query->leftjoin('field_data_field_story_small_image', 'sm', 'sm.entity_id = fg.entity_id');
+    $query->fields('fg', array('entity_id'))
+          ->fields('n', array('title', 'created','nid'))
+          ->fields('sm', array('field_story_small_image_fid'))
+          ->condition('fg.entity_id', array($nid), 'NOT IN')
+          ->condition('fg.field_primary_category_value', $primary_category)
+          ->condition('n.status', 1)
+          ->condition('fg.bundle', $bundle);
+    $query->orderBy('n.created', 'DESC'); 
+    $query->range(0, $limit);
+    $result = $query->execute();
+
+    return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  }
+}
+
+/**
+ * WatchDog helper function for debug
+ */
+function itg_watchdog($error_type , $message) {
+    watchdog($error_type, "<pre>".print_r($message , 1)."</pre>");
+}
