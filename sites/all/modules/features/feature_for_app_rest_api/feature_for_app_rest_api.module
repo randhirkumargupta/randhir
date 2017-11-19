@@ -4,4 +4,4 @@
  * Code for the Feature for ITG App Services feature.
  */
 
-include_once 'feature_for_itg_app_services.features.inc';
+include_once 'feature_for_app_rest_api.features.inc';

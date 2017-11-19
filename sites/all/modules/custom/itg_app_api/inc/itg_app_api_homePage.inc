@@ -94,7 +94,7 @@ function homePageJsonPackagelist() {
         $tid_list[] = 1208559; // Entertainment(photo)
         // code vid=14  end
 
-        $data_news['id'] = "1";
+        $data_news['id'] = "0";
         $data_news['order'] = "1";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "Packagelist";
@@ -144,8 +144,8 @@ function homePageJsonPackagelist() {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1=date('Y-m-d', strtotime("-90 days"));
-        $d2=date(strtotime($d1));
+        $d1 = date('Y-m-d', strtotime("-90 days"));
+        $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
@@ -674,7 +674,7 @@ function homePageJsonNewslist_world() {
             $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
         }
         $term_tree_count = count($term_tree);
-
+        //echo "count:".$term_tree_count."<pre>"; print_r($term_tree);echo "</pre>";exit();
         if ($term_tree_count) {
             foreach ($term_tree as $key => $value) {
                 $tid_list[] = $value->tid;
@@ -683,7 +683,7 @@ function homePageJsonNewslist_world() {
 
         // code vid=14  end
 
-        $data_news['id'] = "5";
+        $data_news['id'] = "1206577";
         $data_news['order'] = "5";
         $data_news['type'] = "newslist";
         $data_news['title'] = "World";
@@ -958,7 +958,7 @@ function getMagazineList() {
 
     $magazine['issue'] = $issue;
 
-
+    //echo "<pre>magazine";  print_r($magazine);echo "</pre>";exit();
 
     return $magazine;
 }
@@ -1241,7 +1241,7 @@ function homePageJsonNewslist_lifestyle() {
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $tid = HOME_PAGE_JSON_NEWS_LIST_INDIA;
+    $tid = HOME_PAGE_JSON_NEWS_LIST_LIFE_STYLE;
     $node_count = "";
     $output = "";
     $data = array();
@@ -1278,7 +1278,7 @@ function homePageJsonNewslist_lifestyle() {
 
         // code vid=14  end
 
-        $data_news['id'] = "4";
+        $data_news['id'] = "1206567";
         $data_news['order'] = "4";
         $data_news['type'] = "newslist";
         $data_news['title'] = "Lifestyle";
@@ -1328,8 +1328,8 @@ function homePageJsonNewslist_lifestyle() {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1=date('Y-m-d', strtotime("-90 days"));
-        $d2=date(strtotime($d1));
+        $d1 = date('Y-m-d', strtotime("-90 days"));
+        $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 

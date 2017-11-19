@@ -1,13 +1,12 @@
-name = feature_for_app_rest_api
-description = feature_for_app_rest_api
+name = Feature For Report Rest API
+description = Feature For Report Rest API
 core = 7.x
 package = Features
 version = 7.x-1.0
 dependencies[] = ctools
-dependencies[] = itg_app_api
 dependencies[] = itg_mobile_feed
 dependencies[] = rest_server
 dependencies[] = services
 features[ctools][] = services:services:3
 features[features_api][] = api:2
-features[services_endpoint][] = appapi
+features[services_endpoint][] = reportapi

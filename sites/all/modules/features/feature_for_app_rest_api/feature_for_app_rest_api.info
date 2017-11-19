@@ -1,5 +1,5 @@
-name = Feature For Rest API
-description = Feature for app api rest services
+name = Feature for app rest api
+description = Feature for app rest api services
 core = 7.x
 package = Features
 version = 7.x-1.4

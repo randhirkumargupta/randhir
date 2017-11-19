@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * feature_for_itg_app_services.services.inc
+ * feature_for_app_rest_api.services.inc
  */
 
 /**
  * Implements hook_default_services_endpoint().
  */
-function feature_for_itg_app_services_default_services_endpoint() {
+function feature_for_app_rest_api_default_services_endpoint() {
   $export = array();
 
   $endpoint = new stdClass();
