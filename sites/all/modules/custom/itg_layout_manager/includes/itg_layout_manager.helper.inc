@@ -812,3 +812,6 @@ function get_highlights_widget_list() {
 
     return $widget;
 }
+
+
+

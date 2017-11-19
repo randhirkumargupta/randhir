@@ -215,8 +215,16 @@
  */
 
 
+
+
+
+//for master and slave setting
+
+
 // setting for UAT
 //#####################################################################################
+
+// one slave setting
 /*$databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => 'master', // optional, defaults to 'master'
@@ -226,7 +234,8 @@
 );
 
 
-$databases['default']['master'] = array(  
+$databases['default']['master'] = array(
+  //'database' => 'indiatoday_migrate',
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_write',
   'password' => '!tgd@!t@wr!te@101',
@@ -236,7 +245,8 @@ $databases['default']['master'] = array(
   'prefix' => '',
 );
 
-$databases['default']['autoslave'] = array(  
+$databases['default']['autoslave'] = array(
+  //'database' => 'indiatoday_migrate',
   'database' => 'indiatoday_migrate',
   'username' => 'itgd_it_read',
   'password' => '!tgd@!t@re@d@102',
@@ -705,13 +715,13 @@ $local_settings = dirname(__FILE__) . '/local.settings.php';
 if (file_exists($local_settings)) {
    include $local_settings;
 }
-MongoCursor::$slaveOkay = true;
+//MongoCursor::$slaveOkay = true;
 $conf['image_suppress_itok_output'] = TRUE;
 $conf['image_allow_insecure_derivatives'] = TRUE;
 $conf['block_cache_bypass_node_grants'] = TRUE;
 $base_url = 'https://'.$_SERVER['SERVER_NAME'];
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;
-/*ini_set('display_errors',1);
+ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
-error_reporting(-1);*/
+error_reporting(-1);

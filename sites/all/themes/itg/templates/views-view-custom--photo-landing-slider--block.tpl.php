@@ -262,7 +262,11 @@ $argum = base64_encode(arg(1));
 </div>
 
 <?php
-$initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
+$initial_slide = 0;
+
+if(isset($_GET['photo']) && $_GET['photo']) {
+  $initial_slide = $_GET['photo']-1;
+}
 ?>
 <script>
   jQuery(document).ready(function (e) {
@@ -327,11 +331,16 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
       });
 // Photogallery slider javascript
       jQuery(document).ready(function () {
+        var query_val = get_photo_url_query('photo' , window.location);
+          if(query_val != null) {
+              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+              ChangeUrl("page", real_node_url +"/"+query_val);
+          }
           jQuery(".slick-arrow , li.slick-slide").on("click", function () {
               var active_slide = jQuery(".slick-active").attr("data-slick-index");
-              var current_url = window.location.href.split('/');
               var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
               if (active_slide > 0) {
+                  ++active_slide;
                   //window.history.pushState(null, null, real_node_url + "/" + active_slide);
                   ChangeUrl("page", real_node_url +"/"+active_slide);
               } else {
@@ -348,6 +357,18 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
         } else {
             alert("Browser does not support HTML5.");
         }
+    }
+    
+    function get_photo_url_query(name, url) {
+        if (!url) {
+          url = window.location.href; 
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
     
   });

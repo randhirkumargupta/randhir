@@ -132,7 +132,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         ' . $link_text . '
      </div>';
       drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}", "inline");
-      $form['field_e_associate_highlights']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
+      $form['field_e_event_banner']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
 
     $form['field_config_photo']['#access'] = FALSE;
@@ -1302,7 +1302,7 @@ function itg_event_backend_get_session_sponsor($daywise, $nid = NULL) {
   $query->fields('daywise', array('field_daywise_event_value'));
   $query->fields('media', array('field_associate_sponsors_value'));
   $query->condition('daywise.field_daywise_event_value', $daywise, '=');
-  $query->condition('bundle', 'field_associate_sponsors', '=');
+  $query->condition('daywise.bundle', 'field_associate_sponsors', '=');
   $query->condition('media.entity_id', $nid, '=');
   $result = $query->execute();
   foreach ($result as $value) {
@@ -2422,6 +2422,20 @@ function itg_event_backend_page_domain($nid) {
   $query->leftjoin('field_data_field_e_event_banner', 'banner', 'banner.entity_id = n.nid');
   $query->leftjoin('field_data_field_e_menu_bck_color', 'color', 'color.entity_id = n.nid');
   $query->leftjoin('file_managed', 'fm', 'fm.fid = banner.field_e_event_banner_fid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement funciton for sponsor details
+ */
+function itg_event_backend_sponsor_details($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fm', array('uri'));
+  $query->fields('n', array('nid', 'title'));
+  $query->leftjoin('field_data_field_sponser_logo', 'logo', 'logo.entity_id = n.nid');
+  $query->leftjoin('file_managed', 'fm', 'fm.fid = logo.field_sponser_logo_fid');
   $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchAll();
   return $result;
