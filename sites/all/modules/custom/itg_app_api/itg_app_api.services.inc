@@ -4180,7 +4180,7 @@ function itg_rapid_api_reset_password($token) {
     }
     $rand = rand();
     $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-    echo $url; die();
+   // echo $url; die();
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
