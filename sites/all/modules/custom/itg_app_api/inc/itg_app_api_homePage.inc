@@ -102,7 +102,7 @@ function homePageJsonPackagelist_india() {
         $data_news['order'] = "1";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "India";
-        $data_news['label'] = "Packagelist";
+        $data_news['label'] = "India";
         $data_news['show_label'] = "0";
         $data_news['n_template_id'] = "1";
 
@@ -335,7 +335,7 @@ function homePageJsonPackagelist_lifestyle() {
         $data_news['order'] = "2";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "Lifestyle";
-        $data_news['label'] = "Packagelist";
+        $data_news['label'] = "Lifestyle";
         $data_news['show_label'] = "0";
         $data_news['n_template_id'] = "1";
 
@@ -543,7 +543,7 @@ function homePageJsonPackagelist_world() {
         $data_news['order'] = "3";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "World";
-        $data_news['label'] = "Packagelist";
+        $data_news['label'] = "World";
         $data_news['show_label'] = "0";
         $data_news['n_template_id'] = "1";
 
