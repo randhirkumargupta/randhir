@@ -1008,8 +1008,7 @@ function variable_set($name, $value) {
  * @see variable_set()
  */
 function variable_del($name) {
-  global $conf;
-  echo "Name: " . $name . "<br>";
+  global $conf;  
   db_delete('variable')
     ->condition('name', $name)
     ->execute();
