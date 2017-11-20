@@ -982,6 +982,10 @@ function _latest_from_pti() {
   global $base_url;
   $related_content = itg_third_party_section_card_content('PTI', 5);
   $related_dt = '';
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
   if (!empty($related_content)) {
     $related_dt = '<span class="widget-title">' . t('LATEST FROM PTI') . '</span>';
   }
@@ -992,7 +996,7 @@ function _latest_from_pti() {
       if (!empty($value->title)) {
         $related_title = mb_strimwidth($value->title, 0, 200, "..");
         $path = drupal_get_path_alias('node/' . $value->nid);
-        $related_dt.= "<li class='third-party-list'><span class='tile'>" . l($related_title, $path, array("attributes" => array("title" => $related_title))) . "</span></li>";
+        $related_dt.= "<li " . $data_tb_region_item . " class='third-party-list'><span class='tile'>" . l($related_title, $path, array("attributes" => array("title" => $related_title))) . "</span></li>";
       }
       $i++;
     }
@@ -1008,6 +1012,10 @@ function _latest_from_aajtak() {
   global $base_url;
   $url = variable_get('aaj_tak_json_url');
   $JSON = file_get_contents($url);
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
   // You can decode it to process it in PHP
   $aajtak_data = json_decode($JSON);
   $related_dt = '';
@@ -1027,7 +1035,7 @@ function _latest_from_aajtak() {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
         }
         
-        $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'"/></a>';
+        $related_dt.= '<li ' . $data_tb_region_item . ' class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'"/></a>';
         $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
       }
       $i++;
@@ -1046,6 +1054,10 @@ function _latest_from_businesstoday() {
   global $base_url;
   $url = variable_get('business_today_json_url');
   $JSON = file_get_contents($url);
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
   // You can decode it to process it in PHP
   $business_data = json_decode($JSON);
   $related_dt = '';
@@ -1065,7 +1077,7 @@ function _latest_from_businesstoday() {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg'; 
         }
         
-        $related_dt.= '<li class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'"/></a>';
+        $related_dt.= '<li ' . $data_tb_region_item . ' class="third-party-list"><a class="pic" href="'.$path.'" target="_blank" title="'.$related_title.'"><img src="'.$img_url.'" alt="'.$related_title.'"/></a>';
         $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
       }
       $i++;
