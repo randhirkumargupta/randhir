@@ -1,10 +1,16 @@
 <?php if (!empty($data)) : global $base_url; ?>
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
+?>
   <div class="rhs-section-ordering">
     <ul>
       <?php
       foreach ($data as $count => $entity) {
         ?>
-        <li class="rhs-section-item-container rhs-item-<?php echo $entity['nid'] ?> rhs-item-<?php echo $entity['type'] ?>">      
+        <li <?php echo $data_tb_region_item;?> class="rhs-section-item-container rhs-item-<?php echo $entity['nid'] ?> rhs-item-<?php echo $entity['type'] ?>">      
 
           <?php if (!empty($entity['uri'])) { ?>
             <a class="pic" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">

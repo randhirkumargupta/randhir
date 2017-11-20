@@ -1,4 +1,10 @@
 <?php if (!empty($data)) : global $base_url; ?>
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
+?>
 <?php if(isset($data[0])) : ?>
   <div class="featured-news">
     <div class="featured-post featured-post-first">
@@ -13,7 +19,7 @@
       <?php endif; ?>
 
       <?php if (!empty($data[0]['title'])) : ?>
-        <h2 class="home-page-feature-<?php echo $data[0]['nid'] ?>">
+        <h2 class="home-page-feature-<?php echo $data[0]['nid'] ?>" <?php echo $data_tb_region_item;?>>
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($data[0]['node_obj'], 0, 80), "node/" . $data[0]['nid'], array('html' => TRUE , 'attributes' => array("title" => $data[0]['title'])));
@@ -38,7 +44,7 @@
         </a>
       <?php endif; ?>
       <?php if (!empty($data[1]['title'])) : ?>
-        <h3 title="<?php echo $data[1]['title'];  ?>" class="home-page-feature-small-<?php echo $data[1]['nid'] ?>">
+        <h3 <?php echo $data_tb_region_item;?> title="<?php echo $data[1]['title'];  ?>" class="home-page-feature-small-<?php echo $data[1]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($data[1]['node_obj'], 0, 60), "node/" . $data[1]['nid'], array('html' => TRUE , 'attributes' => array("title" => $data[1]['title'])));
@@ -63,7 +69,7 @@
         </a>
       <?php endif; ?>
       <?php if (!empty($data[2]['title'])) : ?>
-        <h3 title="<?php echo $data[2]['title'];  ?>" class="home-page-feature-small-<?php echo $data[2]['nid'] ?>">
+        <h3 <?php echo $data_tb_region_item;?> title="<?php echo $data[2]['title'];  ?>" class="home-page-feature-small-<?php echo $data[2]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($data[2]['node_obj'], 0, 60), "node/" . $data[2]['nid'], array('html' => TRUE , 'attributes' => array("title" => $data[2]['title'])));
