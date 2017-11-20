@@ -132,10 +132,10 @@ if ($theme != 'itgadmin') {
 </div>
 <!--- list / grid -->
 <div class="clearfix"></div>
-<div class="col-md-12 itg-h625-section">
+<div class="itg-h625-section">
   <div class="itg-widget">
-    <div class="col-sm-12 remove_padd_right">
-      <div class="row list-group college">
+    <div class="remove_padd_right">
+      <div class="list-group college">
         <div class="clr_chn">
           <?php if ($theme == 'itgadmin') { ?>
           <div class="droppable <?php print $gray_bg_layout; ?>">
