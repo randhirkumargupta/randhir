@@ -46,6 +46,7 @@
   <head>
     <meta charset="utf-8">
     <title><?php print $head_title; ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php print $head; ?>
     <?php include $amptheme_path_file . '/templates/amp-css/amp-boilerplate-styles-min.inc' ?>
     <?php include $ampsubtheme_path_file . '/css/amp-custom-styles.css' ?>
@@ -54,7 +55,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
     <script async custom-element="amp-dailymotion" src="https://cdn.ampproject.org/v0/amp-dailymotion-0.1.js"></script>
     <script async custom-element="amp-jwplayer" src="https://cdn.ampproject.org/v0/amp-jwplayer-0.1.js"></script>
     <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
@@ -66,6 +66,7 @@
     <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
     <script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
     <?php //if (!empty($ampsubtheme_path_file)):  ?>
     <style amp-custom>
 
@@ -78,23 +79,16 @@
       #page-wrapper{max-width: 750px; margin: 0 auto;}
       #main-wrapper{padding: 0 12px;}
       .node-type-videogallery #main-wrapper, .node-type-photogallery #main-wrapper{padding: 0;}
-      #header{position: relative; background-color: #000; height: 75px; margin-bottom: 0; z-index: 9999;}
-      #logo{margin: 12px 20px 0 12px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
-      #navbar{position: absolute; left: 0; bottom: 0; width: 100%; height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 100px;}
-      #navbar h2{
-        width: 20px;
-        text-align: center;
-        background: transparent;
-        border: none;
-        padding: 3px 0;
-        color: #fff;
-        height: 28px;
-      }
+      #header{position: relative; margin-bottom: 0; z-index: 9999; box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
+    height:45px;}
+      #logo{margin: 12px 5px; display: inline-block; vertical-align: top; position: absolute; z-index: 10;}
+      #navbar{/*position: absolute; left: 0; bottom: 0;*/ width: 100%; position: relative; /*height: 28px; background-color: #a41615; z-index: 9; padding: 0 12px 0 15px;*/}
+      #navbar h2{width: 20px; text-align: center; background: transparent; border: none; padding: 3px 0; color: rgb(94, 94, 94); height: 28px; top:-4px; left: 5px;}
       #navbar amp-accordion h2 span{position: absolute; left: 0; top: 3px;}
       #navbar h2[aria-expanded="false"] .show-less{opacity: 0;}
       #navbar h2[aria-expanded="true"] .show-more{opacity: 0;}
-      .header-menu{ left: 0; top: 0; list-style: none; width: 200px; background-color: #a41615; z-index: 10;}
-      .header-menu li a{padding: 8px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto';}
+      .header-menu{position: absolute !important; left: 0; top: 47px; list-style: none; width: 270px; background-color: #a41615; z-index: 10;}
+      .header-menu li a{padding: 0px 10px; text-decoration: none; color: #fff; border-top: 1px solid rgba(255, 255, 255, .7); display: block; font-family: 'Roboto'; height: 35px;}
       .header-menu li:first-child a{border-top: none;}
       .posted-by{margin: 10px 0; font-size: 12px; color: #8c8c8c; font-family: 'Roboto';}
       .stryimg{position: relative;}
@@ -290,36 +284,6 @@
         top: 0;
         z-index: 10;
         overflow: hidden;
-      }
-      .red-star[data-value="0.5"]{
-        width:10%;
-      }
-      .red-star[data-value="1"]{
-        width:20%;
-      }
-      .red-star[data-value="1.5"]{
-        width:30%;
-      }
-      .red-star[data-value="2"]{
-        width:40%;
-      }
-      .red-star[data-value="2.5"]{
-        width:50%;
-      }
-      .red-star[data-value="3"]{
-        width:60%;
-      }
-      .red-star[data-value="3.5"]{
-        width:70%;
-      }
-      .red-star[data-value="4"]{
-        width:80%;
-      }
-      .red-star[data-value="4.5"]{
-        width:90%;
-      }
-      .red-star[data-value="5"]{
-        width:100%;
       }
       .story-section .story-movie .movie-detail div + div {
         margin-top: 15px;
@@ -528,7 +492,25 @@
       .footer-bottom-menu ul li{
         padding: 3px 0;
       }
-      
+      #footer amp-accordion h2{
+        width: 40px;
+        height: 49px;
+        text-align: center;
+        padding: 0;
+        border: none;
+        background: #000;
+        margin-top: -50px;
+        z-index: 99;
+        position: absolute !important;
+        right: 0;
+        top: 0;
+      }
+      #footer amp-accordion h2 span.show-more, #footer amp-accordion h2 span.show-less {
+        line-height: 48px;
+      }
+      #footer amp-accordion h2[aria-expanded="true"] span.show-more, #footer amp-accordion h2[aria-expanded="false"] span.show-less {
+        display: none;
+      }
       .copyright{
         color: #a6a6a6;
         padding: 10px 12px;
@@ -632,32 +614,33 @@
         color: #8d8d8d;
         font-family: Roboto;
       }
-      .search-form {
+      /*.search-form {
         position: absolute;
         right: 10px;
         top: 10px;
-      }
+      }*/
       .search-form input[type="search"] {
         height: 28px;
-        width: 30px;
+        width: 225px;
         padding-right: 35px;
         padding-left: 10px;
         position: absolute;
-        right: 0;
-        top: 0;
+        left: 10px;
+        top: 5px;
         background-color: transparent;
         transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
         cursor: pointer;
         z-index: 3;
-        opacity: 0;
+        opacity: 1;
+        border:1px solid #ccc;
       }
-      .search-form input[type="search"]:focus{
+      /*.search-form input[type="search"]:focus{
         z-index: 1;
         width: 200px;
         cursor: text;
         background-color: #fff;
         opacity: 1;
-      }
+      }*/
       .search-form input[type="submit"] {
         position: absolute;
         top: 0;
@@ -682,170 +665,61 @@
         padding-top: 3px;
         text-align: center;
       }
-      .search-form input[type="search"]:focus + input[type="submit"] + a.search{color: #666;}
+      /*.search-form input[type="search"]:focus + input[type="submit"] + a.search{color: #666;}*/
       .custom-amp-ad{text-align: center;}
+      .live-block .breaking-section.breaking-section{
+		border-top: 1px solid #ddd;
+		}
+		.live-block .breaking-section{padding: 10px 0; line-height: 22px; margin-top: 35px;}
+		#live-blog-amp-share h2[aria-expanded="false"] .show-less{opacity: 0;}
+		#live-blog-amp-share h2[aria-expanded="true"] .show-more{opacity: 0;}
+		#live-blog-amp-share .i-amphtml-accordion-header{border:none;background-color:#fff;}
+    #live-blog-amp-share .show-less{position: relative; left: -18px}
+    #live-blog-amp-share .social-share a{margin-right:5px;}
+    #live-blog-amp-share .social-share .fa-twitter-square{color: #03a4d2; font-size: 30px;}
+    #live-blog-amp-share .social-share .fa-facebook-official{color: #09488b;font-size: 30px;}
+    #live-blog-amp-share .social-share .fa-google-plus-square{font-size: 30px;color: #b00808;}
+    #live-blog-amp-share .social-share .i-amphtml-accordion-content{top: -5px; left: 25px; position: absolute !important;}
+    .i-amphtml-layout-size-defined{width: 490px; margin: 0 auto}
 
-    /* define some contants for photogallery */
-    .collapsible-captions {
-      --caption-height: 32px;
-      --image-height: 300px;
-      --caption-padding: 1rem;
-      --button-size: 28px;
-      --caption-color: #f5f5f5;;
-      --caption-bg-color: #000;
-      background: var(--caption-bg-color);
-    }
-    .collapsible-captions * {
-      /* disable chrome touch highlight */
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-      box-sizing: border-box;
-    }
-    /* see https://ampbyexample.com/advanced/how_to_support_images_with_unknown_dimensions/ */
-    .collapsible-captions .fixed-height-container {
-      position: relative;
-      width: 100%;
-      height: var(--image-height);
-    }
-    .collapsible-captions amp-img img {
-      object-fit: contain;
-    }
-    .collapsible-captions figure {
-      margin: 0;
-      padding: 0;
-    }
-    /* single line caption */
-    .collapsible-captions figcaption {
-      position: absolute;
-      bottom: 0;
-      margin: 0;
-      width: 100%;
-      /* inital height is one line */
-      max-height: var(--caption-height);
-      line-height: var(--caption-height);
-      padding: 0 var(--button-size);
-      /* cut text after first line and show an ellipsis */
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      /* animate expansion */
-      transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);
-      /* overlay the carousel icons */
-      z-index: 1000;
-      /* some styling */
-      color: var(--caption-color);
-      background: var(--caption-bg-color);      
-    }
-    /* expanded caption */
-    .collapsible-captions figcaption.expanded {
-      /* add padding and show all of the text */
-      padding: var(--button-size);
-      line-height: inherit;
-      white-space: normal;
-      text-overflow: auto;
-      max-height: calc(var(--caption-height) + var(--image-height));
-      /* show scrollbar in case caption is larger than image */
-      overflow: auto;
-    }
-    /* don't show focus highlights in chrome */
-    .collapsible-captions figcaption:focus {
-      outline: none;
-      border: none;
-    }
-    /* the expand/collapse icon */
-    .collapsible-captions figcaption span {
-      display: block;
-      position: absolute;
-      top: calc((var(--caption-height) - var(--button-size)) / 2);
-      right: 2px;
-      width: var(--button-size);
-      height: var(--button-size);
-      line-height: var(--button-size);
-      text-align: center;
-      font-size: 12px;
-      color: inherit;
-      cursor: pointer; 
-    }
+    /***** New Header css by itgd ****/
+    .i-amphtml-layout-container{ position: absolute; width: 100%;}
+    #header .top-nav {padding: 0px 0 0 5px; margin: 25px auto 15px auto; float: none; zoom: 1; background: transparent;}
+    #header a {color: #a9a9a9; font-family: "Roboto"; text-decoration: none; font-size:16px; margin:0px 0;}
+    .mobile-nav .bar1, .mobile-nav .bar2, .mobile-nav .bar3 {width: 20px; height: 2px; background-color: rgb(94, 94, 94); margin: 4px 0px; transition: 0.4s;}
+    #header .main-nav .nav-container-menu {width: calc(100% - 28px); margin: 0 auto;/*overflow: hidden;*/}
+    /*#header .main-nav .nav-container-menu .nav-centerall {margin: 0 auto; width:280px;}*/
+    #header .top-nav .main-nav ul.menu {float: left;}
+    #header .top-nav ul {list-style-type: none;}
+    #header .top-nav .main-nav ul.menu li.desktop-hide {display: none;}
+    #header .top-nav .main-nav li.desktop-hide {display: inline-block;}
+    #header .top-nav .main-nav li.desktop-hide {display: none;}
+    #header .main-nav .desktop-hide {width: 20px; height: 20px; position: relative; float: left; padding-left: 10px;}
+    #header .main-nav .desktop-hide {position: absolute; width: 38px; height: 38px;}
+    #header .top-nav ul li {display: inline-block;vertical-align: top; margin:0 5px;} 
+    #header .headeritg-logo {float: left; width:70px;text-align: center;height: 40px;}
+    #header .logo {width:70px; position: absolute;top:-10px;}
+    #header .logo a {display: block; overflow: visible; margin:0;}
+    .navimgamp{width: 21px; height: 20px; margin: 0 10px 0 0; position: relative; display: inline-block; top: 5px;}
+    ul.i-amphtml-accordion-content{background: #fff; border-right: 1px solid #ccc;}
+    ul.i-amphtml-accordion-content li{border-bottom: 1px solid #ccc; width: 270px;}
+    .search-section-amp{height: 35px;}
+    .fa-search{position: relative; top: 10px; right: 5px;}
+    ul.header-menu li:first-child{margin:5px 0;}
+
+    #header .top-nav ul.menu li a{    padding: 0 6px; font-size: 13px; text-transform: uppercase;font-weight: 500;}
+    #header .top-nav ul.menu li.last.leaf{ position:  relative; }
+    #header .top-nav .top-first-menu ul.menu li.last.leaf:after{ content: ""; position:  absolute; width: 5px; height: 5px; border-radius: 100%;
+    background: #c00; display: inline-block; top:8px; left: 0px; box-shadow: 0 0 0 rgba(214,2,12,.8); border-radius: 50%;
+    background: #c00; animation: pulse 1.7s infinite; content: "";}
     
-    /* define some contants for footer-latest */
-    .footer-latest {
-      --caption-height: 42px;
-      --image-height: 300px;
-      --caption-padding: 1rem;
-      --button-size: 28px;
-      --caption-color: #f5f5f5;;
-      --caption-bg-color: #000;
-      background: var(--caption-bg-color);
-    }
-    .footer-latest * {
-      /* disable chrome touch highlight */
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-      box-sizing: border-box;
-    }
-    /* see https://ampbyexample.com/advanced/how_to_support_images_with_unknown_dimensions/ */
-    .footer-latest .fixed-height-container {
-      position: relative;
-      width: 100%;
-      height: var(--image-height);
-    }
-    .footer-latest amp-img img {
-      object-fit: contain;
-    }
-    .footer-latest figure {
-      margin: 0;
-      padding: 0;
-    }
-    /* single line caption */
-    .footer-latest figcaption {
-      position: absolute;
-      bottom: 0;
-      margin: 0;
-      width: 100%;
-      /* inital height is one line */
-      max-height: var(--caption-height);
-      line-height: var(--caption-height);
-      padding: 0 var(--button-size);
-      /* cut text after first line and show an ellipsis */
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      /* animate expansion */
-      transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);
-      /* overlay the carousel icons */
-      z-index: 1000;
-      /* some styling */
-      color: var(--caption-color);
-      background: var(--caption-bg-color);      
-    }
-    /* expanded caption */
-    .footer-latest figcaption.expanded1 {
-      /* add padding and show all of the text */
-      padding: var(--button-size);
-      line-height: inherit;
-      white-space: normal;
-      text-overflow: auto;
-      max-height: calc(var(--caption-height) + var(--image-height));
-      /* show scrollbar in case caption is larger than image */
-      overflow: auto;
-    }
-    /* don't show focus highlights in chrome */
-    .footer-latest figcaption:focus {
-      outline: none;
-      border: none;
-    }
-    /* the expand/collapse icon */
-    .footer-latest figcaption span {
-      display: block;
-      position: absolute;
-      top: calc((var(--caption-height) - var(--button-size)) / 2);
-      right: 2px;
-      width: var(--button-size);
-      height: var(--button-size);
-      line-height: var(--button-size);
-      text-align: center;
-      font-size: 12px;
-      color: inherit;
-      cursor: pointer; 
-    }
+    #header .top-nav ul li{ margin:0px 3px; }
+    #header .logo`{ width: 55px; }
+    .container.top-nav .main-nav .nav-container-menu .nav-centerall{    width: 296px; margin: 0 auto;}
+
+
+
+
     </style>
     <?php //endif;  ?>
   </head>
