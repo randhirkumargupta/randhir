@@ -819,13 +819,11 @@ function getBodyDataForAndroid($str) {
   $mob_str = "";	
   //remove iframe..
   $str = html_entity_decode($str);
-
   $str = str_replace(array('<div class="itgimage">','data-syndication="no"'),array('<div class="itg-mosimage">',''),$str);
   $str = preg_replace('/<div class=\"body_caption\">.*<\/div>/','',$str);
-  $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
-  $body = preg_replace('/\[[^]]+\]/', '', $body);
-
-  $str = str_replace(array('[ITG:LISTICLES]','[ITG:FACTOIDS]','[ITG:EXPERT-CHUNK]','[ITG:TECH-PHOTOS]','[ITG:TECH-PHOTO-GALLERY]'), array('','','','',''), $str);
+  //$mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
+  $str = preg_replace('/\[[^]]+\]/', '', $str);
+  //$str = str_replace(array('[ITG:LISTICLES]','[ITG:FACTOIDS]','[ITG:EXPERT-CHUNK]','[ITG:TECH-PHOTOS]','[ITG:TECH-PHOTO-GALLERY]'), array('','','','',''), $str);
   $str = str_replace('nbsp;',' ',$str);
   $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
   //$img_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
