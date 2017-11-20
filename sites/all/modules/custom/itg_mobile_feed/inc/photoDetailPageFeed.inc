@@ -66,7 +66,7 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       global $base_url;
       $ttl = DEFAULT_REDIS_EXPIRE_TIME;
       $node = node_load($nid);
-      $title = $node->title;
+      $title = html_entity_decode($node->title);
       $tid = $node->field_primary_category['und'][0]['value'];
       $term = taxonomy_term_load($tid);
       $term_name = $term->name;

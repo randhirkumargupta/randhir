@@ -66,7 +66,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       global $base_url;
       $ttl = DEFAULT_REDIS_EXPIRE_TIME;
       $node = node_load($nid);
-      $title = xmlEscape($node->title);
+      $title = html_entity_decode($node->title);
       $tid = $node->field_primary_category['und'][0]['value'];
       $term = taxonomy_term_load($tid);
       $term_name = $term->name;
@@ -79,7 +79,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $weburl = $base_url . "/" . $alias;
       $create_date = date("F d, Y", $node->created);
       $create_datetime = date(DATE_ATOM, $node->created);
-      $full_body = xmlEscape($node->body['und']['0']['value']);
+      $full_body = $node->body['und']['0']['value'];
       $body_android = getBodyDataForAndroid($full_body);
 
       $output .= getMobileFeedXmlHeader();
@@ -260,7 +260,7 @@ function emptygetImgTag() {
  * @return array
  */
 function getImgTag($node) {
-    //p($node);
+   
   $imgtag = "";
   $src = "";
   $img_caption_val = "";
