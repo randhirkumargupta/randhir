@@ -1572,7 +1572,7 @@ function update_preference($user_id, $tid) {
  *
  * @return array - The processed information array.
  */
-function itg_rapid_api_check_user($token) {
+function itg_rapid_api_check_user_sso($token) {
   $uname = $_GET['user_id'];
 
   $account = user_load_by_name($uname);
