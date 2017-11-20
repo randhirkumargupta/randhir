@@ -1,0 +1,1027 @@
+<?php
+
+/**
+ * @file
+ * The ITG App Management Module.
+ *
+ */
+// Load the hirerical select common file
+module_load_include('inc', 'hierarchical_select', 'includes/common');
+
+/**
+ * Implements hook_permission().
+ * @return array().
+ */
+function itg_app_manager_permission() {
+  return array(
+    'administer app manager' => array(
+      'title' => t('Administer app manager'),
+      'description' => t('Perform administration tasks for app management.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ * @return array().
+ */
+function itg_app_manager_menu() {
+  $items = array();
+  $items['hamburger-menu-management'] = array(
+    'title' => 'Hamburger menu',
+    'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
+    'page arguments' => array('itg_app_manager_menu_form', '1'), //put the name of the form here
+    'access arguments' => array('administer app manager'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['horizontal-menu-management'] = array(
+    'title' => 'Horizontal menu',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_app_manager_menu_form', '2'),
+    'access arguments' => array('administer app manager'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['master-config-internal'] = array(
+    'title' => 'Master Config internal',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_app_master_config_internal_form'),
+    'access arguments' => array('administer app manager'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['itg-app-widget'] = array(
+    'title' => 'Widgets',
+    'page callback' => 'itg_app_create_widget_page',
+    //'page arguments' => array('itg_app_create_widget_form'),
+    'access arguments' => array('administer app manager'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['itg-app-widget/%/edit'] = array(
+    'title' => 'Edit Widget item',
+    'page callback' => 'itg_app_create_widget_page',
+    'page arguments' => array(1),
+    'access arguments' => array('administer app manager'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['itg-app-widget/%/delete'] = array(
+    'title' => 'Delete Widget item',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_app_widget_delete_record_comfirm', 1),
+    'access arguments' => array('administer app manager'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['itg-app-manager-packages'] = array(
+    'title' => 'Packages',
+    'page callback' => 'itg_app_manager_packages',
+    'access arguments' => array('administer app manager'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['itg-app-manager-packages/%/delete'] = array(
+    'title' => 'Delete Package',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_app_manager_package_delete_comfirm', 1),
+    'access arguments' => array('administer app manager'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+   $items['package-config/%ctools_js/form/%'] = array(
+    'page callback' => 'itg_app_manager_config_popup_form_callback',
+    'page arguments' => array(1,3),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Menu Management callback function
+ * @param type $form
+ * @param int $form_state
+ * @param int $menu_form_id
+ * @return array
+ */
+function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
+  if ($menu_form_id == '1') {
+    $menu_lablel_arr = array('' => '- Select -');
+    $menu_lablel_query = db_select('itg_app_menu_master', 'imm');
+    $menu_lablel_query->fields('imm', array('menu_name', 'menu_id'));
+    $menu_lablel_query->condition('imm.parent', 1, '=');
+    $menu_lablel_query_results = $menu_lablel_query->execute()->fetchAll();
+    foreach ($menu_lablel_query_results as $key => $val) {
+      $menu_lablel_arr[$val->menu_id] = $val->menu_name;
+    }
+  }
+  $form['container'] = array(
+    '#tree' => TRUE,
+    '#menu_form_id' => $menu_form_id,
+    '#theme' => 'itg_app_manager_menu_form_table',
+  );
+  if (empty($form_state['number_names'])) {
+    $form_state['number_names'] = 1;
+  }
+  for ($i = 1; $i <= $form_state['number_names']; $i++) {
+    $form['container'][$i]['menu_type_id'] = array(
+      '#type' => 'hidden',
+      '#value' => $menu_form_id,
+    );
+    if ($menu_form_id == '1') {
+      $form['container'][$i]['menu_label_id'] = array(
+        '#type' => 'select',
+        '#title' => '',
+        '#options' => $menu_lablel_arr,
+      );
+    }
+    $form['container'][$i]['order_id'] = array(
+      '#type' => 'select',
+      '#title' => '',
+      '#options' => array('' => '- Select -', '0' => '0', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'),
+    );
+    $form['container'][$i]['menu_type'] = array(
+      '#type' => 'select',
+      '#title' => '',
+      '#delta' => $i,
+      '#options' => array('' => '- Select -', '0' => 'Static', '1' => 'Mix', '1208521' => 'Photo', '1207762' => 'Video', '775494' => 'Program'),
+      '#ajax' => array(
+        'callback' => 'ajax_dependent_dropdown_callback',
+        'wrapper' => 'menu-title-' . $i,
+      ),
+    );
+    $subsec_options = array('' => '- Select -');
+    if ((isset($form_state['values']['container'][$i]['menu_type'])) && ($form_state['values']['container'][$i]['menu_type'] != '0')) {
+      $section_options = _get_section_options($form_state['values']['container'][$i]['menu_type']);
+      $form['container'][$i]['section']['title'] = array(
+        '#type' => 'select',
+        '#title' => '',
+        '#delta' => $i,
+        '#options' => $section_options,
+        '#prefix' => '<div id="menu-title-' . $i . '">',
+        '#ajax' => array(
+          'event' => 'change',
+          'callback' => 'ajax_subsection_callback',
+          'wrapper' => 'subsection-wrapper' . $i,
+        ),
+      );
+      if (isset($form_state['values']['container'][$i]['section']['title']) && is_numeric($form_state['values']['container'][$i]['section']['title'])) {
+        $subsec_options = _get_section_options($form_state['values']['container'][$i]['section']['title']);
+      }
+    }
+    else {
+      $form['container'][$i]['section']['title'] = array(
+        '#type' => 'textfield',
+        '#title' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#prefix' => '<div id="menu-title-' . $i . '">',
+        '#suffix' => '</div>',
+      );
+    }
+    $form['container'][$i]['has_subcat'] = array(
+      '#type' => 'checkbox',
+      '#title' => '',
+    );
+    $form['container'][$i]['sub_section'] = array(
+      '#type' => 'select',
+      '#title' => '',
+      '#options' => $subsec_options,
+      '#prefix' => '<div id="subsection-wrapper' . $i . '">',
+      '#suffix' => '</div></div>',
+    );
+    $form['container'][$i]['section_id'] = array(
+      '#type' => 'hidden',
+      '#value' => 0,
+    );
+    $form['container'][$i]['sub_section_id'] = array(
+      '#type' => 'hidden',
+      '#value' => 0,
+    );
+
+    $form['container'][$i]['type'] = array(
+      '#type' => 'textfield',
+      '#title' => '',
+      '#size' => 25,
+      '#maxlength' => 255,
+    );
+    $form['container'][$i]['webview_url'] = array(
+      '#type' => 'textfield',
+      '#title' => '',
+      '#size' => 25,
+      '#maxlength' => 255,
+    );
+    $form['container'][$i]['icon_url'] = array(
+      '#type' => 'textfield',
+      '#title' => '',
+      '#size' => 25,
+      '#maxlength' => 255,
+    );
+    $form['container'][$i]['is_new'] = array(
+      '#type' => 'checkbox',
+      '#title' => '',
+    );
+  }
+  $form['add_item'] = array(
+    '#type' => 'submit',
+    '#value' => t('Add another item'),
+    '#submit' => array('itg_app_manager_menu_form_add_item'),
+  );
+
+  if ($form_state['number_names'] > 1) {
+
+    $form['remove_item'] = array(
+      '#type' => 'submit',
+      '#value' => t('Remove latest item'),
+      '#submit' => array('itg_app_manager_menu_form_remove_item'),
+      // Since we are removing a name, don't validate until later.
+      '#limit_validation_errors' => array(),
+    );
+  }
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+    '#submit' => array('itg_app_manager_form_submit'),
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function itg_app_manager_theme() {
+  $theme['itg_app_manager_menu_form_table'] = array(
+    'render element' => 'element',
+  );
+  return $theme;
+}
+
+/**
+ * Theme callback for creating the table
+ * @param array $variables
+ * @return String
+ */
+function theme_itg_app_manager_menu_form_table($variables) {
+  $element = $variables['element'];
+  $form_type = $element['#menu_form_id'];
+  $rows = array();
+  $element = $variables['element'];
+
+  $rows = array();
+  foreach (element_children($element) as $i) {
+    $row = array(
+      'data' => array(),
+    );
+    // Render the table columns.
+    if ($form_type == '1') {
+      $row['data'][] = drupal_render($element[$i]['menu_label_id']);
+    }
+    $row['data'][] = drupal_render($element[$i]['order_id']);
+    $row['data'][] = drupal_render($element[$i]['menu_type']);
+    $row['data'][] = drupal_render($element[$i]['section']['title']);
+    $row['data'][] = drupal_render($element[$i]['has_subcat']);
+    $row['data'][] = drupal_render($element[$i]['sub_section']);
+    $row['data'][] = drupal_render($element[$i]['type']);
+    $row['data'][] = drupal_render($element[$i]['webview_url']);
+    $row['data'][] = drupal_render($element[$i]['icon_url']);
+    $row['data'][] = drupal_render($element[$i]['is_new']);
+    $rows[] = $row;
+  }
+
+  // Build the table header.
+  if ($form_type == '1') {
+    $header = array(t('Menu label'), t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Sub Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'));
+  }
+  else {
+    $header = array(t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Sub Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'));
+  }
+  // Render the table.
+  // Note: For TableSelect instead of TableDrag, you would have specified
+  //   'tableselect' as render element #type and passed the $rows as 'options'
+  //   instead of 'rows'.
+  $output = theme('table', array(
+    'header' => $header,
+    'rows' => $rows,
+  ));
+  $output .= drupal_render_children($element);
+  return $output;
+}
+
+/**
+ * Add more callback
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_menu_form_add_item($form, &$form_state) {
+  // All we need is to increase the number used in our for loop above ...
+  $form_state['number_names'] ++;
+  // ... and rebuild our form.
+  $form_state['rebuild'] = TRUE;
+}
+
+/**
+ * Remove item callback
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_menu_form_remove_item($form, &$form_state) {
+  // Just the other way around until only one item is left ...
+  if ($form_state['number_names'] > 1) {
+    $form_state['number_names'] --;
+  }
+  // ... and form rebuild again.
+  $form_state['rebuild'] = TRUE;
+}
+
+/**
+ * Ajax dependent dropdown callback
+ * @param array $form
+ * @param array $form_state
+ * @return array $form
+ */
+function ajax_dependent_dropdown_callback($form, $form_state) {
+  return $form['container'][$form_state['triggering_element']['#delta']]['section'];
+}
+
+/**
+ * Ajax subsection dropdown callback
+ * @param array $form
+ * @param array $form_state
+ * @return array $form
+ */
+function ajax_subsection_callback($form, $form_state) {
+  return $form['container'][$form_state['triggering_element']['#delta']]['sub_section'];
+}
+
+/**
+ * Getting child taxonomies form tid
+ * @param int $term_id
+ * @return array
+ */
+function _get_section_options($term_id) {
+  $option_arr = array('' => '- Select -');
+  if ((isset($term_id)) && !empty($term_id)) {
+    if ($term_id == '1') {
+      $term_query = db_select('taxonomy_term_data', 'tt');
+      $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
+      $term_query->fields('tt', array('tid', 'name'));
+      $term_query->condition('tt.vid', 14, '=');
+      $term_query->condition('tt.tid', 1208521, '!=');
+      $term_query->condition('tt.tid', 1207762, '!=');
+      $term_query->condition('th.parent', 0, '=');
+      $term_query_results = $term_query->execute()->fetchAll();
+      foreach ($term_query_results as $key => $val) {
+        $option_arr[$val->tid] = $val->name;
+      }
+    }
+    else {
+      $term_query = db_select('taxonomy_term_data', 'tt');
+      $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
+      $term_query->fields('tt', array('tid', 'name'));
+      $term_query->condition('th.parent', $term_id, '=');
+      $term_query_results = $term_query->execute()->fetchAll();
+      foreach ($term_query_results as $key => $val) {
+        $option_arr[$val->tid] = $val->name;
+      }
+    }
+  }
+  return $option_arr;
+}
+
+/**
+ * Submit callback for menu management form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_form_submit($form, &$form_state) {
+  if (!empty($form_state['values'])) {
+    foreach ($form_state['values']['container'] as $key => $form_val) {
+      $data = array();
+      $title = '';
+      $section_id = 0;
+      $s_id = 0;
+      $s_title = '';
+      if ($form_val['menu_type'] == '0') {
+        $title = $form_val['section']['title'];
+        $section_id = 0;
+      }
+      else if ($form_val['menu_type'] == '1') {
+        $title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+        $section_id = $form_val['section']['title'];
+      }
+      else {
+        $title = $form['container'][$key]['menu_type']['#options'][$form_val['menu_type']];
+        $section_id = $form_val['menu_type'];
+        $s_id = $form_val['section']['title'];
+        $s_title = $form['container'][$key]['section']['title']['#options'][$form_val['section']['title']];
+      }
+      if ($form_val['menu_type'] == '1') {
+        if ($form_val['has_subcat'] == 1) {
+          $s_id = $form_val['sub_section'];
+          $s_title = $form['container'][$key]['sub_section']['#options'][$form_val['sub_section']];
+        }
+        else {
+          $s_id = 0;
+          $s_title = '';
+        }
+      }
+      $data = array(
+        'menu_type_id' => $form_val['menu_type_id'],
+        'menu_label_id' => $form_val['menu_label_id'],
+        'order_id' => $form_val['order_id'],
+        'menu_type' => $form_val['menu_type'],
+        'section_id' => $section_id,
+        'title' => $title,
+        'type' => $form_val['type'],
+        'webview_url' => $form_val['webview_url'],
+        'icon_url' => $form_val['icon_url'],
+        'is_new' => $form_val['is_new'],
+        'has_subcategory' => $form_val['has_subcat'],
+        's_id' => $s_id,
+        's_title' => $s_title,
+      );
+      drupal_write_record('itg_app_menu_content', $data);
+    }
+    drupal_set_message(t('Data saved successfulyy.'), 'status');
+  }
+}
+
+/**
+ * Master config internal menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_master_config_internal_form($form, &$form_state) {
+  $form['last_updated_datetime'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Last Updated Datetime',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['photo_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Photo Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['photo_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Photo Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['photo_display_count_newslist_cell'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Photo Display Count Newslist Cell',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['video_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Video Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['video_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Video Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['story_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Story Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['story_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Story Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['news_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'News Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['news_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'News Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['magazine_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Magazine Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['magazine_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Magazine Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['author_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Author Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['author_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Author Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['author_story_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Author Story Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['author_story_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Author Story Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['anchor_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Anchor Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['anchor_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Anchor Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['anchor_program_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Anchor Program Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['anchor_program_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Anchor Program Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['closed_poll_display_count'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Closed Poll Display Count',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['closed_poll_pagination_cap'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Closed Poll Pagination Cap',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['ios_group'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('IOS'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+
+  $form['ios_live_version'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Live Version',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+
+  $form['ios_version_update_datetime'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Version Update Datetime',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['ios_force_update'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Force Update',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['ios_update_message_frequency'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Update Message Frequency',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+
+  $form['android_group'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Android'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+
+  $form['android_live_version'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Live Version',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['android_beta_version'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Beta Version',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['android_version_update_datetime'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Version Update Datetime',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['android_force_update'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Force Update',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['android_update_message_frequency'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Update Message Frequency',
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+    '#submit' => array('itg_app_master_config_internal_form_submit'),
+  );
+  return $form;
+}
+
+/**
+ * submit callback for master config form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_master_config_internal_form_submit($form, &$form_state) {
+  form_state_values_clean($form_state);
+  foreach ($form_state['values'] as $key => $val) {
+    $data = array(
+      'config_key' => $key,
+      'config_val' => $val,
+    );
+    drupal_write_record('itg_app_master_config_internal', $data);
+  }
+  drupal_set_message(t('Data saved successfulyy.'), 'status');
+}
+
+/**
+ * Widget menu callback
+ * @param type $w_id
+ * @return array
+ */
+function itg_app_create_widget_page($w_id) {
+  $output = array();
+  $output['form'] = drupal_get_form('itg_app_create_widget_form', $w_id);
+  $output['table'] = itg_app_widget_table();
+  return $output;
+}
+
+/**
+ * widget form callback
+ * @param array $form
+ * @param array $form_state
+ * @param int $w_id
+ * @return array
+ */
+function itg_app_create_widget_form($form, &$form_state, $w_id) {
+  $w_name = '';
+  $w_url = '';
+  if (isset($w_id) && !empty($w_id)) {
+    $w_query = db_select('itg_app_middleware', 'itg_m');
+    $w_query->fields('itg_m', array('name', 'url'));
+    $w_query->condition('itg_m.identifier', 'itg_widget', '=');
+    $w_query->condition('itg_m.id', $w_id, '=');
+    $w_query_results = $w_query->execute()->fetchAll();
+    foreach ($w_query_results as $key => $val) {
+      $w_name = $val->name;
+      $w_url = $val->url;
+    }
+  }
+  $form['widget_name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Name',
+    '#default_value' => $w_name,
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  $form['widget_url'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Url',
+    '#default_value' => $w_url,
+    '#size' => 25,
+    '#maxlength' => 255,
+  );
+  if (isset($w_id) && !empty($w_id)) {
+    $form['id'] = array(
+      '#type' => 'hidden',
+      '#value' => $w_id,
+    );
+  }
+  $form['submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+    '#submit' => array('itg_app_create_widget_form_submit'),
+  );
+  return $form;
+}
+
+/**
+ * widget form submit callback
+ * @param array $form
+ * @param string $form_state
+ */
+function itg_app_create_widget_form_submit($form, &$form_state) {
+  if (isset($form_state['values']['id']) && !empty($form_state['values']['id'])) {
+    $num_updated = db_update('itg_app_middleware')
+        ->fields(array(
+          'name' => $form_state['values']['widget_name'],
+          'url' => $form_state['values']['widget_url'],
+          'changed' => REQUEST_TIME,
+        ))
+        ->condition('id', $form_state['values']['id'], '=')
+        ->execute();
+
+    $form_state['redirect'] = "itg-app-widget";
+    drupal_set_message(t('Data Updated successfulyy.'), 'status');
+  }
+  else {
+    db_insert('itg_app_middleware')
+        ->fields(array(
+          'identifier' => 'itg_widget',
+          'name' => $form_state['values']['widget_name'],
+          'url' => $form_state['values']['widget_url'],
+          'created' => REQUEST_TIME,
+          'changed' => REQUEST_TIME,
+        ))
+        ->execute();
+    drupal_set_message(t('Data saved successfully.'), 'status');
+  }
+}
+
+/**
+ * Table structure for widgets
+ * @return array
+ */
+function itg_app_widget_table() {
+  $header = array();
+  $w_query = db_select('itg_app_middleware', 'itg_m');
+  $w_query->fields('itg_m');
+  $w_query->condition('itg_m.identifier', 'itg_widget', '=');
+  $w_query_results = $w_query->execute()->fetchAll();
+  foreach ($w_query_results as $key => $val) {
+    $delete = l(t('Delete'), 'itg-app-widget/' . $val->id . '/delete');
+    $edit = l(t('Edit'), 'itg-app-widget/' . $val->id . '/edit');
+    $rows[] = array('number' => $key+1, 'widget_name' => $val->name, 'edit' => $edit, 'delete' => $delete);
+  }
+  return array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' => t('Nothing found. Nada. Zip. Zilch.'),
+  );
+}
+
+/**
+ * Delete widget item confirm form callback
+ * @param array $form
+ * @param array $form_state
+ * @param array $cid
+ * @return array
+ */
+function itg_app_widget_delete_record_comfirm($form, &$form_state, $cid) {
+  $form['delete'] = array(
+    '#type' => 'value',
+    '#value' => $cid,
+  );
+  return confirm_form(
+      $form, t('Are you sure you want to delete this?'), 'itg_app_create_widget', t('This action cannot be undone.'), t('Delete'), t('Cancel')
+  );
+}
+
+/**
+ * Delete widget item confirm form submit callback
+ * @param array $form
+ * @param array $form_state
+ * @param array $cid
+ * @return array
+ */
+function itg_app_widget_delete_record_comfirm_submit($form, &$form_state) {
+  $record = $form_state['values']['delete'];
+  if ($record) {
+    $num_deleted = db_delete('itg_app_middleware')
+        ->condition('id', $record)
+        ->execute();
+    drupal_set_message('The record has been deleted!');
+  }
+  $form_state['redirect'] = "itg-app-widget";
+}
+
+function itg_app_manager_packages(){
+  $output = array();
+  $output['form'] = drupal_get_form('itg_app_manager_packages_form');
+  $middleware_data = itg_app_middleware_table('itg_package');
+  $header = array();
+  foreach ($middleware_data as $key => $val) {
+    $delete = l(t('Delete'), 'itg-app-manager-packages/' . $val->id . '/delete');    
+    $rows[] = array('number' => $key+1, 'name' => $val->name, 'delete' => $delete);
+  }
+  $table =  array(
+    '#theme' => 'table',
+    '#header' => $header,
+    '#rows' => $rows,
+    '#empty' => t('Nothing found. Nada. Zip. Zilch.'),
+  );
+  $output['table'] = $table;
+  return $output;
+}
+
+function itg_app_manager_packages_form($form, &$form_state){
+	ctools_include('modal');
+    ctools_modal_add_js();
+	$default_checked = array();	
+	$selected_packages = itg_app_middleware_table('itg_package');
+	foreach($selected_packages as $package){
+		$default_checked[] = _get_term_from_name($package->name, 'category_management');
+	}
+	$package_term = taxonomy_get_term_by_name('packages', 'category_management');
+	foreach($package_term as $pack_tid => $pack_obj){
+	  $term_query = db_select('taxonomy_term_data', 'tt');
+      $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
+      $term_query->fields('tt', array('tid', 'name'));
+      $term_query->condition('th.parent', $pack_obj->tid, '=');
+      $term_query_results = $term_query->execute()->fetchAll();
+      foreach ($term_query_results as $key => $val) {
+        $term_options[$val->tid] = $val->name.l('Config Settings', 'package-config/nojs/form/'.$val->tid.'', array('attributes' => array('class' => 'ctools-use-modal')));
+      }
+	}	
+	$form['package_options'] = array(
+		'#type' => 'checkboxes',
+		'#options' => $term_options,
+		'#default_value' => $default_checked,
+	);
+	$form['package_submit_button'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+    '#submit' => array('itg_app_manager_packages_form_submit'),
+    );
+	return $form;
+}
+
+function itg_app_manager_packages_form_submit($form, &$form_state){
+	foreach($form_state['values']['package_options'] as $id => $val){
+		if($val > 0){
+			$package_name = $form['package_options']['#options'][$val];
+			$result = db_select('itg_app_middleware', 'it_m')
+            ->fields('it_m', array('id'))
+            ->condition('name', $package_name)
+            ->condition('identifier', 'itg_package')
+            ->execute();
+			$num_of_results = $result->rowCount();
+			if($num_of_results == 0){
+				db_insert('itg_app_middleware')
+				->fields(array(
+				  'identifier' => 'itg_package',
+				  'name' => $package_name,
+				  'url' => '',
+				  'created' => REQUEST_TIME,
+				  'changed' => REQUEST_TIME,
+				))
+				->execute();
+			}			
+		}
+		else{
+			$package_name = $form['package_options']['#options'][$id];
+			$num_deleted = db_delete('itg_app_middleware')
+			->condition('name', $package_name)
+			->condition('identifier', 'itg_package')
+			->execute();
+		}
+	}
+	
+    drupal_set_message(t('Data saved successfully.'), 'status');
+}
+
+function itg_app_middleware_table($identifier){
+  $i_query_results = array();
+  $i_query = db_select('itg_app_middleware', 'itg_m');
+  $i_query->fields('itg_m');
+  $i_query->condition('itg_m.identifier', $identifier, '=');
+  $i_query_results = $i_query->execute()->fetchAll();
+  return $i_query_results;
+}
+
+function itg_app_manager_package_delete_comfirm($form, &$form_state, $cid){
+	$form['delete'] = array(
+    '#type' => 'value',
+    '#value' => $cid,
+  );
+  return confirm_form(
+      $form, t('Are you sure you want to delete this?'), 'itg-app-manager-packages', t('This action cannot be undone.'), t('Delete'), t('Cancel')
+  );
+}
+
+function itg_app_manager_package_delete_comfirm_submit($form, &$form_state) {
+  $record = $form_state['values']['delete'];
+  if ($record) {
+    $num_deleted = db_delete('itg_app_middleware')
+        ->condition('id', $record)
+        ->execute();
+    drupal_set_message('The record has been deleted!');
+  }
+  $form_state['redirect'] = "itg-app-manager-packages";
+}
+
+function _get_term_from_name($term_name, $vocabulary_name) {
+  if ($vocabulary = taxonomy_vocabulary_machine_name_load($vocabulary_name)) {
+    $tree = taxonomy_get_tree($vocabulary->vid);
+    foreach ($tree as $term) {
+      if ($term->name == $term_name) {
+        return $term->tid;
+      }
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Ajax menu callback.
+ */
+function itg_app_manager_config_popup_form_callback($ajax, $section_id) {
+  if ($ajax) {
+    ctools_include('ajax');
+    ctools_include('modal');
+ 
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('Package Config Form'),
+    );
+ 
+    // Use ctools to generate ajax instructions for the browser to create
+    // a form in a modal popup.
+    $form_state['build_info']['args'] = array($section_id);
+    $output = ctools_modal_form_wrapper('itg_app_manager_package_popup_form', $form_state);
+ 
+    // If the form has been submitted, there may be additional instructions
+    // such as dismissing the modal popup.
+    if (!empty($form_state['ajax_commands'])) {
+      $output = $form_state['ajax_commands'];
+    }
+ 
+    // Return the ajax instructions to the browser via ajax_render().
+    print ajax_render($output);
+    drupal_exit();
+  }
+  else {
+    return drupal_get_form('itg_app_manager_package_popup_form');
+  }
+}
+
+/**
+ * Drupal form to be put in a modal.
+ */
+function itg_app_manager_package_popup_form($form, $form_state, $section_id) {
+  $form = array();
+ 
+  $form['config_options'] = array(
+		'#type' => 'radios',
+		'#options' => array(0 => 'Default Package( 3 Stories )', 1=> '1 Story| 1 Video| 1Photo'),
+		'#default_value' => 0,
+  );
+  $form['config_sectionid'] = array(
+	'#type' => 'hidden',
+	'#value' => $section_id,
+  );
+ 
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  );
+ 
+  return $form;
+}
+
+function itg_app_manager_package_popup_form_submit($form, &$form_state){
+	db_merge('itg_app_package_config_settings')
+  	->key(array('package_id' => $form_state['values']['config_sectionid']))
+  	->fields(array(
+  	      'package_id' =>  $form_state['values']['config_sectionid'],
+  	      'config_id' =>  $form_state['values']['config_options'],
+  	      'description' => '',
+  	))
+  	->execute();
+  	//drupal_goto('itg-app-manager-packages');
+  	//drupal_set_message(t('Data saved successfully.'), 'status');
+}
+
