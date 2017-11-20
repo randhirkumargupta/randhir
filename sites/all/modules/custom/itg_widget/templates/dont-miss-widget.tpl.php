@@ -1,8 +1,16 @@
 <?php if (!empty($data)) : global $base_url; ?>
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }else if(isset($_GET['is_home_front']) && $_GET['is_home_front']){
+	$data_tb_region_item = 'data-tb-region-item';  
+ }
+?>
   <div class="dont-miss">
     <ul>
       <?php foreach ($data as $key => $node_data) { ?>
-        <li class="dont-miss-listing">
+        <li <?php echo $data_tb_region_item;?> class="dont-miss-listing">
           <?php if (!empty($node_data['si_file_uri']) && file_exists($node_data['si_file_uri'])) { ?>
             <div class="dm-pic">
               <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $node_data['nid']) ?>">
