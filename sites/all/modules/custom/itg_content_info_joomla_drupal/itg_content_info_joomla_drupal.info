@@ -1,0 +1,4 @@
+name = ITG Content Info Joomla to Drupal
+description = "ITG Content Info Joomla to Drupal."
+core = 7.x
+package = ITG
