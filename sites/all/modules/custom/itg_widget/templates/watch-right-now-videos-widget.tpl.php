@@ -1,12 +1,16 @@
 <div class="watch-right-now-video">
 <?php if (!empty($data)) : global $base_url; ?>
     <?php $is_fron_page = drupal_is_front_page();
+    $data_tb_region_item = '';
+    if($is_fron_page){
+	  $data_tb_region_item = 'data-tb-region-item';  
+    }
     if (empty($is_fron_page)) { ?>
       <h3><span><?php print t("Watch Right Now") ?></span></h3>
     <?php } ?>
     <ul>    
         <?php foreach ($data as $video_key => $video_data) { ?>
-        <li class="watch-right-now-list watch-right-now-<?php echo $video_key ?>">        
+        <li <?php echo $data_tb_region_item;?> class="watch-right-now-list watch-right-now-<?php echo $video_key ?>">        
     <?php  if (!empty($video_data['esi_file_uri']) && file_exists($video_data['esi_file_uri'])) { ?>
             <a  href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $video_data['nid']); ?>" class="pic">
                 <?php $file_uri = file_create_url($video_data['esi_file_uri']); ?>
