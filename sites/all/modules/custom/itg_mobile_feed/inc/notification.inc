@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Inc file contains global configurations
  */
 
 /**
  * Common function to define the some Primary values
- * @return array $config
+ * @return string
  */
 function get_notification_config() {
   $config = array();
@@ -25,13 +26,11 @@ function notification_page() {
   generate_notification_all($params);
 }
 
-/**  Create notification file based on args
- *  And Write data with in the file,
- * @pram array $params
- * @return string $return_flag
+/**
+ * Create notification file based on args
+ * @param type $params
  */
 function generate_notification_all($params) {
-
   $idsection = 1;
   $section = 'Notifications';
   $file_name = '';
@@ -47,7 +46,7 @@ function generate_notification_all($params) {
   //1 - iOS; 2 - BB; 3 - Android; 4 - Nokia ASHA; 5 - Windows Phone; 7 - OS X; 8 - Windows 8; 9 - Amazon; 10 - Safari; 11 - Chrome
   $device = isset($params['device']) ? $params['device'] : '';
   //defined the path in tidconfig.inc
-  $term_feed_path = getcwd() . FEED_NOTIFICATION_PATH;
+  $term_feed_path = "public://xml_it/notifications";
 
   //XML Files Generation Based on App Id
   if ($app_id == '4') {
@@ -99,7 +98,6 @@ function generate_notification_all($params) {
         $file_name = 'notification_chrome.xml';
         $output = chrome_notification_xml();
       }
-      else {}
 
       if ($output && $output != '') {
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
@@ -118,9 +116,11 @@ function generate_notification_all($params) {
   die();
 }
 
-/** Common Function to get weburl 
- * args nid
- * return string weburl
+/**
+ * Common Function to get weburl 
+ * @global type $base_url
+ * @param type $nid
+ * @return string
  */
 function get_web_url($nid) {
   global $base_url;
@@ -761,7 +761,6 @@ function notifications_article() {
  * Function for getting message_data
  * @return string $res
  */
-
 function message_data() {
   $config = get_notification_config();
   $params = drupal_get_query_parameters();
@@ -771,4 +770,3 @@ function message_data() {
   $message_data = json_decode($all_data);
   return $message_data;
 }
-

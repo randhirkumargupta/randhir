@@ -24,11 +24,10 @@ function videoCategoryPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+  $term_feed_path = "public://xml_it/videos";
   $return_flag = "";
   // loop on section
   foreach ($section_list as $key => $value) {
-
     // check section is videogallery
     $node_count = customNodeCount('videogallery', $value);
     // loop on category
@@ -54,11 +53,9 @@ function videoCategoryPageFeed() {
         $output .= getMobileFeedXmlFooter();
         // xml file writing..
         if ($output) {
-          //echo "andyrr here".$output; exit();
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
-      // }
     }
   }
   //return $return_flag;
@@ -96,7 +93,8 @@ function generateVideoCategoryPage($tid) {
     $range_max = 20;
     $range_min = 0;
     $order_by = 'ASC';
-    $type = "videogallery"; {
+    $type = "videogallery";
+    {
       $listcount = 0;
       // select node belong from current term id or child term id
       $query = db_select('taxonomy_index', 'ti');
@@ -163,10 +161,8 @@ function generateVideoCategoryPage($tid) {
     $data['lcount'] = $listcount;
     $data['data'] = $output;
     $data_fi = $listcount . "##listcount##" . $output;
-
     // set into redis
     $result_set = setRedis($redis_key, $data_fi, $ttl);
   }
   return $data;
 }
-

@@ -74,7 +74,7 @@ function programSectionPageFeed() {
   }
 
   if ($output) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+    $term_feed_path = "public://xml_it/videos";
     $file_name = "programmes.xml";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
@@ -82,4 +82,3 @@ function programSectionPageFeed() {
   echo $output;
   die();
 }
-

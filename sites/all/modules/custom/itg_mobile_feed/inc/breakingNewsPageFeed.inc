@@ -62,7 +62,7 @@ function breakingNewsPageFeed() {
   }
 
   if ($output) {
-    $feed_file_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $feed_file_path = "public://xml_it/stories";
     $feed_file_name = "breakingnews.xml";
     $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
   }
@@ -70,4 +70,3 @@ function breakingNewsPageFeed() {
   echo $output;
   die();
 }
-
