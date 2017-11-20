@@ -816,30 +816,20 @@ function getCityByNid($nid) {
  */
 function getBodyDataForAndroid($str) {
   // variable declation
-  $mob_str = "";
+  $mob_str = "";	
   //remove iframe..
   $str = html_entity_decode($str);
-<<<<<<< HEAD
-  //$str = str_replace(array('[ITG:LISTICLES]','[ITG:FACTOIDS]','[ITG:EXPERT-CHUNK]','[ITG:TECH-PHOTOS]','[ITG:TECH-PHOTO-GALLERY]'), array('','','','',''), $str);
-  //if (strpos($str, '[ITG:SURVEY:')) {
-  // $str = str_replace($search, $replace, $subject);
-  //}
-  //$caption_text = getStringBetween($str, '<div class="body_caption">', '</div>');
+
   $str = str_replace(array('<div class="itgimage">','data-syndication="no"'),array('<div class="itg-mosimage">',''),$str);
-  //$str = str_replace('<div class="body_caption"></div>','',$str);
   $str = preg_replace('/<div class=\"body_caption\">.*<\/div>/','',$str);
   $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
   $body = preg_replace('/\[[^]]+\]/', '', $body);
-=======
+
   $str = str_replace(array('[ITG:LISTICLES]','[ITG:FACTOIDS]','[ITG:EXPERT-CHUNK]','[ITG:TECH-PHOTOS]','[ITG:TECH-PHOTO-GALLERY]'), array('','','','',''), $str);
-  //if (strpos($str, '[ITG:SURVEY:')) {
-  // $str = str_replace($search, $replace, $subject);
-  //}
   $str = str_replace('nbsp;',' ',$str);
   $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
-  //echo $mob_str;
   //$img_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
->>>>>>> 640f949bf2936983b020d1fb8b4e7d61c7c61a36
+
   return $mob_str;
 }
 
