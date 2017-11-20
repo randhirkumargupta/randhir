@@ -75,9 +75,9 @@ function photoSectionPageFeed() {
   // write xml file - photosectionlisting.xml
 
   if ($output) {
-    //$term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
-    $term_feed_path = "public://xml_it/photos";
-    $file_name = "photosectionlisting.xml";
+    $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
+    //$term_feed_path = "public://xml_it/photos";
+    $file_name = "photosectionlisting_11.xml";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
 header('Content-Type: application/xml; charset=utf-8');
