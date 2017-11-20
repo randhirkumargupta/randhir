@@ -65,21 +65,16 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
               $sponsor_all_data = "";
               $sponsor_tags = "";
               if (!empty($sponsors_data)) {
-                $sponsor_all_data = node_load($sponsors_data['sponsor']);
+                $sponsor_all_data = itg_event_backend_sponsor_details($sponsors_data['sponsor']);
               }
 
-              if ($sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri'] != "") {
+              if($sponsor_all_data[0]->uri != "") {
                 $sponsors_data_parent = "sponsors-parent";
-                $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data->field_sponser_logo[LANGUAGE_NONE][0]['uri']) . ' alt="" title="" />';
-                $sponsor_tags = '<div class="spncor-tag"><span>' . t("Powered By") . '</span>' . l($sponsor_img, $baseurl . 'sponsor-details', array('attributes' => array('target' => '_blank'), 'query' => array('sponsor' => $sponsor_all_data->nid), 'html' => true)) . '</div>';
+                $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data[0]->uri) . ' alt="" title= "'.$sponsor_all_data[0]->title.'" />';
+                $sponsor_tags = '<div class="spncor-tag"><span>' . t("Powered By") . '</span>' . l($sponsor_img, $baseurl . 'sponsor-details', array('attributes' => array('target' => '_blank'), 'query' => array('sponsor' => $sponsor_all_data[0]->nid), 'html' => true)) . '</div>';
               }
               $story_title = itg_event_backend_get_session_story_title_move_field($media, $content_font_color, $host_node->nid);
               $output_story_title = '';
-              /*foreach ($story_title['story_title'] as $title) {
-                if (!empty($title)) {
-                  $output_story_title = '<p><i class="fa fa-story-title"></i>' . $title . '</p>';
-                }
-              }*/
               $output_story_title = '<p><i class="fa fa-story-title"></i>' . $story_title[0]['story_title'] . '</p>';
               $output_media = '';
               $max = max(array(count($session_result['photo']), count($session_result['video']), count($session_result['audio'])));
