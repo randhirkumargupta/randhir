@@ -139,7 +139,7 @@ function generatePhotoCategoryPage($tid) {
 
         $listcount++;
 
-        $title = $resvalue['title'];
+        $title = html_entity_decode($resvalue['title']);
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $created = $resvalue['created'];

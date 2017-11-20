@@ -143,7 +143,7 @@ function generateProgramCategoryPage($tid) {
 
         $listcount++;
 
-        $title = $resvalue['title'];
+        $title = html_entity_decode($resvalue['title']);
         $type = $resvalue['type'];
         $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
         $nid = $resvalue['nid'];
