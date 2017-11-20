@@ -142,7 +142,7 @@ function getVideoTag($node) {
   $src = "";
   $img_url = '';
 
-  $html = xmlEscape($node->body['und']['0']['value']);
+  $html = html_entity_decode($node->body['und']['0']['value']);
   $doc = new DOMDocument();
   libxml_use_internal_errors(TRUE);
   // loads your html

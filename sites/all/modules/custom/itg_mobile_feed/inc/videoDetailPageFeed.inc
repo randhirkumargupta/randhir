@@ -95,8 +95,8 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
 
       // get video path
       //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
-      $metatags_title = xmlEscape($node->metatags['und']['keywords']['value']);
-      $metatags_description = xmlEscape($node->metatags['und']['description']['value']);
+      $metatags_title = html_entity_decode($node->metatags['und']['keywords']['value']);
+      $metatags_description = html_entity_decode($node->metatags['und']['description']['value']);
 
       $output .= getMobileFeedXmlHeader();
       $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[" . $reporter_node . "]]></credit><date><![CDATA[" . $create_date . "]]></date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage><mediaid></mediaid><uurl></uurl>";
