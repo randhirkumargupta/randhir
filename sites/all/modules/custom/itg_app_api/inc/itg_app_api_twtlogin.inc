@@ -6,14 +6,11 @@
 
 /**
  * main function for generate twtlogin array
- *
+ * @pram array
  * @return array
  */
-function twtlogin($data){
-//    echo "twtlogin<pre>";
-//    print_r($data);
-//    echo "</pre>";
-//    exit();
+function twtlogin($data) {
+
     $token = $data['token'];
     $app_id_social = $data['app_id'];
     $uname_social = $data['uname'];
@@ -23,11 +20,10 @@ function twtlogin($data){
     //check user name is exist in db..
     $password = $data['password'];
     $user_load = user_load_by_name($uname_social);
-    if($user_load->uid){
+    if ($user_load->uid) {
         // user exist, next is step for login
         return userloginTWT($uname_social, $user_load->uid, $password);
-    }
-    else{
+    } else {
         // user not exist, next is step for signup
         return userSignupTWT($uname_social, $uid_social, $password);
     }
@@ -35,13 +31,13 @@ function twtlogin($data){
 
 /**
  * main function for userloginTWT
- * @pram $uname
+ * @pram string $uname, $uidget, $password
  * @return array
  */
-function userloginTWT($uname, $uidget, $password){
+function userloginTWT($uname, $uidget, $password) {
     global $user;
-    $username =  $uname; 
-    
+    $username = $uname;
+
     if ($user->uid) {
         // user is already logged in
         return services_error(t('Already logged in as @user.', array('@user' => $user->name)), 406);
@@ -50,16 +46,16 @@ function userloginTWT($uname, $uidget, $password){
     if (user_is_blocked($username)) {
         return services_error(t('The username %name has not been activated or is blocked.', array('%name' => $username)), 403);
     }
-    
+
     // Emulate drupal native flood control: check for flood condition.
     $flood_state = array();
     if (variable_get('services_flood_control_enabled', TRUE)) {
         $flood_state = _user_resource_flood_control_precheck($username);
     }
-    
+
     // Only authenticate if a flood condition was not detected.
     if (empty($flood_state['flood_control_triggered'])) {
-        //echo "andy"; exit();
+       
         $uid = $uidget;
     } else {
         $uid = FALSE;
@@ -71,9 +67,9 @@ function userloginTWT($uname, $uidget, $password){
         $flood_state['uid'] = $uid;
         _user_resource_flood_control_postcheck($flood_state);
     }
-    
+
     if ($uid) {
-        $user = user_load($uid);        
+        $user = user_load($uid);
         if ($user->uid) {
             user_login_finalize();
 
@@ -87,7 +83,7 @@ function userloginTWT($uname, $uidget, $password){
             services_remove_user_data($account);
 
             $return->user = $account;
-            //print_r($return);exit();
+            
             return $return;
         }
     }
@@ -97,24 +93,23 @@ function userloginTWT($uname, $uidget, $password){
 
 /**
  * main function for userSignupTWT
- * @pram $uname
+ * @pram string $uname_social, $uid_social, $password
  * @return array
  */
-
-function userSignupTWT($uname_social, $uid_social, $password){
+function userSignupTWT($uname_social, $uid_social, $password) {
     $mail = $uid_social;
-    $username = $uname_social;    
+    $username = $uname_social;
     $first_name = "";
     $last_name = "";
     $mobile = "";
-    
+
     // signup method
     $form_state = array();
 
 
     // check user_id is mail or mobile
     $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
-    
+
     $form_state['values']['mobile'] = "";
     $form_state['values']['url_info'] = $url_info;
     $form_state['values']['mail'] = $mail;
@@ -193,10 +188,9 @@ function userSignupTWT($uname_social, $uid_social, $password){
         $account = $e;
     }
     //return $account;
-    if($account->uid)
+    if ($account->uid)
         return userloginTWT($uname_social, $account->uid, $password);
-    else{
+    else {
         return $account;
     }
-    
 }

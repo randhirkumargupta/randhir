@@ -1,5 +1,5 @@
-name = ITG Rapid Services
-description = Rest WebService APIs for ITG Rapid.
+name = ITG App API Services
+description = Rest WebService APIs for ITG App API.
 core = 7.x
 dependencies[] = services
 dependencies[] = rest_server

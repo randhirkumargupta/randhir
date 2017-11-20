@@ -1,8 +1,12 @@
 <?php
 
 /**
+ * Inc file contains the functions story API
+ */
+
+/**
  * main function for generate StoryDetailPageRerourceValue array
- *
+ * @pram int $id
  * @return array
  */
 function StoryDetailPageRerourceValue($id) {
@@ -30,7 +34,7 @@ function StoryDetailPageRerourceValue($id) {
 
 /**
  * function for generate generateStoryDeatilList JSON
- *
+ * @pram int $id
  * @return array
  */
 function generateStoryDeatilList($id) {
@@ -41,7 +45,7 @@ function generateStoryDeatilList($id) {
     $photo_list_array = array();
     $data_array = array();
     $node = node_load($nid);
-    //p($node);die();
+
     // variable for feed
     $title = $node->title;
     $tid = $node->field_primary_category['und'][0]['value'];
@@ -59,10 +63,10 @@ function generateStoryDeatilList($id) {
     $body_with_html = $body_with_html_data['n_body'];
     $poll_id = $body_with_html_data['poll_id'];
     $polls = getPollsData($poll_id);
-    //p($polls);die();
-    $polls_d = array();  
+
+    $polls_d = array();
     $polls_d = (array) $polls;
-    //p($polls_d);die();
+
     $load_city = taxonomy_term_load($node->field_stroy_city['und'][0]['tid']);
     $location = $load_city->name;
     $term = taxonomy_term_load($tid);
@@ -101,32 +105,32 @@ function generateStoryDeatilList($id) {
     $buzz_data = (array) buildBuzzNode($node);
     $expertchunk_data = array();
     $expertchunk_data = (array) buildExpertchunkNode($node);
-    
+
     $content = $node->field_story_tech_review_chunk['und'][0]['value'];
     $content_org = $content; // pros & cons function
     $tech_pros = array();
-    $tech_pros =  (array) getTechPros($content_org);
-    
+    $tech_pros = (array) getTechPros($content_org);
+
     //$field_story_select_templates = $node->field_story_select_templates['und'][0]['value'];
     if (count($buzz_data) > 0) {
         $buzz_temp_flag = "1";
     } else {
         $buzz_temp_flag = "0";
     }
-    
+
     if (count($story_tech) > 0) {
         $tech_temp_flag = "1";
     } else {
         $tech_temp_flag = "0";
     }
-    
+
     // custom function for get img byline
     $byline = getImgByline($large_image_fid);
     $published_stamp = $node->workbench_moderation['published']->stamp;
 
     $published_date = date("Y-m-d H:i:s", $published_stamp);
     $firebase_url = get_node_firebase_weburl($nid);
-    
+
     $tech_photo_gallery = "";
     $tech_photo_gallery = $node->field_technology_photogallery['und'][0]['target_id'];
 
@@ -156,69 +160,60 @@ function generateStoryDeatilList($id) {
     $data_array['desc_withhtml'] = "$body_with_html";
     $data_array['tag'] = $tag;
     $data_array['highlight'] = $heighligth;
-    if(count($listicle_data['data']) && $listicle_data['data'][0]['description'] !=""){
+    if (count($listicle_data['data']) && $listicle_data['data'][0]['description'] != "") {
         $data_array['listicles'] = $listicle_data;
-    }
-    else{
+    } else {
         $listicle_data = (object) array();
         $data_array['listicles'] = $listicle_data;
     }
-    if(count($factoid_data['data'])){
+    if (count($factoid_data['data'])) {
         $data_array['factoids'] = $factoid_data;
-    }
-    else{
+    } else {
         $factoid_data = new stdClass();
         $data_array['factoids'] = $factoid_data;
     }
-    if($buzz_temp_flag){
+    if ($buzz_temp_flag) {
         $data_array['buzz'] = $buzz_data;
-    }
-    else{
+    } else {
         $buzz_data = array();
         $data_array['buzz'] = $buzz_data;
     }
-    
-    if($tech_photo_gallery){
+
+    if ($tech_photo_gallery) {
         $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
-    }
-    else{
+    } else {
         $tech_photo_gallery = new stdClass();
         $data_array['tech_photo_gallery'] = $tech_photo_gallery;
     }
-    
+
     $data_array['tech_photos'] = $story_tech;
-    if($tech_pros['listcont'] > 0){
+    if ($tech_pros['listcont'] > 0) {
         unset($tech_pros['listcont']);
         $data_array['tech_pros_cons'] = $tech_pros;
-    }
-    else{        
-        $tech_pros_emp = new stdClass();  
+    } else {
+        $tech_pros_emp = new stdClass();
         //$tech_pros_emp->id = NULL;
         $data_array['tech_pros_cons'] = $tech_pros_emp;
-        
     }
-    if(trim($expertchunk_data['name']) == "" && trim($expertchunk_data['image']) == "" && trim($expertchunk_data['expertise']) == "" && trim($expertchunk_data['description']) == ""){
+    if (trim($expertchunk_data['name']) == "" && trim($expertchunk_data['image']) == "" && trim($expertchunk_data['expertise']) == "" && trim($expertchunk_data['description']) == "") {
         $expertchunk_data = new stdClass();
         $data_array['expert-chunk'] = $expertchunk_data;
-    }
-    else{
+    } else {
         $data_array['expert-chunk'] = $expertchunk_data;
     }
-    
+
     $data_array['polls'] = $polls_d;
-    if(trim($author['a_id']) == "" && trim($author['a_title']) == "" && trim($author['a_image']) == "" && trim($author['a_twitter_handler']) == ""){
+    if (trim($author['a_id']) == "" && trim($author['a_title']) == "" && trim($author['a_image']) == "" && trim($author['a_twitter_handler']) == "") {
         $author = new stdClass();
         $data_array['author'] = $author;
-    }
-    else{
-        
+    } else {
+
         $data_array['author'] = $author;
     }
-    if(trim($rating['r_cur_value']) == "" && trim($rating['r_upper_range']) == "" && trim($rating['r_is_star_rating']) == ""){
+    if (trim($rating['r_cur_value']) == "" && trim($rating['r_upper_range']) == "" && trim($rating['r_is_star_rating']) == "") {
         $rating = new stdClass();
         $data_array['rating'] = $rating;
-    }
-    else{
+    } else {
         $data_array['rating'] = $rating;
     }
 
@@ -228,7 +223,7 @@ function generateStoryDeatilList($id) {
 
 /**
  * function for get story tag
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -251,7 +246,7 @@ function getTag($node) {
 
 /**
  * function for get story highlight
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -271,7 +266,7 @@ function getHighlight($node) {
 
 /**
  * function for get story rating
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -297,7 +292,7 @@ function getRatings($node) {
 
 /**
  * function for get story cast name
- * @pram $nid
+ * @pram int $nid
  *
  * @return array
  */
@@ -312,7 +307,8 @@ function getCastName($nid) {
 
 /**
  * function for story body html
- * @pram $node
+ * @pram object $node
+ *
  * @return string
  */
 function story_body_with_html($node) {
@@ -369,7 +365,7 @@ function story_body_with_html($node) {
 
 /**
  * function for get tech node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -387,7 +383,7 @@ function getStoryTechs($node) {
     /* remove pros & cons from contents start */
     $tect_img = $node->field_story_technology['und'];
     //$storytech['tech_photo_gallery']['p_id'] = "";
-    
+
     foreach ($tect_img as $key => $value) {
         $val_fid = $value['value'];
         $load_collection = field_collection_item_load($val_fid);
@@ -398,29 +394,23 @@ function getStoryTechs($node) {
         $listcont++;
     }
     //get tech pros
-    
-    
     //$storytech['tech_pros_cons'] = $tech_pros;
     //get tech pros
-    
     // static photo section
-
     //$storytech['photos']['p_id'] = "358749";
     //$storytech['photos']['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/intoday-mag2_54441497856379.jpeg";
     $storytech_fi[] = (array) $storytech;
-    if($listcont){
+    if ($listcont) {
         return $storytech_fi;
+    } else {
+        $dump = array();
+        return $dump;
     }
-    else{
-       $dump = array();
-      return $dump;  
-    }
-    
 }
 
 /**
  * function for get build listicle node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -438,11 +428,11 @@ function buildListicleNode($node) {
     //$listiclenode['title'] = "$field_story_template_guru";
     //listicle loop data
     $field_story_listicle = $node->field_story_listicle['und'];
-   //$listcont = 1;
+    //$listcont = 1;
     foreach ($field_story_listicle as $key => $value) {
         $collection_id = $value['value'];
         $load_collection = field_collection_item_load($collection_id);
-        //p($load_collection->field_listicle_color_new); die();
+
         $color = $load_collection->field_listicle_color_new['und'][0]['jquery_colorpicker'];
         $type = $load_collection->field_story_listicle_type['und'][0]['value'];
         $description = $load_collection->field_story_listicle_description['und'][0]['value'];
@@ -458,7 +448,7 @@ function buildListicleNode($node) {
 
 /**
  * function for get build factoid node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -484,7 +474,7 @@ function buildFactoidNode($node) {
 
 /**
  * function for get build buzz node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -514,7 +504,7 @@ function buildBuzzNode($node) {
 
 /**
  * function for get build buzz node
- * @pram $node
+ * @pram object $node
  *
  * @return array
  */
@@ -537,12 +527,12 @@ function buildExpertchunkNode($node) {
 
 /**
  * function for  getTechPros
- * @pram $content_org
+ * @pram string $content_org
  *
  * @return array
  */
 function getTechPros($content_org) {
-     $techpross = array();
+    $techpross = array();
     $listcont = 0;
     $html = $content_org;
     $dom = new DOMDocument();
@@ -551,87 +541,70 @@ function getTechPros($content_org) {
     $nodes = $xpath->query('//*[@class="tech-pros"]');
     //$nodes = $xpath->query('//ul[class="tech-pros"]');
     $listcont_flag = 0;
-    
+
     $data = array();
     for ($i = 0; $i < $nodes->length; $i++) {
         $temp = $nodes->item($i)->textContent;
         $techpross[$listcont]['pros'] = $temp;
         $listcont++;
     }
-    
-    $techpross_fi = rtrim($techpross[0]['pros'], '\r\n');    
-    $techpross_ar = explode("\r\n\t",$techpross_fi);
+
+    $techpross_fi = rtrim($techpross[0]['pros'], '\r\n');
+    $techpross_ar = explode("\r\n\t", $techpross_fi);
     $listcont = 0;
     $techpross_data = array();
     $pros_img = getTechProsImg($content_org);
     $tech_h2 = getTechProsh2($content_org);
-    
-    if($tech_h2){
+
+    if ($tech_h2) {
         $str_html = str_get_html($tech_h2);
         $rate = "";
-        foreach($str_html->find('strong') as $element){  
+        foreach ($str_html->find('strong') as $element) {
             $rate = $element;
             //$rate_dup = $rate;
         }
         $rate = ltrim($rate, "<strong>");
         $rate = rtrim($rate, "</strong>");
     }
-   
+
     $tech_h2 = strip_tags($tech_h2);
     $tech_h2 = str_replace($rate, "", $tech_h2);
-    
+
     $techpross_data['label'] = "$tech_h2";
     $techpross_data['rating'] = "$rate";
     $techpross_data['img_url'] = "$pros_img";
-    
+
     $tech_pros_label = getTechProsLabel($content_org, $flag = 0);
     $techpross_data['pros']['label'] = "$tech_pros_label";
-    
+
     foreach ($techpross_ar as $key => $value) {
-       $value = rtrim($value, '\r\n'); 
-       $techpross_data['pros']['data'][$listcont]['title'] = $value; 
-       $listcont++;
-       if($value){
-           $listcont_flag = 1;
-       }
+        $value = rtrim($value, '\r\n');
+        $techpross_data['pros']['data'][$listcont]['title'] = $value;
+        $listcont++;
+        if ($value) {
+            $listcont_flag = 1;
+        }
     }
-    if(count($techpross_data['pros']['data']) < 0){
+    if (count($techpross_data['pros']['data']) < 0) {
         //$techpross_data['pros']['label'] = "";
     }
     $tech_cons = array();
     $tech_cons = getTechCons($content_org);
-    $techpross_data['cons'] = $tech_cons; 
-    $techpross_data['listcont'] = $listcont_flag; 
-    
-    return $techpross_data;
-}
-function getTechPros_bk($content_org) {
-    $techpross = array();
-    $listcont = 0;
-    $html = $content_org;
-    $dom = new DOMDocument();
-    $dom->loadHTML($html);
-    $xpath = new DOMXPath($dom);
-    $nodes = $xpath->query('//*[@class="pros-list"]');
-    $data = array();
-    for ($i = 0; $i < $nodes->length; $i++) {
-        $temp = $nodes->item($i)->textContent;
-        $techpross[$listcont]['pros'] = $temp;
-        $listcont++;
-    }
+    $techpross_data['cons'] = $tech_cons;
+    $techpross_data['listcont'] = $listcont_flag;
 
-    return $techpross;
+    return $techpross_data;
 }
 
 /**
  * function for  getTechCons
- * @pram $content_org
+ * @pram string $content_org
  *
  * @return array
  */
 function getTechCons($content_org) {
-    
-    
+
+
 
     $techpross = array();
     $listcont = 0;
@@ -641,50 +614,32 @@ function getTechCons($content_org) {
     $xpath = new DOMXPath($dom);
     $nodes = $xpath->query('//*[@class="tech-cons"]');
     //$nodes = $xpath->query('//ul[class="tech-pros"]');
-    
+
     $data = array();
     for ($i = 0; $i < $nodes->length; $i++) {
         $temp = $nodes->item($i)->textContent;
         $techpross[$listcont]['cons'] = $temp;
         $listcont++;
     }
-    
-    $techpross_fi = rtrim($techpross[0]['cons'], '\r\n');    
-    $techpross_ar = explode("\r\n\t",$techpross_fi);
+
+    $techpross_fi = rtrim($techpross[0]['cons'], '\r\n');
+    $techpross_ar = explode("\r\n\t", $techpross_fi);
     $listcont = 0;
     $techpross_data = array();
     $tech_cons_label = getTechProsLabel($content_org, $flag = 1);
     $techpross_data['label'] = "$tech_cons_label";
     foreach ($techpross_ar as $key => $value) {
-       $value = rtrim($value, '\r\n'); 
-       $techpross_data['data'][$listcont]['title'] = $value; 
-       $listcont++;
-    }
-    
-    if(count($techpross_data['data']) < 0){
-        //$techpross_data['label'] = "";
-    }
-    
-    
-    return $techpross_data;
-}
-function getTechCons_bk($content_org) {
-
-    $techpcons = array();
-    $listcont = 0;
-    $html = $content_org;
-    $dom = new DOMDocument();
-    $dom->loadHTML($html);
-    $xpath = new DOMXPath($dom);
-    $nodes = $xpath->query('//*[@class="cons-list"]');
-    $data = array();
-    for ($i = 0; $i < $nodes->length; $i++) {
-        $temp = $nodes->item($i)->textContent;
-        $techpcons[$listcont]['cons'] = $temp;
+        $value = rtrim($value, '\r\n');
+        $techpross_data['data'][$listcont]['title'] = $value;
         $listcont++;
     }
 
-    return $techpcons;
+    if (count($techpross_data['data']) < 0) {
+        //$techpross_data['label'] = "";
+    }
+
+
+    return $techpross_data;
 }
 
 /**
@@ -693,9 +648,9 @@ function getTechCons_bk($content_org) {
  *
  * @return array
  */
-function getPollsData($poll_id){
+function getPollsData($poll_id) {
     $poll_data = array();
-    if($poll_id > 0){
+    if ($poll_id > 0) {
         $poll_data = pollsdatalist($poll_id);
     }
     return $poll_data;
@@ -707,79 +662,80 @@ function getPollsData($poll_id){
 
 function pollsdatalist($poll_id) {
 
-  $news2 = array();
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
-  $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
+    $news2 = array();
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
+    $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
 
-  $query->fields('n', array('nid', 'title', 'type', 'changed'));
-  $query->fields('pb', array('field_poll_banner_fid'));
-  $query->fields('st', array('field_poll_start_date_value'));
-  $query->fields('ai', array('field_poll_call_to_action_image_fid'));
-  $query->fields('ed', array('field_poll_end_date_value'));
-  $query->fields('qi', array('field_poll_question_image_fid'));
+    $query->fields('n', array('nid', 'title', 'type', 'changed'));
+    $query->fields('pb', array('field_poll_banner_fid'));
+    $query->fields('st', array('field_poll_start_date_value'));
+    $query->fields('ai', array('field_poll_call_to_action_image_fid'));
+    $query->fields('ed', array('field_poll_end_date_value'));
+    $query->fields('qi', array('field_poll_question_image_fid'));
 
-  $query->condition('n.type', 'poll');  
-  $query->condition('n.nid', $poll_id);
-  
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $lcont = 0;
-  foreach ($result as $k => $res) {
-    $news2[$lcont] = getPollLData($res);
-    $lcont++;
-  }
-  
-  
-  return $news2;
+    $query->condition('n.type', 'poll');
+    $query->condition('n.nid', $poll_id);
+
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $lcont = 0;
+    foreach ($result as $k => $res) {
+        $news2[$lcont] = getPollLData($res);
+        $lcont++;
+    }
+
+
+    return $news2;
 }
 
 /*
- * args array 
- * return the associative array based on expected json
+ * function for associative array based on expected json
+ * @pram array 
+ * @return array
  */
 
 function getPollLData($res) {
 
-  $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
-  $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
-  $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
-  $poll_nid = $res['nid'];
-  $poll_publish_date_time = $res['field_poll_start_date_value'];
-  $poll_title = $res['title'];
+    $poll_sponsored_icon = completeFilePath($res['field_poll_banner_fid']);
+    $poll_action_img = completeFilePath($res['field_poll_call_to_action_image_fid']);
+    $poll_ques_img = completeFilePath($res['field_poll_question_image_fid']);
+    $poll_nid = $res['nid'];
+    $poll_publish_date_time = $res['field_poll_start_date_value'];
+    $poll_title = $res['title'];
 
-  $query2 = db_select('field_data_field_poll_answer', 'pa');
-  $query2->leftJoin('field_data_field_poll_answer_text', 'ot', 'ot.entity_id = pa.field_poll_answer_value');
-  $query2->leftJoin('field_data_field_poll_answer_image', 'ai', 'ai.entity_id = pa.field_poll_answer_value');
-  $query2->fields('pa', array('field_poll_answer_value'));
-  $query2->fields('ot', array('field_poll_answer_text_value'));
-  $query2->fields('ai', array('field_poll_answer_image_fid'));
-  $query2->condition('pa.entity_id', $res['nid']);
-  $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query2 = db_select('field_data_field_poll_answer', 'pa');
+    $query2->leftJoin('field_data_field_poll_answer_text', 'ot', 'ot.entity_id = pa.field_poll_answer_value');
+    $query2->leftJoin('field_data_field_poll_answer_image', 'ai', 'ai.entity_id = pa.field_poll_answer_value');
+    $query2->fields('pa', array('field_poll_answer_value'));
+    $query2->fields('ot', array('field_poll_answer_text_value'));
+    $query2->fields('ai', array('field_poll_answer_image_fid'));
+    $query2->condition('pa.entity_id', $res['nid']);
+    $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-  $options2 = array();
-  $lcont = 0;
-  foreach ($result_option as $p => $pv) {
-    $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
-    $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
-    $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
-    $options2[$lcont] = $options;
-    $lcont++;
-  }
-  $news = array();
-  $news['p_id'] = "$poll_nid";
-  $news['p_is_sponsored'] = "";
-  $news['p_sponsored_icon'] = "";
-  $news['p_sponsored_link'] = "";
-  $news['p_publish_datetime'] = "$poll_publish_date_time";
-  $news['p_title'] = "$poll_title";
-  $news['p_image'] = "$poll_ques_img";
-  $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
+    $options2 = array();
+    $lcont = 0;
+    foreach ($result_option as $p => $pv) {
+        $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
+        $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
+        $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
+        $options2[$lcont] = $options;
+        $lcont++;
+    }
+    $news = array();
+    $news['p_id'] = "$poll_nid";
+    $news['p_is_sponsored'] = "";
+    $news['p_sponsored_icon'] = "";
+    $news['p_sponsored_link'] = "";
+    $news['p_publish_datetime'] = "$poll_publish_date_time";
+    $news['p_title'] = "$poll_title";
+    $news['p_image'] = "$poll_ques_img";
+    $news['p_share_link'] = get_node_firebase_weburl($res['nid']);
 
-  $news['p_option'] = $options2;
-  return $news;
+    $news['p_option'] = $options2;
+    return $news;
 }
 
 /**
@@ -791,30 +747,33 @@ function getPollLData($res) {
 function getTechProsLabel($content_org, $flag = 0) {
     //include 'simple_html_dom.php';
     $h2 = "";
-    if($content_org){
+    if ($content_org) {
         $str_html = str_get_html($content_org);
         $h2 = "";
         $lcont = 0;
-        foreach($str_html->find('span') as $element){  
+        foreach ($str_html->find('span') as $element) {
             $h2 = $element;
             $lcont++;
-            if($flag == 0 && $lcont == 1){
+            if ($flag == 0 && $lcont == 1) {
                 break;
             }
         }
         $h2 = ltrim($h2, "<span>");
         $h2 = rtrim($h2, "</span>");
     }
-    //echo $h2; die();
+
     return $h2;
-    
 }
 
-
+/**
+ * function for  getBalanklist
+ * @pram int $nid
+ *
+ * @return array
+ */
 function getBalanklist($nid) {
     $photolist = array();
-    $photolist_loop = array();    
+    $photolist_loop = array();
     $photolist['tech_pros_cons'] = $photolist_loop;
     return $photolist;
 }
-

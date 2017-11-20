@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * app_api_feature.services.inc
+ * feature_for_app_rest_api.services.inc
  */
 
 /**
  * Implements hook_default_services_endpoint().
  */
-function app_api_feature_default_services_endpoint() {
+function feature_for_app_rest_api_default_services_endpoint() {
   $export = array();
 
   $endpoint = new stdClass();
@@ -83,21 +83,7 @@ function app_api_feature_default_services_endpoint() {
         ),
       ),
     ),
-    'anchor_list' => array(
-      'operations' => array(
-        'create' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
     'anchor_programm_list' => array(
-      'operations' => array(
-        'retrieve' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'auscovery_dashboard_mob' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',
@@ -112,13 +98,6 @@ function app_api_feature_default_services_endpoint() {
       ),
     ),
     'author_follow_list' => array(
-      'operations' => array(
-        'create' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'author_list' => array(
       'operations' => array(
         'create' => array(
           'enabled' => '1',
@@ -176,6 +155,9 @@ function app_api_feature_default_services_endpoint() {
     ),
     'comment' => array(
       'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
         'retrieve' => array(
           'enabled' => '1',
         ),
@@ -235,6 +217,9 @@ function app_api_feature_default_services_endpoint() {
     ),
     'file' => array(
       'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
         'retrieve' => array(
           'enabled' => '1',
         ),
@@ -242,9 +227,6 @@ function app_api_feature_default_services_endpoint() {
           'enabled' => '1',
         ),
         'index' => array(
-          'enabled' => '1',
-        ),
-        'update' => array(
           'enabled' => '1',
         ),
       ),
@@ -268,13 +250,6 @@ function app_api_feature_default_services_endpoint() {
         ),
       ),
     ),
-    'follow_topic' => array(
-      'operations' => array(
-        'create' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
     'forgot_password' => array(
       'operations' => array(
         'create' => array(
@@ -290,13 +265,6 @@ function app_api_feature_default_services_endpoint() {
       ),
     ),
     'get_preference' => array(
-      'operations' => array(
-        'create' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'get_the_user_follow_status' => array(
       'operations' => array(
         'create' => array(
           'enabled' => '1',
@@ -427,6 +395,9 @@ function app_api_feature_default_services_endpoint() {
         'retrieve' => array(
           'enabled' => '1',
         ),
+        'create' => array(
+          'enabled' => '1',
+        ),
         'update' => array(
           'enabled' => '1',
         ),
@@ -535,13 +506,6 @@ function app_api_feature_default_services_endpoint() {
         ),
       ),
     ),
-    'reset_password' => array(
-      'operations' => array(
-        'create' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
     'server_error_master' => array(
       'operations' => array(
         'retrieve' => array(
@@ -582,6 +546,9 @@ function app_api_feature_default_services_endpoint() {
     'taxonomy_term' => array(
       'operations' => array(
         'retrieve' => array(
+          'enabled' => '1',
+        ),
+        'create' => array(
           'enabled' => '1',
         ),
         'update' => array(
@@ -634,13 +601,6 @@ function app_api_feature_default_services_endpoint() {
         ),
       ),
     ),
-    'testing_report' => array(
-      'operations' => array(
-        'retrieve' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
     'twtlogin' => array(
       'operations' => array(
         'retrieve' => array(
@@ -658,6 +618,9 @@ function app_api_feature_default_services_endpoint() {
     'user' => array(
       'operations' => array(
         'retrieve' => array(
+          'enabled' => '1',
+        ),
+        'create' => array(
           'enabled' => '1',
         ),
         'update' => array(
@@ -712,14 +675,14 @@ function app_api_feature_default_services_endpoint() {
         ),
       ),
     ),
-    'user_follow_topic_list' => array(
+    'videolist' => array(
       'operations' => array(
-        'create' => array(
+        'retrieve' => array(
           'enabled' => '1',
         ),
       ),
     ),
-    'videolist' => array(
+    'views' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',

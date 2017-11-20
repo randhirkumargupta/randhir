@@ -6,15 +6,12 @@
 
 /**
  * main function for generate fblogin array
- *
+ * @pram  array
  * @return array
  */
 function fblogin($data) {
-//    echo "fblogin<pre>";
-//    print_r($data);
-//    echo "</pre>";
-//    exit();    
-     $token = $data['token'];
+
+    $token = $data['token'];
     $app_id_social = $data['app_id'];
     $uname_social = $data['uname'];
     $uid_social = $data['uid'];
@@ -23,7 +20,7 @@ function fblogin($data) {
     $password = $data['password'];
     //check user name is exist in db..
     $user_load = user_load_by_name($uname_social);
-    //echo "<pre>"; print_r($user_load->uid);echo "</pre>";exit();
+
     if ($user_load->uid) {
         // user exist, next is step for login
         return userloginFB($uname_social, $user_load->uid, $password);
@@ -35,7 +32,7 @@ function fblogin($data) {
 
 /**
  * main function for userloginFB
- * @pram $uname
+ * @pram string $uname, $uidget, $password
  * @return array
  */
 function userloginFB($uname, $uidget, $password) {
@@ -59,7 +56,7 @@ function userloginFB($uname, $uidget, $password) {
 
     // Only authenticate if a flood condition was not detected.
     if (empty($flood_state['flood_control_triggered'])) {
-        //echo "andy"; exit();
+
         $uid = $uidget;
     } else {
         $uid = FALSE;
@@ -87,7 +84,7 @@ function userloginFB($uname, $uidget, $password) {
             services_remove_user_data($account);
 
             $return->user = $account;
-            //print_r($return);exit();
+
             return $return;
         }
     }
@@ -97,12 +94,12 @@ function userloginFB($uname, $uidget, $password) {
 
 /**
  * main function for userSignupFB
- * @pram $uname
+ * @pram string $uname_social, $uid_social, $password
  * @return array
  */
 function userSignupFB($uname_social, $uid_social, $password) {
     $mail = $uid_social;
-    $username = $uname_social;    
+    $username = $uname_social;
     $first_name = "";
     $last_name = "";
     $mobile = "";
@@ -191,13 +188,18 @@ function userSignupFB($uname_social, $uid_social, $password) {
         drupal_set_message('Error:' . $e->getMessage(), 'error');
         $account = $e;
     }
-    if($account->uid)
-    return userloginFB($uname_social, $account->uid, $password);
-    else{
+    if ($account->uid)
+        return userloginFB($uname_social, $account->uid, $password);
+    else {
         return $account;
     }
 }
 
+/**
+ * function for signup on local
+ * @pram array
+ * @return array
+ */
 function localSignup($data) {
     global $user;
     $first_name = $data['first_name'];
@@ -228,7 +230,7 @@ function localSignup($data) {
         } else {
             $form_state['values']['mail'] = "";
         }
-        if($data['email_id'] != "" && filter_var($data['email_id'], FILTER_VALIDATE_EMAIL)){
+        if ($data['email_id'] != "" && filter_var($data['email_id'], FILTER_VALIDATE_EMAIL)) {
             $mail = $data['email_id'];
         }
         // prepare array for user
@@ -272,7 +274,7 @@ function localSignup($data) {
         try {
 
             $account = user_save(NULL, $edit);
-            //p($account);die();
+
             $user = updateUsedrProfileAtSignup_rapid($data, 1);
 
             if (function_exists('itg_personalization_reddem_referfriend')) {
@@ -310,26 +312,31 @@ function localSignup($data) {
         //return $account;
     }
     if ($user->uid) {
-            user_login_finalize();
+        user_login_finalize();
 
-            $return = new stdClass();
-            $return->sessid = session_id();
-            $return->session_name = session_name();
-            $return->token = drupal_get_token('services');
+        $return = new stdClass();
+        $return->sessid = session_id();
+        $return->session_name = session_name();
+        $return->token = drupal_get_token('services');
 
-            $account = clone $user;
+        $account = clone $user;
 
-            services_remove_user_data($account);
+        services_remove_user_data($account);
 
-            $return->user = $account;
+        $return->user = $account;
 
-            return $return;
-        }
+        return $return;
+    }
 
     //return $local_account;
 }
 
-function localLogin($data){
+/**
+ * function for login on local
+ * @pram array
+ * @return array
+ */
+function localLogin($data) {
     global $user;
     $user_id = $username = $data['user_id'];
     $password = $password = $data['password'];
@@ -352,7 +359,7 @@ function localLogin($data){
 
     // Only authenticate if a flood condition was not detected.
     if (empty($flood_state['flood_control_triggered'])) {
-        //echo "andy"; exit();
+
         $uid = user_authenticate($username, $password);
     } else {
         $uid = FALSE;
@@ -386,9 +393,15 @@ function localLogin($data){
     }
 }
 
-function localChangePass($get_data, $uid){
+/**
+ * function for password change on local
+ * @pram array
+ * @pram int
+ * @return array
+ */
+function localChangePass($get_data, $uid) {
     $uname = $user_id = $get_data['user_id'];
-    $pass  = $get_data['new_password'];
+    $pass = $get_data['new_password'];
     $pass2 = $get_data['confirm_password'];
     $msg = "";
     $data = array();
@@ -419,9 +432,15 @@ function localChangePass($get_data, $uid){
     return $flag;
 }
 
-function localResetPass($get_data, $uid){
+/**
+ * function for reset password change on local
+ * @pram array
+ * @pram int
+ * @return array
+ */
+function localResetPass($get_data, $uid) {
     $uname = $user_id = $get_data['user_id'];
-    $pass  = $get_data['new_password'];
+    $pass = $get_data['new_password'];
     $pass2 = $get_data['confirm_password'];
     $msg = "";
     //$data = array();

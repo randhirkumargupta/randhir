@@ -1,13 +1,14 @@
 <?php
 
 /*
- * Set the Firebase API Configuration 
+ * INC file for Set the Firebase API Configuration & Static variable declaratrion
  * 
  */
+
 define('HOME_PAGE_JSON_NEWS_LIST_LIFE_STYLE', 1206567);
 define('HOME_PAGE_JSON_NEWS_LIST_INDIA', 1206578);
 define('HOME_PAGE_JSON_NEWS_LIST_WORLD', 1206577);
-define('SSO_SERVER_URL', 'http://itgd-dev-sso.indiatodayonline.in');
+//define('SSO_SERVER_URL', 'https://uat-sso.indiatodayonline.in');
 
 //CATEGORY_MANAGMENT; 14
 
@@ -74,3 +75,6 @@ function get_node_firebase_weburl($nid) {
     //return $firebase_url;
     return $weburl;
 }
+
+
+

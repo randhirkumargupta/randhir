@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Inc file contains the functions
+ * Inc file contains the functions photo API
  */
 
 /**
  * main function for generate photoCategoryPage array
- *
+ * @pram int $tid, $pageno
  * @return array
  */
 function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
@@ -53,7 +53,7 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
 
 /**
  * function for generate photoCategoryPage xml feed
- *
+ * @pram int $tid, $pageno
  * @return array
  */
 function generatePhotoCategoryList($tid, $pageno) {
@@ -126,7 +126,7 @@ function generatePhotoCategoryList($tid, $pageno) {
         $query->fields('li', array('field_story_large_image_fid'));
         $query->fields('mi', array('field_story_medium_image_fid'));
         $query->fields('si', array('field_story_small_image_fid'));
-        $query->fields('eli',array('field_story_extra_large_image_fid'));
+        $query->fields('eli', array('field_story_extra_large_image_fid'));
         $query->fields('rc', array('field_common_related_content_value'));
 
         $query->fields('kt', array('field_story_kicker_text_value'));
@@ -134,14 +134,15 @@ function generatePhotoCategoryList($tid, $pageno) {
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
         $query->fields('fpc', array('field_primary_category_value'));
 
-        $d1 = date('Y-m-d', strtotime("-90 days"));
-        $d2 = date(strtotime($d1));
+
         //end
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        //change in query
+        $d1=date('Y-m-d', strtotime("-90 days"));
+        $d2=date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
+        //change in query
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
@@ -221,7 +222,7 @@ function generatePhotoCategoryList($tid, $pageno) {
 
 /**
  * main function for generate photoDetailPage array
- *
+ * @pram int $id
  * @return array
  */
 function photoDetailPageRerourceValue($id) {
@@ -250,7 +251,7 @@ function photoDetailPageRerourceValue($id) {
 
 /**
  * function for generate generatePhotoDeatilList JSON
- *
+ * @pram int $id
  * @return array
  */
 function generatePhotoDeatilList($id) {
@@ -303,26 +304,26 @@ function generatePhotoDeatilList($id) {
 
 /**
  * function for generate photo list array
- *
+ * @pram array $galleryimg
  * @return array
  */
 function generatePhotoDetailList($galleryimg) {
-    //echo "<pre>"; print_r($galleryimg);  echo "</pre>"; exit();
+
     $photo_list_array = array();
     $listcont = 0;
     if (count($galleryimg) > 0) {
         // loop on gallery img
         $output = "";
         foreach ($galleryimg as $key => $value) {
-            //echo "<pre>"; print_r($value);  echo "</pre>"; exit();
+
             // get img url start
             // $field_story_large_image_fid = field_data_field_story_large_image($value['value']);
             // get img url end
             $fc = field_collection_field_get_entity($value);
-            //echo "<pre>"; print_r($fc);  echo "</pre>"; exit();
+
             //$fid = $fc->field_api_image['und'][0]['fid'];
             $fid = $fc->field_image_id['und'][0]['value'];
-            if(!$fid > 0){
+            if (!$fid > 0) {
                 $fid = $fc->field_images['und'][0]['fid'];
             }
             $uri = $fc->field_images['und'][0]['filename'];
@@ -336,7 +337,7 @@ function generatePhotoDetailList($galleryimg) {
             //$byline = getImgByline($fid);
             $byline = $fc->field_credit['und'][0]['value'];
             $photo_story_img = image_style_url('photo_slider_753x543', $uri);
-             //$photo_story_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_img);
+            //$photo_story_img = str_replace("http://itgdrapid.indiatodayonline.in/s3/files", "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public", $photo_story_img);
             if (!$byline) {
                 // $byline = "";
             }
@@ -354,14 +355,14 @@ function generatePhotoDetailList($galleryimg) {
 
 /**
  * main function for generate photoStoryDetailPage array
- *
+ * @pram int $id
  * @return array
  */
 function photoStoryDetailPageRerourceValue($id) {
 
     // variable decalartion
     //349693 , 349625-> photo story nid
-    // echo "<pre>"; print_r(node_load($id));  echo "</pre>";exit();
+
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
@@ -384,7 +385,7 @@ function photoStoryDetailPageRerourceValue($id) {
 
 /**
  * function for generate generatePhotoStoryDeatilList JSON
- *
+ * @pram int $id
  * @return array
  */
 function generatePhotoStoryDeatilList($id) {
@@ -479,7 +480,7 @@ function generatePhotoStoryDetailList($nid) {
 
 /**
  * function for photoSotryHtml
- * @param type $node_id
+ * @param int $node_id
  * @return string
  */
 function photoSotryHtml($node_id) {
@@ -520,7 +521,7 @@ function photoSotryHtml($node_id) {
 
 /**
  * function for generate photo list array
- *
+ * @pram object $node
  * @return array
  */
 function generateAuthorTag($node) {
@@ -537,7 +538,7 @@ function generateAuthorTag($node) {
 
 /**
  * function for generate photo list array
- *
+ * @pram int $rvid
  * @return array
  */
 function field_data_field_story_large_image($rvid) {

@@ -5,8 +5,8 @@
  */
 
 /**
- * main function for generate fblogin array
- *
+ * main function for saveUpdatedProfile
+ * @pram array
  * @return array
  */
 function saveUpdatedProfile($data) {
@@ -67,7 +67,6 @@ function saveUpdatedProfile($data) {
 //    if (!empty($inputs['alt_email'])) {
 //        $user_detail->field_user_alternate_email['und'][0]['value'] = check_plain($inputs['alt_email']);
 //    }
-
     // Update dob field.
     if (!empty($data['date_of_birth'])) {
         $user_detail->field_story_issue_date['und'][0]['value'] = check_plain($date_of_birth);
@@ -109,7 +108,6 @@ function saveUpdatedProfile($data) {
 //    } else {
 //        unset($user_detail->field_user_qualification['und']);
 //    }
-
     // Update address field.
     if (!empty($data['address'])) {
         $user_detail->field_short_description['und'][0]['value'] = check_plain($address);
@@ -119,27 +117,27 @@ function saveUpdatedProfile($data) {
     if (!empty($data['zipcode'])) {
         $user_detail->field_user_pincode['und'][0]['value'] = check_plain($zipcode);
     }
- /*
-    //update country
-    if (!empty($country_tid) && $country_tid !== '_none') {
-        $user_detail->field_user_counrty['und'][0]['tid'] = check_plain($country_tid);
-    } else {
-        unset($user_detail->field_user_counrty['und']);
-    }
+    /*
+      //update country
+      if (!empty($country_tid) && $country_tid !== '_none') {
+      $user_detail->field_user_counrty['und'][0]['tid'] = check_plain($country_tid);
+      } else {
+      unset($user_detail->field_user_counrty['und']);
+      }
 
-    //update state
-    if (!empty($state_tid) && $state_tid !== '_none') {
-        $user_detail->field_personalization_state['und'][0]['tid'] = check_plain($state_tid);
-    } else {
-        unset($user_detail->field_personalization_state['und']);
-    }
+      //update state
+      if (!empty($state_tid) && $state_tid !== '_none') {
+      $user_detail->field_personalization_state['und'][0]['tid'] = check_plain($state_tid);
+      } else {
+      unset($user_detail->field_personalization_state['und']);
+      }
 
-    //update city
-    if (!empty($city_tid) && $city_tid !== '_none') {
-        $user_detail->field_personalization_city['und'][0]['tid'] = check_plain($city_tid);
-    } else {
-        unset($user_detail->field_personalization_city['und']);
-    }*/
+      //update city
+      if (!empty($city_tid) && $city_tid !== '_none') {
+      $user_detail->field_personalization_city['und'][0]['tid'] = check_plain($city_tid);
+      } else {
+      unset($user_detail->field_personalization_city['und']);
+      } */
 
     //Update News Letters field.  
 //    $flag = FALSE;
@@ -153,17 +151,15 @@ function saveUpdatedProfile($data) {
 //    if ($flag) {
 //        $user_detail->field_subscribe_for_newsletter['und'] = $data;
 //    }
-
     // Save user object.
     $flag_save = user_save($user_detail);
-    
-    
+
+
     // responce object
-    if($flag_save->uid){
+    if ($flag_save->uid) {
         $responce_object['status_code'] = "1";
         $responce_object['status_message'] = "customised_message";
-    }
-    else{
+    } else {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "";
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions
+ * Inc file contains the functions for homePgae API 
  */
 
 /**
@@ -19,9 +19,9 @@ function homePageJson() {
     $data_packagelist = homePageJsonPackagelist();
     $data_topstories = homePageJsonTopstories();
     $data_news_india = homePageJsonNewslist_india();
-    
+
     $data_news_lifestyle = homePageJsonNewslist_lifestyle();
-    
+
     $data_news_world = homePageJsonNewslist_world();
     $data_magazine = homePageJsonMagazine();
     $data_poll = homePageJsonPoll();
@@ -32,9 +32,9 @@ function homePageJson() {
     $data['data'][0] = $data_packagelist;
     $data['data'][1] = $data_topstories;
     $data['data'][2] = $data_news_india;
-    
+
     $data['data'][3] = $data_news_lifestyle;
-    
+
     $data['data'][4] = $data_news_world;
     $data['data'][5] = $data_magazine;
     $data['data'][6] = $data_poll;
@@ -75,7 +75,8 @@ function homePageJsonPackagelist() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0; {
+    $loop_count = 0;
+    {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -91,10 +92,9 @@ function homePageJsonPackagelist() {
         }
         $tid_list[] = 1206955; // india(video)
         $tid_list[] = 1208559; // Entertainment(photo)
-        
         // code vid=14  end
 
-        $data_news['id'] = "0";
+        $data_news['id'] = "1";
         $data_news['order'] = "1";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "Packagelist";
@@ -245,31 +245,31 @@ function homePageJsonPackagelist() {
             $listcount++;
         }
     }
-   
+
     $st_story = array();
-$test = array();
-$st_story['n_id'] = "820494";
-$st_story['n_type'] = "story";
-$st_story['n_is_developing'] = "0";
-$st_story['n_is_sponsored'] = "0";
-$st_story['n_share_link'] = "http://itgdrapid.indiatodayonline.in/magazine/auto-special/story/20151005-money-matters-petrol-vs-diesel-820494-2015-09-23";
-$st_story['n_title'] = "Current trends have narrowed the gap between petrol and diesel, so does buying a diesel car still make sense?";
-$st_story['n_description'] = "The basic premise should be to go in for a petrol car and then depending\n on the number of kilometres you drive every month switch to a \ndiesel-engined car.";
-$st_story['n_pcategory_id'] = "1206799";
-$st_story['n_pcategory_name'] = "AUTO SPECIAL";
-$st_story['n_comment_count'] = "0";
-$st_story['n_small_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/diesel_story_180_092815032739.jpg";
-$st_story['n_large_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/diesel_story_300_092815032739.jpg";
-$st_story['n_image_credit'] = "";
-$st_story['n_photo'] = $test;
-$st_story['n_video'] = $test;
-$st_story['n_polls'] = $test;
-$st_story['n_rating'] = $test;
-$st_story['n_magazine'] = $test;
-    
+    $test = array();
+    $st_story['n_id'] = "820494";
+    $st_story['n_type'] = "story";
+    $st_story['n_is_developing'] = "0";
+    $st_story['n_is_sponsored'] = "0";
+    $st_story['n_share_link'] = "http://itgdrapid.indiatodayonline.in/magazine/auto-special/story/20151005-money-matters-petrol-vs-diesel-820494-2015-09-23";
+    $st_story['n_title'] = "Current trends have narrowed the gap between petrol and diesel, so does buying a diesel car still make sense?";
+    $st_story['n_description'] = "The basic premise should be to go in for a petrol car and then depending\n on the number of kilometres you drive every month switch to a \ndiesel-engined car.";
+    $st_story['n_pcategory_id'] = "1206799";
+    $st_story['n_pcategory_name'] = "AUTO SPECIAL";
+    $st_story['n_comment_count'] = "0";
+    $st_story['n_small_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/diesel_story_180_092815032739.jpg";
+    $st_story['n_large_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/diesel_story_300_092815032739.jpg";
+    $st_story['n_image_credit'] = "";
+    $st_story['n_photo'] = $test;
+    $st_story['n_video'] = $test;
+    $st_story['n_polls'] = $test;
+    $st_story['n_rating'] = $test;
+    $st_story['n_magazine'] = $test;
+
     $data_newslist[$listcount] = $st_story;
-    
-    
+
+
 
     $data_news['news'] = (array) $data_newslist;
 
@@ -335,7 +335,7 @@ function homePageJsonTopstories() {
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-    $data_topstories['id'] = "0";
+    $data_topstories['id'] = "2";
     $data_topstories['order'] = "2";
     $data_topstories['type'] = "newslist";
     $data_topstories['title'] = "Top Stories";
@@ -456,7 +456,8 @@ function homePageJsonNewslist_india() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0; {
+    $loop_count = 0;
+    {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -473,7 +474,7 @@ function homePageJsonNewslist_india() {
 
         // code vid=14  end
 
-        $data_news['id'] = "1206578";
+        $data_news['id'] = "3";
         $data_news['order'] = "3";
         $data_news['type'] = "newslist";
         $data_news['title'] = "India";
@@ -663,7 +664,8 @@ function homePageJsonNewslist_world() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0; {
+    $loop_count = 0;
+    {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -672,7 +674,7 @@ function homePageJsonNewslist_world() {
             $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
         }
         $term_tree_count = count($term_tree);
-        //echo "count:".$term_tree_count."<pre>"; print_r($term_tree);echo "</pre>";exit();
+
         if ($term_tree_count) {
             foreach ($term_tree as $key => $value) {
                 $tid_list[] = $value->tid;
@@ -681,7 +683,7 @@ function homePageJsonNewslist_world() {
 
         // code vid=14  end
 
-        $data_news['id'] = "1206577";
+        $data_news['id'] = "5";
         $data_news['order'] = "5";
         $data_news['type'] = "newslist";
         $data_news['title'] = "World";
@@ -855,7 +857,7 @@ function homePageJsonMagazine() {
     $n_magazine_data = magazineCoverstoriesPageRerourceValueList();
     $n_magazine = $n_magazine_data['data'];
 
-    $data_magazine['id'] = "0";
+    $data_magazine['id'] = "6";
     $data_magazine['order'] = "6";
     $data_magazine['type'] = "magazine";
     $data_magazine['title'] = "From The Magazine";
@@ -956,7 +958,7 @@ function getMagazineList() {
 
     $magazine['issue'] = $issue;
 
-    //echo "<pre>magazine";  print_r($magazine);echo "</pre>";exit();
+
 
     return $magazine;
 }
@@ -1094,6 +1096,11 @@ function getMagazineStory($issue_date) {
     return $story;
 }
 
+/**
+ * function for serach in M-D array
+ * @pram array
+ * @return bool
+ */
 function in_multiarray($elem, $array, $field) {
     $top = sizeof($array) - 1;
     $bottom = 0;
@@ -1153,7 +1160,7 @@ function homePageJsonPoll() {
     $n_magazine = array();
 
     //$n_magazine = getMagazineList(); // homepage.inc
-   // $n_polls_data = polls_open_list(0);
+    // $n_polls_data = polls_open_list(0);
     //$n_polls = $n_polls_data['data'];
     $n_polls = array();
     $n_polls[0]['p_id'] = "837283";
@@ -1164,23 +1171,23 @@ function homePageJsonPoll() {
     $n_polls[0]['p_title'] = "BJP says Supreme Court\'s triple talaq verdict will end communal appeasement politics.";
     $n_polls[0]['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/card_14618248577791503655685.jpg";
     $n_polls[0]['p_share_link'] = "https://peg3z.app.goo.gl/qYPfjFjqTea5uHLR2";
-    
+
     $poll_option = array();
     $poll_option[0]['o_id'] = "1031148";
     $poll_option[0]['o_title'] = "";
     $poll_option[0]['o_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/I-agree1981503655508.jpg";
-    
+
     $poll_option[1]['o_id'] = "1031149";
     $poll_option[1]['o_title'] = "";
     $poll_option[1]['o_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/22167215-disagree-rubber-stamp-over-a-white-background9401503655569.jpg";
-    
-    
-    $n_polls[0]['p_option'] = $poll_option;
-   // $n_polls = (object) $n_polls;
-    
-   
 
-    $data_magazine['id'] = "0";
+
+    $n_polls[0]['p_option'] = $poll_option;
+    // $n_polls = (object) $n_polls;
+
+
+
+    $data_magazine['id'] = "7";
     $data_magazine['order'] = "7";
     $data_magazine['type'] = "poll";
     $data_magazine['title'] = "poll";
@@ -1214,10 +1221,9 @@ function homePageJsonPoll() {
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
 
-    $data_magazine['news'] =  (array) $data_newslist;
+    $data_magazine['news'] = (array) $data_newslist;
     //$data_magazine = (array) $data_magazine;
-    
-    //var_dump($data_magazine); die();
+
 
     return $data_magazine;
 }
@@ -1235,7 +1241,7 @@ function homePageJsonNewslist_lifestyle() {
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $tid = HOME_PAGE_JSON_NEWS_LIST_LIFE_STYLE;
+    $tid = HOME_PAGE_JSON_NEWS_LIST_INDIA;
     $node_count = "";
     $output = "";
     $data = array();
@@ -1254,7 +1260,8 @@ function homePageJsonNewslist_lifestyle() {
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
-    $loop_count = 0; {
+    $loop_count = 0;
+    {
         $listcount = 0;
         // code vid=14  start
         if ($tid > 0) {
@@ -1271,7 +1278,7 @@ function homePageJsonNewslist_lifestyle() {
 
         // code vid=14  end
 
-        $data_news['id'] = "1206567";
+        $data_news['id'] = "4";
         $data_news['order'] = "4";
         $data_news['type'] = "newslist";
         $data_news['title'] = "Lifestyle";
