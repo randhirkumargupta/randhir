@@ -283,6 +283,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     }
                                                   }
                                                   $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
+                                                  
                                                   ?>
                                               </select>
                                                   <div id="main_container" class="map-result-detail">
