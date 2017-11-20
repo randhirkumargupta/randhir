@@ -130,7 +130,7 @@ class MemCacheDrupal implements DrupalCacheInterface {
         // Cache item expired, return FALSE.
         $cache = FALSE;
       }
-      // Temporary items created before the cache was last flushed by
+   riables Set Hit";   // Temporary items created before the cache was last flushed by
       // cache_clear_all(NULL, $bin) are invalid.
       elseif (!empty($cache->temporary) && $cache->created + $this->cache_lifetime <= $this->cache_temporary_flush) {
         // CACHE_TEMPORARY item expired, return FALSE.
@@ -595,7 +595,6 @@ class MemCacheDrupal implements DrupalCacheInterface {
     if ($cached = cache_get('variables', 'cache_bootstrap')) {
       $variables = $cached->data;
       $variables[$name] = $value;
-      echo "Memcache Variables Set Hit";
       cache_set('variables', $variables, 'cache_bootstrap');
     }
     // If the variables aren't cached, there's no need to do anything.
