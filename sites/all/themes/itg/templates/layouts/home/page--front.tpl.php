@@ -114,7 +114,7 @@ if ($theme != 'itgadmin') {
         <!-- End of Breaking news band -->
         <?php if (isset($widget_data['big_story'])) : ?>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" data-tb-region="homeBigStory">
               <?php print $widget_data['big_story']; ?>
             </div>            
           </div>
@@ -124,7 +124,7 @@ if ($theme != 'itgadmin') {
 
           <div class="top-block">
 
-            <div class="top-colum-2">
+            <div class="top-colum-2" data-tb-region="homeTopFeatured">
               <div class="widget-help-text">Template widgets ( <strong>Home Page Feature</strong> )</div>
               <div class="itg-widget">
                 <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -143,7 +143,7 @@ if ($theme != 'itgadmin') {
               </div>
             </div>
 
-            <div class="top-colum-1">
+            <div class="top-colum-1" data-tb-region="homeTopStory">
               <div class="widget-help-text">Template widgets (<strong>Top Story</strong>)</div>
               <div class="itg-widget">
                 <div class="top-n-most-popular-stories">
@@ -214,7 +214,7 @@ if ($theme != 'itgadmin') {
                     ?>
                   </span>
                 </div>
-                <div class="itg-widget-child tab-data tab-data-1">
+                <div class="itg-widget-child tab-data tab-data-1" data-tb-region="homeTrendingVideo">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
                     <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name']; ?>">
 <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
@@ -237,7 +237,7 @@ if ($theme != 'itgadmin') {
                     </div>
                   </div>
                 </div>
-                <div class="itg-widget-child tab-data tab-data-2 hide">
+                <div class="itg-widget-child tab-data tab-data-2 hide" data-tb-region="homeTopTakes">
                   <div class="droppable <?php print $gray_bg_layout; ?>"> 
                     <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name']; ?>"> 
                       <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
@@ -271,7 +271,7 @@ if ($theme != 'itgadmin') {
             $recomended_array_count = count(explode(",", $value));
             if ($recomended_array_count >= 4) {
               ?>
-              <section class="recommended-for-you">
+              <section class="recommended-for-you" data-tb-region="homeRecommendedForYouNonPersonlization">
                 <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['non_personlization'] ?></div>
               </section>
             <?php
@@ -283,7 +283,7 @@ if ($theme != 'itgadmin') {
         
 
         <?php if (!empty($user->uid) && $arg[0] != "itg-layout-manager") { ?>
-          <section class="recommended-for-you">
+          <section class="recommended-for-you" data-tb-region="homeRecommendedForYouPersonlization">
             <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization'] ?></div>
           </section>
         <?php } ?>
@@ -294,7 +294,7 @@ if ($theme != 'itgadmin') {
           <!--Common section strat here-->
 <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>
             <div class="row itg-common-section">        
-              <div class="col-md-4 col-sm-4 col-xs-12 mt-50">
+              <div class="col-md-4 col-sm-4 col-xs-12 mt-50" data-tb-region="<?php echo itg_get_dive_region_name($widget_data['itg-block-7']['block_title'], 'Home');?>">
                 <div class="widget-help-text">Section Card</div>
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
