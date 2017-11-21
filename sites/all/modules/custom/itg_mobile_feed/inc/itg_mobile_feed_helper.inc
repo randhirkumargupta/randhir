@@ -3,9 +3,9 @@
 /**
  * Inc file contains global configurations
  */
-define('DEFAULT_REDIS_EXPIRE_TIME', 86400);
-define('RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME', 86400);
-define('RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME', 86400);
+define('DEFAULT_REDIS_EXPIRE_TIME', 3600);
+define('RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME', 3600);
+define('RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME', 3600);
 
 /**
  * main function for get tidConfig
