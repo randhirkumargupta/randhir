@@ -288,7 +288,8 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  
+  $newsroomjs = get_newsroom_js();
+  drupal_add_html_head($newsroomjs, 'newsroomjs');
   // Code for setting page header title for home page
   if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
@@ -563,4 +564,46 @@ function itg_js_alter(&$javascript) {
   $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
+}
+
+
+/**
+ * Get newsroom js ad code
+ */ 
+function get_newsroom_js(){
+	if(drupal_is_front_page()){
+		return <<<jscode
+	<!-- NEWSROOM SCRIPT -->
+<script>
+window._newsroom = window._newsroom || [];
+window._newsroom.push({pageTemplate: 'home'});
+window._newsroom.push({pageDashboard: 'home'});
+window._newsroom.push('auditClicks');
+window._newsroom.push('trackPage');
+
+!function (e, f, u) {
+	e.async = 1;
+	e.src = u;
+	f.parentNode.insertBefore(e, f);
+}(document.createElement('script'),
+		document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indiatoday/newsroom.js');
+</script>
+<!-- END NEWSROOM SCRIPT -->
+jscode;
+	}else{
+		return <<<jscode
+		<!-- NEWSROOM SCRIPT -->
+<script>
+    window._newsroom = window._newsroom || [];
+ 
+    !function (e, f, u) {
+        e.async = 1;
+        e.src = u;
+        f.parentNode.insertBefore(e, f);
+    }(document.createElement('script'),
+            document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indiatoday/newsroom.js');
+</script>
+<!-- END NEWSROOM SCRIPT -->
+jscode;
+	}
 }
