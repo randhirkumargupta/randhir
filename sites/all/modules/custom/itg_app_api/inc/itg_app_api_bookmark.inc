@@ -172,6 +172,7 @@ function bookmark_set_responce_datalist($user_id) {
 function bookmark_responce_datalist($user_id) {
 
   $user_id = isset($user_id) ? $user_id : '';
+  $changed_datetime = "";
   $news = array();
   $news2 = array();
 
@@ -199,9 +200,7 @@ function bookmark_responce_datalist($user_id) {
           if ($changed) {
             $changed_datetime = date("Y-m-d H:i:s", $changed);
           }
-          else {
-            $changed_datetime = "";
-          }
+          
           $file_small_img_url = completeFilePath($dd['field_story_small_image_fid']);
           $file_large_img_url = completeFilePath($dd['field_story_large_image_fid']);
         }

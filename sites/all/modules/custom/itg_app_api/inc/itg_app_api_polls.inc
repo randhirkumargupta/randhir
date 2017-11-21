@@ -609,9 +609,11 @@ function poll_voter_count($node_id, $option_id) {
  * @return array
  */
 function poll_participants($node_id) {
-  $query = db_select('itg_polls', 'p');
-  $query->condition('p.nid', $node_id);
-  $query->addExpression('COUNT(p.id)', 'optionCnt');
-  $results = $query->execute()->fetchField();
-  return $results;
+    if ($node_id) {
+        $query = db_select('itg_polls', 'p');
+        $query->condition('p.nid', $node_id);
+        $query->addExpression('COUNT(p.id)', 'optionCnt');
+        $results = $query->execute()->fetchField();
+        return $results;
+    }
 }

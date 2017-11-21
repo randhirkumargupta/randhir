@@ -60,6 +60,7 @@ function author_latest_storylist($author_id, $cpageno) {
   global $base_url;
   $range_max = 10;
   $range_min = 0;
+  $changed_datetime = "";
 
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
@@ -144,9 +145,7 @@ function author_latest_storylist($author_id, $cpageno) {
     if ($changed) {
       $changed_datetime = date("Y-m-d H:i:s", $changed);
     }
-    else {
-      $changed_datetime = "";
-    }
+    
 
     $news['n_id'] = "$nid";
     $news['n_type'] = "$type";
@@ -182,7 +181,7 @@ function author_latest_storylist($author_id, $cpageno) {
 
 function author_popular_storylist($author_id, $cpageno) {
   global $base_url;
-
+  $changed_datetime = "";
   $range_max = 10;
   $range_min = 0;
   if (!$cpageno == 0) {
@@ -261,9 +260,7 @@ function author_popular_storylist($author_id, $cpageno) {
       if ($changed) {
         $changed_datetime = date("Y-m-d H:i:s", $changed);
       }
-      else {
-        $changed_datetime = "";
-      }
+      
 
       $news['n_id'] = "$node_id";
       $news['n_type'] = "$node_type";
@@ -314,7 +311,7 @@ function author_detail_data($author_id) {
   $query->fields('db', array('body_value'));
   $query->condition('n.status', 1);
   $query->condition('n.nid', $author_id);
-  $query->condition('occ.field_celebrity_pro_occupation_tid', 285750); //Author term id
+  $query->condition('occ.field_celebrity_pro_occupation_tid', AUTHOR_TID); //Author term id
   $query->condition('n.type', 'reporter');
   $result = $query->execute()->fetchAssoc();
 
@@ -395,7 +392,8 @@ function anchor_detail_data($anchor_id) {
 }
 
 /**
- * Return Newswrap list,
+ * Return Newswrap list
+ * @return array
  */
 function news_wrap_list() {
   // variable decalartion
@@ -423,14 +421,16 @@ function news_wrap_list() {
   return $output_array;
 }
 
-/*
+/**
  * Return all the recent stories having highlights
+ * @return array
  */
 
 function news_wrap_datalist() {
   global $base_url;
 
   $data = array();
+  $changed_datetime = "";
 
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_common_by_line_reporter_id', 'bl', 'bl.entity_id = n.nid');
@@ -469,9 +469,7 @@ function news_wrap_datalist() {
     if ($changed) {
       $changed_datetime = date("Y-m-d H:i:s", $changed);
     }
-    else {
-      $changed_datetime = "";
-    }
+    
 
     $news['n_id'] = isset($res['nid']) ? $res['nid'] : "";
     $news['n_title'] = isset($res['title']) ? $res['title'] : "";
@@ -542,6 +540,7 @@ function anchor_programm_data_list($anchor_id, $type, $cpageno) {
 function anchor_latest_programm_list($anchor_id, $cpageno) {
 
   $range_max = 10;
+  $changed_datetime = "";
   $range_min = 0;
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
@@ -604,9 +603,7 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
     if ($changed) {
       $changed_datetime = date("Y-m-d H:i:s", $changed);
     }
-    else {
-      $changed_datetime = "";
-    }
+    
 
     $field_video_upload = $res['field_video_upload_value'];
     $file_id = file_usage($field_video_upload);
@@ -687,6 +684,7 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
 function anchor_popular_programm_list($anchor_id, $cpageno) {
   $range_max = 10;
   $range_min = 0;
+  $changed_datetime = "";
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
@@ -756,9 +754,7 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
       if ($changed) {
         $changed_datetime = date("Y-m-d H:i:s", $changed);
       }
-      else {
-        $changed_datetime = "";
-      }
+      
 
       $field_video_upload = $res['field_video_upload_value'];
       $file_id = file_usage($field_video_upload);
