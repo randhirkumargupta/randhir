@@ -246,8 +246,11 @@ function poll_detail_data($poll_id) {
  * @pram int $cpageno
  * @return array
  */
-function polls_open_datalist($cpageno) {
+function polls_open_datalist($cpageno, $from) {
     $range_max = 10;
+    if($from == "home"){
+        $range_max = 1;
+    }
     if (!$cpageno == 0) {
         $range_min = $cpageno * $range_max;
     } else {
