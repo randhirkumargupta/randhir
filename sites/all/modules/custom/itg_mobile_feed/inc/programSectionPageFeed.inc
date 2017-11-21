@@ -80,5 +80,5 @@ function programSectionPageFeed() {
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }

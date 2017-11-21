@@ -113,7 +113,7 @@ function generate_notification_all($params) {
     $return_flag .= writeFeedFile($term_feed_path, $app_file_name, $app_output);
   }
   echo $return_flag;
-  die();
+  drupal_exit();
 }
 
 /**

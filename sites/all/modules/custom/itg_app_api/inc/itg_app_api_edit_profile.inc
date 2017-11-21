@@ -76,8 +76,6 @@ function saveUpdatedProfile($data) {
   $mime_type_ar = explode("/", $mime_type);
   $mime_type_ext = $mime_type_ar[1];
 
-
-  //echo  mime_content_type ($profile_image );die();
   $profile_img_tmp = '/tmp/profileimage_' . $uid . "." . $mime_type_ext;
 
   $image_name = 'profileimage_' . $uid . "." . $mime_type_ext;

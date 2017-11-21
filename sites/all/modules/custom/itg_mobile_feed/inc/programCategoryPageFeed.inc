@@ -59,7 +59,7 @@ function programCategoryPageFeed() {
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
@@ -73,8 +73,7 @@ function generateProgramCategoryPage($tid) {
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
-    $data_str = $result_get['key_value'];
-    //echo "redis get - ". $output; exit();
+    $data_str = $result_get['key_value'];    
     $data_ar = explode("##listcount##", $data_str);
     $data['lcount'] = $data_ar[0];
     $data['data'] = $data_ar[1];

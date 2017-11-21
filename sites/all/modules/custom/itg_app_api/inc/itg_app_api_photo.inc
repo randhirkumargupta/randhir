@@ -68,12 +68,11 @@ function generatePhotoCategoryList($tid, $pageno) {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 10;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $order_by = 'ASC';
   $type = "photogallery";
   $photo_list_array = array();

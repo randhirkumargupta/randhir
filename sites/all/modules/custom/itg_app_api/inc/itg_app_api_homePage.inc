@@ -68,12 +68,11 @@ function homePageJsonPackagelist_india() {
   $tid_list = array();
   $listcount = 0;
   $range_max = 5;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $order_by = 'ASC';
   $type = array("videogallery", "photogallery", "story");
   $news_list_array = array();
@@ -96,7 +95,7 @@ function homePageJsonPackagelist_india() {
       }
     }
     // code vid=14  end
-    $data_news['id'] = "1206578";
+    $data_news['id'] = "$tid";
     $data_news['order'] = "1";
     $data_news['type'] = "packagelist";
     $data_news['title'] = "India";
@@ -262,12 +261,11 @@ function homePageJsonPackagelist_lifestyle() {
   $tid_list = array();
   $listcount = 0;
   $range_max = 5;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $order_by = 'ASC';
   $type = array("videogallery", "photogallery", "story");
   $news_list_array = array();
@@ -290,7 +288,7 @@ function homePageJsonPackagelist_lifestyle() {
       }
     }
     // code vid=14  end
-    $data_news['id'] = "1206567";
+    $data_news['id'] = "$tid";
     $data_news['order'] = "2";
     $data_news['type'] = "packagelist";
     $data_news['title'] = "Lifestyle";
@@ -457,12 +455,11 @@ function homePageJsonPackagelist_world() {
   $tid_list = array();
   $listcount = 0;
   $range_max = 5;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $order_by = 'ASC';
   $type = array("videogallery", "photogallery", "story");
   $news_list_array = array();
@@ -486,7 +483,7 @@ function homePageJsonPackagelist_world() {
     }
 
     // code vid=14  end
-    $data_news['id'] = "1206577";
+    $data_news['id'] = "$tid";
     $data_news['order'] = "3";
     $data_news['type'] = "packagelist";
     $data_news['title'] = "World";
@@ -802,12 +799,11 @@ function homePageJsonNewslist_india() {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 10;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $order_by = 'ASC';
   $type = array("videogallery", "photogallery", "story");
   $news_list_array = array();
@@ -832,7 +828,7 @@ function homePageJsonNewslist_india() {
 
     // code vid=14  end
 
-    $data_news['id'] = "1206578";
+    $data_news['id'] = "$tid";
     $data_news['order'] = "5";
     $data_news['type'] = "newslist";
     $data_news['title'] = "India";
@@ -999,12 +995,11 @@ function homePageJsonNewslist_world() {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 10;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $order_by = 'ASC';
   $type = array("videogallery", "photogallery", "story");
   $news_list_array = array();
@@ -1027,7 +1022,7 @@ function homePageJsonNewslist_world() {
         $tid_list[] = $value->tid;
       }
     }
-    $data_news['id'] = "1206577";
+    $data_news['id'] = "$tid";
     $data_news['order'] = "7";
     $data_news['type'] = "newslist";
     $data_news['title'] = "World";
@@ -1573,12 +1568,11 @@ function homePageJsonNewslist_lifestyle() {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 10;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $order_by = 'ASC';
   $type = array("videogallery", "photogallery", "story");
   $news_list_array = array();
@@ -1602,7 +1596,7 @@ function homePageJsonNewslist_lifestyle() {
     }
 
     // code vid=14  end
-    $data_news['id'] = "1206567";
+    $data_news['id'] = "$tid";
     $data_news['order'] = "6";
     $data_news['type'] = "newslist";
     $data_news['title'] = "Lifestyle";

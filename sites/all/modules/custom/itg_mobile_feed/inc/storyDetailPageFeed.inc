@@ -17,7 +17,7 @@ function storyDetailPageFeed() {
     $output = generateStoryDetailPageFeed(arg(1));
   }
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**

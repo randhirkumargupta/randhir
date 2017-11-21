@@ -64,12 +64,11 @@ function generateVideoCategoryList($tid, $pageno) {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 10;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $order_by = 'ASC';
   $type = "videogallery";
   $photo_list_array = array();
@@ -334,12 +333,11 @@ function generateProgramCategoryList($tid, $pageno) {
   $range_max = 10;
   $term = taxonomy_term_load($tid);
   $term_name = $term->name;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   // filter user data list
   $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350, 1148, 2573); /* Testing user id, i will remove after testing. */
   $order_by = 'ASC';

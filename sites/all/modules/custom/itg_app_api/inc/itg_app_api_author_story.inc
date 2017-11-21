@@ -11,7 +11,7 @@
  */
 function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
   // variable decalartion
-
+  $data = '';
   $output_array = array();
   $data_array = array();
   $updated_datetime = "";
@@ -23,9 +23,7 @@ function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
   elseif ($story_type == '1') { //popular story
     $data = author_popular_storylist($author_id, $cpageno);
   }
-  else {
-    $data = '';
-  }
+ 
 
 
   if ($data['lcount'] > 0) {
@@ -61,13 +59,12 @@ function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
 function author_latest_storylist($author_id, $cpageno) {
   global $base_url;
   $range_max = 10;
+  $range_min = 0;
 
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+ 
 
   $data = array();
   $type = array("story");
@@ -187,12 +184,11 @@ function author_popular_storylist($author_id, $cpageno) {
   global $base_url;
 
   $range_max = 10;
+  $range_min = 0;
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
 
   $type = array("story");
   $data = array();
@@ -501,6 +497,7 @@ function news_wrap_datalist() {
 function anchor_programm_data_list($anchor_id, $type, $cpageno) {
   // variable decalartion
   $output_array = array();
+  $data = '';
   $data_array = array();
   $updated_datetime = "";
 
@@ -511,9 +508,7 @@ function anchor_programm_data_list($anchor_id, $type, $cpageno) {
   elseif ($type == '1') { //popular Programm
     $data = anchor_popular_programm_list($anchor_id, $cpageno);
   }
-  else {
-    $data = '';
-  }
+ 
 
 
   if ($data['lcount'] > 0) {
@@ -547,12 +542,11 @@ function anchor_programm_data_list($anchor_id, $type, $cpageno) {
 function anchor_latest_programm_list($anchor_id, $cpageno) {
 
   $range_max = 10;
+  $range_min = 0;
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
 
   $data = array();
 
@@ -654,7 +648,7 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
       if ($videotag['dailymotion']['bitate_url']['download_url'])
         $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
       else
-        $prog['p_download_url'] = "public://dailymotion_bitates_video/x5o9vhw_848x480.mp4";
+        $prog['p_download_url'] = "".BITARATES_BASE_PATH."/x5o9vhw_848x480.mp4";
     }elseif (!empty($videotag['migrated'])) {
       $prog['p_is_default_player'] = "0";
       $prog['p_url'] = $videotag['migrated']['video_path_mp4'];
@@ -692,12 +686,11 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
  */
 function anchor_popular_programm_list($anchor_id, $cpageno) {
   $range_max = 10;
+  $range_min = 0;
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
 
   $data = array();
   $query = db_select('node', 'n');

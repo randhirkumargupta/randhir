@@ -233,12 +233,11 @@ function poll_detail_data($poll_id) {
  */
 function polls_open_datalist($cpageno) {
   $range_max = 10;
+  $range_min = 0;
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $current_time = date('Y-m-d H:i:s', time());
 
   $query = db_select('node', 'n');
@@ -331,12 +330,11 @@ function open_poll_list($res) {
 function polls_close_datalist($cpageno) {
   $news2 = array();
   $range_max = 10;
+  $range_min = 0;
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+ 
 
   $current_time = date('Y-m-d H:i:s', time());
 

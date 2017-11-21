@@ -17,7 +17,7 @@ function photoDetailPageFeed() {
     $output = generatePhotoDetailPageFeed(arg(1));
   }
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
