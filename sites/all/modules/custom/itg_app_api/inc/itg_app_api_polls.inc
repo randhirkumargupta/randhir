@@ -25,8 +25,8 @@ function polls_open_list($cpageno) {
     $output_array['status_message'] = "customised_message";
   }
   //data array building
-  $data_array['id'] = "1234"; //testing id, after testing we will change. $poll_id
-  $data_array['title'] = "Test title"; //testing title, after testing we will change. $poll_title
+  $data_array['id'] = ""; //testing id, after testing we will change. $poll_id
+  $data_array['title'] = ""; //testing title, after testing we will change. $poll_title
 
   $data_array['polls'] = $data['data'];
   $output_array['data'] = $data_array;
@@ -56,8 +56,8 @@ function polls_close_list($cpageno) {
     $output_array['status_message'] = "customised_message";
   }
   //data array building
-  $data_array['id'] = "1234";
-  $data_array['title'] = "Test Title";
+  $data_array['id'] = "";
+  $data_array['title'] = "";
 
   $data_array['polls'] = $data['data'];
   $output_array['data'] = $data_array;
@@ -218,8 +218,8 @@ function poll_detail_data($poll_id) {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
-  $data_array['id'] = "1234"; //$poll_id
-  $data_array['title'] = "Test Title"; //$poll_title
+  $data_array['id'] = ""; //$poll_id
+  $data_array['title'] = ""; //$poll_title
   $data_array['polls'] = $data['data'];
   $output_array['data'] = $data_array;
 

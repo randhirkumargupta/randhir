@@ -8,6 +8,7 @@
 define('HOME_PAGE_JSON_NEWS_LIST_LIFE_STYLE', 1206567); /*till middleware implementation*/
 define('HOME_PAGE_JSON_NEWS_LIST_INDIA', 1206578); /*till middleware implementation*/
 define('HOME_PAGE_JSON_NEWS_LIST_WORLD', 1206577); /*till middleware implementation*/
+define('ANCHOR_TID', 285903); /*till middleware implementation*/
 define('BITARATES_BASE_PATH', 'https://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/dailymotion_bitates_video'); /*till middleware implementation*/
 
 

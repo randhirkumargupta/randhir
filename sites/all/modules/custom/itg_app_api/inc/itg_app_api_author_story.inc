@@ -366,7 +366,7 @@ function anchor_detail_data($anchor_id) {
   $query->fields('db', array('body_value'));
   $query->condition('n.status', 1);
   $query->condition('n.nid', $anchor_id);
-  $query->condition('occ.field_celebrity_pro_occupation_tid', 285903); //Anchor term id
+  $query->condition('occ.field_celebrity_pro_occupation_tid', ANCHOR_TID); //Anchor term id
   $query->condition('n.type', 'reporter');
   $result = $query->execute()->fetchAssoc();
 
@@ -798,7 +798,7 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
         if ($videotag['dailymotion']['bitate_url']['download_url'])
           $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
         else
-          $prog['p_download_url'] = "public://dailymotion_bitates_video/x5o9vhw_848x480.mp4";
+          $prog['p_download_url'] = "".BITARATES_BASE_PATH."/x5o9vhw_848x480.mp4";
       }elseif (!empty($videotag['migrated'])) {
         $prog['p_is_default_player'] = "0";
         $prog['p_url'] = $videotag['migrated']['video_path_mp4'];
