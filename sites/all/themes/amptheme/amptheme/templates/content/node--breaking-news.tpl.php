@@ -24,7 +24,7 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
     $embed_image = $embed_image;
   }
   else {
-    $embed_image = '';
+    $embed_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
   }
   $embed_logo = $base_url . '/sites/all/themes/itg/logo.png';
   $blog_created_date = date('Y-m-d', $node->created);
@@ -78,14 +78,11 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
                   <meta itemprop="datePublished" content="<?php print $created_date; ?>">
                   <meta itemprop="author" content="IndiaToday.in">
                   <meta itemprop="dateModified" content="<?php print $modify_date; ?>">
-                  <?php
-                    if(!empty($embed_image)){ ?>
-					  <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+                  <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
                       <meta itemprop="url" content="<?php print $embed_image; ?>">
                       <meta itemprop="width" content="650">
                       <meta itemprop="height" content="450">
                   </span>
-				  <?php	} ?>                  
                   <span itemprop="publisher" itemscope="itemscope" itemtype="https://schema.org/Organization">
                       <span itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
                           <meta itemprop="url" content="<?php print $embed_logo; ?>">
