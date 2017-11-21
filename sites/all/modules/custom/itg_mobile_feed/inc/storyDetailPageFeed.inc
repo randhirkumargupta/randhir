@@ -17,7 +17,7 @@ function storyDetailPageFeed() {
     $output = generateStoryDetailPageFeed(arg(1));
   }
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
@@ -32,17 +32,17 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     $file_name = "story" . $nid . ".xml";
   }
   if (!$term_feed_path) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $term_feed_path = "public://xml_it/stories";
   }
   elseif ($type) {
     if ($type == "photogallery") {
-      $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
+      $term_feed_path = "public://xml_it/photos";
     }
     elseif ($type == "story") {
-      $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+      $term_feed_path = "public://xml_it/stories";
     }
     elseif ($type == "videogallery") {
-      $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+      $term_feed_path = "public://xml_it/videos";
     }
   }
 
@@ -174,7 +174,9 @@ function getVideoTag($node) {
       $src = $add_video;
     }
   }
-  else {}
+  else {
+    
+  }
 
   if ($src) {
     //$videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
@@ -206,6 +208,7 @@ function migrated_video_to_nid($video_uri) {
   $query->condition('mv.field_migrated_video_url_value', $video_uri);
   return $all_result = $query->execute()->fetchField();
 }
+
 /**
  * function uploaded_video_to_nid
  * @pram string $video_uri
@@ -283,4 +286,3 @@ function getImgTag($node) {
   }
   return $imgtag;
 }
-

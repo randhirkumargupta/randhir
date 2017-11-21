@@ -22,7 +22,7 @@ function photocategoryPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
+  $term_feed_path = "public://xml_it/photos";
 
   $return_flag = "";
   // loop on section
@@ -51,16 +51,15 @@ function photocategoryPageFeed() {
         $output .= getMobileFeedXmlFooter();
         // xml file writing..
         if ($output) {
-
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
     }
   }
-  //return $return_flag;
+
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
@@ -91,7 +90,8 @@ function generatePhotoCategoryPage($tid) {
     $range_max = 20;
     $range_min = 0;
     $order_by = 'ASC';
-    $type = "photogallery"; {
+    $type = "photogallery";
+    {
       $listcount = 0;
       // select node belong from current term id or child term id
       $query = db_select('taxonomy_index', 'ti');
@@ -131,9 +131,7 @@ function generatePhotoCategoryPage($tid) {
       $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
       foreach ($result as $reskey => $resvalue) {
-
         $listcount++;
-
         $title = $resvalue['title'];
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
@@ -161,4 +159,3 @@ function generatePhotoCategoryPage($tid) {
 
   return $data;
 }
-

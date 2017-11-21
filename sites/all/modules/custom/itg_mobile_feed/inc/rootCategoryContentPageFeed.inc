@@ -21,7 +21,7 @@ function rootCategoryContentPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+  $term_feed_path = "public://xml_it/stories";
   $return_flag = "";
   foreach ($section_list as $key => $value) {
 
@@ -49,7 +49,6 @@ function rootCategoryContentPageFeed() {
         $output .= getMobileFeedXmlFooter();
         // xml file writing..
         if ($output) {
-
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
@@ -57,7 +56,7 @@ function rootCategoryContentPageFeed() {
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
@@ -171,4 +170,3 @@ function generateLeftMainCategoryPage($tid, $term_name) {
   }
   return $data;
 }
-
