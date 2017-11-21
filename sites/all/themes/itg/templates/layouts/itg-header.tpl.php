@@ -119,11 +119,9 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                       $link_text_icon  = "<span class='menu-icons hidden-desktop'><img class='itg-user-icon' src='https://prod-it.indiatodayonline.in/sites/all/themes/itg/images/default_for_all_48_32.jpeg' alt='' /></span>";
                     }
                     $link_title_for_vertical = $link_text_icon . $menu_link_data['link_title_for_vertical'];
-                    module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
-                    $detect = new Mobile_Detect;
                     ?>
-                      <li <?php echo $style_tag; ?> class="nav-items <?php if (!$detect->isMobile()) { print $image_class; } ?>">
-                        <?php if (!$detect->isMobile()) { ?>
+                      <li <?php echo $style_tag; ?> class="nav-items <?php if (!$data['detect']) { print $image_class; } ?>">
+                        <?php if (!$data['detect']) { ?>
                           <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?>
                         <?php } else { ?>
                           <?php print l($link_title_for_vertical, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value" ) , 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)))); ?>
