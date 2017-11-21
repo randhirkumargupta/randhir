@@ -67,7 +67,7 @@ function homePageJsonPackagelist_india() {
   $data = array();
   $tid_list = array();
   $listcount = 0;
-  $range_max = 5;
+  $range_max = 3;
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
@@ -260,7 +260,7 @@ function homePageJsonPackagelist_lifestyle() {
   $data = array();
   $tid_list = array();
   $listcount = 0;
-  $range_max = 5;
+  $range_max = 3;
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
@@ -454,7 +454,7 @@ function homePageJsonPackagelist_world() {
   $data = array();
   $tid_list = array();
   $listcount = 0;
-  $range_max = 5;
+  $range_max = 3;
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
@@ -798,7 +798,7 @@ function homePageJsonNewslist_india() {
   $tid_list = array();
   $tid_list[] = $tid;
   $listcount = 0;
-  $range_max = 10;
+  $range_max = 5;
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
@@ -994,7 +994,7 @@ function homePageJsonNewslist_world() {
   $tid_list = array();
   $tid_list[] = $tid;
   $listcount = 0;
-  $range_max = 10;
+  $range_max = 5;
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
@@ -1488,27 +1488,8 @@ function homePageJsonPoll() { /* static poll show at front. */
   $n_rating = array();
   $n_magazine = array();
 
-  $n_polls = array();
-  $n_polls[0]['p_id'] = "837283";
-  $n_polls[0]['p_is_sponsored'] = "";
-  $n_polls[0]['p_sponsored_icon'] = "";
-  $n_polls[0]['p_sponsored_link'] = "";
-  $n_polls[0]['p_publish_datetime'] = "2017-08-25 15:30:00";
-  $n_polls[0]['p_title'] = "BJP says Supreme Court\'s triple talaq verdict will end communal appeasement politics.";
-  $n_polls[0]['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/card_14618248577791503655685.jpg";
-  $n_polls[0]['p_share_link'] = "https://peg3z.app.goo.gl/qYPfjFjqTea5uHLR2";
-
-  $poll_option = array();
-  $poll_option[0]['o_id'] = "1031148";
-  $poll_option[0]['o_title'] = "";
-  $poll_option[0]['o_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/I-agree1981503655508.jpg";
-
-  $poll_option[1]['o_id'] = "1031149";
-  $poll_option[1]['o_title'] = "";
-  $poll_option[1]['o_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/22167215-disagree-rubber-stamp-over-a-white-background9401503655569.jpg";
-
-
-  $n_polls[0]['p_option'] = $poll_option;
+  $n_polls = array();  
+  $n_polls = polls_open_datalist(0, "home");
 
   $data_magazine['id'] = "0";
   $data_magazine['order'] = "9";
@@ -1567,7 +1548,7 @@ function homePageJsonNewslist_lifestyle() {
   $tid_list = array();
   $tid_list[] = $tid;
   $listcount = 0;
-  $range_max = 10;
+  $range_max = 5;
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;

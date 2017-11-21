@@ -229,14 +229,19 @@ function poll_detail_data($poll_id) {
 /**
  * Return the data of open poll
  * @pram int $cpageno
+ * @pram string $from 
  * @return array
  */
-function polls_open_datalist($cpageno) {
+function polls_open_datalist($cpageno, $from) {
   $range_max = 10;
+  if($from == "home"){
+      $range_max = 1;
+  }
   $range_min = 0;
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
+  
   
   $current_time = date('Y-m-d H:i:s', time());
 
@@ -279,7 +284,7 @@ function polls_open_datalist($cpageno) {
 
 /**
  * function for generate open_poll_list array
- * @pram array $res
+ * @pram array $res 
  * @return array
  */
 function open_poll_list($res) {
@@ -298,6 +303,9 @@ function open_poll_list($res) {
   $query2->fields('ot', array('field_poll_answer_text_value'));
   $query2->fields('ai', array('field_poll_answer_image_fid'));
   $query2->condition('pa.entity_id', $res['nid']);
+  if($from == "home"){
+      $query2->range(0, 1);
+  }
   $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   $options2 = array();
