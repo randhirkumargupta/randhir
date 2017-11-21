@@ -61,14 +61,14 @@ function homePageJsonPackagelist_india() {
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $tid = HOME_PAGE_JSON_NEWS_LIST_INDIA;
+    $tid = HOME_PAGE_JSON_MOVIES;
     $node_count = "";
     $output = "";
     $data = array();
     $tid_list = array();
     //$tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 5;
+    $range_max = 3;
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
@@ -101,8 +101,8 @@ function homePageJsonPackagelist_india() {
         $data_news['id'] = "1206578";
         $data_news['order'] = "1";
         $data_news['type'] = "packagelist";
-        $data_news['title'] = "India";
-        $data_news['label'] = "India";
+        $data_news['title'] = "Movies";
+        $data_news['label'] = "Movies";
         $data_news['show_label'] = "0";
         $data_news['n_template_id'] = "1";
 
@@ -294,14 +294,14 @@ function homePageJsonPackagelist_lifestyle() {
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $tid = HOME_PAGE_JSON_NEWS_LIST_LIFE_STYLE;
+    $tid = HOME_PAGE_JSON_MOVIES_PHOTO;
     $node_count = "";
     $output = "";
     $data = array();
     $tid_list = array();
     //$tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 5;
+    $range_max = 3;
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
@@ -334,8 +334,8 @@ function homePageJsonPackagelist_lifestyle() {
         $data_news['id'] = "1206567";
         $data_news['order'] = "2";
         $data_news['type'] = "packagelist";
-        $data_news['title'] = "Lifestyle";
-        $data_news['label'] = "Lifestyle";
+        $data_news['title'] = "Movies Photo";
+        $data_news['label'] = "Movies Photo";
         $data_news['show_label'] = "0";
         $data_news['n_template_id'] = "1";
 
@@ -502,14 +502,14 @@ function homePageJsonPackagelist_world() {
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $tid = HOME_PAGE_JSON_NEWS_LIST_WORLD;
+    $tid = HOME_PAGE_JSON_MOVIES_VIDEO;
     $node_count = "";
     $output = "";
     $data = array();
     $tid_list = array();
     //$tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 5;
+    $range_max = 3;
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
@@ -542,8 +542,8 @@ function homePageJsonPackagelist_world() {
         $data_news['id'] = "1206577";
         $data_news['order'] = "3";
         $data_news['type'] = "packagelist";
-        $data_news['title'] = "World";
-        $data_news['label'] = "World";
+        $data_news['title'] = "Movies video";
+        $data_news['label'] = "Movies video";
         $data_news['show_label'] = "0";
         $data_news['n_template_id'] = "1";
 
@@ -864,7 +864,7 @@ function homePageJsonNewslist_india() {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 10;
+    $range_max = 5;
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
@@ -1071,7 +1071,7 @@ function homePageJsonNewslist_world() {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 10;
+    $range_max = 5;
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
@@ -1579,34 +1579,8 @@ function homePageJsonPoll() {
     $n_rating = array();
     $n_magazine = array();
 
-    //$n_magazine = getMagazineList(); // homepage.inc
-    // $n_polls_data = polls_open_list(0);
-    //$n_polls = $n_polls_data['data'];
-    $n_polls = array();
-    $n_polls[0]['p_id'] = "837283";
-    $n_polls[0]['p_is_sponsored'] = "";
-    $n_polls[0]['p_sponsored_icon'] = "";
-    $n_polls[0]['p_sponsored_link'] = "";
-    $n_polls[0]['p_publish_datetime'] = "2017-08-25 15:30:00";
-    $n_polls[0]['p_title'] = "BJP says Supreme Court\'s triple talaq verdict will end communal appeasement politics.";
-    $n_polls[0]['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/card_14618248577791503655685.jpg";
-    $n_polls[0]['p_share_link'] = "https://peg3z.app.goo.gl/qYPfjFjqTea5uHLR2";
-
-    $poll_option = array();
-    $poll_option[0]['o_id'] = "1031148";
-    $poll_option[0]['o_title'] = "";
-    $poll_option[0]['o_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/I-agree1981503655508.jpg";
-
-    $poll_option[1]['o_id'] = "1031149";
-    $poll_option[1]['o_title'] = "";
-    $poll_option[1]['o_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/indiatoday/images/poll/201708/22167215-disagree-rubber-stamp-over-a-white-background9401503655569.jpg";
-
-
-    $n_polls[0]['p_option'] = $poll_option;
-    // $n_polls = (object) $n_polls;
-
-
-
+    $n_polls = array();  
+    $n_polls = polls_open_datalist(0, "home");
     $data_magazine['id'] = "0";
     $data_magazine['order'] = "9";
     $data_magazine['type'] = "poll";
@@ -1668,7 +1642,7 @@ function homePageJsonNewslist_lifestyle() {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 10;
+    $range_max = 5;
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
