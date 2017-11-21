@@ -809,12 +809,11 @@ function getCityByNid($nid) {
 }
 
 /**
- * common function for getBodyDataForAndroid
- *
- * @return $type
- * @pram $type
+ * Prepare Android body content
+ * @pram string
+ * @return string
  */
-function getBodyDataForAndroid($str) {
+function getBodyDataForAndroid($str, $node=NULL) {
   // variable declation
   $mob_str = "";	
   //remove iframe..
@@ -822,14 +821,81 @@ function getBodyDataForAndroid($str) {
   $str = str_replace(array('<div class="itgimage">','data-syndication="no"'),array('<div class="itg-mosimage">',''),$str);
   $str = preg_replace('/<div class=\"body_caption\">.*<\/div>/','',$str);
   $str = str_replace('src="','width="100%" src="',$str);
+  $str = str_replace("src='","width='100%' src='",$str);
   //$mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
+  //add listicle content data
+   if (strpos($str, '[ITG:LISTICLES]')) {
+   $str = listicle_story_body($str, $node);
+   }
+   if (strpos($str, '[ITG:FACTOIDS]')) {
+   $str = factroid_story_body($str, $node);
+   }
   $str = preg_replace('/\[[^]]+\]/', '', $str);
-  //$str = str_replace(array('[ITG:LISTICLES]','[ITG:FACTOIDS]','[ITG:EXPERT-CHUNK]','[ITG:TECH-PHOTOS]','[ITG:TECH-PHOTO-GALLERY]'), array('','','','',''), $str);
-  //$str = str_replace('nbsp;',' ',$str);
-  $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
+  $str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
   //$img_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
+  return $str;
+}
 
-  return $mob_str;
+function factroid_story_body($str,$node){
+  
+                  $factoidsBlock = '';
+                  if (isset($node->field_story_template_factoids) && !empty($node->field_story_template_factoids)) {
+                    $factoidsSocialShare['title'] = $node->field_story_factoids_title[LANGUAGE_NONE][0]['value'];
+                    $factoidsSocialShare_title = preg_replace("/'/", "\\'", $factoidsSocialShare['title']);
+                    $factoidsSocial_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
+                    $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
+                    $factoidsSocialShare['icons'] = '<div class="factoids-page">
+                                 <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div></div>';
+                    $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
+                    foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
+                      $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
+                    }
+                    $factoidsSocialShare['slider'] .= '</ul></div>';
+                    $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
+                  }
+                  $str = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $str);
+  return $str;
+}
+
+function listicle_story_body($str, $node){
+
+                  $listicle_output = '';
+                  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                   $listicle_output .= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                  }
+                  $buzz_output.= '';
+                  $num = 1;
+                  $listicle_output.= '<ul class="listicle-detail">';
+                  foreach ($node->field_story_listicle['und'] as $buzz_item) {
+                    $listicletype = '';
+                    
+                    $field_collection_id = $buzz_item['value'];
+                    $entity = entity_load('field_collection_item', array($field_collection_id));
+                    $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
+                    $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
+                    //$color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
+                    $color = $entity[$field_collection_id]->field_listicle_color_new['und'][0]['jquery_colorpicker'];
+                    $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
+                    $color = ($color) ? $color : '#000000';
+                    if ($li_type == 'bullet_points') {
+                      $listicle_output.= '<span class="bullet_points"></span>';
+                    }
+                    else {
+                      $listicle_output.= '<span>' . $num . '</span>';
+                    }
+                    if (isset($type)) {
+                      $listicletype = '<span class="listicle-type" style="color: #' . $color . '">' . $type . ': </span>';
+                    }
+                    $listicle_output.= '<li>' . $listicletype . $description . '</li>';
+                    $num++;
+                  }
+                   $listicle_output.= '</ul>';
+                  //print $listicle_output;
+                  $str = str_replace('[ITG:LISTICLES]', $listicle_output, $str);
+                  
+                 }
+                 return $str;
 }
 
 /**
@@ -1108,8 +1174,8 @@ function itg_mobile_feed_xml_feed_url_cron() {
 }
 
 /**
- * XML Parse by HTML Tags
- * $string String
+ * Common function for Parsing HTML Tags in XML
+ * args $string String
  * Return String 
  */
 function xmlEscape($string) {
