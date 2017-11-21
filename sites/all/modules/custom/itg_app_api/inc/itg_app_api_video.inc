@@ -225,7 +225,7 @@ function generateVideoCategoryList($tid, $pageno) {
         if ($videotag['dailymotion']['bitate_url']['download_url'])
           $photo_list_array[$listcount]['v_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
         else
-          $photo_list_array[$listcount]['v_download_url'] = "https://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/dailymotion_bitates_video/x5o9vhw_848x480.mp4";
+          $photo_list_array[$listcount]['v_download_url'] = "".BITARATES_BASE_PATH."/x5o9vhw_848x480.mp4";
       }
       elseif (!empty($videotag['migrated'])) {
         $photo_list_array[$listcount]['v_is_default_player'] = "0";
@@ -490,7 +490,7 @@ function generateProgramCategoryList($tid, $pageno) {
         if ($videotag['dailymotion']['bitate_url']['download_url'])
           $photo_list_array[$listcount]['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
         else
-          $photo_list_array[$listcount]['p_download_url'] = "https://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/dailymotion_bitates_video/x5o9vhw_848x480.mp4";
+          $photo_list_array[$listcount]['p_download_url'] = "".BITARATES_BASE_PATH."/x5o9vhw_848x480.mp4";
       }
       elseif (!empty($videotag['migrated'])) {
         $video_path_mp4 = $video_path_info['video_path_mp4'];
