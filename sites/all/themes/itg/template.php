@@ -41,22 +41,25 @@ function itg_theme() {
  * {@inheritdoc}
  */
 function itg_preprocess_node(&$variables) {
+  //p($variables['node']->type);
   $node = $variables['node'];
   unset($variables['content']['links']['node']['#links']['node-readmore']);
-  // Inclue pathauto module
-  module_load_all_includes('inc', 'pathauto', 'pathauto');
-  if (function_exists('pathauto_cleanstring')) {
-    // This assumes that you are using Pathauto for generating clean URLs.
-    // Get the "clean" title.
-    $title = pathauto_cleanstring($variables['node']->title);
-    // Replace all dashes with underscores. This is necessary for recognizing the
-    // template filenames.
-    $title = str_replace('-', '_', $title);
-    // Add new template variation.
-    $variables['theme_hook_suggestions'][] = 'node__' . $title;
-    $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
-    if (function_exists('global_comment_last_record')) {
-      $variables['global_comment_last_record'] = global_comment_last_record();
+  if ($variables['node']->type == 'page') {
+    // Inclue pathauto module
+    module_load_all_includes('inc', 'pathauto', 'pathauto');
+    if (function_exists('pathauto_cleanstring')) {
+      // This assumes that you are using Pathauto for generating clean URLs.
+      // Get the "clean" title.
+      $title = pathauto_cleanstring($variables['node']->title);
+      // Replace all dashes with underscores. This is necessary for recognizing the
+      // template filenames.
+      $title = str_replace('-', '_', $title);
+      // Add new template variation.
+      $variables['theme_hook_suggestions'][] = 'node__' . $title;
+      $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
+      /*if (function_exists('global_comment_last_record')) {
+        $variables['global_comment_last_record'] = global_comment_last_record();
+      }*/
     }
   }
 
@@ -159,7 +162,7 @@ function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
   $arg = arg();
-  //unset($variables['page']['content']);
+  //drupal_add_js(drupal_get_path('theme', 'itg') . '/js/itg_seo_script.js');
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__ssoheader';
@@ -188,25 +191,6 @@ function itg_preprocess_page(&$variables) {
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
   }
 
-  // Access domain
-  /*if (function_exists('domain_select_format')) {
-    $format = domain_select_format();
-    foreach (domain_domains() as $data) {
-      if ($data['valid'] || user_access('access inactive domains')) {
-        $options[$data['domain_id']] = empty($format) ? check_plain($data['sitename']) : $data['sitename'];
-      }
-    }
-
-    // Add another page.tpl file for existing domains
-    $parse = parse_url($base_url);
-
-    // Call Event Parent TPL
-    if (in_array($parse['host'], $options)) {
-      $variables['theme_hook_suggestions'][] = 'page__event_domain';
-    }
-  }*/
-
-
   // Call Event Parent TPL
   if (!empty($variables['node']->type) && $variables['node']->type == 'event_backend' || $arg[0] == 'event') {
     $variables['theme_hook_suggestions'][] = 'page__event_domain';
@@ -218,8 +202,7 @@ function itg_preprocess_page(&$variables) {
 
   if ($arg[0] == 'blog') {
     drupal_add_css('#page-title , .feed-icon  {display: none !important}', 'inline');
-    unset($variables['page']['content']);
-    //pr($variables['theme_hook_suggestions']);
+    unset($variables['page']['content']);    
     $variables['theme_hook_suggestions'][] = 'page__itg_blog_page';
   }
 
@@ -477,6 +460,7 @@ function itg_js_alter(&$javascript) {
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
   }
+  
   unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
@@ -491,14 +475,7 @@ function itg_js_alter(&$javascript) {
   $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
-//  foreach($javascript as $k => &$j) {
-//  if ($j['data'] == 'misc/drupal.js' || $j['type'] == 'setting' || (is_string($j['data']) && (preg_match('/jquery/i',$j['data']) || preg_match('/admin_menu/i',$j['data'])))
-//) {
-//  $j['scope'] = 'header';
-//} else {
-//  $j['scope'] = 'footer';
-//  }
-//  }
+
 }
 
 function itg_image($variables) {
@@ -511,11 +488,7 @@ function itg_image($variables) {
   $attributes['alt'] = !empty($variables['alt']) ? $variables['alt'] : " ";
   $attributes['title'] = !empty($variables['title']) ? $variables['title'] : " ";
   $attributes['height'] = !empty($variables['height']) ? $variables['height'] : " ";
-//  foreach (array('width', 'height', 'alt', 'title') as $key) {
-//
-//    if (isset($variables[$key])) {
-//      $attributes[$key] = !empty($variables[$key]) ? $variables[$key] : "asdasdasd";
-//    }
-//  }
+
   return '<img' . drupal_attributes($attributes) . ' />';
 }
+
