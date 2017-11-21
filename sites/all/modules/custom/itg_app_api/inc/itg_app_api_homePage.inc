@@ -1520,7 +1520,7 @@ function homePageJsonPoll() { /* static poll show at front. */
   $data_newslist[0]['n_updated_datetime'] = "";
   $data_newslist[0]['n_photo'] = $n_photo;
   $data_newslist[0]['n_video'] = $n_video;
-  $data_newslist[0]['n_polls'] = $n_polls;
+  $data_newslist[0]['n_polls'] = $n_polls['data'];
   $data_newslist[0]['n_rating'] = $n_rating;
   $data_newslist[0]['n_magazine'] = $n_magazine;
 
