@@ -831,7 +831,7 @@ function getBodyDataForAndroid($str, $node=NULL) {
    $str = factroid_story_body($str, $node);
    }
   $str = preg_replace('/\[[^]]+\]/', '', $str);
-  $str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
+  //$str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
   //$img_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
   return $str;
 }
