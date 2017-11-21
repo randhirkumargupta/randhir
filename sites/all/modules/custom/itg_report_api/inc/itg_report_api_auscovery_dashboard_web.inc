@@ -19,13 +19,11 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $item_per_page = 10;
   $range_max = $item_per_page;
   $pageno = 0;
-
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+
   $type = "story";
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
@@ -114,13 +112,11 @@ function auscovery_dashboard_mob($start_date, $end_date) {
   $item_per_page = 10;
   $range_max = $item_per_page;
   $pageno = 0;
-  //$photolist = array();
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $type = "story";
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
