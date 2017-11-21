@@ -81,6 +81,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $create_datetime = date(DATE_ATOM, $node->created);
       $full_body = $node->body['und']['0']['value'];
       $body_android = getBodyDataForAndroid($full_body);
+
       $output .= getMobileFeedXmlHeader();
       $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit><![CDATA[" . $reporter_node . "]]> </credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city><![CDATA[" . $city . "]]></city><courtesy><![CDATA[]]></courtesy>";
       $output .= "<body><![CDATA[" . $full_body . "]]></body>";
@@ -259,6 +260,7 @@ function emptygetImgTag() {
  * @return array
  */
 function getImgTag($node) {
+   
   $imgtag = "";
   $src = "";
   $img_caption_val = "";
