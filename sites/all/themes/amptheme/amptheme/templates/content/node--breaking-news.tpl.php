@@ -78,11 +78,14 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
                   <meta itemprop="datePublished" content="<?php print $created_date; ?>">
                   <meta itemprop="author" content="IndiaToday.in">
                   <meta itemprop="dateModified" content="<?php print $modify_date; ?>">
-                  <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+                  <?php
+                    if(!empty($embed_image)){ ?>
+					  <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
                       <meta itemprop="url" content="<?php print $embed_image; ?>">
                       <meta itemprop="width" content="650">
                       <meta itemprop="height" content="450">
                   </span>
+				  <?php	} ?>                  
                   <span itemprop="publisher" itemscope="itemscope" itemtype="https://schema.org/Organization">
                       <span itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
                           <meta itemprop="url" content="<?php print $embed_logo; ?>">
