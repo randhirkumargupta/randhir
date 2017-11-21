@@ -76,7 +76,7 @@ function homePageJsonPackagelist_india() {
         $range_min = 0;
     }
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story");
+    $type = array("story");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
@@ -98,7 +98,7 @@ function homePageJsonPackagelist_india() {
        
         // code vid=14  end
 
-        $data_news['id'] = "1206578";
+        $data_news['id'] = "$tid";
         $data_news['order'] = "1";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "Movies";
@@ -250,28 +250,6 @@ function homePageJsonPackagelist_india() {
         }
     }
 
-    /*$st_story = array();
-    $test = array();
-    $st_story['n_id'] = "820494";
-    $st_story['n_type'] = "story";
-    $st_story['n_is_developing'] = "0";
-    $st_story['n_is_sponsored'] = "0";
-    $st_story['n_share_link'] = "http://itgdrapid.indiatodayonline.in/magazine/auto-special/story/20151005-money-matters-petrol-vs-diesel-820494-2015-09-23";
-    $st_story['n_title'] = "Current trends have narrowed the gap between petrol and diesel, so does buying a diesel car still make sense?";
-    $st_story['n_description'] = "The basic premise should be to go in for a petrol car and then depending\n on the number of kilometres you drive every month switch to a \ndiesel-engined car.";
-    $st_story['n_pcategory_id'] = "1206799";
-    $st_story['n_pcategory_name'] = "AUTO SPECIAL";
-    $st_story['n_comment_count'] = "0";
-    $st_story['n_small_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/diesel_story_180_092815032739.jpg";
-    $st_story['n_large_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/diesel_story_300_092815032739.jpg";
-    $st_story['n_image_credit'] = "";
-    $st_story['n_photo'] = $test;
-    $st_story['n_video'] = $test;
-    $st_story['n_polls'] = $test;
-    $st_story['n_rating'] = $test;
-    $st_story['n_magazine'] = $test;
-
-    $data_newslist[$listcount] = $st_story;*/
 
 
 
@@ -309,7 +287,7 @@ function homePageJsonPackagelist_lifestyle() {
         $range_min = 0;
     }
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story");
+    $type = array("photogallery");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
@@ -331,7 +309,7 @@ function homePageJsonPackagelist_lifestyle() {
        
         // code vid=14  end
 
-        $data_news['id'] = "1206567";
+        $data_news['id'] = "$tid";
         $data_news['order'] = "2";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "Movies Photo";
@@ -517,7 +495,7 @@ function homePageJsonPackagelist_world() {
         $range_min = 0;
     }
     $order_by = 'ASC';
-    $type = array("videogallery", "photogallery", "story");
+    $type = array("videogallery");
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
@@ -539,7 +517,7 @@ function homePageJsonPackagelist_world() {
        
         // code vid=14  end
 
-        $data_news['id'] = "1206577";
+        $data_news['id'] = "$tid";
         $data_news['order'] = "3";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "Movies video";
