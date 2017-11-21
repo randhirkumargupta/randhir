@@ -2262,7 +2262,6 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
  * {@inheritdoc}
  */
 function itg_widget_block_view_alter(&$data, $block) {
-
     $item = menu_get_item();
     $flag_occupation = $story_category = $occupation = array();
     $ipl_category = array();
