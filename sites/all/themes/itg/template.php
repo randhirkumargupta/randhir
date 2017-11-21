@@ -289,7 +289,11 @@ function itg_preprocess_html(&$vars) {
     }
   }
   $newsroomjs = get_newsroom_js();
-  drupal_add_html_head($newsroomjs, 'newsroomjs');
+  $script_code = array(
+	'#type' => 'markup',
+	'#markup' => $newsroomjs,
+  );
+  drupal_add_html_head($script_code, 'newsroomjs');
   // Code for setting page header title for home page
   if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
