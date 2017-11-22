@@ -1021,10 +1021,11 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     $node->content['photo_story_bottom_html'] = itg_story_photo_story_bottom_html($node);
     }
     
-    /*if ($external_url = _is_external_url_story_article($node->nid)) {
+    if((isset($node->field_story_external_url)) && (!empty($node->field_story_external_url[LANGUAGE_NONE][0]['value']))) {
+      $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
       drupal_goto($external_url);
-    }*/
-    
+    }
+
     // modified code external url code
     if ($view_mode != 'search_index' && ($theme == FRONT_THEME_NAME || $theme == 'amptheme') && (in_array(FRONT_USER, $user->roles) || $user->uid == 0)) {
       if (!empty($node->field_story_external_url['und'][0]['value'])) {
@@ -1434,29 +1435,19 @@ function _sponsor_category_setting() {
  * @return false or external url
  */
 function _is_external_url_story_article($nid) {
-  
   $is_external_url = FALSE;
-  //commented by shravan and discussed with shashank
- /* if (isset($nid)) {
-    if (db_table_exists('field_data_field_story_external_url')) {
-      $type_query = db_select('node', 'n');
-      $type_query->fields('n', array('type'));
-      $type_query->condition('n.nid', $nid, '=');
-      $node_type = $type_query->execute()->fetchField();
-      if ($node_type == 'story') {
-        $query = db_select('field_data_field_story_external_url', 'eu');
-        $query->fields('eu', array('field_story_external_url_value'));
-        $query->isNotNull('eu.field_story_external_url_value');
-        $query->condition('eu.entity_id', $nid, '=');
-        $query->condition('eu.bundle', 'story', '=');
-        $query->condition('eu.entity_type', 'node', '=');
-        $query_result = $query->execute()->fetchAll();
-        if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value) && filter_var(trim($query_result[0]->field_story_external_url_value), FILTER_VALIDATE_URL)) {
-          $is_external_url = trim($query_result[0]->field_story_external_url_value);
-        }
-      }
+  if (isset($nid)) {
+    $query = db_select('field_data_field_story_external_url', 'eu');
+    $query->fields('eu', array('field_story_external_url_value'));
+    $query->isNotNull('eu.field_story_external_url_value');
+    $query->condition('eu.entity_id', $nid, '=');
+    $query->condition('eu.bundle', 'story', '=');
+    $query->condition('eu.entity_type', 'node', '=');
+    $query_result = $query->execute()->fetchAll();
+    if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value) && filter_var(trim($query_result[0]->field_story_external_url_value), FILTER_VALIDATE_URL)) {
+      $is_external_url = trim($query_result[0]->field_story_external_url_value);
     }
-  }*/
+  }
   return $is_external_url;
 }
 
