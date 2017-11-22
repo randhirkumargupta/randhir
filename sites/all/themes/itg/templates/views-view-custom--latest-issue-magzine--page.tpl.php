@@ -90,7 +90,7 @@
       $sub_title = '';
       foreach ($parent_value as $key => $value) {
         // get status of lock story
-        if (function_exists(itg_msi_get_lock_story_status)) {
+        if (function_exists('itg_msi_get_lock_story_status')) {
           $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
         }
         if ($key == 0) {
