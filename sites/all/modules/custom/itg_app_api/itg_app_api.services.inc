@@ -3464,6 +3464,7 @@ function itg_rapid_api_login_request($token) {
             $is_first_login = 0;
         }
         if ($auth_token) {
+            p($_COOKIE);
             $SimpleSAMLSessionID = $_COOKIE['SimpleSAMLSessionID'];
             $field_first_name = $local_account->user->field_first_name['und'][0]['value'];
             $field_last_name = $local_account->user->field_last_name['und'][0]['value'];
