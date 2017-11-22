@@ -124,7 +124,7 @@ if ($theme != 'itgadmin') {
 
           <div class="top-block">
 
-            <div class="top-colum-2" data-tb-region="homeTopFeatured">
+            <div class="col-sm-8 col-md-8 col-lg-5 home-top-featured" data-tb-region="homeTopFeatured">
               <div class="widget-help-text">Template widgets ( <strong>Home Page Feature</strong> )</div>
               <div class="itg-widget">
                 <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -143,7 +143,7 @@ if ($theme != 'itgadmin') {
               </div>
             </div>
 
-            <div class="top-colum-1" data-tb-region="homeTopStory">
+            <div class="col-sm-4 col-md-4 col-lg-3 home-top-story" data-tb-region="homeTopStory">
               <div class="widget-help-text">Template widgets (<strong>Top Story</strong>)</div>
               <div class="itg-widget">
                 <div class="top-n-most-popular-stories">
@@ -177,9 +177,9 @@ if ($theme != 'itgadmin') {
               </div>
             </div>
 
-            <div class="top-colum-3">
+            <div class="col-sm-12 col-md-12 col-lg-4 top-rhs-add">
               <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
-              <div class="itg-widget-parent m-bottom40">
+              <div class="col-sm-6 col-lg-12 top-rhs-add-child">
                 <div class="itg-widget">
                   <div class="ad-widget">
                     <div class="sidebar-ad">
@@ -192,7 +192,7 @@ if ($theme != 'itgadmin') {
                   </div>
                 </div>
               </div>
-              <div class="itg-widget trending-list">
+              <div class="col-sm-6 col-lg-12 home-trending-video">
                 <div class="widget-help-text">Template widgets(<strong>Trending Videos &amp; Top Takes</strong>)</div>
                 <div class="tab-buttons">
                   <span data-class="itg-block-5" data-id="tab-data-1" class="active">
