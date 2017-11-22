@@ -3489,6 +3489,8 @@ function itg_rapid_api_login_request($token) {
             $account['data']['profile_image'] = "$profile_image";
             $account['data']['gender'] = "$gender";
             $account['data']['date_of_birth'] = "$date_of_birth";
+            print_r($_COOKIE);
+            print_r($_SESSION);die();
 
             // query for insert data into itg_app_device - $action $token
             $action = 2;
