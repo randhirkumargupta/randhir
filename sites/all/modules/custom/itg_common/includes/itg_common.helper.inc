@@ -127,7 +127,6 @@ define('SMALL_IMAGE_STYLES', $small_image_style);
 $small_extra_image_style = array('widget_very_small' , 'image88x66scale' , 'photo_landing_slider_thumb_88_86' );
 define('SMALL_EXTRA_IMAGE_STYLES', $small_extra_image_style);
 
-//define('CATEGORY_MANAGMENT', 4);
 define('CATEGORY_MANAGMENT', variable_get('category_manager_vid'));
 define('CITY_MANAGMENT', variable_get('city_manager_vid'));
 define('POLITICIAN_TID', variable_get('tid_politician'));
@@ -146,15 +145,6 @@ define('BACKEND_URL', variable_get('itg_backend_url'));
 define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
 define('INDEX_PAGE_URL', 'node/2');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
-//define('FRONT_URL', 'http://itgd-mum-lb-dev-frontend-app-1144451114.ap-south-1.elb.amazonaws.com');
-//define('BACKEND_URL', 'http://itgd-mum-lb-dev-backend-app-678057722.ap-south-1.elb.amazonaws.com');
-//define('FRONT_URL', 'http://localhost/itg-cms');
-//define('BACKEND_URL', 'http://192.168.14.45/itg-cms');
-// set comment config in variable
-//if (function_exists('global_comment_last_record')) {
-  //variable_set('COMMENT_CONFIG', global_comment_last_record());
-//}
-
 define('taxonomy_terms_per_page_admin' , 20);
 
 if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") { 
@@ -241,7 +231,6 @@ function _widget_title($string , $is_for_attribute = TRUE) {
     return str_replace(array('\'', '"' , '>' , '<' , '\/', '/'), '', html_entity_decode($string));
   } else {
     return str_replace(array('>' , '<' , '\/', '/'), '', html_entity_decode($string));
-  //return preg_replace('#\W#', " ", $string );
   }
 }
 
@@ -291,7 +280,6 @@ function get_field_value_for_smily($nid) {
   $query->fields('emoji_2', array('field_emoji_2_value'));
   $query->fields('emoji_pos', array('field_emoji_position_value'));
   $query->condition('n.nid', $nid);
-  //$query->condition('n.type', 'story');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return array(
     'field_story_short_headline_value' => $result[0]['field_story_short_headline_value'],
