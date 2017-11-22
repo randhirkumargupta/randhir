@@ -12,11 +12,12 @@ if (!empty($title)):
     <h3><?php print $title; ?></h3>
     <?php endif; ?>
 <div class="search-img-list" id="easyPaginate">
-    <?php foreach ($rows as $id => $row) {
-       
-        $allimage=  explode(' ', $row);
-        if(!empty($allimage)) {
-            foreach ($allimage as $img) {
+    <?php
+    foreach ($rows as $id => $row) {
+       preg_match_all('/(https?:\/\/\S+\.(?:jpg|png|gif|GIF|jpeg))\s+/', $row, $matches);
+        //$allimage=  explode(' ', $row);
+        if(!empty($matches[0])) {
+            foreach ($matches[0] as $img) {
                 if(trim($img) !="") {
                       print '<img  width="100" height="44" src="'. $img.'">'; 
                 }
