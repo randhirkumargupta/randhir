@@ -645,11 +645,7 @@ function itg_common_get_domain($url) {
  *   Returns node title.
  */
 function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
-// Condition is to make free title on home page ITG-3774
-  //if(drupal_is_front_page() || itg_is_special_page()) {
-    $max_limit = 10000;
-  //}
-    
+  $max_limit = 10000;
   $arg = arg();
   $titlte = "";
   $positions_array = array();

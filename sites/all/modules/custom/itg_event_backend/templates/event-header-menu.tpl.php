@@ -74,15 +74,15 @@ if (!empty($node) && ($node->type == 'event_backend')) {
                   }
 
                   if ($event_config_flashback) {
-                    $flash_old = itg_event_backend_flashback($node->nid, $menu_font_color, $event_type);
-                    $flash_old_event = '';
+                      $flash_old = itg_event_backend_flashback($node->nid, $menu_font_color, $event_type);
+                      $flash_old_event = '';
                     if (!empty($flash_old)) {
                       $flash_old_event = $flash_old['menu'];
                     }
                     if(!empty($flash_old['top'])) {
-                    print '<li>' . l(t('Flashback'), 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
+                      print '<li>' . l(t('Flashback'), 'node/' . $flash_old['top'], array('attributes' => array("style" => "color:$menu_font_color"))) . $flash_old_event . '</li>';
                     }
-                    }
+                  }
                   $tab_menu = '';
                   $tab_menu = itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font);
                   if (!empty($tab_menu['tab_top_menu'])) {
