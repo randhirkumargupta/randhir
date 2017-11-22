@@ -18,11 +18,9 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
  * {@inheritdoc}
  */
 function itg_common_init() {
-  //$con = mongodb();
-  //watchdog('Mongo connection status', $con->connection->connected);
-  global $user, $base_url, $theme;
-  $arg = arg();  
   
+  global $user, $base_url, $theme;
+  $arg = arg();
   
   // condition for archive story redirect
   $ctype_tab = array('Story', 'photogallery', 'Videogallery');

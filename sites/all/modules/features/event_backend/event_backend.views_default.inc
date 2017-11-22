@@ -3429,7 +3429,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['label'] = '';
   $handler->display->display_options['fields']['field_story_new_title']['element_label_colon'] = FALSE;
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -3503,7 +3503,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -4100,7 +4100,7 @@ return itg_event_backend_speaker_ids(arg(1));
   $handler->display->display_options['relationships']['field_program_schedule_value']['table'] = 'field_data_field_program_schedule';
   $handler->display->display_options['relationships']['field_program_schedule_value']['field'] = 'field_program_schedule_value';
   $handler->display->display_options['relationships']['field_program_schedule_value']['delta'] = '-1';
-  /* Field: Field: Session Title  */
+  /* Field: Field: Kicker */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -4207,7 +4207,7 @@ return itg_event_backend_speaker_ids(arg(1));
     'multiple_to' => '',
     'show_remaining_days' => 0,
   );
-  /* Field: Field: Session Title  */
+  /* Field: Field: Kicker */
   $handler->display->display_options['fields']['field_story_expert_name']['id'] = 'field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['table'] = 'field_data_field_story_expert_name';
   $handler->display->display_options['fields']['field_story_expert_name']['field'] = 'field_story_expert_name';
@@ -4726,7 +4726,7 @@ print  "<img src=\'" . $base_url . \'/\' . drupal_get_path(\'theme\', \'itg\') .
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
