@@ -476,9 +476,11 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
     foreach ($result as $option_values) {
       if ($option_values->field_story_source_type_value == 'videogallery') {
         $option[$option_values->field_story_source_type_value] = 'Video';
+      } else if($option_values->field_story_source_type_value == 'story') {
+        $option[$option_values->field_story_source_type_value] = 'Internal Story';
       }
       else {
-        $option[$option_values->field_story_source_type_value] = $option_values->field_story_source_type_value;
+        $option[$option_values->field_story_source_type_value] = ucwords($option_values->field_story_source_type_value);
       }
     }
 
