@@ -11,9 +11,7 @@
 function programCategoryPageFeed() {
   $output = "";
   $conf_array = tidConfig();
-
   $storytag = array();
-
   // check tid argument
   $tid_arg = arg(1);
   if ($tid_arg && is_numeric($tid_arg)) {
@@ -24,7 +22,7 @@ function programCategoryPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+  $term_feed_path = "public://xml_it/videos";
   $return_flag = "";
   foreach ($section_list as $key => $value) {
 
@@ -54,7 +52,6 @@ function programCategoryPageFeed() {
         $output .= program_section_page_feed_footer();
         // xml file writing..
         if ($output) {
-
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
@@ -62,7 +59,7 @@ function programCategoryPageFeed() {
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
@@ -76,8 +73,7 @@ function generateProgramCategoryPage($tid) {
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
-    $data_str = $result_get['key_value'];
-    //echo "redis get - ". $output; exit();
+    $data_str = $result_get['key_value'];    
     $data_ar = explode("##listcount##", $data_str);
     $data['lcount'] = $data_ar[0];
     $data['data'] = $data_ar[1];
@@ -95,7 +91,8 @@ function generateProgramCategoryPage($tid) {
     $range_max = 20;
     $range_min = 0;
     $order_by = 'ASC';
-    $type = "videogallery"; {
+    $type = "videogallery";
+    {
       $listcount = 0;
       // select node belong from current term id or child term id
 
@@ -139,9 +136,7 @@ function generateProgramCategoryPage($tid) {
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
       foreach ($result as $reskey => $resvalue) {
-
         $listcount++;
-
         $title = $resvalue['title'];
         $type = $resvalue['type'];
         $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
@@ -169,7 +164,5 @@ function generateProgramCategoryPage($tid) {
 
     $result_set = setRedis($redis_key, $data_fi, $ttl);
   }
-
   return $data;
 }
-
