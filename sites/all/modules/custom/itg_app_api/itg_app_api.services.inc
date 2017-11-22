@@ -3454,8 +3454,8 @@ function itg_rapid_api_login_request($token) {
     if ($uid) {
         //$local_account = localSignup($params);
         $local_account = localLogin($params);
-print_r($_COOKIE);
-p($_SESSION);
+        $cookie_val = getSmlCookie();
+        p($cookie_val);
         $uid = $local_account->user->uid;
         $name = $local_account->user->name;
         $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
@@ -5978,4 +5978,16 @@ function resetToken($uname, $token) {
             ->condition('uid', $uid)
             ->condition('token', $token)
             ->execute();
+}
+/**
+ * Helper function to get cookie value
+ * @return array 
+ */
+function getSmlCookie(){
+    $cook_val = array();
+    foreach ($_COOKIE as $key => $value) {
+        $cook_val['session_id'] = $key;
+        $cook_val['session_name'] = $value;
+    } 
+    return $cook_val;
 }
