@@ -73,7 +73,6 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
               ?>
               <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
                   <p itemprop="headline" content="<?php print $node->title; ?>"></p>
-                  <?php print $embed_display_time; ?> IST: </strong><?php print $title; ?></h2>-->
                   <meta itemprop="datePublished" content="<?php print $created_date; ?>">
                   <meta itemprop="author" content="IndiaToday.in">
                   <meta itemprop="dateModified" content="<?php print $modify_date; ?>">
