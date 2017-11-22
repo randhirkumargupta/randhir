@@ -3454,7 +3454,8 @@ function itg_rapid_api_login_request($token) {
     if ($uid) {
         //$local_account = localSignup($params);
         $local_account = localLogin($params);
-p($_COOKIE);
+print_r($_COOKIE);
+p($_SESSION);
         $uid = $local_account->user->uid;
         $name = $local_account->user->name;
         $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
