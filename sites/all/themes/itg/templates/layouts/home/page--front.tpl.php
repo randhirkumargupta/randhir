@@ -560,7 +560,7 @@ if ($theme != 'itgadmin') {
           <!--Photo slider and Watch now section starts here-->
 <?php if (isset($widget_data['itg-block-12']['widget_name']) || isset($widget_data['itg-block-13']['widget_name']) || $theme == 'itgadmin') { ?>
             <div class="row itg-h450-section">
-              <div class="col-md-8 col-sm-12 col-xs-12 mt-50" data-tb-region="HomePhotoCarousel">
+              <div class="col-md-8 col-sm-8 col-xs-12 col-lg-8 mt-50" data-tb-region="HomePhotoCarousel">
                 <div class="widget-help-text">Template widgets ( <strong>Photo Carousel</strong> )</div>
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -592,7 +592,7 @@ if ($theme != 'itgadmin') {
                   </div>               
                 </div>  
               </div>
-              <div class="col-md-4 col-sm-12 col-xs-12 mt-50" data-tb-region="<?php echo itg_get_dive_region_name($widget_data['itg-block-13']['block_title'], 'Home');?>">
+              <div class="col-md-4 col-sm-12 col-xs-4 col-lg-4 mt-50" data-tb-region="<?php echo itg_get_dive_region_name($widget_data['itg-block-13']['block_title'], 'Home');?>">
                 <div class="widget-help-text">Section card ( <strong>Watch</strong> )</div>
                 <div class="itg-widget">
                   <div class="droppable <?php print $gray_bg_layout; ?>">
