@@ -1428,6 +1428,7 @@ function simplesamlphp_auth_get_attributes($attribute = NULL) {
  */
 function simplesaml_twitter_image($url) {
   if (!empty($url)) {
+    watchdog('sso_image', '<pre>' . $url . '</pre>');
     $imagedata = file_get_contents($url);
     $image_url = 'itg' . time() . end(explode('/', $url));
     $image_extension = end(explode('.', $image_url));
