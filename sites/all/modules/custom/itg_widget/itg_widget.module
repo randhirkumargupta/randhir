@@ -2131,8 +2131,15 @@ function _itg_widget_get_old_data() {
 function _get_widget_display_data_as_per_db_result($result = array()) {
     if (!empty($result)) {
         foreach ($result as $widget_data) {
-
+            $is_sponsor = FALSE;
             $node_load_data = unserialize($widget_data->node_data);
+            if ((isset($node_load_data->field_story_configurations)) && (!empty($node_load_data->field_story_configurations))) {
+              foreach ($node_load_data->field_story_configurations[LANGUAGE_NONE] as $config_key => $config_val) {
+                if ($config_val['value'] == 'sponsor') {
+                  $is_sponsor = TRUE;
+                }
+              }
+            }
             $node_smily_data = array('field_story_short_headline_value' => $node_load_data->field_story_short_headline['und'][0]['value'],
                 'field_emoji_position_value' => array(
                   $node_load_data->field_emoji_position['und'][0]['value'],
@@ -2144,6 +2151,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
                 'ad_title' => $node_load_data->field_story_new_title['und'][0]['value'],
                 'ad_url' => $node_load_data->field_story_redirection_url_titl['und'][0]['value'],
                 'nid' => $node_load_data->nid,
+                'is_spnoser' => $is_sponsor,
              );
             $uri = $node_load_data->field_story_extra_large_image['und'][0]['uri'];
             $li_file_uri = $node_load_data->field_story_large_image['und'][0]['uri'];

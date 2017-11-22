@@ -21,9 +21,9 @@
           }
           ?>
           <li <?php echo $data_tb_region_item;?> title="<?php echo $entity['title']; ?>" class="<?php print $entity['type'] ?> top-story-<?php print $entity['nid'] ?>  <?php print $pipelineclass; ?>">
-              <?php if (_is_sponsor_story_article($entity['nid'])): ?>
+              <?php if ($entity['node_obj']['is_spnoser']): ?>
                 <span class="itg-sponsor-title"><?php print t('SPONSORED'); ?></span>
-                <?php
+              <?php
               endif;
               if (function_exists('itg_common_get_smiley_title')) {
                 
