@@ -7,7 +7,7 @@
  * @see https://drupal.org/node/1728164
  */
 global $base_url;
-$actual_link = 'http://' . $_SERVER['HTTP_HOST'] .'/amp'. $_SERVER['REQUEST_URI'];
+$actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] .'/amp'. $_SERVER['REQUEST_URI'];
 $amp_link = str_replace('?amp', '', $actual_link);
 $short_url = shorten_url($amp_link, 'goo.gl');
 $share_desc = '';
@@ -67,14 +67,13 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
               $field_collection_embed_id = $breaking_embed_item;
               $entity = entity_load('field_collection_item', array($field_collection_embed_id));
               $title = $entity[$field_collection_embed_id]->field_breaking_tile['und'][0]['value'];
-              //$embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
               $embed_display_time = date("H:i", strtotime($entity[$field_collection_embed_id]->field_breaking_publish_time['und'][0]['value']));
               $created_date = date('Y-m-d H:i:s', $node->created);
               $modify_date = date('Y-m-d H:i:s', $node->changed);
               ?>
               <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
                   <p itemprop="headline" content="<?php print $node->title; ?>"></p>
-                  <!--<h2 itemprop="articleBody" style="display:none"><strong><?php print $embed_display_time; ?> IST: </strong><?php print $title; ?></h2>-->
+                  <?php print $embed_display_time; ?> IST: </strong><?php print $title; ?></h2>-->
                   <meta itemprop="datePublished" content="<?php print $created_date; ?>">
                   <meta itemprop="author" content="IndiaToday.in">
                   <meta itemprop="dateModified" content="<?php print $modify_date; ?>">
@@ -214,22 +213,15 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
               $slider_last_item = entity_load('field_collection_item', array(reset($field_collection_ids)));
               $slider_last_time = date("H:i A", strtotime($slider_last_item[reset($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));
               $slider_first_item = entity_load('field_collection_item', array(end($field_collection_ids)));
-              $slider_first_time = date("H:i A", strtotime($slider_first_item[end($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));
-              //~ $settings = array();
-              //~ $settings['last'] = $slider_last_time;
-              //~ $settings['first'] = $slider_first_time;
-              //~ drupal_add_js(array('itg_front_end_common' => array('settings' => $settings)), array('type' => 'setting'));
+              $slider_first_time = date("H:i A", strtotime($slider_first_item[end($field_collection_ids)]->field_breaking_publish_time['und'][0]['value']));              
 			   $i =0;
-			  // print_r($node);die;
               foreach ($field_collection_ids as $breaking_item) {
                 $breaking_output .= '<div class="breaking-section">';
                 $field_collection_id = $breaking_item;
                 $entity = entity_load('field_collection_item', array($field_collection_id));
                 $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $entity[$field_collection_id]->field_breaking_tile['und'][0]['value']);
                 $fb_title = $string = preg_replace('/\s+/', ' ', itg_common_only_text_string($html));
-                //$pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
                 $pub_time = date("H:i", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']));
-                //$pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']) + 19800);
                 $pub_display_time = date("H:i A", strtotime($entity[$field_collection_id]->field_breaking_publish_time['und'][0]['value']));
                 $pub_time2 = str_replace(":", "", $pub_time);
                 $current_time = str_replace(":", "", date('H:i'));
@@ -237,12 +229,6 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
                   $url = preg_replace('#^https?://#', '', $entity[$field_collection_id]->field_breaking_redirection_url['und'][0]['value']);
                   $redirection_url = l($entity[$field_collection_id]->field_breaking_tile['und'][0]['value'], 'http://' . $url, array("attributes" => array("target" => "_blank", "title" => $entity[$field_collection_id]->field_breaking_tile['und'][0]['value']), 'html' => TRUE));
                 }
-                /*else if($i == 19){
-					//echo "fssf".$redirection_url;die;
-					$redirection_url = '<amp-twitter width=390 height=330 layout="fixed"></amp-twitter><blockquote class="twitter-tweet" data-lang="en">
-<p dir="ltr" lang="en"><a href="https://twitter.com/hashtag/Verdict2017?src=hash">#Verdict2017</a> - Punjab election 2017 result: Newcomer AAP giving tough fight to Congress<a href="https://t.co/pdeVZn3EPU">https://t.co/pdeVZn3EPU</a> <a href="https://t.co/0J5rRXuJp5">pic.twitter.com/0J5rRXuJp5</a></p>
-— India Today (@IndiaToday) <a href="https://twitter.com/IndiaToday/status/840392782623719426">March 11, 2017</a></blockquote></amp-twitter>';
-				}*/
                 else {
                   $redirection_url = $entity[$field_collection_id]->field_breaking_tile['und'][0]['value'];
                 }
@@ -257,7 +243,6 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
                 $breaking_output .= '</div></section></amp-accordion></div></div>';
                 $breaking_output .= '</div></div>';
               }
-              //$breaking_output .= '<span class="no-record" style="display:none">' . t('No Record Found') . '</span>';
               print $breaking_output;
             }
           }
