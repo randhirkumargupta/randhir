@@ -294,6 +294,8 @@ function itg_preprocess_html(&$vars) {
 	'#markup' => $newsroomjs,
   );
   drupal_add_html_head($script_code, 'newsroomjs');
+  
+  itg_add_branch_io_code();
   // Code for setting page header title for home page
   if (!empty(arg(1)) && is_numeric(arg(1))) {
     $arg_data = node_load(arg(1));
@@ -573,10 +575,10 @@ function itg_js_alter(&$javascript) {
 
 /**
  * Get newsroom js ad code
- */ 
-function get_newsroom_js(){
-	if(drupal_is_front_page()){
-		return <<<jscode
+ */
+function get_newsroom_js() {
+  if (drupal_is_front_page()) {
+    return <<<jscode
 	<!-- NEWSROOM SCRIPT -->
 <script>
 window._newsroom = window._newsroom || [];
@@ -594,8 +596,9 @@ window._newsroom.push('trackPage');
 </script>
 <!-- END NEWSROOM SCRIPT -->
 jscode;
-	}else{
-		return <<<jscode
+  }
+  else {
+    return <<<jscode
 		<!-- NEWSROOM SCRIPT -->
 <script>
     window._newsroom = window._newsroom || [];
@@ -609,5 +612,74 @@ jscode;
 </script>
 <!-- END NEWSROOM SCRIPT -->
 jscode;
-	}
+  }
+}
+
+/**
+ * FUnction to add branch io code on header
+ */
+function itg_add_branch_io_code() {
+  $arg = arg();
+  $node = menu_get_object();
+  if (!drupal_is_front_page() && $arg[0] == 'node' && !empty($arg[1]) && is_numeric($arg[1]) && $node->type == 'story') {
+    global $base_url;
+    $kicker_text = (isset($node->field_story_magazine_kicker_text[LANGUAGE_NONE][0][value]) ? $node->field_story_magazine_kicker_text[LANGUAGE_NONE][0][value] : $node->title);
+    $large_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    get_branch_io_js_code($node->title, $kicker_text, $large_image, $base_url);
+  }
+}
+
+/**
+ * 
+ * @param string $title
+ * @param string $kicker_text
+ * @param string $medium_img
+ * @param string $base_url
+ */
+function get_branch_io_js_code($title, $kicker_text, $large_image, $base_url) {
+  $js_code = <<<JCODE
+<script type = "text/javascript">
+(function(b, r, a, n, c, h, _, s, d, k){if(!b[n]||!b[n]._q){for(;
+s<_.length;
+)c(h, _[s++]);
+d = r.createElement(a);
+d.async = 1;
+d.src = "https://cdn.branch.io/branch-latest.min.js";
+k = r.getElementsByTagName(a)[0];
+k.parentNode.insertBefore(d, k);
+b[n] = h}})(window, document, "script", "branch", function(b, r){b[r] = function(){b._q.push([r, arguments])}}, {_q:[], _v:1}, "addListener applyCode autoAppIndex banner closeBanner closeJourney creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode trackCommerceEvent".split(" "), 0);
+
+branch.init('key_live_cgwzd2EvhB7X2XUsBd2N6joitydwu3OS', function(err, data) {
+console.log('data==>'+JSON.stringify(data));
+branch.setBranchViewData({
+data: {
+'\$deeplink_path': window.location.pathname + window.location.search + window.location.hash,
+ 'user_id': '12342'
+}
+});
+
+branch.link({
+data: {
+'\$desktop_url': '$base_url',
+ '\$ios_url': 'https://itunes.apple.com/us/app/aaj-tak/id493319791?ls=1&mt=8',
+ '\$ipad_url': 'https://itunes.apple.com/us/app/aaj-tak-hd/id500111702?ls=1&mt=8',
+ '\$android_url': 'https://play.google.com/store/apps/details?id=in.AajTak.headlines&hl=en',
+ '\$og_app_id': '493319791',
+ '\$og_title': '$title',
+ '\$og_description': '$kicker_text',
+ '\$og_image_url': '$large_image'
+
+}
+}, function(err, link) {
+console.log(err, link);
+});
+});
+</script>
+JCODE;
+
+  $script_code = array(
+    '#type' => 'markup',
+    '#markup' => $js_code,
+  );
+  drupal_add_html_head($script_code, 'branchio');
 }
