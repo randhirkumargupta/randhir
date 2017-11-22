@@ -87,6 +87,7 @@ function itg_app_api_sso_url_inbound_alter(&$result, $path, $path_language) {
  * @param int $nid
  * @return String 
  */
+
 function getStoryType_sso($nid) {
   $query = db_select('node', 'n');
   $query->Join('field_data_field_story_type', 'st', 'st.entity_id = n.nid');
@@ -192,5 +193,6 @@ function updateUsedrProfileAtSignup_rapid_sso($data, $action = 1) {
 /**
  * Implements hook_boot().
  */
-function itg_app_api_sso_boot() {}
-
+function itg_app_api_sso_boot() {
+  // required for hook_url_inbound_alter().
+}
