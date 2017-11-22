@@ -1297,7 +1297,7 @@ function itg_common_node_for_story_update_image() {
   $query->addField('n', 'destid1', 'nid');
   $query->join('field_data_field_story_category', 'fdfsc', 'fdfsc.entity_id = n.destid1');
   $query->condition('fdfsc.field_story_category_tid', '1206640', '!= ');
-  $query->condition('n.destid1', 210434, '>')->groupBy('n.destid1');
+  $query->condition('n.destid1', 215791, '>')->groupBy('n.destid1');
   $result = $query->execute()->fetchAll();
 
   foreach ($result as $res) {
@@ -1664,6 +1664,7 @@ function itg_common_node_for_story_update_image() {
             }
           }
         }
+      }
 
         //FAcebook  image
         $facebook_image['fid'] = $node->field_story_facebook_image['und'][0]['fid'];
@@ -1911,5 +1912,5 @@ function itg_common_node_for_story_update_image() {
         print $res->nid . ',';
       }
     }
-  }
+  
 }

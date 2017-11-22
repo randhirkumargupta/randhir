@@ -21,13 +21,11 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
   $data = array();
   $total_cont = 0;
   $range_max = $item_per_page;
-  //$photolist = array();
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');

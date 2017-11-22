@@ -44,13 +44,13 @@ function intodayMagazine() {
     $result_set = setRedis($redis_key, $output, $ttl);
   }
   if ($output) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $term_feed_path = "public://xml_it/stories";
     $catFile = "fromthemagazine.xml";
     $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
@@ -130,4 +130,3 @@ function generateIntodayMagazinePage($tid) {
   $data['data'] = $output;
   return $data;
 }
-
