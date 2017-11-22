@@ -1427,15 +1427,19 @@ function simplesamlphp_auth_get_attributes($attribute = NULL) {
  * Helper function for image upload
  */
 function simplesaml_twitter_image($url) {
-  if (!empty($url)) {
+ if (!empty($url)) {
+    try {
     watchdog('sso_image', '<pre>' . $url . '</pre>');
     $imagedata = file_get_contents($url);
     $image_url = 'itg' . time() . end(explode('/', $url));
     $image_extension = end(explode('.', $image_url));
     $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
-    $file = file_load($file_data_temp->fid);
-    file_usage_add($file_data_temp, 'itg_sso_image', 'file', 4);
-
+    //$file = file_load($file_data_temp->fid);
+    file_usage_add($file_data_temp, 'itg_sso_image', 'file', $file_data_temp->fid);
     return $file_data_temp->fid;
+    }
+    catch (Exception $e) {
+     watchdog('SSo image exception', '<pre>' . $e->getMessage() . '</pre>'); 
+    }
   }
 }
