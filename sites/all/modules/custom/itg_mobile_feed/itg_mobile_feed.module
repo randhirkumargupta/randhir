@@ -815,8 +815,8 @@ function getCityByNid($nid) {
  */
 function getBodyDataForAndroid($str, $node=NULL) {
   // variable declation
-  $mob_str = "";	
-  //remove iframe..
+  $mob_str = "";
+  $movie_data = "";
   $str = html_entity_decode($str);
   $str = str_replace(array('<div class="itgimage">','data-syndication="no"'),array('<div class="itg-mosimage">',''),$str);
   $str = preg_replace('/<div class=\"body_caption\">.*<\/div>/','',$str);
@@ -830,72 +830,254 @@ function getBodyDataForAndroid($str, $node=NULL) {
    if (strpos($str, '[ITG:FACTOIDS]')) {
    $str = factroid_story_body($str, $node);
    }
+   if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
+   $buzz_data = buzz_story_body($str,$node);  
+   }
+   if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+   $technology_data = technology_story_body($str,$node); 
+   }
+   if (!empty($node->field_story_rating)){
+   $movie_data = movie_story_body($str,$node);
+   }
   $str = preg_replace('/\[[^]]+\]/', '', $str);
+  $str .= $technology_data;
+  $str .= $buzz_data;
+  //$str .= $movie_data;
   //$str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
   //$img_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
-  return $str;
+  $new_string = $movie_data.''.$str;
+  return $new_string;
 }
 
-function factroid_story_body($str,$node){
+/**
+ * Function for getting the technology story data from the tech body
+ * @param String $str
+ * @param object $node
+ * @return string  
+ */
+function movie_story_body($str,$node){
+  $movie_output = '';
+  $movie_output .= '<ul>';
+  if (!empty($node->field_story_rating)){
+   $movie_output .= '<li class="movie_rate">'.$node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%".'</li>';
+  //$movie_output .= '<div class="movie-rating" data-star-value="'.$node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%".'">';
+    
+  }
+  if (!empty($node->field_mega_review_cast)){
+    $movie_output .= '<li class="cast">';
+    $movie_output .= '<span class="title">'.t('Cast:').'</span>';
+    $movie_output .= '<span class="detail">';
+                        $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE];
+                        $count = sizeof($cast_ref_id);
+                        for ($i = 0; $i < $count; $i++) {
+                          $entity_obj = entity_load('node', array($cast_ref_id[$i]['target_id']));
+                          $cast = $entity_obj[$cast_ref_id[$i]['target_id']]->title;
+    $movie_output .= $cast;
+                          if ($i < ($count - 1)) {
+    $movie_output .= ', ';
+                          }
+                        }
+    $movie_output .= '</span>';
+    $movie_output .= '</li>';
+  }
+  if (!empty($node->field_mega_review_director)){
+    $movie_output .= '<li class="director">';
+    $movie_output .= '<span class="title">'.t('Director:').'</span>';
+    $movie_output .= '<span class="detail">'.$node->field_mega_review_director[LANGUAGE_NONE]['0']['value'].'</span>';
+    $movie_output .= '</li>';
+  }
+  if (!empty($node->field_mega_review_movie_plot)){
+    $movie_output .= '<li class="plot">';
+    $movie_output .= '<span class="title">'.t('Plot:').'</span>';
+    $movie_output .= '<span class="detail">'.$node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value'].'</span>';
+    $movie_output .= '</li>';
+  }
+  $movie_output .= '</ul>';
+  return $movie_output;
+}
+
+/**
+ * Function for getting the technology story data from the tech body
+ * @param String $str
+ * @param object $node
+ * @return string  
+ */
+function technology_story_body($str,$node){
+  $tech_output = '';
+   $tech_output .= '<ul>';
+  if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+      $buzz = 1;
+      foreach ($node->field_story_technology['und'] as $buzz_item) {
+        $tech_output.= '<li class="technology-section"><ul><li>';
+        $field_collection_id = $buzz_item['value'];
+        $entity = entity_load('field_collection_item', array($field_collection_id));
+
+        $buzz_imguri = '';
+        if (!empty($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid'])) {
+              $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid']);
+        }
+     
+      $img = '<img title="' . $entity[$field_collection_id]->field_technology_sample_photo['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_technology_sample_photo['und'][0]['alt'] . '" />';
+      //if (!empty($entity[$field_collection_id]->field_technology_photo_title[LANGUAGE_NONE][0]['value'])) {
+        $tech_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_technology_photo_title[LANGUAGE_NONE][0]['value'] . '</h1>';
+        if (!empty($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid'])) {
+          $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_technology_photo_title[LANGUAGE_NONE][0]['value']);
+          $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
+
+          if (function_exists('itg_story_get_image_info')) {
+                  $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid']);
+          }
+
+          $tech_output.= '<div class="itg-mosimage">' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
+        }
+        
+        $buzz++;
+        //}
+        $tech_output.= '</li></ul></li>';
+      }
+       
+  }
+    if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])){
+          $tech_output .= '<li class="story-tech-rating">'.$node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10'.'</li>';
+    }
+    if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])){
+         $tech_output .= '<li class="story-tech-chunk">';
+         $tech_output .= $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'];
+         $tech_output .= '</li>';  
+    }
+  $tech_output.= '</ul>';
   
-                  $factoidsBlock = '';
-                  if (isset($node->field_story_template_factoids) && !empty($node->field_story_template_factoids)) {
-                    $factoidsSocialShare['title'] = $node->field_story_factoids_title[LANGUAGE_NONE][0]['value'];
-                    $factoidsSocialShare_title = preg_replace("/'/", "\\'", $factoidsSocialShare['title']);
-                    $factoidsSocial_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
-                    $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
-                    $factoidsSocialShare['icons'] = '<div class="factoids-page">
-                                 <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div></div>';
-                    $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
-                    foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
-                      $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
-                    }
-                    $factoidsSocialShare['slider'] .= '</ul></div>';
-                    $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
-                  }
-                  $str = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $str);
+  
+  $tech_output = html_entity_decode($tech_output);
+  $tech_output = str_replace(array('<div class="itgimage">','data-syndication="no"'),array('<div class="itg-mosimage">',''),$tech_output);
+  $tech_output = preg_replace('/<div class=\"body_caption\">.*<\/div>/','',$tech_output);
+  $tech_output = str_replace('src="','width="100%" src="',$tech_output);
+  $tech_output = str_replace("src='","width='100%' src='",$tech_output);
+  return $tech_output;
+}
+
+/**
+ * Function for getting the buzz token data from the body
+ * @param String $str
+ * @param object $node
+ * @return string  
+ */
+function buzz_story_body($str,$node){
+    $buzz_output = '';
+    if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {  
+      $buzz_output .= '<ul>';
+      $buzz = 1;
+      foreach ($node->field_story_template_buzz['und'] as $buzz_item) {
+        $buzz_output.= '<li class="buzz-section">';
+        $field_collection_id = $buzz_item['value'];
+        $entity = entity_load('field_collection_item', array($field_collection_id));
+        $buzz_imguri = '';
+        if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+              $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+        }
+        $share_uri = '';
+          if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+              $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+              $share_uri = $file->uri;
+          }
+
+      $share_image = file_create_url($share_uri);
+      $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
+      if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
+        $buzz_output.= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
+        if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+          $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']);
+          $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
+
+          if (function_exists('itg_story_get_image_info')) {
+                  $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+          }
+
+          $buzz_output.= '<div class="itg-mosimage">' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
+        }
+        if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
+                $buzz_output.= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
+        }
+        $buzz_output.= '</li>';
+        $buzz++;
+        }
+      }
+          $buzz_output.= '</ul>';
+  }
+  $buzz_output = str_replace('src="','width="100%" src="',$buzz_output);
+  $buzz_output = str_replace("src='","width='100%' src='",$buzz_output);
+  return $buzz_output;
+}
+
+/**
+ * Function for getting the factroid token data from the body
+ * @param String $str
+ * @param object $node
+ * @return string  
+ */
+function factroid_story_body($str,$node){
+  $factoidsBlock = '';
+  if (isset($node->field_story_template_factoids) && !empty($node->field_story_template_factoids)) {
+    $factoidsSocialShare['title'] = $node->field_story_factoids_title[LANGUAGE_NONE][0]['value'];
+    $factoidsSocialShare_title = preg_replace("/'/", "\\'", $factoidsSocialShare['title']);
+    $factoidsSocial_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
+    $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
+    $factoidsSocialShare['icons'] = '<div class="factoids-page">
+      <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div></div>';
+      $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
+          foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
+            $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
+            }
+          $factoidsSocialShare['slider'] .= '</ul></div>';
+          $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
+  }
+  $str = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $str);
   return $str;
 }
 
+/**
+ * function for getting the listicle token data from the node body
+ * @param string $str
+ * @param object $node
+ * @return string 
+ */
 function listicle_story_body($str, $node){
-
-                  $listicle_output = '';
-                  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-                  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-                   $listicle_output .= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
-                  }
-                  $buzz_output.= '';
-                  $num = 1;
-                  $listicle_output.= '<ul class="listicle-detail">';
-                  foreach ($node->field_story_listicle['und'] as $buzz_item) {
-                    $listicletype = '';
+  $listicle_output = '';
+  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+    $listicle_output .= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+  }
+  $buzz_output.= '';
+  $num = 1;
+  $listicle_output.= '<ul class="listicle-detail">';
+    foreach ($node->field_story_listicle['und'] as $buzz_item) {
+      $listicletype = '';
                     
-                    $field_collection_id = $buzz_item['value'];
-                    $entity = entity_load('field_collection_item', array($field_collection_id));
-                    $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
-                    $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
-                    //$color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
-                    $color = $entity[$field_collection_id]->field_listicle_color_new['und'][0]['jquery_colorpicker'];
-                    $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                    $color = ($color) ? $color : '#000000';
-                    if ($li_type == 'bullet_points') {
-                      $listicle_output.= '<span class="bullet_points"></span>';
-                    }
-                    else {
-                      $listicle_output.= '<span>' . $num . '</span>';
-                    }
-                    if (isset($type)) {
-                      $listicletype = '<span class="listicle-type" style="color: #' . $color . '">' . $type . ': </span>';
-                    }
-                    $listicle_output.= '<li>' . $listicletype . $description . '</li>';
-                    $num++;
-                  }
-                   $listicle_output.= '</ul>';
-                  //print $listicle_output;
-                  $str = str_replace('[ITG:LISTICLES]', $listicle_output, $str);
-                  
-                 }
-                 return $str;
+      $field_collection_id = $buzz_item['value'];
+      $entity = entity_load('field_collection_item', array($field_collection_id));
+      $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
+      $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
+      //$color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
+      $color = $entity[$field_collection_id]->field_listicle_color_new['und'][0]['jquery_colorpicker'];
+      $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
+      $color = ($color) ? $color : '#000000';
+      if ($li_type == 'bullet_points') {
+        $listicle_output.= '<span class="bullet_points"></span>';
+        }
+        else {
+          $listicle_output.= '<span>' . $num . '</span>';
+        }
+        if (isset($type)) {
+          $listicletype = '<span class="listicle-type" style="color: #' . $color . '">' . $type . ': </span>';
+        }
+        $listicle_output.= '<li>' . $listicletype . $description . '</li>';
+        $num++;
+    }
+    $listicle_output.= '</ul>';
+    //print $listicle_output;
+    $str = str_replace('[ITG:LISTICLES]', $listicle_output, $str);
+    }
+    return $str;
 }
 
 /**
