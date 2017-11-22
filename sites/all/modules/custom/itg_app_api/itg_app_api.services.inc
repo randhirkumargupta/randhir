@@ -3223,13 +3223,16 @@ function itg_rapid_api_signup($token) {
 
             if ($uid) {
                 $result = localSignup($params);
-                $SimpleSAMLSessionID = $_COOKIE['SimpleSAMLSessionID'];
+                $cookie_val = getSmlCookie(); 
+                $session_id = $cookie_val['session_id'];
+                $session_name = $cookie_val['session_name'];
                 $result_obj = json_decode($result);
                 $account['status_code'] = "1";
                 $account['status_message'] = "";
                 $account['data']['user_id'] = "$uname";
                 $account['data']['auth_token'] = "$result->token";
-                $account['data']['SimpleSAMLSessionID'] = "$SimpleSAMLSessionID";
+                $account['data']['session_id'] = "$session_id";
+                $account['data']['session_name'] = "$session_name";
                 //$account['data']['otp_status'] = "1";
             } else {
                 watchdog('user', 'Duplicate signup attempt for %username.', array('%username' => $params['user_id']));
@@ -3284,7 +3287,9 @@ function itg_rapid_api_signup($token) {
 
         if ($uid) {
             $local_account = fblogin($data);
-            $SimpleSAMLSessionID = $_COOKIE['SimpleSAMLSessionID'];
+            $cookie_val = getSmlCookie(); 
+            $session_id = $cookie_val['session_id'];
+            $session_name = $cookie_val['session_name'];
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
             $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
@@ -3300,7 +3305,8 @@ function itg_rapid_api_signup($token) {
                 $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
                 $account['data']['auth_token'] = "$auth_token";
-                $account['data']['SimpleSAMLSessionID'] = "$SimpleSAMLSessionID";
+                $account['data']['session_id'] = "$session_id";
+                $account['data']['session_name'] = "$session_name";
             } else {
                 watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
                 //return services_error(t('Wrong username or password.'), 401);
@@ -3363,7 +3369,9 @@ function itg_rapid_api_signup($token) {
 
         if ($uid) {
             $local_account = fblogin($data);
-            $SimpleSAMLSessionID = $_COOKIE['SimpleSAMLSessionID'];
+            $cookie_val = getSmlCookie(); 
+            $session_id = $cookie_val['session_id'];
+            $session_name = $cookie_val['session_name'];
 
             $uid = $local_account->user->uid;
             $name = $local_account->user->name;
@@ -3379,7 +3387,8 @@ function itg_rapid_api_signup($token) {
                 $account['status_message'] = "";
                 $account['data']['user_id'] = "$name";
                 $account['data']['auth_token'] = "$auth_token";
-                $account['data']['SimpleSAMLSessionID'] = "$SimpleSAMLSessionID";
+                $account['data']['session_id'] = "$session_id";
+                $account['data']['session_name'] = "$session_name";
             } else {
                 watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
                 //return services_error(t('Wrong username or password.'), 401);
@@ -3454,8 +3463,9 @@ function itg_rapid_api_login_request($token) {
     if ($uid) {
         //$local_account = localSignup($params);
         $local_account = localLogin($params);
-        $cookie_val = getSmlCookie();
-        p($cookie_val);
+        $cookie_val = getSmlCookie(); 
+        $session_id = $cookie_val['session_id'];
+        $session_name = $cookie_val['session_name'];
         $uid = $local_account->user->uid;
         $name = $local_account->user->name;
         $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
@@ -3495,7 +3505,8 @@ function itg_rapid_api_login_request($token) {
             $account['data']['profile_image'] = "$profile_image";
             $account['data']['gender'] = "$gender";
             $account['data']['date_of_birth'] = "$date_of_birth";
-            $account['data']['SimpleSAMLSessionID'] = "$SimpleSAMLSessionID";
+            $account['data']['session_id'] = "$session_id";
+            $account['data']['session_name'] = "$session_name";
             
 
             // query for insert data into itg_app_device - $action $token
