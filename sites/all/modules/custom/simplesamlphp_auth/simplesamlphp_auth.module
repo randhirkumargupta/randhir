@@ -1427,7 +1427,7 @@ function simplesamlphp_auth_get_attributes($attribute = NULL) {
  * Helper function for image upload
  */
 function simplesaml_twitter_image($url) {
- if (!empty($url)) {
+if (!empty($url)) {
     watchdog('sso_image_url', '<pre>' . $url . '</pre>');
     $sso_image_fid = '';
     $imagedata = file_get_contents($url);
@@ -1436,7 +1436,7 @@ function simplesaml_twitter_image($url) {
     try {
     $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
     $file = file_load($file_data_temp->fid);
-    file_usage_add($file, 'itg_sso_image', 'file', 4);
+    file_usage_add((object)$file, 'itg_sso_image', 'file', 4);
     $sso_image_fid = $file_data_temp->fid;
     }
     catch (Exception $e) {
