@@ -1,12 +1,13 @@
 <?php
+print_r($this->data['error']);
 /* Custom check for redirecting user back to site from error page */
-$returnto = $_GET['ReturnTo'];
+/*$returnto = $_GET['ReturnTo'];
 $explode_returnto_val = explode('/', $returnto);
 $return_uri = base64_decode(end($explode_returnto_val));
 if(!empty($this->data['error']['exceptionMsg']) && ($this->data['error']['exceptionMsg'] == 'SimpleSAML_Error_UserAborted: USERABORTED')) {
   header('location:'.$return_uri);
   exit();
-}
+}*/
 /* End here */
 
 $this->data['header'] = $this->t($this->data['dictTitle']);
