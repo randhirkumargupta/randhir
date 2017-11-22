@@ -3454,7 +3454,7 @@ function itg_rapid_api_login_request($token) {
     if ($uid) {
         //$local_account = localSignup($params);
         $local_account = localLogin($params);
-
+p($_COOKIE);
         $uid = $local_account->user->uid;
         $name = $local_account->user->name;
         $field_logged_in_count = $local_account->user->field_logged_in_count['und'][0]['value'];
@@ -3464,7 +3464,7 @@ function itg_rapid_api_login_request($token) {
             $is_first_login = 0;
         }
         if ($auth_token) {
-            p($_COOKIE);
+            
             $SimpleSAMLSessionID = $_COOKIE['SimpleSAMLSessionID'];
             $field_first_name = $local_account->user->field_first_name['und'][0]['value'];
             $field_last_name = $local_account->user->field_last_name['und'][0]['value'];
