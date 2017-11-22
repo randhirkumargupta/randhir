@@ -1,15 +1,16 @@
 <?php
-$returnto = $_GET['ReturnTo'];
-print_r($returnto);
-print_r($this->data['error']);
 /* Custom check for redirecting user back to site from error page */
-/*$returnto = $_GET['ReturnTo'];
+$returnto = $_GET['ReturnTo'];
 $explode_returnto_val = explode('/', $returnto);
 $return_uri = base64_decode(end($explode_returnto_val));
-if(!empty($this->data['error']['exceptionMsg']) && ($this->data['error']['exceptionMsg'] == 'SimpleSAML_Error_UserAborted: USERABORTED')) {
+if(!empty($this->data['error']['exceptionMsg']) && ($this->data['error']['exceptionMsg'] == 'SimpleSAML_Error_UserAborted: USERABORTED') &&  $this->data['error']['referer'] != 'https://www.facebook.com/') {
   header('location:'.$return_uri);
   exit();
-}*/
+}
+
+if(!empty($this->data['error']['exceptionMsg']) && ($this->data['error']['exceptionMsg'] == 'SimpleSAML_Error_UserAborted: USERABORTED') &&  $this->data['error']['referer'] != 'https://www.facebook.com/') {
+print_r(urldecode($_GET['ReturnTo']));
+}
 /* End here */
 
 $this->data['header'] = $this->t($this->data['dictTitle']);
