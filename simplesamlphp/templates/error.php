@@ -1,4 +1,7 @@
 <?php
+$returnto = $_GET['ReturnTo'];
+$explode_returnto_val = explode('/', $returnto);
+print_r($explode_returnto_val);
 print_r($this->data['error']);
 /* Custom check for redirecting user back to site from error page */
 /*$returnto = $_GET['ReturnTo'];
