@@ -344,20 +344,20 @@ function itg_story_photo_story_html($node, $primary_cat = NULL) {
   // generate the html for photo story top slider
   if (!empty($node->nid)) {
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
-    $next = itg_story_photo_story_redirect($node_id, 'next', $primary_cat);
-    $previous = itg_story_photo_story_redirect($node_id, 'prev', $primary_cat);
+    $next = itg_story_photo_story_redirect($node->nid, 'next', $primary_cat);
+    $previous = itg_story_photo_story_redirect($node->nid, 'prev', $primary_cat);
     $next_link_count = count($photo_story) - 1;
     $html = '';
     $html .= '<div class="photo-story-img multiple-photo-disc">';
     foreach ($photo_story as $key => $val) {
       if ($key == 0 && !empty($previous)) {
-        $previous_link = "<a class='fa fa-chevron-left prev-story-link' href='" . $previous . "'></a>";
+        $previous_link = "<a rel='prev' class='fa fa-chevron-left prev-story-link' href='" . $previous . "'></a>";
       }
       else {
         $previous_link = "";
       }
       if ($key == $next_link_count && !empty($next)) {
-        $next_link = "<a class='fa fa-chevron-right next-story-link' href='" . $next . "'></a>";
+        $next_link = "<a  rel='next' class='fa fa-chevron-right next-story-link' href='" . $next . "'></a>";
       }
       else {
         $next_link = "";
