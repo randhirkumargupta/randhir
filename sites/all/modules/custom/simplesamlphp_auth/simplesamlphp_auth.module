@@ -1434,7 +1434,7 @@ function simplesaml_twitter_image($url) {
     $image_extension = end(explode('.', $image_url));
     $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
     $file = file_load($file_data_temp->fid);
-    file_usage_add($file, 'itg_sso_image', 'file', 4);
+    file_usage_add($file_data_temp, 'itg_sso_image', 'file', 4);
 
     return $file_data_temp->fid;
   }
