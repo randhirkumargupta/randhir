@@ -9,7 +9,7 @@ if(!empty($this->data['error']['exceptionMsg']) && ($this->data['error']['except
 }
 
 if(!empty($this->data['error']['exceptionMsg']) && ($this->data['error']['exceptionMsg'] == 'SimpleSAML_Error_UserAborted: USERABORTED') &&  $this->data['error']['referer'] != 'https://www.facebook.com/') {
-print_r(urldecode($_GET['ReturnTo']));
+print_r(urldecode($_GET['AuthState']));
 }
 /* End here */
 
