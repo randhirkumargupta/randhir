@@ -2363,6 +2363,62 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        /* Change request */
+
+        // videodetail custom resource declaration.....
+        'videodetail' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves videodetail schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_videodetail',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        // programdetail custom resource declaration.....
+        'programdetail' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves programdetail schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_programdetail',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -3223,7 +3279,7 @@ function itg_rapid_api_signup($token) {
 
             if ($uid) {
                 $result = localSignup($params);
-                $cookie_val = getSmlCookie(); 
+                $cookie_val = getSmlCookie();
                 $session_id = $cookie_val['session_id'];
                 $session_name = $cookie_val['session_name'];
                 $result_obj = json_decode($result);
@@ -3287,7 +3343,7 @@ function itg_rapid_api_signup($token) {
 
         if ($uid) {
             $local_account = fblogin($data);
-            $cookie_val = getSmlCookie(); 
+            $cookie_val = getSmlCookie();
             $session_id = $cookie_val['session_id'];
             $session_name = $cookie_val['session_name'];
             $uid = $local_account->user->uid;
@@ -3369,7 +3425,7 @@ function itg_rapid_api_signup($token) {
 
         if ($uid) {
             $local_account = fblogin($data);
-            $cookie_val = getSmlCookie(); 
+            $cookie_val = getSmlCookie();
             $session_id = $cookie_val['session_id'];
             $session_name = $cookie_val['session_name'];
 
@@ -3463,7 +3519,7 @@ function itg_rapid_api_login_request($token) {
     if ($uid) {
         //$local_account = localSignup($params);
         $local_account = localLogin($params);
-        $cookie_val = getSmlCookie(); 
+        $cookie_val = getSmlCookie();
         $session_id = $cookie_val['session_id'];
         $session_name = $cookie_val['session_name'];
         $uid = $local_account->user->uid;
@@ -3475,7 +3531,7 @@ function itg_rapid_api_login_request($token) {
             $is_first_login = 0;
         }
         if ($auth_token) {
-            
+
             $SimpleSAMLSessionID = $_COOKIE['SimpleSAMLSessionID'];
             $field_first_name = $local_account->user->field_first_name['und'][0]['value'];
             $field_last_name = $local_account->user->field_last_name['und'][0]['value'];
@@ -3507,7 +3563,7 @@ function itg_rapid_api_login_request($token) {
             $account['data']['date_of_birth'] = "$date_of_birth";
             $account['data']['session_id'] = "$session_id";
             $account['data']['session_name'] = "$session_name";
-            
+
 
             // query for insert data into itg_app_device - $action $token
             $action = 2;
@@ -4199,7 +4255,7 @@ function itg_rapid_api_reset_password($token) {
     }
     $rand = rand();
     $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-   // echo $url; die();
+    // echo $url; die();
     $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
@@ -5279,7 +5335,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
  */
 function itg_rapid_api_testing($token) {
 
-echo $term_feed_path = "public://xml_it/photos"; die();
+    echo $term_feed_path = "public://xml_it/photos";
+    die();
 
     $str = '{
 	"status_code": "0",
@@ -5990,15 +6047,76 @@ function resetToken($uname, $token) {
             ->condition('token', $token)
             ->execute();
 }
+
 /**
  * Helper function to get cookie value
  * @return array 
  */
-function getSmlCookie(){
+function getSmlCookie() {
     $cook_val = array();
     foreach ($_COOKIE as $key => $value) {
         $cook_val['session_id'] = $key;
         $cook_val['session_name'] = $value;
-    } 
+    }
     return $cook_val;
+}
+
+/* Change request */
+
+/**
+ * Call back function for programdetail API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_programdetail($token) {
+    //valid id
+    $id = $_GET['id'];
+    $suffix = $id;
+    if (!is_numeric($id)) {
+        $id = 0;
+    }
+
+    $redis_key = "itg_rapid_api_programdetail_" . $suffix;
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = generateProgramDetail($id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/**
+ * Call back function for videodetail API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_videodetail($token) {
+    //valid id
+    $id = $_GET['id'];
+    $suffix = $id;
+    if (!is_numeric($id)) {
+        $id = 0;
+    }
+
+    $redis_key = "itg_rapid_api_videodetail_" . $suffix;
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = generateVideoDetail($id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
 }

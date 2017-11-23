@@ -74,8 +74,7 @@ function generateVideoCategoryList($tid, $pageno) {
     $order_by = 'ASC';
     $type = "videogallery";
     $photo_list_array = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
 
         // code vid=14  start
@@ -149,8 +148,8 @@ function generateVideoCategoryList($tid, $pageno) {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1=date('Y-m-d', strtotime("-90 days"));
-        $d2=date(strtotime($d1));
+        $d1 = date('Y-m-d', strtotime("-90 days"));
+        $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -355,8 +354,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $order_by = 'ASC';
     $type = "videogallery";
     $photo_list_array = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
 
         // code vid=14  start
@@ -425,8 +423,8 @@ function generateProgramCategoryList($tid, $pageno) {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1=date('Y-m-d', strtotime("-90 days"));
-        $d2=date(strtotime($d1));
+        $d1 = date('Y-m-d', strtotime("-90 days"));
+        $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -651,4 +649,221 @@ function getVedioAnchor($nid) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $anchor_id = $result[0]['field_video_anchor_target_id'];
     return $anchor_id;
+}
+
+/* Change request */
+
+/**
+ * function for generate VideoDetail
+ * @pram int $nid
+ * @return array
+ */
+function generateVideoDetail($nid) {
+    // variable declaration
+    global $base_url;
+    $field_story_source_type = array();
+    $data = array();
+    $listcount = 0;
+    if ($nid) {
+        $node = node_load($nid);
+        // node feed tag
+        $title = $node->title;
+        $type = $node->type;
+        $nid = $node->nid;
+        $created = $node->created;
+        $changed = $node->changed;
+        $field_story_kicker_text_value = $node->field_video_kicker['und']['0']['value'];
+        $field_primary_category_value = $node->field_primary_category['und']['0']['value'];
+
+        $nv_cont = getNodeViewCount($nid);
+        $alias = drupal_get_path_alias('node/' . $nid . '');
+        $weburl = $base_url . "/" . $alias;
+        $field_video_duration_value = $node->field_video_duration['und']['0']['value'];
+        // file url
+        $file_small_img_url = completeFilePath($node->field_story_small_image['und']['0']['fid']);
+        $file_medium_img_url = completeFilePath($node->field_story_medium_image['und']['0']['fid']);
+        $file_large_img_url = completeFilePath($node->field_story_large_image['und']['0']['fid']);
+        $file_extra_large_img_url = completeFilePath($node->field_story_extra_large_image['und']['0']['fid']);
+
+        $desc = $node->field_story_expert_description['und']['0']['value'];
+
+        //related content
+        $related = relatedContentNodeType($node->field_common_related_content['und']['0']['value']);
+
+        $field_story_reporter_target_id = $node->field_story_reporter['und']['0']['target_id'];
+        $reporter_node = itg_common_get_node_title($field_story_reporter_target_id);
+        //video url start
+        $field_video_upload = $node->field_video_upload['und']['0']['value'];
+        $file_id = file_usage($field_video_upload);
+        //to get the video of all the other formats
+        $load_collection = field_collection_item_load($field_video_upload);
+
+        $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+
+        // return all the video details
+        $source_type = $node->field_story_source_type['und']['0']['value'];
+        $videotag = video_detail_formats($nid, $source_type);
+
+        // create date formating
+        $firebase_url = get_node_firebase_weburl($nid);
+
+        if ($created) {
+            $create_datetime = date("Y-m-d H:i:s", $created);
+            $create_date = date("Y-m-d H:i:s", $created);
+        } else {
+            $create_datetime = "";
+            $create_date = "";
+        }
+        if ($changed) {
+            $changed_datetime = date("Y-m-d H:i:s", $changed);
+        } else {
+            $changed_datetime = "";
+        }
+
+        $photo_list_array[$listcount]['v_id'] = "$nid";
+        $photo_list_array[$listcount]['v_title'] = "$title";
+        $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
+        $photo_list_array[$listcount]['v_byline'] = "$reporter_node";
+        $photo_list_array[$listcount]['v_short_desc'] = "$desc";
+        $photo_list_array[$listcount]['v_small_image'] = "$file_small_img_url";
+        $photo_list_array[$listcount]['v_large_image'] = "$file_large_img_url";
+        $photo_list_array[$listcount]['v_extralarge_image'] = "$file_extra_large_img_url";
+        if (!empty($videotag['dailymotion'])) {
+            $photo_list_array[$listcount]['v_is_default_player'] = "1";
+            $photo_list_array[$listcount]['v_url'] = $videotag['dailymotion']['video_id'];
+            if ($videotag['dailymotion']['bitate_url']['download_url'])
+                $photo_list_array[$listcount]['v_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
+            else
+                $photo_list_array[$listcount]['v_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+        }
+        elseif (!empty($videotag['migrated'])) {
+            $photo_list_array[$listcount]['v_is_default_player'] = "0";
+            $photo_list_array[$listcount]['v_url'] = $videotag['migrated']['video_path_mp4'];
+            $photo_list_array[$listcount]['v_download_url'] = $videotag['migrated']['video_path_mp4']; //$video_path_mp4
+        }
+        $term_pri = taxonomy_term_load($field_primary_category_value);
+        $term_name_pri = $term_pri->name;
+        $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
+        $photo_list_array[$listcount]['v_comment_count'] = "10";
+        $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
+        $photo_list_array[$listcount]['v_updated_datetime'] = "$changed_datetime";
+        $photo_list_array[$listcount]['v_duration'] = "$field_video_duration_value";
+        $photo_list_array[$listcount]['v_show_ad'] = "0";
+        $photo_list_array[$listcount]['v_video_size'] = "300";
+        $photo_list_array[$listcount]['v_subcategory_id'] = "$field_primary_category_value";
+        $photo_list_array[$listcount]['v_subcategory_title'] = "$term_name_pri";
+    }
+    $data['status_code'] = 1;
+    $data['status_message'] = "";
+    $data['data'] = $photo_list_array;
+    return $data;
+}
+
+/**
+ * function for  generateProgramDetail
+ * @pram int $nid
+ * @return array
+ */
+function generateProgramDetail($nid) {
+    // variable declaration
+    global $base_url;
+    $listcount = 0;
+    $photo_list_array = array();
+    $data = array();
+    if ($nid) {
+        // node feed tag
+        $node = node_load($nid);
+        $title = $node->title;
+        $type = $node->type;
+        $nid = $node->nid;
+        $created = $node->created;
+        $changed = $node->changed;
+        $field_story_kicker_text_value = $node->field_video_kicker['und']['0']['value'];
+        $nv_cont = getNodeViewCount($nid);
+        $alias = drupal_get_path_alias('node/' . $nid . '');
+        $weburl = $base_url . "/" . $alias;
+        $field_video_duration_value = $node->field_video_duration['und']['0']['value'];
+        // file url
+        $file_small_img_url = completeFilePath($node->field_story_small_image['und']['0']['fid']);
+        $file_medium_img_url = completeFilePath($node->field_story_medium_image['und']['0']['fid']);
+        $file_large_img_url = completeFilePath($node->field_story_large_image['und']['0']['fid']);
+        $file_extra_large_img_url = completeFilePath($node->field_story_extra_large_image['und']['0']['fid']);
+
+        //related content
+        $related = relatedContentNodeType($node->field_common_related_content['und']['0']['value']);
+        $field_story_reporter_target_id = $node->field_story_reporter['und']['0']['target_id'];
+        $reporter_node = itg_common_get_node_title($field_story_reporter_target_id);
+        //video url start
+        $field_video_upload = $node->field_video_upload['und']['0']['value'];
+        $file_id = file_usage($field_video_upload);
+        //to get the video of all the other formats
+        $load_collection = field_collection_item_load($field_video_upload);
+        $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+        $anchor_id = getVedioAnchor($nid);
+        $desc = $node->field_story_expert_description['und']['0']['value'];
+
+        //display all the video sounce check and format
+        $source_type = $node->field_story_source_type['und']['0']['value'];
+        $videotag = video_detail_formats($nid, $source_type);
+        $filesize = $videotag['dailymotion']['filsize'];
+        //video url end
+        // create date formating
+        $firebase_url = get_node_firebase_weburl($nid);
+
+        if ($created) {
+            $create_datetime = date("Y-m-d H:i:s", $created);
+            $create_date = date("Y-m-d H:i:s", $created);
+        } else {
+            $create_datetime = "";
+            $create_date = "";
+        }
+        if ($changed) {
+            $changed_datetime = date("Y-m-d H:i:s", $changed);
+        } else {
+            $changed_datetime = "";
+        }
+
+        $photo_list_array[$listcount]['p_id'] = "$nid";
+        $photo_list_array[$listcount]['p_title'] = "$title";
+        $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
+        $photo_list_array[$listcount]['p_byline'] = "$reporter_node";
+        $photo_list_array[$listcount]['p_short_desc'] = "$desc";
+        $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
+        $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
+        $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
+
+        //if($video_path_mp4){
+        if (!empty($videotag['dailymotion'])) {
+            $photo_list_array[$listcount]['p_is_default_player'] = "1";
+            $photo_list_array[$listcount]['p_url'] = $videotag['dailymotion']['video_id'];
+            if ($videotag['dailymotion']['bitate_url']['download_url'])
+                $photo_list_array[$listcount]['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
+            else
+                $photo_list_array[$listcount]['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+        }
+        elseif (!empty($videotag['migrated'])) {
+            $video_path_mp4 = $video_path_info['video_path_mp4'];
+            $photo_list_array[$listcount]['p_is_default_player'] = "0";
+            $photo_list_array[$listcount]['p_url'] = $videotag['migrated']['video_path_mp4'];
+            $photo_list_array[$listcount]['p_download_url'] = $videotag['migrated']['video_path_mp4'];
+        }
+        $field_primary_category_value = $node->field_primary_category['und']['0']['value'];
+        $term = taxonomy_term_load($field_primary_category_value);
+        $term_name = $term->name;
+        $trem_id = $term->tid;
+        $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
+        $photo_list_array[$listcount]['p_comment_count'] = "10";
+        $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
+        $photo_list_array[$listcount]['p_updated_datetime'] = "$changed_datetime";
+        $photo_list_array[$listcount]['p_duration'] = "$field_video_duration_value";
+        $photo_list_array[$listcount]['p_show_ad'] = "0";
+        $photo_list_array[$listcount]['p_subcategory_id'] = "$trem_id";
+        $photo_list_array[$listcount]['p_subcategory_title'] = "$term_name";
+        $photo_list_array[$listcount]['p_program_size'] = "$filesize";
+        $photo_list_array[$listcount]['p_anchor_id'] = "$anchor_id";
+    }
+    $data['status_code'] = 1;
+    $data['status_message'] = "";
+    $data['data'] = $photo_list_array;
+    return $data;
 }
