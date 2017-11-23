@@ -597,6 +597,9 @@ function itg_layout_getsectioncarddata_new_pre($sectinno, $section) {
   }
 }
 
+/**
+ * Implements make_graph().
+ */
 function make_graph() {
   drupal_add_js('https://code.highcharts.com/highcharts.js', array('type' => 'external', 'scope' => 'footer', 'weight' => 5));
   $section = arg(1);

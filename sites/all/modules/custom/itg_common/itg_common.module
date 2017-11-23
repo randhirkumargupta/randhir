@@ -1066,16 +1066,10 @@ function itg_content_inactive() {
     $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
     $node_data->status = 0;
-//    if($node->type == 'videogallery') {
-//      if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
-//        itg_videogallery_node_publish_to_unpublish($node->nid);
-//      }
-//    }
     node_save($node_data);
     itg_widget_handle_unpublished_node($node->nid);
   }
   itg_watchdog("nodes_expiry" , $nodeid);
-  //watchdog("cron content expiry", '<pre>' . print_r($nodeid, TRUE) . '</pre>');
 }
 
 

@@ -1,6 +1,5 @@
 <?php
 drupal_add_library('flexslider', 'flexslider');
-
 drupal_add_js('jQuery(window).load(function() {
             jQuery(".flexslider").flexslider({
             animation: "slide",
@@ -9,7 +8,6 @@ drupal_add_js('jQuery(window).load(function() {
             });
             });', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5)
 );
-
 drupal_add_css('.flex-caption {
               width: 96%;
               padding: 2%;
@@ -25,20 +23,14 @@ drupal_add_css('.flex-caption {
 
 <div class="flexslider">
     <ul class="slides"> 
-        <?php foreach ($rows as $index => $row) {
-            ?>
+        <?php foreach ($rows as $index => $row) { ?>
+          <li><?php print $row['field_story_extra_large_image']; ?> 
+              <div class="detail">
+                  <p class="flex-count"><i class="fa fa-camera"></i> <?php print $row['delta']; ?> <?php print t('Images'); ?></p>
+                  <p class="flex-caption"><?php print ucfirst($row['title']); ?></p>
+              </div>
 
-            <li><?php print $row['field_story_extra_large_image']; ?> 
-
-
-
-
-                <div class="detail">
-                    <p class="flex-count"><i class="fa fa-camera"></i> <?php print $row['delta']; ?> <?php print t('Images'); ?></p>
-                    <p class="flex-caption"><?php print ucfirst($row['title']); ?></p>
-                </div>
-
-            </li>
-<?php }; ?>
+          </li>
+        <?php }; ?>
     </ul>
 </div>

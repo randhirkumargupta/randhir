@@ -13,14 +13,12 @@
 function itg_widget_setids() {
     $datatoset = array();
     $datatoset = $_SESSION[$_POST['formid']];
-
     if (is_array($_POST['checkid'])) {
         foreach ($_POST['checkid'] as $ids) {
             if ($_POST['type'] == 'ADD') {
                 $datatoset[] = $ids;
             } elseif ($_POST['type'] == 'REMOVE') {
                 if (($key = array_search($ids, $datatoset)) !== FALSE) {
-
                     unset($datatoset[$key]);
                 }
             }
@@ -283,11 +281,7 @@ function itg_widget_keycandidate_form($form, $form_state) {
     $state_class = "visible";
     $states_neame = array();
     $states_neame = get_all_state($form_state['input']['cat_value']);
-//    if (isset($_POST['state_value'])) {
-//        $pre_fix = "<div style='display:none'>";
-//        $suf_fix = "</div>";
-//    }
-
+    
     $form['state_value'] = array(
         '#type' => 'select',
         '#title' => 'State <span class="form-required" title="This field is required.">*</span>',
@@ -504,28 +498,19 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         $itg_widget_order_data->condition('content_type', $actual_weight_type)
                 ->condition('widget', 'section_wise_widget')
                 ->execute()->fetchAll();
-//pr($itg_widget_order_data);
-//Prepare weight crosspond to nid.
+        //Prepare weight crosspond to nid.
         $select_map_array = array();
         foreach ($itg_widget_order_data as $order_data) {
             $select_map_array[$order_data->nid] = $order_data->weight;
         }
 
-// Prepare weights in array. 
-//    $select_map_array_weight = array();
-//    foreach ($itg_widget_order_data as $order_data) {
-//      $select_map_array_weight[] = $order_data->weight;
-//    }
-        //pr($form['draggableviews']);
+        // Prepare weights in array. 
         foreach ($form['draggableviews'] as $key => $weight) {
-
-
-// echo $key."</br>";
-// make options to weight drop down equal to saved weight value.
+            // make options to weight drop down equal to saved weight value.
             //$form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc($select_map_array_weight);
             $form['draggableviews'][$key]['weight']['#options'] = drupal_map_assoc(array($select_map_array[$form['draggableviews'][$key]['id']['#value']] => $select_map_array[$form['draggableviews'][$key]['id']['#value']]));
-//$form['draggableviews'][$key]['weight']['#options'] = array($key => $key);
-// make default selected value as saved in database.
+            //$form['draggableviews'][$key]['weight']['#options'] = array($key => $key);
+            // make default selected value as saved in database.
             $form['draggableviews'][$key]['weight']['#default_value'] = $select_map_array[$form['draggableviews'][$key]['id']['#value']];
             $form['draggableviews'][$key]['weight']['#validated'] = TRUE;
         }
@@ -609,7 +594,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
         unset($form['field_section']['und']['#options']);
         $form['field_section']['und']['#options'] = $op;
     }
-// Hiding section filed from basic page (Static page node form)
+    // Hiding section filed from basic page (Static page node form)
     if ($form_id == 'page_node_form') {
         //   drupal_add_css("div.form-item-field-page-section-und {display:none}", 'inline');
     }
@@ -617,7 +602,7 @@ function itg_widget_form_alter(&$form, &$form_state, $form_id) {
     if (in_array($form_id, itg_widget_order_reorder_form())) {
         $form['actions']['submit']['#submit'][] = "itg_widget_update_weight_during_order_reorder";
     }
-// Assign deafult values in case of checkbox are checked.
+    // Assign deafult values in case of checkbox are checked.
     $form = get_sessions_of_ticked_nodes($form);
 }
 
@@ -3041,9 +3026,7 @@ function itg_widget_node_update($node) {
         }
 
         if (isset($arg[1]) && $arg[1] != 'add') {
-            if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
-                __itg_widget_helper_data_insert($node->nid);
-            }
+            __itg_widget_helper_data_insert($node->nid);
             watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
