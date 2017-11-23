@@ -24,10 +24,11 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   $edit_mobile_link = '<a href="'. $edit_mobile_url .'">Edit</a>';
   
   $user_detail = user_load($user->uid);
-  if (is_numeric($user_detail->name)) {
-    $mobile = $user_detail->name;
-  }
-  else if(strpos($user_detail->mail, '@twitter.com') !== false || strpos($user_detail->mail, '@facebook.com') !== false) {
+  //if (is_numeric($user_detail->name)) {
+   // $mobile = $user_detail->name;
+  //}
+  //else 
+  if(strpos($user_detail->mail, '@twitter.com') !== false || strpos($user_detail->mail, '@facebook.com') !== false) {
         if (array_key_exists(FRONT_USER, $user->roles)) {
         /*$authname = simplesaml_get_authname($user->uid);
         db_set_active('sso_db');
