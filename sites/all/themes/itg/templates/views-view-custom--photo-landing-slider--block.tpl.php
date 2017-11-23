@@ -338,7 +338,7 @@ if(isset($_GET['photo']) && $_GET['photo']) {
           }
           jQuery(".slick-arrow , li.slick-slide").on("click", function () {
               var active_slide = jQuery(".slick-active").attr("data-slick-index");
-              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+              var real_node_url = "<?php echo $base_url.'/'.$photo_node->path['alias']; ?>";
               if (active_slide > 0) {
                   ++active_slide;
                   //window.history.pushState(null, null, real_node_url + "/" + active_slide);
