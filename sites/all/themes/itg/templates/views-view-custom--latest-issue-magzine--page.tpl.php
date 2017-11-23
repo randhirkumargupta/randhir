@@ -73,9 +73,12 @@
   <?php
   global $base_url;
 // category based story according issue date
-  $data = itg_msi_issue_category_data($issue_attribute_date);
-
-  $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date);
+  if (function_exists('itg_msi_issue_category_data')) {
+    $data = itg_msi_issue_category_data($issue_attribute_date);
+  }
+  if (function_exists('itg_msi_issue_suppliment_data')) {
+    $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date);
+  }
   if (isset($supplement_value)) {
     $class = '';
     print '<div class="col-md-6 col-sm-6 col-xs-12 mt-50">';
@@ -100,21 +103,23 @@
           else {
             $img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
           }
+          // Get the short headline for a node data
+          $shortheadline_cat = $value->field_story_short_headline_value;
           if (!empty($lock_story)) {
             $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
-            $title = l($value->title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+            $title = l(t($shortheadline_cat), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
           }
           else {
             $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
-            $title = l($value->title, 'node/' . $value->nid);
+            $title = l(t($shortheadline_cat), 'node/' . $value->nid);
           }
         }
         elseif ($key > 0 && $key < 3) {
           if (!empty($lock_story)) {
-            $sub_title .= '<p class="lock">' . l($value->title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
+            $sub_title .= '<p class="lock">' . l(t($value->field_story_short_headline_value), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
           }
           else {
-            $sub_title .= '<p>' . l($value->title, 'node/' . $value->nid) . '</p>';
+            $sub_title .= '<p>' . l(t($value->field_story_short_headline_value), 'node/' . $value->nid) . '</p>';
           }
         }
       }
@@ -161,21 +166,23 @@
           else {
             $supp_img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
           }
+          // Get the short headline for a node data
+          $shortheadline_supp = $s_value->field_story_short_headline_value;
           if (!empty($lock_story)) {
             $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
-            $supp_title = l($s_value->title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+            $supp_title = l(t($shortheadline_supp), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
           }
           else {
             $supp_img = l($supp_img_url, 'node/' . $s_value->nid, array('html' => TRUE));
-            $supp_title = l($s_value->title, 'node/' . $s_value->nid);
+            $supp_title = l(t($shortheadline_supp), 'node/' . $s_value->nid);
           }
         }
         elseif ($key > 0 && $key < 3) {
           if (!empty($lock_story)) {
-            $sup_sub_title .= '<p class="lock">' . l($s_value->title, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
+            $sup_sub_title .= '<p class="lock">' . l(t($s_value->field_story_short_headline_value), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
           }
           else {
-            $sup_sub_title .= '<p>' . l($s_value->title, 'node/' . $s_value->nid) . '</p>';
+            $sup_sub_title .= '<p>' . l(t($s_value->field_story_short_headline_value), 'node/' . $s_value->nid) . '</p>';
           }
         }
       }      
