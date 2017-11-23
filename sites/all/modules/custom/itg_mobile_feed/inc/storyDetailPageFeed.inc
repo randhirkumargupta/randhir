@@ -83,10 +83,10 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $body_android = getBodyDataForAndroid($full_body,$node);
       $output .= getMobileFeedXmlHeader();
       $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit><![CDATA[" . $reporter_node . "]]> </credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city><![CDATA[" . $city . "]]></city><courtesy><![CDATA[]]></courtesy>";
-      $output .= "<body><![CDATA[" . $full_body . "]]></body>";
+      $output .= "<body><![CDATA[" . html_entity_decode($full_body) . "]]></body>";
       $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
       //get video tag
-      //$videotag = getVideoTag($node);
+      $videotag = getVideoTag($node);
       if ($videotag) {
         $output .= $videotag;
       }
@@ -152,36 +152,72 @@ function getVideoTag($node) {
   $nodelist = $xpath->query("//iframe");
   // gets the 1st image
   $node = $nodelist->item(0);
-  $add_video = getStringBetween($html, '<div class="itgvideo">', '</div>');
-  if ($node->attributes->length > 0) {
-    //It has Youtube video
-     $src =  $node->attributes->getNamedItem('src')->nodeValue;
-    //$src = '';
-  }elseif ($add_video != '') {
-    //It has uploaded video
-    if (strpos($add_video, "dailymotion_video_dir") > 0) {
-      // It has Daily Motion Video
-      $video_name = substr(strstr($add_video, 'dir/'), 4);
-      $video_node = dailymotion_video_name_to_nid($video_name);
-      $video_field = node_load($video_node);
-      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
-      $src = $add_video;
-    }
-    else {
-      //It is Migrated video
-      $video_nid = migrated_video_to_nid($add_video);
-      $video_field = node_load($video_nid);
-      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
-      $src = $add_video;
-    }
-  }
-  else {
+   $iframe_code = getStringBetween($html, '<iframe', '</iframe>');
+   $video_path = getStringBetween($iframe_code, 'src="', '"');
+  if (strpos($video_path, '/embed/')) { // Migrated video
+     $encrypted_nid = end(explode("/",$video_path));
+     $video_nid = decryptForEmbed(encrypted_nid);
+     $node_id = embed_video_nid($video_nid);
+     $node = node_load($node_id);
+     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+     if(!empty($node->field_story_medium_image['und'][0]['uri'])){
+       $img_url = file_create_url($node->field_story_medium_image['und'][0]['uri']);
+     }
+     $videotag = video_detail_formats($node->nid,$source_type);
+  }elseif(strpos($video_path, '/embeded-video/')){ //Daily motion video
+    $dailymotion_vid = end(explode("/",$video_path));
+    //$daily_motion_video_details = itg_videogallery_get_all_video_info_by_video_id($dailymotion_vid);
+    $video_detail = array();
+    $video_status = 'dailymotion';
+    $query = db_select('itg_video_bitrates_data', 'itgv');
+    $query->fields('itgv', array('bitate_url', 'bitates_field'));
+    $query->condition('itgv.video_id', $dailymotion_vid);
+    $result2 = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     
+    $video_format = array();
+    foreach ($result2 as $res_data) {
+      $video_format[$res_data['bitates_field']] = $res_data['bitate_url'];
+    }
+    $video_path_mp4 = "https://www.dailymotion.com/embed/video/" . $dailymotion_vid . "";
+    $video_format['videoparts_mp4'] = $video_path_mp4;
+    $video_detail[$video_status]['bitate_url'] = $video_format;
+    $dailymotion_download = dailymotion_download_video_uri($video_id);
+    $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
+    if(!empty($video_field->field_story_medium_image['und'][0]['uri'])){
+      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+    }
+    $videotag = $video_detail;
+    //print_r($videotag);
   }
 
-  if ($src) {
-    $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
-     //$videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+//  if ($node->attributes->length > 0) {
+//    //It has Youtube video
+//     $src =  $node->attributes->getNamedItem('src')->nodeValue;
+//    //$src = '';
+//  }elseif ($add_video != '') {
+//    //It has uploaded video
+//    if (strpos($add_video, "dailymotion_video_dir") > 0) {
+//      // It has Daily Motion Video
+//      $video_name = substr(strstr($add_video, 'dir/'), 4);
+//      $video_node = dailymotion_video_name_to_nid($video_name);
+//      $video_field = node_load($video_node);
+//      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+//      $src = $add_video;
+//    }
+//    else {
+//      //It is Migrated video
+//      $video_nid = migrated_video_to_nid($add_video);
+//      $video_field = node_load($video_nid);
+//      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+//      $src = $add_video;
+//    }
+//  }
+  if (!empty($videotag['migrated'])) { 
+    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
+  }elseif (!empty($videotag['dailymotion'])) {
+    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
+  }else{
+    $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
   }
   return $videotag;
 }
@@ -293,5 +329,6 @@ function getImgTag($node) {
   }
   return $imgtag; 
 }
+
 
 

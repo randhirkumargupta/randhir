@@ -1393,3 +1393,35 @@ function migrated_video_transcoding($nid){
     }
     return $video_size;
 }
+/**
+ * function for converting ifrmae video code to video id
+ * @param string
+ * @return string 
+ */
+function decryptForEmbed($string){
+     $decrypter = gmp_strval(gmp_init($string, 36));
+     $decrypter = gmp_shiftr($decrypter, 5);
+     $decrypter = gmp_export($decrypter);
+     return $decrypter;
+}
+/**
+ * return the gmap value
+ */
+function gmp_shiftr($x,$n) { // shift right
+   return(gmp_div($x,gmp_pow(2,$n)));
+}
+
+/**
+ * @param string migrated video video id
+ * @return the nid of the cms
+ */
+function embed_video_nid($video_id){
+//  $video_id = '27803';
+  if($video_id != ''){
+       $qry = db_select('migrate_map_itgvideogallery', 'mv')
+          ->fields('mv', array('destid1'))
+          ->condition('mv.sourceid1',$video_id )
+          ->execute()->fetchField();
+  return $qry;
+  }
+}
