@@ -333,12 +333,12 @@ if(isset($_GET['photo']) && $_GET['photo']) {
       jQuery(document).ready(function () {
         var query_val = get_photo_url_query('photo' , window.location);
           if(query_val != null) {
-              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+              var real_node_url = "<?php echo $base_url."/".$photo_node->path['alias']; ?>";
               ChangeUrl("page", real_node_url +"/"+query_val);
           }
           jQuery(".slick-arrow , li.slick-slide").on("click", function () {
               var active_slide = jQuery(".slick-active").attr("data-slick-index");
-              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+                       var real_node_url = "<?php echo $base_url.'/'.$photo_node->path['alias']; ?>";
               if (active_slide > 0) {
                   ++active_slide;
                   //window.history.pushState(null, null, real_node_url + "/" + active_slide);

@@ -155,7 +155,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
             $field_story_kicker_text = isset($node_load_data->field_story_kicker_text['und'][0]['value']) ? $node_load_data->field_story_kicker_text['und'][0]['value'] : "";
             $field_story_short_headline_value = isset($node_load_data->field_story_short_headline['und'][0]['value']) ? $node_load_data->field_story_short_headline['und'][0]['value'] : "";
             $field_video_duration_value = isset($node_load_data->field_video_duration_value['und'][0]['value']) ? $node_load_data->field_video_duration_value['und'][0]['value'] : "";
-            $field_photo_see_pic_link_value = isset($node_load_data->field_photo_see_pic_link_value['und'][0]['value']) ? $node_load_data->field_photo_see_pic_link_value['und'][0]['value'] : "";
+$field_photo_see_pic_link_value = isset($node_load_data->field_photo_see_pic_link['und'][0]['value']) ? $node_load_data->field_photo_see_pic_link['und'][0]['value'] : "";
 
             $nid = $node_load_data->nid;
             if ($node_load_data->type == 'story') {
