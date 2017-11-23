@@ -158,7 +158,7 @@ function getVideoTag($node) {
    echo 'path <br>'.$video_path = getStringBetween($iframe_code, 'src="', '"');
   if (strpos($video_path, '/embed/')) { // Migrated video
      echo 'enc video id<br>'.$encrypted_nid = end(explode("/",$video_path));
-     echo 'video id '.$video_nid = decryptForEmbed(encrypted_nid);
+     echo 'video id '.$video_nid = decryptForEmbed($encrypted_nid);
      echo 'nid <br>'.$node_id = embed_video_nid($video_nid);
      $node = node_load($node_id);
      $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
