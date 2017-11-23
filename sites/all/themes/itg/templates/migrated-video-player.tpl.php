@@ -9,8 +9,16 @@ global $base_url;
 <script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
 
 <?php
-$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on);
 
+$refral_site = itg_common_get_domain($_SERVER["HTTP_REFERER"]);
+$external_side = 0;
+if (!empty($refral_site)) {
+  if (strpos($base_url, $refral_site) === false) {
+    $external_side = 1;
+    $used_on = 'embed';
+  }
+}
+$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on ,$external_side);
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
