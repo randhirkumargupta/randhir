@@ -87,7 +87,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     }
  
     $total_num_of_ques = count($ques_arr);
- 
+    $rating_num = 0;
     foreach ($ques_arr as $question_arr) {
       //Question Info
       $question_detail = entity_load('field_collection_item', array($question_arr['value']));
@@ -219,7 +219,6 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         }
         
       } elseif ($answer_type == 'rating') { // Answer option for rating
-        $rating_num = 0;
         foreach ($all_ans_options[$num] as $rating_option) {
           $arr = array(1 => '', 2 => '', 3 => '', 4 => '', 5 => '');
           $form['answer_option' . $num . '_' . $rating_num] = array(

@@ -32,7 +32,7 @@ function itg_photogallery_get_workbench_title($title) {
         $query->condition('n.title', '%' . $title . '%', 'LIKE');
         $query->condition('n.type', $content_type, '=');        
         
-        if ($state == 'mydraft-photogallery' || $state == 'my-queue-photogallery' || $state =='my-published-photogallery' || $state =='my-expired-photogallery' || $state == 'my-unpublished-photogallery' || $state == 'my-rejected-photogallery') {
+        if ($state == 'mydraft-photogallery' || $state == 'my-queue-photogallery' || $state =='my-expired-photogallery' || $state == 'my-unpublished-photogallery' || $state == 'my-rejected-photogallery') {
           $query->condition('n.uid', $user->uid);
         }
         
