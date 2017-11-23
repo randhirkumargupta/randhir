@@ -2419,6 +2419,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        // topstories custom resource declaration.....
+        'topstories' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves topstories schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_topstories',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -5334,7 +5361,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-echo phpinfo();die();
+
     echo $term_feed_path = "public://xml_it/photos";
     die();
 
@@ -6113,6 +6140,35 @@ function itg_rapid_api_videodetail($token) {
     } else {
         // call function from return data..
         $jsondata = generateVideoDetail($id);
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+/**
+ * Call back function for topstories API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_topstories($token) {
+    //valid id
+    $id = $_GET['id'];
+    $suffix = $id;
+    if (!is_numeric($id)) {
+        $id = 0;
+    }
+
+    $redis_key = "itg_rapid_api_topstories";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = topstoriesList();
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
