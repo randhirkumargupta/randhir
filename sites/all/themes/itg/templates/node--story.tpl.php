@@ -18,7 +18,7 @@ if (!empty($content)):
     $class_listicle = ' listicle-feedback';//buzz-feedback
   }
   // prepare url for sharing
-  $scheme = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://";
+  $scheme = SITE_PROTOCOL;
   $actual_link = $scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   $uri = base64_encode($actual_link);
   $short_url = shorten_url($actual_link, 'goo.gl');
@@ -973,7 +973,7 @@ if (!empty($content)):
               else:
                 ?>
                 <li class="mhide">
-                  <a title="follow story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow story'); ?></a>
+                  <a title="follow story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow the story'); ?></a>
                 </li>
             <?php endif; ?>
             </ul>

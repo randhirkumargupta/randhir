@@ -403,3 +403,17 @@ jQuery(document).ajaxSuccess(function () {
         jQuery('#' + forms[i] + ' #edit-category-tid-select-1 > option[value=0]').html("- Any -");
     }
 });
+
+jQuery(window).load(function() {
+    jQuery(".flexslider").flexslider({
+    animation: "slide",
+    prevText: "",
+    nextText: "",
+    });
+});
+
+jQuery(window).load(function() {
+    jQuery(".flexslider-video").flexslider({
+    animation: "slide"
+    });
+});

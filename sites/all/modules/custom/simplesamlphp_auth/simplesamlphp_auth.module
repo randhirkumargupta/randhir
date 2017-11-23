@@ -1438,13 +1438,20 @@ function simplesamlphp_auth_get_attributes($attribute = NULL) {
  */
 function simplesaml_twitter_image($url) {
   if (!empty($url)) {
+    watchdog('sso_image_url', '<pre>' . print_r($url, true) . '</pre>');
+    $sso_image_fid = '';
     $imagedata = file_get_contents($url);
     $image_url = 'itg' . time() . end(explode('/', $url));
     $image_extension = end(explode('.', $image_url));
-    $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
-    $file = file_load($file_data_temp->fid);
-    file_usage_add($file, 'itg_sso_image', 'file', 4);
-
-    return $file_data_temp->fid;
+    try {
+      $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
+      watchdog('sso_image_arr', '<pre>' . print_r($file_data_temp, true) . '</pre>');
+      file_usage_add((object) $file_data_temp, 'itg_sso_image', 'file', 4);
+      $sso_image_fid = $file_data_temp->fid;
+    }
+    catch (Exception $e) {
+      watchdog('SSo image exception', '<pre>' . $e->getMessage() . '</pre>');
+    }
+    return $sso_image_fid;
   }
 }
