@@ -12,7 +12,7 @@ function expiredmail_mail_content($to) {
   if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
     $node_url = l('URL', $base_url.'/node/'.$var->nid);
   } else {
-    $node_url = l('URL', array('@login-link' => $base_url . '/user/login?destination='.current_path()));
+    $node_url = t('URL', array('@login-link' => $base_url . '/user/login?destination=node/'.$var->nid));
   }
 
   $content = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 

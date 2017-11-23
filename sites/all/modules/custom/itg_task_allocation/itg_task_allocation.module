@@ -415,7 +415,7 @@ function itg_task_allocation_cronapi($op, $job = NULL) {
     'description' => 'Mail shoot after task completion date.',
     'weight' => 5,
     'callback' => 'itg_task_allocation_expirestatus_enddatemail',
-    'file' => 'include/itg_task_allocation.inc',
+    'file' => 'includes/itg_task_allocation.inc',
   );
   
   return $items;
