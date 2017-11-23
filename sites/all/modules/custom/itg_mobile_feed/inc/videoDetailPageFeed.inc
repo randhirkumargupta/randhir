@@ -380,7 +380,7 @@ function getDailymotionPath($fid, $filename) {
             $videoparts_m3u = str_replace('.mp4', $new_m3, $video_path_mp4);
         }
         //$videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
-        $videoparts_m3u8 = str_replace('http://medias3d.intoday.in', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
+        $videoparts_m3u8 = str_replace('http://indiatoday-pdelivery.akamaized.net', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
         //end         
         $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
         $video_detail[$video_status]['flv_url'] = $flv_url;

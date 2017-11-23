@@ -59,10 +59,10 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     $redis_key = "itgd_story" . $nid;
     $result_get = getRedis($redis_key);
 
-//    if ($result_get['key_value'] != "") {
-//      $output = $result_get['key_value'];
-//    }
-//    else {
+    if ($result_get['key_value'] != "") {
+      $output = $result_get['key_value'];
+    }
+    else {
       global $base_url;
       $ttl = DEFAULT_REDIS_EXPIRE_TIME;
       $node = node_load($nid);
@@ -86,9 +86,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $output .= "<body><![CDATA[" . html_entity_decode($full_body) . "]]></body>";
       $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
       //get video tag
-      if($nid == '1069004' || $nid == '1069005'){
-        $videotag = getVideoTag($node);
-      }
+      $videotag = getVideoTag($node);
       if ($videotag) {
         $output .= $videotag;
       }
@@ -122,7 +120,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       //call function getMobileFeedXmlFooter
       $output .= "</item>" . getMobileFeedXmlFooter();
       $result_set = setRedis($redis_key, $output, $ttl);
-    //}
+    }
   }
   if ($output) {
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
@@ -155,11 +153,11 @@ function getVideoTag($node) {
   // gets the 1st image
   $node = $nodelist->item(0);
    $iframe_code = getStringBetween($html, '<iframe', '</iframe>');
-   echo 'path <br>'.$video_path = getStringBetween($iframe_code, 'src="', '"');
+   $video_path = getStringBetween($iframe_code, 'src="', '"');
   if (strpos($video_path, '/embed/')) { // Migrated video
-     echo 'enc video id<br>'.$encrypted_nid = end(explode("/",$video_path));
-     echo 'video id '.$video_nid = decryptForEmbed($encrypted_nid);
-     echo 'nid <br>'.$node_id = embed_video_nid($video_nid);
+     $encrypted_nid = end(explode("/",$video_path));
+     $video_nid = decryptForEmbed($encrypted_nid);
+     $node_id = embed_video_nid($video_nid);
      $node = node_load($node_id);
      $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
      if(!empty($node->field_story_medium_image['und'][0]['uri'])){
@@ -190,9 +188,9 @@ function getVideoTag($node) {
       $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
     }
     $videotag = $video_detail;
-    print_r($videotag);
+    //print_r($videotag);
   }
-exit();
+
 //  if ($node->attributes->length > 0) {
 //    //It has Youtube video
 //     $src =  $node->attributes->getNamedItem('src')->nodeValue;
