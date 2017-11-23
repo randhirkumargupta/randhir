@@ -668,19 +668,17 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
     foreach ($result[0]['field_emoji_position_value'] as $positions) {
         $positions_array[] = $positions;
     }
-    if (in_array('left', $positions_array)) {
-      if (!empty($result[0]['field_emoji_2_value'])) {
+    if (in_array('left', $positions_array) && !empty($result[0]['field_emoji_2_value'])) {      
         // Get all the smiley images.
         preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images);
         $left_smiles = '<span class="smilies-title">';
         // Implode all images in case of muliple smiley.
         $left_smiles .= implode("", $images[0]);
 
-        $left_smiles .= '</span>';
-      }
+        $left_smiles .= '</span>';      
     }
-    if (in_array('right', $positions_array)) {
-      if (!empty($result[0]['field_emoji_value'])) {
+    if (in_array('right', $positions_array) && !empty($result[0]['field_emoji_value'])) {
+     
         // Get all the smiley images.
         preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images_2);
         // Implode all images in case of muliple smiley.
@@ -690,7 +688,7 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
         $right_smiles .= implode("", $images_2[0]);
 
         $right_smiles .= '</span>';
-      }
+      
     }
     if (count($result) && !$is_long_headline) {
       if (!empty($left_smiles) || !empty($right_smiles)) {

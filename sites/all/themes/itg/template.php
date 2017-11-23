@@ -57,15 +57,12 @@ function itg_preprocess_node(&$variables) {
       // Add new template variation.
       $variables['theme_hook_suggestions'][] = 'node__' . $title;
       $variables['static_page_menu'] = itg_block_render('menu', 'menu-about-us-page-menu');
-      /*if (function_exists('global_comment_last_record')) {
-        $variables['global_comment_last_record'] = global_comment_last_record();
-      }*/
+     
     }
   }
 
   if ($variables['type'] == 'webform') {
-    unset($variables['submitted']);
-    //$variables['submitted'] = t('Submitted by !username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
+    unset($variables['submitted']);    
   }
 
 
@@ -162,7 +159,7 @@ function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
   $arg = arg();
-  //drupal_add_js(drupal_get_path('theme', 'itg') . '/js/itg_seo_script.js');
+  
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
     $variables['theme_hook_suggestions'][] = 'page__ssoheader';

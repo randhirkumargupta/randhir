@@ -35,8 +35,9 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
           var match = /(?:https?:\/\/)?(?:\w+:\/)?[^:?#\/\s]*?([^.\s]+\.(?:[a-z]{2,}|co\.uk|org\.uk|ac\.uk|org\.au|com\.au))(?:[:?#\/]|$)/gi
                   .exec(url);
           return match ? match[1] : null;
-      } else
+      } else {
           return null;
+        }
   }
   var myUserAgent = navigator.userAgent;
   var myUserAgent = navigator.userAgent;
@@ -47,8 +48,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
   var itgdAds = "";
   if (referrer.length > 0) {
       ItgdDomain = getDomain(referrer);
-  }
-  alert(ItgdDomain);
+  } 
 
 
   //var videoSectionId=321;
