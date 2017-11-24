@@ -2179,7 +2179,6 @@ footer {
                 h2 {
                     @include font(22px,
                     28px);
-                    margin-top: -5px;
                     a {
                         @include font(22px,
                         28px);
@@ -13824,6 +13823,7 @@ span.see-picture {
     }
     .view-front-end-global-search .view-content .search-pic {
         float: left;
+        margin-right: 15px;
     }
 }
 
@@ -14700,7 +14700,6 @@ ul.pron-cons-img li img {
 
 #block-itg-videogallery-itg-videogallery-menu-content {
     margin-top: 22px;
-    /*float: left;*/
     width: 100%;
     margin-bottom: 22px;
 }
@@ -14837,7 +14836,7 @@ ul.pron-cons-img li img {
 }
 
 #block-itg-videogallery-itg-videogallery-tab-realted .related_content_tabs figcaption {
-    bottom: 11px;
+    bottom: 0px;
     left: 0;
     position: absolute;
     padding: 5px;
