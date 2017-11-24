@@ -9,7 +9,7 @@ if (!empty($data['node_data'])) :
   $photo_icon = "";
   $video_icon = "";
   $image = "<img src='" . $base_url . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' alt='' title='' />";
-  $share_desc = $share_desc_fb = "";
+  $share_desc = trim($share_desc_fb) = "";
   if ($data['node_data']->type == 'videogallery') {
     $is_videogallery = TRUE;
     $data_nid = "data-nid='" . $data['node_data']->nid . "'";
@@ -25,7 +25,7 @@ if (!empty($data['node_data'])) :
     print '<div id="videogallery-iframe"></div>';
   }
   $fb_image = '';
-  $uri = base64_encode('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+  $uri = base64_encode(SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   ?>
   <!-- Big news Block -->
   <span class="widget-title"><a title="<?php echo _widget_title($data['node_data']->title); ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>News</a></span>
@@ -87,7 +87,7 @@ if (!empty($data['node_data'])) :
                 // prepare configuration for sharing
                 $share_title = $data['node_data']->title;
                 $bigstory_title = preg_replace("/'/", "\\'", $data['node_data']->title);
-                $bigstory_fb_share = htmlentities($bigstory_title, ENT_QUOTES);
+                $bigstory_fb_share = trim(htmlentities($bigstory_title, ENT_QUOTES));
                 $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
                 $short_url = shorten_url($actual_link, 'goo.gl');
                 $pipelinetext = "";
@@ -110,13 +110,13 @@ if (!empty($data['node_data'])) :
                   <?php endif; ?>
               <p>
                   <!-- Story -->
-              <?php if (!empty($data['node_data']->field_story_kicker_text['und'][0]['value'])) : ?>
-    <?php
-    // prepare configuration for sharing
-    $share_desc = preg_replace("/'/", "\\'", $data['node_data']->field_story_kicker_text['und'][0]['value']);
-    $share_desc_fb = htmlentities($share_desc, ENT_QUOTES);
-    print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 200, '..');
-    ?>
+                  <?php if (!empty($data['node_data']->field_story_kicker_text['und'][0]['value'])) : ?>
+                  <?php
+                  // prepare configuration for sharing
+                  $share_desc = preg_replace("/'/", "\\'", $data['node_data']->field_story_kicker_text['und'][0]['value']);
+                  $share_desc_fb = trim(htmlentities($share_desc, ENT_QUOTES));
+                  print mb_strimwidth($data['node_data']->field_story_kicker_text['und'][0]['value'], 0, 200, '..');
+                  ?>
                   <?php endif; ?>
                   <!-- Live blog -->
                   <?php if (!empty($data['node_data']->field_label['und'][0]['value'])) : ?>
@@ -124,7 +124,7 @@ if (!empty($data['node_data'])) :
                     // prepare configuration for sharing
                     if (!empty($data['node_data']->field_story_kicker_text['und'][0]['value'])) {
                       $share_desc = preg_replace($data['node_data']->field_story_kicker_text['und'][0]['value']);
-                      $share_desc_fb = htmlentities($share_desc, ENT_QUOTES);
+                      $share_desc_fb = trim(htmlentities($share_desc, ENT_QUOTES));
                     }
                     print mb_strimwidth($data['node_data']->field_label['und'][0]['value'], 0, 165, '..');
                     ?>
@@ -132,10 +132,10 @@ if (!empty($data['node_data'])) :
 
               </p>
 
-  <?php if (!empty($data['node_data']->nid)) : ?>
+  <?php if (!empty($data['node_data']->nid)) :?>
                 <div class="share-new">
                     <ul>
-                        <li><a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $bigstory_fb_share; ?>', '<?php print $share_desc_fb; ?>', '<?php print $fb_image; ?>')"><i class="fa fa-facebook"></i></a></li>
+                        <li><a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $bigstory_fb_share; ?>', '<?php print $share_desc_fb; ?>', '<?php print $fb_image; ?>', '<?php print $base_url;?>', '<?php print $data['node_data']->nid;?>')"><i class="fa fa-facebook"></i></a></li>
                         <li><a title="share on twitter" class="user-activity def-cur-pointer" data-rel="<?php print $data['node_data']->nid; ?>" data-tag="<?php print $data['node_data']->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($share_title); ?>', '<?php print $short_url; ?>')"><i class="fa fa-twitter"></i></a></li>
 
     <?php
