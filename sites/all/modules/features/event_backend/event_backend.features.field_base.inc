@@ -937,7 +937,7 @@ function event_backend_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_event_highlights',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'revision_id' => array(
