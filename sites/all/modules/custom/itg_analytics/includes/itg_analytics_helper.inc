@@ -476,6 +476,7 @@ function _get_most_popular_nodes_based_on_trending_shared_analytics($newsletter_
  */
 function _get_most_popular_nodes_based_on_top_20_shared($newsfrequency = NULL) {
   // Check for dynamic content limit
+  $content_limit = variable_get('newsletter_content_limit');
   if (isset($content_limit) && is_numeric($content_limit)) {
     $renge = $content_limit;
   } else {
@@ -499,6 +500,7 @@ function _get_most_popular_nodes_based_on_top_20_shared($newsfrequency = NULL) {
  */
 function _get_most_popular_nodes_based_on_top_20_trending($newsfrequency = NULL) {
   // Check for dynamic content limit
+  $content_limit = variable_get('newsletter_content_limit');
   if (isset($content_limit) && is_numeric($content_limit)) {
     $renge = $content_limit;
   } else {
@@ -522,6 +524,7 @@ function _get_most_popular_nodes_based_on_top_20_trending($newsfrequency = NULL)
  */
 function _get_most_popular_nodes_based_on_top_20_most_viewed($newsfrequency = NULL) {
   // Check for dynamic content limit
+  $content_limit = variable_get('newsletter_content_limit');
   if (isset($content_limit) && is_numeric($content_limit)) {
     $renge = $content_limit;
   } else {
