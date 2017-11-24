@@ -973,7 +973,7 @@ if (!empty($content)):
               else:
                 ?>
                 <li class="mhide">
-                  <a title="follow story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow story'); ?></a>
+                  <a title="follow story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow the story'); ?></a>
                 </li>
             <?php endif; ?>
             </ul>
