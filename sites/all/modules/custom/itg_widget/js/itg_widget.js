@@ -428,6 +428,6 @@ jQuery(window).load(function() {
          });
      }
      catch(err) {
-         
+         console.log(err.message);
      }
 });
