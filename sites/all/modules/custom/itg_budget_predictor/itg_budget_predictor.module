@@ -137,16 +137,14 @@ function itg_budget_predictor_custom() {
 
 
   $data['user_id'] = $user_id;
-  //drupal_add_css('http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/css/base/jquery.ui.all.css', external);
-  //drupal_add_css('http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css', external);
-    
-  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', external);
-  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js', external);
-  drupal_add_js('http://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js', external);
+  drupal_add_js(drupal_get_path('theme', 'itg') . '/js/budget_predictor/jquery1.7.1.min.js', array('weight' => 4, 'scope' => 'footer'));
+  
+  drupal_add_js(drupal_get_path('theme', 'itg') . '/js/budget_predictor/jquery-ui.min.js', array('weight' => 5, 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', 'itg') . '/js/budget_predictor/jquery.ui.touch-punch.min.js', array('weight' => 6, 'scope' => 'footer'));
   drupal_add_js(array('itg_budget_predictor' => array('settings' => $settings)), array('type' => 'setting', 'scope' => 'footer'));
-  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/itg_budget_predictor.js', array('weight' => 4, 'scope' => 'footer'));
-  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/html2canvas.js', 'file');
-  drupal_add_js(drupal_get_path('module', 'itg_budget_predictor') . '/js/jquery.cookie.js', 'file');
+  drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/itg_budget_predictor.js', array('weight' => 4, 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/html2canvas.js', array('weight' => 7, 'scope' => 'footer'));
+  drupal_add_js(drupal_get_path('theme', 'itg')  . '/js/budget_predictor/jquery.cookie.js', array('weight' => 7, 'scope' => 'footer'));
   
  return theme('itg_budget_predictor_cheaper', array('data' => $data));
 }
