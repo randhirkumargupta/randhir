@@ -1,14 +1,9 @@
 <?php drupal_add_library('flexslider', 'flexslider');
-      libraries_load('flexslider');
-
-
-
-      module_load_include('inc', 'itg_widget', 'includes/featured_photo_carousel');?>
+      ?>
 
 <div class="flexslider">
       <ul class="slides"> 
 <?php foreach($rows as $index => $row){
-
    ?>
 
  <li><?php print $row['field_story_extra_large_image'];?> 
@@ -22,4 +17,3 @@
 <?php }; ?>
 </ul>
  </div>
-
