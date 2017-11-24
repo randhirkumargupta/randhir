@@ -463,7 +463,7 @@ header {
                     a {
                         &:before {
                             content: '';
-                            background: url(../images/live-icon.png) no-repeat;
+                            background: url(../images/sprite.png) no-repeat 0 -123px;
                             @include pos(absolute,
                             -11px,
                             null,
@@ -1515,15 +1515,16 @@ footer {
             @include text-align(center);
             height: 37px;
             cursor: pointer;
-            background: $black-bg url(../images/footer-close-icon.png) no-repeat center center;
+            background: $black-bg url(../images/sprite.png) no-repeat 10px 10px;
         }
         .footer-open-icon {
-            background: $black-bg url(../images/footer-open-icon.png) no-repeat center center;
+            background: $black-bg url(../images/sprite.png) no-repeat 10px -35px;
         }
     }
     .footer-mid {
         background: $second-black-bg;
         padding: 12px 0;
+        text-align: center;
     }
     .footer-bottom {
         padding: 20px 0;
@@ -1982,7 +1983,7 @@ footer {
     @include display-inline;
     @extend .pos-rel;
     &:after {
-        background: url(../images/video-icon-small.png) no-repeat;
+        background: url(../images/sprite.png) no-repeat 0 -87px;
         content: "";
         width: 18px;
         height: 18px;
