@@ -9,7 +9,7 @@ if (!empty($data['node_data'])) :
   $photo_icon = "";
   $video_icon = "";
   $image = "<img src='" . $base_url . drupal_get_path('theme', 'itg') . "/images/default_for_all.png' alt='' title='' />";
-  $share_desc = trim($share_desc_fb) = "";
+  $share_desc = $share_desc_fb = "";
   if ($data['node_data']->type == 'videogallery') {
     $is_videogallery = TRUE;
     $data_nid = "data-nid='" . $data['node_data']->nid . "'";
