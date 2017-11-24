@@ -91,7 +91,7 @@ function generateStoryDeatilList($id) {
     $heighligth = array();
     $heighligth = (array) getHighlight($node);
     $author = array();
-    $author = (array) generateAuthorTag($node);
+    $author = (array) generateAuthorTagStory($node, 1);
     $rating = array();
     $rating = (array) getRatings($node);
     $caption = getImgCaption($large_image_fid);
@@ -776,4 +776,26 @@ function getBalanklist($nid) {
     $photolist_loop = array();
     $photolist['tech_pros_cons'] = $photolist_loop;
     return $photolist;
+}
+
+
+/**
+ * function for get author list for story
+ * @pram object $node
+ * @return array
+ */
+function generateAuthorTagStory($node, $status) {
+  $byline = itg_common_get_latest_byline($node->nid, $status);
+  $byline_data = itg_get_multi_byline_details($byline);
+  $aid = $byline_data[0]['nid'];
+  $a_title = $byline_data[0]['title'];
+  $extra_laarge_file = file_load($byline_data[0]['extra_large_image']);
+  $a_image = $extra_large_file->uri;
+  $a_twitter_handler = $byline_data[0]['twitter_handle'];
+  $output = array();
+  $output['a_id'] = "$aid";
+  $output['a_title'] = "$a_title";
+  $output['a_image'] = "$a_image";
+  $output['a_twitter_handler'] = "$a_twitter_handler";
+  return $output;
 }
