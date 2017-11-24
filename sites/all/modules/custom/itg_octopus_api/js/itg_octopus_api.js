@@ -74,16 +74,12 @@ jQuery( 'document' ).ready( function() {
       type: 'post',
       data: { 'slug_id': slug_id, 'attr_id': attr_id },
       beforeSend: function() {
-        setTimeout( function() {
           current_working_object.closest( 'tr' ).find( '.video-process-bar-' + attr_id ).html( '<div class="process-bar-data"><div class="progress">       <div class="bg-success progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div></div><p>Wait..Getting response from server..</p></div>' );
-        }, 2000 );
       },
       success: function( data ) {
-        console.log( 'ishwar1112' );
         _octopus_background_process_holder[attr_id] = setInterval( function() {
           console.log( current_working_object );
           jQuery.ajax( {
-            //url: base_url + '/itg-octopus-dumping-video-status/' + data,
             url: base_url + '/itg-octopus-background-video-status',
             type: 'post',
             data: { 'id': data },

@@ -511,27 +511,27 @@ function slug_details() {
 
 function itg_octopus_check_slug_inprogress() {
   // Getting all request from Queue
-  if(isset($_POST['id']) && !empty($_POST['id'])) {
+  if (isset($_POST['id']) && !empty($_POST['id'])) {
     $slug_id = $_POST['id'];
-  try {
-    $query = db_select('itg_octopus_cron', 'z')
-        ->fields('z', array('slug_id'))
-        ->condition('z.slug_id', $slug_id)
-        ->condition('z.final_success', OCTOPUS_FAIL_STATUS)
-        ->execute();
-    $result = $query->fetchObject();
-    if (isset($result->slug_id) && !empty($result->slug_id)) {
-      print TRUE;
+    try {
+      $query = db_select('itg_octopus_cron', 'z')
+          ->fields('z', array('slug_id'))
+          ->condition('z.slug_id', $slug_id)
+          ->condition('z.final_success', OCTOPUS_FAIL_STATUS)
+          ->execute();
+      $result = $query->fetchObject();
+      if (isset($result->slug_id) && !empty($result->slug_id)) {
+        print TRUE;
+      }
+      else {
+        print FALSE;
+      }
+      drupal_exit();
     }
-    else {
-      print FALSE;
+    catch (Exception $e) {
+      itg_octopus_api_send_email_to_support("Octopus error while fatching data from itg_octopus_cron table", $e->getMessage());
+      watchdog('Octopus Error', 'Error:' . $e->getMessage());
     }
-    drupal_exit();
-  }
-  catch (Exception $e) {
-    itg_octopus_api_send_email_to_support("Octopus error while fatching data from itg_octopus_cron table", $e->getMessage());
-    watchdog('Octopus Error', 'Error:' . $e->getMessage());
-  }
   }
 }
 
@@ -1208,8 +1208,8 @@ function itg_octopus_api_check_s3_copied_status($video_request_id, $cron_id) {
         if (isset($success_data['@attributes']['MP4_FILE_PATH']) &&
             !empty($success_data['@attributes']['MP4_FILE_PATH'])) {
           // Setting s3 path for Cron that will be further reused for Daily motion request
-          $file_size = '256845245'; // TODO Hardcoded
           $mp4_path = $success_data['@attributes']['MP4_FILE_PATH'];
+          $file_size = itg_octopus_api_get_file_size($mp4_path); // Getting file size
           itg_octopus_set_s3_path_for_cron($video_request_id, $mp4_path, $file_size, $cron_id);
           return true;
         }
@@ -1305,7 +1305,6 @@ function itg_octopus_api_get_s3_path_by_cron_id($cron_id) {
 function itg_octopus_api_video_s3_to_dm_via_cron($s3video_url, $file_size,
     $slug_id) {
   $data = array();
-  //module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   $filename = drupal_basename($s3video_url);
   if (function_exists('itg_videogallery_dailymotion_send_video')) {
     $response = itg_videogallery_dailymotion_send_video($s3video_url);
@@ -1481,5 +1480,28 @@ function itg_octopus_restore_back_g_process() {
   catch (Exception $e) {
     itg_octopus_api_send_email_to_support("Octopus error while fatching data from itg_octopus_cron table", $e->getMessage());
     watchdog('Octopus Error', 'Error:' . $e->getMessage());
+  }
+}
+
+/**
+ * Getting file size by passing s3 public path
+ * @param type $s3_url
+ */
+function itg_octopus_api_get_file_size($s3_url) {
+  stream_context_set_default(
+      array(
+        'http' => array(
+          'method' => 'HEAD'
+        )
+      )
+  );
+  $headers = get_headers($s3_url, 1);
+  $headers = array_change_key_case($headers);
+  $size = trim($headers['content-length'], '"');
+  if (isset($size) && !empty($size)) {
+    return $size;
+  }
+  else {
+    return 1;
   }
 }
