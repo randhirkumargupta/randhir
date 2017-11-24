@@ -14509,6 +14509,10 @@ div.ctools-modal-content {
     top: 4px;
 }
 
+.node-survey-form label.no-after::after {
+    content: " " !important;
+}
+
 
 /*css end add by rajveer */
 
@@ -14516,8 +14520,28 @@ div.ctools-modal-content {
     table {
         @extend .views-table;
     }
-    a {
+    a.btn-submit {
         float: right;
         margin-bottom: 20px;
     }
+}
+
+[id*="edit-metatags-und-facebook"] {
+    border: none;
+}
+
+#views-exposed-form-key-candidate-special-key-candidate-widget-list .views-exposed-widget .form-item,
+#views-exposed-form-key-candidate-special-key-candidate-widget-list .views-exposed-widget #view-display-isesue {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 200px;
+}
+
+#views-exposed-form-key-candidate-special-key-candidate-widget-list .views-exposed-widget .form-submit {
+    vertical-align: bottom;
+    margin-left: 10px;
+}
+
+#print-team-integration-node-form [id*="field-add-member-values"] tbody {
+    overflow: inherit;
 }

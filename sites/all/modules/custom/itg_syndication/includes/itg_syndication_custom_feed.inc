@@ -1072,7 +1072,10 @@ function get_default_feed_pattern_callback($form, &$form_state) {
         );
     }
 }
-
+/**
+ * _get_byline_from_nid().
+ * @return $final_result
+ */
 function _get_byline_from_nid($nid) {
     $final_result = array();
     $query = db_select('itg_multi_byline_info', 'bi');
@@ -1088,6 +1091,10 @@ function _get_byline_from_nid($nid) {
     return $final_result;
 }
 
+/**
+ * _get_byline_from_nid_for_kindle().
+ * @return $final_result
+ */
 function _get_byline_from_nid_for_kindle($nid) {
     $final_result = array();
     $query = db_select('itg_multi_byline_info', 'bi');
@@ -1102,4 +1109,42 @@ function _get_byline_from_nid_for_kindle($nid) {
         }
     }
     return $final_result;
+}
+
+/**
+ * Get all parent of term.
+ * @return $top_parents
+ */
+function _get_all_parent_terms($tid) {
+  $parents = array_reverse(taxonomy_get_parents_all($tid));
+  $top_parents = array();
+  foreach($parents as $parent) {
+      $top_parents['tid'][] = $parent->tid;
+      $top_parents['title'][] = $parent->name;
+  }
+  return $top_parents;
+}
+
+/**
+ * Function which gives flag weather node is future date or not.
+ * 
+ * @param int $nid
+ *    Node id
+ * 
+ * @return boolean
+ */
+function is_not_future_node($nid) {
+  $results = array();
+  if(!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->leftJoin("field_data_field_story_schedule_date_time" , "sdt" , "sdt.entity_id=n.nid");
+    $query->fields('n', array('nid'));
+    // Logic to skip future nodes.
+    $db_or = db_or()->isNull("sdt.field_story_schedule_date_time_value")
+      ->condition("sdt.field_story_schedule_date_time_value" , date('Y-m-d H:i:s') , "<");
+    $query->condition($db_or);
+    $query->condition('n.nid' , $nid);
+    $results = $query->execute()->fetchAllAssoc('nid');
+  }
+  return empty($results) ? FALSE : TRUE;
 }

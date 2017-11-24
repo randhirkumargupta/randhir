@@ -7,7 +7,7 @@
  * @see https://drupal.org/node/1728164
  */
 global $base_url;
-$share_page_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$share_page_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $short_url = shorten_url($share_page_link, 'goo.gl');
 $share_desc = '';
 $share_image = '';
