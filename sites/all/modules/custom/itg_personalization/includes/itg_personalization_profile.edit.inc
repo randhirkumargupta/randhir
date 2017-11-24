@@ -29,32 +29,24 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   $edit_mobile_link = '<a href="'. $edit_mobile_url .'">Edit</a>';
   
   $user_detail = user_load($user->uid);
-  if (is_numeric($user_detail->name)) {
-    $mobile = $user_detail->name;
+  if (strpos($user_detail->mail, '@twitter.com') !== false || strpos($user_detail->mail, '@facebook.com') !== false) {
+    if (array_key_exists(FRONT_USER, $user->roles)) {
+      // code to use in optimization using drupal http request.
+      if (function_exists('itg_global_loyality_get_sso_id')) {
+        $sso_final_id = itg_global_loyality_get_sso_id($user->uid);
+      }
+      if (empty($sso_final_id)) {
+        $sso_id = $user->uid;
+      }
+      else {
+        $sso_id = $sso_final_id;
+      }
+      if (function_exists('itg_sso_get_social_uid')) {
+        $mobile = itg_sso_get_social_uid($sso_id);
+      }
+    }
   }
-  else if(strpos($user_detail->mail, '@twitter.com') !== false || strpos($user_detail->mail, '@facebook.com') !== false) {
-        if (array_key_exists(FRONT_USER, $user->roles)) {
-        /*$authname = simplesaml_get_authname($user->uid);
-        db_set_active('sso_db');
-        $auth_attr = simplesaml_get_uid_byauth($authname);
-        $mobile = $auth_attr['mobile'];
-        db_set_active();*/
-        // code to use in optimization using drupal http request.
-        if (function_exists('itg_global_loyality_get_sso_id')) {
-          $sso_final_id = itg_global_loyality_get_sso_id($user->uid);
-         }
-         if (empty($sso_final_id)) {
-           $sso_id = $user->uid;
-         }
-         else {
-           $sso_id = $sso_final_id;
-         }
-         if(function_exists('itg_sso_get_social_uid')) {
-           $mobile = itg_sso_get_social_uid($sso_id);
-         }
-  
-  }
-  } else {
+  else {
     $mobile = $user_detail->field_mobile_number['und'][0]['value'];
   }
   // email setting
@@ -155,7 +147,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
   $form['profile_pic'] = array(
     '#title' => t('Profile Pic'),
     '#type' => 'managed_file',
-    '#upload_location' => 'public://profile_pic/',
+    '#upload_location' => file_default_scheme() . '://sso_user_image/',
     '#description' => 'Files must be less than<strong>512 MB</strong>.<br>Allowed file types:<strong>gif jpg jpeg</strong>',
     '#preview' => TRUE,
     "#upload_validators" => array(

@@ -262,7 +262,11 @@ $argum = base64_encode(arg(1));
 </div>
 
 <?php
-$initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
+$initial_slide = 0;
+
+if(isset($_GET['photo']) && $_GET['photo']) {
+  $initial_slide = $_GET['photo']-1;
+}
 ?>
 <script>
   jQuery(document).ready(function (e) {
@@ -273,7 +277,7 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
           fade: false,
           asNavFor: '.slick-thumbs-slider, .counterslide, .photo-by-slider',
           // For active slide
-          initialSlide: <?php echo --$initial_slide; ?>,
+          initialSlide: <?php echo $initial_slide; ?>,
       });
       jQuery('.slick-thumbs-slider').slick({
           slidesToShow: 7,
@@ -329,12 +333,12 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
       jQuery(document).ready(function () {
         var query_val = get_photo_url_query('photo' , window.location);
           if(query_val != null) {
-              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+              var real_node_url = "<?php echo $base_url."/".$photo_node->path['alias']; ?>";
               ChangeUrl("page", real_node_url +"/"+query_val);
           }
           jQuery(".slick-arrow , li.slick-slide").on("click", function () {
               var active_slide = jQuery(".slick-active").attr("data-slick-index");
-              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+                       var real_node_url = "<?php echo $base_url.'/'.$photo_node->path['alias']; ?>";
               if (active_slide > 0) {
                   ++active_slide;
                   //window.history.pushState(null, null, real_node_url + "/" + active_slide);
@@ -380,16 +384,3 @@ $initial_slide = isset($_GET['photo']) ? $_GET['photo'] : 0;
       });
   });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
