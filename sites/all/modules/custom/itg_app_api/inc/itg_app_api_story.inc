@@ -790,7 +790,7 @@ function generateAuthorTagStory($node, $status) {
   $aid = $byline_data[0]['nid'];
   $a_title = $byline_data[0]['title'];
   $extra_laarge_file = file_load($byline_data[0]['extra_large_image']);
-  $a_image = $extra_large_file->uri;
+  $a_image = $extra_laarge_file->uri;
   $a_twitter_handler = $byline_data[0]['twitter_handle'];
   $output = array();
   $output['a_id'] = "$aid";
