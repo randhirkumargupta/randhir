@@ -109,13 +109,18 @@ function checkContainer(originalId){
 }(document, 'script', 'facebook-jssdk'));
 
 function badget_fb_share(linkurl, title, desc, image) {
+   
     FB.ui({
-        method: 'feed',
-        link: linkurl,
-        picture: image,
-        name: title,
-        //caption: desc,
-        description: desc
+        method: 'share_open_graph',
+        action_type: 'og.shares',
+        action_properties: JSON.stringify({
+            object: {
+                'og:url': linkurl,
+                'og:title': title,
+                'og:description': desc,
+                'og:image': image
+            }
+        })
     });
 }
 //facebook sharing end here
