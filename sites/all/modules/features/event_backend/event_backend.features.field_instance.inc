@@ -345,7 +345,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -385,7 +385,7 @@ function event_backend_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete',
-      'weight' => 3,
+      'weight' => 2,
     ),
   );
 
@@ -2370,15 +2370,9 @@ function event_backend_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 1,
+      'active' => 0,
       'module' => 'field_collection',
-      'settings' => array(
-        'collapsed' => 0,
-        'field_as_label' => '',
-        'last_item_collapsed' => 0,
-        'new_item_open' => 0,
-        'replace_label' => 0,
-      ),
+      'settings' => array(),
       'type' => 'field_collection_embed',
       'weight' => 12,
     ),

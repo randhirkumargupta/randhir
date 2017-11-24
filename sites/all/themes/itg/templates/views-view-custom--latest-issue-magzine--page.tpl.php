@@ -14,13 +14,7 @@
         <span class="latest-issue"><?php print t('latest issue'); ?></span>
         <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
         <div class="issue-title">
-          <?php 
-          if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($row['nid'], 0, 999), "node/" . $row['nid'], array("html" => TRUE , 'attributes' => array("title" => $row['title'])));
-          } else {
-            print $row['field_issue_title'];
-          }
-          ?>
+          <?php print $row['field_issue_title']; ?>
         </div>
         <?php
         $current_issues = itg_msi_get_current_issue();
@@ -46,15 +40,7 @@
     <div class="magazin-subscribe">
       <span class="latest-issue"><?php print t('latest issue'); ?></span>
       <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
-        <div class="issue-title">
-          <?php 
-          if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($row['nid'], 0, 999), "node/" . $row['nid'], array("html" => TRUE , 'attributes' => array("title" => $row['title'])));
-          } else {
-            print $row['field_issue_title'];
-          }
-          ?>
-        </div>
+        <div class="issue-title"><?php print $row['field_issue_title']; ?></div>
       <?php
       $current_issues = itg_msi_get_current_issue();
       $current_issue = explode(' 00:', $current_issues);
