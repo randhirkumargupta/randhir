@@ -1053,11 +1053,14 @@ function itg_event_backend_views_pre_render(&$view) {
 function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   // Get the Form Id
   if ($form["#id"] == 'views-exposed-form-Event-backend-page' || $form['#id'] == 'views-exposed-form-Event-backend-page-1') {
-    //$form['title']['#autocomplete_path'] = 'content-title-list/event_backend/autocomplete';
     $form['title']['#autocomplete_path'] = 'content-title-event/active/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
-  if ($form["#id"] == 'views-exposed-form-Event-backend-page-2' || $form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event close and draft
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-2') { // for event close
+    $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event draft
     $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
