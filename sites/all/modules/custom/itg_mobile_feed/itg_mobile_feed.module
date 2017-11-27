@@ -3,7 +3,6 @@
 /**
  * @file
  * The ITG Mobile App XML Feed.
- *
  * Contains functionality for mobile app xml feed.
  */
 module_load_include('inc', 'itg_mobile_feed', 'inc/itg_mobile_feed_helper');
@@ -15,6 +14,7 @@ module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
 
 /**
  * Implements hook_menu().
+ * {@inheritdoc}
  */
 function itg_mobile_feed_menu() {
   $items['home-page-feed'] = array(
@@ -165,10 +165,10 @@ function itg_mobile_feed_menu() {
   return $items;
 }
 
-/*
+/**
  * Implement form callback for redis_server_config
+ * {@inheritdoc}
  */
-
 function redis_server_config() {
   $form = array();
 
@@ -196,10 +196,10 @@ function redis_server_config() {
   return system_settings_form($form);
 }
 
-/*
+/**
  * Implement form callback for defining term id config
+ * {@inheritdoc}
  */
-
 function feed_tid_config() {
   $form = array();
 
@@ -240,12 +240,12 @@ function feed_tid_config() {
 
   return system_settings_form($form);
 }
-/*
- * creage form for redis cache delete by admin
+/**
+ * Implement hook_form_submit , Create form for redis cache delete by admin
+ * {@inheritdoc}
  */
 function redis_cache_manager() {
   $form = array();
-
   $form['redis_cache'] = array(
     '#type' => 'textfield',
     '#title' => t('Remove Redis Cache Key'),
@@ -257,12 +257,11 @@ function redis_cache_manager() {
     '#type' => 'submit',
     '#value' => t('Delete'),
   );
-
   return $form;
 }
 
-/*
- * redis cache form submit
+/** Implement hook_form_submit ,  redis cache form submit
+ *  {@inheritdoc}
  */
 function redis_cache_manager_submit($form,&$form_state){
 
@@ -278,6 +277,7 @@ function redis_cache_manager_submit($form,&$form_state){
 
 /**
  * Implements hook_permission.
+ * {@inheritdoc}
  */
 function itg_mobile_feed_permission() {
   return array(
@@ -289,31 +289,27 @@ function itg_mobile_feed_permission() {
 }
 
 /**
- * common function for return xml feed file header
- *
+ * Common function for return xml feed file header
  * @return string
  */
 function getMobileFeedXmlHeader() {
   $output = "";
   $output = "<?xml version='1.0' encoding='utf-8'?><Root>";
-
   return $output;
 }
 
 /**
  * common function for return xml feed file header
- *
  * @return string
  */
 function getMobileFeedXmlFooter() {
   $output = "";
   $output = "</Root>";
-
-  return $output;
+ return $output;
 }
+
 /**
- *  function for return xml feed file header only for program section
- *
+ * function for return xml feed file header only for program section
  * @return string
  */
 function program_section_page_feed_header() {
@@ -323,24 +319,20 @@ function program_section_page_feed_header() {
 }
 
 /**
- *  function for return xml feed file footer only for program section
- *
+ * Function for return xml feed file footer only for program section
  * @return string
- *
  */
-
 function program_section_page_feed_footer() {
   $output = "";
   $output = "</root>";
-
   return $output;
 }
 
 /**
- * common function for return related content node type
- *
+ * Common function for return related content node type
+ * @param int $node_list
+ * @param string $type
  * @return array
- * @pram $type
  */
 function relatedContentNodeType($node_list = "", $type) {
 
@@ -394,9 +386,9 @@ function relatedContentNodeType($node_list = "", $type) {
 
 /**
  * common function for return complete file path
- *
- * @return $type
- * @pram $type
+ * @param int $fid
+ * @return string $file_url
+ * 
  */
 function completeFilePath($fid) {
   $file_url = "";
@@ -407,15 +399,15 @@ function completeFilePath($fid) {
   $serch = ITGD_DEV_FILES_PATH;
   $replace = ITGD_MUM_DEV_FILES_PATH;
   $file_url = str_replace($serch,$replace,$file_url); // need update img base url in variable table
-
-  return $file_url;
+ return $file_url;
 }
 
 /**
- * common function for write feed file
- *
- * @return $type
- * @pram $type
+ * Common function for write feed file 
+ * @param string $feed_file_path 
+ * @param string $feed_file_name
+ * @return boolen $output 
+ * 
  */
 function writeFeedFile($feed_file_path, $feed_file_name, $output) {
   // variable declation
@@ -451,8 +443,9 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
 }
 
 /**
- * common function for return array of category-manager section tid
- *
+ * Common function for return array of category-manager section tid
+ * @param string $type
+ * @param int $parent
  * @return array
  */
 function categoryManagerSectionTid($type = "story", $parent = 0) {
@@ -475,11 +468,10 @@ function categoryManagerSectionTid($type = "story", $parent = 0) {
 }
 
 /**
- * common function for return content type mapped with tid
- *
- * @return type
+ * Common function for return content type mapped with tid
+ * @param int $tid Term if of the taxonomy
+ * @return boolean $flag 
  */
-
 function checkContentTypeMapped($tid, $type){
   // check map with passed content type
   $flag = 0;
@@ -498,10 +490,9 @@ function checkContentTypeMapped($tid, $type){
 
 /**
  * common function for return node count without child
- * @pram $type
- * @pram $tid
- *
- * @return $type
+ * @param string $type
+ * @param int $tid
+ * @return string $type
  */
 function customNodeCount($type, $tid) {
   // variable declation
@@ -519,7 +510,6 @@ function customNodeCount($type, $tid) {
  * common function for return node count with child
  * @pram $type
  * @pram $tid
- *
  * @return $type
  */
 function customNodeCountChild($tid, $type, $child_count = TRUE) {
@@ -543,11 +533,8 @@ function customNodeCountChild($tid, $type, $child_count = TRUE) {
 
 /**
  * Retrieve ids of term children .
- *
- * @param $tid
- *   The term's ID.
- * @param $tids
- *   An array where ids of term children will be added
+ * @param int $tid The term's ID.
+ * @return array $tids An array where ids of term children will be added
  */
 function term_get_children_ids($tid) {
   $children = taxonomy_get_children($tid);
@@ -564,12 +551,11 @@ function term_get_children_ids($tid) {
 
 /**
  *function get section/category/node front url
- * @pram $tid
- *
- * @return $type
+ * @param $tid
+ * @param $type
+ * @return string $final_url
  */
 function nodeCategoryFrontUrl($tid, $type) {
-
   $final_url = "";
   if ($type == 'term') {
     $source = "taxonomy/term/" . $tid;
@@ -597,8 +583,7 @@ function nodeCategoryFrontUrl($tid, $type) {
 
 /**
  *function get section/category icon img
- * @pram $tid
- *
+ * @param $tid
  * @return $type
  */
 function sectionCategoryIconImg($tid) {
@@ -611,12 +596,10 @@ function sectionCategoryIconImg($tid) {
 
 /**
  *function get tid is_favorite
- * @pram $tid
- *
- * @return type
+ * @param int $nid
+ * @return boolean type
  */
 function getNidIsFavorite($nid) {
-
   $flag = "";
   $result = db_select('field_data_field_featured', 'ffd')->fields('ffd', array('field_featured_value'))->condition('ffd.entity_id', $nid, '=')->execute()->fetchAssoc();
   if (isset($result['field_featured_value']) && ($result['field_featured_value'] == "yes" || $result['field_featured_value'] == "Yes")) {
@@ -630,30 +613,23 @@ function getNidIsFavorite($nid) {
 
 /**
  *function get nid is syndications
- * @pram $tid
- *
+ * @param $tid
  * @return type
  */
 function getNidIsSyndications($nid) {
-  // variable declation
   $flag = 0;
   $result = db_select('field_data_field_story_syndication', 'fss')->fields('fss', array('field_story_syndication_value'))->condition('fss.entity_id', $nid, '=')->execute()->fetchAssoc();
-
   if (isset($result['field_featured_value']) && ($result['field_featured_value'] == "yes" || $result['field_featured_value'] == "Yes")) {
     $flag = 1;
-  }
-  else {
-    $flag = 0;
   }
   return $flag;
 }
 
 /**
- *function get node list in tid
+ * function get node list in tid
  * @pram $tid
  * @pram $type
  * @pram $count
- *
  * @return array
  */
 function getNodeFeedTag($tid, $type, $count) {
@@ -754,58 +730,57 @@ function getNodeFeedTag($tid, $type, $count) {
 }
 
 /**
- * common function for get img caption
- *
- * @return $type
- * @pram $type
+ * Common function for get img caption
+ * @param int $fid file id
+ * @return string $caption
  */
 function getImgCaption($fid) {
-  // variable declation
   $caption = "";
-  $query = db_select('field_data_field_image_caption', 'fic');
-  $query->fields('fic', array('field_image_caption_value'));
-  $query->condition('fic.entity_id', $fid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $caption = $result['0']['field_image_caption_value'];
-
-  return $caption;
+  if(!empty($fid)){
+    $query = db_select('field_data_field_image_caption', 'fic');
+    $query->fields('fic', array('field_image_caption_value'));
+    $query->condition('fic.entity_id', $fid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $caption = $result['0']['field_image_caption_value'];
+  }
+ return $caption;
 }
 
 /**
- * common function for get img byline
- *
- * @return $type
- * @pram $type
+ * Common function for get img byline
+ * @param int $fid
+ * @return string $byline
  */
 function getImgByline($fid) {
-  // variable declation
   $byline = "";
-  $query = db_select('field_data_field_photo_byline', 'fpb');
-  $query->innerJoin('node', 'n', 'fpb.field_photo_byline_target_id=n.nid');
-  $query->fields('n', array('title'));
-  $query->condition('fpb.entity_id', $fid);
-  $query->condition('n.type', 'reporter');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $byline = $result['0']['title'];
-
-  return $byline;
+  if(!empty($fid)){
+    $query = db_select('field_data_field_photo_byline', 'fpb');
+    $query->innerJoin('node', 'n', 'fpb.field_photo_byline_target_id=n.nid');
+    $query->fields('n', array('title'));
+    $query->condition('fpb.entity_id', $fid);
+    $query->condition('n.type', 'reporter');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $byline = $result['0']['title'];
+  }
+ return $byline;
 }
 
 /**
- * common function for getCityByNid
- *
- * @return $type
- * @pram $type
+ * Common function for getCityByNid
+ * @param int $nid node id of the node
+ * @return string $city
+ * 
  */
 function getCityByNid($nid) {
-  // variable declation
-  $query = db_select('field_data_field_stroy_city', 'fdc');
-  $query->innerJoin('taxonomy_term_data', 'ttd', 'fdc.field_stroy_city_tid=ttd.tid');
-  $query->fields('ttd', array('name'));
-  $query->condition('fdc.entity_id', $nid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $city = $result['0']['name'];
-  return $city;
+  if(!empty($nid)){
+    $query = db_select('field_data_field_stroy_city', 'fdc');
+    $query->innerJoin('taxonomy_term_data', 'ttd', 'fdc.field_stroy_city_tid=ttd.tid');
+    $query->fields('ttd', array('name'));
+    $query->condition('fdc.entity_id', $nid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $city = $result['0']['name'];
+    return $city;
+  }
 }
 
 /**
@@ -1074,15 +1049,14 @@ function listicle_story_body($str, $node){
         $num++;
     }
     $listicle_output.= '</ul>';
-    //print $listicle_output;
     $str = str_replace('[ITG:LISTICLES]', $listicle_output, $str);
     }
-    return $str;
+  return $str;
 }
 
 /**
  * function for generate comment xml tag
- *
+ * @param object $node node object
  * @return array
  */
 function getCommentXmlTag($node) {
@@ -1117,11 +1091,8 @@ function getCommentXmlTag($node) {
   return $output;
 }
 
-
 /**
  * function for generate Empty comment xml tag
- *
- *
  */
 function emptygetCommentXmlTag() {
   $commenttext = "";
@@ -1129,21 +1100,16 @@ function emptygetCommentXmlTag() {
   $create_date = '';
   $create_datetime = "";
   $email = "";
-
-  // writng comments tag
   $comment_tag .= "<comment><commenttext>" . $commenttext . "</commenttext><name>" . $name . "</name><createddate>" . $create_date . "</createddate><createddatetime>" . $create_datetime . "</createddatetime><email>" . $email . "</email></comment>";
-
   $output .= "<comments>";
   $output .= $comment_tag;
   $output .= "</comments>";
-
   return $output;
 }
 
-
 /**
  * function for generate getRelatedNodeXmlTag
- *
+ * @param object $nidar
  * @return array
  */
 function getRelatedNodeXmlTag($nidar) {
@@ -1210,30 +1176,23 @@ function emptygetRelatedNodeXmlTag() {
   $title = '';
   $url = '';
   $img_url = '';
-
   $story_tag .= "<story><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></story>";
-
   $photo_tag .= "<photo><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></photo>";
-
   $video_tag .= "<video><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></video>";
   $output .= "<related>";
-
   $output .= "<stories>" . $story_tag . "</stories>";
-
   $output .= "<photos>" . $photo_tag . "</photos>";
   $output .= "<videos>" . $video_tag . "</videos>";
   $output .= "</related>";
-
   return $output;
 }
 
 
-/*
- * creage form for redis cache apttern delete by admin
+/* 
+ * Create form for redis cache pattern delete by admin
  */
 function redis_cache_pattern_manager() {
   $form = array();
-
   $form['redis_cache_pattern'] = array(
     '#type' => 'textfield',
     '#title' => t('Remove Redis Cache Key'),
@@ -1245,15 +1204,13 @@ function redis_cache_pattern_manager() {
     '#type' => 'submit',
     '#value' => t('Delete'),
   );
-
   return $form;
 }
 
-/*
- * redis cache apttern form submit
+/* Implement hook_form_submit()
+ * Function for clear the redis cache with key pattern
  */
 function redis_cache_pattern_manager_submit($form,&$form_state){
-
   $key_patt = $form_state['values']['redis_cache_pattern'];
   $responce = redis_key_pattern_delete($key_patt);
   if($responce == '0' || $responce == 0){
@@ -1261,27 +1218,23 @@ function redis_cache_pattern_manager_submit($form,&$form_state){
   }else {
      drupal_set_message('Redis '.$responce.' Key Has been deleted Successfully.');
   }
-
 }
 
 /**
  * Implements hook_cronapi().
  * {@inheritdoc}
  */
-
 function itg_mobile_feed_cronapi($op, $job = NULL) {
   $items['xml_feed_url_cron'] = array(
     'description' => 'cron for update all xml feed.',
     'callback' => 'itg_mobile_feed_xml_feed_url_cron',
   );
   return $items;
-  
 }
 
 /**
  * Implements function for cron for update all xml feed
-*/
-
+ */
 function itg_mobile_feed_xml_feed_url_cron() {
     global $base_url;
     $xml_feed_url = array();
@@ -1404,19 +1357,19 @@ function decryptForEmbed($string){
      $decrypter = gmp_export($decrypter);
      return $decrypter;
 }
-/**
- * return the gmap value
+
+/** 
+ * return the gmap encode value
  */
-function gmp_shiftr($x,$n) { // shift right
+function gmp_shiftr($x,$n) { 
    return(gmp_div($x,gmp_pow(2,$n)));
 }
 
-/**
+/** Function for gettig the nid from the migrated content id
  * @param string migrated video video id
  * @return the nid of the cms
  */
 function embed_video_nid($video_id){
-//  $video_id = '27803';
   if($video_id != ''){
        $qry = db_select('migrate_map_itgvideogallery', 'mv')
           ->fields('mv', array('destid1'))
