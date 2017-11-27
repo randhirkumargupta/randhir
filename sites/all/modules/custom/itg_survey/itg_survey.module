@@ -504,7 +504,7 @@ function itg_survey_vote_percentage_user($nid , $ques_id , $answer , $user_type)
 function itg_survey_vote_percentage_user_rating($nid , $ques_id , $answer , $rating) {
 
   $total_vote_on_question_user = itg_survey_get_total_vote_question($nid , $ques_id , $answer , $rating);
-
+  
   if (!$total_vote_on_question_user) {
     return '0%';
   }
@@ -519,7 +519,7 @@ function itg_survey_vote_percentage_user_rating($nid , $ques_id , $answer , $rat
         ->groupBy('su.rating_value');
     $itg_query->addExpression('COUNT(su.rating_value)' , 'user');
     $total_answwer_for_ques_user = $itg_query->execute()->fetchAll();
-
+    
     return $total_answwer_for_ques_user;
   }
 }
@@ -593,11 +593,13 @@ function itg_survey_block_view($delta = '') {
  * @return string
  */
 function itg_survey_show_survey_result($nid) {
-  if (itg_common_check_record_existance($nid , 'itg_survey_detail' , 'nid') > 0) {
-    return l('View Result' , 'survey-result/' . $nid , array('attributes' => array('target' => '_blank')));
-  }
-  else {
-    return 'View Result';
+  if (function_exists('itg_common_check_record_existance')) {
+    if (itg_common_check_record_existance($nid , 'itg_survey_detail' , 'nid') > 0) {
+      return l('View Result' , 'survey-result/' . $nid , array('attributes' => array('target' => '_blank')));
+    }
+    else {
+      return 'View Result';
+    }
   }
 }
 
@@ -1168,19 +1170,14 @@ function itg_survey_survey_form_submit($form , &$form_state) {
 
       // Insert for rating type answer
       if ($form_state['values']['question_type' . $ques_num] == 'rating') {
-
         for ($rating_field = 0; $rating_field < $form_detail['rating_total_count']; $rating_field++) {
           for ($rating_field_val = 1; $rating_field_val <= 5; $rating_field_val++) {
             if ($form_detail['answer_option' . $ques_num . '_' . $rating_field][$rating_field_val] == 1) {
-              $ans_data = 0;
-              if (!empty($form_state['values']['answer_option0_0'])) {
-
-                foreach ($form_state['values']['answer_option0_0'] as $ans_data) {
+                foreach ($form_state['values']['answer_option'.$rating_field.'_'.$rating_field] as $ans_data) {
                   if ($ans_data != 0) {
                     $rating = $ans_data;
                   }
                 }
-              }
 
               db_insert('itg_survey_detail')
                   ->fields(array(

@@ -52,7 +52,6 @@ function video_rss_feed() {
  */
 function get_video_item_rss($section_id, $term_name, $section_url) {
   global $base_url;
-  $tid_list = array();
   $tid = $section_id;
   $tid_list = array();
   if (!empty($tid)) {
@@ -114,18 +113,18 @@ function get_video_item_rss($section_id, $term_name, $section_url) {
     $created = $resvalue['created'];
     date_default_timezone_set("GMT");
     $created_date = date("D, d M Y H:i:s e", $created);
-    $output .= '<item>';
-    $output .= '<title><![CDATA[' . $title . ']]></title>';
-    $output .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>';
-    $output .= '<description><a href="' . $url . '?utm_source=rss"><img src="' . $img_url . '" align="left" hspace="2" height="82" width="107" alt="" border="0" /></a><![CDATA[' . $body_value . ']]></description>';
-    $output .= '<pubDate>' . $created_date . '></pubDate>';
-    $output .= '<media:content type="video/quicktime" expression="full" url= "' . $url . '?utm_source=rss">';
-    $output .= '<media:category scheme="' . $url . '?utm_source=rss">' . $term_name . '</media:category>';
-    $output .= '<media:text type="plain">' . $title . '</media:text>';
-    $output .= '<media:rating scheme="urn:simple">nonadult</media:rating>';
-    $output .= '<media:thumbnail width="107" height="82" url="' . $img_url . '"/>';
+    $output .= '<item>'. "\r\n";
+    $output .= '<title><![CDATA[' . $title . ']]></title>'. "\r\n";
+    $output .= '<link><![CDATA[' . $url . '?utm_source=rss]]></link>'. "\r\n";
+    $output .= '<description><a href="' . $url . '?utm_source=rss"><img src="' . $img_url . '" align="left" hspace="2" height="82" width="107" alt="" border="0" /></a><![CDATA[' . $body_value . ']]></description>'. "\r\n";
+    $output .= '<pubDate>' . $created_date . '></pubDate>'. "\r\n";
+    $output .= '<media:content type="video/quicktime" expression="full" url= "' . $url . '?utm_source=rss">'. "\r\n";
+    $output .= '<media:category scheme="' . $url . '?utm_source=rss">' . $term_name . '</media:category>'. "\r\n";
+    $output .= '<media:text type="plain"><![CDATA[ ' . check_plain($title) . ' ]]></media:text>'. "\r\n";
+    $output .= '<media:rating scheme="urn:simple">nonadult</media:rating>'. "\r\n";
+    $output .= '<media:thumbnail width="107" height="82" url="' . $img_url . '"/>'. "\r\n";
     $output .= '</media:content>';
-    $output .= '</item>';
+    $output .= '</item>'. "\r\n";
   }
   return $output;
 }

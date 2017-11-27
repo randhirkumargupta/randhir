@@ -11,8 +11,7 @@ module_load_include('inc' , 'itg_category_manager' , 'includes/itg_category_mana
 /**
  * Implements hook_init
  */
-function itg_category_manager_init() {
-  variable_set('taxonomy_terms_per_page_admin' , 20);
+function itg_category_manager_init() {  
   global $base_url;
   $settings['baseUrl'] = $base_url;
   drupal_add_js(array('baseUrl' => $settings) , 'setting');
