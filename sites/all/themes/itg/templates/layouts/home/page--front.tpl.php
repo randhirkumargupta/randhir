@@ -970,11 +970,7 @@ if ($theme != 'itgadmin') {
                       }
                     }
                     ?>
-                    <div><?php
-                        if (function_exists('vukkul_view')) {
-                          vukkul_view();
-                        }
-                        ?></div>
+                    
                 </div>
             </div>
             <!--------------------------------Code for Front tpl---------------------------------------->
