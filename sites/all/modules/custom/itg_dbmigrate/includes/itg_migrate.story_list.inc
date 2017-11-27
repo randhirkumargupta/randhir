@@ -1072,7 +1072,7 @@ class ItgStoryListMigration extends XMLMigration {
           'gallery_position' => 'story',
           'gallery_id' => $gall_id,
         ))->execute();
-    __node_for_story_update_image($node->nid);
+    //__node_for_story_update_image($node->nid);
   }
   
     public function read_folder_xml_story() {
