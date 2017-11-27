@@ -747,12 +747,6 @@ function itg_facebook_share_count($url) {
 
 function itg_google_share_count($url) {
   if (!empty($url)) {
-//    $html = file_get_contents("https://plusone.google.com/_/+1/fastbutton?url=" . urlencode($url));
-//    $doc = new DOMDocument();
-//    libxml_use_internal_errors(true);
-//    $doc->loadHTML($html);
-//    $counter = $doc->getElementById('aggregateCount');
-//    return $counter->nodeValue;
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, "https://clients6.google.com/rpc");
     curl_setopt($curl, CURLOPT_POST, 1);
@@ -777,8 +771,6 @@ function _related_story_left_block_content() {
     $related_result = itg_get_related_story_id($related_content);
   }
   if(!empty($related_result)) {
-  //$related_story = '<h3>Related</h3>';
-  //$related_story.= "<div class='row'><ul>";
   $i = 0;
   $counter = 0;
   foreach ($related_result as $site_hash_key) {
@@ -789,7 +781,6 @@ function _related_story_left_block_content() {
       ++$counter;
     $current_entity_id = $site_hash_key;
     $related_data = itg_get_related_story_content($current_entity_id);
-    //if (!empty($related_data)) {
       $display_title = get_related_display_title($arg[1], $current_entity_id);
       if(!empty($display_title)) {
         $display_title = $display_title;
@@ -811,8 +802,6 @@ function _related_story_left_block_content() {
         $related_story.= "<li class='col-md-12'><a href='$front_url' target='_blank' title='$related_title'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
         $related_story.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
       }
-      
-    //}
     $i++;
     if ($i == 10)
       break;
@@ -844,8 +833,7 @@ function _related_story_bottom_block_content() {
       ++$counter;
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
-      //if (!empty($related_data)) {
-        $display_title = get_related_display_title($arg[1], $current_entity_id);
+      $display_title = get_related_display_title($arg[1], $current_entity_id);
         if (!empty($display_title)) {
           $display_title = $display_title;
         }
@@ -868,7 +856,6 @@ function _related_story_bottom_block_content() {
           $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
           $related_story.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
         }
-      //}
       $i++;
       if ($i == 4)
         break;
@@ -960,8 +947,6 @@ function _related_podcast_bottom_block_content() {
         $related_story.= "<li class='col-md-3 col-sm-6 col-xs-6'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
         $related_story.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
       }
-
-      // }
       $i++;
       if ($i == 10)
         break;
