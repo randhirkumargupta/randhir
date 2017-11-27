@@ -265,17 +265,11 @@ function itg_preprocess_html(&$vars) {
         '#type' => 'markup',
         '#markup' => $code,
       );
+      
       drupal_add_html_head($script_code, $ads_key);
     }
   }
   
-  // Code for setting page header title for home page
-  /*if (!empty(arg(1)) && is_numeric(arg(1))) {
-    $arg_data = node_load(arg(1));
-    if ($arg_data->type == 'page' && $arg_data->nid == 2 && isset($arg_data->metatags[LANGUAGE_NONE]['title']['value']) && !empty($arg_data->metatags[LANGUAGE_NONE]['title']['value'])) {
-      $vars['head_title'] = $arg_data->metatags[LANGUAGE_NONE]['title']['value'] . ' | IndiaToday';
-    }
-  }*/
 }
 
 /**
@@ -448,30 +442,39 @@ function itg_link($variables) {
  * @return string
  */
 function itg_js_alter(&$javascript) {
-  // some js unset
-
+  
+  unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
+  unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+  
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/styles/default/colorbox_style.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_load.js']);
     unset($javascript['sites/all/modules/contrib/colorbox/js/colorbox_inline.js']);
-  }
-  
-  unset($javascript['sites/all/modules/custom/itg_common/js/itg_common_admin_form.js']);
-  unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
-  unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
-  unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
+    
+    //remove some js in footer for home page
+    $javascript['misc/jquery.once.js']['scope'] = 'footer';
+    $javascript['sites/all/modules/contrib/jquery_update/replace/ui/external/jquery.cookie.js']['scope'] = 'footer';
+    $javascript['sites/all/modules/contrib/jquery_update/replace/misc/jquery.form.min.js']['scope'] = 'footer';
+    $javascript['misc/ajax.js']['scope'] = 'footer';
+    $javascript['sites/all/modules/contrib/jquery_update/js/jquery_update.js']['scope'] = 'footer';
+    $javascript['misc/progress.js']['scope'] = 'footer';
+    
+  }  
 
-//itg theme JS alter    
+  //remove some js in footer for all front page    
   $javascript['sites/all/themes/itg/js/script.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/slick.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/jquery.liMarquee.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';
-  //$javascript['sites/all/themes/itg/js/bootstrap.min.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/ripple.js']['scope'] = 'footer';  
   $javascript['sites/all/themes/itg/js/jquery.mCustomScrollbar.concat.min.js']['scope'] = 'footer';
   $javascript['sites/all/themes/itg/js/stickyMojo.js']['scope'] = 'footer';
-  $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';
+  $javascript['sites/all/themes/itg/js/ion.rangeSlider.js']['scope'] = 'footer';  
+  $javascript['sites/all/modules/contrib/google_analytics/googleanalytics.js']['scope'] = 'footer';
+  $javascript['sites/all/modules/contrib/google_analytics_et/js/google_analytics_et.js']['scope'] = 'footer';
 
 }
 
