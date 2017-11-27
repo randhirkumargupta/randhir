@@ -86,6 +86,7 @@ if (!empty($data['node_data'])) :
 
                 // prepare configuration for sharing
                 $share_title = $data['node_data']->title;
+                $bigstory_fb_share = "";
                 if(function_exists('itg_common_only_text_string')) {
                 $bigstory_fb_share = itg_common_only_text_string($share_title);
                 }
