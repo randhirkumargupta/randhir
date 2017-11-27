@@ -570,7 +570,7 @@ function akamai_cc_clear_frm_form_submit(&$form, &$form_state) {
     $qry = db_select('node', 'n');
     $qry->condition('n.type', $akamai_config_cctype_type);
     $qry->condition('n.status', 1);
-    $qry->fields('n', array('nid'));
+    $qry->fields('n', array('nid', 'type'));
     $qry->orderBy('n.changed', 'DESC');
     $qry->range(0, $akamai_config_cctype_flag);
     $res = $qry->execute();
@@ -581,7 +581,6 @@ function akamai_cc_clear_frm_form_submit(&$form, &$form_state) {
 
   $a = array();
   foreach ($res as $chunk_data) {
-    $a[] = $chunk_data;
     $operations[] = array('akamai_cc_clear_ct_op', array($chunk_data));
   }
 
@@ -606,7 +605,17 @@ function akamai_cc_clear_frm_form_submit(&$form, &$form_state) {
 function akamai_cc_clear_ct_op($nodedata, &$context) {
   $message = '';
   if (isset($nodedata->nid) && !empty($nodedata->nid)) {
-    itg_akamai_clear_url('node/' . $nodedata->nid);
+    $alias = drupal_get_path_alias('node/' . $nodedata->nid);
+    if (isset($alias) && !empty($alias)) {
+      $amp_types = itg_akamai_amp_cc_mapping();
+      if (in_array($nodedata->type, $amp_types)) {
+        $url = itg_akamai_send_for_host_mapping_for_amp($alias);
+        itg_akamai_clear_url($url);
+      }
+      else {
+        itg_akamai_clear_url($alias);
+      }
+    }
   }
 }
 
