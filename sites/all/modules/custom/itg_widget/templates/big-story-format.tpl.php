@@ -88,7 +88,7 @@ if (!empty($data['node_data'])) :
                 $share_title = $data['node_data']->title;
                 $bigstory_fb_share = "";
                 if(function_exists('itg_common_only_text_string')) {
-                $bigstory_fb_share = itg_common_only_text_string($share_title);
+                  $bigstory_fb_share = itg_common_only_text_string($share_title);
                 }
                 $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
                 $short_url = shorten_url($actual_link, 'goo.gl');
