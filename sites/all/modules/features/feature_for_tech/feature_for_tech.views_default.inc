@@ -101,19 +101,6 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['type']['label'] = '';
   $handler->display->display_options['fields']['type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['type']['element_label_colon'] = FALSE;
-  /* Field: Content: Description */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Field: Field: iOS */
-  $handler->display->display_options['fields']['field_story_expert_description']['id'] = 'field_story_expert_description';
-  $handler->display->display_options['fields']['field_story_expert_description']['table'] = 'field_data_field_story_expert_description';
-  $handler->display->display_options['fields']['field_story_expert_description']['field'] = 'field_story_expert_description';
-  $handler->display->display_options['fields']['field_story_expert_description']['label'] = '';
-  $handler->display->display_options['fields']['field_story_expert_description']['element_label_colon'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -154,7 +141,7 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_story_redirection_url_titl']['field'] = 'field_story_redirection_url_titl';
   $handler->display->display_options['fields']['field_story_redirection_url_titl']['label'] = '';
   $handler->display->display_options['fields']['field_story_redirection_url_titl']['element_label_colon'] = FALSE;
-  /* Field: Content: Designation */
+  /* Field: Content: Addon Story Title */
   $handler->display->display_options['fields']['field_story_new_title']['id'] = 'field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['table'] = 'field_data_field_story_new_title';
   $handler->display->display_options['fields']['field_story_new_title']['field'] = 'field_story_new_title';
@@ -317,17 +304,6 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => 'content',
-  );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -450,17 +426,6 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'video_landing_page_170_x_127',
-    'image_link' => 'content',
-  );
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -589,17 +554,6 @@ function feature_for_tech_views_default_views() {
   $handler->display->display_options['fields']['field_story_extra_small_image']['empty'] = '<img width="88" height="66" class="no-result-image" src="../sites/all/themes/itg/images/dimage_170X127.jpg">';
   $handler->display->display_options['fields']['field_story_extra_small_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_extra_small_image']['settings'] = array(
-    'image_style' => 'widget_very_small',
-    'image_link' => '',
-  );
-  /* Field: Field: Small image */
-  $handler->display->display_options['fields']['field_story_small_image']['id'] = 'field_story_small_image';
-  $handler->display->display_options['fields']['field_story_small_image']['table'] = 'field_data_field_story_small_image';
-  $handler->display->display_options['fields']['field_story_small_image']['field'] = 'field_story_small_image';
-  $handler->display->display_options['fields']['field_story_small_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_small_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_small_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_small_image']['settings'] = array(
     'image_style' => 'widget_very_small',
     'image_link' => '',
   );

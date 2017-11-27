@@ -75,17 +75,24 @@ function itg_story_get_workbench_title($title) {
         $content_type = arg(1);
         $state = trim(arg(2));
         
-        $state_array = array('mydraft-story' => 'draft', 'in-queue-story' => 'needs_review', 'my-queue-story' => 'needs_review', 'my-rejected-story' => 'rejected', 'my-unpublished-story' => 'draft', 'unpublished-story' => 'draft', 'archive-story' => 'published');
+        $state_array = array('mydraft-story' => 'draft', 'in-queue-story' => 'needs_review', 'my-queue-story' => 'needs_review', 'my-rejected-story' => 'rejected', 'my-unpublished-story' => 'draft', 'unpublished-story' => 'draft', 'archive-story' => 'draft');
         $options = '';
         $title = strtolower(trim($title));
         $query = db_select('node', 'n');
+        $query->Join('field_data_field_story_source_type', 'sourcetype', 'sourcetype.entity_id = n.nid');
         if ($state =='my-published-story' || $state =='published-story') {
           $query->condition('n.status', 1, '=');
         } else if ($state !='expired-story' && $state !='my-expired-story') {
-           $query->Join('workbench_moderation_node_history', 'wm', 'n.nid = wm.nid');
-           $query->condition('wm.state', $state_array[$state]);
+            $query->Join('workbench_moderation_node_history', 'wm', 'n.nid = wm.nid');
+            $or = db_or();
+            $or->condition('wm.state', $state_array[$state]);
+            $or->condition('sourcetype.field_story_source_type_value', 'migrated');
+            $query->condition($or);
            if ($state =='my-unpublished-story' || $state == 'published-story') {
-            $query->condition('wm.from_state', 'published');
+            $un_or = db_or();
+            $un_or->condition('wm.from_state', 'published');
+            $un_or->condition('sourcetype.field_story_source_type_value', 'migrated');
+            $query->condition($un_or);
            }
            $query->condition('wm.is_current', 1); 
            $query->condition('n.status', 0);
