@@ -20,6 +20,7 @@ module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_author_story');
 module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_polls');
 module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_edit_profile');
 module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_bookmark');
+module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_middleware');
 
 /**
  * Function for APP API resource declaration. 
@@ -2531,18 +2532,18 @@ function itg_rapid_api_hamburger_menu($token) {
 function itg_rapid_api_horizontal_menu($token) {
     $redis_key = "itgd_rapid_horizontal_menu_json";
     $result_get = getRedis($redis_key);
-
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
-        $jsondata = variable_get('horizontal_menu_json');
+     
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
+        $jsondata = horizontal_menu_middleware_data();//variable_get('horizontal_menu_json');
+        $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+    //}
 
     $obj = json_decode($jsondata, true);
     $return_obj = $obj;
-
     return $return_obj;
 }
 
