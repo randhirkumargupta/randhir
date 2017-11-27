@@ -59,7 +59,10 @@
           </div>
           <div class="ltv-and-ss"> 
           <div class="live-tv-link">
-              <?php $live_tv_img = '<img src="'. $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/imgpsh_fullsize.png" alt="LiveTV" title="LiveTV" />'; ?>
+            <?php
+              $livetv_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/imgpsh_fullsize.png');
+            ?>
+              <?php $live_tv_img = '<img src="'.$livetv_url.'" alt="LiveTV" title="LiveTV" />'; ?>
               <?php print l($live_tv_img, 'livetv', array('html' => TRUE, 'attributes' => array('class' => array('live-tv-icon')))); ?>
               <a href="javascript:void(0)" class="breaking-new-close">X</a>            
           </div>
