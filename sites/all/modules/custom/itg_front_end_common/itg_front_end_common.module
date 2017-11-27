@@ -559,7 +559,6 @@ function _related_video_block_content() {
     foreach ($related_result as $site_hash_key) {
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
-      //if (!empty($related_data)) {
         $display_title = get_related_display_title($arg[1], $current_entity_id);
         if (!empty($display_title)) {
           $display_title = $display_title;
@@ -580,11 +579,10 @@ function _related_video_block_content() {
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         
         if (!empty($related_title)) {
-        $img_alt = strip_tags($related_title);
-        $related_video.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
-        $related_video.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
+          $img_alt = strip_tags($related_title);
+          $related_video.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
+          $related_video.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
         }
-      //}
     }
 
     $related_video.= "</ul></div>";
@@ -619,7 +617,6 @@ function _related_photo_block_content() {
     foreach ($related_result as $site_hash_key) {
       $current_entity_id = $site_hash_key;
       $related_data = itg_get_related_story_content($current_entity_id);
-      //if (!empty($related_data)) {
         $display_title = get_related_display_title($arg[1], $current_entity_id);
         if (!empty($display_title)) {
           $display_title = $display_title;
@@ -639,11 +636,10 @@ function _related_photo_block_content() {
         }
         $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
         if (!empty($related_title)) {
-        $img_alt = strip_tags($related_title);
-        $related_photo.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
-        $related_photo.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
+          $img_alt = strip_tags($related_title);
+          $related_photo.= "<li class='col-md-3'><a href='$front_url' target='_blank' title='$img_alt'><img src='$related_image_url' class='related-default' alt='$img_alt' title='' /></a>";
+          $related_photo.= "<span class='tile'><a href='$front_url' target='_blank' title='$related_title'>" . $related_title . "</a></span></li>";
         }
-      //}
     }
 
     $related_photo.= "</ul></div>";
