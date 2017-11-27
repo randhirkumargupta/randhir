@@ -13,6 +13,16 @@ global $base_url;
 
 <div class="row catagory-grid">
   <?php foreach ($rows as $id => $row): 
+      // code for add on story title and url
+  if (function_exists('itg_common_get_addontitle_for_view')) {
+    $add_on_data = itg_common_get_addontitle_for_view($row['nid']);
+    $pipelinetext = "";
+    $pipelineclass = "";
+    if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
+      $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+      $pipelineclass = ' pipeline-added';
+    }
+  }
     $video_class ="";
   if($row['type'] == 'videogallery') {
      $video_class = 'video-icon';
@@ -34,10 +44,12 @@ global $base_url;
       <?php } ?>
       </div>
       <div class="detail">
-        <h3 title="<?php echo strip_tags($row['title']);?>">
+          <h3 class="<?php echo $pipelineclass; ?>" title="<?php echo strip_tags($row['title']);?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             print l(itg_common_get_smiley_title($row['nid'], 0, 35), "node/" . $row['nid'], array("html" => TRUE));
+            echo $pipelinetext;
+            
           }
           else {
             print l(strip_tags(__html_output_with_tags($row['title'])), "node/" . $row['nid'], array("html" => TRUE));

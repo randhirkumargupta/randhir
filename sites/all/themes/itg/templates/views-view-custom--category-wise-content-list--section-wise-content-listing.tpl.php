@@ -12,7 +12,17 @@ global $base_url;
   <h3><?php print $title; ?></h3>
 <?php endif; ?>
 
-<?php foreach ($rows as $id => $row): 
+<?php foreach ($rows as $id => $row):
+  // code for add on story title and url
+  if (function_exists('itg_common_get_addontitle_for_view')) {
+    $add_on_data = itg_common_get_addontitle_for_view($row['nid']);
+    $pipelinetext = "";
+    $pipelineclass = "";
+    if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
+      $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+      $pipelineclass = ' pipeline-added';
+    }
+  }
   $video_class ="";
   if($row['type'] == 'videogallery') {
      $video_class = 'video-icon';
@@ -32,12 +42,15 @@ global $base_url;
             <?php print l($image_link, "node/" . $row['nid'], array("html" => true)); ?>
           <?php endif; ?>
           <div class="cat-heading">
-              <h3 class="cat-heading-title" title="<?php echo strip_tags($row['title']);?>"><?php
+              <h3 class="<?php echo $pipelineclass; ?> cat-heading-title" title="<?php echo strip_tags($row['title']);?>"><?php
                 if (function_exists('itg_common_get_smiley_title')) {
                   print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
+                  echo $pipelinetext;
                 }
                 else {
                   print l(strip_tags(mb_strimwidth($row['title'], 0, 120, "..")), "node/" . $row['nid']);
+                  echo $pipelinetext;
+                  
                 }
                 ?></h3>
           </div>
@@ -58,12 +71,15 @@ global $base_url;
             <figcaption><i class="fa fa-play-circle"></i> <?php print $row['field_video_duration']; ?></figcaption>
       <?php } ?>
     </div>
-    <div class="detail"><h3 title="<?php echo strip_tags($row['title']);?>"><?php
+    <div class="detail"><h3 class="<?php echo $pipelineclass; ?>" title="<?php echo strip_tags($row['title']);?>"><?php
       if (function_exists('itg_common_get_smiley_title')) {
         print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
+        echo $pipelinetext;
+        
       }
       else {
         print l(__html_output_with_tags($row['title']), "node/" . $row['nid']);
+        echo $pipelinetext;
       }
       ?></h3>
         <?php if (strtolower($row['type']) == 'story'): ?>

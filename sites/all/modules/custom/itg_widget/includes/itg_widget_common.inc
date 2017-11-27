@@ -3057,7 +3057,7 @@ function itg_widget_node_update($node) {
  * @param int $category_tid
  * @param string $node_type
  */
-function manage_widget_order_during_node_update($nid, $category_tid, $node_type) {
+function  manage_widget_order_during_node_update($nid, $category_tid, $node_type) {
     $max_result = get_max_weight($category_tid, $node_type);
     $table = 'itg_widget_order_section';
     if (strtolower($node_type) == 'all') {
