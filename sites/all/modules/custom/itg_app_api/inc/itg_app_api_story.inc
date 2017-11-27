@@ -273,7 +273,7 @@ function getHighlight($node) {
 function getRating($node) {
     $rating = array();
     $field_story_rating = trim($node->field_story_rating['und'][0]['value']);
-    if($field_story_rating){
+    if($field_story_rating !=""){
         $rating['r_cur_value'] = "$field_story_rating";
         $rating['r_upper_range'] = "$field_story_rating";
         $rating['r_is_star_rating'] = "$field_story_rating";
@@ -284,7 +284,7 @@ function getRating($node) {
 
 function getRatings($node) {
     $rating = array();
-    if($field_story_rating){
+    if($field_story_rating !=""){
         $field_story_rating = trim($node->field_story_rating['und'][0]['value']);
         $rating['r_cur_value'] = "$field_story_rating";
         $rating['r_upper_range'] = "$field_story_rating";
