@@ -295,10 +295,10 @@ function theme_filefield_source_itg_image_repository_element($variables) {
  */
 function filefield_source_itg_image_repository_page($entity_type, $bundle_name, $field_name) {
     global $conf;
-
+    $conf['preprocess_js'] = 0;
     $field = field_info_field($field_name);
-
-    // Disable absolute URLs.
+ 
+    // Disable absolu URLs.
     $conf['itg_image_repository_settings_absurls'] = 0;
 
     module_load_include('inc', 'itg_image_repository', 'inc/itg_image_repository.page');
