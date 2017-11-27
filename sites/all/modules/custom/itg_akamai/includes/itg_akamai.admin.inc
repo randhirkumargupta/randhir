@@ -11,6 +11,7 @@ function itg_akamai_settings() {
     '#type' => 'fieldset',
     '#title' => 'Akamai Cache Host Map URL',
   );
+
   $form['itg_akamai_host_map']['itg_akamai_mapping_host'] = array(
     '#type' => 'textfield',
     '#title' => t('ITG Akamai Map Host URL'),
@@ -71,7 +72,7 @@ function itg_akamai_settings() {
     '#description' => t('Akamai Client Secret'),
     '#required' => TRUE,
   );
-  
+
   $form['itg_config_fieldset']['itg_akamai_access_token'] = array(
     '#type' => 'textfield',
     '#title' => t('Akamai Access Token'),
@@ -79,13 +80,23 @@ function itg_akamai_settings() {
     '#description' => t('Akamai Access Token'),
     '#required' => TRUE,
   );
-   
+
+  $form['itg_config_fieldset']['itg_akamai_amp_url_purge_ptrn'] = array(
+    '#type' => 'radios',
+    '#options' => array('/amp' => '/amp', '?amp' => '?amp'),
+    '#title' => t('AMP Purge Url Pattern'),
+    '#default_value' => variable_get('itg_akamai_amp_url_purge_ptrn', '/amp'),
+    '#description' => t('Please select Amp Purge Url pattern i.e /amp Or ?amp'),
+    '#required' => TRUE,
+  );
+
+
   $nodes_list = node_type_get_types();
   $nodes_list_array = array();
   foreach ($nodes_list as $key => $value) {
     $nodes_list_array[$key] = $value->name;
   }
-   
+
   $form['itg_config_fieldset']['itg_akamai_cc_conf_list'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Select Content Type List for Akamai'),
@@ -555,14 +566,18 @@ function akamai_cc_clear_frm_form_submit(&$form, &$form_state) {
   $akamai_config_cctype_flag = $form_state['values']['limit'];
   $akamai_config_cctype_type = $form_state['values']['contenttype'];
 
-  $qry = db_select('node', 'n');
-  $qry->condition('n.type', $akamai_config_cctype_type);
-  $qry->condition('n.status', 1);
-  $qry->fields('n', array('nid'));
-  $qry->orderBy('n.updated', 'DESC');
-  $qry->range(0, $akamai_config_cctype_flag);
-  $res = $qry->execute();
-
+  try {
+    $qry = db_select('node', 'n');
+    $qry->condition('n.type', $akamai_config_cctype_type);
+    $qry->condition('n.status', 1);
+    $qry->fields('n', array('nid'));
+    $qry->orderBy('n.changed', 'DESC');
+    $qry->range(0, $akamai_config_cctype_flag);
+    $res = $qry->execute();
+  }
+  catch (Exception $e) {
+    watchdog('ITG Akamai', 'Error:' . $e->getMessage());
+  }
 
   $a = array();
   foreach ($res as $chunk_data) {

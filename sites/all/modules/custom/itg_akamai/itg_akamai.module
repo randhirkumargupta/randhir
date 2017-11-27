@@ -358,18 +358,23 @@ function itg_akamai_varnish_host_mapping($paths) {
  * @param array $paths
  */
 function itg_akamai_send_for_host_mapping_for_amp($paths) {
+  // Getting AMP url patten from configuration
+  $amp_pattern = variable_get('itg_akamai_amp_url_purge_ptrn', '/amp');
+  if(isset($amp_pattern) && !empty($amp_pattern)) {  // Setting default value If not found any setting
+    $amp_pattern = '/amp';
+  }
   $path_new_array = array();
   if (is_array($paths)) {
     if (isset($paths) && !empty($paths)) {
       foreach ($paths as $paths_chunk) {
         $path_new_array[] = $paths_chunk;
-        $path_new_array[] = $paths_chunk . '?amp';
+        $path_new_array[] = $paths_chunk . $amp_pattern;
       }
     }
   }
   else {
     $path_new_array[] = $paths;
-    $path_new_array[] = $paths . '?amp';
+    $path_new_array[] = $paths . $amp_pattern;
   }
   return $path_new_array;
 }
@@ -753,12 +758,12 @@ function itg_akamai_exit() {
         drupal_add_http_header('Edge-control', 'no-store');
         drupal_add_http_header('Cache-Control', 'no-store');
       }
-      if (!empty($_SESSION['messages']['error'])) {    
+      if (!empty($_SESSION['messages']['error'])) {
         $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
         $key = array_search($msg, $_SESSION['messages']['error']);
 
         if ($key !== FALSE) {
-          unset($_SESSION['messages']['status'][$key]);     
+          unset($_SESSION['messages']['status'][$key]);
         }
       }
     }
