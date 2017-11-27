@@ -155,10 +155,9 @@ function filefield_source_itg_image_repository_process($element, &$form_state, $
     $getimageoptions = explode(')', @$getimageoptions[1]);
     $getimagehightwidth = explode('x', @$getimageoptions[0]);
 
-    $url=url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $form['#node']->type . '/' . $element['#field_name'], array('query' => array('app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));
-      
-    $itg_image_repository_function="showimagerepopopu('".$url."')";
-    $element['filefield_itg_image_repository']['display_path'] = array(
+     $url = url('file/itg_image_repository/' . $element['#entity_type'] . '/' . $form['#node']->type . '/' . $element['#field_name'], array('query' => array('advagg'=>0,'app' => $instance['label'] . '|url@' . $filepath_id, 'field_name' => $element['#field_name'], 'height' => @$getimagehightwidth[1], 'width' => @$getimagehightwidth[0],'btn_name'=>$element['#name'])));      
+     $itg_image_repository_function="showimagerepopopu('".$url."')";
+     $element['filefield_itg_image_repository']['display_path'] = array(
         '#type' => 'markup',
         '#markup' => '<span id="' . $display_id . '" class="filefield-sources-imce-display">' . t('No file selected') . '</span> (<a class="filefield-sources-imce-browse" href="javascript:void(0)" onclick="' . $itg_image_repository_function . '">' . t('browse') . '</a>)',
     );

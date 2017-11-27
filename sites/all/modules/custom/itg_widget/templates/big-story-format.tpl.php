@@ -86,8 +86,10 @@ if (!empty($data['node_data'])) :
 
                 // prepare configuration for sharing
                 $share_title = $data['node_data']->title;
-                $bigstory_title = preg_replace("/'/", "\\'", $data['node_data']->title);
-                $bigstory_fb_share = trim(htmlentities($bigstory_title, ENT_QUOTES));
+                $bigstory_fb_share = "";
+                if(function_exists('itg_common_only_text_string')) {
+                  $bigstory_fb_share = itg_common_only_text_string($share_title);
+                }
                 $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
                 $short_url = shorten_url($actual_link, 'goo.gl');
                 $pipelinetext = "";
