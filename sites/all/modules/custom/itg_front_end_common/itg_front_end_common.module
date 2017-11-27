@@ -914,7 +914,7 @@ function _related_podcast_bottom_block_content() {
     $related_result = itg_get_related_story_id($related_content);
   }
   $related_story = '';
-  // Fix for related label on front end.
+  // Display related heading on front end.
   if (!empty($related_result[0])) {
     $related_story = '<h3><span>' . t('Related Content') . '</span></h3>';
   }
