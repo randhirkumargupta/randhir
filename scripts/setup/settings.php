@@ -240,18 +240,17 @@ $databases['default']['default'] = array(
 
 
 $databases['default']['master'] = array(  
-  'database' => 'indiatoday_migrate',
+  'database' => 'indiatoday_staging',
   'username' => 'itgd_it_write',
   'password' => '!tgd@!t@wr!te@101',
-  'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com ',
+  'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
   'port' => '3306',
   'driver' => 'mysql',
   'prefix' => '',
 );
 
-$databases['default']['autoslave'] = array(
-  //'database' => 'indiatoday_migrate',
-  'database' => 'indiatoday_migrate',
+$databases['default']['autoslave'] = array(  
+  'database' => 'indiatoday_staging',
   'username' => 'itgd_it_read',
   'password' => '!tgd@!t@re@d@102',
   'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
