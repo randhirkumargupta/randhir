@@ -15,7 +15,15 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-
+    $photo_dis_count = fetchMasterConfigData('photo_display_count');
+    $photo_display_count = isset($photo_dis_count) ? $photo_dis_count : "10";
+    
+    $success_status_mess = fetchMasterConfigData('photo_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
+    $photo_pag_cap = fetchMasterConfigData('photo_pagination_cap');
+    $photo_pagination_cap = isset($photo_pag_cap) ? $photo_pag_cap : "50";
+    
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -27,7 +35,7 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
 
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -36,13 +44,13 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     //data array building
     $datacount = $data['lcount'];
     $data_up_time = $data['updated_datetime'];
-
+    
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
     $data_array['layout_id'] = "0";
     $data_array['photo_count'] = "$datacount";
-    $data_array['photo_display_count'] = "10";
-    $data_array['photo_pagination_cap'] = "50";
+    $data_array['photo_display_count'] = "$photo_display_count";
+    $data_array['photo_pagination_cap'] = "$photo_pagination_cap";
     $data_array['updated_datetime'] = "$data_up_time";
 
     $data_array['photo'] = $data['data'];
@@ -227,18 +235,18 @@ function generatePhotoCategoryList($tid, $pageno) {
  */
 function photoDetailPageRerourceValue($id) {
     // variable decalartion
-    // variable decalartion
-
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
-
+    
+    $success_status_mess = fetchMasterConfigData('photo_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     // list array building
     $data = generatePhotoDeatilList($id);
     if ($data['data']['photo_count'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";

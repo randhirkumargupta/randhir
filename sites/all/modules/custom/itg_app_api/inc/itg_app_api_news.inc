@@ -10,13 +10,21 @@
  * @return array
  */
 function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
-
     // variable decalartion
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
 
+    $success_status_mess = fetchMasterConfigData('news_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
+    $dis_count = fetchMasterConfigData('news_display_count');
+    $display_count = isset($dis_count) ? $dis_count : "10";
+    
+    $pag_cap = fetchMasterConfigData('news_pagination_cap');
+    $pagination_cap = isset($pag_cap) ? $pag_cap : "50";
+    
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -27,7 +35,7 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data = generateNewsCategoryList($tid, $pageno);
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -45,10 +53,9 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['title'] = "$term_name";
     $data_array['layout_id'] = "0";
     $data_array['news_count'] = "$datacount";
-    $data_array['news_display_count'] = "10";
-    $data_array['news_pagination_cap'] = "50";
+    $data_array['news_display_count'] = "$display_count";
+    $data_array['news_pagination_cap'] = "$pagination_cap";
     $data_array['updated_datetime'] = "$data_up_time";
-
 
     $data_array['news'] = $data['data'];
     $output_array['data'] = $data_array;
