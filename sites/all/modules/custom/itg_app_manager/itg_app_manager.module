@@ -112,6 +112,14 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
+    
+    $items['top-stories-management'] = array(
+        'title' => 'Top stories management',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('top_stories_management_form'),
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
    
     return $items;
 }
@@ -990,7 +998,7 @@ function itg_app_manager_packages_form($form, &$form_state) {
     ctools_include('modal');
     ctools_modal_add_js();
     $default_checked = array();
-    $selected_packages = itg_app_middleware_table('itg_widget');
+    $selected_packages = itg_app_middleware_table('itg_package');
     foreach ($selected_packages as $package) {
         $default_checked[] = _get_term_from_name($package->name, 'category_management');
     }
@@ -1262,5 +1270,55 @@ function fetchMasterConfigData($key){
         $key_val = $results[0]->config_val;
     }
     return $key_val;
+}
+
+/**
+ * Top stories management menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function top_stories_management_form($form, &$form_state) {
+    $form['top_stories_management'] = array(
+            '#type' => 'radios',
+            '#title' => 'Top Stories',
+            '#options' => array('10' => 'Top 10', '15' => 'Top 15', '20' => 'Top 20', '25' => 'Top 25'),
+            '#default_value' => fetchMasterConfigData('top_stories_management')
+        );
+    $form['submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#submit' => array('top_stories_management_form_submit'),
+    );
+    return $form;
+}
+
+/**
+ * submit callback for Top stories management form
+ * @param array $form
+ * @param array $form_state
+ */
+function top_stories_management_form_submit($form, &$form_state) {
+    form_state_values_clean($form_state);
+    foreach ($form_state['values'] as $key => $val) {
+        $key_val = "";
+        $key_val = fetchMasterConfigData($key);
+        if($key_val !=""){
+            // uapdete query
+            db_update('itg_app_master_config_internal') 
+            ->fields(array(
+              'config_val' => $val,              
+            ))->condition('config_key', $key, '=')->execute();
+        }
+        else{
+            // insert query
+            $data = array(
+                'config_key' => $key,
+                'config_val' => $val,
+            );
+            drupal_write_record('itg_app_master_config_internal', $data);
+        }
+    }
+    drupal_set_message(t('Data saved successfully.'), 'status');
 }
 
