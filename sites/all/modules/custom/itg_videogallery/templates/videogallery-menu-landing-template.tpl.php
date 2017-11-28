@@ -34,8 +34,7 @@ if (empty($_GET['category'])) {
 ?>
 
 <script>
-
-$('.video_landing_menu').slick({
+jQuery('.video_landing_menu').slick({
   dots: false,
   infinite: true,
   speed: 300,

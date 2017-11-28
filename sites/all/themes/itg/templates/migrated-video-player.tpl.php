@@ -9,21 +9,16 @@ global $base_url;
 <script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
 
 <?php
+
 $refral_site = itg_common_get_domain($_SERVER["HTTP_REFERER"]);
 $external_side = 0;
-$width = 'auto';
-$height = 'auto';
 if (!empty($refral_site)) {
   if (strpos($base_url, $refral_site) === false) {
     $external_side = 1;
     $used_on = 'embed';
   }
 }
-if ($used_on == 'embed') {
-  $width = '647';
-  $height = '450';
-}
-$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $external_side);
+$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on ,$external_side);
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
@@ -33,10 +28,13 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
 
   function loadplayerjw() {
       var player_dfp = "<?php echo urlencode($data_video['dfp_tags']); ?>";
+
+      // var playerInstance = jwplayer('videoplayer');
       jwplayer('videoplayer').setup({
+          //var multipart=0;
           playlist: [{
-                  title: "",
-                  'image': "<?php echo $image; ?>",
+                  title: "", 
+                          'image': "<?php echo $image; ?>",
                   sources: [
                       {
                           file: "<?php echo $data_video['bitrate_url']; ?>"
@@ -47,8 +45,8 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
                       }]
               }],
           primary: "html5",
-          width: "<?php echo $width; ?>",
-          height: "<?php echo $height; ?>",
+          width: "100%",
+          height: "100%",
           aspectratio: "16:9",
           "stretching": "exactfit",
           androidhls: "true",
@@ -88,6 +86,5 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
       playerInstance.play();
 
   });
-  ga('create', '<?php echo $player_content["ga_code"]; ?>', 'auto');
 </script>
 <script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.gaevent.js'; ?>"></script>
