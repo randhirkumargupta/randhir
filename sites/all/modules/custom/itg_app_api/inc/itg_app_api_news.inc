@@ -322,7 +322,7 @@ function getPhotolist($nid) {
         $photolist_loop[$lcont]['np_caption'] = "$caption";
         $lcont++;
     }
-    $photolist[0]['photos'] = (array) $photolist_loop;
+    $photolist['photos'] = (array) $photolist_loop;
     return $photolist;
 }
 
