@@ -124,7 +124,7 @@ function itg_app_manager_menu() {
  * @return array
  */
 function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
-    if ($menu_form_id == '1' || $menu_form_id == '2') {
+    if ($menu_form_id == '1') {
         $menu_lablel_arr = array('' => '- Select -');
         $menu_lablel_query = db_select('itg_app_menu_master', 'imm');
         $menu_lablel_query->fields('imm', array('menu_name', 'menu_id'));
@@ -163,7 +163,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             '#type' => 'select',
             '#title' => '',
             '#delta' => $i,
-            '#options' => array('' => '- Select -', '0' => 'Static', '1' => 'Mix', '1208521' => 'Photo', '1207762' => 'Video', '775494' => 'Program'),
+            '#options' => array('' => '- Select -', '0' => 'Static', '1' => 'Mix', '1208521' => 'Photo', '1206552' => 'Video', '1206553' => 'Program'),
             '#ajax' => array(
                 'callback' => 'ajax_dependent_dropdown_callback',
                 'wrapper' => 'menu-title-' . $i,
@@ -379,7 +379,7 @@ function ajax_subsection_callback($form, $form_state) {
  * @param int $term_id
  * @return array
  */
-function _get_section_options($term_id) {
+function _get_section_options($term_id) {    
     $option_arr = array('' => '- Select -');
     if ((isset($term_id)) && !empty($term_id)) {
         if ($term_id == '1') {
