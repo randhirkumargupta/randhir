@@ -112,6 +112,34 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
+    
+    $items['top-stories-management'] = array(
+        'title' => 'Top stories management',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('top_stories_management_form'),
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    
+    $items['itg-app-manager-categories'] = array(
+        'title' => 'categories',
+        'page callback' => 'itg_app_manager_categories',
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['itg-app-manager-categories/%/delete'] = array(
+        'title' => 'categories Package',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_app_manager_categories_delete_comfirm', 1),
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+//    $items['categories-config/%ctools_js/form/%'] = array(
+//        'page callback' => 'itg_app_manager_categories_popup_form_callback',
+//        'page arguments' => array(1, 3),
+//        'access callback' => TRUE,
+//        'type' => MENU_CALLBACK,
+//    );
    
     return $items;
 }
@@ -967,10 +995,10 @@ function itg_app_widget_delete_record_comfirm_submit($form, &$form_state) {
     $form_state['redirect'] = "itg-app-widget";
 }
 
-function itg_app_manager_packages() {
+function itg_app_manager_packages() {    
     $output = array();
     $output['form'] = drupal_get_form('itg_app_manager_packages_form');
-    /*$middleware_data = itg_app_middleware_table('itg_package');
+    $middleware_data = itg_app_middleware_table('itg_package');
     $header = array();
     foreach ($middleware_data as $key => $val) {
         $delete = l(t('Delete'), 'itg-app-manager-packages/' . $val->id . '/delete');
@@ -982,8 +1010,7 @@ function itg_app_manager_packages() {
         '#rows' => $rows,
         '#empty' => t('Nothing found. Nada. Zip. Zilch.'),
     );
-    $output['table'] = $table;*/
-    //p($output);
+    $output['table'] = $table;
     return $output;
 }
 
@@ -995,17 +1022,19 @@ function itg_app_manager_packages_form($form, &$form_state) {
     foreach ($selected_packages as $package) {
         $default_checked[] = _get_term_from_name($package->name, 'category_management');
     }
+    
     $package_term = taxonomy_get_term_by_name('packages', 'category_management');
     foreach ($package_term as $pack_tid => $pack_obj) {
         $term_query = db_select('taxonomy_term_data', 'tt');
         $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
         $term_query->fields('tt', array('tid', 'name'));
         $term_query->condition('th.parent', $pack_obj->tid, '=');
-        $term_query_results = $term_query->execute()->fetchAll();
+        $term_query_results = $term_query->execute()->fetchAll();        
         foreach ($term_query_results as $key => $val) {
             $term_options[$val->tid] = $val->name . l('Config Settings', 'package-config/nojs/form/' . $val->tid . '', array('attributes' => array('class' => 'ctools-use-modal')));
         }
     }
+    
     $form['package_options'] = array(
         '#type' => 'checkboxes',
         '#options' => $term_options,
@@ -1057,7 +1086,7 @@ function itg_app_middleware_table($identifier) {
     $i_query = db_select('itg_app_middleware', 'itg_m');
     $i_query->fields('itg_m');
     $i_query->condition('itg_m.identifier', $identifier, '=');
-    $i_query_results = $i_query->execute()->fetchAll();
+    $i_query_results = $i_query->execute()->fetchAll();    
     return $i_query_results;
 }
 
@@ -1261,5 +1290,189 @@ function fetchMasterConfigData($key){
         $key_val = $results[0]->config_val;
     }
     return $key_val;
+}
+
+/**
+ * Top stories management menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function top_stories_management_form($form, &$form_state) {
+    $form['top_stories_management'] = array(
+            '#type' => 'radios',
+            '#title' => 'Top Stories',
+            '#options' => array('10' => 'Top 10', '15' => 'Top 15', '20' => 'Top 20', '25' => 'Top 25'),
+            '#default_value' => fetchMasterConfigData('top_stories_management')
+        );
+    $form['submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#submit' => array('top_stories_management_form_submit'),
+    );
+    return $form;
+}
+
+/**
+ * submit callback for Top stories management form
+ * @param array $form
+ * @param array $form_state
+ */
+function top_stories_management_form_submit($form, &$form_state) {
+    form_state_values_clean($form_state);
+    foreach ($form_state['values'] as $key => $val) {
+        $key_val = "";
+        $key_val = fetchMasterConfigData($key);
+        if($key_val !=""){
+            // uapdete query
+            db_update('itg_app_master_config_internal') 
+            ->fields(array(
+              'config_val' => $val,              
+            ))->condition('config_key', $key, '=')->execute();
+        }
+        else{
+            // insert query
+            $data = array(
+                'config_key' => $key,
+                'config_val' => $val,
+            );
+            drupal_write_record('itg_app_master_config_internal', $data);
+        }
+    }
+    drupal_set_message(t('Data saved successfully.'), 'status');
+}
+// andy here
+/**
+ * categories management menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+
+function itg_app_manager_categories() {    
+    $output = array();
+    $output['form'] = drupal_get_form('itg_app_manager_categories_form');
+    $middleware_data = itg_app_middleware_table('categories_options');
+    $header = array();
+    foreach ($middleware_data as $key => $val) {
+        $delete = l(t('Delete'), 'itg-app-manager-packages/' . $val->id . '/delete');
+        $rows[] = array('number' => $key + 1, 'name' => $val->name, 'delete' => $delete);
+    }
+    $table = array(
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+        '#empty' => t('Nothing found. Nada. Zip. Zilch.'),
+    );
+    $output['table'] = $table;
+    return $output;
+}
+/**
+ * Categories management form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_manager_categories_form($form, &$form_state) {
+    ctools_include('modal');
+    ctools_modal_add_js();
+    $default_checked = array();
+    $selected_packages = itg_app_middleware_table('categories_options');
+    foreach ($selected_packages as $package) {
+        $default_checked[] = _get_term_from_name($package->name, 'category_management');
+    }
+    
+    
+        $term_query = db_select('taxonomy_term_data', 'tt');
+        $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
+        $term_query->fields('tt', array('tid', 'name'));
+        $term_query->condition('tt.vid', 14, '=');
+        $term_query->condition('th.parent', 0, '=');
+        $term_query_results = $term_query->execute()->fetchAll();        
+        foreach ($term_query_results as $key => $val) {
+            //$term_options[$val->tid] = $val->name . l('Config Settings', 'categories-config/nojs/form/' . $val->tid . '', array('attributes' => array('class' => 'ctools-use-modal')));
+            $term_options[$val->tid] = $val->name;
+        }
+    
+    
+    $form['categories_options'] = array(
+        '#type' => 'checkboxes',
+        '#options' => $term_options,
+        '#default_value' => $default_checked,
+    );
+    $form['categories_submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#submit' => array('itg_app_manager_categories_form_submit'),
+    );
+    return $form;
+}
+/**
+ * submit callback for Top stories management form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_categories_form_submit($form, &$form_state) {
+    foreach ($form_state['values']['categories_options'] as $id => $val) {
+        if ($val > 0) {
+            $package_name = $form['categories_options']['#options'][$val];
+            $result = db_select('itg_app_middleware', 'it_m')
+                    ->fields('it_m', array('id'))
+                    ->condition('name', $package_name)
+                    ->condition('identifier', 'categories_options')
+                    ->execute();
+            $num_of_results = $result->rowCount();
+            if ($num_of_results == 0) {
+                db_insert('itg_app_middleware')
+                        ->fields(array(
+                            'identifier' => 'categories_options',
+                            'name' => $package_name,
+                            'url' => '',
+                            'created' => REQUEST_TIME,
+                            'changed' => REQUEST_TIME,
+                        ))
+                        ->execute();
+            }
+        } else {
+            $package_name = $form['categories_options']['#options'][$id];
+            $num_deleted = db_delete('itg_app_middleware')
+                    ->condition('name', $package_name)
+                    ->condition('identifier', 'categories_options')
+                    ->execute();
+        }
+    }
+
+    drupal_set_message(t('Data saved successfully.'), 'status');
+}
+/**
+ * delete categories management menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_manager_categories_delete_comfirm($form, &$form_state, $cid) {
+    $form['delete'] = array(
+        '#type' => 'value',
+        '#value' => $cid,
+    );
+    return confirm_form(
+            $form, t('Are you sure you want to delete this?'), 'itg-app-manager-categories', t('This action cannot be undone.'), t('Delete'), t('Cancel')
+    );
+}
+/**
+ * submit callback for delete categories management form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_categories_delete_comfirm_submit($form, &$form_state) {
+    $record = $form_state['values']['delete'];
+    if ($record) {
+        $num_deleted = db_delete('itg_app_middleware')
+                ->condition('id', $record)
+                ->execute();
+        drupal_set_message('The record has been deleted!');
+    }
+    $form_state['redirect'] = "itg-app-manager-categories";
+    
 }
 
