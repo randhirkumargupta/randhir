@@ -32,9 +32,9 @@ $conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
 #MongoDB 
 $conf['mongodb_connections'] = array(
   'default' => array(    
-    'host' => 'mongodb://itoday_write:1t0day_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo_dev',
+    'host' => 'mongodb://itg_write:1tg_wr1te111@mongodb1,mongodb2,mongodb3/itgcmsmongo_dev',
     'db' => 'itgcmsmongo_dev',
-    'connection_options' => array('replicaSet' => 'uatreplica_dev'),
+    'connection_options' => array('replicaSet' => 'uatreplica'),
   ),
 );
 
