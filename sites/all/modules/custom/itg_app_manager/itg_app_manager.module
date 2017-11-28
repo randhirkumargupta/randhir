@@ -1444,4 +1444,35 @@ function itg_app_manager_categories_form_submit($form, &$form_state) {
 
     drupal_set_message(t('Data saved successfully.'), 'status');
 }
+/**
+ * delete categories management menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_manager_categories_delete_comfirm($form, &$form_state, $cid) {
+    $form['delete'] = array(
+        '#type' => 'value',
+        '#value' => $cid,
+    );
+    return confirm_form(
+            $form, t('Are you sure you want to delete this?'), 'itg-app-manager-categories', t('This action cannot be undone.'), t('Delete'), t('Cancel')
+    );
+}
+/**
+ * submit callback for delete categories management form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_categories_delete_comfirm_submit($form, &$form_state) {
+    $record = $form_state['values']['delete'];
+    if ($record) {
+        $num_deleted = db_delete('itg_app_middleware')
+                ->condition('id', $record)
+                ->execute();
+        drupal_set_message('The record has been deleted!');
+    }
+    $form_state['redirect'] = "itg-app-manager-categories";
+    
+}
 
