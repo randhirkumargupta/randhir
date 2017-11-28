@@ -124,7 +124,7 @@ function itg_app_manager_menu() {
  * @return array
  */
 function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
-    if ($menu_form_id == '1') {
+    if ($menu_form_id == '1' || $menu_form_id == '2') {
         $menu_lablel_arr = array('' => '- Select -');
         $menu_lablel_query = db_select('itg_app_menu_master', 'imm');
         $menu_lablel_query->fields('imm', array('menu_name', 'menu_id'));
