@@ -241,7 +241,7 @@ function generateNewsCategoryList($tid, $pageno) {
             // photo list array
 
             if ($type == "photogallery") {
-                $photolist = (object) getPhotolist($nid);
+                $photolist = (object) getPhotolist($nid, 1);
             }
             if ($type == "photostory") {
                 $photolist = (object) getPhotostorylist($nid);
@@ -255,7 +255,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
             // video list array
             if ($type == "videogallery") {
-                $videolist = (object) getVideolist($nid);
+                $videolist = (object) getVideolist($nid, 1);
             }
             if (count($videolist) == 0) {
                 $videolist = (object) $videolist;
@@ -336,7 +336,7 @@ function getPhotolist($nid, $source = 0) {
  * @pram int $nid
  * @return array
  */
-function getVideolist($nid, $source) {
+function getVideolist($nid, $source = 0) {
     // variable declaration
     $videolist = array();
 
