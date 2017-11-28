@@ -48,7 +48,7 @@ $conf['cache_class_cache_update'] = 'DrupalDatabaseCache';
 #$conf['memcache_storage_debug'] = TRUE;
 $conf['memcache_extension'] = 'Memcache';
 
-$conf['memcache_storage_key_prefix'] = 'itgmem';
+$conf['memcache_storage_key_prefix'] = 'staging';
 //$conf['session_inc'] = 'sites/all/modules/contrib/memcache_storage/includes/session.inc';
 
 // setting for UAT
