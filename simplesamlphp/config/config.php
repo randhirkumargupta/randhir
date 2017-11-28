@@ -211,7 +211,7 @@ $config = array(
      * Ensure that you have the required PDO database driver installed
      * for your connection string.
      */
-    'database.dsn' => 'mysql:host=itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com;dbname=IndiaToday_sso',
+    'database.dsn' => 'mysql:host=itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com;dbname=indiatoday_sso_staging',
 
     /*
      * SQL database credentials
