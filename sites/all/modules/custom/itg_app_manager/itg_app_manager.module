@@ -967,10 +967,10 @@ function itg_app_widget_delete_record_comfirm_submit($form, &$form_state) {
     $form_state['redirect'] = "itg-app-widget";
 }
 
-function itg_app_manager_packages() {
+function itg_app_manager_packages() {    
     $output = array();
     $output['form'] = drupal_get_form('itg_app_manager_packages_form');
-    /*$middleware_data = itg_app_middleware_table('itg_package');
+    $middleware_data = itg_app_middleware_table('itg_package');
     $header = array();
     foreach ($middleware_data as $key => $val) {
         $delete = l(t('Delete'), 'itg-app-manager-packages/' . $val->id . '/delete');
@@ -982,8 +982,7 @@ function itg_app_manager_packages() {
         '#rows' => $rows,
         '#empty' => t('Nothing found. Nada. Zip. Zilch.'),
     );
-    $output['table'] = $table;*/
-    //p($output);
+    $output['table'] = $table;
     return $output;
 }
 
@@ -991,21 +990,23 @@ function itg_app_manager_packages_form($form, &$form_state) {
     ctools_include('modal');
     ctools_modal_add_js();
     $default_checked = array();
-    $selected_packages = itg_app_middleware_table('itg_package');
+    $selected_packages = itg_app_middleware_table('itg_widget');
     foreach ($selected_packages as $package) {
         $default_checked[] = _get_term_from_name($package->name, 'category_management');
     }
+    
     $package_term = taxonomy_get_term_by_name('packages', 'category_management');
     foreach ($package_term as $pack_tid => $pack_obj) {
         $term_query = db_select('taxonomy_term_data', 'tt');
         $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
         $term_query->fields('tt', array('tid', 'name'));
         $term_query->condition('th.parent', $pack_obj->tid, '=');
-        $term_query_results = $term_query->execute()->fetchAll();
+        $term_query_results = $term_query->execute()->fetchAll();        
         foreach ($term_query_results as $key => $val) {
             $term_options[$val->tid] = $val->name . l('Config Settings', 'package-config/nojs/form/' . $val->tid . '', array('attributes' => array('class' => 'ctools-use-modal')));
         }
     }
+    
     $form['package_options'] = array(
         '#type' => 'checkboxes',
         '#options' => $term_options,
@@ -1057,7 +1058,7 @@ function itg_app_middleware_table($identifier) {
     $i_query = db_select('itg_app_middleware', 'itg_m');
     $i_query->fields('itg_m');
     $i_query->condition('itg_m.identifier', $identifier, '=');
-    $i_query_results = $i_query->execute()->fetchAll();
+    $i_query_results = $i_query->execute()->fetchAll();    
     return $i_query_results;
 }
 
