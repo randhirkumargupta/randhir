@@ -213,208 +213,14 @@
  * @endcode
  */
 
-// setting for UAT backend
- /*$databases = array (
-  'default' => 
-  array (
-    'default' => 
-    array (
-      'database'=>'indiatoday_migrate',   
-      'username' => 'itgd_it_write',
-      'password' => '!tgd@!t@wr!te@101',
-      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-      'port' => '3306',
-      'driver' => 'mysql',
-      'prefix' => '',
-    ),
-  ),
-);*/
-
-// setting for Prod backend
-/*$databases = array (
-  'default' => 
-  array (
-    'default' => 
-    array (
-      'database'=>'indiatoday',   
-      'username' => 'prod_it_write',
-      'password' => 'pr0d_!t@64',
-      'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-      'port' => '3306',
-      'driver' => 'mysql',
-      'prefix' => '',
-    ),
-  ),
-);*/
-
-//for master and slave setting
 
 
-// setting for UAT
-/*$databases['default']['default'] = array(
-  'driver' => 'autoslave',
-  'master' => 'master', // optional, defaults to 'master'
-  'slave' => 'autoslave', // optional, defaults to 'autoslave'  
-// Always use "master" for tables "semaphore" and "sessions"
-  'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
-);*/
-
-/*$databases['default']['master'][] = array (
-  'database' => 'indiatoday_migrate',
-  'username' => 'itgd_it_write',
-  'password' => '!tgd@!t@wr!te@101',
-  'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-);
-
-$databases['default']['slave'][] = array (
-  'database' => 'indiatoday_migrate',
-  'username' => 'itgd_it_read',
-  'password' => '!tgd@!t@re@d@102',
-  'host' => 'itgd-drupal-db-dev-replica.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '',
-  'driver' => 'mysql',
-  'prefix' => '',
-  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
-);
-
-$databases['default']['slave'][] = array (
-  'database' => 'indiatoday_migrate',
-  'username' => 'itgd_it_read',
-  'password' => '!tgd@!t@re@d@102',
-  'host' => 'itgd-drupal-db-dev-replica-2.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '',
-  'driver' => 'mysql',
-  'prefix' => '',
-  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
-);
-
-$databases['default']['default'] = array (
-  'driver' => 'autoslave',
-  'master' => array('master'),
-  'slave' => array('slave'),
-  'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
-  'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
-  'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
-  'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
-  'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'") // For MySQL InnoDB, make sure isolation level doesn't interfere with our intentions. Defaults to empty.
-);*/
-
-/*$databases['default']['master'] = array(
-  //'database' => 'indiatoday_migrate',
-  'database' => 'indiatoday_migrate',
-  'username' => 'itgd_it_write',
-  'password' => '!tgd@!t@wr!te@101',
-  'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-);
-
-$databases['default']['autoslave'] = array(
-  //'database' => 'indiatoday_migrate',
-  'database' => 'indiatoday_migrate',
-  'username' => 'itgd_it_read',
-  'password' => '!tgd@!t@re@d@102',
-  'host' => 'itgd-drupal-db-dev-replica.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-);*/
-
-/*$databases['sso_db']['default'] = array(
-  'database' => 'IndiaToday_sso',
-      'username' => 'itgd_it_write',
-      'password' => '!tgd@!t@wr!te@101',
-      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-      'port' => '',
-      'driver' => 'mysql',
-      'prefix' => '',
-);*/
-// end setting for UAT
-/*
-//for production setting
-$databases['default']['default'] = array(
-  'driver' => 'autoslave',
-  'master' => 'master', // optional, defaults to 'master'  
-  'slave' => array('slave1','slave2'), // optional, defaults to 'autoslave'
-// Always use "master" for tables "semaphore" and "sessions"
-  'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
-);
-
-$databases['default']['master'] = array(  
-  'database' => 'indiatoday',
-  'username' => 'prod_it_write',
-  'password' => 'pr0d_!t@64',
-  'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-);
-
-$databases['default']['slave1'] = array(
-  //'database' => 'indiatoday_migrate',
-  'database' => 'indiatoday',
-  'username' => 'prod_it_read',
-  'password' => 'pr0d_!t@98',
-  'host' => 'itgd-drupal-db-it-prod-replica1.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-);
-
-$databases['default']['slave2'] = array(
-  //'database' => 'indiatoday_migrate',
-  'database' => 'indiatoday',
-  'username' => 'prod_it_read',
-  'password' => 'pr0d_!t@98',
-  'host' => 'itgd-drupal-db-it-prod-replica2.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-);
-
-$databases['sso_db']['default'] = array(
-  'database' => 'IndiaToday_sso',
-      'username' => 'prod_it_write',
-      'password' => 'pr0d_!t@64',
-      'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-      'port' => '3306',
-      'driver' => 'mysql',
-      'prefix' => '',
-);*/
-//end production setting
-
-// Use locking that supports force master
-//$conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
-
-//$conf['cache_default_class'] = 'AutoslaveCache';
-//$conf['autoslave_cache_default_class'] = 'ConsistentCache';
-/*
 $databases = array (
   'default' => 
   array (
     'default' => 
     array (
-      'database' => 'indiatoday',
-      'username' => 'itgd_it_write',
-      'password' => '!tgd@!t@wr!te@101',
-      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-      'port' => '',
-      'driver' => 'mysql',
-      'prefix' => '',
-    ),
-  ),
-);
-*/
-$databases = array (
-  'default' => 
-  array (
-    'default' => 
-    array (
-      'database' => 'IndiaToday_sso',
+      'database' => 'indiatoday_sso_staging',
       'username' => 'itgd_it_write',
       'password' => '!tgd@!t@wr!te@101',
       'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
@@ -804,13 +610,9 @@ $conf['404_fast_html'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
 /**
  * Include a local settings file if it exists.
  */
-//$local_settings = dirname(__FILE__) . '/local.settings.php';
-//if (file_exists($local_settings)) {
-  //include $local_settings;
-//}
+
 //MongoCursor::$slaveOkay = true;
 $conf['image_allow_insecure_derivatives'] = TRUE;
 $conf['block_cache_bypass_node_grants'] = TRUE;
 $base_url = 'https://'.$_SERVER['SERVER_NAME'];
-//$conf['cache_default_class'] = 'ConsistentCache';
-//$conf['consistent_cache_default_safe'] = FALSE;
+
