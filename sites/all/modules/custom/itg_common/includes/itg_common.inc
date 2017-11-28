@@ -554,6 +554,7 @@ function itg_common_only_text_string($str) {
   $data = preg_replace("/'/" , "\\'" , $data);
   $data = htmlentities($data , ENT_QUOTES);
   $data = trim(str_replace('&nbsp;' , ' ' , $data));
+  $data = str_replace(array("\r","\n"),"",$data);
 
   return $data;
 }
