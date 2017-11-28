@@ -16,8 +16,8 @@
 define('DRUPAL_ROOT', getcwd());
 
 require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
-echo "test";
-var_dump($GLBALS['databases']);
-die;
 drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+echo "test";
+var_dump($GLOBALS['databases']);
+die;
 menu_execute_active_handler();
