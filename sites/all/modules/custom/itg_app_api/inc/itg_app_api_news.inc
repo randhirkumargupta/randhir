@@ -241,10 +241,10 @@ function generateNewsCategoryList($tid, $pageno) {
             // photo list array
 
             if ($type == "photogallery") {
-                $photolist = getPhotolist($nid);
+                $photolist = (object) getPhotolist($nid);
             }
             if ($type == "photostory") {
-                $photolist = getPhotostorylist($nid);
+                $photolist = (object) getPhotostorylist($nid);
             }
             if (count($photolist) == 0) {
                 $photolist = (object) $photolist;
@@ -255,7 +255,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
             // video list array
             if ($type == "videogallery") {
-                $videolist = getVideolist($nid);
+                $videolist = (object) getVideolist($nid);
             }
             if (count($videolist) == 0) {
                 $videolist = (object) $videolist;
