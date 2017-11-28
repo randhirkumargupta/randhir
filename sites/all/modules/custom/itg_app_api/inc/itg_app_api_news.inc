@@ -279,7 +279,7 @@ function generateNewsCategoryList($tid, $pageno) {
  * @pram int $nid
  * @return array
  */
-function getPhotolist($nid) {
+function getPhotolist($nid, $source = 0) {
     // variable decalaration
     $photolist = array();
     $photolist_loop = array();
@@ -322,7 +322,12 @@ function getPhotolist($nid) {
         $photolist_loop[$lcont]['np_caption'] = "$caption";
         $lcont++;
     }
-    $photolist['photos'] = (array) $photolist_loop;
+    if($source == 1){
+        $photolist['photos'] = (array) $photolist_loop;
+    }
+    else{
+        $photolist[0]['photos'] = (array) $photolist_loop;
+    }
     return $photolist;
 }
 
@@ -331,7 +336,7 @@ function getPhotolist($nid) {
  * @pram int $nid
  * @return array
  */
-function getVideolist($nid) {
+function getVideolist($nid, $source) {
     // variable declaration
     $videolist = array();
 
@@ -457,7 +462,12 @@ function getVideolist($nid) {
         $videolist['nv_duration'] = "$field_video_duration_value";
         $videolist['nv_show_ad'] = "0";
     }
-    $videolist2[0] = $videolist;
+    if($source == 1){
+       $videolist2 = $videolist; 
+    }
+    else{
+        $videolist2[0] = $videolist;
+    }
     return $videolist2;
 }
 
