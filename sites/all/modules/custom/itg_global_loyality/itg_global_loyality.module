@@ -93,6 +93,13 @@ function itg_global_loyality_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
   
+   $items['del-point-history-data'] = array(
+    'title' => 'Delete Point history table data',
+    'page callback' => 'itg_del_point_history_data',
+    'access arguments' => array('access global point report history'),
+    'type' => MENU_CALLBACK,
+  );
+  
   return $items;
 }
 
@@ -1023,5 +1030,20 @@ function itg_sso_get_social_mobile($sso_id = NULL) {
   }
   else {
     return drupal_access_denied();
+  }
+}
+
+/*
+ * Implements itg_del_point_history_data().
+ */
+function itg_del_point_history_data() {
+  try {
+  $result = db_truncate('itg_global_loyality_point')->execute();
+  $result = db_truncate('itg_global_redem_point')->execute();
+  $result = db_truncate('itg_global_reward_order')->execute();
+  $redirect_url = 'admin/config/people/global-point-report-history';
+  drupal_goto($redirect_url);
+  } catch (Exception $e) {
+  watchdog('table not truncate', '<pre>' . $e->getMessage() . '</pre>');  
   }
 }
