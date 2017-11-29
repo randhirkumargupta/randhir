@@ -528,266 +528,379 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('last_updated_datetime')
     );
-    $form['photo_display_count'] = array(
+    $form['sprint1_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('sprint1 group'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['sprint1_group']['photo_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Photo Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('photo_display_count')
     );
-    $form['photo_pagination_cap'] = array(
+    $form['sprint1_group']['photo_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'Photo Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('photo_pagination_cap')
     );
-    $form['photo_display_count_newslist_cell'] = array(
+    $form['sprint1_group']['photo_display_count_newslist_cell'] = array(
         '#type' => 'textfield',
         '#title' => 'Photo Display Count Newslist Cell',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('photo_display_count_newslist_cell')
     );
-    $form['photo_display_custom_msg'] = array(
+    $form['sprint1_group']['photo_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Photo Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('photo_display_custom_msg')
     );
-    $form['video_display_count'] = array(
+    $form['sprint1_group']['photo_detail_display_custom_msg'] = array(
         '#type' => 'textfield',
-        '#title' => 'Video Display Count',
+        '#title' => 'Photo Detail Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('video_display_count')
+        '#default_value' => fetchMasterConfigData('photo_detail_display_custom_msg')
     );
-    $form['video_pagination_cap'] = array(
+    $form['sprint1_group']['program_pagination_cap'] = array(
         '#type' => 'textfield',
-        '#title' => 'Video Pagination Cap',
+        '#title' => 'Program Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('video_pagination_cap')
+        '#default_value' => fetchMasterConfigData('program_pagination_cap')
     );
-    $form['video_display_custom_msg'] = array(
+    $form['sprint1_group']['program_display_count'] = array(
         '#type' => 'textfield',
-        '#title' => 'Video Display Custom Message',
+        '#title' => 'Program Display Count',
         '#size' => 25,
         '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('video_display_custom_msg')
+        '#default_value' => fetchMasterConfigData('program_display_count')
     );
-    $form['story_display_count'] = array(
+    $form['sprint1_group']['program_display_custom_msg'] = array(
         '#type' => 'textfield',
-        '#title' => 'Story Display Count',
+        '#title' => 'Program Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('story_display_count')
+        '#default_value' => fetchMasterConfigData('program_display_custom_msg')
     );
-    $form['story_pagination_cap'] = array(
+    $form['sprint1_group']['program_detail_display_custom_msg'] = array(
         '#type' => 'textfield',
-        '#title' => 'Story Pagination Cap',
+        '#title' => 'program Detail Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('story_pagination_cap')
+        '#default_value' => fetchMasterConfigData('program_detail_display_custom_msg')
     );
-    $form['story_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Story Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('story_display_custom_msg')
-    );
-    $form['news_display_count'] = array(
+    $form['sprint1_group']['news_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'News Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('news_display_count')
     );
-    $form['news_pagination_cap'] = array(
+    $form['sprint1_group']['news_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'News Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('news_pagination_cap')
     );
-    $form['news_display_custom_msg'] = array(
+    $form['sprint1_group']['news_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'News Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('news_display_custom_msg')
     );
-    $form['magazine_display_count'] = array(
+    $form['sprint1_group']['news_detail_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'News Detail Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('news_detail_display_custom_msg')
+    );
+    $form['sprint1_group']['video_display_count'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Video Display Count',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('video_display_count')
+    );
+    $form['sprint1_group']['video_pagination_cap'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Video Pagination Cap',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('video_pagination_cap')
+    );
+    $form['sprint1_group']['video_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Video Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('video_display_custom_msg')
+    );
+    $form['sprint1_group']['video_detail_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Video Detail Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('video_detail_display_custom_msg')
+    );
+    $form['sprint1_group']['story_display_count'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Story Display Count',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('story_display_count')
+    );
+    
+    $form['sprint2_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('sprint2 group'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        
+    );
+    $form['sprint2_group']['photostorydetail_detail_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'photostorydetail Detail Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('photostorydetail_detail_display_custom_msg')
+    );
+    $form['sprint2_group']['program_category_list_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'program category list Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('program_category_list_display_custom_msg')
+    );
+    $form['sprint2_group']['magazine_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Magazine Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('magazine_display_count')
     );
-    $form['magazine_pagination_cap'] = array(
+    $form['sprint2_group']['magazine_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'Magazine Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('magazine_pagination_cap')
     );
-    $form['magazine_display_custom_msg'] = array(
+    $form['sprint2_group']['magazine_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Magazine Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('magazine_display_custom_msg')
     );
-    $form['author_display_count'] = array(
+     $form['sprint2_group']['magazine_editionlist_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Magazine editionlist Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('magazine_editionlist_display_custom_msg')
+    );
+     $form['sprint2_group']['magazine_edition_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Magazine edition Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('magazine_edition_display_custom_msg')
+    );
+     $form['sprint2_group']['story_pagination_cap'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Story Pagination Cap',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('story_pagination_cap')
+    );
+    $form['sprint2_group']['story_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Story Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('story_display_custom_msg')
+    );
+    $form['sprint2_group']['story_detail_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Story Detail Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('story_detail_display_custom_msg')
+    );
+    $form['sprint2_group']['homePage_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'homePage Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('homePage_display_custom_msg')
+    );
+    $form['sprint3_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('sprint3 group'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        
+    );
+    $form['sprint3_group']['author_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Author Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('author_display_count')
     );
-    $form['author_pagination_cap'] = array(
+    $form['sprint3_group']['author_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'Author Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('author_pagination_cap')
     );
-    $form['author_display_custom_msg'] = array(
+    $form['sprint3_group']['author_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Author Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('author_display_custom_msg')
     );
-    $form['author_story_display_count'] = array(
+    $form['sprint3_group']['author_story_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Author Story Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('author_story_display_count')
     );
-    $form['author_story_pagination_cap'] = array(
+    $form['sprint3_group']['author_story_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'Author Story Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('author_story_pagination_cap')
     );
-    $form['author_story_display_custom_msg'] = array(
+    $form['sprint3_group']['author_story_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Author Story Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('author_story_display_custom_msg')
     );
-    $form['poll_pagination_cap'] = array(
+    $form['sprint3_group']['poll_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'Poll Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('poll_pagination_cap')
     );
-    $form['poll_display_count_newslist_cell'] = array(
+    $form['sprint3_group']['poll_display_count_newslist_cell'] = array(
         '#type' => 'textfield',
         '#title' => 'Poll Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('poll_display_count_newslist_cell')
     );
-    $form['poll_display_custom_message'] = array(
+    $form['sprint3_group']['poll_display_custom_message'] = array(
         '#type' => 'textfield',
         '#title' => 'Poll Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('poll_display_custom_message')
     );
-    $form['anchor_display_count'] = array(
+    $form['sprint3_group']['anchor_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('anchor_display_count')
     );
-    $form['anchor_pagination_cap'] = array(
+    $form['sprint3_group']['anchor_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('anchor_pagination_cap')
     );
-    $form['anchor_display_custom_msg'] = array(
+    $form['sprint3_group']['anchor_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('anchor_display_custom_msg')
     );
-    $form['bookmark_pagination_cap'] = array(
+    $form['sprint3_group']['bookmark_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'Bookmark Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('bookmark_pagination_cap')
     );
-    $form['bookmark_display_count_newslist_cell'] = array(
+    $form['sprint3_group']['bookmark_display_count_newslist_cell'] = array(
         '#type' => 'textfield',
         '#title' => 'Bookmark Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('bookmark_display_count_newslist_cell')
     );
-    $form['bookmark_display_custom_message'] = array(
+    $form['sprint3_group']['bookmark_display_custom_message'] = array(
         '#type' => 'textfield',
         '#title' => 'Bookmark Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('bookmark_display_custom_message')
     );
-    $form['bookmark_delete_display_custom_message'] = array(
+    $form['sprint3_group']['bookmark_delete_display_custom_message'] = array(
         '#type' => 'textfield',
         '#title' => 'Bookmark Delete Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('bookmark_delete_display_custom_message')
     );
-    $form['anchor_program_display_count'] = array(
+    $form['sprint3_group']['anchor_program_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Program Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('anchor_program_display_count')
     );
-    $form['anchor_program_pagination_cap'] = array(
+    $form['sprint3_group']['anchor_program_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Program Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('anchor_program_pagination_cap')
     );
-    $form['anchor_program_display_custom_msg'] = array(
+    $form['sprint3_group']['anchor_program_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Program Display Custom Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('anchor_display_custom_msg')
     );
-    $form['closed_poll_display_count'] = array(
+    $form['sprint3_group']['closed_poll_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Closed Poll Display Count',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('closed_poll_display_count')
     );
-    $form['closed_poll_pagination_cap'] = array(
+    $form['sprint3_group']['closed_poll_pagination_cap'] = array(
         '#type' => 'textfield',
         '#title' => 'Closed Poll Pagination Cap',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('closed_poll_pagination_cap')
     );
-    $form['poll_display_custom_msg'] = array(
+    $form['sprint3_group']['poll_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Poll Display Custom Message',
         '#size' => 25,
