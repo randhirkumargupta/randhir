@@ -2510,13 +2510,14 @@ function itg_rapid_api_hamburger_menu($token) {
     $redis_key = "itgd_rapid_hamburger_menu_json";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
-        $jsondata = variable_get('hamburger_menu_json');
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
+        $jsondata = hamburger_menu_middleware_data();//variable_get('hamburger_menu_json');
+        $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+    //}
 
     $obj = json_decode($jsondata, true);
     $return_obj = $obj;

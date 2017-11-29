@@ -15,7 +15,15 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-
+    $success_status_mess = fetchMasterConfigData('video_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
+    $dis_count = fetchMasterConfigData('video_display_count');
+    $display_count = isset($dis_count) ? $dis_count : "10";
+    
+    $pag_cap = fetchMasterConfigData('video_pagination_cap');
+    $pagination_cap = isset($pag_cap) ? $pag_cap : "50";
+    
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -26,7 +34,7 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data = generateVideoCategoryList($tid, $pageno);
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -41,8 +49,8 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['layout_id'] = "0";
 
     $data_array['video_count'] = "$datacount";
-    $data_array['video_display_count'] = "10";
-    $data_array['video_pagination_cap'] = "50";
+    $data_array['video_display_count'] = "$display_count";
+    $data_array['video_pagination_cap'] = "$pagination_cap";
     $data_array['updated_datetime'] = "$data_up_time";
 
     $data_array['video'] = $data['data'];
@@ -283,15 +291,20 @@ function fid_videoid($video_fid) {
  * @return array
  */
 function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
-
-
     // variable decalartion
-
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-
+    $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
+    $dis_count = fetchMasterConfigData('anchor_program_display_count');
+    $display_count = isset($dis_count) ? $dis_count : "10";
+    
+    $pag_cap = fetchMasterConfigData('anchor_program_pagination_cap');
+    $pagination_cap = isset($pag_cap) ? $pag_cap : "50";
+    
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -302,7 +315,7 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data = generateProgramCategoryList($tid, $pageno);
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -318,8 +331,8 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['subcategory_id'] = "$tid";
     $data_array['subcategory_title'] = "$term_name";
     $data_array['program_count'] = "$datacount";
-    $data_array['program_display_count'] = "10";
-    $data_array['program_pagination_cap'] = "50";
+    $data_array['program_display_count'] = "$display_count";
+    $data_array['program_pagination_cap'] = "$pagination_cap";
     $data_array['updated_datetime'] = "$data_up_time";
 
     $data_array['program'] = $data['data'];
@@ -664,6 +677,8 @@ function generateVideoDetail($nid) {
     // variable declaration
     global $base_url;
     $field_story_source_type = array();
+    $success_status_mess = fetchMasterConfigData('video_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
     $data = array();
     $listcount = 0;
     if ($nid) {
@@ -756,7 +771,7 @@ function generateVideoDetail($nid) {
         $photo_list_array[$listcount]['v_subcategory_title'] = "$term_name_pri";
     }
     $data['status_code'] = 1;
-    $data['status_message'] = "";
+    $data['status_message'] = "$success_status_message";
     $data['data'] = $photo_list_array;
     return $data;
 }
@@ -771,6 +786,9 @@ function generateProgramDetail($nid) {
     global $base_url;
     $listcount = 0;
     $photo_list_array = array();
+    $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
     $data = array();
     if ($nid) {
         // node feed tag
@@ -865,7 +883,7 @@ function generateProgramDetail($nid) {
         $photo_list_array[$listcount]['p_anchor_id'] = "$anchor_id";
     }
     $data['status_code'] = 1;
-    $data['status_message'] = "";
+    $data['status_message'] = "$success_status_message";
     $data['data'] = $photo_list_array;
     return $data;
 }
