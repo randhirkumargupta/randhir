@@ -1132,9 +1132,7 @@ function itg_akamai_get_story_list_assc_video($video_nid = NULL) {
     $query->condition('v.field_story_associate_video_target_id', $video_nid);
     $query->condition('v.bundle', 'story');
     $query->fields('v', array('entity_id'));
-    //$query->condition('n.status', 1);
     $result = $query->execute();
-
     foreach ($result as $row) {
       $story_ids[] = 'node/' . $row->entity_id;
     }
@@ -1209,10 +1207,6 @@ function itg_akamai_getting_mapped_content_type() {
       $mapping[] = $content_type;
     }
   }
-//  if (empty($mapping)) {
-//    // Hardcoded content type
-//    $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
-//  }
   return $mapping;
 }
 
@@ -1288,14 +1282,6 @@ function itg_akamai_cc_button_purge($entity_data) {
       drupal_goto('<front>');
     }
   }
-}
-
-/**
- * Getting story issue date
- * @param int $nid
- */
-function itg_akamai_get_field_story_issue_date($nid) {
-  
 }
 
 /**

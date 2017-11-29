@@ -584,11 +584,9 @@ function akamai_cc_clear_frm_form_submit(&$form, &$form_state) {
     watchdog('ITG Akamai', 'Error:' . $e->getMessage());
   }
 
-  $a = array();
   foreach ($res as $chunk_data) {
     $operations[] = array('akamai_cc_clear_ct_op', array($chunk_data));
   }
-
 
   $batch = array(
     'title' => t('Content type nodes are purging process have been started...please wait....!'),
