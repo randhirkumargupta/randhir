@@ -711,6 +711,27 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('anchor_display_custom_msg')
     );
+    $form['bookmark_pagination_cap'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Bookmark Pagination Cap',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('bookmark_pagination_cap')
+    );
+    $form['bookmark_display_count_newslist_cell'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Bookmark Display Count',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('bookmark_display_count_newslist_cell')
+    );
+    $form['bookmark_display_custom_message'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Bookmark Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('bookmark_display_custom_message')
+    );
     $form['anchor_program_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Program Display Count',
