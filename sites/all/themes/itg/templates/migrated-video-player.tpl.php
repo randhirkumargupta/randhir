@@ -6,7 +6,6 @@
  */
 global $base_url;
 ?>
-<script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
 
 <?php
 $refral_site = itg_common_get_domain($_SERVER["HTTP_REFERER"]);
@@ -19,18 +18,12 @@ if (!empty($refral_site)) {
 }
 $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $external_side);
 ?>
-<script>
-  jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
-
 <div id="videoplayer"> </div>
 <script type="text/javascript">
-
+  jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
   function loadplayerjw() {
       var player_dfp = "<?php echo urlencode($data_video['dfp_tags']); ?>";
-
-      // var playerInstance = jwplayer('videoplayer');
       jwplayer('videoplayer').setup({
-          //var multipart=0;
           playlist: [{
                   title: "<?php echo stripslashes($title); ?>",
                   'image': "<?php echo $image; ?>",
@@ -65,7 +58,6 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
 
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
- 
   playerInstance.on('setupError', function (event) {
       if (event.message == 'Error loading player: No playable sources found') {
           document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
@@ -73,19 +65,15 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
           loadplayerjw();
       }
   });
-
-
-
-</script>
-
-
-
-
-<script>
   jQuery(document).ready(function () {
 
       playerInstance.play();
 
   });
+
 </script>
-<script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.gaevent.js'; ?>"></script>
+
+<?php
+drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
+drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
+?>
