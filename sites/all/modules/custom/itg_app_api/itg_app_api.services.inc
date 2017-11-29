@@ -3129,15 +3129,15 @@ function itg_rapid_api_homePage($token) {
     $redis_key = "itg_rapid_api_homePage";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
         // call function from return data..
         $jsondata = homePageJson();
         $jsondata = json_encode($jsondata);
         $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+    //}
 
     $jsondata = json_decode($jsondata, true);
     return $jsondata;

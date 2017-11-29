@@ -73,7 +73,10 @@ function generateVideoCategoryList($tid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 10;
+    //$range_max = 10;
+    $dis_count = fetchMasterConfigData('video_display_count');
+    $range_max = isset($dis_count) ? $dis_count : 10;
+    
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
     } else {
@@ -355,7 +358,10 @@ function generateProgramCategoryList($tid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 10;
+    //$range_max = 10;
+    $dis_count = fetchMasterConfigData('anchor_program_display_count');
+    $range_max = isset($dis_count) ? $dis_count : 10;
+    
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$pageno == 0) {
@@ -560,22 +566,23 @@ function generateProgramCategoryList($tid, $pageno) {
  * @return array
  */
 function programCategoryListlPageRerourceValue($token) {
-
-
     // variable decalartion
-
     $output_array = array();
     $data_array = array();
     $program_list_array = array();
     $updated_datetime = "";
     $conf_array = tidConfig();
     $Program_section_list = $conf_array['program_sec_tid'];
+    
+    $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
 
     // list array building
     $data = generateProgramSectionList($Program_section_list);
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";

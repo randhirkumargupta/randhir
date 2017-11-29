@@ -77,7 +77,10 @@ function generateNewsCategoryList($tid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 10;
+    //$range_max = 10;
+    $dis_count = fetchMasterConfigData('news_display_count');
+    $range_max = isset($dis_count) ? $dis_count : 10;
+    
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;

@@ -15,13 +15,16 @@ function StoryDetailPageRerourceValue($id) {
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
-
+    
+    $success_status_mess = fetchMasterConfigData('story_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
 
     // list array building
     $data = generateStoryDeatilList($id);
     if (!empty($data['data']['title'])) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";

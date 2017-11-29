@@ -14,15 +14,15 @@ function polls_open_list($cpageno) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-
+    $success_status_mess = fetchMasterConfigData('poll_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
     // list array building
-
     $data = polls_open_datalist($cpageno);
-
 
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -49,7 +49,9 @@ function polls_close_list($cpageno) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-
+    $success_status_mess = fetchMasterConfigData('poll_display_custom_message');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
     // list array building
 
     $data = polls_close_datalist($cpageno);
@@ -57,7 +59,7 @@ function polls_close_list($cpageno) {
 
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -81,11 +83,13 @@ function polls_close_list($cpageno) {
  * @return the poll info in array
  */
 function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) {
-
+    $success_status_mess = fetchMasterConfigData('poll_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+        
     if (isset($option_id) && $option_id != '') {
         $dsp_result = itg_poll_get_display_result($poll_id);
         $dsp_result = $dsp_result > 0 ? $dsp_result : 1;
-
+        
         $check = db_select('itg_polls', 'itgp')
                         ->fields('itgp', array('Id'))
                         ->condition('itgp.nid', $poll_id)
@@ -106,7 +110,7 @@ function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) 
                     ->execute();
 
             $output_array['status_code'] = "1";
-            $output_array['status_message'] = "";
+            $output_array['status_message'] = "$success_status_message";
         } else {
 
             $output_array['status_code'] = "0";
@@ -115,7 +119,7 @@ function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) 
         }
     } else {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     }
 
     $data = poll_cast_datalist($poll_id);
@@ -218,7 +222,9 @@ function poll_detail_data($poll_id) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-
+    $success_status_mess = fetchMasterConfigData('poll_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
     // list array building
 
     $data = poll_detail_datalist($poll_id);
@@ -226,7 +232,7 @@ function poll_detail_data($poll_id) {
 
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -247,7 +253,10 @@ function poll_detail_data($poll_id) {
  * @return array
  */
 function polls_open_datalist($cpageno, $from) {
-    $range_max = 10;
+    //$range_max = 10;
+    $dis_count = fetchMasterConfigData('poll_display_count_newslist_cell');
+    $range_max = isset($dis_count) ? $dis_count : 10;
+    
     if($from == "home"){
         $range_max = 1;
     }
@@ -346,7 +355,10 @@ function open_poll_list($res) {
  */
 function polls_close_datalist($cpageno) {
     $news2 = array();
-    $range_max = 10;
+    //$range_max = 10;
+    $dis_count = fetchMasterConfigData('closed_poll_display_count');
+    $range_max = isset($dis_count) ? $dis_count : 10;
+    
     if (!$cpageno == 0) {
         $range_min = $cpageno * $range_max;
     } else {

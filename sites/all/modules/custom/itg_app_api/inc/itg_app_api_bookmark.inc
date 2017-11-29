@@ -14,14 +14,16 @@ function bookmark_responce_data($user_id) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-
+    $success_status_mess = fetchMasterConfigData('bookmark_display_custom_message');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
     // list array building
     $data = bookmark_responce_datalist($user_id);
 
 
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -98,6 +100,10 @@ function bookmark_del_data_responce($user_id, $node_ids) {
     $user_activity = 'read_later';
     $activity_date = date('d-m-Y');
     $activity_date_time = date('d-m-Y h:i:s');
+    
+    $success_status_mess = fetchMasterConfigData('bookmark_delete_display_custom_message');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
 
     if (function_exists('mongodb')) {
         $con = mongodb();
@@ -126,7 +132,7 @@ function bookmark_del_data_responce($user_id, $node_ids) {
 
     if (!empty($all_delete_bookmark)) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = array('bookmark_content' => $all_delete_bookmark);
     } else {
         $output_array['status_code'] = "0";

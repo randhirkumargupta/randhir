@@ -75,7 +75,10 @@ function generatePhotoCategoryList($tid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 10;
+    //$range_max = 10;
+    $photo_dis_count = fetchMasterConfigData('photo_display_count');
+    $range_max = isset($photo_dis_count) ? $photo_dis_count : 10;
+    
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
     } else {
@@ -367,10 +370,11 @@ function generatePhotoDetailList($galleryimg) {
  * @return array
  */
 function photoStoryDetailPageRerourceValue($id) {
-
     // variable decalartion
     //349693 , 349625-> photo story nid
-
+    $success_status_mess = fetchMasterConfigData('photo_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
@@ -380,7 +384,7 @@ function photoStoryDetailPageRerourceValue($id) {
     $data = generatePhotoStoryDeatilList($id);
     if ($data['data']['photo_count'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";

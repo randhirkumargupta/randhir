@@ -14,7 +14,16 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-
+    
+    $success_status_mess = fetchMasterConfigData('magazine_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
+    $dis_count = fetchMasterConfigData('magazine_display_count');
+    $display_count = isset($dis_count) ? $dis_count : "10";
+    
+    $pag_cap = fetchMasterConfigData('magazine_pagination_cap');
+    $pagination_cap = isset($pag_cap) ? $pag_cap : "7";
+    
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -26,7 +35,7 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
 
     if ($data['issue_nid'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -45,8 +54,8 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
     $data_array['issue_cover_image'] = "$issue_cover_image";
     $data_array['issue_digitalmag_url'] = "$issue_digitalmag_url";
     $data_array['story_count'] = "$datacount";
-    $data_array['story_display_count'] = "10";
-    $data_array['story_pagination_cap'] = "7";
+    $data_array['story_display_count'] = "$display_count";
+    $data_array['story_pagination_cap'] = "$pagination_cap";
     $data_array['updated_datetime'] = "$data_up_time";
 
     $data_array['story'] = $data['data'];
@@ -82,7 +91,10 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    $range_max = 10;
+    //$range_max = 10;
+    $dis_count = fetchMasterConfigData('magazine_display_count');
+    $range_max = isset($dis_count) ? $dis_count : 10;
+    
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
     } else {
@@ -236,14 +248,15 @@ function magazineCoverstoriesPageRerourceValue() {
     $data_array = array();
     $issue_list_array = array();
     $updated_datetime = "";
-
-
+    $success_status_mess = fetchMasterConfigData('magazine_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
     // list array building
     $data = magazineCoverstoriesPageRerourceValueList();
 
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -275,7 +288,10 @@ function magazineCoverstoriesPageRerourceValueList() {
     $listcount = 0;
     $data_list_array = array();
     $loop_count = 0;
-
+    
+    $dis_count = fetchMasterConfigData('magazine_display_count');
+    $range_max = isset($dis_count) ? $dis_count : 20;
+    $range_min = 0;
     // issue list query..
 
     $query_issue = db_select('node', 'n');
@@ -289,7 +305,7 @@ function magazineCoverstoriesPageRerourceValueList() {
     $query_issue->fields('fsit', array('field_issue_title_value'));
     $query_issue->fields('n', array('nid'));
 
-    $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->condition('fsit.field_issue_title_value', '2016-12-31', '<=')->orderBy('fsit.field_issue_title_value', 'desc')->range(0, 20);
+    $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->condition('fsit.field_issue_title_value', '2016-12-31', '<=')->orderBy('fsit.field_issue_title_value', 'desc')->range($range_min, $range_max);
     $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result_issue as $reskey => $resvalue) {
 
@@ -469,22 +485,28 @@ function getCoverstoriesList($issue_date) {
  * @return array
  */
 function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno = 0) {
-
-
     // variable decalartion
-
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
+    
+    $success_status_mess = fetchMasterConfigData('magazine_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
+    $dis_count = fetchMasterConfigData('magazine_display_count');
+    $display_count = isset($dis_count) ? $dis_count : "10";
+    
+    $pag_cap = fetchMasterConfigData('magazine_pagination_cap');
+    $pagination_cap = isset($pag_cap) ? $pag_cap : "7";
 
-
+    
     // list array building
     $data = magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno);
 
     if ($data['lcount'] > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -495,8 +517,8 @@ function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno =
     $data_up_time = $data['updated_datetime'];
 
     $data_array['issue_count'] = "$datacount";
-    $data_array['issue_display_count'] = "10";
-    $data_array['issue_pagination_cap'] = "7";
+    $data_array['issue_display_count'] = "$display_count";
+    $data_array['issue_pagination_cap'] = "$pagination_cap";
 
 
     $data_array['issue'] = $data['data'];
@@ -520,7 +542,10 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
     $tid_list[] = $tid;
     $issue_list_array = array();
     $listcount = 0;
-    $range_max = 10;
+    //$range_max = 10;
+    $dis_count = fetchMasterConfigData('magazine_display_count');
+    $range_max = isset($dis_count) ? $dis_count : 10;
+    
     $sdate_fi = strtotime($sdate);
     $tdate_fi = strtotime($tdate);
 
