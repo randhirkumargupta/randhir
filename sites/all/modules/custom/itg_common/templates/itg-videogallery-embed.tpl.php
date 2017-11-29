@@ -138,7 +138,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                           <div class="bounce3"></div>
                       </div></div>
                   <div  id="migrate_video_palyer_container">
-                      <?php print theme('migrated_video_player', array("url" => $video_value->field_migrated_video_url_value, 'nid' => $nid, 'image' => $image_url, 'used_on' => 'video', 'title' => $fb_title)); ?>
+                      <?php print theme('migrated_video_player', array("url" => $video_value->field_migrated_video_url_value, 'nid' => $nid, 'image' => $image_url, 'used_on' => 'embed', 'title' => $fb_title)); ?>
                   </div> 
               </div>
             <?php } ?>
