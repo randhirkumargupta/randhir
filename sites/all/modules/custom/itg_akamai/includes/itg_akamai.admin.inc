@@ -179,13 +179,18 @@ function itg_akamai_cache_akamai_log($form, &$form_state) {
   );
 
   $form['fieldset']['markup1'] = array(
-    '#weight' => 1,
+    '#weight' => -1,
     '#markup' => '<p>' . l('Click here for node report where TTL is not set(But globally set)', 'admin/config/system/itg_akamai/akamai_not_implemented') . '</p>',
   );
 
   $form['fieldset']['markup2'] = array(
-    '#weight' => 2,
+    '#weight' => 1,
     '#markup' => '<p>' . l('Click here for section report where TTL is not set(But globally set)', 'admin/config/system/itg_akamai/akamais_not_implemented') . '</p>',
+  );
+
+  $form['fieldset']['markup3'] = array(
+    '#weight' => 2,
+    '#markup' => '<p>' . l('Click here to get list of Block/Widget where TTL(Time to Live) is not set', 'admin/config/system/itg_akamai/comp_widgt_ttl_not_implemented') . '</p>',
   );
 
   $form['fieldset']['purge_id'] = array(
@@ -983,6 +988,70 @@ function itg_akamai_akamai_not_implemented_rows() {
 
   $render_array['akamai_cache_logs_n_nid'] = array(
     array(
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $rows,
+      '#empty' => t('No Record found!'),
+      '#attributes' => array(
+        'class' => array('views-table'),
+      ),
+    ),
+    array(
+      '#theme' => 'pager',
+    ),
+  );
+
+  return $render_array;
+}
+
+/**
+ * Implements itg_akamai_akamai_not_implemented_rows()
+ */
+function itg_akamai_comp_widgt_ttl_not_implemented() {
+
+  $rows = array();
+
+  $header = array(
+    t('Sn no.'),
+    t('Module'),
+    t('Delta'),
+    t('Action'),
+  );
+
+  // Getting all settings for Akamai block refresh , We send all settings into Drupal variables 
+
+  $settings = variable_get('itg_akamai_block_refresh_settings', array());
+  $settings_keys = array_keys($settings);
+  $settings_keys = array_map(function($el) {
+    return str_replace('-', '_', $el);
+  }, $settings_keys);
+
+  try {
+    $query = db_select('block', 'a');
+    $query->fields('a', array('module', 'delta'));
+    $query->addExpression("CONCAT('block_', a.module, '_', a.delta)", 'itg_block_refresh_id');
+    $query->condition('a.theme', 'itg');
+    $query = $query->extend('PagerDefault')->limit(50);
+    $result = $query->execute();
+  }
+  catch (Exception $e) {
+    die($e->getMessage());
+  }
+  $sn = 0;
+  while ($record = $result->fetchObject()) {
+    if (!in_array($record->itg_block_refresh_id, $settings_keys)) {
+      $rows[] = array(
+        ++$sn,
+        $record->module,
+        $record->delta,
+        l('Configure', "/admin/structure/block/manage/{$record->module}/{$record->delta}/configure"),
+      );
+    }
+  }
+
+  $render_array['akamai_cache_logs_n_nid'] = array(
+    array(
+      '#prefix' => t('Note:You must have to check "Enable block to be refreshed automatically" in Block configuration setting'),
       '#theme' => 'table',
       '#header' => $header,
       '#rows' => $rows,
