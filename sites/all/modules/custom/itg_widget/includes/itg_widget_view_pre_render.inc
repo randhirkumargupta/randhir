@@ -289,8 +289,9 @@ function itg_widget_views_pre_render(&$view) {
   }
   elseif ($view->name == "key_candidate" && $view->current_display == 'special_key_candidate_widget_list') {
     if(!isset($_GET['cat_id'])) {
-        drupal_set_message(t("Category filter is required"));
+        drupal_set_message(t("Category filter is required"), 'error');
         unset($view->result);
+        unset($view->query->pager);
     }
   }
   elseif ($view->name == "category_of_stroy_base_magazin_widget" && $view->current_display == 'issue_category_magazin_widget') {
