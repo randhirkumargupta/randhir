@@ -1218,6 +1218,7 @@ function itg_app_manager_packages_form($form, &$form_state) {
 
 function itg_app_manager_packages_form_submit($form, &$form_state) {
     foreach ($form_state['values']['package_options'] as $id => $val) {
+       $ids = $val;
         if ($val > 0) {
             $package_name = $form['package_options']['#options'][$val];
             $result = db_select('itg_app_middleware', 'it_m')
@@ -1232,6 +1233,7 @@ function itg_app_manager_packages_form_submit($form, &$form_state) {
                             'identifier' => 'itg_package',
                             'name' => $package_name,
                             'url' => '',
+                            'ids' => $ids,
                             'created' => REQUEST_TIME,
                             'changed' => REQUEST_TIME,
                         ))
@@ -1582,6 +1584,7 @@ function itg_app_manager_categories_form($form, &$form_state) {
  */
 function itg_app_manager_categories_form_submit($form, &$form_state) {
     foreach ($form_state['values']['categories_options'] as $id => $val) {
+        $ids = $val;
         if ($val > 0) {
             $package_name = $form['categories_options']['#options'][$val];
             $result = db_select('itg_app_middleware', 'it_m')
@@ -1596,6 +1599,7 @@ function itg_app_manager_categories_form_submit($form, &$form_state) {
                             'identifier' => 'categories_options',
                             'name' => $package_name,
                             'url' => '',
+                            'ids' => $ids,
                             'created' => REQUEST_TIME,
                             'changed' => REQUEST_TIME,
                         ))
@@ -1713,6 +1717,7 @@ function itg_app_manager_poll_form($form, &$form_state) {
  */
 function itg_app_manager_poll_form_submit($form, &$form_state) {    
     foreach ($form_state['values']['poll_options'] as $id => $val) {
+        $ids = $val;
         if ($val > 0) {
             $package_name = $form['poll_options']['#options'][$val];            
             $result = db_select('itg_app_middleware', 'it_m')
@@ -1727,6 +1732,7 @@ function itg_app_manager_poll_form_submit($form, &$form_state) {
                             'identifier' => 'poll_options',
                             'name' => $package_name,
                             'url' => '',
+                            'ids' => $ids,
                             'created' => REQUEST_TIME,
                             'changed' => REQUEST_TIME,
                         ))
@@ -1902,6 +1908,7 @@ function itg_app_manager_magazine_form($form, &$form_state) {
  */
 function itg_app_manager_magazine_form_submit($form, &$form_state) {    
     foreach ($form_state['values']['magazine_options'] as $id => $val) {
+        $ids = $val;
         if ($val > 0) {
             $package_name = $form['magazine_options']['#options'][$val];            
             $result = db_select('itg_app_middleware', 'it_m')
@@ -1916,6 +1923,7 @@ function itg_app_manager_magazine_form_submit($form, &$form_state) {
                             'identifier' => 'magazine_options',
                             'name' => $package_name,
                             'url' => '',
+                            'ids' => $ids,
                             'created' => REQUEST_TIME,
                             'changed' => REQUEST_TIME,
                         ))
