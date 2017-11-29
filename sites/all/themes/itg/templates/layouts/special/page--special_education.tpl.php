@@ -689,7 +689,7 @@ if ($theme != 'itgadmin') {
                       <?php
                         if (isset($widget_data['itg-block-15']['widget'])) {
                           print $widget_data['itg-block-15']['widget']; 
-                        } else{
+                        } else {
                           print '<div class="widget-placeholder"><span>'.t('Videos').'</span></div>';
                         } 
                       ?>
