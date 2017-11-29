@@ -53,7 +53,7 @@ function itg_users_cms_user_dashboard() {
       'manage-ads' => 'Ads',
       'manage-poll' => 'Poll',
       'manage-survey' => 'Survey',
-      'ask-an-expert' => 'Ask an expert',
+      'ask-an-expert-inqueue-content' => 'Ask an expert',
       'manage-quiz' => 'Quiz',
       'manage-newsletter' => 'Newsletter',
       'manage-event-backend' => 'Events',
@@ -65,7 +65,10 @@ function itg_users_cms_user_dashboard() {
       'mydraft-blogs' => 'Blogs',
       'report/filed-content' => 'CMS Report');
 
-  
+   if(!in_array("Expert", $user->roles)) {
+     unset($listed_menu_link_site_admin['ask-an-expert-inqueue-content']); 
+   }
+   
    if (in_array("Author/Guest", $user->roles) || in_array("Intern", $user->roles) || in_array("Subeditor/Sr.Sub", $user->roles)) {
       unset($listed_menu_link_site_admin['category-manager-listing'],
             $listed_menu_link_site_admin['manage-users'],
