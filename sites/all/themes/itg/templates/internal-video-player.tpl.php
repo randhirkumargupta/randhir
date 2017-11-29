@@ -20,7 +20,7 @@ if (!empty($refral_site)) {
     $used_on = 'embed';
   }
 }
-$player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on ,$external_side);
+$player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on, $external_side);
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
@@ -31,7 +31,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
       var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
       jwplayer('videoplayer').setup({
           playlist: [{
-                  title: "",
+                  title: "<?php echo stripslashes($title); ?>",
                   'image': "<?php echo $player_content['player_image']; ?>",
                   sources: [
                       {
@@ -41,7 +41,8 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
 
                       }]
               }],
-          primary: "html5",
+          primary: "flash",
+          autostart: "true",
           width: "100%",
           height: "100%",
           aspectratio: "16:9",
@@ -50,11 +51,11 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
           autostart: true,
-          advertising: {
-              client: "googima", skipoffset: 5,
-              schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
+                  advertising: {
+                      client: "googima", skipoffset: 5,
+                      schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
-              idstring: "",
+              idstring: "<?php echo stripslashes($title); ?>",
               label: "<?php echo $player_content["ga_code"]; ?>"
           }
       });

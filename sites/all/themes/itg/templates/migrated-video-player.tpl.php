@@ -9,7 +9,6 @@ global $base_url;
 <script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
 
 <?php
-
 $refral_site = itg_common_get_domain($_SERVER["HTTP_REFERER"]);
 $external_side = 0;
 if (!empty($refral_site)) {
@@ -18,7 +17,7 @@ if (!empty($refral_site)) {
     $used_on = 'embed';
   }
 }
-$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on ,$external_side);
+$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $external_side);
 ?>
 <script>
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
@@ -33,8 +32,8 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on ,$e
       jwplayer('videoplayer').setup({
           //var multipart=0;
           playlist: [{
-                  title: "", 
-                          'image': "<?php echo $image; ?>",
+                  title: "<?php echo stripslashes($title); ?>",
+                  'image': "<?php echo $image; ?>",
                   sources: [
                       {
                           file: "<?php echo $data_video['bitrate_url']; ?>"
@@ -44,20 +43,21 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on ,$e
 
                       }]
               }],
-          primary: "html5",
+          primary: "flash",
+          autostart: "true",
           width: "100%",
           height: "100%",
-          aspectratio: "16:9",
+          aspectratio: "4:3",
           "stretching": "exactfit",
           androidhls: "true",
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
           autostart: true,
-          advertising: {
-              client: "googima", skipoffset: 5,
-              schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
+                  advertising: {
+                      client: "googima", skipoffset: 5,
+                      schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
-              idstring: "",
+              idstring: "<?php echo stripslashes($title); ?>",
               label: "<?php echo $player_content["ga_code"]; ?>"
           }
       });
@@ -65,6 +65,7 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on ,$e
 
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
+ 
   playerInstance.on('setupError', function (event) {
       if (event.message == 'Error loading player: No playable sources found') {
           document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
