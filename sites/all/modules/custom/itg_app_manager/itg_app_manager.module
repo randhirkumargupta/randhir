@@ -1384,7 +1384,7 @@ function itg_app_manager_categories() {
     $middleware_data = itg_app_middleware_table('categories_options');
     $header = array();
     foreach ($middleware_data as $key => $val) {
-        $delete = l(t('Delete'), 'itg-app-manager-packages/' . $val->id . '/delete');
+        $delete = l(t('Delete'), 'itg-app-manager-categories/' . $val->id . '/delete');
         $rows[] = array('number' => $key + 1, 'name' => $val->name, 'delete' => $delete);
     }
     $table = array(
@@ -1520,7 +1520,7 @@ function itg_app_manager_poll() {
     $middleware_data = itg_app_middleware_table('poll_options');
     $header = array();
     foreach ($middleware_data as $key => $val) {
-        $delete = l(t('Delete'), 'itg-app-manager-packages/' . $val->id . '/delete');
+        $delete = l(t('Delete'), 'itg-app-manager-poll/' . $val->id . '/delete');
         $rows[] = array('number' => $key + 1, 'name' => $val->name, 'delete' => $delete);
     }
     $table = array(
