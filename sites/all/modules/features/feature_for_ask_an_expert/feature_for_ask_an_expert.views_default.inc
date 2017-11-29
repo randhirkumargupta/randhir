@@ -168,7 +168,6 @@ function feature_for_ask_an_expert_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    6 => '6',
     21 => '21',
     10 => '10',
   );
@@ -348,7 +347,7 @@ if($user->uid != \'1\') {
 }
 else
 {
-  return \'No Record Found\';
+  return 0;
 }';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['format'] = 'default_summary';
@@ -547,9 +546,7 @@ else
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    6 => '6',
     21 => '21',
-    10 => '10',
   );
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -634,7 +631,7 @@ if($user->uid != \'1\') {
 }
 else
 {
-  return \'No Record Found\';
+  return 0;
 }';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_user_source_term_id_value']['summary']['format'] = 'default_summary';
