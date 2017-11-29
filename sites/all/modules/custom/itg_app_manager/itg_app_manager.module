@@ -147,6 +147,19 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
+    $items['itg-app-manager-magazine'] = array(
+        'title' => 'Poll',
+        'page callback' => 'itg_app_manager_magazine',
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['itg-app-manager-magazine/%/delete'] = array(
+        'title' => 'Poll Package',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_app_manager_magazine_delete_comfirm', 1),
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
    
     return $items;
 }
@@ -731,6 +744,13 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('bookmark_display_custom_message')
+    );
+    $form['bookmark_delete_display_custom_message'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Bookmark Delete Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('bookmark_delete_display_custom_message')
     );
     $form['anchor_program_display_count'] = array(
         '#type' => 'textfield',
@@ -1526,8 +1546,6 @@ function itg_app_manager_categories_delete_comfirm_submit($form, &$form_state) {
     
 }
 
-// andy here
-
 /**
  * poll management menu callback
  * @param array $form
@@ -1713,4 +1731,203 @@ function polls_open_list_app($cpageno, $from) {
   }
  
   return $poll_list;
+}
+
+// andy here
+
+/**
+ * magazine management menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+
+function itg_app_manager_magazine() {    
+    $output = array();
+    $output['form'] = drupal_get_form('itg_app_manager_magazine_form');
+    $middleware_data = itg_app_middleware_table('magazine_options');
+    $header = array();
+    foreach ($middleware_data as $key => $val) {
+        $delete = l(t('Delete'), 'itg-app-manager-magazine/' . $val->id . '/delete');
+        $rows[] = array('number' => $key + 1, 'name' => $val->name, 'delete' => $delete);
+    }
+    $table = array(
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+        '#empty' => t('Nothing found. Nada. Zip. Zilch.'),
+    );
+    $output['table'] = $table;
+    return $output;
+}
+/**
+ * magazine management form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_manager_magazine_form($form, &$form_state) {
+    ctools_include('modal');
+    ctools_modal_add_js();
+    $default_checked = array();
+    $selected_packages = itg_app_middleware_table('magazine_options');
+    foreach ($selected_packages as $package) {
+        $default_checked[] = _get_term_from_name($package->name, 'magazine_management');
+    }
+    
+    $magazine_res = magazine_list_app();
+              
+        foreach ($magazine_res as $key => $val) {
+            //$term_options[$val->tid] = $val->name . l('Config Settings', 'categories-config/nojs/form/' . $val->tid . '', array('attributes' => array('class' => 'ctools-use-modal')));
+            $magazine_title = $val['title'];
+            $magazine_nid = $val['nid'];
+            $term_options[$magazine_nid] = $magazine_title;
+        }
+    
+    
+    $form['magazine_options'] = array(
+        '#type' => 'checkboxes',
+        '#options' => $term_options,
+        '#default_value' => $default_checked,
+    );
+    $form['magazine_submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#submit' => array('itg_app_manager_magazine_form_submit'),
+    );
+    return $form;
+}
+/**
+ * submit callback for magazine management form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_magazine_form_submit($form, &$form_state) {    
+    foreach ($form_state['values']['magazine_options'] as $id => $val) {
+        if ($val > 0) {
+            $package_name = $form['magazine_options']['#options'][$val];            
+            $result = db_select('itg_app_middleware', 'it_m')
+                    ->fields('it_m', array('id'))
+                    ->condition('name', $package_name)
+                    ->condition('identifier', 'magazine_options')
+                    ->execute();
+            $num_of_results = $result->rowCount();
+            if ($num_of_results == 0) {
+                db_insert('itg_app_middleware')
+                        ->fields(array(
+                            'identifier' => 'magazine_options',
+                            'name' => $package_name,
+                            'url' => '',
+                            'created' => REQUEST_TIME,
+                            'changed' => REQUEST_TIME,
+                        ))
+                        ->execute();
+            }
+        } else {
+            $package_name = $form['magazine_options']['#options'][$id];
+            $num_deleted = db_delete('itg_app_middleware')
+                    ->condition('name', $package_name)
+                    ->condition('identifier', 'magazine_options')
+                    ->execute();
+        }
+    }
+
+    drupal_set_message(t('Data saved successfully.'), 'status');
+}
+/**
+ * delete magazine management menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_manager_magazine_delete_comfirm($form, &$form_state, $cid) {
+    $form['delete'] = array(
+        '#type' => 'value',
+        '#value' => $cid,
+    );
+    return confirm_form(
+            $form, t('Are you sure you want to delete this?'), 'itg-app-manager-magazine', t('This action cannot be undone.'), t('Delete'), t('Cancel')
+    );
+}
+/**
+ * submit callback for delete magazine management form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_magazine_delete_comfirm_submit($form, &$form_state) {
+    $record = $form_state['values']['delete'];
+    if ($record) {
+        $num_deleted = db_delete('itg_app_middleware')
+                ->condition('id', $record)
+                ->execute();
+        drupal_set_message('The record has been deleted!');
+    }
+    $form_state['redirect'] = "itg-app-manager-magazine";
+    
+}
+
+/**
+ * Return the magazine issue list
+ * @pram int $cpageno
+ * @pram string $from 
+ * @return array
+ */
+function magazine_list_app($cpageno, $from){
+  // variable declaration
+  global $base_url;
+  $node_count = "";
+  $output = "";
+  $data = array();
+  $listcount = 0;
+  $data_list_array = array();
+  $loop_count = 0;
+
+  // issue list query..
+
+  $query_issue = db_select('node', 'n');
+  $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
+  $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
+  $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
+  //$query_issue->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
+
+  $query_issue->fields('fsli', array('field_issue_large_cover_image_fid'));
+  $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
+  $query_issue->fields('fsit', array('field_issue_title_value'));
+  $query_issue->fields('n', array('nid'));
+
+  $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->condition('fsit.field_issue_title_value', '2016-12-31', '<=')->orderBy('fsit.field_issue_title_value', 'desc')->range(0, 20);
+  $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result_issue as $reskey => $resvalue) {
+
+    //issue node 
+    $issueid = $resvalue['nid'];
+    $node_data = node_load($issueid);
+
+    $lar_img_uri = $node_data->field_issue_large_cover_image['und'][0]['uri'];
+    $lar_img = image_style_url('magazine_top_issue_172x240', $lar_img_uri);
+    $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
+    $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
+
+    $field_issue_small_cover_image_fid = $resvalue['field_issue_small_cover_image_fid'];
+    $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
+
+    $issue_date = $resvalue['field_issue_title_value'];
+    $issue_nid = $resvalue['nid'];
+    $story_list_data = getCoverstoriesList($issue_date);
+    if (count($story_list_data) > 0) {
+      $data_list_array[$loop_count]['issue_id'] = "$issueid";
+      $data_list_array[$loop_count]['issue_date'] = "$issue_date";
+      $data_list_array[$loop_count]['issue_cover_image'] = "$lar_img";
+      $data_list_array[$loop_count]['story'] = $story_list_data;
+      $loop_count++;
+    }
+    if ($loop_count >= 10) {
+      break;
+    }
+  }
+
+  $data['lcount'] = $loop_count;
+  $data['data'] = $data_list_array;
+  $data['updated_datetime'] = $changed_datetime;
+  return $data;
 }
