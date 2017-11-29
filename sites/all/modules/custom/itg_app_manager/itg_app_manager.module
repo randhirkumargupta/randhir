@@ -134,12 +134,19 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
-//    $items['categories-config/%ctools_js/form/%'] = array(
-//        'page callback' => 'itg_app_manager_categories_popup_form_callback',
-//        'page arguments' => array(1, 3),
-//        'access callback' => TRUE,
-//        'type' => MENU_CALLBACK,
-//    );
+    $items['itg-app-manager-poll'] = array(
+        'title' => 'Poll',
+        'page callback' => 'itg_app_manager_poll',
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['itg-app-manager-poll/%/delete'] = array(
+        'title' => 'Poll Package',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_app_manager_poll_delete_comfirm', 1),
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
    
     return $items;
 }
@@ -662,6 +669,27 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('author_story_display_custom_msg')
     );
+    $form['poll_pagination_cap'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Poll Pagination Cap',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('poll_pagination_cap')
+    );
+    $form['poll_display_count_newslist_cell'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Poll Display Count',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('poll_display_count_newslist_cell')
+    );
+    $form['poll_display_custom_msg'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Poll Display Custom Message',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('poll_display_custom_msg')
+    );
     $form['anchor_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Display Count',
@@ -806,6 +834,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('android_update_message_frequency')
     );
+    
 
     $form['submit_button'] = array(
         '#type' => 'submit',
@@ -1341,7 +1370,7 @@ function top_stories_management_form_submit($form, &$form_state) {
     }
     drupal_set_message(t('Data saved successfully.'), 'status');
 }
-// andy here
+
 /**
  * categories management menu callback
  * @param array $form
@@ -1476,3 +1505,191 @@ function itg_app_manager_categories_delete_comfirm_submit($form, &$form_state) {
     
 }
 
+// andy here
+
+/**
+ * poll management menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+
+function itg_app_manager_poll() {    
+    $output = array();
+    $output['form'] = drupal_get_form('itg_app_manager_poll_form');
+    $middleware_data = itg_app_middleware_table('poll_options');
+    $header = array();
+    foreach ($middleware_data as $key => $val) {
+        $delete = l(t('Delete'), 'itg-app-manager-packages/' . $val->id . '/delete');
+        $rows[] = array('number' => $key + 1, 'name' => $val->name, 'delete' => $delete);
+    }
+    $table = array(
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+        '#empty' => t('Nothing found. Nada. Zip. Zilch.'),
+    );
+    $output['table'] = $table;
+    return $output;
+}
+/**
+ * poll management form
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_manager_poll_form($form, &$form_state) {
+    ctools_include('modal');
+    ctools_modal_add_js();
+    $default_checked = array();
+    $selected_packages = itg_app_middleware_table('poll_options');
+    foreach ($selected_packages as $package) {
+        $default_checked[] = _get_term_from_name($package->name, 'poll_management');
+    }
+    
+    $poll_res = polls_open_list_app();
+              
+        foreach ($poll_res as $key => $val) {
+            //$term_options[$val->tid] = $val->name . l('Config Settings', 'categories-config/nojs/form/' . $val->tid . '', array('attributes' => array('class' => 'ctools-use-modal')));
+            $poll_title = $val['title'];
+            $poll_nid = $val['nid'];
+            $term_options[$poll_nid] = $poll_title;
+        }
+    
+    
+    $form['poll_options'] = array(
+        '#type' => 'checkboxes',
+        '#options' => $term_options,
+        '#default_value' => $default_checked,
+    );
+    $form['poll_submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#submit' => array('itg_app_manager_poll_form_submit'),
+    );
+    return $form;
+}
+/**
+ * submit callback for poll management form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_poll_form_submit($form, &$form_state) {    
+    foreach ($form_state['values']['poll_options'] as $id => $val) {
+        if ($val > 0) {
+            $package_name = $form['poll_options']['#options'][$val];            
+            $result = db_select('itg_app_middleware', 'it_m')
+                    ->fields('it_m', array('id'))
+                    ->condition('name', $package_name)
+                    ->condition('identifier', 'poll_options')
+                    ->execute();
+            $num_of_results = $result->rowCount();
+            if ($num_of_results == 0) {
+                db_insert('itg_app_middleware')
+                        ->fields(array(
+                            'identifier' => 'poll_options',
+                            'name' => $package_name,
+                            'url' => '',
+                            'created' => REQUEST_TIME,
+                            'changed' => REQUEST_TIME,
+                        ))
+                        ->execute();
+            }
+        } else {
+            $package_name = $form['poll_options']['#options'][$id];
+            $num_deleted = db_delete('itg_app_middleware')
+                    ->condition('name', $package_name)
+                    ->condition('identifier', 'poll_options')
+                    ->execute();
+        }
+    }
+
+    drupal_set_message(t('Data saved successfully.'), 'status');
+}
+/**
+ * delete poll management menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_manager_poll_delete_comfirm($form, &$form_state, $cid) {
+    $form['delete'] = array(
+        '#type' => 'value',
+        '#value' => $cid,
+    );
+    return confirm_form(
+            $form, t('Are you sure you want to delete this?'), 'itg-app-manager-poll', t('This action cannot be undone.'), t('Delete'), t('Cancel')
+    );
+}
+/**
+ * submit callback for delete poll management form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_manager_poll_delete_comfirm_submit($form, &$form_state) {
+    $record = $form_state['values']['delete'];
+    if ($record) {
+        $num_deleted = db_delete('itg_app_middleware')
+                ->condition('id', $record)
+                ->execute();
+        drupal_set_message('The record has been deleted!');
+    }
+    $form_state['redirect'] = "itg-app-manager-poll";
+    
+}
+
+/**
+ * Return the data of open poll
+ * @pram int $cpageno
+ * @pram string $from 
+ * @return array
+ */
+function polls_open_list_app($cpageno, $from) {
+  $poll_list = array();
+  $range_max = 10;
+  if($from == "home"){
+      $range_max = 1;
+  }
+  $range_min = 0;
+  if (!$cpageno == 0) {
+    $range_min = $cpageno * $range_max;
+  }
+  
+  
+  $current_time = date('Y-m-d H:i:s', time());
+
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
+  $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
+  $query->leftJoin('field_data_field_poll_call_to_action_image', 'ai', 'ai.entity_id = n.nid');
+  $query->leftJoin('field_data_field_poll_end_date', 'ed', 'ed.entity_id = n.nid');
+  $query->leftJoin('field_data_field_poll_question_image', 'qi', 'qi.entity_id = n.nid');
+
+  $query->fields('n', array('nid', 'title', 'type', 'changed'));
+  $query->fields('pb', array('field_poll_banner_fid'));
+  $query->fields('st', array('field_poll_start_date_value'));
+  $query->fields('ai', array('field_poll_call_to_action_image_fid'));
+  $query->fields('ed', array('field_poll_end_date_value'));
+  $query->fields('qi', array('field_poll_question_image_fid'));
+
+  $query->condition('n.type', 'poll');
+  $query->condition('st.field_poll_start_date_value', $current_time, '<');
+  $query->condition('n.status', '1');
+  $query->orderBy('n.nid', 'DESC');
+  //$query->range($range_min, $range_max);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $loopc = 0;
+  foreach ($result as $k => $res) {
+    if ($res['field_poll_end_date_value'] != '' && $res['field_poll_end_date_value'] > $current_time) {
+      $poll_list[$loopc]['title'] = $res['title'];
+      $poll_list[$loopc]['nid'] = $res['nid'];
+    }
+    else if ($res['field_poll_end_date_value'] == '') {//&& $res['field_poll_start_date_value'] >= $current_time
+      $poll_list[$loopc]['title'] = $res['title'];
+      $poll_list[$loopc]['nid'] = $res['nid'];
+    }
+    $loopc++;
+  }
+ 
+  return $poll_list;
+}
