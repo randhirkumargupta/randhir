@@ -1873,61 +1873,33 @@ function itg_app_manager_magazine_delete_comfirm_submit($form, &$form_state) {
  * @return array
  */
 function magazine_list_app($cpageno, $from){
-  // variable declaration
-  global $base_url;
-  $node_count = "";
-  $output = "";
-  $data = array();
-  $listcount = 0;
-  $data_list_array = array();
-  $loop_count = 0;
+ 
+// variable declaration
+  $issue_list = array();
+  $loopc = 0;
 
   // issue list query..
 
-  $query_issue = db_select('node', 'n');
-  $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
-  $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
-  $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
-  //$query_issue->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
-
-  $query_issue->fields('fsli', array('field_issue_large_cover_image_fid'));
-  $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
+  $query_issue = db_select('node', 'n');  
+  $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid'); 
   $query_issue->fields('fsit', array('field_issue_title_value'));
   $query_issue->fields('n', array('nid'));
 
-  $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->condition('fsit.field_issue_title_value', '2016-12-31', '<=')->orderBy('fsit.field_issue_title_value', 'desc')->range(0, 20);
+  //$query_issue->condition('n.status', 1)->condition('n.type', 'issue')->condition('fsit.field_issue_title_value', '2016-12-31', '<=')->orderBy('fsit.field_issue_title_value', 'desc')->range(0, 20);
+  $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->orderBy('fsit.field_issue_title_value', 'desc')->range(0, 20);
   $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
+  
   foreach ($result_issue as $reskey => $resvalue) {
-
-    //issue node 
-    $issueid = $resvalue['nid'];
-    $node_data = node_load($issueid);
-
-    $lar_img_uri = $node_data->field_issue_large_cover_image['und'][0]['uri'];
-    $lar_img = image_style_url('magazine_top_issue_172x240', $lar_img_uri);
-    $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
-    $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
-
-    $field_issue_small_cover_image_fid = $resvalue['field_issue_small_cover_image_fid'];
-    $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
-
-    $issue_date = $resvalue['field_issue_title_value'];
-    $issue_nid = $resvalue['nid'];
-    $story_list_data = getCoverstoriesList($issue_date);
-    if (count($story_list_data) > 0) {
-      $data_list_array[$loop_count]['issue_id'] = "$issueid";
-      $data_list_array[$loop_count]['issue_date'] = "$issue_date";
-      $data_list_array[$loop_count]['issue_cover_image'] = "$lar_img";
-      $data_list_array[$loop_count]['story'] = $story_list_data;
-      $loop_count++;
-    }
-    if ($loop_count >= 10) {
-      break;
-    }
-  }
-
-  $data['lcount'] = $loop_count;
-  $data['data'] = $data_list_array;
-  $data['updated_datetime'] = $changed_datetime;
-  return $data;
+      
+      $issue_title = $resvalue['field_issue_title_value'];
+      $issue_nid = $resvalue['nid'];
+      $issue_title_date = date("M d, Y", strtotime($issue_title));
+      
+      $issue_list[$loopc]['title'] = $issue_title_date;
+      $issue_list[$loopc]['nid'] = $issue_nid;
+      $loopc++;
+   
+  }  
+  
+  return $issue_list;
 }
