@@ -58,7 +58,6 @@ function itg_akamai_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
-
   $items['admin/config/system/itg_akamai/akamai_log'] = array(
     'title' => 'Akamai Cache Log',
     'description' => 'Admin interface to view Cache Activity Log',
@@ -107,7 +106,6 @@ function itg_akamai_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
-
   $items['admin/config/system/itg_akamai/akamai_section'] = array(
     'title' => 'Akamai Section/Category Setting',
     'description' => 'Admin interface for Akamai Section/Category Setting',
@@ -127,7 +125,6 @@ function itg_akamai_menu() {
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
-
 
   $items['admin/config/system/itg_akamai/akamai_ccs/%ctools_js/%'] = array(
     'title' => 'Akamai Content type Settings',
@@ -158,15 +155,6 @@ function itg_akamai_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  /* $items['itg-akamai-load-my-account'] = array(
-    'title' => 'Akamai Load My Account',
-    'description' => 'Akamai Load My Account',
-    'page callback' => 'itg_akamai_load_my_account',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_akamai.helper.inc',
-    'type' => MENU_CALLBACK,
-    ); */
-
   return $items;
 }
 
@@ -190,7 +178,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       return TRUE;
     }
   }
-
   // First of all request should not be part of drupal CLI
   if (!drupal_is_cli()) {
     global $user;
@@ -210,7 +197,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     foreach ($paths_in as $path) {
       $paths[] = $path;
     }
-
     // It is possible to have no paths at this point if other modules have
     // altered the paths.
     if (empty($paths)) {
@@ -218,26 +204,18 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       return FALSE;
     }
     $paths = array_unique($paths);
-
     $paths = array_map('trim', $paths);
-
     // Sending for clearing cache for varnish before hitting to Varnish
     if (module_exists('varnish')) {
       if (function_exists('varnish_expire_cache')) {
         varnish_expire_cache($paths);
       }
     }
-
     global $base_url;
-
     $varnish_paths = itg_akamai_varnish_host_mapping($paths);
-
-
     $paths = itg_akamai_send_for_host_mapping($paths);
     //$paths = itg_akamai_send_for_host_mapping_for_amp($paths);  // Preparing data for AMP URLs
-
     $paths_data = $paths;
-
     if (!empty($paths)) {
       $url = implode(',', $paths);
     }
@@ -246,7 +224,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       watchdog('ITG Akamai Exception', t('URL is empty'));
       return;
     }
-
     $urls = explode(',', $url);
     if (is_array($urls)) {
       $url = '';
@@ -258,35 +235,25 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     else {
       $url = '"' . $url . '"';
     }
-
     $client = new Akamai\Open\EdgeGrid\Client(['base_uri' => AKAMAI_BASE_URI]);
-
     $client->setAuth(AKAMAI_CLIENT_TOKEN, AKAMAI_CLIENT_SECRET, AKAMAI_ACCESS_TOKEN);
-
-
     // use $client just as you would \Guzzle\Http\Client 
-
     if ($params['action'] == 'remove') {
       $data = '{ "objects" : [ ' . $url . '], "action" : "remove" }';
     }
     else {
       $data = '{ "objects" : [ ' . $url . '] }';
     }
-
     $request_success_flag = 0;
-
     try {
       $response = $client->post(AKAMAI_API_ENDPOINT, [
         'body' => $data,
         'headers' => ['Content-Type' => 'application/json']
       ]);
-
       $response_data_decoded = json_decode($response->getBody());
-
       $data_for_log = ItgAkamaiUtility::itgAkamaiGetDataForLog($paths_data, $data, $response->getBody(), $user->uid, $response_data_decoded->httpStatus, $response_data_decoded->purgeId);
       $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
       $request_success_flag = 1;
-
       // Passing / Saving akamai purging log to drupal watchdog 
       watchdog('ITG-Akamai log', 'Url have been purged successfully! Data =>' . json_encode($data_for_log));
     }
@@ -310,7 +277,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       }
     }
     // End code for Recaching
-
     return $request_success_flag;
   }
 }
@@ -396,9 +362,7 @@ function itg_akamai_send_for_host_mapping_for_amp($paths) {
  */
 function itg_akamai_form_node_type_form_alter(&$form, &$form_state) {
   $default_value = TRUE;
-
   if (user_access("administer itg akamai")) {
-
     $type = $form['#node_type'];
     $form['itg_akamai_setting'] = array(
       '#type' => 'fieldset',
@@ -483,10 +447,7 @@ function itg_akamai_block_view($delta) {
 function itg_akamai_page_cache_control_form() {
   $form = array();
   $nid = arg(1);
-
-
   $is_front_page = drupal_is_front_page();
-
   if ($is_front_page) {
     $path[] = drupal_get_path_alias($_GET['q']);
     $path[] = $_GET['q'];
@@ -508,7 +469,6 @@ function itg_akamai_page_cache_control_form() {
       $form['#node'] = NULL;
     }
   }
-
 
   $form['path'] = array(
     '#type' => 'hidden',
@@ -859,6 +819,11 @@ function itg_akamai_add_cc_button($form, &$form_state) {
       'nid' => $form_state['node']->nid,
       'type' => $form_state['node']->type
     );
+
+    if ($form_state['node']->type == 'story' && isset($form_state['node']->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !empty($form_state['node']->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
+      $data['field_story_issue_date'] = date('d-m-Y', strtotime($form_state['node']->field_story_issue_date[LANGUAGE_NONE][0]['value']));
+    }
+
     $return_data = base64_encode(json_encode(array($_GET['q'], array_reverse($qry_array))));
     $purge_url = $base_url . '/itg-akamai-cc-button-purge/' . base64_encode(json_encode($data)) . '?return_data=' . $return_data;
     $purge_akamai_cache_link = '<a  class="btn-submit" href="' . $purge_url . '">Purge Akamai Cache</a>';
@@ -1303,7 +1268,6 @@ function itg_akamai_cc_button_purge($entity_data) {
         drupal_set_message(t('Content have been purged successfully.'));
       }
     }
-
     //Start code sending purge request to Akamai to purge those stories which is related to passed video id
     if ($node_data->type == 'videogallery') {
       itg_akamai_purge_story_related_to_video($node_data->nid);
@@ -1311,14 +1275,11 @@ function itg_akamai_cc_button_purge($entity_data) {
     // End code  sending purge request to Akamai to purge those stories which is related to passed video id
     // Sending request for purging Magazine page
     if ($node_data->type == 'story') {
-      $node = node_load($node_data->nid);
-      if (isset($node->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
-        $pattern_magazine_url = 'magazine/' . date('d-m-Y', strtotime($node->field_story_issue_date[LANGUAGE_NONE][0]['value']));
+      if (isset($node_data->field_story_issue_date) && !empty($node_data->field_story_issue_date)) {
+        $pattern_magazine_url = 'magazine/' . $node_data->field_story_issue_date;
         itg_akamai_clear_url($pattern_magazine_url);
       }
     }
-
-
     if (isset($_GET['return_data']) && !empty($_GET['return_data'])) {
       $return_data = json_decode(base64_decode($_GET['return_data']), TRUE);
       drupal_goto($return_data[0], array('query' => $return_data[1]));
@@ -1327,6 +1288,14 @@ function itg_akamai_cc_button_purge($entity_data) {
       drupal_goto('<front>');
     }
   }
+}
+
+/**
+ * Getting story issue date
+ * @param int $nid
+ */
+function itg_akamai_get_field_story_issue_date($nid) {
+  
 }
 
 /**
