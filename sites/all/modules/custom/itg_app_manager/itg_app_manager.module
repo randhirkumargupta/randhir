@@ -876,6 +876,104 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('android_update_message_frequency')
     );
     
+    $form['sso_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('SSO'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        
+    );
+    $form['sso_signup'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso signup',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_signup')
+    );
+    $form['sso_login_request'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso login request',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_login_request')
+    );
+    $form['sso_log_out'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso log out',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_log_out')
+    );
+    $form['sso_change_password'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso change password',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_change_password')
+    );
+    $form['sso_forgot_password'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso forgot password',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_forgot_password')
+    );
+    $form['sso_otp_verification'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso otp verification',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_otp_verification')
+    );
+    $form['sso_resend_otp'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso resend otp',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_resend_otp')
+    );
+    $form['sso_get_login_user_detail'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso get login user detail',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_get_login_user_detail')
+    );
+    $form['sso_edit_profile'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso edit profile',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_edit_profile')
+    );
+    $form['sso_get_preference'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso get preference',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_get_preference')
+    );
+    $form['sso_update_preference'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso update preference',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_update_preference')
+    );
+    $form['sso_reset_password'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso reset password',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_reset_password')
+    );
+    $form['sso_authtoken_verification'] = array(
+        '#type' => 'textfield',
+        '#title' => 'sso authtoken verification',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#default_value' => fetchMasterConfigData('sso_authtoken_verification')
+    );
 
     $form['submit_button'] = array(
         '#type' => 'submit',
