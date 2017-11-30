@@ -288,7 +288,7 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
     foreach ($form_state['values']['field_event_tabs'][LANGUAGE_NONE] as $key => $event_tabs) {
       if (is_numeric($key)) {
         if ($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url') {
-          if((strpos($url, 'http') !== 0) && !filter_var($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_URL)) {
+          if((strpos($url, 'http') !== 0) && !filter_var($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_URL) && !empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'])) {
               form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter valid Tab External URL.'));  
             }
         }
@@ -1907,7 +1907,7 @@ function itg_event_backend_highlights_block_content() {
     $highlights_node = node_load($highlights_nid);
 
     $output = '';
-    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">Highlights</h2><div class="wrap-listing">';
+    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">'.t('Highlights').'</h2><div class="wrap-listing">';
     $text = '';
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
       $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
@@ -1918,8 +1918,11 @@ function itg_event_backend_highlights_block_content() {
         $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
       }
     }
-
-    $output .= $text . '</div></div>';
+    if(!empty($text)) {
+      $output .= $text . '</div></div>';
+    }else{
+      $output = '';
+    }
     return $output;
   }
 }
