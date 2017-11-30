@@ -1020,39 +1020,41 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             $form['cat_id']['#suffix'] = '</div>';
             break;
         case 'views-exposed-form-key-candidate-special-key-candidate-widget-list':
-            $form['title']['#attributes']['placeholder'] = t('Content Title');
-            $form['title']['#weight'] = 1;
-            $form['nid']['#weight'] = 2;
-            $form['title']['#weight'] = 1;
-            $form['items_per_page']['#weight'] = 5;
-            $form['nid']['#attributes']['placeholder'] = t('Content ID');
-            $autocomplete_path = autocomplete_for_widgets('reporter');
-            $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
-            $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
-            $form['#validate'][] = 'custom_section_wise_validate';
-            $form['cat_id']['#prefix'] = '<div class="cat-wraper"style="">';
-            $form['cat_id']['#suffix'] = '</div>';
-            $form['cat_id']['#title'] = '';
-            $form['state']['#prefix'] = '<div class="state-wraper"style="">';
-            $form['state']['#suffix'] = '</div>';
-            $op = getsaction_list();
-            $form['cat1_id']['#type'] = 'select';
-            $form['cat1_id']['#options'] = $op;
-            $form['cat1_id']['#weight'] = -9999;
-            $form['cat1_id']['#default_value'] = $_GET['cat_id'];
-            $allstate = get_all_state();
-            foreach ($allstate as $key => $opvalue) {
-                if ($key == 0) {
-                    $key = "";
-                }
-                $returnarray[$key] = $opvalue;
-            }
+              $form['title']['#attributes']['placeholder'] = t('Content Title');
+              $form['title']['#weight'] = 1;
+              $form['nid']['#weight'] = 2;
+              $form['title']['#weight'] = 1;
+              $form['items_per_page']['#weight'] = 5;
+              $form['nid']['#attributes']['placeholder'] = t('Content ID');
+              $autocomplete_path = autocomplete_for_widgets('reporter');
+              $form['title']['#autocomplete_path'] = $autocomplete_path['title'];
+              $form['nid']['#autocomplete_path'] = $autocomplete_path['nid'];
+              $form['#validate'][] = 'custom_section_wise_validate';
+              $op = getsaction_list();
+              $form['cat_id'] = array(
+                '#type' => 'select',
+                '#title' => 'Section <span class="form-required" title="This field is required.">*</span>',
+                '#options' => $op,
+                '#weight' => -9999,
+                '#ajax' => array(
+                  'callback' => 'ajax_dependent_dropdown_state_key_candidate',
+                ),
+                '#prefix' => $pre_fix,
+                '#suffix' => $suf_fix,
+              );
+              $state_class = "visible";
+              $states_neame = array();
+              $states_neame = get_all_state($form_state['input']['cat_value']);
+              $form['state'] = array(
+                '#type' => 'select',
+                '#title' => 'State <span class="form-required" title="This field is required.">*</span>',
+                '#weight' => -9999,
+                '#options' => $states_neame,
+                '#prefix' => '<div id="view-display-isesue">',
+                '#suffix' => '</div>',
+              );
 
-            $form['state1']['#type'] = 'select';
-            $form['state1']['#options'] = $returnarray;
-            $form['state1']['#weight'] = -99994;
-            $form['state1']['#default_value'] = $_GET['state'];
-            break;
+              break;
         case 'views-exposed-form-section-wise-content-ordering-list-page':
             if ($_GET['category_tid'] == 0) {
                 drupal_add_css(".messages--error {display:none}", "inline");
@@ -3345,4 +3347,16 @@ function autocomplete_widget_path_with_filter() {
     }
 
     drupal_json_output($options);
+}
+
+/**
+ * {@inheritdoc}
+ */
+function ajax_dependent_dropdown_state_key_candidate(&$form, $form_state) {
+  return array(
+    '#type' => 'ajax',
+    '#commands' => array(
+      ajax_command_replace("#view-display-isesue", render($form['state'])),
+    )
+  );
 }

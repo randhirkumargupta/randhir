@@ -57,7 +57,7 @@ $argum = base64_encode(arg(1));
                     <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                     <div class="show-embed-code-div">
                         <div class="copy-sample-code">
-                            <textarea readonly><iframe src=<?php print $base_url . '/photo/' . $primary_category_name . '/embed/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea> 
+                            <textarea readonly><iframe src=<?php print $base_url . '/photo/' . $primary_category_name . '/embed/' . $argum; ?> allowfullscreen  width='648' height='550' frameborder='0' scrolling='no' /></textarea> 
                         </div>
                     </div>
                 </li>
@@ -210,7 +210,7 @@ $argum = base64_encode(arg(1));
                         <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                         <div class="show-embed-code-div">
                             <div class="copy-sample-code">
-                                <textarea readonly><iframe src="<?php print $base_url . '/photo/' . $primary_category_name . '/embed/' . $argum; ?>" allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                                <textarea readonly><iframe src="<?php print $base_url . '/photo/' . $primary_category_name . '/embed/' . $argum; ?>" allowfullscreen  width='648' height='550' frameborder='0' scrolling='no' /></textarea>
                             </div>
                         </div>
                     </li>

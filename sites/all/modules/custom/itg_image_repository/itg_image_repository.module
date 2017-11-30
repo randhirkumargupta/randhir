@@ -282,9 +282,7 @@ function filefield_source_itg_image_repository_value($element, &$item) {
  */
 function theme_filefield_source_itg_image_repository_element($variables) {
     $element = $variables['element'];
-
     $output = drupal_render_children($element);
-    ;
     return '<div class="filefield-source filefield-source-itg_image_repository clear-block">' . $output . '</div>';
 }
 
