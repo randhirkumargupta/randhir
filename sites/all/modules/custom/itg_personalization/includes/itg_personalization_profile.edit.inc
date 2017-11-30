@@ -47,7 +47,11 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     }
   }
   else {
-    $mobile = $user_detail->field_mobile_number['und'][0]['value'];
+    if(empty($user_detail->field_mobile_number['und'][0]['value'])) {
+      $mobile = $user_detail->field_mobile_number['und'][0]['value'];
+    } else {
+      $mobile =  $user_detail->name; 
+    }
   }
   // email setting
   if (strpos($user_detail->mail, 'nowhere.com') !== false) {
