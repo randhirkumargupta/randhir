@@ -554,6 +554,7 @@ function itg_common_only_text_string($str) {
   $data = preg_replace("/'/" , "\\'" , $data);
   $data = htmlentities($data , ENT_QUOTES);
   $data = trim(str_replace('&nbsp;' , ' ' , $data));
+  $data = str_replace(array("\r","\n"),"",$data);
 
   return $data;
 }
@@ -746,4 +747,17 @@ function itg_custom_get_user_details($uid) {
 
     return $user_list;
   }
+}
+
+/**
+ * Helper function to create image style
+ * @param int $nid
+ */
+function create_node_image_style() {
+  $arg = arg();
+  
+  if (is_numeric($arg[1])) {
+    
+  }
+  
 }
