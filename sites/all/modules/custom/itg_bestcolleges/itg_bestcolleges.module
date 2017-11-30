@@ -135,6 +135,7 @@ function itg_bestcolleges_menu() {
     'file' => 'includes/itg_bestcolleges.inc',
     'type' => MENU_CALLBACK,
   );
+
   return $items;
 }
 
@@ -308,7 +309,6 @@ function itg_bestcolleges_block_view($delta = '') {
       else {
         $path_request = request_path();
         $path_request_array = explode('/', $path_request);
-
         if ($path_request_array && $path_request_array[0] == "bestcolleges") {
           $term_name = "Bestcolleges " . $path_request_array[1];
           $term_data = taxonomy_get_term_by_name($term_name);
@@ -865,26 +865,60 @@ function itg_bestcollege_get_term_tid($tid, $stream) {
  */
 function itg_bestcolleges_views_query_alter(&$view, &$query) {
   if (isset($view->name) && $view->name === 'best_college_image_slider') {
-    $page_type = isset($_GET['page']) ? $_GET['page'] : '';
-    if (!empty($page_type)) {
-      if (isset($view->query->where[1]['conditions'][2]['field'])) {
-        if ($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
-          $year = arg(1);
-          $query = db_select('field_data_field_bestcollege_year', 'y');
-          $query->join('field_data_field_bestcollege_rank', 'r', 'y.entity_id = r.entity_id');
-          $query->distinct();
-          $query->fields('r', array('field_bestcollege_rank_value'))
-            ->condition('y.field_bestcollege_year_value', $year)
-            ->condition('r.field_bestcollege_rank_value', 10, '>')
-            ->orderBy('r.field_bestcollege_rank_value', 'ASC');
+    if ($view->current_display == 'block') {
+      if (isset($view->query->where[0]['conditions'][0]['field'])) {
+        $url_get = explode('/', $_SERVER['REQUEST_URI']);
+        $year = $url_get[2];
+        $related_story = array();
+        if ($year == '2017' || $year == '2016') {
+          $related_story = array('950792', '950794', '950793', '950788', '950787');
+        }
+        else if ($year == '2015') {
+          $related_story = array('671609', '671600', '671604', '671612', '671605');
+        }
+
+        if (is_array($related_story) && count($related_story) > 0) {
+
+          $query = db_select('migrate_map_itgstorylist', 'm')->fields('m');
+          $query->condition('m.sourceid1', $related_story, 'IN');
           $results = $query->execute()->fetchAll();
-          if (is_array($results) && count($results) > 0) {
-            foreach ($results as $results_key => $results_val) {
-              $rank_array[] = $results_val->field_bestcollege_rank_value;
+          $story_data = '';
+          foreach ($results as $migrate) {
+            $story_data[] = $migrate->destid1;
+          }
+
+          if (empty($story_data)) {
+            $story_data = array('828914', '828905', '828909', '828917', '828910');
+          }
+        }
+        if ($view->query->where[0]['conditions'][0]['operator'] = 'IN') {
+          $view->query->where[0]['conditions'][0]['field'] = 'node.nid';
+          $view->query->where[0]['conditions'][0]['value'] = $story_data;
+        }
+      }
+    }
+    else {
+      $page_type = isset($_GET['page']) ? $_GET['page'] : '';
+      if (!empty($page_type)) {
+        if (isset($view->query->where[1]['conditions'][2]['field'])) {
+          if ($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
+            $year = arg(1);
+            $query = db_select('field_data_field_bestcollege_year', 'y');
+            $query->join('field_data_field_bestcollege_rank', 'r', 'y.entity_id = r.entity_id');
+            $query->distinct();
+            $query->fields('r', array('field_bestcollege_rank_value'))
+                ->condition('y.field_bestcollege_year_value', $year)
+                ->condition('r.field_bestcollege_rank_value', 10, '>')
+                ->orderBy('r.field_bestcollege_rank_value', 'ASC');
+            $results = $query->execute()->fetchAll();
+            if (is_array($results) && count($results) > 0) {
+              foreach ($results as $results_key => $results_val) {
+                $rank_array[] = $results_val->field_bestcollege_rank_value;
+              }
+              $pre_array = $view->query->where[1]['conditions'][2]['value'];
+              $final_array = array_merge($pre_array, $rank_array);
+              $view->query->where[1]['conditions'][2]['value'] = $final_array;
             }
-            $pre_array = $view->query->where[1]['conditions'][2]['value'];
-            $final_array = array_merge($pre_array, $rank_array);
-            $view->query->where[1]['conditions'][2]['value'] = $final_array;
           }
         }
       }
@@ -1602,24 +1636,21 @@ function best_college_theme_data_migrate($line, $session_nid, &$context) {
  */
 function bestCollegesRelatedStoryList() {
   // variable declaration
-  $flag_related_nid = 0;
-  $related_story_nid_ar = array();
   $count = 0;
   $data = array();
+  $related_story_nid_ar = array();
+  $year = arg(1);
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
-  $field_bestcollege_related_story_nid = $result_best_college_image_slider[0]->_field_data['nid']['entity']->field_bestcollege_related_story['und'][0];
-  //echo $field_bestcollege_related_story_nid['value'];
-  //$related_story_nid_ar =  (explode(",",
-  // $field_bestcollege_related_story_nid['value'])); // after final
-  $related_story_nid_ar[] = 666;
-  $related_story_nid_ar[] = 664;
+  $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
+  if ($year != '2016' && $year != '2017') {
+    $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'story');
+    $related_story_nid_ar = explode(",", $story_data);
+  }
 
   // related story node data fatching
-  if (isset($field_bestcollege_related_story_nid['value']) && $field_bestcollege_related_story_nid['value'] != "") {
-    $flag_related_nid = 1;
+  if (is_array($related_story_nid_ar) && count($related_story_nid_ar) > 0) {
     $query = db_select('node', 'n');
-    //join  for field value
     $query->leftJoin('field_data_field_story_long_head_line', 'lhl', 'lhl.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
@@ -1629,17 +1660,53 @@ function bestCollegesRelatedStoryList() {
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('n', array('title', 'nid'));
     $query->condition('n.status', '1');
-    //$query->condition('n.nid', '666', '=');
     $query->condition('n.nid', $related_story_nid_ar, 'IN');
     $result = $query->execute();
+    // print strtr((string) $query, $query->arguments());die;
     while ($record = $result->fetchAssoc()) {
       $data[$count] = $record;
       $count++;
     }
     $data['relatedstory_count'] = $count;
   }
-  // return final result
   return $data;
+}
+
+/**
+ * function itg_bestcolleges_get_storyids()
+ * @param string $field_bestcollege_title
+ * @param string $type
+ * @return string
+ */
+function itg_bestcolleges_get_storyids($field_bestcollege_title, $type) {
+  $query = db_select('bestcolleges_master', 'm');
+  $query->fields('m', array('storyids', 'videoids'))
+      ->condition('m.collegename', '%' . $field_bestcollege_title . '%', 'LIKE');
+  $results = $query->execute()->fetchAll();
+  $field_type = ($type == 'story') ? 'storyids' : 'videoids';
+  $table = ($type == 'story') ? 'migrate_map_itgstorylist' : 'migrate_map_itgvideogallery';
+  if ($results[0]->$field_type) {
+    $query = db_select($table, 'm')->fields('m');
+    $storyids_arr = explode(",", $results[0]->$field_type);
+    if ($storyids_arr[1]) {
+      $query->condition('m.sourceid1', $storyids_arr, 'IN');
+    }
+    else {
+      $query->condition('m.sourceid1', $storyids_arr[0]);
+    }
+    $results = $query->execute()->fetchAll();
+    $prefix = $story_data = '';
+    foreach ($results as $migrate) {
+      if ($storyids_arr[1]) {
+        $story_data .= $prefix . $migrate->destid1;
+        $prefix = ', ';
+      }
+      else {
+        $story_data = $migrate->destid1;
+      }
+    }
+  }
+  return $story_data;
 }
 
 /**
@@ -1667,7 +1734,7 @@ function bestCollegesrank($arg) {
   $str_parameterwise_rank = "";
   $str_yearwise_rank = "";
 
-  if ($name = 'Art') {
+  if ($name == 'Art') {
     $name = 'Arts';
   }
   // query for previous_rank
@@ -1676,10 +1743,11 @@ function bestCollegesrank($arg) {
   $query->condition('published', '1', '=');
   $query->condition('stream', $name, '=');
   $query->condition('collegeid', $college_id, '=');
+  $query->condition('collegeid', 0, '>');
   $query->condition('year', $year, '<');
+  $query->condition('rank', 0, '!=');
   $query->orderBy('year', 'DESC');
   $result = $query->execute();
-
   while ($record = $result->fetchAssoc()) {
     $data_previous_rank[$count_previous_rank] = $record;
     $count_previous_rank++;
@@ -1693,16 +1761,16 @@ function bestCollegesrank($arg) {
   $query->condition('year', $year, '=');
   $query->condition('collegeid', $college_id, '=');
   $query->orderBy('year', 'DESC');
+  $query->range(0, 1);
   $result = $query->execute();
-
+  //print strtr((string) $query, $query->arguments());die;
   while ($record = $result->fetchAssoc()) {
     $data_parameterwise_rank[$count_parameterwise_rank] = $record;
     $count_parameterwise_rank++;
   }
 
-  $page_data['previous-rank'] = $data_previous_rank;
-  $page_data['parameterwise-rank'] = $data_parameterwise_rank;
-  $page_data['flag-rank'] = 1;
+  $page_data['previous_rank'] = $data_previous_rank;
+  $page_data['parameterwise_rank'] = $data_parameterwise_rank;
   return $page_data;
 }
 
@@ -1710,26 +1778,23 @@ function bestCollegesrank($arg) {
  * best colleges related video List
  * @return array
  */
-function bestCollegesRelatedImgList() {
+function itg_bestcolleges_related_videolist() {
   // variable declaration
-  $flag_related_nid = 0;
-  $related_story_nid_ar = array();
   $count = 0;
   $data = array();
+  $related_photo_nid_ar = array();
+  $year = arg(1);
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
-  //return $result_best_college_image_slider;
-  $field_bestcollege_related_photo_nid = $result_best_college_image_slider[0]->_field_data['nid']['entity']->field_bestcollege_related_photo['und'][0];
+  $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
+  if ($year != '2016' && $year != '2017') {
+    $field_bestcollege_title = "Lady Shri Ram College for Women";
+    $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'video');
+    $related_photo_nid_ar = explode(",", $story_data);
+  }
 
-
-  //echo $field_bestcollege_related_photo_nid['value'];
-  //$related_photo_nid_ar =  (explode(",",$field_bestcollege_related_photo_nid['value'])); // after final uncomment this
-  $related_photo_nid_ar = array(640, 652, 328, 626); // after final remove this
-  // related story node data fatching
-  if (isset($field_bestcollege_related_photo_nid['value']) && $field_bestcollege_related_photo_nid['value'] != "") {
-    $flag_related_nid = 1;
+  if (is_array($related_photo_nid_ar) && count($related_photo_nid_ar) > 0) {
     $query = db_select('node', 'n');
-    //join  for field value
     $query->leftJoin('field_data_field_story_long_head_line', 'lhl', 'lhl.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'fsli', 'fsli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
@@ -1738,17 +1803,14 @@ function bestCollegesRelatedImgList() {
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('n', array('title', 'nid'));
     $query->condition('n.status', '1');
-    //$query->condition('n.nid', '640', '=');
     $query->condition('n.nid', $related_photo_nid_ar, 'IN');
     $result = $query->execute();
-
     while ($record = $result->fetchAssoc()) {
       $data[$count] = $record;
       $count++;
     }
     $data['relatedimg_count'] = $count;
   }
-  // return final result
   return $data;
 }
 
