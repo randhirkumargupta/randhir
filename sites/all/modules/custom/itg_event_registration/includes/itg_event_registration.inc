@@ -36,7 +36,6 @@ function itg_event_registration_form($form, &$form_state) {
         }
         elseif ($current_date > $event_reg_close_date && !empty($event_reg_close_date)) {
           if ((($force_registration_flag) && ($event_close_date > $current_date)) || (!$force_registration_flag) && ($event_close_date > $current_date) && ($current_date > $event_reg_start_date)) {
-            //if ((1 >= $no_of_tickets) || ($total_registration_users >= $no_of_tickets)) {
             if ((1 > $no_of_tickets) || ($total_registration_users >= $no_of_tickets)) {
               return itg_event_registration_get_status_message($node, 'tickets_not_available');
             }
