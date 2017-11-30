@@ -18,7 +18,7 @@ function horizontal_menu_middleware_data() {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
     }
-    
+
    $output_array['data'] = $menu_data['data'];
    return $output_array;
 }
@@ -36,13 +36,13 @@ function hamburger_menu_middleware_data() {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
     }
-    
+
    $output_array['data'] = $menu_data['data'];
    return $output_array;
 }
 
 /**
- * Get the hamburger menu data from 
+ * Get the hamburger menu data from
  * @param int $menu_type_id horizontal/humburger_menu id
  * @return array $result menu list
  */
@@ -52,18 +52,18 @@ function hamburger_menu_data() {
   $all_menus = array();
   $top_cat = array();
   $other_cat = array();
-  
+
   $option_list = humberger_menu_cms_list();
      $result = hamburger_menu_listing(1);//Top Categories
      $top_cat['menu_label'] = 'Top Categories';
      $all_menus = menu_list($result);
      $top_cat['menu'] = $all_menus;
-     
+
      $other_cat_result = hamburger_menu_listing(2);//Other Categories
      $other_cat['menu_label'] = 'Other Categories';
      $top_cat_menus = menu_list($other_cat_result);
      $other_cat['menu'] = $top_cat_menus;
-     
+
      $hamburger_menu['hamburger_menu'][0] = $top_cat;
      $hamburger_menu['hamburger_menu'][1] = $other_cat;
      $hamburger_menu['data'] = $hamburger_menu;
@@ -105,7 +105,7 @@ function humberger_menu_cms_list(){
 }
 
 /**
- * Get the horizental menu data from 
+ * Get the horizental menu data from
  * @param int $menu_type_id horizontal/humburger_menu id
  * @return array $result menu list
  */
@@ -141,7 +141,7 @@ function horizontal_menu_data($menu_type_id) {
 }
 
 /**
- * Common function to get the middleware menu list 
+ * Common function to get the middleware menu list
  * @param type $menu_type_id
  * @return type array list of menus
  */
@@ -160,7 +160,7 @@ function hamburger_menu_listing($menu_label_id) {
 }
 
 /**
- * Common function to get the middleware menu list 
+ * Common function to get the middleware menu list
  * @param type $menu_type_id
  * @return type array list of menus
  */
@@ -169,8 +169,8 @@ function middleware_menu_data($menu_type_id) {
     $query = db_select('itg_app_menu_content', 'ham');
     $query->fields('ham');
     $query->condition('ham.menu_type_id', $menu_type_id);
-    $query->condition('ham.s_id', 0); //only parent menus 
-    $query->orderBy('order_id', 'DESC');
+    $query->condition('ham.s_id', 0); //only parent menus
+    $query->orderBy('order_id', 'ASC');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   }
   return $result;
@@ -185,17 +185,18 @@ function middleware_menu_subcat_list($cat_id) {
     $sub_cat = array();
     $sub_cat_list = array();
     $all_sub_cat = array();
-    
+
     //$secion_id = array(0);
     $query = db_select('itg_app_menu_content', 'cl');
     $query->fields('cl',array('menu_type','section_id','s_title','order_id','is_new'));
     $query->condition('cl.section_id', $cat_id);
-    $query->condition('cl.has_subcategory', 0); //only parent menus 
+    $query->condition('cl.has_subcategory', 0); //only parent menus
     $query->condition('cl.menu_type', 0, '!=');
-    $query->orderBy('order_id', 'DESC');
+    $query->condition('cl.s_id', 0, '!=');
+    $query->orderBy('order_id', 'ASC');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $total_sub_cat = count($result);
-    
+
     if($total_sub_cat > 0){
       foreach ($result as $cat_data){
         $sub_cat['s_id'] = $cat_data['section_id'];
@@ -205,7 +206,7 @@ function middleware_menu_subcat_list($cat_id) {
         $all_sub_cat[] = $sub_cat;
       }
     }
-  
+
    $sub_cat_list['total_sub_cat'] = $total_sub_cat;
    $sub_cat_list['data'] = $all_sub_cat;
   return $sub_cat_list;

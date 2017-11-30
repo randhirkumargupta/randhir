@@ -931,10 +931,13 @@ function follow_author_data_responce($user_id, $author_id, $type) {
         $data['is_saved'] = 1; //$response['success'];
         $data['limit_crossed'] = '0';
     }
-
+    
+    $success_status_mess = fetchMasterConfigData('follow_author_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
     if (!empty($response)) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = $data;
     } else {
         $output_array['status_code'] = "0";
@@ -1006,10 +1009,12 @@ function follow_anchor_data_responce($user_id, $author_id, $type) {
         $data['is_saved'] = 1; //$response['success'];
         $data['limit_crossed'] = '0';
     }
-
+    $success_status_mess = fetchMasterConfigData('follow_anchor_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+    
     if (!empty($response)) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = $data;
     } else {
         $output_array['status_code'] = "0";

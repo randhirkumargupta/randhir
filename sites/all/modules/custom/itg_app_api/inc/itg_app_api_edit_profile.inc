@@ -139,7 +139,7 @@ function saveUpdatedProfile($data) {
       unset($user_detail->field_personalization_city['und']);
       } */
 
-    //Update News Letters field.  
+    //Update News Letters field.
 //    $flag = FALSE;
 //    foreach ($inputs['news_letter'] as $value) {
 //        $flag = TRUE;
@@ -154,11 +154,13 @@ function saveUpdatedProfile($data) {
     // Save user object.
     $flag_save = user_save($user_detail);
 
+    $success_status_mess = fetchMasterConfigData('sso_edit_profile');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     // responce object
     if ($flag_save->uid) {
         $responce_object['status_code'] = "1";
-        $responce_object['status_message'] = "customised_message";
+        $responce_object['status_message'] = "$success_status_message";
     } else {
         $responce_object['status_code'] = "0";
         $responce_object['status_message'] = "";

@@ -266,7 +266,8 @@ function polls_open_datalist($cpageno, $from) {
         $range_min = 0;
     }
     $current_time = date('Y-m-d H:i:s', time());
-
+    $poll_node_list = home_page_polls_node_list();
+    
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
     $query->leftJoin('field_data_field_poll_start_date', 'st', 'st.entity_id = n.nid');
@@ -282,10 +283,10 @@ function polls_open_datalist($cpageno, $from) {
     $query->fields('qi', array('field_poll_question_image_fid'));
 
     $query->condition('n.type', 'poll');
-    $query->condition('st.field_poll_start_date_value', $current_time, '<');
+    $query->condition('n.nid', $poll_node_list, 'IN');
     $query->condition('n.status', '1');
     $query->orderBy('n.nid', 'DESC');
-    $query->range($range_min, $range_max);
+    //$query->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $k => $res) {

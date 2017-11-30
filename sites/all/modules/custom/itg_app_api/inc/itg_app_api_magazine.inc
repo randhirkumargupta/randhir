@@ -292,6 +292,7 @@ function magazineCoverstoriesPageRerourceValueList() {
     $dis_count = fetchMasterConfigData('magazine_display_count');
     $range_max = isset($dis_count) ? $dis_count : 20;
     $range_min = 0;
+    $magazine_nids = home_page_magazine_node_list();
     // issue list query..
 
     $query_issue = db_select('node', 'n');
@@ -305,7 +306,11 @@ function magazineCoverstoriesPageRerourceValueList() {
     $query_issue->fields('fsit', array('field_issue_title_value'));
     $query_issue->fields('n', array('nid'));
 
-    $query_issue->condition('n.status', 1)->condition('n.type', 'issue')->condition('fsit.field_issue_title_value', '2016-12-31', '<=')->orderBy('fsit.field_issue_title_value', 'desc')->range($range_min, $range_max);
+    $query_issue->condition('n.status', 1);
+    $query_issue->condition('n.type', 'issue');
+    $query_issue->condition('n.nid', $magazine_nids, 'IN');
+    //$query_issue->range($range_min, $range_max);
+    
     $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result_issue as $reskey => $resvalue) {
 

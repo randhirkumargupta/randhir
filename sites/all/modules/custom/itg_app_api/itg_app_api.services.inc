@@ -23,7 +23,7 @@ module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_bookmark');
 module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_middleware');
 
 /**
- * Function for APP API resource declaration. 
+ * Function for APP API resource declaration.
  */
 function itg_app_api_resource() {
 
@@ -2457,7 +2457,7 @@ function itg_app_api_resource() {
  */
 
 /**
- * Call back function for master_config API 
+ * Call back function for master_config API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2479,7 +2479,7 @@ function itg_rapid_api_master_config($token) {
 }
 
 /**
- * Call back function for config_update_status API 
+ * Call back function for config_update_status API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2502,7 +2502,7 @@ function itg_rapid_api_config_update_status($token) {
 }
 
 /**
- * Call back function for hamburger_menu API 
+ * Call back function for hamburger_menu API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2526,14 +2526,14 @@ function itg_rapid_api_hamburger_menu($token) {
 }
 
 /**
- * Call back function for horizontal_menu API 
+ * Call back function for horizontal_menu API
  * @pram $_GET
  * @return array - The processed information array.
  */
 function itg_rapid_api_horizontal_menu($token) {
     $redis_key = "itgd_rapid_horizontal_menu_json";
     $result_get = getRedis($redis_key);
-     
+
 //    if ($result_get['key_value'] != "") {
 //        $jsondata = $result_get['key_value'];
 //    } else {
@@ -2549,7 +2549,7 @@ function itg_rapid_api_horizontal_menu($token) {
 }
 
 /**
- * Call back function for server_error_master API 
+ * Call back function for server_error_master API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2571,7 +2571,7 @@ function itg_rapid_api_server_error_master($token) {
 }
 
 /**
- * Call back function for photolist API 
+ * Call back function for photolist API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2605,7 +2605,7 @@ function itg_rapid_api_photolist($token) {
 }
 
 /**
- * Call back function for photodetail API 
+ * Call back function for photodetail API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2635,7 +2635,7 @@ function itg_rapid_api_photodetail($token) {
 }
 
 /**
- * Call back function for programlist API 
+ * Call back function for programlist API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2669,7 +2669,7 @@ function itg_rapid_api_programlist($token) {
 }
 
 /**
- * Call back function for newslist API 
+ * Call back function for newslist API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2708,7 +2708,7 @@ function itg_rapid_api_newslist($token) {
 }
 
 /**
- * Call back function for videolist API 
+ * Call back function for videolist API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2742,7 +2742,7 @@ function itg_rapid_api_videolist($token) {
 }
 
 /**
- * Call back function for adconfig_android API 
+ * Call back function for adconfig_android API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2765,7 +2765,7 @@ function itg_rapid_api_adconfig_android($token) {
 }
 
 /**
- * Call back function for adconfig_ipad API 
+ * Call back function for adconfig_ipad API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2788,7 +2788,7 @@ function itg_rapid_api_adconfig_ipad($token) {
 }
 
 /**
- * Call back function for adconfig_iphone API 
+ * Call back function for adconfig_iphone API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2811,7 +2811,7 @@ function itg_rapid_api_adconfig_iphone($token) {
 }
 
 /**
- * Call back function for adconfig_tab API 
+ * Call back function for adconfig_tab API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2838,7 +2838,7 @@ function itg_rapid_api_adconfig_tab($token) {
  */
 
 /**
- * Call back function for photostorydetail API 
+ * Call back function for photostorydetail API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2870,7 +2870,7 @@ function itg_rapid_api_photostorydetail($token) {
 }
 
 /**
- * Call back function for program_category_list API 
+ * Call back function for program_category_list API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2895,7 +2895,7 @@ function itg_rapid_api_program_category_list($token) {
 }
 
 /**
- * Call back function for ad_config_json API 
+ * Call back function for ad_config_json API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2918,7 +2918,7 @@ function itg_rapid_api_ad_config_json($token) {
 }
 
 /**
- * Call back function for livetv_channellist API 
+ * Call back function for livetv_channellist API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2943,7 +2943,7 @@ function itg_rapid_api_livetv_channellist_json($token) {
 }
 
 /**
- * Call back function for otherapps_ios API 
+ * Call back function for otherapps_ios API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2967,7 +2967,7 @@ function itg_rapid_api_otherapps_ios_json($token) {
 }
 
 /**
- * Call back function for otherapps_android API 
+ * Call back function for otherapps_android API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -2991,7 +2991,7 @@ function itg_rapid_api_otherapps_android_json($token) {
 }
 
 /**
- * Call back function for magazine_edition API 
+ * Call back function for magazine_edition API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -3026,7 +3026,7 @@ function itg_rapid_api_magazine_edition($token) {
 }
 
 /**
- * Call back function for magazine_coverstories API 
+ * Call back function for magazine_coverstories API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -3052,7 +3052,7 @@ function itg_rapid_api_magazine_coverstories($token) {
 }
 
 /**
- * Call back function for magazine_editionlist API 
+ * Call back function for magazine_editionlist API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -3087,7 +3087,7 @@ function itg_rapid_api_magazine_editionlist($token) {
 }
 
 /**
- * Call back function for storydetail API 
+ * Call back function for storydetail API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -3120,7 +3120,7 @@ function itg_rapid_api_storydetail($token) {
 }
 
 /**
- * Call back function for homePage API 
+ * Call back function for homePage API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -3144,7 +3144,7 @@ function itg_rapid_api_homePage($token) {
 }
 
 /**
- * Call back function for livetv_aajtak API 
+ * Call back function for livetv_aajtak API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -3168,7 +3168,7 @@ function itg_rapid_api_livetv_aajtak($token) {
 }
 
 /**
- * Call back function for livetv_indiatoday API 
+ * Call back function for livetv_indiatoday API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -3192,7 +3192,7 @@ function itg_rapid_api_livetv_indiatoday($token) {
 }
 
 /**
- * Call back function for livetv_delhiaajtak API 
+ * Call back function for livetv_delhiaajtak API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -3216,7 +3216,7 @@ function itg_rapid_api_livetv_delhiaajtak($token) {
 }
 
 /**
- * Call back function for livetv_tej API 
+ * Call back function for livetv_tej API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -3244,7 +3244,7 @@ function itg_rapid_api_livetv_tej($token) {
  */
 
 /**
- * Call back function for signup API 
+ * Call back function for signup API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -3331,8 +3331,6 @@ function itg_rapid_api_signup($token) {
 
         $method = "POST";
 
-
-
         $data = array();
         $password = rand(0, 9999);
         //$_GET['password'] = $password;
@@ -3384,10 +3382,12 @@ function itg_rapid_api_signup($token) {
                 $is_first_login = 0;
             }
             if ($auth_token) {
+                $success_status_mess = fetchMasterConfigData('sso_signup');
+                $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
                 $user = updateUsedrProfileAtSignup_rapid($data, 1);
                 $account['status_code'] = "1";
-                $account['status_message'] = "";
+                $account['status_message'] = "$success_status_message";
                 $account['data']['user_id'] = "$name";
                 $account['data']['auth_token'] = "$auth_token";
                 $account['data']['session_id'] = "$session_id";
@@ -3496,7 +3496,7 @@ function itg_rapid_api_signup($token) {
 }
 
 /**
- * Call back function for login_request API 
+ * Call back function for login_request API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -3576,8 +3576,11 @@ function itg_rapid_api_login_request($token) {
             } else {
                 $mail = $name;
             }
+            $success_status_mess = fetchMasterConfigData('sso_login_request');
+            $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
             $account['status_code'] = "1";
-            $account['status_message'] = "";
+            $account['status_message'] = "$success_status_message";
             $account['data']['user_id'] = "$name";
             $account['data']['auth_token'] = "$auth_token";
             $account['data']['is_authenticated'] = "0";
@@ -3628,7 +3631,7 @@ function itg_rapid_api_login_request($token) {
 }
 
 /**
- * Call back function for edit_user_image API 
+ * Call back function for edit_user_image API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -3694,9 +3697,12 @@ function itg_rapid_api_edit_user_image($token) {
 
         // Save user object.
         $resp = user_save($user_detail);
+        $success_status_mess = fetchMasterConfigData('sso_edit_profile');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
         if ($resp->uid) {
             $data['status_code'] = "1";
-            $data['status_message'] = "";
+            $data['status_message'] = "$success_status_message";
         } else {
             $data['status_code'] = "0";
             $data['status_message'] = "Technical Error.";
@@ -3706,7 +3712,7 @@ function itg_rapid_api_edit_user_image($token) {
 }
 
 /**
- * Call back function for log_out API 
+ * Call back function for log_out API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -3761,14 +3767,17 @@ function itg_rapid_api_log_out($token) {
         // call custom function to clean token in custom table
         cleanToken_Rapid($params);
     }
+    $success_status_mess = fetchMasterConfigData('sso_log_out');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     $data['status_code'] = "1";
-    $data['status_message'] = "";
+    $data['status_message'] = "$success_status_message";
 
     return $data;
 }
 
 /**
- * Call back function for change_password API 
+ * Call back function for change_password API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -3834,8 +3843,11 @@ function itg_rapid_api_change_password($token) {
 
         drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
+        $success_status_mess = fetchMasterConfigData('sso_change_password');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
+
         $data['status_code'] = "1";
-        $data['status_message'] = "Password has changed";
+        $data['status_message'] = "$success_status_message";
     } else {
         $data['status_code'] = "2";
         $data['status_message'] = "Password has not changed";
@@ -3847,7 +3859,7 @@ function itg_rapid_api_change_password($token) {
 }
 
 /**
- * Call back function for forgot_password API 
+ * Call back function for forgot_password API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -3899,14 +3911,17 @@ function itg_rapid_api_forgot_password($token) {
         itg_otp_device_info_insert_rapid($params, $result_obj_otp[0]->otp, 1, $result_obj_otp[0]->created);
     }
     cleanToken_Rapid($params);
+    $success_status_mess = fetchMasterConfigData('sso_forgot_password');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     $data['status_code'] = "1";
-    $data['status_message'] = "";
+    $data['status_message'] = "$success_status_message";
 
     return $data;
 }
 
 /**
- * Call back function for otp_verification API 
+ * Call back function for otp_verification API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -3957,8 +3972,11 @@ function itg_rapid_api_otp_verification($token) {
         }
         //login scritp end
         $uname = $params['user_id'];
+        $success_status_mess = fetchMasterConfigData('sso_otp_verification');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
         $data['status_code'] = "1";
-        $data['status_message'] = "";
+        $data['status_message'] = "$success_status_message";
         $data['data']['user_id'] = "$uname";
         $data['data']['is_authenticated'] = "1";
         //$data['data']['auth_token'] = "$return->token";
@@ -3972,7 +3990,7 @@ function itg_rapid_api_otp_verification($token) {
 }
 
 /**
- * Call back function for resend_otp API 
+ * Call back function for resend_otp API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4006,14 +4024,17 @@ function itg_rapid_api_resend_otp($token, $user_id) {
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
+    $success_status_mess = fetchMasterConfigData('sso_resend_otp');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     $data['status_code'] = "1";
-    $data['status_message'] = "";
+    $data['status_message'] = "$success_status_message";
 
     return $data;
 }
 
 /**
- * Call back function for get_login_user_detail API 
+ * Call back function for get_login_user_detail API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4063,8 +4084,11 @@ function itg_rapid_api_get_login_user_detail($token) {
             $login_type = 2;
         }
 
+        $success_status_mess = fetchMasterConfigData('sso_get_login_user_detail');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
         $data['status_code'] = "1";
-        $data['status_message'] = "";
+        $data['status_message'] = "$success_status_message";
 
         $data['data']['user_profile_detail']['token_id'] = "$authtoken_id";
         $data['data']['user_profile_detail']['login_type'] = "$login_type";
@@ -4083,7 +4107,7 @@ function itg_rapid_api_get_login_user_detail($token) {
 }
 
 /**
- * Call back function for edit_profile API 
+ * Call back function for edit_profile API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4127,15 +4151,19 @@ function itg_rapid_api_edit_profile($token) {
 
         //if ($result_obj->uid) {
         $responce_object_rs = saveUpdatedProfile($params);
+
+        $success_status_mess = fetchMasterConfigData('sso_edit_profile');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
         $responce_object['status_code'] = "1";
-        $responce_object['status_message'] = "";
+        $responce_object['status_message'] = "$success_status_message";
         //}
     }
     return $responce_object;
 }
 
 /**
- * Call back function for get_preference API 
+ * Call back function for get_preference API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4164,10 +4192,12 @@ function itg_rapid_api_get_preference($token) {
 
         $preference_tid = get_personalization_saved_value_service($account->uid);
 
+        $success_status_mess = fetchMasterConfigData('sso_get_preference');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
         // return data of personalization-preferences value
         $data['status_code'] = "1";
-        $data['status_message'] = "";
+        $data['status_message'] = "$success_status_message";
         $data['data']['updated_datetime'] = "$last_access_date";
         //$data['data']['preference_type'] = "default/implicit/explicit";
         $data['data']['preference_type'] = "explicit";
@@ -4189,7 +4219,7 @@ function itg_rapid_api_get_preference($token) {
 }
 
 /**
- * Call back function for update_preference API 
+ * Call back function for update_preference API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4258,13 +4288,16 @@ function itg_rapid_api_update_preference($token) {
                     ->execute();
         }
     }
+    $success_status_mess = fetchMasterConfigData('sso_update_preference');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     $data['status_code'] = "1";
-    $data['status_message'] = "";
+    $data['status_message'] = "$success_status_message";
     return $data;
 }
 
 /**
- * Call back function for reset_password API 
+ * Call back function for reset_password API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4319,8 +4352,10 @@ function itg_rapid_api_reset_password($token) {
 
         drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
+        $success_status_mess = fetchMasterConfigData('sso_reset_password');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "password has been changed";
         $data['status_code'] = "1";
-        $data['status_message'] = "password has been changed";
+        $data['status_message'] = "$success_status_message";
     } else {
         $data['status_code'] = "2";
         $data['status_message'] = "password has not been changed";
@@ -4332,7 +4367,7 @@ function itg_rapid_api_reset_password($token) {
 }
 
 /**
- * Call back function for authtoken_verification API 
+ * Call back function for authtoken_verification API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4375,8 +4410,10 @@ function itg_rapid_api_authtoken_verification($token) {
             $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
         } else {
+            $success_status_mess = fetchMasterConfigData('sso_authtoken_verification');
+            $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
             $res['status_code'] = "1";
-            $res['status_message'] = "";
+            $res['status_message'] = "$success_status_message";
         }
     }
 
@@ -4384,7 +4421,7 @@ function itg_rapid_api_authtoken_verification($token) {
 }
 
 /**
- * Call back function for author_list API 
+ * Call back function for author_list API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4436,7 +4473,7 @@ function itg_rapid_api_author_list($token) {
 }
 
 /**
- * Call back function for anchor_list API 
+ * Call back function for anchor_list API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4493,7 +4530,7 @@ function itg_rapid_api_anchor_list($token) {
 }
 
 /**
- * Call back function for get_the_user_follow_status API 
+ * Call back function for get_the_user_follow_status API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4544,7 +4581,7 @@ function itg_rapid_api_get_the_user_follow_status($token) {
 }
 
 /**
- * Call back function for author_latest_story API 
+ * Call back function for author_latest_story API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -4587,7 +4624,7 @@ function author_latest_story($token) {
 }
 
 /**
- * Call back function for polls_open API 
+ * Call back function for polls_open API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -4615,7 +4652,7 @@ function polls_open($token) {
 }
 
 /**
- * Call back function for polls_close API 
+ * Call back function for polls_close API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -4642,7 +4679,7 @@ function polls_close($token) {
 }
 
 /**
- * Call back function for poll_cast API 
+ * Call back function for poll_cast API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4700,7 +4737,7 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
 
     // check args
     if ($args != '0') {
-        // if status is 0 then poll is already closed , 
+        // if status is 0 then poll is already closed ,
         $poll_status = check_poll_status($poll_id);
         if ($poll_status != '0') {
             $jsondata = poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device);
@@ -4717,7 +4754,7 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
 }
 
 /**
- * Call back function for author_detail API 
+ * Call back function for author_detail API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -4746,7 +4783,7 @@ function author_detail($token, $author_id) {
  */
 
 /**
- * Call back function for news_wrap API 
+ * Call back function for news_wrap API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -4770,7 +4807,7 @@ function news_wrap($token) {
 }
 
 /**
- * Call back function for bookmark_get_responce API 
+ * Call back function for bookmark_get_responce API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4819,7 +4856,7 @@ function bookmark_get_responce($token, $user_id, $authtoken_id) {
 }
 
 /**
- * Call back function for bookmark_set_responce API 
+ * Call back function for bookmark_set_responce API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4869,7 +4906,7 @@ function bookmark_set_responce($token, $user_id, $node_id) {
 }
 
 /**
- * Call back function for bookmark_delete_responce API 
+ * Call back function for bookmark_delete_responce API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4917,7 +4954,7 @@ function bookmark_delete_responce($token, $user_id, $node_id) {
 }
 
 /**
- * Call back function for follow_anchor API 
+ * Call back function for follow_anchor API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -4969,7 +5006,7 @@ function follow_anchor_responce($token, $user_id, $node_id) {
         $message_array['data'] = array();
     }
     if ($type == 'follow_story' || $type == 'Unfollow') {
-        
+
     } else {
         $args = '0';
         $message_array['status_code'] = "0";
@@ -4988,7 +5025,7 @@ function follow_anchor_responce($token, $user_id, $node_id) {
 }
 
 /**
- * Call back function for follow_author API 
+ * Call back function for follow_author API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -5040,7 +5077,7 @@ function follow_author_responce($token, $user_id, $node_id) {
         $message_array['data'] = array();
     }
     if ($type == 'follow_story' || $type == 'Unfollow') {
-        
+
     } else {
         $args = '0';
         $message_array['status_code'] = "0";
@@ -5059,7 +5096,7 @@ function follow_author_responce($token, $user_id, $node_id) {
 }
 
 /**
- * Call back function for anchor_follow_list API 
+ * Call back function for anchor_follow_list API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -5110,7 +5147,7 @@ function itg_rapid_api_anchor_follow_list($token) {
 }
 
 /**
- * Call back function for author_follow_list API 
+ * Call back function for author_follow_list API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -5162,7 +5199,7 @@ function itg_rapid_api_author_follow_list($token) {
 }
 
 /**
- * Call back function for get_the_user_follow_status API 
+ * Call back function for get_the_user_follow_status API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -5222,9 +5259,12 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
     $anchor_data['author'] = $author_list;
     $anchor_data['topic'] = $topics_list;
 
+    $success_status_mess = fetchMasterConfigData('get_the_user_follow_status_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = $anchor_data;
     } else {
         $data = array();
@@ -5236,7 +5276,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
 }
 
 /**
- * Call back function for follow_topic API 
+ * Call back function for follow_topic API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -5284,7 +5324,7 @@ function itg_rapid_api_follow_topic($token) {
     }
 
     if ($type == 'follow_story' || $type == 'Unfollow') {
-        
+
     } else {
         $args = '0';
         $message_array['status_code'] = "0";
@@ -5303,7 +5343,7 @@ function itg_rapid_api_follow_topic($token) {
 }
 
 /**
- * Call back function for follow_topic_list API 
+ * Call back function for follow_topic_list API
  * @pram $_POST in JSON formate
  * @return array - The processed information array.
  */
@@ -5358,7 +5398,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  */
 
 /**
- * Call back function for testing API 
+ * Call back function for testing API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -5386,7 +5426,7 @@ function itg_rapid_api_testing($token) {
 /*
  * Common function for checking poll is open or close
  * @param $poll_id
- * return 0|1 , if return 0 then poll is closed , if return 1 then poll is open , 
+ * return 0|1 , if return 0 then poll is closed , if return 1 then poll is open ,
  */
 
 function check_poll_status($poll_id) {
@@ -5445,9 +5485,9 @@ function poll_detail($token, $poll_id) {
 }
 
 /**
- * Helper function to get_personalization_saved_value. 
+ * Helper function to get_personalization_saved_value.
  * @param int $tid, $uid
- * @return array 
+ * @return array
  */
 function itg_rapid_api_get_personalization_saved_value($tid, $uid) {
     $query = db_select('itg_widget_order', 'iwo');
@@ -5458,9 +5498,9 @@ function itg_rapid_api_get_personalization_saved_value($tid, $uid) {
 }
 
 /**
- * Helper function to save_itg_widget_personalization_data. 
+ * Helper function to save_itg_widget_personalization_data.
  * @param int $updates, $user_id
- * @return array 
+ * @return array
  */
 function rapid_save_itg_widget_personalization_data($updates, $user_id) {
 
@@ -5490,9 +5530,9 @@ function rapid_save_itg_widget_personalization_data($updates, $user_id) {
 }
 
 /**
- * Helper function to update_preference. 
+ * Helper function to update_preference.
  * @param int $user_id, $tid
- * @return array 
+ * @return array
  */
 function update_preference($user_id, $tid) {
     global $user;
@@ -5594,9 +5634,9 @@ function anchor_programm_list($token, $anchor_id, $type) {
 }
 
 /**
- * Helper function to get previous insert record. 
- * @param int $uid 
- * @return array 
+ * Helper function to get previous insert record.
+ * @param int $uid
+ * @return array
  */
 function list_anchor_data_responce($uid) {
     $data = '';
@@ -5631,10 +5671,12 @@ function list_anchor_data_responce($uid) {
 
 
     $anchor_data['anchor'] = $anchor_list;
+    $success_status_mess = fetchMasterConfigData('anchor_follow_list_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if ($loopc > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = $anchor_data;
     } else {
         $data = array();
@@ -5646,9 +5688,9 @@ function list_anchor_data_responce($uid) {
 }
 
 /**
- * Helper function to get previous insert record. 
- * @param int $uid 
- * @return array 
+ * Helper function to get previous insert record.
+ * @param int $uid
+ * @return array
  */
 function list_author_data_responce($uid) {
     $data = '';
@@ -5683,10 +5725,12 @@ function list_author_data_responce($uid) {
 
 
     $anchor_data['author'] = $anchor_list;
+    $success_status_mess = fetchMasterConfigData('author_follow_list_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if ($loopc > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = $anchor_data;
     } else {
         $data = array();
@@ -5698,8 +5742,8 @@ function list_author_data_responce($uid) {
 }
 
 /**
- * Helper function to get follower_count. 
- * @param int $a_id 
+ * Helper function to get follower_count.
+ * @param int $a_id
  * @return int $count
  */
 function get_follower_count($a_id) {
@@ -5720,9 +5764,9 @@ function get_follower_count($a_id) {
 }
 
 /**
- * Helper function to get previous insert record. 
- * @param int $uid 
- * @return array 
+ * Helper function to get previous insert record.
+ * @param int $uid
+ * @return array
  */
 function list_itg_rapid_api_author_list($uid, $cpageno) {
     $data = '';
@@ -5754,19 +5798,27 @@ function list_itg_rapid_api_author_list($uid, $cpageno) {
         }
         //return $data;
     }
+    $success_status_mess = fetchMasterConfigData('author_list_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+    $dis_count = fetchMasterConfigData('author_list_display_count');
+    $display_count = isset($dis_count) ? $dis_count : "25";
+
+    $pag_cap = fetchMasterConfigData('author_list_pagination_cap');
+    $pagination_cap = isset($pag_cap) ? $pag_cap : "25";
 
 
     $anchor_data['id'] = "$uid";
     $anchor_data['title'] = "Authors";
     $anchor_data['author_count'] = "$loopc";
-    $anchor_data['author_display_count'] = "25";
-    $anchor_data['author_pagination_cap'] = "25";
+    $anchor_data['author_display_count'] = "$display_count";
+    $anchor_data['author_pagination_cap'] = "$pagination_cap";
 
     $anchor_data['author'] = $anchor_list;
 
     if ($loopc > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = $anchor_data;
     } else {
         $data = array();
@@ -5797,9 +5849,9 @@ function itg_rapid_api_get_user_status($uid, $ntype, $nid) {
 }
 
 /**
- * Helper function to get previous insert record. 
- * @param int $uid, $cpageno, $showall 
- * @return array 
+ * Helper function to get previous insert record.
+ * @param int $uid, $cpageno, $showall
+ * @return array
  */
 function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
     $data = '';
@@ -5859,12 +5911,20 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
         }
         //return $data;
     }
+    $success_status_mess = fetchMasterConfigData('anchor_list_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+    $dis_count = fetchMasterConfigData('anchor_list_display_count');
+    $display_count = isset($dis_count) ? $dis_count : "50";
+
+    $pag_cap = fetchMasterConfigData('anchor_list_pagination_cap');
+    $pagination_cap = isset($pag_cap) ? $pag_cap : "50";
 
     $anchor_data['id'] = "$uid";
     $anchor_data['display_label'] = "Anchors";
     $anchor_data['anchor_count'] = "$anchor_c";
-    $anchor_data['anchor_display_count'] = "50";
-    $anchor_data['anchor_pagination_cap'] = "50";
+    $anchor_data['anchor_display_count'] = "$display_count";
+    $anchor_data['anchor_pagination_cap'] = "$pagination_cap";
 
     //$anchor_list = removeduplicatefrommiltiD($anchor_list);
     $anchor_data['anchor'] = $anchor_list;
@@ -5873,7 +5933,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
 
     if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = $anchor_data;
     } else {
         $data = array();
@@ -5885,10 +5945,10 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
 }
 
 /**
- * Helper function to follow_topic_data_responce. 
+ * Helper function to follow_topic_data_responce.
  * @param int $user_id, $author_id
  * @param string $type
- * @return array 
+ * @return array
  */
 function follow_topic_data_responce($user_id, $author_id, $type) {
     // variable decalartion
@@ -5949,9 +6009,12 @@ function follow_topic_data_responce($user_id, $author_id, $type) {
         $data['limit_crossed'] = '0';
     }
 
+    $success_status_mess = fetchMasterConfigData('follow_topic_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     if (!empty($response)) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = $data;
     } else {
         $output_array['status_code'] = "0";
@@ -5962,9 +6025,9 @@ function follow_topic_data_responce($user_id, $author_id, $type) {
 }
 
 /**
- * Helper function to get previous insert record. 
- * @param int $uid 
- * @return array 
+ * Helper function to get previous insert record.
+ * @param int $uid
+ * @return array
  */
 function list_user_follow_topic_list($uid) {
     $data = '';
@@ -5992,9 +6055,12 @@ function list_user_follow_topic_list($uid) {
 
     $anchor_data['topic'] = $data;
 
+    $success_status_mess = fetchMasterConfigData('user_follow_topic_list_display_custom_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     if ($loopc > 0) {
         $output_array['status_code'] = "1";
-        $output_array['status_message'] = "";
+        $output_array['status_message'] = "$success_status_message";
         $output_array['data'] = $anchor_data;
     } else {
         $data = array();
@@ -6006,9 +6072,9 @@ function list_user_follow_topic_list($uid) {
 }
 
 /**
- * Helper function to removeduplicatefrommiltiD. 
+ * Helper function to removeduplicatefrommiltiD.
  * @param array
- * @return array 
+ * @return array
  */
 function removeduplicatefrommiltiD($array) {
     $copy = $array; // create copy to delete dups from
@@ -6027,10 +6093,10 @@ function removeduplicatefrommiltiD($array) {
 }
 
 /**
- * Helper function to searchIn2DArray. 
+ * Helper function to searchIn2DArray.
  * @param int $id
  * @param array
- * @return int 
+ * @return int
  */
 function searchIn2DArray($id, $array) {
     foreach ($array as $key => $val) {
@@ -6042,9 +6108,9 @@ function searchIn2DArray($id, $array) {
 }
 
 /**
- * Helper function to tokenValidator. 
+ * Helper function to tokenValidator.
  * @param string $uname, $token
- * @return int 
+ * @return int
  */
 function tokenValidator($uname, $token) {
     $user_load = user_load_by_name($uname);
@@ -6063,7 +6129,7 @@ function tokenValidator($uname, $token) {
 }
 
 /**
- * Helper function to get_personalization_saved_value. 
+ * Helper function to get_personalization_saved_value.
  * @param string $uname, $token
  */
 function resetToken($uname, $token) {
@@ -6079,7 +6145,7 @@ function resetToken($uname, $token) {
 
 /**
  * Helper function to get cookie value
- * @return array 
+ * @return array
  */
 function getSmlCookie() {
     $cook_val = array();
@@ -6093,7 +6159,7 @@ function getSmlCookie() {
 /* Change request */
 
 /**
- * Call back function for programdetail API 
+ * Call back function for programdetail API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -6122,7 +6188,7 @@ function itg_rapid_api_programdetail($token) {
 }
 
 /**
- * Call back function for videodetail API 
+ * Call back function for videodetail API
  * @pram $_GET
  * @return array - The processed information array.
  */
@@ -6151,7 +6217,7 @@ function itg_rapid_api_videodetail($token) {
 }
 
 /**
- * Call back function for topstories API 
+ * Call back function for topstories API
  * @pram $_GET
  * @return array - The processed information array.
  */
