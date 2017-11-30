@@ -13,7 +13,13 @@
 function itg_personalization_edit_profile_form($form, &$form_state) {
   global $user;
   
-  $scheme = SITE_PROTOCOL;
+  if (!empty(SITE_PROTOCOL)) {
+    $scheme = SITE_PROTOCOL;
+  }
+  else {
+    $scheme = 'http://';
+  }
+  
   $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   //prepare url for change mobile and email
   $edit_email_url = $edit_email_link= $edit_mobile_url = $edit_mobile_link = '';
