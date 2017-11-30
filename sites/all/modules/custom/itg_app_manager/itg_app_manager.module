@@ -2155,7 +2155,7 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('widget_config_options'),
     );
     $form['widget_group']['widget_information'] = array(
-        '#markup' => $img_tag,        
+        '#markup' => "<a href='$base_url/itg-app-widget' target='_blank'>$img_tag</a>",        
     );
    
     $form['packages_group'] = array(
@@ -2171,7 +2171,7 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('packages_config_options'),
     );
     $form['packages_group']['packages_information'] = array(
-        '#markup' => $img_tag,        
+        '#markup' => "<a href='$base_url/itg-app-manager-packages' target='_blank'>$img_tag</a>",      
     );
     $form['top_stories_group'] = array(
         '#type' => 'fieldset',
@@ -2186,7 +2186,7 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('top_stories_config_options'),
     );
     $form['top_stories_group']['top_stories_information'] = array(
-        '#markup' => $img_tag,        
+        '#markup' => "<a href='$base_url/top-stories-management' target='_blank'>$img_tag</a>",       
     );
     $form['categories_group'] = array(
         '#type' => 'fieldset',
@@ -2201,7 +2201,7 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('categories_config_options'),
     );
     $form['categories_group']['categories_information'] = array(
-        '#markup' => $img_tag,        
+        '#markup' => "<a href='$base_url/itg-app-manager-categories' target='_blank'>$img_tag</a>",   
     );
     $form['polls_group'] = array(
         '#type' => 'fieldset',
@@ -2216,7 +2216,7 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('polls_config_options'),
     );
     $form['polls_group']['polls_information'] = array(
-        '#markup' => $img_tag,        
+        '#markup' => "<a href='$base_url/itg-app-manager-poll' target='_blank'>$img_tag</a>",    
     );
     $form['magazine_group'] = array(
         '#type' => 'fieldset',
@@ -2231,7 +2231,7 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('magazine_config_options'),
     );
     $form['magazine_group']['magazine_information'] = array(
-        '#markup' => $img_tag,        
+        '#markup' => "<a href='$base_url/itg-app-manager-magazine' target='_blank'>$img_tag</a>",       
     );
     $form['daily_capsule_group'] = array(
         '#type' => 'fieldset',
@@ -2261,7 +2261,7 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('hamburger_menu_config_options'),
     );
     $form['hamburger_menu_group']['hamburger_menu_information'] = array(
-        '#markup' => $img_tag,        
+        '#markup' => "<a href='$base_url/hamburger-menu-management' target='_blank'>$img_tag</a>",     
     );
     $form['horizontal_menu_group'] = array(
         '#type' => 'fieldset',
@@ -2276,7 +2276,18 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('horizontal_menu_config_options'),
     );
     $form['horizontal_menu_group']['horizontal_menu_information'] = array(
-        '#markup' => $img_tag,        
+        '#markup' => "<a href='$base_url/horizontal-menu-management' target='_blank'>$img_tag</a>",     
+    );
+    $form['other_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Other'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['other_group']['horizontal_menu_information'] = array(
+        '#markup' => "<a href='$base_url/master-config-internal' target='_blank'>Master Config</a>",    
+        
     );
     $form['dashboard_submit_button'] = array(
         '#type' => 'submit',
