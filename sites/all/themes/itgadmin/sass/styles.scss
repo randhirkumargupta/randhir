@@ -2355,7 +2355,8 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-photo-story-values"],
 [id*="field-story-listicle-values"],
 [id*="field-event-tabs-values"],
-[id*="field-add-member-values"] {
+[id*="field-add-member-values"],
+[id*="field-associate-event-photo-values"] {
     @extend .itg-add-another-item;
 }
 
@@ -8454,7 +8455,8 @@ div.node {
 [id*="field-story-template-quotes-values"],
 [id*="field-story-template-factoids-values"],
 [id*="field-story-template-guru-values"],
-[id*="field-add-member-values"] {
+[id*="field-add-member-values"],
+[id*="field-associate-event-photo-values"] {
     tbody tr {
         td {
             border: none;
@@ -14544,4 +14546,35 @@ div.ctools-modal-content {
 
 #print-team-integration-node-form [id*="field-add-member-values"] tbody {
     overflow: inherit;
+}
+
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget {
+    height: auto;
+    a {
+        display: inline;
+    }
+}
+
+[id*="views-exposed-form-searchimage-search-publish-video"] {
+    .form-select[multiple="multiple"] {
+        min-height: 40px;
+        margin-bottom: 30px;
+    }
+    .views-exposed-form .views-exposed-widget {
+        padding-right: 12px;
+    }
+}
+
+.section-unpublished-story,
+.section-unpublished-photogallery,
+.section-unpublished-podcast,
+.section-unpublished-blogs,
+.section-unpublished-video {
+    .form-actions {
+        .form-submit {
+            +a {
+                @extend .button;
+            }
+        }
+    }
 }
