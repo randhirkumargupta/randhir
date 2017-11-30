@@ -160,6 +160,13 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
+     $items['itg-app-dashboard'] = array(
+        'title' => 'App Dashboard',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_app_dashboard_form'),
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
    
     return $items;
 }
@@ -2121,4 +2128,189 @@ function magazine_list_app($cpageno, $from){
   }  
   
   return $issue_list;
+}
+
+/**
+ * itg app dashboard menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_dashboard_form($form, &$form_state) {
+    global $base_url;
+    $form = array();
+    $image_file = $base_url."/". drupal_get_path('module', 'itg_app_manager') . '/img/add-icon.png'; 
+    $img_tag = "<img src='$image_file' style='width: 30px;' />";
+    $form['widget_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('widget'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    
+    $form['widget_group']['widget_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('widget_config_options'),
+    );
+    $form['widget_group']['widget_information'] = array(
+        '#markup' => $img_tag,        
+    );
+   
+    $form['packages_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Packages'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['packages_group']['packages_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('packages_config_options'),
+    );
+    $form['packages_group']['packages_information'] = array(
+        '#markup' => $img_tag,        
+    );
+    $form['top_stories_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Top Stories'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['top_stories_group']['top_stories_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('top_stories_config_options'),
+    );
+    $form['top_stories_group']['top_stories_information'] = array(
+        '#markup' => $img_tag,        
+    );
+    $form['categories_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Categories'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['categories_group']['categories_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('categories_config_options'),
+    );
+    $form['categories_group']['categories_information'] = array(
+        '#markup' => $img_tag,        
+    );
+    $form['polls_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Polls'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['polls_group']['polls_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('polls_config_options'),
+    );
+    $form['polls_group']['polls_information'] = array(
+        '#markup' => $img_tag,        
+    );
+    $form['magazine_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Magazine'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['magazine_group']['magazine_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('magazine_config_options'),
+    );
+    $form['magazine_group']['magazine_information'] = array(
+        '#markup' => $img_tag,        
+    );
+    $form['daily_capsule_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Daily Capsule'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['daily_capsule_group']['daily_capsule_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('daily_capsule_config_options'),
+    );
+    $form['daily_capsule_group']['daily_capsule_information'] = array(
+        '#markup' => $img_tag,        
+    );
+    $form['hamburger_menu_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Hamburger Menu'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['hamburger_menu_group']['hamburger_menu_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('hamburger_menu_config_options'),
+    );
+    $form['hamburger_menu_group']['hamburger_menu_information'] = array(
+        '#markup' => $img_tag,        
+    );
+    $form['horizontal_menu_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Horizontal Menu'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['horizontal_menu_group']['horizontal_menu_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('horizontal_menu_config_options'),
+    );
+    $form['horizontal_menu_group']['horizontal_menu_information'] = array(
+        '#markup' => $img_tag,        
+    );
+    $form['dashboard_submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#submit' => array('itg_app_dashboard_form_submit'),
+    );
+    
+    return $form;
+}
+/**
+ * submit callback for master config form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_dashboard_form_submit($form, &$form_state) {
+    form_state_values_clean($form_state);
+    foreach ($form_state['values'] as $key => $val) {
+        $key_val = "";
+        $key_val = fetchMasterConfigData($key);
+        if($key_val !=""){
+            // uapdete query
+            db_update('itg_app_master_config_internal') 
+            ->fields(array(
+              'config_val' => $val,              
+            ))->condition('config_key', $key, '=')->execute();
+        }
+        else{
+            // insert query
+            $data = array(
+                'config_key' => $key,
+                'config_val' => $val,
+            );
+            drupal_write_record('itg_app_master_config_internal', $data);
+        }
+    }
+    drupal_set_message(t('Data saved successfully.'), 'status');
 }
