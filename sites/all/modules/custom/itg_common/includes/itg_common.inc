@@ -748,3 +748,16 @@ function itg_custom_get_user_details($uid) {
     return $user_list;
   }
 }
+
+/**
+ * Helper function to create image style
+ * @param int $nid
+ */
+function create_node_image_style() {
+  $arg = arg();
+  
+  if (is_numeric($arg[1])) {
+    
+  }
+  
+}
