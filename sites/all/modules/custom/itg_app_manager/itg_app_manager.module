@@ -167,6 +167,21 @@ function itg_app_manager_menu() {
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
+     
+  $items['admin/api-configuration/rest-api/itg-app-dashboard'] = array(
+    'title' => 'App Dashboard',    
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_app_dashboard_form'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['itg-app-daily-capsule-manager'] = array(
+        'title' => 'Daily Capsule Manager',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_app_daily_capsule_manager_form'),
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
    
     return $items;
 }
@@ -2466,7 +2481,7 @@ function itg_app_dashboard_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('daily_capsule_config_options'),
     );
     $form['daily_capsule_group']['daily_capsule_information'] = array(
-        '#markup' => $img_tag,        
+        '#markup' => "<a href='$base_url/itg-app-daily-capsule-manager' target='_blank'>$img_tag</a>",        
     );
     $form['hamburger_menu_group'] = array(
         '#type' => 'fieldset',
@@ -2552,4 +2567,272 @@ function itg_app_dashboard_form_submit($form, &$form_state) {
         }
     }
     drupal_set_message(t('Data saved successfully.'), 'status');
+}
+
+/**
+ * daily capsule manager menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_daily_capsule_manager_form($form, &$form_state) {
+    drupal_add_css(drupal_get_path('module', 'itg_app_manager') . '/css/itg_app_manager.css');
+    global $base_url;
+    $form = array();
+    $hr = array(); // array for hour options
+    $min = array(); // array for minute options
+    for($i = 1; $i <= 23; $i++){
+        $hr[$i] = $i;
+    }
+    for($i = 1; $i <= 59; $i++){
+        $min[$i] = $i;
+    }
+    $form['frequency_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Frequency'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['frequency_group']['week_days'] = array(
+        '#type' => 'checkboxes',
+        '#options' => array(1 => 'Sunday', 2 => 'Monday', 3 => 'Tuesday', 4 => 'Wednesday', 5 => 'Thursday', 6 => 'Friday', 7 => 'Saturday'),
+        //'#default_value' => fetchMasterConfigData('horizontal_menu_config_options'),
+    );
+    $form['frequency_group']['start_time'] = array(
+        '#markup' => 'Start time', 
+        '#prefix' => '<div class="start-time">',
+    );
+    $form['frequency_group']['start_time_hr'] = array(
+        '#type' => 'select',
+        '#options' => $hr,
+        
+    );
+    $form['frequency_group']['start_time_min'] = array(
+        '#type' => 'select',
+        '#options' => $min,
+        '#suffix' => '</div>', 
+        
+    );
+    $form['frequency_group']['end_time'] = array(
+        '#markup' => 'End time', 
+        '#prefix' => '<div class="end-time">',
+    );
+    $form['frequency_group']['end_time_hr'] = array(
+        '#type' => 'select',
+        '#options' => $hr,
+        
+    );
+    $form['frequency_group']['end_time_min'] = array(
+        '#type' => 'select',
+        '#options' => $min,
+        '#suffix' => '</div>', 
+        
+    );
+    $form['frequency_group']['morning_messages'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'Morning Messages'),
+    );
+    $form['frequency_group']['evening_messages'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'Evening Messages'),
+    );
+    
+    $form['score_card_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Score Card'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['score_card_group']['daily_score_card_group_icon'] = array(
+        '#type' => 'file',
+        '#title' => t('Upload Icon'),        
+    );
+    $form['score_card_group']['daily_score_card_group_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('daily_score_card_group_config_options'),
+    );
+    $form['score_card_group']['daily_score_card_messages'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'Display Name'),
+    );
+    $form['score_card_group']['daily_score_card_url'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'URL'),
+    );
+    $form['score_card_group']['daily_score_card_type'] = array(
+        '#type' => 'select',
+        '#options' => array('1' => 'Feed Type'),
+        
+    );
+    $form['top_stories_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Top Stories'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['top_stories_group']['daily_top_stories_group_icon'] = array(
+        '#type' => 'file',
+        '#title' => t('Upload Icon'),        
+    );
+    $form['top_stories_group']['daily_top_stories_group_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('daily_top_stories_group_config_options'),
+    );
+    $form['top_stories_group']['daily_top_stories_messages'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'Display Name'),
+    );
+    $form['top_stories_group']['daily_top_stories_url'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'URL'),
+    );
+    $form['top_stories_group']['daily_top_stories_type'] = array(
+        '#type' => 'select',
+        '#options' => array('1' => 'Feed Type'),
+        
+    );
+    $form['news_wrap_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('News Wrap'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['news_wrap_group']['daily_news_wrap_group_icon'] = array(
+        '#type' => 'file',
+        '#title' => t('Upload Icon'),        
+    );
+    $form['news_wrap_group']['daily_news_wrap_group_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('daily_news_wrap_group_config_options'),
+    );
+    $form['news_wrap_group']['daily_news_wrap_messages'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'Display Name'),
+    );
+    $form['news_wrap_group']['daily_news_wrap_url'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'URL'),
+    );
+    $form['news_wrap_group']['daily_news_wrap_type'] = array(
+        '#type' => 'select',
+        '#options' => array('1' => 'Feed Type'),
+        
+    );
+    $form['breaking_news_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Breaking News'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['breaking_news_group']['daily_breaking_news_group_icon'] = array(
+        '#type' => 'file',
+        '#title' => t('Upload Icon'),        
+    );
+    $form['breaking_news_group']['daily_breaking_news_group_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('daily_breaking_news_group_config_options'),
+    );
+    $form['breaking_news_group']['daily_breaking_news_messages'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'Display Name'),
+    );
+    $form['breaking_news_group']['daily_breaking_news_url'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'URL'),
+    );
+    $form['breaking_news_group']['daily_breaking_news_type'] = array(
+        '#type' => 'select',
+        '#options' => array('1' => 'Feed Type'),
+        
+    );
+    $form['big_stories_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Big Stories'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['big_stories_group']['daily_big_stories_group_icon'] = array(
+        '#type' => 'file',
+        '#title' => t('Upload Icon'),        
+    );
+    $form['big_stories_group']['daily_big_stories_group_config_options'] = array(
+        '#type' => 'radios',
+        '#options' => array(0 => 'In Active', 1 => 'Active'),
+        '#default_value' => fetchMasterConfigData('daily_big_stories_group_config_options'),
+    );
+    $form['big_stories_group']['daily_big_stories_messages'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'Display Name'),
+    );
+    $form['big_stories_group']['daily_big_stories_url'] = array(
+        '#type' => 'textfield',        
+        '#default_value' => '',
+        '#size' => 25,
+        '#maxlength' => 255,
+        '#attributes' => array('placeholder' => 'URL'),
+    );
+    $form['big_stories_group']['daily_big_stories_type'] = array(
+        '#type' => 'select',
+        '#options' => array('1' => 'Feed Type'),
+        
+    );
+    $form['fixed_widget_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Fixed Widget'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    $form['active_doses_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Active Doses'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+        
+    );
+    
+    return $form;
 }
