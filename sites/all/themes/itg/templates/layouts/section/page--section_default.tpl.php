@@ -140,8 +140,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                       <?php } ?>
                                                       <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-1']['block_title']; ?>" name="itg-block-1" class="block_title_id" placeholder="Enter Title" />
                                                   </div>
-                                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                  <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-1"><i class="fa fa-times"></i></a></span>
+                                                  <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                                  <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-1"><i class="fa fa-times"></i></a>
+                                                </span>
+                                                  
 
                                               </div>
                                             <?php } ?>  
@@ -212,9 +214,9 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                       <div class="widget-title-wrapper">
                                                           <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-5']['block_title']; ?>" name="itg-block-5" class="block_title_id" placeholder="Enter Title" />
                                                       </div>
-                                                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                      <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-5"><i class="fa fa-times"></i></a></span>
-
+                                                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                                      <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-5"><i class="fa fa-times"></i></a>
+                                                    </span>                                                      
                                                   </div>  
                                                 <?php } ?>                   
                                                 <div class="data-holder" id="itg-block-5">
@@ -238,8 +240,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                       <div class="widget-title-wrapper">
                                                           <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-6']['block_title']; ?>" name="itg-block-6" class="block_title_id" placeholder="Enter Title" />
                                                       </div>
-                                                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                      <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-6"><i class="fa fa-times"></i></a></span>
+                                                      <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                                      <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-6"><i class="fa fa-times"></i></a>
+                                                    </span>
+                                                      
 
                                                   </div>  
                                                 <?php } ?>                   
@@ -281,8 +285,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-7"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-7']['block_title']; ?>" name="itg-block-7" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-7"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-7"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
                                         </div>
                                       <?php } ?>  
                                       <div class="data-holder" id="itg-block-7">
@@ -316,8 +322,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-8"><?php print $widget_data['itg-block-8']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-8']['block_title']; ?>" name="itg-block-8" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-8"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-8"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
                                         </div>
                                       <?php } ?>  
                                       <div class="data-holder" id="itg-block-8">
@@ -351,8 +359,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-9"><?php print $widget_data['itg-block-9']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-9']['block_title']; ?>" name="itg-block-9" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-9"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-9"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
 
                                         </div>
                                       <?php } ?>  
@@ -393,8 +403,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-17"><?php print $widget_data['itg-block-17']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-17']['block_title']; ?>" name="itg-block-17" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-17"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-17"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
                                         </div>
                                       <?php } ?>  
                                       <div class="data-holder" id="itg-block-17">
@@ -428,8 +440,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-18"><?php print $widget_data['itg-block-18']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-18']['block_title']; ?>" name="itg-block-18" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-18"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-18"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
                                         </div>
                                       <?php } ?>  
                                       <div class="data-holder" id="itg-block-18">
@@ -463,8 +477,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-19"><?php print $widget_data['itg-block-19']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-19']['block_title']; ?>" name="itg-block-19" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-19"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-19"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
                                         </div>
                                       <?php } ?>  
                                       <div class="data-holder" id="itg-block-19">
@@ -504,8 +520,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-10"><?php print $widget_data['itg-block-10']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-10']['block_title']; ?>" name="itg-block-10" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-10"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-10"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
                                         </div>
                                       <?php } ?>  
                                       <div class="data-holder" id="itg-block-10">
@@ -561,8 +579,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-12"><?php print $widget_data['itg-block-12']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-12']['block_title']; ?>" name="itg-block-12" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-12"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-12"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
                                         </div>
                                       <?php } ?>  
                                       <div class="data-holder" id="itg-block-12">
@@ -596,8 +616,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-13"><?php print $widget_data['itg-block-13']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-13']['block_title']; ?>" name="itg-block-13" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-13"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-13"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
 
                                         </div>
                                       <?php } ?>  
@@ -638,8 +660,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-14"><?php print $widget_data['itg-block-14']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-14']['block_title']; ?>" name="itg-block-14" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-14"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-14"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
                                         </div>
                                       <?php } ?>  
                                       <div class="data-holder" id="itg-block-14">
@@ -673,8 +697,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-15"><?php print $widget_data['itg-block-15']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-15']['block_title']; ?>" name="itg-block-15" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-15"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-15"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
                                         </div>
                                       <?php } ?>  
                                       <div class="data-holder" id="itg-block-15">
@@ -708,8 +734,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 <span class="widget-title" data-id="itg-block-16"><?php print $widget_data['itg-block-16']['block_title']; ?></span>
                                                 <input type="text" maxlength="255" size="30" value="<?php print $widget_data['itg-block-16']['block_title']; ?>" name="itg-block-16" class="block_title_id" placeholder="Enter Title" />
                                             </div>
-                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                            <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-16"><i class="fa fa-times"></i></a></span>
+                                            <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-16"><i class="fa fa-times"></i></a>
+                                        </span>
+                                            
 
                                         </div>
                                       <?php } ?>  
@@ -776,8 +804,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     <span class="widget-title" data-id="<?php print $widget_name1; ?>"><?php print $widget_data[$widget_name1]['block_title']; ?></span>
                                                     <input type="text" maxlength="255" size="30" value="<?php print $widget_data[$widget_name1]['block_title']; ?>" name="<?php print $widget_name1; ?>" class="block_title_id" placeholder="Enter Title" />
                                                 </div>
-                                                <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="<?php print $widget_name1; ?>"><i class="fa fa-times"></i></a></span>
+                                                <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                                <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="<?php print $widget_name1; ?>"><i class="fa fa-times"></i></a>
+                                            </span>
+                                                
                                             </div>
                                           <?php } ?>  
                                           <div class="data-holder" id="<?php print $widget_name1; ?>"><?php print $widget_data[$widget_name1]['widget']; ?></div>
@@ -802,8 +832,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     <span class="widget-title" data-id="<?php print $widget_name2; ?>"><?php print $widget_data[$widget_name2]['block_title']; ?></span>
                                                     <input type="text" maxlength="255" size="30" value="<?php print $widget_data[$widget_name2]['block_title']; ?>" name="<?php print $widget_name2; ?>" class="block_title_id" placeholder="Enter Title" />
                                                 </div>
-                                                <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="<?php print $widget_name2; ?>"><i class="fa fa-times"></i></a></span>
+                                                <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                                <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="<?php print $widget_name2; ?>"><i class="fa fa-times"></i></a>
+                                            </span>
+                                                
                                             </div>
                                           <?php } ?>  
 
@@ -829,8 +861,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                     <span class="widget-title" data-id="<?php print $widget_name3; ?>"><?php print $widget_data[$widget_name3]['block_title']; ?></span>
                                                     <input type="text" maxlength="255" size="30" value="<?php print $widget_data[$widget_name3]['block_title']; ?>" name="<?php print $widget_name3; ?>" class="block_title_id" placeholder="Enter Title" />
                                                 </div>
-                                                <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                                                <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="<?php print $widget_name3; ?>"><i class="fa fa-times"></i></a></span>
+                                                <span class="widget-trigger"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                                <a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="<?php print $widget_name3; ?>"><i class="fa fa-times"></i></a>
+                                            </span>
+                                                
                                             </div>
                                           <?php } ?>  
                                           <div class="data-holder" id="<?php print $widget_name3; ?>"><?php print $widget_data[$widget_name3]['widget']; ?></div>

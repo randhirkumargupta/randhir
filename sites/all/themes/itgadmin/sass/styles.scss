@@ -7836,7 +7836,7 @@ div.node {
             font-size: 14px;
         }
         &.active {
-            width: 200px;
+            width: 186px;
             input[type="text"] {
                 display: block;
             }
@@ -7859,12 +7859,16 @@ div.node {
     line-height: 30px;
     padding: 0;
     text-align: center;
-    width: 28px;
+    width: 46px;
     cursor: pointer;
     z-index: 9;
     float: right;
     .fa {
         font-size: 18px;
+    }
+    a {
+        color: #fff;
+        padding-left: 5px;
     }
 }
 
@@ -14420,7 +14424,6 @@ div.ctools-modal-content {
 #views-exposed-form-so-sorry-so-sorry-videos-widget,
 #views-exposed-form-widget-anchors-listing-anchors-listing-widget,
 #views-exposed-form-key-candidate-special-key-candidate-widget-list .views-widget-per-page,
-#itg-widget-issuewidgetlist-filter-form .form-item-items-per-page,
 #views-exposed-form-category-of-stroy-base-magazin-widget-issue-magazin-widget-list .form-item-items-per-page,
 #views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget-list .form-item-items-per-page {
     display: none !important;
