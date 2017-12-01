@@ -62,12 +62,9 @@ $menu_background_color = (!empty($menu_color) ? $menu_color : '#000');
             </section>
         </header>
         <?php
-        // Render the sidebars to see if there's anything in them.
-        //$sidebar_first = render($page['sidebar_first']);
         $sidebar_second = render($page['sidebar_second_event']);
         ?>
         <?php
-        //$cls = 'col-md-12';
         $cls = 'col-md-8';
         if ($sidebar_second):
           $cls = 'col-md-8';
@@ -85,7 +82,7 @@ $menu_background_color = (!empty($menu_color) ? $menu_color : '#000');
                     <a id="main-content"></a>
                     <?php print render($title_prefix); ?>
                     <?php if ($title): ?>
-                      <h1 class="page__title title" id="page-title"><?php //print $title;  ?></h1>
+                      <h1 class="page__title title element-hidden" id="page-title"><?php print $title;  ?></h1>
                     <?php endif; ?>
                     <?php print render($title_suffix); ?>
                     <?php print $messages; ?>
