@@ -14,16 +14,16 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-    
+
     $success_status_mess = fetchMasterConfigData('magazine_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     $dis_count = fetchMasterConfigData('magazine_display_count');
     $display_count = isset($dis_count) ? $dis_count : "10";
-    
+
     $pag_cap = fetchMasterConfigData('magazine_pagination_cap');
     $pagination_cap = isset($pag_cap) ? $pag_cap : "7";
-    
+
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -72,7 +72,7 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
 function magazineEditionPageRerourceValueList($issueid, $pageno) {
     // variable declaration
     global $base_url;
-    //issue node 
+    //issue node
     $node = node_load($issueid);
     $field_issue_large_cover_image_fid = $node->field_issue_large_cover_image['und'][0]['fid'];
     $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
@@ -91,10 +91,12 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    //$range_max = 10;
+    $range_max = 10;
     $dis_count = fetchMasterConfigData('magazine_display_count');
-    $range_max = isset($dis_count) ? $dis_count : 10;
-    
+    if(!empty($dis_count) && is_numeric($dis_count)){
+      $range_max = $dis_count;
+    }
+
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
     } else {
@@ -250,7 +252,7 @@ function magazineCoverstoriesPageRerourceValue() {
     $updated_datetime = "";
     $success_status_mess = fetchMasterConfigData('magazine_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     // list array building
     $data = magazineCoverstoriesPageRerourceValueList();
 
@@ -288,9 +290,12 @@ function magazineCoverstoriesPageRerourceValueList() {
     $listcount = 0;
     $data_list_array = array();
     $loop_count = 0;
-    
+    $range_max = 20;
+
     $dis_count = fetchMasterConfigData('magazine_display_count');
-    $range_max = isset($dis_count) ? $dis_count : 20;
+    if(!empty($dis_count) && is_numeric($dis_count)){
+     $range_max = $dis_count;
+    }
     $range_min = 0;
     $magazine_nids = home_page_magazine_node_list();
     // issue list query..
@@ -310,11 +315,11 @@ function magazineCoverstoriesPageRerourceValueList() {
     $query_issue->condition('n.type', 'issue');
     $query_issue->condition('n.nid', $magazine_nids, 'IN');
     //$query_issue->range($range_min, $range_max);
-    
+
     $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result_issue as $reskey => $resvalue) {
 
-        //issue node 
+        //issue node
         $issueid = $resvalue['nid'];
         $node_data = node_load($issueid);
 
@@ -495,17 +500,17 @@ function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno =
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-    
+
     $success_status_mess = fetchMasterConfigData('magazine_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     $dis_count = fetchMasterConfigData('magazine_display_count');
     $display_count = isset($dis_count) ? $dis_count : "10";
-    
+
     $pag_cap = fetchMasterConfigData('magazine_pagination_cap');
     $pagination_cap = isset($pag_cap) ? $pag_cap : "7";
 
-    
+
     // list array building
     $data = magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno);
 
@@ -547,10 +552,12 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
     $tid_list[] = $tid;
     $issue_list_array = array();
     $listcount = 0;
-    //$range_max = 10;
+    $range_max = 10;
     $dis_count = fetchMasterConfigData('magazine_display_count');
-    $range_max = isset($dis_count) ? $dis_count : 10;
-    
+    if(!empty($dis_count) && is_numeric($dis_count)){
+      $range_max = $dis_count;
+    }
+
     $sdate_fi = strtotime($sdate);
     $tdate_fi = strtotime($tdate);
 
@@ -581,7 +588,7 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
     $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result_issue as $reskey => $resvalue) {
 
-        //issue node 
+        //issue node
         $issueid = $resvalue['nid'];
         $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
         $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);

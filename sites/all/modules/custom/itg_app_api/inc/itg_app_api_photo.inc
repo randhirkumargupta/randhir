@@ -17,13 +17,13 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $updated_datetime = "";
     $photo_dis_count = fetchMasterConfigData('photo_display_count');
     $photo_display_count = isset($photo_dis_count) ? $photo_dis_count : "10";
-    
+
     $success_status_mess = fetchMasterConfigData('photo_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     $photo_pag_cap = fetchMasterConfigData('photo_pagination_cap');
     $photo_pagination_cap = isset($photo_pag_cap) ? $photo_pag_cap : "50";
-    
+
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -44,7 +44,7 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     //data array building
     $datacount = $data['lcount'];
     $data_up_time = $data['updated_datetime'];
-    
+
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
     $data_array['layout_id'] = "0";
@@ -75,10 +75,12 @@ function generatePhotoCategoryList($tid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    //$range_max = 10;
+    $range_max = 10;
     $photo_dis_count = fetchMasterConfigData('photo_display_count');
-    $range_max = isset($photo_dis_count) ? $photo_dis_count : 10;
-    
+    if(!empty($photo_dis_count) && is_numeric($photo_dis_count)){
+      $range_max = $photo_dis_count;
+    }
+
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
     } else {
@@ -241,7 +243,7 @@ function photoDetailPageRerourceValue($id) {
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
-    
+
     $success_status_mess = fetchMasterConfigData('photo_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
@@ -266,7 +268,7 @@ function photoDetailPageRerourceValue($id) {
  * @return array
  */
 function generatePhotoDeatilList($id) {
-    // variable declaration    
+    // variable declaration
     global $base_url;
     $data = array();
     $nid = $id;
@@ -374,7 +376,7 @@ function photoStoryDetailPageRerourceValue($id) {
     //349693 , 349625-> photo story nid
     $success_status_mess = fetchMasterConfigData('photo_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
@@ -401,7 +403,7 @@ function photoStoryDetailPageRerourceValue($id) {
  * @return array
  */
 function generatePhotoStoryDeatilList($id) {
-    // variable declaration    
+    // variable declaration
     global $base_url;
     $data = array();
     $nid = $id;

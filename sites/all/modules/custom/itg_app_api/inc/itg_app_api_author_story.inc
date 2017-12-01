@@ -16,13 +16,13 @@ function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
     $updated_datetime = "";
     $success_status_mess = fetchMasterConfigData('author_story_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     $dis_count = fetchMasterConfigData('author_story_display_count');
     $display_count = isset($dis_count) ? $dis_count : "10";
-    
+
     $pag_cap = fetchMasterConfigData('author_story_pagination_cap');
     $pagination_cap = isset($pag_cap) ? $pag_cap : "10";
-    
+
 
     // list array building
     if ($story_type == '0') { // latest story
@@ -65,9 +65,12 @@ function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
  */
 function author_latest_storylist($author_id, $cpageno) {
     global $base_url;
-    //$range_max = 10;
+    $range_max = 10;
+
     $dis_count = fetchMasterConfigData('author_story_display_count');
-    $range_max = isset($dis_count) ? $dis_count : 10;
+    if(!empty($dis_count) && is_numeric($dis_count)){
+    $range_max = $dis_count;
+    }
 
     if (!$cpageno == 0) {
         $range_min = $cpageno * $range_max;
@@ -204,7 +207,7 @@ function author_popular_storylist($author_id, $cpageno) {
     //$range_max = 10;
     $dis_count = fetchMasterConfigData('author_story_display_count');
     $range_max = isset($dis_count) ? $dis_count : 10;
-    
+
     if (!$cpageno == 0) {
         $range_min = $cpageno * $range_max;
     } else {
@@ -321,10 +324,10 @@ function author_detail_data($author_id) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-    
+
     $success_status_mess = fetchMasterConfigData('author_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
 
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_extra_large_image', 'ai', 'ai.entity_id = n.nid');
@@ -378,8 +381,8 @@ function anchor_detail_data($anchor_id) {
     $updated_datetime = "";
     $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
-    
+
+
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_extra_large_image', 'ai', 'ai.entity_id = n.nid');
     $query->leftJoin('field_data_field_celebrity_pro_occupation', 'occ', 'occ.entity_id = n.nid');
@@ -429,7 +432,7 @@ function news_wrap_list() {
     $updated_datetime = "";
     $success_status_mess = fetchMasterConfigData('news_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     // list array building
     $data = news_wrap_datalist();
     $current_date = date('Y-m-d H:i:s', time());
@@ -524,17 +527,17 @@ function anchor_programm_data_list($anchor_id, $type, $cpageno) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-    
+
     $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     $dis_count = fetchMasterConfigData('anchor_program_display_count');
     $display_count = isset($dis_count) ? $dis_count : "10";
-    
+
     $pag_cap = fetchMasterConfigData('anchor_program_pagination_cap');
     $pagination_cap = isset($pag_cap) ? $pag_cap : "10";
-    
-    
+
+
     // list array building
     if ($type == '0') { // latest Programm
         $data = anchor_latest_programm_list($anchor_id, $cpageno);
@@ -574,10 +577,12 @@ function anchor_programm_data_list($anchor_id, $type, $cpageno) {
  */
 function anchor_latest_programm_list($anchor_id, $cpageno) {
 
-    //$range_max = 10;
+    $range_max = 10;
     $dis_count = fetchMasterConfigData('anchor_program_display_count');
-    $range_max = isset($dis_count) ? $dis_count : "10";
-    
+    if(!empty($dis_count) && is_numeric($dis_count)){
+      $range_max = $dis_count;
+    }
+
     if (!$cpageno == 0) {
         $range_min = $cpageno * $range_max;
     } else {
@@ -719,10 +724,12 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
  * @return array
  */
 function anchor_popular_programm_list($anchor_id, $cpageno) {
-    //$range_max = 10;
+    $range_max = 10;
     $dis_count = fetchMasterConfigData('anchor_program_display_count');
-    $range_max = isset($dis_count) ? $dis_count : "10";
-    
+    if(!empty($dis_count) && is_numeric($dis_count)){
+     $range_max = $dis_count;
+    }
+
     if (!$cpageno == 0) {
         $range_min = $cpageno * $range_max;
     } else {
@@ -931,10 +938,10 @@ function follow_author_data_responce($user_id, $author_id, $type) {
         $data['is_saved'] = 1; //$response['success'];
         $data['limit_crossed'] = '0';
     }
-    
+
     $success_status_mess = fetchMasterConfigData('follow_author_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     if (!empty($response)) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "$success_status_message";
@@ -1011,7 +1018,7 @@ function follow_anchor_data_responce($user_id, $author_id, $type) {
     }
     $success_status_mess = fetchMasterConfigData('follow_anchor_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     if (!empty($response)) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "$success_status_message";
