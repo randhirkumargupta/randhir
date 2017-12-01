@@ -549,7 +549,7 @@ function itg_sso_itgredirect() {
   watchdog('user_page', 'pass');
   $redirect = base64_decode($arg[1]);
   watchdog('redirect_sso', $redirect);
-  $loader = $base_url . '/sites/all/themes/itgadmin/images/loader.svg';
+  $loader = $base_url . '/sites/all/themes/itg/images/loader.svg';
   $login_html = '<div class="please-wait-loading"><span><img height="50" width="50" class="profile-loader" align="center" src="' . $loader . '" alt="Loading..." /> Please wait while we are logging you in..</span></div>';
   
   drupal_add_js('
