@@ -773,7 +773,7 @@ $config = array(
      * than one instance is using memcache, you probably want to assign
      * a unique value per instance to this setting to avoid data collision.
      */
-    'memcache_store.prefix' => 'staging_SimpleSAMLphp',
+    'memcache_store.prefix' => 'SimpleSAMLphp',
 
 
     /*
