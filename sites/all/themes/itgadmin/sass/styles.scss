@@ -14581,3 +14581,63 @@ div.ctools-modal-content {
         }
     }
 }
+
+
+/*css for emoji*/
+
+.emoji-container {
+    display: inline-block;
+    vertical-align: top;
+    span {
+        vertical-align: bottom;
+    }
+    a {
+        display: inline-block;
+    }
+}
+
+#smily,
+#smilysad,
+#wgmf {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    .face {
+        position: fixed;
+        z-index: 9999;
+        &.face1 {
+            left: 400px;
+            top: 500px;
+        }
+        &.face2 {
+            left: 200px;
+            top: 0;
+        }
+        &.face3 {
+            top: 0;
+            right: 200px;
+        }
+        &.face4 {
+            right: 600px;
+            top: 100px;
+        }
+    }
+}
+
+
+/*css end for emoji*/
+
+.view .view-filters [id*="views-exposed-form-key-candidate-special-key-candidate-widget-list"] .views-exposed-form .views-exposed-widget {
+    width: 150px;
+    .form-item {
+        width: 140px;
+    }
+    .ajax-progress {
+        top: 20px;
+        position: absolute;
+        right: 0;
+    }
+}
