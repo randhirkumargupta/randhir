@@ -22,7 +22,6 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
   $output_right = '';
   ?>
 <?php foreach ($rows as $index => $row): ?>
-<!--<div class="col-md-6">-->
   <?php
   $media = '';
      $media = $row['field_daywise_event'].'--'.$row['field_story_expert_name'].'--'.$row['field_start_time_1'].'--'.$row['field_start_time_2'];
@@ -40,17 +39,16 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
      $row_count = count($rows);
     if ($index <= ((round($row_count / 2)) - 1)) {
     $output_left .= $sponsor_tags.'<div class="content-list" style="background:'.$heading_background_color.'">';
-    $output_left .= '<div style="color:'.$content_font_color .'">'.$row['field_start_time'].'</div>';
+    $output_left .= '<div style="color:'.$content_font_color .'"><span class="date-display-single"><div class="date-display-range">'.$row['field_start_time_1'].' to '.$row['field_start_time_2'].'</div></span></div>';
     $output_left .= '<div class="story-expert-name" style="color:'.$font_color.'">'.$row['field_story_expert_name'].'</div>';
     $output_left .= '<div class="program-schedule-content" style="color:'.$content_font_color.'">'.$row['view'].'</div></div>';
     }else{
     $output_right .= $sponsor_tags.'<div class="content-list" style="background:'.$heading_background_color.'">';
-    $output_right .= '<div style="color:'.$content_font_color .'">'.$row['field_start_time'].'</div>';
+    $output_right .= '<div style="color:'.$content_font_color .'"><span class="date-display-single"><div class="date-display-range">'.$row['field_start_time_1'].' to '.$row['field_start_time_2'].'</div></span></div>';
     $output_right .= '<div class="story-expert-name" style="color:'.$font_color.'">'.$row['field_story_expert_name'].'</div>';
     $output_right .= '<div class="program-schedule-content" style="color:'.$content_font_color.'">'.$row['view'].'</div></div>';
     }
     ?>
-<!--  </div>  -->
 <?php endforeach; ?>
 <?php
 if(!empty($output_left)){
