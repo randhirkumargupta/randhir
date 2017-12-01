@@ -58,7 +58,6 @@ function itg_akamai_menu() {
     'type' => MENU_LOCAL_TASK,
   );
 
-
   $items['admin/config/system/itg_akamai/akamai_log'] = array(
     'title' => 'Akamai Cache Log',
     'description' => 'Admin interface to view Cache Activity Log',
@@ -87,6 +86,16 @@ function itg_akamai_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['admin/config/system/itg_akamai/comp_widgt_ttl_not_implemented'] = array(
+    'title' => 'List of Block/Widget where TTL(Time to Live) is not set',
+    'description' => 'Admin interface',
+    'page callback' => 'itg_akamai_comp_widgt_ttl_not_implemented',
+    'access arguments' => array('purge itg akamai cache'),
+    'file' => 'includes/itg_akamai.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+
   $items['admin/config/system/itg_akamai/akamai_ccpurge'] = array(
     'title' => 'Akamai Purge Content type Node',
     'description' => 'Admin interface to clear Akamai Purge Content type Node',
@@ -96,7 +105,6 @@ function itg_akamai_menu() {
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
-
 
   $items['admin/config/system/itg_akamai/akamai_section'] = array(
     'title' => 'Akamai Section/Category Setting',
@@ -117,7 +125,6 @@ function itg_akamai_menu() {
     'file' => 'includes/itg_akamai.admin.inc',
     'type' => MENU_LOCAL_TASK,
   );
-
 
   $items['admin/config/system/itg_akamai/akamai_ccs/%ctools_js/%'] = array(
     'title' => 'Akamai Content type Settings',
@@ -148,15 +155,6 @@ function itg_akamai_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  /* $items['itg-akamai-load-my-account'] = array(
-    'title' => 'Akamai Load My Account',
-    'description' => 'Akamai Load My Account',
-    'page callback' => 'itg_akamai_load_my_account',
-    'access arguments' => array('access content'),
-    'file' => 'includes/itg_akamai.helper.inc',
-    'type' => MENU_CALLBACK,
-    ); */
-
   return $items;
 }
 
@@ -180,7 +178,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       return TRUE;
     }
   }
-
   // First of all request should not be part of drupal CLI
   if (!drupal_is_cli()) {
     global $user;
@@ -200,7 +197,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     foreach ($paths_in as $path) {
       $paths[] = $path;
     }
-
     // It is possible to have no paths at this point if other modules have
     // altered the paths.
     if (empty($paths)) {
@@ -208,26 +204,18 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       return FALSE;
     }
     $paths = array_unique($paths);
-
     $paths = array_map('trim', $paths);
-
     // Sending for clearing cache for varnish before hitting to Varnish
     if (module_exists('varnish')) {
       if (function_exists('varnish_expire_cache')) {
         varnish_expire_cache($paths);
       }
     }
-
     global $base_url;
-
     $varnish_paths = itg_akamai_varnish_host_mapping($paths);
-
-
     $paths = itg_akamai_send_for_host_mapping($paths);
     //$paths = itg_akamai_send_for_host_mapping_for_amp($paths);  // Preparing data for AMP URLs
-
     $paths_data = $paths;
-
     if (!empty($paths)) {
       $url = implode(',', $paths);
     }
@@ -236,7 +224,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       watchdog('ITG Akamai Exception', t('URL is empty'));
       return;
     }
-
     $urls = explode(',', $url);
     if (is_array($urls)) {
       $url = '';
@@ -248,35 +235,25 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     else {
       $url = '"' . $url . '"';
     }
-
     $client = new Akamai\Open\EdgeGrid\Client(['base_uri' => AKAMAI_BASE_URI]);
-
     $client->setAuth(AKAMAI_CLIENT_TOKEN, AKAMAI_CLIENT_SECRET, AKAMAI_ACCESS_TOKEN);
-
-
     // use $client just as you would \Guzzle\Http\Client 
-
     if ($params['action'] == 'remove') {
       $data = '{ "objects" : [ ' . $url . '], "action" : "remove" }';
     }
     else {
       $data = '{ "objects" : [ ' . $url . '] }';
     }
-
     $request_success_flag = 0;
-
     try {
       $response = $client->post(AKAMAI_API_ENDPOINT, [
         'body' => $data,
         'headers' => ['Content-Type' => 'application/json']
       ]);
-
       $response_data_decoded = json_decode($response->getBody());
-
       $data_for_log = ItgAkamaiUtility::itgAkamaiGetDataForLog($paths_data, $data, $response->getBody(), $user->uid, $response_data_decoded->httpStatus, $response_data_decoded->purgeId);
       $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
       $request_success_flag = 1;
-
       // Passing / Saving akamai purging log to drupal watchdog 
       watchdog('ITG-Akamai log', 'Url have been purged successfully! Data =>' . json_encode($data_for_log));
     }
@@ -300,7 +277,6 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       }
     }
     // End code for Recaching
-
     return $request_success_flag;
   }
 }
@@ -358,18 +334,23 @@ function itg_akamai_varnish_host_mapping($paths) {
  * @param array $paths
  */
 function itg_akamai_send_for_host_mapping_for_amp($paths) {
+  // Getting AMP url patten from configuration
+  $amp_pattern = variable_get('itg_akamai_amp_url_purge_ptrn', '/amp');
+  if (isset($amp_pattern) && !empty($amp_pattern)) {  // Setting default value If not found any setting
+    $amp_pattern = '/amp';
+  }
   $path_new_array = array();
   if (is_array($paths)) {
     if (isset($paths) && !empty($paths)) {
       foreach ($paths as $paths_chunk) {
         $path_new_array[] = $paths_chunk;
-        $path_new_array[] = $paths_chunk . '?amp';
+        $path_new_array[] = $paths_chunk . $amp_pattern;
       }
     }
   }
   else {
     $path_new_array[] = $paths;
-    $path_new_array[] = $paths . '?amp';
+    $path_new_array[] = $paths . $amp_pattern;
   }
   return $path_new_array;
 }
@@ -381,9 +362,7 @@ function itg_akamai_send_for_host_mapping_for_amp($paths) {
  */
 function itg_akamai_form_node_type_form_alter(&$form, &$form_state) {
   $default_value = TRUE;
-
   if (user_access("administer itg akamai")) {
-
     $type = $form['#node_type'];
     $form['itg_akamai_setting'] = array(
       '#type' => 'fieldset',
@@ -468,10 +447,7 @@ function itg_akamai_block_view($delta) {
 function itg_akamai_page_cache_control_form() {
   $form = array();
   $nid = arg(1);
-
-
   $is_front_page = drupal_is_front_page();
-
   if ($is_front_page) {
     $path[] = drupal_get_path_alias($_GET['q']);
     $path[] = $_GET['q'];
@@ -493,7 +469,6 @@ function itg_akamai_page_cache_control_form() {
       $form['#node'] = NULL;
     }
   }
-
 
   $form['path'] = array(
     '#type' => 'hidden',
@@ -533,7 +508,6 @@ function itg_akamai_page_cache_control_form_submit($form, &$form_state) {
  * cache. Clear base node/% url as well as aliases.
  */
 function itg_akamai_node_update($node) {
-
 
   // Skipping batch for widget only
   if (function_exists('itg_workflow_stop_node_update_batch_for_widgets')) {
@@ -595,6 +569,12 @@ function itg_akamai_node_update($node) {
         itg_akamai_content_setting($node);
       }
     }
+  }
+
+  // Sending request for purging Magazine page
+  if ($node->type == 'story' && $node->status == 1 && isset($node->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
+    $pattern_magazine_url = 'magazine/' . date('d-m-Y', strtotime($node->field_story_issue_date[LANGUAGE_NONE][0]['value']));
+    itg_akamai_clear_url($pattern_magazine_url);
   }
 }
 
@@ -740,25 +720,31 @@ function akamai_max_age($age = NULL) {
  */
 function itg_akamai_exit() {
   global $theme;
-  if (!drupal_is_front_page()) {
-    if ($theme == FRONT_THEME_NAME) {
-      $max_age = akamai_max_age();
-      if (!empty($max_age)) {
-        $formated_expire_date = itg_akamai_set_expiration_date($max_age);
-        drupal_add_http_header('Edge-control', 'cache-maxage=' . $max_age . 's');
-        drupal_add_http_header('Cache-Control', 'public, max-age=' . $max_age);
-        drupal_add_http_header('Expires', $formated_expire_date);
-      }
-      else if ($max_age == 0) {
-        drupal_add_http_header('Edge-control', 'no-store');
-        drupal_add_http_header('Cache-Control', 'no-store');
-      }
-      if (!empty($_SESSION['messages']['error'])) {    
-        $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
-        $key = array_search($msg, $_SESSION['messages']['error']);
+  if (!itg_akamai_check_pattern_for_by_passing_url($_SERVER['REDIRECT_URL'])) {
+    if (!function_exists('drupal_is_front_page')) {
+      require_once DRUPAL_ROOT . '/' . variable_get('path_inc', 'includes/path.inc');
+    }
 
-        if ($key !== FALSE) {
-          unset($_SESSION['messages']['status'][$key]);     
+    if (!drupal_is_front_page()) {
+      if ($theme == FRONT_THEME_NAME) {
+        $max_age = akamai_max_age();
+        if (!empty($max_age)) {
+          $formated_expire_date = itg_akamai_set_expiration_date($max_age);
+          drupal_add_http_header('Edge-control', 'cache-maxage=' . $max_age . 's');
+          drupal_add_http_header('Cache-Control', 'public, max-age=' . $max_age);
+          drupal_add_http_header('Expires', $formated_expire_date);
+        }
+        else if ($max_age == 0) {
+          drupal_add_http_header('Edge-control', 'no-store');
+          drupal_add_http_header('Cache-Control', 'no-store');
+        }
+        if (!empty($_SESSION['messages']['error'])) {
+          $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
+          $key = array_search($msg, $_SESSION['messages']['error']);
+
+          if ($key !== FALSE) {
+            unset($_SESSION['messages']['status'][$key]);
+          }
         }
       }
     }
@@ -833,6 +819,11 @@ function itg_akamai_add_cc_button($form, &$form_state) {
       'nid' => $form_state['node']->nid,
       'type' => $form_state['node']->type
     );
+
+    if ($form_state['node']->type == 'story' && isset($form_state['node']->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !empty($form_state['node']->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
+      $data['field_story_issue_date'] = date('d-m-Y', strtotime($form_state['node']->field_story_issue_date[LANGUAGE_NONE][0]['value']));
+    }
+
     $return_data = base64_encode(json_encode(array($_GET['q'], array_reverse($qry_array))));
     $purge_url = $base_url . '/itg-akamai-cc-button-purge/' . base64_encode(json_encode($data)) . '?return_data=' . $return_data;
     $purge_akamai_cache_link = '<a  class="btn-submit" href="' . $purge_url . '">Purge Akamai Cache</a>';
@@ -1038,68 +1029,71 @@ function itg_akamai_taxonomy_term_insert($term) {
  * Implements hook_init()
  */
 function itg_akamai_init() {
+
   if (!drupal_is_cli()) {
+    if (!itg_akamai_check_pattern_for_by_passing_url(arg(0))) {
 // Adding TTL for some specified pages
-    global $theme;
-    if ($theme == FRONT_THEME_NAME) {
-      // Akamai Setting for Home Page
-      $is_front_page = drupal_is_front_page();
-      $parm = isset($_GET['q']) ? $_GET['q'] : NULL;
-      // Checking if page is Taxonomy page
-      $parms = explode('/', $parm);
-      if ($is_front_page) {   // Checking if page is front page
-        $homepage_ttl = variable_get('itg_akamai_other_hpage');
-        if (isset($homepage_ttl) && !empty($homepage_ttl)) {
-          $itg_max_age = akamai_max_age($homepage_ttl);
-          if (!empty($itg_max_age)) {
-            $formated_expire_date = itg_akamai_set_expiration_date($itg_max_age);
-            drupal_add_http_header('Edge-control', 'cache-maxage=' . $itg_max_age . 's');
-            drupal_add_http_header('Cache-Control', 'public, max-age=' . $itg_max_age);
-            drupal_add_http_header('Expires', $formated_expire_date);
+      global $theme;
+      if ($theme == FRONT_THEME_NAME) {
+        // Akamai Setting for Home Page
+        $is_front_page = drupal_is_front_page();
+        $parm = isset($_GET['q']) ? $_GET['q'] : NULL;
+        // Checking if page is Taxonomy page
+        $parms = explode('/', $parm);
+        if ($is_front_page) {   // Checking if page is front page
+          $homepage_ttl = variable_get('itg_akamai_other_hpage');
+          if (isset($homepage_ttl) && !empty($homepage_ttl)) {
+            $itg_max_age = akamai_max_age($homepage_ttl);
+            if (!empty($itg_max_age)) {
+              $formated_expire_date = itg_akamai_set_expiration_date($itg_max_age);
+              drupal_add_http_header('Edge-control', 'cache-maxage=' . $itg_max_age . 's');
+              drupal_add_http_header('Cache-Control', 'public, max-age=' . $itg_max_age);
+              drupal_add_http_header('Expires', $formated_expire_date);
+            }
           }
         }
-      }
-      else if ($parms[0] == "taxonomy" && $parms[1] == "term" && is_numeric($parms[2]) && $parms[3] == "") {
-        $max_age = get_itg_akamai_content_setting($parms[2], 'taxonomy');
-        akamai_max_age($max_age);
-      }
-      else if (($parms[0] == "magazine" && $parms[1] != "" && $parms[3] == "") || ($parms[0] == "magazine" && $parms[1] == "" && $parms[3] == "")) {
-        try {
+        else if ($parms[0] == "taxonomy" && $parms[1] == "term" && is_numeric($parms[2]) && $parms[3] == "") {
+          $max_age = get_itg_akamai_content_setting($parms[2], 'taxonomy');
+          akamai_max_age($max_age);
+        }
+        else if (($parms[0] == "magazine" && $parms[1] != "" && $parms[3] == "") || ($parms[0] == "magazine" && $parms[1] == "" && $parms[3] == "")) {
+          try {
+            $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);
+            if (isset($ttl_for_custom_url)) {
+              $max_age = $ttl_for_custom_url;
+            }
+            else {
+              $max_age = variable_get('akamai_timeout_magazine');
+            }
+            akamai_max_age($max_age);
+          }
+          catch (Exception $e) {
+            watchdog('ITG Akamai', 'Error:' . $e->getMessage());
+          }
+        }
+        // Setting TTL for Akamai including all internal pages, ie. Home, Program, Speaker, Registration and Sponser
+        // TTL will be reflected in HTTP header as Cache-Control:public, max-age=SOME_INTEGER 
+        // Also it will change the Eadge Header and Expiry as well 
+        // Checking the event and its related urls with all pattern,  and if it is found then setting TTL as desired
+        else if ($parms[0] == "event" && $parms[1] != "" && is_numeric($parms[2]) && $parms[3] != "") {
+          // Getting the entity ID.
+          $entity_id = $parms[2];
+          if (isset($entity_id) && !empty($entity_id)) {
+            // Checking where entity ID is exist or not 
+            // Passing the default parm for node entity 
+            // This will return the TTL that have been set from backend
+            $max_age = get_itg_akamai_content_setting($entity_id, ITG_AKAMAI_EVENT_BACKEND);
+            akamai_max_age($max_age);
+          }
+        }
+        else {
           $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);
           if (isset($ttl_for_custom_url)) {
-            $max_age = $ttl_for_custom_url;
+            akamai_max_age($ttl_for_custom_url);
           }
-          else {
-            $max_age = variable_get('akamai_timeout_magazine');
-          }
-          akamai_max_age($max_age);
         }
-        catch (Exception $e) {
-          watchdog('ITG Akamai', 'Error:' . $e->getMessage());
-        }
-      }
-      // Setting TTL for Akamai including all internal pages, ie. Home, Program, Speaker, Registration and Sponser
-      // TTL will be reflected in HTTP header as Cache-Control:public, max-age=SOME_INTEGER 
-      // Also it will change the Eadge Header and Expiry as well 
-      // Checking the event and its related urls with all pattern,  and if it is found then setting TTL as desired
-      else if ($parms[0] == "event" && $parms[1] != "" && is_numeric($parms[2]) && $parms[3] != "") {
-        // Getting the entity ID.
-        $entity_id = $parms[2];
-        if (isset($entity_id) && !empty($entity_id)) {
-          // Checking where entity ID is exist or not 
-          // Passing the default parm for node entity 
-          // This will return the TTL that have been set from backend
-          $max_age = get_itg_akamai_content_setting($entity_id, ITG_AKAMAI_EVENT_BACKEND);
-          akamai_max_age($max_age);
-        }
-      }
-      else {
-        $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);
-        if (isset($ttl_for_custom_url)) {
-          akamai_max_age($ttl_for_custom_url);
-        }
-      }
-    } // End of theme conditon
+      } // End of theme conditon
+    }
   }
 }
 
@@ -1138,9 +1132,7 @@ function itg_akamai_get_story_list_assc_video($video_nid = NULL) {
     $query->condition('v.field_story_associate_video_target_id', $video_nid);
     $query->condition('v.bundle', 'story');
     $query->fields('v', array('entity_id'));
-    //$query->condition('n.status', 1);
     $result = $query->execute();
-
     foreach ($result as $row) {
       $story_ids[] = 'node/' . $row->entity_id;
     }
@@ -1215,10 +1207,6 @@ function itg_akamai_getting_mapped_content_type() {
       $mapping[] = $content_type;
     }
   }
-//  if (empty($mapping)) {
-//    // Hardcoded content type
-//    $mapping = array('story', 'photogallery', 'videogallery', 'blog', 'podcast', 'breaking_news');
-//  }
   return $mapping;
 }
 
@@ -1274,13 +1262,18 @@ function itg_akamai_cc_button_purge($entity_data) {
         drupal_set_message(t('Content have been purged successfully.'));
       }
     }
-
-    //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
+    //Start code sending purge request to Akamai to purge those stories which is related to passed video id
     if ($node_data->type == 'videogallery') {
       itg_akamai_purge_story_related_to_video($node_data->nid);
     }
-    // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
-
+    // End code  sending purge request to Akamai to purge those stories which is related to passed video id
+    // Sending request for purging Magazine page
+    if ($node_data->type == 'story') {
+      if (isset($node_data->field_story_issue_date) && !empty($node_data->field_story_issue_date)) {
+        $pattern_magazine_url = 'magazine/' . $node_data->field_story_issue_date;
+        itg_akamai_clear_url($pattern_magazine_url);
+      }
+    }
     if (isset($_GET['return_data']) && !empty($_GET['return_data'])) {
       $return_data = json_decode(base64_decode($_GET['return_data']), TRUE);
       drupal_goto($return_data[0], array('query' => $return_data[1]));
@@ -1305,4 +1298,15 @@ function itg_akamai_getting_domain_without_protocal() {
   $strn = str_replace('http://', '', FRONT_URL);
   $strn = str_replace('https://', '', $strn);
   return $strn;
+}
+
+/**
+ * Checking pattern for by passing some urls 
+ * @param string $string
+ */
+function itg_akamai_check_pattern_for_by_passing_url($string) {
+  if (strpos($string, 'itg_akamai_block_refresh') !== false) {
+    return true;
+  }
+  return;
 }

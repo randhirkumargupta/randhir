@@ -246,7 +246,7 @@ $uri = base64_encode($actual_link);
                           <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                               <div class="show-embed-code-div">
                                   <div class="copy-sample-code">
-                                      <textarea readonly><iframe class="multy-video-iframe" scrolling="no" allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>
+                                      <textarea readonly><iframe class="multy-video-iframe" scrolling="no" allowfullscreen="" frameborder="0" width="648" height="500" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>
                                   </div>
                               </div>
                           </li>
@@ -264,7 +264,7 @@ $uri = base64_encode($actual_link);
                           <?php if ($user->uid > 0): ?>
                             <li><a class="def-cur-pointer video-login-akamai" title="Submit Video" href="javascript:"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                           <?php else: ?>
-                            <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+                            <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                           <?php endif; ?>
                             <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i></span></a>
 
@@ -298,7 +298,7 @@ $uri = base64_encode($actual_link);
                               <li class="show-embed-code-link"><a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i> <span><?php print t('Embed'); ?></span></a>
                                   <div class="show-embed-code-div">
                                       <div class="copy-sample-code">
-                                          <textarea readonly><iframe scrolling="no" allowfullscreen="" frameborder="0" width="648" height="480" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>    
+                                          <textarea readonly><iframe scrolling="no" allowfullscreen="" frameborder="0" width="648" height="500" src="<?php print $base_url . '/video/' . $primary_category_name . '/embed/' . $argum; ?>" /></textarea>    
                                       </div>
                                   </div>
                               </li>
@@ -316,9 +316,9 @@ $uri = base64_encode($actual_link);
                               <?php if ($user->uid > 0): ?>
                                 <li><a class="def-cur-pointer video-login-akamai" title="Submit Video" href="javascript:"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                               <?php else: ?>
-                                <li><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+                                <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                               <?php endif; ?>
-                              <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i></span></a>  
+                              <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=550&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i></span></a>  
 
                           </ul>
                       </div>
