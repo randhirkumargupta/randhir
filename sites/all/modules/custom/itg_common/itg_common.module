@@ -217,7 +217,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     'views-exposed-form-searchimage-search-publish-video-radio',
     'views-exposed-form-searchimage-search-publish-video', 
     );
-  if( in_array($form['#id'], $solr_video_video_id)) {
+  if( in_array($form['#id'], $solr_video_video_id)) { 
+      global $conf;
+      $conf['preprocess_js'] = 0;
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
@@ -256,7 +258,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   
   $solr_video_view_internal = array('views-exposed-form-searchimage-search-unpublish-internal-video' , 
       'views-exposed-form-searchimage-search-unpublish-internal-video-singal','views-exposed-form-searchimage-search-publish-internal-video-singal', 'views-exposed-form-searchimage-search-publish-internal-video');
-  if( in_array($form['#id'], $solr_video_view_internal)) {
+  if( in_array($form['#id'], $solr_video_view_internal)) { 
+    global $conf;
+     $conf['preprocess_js'] = 0;
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
