@@ -757,7 +757,24 @@ function create_node_image_style() {
   $arg = arg();
   
   if (is_numeric($arg[1])) {
-    
+    //add function by pavnish
   }
   
+}
+
+/**
+ * This function is used to create settings.
+ * 
+ * {@inheritdoc}
+ */
+function itg_global_custom_variables() {
+	$form = array();
+  
+  $form['itg_widgets_sports'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable Sports widgets on Sports page '),      
+      '#default_value' => variable_get('itg_widgets_sports'),
+  );
+  
+  return system_settings_form($form);
 }
