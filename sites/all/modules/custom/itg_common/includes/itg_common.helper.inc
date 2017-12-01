@@ -142,7 +142,6 @@ define('PARENT_SSO', variable_get('parent_sso'));
 define('FRONT_URL_VIDEO', variable_get('FRONT_URL_VIDEO'));
 define('FRONT_URL', variable_get('itg_front_url'));
 define('BACKEND_URL', variable_get('itg_backend_url'));
-define('SSO_URL', 'http://uat-sso.indiatodayonline.in');
 define('INDEX_PAGE_URL', 'node/2');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 define('taxonomy_terms_per_page_admin' , 20);

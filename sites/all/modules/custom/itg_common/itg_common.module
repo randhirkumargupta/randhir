@@ -170,6 +170,13 @@ function itg_common_menu() {
     'file' => 'includes/itg_common.inc',
   );
   
+  $items['create-node-image-style/%'] = array(
+    'page callback' => 'create_node_image_style',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.inc',
+  );
+  
   $items['hello'] = array(
     'page callback' => 'itg_get_test_result',
     'access callback' => TRUE,
