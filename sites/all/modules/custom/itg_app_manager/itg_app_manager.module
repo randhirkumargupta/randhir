@@ -1118,20 +1118,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('sso_authtoken_verification')
     );
-    $form['sso_group']['follow_anchor_pagination_cap'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Follow Anchor Pagination Cap',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('follow_anchor_pagination_cap')
-    );
-    $form['sso_group']['follow_anchor_display_count'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Follow Anchor Display Count',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('follow_anchor_display_count')
-    );
+    
     $form['sso_group']['follow_anchor_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Follow Anchor Display Custom Message',
@@ -1140,20 +1127,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('follow_anchor_display_custom_msg')
     );
 
-    $form['sso_group']['follow_author_pagination_cap'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Follow Author Pagination Cap',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('follow_author_pagination_cap')
-    );
-    $form['sso_group']['follow_author_display_count'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Follow Author Display Count',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('follow_author_display_count')
-    );
+    
     $form['sso_group']['follow_author_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Follow Author Display Custom Message',
@@ -1162,20 +1136,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('follow_author_display_custom_msg')
     );
 
-    $form['sso_group']['anchor_follow_list_pagination_cap'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Anchor Follow List Pagination Cap',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('anchor_follow_list_pagination_cap')
-    );
-    $form['sso_group']['anchor_follow_list_display_count'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Anchor Follow List Display Count',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('anchor_follow_list_display_count')
-    );
+    
     $form['sso_group']['anchor_follow_list_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Follow List Display Custom Message',
@@ -1184,20 +1145,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('anchor_follow_list_display_custom_msg')
     );
 
-    $form['sso_group']['author_follow_list_pagination_cap'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Author Follow List Pagination Cap',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('author_follow_list_pagination_cap')
-    );
-    $form['sso_group']['author_follow_list_display_count'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Author Follow List Display Count',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('author_follow_list_display_count')
-    );
+    
     $form['sso_group']['author_follow_list_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Author Follow List Display Custom Message',
@@ -1206,20 +1154,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('author_follow_list_display_custom_msg')
     );
 
-    $form['sso_group']['author_list_pagination_cap'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Author List Pagination Cap',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('author_list_pagination_cap')
-    );
-    $form['sso_group']['author_list_display_count'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Author List Display Count',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('author_list_display_count')
-    );
+   
     $form['sso_group']['author_list_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Author List Display Custom Message',
@@ -1228,20 +1163,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('author_list_display_custom_msg')
     );
 
-    $form['sso_group']['anchor_list_pagination_cap'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Anchor List Pagination Cap',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('anchor_list_pagination_cap')
-    );
-    $form['sso_group']['anchor_list_display_count'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Anchor List Display Count',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('anchor_list_display_count')
-    );
+   
     $form['sso_group']['anchor_list_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor List Display Custom Message',
@@ -1250,20 +1172,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('anchor_list_display_custom_msg')
     );
 
-    $form['sso_group']['get_the_user_follow_status_pagination_cap'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Get The User Follow Status Pagination Cap',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('get_the_user_follow_status_pagination_cap')
-    );
-    $form['sso_group']['get_the_user_follow_status_display_count'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Get The User Follow Status Display Count',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('get_the_user_follow_status_display_count')
-    );
+    
     $form['sso_group']['get_the_user_follow_status_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Get The User Follow Status Display Custom Message',
@@ -1272,20 +1181,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('get_the_user_follow_status_display_custom_msg')
     );
 
-    $form['sso_group']['follow_topic_pagination_cap'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Follow Topic Pagination Cap',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('follow_topic_pagination_cap')
-    );
-    $form['sso_group']['follow_topic_display_count'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Follow Topic Display Count',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('follow_topic_display_count')
-    );
+    
     $form['sso_group']['follow_topic_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'Follow Topic Display Custom Message',
@@ -1294,20 +1190,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('follow_topic_display_custom_msg')
     );
 
-    $form['sso_group']['user_follow_topic_list_pagination_cap'] = array(
-        '#type' => 'textfield',
-        '#title' => 'User Follow Topic List Pagination Cap',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('user_follow_topic_list_pagination_cap')
-    );
-    $form['sso_group']['user_follow_topic_list_display_count'] = array(
-        '#type' => 'textfield',
-        '#title' => 'User Follow Topic List Display Count',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('user_follow_topic_list_display_count')
-    );
+   
     $form['sso_group']['user_follow_topic_list_display_custom_msg'] = array(
         '#type' => 'textfield',
         '#title' => 'User Follow Topic List Display Custom Message',
