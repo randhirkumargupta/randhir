@@ -107,6 +107,7 @@ function generateNewsCategoryList($tid, $pageno) {
                 $tid_list[] = $value->tid;
             }
         }
+        //p($tid_list);
 // code vid=14  end
         // select node belong from current term id or child term id
 
