@@ -13,10 +13,13 @@
 function itg_personalization_edit_profile_form($form, &$form_state) {
   global $user;
   
-  if(!empty(variable_get('itg_front_url'))) {
-   $parse_scheme = parse_url(variable_get('itg_front_url'));
-   $scheme = $parse_scheme['scheme']."://";
+  if (!empty(SITE_PROTOCOL)) {
+    $scheme = SITE_PROTOCOL;
   }
+  else {
+    $scheme = 'http://';
+  }
+  
   $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   //prepare url for change mobile and email
   $edit_email_url = $edit_email_link= $edit_mobile_url = $edit_mobile_link = '';
@@ -47,7 +50,11 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     }
   }
   else {
-    $mobile = $user_detail->field_mobile_number['und'][0]['value'];
+    if(is_numeric($user_detail->name)) {
+      $mobile = $user_detail->name;
+    } else {
+      $mobile = $user_detail->field_mobile_number['und'][0]['value'];
+    }
   }
   // email setting
   if (strpos($user_detail->mail, 'nowhere.com') !== false) {
