@@ -513,8 +513,10 @@ function itg_app_manager_form_submit($form, &$form_state) {
                     $s_title = '';
                 }
             }
-            $data = array(
-                'menu_type_id' => $form_val['menu_type_id'],
+            
+            $minu = db_insert('itg_app_menu_content') 
+            ->fields(array(
+              'menu_type_id' => $form_val['menu_type_id'],
                 'menu_label_id' => $form_val['menu_label_id'],
                 'order_id' => $form_val['order_id'],
                 'menu_type' => $form_val['menu_type'],
@@ -527,8 +529,8 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 'has_subcategory' => $form_val['has_subcat'],
                 's_id' => $s_id,
                 's_title' => $s_title,
-            );
-            drupal_write_record('itg_app_menu_content', $data);
+            ))
+            ->execute();
         }
         drupal_set_message(t('Data saved successfulyy.'), 'status');
     }
