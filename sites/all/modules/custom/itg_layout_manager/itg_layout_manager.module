@@ -887,7 +887,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $query->condition('tth.tid', $arg[2]);
     $query->condition('ttd.vid', CATEGORY_MANAGMENT);
     $parent_id = $query->execute()->fetchField();
-    if ($parent_id == 0) {
+    if (TRUE || $parent_id == 0) {
       $tpl_name = get_template_name_by_section_name($arg[2]);
 
       $tid_val = $arg[2]; //section id
