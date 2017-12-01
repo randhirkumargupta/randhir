@@ -175,7 +175,17 @@ function itg_common_menu() {
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_common.inc',
-  );
+  );  
+    
+  $items['admin/settings/global-custom-variables'] = array(
+     'title' => 'Global Custom variables',
+     'description' => 'Global Custom variables settings page',
+     'page callback' => 'drupal_get_form',
+     'page arguments' => array('itg_global_custom_variables'),
+     'file' => 'includes/itg_common.inc',
+     'access arguments' => array('access itg story'),
+     'type' => MENU_NORMAL_ITEM,
+   );
   
   $items['hello'] = array(
     'page callback' => 'itg_get_test_result',
@@ -1763,3 +1773,13 @@ function itg_common_cache_clear($cache_array = array()) {
     }
   }
 }
+
+/**
+ * {@inheritdoc}
+ */
+//function display_widget_on_sport_page() {
+//  
+//  $url_list = array('ipl-venue', 'ipl-schedule', 'ipl-teams', 'ipl-stadiums');
+//  
+//  
+//}
