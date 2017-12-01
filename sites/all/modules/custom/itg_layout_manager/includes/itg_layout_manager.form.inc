@@ -399,7 +399,7 @@ function itgd_get_section_category_ajax_callback($form, &$form_state){
  * get all associate category with tpl
  * {@inheritdoc}
  */
-function get_category_of_associate_tpl($tpl_type, $section_id) {//var_dump($tpl_type, $section_id);die;
+function get_category_of_associate_tpl($tpl_type, $section_id) {
   
   $op = array("" => "-- Category --");
   $itg_query = db_select('taxonomy_term_data', 'term');
