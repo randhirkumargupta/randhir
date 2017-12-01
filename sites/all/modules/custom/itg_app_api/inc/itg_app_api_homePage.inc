@@ -63,7 +63,7 @@ function homePageJsonPackagelist_india() {
     $n_rating = array();
     $tid = 1768551;
     $term_m = taxonomy_term_load($tid);
-    $term_name_m = $term->name;
+    $term_name_m = $term_m->name;
     $node_count = "";
     $output = "";
     $data = array();
@@ -95,9 +95,11 @@ function homePageJsonPackagelist_india() {
         if ($term_tree_count) {
             foreach ($term_tree as $key => $value) {
                 $tid_list[] = $value->tid;
+                $tid_list[] = $value->tid;
             }
         }
-       
+       $tid_list = array();
+       $tid_list[] = 1768551;
         // code vid=14  end
 
         $data_news['id'] = "$tid";
