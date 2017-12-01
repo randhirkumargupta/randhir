@@ -78,7 +78,7 @@ function homePageJsonPackagelist_india() {
         $range_min = 0;
     }
     $order_by = 'ASC';
-    $type = array("story");
+    $type = array('story', 'photogallery', 'videogallery');
     $news_list_array = array();
     $photolist = array();
     $videolist = array();
