@@ -1910,8 +1910,6 @@ function itg_event_backend_highlights_block_content() {
         $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
       }
     }
-
-    $output .= $text . '</div></div>';
      if(!empty($text)) {
        $output .= $text . '</div></div>';
      }else{
