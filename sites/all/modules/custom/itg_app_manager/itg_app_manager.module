@@ -2837,7 +2837,12 @@ function itg_app_daily_capsule_manager_form_submit($form, &$form_state) {
     }
     drupal_set_message(t('Data saved successfully.'), 'status');
 }
-
+/**
+ * helper function to upload img
+ * @param array $form
+ * @param array $form_state
+ * @return type
+ */
 function uploadIconImgdailyCapsule($form, $form_state, $key){
     $validators = array();
     if ($file = file_save_upload($key, $validators, "public://uploadiconimgdailycapsule", FILE_EXISTS_REPLACE)) {
