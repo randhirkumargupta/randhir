@@ -297,13 +297,10 @@ function itg_event_get_content_title_autocomplete($title) {
       $query->isNotNull('step_complete.field_step_completion_value');
     }
     $query->range(0, 20);
-
     $result = $query->execute();
-
     while ($record = $result->fetchAssoc()) {
       $options[$record['title']] = $record['title'];
     }
-
     drupal_json_output($options);
   }
 }

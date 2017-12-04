@@ -1100,5 +1100,5 @@ class ItgStoryListMigration extends XMLMigration {
       $mail = drupal_mail('itg_dbmigrate', 'send_mail_failed_content', mail_user_send(), language_default(), $params, 'no-reply@kelltontech.com', TRUE);
     }
   }
-
+  
 }
