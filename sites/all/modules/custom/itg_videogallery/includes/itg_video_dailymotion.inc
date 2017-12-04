@@ -401,7 +401,6 @@ function itg_videogallery_publish_node_after_video_ready_by_dm() {
           }
         }
         if ($node->workbench_moderation['current']->state == 'draft') {
-          //$node->status_cron = 'cron_run';
           $node->revision = 0;
         }
 
@@ -450,7 +449,6 @@ function itg_videogallery_remove_video_with_child() {
         }
       }
       if ($data_delete->property == VIDEO_PROPERTY) {
-// $is_video_exist = itg_videogallery_get_video_info_video_id($data_delete->solr_video_id);
         $query = db_update('dailymotion_response_details');
         $query->fields(array('dailymotion_published' => 0, 'is_replace' => 1));
         $query->condition('video_id', $data_delete->solr_video_id, ' = ');
@@ -714,69 +712,12 @@ function itg_videogallery_video_bitrate() {
   $query->condition('upload_time', $totime, '>=');
   $result = $query->execute()->fetchall();
   $bitrates_info = itg_videogallery_url_with_bitates();
-
   foreach ($result as $ke => $vid) {
     itg_videogallery_update_embedcode_url($vid->video_id);
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://www.dailymotion.com/json/video/" . $vid->video_id . "?fields=stream_h264_hd1080_url,stream_h264_hd_url,stream_h264_hq_url,stream_h264_ld_url,stream_h264_url");
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    $content = curl_exec($ch);
-    $decode_json = json_decode($content);
-    curl_close($ch);
-    if (!empty($content)) {
-      foreach ($decode_json as $keys => $json_url) {
-        if ($json_url != "") {
-          $query = db_select('itg_video_bitrates_data', 'ivbd');
-          $query->fields('ivbd');
-          $query->condition('video_id', $vid->video_id);
-          $query->condition('bitates_field', $keys);
-          $result = $query->execute()->fetchall();
-          if (!empty($result)) {
-            if ($result[0]->is_download != 1) {
-              db_update('itg_video_bitrates_data')
-                  ->fields(array(
-                    'video_id' => $vid->video_id,
-                    'bitate_url' => $json_url,
-                    'duration' => $vid->video_duration,
-                    'framesize' => $bitrates_info['framesize'][$keys],
-                    'bitrate' => $bitrates_info['bitrate'][$keys],
-                    'video_name' => $vid->name,
-                    'bitates_field' => $keys,
-                    'is_download' => 0,
-                  ))->condition('id', $result[0]->id)
-                  ->execute();
-            }
-          }
-          else {
-            db_insert('itg_video_bitrates_data')
-                ->fields(array(
-                  'video_id' => $vid->video_id,
-                  'bitate_url' => $json_url,
-                  'framesize' => $bitrates_info['framesize'][$keys],
-                  'bitrate' => $bitrates_info['bitrate'][$keys],
-                  'bitates_field' => $keys,
-                  'duration' => $vid->video_duration,
-                  'video_name' => $vid->name,
-                  'is_download' => 0,
-                ))
-                ->execute();
-          }
-        }
-      }
-    }
-
-
-    curl_setopt($ch, CURLOPT_URL, "http://www.dailymotion.com/json/video/" . $vid->video_id . "?fields=stream_h264_l1_url,stream_h264_l2_url,stream_h264_qhd_url,stream_h264_uhd_url");
-    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9');
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    $content = curl_exec($ch);
-
-    $decode_json = json_decode($content);
-    curl_close($ch);
-    if (!empty($content)) {
+    $decode_json = $api->get(
+        '/video/' . $vid->video_id, array('fields' => array('stream_h264_hd1080_url','stream_h264_hd_url','stream_h264_hq_url','stream_h264_ld_url','stream_h264_url','stream_h264_l1_url','stream_h264_l2_url','stream_h264_qhd_url','stream_h264_uhd_url'))
+    );
+    if (!empty($decode_json)) {
       foreach ($decode_json as $keys => $json_url) {
         if ($json_url != "") {
           $query = db_select('itg_video_bitrates_data', 'ivbd');
@@ -819,7 +760,6 @@ function itg_videogallery_video_bitrate() {
     }
   }
 }
-
 /**
  * Implement itg_videogallery_getsolr_data_for_internal_video
  * @param string $video_id
@@ -866,7 +806,6 @@ function itg_videogallery_getsolr_data_unpublish() {
     if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
     }
-//  $all_video_ids = array();
     $hashvalue = implode(' OR ', array_keys($hash));
     $str = 'hash:(' . $hashvalue . ')';
     $str_pub = 'sm_field_video_used:(0)';
@@ -874,7 +813,6 @@ function itg_videogallery_getsolr_data_unpublish() {
     $query = apachesolr_drupal_query("custom");
     $query->addParam('rows', '100000'); // How many rows of result to display default it is 10.
     $query->addParam('qf', 'label'); // Only search in title
-    //$query->addParam('qf', 'label');
 //The bundle which you want to search
     $query->replaceParam("fq", '(' . $str . ')');
     $query->addFilter("bundle", "itg_solr_video");
