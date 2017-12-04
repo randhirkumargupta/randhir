@@ -2480,6 +2480,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
     drupal_add_css(drupal_get_path('module', 'itg_app_manager') . '/css/itg_app_manager.css');
     global $base_url;
     $form = array();
+    
     $hr = array(); // array for hour options
     $min = array(); // array for minute options
     for ($i = 1; $i <= 23; $i++) {
@@ -2488,6 +2489,9 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
     for ($i = 1; $i <= 59; $i++) {
         $min[$i] = $i;
     }
+    $form['#attributes'] = array(
+        'enctype' => 'multipart/form-data'
+    );
     $form['frequency_group'] = array(
         '#type' => 'fieldset',
         '#title' => t('Frequency'),
@@ -2803,10 +2807,16 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
  */
 
 function itg_app_daily_capsule_manager_form_submit($form, &$form_state) {
+   
     form_state_values_clean($form_state);
     foreach ($form_state['values'] as $key => $val) {
         $key_val = "";
         $key_val = fetchMasterConfigDataCount($key);
+        // call file uploading function
+        if (strpos($key,'icon') !== false) {            
+            $val = uploadIconImgdailyCapsule($form, $form_state, $key);            
+        }
+        // save week days serialize data
         if($key == 'week_days'){
             $val = serialize($form_state['values']['week_days']);
         }
@@ -2826,4 +2836,16 @@ function itg_app_daily_capsule_manager_form_submit($form, &$form_state) {
         }
     }
     drupal_set_message(t('Data saved successfully.'), 'status');
+}
+
+function uploadIconImgdailyCapsule($form, $form_state, $key){
+    $validators = array();
+    if ($file = file_save_upload($key, $validators, "public://uploadiconimgdailycapsule", FILE_EXISTS_REPLACE)) {
+    $form_state['values'][$key] = $file->destination;
+    
+    return $form_state['values'][$key];
+  }
+  else {
+    form_set_error($key, t('Unable to copy upload file to !dest', array('!dest' => $destination)));
+  }
 }
