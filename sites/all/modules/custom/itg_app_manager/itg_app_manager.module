@@ -514,23 +514,7 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 }
             }
             
-            /*$minu = db_insert('itg_app_menu_content') 
-            ->fields(array(
-              'menu_type_id' => $form_val['menu_type_id'],
-                'menu_label_id' => $form_val['menu_label_id'],
-                'order_id' => $form_val['order_id'],
-                'menu_type' => $form_val['menu_type'],
-                'section_id' => $section_id,
-                'title' => $title,
-                'type' => $form_val['type'],
-                'webview_url' => $form_val['webview_url'],
-                'icon_url' => $form_val['icon_url'],
-                'is_new' => $form_val['is_new'],
-                'has_subcategory' => $form_val['has_subcat'],
-                's_id' => $s_id,
-                's_title' => $s_title,
-            ))
-            ->execute();*/
+            
             $data = array(
                 'menu_type_id' => $form_val['menu_type_id'],
                 'menu_label_id' => $form_val['menu_label_id'],
@@ -547,8 +531,15 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 's_title' => $s_title,
             );
             drupal_write_record('itg_app_menu_content', $data);
+            $last_id = db_query('SELECT MAX(id) FROM {itg_app_menu_content}')->fetchField();
+            $icon_url = $form_val['icon_url'];
+            db_update('itg_app_menu_content')
+                    ->fields(array(
+                        'icon_url' => $icon_url,
+                    ))->condition('id', $last_id, '=')->execute();
+            
         }
-        drupal_set_message(t('Data saved successfulyy.'), 'status');
+        drupal_set_message(t('Data saved successfully.'), 'status');
     }
 }
 
