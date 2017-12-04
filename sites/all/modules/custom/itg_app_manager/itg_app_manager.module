@@ -1225,8 +1225,8 @@ function itg_app_master_config_internal_form_submit($form, &$form_state) {
     form_state_values_clean($form_state);
     foreach ($form_state['values'] as $key => $val) {
         $key_val = "";
-        $key_val = fetchMasterConfigData($key);
-        if ($key_val != "") {
+        $key_val = fetchMasterConfigDataCount($key);
+        if ($key_val > 0) {
             // uapdete query
             db_update('itg_app_master_config_internal')
                     ->fields(array(
@@ -1701,6 +1701,17 @@ function fetchMasterConfigData($key) {
         $key_val = $results[0]->config_val;
     }
     return $key_val;
+}
+function fetchMasterConfigDataCount($key) {
+    $count = 0;
+    if ($key) {
+        $query = db_select('itg_app_master_config_internal', 'imi');
+        $query->fields('imi');
+        $query->condition('imi.config_key', $key, '=');
+        $results = $query->execute()->fetchAll();
+        $count = count($results);
+    }
+    return $count;
 }
 
 /**
