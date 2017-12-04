@@ -286,7 +286,6 @@ function itg_event_get_content_title_autocomplete($title) {
       $query->condition('close_date.field_event_close_date_value', $current_date_time, '>=');
       $query->condition('start_date.field_event_start_date_value', $current_date_time, '<=');
       $query->isNotNull('step_complete.field_step_completion_value');
-      //$query->condition('n.status', 1);
     } elseif($event_type == 'draft') {
       $query->leftjoin('field_data_field_step_completion', 'step_complete', 'step_complete.entity_id = n.nid');
       $query->condition('step_complete.field_step_completion_value', 0, '=');   
@@ -296,16 +295,12 @@ function itg_event_get_content_title_autocomplete($title) {
       $query->condition('step_complete.field_step_completion_value', 2, '=');
       $query->condition('close_date.field_event_close_date_value', $current_date_time, '<=');
       $query->isNotNull('step_complete.field_step_completion_value');
-      //$query->condition('n.status', 1);
     }
     $query->range(0, 20);
-
     $result = $query->execute();
-
     while ($record = $result->fetchAssoc()) {
       $options[$record['title']] = $record['title'];
     }
-
     drupal_json_output($options);
   }
 }
