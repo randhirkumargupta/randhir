@@ -248,8 +248,10 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                 <div class="itg-widget">
                                     <?php
                                     if ($theme != 'seven') {
+										
                                       if ($theme == FRONT_THEME_NAME) {
                                         $section = arg(2);
+                                        $section_org = $section;
                                         $section_tid = get_category_parent_one_level($section);
                                         if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
 											$section = $section_tid[0]->parent;
@@ -262,6 +264,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 										}
                                       }
                                     }
+                                    $state_tid = $graphdata[0]->field_election_state_tid;
                                     $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
                                     $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
                                     if (!empty($terms)) {
@@ -299,7 +302,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   $colorurl = "";
 
                                                   foreach ($terms as $values) {
-                                                    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
+                                                    if ($values->tid == $state_tid) {
                                                       if ($countf == 0) {
                                                         $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
                                                         $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
