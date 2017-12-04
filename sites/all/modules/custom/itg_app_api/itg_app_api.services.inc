@@ -2689,16 +2689,16 @@ function itg_rapid_api_newslist($token) {
     $redis_key = "itgd_rapid_api_newslist_" . $suffix;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
         // call function from return data..
         $realtime = 1;
         $jsondata_realtime = $jsondata = newscategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
         $ttl = RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+    //}
     if ($realtime) {
         return $jsondata_realtime;
     } else {

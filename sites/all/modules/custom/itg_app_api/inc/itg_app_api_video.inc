@@ -17,13 +17,20 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $updated_datetime = "";
     $success_status_mess = fetchMasterConfigData('video_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+    $display_count = 10;
+    $pagination_cap = 50;
+
+
     $dis_count = fetchMasterConfigData('video_display_count');
-    $display_count = isset($dis_count) ? $dis_count : "10";
-    
+    if(!empty($dis_count) && is_numeric($dis_count)){
+      $display_count = $dis_count;
+    }
+
     $pag_cap = fetchMasterConfigData('video_pagination_cap');
-    $pagination_cap = isset($pag_cap) ? $pag_cap : "50";
-    
+    if(!empty($pag_cap) && is_numeric($pag_cap)){
+      $pagination_cap = $pag_cap;
+    }
+
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -73,10 +80,12 @@ function generateVideoCategoryList($tid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    //$range_max = 10;
+    $range_max = 10;
     $dis_count = fetchMasterConfigData('video_display_count');
-    $range_max = isset($dis_count) ? $dis_count : 10;
-    
+    if(!empty($dis_count) && is_numeric($dis_count)){
+     $range_max = $dis_count;
+   }
+
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
     } else {
@@ -162,7 +171,7 @@ function generateVideoCategoryList($tid, $pageno) {
         }
         $d1 = date('Y-m-d', strtotime("-90 days"));
         $d2 = date(strtotime($d1));
-        $query->condition('n.created', $d2, '>=');
+        //$query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
@@ -301,13 +310,19 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $updated_datetime = "";
     $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+    $display_count = 10;
+    $pagination_cap = 50;
+
     $dis_count = fetchMasterConfigData('anchor_program_display_count');
-    $display_count = isset($dis_count) ? $dis_count : "10";
-    
+    if(!empty($dis_count) && is_numeric($dis_count)){
+      $display_count = $dis_count;
+    }
+
     $pag_cap = fetchMasterConfigData('anchor_program_pagination_cap');
-    $pagination_cap = isset($pag_cap) ? $pag_cap : "50";
-    
+    if(!empty($pag_cap) && is_numeric($pag_cap)){
+      $pagination_cap = $pag_cap;
+    }
+
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -358,10 +373,12 @@ function generateProgramCategoryList($tid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    //$range_max = 10;
+    $range_max = 10;
     $dis_count = fetchMasterConfigData('anchor_program_display_count');
-    $range_max = isset($dis_count) ? $dis_count : 10;
-    
+    if(!empty($dis_count) && is_numeric($dis_count)){
+      $range_max = $dis_count;
+    }
+
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$pageno == 0) {
@@ -573,10 +590,10 @@ function programCategoryListlPageRerourceValue($token) {
     $updated_datetime = "";
     $conf_array = tidConfig();
     $Program_section_list = $conf_array['program_sec_tid'];
-    
+
     $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
 
     // list array building
     $data = generateProgramSectionList($Program_section_list);
@@ -795,7 +812,7 @@ function generateProgramDetail($nid) {
     $photo_list_array = array();
     $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     $data = array();
     if ($nid) {
         // node feed tag

@@ -10,6 +10,7 @@
  * @return array
  */
 function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
+
     // variable decalartion
     $output_array = array();
     $data_array = array();
@@ -57,6 +58,7 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['news_pagination_cap'] = "$pagination_cap";
     $data_array['updated_datetime'] = "$data_up_time";
 
+
     $data_array['news'] = $data['data'];
     $output_array['data'] = $data_array;
 
@@ -77,10 +79,11 @@ function generateNewsCategoryList($tid, $pageno) {
     $tid_list = array();
     $tid_list[] = $tid;
     $listcount = 0;
-    //$range_max = 10;
+    $range_max = 10;
     $dis_count = fetchMasterConfigData('news_display_count');
-    $range_max = isset($dis_count) ? $dis_count : 10;
-    
+    if(!empty($dis_count) && is_numeric($dis_count)){
+      $range_max = $dis_count;
+    }
     //$photolist = array();
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
@@ -107,6 +110,7 @@ function generateNewsCategoryList($tid, $pageno) {
                 $tid_list[] = $value->tid;
             }
         }
+        //p($tid_list);
 // code vid=14  end
         // select node belong from current term id or child term id
 
@@ -155,9 +159,8 @@ function generateNewsCategoryList($tid, $pageno) {
         }
         $d1=date('Y-m-d', strtotime("-90 days"));
         $d2=date(strtotime($d1));
-        $query->condition('n.created', $d2, '>=');
+        //$query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
