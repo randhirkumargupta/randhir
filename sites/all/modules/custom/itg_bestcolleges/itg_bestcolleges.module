@@ -175,6 +175,7 @@ function bestcollege_migrate_video() {
       }
     }
   }
+  itg_widget_delete_old_data_by_limit($widget_name);
   return 'done';
 }
 
@@ -904,9 +905,11 @@ function itg_bestcolleges_views_query_alter(&$view, &$query) {
         if (is_object($related_result['image_slider']) && count($related_result['image_slider']) > 0) {
           $story_data = $related_result['image_slider']->{$year};
         }
-        if ($view->query->where[0]['conditions'][0]['operator'] = 'IN') {
-          $view->query->where[0]['conditions'][0]['field'] = 'node.nid';
-          $view->query->where[0]['conditions'][0]['value'] = $story_data;
+        if(is_array($story_data) && count($story_data) > 0) {
+          if ($view->query->where[0]['conditions'][0]['operator'] = 'IN') {
+            $view->query->where[0]['conditions'][0]['field'] = 'node.nid';
+            $view->query->where[0]['conditions'][0]['value'] = $story_data;
+          }
         }
       }
     }
