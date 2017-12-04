@@ -2497,7 +2497,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
     $form['frequency_group']['week_days'] = array(
         '#type' => 'checkboxes',
         '#options' => array(1 => 'Sunday', 2 => 'Monday', 3 => 'Tuesday', 4 => 'Wednesday', 5 => 'Thursday', 6 => 'Friday', 7 => 'Saturday'),
-            //'#default_value' => fetchMasterConfigData('horizontal_menu_config_options'),
+        '#default_value' => unserialize(fetchMasterConfigData('week_days'))
     );
     $form['frequency_group']['start_time'] = array(
         '#markup' => 'Start time',
@@ -2506,11 +2506,13 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
     $form['frequency_group']['start_time_hr'] = array(
         '#type' => 'select',
         '#options' => $hr,
+        '#default_value' => fetchMasterConfigData('start_time_hr')
     );
     $form['frequency_group']['start_time_min'] = array(
         '#type' => 'select',
         '#options' => $min,
         '#suffix' => '</div>',
+        '#default_value' => fetchMasterConfigData('start_time_min')
     );
     $form['frequency_group']['end_time'] = array(
         '#markup' => 'End time',
@@ -2519,11 +2521,13 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
     $form['frequency_group']['end_time_hr'] = array(
         '#type' => 'select',
         '#options' => $hr,
+        '#default_value' => fetchMasterConfigData('end_time_hr')
     );
     $form['frequency_group']['end_time_min'] = array(
         '#type' => 'select',
         '#options' => $min,
         '#suffix' => '</div>',
+        '#default_value' => fetchMasterConfigData('end_time_min')
     );
     $form['frequency_group']['morning_messages'] = array(
         '#type' => 'textfield',
@@ -2531,6 +2535,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'Morning Messages'),
+        '#default_value' => fetchMasterConfigData('morning_messages')
     );
     $form['frequency_group']['evening_messages'] = array(
         '#type' => 'textfield',
@@ -2538,6 +2543,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'Evening Messages'),
+        '#default_value' => fetchMasterConfigData('evening_messages')
     );
 
     $form['score_card_group'] = array(
@@ -2561,6 +2567,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'Display Name'),
+        '#default_value' => fetchMasterConfigData('daily_score_card_messages')
     );
     $form['score_card_group']['daily_score_card_url'] = array(
         '#type' => 'textfield',
@@ -2568,10 +2575,12 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'URL'),
+        '#default_value' => fetchMasterConfigData('daily_score_card_url')
     );
     $form['score_card_group']['daily_score_card_type'] = array(
         '#type' => 'select',
         '#options' => array('1' => 'Feed Type'),
+        '#default_value' => fetchMasterConfigData('daily_score_card_type')
     );
     $form['top_stories_group'] = array(
         '#type' => 'fieldset',
@@ -2582,6 +2591,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
     $form['top_stories_group']['daily_top_stories_group_icon'] = array(
         '#type' => 'file',
         '#title' => t('Upload Icon'),
+        
     );
     $form['top_stories_group']['daily_top_stories_group_config_options'] = array(
         '#type' => 'radios',
@@ -2594,6 +2604,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'Display Name'),
+        '#default_value' => fetchMasterConfigData('daily_top_stories_messages')
     );
     $form['top_stories_group']['daily_top_stories_url'] = array(
         '#type' => 'textfield',
@@ -2601,10 +2612,12 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'URL'),
+        '#default_value' => fetchMasterConfigData('daily_top_stories_url')
     );
     $form['top_stories_group']['daily_top_stories_type'] = array(
         '#type' => 'select',
         '#options' => array('1' => 'Feed Type'),
+        '#default_value' => fetchMasterConfigData('daily_top_stories_type')
     );
     $form['news_wrap_group'] = array(
         '#type' => 'fieldset',
@@ -2620,6 +2633,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#type' => 'radios',
         '#options' => array(0 => 'In Active', 1 => 'Active'),
         '#default_value' => fetchMasterConfigData('daily_news_wrap_group_config_options'),
+        
     );
     $form['news_wrap_group']['daily_news_wrap_messages'] = array(
         '#type' => 'textfield',
@@ -2627,6 +2641,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'Display Name'),
+        '#default_value' => fetchMasterConfigData('daily_news_wrap_messages')
     );
     $form['news_wrap_group']['daily_news_wrap_url'] = array(
         '#type' => 'textfield',
@@ -2634,10 +2649,12 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'URL'),
+        '#default_value' => fetchMasterConfigData('daily_news_wrap_url')
     );
     $form['news_wrap_group']['daily_news_wrap_type'] = array(
         '#type' => 'select',
         '#options' => array('1' => 'Feed Type'),
+        '#default_value' => fetchMasterConfigData('daily_news_wrap_type')
     );
     $form['breaking_news_group'] = array(
         '#type' => 'fieldset',
@@ -2653,6 +2670,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#type' => 'radios',
         '#options' => array(0 => 'In Active', 1 => 'Active'),
         '#default_value' => fetchMasterConfigData('daily_breaking_news_group_config_options'),
+        
     );
     $form['breaking_news_group']['daily_breaking_news_messages'] = array(
         '#type' => 'textfield',
@@ -2660,6 +2678,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'Display Name'),
+        '#default_value' => fetchMasterConfigData('daily_breaking_news_messages')
     );
     $form['breaking_news_group']['daily_breaking_news_url'] = array(
         '#type' => 'textfield',
@@ -2667,10 +2686,12 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'URL'),
+        '#default_value' => fetchMasterConfigData('daily_breaking_news_url')
     );
     $form['breaking_news_group']['daily_breaking_news_type'] = array(
         '#type' => 'select',
         '#options' => array('1' => 'Feed Type'),
+        '#default_value' => fetchMasterConfigData('daily_breaking_news_type')
     );
     $form['big_stories_group'] = array(
         '#type' => 'fieldset',
@@ -2681,11 +2702,13 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
     $form['big_stories_group']['daily_big_stories_group_icon'] = array(
         '#type' => 'file',
         '#title' => t('Upload Icon'),
+        
     );
     $form['big_stories_group']['daily_big_stories_group_config_options'] = array(
         '#type' => 'radios',
         '#options' => array(0 => 'In Active', 1 => 'Active'),
         '#default_value' => fetchMasterConfigData('daily_big_stories_group_config_options'),
+        
     );
     $form['big_stories_group']['daily_big_stories_messages'] = array(
         '#type' => 'textfield',
@@ -2693,6 +2716,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'Display Name'),
+        '#default_value' => fetchMasterConfigData('daily_big_stories_messages')
     );
     $form['big_stories_group']['daily_big_stories_url'] = array(
         '#type' => 'textfield',
@@ -2700,10 +2724,12 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'URL'),
+        '#default_value' => fetchMasterConfigData('daily_big_stories_url')
     );
     $form['big_stories_group']['daily_big_stories_type'] = array(
         '#type' => 'select',
         '#options' => array('1' => 'Feed Type'),
+        '#default_value' => fetchMasterConfigData('daily_big_stories_type')
     );
     $form['fixed_widget_group'] = array(
         '#type' => 'fieldset',
@@ -2719,11 +2745,13 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'Throught of the day'),
         '#prefix' => '<div class="fixed-widget-whole-day">',
+        '#default_value' => fetchMasterConfigData('fixed_widget_whole_day')
     );
     $form['fixed_widget_group']['fixed_widget_whole_day_select'] = array(
         '#type' => 'select',
         '#options' => array(1 => 'ComboBox'),
         '#suffix' => '</div>',
+        '#default_value' => fetchMasterConfigData('fixed_widget_whole_day_select')
     );
     $form['fixed_widget_group']['fixed_widget_missed'] = array(
         '#type' => 'textfield',
@@ -2732,23 +2760,27 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#maxlength' => 255,
         '#attributes' => array('placeholder' => 'Missed the manager'),
         '#prefix' => '<div class="fixed-widget-missed">',
+        '#default_value' => fetchMasterConfigData('fixed_widget_missed')
     );
     $form['fixed_widget_group']['fixed_widget_missed_select'] = array(
         '#type' => 'select',
         '#options' => array(1 => 'ComboBox'),
         '#suffix' => '</div>',
+        '#default_value' => fetchMasterConfigData('fixed_widget_missed_select')
     );
     $form['fixed_widget_group']['fixed_widget_whole_weather'] = array(
         '#type' => 'select',
         '#title' => 'Weather',
         '#options' => array(1 => 'ComboBox'),
         '#prefix' => '<div class="fixed-widget-whole-weather">',
+        '#default_value' => fetchMasterConfigData('fixed_widget_whole_weather')
     );
     $form['fixed_widget_group']['fixed_widget_whole_temprature'] = array(
             '#type' => 'select',
             '#title' => 'Temprature',
             '#options' => array(1 => 'ComboBox'),
             '#suffix' => '</div>',
+        '#default_value' => fetchMasterConfigData('fixed_widget_whole_temprature')
         );
     $form['active_doses_group'] = array(
         '#type' => 'fieldset',
@@ -2769,6 +2801,29 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
  * @param array $form
  * @param array $form_state
  */
+
 function itg_app_daily_capsule_manager_form_submit($form, &$form_state) {
-    p($form_state);
+    form_state_values_clean($form_state);
+    foreach ($form_state['values'] as $key => $val) {
+        $key_val = "";
+        $key_val = fetchMasterConfigDataCount($key);
+        if($key == 'week_days'){
+            $val = serialize($form_state['values']['week_days']);
+        }
+        if ($key_val > 0) {
+            // uapdete query
+            db_update('itg_app_master_config_internal')
+                    ->fields(array(
+                        'config_val' => $val,
+                    ))->condition('config_key', $key, '=')->execute();
+        } else {
+            // insert query
+            $data = array(
+                'config_key' => $key,
+                'config_val' => $val,
+            );
+            drupal_write_record('itg_app_master_config_internal', $data);
+        }
+    }
+    drupal_set_message(t('Data saved successfully.'), 'status');
 }
