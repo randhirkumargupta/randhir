@@ -2590,15 +2590,15 @@ function itg_rapid_api_photolist($token) {
     $redis_key = "itgd_rapid_api_photolist_" . $suffix;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
         // call function from return data..
         $jsondata = photocategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+    //}
 
     $jsondata = json_decode($jsondata, true);
     return $jsondata;
@@ -2654,15 +2654,15 @@ function itg_rapid_api_programlist($token) {
     $redis_key = "itgd_rapid_api_programlist_" . $suffix;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
         // call function from return data..
         $jsondata = programcategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+    //}
 
     $jsondata = json_decode($jsondata, true);
     return $jsondata;
@@ -2880,14 +2880,14 @@ function itg_rapid_api_program_category_list($token) {
     $redis_key = "itg_rapid_api_program_category_list";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
         $jsondata = programCategoryListlPageRerourceValue();
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+   // }
 
     $obj = json_decode($jsondata, true);
     $return_obj = $obj;
@@ -3105,15 +3105,15 @@ function itg_rapid_api_storydetail($token) {
     $redis_key = "itg_rapid_api_storydetail" . $suffix;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
         // call function from return data..
         $jsondata = StoryDetailPageRerourceValue($id);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+    //}
 
     $jsondata = json_decode($jsondata, false);
     return $jsondata;
@@ -6203,15 +6203,15 @@ function itg_rapid_api_videodetail($token) {
     $redis_key = "itg_rapid_api_videodetail_" . $suffix;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
         // call function from return data..
         $jsondata = generateVideoDetail($id);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+    //}
     $jsondata = json_decode($jsondata, true);
     return $jsondata;
 }

@@ -308,17 +308,17 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
     $display_count = 10;
     $pagination_cap = 50;
 
-    $dis_count = fetchMasterConfigData('anchor_program_display_count');
+    $dis_count = fetchMasterConfigData('program_display_count');
     if(!empty($dis_count) && is_numeric($dis_count)){
       $display_count = $dis_count;
     }
 
-    $pag_cap = fetchMasterConfigData('anchor_program_pagination_cap');
+    $pag_cap = fetchMasterConfigData('program_pagination_cap');
     if(!empty($pag_cap) && is_numeric($pag_cap)){
       $pagination_cap = $pag_cap;
     }
@@ -463,7 +463,7 @@ function generateProgramCategoryList($tid, $pageno) {
         }
         $d1 = date('Y-m-d', strtotime("-90 days"));
         $d2 = date(strtotime($d1));
-        $query->condition('n.created', $d2, '>=');
+        //$query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
