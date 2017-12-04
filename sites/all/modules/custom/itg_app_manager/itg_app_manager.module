@@ -300,7 +300,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             '#size' => 25,
             '#maxlength' => 255,
         );
-        $form['container'][$i]['icon_url'] = array(
+       $form['container'][$i]['icon_url'] = array(
             '#type' => 'textfield',
             '#title' => '',
             '#size' => 25,
