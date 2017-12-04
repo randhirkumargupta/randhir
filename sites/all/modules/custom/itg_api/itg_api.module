@@ -367,14 +367,13 @@ function itg_api_path_insert($node) {
         $node_sef = _remove_slash_from_string($node->title);
       }
     }
-      $pathdata = get_path_from_category($getsection);
-      // Add static value for photo story.
-      $pathdata .= '/story';
-      // Add node title.
-      $pathdata .= '/' . trim($node_sef);
-      
-      // Prepare SEO friendly node url
-      $newpath = itg_common_custompath_insert_val($pathdata);
+    $pathdata = get_path_from_category($getsection);
+    // Add static value for photo story.
+    $pathdata .= '/story';
+    // Add node title.
+    $pathdata .= '/' . trim($node_sef);
+    // Prepare SEO friendly node url
+    $newpath = itg_common_custompath_insert_val($pathdata);
     return $newpath;
   }
 }
