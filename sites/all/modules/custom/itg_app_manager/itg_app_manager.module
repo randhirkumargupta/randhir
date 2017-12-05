@@ -2865,7 +2865,7 @@ function uploadIconImgdailyCapsule($form, $form_state, $key){
  */
 function getMenuTypeLabel($m_id, $label){
     if($label ==0){
-        $menu_name = "label";
+        $menu_name = "";
         if($m_id == 0){
             $menu_name = "Static";
         }
