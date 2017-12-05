@@ -5,6 +5,15 @@
  * The ITG App Management Module.
  *
  */
+drupal_add_css(
+        
+        
+        '.fieldset-legend {color: red;}'
+        
+        
+        
+        
+        , array('type' => 'inline'));
 // Load the hirerical select common file
 module_load_include('inc', 'hierarchical_select', 'includes/common');
 
