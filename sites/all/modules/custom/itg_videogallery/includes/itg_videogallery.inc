@@ -264,11 +264,6 @@ function itg_videogallery_dfp_tags_setting_form_submit($form, &$form_state) {
  * @param array $form_state
  */
 function itg_videogallery_dfp_tags_list() {
-
-//  $form['fieldset'] = array(
-//    '#type' => 'fieldset',
-//    '#title' => 'DFP Tags List',
-//  );
  $form['fieldset'] = array(
     '#markup' => l(t('Add'), '/itg-dfp-tags-setting', array('attributes' => array('class' => 'btn-submit'))),
   );
@@ -299,9 +294,7 @@ function itg_videogallery_dfp_tags_list_data() {
 
   $query = db_select('itg_dfp_tags_setting', 'idts');
   $query->fields('idts');
-
   $pagelimit = 20;
-//print strtr((string) $query, $query->arguments());die;
   $query = $query->extend('PagerDefault')->limit($pagelimit);
   $query->orderBy('idts.id', 'DESC');
   $result = $query->execute();
@@ -322,7 +315,6 @@ function itg_videogallery_dfp_tags_list_data() {
   }
   $total = count($rows);
   $html .= theme('table', array('header' => $header, 'rows' => $rows));
-  //$html .= theme('pager');
   $html .= theme('pager');
   return $html;
 }
@@ -393,7 +385,6 @@ function itg_videogallery_move_ftp_videos() {
   $ftp_video_folder = variable_get('ftp_upload_video_folder', '');
   $ftp_move_archive = variable_get('ftp_move_archive', '');
   foreach ($result as $ke => $vid) {
-
     if ($vid->type == 'ftp') {
       $datefolder = date('Y-m', $vid->upload_time);
       $file_name = '/' . FOLDER_FTP_ROOT . '/' . $ftp_video_folder . '/' . $vid->name;
@@ -405,7 +396,6 @@ function itg_videogallery_move_ftp_videos() {
         ftp_mkdir($connection_id, $file_name_to_folder);
       }
       if (ftp_rename($connection_id, $file_name, $file_name_to_folder_file)) {
-//ftp_delete($connection_id, $file_name);
       }
     }
 

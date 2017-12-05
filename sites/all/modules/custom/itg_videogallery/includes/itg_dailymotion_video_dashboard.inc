@@ -265,7 +265,6 @@ function daily_motion_video_dashboard_rows() {
   }
   $total = count($rows);
   $html .= theme('table', array('header' => $header, 'rows' => $rows));
-  //$html .= theme('pager');
   $html .= theme('pager');
   return $html;
 }

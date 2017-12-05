@@ -63,7 +63,6 @@ function itg_videogallery_ftp_file_insert_cron() {
             file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
           }
           catch (Exception $e) {
-//die($e->getMessage());
           }
 
           $file_details = file_load($fid);
@@ -99,7 +98,6 @@ function itg_videogallery_ftp_file_insert_cron() {
 // data insert into node
             }
             catch (Exception $e) {
-              die($e->getMessage());
             }
 // Code start for Adding  video in daily motion 
           }
@@ -237,13 +235,10 @@ function itg_videogallery_dailymotion_add_video($real_path, $name, $realfilename
     $dur = $api->get(
         '/video/' . $result['id'], array('fields' => array('duration', 'encoding_progress', 'publishing_progress'))
     );
-    //$result['id'] = end(explode('/', $dur['embed_url']));
     $playlist_id = variable_get('dailymotion_playlist_id');
-//$resp = $api->post('/playlist/' . $playlist_id . '/videos/' . $result['id']);
     $result['duration'] = $dur['duration'];
     $result['encoding_progress'] = $dur['encoding_progress'];
     $result['publishing_progress'] = $dur['publishing_progress'];
-
     $a = new Dailymotion();
     $a->logout();
     $result['fid'] = $fid;

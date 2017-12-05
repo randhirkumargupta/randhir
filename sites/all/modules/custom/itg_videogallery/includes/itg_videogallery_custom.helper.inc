@@ -272,10 +272,6 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       }
     }
 
-//    if ($form_state['node']->status == 0) {
-//      
-//      drupal_set_message('The video is not published. It will auto published once it published on Daily motion.');
-//    }
 // check loavl upaod file
     $is_loacl = 0;
     try {
