@@ -739,7 +739,7 @@ function homePageJsonTopstories() {
 
     $data_topstories['id'] = "0";
     $data_topstories['order'] = "2";
-    $data_topstories['type'] = "newslist";
+    $data_topstories['type'] = "topstories";
     $data_topstories['title'] = "Top Stories";
     $data_topstories['label'] = "Top Stories";
     $data_topstories['show_label'] = "0";
