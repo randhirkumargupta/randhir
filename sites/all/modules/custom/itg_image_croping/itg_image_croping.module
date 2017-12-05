@@ -59,8 +59,6 @@ function itg_image_croping_menu() {
     'type' => MENU_CALLBACK,
     'access arguments' => array('access content'),
   );
-
-
   $items['savetags'] = array(
     'page callback' => 'itg_image_croping_save_tags', // save the tags on images.
     'type' => MENU_CALLBACK,
