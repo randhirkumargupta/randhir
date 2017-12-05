@@ -5,6 +5,10 @@
  * The ITG App Management Module.
  *
  */
+function itg_app_manager_init() {
+  module_load_include('inc', 'itg_app_manager', 'inc/comman');
+}
+
 // Load the hirerical select common file
 module_load_include('inc', 'hierarchical_select', 'includes/common');
 
@@ -1619,7 +1623,7 @@ function theme_itg_app_manager_menu_list_table($variables) {
         foreach ($data as $key => $value) {
             $rows[$loopc]['menu_label_id'] = $value->menu_label_id;
             $rows[$loopc]['order_id'] = $value->order_id;
-            $rows[$loopc]['menu_type'] = $value->menu_type;
+            $rows[$loopc]['menu_type'] = getMenuTypeLabel($value->menu_type);
             $rows[$loopc]['title'] = $value->title;
             $rows[$loopc]['has_subcategory'] = $value->has_subcategory;
             $rows[$loopc]['section_id'] = $value->section_id;
@@ -1634,7 +1638,7 @@ function theme_itg_app_manager_menu_list_table($variables) {
         $header = array(t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Sub Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'), t('Action'));
         foreach ($data as $key => $value) {
             $rows[$loopc]['order_id'] = $value->order_id;
-            $rows[$loopc]['menu_type'] = $value->menu_type;
+            $rows[$loopc]['menu_type'] = getMenuTypeLabel($value->menu_type);
             $rows[$loopc]['title'] = $value->title;
             $rows[$loopc]['has_subcategory'] = $value->has_subcategory;
             $rows[$loopc]['section_id'] = $value->section_id;
@@ -2853,4 +2857,28 @@ function uploadIconImgdailyCapsule($form, $form_state, $key){
   else {
     form_set_error($key, t('Unable to copy upload file to !dest', array('!dest' => $destination)));
   }
+}
+/**
+ * helper function to get menu type
+ * @param int $m_id 
+ * @return type
+ */
+function getMenuTypeLabel($m_id){
+    $menu_name = "";
+    if($m_id == 0){
+        $menu_name = "Static";
+    }
+    elseif($m_id == 2){
+        $menu_name = "Mix";
+    }
+    elseif($m_id == 1208521){
+        $menu_name = "Photo";
+    }
+    elseif($m_id == 1206552){
+        $menu_name = "Video";
+    }
+    elseif($m_id == 1206553){
+        $menu_name = "Program";
+    }
+    return $menu_name;
 }
