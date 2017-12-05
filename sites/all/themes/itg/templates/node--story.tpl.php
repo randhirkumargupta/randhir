@@ -268,7 +268,7 @@ if (!empty($content)):
                     </span>
                   <?php print t('SHARES'); ?>
                   </li>
-                  <li><?php print date('F j, Y', $node->created); ?>   </li>
+                  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
                   <li>
                     <?php
                     print t('UPDATED');
@@ -383,7 +383,7 @@ if (!empty($content)):
                 </ul>
                 <?php } ?>  
                 <ul class="date-update">
-                  <li><?php print date('F j, Y', $node->created); ?>   </li>
+                  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
                   <li><?php t('UPDATED'); ?><?php print date('H:i', $node->changed); ?> IST</li>
                 <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
                     <li><?php
