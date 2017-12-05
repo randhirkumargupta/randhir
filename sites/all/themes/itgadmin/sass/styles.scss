@@ -9187,7 +9187,8 @@ div.node {
 .node-story-form,
 .node-videogallery-form,
 .node-photogallery-form,
-.node-type-print-team-integration {
+.node-type-print-team-integration,
+.node-type-event-backend {
     font-family: Roboto;
     margin: 0;
     .ajax-progress {
@@ -9313,7 +9314,8 @@ div.node {
     [id*="field-story-template-guru-values"],
     [id*="field-video-anchor-values"],
     [id*="field-story-listicle-values"],
-    [id*="field-add-member-values"] {
+    [id*="field-add-member-values"],
+    [id*="field-associate-event-photo-values"] {
         thead {
             padding-left: 20px;
             padding-right: 10px;
@@ -11493,7 +11495,7 @@ div.node {
         position: absolute;
         left: 0;
         top: 71px;
-        left: 315px;
+        left: 900px;
     }
     table {
         @extend .views-table;
@@ -14553,8 +14555,10 @@ div.ctools-modal-content {
 
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget {
     height: auto;
-    a {
-        display: inline;
+    .file {
+        a {
+            display: inline;
+        }
     }
 }
 
@@ -14633,11 +14637,18 @@ div.ctools-modal-content {
 .view .view-filters [id*="views-exposed-form-key-candidate-special-key-candidate-widget-list"] .views-exposed-form .views-exposed-widget {
     width: 150px;
     .form-item {
-        width: 140px;
+        width: 140px !important;
     }
     .ajax-progress {
         top: 20px;
         position: absolute;
-        right: 0;
+        right: 10px;
+    }
+    &.views-submit-button,
+    &.views-reset-button {
+        width: auto;
+        .form-item {
+            padding-right: 10px;
+        }
     }
 }
