@@ -1617,13 +1617,13 @@ function theme_itg_app_manager_menu_list_table($variables) {
     // Build the table.
     $rows = array();
     $loopc = 0;
-    $source = $variables['source'];
-    if ($form_type == '1') {
+    $source = $variables['source'];    
+    if ($source == '1') {
         $header = array(t('Menu label'), t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Sub Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'), t('Action'));
         foreach ($data as $key => $value) {
-            $rows[$loopc]['menu_label_id'] = $value->menu_label_id;
+            $rows[$loopc]['menu_label_id'] = getMenuTypeLabel($value->menu_label_id,1);
             $rows[$loopc]['order_id'] = $value->order_id;
-            $rows[$loopc]['menu_type'] = getMenuTypeLabel($value->menu_type);
+            $rows[$loopc]['menu_type'] = getMenuTypeLabel($value->menu_type,0);
             $rows[$loopc]['title'] = $value->title;
             $rows[$loopc]['has_subcategory'] = $value->has_subcategory;
             $rows[$loopc]['section_id'] = $value->section_id;
@@ -1638,7 +1638,7 @@ function theme_itg_app_manager_menu_list_table($variables) {
         $header = array(t('Order'), t('Menu type'), t('Title'), t('Has Subcategory'), t('Sub Section'), t('Type'), t('Webview Url'), t('Icon Url'), t('Is New'), t('Action'));
         foreach ($data as $key => $value) {
             $rows[$loopc]['order_id'] = $value->order_id;
-            $rows[$loopc]['menu_type'] = getMenuTypeLabel($value->menu_type);
+            $rows[$loopc]['menu_type'] = getMenuTypeLabel($value->menu_type,0);
             $rows[$loopc]['title'] = $value->title;
             $rows[$loopc]['has_subcategory'] = $value->has_subcategory;
             $rows[$loopc]['section_id'] = $value->section_id;
@@ -2863,22 +2863,29 @@ function uploadIconImgdailyCapsule($form, $form_state, $key){
  * @param int $m_id 
  * @return type
  */
-function getMenuTypeLabel($m_id){
-    $menu_name = "";
-    if($m_id == 0){
-        $menu_name = "Static";
+function getMenuTypeLabel($m_id, $label){
+    if($label ==0){
+        $menu_name = "label";
+        if($m_id == 0){
+            $menu_name = "Static";
+        }
+        elseif($m_id == 2){
+            $menu_name = "Mix";
+        }
+        elseif($m_id == 1208521){
+            $menu_name = "Photo";
+        }
+        elseif($m_id == 1206552){
+            $menu_name = "Video";
+        }
+        elseif($m_id == 1206553){
+            $menu_name = "Program";
+        }
+        return $menu_name;
     }
-    elseif($m_id == 2){
-        $menu_name = "Mix";
+    elseif($label ==1){
+        $menu_name = "";
+        $menu_name = db_query('SELECT menu_name FROM {itg_app_menu_master} where menu_id='.$m_id.'')->fetchField();
+        return $menu_name;
     }
-    elseif($m_id == 1208521){
-        $menu_name = "Photo";
-    }
-    elseif($m_id == 1206552){
-        $menu_name = "Video";
-    }
-    elseif($m_id == 1206553){
-        $menu_name = "Program";
-    }
-    return $menu_name;
 }
