@@ -104,9 +104,8 @@ function itg_app_manager_schema() {
       ),
       'icon_url' => array(
         'description' => 'Icon Url',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'default' => 0,
+        'type' => 'varchar',
+        'length' => 255,
       ),
       'is_new' => array(
         'description' => '',
