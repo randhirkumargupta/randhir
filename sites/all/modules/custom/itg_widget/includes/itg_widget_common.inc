@@ -2897,7 +2897,7 @@ function itg_widget_node_update($node) {
             return;
         }
 
-        if (isset($arg[1]) && $arg[1] != 'add') {
+        if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) &&!empty($node->op)) {
             __itg_widget_helper_data_insert($node->nid);
             watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
             $nid = $node->nid;

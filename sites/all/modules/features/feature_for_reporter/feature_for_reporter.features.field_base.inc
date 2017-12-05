@@ -167,7 +167,7 @@ function feature_for_reporter_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_old_content_source_id',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'format' => array(

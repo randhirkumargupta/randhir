@@ -1247,7 +1247,6 @@ function itg_event_backend_get_speaker_details($spk_id) {
   $query->condition('n.nid', $spk_id, '=');
   $query->condition('designation.bundle', 'reporter', '=');
   $result = $query->execute()->fetchAll();
-  //$result[0]->occupation_speaker = itg_event_backend_occupation_home($spk_id);
   return $result;
 }
 
@@ -1899,7 +1898,6 @@ function itg_event_backend_highlights_block_content() {
     $query->condition('fh.entity_id', $nid, '=');
     $highlights_nid = $query->execute()->fetchField();
     $highlights_node = node_load($highlights_nid);
-
     $output = '';
     $output .= '<div class="highlight-box"><h2 class = "highlights-heading">'.t('Highlights').'</h2><div class="wrap-listing">';
     $text = '';
