@@ -14,13 +14,28 @@
       <?php endif; ?>
 
       <?php if (!empty($data[0]['title'])) : ?>
-        <h2 class="home-page-feature-<?php echo $data[0]['nid'] ?>">
+        <?php
+          // code for add on story title and url
+          if (function_exists('itg_common_get_addontitle')) {
+            $add_on_data = itg_common_get_addontitle($data[0]['node_obj']);
+            $pipelinetext = "";
+            $pipelineclass = "";
+            if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
+              $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+              $pipelineclass = ' pipeline-added';
+            }
+          }
+        ?>
+        <h2 class="<?php echo $pipelineclass; ?> home-page-feature-<?php echo $data[0]['nid'] ?>">
           <?php
+          
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($data[0]['node_obj'], 0, 80), "node/" . $data[0]['nid'], array('html' => TRUE , 'attributes' => array("title" => _widget_title($data[0]['title']))));
+            echo $pipelinetext;
           }
           else {
             echo l(mb_strimwidth($data[0]['title'], 0, 90, ".."), "node/" . $data[0]['nid']  , array('attributes' => array("title" => $data[0]['title'])));
+            echo $pipelinetext;
           }
           ?>
         </h2>   
@@ -39,13 +54,29 @@
         </a>
       <?php endif; ?>
       <?php if (!empty($data[1]['title'])) : ?>
-        <h3 title="<?php echo $data[1]['title'];  ?>" class="home-page-feature-small-<?php echo $data[1]['nid'] ?>">
+        <?php 
+          // code for add on story title and url
+          if (function_exists('itg_common_get_addontitle')) {
+            $add_on_data = itg_common_get_addontitle($data[1]['node_obj']);
+            $pipelinetext = "";
+            $pipelineclass = "";
+            if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
+              $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+              $pipelineclass = ' pipeline-added';
+            }
+          }
+        ?>
+        <h3 title="<?php echo $data[1]['title'];  ?>" class="<?php echo $pipelineclass; ?> home-page-feature-small-<?php echo $data[1]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($data[1]['node_obj'], 0, 60), "node/" . $data[1]['nid'], array('html' => TRUE , 'attributes' => array("title" => _widget_title($data[1]['title']))));
+            echo $pipelinetext;
+            
           }
           else {
             echo l(mb_strimwidth($data[1]['title'], 0, 70, ".."), "node/" . $data[1]['nid'] , array('attributes' => array("title" => $data[1]['title'])));
+            echo $pipelinetext;
+            
           }
           ?>
         </h3>   
@@ -64,13 +95,29 @@
         </a>
       <?php endif; ?>
       <?php if (!empty($data[2]['title'])) : ?>
-        <h3 title="<?php echo $data[2]['title'];  ?>" class="home-page-feature-small-<?php echo $data[2]['nid'] ?>">
+        <?php
+          // code for add on story title and url
+          if (function_exists('itg_common_get_addontitle')) {
+            $add_on_data = itg_common_get_addontitle($data[2]['node_obj']);
+            $pipelinetext = "";
+            $pipelineclass = "";
+            if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
+              $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
+              $pipelineclass = ' pipeline-added';
+            }
+          }
+        ?>
+        <h3 title="<?php echo $data[2]['title'];  ?>" class="<?php echo $pipelineclass; ?> home-page-feature-small-<?php echo $data[2]['nid'] ?>">
           <?php
           if (function_exists('itg_common_get_smiley_title')) {
             echo l(itg_common_get_smiley_title($data[2]['node_obj'], 0, 60), "node/" . $data[2]['nid'], array('html' => TRUE , 'attributes' => array("title" => _widget_title($data[2]['title']))));
+            echo $pipelinetext;
+            
           }
           else {
             echo l(mb_strimwidth($data[2]['title'], 0, 70, ".."), "node/" . $data[2]['nid'] , array('attributes' => array("title" => _widget_title($data[2]['title']))));
+            echo $pipelinetext;
+            
           }
           ?>
         </h3>    

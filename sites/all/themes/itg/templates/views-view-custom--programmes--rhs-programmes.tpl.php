@@ -9,18 +9,11 @@
           } else {
             $status = 0;
           }
-          if ($status) {
-            $view = views_get_view('programme_content');
-            $args = array($row['tid']);
-            $view->preview('block', $args);
-            $view_result = $view->result;
-            $recent_video_under_cat = !empty($view_result[0]->nid) ? $view_result[0]->nid : '';
-            ?>
+          if ($status) { ?>
             <li>
                 <h4>
                     <?php if (!empty($row['field_cm_display_title'])) : ?>
-                      <?php //print l(__html_output_with_tags($row['field_cm_display_title']), 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
-                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'node/' . $recent_video_under_cat, array('html' => TRUE)); ?>
+                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'program', array('html' => TRUE)); ?>
                     <?php endif; ?>
                 </h4>
                 <span class="time">
@@ -45,14 +38,12 @@
                           <?php
                           $img = $row['field_sponser_logo'];
                           ?>
-                          <?php //print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
-                          <?php print l($img, 'node/' . $recent_video_under_cat, array('html' => TRUE)); ?>
+                          <?php print l($img, 'program', array('html' => TRUE)); ?>
                         <?php else : ?>
                           <?php
                           $img = "<img width='88' height='66'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') ."' alt='' title='' />";
                           ?>
-                          <?php print l($img, 'node/' . $recent_video_under_cat, array('html' => TRUE)); ?>
-                          <?php //print l($img, 'node/' . $recent_video_under_cat, array('query' => array('category' => $row['tid']), 'html' => TRUE)); ?>
+                          <?php print l($img, 'program', array('html' => TRUE)); ?>
 
                         <?php endif; ?>
                     </div>

@@ -320,14 +320,18 @@ if(isset($_GET['photo']) && $_GET['photo']) {
           slidesToScroll: 1,
           arrows: true,
           fade: true,
-          asNavFor: '.slick-thumbs-slider, .slickslide, .photo-by-slider'
+          asNavFor: '.slick-thumbs-slider, .slickslide, .photo-by-slider',
+          // For active slide
+          initialSlide: <?php echo $initial_slide; ?>,
       });
       jQuery('.photo-by-slider').slick({
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
           fade: true,
-          asNavFor: '.slick-thumbs-slider, .slickslide, .counterslide'
+          asNavFor: '.slick-thumbs-slider, .slickslide, .counterslide',
+          // For active slide
+          initialSlide: <?php echo $initial_slide; ?>,
       });
 // Photogallery slider javascript
       jQuery(document).ready(function () {

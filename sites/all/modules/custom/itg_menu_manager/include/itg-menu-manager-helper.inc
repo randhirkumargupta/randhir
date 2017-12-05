@@ -430,6 +430,8 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $display_icon_attribute = $display_icon;
   $sponser_logo_uri = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['uri']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['uri'] : 0;
   $vertical_menu_icon = "";
+  $sponser_logo_alt = $menu_data['term_load']->field_sponser_logo['und'][0]['alt'];
+  $sponser_logo_title = $menu_data['term_load']->field_sponser_logo['und'][0]['title'];
   // handel case for external menu.
   // display_icon is true and icon_fid is set then show icon other wise title.
   if ($url_type == 'external' && $display_icon && $icon_fid) {
@@ -438,9 +440,10 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
       $icon_object = file_load((int) $icon_fid);
       // Set icon for internal menu used for vertical menu.
       if (!empty($amp)) {
-        $link_text = $vertical_menu_icon = "<img width='152' height='85' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='amp-image' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+        $link_text = $vertical_menu_icon = "<img width='152' height='85' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='amp-image' />"; 
       } else {
-        $link_text = $vertical_menu_icon = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $icon_object->uri));
+        $img_path = image_style_url('menu_manager_icons' , $icon_object->uri);
+        $link_text = $vertical_menu_icon =   "<img width='152' height='85' title='" . $link_title_for_vertical . "'  src='" . $img_path . "' alt='".$link_title_for_vertical."' />";
       }
       if (!empty($icon_object->uri)) {
         $image_class = "has-image";
@@ -459,10 +462,11 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   if ($url_type == 'internal' && $display_icon) {
     if (is_string($sponser_logo_uri) && !empty($sponser_logo_uri)) {
       if (!empty($amp)) {
-        $link_text = $vertical_menu_icon = "<img width='152'  height= '85' src='" . file_create_url($sponser_logo_uri) . "' alt='amp-image' />"; //theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
+        $link_text = $vertical_menu_icon = "<img width='152'  height= '85' src='" . file_create_url($sponser_logo_uri) . "' alt='amp-image' />"; 
         $image_class = "has-image";
       } else {
-        $link_text = $vertical_menu_icon = theme('image_style', array('style_name' => 'menu_manager_icons', 'path' => $sponser_logo_uri));
+        $img_path = image_style_url('menu_manager_icons' , $sponser_logo_uri);
+        $link_text = $vertical_menu_icon =   "<img width='152' height='85' title='" . $sponser_logo_title . "'  src='" . $img_path . "' alt='".$sponser_logo_alt."' />";
         $image_class = "has-image";
       }
     }
