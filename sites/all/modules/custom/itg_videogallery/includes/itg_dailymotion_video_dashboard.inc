@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Custom form defination for Daily motion dashboard.
  * @param array $form
@@ -9,6 +10,14 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset'] = array(
     '#type' => 'fieldset',
     '#title' => 'Daily Motion Video Dashboard',
+  );
+  $form['fieldset']['video_name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Name',
+    '#attributes' => array(
+      'placeholder' => t('Name'),
+    ),
+    '#default_value' => isset($_GET['video_name']) ? $_GET['video_name'] : '',
   );
   $form['fieldset']['video_title'] = array(
     '#type' => 'textfield',
@@ -21,8 +30,14 @@ function daily_motion_video_dashboard($form, &$form_state) {
   $form['fieldset']['channel'] = array(
     '#type' => 'select',
     '#title' => 'Channel',
-    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3', 'OCTOPUS' => 'OCTOPUS','INTERNAL' => 'ITG Internal'),
+    '#options' => array('' => '-All-', 'ftp' => 'FTP', 'LOCAL' => 'LOCAL', 'S3' => 'S3', 'OCTOPUS' => 'OCTOPUS', 'INTERNAL' => 'ITG Internal'),
     '#default_value' => isset($_GET['channel']) ? $_GET['channel'] : '',
+  );
+  $form['fieldset']['video_source'] = array(
+    '#type' => 'select',
+    '#title' => 'Video Source',
+    '#options' => array('' => '-All-', 'DM' => 'Dailymotion', 'INTERNAL' => 'AWS Transcode'),
+    '#default_value' => isset($_GET['video_source']) ? $_GET['video_source'] : '',
   );
 
   $form['fieldset']['from_time'] = array(
@@ -111,15 +126,17 @@ function daily_motion_video_dashboard_submit($form, &$form_state) {
 
   $video_id = $form_state['values']['video_id'];
   $filtertype = $form_state['values']['filtertype'];
+  $video_name = $form_state['values']['video_name'];
   $video_title = $form_state['values']['video_title'];
-  $channel = $form_state['values']['channel'];
-  $video_title = $form_state['values']['video_title'];
+  $video_source = $form_state['values']['video_source'];
   $channel = $form_state['values']['channel'];
   $totime = $form_state['values']['to_time'];
   $fromtime = $form_state['values']['from_time'];
   drupal_goto('daily-motion-video-dashboard', array('query' => array(
       'video_title' => $video_title,
+      'video_name' => $video_name,
       'channel' => $channel,
+      'video_source' => $video_source,
       'filtertype' => $filtertype,
       'video_id' => $video_id,
       'from_time' => $fromtime,
@@ -136,6 +153,8 @@ function daily_motion_video_dashboard_rows() {
   $filtertype = isset($_GET['filtertype']) ? $_GET['filtertype'] : '';
   $video_id = isset($_GET['video_id']) ? $_GET['video_id'] : '';
   $video_title = isset($_GET['video_title']) ? $_GET['video_title'] : '';
+  $video_source = isset($_GET['video_source']) ? $_GET['video_source'] : '';
+  $video_name = isset($_GET['video_name']) ? $_GET['video_name'] : '';
   $channel = isset($_GET['channel']) ? $_GET['channel'] : '';
   $to_time = isset($_GET['to_time']) ? $_GET['to_time'] : '';
   $from_time = isset($_GET['from_time']) ? $_GET['from_time'] : '';
@@ -146,6 +165,7 @@ function daily_motion_video_dashboard_rows() {
   $rows = array();
   $header = array(
     t('Sn no.'),
+    t('Name'),
     t('Title'),
     t('Channel'),
     t('Uploaded Time'),
@@ -163,7 +183,10 @@ function daily_motion_video_dashboard_rows() {
   if (isset($video_id) && !empty($video_id)) {
     $query->condition('n.video_id', $video_id, '=');
   }
+  if (isset($video_name) && !empty($video_name)) {
 
+    $query->condition('n.name', '%' . db_like($video_name) . '%', 'LIKE');
+  }
   if (isset($video_title) && !empty($video_title)) {
 
     $query->condition('n.title', '%' . db_like($video_title) . '%', 'LIKE');
@@ -171,6 +194,10 @@ function daily_motion_video_dashboard_rows() {
   if (isset($channel) && !empty($channel)) {
 
     $query->condition('n.type', $channel, '=');
+  }
+  if (isset($video_source) && !empty($video_source)) {
+
+    $query->condition('n.video_type', $video_source, '=');
   }
   if (isset($from_time) && !empty($from_time)) {
 
@@ -181,7 +208,6 @@ function daily_motion_video_dashboard_rows() {
     $query->condition('n.upload_time', $to_time, '<=');
   }
   $pagelimit = 20;
-//print strtr((string) $query, $query->arguments());die;
   $query = $query->extend('PagerDefault')->limit($pagelimit);
   $query->orderBy('n.eid', 'DESC');
   $result = $query->execute();
@@ -203,13 +229,12 @@ function daily_motion_video_dashboard_rows() {
         }
       }
       if ($record->encoding_progress != '100' && $record->publishing_progress != '100') {
-      if($record->video_type == 'INTERNAL') {
-       $status_flag = '<span class="under-precess">Completed</span>';
-
-      }else {
-        $status_flag = '<span class="under-precess">Processing (' . $record->publishing_progress . ')%</span>';
-
-      }
+        if ($record->video_type == 'INTERNAL') {
+          $status_flag = '<span class="under-precess">Completed</span>';
+        }
+        else {
+          $status_flag = '<span class="under-precess">Processing (' . $record->publishing_progress . ')%</span>';
+        }
         if (strtoupper($record->type) != 'LOCAL') {
           $delete_link = "<a  class='dalymotion-video-delete' href='" . $base_url . "/delete_daily_motion_video/" . $record->video_id . "' > Delete </a>";
         }
@@ -255,6 +280,7 @@ function daily_motion_video_dashboard_rows() {
     $rows[] = array(
       $sn++,
       $record->name,
+      $record->title,
       strtoupper($record->type),
       date('d-M-Y H:i:s', $record->upload_time),
       $record->video_id,
