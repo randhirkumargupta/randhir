@@ -149,7 +149,6 @@ function itg_videogallery_menu() {
     'page arguments' => array('daily_motion_video_dashboard'),
     'access arguments' => array('access content'),
     'file' => 'includes/itg_dailymotion_video_dashboard.inc',
-      //'access arguments' => array('daily motion video dashboard perm')
   );
 
   $items['delete_daily_motion_video/%'] = array(
@@ -399,11 +398,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
                 }
               }
               $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
-              if (arg(1) == 'ajax' && $form_state['values']['nid'] > 0) {
-                if ($video_fid == "" || $video_fid == 0) {
-                  // unset($form['field_video_upload']['und'][$delta]);
-                }
-              }
+             
             }
           }
          }
@@ -649,7 +644,6 @@ function itg_videogallery_send_local_video_to_dailymotion($real_path, $file_deta
 function itg_videogallery_clean_string($string) {
   $string = str_replace(' ', ' ', $string);
   $string = preg_replace('/[^A-Za-z0-9\-ığşçöüÖÇŞİıĞ]/', ' ', $string);
-
   return preg_replace('/-+/', '-', $string);
 }
 
@@ -861,11 +855,6 @@ function itg_videogallery_after_build($form, &$form_state) {
         unset($form['field_noindex_nofollow']);
         $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
 
-        if (arg(1) == 'ajax' && $form_state['values']['nid'] > 0) {
-          if ($video_fid == "" || $video_fid == 0) {
-            //unset($form['field_video_upload']['und'][$delta]);
-          }
-        }
       }
     }
   }
@@ -889,20 +878,7 @@ function itg_videogallery_after_build($form, &$form_state) {
       }
     }
   }
-  else {
-    foreach ($form['field_video_upload']['und'] as $delta => $field) {
-      if (is_numeric($delta)) {
-        if ($arg == 'edit') {
-          $video_fid = $form['field_video_upload']['und'][$delta]['field_videogallery_video_upload']['und'][0]['#default_value']['fid'];
-          $file_exist = itg_videogallery_check_file_manage_fid($video_fid);
-          if (empty($file_exist) || $video_fid < 1) {
-            //$form['field_video_upload']['und'][$delta]['#access'] = FALSE;
-            // unset($form['field_video_upload']['und'][$delta]);
-          }
-        }
-      }
-    }
-  }
+  
   $form['original_image_fids'] = array(
     '#type' => 'hidden',
     '#value' => isset($form_state['input']['original_image_fids']) ? $form_state['input']['original_image_fids'] : '',
@@ -1120,7 +1096,6 @@ function itg_videogallery_save_story_video_data($story_body, $nid) {
               'url' => $video_value,
               'nid' => $nid,
             ))->execute();
-        //$node_data = itg_videogallery_get_node_status($node_id);
       }
     }
   }
@@ -1200,7 +1175,6 @@ function itg_videogallery_getsolr_data_publish($all_property = NULL) {
     if (function_exists('itg_apache_solr_get_site_hash')) {
       $hash = itg_apache_solr_get_site_hash();
     }
-//  $all_video_ids = array();
     $hashvalue = implode(' OR ', array_keys($hash));
     $str = 'hash:(' . $hashvalue . ')';
     $str_pub = 'sm_field_video_used:(0)';
@@ -1208,7 +1182,6 @@ function itg_videogallery_getsolr_data_publish($all_property = NULL) {
     $query = apachesolr_drupal_query("custom");
     $query->addParam('rows', '100000'); // How many rows of result to display default it is 10.
     $query->addParam('qf', 'label'); // Only search in title
-    //$query->addParam('qf', 'label');
 //The bundle which you want to search
     $query->replaceParam("fq", '(' . $str . ')');
     $query->addFilter("bundle", "itg_solr_video");
@@ -1478,10 +1451,6 @@ function itg_videogallery_cronapi($op, $job = NULL) {
     'callback' => 'itg_videogallery_thumb_assign',
     'file' => 'includes/itg_video_dailymotion.inc',
   );
-//  $items['draft-video-publish-after-local-video-readytouse'] = array(
-//    'description' => 'Cron use for make publish node after check video status ready to play.',
-//    'callback' => 'itg_videogallery_publish_node_after_video_ready_by_dm',
-//  );
   $items['ftp_file_save'] = array(
     'description' => 'Ftp file save in file managed table.',
     'callback' => 'itg_videogallery_ftp_file_insert',
@@ -1911,7 +1880,6 @@ function itg_videogallery_field_attach_form($entity_type, $entity, &$form, &$for
     //If we are looking at our field type and specific widget type, and we are multiple entries
     if (($field['cardinality'] == FIELD_CARDINALITY_UNLIMITED) && ($field['type'] == "field_collection")) {
       if ($field['bundles']['node'][0] == "videogallery") {
-    //  drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/upload.js', array('weight' => 2));
     // Check just in case the button is here, and add another #submit function
         if (isset($form[$field['field_name']]['und']['add_more'])) {
     // add a simple select list, this defaults to numb 3
