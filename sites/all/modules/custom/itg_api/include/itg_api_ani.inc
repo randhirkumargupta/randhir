@@ -298,9 +298,11 @@ function itg_ani_content() {
                   foreach ($combine_cat as $key => $tax_id) {
                     if (!empty($tax_id)) {
                       $node->field_story_category[LANGUAGE_NONE][0]['tid'] = $tax_id;
+                      $node->field_primary_category[LANGUAGE_NONE][0]['value'] = $tax_id;
                     }
                   }
                   $node->field_story_schedule_date_time[LANGUAGE_NONE][0]['value'] = $publish_date;
+                  $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = $publish_date;
                   $node->field_story_expiry_date[LANGUAGE_NONE][0]['value'] = $exp_date;
                   if (array_intersect($op, $exp_description)) {
                     $node->log = 'State Changed to Review';
@@ -311,6 +313,12 @@ function itg_ani_content() {
                   }
                   $node = node_submit($node); // Prepare node for saving
                   node_save($node); // Finally save node
+                  $newpath = itg_api_path_insert($node);
+                  $path = array(
+                    'source' => "node/{$node->nid}",
+                    'alias' => $newpath, // Any alias that you want to set.
+                  );
+                  path_save($path);
                   itg_api_insert_xml_info($node->nid, $xml_filename, 'story', 'ANI');
                   $msg = $headline . ' imported sucessfully';
                   watchdog('ANI_XML', $msg);

@@ -1493,6 +1493,28 @@ function itg_common_get_addontitle($node_obj) {
   }
 }
 
+/**
+ * Function to get details of addtitle for given nodeid.
+ * @param int $nid;
+ */
+function itg_common_get_addontitle_for_view($nid) {
+  if (!empty($nid)) {
+    $addon_list = array();
+    $query = db_select('field_data_field_story_new_title', 'addon');
+    $query->join('field_data_field_story_redirection_url_titl', 'addurl', 'addurl.entity_id = addon.entity_id');
+    $query->fields('addon', array('field_story_new_title_value'))
+          ->fields('addurl', array('field_story_redirection_url_titl_value'));
+    $query->condition('addon.entity_id', $nid);
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $addon_list['ad_title'] = $record['field_story_new_title_value'];
+      $addon_list['ad_url'] = $record['field_story_redirection_url_titl_value'];
+    }
+
+    return $addon_list;
+  }
+}
+
 function itg_common_taxonomy_get_parents($tid) {
     $parents = &drupal_static(__FUNCTION__, array());
 
