@@ -25,9 +25,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
 <script type="text/javascript">
   function loadplayerjw() {
 var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
-      // var playerInstance = jwplayer('videoplayer');
       jwplayer('videoplayer').setup({
-          //var multipart=0;
           playlist: [{
                   title: "",
                   'image': "<?php echo $player_content['player_image']; ?>",
@@ -62,21 +60,13 @@ var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
   playerInstance.on('setupError', function (event) {
-      //alert('Setup Error:'+event.message);
       if (event.message == 'Error loading player: No playable sources found') {
-
-          //alert(event.message);
          document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
       } else {
           loadplayerjw();
       }
   });
-
-  //});           
-
-
-
-
+          
 </script>
 
 

@@ -76,55 +76,6 @@ else {
                 <?php } ?>
             </div>  
 
-<!--            <div class="ftp-server-internal" style="display:none">
-                <?php
-                if ($_GET['file_filed_name'] == 'field_upload_video[und][0][fid]' || $_GET['field_name'] == 'field_videogallery_video_upload') {
-                  if ($_GET['no_value'] == 'single') {
-                    ?>
-                    <iframe id="video_iframe_internal" src="<?php echo base_path() . 'search-unpublish-video-radio'; ?>" width="100%" height="650"></iframe>
-
-                    <?php
-                  }
-                  else {
-                    ?>
-                    <iframe id="video_iframe_internal" src="<?php echo base_path() . 'search-unpublish-internal-video'; ?>" width="100%" height="650"></iframe>
-                    <?php
-                  }
-                }
-                else {
-                  if ($_GET['no_value'] == 'single') {
-                    ?>
-                    <iframe id="video_iframe_internal" src="<?php echo base_path() . 'search-publish-internal-video-singal'; ?>" width="100%" height="650"></iframe>
-
-                    <?php
-                  }
-                  else {
-                    ?>
-                    <iframe id="video_iframe_internal" src="<?php echo base_path() . 'search-publish-internal-video'; ?>" width="100%" height="650"></iframe>
-                    <?php
-                  }
-                }
-                ?>
-                <div class="video-options-wrapper"></div>
-                <?php if (isset($_GET['input_filed']) && $_GET['input_filed'] == 'ckeditor') { ?>
-                  <a href="javascript:void(0)" class = "btn-submit asso-with-ckeditor-internal"><?php print t('Associate Video'); ?></a>
-                  <input type="hidden" id="single_add" name="single_add" value="0">
-                  <?php
-                }
-                else if ($_GET['no_value'] == 'single') {
-                  ?>
-                  <input type="hidden" id="single_add" name="single_add" value="1">
-                  <a href="javascript:void(0)" class = "btn-submit asso-filed_single_internal" btn_name="<?php echo $_GET['btn_name']; ?>" field_name="<?php echo $_GET['field_name']; ?>"><?php print t('Associate Video'); ?></a>
-
-                  <?php
-                }
-                else {
-                  ?>
-                  <input type="hidden" id="single_add" name="single_add" value="0">
-                  <a href="javascript:void(0)" class = "button btn-submit asso-filed-internal"><?php print t('Associate Video'); ?></a>
-                <?php } ?>
-            </div>  -->
-
             <div class="local_browse" style="display: none;">
 
                 <?php print drupal_render(drupal_get_form('videogallery_new_fileupload_form')); ?>
