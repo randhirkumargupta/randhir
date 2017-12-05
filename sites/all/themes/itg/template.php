@@ -62,7 +62,7 @@ function itg_preprocess_node(&$variables) {
   }
   
   $content_type = array('story', 'photogallery', 'videogallery', 'blog', 'podcast');
-  if($variables['node']->type != 'page' && in_array($variables['node']->type, $content_type)) {
+  if ($variables['node']->type != 'page' && in_array($variables['node']->type, $content_type)) {
     if (function_exists('global_comment_last_record')) {
       $variables['global_comment_last_record'] = global_comment_last_record();
     }
