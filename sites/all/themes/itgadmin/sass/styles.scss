@@ -2355,7 +2355,8 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-photo-story-values"],
 [id*="field-story-listicle-values"],
 [id*="field-event-tabs-values"],
-[id*="field-add-member-values"] {
+[id*="field-add-member-values"],
+[id*="field-associate-event-photo-values"] {
     @extend .itg-add-another-item;
 }
 
@@ -7835,7 +7836,7 @@ div.node {
             font-size: 14px;
         }
         &.active {
-            width: 200px;
+            width: 186px;
             input[type="text"] {
                 display: block;
             }
@@ -7858,12 +7859,16 @@ div.node {
     line-height: 30px;
     padding: 0;
     text-align: center;
-    width: 28px;
+    width: 46px;
     cursor: pointer;
     z-index: 9;
     float: right;
     .fa {
         font-size: 18px;
+    }
+    a {
+        color: #fff;
+        padding-left: 5px;
     }
 }
 
@@ -8454,7 +8459,8 @@ div.node {
 [id*="field-story-template-quotes-values"],
 [id*="field-story-template-factoids-values"],
 [id*="field-story-template-guru-values"],
-[id*="field-add-member-values"] {
+[id*="field-add-member-values"],
+[id*="field-associate-event-photo-values"] {
     tbody tr {
         td {
             border: none;
@@ -14418,7 +14424,6 @@ div.ctools-modal-content {
 #views-exposed-form-so-sorry-so-sorry-videos-widget,
 #views-exposed-form-widget-anchors-listing-anchors-listing-widget,
 #views-exposed-form-key-candidate-special-key-candidate-widget-list .views-widget-per-page,
-#itg-widget-issuewidgetlist-filter-form .form-item-items-per-page,
 #views-exposed-form-category-of-stroy-base-magazin-widget-issue-magazin-widget-list .form-item-items-per-page,
 #views-exposed-form-supplement-base-magazin-widget-supplement-base-magazin-widget-list .form-item-items-per-page {
     display: none !important;
@@ -14544,4 +14549,95 @@ div.ctools-modal-content {
 
 #print-team-integration-node-form [id*="field-add-member-values"] tbody {
     overflow: inherit;
+}
+
+#videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget {
+    height: auto;
+    a {
+        display: inline;
+    }
+}
+
+[id*="views-exposed-form-searchimage-search-publish-video"] {
+    .form-select[multiple="multiple"] {
+        min-height: 40px;
+        margin-bottom: 30px;
+    }
+    .views-exposed-form .views-exposed-widget {
+        padding-right: 12px;
+    }
+}
+
+.section-unpublished-story,
+.section-unpublished-photogallery,
+.section-unpublished-podcast,
+.section-unpublished-blogs,
+.section-unpublished-video {
+    .form-actions {
+        .form-submit {
+            +a {
+                @extend .button;
+            }
+        }
+    }
+}
+
+
+/*css for emoji*/
+
+.emoji-container {
+    display: inline-block;
+    vertical-align: top;
+    span {
+        vertical-align: bottom;
+    }
+    a {
+        display: inline-block;
+    }
+}
+
+#smily,
+#smilysad,
+#wgmf {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    .face {
+        position: fixed;
+        z-index: 9999;
+        &.face1 {
+            left: 400px;
+            top: 500px;
+        }
+        &.face2 {
+            left: 200px;
+            top: 0;
+        }
+        &.face3 {
+            top: 0;
+            right: 200px;
+        }
+        &.face4 {
+            right: 600px;
+            top: 100px;
+        }
+    }
+}
+
+
+/*css end for emoji*/
+
+.view .view-filters [id*="views-exposed-form-key-candidate-special-key-candidate-widget-list"] .views-exposed-form .views-exposed-widget {
+    width: 150px;
+    .form-item {
+        width: 140px;
+    }
+    .ajax-progress {
+        top: 20px;
+        position: absolute;
+        right: 0;
+    }
 }

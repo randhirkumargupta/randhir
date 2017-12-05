@@ -11,7 +11,11 @@
 global $theme;
 $preview = NULL;
 if (arg(2) == 'preview') {
-  $preview = 'preview';
+  $preview = 'preview';  
+}
+if ($theme == 'itgadmin' || $preview == 'preview') {
+  global $conf;
+  $conf['preprocess_js'] = 0;
 }
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';

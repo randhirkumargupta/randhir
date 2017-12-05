@@ -255,7 +255,7 @@
         }
     }
     /*end css footer*/
-    /*start css home page*/
+    /*start css home page
     .top-block .top-colum-2,
     .top-block .top-colum-1 {
         @include float(left);
@@ -282,7 +282,7 @@
     }
     .top-block .auto-block-3 {
         margin-top: 0;
-    }
+    }*/
     .big-news .big-story-col-1,
     .big-news .big-story-col-2 {
         @include calculate-width(2);
@@ -293,9 +293,10 @@
     }
     .itg-layout-container {
         .itg-top-section {
-            .top-colum-2 {
+            .top-colum-2,
+            .top-colum-1 {
                 .droppable {
-                    height: auto;
+                    height: 610px;
                 }
             }
         }

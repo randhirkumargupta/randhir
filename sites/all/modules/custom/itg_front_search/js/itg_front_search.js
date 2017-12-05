@@ -26,6 +26,13 @@
                 }
             });
 
+            jQuery("#edit-custom-drp").mouseup(function () {
+                var val = jQuery(this).val();
+                if (val == 'calender') {
+                    jQuery(".searh-all-filters .caln").show();
+                }
+            });
+
             if (custom_field_val != 'calender') {
                 $(".caln").hide();
                 $(".caln").hide();
