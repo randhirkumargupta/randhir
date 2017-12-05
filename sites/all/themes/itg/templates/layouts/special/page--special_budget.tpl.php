@@ -21,6 +21,10 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
+if ($theme == 'itgadmin' || $preview == 'preview') {
+  global $conf;
+  $conf['preprocess_js'] = 0;
+}
 $highlights = itg_widget_highlights_block_data();
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
