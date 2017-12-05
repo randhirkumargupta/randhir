@@ -207,6 +207,12 @@ function itg_app_manager_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
+      'ids' => array(
+        'description' => 'value of term or node id.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
       'created' => array(
         'description' => 'The Unix timestamp when the identifier was created.',
         'type' => 'int',
