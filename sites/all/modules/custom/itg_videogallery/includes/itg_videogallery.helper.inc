@@ -424,9 +424,7 @@ function itg_videogallery_dailymotion_send_video($real_path) {
       $dur = $api->get(
           '/video/' . $result['id'], array('fields' => array('duration', 'embed_url', 'encoding_progress', 'publishing_progress'))
       );
-      //$result['id'] = end(explode('/', $dur['embed_url']));
       $playlist_id = variable_get('dailymotion_playlist_id');
-//  $resp = $api->post('/playlist/'.$playlist_id.'/videos/' . $result['id']);
       $result['duration'] = $dur['duration'];
       $result['name'] = $file_name;
 
