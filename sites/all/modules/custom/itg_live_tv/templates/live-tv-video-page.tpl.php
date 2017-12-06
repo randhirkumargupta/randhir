@@ -65,10 +65,18 @@ if (function_exists('itg_live_tv_company')) {
       </div>
   </div>
   <?php
-      }
-      $current_time_program_tid = '';
-      if (function_exists('itg_live_tv_page_video_category')) {
-      $current_time_program_tid = itg_live_tv_page_video_category();
-  }
-  ?>
-  <div class="latest-livetv-video"><h4><?php print t('Latest Videos'); ?></h4><?php print views_embed_view( 'programme_content_live_tv', 'block_1', $current_time_program_tid); ?></div>
+}
+$current_time_program_tid = '';
+if (function_exists('itg_live_tv_page_video_category')) {
+  $current_time_program_tid = itg_live_tv_page_video_category();
+}
+?>
+<?php
+if (!empty($current_time_program_tid)) {
+  $latest_video = views_embed_view('programme_content_live_tv', 'block_1', $current_time_program_tid);
+  if (trim(strip_tags($latest_video)) != NULL) {
+    ?>
+    <div class="latest-livetv-video"><h4><?php print t('Latest Videos'); ?></h4><?php print $latest_video; ?></div>
+  <?php }
+}
+?>
