@@ -339,3 +339,41 @@ function itg_api_node_delete($node) {
         ->execute();
   }
 }
+
+/**
+ * Implements itt_api_path_insert().
+ */
+function itg_api_path_insert($node) {
+  if ($node->type == 'story') {
+    $getsection = !empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) ? $node->field_primary_category[LANGUAGE_NONE][0]['value'] : '';
+    if (function_exists('_remove_slash_from_string')) {
+      $edited_sef_url = _remove_slash_from_string($node->path['alias']);
+    }
+    if (!empty($edited_sef_url)) {
+      $lencount_sef = strlen($edited_sef_url);
+      if ($lencount_sef >= 160) {
+        $node_sef = substr($edited_sef_url, 0, 160);
+      }
+      else {
+        $node_sef = $edited_sef_url;
+      }
+    }
+    else {
+      $title_lenght = strlen($node->title);
+      if ($title_lenght >= 160) {
+        $node_sef = substr($node->title, 0, 160);
+      }
+      else {
+        $node_sef = _remove_slash_from_string($node->title);
+      }
+    }
+    $pathdata = get_path_from_category($getsection);
+    // Add static value for photo story.
+    $pathdata .= '/story';
+    // Add node title.
+    $pathdata .= '/' . trim($node_sef);
+    // Prepare SEO friendly node url
+    $newpath = itg_common_custompath_insert_val($pathdata);
+    return $newpath;
+  }
+}

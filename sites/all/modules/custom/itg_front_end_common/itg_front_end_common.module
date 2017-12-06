@@ -235,6 +235,7 @@ function _amp_story_ad_block() {
 function _vukkul_block_content() {
   $page_id = arg(1);
   $node = node_load($page_id);
+  if(!empty($node) && isset($node->type)) {
   $byline_id = isset($node->field_story_reporter[LANGUAGE_NONE][0]['target_id']) ? $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'] : '';
   if (function_exists('itg_common_get_node_title')) {
     $reporter_node = itg_common_get_node_title($byline_id);
@@ -276,6 +277,7 @@ function _vukkul_block_content() {
 
                </script>';
   return $output;
+  }
 }
 
 /**
@@ -1141,10 +1143,11 @@ function _related_story_amp_block_content() {
     if (!empty($related_data)) {
       $display_title = get_related_display_title($arg[1], $current_entity_id);
       if(!empty($display_title)) {
-        $display_title = $display_title;
+        $display_title = html_entity_decode($display_title);
       } else {
-        $display_title = $related_data->label;
+        $display_title = html_entity_decode($related_data->label);
       }
+      
       $related_title = mb_strimwidth($display_title, 0, 80, "..");
       
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
@@ -1162,16 +1165,16 @@ function _related_story_amp_block_content() {
         $request = parse_url($front_url);
         $host = $request['host'];
         $path = $request['path'];
-        $amp_url = 'http://'.$host.'/amp'.$path;
+        $amp_url = SITE_PROTOCOL.$host.'/amp'.$path;
         $image_link_url = $amp_url;
         if (empty($related_image_url)) {
         $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
         $related_story.= "<li>";
-        $related_story.= "<span class='tile'>" . l($related_title, $amp_url, array("attributes" => array("target" => "_blank","title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /><div fallback>offline</div></amp-img></a></li>";
+        $related_story.= "<span class='tile'><a href='$amp_url' target='_blank' title='$related_title'>" . $related_title . "</a></span><a href='$image_link_url' target='_blank' title='$related_title'><amp-img height='127' width='170' layout='responsive' src='$img_url' title='$related_title' alt='$related_title' /><div fallback>offline</div></amp-img></a></li>";
       }
       else {
         $related_story.= "<li>";
-        $related_story.= "<span class='tile'>" . l($related_title, $amp_url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</span><a href='$image_link_url' target='_blank' title='$related_title'>" . $related_image."</a></li>";
+        $related_story.= "<span class='tile'><a href='$amp_url' target='_blank' title='$related_title'>" . $related_title . "</a></span><a href='$image_link_url' target='_blank' title='$related_title'>" . $related_image."</a></li>";
       }
     }
     $i++;

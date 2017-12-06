@@ -18,9 +18,15 @@ global $theme;
 global $base_url;
 $live_url = "";
 $preview = NULL;
+
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
+if ($theme == 'itgadmin' || $preview == 'preview') {
+  global $conf;
+  $conf['preprocess_js'] = 0;
+}
+
 $highlights = itg_widget_highlights_block_data();
 $device = itg_live_tv_company('web');
 if (!empty($device[0])) {
