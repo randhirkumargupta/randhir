@@ -16565,3 +16565,31 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .social-nav .social-dropdown.active{ display: block; width:260px;}
 #block-itg-layout-manager-header-block .social-nav .social-dropdown ul li a{ line-height:45px; color:#333; }
 #block-itg-layout-manager-header-block .social-nav li:hover .social-dropdown ul li:hover .fa,#block-itg-layout-manager-header-block .social-nav li:hover .social-dropdown ul li .fa{ color:#333; }
+/* for event program tabs */
+.view-program-schedule .left-side-event-contents .common-class{
+    display : none;
+ }
+
+.view-program-schedule .top-tab ul li.active {
+    background: #a00606 !important;
+    color: #fff;
+}
+
+ .view-program-schedule .top-tab ul li {
+    display: inline-block;
+    vertical-align: top;
+    background: #eee;
+    padding: 6px 20px;
+    margin-right: 5px;
+    border-radius: 5px 5px 0px 0px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.view-program-schedule .top-tab ul {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+/* end for event program tabs */
