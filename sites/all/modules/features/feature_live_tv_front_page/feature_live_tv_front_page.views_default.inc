@@ -91,6 +91,12 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['relationships']['reverse_field_story_category_node']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['relationships']['reverse_field_story_category_node']['field'] = 'reverse_field_story_category_node';
   $handler->display->display_options['relationships']['reverse_field_story_category_node']['required'] = TRUE;
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
+  $handler->display->display_options['relationships']['nid']['id'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['relationships']['nid']['field'] = 'nid';
+  $handler->display->display_options['relationships']['nid']['relationship'] = 'reverse_field_story_category_node';
+  $handler->display->display_options['relationships']['nid']['required'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Taxonomy term: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
@@ -193,10 +199,6 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: Section wise ordering content: Category */
-  $handler->display->display_options['fields']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['fields']['cat_id']['table'] = 'itg_widget_order';
-  $handler->display->display_options['fields']['cat_id']['field'] = 'cat_id';
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
   $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
@@ -239,9 +241,9 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['sorts']['weight']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Section wise ordering content: Category */
+  /* Contextual filter: Section widget relationship: Category */
   $handler->display->display_options['arguments']['cat_id']['id'] = 'cat_id';
-  $handler->display->display_options['arguments']['cat_id']['table'] = 'itg_widget_order';
+  $handler->display->display_options['arguments']['cat_id']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['arguments']['cat_id']['field'] = 'cat_id';
   $handler->display->display_options['arguments']['cat_id']['default_action'] = 'default';
   $handler->display->display_options['arguments']['cat_id']['default_argument_type'] = 'taxonomy_tid';
