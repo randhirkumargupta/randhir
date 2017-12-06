@@ -129,6 +129,12 @@ function feature_live_tv_front_page_views_default_views() {
     'category_management' => 'category_management',
   );
   $handler->display->display_options['filters']['machine_name']['group'] = 1;
+  /* Filter criterion: Section widget relationship: Content type */
+  $handler->display->display_options['filters']['content_type']['id'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['table'] = 'itg_widget_order_section';
+  $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
+  $handler->display->display_options['filters']['content_type']['relationship'] = 'reverse_field_story_category_node';
+  $handler->display->display_options['filters']['content_type']['value'] = 'videogallery';
   $handler->display->display_options['path'] = 'livetv';
   $export['live_tv_programs'] = $view;
 
@@ -187,9 +193,9 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Section wise ordering content: itg_widget_order nid Title */
+  /* Relationship: Section widget relationship: itg_widget_order_section nid Title */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
-  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order';
+  $handler->display->display_options['relationships']['nid']['table'] = 'itg_widget_order_section';
   $handler->display->display_options['relationships']['nid']['field'] = 'nid';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
