@@ -2356,7 +2356,8 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-story-listicle-values"],
 [id*="field-event-tabs-values"],
 [id*="field-add-member-values"],
-[id*="field-associate-event-photo-values"] {
+[id*="field-associate-event-photo-values"],
+[id*="field-associate-event-video-values"] {
     @extend .itg-add-another-item;
 }
 
@@ -8460,7 +8461,8 @@ div.node {
 [id*="field-story-template-factoids-values"],
 [id*="field-story-template-guru-values"],
 [id*="field-add-member-values"],
-[id*="field-associate-event-photo-values"] {
+[id*="field-associate-event-photo-values"],
+[id*="field-associate-event-video-values"] {
     tbody tr {
         td {
             border: none;
@@ -9315,7 +9317,8 @@ div.node {
     [id*="field-video-anchor-values"],
     [id*="field-story-listicle-values"],
     [id*="field-add-member-values"],
-    [id*="field-associate-event-photo-values"] {
+    [id*="field-associate-event-photo-values"],
+    [id*="field-associate-event-video-values"] {
         thead {
             padding-left: 20px;
             padding-right: 10px;
@@ -14650,5 +14653,24 @@ div.ctools-modal-content {
         .form-item {
             padding-right: 10px;
         }
+    }
+    #view-display-isesue {
+        width: auto;
+    }
+}
+
+.form-field-name-field-associate-event-video {
+    [id*="field-associate-event-video-values"],
+    [id*="field-associate-event-photo-values"] {
+        thead {
+            padding: 0px 20px;
+        }
+        tbody tr td .form-type-textfield {
+            padding: 0;
+            margin: 0;
+        }
+    }
+    [id*="field-associate-event-video-values"] {
+        margin-top: 10px;
     }
 }
