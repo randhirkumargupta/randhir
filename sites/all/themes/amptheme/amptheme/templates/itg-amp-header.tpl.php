@@ -59,10 +59,10 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
                 $icon_path = $menu_link_data['icon_path'];
 
                 if (!empty($icon_path)) {
-                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img class='itg-user-icon' width='48' height='32' src='" . file_create_url($icon_path) . "'  /></span>";
+                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img class='itg-user-icon navimgamp' src='" . file_create_url($icon_path) . "'  /></span>";
                 } else {
                   $default_image = $base_url . '/sites/all/themes/itg/images/default_for_all_48_32.jpeg';
-                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img class='itg-user-icon' width='48' height='32' src=$default_image alt='' /></span>";
+                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img class='itg-user-icon navimgamp' src=$default_image alt='' /></span>";
                 }
                 $link_text = $link_text_icon . $menu_link_data['link_title_for_vertical'];
                 if (!empty($sponsored_class)) {
@@ -113,7 +113,9 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
     <div class="main-nav">
        <div class="nav-container-menu">
          <div class="nav-centerall">
+         <div class="top-first-menu">
           <?php print drupal_render($data['itg_top_manu_header']); ?>
+          </div>
              <!--logo start -->
             <?php $logo_itg = theme_get_setting('logo', 'itg'); ?>
               <div class="container headeritg-logo">    
