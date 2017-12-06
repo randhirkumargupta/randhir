@@ -386,7 +386,7 @@ function itg_videogallery_move_ftp_videos() {
   $ftp_move_archive = variable_get('ftp_move_archive', '');
   foreach ($result as $ke => $vid) {
     if ($vid->type == 'ftp') {
-      $datefolder = date('Y-m', $vid->upload_time);
+      $datefolder = date('Ym', $vid->upload_time);
       $file_name = '/' . FOLDER_FTP_ROOT . '/' . $ftp_video_folder . '/' . $vid->name;
       $file_name_to_folder = '/' . FOLDER_FTP_ROOT . '/' . $ftp_move_archive . '/' . $datefolder . '/';
       $file_name_to_folder_file = '/' . FOLDER_FTP_ROOT . '/' . $ftp_move_archive . '/' . $datefolder . '/' . $vid->name;
@@ -400,7 +400,7 @@ function itg_videogallery_move_ftp_videos() {
     }
 
     if ($vid->type == 'S3') {
-      $datefolder = date('Y-m', $vid->upload_time);
+      $datefolder = date('Ym', $vid->upload_time);
 
       $pav = itg_video_copy_onfile_to_anoter($vid->name, $datefolder);
     }
