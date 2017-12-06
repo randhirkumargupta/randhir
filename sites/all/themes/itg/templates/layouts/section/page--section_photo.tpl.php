@@ -111,6 +111,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                        jQuery('#edit-field-story-category-tid').val(section_id); 
                        jQuery('#edit-field-story-category-tid').trigger('change');
                        jQuery(this).addClass('menu-active');
+                       jQuery('body').css('pointer-events','none');
                    });", array('type' => 'inline', 'scope' => 'footer'));
 
                   drupal_add_js("jQuery(document).ready(function(){
