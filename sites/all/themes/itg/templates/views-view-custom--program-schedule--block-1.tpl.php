@@ -51,7 +51,8 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
 <?php
 $daywise = array_unique($daywise);
 foreach ($daywise as $key => $value) {
-  $tabs .= '<li style="background: ' . $tab_highlighted_color . '" data-tag="' . $value . '" class="event-program-tabs ' . $value . '">' . $value . '</li>';
+  $tab_value = str_replace('-', ' ', $value);
+  $tabs .= '<li style="background: ' . $tab_highlighted_color . '" data-tag="' . $value . '" class="event-program-tabs ' . $value . '">' . $tab_value . '</li>';
 }
 print '<div class="top-tab col-lg-12 col-md-12 col-sm-12"><ul>' . $tabs . '</ul></div>';
 print '<div class ="left-side-event-contents col-lg-12 col-md-12 col-sm-12">'.$output_left.'</div>';
