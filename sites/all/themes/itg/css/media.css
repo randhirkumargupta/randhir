@@ -3724,6 +3724,6 @@
     padding: 0 5px;
     }
     #block-itg-layout-manager-header-block .main-nav .nav-container-menu .nav-centerall{margin: 0 auto;width:265px;}
-    #block-itg-layout-manager-header-block .logo { width: 55px; position: absolute; top:15px; }
+    #block-itg-layout-manager-header-block .logo { width: 55px; position: absolute; top:15px; transform: translate(0%, 10%);}
 	
 }
