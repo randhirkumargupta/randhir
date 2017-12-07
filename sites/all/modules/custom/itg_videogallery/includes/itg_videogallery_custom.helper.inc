@@ -50,7 +50,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
       $file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
     }
     if (!empty($file_data_temp)) {
-// This code for resize all images 
+    // This code for resize all images 
       if ($form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'] == 0) {
         $file_image = file_load($file_data_temp->fid);
         $image = image_load($file_image->uri);
@@ -212,16 +212,15 @@ function itg_videogallery_custom_submit($form, &$form_state) {
     }
   }
   if ($node_id != "") {
-// for update on DM
+  // for update on DM
     $extralarge_image_fid = $form_state['values']['field_story_extra_large_image'][LANGUAGE_NONE][0]['fid'];
     $main_fids = array();
     $draft_msg_flag = 0;
     $video_desc = strip_tags($form_state['values']['field_story_expert_description'][LANGUAGE_NONE][0]['value']);
-// start loop of videos field collection
+   // start loop of videos field collection
     foreach ($form_state['values']['field_video_upload']['und'] as $keys => $videofields) {
 
       if ((int) $videofields['field_videogallery_video_upload']['und'][0]['fid'] != 0) {
-
         $video_image = itg_videogallery_get_video_info_by_fid($videofields['field_videogallery_video_upload']['und'][0]['fid']);
         $main_fids[] = $videofields['field_videogallery_video_upload']['und'][0]['fid'];
         if (!empty($video_image)) {
@@ -242,7 +241,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
            itg_videogallery_update_embedcode_url($video_image[0]->solr_video_id);
           }
           $file_video = $video_image;
-// this function use for delete itg_solr_delete_vide nid
+          // this function use for delete itg_solr_delete_vide nid
           itg_videogallery_delele_node_reuse_video($file_video[0]->solr_video_id);
           if ($form_state['node']->status == 1) {
             $num_updated = db_update('dailymotion_response_details') // Table name no longer needs {}
