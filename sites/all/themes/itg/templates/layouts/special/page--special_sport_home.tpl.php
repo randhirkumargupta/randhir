@@ -389,7 +389,6 @@ if ($theme != 'itgadmin') {
                                                   </div>
                                                 <?php } ?>  
                                                 <div class="data-holder" id="itg-block-8">
-                                                    <?php //print views_embed_view('sport_ipl', 'top_performers', ""); ?>
                                                     <?php
                                                     if (isset($widget_data['itg-block-8']['widget'])) {
                                                       print $widget_data['itg-block-8']['widget'];
@@ -465,17 +464,16 @@ if ($theme != 'itgadmin') {
                                     </div>  
                                 </div>
                             </div>
-<?php //}   ?>
+                           
                         </div>
                     </div>
                 </div>
                 <!--------------------------------Code for Front tpl---------------------------------------->
                 <?php if ($theme != 'itgadmin') { ?>
-          <?php //print $feed_icons;     ?>
           </section>
-              <?php if (false) { ?> 
+          <?php if (false) { ?> 
             <div id="navigation">
-                    <?php if ($main_menu): ?>
+                <?php if ($main_menu): ?>
                   <nav id="main-menu" role="navigation" tabindex="-1">
                       <?php
                       // This code snippet is hard to modify. We recommend turning off the
@@ -496,15 +494,15 @@ if ($theme != 'itgadmin') {
                       ?>
                   </nav>
                 <?php endif; ?>
-            <?php print render($page['navigation']); ?>
+                <?php print render($page['navigation']); ?>
             </div>
           <?php } ?>
-  <?php if ($sidebar_first || $sidebar_second): ?>
+          <?php if ($sidebar_first || $sidebar_second): ?>
             <aside class="sidebars">               
             </aside>
-      <?php endif; ?>
+          <?php endif; ?>
       </main>
-  <?php print render($page['footer']); ?>
+      <?php print render($page['footer']); ?>
   </div>
   <?php print render($page['bottom']); ?>
 <?php } ?>
