@@ -910,6 +910,7 @@ function featuresWidgetData() {
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
+    $query->fields('li', array('field_story_large_image_fid'));
 
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
