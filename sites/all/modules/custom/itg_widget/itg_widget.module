@@ -2259,3 +2259,14 @@ function itg_save_section_top_story_widget_data($form_state, $widget_name) {
         //itg_widget_delete_old_data_by_limit($widget_name, $category_id);
     }
 }
+
+
+function get_election_state_by_category($catid){
+    $itg_query = db_select('field_data_field_graph_category', 'dfgc');
+    $itg_query->innerJoin("field_data_field_election_state", "fes", "fes.entity_id=dfgc.entity_id");
+    $itg_query->condition('dfgc.field_graph_category_value', $catid, '=');
+	$itg_query->fields('fes', array('field_election_state_tid'));
+    $itg_result = $itg_query->execute()->fetchAll();
+	return $itg_result;
+	
+}
