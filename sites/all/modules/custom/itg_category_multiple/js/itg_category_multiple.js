@@ -51,7 +51,6 @@ $( document ).ready( function() {
     // Saving the extra data for the section 
     var category_extra_data = { };
     category_extra_data.section = $( this ).val(); // Setting for section 
-    //$('input[name="field_story_extra_data[und][0][value]"]').val(btoa(JSON.stringify(category_extra_data)));
 
     if ( categoryies ) {
       $( '#edit-field-story-category-und' ).val( '' );
@@ -96,12 +95,6 @@ $( document ).ready( function() {
           $( '#edit-itg-primary-category' ).empty();
           $( '#edit-itg-category' ).append( item.main );
           $( '#edit-itg-primary-category' ).append( item.primary );
-
-          // $('#edit-field-story-category-und').val($('#edit-itg-section').val());
-          // $('#edit-field-story-category-und').val($('#edit-itg-category').val());
-          // $('#edit-field-story-category-und').val($('#edit-itg-sub-category').val());
-          // $('#edit-field-story-category-und').val($('#edit-itg-sub-sub-category').val());
-          // $('#edit-field-story-category-und').val($('#edit-itg-sub-sub-sub-category').val());
 
           if ( item.b_cat.length > 0 ) { // Category
             $( '#edit-itg-category' ).val( JSON.parse( item.b_cat ) );
