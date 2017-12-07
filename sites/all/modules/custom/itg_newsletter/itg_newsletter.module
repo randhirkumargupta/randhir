@@ -139,13 +139,13 @@ function itg_newsletter_form_alter(&$form , &$form_state , $form_id) {
   if ($form_id == 'newsletter_node_form') {
     $content_limit = variable_get('newsletter_content_limit');
     if (isset($content_limit) && is_numeric($content_limit)) {
-      $renge = $content_limit;
+      $range = $content_limit;
     } else {
-      $renge = 20;
+      $range = 20;
     }
-    $form['field_newsl_newsletter_content']['und']['#options']['top_20_trending'] = t("Top ".$renge." Trending News");
-    $form['field_newsl_newsletter_content']['und']['#options']['top_20_shared'] = t("Top ".$renge." Shared News");
-    $form['field_newsl_newsletter_content']['und']['#options']['top_20_most_viewed'] = t("Top ".$renge." Most Viewed News");
+    $form['field_newsl_newsletter_content']['und']['#options']['top_20_trending'] = t("Top ".$range." Trending News");
+    $form['field_newsl_newsletter_content']['und']['#options']['top_20_shared'] = t("Top ".$range." Shared News");
+    $form['field_newsl_newsletter_content']['und']['#options']['top_20_most_viewed'] = t("Top ".$range." Most Viewed News");
 
     // Modify content id(show content id only instead of title and content id)
     if (arg(0) == 'node' && arg(2) == 'edit') {
