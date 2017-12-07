@@ -14659,7 +14659,8 @@ div.ctools-modal-content {
     }
 }
 
-.form-field-name-field-associate-event-video {
+.form-field-name-field-associate-event-video,
+.form-field-name-field-associate-event-photo {
     [id*="field-associate-event-video-values"],
     [id*="field-associate-event-photo-values"] {
         thead {
@@ -14668,6 +14669,11 @@ div.ctools-modal-content {
         tbody tr td .form-type-textfield {
             padding: 0;
             margin: 0;
+        }
+        +.description {
+            +.clearfix {
+                left: 580px;
+            }
         }
     }
     [id*="field-associate-event-video-values"] {
