@@ -1075,6 +1075,12 @@ function topstoriesList($source) {
 //}
     }
 
-    $data_topstories['data'] = (array) $data_newslist;
+    
+    if($source == 'home'){
+        $data_topstories['news'] = (array) $data_newslist;
+    }
+    else{
+        $data_topstories['data'] = (array) $data_newslist;
+    }
     return $data_topstories;
 }
