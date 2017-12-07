@@ -581,6 +581,7 @@ function itg_videogallery_make_parm_for_jwpalyer($video_data, $used_on, $externa
     $retrun_array['player_image'] = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg';
   }
   $dfp_data = itg_videogallery_get_dfp_tags($video_data['in']['website'], $video_data['in']['client']);
+  $retrun_array['dfp_tags'] = JWPLAYER_DFP_TAG;
   if (!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
 
     if ($used_on == 'embed') {
@@ -595,9 +596,7 @@ function itg_videogallery_make_parm_for_jwpalyer($video_data, $used_on, $externa
       $retrun_array['dfp_tags'] = $dfp_data[0]->dfp_tags;
     }
   }
-  else {
-    $retrun_array['dfp_tags'] = JWPLAYER_DFP_TAG;
-  }
+  
 
   if (!empty($dfp_data)) {
     if ($used_on == 'embed' && !empty($dfp_data[0]->ga_tag_extarnal)) {
