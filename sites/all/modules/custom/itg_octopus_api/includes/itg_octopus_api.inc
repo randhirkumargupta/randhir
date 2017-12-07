@@ -327,8 +327,6 @@ function itg_octopus_api_rundown_listing() {
 
   $query->orderBy('ios.id', 'DESC');
 
-// p($query->__toString());
-  //$result = $query->execute();
   $result = $query->distinct()->execute();
 
 
@@ -446,7 +444,6 @@ function itg_octopus_api_rundown_listing_count($current_rundown) {
 
   $query->orderBy('ios.id', 'DESC');
 
-// p($query->__toString());
   return $result = $query->distinct()->execute()->rowCount();
 }
 
