@@ -1044,14 +1044,14 @@ function itg_widget_get_graph_data() {
     $itg_query->leftJoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
     $itg_query->innerjoin('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
     $itg_query->innerjoin('field_data_field_graph_type', 'gt', 'n.nid = gt.entity_id');
-	
+	$itg_query->leftJoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
 	if($is_category){
-		$itg_query->innerjoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
 		$itg_query->condition('dfgc.field_graph_category_value', $cat_id_org, '=');
 	}
 
     $itg_query->innerjoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
     $itg_query->fields('n', array('nid'));
+    $itg_query->fields('dfgc', array('field_graph_category_value'));
     $itg_query->fields('frq', array('field_election_constituency_tall_value'));
     $itg_query->fields('astw', array('field_election_state_tid'));
      $itg_query->fields('cju', array('field_election_chart_json_url_value'));
