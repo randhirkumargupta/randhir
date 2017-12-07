@@ -1,11 +1,23 @@
 
 <?php
+
 foreach ($rows as $index => $row) {
 
     $consti[] = $row['state'];
 }
-
 $resultdata = array_unique($consti);
+$cat_d = arg(2);
+$is_category = FALSE;
+$section_tid = get_category_parent_one_level($cat_d);
+if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
+	$is_category = TRUE;
+	$election_state = get_election_state_by_category($cat_d);
+	if(isset($election_state[0]->field_election_state_tid) && !empty($election_state[0]->field_election_state_tid)){
+		$resultdata = array($election_state[0]->field_election_state_tid);
+	}
+}
+
+
 ?>
 <div class="key-candidate">
 
