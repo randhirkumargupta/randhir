@@ -463,11 +463,12 @@ function generatePhotoStoryDetailList($nid) {
             $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
             $photo_story_img = completeFilePath($photo_story_img_fid);
             $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
-
+            $caption = getImgCaption($photo_story_img_fid);
+            $byline = getImgByline($large_image_fid);
             $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
             $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
-            $photo_list_array[$listcont]['p_credit'] = "";
-            $photo_list_array[$listcont]['p_caption'] = "";
+            $photo_list_array[$listcont]['p_credit'] = "$byline";
+            $photo_list_array[$listcont]['p_caption'] = "$caption";
             $photo_list_array[$listcont]['p_desc_withouthtml'] = "$photo_story_desc";
             $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_desc";
             $listcont++;
