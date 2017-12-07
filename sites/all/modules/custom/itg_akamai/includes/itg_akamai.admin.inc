@@ -81,16 +81,6 @@ function itg_akamai_settings() {
     '#required' => TRUE,
   );
 
-  $form['itg_config_fieldset']['itg_akamai_amp_url_purge_ptrn'] = array(
-    '#type' => 'radios',
-    '#options' => array('/amp' => '/amp', '?amp' => '?amp'),
-    '#title' => t('AMP Purge Url Pattern'),
-    '#default_value' => variable_get('itg_akamai_amp_url_purge_ptrn', '/amp'),
-    '#description' => t('Please select Amp Purge Url pattern i.e /amp Or ?amp'),
-    '#required' => TRUE,
-  );
-
-
   $nodes_list = node_type_get_types();
   $nodes_list_array = array();
   foreach ($nodes_list as $key => $value) {
@@ -968,8 +958,8 @@ function itg_akamai_akamai_not_implemented_rows() {
     $query_node->condition('n.nid', $data_nids, 'NOT IN');
   }
 
-  $query->condition('n.entity_type', $mapping, 'IN');
-  $query->orderBy('n.nid', 'DESC');
+  $query_node->condition('n.type', $mapping, 'IN');
+  $query_node->orderBy('n.nid', 'DESC');
 
   $query_node = $query_node->extend('PagerDefault')->limit(50);
 

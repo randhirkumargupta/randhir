@@ -139,9 +139,9 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,    
   );
   
-  $items['itg-akamai-load-my-account'] = array(
-    'title' => 'Akamai Load My Account',
-    'description' => 'Akamai Load My Account',
+  $items['itg-load-my-account'] = array(
+    'title' => 'Load My Account',
+    'description' => 'Load My Account',
     'page callback' => 'itg_akamai_load_my_account',
     'access arguments' => array('access content'),
     'file' => 'includes/itg_akamai.helper.inc',
