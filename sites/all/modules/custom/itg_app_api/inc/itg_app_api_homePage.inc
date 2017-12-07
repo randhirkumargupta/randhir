@@ -20,7 +20,8 @@ function homePageJson() {
     //$data_packagelist_lifestyle = homePageJsonPackagelist_lifestyle();
     //$data_packagelist_world = homePageJsonPackagelist_world();
     
-    $data_topstories = homePageJsonTopstories();
+    //$data_topstories = homePageJsonTopstories();
+    $data_topstories = topstoriesList('home');
     $data_news_india = homePageJsonNewslist_india();
 
     $data_news_lifestyle = homePageJsonNewslist_lifestyle();

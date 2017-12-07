@@ -926,7 +926,7 @@ function featuresWidgetData() {
  * function for  topstoriesList
  * @return array
  */
-function topstoriesList() {
+function topstoriesList($source) {
 // variable declation
     $data_topstories = array();
     $data_newslist = array();
@@ -937,6 +937,9 @@ function topstoriesList() {
     $home_list_count = 0;
     $widget_name = "top_stories_widget";
     $range_max = 15;
+    if($source == 'home'){
+        $range_max = 7;
+    }
     $range_min = 0;
     $order_by = 'ASC';
 
