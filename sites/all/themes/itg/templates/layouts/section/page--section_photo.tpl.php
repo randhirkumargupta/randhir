@@ -115,7 +115,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                    });", array('type' => 'inline', 'scope' => 'footer'));
 
                   drupal_add_js("jQuery(document).ready(function(){
+                       var section_id = jQuery('.video_landing_menu li a:first').attr('data-anchor');
+                       jQuery('#edit-field-story-category-tid').val(section_id); 
+                       jQuery('#edit-field-story-category-tid').trigger('change');
                        jQuery('.video_landing_menu li a:first').addClass('menu-active');
+                       jQuery('body').css('pointer-events','none');
                    });", array('type' => 'inline', 'scope' => 'footer'));
                   ?>
               <div class="slide-icon scroll-arrow-left"><i class="fa fa-angle-right ll"></i></div>
