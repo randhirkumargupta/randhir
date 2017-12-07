@@ -5193,19 +5193,19 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
         if ($value['nid']) {
             $node_data = node_load($value['nid']); // 837259
 
-            if ($value['ntype'] == "anchor") {
+            if ($value['ntype'] == "anchor" && $value['status'] == 1) {
                 $a_id = $node_data->nid;
 
                 $anchor_list[$anchor_c]['a_id'] = "$a_id";
 
                 $anchor_c++;
-            } elseif ($value['ntype'] == "author") {
+            } elseif ($value['ntype'] == "author" && $value['status'] == 1) {
                 $a_id = $node_data->nid;
 
                 $author_list[$anchor_c1]['a_id'] = "$a_id";
 
                 $anchor_c1++;
-            } elseif ($value['ntype'] == "tag") {
+            } elseif ($value['ntype'] == "tag" && $value['status'] == 1) {
                 $a_id = $value['nid'];
 
                 $topics_list[$anchor_c2]['t_id'] = "$a_id";
