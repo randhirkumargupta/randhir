@@ -4,9 +4,9 @@
  * Inc file contains global configurations
  */
 define('FEED_NOTIFICATION_PATH', '/sites/default/files/xml_it/notifications');
-define('DEFAULT_REDIS_EXPIRE_TIME', 86400);
-define('RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME', 86400);
-define('RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME', 86400);
+define('DEFAULT_REDIS_EXPIRE_TIME', 600);
+define('RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME', 600);
+define('RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME', 600);
 
 
 define('ITGD_DEV_FILES_PATH', 'http://itgddev.indiatodayonline.in/sites/default/files');
