@@ -28,7 +28,7 @@ function feature_category_management_strongarm() {
           'weight' => '9',
         ),
         'description' => array(
-          'weight' => '5',
+          'weight' => '4',
         ),
         'redirect' => array(
           'weight' => '7',

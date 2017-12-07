@@ -2215,21 +2215,18 @@ function itg_widget_block_view_alter(&$data, $block) {
         $arraynid = array();
         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
         $itg_widgets_sports_check = variable_get('itg_widgets_sports');
-        
         if ((isset($arg[1]) && (in_array($arg[1], $arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)))) {          
             drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
 
           });', array('type' => 'inline', 'scope' => 'footer'));
-            
+           
            if ((isset($item['page_arguments'][0]->type) && ($item['page_arguments'][0]->type == 'sport_static_page' && empty($itg_widgets_sports_check)))) {
              $data['content'] = array();             
            } else {           
               return TRUE;
            }
-        } else {         
-            $data['content'] = array();
-        }
+        } 
     }
 
     if ($block->delta == 'may_be_recommend_block') {
@@ -2606,7 +2603,7 @@ function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
         '#title' => t('Items per page'),
         '#type' => 'select',
         '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
-        '#options' => array(10 => 10, 20 => 20, 30 => 30),
+        '#options' => array(20 => 20, 40 => 40, 60 => 60, 80 => 80, 100 => 100),
     );
     $form['alt_button'] = array(
         '#type' => 'submit',

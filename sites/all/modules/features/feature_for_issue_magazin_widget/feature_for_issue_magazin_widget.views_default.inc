@@ -152,6 +152,7 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '20, 40, 60, 80, 100';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -298,10 +299,6 @@ function feature_for_issue_magazin_widget_views_default_views() {
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
-  /* Field: Content: Display on */
-  $handler->display->display_options['fields']['field_display_on']['id'] = 'field_display_on';
-  $handler->display->display_options['fields']['field_display_on']['table'] = 'field_data_field_display_on';
-  $handler->display->display_options['fields']['field_display_on']['field'] = 'field_display_on';
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -428,6 +425,14 @@ function feature_for_issue_magazin_widget_views_default_views() {
   /* Display: Issue Magazine widget List */
   $handler = $view->new_display('page', 'Issue Magazine widget List', 'issue_magazin_widget_list');
   $handler->display->display_options['display_description'] = 'Issue Magazin widget List';
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '20, 40, 60, 80, 100';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
