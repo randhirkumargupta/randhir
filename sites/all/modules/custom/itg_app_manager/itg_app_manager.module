@@ -2546,7 +2546,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#default_value' => unserialize(fetchMasterConfigData('week_days'))
     );
     $form['frequency_group']['start_time'] = array(
-        '#markup' => 'Start time',
+        '#markup' => '<span>Start time<span>',
         '#prefix' => '<div class="start-time">',
     );
     $form['frequency_group']['start_time_hr'] = array(
@@ -2561,7 +2561,7 @@ function itg_app_daily_capsule_manager_form($form, &$form_state) {
         '#default_value' => fetchMasterConfigData('start_time_min')
     );
     $form['frequency_group']['end_time'] = array(
-        '#markup' => 'End time',
+        '#markup' => '<span>End time</span>',
         '#prefix' => '<div class="end-time">',
     );
     $form['frequency_group']['end_time_hr'] = array(
