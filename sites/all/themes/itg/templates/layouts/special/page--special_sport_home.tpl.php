@@ -359,8 +359,6 @@ if ($theme != 'itgadmin') {
                                             <?php } ?>    
                                             <div class="data-holder" id="itg-block-7">
                                                 <?php
-                                               // print views_embed_view('sport_ipl', 'points_tally', "");
-
                                                 if (isset($widget_data['itg-block-7']['widget'])) {
                                                   print $widget_data['itg-block-7']['widget'];
                                                 }
@@ -466,7 +464,7 @@ if ($theme != 'itgadmin') {
                                     </div>  
                                 </div>
                             </div>
-                            <?php //}   ?>
+                           
                         </div>
                     </div>
                 </div>
