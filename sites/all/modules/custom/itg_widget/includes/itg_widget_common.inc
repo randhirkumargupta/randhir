@@ -2606,7 +2606,7 @@ function itg_widget_issuewidgetlist_filter_form($form, $form_state) {
         '#title' => t('Items per page'),
         '#type' => 'select',
         '#default_value' => ($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
-        '#options' => array(10 => 10, 20 => 20, 30 => 30),
+        '#options' => array(20 => 20, 40 => 40, 60 => 60, 80 => 80, 100 => 100),
     );
     $form['alt_button'] = array(
         '#type' => 'submit',
