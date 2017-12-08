@@ -40,7 +40,9 @@
               if(function_exists('itg_videogallery_make_parm_for_jwpalyer')) {
                $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, 'video', 0);
               }
+            if(strpos($player_content['file_url'], 'https') === FALSE) {
               $video_urls = str_replace("http","https",$player_content['file_url']);
+            }
             ?>
               <amp-video width="300"
                        height="200"
