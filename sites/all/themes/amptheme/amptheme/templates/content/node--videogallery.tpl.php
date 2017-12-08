@@ -46,9 +46,8 @@
                        height="200"
                        src="<?php print $video_urls;?>"  
                        layout="responsive"
-                       controls
-                       >
-                       <source type="video/webm" src="<?php $video_urls ;?>">
+                       controls>
+                       <source type="video/webm" src="<?php $video_urls;?>">
               </amp-video>
             <?php
             }
@@ -85,8 +84,7 @@
                        height="200"
                        src="<?php print $video_id;?>"  
                        layout="responsive"
-                       controls
-                       >
+                       controls>
                        <source type="video/webm" src="<?php print $video_id;?>">
                       </amp-video>
                     <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
