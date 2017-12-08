@@ -9,7 +9,6 @@ function hmelectioninner(a, x, chart_path) {
     }
 
     var stateURL = chart_path;
-    console.log(stateURL, 'stateURL');
     jQuery.ajax({
         type: "GET",
         url: stateURL,
@@ -32,7 +31,6 @@ function hmelectioninner(a, x, chart_path) {
 function hmelection(a, type, json_path, chart_path) {
     var b = a;
     var feedURL = json_path;
-    console.log(feedURL, 'feedURL');
     jQuery.ajax({
         type: "GET",
         url: feedURL,
