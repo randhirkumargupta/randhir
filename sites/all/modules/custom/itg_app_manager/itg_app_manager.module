@@ -44,9 +44,9 @@ function itg_app_manager_block_view($delta = '') {
     switch ($delta) {
         case 'app_user_button':
             $block['content'] = '';
-            //if(user_has_role(30)){
+            if(user_has_role(30)){
             $block['content'] = '<a href="'.$base_url.'/user/logout">Logout</a>';
-           //}
+           }
             break;
 
         
