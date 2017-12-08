@@ -13,7 +13,7 @@
  */
 function itg_app_api_init() {
     module_load_include('inc', 'itg_app_api', 'inc/helper');
-    module_load_include('inc', 'itg_app_api', 'inc/simple_html_dom');
+    module_load_include('php', 'itg_app_api', 'inc/simple_html_dom');
 }
 
 
