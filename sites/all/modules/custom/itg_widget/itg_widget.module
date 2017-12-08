@@ -768,8 +768,11 @@ function itg_widget_block_view($delta = '') {
 				drupal_add_css(drupal_get_path('module', 'itg_widget') . '/css/dot_graph.css', array('type' => 'file', 'scope' => 'footer'));
 			}
             
-            if($data[0]->field_graph_type_value != 'Dot Graph'){
+            if($data[0]->field_graph_type_value == 'Graph'){
 				foreach ($data as $index => $row) {
+					if($row->field_graph_type_value != "Graph"){
+						continue;
+					}
                 $jsondata = file_get_contents($row->field_election_constituency_tall_value);
                 drupal_add_js(' jQuery(function() {
 
