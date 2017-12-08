@@ -131,21 +131,7 @@ function itg_app_manager_schema() {
         'type' => 'varchar',
         'length' => 255,
       ),
-      /*'s_order' => array(
-        'description' => 'Order of the Subcategory',
-        'type' => 'int',
-        'unsigned' => TRUE,
-      ),
-      's_is_new' => array(
-        'description' => '',
-        'type' => 'int',
-        'unsigned' => TRUE,
-      ),
-      'content_type' => array(
-        'description' => 'Content type name',
-        'type' => 'varchar',
-        'length' => 255,
-      ),*/
+      
     ),
     'primary key' => array('id'),
   );
@@ -206,6 +192,12 @@ function itg_app_manager_schema() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
+      ),
+      'ids' => array(
+        'description' => 'value of term or node id.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
       ),
       'created' => array(
         'description' => 'The Unix timestamp when the identifier was created.',
