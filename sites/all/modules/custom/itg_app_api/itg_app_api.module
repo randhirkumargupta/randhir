@@ -13,7 +13,7 @@
  */
 function itg_app_api_init() {
     module_load_include('inc', 'itg_app_api', 'inc/helper');
-    //module_load_include('inc', 'itg_app_api', 'inc/simple_html_dom');
+    module_load_include('inc', 'itg_app_api', 'inc/simple_html_dom');
 }
 
 
@@ -1781,7 +1781,7 @@ function resentotpValidation_rapid($params) {
  * @return string $n_body
  */
 function formateNodeBodyToken($n_body) {
-    include 'simple_html_dom.php';
+    //include 'simple_html_dom.php';
     $token_list = array('div[class=quiz]', 'div[class=poll]', 'div[class=survey]', '<p>[ITG:LISTICLES]</p>', 'div[class=itgimage]', '<p>[ITG:TECH-PHOTOS]</p>', '<p>[ITG:EXPERT-CHUNK]</p>', '<p>[ITG:FACTOIDS]</p>', '<p>[ITG:TECH-PHOTO-GALLERY]</p>');
     
     $data = array();
@@ -1860,7 +1860,7 @@ function getTechProsImg($content_org) {
  * @return array
  */
 function getTechProsh2($content_org) {
-    include 'simple_html_dom.php';
+    //include 'simple_html_dom.php';
     $h2 = "";
     if ($content_org) {
         $str_html = str_get_html($content_org);
