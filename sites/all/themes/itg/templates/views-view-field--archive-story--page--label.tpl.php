@@ -36,12 +36,10 @@ if (function_exists(itg_story_clone_data))
   $right_emoji_image = $clone_arr_response->sm_field_custom_emoji[0];
   preg_match_all('/<img[^>]*>/s', $right_emoji_image, $images);
   $right_smilies = implode("", $images[0]);
-  if (strpos($clone_arr_response->url, BACKEND_URL) !== false) {
-    $front_url = str_replace(BACKEND_URL, FRONT_URL, $clone_arr_response->url);
+  if (function_exists('itg_apache_solr_get_site_url')) {
+    $hash_url = itg_apache_solr_get_site_url();
   }
-  else {
-    $front_url = $clone_arr_response->url;
-  }
+  $front_url = $hash_url[$clone_arr_response->hash] . '/' . $clone_arr_response->path_alias;
   $label = html_entity_decode($clone_arr_response->label, ENT_QUOTES);
 }
 if(!empty($left_position) && $left_position == 'left' && empty($right_position)) {
