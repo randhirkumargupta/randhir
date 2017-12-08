@@ -2514,14 +2514,14 @@ function itg_rapid_api_master_config_internal($token) {
     $redis_key = "itgd_rapid_master_config_json_internal";
     $result_get = getRedis($redis_key);
 
-//    if ($result_get['key_value'] != "") {
-//        $jsondata = $result_get['key_value'];
-//    } else {
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
         $jsondata = master_config_interenal();
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    //}
+    }
 
     $obj = json_decode($jsondata, true);
     $return_obj = $obj;
