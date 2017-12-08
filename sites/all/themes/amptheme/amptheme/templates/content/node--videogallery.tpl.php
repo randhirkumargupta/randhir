@@ -40,9 +40,11 @@
               if(function_exists('itg_videogallery_make_parm_for_jwpalyer')) {
                $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, 'video', 0);
               }
-            if(strpos($player_content['file_url'], 'https') === FALSE) {
-              $video_urls = str_replace("http","https",$player_content['file_url']);
-            }
+              if(strpos($player_content['file_url'], 'https') === FALSE) {
+                $video_urls = str_replace("http","https",$player_content['file_url']);
+             } else {
+                $video_urls = $player_content['file_url'];
+             }
             ?>
               <amp-video width="300"
                        height="200"
@@ -79,7 +81,11 @@
                   layout="responsive"
                   type="slides">
               <?php foreach ($videoids as $keys => $video_value) {
-                $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
+                if(strpos($video_value->field_migrated_video_url_value, 'https') === FALSE) {
+                 $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
+                } else {
+                 $video_id = $video_value->field_migrated_video_url_value;
+                }
                 ?> 
               <div class="slide"> <div class="photo-slide">
                       <amp-video width="300"
