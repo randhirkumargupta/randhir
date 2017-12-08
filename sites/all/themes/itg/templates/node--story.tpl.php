@@ -109,6 +109,8 @@ if (!empty($content)):
       endif;
     }
   }
+  // source type array
+  $source_type_arr = array('PTI' , 'IANS', 'ANI');
 ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>">
     <div class='<?php print $classes ?>'>      
@@ -272,7 +274,7 @@ if (!empty($content)):
                   <li>
                     <?php
                     print t('UPDATED ');
-                    if($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'PTI') {
+                    if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                         print date('H:i', $node->created);
                     } else {
                         print date('H:i', $node->changed);  
@@ -388,7 +390,7 @@ if (!empty($content)):
                 <?php } ?>  
                 <ul class="date-update">
                   <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                  <li><?php t('UPDATED '); ?><?php if($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'PTI') {
+                  <li><?php t('UPDATED '); ?><?php if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
                         print date('H:i', $node->created);
                     } else {
                         print date('H:i', $node->changed);  
