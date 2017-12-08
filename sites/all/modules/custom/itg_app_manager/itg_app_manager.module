@@ -12,6 +12,16 @@
 function itg_app_manager_init() {
     module_load_include('inc', 'itg_app_manager', 'inc/comman');
 }
+/**
+ * Implements hook_user_login(). 
+ */
+function itg_app_manager_user_login(&$edit, $account) {
+    if (in_array("App Manager", $account->roles)) {
+        $edit['redirect'] = 'itg-app-dashboard';
+        drupal_goto('itg-app-dashboard');
+    }
+   
+}
 
 // Load the hirerical select common file
 module_load_include('inc', 'hierarchical_select', 'includes/common');
@@ -35,56 +45,57 @@ function itg_app_manager_permission() {
  */
 function itg_app_manager_menu() {
     $items = array();
+    global $base_url;
     $items['hamburger-menu-management'] = array(
-        'title' => 'Hamburger menu',
+        'title' => 'Hamburger menu  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form', //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
         'page arguments' => array('itg_app_manager_menu_form', '1'), //put the name of the form here
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['horizontal-menu-management'] = array(
-        'title' => 'Horizontal menu',
+        'title' => 'Horizontal menu  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_manager_menu_form', '2'),
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['master-config-internal'] = array(
-        'title' => 'Master Config internal',
+        'title' => 'Master Config internal  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_master_config_internal_form'),
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-widget'] = array(
-        'title' => 'Widgets',
+        'title' => 'Widgets  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'itg_app_create_widget_page',
         //'page arguments' => array('itg_app_create_widget_form'),
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-widget/%/edit'] = array(
-        'title' => 'Edit Widget item',
+        'title' => 'Edit Widget item  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'itg_app_create_widget_page',
         'page arguments' => array(1),
         'access arguments' => array('administer app manager'),
         'type' => MENU_CALLBACK,
     );
     $items['itg-app-widget/%/delete'] = array(
-        'title' => 'Delete Widget item',
+        'title' => 'Delete Widget item  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_widget_delete_record_comfirm', 1),
         'access arguments' => array('administer app manager'),
         'type' => MENU_CALLBACK,
     );
     $items['itg-app-manager-packages'] = array(
-        'title' => 'Packages',
+        'title' => 'Packages  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'itg_app_manager_packages',
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-manager-packages/%/delete'] = array(
-        'title' => 'Delete Package',
+        'title' => 'Delete Package  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_manager_package_delete_comfirm', 1),
         'access arguments' => array('administer app manager'),
@@ -97,13 +108,13 @@ function itg_app_manager_menu() {
         'type' => MENU_CALLBACK,
     );
     $items['horizontal-menu-list'] = array(
-        'title' => 'Horizontal menu list',
+        'title' => 'Horizontal menu list  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'horizontal_menu_list',
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['hamburger-menu-list'] = array(
-        'title' => 'Hamburger menu list',
+        'title' => 'Hamburger menu list  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'hamburger_menu_list',
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
@@ -115,14 +126,14 @@ function itg_app_manager_menu() {
         'type' => MENU_NORMAL_ITEM,
     );
     $items['m-menu/%/edit'] = array(
-        'title' => 'Edit Hamburger/Horizontal menu',
+        'title' => 'Edit Hamburger/Horizontal menu  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'm_menu_edit',
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
 
     $items['top-stories-management'] = array(
-        'title' => 'Top stories management',
+        'title' => 'Top stories management  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('top_stories_management_form'),
         'access arguments' => array('administer app manager'),
@@ -130,46 +141,46 @@ function itg_app_manager_menu() {
     );
 
     $items['itg-app-manager-categories'] = array(
-        'title' => 'categories',
+        'title' => 'categories  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'itg_app_manager_categories',
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-manager-categories/%/delete'] = array(
-        'title' => 'categories Package',
+        'title' => 'categories Package  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_manager_categories_delete_comfirm', 1),
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-manager-poll'] = array(
-        'title' => 'Poll',
+        'title' => 'Poll  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'itg_app_manager_poll',
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-manager-poll/%/delete'] = array(
-        'title' => 'Poll Package',
+        'title' => 'Poll Package  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_manager_poll_delete_comfirm', 1),
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-manager-magazine'] = array(
-        'title' => 'Poll',
+        'title' => 'Magazine  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'itg_app_manager_magazine',
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-manager-magazine/%/delete'] = array(
-        'title' => 'Poll Package',
+        'title' => 'Magazine Package  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_manager_magazine_delete_comfirm', 1),
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-dashboard'] = array(
-        'title' => 'App Dashboard',
+        'title' => 'App Dashboard  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_dashboard_form'),
         'access arguments' => array('administer app manager'),
@@ -177,14 +188,14 @@ function itg_app_manager_menu() {
     );
 
     $items['admin/api-configuration/rest-api/itg-app-dashboard'] = array(
-        'title' => 'App Dashboard',
+        'title' => 'App Dashboard  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_dashboard_form'),
         'access arguments' => array('itg mobile feed'),
         'type' => MENU_NORMAL_ITEM,
     );
     $items['itg-app-daily-capsule-manager'] = array(
-        'title' => 'Daily Capsule Manager',
+        'title' => 'Daily Capsule Manager  <a href="'.$base_url.'/user/logout">',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_daily_capsule_manager_form'),
         'access arguments' => array('administer app manager'),

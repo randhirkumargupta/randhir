@@ -14,16 +14,7 @@
 function itg_app_api_init() {
     module_load_include('inc', 'itg_app_api', 'inc/helper');
 }
-/**
- * Implements hook_user_login(). 
- */
-function itg_app_api_user_login(&$edit, $account) {
-    if (in_array("App Manager", $account->roles)) {
-        $edit['redirect'] = 'itg-app-dashboard';
-        drupal_goto('itg-app-dashboard');
-    }
-   
-}
+
 
 /**
  * Implements hook_services_resources().
