@@ -23,6 +23,9 @@ function itg_app_api_user_login(&$edit, $account) {
     if (in_array("App Manager", $account->roles)) {
         $edit['redirect'] = 'itg-app-dashboard';
     }
+    if (user_is_logged_in()) {
+      drupal_goto('itg-app-dashboard');
+    }
 }
 
 /**
