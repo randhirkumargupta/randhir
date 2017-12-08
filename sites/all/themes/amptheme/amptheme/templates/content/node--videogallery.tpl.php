@@ -22,13 +22,40 @@
         } 
     ?>
 
-            <div class="slide"> <div class="photo-slide"><amp-dailymotion data-videoid=<?php print $video_value->solr_video_id; ?>
-                             layout="responsive"
-                             data-ui-logo="false"
-                             data-info="false"
-                             width="300"
-                             height="200">
-            </amp-dailymotion>
+            <div class="slide"> <div class="photo-slide">
+            <?php if($video_value->video_repo_type != 'INTERNAL') { ?> 
+              <amp-dailymotion data-videoid=<?php print $video_value->solr_video_id; ?>
+                               layout="responsive"
+                               data-ui-logo="false"
+                               data-info="false"
+                               width="300"
+                               height="200">
+              </amp-dailymotion>
+            <?php }
+            if($video_value->video_repo_type == 'INTERNAL') {
+              if(function_exists('itg_videogallery_get_video_xml_data_by_fid')) {
+               $data_video = itg_videogallery_get_video_xml_data_by_fid($video_value->fid);
+              }
+              $video_all_data = json_decode($data_video[0]->video_xml_data, TRUE);
+              if(function_exists('itg_videogallery_make_parm_for_jwpalyer')) {
+               $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, 'video', 0);
+              }
+              if(strpos($player_content['file_url'], 'https') === FALSE) {
+                $video_urls = str_replace("http","https",$player_content['file_url']);
+             } else {
+                $video_urls = $player_content['file_url'];
+             }
+            ?>
+              <amp-video width="300"
+                       height="200"
+                       src="<?php print $video_urls;?>"  
+                       layout="responsive"
+                       controls>
+                       <source type="video/webm" src="<?php $video_urls;?>">
+              </amp-video>
+            <?php
+            }
+            ?>
                     <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
                 </div>
             </div>        
@@ -54,15 +81,18 @@
                   layout="responsive"
                   type="slides">
               <?php foreach ($videoids as $keys => $video_value) {
-                $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
+                if(strpos($video_value->field_migrated_video_url_value, 'https') === FALSE) {
+                 $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
+                } else {
+                 $video_id = $video_value->field_migrated_video_url_value;
+                }
                 ?> 
               <div class="slide"> <div class="photo-slide">
                       <amp-video width="300"
                        height="200"
                        src="<?php print $video_id;?>"  
                        layout="responsive"
-                       controls
-                       >
+                       controls>
                        <source type="video/webm" src="<?php print $video_id;?>">
                       </amp-video>
                     <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>

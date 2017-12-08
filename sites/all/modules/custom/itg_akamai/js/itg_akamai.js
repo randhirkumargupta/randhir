@@ -9,7 +9,7 @@
 jQuery(document).ready(function () {
     try {
         jQuery.ajax({
-            url: Drupal.settings.itg_widget.settings.base_url + '/itg-akamai-load-my-account',
+            url: Drupal.settings.itg_widget.settings.base_url + '/itg-load-my-account',
             type: 'post',
             data: '',
             beforeSend: function () {
