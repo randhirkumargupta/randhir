@@ -22,6 +22,38 @@ function itg_app_manager_user_login(&$edit, $account) {
     }
    
 }
+/**
+ * Implements hook_block_info().
+ */
+function itg_app_manager_block_info() {
+    $blocks['app_user_button'] = array(
+        'info' => t('App User Button'),
+    );
+    
+
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function itg_app_manager_block_view($delta = '') {
+    global $user, $base_url;
+    $block = array();
+
+    switch ($delta) {
+        case 'app_user_button':
+            $block['content'] = '';
+            if(user_has_role(30)){
+            $block['content'] = '<a href="'.$base_url.'/user/logout">Logout</a>';
+            }
+            break;
+
+        
+    }
+
+    return $block;
+}
 
 // Load the hirerical select common file
 module_load_include('inc', 'hierarchical_select', 'includes/common');
