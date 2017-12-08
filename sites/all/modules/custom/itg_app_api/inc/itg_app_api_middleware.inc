@@ -246,7 +246,7 @@ function humberger_menu_subcat_list($cat_id) {
   //$query->condition('cl.has_subcategory', 0); //only parent menus
   $query->condition('cl.menu_type', 0, '!=');
   $query->condition('cl.s_id', 0, '!=');
-  $query->condition('cl.menu_type_id',1);
+  $query->condition('cl.menu_type_id', 1);
   $query->orderBy('order_id', 'ASC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $total_sub_cat = count($result);
@@ -264,4 +264,89 @@ function humberger_menu_subcat_list($cat_id) {
   $sub_cat_list['total_sub_cat'] = $total_sub_cat;
   $sub_cat_list['data'] = $all_sub_cat;
   return $sub_cat_list;
+}
+
+/**
+ * Get the internal master configuration from the middleware
+ * @return type
+ */
+function master_config_interenal() {
+  $config_data = master_config_internal_data();
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+  if ($config_data['count'] > 0) {
+    $output_array['status_code'] = "1";
+    $output_array['status_message'] = "$success_status_message";
+  }
+  else {
+    $output_array['status_code'] = "0";
+    $output_array['status_message'] = "customised_message";
+  }
+
+  $output_array['data'] = $config_data['data'][0];
+  return $output_array;
+}
+
+/**
+ * Get the list of middleware array data
+ * @return string
+ */
+function master_config_internal_data() {
+  $config_list = array();
+  $data_list = array();
+  $ios_data = array();
+  $android_data = array();
+
+  $query = db_select('itg_app_master_config_internal', 'imi');
+  $query->fields('imi', array('config_val', 'config_key'));
+  //$query->condition('imi.config_key', $config_list, 'IN');//
+  $result = $query->execute()->fetchAllAssoc('config_key', PDO::FETCH_ASSOC);
+
+  $total_config_data = count($result);
+  if ($total_config_data > 0) {
+
+    $config_list['last_updated_datetime'] = isset($result['last_updated_datetime']['config_val']) ? $result['last_updated_datetime']['config_val'] : "";
+    $config_list['photo_display_count'] = isset($result['photo_display_count']['config_val']) ? $result['photo_display_count']['config_val'] : "";
+    $config_list['photo_pagination_cap'] = isset($result['photo_pagination_cap']['config_val']) ? $result['photo_pagination_cap']['config_val'] : "";
+
+    $config_list['photo_display_count_newslist_cell'] = isset($result['photo_display_count_newslist_cell']['config_val']) ? $result['photo_display_count_newslist_cell']['config_val'] : "";
+    $config_list['video_display_count'] = isset($result['video_display_count']['config_val']) ? $result['video_display_count']['config_val'] : "";
+    $config_list['video_pagination_cap'] = isset($result['video_pagination_cap']['config_val']) ? $result['video_pagination_cap']['config_val'] : "";
+    $config_list['story_display_count'] = isset($result['story_display_count']['config_val']) ? $result['story_display_count']['config_val'] : "";
+    $config_list['story_pagination_cap'] = isset($result['story_pagination_cap']['config_val']) ? $result['story_pagination_cap']['config_val'] : "";
+    $config_list['news_display_count'] = isset($result['news_display_count']['config_val']) ? $result['news_display_count']['config_val'] : "";
+    $config_list['news_pagination_cap'] = isset($result['news_pagination_cap']['config_val']) ? $result['news_pagination_cap']['config_val'] : "";
+    $config_list['magazine_display_count'] = isset($result['magazine_display_count']['config_val']) ? $result['magazine_display_count']['config_val'] : "";
+    $config_list['magazine_pagination_cap'] = isset($result['magazine_pagination_cap']['config_val']) ? $result['magazine_pagination_cap']['config_val'] : "";
+    $config_list['author_display_count'] = isset($result['author_display_count']['config_val']) ? $result['author_display_count']['config_val'] : "";
+    $config_list['author_pagination_cap'] = isset($result['author_pagination_cap']['config_val']) ? $result['author_pagination_cap']['config_val'] : "";
+    $config_list['author_story_display_count'] = isset($result['author_story_display_count']['config_val']) ? $result['author_story_display_count']['config_val'] : "";
+    $config_list['author_story_pagination_cap'] = isset($result['author_story_pagination_cap']['config_val']) ? $result['author_story_pagination_cap']['config_val'] : "";
+    $config_list['anchor_display_count'] = isset($result['anchor_display_count']['config_val']) ? $result['anchor_display_count']['config_val'] : "";
+    $config_list['anchor_pagination_cap'] = isset($result['anchor_pagination_cap']['config_val']) ? $result['anchor_pagination_cap']['config_val'] : "";
+    $config_list['anchor_program_display_count'] = isset($result['anchor_program_display_count']['config_val']) ? $result['anchor_program_display_count']['config_val'] : "";
+    $config_list['anchor_program_pagination_cap'] = isset($result['anchor_program_pagination_cap']['config_val']) ? $result['anchor_program_pagination_cap']['config_val'] : "";
+    $config_list['closed_poll_display_count'] = isset($result['closed_poll_display_count']['config_val']) ? $result['closed_poll_display_count']['config_val'] : "";
+    $config_list['closed_poll_pagination_cap'] = isset($result['closed_poll_pagination_cap']['config_val']) ? $result['closed_poll_pagination_cap']['config_val'] : "";
+
+    $ios_data['live_version'] = isset($result['ios_live_version']['config_val']) ? $result['ios_live_version']['config_val'] : "";
+    $ios_data['version_update_datetime'] = isset($result['ios_version_update_datetime']['config_val']) ? $result['ios_version_update_datetime']['config_val'] : "";
+    $ios_data['force_update'] = isset($result['ios_force_update']['config_val']) ? $result['ios_force_update']['config_val'] : "";
+    $ios_data['update_message_frequency'] = isset($result['ios_update_message_frequency']['config_val']) ? $result['ios_update_message_frequency']['config_val'] : "";
+
+    $android_data['live_version'] = isset($result['android_live_version']['config_val']) ? $result['android_live_version']['config_val'] : "";
+    $android_data['beta_version'] = isset($result['android_beta_version']['config_val']) ? $result['android_beta_version']['config_val'] : "";
+    $android_data['version_update_datetime'] = isset($result['android_version_update_datetime']['config_val']) ? $result['android_version_update_datetime']['config_val'] : "";
+    $android_data['force_update'] = isset($result['android_force_update']['config_val']) ? $result['android_force_update']['config_val'] : "";
+    $android_data['update_message_frequency'] = isset($result['android_update_message_frequency']['config_val']) ? $result['android_update_message_frequency']['config_val'] : "";
+
+    $config_list['ios'] = $ios_data;
+    $config_list['android'] = $android_data;
+    $config_list_data[] = $config_list;
+  }
+
+  $data_list['count'] = $total_config_data;
+  $data_list['data'] = $config_list_data;
+  return $data_list;
 }

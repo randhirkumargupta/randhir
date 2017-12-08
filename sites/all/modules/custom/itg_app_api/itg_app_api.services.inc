@@ -85,6 +85,33 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+      //Master config internal
+      'master_config_internal' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves master config data from middleware info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_master_config_internal',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
         // hamburger_menu custom resource declaration.....
         'hamburger_menu' => array(
             'operations' => array(
@@ -2472,6 +2499,29 @@ function itg_rapid_api_master_config($token) {
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
+
+    $obj = json_decode($jsondata, true);
+    $return_obj = $obj;
+    return $return_obj;
+}
+
+/**
+ * Call back function for master_config API
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_master_config_internal($token) {
+    $redis_key = "itgd_rapid_master_config_json_internal";
+    $result_get = getRedis($redis_key);
+
+//    if ($result_get['key_value'] != "") {
+//        $jsondata = $result_get['key_value'];
+//    } else {
+        $jsondata = master_config_interenal();
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    //}
 
     $obj = json_decode($jsondata, true);
     $return_obj = $obj;
