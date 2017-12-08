@@ -238,11 +238,6 @@ function itg_octopus_api_schema() {
         'type' => 'int',
         'not null' => TRUE,
       ),
-      'new_element_id' => array(
-        'description' => 'TODO: to add new content id for story,video,photo!',
-        'type' => 'int',
-        'not null' => TRUE,
-      ),
       'element_type' => array(
         'description' => 'element_type',
         'type' => 'varchar',

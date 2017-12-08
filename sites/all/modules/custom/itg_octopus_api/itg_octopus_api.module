@@ -452,7 +452,8 @@ function itg_octopus_api_send_email_to_support($mail_subject, $msg) {
     'subject' => $mail_subject,
   );
   $to = variable_get('itg_octopus_support_team_email');
-  $mail = drupal_mail('itg_octopus_api', 'send_mail_to_support', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $from = variable_get('itg_octopus_oct_fromemail');
+  $mail = drupal_mail('itg_octopus_api', 'send_mail_to_support', $to, language_default(), $params, $from, TRUE);
   if ($mail['result']) {
     return TRUE;
   }
@@ -484,7 +485,8 @@ function itg_octopus_api_send_email_to_octopus($mail_subject, $msg) {
     'subject' => $mail_subject,
   );
   $to = variable_get('itg_octopus_notify_email');
-  $mail = drupal_mail('itg_octopus_api', 'send_mail_for_octopus', $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
+  $from = variable_get('itg_octopus_oct_fromemail');
+  $mail = drupal_mail('itg_octopus_api', 'send_mail_for_octopus', $to, language_default(), $params, $from, TRUE);
   if ($mail['result']) {
     return TRUE;
   }

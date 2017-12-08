@@ -48,9 +48,8 @@
                        height="200"
                        src="<?php print $video_urls;?>"  
                        layout="responsive"
-                       controls
-                       >
-                       <source type="video/webm" src="<?php $video_urls ;?>">
+                       controls>
+                       <source type="video/webm" src="<?php $video_urls;?>">
               </amp-video>
             <?php
             }
@@ -87,8 +86,7 @@
                        height="200"
                        src="<?php print $video_id;?>"  
                        layout="responsive"
-                       controls
-                       >
+                       controls>
                        <source type="video/webm" src="<?php print $video_id;?>">
                       </amp-video>
                     <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
@@ -131,11 +129,11 @@ if (function_exists('get_other_gallery_amp')) {
       if (!empty($value['field_story_small_image_fid'])) {
         $file = file_load($value['field_story_small_image_fid']);
         $small_image = file_create_url($file->uri);
-        $other_src_set = $small_image . ' ' . $small_width . ' w';
+        $other_src_set = $small_image . ' ' . $small_width . 'w';
       }
       else {
         $small_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
-        $other_src_set = $small_image . ' ' . $small_width . ' w';
+        $other_src_set = $small_image . ' ' . $small_width . 'w';
       }
       $alias = drupal_get_path_alias('node/'.$value['nid']);
       $path_alias = $base_url.'/amp/'.$alias;

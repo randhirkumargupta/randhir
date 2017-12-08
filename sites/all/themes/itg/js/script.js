@@ -32,7 +32,7 @@
                     beforeSend: function () {
                         // jQuery('#widget-ajex-loader').show();
                     },
-                    data: {'section_ids': section_ids, },
+                    data: { 'section_ids': section_ids, },
                     success: function (data) {
                         if (data == "") {
                             jQuery('.no-more-card').show();
@@ -58,7 +58,7 @@
                 var section_ids = "";
                 var elementobj = jQuery(this);
                 jQuery(this).parent('.load-more-wrapper-front').addClass('new-load').html('<img src="./sites/all/themes/itg/images/tab-loading.gif" alt="" />')
-                //jQuery(this).remove();
+
                 jQuery('.sectioncart').each(function () {
                     section_ids = jQuery(this).attr('id');
                 });
@@ -67,9 +67,9 @@
                     url: Drupal.settings.basePath + 'getsecttioncarddata',
                     type: 'post',
                     beforeSend: function () {
-                        // jQuery('#widget-ajex-loader').show();
+
                     },
-                    data: {'section_ids': section_ids, getsectionid: getsectionid},
+                    data: { 'section_ids': section_ids, getsectionid: getsectionid },
                     success: function (data) {
                         if (data == "") {
                             jQuery('.no-more-card').show();
@@ -81,7 +81,7 @@
 
                         }
                         elementobj.remove();
-                        //  alert(data);  
+
 
                     },
                     complete: function () {
@@ -228,9 +228,9 @@
             // jQuery code to get url parameters
             var getUrlParameter = function getUrlParameter(sParam) {
                 var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-                        sURLVariables = sPageURL.split('&'),
-                        sParameterName,
-                        i;
+                    sURLVariables = sPageURL.split('&'),
+                    sParameterName,
+                    i;
 
                 for (i = 0; i < sURLVariables.length; i++) {
                     sParameterName = sURLVariables[i].split('=');
@@ -256,7 +256,6 @@
             if (change_email_mobile) {
                 $('.activate-message').show();
             }
-            //jQuery('#main').find('img').parent().addClass('zoom-image');
 
             // jQuery code to set message error on my content page
             var my_content_error = jQuery('.page-personalization-my-content').find('.messages--error');
@@ -286,8 +285,6 @@ jQuery(document).ready(function () {
     var numLatestVideo = jQuery(".view-video-landing-header.view-display-id-block_1 ul.photo-list li").length;
     var winWidth = window.innerWidth;
     if (winWidth > 680) {
-        // var getLength = jQuery("#block-views-video-landing-header-block-1 ul.photo-list li").length;
-        // jQuery("#block-views-video-landing-header-block-1 ul.photo-list").css("width", 190 + "px");
         jQuery(".defalt-bar").mCustomScrollbar({
             axis: "y",
         });
@@ -305,17 +302,6 @@ jQuery(document).ready(function () {
             return false;
         }
     }
-
-    //  jQuery(".top_stories_ordering .block-itg-widget, .special-top-news").mousemove(function (e) {
-    //    var h = jQuery(this).height() + 13;
-    //    var offset = jQuery(this).offset();
-    //    var position = (e.pageY - offset.top) / jQuery(this).height();
-    //    if (position < 0.20) {
-    //      jQuery(this).stop().animate({scrollTop: 0}, 1000);
-    //    } else if (position > 0.70) {
-    //      jQuery(this).stop().animate({scrollTop: h}, 1000);
-    //    }
-    //  });
 
     jQuery(".top_stories_ordering .data-holder").mCustomScrollbar();
     jQuery(".special-top-news .itg-listing-wrapper").mCustomScrollbar();
@@ -396,9 +382,7 @@ jQuery(document).ready(function () {
         el = jQuery(this);
         value = el.val();
         var code = e.keyCode || e.which;
-        if (code == 13 && value.length != 0) { //Enter keycode
-            //Do something
-            //var urldata = Drupal.settings.basePath + 'topic?keyword=' + jQuery(this).val();
+        if (code == 13 && value.length != 0) { //Enter keycode            
             keyword = jQuery(this).val();
             myStr = keyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             myStr = myStr.replace(/\s+/g, "-");
@@ -418,7 +402,6 @@ jQuery(document).ready(function () {
             nkeyword = search_value;
             nmyStr = nkeyword.replace(/(^\s+|[^a-zA-Z0-9 ]+|\s+$)/g, "");
             nmyStr = nmyStr.replace(/\s+/g, "-");
-            //var urldata = Drupal.settings.basePath + 'topic?keyword=' + search_value;
             var urldata = Drupal.settings.basePath + 'topic/' + search_value;
             window.location.href = urldata;
         }
@@ -430,7 +413,6 @@ jQuery(document).ready(function () {
         //header menu add icon for mobile
         jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
 
-        //var logotxt = $('.container.header-logo').html();
         jQuery('.container.header-logo').prependTo('.itg-logo-container');
 
         var mouse_is_inside = false;
@@ -464,7 +446,6 @@ jQuery(document).ready(function () {
         });
 
         if (is_mobile) {
-            //jQuery('.head-live-tv .user-icon').click(function () {
             jQuery(document).on('click', '.head-live-tv .loginicon', function (e) {
                 e.preventDefault();
                 jQuery(this).next('ul.menu').toggle();
@@ -478,31 +459,12 @@ jQuery(document).ready(function () {
         //footer toggal script
         jQuery('.footer-expand-icon').click(function () {
             jQuery('.footer-toggle').slideToggle();
-            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
+            jQuery("html, body").animate({ scrollTop: jQuery(document).height() }, 800);
             jQuery('.footer-expand-icon').toggleClass('footer-open-icon');
         });
-        //footer add more link
-        //        jQuery('.footer-bottom .cell ul').each(function () {
-        //            var countList = jQuery(this).children('li').length;
-        //            if (countList > 8) {
-        //                jQuery(this).find('li:gt(7)').hide().addClass('hidelist');
-        //                jQuery(this).append("<li><span class='more-link'>More</span></li>");
-        //            }
-        //        });
-        //        jQuery('.footer-bottom .more-link').click(function () {
-        //            jQuery(this).parents('ul').find('li.hidelist').slideToggle();
-        //            jQuery(this).toggleClass('active');
-        //            jQuery("html, body").animate({scrollTop: jQuery(document).height()}, 800);
-        //            if (jQuery(this).hasClass('active')) {
-        //                jQuery('.footer-bottom .more-link').text('Less');
-        //            } else {
-        //                jQuery('.footer-bottom .more-link').text('More');
-        //            }
-        //        });
     }
 
-    //Add header for so-sorry page
-    //jQuery('#block-views-so-sorry-you-will-love-these ul.photo-list').before("<h2>YOU'LL <span>LOVE THESE</span></h2>");
+    //Add header for so-sorry page    
     jQuery('#auto-new-block .widget-title, #tech-new-block .widget-title, #education-new-block .widget-title, #movie-new-block .widget-title, #defalt-section-top-block .widget-title').prependTo('.auto-block-2 .special-top-news');
 
 
@@ -581,7 +543,7 @@ jQuery(window).load(function () {
     // jQuery code to set offset of photo section page
     var menuOffset = jQuery('.itg-region').offset();
     if (jQuery('.video_landing_menu li').children().hasClass('set-offset')) {
-        jQuery("body,html").animate({scrollTop: menuOffset.top - 100}, 300);
+        jQuery("body,html").animate({ scrollTop: menuOffset.top - 100 }, 300);
     }
 });
 
@@ -617,7 +579,7 @@ jQuery(document).ready(function () {
             beforeSend: function () {
                 jQuery('#widget-ajex-loader').show();
             },
-            data: {'state_id': getstate_id, },
+            data: { 'state_id': getstate_id, },
             success: function (data) {
                 var obj = jQuery.parseJSON(data);
                 jQuery('#widget-ajex-loader').hide();
@@ -636,15 +598,6 @@ jQuery(document).ready(function () {
         });
     });
 
-    //    //saved message
-    //    var getmsgsaves = jQuery('.saved-photogallery').text();
-    //    if (getmsgsaves != "") {
-    //        jQuery('.saved-photogallery').remove();
-    //        jQuery(".view-photo-landing-slider .slickslide li").append('<div class="saved-photogallery">' + getmsgsaves + '</div>');
-    //    }
-    //    setTimeout(function () {
-    //        jQuery('.saved-photogallery').remove();
-    //    }, 3000);
 
     //movie review more less
     jQuery('.other-reviews-desc .read-more').click(function () {
@@ -695,25 +648,6 @@ jQuery(document).ready(function () {
         jQuery(this).find('.share').parent('li').nextAll('li').toggle();
     });
 
-    //vertical menu position      
-    /*var getNumberMenu = jQuery('.vertical-menu li').length;
-     if (getNumberMenu > 6) {
-     jQuery('.vertical-menu').slick({
-     vertical: true,
-     slidesToShow: 6,
-     slidesToScroll: 2,
-     infinite: false,
-     nextArrow: '<span class="more"><i class="fa fa-chevron-down"></i> More</span>',
-     prevArrow: '<span class="less"><i class="fa fa-chevron-up"></i> Less</span>',
-     });
-     jQuery(document).find('.vertical-menu span.less').hide();
-     jQuery('.vertical-menu span.more').click(function () {
-     jQuery('.vertical-menu span.less').show();
-     });
-     } else {
-     return false;
-     }*/
-
     var menuLength;
     jQuery(".vertical-menu").each(function () {
         menuLength = jQuery(this).find('li').length;
@@ -753,9 +687,9 @@ jQuery(document).ready(function () {
 
         // Setup
         var posX = jQuery(this).offset().left,
-                posY = jQuery(this).offset().top,
-                buttonWidth = jQuery(this).width(),
-                buttonHeight = jQuery(this).height();
+            posY = jQuery(this).offset().top,
+            buttonWidth = jQuery(this).width(),
+            buttonHeight = jQuery(this).height();
 
         // Add the element
         jQuery(this).prepend("<span class='ripple'></span>");
@@ -838,9 +772,9 @@ jQuery(document).ready(function () {
     var getclick;
     jQuery('.comment-mobile .share-icon').toggle(function () {
         getclick = jQuery(this).parents('.comment-mobile').find('.social-share');
-        getclick.css({'display': 'inline-block'});
+        getclick.css({ 'display': 'inline-block' });
     }, function () {
-        getclick.css({'display': 'none'});
+        getclick.css({ 'display': 'none' });
     });
 
 
@@ -913,15 +847,15 @@ function smilyanimation(facetype) {
     var facethree = jQuery('#' + facetype + ' .face3');
     var facefour = jQuery('#' + facetype + ' .face4');
     jQuery('#' + facetype).fadeIn(function () {
-        faceone.animate({top: '100px', left: '800px'}, 3000);
-        facetwo.animate({top: '300px', left: '600px'}, 3000);
-        facethree.animate({top: '600px', right: '800px'}, 3000);
-        facefour.animate({top: '400px', right: '400px'}, 3000, function () {
+        faceone.animate({ top: '100px', left: '800px' }, 3000);
+        facetwo.animate({ top: '300px', left: '600px' }, 3000);
+        facethree.animate({ top: '600px', right: '800px' }, 3000);
+        facefour.animate({ top: '400px', right: '400px' }, 3000, function () {
             jQuery('#' + facetype).fadeOut(500, function () {
-                faceone.css({top: '500px', left: '400px'});
-                facetwo.css({top: '0px', left: '200px'});
-                facethree.css({top: '0px', right: '200px'});
-                facefour.css({top: '100px', right: '600px'});
+                faceone.css({ top: '500px', left: '400px' });
+                facetwo.css({ top: '0px', left: '200px' });
+                facethree.css({ top: '0px', right: '200px' });
+                facefour.css({ top: '100px', right: '600px' });
             });
         });
     });
@@ -989,7 +923,7 @@ jQuery(document).ready(function () {
 
     });
 
-    jQuery('#modalCarousel').carousel({interval: false});
+    jQuery('#modalCarousel').carousel({ interval: false });
 
     jQuery('#modalCarousel').on('slid.bs.carousel', function () {
         jQuery('.modal-title').html(jQuery(this).find('.active').attr("title"));
@@ -999,20 +933,12 @@ jQuery(document).ready(function () {
     jQuery('.dtv ul li').click(function () {
         var at = jQuery(this).children('img').attr("pr");
         var img_src = jQuery(this).children('img').attr('src');
-        jQuery('.active > a > img').attr({'src': img_src});
+        jQuery('.active > a > img').attr({ 'src': img_src });
     });
-
-    //    jQuery(window).bind({
-    //        'load': setSidebarHeight,
-    //        'scroll': setSidebarHeight,
-    //        'resize': setSidebarHeight
-    //    });
 
     jQuery(window).load(function () {
         var sticky = jQuery('.region-vertical-menu');
-        //var sticky_sidebar = jQuery('.region-sidebar-second');
-        sticky.stickyMojo({footerID: '#footer', contentID: '#main'});
-        //sticky_sidebar.stickyMojo({footerID: '#footer', contentID: '#main'});
+        sticky.stickyMojo({ footerID: '#footer', contentID: '#main' });
     });
 });
 
@@ -1032,20 +958,20 @@ jQuery(document).ready(function () {
             if (content_ht > el_height) {
                 if (el_height > win_height) {
                     if (jQuery(this).scrollTop() >= fix_point && jQuery(this).scrollTop() <= footer_offset_top) {
-                        el.css({"position": "fixed", "bottom": "0"});
+                        el.css({ "position": "fixed", "bottom": "0" });
                     } else if (jQuery(this).scrollTop() >= footer_offset_top) {
-                        el.css({"position": "absolute", "bottom": "0"});
+                        el.css({ "position": "absolute", "bottom": "0" });
                     } else {
-                        el.css({"position": "static"});
+                        el.css({ "position": "static" });
                     }
                 } else {
                     var diff = footer_offset_top + win_height - el_height - 50;
                     if (jQuery(this).scrollTop() >= el_offset.top && jQuery(this).scrollTop() <= diff) {
-                        el.css({"position": "fixed", "top": "0", "height": el_height});
+                        el.css({ "position": "fixed", "top": "0", "height": el_height });
                     } else if (jQuery(this).scrollTop() >= footer_offset_top) {
-                        el.css({"position": "absolute", "top": "auto", "bottom": "0"});
+                        el.css({ "position": "absolute", "top": "auto", "bottom": "0" });
                     } else {
-                        el.css({"position": "static"});
+                        el.css({ "position": "static" });
                     }
                 }
             }
@@ -1056,10 +982,6 @@ jQuery(document).ready(function () {
 });
 
 jQuery(document).ready(function (e) {
-    // story discription iframe wrap in div
-    var tagIframe = jQuery('.story-section .story-right .description');
-    tagIframe.find('iframe').removeAttr('height').removeAttr('width').wrap('<div class="iframe-video"></div>');
-
     // iframe wrap with div
     jQuery('.big-news .live-tv-big-story').find('iframe').removeAttr('height').removeAttr('width');
 
@@ -1071,7 +993,7 @@ jQuery(document).ready(function (e) {
         var getvideousedon = jQuery(this).attr('data-used-on');
         var video_title = jQuery(this).attr('data-video-title');
         var ajaxpath = Drupal.settings.basePath + 'getvideoplayer';
-        load_video_in_slider(getvideofid, ajaxpath, getvideoindex, getvideousedon,video_title)
+        load_video_in_slider(getvideofid, ajaxpath, getvideoindex, getvideousedon, video_title)
 
     });
 
@@ -1080,9 +1002,9 @@ jQuery(document).ready(function (e) {
         var getvideoimage = jQuery(this).attr('data-image');
         var getvideonid = jQuery(this).attr('data-nid');
         var getvideourl = jQuery(this).attr('data-video-url');
-         var getvideousedon = jQuery(this).attr('data-used-on');
+        var getvideousedon = jQuery(this).attr('data-used-on');
         var ajaxpath = Drupal.settings.basePath + 'getvideoplayer-migrated';
-        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl,getvideousedon)
+        load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getvideourl, getvideousedon)
 
     });
     jQuery('.itg-embed-photo-slider').slick({
@@ -1155,11 +1077,6 @@ jQuery(document).ready(function (e) {
     })
     /* end photo/ video next/pre icon*/
 });
-//function setSidebarHeight() {
-//    var sticky_sidebar = jQuery('.region-sidebar-second');
-//    var sticky_sidebar_height = sticky_sidebar.outerHeight(true);
-//    sticky_sidebar.closest('.sidebars').css('height', sticky_sidebar_height);
-//}
 
 
 jQuery(window).load(function () {
@@ -1190,10 +1107,10 @@ function navigationResize() {
     jQuery('.third-level-menu li.more').before(jQuery('#overflow > li'));
 
     var $navItemMore = jQuery('.third-level-menu > li.more'),
-            $navItems = jQuery('.third-level-menu > li:not(.more)'),
-            navItemMoreWidth = navItemWidth = $navItemMore.width(),
-            windowWidth = jQuery('.third-level-menu').width(),
-            navItemMoreLeft, offset, navOverflowWidth;
+        $navItems = jQuery('.third-level-menu > li:not(.more)'),
+        navItemMoreWidth = navItemWidth = $navItemMore.width(),
+        windowWidth = jQuery('.third-level-menu').width(),
+        navItemMoreLeft, offset, navOverflowWidth;
 
     $navItems.each(function () {
         navItemWidth += jQuery(this).width();
@@ -1210,7 +1127,7 @@ function navigationResize() {
 }
 
 
-function load_video_in_slider(fid, path, getvideoindex, getvideousedon,video_title) {
+function load_video_in_slider(fid, path, getvideoindex, getvideousedon, video_title) {
 
     jQuery.ajax({
         url: path,
@@ -1218,7 +1135,7 @@ function load_video_in_slider(fid, path, getvideoindex, getvideousedon,video_tit
         beforeSend: function () {
             jQuery('.loading-video').show();
         },
-        data: {'fid': fid, 'tabindex': getvideoindex, 'getvideousedon': getvideousedon , 'video_title':video_title},
+        data: { 'fid': fid, 'tabindex': getvideoindex, 'getvideousedon': getvideousedon, 'video_title': video_title },
         success: function (data) {
             jQuery('#video_palyer_container').html(data);
             jQuery('.loading-video').hide();
@@ -1240,7 +1157,7 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
         beforeSend: function () {
             jQuery('.loading-video').show();
         },
-        data: {'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl,'getvideousedon':getvideousedon},
+        data: { 'video_image': getvideoimage, 'nid': getvideonid, 'video_url': getvideourl, 'getvideousedon': getvideousedon },
         success: function (data) {
             jQuery('#migrate_video_palyer_container').html(data);
             jQuery('.loading-video').hide();

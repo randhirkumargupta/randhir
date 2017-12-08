@@ -2356,7 +2356,8 @@ div.image-widget-data .ajax-progress-throbber {
 [id*="field-story-listicle-values"],
 [id*="field-event-tabs-values"],
 [id*="field-add-member-values"],
-[id*="field-associate-event-photo-values"] {
+[id*="field-associate-event-photo-values"],
+[id*="field-associate-event-video-values"] {
     @extend .itg-add-another-item;
 }
 
@@ -8460,7 +8461,8 @@ div.node {
 [id*="field-story-template-factoids-values"],
 [id*="field-story-template-guru-values"],
 [id*="field-add-member-values"],
-[id*="field-associate-event-photo-values"] {
+[id*="field-associate-event-photo-values"],
+[id*="field-associate-event-video-values"] {
     tbody tr {
         td {
             border: none;
@@ -9187,7 +9189,8 @@ div.node {
 .node-story-form,
 .node-videogallery-form,
 .node-photogallery-form,
-.node-type-print-team-integration {
+.node-type-print-team-integration,
+.node-type-event-backend {
     font-family: Roboto;
     margin: 0;
     .ajax-progress {
@@ -9313,7 +9316,9 @@ div.node {
     [id*="field-story-template-guru-values"],
     [id*="field-video-anchor-values"],
     [id*="field-story-listicle-values"],
-    [id*="field-add-member-values"] {
+    [id*="field-add-member-values"],
+    [id*="field-associate-event-photo-values"],
+    [id*="field-associate-event-video-values"] {
         thead {
             padding-left: 20px;
             padding-right: 10px;
@@ -11493,7 +11498,7 @@ div.node {
         position: absolute;
         left: 0;
         top: 71px;
-        left: 315px;
+        left: 900px;
     }
     table {
         @extend .views-table;
@@ -14553,8 +14558,10 @@ div.ctools-modal-content {
 
 #videoupload #edit-field-video-upload [id*="field-video-upload-values"] tbody tr td .file-widget {
     height: auto;
-    a {
-        display: inline;
+    .file {
+        a {
+            display: inline;
+        }
     }
 }
 
@@ -14633,11 +14640,43 @@ div.ctools-modal-content {
 .view .view-filters [id*="views-exposed-form-key-candidate-special-key-candidate-widget-list"] .views-exposed-form .views-exposed-widget {
     width: 150px;
     .form-item {
-        width: 140px;
+        width: 140px !important;
     }
     .ajax-progress {
         top: 20px;
         position: absolute;
-        right: 0;
+        right: 10px;
+    }
+    &.views-submit-button,
+    &.views-reset-button {
+        width: auto;
+        .form-item {
+            padding-right: 10px;
+        }
+    }
+    #view-display-isesue {
+        width: auto;
+    }
+}
+
+.form-field-name-field-associate-event-video,
+.form-field-name-field-associate-event-photo {
+    [id*="field-associate-event-video-values"],
+    [id*="field-associate-event-photo-values"] {
+        thead {
+            padding: 0px 20px;
+        }
+        tbody tr td .form-type-textfield {
+            padding: 0;
+            margin: 0;
+        }
+        +.description {
+            +.clearfix {
+                left: 580px;
+            }
+        }
+    }
+    [id*="field-associate-event-video-values"] {
+        margin-top: 10px;
     }
 }

@@ -84,7 +84,7 @@ global $base_url;
     </section>
 </section>
 <div id="widget-ajex-loader" style="display: none">
-    <img class="widget-loader" src="<?php echo file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/loader.svg'); ?>" alt="Loading..." />
+    <img class="widget-loader" src="<?php echo file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/loading.gif'); ?>" alt="Loading..." />
 </div>
 <div id="iframe-display" style="display: none"></div>
 

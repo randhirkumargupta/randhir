@@ -87,6 +87,14 @@
                 }
 
             });
+            
+            //click disable when ajax load
+            $('#views-exposed-form-photo-list-of-category-block').ajaxComplete(function (event, request, settings) {
+                 $('body').css('pointer-events','');
+            });
+            $('#views-exposed-form-video-list-of-category-block-1').ajaxComplete(function (event, request, settings) {
+                 $('body').css('pointer-events','');
+            });
 
         }
 
