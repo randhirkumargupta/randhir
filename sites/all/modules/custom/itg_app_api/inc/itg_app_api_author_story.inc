@@ -337,8 +337,7 @@ function author_detail_data($author_id) {
         $data_array['follower_count'] = '';
         $data_array['twitter_handler'] = isset($result['field_reporter_twitter_handle_value']) ? $result['field_reporter_twitter_handle_value'] : '';
         $data_array['location'] = '';
-        $json_body_value = preg_replace("!\r?\n!", "", $result['body_value']);
-        $data_array['desc'] = isset($result['body_value']) ? strip_tags($json_body_value) : '';
+        $data_array['desc'] = isset($result['body_value']) ? $result['body_value'] : '';
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
@@ -389,8 +388,7 @@ function anchor_detail_data($anchor_id) {
         $data_array['follower_count'] = '';
         $data_array['twitter_handler'] = isset($result['field_reporter_twitter_handle_value']) ? $result['field_reporter_twitter_handle_value'] : '';
         $data_array['location'] = '';
-        $json_body_value = preg_replace("!\r?\n!", "", $result['body_value']);
-        $data_array['desc'] = isset($result['body_value']) ? strip_tags($json_body_value) : "";
+        $data_array['desc'] = isset($result['body_value']) ? $result['body_value'] : '';
     } else {
         $output_array['status_code'] = "0";
         $output_array['status_message'] = "customised_message";
