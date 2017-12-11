@@ -2553,7 +2553,7 @@ function top_stories_management_form($form, &$form_state) {
     $form['top_stories_management'] = array(
         '#type' => 'radios',
         '#title' => 'Top Stories',
-        '#options' => array('10' => 'Top 10', '15' => 'Top 15', '20' => 'Top 20', '25' => 'Top 25'),
+        '#options' => array('5' => 'Top 5','7' => 'Top 7','10' => 'Top 10', '15' => 'Top 15', '20' => 'Top 20', '25' => 'Top 25'),
         '#default_value' => fetchMasterConfigData('top_stories_management')
     );
     $form['submit_button'] = array(
