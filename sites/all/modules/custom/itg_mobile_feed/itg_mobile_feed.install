@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file : itg_mobile_feed.install
+ */
+
+/**
+ * Implements hook_schema()
+ * Defining table structure to store mobile feed log
+ * {@inheritdoc}
+ */
+function itg_mobile_feed_schema() {
+  $schema['itg_mobile_feed_log'] = array(
+    'description' => 'Table for mobile feed log.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary id.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'User id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'agent' => array(
+        'description' => '0 = generated, 1= manuall generated.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'status' => array(
+        'description' => '1 = success, 0= fail.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'ip' => array(
+        'description' => 'ip of remote machine.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'file' => array(
+        'description' => 'feed file name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'path' => array(
+        'description' => 'feed file path.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Timestamp for when feed was created.',
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+    /*
+    'indexes' => array(
+      'uid' => array('uid'),
+      'created' => array('created'),
+      'agent' => array('agent'),
+      'status' => array('status'),
+    ),
+      */
+  );
+  return $schema;
+}
+
