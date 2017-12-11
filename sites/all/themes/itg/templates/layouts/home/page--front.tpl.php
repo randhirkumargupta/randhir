@@ -90,7 +90,7 @@ if ($theme != 'itgadmin') {
             </div>      
           </div>    
         <?php endif; ?>
-        <?php //if(isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) { ?>
+        <?php if(isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) { ?>
         <div class="home-election" data-tb-region="homeElection" >
           <div class="widget-help-text">Template widgets ( <strong>Home Page Election</strong> )</div>
           <div class="itg-widget">
@@ -109,7 +109,7 @@ if ($theme != 'itgadmin') {
             </div>
           </div>
         </div>
-        <?php //} ?>
+        <?php } ?>
         
         <!-- End of Breaking news band -->
         <?php if (isset($widget_data['big_story'])) : ?>
