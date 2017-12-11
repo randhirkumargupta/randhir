@@ -387,6 +387,9 @@ function itg_widget_block_info() {
     $blocks['auto_master_form_widget'] = array(
       'info' => t('Widget: Auto Master Form'),
     );
+    $blocks['live_tv'] = array(
+      'info' => t('Live Tv')
+    );
     return $blocks;
 }
 
@@ -860,10 +863,8 @@ function itg_widget_block_view($delta = '') {
 
         case 'state_election_sosorry':
             module_load_include('inc', 'itg_widget', 'includes/itg_widget_state_election');
-
             $block['subject'] = '';
             $data = state_election_sosorry_data();
-
             $block['content'] = theme("state_election_sosorry_data", array("data" => $data));
             break;
         case 'cheaper_dearer':
@@ -900,15 +901,17 @@ function itg_widget_block_view($delta = '') {
             break;
         case 'auto_master_form_widget':
             $info['widget'] = 'auto_master_form_widget';
-            if (module_exists('itg_auto_search')) {
+             if (module_exists('itg_auto_search')) {
                 $block['content'] = drupal_get_form('auto_master_form');
-            }
+             }
+            break;
+        case 'live_tv':
+            $block['subject'] = '';
+            $live_tv = itg_live_tv_company('web');
+            $live_tv_get_details = node_load($live_tv[0]);
+            $block['content'] = theme("itg_widget_live_tv", array("data" => $live_tv_get_details));
             break;
     }
-
-
-
-
     return $block;
 }
 
