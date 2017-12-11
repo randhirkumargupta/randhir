@@ -810,7 +810,7 @@ function generateProgramDetail($nid) {
     global $base_url;
     $listcount = 0;
     $photo_list_array = array();
-    $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('program_detail_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $data = array();
