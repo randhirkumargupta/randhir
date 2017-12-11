@@ -2489,7 +2489,7 @@ function itg_app_api_resource() {
  * @return array - The processed information array.
  */
 function itg_rapid_api_master_config($token) {
-    $redis_key = "itgd_rapid_master_config_json";
+    $redis_key = "devitgd_rapid_master_config_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2511,7 +2511,7 @@ function itg_rapid_api_master_config($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_master_config_internal($token) {
-    $redis_key = "itgd_rapid_master_config_json_internal";
+    $redis_key = "devitgd_rapid_master_config_json_internal";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2534,7 +2534,7 @@ function itg_rapid_api_master_config_internal($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_config_update_status($token) {
-    $redis_key = "itgd_rapid_config_update_status_json";
+    $redis_key = "devitgd_rapid_config_update_status_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2557,7 +2557,7 @@ function itg_rapid_api_config_update_status($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_hamburger_menu($token) {
-    $redis_key = "itgd_rapid_hamburger_menu_json";
+    $redis_key = "devitgd_rapid_hamburger_menu_json";
     $result_get = getRedis($redis_key);
 
 //    if ($result_get['key_value'] != "") {
@@ -2581,7 +2581,7 @@ function itg_rapid_api_hamburger_menu($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_horizontal_menu($token) {
-    $redis_key = "itgd_rapid_horizontal_menu_json";
+    $redis_key = "devitgd_rapid_horizontal_menu_json";
     $result_get = getRedis($redis_key);
 
 //    if ($result_get['key_value'] != "") {
@@ -2604,7 +2604,7 @@ function itg_rapid_api_horizontal_menu($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_server_error_master($token) {
-    $redis_key = "itgd_rapid_server_error_master_json";
+    $redis_key = "devitgd_rapid_server_error_master_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2637,7 +2637,7 @@ function itg_rapid_api_photolist($token) {
         $cpageno = 0;
     }
 
-    $redis_key = "itgd_rapid_api_photolist_" . $suffix;
+    $redis_key = "devitgd_rapid_api_photolist_" . $suffix;
     $result_get = getRedis($redis_key);
 
 //    if ($result_get['key_value'] != "") {
@@ -2668,7 +2668,7 @@ function itg_rapid_api_photodetail($token) {
         $id = 0;
     }
 
-    $redis_key = "itgd_rapid_api_photodetail_" . $suffix;
+    $redis_key = "devitgd_rapid_api_photodetail_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2701,7 +2701,7 @@ function itg_rapid_api_programlist($token) {
         $cpageno = 0;
     }
 
-    $redis_key = "itgd_rapid_api_programlist_" . $suffix;
+    $redis_key = "devitgd_rapid_api_programlist_" . $suffix;
     $result_get = getRedis($redis_key);
 
 //    if ($result_get['key_value'] != "") {
@@ -2736,7 +2736,7 @@ function itg_rapid_api_newslist($token) {
         $cpageno = 0;
     }
 
-    $redis_key = "itgd_rapid_api_newslist_" . $suffix;
+    $redis_key = "devitgd_rapid_api_newslist_" . $suffix;
     $result_get = getRedis($redis_key);
 
 //    if ($result_get['key_value'] != "") {
@@ -2774,7 +2774,7 @@ function itg_rapid_api_videolist($token) {
         $cpageno = 0;
     }
 
-    $redis_key = "itgd_rapid_api_videolist_" . $suffix;
+    $redis_key = "devitgd_rapid_api_videolist_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2797,7 +2797,7 @@ function itg_rapid_api_videolist($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_adconfig_android($token) {
-    $redis_key = "itgd_rapid_adconfig_android";
+    $redis_key = "devitgd_rapid_adconfig_android";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2820,7 +2820,7 @@ function itg_rapid_api_adconfig_android($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_adconfig_ipad($token) {
-    $redis_key = "itgd_rapid_adconfig_ipad";
+    $redis_key = "devitgd_rapid_adconfig_ipad";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2843,7 +2843,7 @@ function itg_rapid_api_adconfig_ipad($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_adconfig_iphone($token) {
-    $redis_key = "itgd_rapid_adconfig_iphone";
+    $redis_key = "devitgd_rapid_adconfig_iphone";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2866,7 +2866,7 @@ function itg_rapid_api_adconfig_iphone($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_adconfig_tab($token) {
-    $redis_key = "itgd_rapid_aadconfig_tab";
+    $redis_key = "devitgd_rapid_aadconfig_tab";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2902,7 +2902,7 @@ function itg_rapid_api_photostorydetail($token) {
     // call function for return data..
 
     $suffix = $id;
-    $redis_key = "itg_rapid_api_photostorydetail_" . $suffix;
+    $redis_key = "devitg_rapid_api_photostorydetail_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2927,7 +2927,7 @@ function itg_rapid_api_photostorydetail($token) {
 function itg_rapid_api_program_category_list($token) {
 
 
-    $redis_key = "itg_rapid_api_program_category_list";
+    $redis_key = "devitg_rapid_api_program_category_list";
     $result_get = getRedis($redis_key);
 
 //    if ($result_get['key_value'] != "") {
@@ -2951,7 +2951,7 @@ function itg_rapid_api_program_category_list($token) {
  */
 function itg_rapid_api_ad_config_json($token) {
 
-    $redis_key = "itg_rapid_api_ad_config_json";
+    $redis_key = "devitg_rapid_api_ad_config_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -2975,7 +2975,7 @@ function itg_rapid_api_ad_config_json($token) {
 function itg_rapid_api_livetv_channellist_json($token) {
 
 
-    $redis_key = "itg_rapid_api_livetv_channellist_json";
+    $redis_key = "devitg_rapid_api_livetv_channellist_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -3000,7 +3000,7 @@ function itg_rapid_api_livetv_channellist_json($token) {
 function itg_rapid_api_otherapps_ios_json($token) {
 
 
-    $redis_key = "itg_rapid_api_otherapps_ios_json";
+    $redis_key = "devitg_rapid_api_otherapps_ios_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -3024,7 +3024,7 @@ function itg_rapid_api_otherapps_ios_json($token) {
 function itg_rapid_api_otherapps_android_json($token) {
 
 
-    $redis_key = "itg_rapid_api_otherapps_android_json";
+    $redis_key = "devitg_rapid_api_otherapps_android_json";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -3058,7 +3058,7 @@ function itg_rapid_api_magazine_edition($token) {
 
 
     $suffix = $id . "_" . $cpageno;
-    $redis_key = "itg_rapid_api_magazine_edition_" . $suffix;
+    $redis_key = "devitg_rapid_api_magazine_edition_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -3084,7 +3084,7 @@ function itg_rapid_api_magazine_coverstories($token) {
 
     // call function from return data..
 
-    $redis_key = "itg_rapid_api_magazine_coverstories";
+    $redis_key = "devitg_rapid_api_magazine_coverstories";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -3118,7 +3118,7 @@ function itg_rapid_api_magazine_editionlist($token) {
 
 
     $suffix = $sdate . "_" . $tdate . "_" . $cpageno;
-    $redis_key = "itg_rapid_api_magazine_editionlist_" . $suffix;
+    $redis_key = "devitg_rapid_api_magazine_editionlist_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -3152,7 +3152,7 @@ function itg_rapid_api_storydetail($token) {
 
 
     $suffix = $id;
-    $redis_key = "itg_rapid_api_storydetail" . $suffix;
+    $redis_key = "devitg_rapid_api_storydetail" . $suffix;
     $result_get = getRedis($redis_key);
 
 //    if ($result_get['key_value'] != "") {
@@ -3176,7 +3176,7 @@ function itg_rapid_api_storydetail($token) {
  */
 function itg_rapid_api_homePage($token) {
 
-    $redis_key = "itg_rapid_api_homePage";
+    $redis_key = "devitg_rapid_api_homePage";
     $result_get = getRedis($redis_key);
 
 //    if ($result_get['key_value'] != "") {
@@ -3201,7 +3201,7 @@ function itg_rapid_api_homePage($token) {
 function itg_rapid_api_livetv_aajtak($token) {
 
 
-    $redis_key = "itg_rapid_api_livetv_aajtak";
+    $redis_key = "devitg_rapid_api_livetv_aajtak";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -3225,7 +3225,7 @@ function itg_rapid_api_livetv_aajtak($token) {
 function itg_rapid_api_livetv_indiatoday($token) {
 
 
-    $redis_key = "itg_rapid_api_livetv_indiatoday";
+    $redis_key = "devitg_rapid_api_livetv_indiatoday";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -3249,7 +3249,7 @@ function itg_rapid_api_livetv_indiatoday($token) {
 function itg_rapid_api_livetv_delhiaajtak($token) {
 
 
-    $redis_key = "itg_rapid_api_livetv_delhiaajtak";
+    $redis_key = "devitg_rapid_api_livetv_delhiaajtak";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -3273,7 +3273,7 @@ function itg_rapid_api_livetv_delhiaajtak($token) {
 function itg_rapid_api_livetv_tej($token) {
 
 
-    $redis_key = "itg_rapid_api_livetv_tej";
+    $redis_key = "devitg_rapid_api_livetv_tej";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -4656,7 +4656,7 @@ function author_latest_story($token) {
     }
 
     $suffix = $author_id . '_' . $cpageno;
-    $redis_key = "itg_rapid_api_author_" . $type . "_storylist" . $suffix;
+    $redis_key = "devitg_rapid_api_author_" . $type . "_storylist" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -4684,7 +4684,7 @@ function polls_open($token) {
         $cpageno = 0;
     }
 
-    $redis_key = "itg_rapid_api_open_polls_" . $cpageno;
+    $redis_key = "devitg_rapid_api_open_polls_" . $cpageno;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -4711,7 +4711,7 @@ function polls_close($token) {
     if (!is_numeric($cpageno)) {
         $cpageno = 0;
     }
-    $redis_key = "itg_rapid_api_close_polls_" . $cpageno;
+    $redis_key = "devitg_rapid_api_close_polls_" . $cpageno;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -4811,7 +4811,7 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
 function author_detail($token, $author_id) {
 
     $author_id = $_GET['author_id'];
-    $redis_key = "itg_rapid_api_author_" . $author_id . "_detail";
+    $redis_key = "devitg_rapid_api_author_" . $author_id . "_detail";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -4839,7 +4839,7 @@ function author_detail($token, $author_id) {
  */
 function news_wrap($token) {
 
-    $redis_key = "itg_rapid_newswrap";
+    $redis_key = "devitg_rapid_newswrap";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -5517,7 +5517,7 @@ function check_poll_status($poll_id) {
 function poll_detail($token, $poll_id) {
 
     $poll_id = $_GET['poll_id'];
-    $redis_key = "itg_rapid_poll_details_" . $poll_id;
+    $redis_key = "devitg_rapid_poll_details_" . $poll_id;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -5620,7 +5620,7 @@ function update_preference($user_id, $tid) {
 function anchor_detail($token, $anchor_id) {
 
     $anchor_id = $_GET['anchor_id'];
-    $redis_key = "itg_rapid_api_anchor_" . $anchor_id . "_detail";
+    $redis_key = "devitg_rapid_api_anchor_" . $anchor_id . "_detail";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -5670,7 +5670,7 @@ function anchor_programm_list($token, $anchor_id, $type) {
         $type = '';
     }
     $suffix = $anchor_id . '_' . $cpageno;
-    $redis_key = "itg_rapid_api_anchor_" . $redis_type . "_programmlist" . $suffix;
+    $redis_key = "devitg_rapid_api_anchor_" . $redis_type . "_programmlist" . $suffix;
 
     $result_get = getRedis($redis_key);
 
@@ -6221,7 +6221,7 @@ function itg_rapid_api_programdetail($token) {
         $id = 0;
     }
 
-    $redis_key = "itg_rapid_api_programdetail_" . $suffix;
+    $redis_key = "devitg_rapid_api_programdetail_" . $suffix;
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
@@ -6250,7 +6250,7 @@ function itg_rapid_api_videodetail($token) {
         $id = 0;
     }
 
-    $redis_key = "itg_rapid_api_videodetail_" . $suffix;
+    $redis_key = "devitg_rapid_api_videodetail_" . $suffix;
     $result_get = getRedis($redis_key);
 
 //    if ($result_get['key_value'] != "") {
@@ -6279,7 +6279,7 @@ function itg_rapid_api_topstories($token) {
         $id = 0;
     }
 
-    $redis_key = "itg_rapid_api_topstories";
+    $redis_key = "devitg_rapid_api_topstories";
     $result_get = getRedis($redis_key);
 
     if ($result_get['key_value'] != "") {
