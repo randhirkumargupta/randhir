@@ -3,7 +3,7 @@
 drupal_add_css(
         
         
-        '.page-itg-app-dashboard #itg-app-dashboard-form fieldset legend{ display: block; }
+        '.page-itg-app-dashboard #itg-app-dashboard-form fieldset legend{ display: block; } 
 .page-itg-app-dashboard #itg-app-dashboard-form fieldset{ width:17%; float:left; margin:0 2% 2% 0; min-height:90px;}
 .page-itg-app-dashboard #itg-app-dashboard-form fieldset legend span.fieldset-legend{ font-size:18px;display: block; }
 .page-itg-app-dashboard #itg-app-dashboard-form fieldset .fieldset-wrapper{ padding-top:10px; }
