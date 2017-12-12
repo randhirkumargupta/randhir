@@ -968,7 +968,7 @@ function featuresWidgetData() {
  * function for  topstoriesList
  * @return array
  */
-function topstoriesList() {
+function topstoriesList($source) {
 // variable declation
     $data_topstories = array();
     $data_newslist = array();
@@ -979,6 +979,11 @@ function topstoriesList() {
     $home_list_count = 0;
     $widget_name = "top_stories_widget";
     $range_max = 15;
+    if($source == 'home'){
+        $top_story_data = fetchMasterConfigData('top_stories_management');
+        $top_story_limit = isset($top_story_data) ? $top_story_data : '7';
+        $range_max = $top_story_limit - 3;
+    }
     $range_min = 0;
     $order_by = 'ASC';
 
@@ -1011,6 +1016,7 @@ function topstoriesList() {
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
+    $query->fields('li', array('field_story_large_image_fid'));
 
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
@@ -1029,6 +1035,15 @@ function topstoriesList() {
     $data_topstories['title'] = "Top Stories";
     $data_topstories['label'] = "Top Stories";
     $data_topstories['show_label'] = "0";
+    if($source == 'home'){
+        $data_topstories['id'] = "0";
+        $data_topstories['order'] = "2";
+        $data_topstories['type'] = "topstories";
+        $data_topstories['title'] = "Top Stories";
+        $data_topstories['label'] = "Top Stories";
+        $data_topstories['show_label'] = "0";
+        $data_topstories['n_template_id'] = "1";
+    }
 
 // loop on top stories.
     foreach ($result as $key => $value) {
@@ -1047,6 +1062,7 @@ function topstoriesList() {
 // file url
         $file_small_img_url = completeFilePath($value['field_story_small_image_fid']);
         $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);
+        $file_large_img_url = completeFilePath($value['field_story_large_image_fid']);
         $comment_cont = getCommentsCount($nid);
 
 // create date formating
@@ -1093,7 +1109,7 @@ function topstoriesList() {
         $data_newslist[$home_list_count]['n_pcategory_name'] = "$prime_cat->name";
         $data_newslist[$home_list_count]['n_comment_count'] = "$comment_cont";
         $data_newslist[$home_list_count]['n_small_image'] = "$file_small_img_url";
-        $data_newslist[$home_list_count]['n_large_image'] = "$file_medium_img_url";
+        $data_newslist[$home_list_count]['n_large_image'] = "$file_large_img_url";
         $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
         $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
         $data_newslist[$home_list_count]['n_photo'] = $n_photo;
@@ -1105,6 +1121,12 @@ function topstoriesList() {
 //}
     }
 
-    $data_topstories['data'] = (array) $data_newslist;
+    
+    if($source == 'home'){
+        $data_topstories['news'] = (array) $data_newslist;
+    }
+    else{
+        $data_topstories['data'] = (array) $data_newslist;
+    }
     return $data_topstories;
 }

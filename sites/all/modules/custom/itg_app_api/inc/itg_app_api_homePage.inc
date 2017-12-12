@@ -31,7 +31,8 @@ function homePageJson() {
     
     $middleware_topstories_config = fetchMasterConfigData('top_stories_config_options');
     if($middleware_topstories_config == 1){ //enable
-       $data_topstories = homepage_topstories();
+       //$data_topstories = homepage_topstories();
+       $data_topstories = topstoriesList('home');
        $total_count += count($data_topstories);
     }
    
