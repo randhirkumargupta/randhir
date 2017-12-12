@@ -1037,7 +1037,9 @@ function topstoriesList($source) {
     $data_topstories['show_label'] = "0";
     if($source == 'home'){
         $data_topstories['id'] = "0";
-        $data_topstories['order'] = "2";
+        $home_page_api_story_order = fetchMasterConfigData('homeapi_order_topstories');
+        $top_stories_order = isset($home_page_api_story_order) ? $home_page_api_story_order : "";
+        $data_topstories['order'] = "$top_stories_order";
         $data_topstories['type'] = "topstories";
         $data_topstories['title'] = "Top Stories";
         $data_topstories['label'] = "Top Stories";
