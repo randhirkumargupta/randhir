@@ -690,9 +690,13 @@ function itg_category_manager_term_validate($form , &$form_state) {
     if ($num_cat_selected > 4) {
       form_set_error('parent' , t('Sorry! You can not create more than 4 levels of categories within a section.'));
     }
-//Check for duplicate category    
+    //Check for duplicate category    
     $dup_parents = itg_category_manager_is_dupe_term($term , $vid , $tid);
     $erros = $dup_parents ? array_filter($dup_parents) : NULL;
+    
+
+    $term_load = taxonomy_term_load(arg(2));
+    
     if (!empty($erros)) {
       $new_rparent = $termParent != 0 ? taxonomy_get_parents_all($termParent) : 0;
       $new_rparent = is_array($new_rparent) ? $new_rparent[count($new_rparent) - 1]->tid : 0;
@@ -701,8 +705,11 @@ function itg_category_manager_term_validate($form , &$form_state) {
         if (isset($value->tid) && $value->tid == $new_rparent) {
           form_set_error('name' , t('Category name already exists.'));
         }
-        elseif ($new_rparent == 0 && $value->name == $form_state['values']['name']) {
-          form_set_error('name' , t('Category name already exists.'));
+        elseif (is_numeric(arg(2)) && $term_load->name != $form_state['values']['name'] && $new_rparent == 0 && $value->name == $form_state['values']['name']) {
+          form_set_error('name' , t('Category name already exists2.'));
+        }
+        elseif (!is_numeric(arg(2)) && $new_rparent == 0 && $value->name == $form_state['values']['name']) {
+          form_set_error('name' , t('Category name already exists3.'));
         }
         else {
           

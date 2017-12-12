@@ -90,7 +90,7 @@ $argum = base64_encode(arg(1));
                 <?php if ($user->uid > 0): ?>
                   <li><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                 <?php else: ?>
-                  <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                 <?php endif; ?>
                <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   
             </ul>
@@ -217,9 +217,9 @@ $argum = base64_encode(arg(1));
                     <?php if ($user->uid > 0): ?>
                       <li class="mhide"><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                     <?php else: ?>
-                      <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                      <li class="mhide replace-submit-story"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                     <?php endif; ?>
-                    <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   
+                    
                     <div class = "photo-refresh-bottom">
                     <?php global $user; ?>
                     <?php
@@ -320,14 +320,18 @@ if(isset($_GET['photo']) && $_GET['photo']) {
           slidesToScroll: 1,
           arrows: true,
           fade: true,
-          asNavFor: '.slick-thumbs-slider, .slickslide, .photo-by-slider'
+          asNavFor: '.slick-thumbs-slider, .slickslide, .photo-by-slider',
+          // For active slide
+          initialSlide: <?php echo $initial_slide; ?>,
       });
       jQuery('.photo-by-slider').slick({
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
           fade: true,
-          asNavFor: '.slick-thumbs-slider, .slickslide, .counterslide'
+          asNavFor: '.slick-thumbs-slider, .slickslide, .counterslide',
+          // For active slide
+          initialSlide: <?php echo $initial_slide; ?>,
       });
 // Photogallery slider javascript
       jQuery(document).ready(function () {

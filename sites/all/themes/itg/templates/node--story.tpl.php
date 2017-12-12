@@ -109,6 +109,8 @@ if (!empty($content)):
       endif;
     }
   }
+  // source type array
+  $source_type_arr = array('PTI' , 'IANS', 'ANI');
 ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle . $photo_story_section_class; ?>">
     <div class='<?php print $classes ?>'>      
@@ -268,11 +270,15 @@ if (!empty($content)):
                     </span>
                   <?php print t('SHARES'); ?>
                   </li>
-                  <li><?php print date('F j, Y', $node->created); ?>   </li>
+                  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
                   <li>
                     <?php
-                    print t('UPDATED');
-                    print date('H:i', $node->changed);
+                    print t('UPDATED ');
+                    if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+                        print date('H:i', $node->created);
+                    } else {
+                        print date('H:i', $node->changed);  
+                    }
                     print t(' IST');
                     ?>
                   </li>
@@ -383,8 +389,12 @@ if (!empty($content)):
                 </ul>
                 <?php } ?>  
                 <ul class="date-update">
-                  <li><?php print date('F j, Y', $node->created); ?>   </li>
-                  <li><?php t('UPDATED'); ?><?php print date('H:i', $node->changed); ?> IST</li>
+                  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+                  <li><?php t('UPDATED '); ?><?php if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+                        print date('H:i', $node->created);
+                    } else {
+                        print date('H:i', $node->changed);  
+                    } ?> IST</li>
                 <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
                     <li><?php
                     $buzz_city_array = array();

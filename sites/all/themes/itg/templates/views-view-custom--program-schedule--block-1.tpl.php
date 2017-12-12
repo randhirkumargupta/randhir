@@ -35,7 +35,6 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
          $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data[0]->uri) . ' alt="" title= "'.$sponsor_all_data[0]->title.'" />';
          $sponsor_tags = '<div class="program-sch-sponcor"><div class="div-sponcor"><span>'.t("Powered By").'</span>'.l($sponsor_img,$baseurl.'sponsor-details',  array('attributes' => array('target' => '_blank'),'query' => array('sponsor' => $sponsor_all_data[0]->nid), 'html' => true)).'</div></div>';
      }
-     
      $row_count = count($rows);
     if ($index <= ((round($row_count / 2)) - 1)) {
     $output_left .= $sponsor_tags.'<div class="content-list" style="background:'.$heading_background_color.'">';

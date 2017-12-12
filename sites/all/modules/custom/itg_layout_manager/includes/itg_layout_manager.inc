@@ -30,7 +30,7 @@ function itg_layout_admin() {
  * @return array $output
  */
 function itg_layout_list() {
-  
+
   drupal_add_js('jQuery(document).ready(function(){
                   jQuery(".layout_delete_conformation").click(function() {
                     if (!confirm("Are you sure, you want to delete.")) {
@@ -38,7 +38,7 @@ function itg_layout_list() {
                     }
                   }); 
               });', array('scope' => 'footer', 'type' => 'inline'));
-  
+
   // configure the table header columns
   $header = array(
     array('data' => t('ID')),
@@ -61,8 +61,8 @@ function itg_layout_list() {
   else {
     $items_per_page = 20;
   }
-	
-	if (isset($_GET['page'])) {
+
+  if (isset($_GET['page'])) {
     $pages = $_GET['page'];
   }
   else {
@@ -75,7 +75,7 @@ function itg_layout_list() {
   $itg_query->fields('ttd', array('name'));
   $itg_query->groupBy('layout_tpl.section_name');
   $itg_query->condition('layout_tpl.layout_type', arg(1));
-	$itg_query->orderBy('layout_tpl.id', 'DESC');
+  $itg_query->orderBy('layout_tpl.id', 'DESC');
   if (!empty($_GET['section']) && $_GET['section'] != '_none') {
     $itg_query->condition('layout_tpl.section_name', $_GET['section']);
   }
@@ -89,7 +89,7 @@ function itg_layout_list() {
   foreach ($itg_result as $row) {
 
     $edit_link = l(t('Edit'), 'itg-layout-manager/' . arg(1), array('query' => array('section' => $row->section_name, 'template_name' => $row->template_name)));
-    $delete_link = l(t('Delete'), 'itg-deletelayout/' . $row->section_name, array('query' => array('destination' => 'itg-layout-list/'.arg(1)), 'attributes' => array('class' => 'layout_delete_conformation')));
+    $delete_link = l(t('Delete'), 'itg-deletelayout/' . $row->section_name, array('query' => array('destination' => 'itg-layout-list/' . arg(1)), 'attributes' => array('class' => 'layout_delete_conformation')));
     $itg_action = $edit_link . ' / ' . $delete_link;
     $rows[] = array(
       array('data' => ($items_per_page * $pages + $count + 1)),
@@ -507,6 +507,22 @@ function itg_state_election() {
   make_graph();
 
   return theme('itg_state_election', array('widget_data' => $data, 'map_data' => $urlarray));
+}
+
+/**
+ * This function use for plote .
+ */
+function make_graph() {
+  drupal_add_js(drupal_get_path('module', 'itg_widget') . '/js/itg_election_graph_main.js', array('type' => 'file', 'scope' => 'header'));
+  $section = arg(1);
+  $state = arg(2);
+  $data = itg_widget_get_graph_data_by_state($section, $state);
+  $jsondata = file_get_contents($data[0]->field_election_constituency_tall_value);
+  $settings['index'] = 0;
+  $settings['json_data'] = $jsondata;
+  drupal_add_js(array('itg_layout_manager' => array('settings' => $settings)), array('type' => 'setting'));
+  drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/state_election_map.js', array('type' => 'file',));
+
 }
 
 /**

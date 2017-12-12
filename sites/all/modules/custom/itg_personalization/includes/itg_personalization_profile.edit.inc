@@ -158,7 +158,7 @@ function itg_personalization_edit_profile_form($form, &$form_state) {
     '#description' => 'Files must be less than<strong>512 MB</strong>.<br>Allowed file types:<strong>gif jpg jpeg</strong>',
     '#preview' => TRUE,
     "#upload_validators" => array(
-      "file_validate_extensions" => array("gif jpeg jpg"),
+      "file_validate_extensions" => array("jpeg jpg png"),
       "file_validate_size" => array(500 * 1024 * 1024),
     ),
     '#default_value' => $user_detail->field_user_picture['und'][0]['fid'],

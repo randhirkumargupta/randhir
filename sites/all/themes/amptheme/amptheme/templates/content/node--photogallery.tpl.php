@@ -95,11 +95,11 @@ if (function_exists('get_other_gallery_amp')) {
       if (!empty($value['field_story_small_image_fid'])) {
         $file = file_load($value['field_story_small_image_fid']);
         $small_image = file_create_url($file->uri);
-        $other_src_set = $small_image . ' ' . $small_width . ' w';
+        $other_src_set = $small_image . ' ' . $small_width . 'w';
       }
       else {
         $small_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg');
-        $other_src_set = $small_image . ' ' . $small_width . ' w';
+        $other_src_set = $small_image . ' ' . $small_width . 'w';
       }
       
       $alias = drupal_get_path_alias('node/'.$value['nid']);

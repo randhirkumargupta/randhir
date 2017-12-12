@@ -202,6 +202,12 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
 
       if ($answer_type == 'textfield') { // Answer options for textfield
         $txt_num = 0;
+        $form['media' . $num] = array(
+           '#type' => 'markup',
+           '#prefix' => '<div class="survey-media-wrapper">',
+           '#markup' => $question_media,
+           '#suffix' => '</div>',
+       );
         foreach ($all_ans_options[$num] as $val_txt_option) {
           $form['answer_option' . $num . '_' . $txt_num] = array(
               '#title' => $val_txt_option,
@@ -237,12 +243,6 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         }
         
       } else {  //Answer option for radios and checkboxes
-        $form['answer_option' . $num] = array(
-            '#title' => t(''),
-            '#type' => $answer_type,
-            '#options' => $all_ans_options[$num],
-        );
-      }      
     
       $form['media' . $num] = array(
            '#type' => 'markup',
@@ -250,6 +250,14 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
            '#markup' => $question_media,
            '#suffix' => '</div>',
        );
+
+        $form['answer_option' . $num] = array(
+            '#title' => t(''),
+            '#type' => $answer_type,
+            '#options' => $all_ans_options[$num],
+        );
+      }      
+
       
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       

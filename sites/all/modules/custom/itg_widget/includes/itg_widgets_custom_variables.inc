@@ -394,5 +394,12 @@ function itg_widgets_custom_variables() {
 		'#default_value' => variable_get('solr_down'),
 	);
   
+  $form['disable_livetv_embed'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Disbale Live tv Embed'),
+      '#required'=> FALSE,
+      '#default_value' => variable_get('disable_livetv_embed'), // for default checked and false is not checked
+  );
+  
   return system_settings_form($form);
 }

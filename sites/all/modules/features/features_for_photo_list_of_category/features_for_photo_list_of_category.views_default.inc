@@ -852,7 +852,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '84';
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
@@ -991,7 +990,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '84';
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
@@ -1159,7 +1157,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '84';
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Field: Small image */
   $handler->display->display_options['fields']['field_story_small_image']['id'] = 'field_story_small_image';
@@ -1298,7 +1295,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '84';
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Field: Small image */
@@ -1399,7 +1395,6 @@ return $_GET[\'category\'];
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['max_length'] = '84';
-  $handler->display->display_options['fields']['title']['alter']['trim'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Field: Small image */
   $handler->display->display_options['fields']['field_story_small_image']['id'] = 'field_story_small_image';

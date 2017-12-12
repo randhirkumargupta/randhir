@@ -551,7 +551,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -579,6 +579,14 @@ echo itg_event_registration_registered_user_detail($row->nid);
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   $handler->display->display_options['path'] = 'manage-event-backend';
 
@@ -920,7 +928,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -948,6 +956,14 @@ echo itg_event_registration_registered_user_detail($row->nid);
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   $handler->display->display_options['path'] = 'manage-event-backend';
 
@@ -1343,7 +1359,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -1371,6 +1387,14 @@ echo itg_event_registration_registered_user_detail($row->nid);
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   $handler->display->display_options['path'] = 'manage-event-backend-type';
 
@@ -1750,7 +1774,7 @@ echo itg_event_registration_registered_user_detail($row->nid);
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['operator'] = 'word';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
   $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
@@ -1778,6 +1802,14 @@ echo itg_event_registration_registered_user_detail($row->nid);
     12 => 0,
     15 => 0,
     18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   $handler->display->display_options['path'] = 'manage-event-backend-draft';
   $export['Event_backend'] = $view;
@@ -3527,7 +3559,7 @@ return itg_event_backend_get_event_node();
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field: Category Icon */
+  /* Field: Field: Sponser Logo */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';
@@ -4617,7 +4649,7 @@ print  "<img src=\'" . $base_url . \'/\' . drupal_get_path(\'theme\', \'itg\') .
 ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
-  /* Field: Field: Category Icon */
+  /* Field: Field: Sponser Logo */
   $handler->display->display_options['fields']['field_sponser_logo']['id'] = 'field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['table'] = 'field_data_field_sponser_logo';
   $handler->display->display_options['fields']['field_sponser_logo']['field'] = 'field_sponser_logo';

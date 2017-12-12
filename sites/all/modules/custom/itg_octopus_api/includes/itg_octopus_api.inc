@@ -158,7 +158,6 @@ function itg_octopus_api_rundown() {
                   'clipin' => $clip_in,
                   'clipout' => $clip_out,
                   'text' => $text,
-                  'new_element_id' => 12,
                   'commands' => $commands,
                 ))->execute();
           }
@@ -328,8 +327,6 @@ function itg_octopus_api_rundown_listing() {
 
   $query->orderBy('ios.id', 'DESC');
 
-// p($query->__toString());
-  //$result = $query->execute();
   $result = $query->distinct()->execute();
 
 
@@ -447,8 +444,7 @@ function itg_octopus_api_rundown_listing_count($current_rundown) {
 
   $query->orderBy('ios.id', 'DESC');
 
-// p($query->__toString());
-  return $result = $query->execute()->rowCount();
+  return $result = $query->distinct()->execute()->rowCount();
 }
 
 /**
@@ -623,6 +619,14 @@ function itg_octopus_api_settings($form, &$form_state) {
     '#title' => t('Octopus Notify E-mail'),
     '#default_value' => variable_get('itg_octopus_notify_email', ''),
     '#description' => t('Notification Email address for Octopus'),
+    '#required' => TRUE,
+  );
+
+  $form['itg_octopus_holder']['itg_octopus_oct_fromemail'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Reply to E-mail'),
+    '#default_value' => variable_get('itg_octopus_oct_fromemail', ''),
+    '#description' => t('Reply to E-mail address for Octopus'),
     '#required' => TRUE,
   );
 

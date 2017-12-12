@@ -139,9 +139,9 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,    
   );
   
-  $items['itg-akamai-load-my-account'] = array(
-    'title' => 'Akamai Load My Account',
-    'description' => 'Akamai Load My Account',
+  $items['itg-load-my-account'] = array(
+    'title' => 'Load My Account',
+    'description' => 'Load My Account',
     'page callback' => 'itg_akamai_load_my_account',
     'access arguments' => array('access content'),
     'file' => 'includes/itg_akamai.helper.inc',
@@ -175,7 +175,17 @@ function itg_common_menu() {
     'access arguments' => array('access itg story'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_common.inc',
-  );
+  );  
+    
+  $items['admin/settings/global-custom-variables'] = array(
+     'title' => 'Global Custom variables',
+     'description' => 'Global Custom variables settings page',
+     'page callback' => 'drupal_get_form',
+     'page arguments' => array('itg_global_custom_variables'),
+     'file' => 'includes/itg_common.inc',
+     'access arguments' => array('access itg story'),
+     'type' => MENU_NORMAL_ITEM,
+   );
   
   $items['hello'] = array(
     'page callback' => 'itg_get_test_result',
@@ -224,7 +234,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     'views-exposed-form-searchimage-search-publish-video-radio',
     'views-exposed-form-searchimage-search-publish-video', 
     );
-  if( in_array($form['#id'], $solr_video_video_id)) {
+  if( in_array($form['#id'], $solr_video_video_id)) { 
+      global $conf;
+      $conf['preprocess_js'] = 0;
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
@@ -263,7 +275,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   
   $solr_video_view_internal = array('views-exposed-form-searchimage-search-unpublish-internal-video' , 
       'views-exposed-form-searchimage-search-unpublish-internal-video-singal','views-exposed-form-searchimage-search-publish-internal-video-singal', 'views-exposed-form-searchimage-search-publish-internal-video');
-  if( in_array($form['#id'], $solr_video_view_internal)) {
+  if( in_array($form['#id'], $solr_video_view_internal)) { 
+    global $conf;
+     $conf['preprocess_js'] = 0;
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
@@ -1479,6 +1493,28 @@ function itg_common_get_addontitle($node_obj) {
   }
 }
 
+/**
+ * Function to get details of addtitle for given nodeid.
+ * @param int $nid;
+ */
+function itg_common_get_addontitle_for_view($nid) {
+  if (!empty($nid)) {
+    $addon_list = array();
+    $query = db_select('field_data_field_story_new_title', 'addon');
+    $query->join('field_data_field_story_redirection_url_titl', 'addurl', 'addurl.entity_id = addon.entity_id');
+    $query->fields('addon', array('field_story_new_title_value'))
+          ->fields('addurl', array('field_story_redirection_url_titl_value'));
+    $query->condition('addon.entity_id', $nid);
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $addon_list['ad_title'] = $record['field_story_new_title_value'];
+      $addon_list['ad_url'] = $record['field_story_redirection_url_titl_value'];
+    }
+
+    return $addon_list;
+  }
+}
+
 function itg_common_taxonomy_get_parents($tid) {
     $parents = &drupal_static(__FUNCTION__, array());
 
@@ -1759,3 +1795,13 @@ function itg_common_cache_clear($cache_array = array()) {
     }
   }
 }
+
+/**
+ * {@inheritdoc}
+ */
+//function display_widget_on_sport_page() {
+//  
+//  $url_list = array('ipl-venue', 'ipl-schedule', 'ipl-teams', 'ipl-stadiums');
+//  
+//  
+//}
