@@ -1024,7 +1024,7 @@ function topstoriesList($source) {
     $query->fields('ti', array('tid'));
 
 
-//end
+//end 
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $result_fs = featuresWidgetData();
@@ -1037,7 +1037,9 @@ function topstoriesList($source) {
     $data_topstories['show_label'] = "0";
     if($source == 'home'){
         $data_topstories['id'] = "0";
-        $data_topstories['order'] = "2";
+        $home_page_api_story_order = fetchMasterConfigData('homeapi_order_topstories');
+        $top_stories_order = isset($home_page_api_story_order) ? $home_page_api_story_order : "";
+        $data_topstories['order'] = "$top_stories_order";
         $data_topstories['type'] = "topstories";
         $data_topstories['title'] = "Top Stories";
         $data_topstories['label'] = "Top Stories";
