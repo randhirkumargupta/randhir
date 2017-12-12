@@ -598,20 +598,22 @@ function itg_get_multi_byline_details($byline_id) {
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_extra_large_image', 're', 'n.nid = re.entity_id');
     $query->leftJoin('field_data_field_reporter_twitter_handle', 'frq', 'n.nid = frq.entity_id');
-    $query->leftJoin('itg_multi_byline_info', 'b', 'n.nid = b.nid');
+    $query->leftJoin('itg_multi_byline_info', 'b', 'n.nid = b.byline_id');
     $query->fields('n');
     $query->fields('frq', array('field_reporter_twitter_handle_value'));
     $query->fields('re', array('field_story_extra_large_image_fid'));
-    $query->fields('b', array('	byline_id'));
+    $query->fields('b', array('byline_weight'));
     $query->condition('n.nid', $id_arr, 'IN');
     $query->condition('n.type', 'reporter', '=');
+    $query->condition('b.nid', '0', '<>');
+    $query->groupBy('n.nid');
     $result = $query->execute();
     while ($record = $result->fetchAssoc()) {
-      $byline_id= $record['byline_id'];
-      $options[$byline_id]['nid'] = $record['nid'];
-      $options[$byline_id]['title'] = $record['title'];
-      $options[$byline_id]['extra_large_image'] = $record['field_story_extra_large_image_fid'];
-      $options[$byline_id]['twitter_handle'] = $record['field_reporter_twitter_handle_value'];
+      $byline_weight= $record['byline_weight'];
+      $options[$byline_weight]['nid'] = $record['nid'];
+      $options[$byline_weight]['title'] = $record['title'];
+      $options[$byline_weight]['extra_large_image'] = $record['field_story_extra_large_image_fid'];
+      $options[$byline_weight]['twitter_handle'] = $record['field_reporter_twitter_handle_value'];
     }
   }
   return $options;
