@@ -308,7 +308,7 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('program_display_custom_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
     $display_count = 10;
     $pagination_cap = 50;
