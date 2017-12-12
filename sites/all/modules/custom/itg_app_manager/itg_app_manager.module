@@ -2239,6 +2239,7 @@ function itg_app_manager_packages_form($form, &$form_state) {
         $term_query_results = $term_query->execute()->fetchAll();
         foreach ($term_query_results as $key => $val) {
             //$term_options[$val->tid] = $val->name . l('Config Settings', 'package-config/nojs/form/' . $val->tid . '', array('attributes' => array('class' => 'ctools-use-modal')));
+            $term_options[$val->tid] = $val->name;
         }
     }
 
