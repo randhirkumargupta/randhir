@@ -167,8 +167,8 @@ function hamburger_menu_listing($menu_label_id) {
     $query = db_select('itg_app_menu_content', 'ham');
     $query->fields('ham');
     $query->condition('ham.menu_type_id', $menu_type_id);
-    //$query->condition('ham.s_id', 0);
-    $query->condition('ham.has_subcategory','0');
+    $query->condition('ham.s_id', 0);
+    //$query->condition('ham.has_subcategory','0');
     $query->condition('ham.menu_label_id', $menu_label_id);
     $query->orderBy('order_id', 'ASC');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -243,7 +243,7 @@ function humberger_menu_subcat_list($cat_id) {
   $query = db_select('itg_app_menu_content', 'cl');
   $query->fields('cl', array('menu_type', 'section_id', 's_title', 'order_id', 'is_new'));
   $query->condition('cl.section_id', $cat_id);
-  //$query->condition('cl.has_subcategory', 0); //only parent menus
+  $query->condition('cl.has_subcategory', 0); //only parent menus
   $query->condition('cl.menu_type', 0, '!=');
   $query->condition('cl.s_id', 0, '!=');
   $query->condition('cl.menu_type_id', 1);
