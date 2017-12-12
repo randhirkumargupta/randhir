@@ -87,7 +87,7 @@ function homePageJson() {
         $data['data'][] = $data_poll;
         }
       }
-    }
+    } 
     if(count($data) == 2){
       $data['data'] = array();
     }
