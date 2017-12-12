@@ -3362,8 +3362,10 @@ function itg_rapid_api_signup($token) {
                 $session_id = $cookie_val['session_id'];
                 $session_name = $cookie_val['session_name'];
                 $result_obj = json_decode($result);
+                $success_status_mess = fetchMasterConfigData('sso_signup');
+                $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
                 $account['status_code'] = "1";
-                $account['status_message'] = "";
+                $account['status_message'] = "$success_status_message";
                 $account['data']['user_id'] = "$uname";
                 $account['data']['auth_token'] = "$result->token";
                 $account['data']['session_id'] = "$session_id";
@@ -3518,8 +3520,10 @@ function itg_rapid_api_signup($token) {
             }
             if ($auth_token) {
                 $user = updateUsedrProfileAtSignup_rapid($data, 1);
+                $success_status_mess = fetchMasterConfigData('sso_signup');
+                $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
                 $account['status_code'] = "1";
-                $account['status_message'] = "";
+                $account['status_message'] = "$success_status_message";
                 $account['data']['user_id'] = "$name";
                 $account['data']['auth_token'] = "$auth_token";
                 $account['data']['session_id'] = "$session_id";
@@ -3961,7 +3965,7 @@ function itg_rapid_api_forgot_password($token) {
         itg_otp_device_info_insert_rapid($params, $result_obj_otp[0]->otp, 1, $result_obj_otp[0]->created);
     }
     cleanToken_Rapid($params);
-    $success_status_mess = fetchMasterConfigData('sso_forgot_password');
+    $success_status_mess = fetchMasterConfigData('sso_otp_verification');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $data['status_code'] = "1";
