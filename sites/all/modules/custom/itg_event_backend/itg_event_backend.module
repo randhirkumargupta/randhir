@@ -287,6 +287,19 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   if(!empty($form_state['values']['field_event_tabs'])){
     foreach ($form_state['values']['field_event_tabs'][LANGUAGE_NONE] as $key => $event_tabs) {
       if (is_numeric($key)) {
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_name', t('Please enter Tab name.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value'])){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_name', t('Please enter Tab name.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter Tab URL.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_sef'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_sef', t('Please enter Tab SEF.'));
+        }
+        
         if ($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url') {
           if((strpos($url, 'http') !== 0) && !filter_var($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_URL) && !empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'])) {
               form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter valid Tab External URL.'));  
