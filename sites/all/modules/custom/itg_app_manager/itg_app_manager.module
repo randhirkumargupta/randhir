@@ -3226,7 +3226,8 @@ function itg_app_dashboard_form($form, &$form_state) {
     $form['hamburger_menu_group']['hamburger_menu_config_options'] = array(
         '#type' => 'radios',
         '#options' => array(0 => 'In Active', 1 => 'Active'),
-        '#default_value' => fetchMasterConfigData('hamburger_menu_config_options'),
+        '#default_value' => 1,
+        '#disabled' => TRUE
     );
     $form['hamburger_menu_group']['hamburger_menu_information'] = array(
         '#markup' => "<a href='$base_url/hamburger-menu-management' target='_blank'>$img_tag</a>",
@@ -3243,7 +3244,8 @@ function itg_app_dashboard_form($form, &$form_state) {
     $form['horizontal_menu_group']['horizontal_menu_config_options'] = array(
         '#type' => 'radios',
         '#options' => array(0 => 'In Active', 1 => 'Active'),
-        '#default_value' => fetchMasterConfigData('horizontal_menu_config_options'),
+        '#default_value' => 1,
+        '#disabled' => TRUE
     );
     $form['horizontal_menu_group']['horizontal_menu_information'] = array(
         '#markup' => "<a href='$base_url/horizontal-menu-management' target='_blank'>$img_tag</a>",
