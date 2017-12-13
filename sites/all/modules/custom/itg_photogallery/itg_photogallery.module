@@ -474,6 +474,7 @@ function itg_photogallery_field_add_more_submit($form, &$form_state) {
 		$source = $img['tmppath'];
 
 		$directory = $filedir;
+    $img['name'] = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $img['name']);
 		$destination = file_stream_wrapper_uri_normalize($scheme . $directory . $img['name']);
 		$destination = file_unmanaged_move($source, $destination, FILE_EXISTS_RENAME);
 		global $user;
