@@ -232,7 +232,6 @@
       }
       .story-section .story-tech-chunk {
         background: #f3f3f3;
-        padding: 10px;
         position: relative;
 		display:inline-block
       }
