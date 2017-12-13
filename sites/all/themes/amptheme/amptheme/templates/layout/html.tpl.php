@@ -234,6 +234,7 @@
         background: #f3f3f3;
         padding: 10px;
         position: relative;
+		display:inline-block;
       }
       .story-section .story-tech-chunk .tech-rating {
         max-width: 88px;
@@ -821,6 +822,15 @@ ul.pron-cons-img li img {
 .tech-photos .tech-photo-item .tech-photo-overlay a span:hover {
     color: #fff;
     text-decoration: underline
+}
+.tech-photos{text-align:center;}
+h3.tech-photo-head,.tech-photos-count{text-align:left;}
+@media only screen and (max-width: 767px) {
+ul.pron-cons-img{width:100%;}
+.tech-pros-cons-main h2{margin-left:0; width:100%;}
+ul.pron-cons-img li img{margin-top:0;}
+ul.tech-cons,ul.tech-pros{width:100%; margin-left:6%; box-sizing:border-box;}
+
 }
     </style>
     <?php //endif;  ?>
