@@ -2220,13 +2220,13 @@ function itg_widget_block_view_alter(&$data, $block) {
         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
         $itg_widgets_sports_check = variable_get('itg_widgets_sports');
        
-        if(isset($_GET['section']) && !empty($_GET['section'])) {
+        if (isset($_GET['section']) && !empty($_GET['section'])) {
           $tid_of_template = $_GET['section'];
         }
-        if(isset($_GET['section_name']) && !empty($_GET['section_name'])) {
+        if (isset($_GET['section_name']) && !empty($_GET['section_name'])) {
           $tid_of_template = $_GET['section_name'];
         }
-        if(is_numeric($arg[2]) && !empty($arg[2]) && $arg[0] == 'taxonomy') {
+        if (is_numeric($arg[2]) && !empty($arg[2]) && $arg[0] == 'taxonomy') {
           $tid_of_template = $arg[2];
         }
         $tids_of_live_score  = itg_widget_get_tid_by_block('live_score');
@@ -2234,9 +2234,8 @@ function itg_widget_block_view_alter(&$data, $block) {
         if ((isset($arg[1]) && (in_array($arg[1], $arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category) || in_array($tid_of_template , $tids_of_live_score)))) {          
             drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
-
           });', array('type' => 'inline', 'scope' => 'footer'));
-          if(in_array($tid_of_template , $tids_of_live_score)) 
+          if (in_array($tid_of_template , $tids_of_live_score)) 
             {
               drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("#block-itg-widget-live-score").find(".block-title").remove();

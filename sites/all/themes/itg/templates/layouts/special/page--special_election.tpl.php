@@ -171,7 +171,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                      
                           <div class="row itg-325-layout">
                               <div class="col-md-6 col-sm-6 mt-50">
-                                  <div class="widget-help-text"> Draggable ( <strong>Live Tv</strong> )</div>
+                                  <div class="widget-help-text"> <?php echo t('Draggable');?> ( <strong><?php echo t('Live Tv');?></strong> )</div>
                                   <div class="itg-widget">
                                       <div class=" droppable <?php print $gray_bg_layout; ?>">
                                           <div class="widget-wrapper <?php print $widget_data['itg-block-3']['widget_name']; ?>">
