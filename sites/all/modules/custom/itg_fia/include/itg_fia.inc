@@ -22,6 +22,8 @@ function itg_fia_data() {
 function itg_fia_xml_node_feed($query) {
   global $base_url;
   $xml_base = $base_url . '/' . current_path();
+  $fia_ga_data = variable_get('ga_code');
+  $fia_ga = isset($fia_ga_data) ? $fia_ga_data : " ";
   $nodes = node_load_multiple($query);
   $items = '';
   foreach ($nodes as $node) {
@@ -242,7 +244,7 @@ function itg_fia_xml_node_feed($query) {
     $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-    $items .= itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
+    $items .= itg_fia_xml_format_rss_item('story-'.$node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
 
   global $base_url;
@@ -279,7 +281,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
 /**
  * Creates the xml item.
  */
-function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $output = "    <item>\n";
   $output .= "      <title>" . $title . "</title>\n";
   $output .= "      <link>" . check_url($link) . "</link>\n";
@@ -315,7 +317,7 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
   $output .= "    <h1>" . $title . "</h1>";
   $output .= "    <h2>" . $kicker . "</h2>";
   // <!-- A kicker for your article -->
-  $output .= "      <h3 class='op-kicker'>" . $kicker . "</h3>\n";
+  $output .= "      <details><summary>" . $kicker . "</details></summary>\n";
   // <!-- The author of your article -->
   $output .= "      <address>" . $name . "</address>\n";
   $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
@@ -327,6 +329,9 @@ function itg_fia_xml_format_rss_item($kicker, $target_nids, $fb_instant_image, $
   $output .= "    <aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>\n";
   // <!-- Copyright details for your article -->
   $output .= "    <small>© Facebook</small>\n";
+  $output .= '<figure class="op-tracker"><iframe><script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function()
+              { (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,"script","//www.google-analytics.com/analytics.js","ga"); ga("create", "'.$fia_ga.'", "auto"); ga("set", "referrer", "http://instant.facebook.com/c_id='.$id.'"); ga("send", "pageview");</script></iframe></figure> ';
+  $output .= '<figure class="op-tracker"><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: "2", c2: "8549097",options: { url_append: "comscorekw=fbia" }});(function(){ var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();</script><noscript><img src="http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia" /></noscript><!-- End comScore Tag --></iframe></figure>';
   $output .= "    </footer>\n\n";
   $output .= "    </article>\n\n";
   $output .= "    </body>\n\n";
