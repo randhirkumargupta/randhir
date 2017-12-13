@@ -263,6 +263,16 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             $menu_lablel_arr[$val->menu_id] = $val->menu_name;
         }
     }
+    //menu edit
+    if(arg(0) == 'm-menu' && arg(2) == 'edit'){
+        $m_id = arg(1);
+        $s_query = db_select('itg_app_menu_content', 'imc');
+        $s_query->fields('imc');
+        $s_query->condition('imc.id', $m_id, '=');
+        $s_ses = $s_query->execute()->fetchAll();
+        $d_row = $s_ses[0];    
+        $form['m_id'] = array('#type' => 'hidden', '#value' => $d_row->id);
+    }
     $form['container'] = array(
         '#tree' => TRUE,
         '#menu_form_id' => $menu_form_id,
@@ -281,18 +291,21 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 '#type' => 'select',
                 '#title' => '',
                 '#options' => $menu_lablel_arr,
+                '#default_value' => $d_row->menu_label_id
             );
         }
         $form['container'][$i]['order_id'] = array(
             '#type' => 'select',
             '#title' => '',
             '#options' => array('' => '- Select -', '0' => '0', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10'),
+            '#default_value' => $d_row->order_id
         );
         $form['container'][$i]['menu_type'] = array(
             '#type' => 'select',
             '#title' => '',
             '#delta' => $i,
             '#options' => array('' => '- Select -', '0' => 'Static', '1' => 'Mix', '1208521' => 'Photo', '1206552' => 'Video', '1206553' => 'Program'),
+            '#default_value' => $d_row->menu_type,
             '#ajax' => array(
                 'callback' => 'ajax_dependent_dropdown_callback',
                 'wrapper' => 'menu-title-' . $i,
@@ -312,6 +325,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                     'callback' => 'ajax_subsection_callback',
                     'wrapper' => 'subsection-wrapper' . $i,
                 ),
+                '#default_value' => $d_row->title,
             );
             if (isset($form_state['values']['container'][$i]['section']['title']) && is_numeric($form_state['values']['container'][$i]['section']['title'])) {
                 $subsec_options = _get_section_options($form_state['values']['container'][$i]['section']['title']);
@@ -324,11 +338,13 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 '#maxlength' => 255,
                 '#prefix' => '<div id="menu-title-' . $i . '">',
                 '#suffix' => '</div>',
+                '#default_value' => $d_row->title,
             );
         }
         $form['container'][$i]['has_subcat'] = array(
             '#type' => 'checkbox',
             '#title' => '',
+            '#default_value' => $d_row->has_subcategory,
         );
         $form['container'][$i]['sub_section'] = array(
             '#type' => 'select',
@@ -336,14 +352,17 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             '#options' => $subsec_options,
             '#prefix' => '<div id="subsection-wrapper' . $i . '">',
             '#suffix' => '</div></div>',
+            '#default_value' => $d_row->s_id,
         );
         $form['container'][$i]['section_id'] = array(
             '#type' => 'hidden',
             '#value' => 0,
+            '#default_value' => $d_row->section_id,
         );
         $form['container'][$i]['sub_section_id'] = array(
             '#type' => 'hidden',
             '#value' => 0,
+            '#default_value' => $d_row->section_id,
         );
 
         $form['container'][$i]['type'] = array(
@@ -351,22 +370,26 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             '#title' => '',
             '#size' => 25,
             '#maxlength' => 255,
+            '#default_value' => $d_row->type,
         );
         $form['container'][$i]['webview_url'] = array(
             '#type' => 'textfield',
             '#title' => '',
             '#size' => 25,
             '#maxlength' => 255,
+            '#default_value' => $d_row->webview_url,
         );
         $form['container'][$i]['icon_url'] = array(
             '#type' => 'textfield',
             '#title' => '',
             '#size' => 25,
             '#maxlength' => 255,
+            '#default_value' => $d_row->icon_url,
         );
         $form['container'][$i]['is_new'] = array(
             '#type' => 'checkbox',
             '#title' => '',
+            '#default_value' => $d_row->is_new,
         );
     }
     $form['add_item'] = array(
@@ -543,7 +566,7 @@ function _get_section_options($term_id) {
  * @param array $form_state
  */
 function itg_app_manager_form_submit($form, &$form_state) {
-    if (!empty($form_state['values'])) {
+    if (!empty($form_state['values'])) {        
         foreach ($form_state['values']['container'] as $key => $form_val) {
             $data = array();
             $title = '';
@@ -588,15 +611,38 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 's_id' => $s_id,
                 's_title' => $s_title,
             );
-            drupal_write_record('itg_app_menu_content', $data);
-            $last_id = db_query('SELECT MAX(id) FROM {itg_app_menu_content}')->fetchField();
-            $icon_url = $form_val['icon_url'];
-            db_update('itg_app_menu_content')
-                    ->fields(array(
-                        'icon_url' => $icon_url,
-                    ))->condition('id', $last_id, '=')->execute();
+            if(isset($form_state['values']['m_id']) && $form_state['values']['m_id'] > 0){
+               $m_id = $form_state['values']['m_id'];
+               db_update('itg_app_menu_content')
+                        ->fields(array(
+                            'menu_type_id' => $form_val['menu_type_id'],
+                            'menu_label_id' => $form_val['menu_label_id'],
+                            'order_id' => $form_val['order_id'],
+                            'menu_type' => $form_val['menu_type'],
+                            'section_id' => $section_id,
+                            'title' => $title,
+                            'type' => $form_val['type'],
+                            'webview_url' => $form_val['webview_url'],
+                            'icon_url' => $form_val['icon_url'],
+                            'is_new' => $form_val['is_new'],
+                            'has_subcategory' => $form_val['has_subcat'],
+                            's_id' => $s_id,
+                            's_title' => $s_title,
+                        ))->condition('id', $m_id, '=')->execute(); 
+               drupal_set_message(t('Data update for id: '.$m_id.' successfully.'), 'status');
+            }
+            else{
+                drupal_write_record('itg_app_menu_content', $data);
+                $last_id = db_query('SELECT MAX(id) FROM {itg_app_menu_content}')->fetchField();
+                $icon_url = $form_val['icon_url'];
+                db_update('itg_app_menu_content')
+                        ->fields(array(
+                            'icon_url' => $icon_url,
+                        ))->condition('id', $last_id, '=')->execute();
+            
+                drupal_set_message(t('Data saved successfully.'), 'status');
+            }
         }
-        drupal_set_message(t('Data saved successfully.'), 'status');
     }
 }
 
@@ -2462,7 +2508,7 @@ function theme_itg_app_manager_menu_list_table($variables) {
             $rows[$loopc]['webview_url'] = $value->webview_url;
             $rows[$loopc]['icon_url'] = $value->icon_url;
             $rows[$loopc]['is_new'] = $value->is_new;
-            $rows[$loopc]['action'] = '<span class="delete-link delete-m-menu" id="del_menu_' . $value->id . '">' . t(Remove) . '</span> | <span class="edit-link">' . t(Edit) . '</span>';
+            $rows[$loopc]['action'] = '<span class="delete-link delete-m-menu" id="del_menu_' . $value->id . '">' . t(Remove) . '</span> | <span class="edit-link"><a href="'.$base_url.'/m-menu/' . $value->id . '/edit/'.$source.'">' . t(Edit) . '</a></span>';
             $loopc++;
         }
     } else {
@@ -2477,7 +2523,7 @@ function theme_itg_app_manager_menu_list_table($variables) {
             $rows[$loopc]['webview_url'] = $value->webview_url;
             $rows[$loopc]['icon_url'] = $value->icon_url;
             $rows[$loopc]['is_new'] = $value->is_new;
-            $rows[$loopc]['action'] = '<span class="delete-link delete-m-menu" id="del_menu_' . $value->id . '">' . t(Remove) . '</span> | <span class="edit-link">' . t(Edit) . '</span>';
+            $rows[$loopc]['action'] = '<span class="delete-link delete-m-menu" id="del_menu_' . $value->id . '">' . t(Remove) . '</span> | <span class="edit-link"><a href="'.$base_url.'/m-menu/' . $value->id . '/edit/'.$source.'">' . t(Edit) . '</a></span>';
             $loopc++;
         }
     }
@@ -3819,4 +3865,17 @@ function itg_app_arrange_home_form_submit($form, &$form_state) {
  */
 function array_is_unique($array) {
    return array_unique($array) == $array;
+}
+
+/**
+ * m-menu menu edit callback
+ * @param array $_GET
+ * @return array
+ */
+function m_menu_edit(){    
+    $m_id = arg(1);
+    $source = arg(3);
+    $output = array();
+    $output['form'] = drupal_get_form('itg_app_manager_menu_form',$source);    
+    return $output;
 }
