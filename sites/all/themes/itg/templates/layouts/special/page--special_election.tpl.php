@@ -298,11 +298,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                         $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
                                                         $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
                                                       //~ }
-                                                      echo '<option value="' $svgurl . '">' . $values->name . '</option>';
+                                                      echo '<option value="'. $svgurl . '">' . $values->name . '</option>';
                                                       $countf++;
                                                     }
                                                   }
-                                                  $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
+                                                  //~ $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
                                                   ?>
                                               </select>
                                                   <div id="main_container" class="map-result-detail">
