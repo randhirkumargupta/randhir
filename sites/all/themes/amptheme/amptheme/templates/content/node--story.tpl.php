@@ -186,6 +186,9 @@ if (!empty($content)):
                 }
                 
                 $image_repo_srcset = $extra_large_image_src_set.$large_image_src_set.$medium_image_src_set.$small_image_src_set.$extra_small_image_src_set;
+                if(empty($image_repo_srcset)) {
+                  $image_repo_srcset =  file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg').' 647w';
+                }
               if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
                 ?>
                 <div class="stryimg" ><?php

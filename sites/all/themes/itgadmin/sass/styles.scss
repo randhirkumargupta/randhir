@@ -8487,6 +8487,21 @@ div.node {
     div.vertical-tabs {
         display: none;
     }
+    .form-field-name-field-service-association-title {
+        .form-type-select {
+            display: inline-block;
+            width: 50%;
+            padding-right: 0;
+            vertical-align: middle;
+        }
+        .form-submit {
+            display: inline-block;
+            line-height: 26px;
+            height: 29px;
+            padding: 0 10px;
+            vertical-align: middle;
+        }
+    }
 }
 
 .page-node-delete {
@@ -14666,9 +14681,12 @@ div.ctools-modal-content {
         thead {
             padding: 0px 20px;
         }
-        tbody tr td .form-type-textfield {
-            padding: 0;
-            margin: 0;
+        tbody {
+            overflow: visible;
+            tr td .form-type-textfield {
+                padding: 0;
+                margin: 0;
+            }
         }
         +.description {
             +.clearfix {
