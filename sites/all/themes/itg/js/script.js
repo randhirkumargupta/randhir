@@ -615,7 +615,14 @@ jQuery(document).ready(function () {
         }
 
     })
-    jQuery('#map-state').change(function () {
+    
+    
+    
+
+    /*
+     * Commented By Vishal to use Iframe for state
+     * 
+     * jQuery('#map-state').change(function () {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
 
@@ -644,7 +651,7 @@ jQuery(document).ready(function () {
                 console.log("Details: " + desc + "\nError:" + err);
             }
         });
-    });
+    });*/
 
     //    //saved message
     //    var getmsgsaves = jQuery('.saved-photogallery').text();
@@ -1238,3 +1245,5 @@ function load_migrate_video_in_slider(getvideoimage, ajaxpath, getvideonid, getv
     });
 
 }
+
+

@@ -283,7 +283,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                               
 
                                               <div class="data-holder pos-rel" id="itg-block-5">
-                                                <select id="map-state" name="map_state">
+                                                <select id="map-state" name="map_state" onChange="change_mini_state_graph(this)">
 
                                                   <?php
                                                   $countf = 0;
@@ -293,22 +293,30 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                                                   foreach ($terms as $values) {
                                                     if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
-                                                      if ($countf == 0) {
-                                                        $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
-                                                        $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
-                                                        $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
-                                                      }
-                                                      echo '<option value="' . itg_layout_clean_url($values->tid) . '">' . $values->name . '</option>';
+                                                      //~ if ($countf == 0) {
+                                                        //~ $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+                                                        //~ $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+                                                        //~ $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
+                                                      //~ }
+													  $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+                                                      $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+                                                      $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
+                                                      echo '<option value="' . $svgurl . '">' . $values->name . '</option>';
                                                       $countf++;
                                                     }
                                                   }
-                                                  $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
+                                                  //$urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
                                                   ?>
                                               </select>
                                                   <div id="main_container" class="map-result-detail">
                                                       <div id= "consTable"></div></div>
                                                   <div id = "conssvg"></div>
-                                                  <script>getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
+<!--
+                                                  <script>getconssvg(<?php //echo json_encode($urlarray); ?>, "0");</script>
+-->
+												<div class="small_state_graph">
+													<iframe src = "<?php echo $svgurl;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > 
+												</div>
                                               </div>
                                           </div>             
                                       </div>
