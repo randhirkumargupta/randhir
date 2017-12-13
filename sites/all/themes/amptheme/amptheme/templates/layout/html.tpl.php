@@ -217,7 +217,8 @@
         white-space: nowrap;
       }
       .story-photo-list-wrapper .story-photo-list-item {
-        margin-right: 1%;
+        padding: 0 11px;
+        width: 192px;
         display: inline-block;
         vertical-align: top;
       }
