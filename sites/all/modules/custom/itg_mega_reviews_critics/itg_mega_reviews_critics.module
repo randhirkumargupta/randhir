@@ -17,6 +17,11 @@ function itg_mega_reviews_critics_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  $items['migrate/mega-review-migration'] = array(
+    'page callback' => 'itg_mega_review_migration',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -284,4 +289,28 @@ function itg_mega_review_filter_callback($title) {
     }
     drupal_json_output($options);
   }
+}
+
+function itg_mega_review_migration() {
+  $query = db_select('node', 'n')
+            ->fields('n', array('nid'));
+  //$query->join('field_data_field_story_category', 'c', 'n.nid<>c.entity_id');
+  $query->condition('type', 'mega_review_critic', '=');
+  $result = $query->execute()->fetchAll();
+  $i=1;
+  foreach ($result AS $row) {
+    $nid = $row->nid; // 842901
+    $node = node_load($nid);
+    if(empty($node->field_story_category['und'][0]['tid']) && $i == 1;) {
+      $node->field_story_category['und'][0]['tid'] = '1762732';
+      print $nid;
+      $i++;
+    }
+  }
+ // exit;
+  //pr($result); // 1762732
+/*  $node = node_load('842901');
+  pr($node->field_story_category['und'][0]['tid']);
+  pr($node);
+  $node->field_story_category['und'][0]['tid'] = '1762732';*/
 }
