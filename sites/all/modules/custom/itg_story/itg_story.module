@@ -1768,3 +1768,21 @@ function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $p
     }
   }
 }
+
+/**
+ * function for large image url.
+ * @param int $nid
+ * @return string
+ */
+function itg_get_story_extra_large_image($nid) {
+  if (!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->leftjoin('field_data_field_story_extra_large_image', 'sm', 'sm.entity_id = n.nid');
+    $query->leftJoin('file_managed', 'fm', 'fm.fid = sm.field_story_extra_large_image_fid');
+    $query->fields('fm', array('uri'));
+    $query->condition('n.nid', $nid);
+    $query->orderBy('n.created', 'DESC');
+    $result = $query->execute();
+    return $query->execute()->fetchField();
+  }
+}
