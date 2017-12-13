@@ -965,7 +965,6 @@ function itg_widget_get_graph_data_for_home() {
       ->orderBy('iwo.weight', 'ASC')
       ->condition('status', 1);
     $itg_result = $itg_query->execute()->fetchAll();
-
     return $itg_result;
 }
 

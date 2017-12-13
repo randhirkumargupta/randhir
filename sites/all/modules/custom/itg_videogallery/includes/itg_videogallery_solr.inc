@@ -27,6 +27,7 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
       $file = file_load($fid);
       file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
       $is_used = 0;
+     
       if (isset($expode_video_info[7]) && !empty($expode_video_info[7])) {
         $is_used = 1;
       }
