@@ -293,11 +293,13 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                                                   foreach ($terms as $values) {
                                                     if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
-                                                      //~ if ($countf == 0) {
-                                                        $svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+                                                      if ($countf == 0) {
+														$svgurl1 = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+													  }
+														$svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
                                                         $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
                                                         $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
-                                                      //~ }
+                                                      
                                                       echo '<option value="'. $svgurl . '">' . $values->name . '</option>';
                                                       $countf++;
                                                     }
@@ -309,7 +311,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                       <div id= "consTable"></div></div>
                                                   <div id = "conssvg"></div>
                                                   <div class="small_state_graph">
-													<iframe src="<?php echo $svgurl;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
+													<iframe src="<?php echo $svgurl1;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
 												</div>
                                               </div>
                                           </div>             
