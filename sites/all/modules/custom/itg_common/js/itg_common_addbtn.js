@@ -16,6 +16,7 @@
     if (actionbtnshtml != null) {
         actionbtnshtml = actionbtnshtml.replace(/id=/g, "data-id=");
         actionbtnshtml = actionbtnshtml.replace(/form-submit/g, 'form-submit btn-trigger');
+        jQuery('top-actions').remove();
         jQuery('#page-title').after('<div class="top-actions">' + actionbtnshtml + '</div>');
 
         jQuery('.top-actions .btn-trigger').click(function() {

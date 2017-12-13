@@ -170,6 +170,8 @@ function daily_motion_video_dashboard_rows() {
     t('Channel'),
     t('Uploaded Time'),
     t('Video Id'),
+    t('Video Article ID'),
+    t('Duration'),
     t('Video Status'),
     t('Status'),
     t('Action'),
@@ -220,8 +222,11 @@ function daily_motion_video_dashboard_rows() {
     if ($record->dailymotion_published == 1) {
       $status_flag = '<span class="used-video">Used</span>';
       $delete_link = '';
+       $nid = itg_videogallery_get_nid_by_video_id( $record->video_id);
     }
     else {
+      $nid = "";
+      $record->nid = "";
       if ($record->encoding_progress == '100') {
         $status_flag = '<span class="ready-to-use-video">Ready To Use</span>';
         if (strtoupper($record->type) != 'LOCAL') {
@@ -275,7 +280,6 @@ function daily_motion_video_dashboard_rows() {
     else {
       $video_status = 'Unpublished';
     }
-
     $page_no = $_GET['page'];
     $rows[] = array(
       $sn++,
@@ -284,6 +288,8 @@ function daily_motion_video_dashboard_rows() {
       strtoupper($record->type),
       date('d-M-Y H:i:s', $record->upload_time),
       $record->video_id,
+      $nid,
+      $record->video_duration,
       $video_status,
       $status_flag,
       $delete_link
@@ -294,6 +300,19 @@ function daily_motion_video_dashboard_rows() {
   $html .= theme('pager');
   return $html;
 }
+/**
+ * function get node id by fid
+ */
+function itg_videogallery_get_nid_by_video_id($vid) {
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd', array('nid'));
+  $query->condition('solr_video_id', $vid, '=');
+  $query->condition('content_type', 'video_gallery', '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+
 
 /*
  * This callback use for delete video from local and daily motion

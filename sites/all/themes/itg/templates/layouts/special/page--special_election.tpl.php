@@ -168,12 +168,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                               ?>
                           </div>
                         <?php } ?>
-                        <?php if ($theme == 'itgadmin' || (!empty($live_url) || $highlights['node_data']->field_story_highlights['und'][0]['value'] != "" )) { ?>
+                     
                           <div class="row itg-325-layout">
                               <div class="col-md-6 col-sm-6 mt-50">
-                                  <div class="widget-help-text">Non Draggable ( <strong>Live Tv</strong> )</div>
+                                  <div class="widget-help-text"> <?php echo t('Draggable');?> ( <strong><?php echo t('Live Tv');?></strong> )</div>
                                   <div class="itg-widget">
-                                      <div class=" <?php print $gray_bg_layout; ?>">
+                                      <div class=" droppable <?php print $gray_bg_layout; ?>">
                                           <div class="widget-wrapper <?php print $widget_data['itg-block-3']['widget_name']; ?>">
                                               <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-3']['block_title'])) { ?>
                                                 <h4 class="heading"><?php print $widget_data['itg-block-3']['block_title']; ?></h4>
@@ -191,7 +191,14 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                 </div>
                                               <?php } ?>  
                                               <div class="data-holder" id="itg-block-3">
-                                                  <?php print $live_url; ?>
+                                                  <?php
+                                                  if (isset($widget_data['itg-block-3']['widget'])) {
+                                                    print $widget_data['itg-block-3']['widget'];
+                                                  }
+                                                  else {
+                                                    print '<div class="widget-placeholder"><span>' . t('Live Tv') . '</span></div>';
+                                                  }
+                                                  ?>
                                               </div>
                                           </div>             
                                       </div>
@@ -233,7 +240,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                   </div>
                               </div>
                           </div>
-                        <?php } ?>
+               
                         <div class="row itg-map">
                             <div class="col-md-6 col-sm-6 mt-50">
                                 <div class="widget-help-text">Non Draggable ( <strong>MAP</strong> )</div>
