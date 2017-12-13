@@ -1845,12 +1845,15 @@ function getTechProsImg($content_org) {
         foreach ($str_html->find('ul[class="pron-cons-img]') as $element) {
             $img_str = $element;
         }
-        $str_html2 = str_get_html($img_str);
-        foreach ($str_html2->find('img') as $element) {
-            $img_str_img = $element;
+        if($img_str !=""){
+            $str_html2 = str_get_html($img_str);
+            foreach ($str_html2->find('img') as $element) {
+                $img_str_img = $element;
+            }
+            $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
+            $src = $xpath->evaluate("string(//img/@src)");
         }
-        $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
-        $src = $xpath->evaluate("string(//img/@src)");
+
     }
     return $src;
 }
