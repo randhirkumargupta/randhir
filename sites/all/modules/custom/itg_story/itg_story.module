@@ -1509,6 +1509,9 @@ function itg_story_add_byline_popup($ajax) {
  */
 function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, $view_mode = null) {
   $count = 0;
+  if($view_mode == 'amp'){
+    $count = -1; 
+  }
   $output = '';
   $output .= '<div class="tech-photos">';
   $output .= '<div class="tech-photos-head-section"><h3 class="tech-photo-head">Photos</h3>';
