@@ -3,6 +3,7 @@ description = Features for Newsletter
 core = 7.x
 package = Features
 version = 7.x-1.6
+dependencies[] = conditional_fields
 dependencies[] = date
 dependencies[] = entityreference
 dependencies[] = feature_for_video
