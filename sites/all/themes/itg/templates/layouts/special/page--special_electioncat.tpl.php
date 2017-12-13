@@ -322,7 +322,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   <script>//getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
 
 												<div class="small_state_graph">
-													<iframe src = "<?php echo $svgurl;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > 
+													<iframe src="<?php echo $svgurl;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
 												</div>
                                               </div>
                                           </div>             
