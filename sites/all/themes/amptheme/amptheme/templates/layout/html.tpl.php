@@ -798,7 +798,7 @@ ul.pron-cons-img li img {
 .tech-photos .tech-photo-item {
     /*width: 30%;*/
     display: inline-block;
-    margin-right: 3%;
+    margin-right: 1%;
     position: relative
 }
 .tech-photos .tech-photo-item .tech-photo-overlay {
@@ -823,7 +823,6 @@ ul.pron-cons-img li img {
     color: #fff;
     text-decoration: underline
 }
-.tech-photos{text-align:center;}
 h3.tech-photo-head,.tech-photos-count{text-align:left;}
 @media only screen and (max-width: 767px) {
 ul.pron-cons-img{width:100%;}
