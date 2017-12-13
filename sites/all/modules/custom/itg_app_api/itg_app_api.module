@@ -1823,6 +1823,8 @@ function formateNodeBodyToken($n_body) {
     $paragraph_rep = $paragraph . "<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>";
     $n_body = str_replace($paragraph, $paragraph_rep, $n_body);
     // add AD block after 1st <p> end
+    $n_body = str_replace('<img', '<img style="width:100%;height: auto;"', $n_body);
+    $n_body = str_replace('<iframe', '<iframe style="width:100%;height: auto;"', $n_body);
     $data['n_body'] = $n_body;
     $data['poll_id'] = $poll_id;
     return $data;
