@@ -318,7 +318,12 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   <div id="main_container" class="map-result-detail">
                                                       <div id= "consTable"></div></div>
                                                   <div id = "conssvg"></div>
-                                                  <script>getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
+
+                                                  <script>//getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
+
+												<div class="small_state_graph">
+													<iframe src = "<?php echo $svgurl;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > 
+												</div>
                                               </div>
                                           </div>             
                                       </div>
@@ -714,3 +719,4 @@ if ($theme == 'itgadmin' && !isset($preview)) {
       <img src="<?php echo base_path() . drupal_get_path('theme', $theme); ?>/images/loader.svg" alt=""/>
   </div>
 <?php } ?>
+
