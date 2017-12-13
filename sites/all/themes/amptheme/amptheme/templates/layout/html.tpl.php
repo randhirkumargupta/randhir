@@ -234,7 +234,7 @@
         background: #f3f3f3;
         padding: 10px;
         position: relative;
-		display:inline-block;
+		display:inline-block
       }
       .story-section .story-tech-chunk .tech-rating {
         max-width: 88px;
@@ -681,7 +681,7 @@
     #live-blog-amp-share .social-share .fa-facebook-official{color: #09488b;font-size: 30px;}
     #live-blog-amp-share .social-share .fa-google-plus-square{font-size: 30px;color: #b00808;}
     #live-blog-amp-share .social-share .i-amphtml-accordion-content{top: -5px; left: 25px; position: absolute !important;}
-    .i-amphtml-layout-size-defined{width: 490px; margin: 0 auto}
+    .i-amphtml-layout-size-defined{width: 100%; margin: 0 auto}
 
     /***** New Header css by itgd ****/
     .i-amphtml-layout-container{ position: absolute; }
@@ -736,7 +736,8 @@
 }
 ul.pron-cons-img {
     width: 42%;
-    float: left
+    float: left;
+	list-style:none
 }
 ul.tech-pron-cons-img {
     width: 41.66666667%;
