@@ -113,7 +113,6 @@ function itg_videogallery_s3_file_to_dm() {
 function itg_videogallery_dm_to_s3() {
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   global $user;
-
   $query = db_select('itg_video_bitrates_data', 'ivbd');
   $query->fields('ivbd');
   $query->condition('is_download', '0', '=');
