@@ -15,13 +15,20 @@ function itg_photogallery_get_workbench_title($title) {
         $options = '';
         $title = strtolower(trim($title));
         $query = db_select('node', 'n');
+        $query->Join('field_data_field_story_source_type', 'sourcetype', 'sourcetype.entity_id = n.nid');
         if ($state =='my-published-photogallery' || $state =='published-photogallery') {
           $query->condition('n.status', 1, '=');
         } else if ($state !='expired-photogallery' && $state !='my-expired-photogallery') {
-           $query->Join('workbench_moderation_node_history', 'wm', 'n.nid = wm.nid');
-           $query->condition('wm.state', $state_array[$state]);
+            $query->Join('workbench_moderation_node_history', 'wm', 'n.nid = wm.nid');
+            $or = db_or();
+            $or->condition('wm.state', $state_array[$state]);
+            $or->condition('sourcetype.field_story_source_type_value', 'migrated');
+            $query->condition($or);
            if ($state =='my-unpublished-photogallery' || $state == 'published-photogallery') {
-            $query->condition('wm.from_state', 'published');
+            $un_or = db_or();
+            $un_or->condition('wm.from_state', 'published');
+            $un_or->condition('sourcetype.field_story_source_type_value', 'migrated');
+            $query->condition($un_or);
            }
            $query->condition('wm.is_current', 1); 
            $query->condition('n.status', 0);
@@ -32,7 +39,7 @@ function itg_photogallery_get_workbench_title($title) {
         $query->condition('n.title', '%' . $title . '%', 'LIKE');
         $query->condition('n.type', $content_type, '=');        
         
-        if ($state == 'mydraft-photogallery' || $state == 'my-queue-photogallery' || $state =='my-published-photogallery' || $state =='my-expired-photogallery' || $state == 'my-unpublished-photogallery' || $state == 'my-rejected-photogallery') {
+        if ($state == 'mydraft-photogallery' || $state == 'my-queue-photogallery' || $state =='my-expired-photogallery' || $state == 'my-unpublished-photogallery' || $state == 'my-rejected-photogallery') {
           $query->condition('n.uid', $user->uid);
         }
         

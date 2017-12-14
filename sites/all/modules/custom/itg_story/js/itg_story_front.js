@@ -12,7 +12,7 @@
                     url = window.location.href;
                 name = name.replace(/[\[\]]/g, "\\$&");
                 var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                        results = regex.exec(url);
+                    results = regex.exec(url);
                 if (!results)
                     return null;
                 if (!results[2])
@@ -29,12 +29,13 @@
                 infinite: false,
                 slidesToShow: 1,
                 slidesToScroll: 1,
+                adaptiveHeight: true,
                 prevArrow: '<i class="fa fa-chevron-left" aria-hidden="true"></i>',
                 nextArrow: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
                 asNavFor: '.multiple-photo',
-                initialSlide: slickSliderValue, // Default slide when query string present in url.
+                initialSlide: parseInt(slickSliderValue), // Default slide when query string present in url.
             });
-            
+
             $('.multiple-photo').slick({
                 infinite: false,
                 slidesToShow: 5,
@@ -42,16 +43,16 @@
                 asNavFor: '.multiple-photo-disc',
                 focusOnSelect: true,
                 centerPadding: '10px',
-                responsive: [  
-                              {
-                                breakpoint: 480,
-                                settings: {
-                                  slidesToShow: 3                                            
-                                }
-                              }
-                            ]
+                responsive: [
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    }
+                ]
             });
-            
+
             $('.multiple-photo-disc').on('afterChange', function (event, slick, currentSlide) {
                 var hash_text = $('.slick-current').attr("data-slick-index");
                 var current_url = window.location.href.split('?')[0];

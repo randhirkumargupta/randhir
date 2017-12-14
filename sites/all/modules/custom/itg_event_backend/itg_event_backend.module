@@ -132,7 +132,7 @@ function itg_event_backend_form_alter(&$form, &$form_state, $form_id) {
         ' . $link_text . '
      </div>';
       drupal_add_css("a.anchor-order-reorder {text-decoration:underline !important}", "inline");
-      $form['field_e_event_banner']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
+       $form['field_e_event_banner']['#suffix'] = "<div class='form-wrapper speaker-order-reorder'>$link</div>";
     }
 
     $form['field_config_photo']['#access'] = FALSE;
@@ -287,8 +287,21 @@ function itg_event_backend_node_form_validate($form, &$form_state) {
   if(!empty($form_state['values']['field_event_tabs'])){
     foreach ($form_state['values']['field_event_tabs'][LANGUAGE_NONE] as $key => $event_tabs) {
       if (is_numeric($key)) {
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_name', t('Please enter Tab name.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value'])){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_name', t('Please enter Tab name.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter Tab URL.'));
+        }
+        if(!empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_name'][LANGUAGE_NONE][0]['value']) && empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef'][LANGUAGE_NONE][0]['value']) && $form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_sef'){
+          form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_sef', t('Please enter Tab SEF.'));
+        }
+        
         if ($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_sef_tab_url'][LANGUAGE_NONE][0]['value'] == 'tab_url') {
-          if((strpos($url, 'http') !== 0) && !filter_var($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_URL)) {
+          if((strpos($url, 'http') !== 0) && !filter_var($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'], FILTER_VALIDATE_URL) && !empty($form_state['values']['field_event_tabs'][LANGUAGE_NONE][$key]['field_tab_url'][LANGUAGE_NONE][0]['value'])) {
               form_set_error('field_event_tabs][' . LANGUAGE_NONE . '][' . $key . '][	field_tab_url', t('Please enter valid Tab External URL.'));  
             }
         }
@@ -1053,12 +1066,19 @@ function itg_event_backend_views_pre_render(&$view) {
 function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
   // Get the Form Id
   if ($form["#id"] == 'views-exposed-form-Event-backend-page' || $form['#id'] == 'views-exposed-form-Event-backend-page-1') {
-    //$form['title']['#autocomplete_path'] = 'content-title-list/event_backend/autocomplete';
     $form['title']['#autocomplete_path'] = 'content-title-event/active/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
-  if ($form["#id"] == 'views-exposed-form-Event-backend-page-2' || $form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event close and draft
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-2') { // for event close
     $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event draft
+    $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event draft
+    $form['title']['#autocomplete_path'] = 'content-title-event/draft/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
   if ($form["#id"] == 'views-exposed-form-Sponsor-page') {
@@ -1242,9 +1262,8 @@ function itg_event_backend_get_speaker_details($spk_id) {
   $query->leftJoin('file_managed', 'fm', 'fm.fid = pic.field_story_extra_large_image_fid');
   $query->leftJoin('field_data_field_story_new_title', 'designation', 'n.nid = designation.entity_id');
   $query->condition('n.nid', $spk_id, '=');
-  // $query->condition('designation.bundle', 'reporter', '=');
+  $query->condition('designation.bundle', 'reporter', '=');
   $result = $query->execute()->fetchAll();
-  $result[0]->occupation_speaker = itg_event_backend_occupation_home($spk_id);
   return $result;
 }
 
@@ -1381,12 +1400,6 @@ function itg_event_backend_menu() {
   $items['itg-event-test'] = array(
     'page callback' => 'itg_event_backend_page',
     'access callback' => TRUE,
-  );
-
-  $items['programme'] = array(
-    'page callback' => 'itg_event_backend_page',
-    'access callback' => TRUE,
-    'theme callback' => 'itg_event_backend_default_node_theme',
   );
   $items['event/%/%/programme'] = array(
     'page callback' => 'itg_event_backend_page',
@@ -1818,14 +1831,16 @@ function itg_event_backend_flashback($curr_event_id, $menu_font_color, $event_ty
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title', 'created'));
   $query->join('field_data_field_event_close_date', 'event_close_date', 'event_close_date.entity_id = n.nid');
+  $query->join('field_data_field_event_start_date', 'event_start_date', 'event_start_date.entity_id = n.nid');
   $query->join('field_data_field_event_types', 'event_types', 'event_types.entity_id = n.nid');
   $query->fields('event_close_date', array('field_event_close_date_value'));
+  $query->fields('event_start_date', array('field_event_start_date_value'));
   $query->condition('n.type', 'event_backend', '=');
   $query->condition('n.nid', $curr_event_id, '!=');
   $query->condition('event_close_date.field_event_close_date_value', $current_date_time, '<');
   $query->condition('event_types.field_event_types_tid', $event_type, '=');
   $query->condition('n.status', 1, '=');
-  $query->orderBy('n.created', 'DESC');
+  $query->orderBy('event_start_date.field_event_start_date_value', 'DESC');
   $result = $query->execute();
   $flash_back_link = '';
   $count = 1;
@@ -1900,9 +1915,8 @@ function itg_event_backend_highlights_block_content() {
     $query->condition('fh.entity_id', $nid, '=');
     $highlights_nid = $query->execute()->fetchField();
     $highlights_node = node_load($highlights_nid);
-
     $output = '';
-    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">Highlights</h2><div class="wrap-listing">';
+    $output .= '<div class="highlight-box"><h2 class = "highlights-heading">'.t('Highlights').'</h2><div class="wrap-listing">';
     $text = '';
     foreach ($highlights_node->field_highlights[LANGUAGE_NONE] as $highlights_arr) {
       $highlights_detail = entity_load('field_collection_item', array($highlights_arr['value']));
@@ -1913,8 +1927,11 @@ function itg_event_backend_highlights_block_content() {
         $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
       }
     }
-
-    $output .= $text . '</div></div>';
+     if(!empty($text)) {
+      $output .= $text . '</div></div>';
+    }else{
+      $output = '';
+    }
     return $output;
   }
 }
@@ -2415,7 +2432,6 @@ function itg_event_backend_tab_name_menu($node, $menu_font_color, $tab_menu_font
  * Implement function for return node color
  */
 function itg_event_backend_page_domain($nid) {
-  //p($nid);
   $query = db_select('node', 'n');
   $query->fields('fm', array('uri'));
   $query->fields('color', array('field_e_menu_bck_color_rgb'));
@@ -2440,3 +2456,4 @@ function itg_event_backend_sponsor_details($nid) {
   $result = $query->execute()->fetchAll();
   return $result;
 }
+

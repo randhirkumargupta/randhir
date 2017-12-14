@@ -404,7 +404,7 @@ return date(\'Y\');
   $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$img = \'<img src="\'.base_path().\'sites/all/themes/itg/images/itg_image237x133.jpg">\';
+$img = \'<img src="https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/itg_image237x133.jpg">\';
 print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -495,7 +495,7 @@ print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
   $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$img = \'<img src="\'.base_path().\'sites/all/themes/itg/images/itg_image483x271.jpg">\';
+$img = \'<img src="https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/itg_image483x271.jpg">\';
 print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';

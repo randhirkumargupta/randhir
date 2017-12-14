@@ -19,7 +19,7 @@ if (!empty($get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri'])) {
   $user_pic = theme('image_style', array('style_name' => 'user_header_image_30x30', 'path' => $get_user_detail->field_user_picture[LANGUAGE_NONE][0]['uri']));
 }
 else {
-  $file = drupal_get_path('theme', 'itg').'/images/default-user.png';
+  $file = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default-user.png');
   $user_pic = "<img src=$file width='30' height='30' alt='user-image' title='user-image' />";
 }
 $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
@@ -41,7 +41,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
         <input class="search-text" placeholder="Type here" type="text" value="" />
       </div>
     </li>
-    <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php print base_path() ?>sites/all/themes/itg/images/live-tv-icon.png" alt="Live Tv" title="Live Tv" /></a></li> 
+    <li><a href="<?php print base_path() ?>livetv" class="live-tv" title=""><img src="<?php echo file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/live-tv-icon.png'); ?>" alt="Live Tv" title="Live Tv" /></a></li> 
     <li class="user-menu"> 
       <?php
         if ($_GET['q'] != 'user') {

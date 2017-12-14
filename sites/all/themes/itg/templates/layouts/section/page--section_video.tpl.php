@@ -13,6 +13,10 @@ $preview = NULL;
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
+if ($theme == 'itgadmin' || $preview == 'preview') {
+  global $conf;
+  $conf['preprocess_js'] = 0;
+}
 if ($theme == 'itgadmin' && !isset($preview)) {
   $gray_bg_layout = 'gray-bg-layout';
 }
@@ -117,6 +121,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                jQuery('#edit-field-story-category-tid').val(section_id); 
                jQuery('#edit-field-story-category-tid').trigger('change');
                jQuery(this).addClass('menu-active');
+               jQuery('body').css('pointer-events','none');
            });", array('type' => 'inline', 'scope' => 'footer'));
 
                   drupal_add_js("jQuery(document).ready(function(){
@@ -124,11 +129,8 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                jQuery('#edit-field-story-category-tid').val(section_id); 
                jQuery('#edit-field-story-category-tid').trigger('change');
                jQuery('.video_landing_menu li a:first').addClass('menu-active');
+               jQuery('body').css('pointer-events','none');
            });", array('type' => 'inline', 'scope' => 'footer'));
-                  
-//                    drupal_add_js("jQuery(document).ready(function(){
-//                       jQuery('.video_landing_menu li:first a').addClass('menu-active');
-//                    });", array('type' => 'inline', 'scope' => 'footer'));
                   ?>
               <div class="slide-icon scroll-arrow-left"><i class="fa fa-angle-right ll"></i></div>
           </div>

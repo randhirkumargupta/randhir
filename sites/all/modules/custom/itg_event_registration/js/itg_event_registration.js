@@ -197,8 +197,9 @@ jQuery(document).ready(function () {
                         if (obj_success['discounted_value'] == 0) {
                             jQuery('.form-field-name-field-erf-payment-gateway').hide();
                             jQuery('.event-total-fees-text').hide();
-                            jQuery('.event-total-fees-text').parent().append("<span class='free-class'>Free</span>");
-                            jQuery("#edit-field-erf-payment-gateway-und").val('free').hide();
+                            var _total_fee = jQuery('.event-total-fees-text').html();
+                            jQuery('.event-total-fees-text').parent().html("<label for='edit-total-fees-container'>Total Fees </label><span class='event-total-fees-text' style='display:none;'>"+_total_fee +"</span><span class='free-class'>Free</span>");
+                            jQuery("#edit-field-erf-payment-gateway-und").val('free').hide();               
                         }
                     }
                 }

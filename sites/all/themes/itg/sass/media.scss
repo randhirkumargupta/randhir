@@ -255,7 +255,7 @@
         }
     }
     /*end css footer*/
-    /*start css home page*/
+    /*start css home page
     .top-block .top-colum-2,
     .top-block .top-colum-1 {
         @include float(left);
@@ -282,7 +282,7 @@
     }
     .top-block .auto-block-3 {
         margin-top: 0;
-    }
+    }*/
     .big-news .big-story-col-1,
     .big-news .big-story-col-2 {
         @include calculate-width(2);
@@ -293,9 +293,10 @@
     }
     .itg-layout-container {
         .itg-top-section {
-            .top-colum-2 {
+            .top-colum-2,
+            .top-colum-1 {
                 .droppable {
-                    height: auto;
+                    height: 610px;
                 }
             }
         }
@@ -1769,6 +1770,11 @@
             }
         }
     }
+    /*css search page */
+    .view-front-end-global-search .searh-all-filters {
+        overflow-x: inherit;
+    }
+    /*css end search page */
 }
 
 @media only screen and (max-width:768px) {
@@ -3273,7 +3279,6 @@
                 .views-field-label {
                     h2 {
                         @include font(22px, 28px);
-                        margin-top: -5px;
                         a {
                             @include font(22px, 28px);
                         }
@@ -3914,7 +3919,7 @@
         margin-top: 25px;
     }
     #block-itg-videogallery-itg-other-videogallery-section .view-display-id-block_4 .view-content {
-        float: left;
+        /*float: left;*/
         width: 100%;
         overflow-x: scroll;
     }

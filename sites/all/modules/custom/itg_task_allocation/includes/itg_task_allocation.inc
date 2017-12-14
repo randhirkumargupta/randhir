@@ -106,7 +106,7 @@ function expiredtask_authormail_content($var, $expiry_task, $task_type) {
     if (isset($user->uid) && !empty($user->uid) && ($user->uid > 0)) {
       $node_url = l('URL', $base_url.'/node/'.$var->nid);
     } else {
-      $node_url = l('URL', array('@login-link' => $base_url . '/user/login?destination='.current_path()));
+      $node_url = t('<a href="@login-link">URL</a>', array('@login-link' => $base_url . '/user/login?destination=node/'.$var->nid));
     }
     $node_title = itg_common_get_node_title($var->nid);
 

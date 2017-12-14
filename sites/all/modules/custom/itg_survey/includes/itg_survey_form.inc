@@ -87,7 +87,7 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
     }
  
     $total_num_of_ques = count($ques_arr);
- 
+    $rating_num = 0;
     foreach ($ques_arr as $question_arr) {
       //Question Info
       $question_detail = entity_load('field_collection_item', array($question_arr['value']));
@@ -202,6 +202,12 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
 
       if ($answer_type == 'textfield') { // Answer options for textfield
         $txt_num = 0;
+        $form['media' . $num] = array(
+           '#type' => 'markup',
+           '#prefix' => '<div class="survey-media-wrapper">',
+           '#markup' => $question_media,
+           '#suffix' => '</div>',
+       );
         foreach ($all_ans_options[$num] as $val_txt_option) {
           $form['answer_option' . $num . '_' . $txt_num] = array(
               '#title' => $val_txt_option,
@@ -219,7 +225,6 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         }
         
       } elseif ($answer_type == 'rating') { // Answer option for rating
-        $rating_num = 0;
         foreach ($all_ans_options[$num] as $rating_option) {
           $arr = array(1 => '', 2 => '', 3 => '', 4 => '', 5 => '');
           $form['answer_option' . $num . '_' . $rating_num] = array(
@@ -238,12 +243,6 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
         }
         
       } else {  //Answer option for radios and checkboxes
-        $form['answer_option' . $num] = array(
-            '#title' => t(''),
-            '#type' => $answer_type,
-            '#options' => $all_ans_options[$num],
-        );
-      }      
     
       $form['media' . $num] = array(
            '#type' => 'markup',
@@ -251,6 +250,14 @@ function itg_survey_survey_form($form, &$form_state, $node_id = NULL) {
            '#markup' => $question_media,
            '#suffix' => '</div>',
        );
+
+        $form['answer_option' . $num] = array(
+            '#title' => t(''),
+            '#type' => $answer_type,
+            '#options' => $all_ans_options[$num],
+        );
+      }      
+
       
       $form['answer_option' . $num . '_' . $txt_num]['#suffix'] = '</div>';
       

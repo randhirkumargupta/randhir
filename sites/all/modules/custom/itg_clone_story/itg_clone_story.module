@@ -141,9 +141,6 @@ function itg_clone_story_form_alter(&$form, &$form_state, $form_id) {
         $form['#metatags']['metatags']['title']['value'] = $overall_data->metatags[LANGUAGE_NONE]['title']['value'];
         $form['#metatags']['metatags']['description']['value'] = $overall_data->metatags[LANGUAGE_NONE]['description']['value'];
         $form['#metatags']['metatags']['keywords']['value'] = $overall_data->metatags[LANGUAGE_NONE]['keywords']['value'];
-       
-        $form['field_story_highlights'][LANGUAGE_NONE][0]['value']['#default_value'] = $overall_data->field_story_highlights[LANGUAGE_NONE][0]['value'];
-        
         /* code for quick file */
         $form['field_story_type'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_type[LANGUAGE_NONE][0]['value'];
         $form['field_story_select_magazine'][LANGUAGE_NONE]['#default_value'] = $overall_data->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'];

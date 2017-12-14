@@ -32,7 +32,7 @@
         <ul>
           <li><b><?php print t('STEP 1');?> -</b><?php print t('Click on the hand icon for adblock extension, on the top right corner of your browser'); ?></li>
           <li><b><?php print t('STEP 2');?> -</b> <?php print t('A drop-down menu will appear'); ?></li>
-          <li><b><?php print t('STEP 3');?> -</b> <?php print t('Click the');?> <strong><?php print t("Don't run on pages on this domain");?></strong><?php printt('option on the drop down');?> </li>
+          <li><b><?php print t('STEP 3');?> -</b> <?php print t('Click the');?> <strong><?php print t("Don't run on pages on this domain");?></strong><?php print('option on the drop down');?> </li>
           <li><b><?php print t('STEP 4');?> -</b> <?php print t('Once clicked a settings popup will appear');?></li>
           <li><b><?php print t('STEP 5');?> -</b> <?php print t('Click Exclude');?> </li>
           <li><b><?php print t('STEP 6');?> -</b> <?php print t('Refresh the page or go to home Page, to access indiatoday.in');?></li>

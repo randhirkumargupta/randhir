@@ -55,10 +55,8 @@
                 </div>
                 <?php print drupal_render($form['field_video_duration']); ?>
                 <div class="browse-video-form"><?php print drupal_render($form['field_video_upload']); ?>
-        <!--          <div class="ftp_browse_field"><label for="edit-field-upload-video-und-0-upload">Video <span title="This field is required." class="form-required">*</span></label><span class="browse-ftp-click">Browse Video</span></div>-->
                     <span class="error vid-error"></span>
                 </div>
-                <?php //print drupal_render($form['field_story_expert_name']); ?>
                 <?php print drupal_render($form['field_video_kicker']); ?>
             </div>
         </div>
@@ -135,8 +133,6 @@
                 <h2 class="story-title"><?php print t('Associate Video'); ?></h2>
                 <div class="itg-form-section hide">
                     <iframe id="video_iframe" src="<?php echo base_path() . 'solr-unpublish-video'; ?>" width="400" height="650"></iframe>
-                    <?php //print views_embed_view('searchimage', 'solr_unpublish_video');
-                    ?>
                     <a href="javascript:void(0)" class = "button btn-submit asso-filed-video"><?php print t('Save'); ?></a>
                    <?php print  l(t('Advance Search'), 'dailymotion-ftp-template', array('query' => array('width' => '80%', 'height' => '80%', 'iframe' => TRUE, 'input_filed' => 'edit-field-upload-video-und-0-upload', 'file_filed_name' => 'field_upload_video[und][0][fid]'), 'attributes' => array('class' => array('colorbox-load', 'btn-submit', 'browse-ftp-click','button'))));?>
                     
@@ -149,10 +145,6 @@
     </div>
 </div>
 
-
-
-
-<script src="http://media2.intoday.in/lallantop/wp-content/themes/lallantop/asset/js/jwplayer/jwplayer.js"></script>
 
 
 

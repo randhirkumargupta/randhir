@@ -6,10 +6,6 @@
 global $base_url;
 $arg = arg();
 
-//if (!empty($arg[1]) && is_numeric($arg[1]) && $arg[0] == 'node') {
-//  $host_node = node_load($arg[1]);
-//}
-
 $current_date = strtotime(date('Y-m-d  H:i:s'));
 if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   $event_start_date = strtotime($host_node->field_event_start_date[LANGUAGE_NONE][0]['value']);
@@ -37,7 +33,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
       foreach ($data as $key => $value) {
         $tabs .= '<li style="background: ' . $tab_highlighted_color . '" data-tag="Day-' . $key . '" class="event-program-tabs Day-' . $key . '">Day ' . $key . '</li>';
       }
-// if for live event
+
       $output = '';
       if ($current_date > $event_start_date && $current_date < $event_close_date) {
         $output .= itg_event_backend_get_highlights_block();
@@ -68,7 +64,7 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
                 $sponsor_all_data = itg_event_backend_sponsor_details($sponsors_data['sponsor']);
               }
 
-              if($sponsor_all_data[0]->uri != "") {
+              if ($sponsor_all_data[0]->uri != "") {
                 $sponsors_data_parent = "sponsors-parent";
                 $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data[0]->uri) . ' alt="" title= "'.$sponsor_all_data[0]->title.'" />';
                 $sponsor_tags = '<div class="spncor-tag"><span>' . t("Powered By") . '</span>' . l($sponsor_img, $baseurl . 'sponsor-details', array('attributes' => array('target' => '_blank'), 'query' => array('sponsor' => $sponsor_all_data[0]->nid), 'html' => true)) . '</div>';
@@ -105,13 +101,10 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
                                 $img = '<img src=' . image_style_url("event_speaker_program_72x72", $spk_detail[0]->uri) . ' alt="" title="" />';
                               }
                               else {
-                                //$img = "<img width='72' height='72'  src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image72x72.jpg' alt='' title='' />";
-                               //$img = "<img width='72' height='72' src='" . file_create_url(file_build_uri(drupal_get_path('theme', 'itg') . '/images/itg_image72x72.jpg')) . "' alt='' title='' />";
                                 $img = "<img width='72' height='72' src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/itg_image72x72.jpg') . "' alt='' title='' />";
                               }
 
                               print '<div class="speaker-image">' . l($img, $baseurl . 'speaker-details', array('query' => array('speaker' => $spk_detail[0]->nid), 'html' => TRUE)) . '</div>';
-                              // print '<div class="speaker-designation" style="color:'.$content_font_color.'">' . t($spk_title . $spk_detail[0]->occupation_speaker) . '</div></div>';
                               print '<div class="speaker-designation" style="color:' . $content_font_color . '">' . t($spk_title . ucfirst($spk_detail[0]->field_story_new_title_value)) . '</div></div>';
                             }
                           }
@@ -142,4 +135,4 @@ if (!empty($host_node) && ($host_node->type == 'event_backend')) {
   
 }
  }
-    ?>
+?>

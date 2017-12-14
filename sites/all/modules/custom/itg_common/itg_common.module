@@ -18,11 +18,9 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
  * {@inheritdoc}
  */
 function itg_common_init() {
-  //$con = mongodb();
-  //watchdog('Mongo connection status', $con->connection->connected);
-  global $user, $base_url, $theme;
-  $arg = arg();  
   
+  global $user, $base_url, $theme;
+  $arg = arg();
   
   // condition for archive story redirect
   $ctype_tab = array('Story', 'photogallery', 'Videogallery');
@@ -141,9 +139,9 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,    
   );
   
-  $items['itg-akamai-load-my-account'] = array(
-    'title' => 'Akamai Load My Account',
-    'description' => 'Akamai Load My Account',
+  $items['itg-load-my-account'] = array(
+    'title' => 'Load My Account',
+    'description' => 'Load My Account',
     'page callback' => 'itg_akamai_load_my_account',
     'access arguments' => array('access content'),
     'file' => 'includes/itg_akamai.helper.inc',
@@ -172,6 +170,23 @@ function itg_common_menu() {
     'file' => 'includes/itg_common.inc',
   );
   
+  $items['create-node-image-style/%'] = array(
+    'page callback' => 'create_node_image_style',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_common.inc',
+  );  
+    
+  $items['admin/settings/global-custom-variables'] = array(
+     'title' => 'Global Custom variables',
+     'description' => 'Global Custom variables settings page',
+     'page callback' => 'drupal_get_form',
+     'page arguments' => array('itg_global_custom_variables'),
+     'file' => 'includes/itg_common.inc',
+     'access arguments' => array('access itg story'),
+     'type' => MENU_NORMAL_ITEM,
+   );
+  
   $items['hello'] = array(
     'page callback' => 'itg_get_test_result',
     'access callback' => TRUE,
@@ -179,6 +194,7 @@ function itg_common_menu() {
   );
   return $items;
 }
+
 
 /**
  * get domian name
@@ -231,7 +247,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
     'views-exposed-form-searchimage-search-publish-video-radio',
     'views-exposed-form-searchimage-search-publish-video', 
     );
-  if( in_array($form['#id'], $solr_video_video_id)) {
+  if( in_array($form['#id'], $solr_video_video_id)) { 
+      global $conf;
+      $conf['preprocess_js'] = 0;
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
@@ -270,7 +288,9 @@ function itg_common_form_alter(&$form, &$form_state, $form_id) {
   
   $solr_video_view_internal = array('views-exposed-form-searchimage-search-unpublish-internal-video' , 
       'views-exposed-form-searchimage-search-unpublish-internal-video-singal','views-exposed-form-searchimage-search-publish-internal-video-singal', 'views-exposed-form-searchimage-search-publish-internal-video');
-  if( in_array($form['#id'], $solr_video_view_internal)) {
+  if( in_array($form['#id'], $solr_video_view_internal)) { 
+    global $conf;
+     $conf['preprocess_js'] = 0;
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer-jquery-1.11.3.min.js', array('scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'footer'));
     drupal_add_js( $base_url . "/" . drupal_get_path('theme', 'itgadmin').'/js/jquery-pagination-min.js', array('scope' => 'footer'));
@@ -1052,19 +1072,13 @@ function itg_common_cronapi($op, $job = NULL) {
     'callback' => 'itg_content_inactive',
   );
 
+   $items['insert-private-ip'] = array(
+    'description' => 'Insert varnish ip .',
+    'callback' => 'insert_private_ip',
+ );
   return $items;
 }
 
-/**
- * This function use for remove html special chars
- */
-function itg_common_remove_extra_html($string) {
-  $return_data = "";
-  if (!empty($string)) {
-    $return_data = preg_replace("/&#?[a-z0-9]{2,8};/i", "", $string);
-  }
-  return $return_data;
-}
 
 /**
  * Implement cron callback for content inactive
@@ -1090,127 +1104,12 @@ function itg_content_inactive() {
     $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
     $node_data->status = 0;
-//    if($node->type == 'videogallery') {
-//      if(function_exists('itg_videogallery_node_publish_to_unpublish')) {
-//        itg_videogallery_node_publish_to_unpublish($node->nid);
-//      }
-//    }
     node_save($node_data);
     itg_widget_handle_unpublished_node($node->nid);
   }
   itg_watchdog("nodes_expiry" , $nodeid);
-  //watchdog("cron content expiry", '<pre>' . print_r($nodeid, TRUE) . '</pre>');
 }
 
-/**
- * Function which returns true is case of special page.
- */
-function itg_is_special_page() {
-  $flag = FALSE;
-  $arg = arg();
-  if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2])) {
-    $query = db_select('itg_layout_tpl' ,'tpl');
-    $query->fields("tpl" , array("id"));
-    $query->condition("tpl.status" , 1);
-    $query->condition("tpl.section_name" , $arg[2]);
-    $result = $query->execute()->rowCount();
-    if($result) {
-      $flag = TRUE;
-    }
-  }
-  return $flag;
-}
-/**
- * Function is used to prepare node title with emoji.
- * @param int $nid
- *   Node id
- * @param int $min_limit
- *   Min limit to truncate node title
- * @param int $max_limit
- *   Max limit to truncate node title
- * @return string
- *   Returns node title.
- */
-function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
-// Condition is to make free title on home page ITG-3774
-  //if(drupal_is_front_page() || itg_is_special_page()) {
-    $max_limit = 10000;
-  //}
-    
-  $arg = arg();
-  $titlte = "";
-  $positions_array = array();
-  $left_smiles = "";
-  $right_smiles = "";
-  $result = [];
-  if (!empty($node_obj) && is_numeric($node_obj) && (int) $node_obj) {
-   $result[] = get_field_value_for_smily($node_obj);
-   
-  } else {
-      $result[] = array(
-        'field_story_short_headline_value' => $node_obj['field_story_short_headline_value'],
-        'field_emoji_position_value' => $node_obj['field_emoji_position_value'],
-        'field_emoji_2_value' => $node_obj['field_emoji_2_value'],
-        'field_emoji_value' => $node_obj['field_emoji_value'],
-        'title' => $node_obj['title'],
-      );
-  }
-  if (!empty($result[0]['field_story_short_headline_value'])) {
-    foreach ($result[0]['field_emoji_position_value'] as $positions) {
-        $positions_array[] = $positions;
-    }
-    if (in_array('left', $positions_array)) {
-      if (!empty($result[0]['field_emoji_2_value'])) {
-        // Get all the smiley images.
-        preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images);
-        $left_smiles = '<span class="smilies-title">';
-        // Implode all images in case of muliple smiley.
-        $left_smiles .= implode("", $images[0]);
-
-        $left_smiles .= '</span>';
-      }
-    }
-    if (in_array('right', $positions_array)) {
-      if (!empty($result[0]['field_emoji_value'])) {
-        // Get all the smiley images.
-        preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images_2);
-        // Implode all images in case of muliple smiley.
-
-        $right_smiles = '<span class="smilies-title">';
-        // Implode all images in case of muliple smiley.
-        $right_smiles .= implode("", $images_2[0]);
-
-        $right_smiles .= '</span>';
-      }
-    }
-    if (count($result) && !$is_long_headline) {
-      if (!empty($left_smiles) || !empty($right_smiles)) {
-        $titlte = ucfirst(mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, ".."));
-      }
-      else {
-        $max_limit += 10;
-        $titlte = ucfirst(mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, ".."));
-      }
-      // Add smiley to right;
-      $titlte = $left_smiles . _widget_title($titlte , FALSE) . $right_smiles;
-      return $titlte;
-    }
-    else {
-      if (!empty($left_smiles) || !empty($right_smiles)) {
-        $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
-      }
-      else {
-        $max_limit += 10;
-        $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
-      }
-      $titlte = $left_smiles . _widget_title($titlte , FALSE) . $right_smiles;
-      return $titlte;
-    }
-  }
-  else {
-    return ucfirst(mb_strimwidth(_widget_title($result[0]['title'] , FALSE), $min_limit, $max_limit, ".."));
-  }
-}
 
 /** Implements itg_apache_solr_get_site_hash();
  */
@@ -1279,34 +1178,6 @@ function get_term_name_from_tid($tid, $vid = CATEGORY_MANAGMENT) {
   return $query->execute()->fetchObject();
 }
 
-/**
- * Helper function to get user details
- * @param int $uid 
- */
-function itg_custom_get_user_details($uid) {
-  if (!empty($uid)) {
-    $query = db_select('users', 'u');
-    $query->leftjoin('field_data_field_first_name', 'f', 'u.uid = f.entity_id');
-    $query->leftjoin('field_data_field_last_name', 'g', 'u.uid = g.entity_id');
-    $query->fields('u', array('uid'))
-        ->fields('u', array('mail'))
-        ->fields('u', array('name'))
-        ->fields('f', array('field_first_name_value'))
-        ->fields('g', array('field_last_name_value'))
-        ->condition('u.status', 1)
-        ->condition('u.uid', $uid);
-    $result = $query->execute();
-
-    while ($record = $result->fetchAssoc()) {
-      $user_list['mail'] = $record['mail'];
-      $user_list['name'] = $record['name'];
-      $user_list['fname'] = $record['field_first_name_value'];
-      $user_list['lname'] = $record['field_last_name_value'];
-    }
-
-    return $user_list;
-  }
-}
 
 /**
  * Implements hook_token_info_alter.
@@ -1390,38 +1261,6 @@ function itg_common_token_info_alter(&$info) {
   }
 }
 
-/**
- * Implements _occupation_from_tid_for_sef_url.
- * {@inheritdoc}
- */
-function _occupation_from_tid_for_sef_url($tid) {
-  $term_data = taxonomy_term_load($tid);
-  return $term_data->name;
-}
-
-/*
- * get_other_gallery_amp
- *  @param int $primary_category
- */
-function get_other_gallery_amp($primary_category, $nid, $bundle, $limit) {
-   if (!empty($primary_category)) {
-    $query = db_select('field_data_field_primary_category', 'fg');
-    $query->leftjoin('node', 'n', 'n.nid = fg.entity_id');
-    $query->leftjoin('field_data_field_story_small_image', 'sm', 'sm.entity_id = fg.entity_id');
-    $query->fields('fg', array('entity_id'))
-          ->fields('n', array('title', 'created','nid'))
-          ->fields('sm', array('field_story_small_image_fid'))
-          ->condition('fg.entity_id', array($nid), 'NOT IN')
-          ->condition('fg.field_primary_category_value', $primary_category)
-          ->condition('n.status', 1)
-          ->condition('fg.bundle', $bundle);
-    $query->orderBy('n.created', 'DESC'); 
-    $query->range(0, $limit);
-    $result = $query->execute();
-
-    return $record = $result->fetchAll(PDO::FETCH_ASSOC);
-  }
-}
 
 /*
  * get_image_count_entity_id
@@ -1576,13 +1415,6 @@ function _remove_embded_tags_from_story_body($body_content) {
 
 
 /**
- * WatchDog helper function for debug
- */
-function itg_watchdog($error_type , $message) {
-    watchdog($error_type, "<pre>".print_r($message , 1)."</pre>");
-}
-
-/**
  * Function for prevent sent email during widget add bulk operation.
  * @param array $request
  * @return boolean
@@ -1669,6 +1501,28 @@ function itg_common_get_addontitle($node_obj) {
       $addon_list['ad_title'] = $node_obj['ad_title'];
       $addon_list['ad_url'] = $node_obj['ad_url'];
     //}
+
+    return $addon_list;
+  }
+}
+
+/**
+ * Function to get details of addtitle for given nodeid.
+ * @param int $nid;
+ */
+function itg_common_get_addontitle_for_view($nid) {
+  if (!empty($nid)) {
+    $addon_list = array();
+    $query = db_select('field_data_field_story_new_title', 'addon');
+    $query->join('field_data_field_story_redirection_url_titl', 'addurl', 'addurl.entity_id = addon.entity_id');
+    $query->fields('addon', array('field_story_new_title_value'))
+          ->fields('addurl', array('field_story_redirection_url_titl_value'));
+    $query->condition('addon.entity_id', $nid);
+    $result = $query->execute();
+    while ($record = $result->fetchAssoc()) {
+      $addon_list['ad_title'] = $record['field_story_new_title_value'];
+      $addon_list['ad_url'] = $record['field_story_redirection_url_titl_value'];
+    }
 
     return $addon_list;
   }
@@ -1938,47 +1792,6 @@ function itg_get_twitter_embeded_video_id($bodystr) {
 }
 
 /**
- * Function is used to prepare node title with emoji.
- * 
- * @param type $nid
- * @return type
- */
-function get_field_value_for_smily($nid) {
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_story_short_headline', 'sh', 'sh.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji', 'emoji', 'emoji.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji_2', 'emoji_2', 'emoji_2.entity_id=n.nid');
-  $query->leftJoin('field_data_field_emoji_position', 'emoji_pos', 'emoji_pos.entity_id=n.nid');
-  $query->fields('n', array('title'));
-  $query->fields('emoji', array('field_emoji_value'));
-  $query->fields('sh', array('field_story_short_headline_value'));
-  $query->fields('emoji_2', array('field_emoji_2_value'));
-  $query->fields('emoji_pos', array('field_emoji_position_value'));
-  $query->condition('n.nid', $nid);
-  //$query->condition('n.type', 'story');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return array(
-    'field_story_short_headline_value' => $result[0]['field_story_short_headline_value'],
-    'field_emoji_position_value' => array($result[0]['field_emoji_position_value'] , $result[1]['field_emoji_position_value']),
-    'field_emoji_2_value' => $result[0]['field_emoji_2_value'],
-    'field_emoji_value' => $result[0]['field_emoji_value'],
-    'title' => $result[0]['title'],
-  );
-}
-
-/*
- * Implements _widget_title().
- */
-function _widget_title($string , $is_for_attribute = TRUE) {
-  if($is_for_attribute) {
-    return str_replace(array('\'', '"' , '>' , '<' , '\/', '/'), '', html_entity_decode($string));
-  } else {
-    return str_replace(array('>' , '<' , '\/', '/'), '', html_entity_decode($string));
-  //return preg_replace('#\W#', " ", $string );
-  }
-}
-
-/**
  * Implements itg_get_test_result().
  */
 function itg_get_test_result() {
@@ -1986,101 +1799,8 @@ function itg_get_test_result() {
 }
 
 /**
- * Get email by roll
- * @param string $key
- * @param string $message
- * @param array $params
+ * Implements itg_common_cache_clear().
  */
-function get_email_by_roll($id) {
-  $query = db_select('users', 'u');
-  $query->fields('u', array('mail'));
-  $query->join('users_roles', 'ur', 'ur.uid = u.uid');
-  $query->condition('ur.rid', $id, IN);
-  $query->condition('u.status', 1);
-  $result = $query->execute();
-
-  foreach ($result as $val) {
-    $value[] = $val->mail;
-  }
-  return $value;
-}
-
-/**
- * Function for getting content by section
- * @param int $section_id
- * @param string $type
- * @return array
- */
-function itg_common_get_content_by_section($section_id, $type) {
-  $item_per_page = 4;
-  $table = 'itg_widget_order_section';
-  if (strtolower($type) == 'all') {
-    $table = 'itg_widget_order';
-  }
-  $db_query = db_select($table, 'iwo')->extend('PagerDefault')->limit($item_per_page);
-  $db_query->join('node', 'n', 'n.nid = iwo.nid');
-  $db_query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-  $db_query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
-  if ($type == 'videogallery') {
-    $db_query->leftJoin('field_data_field_video_duration', 'fdv', 'fdv.entity_id=n.nid');
-  }
-  $db_query->fields('n', array('nid', 'title', 'created'));
-  $db_query->fields('eli_file', array('uri'));
-  if ($type == 'videogallery') {
-    $db_query->fields('fdv', array('field_video_duration_value'));
-  }
-  $db_query->condition('iwo.widget', 'section_wise_widget');
-  $db_query->condition('iwo.content_type', $type);
-  $db_query->condition('iwo.cat_id', $section_id);
-  $db_query->orderBy('iwo.weight', 'DESC');
-  $result = $db_query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $result;
-}
-
-/**
- * Function for counting the images in photogallery.
- * @param type $nid
- * @return type
- */
-function itg_common_count_images_in_photogallery($nid) {
-  $query = db_select('field_data_field_gallery_image', 'fdg')
-      ->fields('fdg', array('field_gallery_image_value'))
-      ->condition('fdg.entity_id', $nid);
-  $result = $query->execute()->rowCount();
-  return $result;
-}
-
-/**
- * itg_fronturl_check
- * 
- */
-function itg_fronturl_check() {
-  global $base_url;
-  $baseUrl = explode('//', $base_url);
-  $fUrl = explode('//', FRONT_URL);  
-  if ($baseUrl[1] == $fUrl[1]) {
-    return true;
-  } else {
-      return false;
-  }
-}
-
-
-/**
- * Implements hook_exit().
- */
-/*function itg_common_exit() {
-  global $theme;
-  if (!empty($_SESSION['messages']['error']) && $theme == FRONT_THEME_NAME) {    
-    $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
-    $key = array_search($msg, $_SESSION['messages']['error']);
-    
-    if ($key !== FALSE) {
-      unset($_SESSION['messages']['status'][$key]);     
-    }
-  }
-}*/
-
 function itg_common_cache_clear($cache_array = array()) {
   if(!empty($cache_array)) {
     foreach($cache_array as $cache) {
@@ -2088,3 +1808,13 @@ function itg_common_cache_clear($cache_array = array()) {
     }
   }
 }
+
+/**
+ * {@inheritdoc}
+ */
+//function display_widget_on_sport_page() {
+//  
+//  $url_list = array('ipl-venue', 'ipl-schedule', 'ipl-teams', 'ipl-stadiums');
+//  
+//  
+//}

@@ -5,17 +5,14 @@
  * @param int $nid
  */
 function __itg_widget_helper_data_insert($nid) {
-    if ($nid) {
+  itg_watchdog("request", $_REQUEST['op']);
+    if ($nid && $_REQUEST['op'] !='Apply' && $_REQUEST['op'] !='Save') {
         __itg_widget_helper_data_delete($nid);
         $node_load_data = node_load($nid , null , TRUE);
-        itg_watchdog("widget_update" , array(
-              'nid' => $nid,
-              'node_status' => $node_load_data->status,
-              'node_type' => $node_load_data->type,
-            )
-        );
+        $node_load_data->status = itg_common_get_node_status_from_tbl($nid);
+        itg_watchdog("helper_insert" , time());
+        itg_watchdog("helper_insert_status" , array($node_load_data->status , itg_common_get_node_status_from_tbl($nid)));
         try {
-          itg_watchdog("helper_insert" , $node_load_data->field_emoji_position);
             db_insert('itg_widget_helper')
               ->fields(array(
                 'nid',
@@ -28,7 +25,7 @@ function __itg_widget_helper_data_insert($nid) {
                 array(
                   'nid' => $nid,
                   'node_data' => serialize($node_load_data),
-                  'node_status' => $node_load_data->status,
+                  'node_status' => itg_common_get_node_status_from_tbl($nid),
                   'node_type' => $node_load_data->type,
                 )
               )->execute();
@@ -38,6 +35,11 @@ function __itg_widget_helper_data_insert($nid) {
     }
 }
 
+function itg_common_get_node_status_from_tbl($nid) {
+  if(is_numeric($nid)) {
+    return db_select('node' ,'n')->fields('n', array('status'))->condition('n.nid' , $nid)->execute()->fetchField();
+  }
+}
 /**
  * Function used to delete data from helper table for perticulat nid.
  * @param int $nid
@@ -155,7 +157,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
             $field_story_kicker_text = isset($node_load_data->field_story_kicker_text['und'][0]['value']) ? $node_load_data->field_story_kicker_text['und'][0]['value'] : "";
             $field_story_short_headline_value = isset($node_load_data->field_story_short_headline['und'][0]['value']) ? $node_load_data->field_story_short_headline['und'][0]['value'] : "";
             $field_video_duration_value = isset($node_load_data->field_video_duration_value['und'][0]['value']) ? $node_load_data->field_video_duration_value['und'][0]['value'] : "";
-            $field_photo_see_pic_link_value = isset($node_load_data->field_photo_see_pic_link_value['und'][0]['value']) ? $node_load_data->field_photo_see_pic_link_value['und'][0]['value'] : "";
+            $field_photo_see_pic_link_value = isset($node_load_data->field_photo_see_pic_link['und'][0]['value']) ? $node_load_data->field_photo_see_pic_link['und'][0]['value'] : "";
 
             $nid = $node_load_data->nid;
             if ($node_load_data->type == 'story') {

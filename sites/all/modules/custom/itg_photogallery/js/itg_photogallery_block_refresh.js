@@ -16,9 +16,15 @@ jQuery(document).ready(function () {
             beforeSend: function () {
             },
             success: function (userdata) {
+                var obj = jQuery.parseJSON(userdata);
                 if (userdata.length != 0) {
-                    jQuery('.photo-refresh-top').html(userdata);
-                    jQuery('.photo-refresh-bottom').html(userdata);
+                    if (obj.type == 'watch') {
+                        jQuery('.photo-refresh-top').html(obj.html_render);
+                        jQuery('.photo-refresh-bottom').html(obj.html_render);
+                    }
+                    if (obj.default_type == 'normal') {
+                        jQuery('.replace-submit-story').html(obj.default_render);
+                    }
                 }
             },
             error: function (xhr, desc, err) {

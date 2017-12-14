@@ -6,8 +6,6 @@
  */
 global $base_url;
 ?>
-<script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
-
 <?php
 $width = 622;
 $height = 446;
@@ -15,56 +13,22 @@ $external_side = 0;
 $data_video = itg_videogallery_get_video_xml_data_by_fid($data);
 $video_all_data = json_decode($data_video[0]->video_xml_data, TRUE);
 $refral_site = itg_common_get_domain($_SERVER["HTTP_REFERER"]);
-
 if (!empty($refral_site)) {
   if (strpos($base_url, $refral_site) === false) {
     $external_side = 1;
     $used_on = 'embed';
   }
 }
-
-$player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on ,$external_side);
+$player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on, $external_side);
 ?>
-<script>
-  jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";</script>
-
 <div id="videoplayer"> </div>
 <script type="text/javascript">
-  function getDomain(url) {
-      if (url) {
-          var match = /(?:https?:\/\/)?(?:\w+:\/)?[^:?#\/\s]*?([^.\s]+\.(?:[a-z]{2,}|co\.uk|org\.uk|ac\.uk|org\.au|com\.au))(?:[:?#\/]|$)/gi
-                  .exec(url);
-          return match ? match[1] : null;
-      } else
-          return null;
-  }
-  var myUserAgent = navigator.userAgent;
-  var myUserAgent = navigator.userAgent;
-  var currentItem = 0;
-
-  var referrer = document.referrer;
-  var ItgdDomain = "";
-  var itgdAds = "";
-  if (referrer.length > 0) {
-      ItgdDomain = getDomain(referrer);
-  }
-  alert(ItgdDomain);
-
-
-  //var videoSectionId=321;
-  var vdopiavideoid = '15719';
-  //var arrPlaylist=[""];
-  var autoplay = "true";
-  var mp4videoFlagJS = 1;
-  //$(document).ready(function() {	
-//stripcslashes($title);
+  jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
   function loadplayerjw() {
       var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
-      //var playerInstance = jwplayer('videoplayer');
       jwplayer('videoplayer').setup({
-          //var multipart=0;
           playlist: [{
-                  title: "",
+                  title: "<?php echo stripslashes($title); ?>",
                   'image': "<?php echo $player_content['player_image']; ?>",
                   sources: [
                       {
@@ -74,25 +38,25 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
 
                       }]
               }],
-          primary: "html5",
+          primary: "flash",
+          autostart: "true",
           width: "100%",
           height: "100%",
-          aspectratio: "16:9",
+          aspectratio: "4:3",
           "stretching": "exactfit",
           androidhls: "true",
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
           autostart: true,
-          advertising: {
-              client: "googima", skipoffset: 5,
-              schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
+                  advertising: {
+                      client: "googima", skipoffset: 5,
+                      schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
-              idstring: "",
+              idstring: "<?php echo stripslashes($title); ?>",
               label: "<?php echo $player_content["ga_code"]; ?>"
           }
       });
   }
-
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
   playerInstance.on('setupError', function (event) {
@@ -102,20 +66,15 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
           loadplayerjw();
       }
   });
-
-
-
-</script>
-
-
-
-
-<script>
   jQuery(document).ready(function () {
 
       playerInstance.play();
 
   });
-  ga('create', '<?php echo $player_content["ga_code"]; ?>', 'auto');
+
 </script>
-<script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.gaevent.js'; ?>"></script>
+
+<?php
+drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
+drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
+?>

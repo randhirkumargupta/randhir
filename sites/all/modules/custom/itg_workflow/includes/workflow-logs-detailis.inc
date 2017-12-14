@@ -187,3 +187,93 @@ function itg_workflow_content_email($email) {
 
   drupal_json_output($matches);
 }
+
+/**
+ * Implements hook_form().
+ * {@inheritdoc}
+ */
+function itg_workflow_preview_log_filter_form($form, &$form_state) {
+  $form = array();
+
+  $form['nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Content Id'),
+    '#default_value' => isset($_GET['nid']) ? $_GET['nid'] : "",
+    '#autocomplete_path' => 'preview-content-logs-report/nid/autocomplete',
+    '#attributes' => array('placeholder' => array("Enter Content ID"))
+  );
+
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Content Title'),
+    '#default_value' => isset($_GET['title']) ? $_GET['title'] : "",
+    '#autocomplete_path' => 'preview-content-logs-report/title/autocomplete',
+    '#attributes' => array('placeholder' => array("Enter Content Title"))
+  );
+
+  $form['username'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Username'),
+    '#default_value' => isset($_GET['username']) ? $_GET['username'] : "",
+    '#autocomplete_path' => 'preview-content-logs-report/username/autocomplete',
+    '#attributes' => array('placeholder' => array("Enter Username"))
+  );
+
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email'),
+    '#default_value' => isset($_GET['email']) ? $_GET['email'] : "",
+    '#autocomplete_path' => 'preview-content-logs-report/email/autocomplete',
+    '#attributes' => array('placeholder' => array("Enter Email"))
+  );
+
+  $form['type'] = array(
+    '#type' => 'select',
+    '#title' => t('Content type'),
+    '#options' => array("All" => "All", "blog" => "Blog", "story" => "Story", "videogallery" => "Videogallery", "photogallery" => "Photogallery", "podcast" => "Podcast"),
+    '#default_value' => isset($_GET['type']) ? $_GET['type'] : "",
+  );
+
+  $form['items_per_page'] = array(
+    '#type' => 'select',
+    '#title' => t('Items per page'),
+    '#options' => array(5 => 5, 10 => 10, 20 => 20, 40 => 40, 60 => 60),
+    '#default_value' => isset($_GET['items_per_page']) ? $_GET['items_per_page'] : 20,
+  );
+
+  $form['submit'] = array(
+    '#value' => 'Apply',
+    '#type' => 'submit',
+    '#attributes' => array('class' => array(' layout-apply', ' btn-small' . ' form-submit')),
+    '#prefix' => '<div class = "layout-filter-btn">',
+    '#suffix' => '<a class="layout-reset btn-small btn-reset" href="' . base_path() . 'preview-content-logs-report">Reset</a></div>',
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_submit()
+ * {@inheritdoc}
+ */
+function itg_workflow_preview_log_filter_form_submit($form, &$form_state) {
+  $item_per_page = $form_state['values']['items_per_page'];
+  $nid = $form_state['values']['nid'];
+  $title = $form_state['values']['title'];
+  $type = $form_state['values']['type'];
+  $username = $form_state['values']['username'];
+  $email = $form_state['values']['email'];
+  $form_state['redirect'] = array(
+    'preview-content-logs-report',
+    array(
+      'query' => array(
+        'nid' => $nid,
+        'title' => $title,
+        'type' => $type,
+        'username' => $username,
+        'email' => $email,
+        'items_per_page' => $item_per_page,
+      ),
+    ),
+  );
+}

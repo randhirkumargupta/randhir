@@ -900,11 +900,14 @@ function itg_msi_calendar_data() {
  */
 function itg_msi_last_issue_calendar($current_year) {
   $present_date = date('Y-m-d', time());
-  $query = db_select('field_data_field_issue_title', 'ft');
+  $query = db_select('node', 'n');
   $query->fields('ft', array('field_issue_title_value'));
+  $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
   $query->condition('ft.field_issue_title_value', '%' . db_like($current_year) . '%', 'LIKE');
   $query->condition('ft.field_issue_title_value', $present_date, '<');
   $query->orderBy('ft.field_issue_title_value', 'DESC');
+  $query->condition('n.type', 'issue', '=');
+  $query->condition('n.status', 1, '=');
   $query->range(0, 1);
   $output = $query->execute()->fetchField();
   $result = strtotime($output);
@@ -956,10 +959,14 @@ function itg_msi_validate_date($date, $format = 'Y-m-d H:i:s')
  */
 function itg_msi_next_week_issue() {
     $current_time = date('Y-m-d', time());
-    $query = db_select('field_data_field_issue_title', 'ft');
+    $query = db_select('node', 'n');
+    //$query = db_select('field_data_field_issue_title', 'ft');
+    $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
     $query->fields('ft', array('field_issue_title_value'));
-    $query->condition('field_issue_title_value', $current_time, '>');
+    $query->condition('ft.field_issue_title_value', $current_time, '>');
     $query->orderBy('ft.field_issue_title_value', 'ASC');
+    $query->condition('n.type', 'issue', '=');
+    $query->condition('n.status', 1, '=');
     $query->range(0, 1);
     $result = strtotime($query->execute()->fetchField());
     $date_format_result = format_date($result, $type = 'itg', $format = '', $timezone = NULL, $langcode = NULL);
@@ -972,9 +979,12 @@ function itg_msi_next_week_issue() {
  */
 function itg_msi_get_current_time_issue() {
     $current_time = date('Y-m-d', time());
-    $query = db_select('field_data_field_issue_title', 'ft');
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
     $query->fields('ft', array('field_issue_title_value'));
-    $query->condition('field_issue_title_value', $current_time, '=');
+    $query->condition('ft.field_issue_title_value', $current_time, '=');
+    $query->condition('n.type', 'issue', '=');
+    $query->condition('n.status', 1, '=');
     $result = $query->execute()->fetchField();
     return $result;
 }
@@ -1047,10 +1057,14 @@ function itg_msi_get_current_issue() {
     }
     else {
         $current_time = date('Y-m-d', time());
-        $query = db_select('field_data_field_issue_title', 'ft');
+        //$query = db_select('field_data_field_issue_title', 'ft');
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
         $query->fields('ft', array('field_issue_title_value'));
-        $query->condition('field_issue_title_value', $current_time, '<');
+        $query->condition('ft.field_issue_title_value', $current_time, '<');
         $query->orderBy('ft.field_issue_title_value', 'DESC');
+        $query->condition('n.type', 'issue', '=');
+        $query->condition('n.status', 1, '=');
         $query->range(0, 1);
         $output = $query->execute()->fetchField();
     }

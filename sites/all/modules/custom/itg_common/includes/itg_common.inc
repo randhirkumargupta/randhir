@@ -554,6 +554,7 @@ function itg_common_only_text_string($str) {
   $data = preg_replace("/'/" , "\\'" , $data);
   $data = htmlentities($data , ENT_QUOTES);
   $data = trim(str_replace('&nbsp;' , ' ' , $data));
+  $data = str_replace(array("\r","\n"),"",$data);
 
   return $data;
 }
@@ -618,4 +619,162 @@ function itg_get_multi_byline_details($byline_id) {
     }
   }
   return $options;
+}
+
+/**
+ * get domian name
+ */
+
+function itg_common_get_domain($url) {
+  $pieces = parse_url($url);
+  $domain = isset($pieces['host']) ? $pieces['host'] : $pieces['path'];
+  if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
+    return $regs['domain'];
+  }
+  return $pieces['host'];
+}
+
+/**
+ * Function is used to prepare node title with emoji.
+ * @param int $nid
+ *   Node id
+ * @param int $min_limit
+ *   Min limit to truncate node title
+ * @param int $max_limit
+ *   Max limit to truncate node title
+ * @return string
+ *   Returns node title.
+ */
+function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255, $is_long_headline = FALSE) {
+  $max_limit = 10000;
+  $arg = arg();
+  $titlte = "";
+  $positions_array = array();
+  $left_smiles = "";
+  $right_smiles = "";
+  $result = [];
+  if (!empty($node_obj) && is_numeric($node_obj) && (int) $node_obj) {
+   $result[] = get_field_value_for_smily($node_obj);
+   
+  } else {
+      $result[] = array(
+        'field_story_short_headline_value' => $node_obj['field_story_short_headline_value'],
+        'field_emoji_position_value' => $node_obj['field_emoji_position_value'],
+        'field_emoji_2_value' => $node_obj['field_emoji_2_value'],
+        'field_emoji_value' => $node_obj['field_emoji_value'],
+        'title' => $node_obj['title'],
+      );
+  }
+  if (!empty($result[0]['field_story_short_headline_value'])) {
+    foreach ($result[0]['field_emoji_position_value'] as $positions) {
+        $positions_array[] = $positions;
+    }
+    if (in_array('left', $positions_array) && !empty($result[0]['field_emoji_2_value'])) {      
+        // Get all the smiley images.
+        preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_2_value'], $images);
+        $left_smiles = '<span class="smilies-title">';
+        // Implode all images in case of muliple smiley.
+        $left_smiles .= implode("", $images[0]);
+
+        $left_smiles .= '</span>';      
+    }
+    if (in_array('right', $positions_array) && !empty($result[0]['field_emoji_value'])) {
+     
+        // Get all the smiley images.
+        preg_match_all('/<img[^>]*>/s', $result[0]['field_emoji_value'], $images_2);
+        // Implode all images in case of muliple smiley.
+
+        $right_smiles = '<span class="smilies-title">';
+        // Implode all images in case of muliple smiley.
+        $right_smiles .= implode("", $images_2[0]);
+
+        $right_smiles .= '</span>';
+      
+    }
+    if (count($result) && !$is_long_headline) {
+      if (!empty($left_smiles) || !empty($right_smiles)) {
+        $titlte = ucfirst(mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, ".."));
+      }
+      else {
+        $max_limit += 10;
+        $titlte = ucfirst(mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, ".."));
+      }
+      // Add smiley to right;
+      $titlte = $left_smiles . _widget_title($titlte , FALSE) . $right_smiles;
+      return $titlte;
+    }
+    else {
+      if (!empty($left_smiles) || !empty($right_smiles)) {
+        $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
+      }
+      else {
+        $max_limit += 10;
+        $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
+      }
+      $titlte = $left_smiles . _widget_title($titlte , FALSE) . $right_smiles;
+      return $titlte;
+    }
+  }
+  else {
+    return ucfirst(mb_strimwidth(_widget_title($result[0]['title'] , FALSE), $min_limit, $max_limit, ".."));
+  }
+}
+
+/**
+ * Helper function to get user details
+ * @param int $uid 
+ */
+function itg_custom_get_user_details($uid) {
+  if (!empty($uid)) {
+    $query = db_select('users', 'u');
+    $query->leftjoin('field_data_field_first_name', 'f', 'u.uid = f.entity_id');
+    $query->leftjoin('field_data_field_last_name', 'g', 'u.uid = g.entity_id');
+    $query->fields('u', array('uid'))
+        ->fields('u', array('mail'))
+        ->fields('u', array('name'))
+        ->fields('f', array('field_first_name_value'))
+        ->fields('g', array('field_last_name_value'))
+        ->condition('u.status', 1)
+        ->condition('u.uid', $uid);
+    $result = $query->execute();
+
+    while ($record = $result->fetchAssoc()) {
+      $user_list['mail'] = $record['mail'];
+      $user_list['name'] = $record['name'];
+      $user_list['fname'] = $record['field_first_name_value'];
+      $user_list['lname'] = $record['field_last_name_value'];
+    }
+
+    return $user_list;
+  }
+}
+
+/**
+ * Helper function to create image style
+ * @param int $nid
+ */
+function create_node_image_style() {
+  $arg = arg();
+  
+  if (is_numeric($arg[1])) {
+    //add function by pavnish
+  }
+  
+}
+
+/**
+ * This function is used to create settings.
+ * 
+ * {@inheritdoc}
+ */
+function itg_global_custom_variables() {
+	$form = array();
+  
+  $form['itg_widgets_sports'] = array(
+      '#type' =>'checkbox',
+      '#title'=>t('Enable Sports widgets on Sports page '),      
+      '#default_value' => variable_get('itg_widgets_sports'),
+  );
+  
+  return system_settings_form($form);
 }

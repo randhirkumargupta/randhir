@@ -10,7 +10,7 @@ function itg_clone_story_search_autocompletelabel($string) {
   $results = array();
   $matches = array();
   $num = '';
-  
+  $string = trim($string);
   //replace the space with %20
   $key = preg_replace('/[[:space:]]+/', '%20', $string);
   //number of results you want to show

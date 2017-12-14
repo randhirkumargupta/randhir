@@ -57,7 +57,7 @@ $argum = base64_encode(arg(1));
                     <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                     <div class="show-embed-code-div">
                         <div class="copy-sample-code">
-                            <textarea readonly><iframe src=<?php print $base_url . '/photo/' . $primary_category_name . '/embed/' . $argum; ?> allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea> 
+                            <textarea readonly><iframe src=<?php print $base_url . '/photo/' . $primary_category_name . '/embed/' . $argum; ?> allowfullscreen  width='648' height='550' frameborder='0' scrolling='no' /></textarea> 
                         </div>
                     </div>
                 </li>
@@ -90,7 +90,7 @@ $argum = base64_encode(arg(1));
                 <?php if ($user->uid > 0): ?>
                   <li><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                 <?php else: ?>
-                  <li><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                  <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                 <?php endif; ?>
                <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   
             </ul>
@@ -210,16 +210,16 @@ $argum = base64_encode(arg(1));
                         <a class="embed-link" href="javascript:;" title="Embed"><i class="fa fa-link"></i></a>
                         <div class="show-embed-code-div">
                             <div class="copy-sample-code">
-                                <textarea readonly><iframe src="<?php print $base_url . '/photo/' . $primary_category_name . '/embed/' . $argum; ?>" allowfullscreen  width='648' height='480' frameborder='0' scrolling='no' /></textarea>
+                                <textarea readonly><iframe src="<?php print $base_url . '/photo/' . $primary_category_name . '/embed/' . $argum; ?>" allowfullscreen  width='648' height='550' frameborder='0' scrolling='no' /></textarea>
                             </div>
                         </div>
                     </li>
                     <?php if ($user->uid > 0): ?>
                       <li class="mhide"><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                     <?php else: ?>
-                      <li class="mhide"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
+                      <li class="mhide replace-submit-story"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                     <?php endif; ?>
-                    <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   
+                    
                     <div class = "photo-refresh-bottom">
                     <?php global $user; ?>
                     <?php
@@ -320,25 +320,29 @@ if(isset($_GET['photo']) && $_GET['photo']) {
           slidesToScroll: 1,
           arrows: true,
           fade: true,
-          asNavFor: '.slick-thumbs-slider, .slickslide, .photo-by-slider'
+          asNavFor: '.slick-thumbs-slider, .slickslide, .photo-by-slider',
+          // For active slide
+          initialSlide: <?php echo $initial_slide; ?>,
       });
       jQuery('.photo-by-slider').slick({
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
           fade: true,
-          asNavFor: '.slick-thumbs-slider, .slickslide, .counterslide'
+          asNavFor: '.slick-thumbs-slider, .slickslide, .counterslide',
+          // For active slide
+          initialSlide: <?php echo $initial_slide; ?>,
       });
 // Photogallery slider javascript
       jQuery(document).ready(function () {
         var query_val = get_photo_url_query('photo' , window.location);
           if(query_val != null) {
-              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+              var real_node_url = "<?php echo $base_url."/".$photo_node->path['alias']; ?>";
               ChangeUrl("page", real_node_url +"/"+query_val);
           }
           jQuery(".slick-arrow , li.slick-slide").on("click", function () {
               var active_slide = jQuery(".slick-active").attr("data-slick-index");
-              var real_node_url = '<?php echo $base_url."/".$photo_node->path['alias']; ?>';
+                       var real_node_url = "<?php echo $base_url.'/'.$photo_node->path['alias']; ?>";
               if (active_slide > 0) {
                   ++active_slide;
                   //window.history.pushState(null, null, real_node_url + "/" + active_slide);
@@ -384,16 +388,3 @@ if(isset($_GET['photo']) && $_GET['photo']) {
       });
   });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
