@@ -207,18 +207,7 @@ class ItgCricketliveblog extends XMLMigration {
   public function complete($entity, $row) {
 	$node = node_load($entity->nid);
     $key = 0;
-    //~ if (isset($row->xml->redirection_url)) {
-      //~ $sorce_url = end(explode('indiatoday.intoday.in/', $row->xml->redirection_url));
-      //~ $redirect = new stdClass();
-      //~ $redirect->type = 'redirect';
-      //~ $redirect->source_options = $redirect->redirect_options = array();
-      //~ $redirect->language = LANGUAGE_NONE;
-      //~ $redirect->status_code = 0;
-      //~ $redirect->source = trim($sorce_url);
-      //~ $redirect->redirect = "node/{$node->nid}";
-      //~ redirect_save($redirect);
-    //~ }
-
+    
     if (isset($row->xml->content_details->details)) {
       foreach ($row->xml->content_details->details as $value) {
         $content_title = (string) $value->content_title;
