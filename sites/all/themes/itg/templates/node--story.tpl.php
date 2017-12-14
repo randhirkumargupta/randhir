@@ -523,12 +523,19 @@ if (!empty($content)):
                 else {
                   ?>
                   <div class="stryimg"><?php
+                    // For Video image
+                    $video_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+                    $video_image = itg_get_story_extra_large_image($video_id);
+                    
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
                      //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
                                     //<i class="fa fa-camera"></i></span>';
+                    }
+                    elseif (file_exists($video_image)) {
+                      $file_uri = file_create_url($video_image);
                     }
                     else {
                       $file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
