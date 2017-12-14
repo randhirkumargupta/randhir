@@ -52,7 +52,6 @@ function videoSectionPageFeed() {
         $cat_icon_img = sectionCategoryIconImg($value);
         // child xml node
         $child_node .= "<item><section><![CDATA[" . $term_name . "]]></section><sectionurl><![CDATA[" . $term_file_name . "]]></sectionurl>";
-
         // get videogallery node tag
         $child_node .= getNodeFeedTag($value, 'videogallery', 2);
 
@@ -76,11 +75,10 @@ function videoSectionPageFeed() {
 
   if ($output) {
     $file_name = "videsectionlist.xml";
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+    $term_feed_path = "public://xml_it/videos";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
   die();
 }
-

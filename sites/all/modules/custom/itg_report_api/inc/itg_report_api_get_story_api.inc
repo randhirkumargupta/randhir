@@ -23,13 +23,11 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
   $total_cont = 0;
   $range_max = 20;
   $pageno = 0;
-  //$photolist = array();
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $start_date = strtotime($start_date);
   $end_date = strtotime($end_date);
   $query = db_select('node', 'n');
