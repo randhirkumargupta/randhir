@@ -117,7 +117,6 @@ function itg_videogallery_dm_to_s3() {
   $query->fields('ivbd');
   $query->condition('is_download', '0', '=');
   $result = $query->execute()->fetchall();
-  p($result);
   foreach ($result as $key => $value) {
     if (!empty($value->bitate_url)) {
       $video_urlsdata = $value->video_id . '_' . $value->bitrate . '.mp4';
