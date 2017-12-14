@@ -81,6 +81,8 @@
 }
 
 /*===============Aseem Girdhar=========================*/
+
+.views-row-4 .item,.views-row-8 .item,.views-row-12 .item{padding-right:0px !important}
  .item img {
      width: 100%;
  }
@@ -227,7 +229,7 @@
      display: inline-block;
  }
  .btn-group {
-     max-width: 175px;
+     max-width: 180px;
      float: right;
  }
  .glyphicon {
@@ -326,7 +328,7 @@
      margin-top: 10px;
  }
  .list-group-item {
-     max-width: 98%;
+     max-width: 100%;
  }
  .cl {
      display: inline-block;
