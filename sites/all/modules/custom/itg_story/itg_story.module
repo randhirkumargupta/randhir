@@ -317,6 +317,21 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
           'file_validate_extensions' => array("png gif jpg jpeg"),
         ),
       );
+      // Google standout chekbox modifications.
+      $approved_roleid = array(ADMINISTRATOR, EDITOR, SITE_ADMIN);
+      $check = array();
+      $check = array_intersect($approved_roleid, array_keys($user->roles));
+      if (empty($check)) {
+        unset($form['field_story_configurations'][LANGUAGE_NONE]['#options']['google_standout']);
+      }
+      if ((isset($form['#node']->nid)) && (in_array(EDITOR, array_keys($user->roles)))) {
+        foreach ($form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] as $key => $val) {
+          if ($val == 'google_standout') {
+            $form['field_story_configurations'][LANGUAGE_NONE]['google_standout']['#attributes']['disabled'] = 'disabled';
+            break;
+          }
+        }
+      }
       //Byline popup
       // Load the modal library and add the modal javascript.
       ctools_include('modal');
@@ -562,6 +577,30 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
     if ($node->field_story_type[LANGUAGE_NONE][0]['value'] == 'other_story' && empty($node->body[LANGUAGE_NONE][0]['value'])) {
       form_set_error('body', t("Description field is required."));
+    }
+    if ((!empty($node->field_story_configurations[LANGUAGE_NONE]))) {
+      foreach ($node->field_story_configurations[LANGUAGE_NONE] as $config_key => $config_val) {
+        if ($config_val['value'] == 'google_standout') {
+          $current_calender_week = date("W");
+          $current_year = date("Y");
+          $calender_week = _get_calender_week_start_end_date($current_calender_week, $current_year);
+          $start_time = strtotime($calender_week['week_start']);
+          $end_time = strtotime($calender_week['week_end']);
+          $query = db_select('field_data_field_story_configurations', 'fsc');
+          $query->join('node', 'n', 'fsc.entity_id=n.nid');
+          $query->fields('n', array('nid'));
+          $query->condition('n.changed', array($start_time, $end_time), 'BETWEEN');
+          $query->condition('n.status', 1);
+          $query->condition('n.type', 'story', '=');
+          $query->condition('fsc.field_story_configurations_value', 'google_standout', '=');
+          $result = $query->execute();
+          $num_of_results = $result->rowCount();
+          if ($num_of_results >= 7) {
+            form_set_error('field_story_configurations', t("We can have only seven story with google standout with in a calender week."));
+          }
+          break;
+        }
+      }
     }
   }
 }
