@@ -1023,22 +1023,35 @@ function itg_widget_block_view($delta = '') {
  * @return array
  */
 function itg_widget_get_graph_data() {
-
     global $theme;
     $cat_id = $_GET['section'];
+    $is_category = FALSE;
+    if(isset($_GET['category']) && !empty($_GET['category'])){
+	  $cat_id = $_GET['category'];
+	}
     if ($theme == FRONT_THEME_NAME) {
         $cat_id = arg(2);
+        $cat_id_org = $cat_id;
+        $section_tid = get_category_parent_one_level($cat_id);
+		if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
+			$cat_id = $section_tid[0]->parent;
+			$is_category = TRUE;
+		}
     }
     $itg_query = db_select('node', 'n');
-    $itg_query->innerjoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
-    $itg_query->innerjoin('field_data_field_election_svg_json_url', 'sju', 'n.nid = sju.entity_id');
-    $itg_query->innerjoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
+    $itg_query->leftJoin('field_data_field_election_constituency_tall', 'frq', 'n.nid = frq.entity_id');
+    $itg_query->leftJoin('field_data_field_election_svg_json_url', 'sju', 'n.nid = sju.entity_id');
+    $itg_query->leftJoin('field_data_field_election_chart_json_url', 'cju', 'n.nid = cju.entity_id');
     $itg_query->innerjoin('field_data_field_section', 'ast', 'n.nid = ast.entity_id');
     $itg_query->innerjoin('field_data_field_graph_type', 'gt', 'n.nid = gt.entity_id');
-
+	$itg_query->leftJoin('field_data_field_graph_category', 'dfgc', 'n.nid = dfgc.entity_id');
+	if($is_category){
+		$itg_query->condition('dfgc.field_graph_category_value', $cat_id_org, '=');
+	}
 
     $itg_query->innerjoin('field_data_field_election_state', 'astw', 'n.nid = astw.entity_id');
     $itg_query->fields('n', array('nid'));
+    $itg_query->fields('dfgc', array('field_graph_category_value'));
     $itg_query->fields('frq', array('field_election_constituency_tall_value'));
     $itg_query->fields('astw', array('field_election_state_tid'));
      $itg_query->fields('cju', array('field_election_chart_json_url_value'));
@@ -2131,8 +2144,15 @@ function _itg_widget_get_old_data() {
 function _get_widget_display_data_as_per_db_result($result = array()) {
     if (!empty($result)) {
         foreach ($result as $widget_data) {
-
+            $is_sponsor = FALSE;
             $node_load_data = unserialize($widget_data->node_data);
+            if (($node_load_data->type == 'story') && (isset($node_load_data->field_story_configurations)) && (!empty($node_load_data->field_story_configurations))) {
+              foreach ($node_load_data->field_story_configurations[LANGUAGE_NONE] as $config_key => $config_val) {
+                if ($config_val['value'] == 'sponsor') {
+                  $is_sponsor = TRUE;
+                }
+              }
+            }
             $node_smily_data = array('field_story_short_headline_value' => $node_load_data->field_story_short_headline['und'][0]['value'],
                 'field_emoji_position_value' => array(
                   $node_load_data->field_emoji_position['und'][0]['value'],
@@ -2144,6 +2164,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
                 'ad_title' => $node_load_data->field_story_new_title['und'][0]['value'],
                 'ad_url' => $node_load_data->field_story_redirection_url_titl['und'][0]['value'],
                 'nid' => $node_load_data->nid,
+                'is_spnoser' => $is_sponsor,
              );
             $uri = $node_load_data->field_story_extra_large_image['und'][0]['uri'];
             $li_file_uri = $node_load_data->field_story_large_image['und'][0]['uri'];

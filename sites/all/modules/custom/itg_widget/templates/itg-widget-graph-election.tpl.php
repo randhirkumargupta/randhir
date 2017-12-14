@@ -28,6 +28,11 @@
   }
   // Start high chart Graph
   foreach ($data as $index => $row):
+	$graph_link = $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid;
+	if(!empty($row->field_graph_category_value)){
+		$graph_link = $base_url . '/'. drupal_get_path_alias('taxonomy/term/' . $row->field_graph_category_value);
+	}
+  
     if($row->field_graph_type_value == 'Graph'){
 
     ?>
@@ -35,7 +40,7 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid ?>" >
+            <a href="<?php echo $graph_link; ?>" >
               <div class="data-holder">
                 <div class="graph-design">
                   <div id="container_<?php echo $index; ?>"></div>
@@ -93,7 +98,7 @@
       <div class="itg-widget">
         <div class="droppable <?php print $gray_bg_layout; ?>">
           <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
-            <a href="<?php echo $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid ?>" >
+            <a href="<?php echo $graph_link; ?>" >
               <div class="data-holder">
                 <div class="graph-design">
                 <div class="statesvg-map">

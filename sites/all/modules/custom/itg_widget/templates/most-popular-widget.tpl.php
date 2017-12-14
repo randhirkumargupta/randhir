@@ -14,7 +14,7 @@
         ?>
         <li <?php echo $data_tb_region_item;?> title="<?php echo $entity['title'];  ?>" class="most-popular-<?php print $entity['nid'] ?>">
           <?php
-          if (_is_sponsor_story_article($entity['nid'])):?>
+          if ($entity['node_obj']['is_spnoser']): ?>
             <span class="itg-sponsor-title"><?php print t('SPONSORED'); ?></span>
           <?php 
           endif; ?>
