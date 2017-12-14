@@ -6,6 +6,7 @@
 
 /**
  * main function for generate photoCategoryPage xml feed
+ *
  * @return string $output
  */
 function photocategoryPageFeed() {
@@ -64,6 +65,7 @@ function photocategoryPageFeed() {
 
 /**
  * function for generate photoCategoryPage xml feed
+ *
  * @return array $data
  */
 function generatePhotoCategoryPage($tid) {
@@ -90,8 +92,7 @@ function generatePhotoCategoryPage($tid) {
     $range_max = 20;
     $range_min = 0;
     $order_by = 'ASC';
-    $type = "photogallery";
-    {
+    $type = "photogallery"; {
       $listcount = 0;
       // select node belong from current term id or child term id
       $query = db_select('taxonomy_index', 'ti');
@@ -122,6 +123,7 @@ function generatePhotoCategoryPage($tid) {
       $query->fields('mi', array('field_story_medium_image_fid'));
       $query->fields('si', array('field_story_small_image_fid'));
       $query->fields('rc', array('field_common_related_content_value'));
+      $query->fields('esi', array('field_story_extra_small_image_fid'));
 
       $query->fields('kt', array('field_story_kicker_text_value'));
       $query->fields('vd', array('field_video_duration_value'));
@@ -132,7 +134,8 @@ function generatePhotoCategoryPage($tid) {
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
       foreach ($result as $reskey => $resvalue) {
         $listcount++;
-        $title = $resvalue['title'];
+
+        $title = html_entity_decode($resvalue['title']);
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $created = $resvalue['created'];
@@ -146,7 +149,7 @@ function generatePhotoCategoryPage($tid) {
 
         $create_date = date("F d, Y", $created);
         $create_datetime = date(DATE_ATOM, $created);
-        $output .= "<item><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $file_medium_img_url . "]]></thumbimage><url>photo" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds><weburl><![CDATA[" . $weburl . "]]></weburl></item>";
+        $output .= "<item><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>photo" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds><weburl><![CDATA[" . $weburl . "]]></weburl></item>";
         $fl = generatePhotoDetailPageFeed($nid);
       }
     }
@@ -159,3 +162,4 @@ function generatePhotoCategoryPage($tid) {
 
   return $data;
 }
+

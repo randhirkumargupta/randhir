@@ -6,6 +6,7 @@
 
 /**
  * main function for generate programSectionPageFeed xml feed
+ *
  * @return string $output
  */
 function programSectionPageFeed() {
@@ -82,3 +83,4 @@ function programSectionPageFeed() {
   echo $output;
   drupal_exit();
 }
+

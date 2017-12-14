@@ -3,14 +3,13 @@
 /**
  * Inc file contains global configurations
  */
-define('DEFAULT_REDIS_EXPIRE_TIME', 3600);
-define('RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME', 3600);
-define('RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME', 3600);
-
-/**
- * main function for get tidConfig
- * @return array $tid_config
- */
+define('FEED_NOTIFICATION_PATH', '/sites/default/files/xml_it/notifications');
+define('DEFAULT_REDIS_EXPIRE_TIME', 600);
+define('RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME', 600);
+define('RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME', 600);
+define('ITGD_DEV_FILES_PATH', 'http://itgddev.indiatodayonline.in/sites/default/files');
+define('ITGD_MUM_DEV_FILES_PATH', 'http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public');
+define('NOTIFICATION_FEED_PATH', 'http://feeds.intoday.in/pushwoosh/message_api.php?app_id=');
 function tidConfig() {
   $tid_config = array();
   $photo_sec_tid = explode(',', variable_get('photo_sec_tid'));
@@ -29,6 +28,7 @@ function tidConfig() {
 /**
  * Function for get to redis key value
  * @pram string $key
+ *
  * @return string $result
  */
 function getRedis($key) {
@@ -49,7 +49,8 @@ function getRedis($key) {
  * Common function to set the value on redis key
  * @pram string $key, $value
  * @pram int $ttl
- * @return array $result 
+ *
+ * @return array $result
  */
 function setRedis($key, $value, $ttl = 300) {
   $key_value = 0;
@@ -64,6 +65,7 @@ function setRedis($key, $value, $ttl = 300) {
 
 /**
  * unique function to return all the redis keys
+ *
  * @return  array $all_redis_key
  */
 function list_redis_key() {
@@ -74,6 +76,7 @@ function list_redis_key() {
 
 /**
  * unique function to connect redis server
+ *
  * @return object $redis
  */
 function redis_connection() {
@@ -95,6 +98,7 @@ function redis_connection() {
 /**
  * delete redis key value
  * @pram string $key
+ *
  * @return bool $result
  */
 function redis_key_delete($key) {
@@ -105,7 +109,9 @@ function redis_key_delete($key) {
 
 /**
  * delete redis key_pattern value
+ *
  * @param type $key_patt
+ *
  * @return int
  */
 function redis_key_pattern_delete($key_patt) {
@@ -122,3 +128,4 @@ function redis_key_pattern_delete($key_patt) {
   }
   return $flag;
 }
+

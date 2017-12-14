@@ -6,6 +6,7 @@
 
 /**
  * main function for generate photoSectionPage xml feed
+ *
  * @return string $output
  */
 function photoSectionPageFeed() {
@@ -82,3 +83,4 @@ function photoSectionPageFeed() {
   echo $output;
   drupal_exit();
 }
+

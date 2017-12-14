@@ -6,6 +6,7 @@
 
 /**
  * main function for generate breakingNewsPage xml feed
+ *
  * @return string $output
  */
 function breakingNewsPageFeed() {
@@ -70,3 +71,4 @@ function breakingNewsPageFeed() {
   echo $output;
   drupal_exit();
 }
+

@@ -6,6 +6,7 @@
 
 /**
  * main function for generate rootCategoryContentPageFeed xml feed
+ *
  * @return string $output
  */
 function rootCategoryContentPageFeed() {
@@ -63,6 +64,7 @@ function rootCategoryContentPageFeed() {
  * function for generate storyCategoryPage xml feed
  * @pram int $tid
  * @pram string $term_name
+ *
  * @return array $data
  */
 function generateLeftMainCategoryPage($tid, $term_name) {
@@ -133,7 +135,7 @@ function generateLeftMainCategoryPage($tid, $term_name) {
 
         $listcount++;
 
-        $title = $resvalue['title'];
+        $title = html_entity_decode($resvalue['title']);
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $created = $resvalue['created'];
@@ -170,3 +172,4 @@ function generateLeftMainCategoryPage($tid, $term_name) {
   }
   return $data;
 }
+

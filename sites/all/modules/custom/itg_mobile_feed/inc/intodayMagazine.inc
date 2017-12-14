@@ -6,6 +6,7 @@
 
 /**
  * main function for generate intodayMagazine xml feed
+ *
  * @return string $output
  */
 function intodayMagazine() {
@@ -56,6 +57,7 @@ function intodayMagazine() {
 /**
  * function for generate storyCategoryPage xml feed
  * @pram int $tid
+ *
  * @return array $data
  */
 function generateIntodayMagazinePage($tid) {
@@ -130,3 +132,4 @@ function generateIntodayMagazinePage($tid) {
   $data['data'] = $output;
   return $data;
 }
+

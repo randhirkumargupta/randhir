@@ -1,16 +1,18 @@
 <?php
+
 /**
  * Inc file contains the functions
  */
 
 /**
  * main function for generate home page xml feed
+ *
  * @return string $output
  */
 $home_list_count = 0;
 
 /**
- * 
+ *
  * @global int $home_list_count
  */
 function homePageFeed() {
@@ -57,6 +59,7 @@ function homePageFeed() {
 
 /**
  * function for get story from Big Story widget
+ *
  * @return string $output
  */
 function bigStoryWidgetData() {
@@ -99,7 +102,8 @@ function bigStoryWidgetData() {
 }
 
 /**
- * function for get story from Home Page Features widget 
+ * function for get story from Home Page Features widget
+ *
  * @return string $output
  */
 function homePageFeaturesWidgetData() {
@@ -171,6 +175,7 @@ function homePageFeaturesWidgetData() {
 
 /**
  * function for get story from Top Stories widget
+ *
  * @return string $output
  */
 function topStoriesWidgetData() {
@@ -244,3 +249,4 @@ function topStoriesWidgetData() {
 
   return $output;
 }
+

@@ -6,6 +6,7 @@
 
 /**
  * Common function to define the some Primary values
+ *
  * @return string
  */
 function get_notification_config() {
@@ -19,7 +20,7 @@ function get_notification_config() {
 }
 
 /**
- * Common function to build notification page 
+ * Common function to build notification page
  */
 function notification_page() {
   $params = drupal_get_query_parameters();
@@ -28,6 +29,7 @@ function notification_page() {
 
 /**
  * Create notification file based on args
+ *
  * @param type $params
  */
 function generate_notification_all($params) {
@@ -117,9 +119,11 @@ function generate_notification_all($params) {
 }
 
 /**
- * Common Function to get weburl 
+ * Common Function to get weburl
  * @global type $base_url
+ *
  * @param type $nid
+ *
  * @return string
  */
 function get_web_url($nid) {
@@ -131,6 +135,7 @@ function get_web_url($nid) {
 
 /**
  * Function for getting the xml output for notification_all, android, ios
+ *
  * @return string $output
  */
 function default_xml_feed() {
@@ -146,6 +151,7 @@ function default_xml_feed() {
 
 /**
  * Function for getting the Ipad notification Xml Output
+ *
  * @return string $output
  */
 function ipad_notification_xml() {
@@ -215,6 +221,7 @@ function ipad_notification_xml() {
 
 /**
  * Function for getting the chrome notification Xml Output
+ *
  * @return string $output
  */
 function chrome_notification_xml() {
@@ -283,6 +290,7 @@ function chrome_notification_xml() {
 
 /**
  * Function for getting the safari notification Xml Output
+ *
  * @return string $output
  */
 function safari_notification_xml() {
@@ -348,6 +356,7 @@ function safari_notification_xml() {
 
 /**
  * Function for getting the amazon notification Xml Output
+ *
  * @return string $output
  */
 function amazon_notification_xml() {
@@ -415,6 +424,7 @@ function amazon_notification_xml() {
 
 /**
  * Function for getting the Window 8 notification Xml Output
+ *
  * @return string $output
  */
 function windows8_notification_xml() {
@@ -482,6 +492,7 @@ function windows8_notification_xml() {
 
 /**
  * Function for getting the osx notification Xml Output
+ *
  * @return string $output
  */
 function osx_notification_xml() {
@@ -551,6 +562,7 @@ function osx_notification_xml() {
 
 /**
  * Function for getting the Nokia Asha notification Xml Output
+ *
  * @return string $output
  */
 function nokiaasha_notification_xml() {
@@ -624,6 +636,7 @@ function nokiaasha_notification_xml() {
 
 /**
  * Function for getting the BB Xml Output
+ *
  * @return string $output
  */
 function bb_notification_xml() {
@@ -695,6 +708,7 @@ function bb_notification_xml() {
 
 /**
  * Function for getting notifications article
+ *
  * @return string $output
  */
 function notifications_article() {
@@ -759,14 +773,16 @@ function notifications_article() {
 
 /**
  * Function for getting message_data
+ *
  * @return string $res
  */
 function message_data() {
   $config = get_notification_config();
   $params = drupal_get_query_parameters();
-  $message_data_url = 'http://feeds.intoday.in/pushwoosh/message_api.php?app_id=' . $params['app_id'] . '&devices=' . $params['app_id'] . '';
+  $message_data_url = NOTIFICATION_FEED_PATH . $params['app_id'] . '&devices=' . $params['device'] . '';
 
   $all_data = file_get_contents($message_data_url);
   $message_data = json_decode($all_data);
   return $message_data;
 }
+

@@ -6,6 +6,7 @@
 
 /**
  * main function for generate storyCategoryPage xml feed
+ *
  * @return string $output
  */
 function storyCategoryPageFeed() {
@@ -55,6 +56,7 @@ function storyCategoryPageFeed() {
 /**
  * function for generate storyCategoryPage xml feed
  * @pram int $tid
+ *
  * @return array $data
  */
 function generateStoryCategoryPage($tid) {
@@ -81,8 +83,7 @@ function generateStoryCategoryPage($tid) {
     $range_max = 20;
     $range_min = 0;
     $order_by = 'ASC';
-    $type = "story";
-    {
+    $type = "story"; {
       $listcount = 0;
       // select node belong from current term id or child term id
 
@@ -130,7 +131,7 @@ function generateStoryCategoryPage($tid) {
         // node feed tag
         $listcount++;
 
-        $title = $resvalue['title'];
+        $title = html_entity_decode($resvalue['title']);
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $created = $resvalue['created'];
@@ -156,3 +157,4 @@ function generateStoryCategoryPage($tid) {
   }
   return $data;
 }
+

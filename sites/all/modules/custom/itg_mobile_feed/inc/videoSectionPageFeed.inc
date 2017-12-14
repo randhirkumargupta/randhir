@@ -6,6 +6,7 @@
 
 /**
  * main function for generate videoSectionPage xml feed *
+ *
  * @return string $output
  */
 function videoSectionPageFeed() {
@@ -82,3 +83,4 @@ function videoSectionPageFeed() {
   echo $output;
   die();
 }
+

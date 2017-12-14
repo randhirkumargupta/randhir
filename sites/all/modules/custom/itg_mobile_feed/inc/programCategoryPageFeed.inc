@@ -6,6 +6,7 @@
 
 /**
  * main function for generate programCategoryPageFeed xml feed
+ *
  * @return string $output
  */
 function programCategoryPageFeed() {
@@ -65,6 +66,7 @@ function programCategoryPageFeed() {
 /**
  * function for generate photoVideoPage xml feed
  * @pram int $tid
+ *
  * @return array $data
  */
 function generateProgramCategoryPage($tid) {
@@ -73,7 +75,7 @@ function generateProgramCategoryPage($tid) {
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
-    $data_str = $result_get['key_value'];    
+    $data_str = $result_get['key_value'];
     $data_ar = explode("##listcount##", $data_str);
     $data['lcount'] = $data_ar[0];
     $data['data'] = $data_ar[1];
@@ -91,8 +93,7 @@ function generateProgramCategoryPage($tid) {
     $range_max = 20;
     $range_min = 0;
     $order_by = 'ASC';
-    $type = "videogallery";
-    {
+    $type = "videogallery"; {
       $listcount = 0;
       // select node belong from current term id or child term id
 
@@ -137,7 +138,8 @@ function generateProgramCategoryPage($tid) {
 
       foreach ($result as $reskey => $resvalue) {
         $listcount++;
-        $title = $resvalue['title'];
+
+        $title = html_entity_decode($resvalue['title']);
         $type = $resvalue['type'];
         $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
         $nid = $resvalue['nid'];
@@ -154,7 +156,7 @@ function generateProgramCategoryPage($tid) {
         $create_date = date("F d, Y", $created);
         $create_datetime = date(DATE_ATOM, $created);
 
-        $output .= "<item><title><![CDATA[" . $title . "]]></title><shortdescription><![CDATA[" . $field_story_kicker_text_value . "]]></shortdescription><thumbimage><![CDATA[" . $file_medium_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate></item>";
+        $output .= "<item><title><![CDATA[" . $title . "]]></title><shortdescription><![CDATA[" . $field_story_kicker_text_value . "]]></shortdescription><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate></item>";
         $fl = generateVideoDetailPageFeed($nid);
       }
     }
@@ -166,3 +168,4 @@ function generateProgramCategoryPage($tid) {
   }
   return $data;
 }
+

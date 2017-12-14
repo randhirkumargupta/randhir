@@ -6,6 +6,7 @@
 
 /**
  * main function for generate storySectionPage xml feed
+ *
  * @return string $output
  */
 function storySectionPageFeed() {
@@ -77,3 +78,4 @@ function storySectionPageFeed() {
   echo $output;
   drupal_exit();
 }
+
