@@ -711,6 +711,7 @@ function itg_videogallery_video_bitrate() {
   $query->condition('video_type', 'DM', '=');
   $query->condition('upload_time', $totime, '>=');
   $result = $query->execute()->fetchall();
+  p($result);
   $bitrates_info = itg_videogallery_url_with_bitates();
   foreach ($result as $ke => $vid) {
     itg_videogallery_update_embedcode_url($vid->video_id);
