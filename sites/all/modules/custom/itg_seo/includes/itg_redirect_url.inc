@@ -217,7 +217,9 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   } else if ((!empty($arg[0]) && ($arg[0] == 'embed')) && !empty ($arg[1])) {  // Pattern embed/@#trfg
       $videoembed = $arg[1];
       $newmatchurl = getNewVideoEmbedUrl($videoembed);
-      drupal_goto($newmatchurl);
+      if ($newmatchurl) {
+        drupal_goto($newmatchurl);
+      }
   } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
@@ -315,13 +317,16 @@ function gmp_shiftr_update($x,$n) { // shift right
  */
 function getNewVideoEmbedUrl($videoembed) {
   global $base_url;
+  $newurl = '';
   $videoid = getdecryptForEmbed($videoembed);
   $newvideoid = get_new_seccat_by_mig_id($videoid, 'migrate_map_itgvideogallery');
-  $video_decode = base64_encode($newvideoid);
-  $video_node = node_load($newvideoid);
-  $tid = $video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
-  $term = taxonomy_term_load($tid);
-  $primary_category_name = strtolower(itg_common_custompath_insert_val($term->name));
-  $newurl = $base_url.'/video/' . $primary_category_name.'/embed/'.$video_decode;
+  if ($newvideoid) {
+    $video_decode = base64_encode($newvideoid);
+    $video_node = node_load($newvideoid);
+    $tid = $video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
+    $term = taxonomy_term_load($tid);
+    $primary_category_name = strtolower(itg_common_custompath_insert_val($term->name));
+    $newurl = $base_url.'/video/' . $primary_category_name.'/embed/'.$video_decode;
+  }
   return $newurl;
 }
