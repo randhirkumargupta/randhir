@@ -17,6 +17,8 @@ elseif ($arg[0] == 'event' && !empty($arg[0])) {
     $nid = $nid_id[1];
   }
 }
+$event_section = itg_event_backend_section_detail($nid);
+$flag = TRUE;
 $node_value = itg_event_backend_page_domain($nid);
 $banner_image_uri = $node_value[0]->uri;
 $menu_color = $node_value[0]->field_e_menu_bck_color_rgb;
@@ -26,6 +28,21 @@ $menu_background_color = (!empty($menu_color) ? $menu_color : '#000');
 <div id="page">
     <div class="event-sidebar">
         <header class="header" id="header" role="banner">
+            <?php if(isset($event_section) && !empty($event_section)):?>
+            <?php
+              $tpl_name = 'section_header_' . $event_section . '_block';
+              if(!empty(theme($tpl_name))){
+              $menu_data = get_event_menu($nid);
+              $data['menu_manager'] = $menu_data;
+              $return_data['data'] = $data;
+              $return_data['is_event'] = TRUE;
+              $return_data['template_name'] = $tpl_name;
+              print  theme($tpl_name, array('data' => $return_data));
+              $flag = FALSE;
+              }
+            ?>
+          <?php endif;?>
+          <?php if($flag):?>  
             <section class="header-top">
                 <div class="event-header-banner">
                     <img src="<?php echo $banner_image; ?>" alt="" title="">
@@ -60,6 +77,7 @@ $menu_background_color = (!empty($menu_color) ? $menu_color : '#000');
                 <div class="event-menu" style="background: <?php print $menu_background_color; ?>"> <?php print render($page['header_event']); ?></div>
 
             </section>
+          <?php endif;?>
         </header>
         <?php
         $sidebar_second = render($page['sidebar_second_event']);
