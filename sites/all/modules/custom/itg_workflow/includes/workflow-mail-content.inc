@@ -37,8 +37,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
       }
       elseif ($mail_data_cat == 'story') {
-		 if(variable_get('mail_template_emails') != ''){
-            $to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+        if (variable_get('mail_template_emails') != '') {
+          $to_mail = $to_mail . ' , ' . variable_get('mail_template_emails');
         }
         $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
         $alias = drupal_get_path_alias('node/' . $node->nid . '');

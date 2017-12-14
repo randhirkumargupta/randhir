@@ -379,7 +379,6 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
         '#title' => 'Story/Photo/Video Mail Template Emails',
         '#default_value' => variable_get('mail_template_emails'),
         '#size' => 10,
-        //'#maxlength' => 20,
       );
       break;
     case 'videogallery_node_form':
