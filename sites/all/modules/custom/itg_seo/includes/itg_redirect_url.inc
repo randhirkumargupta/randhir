@@ -308,11 +308,11 @@ function get_new_seccat_by_mig_id($sourceid, $table) {
  */
 function get_decryptForEmbed($string){
 	$decrypter = gmp_strval(gmp_init($string, 36));
-	$decrypter = gmp_shiftr($decrypter, 5);
+	$decrypter = get_gmp_shiftr($decrypter, 5);
 	$decrypter = gmp_export($decrypter);
 	return $decrypter;
 }
 
-function gmp_shiftr($x,$n) { // shift right 
+function get_gmp_shiftr($x,$n) { // shift right 
   return(gmp_div($x,gmp_pow(2,$n))); 
 }
