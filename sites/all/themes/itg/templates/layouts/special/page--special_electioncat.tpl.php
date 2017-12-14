@@ -135,11 +135,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   </div>    
                 <?php endif; ?>
                 <?php
+                $story_title = get_first_story_title_by_tid(arg(2));
+                $story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
+                if(!empty($story_title)){
+					$content_link = $base_url  . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+					$story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
+				}
                 $display_title = "";
-                if ($widget_data['itg-block-4']['block_title'] == "") {
+                if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
                   $display_title = 'style="display:none"';
                 }
-                echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..") . '</span></h1> <div class="social-share">
+                echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
@@ -300,7 +306,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   $svgurl = "";
                                                   $mapgurl = "";
                                                   $colorurl = "";
-
+											      $state = 0;
                                                   foreach ($terms as $values) {
                                                     if ($values->tid == $state_tid) {
                                                       if ($countf == 0) {
@@ -308,6 +314,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                         $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
                                                         $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
                                                       }
+                                                      $state = $values->tid;
                                                       echo '<option value="' . itg_layout_clean_url($values->tid) . '">' . $values->name . '</option>';
                                                       $countf++;
                                                     }
@@ -321,9 +328,13 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                                                   <script>//getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
 
-												<div class="small_state_graph">
-													<iframe src="<?php echo $svgurl;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
-												</div>
+												<div class="small_state_graph_wrapper">
+												   <a href="/state-elections/<?php echo $section."/". $state; ?>"> 
+														<div class="small_state_graph">
+															<iframe src="<?php echo $svgurl;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
+														</div>
+													</a>
+											  </div>
                                               </div>
                                           </div>             
                                       </div>

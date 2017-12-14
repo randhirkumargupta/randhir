@@ -135,11 +135,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   </div>    
                 <?php endif; ?>
                 <?php
+                $story_title = get_first_story_title_by_tid(arg(2));
+                $story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
+                if(!empty($story_title)){
+					$content_link = $base_url  . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+					$story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
+				}
                 $display_title = "";
-                if ($widget_data['itg-block-4']['block_title'] == "") {
+                if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
                   $display_title = 'style="display:none"';
                 }
-                echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..") . '</span></h1> <div class="social-share">
+                echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>
@@ -283,36 +289,46 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                               
 
                                               <div class="data-holder pos-rel" id="itg-block-5">
-                                                <select id="map-state" name="map_state" onChange="change_mini_state_graph(this)">
+                                               
 
                                                   <?php
                                                   $countf = 0;
                                                   $svgurl = "";
                                                   $mapgurl = "";
                                                   $colorurl = "";
-
+                                                  $state = 0;
+                                                  $state_opt = '';
                                                   foreach ($terms as $values) {
                                                     if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section) {
                                                       if ($countf == 0) {
 														$svgurl1 = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
+														$state = $values->tid;
 													  }
 														$svgurl = $values->field_state_svg_json[LANGUAGE_NONE][0]['value'];
                                                         $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
                                                         $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
+                                                      echo '<input type="hidden" name="svg_url_'.$values->tid.'" value= "'.$svgurl.'" id="svg_url_'.$values->tid.'">';
+                                                      echo '<input type="hidden" name="election_cat_'.$values->tid.'" value= "'.arg(2).'" id="election_cat_'.$values->tid.'">';
                                                       
-                                                      echo '<option value="'. $svgurl . '">' . $values->name . '</option>';
+                                                      $state_opt .= '<option value="'. $values->tid . '">' . $values->name . '</option>';
                                                       $countf++;
                                                     }
                                                   }
                                                   //~ $urlarray = array('svgurl' => $svgurl, 'mapjson' => $mapgurl, 'color_url' => $colorurl);
                                                   ?>
+                                              <select id="map-state" name="map_state" onChange="change_mini_state_graph(this)">
+												  <?php echo $state_opt;?>
                                               </select>
                                                   <div id="main_container" class="map-result-detail">
                                                       <div id= "consTable"></div></div>
                                                   <div id = "conssvg"></div>
-                                                  <div class="small_state_graph">
-													<iframe src="<?php echo $svgurl1;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
-												</div>
+                                               <div class="small_state_graph_wrapper">
+												   <a href="/state-elections/<?php echo arg(2)."/". $state; ?>"> 
+														<div class="small_state_graph">
+															<iframe src="<?php echo $svgurl1;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
+														</div>
+													</a>
+											  </div>
                                               </div>
                                           </div>             
                                       </div>

@@ -122,6 +122,13 @@ function itg_layout_manager_menu() {
     //'page arguments' => array(1, 2),
     'access arguments' => array('access content'),
   );
+  
+  $items['state-elections/%/%'] = array(
+    'page callback' => 'itg_state_election_map',
+    'page arguments' => array(1,2),
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('access content'),
+  );
 
   return $items;
 }
@@ -151,6 +158,29 @@ function itg_state_election() {
   make_graph();
 
   return theme('itg_state_election', array('widget_data' => $data, 'map_data' => $urlarray));
+}
+
+
+/**
+ * This function use for make state election page
+ */
+function itg_state_election_map() {
+  global $base_url;
+
+  $section = arg(1);
+  $state = arg(2);
+  $vocabulary = taxonomy_vocabulary_machine_name_load('state_managment');
+  $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+  $section_tid = get_category_parent_one_level($section);
+  if(isset($section_tid[0]->parent) && !empty($section_tid[0]->parent)){
+	$section = $section_tid[0]->parent;
+  }
+  foreach ($terms as $values) {
+    if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
+	  $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+    }
+  }
+	return theme('itg_state_election_map', array('widget_data' => $data, 'map_data' => $mapgurl));
 }
 
 function make_graph() {
@@ -776,6 +806,11 @@ function itg_layout_manager_theme($existing, $type, $theme, $path) {
       'template' => 'layout-state-election',
       'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
     ),
+    'itg_state_election_map' => array(
+      'arguments' => array('form' => NULL),
+      'template' => 'layout-state-election-map',
+      'path' => drupal_get_path('module', 'itg_layout_manager') . '/templates',
+    ),
     'layout_election_widgets_block' => array(
       'arguments' => array('form' => NULL),
       'template' => 'layout-election-widgets-block',
@@ -951,4 +986,21 @@ function get_category_parent_one_level($tid) {
   $itg_query->condition('tth.tid', $tid, '=');
   $itg_result = $itg_query->execute()->fetchAll();
   return $itg_result;
+}
+
+/**
+ * get first story title from section or category
+ * {@inheritdoc}
+ */
+function get_first_story_title_by_tid($tid) {
+  $query = db_select('node', 'n');
+  $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->condition('ti.tid', $tid, '=');
+  $query->fields('n', array('nid', 'title'));
+  $query->condition('n.status', 1);
+  $query->condition('n.type', 'story', '=');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
 }
