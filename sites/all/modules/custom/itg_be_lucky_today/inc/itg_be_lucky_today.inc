@@ -399,11 +399,11 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
     global $base_url;
     $state = '';
     if (isset($form_state['multistep_values']['registration3']['state'])) {
-        $state = get_term_name_by_tid($form_state['multistep_values']['registration3']['state']);
+        $state = get_term_name_by_tid_custom($form_state['multistep_values']['registration3']['state']);
     }
     $city = '';
     if (isset($form_state['multistep_values']['registration3']['city'])) {
-        $city = get_term_name_by_tid($form_state['multistep_values']['registration3']['city']);
+        $city = get_term_name_by_tid_custom($form_state['multistep_values']['registration3']['city']);
     }
     $selected_magazine_name = $form_state['input']['magazine_name'];
     $magazine1 = $form_state['input']['magazine'];
@@ -459,7 +459,7 @@ function be_lucky_today_aftersubscription_submit($form, &$form_state) {
  * @param int $tid
  * @return array
  */
-function get_term_name_by_tid($tid) {
+function get_term_name_by_tid_custom($tid) {
     return db_select('taxonomy_term_data', 't')
             ->fields('t', array('name'))
             ->condition('tid', $tid)

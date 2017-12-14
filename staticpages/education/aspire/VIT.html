@@ -1,0 +1,319 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>VIT Institute</title>
+<link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
+<link href="/education/aspire/css/style-sheet-new.css" rel="stylesheet">
+<link href="/education/css/style-sheet.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+$(document).ready(function(e) {
+        var left1 = 0;
+		var left2 = -650;
+		var left3 = -1300;
+		var left4 = -1950;
+		var len = $('.img-border ul li').length;
+		var f_width = 650 *len
+		$('.img-border ul, .cap-area ul').css('width', f_width);
+		$('.thumb ul li').click(function(){
+			var current = $(this).attr('id');
+			$('.thumb ul li').removeClass('active');
+			$(this).addClass('active');
+
+			if (current == 1)
+			{
+				$('.img-border ul, .cap-area ul').animate({left : left1});
+			}
+			if (current == 2)
+			{
+				$('.img-border ul, .cap-area ul').animate({left : left2});
+
+
+			}
+			if (current == 3)
+			{
+				$('.img-border ul, .cap-area ul').animate({left : left3});
+			}
+			if (current == 4)
+			{
+				$('.img-border ul, .cap-area ul').animate({left : left4});
+			}
+
+		});
+   });
+$(document).ready(function(e) {
+	$('div#sec:first').slideDown();
+	$('#acc li:first').addClass('right');
+	$('#acc li').addClass('down');
+    $('#acc li').click(function(){
+		$('#acc li').removeClass('right')
+		$(this).addClass('right');
+		$('div#sec').slideUp();
+		$(this).next('div#sec').slideToggle();
+	});
+});
+</script>
+<style>
+body{font-family:roboto;}
+#left-side{width:670px;}
+.clr{clear:both}
+/*Slider*/
+#slider-area { width:668px; position:relative; margin-bottom:80px;}
+.img-border { border:10px solid #f5f3f4; width:650px; /*height:310px;*/ overflow:hidden   }
+.img-border ul { position:relative;}
+.img-border ul li { list-style:none; float:left; width:650px; height:350px;}
+.cap-area { width: 610px;background: #f5f3f4;padding: 10px;position: absolute;bottom: -30px !important;left: 20px;height: 100px;overflow: hidden;}
+.shed { left: 1px;margin-left: 20px;position: absolute;bottom: -57px;}
+.cap-area ul { position:relative; }
+.cap-area ul li { font: bold 23px/25px roboto; list-style:none; width:650px; height:105px; float:left }
+.cap-area ul li a { color:#000; text-decoration:none; width:610px; float:left;}
+.cap-area ul li a:hover { color:#77767b; text-decoration:underline;}
+.cap-area ul li p { font: 12px/18px arial; color:#77767b; }
+.thumb { position:absolute; right:25px; bottom:65px }
+.thumb ul { padding:0px; margin:0px;}
+.thumb ul li { line-height:none; padding:5px; width:3px; height:3px; list-style:none;
+background: -webkit-linear-gradient(#666, #ccc); /* For Safari 5.1 to 6.0 */
+background: -o-linear-gradient(#666, #ccc); /* For Opera 11.1 to 12.0 */
+background: -moz-linear-gradient(#666, #ccc); /* For Firefox 3.6 to 15 */
+background: linear-gradient(#666, #ccc); /* Standard syntax (must be last) */ border-radius:10px; float:left; margin-left:10px; cursor:pointer}
+.active { background:#000!Important}
+#left-side { float:left; width:670px; margin-left:5px;}
+#right-side  { float:right; width:300px; margin-right:5px;}
+
+/*Accordian*/
+ul{margin:0; padding:0}
+ul li{margin:0; padding:0; list-style:none;}
+#acc li:first-child{border-top:none;}
+#acc li{color: black;border-bottom:1px solid #dfdfdf; cursor:pointer; padding:15px 0; margin-bottom:2px; width:100%; font-size:27px;}
+#acc li.down{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/edu/arrow-down.png) no-repeat 99%}
+#acc li.right{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/edu/arrow-right.png) no-repeat 99%}
+div#sec{display:none;}
+.contact-us{width:650px; background:white; margin-top:10px; padding:10px;}
+</style>
+</head>
+
+<body>
+<div id="top-web" class="itgd_links">
+<ul>
+<li class="last"><a rel="nofollow" target="_blank" href="http://indiatodaygroup.com/">THE INDIA TODAY GROUP</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.indiatoday.in/">India Today</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.aajtak.in/">Aaj Tak</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.headlinestoday.in/">Headlines Today</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.businesstoday.in/">Business Today</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.menshealthindia.in/">Men's Health</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.wonderwoman.in">Wonder Woman</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://www.cosmopolitan.in/">Cosmopolitan</a></li>
+<li><a rel="nofollow" class="mainlevel" target="_blank" href="http://oyefm.in/">Oye! 104.8FM</a></li>
+<li class="last"><a rel="nofollow" class="mainlevel" target="_blank" href="http://travelplus.wayn.com/profiles/travelplus">Travel Plus</a></li>
+</ul>
+<div class="clr"></div>
+</div>
+<div class="redborder">
+<header>
+<div class="header-tag">
+<div class="logoit"><a href="#" style="display:block; height:68px;">India Today</a></div>
+<div class="top-ad">
+</div>
+</div>
+</header>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="menues" style="top: 0px; width: 100%; z-index: 999999;">
+<nav>
+<ul>
+<li class="home-icon sp_bg home_b"><a href="index.jsp?source=hometn" class="nav_padding"></a></li>
+<li class="news_b"><h1><a href="/education/526.html" title="News" class="nav_padding">News</a></h1></li>
+<li class="world_b"><a href="/education/527.html" title="Results Notification" class="nav_padding">Notification</a></li>
+<li class="video_b"><a href="http://indiatoday.intoday.in/education/category/exam-tips-and-trick/1/731.html" title="Exam Tips" class="nav_padding">Exam Tips</a></li>
+<li class="photo_b"><a href="http://indiatoday.intoday.in/education/category/scholarship/1/503.html" title="Scholarships" class="nav_padding">Scholarships</a></li>
+<li class="cricket_b"><a class="nav_padding" href="/education/734.html" title="Government Jobs">Government Jobs</a></li>
+<li class="movies_b"><a href="http://indiatoday.intoday.in/education/categorylist/plan-your-career/1/544.html" title="Plan Your Career" class="nav_padding">Plan Your Career</a></li>
+<li class="auto_b"><a href="http://www.learntoday.in/courses?source=eduportal" title="Online Courses" target="_blank" class="nav_padding">Online Courses</a></li>
+<li class="auto_b"><a href="http://indiatoday.intoday.in/education/aspire/institutes.jsp" title="Online Courses" target="_blank" class="nav_padding">Institute</a></li>
+<li class="auto_b"><a href="http://indiatoday.intoday.in/education/category/from-the-magazine/1/528.html" title="Online Courses" target="_blank" class="nav_padding">Magazine</a></li>
+</ul>
+<div class="searc-icon">Search</div>
+</nav>
+<div class="clear"></div>
+<div id="search-saction">
+<div class="search-inner">
+<form style="margin:0;padding:0;" onsubmit="return validate1();" name="searchform1" method="get" action="http://indiatoday.intoday.in/advanced_search.jsp">
+<input name="option" value="com_search" type="hidden">
+<input type="text" onfocus="if(this.value=='Type Your search') this.value='';" onblur="if(this.value=='') this.value='Type Your search';" value="Type Your search" id="mod_search_searchword" name="searchword" class="input-box">
+<input type="submit" value="search" class="submit-btn" name="">
+</form>
+</div>
+</div>
+ </div>
+<div id="wrapper">
+<section class="main">
+<section class="left">
+<div id="left-side">
+<div id="slider-area">
+          <div class="img-border">
+            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/education/images/banner.jpg">
+          </div>
+          <div class="cap-area">VIT Institute                                            </div>
+          <div class="thumb">
+
+          </div>
+          <div class="shed"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/ipl-images/Top_chunk.png" width="618" height="30" alt=""></div>
+        </div>
+<div style="background:white; padding:5px; margin-bottom:10px;">
+          <h2 style="margin:5px 0;">Course Offered</h2>
+          <p style="margin:10px 0;"><strong>Undergraduate Programmes</strong></p>
+          <p style="margin:10px 0;">•	B.Tech. Biomedical Engineering<br>
+            •	B.Tech. Biotechnology <br>
+          </p>
+          <p style="margin:10px 0;"><strong>Postgraduate Programmes</strong></p>
+          <p style="margin:10px 0;">            •	M.Tech. Biotechnology<br>
+            •	M.Tech. Biomedical Engineering<br>
+            •	M.Sc. Applied Microbiology<br>
+            •	M.Sc. Biomedical Genetics<br>
+            •	M. Sc. Biotechnology <br>
+          </p>
+          <p style="margin:10px 0;"><strong>Integrated Programme</strong></p>
+          <p style="margin:10px 0;">            •	M. Sc. Biotechnology (5 Year Integrated Programme)</p>
+          </div>
+
+<div style="background:white; padding:5px;"><ul id="acc">
+
+<li>Vision</li>
+<div id="sec">
+We at VIT University will impart futuristic technical education and instil high patterns of discipline through our dedicated staff, who shall set global standards, making our students technologically superior and ethically strong, who in turn shall improve the quality of life of the human race.</div>
+<li>Mission</li>
+<div id="sec">
+Our mission is to educate students from all over India, including those from the local and rural areas, and from other countries, so they become enlightened individuals, improving the living standards of their families, industry and society. We will provide individual attention, world-class quality education and take care of character building</div>
+<li>Quality Policy </li>
+<div id="sec">
+We at VIT University aspire to establish a system of Quality Assurance, which would on a continuous basis evaluate and monitor the quality of education and training imparted at the Institute, improve the teaching-learning process and ultimately, develop the Institute as a Centre of Excellence.</div>
+<li>Placement Record</li>
+<div id="sec">
+VIT University has been a consistent topper for several years in the list of campusplacement records among private institutions in India. It is proud that its graduates are highly rated by employers from industry and commerce in the private and public sectors. Offering information, advice, guidance and support for job-seeking students is considered a primary responsibility at the University. The Placement and Training Centre is provided with a well-equipped conference training room and separate, well-furnished rooms for interviews and counselling.
+</div>
+<li>Recognition</li>
+<div id="sec">
+VIT University was the first educational institution in India to be awarded International Organization for Standardization 9002 certificate for three years by the Det Norske Veritas(DNV) of Netherlands for management of the cultural festival 'Riviera' in 2011. <br/>
+VIT is the first educational institution to be honoured with the TVN-KIDAO-NIQR award instituted by the National Institute of Quality and Reliability (NIQR), for maintaining exceptional quality.<br/>
+VIT university was the first Indian engineering institution to get ABET Accreditation for both civil and mechanical programmes. <br/> VIT has also got ABET accreditation for its Bio Technology, Computer science, Information technology, Electronics & Communication Engineering and Electrical and Electronics Engineering since academic year 2012.<br/>
+
+</ul>
+</div>
+
+<div class="contact-us">
+<span style="font-size:25px;">Contact Us</span><br/>
+
+<p>	Ranipet Katpadi Road Vellor 632 014<br>
+  	Vellore<br>
+  	Tamil Nadu <br>
+Phone Number	2243091 2245070<br>
+  Email	registrar@vit.ac.in
+    </p>
+</p>
+</div>
+</div>
+</section>
+<section class="right">
+	<div class="res-view1"><div class="ad rightmargin">
+		<div class="adtext">Advertisement</div>
+		<!-- begin ZEDO for channel: IT ROS Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
+		<script language="JavaScript">
+		var zflag_nid="821"; var zflag_cid="1218/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";
+		</script>
+		<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script><script language="javascript" src="http://z2.zedo.com/client/z2/fo.js"></script><script language="javascript" src="http://z2.zedo.com/asw/fm.js?c=1218/1137&amp;a=0&amp;f=&amp;n=821&amp;r=13&amp;d=9&amp;adm=&amp;q=&amp;$=&amp;s=2&amp;ct=&amp;z=0.7944975893478841&amp;tt=0&amp;tz=5.5&amp;pu=http%3A%2F%2Findiatoday.intoday.in%2Feducation%2Faspire%2Finstitutes.jsp&amp;ru=http%3A%2F%2Findiatoday.intoday.in%2Feducation%2Faspire%2F&amp;pi=1407933920289&amp;ce=UTF-8" charset="UTF-8"></script><span id="Zedo-Ad=2013780_1218_2_300_250;Domain=.zedo.com"></span><table align="center" border="0"><tbody><tr><td align="center" valign="top" width="300px" height="250px"><div id="parent_2013780" name="parent" style="position:relative; width:300px; height:250px"><div id="Small_2013780" style="z-index: 9999; position: absolute; width: 300px; height: 250px; right: 0px; bottom: 0px; visibility: visible; display: block;"><a href="javascript:void()" onmouseover="setTimeout(zd_expand2013780,80);"><object id="fobj_109" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="300px" height="250px" align=""><param name="allowScriptAccess" value="always"><param name="movie" value="http://d13.zedo.com/OzoDB/m/4/2013780/V1/300x250.swf?zzad=2013780"><param name="FlashVars" value="clickTAG=http://yads.zedo.com/ads2/c?a=2013780;x=2317;g=78;c=821001218,821001218;i=6;n=821;s=2;1=8;2=1;tg=1407933892;vr=1;m=1;w=7;os=3;ct=0;u=FELW5vcIQwaUi2g65Ui7Lw**~053014;z=0.4379023367836756;ainfo=;csv=0;dct=;dmf=;dvm=;dsr=;djs=;dhs=;k=http%253A%252F%252Fdavidoffnightdive.in%252F%253Futm_source%253Dnightdive%2526utm_medium%253Dcpm%2526utm_campaign%253Dmh_into_300*250"><param name="quality" value="high"><param name="bgcolor" value="#FFFFFF"><param name="wmode" value="transparent"><embed src="http://d13.zedo.com/OzoDB/m/4/2013780/V1/300x250.swf?zzad=2013780" flashvars="clickTAG=http://yads.zedo.com/ads2/c?a=2013780;x=2317;g=78;c=821001218,821001218;i=6;n=821;s=2;1=8;2=1;tg=1407933892;vr=1;m=1;w=7;os=3;ct=0;u=FELW5vcIQwaUi2g65Ui7Lw**~053014;z=0.4379023367836756;ainfo=;csv=0;dct=;dmf=;dvm=;dsr=;djs=;dhs=;k=http%253A%252F%252Fdavidoffnightdive.in%252F%253Futm_source%253Dnightdive%2526utm_medium%253Dcpm%2526utm_campaign%253Dmh_into_300*250" quality="high" allowscriptaccess="always" width="300px" height="250px" id="expander_close2013780" bgcolor="#FFFFFF" swliveconnect="true" name="expander_close2013780" align="" wmode="transparent" type="application/x-shockwave-flash" pluginspage="https://www.macromedia.com/go/getflashplayer"></object></a></div><div id="Big_2013780" style="position: absolute; width: 600px; height: 250px; z-index: 999999; visibility: hidden; display: none; right: 0px; bottom: 0px;"><a href="javascript:void()" onmouseout="zd_collapse2013780();"><object id="fobj_258" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="600px" height="250px" align=""><param name="allowScriptAccess" value="always"><param name="movie" value="http://d13.zedo.com/OzoDB/m/4/2013780/V1/600x250.swf?zzad=2013780"><param name="FlashVars" value="clickTAG=http://yads.zedo.com/ads2/c?a=2013780;x=2317;g=78;c=821001218,821001218;i=6;n=821;s=2;1=8;2=1;tg=1407933892;vr=1;m=1;w=7;os=3;ct=0;u=FELW5vcIQwaUi2g65Ui7Lw**~053014;z=0.47057012036436474;ainfo=;csv=0;dct=;dmf=;dvm=;dsr=;djs=;dhs=;k=http%253A%252F%252Fdavidoffnightdive.in%252F%253Futm_source%253Dnightdive%2526utm_medium%253Dcpm%2526utm_campaign%253Dmh_into_300*250"><param name="quality" value="high"><param name="bgcolor" value="#FFFFFF"><param name="wmode" value="transparent"><embed src="http://d13.zedo.com/OzoDB/m/4/2013780/V1/600x250.swf?zzad=2013780" flashvars="clickTAG=http://yads.zedo.com/ads2/c?a=2013780;x=2317;g=78;c=821001218,821001218;i=6;n=821;s=2;1=8;2=1;tg=1407933892;vr=1;m=1;w=7;os=3;ct=0;u=FELW5vcIQwaUi2g65Ui7Lw**~053014;z=0.47057012036436474;ainfo=;csv=0;dct=;dmf=;dvm=;dsr=;djs=;dhs=;k=http%253A%252F%252Fdavidoffnightdive.in%252F%253Futm_source%253Dnightdive%2526utm_medium%253Dcpm%2526utm_campaign%253Dmh_into_300*250" quality="high" allowscriptaccess="always" width="600px" height="250px" id="expander_open2013780" bgcolor="#FFFFFF" swliveconnect="true" name="expander_open2013780" align="" wmode="transparent" type="application/x-shockwave-flash" pluginspage="https://www.macromedia.com/go/getflashplayer"></object></a></div></div></td></tr></tbody></table>
+		<!-- end ZEDO for channel: IT ROS Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
+		<div class="clr"></div>
+		<div class="rightmargin">
+			<p class="blueheader">STAY CONNECTED WITH US ON</p><a title="Facebook" rel="nofollow" target="_blank" href="http://www.facebook.com/indiatoday"><span class="fb-icon"></span></a><a title="Twitter" rel="nofollow" target="_blank" href="https://twitter.com/IndiatodayEdu"><span class="tw-icon"></span></a><a href="https://plus.google.com/110444701923652479610" rel="publisher" target="_blank"><span class="plus-icon"></span></a><a title="Rediff" rel="nofollow" target="_blank" href="http://pages.rediff.com/india-today-education/1778596"><span class="rediff-icon"></span></a><a title="RSS" rel="nofollow" target="_blank" href="http://indiatoday.intoday.in/education/rssFeed.jsp"><span class="rss-icon"></span></a><a title="Mobile" rel="nofollow" target="_blank" href="http://m.indiatoday.in/"><span class="mobile-icon"></span></a><a title="Live TV" target="_blank" href="http://indiatoday.intoday.in/livetv.jsp"><span class="tv-icon"></span></a>
+			<div class="clear"></div>
+		 </div>
+	</div></div>
+	<div class="clr"></div>
+	<div class="res-view1"><div class="boxshadow_300">
+		<div class="topheader">India's Best B-Schools</div>
+		<div class="clr"></div>
+		<div class="boxcont right-height">
+
+
+
+
+<div class="mag8in"> <div class="subhead"><b>IIM-Bangalore</b></div> <div class="kiker"><img class="img8marg" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2012june/iim-144_060512040323.jpg" mce_src="images/dummy.jpg" align="left" border="0"><b>Rank 1:</b> IIM-B is one of the most important centres of management research with a huge knowledge database. </div> <div class="clr"></div> <div class="prev5marg"><div class="yer"><b>Previous Years:</b></div><div class="styled-select"><span class="select" id="selectprovincia2">--Year--</span><select id="provincia2" name="provincia2" class="styled"> <option selected="selected" value="">--Year--</option> <option value="http://businesstoday.intoday.in/bschools/index.jsp?changeYear=2013">2013</option> <option value="http://businesstoday.intoday.in/bschools/index.jsp?changeYear=2012&amp;changeParameter=OVERALL&amp;value=like&amp;id=1&amp;selectCatagory=&amp;SelectParameter=EXECUTIVE&amp;compareYear=&amp;compareYear2=&amp;selectYearCatagory=&amp;compareBeiYear=">2012</option> <option value="http://businesstoday.intoday.in/bschools/index.jsp?changeYear=2011&amp;changeParameter=OVERALL&amp;value=like&amp;id=1&amp;selectCatagory=&amp;SelectParameter=EXECUTIVE&amp;compareYear=&amp;compareYear2=&amp;selectYearCatagory=&amp;compareBeiYear=">2011</option> <option value="http://businesstoday.intoday.in/bschools/index.jsp?changeYear=2010&amp;changeParameter=OVERALL&amp;value=like&amp;id=1&amp;selectCatagory=&amp;SelectParameter=EXECUTIVE&amp;compareYear=&amp;compareYear2=&amp;selectYearCatagory=&amp;compareBeiYear=">2010</option>  <option value="http://businesstoday.intoday.in/bschools/index.jsp?changeYear=2009&amp;changeParameter=OVERALL&amp;value=like&amp;id=1&amp;selectCatagory=&amp;SelectParameter=EXECUTIVE&amp;compareYear=&amp;compareYear2=&amp;selectYearCatagory=&amp;compareBeiYear=">2009</option> <option value="http://businesstoday.intoday.in/bschools/index.jsp?changeYear=2008&amp;changeParameter=OVERALL&amp;value=like&amp;id=1&amp;selectCatagory=&amp;SelectParameter=EXECUTIVE&amp;compareYear=&amp;compareYear2=&amp;selectYearCatagory=&amp;compareBeiYear=">2008</option> <option value="http://businesstoday.intoday.in/bschools/index.jsp?changeYear=2007&amp;changeParameter=OVERALL&amp;value=like&amp;id=1&amp;selectCatagory=&amp;SelectParameter=EXECUTIVE&amp;compareYear=2010&amp;compareYear2=2009&amp;selectYearCatagory=ALL&amp;compareBeiYear=">2007</option> <option value="http://businesstoday.intoday.in/bschools/index.jsp?changeYear=2006&amp;changeParameter=OVERALL&amp;value=like&amp;id=1&amp;selectCatagory=&amp;SelectParameter=EXECUTIVE&amp;compareYear=&amp;compareYear2=&amp;selectYearCatagory=&amp;compareBeiYear=">2006</option> <option value="http://businesstoday.intoday.in/bschools/index.jsp?changeYear=2005&amp;changeParameter=OVERALL&amp;value=like&amp;id=1&amp;selectCatagory=&amp;SelectParameter=EXECUTIVE&amp;compareYear=&amp;compareYear2=&amp;selectYearCatagory=&amp;compareBeiYear=">2005</option></select><span id="provinciaInfo" style="display:none; color:#FF0000;">--Year--</span> </div><div class="clr"></div></div></div>
+
+
+		<div class="clr"></div>
+		</div>
+	</div></div>
+    <div class="res-view2"><div class=" boxshadow_300_even">
+		<div class="topheader">India's Best Colleges</div>
+		<div class="clr"></div>
+		<div class="boxcont right-height">
+
+
+
+
+<div class="mag8in"> <div class="subhead"><b>Science: St. Stephen's College</b></div> <div class="kiker"><img src="images/dummy.jpg" class="img8marg" mce_src="images/dummy.jpg" align="left" border="0">With the establishment of DU in 1922, it became one of its three original constituent colleges. </div> <div class="clr"></div> <div class="col-txtcolor subhead"><a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Arts&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Arts&amp;Y=2012" target="_blank">Arts</a> <span class="seprator">|</span> <a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Commerce&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Commerce&amp;Y=2012" target="_blank">Commerce</a> <span class="seprator">|</span> <a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Science&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Science&amp;Y=2012" target="_blank">Science</a> <span class="seprator">|</span> <a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Law&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Law&amp;Y=2012" target="_blank">Law</a> <br><a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Medicine&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Medicine&amp;Y=2012" target="_blank">Medicine</a> <span class="seprator">|</span> <a href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Engineering&amp;Y=2012" mce_href="http://indiatoday.intoday.in/bestcolleges/2012/ranks.jsp?ST=Engineering&amp;Y=2012" target="_blank">Engineering</a></div> <div class="prev5marg"><div class="yer"><b>Previous Years:</b></div><div class="styled-select"><span class="select" id="selectprovincia1">--Year--</span><select id="provincia1" name="provincia1" class="styled"><option selected="selected" value="http://indiatoday.intoday.in/bestcolleges/2013/">--Year--</option> <option value="http://indiatoday.intoday.in/bestcolleges/2014/">2014</option><option value="http://indiatoday.intoday.in/bestcolleges/2013/">2013</option><option value="http://indiatoday.intoday.in/bestcolleges/2012/">2012</option><option value="http://indiatoday.intoday.in/specials/bestcolleges/2011/">2011</option> <option value="http://indiatoday.intoday.in/specials/bestcolleges/2011/ranks.jsp?Y=2010">2010</option> <option value="http://indiatoday.intoday.in/specials/bestcolleges/2011/ranks.jsp?Y=2009">2009</option> <option value="http://indiatoday.intoday.in/specials/bestcolleges/2011/ranks.jsp?Y=2008">2008</option> <option value="http://indiatoday.intoday.in/specials/bestcolleges/2011/ranks.jsp?Y=2007">2007</option> <option value="http://indiatoday.intoday.in/specials/bestcolleges/2011/ranks.jsp?Y=2006">2006</option> <option value="http://indiatoday.intoday.in/specials/bestcolleges/2011/ranks.jsp?Y=2005">2005</option></select> </div><div class="clr"></div></div></div>
+
+
+        </div>
+        <div class="clr"></div>
+	</div></div>
+	<div class="clr"></div>
+	<div class="res-view1"><script type="text/javascript">ajaxinclude("http://indiatoday.intoday.in/education/video_chunk.jsp")</script>
+
+
+
+<div class="boxshadow_300"><div class="boxcont right-height"><div class="topheader">Video</div><div class="topheader-arrow"></div><div class="clr"></div><div class="mag8in"><div class="imgbox">
+				<div> <a href="http://indiatoday.intoday.in/video/best-colleges-survey-2014-know-about-your-college/1/365715.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/best-college---video_88_060614104925.jpg" class="imgrepeat" alt="" title="" border="0"> <span class="must-watch-icon"></span></a></div>
+
+
+			<div class="clr"></div><div class="caption"><a href="http://indiatoday.intoday.in/video/best-colleges-survey-2014-know-about-your-college/1/365715.html">Best Colleges survey 2014: Know your college</a></div>
+</div><div class="imgbox">
+				<div> <a href="http://indiatoday.intoday.in/video/shri-ram-college-of-commerce-students-speak/1/365414.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/student-srcc-video_88_060514053501.jpg" class="imgrepeat" alt="" title="" border="0"> <span class="must-watch-icon"></span></a></div>
+
+
+			<div class="clr"></div><div class="caption"><a href="http://indiatoday.intoday.in/video/shri-ram-college-of-commerce-students-speak/1/365414.html">In conversation of students of Shri Ram College of Commerce</a></div>
+</div><div class="imgbox">
+				<div> <a href="http://indiatoday.intoday.in/video/national-institute-of-fashion-technology-student-speak/1/365410.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/nift-student-video_88_060514052811.jpg" class="imgrepeat" alt="" title="" border="0"> <span class="must-watch-icon"></span></a></div>
+
+
+			<div class="clr"></div><div class="caption"><a href="http://indiatoday.intoday.in/video/national-institute-of-fashion-technology-student-speak/1/365410.html">In conversation with students of NIFT</a></div>
+</div><div class="clr"></div><div class="more"><a href="http://indiatoday.intoday.in/videolist/best-colleges/1/218.html">more...</a></div></div><div class="clr"></div></div></div><div class="clr"></div>
+</div>
+	<div class="clr"></div>
+</section>
+</section>
+<footer>
+<div class="bottom-add">
+<!-- begin ZEDO for channel: ET Home Page Topnav LB , publisher: Education Today Web , Ad Dimension: Super Banner - 728 x 90 -->
+<script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="2030/2029"; var zflag_sid="26"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
+</script>
+<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel: ET Home Page Topnav LB , publisher: Education Today Web , Ad Dimension: Super Banner - 728 x 90 -->
+
+
+</div>
+<div id="footer">
+	<div id="itgd_group_links">
+      <strong>Web:</strong> <a target="_blank" href="http://www.intoday.in">InToday</a><strong>Publications:</strong> <a target="_blank" href="http://indiatoday.intoday.in">India Today</a> | <a target="_blank" href="http://subscriptions.intoday.in/subscriptions/itoday/ith_offer.jsp?source=website">India Today - Hindi</a> | <a target="_blank" href="http://businesstoday.intoday.in">Business Today</a> | <a target="_blank" href="http://cosmo.intoday.in/cosmopolitan/index.jsp">Cosmopolitan</a> | <a target="_blank" href="http://menshealth.intoday.in/menshealth/index.jsp">Men's Health</a> | <a target="_blank" href="http://www.wonderwoman.in">Wonder Woman</a> | <a target="_blank" href="http://moneytoday.intoday.in">Money Today</a> | <a target="_blank" href="http://www.prevention.intoday.in/">Prevention</a> | <a target="_blank" href="http://www.rd-india.com/newsite/home/home.asp">Reader's Digest</a> | <a target="_blank" href="http://www.indiatodaygroup.com/goodhouse/issue.html">Good Housekeeping</a> | <a target="_blank" href="http://travelplus.in">Travel Plus</a> | <a target="_blank" href="http://www.golfdigestindia.com">Golf Digest India</a> | <a target="_blank" href="http://specials.indiatoday.com/design/issue.html">Design Today</a> | <a target="_blank" href="http://subscriptions.digitaltoday.in/subscriptions/time/subscription.html">Time</a> |<a target="_blank" href="http://www.hbrsasia.org">Harvard Business Review</a> | <a target="_blank" href="http://www.gadgetsngizmos.in">Gadgets &amp; Gizmos</a> <strong>Television:</strong> <a target="_blank" href="http://aajtak.intoday.in">Aaj Tak</a>| <a target="_blank" href="http://headlinestoday.intoday.in">Headlines Today</a>  <strong>Radio:</strong> <a target="_blank" href="http://oyefm.in/">Oye! 104.8FM</a> <strong>Education:</strong> <a target="_blank" href="http://www.vasantvalley.org/vasantvalley/default.shtml">Vasant  Valley</a> | <a target="_blank" href="http://ulearntoday.com">Learn Today</a> <strong>Online Shopping:</strong> <a target="_blank" href="http://www.bagittoday.com/">Bag It Today</a> | <a target="_blank" href="http://www.indiatodaydiaries.com/">India Today Diaries</a> <strong>Events:</strong> <a target="_blank" href="http://www.indiatodayconclave.com">India Today Conclave</a> | <a target="_blank" href="http://indiatoday.in/womansummit/index.php">India Today Woman's Summit</a> | <a target="_blank" href="http://www.indiatoday.in/youthsummit">India Today Youth Summit</a> | <a target="_blank" href="http://indiatoday.intoday.in/state-of-the-states/">State Of The States Conclave</a> | <a target="_blank" href="http://indiatoday.intoday.in/educationsummit/">India Today Education Summit</a> <strong>Music:</strong> <a target="_blank" href="http://www.music-today.com">Music Today</a> <strong>Printing:</strong> <a target="_blank" href="http://www.thomsonpress.com">Thomson Press</a> <strong>Welfare:</strong> <a target="_blank" href="http://www.caretoday.in">Care Today</a> <strong>Classifieds:</strong> <a target="_blank" href="http://www.directories-today.com">Directories Today</a> <br><strong>Useful Links :</strong> <a target="_blank" href="http://indiatoday.intoday.in/site/partners.jsp">Partners</a> | <a target="_blank" href="http://indiatoday.intoday.in/prnewswire/index.jsp">Press Releases</a> <strong>Syndications:</strong> <a target="_blank" href="http://www.indiatodayimages.com/">India Today Images</a></div>
+	<div class="clear"></div>
+                <ul id="footer_menu">
+                    <li><a class="mainlevel" target="_blank" href="http://www.indiatodaygroup.com/new-site/publications/ite-about.html">ABOUT US</a></li>
+                    <li><a class="mainlevel" target="_blank" href="http://www.indiatodaygroup.com/new-site/publications/ite.html">CONTACT US</a></li>
+                    <li><a onclick="window.open('http://specials.indiatoday.com/specials/popup/advertisewithus.htm','aws','width=506,height=167,left='+(screen.availWidth/2-253)+',top='+(screen.availHeight/2-91)+'');return false;" href="#">ADVERTISE WITH US</a></li>
+                    <li><a class="mainlevel" target="_blank" href="http://www.indiatoday.com/itoday/intlsubscription/itsubs/itsubstop2.html?">SUBSCRIPTION</a></li>
+                    <li><a class="mainlevel" target="_blank" href="https://www.wecare24x7.in/">WE CARE</a></li>
+                    <li><a class="mainlevel" target="_blank" href="http://specials.indiatoday.com/common/privacypolicy/privacy.phtml">PRIVACY POLICY</a></li>
+                </ul>
+				<div class="clear"></div>
+                <div id="copyrights">
+                    Copyright © 2014 Living Media India Limited. For reprint rights: <a target="_blank" href="http://www.syndicationstoday.com/">Syndications Today.</a>
+                </div>
+            </div>
+        </footer>
+</div>
+
+</body>
+</html>

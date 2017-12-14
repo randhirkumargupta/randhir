@@ -713,13 +713,109 @@
     background: #c00; display: inline-block; top:8px; left: 0px; box-shadow: 0 0 0 rgba(214,2,12,.8); border-radius: 50%;
     background: #c00; animation: pulse 1.7s infinite; content: "";}
     
-    #header .top-nav ul li{ margin:0px 3px; }
-    #header .logo`{ width: 55px; }
+
+
+
     .container.top-nav .main-nav .nav-container-menu .nav-centerall{    width: 296px; margin: 0 auto;}
 
 
 
-
+    /* define some contants for footer-latest */
+    .footer-latest {
+      --caption-height: 42px;
+      --image-height: 300px;
+      --caption-padding: 1rem;
+      --button-size: 28px;
+      --caption-color: #f5f5f5;;
+      --caption-bg-color: #000;
+      background: var(--caption-bg-color);
+    }
+    .footer-latest * {
+      /* disable chrome touch highlight */
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+      box-sizing: border-box;
+    }
+    /* see https://ampbyexample.com/advanced/how_to_support_images_with_unknown_dimensions/ */
+    .footer-latest .fixed-height-container {
+      position: relative;
+      width: 100%;
+      height: var(--image-height);
+    }
+    .footer-latest amp-img img {
+      object-fit: contain;
+    }
+    .footer-latest figure {
+      margin: 0;
+      padding: 0;
+    }
+    /* single line caption */
+    .footer-latest figcaption {
+      position: absolute;
+      bottom: 0;
+      margin: 0;
+      width: 100%;
+      /* inital height is one line */
+      max-height: var(--caption-height);
+      line-height: var(--caption-height);
+      padding: 0 var(--button-size);
+      /* cut text after first line and show an ellipsis */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* animate expansion */
+      transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      /* overlay the carousel icons */
+      z-index: 1000;
+      /* some styling */
+      color: var(--caption-color);
+      background: var(--caption-bg-color);      
+    }
+    /* expanded caption */
+    .footer-latest figcaption.expanded1 {
+      /* add padding and show all of the text */
+      padding: var(--button-size);
+      line-height: inherit;
+      white-space: normal;
+      text-overflow: auto;
+      max-height: calc(var(--caption-height) + var(--image-height));
+      /* show scrollbar in case caption is larger than image */
+      overflow: auto;
+    }
+    /* don't show focus highlights in chrome */
+    .footer-latest figcaption:focus {
+      outline: none;
+      border: none;
+    }
+    /* the expand/collapse icon */
+    .footer-latest figcaption span {
+      display: block;
+      position: absolute;
+      top: calc((var(--caption-height) - var(--button-size)) / 2);
+      right: 2px;
+      width: var(--button-size);
+      height: var(--button-size);
+      line-height: var(--button-size);
+      text-align: center;
+      font-size: 12px;
+      color: inherit;
+      cursor: pointer; 
+    }
+    /** Live Blog/ Breaking news css */
+    .live-block .breaking-section.breaking-section{
+        border-top: 1px solid #ddd;
+    }
+    .live-block .breaking-section{padding: 10px 0; line-height: 22px; margin-top: 20px;}
+    #live-blog-amp-share h2[aria-expanded="false"] .show-less{opacity: 0;}
+    #live-blog-amp-share h2[aria-expanded="true"] .show-more{opacity: 0;}		
+    #live-blog-amp-share h2{border:none;background-color:#fff;}
+    #live-blog-amp-share .show-less{position: relative; left: -18px}
+    #live-blog-amp-share .social-share a{margin-right:5px;}
+    #live-blog-amp-share .social-share .fa-twitter-square{color: #03a4d2; font-size: 30px;}
+    #live-blog-amp-share .social-share .fa-facebook-official{color: #09488b;font-size: 30px;}
+    #live-blog-amp-share .social-share .fa-google-plus-square{font-size: 30px;color: #b00808;}    
+    #live-blog-amp-share .social-share #_AMP_content_0{top: -5px; left: 25px;transform: translateY(-60%);}
+    .live-block .breaking-section amp-instagram{width: 490px; margin: 0 auto}
+    .live-block .timeline{border-bottom: 1px solid #ddd;padding-bottom: 25px;margin-bottom: 25px;}
     </style>
     <?php //endif;  ?>
   </head>
