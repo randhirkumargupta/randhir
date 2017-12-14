@@ -216,7 +216,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       drupal_goto($newmatchurl);
   } else if ((!empty($arg[0]) && ($arg[0] == 'embed')) && !empty ($arg[1])) {  // Pattern embed/@#trfg
       $videoembed = $arg[1];
-      $videoid = decryptForEmbed($videoembed);
+      $videoid = get_decryptForEmbed($videoembed);
       $newvideoid = get_new_seccat_by_mig_id($videoid, 'migrate_map_itgvideogallery');
       $video_decode = base64_encode($newvideoid);
       $video_node = node_load($newvideoid);
@@ -306,7 +306,7 @@ function get_new_seccat_by_mig_id($sourceid, $table) {
  * @param String $string
  * @return int
  */
-function decryptForEmbed($string){
+function get_decryptForEmbed($string){
 	$decrypter = gmp_strval(gmp_init($string, 36));
 	$decrypter = gmp_shiftr($decrypter, 5);
 	$decrypter = gmp_export($decrypter);
