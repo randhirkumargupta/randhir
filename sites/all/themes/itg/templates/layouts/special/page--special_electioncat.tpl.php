@@ -306,7 +306,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                   $svgurl = "";
                                                   $mapgurl = "";
                                                   $colorurl = "";
-
+											      $state = 0;
                                                   foreach ($terms as $values) {
                                                     if ($values->tid == $state_tid) {
                                                       if ($countf == 0) {
@@ -314,6 +314,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                                                         $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
                                                         $colorurl = $values->field_state_map_color_json[LANGUAGE_NONE][0]['value'];
                                                       }
+                                                      $state = $values->tid;
                                                       echo '<option value="' . itg_layout_clean_url($values->tid) . '">' . $values->name . '</option>';
                                                       $countf++;
                                                     }
@@ -327,9 +328,13 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                                                   <script>//getconssvg(<?php echo json_encode($urlarray); ?>, "0");</script>
 
-												<div class="small_state_graph">
-													<iframe src="<?php echo $svgurl;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
-												</div>
+												<div class="small_state_graph_wrapper">
+												   <a href="/state-elections/<?php echo $section."/". $state; ?>"> 
+														<div class="small_state_graph">
+															<iframe src="<?php echo $svgurl;?>" frameborder="0" style="overflow:hidden;height:100%;width:100%;pointer-events: none;" height="100%" width="100%" > </iframe>
+														</div>
+													</a>
+											  </div>
                                               </div>
                                           </div>             
                                       </div>
