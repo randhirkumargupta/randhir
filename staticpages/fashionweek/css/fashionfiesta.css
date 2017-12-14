@@ -1,0 +1,272 @@
+body { margin:0; padding:0;}
+#itgd_links
+{float:left; text-align:center; width:1003px; font:bold 11px arial; color:#000; line-height:20px; border:0px solid #000; margin:0; padding:0px 0 0 0;}
+#itgd_links a
+{border:0px solid #000; font:bold 11px arial; color:#002f5e; text-decoration:none; margin:0 10px;}
+#itgd_links a:hover
+{color:#D81921; }
+.ddcolortabs
+{ float:left; padding:5px 0 !important;width:100%;background: transparent;voice-family: inherit;}
+
+.ddcolortabs ul{
+font:bold 13px tahoma;margin:0;padding:0;list-style:none;}
+
+.ddcolortabs li{
+display:inline;padding:0 8px !important; background:none !important; float:left; font:bold 13px tahoma; border-right:1px solid #fff; margin:0 !important ;}
+
+
+.ddcolortabs a{
+float:left;color: white;margin:0 2px 0 0;padding:0 0 3px 3px; $padding-bottom:4px;text-decoration:none;letter-spacing: 1px; }
+.ddcolortabs a:hover
+{color:#FF821D !important; text-decoration:none !important;}
+
+.ddcolortabsline{
+clear: both;padding: 0;width: 100%;height:8px;line-height:8px;background: black;border-top: 1px solid #fff; }
+
+
+.dropmenudiv_a{
+position:absolute;top: 0;border-top:1px solid #ffffff;border-bottom-width: 0;font:bold 13px tahoma;line-height:18px;
+z-index:100;background-color: #107ABD;width:120px !important ;visibility: hidden; margin:4px 0 2px 0 !important; 
+}
+
+
+.dropmenudiv_a a{
+width: auto;display: block;text-indent: 5px;border-top: 0 solid #678b3f;border: 1px solid #ffffff; border-width:0px 1px 1px 1px;
+padding:4px 0px !important;text-decoration: none;color: white; font:bold 13px tahoma;background-color:#1E4101;}
+.dropmenudiv_a a:hover
+{color:#FF821D }
+
+
+.HomeblackHeadelinetext { font:bold 12px arial; color:#000000; line-height:18px; padding-top:3px;}
+.HomeblackHeadelinetext a{ font:bold 12px arial; color:#000000; line-height:18px; text-decoration:none;}
+.HomeblackHeadelinetext a:hover{ font:bold 12px arial; color:#ffffff; line-height:18px;  text-decoration:underline;}
+
+.new-sub-head {font-size:16px; font-family:arial,verdana;color:#81008E;padding:6px 8px 6px 8px;line-height:17px;font-weight:bold;}
+.new-sub-head a{ color:#81008E;text-decoration:none;}
+.new-sub-head a:hover{ color:#000000; text-decoration:none;}
+
+.missUgraytxt { font:normal 11px Tahoma; color:#8D8D8D; line-height:15px; }
+.missUgraytxt a{ text-decoration:none; color:#ffffff; }
+.missUgraytxt a:hover{ text-decoration:underline; color:#ffffff;}
+
+.missvote { font:bold 12px arial; color:#FF821D; line-height:18px; }
+.missvote a{ text-decoration:none; color:#8D8D8D; }
+.missvote a:hover{ text-decoration:underline; color:#8D8D8D;}
+
+.muphotoHeadline { font:normal 25px arial; color:#ffffff; line-height:30px; padding-bottom:5px; }
+.muphotoHeadline a{ text-decoration:none; color:#8D8D8D; }
+.muphotoHeadline a:hover{ text-decoration:underline; color:#8D8D8D;}
+
+.mutopstoryH { font:bold 20px arial; color:#ffffff; line-height:28px; }
+.mutopstoryH a{ text-decoration:none; color:#ffffff; }
+.mutopstoryH a:hover{ text-decoration:underline; color:#ffffff; }
+.mutopstorySH { font:bold 14px Georgia; color:#808080; margin-bottom:5px; }
+
+.mutopstorytxt { font:normal 14px arial; color:#8d8d8d; line-height:20px; }
+.mutopstorytxt a { text-decoration:none; color:#ffffff; }
+.mutopstorytxt a:hover { text-decoration:underline; color:#ffffff; }
+
+.mutopstorytxt ul{ list-style:none; margin:0; padding:5px 0 0 0px}
+.mutopstorytxt ul li{ list-style:none; background:url(http://media2.intoday.in/microsites/fashionweek/images/story_icon.jpg) no-repeat left 3px; $background:url(http://media2.intoday.in/microsites/fashionweek/images/story_icon.jpg) no-repeat left 3px; color:#ffffff; font:normal 11px arial; margin:0px 0 5px 0;_margin:0px 0 2px 0; padding:0 2px 0 12px; line-height:18px;}
+.mutopstorytxt ul li a{ color:#ffffff; text-decoration:none;}
+.mutopstorytxt ul li a:hover{ color:#ffffff; text-decoration:underline;}
+
+.missother { font:bold 12px arial; color:#FF821D; line-height:18px; margin-top:10px; }
+.missother a{ text-decoration:none; color:#FF821D; }
+.missother a:hover{ text-decoration:underline; color:#FF821D;}
+
+.missother ul{ list-style:none; margin:0; padding:5px 0 0 0px}
+.missother ul li{ list-style:none; background:url(http://media2.intoday.in/microsites/fashionweek/images/dot.gif) no-repeat left 8px; $background:url(http://media2.intoday.in/microsites/fashionweek/images/dot.gif) no-repeat left 9px; color:#ffffff; font:normal 12px arial; margin:0px 0 5px 0;_margin:0px 0 2px 0; padding:0 2px 0 12px; line-height:18px;}
+.missother ul li a{ color:#ffffff; text-decoration:none;}
+.missother ul li a:hover{ color:#ffffff; text-decoration:underline;}
+
+
+.moretext{font:normal 11px Tahoma; color:#ffffff; text-align:right; padding-bottom:5px; margin-right:10px;}
+.moretext a{text-decoration:none; color:#ffffff;}
+.moretext a:hover{text-decoration:underline; color:#ffffff;}
+
+
+.mublueH { font:bold 25px arial; color:#0F9ECE; line-height:32px; }
+.mublueH a{ text-decoration:none; color:#0F9ECE; }
+.mublueH a:hover{ text-decoration:underline; color:#0F9ECE; }
+
+.muvideosRH { font:bold 25px arial; color:#D402A3; line-height:32px; }
+.muvideosRH a{ text-decoration:none; color:#D402A3; }
+.muvideosRH a:hover{ text-decoration:underline; color:#D402A3; }
+
+.muvotesRH { font:bold 25px arial; color:#FF821D; line-height:32px; }
+.muvotesRH a{ text-decoration:none; color:#FF821D; }
+.muvotesRH a:hover{ text-decoration:underline; color:#FF821D; }
+
+.lefttab { font-size:11px; font-family:arial,verdana;color:#ffffff;font-weight:bold;}
+.lefttab a{  color:#ffffff; outline:none; text-decoration:none}
+.lefttab a:hover{ color:#ffffff; outline:none; text-decoration:underline}
+
+.tabtxt { font:bold 16px arial; color:#ffffff; line-height:24px;}
+
+.musurfertxt{ font:bold 13px arial; color:#ffffff; line-height:18px;}
+.musurfertxt a{ text-decoration:none; color:#ffffff;}
+.musurfertxt a:hover{ text-decoration:underline; color:#ffffff;}
+
+.musurfertxt{ font:bold 13px arial; color:#ffffff; line-height:18px;}
+.musurfertxt a{ text-decoration:none; color:#ffffff;}
+.musurfertxt a:hover{ text-decoration:underline; color:#ffffff;}
+
+.musurfertxtby { font:bold 12px arial; color:#8D8D8D; line-height:18px;}
+.musurfertxtby1 { font:normal 14px arial; color:#ffffff; }
+
+.muvoteHeadline {font:bold 16px arial; color:#ffffff; line-height:24px;}
+.muvoteHeadline a { text-decoration:none; color:#ffffff;}
+.muvoteHeadline a:hover{ text-decoration:underline; color:#ffffff;}
+
+.muredcolor { font: bold 11px tahoma; color:#D71920; line-height:15px;}
+.muredcolor a{ text-decoration:none; color:#d71920;}
+.muredcolor a:hover{ text-decoration: underline; color:#d71920;}
+
+.muvotepage {font:normal 16px arial; color:#8d8d8d; line-height:24px;}
+.muvotepage a { text-decoration:none; color:#8d8d8d;}
+.muvotepage a:hover{ text-decoration:underline; color:#8d8d8d;}
+
+/*----------------gallery css----------------------------*/
+
+.gallery
+{ float:left; border:0px solid #000; width:678px !important; background-color:#333; }
+
+.gallery .next_prev_links
+{float:right; font:normal 12px arial; color:#fff; margin:0px 0 0 0; }
+.gallery .next_prev_links a
+{color:#fff; margin:0 0px 0 10px; text-transform:uppercase; font:bold 12px arial; line-height:22px; }
+.gallery .next_prev_links a.back
+{background:url(http://media2.intoday.in/microsites/fashionweek/images/back.gif) no-repeat left top; padding:4px 16px 4px 20px; text-decoration:none; }
+.gallery .next_prev_links a.next
+{background:url(http://media2.intoday.in/microsites/fashionweek/images/next.gif) no-repeat left top; padding:4px 20px 4px 16px; text-decoration:none; }
+.gallery .next_prev_links a:hover
+{text-decoration:none; color:#CCCCCC }
+
+.newgallerytext{float:right; width:658px;padding:10px 20px 0 0; font:normal 12px arial; color:#fff; line-height:20px;}
+.newphoto_mu{ text-align:left; font:normal 10px arial; color:#A3A3A3; text-transform:uppercase; margin:25px 0 0 0; }
+.listing_gallery ul{ list-style:none; color:#ffffff; margin:0; padding:10px 0 0 0px}
+.listing_gallery ul li{ list-style:none; color:#ffffff; background:url(http://media2.intoday.in/microsites/fashionweek/images/bullet.gif) no-repeat left 6px;$background:url(http://media2.intoday.in/microsites/fashionweek/images/bullet.gif) no-repeat left 9px;  font:normal 11px arial; margin:0px 0 5px 0;_margin:0px 0 2px 0; padding:0 2px 0 12px;}
+.listing_gallery ul li a{ color:#ffffff; text-decoration:none;}
+.listing_gallery ul li a:hover{ color:#ffffff; text-decoration:underline;}
+
+.muboldgallery{font:bold 22px arial; text-align:left; padding-left:5px; line-height:30px; color:#ffffff;}
+
+
+
+
+
+.gallery .gallery_bottom
+{float:left; width:313px; padding:10px 0; }
+.gallery .gallery_bottom .gallery_rating
+{float:left; font:bold 11px tahoma; color:#fff; }
+
+
+.gallery .gallery_bottom .bottom_right
+{float:right;  color:#fff; text-align:right; font:bold 11px tahoma;  }
+.gallery .gallery_bottom .bottom_right a
+{color:#fff; text-decoration:none; margin:0 10px; }
+.gallery .gallery_bottom .bottom_right a img
+{margin-left:5px; }
+.gallery .gallery_bottom .bottom_right a:hover
+{color:#d71920; }
+
+.bottom_right .ddcolortabs{padding: 0; width:auto; background-color:#333 !important ; float:right; text-align:right; border:0px solid #fff;}
+.bottom_right .ddcolortabs a{float:left;color:white; padding:0 0 0px 3px;text-decoration:none;}
+.bottom_right .ddcolortabsline{clear: both;padding: 0;width: 100%;height: 8px;line-height: 8px;background: black;border-top: 1px solid #fff; }
+
+
+.bottom_right .dropmenudiv_a
+{position:absolute;top: 0;border:0px solid #D1D1D1;font:normal 12px Arial;line-height:18px;z-index:100;background-color: white;width:auto;visibility: hidden; margin:2px 0 0 0 !important; padding:0 !important;}
+.bottom_right .dropmenudiv_a a,
+.bottom_right #dropmenu3.dropmenudiv_a span
+{width:100px;display:block;border: 1px solid #fff; border-width:0 0 1px 1px; text-decoration: none;background-color:#d71920; clear:both; color:#fff; padding:3px 5px; font:bold 9px verdana; text-align:left; margin:0  !important; }
+.bottom_right .dropmenudiv_a img
+{ vertical-align:middle; margin-right:5px; }
+.bottom_right #dropmenu3.dropmenudiv_a span
+{ display:block; width:116px; font:bold 9px verdana; color:#000; padding:3px 0 3px 10px;}
+.bottom_right #dropmenu3.dropmenudiv_a a.sub_sub
+{padding-left:20px; }
+.bottom_right .dropmenudiv_a a:hover{color:#fff !important; font:bold 9px verdana; text-decoration:none; background-color:#000;}
+
+
+.gallerywhitetext{ font:normal 12px arial; color:#Ffffff; line-height:18px;}
+.galleryorangetext{ font:bold 12px arial; color:#FF821D; line-height:18px;}
+.galleryorangetext a{ font:bold 12px arial; color:#FF821D; line-height:18px; text-decoration:none}
+.galleryorangetext a:hover{ font:bold 12px arial; color:#FF821D; line-height:18px; text-decoration:underline;}
+
+/*------------------footerdiv----------------*/
+
+#footerdiv { width:1003px !important; float:left;  margin:0px 0 20px 0; _margin:0px 0 20px 0; $margin:0px 0 20px 0; border-top:0px solid #95999A; }
+#footerdiv #google_ad_footer { margin:0px auto;  border:0px solid #000; text-align:center;}
+#footerdiv #footer_menu {  width:75%; border:1px solid #BDD9E5; border-width:1px 0px; margin:0 auto; padding:0;height:18px; color:#4C4C4C; font:bold 11px Tahoma; text-align:center;}
+#footerdiv #footer_menu a:link,
+#footerdiv #footer_menu a:visited,
+#footerdiv #footer_menu a:hover { font:bold 11px Tahoma; text-align:center; color:#4C4C4C; text-decoration:none; line-height:16px; }
+#footerdiv #footer_menu span { line-height:16px; margin:0 15px;}
+#footerdiv #copyrights
+{float:left; padding:10px 0;  font:normal 11px arial; color:#4B4B4B; text-align:center; width:100%; border:0px solid #000;}
+#footerdiv #copyrights a
+{text-decoration:none; color:#204fa4; }
+
+#footerdiv #copyrights a:hover
+{text-decoration:underline; }
+
+#footerdiv #itgd_group_links
+{border:0px solid #000; margin:0 auto 15px auto; width:99%; font:normal 11px arial; color:#6277A4; line-height:18px; text-align:center; }
+#footerdiv #itgd_group_links b
+{width:auto; font:bold 11px Arial; color:#E31D36; border:0px solid #000; margin:0; line-height:18px; }
+#footerdiv #itgd_group_links strong
+{color:#494949; margin:0 0 0 5px;}
+#footerdiv #itgd_group_links a
+{text-decoration:none; color:#6277A4; margin:0 5px;}
+#footerdiv #itgd_group_links a:hover
+{text-decoration:underline; }
+
+.t-link {font-size:12px;font-family:arial,verdana; color:#ffffff;font-weight:bold;text-align:center;}
+.t-link a{color:#ffffff; text-decoration:none;padding:0px 13px 0px 13px;}
+.t-link a:hover {color:FF821D; text-decoration:underline;}
+
+.face {font-size:11px; font-family:arial,verdana;color:#8D8D8D;padding:0px 5px 0px 0px;line-height:17px;}
+.face a{color:#8D8D8D; text-decoration:none;}
+.face a:hover {color:#ffffff; text-decoration:underline;}
+
+.t-link {font-size:12px;font-family:arial,verdana; color:FF821D;font-weight:bold;text-align:center;}
+
+.p-text {font-size:11px; font-family:arial,verdana;color:#E7B0EC;padding:2px 10px 0px 18px;line-height:17px;}
+.p-text a{color:#E7B0EC; text-decoration:none;}
+.p-text a:hover {color:#ffffff; text-decoration:underline;}
+
+.p-text1 {font-size:11px; font-family:arial,verdana;color:#E7B0EC;text-align:center;line-height:17px;}
+.p-text1 a{color:#E7B0EC; text-decoration:none;}
+.p-text1 a:hover {color:#000000; text-decoration:underline;}
+
+.l-text {font-size:11px; font-family:arial,verdana;color:#ffffff;padding:2px 10px 0px 18px;line-height:17px;}
+
+.rh-text {font-size:12px; font-family:arial,verdana;color:#ffffff;padding:6px 5px 2px 0px;line-height:17px;}
+.rh-sub-text {font-size:11px; font-family:arial,verdana;color:#745878;text-align:right;}
+
+.new-sub-head {font-size:16px; font-family:arial,verdana;color:#81008E;padding:6px 8px 6px 8px;line-height:17px;font-weight:bold;}
+
+.sk-text {font-size:12px; font-family:arial,verdana;color:#ffffff;padding:6px 10px 2px 10px;line-height:17px;font-weight:bold;}
+.sk-text1 {font-size:12px; font-family:arial,verdana;color:#8D8D8D;padding:6px 10px 2px 10px;line-height:17px;font-weight:bold;text-align:right;}
+.sk-text2 {font-size:12px; font-family:arial,verdana;color:#ffffff;padding:6px 10px 2px 10px;line-height:17px;}
+
+.sk-text3 {font-size:11px; font-family:arial,verdana;color:#ffffff;padding:6px 10px 2px 10px;line-height:17px;text-align:right;}
+.sk-text3 a{color:#ffffff; text-decoration:none;}
+.sk-text3 a:hover {color:#E7B0EC; text-decoration:underline;}
+
+
+.poll-text{font-size:12px; font-family:arial,verdana;color:#ffffff;line-height:17px;padding:6px 0px 2px 0px;}
+.poll-text1{font-size:11px; font-family:arial,verdana;color:#ffffff;line-height:17px;padding:2px 0px 2px 0px;}
+
+.tab-poll-text{font-size:12px; font-family:arial,verdana;color:#ffffff;line-height:17px;padding:3px 0px 3px 8px;font-weight:bold;}
+.tab-poll-text1{font-size:12px; font-family:arial,verdana;color:#ffffff;line-height:17px;padding:3px 0px 3px 0px;}
+
+.p-text1_top{font-size:12px; font-weight:bold; font-family:arial,verdana;color:#E7B0EC;text-align:left;line-height:18px;}
+.p-text1_top a{color:#E7B0EC; text-decoration:none;}
+.p-text1_top a:hover {color:#E7B0EC; text-decoration:underline;}
+
+.p-text1_new{font-size:12px; font-family:arial,verdana;color:#E7B0EC;text-align:left;line-height:18px;}
+.p-text1_new a{color:#E7B0EC; text-decoration:none;}
+.p-text1_new a:hover {color:#E7B0EC; text-decoration:underline;}

@@ -1,0 +1,110 @@
+h2 a {color:#022F59}
+.section_title
+{font:bold 22px arial; color:#000; width:15%; padding:0 5px 0 0; white-space:pre; text-transform:uppercase; line-height:25px; }
+#rightpart .article_feedback
+{float:left; border-bottom:3px solid #7E7E7E; width:494px; padding:0 0 20px 0; margin:0 0 20px 0;  }
+#rightpart .article_feedback h2
+{float:left; margin:0; padding:0; font:bold 20px georgia; color:#002F5E; width:494px;}
+#rightpart .article_feedback h2 a
+{color:#002f5e; text-decoration:none; }
+#rightpart .article_feedback h2 a:hover
+{text-decoration:underline }
+#rightpart .article_feedback ul
+{float:left; margin:10px 0 0 0; padding:0 0 0 15px; }
+
+#rightpart .article_feedback ul li
+{float:left; padding:0 0 10px 15px; background:url(http://media2.intoday.in/indiatoday/images/itsite/black_bullet.jpg) no-repeat left 8px; list-style-type:none; font:normal 12px georgia; line-height:18px;  }
+#rightpart .article_feedback ul div.devider
+{height:1px; width:480px; *width:470px; float:left; display:block; margin:10px 0; background:url(http://media2.intoday.in/indiatoday/images/itsite/dotted_hdevider.jpg) repeat-x left bottom;  }
+#rightpart .article_feedback ul li .name_mail
+{float:left; width:100%; font:normal 9px verdana; color:#7E7E7E; margin:7px 0 0 0; }
+#rightpart .article_feedback ul li .name_mail span
+{float:left; }
+#rightpart .article_feedback ul li .name_mail b
+{color:#000000; }
+#rightpart .article_feedback ul li .name_mail a
+{float:right; color:#022F59 }
+#rightpart .article_feedback .read_more
+{float:left; text-align:right; width:480px; *width:470px; font:bold 11px arial; color:#000; margin:10px 0 0 0; }
+#rightpart .article_feedback .read_more a
+{ color:#002F5E; margin:0 5px; padding:0 10px 0 0; background:url(http://media2.intoday.in/indiatoday/images/itsite/dark_blue_arrow.jpg) no-repeat right 4px; }
+#rightpart .article_feedback .read_more a.article
+{font:bold 14px georgia; background:url(http://media2.intoday.in/indiatoday/images/itsite/dark_blue_arrow.jpg) no-repeat right 7px; }
+#article_main_div {
+border:0px solid #000; width:100%; padding:0 0 0px 0; float:left; background:url(http://media2.intoday.in/indiatoday/images/itsite/article_devider.jpg) repeat-y 49% top;
+}
+#article_main_div #left_art_div {
+float:left; width:47%; border:0px solid #000;
+}
+#article_main_div #right_art_div {
+float:right; width:49%; border:0px solid #000;
+}
+
+#article_main_div #left_art_div h1,
+#article_main_div #right_art_div h1,
+#rightpart #latest_issue #latestissues_content h1{
+font-family:arial; font-size:12px; font-weight:bold; color:#164C68; text-transform:uppercase; margin:0; padding:0; border:0px solid#000;
+}
+
+#article_main_div #left_art_div h2,
+#article_main_div #right_art_div h2,
+#rightpart #latest_issue #latestissues_content h2{
+font-family:arial; font-size:16px; color:#022f59; margin:0; padding:0; border:0px solid#000; font-weight:bold;
+}
+#article_main_div #left_art_div h2 a,
+#article_main_div #right_art_div h2 a,
+#rightpart #latest_issue #latestissues_content h2 a{
+font-family:arial; font-size:16px; color:#022f59; text-decoration:none;
+}
+#article_main_div #left_art_div h2 a:hover,
+#article_main_div #right_art_div h2 a:hover,
+#rightpart #latest_issue #latestissues_content h2 a:hover{
+text-decoration:underline;
+}
+#article_main_div #left_art_div h3,
+#article_main_div #right_art_div h3,
+#rightpart #latest_issue #latestissues_content h3{
+font-family:arial; font-size:11px; color:#909090; margin:0; padding:0; border:0px solid#000; font-weight:normal;
+}
+#article_main_div #left_art_div h4,
+#article_main_div #right_art_div h4,
+#rightpart #latest_issue #latestissues_content h4{
+font-family:arial; font-size:12px; color:#000; margin:0; padding:0; border:0px solid#000; font-weight:normal; width:99%;
+}
+
+#article_main_div #left_art_div ul,
+#article_main_div #right_art_div ul,
+#latest_issue #latestissues_content ul,
+#latest_issue #latestissues_content dl
+{margin:0; padding:0; list-style-type:none; float:left; width:100%;}
+#article_main_div #left_art_div h4,
+#article_main_div #left_art_div ul,
+#article_main_div #right_art_div ul
+{margin:0 0 18px 0; }
+
+#latest_issue #latestissues_content dl
+{padding:0 0 10px 0; }
+#article_main_div #left_art_div ul li,
+#article_main_div #right_art_div ul li,
+#latest_issue #latestissues_content ul li,
+#latest_issue #latestissues_content dl dt
+{margin:0; padding:0; list-style-type:none; font:normal 12px arial; line-height:17px; border:0px solid #000;  }
+
+#article_main_div #left_art_div ul li a,
+#article_main_div #right_art_div ul li a,
+#latest_issue #latestissues_content ul li a,
+#latest_issue #latestissues_content dl dt a
+{text-decoration:none; color:#022F59; background:url(http://media2.intoday.in/indiatoday/images/itsite/topstories_bullet.jpg) no-repeat left 7px; padding:0 0 0 10px; margin:0; border:0px solid #000; }
+#latest_issue #latestissues_content dl dt a
+{background:url(http://media2.intoday.in/indiatoday/images/itsite/related_icon_white_bg.jpg) no-repeat left 3px; padding:0 0 0 25px;}
+#article_main_div #left_art_div ul li a:hover,
+#article_main_div #right_art_div ul li a:hover,
+#latest_issue #latestissues_content ul li a:hover,
+#latest_issue #latestissues_content dl dt a:hover
+{text-decoration:underline; }
+.sub_menu
+{float:right; width:auto; font:normal 12px arial; color:#022F59; padding:0; margin:0 5px 30px 90px;}
+.sub_menu a
+{font:normal 12px arial; color:#022F59; text-decoration:none;}
+.sub_menu a:hover
+{text-decoration:underline; }
