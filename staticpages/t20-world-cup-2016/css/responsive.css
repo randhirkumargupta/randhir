@@ -1,0 +1,348 @@
+@media screen and (max-width:1024px){
+/*** HOME PAGE ***/
+	body { background:#f4f4f4}
+	img { /*width:100%*/}
+	.logo { width:73%}
+	.logo h1 img { width:auto}
+	.container { padding-left:15px; padding-right:15px;}
+	.top_social { display:none}
+	.highlights_slide ol.carousel-indicators {right: -6%;  top: 53%;}
+	.intro_middle ul li { margin-bottom:30px;     height: 208px;}
+	.intro_middle ul li:last-child { margin-bottom:0px;}
+	.intro_middle ul li h3 { line-height: 19px; font-size: 13px; padding: 0 7px 0 5px;}
+	.highlights_info { padding-bottom:46px; height:90px; padding-top:10px;}
+	.interviews_area, .news_area { margin-top:30px;}
+	.news_area ul li .news_info h3 { font-size:13px; line-height:18px;}
+	.keyplayer_box h3 { font-size:17px; line-height:24px; padding:10px 15px 33px 7px; height:105px;}
+	.keyplayer_box h2 { top:33%; font-size:19px;}
+	.interviews_box h3 { font-size: 18px;   height: 149px; line-height: 23px; margin-bottom: 15px;}
+	.interviews_box .carousel-control.right, .interviews_box .carousel-control.left { top:38%}
+	.interviews_box .carousel-control.left { right:15.8%}
+	.intro_middle ul li .intro_pic .fa.fa-play-circle { top:55%}
+	.news_area.centric_area { margin-top:0px;}
+	.news_area.cheer_area { margin-top:0px;}
+	.news_area.centric_area ul li { margin-bottom:21px; padding-bottom:19px;}
+	.news_area.centric_area ul li.centric_first .news_pic img { height:118px;}
+	.twitter_right_box { height:inherit; margin-bottom:23px;}
+	
+	
+	.video_area ul li .video_info h3 { font-size:13px; line-height:18px;}
+	.video_area ul li { padding:0 10px 7px 0; margin:0 0 6px}
+	.video_area .fa.fa-play-circle { top:64%}
+	.icc_events_box ul li .event_info h3 { font-size:14px;}
+	.editions_area ul li .editions_info h3 { line-height:18px; font-size:13px;}
+	.editions_area ul li { padding:0 10px 4px 0; margin:0 0 4px}
+	.editions_area ul li.editions_first { padding-bottom:12px}
+	.columns_area ul li { padding:23px 10px 24px 12px}
+	.columns_area ul li .columns_info h3 { font-size:13px; line-height:18px;}
+	.podcasts_box ul { height:256px;}
+	.item .thumb { margin-left:13px;}
+	.right_advertis { margin-bottom:30px; padding:0px; margin-bottom:10px;}
+	.highlights_slide ol.carousel-indicators {right: -10%; top:71%;}
+	.highlights_info h2 {font-size: 22px;}
+	.news_area.centric_area .news_box { height:398px}
+	.news_box { height:inherit}
+	.news_area ul li.centric_first .news_info h3 { padding-top:5px; font-size:15px;}
+	
+	.listing_worldcup ul li .listing_info h3 { font-size:27px;}
+	.ad_cont_right_bottom { padding:20px;}
+	
+	.twitter_right_box iframe{ height:416px !important}
+	.columns_box { height:inherit}
+	.performers_box { height:inherit}
+	.performers_box .perfor_info h3 { font-size:15px;}
+	.performers_box .btn_more { margin-top:20px; padding-bottom:0px;}
+	.news_area ul li { padding:0 10px 15px 0; margin:0 0 15px}
+	.keyplayer_area .keyplayer_box img, .interviews_area .carousel-inner .item img { height:226px;}
+	.customListScroll { height:256px;}
+	.video_area ul li .video_pic img { height:107px}
+	.intro_middle ul li .intro_pic { margin-bottom:3px;}
+	.storycentimg img { width:100%}
+	.news_area {height: 374px;}
+	.news_area ul li .news_pic img { height:66px;}
+	.keyplayer_area .keyplayer_box img, .interviews_area .carousel-inner .item img { height:226px;}
+	.news_box { height: 428px;}
+	.keyplayer_area .keyplayer_box .item img { height:226px }
+	.scorecard_area { margin-bottom:15px;}
+	#main_videolanding_page .videosocial .txt_social{ font-size:12px;}
+	#main_videolanding_page .videosocial a{padding:19px 15px 20px 19px}
+	#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp img{ height:115px;}
+	
+	.like_dislike_area {  width: 308px !important;}
+	#main_photolisting_page .photo_box_main .photo_mn .photo_icn { top: 76px;}
+	
+	.logo_area h1 { font-size:20px;}
+	.logo_area h1 img { width:73%;}
+	
+/***  16 ***/
+	.keyplayer_box .carousel-control.right, .keyplayer_box .carousel-control.left { top:43%}
+	.keyplayer_box .carousel-control.left { right:15.8%}
+	.play_inter_icon { margin:0px; padding:0px; position:absolute; font-size:30px; color:#fff; top:43%; left:10px;}
+	.keyplayer_box .play_inter_icon { top:53%}
+/***  end 16 ***/
+}
+
+
+@media screen and (max-width:900px){
+	.logo_area h1 img { width:auto;}
+	.logo_area h1 { font-size:29px;}
+/*** HOME PAGE ***/
+
+	/*.intro_area .keyplayer_area { margin-top:30px;}*/
+	.intro_area .keyplayer_area { margin-top:0px;}
+	
+	.news_box { height: 394px;}
+	.logo { width:40%; float:left}
+	.intro_middle ul li h3 { font-size:13px;}
+	.intro_middle ul li { margin-bottom:30px;}
+	.timeline_area .swiper-slide h2 a { margin-right:15px;}
+	.highlights_slide ol.carousel-indicators {top: 64%; right: -11%;}
+	.highlights_info h2 { font-size:26px;}
+	.news_area ul li .news_info h3 { font-size:13px; line-height:18px;}
+	.news_area ul li .news_pic { width: 25.3%;}
+	.interviews_box .carousel-control.left, .interviews_box .carousel-control.right { top:47%}
+	.ipad_space { clear:both; margin-bottom:30px;}
+	.ipad_space_none { clear:both; margin-bottom:0px;}
+	.keyplayer_box h3 { font-weight:500; line-height:27px; font-size:16px; height:inherit}
+	.keyplayer_box h2 { top:65%}
+	.video_area ul li { margin-bottom:14px; padding-bottom:14px;}
+	.video_area ul li .video_info h3 { font-size:14px;}
+	.news_area ul li.centric_first { padding-bottom:18px;}
+	.editions_area ul li.editions_bor_none { margin-bottom:0px; padding-bottom:0px; border-bottom:none}
+	.editions_area ul li { padding: 0 10px 8px 0; margin: 0 0 8px;}
+	.editions_area ul li .editions_info h3 { font-size:14px;}
+	.editions_area ul li.editions_first { padding-bottom:9px;}
+	.icc_events_box ul li .event_info h3 { font-size:14px; line-height:20px;}
+	.podcasts_box ul li h3 { font-size:11px;}
+	.columns_area ul li .columns_info h3 { font-size:14px; line-height:18px;}
+	.podcasts_box ul { height:241px;}
+	.outer_footer h3 { font-size:12px;}
+	.highlights_info { padding-bottom:44px;}
+	.interviews_box h3 { font-size:18px; line-height:25px; margin-bottom:0px; height:130px;}
+	.top_social { display:block; margin:45px 0 0 0; padding:0px; float:right}
+	.top_social ul { margin:0px; padding:0px; list-style:none}
+	.top_social ul li{ margin:0px; padding:0px 0px 0 20px; font-size:25px; color:#898989; display:inline-block}
+	.top_social ul li a { color:#898989}
+	.top_social ul li a:hover { color:#353535}
+	.top_social ul li span { padding-top:4px;}
+	.interviews_area { margin-top:30px;}
+	.news_area { margin-top:30px;}
+	.news_area.centric_area ul li {  margin-bottom: 16px; padding-bottom: 16px;}
+	.editions_area ul li { padding:0 10px 22px 0; margin:0 0 22px}
+	
+/*** LISTING WORLDCUP ***/
+	.listing_worldcup ul li .listing_info h3 { font-size:29px;}
+	.news_area.cheer_area .news_box { height:auto}
+	.customListScroll { height:245px;}
+	.twitter_right_box { margin-top:26px;}
+	.twitter_right_box iframe { height:440px !important;}
+	.right_advertis { padding:22px;}
+	.keyplayer_area .keyplayer_box .item img { height:auto}
+	
+	.news_area ul li { padding:0 10px 9px 0; margin:0 0 9px}
+	.keyplayer_box h3 { padding-bottom:0px;}
+.breadcrumb>li{ font-size:13px;}
+#videoplayer{ width:100%; height:350px;}
+.search_area{ display:none;}
+	.like_dislike_area {  width: 350px !important;}
+	#main_photolisting_page .photo_box_main .photo_mn .photo_icn { top: 95px;}
+	
+	
+#right_restpages .keyplayer_area { margin-top:0px;}
+#right_restpages .scorecard_area { margin-bottom:30px;}
+
+/***  16 ***/
+	.keyplayer_box .carousel-control.left, .keyplayer_box .carousel-control.right { top:50%}
+/***  end 16 ***/
+
+}
+
+@media screen and (max-width:767px){
+/*** HOME PAGE ***/
+
+
+.keyplayer_area .keyplayer_box img, .interviews_area .carousel-inner .item img { height:inherit}
+.news_area ul li .news_pic img { height:inherit}
+
+.news_box {
+    height: inherit;
+}
+.news_area.centric_area ul li.centric_first .news_pic img { height:inherit}
+.news_area.centric_area .news_box { height:inherit}
+	.time_head { font-size:16px; padding-top:10px;}
+	.highlights_slide { margin-bottom:30px; position:relative}
+	.fresh_news_area h3 { font-size:14px;}
+	.interviews_area { margin-bottom:30px;}
+	.interviews_box .carousel-control.left, .interviews_box .carousel-control.right { top:71%}
+	.interviews_box .carousel-control.left { right: 8.8%;}
+	.news_area.centric_area { margin-bottom:30px;}
+	.columns_area { margin-bottom:30px;}
+	.podcasts_box ul li h3 { font-size:13px;}
+	.podcasts_box ul { height:250px;}
+	.highlights_info h2 { font-size:20px; line-height:25px;}
+	.highlights_info { padding:15px;}
+	.video_area .fa.fa-play-circle { top:74%}
+	.icc_events_box { padding:3px;}
+	.icc_events_box ul li { border:none; padding:0px; margin-bottom:30px;  margin-right:5.5%; float:left; width: 47%;}
+	.icc_events_box ul li .event_pic { float:none; width:100%; margin:0px 0 10px 0;}
+	.icc_events_box ul li .event_info { margin:0px 15px 0 0; padding:0px; float:none; width:100%}
+	.icc_events_box ul li:nth-child(even) { margin-right:0px;}
+	.logo { width:48%; margin-left:auto; margin-right:auto; float:none}
+	.interviews_box h3 { font-size:16px; line-height:22px; font-weight:600; height:inherit}
+	.footer_mob { background:#000; height:50px;}
+	.intro_area .highlights_slide .carousel-indicators { bottom:inherit; left:inherit; right:15px; top:10px; margin-left:0px; width:100%; text-align:right;}
+	.intro_area .highlights_slide .carousel-indicators li { margin:0px 0 0 3px; padding:0px; width:12px; height:12px; border-radius:50%; background:#fff; border:none; box-shadow: inset -1px 1px 2px #000; font-size:0px; 
+	text-indent:-888;}
+	.intro_area .highlights_slide .carousel-indicators li:hover, .highlights_slide .carousel-indicators li.active { background:#ffec4e}
+	.interviews_area { margin-top:0px;}
+	.news_area { margin-top:0px; height:inherit}
+	.copy_write_area { display:none}
+	.video_area ul li .video_pic img { height:auto}
+	.video_area.intro_video { margin-bottom:0px;padding-bottom:0px;}
+	.twitter_right_box iframe { width:100% !important} 
+
+/*** LISTING WORLDCUP ***/
+	.listing_worldcup ul li .listing_info h3 { font-size:18px; line-height:25px;}
+	#main_videolisting_page .video_box_main .txt_mn_area, #main_photolisting_page .photo_box_main .txt_mn_area { font-size:15px; line-height:18px;}
+	#main_photolisting_page .iteam_box { line-height:17px; font-size:12px;}
+	#main_photolisting_page h1.hdn_h { font-size:20px;}
+	h3.title_upper { font-size:16px;}
+	#main_photolisting_page .crousel_outer { border:none; padding-bottom:0px; background:none; margin-bottom:0px;}
+	#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_hdn {font-size: 18px;}
+	#main_timeline_page .container_timeline .hdn_cont_t h3 { font-size:30px;}
+	#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .txt_cnt_ph {font-size: 23px;}
+	#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .fa { font-size:20px;}
+	.highlights_pic img { height:auto}
+	.highlights_info { height:inherit}
+	.socialMoreSec { margin-top:10px;}
+	
+	#main_photolisting_page .photo_box_main { height:inherit}
+	ad_cont_right_bottom{ padding:0px}
+	
+	.points-tally{ float: left; height: auto; position: relative; padding:10px 0; text-align: left}
+	.points-tally h2{ font-size:15px; line-height:20px}
+	.point-tally-icon{ float: none; position: absolute; right:-4px; top:-2px;}
+	.timeline_area{ margin-bottom:20px}
+	.fresh_news{ margin-bottom:0px;}
+	h2.head{ font-size:18px; line-height:26px;}
+	.pointtally-box-section{ overflow-x: auto;}
+	.schedule_section{border-width: 0;}
+	#schedulesec .mCSB_inside > .mCSB_container{ margin-right:10px;}
+	.schedule_head table thead tr td{ font-size:15px; line-height:20px;}
+	.logo_area h1 { font-size:25px;}
+	.like_dislike_area {    margin: 0 auto;    width: 100% !important;
+	
+}
+
+.news_area.centric_area, .news_area.cheer_area { height:inherit}
+
+.intro_area .keyplayer_area { margin-top:30px;}
+#right_restpages .keyplayer_area { margin-top:30px;}
+	
+/** 16 **/
+	.keyplayer_box .carousel-control.left, .keyplayer_box .carousel-control.right { top:71%}
+	.keyplayer_box .carousel-control.left { right: 8.8%;}
+	.play_inter_icon { margin:0px; padding:0px; position:absolute; font-size:30px; color:#fff; top:62%; left:10px;}
+	.keyplayer_box .play_inter_icon { top:62%}
+/** end 16 **/
+	}
+	
+	
+@media screen and (max-width:640px) {
+	/*.sponserd_outer iframe { height:210px !important}*/
+	}
+	
+@media  screen and  (max-width: 680px)
+{
+	#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp img{ height:115px;}
+	.st_social { margin:0 auto; overflow: hidden; width: auto; float:none}
+	.like_dislike_area{ width:100% !important; margin:0 auto;}
+	.likedisdiv{ height:164px;}
+	#videoplayer{ width:100%; height:300px !important;}
+	#main_videolanding_page .video_player_cont{ width:98%;}
+	.mn_cont_vd{ margin: 0 0 0 5px !important}
+	.search_area{ display:block;}
+	/*** HOME TRAKER ***/
+	.mejs-poster { display:none !important}
+	.mejs-controls { width:100%; left:0px;}
+	.mejs-container .mejs-controls { width:300px;  left:0px !important; }
+	#playing-audio-titile { width:100% !important;  left:15px !important;}
+}
+@media screen and (min-width:481px) and (max-width:639px){
+/*** HOME PAGE ***/
+	.timeline_area .swiper-slide h2 a { padding:2px 13px 5px;}
+	.highlights_info { padding:10px; padding-bottom:20px;}
+	.highlights_info h2 { font-size:16px;}
+	.interviews_box .carousel-control.left, .interviews_box .carousel-control.right {top: 64%;}
+	.interviews_box .carousel-control.left { right:53px}
+	.keyplayer_box h2 { top:53%}
+	.video_area .fa.fa-play-circle { top:67%}
+	#main_photolisting_page .iteam_box { left: 4%;}
+	#main_photolisting_page .left01, #main_photolisting_page .right01 { top:25%; background-size:100% auto; width:8%}
+	#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp img{ height:68px;}
+	
+		/** 16 **/
+	.keyplayer_box .carousel-control.left, .keyplayer_box .carousel-control.right {top: 64%;}
+	.keyplayer_box .carousel-control.left { right:53px}
+		/** end 16 **/
+
+	}
+	
+	
+@media screen and (max-width:480px){
+/*** HOME PAGE ***/
+	.logo h1 img { width:100%}
+	.interviews_box .carousel-control.left, .interviews_box .carousel-control.right { top:44%}
+	.interviews_box .carousel-control.left { right:50px;}
+	.highlights_info h2 {line-height: 21px;  font-size: 15px;}
+	.highlights_info { padding:5px 10px 10px 10px}
+	.keyplayer_box h3 {font-size: 14px;  line-height: 21px; font-weight:400}
+	.columns_area ul li .columns_info h3 { font-size:13px;}
+	.editions_area ul li.editions_first .editions_info h3 { font-size: 14px; line-height: 18px; padding: 10px 0 0;}
+	.video_area ul li .video_info h3 { font-size:13px;}
+	.video_area .fa.fa-play-circle { top:47%}
+	.performers_box .perfor_info h3 { font-size:14px;}
+	.performers_run { font-size:30px;}
+	.video_area ul li .video_info h3, .editions_area ul li .editions_info h3, .icc_events_box ul li .event_info h3 { line-height:18px; font-size:13px;}
+	.news_area ul li .news_pic {width: 27.3%;}
+	.icc_events_box .btn_more { margin-top:25px;}
+	.icc_events_box ul li.border_none { margin-bottom:0px;}
+	.keyplayer_box h2 { font-size:18px; top:36%;}
+	.podcasts_box ul li h3 { line-height:18px;}
+	.logo { width:60%}
+/*** LISTING WORLDCUP ***/
+	.listing_worldcup ul li .listing_info h3 { font-size:13px; line-height:18px; padding-left:5px;}
+	#main_photolisting_page .iteam_box { left: 4%;}
+	#main_photolisting_page .left01, #main_photolisting_page .right01 { top:25%; background-size:100% auto; width:10%}
+	#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .cont_pht { margin-top:10px;}
+	#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .txt_cnt_ph { font-size:13px;}
+	.right_advertis { padding:0px;}
+	#main_timeline_page .container_timeline .cont_tmln ul li .cont_li .cont_li_cnt .img_cnt_wcp img{ height:60px;}
+#videoplayer{ width:100%; height:250px !important;}
+.mn_cont_vd{ margin:0px 0 0 5px !important;}
+#main_videolanding_page .video_player_cont{ margin-left:-10px;}
+.likedisdiv{ height:246px;}
+.like_dislike_area{ float:none;}
+.like_dislike_area .lkedislake-text{ float:none;}
+.likedislike-action{ float:left !important}
+
+/** 15-3-16 **/
+.sponsor_info .sponsor_pnl {width: 93%;}
+/*.sponserd_outer iframe {
+    height: 84px !important;
+}*/
+
+.sponserd_outer_all_1 iframe {
+    height: 84px !important;
+}
+/** 16 **/
+	.keyplayer_box .carousel-control.left, .keyplayer_box .carousel-control.right { top:44%}
+	.keyplayer_box .carousel-control.left { right:50px;}
+	.play_inter_icon { margin:0px; padding:0px; position:absolute; font-size:30px; color:#fff; top:45%; left:10px;}
+	.keyplayer_box .play_inter_icon { top:50%}
+/** END 16 **/
+
+}
+@media screen and (max-width:320px){
+.ad_cont_right_bottom{ padding:20px 0}
+}

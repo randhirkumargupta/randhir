@@ -1,0 +1,76 @@
+body{margin:0;padding:0;visibility:visible; background-color:#000000;}
+
+.assembly_link{font-size:11px;color:#204FA4;font-family:arial,verdana;font-weight:bold;text-align:center;}
+.assembly_link a{color:#204FA4; text-decoration:none;}
+.assembly_link a:hover {color:#D71920; text-decoration:none;}
+.sctionheader{ font:bold 22px arial; color:#c90b1d; text-align:left; margin-left:0px; padding:0;}
+.sctionheader a{ color:#c90b1d; text-decoration:none;}
+.sctionheader a:hover{color:#c90b1d; text-decoration:underline;}
+.hborder_481{ width:481px; height:1px; margin:1px 0; padding:0; float:left; background-color:#c90b1d;}
+
+.hborder_297{ width:297px; height:1px; margin:1px 0; padding:0; float:left; background-color:#c90b1d;}
+.headline{font:bold 22px arial; color:#3774b2; text-align:left; margin-bottom:4px;}
+.headline a{ color:#3774b2; text-decoration:none;}
+.headline a:hover{ color:#3774b2; text-decoration:underline;}
+.hborder_1001{ width:1001px; height:10px; margin:1px 0; padding:0; float:left; border-bottom:1px solid #c90b1d;}
+
+.hborder_367{ width:367px; height:1px; margin:1px 0; padding:0; float:left; background-color:#c90b1d;}
+.kickerText{font:normal 14px arial; color:#3e3e3e; text-align:left; line-height:20px; margin-right:10px;}
+.other_head{font:bold 15px arial; color:#000000; text-align:left; margin:8px 0 4px 0;}
+.multi_headlines{font:bold 12px arial; color:#3774b2; text-align:left; line-height:18px;}
+.multi_headlines a{ color:#3774b2; text-decoration:none;}
+.multi_headlines a:hover{color:#3774b2; text-decoration:underline;}
+.adtext{ font:normal 12px arial; text-align:center; color:#999999;}
+
+.photodiv{ width:208px; height:143px; margin:8px auto; padding:0;}
+.whitetext{ font:bold 12px arial; color:#ffffff; padding:5px 9px; float:left;background-image:url(images/PNG2.png); background-repeat:no-repeat; background-position:bottom left; height:27px; width:190px;}
+.whitetext a{color:#ffffff; text-decoration:none;}
+.whitetext a:hover{color:#ffffff; text-decoration:underline;}
+
+.quotesclass{ width:280px; float:left; background-image:url(images/Quot_Down.gif); background-position:bottom right; background-repeat:no-repeat; padding-right:10px; padding-bottom:10px;}
+.opiniontext{ font:bold 12px arial; color:#454545; text-align:center; line-height:18px;}
+.quotesclass_unquote{ width:230px; float:left; background-image:url(images/Quot_Down.gif); background-position:bottom right; background-repeat:no-repeat; padding-right:10px; padding-bottom:10px;}
+.surfername{ font: bold 15px arial; text-align:right; margin-right:10px;}
+.surferstory{font:bold 13px arial; color:#c90b1d; text-align:right; line-height:18px; margin-right:10px; margin-bottom:4px;}
+.surferstory a{color:#3774b2; text-decoration:none;}
+.surferstory a:hover{color:#3774b2; text-decoration:underline;}
+.Red_Line{border-bottom:solid 1px #c90b1d; width:297px ; margin-top:3px}
+.sub_section{width:292px; margin-top:15px; margin-left:5px; border-bottom:1px dotted #000000;float:left;}
+.sub_section_middle{width:329px; margin-top:15px; margin-left:5px; border-bottom:1px dotted #000000;float:left;}
+
+.Photo{width:98px; height:98px; float:left}
+.Text_Main{width:182px; float:right}
+.Bold_text{font-family:Arial; font-size:12px; font-weight:bold; color:#3774b2}
+.Ragular_text{font-family:Arial; font-size:12px; line-height:18px; color:#454545}
+.Clear{ clear:both}
+
+#nav {float:left; margin-top:3px; border-bottom:5px solid #133558;}
+.glossymenu{position: relative;padding: 0 0 0 0px;margin: 0 auto 0 auto;height: 39px;list-style: none; width:1003px;}
+.glossymenu li{	float:left;}
+.glossymenu li a{float: left;display: block;color:#000000;	text-decoration: none;font:normal 16px arial;padding:0 0 0 7px; height: 40px; line-height: 39px;	text-align: center;	cursor: pointer;  margin-right:30px; _margin-right:15px;}
+.glossymenu li a b{	float: left;display: block;	padding: 0 13px 0 8px;}
+.glossymenu li.current a, .glossymenu li a:hover{color: #ffffff;background: url(images/nav-left.png) no-repeat; background-position: left;}
+.glossymenu li.current a b, .glossymenu li a:hover b{color: #ffffff;background: url(images/nav-rite.png) no-repeat right 1px;}
+#comedown {	padding:0px 0;background:#FFFFFF; border-bottom:1px solid #2979BE; margin-bottom:4px; }
+.comedown {	width:430px;float:left;	padding-left:10px;}
+.comedown span {width:41px;height:29px;float:left;text-align:center;margin-left:2px;color:#000000;}
+.comedown span .cnumber {font-size:30px;height:30px;margin-top:-3px;}
+.comedown span .ctext{font-size:12px;font-family:Arial, Helvetica, sans-serif;}
+#share_tool {width:560px;float:right;}
+.like {	margin-top: 0px; margin-right: 10px;width:250px;float:left;}
+.tweet {float:left;	width:70px;}
+.buzz {	float:left;	width:94px;}
+.fb_share {	float:right;width:101px;}
+
+#search {width: 200px;height:31px;padding-top:10px;font-family: "Tahoma",Arial, Helvetica, sans-serif;font-size:12px;text-align:left;float:left;}
+
+.mod_search_bg {background:url(images/search-box.gif) no-repeat;height:19px;width:95px;	float:left;	padding:2px 4px 0; font:normal 12px Tahoma;}
+#mod_search_searchword{	border:none;*border:0;width:95px;padding:0;}
+.search-go-btn {float:left;	}
+
+.head_bottom {	float:right;width:200px;}
+#footerdiv{ border-top-color:#000000; border-top-style:solid; border-top-width:1px; float: left; margin: 20px 0 5px 0; width: 1003px! important; _margin: 20px 0 5px 0;}
+#footerdiv #google_ad_footer{ margin: 20px auto; text-align: center }
+
+
+
