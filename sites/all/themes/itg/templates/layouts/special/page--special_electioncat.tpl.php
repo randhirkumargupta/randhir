@@ -135,11 +135,17 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   </div>    
                 <?php endif; ?>
                 <?php
+                $story_title = get_first_story_title_by_tid(arg(2));
+                $story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
+                if(!empty($story_title)){
+					$content_link = $base_url  . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
+					$story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
+				}
                 $display_title = "";
-                if ($widget_data['itg-block-4']['block_title'] == "") {
+                if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
                   $display_title = 'style="display:none"';
                 }
-                echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..") . '</span></h1> <div class="social-share">
+                echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
                         <li><a title="share on facebook" class="facebook def-cur-pointer" onclick="fbpop(' . "'" . $actual_link . "'" . ', ' . "'" . $fb_share_title . "'" . ', ' . "'" . $share_desc . "'" . ', ' . "'" . $src . "'" . ')"><i class="fa fa-facebook"></i></a></li>

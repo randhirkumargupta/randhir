@@ -952,3 +952,20 @@ function get_category_parent_one_level($tid) {
   $itg_result = $itg_query->execute()->fetchAll();
   return $itg_result;
 }
+
+/**
+ * get first story title from section or category
+ * {@inheritdoc}
+ */
+function get_first_story_title_by_tid($tid) {
+  $query = db_select('node', 'n');
+  $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->condition('ti.tid', $tid, '=');
+  $query->fields('n', array('nid', 'title'));
+  $query->condition('n.status', 1);
+  $query->condition('n.type', 'story', '=');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 1);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
