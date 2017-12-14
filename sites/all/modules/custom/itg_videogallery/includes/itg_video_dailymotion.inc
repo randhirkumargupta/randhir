@@ -704,13 +704,14 @@ function itg_videogallery_dailymotion_video_play() {
  */
 function itg_videogallery_video_bitrate() {
   $api = itg_videogallery_dailymotion_api();
-  $totime = strtotime('-1 days', time());
+  $totime = strtotime('-5 days', time());
   $query = db_select('dailymotion_response_details', 'drd');
   $query->fields('drd', array('video_id', 'encoding_progress', 'name', 'video_duration'));
   $query->condition('encoding_progress', '100', '=');
   $query->condition('video_type', 'DM', '=');
   $query->condition('upload_time', $totime, '>=');
   $result = $query->execute()->fetchall();
+  p($result);
   $bitrates_info = itg_videogallery_url_with_bitates();
   foreach ($result as $ke => $vid) {
     itg_videogallery_update_embedcode_url($vid->video_id);
