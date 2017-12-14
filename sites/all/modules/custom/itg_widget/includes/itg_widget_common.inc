@@ -794,6 +794,10 @@ function itg_widget_theme() {
         'podcast_banner' => array(
             'template' => 'templates/podcast-banner',
         ),
+       'itg_widget_live_tv' => array(
+            'template' => 'templates/itg-widget-live-tv',
+        ),
+      
     );
     return $themes;
 }
@@ -2163,6 +2167,7 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
  */
 function itg_widget_block_view_alter(&$data, $block) {
     $item = menu_get_item();
+    $tid_of_template = "";
     $flag_occupation = $story_category = $occupation = array();
     $ipl_category = array();
     $arg = arg();
@@ -2198,7 +2203,6 @@ function itg_widget_block_view_alter(&$data, $block) {
             }
         }
     }
-
     if ($block->delta == 'related_photo_block') {
         if (isset($_GET['amp'])) {
             $data['content'] = array();
@@ -2215,12 +2219,28 @@ function itg_widget_block_view_alter(&$data, $block) {
         $arraynid = array();
         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
         $itg_widgets_sports_check = variable_get('itg_widgets_sports');
+       
+        if (isset($_GET['section']) && !empty($_GET['section'])) {
+          $tid_of_template = $_GET['section'];
+        }
+        if (isset($_GET['section_name']) && !empty($_GET['section_name'])) {
+          $tid_of_template = $_GET['section_name'];
+        }
+        if (is_numeric($arg[2]) && !empty($arg[2]) && $arg[0] == 'taxonomy') {
+          $tid_of_template = $arg[2];
+        }
+        $tids_of_live_score  = itg_widget_get_tid_by_block('live_score');
         
-        if ((isset($arg[1]) && (in_array($arg[1], $arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)))) {          
+        if ((isset($arg[1]) && (in_array($arg[1], $arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category) || in_array($tid_of_template , $tids_of_live_score)))) {          
             drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
-
           });', array('type' => 'inline', 'scope' => 'footer'));
+          if (in_array($tid_of_template , $tids_of_live_score)) 
+            {
+              drupal_add_js('jQuery(document).ready(function() {                  
+                        jQuery("#block-itg-widget-live-score").find(".block-title").remove();
+            });', array('type' => 'inline', 'scope' => 'footer'));
+            }
             
            if ((isset($item['page_arguments'][0]->type) && ($item['page_arguments'][0]->type == 'sport_static_page' && empty($itg_widgets_sports_check)))) {
              $data['content'] = array();             
@@ -2242,6 +2262,22 @@ function itg_widget_block_view_alter(&$data, $block) {
         }
     }
 }
+
+/**
+ * function for get tid by block name in layout manager.
+ * @param string $block_name  for widget name.
+ * 
+ */
+   function itg_widget_get_tid_by_block($block_name) {
+      $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+      $itg_query->fields('layout_tpl', array('section_name'));
+      $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');
+      $itg_query->isNotNull('section_name')->condition('layout_manager.widget_name', $block_name);
+      $itg_query->condition('layout_tpl.section_name', ' ', "!=");
+      $result = $itg_query->execute()->fetchAllAssoc('section_name');
+      $result = array_keys($result);
+      return $result;
+  }
 
 /**
  * Callback function for widget title autocomplete.

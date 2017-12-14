@@ -65,6 +65,14 @@ function daily_motion_video_dashboard($form, &$form_state) {
     ),
     '#default_value' => isset($_GET['video_id']) ? $_GET['video_id'] : '',
   );
+  $form['fieldset']['video_art_id'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Video Article id',
+    '#attributes' => array(
+      'placeholder' => t('Video Article Id'),
+    ),
+    '#default_value' => isset($_GET['video_art_id']) ? $_GET['video_art_id'] : '',
+  );
 
   $form['fieldset']['filtertype'] = array(
     '#type' => 'select',
@@ -125,6 +133,7 @@ function daily_motion_video_dashboard_validate($form, &$form_state, $form_id) {
 function daily_motion_video_dashboard_submit($form, &$form_state) {
 
   $video_id = $form_state['values']['video_id'];
+  $video_art_id = $form_state['values']['video_art_id'];
   $filtertype = $form_state['values']['filtertype'];
   $video_name = $form_state['values']['video_name'];
   $video_title = $form_state['values']['video_title'];
@@ -139,6 +148,7 @@ function daily_motion_video_dashboard_submit($form, &$form_state) {
       'video_source' => $video_source,
       'filtertype' => $filtertype,
       'video_id' => $video_id,
+      'video_art_id' => $video_art_id,
       'from_time' => $fromtime,
       'to_time' => $totime,
   )));
@@ -152,6 +162,7 @@ function daily_motion_video_dashboard_rows() {
   drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_videogallery_dashbord.js', array('weight' => 1, 'scope' => 'footer'));
   $filtertype = isset($_GET['filtertype']) ? $_GET['filtertype'] : '';
   $video_id = isset($_GET['video_id']) ? $_GET['video_id'] : '';
+  $video_art_id = isset($_GET['video_art_id']) ? $_GET['video_art_id'] : '';
   $video_title = isset($_GET['video_title']) ? $_GET['video_title'] : '';
   $video_source = isset($_GET['video_source']) ? $_GET['video_source'] : '';
   $video_name = isset($_GET['video_name']) ? $_GET['video_name'] : '';
@@ -170,6 +181,8 @@ function daily_motion_video_dashboard_rows() {
     t('Channel'),
     t('Uploaded Time'),
     t('Video Id'),
+    t('Video Article ID'),
+    t('Duration'),
     t('Video Status'),
     t('Status'),
     t('Action'),
@@ -183,6 +196,10 @@ function daily_motion_video_dashboard_rows() {
   if (isset($video_id) && !empty($video_id)) {
     $query->condition('n.video_id', $video_id, '=');
   }
+  if (isset($video_art_id) && !empty($video_art_id)) {
+   $query->join('itg_solr_video_info', 'isvi', 'isvi.solr_video_id = n.video_id');
+   $query->condition('isvi.nid', $video_art_id, '=');
+   }
   if (isset($video_name) && !empty($video_name)) {
 
     $query->condition('n.name', '%' . db_like($video_name) . '%', 'LIKE');
@@ -220,8 +237,11 @@ function daily_motion_video_dashboard_rows() {
     if ($record->dailymotion_published == 1) {
       $status_flag = '<span class="used-video">Used</span>';
       $delete_link = '';
-    }
+       $nid = itg_videogallery_get_nid_by_video_id( $record->video_id);
+     }
     else {
+      $nid = "";
+      $record->nid = "";
       if ($record->encoding_progress == '100') {
         $status_flag = '<span class="ready-to-use-video">Ready To Use</span>';
         if (strtoupper($record->type) != 'LOCAL') {
@@ -275,7 +295,6 @@ function daily_motion_video_dashboard_rows() {
     else {
       $video_status = 'Unpublished';
     }
-
     $page_no = $_GET['page'];
     $rows[] = array(
       $sn++,
@@ -284,6 +303,8 @@ function daily_motion_video_dashboard_rows() {
       strtoupper($record->type),
       date('d-M-Y H:i:s', $record->upload_time),
       $record->video_id,
+      $nid,
+      $record->video_duration,
       $video_status,
       $status_flag,
       $delete_link
@@ -294,6 +315,19 @@ function daily_motion_video_dashboard_rows() {
   $html .= theme('pager');
   return $html;
 }
+/**
+ * function get node id by fid
+ */
+function itg_videogallery_get_nid_by_video_id($vid) {
+  $query = db_select('itg_solr_video_info', 'drd');
+  $query->fields('drd', array('nid'));
+  $query->condition('solr_video_id', $vid, '=');
+  $query->condition('content_type', 'video_gallery', '=');
+  $result = $query->execute()->fetchField();
+  return $result;
+}
+
+
 
 /*
  * This callback use for delete video from local and daily motion

@@ -27,6 +27,7 @@ function itg_videogallery_solr_video_insert_in_for_fid() {
       $file = file_load($fid);
       file_usage_add($file, 'itg_videogallery', 'file', $file->fid);
       $is_used = 0;
+     
       if (isset($expode_video_info[7]) && !empty($expode_video_info[7])) {
         $is_used = 1;
       }
@@ -112,7 +113,6 @@ function itg_videogallery_s3_file_to_dm() {
 function itg_videogallery_dm_to_s3() {
   module_load_include('inc', 'itg_videogallery', 'includes/itg_videogallery_aws_s3');
   global $user;
-
   $query = db_select('itg_video_bitrates_data', 'ivbd');
   $query->fields('ivbd');
   $query->condition('is_download', '0', '=');

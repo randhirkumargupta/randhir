@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript" src="lib/jquery-1.2.3.pack.js"></script>
+<script type="text/javascript" src="lib/jquery.jcarousel.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="skins/tango/skin.css" />
+
+<style type="text/css">
+body { margin:0; padding:0;}
+ul { margin:0; padding:0;}
+/**
+ * This <div> element is wrapped by jCarousel around the list
+ * and has the classname "jcarousel-container".
+ */
+.arrowimg {background:url(images/Sex-Survey-Sprites.png) no-repeat scroll 0 0 transparent;}
+.arrowimg {
+    background-position: -10px -144px;
+    float: left;
+    height: 50px;
+    position: absolute;
+    top: -8px;
+    width: 40px;z-index: 9;
+}
+.posrel {position:relative}
+.headline {margin-left:40px; color:#ee1619; font:normal 16px/20px arial black;}
+.headline a {color:#ee1619; text-decoration:none;}
+.headline a:hover {text-decoration:underline;}
+.headbg {background:#EDEBEC; padding:2px 4px;}
+.topmarg {margin-top:8px;}
+.jcarousel-container {
+    position: relative;
+}
+
+.jcarousel-clip {
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.jcarousel-list {
+    z-index: 1;
+    overflow: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel-skin-tango .jcarousel-item {
+    height: 125px;
+    width: 99px;
+}
+
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+    padding: 10px 35px;
+    width: 450px;
+}
+.jcarousel-skin-tango .jcarousel-clip-horizontal {
+ 	height: 125px;
+    width: 450px;
+}
+
+
+.jcarousel-skin-tango .jcarousel-next-horizontal {
+	top: 40px;
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal {top:40px; left:0;}
+
+.jcarousel-list li,
+.jcarousel-item {
+    float: left;
+    list-style: none;
+    /* We set the width/height explicitly. No width/height causes infinite loops. */
+    width: 99px;
+	height:130px;
+	float:left;
+	text-align:center;
+}
+
+.jcarousel-skin-tango .jcarousel-item-horizontal  {
+    margin-right: 19px;
+}
+
+/**
+ * The buttons are added dynamically by jCarousel before
+ * the <ul> list (inside the <div> described above) and
+ * have the classnames "jcarousel-next" and "jcarousel-prev".
+ */
+.jcarousel-next {
+    z-index: 3;
+    display: none;
+}
+
+.jcarousel-prev {
+    z-index: 3;
+    display: none;
+}
+
+.indepth.last{margin-right:0;}
+.indepth img{border:5px solid #BDBDBD;}
+.indepth .txt{font:12px arial;}
+.indepth .txt a{text-decoration:none; color:#000000; font:12px arial;}
+.indepth .txt a:hover{text-decoration:underline;}
+</style>
+
+<script type="text/javascript">
+function mycarousel_initCallback(carousel) {
+    jQuery('.jcarousel-control a').bind('click', function() {
+        carousel.scroll(jQuery.jcarousel.intval(jQuery(this).text()));
+        return false;
+    });
+
+    jQuery('.jcarousel-scroll select').bind('change', function() {
+        carousel.options.scroll = jQuery.jcarousel.intval(this.options[this.selectedIndex].value);
+        return false;
+    });
+
+    jQuery('#mycarousel-next').bind('click', function() {
+        carousel.next();
+        return false;
+    });
+
+    jQuery('#mycarousel-prev').bind('click', function() {
+        carousel.prev();
+        return false;
+    });
+};
+
+jQuery(document).ready(function() {
+    jQuery("#mycarousel").jcarousel({
+        scroll: 1,
+        initCallback: mycarousel_initCallback,
+        buttonNextHTML: null,
+        buttonPrevHTML: null
+    });
+});
+
+</script>
+</head>
+<body>
+<div class="topmarg">
+<div class="headbg">
+  <div class="posrel"><span class="arrowimg"></span><span class="headline">Sex Sutra</span></div>
+</div>
+<div id="wrap" style="background:#EDEBEC; padding:15px 20px;">
+	<div id="mycarousel" class="jcarousel-skin-tango">
+    	<ul >
+            <li style="background-image:none">
+                <div class="indepth">
+                    <a href="http://indiatoday.intoday.in/story/sex-survey-2011-sex-relationship-marriage-bed-sexual-deviance/1/161390.html" target="_blank"><img src="images/in-the-boredroom.jpg"></a>
+                    <div class="txt"><a href="http://indiatoday.intoday.in/story/sex-survey-2011-sex-relationship-marriage-bed-sexual-deviance/1/161390.html" target="_blank">In the boredroom 
+            </a></div>
+                </div>
+            </li>
+            <li style="background-image:none">
+                <div class="indepth">
+                    <a href="http://indiatoday.intoday.in/story/sex-survey-2011-sex-condom-kama-sutra-relationship-safe-sex/1/161398.html" target="_blank"><img src="images/the-sex-second.jpg"></a>
+                    <div class="txt"><a href="http://indiatoday.intoday.in/story/sex-survey-2011-sex-condom-kama-sutra-relationship-safe-sex/1/161398.html" target="_blank">The second sex</a></div>
+                </div>
+            </li>
+            <li style="background-image:none">
+                <div class="indepth">
+                    <a href="http://indiatoday.intoday.in/story/sexual-identity-sex-life-one-night-stand/1/161406.html" target="_blank"><img src="images/young-and-kinky.jpg"></a>
+                    <div class="txt"><a href="http://indiatoday.intoday.in/story/sexual-identity-sex-life-one-night-stand/1/161406.html" target="_blank">Young and kinky</a></div>
+                </div>
+            </li>
+            <li style="background-image:none">
+                <div class="indepth">
+                    <a href="http://indiatoday.intoday.in/story/sexuality-moral-panics-sex-education-sex-before-marriage/1/161393.html" target="_blank"><img src="images/parent-trap.jpg"></a>
+                    <div class="txt"><a href="http://indiatoday.intoday.in/story/sexuality-moral-panics-sex-education-sex-before-marriage/1/161393.html" target="_blank">Parent trap</a></div>
+                </div>
+            </li>
+            <li style="background-image:none">
+                <div class="indepth">
+                    <a href="http://indiatoday.intoday.in/story/savita-bhabhi-safe-sex-aspects-of-sex/1/161397.html" target="_blank"><img src="images/savita_bhabhi_79.jpg"></a>
+                    <div class="txt"><a href="http://indiatoday.intoday.in/story/savita-bhabhi-safe-sex-aspects-of-sex/1/161397.html" target="_blank">Savita Bhabhi in all of us</a></div>
+                </div>
+            </li>
+            <li style="background-image:none">
+                <div class="indepth">
+                    <a href="http://indiatoday.intoday.in/story/sex-in-indian-cinema-satyam-shivam-sundaram-utsav-aastha/1/161405.html" target="_blank"><img src="images/Vidya_79.jpg"></a>
+                    <div class="txt"><a href="http://indiatoday.intoday.in/story/sex-in-indian-cinema-satyam-shivam-sundaram-utsav-aastha/1/161405.html" target="_blank">Sex in Indian cinema</a></div>
+                </div>
+            </li>
+    	</ul>
+	</div>
+</div></div>
+</body>
+</html>

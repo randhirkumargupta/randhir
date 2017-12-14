@@ -401,6 +401,7 @@ function itg_newsletter_form_after_build($form , &$form_state) {
  * @param object $view
  */
 function itg_newsletter_views_pre_render(&$view) {
+  
   // Add "Create Newsletter" button on listing page of Newsletter
   if ($view->name == "manage_newsletter") {
     $header_content_newsletter = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
@@ -413,6 +414,11 @@ function itg_newsletter_views_pre_render(&$view) {
     $header_content_newsletter = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
     $header_content_newsletter .= '<a href="./node/add/newsletter-templates">Create Newsletter Template</a>';
     $view->attachment_before = $header_content_newsletter;
+  }
+  
+  if ($view->name == "users_newsletter_subscribers") {
+    $header_newsletter_subscribers = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';    
+    $view->attachment_before = $header_newsletter_subscribers;
   }
 }
 

@@ -87,9 +87,9 @@ if ($theme != 'itgadmin') {
                       </div>      
                   </div>    
                 <?php endif; ?>
-                <?php if (isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) { ?>
+                <?php if ((isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) || ($theme == 'itgadmin')) { ?>
                   <div class="home-election">
-                      <div class="widget-help-text">Template widgets ( <strong>Home Page Election</strong> )</div>
+                      <div class="widget-help-text"><?php print t('Template widgets'); ?> ( <strong><?php print t('Home Page Election'); ?></strong> )</div>
                       <div class="itg-widget">
                           <div class="droppable <?php print $gray_bg_layout; ?>">
                               <div class="widget-wrapper <?php print $widget_data['itg-block-0']['widget_name']; ?>">
@@ -98,9 +98,9 @@ if ($theme != 'itgadmin') {
                                       if (isset($widget_data['itg-block-0']['widget'])) {
                                         print $widget_data['itg-block-0']['widget'];
                                       }
-                                      else {
-                                        print '<div class="widget-placeholder"><span>Home Election</span></div>';
-                                      }
+                                      else { ?>
+                                        <div class="widget-placeholder"><span><?php print t('Home Election'); ?></span></div>
+                                     <?php }
                                       ?>
                                   </div>
                               </div>
