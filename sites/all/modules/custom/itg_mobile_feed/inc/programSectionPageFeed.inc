@@ -6,6 +6,7 @@
 
 /**
  * main function for generate programSectionPageFeed xml feed
+ *
  * @return string $output
  */
 function programSectionPageFeed() {
@@ -74,12 +75,12 @@ function programSectionPageFeed() {
   }
 
   if ($output) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+    $term_feed_path = "public://xml_it/videos";
     $file_name = "programmes.xml";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 

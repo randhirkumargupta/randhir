@@ -6,6 +6,7 @@
 
 /**
  * main function for generate rootCategoryContentPageFeed xml feed
+ *
  * @return string $output
  */
 function rootCategoryContentPageFeed() {
@@ -21,7 +22,7 @@ function rootCategoryContentPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+  $term_feed_path = "public://xml_it/stories";
   $return_flag = "";
   foreach ($section_list as $key => $value) {
 
@@ -49,7 +50,6 @@ function rootCategoryContentPageFeed() {
         $output .= getMobileFeedXmlFooter();
         // xml file writing..
         if ($output) {
-
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
@@ -57,13 +57,14 @@ function rootCategoryContentPageFeed() {
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
  * function for generate storyCategoryPage xml feed
  * @pram int $tid
  * @pram string $term_name
+ *
  * @return array $data
  */
 function generateLeftMainCategoryPage($tid, $term_name) {
@@ -134,7 +135,7 @@ function generateLeftMainCategoryPage($tid, $term_name) {
 
         $listcount++;
 
-        $title = $resvalue['title'];
+        $title = html_entity_decode($resvalue['title']);
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $created = $resvalue['created'];
