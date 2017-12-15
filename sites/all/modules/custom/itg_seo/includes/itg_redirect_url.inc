@@ -214,6 +214,12 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $matchid = $_GET['matchid'];
       $newmatchurl = $base_url.'/scorecard/matchcenter/'.$matchid;
       drupal_goto($newmatchurl);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'embed')) && !empty ($arg[1])) {  // Pattern embed/@#trfg
+      $videoembed = $arg[1];
+      $newmatchurl = getNewVideoEmbedUrl($videoembed);
+      if ($newmatchurl) {
+        drupal_goto($newmatchurl);
+      }
   } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
@@ -286,4 +292,41 @@ function get_new_seccat_by_mig_id($sourceid, $table) {
   $query->fields('scc', array('destid1'));  
   $query->condition('sourceid1', $sourceid);
   return $query->execute()->fetchField();
+}
+
+/*
+ * Used this function to get Video id of Migrated content.
+ * @param String $string
+ * @return int
+ */
+function getdecryptForEmbed($string){
+	$decrypter = gmp_strval(gmp_init($string, 36));
+	$decrypter = gmp_shiftr_update($decrypter, 5);
+	$decrypter = gmp_export($decrypter);
+	return $decrypter;
+}
+
+function gmp_shiftr_update($x,$n) { // shift right 
+  return(gmp_div($x,gmp_pow(2,$n))); 
+}
+
+/*
+ * Fucnction to get new Embed url from old embed code.
+ * @param String $videoembed
+ * return String
+ */
+function getNewVideoEmbedUrl($videoembed) {
+  global $base_url;
+  $newurl = '';
+  $videoid = getdecryptForEmbed($videoembed);
+  $newvideoid = get_new_seccat_by_mig_id($videoid, 'migrate_map_itgvideogallery');
+  if ($newvideoid) {
+    $video_decode = base64_encode($newvideoid);
+    $video_node = node_load($newvideoid);
+    $tid = $video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
+    $term = taxonomy_term_load($tid);
+    $primary_category_name = strtolower(itg_common_custompath_insert_val($term->name));
+    $newurl = $base_url.'/video/' . $primary_category_name.'/embed/'.$video_decode;
+  }
+  return $newurl;
 }
