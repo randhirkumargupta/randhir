@@ -135,7 +135,8 @@ function generateStoryDeatilList($id) {
     $tech_photo_gallery = $node->field_technology_photogallery['und'][0]['target_id'];
     $caption = "";
     $byline = "";
-    $caption = file_create_url($node->field_story_extra_large_image['und'][0]['title']);
+    $byline = $node->field_story_extra_large_image['und'][0]['alt'];
+    $caption = $node->field_story_extra_large_image['und'][0]['title'];
 
     //data array building
 
