@@ -57,7 +57,7 @@ global $base_url;
           }
           ?>
         </h3>
-        <?php if (strtolower($row['type']) == 'story'): ?>
+        <?php /*if (strtolower($row['type']) == 'story'): ?>
           <p><?php print __html_output_with_tags($row['field_story_kicker_text']); ?></p>
         <?php elseif ($row['type'] == 'photogallery'): ?>
           <p><?php print __html_output_with_tags($row['field_gallery_kicer']); ?></p>
@@ -66,7 +66,9 @@ global $base_url;
         <?php endif; ?>
        <?php if (!empty($row['field_video_kicker'])) {
        // print '<p>' .__html_output_with_tags($row['field_video_kicker'])  . '</p>';
-      }?>
+      } */
+      
+      ?>
 
       </div>
     </div>

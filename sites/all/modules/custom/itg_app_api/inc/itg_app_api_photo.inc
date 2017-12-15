@@ -7,6 +7,7 @@
 /**
  * main function for generate photoCategoryPage array
  * @pram int $tid, $pageno
+ *
  * @return array
  */
 function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
@@ -15,6 +16,7 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
   $data_array = array();
   $photo_list_array = array();
   $updated_datetime = "";
+
   $term = taxonomy_term_load($tid);
   $term_name = $term->name;
   if (!$tid) {
@@ -22,6 +24,7 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
   }
   // list array building
   $data = generatePhotoCategoryList($tid, $pageno);
+
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
     $output_array['status_message'] = "";
@@ -30,9 +33,11 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
+
   //data array building
   $datacount = $data['lcount'];
   $data_up_time = $data['updated_datetime'];
+
   $data_array['id'] = "$tid";
   $data_array['title'] = "$term_name";
   $data_array['layout_id'] = "0";
@@ -40,14 +45,17 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
   $data_array['photo_display_count'] = "10";
   $data_array['photo_pagination_cap'] = "50";
   $data_array['updated_datetime'] = "$data_up_time";
+
   $data_array['photo'] = $data['data'];
   $output_array['data'] = $data_array;
+
   return $output_array;
 }
 
 /**
  * function for generate photoCategoryPage xml feed
  * @pram int $tid, $pageno
+ *
  * @return array
  */
 function generatePhotoCategoryList($tid, $pageno) {
@@ -62,17 +70,17 @@ function generatePhotoCategoryList($tid, $pageno) {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 10;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+
   $order_by = 'ASC';
   $type = "photogallery";
   $photo_list_array = array();
   $loop_count = 0; {
     $listcount = 0;
+
     // code vid=14  start
     if ($tid > 0) {
       $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
@@ -86,8 +94,7 @@ function generatePhotoCategoryList($tid, $pageno) {
         $tid_list[] = $value->tid;
       }
     }
-    // code vid=14  end
-    // select node belong from current term id or child term id
+
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
@@ -104,32 +111,37 @@ function generatePhotoCategoryList($tid, $pageno) {
     $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
     $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-    //field_data_field_primary_category
     $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
     $query->fields('mi_file', array('uri'));
     $query->fields('si_file', array('uri'));
     $query->fields('esi_file', array('uri'));
-    //field_story_extra_large_image
     $query->fields('li', array('field_story_large_image_fid'));
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('eli', array('field_story_extra_large_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
+
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fpc', array('field_primary_category_value'));
-    //end
+
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
+    $d1 = date('Y-m-d', strtotime("-90 days"));
+    $d2 = date(strtotime($d1));
+    $query->condition('n.created', $d2, '>=');
     //change in query
     $query->condition('n.uid', $filter_user_data, 'NOT IN');
     $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
     foreach ($result as $reskey => $resvalue) {
       // node feed tag
       $listcount++;
@@ -140,6 +152,7 @@ function generatePhotoCategoryList($tid, $pageno) {
       $changed = $resvalue['changed'];
       $comment_cont = getCommentsCount($nid);
       $node = node_load($nid);
+
       $galleryimg = $node->field_gallery_image['und'];
       $toptlapics = count($galleryimg);
       $field_gallery_image = $resvalue['field_gallery_image'];
@@ -151,11 +164,14 @@ function generatePhotoCategoryList($tid, $pageno) {
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
       $file_extra_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
+
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
       $field_primary_category_value = $resvalue['field_primary_category_value'];
+
       $term = taxonomy_term_load($tid);
       $term_name = $term->name;
+
       // create date formating
       $firebase_url = get_node_firebase_weburl($nid);
       $create_date = date("Y-m-d H:i:s", $created);
@@ -199,15 +215,13 @@ function generatePhotoCategoryList($tid, $pageno) {
 /**
  * main function for generate photoDetailPage array
  * @pram int $id
+ *
  * @return array
  */
 function photoDetailPageRerourceValue($id) {
-  // variable decalartion
-  // variable decalartion
   $output_array = array();
   $data_array = array();
   $photo_list_array = array();
-  // list array building
   $data = generatePhotoDeatilList($id);
   if ($data['data']['photo_count'] > 0) {
     $output_array['status_code'] = "1";
@@ -217,6 +231,7 @@ function photoDetailPageRerourceValue($id) {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
+
   $output_array['data'] = $data['data'];
   return $output_array;
 }
@@ -224,6 +239,7 @@ function photoDetailPageRerourceValue($id) {
 /**
  * function for generate generatePhotoDeatilList JSON
  * @pram int $id
+ *
  * @return array
  */
 function generatePhotoDeatilList($id) {
@@ -239,13 +255,11 @@ function generatePhotoDeatilList($id) {
   $tid = $node->field_primary_category['und'][0]['value'];
   $term = taxonomy_term_load($tid);
   $term_name = $term->name;
-  //$comment_cont = $node->comment;
   $alias = drupal_get_path_alias('node/' . $nid . '');
   $weburl = $base_url . "/" . $alias;
   $galleryimg = $node->field_gallery_image['und'];
   $toptlapics = count($galleryimg);
   $changed = $node->changed;
-  //$changed_datetime = date("Y-m-d H:i:s", $changed);
   if ($changed) {
     $changed_datetime = date("Y-m-d H:i:s", $changed);
   }
@@ -276,17 +290,18 @@ function generatePhotoDeatilList($id) {
 /**
  * function for generate photo list array
  * @pram array $galleryimg
+ *
  * @return array
  */
 function generatePhotoDetailList($galleryimg) {
+
   $photo_list_array = array();
   $listcont = 0;
   if (count($galleryimg) > 0) {
     // loop on gallery img
     $output = "";
     foreach ($galleryimg as $key => $value) {
-      $fc = field_collection_field_get_entity($value);
-      //$fid = $fc->field_api_image['und'][0]['fid'];
+      $fc = field_collection_field_get_entity($value);;
       $fid = $fc->field_image_id['und'][0]['value'];
       if (!$fid > 0) {
         $fid = $fc->field_images['und'][0]['fid'];
@@ -295,19 +310,10 @@ function generatePhotoDetailList($galleryimg) {
       $file_uri = file_create_url($uri);
       $fid_file = $fid;
       $img_url = completeFilePath($fid_file);
-      // custom function for get img caption
-      //$caption = getImgCaption($fid);
       $caption = $fc->field_image_caption['und'][0]['value'];
-      // custom function for get img byline
-      //$byline = getImgByline($fid);
+
       $byline = $fc->field_credit['und'][0]['value'];
       $photo_story_img = image_style_url('photo_slider_753x543', $uri);
-      $serch = ITGD_DEV_FILES_PATH;
-      $replace = ITGD_MUM_DEV_FILES_PATH;
-      $photo_story_img = str_replace($serch, $replace, $photo_story_img);
-      if (!$byline) {
-        // $byline = "";
-      }
       $photo_list_array[$listcont]['p_id'] = "$fid";
       $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
       $photo_list_array[$listcont]['p_credit'] = "$byline";
@@ -318,15 +324,14 @@ function generatePhotoDetailList($galleryimg) {
   return $photo_list_array;
 }
 
-/* sprint2 function start */
-
 /**
+ * sprint2 function start
  * main function for generate photoStoryDetailPage array
  * @pram int $id
+ *
  * @return array
  */
 function photoStoryDetailPageRerourceValue($id) {
-  // variable decalartion
   $output_array = array();
   $data_array = array();
   $photo_list_array = array();
@@ -340,13 +345,16 @@ function photoStoryDetailPageRerourceValue($id) {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
+
   $output_array['data'] = $data['data'];
+
   return $output_array;
 }
 
 /**
  * function for generate generatePhotoStoryDeatilList JSON
  * @pram int $id
+ *
  * @return array
  */
 function generatePhotoStoryDeatilList($id) {
@@ -391,8 +399,10 @@ function generatePhotoStoryDeatilList($id) {
   $data_array['sponsored_url'] = "";
   $data_array['subcategory_id'] = "$tid";
   $data_array['subcategory_title'] = "$term_name";
+
   $data_array['photo'] = $photo_list_array['data'];
   $data_array['author'] = generateAuthorTag($node);
+
   $data['data'] = $data_array;
   return $data;
 }
@@ -406,24 +416,30 @@ function generatePhotoStoryDetailList($nid) {
   $photo_list_array_data = array();
   $photo_list_array = array();
   $listcont = 0;
+
+
   // generate the html for photo story top slider
   if (!empty($nid)) {
     $node = node_load($nid);
+
     $photo_story = $node->field_photo_story[LANGUAGE_NONE];
     // function from
     $photo_story_html = photoSotryHtml($nid);
+
     foreach ($photo_story as $key => $val) {
+
       $entity_obj = entity_load('field_collection_item', array($val['value']));
       $photo_story_img_path = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['uri'];
       $photo_story_img_fid = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid'];
       $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
       $photo_story_img = completeFilePath($photo_story_img_fid);
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
-
+      $caption = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
+      $byline = getImgByline($photo_story_img_fid);
       $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
       $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
-      $photo_list_array[$listcont]['p_credit'] = "";
-      $photo_list_array[$listcont]['p_caption'] = "";
+      $photo_list_array[$listcont]['p_credit'] = "$byline";
+      $photo_list_array[$listcont]['p_caption'] = "$caption";
       $photo_list_array[$listcont]['p_desc_withouthtml'] = "$photo_story_desc";
       $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_desc";
       $listcont++;
@@ -436,7 +452,9 @@ function generatePhotoStoryDetailList($nid) {
 
 /**
  * function for photoSotryHtml
+ *
  * @param int $node_id
+ *
  * @return string
  */
 function photoSotryHtml($node_id) {
@@ -480,6 +498,7 @@ function photoSotryHtml($node_id) {
 /**
  * function for generate photo list array
  * @pram object $node
+ *
  * @return array
  */
 function generateAuthorTag($node) {
@@ -497,13 +516,16 @@ function generateAuthorTag($node) {
 /**
  * function for generate photo list array
  * @pram int $rvid
+ *
  * @return array
  */
 function field_data_field_story_large_image($rvid) {
-  $query = db_select('field_data_field_story_large_image', 'lid');
-  $query->fields('lid', array('field_story_large_image_fid'));
-  $query->condition('lid.entity_id', $rvid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  return $result[0]['field_story_large_image_fid'];
+  if ($rvid) {
+    $query = db_select('field_data_field_story_large_image', 'lid');
+    $query->fields('lid', array('field_story_large_image_fid'));
+    $query->condition('lid.entity_id', $rvid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    return $result[0]['field_story_large_image_fid'];
+  }
 }
 

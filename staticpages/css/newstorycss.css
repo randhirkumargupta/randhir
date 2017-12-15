@@ -1,0 +1,365 @@
+.mediumcontent .divleft .storyimgclose {
+	/*box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px
+		rgba(0, 0, 0, 0.16);
+	-webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.23), 0 3px 12px
+		rgba(0, 0, 0, 0.16);
+	border: 0px;
+	padding: 6px;*/
+}
+
+.divleft .downloadstoryimg .storyimgclose {
+	height: 220px;
+	overflow: hidden;
+	padding:0px; border:0px;
+}
+
+.mediumcontent .storyimgclose .stimagecaption {
+	bottom: 12px;
+	width: 95.2%;
+	left: 2px;
+}
+
+.snappost_container {
+	border: 1px solid #E7E7E7;
+	background: #F2F2F2;
+	padding-top: 10px !important;;
+	padding-bottom: 0px !important;
+	min-height: 138px !important;
+}
+
+.snappost_container .left_snp_l {
+	padding: 0 10px 0 5px;
+	width: 60px !important;
+}
+
+.snappost_container .right_snp_l {
+	width: 575px !important;
+}
+
+.strleft {
+	color: #737373;
+}
+
+#strwapper .strtitlealias h2 {
+	color: #5B5B5B !important;
+}
+
+.tagstxt a {
+	background: none;
+	padding-left: 0px;
+	color: #AEAEAE;
+}
+
+.more-news {
+	background: #FBF9FA;
+	border: 1px solid #EFEFEF;
+	color: #737373;
+}
+
+.newstory-stripsection .author-section .author-img {
+	width: 44px;
+	float: left;
+	margin-right: 10px;
+}
+
+.newstory-stripsection .author-section .author-img img {
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+}
+
+.newstory-stripsection .author-section .autherninfo {
+	width: auto;
+	float: left;
+}
+
+.newstory-stripsection .author-section .autherninfo .authername {
+	font-size: 15px;
+	color: #8A8889;
+	font-weight: 400;
+	line-height: 25px;
+	position: relative;
+	/*cursor: pointer;*/
+}
+.newstory-stripsection .author-section .autherninfo .authername span#arrowclick{ width:20px; height:10px; display:inline-block;}
+.newstory-stripsection .author-section .autherninfo .authername span#arrowclick span.arrow::before,.newstory-stripsection .author-section .autherninfo .authername span#arrowclick span.arrow::after
+	{
+	background-color: #bebebe;
+	content: "";
+	height: 2px;
+	left: 0;
+	position: absolute;
+	transition-duration: 0.5s;
+	width: 8px;
+}
+
+.newstory-stripsection .author-section .autherninfo .authername span#arrowclick span.arrow
+	{
+	margin-left: 8px;
+	position: absolute;
+	top: 12px;
+	cursor: pointer;
+}
+
+.newstory-stripsection .author-section .autherninfo .authername span#arrowclick span.arrow::before
+	{
+	top: 1px;
+    transform: rotate(53deg);
+}
+
+.newstory-stripsection .author-section .autherninfo .authername span#arrowclick span.arrow::after
+	{
+	left: 4px;
+    top: 1px;
+    transform: rotate(-53deg);
+}
+
+.newstory-stripsection .author-section .autherninfo .authername span#arrowclick.open span.arrow::before
+	{
+	top: 1px;
+    transform: rotate(-53deg);
+}
+
+.newstory-stripsection .author-section .autherninfo .authername span#arrowclick.open span.arrow::after
+	{
+	left: 4px;
+    top: 1px;
+    transform: rotate(53deg);
+}
+
+.newstory-stripsection .author-section .autherninfo .story-timedate {
+	font-size: 14px;
+	color: #979797;
+	font-weight: 300;
+	line-height: 15px; float:left;
+}
+
+.newstory-stripsection .font-incer {
+	position: relative;
+	top: -20px;
+}
+
+.strleft .size_inc_dec a {
+	color: #888687;
+	font-weight: 400;
+}
+
+.size_inc_dec {
+	width: 60px;
+}
+
+.loadmore_bg {
+	background:url(http://media2.intoday.in/indiatoday/images/expand-image.png) repeat-x center 0;
+	position: absolute;
+	bottom: -29px;
+	width: 100%;
+	height: 156px;
+	cursor: pointer;
+	z-index:9;
+}
+.mediumcontent .right-story-container{margin-top:20px !important;}
+
+.loadactive {
+	background:url(http://media2.intoday.in/indiatoday/images/collapse-image2.png) repeat-x center 0 !important;
+}
+.expander{height:auto !important; overflow:inherit !important;}
+
+.downloadstoryimg{position:relative;}
+.total_shares{/*background: #F0EEEF !important;*/
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    height: 35px !important;
+    width: 46px !important;
+    text-align: center !important;
+    border-radius: 3px !important;
+    -webkit-border-radius: 3px;
+	}
+.total_shares span{display: block;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    line-height: 20px;
+ color:#000 !important;
+ }	
+.st_social ul li{min-height:50px !important;}
+.stimagecaption {
+	display: none; z-index:10; background:none;
+}
+.storyimgclose.expander .stimagecaption { display:block; font-size:15px; line-height:20px;}
+
+.prev-storynav {
+	background: #fff;
+	border: 0px; z-index:9999;
+}
+
+.prev-storynav:hover {
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	background: #F7F7F7;
+}
+
+.next-storynav {
+	background: #fff;
+	border: 0px; z-index:9999;
+}
+
+.next-storynav:hover {
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	background: #F7F7F7;
+}
+
+.prev-storynav .right_shares,.next-storynav .right_shares {
+	padding: 0px;
+	box-shadow: 0 0 0;
+	width: 88px;
+}
+
+.prev-storynav .right_shares>img,.next-storynav .right_shares>img {
+	float: left;
+}
+
+.next-storynav .left_shares a,.prev-storynav .left_shares a {
+	font-size: 15px;
+}
+
+.fixedsocial {
+	position: fixed;
+	margin-left: -55px; z-index:9999999;
+}
+
+.fixedsocial ul li {
+	list-style: none;
+	margin-bottom: 5px;
+}
+
+.fixedsocial ul li.facbook,.fixedsocial ul li.twitter,.fixedsocial ul li.googlepluse
+	{
+	text-indent: -999999px;
+}
+.fixedsocial ul li a{ width:46px; height:37px; display:block;}
+.fixedsocial ul li.comment .icon_c{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png) no-repeat -188px -778px; width:46px; height:37px; display:block;}
+
+.fixedsocial ul li.facbook {
+	background:
+		url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png")
+		no-repeat scroll -23px -778px;
+	display: block;
+	height: 37px;
+	width: 46px;
+}
+
+.fixedsocial ul li.twitter {
+	background:
+		url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png")
+		no-repeat scroll -79px -778px;
+	display: block;
+	height: 37px;
+	width: 46px;
+}
+
+.fixedsocial ul li.googlepluse {
+	background:
+		url("http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png")
+		no-repeat scroll -134px -778px;
+	display: block;
+	height: 37px;
+	width: 46px;
+}
+
+.fixedsocial ul li.sharenumb span {
+	display: block;
+	font-weight: 400;
+	font-size: 18px;
+	text-align: center;
+	line-height: 17px;
+	padding-top: 3px;
+}
+
+.fixedsocial ul li.sharenumb {
+	background: #F0EEEF;
+	font-size: 11px;
+	font-weight: 300;
+	height: 37px;
+	width: 46px;
+	text-align: center;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+#auther-shortinfo{ display:none; text-align: left;line-height: 16px;}
+#auther-shortinfo a{ display: inline-block;float: left;margin-right: 5px;}
+#auther-shortinfo {
+    padding-bottom: 3px;
+    width: 100%;
+}
+.authername a{ color:#193982}
+@media screen and (max-width :800px){
+
+#rightpanel #right-section #rosRightColumn .rt-colum:nth-child(12), #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(18), #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(20), #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(22){ float:left;}
+#rightpanel #right-section #rosRightColumn .rt-colum:nth-child(13), #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(19), #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(21), #rightpanel #right-section #rosRightColumn .rt-colum:nth-child(23){ float:right;}
+
+}
+
+@media screen and (max-width:800px) {
+	.alpha {
+		margin-top: 100px;
+	}
+}
+
+.share-story ul {
+	display: block
+}
+
+.share-story li {
+	padding: 0 9px 0 0;
+}
+
+.factolds ul {
+	padding-top: 0px !important;
+}
+
+
+
+
+.watch_chunk_right{ color:#404040;}
+ .watch_chunk_container { margin-top:19px; border:none;background:#FFF;}
+ .watch_chunk_container li{ list-style:none; margin-bottom:16px;padding-bottom:16px; float:left;border-bottom: 1px solid #ebebeb;} .watch_chunk_container li:last-child{ border-bottom:0px;}
+ 
+ .border-behind{ position:relative; border-top:3px solid #ddd; width:310px; top:10px; height:20px;}
+ .trc_related_container{margin-top:19px;}
+/* .rt-colum h3.fullblue{ background:#193982; color:#fff; font-size:16px; text-transform:uppercase; line-height:15px; font-weight:400; padding:2px 10px;}*/
+ .rt-colum h3.fullblue{color:#222222; font-size:20px; line-height:26px; font-weight:900; padding:2px 0; font-family:"Roboto", sans-serif;}  
+.border-behind h3.fullblue{ position:absolute;top:-17px; font-size:20px; background:#FFF; padding-right:10px}
+
+#right-section .rt-colum {margin-bottom: 50px; position: relative;}
+ .watch_chunk{ padding:0; background:none; width:310px;} 
+ .watch_chunk_left{ width:auto; float:right;}
+ .watch_chunk_left img{ width:88px; height:auto;}
+ .watch_chunk_right{float:left; font-size:14px; line-height:19px; width:66%; padding-left:0; padding-right:0; font-family:"Roboto", sans-serif; color:#333333;}
+ .watch_chunk_container li:last-child {border-bottom: 0px;margin-bottom: 0 !important;padding-bottom: 10px !important;}  
+ .newmore-section a.arrowmore{ background-color:#f2f2f2; color:#999999; text-align:center; display:block; font-size:20px; text-transform:uppercase; line-height:17px; font-weight:300; padding:8px 0 6px; border-radius:0 0 4px 4px; -webkit-border-radius:0 0 4px 4px;transition:all 0.3s ease; -webkit-transition:all 0.3s ease;}
+.newmore-section a.arrowmore:hover{background-color:#FF2B37; color:#fff;} .newmore-section a.arrowmore:hover span.arrowcir{ background-position:-411px -783px;}
+.newmore-section a.arrowmore span.arrowcir{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png) no-repeat  -408px -747px; width:27px; height:25px; display:inline-block;}
+.newmore-section a.arrowmore span.moretext{ position:relative; top:-5px; margin-right:7px;text-transform:capitalize;}
+.arrowcir{ background:none;}
+
+
+.rt-colum .newtab-nav{ list-style:none;} .rt-colum .newtab-nav li{ list-style:none; width:auto; display:inline-block;} .rt-colum .newtab-nav li:nth-child(1){ margin-right:5px;} .rt-colum .newtab-nav li.active a{ background:#011037} .rt-colum .newtab-nav li a{ display:inline-block; background:#193982; color:#fff; font-weight:400; font-size:16px; line-height:16px; padding:2px 5px; text-transform:uppercase;}
+span.ytb_icon_white{width:18px;height:18px;display: block;position: absolute;z-index: 111;background: url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png) -448px -784px; bottom: 3px;right: 3px;}
+span.pht_icon_white{width:21px;height:18px;display: block;position: absolute;z-index: 111;background: url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png) -448px -810px; bottom: 3px;right: 3px;}
+
+.likedisdiv{padding:5px 0;}
+.like_dislike_area{ width:410px; position:relative; top:15px;} .like_dislike_area .lkedislake-text{ width:auto; float:left; font-weight:300; line-height:40px;} .likedislike-action{ width:auto; float:right;} .likedislike-action a, .likedislike-action span{ float:left;} .likedislike-action span{ line-height:41px; font-weight:500;} .likedislike-action span.likecount{ margin-right:20px;}
+.st_social ul li{ background:none; padding:0; margin-right:10px;}
+.st_social ul li .social-sharednum{ background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png) no-repeat -23px -821px; width:46px; height:29px; text-align:center; font-weight:400; font-size:11px; padding-top:3px; color:#828282;}
+.st_social ul li .icon_f{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png) no-repeat -23px -778px; width:46px; height:37px; display:block;}
+.st_social ul li .icon_t{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png) no-repeat -79px -778px; width:46px; height:37px; display:block;}
+.st_social ul li .icon_gp{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png) no-repeat -134px -778px; width:46px; height:37px; display:block;}
+.st_social ul li .icon_c{background:url(http://media2.intoday.in/indiatoday/images/homenew/Sprit-IT-Home-New.png) no-repeat -188px -778px; width:46px; height:37px; display:block;}
+
+.strleft .strtitlealias ul{ margin-left:20px;} .strleft .strtitlealias ul li{ padding-bottom:6px;}
+
+
+
+

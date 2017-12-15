@@ -230,7 +230,12 @@
                 }
             });
 
-
+            $('#videogallery-new-fileupload-form').ajaxStart(function () {
+                 jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+            });
+            $('#videogallery-new-fileupload-form').ajaxComplete(function () {
+                jQuery('#loader-data img').hide().parent().removeClass('loader_overlay');
+            });
 
             $(".ftp-server-internal .asso-filed_single_internal").click(function (e) {
                 jQuery('#loader-data img').show().parent().addClass('loader_overlay');

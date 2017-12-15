@@ -831,6 +831,19 @@ function itg_workflow_stop_email_during_bulk_operation($request) {
   return TRUE;
 }
 
+/**
+ * Common Function for Getting all the cities of the story
+ * @param array $tids
+ * @return string
+  */
+function story_city_list($tids){
+  $city = array();
+  foreach ($tids as $tax){
+    $city[] = $tax['taxonomy_term']->name;
+
+  }
+  return $all_city = implode(',', $city);
+}
 
 /**
  * Implements hook_mail

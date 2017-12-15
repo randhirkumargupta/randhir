@@ -20,7 +20,6 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
   if (!$tid) {
     $term_name = "Latest";
   }
-
   // list array building
   $data = magazineEditionPageRerourceValueList($issueid, $pageno);
 
@@ -84,16 +83,17 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 10;
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+
   $order_by = 'DESC';
   $story_list_array = array();
   $loop_count = 0;
+
   // select node belong from current term id or child term id
+
   $query = db_select('node', 'n');
   //join  for field value
   $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -141,12 +141,13 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
   $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
   $query->fields('fsri', array('field_reporter_unique_id_value'));
   $query->fields('fci', array('field_primary_category_value'));
+
+
   //end
   $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('fsid.field_story_issue_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
     // node feed tag
-
     $title = $resvalue['title'];
     $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
     $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
@@ -219,6 +220,8 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
   $data['issue_nid'] = $issue_nid;
   $data['issue_cover_image'] = $issue_cover_image;
   $data['issue_digitalmag_url'] = $issue_digitalmag_url;
+
+
   return $data;
 }
 
@@ -236,7 +239,6 @@ function magazineCoverstoriesPageRerourceValue() {
   $updated_datetime = "";
   // list array building
   $data = magazineCoverstoriesPageRerourceValueList();
-
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
     $output_array['status_message'] = "";
@@ -267,11 +269,14 @@ function magazineCoverstoriesPageRerourceValueList() {
   $listcount = 0;
   $data_list_array = array();
   $loop_count = 0;
+
   // issue list query..
+
   $query_issue = db_select('node', 'n');
   $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
   $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
   $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
+  //$query_issue->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
 
   $query_issue->fields('fsli', array('field_issue_large_cover_image_fid'));
   $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
@@ -285,12 +290,9 @@ function magazineCoverstoriesPageRerourceValueList() {
     //issue node
     $issueid = $resvalue['nid'];
     $node_data = node_load($issueid);
-   
+
     $lar_img_uri = $node_data->field_issue_large_cover_image['und'][0]['uri'];
     $lar_img = image_style_url('magazine_top_issue_172x240', $lar_img_uri);
-    $serch = ITGD_DEV_FILES_PATH;
-    $replace = ITGD_MUM_DEV_FILES_PATH;
-    $lar_img = str_replace($serch, $replace, $lar_img);
     $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
     $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
 
@@ -315,8 +317,6 @@ function magazineCoverstoriesPageRerourceValueList() {
   $data['lcount'] = $loop_count;
   $data['data'] = $data_list_array;
   $data['updated_datetime'] = $changed_datetime;
-
-
   return $data;
 }
 
@@ -326,6 +326,7 @@ function magazineCoverstoriesPageRerourceValueList() {
  * @return array
  */
 function getCoverstoriesList($issue_date) {
+
   $cover_story_list_array = array();
   $loop_count = 0;
   // select node belong from current term id or child term id
@@ -377,6 +378,7 @@ function getCoverstoriesList($issue_date) {
   $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
   $query->fields('fsri', array('field_reporter_unique_id_value'));
   $query->fields('fci', array('field_primary_category_value'));
+
   //end
   $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range(0, 2);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -444,6 +446,7 @@ function getCoverstoriesList($issue_date) {
 
     $loop_count++;
   }
+
   return $cover_story_list_array;
 }
 
@@ -462,6 +465,7 @@ function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno =
   $updated_datetime = "";
   // list array building
   $data = magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno);
+
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
     $output_array['status_message'] = "";
@@ -474,11 +478,13 @@ function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno =
   //data array building
   $datacount = $data['lcount'];
   $data_up_time = $data['updated_datetime'];
+
   $data_array['issue_count'] = "$datacount";
   $data_array['issue_display_count'] = "10";
   $data_array['issue_pagination_cap'] = "7";
   $data_array['issue'] = $data['data'];
   $output_array['data'] = $data_array;
+
   return $output_array;
 }
 
@@ -500,13 +506,14 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
   $range_max = 10;
   $sdate_fi = strtotime($sdate);
   $tdate_fi = strtotime($tdate);
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+
+
   $loop_count = 0;
+
   // issue list query..
   $query_issue = db_select('node', 'n');
   $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
@@ -516,10 +523,10 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
   $query_issue->fields('fssi', array('field_issue_small_cover_image_fid'));
   $query_issue->fields('fsit', array('field_issue_title_value'));
   $query_issue->fields('n', array('nid'));
-  //condition('fsit.field_issue_title_value', array($sdate_fi, $tdate_fi), 'BETWEEN');
   $query_issue->condition('fsit.field_issue_title_value', array($sdate, $tdate), 'BETWEEN')->condition('n.type', 'issue')->orderBy('fsit.field_issue_title_value', 'DESC')->range($range_min, $range_max);
   $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result_issue as $reskey => $resvalue) {
+
     //issue node
     $issueid = $resvalue['nid'];
     $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
@@ -571,13 +578,15 @@ function getIssueStoryCount($issue_date) {
  */
 function getStoryConfigVal($nid) {
   $conf = array();
-  $query_issue = db_select('field_data_field_story_configurations', 'sc');
-  $query_issue->fields('sc', array('field_story_configurations_value'));
-  $query_issue->condition('sc.entity_id', $nid);
-  $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
-  foreach ($result_issue as $reskey => $resvalue) {
-    $conf[] = $resvalue;
+  if ($nid) {
+    $query_issue = db_select('field_data_field_story_configurations', 'sc');
+    $query_issue->fields('sc', array('field_story_configurations_value'));
+    $query_issue->condition('sc.entity_id', $nid);
+    $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result_issue as $reskey => $resvalue) {
+      $conf[] = $resvalue;
+    }
+    return $conf;
   }
-  return $conf;
 }
 

@@ -4,6 +4,7 @@
 
 jQuery(document).ready(function () {
     if (__at__ != 1) {
+      console.log('detected');  
       setTimeout(openPopup(), 4000);
     } else {
         jQuery('.ad-blocker').hide();
