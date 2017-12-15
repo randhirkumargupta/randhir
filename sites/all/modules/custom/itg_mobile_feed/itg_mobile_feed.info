@@ -1,0 +1,9 @@
+name = ITG Mobile App XML Feed
+description = "ITG Custom module for mobile app xml feed."
+core = 7.x
+package = ITG
+
+
+
+
+
