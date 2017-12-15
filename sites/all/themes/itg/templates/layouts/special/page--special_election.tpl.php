@@ -6,10 +6,10 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-$actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
-$fb_share_title = htmlentities($search_title, ENT_QUOTES);
-$short_url = shorten_url($actual_link, 'goo.gl');
+//~ $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+//~ $search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
+//~ $fb_share_title = htmlentities($search_title, ENT_QUOTES);
+//~ $short_url = shorten_url($actual_link, 'goo.gl');
 $share_desc = '';
 $src = '';
 ?>
@@ -135,16 +135,25 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                   </div>    
                 <?php endif; ?>
                 <?php
+                $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+				$search_title = preg_replace("/'/", "\\'", $widget_data['itg-block-4']['block_title']);
+				$fb_share_title = htmlentities($search_title, ENT_QUOTES);
                 $story_title = get_first_story_title_by_tid(arg(2));
                 $story_title_display = mb_strimwidth($widget_data['itg-block-4']['block_title'], 0, 90, "..");
                 if(!empty($story_title)){
 					$content_link = $base_url  . "/" . drupal_get_path_alias('node/' . $story_title[0]['nid']);
 					$story_title_display = l(mb_strimwidth($story_title[0]['title'], 0, 90, ".."), $content_link);
+					$actual_link = $content_link;
+					$search_title = preg_replace("/'/", "\\'", $story_title_display);
+					$fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
+				}else{
+					$short_url = shorten_url($actual_link, 'goo.gl');					
 				}
                 $display_title = "";
                 if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
                   $display_title = 'style="display:none"';
                 }
+                
                 echo '<div class="row"><div class="col-md-12 election-top-block"><h1 ' . $display_title . ' id="display_tit"><span class="highlights-title">' . $story_title_display . '</span></h1> <div class="social-share">
                     <ul>
                         <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
