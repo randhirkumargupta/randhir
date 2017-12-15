@@ -193,7 +193,7 @@ if (!empty($content)):
                 ?>
                 <div class="stryimg" ><?php
                 
-                  if (empty($widget_data) && empty($node->field_story_template_guru['und'][0]['value'])) {
+                  if (empty($widget_data)) {
                     $story_image = '';
                     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
@@ -426,11 +426,26 @@ if (!empty($content)):
                     $story_body = str_replace('[ITG:TECH-PHOTOS]', '', $story_body);
                   }
                 }
-                if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-                  print '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                // Code for Tech Photo gallery
+                if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) { 
+                  if (!empty($node->field_technology_photogallery['und'])) {
+                    $gallery_node = node_load($node->field_technology_photogallery['und'][0]['target_id']);
+                    $tech_gallery_images = $gallery_node->field_gallery_image;
+                    $tech_gallery_alias = drupal_get_path_alias('node/' . $gallery_node->nid);
+                    $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, 'amp');
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
+                  }
+                  else {
+                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+                  }
                 }
-
-                if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                //code for listicle story
+                if (strpos($story_body, '[ITG:LISTICLES]')) {
+                  $listicle_output = '';
+                  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+                    $listicle_output.= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+                  }
                   $buzz_output.= '';
                   $num = 1;
                   foreach ($node->field_story_listicle['und'] as $buzz_item) {
@@ -440,10 +455,7 @@ if (!empty($content)):
                     $entity = entity_load('field_collection_item', array($field_collection_id));
                     $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
                     $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
-                    //$color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
-                    $color = $entity[$field_collection_id]->field_listicle_color_new['und'][0]['jquery_colorpicker'];
                     $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
-                    $color = ($color) ? $color : '#000000';
                     if ($li_type == 'bullet_points') {
                       $listicle_output.= '<span class="bullet_points"></span>';
                     }
@@ -457,7 +469,9 @@ if (!empty($content)):
                     $listicle_output.= '</div>';
                     $num++;
                   }
-                  print $listicle_output;
+                  //print $listicle_output;
+                  print $story_body = str_replace('[ITG:LISTICLES]', $listicle_output, $story_body);
+                 }
                 }
                 else {
                   // Print story body
@@ -470,11 +484,6 @@ if (!empty($content)):
               if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
                 ?>
                 <div class="story-tech-chunk">
-                  <?php if (!empty($node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'])) { ?>
-                    <span class="tech-rating">
-                      <?php echo $node->field_story_tech_pros_cons_ratin[LANGUAGE_NONE][0]['value'] . '/10'; ?>
-                    </span>
-                  <?php } ?>
                   <?php print render($content['field_story_tech_review_chunk']); ?>
                 </div>
               <?php } ?>
