@@ -496,17 +496,19 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <?php
                         $adsclass = "";
                         $key_candidate_extra_block = "";
+                        $margin_class = 'election-topaddd'
                         if (count($graphdata) > 2) {
-                          $adsclass = 'ads-after-two';
+                          $adsclass = 'ads-after-two mt-50';
                           $key_candidate_extra_block = 'key_candidate_extra_block';
+                          $margin_class = 'election-topadd'
                         }
                         ?>
                         <div class="row">
 
 
-                            <div class="<?php echo $adsclass; ?> col-md-12 col-sm-6 mt-50">
+                            <div class="<?php echo $adsclass ?> col-md-12 col-sm-6">
                               <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>
-                                <div class="itg-widget election-topadd">
+                                <div class="itg-widget <?php echo $margin_class;?>">
                                     <div class="ad-widget droppable">
                                         <div class="sidebar-ad">
                                             <?php
