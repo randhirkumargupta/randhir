@@ -100,15 +100,31 @@ function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $p
         if (!$is_node_in_widget) {
           if ($widget_name == 'big_story_format_widget') {
             $extra = '[]';
-            itg_widget_insert_widget_data($nid, $widget_name, $category_tid, $extra);
+              db_delete('itg_widget_order')
+                ->condition('widget' , $widget_name)
+                ->condition('extra' , '[]')
+                ->execute();
+              $node_load_data = itg_widget_get_required_node_data_for_widget($node);
+              $query = db_insert('itg_widget_order')
+                ->fields(array(
+                  'nid' => $nid ,
+                  'widget' => $widget_name ,
+                  'content_type' => $node_load_data->type,
+                  'cat_id' => 0 ,
+                  'weight' => 0 ,
+                  'extra' => $extra ,
+                ))
+                ->execute();
+
           }
           else {
             itg_widget_insert_widget_data($nid, $widget_name, 0);
+            itg_widget_delete_old_data_by_limit($widget_name);
           }
         }
       }
     }
-    itg_widget_delete_old_data_by_limit($widget_name);
+
     foreach ($previous_story_assign as $row) {
       $widget_value = $row['value'];
       if ($widget_value != $result[$row['value']]) {
