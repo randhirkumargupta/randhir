@@ -1092,7 +1092,7 @@ function homePageJsonNewslist_world() {
 
         // code vid=14  end
 
-        $data_news['id'] = "1206577";
+        $data_news['id'] = "$tid";
         $data_news['order'] = "5";
         $data_news['type'] = "newslist";
         $data_news['title'] = "World";
