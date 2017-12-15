@@ -184,7 +184,7 @@ function itg_preprocess_page(&$variables) {
   }
 
   // For single column page
-  if ($arg[0] == 'be-lucky-today') {
+  if ($arg[0] == 'be-lucky-today' || $arg[0] == 'state-elections') {
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
   }
 
