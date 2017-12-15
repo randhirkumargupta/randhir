@@ -317,6 +317,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_hltapps_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-feeds/scribd/live_issue'] = array(
+    'page callback' => 'itg_scribd_feed_live_issue',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_scribd_live_issue.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
