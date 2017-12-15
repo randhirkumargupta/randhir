@@ -864,7 +864,7 @@ function generateProgramDetail($nid) {
         $photo_list_array[$listcount]['p_program_size'] = "$filesize";
         $photo_list_array[$listcount]['p_anchor_id'] = "$anchor_id";
     }
-    $data['status_code'] = 1;
+    $data['status_code'] = "1";
     $data['status_message'] = "";
     $data['data'] = $photo_list_array;
     return $data;
