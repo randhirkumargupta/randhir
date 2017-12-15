@@ -1573,8 +1573,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
       $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
     }
     if (strpos($frame_url, 'mega-review/embed') !== false) {
-	  $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);  	
-	}
+      $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
+    }
     else {
     $frame = '<amp-iframe width="200" height="100"
     sandbox="allow-scripts allow-same-origin"

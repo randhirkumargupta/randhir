@@ -185,8 +185,8 @@ function itg_story_save_original_sample_image($fid) {
  */
 function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, $view_mode = null) {
   $count = 0;
-  if($view_mode == 'amp'){
-    $count = -1; 
+  if ($view_mode == 'amp') {
+    $count = -1;
   }
   $output = '';
   $output .= '<div class="tech-photos">';
@@ -205,12 +205,12 @@ function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_
     $photo_img_title = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['title'];
     $output .= '<div class="tech-photo-item">';
     $output .= '<a href="/' . $tech_gallery_alias . '" target="_blank">';
-    if($view_mode == 'amp'){
-	  $output .= '<amp-img height="127" width="135" src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"></amp-img>';
-	}
-	else{
-	  $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';	
-	}    
+    if ($view_mode == 'amp') {
+      $output .= '<amp-img height="127" width="135" src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"></amp-img>';
+    }
+    else {
+      $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
+    }
     $output .= '</a>';
     if ($count == 2) {
       $output .= '<div class="tech-photo-overlay">';
