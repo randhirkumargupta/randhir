@@ -2,16 +2,13 @@
     <div class="col-md-8">
         <div class="auto-block-1">
             <div class="featured-news">
-
                 <?php
                 global $base_url;
-
                 foreach ($data as $index => $row) {
                   $desc = $row['title'];
                   if (function_exists('itg_common_remove_extra_html')) {
                     $desc = itg_common_remove_extra_html($desc);
                   }
-
                   $video_class = "";
                   if (strtolower($row['type']) == 'videogallery') {
                     $video_class = 'video-icon';
@@ -41,9 +38,6 @@
                             ?>
                         </h2>           
                     </div>
-
-
-
                       <?php }
                       else if ($index > 0 && $index <= 2) { ?>
                     <div class="featured-post <?php echo $video_class; ?>">
@@ -69,9 +63,9 @@
                         </h3>
                     </div>
 
-  <?php } ?>
+                  <?php } ?>
 
-<?php } ?>
+                <?php } ?>
             </div>
         </div>    
     </div>
@@ -113,7 +107,7 @@
 
                           <?php } ?>
 
-<?php } ?>
+                       <?php } ?>
 
                     </ul>
                 </div>
