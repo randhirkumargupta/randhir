@@ -14,7 +14,7 @@ $arg = arg();
 <div class="col-md-12 col-sm-12 col-xs-12 left-panel arts">
 <!-- Slider Start-->
 <?php $term = taxonomy_term_load(arg(3));?>
-<h2><?php print "INDIA'S BEST ". strtoupper($term->name) ." COLLEGES ".arg(1); ?></h2>
+<h2><?php print t("INDIA'S BEST ") . strtoupper($term->name) . t(" COLLEGES ") .arg(1); ?></h2>
 <div class="slider_outer1">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -105,13 +105,13 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
         <div class='midcontitles'>PARAMETER-WISE RANKING <span style='float:right;'></span></div>
         <div class='midmorestories'>
           <ul>
-             <li>Reputation: " . $data_parameterwise_rank[0]['reputation'] . "</li>
-             <li>Academic Input: " . $data_parameterwise_rank[0]['academic_input'] . "</li>
-             <li>Student Care: " . $data_parameterwise_rank[0]['studentcare'] . "</li>
-             <li>Infrastructure: " . $data_parameterwise_rank[0]['infrastructure'] . "</li>
-             <li>Placement: " . $data_parameterwise_rank[0]['placement'] . "</li>
-             <li>Perceptual Rank: " . $data_parameterwise_rank[0]['preceptual_rank'] . "</li>
-             <li>Factual Rank: " . $data_parameterwise_rank[0]['factual_rank'] . "</li>
+             <li>". t('Reputation') ." : " . $data_parameterwise_rank[0]['reputation'] . "</li>
+             <li>". t('Academic Input') ." : " . $data_parameterwise_rank[0]['academic_input'] . "</li>
+             <li>". t('Student Care') ." : " . $data_parameterwise_rank[0]['studentcare'] . "</li>
+             <li>". t('Infrastructure') ." : " . $data_parameterwise_rank[0]['infrastructure'] . "</li>
+             <li>". t('Placement') ." : " . $data_parameterwise_rank[0]['placement'] . "</li>
+             <li>". t('Perceptual Rank') ." : " . $data_parameterwise_rank[0]['preceptual_rank'] . "</li>
+             <li>". t('Factual Rank') ." : " . $data_parameterwise_rank[0]['factual_rank'] . "</li>
 
           </ul>
         <div class='clear'></div>
@@ -122,7 +122,7 @@ if(isset($related_story_value['relatedstory_count']) && $related_story_value['re
       if (count($data_previous_rank) > 0) {
         // yearwisewise data string building
         $str_yearwise_rank = "<div class='prvlink'>
-	<div class='prvarrtxt'>PREVIOUS RANKING:</div>
+	<div class='prvarrtxt'>". t('PREVIOUS RANKING:') ."</div>
     <div class='prvyrs'>
 	 <ul>";
 
