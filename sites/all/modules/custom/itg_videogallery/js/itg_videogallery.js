@@ -108,6 +108,12 @@
     };
 })(jQuery, Drupal, this, this.document);
 jQuery('document').ready(function () {
+    jQuery('#field-video-upload-values').find('.delta-order').each(function(){
+        var getlength = jQuery(this).html();
+         if(getlength == "") {
+          jQuery('#field-video-upload-values').find('.draggable').remove();
+        }
+    })
     var first_fid = jQuery("input[name='field_video_upload[und][0][field_videogallery_video_upload][und][0][fid]").val();
     if (first_fid != "" && first_fid != 0)
     {
