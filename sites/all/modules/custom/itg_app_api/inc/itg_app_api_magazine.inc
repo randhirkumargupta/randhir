@@ -16,7 +16,7 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
     $updated_datetime = "";
 
     $term = taxonomy_term_load($tid);
-    $term_name = $term->name;
+    $term_name = $term->name; 
     if (!$tid) {
         $term_name = "Latest";
     }
