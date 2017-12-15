@@ -11479,7 +11479,10 @@ div.node {
                 width: 140px;
             }
             &.form-item-filtertype {
-                width: 220px;
+                width: 150px;
+            }
+            &.form-item-video-art-id {
+                width: 140px;
             }
         }
         .container-inline-date {
@@ -11511,9 +11514,9 @@ div.node {
         @extend .btn-small;
         margin-top: 33px;
         position: absolute;
-        left: 0;
+        left: auto;
         top: 71px;
-        left: 900px;
+        right: 109px;
     }
     table {
         @extend .views-table;
@@ -13912,6 +13915,7 @@ fieldset#edit-xmlsitemap {
                 position: absolute;
                 left: 600px;
                 top: 30px;
+                z-index: 1;
             }
         }
     }
@@ -14681,9 +14685,12 @@ div.ctools-modal-content {
         thead {
             padding: 0px 20px;
         }
-        tbody tr td .form-type-textfield {
-            padding: 0;
-            margin: 0;
+        tbody {
+            overflow: visible;
+            tr td .form-type-textfield {
+                padding: 0;
+                margin: 0;
+            }
         }
         +.description {
             +.clearfix {

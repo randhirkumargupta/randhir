@@ -1,0 +1,314 @@
+.itgd_links a:hover{ color:#fff!important;}
+#top-web{ padding:0; margin-top:-20px; background:#000!important;}
+.itgd_links ul li.last{ background:none!important;}
+.itgd_links a{ text-transform:uppercase; color:#8C8C8C; font: 12px/20px roboto; color:#8C8C8C;}
+.submenu p{ padding-left:0px!important;}
+#spc-topnav { margin: 0 auto; width: 1003px; }
+#spc-rightnav {width:300px; float:right; text-align:left}
+.maplink a{color:#777; font-size:17px;}
+.storyimages{ width:47%; float:left; margin-right:15px;}	
+.storytext{ width:50%; float:left;}
+.storytext p{ margin-top:0;}
+.alpha{ min-height:100px;}
+footer { background:none!Important}
+.nav ul li { padding: 13px 0 !important;}
+body{ background:#fff!important;}
+.lineheader {
+    background: url(http://media2.intoday.in/microsites/banners/headingborder.png) repeat-x scroll 0 12px;
+    height:20px;
+    margin-bottom: 10px;   
+}
+
+.logoit {
+    background: url("../images/white-logo.png") no-repeat 0 11px;
+    height: 77px;
+    text-indent: -9999px;
+    width:267px;
+}
+.lineheader h2{ font-size:20px; background:#fff; padding:0 5px 0 0; width:auto; float:left;}
+.topinnerbox1{}
+.left-column1{ width:98%!important;  background:#F8F6F7;}
+.logo-election { height:168px;  background: url("http://media2.intoday.in/indiatoday/election2014/Delhi_Election_logo.gif") no-repeat scroll left top transparent;
+    text-indent: -9999px;
+    width: 329px; margin:10px 0 -15px 0 } 
+.btm-arrow { display:none;}
+.belt {
+    border: medium none;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    width: 425px;
+	 height: 471px;
+	 margin-left: 10px;
+}
+.inner-belts {
+    height: 593px;
+    position: relative;
+    width: 2500px;
+}
+
+.slwidth {
+    padding-left: 0 !important;
+    width: 370px !important;
+}
+.left-column {
+    overflow: hidden;
+    padding: 10px 0 10px 10px;
+    position: relative;
+   
+	 min-height: 470px;
+}
+
+
+
+.thumb {
+    height: 50px;
+    left: 168px;
+    position: absolute;
+    width: 300px;
+	bottom:-26px;
+
+}
+.thumb ul {
+    margin: 0;
+    padding: 0;
+}
+.thumb ul li {
+    border-radius: 100%;
+    box-shadow: 4px 4px 10px #999 inset;
+    cursor: pointer;
+    float: left;
+    height: 15px;
+    list-style: outside none none;
+    margin-right: 5px;
+    width: 15px;
+}
+
+.thumb ul li.active {
+    background: none repeat scroll 0 0 #000 !important;
+}
+.images { width:415px;}
+.redborder { border:none;}
+.htl-logo { padding-top:10px;}
+#wapper { padding-top:20px; padding-left:2px;}
+.topstories { box-shadow:0px 0px 2px #ccc; width:58%; height:472px;}
+.topstories .topinnerbox a img{ width:100%;}
+
+.right-column {padding: 2px 0 2%; margin-right:0px; width:38%!Important;  }
+.morehead {font: 500 20px/20px Roboto,sans-serif; padding-left:0px;}
+.topstr-list li {font: normal 15px/20px Roboto,sans-serif; padding-bottom:0; border-bottom:0;}
+.more { font: normal 14px/20px Roboto,sans-serif; padding:0!Important; text-align:right; }
+.topzone h2 a { font-size:29px; line-height:33px; font-weight:bold; color:#3A3A3A;}
+.subhead h2 {  font: normal 14px/24px roboto;}
+.topinnerbox { padding:0px;}
+.topinnerbox p {color: #737373;    font: 14px/21px roboto !important;}
+.leftspac { background: none repeat scroll 0 0 #fff;
+    box-shadow: 1px 1px 3px 0 #cbcbcb;
+    clear: both;
+    overflow: hidden;
+	width:290px;
+	padding:5px;
+}
+.share-story { display:none;}
+.hotrightnow_lft {
+    background-color: #ffffff;
+    color: #6e6e6e;
+    float: left;
+    font: normal 14px/18px roboto;
+    margin-top: 0;
+    position: relative;
+    width: 140px;
+	box-shadow:none!Important;
+	padding:0px!Important;
+	border:0!Important;
+	margin-right:10px;
+}
+.leftspac li:nth-child(2){
+	margin-right:0;
+} 
+.boxcont { width:205px; box-shadow:0 0 2px #ccc;  margin: 0 4.1% 3% 0; height:240px;}
+.map{box-shadow:0 0 2px #ccc; padding:5PX; clear:both;   }
+.colum .boxcont { width:300px; box-shadow:0 0 2px #ccc;  margin: 0 4.1% 8% 0; height:auto;}
+.box { height:auto}
+
+.box a { color:#505050;  font: bold 16px/22px Roboto,sans-serif; }
+.box a:hover { color:#206ca8; }
+.box .images { width:205px;}
+.colum .box .images { width:300px;}
+.subhead {padding: 0px 5px; left:0;}
+.topstr-list li a {  font: 100 14px/20px Roboto,sans-serif; color:#5f5f5f}
+.topstr-list li a:hover {color:#206ca8;}
+.thirdcrad  { margin-right:0px;}
+.yellow-bg { background:#f16808}
+.orrang-bg { background:#ffde00}
+.orrang-bg a { color:#000;}
+
+.con-chunk{box-shadow:0px 0px 2px #ccc; margin-bottom:30px; border-radius:3px; -webkit-border-radius:3px;}
+#conssvg{ text-align:center;}
+.box-poll-shadow{ padding:10px;}
+.left-chart{ width:300px; float:left;}
+
+.top-strip-one {overflow:hidden; width:1000px; margin:0 auto}
+.top-strip-one span {
+  
+    float: left;
+    height: 38px;
+}
+.top-strip-one h2 {
+    background-color: #000000;
+    color: #FFFFFF;
+    float: left;
+    font-family: Roboto,sans-serif;
+    font-size: 18px;
+    padding: 4px 12px 4px 12px;
+    text-transform: uppercase;
+	margin:8px 0 0 0;
+	border-right:1px solid #ccc;
+}
+.top-strip-one h3 {
+    background-color: #6E6F73;
+    color: #FFFFFF;
+    float: left;
+    font-family: Roboto,sans-serif;
+    font-size: 18px;
+	margin:8px 0 0 0;
+    padding: 4px 13px 4px 13px;
+    text-transform: uppercase;
+	border-right:1px solid #ccc; margin-bottom:10px
+}
+.top-strip-one h3 a, .top-strip-one h2 a { color: #FFFFFF; text-decoration:none; }
+#tRow{ margin-top:70px;}
+#tRow td{font-size: 18px; font-weight: 700; width: 150px; background:#fff;}
+#consTable{  left: 380px; position: absolute; top: 50px; width: 220px;}
+#consTable table{ border-radius:5px;  -webkit-border-radius:5px; box-shadow:0 3px 2px #ccc; -webkit-box-shadow:0 3px 2px #ccc; background:#fff;}
+.p_head{ background:#45D2F0; color:#fff; font-size:18px; text-transform:uppercase; border-radius:3px 3px 0 0; -webkit-border-radius:3px 3px 0 0 ; padding:5px 10px;}
+.p_pname2{ background:#E9E9E9; font-style:italic; padding:3px 5px;}
+.p_pname2 a{ color:#4B67A0; text-decoration:none; font-size:15px;}
+.p_cname img{border-radius:50%;  -webkit-border-radius:50%;}
+.highcharts-container{left:-119px!important;}
+.statheader{ overflow:hidden; margin-bottom:20px;}
+.statheader h2{ width:100px; margin-left:300px; float:left; font-size:25px; font-weight:300; text-transform:uppercase; font-family:roboto;}
+.costudropdown{ width:200px; float:right;}
+.p_cname{ padding:7px 5px; font-size:17px; font-weight:400; color:#9D9D9D;}
+
+
+
+nav ul li {padding: 12px 0 11px 0px; font-size:13px; }
+.logoit-holi { float:left;}
+.itgd_links { width:100%!important;}
+.htl-logo { width:auto}
+.top-global { margin: -25px auto 20px;}
+.itgd_links ul li {
+    padding: 1px 5px; border-right:0px!important;
+}
+.skinnin-ad-container{ margin:0 auto!important; background:#fff; width:1003px;}
+#top-web{ margin:-20px 0 0 !important;}
+
+.dontmiss {
+    margin-bottom: 30px;
+}
+.dontmiss_box {
+    background: none repeat scroll 0 0 #fff;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px 0 #cbcbcb;
+    height: 350px;
+    overflow: hidden;
+    padding: 5px;
+    position: relative;
+	clear:both;
+	margin-top:10px;
+}
+.dontmiss .dontmiss_box ul {
+    position: relative;
+}
+.dontmiss .dontmiss_box ul li {
+    float: left;
+    list-style: outside none none;
+    margin-right: 5px;
+    position: relative;
+    width: 300px;
+}
+.caption_two {
+    background: #000;
+    bottom: 5px;
+    font-size: 18px;
+    margin: 0;
+    padding: 8px;
+    position: absolute;
+    width: 274px;
+	opacity:0.8;
+}
+
+.caption_two a {
+    color: #fff;
+    font-weight: normal;
+    text-decoration: none;
+}
+.dontmiss_box a#dontmiss-prev {
+    background: url("http://media2.intoday.in/microsites/swachhbharat/left-arrow.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    display: block;
+    height: 66px;
+    left: 5px;
+    position: absolute;
+    text-indent: -99999px;
+    top: 40%;
+    width: 45px;
+}
+.dontmiss_box a#dontmiss-next {
+    background: url("http://media2.intoday.in/microsites/swachhbharat/right-arrow.png") no-repeat scroll left top rgba(0, 0, 0, 0);
+    display: block;
+    height: 66px;
+    position: absolute;
+    right: 5px;
+    text-indent: -99999px;
+    top: 40%;
+    width: 45px;
+}
+
+.heading-line-right {
+    background-color: #d71920;
+    color: #ffffff;
+    float: left;
+    font: 500 15px/22px Roboto,sans-serif;
+    padding: 2px 5px;
+    text-transform: uppercase;
+    top: 0;
+    z-index: 999;
+	margin-bottom:10px;
+}
+
+
+.topstr-list {
+    box-shadow: 1px 1px 3px 0 #cbcbcb;
+    clear: both;
+    list-style: outside none none;
+    margin-top: 34px;
+    padding: 1px 10px;
+    position: relative;
+    transform-style: preserve-3d;
+}
+.small-play-icon1 {  background: url("http://media2.intoday.in/microsites/swachhbharat/video-icon.png") no-repeat scroll 0 0 transparent;
+background-position: left top!Important;
+width:36px;
+height:36px;
+left:98px;
+top:66px;
+}
+.twitter_heading { background:url(http://media2.intoday.in/microsites/swachhbharat/celeb-twees.png) left top no-repeat; width:300px; height:37px; position:relative; float:left; margin-bottom:-37px; }
+.swatchbanner, .swatchbanner img{ width:100%;}
+.gm-style-iw p{ margin:0;}
+@media screen and (max-width:800px){
+ .charts { margin-bottom:30px;}
+	.electionbanner img { width:100%!Important}
+ .alpha{margin-top:-50px;}  
+ .logoit {}
+ .corumright {
+    float: right !important;
+}
+.nav ul li {
+    padding: 13px 5px !important;
+}
+
+.topstories{ height:488px;}
+  
+}

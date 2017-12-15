@@ -185,7 +185,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Last name */
+  /* Field: Field: Day */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -331,24 +331,28 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node_1']['id'] = 'edit_node_1';
-  $handler->display->display_options['fields']['edit_node_1']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node_1']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node_1']['label'] = 'Template';
-  $handler->display->display_options['fields']['edit_node_1']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['edit_node_1']['alter']['text'] = '[title]';
-  $handler->display->display_options['fields']['edit_node_1']['alter']['make_link'] = TRUE;
   /* Field: Field: Subject Line */
   $handler->display->display_options['fields']['field_news_title']['id'] = 'field_news_title';
   $handler->display->display_options['fields']['field_news_title']['table'] = 'field_data_field_news_title';
   $handler->display->display_options['fields']['field_news_title']['field'] = 'field_news_title';
   $handler->display->display_options['fields']['field_news_title']['label'] = 'Subject line';
+  $handler->display->display_options['fields']['field_news_title']['exclude'] = TRUE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node_1']['id'] = 'edit_node_1';
+  $handler->display->display_options['fields']['edit_node_1']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node_1']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node_1']['label'] = 'Subject line';
+  $handler->display->display_options['fields']['edit_node_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node_1']['alter']['text'] = '[field_news_title]';
+  $handler->display->display_options['fields']['edit_node_1']['alter']['make_link'] = TRUE;
   /* Field: Content: Newsletter Type */
   $handler->display->display_options['fields']['field_newsl_newsletter_type']['id'] = 'field_newsl_newsletter_type';
   $handler->display->display_options['fields']['field_newsl_newsletter_type']['table'] = 'field_data_field_newsl_newsletter_type';
   $handler->display->display_options['fields']['field_newsl_newsletter_type']['field'] = 'field_newsl_newsletter_type';
-  $handler->display->display_options['fields']['field_newsl_newsletter_type']['exclude'] = TRUE;
+  /* Field: Content: Frequency */
+  $handler->display->display_options['fields']['field_newsl_frequency']['id'] = 'field_newsl_frequency';
+  $handler->display->display_options['fields']['field_newsl_frequency']['table'] = 'field_data_field_newsl_frequency';
+  $handler->display->display_options['fields']['field_newsl_frequency']['field'] = 'field_newsl_frequency';
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'users';
@@ -361,7 +365,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Last name */
+  /* Field: Field: Day */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -386,6 +390,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
+  $handler->display->display_options['fields']['changed']['exclude'] = TRUE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
@@ -394,6 +399,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['label'] = 'Shedule date';
+  $handler->display->display_options['fields']['field_survey_start_date']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_survey_start_date']['settings'] = array(
     'format_type' => 'itg_date_with_time',
     'fromto' => 'both',
@@ -625,11 +631,16 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Field: Subject Line */
+  $handler->display->display_options['fields']['field_news_title']['id'] = 'field_news_title';
+  $handler->display->display_options['fields']['field_news_title']['table'] = 'field_data_field_news_title';
+  $handler->display->display_options['fields']['field_news_title']['field'] = 'field_news_title';
+  $handler->display->display_options['fields']['field_news_title']['exclude'] = TRUE;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node_1']['id'] = 'edit_node_1';
   $handler->display->display_options['fields']['edit_node_1']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node_1']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node_1']['label'] = 'Template';
+  $handler->display->display_options['fields']['edit_node_1']['label'] = 'Subject Line';
   $handler->display->display_options['fields']['edit_node_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['edit_node_1']['alter']['text'] = '[title]';
   $handler->display->display_options['fields']['edit_node_1']['alter']['make_link'] = TRUE;
@@ -637,6 +648,10 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['field_newsl_newsletter_type']['id'] = 'field_newsl_newsletter_type';
   $handler->display->display_options['fields']['field_newsl_newsletter_type']['table'] = 'field_data_field_newsl_newsletter_type';
   $handler->display->display_options['fields']['field_newsl_newsletter_type']['field'] = 'field_newsl_newsletter_type';
+  /* Field: Content: Frequency */
+  $handler->display->display_options['fields']['field_newsl_frequency']['id'] = 'field_newsl_frequency';
+  $handler->display->display_options['fields']['field_newsl_frequency']['table'] = 'field_data_field_newsl_frequency';
+  $handler->display->display_options['fields']['field_newsl_frequency']['field'] = 'field_newsl_frequency';
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'users';
@@ -649,7 +664,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Last name */
+  /* Field: Field: Day */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -674,6 +689,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['changed']['table'] = 'node';
   $handler->display->display_options['fields']['changed']['field'] = 'changed';
   $handler->display->display_options['fields']['changed']['label'] = 'Modified On';
+  $handler->display->display_options['fields']['changed']['exclude'] = TRUE;
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';

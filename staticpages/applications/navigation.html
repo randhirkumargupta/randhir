@@ -1,0 +1,34 @@
+<?php 
+$request_url_arr = explode('/' , $_SERVER['REQUEST_URI']);
+
+?>
+
+<!--navigation start-->
+<div class="container navigation cf">
+ <div class="wrapper cf">
+  <ul class="menu cf">
+    <li><a href="index.jsp" <?php if($request_url_arr['2'] === 'index.jsp') { echo "class='current'";  } else { echo "class=''"; } ?> >Home</a></li>
+    <li><a href="/applications/indiatoday.jsp" <?php if($request_url_arr['2'] === 'indiatoday.jsp') { echo "class='current'";  } else { echo "class=''"; } ?> >INDIA TODAY </a></li>
+    <li><a href="/applications/aajtak.jsp" <?php if($request_url_arr['2'] === 'aajtak.jsp') { echo "class='current'";  } else { echo "class=''"; } ?>>AAJTAK</a></li>
+    <li><a href="/applications/businesstoday.jsp" <?php if($request_url_arr['2'] === 'businesstoday.jsp') { echo "class='current'";  } else { echo "class=''"; } ?>>BUSINESS TODAY</a></li>
+    <li><a href="/applications/cosmopoliton.jsp" <?php if($request_url_arr['2'] === 'cosmopoliton.jsp') { echo "class='current'";  } else { echo "class=''"; } ?> >COSMOPOLITON</a></li>
+    <li><a href="/applications/mailtoday.jsp" <?php if($request_url_arr['2'] === 'mailtoday.jsp') { echo "class='current'";  } else { echo "class=''"; } ?> >MAIL TODAY </a></li>
+    <li><a href="/applications/newsflicks.jsp" <?php if($request_url_arr['2'] === 'newsflicks.jsp') { echo "class='current'";  } else { echo "class=''"; } ?> >NEWS FLICKS</a></li>
+    <li><a href="/applications/iptv_ott.jsp" <?php if($request_url_arr['2'] === 'iptv_ott.jsp') { echo "class='current'";  } else { echo "class=''"; } ?>>IPTV/OTT</a></li>
+  </ul>
+  <div class="category"><a href="#">CATEGORIES</a>
+
+  <ul class="cat">
+    <li><a href="#">Any</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="#">Business</a></li>
+    <li><a href="#">Entertainment</a></li>
+    <li><a href="#">Lifestyle</a></li>
+    <li><a href="#">Sports</a></li>
+  </ul>
+  </div>
+
+  <div class="search-your-app"><input type="text" class="search" placeholder="Search your app"><input type="submit" value="" class="search-btn"></div>
+ </div>
+</div>
+<!--navigation end-->

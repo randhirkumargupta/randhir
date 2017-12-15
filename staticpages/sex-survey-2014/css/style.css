@@ -1,0 +1,188 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ margin:0; padding:0;}
+.clearfix:before, .clearfix:after {content: " ";display: block;height: 0;visibility: hidden;}
+.clearfix:after {clear: both;}.clearfix {}
+.flt{float:left}
+.flr{float:right}
+
+body{ font-size:100%; margin:0; padding:0; font-family:roboto; background:#fa0d1f url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015_BG.jpg)top center no-repeat; }
+
+#header{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-Masthead.png) center center no-repeat; height:171px;}
+.wrapper{ width:960px; margin:0 auto; padding:20px; background:#e4e4e4;}
+.top-add{ float:right; margin:15px 15px;}
+#header .wapper{ width:1000px; margin: 0 auto;}
+#nav-section{ width:100%; height:44px; background:#323232;}
+.nav-section{ width:1000px; margin:0 auto;}
+.nav {float: left;height: 45px;line-height: 45px;}
+.nav ul li{list-style:none; float:left; margin-right:15px;}
+.nav ul li a{ color:#FFF; text-decoration:none; text-transform:uppercase; padding:10px; font-size:18px; font-weight:500;}
+.nav ul li.active a:hover{ background:#f9ff00; color:#33342f; text-decoration:none; text-transform:uppercase; padding:10px; font-size:18px; font-weight:500;}
+.nav ul li.active a{background:#f9ff00; color:#000; }
+
+.social-icon{ float:right;}
+.social-icon ul li{ float:left; list-style:none; margin-left:8px;}
+.twitter-icon {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -11px -4px no-repeat;width: 40px;height: 42px;display: block;}
+.fb-icon {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -53px -4px no-repeat;width: 40px;height: 42px;display: block;}
+.share-icon-one {background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -90px -4px no-repeat;width: 40px;height: 42px;display: block;}
+.icon-home {
+background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) -90px -56px no-repeat;
+width: 40px;height: 42px;display: block;padding: 0 8px;margin-left: 15px;}
+.yellow{ background:#faff00;margin-right:10px;}
+
+#left-panel{ width:640px; float:left;}
+.top-stories{width:640px; background:#FFF;box-shadow: 2px 2px 10px 2px #CCCCCC;}
+.top-stories h2{font-size:36px; padding:0 10px;}
+.top-stories h2 a{text-decoration:none; color:#000;}
+.top-stories p{padding:0 10px 10px; font-size:14px; color:#767676;}
+
+.list-stories{margin-top:35px;}
+.list-stories ul li{ list-style:none;margin-bottom:20px;}
+.boxcont{ width:312px; margin-bottom:25px; background:#FFF;box-shadow: 2px 2px 10px 2px #CCCCCC;}
+.boxcont p{ padding:5px 10px 10px; font-size:17px;}
+.posrel{ position:relative;}
+.posrel span{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sex-survey/caption.png); width:292px; height:35px; line-height:35px; font-size:18px; font-weight:500; position:absolute; bottom:0px; left:0; color:#FFF; padding:5px 10px;}
+
+.share-story{width:98%; padding-left:5px;}
+.share-story{float:left;padding:2px 0 5px 8px;height:34px;}
+.share-icon{background:url("/staticpages/main/images/sprite-image.png") no-repeat scroll -135px -10px;width:42px;height:34px;float:left;margin-left:-5px;cursor:pointer;}
+.share-story ul{border-bottom:1px solid #DADADA;margin:0;padding:0;float:left;}
+.share-story li{border:medium none !important;color:#B2A6AA;margin:0 !important;padding:0 0px 0 0;list-style:none;float:left;}
+
+.sextionary-section{margin-bottom:20px;}
+.sextionary-section h2 a{ font-size:24px; color:#000; text-decoration:none; background:#faff00; text-transform:uppercase; font-weight:600; display:inline; padding:0;}
+.sextionary-inner-section{width:615px; height:209px; background:#faff00;margin-top:10px; padding:0 15px 15px;box-shadow: 2px 2px 10px 2px #CCCCCC;}
+.sextionary-inner-section h3{ font-size:24px; text-transform:uppercase; color:#333333; font-weight:normal;}
+.sextionary-inner-text{ float:left;margin-top:15px;}
+.sextionary-inner-text img{float:left !important; width:205px; margin-top:7px; border-right:1px solid #faff00;}
+.sextionary-inner-text img:first-child{border-right:none;}
+.sextionary-inner-text img:last-child{border-right:none;}
+
+.sextionary-inner-text p {float: left;width: 100%;margin-right: 15px;}
+.sextionary-inner-text a.more{float:right; clear:left; font-size:13px; line-height:20px; color:#000; text-decoration:none;}
+.sextionary-inner-text a.more:hover{text-decoration:underline;}
+
+.previous-section{margin-bottom:20px;}
+.previous-section h2 a{ font-size:24px; color:#000; text-decoration:none; background:#faff00; text-transform:uppercase; font-weight:600; display:inline; padding:0;}
+.previous-inner-section{width:642px; height:209px; background:#FFF;margin-top:10px; padding:15px 0;box-shadow: 2px 2px 10px 2px #CCCCCC;}
+
+
+#right-panel{ width:300px; float:right;}
+.right-add{width:300px; margin-bottom:20px; text-align:center; text-transform:uppercase; color:#717171; font-size:12px;}
+.right-add img{margin-top:5px;}
+.right-colum{ width:300px; min-height:230px; background:#fff;}
+.boxdec{box-shadow: 2px 2px 10px 2px #CCCCCC;}
+.right-colum h3{font-size: 30px;color: #000;text-decoration: none;background: #faff00;text-transform: uppercase;font-weight: 600;
+display: inline;padding: 0;margin:8px 0 0 0; float:left; clear:both;}
+
+.right-colum h4{ clear:both; margin:8px 0 8px 8px; float:left; font-size:18px;}
+.list-items{ clear:both; margin-left:10px;}
+.list-items li{ list-style:none; margin-bottom:20px; float:left; width:100%;}
+.list-items img{float:left;}
+.list-items li b{font-size:33px;color: #000;background: #faff00;text-transform: uppercase;font-weight: 600;display: inline;padding: 0; margin-right:5px; float:left;}
+.list-items li p{display:block;}
+.list-item-section{padding-bottom:15px;}
+
+.key-finding{margin:20px 0 20px}
+.key-finding h2 a {font-size: 24px;color: #000;text-decoration: none;background: #faff00;text-transform: uppercase;font-weight: 600;
+display: inline;padding:0;}
+
+.key-finding-section{margin-top:15px; background:#faff00; padding:15px 10px 15px 10px;}
+.key-finding-section ul{margin:0 0 0 20px; padding:0;}
+.key-finding-section ul li{ list-style:square; color:#e4e4e4; margin-bottom:10px;}
+.key-finding-section ul li a{text-decoration:none; color:#000;}
+
+.col-list-items{ clear:both; margin-left:10px; margin-top:15px; float:left; list-style:none;}
+.col-list-items li{ list-style:none; margin-bottom:20px;}
+.col-list-items li a span{line-height:20px; font-size:18px; font-weight:500; color:#000; text-decoration:none; display:inline-block; padding-bottom:5px;}
+
+
+.col-list-items img{float:left; margin:0 10px 0px 0;}
+.col-list-items li b{font-size:18px;color: #000;background: #faff00;text-transform: uppercase;font-weight: 600;display: inline;padding: 0;}
+.col-list-items li p {display:block;}
+
+.subscribe-now{ background:#fdfd00;box-shadow: 2px 2px 10px 2px #CCCCCC; margin-top:20px; width:300px; min-height:165px;}
+.inner-card{ width:253px; height:423px; background:#fff; margin:15px; float:left; position:relative;}
+.inner-card h3{ font-size:32px; padding:0 15px;}
+.maz{margin:12px 0 0 11px;}
+.subscribe {position: absolute;top: 205px;right: -19px;}
+
+
+
+#footer-section{ width:100%; height:42px; background:#323232;}
+.footer-section{ width:1000px; margin:0 auto;}
+.footer-icon{ float:left; height:45px;}
+.footer-icon li{list-style:none; float:left;}
+
+.footer{ width:1000px; margin:20px auto 30px; background:#FFF;}
+
+
+/* Year Slider */
+.previous-inner-section{ position:relative;}
+.previous-inner-section .previous-yearslider{ position:relative; width:563px; overflow:hidden; margin:0 auto;}
+.previous-inner-section .previous-yearslider ul{ position:relative;}
+.previous-inner-section .previous-yearslider ul li{ list-style:none; width:186px; float:left; margin-right:15px;}
+.previous-inner-section .previous-yearslider ul li .preyear{ width:40px; background:#faff00; border:1px solid #000; padding:3px; color:#323232;font-weight:700; font-size:17px; line-height:17px;}
+.previous-inner-section .previous-yearslider ul li .year-caption{ font-size:18px; font-weight:700; color:#323232; line-height:20px;}
+.previous-inner-section .previous-yearslider ul li .year-img{ margin:10px 0 0;}
+.previous-inner-section a#pre{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) no-repeat -20px -65px; text-indent:-99999px; display:block; width:19px; height:26px; position:absolute; top:105px; left:4px; }
+.previous-inner-section a#next{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/specials/sex-survey/Sex-Survey-2015-icons.png) no-repeat -52px -65px; text-indent:-99999px; display:block; width:19px; height:26px;position:absolute; top:105px; right:4px; }
+
+.list-stories ul{float:left; width:49%;}
+.list-stories ul:last-child{float:right;}
+.list-stories ul li{display:inline-block; margin-bottom:0;}
+.share-story ul{width:100%;}
+
+#top-web {
+    display: block;
+}
+.itgd_links {
+    width: 995px !important;
+}
+.submenu, .menues, .redborder, .itgd_links {
+    margin: 0 auto !important;
+    width: 1003px !important;
+}
+.gb-lik {
+    background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/band-gblink.png") no-repeat scroll 5px center rgba(0, 0, 0, 0);
+}
+.itgd_links {
+    background-color: #d8d8d8 !important;
+    color: #7a7a7a;
+    font: 11px/15px roboto;
+    margin: 0;
+
+    text-align: center;
+}
+.itgd_links ul {
+    margin: 0 auto;
+    padding: 0;
+    width: 1003px;
+}
+
+.itgd_links ul li.last {
+    border-right: medium none;
+}
+
+
+.last {
+    border-right: 0 none !important;
+    margin: 0;
+}
+
+.itgd_links a {
+    color: #7a7a7a;
+    text-decoration: none;
+}
+
+
+.itgd_links ul li {
+    border-right: 1px solid #92807e;
+    float: left;
+    list-style: outside none none;
+    padding: 0 9px;
+	line-height:23px;
+}
+.clr {clear:both}
+#top-web1 { display:none;}

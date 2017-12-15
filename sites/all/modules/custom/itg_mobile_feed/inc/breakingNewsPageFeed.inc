@@ -6,6 +6,7 @@
 
 /**
  * main function for generate breakingNewsPage xml feed
+ *
  * @return string $output
  */
 function breakingNewsPageFeed() {
@@ -62,12 +63,12 @@ function breakingNewsPageFeed() {
   }
 
   if ($output) {
-    $feed_file_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $feed_file_path = "public://xml_it/stories";
     $feed_file_name = "breakingnews.xml";
     $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 

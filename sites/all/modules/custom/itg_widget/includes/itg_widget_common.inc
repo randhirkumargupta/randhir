@@ -48,25 +48,29 @@ function itg_widget_setids() {
  * 
  * @param string $widget_name
  * @param string $content_type
- * @param int $cat_tid
+ * @param int $cat_tid (extra where condition to delete widget) Added
  * @param int $nid
  */
 function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, $nid) {
-    if (!empty($widget_name) && !empty($nid)) {
-        $num = db_delete('itg_widget_order')
-                ->condition('nid', $nid)
-                ->condition('widget', $widget_name)
-                ->execute();
-        if (function_exists("_itg_widget_delete_node_data_from_helper_table")) {
-            _itg_widget_delete_node_data_from_helper_table($nid);
-        }
-        if ($num) {
-            drupal_goto($_SERVER['HTTP_REFERER']);
-        } else {
-            drupal_set_message(t("Node id or widget name not found"));
-            drupal_goto($_SERVER['HTTP_REFERER']);
-        }
+  if (!empty($widget_name) && !empty($nid)) {
+    $num = db_delete('itg_widget_order')
+        ->condition('nid', $nid)
+        ->condition('widget', $widget_name);
+    if (is_numeric($cat_tid) && !empty($cat_tid)) {
+      $num->condition('cat_id', $cat_tid);
     }
+    $num->execute();
+    if (function_exists("_itg_widget_delete_node_data_from_helper_table")) {
+      _itg_widget_delete_node_data_from_helper_table($nid);
+    }
+    if ($num) {
+      drupal_goto($_SERVER['HTTP_REFERER']);
+    }
+    else {
+      drupal_set_message(t("Node id or widget name not found"));
+      drupal_goto($_SERVER['HTTP_REFERER']);
+    }
+  }
 }
 
 /**
@@ -794,6 +798,16 @@ function itg_widget_theme() {
         'podcast_banner' => array(
             'template' => 'templates/podcast-banner',
         ),
+       'itg_widget_live_tv' => array(
+            'template' => 'templates/itg-widget-live-tv',
+        ),
+        'section_manual_order_widget_data' => array(
+            'template' => 'templates/section-manual-order-widget-data',
+        ),
+        'movie_section_manual_widget_data' => array(
+            'template' => 'templates/movie-section-manual-widget-data',
+        ),
+      
     );
     return $themes;
 }
@@ -1052,6 +1066,23 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
             $form['#validate'][] = 'custom_section_wise_validate';
             break;
+
+        case 'views-exposed-form-section-wise-top-story-widget-order-reorder-page-1':
+            $form['items_per_page']['#options'] = array(
+                '10' => 10,
+                '20' => 20,
+                '30' => 30
+            );
+            $category_tid = $_GET['category_tid'];
+            $form['category_tid'] = array(
+                '#type' => 'hidden',
+                '#default_value' => isset($category_tid) ? $category_tid : 0,
+            );
+            $form['Cancel'] = array(
+                '#type' => 'markup',
+                '#markup' => l(t('Reset'), 'section-manual-order-widget-listing', array("attributes" => array("class" => array("button", "form-submit", "manual-section-reset")), "query" => array("category_tid" => $category_tid))),
+            );
+          break;
 
         case 'views-exposed-form-bitrates-videos-page':
 
@@ -2163,6 +2194,7 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
  */
 function itg_widget_block_view_alter(&$data, $block) {
     $item = menu_get_item();
+    $tid_of_template = "";
     $flag_occupation = $story_category = $occupation = array();
     $ipl_category = array();
     $arg = arg();
@@ -2198,7 +2230,6 @@ function itg_widget_block_view_alter(&$data, $block) {
             }
         }
     }
-
     if ($block->delta == 'related_photo_block') {
         if (isset($_GET['amp'])) {
             $data['content'] = array();
@@ -2215,12 +2246,28 @@ function itg_widget_block_view_alter(&$data, $block) {
         $arraynid = array();
         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
         $itg_widgets_sports_check = variable_get('itg_widgets_sports');
+       
+        if (isset($_GET['section']) && !empty($_GET['section'])) {
+          $tid_of_template = $_GET['section'];
+        }
+        if (isset($_GET['section_name']) && !empty($_GET['section_name'])) {
+          $tid_of_template = $_GET['section_name'];
+        }
+        if (is_numeric($arg[2]) && !empty($arg[2]) && $arg[0] == 'taxonomy') {
+          $tid_of_template = $arg[2];
+        }
+        $tids_of_live_score  = itg_widget_get_tid_by_block('live_score');
         
-        if ((isset($arg[1]) && (in_array($arg[1], $arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)))) {          
+        if ((isset($arg[1]) && (in_array($arg[1], $arraynid) || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category) || in_array($tid_of_template , $tids_of_live_score)))) {          
             drupal_add_js('jQuery(document).ready(function() {                  
                         jQuery("body").addClass("section-sport-ipl-bg");
-
           });', array('type' => 'inline', 'scope' => 'footer'));
+          if (in_array($tid_of_template , $tids_of_live_score)) 
+            {
+              drupal_add_js('jQuery(document).ready(function() {                  
+                        jQuery("#block-itg-widget-live-score").find(".block-title").remove();
+            });', array('type' => 'inline', 'scope' => 'footer'));
+            }
             
            if ((isset($item['page_arguments'][0]->type) && ($item['page_arguments'][0]->type == 'sport_static_page' && empty($itg_widgets_sports_check)))) {
              $data['content'] = array();             
@@ -2242,6 +2289,22 @@ function itg_widget_block_view_alter(&$data, $block) {
         }
     }
 }
+
+/**
+ * function for get tid by block name in layout manager.
+ * @param string $block_name  for widget name.
+ * 
+ */
+   function itg_widget_get_tid_by_block($block_name) {
+      $itg_query = db_select('itg_layout_tpl', 'layout_tpl');
+      $itg_query->fields('layout_tpl', array('section_name'));
+      $itg_query->join('itg_layout_manager', 'layout_manager', 'layout_tpl.id = layout_manager.layout_id');
+      $itg_query->isNotNull('section_name')->condition('layout_manager.widget_name', $block_name);
+      $itg_query->condition('layout_tpl.section_name', ' ', "!=");
+      $result = $itg_query->execute()->fetchAllAssoc('section_name');
+      $result = array_keys($result);
+      return $result;
+  }
 
 /**
  * Callback function for widget title autocomplete.

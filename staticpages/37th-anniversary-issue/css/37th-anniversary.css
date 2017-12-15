@@ -1,0 +1,400 @@
+﻿body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.wrapper_37th {
+    background-image: url(../images/bg.jpg);
+    background-repeat: repeat-y;
+    overflow: hidden;
+    background-position: center center;
+}
+
+.wrapper1001 {
+    width: 1001px;
+    margin: 0 auto;
+}
+
+.padded10 {
+    padding: 10px;
+}
+
+.padded5 {
+    padding: 5px;
+}
+
+
+.header {
+    height: 168px;
+    border-bottom: solid 1px #838383;
+    position: relative;
+}
+
+    .header .logo {
+        position: absolute;
+        left: 12px;
+        top: 6px;
+        width: 173px;
+        height: 151px;
+        background-image: url(../images/mast-logo.gif);
+        background-repeat: no-repeat;
+        background-position: top center;
+    }
+
+        .header .logo h1 {
+            margin: 0px;
+            padding: 0px;
+        }
+
+            .header .logo h1 a {
+                text-indent: -1111px;
+                display: block;
+                height: 150px;
+            }
+
+    .header .top-ads {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+        width: 728px;
+        height: 90px;
+    }
+
+    .header .caption {
+        position: absolute;
+        left: 183px;
+        bottom: 5px;
+        width: 410px;
+        height: 30px;
+        font-family: "DIN Alternate Medium";
+        font-size: 30px;
+        line-height: 120%;
+        color: rgb(237,37,9);
+        text-align: left;
+    }
+
+        .header .caption span {
+            font-family: "DIN Medium";
+            font-size: 20px;
+            line-height: 120%;
+            text-align: center;
+            color: #000;
+        }
+
+    .header .it-spcl-logo {
+        position: absolute;
+        left: 730px;
+        bottom: 9px;
+        width: 122px;
+        height: 31px;
+    }
+
+    .header .connect-with-us {
+        position: absolute;
+        right: 22px;
+        bottom: 4px;
+        width: 130px;
+        height: 45px;
+        font: 12px/14px Arial;
+    }
+
+        .header .connect-with-us ul {
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
+        }
+
+            .header .connect-with-us ul li {
+                float: left;
+                margin-right: 6px;
+            }
+
+                .header .connect-with-us ul li a {
+                    text-decoration: none;
+                }
+
+                    .header .connect-with-us ul li a img {
+                        border: 0px;
+                    }
+
+.page-wrapper {
+}
+
+
+.footer {
+}
+
+.clsfix {
+    clear: both;
+}
+
+.clsfix25 {
+    clear: both;
+    height: 25px;
+}
+
+.main-area {
+    background-color: #fff;
+    height: 500px;
+}
+
+    .main-area .left-area {
+        float: left;
+        margin-right: 10px;
+    }
+
+    .main-area .right-area {
+        float: right;
+        width: 310px;
+    }
+
+        .main-area .right-area h2 a {
+            color: #DE4A33;
+            font: bold 20px/24px Arial;
+            padding: 5px 0;
+            text-decoration: none;
+        }
+            .main-area .right-area h2 a:hover {
+                color: #004D85;
+            }
+
+        .main-area .right-area p {
+            color: #222;
+            font: normal 12px/16px Arial;
+            padding: 5px 0;
+        }
+
+        .main-area .right-area .ext-links {
+            margin: 15px 0;
+        }
+
+            .main-area .right-area .ext-links a {
+                font: bold 16px/25px Arial;
+                color: #52523B;
+                text-decoration: none;
+            }
+
+            .main-area .right-area .ext-links img {
+                float: left;
+            }
+
+            .main-area .right-area .ext-links span {
+                margin-left: 10px;
+            }
+
+            .main-area .right-area .ext-links a:hover {
+                color: #cc0000;
+            }
+
+        .main-area .right-area .related-images {
+            margin-top: 10px;
+        }
+
+            .main-area .right-area .related-images a {
+                float: left;
+                margin-right: 5px;
+            }
+
+.line363636 {
+    background-color: #363636;
+    height: 1px;
+    width: 98%;
+    margin: 0 auto;
+}
+
+h1, h2, h3, p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.footband {
+    background-color: #000;
+    border-right: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font: bold 12px arial;
+    padding: 5px 15px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 5px;
+    width: 950px;
+}
+
+    .footband ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+        .footband ul li {
+            border-right: 1px solid #CCCCCC;
+            color: #FFFFFF;
+            float: left;
+            font: bold 12px arial;
+            padding: 0 12px 0 11px;
+        }
+
+            .footband ul li a {
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+
+                .footband ul li a:hover {
+                    text-decoration: underline;
+                }
+
+            .footband ul li.last {
+                border-right: none;
+            }
+
+.center-wrapper {
+    margin: 30px 0 50px 0;
+    overflow: hidden;
+}
+
+.left-wrapper {
+    width: 678px;
+    float: left;
+    background-color: #fff;
+    border-top: solid 4px #f3220e;
+    border-bottom: solid 2px #f3220e;
+    min-height: 550px;
+}
+
+.heading {
+    height: 40px;
+    padding-left: 10px;
+    background-color: #d5d5d5;
+    font: bold 20px/40px Arial;
+    color: #004d85;
+}
+
+    .heading a {
+        text-decoration: none;
+        color: #cc0000;
+        font-weight: normal;
+    }
+
+        .heading a:hover {
+            color: #004d85;
+        }
+
+.right-wrapper {
+    width: 291px;
+    float: right;
+    background-color: #fff;
+    border-top: solid 4px #f3220e;
+    border-bottom: solid 2px #f3220e;
+    min-height: 550px;
+}
+
+    .right-wrapper .magazine {
+        margin-top: 25px;
+    }
+
+    .right-wrapper .line {
+        border-top: solid 1px #363636;
+        margin: 10px 0;
+        height: 10px;
+    }
+
+    .right-wrapper .cover-left {
+        float: left;
+        width: 144px;
+    }
+
+    .right-wrapper .cover-desc {
+        float: right;
+        width: 115px;
+        font: normal 12px/16px Arial;
+    }
+
+        .right-wrapper .cover-desc a {
+            font: bold 14px/18px Arial;
+            color: #e84b3a;
+            text-decoration: none;
+        }
+
+            .right-wrapper .cover-desc a:hover {
+                text-decoration: underline;
+            }
+
+.tab-wrapper {
+    margin-top: 25px;
+    overflow: hidden;
+    min-height: 407px;
+}
+
+    .tab-wrapper .col {
+        float: left;
+        width: 179px;
+        height: 191px;
+    }
+
+    .tab-wrapper .center-col {
+        margin: 0 55px;
+    }
+
+.interview-ticker {
+    background-image: url(../images/full-interview-ticker-bg.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    height: 56px;
+}
+
+    .interview-ticker a {
+        padding: 10px 7px;
+        font: bold 14px/18px Arial;
+        text-decoration: none;
+        color: #124d79;
+        display: block;
+    }
+
+        .interview-ticker a:hover {
+            color: #c00;
+        }
+
+#tab-two {
+    display: none;
+}
+
+.see-more {
+    text-align: center;
+    background-color: #d5d5d5;
+    height: 29px;
+    margin-top: 10px;
+}
+
+    .see-more:hover {
+        background-color: #b6b5b5;
+    }
+
+    .see-more a {
+        text-decoration: none;
+        color: #656565;
+        display: block;
+        font: bold 14px/29px Arial;
+    }
+
+        .see-more:hover a, .see-more a:hover {
+            color: #cc0000;
+        }
+
+.tab-navigation {
+    text-align: center;
+    margin-top: 15px;
+}
+
+    .tab-navigation a {
+        background: #000;
+        height: 16px;
+        width: 16px;
+        /*text-indent: -111111px;*/
+        display: inline-block;
+        margin-right: 10px;
+        border-radius: 8px;
+        text-decoration: none;
+    }
+
+        .tab-navigation a.selected {
+            background: #cc0000;
+        }
