@@ -673,7 +673,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
     );
     $form['mastercong']['master_config_internal_msg'] = array(
         '#type' => 'textfield',
-        '#title' => 'Master config internal msg',
+        '#title' => 'Success Message',
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('master_config_internal_msg')
