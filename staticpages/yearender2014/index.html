@@ -1,0 +1,873 @@
+<!doctype html>
+<html>
+
+<head>
+<script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>
+<!-- Begin comScore Tag -->
+<script type='text/javascript'>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "8549097" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<noscript>
+  <img src="http://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+</noscript>
+<!-- End comScore Tag -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-795349-17', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- IndiaToday Group - IndiaToday - RTA script -->
+<script type='text/javascript'>
+var crtg_nid = '5603';
+var crtg_cookiename = 'crtg_rta';
+var crtg_varname = 'crtg_content';
+function crtg_getCookie(c_name){ var i,x,y,ARRCookies=document.cookie.split(";");for(i=0;i<ARRCookies.length;i++){x=ARRCookies[i].substr(0,ARRCookies[i].indexOf("="));y=ARRCookies[i].substr(ARRCookies[i].indexOf("=")+1);x=x.replace(/^\s+|\s+$/g,"");if(x==c_name){return unescape(y);} }return'';}
+var crtg_content = crtg_getCookie(crtg_cookiename);
+var crtg_rnd=Math.floor(Math.random()*99999999999);
+(function(){
+var crtg_url=location.protocol+'//rtax.criteo.com/delivery/rta/rta.js?netId='+escape(crtg_nid);
+crtg_url +='&cookieName='+escape(crtg_cookiename);
+crtg_url +='&rnd='+crtg_rnd;
+crtg_url +='&varName=' + escape(crtg_varname);
+var crtg_script=document.createElement('script');crtg_script.type='text/javascript';crtg_script.src=crtg_url;crtg_script.async=true;
+if(document.getElementsByTagName("head").length>0)document.getElementsByTagName("head")[0].appendChild(crtg_script);
+else if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
+})();
+</script>
+<!--FB Claim URL // 22 june 2017-->
+<meta property="fb:pages" content="23230437118" />
+<!--End FB Claim URL -->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+<title>Yearender 2014 - A Complete Roundup of 2014</title>
+<meta name="description" content="India Today Yearender 2014 - News, gossips, reviews and landmark events that made 2014 memorable." />
+<meta name="keywords" content="year ender, indian of the year 2014, 2014 top news in india, 2014 year review, top business news 2014, 2014 most popular weddings, scandals and controversies 2014 year, 2014 indian economy news, biggest hits and flops movies 2014, your new resolutions" />
+<base href="/">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,900,700italic,900italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="/yearender2014/css/style.css" />
+<link href="/yearender2014/css/responsive.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script type='text/javascript' src='http://indiatoday.intoday.in/yearender2014/js/custom.js' ></script>
+<script>
+$(function() {
+$( ".draggable" ).draggable({
+	revert: "invalid"
+});
+var currentbox = "";
+$( ".droppable" ).droppable({
+activeClass: "ui-state-default",
+hoverClass: "ui-state-hover",
+	drop: function( event, ui ) {
+		var oldhtml = ui.draggable.html();
+		//alert("oldhtml"+oldhtml);
+		selectVal = ui.draggable.attr('idx');
+		//alert("selectVal"+selectVal);
+		selectVal = selectVal + ",";
+		//var current_dropcontain = $(this).attr('idx');
+		//alert("current_dropcontain"+current_dropcontain);
+		//current_dropcontain = current_dropcontain + ",";
+		var textval = $('#ids').val();
+		//alert("textval"+textval);
+		$('#ids').val(textval + selectVal);
+		//alert($('#ids').val());
+		var textval2 = $('#nameval').val();
+		if(isNaN(textval2)){
+			textval2 = 1;
+		}
+		$('#nameval').val((parseInt(textval2)+ 1));
+		$(this).append(oldhtml);
+		//currentbox = $(oldhtml).attr('name');
+		ui.draggable.hide();
+		$(this).next('div').show();
+		$(this).children('.drag').hide();
+		$(this).droppable('disable');
+		if($('#nameval').val()==5) {
+			$('#ids').val($('#ids').val().substring(0,($('#ids').val().length-1)));
+			$("#submitt").removeAttr('disabled');
+		}
+	}
+});
+
+	$('.close').click(function(){
+		var selectVal = $(this).prev('div').html();
+		var dropid = $(this).prev('div').children('span:last').attr('id');
+		$selectVal = $(this).prev('div').children('span:last').attr('id');
+		$selectVal = $selectVal + ",";
+		var current_dropcontain = $(this).prev('div').attr('idx');
+		$("#ids").val($("#ids").val().replace("," +current_dropcontain +',', ","));
+		$("#nameval").val($("#nameval").val().replace("," +$selectVal, ","));
+		$(this).prev('div').children('span:last').remove();
+		$('#'+dropid).css({left:0, top:0});
+		$('#'+dropid).show();
+		$(this).hide();
+		$(this).prev('div').children('span:first').show();
+		$(".droppable").droppable('enable');
+	});
+
+
+});
+</script>
+
+<script>
+
+(function ($) {
+    // Detect touch support
+    $.support.touch = 'ontouchend' in document;
+    // Ignore browsers without touch support
+    if (!$.support.touch) {
+    return;
+    }
+    var mouseProto = $.ui.mouse.prototype,
+        _mouseInit = mouseProto._mouseInit,
+        touchHandled;
+
+    function simulateMouseEvent (event, simulatedType) { //use this function to simulate mouse event
+    // Ignore multi-touch events
+        if (event.originalEvent.touches.length > 1) {
+        return;
+        }
+    event.preventDefault(); //use this to prevent scrolling during ui use
+
+    var touch = event.originalEvent.changedTouches[0],
+        simulatedEvent = document.createEvent('MouseEvents');
+    // Initialize the simulated mouse event using the touch event's coordinates
+    simulatedEvent.initMouseEvent(
+        simulatedType,    // type
+        true,             // bubbles
+        true,             // cancelable
+        window,           // view
+        1,                // detail
+        touch.screenX,    // screenX
+        touch.screenY,    // screenY
+        touch.clientX,    // clientX
+        touch.clientY,    // clientY
+        false,            // ctrlKey
+        false,            // altKey
+        false,            // shiftKey
+        false,            // metaKey
+        0,                // button
+        null              // relatedTarget
+        );
+
+    // Dispatch the simulated event to the target element
+    event.target.dispatchEvent(simulatedEvent);
+    }
+    mouseProto._touchStart = function (event) {
+    var self = this;
+    // Ignore the event if another widget is already being handled
+    if (touchHandled || !self._mouseCapture(event.originalEvent.changedTouches[0])) {
+        return;
+        }
+    // Set the flag to prevent other widgets from inheriting the touch event
+    touchHandled = true;
+    // Track movement to determine if interaction was a click
+    self._touchMoved = false;
+    // Simulate the mouseover event
+    simulateMouseEvent(event, 'mouseover');
+    // Simulate the mousemove event
+    simulateMouseEvent(event, 'mousemove');
+    // Simulate the mousedown event
+    simulateMouseEvent(event, 'mousedown');
+    };
+
+    mouseProto._touchMove = function (event) {
+    // Ignore event if not handled
+    if (!touchHandled) {
+        return;
+        }
+    // Interaction was not a click
+    this._touchMoved = true;
+    // Simulate the mousemove event
+    simulateMouseEvent(event, 'mousemove');
+    };
+    mouseProto._touchEnd = function (event) {
+    // Ignore event if not handled
+    if (!touchHandled) {
+        return;
+    }
+    // Simulate the mouseup event
+    simulateMouseEvent(event, 'mouseup');
+    // Simulate the mouseout event
+    simulateMouseEvent(event, 'mouseout');
+    // If the touch interaction did not move, it should trigger a click
+    if (!this._touchMoved) {
+      // Simulate the click event
+      simulateMouseEvent(event, 'click');
+    }
+    // Unset the flag to allow other widgets to inherit the touch event
+    touchHandled = false;
+    };
+    mouseProto._mouseInit = function () {
+    var self = this;
+    // Delegate the touch handlers to the widget's element
+    self.element
+        .on('touchstart', $.proxy(self, '_touchStart'))
+        .on('touchmove', $.proxy(self, '_touchMove'))
+        .on('touchend', $.proxy(self, '_touchEnd'));
+
+    // Call the original $.ui.mouse init method
+    _mouseInit.call(self);
+    };
+})(jQuery);
+</script>
+</head>
+<body>
+
+<style>
+.logo a{ display:block; text-indent:-999999px; height: 149px; width: 269px;}
+
+</style>
+<div id="top_nav">
+  <div class="top_nav">
+    <ul>
+      <li><a href="http://indiatodaygroup.com/" target="_blank" rel="nofollow"><strong>THE INDIA TODAY GROUP</strong></a></li>
+<li><a href="http://www.indiatoday.in/" target="_blank"  rel="nofollow">India Today</a></li>
+<li><a href="http://www.aajtak.in/" target="_blank"  rel="nofollow">Aaj Tak</a></li>
+<li><a href="http://www.businesstoday.in/" target="_blank" rel="nofollow">Business Today</a></li>
+<li><a href="http://www.menshealthindia.in/" target="_blank"  rel="nofollow">Men's Health</a></li>
+<li><a href="http://www.wonderwoman.in" target="_blank"  rel="nofollow">Wonder Woman</a></li>
+<li><a href="http://www.cosmopolitan.in/" target="_blank"  rel="nofollow">Cosmopolitan</a></li>
+<li><a href="http://oyefm.in/" target="_blank"  rel="nofollow">Oye! 104.8FM</a></li>
+<li><a href="http://travelplus.intoday.in" target="_blank"  rel="nofollow">Travel Plus</a></li>
+    </ul>
+  </div>
+</div>
+<!--top_nav end-->
+<div id="header">
+  <div class="header">
+    <div class="logo"><a href="http://indiatoday.intoday.in/yearender2014/">YearEnd 2014</a></div>
+    <div class="top_ad">
+      <p>.....ADVERTISEMENT.....</p>
+						<!-- Javascript tag: -->
+<!-- begin ZEDO for channel: IT ROS Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->
+<script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="1216/1137"; var zflag_sid="2"; var zflag_width="728"; var zflag_height="90"; var zflag_sz="14";
+</script>
+<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel: IT ROS Topnav LB , publisher: India Today , Ad Dimension: Super Banner - 728 x 90 -->	</div>
+  </div>
+</div>
+<!--header end-->
+<!-- Start Main Container -->
+<div id="container">
+  <div class="wapper">
+ <div class="left-container">
+
+ 	<!-- Main Content Box -->
+        <div class="topsliding-banner">
+    <div class="banner-cont">
+      <div class="heading-woutline">
+        <div class="heading-line"><h3>Year In Pictures</h3></div>
+   </div>
+      <div class="belt-mainbanner">
+      <ul>
+
+          <li> <a href="http://indiatoday.intoday.in/gallery/celeb-couples-who-tied-the-knot-in-secret-this-year/1/13794.html"><img height="460"  width="300" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_650_210_123014031307.jpg"></a>
+          <div class="caption"> <a href="http://indiatoday.intoday.in/gallery/celeb-couples-who-tied-the-knot-in-secret-this-year/1/13794.html">Celeb couples who tied the knot secretly this year</a>
+            <div class="social-icon"> <a href="https://www.facebook.com/dialog/feed?app_id=613580381995012&display=popup&caption=India%20today%20Year%20Ender&description=Celeb%20couples%20who%20tied%20the%20knot%20secretly%20this%20year&link=http://indiatoday.intoday.in/yearender2014/index.jsp&redirect_uri=http://indiatoday.intoday.in/yearender2014/index.jsp&picture=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_650_210_123014031307.jpg" class="facebook" target="_blank"></a><a href="http://twitter.com/?status=Celeb couples who tied the knot secretly this year http://indiatoday.intoday.in/yearender2014/ @indiatoday" class="twitter" target="_blank"></a><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/gallery/celeb-couples-who-tied-the-knot-in-secret-this-year/1/13794.html" onClick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="googlepluse"></a> </div>
+          </div>
+        </li>
+
+          <li> <a href="http://indiatoday.intoday.in/gallery/photobomber-sachin-queen-elizabeth-michelle-obama-putin/1/13791.html"><img height="460"  width="300" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-uk-obma-putin-650x500_123014024750.jpg"></a>
+          <div class="caption"> <a href="http://indiatoday.intoday.in/gallery/photobomber-sachin-queen-elizabeth-michelle-obama-putin/1/13791.html">How to photobomb, learn from the best</a>
+            <div class="social-icon"> <a href="https://www.facebook.com/dialog/feed?app_id=613580381995012&display=popup&caption=India%20today%20Year%20Ender&description=How%20to%20photobomb,%20learn%20from%20the%20best&link=http://indiatoday.intoday.in/yearender2014/index.jsp&redirect_uri=http://indiatoday.intoday.in/yearender2014/index.jsp&picture=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-uk-obma-putin-179_123014024750.jpg" class="facebook" target="_blank"></a><a href="http://twitter.com/?status=How to photobomb, learn from the best http://indiatoday.intoday.in/yearender2014/ @indiatoday" class="twitter" target="_blank"></a><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/gallery/photobomber-sachin-queen-elizabeth-michelle-obama-putin/1/13791.html" onClick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="googlepluse"></a> </div>
+          </div>
+        </li>
+
+          <li> <a href="http://indiatoday.intoday.in/gallery/wardrobe-malfunctions-oops-kim-kardashian-nicki-minaj-breast-boobs-butt/1/13789.html"><img height="460"  width="300" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_650_123014012601.jpg"></a>
+          <div class="caption"> <a href="http://indiatoday.intoday.in/gallery/wardrobe-malfunctions-oops-kim-kardashian-nicki-minaj-breast-boobs-butt/1/13789.html">Yearender 2014: Wardrobe malfunctions of the stars that made us go oops!</a>
+            <div class="social-icon"> <a href="https://www.facebook.com/dialog/feed?app_id=613580381995012&display=popup&caption=India%20today%20Year%20Ender&description=Yearender%202014:%20Wardrobe%20malfunctions%20of%20the%20stars%20that%20made%20us%20go%20oops!&link=http://indiatoday.intoday.in/yearender2014/index.jsp&redirect_uri=http://indiatoday.intoday.in/yearender2014/index.jsp&picture=http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/robin-wright_210_123014012601.jpg" class="facebook" target="_blank"></a><a href="http://twitter.com/?status=Yearender 2014: Wardrobe malfunctions of the stars that made us go oops! http://indiatoday.intoday.in/yearender2014/ @indiatoday" class="twitter" target="_blank"></a><a href="https://plus.google.com/share?url=http://indiatoday.intoday.in/gallery/wardrobe-malfunctions-oops-kim-kardashian-nicki-minaj-breast-boobs-butt/1/13789.html" onClick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="googlepluse"></a> </div>
+          </div>
+        </li>
+
+ </ul><a href="javascript:void(0)" id="prev">Pre</a><a href="javascript:void(0)" id="next">next</a>
+</div></div> </div><!-- TOp Banner End -->
+       <!-- Entertainment -->
+     <div class="row-colum">
+        <div class="heading-line">
+          <h3>YEAR ENDER 2014</h3>
+        </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/outstanding-performances-of-2014-aamir-khan-kangana-ranaut-alia-bhatt-nawazuddin-siddiqui-shahid-kapoor-pankaj-kapoor/1/13788.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_122914061425.jpg" alt="Yearender 2014: Bollywood's best performances this year" title="Yearender 2014: Bollywood's best performances this year"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/outstanding-performances-of-2014-aamir-khan-kangana-ranaut-alia-bhatt-nawazuddin-siddiqui-shahid-kapoor-pankaj-kapoor/1/13788.html">Yearender 2014: Bollywood's best performances this year </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/fashion-round-up-most-fashionable-women-celebrities-of-this-year/1/13786.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_122914052018.jpg" alt="Fashion round-up: Most fashionable women celebrities of this year" title="Fashion round-up: Most fashionable women celebrities of this year"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/fashion-round-up-most-fashionable-women-celebrities-of-this-year/1/13786.html">Fashion round-up: Most fashionable women celebrities of this year </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/yearender-2014-from-pk-to-happy-new-year-biggest-grosser-of-the-year/1/13782.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_122914031040.jpg" alt="Yearender 2014: From PK to Happy New Year, biggest grosser of the year" title="Yearender 2014: From PK to Happy New Year, biggest grosser of the year"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/yearender-2014-from-pk-to-happy-new-year-biggest-grosser-of-the-year/1/13782.html">Yearender 2014: From PK to Happy New Year, biggest grosser of the year </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/beauty-trends-2015-forecast-kim-kardaashian-negative-space-manicure/1/13780.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumbbeauty-trends_350_122914021503.jpg" alt="Beauty trends forecast for 2015" title="Beauty trends forecast for 2015"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/beauty-trends-2015-forecast-kim-kardaashian-negative-space-manicure/1/13780.html">Beauty trends forecast for 2015 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/pk-ugly-katiyabaaz-filmistaan-aankhon-dekhi-miss-lovely-mardaani-finding-fanny/1/13772.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/filmistaan-thumb_350_122714060242.jpg" alt="Yearender 2014: Films that redefined Bollywood" title="Yearender 2014: Films that redefined Bollywood"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/pk-ugly-katiyabaaz-filmistaan-aankhon-dekhi-miss-lovely-mardaani-finding-fanny/1/13772.html">Yearender 2014: Films that redefined Bollywood </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/10-best-bollywood-films-of-2014/1/13766.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_350_122614063622.jpg" alt="Yearender: 10 best Bollywood films of 2014" title="Yearender: 10 best Bollywood films of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/10-best-bollywood-films-of-2014/1/13766.html">Yearender: 10 best Bollywood films of 2014 </a> </div>
+               </div>
+
+</div>
+
+
+      <!-- TOp 5 Stoty Drap drop Section  -->
+
+		<form action="http://indiatoday.intoday.in/yearender2014/chunk_story_dragdrop_save.jsp" name="dragdropfrm" method="post" id="dragdropfrm" autocomplete="off">
+ 		<div class="topstory-section">
+      	<div class="topstory-mainheading">
+          <h3>Your Top Stories of 2014</h3>
+          <div class="subheding">We asked readers to rank the top news stories of 2014</div>
+      	</div>
+      	<h6>Your Picks</h6>
+       	<h6 style="margin-left:250px">Top Stories</h6>
+       	<div class="clr"></div>
+        <div id="topstories">
+           <div class="left-dropablelist">
+              <ul class="fivestory-list">
+                 <li><span class="numbers">1</span><span class="stories-drop-comm ui-widget-header droppable drop-area"><span class="drag">Drag story here</span></span></li>
+                 <li><span class="numbers">2</span><span class="stories-drop-comm ui-widget-header droppable drop-area "><span class="drag">Drag story here</span></span></li>
+                 <li><span class="numbers">3</span><span class="stories-drop-comm ui-widget-header droppable drop-area "><span class="drag">Drag story here</span></span></li>
+                 <li><span class="numbers">4</span><span class="stories-drop-comm ui-widget-header droppable drop-area "><span class="drag">Drag story here</span></span></li>
+                 <li><span class="numbers">5</span><span class="stories-drop-comm ui-widget-header droppable drop-area "><span class="drag">Drag story here</span></span></li>
+              </ul>
+              <input type="submit" name="submit" id="submitt" disabled="disabled" value="Submit"/>
+           </div>
+           <div class="right-droplist">
+              <div class="stories-container">
+              <ul class="story-listall">
+     <li name="story1" idx="359920">
+              <div class="ui-widget-content draggable" idx="359920">
+              <div class="story-smlimg" idx="359920"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/cs-bjp-may19-1_88_051014120957.jpg" width="88"></div>
+              <div class="story-text" idx="359920"><a href="http://indiatoday.intoday.in/story/narendra-modi-bjp-campaign-indian-electoral-history-lok-sabha-elections-2014/1/359920.html">Modi unleashes a poll blitzkrieg never seen before </a></div>
+              </div>
+          </li>
+<li name="story2" idx="375023">
+              <div class="ui-widget-content draggable" idx="375023">
+              <div class="story-smlimg" idx="375023"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/cs-natwar-interview-aug11-1_88_073114103413.jpg" width="88"></div>
+              <div class="story-text" idx="375023"><a href="http://indiatoday.intoday.in/story/natwar-singh-interview-with-kaveree-bamzai-on-sonia-gandhi/1/375023.html">Madam Sonia said I had to be fixed: Natwar Singh </a></div>
+              </div>
+          </li>
+<li name="story3" idx="377245">
+              <div class="ui-widget-content draggable" idx="377245">
+              <div class="story-smlimg" idx="377245"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modispeech-story_88_081514090858.jpg" width="88"></div>
+              <div class="story-text" idx="377245"><a href="http://indiatoday.intoday.in/story/independence-day-15-things-modi-said-in-his-red-fort-speech/1/377245.html">15 things Modi said in his August 15 speech </a></div>
+              </div>
+          </li>
+<li name="story4" idx="384503">
+              <div class="ui-widget-content draggable" idx="384503">
+              <div class="story-smlimg" idx="384503"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/white-tiger_88_092314054451.jpg" width="88"></div>
+              <div class="story-text" idx="384503"><a href="http://indiatoday.intoday.in/story/white-tiger-kills-class-12-boy-delhi-zoo/1/384503.html">White tiger kills man in Delhi Zoo </a></div>
+              </div>
+          </li>
+<li name="story5" idx="397130">
+              <div class="ui-widget-content draggable" idx="397130">
+              <div class="story-smlimg" idx="397130"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/redmi-note_88_102214042532.jpg" width="88"></div>
+              <div class="story-text" idx="397130"><a href="http://indiatoday.intoday.in/story/indian-air-force-warns-against-using-xiaomi-phones/1/397130.html">Indian Air Force warns against using Xiaomi phones </a></div>
+              </div>
+          </li>
+<li name="story6" idx="397328">
+              <div class="ui-widget-content draggable" idx="397328">
+              <div class="story-smlimg" idx="397328"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/14fir21-2_88_102414014420.jpg" width="88"></div>
+              <div class="story-text" idx="397328"><a href="http://indiatoday.intoday.in/story/happy-new-year-review-starring-shahrukh-khan-deepika-padukone-abhishek-bachchan/1/397328.html">Movie review: Happy New Year a below average film </a></div>
+              </div>
+          </li>
+<li name="story7" idx="399452">
+              <div class="ui-widget-content draggable" idx="399452">
+              <div class="story-smlimg" idx="399452"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/cs-lead-sachin-nov17-2_88_110714095637.jpg" width="88"></div>
+              <div class="story-text" idx="399452"><a href="http://indiatoday.intoday.in/story/sachin-tendulkar-playing-it-my-way-book-greg-chappell-rahul-dravid/1/399452.html">First Review of Playing It My Way: Looking back with Sachin </a></div>
+              </div>
+          </li>
+<li name="story8" idx="399937">
+              <div class="ui-widget-content draggable" idx="399937">
+              <div class="story-smlimg" idx="399937"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/virat_650_col-story_88_111014104700.jpg" width="88"></div>
+              <div class="story-text" idx="399937"><a href="http://indiatoday.intoday.in/story/anushka-sharma-virat-kohli-hyderabad-odi-india-vs-sri-lanka/1/399937.html">Virat blows a kiss to Anushka on completing half-ton </a></div>
+              </div>
+          </li>
+<li name="story9" idx="402809">
+              <div class="ui-widget-content draggable" idx="402809">
+              <div class="story-smlimg" idx="402809"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/arpita14_88_112014010631.jpg" width="88"></div>
+              <div class="story-text" idx="402809"><a href="http://indiatoday.intoday.in/story/salman-khan-gifts-rolls-royce-phantom-to-newlywed-couple-arpita-and-aayush/1/402809.html">Salman Khan gifts Rolls-Royce Phantom to Arpita and Aayush </a></div>
+              </div>
+          </li>
+<li name="story10" idx="404518">
+              <div class="ui-widget-content draggable" idx="404518">
+              <div class="story-smlimg" idx="404518"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gauahar-slapped-story_88_120114094510.jpg" width="88"></div>
+              <div class="story-text" idx="404518"><a href="http://indiatoday.intoday.in/story/gauhar-khan-slapped-raw-star-short-clothes/1/404518.html">Gauahar Khan slapped for wearing skimpy clothes during shoot </a></div>
+              </div>
+          </li>
+</ul> </div>
+              <a href="javascript:void(0)" id="topnext">top</a><a href="javascript:void(0)" id="topprev">bottom</a>
+           </div>
+           </div>
+        </div>
+        <input type="hidden" value="" name="ids" id="ids">
+        <input type="hidden" value="" name="nameval" id="nameval">
+<!--<input type="submit" name="submit" id="submitt" disabled="disabled" value="Submit"/>-->
+        </form>
+
+
+     <div class="row-colum">
+
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/fashion-trends-2015-rohit-bal-frou-frou-leather-skirt-crop-tops/1/13761.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_350_122614020924.jpg" alt="Yearender 2014: Fashion trends we hope to see in 2015" title="Yearender 2014: Fashion trends we hope to see in 2015"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/fashion-trends-2015-rohit-bal-frou-frou-leather-skirt-crop-tops/1/13761.html">Yearender 2014: Fashion trends we hope to see in 2015 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/top-hollywood-beauty-looks-2014-lupita-selena-gomez-nicole-richie/1/13760.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_122614015216.jpg" alt="Yearender 2014: Top Hollywood beauty looks that left us smitten" title="Yearender 2014: Top Hollywood beauty looks that left us smitten"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/top-hollywood-beauty-looks-2014-lupita-selena-gomez-nicole-richie/1/13760.html">Yearender 2014: Top Hollywood beauty looks that left us smitten </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/hrithik-roshan-katrina-kaif-salman-khan-jacqueline-fernandez-shah-rukh-khan-deepika-padukone-alia-bhatt-varun-dhawan-arjun-kapoor/1/13758.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_122614113955.jpg" alt="Yearender 2014: Bollywood's best and worst onscreen couples" title="Yearender 2014: Bollywood's best and worst onscreen couples"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/hrithik-roshan-katrina-kaif-salman-khan-jacqueline-fernandez-shah-rukh-khan-deepika-padukone-alia-bhatt-varun-dhawan-arjun-kapoor/1/13758.html">Yearender 2014: Bollywood's best and worst onscreen couples </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/10-gadgets-that-failed-in-2014/1/13756.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/google-glass_350_122514061313.jpg" alt="10 gadgets that failed in 2014" title="10 gadgets that failed in 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/10-gadgets-that-failed-in-2014/1/13756.html">10 gadgets that failed in 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/best-smartphones-of-2014/1/13744.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/rtr46tv8_350_122414043718.jpg" alt="Best smartphones of 2014" title="Best smartphones of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/best-smartphones-of-2014/1/13744.html">Best smartphones of 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/10-racy-confessions-of-kardashians-sex-vagina-penis-kim-kardashian-khloe/1/13743.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_350_122414042120.jpg" alt="Yearender 2014: 10 racy confessions of the Kardashian Klan" title="Yearender 2014: 10 racy confessions of the Kardashian Klan"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/10-racy-confessions-of-kardashians-sex-vagina-penis-kim-kardashian-khloe/1/13743.html">Yearender 2014: 10 racy confessions of the Kardashian Klan </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/fashion-trends-10-top-2014-sonam-kapoor-deepika-oxblood-crop-top/1/13742.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/suits_350_122414030220.jpg" alt="Yearender 2014: 10 fashion trends that left a mark on this year" title="Yearender 2014: 10 fashion trends that left a mark on this year"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/fashion-trends-10-top-2014-sonam-kapoor-deepika-oxblood-crop-top/1/13742.html">Yearender 2014: 10 fashion trends that left a mark on this year </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/hollywood-films-birdman-interstellar-boyhood-the-grand-budapest-hotel-ida-mr-turner/1/13740.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collrge_350_122414021428.jpg" alt="Yearender 2014: Top 10 Hollywood films of this year" title="Yearender 2014: Top 10 Hollywood films of this year"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/hollywood-films-birdman-interstellar-boyhood-the-grand-budapest-hotel-ida-mr-turner/1/13740.html">Yearender 2014: Top 10 Hollywood films of this year </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/2014-bollywood-comebacks-govinda-madhuri-dixit-juhi-chawla-rani-mukerji-rekha/1/13732.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collrge_350_122314043907.jpg" alt="2014: The year of Bollywood comebacks" title="2014: The year of Bollywood comebacks"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/2014-bollywood-comebacks-govinda-madhuri-dixit-juhi-chawla-rani-mukerji-rekha/1/13732.html">2014: The year of Bollywood comebacks </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/top-10-phablets-of-2014/1/13730.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/htc_350_122314042208.jpg" alt="Top 10 Phablets of 2014" title="Top 10 Phablets of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/top-10-phablets-of-2014/1/13730.html">Top 10 Phablets of 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/biggest-hollywood-fashion-trends-of-2014/1/13725.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/power-thumb_350_122214075234.jpg" alt="Biggest Hollywood fashion trends of 2014" title="Biggest Hollywood fashion trends of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/biggest-hollywood-fashion-trends-of-2014/1/13725.html">Biggest Hollywood fashion trends of 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/yearender-2014-celebs-who-became-proud-parents-genelia-dsouza-riteish-deshmukh-imran-khan-avantika-malik/1/13724.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ritesh-genelia-thumb_350_122214050442.jpg" alt="Yearender 2014: Celebs who became proud parents" title="Yearender 2014: Celebs who became proud parents"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/yearender-2014-celebs-who-became-proud-parents-genelia-dsouza-riteish-deshmukh-imran-khan-avantika-malik/1/13724.html">Yearender 2014: Celebs who became proud parents </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/top-10-iphone-apps-of-2014/1/13704.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/app-store_350_121914070608.jpg" alt="Top 10 iPhone apps of 2014" title="Top 10 iPhone apps of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/top-10-iphone-apps-of-2014/1/13704.html">Top 10 iPhone apps of 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/bollywood-weddings-john-abraham-rani-mukerji-dia-mirza-arpita-khan-pulkit-samrat-sameera-reddy-rannvijay-singh/1/13693.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_121814112636.jpg" alt="Yearender 2014: Bollywood actors who got hitched this year" title="Yearender 2014: Bollywood actors who got hitched this year"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/bollywood-weddings-john-abraham-rani-mukerji-dia-mirza-arpita-khan-pulkit-samrat-sameera-reddy-rannvijay-singh/1/13693.html">Yearender 2014: Bollywood actors who got hitched this year </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/top-10-gadgets-of-2014/1/13691.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/rtr46va2_350_121714063646.jpg" alt="Top 10 gadgets of 2014" title="Top 10 gadgets of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/top-10-gadgets-of-2014/1/13691.html">Top 10 gadgets of 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/10-bizarre-things-people-inserted-inside-their-bodies-in-2014/1/13689.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/8-bottle-thumb-350_121714053527.jpg" alt="10 bizarre things people inserted inside their bodies in 2014" title="10 bizarre things people inserted inside their bodies in 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/10-bizarre-things-people-inserted-inside-their-bodies-in-2014/1/13689.html">10 bizarre things people inserted inside their bodies in 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/top-10-free-android-apps-and-games-that-made-2014-more-fun/1/13687.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/main_350_121714035912.jpg" alt="Top 10 most popular Android apps of 2014" title="Top 10 most popular Android apps of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/top-10-free-android-apps-and-games-that-made-2014-more-fun/1/13687.html">Top 10 most popular Android apps of 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/top-women-centric-bollywood-films-of-2014/1/13686.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_121714121341.jpg" alt="Yearender: 2014 year of women-centric films in Bollywood" title="Yearender: 2014 year of women-centric films in Bollywood"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/top-women-centric-bollywood-films-of-2014/1/13686.html">Yearender: 2014 year of women-centric films in Bollywood </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/katrina-kaif-is-the-most-searched-bollywood-heroine-of-2014/1/13681.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/katrina-gallery-thumb-350_121614061247.jpg" alt="Katrina Kaif is the most searched Bollywood heroine of 2014" title="Katrina Kaif is the most searched Bollywood heroine of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/katrina-kaif-is-the-most-searched-bollywood-heroine-of-2014/1/13681.html">Katrina Kaif is the most searched Bollywood heroine of 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/jai-ho-ragini-mms-2-kick-happy-new-year-singham-returns-heropanti-bang-bang-2-states-ek-villain/1/13680.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_350_121614052645.jpg" alt="Yearender 2014: The most searched Bollywood movies on Google" title="Yearender 2014: The most searched Bollywood movies on Google"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/jai-ho-ragini-mms-2-kick-happy-new-year-singham-returns-heropanti-bang-bang-2-states-ek-villain/1/13680.html">Yearender 2014: The most searched Bollywood movies on Google </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/bollywood-flops-kill-dil-action-jackson-bobby-jasoos-entertainment-revolver-rani-kaanchi-happy-ending-total-siyapaa/1/13677.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_350_121614022829.jpg" alt="Yearender: The surprise flops of 2014" title="Yearender: The surprise flops of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/bollywood-flops-kill-dil-action-jackson-bobby-jasoos-entertainment-revolver-rani-kaanchi-happy-ending-total-siyapaa/1/13677.html">Yearender: The surprise flops of 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/simply-booty-full-top-celebrity-bums-in-2014/1/13672.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_350_121514063042.jpg" alt="Simply booty-full: Top 10 celebrity bums in 2014" title="Simply booty-full: Top 10 celebrity bums in 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/simply-booty-full-top-celebrity-bums-in-2014/1/13672.html">Simply booty-full: Top 10 celebrity bums in 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/tiger-shroff-kriti-sanon-surveen-chawla-tahir-bhasin-armaan-jain-siddharth-shukla-most-promising-newcomers-of-2014-bollywood/1/13671.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_350_121514045058.jpg" alt="Yearender: Bollywood's most promising newcomers of 2014" title="Yearender: Bollywood's most promising newcomers of 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/tiger-shroff-kriti-sanon-surveen-chawla-tahir-bhasin-armaan-jain-siddharth-shukla-most-promising-newcomers-of-2014-bollywood/1/13671.html">Yearender: Bollywood's most promising newcomers of 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/instagram-sonam-kapoor-priyanka-chopra-deepika-padukone-ranveer-singh-sonakshi-sinha/1/13670.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_350_121514040105.jpg" alt="Yearender 2014: What Bollywood stars were up to on Instagram" title="Yearender 2014: What Bollywood stars were up to on Instagram"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/instagram-sonam-kapoor-priyanka-chopra-deepika-padukone-ranveer-singh-sonakshi-sinha/1/13670.html">Yearender 2014: What Bollywood stars were up to on Instagram </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-revisiting-football-in-2014-photos/1/13669.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/ronaldo-thumb_350_121514035210.jpg" alt="Yearender Special: Revisiting football in 2014" title="Yearender Special: Revisiting football in 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-revisiting-football-in-2014-photos/1/13669.html">Yearender Special: Revisiting football in 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-revisiting-cricket-in-2014-photos/1/13666.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/sharma-thumb_350_121514033040.jpg" alt="Yearender Special: Revisiting cricket in 2014" title="Yearender Special: Revisiting cricket in 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-revisiting-cricket-in-2014-photos/1/13666.html">Yearender Special: Revisiting cricket in 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-major-sporting-events-in-2014-photos/1/13665.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/germany-thumb_350_121514014101.jpg" alt="Yearender Special: Major sporting events in 2014" title="Yearender Special: Major sporting events in 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-major-sporting-events-in-2014-photos/1/13665.html">Yearender Special: Major sporting events in 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-shocking-events-in-sports-2014-photos/1/13662.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_350_121514120400.jpg" alt="Yearender 2014: Most shocking events in sports" title="Yearender 2014: Most shocking events in sports"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-shocking-events-in-sports-2014-photos/1/13662.html">Yearender 2014: Most shocking events in sports </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-india-proud-moments-in-sports-2014-photos/1/13661.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb1_350_121514111616.jpg" alt="Yearender 2014: India's proud moments in sports" title="Yearender 2014: India's proud moments in sports"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/yearender-special-india-proud-moments-in-sports-2014-photos/1/13661.html">Yearender 2014: India's proud moments in sports </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/pictures-of-the-decade-that-you-should-not-miss/1/13650.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/decade1-thumb_350_121314122122.jpg" alt="Pictures of the decade that you should not miss" title="Pictures of the decade that you should not miss"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/pictures-of-the-decade-that-you-should-not-miss/1/13650.html">Pictures of the decade that you should not miss </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/shah-rukh-khan-salman-khan-aamir-khan-kim-kardashian-angelina-jolie-george-clooney-amitabh-bachchan-virat-kohli/1/13646.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_350_121214012526.jpg" alt="Yearender 2014: The most talked about celebrity pictures" title="Yearender 2014: The most talked about celebrity pictures"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/shah-rukh-khan-salman-khan-aamir-khan-kim-kardashian-angelina-jolie-george-clooney-amitabh-bachchan-virat-kohli/1/13646.html">Yearender 2014: The most talked about celebrity pictures </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/dev-patel-frieda-pinto-karan-singh-grover-jennifer-winget-pooja-bhatt-manish-makhija-gauahar-khan-kushal-tandon-armaan-kohli/1/13640.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb__121114124913.jpg" alt="Yearender 2014: The most shocking celebrity break-ups" title="Yearender 2014: The most shocking celebrity break-ups"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/dev-patel-frieda-pinto-karan-singh-grover-jennifer-winget-pooja-bhatt-manish-makhija-gauahar-khan-kushal-tandon-armaan-kohli/1/13640.html">Yearender 2014: The most shocking celebrity break-ups </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/5-people-attractive-police-mug-famous-2014/1/13625.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/stephanie_thumb-350_120914120812.jpg" alt="Police mugshots that made 5 convicts famous. No 6 is hot!" title="Police mugshots that made 5 convicts famous. No 6 is hot!"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/5-people-attractive-police-mug-famous-2014/1/13625.html">Police mugshots that made 5 convicts famous. No 6 is hot! </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/seven-most-shocking-photos-of-2014/1/13611.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/car-thumb_350_120614063108.jpg" alt="7 most bizarre photos of 2014. 3rd one is really shocking" title="7 most bizarre photos of 2014. 3rd one is really shocking"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/seven-most-shocking-photos-of-2014/1/13611.html">7 most bizarre photos of 2014. 3rd one is really shocking </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/12-instagram-pics-that-went-viral-in-2014/1/13603.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/monkey_350_120514035113.jpg" alt="12 instagram pics that went viral in 2014" title="12 instagram pics that went viral in 2014"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/12-instagram-pics-that-went-viral-in-2014/1/13603.html">12 instagram pics that went viral in 2014 </a> </div>
+               </div>
+
+			 <div class="col-box"> <a href="http://indiatoday.intoday.in/gallery/11-pictures-of-2014-that-you-shouldnt-miss.-seventh-one-will-take-your-breath-away/1/13600.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/photo-icon-small.png" title="" alt="" class="mediaimg"><img width="212" height="135" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/angelina-350_120414081436.jpg" alt="11 pictures of 2014 that you shouldn't miss. Seventh one will take your breath away" title="11 pictures of 2014 that you shouldn't miss. Seventh one will take your breath away"></a>
+             <div class="column-text"> <a href="http://indiatoday.intoday.in/gallery/11-pictures-of-2014-that-you-shouldnt-miss.-seventh-one-will-take-your-breath-away/1/13600.html">11 pictures of 2014 that you shouldn't miss. Seventh one will take your breath away </a> </div>
+               </div>
+
+</div>
+    </div>
+    <!--Right Container -->
+     <div class="right-container">
+    <div class="colum">
+    	<div class="newstay-connected">
+        <div class="socialmedia">
+        <a alt="facebook" href="http://www.facebook.com/indiatoday"><div class="ceo-fb bg"></div></a>
+        <a alt="twitter" href="http://www.twitter.com/indiatoday"><div class="ceo-tw bg"></div></a>
+        <a alt="googleplus" href="http://www.google.com/+indiatoday"><div class="ceo-g bg"></div></a>
+        <a alt="youtube" href="#"><div class="ceo-you bg"></div></a>
+        <a alt="mail" href="http://indiatoday.intoday.in/newsletter.jsp"><div class="ceo-mail bg"></div></a>
+        <a alt="mobileapp" href="http://m.indiatoday.in/"><div class="ceo-mobile bg"></div></a>
+        <div id="ceo-search" class="ceo_search bg"></div>
+
+        </div>
+        <div class="clr"></div>
+
+        <div id="searchform">
+        <form style="margin:0;padding:0;" onSubmit="return validate1();" name="searchform1" method="get" action="http://indiatoday.intoday.in/advanced_search.jsp">
+        <div class="search-inner">
+        <input type="hidden" value="com_search" name="option">
+        <input type="text" onFocus="if(this.value=='Search') this.value='';" onBlur="if(this.value=='') this.value='Search';" value="Search" id="mod_search_searchword" name="searchword" class="input-box">
+        <input type="image" value="Search" class="submit-btn" name="">
+        </div>
+        </form>
+        </div>
+</div>
+    	<div class="ad">
+        	<h4>.....ADVERTISEMENT.....</h4>
+
+				<!-- Javascript tag: -->
+<!-- begin ZEDO for channel: IT ROS Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
+<script language="JavaScript">
+var zflag_nid="821"; var zflag_cid="1218/1137"; var zflag_sid="2"; var zflag_width="300"; var zflag_height="250"; var zflag_sz="9";
+</script>
+<script language="JavaScript" src="http://d2.zedo.com/jsc/d2/fo.js"></script>
+<!-- end ZEDO for channel: IT ROS Rightnav MR 1 , publisher: India Today , Ad Dimension: Medium Rectangle - 300 x 250 -->
+        </div>
+      </div>
+         <div class="colum">
+
+             </div>
+
+        <!-- TOP News End -->
+         <div class="colum">
+
+        </div>
+        <!-- Do not Miss -->
+        <div class="colum">
+
+
+
+<div class="dontmiss"><div class="heading-line-right"> <h3>DON'T MISS</h3></div><div class="dontmiss_box"><ul>
+
+  <li><a href="story/love-sex-dhoka-jaish-e-muhammad-khalid-kashmir/1/1064623.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/khalid-background-story-300_100917030629.jpg" width="300" height="350" alt="JeM militant Khalid" title="JeM militant Khalid"/></a>
+<div class="caption_two"><a href="story/love-sex-dhoka-jaish-e-muhammad-khalid-kashmir/1/1064623.html">Love, Sex, Dhokha: Story behind killing of a Jaish-e-Mohammad commander</a></div>
+</li>
+
+  <li><a href="story/jay-amit-shah-company-turnover-wire-article-rahul-gandhi-modi/1/1064525.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rahul-gandhi-story_300x350_100917124855.jpg" width="300" height="350" alt="Rahul Gandhi" title="Rahul Gandhi"/></a>
+<div class="caption_two"><a href="story/jay-amit-shah-company-turnover-wire-article-rahul-gandhi-modi/1/1064525.html">Rahul Gandhi, BJP exchange barbs over Jay Amit Shah controversy</a></div>
+</li>
+
+  <li><a href="story/nobel-prize-in-economic-sciences-goes-to-richard-thaler/1/1064624.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/economics-nobel-story_300_100917033738.jpg" width="300" height="350" alt="Richard Thaler" title="Richard Thaler"/></a>
+<div class="caption_two"><a href="story/nobel-prize-in-economic-sciences-goes-to-richard-thaler/1/1064624.html">Nobel Prize in Economic Sciences winner announced. No, it is not Raghuram Rajan</a></div>
+</li>
+
+  <li><a href="story/kerala-love-jihad-hadiya-case-supreme-court/1/1064714.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/love-jihad-story-300_100317013018_100717055538_100917044536.jpg" width="300" height="350" alt="Hadiya and Shefin Jahan" title="Hadiya and Shefin Jahan"/></a>
+<div class="caption_two"><a href="story/kerala-love-jihad-hadiya-case-supreme-court/1/1064714.html">Kerala Love Jihad: Hadiya case adjourned after lawyer says NIA probe is political</a></div>
+</li>
+
+  <li><a href="story/chetan-bhagat-diwali-firecrackers-supreme-court-twitter/1/1064571.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/chetan-diwali-story_300_100917014907.jpg" width="300" height="350" alt="Chetan Bhagat in a series of tweets indicated his disapproval over the ban on sale of firecrackers during Diwali (File photo)" title="Chetan Bhagat in a series of tweets indicated his disapproval over the ban on sale of firecrackers during Diwali (File photo)"/></a>
+<div class="caption_two"><a href="story/chetan-bhagat-diwali-firecrackers-supreme-court-twitter/1/1064571.html">Chetan Bhagat wants Diwali celebrated with firecrackers. Because, tradition</a></div>
+</li>
+
+  <li><a href="story/african-national-beaten-malviya-nagar-robbery-delhi-police/1/1064625.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/african-story_2300_100917034424.jpg" width="300" height="350" alt="Video grab" title="Video grab"/></a>
+<div class="caption_two"><a href="story/african-national-beaten-malviya-nagar-robbery-delhi-police/1/1064625.html">Watch: Delhi brutes tie African man to pole, beat him to pulp on suspicion of theft</a></div>
+</li>
+
+  <li><a href="story/godhra-train-burning-gujarat-riots-high-court-verdict/1/1064446.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/godhra-coach_300x350_100917101231.jpg" width="300" height="350" alt="Coach S6 of the Sabarmati Express that was burnt on February 27, 2002 (File photo)" title="Coach S6 of the Sabarmati Express that was burnt on February 27, 2002 (File photo)"/></a>
+<div class="caption_two"><a href="story/godhra-train-burning-gujarat-riots-high-court-verdict/1/1064446.html">Godhra case: Gujarat High Court commutes death to life term for 11 convicts</a></div>
+</li>
+
+  <li><a href="story/gorakhpur-16-children-die-brd-medical-college-encephalitis/1/1064630.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/medium-copy_100917034347.jpg" width="300" height="350" alt="BRD Medical College was in news in August when around 63 children died within a span of one week. | Photo: Reuters " title="BRD Medical College was in news in August when around 63 children died within a span of one week. | Photo: Reuters "/></a>
+<div class="caption_two"><a href="story/gorakhpur-16-children-die-brd-medical-college-encephalitis/1/1064630.html">Gorakhpur: 16 more children die in the last 24 hours</a></div>
+</li>
+
+  <li><a href="story/padmavati-trailer-deepika-padukone-ranveer-singh-shahid-kapoor/1/1064554.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/padmavati-trailer-story-urg_300_100917011556.jpg" width="300" height="350" alt="A still from Padmavati" title="A still from Padmavati"/></a>
+<div class="caption_two"><a href="story/padmavati-trailer-deepika-padukone-ranveer-singh-shahid-kapoor/1/1064554.html">WATCH Padmavati trailer: Deepika-Shahid mesmerising but Ranveer steals the show</a></div>
+</li>
+
+  <li><a href="story/indian-air-force-iaf-helicopter-crash-arunachal-pradesh-tawang-dead-bodies-cardboard-box/1/1064433.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/helicopter-crash-arunachal-iaf-m_100917090734.jpg" width="300" height="350" alt="Picture for representation" title="Picture for representation"/></a>
+<div class="caption_two"><a href="story/indian-air-force-iaf-helicopter-crash-arunachal-pradesh-tawang-dead-bodies-cardboard-box/1/1064433.html">Why remains of men dead in Arunachal crash were sent in cardboard boxes</a></div>
+</li>
+
+  <li><a href="story/oneplus-at-it-yet-again-uses-diwali-promo-to-put-oneplus-5-in-spotlight/1/1061188.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/" width="300" height="350" alt="OnePlus at it yet again, uses Diwali promo to put OnePlus 5 in spotlight" title="OnePlus at it yet again, uses Diwali promo to put OnePlus 5 in spotlight"/></a>
+<div class="caption_two"><a href="story/oneplus-at-it-yet-again-uses-diwali-promo-to-put-oneplus-5-in-spotlight/1/1061188.html">OnePlus at it yet again, uses Diwali promo to put OnePlus 5 in spotlight</a></div>
+</li>
+
+  <li><a href="story/billions-in-change-philanthropist-inventions-development/1/1062759.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/billions-story-300_100617050721.jpg" width="300" height="350" alt="Manoj Bhargava - Billions in Change" title="Manoj Bhargava - Billions in Change"/></a>
+<div class="caption_two"><a href="story/billions-in-change-philanthropist-inventions-development/1/1062759.html">Billionaire philanthropist creates life changing inventions</a></div>
+</li>
+
+  <li><a href="story/coach-job-india-virender-sehwag-virat-kohli-cricket/1/1048833.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/300_091517071707.jpg" width="300" height="350" alt="Reuters Photo" title="Reuters Photo"/></a>
+<div class="caption_two"><a href="story/coach-job-india-virender-sehwag-virat-kohli-cricket/1/1048833.html">Missed out on coach job for lack of 'setting': Virender Sehwag</a></div>
+</li>
+
+  <li><a href="story/ahmedabad-mumbai-bullet-train-sabarmati-narendra-modi-shinzo-abe/1/1047584.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bullet-train-reuters-story-300_091417120544.jpg" width="300" height="350" alt="Japenese Bullet train" title="Japenese Bullet train"/></a>
+<div class="caption_two"><a href="story/ahmedabad-mumbai-bullet-train-sabarmati-narendra-modi-shinzo-abe/1/1047584.html">Before first bullet train leaves Ahmedabad for Mumbai, here are the challenges for railways</a></div>
+</li>
+
+  <li><a href="gallery/satish-acharya-cartoons-in-mail-today/1/19594.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/cartoon_300x350_100917044058.jpg" width="300" height="350" alt="Satish Acharya cartoon" title="Satish Acharya cartoon"/></a>
+<div class="caption_two"><a href="gallery/satish-acharya-cartoons-in-mail-today/1/19594.html">Mail Today cartoons</a></div>
+</li>
+
+  <li><a href="story/watch-nirmala-sitharaman-chinese-soldiers-namaste-nathu-la/1/1064053.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sitharaman-chinese-story_300x350_100817125317.jpg" width="300" height="350" alt="Nirmala Sitharaman earlier shared this photo showing her waving at a group of Chinese soldies who she said were taking her photograph from across the border (PTI photo)" title="Nirmala Sitharaman earlier shared this photo showing her waving at a group of Chinese soldies who she said were taking her photograph from across the border (PTI photo)"/></a>
+<div class="caption_two"><a href="story/watch-nirmala-sitharaman-chinese-soldiers-namaste-nathu-la/1/1064053.html">WATCH | Nirmala Sitharaman teaches Chinese soldiers meaning of namaste</a></div>
+</li>
+
+  <li><a href="story/andhra-pradesh-theme-wedding-gods-goddesses-local-godman-daughter/1/1064074.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/theme-wedding-ap-medium_100817013246.jpg" width="300" height="350" alt="People were dressed like gods and goddesses in this theme based wedding in Andhra Pradesh." title="People were dressed like gods and goddesses in this theme based wedding in Andhra Pradesh."/></a>
+<div class="caption_two"><a href="story/andhra-pradesh-theme-wedding-gods-goddesses-local-godman-daughter/1/1064074.html">Andhra Pradesh: Godman's daughter gets god-like wedding</a></div>
+</li>
+
+  <li><a href="story/economics-nobel-raghuram-rajan-clarivate-list-winners/1/1063789.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rajan-story_300_100717083330.jpg" width="300" height="350" alt="Former RBI Governor Raghuram Rajan (Reuters file photo)" title="Former RBI Governor Raghuram Rajan (Reuters file photo)"/></a>
+<div class="caption_two"><a href="story/economics-nobel-raghuram-rajan-clarivate-list-winners/1/1063789.html">Raghuram Rajan, ex-RBI boss, a likely Economics Nobel winner: Research firm</a></div>
+</li>
+
+  <li><a href="story/bihar-student-admit-card-lord-ganesha-university/1/1061566.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bihar-student-story-300_100417073550.jpg" width="300" height="350" alt="Krishna Kumar Roy, candidate for B Com (Hons) Part-1 exams" title="Krishna Kumar Roy, candidate for B Com (Hons) Part-1 exams"/></a>
+<div class="caption_two"><a href="story/bihar-student-admit-card-lord-ganesha-university/1/1061566.html">Lord Ganesha to appear for exam? University in Bihar prints god's photo on student's admit card</a></div>
+</li>
+
+  <li><a href="story/i-am-alive-mumbai-elphinstone-stampede-railway-station-man-dead-found-alive/1/1061630.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/i-am-alive-medium_100417082508.jpg" width="300" height="350" alt="The poster in which Imran Shaikh's photo was used with his uncle." title="The poster in which Imran Shaikh's photo was used with his uncle."/></a>
+<div class="caption_two"><a href="story/i-am-alive-mumbai-elphinstone-stampede-railway-station-man-dead-found-alive/1/1061630.html">I am alive: Living man found himself dead in posters of deceased people in Elphinstone stampede</a></div>
+</li>
+
+  <li><a href="story/japan-work-stress-woman-dies-overtime-depression/1/1062135.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/karoshi-japan-m_100517043608.jpg" width="300" height="350" alt="Photo: Reuters" title="Photo: Reuters"/></a>
+<div class="caption_two"><a href="story/japan-work-stress-woman-dies-overtime-depression/1/1062135.html">Working dead: Japanese woman dies due to working 159 hours overtime</a></div>
+</li>
+
+  <li><a href="story/jaipur-woman-protest-jantar-mantar-marry-pm-modi/1/1063247.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/jaipur-woman-sit-in-jantar-mantra-marry-modi-300-350_100617093525.jpg" width="300" height="350" alt="Jaipur woman on sit-in at Jantar Mantar to marry PM Modi" title="Jaipur woman on sit-in at Jantar Mantar to marry PM Modi"/></a>
+<div class="caption_two"><a href="story/jaipur-woman-protest-jantar-mantar-marry-pm-modi/1/1063247.html">Dilli tamanna: Jaipur woman on sit-in for month now at Jantar Mantar to marry Modi</a></div>
+</li>
+
+  <li><a href="story/honeypreet-insan-found-gurmeet-ram-rahim-india-today-interview-honeypreet/1/1060299.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/honey-preet-exclusive-300_100317092341.jpg" width="300" height="350" alt="Honeypreet Insan" title="Honeypreet Insan"/></a>
+<div class="caption_two"><a href="story/honeypreet-insan-found-gurmeet-ram-rahim-india-today-interview-honeypreet/1/1060299.html">Honeypreet found by India Today, says 'papa' innocent, no impure relation with him</a></div>
+</li>
+
+  <li><a href="story/icu-grandpa-volunteer-atlanta-hospital-cuddles-babies/1/1058906.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/icu-grandpa-atlanta-cuddle-babies-300-350_093017111120.jpg" width="300" height="350" alt="ICU Grandpa" title="ICU Grandpa"/></a>
+<div class="caption_two"><a href="story/icu-grandpa-volunteer-atlanta-hospital-cuddles-babies/1/1058906.html">ICU Grandpa: This old man holds, cuddles babies at hospital when their parents aren't around</a></div>
+</li>
+
+  <li><a href="story/your-answers-can-win-you-gift-vouchers-worth-rs-1000/1/345316.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/nowqom-6_022414084852.jpg" width="300" height="350" alt="IT Woman question of the month" title="IT Woman question of the month"/></a>
+<div class="caption_two"><a href="story/your-answers-can-win-you-gift-vouchers-worth-rs-1000/1/345316.html">Your answers can win you gift vouchers worth Rs 1,000</a></div>
+</li>
+
+  <li><a href="story/gurmeet-ram-rahim-impotent-sex-addict-honeypreet-dera-sacha-sauda/1/1045038.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rahim-stry_300_091017091347.jpg" width="300" height="350" alt="Gurmeet Ram Rahim" title="Gurmeet Ram Rahim"/></a>
+<div class="caption_two"><a href="story/gurmeet-ram-rahim-impotent-sex-addict-honeypreet-dera-sacha-sauda/1/1045038.html">Gurmeet Ram Rahim is a sex addict, says doctor who examined him in jail</a></div>
+</li>
+
+  <li><a href="story/couple-named-irma-and-harvey-hurricanes-75-years-marriage/1/1044345.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/300irma-harvy_090917050447.jpg" width="300" height="350" alt="Irma and Harvey Schluter. Source: Twitter/ @datanimefriend" title="Irma and Harvey Schluter. Source: Twitter/ @datanimefriend"/></a>
+<div class="caption_two"><a href="story/couple-named-irma-and-harvey-hurricanes-75-years-marriage/1/1044345.html">Irma and Harvey's love story: Not the hurricanes, but a lovely couple married for 75 years</a></div>
+</li>
+
+  <li><a href="story/radhe-maa-seduction-case-ram-ram-sukhwinder-kaur/1/1044209.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/radhe-maa-fb-story_300x350_090917124255.jpg" width="300" height="350" alt="Radhe Maa" title="Radhe Maa"/></a>
+<div class="caption_two"><a href="story/radhe-maa-seduction-case-ram-ram-sukhwinder-kaur/1/1044209.html">Radhe Maa seduction case: After Gurmeet Ram Rahim, is it time for Sukhwinder Kaur to pack up?</a></div>
+</li>
+
+  <li><a href="story/kerala-drunk-father-forgets-daughter-train-kottayam-salem-palakkad/1/993131.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/drunk-father-leaves-daughter-train-kerala-m_070317051928.jpg" width="300" height="350" alt="Photo: Reuters" title="Photo: Reuters"/></a>
+<div class="caption_two"><a href="story/kerala-drunk-father-forgets-daughter-train-kottayam-salem-palakkad/1/993131.html">Kerala: Drunk man forgets 4-year-old daughter in train, childline officials warns father</a></div>
+</li>
+
+  <li><a href="story/gst-faqs-received-by-pm-modi-regime-on-twitter/1/988477.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/gst-faq_300_062717053314.jpg" width="300" height="350" alt="GST" title="GST"/></a>
+<div class="caption_two"><a href="story/gst-faqs-received-by-pm-modi-regime-on-twitter/1/988477.html">GST: 100 FAQs received by Modi regime on Twitter</a></div>
+</li>
+
+  <li><a href="story/islamic-school-malaysia-boy-died-amputated-limbs/1/939150.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/malaysia-tahfix-islamic-boy-amputee-warden-300-350_042617083513.jpg" width="300" height="350" alt="Facebook: Hafiz Ya'akob" title="Facebook: Hafiz Ya'akob"/></a>
+<div class="caption_two"><a href="story/islamic-school-malaysia-boy-died-amputated-limbs/1/939150.html">11-year-old boy dies after being brutally thrashed at Islamic school in Malaysia</a></div>
+</li>
+
+  <li><a href="story/the-last-minute-short-film-stereotypes-shocking-end/1/938732.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/thelastminute300_042617050320.jpg" width="300" height="350" alt="A shot from The Last Minute" title="A shot from The Last Minute"/></a>
+<div class="caption_two"><a href="story/the-last-minute-short-film-stereotypes-shocking-end/1/938732.html">This viral short film deploys a lot of stereotypes but will shock you in the end</a></div>
+</li>
+
+  <li><a href="story/india-today-axis-opinion-poll-goa-aap-bjp-assembly-election/1/850522.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/goa_300_010517085036.jpg" width="300" height="350" alt="India Today-Axis Opinion Poll on Goa." title="India Today-Axis Opinion Poll on Goa."/></a>
+<div class="caption_two"><a href="story/india-today-axis-opinion-poll-goa-aap-bjp-assembly-election/1/850522.html">India Today-Axis Opinion Poll on Goa: In key state, AAP eyed, BJP takes the cake</a></div>
+</li>
+
+  <li><a href="story/woman-steals-three-french-fries-arrested-washington-dc-lifefd/1/763128.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/frenchfries2-morunola-story_300_091316124513.jpg" width="300" height="350" alt=" The next time you pick fries off someone's plate, make sure they're not a police officer. Picture courtesy: Instagram/morunola" title=" The next time you pick fries off someone's plate, make sure they're not a police officer. Picture courtesy: Instagram/morunola"/></a>
+<div class="caption_two"><a href="story/woman-steals-three-french-fries-arrested-washington-dc-lifefd/1/763128.html">A woman in the US was arrested for stealing 3 (yes 3) French fries</a></div>
+</li>
+
+  <li><a href="story/disaster-selfies-cauvery-dispute-dubai-burning-hotel-plane-crash/1/764020.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/300_091416030800.jpg" width="300" height="350" alt="Disaster selfies" title="Disaster selfies"/></a>
+<div class="caption_two"><a href="story/disaster-selfies-cauvery-dispute-dubai-burning-hotel-plane-crash/1/764020.html">Photo finish: From burning Bengaluru to aircraft crash sites, how people are obsessing with disaster selfies</a></div>
+</li>
+
+  <li><a href="gallery/cannes-2015-sonam-kapoor-royal-blue-gown-aishwarya-rai-bachchan-diane-kruger-sienna-miller-natalie-portman/1/14839.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_300x350_051715010947.jpg" width="300" height="350" alt="cannes 2015, sonam kapoor, royal blue gown, aishwarya rai bachchan, diane kruger, sienna miller, natalie portman" title="cannes 2015, sonam kapoor, royal blue gown, aishwarya rai bachchan, diane kruger, sienna miller, natalie portman"/></a>
+<div class="caption_two"><a href="gallery/cannes-2015-sonam-kapoor-royal-blue-gown-aishwarya-rai-bachchan-diane-kruger-sienna-miller-natalie-portman/1/14839.html">Cannes 2015: Sonam Kapoor adds colour to the red carpet on Day 4</a></div>
+</li>
+
+  <li><a href="story/vinny-forte-entire-chemistry-class-gets-full-100-marks-with-one-epic-shot/1/757674.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/300_090616035204.jpg" width="300" height="350" alt="Vinny Forte" title="Vinny Forte"/></a>
+<div class="caption_two"><a href="story/vinny-forte-entire-chemistry-class-gets-full-100-marks-with-one-epic-shot/1/757674.html">Watch: This guy got full marks in chemistry for his entire class with one epic 'shot'</a></div>
+</li>
+
+  <li><a href="story/indian-girl-reshma-qureshi-acid-attack-catwalk-new-york-fashion-week/1/750757.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/medium-large_082816045749.jpg" width="300" height="350" alt="Reshma at New York Fashion Week" title="Reshma at New York Fashion Week"/></a>
+<div class="caption_two"><a href="story/indian-girl-reshma-qureshi-acid-attack-catwalk-new-york-fashion-week/1/750757.html">All things beautiful: Indian girl who survived acid attack will walk the catwalk in New York</a></div>
+</li>
+
+  <li><a href="story/letters-to-modi-children-write-letters-to-the-pmo-received-response/1/610997.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage-story_300_030316035932.jpg" width="300" height="350" alt="" title=""/></a>
+<div class="caption_two"><a href="story/letters-to-modi-children-write-letters-to-the-pmo-received-response/1/610997.html">Letters to Modi: Children who wrote to the PMO and received immediate responses</a></div>
+</li>
+
+  <li><a href="gallery/cannes-2015-aishwarya-rai-bachchan-cate-blanchett-red-carpet-de-grisogono-cannes-film-festival-fashion/1/14863.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage-30_052015040710.jpg" width="300" height="350" alt="Aishwarya Rai Bachchan" title="Aishwarya Rai Bachchan"/></a>
+<div class="caption_two"><a href="gallery/cannes-2015-aishwarya-rai-bachchan-cate-blanchett-red-carpet-de-grisogono-cannes-film-festival-fashion/1/14863.html">Cannes 2015, Day 7: Hottest looks that stole the show</a></div>
+</li>
+
+  <li><a href="story/salman-khan-kashmir-bajrangi-bhaijaan-selfie-song-thank-fans-kareena-kapoor/1/437730.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/13fir17-2_300_051315113514.jpg" width="300" height="350" alt="Kareena-Salman" title="Kareena-Salman"/></a>
+<div class="caption_two"><a href="story/salman-khan-kashmir-bajrangi-bhaijaan-selfie-song-thank-fans-kareena-kapoor/1/437730.html">Salman Khan takes selfie to thank fans</a></div>
+</li>
+
+  <li><a href="story/priyanka-chopra-quantico-trailer-johanna-braddy-twitter-bollywood-fbi-agent-american-tv-show/1/437719.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/quantic-story_3000_051315110310.jpg" width="300" height="350" alt="Priyanka Chopra plays FBI agent in Quantico" title="Priyanka Chopra plays FBI agent in Quantico"/></a>
+<div class="caption_two"><a href="story/priyanka-chopra-quantico-trailer-johanna-braddy-twitter-bollywood-fbi-agent-american-tv-show/1/437719.html">Watch: Priyanka Chopra nails the FBI agent act in Quantico trailer</a></div>
+</li>
+
+  <li><a href="gallery/kangana-ranaut-mother-india-queen-farhan-akhtar-20-films-made-bollywood-proud/1/14647.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_300x350_041715032701.jpg" width="300" height="350" alt="" title=""/></a>
+<div class="caption_two"><a href="gallery/kangana-ranaut-mother-india-queen-farhan-akhtar-20-films-made-bollywood-proud/1/14647.html">From Mother India to Queen: 15 films that have made Bollywood proud</a></div>
+</li>
+
+  <li><a href="story/shah-rukh-khan-zayn-malik-asian-awards-selfie-twitter-one-direction/1/431270.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/srk-story_300_042115103437.jpg" width="300" height="350" alt="Shah Rukh Khan" title="Shah Rukh Khan"/></a>
+<div class="caption_two"><a href="story/shah-rukh-khan-zayn-malik-asian-awards-selfie-twitter-one-direction/1/431270.html">SRK's selfie with Zayn Malik is one of the most favourited and retweeted pictures</a></div>
+</li>
+
+  <li><a href="gallery/abhishek-bachchan-aishwarya-rai-bachchan-8th-marriage-anniversary/1/14660.html"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage-300_042015102102.jpg" width="300" height="350" alt="abhishek bachchan, aishwarya rai bachchan, 8th marriage anniversary" title="abhishek bachchan, aishwarya rai bachchan, 8th marriage anniversary"/></a>
+<div class="caption_two"><a href="gallery/abhishek-bachchan-aishwarya-rai-bachchan-8th-marriage-anniversary/1/14660.html">Bollywood super-couple Abhi, Ash complete 8 years of marital bliss</a></div>
+</li>
+
+ </ul><a href="javascript:void(0)" id="dontmiss-prev">pre</a> <a href="javascript:void(0)" id="dontmiss-next">next</a></div></div>
+
+        </div>
+
+        <div class="colum">
+	        <div class="twitter_box">
+        	<div class="twitter_heading">
+            	<h2><span>TWEETS</span></h2>
+                <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/yearend/2014/twitter.jpg" width="35" height="29"  />
+            </div>
+
+           <div>
+
+          <a class="twitter-timeline" width="310" height="480" href="https://twitter.com/IndiaToday" data-widget-id="544797482400497664">Tweets by @IndiaToday</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+           </div>
+        </div>
+        </div>
+
+
+    </div>
+
+  </div>
+</div>
+<!-- End Main Container -->
+  <div class="clr"></div>
+<div class="index-footer">
+  <footer style="margin-top:15px;">
+    <div class="footertag"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btm-logo.jpg" height="43" border="0" style="float:left;" class="btm-itlogo">
+      <nav class="nav">
+        <ul>
+          <div class="home" style="background:none"><a href="index.jsp"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/home-cion.jpg" height="43" border="0"></a></div>
+          <li><a href="http://indiatoday.intoday.in/news.html" class="nav_padding">News</a></li>
+          <li><a href="http://indiatoday.intoday.in/section/114/1/india.html" class="nav_padding">India</a> </li>
+          <li><a href="http://indiatoday.intoday.in/section/113/1/world.html" class="nav_padding">World</a> </li>
+          <li><a href="http://indiatoday.intoday.in/videos" class="nav_padding">Videos</a></li>
+          <li><a href="http://indiatoday.intoday.in/galleries" class="nav_padding">Photos</a></li>
+          <li><a href="http://indiatoday.intoday.in/section/214/1/cricket.html" class="nav_padding">Cricket</a></li>
+          <li><a href="http://indiatoday.intoday.in/section/67/1/movies.html" class="nav_padding">Movies</a></li>
+          <li><a href="http://indiatoday.intoday.in/section/230/1/auto.html" class="nav_padding">Auto</a></li>
+          <li><a href="http://indiatoday.intoday.in/section/84/1/sports.html" class="nav_padding">Sports</a></li>
+          <li><a href="http://indiatoday.intoday.in/section/103/1/lifestyle.html" class="nav_padding">Lifestyle</a></li>
+          <li><a href="http://indiatoday.intoday.in/technology" class="nav_padding">Tech</a></li>
+          <li><a href="http://indiatoday.intoday.in/education" class="nav_padding">Education</a></li>
+        </ul>
+        <div class="clear"></div>
+      </nav>
+      <!--searc-icon1-->
+      <div><img class="btm-arrow" style="margin-bottom:-5px;" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/btn-down-arrow.jpg">
+        <div id="footer1" style="display:block !important">
+          <iframe width="98%" scrolling="no" height="210" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/microsites/common/common_it_footer.html"></iframe>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+
+</body>
+</html>

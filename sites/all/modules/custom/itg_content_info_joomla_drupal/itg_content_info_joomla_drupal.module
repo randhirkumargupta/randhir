@@ -1,0 +1,158 @@
+<?php
+
+/**
+ * Implement hook_menu
+ * @return array
+ */
+function itg_content_info_joomla_drupal_menu() {
+  $items['content-info-joomla-drupal'] = array(
+    'title' => 'ITG Content Info Joomla to Drupal',
+    'description' => 'ITG Content Info Joomla to Drupal',
+    'page callback' => 'itg_content_mapping',
+    'access callback' => 'itg_content_info_joomla_drupal_user_has_role',
+    'access arguments' => array('administer', 'Site Admin'),
+    'type' => MENU_CALLBACK,
+    'file' => 'itg_content_map_helper.inc',
+  );
+  return $items;
+}
+
+/**
+ * Function for access callback
+ * @global global $user
+ * @return boolean
+ */
+function itg_content_info_joomla_drupal_user_has_role() {
+  global $user;
+  $roles = func_get_args();
+  foreach ($roles as $role) {
+    if (in_array($role, $user->roles)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Menu callback function
+ * @return array
+ */
+function itg_content_mapping() {
+  $output = drupal_render(drupal_get_form('itg_content_mapping_form'));
+  return $output;
+}
+
+/**
+ * Function for display form to filter
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_content_mapping_form($form, &$form_state) {
+  $form['contentid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Content Id'),
+    '#required' => TRUE
+  );
+  $form['contenttype'] = array(
+    '#type' => 'select',
+    '#title' => t('Content Type'),
+    '#options' => array(
+      'story' => t('Story'),
+      'video' => t('Video Gallery'),
+      'photo' => t('Photo Gallery'),
+      'section' => t('Section'),
+      'category' => t('Category'),
+      'subcategory' => t('Sub Category'),
+      'subsubcategory' => t('Sub Sub Category'),
+    ),
+    '#description' => t('Select Content type: Story, videogallery, photogallery, section, catgory, sub category'),
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search')
+  );
+  if (isset($form_state['values']['contentid'])) {
+    $contentid_arr = explode(',', $form_state['values']['contentid']);
+    $contenttype = trim($form_state['values']['contenttype']);
+    $content_data = get_mapping_array($contenttype);
+    $tablename = $content_data['table'];
+    $type = $content_data['type'];
+
+
+    $query = db_select($tablename, 'tbl');
+    $query->fields('tbl', array('sourceid1', 'destid1'));
+
+    if ($type == 'node') {
+      $query->fields('n', array('nid', 'title'));
+      $query->leftJoin('node', 'n', 'tbl.destid1=n.nid');
+    }
+    else {
+      $query->fields('ttd', array('tid', 'name'));
+      $query->leftJoin('taxonomy_term_data', 'ttd', 'tbl.destid1=ttd.tid');
+    }
+
+    $query->condition('tbl.sourceid1', $contentid_arr, 'IN');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+    $header = array('Joomla ID', 'Drupal ID', 'Title', 'Drupal Url');
+    $rows = array();
+    $found = array();
+    foreach ($result as $value) {
+      $found[] = $value['sourceid1'];
+      $drupal_url = '';
+      $contentid = 0;
+      $contenttitle = '';
+      if ($type == 'node') {
+        $drupal_url = FRONT_URL . '/' . drupal_get_path_alias('node/' . $value['destid1']);
+        $contentid = $value['nid'];
+        $contenttitle = $value['title'];
+      }
+      else if ($type == 'taxonomy') {
+        $drupal_url = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $value['destid1']);
+        $contentid = $value['tid'];
+        $contenttitle = $value['name'];
+      }
+      $rows[] = array(
+        $value['sourceid1'],
+        $contentid,
+        $contenttitle,
+        l($drupal_url, $drupal_url, array('attributes' => array('target' => '_blank')))
+      );
+    }
+
+    $not_found = array_diff($contentid_arr, $found);
+    if (count($not_found) > 0) {
+      $not_found = implode(',', $not_found);
+      $form['not_found_table'] = array(
+        '#theme' => 'table',
+        '#header' => array('Not Found Joomla ID'),
+        '#rows' => array(array($not_found)),
+        '#attributes' => array('class' => array("views-table")),
+        '#tree' => TRUE,
+        '#empty' => t('Empty Rows')
+      );
+    }
+
+    if (count($rows) > 0) {
+      $form['table'] = array(
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+        '#attributes' => array('class' => array("views-table")),
+        '#tree' => TRUE,
+        '#empty' => t('Empty Rows')
+      );
+    }
+  }
+  return $form;
+}
+
+/**
+ * function is used for form submit
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_content_mapping_form_submit($form, &$form_state) {
+  $form_state['rebuild'] = TRUE;
+}

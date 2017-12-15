@@ -20,9 +20,13 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
 <div class="row">
   <?php $output_left = '';
   $output_right = '';
+  $key = 1;
   ?>
 <?php foreach ($rows as $index => $row): ?>
   <?php
+    $daywise_arr = explode(':',$row['field_daywise_event']);
+    $daywise[] = $daywise_arr[0];
+
   $media = '';
      $media = $row['field_daywise_event'].'--'.$row['field_story_expert_name'].'--'.$row['field_start_time_1'].'--'.$row['field_start_time_2'];
      $sponsors_data = itg_event_backend_get_session_sponsor($media, $host_node->nid);
@@ -35,26 +39,39 @@ drupal_add_js("jQuery(document).ready(function() { jQuery('.program-schedule-con
          $sponsor_img = '<img src=' . image_style_url("sponsor85___33", $sponsor_all_data[0]->uri) . ' alt="" title= "'.$sponsor_all_data[0]->title.'" />';
          $sponsor_tags = '<div class="program-sch-sponcor"><div class="div-sponcor"><span>'.t("Powered By").'</span>'.l($sponsor_img,$baseurl.'sponsor-details',  array('attributes' => array('target' => '_blank'),'query' => array('sponsor' => $sponsor_all_data[0]->nid), 'html' => true)).'</div></div>';
      }
-     $row_count = count($rows);
-    if ($index <= ((round($row_count / 2)) - 1)) {
-    $output_left .= $sponsor_tags.'<div class="content-list" style="background:'.$heading_background_color.'">';
+
+    $daywise_style = ($daywise_arr[0] == 'Day-1') ? 'style="display: block"' : '';
+    $output_left .= '<div '.$daywise_style.' class="'.$daywise_arr[0].' common-class  col-lg-6 col-md-6 col-sm-12">';
+    $output_left .= $sponsor_tags .'<div class="content-list" style="background:'.$heading_background_color.'">';
     $output_left .= '<div style="color:'.$content_font_color .'"><span class="date-display-single"><div class="date-display-range">'.$row['field_start_time_1'].' to '.$row['field_start_time_2'].'</div></span></div>';
     $output_left .= '<div class="story-expert-name" style="color:'.$font_color.'">'.$row['field_story_expert_name'].'</div>';
-    $output_left .= '<div class="program-schedule-content" style="color:'.$content_font_color.'">'.$row['view'].'</div></div>';
-    }else{
-    $output_right .= $sponsor_tags.'<div class="content-list" style="background:'.$heading_background_color.'">';
-    $output_right .= '<div style="color:'.$content_font_color .'"><span class="date-display-single"><div class="date-display-range">'.$row['field_start_time_1'].' to '.$row['field_start_time_2'].'</div></span></div>';
-    $output_right .= '<div class="story-expert-name" style="color:'.$font_color.'">'.$row['field_story_expert_name'].'</div>';
-    $output_right .= '<div class="program-schedule-content" style="color:'.$content_font_color.'">'.$row['view'].'</div></div>';
-    }
+    $output_left .= '<div class="program-schedule-content" style="color:'.$content_font_color.'">'.$row['view'].'</div></div></div>';
+
+    $key ++;
+
     ?>
 <?php endforeach; ?>
 <?php
-if(!empty($output_left)){
-  print '<div class ="left-side-event-content col-md-6">'.$output_left.'</div>';
-}
-if(!empty($output_right)){
-  print '<div class ="right-side-event-content col-md-6">'.$output_right.'</div>';
-}
+  $daywise = array_unique($daywise);
+  foreach ($daywise as $key => $value) {
+    $tabs .= '<li style="background: ' . $tab_highlighted_color . '" data-tag="' . $value . '" class="event-program-tabs ' . $value . '">' . $value . '</li>';
+  }
+  print '<div class="top-tab col-lg-12 col-md-12 col-sm-12"><ul>' . $tabs . '</ul></div>';
+  print '<div class ="left-side-event-contents col-lg-12 col-md-12 col-sm-12">'.$output_left.'</div>';
+
 ?>
 </div>
+
+<?php
+drupal_add_js("jQuery(document).ready(function(){
+    jQuery('.top-tab li').eq(0).addClass('active');
+    jQuery('.top-tab li').click(function(){        
+        jQuery('.top-tab li').removeClass('active');
+        jQuery(this).addClass('active');        
+        jQuery('.common-class').hide();
+        var getVal = jQuery(this).attr('data-tag');        
+        jQuery('.'+getVal).show();
+    });
+    
+});", array('type' => 'inline', 'scope' => 'footer'));
+?>

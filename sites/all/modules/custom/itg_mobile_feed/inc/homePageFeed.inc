@@ -6,9 +6,15 @@
 
 /**
  * main function for generate home page xml feed
+ *
  * @return string $output
  */
 $home_list_count = 0;
+
+/**
+ *
+ * @global int $home_list_count
+ */
 function homePageFeed() {
   $redis_key = "itgd_homePageFeed";
   $result_get = getRedis($redis_key);
@@ -42,17 +48,18 @@ function homePageFeed() {
 
   //home page feed file writing
   if ($output) {
-    $feed_file_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $feed_file_path = "public://xml_it/stories";
     $feed_file_name = "home.xml";
     $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
  * function for get story from Big Story widget
+ *
  * @return string $output
  */
 function bigStoryWidgetData() {
@@ -95,7 +102,8 @@ function bigStoryWidgetData() {
 }
 
 /**
- * function for get story from Home Page Features widget 
+ * function for get story from Home Page Features widget
+ *
  * @return string $output
  */
 function homePageFeaturesWidgetData() {
@@ -139,8 +147,6 @@ function homePageFeaturesWidgetData() {
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
 
-
-  //end
   $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
@@ -169,6 +175,7 @@ function homePageFeaturesWidgetData() {
 
 /**
  * function for get story from Top Stories widget
+ *
  * @return string $output
  */
 function topStoriesWidgetData() {

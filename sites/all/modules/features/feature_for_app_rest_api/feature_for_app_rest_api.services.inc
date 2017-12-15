@@ -69,16 +69,51 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
-    'auscovery_dashboard_mob' => array(
+    'anchor_detail' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',
         ),
       ),
     ),
-    'auscovery_dashboard_web' => array(
+    'anchor_follow_list' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'anchor_list' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'anchor_programm_list' => array(
       'operations' => array(
         'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'author_detail' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'author_follow_list' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'author_list' => array(
+      'operations' => array(
+        'create' => array(
           'enabled' => '1',
         ),
       ),
@@ -90,9 +125,78 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
-    'author_report_tvtn' => array(
+    'author_story_list' => array(
       'operations' => array(
         'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'authtoken_verification' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'bookmark_delete' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'bookmark_get' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'bookmark_set' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'cast_polls' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'change_password' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'comment' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+        'update' => array(
+          'enabled' => '1',
+        ),
+        'delete' => array(
+          'enabled' => '1',
+        ),
+        'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+      'actions' => array(
+        'countAll' => array(
+          'enabled' => '1',
+        ),
+        'countNew' => array(
           'enabled' => '1',
         ),
       ),
@@ -104,9 +208,79 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
-    'datanotexist_api' => array(
+    'edit_profile' => array(
       'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'edit_user_image' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'file' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
         'retrieve' => array(
+          'enabled' => '1',
+        ),
+        'delete' => array(
+          'enabled' => '1',
+        ),
+        'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+      'actions' => array(
+        'create_raw' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'follow_anchor' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'follow_author' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'follow_topic' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'forgot_password' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'get_login_user_detail' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'get_preference' => array(
+      'operations' => array(
+        'create' => array(
           'enabled' => '1',
         ),
       ),
@@ -114,6 +288,13 @@ function feature_for_app_rest_api_default_services_endpoint() {
     'get_story_api' => array(
       'operations' => array(
         'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'get_the_user_follow_status' => array(
+      'operations' => array(
+        'create' => array(
           'enabled' => '1',
         ),
       ),
@@ -133,13 +314,6 @@ function feature_for_app_rest_api_default_services_endpoint() {
       ),
     ),
     'horizontal_menu' => array(
-      'operations' => array(
-        'retrieve' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'livetv' => array(
       'operations' => array(
         'retrieve' => array(
           'enabled' => '1',
@@ -181,6 +355,20 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
+    'log_out' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'login_request' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'magazine_coverstories' => array(
       'operations' => array(
         'retrieve' => array(
@@ -216,6 +404,45 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
+    'newswrap' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'node' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+        'create' => array(
+          'enabled' => '1',
+        ),
+        'update' => array(
+          'enabled' => '1',
+        ),
+        'delete' => array(
+          'enabled' => '1',
+        ),
+        'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+      'relationships' => array(
+        'files' => array(
+          'enabled' => '1',
+        ),
+        'comments' => array(
+          'enabled' => '1',
+        ),
+      ),
+      'targeted_actions' => array(
+        'attach_file' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'otherapps_android' => array(
       'operations' => array(
         'retrieve' => array(
@@ -226,6 +453,13 @@ function feature_for_app_rest_api_default_services_endpoint() {
     'otherapps_ios' => array(
       'operations' => array(
         'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'otp_verification' => array(
+      'operations' => array(
+        'create' => array(
           'enabled' => '1',
         ),
       ),
@@ -251,6 +485,27 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
+    'poll_detail' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'polls_close' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'polls_open' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'program_category_list' => array(
       'operations' => array(
         'retrieve' => array(
@@ -265,6 +520,20 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
+    'resend_otp' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'reset_password' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
     'server_error_master' => array(
       'operations' => array(
         'retrieve' => array(
@@ -272,16 +541,9 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
-    'story_count_report' => array(
+    'signup' => array(
       'operations' => array(
-        'retrieve' => array(
-          'enabled' => '1',
-        ),
-      ),
-    ),
-    'story_video_photo_field_report' => array(
-      'operations' => array(
-        'retrieve' => array(
+        'create' => array(
           'enabled' => '1',
         ),
       ),
@@ -289,6 +551,46 @@ function feature_for_app_rest_api_default_services_endpoint() {
     'storydetail' => array(
       'operations' => array(
         'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'system' => array(
+      'actions' => array(
+        'connect' => array(
+          'enabled' => '1',
+        ),
+        'get_variable' => array(
+          'enabled' => '1',
+        ),
+        'set_variable' => array(
+          'enabled' => '1',
+        ),
+        'del_variable' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'taxonomy_term' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+        'create' => array(
+          'enabled' => '1',
+        ),
+        'update' => array(
+          'enabled' => '1',
+        ),
+        'delete' => array(
+          'enabled' => '1',
+        ),
+        'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+      'actions' => array(
+        'selectNodes' => array(
           'enabled' => '1',
         ),
       ),
@@ -320,9 +622,83 @@ function feature_for_app_rest_api_default_services_endpoint() {
         ),
       ),
     ),
-    'testing_report' => array(
+    'testing' => array(
       'operations' => array(
         'retrieve' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'update_preference' => array(
+      'operations' => array(
+        'create' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'user' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'enabled' => '1',
+        ),
+        'create' => array(
+          'enabled' => '1',
+        ),
+        'update' => array(
+          'enabled' => '1',
+        ),
+        'delete' => array(
+          'enabled' => '1',
+        ),
+        'index' => array(
+          'enabled' => '1',
+        ),
+      ),
+      'actions' => array(
+        'login' => array(
+          'enabled' => '1',
+          'settings' => array(
+            'services' => array(
+              'resource_api_version' => '1.0',
+            ),
+          ),
+        ),
+        'logout' => array(
+          'enabled' => '1',
+          'settings' => array(
+            'services' => array(
+              'resource_api_version' => '1.0',
+            ),
+          ),
+        ),
+        'token' => array(
+          'enabled' => '1',
+        ),
+        'request_new_password' => array(
+          'enabled' => '1',
+        ),
+        'user_pass_reset' => array(
+          'enabled' => '1',
+        ),
+        'register' => array(
+          'enabled' => '1',
+        ),
+      ),
+      'targeted_actions' => array(
+        'cancel' => array(
+          'enabled' => '1',
+        ),
+        'password_reset' => array(
+          'enabled' => '1',
+        ),
+        'resend_welcome_email' => array(
+          'enabled' => '1',
+        ),
+      ),
+    ),
+    'user_follow_topic_list' => array(
+      'operations' => array(
+        'create' => array(
           'enabled' => '1',
         ),
       ),
