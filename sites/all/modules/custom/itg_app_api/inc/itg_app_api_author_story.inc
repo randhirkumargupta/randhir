@@ -14,7 +14,7 @@ function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('author_story_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $dis_count = fetchMasterConfigData('author_story_display_count');
@@ -325,7 +325,7 @@ function author_detail_data($author_id) {
     $data_array = array();
     $updated_datetime = "";
 
-    $success_status_mess = fetchMasterConfigData('author_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
 
@@ -380,7 +380,7 @@ function anchor_detail_data($anchor_id) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
 
@@ -432,7 +432,7 @@ function news_wrap_list() {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('news_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     // list array building
@@ -530,7 +530,7 @@ function anchor_programm_data_list($anchor_id, $type, $cpageno) {
     $data_array = array();
     $updated_datetime = "";
 
-    $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $dis_count = fetchMasterConfigData('anchor_program_display_count');
@@ -941,7 +941,7 @@ function follow_author_data_responce($user_id, $author_id, $type) {
         $data['limit_crossed'] = '0';
     }
 
-    $success_status_mess = fetchMasterConfigData('follow_author_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if (!empty($response)) {
@@ -1018,7 +1018,7 @@ function follow_anchor_data_responce($user_id, $author_id, $type) {
         $data['is_saved'] = 1; //$response['success'];
         $data['limit_crossed'] = '0';
     }
-    $success_status_mess = fetchMasterConfigData('follow_anchor_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if (!empty($response)) {

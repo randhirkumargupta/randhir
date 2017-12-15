@@ -15,7 +15,7 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('video_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
     $display_count = 10;
     $pagination_cap = 50;
@@ -308,7 +308,7 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('program_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
     $display_count = 10;
     $pagination_cap = 50;
@@ -591,7 +591,7 @@ function programCategoryListlPageRerourceValue($token) {
     $conf_array = tidConfig();
     $Program_section_list = $conf_array['program_sec_tid'];
 
-    $success_status_mess = fetchMasterConfigData('anchor_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
 
@@ -701,7 +701,7 @@ function generateVideoDetail($nid) {
     // variable declaration
     global $base_url;
     $field_story_source_type = array();
-    $success_status_mess = fetchMasterConfigData('video_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
     $data = array();
     $listcount = 0;
@@ -810,7 +810,7 @@ function generateProgramDetail($nid) {
     global $base_url;
     $listcount = 0;
     $photo_list_array = array();
-    $success_status_mess = fetchMasterConfigData('program_detail_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $data = array();
@@ -1024,7 +1024,7 @@ function topstoriesList($source) {
     $query->fields('ti', array('tid'));
 
 
-//end 
+//end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $result_fs = featuresWidgetData();
@@ -1123,7 +1123,7 @@ function topstoriesList($source) {
 //}
     }
 
-    
+
     if($source == 'home'){
         $data_topstories['news'] = (array) $data_newslist;
     }

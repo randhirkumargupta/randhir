@@ -154,7 +154,7 @@ function saveUpdatedProfile($data) {
     // Save user object.
     $flag_save = user_save($user_detail);
 
-    $success_status_mess = fetchMasterConfigData('sso_edit_profile');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     // responce object

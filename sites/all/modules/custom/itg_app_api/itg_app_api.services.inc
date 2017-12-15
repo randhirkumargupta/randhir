@@ -3362,7 +3362,7 @@ function itg_rapid_api_signup($token) {
                 $session_id = $cookie_val['session_id'];
                 $session_name = $cookie_val['session_name'];
                 $result_obj = json_decode($result);
-                $success_status_mess = fetchMasterConfigData('sso_signup');
+                $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
                 $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
                 $account['status_code'] = "1";
                 $account['status_message'] = "$success_status_message";
@@ -3434,7 +3434,7 @@ function itg_rapid_api_signup($token) {
                 $is_first_login = 0;
             }
             if ($auth_token) {
-                $success_status_mess = fetchMasterConfigData('sso_signup');
+                $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
                 $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
                 $user = updateUsedrProfileAtSignup_rapid($data, 1);
@@ -3520,7 +3520,7 @@ function itg_rapid_api_signup($token) {
             }
             if ($auth_token) {
                 $user = updateUsedrProfileAtSignup_rapid($data, 1);
-                $success_status_mess = fetchMasterConfigData('sso_signup');
+                $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
                 $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
                 $account['status_code'] = "1";
                 $account['status_message'] = "$success_status_message";
@@ -3630,7 +3630,7 @@ function itg_rapid_api_login_request($token) {
             } else {
                 $mail = $name;
             }
-            $success_status_mess = fetchMasterConfigData('sso_login_request');
+            $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
             $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
             $account['status_code'] = "1";
@@ -3751,7 +3751,7 @@ function itg_rapid_api_edit_user_image($token) {
 
         // Save user object.
         $resp = user_save($user_detail);
-        $success_status_mess = fetchMasterConfigData('sso_edit_profile');
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
         $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
         if ($resp->uid) {
@@ -3821,7 +3821,7 @@ function itg_rapid_api_log_out($token) {
         // call custom function to clean token in custom table
         cleanToken_Rapid($params);
     }
-    $success_status_mess = fetchMasterConfigData('sso_log_out');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $data['status_code'] = "1";
@@ -3897,7 +3897,7 @@ function itg_rapid_api_change_password($token) {
 
         drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
-        $success_status_mess = fetchMasterConfigData('sso_change_password');
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
         $success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
 
         $data['status_code'] = "1";
@@ -3965,7 +3965,7 @@ function itg_rapid_api_forgot_password($token) {
         itg_otp_device_info_insert_rapid($params, $result_obj_otp[0]->otp, 1, $result_obj_otp[0]->created);
     }
     cleanToken_Rapid($params);
-    $success_status_mess = fetchMasterConfigData('sso_otp_verification');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $data['status_code'] = "1";
@@ -4026,7 +4026,7 @@ function itg_rapid_api_otp_verification($token) {
         }
         //login scritp end
         $uname = $params['user_id'];
-        $success_status_mess = fetchMasterConfigData('sso_otp_verification');
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
         $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
         $data['status_code'] = "1";
@@ -4078,7 +4078,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
     $result = callAPI($method, $url, $params);
     $result_obj = json_decode($result);
 
-    $success_status_mess = fetchMasterConfigData('sso_resend_otp');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $data['status_code'] = "1";
@@ -4138,7 +4138,7 @@ function itg_rapid_api_get_login_user_detail($token) {
             $login_type = 2;
         }
 
-        $success_status_mess = fetchMasterConfigData('sso_get_login_user_detail');
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
         $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
         $data['status_code'] = "1";
@@ -4206,7 +4206,7 @@ function itg_rapid_api_edit_profile($token) {
         //if ($result_obj->uid) {
         $responce_object_rs = saveUpdatedProfile($params);
 
-        $success_status_mess = fetchMasterConfigData('sso_edit_profile');
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
         $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
         $responce_object['status_code'] = "1";
@@ -4246,7 +4246,7 @@ function itg_rapid_api_get_preference($token) {
 
         $preference_tid = get_personalization_saved_value_service($account->uid);
 
-        $success_status_mess = fetchMasterConfigData('sso_get_preference');
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
         $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
         // return data of personalization-preferences value
@@ -4342,7 +4342,7 @@ function itg_rapid_api_update_preference($token) {
                     ->execute();
         }
     }
-    $success_status_mess = fetchMasterConfigData('sso_update_preference');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $data['status_code'] = "1";
@@ -4406,7 +4406,7 @@ function itg_rapid_api_reset_password($token) {
 
         drupal_save_session($original_session_state);
         deviceTokenReset_Rapid($params);
-        $success_status_mess = fetchMasterConfigData('sso_reset_password');
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
         $success_status_message = isset($success_status_mess) ? $success_status_mess : "password has been changed";
         $data['status_code'] = "1";
         $data['status_message'] = "$success_status_message";
@@ -4464,7 +4464,7 @@ function itg_rapid_api_authtoken_verification($token) {
             $res['status_code'] = "0";
             $res['status_message'] = "invalid token";
         } else {
-            $success_status_mess = fetchMasterConfigData('sso_authtoken_verification');
+            $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
             $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
             $res['status_code'] = "1";
             $res['status_message'] = "$success_status_message";
@@ -5313,7 +5313,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
     $anchor_data['author'] = $author_list;
     $anchor_data['topic'] = $topics_list;
 
-    $success_status_mess = fetchMasterConfigData('get_the_user_follow_status_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if ($anchor_c > 0) {
@@ -5725,7 +5725,7 @@ function list_anchor_data_responce($uid) {
 
 
     $anchor_data['anchor'] = $anchor_list;
-    $success_status_mess = fetchMasterConfigData('anchor_follow_list_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if ($loopc > 0) {
@@ -5779,7 +5779,7 @@ function list_author_data_responce($uid) {
 
 
     $anchor_data['author'] = $anchor_list;
-    $success_status_mess = fetchMasterConfigData('author_follow_list_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if ($loopc > 0) {
@@ -5852,7 +5852,7 @@ function list_itg_rapid_api_author_list($uid, $cpageno) {
         }
         //return $data;
     }
-    $success_status_mess = fetchMasterConfigData('author_list_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $dis_count = fetchMasterConfigData('author_list_display_count');
@@ -5965,7 +5965,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
         }
         //return $data;
     }
-    $success_status_mess = fetchMasterConfigData('anchor_list_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $dis_count = fetchMasterConfigData('anchor_list_display_count');
@@ -6063,7 +6063,7 @@ function follow_topic_data_responce($user_id, $author_id, $type) {
         $data['limit_crossed'] = '0';
     }
 
-    $success_status_mess = fetchMasterConfigData('follow_topic_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if (!empty($response)) {
@@ -6109,7 +6109,7 @@ function list_user_follow_topic_list($uid) {
 
     $anchor_data['topic'] = $data;
 
-    $success_status_mess = fetchMasterConfigData('user_follow_topic_list_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if ($loopc > 0) {

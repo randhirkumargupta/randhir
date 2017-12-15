@@ -14,9 +14,9 @@ function bookmark_responce_data($user_id) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('bookmark_display_custom_message');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     // list array building
     $data = bookmark_responce_datalist($user_id);
 
@@ -86,9 +86,9 @@ function bookmark_set_data_responce($user_id, $node_ids) {
 }
 
 /**
- * Delete Bookmark Stories based on user id 
+ * Delete Bookmark Stories based on user id
  * @param $user_id , $node_id
- * @return array of All the stories which is bookmarked/Read later ,  
+ * @return array of All the stories which is bookmarked/Read later ,
  */
 function bookmark_del_data_responce($user_id, $node_ids) {
 
@@ -100,10 +100,10 @@ function bookmark_del_data_responce($user_id, $node_ids) {
     $user_activity = 'read_later';
     $activity_date = date('d-m-Y');
     $activity_date_time = date('d-m-Y h:i:s');
-    
-    $success_status_mess = fetchMasterConfigData('bookmark_delete_display_custom_message');
+
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
 
     if (function_exists('mongodb')) {
         $con = mongodb();

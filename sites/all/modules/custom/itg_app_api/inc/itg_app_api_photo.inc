@@ -18,7 +18,7 @@ function photocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $photo_dis_count = fetchMasterConfigData('photo_display_count');
     $photo_display_count = isset($photo_dis_count) ? $photo_dis_count : "10";
 
-    $success_status_mess = fetchMasterConfigData('photo_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $photo_pag_cap = fetchMasterConfigData('photo_pagination_cap');
@@ -244,7 +244,7 @@ function photoDetailPageRerourceValue($id) {
     $data_array = array();
     $photo_list_array = array();
 
-    $success_status_mess = fetchMasterConfigData('photo_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     // list array building
@@ -374,7 +374,7 @@ function generatePhotoDetailList($galleryimg) {
 function photoStoryDetailPageRerourceValue($id) {
     // variable decalartion
     //349693 , 349625-> photo story nid
-    $success_status_mess = fetchMasterConfigData('photo_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $output_array = array();

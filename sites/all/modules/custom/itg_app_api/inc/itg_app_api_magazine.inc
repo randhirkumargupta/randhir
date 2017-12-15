@@ -15,7 +15,7 @@ function magazineEditionPageRerourceValue($issueid = 0, $pageno = 0) {
     $photo_list_array = array();
     $updated_datetime = "";
 
-    $success_status_mess = fetchMasterConfigData('magazine_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $dis_count = fetchMasterConfigData('magazine_display_count');
@@ -250,7 +250,7 @@ function magazineCoverstoriesPageRerourceValue() {
     $data_array = array();
     $issue_list_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('magazine_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     // list array building
@@ -501,7 +501,7 @@ function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno =
     $photo_list_array = array();
     $updated_datetime = "";
 
-    $success_status_mess = fetchMasterConfigData('magazine_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     $dis_count = fetchMasterConfigData('magazine_display_count');

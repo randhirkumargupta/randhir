@@ -705,28 +705,7 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('photo_display_count_newslist_cell')
     );
-    $form['photolist']['photo_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Photo Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('photo_display_custom_msg')
-    );
-    $form['photolist']['photostorydetail_detail_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'photostorydetail Detail Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('photostorydetail_detail_display_custom_msg')
-    );
-    $form['photolist']['photo_detail_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Photo Detail Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('photo_detail_display_custom_msg')
-    );
-    $form['program'] = array(
+   $form['program'] = array(
         '#type' => 'fieldset',
         '#title' => t('Program List & Detail'),
         '#collapsible' => TRUE,
@@ -746,27 +725,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('program_display_count')
-    );
-    $form['program']['program_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Program Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('program_display_custom_msg')
-    );
-    $form['program']['program_detail_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'program Detail Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('program_detail_display_custom_msg')
-    );
-    $form['program']['program_category_list_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'program category list Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('program_category_list_display_custom_msg')
     );
     $form['newslist'] = array(
         '#type' => 'fieldset',
@@ -788,20 +746,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('news_pagination_cap')
     );
-    $form['newslist']['news_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'News Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('news_display_custom_msg')
-    );
-    $form['newslist']['news_detail_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'News Detail Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('news_detail_display_custom_msg')
-    );
     $form['videolist'] = array(
         '#type' => 'fieldset',
         '#title' => t('Video list & Detail'),
@@ -821,20 +765,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('video_pagination_cap')
-    );
-    $form['videolist']['video_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Video Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('video_display_custom_msg')
-    );
-    $form['videolist']['video_detail_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Video Detail Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('video_detail_display_custom_msg')
     );
     $form['storydetail'] = array(
         '#type' => 'fieldset',
@@ -856,41 +786,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('story_pagination_cap')
     );
-    $form['storydetail']['story_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Story Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('story_display_custom_msg')
-    );
-    $form['storydetail']['story_detail_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Story Detail Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('story_detail_display_custom_msg')
-    );
-    $form['hamburger_horizontal_menu'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Hamburger & horizontal menu'),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-    );
-    $form['hamburger_horizontal_menu']['horizontal_menu_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Horizontal Menu Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('horizontal_menu_custom_msg')
-    );
-    $form['hamburger_horizontal_menu']['hamburger_menu_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Hamburger Menu Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('hamburger_menu_custom_msg')
-    );
-
     $form['magazine'] = array(
         '#type' => 'fieldset',
         '#title' => t('Magazine api'),
@@ -913,40 +808,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('magazine_pagination_cap')
     );
-    $form['magazine']['magazine_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Magazine Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('magazine_display_custom_msg')
-    );
-    $form['magazine']['magazine_editionlist_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Magazine editionlist Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('magazine_editionlist_display_custom_msg')
-    );
-    $form['magazine']['magazine_edition_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Magazine edition Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('magazine_edition_display_custom_msg')
-    );
-    $form['homepage'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Home api'),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-    );
-    $form['homepage']['homePage_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'homePage Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('homePage_display_custom_msg')
-    );
     $form['author'] = array(
         '#type' => 'fieldset',
         '#title' => t('Author api'),
@@ -967,13 +828,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('author_pagination_cap')
     );
-    $form['author']['author_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Author Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('author_display_custom_msg')
-    );
     $form['author']['author_story_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Author Story Display Count',
@@ -987,13 +841,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('author_story_pagination_cap')
-    );
-    $form['author']['author_story_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Author Story Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('author_story_display_custom_msg')
     );
     $form['poll'] = array(
         '#type' => 'fieldset',
@@ -1015,13 +862,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('poll_display_count_newslist_cell')
     );
-    $form['poll']['poll_display_custom_message'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Poll Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('poll_display_custom_message')
-    );
     $form['poll']['closed_poll_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Closed Poll Display Count',
@@ -1035,13 +875,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('closed_poll_pagination_cap')
-    );
-    $form['poll']['poll_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Poll Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('poll_display_custom_msg')
     );
     $form['anchor'] = array(
         '#type' => 'fieldset',
@@ -1063,13 +896,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('anchor_pagination_cap')
     );
-    $form['anchor']['anchor_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Anchor Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('anchor_display_custom_msg')
-    );
     $form['anchor']['anchor_program_display_count'] = array(
         '#type' => 'textfield',
         '#title' => 'Anchor Program Display Count',
@@ -1083,13 +909,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('anchor_program_pagination_cap')
-    );
-    $form['anchor']['anchor_program_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Anchor Program Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('anchor_display_custom_msg')
     );
     $form['bookmark'] = array(
         '#type' => 'fieldset',
@@ -1111,22 +930,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('bookmark_display_count_newslist_cell')
     );
-    $form['bookmark']['bookmark_display_custom_message'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Bookmark Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('bookmark_display_custom_message')
-    );
-    $form['bookmark']['bookmark_del_display_custom_message'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Bookmark Delete Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('bookmark_del_display_custom_message')
-    );
-
-
     $form['ios_group'] = array(
         '#type' => 'fieldset',
         '#title' => t('IOS'),
@@ -1156,14 +959,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('ios_force_update')
     );
-    $form['ios_group']['ios_update_message_frequency'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Update Message Frequency',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('ios_update_message_frequency')
-    );
-
     $form['android_group'] = array(
         '#type' => 'fieldset',
         '#title' => t('Android'),
@@ -1199,198 +994,6 @@ function itg_app_master_config_internal_form($form, &$form_state) {
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('android_force_update')
     );
-    $form['android_group']['android_update_message_frequency'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Update Message Frequency',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('android_update_message_frequency')
-    );
-
-    $form['sso_group'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('SSO'),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-    );
-    $form['sso_group']['sso_signup'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso signup',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_signup')
-    );
-    $form['sso_group']['sso_login_request'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso login request',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_login_request')
-    );
-    $form['sso_group']['sso_log_out'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso log out',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_log_out')
-    );
-    $form['sso_group']['sso_change_password'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso change password',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_change_password')
-    );
-    $form['sso_group']['sso_forgot_password'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso forgot password',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_forgot_password')
-    );
-    $form['sso_group']['sso_otp_verification'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso otp verification',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_otp_verification')
-    );
-    $form['sso_group']['sso_resend_otp'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso resend otp',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_resend_otp')
-    );
-    $form['sso_group']['sso_get_login_user_detail'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso get login user detail',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_get_login_user_detail')
-    );
-    $form['sso_group']['sso_edit_profile'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso edit profile',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_edit_profile')
-    );
-    $form['sso_group']['sso_get_preference'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso get preference',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_get_preference')
-    );
-    $form['sso_group']['sso_update_preference'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso update preference',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_update_preference')
-    );
-    $form['sso_group']['sso_reset_password'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso reset password',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_reset_password')
-    );
-    $form['sso_group']['sso_authtoken_verification'] = array(
-        '#type' => 'textfield',
-        '#title' => 'sso authtoken verification',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('sso_authtoken_verification')
-    );
-
-    $form['sso_group']['follow_anchor_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Follow Anchor Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('follow_anchor_display_custom_msg')
-    );
-
-    $form['follow'] = array(
-        '#type' => 'fieldset',
-        '#title' => t('Follow api'),
-        '#collapsible' => TRUE,
-        '#collapsed' => TRUE,
-    );
-    $form['follow']['follow_author_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Follow Author Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('follow_author_display_custom_msg')
-    );
-
-
-    $form['follow']['anchor_follow_list_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Anchor Follow List Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('anchor_follow_list_display_custom_msg')
-    );
-
-
-    $form['follow']['author_follow_list_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Author Follow List Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('author_follow_list_display_custom_msg')
-    );
-
-
-    $form['follow']['author_list_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Author List Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('author_list_display_custom_msg')
-    );
-
-
-    $form['follow']['anchor_list_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Anchor List Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('anchor_list_display_custom_msg')
-    );
-
-
-    $form['follow']['get_the_user_follow_status_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Get The User Follow Status Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('get_the_user_follow_status_display_custom_msg')
-    );
-
-
-    $form['follow']['follow_topic_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Follow Topic Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('follow_topic_display_custom_msg')
-    );
-
-
-    $form['follow']['user_follow_topic_list_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'User Follow Topic List Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('user_follow_topic_list_display_custom_msg')
-    );
-
-
     $form['submit_button'] = array(
         '#type' => 'submit',
         '#value' => t('Save'),
@@ -1448,13 +1051,6 @@ function itg_app_master_config_internal_form_bk($form, &$form_state) {
         '#size' => 25,
         '#maxlength' => 255,
         '#default_value' => fetchMasterConfigData('photo_display_custom_msg')
-    );
-    $form['sprint1_group']['photo_detail_display_custom_msg'] = array(
-        '#type' => 'textfield',
-        '#title' => 'Photo Detail Display Custom Message',
-        '#size' => 25,
-        '#maxlength' => 255,
-        '#default_value' => fetchMasterConfigData('photo_detail_display_custom_msg')
     );
     $form['sprint1_group']['program_pagination_cap'] = array(
         '#type' => 'textfield',

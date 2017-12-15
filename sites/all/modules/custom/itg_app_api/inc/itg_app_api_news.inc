@@ -17,15 +17,15 @@ function newscategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $photo_list_array = array();
     $updated_datetime = "";
 
-    $success_status_mess = fetchMasterConfigData('news_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     $dis_count = fetchMasterConfigData('news_display_count');
     $display_count = isset($dis_count) ? $dis_count : "10";
-    
+
     $pag_cap = fetchMasterConfigData('news_pagination_cap');
     $pagination_cap = isset($pag_cap) ? $pag_cap : "50";
-    
+
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {

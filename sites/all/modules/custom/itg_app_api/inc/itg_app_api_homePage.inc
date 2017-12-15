@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions for homePgae API 
+ * Inc file contains the functions for homePgae API
  */
 
 /**
@@ -22,41 +22,41 @@ function homePageJson() {
     $data_topstories = array();
     $data_middleware = array();
     $total_count = 0;
-    
+
     $middleware_packages_config = fetchMasterConfigData('packages_config_options');
     if($middleware_packages_config == 1){
       $data_middleware = home_page_packages();
       $total_count += count($data_middleware);
     }
-    
+
     $middleware_topstories_config = fetchMasterConfigData('top_stories_config_options');
     if($middleware_topstories_config == 1){ //enable
        //$data_topstories = homepage_topstories();
        $data_topstories = topstoriesList('home');
        $total_count += count($data_topstories);
     }
-   
+
     $middleware_cat_config = fetchMasterConfigData('categories_config_options');
     if($middleware_cat_config == 1){ //enable
       $data_cat_news= home_page_newslist_cat();
       $total_count += count($data_cat_news);
     }
-    
-    $middleware_magazine_config = fetchMasterConfigData('magazine_config_options');    
+
+    $middleware_magazine_config = fetchMasterConfigData('magazine_config_options');
     if($middleware_magazine_config == 1){ //enable
       $data_magazine = homePageJsonMagazine();
       $total_count += count($data_magazine);
     }
-    
+
     $middleware_polls_config = fetchMasterConfigData('polls_config_options');
     if($middleware_polls_config == 1){ //enable
       $data_poll = homePageJsonPoll();
       $total_count += count($data_poll);
     }
-    
-    $success_status_mess = fetchMasterConfigData('homePage_display_custom_msg');
+
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
     if($total_count > 0){
       $data['status_code'] = "1";
       $data['status_message'] = "$success_status_message";
@@ -67,7 +67,7 @@ function homePageJson() {
     $order_config = homepage_order_config();
     foreach ($order_config as $order_data){
       if($order_data['config_key'] == 'homeapi_order_packages'){
-       if(count($data_middleware) > 0){ 
+       if(count($data_middleware) > 0){
         $data['data'][] = $data_middleware;
        }
       }elseif ($order_data['config_key'] == 'homeapi_order_topstories') {
@@ -87,7 +87,7 @@ function homePageJson() {
         $data['data'][] = $data_poll;
         }
       }
-    } 
+    }
     if(count($data) == 2){
       $data['data'] = array();
     }
@@ -116,7 +116,7 @@ function homepage_topstories() {
   $top_story_list = array();
   $top_story_data = fetchMasterConfigData('top_stories_management');
   $top_story_limit = isset($top_story_data) ? $top_story_data : '10';
-  
+
   $top_story_list = homePageJsonTopstories($top_story_limit);
   return $top_story_list;
 }
@@ -146,13 +146,13 @@ function home_page_newslist_cat() {
  */
 function home_page_magazine_node_list() {
   $mag_news_list = array();
-  
+
   $query = db_select('itg_app_middleware', 'am');
   $query->fields('am', array('ids'));
   $query->condition('am.identifier','magazine_options');
   $query->condition('am.ids','0','!=');
   $result_query = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  
+
   foreach ($result_query as $result_data){
     $mag_news_list[] = $result_data['ids'];
   }
@@ -165,13 +165,13 @@ function home_page_magazine_node_list() {
  */
 function home_page_polls_node_list() {
   $polls_node_list = array();
-  
+
   $query = db_select('itg_app_middleware', 'am');
   $query->fields('am', array('ids'));
   $query->condition('am.identifier','poll_options');
   $query->condition('am.ids','0','!=');
   $result_query = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  
+
   foreach ($result_query as $result_data){
     $polls_node_list[] = $result_data['ids'];
   }
@@ -244,7 +244,7 @@ function homePageJsonPackagelist($tid) {
                 $tid_list[] = $value->tid;
             }
         }
-       
+
         // code vid=14  end
         $term_name = get_term_name_from_tid_for_report($tid);
         $home_page_api_pck_order = fetchMasterConfigData('homeapi_order_packages ');
@@ -608,7 +608,7 @@ function homePageCatNewslist($tid) {
         $term_name = get_term_name_from_tid_for_report($tid);
         $home_page_api_pck_cat = fetchMasterConfigData('homeapi_order_categories');
         $cat_order = isset($home_page_api_pck_cat) ? $home_page_api_pck_cat : "";
-        
+
         $data_news['id'] = "$tid";
         $data_news['order'] = "$cat_order";
         $data_news['type'] = "newslist";
@@ -785,7 +785,7 @@ function homePageJsonMagazine() {
     $n_magazine = $n_magazine_data['data'];
     $home_page_api_mag_order = fetchMasterConfigData('homeapi_order_magazines ');
     $mag_order = isset($home_page_api_mag_order) ? $home_page_api_mag_order : "";
-        
+
     $data_magazine['id'] = "0";
     $data_magazine['order'] = "$mag_order";
     $data_magazine['type'] = "magazine";
@@ -864,7 +864,7 @@ function getMagazineList() {
     $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result_issue as $reskey => $resvalue) {
 
-        //issue node 
+        //issue node
         $issueid = $resvalue['nid'];
         $field_issue_large_cover_image_fid = $resvalue['field_issue_large_cover_image_fid'];
         $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
@@ -1048,7 +1048,7 @@ function in_multiarray($elem, $array, $field) {
 
 /**
  * function for getNodeBodyByNid
- * @pram datetime $nid 
+ * @pram datetime $nid
  * @return string $field_data_body;
  */
 function getNodeBodyByNid_Report($nid) {
@@ -1062,7 +1062,7 @@ function getNodeBodyByNid_Report($nid) {
 
 /**
  * function for getNode prime cat tid ByNid
- * @pram datetime $nid 
+ * @pram datetime $nid
  * @return obj term_object;
  */
 function getNodePrimeCatByNid($nid) {
@@ -1089,7 +1089,7 @@ function homePageJsonPoll() {
     $n_rating = array();
     $n_magazine = array();
 
-    $n_polls = array();  
+    $n_polls = array();
     $n_polls = polls_open_datalist(0, "home");
     $home_page_api_poll_order = fetchMasterConfigData('homeapi_order_polls');
     $poll_order = isset($home_page_api_poll_order) ? $home_page_api_poll_order : "";

@@ -11,9 +11,9 @@
 function horizontal_menu_middleware_data() {
   $menu_type_id = '2'; //for horizontal menu
   $menu_data = horizontal_menu_data($menu_type_id);
-  $success_status_mess = fetchMasterConfigData('horizontal_menu_custom_msg');
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
   $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-  
+
   if ($menu_data['count'] > 0) {
     $output_array['status_code'] = "1";
     $output_array['status_message'] = "$success_status_message";
@@ -33,9 +33,9 @@ function horizontal_menu_middleware_data() {
  */
 function hamburger_menu_middleware_data() {
   $menu_data = hamburger_menu_data();
-  $success_status_mess = fetchMasterConfigData('hamburger_menu_custom_msg');
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
   $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
   if ($menu_data['count'] > 0) {
     $output_array['status_code'] = "1";
     $output_array['status_message'] = "$success_status_message";

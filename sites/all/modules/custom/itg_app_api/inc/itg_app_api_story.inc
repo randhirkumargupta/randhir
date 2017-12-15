@@ -15,10 +15,10 @@ function StoryDetailPageRerourceValue($id) {
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
-    
-    $success_status_mess = fetchMasterConfigData('story_display_custom_msg');
+
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-    
+
 
     // list array building
     $data = generateStoryDeatilList($id);
@@ -41,7 +41,7 @@ function StoryDetailPageRerourceValue($id) {
  * @return array
  */
 function generateStoryDeatilList($id) {
-    // variable declaration    
+    // variable declaration
     global $base_url;
     $data = array();
     $nid = $id;
@@ -334,20 +334,20 @@ function story_body_with_html($node) {
     $output .= '<div class="story-section">
 <div class="story-right ">
                       <div class="">
-                                    
+
                               <div class="stryimg"><img alt="" title="" src="' . $extra_large_image . '">
-                                    
+
                                       <div class="photoby">
                                                                     <div class="photoby-text">' . $caption . '</div>
                                           </div>
-                       
+
 
 
 
                 </div>
-                    
+
                   <div class="image-alt">' . $caption . '</div>
-                                            
+
               </div>
 
                                 <div class="briefcase desktop-hide">
@@ -355,10 +355,10 @@ function story_body_with_html($node) {
                     <ul>
                       ' . $getHighlight_str . '                   </ul>
                   </div>
-                  
+
               <div class="story-movie">
                                 <div class="movie-detail">
-                                                                      </div>                            
+                                                                      </div>
               </div>
               <div class="ad-blocker"></div>';
     $output .= '<div class="description">' . $body_android . '
@@ -700,7 +700,7 @@ function pollsdatalist($poll_id) {
 
 /*
  * function for associative array based on expected json
- * @pram array 
+ * @pram array
  * @return array
  */
 

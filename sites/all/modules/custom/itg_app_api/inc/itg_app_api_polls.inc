@@ -14,7 +14,7 @@ function polls_open_list($cpageno) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('poll_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     // list array building
@@ -49,7 +49,7 @@ function polls_close_list($cpageno) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('poll_display_custom_message');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     // list array building
@@ -83,7 +83,7 @@ function polls_close_list($cpageno) {
  * @return the poll info in array
  */
 function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) {
-    $success_status_mess = fetchMasterConfigData('poll_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     if (isset($option_id) && $option_id != '') {
@@ -222,7 +222,7 @@ function poll_detail_data($poll_id) {
     $output_array = array();
     $data_array = array();
     $updated_datetime = "";
-    $success_status_mess = fetchMasterConfigData('poll_display_custom_msg');
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
     $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
     // list array building
