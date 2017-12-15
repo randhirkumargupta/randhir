@@ -374,6 +374,12 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
         '#size' => 20,
         '#maxlength' => 20,
       );
+      $form['mail_template_emails'] = array(
+        '#type' => 'textarea',
+        '#title' => 'Story/Photo/Video Mail Template Emails',
+        '#default_value' => variable_get('mail_template_emails'),
+        '#size' => 10,
+      );
       break;
     case 'videogallery_node_form':
       $arg = arg(2);
@@ -1744,10 +1750,12 @@ function itg_videogallery_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'videogallery' && !empty(variable_get('photo_block_refresh'))) {
     $settings = array();
     $settings['video_nid'] = $node->nid;
-    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
-    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
     drupal_add_js(array('itg_videogallery' => array('settings' => $settings)), array('type' => 'setting'));
     drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/itg_videogallery_watchlater_refresh.js', array('scope' => 'footer'));
+  }
+  if(($node->type == 'videogallery') && ($node->field_video_repo_type[LANGUAGE_NONE][0]['value'] == 'INTERNAL' || $node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated')) {
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
+    drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
   }
 }
 

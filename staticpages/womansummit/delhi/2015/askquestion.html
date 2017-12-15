@@ -1,0 +1,137 @@
+ <script type="text/javascript">
+    
+	function cemail(val){
+		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(val.value)){
+		return (true)
+		}
+		return false;
+		}
+	
+    function ajaxFunction(){
+		var frm=document.feedback;
+		if(frm.FNAME.value=="")
+		{
+		  alert("Please enter First Name");
+		  frm.FNAME.focus();
+		  return false;
+		}
+
+		if (frm.FNAME.value!="") {
+				var alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+						for (var i=0;i<frm.FNAME.value.length;i++){
+							temp=frm.FNAME.value.substring(i,i+1);
+							if (alp.indexOf(temp)==-1){
+								alert("First name should accept only alphabets[a-z,A-Z]");
+								frm.FNAME.focus();
+								return false;
+							}
+						}
+		    	}
+		
+
+		if(frm.EMAIL.value=="")
+		{
+		  alert("Please enter Email Id");
+		  frm.EMAIL.focus();
+		  return false;
+		}
+		if(cemail(frm.EMAIL)==false)
+			{
+					alert( "Please enter valid email ID" );
+					frm.EMAIL.focus();
+					return false;
+			}
+
+	 
+		if(frm.Location.value=="")
+		{
+		  alert("Please enter city");
+		  frm.Location.focus();
+		  return false;
+		}
+		if (frm.Location.value!="") {
+				var alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ";
+						for (var i=0;i<frm.Location.value.length;i++){
+							temp=frm.Location.value.substring(i,i+1);
+							if (alp.indexOf(temp)==-1){
+								alert("City should accept only alphabets[a-z,A-Z]");
+								frm.Location.focus();
+								return false;
+							}
+						}
+		}
+		
+		 if(frm.number.value=="")
+			{
+				alert( "Please Enter the  Code" );	
+				frm.number.focus();
+				return false;
+			} 
+		frm.submit();
+}
+    
+    </script>
+<div id="cont-area margtop" style="width:1000px; margin: 0 auto;">
+                	<div style=" font:bold 18px arial; color:#ffffff; padding-left:5px; height:32px; line-height:32px; background-image:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/question.gif); background-repeat:no-repeat; background-position:top-left">Ask Your Question</div>
+                    <div id="left">
+                    <form name="feedback" action="save_comment.jsp" method="post" onsubmit="javascript:return ajaxFunction()">
+                        <table width="500" border="0"  align="center" cellpadding="0" cellspacing="10" id="ask_your_quation" style="font:bold 11px arial; color:#5A5A5A;">
+                         <tr>
+                                <td align="center" valign="top" colspan="2" style="font:bold 14px arial; color:#FF0000;"><%=speakers_array[contentId]%></td>
+                               
+                            </tr>
+                        
+                        
+                        
+                            <tr>
+                                
+                                <td  align="left" valign="middle" class="td" colspan="2"><input type="hidden" name="Session" value="<%=speakers_array[contentId]%>" />
+                                <input type="hidden" name="id" value="<%=contentId%>" />
+                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top">Ask Your Question Here:</td>
+                                <td  align="left" valign="middle" class="td"><textarea name="message"></textarea></td>
+                            </tr>
+                            <tr>			
+                                <td width="444" align="right" valign="middle">Name:</td>
+                                <td width="531"  align="left" valign="middle"><input type="text" name="FNAME" /></td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="right" valign="middle">Email:</td>
+                                <td align="left" valign="middle"><input type="text" name="EMAIL" /></td>
+                            </tr>
+                            
+                            <tr>
+                                <td align="right" valign="middle">City:</td>
+                                <td align="left" valign="middle" ><input type="text" name="Location" /></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">Phone:</td>
+                                <td align="left" valign="middle" ><input type="text" name="mobileno" /></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top" ><i style="color:#FF0000">*</i>&nbsp;Enter The Code Shown:</td>
+                                <td  align="left" valign="middle" class="td"><input type="text" name="number" /> </td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top">&nbsp;</td>
+                                <td  align="left" valign="middle" class="td"><img src="img.jsp" /></td>
+                            </tr>
+                            
+                             <tr>
+                                <td align="right" valign="top">&nbsp;</td>
+                                <td  align="left" valign="middle" class="td" style="font:bold 12px arial; color:#FF0000;"><%=msg%></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="middle">&nbsp;</td>
+                                <td align="left" valign="middle"><input name="submit" type="submit" value="Submit" class="send_button"/></td>
+                            </tr>
+                        </table>
+					</form>
+                    </div>
+
+				
+   </div>

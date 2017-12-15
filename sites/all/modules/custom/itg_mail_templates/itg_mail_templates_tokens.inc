@@ -95,13 +95,38 @@ function itg_mail_templates_tokenstable() {
               </tr>
               <tr>
                 <td>'.t('ITG Node Title').'</td>
-                <td>[itg_mail_token:itg_node_title]    </td>
+                <td>[itg_mail_token:itg_node_title]</td>
                 <td>'.t('A token that will be used for ITG Content Title in Mail Body.').'</td>
+              </tr>
+              <tr>
+                <td>'.t('ITG Node Byline').'</td>
+                <td>[itg_mail_token:itg_node_byline]</td>
+                <td>'.t('A token that will be used for ITG Content Byline in Mail Body.').'</td>
+              </tr>
+              <tr>
+                <td>'.t('ITG Node City').'</td>
+                <td>[itg_mail_token:itg_node_city]</td>
+                <td>'.t('A token that will be used for ITG Content City in Mail Body.').'</td>
+              </tr>
+              <tr>
+                <td>'.t('ITG Node Creator').'</td>
+                <td>[itg_mail_token:itg_node_creator]</td>
+                <td>'.t('A token that will be used for ITG Content Author/Creator in Mail Body.').'</td>
               </tr>
               <tr>
                 <td>'.t('ITG Node Title With Link').'</td>
                 <td>[itg_mail_token:itg_node_title_link]</td>
                 <td>'.t('A token that will be used for ITG Node Title With Link.').'</td>
+              </tr>
+              <tr>
+                <td>'.t('ITG Node Url').'</td>
+                <td>[itg_mail_token:itg_node_url]</td>
+                <td>'.t('A token that will be used for ITG Content Web Url in Mail Body.').'</td>
+              </tr>
+              <tr>
+                <td>'.t('ITG Node Kicker Text').'</td>
+                <td>[itg_mail_token:itg_node_short_desc]</td>
+                <td>'.t('A token that will be used for ITG Content Kicker Text in Mail Body.').'</td>
               </tr>
               <tr>
                 <td colspan="3"><b>'.t('Tokens For Product').'</b></td>
@@ -113,7 +138,7 @@ function itg_mail_templates_tokenstable() {
               </tr>
               <tr>
                 <td>'.t('ITG Node Nid').'</td>
-                <td>[itg_mail_token:itg_node_nid]    </td>
+                <td>[itg_mail_token:itg_node_nid]</td>
                 <td>'.t('A token that will be used for ITG Content Nid in Mail Body.').'</td>
               </tr>
               <tr>

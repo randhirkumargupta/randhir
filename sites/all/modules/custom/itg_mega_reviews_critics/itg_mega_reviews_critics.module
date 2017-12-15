@@ -18,6 +18,12 @@ function itg_mega_reviews_critics_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_mega_reviews_critics.helper.inc',
   );
+  $items['migrate/mega-review-migration/%'] = array(
+    'page callback' => 'itg_mega_review_migration',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_mega_reviews_critics.helper.inc',
+  );
   return $items;
 }
 

@@ -110,7 +110,7 @@ function itg_bestcolleges_menu() {
   $items['csvImporter'] = array(
     'title' => 'Import Data from CSV File',
     'description' => 'Import content from a <abbr title="Comma Separated Values">CSV</abbr> file.',
-    'access callback' => 'user_access',
+    'access callback' => 'user_is_logged_in',
     'access arguments' => array('access content'),
     'page callback' => 'csvImporter_pagecallback',
     'type' => MENU_NORMAL_ITEM,
@@ -118,23 +118,30 @@ function itg_bestcolleges_menu() {
   $items['bestcollege_create_taxonomy'] = array(
     'title' => "Create taxonomy",
     'page callback' => 'bestcollege_create_taxonomy',
-    'access callback' => TRUE,
+    'access callback' => 'user_is_logged_in',
   );
 
   $items['bestcollege_remove'] = array(
     'title' => "Create taxonomy",
     'page callback' => 'bestcollege_remove',
-    'access callback' => TRUE,
+    'access callback' => 'user_is_logged_in',
+  );
+
+  $items['bestcollege/migrate-video'] = array(
+    'title' => "Migrate Video",
+    'page callback' => 'bestcollege_migrate_video',
+    'access callback' => 'user_is_logged_in',
   );
 
   $items['bestcollege/config'] = array(
     'title' => 'Bestcollege Configuration',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('itg_bestcollege_configuration_form'),
-    'access arguments' => array('access content'),
+    'access callback' => 'user_is_logged_in',
     'file' => 'includes/itg_bestcolleges.inc',
     'type' => MENU_CALLBACK,
   );
+
   return $items;
 }
 
@@ -149,6 +156,27 @@ function bestcollege_remove() {
   foreach ($result as $reskey => $resvalue) {
     node_delete($resvalue['nid']);
   }
+}
+
+/**
+ * video associated to bestcolleges.
+ * @return string
+ */
+function bestcollege_migrate_video() {
+  $json = variable_get('bestcollege_add_video', '');
+  $children = (array) json_decode($json);
+  foreach ($children as $nid) {
+    if (!empty($nid)) {
+      $widget_name = 'section_wise_widget';
+      $is_node_in_widget = itg_widget_check_node_in_widget($nid, $widget_name);
+      if (!$is_node_in_widget) {
+        /* Assign video to widget */
+        itg_widget_insert_widget_data($nid, $widget_name, 0);
+      }
+    }
+  }
+  itg_widget_delete_old_data_by_limit($widget_name);
+  return 'done';
 }
 
 /**
@@ -299,28 +327,7 @@ function itg_bestcolleges_block_view($delta = '') {
       $block['content'] = $data;
       break;
     case 'bestcollege_rhs_videos_widget':
-      module_load_include('inc', 'itg_widget', 'includes/section-wise-order-from-custom-table');
-      // value is hardcoded need to be change for dyanamic functionality
-      $arg = arg();
-      if ($arg[0] == 'taxonomy') {
-        $tid = $arg[2];
-      }
-      else {
-        $path_request = request_path();
-        $path_request_array = explode('/', $path_request);
-
-        if ($path_request_array && $path_request_array[0] == "bestcolleges") {
-          $term_name = "Bestcolleges " . $path_request_array[1];
-          $term_data = taxonomy_get_term_by_name($term_name);
-        }
-        $tid = array_pop($term_data)->tid;
-      }
-
-      $info['section'] = $tid; //844693 / (auto) 844517'; // tid of section
-      $info['content_type'] = ''; // content type machine name
-      // view name which is stored in draggableviews_structure table
-      $info['view_name'] = 'views_form_section_wise_content_ordering_list_page';
-      $data = itg_widget_section_wise_ordering_from_custom_table($info);
+      $data = itg_bestcolleges_rhs_video();
       $block['content'] = theme("bestcollege_section_ordering", array("data" => $data));
       break;
     case 'bestcollege_sponser':
@@ -549,11 +556,11 @@ function itg_city_wise_list($year, $scity) {
 function list_of_city($year, $stream) {
   $itg_query = db_select('bestcolleges_citywiseranking', 'bcr')->distinct();
   $itg_query->fields('bcr', array('city', 'stream'))
-    ->condition('bcr.year', $year, '=')
-    ->condition('bcr.stream', $stream, '=')
-    ->condition('bcr.published', 1)
-    ->condition('bcr.rank', 0, '!=')
-    ->orderBy('bcr.rank', 'ASC');
+      ->condition('bcr.year', $year, '=')
+      ->condition('bcr.stream', $stream, '=')
+      ->condition('bcr.published', 1)
+      ->condition('bcr.rank', 0, '!=')
+      ->orderBy('bcr.rank', 'ASC');
   $result = $itg_query->execute();
   $nodes = array();
   // We can use a foreach loop on the $results object.
@@ -579,10 +586,10 @@ function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
     $itg_query->join('bestcolleges_emergingranking', 'bce', 'n.collegeid = bce.collegeid');
     $itg_query->fields('bce', array('id', 'year', 'overall_rank', 'stream', 'reputation', 'academic_input', 'studentcare', 'infrastructure', 'placement', 'preceptual_rank', 'factual_rank'));
     $itg_query->fields('n', array('collegename', 'city'))
-      ->condition('bce.year', $byear, '=')
-      ->condition('bce.stream', $bstream, '=')
-      ->condition('bce.published', 1)
-      ->orderBy('bce.overall_rank', 'ASC');
+        ->condition('bce.year', $byear, '=')
+        ->condition('bce.stream', $bstream, '=')
+        ->condition('bce.published', 1)
+        ->orderBy('bce.overall_rank', 'ASC');
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
@@ -591,11 +598,11 @@ function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
     $itg_query->join('bestcolleges_ranking', 'bcr', 'n.collegeid = bcr.collegeid');
     $itg_query->fields('bcr', array('id', 'year', 'rank', 'stream'));
     $itg_query->fields('n', array('collegename', 'city'))
-      ->condition('bcr.year', $byear, '=')
-      ->condition('bcr.stream', $bstream, '=')
-      ->condition('bcr.published', 1)
-      ->condition('bcr.rank', 0, '!=')
-      ->orderBy('bcr.rank', 'ASC');
+        ->condition('bcr.year', $byear, '=')
+        ->condition('bcr.stream', $bstream, '=')
+        ->condition('bcr.published', 1)
+        ->condition('bcr.rank', 0, '!=')
+        ->orderBy('bcr.rank', 'ASC');
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
@@ -603,11 +610,11 @@ function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
     // Query to find result of on behalf of stream & year:
     $itg_query = db_select('bestcolleges_readyrecnor_directory_list', 'brd');
     $itg_query->fields('brd', array('rank', 'collegename', 'address', 'phone', 'websiteurl', 'established', 'seats', 'cutoff'))
-      ->condition('brd.year', $byear, '=')
-      ->condition('brd.stream', $bstream, '=')
-      ->condition('brd.published', 1)
-      ->condition('brd.rank', 0, '!=')
-      ->orderBy('brd.rank', 'ASC');
+        ->condition('brd.year', $byear, '=')
+        ->condition('brd.stream', $bstream, '=')
+        ->condition('brd.published', 1)
+        ->condition('brd.rank', 0, '!=')
+        ->orderBy('brd.rank', 'ASC');
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
@@ -615,12 +622,12 @@ function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
     // Query to find result of best colleges with zone on behalf of stream & year:
     $itg_query = db_select('bestcolleges_zonecampuswiseranking', 'bcz');
     $itg_query->fields('bcz', array('rank', 'city', 'collegename'))
-      ->condition('bcz.year', $byear, '=')
-      ->condition('bcz.stream', $bstream, '=')
-      ->condition('bcz.city', array('North', 'South', 'East', 'West'), 'IN')
-      ->condition('bcz.published', 1)
-      ->condition('bcz.rank', 0, '!=')
-      ->orderBy('bcz.city', 'ASC');
+        ->condition('bcz.year', $byear, '=')
+        ->condition('bcz.stream', $bstream, '=')
+        ->condition('bcz.city', array('North', 'South', 'East', 'West'), 'IN')
+        ->condition('bcz.published', 1)
+        ->condition('bcz.rank', 0, '!=')
+        ->orderBy('bcz.city', 'ASC');
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
@@ -638,11 +645,11 @@ function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
     // Query to find result of Pvt & Govt colleges with zone on behalf of stream & year:
     $itg_query = db_select('bestcolleges_zonecampuswiseranking', 'bcz');
     $itg_query->fields('bcz', array('rank', 'collegename', 'city', 'stream'))
-      ->condition('bcz.year', $byear, '=')
-      ->condition('bcz.stream', $tech_stream, 'IN')
-      ->condition('bcz.published', 1)
-      ->condition('bcz.rank', 0, '!=')
-      ->orderBy('bcz.stream', 'ASC');
+        ->condition('bcz.year', $byear, '=')
+        ->condition('bcz.stream', $tech_stream, 'IN')
+        ->condition('bcz.published', 1)
+        ->condition('bcz.rank', 0, '!=')
+        ->orderBy('bcz.stream', 'ASC');
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
@@ -650,12 +657,12 @@ function itg_bestcollege_getData($type, $byear, $bstream, $city = NULL) {
     // Query to find result of best colleges with zone on behalf of stream, year & city:
     $itg_query = db_select('bestcolleges_citywiseranking', 'bcr');
     $itg_query->fields('bcr', array('rank', 'collegename'))
-      ->condition('bcr.year', $byear, '=')
-      ->condition('bcr.stream', $bstream, '=')
-      ->condition('bcr.city', $city, '=')
-      ->condition('bcr.published', 1)
-      ->condition('bcr.rank', 0, '!=')
-      ->orderBy('bcr.rank', 'ASC');
+        ->condition('bcr.year', $byear, '=')
+        ->condition('bcr.stream', $bstream, '=')
+        ->condition('bcr.city', $city, '=')
+        ->condition('bcr.published', 1)
+        ->condition('bcr.rank', 0, '!=')
+        ->orderBy('bcr.rank', 'ASC');
     $itg_result = $itg_query->execute()->fetchAll();
     return $itg_result;
   }
@@ -677,8 +684,8 @@ function itg_bestcollege_getStreamYear($type, $byear) {
     $query->join('bestcolleges_emergingranking', 'bce', 'n.collegeid = bce.collegeid');
     $query->distinct();
     $query->fields('bce', array('stream'))
-      ->condition('bce.published', 1)
-      ->orderBy('bce.stream', 'ASC');
+        ->condition('bce.published', 1)
+        ->orderBy('bce.stream', 'ASC');
     $results = $query->execute()->fetchAll();
 
     $data['_none'] = t("---Select Course---");
@@ -693,9 +700,9 @@ function itg_bestcollege_getStreamYear($type, $byear) {
     $query->join('bestcolleges_ranking', 'bcr', 'n.collegeid = bcr.collegeid');
     $query->distinct();
     $query->fields('bcr', array('year'))
-      ->condition('bcr.published', 1)
-      ->condition('bcr.rank', 0, '!=')
-      ->orderBy('bcr.year', 'DESC');
+        ->condition('bcr.published', 1)
+        ->condition('bcr.rank', 0, '!=')
+        ->orderBy('bcr.year', 'DESC');
     $results = $query->execute()->fetchAll();
     $data['year']['_none'] = t("---Select---");
     foreach ($results as $results_key => $results_val) {
@@ -706,9 +713,9 @@ function itg_bestcollege_getStreamYear($type, $byear) {
     $query1->join('bestcolleges_ranking', 'bcr', 'n.collegeid = bcr.collegeid');
     $query1->distinct();
     $query1->fields('bcr', array('stream'))
-      ->condition('bcr.published', 1)
-      ->condition('bcr.rank', 0, '!=')
-      ->orderBy('bcr.stream', 'ASC');
+        ->condition('bcr.published', 1)
+        ->condition('bcr.rank', 0, '!=')
+        ->orderBy('bcr.stream', 'ASC');
     $results1 = $query1->execute()->fetchAll();
     $data['stream']['_none'] = t("---Select---");
     foreach ($results1 as $results1_key => $results1_val) {
@@ -721,10 +728,10 @@ function itg_bestcollege_getStreamYear($type, $byear) {
     $query = db_select('bestcolleges_readyrecnor_directory_list', 'brd');
     $query->distinct();
     $query->fields('brd', array('stream'))
-      ->condition('brd.year', $byear, '=')
-      ->condition('brd.published', 1)
-      ->condition('brd.rank', 0, '!=')
-      ->orderBy('brd.stream', 'ASC');
+        ->condition('brd.year', $byear, '=')
+        ->condition('brd.published', 1)
+        ->condition('brd.rank', 0, '!=')
+        ->orderBy('brd.stream', 'ASC');
     $results = $query->execute()->fetchAll();
     $data['_none'] = t("---Select Course---");
     foreach ($results as $results_key => $results_val) {
@@ -744,9 +751,9 @@ function bestcollege_getStaticWidgetData($year) {
   $keyword = 'RHS' . $year;
   $query = db_select('node', 'n');
   $query->fields('n', array('nid'))
-    ->condition('n.status', 1)
-    ->condition('n.title', '%' . $keyword . '%', 'LIKE')
-    ->condition('n.type', 'custom_html_widgets');
+      ->condition('n.status', 1)
+      ->condition('n.title', '%' . $keyword . '%', 'LIKE')
+      ->condition('n.type', 'custom_html_widgets');
   $results = $query->execute()->fetchAll();
   $best_html = node_load($results[0]->nid)->body[LANGUAGE_NONE][0]['value'];
   return $best_html;
@@ -762,9 +769,9 @@ function bestcollege_get_sponser_data($title) {
   $query = db_select('node', 'n');
   $query->join('field_data_body', 'b', 'n.nid = b.entity_id');
   $query->fields('b', array('body_value'))
-    ->condition('n.status', 1)
-    ->condition('n.title', $title, '=')
-    ->condition('n.type', 'custom_html_widgets');
+      ->condition('n.status', 1)
+      ->condition('n.title', $title, '=')
+      ->condition('n.type', 'custom_html_widgets');
   $results = $query->execute()->fetchAll();
   $best_html = $results[0]->body_value;
   return $best_html;
@@ -801,11 +808,11 @@ function itg_city_option($byear, $tid, $selected, $rstream) {
   }
   $itg_query = db_select('bestcolleges_citywiseranking', 'bcr')->distinct();
   $itg_query->fields('bcr', array('city', 'stream'))
-    ->condition('bcr.year', $byear, '=')
-    ->condition('bcr.stream', $bstream, '=')
-    ->condition('bcr.published', 1)
-    ->condition('bcr.rank', 0, '!=')
-    ->orderBy('bcr.rank', 'ASC');
+      ->condition('bcr.year', $byear, '=')
+      ->condition('bcr.stream', $bstream, '=')
+      ->condition('bcr.published', 1)
+      ->condition('bcr.rank', 0, '!=')
+      ->orderBy('bcr.rank', 'ASC');
   $itg_result = $itg_query->execute()->fetchAll();
   $count = count($itg_result);
 
@@ -829,17 +836,40 @@ function itg_city_option($byear, $tid, $selected, $rstream) {
 }
 
 /**
- *
+ * rhs video at bestcollege page
  * @return type
  */
 function itg_bestcolleges_rhs_video() {
-  module_load_include('inc', 'itg_widget', 'includes/itg_widget_common');
-  $info['widget'] = 'watch_right_now_widget';
-  $info['order'] = 'ASC';
-  $info['max_limit'] = WATCH_RIGHT_NOW_MAX_RANGE;
-  $info['min_limit'] = WATCH_RIGHT_NOW_MIN_RANGE;
-  $data = itg_widget_get_widget_data_data($info);
-  return theme("itg_widget_watch_right_now_videos_widget", array("data" => $data));
+  $arg = arg();
+  if (!empty($arg[1]) && $arg[1] == 'term') {
+    $url_get = explode('/', $_SERVER['REQUEST_URI']);
+    $year = $url_get[2];
+  }
+  else {
+    $year = $arg[1];
+  }
+
+  module_load_include('inc', 'itg_widget', 'includes/itg_widget_helper');
+  $json = variable_get('bestcollege_get_video', '');
+  $video_array = (array) json_decode($json);
+  $video_result = $video_array['video']->{$year};
+  if (is_array($video_result) && count($video_result) > 0) {
+    $widget_name = 'section_wise_widget';
+    $range = 5;
+    $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
+    $query->fields('iwo', array('nid', 'weight', 'extra'));
+    $query->fields('wh', array('node_data'));
+    $query->condition('iwo.nid', $video_result, 'IN');
+    $query->condition('iwo.widget', $widget_name);
+    $query->condition('iwo.content_type', 'All');
+    $query->condition('wh.node_status', 1)
+        ->orderBy('iwo.weight', 'DESC')
+        ->groupBy('iwo.nid')
+        ->range(0, $range);
+    $result = $query->execute();
+    return _get_widget_display_data_as_per_db_result($result);
+  }
 }
 
 /**
@@ -865,26 +895,46 @@ function itg_bestcollege_get_term_tid($tid, $stream) {
  */
 function itg_bestcolleges_views_query_alter(&$view, &$query) {
   if (isset($view->name) && $view->name === 'best_college_image_slider') {
-    $page_type = isset($_GET['page']) ? $_GET['page'] : '';
-    if (!empty($page_type)) {
-      if (isset($view->query->where[1]['conditions'][2]['field'])) {
-        if ($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
-          $year = arg(1);
-          $query = db_select('field_data_field_bestcollege_year', 'y');
-          $query->join('field_data_field_bestcollege_rank', 'r', 'y.entity_id = r.entity_id');
-          $query->distinct();
-          $query->fields('r', array('field_bestcollege_rank_value'))
-            ->condition('y.field_bestcollege_year_value', $year)
-            ->condition('r.field_bestcollege_rank_value', 10, '>')
-            ->orderBy('r.field_bestcollege_rank_value', 'ASC');
-          $results = $query->execute()->fetchAll();
-          if (is_array($results) && count($results) > 0) {
-            foreach ($results as $results_key => $results_val) {
-              $rank_array[] = $results_val->field_bestcollege_rank_value;
+    if ($view->current_display == 'block') {
+      if (isset($view->query->where[0]['conditions'][0]['field'])) {
+        $url_get = explode('/', $_SERVER['REQUEST_URI']);
+        $year = $url_get[2];
+        $story_data = array();
+        $json = variable_get('bestcollege_get_video', '');
+        $related_result = (array) json_decode($json);
+        if (is_object($related_result['image_slider']) && count($related_result['image_slider']) > 0) {
+          $story_data = $related_result['image_slider']->{$year};
+        }
+        if(is_array($story_data) && count($story_data) > 0) {
+          if ($view->query->where[0]['conditions'][0]['operator'] = 'IN') {
+            $view->query->where[0]['conditions'][0]['field'] = 'node.nid';
+            $view->query->where[0]['conditions'][0]['value'] = $story_data;
+          }
+        }
+      }
+    }
+    else {
+      $page_type = isset($_GET['page']) ? $_GET['page'] : '';
+      if (!empty($page_type)) {
+        if (isset($view->query->where[1]['conditions'][2]['field'])) {
+          if ($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
+            $year = arg(1);
+            $query = db_select('field_data_field_bestcollege_year', 'y');
+            $query->join('field_data_field_bestcollege_rank', 'r', 'y.entity_id = r.entity_id');
+            $query->distinct();
+            $query->fields('r', array('field_bestcollege_rank_value'))
+                ->condition('y.field_bestcollege_year_value', $year)
+                ->condition('r.field_bestcollege_rank_value', 10, '>')
+                ->orderBy('r.field_bestcollege_rank_value', 'ASC');
+            $results = $query->execute()->fetchAll();
+            if (is_array($results) && count($results) > 0) {
+              foreach ($results as $results_key => $results_val) {
+                $rank_array[] = $results_val->field_bestcollege_rank_value;
+              }
+              $pre_array = $view->query->where[1]['conditions'][2]['value'];
+              $final_array = array_merge($pre_array, $rank_array);
+              $view->query->where[1]['conditions'][2]['value'] = $final_array;
             }
-            $pre_array = $view->query->where[1]['conditions'][2]['value'];
-            $final_array = array_merge($pre_array, $rank_array);
-            $view->query->where[1]['conditions'][2]['value'] = $final_array;
           }
         }
       }
@@ -1209,18 +1259,18 @@ function best_college_citywiseranking_data_migrate($line, $session_nid, &$contex
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_citywiseranking')
-        ->fields(array(
-          'city' => $city,
-          'streamid' => '0',
-          'collegeid' => '0',
-          'CollegeNewNid' => '0',
-          'stream' => $stream,
-          'collegename' => $collegename,
-          'year' => $year,
-          'rank' => $rank,
-          'published' => '1',
-          'created_date' => $created,
-        ))->execute();
+              ->fields(array(
+                'city' => $city,
+                'streamid' => '0',
+                'collegeid' => '0',
+                'CollegeNewNid' => '0',
+                'stream' => $stream,
+                'collegename' => $collegename,
+                'year' => $year,
+                'rank' => $rank,
+                'published' => '1',
+                'created_date' => $created,
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.
@@ -1252,16 +1302,16 @@ function best_college_city_data_migrate($line, $session_nid, &$context) {
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_ranking')
-        ->fields(array(
-          'stream' => $stream,
-          'streamid' => '0',
-          'collegeid' => $collegeid,
-          'CollegeNewNid' => '0',
-          'year' => $year,
-          'rank' => $rank,
-          'published' => '1',
-          'created_date' => $created,
-        ))->execute();
+              ->fields(array(
+                'stream' => $stream,
+                'streamid' => '0',
+                'collegeid' => $collegeid,
+                'CollegeNewNid' => '0',
+                'year' => $year,
+                'rank' => $rank,
+                'published' => '1',
+                'created_date' => $created,
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.
@@ -1359,23 +1409,23 @@ function best_college_master_data_migrate($line, $session_nid, &$context) {
 
       // bestcolleges_ranking
       db_update('bestcolleges_ranking')
-        ->fields(array('CollegeNewNid' => $node->nid))
-        ->condition('collegeid', $collegeid)
-        ->condition('year', $year)
-        ->execute();
+          ->fields(array('CollegeNewNid' => $node->nid))
+          ->condition('collegeid', $collegeid)
+          ->condition('year', $year)
+          ->execute();
       // bestcolleges_themebasedranking
       $num_updated = db_update('bestcolleges_themebasedranking')
-        ->fields(array('CollegeNewNid' => $node->nid))
-        ->condition('collegeid', $collegeid)
-        ->condition('year', $year)
-        ->execute();
+          ->fields(array('CollegeNewNid' => $node->nid))
+          ->condition('collegeid', $collegeid)
+          ->condition('year', $year)
+          ->execute();
 
       // bestcolleges_emergingranking
       $num_updated = db_update('bestcolleges_emergingranking')
-        ->fields(array('CollegeNewNid' => $node->nid))
-        ->condition('collegeid', $collegeid)
-        ->condition('year', $year)
-        ->execute();
+          ->fields(array('CollegeNewNid' => $node->nid))
+          ->condition('collegeid', $collegeid)
+          ->condition('year', $year)
+          ->execute();
     }
     drupal_set_message(check_plain(t('Pass line !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
   }
@@ -1507,27 +1557,27 @@ function best_college_previous_data_migrate($line, $session_nid, &$context) {
         node_save($node);
         drupal_set_message(t('submitted successfully'));
         $num_updated = db_update('bestcolleges_master')
-          ->fields(array('node_id' => $node->nid))
-          ->condition('collegeid', $collegeid)
-          ->execute();
+            ->fields(array('node_id' => $node->nid))
+            ->condition('collegeid', $collegeid)
+            ->execute();
         // bestcolleges_ranking
         db_update('bestcolleges_ranking')
-          ->fields(array('CollegeNewNid' => $node->nid))
-          ->condition('collegeid', $collegeid)
-          ->condition('year', $year)
-          ->execute();
+            ->fields(array('CollegeNewNid' => $node->nid))
+            ->condition('collegeid', $collegeid)
+            ->condition('year', $year)
+            ->execute();
         // bestcolleges_themebasedranking
         $num_updated = db_update('bestcolleges_themebasedranking')
-          ->fields(array('CollegeNewNid' => $node->nid))
-          ->condition('collegeid', $collegeid)
-          ->condition('year', $year)
-          ->execute();
+            ->fields(array('CollegeNewNid' => $node->nid))
+            ->condition('collegeid', $collegeid)
+            ->condition('year', $year)
+            ->execute();
         // bestcolleges_emergingranking
         $num_updated = db_update('bestcolleges_emergingranking')
-          ->fields(array('CollegeNewNid' => $node->nid))
-          ->condition('collegeid', $collegeid)
-          ->condition('year', $year)
-          ->execute();
+            ->fields(array('CollegeNewNid' => $node->nid))
+            ->condition('collegeid', $collegeid)
+            ->condition('year', $year)
+            ->execute();
       }
     }
     itg_watchdog('bestcollege_master_pass', $line);
@@ -1563,22 +1613,22 @@ function best_college_theme_data_migrate($line, $session_nid, &$context) {
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_themebasedranking')
-        ->fields(array(
-          'stream' => $stream,
-          'streamid' => $stream,
-          'year' => $year,
-          'collegeid' => $collegeid,
-          'CollegeNewNid' => '0',
-          'reputation' => $reputation,
-          'academic_input' => $academic_input,
-          'studentcare' => $studentcare,
-          'infrastructure' => $infrastructure,
-          'placement' => $placement,
-          'preceptual_rank' => $preceptual_rank,
-          'factual_rank' => $factual_rank,
-          'overall_score' => $overall_score,
-          'published' => '1',
-        ))->execute();
+              ->fields(array(
+                'stream' => $stream,
+                'streamid' => $stream,
+                'year' => $year,
+                'collegeid' => $collegeid,
+                'CollegeNewNid' => '0',
+                'reputation' => $reputation,
+                'academic_input' => $academic_input,
+                'studentcare' => $studentcare,
+                'infrastructure' => $infrastructure,
+                'placement' => $placement,
+                'preceptual_rank' => $preceptual_rank,
+                'factual_rank' => $factual_rank,
+                'overall_score' => $overall_score,
+                'published' => '1',
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.
@@ -1602,24 +1652,21 @@ function best_college_theme_data_migrate($line, $session_nid, &$context) {
  */
 function bestCollegesRelatedStoryList() {
   // variable declaration
-  $flag_related_nid = 0;
-  $related_story_nid_ar = array();
   $count = 0;
   $data = array();
+  $related_story_nid_ar = array();
+  $year = arg(1);
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
-  $field_bestcollege_related_story_nid = $result_best_college_image_slider[0]->_field_data['nid']['entity']->field_bestcollege_related_story['und'][0];
-  //echo $field_bestcollege_related_story_nid['value'];
-  //$related_story_nid_ar =  (explode(",",
-  // $field_bestcollege_related_story_nid['value'])); // after final
-  $related_story_nid_ar[] = 666;
-  $related_story_nid_ar[] = 664;
+  $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
+  if ($year != '2016' && $year != '2017') {
+    $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'story');
+    $related_story_nid_ar = explode(",", $story_data);
+  }
 
   // related story node data fatching
-  if (isset($field_bestcollege_related_story_nid['value']) && $field_bestcollege_related_story_nid['value'] != "") {
-    $flag_related_nid = 1;
+  if (is_array($related_story_nid_ar) && count($related_story_nid_ar) > 0) {
     $query = db_select('node', 'n');
-    //join  for field value
     $query->leftJoin('field_data_field_story_long_head_line', 'lhl', 'lhl.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'fdb', 'fdb.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
@@ -1629,17 +1676,53 @@ function bestCollegesRelatedStoryList() {
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('n', array('title', 'nid'));
     $query->condition('n.status', '1');
-    //$query->condition('n.nid', '666', '=');
     $query->condition('n.nid', $related_story_nid_ar, 'IN');
     $result = $query->execute();
+    // print strtr((string) $query, $query->arguments());die;
     while ($record = $result->fetchAssoc()) {
       $data[$count] = $record;
       $count++;
     }
     $data['relatedstory_count'] = $count;
   }
-  // return final result
   return $data;
+}
+
+/**
+ * function itg_bestcolleges_get_storyids()
+ * @param string $field_bestcollege_title
+ * @param string $type
+ * @return string
+ */
+function itg_bestcolleges_get_storyids($field_bestcollege_title, $type) {
+  $query = db_select('bestcolleges_master', 'm');
+  $query->fields('m', array('storyids', 'videoids'))
+      ->condition('m.collegename', '%' . $field_bestcollege_title . '%', 'LIKE');
+  $results = $query->execute()->fetchAll();
+  $field_type = ($type == 'story') ? 'storyids' : 'videoids';
+  $table = ($type == 'story') ? 'migrate_map_itgstorylist' : 'migrate_map_itgvideogallery';
+  if ($results[0]->$field_type) {
+    $query = db_select($table, 'm')->fields('m');
+    $storyids_arr = explode(",", $results[0]->$field_type);
+    if ($storyids_arr[1]) {
+      $query->condition('m.sourceid1', $storyids_arr, 'IN');
+    }
+    else {
+      $query->condition('m.sourceid1', $storyids_arr[0]);
+    }
+    $results = $query->execute()->fetchAll();
+    $prefix = $story_data = '';
+    foreach ($results as $migrate) {
+      if ($storyids_arr[1]) {
+        $story_data .= $prefix . $migrate->destid1;
+        $prefix = ', ';
+      }
+      else {
+        $story_data = $migrate->destid1;
+      }
+    }
+  }
+  return $story_data;
 }
 
 /**
@@ -1667,7 +1750,7 @@ function bestCollegesrank($arg) {
   $str_parameterwise_rank = "";
   $str_yearwise_rank = "";
 
-  if ($name = 'Art') {
+  if ($name == 'Art') {
     $name = 'Arts';
   }
   // query for previous_rank
@@ -1676,10 +1759,11 @@ function bestCollegesrank($arg) {
   $query->condition('published', '1', '=');
   $query->condition('stream', $name, '=');
   $query->condition('collegeid', $college_id, '=');
+  $query->condition('collegeid', 0, '>');
   $query->condition('year', $year, '<');
+  $query->condition('rank', 0, '!=');
   $query->orderBy('year', 'DESC');
   $result = $query->execute();
-
   while ($record = $result->fetchAssoc()) {
     $data_previous_rank[$count_previous_rank] = $record;
     $count_previous_rank++;
@@ -1693,16 +1777,16 @@ function bestCollegesrank($arg) {
   $query->condition('year', $year, '=');
   $query->condition('collegeid', $college_id, '=');
   $query->orderBy('year', 'DESC');
+  $query->range(0, 1);
   $result = $query->execute();
-
+  //print strtr((string) $query, $query->arguments());die;
   while ($record = $result->fetchAssoc()) {
     $data_parameterwise_rank[$count_parameterwise_rank] = $record;
     $count_parameterwise_rank++;
   }
 
-  $page_data['previous-rank'] = $data_previous_rank;
-  $page_data['parameterwise-rank'] = $data_parameterwise_rank;
-  $page_data['flag-rank'] = 1;
+  $page_data['previous_rank'] = $data_previous_rank;
+  $page_data['parameterwise_rank'] = $data_parameterwise_rank;
   return $page_data;
 }
 
@@ -1710,26 +1794,23 @@ function bestCollegesrank($arg) {
  * best colleges related video List
  * @return array
  */
-function bestCollegesRelatedImgList() {
+function itg_bestcolleges_related_videolist() {
   // variable declaration
-  $flag_related_nid = 0;
-  $related_story_nid_ar = array();
   $count = 0;
   $data = array();
+  $related_photo_nid_ar = array();
+  $year = arg(1);
   // view calling for pick related story node
   $result_best_college_image_slider = views_get_view_result('best_college_image_slider', 'block_2');
-  //return $result_best_college_image_slider;
-  $field_bestcollege_related_photo_nid = $result_best_college_image_slider[0]->_field_data['nid']['entity']->field_bestcollege_related_photo['und'][0];
+  $field_bestcollege_title = $result_best_college_image_slider[0]->_field_data['nid']['entity']->title;
+  if ($year != '2016' && $year != '2017') {
+    $field_bestcollege_title = "Lady Shri Ram College for Women";
+    $story_data = itg_bestcolleges_get_storyids($field_bestcollege_title, 'video');
+    $related_photo_nid_ar = explode(",", $story_data);
+  }
 
-
-  //echo $field_bestcollege_related_photo_nid['value'];
-  //$related_photo_nid_ar =  (explode(",",$field_bestcollege_related_photo_nid['value'])); // after final uncomment this
-  $related_photo_nid_ar = array(640, 652, 328, 626); // after final remove this
-  // related story node data fatching
-  if (isset($field_bestcollege_related_photo_nid['value']) && $field_bestcollege_related_photo_nid['value'] != "") {
-    $flag_related_nid = 1;
+  if (is_array($related_photo_nid_ar) && count($related_photo_nid_ar) > 0) {
     $query = db_select('node', 'n');
-    //join  for field value
     $query->leftJoin('field_data_field_story_long_head_line', 'lhl', 'lhl.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'fsli', 'fsli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
@@ -1738,17 +1819,14 @@ function bestCollegesRelatedImgList() {
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('n', array('title', 'nid'));
     $query->condition('n.status', '1');
-    //$query->condition('n.nid', '640', '=');
     $query->condition('n.nid', $related_photo_nid_ar, 'IN');
     $result = $query->execute();
-
     while ($record = $result->fetchAssoc()) {
       $data[$count] = $record;
       $count++;
     }
     $data['relatedimg_count'] = $count;
   }
-  // return final result
   return $data;
 }
 
@@ -1810,9 +1888,9 @@ function bestcollege_create_taxonomy() {
 
     if (empty($exist_tid)) {
       $term1 = (object) array(
-        'name' => $term_name,
-        'vid' => $term->vid,
-        'parent' => array($tid),
+            'name' => $term_name,
+            'vid' => $term->vid,
+            'parent' => array($tid),
       );
 
       if (taxonomy_term_save($term1)) {
@@ -1858,11 +1936,11 @@ function itg_bestcollege_exist_tid($tid, $vid, $term_name) {
  */
 function get_bestcollege_term($name, $vid) {
   return db_select('taxonomy_term_data', 't')
-    ->fields('t', array('tid'))
-    ->condition('name', $name)
-    ->condition('vid', $vid)
-    ->execute()
-    ->fetchField();
+          ->fields('t', array('tid'))
+          ->condition('name', $name)
+          ->condition('vid', $vid)
+          ->execute()
+          ->fetchField();
 }
 
 /**
@@ -1893,20 +1971,20 @@ function itg_bestcollege_master_migrate($line, $session_nid, &$context) {
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_master')
-        ->fields(array(
-          'collegeid' => $collegeid,
-          'collegename' => $collegename,
-          'city' => $city,
-          'description' => $description,
-          'image' => $image,
-          'websiteurl' => $websiteurl,
-          'storyids' => $storyids,
-          'photoids' => $photoids,
-          'videoids' => $videoids,
-          'published' => $published,
-          'created_date' => $created_date,
-          'node_id' => $node_id,
-        ))->execute();
+              ->fields(array(
+                'collegeid' => $collegeid,
+                'collegename' => $collegename,
+                'city' => $city,
+                'description' => $description,
+                'image' => $image,
+                'websiteurl' => $websiteurl,
+                'storyids' => $storyids,
+                'photoids' => $photoids,
+                'videoids' => $videoids,
+                'published' => $published,
+                'created_date' => $created_date,
+                'node_id' => $node_id,
+              ))->execute();
     }
 
 
@@ -1948,18 +2026,18 @@ function itg_bestcollege_citywiseranking_migrate($line, $session_nid, &$context)
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_citywiseranking')
-        ->fields(array(
-          'city' => $city,
-          'streamid' => $streamid,
-          'collegeid' => $collegeid,
-          'CollegeNewNid' => $CollegeNewNid,
-          'stream' => $stream,
-          'collegename' => $collegename,
-          'year' => $year,
-          'rank' => $rank,
-          'published' => $published,
-          'created_date' => $created_date,
-        ))->execute();
+              ->fields(array(
+                'city' => $city,
+                'streamid' => $streamid,
+                'collegeid' => $collegeid,
+                'CollegeNewNid' => $CollegeNewNid,
+                'stream' => $stream,
+                'collegename' => $collegename,
+                'year' => $year,
+                'rank' => $rank,
+                'published' => $published,
+                'created_date' => $created_date,
+              ))->execute();
     }
 
 
@@ -2005,23 +2083,23 @@ function itg_bestcollege_emergingranking_migrate($line, $session_nid, &$context)
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_emergingranking')
-        ->fields(array(
-          'stream' => $stream,
-          'year' => $year,
-          'collegeid' => $collegeid,
-          'CollegeNewNid' => $CollegeNewNid,
-          'reputation' => $reputation,
-          'academic_input' => $academic_input,
-          'studentcare' => $studentcare,
-          'infrastructure' => $infrastructure,
-          'placement' => $placement,
-          'preceptual_rank' => $preceptual_rank,
-          'factual_rank' => $factual_rank,
-          'overall_score' => $overall_score,
-          'published' => $published,
-          'created_date' => $created_date,
-          'overall_rank ' => $overall_rank,
-        ))->execute();
+              ->fields(array(
+                'stream' => $stream,
+                'year' => $year,
+                'collegeid' => $collegeid,
+                'CollegeNewNid' => $CollegeNewNid,
+                'reputation' => $reputation,
+                'academic_input' => $academic_input,
+                'studentcare' => $studentcare,
+                'infrastructure' => $infrastructure,
+                'placement' => $placement,
+                'preceptual_rank' => $preceptual_rank,
+                'factual_rank' => $factual_rank,
+                'overall_score' => $overall_score,
+                'published' => $published,
+                'created_date' => $created_date,
+                'overall_rank ' => $overall_rank,
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.
@@ -2058,16 +2136,16 @@ function itg_bestcollege_ranking_migrate($line, $session_nid, &$context) {
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_ranking')
-        ->fields(array(
-          'stream' => $stream,
-          'streamid' => $streamid,
-          'collegeid' => $collegeid,
-          'CollegeNewNid' => $CollegeNewNid,
-          'year' => $year,
-          'rank' => $rank,
-          'published' => $published,
-          'created_date' => $created_date,
-        ))->execute();
+              ->fields(array(
+                'stream' => $stream,
+                'streamid' => $streamid,
+                'collegeid' => $collegeid,
+                'CollegeNewNid' => $CollegeNewNid,
+                'year' => $year,
+                'rank' => $rank,
+                'published' => $published,
+                'created_date' => $created_date,
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.
@@ -2113,24 +2191,24 @@ function itg_bestcollege_readyrecknor_emerging_migrate($line, $session_nid, &$co
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_readyrecknor_emerging_list')
-        ->fields(array(
-          'rank' => $rank,
-          'collegeid' => $collegeid,
-          'CollegeNewNid' => $CollegeNewNid,
-          'streamid' => $streamid,
-          'collegename' => $collegename,
-          'address' => $address,
-          'phone' => $phone,
-          'image' => $image,
-          'websiteurl' => $websiteurl,
-          'established' => $established,
-          'seats' => $seats,
-          'cutoff' => $cutoff,
-          'stream' => $stream,
-          'year' => $year,
-          'published' => $published,
-          'created_date' => $created_date,
-        ))->execute();
+              ->fields(array(
+                'rank' => $rank,
+                'collegeid' => $collegeid,
+                'CollegeNewNid' => $CollegeNewNid,
+                'streamid' => $streamid,
+                'collegename' => $collegename,
+                'address' => $address,
+                'phone' => $phone,
+                'image' => $image,
+                'websiteurl' => $websiteurl,
+                'established' => $established,
+                'seats' => $seats,
+                'cutoff' => $cutoff,
+                'stream' => $stream,
+                'year' => $year,
+                'published' => $published,
+                'created_date' => $created_date,
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.
@@ -2177,24 +2255,24 @@ function itg_bestcollege_readyrecnor_directory_migrate($line, $session_nid, &$co
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_readyrecnor_directory_list')
-        ->fields(array(
-          'rank' => $rank,
-          'collegeid' => $collegeid,
-          'CollegeNewNid' => $CollegeNewNid,
-          'streamid' => $streamid,
-          'collegename' => $collegename,
-          'address' => $address,
-          'phone' => $phone,
-          'image' => $image,
-          'websiteurl' => $websiteurl,
-          'established' => $established,
-          'seats' => $seats,
-          'cutoff' => $cutoff,
-          'stream' => $stream,
-          'year' => $year,
-          'published' => $published,
-          'created_date' => $created_date,
-        ))->execute();
+              ->fields(array(
+                'rank' => $rank,
+                'collegeid' => $collegeid,
+                'CollegeNewNid' => $CollegeNewNid,
+                'streamid' => $streamid,
+                'collegename' => $collegename,
+                'address' => $address,
+                'phone' => $phone,
+                'image' => $image,
+                'websiteurl' => $websiteurl,
+                'established' => $established,
+                'seats' => $seats,
+                'cutoff' => $cutoff,
+                'stream' => $stream,
+                'year' => $year,
+                'published' => $published,
+                'created_date' => $created_date,
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.
@@ -2227,10 +2305,10 @@ function itg_bestcollege_streams_migrate($line, $session_nid, &$context) {
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_streams')
-        ->fields(array(
-          'stream_id' => $stream_id,
-          'name' => $name,
-        ))->execute();
+              ->fields(array(
+                'stream_id' => $stream_id,
+                'name' => $name,
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.
@@ -2275,23 +2353,23 @@ function itg_bestcollege_themebasedranking_migrate($line, $session_nid, &$contex
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_themebasedranking')
-        ->fields(array(
-          'stream' => $stream,
-          'streamid' => $streamid,
-          'year' => $year,
-          'collegeid' => $collegeid,
-          'CollegeNewNid' => $CollegeNewNid,
-          'reputation' => $reputation,
-          'academic_input' => $academic_input,
-          'studentcare' => $studentcare,
-          'infrastructure' => $infrastructure,
-          'placement' => $placement,
-          'preceptual_rank' => $preceptual_rank,
-          'factual_rank' => $factual_rank,
-          'overall_score' => $overall_score,
-          'published' => $published,
-          'created_date' => $created_date,
-        ))->execute();
+              ->fields(array(
+                'stream' => $stream,
+                'streamid' => $streamid,
+                'year' => $year,
+                'collegeid' => $collegeid,
+                'CollegeNewNid' => $CollegeNewNid,
+                'reputation' => $reputation,
+                'academic_input' => $academic_input,
+                'studentcare' => $studentcare,
+                'infrastructure' => $infrastructure,
+                'placement' => $placement,
+                'preceptual_rank' => $preceptual_rank,
+                'factual_rank' => $factual_rank,
+                'overall_score' => $overall_score,
+                'published' => $published,
+                'created_date' => $created_date,
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.
@@ -2334,20 +2412,20 @@ function itg_bestcollege_zonecampuswiseranking_migrate($line, $session_nid, &$co
   try {
     if (isset($bestcollege_status) && $bestcollege_status == '2') {
       $result = db_insert('bestcolleges_zonecampuswiseranking')
-        ->fields(array(
-          'city' => $city,
-          'stream' => $stream,
-          'collegename' => $collegename,
-          'streamid' => $streamid,
-          'collegeid' => $collegeid,
-          'CollegeNewNid' => $CollegeNewNid,
-          'year' => $year,
-          'rank' => $rank,
-          'published' => $published,
-          'created_date' => $created_date,
-          'type' => $type,
-          'parameter' => $parameter,
-        ))->execute();
+              ->fields(array(
+                'city' => $city,
+                'stream' => $stream,
+                'collegename' => $collegename,
+                'streamid' => $streamid,
+                'collegeid' => $collegeid,
+                'CollegeNewNid' => $CollegeNewNid,
+                'year' => $year,
+                'rank' => $rank,
+                'published' => $published,
+                'created_date' => $created_date,
+                'type' => $type,
+                'parameter' => $parameter,
+              ))->execute();
     }
 
     // No exception thrown; PDO thinks the record was inserted correctly.

@@ -127,6 +127,9 @@ function itg_dbmigrate_migrate_api() {
       'itg_breaking_news' => array(
         'title' => t('Itg breaking news, Live blog, cricket live blog, news live blog Imports'),
       ),
+      'itg_cricketliveblog' => array(
+        'title' => t('Itg Cricket Live Blog Migration'),
+      ),
       /*'itg_magazine' => array(
         'title' => t('Itg magazine Imports'),
       ),
@@ -271,6 +274,10 @@ function itg_dbmigrate_migrate_api() {
       'ItgMegareview' => array(
         'class_name' => 'ItgMegareviewMigration',
         'group_name' => 'itg_megareview',
+      ),
+      'ItgCricketliveblog' => array(
+        'class_name' => 'ItgCricketliveblog',
+        'group_name' => 'itg_cricketliveblog',
       ),
     ),
 

@@ -10,6 +10,7 @@ module_load_include('inc', 'itg_mobile_feed', 'inc/itg_mobile_feed_helper');
 module_load_include('inc', 'itg_mobile_feed', 'inc/photoDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/storyDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/videoDetailPageFeed');
+module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
 
 /**
  * Implements hook_menu().
@@ -286,6 +287,7 @@ function getMobileFeedXmlFooter() {
 
 /**
  *  function for return xml feed file header only for program section
+ *
  * @return string
  */
 function program_section_page_feed_header() {
@@ -296,6 +298,7 @@ function program_section_page_feed_header() {
 
 /**
  *  function for return xml feed file footer only for program section
+ *
  * @return string
  */
 function program_section_page_feed_footer() {
@@ -307,6 +310,7 @@ function program_section_page_feed_footer() {
 /**
  * common function for return related content node type
  * @pram string $node_list, $type
+ *
  * @return array
  */
 function relatedContentNodeType($node_list = "", $type) {
@@ -362,6 +366,7 @@ function relatedContentNodeType($node_list = "", $type) {
 /**
  * common function for return complete file path
  * @pram int $fid
+ *
  * @return string $file_url
  */
 function completeFilePath($fid) {
@@ -381,6 +386,7 @@ function completeFilePath($fid) {
 /**
  * common function for write feed file
  * @pram string  $feed_file_path, $feed_file_name, $output
+ *
  * @return string $return_flag
  */
 function writeFeedFile($feed_file_path, $feed_file_name, $output) {
@@ -420,6 +426,7 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
  * common function for return array of category-manager section tid
  * @pram string $type
  * @pram int $parent
+ *
  * @return array
  */
 function categoryManagerSectionTid($type = "story", $parent = 0) {
@@ -445,6 +452,7 @@ function categoryManagerSectionTid($type = "story", $parent = 0) {
  * common function for return content type mapped with tid
  * @pram int $tid
  * @pram string $type
+ *
  * @return int $flag
  */
 function checkContentTypeMapped($tid, $type) {
@@ -467,7 +475,8 @@ function checkContentTypeMapped($tid, $type) {
 /**
  * common function for return node count without child
  * @pram string $type
- * @pram int $tid 
+ * @pram int $tid
+ *
  * @return int $count
  */
 function customNodeCount($type, $tid) {
@@ -487,6 +496,7 @@ function customNodeCount($type, $tid) {
  * @pram string $type
  * @pram int $tid
  * @pram bool $child_count
+ *
  * @return int $count
  */
 function customNodeCountChild($tid, $type, $child_count = TRUE) {
@@ -513,6 +523,7 @@ function customNodeCountChild($tid, $type, $child_count = TRUE) {
  *
  * @param int $tid
  *   The term's ID.
+ *
  * @return $tids
  *   An array where ids of term children will be added
  */
@@ -533,6 +544,7 @@ function term_get_children_ids($tid) {
  * function get section/category/node front url
  * @pram int $tid
  * @pram string $type
+ *
  * @return string $final_url
  */
 function nodeCategoryFrontUrl($tid, $type) {
@@ -563,6 +575,7 @@ function nodeCategoryFrontUrl($tid, $type) {
 /**
  * function get section/category icon img
  * @pram int $tid
+ *
  * @return string url
  */
 function sectionCategoryIconImg($tid) {
@@ -576,6 +589,7 @@ function sectionCategoryIconImg($tid) {
 /**
  * function get tid is_favorite
  * @pram int $nid
+ *
  * @return bool $flag
  */
 function getNidIsFavorite($nid) {
@@ -594,6 +608,7 @@ function getNidIsFavorite($nid) {
 /**
  * function get nid is syndications
  * @pram int $nid
+ *
  * @return bool $flag
  */
 function getNidIsSyndications($nid) {
@@ -614,6 +629,7 @@ function getNidIsSyndications($nid) {
  * function get node list in tid
  * @pram int $tid, $count
  * @pram string $type
+ *
  * @return array $tid_list
  */
 function getNodeFeedTag($tid, $type, $count) {
@@ -681,7 +697,7 @@ function getNodeFeedTag($tid, $type, $count) {
     $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
 
     // create date formating
-    $create_date = date("F d, Y", $created);
+    $create_date = date("Y-m-d H:i:s", $created);
     $create_datetime = date(DATE_ATOM, $created);
     $output .= "<title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage>";
     if ($type == "photogallery") {
@@ -709,6 +725,7 @@ function getNodeFeedTag($tid, $type, $count) {
 /**
  * common function for get img caption
  * @pram int $fid
+ *
  * @return string  $caption
  */
 function getImgCaption($fid) {
@@ -726,6 +743,7 @@ function getImgCaption($fid) {
 /**
  * common function for get img byline
  * @pram int $fid
+ *
  * @return string  $byline
  */
 function getImgByline($fid) {
@@ -745,6 +763,7 @@ function getImgByline($fid) {
 /**
  * common function for getCityByNid
  * @pram int $nid
+ *
  * @return string  $city
  */
 function getCityByNid($nid) {
@@ -761,20 +780,286 @@ function getCityByNid($nid) {
 /**
  * common function for getBodyDataForAndroid
  * @pram string $str
+ *
  * @return string  $mob_str
  */
-function getBodyDataForAndroid($str) {
+function getBodyDataForAndroid($str, $node = NULL) {
   // variable declation
   $mob_str = "";
-  //remove iframe..
-  $mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
-  $mob_str = preg_replace("/<img[^>]+\>/i", "", $mob_str);
-  return $mob_str;
+  $movie_data = "";
+  $str = html_entity_decode($str);
+  $str = str_replace(array('<div class="itgimage">', 'data-syndication="no"'), array('<div class="itg-mosimage">', ''), $str);
+  $str = preg_replace('/<div class=\"body_caption\">.*<\/div>/', '', $str);
+  $str = str_replace('src="', 'width="100%" src="', $str);
+  $str = str_replace("src='", "width='100%' src='", $str);
+  //$mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
+  //add listicle content data
+  if (strpos($str, '[ITG:LISTICLES]')) {
+    $str = listicle_story_body($str, $node);
+  }
+  if (strpos($str, '[ITG:FACTOIDS]')) {
+    $str = factroid_story_body($str, $node);
+  }
+  if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
+    $buzz_data = buzz_story_body($str, $node);
+  }
+  if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+    $technology_data = technology_story_body($str, $node);
+  }
+  if (!empty($node->field_story_rating)) {
+    $movie_data = movie_story_body($str, $node);
+  }
+  $str = preg_replace('/\[[^]]+\]/', '', $str);
+  $str .= $technology_data;
+  $str .= $buzz_data;
+ 
+  $new_string = $movie_data . '' . $str;
+  return $new_string;
+}
+
+/**
+ * Function for getting the technology story data from the tech body
+ *
+ * @param String $str
+ * @param object $node
+ *
+ * @return string
+ */
+function movie_story_body($str, $node) {
+  $movie_output = '';
+  $movie_output .= '<ul>';
+  if (!empty($node->field_story_rating)) {
+    $movie_output .= '<li class="movie_rate">' . $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%" . '</li>';
+    //$movie_output .= '<div class="movie-rating" data-star-value="'.$node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%".'">';
+  }
+  if (!empty($node->field_mega_review_cast)) {
+    $movie_output .= '<li class="cast">';
+    $movie_output .= '<span class="title">' . t('Cast:') . '</span>';
+    $movie_output .= '<span class="detail">';
+    $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE];
+    $count = sizeof($cast_ref_id);
+    for ($i = 0; $i < $count; $i++) {
+      $entity_obj = entity_load('node', array($cast_ref_id[$i]['target_id']));
+      $cast = $entity_obj[$cast_ref_id[$i]['target_id']]->title;
+      $movie_output .= $cast;
+      if ($i < ($count - 1)) {
+        $movie_output .= ', ';
+      }
+    }
+    $movie_output .= '</span>';
+    $movie_output .= '</li>';
+  }
+  if (!empty($node->field_mega_review_director)) {
+    $movie_output .= '<li class="director">';
+    $movie_output .= '<span class="title">' . t('Director:') . '</span>';
+    $movie_output .= '<span class="detail">' . $node->field_mega_review_director[LANGUAGE_NONE]['0']['value'] . '</span>';
+    $movie_output .= '</li>';
+  }
+  if (!empty($node->field_mega_review_movie_plot)) {
+    $movie_output .= '<li class="plot">';
+    $movie_output .= '<span class="title">' . t('Plot:') . '</span>';
+    $movie_output .= '<span class="detail">' . $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value'] . '</span>';
+    $movie_output .= '</li>';
+  }
+  $movie_output .= '</ul>';
+  return $movie_output;
+}
+
+/**
+ * Function for getting the technology story data from the tech body
+ *
+ * @param String $str
+ * @param object $node
+ *
+ * @return string
+ */
+function technology_story_body($str, $node) {
+  $tech_output = '';
+  $tech_output .= '<ul>';
+  if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+    $buzz = 1;
+    foreach ($node->field_story_technology['und'] as $buzz_item) {
+      $tech_output .= '<li class="technology-section"><ul><li>';
+      $field_collection_id = $buzz_item['value'];
+      $entity = entity_load('field_collection_item', array($field_collection_id));
+
+      $buzz_imguri = '';
+      if (!empty($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid'])) {
+        $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid']);
+      }
+
+      $img = '<img title="' . $entity[$field_collection_id]->field_technology_sample_photo['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_technology_sample_photo['und'][0]['alt'] . '" />';
+      //if (!empty($entity[$field_collection_id]->field_technology_photo_title[LANGUAGE_NONE][0]['value'])) {
+      $tech_output .= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_technology_photo_title[LANGUAGE_NONE][0]['value'] . '</h1>';
+      if (!empty($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid'])) {
+        $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_technology_photo_title[LANGUAGE_NONE][0]['value']);
+        $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
+
+        if (function_exists('itg_story_get_image_info')) {
+          $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid']);
+        }
+
+        $tech_output .= '<div class="itg-mosimage">' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
+      }
+
+      $buzz++;
+      //}
+      $tech_output .= '</li></ul></li>';
+    }
+  }
+  if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) {
+    $tech_output .= '<li class="story-tech-rating">' . $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10' . '</li>';
+  }
+  if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+    $tech_output .= '<li class="story-tech-chunk">';
+    $tech_output .= $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'];
+    $tech_output .= '</li>';
+  }
+  $tech_output .= '</ul>';
+
+
+  $tech_output = html_entity_decode($tech_output);
+  $tech_output = str_replace(array('<div class="itgimage">', 'data-syndication="no"'), array('<div class="itg-mosimage">', ''), $tech_output);
+  $tech_output = preg_replace('/<div class=\"body_caption\">.*<\/div>/', '', $tech_output);
+  $tech_output = str_replace('src="', 'width="100%" src="', $tech_output);
+  $tech_output = str_replace("src='", "width='100%' src='", $tech_output);
+  return $tech_output;
+}
+
+/**
+ * Function for getting the buzz token data from the body
+ *
+ * @param String $str
+ * @param object $node
+ *
+ * @return string
+ */
+function buzz_story_body($str, $node) {
+  $buzz_output = '';
+  if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
+    $buzz_output .= '<ul>';
+    $buzz = 1;
+    foreach ($node->field_story_template_buzz['und'] as $buzz_item) {
+      $buzz_output .= '<li class="buzz-section">';
+      $field_collection_id = $buzz_item['value'];
+      $entity = entity_load('field_collection_item', array($field_collection_id));
+      $buzz_imguri = '';
+      if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+        $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+      }
+      $share_uri = '';
+      if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+        $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+        $share_uri = $file->uri;
+      }
+
+      $share_image = file_create_url($share_uri);
+      $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
+      if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
+        $buzz_output .= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
+        if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+          $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']);
+          $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
+
+          if (function_exists('itg_story_get_image_info')) {
+            $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+          }
+
+          $buzz_output .= '<div class="itg-mosimage">' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
+        }
+        if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
+          $buzz_output .= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
+        }
+        $buzz_output .= '</li>';
+        $buzz++;
+      }
+    }
+    $buzz_output .= '</ul>';
+  }
+  $buzz_output = str_replace('src="', 'width="100%" src="', $buzz_output);
+  $buzz_output = str_replace("src='", "width='100%' src='", $buzz_output);
+  return $buzz_output;
+}
+
+/**
+ * Function for getting the factroid token data from the body
+ *
+ * @param String $str
+ * @param object $node
+ *
+ * @return string
+ */
+function factroid_story_body($str, $node) {
+  $factoidsBlock = '';
+  if (isset($node->field_story_template_factoids) && !empty($node->field_story_template_factoids)) {
+    $factoidsSocialShare['title'] = $node->field_story_factoids_title[LANGUAGE_NONE][0]['value'];
+    $factoidsSocialShare_title = preg_replace("/'/", "\\'", $factoidsSocialShare['title']);
+    $factoidsSocial_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
+    $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
+    $factoidsSocialShare['icons'] = '<div class="factoids-page">
+      <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div></div>';
+    $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
+    foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
+      $factoidsSocialShare['slider'] .= '<li><span>' . $value['value'] . '</span></li>';
+    }
+    $factoidsSocialShare['slider'] .= '</ul></div>';
+    $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
+  }
+  $str = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $str);
+  return $str;
+}
+
+/**
+ * function for getting the listicle token data from the node body
+ *
+ * @param string $str
+ * @param object $node
+ *
+ * @return string
+ */
+function listicle_story_body($str, $node) {
+  $listicle_output = '';
+  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+    if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+      $listicle_output .= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+    }
+    $buzz_output .= '';
+    $num = 1;
+    $listicle_output .= '<ul class="listicle-detail">';
+    foreach ($node->field_story_listicle['und'] as $buzz_item) {
+      $listicletype = '';
+
+      $field_collection_id = $buzz_item['value'];
+      $entity = entity_load('field_collection_item', array($field_collection_id));
+      $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
+      $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
+      //$color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
+      $color = $entity[$field_collection_id]->field_listicle_color_new['und'][0]['jquery_colorpicker'];
+      $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
+      $color = ($color) ? $color : '#000000';
+      if ($li_type == 'bullet_points') {
+        $listicle_output .= '<span class="bullet_points"></span>';
+      }
+      else {
+        $listicle_output .= '<span>' . $num . '</span>';
+      }
+      if (isset($type)) {
+        $listicletype = '<span class="listicle-type" style="color: #' . $color . '">' . $type . ': </span>';
+      }
+      $listicle_output .= '<li>' . $listicletype . $description . '</li>';
+      $num++;
+    }
+    $listicle_output .= '</ul>';
+    //print $listicle_output;
+    $str = str_replace('[ITG:LISTICLES]', $listicle_output, $str);
+  }
+  return $str;
 }
 
 /**
  * function for generate comment xml tag
  * @pram object $node
+ *
  * @return string $output
  */
 function getCommentXmlTag($node) {
@@ -812,6 +1097,7 @@ function getCommentXmlTag($node) {
 
 /**
  * function for generate Empty comment xml tag
+ *
  * @return string $output
  */
 function emptygetCommentXmlTag() {
@@ -834,6 +1120,7 @@ function emptygetCommentXmlTag() {
 /**
  * function for generate getRelatedNodeXmlTag
  * @pram string $nidar
+ *
  * @return string $output
  */
 function getRelatedNodeXmlTag($nidar) {
@@ -886,6 +1173,7 @@ function getRelatedNodeXmlTag($nidar) {
 
 /**
  * function for Blank generate getRelatedNodeXmlTag
+ *
  * @return string $output
  */
 function emptygetRelatedNodeXmlTag() {
@@ -941,6 +1229,174 @@ function redis_cache_pattern_manager_submit($form, &$form_state) {
   }
   else {
     drupal_set_message('Redis ' . $responce . ' Key Has been deleted Successfully.');
+  }
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_mobile_feed_cronapi($op, $job = NULL) {
+  $items['xml_feed_url_cron'] = array(
+    'description' => 'cron for update all xml feed.',
+    'callback' => 'itg_mobile_feed_xml_feed_url_cron',
+  );
+  return $items;
+}
+
+/**
+ * Implements function for cron for update all xml feed
+ */
+function itg_mobile_feed_xml_feed_url_cron() {
+  global $base_url;
+  $xml_feed_url = array();
+  /* $xml_feed_url[] = "home-page-feed";
+    $xml_feed_url[] = "program-section-page-feed";
+    $xml_feed_url[] = "program-category-page-feed/1206960";
+    $xml_feed_url[] = "program-category-page-feed/1207605";
+    $xml_feed_url[] = "program-category-page-feed/1207722";
+    $xml_feed_url[] = "program-category-page-feed/1207726";
+    $xml_feed_url[] = "program-category-page-feed/1207728";
+    $xml_feed_url[] = "program-category-page-feed/1207755";
+    $xml_feed_url[] = "program-category-page-feed/1207797";
+    $xml_feed_url[] = "program-category-page-feed/1207827";
+    $xml_feed_url[] = "program-category-page-feed/1207972";
+    //$xml_feed_url[] = "sites/default/files/videos/programmes1.xml";
+    $xml_feed_url[] = "root-category-content-page-feed/1206578";
+    $xml_feed_url[] = "root-category-content-page-feed/1206550";
+    $xml_feed_url[] = "root-category-content-page-feed/1206577";
+    $xml_feed_url[] = "root-category-content-page-feed/1206795";
+    $xml_feed_url[] = "root-category-content-page-feed/1206533";
+    $xml_feed_url[] = "root-category-content-page-feed/1206567";
+    $xml_feed_url[] = "root-category-content-page-feed/1207414";
+    $xml_feed_url[] = "root-category-content-page-feed/1206689";
+    $xml_feed_url[] = "root-category-content-page-feed/1206572";
+    $xml_feed_url[] = "root-category-content-page-feed/1206589";
+    $xml_feed_url[] = "root-category-content-page-feed/1206796";
+    $xml_feed_url[] = "root-category-content-page-feed/1206688";
+    $xml_feed_url[] = "photo-section-page-feed";
+    $xml_feed_url[] = "photo-category-page-feed/1206578";
+    $xml_feed_url[] = "photo-category-page-feed/1206749";
+    $xml_feed_url[] = "photo-category-page-feed/1206749";
+    $xml_feed_url[] = "photo-category-page-feed/1206550";
+    $xml_feed_url[] = "photo-category-page-feed/1206577";
+    $xml_feed_url[] = "photo-category-page-feed/1206567";
+    $xml_feed_url[] = "photo-category-page-feed/1206749";
+    $xml_feed_url[] = "photo-category-page-feed/1206550";
+    $xml_feed_url[] = "photo-category-page-feed/1206577";
+    $xml_feed_url[] = "photo-category-page-feed/1206567";
+    $xml_feed_url[] = "photo-category-page-feed/1206533";
+    $xml_feed_url[] = "photo-category-page-feed/1206676";
+    $xml_feed_url[] = "photo-category-page-feed/1206719";
+    $xml_feed_url[] = "video-section-page-feed";
+    $xml_feed_url[] = "video-category-page-feed/1206578";
+    $xml_feed_url[] = "video-category-page-feed/1206577";
+    $xml_feed_url[] = "video-category-page-feed/1207580";
+    $xml_feed_url[] = "video-category-page-feed/1206749";
+    $xml_feed_url[] = "video-category-page-feed/1206533";
+    $xml_feed_url[] = "video-category-page-feed/1206567";
+    //$xml_feed_url[] = "sites/default/files/xml_it/videos/video_sports.xml";
+    //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/it-event.xml";
+    //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/aboutus.xml";
+    //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/contactus.xml";
+    $xml_feed_url[] = "story-detail-page-feed/664";
+    $xml_feed_url[] = "video-detail-page-feed/18815";
+    $xml_feed_url[] = "photo-detail-page-feed/626";*/
+
+
+  // Education today
+  $xml_feed_url[] = "root-category-content-page-feed/1206666";
+
+  foreach ($array as $key => $value) {
+    $data = '';
+
+    $options = array(
+      'method' => 'GET',
+      'data' => $data,
+      'timeout' => 30,
+      'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $url = $base_url . "/" . $value;
+    //$result = drupal_http_request($url, $options);
+    $res = callAPI('GET', $url, $data = FALSE);
+  }
+}
+
+/**
+ * Common function for Parsing HTML Tags in XML
+ * args $string String
+ * Return String
+ */
+function xmlEscape($string) {
+  return str_replace(array('&', '<', '>', '\'', '"', '&nbsp;'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;', ' '), $string);
+}
+
+/* Get The migrated video properties
+ * args $nid
+ * return migrated video properties
+ */
+function migrated_video_transcoding($nid) {
+  //$nid = '840162';
+  $query = db_select('itg_video_transcoding', 'vt');
+  $query->fields('vt', array('file_size', 'bitrate_type', 'bitrate'));
+  $query->condition('vt.nid', $nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $video_size = '';
+
+  foreach ($result as $data) {
+    if ($data['bitrate'] == '364') {
+      if ($data['file_size'] != '') {
+        $video_size = $data['file_size'];
+      }
+      else {
+        $video_size = '0';
+      }
+    }
+    elseif ($data['bitrate'] == '512') {
+      if ($data['file_size'] != '') {
+        $video_size = $data['file_size'];
+      }
+      else {
+        $video_size = '0';
+      }
+    }
+  }
+  return $video_size;
+}
+
+/**
+ * function for converting ifrmae video code to video id
+ *
+ * @param string
+ *
+ * @return string
+ */
+function decryptForEmbed($string) {
+  $decrypter = gmp_strval(gmp_init($string, 36));
+  $decrypter = gmp_shiftr($decrypter, 5);
+  $decrypter = gmp_export($decrypter);
+  return $decrypter;
+}
+
+/**
+ * return the gmap value
+ */
+// shift right
+function gmp_shiftr($x, $n) {
+  return (gmp_div($x, gmp_pow(2, $n)));
+}
+
+/**
+ *
+ * @param string migrated video video id
+ *
+ * @return the nid of the cms
+ */
+function embed_video_nid($video_id) {
+  //  $video_id = '27803';
+  if ($video_id != '') {
+    $qry = db_select('migrate_map_itgvideogallery', 'mv')->fields('mv', array('destid1'))->condition('mv.sourceid1', $video_id)->execute()->fetchField();
+    return $qry;
   }
 }
 

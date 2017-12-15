@@ -6,6 +6,7 @@
 
 /**
  * main function for generate photoDetailPage xml feed
+ *
  * @return string $output
  */
 function photoDetailPageFeed() {
@@ -17,11 +18,12 @@ function photoDetailPageFeed() {
     $output = generatePhotoDetailPageFeed(arg(1));
   }
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
  * function for generate generatePhotoDetailPageFeed xml feed file
+ *
  * @return string $return_flag
  */
 function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
@@ -31,7 +33,7 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     $file_name = "photo" . $nid . ".xml";
   }
   if (!$term_feed_path) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
+    $term_feed_path = "public://xml_it/photos";
   }
   elseif ($type) {
     if ($type == "photogallery") {
@@ -64,7 +66,7 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       global $base_url;
       $ttl = DEFAULT_REDIS_EXPIRE_TIME;
       $node = node_load($nid);
-      $title = $node->title;
+      $title = html_entity_decode($node->title);
       $tid = $node->field_primary_category['und'][0]['value'];
       $term = taxonomy_term_load($tid);
       $term_name = $term->name;
@@ -77,7 +79,8 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $output .= getMobileFeedXmlHeader();
       $output .= "<idgallery>" . $nid . "</idgallery><gallery><![CDATA[" . $title . "]]></gallery><idsection>" . $tid . "</idsection><section>" . $term_name . "</section><totalpics>" . $toptlapics . "</totalpics><weburl><![CDATA[" . $weburl . "]]></weburl>";
       //get gallery img tag
-      $imgtag = getGalleryImgTag($galleryimg);
+      $imgtag = getGalleryImgTag($node);
+
       if ($imgtag) {
         $output .= $imgtag;
       }
@@ -111,23 +114,31 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
 }
 
 /**
- * function for generate getGalleryImgTag xml tag 
+ * function for generate getGalleryImgTag xml tag
+ *
  * @return string $output
  */
-function getGalleryImgTag($galleryimg) {
+function getGalleryImgTag($node) {
   $output = "";
+  $galleryimg = $node->field_gallery_image['und'];
   if (count($galleryimg) > 0) {
     $output = "";
     foreach ($galleryimg as $key => $value) {
-      $fid = $value['value'];
-      $fid_file = $value['revision_id'];
-      $img_url = completeFilePath($fid_file);
-      // custom function for get img caption
-      $caption = getImgCaption($fid);
-      // custom function for get img byline
-      $byline = getImgByline($fid);
-      $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $img_url . "]]></image><largeimage><![CDATA[" . $img_url . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
+      $fc = field_collection_field_get_entity($value);
+      $fid = $fc->field_image_id['und'][0]['value'];
+      if (!$fid > 0) {
+        $fid = $fc->field_images['und'][0]['fid'];
+      }
+      $uri = $fc->field_images['und'][0]['uri'];
+      $file_uri = file_create_url($uri);
+
+      //$img_url = completeFilePath($fid);
+      $caption = $fc->field_image_caption['und'][0]['value'];
+      $byline = $fc->field_credit['und'][0]['value'];
+      //$photo_story_img = image_style_url('photo_slider_753x543', $uri);
+      $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $file_uri . "]]></image><largeimage><![CDATA[" . $file_uri . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
     }
+
   }
   return $output;
 }
