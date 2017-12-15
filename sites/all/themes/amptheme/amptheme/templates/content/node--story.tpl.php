@@ -193,7 +193,7 @@ if (!empty($content)):
                 ?>
                 <div class="stryimg" ><?php
                 
-                  if (empty($widget_data) && empty($node->field_story_template_guru['und'][0]['value'])) {
+                  if (empty($widget_data)) {
                     $story_image = '';
                     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
