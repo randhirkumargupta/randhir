@@ -560,6 +560,8 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
   public function prepare($node, stdClass $row) {
     //drupal_set_message('<pre>'.print_r($row->xml->workbench_moderation_state_new, 1).'<pre>');
+    //for update sef
+    $node->sef_url = array('sef' => (string) $row->xml->metatags->sef_url);
     $node->teaser = (string) $row->xml->description;
 
     if (!empty($row->category_new)) {

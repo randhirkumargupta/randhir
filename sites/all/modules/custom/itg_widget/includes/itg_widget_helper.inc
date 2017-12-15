@@ -6,7 +6,7 @@
  */
 function __itg_widget_helper_data_insert($nid) {
   itg_watchdog("request", $_REQUEST['op']);
-    if ($nid && $_REQUEST['op'] !='Apply' && $_REQUEST['op'] !='Save') {
+   // if ($nid && $_REQUEST['op'] !='Apply' && $_REQUEST['op'] !='Save') {
         __itg_widget_helper_data_delete($nid);
         $node_load_data = node_load($nid , null , TRUE);
         $node_load_data->status = itg_common_get_node_status_from_tbl($nid);
@@ -32,7 +32,7 @@ function __itg_widget_helper_data_insert($nid) {
         } catch (Exception $ex) {
             drupal_set_message($ex->getMessage(), 'error');
         }
-    }
+    //}
 }
 
 function itg_common_get_node_status_from_tbl($nid) {
