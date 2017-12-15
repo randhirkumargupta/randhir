@@ -41,7 +41,7 @@
                       <?php }
                       else if ($index > 0 && $index <= 2) { ?>
                     <div class="featured-post <?php echo $video_class; ?>">
-    <?php if ($row['mi_file_uri'] != "") { ?>
+                    <?php if ($row['mi_file_uri'] != "") { ?>
                           <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $row['nid']); ?>">
                               <img src="<?php print image_style_url("home_page_feature_small", $row['mi_file_uri']); ?>" alt="<?php echo $row['field_story_medium_image_alt']; ?>" title="<?php echo $row['field_story_medium_image_title']; ?>" />
                           </a>
