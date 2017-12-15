@@ -545,7 +545,6 @@ function itg_seo_node_update($node) {
   }
   if (!isset($node->op) && is_valid_content_type_for_sef_url($node->type) && isset($node->migrate['machineName']) && !empty($node->migrate['machineName'])) {
     if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
-      watchdog('migration_update_new', '<pre>'.print_r($node, 1).'<pre>');
       $newpath = itg_common_custompath_migrated_load($node, 'migration_node_update');
       $node->path['alias'] = $newpath;
       $path = array(
