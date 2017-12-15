@@ -133,13 +133,9 @@ function generateStoryDeatilList($id) {
 
     $tech_photo_gallery = "";
     $tech_photo_gallery = $node->field_technology_photogallery['und'][0]['target_id'];
-    $byline = "";
     $caption = "";
-    if($tech_photo_gallery){
-        $photo_caption = generatePhotoCaption($tech_photo_gallery);
-        $byline = $photo_caption['byline'];
-        $caption = $photo_caption['caption'];
-    }
+    $byline = "";
+    $caption = file_create_url($node->field_story_extra_large_image['und'][0]['title']);
 
     //data array building
 
@@ -811,29 +807,3 @@ function generateAuthorTagStory($node, $status) {
   return $output;
 }
 
-/**
- * function for generatePhotoCaption array
- * @pram array $galleryimg
- * @return array
- */
-function generatePhotoCaption($galleryimg) {
-
-    $photo_caption = array();
-    $listcont = 0;
-    if (count($galleryimg) > 0) {
-        // loop on gallery img
-        $output = "";
-        foreach ($galleryimg as $key => $value) {
-
-            if ($fc->field_image_caption['und'][0]['value']) {
-                $fc = field_collection_field_get_entity($value);
-                $caption = $fc->field_image_caption['und'][0]['value'];
-                $byline = $fc->field_credit['und'][0]['value'];
-                $photo_caption['caption'] = $caption;
-                $photo_caption['byline'] = $byline;
-                break;
-            }
-        }
-    }
-    return $photo_caption;
-}
