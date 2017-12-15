@@ -496,11 +496,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
                         <?php
                         $adsclass = "";
                         $key_candidate_extra_block = "";
-                        $margin_class = 'election-topaddd'
+                        $margin_class = 'election-topaddd';
                         if (count($graphdata) > 2) {
                           $adsclass = 'ads-after-two mt-50';
                           $key_candidate_extra_block = 'key_candidate_extra_block';
-                          $margin_class = 'election-topadd'
+                          $margin_class = 'election-topadd';
                         }
                         ?>
                         <div class="row">
