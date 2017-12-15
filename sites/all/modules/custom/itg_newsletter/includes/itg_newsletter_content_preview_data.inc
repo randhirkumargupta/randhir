@@ -121,7 +121,60 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
   }
   $content .= '</table>
       </td>
-    </tr><tr>
+    </tr>';
+  $content .= '<tr>
+      <td colspan="2">
+         <table border="0" cellpadding="0" cellspacing="0" width="90%" id="container" align="center">
+    <tr>
+      <td align=left valign=top><table style="display: block; width: 225px;" align=left border=0 cellpadding="0" cellspacing="0" class="reco">
+          <tr>
+          <td valign=top class="body"><a href="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.click?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=1"> <img width="200px" class="original" src="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.get?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=1"/> </a></td>
+        </tr>
+        </table>
+        <table style="display: block; width: 226px;" align=left border=0 cellpadding="0" cellspacing="0" class="reco">
+          <tr>
+            <td valign=top class="body"><a href="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.click?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=2"> <img width="200px" class="original" src="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.get?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=2"/> </a></td>
+          </tr>
+        </table>
+        <table style="display: block; width: 200px;" align=left border=0 cellpadding="0" cellspacing="0" class="reco">
+          <tr>
+            <td valign=top class="body"><a href="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.click?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=3"> <img width="200px" class="original" src="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.get?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=3"/> </a></td>
+          </tr>
+        </table>
+        <table style="display: block; width: 225px;" align=left border=0 cellpadding="0" cellspacing="0" class="reco">
+          <tr>
+            <td valign=top class="body"><a href="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.click?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=4"> <img width="200px" class="original" src="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.get?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=4"/> </a></td>
+          </tr>
+        </table>
+        <table style="display: block; width: 226px;" align=left border=0 cellpadding="0" cellspacing="0" class="reco">
+          <tr>
+            <td valign=top class="body"><a href="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.click?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=5"> <img width="200px" class="original" src="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.get?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=5"/> </a></td>
+          </tr>
+        </table>
+        <table style="display: block; width: 200px;" align=left border=0 cellpadding="0" cellspacing="0" class="reco">
+          <tr>
+            <td valign=top class="body"><a href="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.click?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=6"> <img width="200px" class="original" src="http://mb.taboola.com/1.1/png/indiatoday-newsletter/recommendations.get?recipient.hash.hex=f065723f94e16d3eaea142618f9060fa31ea0a19355bc40545ec5c0ae6ef0f7b&instance.id=25892e17-80f6-415f-9c65-7395632f0&widget.placement=bottom_of_ema
+il&widget.mode=thumbnails-a&source.url=http%3A%2F%2Fmailtoday.in&widget.slot=6"/> </a></td>
+          </tr>
+        </table></td>
+    </tr>
+  </table>
+
+      </td>
+    </tr>';
+
+  $content .= '<tr>
       <td colspan="2">
         <table cellspacing="0" cellpadding="0" style="width: 100%; text-align: center; font-size: 14px;">' . $footer . '</table>
       </td>
