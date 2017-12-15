@@ -5362,8 +5362,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  */
 function itg_rapid_api_testing($token) {
 
-    echo $term_feed_path = "public://xml_it/photos";
-    die();
+    p(node_load(1069009));
 
     $str = '{
 	"status_code": "0",
