@@ -147,8 +147,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 					$search_title = preg_replace("/'/", "\\'", $story_title_display);
 					$fb_share_title = htmlentities($story_title_display, ENT_QUOTES);
 				}else{
-					$short_url = shorten_url($actual_link, 'goo.gl');
-					
+					$short_url = shorten_url($actual_link, 'goo.gl');					
 				}
                 $display_title = "";
                 if ($widget_data['itg-block-4']['block_title'] == "" && empty($story_title)) {
