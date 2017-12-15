@@ -179,7 +179,7 @@ function generateVideoCategoryList($tid, $pageno) {
             $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
             $file_extra_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
 
-            $desc = $resvalue['field_story_expert_description_value'];
+            $desc = strip_tags($resvalue['field_story_expert_description_value']);
 
             //related content
             $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -465,7 +465,7 @@ function generateProgramCategoryList($tid, $pageno) {
             $load_collection = field_collection_item_load($field_video_upload);
             $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
             $anchor_id = getVedioAnchor($nid);
-            $desc = $resvalue['field_story_expert_description_value'];
+            $desc = strip_tags($resvalue['field_story_expert_description_value']);
 
             //display all the video sounce check and format
             $source_type = $resvalue['field_story_source_type_value'];
@@ -599,7 +599,7 @@ function generateProgramSectionList($Program_section_list) {
         $term_name = $term->name;
         $term_url = nodeCategoryFrontUrl($value, 'term');
         $child_term_url = nodeCategoryFrontUrl($value, 'term');
-        $p_short_description = $term->description;
+        $p_short_description = strip_tags($term->description);
         $p_schedule = $term->field_program_timing_in_days['und'][0]['value'];
 
         $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
@@ -687,7 +687,7 @@ function generateVideoDetail($nid) {
         $file_large_img_url = completeFilePath($node->field_story_large_image['und']['0']['fid']);
         $file_extra_large_img_url = completeFilePath($node->field_story_extra_large_image['und']['0']['fid']);
 
-        $desc = $node->field_story_expert_description['und']['0']['value'];
+        $desc = strip_tags($node->field_story_expert_description['und']['0']['value']);
 
         //related content
         $related = relatedContentNodeType($node->field_common_related_content['und']['0']['value']);
@@ -802,7 +802,7 @@ function generateProgramDetail($nid) {
         $load_collection = field_collection_item_load($field_video_upload);
         $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
         $anchor_id = getVedioAnchor($nid);
-        $desc = $node->field_story_expert_description['und']['0']['value'];
+        $desc = strip_tags($node->field_story_expert_description['und']['0']['value']);
 
         //display all the video sounce check and format
         $source_type = $node->field_story_source_type['und']['0']['value'];
