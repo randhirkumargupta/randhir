@@ -159,7 +159,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     $term_name = $term->name;
     $created = $resvalue['created'];
     $changed = $resvalue['changed'];
-    $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+    $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
     $alias = drupal_get_path_alias('node/' . $nid . '');
     $weburl = $base_url . "/" . $alias;
     $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -394,7 +394,7 @@ function getCoverstoriesList($issue_date) {
     $term_name = $term->name;
     $created = $resvalue['created'];
     $changed = $resvalue['changed'];
-    $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+    $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
     $alias = drupal_get_path_alias('node/' . $nid . '');
     $weburl = $base_url . "/" . $alias;
     $field_video_duration_value = $resvalue['field_video_duration_value'];
