@@ -26,6 +26,9 @@
       $section = $_GET['section_name'];
     }
   }
+  if(drupal_is_front_page()){
+	$section = '1206851';
+  }
   // Start high chart Graph
   foreach ($data as $index => $row):
 	$graph_link = $base_url . '/state-election/' . $section . '/' . $row->field_election_state_tid;
