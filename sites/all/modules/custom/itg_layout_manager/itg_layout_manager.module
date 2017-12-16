@@ -178,9 +178,10 @@ function itg_state_election_map() {
   foreach ($terms as $values) {
     if ($values->field_section[LANGUAGE_NONE][0]['tid'] == $section && $values->tid == $state) {
 	  $mapgurl = $values->field_state_map_json[LANGUAGE_NONE][0]['value'];
+	  $state_name = $values->name;
     }
   }
-	return theme('itg_state_election_map', array('widget_data' => $data, 'map_data' => $mapgurl));
+	return theme('itg_state_election_map', array('widget_data' => $data, 'map_data' => $mapgurl, 'state_name' => $state_name));
 }
 
 function make_graph() {
