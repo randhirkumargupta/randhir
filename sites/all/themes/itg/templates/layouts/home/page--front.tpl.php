@@ -90,19 +90,23 @@ if ($theme != 'itgadmin') {
             </div>      
           </div>    
         <?php endif; ?>
-        <?php if(isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) { ?>
+        <?php if(TRUE || isset($widget_data['itg-block-0']['widget']) && !empty($widget_data['itg-block-0']['widget'])) { ?>
         <div class="home-election" data-tb-region="homeElection" >
           <div class="widget-help-text">Template widgets ( <strong>Home Page Election</strong> )</div>
           <div class="itg-widget">
             <div class="droppable <?php print $gray_bg_layout; ?>">
-              <div class="widget-wrapper <?php print $widget_data['itg-block-0']['widget_name']; ?>">
+              <div class="widget-wrapper <?php //print $widget_data['itg-block-0']['widget_name']; ?>">
                 <div class="data-holder" id="itg-block-0">
                   <?php
-                  if (isset($widget_data['itg-block-0']['widget'])) {
-                    print $widget_data['itg-block-0']['widget'];
-                  } else {
-                    print '<div class="widget-placeholder"><span>Home Election</span></div>';
-                  }
+                  //~ if (isset($widget_data['itg-block-0']['widget'])) {
+                    //~ print $widget_data['itg-block-0']['widget'];
+                  //~ } else {
+                    //~ print '<div class="widget-placeholder"><span>Home Election</span></div>';
+                  //~ }
+                  
+                      $block = module_invoke('itg_widget', 'block_view', 'graph_election');
+                      print render($block['content']);
+                  
                   ?>
                 </div>
               </div>
