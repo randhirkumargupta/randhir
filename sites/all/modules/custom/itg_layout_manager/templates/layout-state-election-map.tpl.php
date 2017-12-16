@@ -2,7 +2,7 @@
 <div class="state-election-map-wrapper">
 <div class="full_state_graph">
 	<div class="breadMap"><div class="breadMapLink"><?php echo $state_name;?> Detailed Result</div><style>
-.breadMap .breadMapLink {font-size: 29px;color: #000;}
+.breadMap .breadMapLink {font-size: 29px;color: #000;padding-bottom: 10px;}
 .kikerNewsRightSec { width:100%}
 .kikerNewsRightSec b { margin:5px 0; display:inline-block}
 .kikerNewsRightSec ul {list-style-type: disc;color: #c00;margin-left: 20px;}
