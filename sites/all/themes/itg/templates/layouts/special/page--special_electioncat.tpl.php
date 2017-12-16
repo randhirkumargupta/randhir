@@ -166,7 +166,7 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                 if (count($graphdata) > 2) {
                   ?>
-                  <div class="row election-graph election-graph-<?php echo count($graphdata); ?>">
+                  <div class="row election-graph election-graph-cat election-graph-<?php echo count($graphdata); ?>">
                       <?php
                       $block = module_invoke('itg_widget', 'block_view', 'graph_election');
                       print render($block['content']);
@@ -176,11 +176,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 
                 <?php } ?>
                 <div class="row">
-                    <div class="col-md-8 col-sm-12 col-sx-12 election-graph left-side">
+                    <div class="col-md-8 col-sm-12 col-sx-12  election-graph left-side">
 
                         <?php if (count($graphdata) <= 2) {
                           ?>
-                          <div class="row itg-415-layout">
+                          <div class="row itg-415-layout election-graph-cat">
                               <?php
                               $block = module_invoke('itg_widget', 'block_view', 'graph_election');
                               print render($block['content']);
