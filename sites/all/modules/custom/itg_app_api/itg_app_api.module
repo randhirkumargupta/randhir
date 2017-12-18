@@ -1849,7 +1849,25 @@ function fbiframeupdtae($n_body){
     }
     return (string)$str_html;
 }
+function fbiframeupdtae($n_body) {
 
+    preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $n_body, $iframes_m);
+
+    foreach ($iframes_m as $iframes) {
+        $find = $iframes_m[0][0];
+        $find_up = str_replace('auto', '80vh', $find);
+
+        foreach ($iframes as $iframes_s) {
+            preg_match('/src="([^"]+)"/', $iframes_s, $match);
+
+            if (strpos($match[1], 'https://www.facebook.com') !== false) {
+
+                $n_body = str_replace($find, $find_up, $n_body);
+            }
+        }
+    }
+    return $n_body;
+}
 
 /**
  * function for  getTechPros
