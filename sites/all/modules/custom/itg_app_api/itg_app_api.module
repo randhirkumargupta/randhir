@@ -1836,6 +1836,10 @@ function formateNodeBodyToken($n_body) {
  * @return string $n_body
  */
 function fbiframeupdtae($n_body){    
+    $ser = "&lt;iframe style=&quot;width:100%;height: auto;&quot; allowfullscreen=&quot;true&quot; allowtransparency=&quot;true&quot; frameborder=&quot;0&quot; height=&quot;476&quot; scrolling=&quot;no&quot; src=&quot;https://www.facebook.com/plugins";
+    $rep = "&lt;iframe style=&quot;width:100%;height: 80vh;&quot; allowfullscreen=&quot;true&quot; allowtransparency=&quot;true&quot; frameborder=&quot;0&quot; height=&quot;476&quot; scrolling=&quot;no&quot; src=&quot;https://www.facebook.com/plugins";
+    $n_body = str_replace('$ser', '$rep', $n_body);
+    return $n_body;
     $element_up = "";
     if($n_body){
         $str_html = str_get_html($n_body);
