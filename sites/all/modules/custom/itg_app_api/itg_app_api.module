@@ -1835,17 +1835,14 @@ function formateNodeBodyToken($n_body) {
  * @pram string $n_body
  * @return string $n_body
  */
-function fbiframeupdtae($n_body){    
-    $ser = 'iframe style="width:100%;height: auto;" allowtransparency="true" frameborder="0" height="472" scrolling="no" src="https://www.facebook.com';
-    $rep = 'iframe style="width:100%;height: 80vh;" allowtransparency="true" frameborder="0" height="472" scrolling="no" src="https://www.facebook.com';
-    $n_body = str_replace('$ser', '$rep', $n_body);
-    return $n_body;
+function fbiframeupdtae($n_body){   
+
     $element_up = "";
     if($n_body){
         $str_html = str_get_html($n_body);
         foreach ($str_html->find('iframe') as $element) {
-            if (strpos($element,'https://www.facebook.com/plugins') !== false) {
-                $element_up = str_replace('style="width:100%;height: auto;"', 'style="width:100%;height: 80vh;"', $element);
+            if (strpos($element,'https://www.facebook.com') !== false) {
+                $element_up = str_replace('auto', '80vh', $element);
                 $n_body = str_replace($element, $element_up, $n_body);
             }
         }
