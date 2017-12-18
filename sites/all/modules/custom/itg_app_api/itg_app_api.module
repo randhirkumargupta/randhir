@@ -1842,8 +1842,7 @@ function fbiframeupdtae($n_body){
         $str_html = str_get_html($n_body);
         foreach ($str_html->find('iframe') as $element) {
             if (strpos($element,'https://www.facebook.com') !== false) {               
-                $element_up = str_replace('auto', '80vh', $element);
-                echo $element_up;die();
+                $element_up = str_replace('auto', '80vh', $element);                
                 $n_body = str_replace($element, $element_up, $n_body);
             }
         }
