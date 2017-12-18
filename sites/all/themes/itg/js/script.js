@@ -411,7 +411,9 @@ jQuery(document).ready(function () {
     headerMain();
     function headerMain() {
         //header menu add icon for mobile 
-        jQuery('.main-nav').first().prepend('<div class="desktop-hide"><a class="mobile-nav nochange" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
+       // jQuery('.main-nav').first().prepend('<div class="desktop-hide"><a class="mobile-nav nochange" href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>');
+        jQuery('.main-nav').first().prepend('<div class="desktop-hide"><a class="mobile-nav nochange" href="javascript:void(0)"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></a></div>');
+        
         jQuery('.main-nav ul').first().prepend('<li class="desktop-hide"><a href="javascript:void(0)"></a></li>');
 	
         jQuery('.container.header-logo').prependTo('.itg-logo-container');
@@ -621,13 +623,13 @@ jQuery(document).ready(function () {
 
 jQuery(document).ready(function () {
     var winWidth;
-    jQuery('.mobile-nav i.fa').click(function () {
-        if (jQuery(this).hasClass('fa-bars')) {
-            jQuery(this).addClass('fa-times').removeClass('fa-bars');
+    jQuery('.mobile-nav').click(function () {
+        if (jQuery(this).hasClass('nochange')) {
+            jQuery(this).addClass('change').removeClass('nochange');
             jQuery('.navigation').slideDown();
 
         } else {
-            jQuery(this).addClass('fa-bars').removeClass('fa-times');
+            jQuery(this).addClass('nochange').removeClass('change');
             jQuery('.navigation').slideUp();
         }
     });

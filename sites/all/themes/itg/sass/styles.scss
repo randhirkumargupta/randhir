@@ -391,8 +391,7 @@ header {
 
 #block-itg-layout-manager-header-block {
     padding-top: 20px;
-    box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
-    background: #000;
+    background: #fff;
     .header-top {
         height: 163px;
     }
@@ -400,7 +399,7 @@ header {
         @extend .list-none;
     }
     a {
-        color: $white-color;
+        color: #a9a9a9;
         font-family: $itg-roboto;
     }
     .header-logo {
@@ -408,6 +407,7 @@ header {
     }
     .header-ads {
         text-align: center;
+        padding-top:10px;
         .row {
             margin: 0 auto;
             @include display-inline;
@@ -423,20 +423,51 @@ header {
     }
     .logo {
         width: auto;
-        top: -15px;
+        top: 15px;
         position: absolute;
         a {
             display: block;
-            overflow: hidden;
+            overflow: visible;
         }
         img {
-            background: #000;
             padding-left: 4px;
             padding-right: 0px;
             vertical-align: top;
             margin-bottom: -2px;
         }
     }
+     .social-nav {
+            @include pos(relative);
+            @include float(right);
+            a {
+                .fa {
+                    @include font(23px,
+                    null,
+                    null);
+                    &.fa-mobile {
+                        @include font(27px,
+                        null,
+                        null);
+                    }
+                }
+            }
+            .globle-search {
+                @include pos(absolute,
+                -5px,
+                40px,
+                null,
+                null);
+                @include transition(all 0.5s ease-in-out);
+                width: 0px;
+                overflow: hidden;
+                .search-text {
+                    @include calculate-width(1);
+                }
+                &.active {
+                    width: 225px;
+                }
+            }
+        }
     .top-nav {
         padding: 0 15px 0 15px;
         margin: 25px auto 15px auto;
@@ -451,9 +482,10 @@ header {
             }
         }
         .main-nav {
-            @include float(left);
-            padding-left: 145px;
-            line-height: 28px;
+			padding-left:0px;
+			line-height: 28px;
+			width:58%;
+			margin: 0 auto;
             li {
                 &.desktop-hide {
                     display: none;
@@ -490,48 +522,18 @@ header {
                 }
             }
         }
-        .social-nav {
-            @include pos(relative);
-            @include float(right);
-            a {
-                .fa {
-                    @include font(23px,
-                    null,
-                    null);
-                    &.fa-mobile {
-                        @include font(27px,
-                        null,
-                        null);
-                    }
-                }
-            }
-            .globle-search {
-                @include pos(absolute,
-                -5px,
-                40px,
-                null,
-                null);
-                @include transition(all 0.5s ease-in-out);
-                width: 0px;
-                overflow: hidden;
-                .search-text {
-                    @include calculate-width(1);
-                }
-                &.active {
-                    width: 225px;
-                }
-            }
-        }
+       
     }
     .navigation {
         @include clearfix;
         margin-top: 20px;
         background: #a00606;
+        box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
         .container {
             @include pos(relative);
         }
         .menu {
-            margin-left: 135px;
+            margin-left: 0px;
             margin-right: 50px;
             max-width: 985px;
             li {
@@ -542,7 +544,6 @@ header {
                     @include itg-font(null,
                     $itg-font-medium);
                     padding: 0 10px;
-                    /*                        border-right: 1px solid $itg-nav-bordercolor;*/
                     border-top: none;
                     height: 37px;
                     white-space: nowrap;
@@ -6304,14 +6305,8 @@ section.sidebar {
             a {
                 cursor: pointer;
                 &.user-icon {
-                    position: absolute;
-                    right: 0;
-                    background: #ffc106;
-                    width: 37px;
-                    height: 40px;
-                    line-height: 40px;
-                    color: #ac0000;
-                    top: -39px;
+                    background:transparent;
+                    color: #fff;
                     text-align: center;
                     font-size: 28px;
                 }
@@ -14882,4 +14877,69 @@ ul.pron-cons-img li img {
 .budget-page-layout [id*="twitter-widget"] {
     margin: 0 auto;
     display: inherit;
+}
+
+/* New Header by ITGD */
+.hidden-desktop{ display: none; }
+#block-itg-layout-manager-header-block .navigation .menu li.userlogin-icon-parent-mobile{ display: none; }
+#block-itg-layout-manager-header-block .top-nav .main-nav ul.menu li.desktop-hide{ display: none; }
+#block-itg-ads-ads-super-banner-top-nav-728x90{ text-align: center; padding-top:10px; margin-bottom:10px; }
+#block-itg-layout-manager-header-block .top-nav .main-nav ul.menu{ float: left; }
+#block-itg-layout-manager-header-block .top-nav .main-nav li:nth-child(3) a:before{width: 8px; height: 8px;border-radius: 100%;background: #c00;display: inline-block;
+    position: relative;top: -5px; left:-5px; box-shadow: 0 0 0 rgba(214,2,12,.8);  border-radius: 50%; background: #c00; animation: pulse 1.7s infinite; content:"";}
+#block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile{ display: none; }
+#block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo{ float: left;width:185px; text-align: center; height:40px; }
+#block-itg-layout-manager-header-block .top-nav .main-nav .headeritg-logo + .menu li.menu__item.is-leaf a{ padding-right:0px;padding-left:35px; }
+
+#block-itg-layout-manager-header-block .social-nav .social-dropdown{ display: none; position: absolute; top:-5px; right:40px;    -webkit-transition: all 0.5s ease-in-out;-moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out; -o-transition: all 0.5s ease-in-out;transition: all 0.5s ease-in-out; width:0px; background:#f0f0f0;height: 37px;}
+#block-itg-layout-manager-header-block .navigation .menu{ margin-right:0px; }
+#block-itg-layout-manager-header-block .menu-login{position: absolute;right: 0px;top: 0px;}
+#block-itg-layout-manager-header-block .menu-login .social-nav ul li{ display:inline-block;}
+#block-itg-layout-manager-header-block .menu-login .social-nav ul li a{ padding:0 10px; line-height:32px; color:#fff; }
+#block-itg-layout-manager-header-block .social-nav .globle-search .search-text{ height:37px; border:0px; }
+#block-itg-layout-manager-header-block .social-nav .share-icon-parent{ position: relative; }
+#block-itg-layout-manager-header-block .social-nav .social-dropdown.active{ display: block; width:260px;}
+#block-itg-layout-manager-header-block .social-nav .social-dropdown ul li a{ line-height:45px; color:#333; }
+#block-itg-layout-manager-header-block .social-nav li:hover .social-dropdown ul li:hover .fa,#block-itg-layout-manager-header-block .social-nav li:hover .social-dropdown ul li .fa{ color:#333; }
+
+.dot_red {
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    background: #c00;
+    display: inline-block;
+    position: relative;
+    top: -2px;
+}
+.dot_red {
+    box-shadow: 0 0 0 rgba(214, 2, 12, .8);
+    border-radius: 50%;
+    background: #c00;
+    animation: pulse 1.7s infinite;
+}
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(214, 2, 12, .8)
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px rgba(214, 2, 12, 0)
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(214, 2, 12, 0)
+    }
+}
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(214, 2, 12, .4);
+        box-shadow: 0 0 0 0 rgba(214, 2, 12, .4)
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 6px rgba(214, 2, 12, 0);
+        box-shadow: 0 0 0 6px rgba(214, 2, 12, 0)
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(214, 2, 12, 0);
+        box-shadow: 0 0 0 0 rgba(214, 2, 12, 0)
+    }
 }
