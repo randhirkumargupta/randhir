@@ -769,7 +769,7 @@ function generateVideoDetail($nid) {
         $photo_list_array[$listcount]['v_subcategory_id'] = "$field_primary_category_value";
         $photo_list_array[$listcount]['v_subcategory_title'] = "$term_name_pri";
     }
-    $data['status_code'] = 1;
+    $data['status_code'] = "1";
     $data['status_message'] = "";
     $data['data'] = $photo_list_array;
     return $data;
