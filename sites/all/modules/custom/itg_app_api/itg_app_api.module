@@ -1825,7 +1825,7 @@ function formateNodeBodyToken($n_body) {
     // add AD block after 1st <p> end
     $n_body = str_replace('<img', '<img style="width:100%;height: auto;"', $n_body);
     $n_body = str_replace('<iframe', '<iframe style="width:100%;height: auto;"', $n_body);    
-    //$n_body = fbiframeupdtae($n_body);
+    $n_body = fbiframeupdtae($n_body);
     $data['n_body'] = $n_body;
     $data['poll_id'] = $poll_id;
     return $data;
@@ -1835,21 +1835,25 @@ function formateNodeBodyToken($n_body) {
  * @pram string $n_body
  * @return string $n_body
  */
-function fbiframeupdtae($n_body){   
+function fbiframeupdtae($n_body) {
 
-    $element_up = "";
-    if($n_body){
-        $str_html = str_get_html($n_body);
-        foreach ($str_html->find('iframe') as $element) {
-            if (strpos($element,'https://www.facebook.com') !== false) {               
-                $element_up = str_replace('auto', '80vh', $element);                
-                $str_html = str_replace($element, $element_up, $str_html);
+    preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $n_body, $iframes_m);
+
+    foreach ($iframes_m as $iframes) {
+        $find = $iframes_m[0][0];
+        $find_up = str_replace('auto', '80vh', $find);
+
+        foreach ($iframes as $iframes_s) {
+            preg_match('/src="([^"]+)"/', $iframes_s, $match);
+
+            if (strpos($match[1], 'https://www.facebook.com') !== false) {
+
+                $n_body = str_replace($find, $find_up, $n_body);
             }
         }
     }
-    return (string)$str_html;
+    return $n_body;
 }
-
 
 /**
  * function for  getTechPros
