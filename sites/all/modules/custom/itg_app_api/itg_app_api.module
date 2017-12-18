@@ -1782,7 +1782,7 @@ function resentotpValidation_rapid($params) {
  */
 function formateNodeBodyToken($n_body) {
     //include 'simple_html_dom.php';
-    $token_list = array('div[class=quiz]', 'div[class=poll]', 'div[class=survey]', '<p>[ITG:LISTICLES]</p>', 'div[class=itgimage]', '<p>[ITG:TECH-PHOTOS]</p>', '<p>[ITG:EXPERT-CHUNK]</p>', '<p>[ITG:FACTOIDS]</p>', '<p>[ITG:TECH-PHOTO-GALLERY]</p>');
+    $token_list = array('div[class=quiz]', 'div[class=poll]', 'div[class=survey]', '<p>[ITG:LISTICLES]</p>', 'div[class=itgimage]', 'div[class=itg-mosimage]', '<p>[ITG:TECH-PHOTOS]</p>', '<p>[ITG:EXPERT-CHUNK]</p>', '<p>[ITG:FACTOIDS]</p>', '<p>[ITG:TECH-PHOTO-GALLERY]</p>');
     
     $data = array();
     $poll_id = 0;
