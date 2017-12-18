@@ -15,7 +15,7 @@
                   }
                   if ($index == 0) {
                     ?>
-                    <div class="featured-post featured-post-first <?php echo $video_class; ?>">
+                    <div class="featured-post featured-post-first">
                         <?php if ($row['li_file_uri'] != "") { ?>
                           <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $row['nid']); ?>">
                               <img src="<?php print image_style_url("magazine_top_story_483x271", $row['li_file_uri']); ?>" alt="<?php echo $row['field_story_large_image_alt']; ?>" title="<?php echo $row['field_story_large_image_title']; ?>" />
@@ -40,7 +40,7 @@
                     </div>
                       <?php }
                       else if ($index > 0 && $index <= 2) { ?>
-                    <div class="featured-post <?php echo $video_class; ?>">
+                    <div class="featured-post">
                     <?php if ($row['mi_file_uri'] != "") { ?>
                           <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $row['nid']); ?>">
                               <img src="<?php print image_style_url("home_page_feature_small", $row['mi_file_uri']); ?>" alt="<?php echo $row['field_story_medium_image_alt']; ?>" title="<?php echo $row['field_story_medium_image_title']; ?>" />
@@ -76,35 +76,19 @@
                     <ul class="itg-listing">   
                         <?php
                         foreach ($data as $index => $row) {
-                          if (strtolower($row['type']) == 'story') {
-                            if (function_exists('itg_common_get_addontitle')) {
-                              $add_on_data = itg_common_get_addontitle($row['nid']);
-                              $pipelinetext = "";
-                              $pipelineclass = "";
-                              if (!empty($add_on_data['ad_title']) && !empty($add_on_data['ad_url'])) {
-                                $pipelinetext = ' <span class="add-on-story-pipline">|</span> <a target="_blank" href="' . $add_on_data['ad_url'] . '" title="' . $add_on_data['ad_title'] . '">' . ucfirst($add_on_data['ad_title']) . '</a>';
-                                $pipelineclass = 'pipeline-added';
-                              }
-                            }
-                          }
                           $desc = $row['title'];
-
                           if ($index > 2) {
                             ?>
-                            <li title="<?php echo strip_tags($desc); ?>" class="<?php print $pipelineclass; ?>">
+                            <li title="<?php echo strip_tags($desc); ?>">
                                 <?php
                                 if (function_exists('itg_common_get_smiley_title')) {
                                   echo l(itg_common_get_smiley_title($row['node_obj'], 0, 80), "node/" . $row['nid'], array("html" => TRUE));
-                                  echo $pipelinetext;
                                 }
                                 else {
                                   echo l(mb_strimwidth(strip_tags($desc), 0, 85, ".."), "node/" . $row['nid']);
-                                  echo $pipelinetext;
                                 }
                                 ?>
                             </li>
-
-
                           <?php } ?>
 
                        <?php } ?>
