@@ -1,0 +1,447 @@
+@charset "utf-8";
+/* CSS Document */
+/* ==============================thelallantopshow============================================*/
+
+@import url(https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab);
+
+
+{font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Roboto Slab', serif;
+font-family: 'Roboto Mono', monospace;
+font-family: 'Roboto', sans-serif;}
+
+.margintop5{margin-top:5px;}
+.margintop10{margin-top:10px;}
+.margintop15{margin-top:15px;}
+.margintop20{margin-top:20px;}
+
+.marginbottom5{margin-bottom:5px;}
+.marginbottom10{margin-bottom:10px;}
+.marginbottom15{margin-bottom:15px;}
+.marginbottom20{margin-bottom:20px;}
+.marginbottom30{margin-bottom:30px;}
+
+.paddingtop5{padding-top:5px;}
+.paddingtop10{padding-top:10px;}
+
+/************************************Header CSS*********************************************************/
+body{font-family: 'Roboto Slab', serif;}
+#wrapper_ltop{width:100%; float:left;}
+.header_ltop_container{ background:#fce9e6 url(http://media2.intoday.in/indiatoday/state-of-the-states/2016/img/top-mast-bg.png) repeat-x 0 bottom; padding:0px 0;}
+.header_ltop_container .main_logo{width:288px; float:left;}
+.header_ltop_container .main_logo a{}
+.header_ltop_container .main_logo a img{ background-color:#fff; box-shadow:0 0 5px #000; padding:10px 20px;}
+.header_ltop_container .right_part_header{width:100%;margin-top:0px; float:left}
+.header_ltop_container .right_part_header h1{font:bold 41px/46px 'Roboto Slab', serif; color:#000; display:block; text-transform:uppercase; margin-top: 12px;}
+.header_ltop_container .right_part_header h1 strong{color:#d92027; }
+.header_ltop_container .right_part_header h2{font:normal 24px/29px 'Roboto Slab', serif; color:#231f20; display:block; text-align:center; margin-top:0;  margin-left:-75px;}
+.header_ltop_container .right_part_header .sponsor-top{width:100%; float:left; margin-top:10px;}
+.header_ltop_container .right_part_header .sponsor-top ul{list-style:none; background-color:#fff; margin:0 0 0 80px; padding:0; float:left; width:610px; box-shadow:0 0 5px #9c9c9c;}
+.header_ltop_container .right_part_header .sponsor-top li{display:inline; background:url(http://media2.intoday.in/indiatoday/state-of-the-states/2016/img/sep.jpg) no-repeat 0 0; padding:10px 22px; float:left}
+.header_ltop_container .right_part_header .sponsor-top li:first-child{padding:0; background:none;}
+.header_ltop_container .right_part_header .sponsor-top li:nth-child(2){background:none;}
+.header_ltop_container .right_part_header .social{float:right;}
+.header_ltop_container .right_part_header .social img{margin:16px 0 0 10px;}
+.lastSwiper { margin-left:440px;}
+
+/************************************Header CSS*********************************************************/
+
+/************************************Nav CSS*********************************************************/
+.nav_ltop_container{ background:#000000; margin-bottom:30px; }
+.nav_ltop_container a{color:#fff; font-size:18px; text-decoration:none;text-transform:uppercase;padding:15px 0; float:left;}
+.nav_ltop{width:100%;float:left; }
+.nav_ltop_container a:hover { color:#ec2426}
+
+  .sponTextFoot { display:block; font-size:13px; text-transform:uppercase; color:#fff; padding-bottom:5px; margin-top:-15px;}  
+
+.nav_ltop .register_lt{ float:right; display:block;background:#d92027; padding:7px;text-transform:uppercase; text-align:center; font-weight:bold; }
+.nav_ltop .register_lt a{text-decoration:none; color:#fff; padding:0px 15px; font-size:30px;}
+
+.nav_ltop_container .swiper-container {width: 100%;height: 100%; }
+.nav_ltop_container .swiper-slide {width:auto;display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;}
+
+/************************************Nav CSS*********************************************************/
+
+/************************************Main Container CSS*********************************************************/
+.ltop_slider_container{ display:block; margin-top:20px;}
+.ltop_slider_container .swiper-container {border:4px solid #ffc000;width: 100%;height: 100%; box-sizing:border-box; }
+.ltop_slider_container .swiper-slide {display: -webkit-box;display: -ms-flexbox;display: -webkit-flex;display: flex;padding:10px;}
+.ltop_slider_container .swiper-slide img{width:100%; height:100%}
+.swiper-button-prev_lt {position: absolute;top: 50%;width: 27px;height: 44px;margin-top: -22px;z-index: 10;cursor: pointer;-moz-background-size: 27px 44px;-webkit-background-size: 27px 44px;background-size: 27px 44px;background-position: center;background-repeat: no-repeat;}
+.swiper-button-next_lt {position: absolute;top: 50%;width: 27px;height: 44px;margin-top: -22px;z-index: 10;cursor: pointer;-moz-background-size: 27px 44px;-webkit-background-size: 27px 44px;background-size: 27px 44px;background-position: center;background-repeat: no-repeat;right:-3px;}
+
+.main_ltop_container .ltop_container .right_ltop_container{ width:300px; float:right}
+
+.about_the_lallantop{width:100%; float:left; margin-top: 20px;}
+.about_the_lallantop .hdn_lt{ font-weight:bold; text-transform:uppercase; font-size:20px; padding-bottom:8px; margin-bottom:8px;  border-bottom:1px solid #eee}
+.about_the_lallantop .cont_lt{ padding:10px 0;font-size:14px; margin-bottom:40px;}
+.about_the_lallantop .cont_lt p:first-child{ display:block;}
+.about_the_lallantop .cont_lt p{ display:none; line-height:24px;}      
+.more_less{ color:#c00; font-size:12px;  cursor:pointer; float:right; display:block}
+
+.homeSocial { margin:-15px 0 0 0; padding:0px 0 40px 0; overflow:hidden; float:left; }
+.homeSocial span { padding-right:15px;}
+.homeSocial img { margin:0px 13px 0 0; padding:0px;}
+
+
+.like_follow_us{ width:100%; float:left;}
+.like_follow_us .txt_lf{ font-size:20px; text-transform:uppercase}
+.like_follow_us .socials_ltab{}
+.txt_cont_prog{ background:#eeeeee; padding:10px; font-size:18px; color:#000; margin-top:-2px; position:relative; z-index:5555}	  
+
+.ltop_tab_programme .nav-tabs{ background:#d92027;}
+.ltop_tab_programme .nav-tabs>li { margin-bottom:-2px;margin-top: -4px; text-transform:uppercase}
+.ltop_tab_programme .nav-tabs>li a{ margin-right:0; border-radius:0; padding:8px 30px; color:#fff; font-weight:500; font-size:20px;}
+.ltop_tab_programme .nav-tabs>li>a:hover{ border-color:#000;}
+.ltop_tab_programme .nav>li>a:hover,.ltop_tab_programme .nav>li>a:focus{ background-color:#000;}
+.ltop_tab_programme .nav-tabs>li.active>a, .ltop_tab_programme .nav-tabs>li.active>a:hover, .ltop_tab_programme .nav-tabs>li.active>a:focus{ border:0;background:#000; border-top-left-radius:5px; border-top-right-radius:5px;}
+.ltop_tab_programme .nav-tabs>li.active>a{ }
+.box_programme {background: url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;}
+.timing_l{ color:#d92027; font-size:13px; font-weight:bold; padding:6px 0; text-align:right;/* border-right:2px dotted #ddd;*/}
+.prog_container{  font-size:15px; margin-bottom:10px; margin-left:10px;}
+.box_programme{/*background: url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;*/ }
+.prog_container .prog_txt{padding:5px 10px; background:#ECECEC;   }          
+.session_ltop_cov{}
+.session_ltop_cov a{text-decoration:none; font-size:13px; font-weight:bold;}
+.pink_col{color:#d92027;}
+.pink_col_pvs{}
+.video_ltop_icon{ background:url(http://indiatoday.intoday.in/images/video_icon.gif) no-repeat; display:inline-block; width:18px; position:relative; top:1px; height:10px;}
+.photo_ltop_icon{background:url(http://conclave.intoday.in/conclave/images/photo_icon.jpg) no-repeat; display:inline-block; width:18px; position:relative; top:1px; height:12px;}
+.story_ltop_icon{background:url(http://media2.intoday.in/microsites/youthsummit2012/story-arrow.gif) no-repeat; display:inline-block; width:18px; position:relative; top:3px; height:10px; float:left;}
+.session_inner_cont{ padding:0px 0 19px 0;}
+.rpt_s{ margin-bottom:15px;     padding-left: 8px; margin-top: 10px;}
+.speaker_details.proSpeaker { padding-left:0px;}
+.rpt_s a{ color:#000;}
+.rpt_s p{ margin:0; padding:0; overflow:hidden;}
+.session_inner_cont .session_left{}
+
+.session_right.sessionBor{ margin-top:15px; margin-bottom:15px;    padding-left: 15px;background: url("http://media2.intoday.in/microsites/youthsummit2012/arrow-line.gif") repeat-y scroll left top transparent;}
+.session_left.sessionStory { margin-top:15px; margin-bottom:15px;}
+
+.ltop_tab_programme .tab-content{ margin-top:10px;}
+.speaker_profile{ width:100%;}            
+.speaker_txt{color:#d92027; font-weight:bold;    font-size: 14px;}
+.speaker_details{ margin-top:5px; padding-left: 8px;}
+.speaker_details .speaker_image{width:80px; height:60px; float:left; margin-right:20px;}
+.speaker_details .speaker_image img{border-radius:100%; width:80px; border:2px solid #d92027}
+.speaker_details .speaker_dt{ overflow:hidden;  display: block;line-height:18px;position: relative; top: 10px;}
+.speaker_details .speaker_dt .hdn{ display:block; font-size:14px; font-weight:bold;}
+.speaker_details .speaker_dt .desc_l{ font-size:13px; }
+
+/**********************Programme Page****************************************/
+.prog_lallantop{ width:100%; float:left;}
+.prog_lallantop .hdn_lt{ text-transform:uppercase; font-size:18px; font-weight:bold; padding-bottom:5px; margin-bottom:10px; border-bottom:1px solid #ccc;}
+.prog_lallantop .cont_lt{}
+.prog_lallantop .cont_lt p{ margin-bottom:10px;  font-size:14px; line-height:24px;}
+
+.progamme_panel{ width:100%; float:left;}
+.progamme_panel .heading_prog{ padding:5px 10px; font-weight:500; margin-bottom:15px; color:#fff; background:#d92027; font-size:20px; text-transform:uppercase;}
+
+
+.box_rtprogramme{background: url(http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png) repeat-y top left;}
+.box_rtprogramme .prog_container .prog_txt{ background:#fff;}
+.prog_rt_heading{ font-weight:bold; padding:5px 10px;}
+
+.moderator_right{ margin-left:20px; border-left:1px solid #ccc; margin-top:38px; }
+.moderator_right .mod_cont{ padding:10px;}
+.moderator_right .mod_cont .mod_txt{font-size:15px; font-weight:bold;}
+.moderator_right .mod_cont .mod_name{}
+.box_rtprogramme{ }
+.box_rtprogramme .session_ltop_cov{margin-bottom:30px; float:left;}
+.box_rtprogramme .session_inner_cont{padding:0 15px 15px 9px}
+
+/**********************Programme Page****************************************/
+
+/*************Registration CSS******************************/
+#registraiton_ltop_container{ margin-bottom:40px;} 
+#registraiton_ltop_container .heading_lt{ font-weight:bold; margin-bottom:10px;padding-bottom:5px; border-bottom:1px solid #ccc; text-transform:uppercase; font-size:16px} 
+#registraiton_ltop_container .cont_lt {width:100%; float:left}
+#registraiton_ltop_container .cont_lt .cont_txt{ font-size:14px; font-weight:bold;width:100%; float:left; margin-bottom:10px;} 
+#registraiton_ltop_container .form_cont{}
+#registraiton_ltop_container .form-control{ border-radius:0;}
+.captcha_lt{ width:100px; height:50px; border:1px solid #eee; margin-top:10px; }
+
+.btn-pink { padding: 4px 16px;background-color: #D60090;border-color: #D60090;color: #fff; text-transform:uppercase}
+.btn-pink:hover, .btn-pink:focus, .btn-pink.focus {color: #fff;text-decoration: none;}
+#myModal .modal-dialog{width:500px;}
+#myModal .modal-content{ padding:0 10px; border-radius:0}
+#myModal .modal-header{ padding:20px 0 5px 0; margin-bottom:20px;}
+#myModal .modal-header h4{ font-size: 16px;}
+#myModal .modal-body{ padding: 0; }
+#myModal .modal-dialog{margin:30% auto}
+/*************Registration CSS******************************/
+
+/*************Speakers CSS******************************/
+
+.speakers_container{width:100%; float:left}
+.speakers_container .hdn_ltop_sp{width:100%; float:left; text-transform:uppercase; font-size:16px; font-weight:bold; margin-bottom:20px; padding-bottom:5px; border-bottom:1px solid #ccc;}
+.speakers_container .hdn_ltop_cont{width:100%; float:left; text-align:center}
+.speakers_container .speaker_box{ width:143px;margin:0 auto}
+.speakers_container .speaker_box .speaker_img{ width:143px; float:left; height:143px; }
+.speakers_container .speaker_box .speaker_img img {border-radius: 100%;width:100%; float:left;border: 2px solid #d92027;}
+.speakers_container .speaker_box .speaker_name{ width:100%; float:left;}
+.speakers_container .speaker_box .speaker_name h5{ font-size:15px; font-weight:bold; margin-bottom:2px;}
+.speakers_container .speaker_box .speaker_name p{ font-size:14px;}
+
+.speaker_box_cont{ width:100%; float:left; text-align:left; margin:20px 0;}
+.speaker_box_cont h4.heading{ font-size:16px; text-transform:uppercase; font-weight:bold}
+.speaker_box_cont p{ display:none;}      
+.speaker_box_cont p:nth-child(2){ display:inline;}
+
+/*************Speakers CSS******************************/
+
+/*************Sponsors CSS******************************/
+.sponsors_container{ width:100%; float:left;}
+.sponsors_container .sponsors_hdn{width:100%; float:left;text-transform:uppercase; font-size:16px; font-weight:bold; margin-bottom:20px; padding-bottom:5px; border-bottom:1px solid #ccc;}
+.sponsors_container .sponsors_cont{width:100%; float:left;}
+.sponsors_logo_cont{ width:100%; border:1px solid #ccc; padding:15px; text-align:center; margin-bottom:30px}
+.sponsors_logo_cont img{ text-align:center; height:143px; max-width:100%;}
+
+
+/*************Sponsors CSS******************************/
+
+.video_player_cont{ width:100%; float:left}
+.video_player_cont img{max-width:100%;}
+.landing_page .hdn_ltop_cont{ }
+
+/*************************************Right Part************************************************************/
+
+.ad_container{ width:100%; float:left; text-align:center; background:#F6F6F6;  margin-top: 20px;}
+.ad_container .ad_cont {width:300px; margin:20px auto;}
+
+.first_picture_container{margin-top:28px;}
+.first_picture_container .hd_n_fp{ font-size:23px; font-weight:bold; color:#d92027; text-transform:uppercase} 
+.first_picture_container .cont_fp{}
+.first_picture_container .cont_fp img{width:100%; float:left;}
+
+.short_crisp_container{margin-top:28px;}
+.short_crisp_container .hd_n_sc{ font-size:19px; font-weight:bold; color:#d92027; text-transform:uppercase} 
+.short_crisp_container .cont_sc img{width:100%; float:left;}
+.short_crisp_container .sc_img_cont{ float:left;  margin-bottom:10px; box-sizing:border-box; width:100%;}
+.short_crisp_container .sc_img_cont img{width:100%; float:left;}
+
+.photoIcon { margin:0px; padding:0px; position:absolute; right:25px; bottom:20px;}
+.photoIcon img { width:auto}
+
+.venue_container{}
+.venue_container .venue_ltdt{font-size:20px; font-weight:bold; color:#d92027; border-bottom:1px dotted #000;}
+.venue_container .hd_n_ltdt{border-bottom:1px solid #ccc; text-transform:uppercase; color:#000; font-weight:bold}
+.venue_container .cont_ltdt{}
+.venue_container .cont_ltdt p{ margin-bottom:5px}
+
+.twitter_container{width:100%; float:left;text-align:center; background:#F6F6F6}
+.twitter_container .twitter_cont{ width:300px; margin:20px auto;}
+/*************************************Right Part************************************************************/
+
+
+
+/************************************Main Container CSS*********************************************************/
+
+/*************************Footer Part****************************************/
+.footer_ltop{ background:#c80b1d;width:100%; float:left; padding:15px 0; /*position:fixed; bottom:0; left:0; */ margin-top:35px; padding-bottom:0px;}
+.footer_ltop{}
+.footer_ltop .add_ltop {background: #fff;padding:3px 0 4px 15px;}
+.footer_ltop .socials_icons{ margin-top:15px; width:100%; float:left; text-align:center}
+.footer_ltop .spons_cnt{width:100%; float:left;}
+.footer_ltop .add_ltop .hd_txt{font-size: 11px;font-weight: 600;}
+.footer_ltop .spons_cnt .spns{ width:88px; float:left; margin-right:10px;}
+.footer_ltop .spons_cnt .spns.damilano{width:114px;}    
+.footer_ltop .spons_cnt .spns img{width:100%;}
+
+.sponArea { margin:0px; padding:0px; overflow:hidden}
+.sponArea .sponFirst { margin:0px 40px 0 0; padding:0px; float:left}
+.sponArea ul { margin:16px 0 0 0; padding:0px; list-style:none}
+.sponArea ul li { margin:0px 18px 0 0; padding:0px; float:left}
+
+/*************************Footer Part****************************************/
+
+/******New Css Written by Ravi******/
+
+.nav_ltop{position:relative;}
+.register_lt{position:absolute; top:0; right:0; z-index:99999;}
+ul.subnav{position:absolute; top:56px; right:0; background-color:#d92027; width:366px; list-style:none; z-index:9999; margin:0; padding:0 0 15px 0; display:none}
+ul.subnav li{width:100%; padding:5px 10px 5px 26px; box-sizing:border-box;}
+ul.subnav li a{font-size:18px; line-height:24px; color:#fff; float:none;}
+ul.subnav li a:hover{color:#000;}
+
+.sessionPhoto { margin:0px; padding:0px;}
+.sessionPhoto ul { margin:0px; padding:0px; list-style:none}
+.sessionPhoto ul li { margin:0px 5px 20px 0; padding:3px; float:left; background:#eeeeee; width:48%}
+.sessionPhoto ul li img { width:100%}
+.sessionPhoto ul li .stcaption { margin:0px; padding:4px 0 4px 5px; font-size:13px; color:#000}
+.sessionPhoto ul li .stcaption a { color:#000}
+
+
+.mobAdCode { display:none}
+
+
+@media screen and (max-width:1024px){
+.header_ltop_container .right_part_header h1 { font-size:30px;}	
+.header_ltop_container .right_part_header .sponsor-top ul { width:545px; margin-left:0px;}
+.lastSwiper { margin-left:229px;}
+.sponArea .sponFirst { width:20%;}
+.sponArea .sponFirst img { width:100%}
+.sponArea ul li { width:16%;}
+.sponArea ul li img { width:100%}
+.ad_container .ad_cont { margin:0px; padding:0px; width:auto}
+.box_programme { background:rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll -28px top}
+.prog_container { margin-left:35px;}	
+.box_rtprogramme {background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll -15px top;}
+ul.subnav { width: 377px;}
+
+
+}
+
+
+@media (max-width: 800px)
+{
+.header_ltop_container .main_logo{width:70%;}
+.header_ltop_container .main_logo img{width:100%;}
+.header_ltop_container .right_part_header{ margin-top:90px;}
+.header_ltop_container .right_part_header img{width:100%}
+#registraiton_ltop_container{ margin-bottom:20px;}
+.timing_l{ text-align:left;}
+.header_ltop_container .right_part_header { margin-top:0px;}
+.header_ltop_container .right_part_header h1 { font-size:20px;}
+.header_ltop_container .right_part_header .sponsor-top ul { width:auto}
+.header_ltop_container .right_part_header .social img { width:auto}
+.header_ltop_container .main_logo { width:100%}
+.first_picture_container { margin-top:0px; margin-bottom:20px; overflow:hidden}
+.box_programme { background:rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll 15px top}
+
+.box_rtprogramme {background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll 19px top;}
+
+.sponArea .sponFirst { float:none; display:block; text-align:center; width:100%; margin-bottom:20px;}
+.sponArea .sponFirst img { width:auto;}
+
+.sponArea ul { margin:0px; padding:0px; text-align:center}
+.sponArea ul li { margin:0px 15px 15px 0; padding:0px; float:none; display:inline-block; width:auto}
+.prog_container { margin-left:0px;}
+
+.lastSwiper { margin-left:0px;}
+
+.nav_ltop .register_lt a { font-size:22px; padding:5px 6px}
+
+
+}
+
+@media (max-width: 767px){
+.header_ltop_container .main_logo { width:auto; text-align:center; float:none; margin-bottom:20px; }
+.header_ltop_container .main_logo img { display:block; margin-left:auto; margin-right:auto; width:auto}
+.header_ltop_container .right_part_header { float:none; text-align:center}	
+.header_ltop_container .right_part_header h2 { margin-left:auto; font-size:22px;}
+.header_ltop_container .right_part_header .sponsor-top { margin-bottom:45px;}
+.marginbottom20.slft { float:none; overflow:hidden; margin-bottom:30px;}
+.srtl { float:none !important}
+.short_crisp_container { margin-top:0px;}
+.first_picture_container { margin-bottom:0px;}
+.header_ltop_container .right_part_header h1 { margin-bottom:0px;}
+.header_ltop_container .right_part_header .sponsor-top ul { float:none; overflow:hidden}
+.header_ltop_container .right_part_header .social { float:none}
+.nav_ltop_container .swiper-slide { margin-left:0px;}
+.about_the_lallantop .hdn_lt { font-size:17px;}
+
+.mobAdCode { display:block; margin:0px auto; width:320px;}
+.destopAdCode { display:none}
+
+
+.footer_ltop .mobAdCode { margin:0px auto; width:320px;}
+.ad_container  { display:none; float:none}
+
+
+}
+
+
+
+@media (max-width: 767px)
+{
+.header_ltop_container{ text-align:center}
+.header_ltop_container .main_logo{width:140px; float:none; margin:0 auto; text-align:center}
+.header_ltop_container .main_logo img{width:100%;}
+.header_ltop_container .right_part_header{ margin-top:20px;}
+.header_ltop_container .right_part_header img{width:100%}
+.timing_l{ text-align:left}
+.session_inner_cont .session_right{ padding-left:0; background:none;}
+.speaker_details .speaker_image{ margin-right:0; margin-bottom:20px;}
+.speaker_details .speaker_dt{ float:left; overflow:visible;position: initial;}
+#myModal .modal-dialog{ width:300px; margin:10% auto}
+.captcha_lt{ margin-bottom:10px;}
+#registraiton_ltop_container{ margin-bottom:10px;}
+
+.slft{float:left;}
+.srtl{float:right;}
+.session_inner_cont { float:left}
+
+.register_lt{position:static; width:100%;}
+ul.subnav{position:static; float:left; list-style:none; background-color:#d92027; width:100%;}
+
+}
+
+
+@media (max-width: 640px)
+{
+.header_ltop_container{ text-align:center}
+.header_ltop_container .main_logo{width:140px; float:none; margin:0 auto; text-align:center; position:relative; z-index:5555}
+.header_ltop_container .main_logo img{width:100%;}
+.header_ltop_container .right_part_header{ margin-top:20px;}
+.header_ltop_container .right_part_header img{width:100%}
+.timing_l{ text-align:left}
+.session_inner_cont .session_right{ padding-left:0; background:none;}
+.speaker_details .speaker_image{ margin-right:0; margin-bottom:20px;}
+.speaker_details .speaker_dt{ float:left; overflow:visible;position: initial;}
+#myModal .modal-dialog{ width:300px; margin:10% auto}
+.captcha_lt{ margin-bottom:10px;}
+#registraiton_ltop_container{ margin-bottom:10px;}
+.speakers_container .speaker_box .speaker_img{width:140px; height:140px;}
+
+.box_programme { background:rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll -10px top}
+.box_rtprogramme {
+    background: rgba(0, 0, 0, 0) url("http://media2.intoday.in/indiatoday/youthsummit/2013/delhi/prog-dot.png") repeat-y scroll -10px top;
+}
+
+}
+
+
+@media (max-width: 481px)
+{
+.header_ltop_container{ text-align:center}
+.header_ltop_container .main_logo{width:140px; float:none; margin:0 auto; text-align:center; margin-bottom:20px;}
+.header_ltop_container .main_logo img{width:100%;}
+.header_ltop_container .right_part_header{ margin-top:20px;}
+.header_ltop_container .right_part_header img{width:100%}
+.timing_l{ text-align:left; font-size:11px;}
+.session_inner_cont .session_right{ padding-left:0; background:none;}
+.speaker_details .speaker_image{ margin-right:0; margin-bottom:20px;}
+.speaker_details .speaker_dt{ float:left; overflow:visible;position: initial;}
+#myModal .modal-dialog{ width:300px; margin:10% auto}
+.captcha_lt{ margin-bottom:10px;}
+#registraiton_ltop_container{ margin-bottom:10px;}
+.speakers_container .speaker_box .speaker_img{width:120px; height:120px;}
+.box_programme { background-position: -16%;}
+.nav_ltop .register_lt a { font-size:18px; padding:8px 15px}
+
+.header_ltop_container .right_part_header h1, .header_ltop_container .right_part_header h2 { font-size:14px; line-height:26px !important; margin:0px; padding:0px;}	
+.header_ltop_container .right_part_header .sponsor-top { margin-top:20px;}
+
+.box_programme, .box_rtprogramme { background:none}
+
+.header_ltop_container .right_part_header .sponsor-top li:first-child {width: 24%;}
+
+}
+
+@media screen and (min-width:319px) and (max-width: 320px)
+{
+.slft{float:none;}
+.srtl{float:none;}
+.mobAdCode { margin-left:-15px;}
+.ad_container { margin-left:-20px; background:none}
+
+}
+
+
+.proPadd  { padding-bottom:10px;}
+
+
+
+
+

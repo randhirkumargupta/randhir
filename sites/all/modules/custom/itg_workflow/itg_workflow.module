@@ -298,12 +298,12 @@ function itg_workflow_node_presave($node) {
     return;
   }
   
-  if ((isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') || (empty($node->field_story_source_type[LANGUAGE_NONE][0]['value']))) {
+  if (isset($node->op) && !empty($node->op)) {
     if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
       if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
         $node->workbench_moderation_state_new = 'published';
       }
-      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
+      if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])) {
         $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i'); //2017-02-21 23:45
       }
     }
@@ -408,11 +408,9 @@ function itg_workflow_node_presave($node) {
       }
     }
   }
- /* else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && arg(0) == 'node' && arg(2) == 'edit' && is_numeric(arg(1))) { //comment this code before migrate        
-    if ($node->status == 1) {
+  else if ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && arg(0) == 'node' && arg(2) == 'edit' && is_numeric(arg(1)) && isset($node->op) && $node->status == 1) { //comment this code before migrate
       $node->workbench_moderation_state_new = 'published';
-    }
-  }*/
+  }
   if (!empty($node->op)) {
     if($node->type == 'breaking_news' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])) {
       $node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'] = date('Y-m-d H:i');
@@ -833,6 +831,19 @@ function itg_workflow_stop_email_during_bulk_operation($request) {
   return TRUE;
 }
 
+/**
+ * Common Function for Getting all the cities of the story
+ * @param array $tids
+ * @return string
+  */
+function story_city_list($tids){
+  $city = array();
+  foreach ($tids as $tax){
+    $city[] = $tax['taxonomy_term']->name;
+
+  }
+  return $all_city = implode(',', $city);
+}
 
 /**
  * Implements hook_mail

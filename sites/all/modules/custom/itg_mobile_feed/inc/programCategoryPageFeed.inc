@@ -6,14 +6,13 @@
 
 /**
  * main function for generate programCategoryPageFeed xml feed
+ *
  * @return string $output
  */
 function programCategoryPageFeed() {
   $output = "";
   $conf_array = tidConfig();
-
   $storytag = array();
-
   // check tid argument
   $tid_arg = arg(1);
   if ($tid_arg && is_numeric($tid_arg)) {
@@ -24,7 +23,7 @@ function programCategoryPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+  $term_feed_path = "public://xml_it/videos";
   $return_flag = "";
   foreach ($section_list as $key => $value) {
 
@@ -54,7 +53,6 @@ function programCategoryPageFeed() {
         $output .= program_section_page_feed_footer();
         // xml file writing..
         if ($output) {
-
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
@@ -62,12 +60,13 @@ function programCategoryPageFeed() {
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
  * function for generate photoVideoPage xml feed
  * @pram int $tid
+ *
  * @return array $data
  */
 function generateProgramCategoryPage($tid) {
@@ -77,7 +76,6 @@ function generateProgramCategoryPage($tid) {
 
   if ($result_get['key_value'] != "") {
     $data_str = $result_get['key_value'];
-    //echo "redis get - ". $output; exit();
     $data_ar = explode("##listcount##", $data_str);
     $data['lcount'] = $data_ar[0];
     $data['data'] = $data_ar[1];
@@ -139,10 +137,9 @@ function generateProgramCategoryPage($tid) {
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
       foreach ($result as $reskey => $resvalue) {
-
         $listcount++;
 
-        $title = $resvalue['title'];
+        $title = html_entity_decode($resvalue['title']);
         $type = $resvalue['type'];
         $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
         $nid = $resvalue['nid'];
@@ -159,7 +156,7 @@ function generateProgramCategoryPage($tid) {
         $create_date = date("F d, Y", $created);
         $create_datetime = date(DATE_ATOM, $created);
 
-        $output .= "<item><title><![CDATA[" . $title . "]]></title><shortdescription><![CDATA[" . $field_story_kicker_text_value . "]]></shortdescription><thumbimage><![CDATA[" . $file_medium_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate></item>";
+        $output .= "<item><title><![CDATA[" . $title . "]]></title><shortdescription><![CDATA[" . $field_story_kicker_text_value . "]]></shortdescription><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate></item>";
         $fl = generateVideoDetailPageFeed($nid);
       }
     }
@@ -169,7 +166,6 @@ function generateProgramCategoryPage($tid) {
 
     $result_set = setRedis($redis_key, $data_fi, $ttl);
   }
-
   return $data;
 }
 
