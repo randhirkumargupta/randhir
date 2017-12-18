@@ -370,6 +370,7 @@ if ($theme != 'itgadmin') {
                                         </div>                     
                                     </div> 
                                 </div>
+                            </div>
                                 <div class="col-md-12 col-sm-6 itg-layout-375">
                                     <div class="widget-help-text"><?php print t(' Draggable'); ?> ( <strong><?php print t('Top performers'); ?></strong> )</div>
                                     <div class="itg-widget">
