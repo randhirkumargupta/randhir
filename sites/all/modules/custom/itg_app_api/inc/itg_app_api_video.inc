@@ -1052,7 +1052,7 @@ function topstoriesList($source) {
         if ($changed) {
             $changed_datetime = date("Y-m-d H:i:s", $changed);
         } else {
-            $changed_datetime = "";
+            $changed_datetime = date("Y-m-d H:i:s", $created);
         }
 //json tag writing
 //if ($type == "story") {
