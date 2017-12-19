@@ -583,19 +583,23 @@ function analytics_node_data($nid, $total, $source) {
             $analytics_data_array['data_count_node_share'] = $data_count_node_share_number;
             //END
         }
-
-        if ($total == 'total') {
-            // return the total count
-            // Caculate sum of all data.
-            foreach ($analytics_data_array as $counting) {
-                if (is_int($counting)) {
-                    $final_count_result = $final_count_result + $counting;
-                }
-            }
-            return $final_count_result;
-        } else {
-            // return the associated Array
+        if($source=="commentcont"){
             return $analytics_data_array;
+        }
+        else{
+            if ($total == 'total') {
+                // return the total count
+                // Caculate sum of all data.
+                foreach ($analytics_data_array as $counting) {
+                    if (is_int($counting)) {
+                        $final_count_result = $final_count_result + $counting;
+                    }
+                }
+                return $final_count_result;
+            } else {
+                // return the associated Array
+                return $analytics_data_array;
+            }
         }
     }
 }
