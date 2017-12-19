@@ -300,7 +300,7 @@ function itg_workflow_node_presave($node) {
   
   if (isset($node->op) && !empty($node->op)) {
     if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast') {
-      if (!empty($node->workbench_moderation['current']->state) && $node->workbench_moderation['current']->state == 'published' && $node->status == 1) {
+      if (!empty($node->workbench_moderation['current']->state) && (($node->workbench_moderation['current']->state == 'published' && $node->status == 1) || ($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated' && $node->status == 1))) {
         $node->workbench_moderation_state_new = 'published';
       }
       if ($node->workbench_moderation_state_new == 'published' && $node->workbench_moderation_state_current != 'published' && empty($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])) {
