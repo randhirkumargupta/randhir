@@ -11,9 +11,7 @@ global $base_url;
                 <div class="topRight">
                     <div class="photosec">
                         <img src="<?php echo file_create_url(file_default_scheme() . '://section_header_images/meetthe-img.png'); ?>" alt="">
-
                     </div>
-
                     <div class="brandLogo">
                         <ul>
                             <li><a href="http://indiatoday.intoday.in" target="_blank"><img src="<?php echo file_create_url(file_default_scheme() . '://section_header_images/IT-logo.jpg') ?>" alt=""></a></li>
