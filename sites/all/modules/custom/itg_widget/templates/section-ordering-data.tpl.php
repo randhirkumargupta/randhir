@@ -320,7 +320,7 @@ else if ($widget_style == 'in-depth') {
               if (!empty($data)) {
                 foreach ($data as $count => $entity) {
                   $desc = $entity['title'];
-				  $nid = $entity['nid'];
+                  $nid = $entity['nid'];
                   if ($count > 1) {
                     if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
                       $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
