@@ -481,7 +481,7 @@ function getNodeViewCount($nid) {
 
     $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
     $nc_view = $node_anyalytics['node_view_count'];
-    return $nc_view;
+    return $nc_view; 
 }
 
 /*
