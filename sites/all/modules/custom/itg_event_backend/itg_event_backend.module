@@ -2462,8 +2462,8 @@ function itg_event_backend_section_detail($nid) {
   $query->leftjoin('field_data_field_event_section', 'fes', 'fes.entity_id = n.nid');
   $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchAll();
-  if(count($result) > 0){
-	return $result[0]->field_event_section_target_id;
+  if (count($result) > 0) {
+    return $result[0]->field_event_section_target_id;
   }
   return FALSE;
 }
@@ -2484,7 +2484,7 @@ function itg_event_backend_section_menu_detail($nid) {
   $query->fields('dfet', array('field_event_types_tid'));
   $query->fields('femfc', array('field_e_menu_font_color_rgb'));
   $query->fields('fehfc', array('field_e_highlighted_font_color_rgb'));
-  
+
   $query->leftjoin('field_data_field_event_start_date', 'fesd', 'fesd.entity_id = n.nid');
   $query->leftjoin('field_data_field_config_home', 'fch', 'fch.entity_id = n.nid');
   $query->leftjoin('field_data_field_story_kicker_text', 'skt', 'skt.entity_id = n.nid');
@@ -2495,7 +2495,7 @@ function itg_event_backend_section_menu_detail($nid) {
   $query->leftjoin('field_data_field_event_types', 'dfet', 'dfet.entity_id = n.nid');
   $query->leftjoin('field_data_field_e_menu_font_color', 'femfc', 'femfc.entity_id = n.nid');
   $query->leftjoin('field_data_field_e_highlighted_font_color', 'fehfc', 'fehfc.entity_id = n.nid');
-  
+
   $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchAll();
   return $result;
