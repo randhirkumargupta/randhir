@@ -235,8 +235,7 @@ function itg_layout_manager_block_view($delta = '') {
 
   switch ($delta) {
     case 'header_block':
-      $arg = arg();
-      
+      $arg = arg();      
       if (function_exists('get_section_header_menu_and_content')) {
         $section_header = get_section_header_menu_and_content($arg);
         if ($section_header) {
