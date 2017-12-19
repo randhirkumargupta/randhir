@@ -5,19 +5,19 @@ global $base_url;
     <div class="header-ads header_ltop_container">
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                <div class="main_logo"> <a href="index.jsp" title="Salaam cricket 2017"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/section_header_images/logo.png" alt="Salaam cricket 2017"></a> </div>
+                <div class="main_logo"> <a href="/" title="Salaam cricket 2017"><img src="<?php echo file_create_url(file_default_scheme() . '://section_header_images/logo.png') ?>" alt="Salaam cricket 2017"></a> </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-8 col-sm-12">
                 <div class="topRight">
                     <div class="photosec">
-                        <img src="https://itgd-mum-dev-static.s3.amazonaws.com/section_header_images/meetthe-img.png" alt="">
+                        <img src="<?php echo file_create_url(file_default_scheme() . '://section_header_images/meetthe-img.png'); ?>" alt="">
 
                     </div>
 
                     <div class="brandLogo">
                         <ul>
-                            <li><a href="http://indiatoday.intoday.in" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/section_header_images/IT-logo.jpg" alt=""></a></li>
-                            <li><a href="http://aajtak.intoday.in" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/section_header_images/AT-logo.png" alt=""></a></li>
+                            <li><a href="http://indiatoday.intoday.in" target="_blank"><img src="<?php echo file_create_url(file_default_scheme() . '://section_header_images/IT-logo.jpg') ?>" alt=""></a></li>
+                            <li><a href="http://aajtak.intoday.in" target="_blank"><img src="<?php echo file_create_url(file_default_scheme() . '://section_header_images/AT-logo.png') ?>" alt=""></a></li>
                         </ul>
                     </div>
                 </div>
