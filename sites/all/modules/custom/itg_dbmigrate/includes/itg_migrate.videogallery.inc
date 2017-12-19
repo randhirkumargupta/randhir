@@ -314,6 +314,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     if (empty((string) $row->xml->metatags->sefurl)) {
       $row->xml->metatags->sefurl = itg_common_custompath_insert_val(trim((string) $row->xml->longheadline));
     }
+    
     if (empty($row->xml->modifieddate) || (string) $row->xml->modifieddate == 0) {
       $row->xml->modifieddate = (string) $row->xml->createddate;
     }
@@ -572,6 +573,8 @@ class ItgVideogalleryMigration extends XMLMigration {
   }
 
   public function prepare($node, stdClass $row) {
+    //for update sef
+    $node->sef_url = array('sef' => (string) $row->xml->metatags->sefurl);
     $node->path['alias'] = (string) $row->xml->metatags->sefurl; // path alias set because upper not work
     $node->teaser = (string) $row->xml->description;
     if (!empty($row->category_new)) {

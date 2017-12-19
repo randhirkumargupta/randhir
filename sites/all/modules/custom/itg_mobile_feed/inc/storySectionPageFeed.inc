@@ -6,6 +6,7 @@
 
 /**
  * main function for generate storySectionPage xml feed
+ *
  * @return string $output
  */
 function storySectionPageFeed() {
@@ -69,12 +70,12 @@ function storySectionPageFeed() {
   }
 
   if ($output) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $term_feed_path = "public://xml_it/stories";
     $file_name = "storysectionlisting.xml";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 

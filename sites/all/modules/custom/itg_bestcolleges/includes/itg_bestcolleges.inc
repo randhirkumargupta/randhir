@@ -279,5 +279,18 @@ function itg_bestcollege_configuration_form($form) {
     '#required' => TRUE,
   );
 
+  $form['bestcollege_add_video'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Video migrate array'),
+    '#default_value' => variable_get('bestcollege_add_video', ''),
+    '#required' => TRUE,
+  );
+
+  $form['bestcollege_get_video'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Video get json'),
+    '#default_value' => variable_get('bestcollege_get_video', ''),
+    '#required' => TRUE,
+  );
   return system_settings_form($form);
 }

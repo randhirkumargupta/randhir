@@ -205,7 +205,6 @@
                 top: 0;
                 bottom: 3px;
                 margin: auto;
-
             }
             .story-photo-list-wrapper h3 span {
                 background: #fff;
@@ -237,19 +236,7 @@
                 padding: 10px;
                 position: relative;
             }
-            .story-section .story-tech-chunk .tech-rating {
-                max-width: 88px;
-                background: #b00808;
-                color: #fff;
-                font-size: 22px;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                text-align: center;
-                line-height: 28px;
-                font-weight: 700;
-                padding: 0 10px;
-            }
+
             .field .field-label {
                 font-weight: bold;
             }
@@ -321,7 +308,6 @@
                 top: 0;
                 bottom: 3px;
                 margin: auto;
-
             }
             .amp-other-gallery h2 span {
                 background: #fff;
@@ -805,12 +791,239 @@
             #live-blog-amp-share .social-share #_AMP_content_0{top: -5px; left: 25px;transform: translateY(-60%);}
             .live-block .breaking-section amp-instagram{width: 490px; margin: 0 auto}
             .live-block .timeline{border-bottom: 1px solid #ddd;padding-bottom: 25px;margin-bottom: 25px;}
+
+            /* define some contants for photogallery */
+            .collapsible-captions {
+                --caption-height: 32px;
+                --image-height: 300px;
+                --caption-padding: 1rem;
+                --button-size: 28px;
+                --caption-color: #f5f5f5;;
+                --caption-bg-color: #000;
+                background: var(--caption-bg-color);
+            }
+            .collapsible-captions * {
+                /* disable chrome touch highlight */
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+                box-sizing: border-box;
+            }
+            /* see https://ampbyexample.com/advanced/how_to_support_images_with_unknown_dimensions/ */
+            .collapsible-captions .fixed-height-container {
+                position: relative;
+                width: 100%;
+                height: var(--image-height);
+            }
+            .collapsible-captions amp-img img {
+                object-fit: contain;
+            }
+            .collapsible-captions figure {
+                margin: 0;
+                padding: 0;
+            }
+            /* single line caption */
+            .collapsible-captions figcaption {
+                position: absolute;
+                bottom: 0;
+                margin: 0;
+                width: 100%;
+                /* inital height is one line */
+                max-height: var(--caption-height);
+                line-height: var(--caption-height);
+                padding: 0 var(--button-size);
+                /* cut text after first line and show an ellipsis */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                /* animate expansion */
+                transition: max-height 200ms cubic-bezier(0.4, 0, 0.2, 1);
+                /* overlay the carousel icons */
+                z-index: 1000;
+                /* some styling */
+                color: var(--caption-color);
+                background: var(--caption-bg-color);      
+            }
+            /* expanded caption */
+            .collapsible-captions figcaption.expanded {
+                /* add padding and show all of the text */
+                padding: var(--button-size);
+                line-height: inherit;
+                white-space: normal;
+                text-overflow: auto;
+                max-height: calc(var(--caption-height) + var(--image-height));
+                /* show scrollbar in case caption is larger than image */
+                overflow: auto;
+            }
+            /* don't show focus highlights in chrome */
+            .collapsible-captions figcaption:focus {
+                outline: none;
+                border: none;
+            }
+            /* the expand/collapse icon */
+            .collapsible-captions figcaption span {
+                display: block;
+                position: absolute;
+                top: calc((var(--caption-height) - var(--button-size)) / 2);
+                right: 2px;
+                width: var(--button-size);
+                height: var(--button-size);
+                line-height: var(--button-size);
+                text-align: center;
+                font-size: 12px;
+                color: inherit;
+                cursor: pointer; 
+            }
+
+            /* define some contants for footer-latest */
+            .footer-latest {
+                --caption-height: 42px;
+                --image-height: 300px;
+                --caption-padding: 1rem;
+                --button-size: 28px;
+                --caption-color: #f5f5f5;;
+                --caption-bg-color: #000;
+                background: var(--caption-bg-color);
+            }
+
+            <!-- Tech Story -->
+            .story-section .story-tech-chunk .tech-rating {
+                width: 88px;
+                height: 33px;
+                background: #b00808;
+                color: #fff;
+                font-size: 28px;
+                position: absolute;
+                top: 0px;
+                right: 10px;
+                text-align: center;
+                line-height: 33px;
+                font-weight: 700
+            }
+            .tech-pros-cons-main h2 {
+                font-size: 28px;
+                line-height: 45px;
+                color: #000;
+                font-weight: bold;
+                padding: 0 0 0 10px;
+                float: left;
+                margin-left: 42%;
+                width: 58%;
+                margin-bottom: 10px
+            }
+            .tech-pros-cons-main h2 strong {
+                font-size: 30px;
+                line-height: 35px;
+                color: #fff;
+                background-color: #b00808;
+                float: right;
+                padding: 0 10px
+            }
+            ul.pron-cons-img {
+                width: 42%;
+                float: left;
+                list-style:none
+            }
+            ul.tech-pron-cons-img {
+                width: 41.66666667%;
+                float: left
+            }
+            ul.tech-pros {
+                list-style: disc;
+                width: 27%;
+                float: left;
+                margin-left: 4%
+            }
+            ul.tech-cons {
+                list-style: disc;
+                width: 27%;
+                float: left
+            }
+            ul.tech-cons li,
+            ul.tech-pros li {
+                font-size: 14px;
+                line-height: 26px;
+                color: #939393;
+                float: left;
+                width: 100%
+            }
+            ul.tech-cons li span,
+            ul.tech-pros li span {
+                color: #b00808;
+                font-size: 17px;
+                font-weight: bold;
+                line-height: 24px;
+                list-style: outside none none;
+                margin-left: -14px;
+                text-transform: uppercase
+            }
+            ul.tech-cons li:first-child,
+            ul.tech-pros li:first-child {
+                list-style: none
+            }
+            ul.pron-cons-img li img {
+                margin-right: 10%;
+                margin-top: -53px;
+                width: 92%
+            }
+            .tech-pros-cons-main {
+                width: 100%;
+                float: left;
+                padding: 10px;
+                background-color: #edebec
+            }
+            .tech-photos .tech-photos-head-section {
+                display: block
+            }
+            .tech-photos .tech-photos-head-section .tech-photos-count {
+                color: #B5B5B5;
+                font-size: 13px;
+                margin-bottom: 10px;
+                display: block
+            }
+            .tech-photos{
+                text-align: center;
+            }
+            .tech-photos .tech-photo-item {
+                /*width: 30%;*/
+                display: inline-block;
+                margin-right: 3%;
+                position: relative
+            }
+            .tech-photos .tech-photo-item .tech-photo-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                text-align: center;
+                color: #fff;
+                background: rgba(0, 0, 0, 0.7);
+                width: 100%;
+                height: 100%
+            }
+            .tech-photos .tech-photo-item .tech-photo-overlay a .tech-photo-seemore {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                line-height: 22px
+            }
+            .tech-photos .tech-photo-item .tech-photo-overlay a,
+            .tech-photos .tech-photo-item .tech-photo-overlay a span:hover {
+                color: #fff;
+                text-decoration: underline
+            }
+            h3.tech-photo-head,.tech-photos-count{text-align:left;}
+            @media only screen and (max-width: 767px) {
+                ul.pron-cons-img{width:100%;}
+                .tech-pros-cons-main h2{margin-left:0; width:100%;}
+                ul.pron-cons-img li img{margin-top:0;}
+                ul.tech-cons,ul.tech-pros{width:100%; margin-left:6%; box-sizing:border-box;}
+            }
+  
         </style>
-        <?php //endif;  ?>
     </head>
     <body class="<?php print $classes; ?>" <?php print $attributes; ?>>
         <?php print $page_top; ?>
         <?php print $page; ?>
         <?php print $page_bottom; ?>
     </body>
+   
 </html>

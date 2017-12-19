@@ -6,6 +6,7 @@
 
 /**
  * main function for generate videoCategoryPage xml feed
+ *
  * @return string $output
  */
 function videoCategoryPageFeed() {
@@ -24,11 +25,10 @@ function videoCategoryPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+  $term_feed_path = "public://xml_it/videos";
   $return_flag = "";
   // loop on section
   foreach ($section_list as $key => $value) {
-
     // check section is videogallery
     $node_count = customNodeCount('videogallery', $value);
     // loop on category
@@ -54,22 +54,21 @@ function videoCategoryPageFeed() {
         $output .= getMobileFeedXmlFooter();
         // xml file writing..
         if ($output) {
-          //echo "andyrr here".$output; exit();
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
-      // }
     }
   }
   //return $return_flag;
   header('Content-Type: application/xml; charset=utf-8');
   echo $output;
-  die();
+  drupal_exit();
 }
 
 /**
  * function for generate photoVideoPage xml feed
  * @pram int $tid
+ *
  * @return array $data
  */
 function generateVideoCategoryPage($tid) {
@@ -127,6 +126,7 @@ function generateVideoCategoryPage($tid) {
 
       $query->fields('mi', array('field_story_medium_image_fid'));
       $query->fields('si', array('field_story_small_image_fid'));
+      $query->fields('li', array('field_story_large_image_fid'));
       $query->fields('rc', array('field_common_related_content_value'));
 
       $query->fields('kt', array('field_story_kicker_text_value'));
@@ -139,23 +139,28 @@ function generateVideoCategoryPage($tid) {
       foreach ($result as $reskey => $resvalue) {
         // node feed tag
         $listcount++;
-        $title = $resvalue['title'];
+
+        $title = html_entity_decode($resvalue['title']);
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $created = $resvalue['created'];
         $is_fav = getNidIsFavorite($nid);
         $alias = drupal_get_path_alias('node/' . $nid . '');
         $weburl = $base_url . "/" . $alias;
-        $is_syndications = $resvalue['field_story_syndication_value'];
+	    $is_syndications = '0';
+        if ($resvalue['field_story_syndication_value'] == 'Yes') {
+          $is_syndications = '1';
+        }
+        
         $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
-        $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+        $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
         $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
 
         // create date formating
-        $create_date = date("F d, Y", $created);
+        $create_date = date("Y-m-d", $created);
         $create_datetime = date(DATE_ATOM, $created);
-        $output .= "<item><title>" . $title . "</title><mediumimage><![CDATA[" . $file_medium_img_url . "]]></mediumimage><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><syndications>" . $is_syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
+        $output .= "<item><title>" . $title . "</title><mediumimage><![CDATA[" . $file_large_img_url . "]]></mediumimage><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><syndications>" . $is_syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
         // generate video detail page
         $fl = generateVideoDetailPageFeed($nid);
       }
@@ -163,7 +168,6 @@ function generateVideoCategoryPage($tid) {
     $data['lcount'] = $listcount;
     $data['data'] = $output;
     $data_fi = $listcount . "##listcount##" . $output;
-
     // set into redis
     $result_set = setRedis($redis_key, $data_fi, $ttl);
   }

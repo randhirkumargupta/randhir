@@ -488,12 +488,31 @@ if (!empty($content)):
                             print '<img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">';
                         }
                         else {
-                          $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+                            $flag = TRUE;
+                            $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                             $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                             if (file_exists($story_image)) {
-                                $file_uri = file_create_url($story_image);
+                              $file_uri = file_create_url($story_image);
+                              $flag = FALSE;
+                            }else{
+                              // For Video image
+                              $video_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+                              $video_image = itg_get_story_extra_large_image($video_id);
+                              if (file_exists($video_image)) {
+                                $file_uri = file_create_url($video_image);
+                                $flag = FALSE;
+                              }
+                              else {
+                                // For Photogallery image
+                                $photog_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+                                $photog_image = itg_get_story_extra_large_image($photog_id);
+                                if (file_exists($photog_image)) {
+                                  $file_uri = file_create_url($photog_image);
+                                  $flag = FALSE;
+                                }
+                              }
                             }
-                            else {
+                            if($flag) {
                                 $file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                             }
                             print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '"><span class="story-photo-icon">';
@@ -523,14 +542,35 @@ if (!empty($content)):
                 else {
                   ?>
                   <div class="stryimg"><?php
+                    $flag = TRUE;
                     $story_image = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
                     $getimagetags = itg_image_croping_get_image_tags_by_fid($node->field_story_extra_large_image[LANGUAGE_NONE][0]['fid']);
                     if (file_exists($story_image)) {
                       $file_uri = file_create_url($story_image);
+                      $flag = FALSE;
                      //$icon_detail = '<span class="story-photo-icon"><i class="fa fa-play-circle"></i>
                                     //<i class="fa fa-camera"></i></span>';
                     }
                     else {
+                      // For Video image
+                      $video_id = $node->field_story_associate_video[LANGUAGE_NONE][0]['target_id'];
+                      $video_image = itg_get_story_extra_large_image($video_id);
+                      if (file_exists($video_image)) {
+                        $file_uri = file_create_url($video_image);
+                        $flag = FALSE;
+                      }
+                      else {
+                        // For Photogallery image
+                        $photog_id = $node->field_associate_photo_gallery[LANGUAGE_NONE][0]['target_id'];
+                        $photog_image = itg_get_story_extra_large_image($photog_id);
+                        if (file_exists($photog_image)) {
+                          $file_uri = file_create_url($photog_image);
+                          $flag = FALSE;
+                        }
+                      }
+                    }
+
+                    if($flag) {
                       $file_uri = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image647x363.jpg');
                     }
                     print '<a href="javascript:void(0);" class="' . $clidk_class_slider . '" data-widget="' . $widget_data . '"><img  alt="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt'] . '" title="' . $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title'] . '" src="' . $file_uri . '">        

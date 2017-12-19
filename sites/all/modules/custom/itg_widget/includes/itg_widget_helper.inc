@@ -6,7 +6,7 @@
  */
 function __itg_widget_helper_data_insert($nid) {
   itg_watchdog("request", $_REQUEST['op']);
-    if ($nid && $_REQUEST['op'] !='Apply' && $_REQUEST['op'] !='Save') {
+   // if ($nid && $_REQUEST['op'] !='Apply' && $_REQUEST['op'] !='Save') {
         __itg_widget_helper_data_delete($nid);
         $node_load_data = node_load($nid , null , TRUE);
         $node_load_data->status = itg_common_get_node_status_from_tbl($nid);
@@ -32,7 +32,7 @@ function __itg_widget_helper_data_insert($nid) {
         } catch (Exception $ex) {
             drupal_set_message($ex->getMessage(), 'error');
         }
-    }
+    //}
 }
 
 function itg_common_get_node_status_from_tbl($nid) {
@@ -306,7 +306,8 @@ function itg_widget_order_reorder_form() {
       'views_form_photo_carousel_widget_photo_carousel', // photo carousel
       'views_form_photo_carousel_widget_video_carousel',
       'views_form_widget_anchors_listing_anchors_listing_widget',
-      'views_form_section_wise_content_ordering_list_we_may_suggest_widget'
+      'views_form_section_wise_content_ordering_list_we_may_suggest_widget',
+      'views_form_section_wise_top_story_widget_order_reorder_page_1'
     );
     return $forms;
 }
@@ -352,7 +353,9 @@ function _get_widget_name($view_name, $page_name) {
         $widget = 'video_carousel_list_widget';
     } elseif ($page_name == 'dont_miss_content') {
         $widget = 'dont_miss_content_widget';
-    }
+    } elseif ($view_name == "views_form_section_wise_top_story_widget_order_reorder_page" && $page_name == "page") {
+        $widget = 'section_manual_order_widget';
+    } 
     return $widget;
 }
 
@@ -394,6 +397,9 @@ function itg_widget_get_widget_name_from_views($view_name, $view_current_display
     }
     if ($view_name == 'section_wise_content_ordering_list' && $view_current_display == 'we_may_suggest_widget') {
         $widget_name = "we_may_suggest_widget";
+    }
+    if ($view_name == 'section_wise_top_story_widget_order_reorder' && $view_current_display == 'page_1') {
+        $widget_name = "section_manual_order_widget";
     }
     return $widget_name;
 }
@@ -452,19 +458,22 @@ function itg_widget_get_primary_cat($nid, $is_rss = FALSE) {
  * 
  * @param int $nid
  * @param string $widget
- * 
+ * @param int $cat_id (Added: add category filter for widget)
  * @return int
  */
 function itg_widget_check_node_in_widget($nid, $widget) {
-    $count = 0;
-    if (!empty($nid) && !empty($widget)) {
-        $query = db_select('itg_widget_order', 'iwo')
-          ->fields('iwo', array('nid'))
-          ->condition('iwo.nid', $nid)
-          ->condition('iwo.widget', $widget);
-        $count = $query->execute()->rowCount();
+  $count = 0;
+  if (!empty($nid) && !empty($widget)) {
+    $query = db_select('itg_widget_order', 'iwo')
+        ->fields('iwo', array('nid'))
+        ->condition('iwo.nid', $nid)
+        ->condition('iwo.widget', $widget);
+    if (!empty($cat_id) && is_numeric($cat_id)) {
+      $query->condition('cat_id', $cat_id);
     }
-    return $count;
+    $count = $query->execute()->rowCount();
+  }
+  return $count;
 }
 
 /**
@@ -512,4 +521,25 @@ function itg_content_inactive_videogallery() {
     itg_widget_handle_unpublished_node($node->nid);
   }
   itg_watchdog("nodes_expiry" , $nodeid);
+}
+
+/**
+ * Function to use insert data into custom table.
+ * @param array $form_state
+ * @param string $widget_name
+ */
+function itg_save_section_top_story_widget_data($form_state, $widget_name) {
+  $selected_node = $form_state['selection'];
+  $category_id = $_GET['category_tid'];
+  if (empty($category_id) || $category_id == 0) {
+    return;
+  }
+  if (count($selected_node)) {
+    foreach ($selected_node as $node) {
+      $is_node_in_widget = itg_widget_check_node_in_widget($node, $widget_name, $category_id);
+      if (!$is_node_in_widget) {
+        itg_widget_insert_widget_data($node, $widget_name, $category_id);
+      }
+    }
+  }
 }
