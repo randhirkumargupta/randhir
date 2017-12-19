@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<script language="Javascript" type="text/javascript" src="js/jquery-1.4.1.js"></script>
+	<script language="Javascript" type="text/javascript" src="js/jquery.lwtCountdown-1.0.js"></script>
+	<link rel="Stylesheet" type="text/css" href="css/countdown.css"></link>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   
+	<title>Countdown</title>
+</head>
+
+<body>
+<div class="countdownOlympics">
+		<div class="countdown1">
+			
+			<div class="dash days_dash">
+				<div class="digit">0</div>
+				<div class="digit">0</div>
+			</div>
+            
+			<div class="seprator"></div>
+            
+			<div class="dash hours_dash">
+				<div class="digit">0</div>
+				<div class="digit">0</div>
+			</div>
+			
+            <div class="seprator"></div>
+            
+			<div class="dash minutes_dash">
+				<div class="digit">0</div>
+				<div class="digit">0</div>
+			</div>
+			
+            <div class="seprator"></div>
+            
+			<div class="dash seconds_dash">
+				<div class="digit">0</div>
+				<div class="digit">0</div>
+			</div>
+		
+		</div>
+				<div style="clear: both"></div>
+		<div class="countdown2">
+		
+			<span class="dash1 hours_dash">
+				<span class="digit">0</span><span class="digit">0</span><span class="caption">Hours</span>
+			</span>
+
+			<span class="dash1 minutes_dash">
+				<span class="digit">0</span><span class="digit">0</span><span class="caption">Minutes</span>
+			</span>
+
+		</div>
+		<div style="clear: both"></div>
+		
+
+<div style="clear: both"></div>
+
+
+		<script language="javascript" type="text/javascript">
+			jQuery(document).ready(function() {
+				$('.countdown1').countDown({
+					targetDate: {
+						'day': 		28,
+						'month': 	07,
+						'year': 	2012,
+						'hour': 	1,
+						'min': 		30,
+						'sec': 		1
+					}
+				});
+
+				$('.countdown2').countDown({
+					targetDate: {
+						'day': 		28,
+						'month': 	07,
+						'year': 	2012,
+						'hour': 	1,
+						'min': 		30,
+						'sec': 		1
+					}
+				});
+
+				
+				
+			});
+		</script>
+        </div>
+
+</body>
+
+</html>
+
+

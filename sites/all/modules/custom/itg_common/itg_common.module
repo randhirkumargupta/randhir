@@ -1572,6 +1572,9 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
     if ($frame_url['scheme'] != 'https') {
       $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
     }
+    if (strpos($frame_url, 'mega-review/embed') !== false) {
+      $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
+    }
     else {
     $frame = '<amp-iframe width="200" height="100"
     sandbox="allow-scripts allow-same-origin"
@@ -1805,3 +1808,16 @@ function itg_common_cache_clear($cache_array = array()) {
 //  
 //  
 //}
+
+/**
+ * Get calnder week start and end date
+ * @param array $week
+ * @param array $year
+ * @return array
+ */
+function _get_calender_week_start_end_date($week, $year) {
+  $dto = new DateTime();
+  $ret['week_start'] = $dto->setISODate($year, $week)->format('Y-m-d');
+  $ret['week_end'] = $dto->modify('+6 days')->format('Y-m-d');
+  return $ret;
+}

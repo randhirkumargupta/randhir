@@ -27,13 +27,6 @@ if ($theme != 'itgadmin') {
   <div id="page">
       <header class="header" id="header" role="banner">
           <section class="header-top">
-              <div class="container header-logo">
-                  <?php if ($logo): ?>
-                    <div class="logo">
-                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-                    </div>
-                  <?php endif; ?>         
-              </div>
               <?php if ($site_name || $site_slogan): ?>
                 <div class="header__name-and-slogan" id="name-and-slogan">
                     <?php if ($site_name): ?>
@@ -118,7 +111,7 @@ if ($theme != 'itgadmin') {
                 <?php endif; ?>
                 <div class="row itg-top-section">
                     <div class="top-block">
-                        <div class="top-colum-2">
+                        <div class="col-sm-8 col-md-8 col-lg-5 home-top-featured">
                             <div class="widget-help-text">Template widgets ( <strong>Home Page Feature</strong> )</div>
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -142,7 +135,7 @@ if ($theme != 'itgadmin') {
                                 </div>
                             </div>
                         </div>
-                        <div class="top-colum-1">
+                        <div class="col-sm-4 col-md-4 col-lg-3 home-top-story">
                             <div class="widget-help-text">Template widgets (<strong>Top Story</strong>)</div>
                             <div class="itg-widget">
                                 <div class="top-n-most-popular-stories">
@@ -179,9 +172,9 @@ if ($theme != 'itgadmin') {
                                 </div>
                             </div>
                         </div>
-                        <div class="top-colum-3">
+                        <div class="col-sm-12 col-md-12 col-lg-4 top-rhs-add">
                             <div class="widget-help-text">Non Draggable ( <strong>Ad widget</strong> )</div>
-                            <div class="itg-widget-parent m-bottom40">
+                            <div class="col-sm-6 col-lg-12 top-rhs-add-child">
                                 <div class="itg-widget">
                                     <div class="ad-widget">
                                         <div class="sidebar-ad">
@@ -194,7 +187,7 @@ if ($theme != 'itgadmin') {
                                     </div>
                                 </div>
                             </div>
-                            <div class="itg-widget trending-list">
+                            <div class="col-sm-6 col-lg-12 home-trending-video">
                                 <div class="widget-help-text">Template widgets(<strong>Trending Videos &amp; Top Takes</strong>)</div>
                                 <div class="tab-buttons">
                                     <span data-class="itg-block-5" data-id="tab-data-1" class="active">
@@ -581,7 +574,7 @@ if ($theme != 'itgadmin') {
                     <!--Photo slider and Watch now section starts here-->
                     <?php if (isset($widget_data['itg-block-12']['widget_name']) || isset($widget_data['itg-block-13']['widget_name']) || $theme == 'itgadmin') { ?>
                       <div class="row itg-h450-section">
-                          <div class="col-md-8 col-sm-12 col-xs-12 mt-50">
+                          <div class="col-md-8 col-sm-7 col-xs-12 col-lg-8 mt-50">
                               <div class="widget-help-text">Template widgets ( <strong>Photo Carousel</strong> )</div>
                               <div class="itg-widget">
                                   <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -615,7 +608,7 @@ if ($theme != 'itgadmin') {
                                   </div>               
                               </div>  
                           </div>
-                          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
+                          <div class="col-md-4 col-sm-5 col-xs-4 col-lg-4 mt-50">
                               <div class="widget-help-text">Section card ( <strong>Watch</strong> )</div>
                               <div class="itg-widget">
                                   <div class="droppable <?php print $gray_bg_layout; ?>">

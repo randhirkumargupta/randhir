@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* CSS Document */
+*{margin:0; padding:0; outline:0;}
+body {	margin-left: 0px; 	margin-top: 0px;	margin-right: 0px;	margin-bottom: 0px;font-family: arial;font-size: 12px ; background:#FFF;}
+.txt {
+font-family: arial;
+font-size: 11px;
+color: #000000;
+padding: 12px 0 13px 5px;
+background-image: url(images/gray_line.gif);
+background-repeat: repeat-x;
+background-position: left bottom;
+/* height: 27px; */
+text-decoration: none;
+vertical-align: middle;
+}/*.txtab { font-family: georgia;font-size:12px;color:#000000; padding:2px 0 0 8px;  background-image:url(images/gray_line.gif); background-repeat: repeat-x; background-position:left bottom; height:27px;text-decoration:none; vertical-align:middle;}*/
+.txt a{font-family: georgia;font-size:12px;color:#000000; text-decoration:none; vertical-align:middle;}
+.txt a:hover{font-family: georgia;font-size:12px; text-decoration:none; vertical-align:middle;  }
+
+.txt1{font-family: georgia;font-size:12px;color:#fff; padding-left:15px; background-image:url(images/red_line.gif); background-repeat: repeat-x; background-position:left bottom;}
+.txt1 a{font-family: georgia;font-size:12px;color:#fff; text-decoration:none;}
+.txt1 a:hover{font-family: georgia;font-size:12px;color:#ffffff; text-decoration:none;}
+.txtB{font-family: georgia;font-size:12px;color:#000000; padding-left:20px; background-image: url(images/gray_longline.gif); background-repeat: repeat-x; background-position:left bottom;}
+.txtB a{font-family: georgia;font-size:12px;color:#000000; text-decoration:none;}
+.txtB a:hover{font-family: georgia;font-size:12px;text-decoration:underline; color:#CF242A;}
+.normaltxt{ font:normal 11px arial; color:#000000; line-height:18px; width:745px;}
+.normalRedtxt{ font:normal 12px georgia; color:#CF242A; line-height:18px;}
+.style2 {font: normal 12px Georgia; color: #CF242A; line-height: 18px; font-weight: bold; margin-right:10px; }
+.bredcrum{font:normal 12px arial; color:#969696; line-height:18px; text-align:left;}
+.bredcrum a{font:normal 12px arial; color:#969696; line-height:18px; text-align:left; text-decoration:none;}
+.bredcrum a:hover{font:normal 12px arial; color:#616060; line-height:18px; text-align:left; text-decoration:none;}
+
+.txt10 td a{text-decoration:none;}
+
+
+#wrapper{width:999px; margin:0 auto;}
+
+#left_panel{ width:200px; float:left; margin-right:18px;}
+
+.left-nav{ width:200px;}
+.left-nav li{ list-style:none; background:url(http://specials.indiatoday.com/aajtaknew/tvtmi/images/gray_line.gif) repeat-x; height:39px; line-height:39px; width:200px; border-bottom:1px dotted #000; text-transform:uppercase;}
+
+
+.home_top_container{min-height:550px !important;}
+
+
+.left-nav li a{font-family:Arial, Helvetica, sans-serif ; font-size:12px;color:#000000; text-decoration:none; padding-left:10px;}
+
+
+
+#right_panel{ width:780px; float:right;}
+
+#right_panel p{ font-size:14px; margin-top:16px; line-height:20px;}
+
+#right_panel table{margin-top:20px;text-align:left;}
+
+
+#right_panel h1{margin-top:15px; font-size:18px;}
+
+#right_panel h2{margin-top:15px; font-size:16px}
+
+#right_panel h3{margin-top:15px; font-size:14px;}
+
+#right_panel ol{margin-top:15px; margin-left:20px;}
+#right_panel ol li{margin-bottom:10px; font-size:14px;}
+
+
+
+
+
+
+#right_panel table tr:nth-child(even) {background: #CCC}
+#right_panel table tr:nth-child(odd) {background: #FFF}
+
+
+#right_panel table tr td{ text-align:left; padding:5px;}
+
+#right_panel table tr td p{ font-size:14px; margin-top:0px;}
+
+.download{margin-top: 150px;margin-left: 222px;}
+.download a{padding:10px; background:#e7e7e8; color:#000 !important; font-size:20px; text-decoration:none !important;-moz-border-radius: 9px;-webkit-border-radius: 9px;border-radius: 9px; text-transform:uppercase; border:1px solid #ccc;}
+
+
+.flt{ float:left}
+.flr{ float:right;}
+.clr{ clear:both;}
+.paste-img {padding: 20px;text-align: center;border: 2px solid #000;width: 130px;height: 150px;margin-right: 20px;}

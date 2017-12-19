@@ -48,25 +48,29 @@ function itg_widget_setids() {
  * 
  * @param string $widget_name
  * @param string $content_type
- * @param int $cat_tid
+ * @param int $cat_tid (extra where condition to delete widget) Added
  * @param int $nid
  */
 function move_node_from_dont_miss_widget($widget_name, $content_type, $cat_tid, $nid) {
-    if (!empty($widget_name) && !empty($nid)) {
-        $num = db_delete('itg_widget_order')
-                ->condition('nid', $nid)
-                ->condition('widget', $widget_name)
-                ->execute();
-        if (function_exists("_itg_widget_delete_node_data_from_helper_table")) {
-            _itg_widget_delete_node_data_from_helper_table($nid);
-        }
-        if ($num) {
-            drupal_goto($_SERVER['HTTP_REFERER']);
-        } else {
-            drupal_set_message(t("Node id or widget name not found"));
-            drupal_goto($_SERVER['HTTP_REFERER']);
-        }
+  if (!empty($widget_name) && !empty($nid)) {
+    $num = db_delete('itg_widget_order')
+        ->condition('nid', $nid)
+        ->condition('widget', $widget_name);
+    if (is_numeric($cat_tid) && !empty($cat_tid)) {
+      $num->condition('cat_id', $cat_tid);
     }
+    $num->execute();
+    if (function_exists("_itg_widget_delete_node_data_from_helper_table")) {
+      _itg_widget_delete_node_data_from_helper_table($nid);
+    }
+    if ($num) {
+      drupal_goto($_SERVER['HTTP_REFERER']);
+    }
+    else {
+      drupal_set_message(t("Node id or widget name not found"));
+      drupal_goto($_SERVER['HTTP_REFERER']);
+    }
+  }
 }
 
 /**
@@ -797,6 +801,12 @@ function itg_widget_theme() {
        'itg_widget_live_tv' => array(
             'template' => 'templates/itg-widget-live-tv',
         ),
+        'section_manual_order_widget_data' => array(
+            'template' => 'templates/section-manual-order-widget-data',
+        ),
+        'movie_section_manual_widget_data' => array(
+            'template' => 'templates/movie-section-manual-widget-data',
+        ),
       
     );
     return $themes;
@@ -1056,6 +1066,23 @@ function itg_widget_form_views_exposed_form_alter(&$form, &$form_state, $form_id
             drupal_add_css("#edit-content-type-wrapper {display:none}", 'inline');
             $form['#validate'][] = 'custom_section_wise_validate';
             break;
+
+        case 'views-exposed-form-section-wise-top-story-widget-order-reorder-page-1':
+            $form['items_per_page']['#options'] = array(
+                '10' => 10,
+                '20' => 20,
+                '30' => 30
+            );
+            $category_tid = $_GET['category_tid'];
+            $form['category_tid'] = array(
+                '#type' => 'hidden',
+                '#default_value' => isset($category_tid) ? $category_tid : 0,
+            );
+            $form['Cancel'] = array(
+                '#type' => 'markup',
+                '#markup' => l(t('Reset'), 'section-manual-order-widget-listing', array("attributes" => array("class" => array("button", "form-submit", "manual-section-reset")), "query" => array("category_tid" => $category_tid))),
+            );
+          break;
 
         case 'views-exposed-form-bitrates-videos-page':
 

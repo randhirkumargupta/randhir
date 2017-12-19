@@ -1,0 +1,236 @@
+*{padding:0; margin:0;}
+body{font:12px/15px 'Roboto';}
+.clear{clear:both;}
+a{text-decoration:none;}
+p{font:16px/20px 'Roboto'; color:#5c5a5b; display:block;}
+
+
+#outer_wrapper{float:left; width:100%;}
+.wrapper{width:1000px; margin:0 auto;}
+
+.top_area{float:left; width:100%;}
+.top_area ul{list-style:none; float:left; width:auto; padding:5px 0 5px 15px;}
+.top_area ul li{width:auto; float:left; padding:0 4px; font:12px/15px 'Roboto';}
+.top_area ul li strong{text-transform:uppercase; font-weight:normal; color:#4d5154;}
+.top_area ul li a{color:#4d5154;}
+
+.banner_area{float:left; width:100%; background-color:#000; text-align:center; position:relative;}
+/*.banner_area img{float:left; width:100%; text-align:center;}*/
+ul.social_icon{position:absolute; bottom:0; right:25%; list-style:none;}
+ul.social_icon li{width:auto; float:left; padding-left:9px;}
+ul.social_icon li a{color:#fff;}
+
+.cent_add{width:728px; margin:0 auto;}
+.cent_add strong{font-weight:normal; display:block; text-align:center; color:#bdbcba;}
+.add_sec{float:left; width:100%; margin:16px 0 17px;}
+.advertise_area{float:left; width:100%;}
+
+.body_section{float:left; width:980px; margin:0 8px 0 12px; border-top:1px dashed #b2b2b2; margin:14px 0 0; padding-top:15px;}
+
+.left_section{width:650px; float:left;}
+.left_section .story_video{float:left; width:650px; min-height:336px; position:relative;}
+.left_section .play_btn{position:absolute; top:50%; left:308px;}
+.left_section img{float:left; margin:5px 0;}
+.left_section h1{font:bold 35px/36px 'Roboto'; color:#3b3b3b; display:block;}
+
+.video_section{float:left; width:620px; padding:15px 0 0 10px;}
+.video_section ul{list-style:none; float:left; width:100%;}
+.video_section ul li{float:left; width:290px; /*min-height:186px;*/ height:244px; margin:26px 33px 0 0; position:relative;}
+
+.video_section ul li:nth-child(odd) {margin-right:33px;}
+.video_section ul li:nth-child(even) {margin-right:0px;}
+
+
+
+
+.video_section ul li p{}
+a.play_btn_small{position:absolute; top:147px; left:7px;}
+
+.right_section{float:right; width:300px;}
+
+.right_section .add_area{float:left; width:300px;}
+.right_section .twitter_buzz{float:left; width:300px; margin:25px 0;}
+.right_section ul.video_sec{float:left; width:300px; list-style:none;}
+.right_section ul.video_sec li{width:290px; /*min-height:186px;*/ height:245px; float:left; margin-bottom:25px; position:relative;}
+
+#outer_footer{float:left; width:100%; border-top:1px solid #999; padding-top:10px;}
+
+
+.salaam_section{float:left; width:100%; margin-top:20px;}
+
+.salaam_top_area{float:left; width:100%; background-color:#121011; min-height:64px; padding:5px 0;}
+.salaam_top_area .sponsor{float:left; width:970px; padding:0 15px;}
+.salaam_top_area .sponsor strong{font:15px/64px Roboto; color:#fff; text-transform:uppercase; float:left; padding-right:15px;}
+.salaam_top_area .sponsor img{float:left;}
+
+.salaam_mid_area{float:left; width:100%; background-color:#fff301; min-height:309px;}
+.salaam_mid_area ul.social_icon{right:0 !important;}
+.salaam_mid_area p{font:bold 16px/20px roboto; color:#020406; display:inline-block;}
+.salaam_mid_area h2{font:bold 40px/50px roboto; color:#020406; display:block;}
+.salaam_mid_area .mid_main{float:left; width:988px; position:relative; padding:0 0 0 12px;}
+.salaam_mid_area .mid_main .logo{float:left; width:auto; margin:27px 0 0 16px;}
+.salaam_mid_area .mid_main .content_area{width:525px; float:left; clear:left; padding:22px 0 0;}
+.salaam_mid_area .sachin_img{position:absolute; top:0; right:0;}
+
+
+.salaam_bottom_area{float:left; width:100%;}
+
+.salaam_bottom_area .stop_area{float:left; width:100%; background-color:#3e5713; min-height:99px;}
+.salaam_bottom_area .timeline{float:left; width:990px; border-left:5px solid #fff; border-right:5px solid #fff;}
+.salaam_bottom_area .timeline h2{font:bold 16px/36px roboto; display:block; text-transform:uppercase; color:#fff; padding-left:5px;}
+.salaam_bottom_area .timeline .panel{float:left; width:100%;}
+.salaam_bottom_area .timeline .prev{background:url(http://media2.intoday.in/intoday/images/sachin/timeline_prev.gif) no-repeat 0 0; width:25px; height:29px; float:left;}
+.salaam_bottom_area .timeline .next{background:url(http://media2.intoday.in/intoday/images/sachin/timeline_next.gif) no-repeat 0 0; width:25px; height:29px; float:left;}
+
+.salaam_bottom_area .timeline .panel ul{list-style:none; float:left; width:940px; border-top:1px solid #7c9a42;}
+.salaam_bottom_area .timeline .panel ul li{width:auto; float:left; border-left:1px solid #7c9a42; text-align:center; font:11px/14px roboto; color:#fff; padding:0 7px;}
+.salaam_bottom_area .timeline .panel ul li a{color:#fff;}
+.salaam_bottom_area .timeline .panel ul li.active{background-color:#89b345;}
+.salaam_bottom_area .timeline .panel ul li:first-child{border-left:none; padding-left:13px;}
+.salaam_bottom_area .timeline .panel_des{width:973px; background:#89b345 url(http://media2.intoday.in/intoday/images/sachin/arrow.gif) no-repeat 5px 10px; float:left; padding-left:17px;}
+.salaam_bottom_area .timeline .panel_des p{font:13px/34px roboto; color:#fff; display:block; padding-left:5px;}
+
+@-moz-document url-prefix() {
+	.salaam_bottom_area .timeline .panel ul{width:auto;}
+	.salaam_bottom_area .timeline .panel ul li:first-child{padding-left:12px;}
+	.salaam_bottom_area .timeline .panel ul li{padding:0 9px;}
+}
+
+.salaam_bottom_area .sbot_area{float:left; width:100%; background-color:#fff; min-height:367px;}
+.sbot_main{float:left; width:1000px;}
+.sbot_main .sbot_left{float:left; width:673px; border-top:1px solid #cdcdcd; padding:20px 0 0; margin-top:10px;}  
+.sbot_main .sbot_left .pic_outer{float:left; width:352px;}
+.sbot_main .sbot_left .pic_area{float:left; width:352px; min-height:242px; background-color:#89b345; text-align:center; padding:28px 0 0;}
+.sbot_main .sbot_left .pic_area img{border:1px solid #d2d5ca;}
+.sbot_main .sbot_left .cont_area{float:left; width:332px; min-height:50px; background-color:#3e5713; padding:16px 10px 0; font:16px/18px roboto;}
+.sbot_main .sbot_left .cont_area p{color:#fff; float:left; width:100%; text-align:left;}
+.sbot_main .sbot_left .cont_area a{color:#cfe8c1; float:right;}
+
+.sbot_main .sbot_left .content_section{float:left; width:300px; margin:0 0 0 16px;}
+.sbot_main .sbot_left .content_section h2{font:normal 21px/24px roboto; color:#010002; display:block; padding-bottom:5px;}
+.sbot_main .sbot_left .content_section p{font:normal 15px/19px roboto; color:#505767;}
+.sbot_main .sbot_left .content_section a{color:#d4343e; text-decoration:underline;}
+.sbot_main .sbot_left .content_section ul.link_area{float:left; width:100%; list-style:none; margin-top:16px;}
+.sbot_main .sbot_left .content_section ul.link_area li{width:100%; float:left; border-bottom:1px solid #d0d0d0; margin-bottom:1px;}
+.sbot_main .sbot_left .content_section ul.link_area li a{float:left; background:#f0f0f0 url(http://media2.intoday.in/intoday/images/sachin/dot.gif) no-repeat 13px 9px; width:auto; padding:4px 0 4px 35px; color:#110207; text-decoration:none; font:15px/18px roboto;}
+
+.sbot_main .sbot_right{float:right; width:300px; margin-top:35px;}  
+.sbot_main .sbot_right .main_video_outer{float:left; width:300px; text-align:center;}
+.sbot_main .sbot_right .main_video_outer a{text-decoration:underline; font:14px/20px roboto; color:#060a0b;}
+.sbot_main .sbot_right .main_video{float:left; width:300px; min-height:186px; position:relative;}
+.sbot_main .sbot_right a.play_btn{position:absolute; bottom:0; right:2px;}
+
+.sbot_main .sbot_right .crisp_video{float:left; width:300px; margin:18px 0 0;}
+.sbot_main .sbot_right .crisp_video h3{font:bold 23px/34px roboto; color:#b70100; display:block;}
+.sbot_main .sbot_right .crisp_video ul{list-style:none; float:left; width:100%; border-top:1px dotted #040404; padding-top:2px;}
+.sbot_main .sbot_right .crisp_video li{float:left; width:98px; min-height:73px; margin-left:2px; position:relative;}
+.sbot_main .sbot_right .crisp_video li:first-child{margin-left:0;}
+.sbot_main .sbot_right a.play_small_btn{position:absolute; bottom:2px; right:2px;}
+
+/***Right social icon start***/
+
+.item {
+    margin-bottom: 5px !important;
+}
+.item {
+    clear: both;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.blueheader {
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 18px;
+    margin-bottom: 5px;
+    margin-top: 0;
+    text-align: left;
+}
+.fb-icon, .tw-icon, .plus-icon, .rediff-icon, .rss-icon, .mobile-icon, .tv-icon, .tv-iconph {
+    display: block;
+    float: left;
+    height: 40px;
+    margin-left: 7px;
+    width: 36px;
+}
+
+.fb-icon {
+    background-position: -5px -35px !important;
+    margin: 0;
+}
+.fb-icon, .tw-icon, .plus-icon, .rediff-icon, .rss-icon, .mobile-icon, .tv-icon, .tv-iconph {
+    background: url("http://media2.intoday.in/intoday/images/sachin/India-Today-Sprites1.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.tw-icon {
+    background-position: -48px -35px;
+}
+
+.plus-icon {
+    background-position: -92px -35px;
+}
+
+.rss-icon {
+    background-position: -180px -35px;
+}
+
+.mobile-icon {
+    background-position: -223px -35px;
+}
+
+.tv-icon {
+    background: url("../images/ht-live-tv_on-white.gif") no-repeat scroll 3px 5px rgba(0, 0, 0, 0);
+}
+
+
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+.wrapper{width:90%; padding:0 5%;}
+.body_section{width:100%;}
+.salaam_top_area .sponsor{width:90%;}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+.wrapper{width:90%; padding:0 5%;}
+.body_section{width:100%;}
+.left_section{margin-left:12%;}
+.right_section{float:left; width:90%; margin-left:2%; margin-top:2%;}
+.right_section .twitter_buzz{float:right; margin-top:0;}
+.framewid{width:100% !important; height:200px !important;}
+.salaam_top_area .sponsor{width:100%; padding:0;}
+.salaam_top_area .sponsor strong{width:100%;}
+.salaam_top_area .sponsor img{width:100%;}
+.salaam_mid_area .mid_main{width:100%;}
+.salaam_mid_area .mid_main .content_area{width:35%;}
+.sachin_img{top:45px !important; width:52%;}
+.sachin_img img{width:100%;}
+.sbot_main .sbot_right{width:100%;}
+.sbot_main .sbot_left{width:100%;}
+.sbot_main .sbot_right .crisp_video{float:right;}
+.salaam_bottom_area .timeline,.salaam_bottom_area .timeline .panel_des,.sbot_main,.salaam_bottom_area .timeline .panel ul{width:100%;}
+.stayconnected div{text-align:left;}
+.submenu, .menues, .redborder, .itgd_links {margin: 0 auto !important; width: 99.5% !important;}
+nav, nav ul {width: 100%;}
+.banner_area img{width:100%; height:100%;}
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,230 @@
+body{margin:0; padding:0; background:#f8f6f7; font-family:roboto;}
+a{color:black; text-decoration:none;}
+h1{margin:0; padding:0;}
+ul{margin:0; padding:0;}
+ul li{ list-style:none;}
+.cf:before, .cf:after{display:table; content:''}
+.cf:after{ clear:both;}
+.container{width:100%;}
+.white-bg{ background:white;}
+.top-strip{ background:#ececec; color:#939393; font-size:12px; height:33px; line-height:28px;}
+.top-strip a{color:#939393; padding:0 3px; }
+.header{width:1003px; margin:auto;}
+.logo{width:247px; float:left;}
+.menu{ height:45px;  background:#00a5f4;}
+.wrapper{width:1003px; margin:auto;  }
+.body-area{width:1003px; margin:auto; border-bottom:1px solid #d6d6d6;border-left:1px solid #d6d6d6; background:white; border-right:1px solid #d6d6d6; }
+.left-area{width:690px; float:left; padding-top:25px; border-right:1px solid #d6d6d6;  }
+.right-area{width:310px; float:right; background:#f5f3f4; padding-top:25px; }
+.scroller{width:68px; min-height:500px; float:left; margin-right:17px; background:#f8f6f7;}
+.scroller-box{width:66px; border-bottom:1px solid #d6d6d6;border-top:1px solid #d6d6d6; border-right:1px solid #d6d6d6;}
+.scroller-strip{width:4px; height:65px; float:left;}
+.scroller-art{width:62px; float:left; text-align:center;}
+.left-main{width:586px; float:left;}
+.navigation li{float:left; color:white; margin-right:8px; line-height:43px; text-transform:uppercase; font-size:15px;} 
+.navigation li a{color:#fff}
+.navigation li a:hover{color:#000}
+.headings{ background:#00a5f4;color:white; width:100%; height:44px; margin-bottom:10px; position:relative}
+.headings2{ background:#00a5f4;color:white; width:100%; height:44px; position:relative}
+.headings2 h3{color:white; font-size:17px; line-height:46px; padding-left:10px; float:left; margin:0}
+.headings h3{color:white; font-size:17px; line-height:46px; padding-left:10px; float:left; margin:0}
+::-webkit-input-placeholder {  color: #bfbfbf;}
+
+:-moz-placeholder { /* Firefox 18- */   color: #bfbfbf;  }
+::-moz-placeholder {  /* Firefox 19+ */   color: #bfbfbf;  }
+:-ms-input-placeholder {     color: #bfbfbf;  }
+
+/*home slider*/
+.home-slder{width:575px; height:506px; padding:5px;-webkit-box-shadow: 0px 0px 5px 1px rgba(69,68,69,1);
+-moz-box-shadow: 0px 0px 5px 1px rgba(69,68,69,1);
+box-shadow: 0px 0px 5px 1px rgba(69,68,69,1); margin-bottom:20px;}
+.belt-outer{width:575px; height:495px; overflow:hidden; position:relative}
+.belt{margin:0; padding:0; overflow:hidden; position:absolute;}
+.belt li{float:left;}
+.prev{width:26px; height:46px; background:url(arrows.png); position:absolute; top:120px; left:0; cursor:pointer; z-index:999;}
+.next{width:26px; height:46px; background:url(arrows.png) 25px 0px; position:absolute; top:120px; right:0; cursor:pointer; z-index:999;}
+.nav-area{width:110px; position:absolute; right:0; bottom:0; overflow:hidden;  z-index:999;}
+.nav-area li{width:15px; height:15px; float:left; margin-right:5px;}
+.nav-area li a{width:15px; height:15px; color:transparent; padding:0; float:left; background:url(http://media2.intoday.in/microsites/asiangames2014/dots.png) no-repeat  -23px 0px}
+.nav-area li a:hover{ background:url(http://media2.intoday.in/microsites/asiangames2014/dots.png) no-repeat}
+.nav-area li a.active{background:url(http://media2.intoday.in/microsites/asiangames2014/dots.png) no-repeat}
+.box{width:582px; height:495px; color:#313131; font-size:29px; font-weight:bold; line-height:31px;}
+/*home slider end */
+
+/*news chunk*/
+.news-section{width:586px;}
+.news-section-thumb{width:586px; float:left; font-size:14px;}
+.news-section-thumb li{width:50%; float:left; margin-bottom:10px;}
+.news-section-thumb li:hover{ background:#f2f2f2;}
+.news-section-thumb li img{float:left; margin-right:5px; border:1px solid white;-webkit-box-shadow: 0px 0px 2px 0px rgba(53, 53, 53, 0.75);
+-moz-box-shadow:    0px 0px 2px 0px rgba(53, 53, 53, 0.75);
+box-shadow:         0px 0px 2px 0px rgba(53, 53, 53, 0.75);}
+a.more{color:black; line-height:45px; float:right; font-weight:bold; padding-right:15px; text-transform:uppercase;}
+/*news chunk end*/
+
+/*photographs */
+.photograph{width:586px; position:relative;}
+.photo-slder{width:582px; height:156px; padding:5px; margin-bottom:20px;}
+.photo-belt-outer{width:582px; height:156px; overflow:hidden; position:relative}
+.photo-belt{margin:0; padding:0; overflow:hidden; position:absolute;}
+.photo-belt li{float:left;}
+.photo-prev{width:35px; height:34px; background:url(http://media2.intoday.in/microsites/asiangames2014/left.png) no-repeat; position:absolute; top:6px; right:39px; cursor:pointer; z-index:999;}
+.photo-next{width:35px; height:34px; background:url(http://media2.intoday.in/microsites/asiangames2014/right.png) no-repeat; position:absolute; top:6px; right:0px; cursor:pointer; z-index:999; margin-right:5px;}
+.photo-nav-area{width:110px; position:absolute; right:0; bottom:0; overflow:hidden;  z-index:999;}
+.photo-nav-area li{width:15px; height:15px; float:left; margin-right:5px;}
+.photo-nav-area li a{width:15px; height:15px; color:transparent; padding:0; float:left; background:url(http://media2.intoday.in/microsites/asiangames2014/dots.png) no-repeat  -23px 0px}
+.photo-nav-area li a:hover{ background:url(http://media2.intoday.in/microsites/asiangames2014/dots.png) no-repeat}
+.photo-nav-area li a.active{background:url(http://media2.intoday.in/microsites/asiangames2014/dots.png) no-repeat}
+.photo-box{width: 175px;height: 148px;color: #313131;margin-right:12px;font-size: 29px;padding-left: 12px;font-weight: bold;line-height: 31px;padding-top: 14px;background: url(http://media2.intoday.in/microsites/asiangames2014/photo-bg.png) no-repeat; }
+.photo-box-inner{width:159px; height:119px; position:relative}
+.photo-box img{width:159px;height:119px;}
+.photo-icon{ background:url(http://media2.intoday.in/microsites/asiangames2014/photo_icon.png) no-repeat; width:34px; height:34px; position:absolute; bottom:5px; left:5px;}
+.photo-alpha{width:144px; height:104px; position:absolute; top:0; left:0; background:url(http://media2.intoday.in/indiatoday/images/alpha.png); color:white; font-size:12px; line-height:17px; padding-top:15px; padding-left:15px; display:none; cursor:pointer;}
+
+.vid-alpha{width:144px; height:104px; position:absolute; top:14px; left:12px; background:url(http://media2.intoday.in/indiatoday/images/alpha.png); color:white; font-size:12px; line-height:17px; padding-top:15px; padding-left:15px; display:none; cursor:pointer;}
+/*photographs end*/
+
+/*videos */
+.videos{width:586px;}
+.videos-slder{width:582px; height:156px; padding:5px; margin-bottom:20px;}
+.videos-belt-outer{width:582px; height:156px; overflow:hidden; position:relative}
+.videos-belt{margin:0; padding:0; overflow:hidden; position:absolute;}
+.videos-belt li{float:left;}
+.videos-prev{width:35px; height:34px; background:url(http://media2.intoday.in/microsites/asiangames2014/left.png) no-repeat; position:absolute; top:6px; right:39px; cursor:pointer; z-index:999;}
+.videos-next{width:35px; height:34px; background:url(http://media2.intoday.in/microsites/asiangames2014/right.png) no-repeat; position:absolute; top:6px; right:0px; cursor:pointer; z-index:999; margin-right:5px;}
+.videos-nav-area{width:110px; position:absolute; right:0; bottom:0; overflow:hidden;  z-index:999;}
+.videos-nav-area li{width:15px; height:15px; float:left; margin-right:5px;}
+.videos-nav-area li a{width:15px; height:15px; color:transparent; padding:0; float:left; background:url(http://media2.intoday.in/microsites/asiangames2014/dots.png) no-repeat  -23px 0px}
+.videos-nav-area li a:hover{ background:url(http://media2.intoday.in/microsites/asiangames2014/dots.png) no-repeat}
+.videos-nav-area li a.active{background:url(http://media2.intoday.in/microsites/asiangames2014/dots.png) no-repeat}
+.videos-box{width: 175px;height: 148px;color: #313131;margin-right:12px;font-size: 29px;padding-left: 12px;font-weight: bold;line-height: 31px;padding-top: 14px;background: url(http://media2.intoday.in/microsites/asiangames2014/photo-bg.png) no-repeat; position:relative;}
+.video-alpha{ position:absolute; bottom:29px; width:159px; height:18px; background:url(http://media2.intoday.in/indiatoday/images/alpha.png)}
+.video-icon{ width:13px; height:8px; float:left; background:url(http://media2.intoday.in/microsites/asiangames2014/video_icon.png) no-repeat; margin-top:5px; margin-left:8px;}
+.video-length{width:40px; height:14px; float:right; color:white; font-size:12px; line-height:19px;}
+/*videos end*/
+
+/*points tally*/
+.points-tally{width:312px; background:white; margin-bottom:20px; float:right; }
+.points-tally th{font-size:12px; border:1px solid #d6d6d6; padding:5px; color:#929292}
+.points-tally td{font-size:12px; border:1px solid #d6d6d6; padding:5px; }
+.gold{border:none !important;}
+.silver{border:none !important;}
+.bronz{border:none !important;}
+.bordernone{border:none !important;}
+/*pointer tally end*/
+
+/*schedule*/
+.schedule{width:312px; background:white; margin-bottom:20px; clear:both;  float:right; }
+table {border-collapse:collapse}
+.schedule th{font-size:12px; border:1px solid #d6d6d6; padding:5px; color:#929292}
+.schedule td{font-size:12px; border:1px solid #d6d6d6; padding:5px; }
+/*schedule end*/
+
+
+
+
+.top-ad{width:730px; height:90px; float:right; margin-top:15px;}
+.ad{width:300px;margin-bottom:20px; text-align:right; margin:auto; color:#bdbdbd; text-align:center; font-size:12px;}
+.top-ad {color:#bdbdbd; text-align:center; font-size:12px;}
+.search-box{width:160px; height:37px; line-height:32px; border-radius:20px; border:1px solid #b1b1b1; float:right; background:white url(http://media2.intoday.in/microsites/asiangames2014/search.png) no-repeat 12px; margin-top:3px;}
+.search-box input[type="text"]{border:none; background:transparent; margin-left:48px; height:30px; color:gray; width:96px;}
+
+
+
+.twitter{width:312px; background:white;  clear:both; float:right; text-align:center}
+.aw{ background-color:#c74b01;}.bw{background:#0ca614;}.cw{background:#2f2b75;}.dw{background:#04b799;}.ew{background:#e55a39;}.fw{background:#c56c04;}.gw{background:#624444;}.hw{background:#1e8594;}.iw{background:#e44138;}.jw{background:#bb4f6f;}.kw{background:#a13aa5;}.lw{background:#178bb2;}.mw{background:#448e2d;}.nw{background:#c7ae09;}.ow{background:#74341b;}.pw{background:#de207a;}.qw{background:#68a432;}.rw{background:#666717;}.sw{ background:#e44138;}.tw{ background:#bb4f6f;}.uw{ background:#a13aa5;}.vw{ background:#178bb2;}.ww{ background:#448e2d;}.xw{ background:#c7ae09;}.yw{ background:#74341b;}.zw{ background:#e01f7a;}.aaw{ background:#68a433;}.abw{ background:#666717}
+
+
+
+
+.a{ background-color:#c74b01; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.b{background:#0ca614; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Athletics_White.png);  background-repeat: no-repeat; background-position:center;}
+.c{background:#2f2b75; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Table-Tennis_White.png);  background-repeat: no-repeat; background-position:center;}
+.d{background:#04b799; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.e{background:#e55a39; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Football_White.png);  background-repeat: no-repeat; background-position:center;}
+.f{background:#c56c04; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Wushu_White.png);  background-repeat: no-repeat; background-position:center;}
+.g{background:#624444; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Golf_White.png);  background-repeat: no-repeat; background-position:center;}
+.h{background:#1e8594; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Rowing_White.png);  background-repeat: no-repeat; background-position:center;}
+.i{background:#e44138; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Shooting_White.png);  background-repeat: no-repeat; background-position:center;}
+.j{background:#bb4f6f; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Hockey_White.png);  background-repeat: no-repeat; background-position:center;}
+.k{background:#a13aa5; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.l{background:#178bb2; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Equestrian_White.png);  background-repeat: no-repeat; background-position:center;}
+.m{background:#448e2d; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Sailing_White.png);  background-repeat: no-repeat; background-position:center;}
+.n{background:#c7ae09; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Weightlifting_White.png);  background-repeat: no-repeat; background-position:center;}
+.o{background:#74341b; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Tennis_White.png);  background-repeat: no-repeat; background-position:center;}
+.p{background:#de207a; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Basket-ball_White.png);  background-repeat: no-repeat; background-position:center;}
+.q{background:#68a432; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Water-Polo_White.png);  background-repeat: no-repeat; background-position:center;}
+.r{background:#666717; background-image:url(http://media2.intoday.in/microsites/asiangames2014/Wrestling_White.png);  background-repeat: no-repeat; background-position:center;}
+.s{ background:#e44138; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.t{ background:#bb4f6f; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.u{ background:#a13aa5; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.v{ background:#178bb2; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.w{ background:#448e2d; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.x{ background:#c7ae09; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.y{ background:#74341b; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.z{ background:#e01f7a; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.aa{ background:#68a433; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+.ab{ background:#666717; background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery_White.png);  background-repeat: no-repeat; background-position:center;}
+
+.archery{ background-image:url(http://media2.intoday.in/microsites/asiangames2014/archery.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.athletics{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Athletics.png);  background-repeat: no-repeat; background-position:center; height:65px;}
+.table-tennis{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Table-Tennis.png);background-repeat: no-repeat; background-position:center; height:65px;}
+.cycling{background:url(http://media2.intoday.in/microsites/asiangames2014/Cycling.png) no-repeat center; height:65px;}
+.cycling:hover{background:#05b699 url(http://media2.intoday.in/microsites/asiangames2014/Cycling_White.png) no-repeat center;}
+.football{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Football.png);background-repeat: no-repeat; background-position:center; height:65px;}
+.wushu{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Wushu.png);background-repeat: no-repeat; background-position:center; height:65px;}
+.golf{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Golf.png);background-repeat: no-repeat; background-position:center; height:65px;}
+.rowing{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Rowing.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.aquatics{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Aquatics.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.shooting{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Shooting.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.hockey{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Hockey.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.equestrian{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Equestrian.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.sailing{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Sailing.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.weightlifting{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Weightlifting.png);  background-repeat: no-repeat; background-position:center; height:65px;}
+.tennis{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Tennis.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.basket-ball{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Basket-ball.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.water-polo{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Water-Polo.png); background-repeat: no-repeat; background-position:center; height:65px;}
+.wrestling{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Wrestling.png);  background-repeat: no-repeat; background-position:center; height:65px;}
+.boxing{background-image:url(http://media2.intoday.in/microsites/asiangames2014/Boxing.png); background-repeat: no-repeat; background-position:center; height:65px;}
+
+
+
+.badmenton{background:url(http://media2.intoday.in/microsites/asiangames2014/Badmenton.png) no-repeat center; height:65px; }
+.badmenton:hover{background:#c74b01 url(http://media2.intoday.in/microsites/asiangames2014/Badmenton_White.png) no-repeat center;}
+.boxing{background:url(http://media2.intoday.in/microsites/asiangames2014/Boxing.png) no-repeat center; height:65px; }
+.boxing:hover{background:#0ca614 url(http://media2.intoday.in/microsites/asiangames2014/Boxing_White.png) no-repeat center;}
+.canoeing{background:url(http://media2.intoday.in/microsites/asiangames2014/Canoeing.png) no-repeat center; height:65px; }
+.canoeing:hover{background:#2f2b75 url(http://media2.intoday.in/microsites/asiangames2014/Canoeing_white.png) no-repeat center;}
+.gymnastics{background:url(http://media2.intoday.in/microsites/asiangames2014/Gymnastics.png) no-repeat center; height:65px;}
+.gymnastics:hover{background:#04b799 url(http://media2.intoday.in/microsites/asiangames2014/Gymnastics_white.png) no-repeat center;}
+.handball{background:url(http://media2.intoday.in/microsites/asiangames2014/Handball.png) no-repeat center; height:65px;}
+.handball:hover{background:#e55a39 url(http://media2.intoday.in/microsites/asiangames2014/Handball_white.png) no-repeat center;}
+.judo{background:url(http://media2.intoday.in/microsites/asiangames2014/Judo.png) no-repeat center; height:65px;}
+.judo:hover{background:#c56c04 url(http://media2.intoday.in/microsites/asiangames2014/Judo_white.png) no-repeat center;}
+.kabaddi{background:url(http://media2.intoday.in/microsites/asiangames2014/Kabaddi.png) no-repeat center; height:65px;}
+.kabaddi:hover{background:#624444 url(http://media2.intoday.in/microsites/asiangames2014/Kabaddi_white.png) no-repeat center;}
+.sepaktakraw{background:url(http://media2.intoday.in/microsites/asiangames2014/Sepaktakraw.png) no-repeat center; height:65px;}
+.sepaktakraw:hover{background:#e44138 url(http://media2.intoday.in/microsites/asiangames2014/Sepaktakraw_white.png) no-repeat center;}
+.squash{background:url(http://media2.intoday.in/microsites/asiangames2014/Squash.png) no-repeat center; height:65px;}
+.squash:hover{background:#bb4f6f url(http://media2.intoday.in/microsites/asiangames2014/Squash_White.png) no-repeat center;}
+.taekwindo{background:url(http://media2.intoday.in/microsites/asiangames2014/Taekwindo.png) no-repeat center; height:65px;}
+.taekwindo:hover{background:#bb4f6f url(http://media2.intoday.in/microsites/asiangames2014/Taekwindo_White.png) no-repeat center;}
+.volleyball{background:url(http://media2.intoday.in/microsites/asiangames2014/Volleyball.png) no-repeat center; height:65px;}
+.volleyball:hover{background:#a13aa5 url(http://media2.intoday.in/microsites/asiangames2014/Volleyball_white.png) no-repeat center;}
+
+
+
+
+.scroller-arrow, .scroller-arrow-up{width:65px; height:63px; background:url(http://media2.intoday.in/microsites/asiangames2014/arrow.png) no-repeat center; border:1px solid #d6d6d6; border-top:none; cursor:pointer;}
+
+
+#social-area {
+    position: fixed;
+    right: 0;
+    width: 40px;
+	top:240px;
+}
+
+#social-area a:hover { opacity:0.7;}
+.scroller-arrow{width:66px; height:66px; background:url(http://media2.intoday.in/microsites/asiangames2014/arrow-down.jpg) no-repeat center;}
+.scroller-arrow-up{width:66px; height:66px; background:url(http://media2.intoday.in/microsites/asiangames2014/arrow-up.jpg) no-repeat center;}

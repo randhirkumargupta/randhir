@@ -889,6 +889,8 @@ class ItgStoryListMigration extends XMLMigration {
   }
 
   public function prepare($node, stdClass $row) {
+    //for update sef
+    $node->sef_url = array('sef' => (string) $row->xml->metatags->sefurl);
     $node->teaser = (string) $row->xml->storybody;
     // Issue based
     if (isset($row->xml->issue_date) && !empty($row->xml->issue_date)) {

@@ -33,13 +33,7 @@ if ($theme != 'itgadmin') {
   <div id="page">
     <header class="header" id="header" role="banner">
       <section class="header-top">
-        <div class="container header-logo">
-          <?php if ($logo): ?>
-            <div class="logo">
-              <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-            </div>
-          <?php endif; ?>         
-        </div>
+   
 
         <?php if ($site_name || $site_slogan): ?>
           <div class="header__name-and-slogan" id="name-and-slogan">
@@ -72,7 +66,7 @@ if ($theme != 'itgadmin') {
           $cls = 'col-md-9';
         endif;
     ?>
-    <main id="main" class="container pos-rel">
+    <main id="main" class="container section-news pos-rel">
       <?php print render($page['vertical_menu']); ?>
       <section id="content" role="main">
         <?php print render($page['highlighted']); ?>

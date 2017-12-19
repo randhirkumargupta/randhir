@@ -1,0 +1,189 @@
+<style>
+.story_slide {position:relative; width:680px; height:660px; overflow:hidden; margin-bottom:7px;  }
+.story_slide ul { padding:0px; margin:0px; float:left; position:relative; left:0px;  } 
+.story_slide ul li { padding:0px; margin:0px; list-style:none; height:638px; float:left; width:660px; border: 10px solid #dcdedf;  }
+.content {color: #2E2E2E;font-size: 14px; margin-left: -10px;  padding: 17px 0; font-family:Arial, Helvetica, sans-serif;}
+.content p { font: 25px/29px Georgia; }
+.story_slide .left-one { position:absolute; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/btmt/images/Big-story-left-arrow1.jpg) 5px 0px no-repeat; color:#fff; padding: 5px 6px 10px 10px; left:0px; top:50%; cursor:pointer; z-index:1; width:24px; height:24px  }	
+.story_slide .right-one { position:absolute; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/btmt/images/Big-story-right-arrow1.jpg) 16px 0px no-repeat; color:#fff; padding: 5px 10px 10px 6px; right:0px; top:50%; cursor:pointer; z-index:1; width:24px; height:24px  }
+.top_headlines { background:#c3c4c6; color:#000; text-transform:uppercase; font-family:Arial, Helvetica, sans-serif; margin-bottom:15px;}
+.top_headlines .heading { background:#2e2d8b; line-height:34px; padding:0px 5px; color:#fff; text-transform:uppercase; font-family:Arial, Helvetica, sans-serif; font-size:18px; float:left; margin-right:10px;}
+.btmenus ul li a.active {background:#fffe00; display:inline-block; padding:0 5px; color:#2d2d8d!Important}
+.active {background:#333333; display:inline-block; padding:0 5px; color:#2d2d8d!Important}
+.stay-connected { border-bottom:1px solid #3c3c3c; border-top:2px solid #3c3c3c; padding:4px 5px 0px; margin-bottom:30px; }
+.stay-connected p {font-family:"Times New Roman", Times, serif; font-size:16px; font-weight:bold; padding-bottom:8px; text-transform:uppercase; color:#010101; }
+.stay-connected img { padding-left:14px; margin-bottom:-3px}
+.left span img{ display:none;}	
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+var j = jQuery.noConflict();
+	j(document).ready(function(e) {							
+		var counter = 1;
+		var len = j('.story_slide ul li').length;
+		j('.story_slide ul').width(((680*len)+10));
+		j('.left-one').click(function(){
+			if (counter == 1)
+			{
+				j(this).css('opacity', '0');
+			}
+			else
+			{
+				j('.story_slide ul').animate({
+					left : '+=680'
+				});
+				counter -=1;
+				j('.right-one').css('opacity', '1');
+				j('.right-one span').html('<img width="110" height="75" src="'+thumblist[counter+1]+'">')
+				j('.left-one span').html('<img width="110" height="75" src="'+thumblist[counter-1]+'">');
+				j('.right-one').show();
+				if (counter<=1)
+				{
+				  j('.left-one span').html('<img width="110" height="75" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/btmt/images/big-story.jpg">');
+				}
+				else
+				{
+					j('.left-one span').show();
+				}
+				if (counter < 6 && counter > 1)
+				{
+					j('.story_slide .left-one').removeClass('l_arrow');
+				}
+				else
+				{
+					j('.story_slide .left-one').addClass('l_arrow');
+				}			
+			}
+			});	
+			var autoslides;
+			autoslides = setInterval(autoslide, 30000);
+			function autoslide(){
+				if (counter > (len-1))
+			{
+				j(this).css('opacity', '0');
+			}
+			else
+			{
+				j('.left-one').show();
+				j('.story_slide ul').animate({
+					left : '-=680px'
+				});
+				counter +=1;
+				j('.left-one').css('opacity', '1');
+				j('.right-one span').html('<img width="110" height="75" src="'+thumblist[counter+1]+'">')
+				j('.left-one span').html('<img width="110" height="75" src="'+thumblist[counter-1]+'">');
+				j('.left-one span').show();
+				if (counter>=6)
+				{
+					j('.right-one').hide();
+					
+					j('.story_slide ul').delay(3000).animate({
+						left : '+=2720px'
+					},100, function(){
+						counter = 1;
+					});
+					
+					j('.left-one span').html('<img width="110" height="75" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/btmt/images/big-story.jpg">');
+					
+				}
+				else 
+				{
+					j('.right-one').show();
+				}
+				
+				if (counter > 1)
+				{
+					j('.story_slide .left-one').removeClass('l_arrow');
+				}
+				else
+				{
+					j('.story_slide .left-one').addClass('l_arrow');
+				}
+			}
+			}
+			j('.right-one, .content').mouseover(function(){
+				myStopFunction();
+			});
+			j('.right-one, .content').mouseleave(function(){
+				autoslides = setInterval(autoslide, 25000);
+			});
+			function myStopFunction()
+			{
+				clearInterval(autoslides);
+			}
+		j('.right-one').click(function(){
+				if (counter > (len-1))
+			{
+				j(this).css('opacity', '0');
+			}
+			else
+			{
+				j('.left-one').show();
+				j('.story_slide ul').animate({
+					left : '-=680px'
+				});
+				counter +=1;
+				j('.left-one').css('opacity', '1');
+				j('.right-one span').html('<img width="110" height="75" src="'+thumblist[counter+1]+'">')
+				j('.left-one span').html('<img width="110" height="75" src="'+thumblist[counter-1]+'">');
+				j('.left-one span').show();
+				if (counter>=6)
+				{
+					j('.right-one').hide();
+				}
+				else 
+				{
+					j('.right-one').show();
+				}
+				
+				if (counter > 1)
+				{
+					j('.story_slide .left-one').removeClass('l_arrow');
+				}
+				else
+				{
+					j('.story_slide .left-one').addClass('l_arrow');
+				}
+			}
+		});
+  });
+</script>
+
+<div class="story_slide"> 
+  
+  <div class="left-one l_arrow" ><span style="padding-left:15px;display:none">&nbsp;</span> </div>
+  <div class="right-one"><span style="display:none" ><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/btmt/images/stories/arm-in-cinepolis_660_030814021812.jpg" alt=""  width="110" height="80"/></span></div>
+  <ul class="ul_images" style="width:4090px;">
+   <li>
+      <div> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2015/slider1.jpg" alt=""  width="660" height="638" usemap="#Map5" border="0" />
+        <map name="Map5"><area shape="rect" coords="440,1,657,317" href="http://indiatoday.intoday.in/story/break-the-mould-have-a-voice-sidharth-malhotra-at-india-today-mind-rocks-2015/1/511464.html" target="_blank">
+          <area shape="rect" coords="221,-1,440,320" href="http://indiatoday.intoday.in/story/india-today-mind-rocks-2015-e-commerce-industry-is-booming-and-buzzing-jayant-sinha/1/511501.html" target="_blank">
+          <area shape="rect" coords="2,319,220,636" href="http://indiatoday.intoday.in/video/dhoni-has-been-the-most-successful-captains-in-india-anil-kumble/1/511571.html" target="_blank">
+          <area shape="rect" coords="223,321,660,635" href="http://indiatoday.intoday.in/story/india-is-safer-under-modi-govt-than-it-was-before-rijiju/1/511553.html" target="_blank">
+          <area shape="rect" coords="4,1,220,318" href="http://indiatoday.intoday.in/story/im-a-complete-romantic-at-heart-sonam-kapoor-at-india-today-mind-rocks-2015/1/511467.html" target="_blank">
+        </map>
+      </div>
+    </li>
+   <li>
+      <div> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2015/slider2.jpg" alt=""  width="660" height="638" usemap="#Map6"  border="0" />
+        <map name="Map6">
+          <area shape="rect" coords="0,2,319,638" href="http://indiatoday.intoday.in/story/cant-be-john-mayer-but-can-try-to-make-what-i-do-go-global-papon/1/511529.html" target="_blank">
+          <area shape="rect" coords="492,2,658,320" href="http://indiatoday.intoday.in/video/if-you-are-different-you-need-to-stand-on-your-own-naina/1/511552.html" target="_blank">
+          <area shape="rect" coords="319,3,491,320" href="http://indiatoday.intoday.in/story/randeep-hooda-sends-crowd-into-a-tizzy-at-india-today-mind-rocks-youth-summit-2015/1/511491.html" target="_blank">
+          <area shape="rect" coords="321,321,657,635" href="http://indiatoday.intoday.in/video/smart-technology-does-not-make-smart-music-arjun-kanungo/1/511510.html" target="_blank">
+        </map>
+      </div>
+    </li>
+    <li>
+      <div><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/youthsummit/2015/slider3.jpg" alt=""  width="660" height="638" usemap="#Map7"  border="0" />
+        <map name="Map7"><area shape="rect" coords="3,478,332,633" href="http://indiatoday.intoday.in/video/most-jokes-in-the-world-are-against-powerful-people-biswa-kalyan-rath/1/511545.html" target="_blank">
+          <area shape="rect" coords="3,0,333,157" href="http://indiatoday.intoday.in/story/my-songs-are-ships-that-sail-far-wide-mohit-chauhan-at-india-today-mind-rocks-2015/1/511435.html" target="_blank">
+          <area shape="rect" coords="334,1,659,636" href="http://indiatoday.intoday.in/video/badshah-wraps-up-mind-rocks-with-saturday-saturday/1/511578.html" target="_blank">
+          <area shape="rect" coords="3,160,331,318" href="http://indiatoday.intoday.in/video/want-to-work-with-srk-nawazuddin-siddiqui-faisal-khan/1/511525.html" target="_blank">
+          <area shape="rect" coords="3,322,332,477" href="http://indiatoday.intoday.in/story/college-is-as-a-waste-of-time-ritesh-agarwal-at-india-today-mind-rocks-2015/1/511493.html" target="_blank">
+        </map>
+      </div>
+    </li>
+ </ul>
+</div>
