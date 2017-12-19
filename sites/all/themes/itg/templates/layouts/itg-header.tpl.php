@@ -32,7 +32,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                 <div class="nav-centerall">
                     <?php print drupal_render($data['itg_top_manu_header']); ?>
                     <!----------logo start -->
-                    <?php $logo_itg = theme_get_setting('logo', 'itg'); ?>
+                    <?php $logo_itg = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png'); ?>
                     <div class="container headeritg-logo">
                         <?php if ($logo_itg): ?>
                           <div class="logo">
