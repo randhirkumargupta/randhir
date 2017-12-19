@@ -479,9 +479,9 @@ function getVideolist($nid, $source = 0) {
  */
 function getNodeViewCount($nid) {
 
-    $node_anyalytics = analytics_node_data($nid, 'array');
-    $nv_count = $node_anyalytics['node_view_count'];
-    return $nv_count;
+    $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
+    $nc_view = $node_anyalytics['node_view_count'];
+    return $nc_view;
 }
 
 /*
