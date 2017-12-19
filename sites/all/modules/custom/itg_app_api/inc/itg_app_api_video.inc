@@ -216,7 +216,7 @@ function generateVideoCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
-
+            $comment_cont = getCommentsCount($nid);
             $photo_list_array[$listcount]['v_id'] = "$nid";
             $photo_list_array[$listcount]['v_title'] = "$title";
             $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
@@ -242,7 +242,7 @@ function generateVideoCategoryList($tid, $pageno) {
             $term_pri = taxonomy_term_load($field_primary_category_value);
             $term_name_pri = $term_pri->name;
             $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
-            $photo_list_array[$listcount]['v_comment_count'] = "10";
+            $photo_list_array[$listcount]['v_comment_count'] = "$comment_cont";
             $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
             $photo_list_array[$listcount]['v_updated_datetime'] = "$changed_datetime";
             $photo_list_array[$listcount]['v_duration'] = "$field_video_duration_value";
@@ -523,8 +523,9 @@ function generateProgramCategoryList($tid, $pageno) {
             $term = taxonomy_term_load($field_primary_category_value);
             $term_name = $term->name;
             $trem_id = $term->tid;
+            $comment_cont = getCommentsCount($nid);
             $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
-            $photo_list_array[$listcount]['p_comment_count'] = "10";
+            $photo_list_array[$listcount]['p_comment_count'] = "$comment_cont";
             $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
             $photo_list_array[$listcount]['p_updated_datetime'] = "$changed_datetime";
             $photo_list_array[$listcount]['p_duration'] = "$field_video_duration_value";
@@ -757,10 +758,11 @@ function generateVideoDetail($nid) {
             $photo_list_array[$listcount]['v_url'] = $videotag['migrated']['video_path_mp4'];
             $photo_list_array[$listcount]['v_download_url'] = $videotag['migrated']['video_path_mp4']; //$video_path_mp4
         }
+        $comment_cont = getCommentsCount($nid);
         $term_pri = taxonomy_term_load($field_primary_category_value);
         $term_name_pri = $term_pri->name;
         $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
-        $photo_list_array[$listcount]['v_comment_count'] = "10";
+        $photo_list_array[$listcount]['v_comment_count'] = "$comment_cont";
         $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
         $photo_list_array[$listcount]['v_updated_datetime'] = "$changed_datetime";
         $photo_list_array[$listcount]['v_duration'] = "$field_video_duration_value";
@@ -870,8 +872,9 @@ function generateProgramDetail($nid) {
         $term = taxonomy_term_load($field_primary_category_value);
         $term_name = $term->name;
         $trem_id = $term->tid;
+        $comment_cont = getCommentsCount($nid);
         $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
-        $photo_list_array[$listcount]['p_comment_count'] = "10";
+        $photo_list_array[$listcount]['p_comment_count'] = "$comment_cont";
         $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
         $photo_list_array[$listcount]['p_updated_datetime'] = "$changed_datetime";
         $photo_list_array[$listcount]['p_duration'] = "$field_video_duration_value";

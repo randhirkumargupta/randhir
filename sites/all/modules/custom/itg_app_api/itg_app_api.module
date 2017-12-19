@@ -374,7 +374,7 @@ function server_error_master_json() {
  */
 function getCommentsCount($nid) {
 
-    $node_anyalytics = analytics_node_data($nid, 'array');
+    $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
     $nc_count = $node_anyalytics['data_count_node_comment'];
     return $nc_count;
 }
