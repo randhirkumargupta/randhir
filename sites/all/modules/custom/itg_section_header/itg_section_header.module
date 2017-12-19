@@ -322,8 +322,6 @@ function is_node_section_header_event($nid) {
  */
 function get_section_header_menu_and_content($arg) {
   if (is_valid_node_header_section($arg) || is_valid_category_header_section($arg) || ($arg[0] == 'taxonomy' && is_event_section_category($arg[2]))) {
-    drupal_add_css(".logo {display:none !important}", "inline");
-    drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
     switch ($arg[0]) {
       case 'taxonomy':
         $tid = $arg[2];
