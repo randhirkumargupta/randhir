@@ -1,0 +1,196 @@
+.lft {float:left;}
+.rgt{float:right;}
+.clr {clear:both}
+.btarchive {
+    color: #FFFFFF;
+    display: inline-block;
+    float: right;
+    font: 12px arial;
+    margin-left: 10px;
+    width: 305px;
+}
+.gallerycont {
+    background-color: #E8E8E8;
+    border-bottom: 1px solid #FFFFFF;
+    border-left: 1px solid #DBDBDB !important;
+    border-right: 1px solid #E6E6E6;
+    border-top: medium none;
+    margin: 0;
+    width: 978px;
+}
+.photocap {
+    color: #000000;
+    padding: 0 5px 5px 0;
+}
+.photo {
+    border-top: 1px solid #8D8D8D;
+    color: #000000;
+    float: left;
+    font: 13px/15px arial;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-top: 3px;
+}
+#photolisting .Photodisplaybox {
+    background-color:#fff;
+    display: block;
+    float: left;
+    margin-left: 1px;
+    padding: 20px 0 0;
+    width: 661px;
+}
+.phpagination {width:660px; margin-top:10px; padding-left:5px;}
+.phcont {width:480px; margin:5px;font:normal 10px Arial, Helvetica, sans-serif;float:left}
+.phcont a {color:#000; text-decoration:none;}
+.phcont a:hover{color:#000; text-decoration:underline}
+.phcont a.active {color:#d71920; cursor:pointer;}
+
+
+.sidebar {
+    margin: 15px 0 auto 16px;
+    width: 325px;
+}
+.sidebar300box {
+    margin: 15px 0 auto 16px;
+    width: 300px;
+}
+.margin15top {margin-top:15px;}
+.rightmustsee {font:normal 12px arial; color:#004990; line-height:23px; width:323px; background-color:#e9e9e9; border:1px solid #dadada;float:left;}
+.rightmustsee .rightmust{width:145px; float:left; margin:10px 8px;}
+.mustspace {width:6px; border:1px solid #ffffff; float:left;  margin-top:10px; }
+.pwcont {
+    color: #666666;
+    float: left;
+    font: 12px/15px arial;
+    width:100%; margin-top:8px;
+}
+.theadline a {
+    color: #004990;
+    font: 20px/20px Georgia;
+    text-decoration: none;
+}
+ .tkicker {
+    color: #000;
+    font: 14px/16px arial;
+    margin-top: 5px;
+    text-align: left;
+}
+.marg8lft {margin-right:8px;}
+.pw-head {background-color:#292c7d; font:bold 16px arial; padding:2px 5px; color:#fff;}
+.pw-head a {color:#fff; text-decoration:none;}
+.pw-head a:hover {text-decoration:underline;}
+.pwmore { text-align:right; color:#000; margin-top:5px;}
+.pwmore a{ text-align:right; color:#004990; text-decoration:none}
+.pwmore a:hover{text-decoration:underline}
+.pw-inner {width:100%; float:left}
+.pwjacket {width:325px; float:left;}
+.pd-marg15px {margin-right:15px;}
+
+.rightmust .musttext a {
+    color: #fff;
+    text-align: left;
+    text-decoration: none;
+}
+.rightmust .musttext a:hover {text-decoration:underline}
+
+.topmensbar { background:url(../images/banner.jpg) no-repeat top left; height:100px; width:987px; margin-bottom:15px;}
+/******** Nav ********/
+.glossymenu{
+	padding: 67px 0 0 34px;
+}
+
+.glossymenu li{
+	float:left;
+}
+
+.glossymenu li a{
+	float: left;
+	display: block;
+	color:#5c5c5c;
+	text-decoration: none;
+	font-family: Arial;
+	font-size: 16px;
+	font-weight: normal;
+	padding:0 0 0 6px; 
+	text-align: center;
+	cursor: pointer;
+	border-right:1px solid #000;
+	margin-top:5px;
+}
+
+.glossymenu li a b {
+    display: block;
+    float: left;
+    font-weight: normal;
+    margin-right: 20px;
+    padding: 0 10px 0 18px;
+}
+
+.glossymenu li.current a, .glossymenu li a:hover{
+	color: #5c5c5c;
+}
+
+.glossymenu li.current a b, .glossymenu li a:hover b{
+	color: #000;
+	font-weight: bold;
+}
+.glossymenu li a.last {border-right:none;}
+
+.scrollable {
+    float: left;
+    font-size: 0.8em;
+    height: 170px;
+    line-height: 1;
+    overflow: hidden;
+    position: relative;
+    width: 555px;
+}
+.scrollable .items {
+    position: absolute;
+    width: 1800px !important;
+	font:bold 12px/15px arial;
+	color:#000;
+	text-align:center;
+}
+.scrollable .items a { text-decoration:none; color:#000;}
+.items div {
+    float: left;
+    width: 112px;
+}
+.items div a {
+    float: left;
+    height: 90px;
+}
+
+.items img {
+    /*border: 1px solid #CCCCCC;*/
+    padding: 4px;
+}
+
+.items span {
+    float: left;
+    width: 112px;
+}
+a.disabled {
+    visibility: hidden !important;
+}
+a.prev_browse {
+    background: url("http://businesstoday.intoday.in/budget/images/Left.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 1px;
+    height: 58px;
+    margin: 50px 10px;
+    width: 30px;
+}
+a.next_browse {
+    background: url("http://businesstoday.intoday.in/budget/images/Right.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-size: 1px;
+    height: 58px;
+    margin: 50px 10px;
+    width: 30px;
+}

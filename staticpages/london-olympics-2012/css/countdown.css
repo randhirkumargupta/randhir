@@ -1,0 +1,95 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+.countdownOlympicsWrapper {
+	width:992px;
+	height:88px;
+	background-image: url('../images/mast.png');
+	background-repeat: no-repeat;
+	position: relative;
+	font-family: Arial;
+	font-size: 12px;
+	
+}
+.countdownOlympics {
+	position: absolute;
+	left: 40px;
+	top: 10px;
+}
+.dash {
+	display:inline-block;
+	width:46px;
+	float:left;
+}
+.countdown1 .dash .digit {
+	font-size: 30px;
+	float: left;
+	font-family: Times;
+	position: relative;
+}
+.countdown1 .digit {
+	position:absolute;
+	display:block;
+	width:.7em;
+	background-color:#444;
+	border-radius:0.2em;
+	text-align:center;
+	color:#fff;
+	letter-spacing:-1px;
+	margin-right: 2px;
+	box-shadow:1px 1px 1px rgba(4, 4, 4, 0.35);
+	background-image: linear-gradient(bottom, #3A3A3A 50%, #444444 50%);
+	background-image: -o-linear-gradient(bottom, #3A3A3A 50%, #444444 50%);
+	background-image: -moz-linear-gradient(bottom, #3A3A3A 50%, #444444 50%);
+	background-image: -webkit-linear-gradient(bottom, #3A3A3A 50%, #444444 50%);
+	background-image: -ms-linear-gradient(bottom, #3A3A3A 50%, #444444 50%);
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, #3A3A3A), color-stop(0.5, #444444));
+	
+}
+.countdown2 , .countdown3 {
+	font-size: 12px;
+	margin: 0 auto 0 35px;
+	font-family:Arial;
+	padding: 0px;
+	text-align: center;
+	text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+
+}
+	
+.countdown2 .top, .countdown3 .top, .countdown3 .bottom, .countdown2 .bottom {
+	width: 8px;
+	float: left;
+	overflow: hidden;
+	color:#0068B1;
+}
+.countdown3 .dash1, .countdown2 .dash1 {
+	float: left;
+	color:#0068B1;
+}
+.countdown3 .caption, .countdown2 .caption {
+	float: left;
+	margin: 0 5px 0 1px;
+}
+.seprator{
+	display:inline-block;
+	width:16px;
+	height:2.6em;
+	position:relative;
+	float:left;
+}
+.seprator:before, .seprator:after{
+	position:absolute;
+	width:5px;
+	height:5px;
+	background-color:#444;
+	border-radius:50%;
+	left:50%;
+	margin-left:-3px;
+	top:.5em;
+	box-shadow:1px 1px 1px rgba(4, 4, 4, 0.5);
+	content:'';	
+}
+.seprator:after{
+	top:1.6em;
+}

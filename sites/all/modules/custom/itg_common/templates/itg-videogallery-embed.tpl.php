@@ -49,7 +49,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 <?php if ($keys == 0) { ?>
                   <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
                           <div style="display:none" class="loading-video">Load.....</div>
-                          <div class="iframe-video1 video-iframe-wrapper" id="video_0">
+                          <div class="video-iframe-wrapper" id="video_0">
                               <?php
                               if ($videoids[0]->video_repo_type == 'INTERNAL') {
                                 print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'embed'));
@@ -131,7 +131,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
         ?>
 
             <?php if ($keys == 0) { ?>
-              <div class="iframe-video">
+              <div class="">
                   <div style="display:none" class="loading-video"><div class="spinner">
                           <div class="bounce1"></div>
                           <div class="bounce2"></div>

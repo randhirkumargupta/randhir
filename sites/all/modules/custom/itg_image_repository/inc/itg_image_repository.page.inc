@@ -9,6 +9,8 @@
  * q = itg_image_repository.
  */
 function itg_image_repository($scheme = NULL) {
+  global $conf;
+  $conf['preprocess_js'] = 0;
   module_invoke('admin_menu', 'suppress'); //suppress admin_menu
   $jsop = isset($_GET['jsop']) ? $_GET['jsop'] : NULL;
   drupal_add_http_header('Content-Type', 'text/html; charset=utf-8');

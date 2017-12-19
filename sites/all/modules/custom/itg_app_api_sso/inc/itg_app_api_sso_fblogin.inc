@@ -24,12 +24,10 @@ function fblogin_sso($data) {
 
   if ($user_load->uid) {
     // user exist, next is step for login
-
     return userloginFB_sso($uname_social, $user_load->uid, $password);
   }
   else {
     // user not exist, next is step for signup
-
     return userSignupFB_sso($uname_social, $uid_social, $password);
   }
 }
@@ -61,7 +59,6 @@ function userloginFB_sso($uname, $uidget, $password) {
 
   // Only authenticate if a flood condition was not detected.
   if (empty($flood_state['flood_control_triggered'])) {
-
     $uid = $uidget;
   }
   else {
@@ -113,10 +110,8 @@ function userSignupFB_sso($uname_social, $uid_social, $password) {
 
   // signup method
   $form_state = array();
-
-
   // check user_id is mail or mobile
-  $url_info = "aHR0cDovL2l0Z2RyYXBpZC5pbmRpYXRvZGF5b25saW5lLmluL2luZGlhL3N0b3J5L2Rpd2FsaS1zbW9rZS1wb2xsdXRpb24tcGFydGljdWxhdGUtbWF0dGVyLTM0OTQ2Ny0yMDE2LTEwLTMx";
+  $url_info = substr(uniqid('', true), -5);
 
   $form_state['values']['mobile'] = "";
   $form_state['values']['url_info'] = $url_info;
@@ -168,11 +163,9 @@ function userSignupFB_sso($uname_social, $uid_social, $password) {
       unset($_SESSION['referral_key']);
     }
     // Set operation.
-
     $op = 'register_no_approval_required';
     // Send an email.
     if (empty($form_state['values']['mobile'])) {
-      // _user_mail_notify($op, $account);
       if (function_exists('itg_sso_get_mail_content')) {
         if (!empty($form_state['values']['url_info'])) {
           $url_info = $form_state['values']['url_info'];
@@ -185,14 +178,10 @@ function userSignupFB_sso($uname_social, $uid_social, $password) {
       $rand_otp = rand(0, 9999);
       if (function_exists('itg_sso_first_time_otp_insert')) {
         itg_sso_first_time_otp_insert($mobile, $mail, $rand_otp, 'register');
-        //itg_sso_sms_send($rand_otp, $mobile);
-      }
-      if (!empty($form_state['values']['mail'])) {
-        //itg_sso_otp_mail_content($rand_otp, $mail);
       }
     }
   }
-  catch(Exception$e) {
+  catch (Exception$e) {
     watchdog('error on user save', $e->getMessage());
     drupal_set_message('Error:' . $e->getMessage(), 'error');
     $account = $e;
@@ -204,4 +193,3 @@ function userSignupFB_sso($uname_social, $uid_social, $password) {
     return $account;
   }
 }
-

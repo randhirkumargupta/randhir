@@ -1671,7 +1671,7 @@ footer {
 
 .itg-common-section {
     .droppable {
-        height: 420px;
+        min-height: 420px;
     }
     .home-page-poll-block-wrap {
         .droppable {
@@ -13723,6 +13723,9 @@ span.close_btt {
         max-width: 100%;
         #main {
             min-height: inherit;
+        }
+        .container {
+            padding: 0;
         }
     }
     .itgvideo {

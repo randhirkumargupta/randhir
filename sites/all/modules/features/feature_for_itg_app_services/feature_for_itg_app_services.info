@@ -1,5 +1,10 @@
+<<<<<<< HEAD:sites/all/modules/features/feature_for_itg_app_services/feature_for_itg_app_services.info
 name = Feature For Rest API
 description = Feature for app api rest services
+=======
+name = Feature for app rest api
+description = Feature for app rest api services
+>>>>>>> 686b033f75b1c58e9f53fa68ff1214b750f6b598:sites/all/modules/features/feature_for_app_rest_api/feature_for_app_rest_api.info
 core = 7.x
 package = Features
 version = 7.x-1.4

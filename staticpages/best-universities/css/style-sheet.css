@@ -1,0 +1,208 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; background:url(../images/bg.jpg) no-repeat;}
+p{float:none;font-size:inherit;padding:0;margin:0;font-size-adjust:none;text-decoration:none;}
+.clr {clear:both}
+.lft {float:left;}
+.rht {float:right}
+
+#itlinks{background:#E4E7EC;}
+#global {margin:0 auto; text-align: center; width:963px;height:22px;}
+#global #itgd_links {color: #1A6471; font: bold 11px/20px arial; text-align: center;}
+#global #itgd_links a{font:bold 11px arial; color:#1A6471; text-decoration:none; margin:0 1em; $margin:0 1em;}
+#wrapper{width:1000px; margin:0 auto;}
+
+header{padding:4px 0 0;}
+header h1{background:url(../images/logo.png) no-repeat; text-indent:-9999px; width:270px; height:174px; float:left; margin:0;}
+header .topad{float:right; width:728px;}
+.topad aside{font:11px arial; color:#8A8F95; text-align:center;}
+.ad aside{font:11px arial; color:#8A8F95; text-align:center;}
+nav {display:block; margin:20px auto 0; position:relative; font:16px Arial;}
+.navimg {margin-right:20px; margin-top: -2px;}
+nav ul {padding:0; margin:0; position:relative; list-style:none;}
+nav li {
+	border-left: 2px solid #516065;
+    color: #D6D6D6;
+    float: left;
+    font: 24px arial;
+    list-style-type: none;
+    margin-top: 5px;
+    position: relative;
+    text-shadow: 1px 0 0 #FFFFFF;
+    text-transform: uppercase;
+}
+
+nav li:hover{}
+nav li a {
+	color: #D6D6D6;
+    display: block;
+    padding: 0 20px;
+    text-decoration: none;
+	}
+nav li.home {margin-top:-10px; border:none;}
+
+
+/*********************************************/
+.main {margin:0 0 10px;}
+.main .left{float:left; width:670px;}
+.main .right{float:right; width:300px;}
+/**********************************************/
+#lead2012{background:url(../images/lead-bg.png) no-repeat; height:338px; width:670px; position:relative;}
+.leadleft{float:left; width:420px;}
+.leadright {
+    float: right;
+    height: 318px;
+    padding: 20px 15px 0 0;
+    position: relative;
+    width: 215px;
+}
+.yearimg{position:absolute; left:5px; top:5px; background:url(../images/2012.png); z-index:1; width:86px; height:25px;}
+.leadleft img{display:block;}
+.leadright .lead2img{display:block; border:1px solid #000;}
+.more {position:absolute; z-index:1; right:3px; bottom:-2px; font:12px "arial black";}
+.more a{text-decoration:none; color:#FFFFFF;}
+.more a:hover{text-decoration:underline;}
+.title{font:14px/18px arial; color:#363636; padding:5px 5px 7px 5px;}
+.desc{font:13px/16px arial; color:#363636; padding:5px 5px 7px 5px;}
+.title a{font:bold 17px/21px arial;}
+.title a, .desc a{text-decoration:none; color:#363636;}
+.title a:hover, .desc a:hover{text-decoration:underline;}
+
+.left ul {
+	font:12px/15px arial;
+	list-style:url(../images/arrow-bullet.gif);
+	margin:0;
+	padding:0 0 0 15px;
+	}
+.left ul li{border-bottom:1px dotted #000000; margin-bottom:5px; padding-bottom:5px; color:#363636;}
+.left ul li a{ text-decoration:none; color:#363636;}
+.left ul li a:hover{text-decoration:underline}
+
+#leftmain{margin-top:20px; width:670px;float:left;}
+#photosdiv{float:left; width:200px;}
+.photoshead{margin-bottom:5px;}
+.photoyear{margin-bottom:20px;}
+.photoyear a img{display:block;}
+.photoueartitle img{margin-right:4px;}
+.photoueartitle p{margin:5px 0 0; color:#aeadad; font:13px arial; line-height:13px;}
+.photoueartitle p a{text-decoration:none; color:#aeadad;}
+.photoueartitle p a:hover{text-decoration:none;}
+
+
+#rankingdiv{float:right; width:395px; background:#EBEBEB; padding:10px 20px}
+.rankingdivyear{margin:0 auto 20px; width:395px;}
+.rankingyear{font:28px arial; color:#45525B;}
+.rankingyear span{font-family:"arial black";}
+.rankingyear a{color:#45525B; text-decoration:none;}
+.rankingyear a:hover{text-decoration:underline;}
+
+
+/*******************Footer**********************/
+footer{background:#FFFFFF; padding:10px;}
+#footer{margin:0 auto;clear:both;width:980px;}
+#itgd_group_links{color:#656565;font:11px/18px arial;margin:0 auto 15px;text-align:center;width:980px;}
+#itgd_group_links strong{color:#656565;font-family:"Arial Black", Gadget, sans-serif; font-weight:600; margin:0 0 0 1px;}
+#itgd_group_links span{color:#656565;font-family:arial;margin:0 0 0 5px;font-weight:bold;}
+#itgd_group_links a{color:#656565;margin:0 5px;text-decoration:none;}
+#itgd_group_links a:hover{text-decoration:underline;}
+ul#footer_menu{margin:0;text-align:center;border:1px solid #656565;border-left:none;border-right:none;line-height:16px;padding-bottom:2px;*padding-top:2px;width:940px;$width:980px; list-style:none;}
+ul#footer_menu li{display:inline;color:#656565;font:11px arial;text-transform:uppercase;border-right:1px solid #656565;padding:0 10px; border-bottom:none;}
+ul#footer_menu li a{color:#656565;text-decoration:none;}
+ul#footer_menu li a:hover{text-decoration:underline;}
+#copyrights{color:#656565;font:11px arial;padding:10px 0;text-align:center;width:980px;}
+#copyrights a{color:#656565;text-decoration:none;}
+#copyrights a:hover{text-decoration:underline;}
+
+
+
+/**********************/
+.righttopmag{margin-bottom: 15px; clear:both;  background:#EBEBEB;}
+.blueheader {
+    color: #D6D6D6;
+    font-family: "Arial Black",Gadget,sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+
+ #multibox #toppart #rightpart a, #multibox #toppart #rightpart a.current, #mtpopchunk #mttoppart #mttopright a, #mtpopchunk #mttoppart #mttopright a.current, .fb-icon, .tw-icon, .plus-icon, .rediff-icon, .rss-icon, .mobile-icon, .tv-icon {background:url(/staticpages/main/images/India-Today-Sprites1.png) no-repeat scroll 0 0;}
+.fb-icon, .tw-icon, .plus-icon, .rediff-icon, .rss-icon, .mobile-icon, .tv-icon,.tv-iconph{width:36px; height:40px; display:block; margin-left:7px; float:left;}
+.fb-icon {background-position: -5px -35px; margin:0;}
+.tw-icon {background-position: -48px -35px;}
+.plus-icon{background-position:-92px -35px;}
+.rediff-icon {background-position: -137px -35px;}
+.rss-icon {background-position: -180px -35px;}
+.mobile-icon {background-position: -223px -35px;}
+.tv-icon {
+    background: url("/staticpages/main/images/ht-live-tv_on-white.gif") no-repeat scroll 3px 5px transparent;
+}
+.tv-iconph {background: url("http://indiatoday.intoday.in/images/ht-live-tv_photogallery.gif") no-repeat scroll 3px 5px transparent;}
+
+/*********most popular******/
+#multibox{border:2px solid #919191;padding:10px 14px;width:268px;}
+#multibox #toppart{border-bottom:1px solid #333333;width:268px;}
+#multibox #toppart .headtxt{float:left;margin-top:3px;}
+#multibox #toppart #rightpart{float:right;}
+#multibox #toppart #rightpart .active{font:bold 12px arial;color:#ffffff;text-align:center;float:left;height:25px;line-height:25px;}
+#multibox #toppart #rightpart .deactive{font:bold 12px arial;color:#ffffff;float:left;text-align:center;margin-left:1px;height:25px;line-height:25px;}
+#multibox #toppart #rightpart .active a, #multibox #toppart #rightpart .deactive a{color:#ffffff;text-decoration:none;}
+#multibox #toppart #rightpart .active a:hover, #multibox #toppart #rightpart .deactive a:hover{text-decoration:underline;}
+#multibox #toppart #rightpart a.current{ background-position:-526px -46px; padding:5px 8px;}
+#multibox #toppart #rightpart a{background-position:-451px -46px; padding:5px 8px;}
+#multibox .mediabox{width:268px;border-bottom:0px solid #333333;padding:0px 0 1px 0;float:left;}
+#multibox .mediaimg{float:left;background-position:top center;background-repeat:no-repeat;width:178px;height:133px;position:relative;}
+#multibox .mediaimg .mediaimgpng{position:absolute;left:0;top:0;}
+#multibox .mediatxt{float:left;margin-left:2px;font-size:12px;text-align:left;width:78px;overflow:hidden;padding:5px;background-color:#333333;color:#ffffff;min-height:123px;}
+#multibox .mediatxt a{color:#ffffff;}
+#multibox .mediatxt .otherhead{font-size:11px;line-height:15px;margin-top:5px;}
+#multibox .mediatxt .otherhead a{color:#ffffff;line-height:15px;text-decoration:none;}
+#multibox .mediatxt .otherhead a:hover{color:#ffffff;line-height:15px;text-decoration:underline;}
+#multibox .mediaSbox{width:88px;float:left;color:#ffffff;background-color:#333333;min-height:135px;overflow:hidden; position:relative;}
+#multibox .mediaSbox .mediaSmarg{padding:3px;}
+#multibox .mediaSbox .mediaSmarg a{color:#ffffff;text-decoration:none;margin-top:3px; float:left;}
+#multibox .mediaSbox .mediaSmarg a:hover{text-decoration:underline;}
+#mtpopchunk{border:2px solid #919191;padding:10px 14px 0px 14px;float: left;background:#EBEBEB;}
+#mtpopchunk #mttoppart {
+    border-bottom: 1px solid #333333;
+    float: left;
+    width: 100%;
+}
+#mtpopchunk #mttoppart .headpart{float:left;margin-top:3px;}
+#mtpopchunk #mttoppart #mttopright{float:right;}
+#mtpopchunk #mttoppart #mttopright .active{font:bold 12px arial;color:#ffffff;text-align:center;float:left;height:25px;line-height:25px;}
+#mtpopchunk #mttoppart #mttopright .deactive{font:bold 12px arial;color:#ffffff;float:left;text-align:center;margin-left:1px;height:25px;line-height:25px;}
+#mtpopchunk #mttoppart #mttopright .active a, #mtpopchunk #mttoppart #mttopright .deactive a{color:#ffffff;text-decoration:none;}
+#mtpopchunk #mttoppart #mttopright .active a:hover, #mtpopchunk #mttoppart #mttopright .deactive a:hover{text-decoration:underline;}
+#mtpopchunk #mttoppart #mttopright a.current {
+    background-position: -526px -46px;
+    padding: 5px 8px;
+}
+#mtpopchunk #mttoppart #mttopright a {
+    background-position: -453px -46px;
+    padding: 5px 8px;
+}
+#mtpopchunk .mtpopbox{width:100%;border-bottom:1px solid #333333;padding:3px 0 0 0;float:left;}
+#mtpopchunk .mtpoptxt{float:right;color:#3d4561;margin-left:8px;font-size:12px;text-align:left;width:170px;}
+#mtpopchunk .mtpoptxt a{color:#3d4561;text-decoration:none;}
+#mtpopchunk .mtpoptxt a:hover{text-decoration:underline;}
+#mtpopchunk .comment{color:#3F80A6;text-align:left;margin-top:2px;font-size:11px;}
+#mtpopchunk .comment a{color:#3F80A6;text-decoration:none;}
+#mtpopchunk .comment a:hover{text-decoration:underline;}
+.spcmargin{margin-bottom:10px;text-align:left;float:left;}
+.mttoppart p.header {margin:0; padding:0;}
+.header {
+    color: #DC0C17;
+    font-family: "Arial Black",Gadget,sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    text-align: left;
+    width: 100%;
+}
+.imgrepeat{background-position:top center;background-repeat:no-repeat;width:88px;height:66px;float:left;margin-bottom:0px;}
+/********************************/
+

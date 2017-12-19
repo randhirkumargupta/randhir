@@ -7,12 +7,12 @@
  * and other commons functions/hooks. if necessary
  */
 
-
 /**
- * Implements hook_init(). 
+ * Implements hook_init().
  */
 function itg_app_api_init() {
     module_load_include('inc', 'itg_app_api', 'inc/helper');
+    module_load_include('inc', 'itg_app_api', 'inc/simple_html_dom');
 }
 
 /**
@@ -23,10 +23,10 @@ function itg_app_api_services_resources() {
 
     $resources = array();
 
-//Include the necessary inc files.
+    //Include the necessary inc files.
     module_load_include('inc', 'itg_app_api', 'itg_app_api.services');
 
-//Service Apis for contents.
+    //Service Apis for contents.
     $resources += itg_app_api_resource();
 
     return $resources;
@@ -36,9 +36,7 @@ function itg_app_api_services_resources() {
  * Implements hook_menu().
  */
 function itg_app_api_menu() {
-
     $items = array();
-
     $items['admin/api-configuration'] = array(
         'title' => 'API Configuration',
         'description' => 'API Configuration',
@@ -132,7 +130,6 @@ function itg_app_api_menu() {
     );
 
     //sprint 2 seting menu,  admin/structure/services
-
     $items['admin/api-configuration/rest-api/ad-config-json'] = array(
         'title' => 'update ad config json',
         'description' => 'ad_config_json',
@@ -240,17 +237,16 @@ function itg_app_api_menu() {
         'type' => MENU_NORMAL_ITEM,
     );
 
-
     return $items;
 }
 
-/*
+/**
  * mobile_service_token form decalation
+ *
+ * @return type
  */
-
 function mobile_service_token() {
     $form = array();
-
     $form['mobile_service_token'] = array(
         '#type' => 'textfield',
         '#title' => t('web service token'),
@@ -258,26 +254,16 @@ function mobile_service_token() {
         '#description' => t("Token for web service API."),
         '#required' => TRUE,
     );
-
     return system_settings_form($form);
 }
 
-/*
- * mobile_service_token form validation
- */
-
-function mobile_service_token_validate($form, &$form_state) {
-    
-}
-
-/*
+/**
  * config_update_status_json form decalation
- * 
+ *
+ * @return type
  */
-
 function config_update_status_json() {
     $form = array();
-
     $form['config_update_status_json'] = array(
         '#type' => 'textarea',
         '#title' => t('config update status json'),
@@ -288,10 +274,11 @@ function config_update_status_json() {
     return system_settings_form($form);
 }
 
-/*
+/**
  * datanotexist_api_json form decalation
+ *
+ * @return type
  */
-
 function datanotexist_api_json() {
     $form = array();
 
@@ -305,10 +292,11 @@ function datanotexist_api_json() {
     return system_settings_form($form);
 }
 
-/*
+/**
  * hamburger_menu_json form decalation
+ *
+ * @return type
  */
-
 function hamburger_menu_json() {
     $form = array();
 
@@ -322,7 +310,11 @@ function hamburger_menu_json() {
     return system_settings_form($form);
 }
 
-// horizontal_menu_json form decalation
+/**
+ * horizontal_menu_json form decalation
+ *
+ * @return type
+ */
 function horizontal_menu_json() {
     $form = array();
 
@@ -336,7 +328,11 @@ function horizontal_menu_json() {
     return system_settings_form($form);
 }
 
-// master_config_json form decalation
+/**
+ * master_config_json form decalation
+ *
+ * @return type
+ */
 function master_config_json() {
     $form = array();
 
@@ -350,7 +346,11 @@ function master_config_json() {
     return system_settings_form($form);
 }
 
-// server_error_master_json form decalation
+/**
+ * server_error_master_json form decalation
+ *
+ * @return type
+ */
 function server_error_master_json() {
     $form = array();
 
@@ -379,7 +379,8 @@ function getCommentsCount($nid) {
 
 /**
  * function for return node published date
- * @arg int $nid 
+ * @arg int $nid
+ *
  * @return datetime $published_datetime
  */
 function getNodePublishedDate($nid) {
@@ -399,35 +400,44 @@ function getNodePublishedDate($nid) {
 }
 
 // sprint2 seting function
-// ad_config_json form decalation
+
+/**
+ * ad_config_json form decalation
+ *
+ * @return type
+ */
 function ad_config_json() {
     $form = array();
-
     $form['ad_config_json'] = array(
         '#type' => 'textarea',
         '#title' => t('ad config json'),
         '#default_value' => variable_get('ad_config_json'),
         '#required' => TRUE,
     );
-
     return system_settings_form($form);
 }
 
-// livetv_channellist_json form decalation
+/**
+ * livetv_channellist_json form decalation
+ *
+ * @return type
+ */
 function livetv_channellist_json() {
     $form = array();
-
     $form['livetv_channellist_json'] = array(
         '#type' => 'textarea',
         '#title' => t('livetv channellist json'),
         '#default_value' => variable_get('livetv_channellist_json'),
         '#required' => TRUE,
     );
-
     return system_settings_form($form);
 }
 
-// livetv_json form decalation
+/**
+ * livetv aajtak form decalations
+ *
+ * @return type
+ */
 function livetv_aajtak() {
     $form = array();
 
@@ -441,7 +451,11 @@ function livetv_aajtak() {
     return system_settings_form($form);
 }
 
-// livetv_indiatoday form decalation
+/**
+ * livetv_indiatoday form decalations
+ *
+ * @return type
+ */
 function livetv_indiatoday() {
     $form = array();
 
@@ -455,7 +469,11 @@ function livetv_indiatoday() {
     return system_settings_form($form);
 }
 
-// livetv_delhiaajtak form decalation
+/**
+ * livetv_delhiaajtak form decalation
+ *
+ * @return type
+ */
 function livetv_delhiaajtak() {
     $form = array();
 
@@ -469,7 +487,11 @@ function livetv_delhiaajtak() {
     return system_settings_form($form);
 }
 
-// livetv_tej form decalation
+/**
+ * livetv_tej form decalation
+ *
+ * @return type
+ */
 function livetv_tej() {
     $form = array();
 
@@ -483,7 +505,11 @@ function livetv_tej() {
     return system_settings_form($form);
 }
 
-// otherapps_ios_json form decalation
+/**
+ * otherapps_ios_json form decalation
+ *
+ * @return type
+ */
 function otherapps_ios_json() {
     $form = array();
 
@@ -497,17 +523,19 @@ function otherapps_ios_json() {
     return system_settings_form($form);
 }
 
-// otherapps_android_json form decalation
+/**
+ * otherapps_android_json form decalation
+ *
+ * @return type
+ */
 function otherapps_android_json() {
     $form = array();
-
     $form['otherapps_android_json'] = array(
         '#type' => 'textarea',
         '#title' => t('otherapps android json'),
         '#default_value' => variable_get('otherapps_android_json'),
         '#required' => TRUE,
     );
-
     return system_settings_form($form);
 }
 
@@ -518,10 +546,12 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
     $u_agent = $_SERVER['HTTP_USER_AGENT'];
     $flag = 0;
 
-// user agent for browser
+    // user agent for browser
     if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
         $flag = 1;
-    } elseif (preg_match('/Trident/i', $u_agent)) { // this condition is for IE11
+    }
+    // this condition is for IE11
+    elseif (preg_match('/Trident/i', $u_agent)) {
         $flag = 1;
     } elseif (preg_match('/Firefox/i', $u_agent)) {
         $flag = 1;
@@ -543,7 +573,7 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
     $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
     $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
 
-    if ($iphone || $android || $palmpre || $ipod || $berry == true) {
+    if ($iphone || $android || $palmpre || $ipod || $berry == TRUE) {
         $flag = 1;
     }
     $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list", "author_list", "anchor_list", "get_the_user_follow_status", "follow_topic", "get_the_user_follow_status", "user_follow_topic_list");
@@ -579,23 +609,24 @@ function getStoryType($nid) {
  * @return array 
  */
 
-function callAPI($method, $url, $data = false) {
-
+function callAPI($method, $url, $data = FALSE) {
     $curl = curl_init();
-
     switch ($method) {
         case "POST":
             curl_setopt($curl, CURLOPT_POST, 1);
-
-            if ($data)
+            if ($data) {
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            }
             break;
+
         case "PUT":
             curl_setopt($curl, CURLOPT_PUT, 1);
             break;
+
         default:
-            if ($data)
+            if ($data) {
                 $url = sprintf("%s?%s", $url, http_build_query($data));
+            }
     }
 
     // Optional Authentication:
@@ -614,32 +645,33 @@ function callAPI($method, $url, $data = false) {
 
 /**
  * Implements hook_boot().
+ * for url inbond alter.
  */
 function itg_app_api_boot() {
-    
+    // delection function required for inbond alter,
 }
 
-// code for check POST method only start
+/**
+ * code for check POST method only start
+ *
+ * @return int
+ */
 function checkReqMethod() {
-
     $req_method = $_SERVER['REQUEST_METHOD'];
-
     $flag = 1;
     if ($req_method != "POST") {
         $flag = 0;
     } else {
         $flag = 1;
     }
-
     return $flag;
 }
 
-// code for check POST method only end
-// for static other device
-/*
+/**
  * adconfig_android form decalation
+ *
+ * @return type
  */
-
 function adconfig_android() {
     $form = array();
 
@@ -670,10 +702,11 @@ function adconfig_ipad() {
     return system_settings_form($form);
 }
 
-/*
+/**
  * adconfig_iphone form decalation
+ *
+ * @return type
  */
-
 function adconfig_iphone() {
     $form = array();
 
@@ -687,10 +720,11 @@ function adconfig_iphone() {
     return system_settings_form($form);
 }
 
-/*
+/**
  * adconfig_tab form decalation
+ *
+ * @return type
  */
-
 function adconfig_tab() {
     $form = array();
 
@@ -706,7 +740,9 @@ function adconfig_tab() {
 
 /**
  * Function for get_personalization_front_data_service.
+ *
  * @param obj $user
+ *
  * @return int
  */
 function get_personalization_front_data_service($user) {
@@ -715,13 +751,9 @@ function get_personalization_front_data_service($user) {
     // As in table itg_widget_order tid is saved in nid colom.
     // So join field_story_category_tid join is applied on nid.
     $query = db_select('itg_widget_order', 'iwo');
-    $query->fields('iwo', array('weight', 'nid'))
-            ->condition('iwo.widget', "personalization_widget")
-            ->condition('iwo.extra', $user->uid)
-            // Orderby weight or taxonomyterm id.
-            ->orderBy('iwo.weight', 'DESC')
-            ->orderBy('iwo.nid', 'DESC')
-            ->range(0, 30);
+    // Orderby weight or taxonomyterm id.
+    $query->fields('iwo', array('weight', 'nid'))->condition('iwo.widget', "personalization_widget")->condition('iwo.extra', $user->uid)
+            ->orderBy('iwo.weight', 'DESC')->orderBy('iwo.nid', 'DESC')->range(0, 30);
     $result = $query->execute()->fetchAllAssoc('nid');
     $new_array_of_terms = array_keys($result);
     // case handled if perferences is not saved.
@@ -729,11 +761,7 @@ function get_personalization_front_data_service($user) {
         $weight_count_loop = TRUE;
         $query = db_select('itg_widget_order', 'iwo');
         $query->leftJoin('field_data_field_set_as_featured_cate', 'fc', 'fc.entity_id=iwo.cat_id');
-        $query->fields('iwo', array('cat_id'))
-                ->condition('iwo.widget', "section_wise_widget")
-                ->condition('fc.field_set_as_featured_cate_value', 'Yes')
-                ->groupBy('iwo.cat_id')
-                ->range(0, 30);
+        $query->fields('iwo', array('cat_id'))->condition('iwo.widget', "section_wise_widget")->condition('fc.field_set_as_featured_cate_value', 'Yes')->groupBy('iwo.cat_id')->range(0, 30);
         $result = $query->execute()->fetchAllAssoc('cat_id');
     }
     if ($weight_count_loop) {
@@ -750,7 +778,9 @@ function get_personalization_front_data_service($user) {
 
 /**
  * Function to get total number of nodes in taxonomy.
+ *
  * @param int $tid
+ *
  * @return int
  */
 function count_node_under_tid_service($tid) {
@@ -766,6 +796,7 @@ function count_node_under_tid_service($tid) {
 
 /**
  * function for save_itg_widget_personalization_data_service
+ *
  * @param array $updates
  */
 function save_itg_widget_personalization_data_service($updates) {
@@ -775,29 +806,24 @@ function save_itg_widget_personalization_data_service($updates) {
     $nids = array_keys($updates);
     // Delete all the tids from table if they are not in $updates variable
     // unsued tid should be delete
-    db_delete('itg_widget_order')
-            ->condition('widget', $widget_name)
-            ->condition('nid', $nids, "NOT IN")
-            ->condition('extra', $user->uid)
-            ->execute();
+    db_delete('itg_widget_order')->condition('widget', $widget_name)->condition('nid', $nids, "NOT IN")->condition('extra', $user->uid)->execute();
     // Update the weight of tids if exists or insert if dont exists.
     foreach ($updates as $term_id => $weight) {
-        db_merge('itg_widget_order')
-                ->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))
-                ->fields(array(
-                    'nid' => $term_id,
-                    'widget' => $widget_name,
-                    'weight' => $weight,
-                    'extra' => $user->uid,
-                ))
-                ->execute();
+        db_merge('itg_widget_order')->key(array('nid' => $term_id, 'widget' => $widget_name, 'extra' => $user->uid))->fields(array(
+            'nid' => $term_id,
+            'widget' => $widget_name,
+            'weight' => $weight,
+            'extra' => $user->uid,
+        ))->execute();
     }
     drupal_set_message(t("My Preferences Has Been Save."));
 }
 
 /**
  * Function to check old/new pass.
+ *
  * @param array
+ *
  * @return array
  */
 function validateServicePass($params) {
@@ -832,7 +858,9 @@ function validateServicePass($params) {
 
 /**
  * function for get_personalization_saved_value_service .
+ *
  * @param int
+ *
  * @return array
  */
 function get_personalization_saved_value_service($uid) {
@@ -846,7 +874,9 @@ function get_personalization_saved_value_service($uid) {
 
 /**
  * Call back function for sign up raw data validation .
+ *
  * @param array
+ *
  * @return array
  */
 function signupValidation_rapid($params) {
@@ -884,7 +914,7 @@ function signupValidation_rapid($params) {
     }
 
 
-    // fname validation      
+    // fname validation
     if (empty($first_name)) {
         $error['fname'] = t('Please enter first name');
     } else {
@@ -893,29 +923,19 @@ function signupValidation_rapid($params) {
         } else {
             if (strlen($first_name) > 25) {
                 $error['fname'] = t('Cannot validate Fname');
-            } else {
-                //$error['fname'] = t('');
             }
         }
     }
-
-
-
-    // lname validation      
+    // lname validation
     if ($last_name) {
         if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
             $error['lname'] = t('Cannot validate Lname');
         } else {
             if (strlen($last_name) > 25) {
                 $error['lname'] = t('Cannot validate Lname');
-            } else {
-                //$error['lname'] = t('');
             }
         }
     }
-
-
-
     // user_id validation
 
     if (empty($user_id)) {
@@ -925,20 +945,12 @@ function signupValidation_rapid($params) {
         if (!$userid_is_numeric) {
             if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
                 $error['user_id'] = t("Invalid Email");
-            } else if (!empty($get_user_check_email)) {
+            } elseif (!empty($get_user_check_email)) {
                 $error['user_id'] = t("User already exists with " . $user_id . "");
-            } else if (!empty($get_user_check_domain)) {
-                //$error['user_id'] = t("User already exists with " . $user_id . "");
-            } else {
-                //$error['user_id'] = t("");
             }
         } else {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("Invalid Mobile Number");
-            } else if (!empty($get_user_check_mobile)) {
-                //$error['user_id'] = t("User already exists with " . $user_id . "");
-            } else {
-                //$error['user_id'] = t('');
             }
         }
     }
@@ -952,17 +964,16 @@ function signupValidation_rapid($params) {
 
     if (empty($pass)) {
         $error['password'] = t('please enter password');
-    } else if (strlen($pass) < $min_length) {
+    } elseif (strlen($pass) < $min_length) {
         $error['password'] = t('Password should be minimum 6 characters without any space ');
-    } else if (strlen($pass) > $max_length) {
+    } elseif (strlen($pass) > $max_length) {
         $error['password'] = t('Password should be maximum 15 characters without any space ');
-    } else if (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
+    } elseif (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
         $error['password'] = t("Password should be 1 special and 1 numeric character");
-    } else if ($pass != $cpass) {
+    } elseif ($pass != $cpass) {
         $error['password'] = t('Password and Confirm Password do not match');
-    } else {
-        //$error['password'] = t('');
     }
+
     // deviceid/type start
     if (empty($device_id)) {
         $error['device_id'] = t('Device id cannot be an empty');
@@ -980,7 +991,9 @@ function signupValidation_rapid($params) {
 
 /**
  * function for upload user profile image from binary file  .
+ *
  * @param binay img file
+ *
  * @return int FID
  */
 function uplodaProfileImg_Rapid($profile_image) {
@@ -1013,7 +1026,9 @@ function uplodaProfileImg_Rapid($profile_image) {
 
 /**
  * function for update user profile at signup  .
- * @param array $data 
+ *
+ * @param array $data
+ *
  * @return object user
  */
 function updateUsedrProfileAtSignup_rapid($data, $action = 1) {
@@ -1062,21 +1077,21 @@ function updateUsedrProfileAtSignup_rapid($data, $action = 1) {
 
     // query for insert data into itg_app_device - $action $token
     $token = drupal_get_token('services');
-    db_insert('itg_app_device')
-            ->fields(array(
-                'uid' => $uid,
-                'device_id' => check_plain($device_id),
-                'device_type' => check_plain($device_type),
-                'action' => check_plain($action),
-                'token' => check_plain($token),
-            ))
-            ->execute();
+    db_insert('itg_app_device')->fields(array(
+        'uid' => $uid,
+        'device_id' => check_plain($device_id),
+        'device_type' => check_plain($device_type),
+        'action' => check_plain($action),
+        'token' => check_plain($token),
+    ))->execute();
     return $flag_save;
 }
 
 /**
  * Call back function for login up raw data validation .
+ *
  * @param array
+ *
  * @return array
  */
 function loginValidation_rapid($params) {
@@ -1114,7 +1129,7 @@ function loginValidation_rapid($params) {
         if (!$userid_is_numeric) {
             if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
                 $error['user_id'] = t("Invalid Email");
-            } else if (empty($get_user_check_email)) {
+            } elseif (empty($get_user_check_email)) {
                 //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
             } else {
                 //$error['user_id'] = t("");
@@ -1122,10 +1137,6 @@ function loginValidation_rapid($params) {
         } else {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("Invalid Mobile Number");
-            } else if (empty($get_user_check_mobile)) {
-                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
-            } else {
-                //$error['user_id'] = t('');
             }
         }
     }
@@ -1139,12 +1150,10 @@ function loginValidation_rapid($params) {
 
     if (empty($pass)) {
         $error['password'] = t('please enter password');
-    } else if (strlen($pass) < $min_length) {
+    } elseif (strlen($pass) < $min_length) {
         $error['password'] = t('Password should be minimum 6 characters without any space ');
-    } else if (strlen($pass) > $max_length) {
+    } elseif (strlen($pass) > $max_length) {
         $error['password'] = t('Password should be maximum 15 characters without any space ');
-    } else {
-        //$error['password'] = t('');
     }
 
     // deviceid/type start
@@ -1164,7 +1173,9 @@ function loginValidation_rapid($params) {
 
 /**
  * function for delete token from itg_app_device
+ *
  * @param array
+ *
  * @return array
  */
 function cleanToken_Rapid($params) {
@@ -1176,18 +1187,18 @@ function cleanToken_Rapid($params) {
     $user = user_load_by_name($user_id);
     $uid = $user->uid;
     if ($uid) {
-
         $query = db_delete('itg_app_device');
         $query->condition('uid', $uid);
         $query->condition('device_id', $device_id);
-        //$query->condition('token', $auth_token);
         $query->execute();
     }
 }
 
 /**
  * Call back function for forgot password raw data validation .
+ *
  * @param array
+ *
  * @return array
  */
 function forgotPasswordValidation_rapid($params) {
@@ -1224,18 +1235,10 @@ function forgotPasswordValidation_rapid($params) {
         if (!$userid_is_numeric) {
             if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
                 $error['user_id'] = t("Invalid email/phone number");
-            } else if (empty($get_user_check_email)) {
-                // $error['user_id'] = t("This phone number/ email is not registered");
-            } else {
-                //$error['user_id'] = t("");
             }
         } else {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("Invalid email/phone number");
-            } else if (empty($get_user_check_mobile)) {
-                //$error['user_id'] = t("This phone number/ email is not registered");
-            } else {
-                //$error['user_id'] = t('');
             }
         }
     }
@@ -1257,7 +1260,8 @@ function forgotPasswordValidation_rapid($params) {
 
 /**
  * Implements itg_otp_device_info_insert_rapid
- * @param array $pram 
+ *
+ * @param array $pram
  * @param int $rand_otp
  * @param int $source
  * @param string $created
@@ -1266,23 +1270,23 @@ function itg_otp_device_info_insert_rapid($params, $rand_otp, $source, $created)
     $user_id = trim($params['user_id']);
     $device_id = trim($params['device_id']);
     $device_type = trim($params['device_type']);
-    //$created_fi = UNIX_TIMESTAMP($created);
 
-    $otp = db_insert('itg_otp_device_info') // Table name no longer needs {}
-            ->fields(array(
-                'user_id' => $user_id,
-                'device_id' => $device_id,
-                'device_type' => $device_type,
-                'source' => $source,
-                'otp' => $rand_otp,
-                    //'created' => UNIX_TIMESTAMP($created),
-            ))
-            ->execute();
+    // Table name no longer needs {}
+    $otp = db_insert('itg_otp_device_info')
+                    ->fields(array(
+                        'user_id' => $user_id,
+                        'device_id' => $device_id,
+                        'device_type' => $device_type,
+                        'source' => $source,
+                        'otp' => $rand_otp,
+                    ))->execute();
 }
 
 /**
  * Callback function for validate raw data of reset_password api.
+ *
  * @param array
+ *
  * @return array
  */
 function validateResetPass($params) {
@@ -1321,18 +1325,10 @@ function validateResetPass($params) {
         if (!$userid_is_numeric) {
             if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
                 $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-            } else if (empty($get_user_check_email)) {
-                // $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-            } else {
-                //$error['user_id'] = t("");
             }
         } else {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-            } else if (empty($get_user_check_mobile)) {
-                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
-            } else {
-                //$error['user_id'] = t('');
             }
         }
     }
@@ -1347,21 +1343,21 @@ function validateResetPass($params) {
     //new pass
     if (empty($pass)) {
         $error['new_password'] = t('please enter new password');
-    } else if (strlen($pass) < $min_length) {
+    } elseif (strlen($pass) < $min_length) {
         $error['new_password'] = t('New Password should be minimum 6 characters without any space ');
-    } else if (strlen($pass) > $max_length) {
+    } elseif (strlen($pass) > $max_length) {
         $error['new_password'] = t('New Password should be maximum 15 characters without any space ');
-    } else if (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
+    } elseif (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
         $error['password'] = t("New Password should be 1 special and 1 numeric character");
     }
     //confirm pass
     if (empty($pass2)) {
         $error['confirm_password'] = t('please enter confirm password');
-    } else if (strlen($pass2) < $min_length) {
+    } elseif (strlen($pass2) < $min_length) {
         $error['confirm_password'] = t('Confirm Password should be minimum 6 characters without any space ');
-    } else if (strlen($pass2) > $max_length) {
+    } elseif (strlen($pass2) > $max_length) {
         $error['confirm_password'] = t('Confirm Password should be maximum 15 characters without any space ');
-    } else if (!preg_match('/\d/', $pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
+    } elseif (!preg_match('/\d/', $pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
         $error['password'] = t("Confirm Password should be 1 special and 1 numeric character");
     }
     //match both pass
@@ -1387,8 +1383,9 @@ function validateResetPass($params) {
 
 /**
  * Implements itg_reset_pass_info_insert_rapid
- * @param array $params 
- * @param int $source 
+ *
+ * @param array $params
+ * @param int $source
  */
 function itg_reset_pass_info_insert_rapid($params, $source) {
     $user_id = trim($params['user_id']);
@@ -1397,19 +1394,21 @@ function itg_reset_pass_info_insert_rapid($params, $source) {
     $device_id = trim($params['device_id']);
     $device_type = trim($params['device_type']);
 
-    $otp = db_insert('itg_reset_pass_info') // Table name no longer needs {}
-            ->fields(array(
-                'user_id' => $user_id,
-                'device_id' => $device_id,
-                'device_type' => $device_type,
-                'source' => $source,
-            ))
-            ->execute();
+    // Table name no longer needs {}
+    $otp = db_insert('itg_reset_pass_info')
+                    ->fields(array(
+                        'user_id' => $user_id,
+                        'device_id' => $device_id,
+                        'device_type' => $device_type,
+                        'source' => $source,
+                    ))->execute();
 }
 
 /**
  * Callback function for validate raw data of change_password api.
+ *
  * @param array
+ *
  * @return array
  */
 function validateChangePass($params) {
@@ -1451,31 +1450,22 @@ function validateChangePass($params) {
         if (!$userid_is_numeric) {
             if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
                 $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-            } else if (empty($get_user_check_email)) {
-                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
-            } else {
-                //$error['user_id'] = t("");
             }
         } else {
             if (!preg_match('/^\d{10}$/', $user_id)) {
                 $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-            } else if (empty($get_user_check_mobile)) {
-                //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
-            } else {
-                //$error['user_id'] = t('');
             }
         }
     }
     //old pass validation
     if (empty($old_password)) {
         $error['old_password'] = t('please enter old password');
-    } else if ($old_password == $new_password) {
+    } elseif ($old_password == $new_password) {
         $error['old_password'] = t('New Password can\'t be same as Old');
-    } else if (!$oldpass_flag) {
+    } elseif (!$oldpass_flag) {
         $error['old_password'] = t('old password is not correct');
-    } else {
-        //$error['old_password'] = t('');
     }
+
     // password validation
     $pass = $new_password;
     $pass2 = $confirm_password;
@@ -1486,21 +1476,21 @@ function validateChangePass($params) {
     //new pass
     if (empty($pass)) {
         $error['new_password'] = t('please enter new password');
-    } else if (strlen($pass) < $min_length) {
+    } elseif (strlen($pass) < $min_length) {
         $error['new_password'] = t('New Password should be minimum 6 characters without any space ');
-    } else if (strlen($pass) > $max_length) {
+    } elseif (strlen($pass) > $max_length) {
         $error['new_password'] = t('New Password should be maximum 15 characters without any space ');
-    } else if (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
+    } elseif (!preg_match('/\d/', $pass) || !preg_match('/[^a-zA-Z\d]/', $pass)) {
         $error['password'] = t("New Password should be 1 special and 1 numeric character");
     }
     //confirm pass
     if (empty($pass2)) {
         $error['confirm_password'] = t('please enter confirm password');
-    } else if (strlen($pass2) < $min_length) {
+    } elseif (strlen($pass2) < $min_length) {
         $error['confirm_password'] = t('Confirm Password should be minimum 6 characters without any space ');
-    } else if (strlen($pass2) > $max_length) {
+    } elseif (strlen($pass2) > $max_length) {
         $error['confirm_password'] = t('Confirm Password should be maximum 15 characters without any space ');
-    } else if (!preg_match('/\d/', $pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
+    } elseif (!preg_match('/\d/', $pass2) || !preg_match('/[^a-zA-Z\d]/', $pass2)) {
         $error['password'] = t("Confirm Password should be 1 special and 1 numeric character");
     }
     //match both pass
@@ -1516,7 +1506,6 @@ function validateChangePass($params) {
         $error['device_type'] = t('Device type cannot be an empty');
     }
     // deviceid/type end
-
     $error_settings = array();
     $error_settings['custom_error'] = $error;
 
@@ -1525,7 +1514,9 @@ function validateChangePass($params) {
 
 /**
  * Call back function for social sign up raw data validation .
+ *
  * @param array
+ *
  * @return array
  */
 function socal_signupValidation_rapid($params, $social_domain) {
@@ -1573,7 +1564,7 @@ function socal_signupValidation_rapid($params, $social_domain) {
         if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
             $error['user_id'] = t("Invalid  User id");
         } else {
-            if (strpos($user_id, $social_domain) !== false) {
+            if (strpos($user_id, $social_domain) !== FALSE) {
                 
             } else {
                 $error['user_id'] = t("Invalid  User id");
@@ -1597,7 +1588,9 @@ function socal_signupValidation_rapid($params, $social_domain) {
 
 /**
  * Call back function for authtoken raw data validation .
+ *
  * @param array
+ *
  * @return array
  */
 function authtokenValidation_rapid($params) {
@@ -1632,7 +1625,9 @@ function authtokenValidation_rapid($params) {
 
 /**
  * Call back function for fblogin_rapid raw data validation .
+ *
  * @param array
+ *
  * @return array
  */
 function fblogin_rapid($params) {
@@ -1659,7 +1654,7 @@ function fblogin_rapid($params) {
     if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
         $error['user_id'] = t("Invalid  User id");
     } else {
-        if (strpos($user_id, "@facebook.com") !== false) {
+        if (strpos($user_id, "@facebook.com") !== FALSE) {
             
         } else {
             $error['user_id'] = t("Invalid  User id");
@@ -1674,7 +1669,9 @@ function fblogin_rapid($params) {
 
 /**
  * Call back function for twtogin_rapid raw data validation .
+ *
  * @param array
+ *
  * @return array
  */
 function twtogin_rapid($params) {
@@ -1701,7 +1698,7 @@ function twtogin_rapid($params) {
     if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
         $error['user_id'] = t("Invalid  User id");
     } else {
-        if (strpos($user_id, "@twitter.com") !== false) {
+        if (strpos($user_id, "@twitter.com") !== FALSE) {
             
         } else {
             $error['user_id'] = t("Invalid  User id");
@@ -1716,7 +1713,9 @@ function twtogin_rapid($params) {
 
 /**
  * Call back function for device token reset .
+ *
  * @param array
+ *
  * @return array
  */
 function deviceTokenReset_Rapid($params) {
@@ -1745,7 +1744,9 @@ function deviceTokenReset_Rapid($params) {
 
 /**
  * Call back function for authtoken raw data validation .
+ *
  * @param array
+ *
  * @return array
  */
 function resentotpValidation_rapid($params) {
@@ -1775,11 +1776,13 @@ function resentotpValidation_rapid($params) {
 
 /**
  * Call back function for nody body token filter .
+ *
  * @param string $n_body
+ *
  * @return string $n_body
  */
 function formateNodeBodyToken($n_body) {
-    include 'simple_html_dom.php';
+    //include 'simple_html_dom.php';
     $token_list = array('div[class=quiz]', 'div[class=poll]', 'div[class=survey]', '<p>[ITG:LISTICLES]</p>', 'div[class=itgimage]', '<p>[ITG:TECH-PHOTOS]</p>', '<p>[ITG:EXPERT-CHUNK]</p>', '<p>[ITG:FACTOIDS]</p>', '<p>[ITG:TECH-PHOTO-GALLERY]</p>');
     $data = array();
     $poll_id = 0;
@@ -1788,6 +1791,9 @@ function formateNodeBodyToken($n_body) {
     // loop on token array
     foreach ($token_list as $tkey => $tvalue) {
         if ($tvalue == '<p>[ITG:TECH-PHOTOS]</p>' || $tvalue == '<p>[ITG:EXPERT-CHUNK]</p>' || $tvalue == '<p>[ITG:FACTOIDS]</p>' || $tvalue == '<p>[ITG:LISTICLES]</p>' || $tvalue == '<p>[ITG:TECH-PHOTO-GALLERY]</p>') {
+
+            $tvalue = str_replace("<p>", "", $tvalue);
+            $tvalue = str_replace("</p>", "", $tvalue);
             $tvalue_replave = "<ITG-NATIVEAPP>" . $tvalue . "<ITG-NATIVEAPP>";
             $n_body = str_replace($tvalue, $tvalue_replave, $n_body);
         } else {
@@ -1817,6 +1823,8 @@ function formateNodeBodyToken($n_body) {
     $paragraph_rep = $paragraph . "<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>";
     $n_body = str_replace($paragraph, $paragraph_rep, $n_body);
     // add AD block after 1st <p> end
+    $n_body = str_replace('<img', '<img style="width:100%;height: auto;"', $n_body);
+    $n_body = str_replace('<iframe', '<iframe style="width:100%;height: auto;"', $n_body);
     $data['n_body'] = $n_body;
     $data['poll_id'] = $poll_id;
     return $data;
@@ -1837,12 +1845,14 @@ function getTechProsImg($content_org) {
         foreach ($str_html->find('ul[class="pron-cons-img]') as $element) {
             $img_str = $element;
         }
-        $str_html2 = str_get_html($img_str);
-        foreach ($str_html2->find('img') as $element) {
-            $img_str_img = $element;
+        if ($img_str != "") {
+            $str_html2 = str_get_html($img_str);
+            foreach ($str_html2->find('img') as $element) {
+                $img_str_img = $element;
+            }
+            $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
+            $src = $xpath->evaluate("string(//img/@src)");
         }
-        $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
-        $src = $xpath->evaluate("string(//img/@src)");
     }
     return $src;
 }
@@ -1870,13 +1880,16 @@ function getTechProsh2($content_org) {
 }
 
 /**
+ *
  * @param int $nid of the author or anchor
  * @param string $type author or anchor
+ *
  * @return $status boolean True|False
  */
 function valid_anchor_author($nid, $type) {
 
-    $node = node_load($nid); // reporter 285750 , anchor 285903
+    // reporter 285750 , anchor 285903
+    $node = node_load($nid);
     $occupation_tids = array();
 
     foreach ($node->field_celebrity_pro_occupation['und'] as $data) {
@@ -1896,4 +1909,21 @@ function valid_anchor_author($nid, $type) {
         }
     }
     return $status;
+}
+
+/**
+ * function for getNode prime cat tid ByNid
+ * @pram datetime $nid
+ *
+ * @return obj term_object;
+ */
+function getNodePrimeCatByNid($nid) {
+    if ($nid) {
+        $query = db_select('field_data_field_primary_category', 'fpc');
+        $query->fields('fpc', array('field_primary_category_value'));
+        $query->condition('fpc.entity_id', $nid);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $field_primary_category_value = $result[0]['field_primary_category_value'];
+        return taxonomy_term_load($field_primary_category_value);
+    }
 }

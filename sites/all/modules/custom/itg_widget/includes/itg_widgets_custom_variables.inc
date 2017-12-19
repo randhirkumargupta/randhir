@@ -311,6 +311,13 @@ function itg_widgets_custom_variables() {
 		'#default_value' => variable_get('newsletter_content_limit'),
 	);
   
+	$form['ga_code'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter current GA code for FIA'),
+		'#attributes' => array('placeholder' => t('Enter current GA code for FIA')),
+		'#default_value' => variable_get('ga_code'),
+	);
+  
   $form['api_info'] = array(
       '#type' =>'checkbox',
       '#title'=>t('Enable agency feed'),

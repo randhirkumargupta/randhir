@@ -13,9 +13,9 @@ function feature_for_sso_rest_services_default_services_endpoint() {
   $endpoint = new stdClass();
   $endpoint->disabled = FALSE; /* Edit this to true to make a default endpoint disabled initially */
   $endpoint->api_version = 3;
-  $endpoint->name = 'appapi';
+  $endpoint->name = 'appapisso';
   $endpoint->server = 'rest_server';
-  $endpoint->path = 'appapi';
+  $endpoint->path = 'appapisso';
   $endpoint->authentication = array();
   $endpoint->server_settings = array(
     'formatters' => array(
@@ -162,7 +162,7 @@ function feature_for_sso_rest_services_default_services_endpoint() {
     ),
   );
   $endpoint->debug = 0;
-  $export['appapi'] = $endpoint;
+  $export['appapisso'] = $endpoint;
 
   return $export;
 }
