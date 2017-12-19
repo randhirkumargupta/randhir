@@ -504,7 +504,7 @@ function getNodeShareCount($nid) {
  * @return an Associated array with count all these values.
  */
 
-function analytics_node_data($nid, $total) {
+function analytics_node_data($nid, $total, $source) {
 
     if (function_exists('mongodb')) {
         $con = mongodb();
@@ -536,6 +536,10 @@ function analytics_node_data($nid, $total) {
 
             // Appended 0 as in mongo database 0 is going.
             $count_condition = array('nid' => "0$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+            if($source=="commentcont"){
+                $count_condition = array('nid' => "0$nid");
+            }
+            
             $count_result = $count_collection->find($count_condition);
             foreach ($count_result as $count_document) {
                 $data_count_node_like = $count_document['like_count'];

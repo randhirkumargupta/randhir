@@ -5361,7 +5361,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    $shh = getNodeShareCount(1069028);
+    $shh = analytics_node_data(1069028, 'total', 'commentcont');
     p($shh);
 p($_SERVER);
     p(node_load(1069009));
