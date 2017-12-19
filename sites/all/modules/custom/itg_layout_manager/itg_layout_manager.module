@@ -235,11 +235,19 @@ function itg_layout_manager_block_view($delta = '') {
 
   switch ($delta) {
     case 'header_block':
-      $arg = arg();
+      $arg = arg();      
+      if (function_exists('get_section_header_menu_and_content')) {
+        $section_header = get_section_header_menu_and_content($arg);
+        if ($section_header) {
+          drupal_add_css(".logo {display:none !important}", "inline");
+          drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
+          $block['content'] = theme($section_header['template_name'], array('data' => $section_header));
+          break;
+        }
+      }
       module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
       $detect = new Mobile_Detect;
       $data['detect'] = $detect->isMobile();
-
       $data['itg_main_manu_header'] = menu_tree('menu-itg-main-menu-header');
       $data['itg_top_manu_header'] = menu_tree('menu-itg-top-menu-header');
       $data['itg_top_manu_header_second'] = menu_tree('menu-itg-top-menu-header-second');
