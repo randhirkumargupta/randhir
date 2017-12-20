@@ -29,13 +29,7 @@ if ($theme != 'itgadmin') {
   <div id="page">
       <header class="header" id="header" role="banner">
           <section class="header-top">
-              <div class="container header-logo">
-                  <?php if ($logo): ?>
-                    <div class="logo">
-                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-                    </div>
-                  <?php endif; ?>         
-              </div>
+          
               <?php if ($site_name || $site_slogan): ?>
                 <div class="header__name-and-slogan" id="name-and-slogan">
                     <?php if ($site_name): ?>
@@ -257,7 +251,7 @@ if ($theme != 'itgadmin') {
                                           <div class="droppable <?php print $gray_bg_layout; ?>">
                                               <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'] . $widget_data['itg-block-5']['widget_display_name']; ?>">                      
                                                   <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
-                                                    <span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
+                                                    <a href="/photo/sports"><span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span></a>
                                                   <?php } ?>
                                                   <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                                     <div class="widget-settings">
@@ -412,7 +406,7 @@ if ($theme != 'itgadmin') {
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-11']['widget_name'] . $widget_data['itg-block-11']['widget_display_name']; ?>">
 											<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title'])) { ?>
-                                                <span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span>
+                                                <a href="/videos/sports"><span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span></a>
                                                 <?php } ?>
                                                 <!-- for admin  -->
                                                 <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>

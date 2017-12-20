@@ -396,7 +396,7 @@ jQuery(document).ready(function () {
             el.closest('.search-icon-parent').find('.search-icon-default').show().next().hide();
         }
     });
-    jQuery('.search-icon-search').click(function () {
+    jQuery('.search-icon-search, .search-icon-default').click(function () {
         search_value = jQuery(this).parent().find('.search-text').val();
         if (search_value.length != 0) {
             nkeyword = search_value;
@@ -410,9 +410,10 @@ jQuery(document).ready(function () {
     //ITG header
     headerMain();
     function headerMain() {
-        //header menu add icon for mobile
-        jQuery('.main-nav ul').prepend('<li class="desktop-hide"><a class="mobile-nav" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>');
-
+        //header menu add icon for mobile 
+        jQuery('.main-nav').first().prepend('<div class="desktop-hide"><a class="mobile-nav nochange" href="javascript:void(0)"><div class="bar1"></div><div class="bar2"></div><div class="bar3"></div></a></div>');  
+        jQuery('.main-nav ul').first().prepend('<li class="desktop-hide"><a href="javascript:void(0)"></a></li>');
+	
         jQuery('.container.header-logo').prependTo('.itg-logo-container');
 
         var mouse_is_inside = false;
@@ -436,7 +437,11 @@ jQuery(document).ready(function () {
             }
             jQuery(this).parent().find('.globle-search').toggleClass('active');
         });
-
+        
+        jQuery('.share-icon-default').on('click', function(e) {    
+                jQuery(this).parent().find('.social-dropdown').toggleClass('active');
+            });
+            
         jQuery('#block-itg-layout-manager-header-block .menu-login .user-menu').hover(function () {
             jQuery('#newlist').hide();
         });
@@ -616,13 +621,13 @@ jQuery(document).ready(function () {
 
 jQuery(document).ready(function () {
     var winWidth;
-    jQuery('.mobile-nav i.fa').click(function () {
-        if (jQuery(this).hasClass('fa-bars')) {
-            jQuery(this).addClass('fa-times').removeClass('fa-bars');
+    jQuery('.mobile-nav').click(function () {
+        if (jQuery(this).hasClass('nochange')) {
+            jQuery(this).addClass('change').removeClass('nochange');
             jQuery('.navigation').slideDown();
 
         } else {
-            jQuery(this).addClass('fa-bars').removeClass('fa-times');
+            jQuery(this).addClass('nochange').removeClass('change');
             jQuery('.navigation').slideUp();
         }
     });
@@ -870,7 +875,7 @@ var menuBuilder = function () {
         jQuery('#newlist').html('');
     }
     jQuery('.all-menu').remove();
-    jQuery('.second-level-menu.menu li').each(function () {
+    jQuery('.second-level-menu.menu li.nav-items').each(function () {
         liLength = jQuery(this).outerWidth(true);
         Totalwidth = Totalwidth + liLength;
         if (Totalwidth <= menuWidth) {
@@ -883,6 +888,7 @@ var menuBuilder = function () {
             if (jQuery('#newlist').length === 0) {
                 jQuery('.navigation .container').append('<ul id="newlist" class="menu"></ul>');
             }
+            
             var html = '<li>' + jQuery(this).html() + '</li>';
             jQuery('#newlist').append(html);
             jQuery(this).addClass('hide');

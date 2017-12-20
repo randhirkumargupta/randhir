@@ -2,9 +2,9 @@
 <?php if(isset($data[0])) : ?>
   <div class="featured-news">
     <div class="featured-post featured-post-first">
-      <?php if (!empty($data[0]['li_file_uri'])) : ?>
+      <?php if (!empty($data[0]['uri'])) : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">
-            <img src="<?php print image_style_url("magazine_top_story_483x271", $data[0]['li_file_uri']); ?>" alt="<?php echo $data[0]['field_story_large_image_alt'] ?>" title="<?php echo $data[0]['field_story_large_image_title'] ?>" />
+            <img src="<?php print image_style_url("magazine_top_story_483x271", $data[0]['uri']); ?>" alt="<?php echo $data[0]['field_story_extra_large_image_alt'] ?>" title="<?php echo $data[0]['field_story_extra_large_image_title'] ?>" />
         </a>
       <?php else : ?>
         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $data[0]['nid']); ?>">

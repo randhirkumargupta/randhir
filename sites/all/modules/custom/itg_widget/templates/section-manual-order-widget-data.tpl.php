@@ -16,9 +16,9 @@
                   if ($index == 0) {
                     ?>
                     <div class="featured-post featured-post-first">
-                        <?php if ($row['li_file_uri'] != "") { ?>
+                        <?php if ($row['uri'] != "") { ?>
                           <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $row['nid']); ?>">
-                              <img src="<?php print image_style_url("magazine_top_story_483x271", $row['li_file_uri']); ?>" alt="<?php echo $row['field_story_large_image_alt']; ?>" title="<?php echo $row['field_story_large_image_title']; ?>" />
+                              <img src="<?php print image_style_url("magazine_top_story_483x271", $row['uri']); ?>" alt="<?php echo $row['field_story_extra_large_image_alt']; ?>" title="<?php echo $row['field_story_extra_large_image_title']; ?>" />
                           </a>
                         <?php
                         }

@@ -28,13 +28,7 @@ if ($theme != 'itgadmin') {
   <div id="page">
     <header class="header" id="header" role="banner">
       <section class="header-top">
-        <div class="container header-logo">
-          <?php if ($logo): ?>
-            <div class="logo">
-              <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-            </div>
-          <?php endif; ?>         
-        </div>
+   
         <?php if ($site_name || $site_slogan): ?>
           <div class="header__name-and-slogan" id="name-and-slogan">
             <?php if ($site_name): ?>
@@ -447,7 +441,7 @@ if ($theme != 'itgadmin') {
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name'].$widget_data['itg-block-8']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-8']['block_title'])) { ?>
-                     <span class="widget-title"><?php print $widget_data['itg-block-8']['block_title']; ?></span>
+                     <a href="/photo/technology"><span class="widget-title"><?php print $widget_data['itg-block-8']['block_title']; ?></span></a>
                   <?php } ?>
                      <!-- for admin  -->
                   <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
@@ -479,7 +473,7 @@ if ($theme != 'itgadmin') {
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name'].$widget_data['itg-block-9']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-9']['block_title'])) { ?>
-                     <span class="widget-title"><?php print $widget_data['itg-block-9']['block_title']; ?></span>
+                     <a href="/videos/technology"><span class="widget-title"><?php print $widget_data['itg-block-9']['block_title']; ?></span>
                   <?php } ?>
                      <!-- for admin  -->
                   <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>

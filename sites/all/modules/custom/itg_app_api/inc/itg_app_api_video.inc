@@ -147,7 +147,7 @@ function generateVideoCategoryList($tid, $pageno) {
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-180 days"));
+    $d1 = date('Y-m-d', strtotime("-360 days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.uid', $filter_user_data, 'NOT IN');
@@ -176,7 +176,10 @@ function generateVideoCategoryList($tid, $pageno) {
       $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
       $file_extra_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
 
-      $desc = $resvalue['field_story_expert_description_value'];
+      $desc = strip_tags($resvalue['field_story_expert_description_value']);
+      $desc = str_replace("\n", "", $desc);
+      $desc = str_replace("\r", "", $desc);
+      $desc = str_replace("\t", "", $desc);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -212,7 +215,7 @@ function generateVideoCategoryList($tid, $pageno) {
       else {
         $changed_datetime = "";
       }
-
+      $comment_cont = getCommentsCount($nid);
       $photo_list_array[$listcount]['v_id'] = "$nid";
       $photo_list_array[$listcount]['v_title'] = "$title";
       $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
@@ -238,7 +241,7 @@ function generateVideoCategoryList($tid, $pageno) {
       $term_pri = taxonomy_term_load($field_primary_category_value);
       $term_name_pri = $term_pri->name;
       $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
-      $photo_list_array[$listcount]['v_comment_count'] = "10";
+      $photo_list_array[$listcount]['v_comment_count'] = "$comment_cont";
       $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
       $photo_list_array[$listcount]['v_updated_datetime'] = "$changed_datetime";
       $photo_list_array[$listcount]['v_duration'] = "$field_video_duration_value";
@@ -415,7 +418,7 @@ function generateProgramCategoryList($tid, $pageno) {
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-180 days"));
+    $d1 = date('Y-m-d', strtotime("-360 days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.uid', $filter_user_data, 'NOT IN');
@@ -452,7 +455,11 @@ function generateProgramCategoryList($tid, $pageno) {
       $load_collection = field_collection_item_load($field_video_upload);
       $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
       $anchor_id = getVedioAnchor($nid);
-      $desc = $resvalue['field_story_expert_description_value'];
+      $desc = strip_tags($resvalue['field_story_expert_description_value']);
+      $desc = str_replace("\n", "", $desc);
+      $desc = str_replace("\r", "", $desc);
+      $desc = str_replace("\t", "", $desc);
+
 
       //display all the video sounce check and format
       $source_type = $resvalue['field_story_source_type_value'];
@@ -505,8 +512,9 @@ function generateProgramCategoryList($tid, $pageno) {
       $term = taxonomy_term_load($field_primary_category_value);
       $term_name = $term->name;
       $trem_id = $term->tid;
+      $comment_cont = getCommentsCount($nid);
       $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
-      $photo_list_array[$listcount]['p_comment_count'] = "10";
+      $photo_list_array[$listcount]['p_comment_count'] = "$comment_cont";
       $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
       $photo_list_array[$listcount]['p_updated_datetime'] = "$changed_datetime";
       $photo_list_array[$listcount]['p_duration'] = "$field_video_duration_value";
@@ -583,7 +591,11 @@ function generateProgramSectionList($Program_section_list) {
     $term_name = $term->name;
     $term_url = nodeCategoryFrontUrl($value, 'term');
     $child_term_url = nodeCategoryFrontUrl($value, 'term');
-    $p_short_description = $term->description;
+    $p_short_description = strip_tags($term->description);
+    $p_short_description = str_replace("\n", "", $p_short_description);
+    $p_short_description = str_replace("\r", "", $p_short_description);
+    $p_short_description = str_replace("\t", "", $p_short_description);
+
     $p_schedule = $term->field_program_timing_in_days['und'][0]['value'];
 
     $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
@@ -678,7 +690,10 @@ function generateVideoDetail($nid) {
     $file_large_img_url = completeFilePath($node->field_story_large_image['und']['0']['fid']);
     $file_extra_large_img_url = completeFilePath($node->field_story_extra_large_image['und']['0']['fid']);
 
-    $desc = $node->field_story_expert_description['und']['0']['value'];
+    $desc = strip_tags($node->field_story_expert_description['und']['0']['value']);
+    $desc = str_replace("\n", "", $desc);
+    $desc = str_replace("\r", "", $desc);
+    $desc = str_replace("\t", "", $desc);
 
     //related content
     $related = relatedContentNodeType($node->field_common_related_content['und']['0']['value']);
@@ -737,10 +752,11 @@ function generateVideoDetail($nid) {
       //$video_path_mp4
       $photo_list_array[$listcount]['v_download_url'] = $videotag['migrated']['video_path_mp4'];
     }
+    $comment_cont = getCommentsCount($nid);
     $term_pri = taxonomy_term_load($field_primary_category_value);
     $term_name_pri = $term_pri->name;
     $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
-    $photo_list_array[$listcount]['v_comment_count'] = "10";
+    $photo_list_array[$listcount]['v_comment_count'] = "$comment_cont";
     $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
     $photo_list_array[$listcount]['v_updated_datetime'] = "$changed_datetime";
     $photo_list_array[$listcount]['v_duration'] = "$field_video_duration_value";
@@ -749,7 +765,7 @@ function generateVideoDetail($nid) {
     $photo_list_array[$listcount]['v_subcategory_id'] = "$field_primary_category_value";
     $photo_list_array[$listcount]['v_subcategory_title'] = "$term_name_pri";
   }
-  $data['status_code'] = 1;
+  $data['status_code'] = "1";
   $data['status_message'] = "";
   $data['data'] = $photo_list_array;
   return $data;
@@ -797,7 +813,10 @@ function generateProgramDetail($nid) {
     $load_collection = field_collection_item_load($field_video_upload);
     $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
     $anchor_id = getVedioAnchor($nid);
-    $desc = $node->field_story_expert_description['und']['0']['value'];
+    $desc = strip_tags($node->field_story_expert_description['und']['0']['value']);
+    $desc = str_replace("\n", "", $desc);
+    $desc = str_replace("\r", "", $desc);
+    $desc = str_replace("\t", "", $desc);
 
     //display all the video sounce check and format
     $source_type = $node->field_story_source_type['und']['0']['value'];
@@ -850,8 +869,9 @@ function generateProgramDetail($nid) {
     $term = taxonomy_term_load($field_primary_category_value);
     $term_name = $term->name;
     $trem_id = $term->tid;
+    $comment_cont = getCommentsCount($nid);
     $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
-    $photo_list_array[$listcount]['p_comment_count'] = "10";
+    $photo_list_array[$listcount]['p_comment_count'] = "$comment_cont";
     $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
     $photo_list_array[$listcount]['p_updated_datetime'] = "$changed_datetime";
     $photo_list_array[$listcount]['p_duration'] = "$field_video_duration_value";
@@ -861,7 +881,7 @@ function generateProgramDetail($nid) {
     $photo_list_array[$listcount]['p_program_size'] = "$filesize";
     $photo_list_array[$listcount]['p_anchor_id'] = "$anchor_id";
   }
-  $data['status_code'] = 1;
+  $data['status_code'] = "1";
   $data['status_message'] = "";
   $data['data'] = $photo_list_array;
   return $data;
@@ -1036,7 +1056,7 @@ function topstoriesList($source) {
       $changed_datetime = date("Y-m-d H:i:s", $changed);
     }
     else {
-      $changed_datetime = "";
+      $changed_datetime = date("Y-m-d H:i:s", $created);
     }
     //json tag writing
     //if ($type == "story") {

@@ -422,6 +422,16 @@ print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
     'image_style' => 'magazine_top_three_story_237x133',
     'image_link' => 'content',
   );
+  /* Field: Field: Large image */
+  $handler->display->display_options['fields']['field_story_large_image']['id'] = 'field_story_large_image';
+  $handler->display->display_options['fields']['field_story_large_image']['table'] = 'field_data_field_story_large_image';
+  $handler->display->display_options['fields']['field_story_large_image']['field'] = 'field_story_large_image';
+  $handler->display->display_options['fields']['field_story_large_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_large_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_story_large_image']['settings'] = array(
+    'image_style' => 'magazine_top_three_story_237x133',
+    'image_link' => 'content',
+  );
   /* Field: Global: Dynamic Clone Link */
   $handler->display->display_options['fields']['dynamic_clone_link']['id'] = 'dynamic_clone_link';
   $handler->display->display_options['fields']['dynamic_clone_link']['table'] = 'views';
@@ -445,7 +455,7 @@ print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="magazin-post">
-[field_story_extra_large_image]
+[field_story_large_image]
 <h3>[dynamic_clone_link]</h3>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
