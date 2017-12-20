@@ -163,7 +163,7 @@ else if ($widget_style == 'buying-guid') {
                 ?>
                 <ul>
                     <li>
-                        <span class="title" title="<?php echo $kicker; ?>"><?php echo l(mb_strimwidth(ucfirst($kicker), 0, 55, ".."), "node/" . $nid); ?></span>
+                        <span class="title" title="<?php //echo $kicker; ?>"><?php //echo l(mb_strimwidth(ucfirst($kicker), 0, 55, ".."), "node/" . $nid); ?></span>
                         <p title="<?php echo $desc; ?>">
                             <?php echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 100, ".."), "node/" . $nid); ?>
                         </p>
@@ -194,13 +194,13 @@ else if ($widget_style == 'buying-guid') {
                     ?>
 
                     <li>
-                        <span class="title" title="<?php echo $kicker; ?>">
+                        <span class="title" title="<?php //echo $kicker; ?>">
                             <?php
                             if (!empty($entity['field_photo_see_pic_link_value'])) {
                               echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
                             }
                             ?>
-                            <?php echo l(mb_strimwidth(ucfirst($kicker), 0, 55, ".."), "node/" . $nid); ?>
+                            <?php //echo l(mb_strimwidth(ucfirst($kicker), 0, 55, ".."), "node/" . $nid); ?>
                            
                         </span>
                         <p title="<?php echo $desc; ?>">
@@ -320,7 +320,7 @@ else if ($widget_style == 'in-depth') {
               if (!empty($data)) {
                 foreach ($data as $count => $entity) {
                   $desc = $entity['title'];
-
+                  $nid = $entity['nid'];
                   if ($count > 1) {
                     if ((!empty($entity['esi_file_uri']) && isset($entity['esi_file_uri']))) {
                       $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
@@ -1195,8 +1195,8 @@ else if ($widget_style == 'talking-point') {
                     $reporter = node_load($node_data->field_reporter_publish_id['und'][0]['value']);
                   }
 
-                  if ((!empty($reporter->field_story_extra_large_image['und'][0]['uri']) && isset($reporter->field_story_extra_large_image['und'][0]['uri']))) {
-                    $extra_large_image_url = image_style_url("widget_very_small", $reporter->field_story_extra_large_image['und'][0]['uri']);
+                  if ((!empty($node_data->field_story_extra_large_image['und'][0]['uri']) && isset($node_data->field_story_extra_large_image['und'][0]['uri']))) {
+                    $extra_large_image_url = image_style_url("widget_very_small", $node_data->field_story_extra_large_image['und'][0]['uri']);
                   }
                   else {
                     $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
@@ -1521,15 +1521,15 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
               $video_class = 'video-icon';
             }
             //pr($entity);
-            if ($count == 0 && (!empty($entity['li_file_uri']) && isset($entity['li_file_uri']))) {
+            if ($count == 0 && (!empty($entity['uri']) && isset($entity['uri']))) {
               // $extra_large_image_url = image_style_url("section_ordering_widget", $entity['li_file_uri']);
-              $extra_large_image_url = file_create_url($entity['li_file_uri']);
+              $extra_large_image_url = file_create_url($entity['uri']);
             }
             ?>
             <?php if ($count == 0) : ?>
               <?php if (!empty($extra_large_image_url)) { ?>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                    <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
+                    <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_extra_large_image_alt']; ?>" title="<?php echo $entity['field_story_extra_large_image_title']; ?>" />
                 </a>
                 <?php
               }

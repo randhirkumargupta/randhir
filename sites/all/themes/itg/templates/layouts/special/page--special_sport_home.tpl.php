@@ -251,7 +251,7 @@ if ($theme != 'itgadmin') {
                                           <div class="droppable <?php print $gray_bg_layout; ?>">
                                               <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'] . $widget_data['itg-block-5']['widget_display_name']; ?>">                      
                                                   <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
-                                                    <span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
+                                                    <a href="/photo/sports"><span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span></a>
                                                   <?php } ?>
                                                   <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                                     <div class="widget-settings">
@@ -406,7 +406,7 @@ if ($theme != 'itgadmin') {
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-11']['widget_name'] . $widget_data['itg-block-11']['widget_display_name']; ?>">
 											<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title'])) { ?>
-                                                <span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span>
+                                                <a href="/videos/sports"><span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span></a>
                                                 <?php } ?>
                                                 <!-- for admin  -->
                                                 <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>

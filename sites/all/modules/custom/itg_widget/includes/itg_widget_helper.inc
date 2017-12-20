@@ -197,6 +197,8 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               'field_story_medium_image_title' => isset($node_load_data->field_story_medium_image_title['und'][0]['title']) ? $node_load_data->field_story_medium_image_title['und'][0]['title'] : "",
               'field_story_small_image_alt' => isset($node_load_data->field_story_small_image_alt['und'][0]['alt']) ? $node_load_data->field_story_small_image_alt['und'][0]['alt'] : "",
               'field_story_small_image_title' => isset($node_load_data->field_story_small_image_title['und'][0]['title']) ? $node_load_data->field_story_small_image_title['und'][0]['title'] : "",
+              'field_story_extra_large_image_alt' => isset($node_load_data->field_story_extra_large_image['und'][0]['alt']) ? $node_load_data->field_story_extra_large_image['und'][0]['alt'] : "",
+              'field_story_extra_large_image_title' => isset($node_load_data->field_story_extra_large_image['und'][0]['title']) ? $node_load_data->field_story_extra_large_image['und'][0]['title'] : "",
               'node_obj' => $node_smily_data,
             );
         }
