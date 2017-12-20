@@ -520,3 +520,23 @@ ul.pron-cons-img {
 ul.pron-cons-img li img {
     margin-top: -10px!important
 }
+.story-section .story-right .stryimg img {
+    width: 100%
+}
+.itg-mosimage {
+    font-size: .8125rem;
+    line-height: 18px;
+    color: #929292;
+}
+.itg-mosimage img {
+    margin-bottom: 5px;
+}
+.story-section .story-right .description p.review_quote {
+    color: #000;
+    font: 600 20px/28px "RobotoSlab-Regular";
+    position: relative;
+}
+.story-right .description p:first-child:first-letter {
+    font-size: 46px;
+    font-weight: bold;
+}
