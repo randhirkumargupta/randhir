@@ -1564,7 +1564,7 @@ function homePageJsonNewslist_lifestyle() {
   $n_video = array();
   $n_polls = array();
   $n_rating = array();
-  $tid = HOME_PAGE_JSON_NEWS_LIST_INDIA;
+  $tid = HOME_PAGE_JSON_NEWS_LIST_LIFE_STYLE;
   $node_count = "";
   $output = "";
   $data = array();

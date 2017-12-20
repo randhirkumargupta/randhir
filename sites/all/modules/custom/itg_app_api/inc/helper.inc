@@ -21,7 +21,7 @@ define('BITARATES_BASE_PATH', 'https://itgd-mum-dev-static.s3.ap-south-1.amazona
 define('HOME_PAGE_JSON_MOVIES', 1206533);
 define('HOME_PAGE_JSON_MOVIES_PHOTO', 1208598);
 define('HOME_PAGE_JSON_MOVIES_VIDEO', 1207303);
-define('HOME_PAGE_JSON_ELECTION', 1768551);
+define('HOME_PAGE_JSON_ELECTION', 1206795);// 1768551
 
 /**
  * Common Function to create short url of node

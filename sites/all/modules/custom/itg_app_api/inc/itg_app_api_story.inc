@@ -133,6 +133,10 @@ function generateStoryDeatilList($id) {
 
   $tech_photo_gallery = "";
   $tech_photo_gallery = $node->field_technology_photogallery['und'][0]['target_id'];
+  $caption = "";
+  $byline = "";
+  
+  $caption = $node->field_story_extra_large_image['und'][0]['title'];
 
   //data array building
   $data_array['category_id'] = "$tid";

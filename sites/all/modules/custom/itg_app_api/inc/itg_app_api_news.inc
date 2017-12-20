@@ -465,9 +465,9 @@ function getVideolist($nid, $source = 0) {
  */
 function getNodeViewCount($nid) {
 
-  $node_anyalytics = analytics_node_data($nid, 'array');
-  $nv_count = $node_anyalytics['node_view_count'];
-  return $nv_count;
+  $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
+  $nc_view = $node_anyalytics['node_view_count'];
+  return $nc_view;
 }
 
 /*
@@ -488,7 +488,7 @@ function getNodeShareCount($nid) {
  * 'total' will return the count of it
  * @return an Associated array with count all these values.
  */
-function analytics_node_data($nid, $total) {
+function analytics_node_data($nid, $total, $source) {
 
   if (function_exists('mongodb')) {
     $con = mongodb();
@@ -520,6 +520,10 @@ function analytics_node_data($nid, $total) {
 
       // Appended 0 as in mongo database 0 is going.
       $count_condition = array('nid' => "0$nid", 'timestamp' => array('$gte' => $timestamp_24_hour_before, '$lte' => $current_time_stamp));
+      if ($source == "commentcont") {
+        $count_condition = array('nid' => "0$nid");
+      }
+
       $count_result = $count_collection->find($count_condition);
       foreach ($count_result as $count_document) {
         $data_count_node_like = $count_document['like_count'];
@@ -563,20 +567,24 @@ function analytics_node_data($nid, $total) {
       $analytics_data_array['data_count_node_share'] = $data_count_node_share_number;
       //END
     }
-
-    if ($total == 'total') {
-      // return the total count
-      // Caculate sum of all data.
-      foreach ($analytics_data_array as $counting) {
-        if (is_int($counting)) {
-          $final_count_result = $final_count_result + $counting;
-        }
-      }
-      return $final_count_result;
+    if ($source == "commentcont") {
+      return $analytics_data_array;
     }
     else {
-      // return the associated Array
-      return $analytics_data_array;
+      if ($total == 'total') {
+        // return the total count
+        // Caculate sum of all data.
+        foreach ($analytics_data_array as $counting) {
+          if (is_int($counting)) {
+            $final_count_result = $final_count_result + $counting;
+          }
+        }
+        return $final_count_result;
+      }
+      else {
+        // return the associated Array
+        return $analytics_data_array;
+      }
     }
   }
 }
