@@ -1,0 +1,1402 @@
+<?php
+
+/**
+ * @file
+ * The ITG Mobile App XML Feed.
+ *
+ * Contains functionality for mobile app xml feed.
+ */
+module_load_include('inc', 'itg_mobile_feed', 'inc/itg_mobile_feed_helper');
+module_load_include('inc', 'itg_mobile_feed', 'inc/photoDetailPageFeed');
+module_load_include('inc', 'itg_mobile_feed', 'inc/storyDetailPageFeed');
+module_load_include('inc', 'itg_mobile_feed', 'inc/videoDetailPageFeed');
+module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
+
+/**
+ * Implements hook_menu().
+ */
+function itg_mobile_feed_menu() {
+  $items['home-page-feed'] = array(
+    'page callback' => 'homePageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/homePageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['story-section-page-feed'] = array(
+    'page callback' => 'storySectionPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/storySectionPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['photo-section-page-feed'] = array(
+    'page callback' => 'photoSectionPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/photoSectionPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['video-section-page-feed'] = array(
+    'page callback' => 'videoSectionPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/videoSectionPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['story-category-page-feed'] = array(
+    'page callback' => 'storyCategoryPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/storyCategoryPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['photo-category-page-feed'] = array(
+    'page callback' => 'photocategoryPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/photocategoryPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['video-category-page-feed'] = array(
+    'page callback' => 'videoCategoryPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/videoCategoryPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['story-detail-page-feed'] = array(
+    'page callback' => 'storyDetailPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/storyDetailPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['photo-detail-page-feed'] = array(
+    'page callback' => 'photoDetailPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/photoDetailPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['video-detail-page-feed'] = array(
+    'page callback' => 'videoDetailPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/videoDetailPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['breaking-news-page-feed'] = array(
+    'page callback' => 'breakingNewsPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/breakingNewsPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['program-section-page-feed'] = array(
+    'page callback' => 'programSectionPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/programSectionPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['program-category-page-feed'] = array(
+    'page callback' => 'programCategoryPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/programCategoryPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['root-category-content-page-feed'] = array(
+    'page callback' => 'rootCategoryContentPageFeed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/rootCategoryContentPageFeed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['intoday-magazine'] = array(
+    'page callback' => 'intodayMagazine',
+    'access arguments' => array('access content'),
+    'file' => 'inc/intodayMagazine.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['notification'] = array(
+    'page callback' => 'notification_page',
+    'access arguments' => array('access content'),
+    'file' => 'inc/notification.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/api-configuration/feed-api/redis-cache'] = array(
+    'title' => 'Flush Redis Cache',
+    'description' => 'Flush Redis Cache',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('redis_cache_manager'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/api-configuration/feed-api/redis-cache-pattern'] = array(
+    'title' => 'Flush Redis Cache Key Pattern',
+    'description' => 'Flush Redis Cache Key Pattern',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('redis_cache_pattern_manager'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/api-configuration/feed-api/tid-config'] = array(
+    'title' => 'Feed Taxonomy Configuration',
+    'description' => 'Static Tid Configuration for XML Feeds',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('feed_tid_config'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/api-configuration/feed-api/redis-config'] = array(
+    'title' => 'Redis Server Configuration',
+    'description' => 'Redis Server Configuration',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('redis_server_config'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/*
+ * Implement form callback for redis_server_config
+ */
+function redis_server_config() {
+  $form = array();
+  $form['redis_server_host'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Redis Server Hostname'),
+    '#default_value' => variable_get('redis_server_host'),
+    '#description' => t('Enter Redis Server Hostname'),
+  );
+  $form['redis_server_port'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Redis Server Port No'),
+    '#default_value' => variable_get('redis_server_port'),
+    '#description' => t('Enter Redis Server Port Number'),
+  );
+  $form['redis_server_timeout'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Redis Server timeout Time'),
+    '#default_value' => variable_get('redis_server_timeout'),
+    '#description' => t('Enter Redis Server timeout in second'),
+  );
+  return system_settings_form($form);
+}
+
+/*
+ * Implement form callback for defining term id config
+ */
+function feed_tid_config() {
+  $form = array();
+  $form['photo_sec_tid'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Term Id's of Photo Section"),
+    '#default_value' => variable_get('photo_sec_tid'),
+    '#description' => t("Enter Photo Section Term Id With Comma Seperated"),
+  );
+  $form['video_sec_tid'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Term Id's of Video Section"),
+    '#default_value' => variable_get('video_sec_tid'),
+    '#description' => t("Enter Video Section Term Id With Comma Seperated"),
+  );
+  $form['program_sec_tid'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Term Id's of Program Section"),
+    '#default_value' => variable_get('program_sec_tid'),
+    '#description' => t("Enter Program Section Term Id With Comma Seperated"),
+  );
+  $form['left_main_tid'] = array(
+    '#type' => 'textarea',
+    '#title' => t("Term Id's Left Main Section"),
+    '#default_value' => variable_get('left_main_tid'),
+    '#description' => t("Enter Left Main Section Term Id With Comma Seperated"),
+  );
+  $form['itg_feed_magazine_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Magazine Term id'),
+    '#default_value' => variable_get('itg_feed_magazine_tid'),
+    '#description' => t("Enter Magazine Term id"),
+  );
+  return system_settings_form($form);
+}
+
+/*
+ * create form for redis cache delete by admin
+ */
+function redis_cache_manager() {
+  $form = array();
+  $form['redis_cache'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Remove Redis Cache Key'),
+    '#size' => 60,
+    '#description' => t("Please Put Redis Key"),
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete'),
+  );
+  return $form;
+}
+
+/*
+ * redis cache form submit
+ */
+function redis_cache_manager_submit($form, &$form_state) {
+
+  $key = $form_state['values']['redis_cache'];
+  $responce = redis_key_delete($key);
+  if ($responce != '1') {
+    drupal_set_message('Unable to delete redis Cache', 'error');
+  }
+  else {
+    drupal_set_message('Redis Key Has been deleted Successfully.');
+  }
+}
+
+/**
+ * Implements hook_permission.
+ */
+function itg_mobile_feed_permission() {
+  return array(
+    'itg mobile feed' => array(
+      'title' => t('mobile feed permission'),
+      'description' => t('mobile feed permission.'),
+    ),
+  );
+}
+
+/**
+ * common function for return xml feed file header
+ *
+ * @return string
+ */
+function getMobileFeedXmlHeader() {
+  $output = "";
+  $output = "<?xml version='1.0' encoding='utf-8'?><Root>";
+
+  return $output;
+}
+
+/**
+ * common function for return xml feed file header
+ *
+ * @return string
+ */
+function getMobileFeedXmlFooter() {
+  $output = "";
+  $output = "</Root>";
+  return $output;
+}
+
+/**
+ *  function for return xml feed file header only for program section
+ *
+ * @return string
+ */
+function program_section_page_feed_header() {
+  $output = "";
+  $output = "<?xml version='1.0' encoding='utf-8'?><root>";
+  return $output;
+}
+
+/**
+ *  function for return xml feed file footer only for program section
+ *
+ * @return string
+ */
+function program_section_page_feed_footer() {
+  $output = "";
+  $output = "</root>";
+  return $output;
+}
+
+/**
+ * common function for return related content node type
+ * @pram string $node_list, $type
+ *
+ * @return array
+ */
+function relatedContentNodeType($node_list = "", $type) {
+  $file_name = "";
+  $term_feed_path = "";
+  $type_ar = array('photos' => 'NO', 'videos' => 'NO', 'stories' => 'NO');
+  $related_ar = array();
+  $count = 0;
+  $query = db_select('field_data_field_common_related_content', 'frc');
+  $query->fields('frc', array('field_common_related_content_value'));
+  $query->condition('frc.entity_id', $node_list);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $node_str = $result[0]['field_common_related_content_value'];
+  // replace enviroment name: AWS_, UAT_ etc
+  $node_str = str_replace("AWS_", "", $node_str);
+  $node_str = str_replace("UAT_", "", $node_str);
+
+  $nid_list = explode(",", $node_str);
+  $query_type = db_select('node', 'n');
+  $query_type->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+  $query_type->fields('n', array('type', 'nid', 'title'));
+  $query_type->fields('si', array('field_story_small_image_fid'));
+  $query_type->condition('n.nid', $nid_list, 'IN');
+  $result_type = $query_type->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($result_type as $reskey => $resvalue) {
+    $nid = $resvalue['nid'];
+    if ($resvalue['type'] == "story") {
+      $type_ar['stories'] = "YES";
+      // generate story detail page
+      $fl = generateStoryDetailPageFeed($nid, $file_name, $term_feed_path, $type);
+    }
+    elseif ($resvalue['type'] == "videogallery") {
+      $type_ar['videos'] = "YES";
+      // generate video detail page
+      $fl = generateVideoDetailPageFeed($nid, $file_name, $term_feed_path, $type);
+    }
+    elseif ($resvalue['type'] == "photogallery") {
+      $type_ar['photos'] = "YES";
+      // generate photo detail page
+      $fl = generatePhotoDetailPageFeed($nid, $file_name, $term_feed_path, $type);
+    }
+    $related_ar[$count]['type'] = $resvalue['type'];
+    $related_ar[$count]['nid'] = $resvalue['nid'];
+    $related_ar[$count]['title'] = $resvalue['title'];
+    $related_ar[$count]['field_story_small_image_fid'] = $resvalue['field_story_small_image_fid'];
+    $count++;
+  }
+  $type_ar['nid'] = $related_ar;
+  return $type_ar;
+}
+
+/**
+ * common function for return complete file path
+ * @pram int $fid
+ *
+ * @return string $file_url
+ */
+function completeFilePath($fid) {
+  $file_url = "";
+  if ($fid) {
+    $file_obj = file_load($fid);
+    $file_url = file_create_url($file_obj->uri);
+  }
+  $serch = ITGD_DEV_FILES_PATH;
+  $replace = ITGD_MUM_DEV_FILES_PATH;
+  // need update img base url in variable table
+  $file_url = str_replace($serch, $replace, $file_url);
+
+  return $file_url;
+}
+
+/**
+ * common function for write feed file
+ * @pram string  $feed_file_path, $feed_file_name, $output
+ *
+ * @return string $return_flag
+ */
+function writeFeedFile($feed_file_path, $feed_file_name, $output) {
+  // variable declation
+  global $user;
+  $ip_add = ip_address();
+  $status = 0;
+  $return_flag = "";
+  $file = $feed_file_path . "/" . $feed_file_name;
+  $fileHandle = fopen($file, 'w') or die("can't open file");
+  chmod($file, 0777);
+  if (fwrite($fileHandle, $output)) {
+
+    $return_flag = "file saved successfully with path & name: $file <br>";
+    $status = 1;
+  }
+  else {
+    $return_flag = "can't write file: $file <br>";
+    $status = 0;
+  }
+  // write log into database table
+
+  db_insert('itg_mobile_feed_log')->fields(array(
+      'uid' => $user->uid,
+      'agent' => 1,
+      'status' => $status,
+      'ip' => $ip_add,
+      'file' => $feed_file_name,
+      'path' => $feed_file_path,
+      'created' => REQUEST_TIME,
+    ))->execute();
+  fclose($fileHandle);
+  return $return_flag;
+}
+
+/**
+ * common function for return array of category-manager section tid
+ * @pram string $type
+ * @pram int $parent
+ *
+ * @return array
+ */
+function categoryManagerSectionTid($type = "story", $parent = 0) {
+  $tid_list = array();
+
+  $vid = CATEGORY_MANAGMENT;
+  $mapped_ctype = 0;
+
+  $tree = taxonomy_get_tree($vid, $parent, $max_depth = NULL, $load_entities = FALSE);
+  foreach ($tree as $key => $value) {
+    //check parent
+    $parent = $value->parents[0];
+    $mapped_ctype = checkContentTypeMapped($value->tid, $type);
+
+    if ($parent == 0 && $mapped_ctype == 1) {
+      $tid_list[] = $value->tid;
+    }
+  }
+  return $tid_list;
+}
+
+/**
+ * common function for return content type mapped with tid
+ * @pram int $tid
+ * @pram string $type
+ *
+ * @return int $flag
+ */
+function checkContentTypeMapped($tid, $type) {
+  // check map with passed content type
+  $flag = 0;
+  $query = db_select('field_data_field_cm_select_type', 'fdst');
+  $query->fields('fdst', array('field_cm_select_type_value'));
+  $query->condition('fdst.entity_id', $tid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($result as $key => $value) {
+    if ($value['field_cm_select_type_value'] == $type) {
+      $flag = 1;
+      break;
+    }
+  }
+  return $flag;
+}
+
+/**
+ * common function for return node count without child
+ * @pram string $type
+ * @pram int $tid
+ *
+ * @return int $count
+ */
+function customNodeCount($type, $tid) {
+  // variable declation
+  $query = db_select('taxonomy_index', 'ti');
+  $query->innerJoin('node', 'n', 'ti.nid=n.nid');
+  $query->fields('n', array('nid'));
+  $query->condition('ti.tid', $tid);
+  $query->condition('n.type', $type);
+  $query->condition('n.status', 1, '=');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return count($result);
+}
+
+/**
+ * common function for return node count with child
+ * @pram string $type
+ * @pram int $tid
+ * @pram bool $child_count
+ *
+ * @return int $count
+ */
+function customNodeCountChild($tid, $type, $child_count = TRUE) {
+
+  $tids = array($tid);
+  if ($child_count) {
+    $tids = array_merge($tids, term_get_children_ids($tid));
+  }
+  global $language;
+  $langs = array($language->language);
+  $langs[] = 'und';
+  $query = db_select('taxonomy_index', 't');
+  $query->condition('tid', $tids, 'IN');
+  $query->join('node', 'n', 't.nid = n.nid');
+  $query->condition('n.status', 1, '=');
+  $query->condition('n.type', $type);
+  $query->condition('n.language', $langs, 'IN');
+  $count = $query->countQuery()->execute()->fetchField();
+  return $count;
+}
+
+/**
+ * Retrieve ids of term children .
+ *
+ * @param int $tid
+ *   The term's ID.
+ *
+ * @return $tids
+ *   An array where ids of term children will be added
+ */
+function term_get_children_ids($tid) {
+  $children = taxonomy_get_children($tid);
+  $tids = array();
+  if (!empty($children)) {
+    foreach ($children as $child) {
+      $tids[] = $child->tid;
+      $tids = array_merge($tids, term_get_children_ids($child->tid));
+    }
+  }
+
+  return $tids;
+}
+
+/**
+ * function get section/category/node front url
+ * @pram int $tid
+ * @pram string $type
+ *
+ * @return string $final_url
+ */
+function nodeCategoryFrontUrl($tid, $type) {
+  $final_url = "";
+  if ($type == 'term') {
+    $source = "taxonomy/term/" . $tid;
+  }
+  elseif ($type == 'node') {
+    $source = "node/" . $tid;
+  }
+  $query = db_select('url_alias', 'ual');
+  $query->fields('ual', array('alias'));
+  $query->condition('ual.source', $source);
+  $query->orderBy('ual.pid', 'DESC');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $final_url = $result[0]['alias'];
+  if ($result[0]['alias'] == "") {
+    $query = db_select('itg_sef_url', 'isu');
+    $query->fields('isu', array('sef_url'));
+    $query->condition('isu.tid', $tid);
+    $query->orderBy('isu.changed', 'DESC');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $final_url = $result[0]['sef_url'];
+  }
+  return $final_url;
+}
+
+/**
+ * function get section/category icon img
+ * @pram int $tid
+ *
+ * @return string url
+ */
+function sectionCategoryIconImg($tid) {
+  $query = db_select('field_data_field_sponser_logo', 'icimg');
+  $query->fields('icimg', array('field_sponser_logo_fid'));
+  $query->condition('icimg.entity_id', $tid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return completeFilePath($result[0]['field_sponser_logo_fid']);
+}
+
+/**
+ * function get tid is_favorite
+ * @pram int $nid
+ *
+ * @return bool $flag
+ */
+function getNidIsFavorite($nid) {
+
+  $flag = "";
+  $result = db_select('field_data_field_featured', 'ffd')->fields('ffd', array('field_featured_value'))->condition('ffd.entity_id', $nid, '=')->execute()->fetchAssoc();
+  if (isset($result['field_featured_value']) && ($result['field_featured_value'] == "yes" || $result['field_featured_value'] == "Yes")) {
+    $flag = "true";
+  }
+  else {
+    $flag = "false";
+  }
+  return $flag;
+}
+
+/**
+ * function get nid is syndications
+ * @pram int $nid
+ *
+ * @return bool $flag
+ */
+function getNidIsSyndications($nid) {
+  // variable declation
+  $flag = 0;
+  $result = db_select('field_data_field_story_syndication', 'fss')->fields('fss', array('field_story_syndication_value'))->condition('fss.entity_id', $nid, '=')->execute()->fetchAssoc();
+
+  if (isset($result['field_featured_value']) && ($result['field_featured_value'] == "yes" || $result['field_featured_value'] == "Yes")) {
+    $flag = 1;
+  }
+  else {
+    $flag = 0;
+  }
+  return $flag;
+}
+
+/**
+ * function get node list in tid
+ * @pram int $tid, $count
+ * @pram string $type
+ *
+ * @return array $tid_list
+ */
+function getNodeFeedTag($tid, $type, $count) {
+  // variable declation
+  global $base_url;
+  $data = array();
+  $tid_list = array();
+  $tid_list[] = $tid;
+  $term_list = taxonomy_get_tree(14, $tid, $max_depth = NULL, $load_entities = FALSE);
+  foreach ($term_list as $key => $value) {
+    $tid_list[] = $value->tid;
+  }
+  $output = "";
+  $range_max = $count;
+  $range_min = 0;
+  $order_by = 'ASC';
+  $query = db_select('taxonomy_index', 'ti');
+  $query->leftJoin('node', 'n', 'n.nid=ti.nid');
+  //join  for field value
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
+  $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
+  $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
+  $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
+  $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
+  $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
+  $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+
+  $query->fields('eli_file', array('uri'));
+  $query->fields('li_file', array('uri'));
+  $query->fields('mi_file', array('uri'));
+  $query->fields('si_file', array('uri'));
+  $query->fields('esi_file', array('uri'));
+
+  $query->fields('mi', array('field_story_medium_image_fid'));
+  $query->fields('si', array('field_story_small_image_fid'));
+  $query->fields('rc', array('field_common_related_content_value'));
+
+  $query->fields('kt', array('field_story_kicker_text_value'));
+  $query->fields('vd', array('field_video_duration_value'));
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+  //end
+  $query->condition('ti.tid', $tid)->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result as $reskey => $resvalue) {
+    // varibale for feed tag
+    $title = $resvalue['title'];
+    $type = $resvalue['type'];
+    $nid = $resvalue['nid'];
+    $created = $resvalue['created'];
+    $is_fav = getNidIsFavorite($nid);
+    // file url
+    $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
+    $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+
+    //related content
+    $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
+
+    // create date formating
+    $create_date = date("Y-m-d H:i:s", $created);
+    $create_datetime = date(DATE_ATOM, $created);
+    $output .= "<title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage>";
+    if ($type == "photogallery") {
+      $output .= "<url>photo" . $nid . ".xml</url>";
+      // generate photo detail page
+      $fl = generatePhotoDetailPageFeed($nid);
+    }
+    elseif ($type == "videogallery") {
+      $output .= "<mediumimage><![CDATA[" . $file_medium_img_url . "]]></mediumimage>";
+      $output .= "<url>video" . $nid . ".xml</url>";
+      // generate video detail page
+      $fl = generateVideoDetailPageFeed($nid);
+    }
+    else {
+      $output .= "<url>story" . $nid . ".xml</url>";
+      // generate story detail page
+      $fl = generateStoryDetailPageFeed($nid);
+    }
+
+    $output .= "<create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><is_favorite>" . $is_fav . "</is_favorite>";
+  }
+  return $output;
+}
+
+/**
+ * common function for get img caption
+ * @pram int $fid
+ *
+ * @return string  $caption
+ */
+function getImgCaption($fid) {
+  // variable declation
+  $caption = "";
+  $query = db_select('field_data_field_image_caption', 'fic');
+  $query->fields('fic', array('field_image_caption_value'));
+  $query->condition('fic.entity_id', $fid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $caption = $result['0']['field_image_caption_value'];
+
+  return $caption;
+}
+
+/**
+ * common function for get img byline
+ * @pram int $fid
+ *
+ * @return string  $byline
+ */
+function getImgByline($fid) {
+  // variable declation
+  $byline = "";
+  $query = db_select('field_data_field_photo_byline', 'fpb');
+  $query->innerJoin('node', 'n', 'fpb.field_photo_byline_target_id=n.nid');
+  $query->fields('n', array('title'));
+  $query->condition('fpb.entity_id', $fid);
+  $query->condition('n.type', 'reporter');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $byline = $result['0']['title'];
+
+  return $byline;
+}
+
+/**
+ * common function for getCityByNid
+ * @pram int $nid
+ *
+ * @return string  $city
+ */
+function getCityByNid($nid) {
+  // variable declation
+  $query = db_select('field_data_field_stroy_city', 'fdc');
+  $query->innerJoin('taxonomy_term_data', 'ttd', 'fdc.field_stroy_city_tid=ttd.tid');
+  $query->fields('ttd', array('name'));
+  $query->condition('fdc.entity_id', $nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $city = $result['0']['name'];
+  return $city;
+}
+
+/**
+ * common function for getBodyDataForAndroid
+ * @pram string $str
+ *
+ * @return string  $mob_str
+ */
+function getBodyDataForAndroid($str, $node = NULL) {
+  // variable declation
+  $mob_str = "";
+  $movie_data = "";
+  $str = html_entity_decode($str);
+  $str = str_replace(array('<div class="itgimage">', 'data-syndication="no"'), array('<div class="itg-mosimage">', ''), $str);
+  $str = preg_replace('/<div class=\"body_caption\">.*<\/div>/', '', $str);
+  $str = str_replace('src="', 'width="100%" src="', $str);
+  $str = str_replace("src='", "width='100%' src='", $str);
+  //$mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
+  //add listicle content data
+  if (strpos($str, '[ITG:LISTICLES]')) {
+    $str = listicle_story_body($str, $node);
+  }
+  if (strpos($str, '[ITG:FACTOIDS]')) {
+    $str = factroid_story_body($str, $node);
+  }
+  if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
+    $buzz_data = buzz_story_body($str, $node);
+  }
+  if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+    $technology_data = technology_story_body($str, $node);
+  }
+  if (!empty($node->field_story_rating)) {
+    $movie_data = movie_story_body($str, $node);
+  }
+  $str = preg_replace('/\[[^]]+\]/', '', $str);
+  $str .= $technology_data;
+  $str .= $buzz_data;
+ 
+  $new_string = $movie_data . '' . $str;
+  return $new_string;
+}
+
+/**
+ * Function for getting the technology story data from the tech body
+ *
+ * @param String $str
+ * @param object $node
+ *
+ * @return string
+ */
+function movie_story_body($str, $node) {
+  $movie_output = '';
+  $movie_output .= '<ul>';
+  if (!empty($node->field_story_rating)) {
+    $movie_output .= '<li class="movie_rate">' . $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%" . '</li>';
+    //$movie_output .= '<div class="movie-rating" data-star-value="'.$node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%".'">';
+  }
+  if (!empty($node->field_mega_review_cast)) {
+    $movie_output .= '<li class="cast">';
+    $movie_output .= '<span class="title">' . t('Cast:') . '</span>';
+    $movie_output .= '<span class="detail">';
+    $cast_ref_id = $node->field_mega_review_cast[LANGUAGE_NONE];
+    $count = sizeof($cast_ref_id);
+    for ($i = 0; $i < $count; $i++) {
+      $entity_obj = entity_load('node', array($cast_ref_id[$i]['target_id']));
+      $cast = $entity_obj[$cast_ref_id[$i]['target_id']]->title;
+      $movie_output .= $cast;
+      if ($i < ($count - 1)) {
+        $movie_output .= ', ';
+      }
+    }
+    $movie_output .= '</span>';
+    $movie_output .= '</li>';
+  }
+  if (!empty($node->field_mega_review_director)) {
+    $movie_output .= '<li class="director">';
+    $movie_output .= '<span class="title">' . t('Director:') . '</span>';
+    $movie_output .= '<span class="detail">' . $node->field_mega_review_director[LANGUAGE_NONE]['0']['value'] . '</span>';
+    $movie_output .= '</li>';
+  }
+  if (!empty($node->field_mega_review_movie_plot)) {
+    $movie_output .= '<li class="plot">';
+    $movie_output .= '<span class="title">' . t('Plot:') . '</span>';
+    $movie_output .= '<span class="detail">' . $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value'] . '</span>';
+    $movie_output .= '</li>';
+  }
+  $movie_output .= '</ul>';
+  return $movie_output;
+}
+
+/**
+ * Function for getting the technology story data from the tech body
+ *
+ * @param String $str
+ * @param object $node
+ *
+ * @return string
+ */
+function technology_story_body($str, $node) {
+  $tech_output = '';
+  $tech_output .= '<ul>';
+  if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+    $buzz = 1;
+    foreach ($node->field_story_technology['und'] as $buzz_item) {
+      $tech_output .= '<li class="technology-section"><ul><li>';
+      $field_collection_id = $buzz_item['value'];
+      $entity = entity_load('field_collection_item', array($field_collection_id));
+
+      $buzz_imguri = '';
+      if (!empty($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid'])) {
+        $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid']);
+      }
+
+      $img = '<img title="' . $entity[$field_collection_id]->field_technology_sample_photo['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_technology_sample_photo['und'][0]['alt'] . '" />';
+      //if (!empty($entity[$field_collection_id]->field_technology_photo_title[LANGUAGE_NONE][0]['value'])) {
+      $tech_output .= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_technology_photo_title[LANGUAGE_NONE][0]['value'] . '</h1>';
+      if (!empty($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid'])) {
+        $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_technology_photo_title[LANGUAGE_NONE][0]['value']);
+        $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
+
+        if (function_exists('itg_story_get_image_info')) {
+          $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_technology_sample_photo['und'][0]['fid']);
+        }
+
+        $tech_output .= '<div class="itg-mosimage">' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
+      }
+
+      $buzz++;
+      //}
+      $tech_output .= '</li></ul></li>';
+    }
+  }
+  if (!empty($node->field_story_technology_rating[LANGUAGE_NONE][0]['value'])) {
+    $tech_output .= '<li class="story-tech-rating">' . $node->field_story_technology_rating[LANGUAGE_NONE][0]['value'] . '/10' . '</li>';
+  }
+  if (!empty($node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'])) {
+    $tech_output .= '<li class="story-tech-chunk">';
+    $tech_output .= $node->field_story_tech_review_chunk[LANGUAGE_NONE][0]['value'];
+    $tech_output .= '</li>';
+  }
+  $tech_output .= '</ul>';
+
+
+  $tech_output = html_entity_decode($tech_output);
+  $tech_output = str_replace(array('<div class="itgimage">', 'data-syndication="no"'), array('<div class="itg-mosimage">', ''), $tech_output);
+  $tech_output = preg_replace('/<div class=\"body_caption\">.*<\/div>/', '', $tech_output);
+  $tech_output = str_replace('src="', 'width="100%" src="', $tech_output);
+  $tech_output = str_replace("src='", "width='100%' src='", $tech_output);
+  return $tech_output;
+}
+
+/**
+ * Function for getting the buzz token data from the body
+ *
+ * @param String $str
+ * @param object $node
+ *
+ * @return string
+ */
+function buzz_story_body($str, $node) {
+  $buzz_output = '';
+  if (!empty($node->field_story_template_buzz[LANGUAGE_NONE])) {
+    $buzz_output .= '<ul>';
+    $buzz = 1;
+    foreach ($node->field_story_template_buzz['und'] as $buzz_item) {
+      $buzz_output .= '<li class="buzz-section">';
+      $field_collection_id = $buzz_item['value'];
+      $entity = entity_load('field_collection_item', array($field_collection_id));
+      $buzz_imguri = '';
+      if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+        $buzz_imguri = _itg_photogallery_fid($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+      }
+      $share_uri = '';
+      if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+        $file = file_load($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+        $share_uri = $file->uri;
+      }
+
+      $share_image = file_create_url($share_uri);
+      $img = '<img title="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['title'] . '" src="' . image_style_url("buzz_image", $buzz_imguri) . '" alt="' . $entity[$field_collection_id]->field_buzz_image['und'][0]['alt'] . '" />';
+      if (!empty($entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'])) {
+        $buzz_output .= '<h1><span>' . $buzz . '</span>' . $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value'] . '</h1>';
+        if (!empty($entity[$field_collection_id]->field_buzz_image['und'][0]['fid'])) {
+          $buzz_title = preg_replace("/'/", "\\'", $entity[$field_collection_id]->field_buzz_headline[LANGUAGE_NONE][0]['value']);
+          $buzz_title_share = htmlentities($buzz_title, ENT_QUOTES);
+
+          if (function_exists('itg_story_get_image_info')) {
+            $getImageInfo = itg_story_get_image_info($entity[$field_collection_id]->field_buzz_image['und'][0]['fid']);
+          }
+
+          $buzz_output .= '<div class="itg-mosimage">' . $img . '</div><div class="photoby">' . $getImageInfo[0]->image_photo_grapher . '</div><div class="image-alt">' . $getImageInfo[0]->image_caption . '</div>';
+        }
+        if (!empty($entity[$field_collection_id]->field_buzz_description['und'][0]['value'])) {
+          $buzz_output .= '<div class="buzz-discription">' . $entity[$field_collection_id]->field_buzz_description['und'][0]['value'] . '</div>';
+        }
+        $buzz_output .= '</li>';
+        $buzz++;
+      }
+    }
+    $buzz_output .= '</ul>';
+  }
+  $buzz_output = str_replace('src="', 'width="100%" src="', $buzz_output);
+  $buzz_output = str_replace("src='", "width='100%' src='", $buzz_output);
+  return $buzz_output;
+}
+
+/**
+ * Function for getting the factroid token data from the body
+ *
+ * @param String $str
+ * @param object $node
+ *
+ * @return string
+ */
+function factroid_story_body($str, $node) {
+  $factoidsBlock = '';
+  if (isset($node->field_story_template_factoids) && !empty($node->field_story_template_factoids)) {
+    $factoidsSocialShare['title'] = $node->field_story_factoids_title[LANGUAGE_NONE][0]['value'];
+    $factoidsSocialShare_title = preg_replace("/'/", "\\'", $factoidsSocialShare['title']);
+    $factoidsSocial_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
+    $factoidsSocialShare['share_desc'] = $node->field_story_template_factoids[LANGUAGE_NONE][0]['value'];
+    $factoidsSocialShare['icons'] = '<div class="factoids-page">
+      <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div></div>';
+    $factoidsSocialShare['slider'] = '<div class="factoids-slider"><ul>';
+    foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
+      $factoidsSocialShare['slider'] .= '<li><span>' . $value['value'] . '</span></li>';
+    }
+    $factoidsSocialShare['slider'] .= '</ul></div>';
+    $factoidsBlock = $factoidsSocialShare['icons'] . $factoidsSocialShare['slider'];
+  }
+  $str = str_replace('[ITG:FACTOIDS]', $factoidsBlock, $str);
+  return $str;
+}
+
+/**
+ * function for getting the listicle token data from the node body
+ *
+ * @param string $str
+ * @param object $node
+ *
+ * @return string
+ */
+function listicle_story_body($str, $node) {
+  $listicle_output = '';
+  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+    if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+      $listicle_output .= '<h3 class="listical_title">' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</h3>';
+    }
+    $buzz_output .= '';
+    $num = 1;
+    $listicle_output .= '<ul class="listicle-detail">';
+    foreach ($node->field_story_listicle['und'] as $buzz_item) {
+      $listicletype = '';
+
+      $field_collection_id = $buzz_item['value'];
+      $entity = entity_load('field_collection_item', array($field_collection_id));
+      $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
+      $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
+      //$color = $entity[$field_collection_id]->field_listicle_color['und'][0]['value'];
+      $color = $entity[$field_collection_id]->field_listicle_color_new['und'][0]['jquery_colorpicker'];
+      $li_type = $node->field_story_templates[LANGUAGE_NONE][0]['value'];
+      $color = ($color) ? $color : '#000000';
+      if ($li_type == 'bullet_points') {
+        $listicle_output .= '<span class="bullet_points"></span>';
+      }
+      else {
+        $listicle_output .= '<span>' . $num . '</span>';
+      }
+      if (isset($type)) {
+        $listicletype = '<span class="listicle-type" style="color: #' . $color . '">' . $type . ': </span>';
+      }
+      $listicle_output .= '<li>' . $listicletype . $description . '</li>';
+      $num++;
+    }
+    $listicle_output .= '</ul>';
+    //print $listicle_output;
+    $str = str_replace('[ITG:LISTICLES]', $listicle_output, $str);
+  }
+  return $str;
+}
+
+/**
+ * function for generate comment xml tag
+ * @pram object $node
+ *
+ * @return string $output
+ */
+function getCommentXmlTag($node) {
+  // variable declation
+  $mode = "COMMENT_MODE_FLAT";
+  $comments_per_page = 10;
+  $commentsflag = 0;
+  $comment_tag = "";
+  $output = "";
+  $comments_list = comment_get_thread($node, $mode, $comments_per_page);
+
+  // writng comments tag
+  foreach ($comments_list as $key => $value) {
+    $cid = $value;
+    $commentsflag = 1;
+    $commens_obj = comment_load($cid);
+    $commenttext = $commens_obj->comment_body['und'][0]['value'];
+    $name = $commens_obj->name;
+    $create_date = date("F d, Y", $commens_obj->created);
+    $create_datetime = date(DATE_ATOM, $commens_obj->created);
+    $email = $commens_obj->mail;
+    $comment_tag .= "<comment><commenttext>" . $commenttext . "</commenttext><name>" . $name . "</name><createddate>" . $create_date . "</createddate><createddatetime>" . $create_datetime . "</createddatetime><email>" . $email . "</email></comment>";
+  }
+
+  if ($commentsflag) {
+    $output .= "<comments>";
+    $output .= $comment_tag;
+    $output .= "</comments>";
+  }
+  else {
+    $output .= emptygetCommentXmlTag();
+  }
+  return $output;
+}
+
+/**
+ * function for generate Empty comment xml tag
+ *
+ * @return string $output
+ */
+function emptygetCommentXmlTag() {
+  $commenttext = "";
+  $name = '';
+  $create_date = '';
+  $create_datetime = "";
+  $email = "";
+
+  // writng comments tag
+  $comment_tag .= "<comment><commenttext>" . $commenttext . "</commenttext><name>" . $name . "</name><createddate>" . $create_date . "</createddate><createddatetime>" . $create_datetime . "</createddatetime><email>" . $email . "</email></comment>";
+
+  $output .= "<comments>";
+  $output .= $comment_tag;
+  $output .= "</comments>";
+
+  return $output;
+}
+
+/**
+ * function for generate getRelatedNodeXmlTag
+ * @pram string $nidar
+ *
+ * @return string $output
+ */
+function getRelatedNodeXmlTag($nidar) {
+  // variable declation
+  global $base_url;
+  $output = "";
+  $story_tag = "";
+  $photo_tag = "";
+  $video_tag = "";
+  $related_flag_story = 0;
+  $related_flag_photo = 0;
+  $related_flag_video = 0;
+  foreach ($nidar as $key => $value) {
+    $title = $value['title'];
+    $url = $base_url . "/node/" . $value['nid'];
+    $img_url = completeFilePath($value['field_story_small_image_fid']);
+
+    if ($value['type'] == "story") {
+      $related_flag_story = 1;
+      $story_tag .= "<story><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></story>";
+    }
+    elseif ($value['type'] == "photogallery") {
+      $related_flag_photo = 1;
+      $photo_tag .= "<photo><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></photo>";
+    }
+    elseif ($value['type'] == "videogallery") {
+      $related_flag_video = 1;
+      $video_tag .= "<video><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></video>";
+    }
+  }
+  $output .= "<related>";
+  if ($related_flag_story) {
+    $output .= "<stories>" . $story_tag . "</stories>";
+  }
+  if ($related_flag_photo) {
+    $output .= "<photos>" . $photo_tag . "</photos>";
+  }
+  if ($related_flag_video) {
+    $output .= "<videos>" . $video_tag . "</videos>";
+  }
+  $output .= "</related>";
+
+  // blank related tag if no data
+  if ($related_flag_story == 0 && $related_flag_photo == 0 && $related_flag_video == 0) {
+    $output = "";
+  }
+
+  return $output;
+}
+
+/**
+ * function for Blank generate getRelatedNodeXmlTag
+ *
+ * @return string $output
+ */
+function emptygetRelatedNodeXmlTag() {
+  // variable declation
+  global $base_url;
+  $output = "";
+  $story_tag = "";
+  $photo_tag = "";
+  $video_tag = "";
+  $title = '';
+  $url = '';
+  $img_url = '';
+  $story_tag .= "<story><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></story>";
+  $photo_tag .= "<photo><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></photo>";
+  $video_tag .= "<video><title>" . $title . "</title><url>" . $url . "</url><thumbimage>" . $img_url . "</thumbimage></video>";
+  $output .= "<related>";
+  $output .= "<stories>" . $story_tag . "</stories>";
+  $output .= "<photos>" . $photo_tag . "</photos>";
+  $output .= "<videos>" . $video_tag . "</videos>";
+  $output .= "</related>";
+  return $output;
+}
+
+
+/*
+ * creage form for redis cache apttern delete by admin
+ */
+function redis_cache_pattern_manager() {
+  $form = array();
+
+  $form['redis_cache_pattern'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Remove Redis Cache Key'),
+    '#size' => 60,
+    '#description' => t("Please Put Redis Key"),
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete'),
+  );
+  return $form;
+}
+
+/*
+ * redis cache apttern form submit
+ */
+function redis_cache_pattern_manager_submit($form, &$form_state) {
+  $key_patt = $form_state['values']['redis_cache_pattern'];
+  $responce = redis_key_pattern_delete($key_patt);
+  if ($responce == '0' || $responce == 0) {
+    drupal_set_message('Unable to delete redis Cache', 'error');
+  }
+  else {
+    drupal_set_message('Redis ' . $responce . ' Key Has been deleted Successfully.');
+  }
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_mobile_feed_cronapi($op, $job = NULL) {
+  $items['xml_feed_url_cron'] = array(
+    'description' => 'cron for update all xml feed.',
+    'callback' => 'itg_mobile_feed_xml_feed_url_cron',
+  );
+  return $items;
+}
+
+/**
+ * Implements function for cron for update all xml feed
+ */
+function itg_mobile_feed_xml_feed_url_cron() {
+  global $base_url;
+  $xml_feed_url = array();
+  /* $xml_feed_url[] = "home-page-feed";
+    $xml_feed_url[] = "program-section-page-feed";
+    $xml_feed_url[] = "program-category-page-feed/1206960";
+    $xml_feed_url[] = "program-category-page-feed/1207605";
+    $xml_feed_url[] = "program-category-page-feed/1207722";
+    $xml_feed_url[] = "program-category-page-feed/1207726";
+    $xml_feed_url[] = "program-category-page-feed/1207728";
+    $xml_feed_url[] = "program-category-page-feed/1207755";
+    $xml_feed_url[] = "program-category-page-feed/1207797";
+    $xml_feed_url[] = "program-category-page-feed/1207827";
+    $xml_feed_url[] = "program-category-page-feed/1207972";
+    //$xml_feed_url[] = "sites/default/files/videos/programmes1.xml";
+    $xml_feed_url[] = "root-category-content-page-feed/1206578";
+    $xml_feed_url[] = "root-category-content-page-feed/1206550";
+    $xml_feed_url[] = "root-category-content-page-feed/1206577";
+    $xml_feed_url[] = "root-category-content-page-feed/1206795";
+    $xml_feed_url[] = "root-category-content-page-feed/1206533";
+    $xml_feed_url[] = "root-category-content-page-feed/1206567";
+    $xml_feed_url[] = "root-category-content-page-feed/1207414";
+    $xml_feed_url[] = "root-category-content-page-feed/1206689";
+    $xml_feed_url[] = "root-category-content-page-feed/1206572";
+    $xml_feed_url[] = "root-category-content-page-feed/1206589";
+    $xml_feed_url[] = "root-category-content-page-feed/1206796";
+    $xml_feed_url[] = "root-category-content-page-feed/1206688";
+    $xml_feed_url[] = "photo-section-page-feed";
+    $xml_feed_url[] = "photo-category-page-feed/1206578";
+    $xml_feed_url[] = "photo-category-page-feed/1206749";
+    $xml_feed_url[] = "photo-category-page-feed/1206749";
+    $xml_feed_url[] = "photo-category-page-feed/1206550";
+    $xml_feed_url[] = "photo-category-page-feed/1206577";
+    $xml_feed_url[] = "photo-category-page-feed/1206567";
+    $xml_feed_url[] = "photo-category-page-feed/1206749";
+    $xml_feed_url[] = "photo-category-page-feed/1206550";
+    $xml_feed_url[] = "photo-category-page-feed/1206577";
+    $xml_feed_url[] = "photo-category-page-feed/1206567";
+    $xml_feed_url[] = "photo-category-page-feed/1206533";
+    $xml_feed_url[] = "photo-category-page-feed/1206676";
+    $xml_feed_url[] = "photo-category-page-feed/1206719";
+    $xml_feed_url[] = "video-section-page-feed";
+    $xml_feed_url[] = "video-category-page-feed/1206578";
+    $xml_feed_url[] = "video-category-page-feed/1206577";
+    $xml_feed_url[] = "video-category-page-feed/1207580";
+    $xml_feed_url[] = "video-category-page-feed/1206749";
+    $xml_feed_url[] = "video-category-page-feed/1206533";
+    $xml_feed_url[] = "video-category-page-feed/1206567";
+    //$xml_feed_url[] = "sites/default/files/xml_it/videos/video_sports.xml";
+    //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/it-event.xml";
+    //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/aboutus.xml";
+    //$xml_feed_url[] = "sites/default/files/xml_it/hltapps/api/contactus.xml";
+    $xml_feed_url[] = "story-detail-page-feed/664";
+    $xml_feed_url[] = "video-detail-page-feed/18815";
+    $xml_feed_url[] = "photo-detail-page-feed/626";*/
+
+
+  // Education today
+  $xml_feed_url[] = "root-category-content-page-feed/1206666";
+
+  foreach ($array as $key => $value) {
+    $data = '';
+
+    $options = array(
+      'method' => 'GET',
+      'data' => $data,
+      'timeout' => 30,
+      'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+    );
+    $url = $base_url . "/" . $value;
+    //$result = drupal_http_request($url, $options);
+    $res = callAPI('GET', $url, $data = FALSE);
+  }
+}
+
+/**
+ * Common function for Parsing HTML Tags in XML
+ * args $string String
+ * Return String
+ */
+function xmlEscape($string) {
+  return str_replace(array('&', '<', '>', '\'', '"', '&nbsp;'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;', ' '), $string);
+}
+
+/* Get The migrated video properties
+ * args $nid
+ * return migrated video properties
+ */
+function migrated_video_transcoding($nid) {
+  //$nid = '840162';
+  $query = db_select('itg_video_transcoding', 'vt');
+  $query->fields('vt', array('file_size', 'bitrate_type', 'bitrate'));
+  $query->condition('vt.nid', $nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $video_size = '';
+
+  foreach ($result as $data) {
+    if ($data['bitrate'] == '364') {
+      if ($data['file_size'] != '') {
+        $video_size = $data['file_size'];
+      }
+      else {
+        $video_size = '0';
+      }
+    }
+    elseif ($data['bitrate'] == '512') {
+      if ($data['file_size'] != '') {
+        $video_size = $data['file_size'];
+      }
+      else {
+        $video_size = '0';
+      }
+    }
+  }
+  return $video_size;
+}
+
+/**
+ * function for converting ifrmae video code to video id
+ *
+ * @param string
+ *
+ * @return string
+ */
+function decryptForEmbed($string) {
+  $decrypter = gmp_strval(gmp_init($string, 36));
+  $decrypter = gmp_shiftr($decrypter, 5);
+  $decrypter = gmp_export($decrypter);
+  return $decrypter;
+}
+
+/**
+ * return the gmap value
+ */
+// shift right
+function gmp_shiftr($x, $n) {
+  return (gmp_div($x, gmp_pow(2, $n)));
+}
+
+/**
+ *
+ * @param string migrated video video id
+ *
+ * @return the nid of the cms
+ */
+function embed_video_nid($video_id) {
+  //  $video_id = '27803';
+  if ($video_id != '') {
+    $qry = db_select('migrate_map_itgvideogallery', 'mv')->fields('mv', array('destid1'))->condition('mv.sourceid1', $video_id)->execute()->fetchField();
+    return $qry;
+  }
+}
+
