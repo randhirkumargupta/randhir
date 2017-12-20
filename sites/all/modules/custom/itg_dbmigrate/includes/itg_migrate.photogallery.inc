@@ -619,7 +619,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
       itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
     }
     // Related content save in db
-    if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
+   /* if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
       //$arr = array();
       foreach ($row->xml->relatedcontents->relatedcontent as $value) {
         $chk_variable = (string) $value;
@@ -635,7 +635,7 @@ class ItgPhotogalleryMigration extends XMLMigration {
               ->execute();
         }
       }
-    }
+    }*/
 
     if (isset($row->xml->gallery->image_details) && !empty($row->xml->gallery->image_details)) {
       $key = 0;
