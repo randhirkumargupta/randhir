@@ -2455,4 +2455,52 @@ function itg_event_backend_sponsor_details($nid) {
   $query->condition('n.nid', $nid, '=');
   $result = $query->execute()->fetchAll();
   return $result;
-} 
+}
+
+/**
+ * Implement funciton for Event Section detail
+ */
+function itg_event_backend_section_detail($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fes', array('field_event_section_target_id'));
+  $query->leftjoin('field_data_field_event_section', 'fes', 'fes.entity_id = n.nid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  if (count($result) > 0) {
+    return $result[0]->field_event_section_target_id;
+  }
+  return FALSE;
+}
+
+/**
+ * Implement funciton for Event Section menu detail
+ */
+function itg_event_backend_section_menu_detail($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title', 'nid'));
+  $query->fields('fesd', array('field_event_start_date_value'));
+  $query->fields('skt', array('field_story_kicker_text_value'));
+  $query->fields('fch', array('field_config_home_value'));
+  $query->fields('fcp', array('field_config_programme_value'));
+  $query->fields('fcs', array('field_config_speakers_value'));
+  $query->fields('dfcs', array('field_config_sponsors_value'));
+  $query->fields('dfcf', array('field_config_flashback_value'));
+  $query->fields('dfet', array('field_event_types_tid'));
+  $query->fields('femfc', array('field_e_menu_font_color_rgb'));
+  $query->fields('fehfc', array('field_e_highlighted_font_color_rgb'));
+
+  $query->leftjoin('field_data_field_event_start_date', 'fesd', 'fesd.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_home', 'fch', 'fch.entity_id = n.nid');
+  $query->leftjoin('field_data_field_story_kicker_text', 'skt', 'skt.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_programme', 'fcp', 'fcp.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_speakers', 'fcs', 'fcs.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_sponsors', 'dfcs', 'dfcs.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_flashback', 'dfcf', 'dfcf.entity_id = n.nid');
+  $query->leftjoin('field_data_field_event_types', 'dfet', 'dfet.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_menu_font_color', 'femfc', 'femfc.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_highlighted_font_color', 'fehfc', 'fehfc.entity_id = n.nid');
+
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}

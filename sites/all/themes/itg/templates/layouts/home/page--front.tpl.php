@@ -27,13 +27,6 @@ if ($theme != 'itgadmin') {
   <div id="page">
       <header class="header" id="header" role="banner">
           <section class="header-top">
-              <div class="container header-logo">
-                  <?php if ($logo): ?>
-                    <div class="logo">
-                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-                    </div>
-                  <?php endif; ?>         
-              </div>
               <?php if ($site_name || $site_slogan): ?>
                 <div class="header__name-and-slogan" id="name-and-slogan">
                     <?php if ($site_name): ?>
@@ -615,7 +608,7 @@ if ($theme != 'itgadmin') {
                                   </div>               
                               </div>  
                           </div>
-                          <div class="col-md-4 col-sm-5 col-xs-4 col-lg-4 mt-50">
+                          <div class="col-md-4 col-sm-5 col-xs-12 col-lg-4 mt-50">
                               <div class="widget-help-text">Section card ( <strong>Watch</strong> )</div>
                               <div class="itg-widget">
                                   <div class="droppable <?php print $gray_bg_layout; ?>">

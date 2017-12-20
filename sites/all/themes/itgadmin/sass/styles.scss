@@ -14433,7 +14433,7 @@ div.ctools-modal-content {
 /* css end Url Redirect page */
 
 
-/* css added by rajveer  singh gangwar start */
+/* css added by start */
 
 #views-exposed-form-section-wise-content-ordering-list-dont-miss-content,
 #views-exposed-form-section-wise-content-ordering-list-we-may-suggest-widget,
@@ -14454,7 +14454,7 @@ div.ctools-modal-content {
 }
 
 
-/* css added by rajveer singh gangwar end  */
+/* css added by end  */
 
 .node-type-print-team-integration [id*="field-add-member-values"]+div.clearfix {
     right: 560px;
@@ -14702,3 +14702,101 @@ div.ctools-modal-content {
         margin-top: 10px;
     }
 }
+
+/*Section Header */
+.section_right_side_block .multi-right-block{
+
+position: absolute;
+
+bottom: 0px;
+top: 64px;
+
+left: 571px;
+
+border-radius: 1px;
+
+border: 1px solid #1fb5ad;
+
+background-color: #1fb5ad;
+
+box-shadow: 0 0 5px #3a8a82;
+
+padding: 0 20px;
+
+line-height: 32px;
+
+height: 36px;
+
+text-transform: uppercase;
+
+color: #fff;
+
+cursor: pointer;
+
+text-align: center;
+
+display: inline-block;
+
+vertical-align: top;
+
+margin-right: 10px;
+
+}
+
+.blocks-list{
+
+padding: 0 10px 0 220px;
+
+position: relative;
+
+}
+
+.blocks-list .blocks-ul{
+
+display: inline-block;
+
+list-style: outside none none;
+
+vertical-align: top;
+
+width: 332px;
+
+}
+
+.blocks-list .blocks-ul li{
+
+background-color: #e5e5e5;
+
+border-top: 1px solid #fff;
+
+padding: 10px;
+
+cursor: move;
+
+min-height: 38px;
+
+font-size: 12px;
+
+position: relative;
+
+}
+
+.blocks-list .blocks-ul li .fa-arrows{
+
+float: left;
+
+margin: 2px 2px 0 0;
+
+}
+
+.blocks-list .save-blocks{
+
+bottom: 1px;
+
+position: absolute;
+
+right: 140px;
+
+}
+
+.section_right_side_block{position:relative;}

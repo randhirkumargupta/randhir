@@ -28,13 +28,7 @@ if ($theme != 'itgadmin') {
   <div id="page">
       <header class="header" id="header" role="banner">
           <section class="header-top">
-              <div class="container header-logo">
-                  <?php if ($logo): ?>
-                    <div class="logo">
-                        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" title="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-                    </div>
-                  <?php endif; ?>         
-              </div>
+       
               <?php if ($site_name || $site_slogan): ?>
                 <div class="header__name-and-slogan" id="name-and-slogan">
                     <?php if ($site_name): ?>
@@ -100,7 +94,7 @@ if ($theme != 'itgadmin') {
               <div class="widget-help-text"><?php print t('Non Draggable');?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
             <div class="auto-block-3 backbg">
                 <div class="row">
-                <div class="itg-widget-parent m-bottom40 col-md-12 col-sm-6 col-xs-12">
+                <div class="itg-widget-parent m-bottom40 col-md-12 col-sm-12 col-xs-12">
                   <div class="itg-widget">
                     <div class="ad-widget">
                       <div class="sidebar-ad">
