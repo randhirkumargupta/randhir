@@ -1431,6 +1431,18 @@ ul.pron-cons-img li img {
 h3.tech-photo-head {
     text-align: left
 }
+nav#navbar amp-accordion {
+    position: absolute;
+}
+ul.header-menu {
+    background: #fff;
+    border-right: 1px solid #ccc;
+    top: 18px;
+}
+ul.header-menu li {
+    border-bottom: 1px solid #ccc;
+    width: 270px;
+}
 @media only screen and (max-width: 767px) {
     ul.pron-cons-img {
         width: 100%
