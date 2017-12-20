@@ -23,7 +23,7 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
                     <input type="submit" name="submitlogin"
                            value="OK"
                            class="ampstart-btn caps">
-                    <a href="/search" class="search" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>
+                    <a href="#" class="search" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>
                 </form>
             </li>
 
