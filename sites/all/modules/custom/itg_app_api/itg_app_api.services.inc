@@ -3654,30 +3654,31 @@ function itg_rapid_api_log_out($token) {
         $account_err['status_message'] = "Invalid User_ID";
         return $account_err;
     }
-
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
-    if (!drupal_valid_token($token, 'services')) {
+    if (!drupal_valid_token($token, 'services')) {       
         $res['status_code'] = "0";
         $res['status_message'] = "invalid token";
         return $res;
-    }
-    $method = "POST";
-    $url = PARENT_SSO . "/appapisso/log_out";
-    $result = callAPI($method, $url, $params);
-    $user_id = $params['user_id'];
-    $user = user_load_by_name($user_id);
-    watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
-    $original_session_state = drupal_save_session();
-    drupal_save_session(TRUE);
-    // Destroy the current session.
-    module_invoke_all('user_logout', $user);
-    session_destroy();
-    // Load the anonymous user.
-    $user = drupal_anonymous_user();
-    drupal_save_session($original_session_state);
-    // call custom function to clean token in custom table
-    cleanToken_Rapid($params);
+    }    
+          
+        $method = "POST";
+        $url = PARENT_SSO . "/appapisso/log_out";
+        $result = callAPI($method, $url, $params);
+        $user_id = $params['user_id'];
+        $user = user_load_by_name($user_id);
+        watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+        $original_session_state = drupal_save_session();
+        drupal_save_session(TRUE);
+        // Destroy the current session.
+        module_invoke_all('user_logout', $user);
+        session_destroy();
+        // Load the anonymous user.
+        $user = drupal_anonymous_user();
+        drupal_save_session($original_session_state);
+        // call custom function to clean token in custom table
+        cleanToken_Rapid($params);            
+    
     $data['status_code'] = "1";
     $data['status_message'] = "";
 
