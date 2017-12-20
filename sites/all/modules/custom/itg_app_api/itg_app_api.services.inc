@@ -3641,31 +3641,30 @@ function itg_rapid_api_edit_user_image($token) {
  */
 function itg_rapid_api_log_out($token) {
   $HTTP_RAW_POST_DATA;
-  global $base_url;
-  $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-  // check valid user_id
-  $rand = rand();
-  $url = PARENT_SSO . "/appapi/check_user/" . $rand;
-  $result = callAPI("GET", $url, $params);
-  $token = $params['auth_token'];
-  $result_obj = json_decode($result);
+    global $base_url;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    // check valid user_id
+    $rand = rand();
+    $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
+    $result = callAPI("GET", $url, $params);
+    $result_obj = json_decode($result);
 
-  if (!$result_obj->uid) {
-    $account_err['status_code'] = "0";
-    $account_err['status_message'] = "Invalid User_ID";
-    return $account_err;
-  }
+    if (!$result_obj->uid) {
+        $account_err['status_code'] = "0";
+        $account_err['status_message'] = "Invalid User_ID";
+        return $account_err;
+    }
 
-  $token_val_flag = 0;
-  $token_val_flag = tokenValidator($params['user_id'], $token);
-  if (!drupal_valid_token($token, 'services')) {
-    //if (!$token_val_flag) {
-    $res['status_code'] = "0";
-    $res['status_message'] = "invalid token";
-    return $res;
-  }
+    $token_val_flag = 0;
+    $token_val_flag = tokenValidator($params['user_id'], $token);
+    if (!drupal_valid_token($token, 'services')) {
+        //if (!$token_val_flag) {
+        $res['status_code'] = "0";
+        $res['status_message'] = "invalid token";
+        return $res;
+    }
 
-  //$params = $_POST; {
+    //$params = $_POST; {
     // call sso server api
     $method = "POST";
     $url = PARENT_SSO . "/appapi/log_out";
