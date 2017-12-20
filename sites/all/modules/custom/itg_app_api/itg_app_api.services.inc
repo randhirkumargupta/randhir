@@ -3564,7 +3564,7 @@ function itg_rapid_api_edit_user_image($token) {
   $data = array();
   $params = (array) json_decode(file_get_contents('php://input'), TRUE);
   $rand = rand();
-  $url = PARENT_SSO . "/appapi/check_user/" . $rand;
+  $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
   $result = callAPI("GET", $url, $params);
   $result_obj = json_decode($result);
 
@@ -3593,7 +3593,7 @@ function itg_rapid_api_edit_user_image($token) {
 
     // call sso server api
     $method = "POST";
-    $url = PARENT_SSO . "/appapi/edit_user_image";
+    $url = PARENT_SSO . "/appapisso/edit_user_image";
     $result = callAPI($method, $url, $params);
 
     // check mime-type
@@ -3640,15 +3640,15 @@ function itg_rapid_api_edit_user_image($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_log_out($token) {
-  $HTTP_RAW_POST_DATA;
+    $HTTP_RAW_POST_DATA;
     global $base_url;
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
     // check valid user_id
     $rand = rand();
     $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
     $result = callAPI("GET", $url, $params);
+    $token = $params['auth_token'];
     $result_obj = json_decode($result);
-
     if (!$result_obj->uid) {
         $account_err['status_code'] = "0";
         $account_err['status_message'] = "Invalid User_ID";
@@ -3658,40 +3658,30 @@ function itg_rapid_api_log_out($token) {
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
     if (!drupal_valid_token($token, 'services')) {
-        //if (!$token_val_flag) {
         $res['status_code'] = "0";
         $res['status_message'] = "invalid token";
         return $res;
     }
-
-    //$params = $_POST; {
-    // call sso server api
     $method = "POST";
-    $url = PARENT_SSO . "/appapi/log_out";
+    $url = PARENT_SSO . "/appapisso/log_out";
     $result = callAPI($method, $url, $params);
     $user_id = $params['user_id'];
     $user = user_load_by_name($user_id);
-
     watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
-
     $original_session_state = drupal_save_session();
     drupal_save_session(TRUE);
-
     // Destroy the current session.
     module_invoke_all('user_logout', $user);
     session_destroy();
-
     // Load the anonymous user.
     $user = drupal_anonymous_user();
-
     drupal_save_session($original_session_state);
     // call custom function to clean token in custom table
     cleanToken_Rapid($params);
-  
-  $data['status_code'] = "1";
-  $data['status_message'] = "";
+    $data['status_code'] = "1";
+    $data['status_message'] = "";
 
-  return $data;
+    return $data;
 }
 
 /**
