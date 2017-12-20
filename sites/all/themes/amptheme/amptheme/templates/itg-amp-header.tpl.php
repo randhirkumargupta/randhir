@@ -97,7 +97,7 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
               $image = file_load($title[0]['field_story_extra_large_image_fid']);
               $share_image = file_create_url($image->uri);
             }
-            $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . '/amp' . $_SERVER['REQUEST_URI'];
+            $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . '/amp' . $_SERVER['REQUEST_URI'];
             $amp_link = str_replace('?amp', '', $actual_link);
             $short_url = shorten_url($amp_link, 'goo.gl');
             $fb_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $amp_link . '&title=' . $share_title . '&picture=' . $share_image;
