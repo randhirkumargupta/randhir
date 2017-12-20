@@ -91,18 +91,18 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
           
           // code for sharing
           $arg = arg();
-          if(function_exists('itg_get_node_details')) { 
-          $title = itg_get_node_details($arg[1]);
-          $share_title = $title[0]['title'];
-          $image = file_load($title[0]['field_story_extra_large_image_fid']);
-          $share_image = file_create_url($image->uri);
-          }
-          $actual_link = 'http://' . $_SERVER['HTTP_HOST'] .'/amp'. $_SERVER['REQUEST_URI'];
-          $amp_link = str_replace('?amp', '', $actual_link);
-          $short_url = shorten_url($amp_link, 'goo.gl');
-          $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$amp_link.'&title='.$share_title.'&picture='.$share_image;
-          $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($share_title).'&url='.$short_url.'&via=IndiaToday';
-          $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
+          if (function_exists('itg_get_node_details')) {
+              $title = itg_get_node_details($arg[1]);
+              $share_title = $title[0]['title'];
+              $image = file_load($title[0]['field_story_extra_large_image_fid']);
+              $share_image = file_create_url($image->uri);
+            }
+            $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . '/amp' . $_SERVER['REQUEST_URI'];
+            $amp_link = str_replace('?amp', '', $actual_link);
+            $short_url = shorten_url($amp_link, 'goo.gl');
+            $fb_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $amp_link . '&title=' . $share_title . '&picture=' . $share_image;
+            $twitter_url = 'https://twitter.com/intent/tweet?text=' . urlencode($share_title) . '&url=' . $short_url . '&via=IndiaToday';
+            $google_url = 'https://plus.google.com/share?url=' . urlencode($amp_link);
           ?>
         </ul>
       </section>
@@ -116,7 +116,7 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
           <?php print drupal_render($data['itg_top_manu_header']); ?>
           </div>
              <!--logo start -->
-            <?php $logo_itg = file_create_url(file_default_scheme() . '://../sites/all/themes/amptheme/ampthem/logo.png'); ?>
+            <?php $logo_itg = file_create_url(file_default_scheme() . '://../sites/all/themes/amptheme/amptheme/logo.png'); ?>
               <div class="container headeritg-logo">    
               <?php if ($logo_itg): ?>
               <div class="logo">
