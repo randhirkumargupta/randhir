@@ -159,7 +159,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
     $term_name = $term->name;
     $created = $resvalue['created'];
     $changed = $resvalue['changed'];
-    $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+    $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
     $alias = drupal_get_path_alias('node/' . $nid . '');
     $weburl = $base_url . "/" . $alias;
     $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -394,7 +394,7 @@ function getCoverstoriesList($issue_date) {
     $term_name = $term->name;
     $created = $resvalue['created'];
     $changed = $resvalue['changed'];
-    $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+    $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
     $alias = drupal_get_path_alias('node/' . $nid . '');
     $weburl = $base_url . "/" . $alias;
     $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -561,10 +561,11 @@ function getIssueStoryCount($issue_date) {
   // issue list query..
   $count = 0;
   $query_issue = db_select('node', 'n');
-  $query_issue->leftJoin('field_data_field_issue_title', 'fsit', 'fsit.entity_id=n.nid');
+  
+  $query_issue->leftJoin('field_data_field_story_issue_date', 'fsid', 'fsid.entity_id=n.nid');
   $query_issue->fields('n', array('nid'));
 
-  $query_issue->condition('n.status', 1)->condition('n.type', 'story')->condition('fsit.field_issue_title_value', $issue_date);
+  $query_issue->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date);
   $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
   $count = count($result_issue);
   return $count;

@@ -603,7 +603,7 @@ class ItgVideogalleryMigration extends XMLMigration {
     if (!empty($row->bitrates)) {
       $node->field_multi_bitrate[LANGUAGE_NONE] = $row->bitrates;
     }
-    $node->uid = $row->xml->createdby;
+   $node->uid = (int) $row->xml->createdby;
 
     // publish time for photo
     if (!empty((int) $row->xml->publisheddate)) {

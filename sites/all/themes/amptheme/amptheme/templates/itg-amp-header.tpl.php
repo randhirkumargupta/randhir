@@ -59,10 +59,10 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
                 $icon_path = $menu_link_data['icon_path'];
 
                 if (!empty($icon_path)) {
-                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img class='itg-user-icon navimgamp' src='" . file_create_url($icon_path) . "'  /></span>";
+                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img width='21' height='20' class='itg-user-icon navimgamp' src='" . file_create_url($icon_path) . "'  /></span>";
                 } else {
                   $default_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default_for_all_48_32.jpeg');
-                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img class='itg-user-icon navimgamp' src=$default_image alt='' /></span>";
+                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img width='21' height='20' class='itg-user-icon navimgamp' src=$default_image alt='' /></span>";
                 }
                 $link_text = $link_text_icon . $menu_link_data['link_title_for_vertical'];
                 if (!empty($sponsored_class)) {
@@ -81,7 +81,7 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
                 }
                 ?>
                 <li <?php echo $style_tag; ?> class="<?php print $image_class; ?>">
-                  <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('style' => array("background : $color_value"), 'target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type))));
+                  <?php print l($link_text, $link_url, array('html' => true, 'attributes' => array('target' => $target, 'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type))));
                   ?>
                 </li>
                 <?php
@@ -97,7 +97,7 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
               $image = file_load($title[0]['field_story_extra_large_image_fid']);
               $share_image = file_create_url($image->uri);
             }
-            $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . '/amp' . $_SERVER['REQUEST_URI'];
+            $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . '/amp' . $_SERVER['REQUEST_URI'];
             $amp_link = str_replace('?amp', '', $actual_link);
             $short_url = shorten_url($amp_link, 'goo.gl');
             $fb_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $amp_link . '&title=' . $share_title . '&picture=' . $share_image;

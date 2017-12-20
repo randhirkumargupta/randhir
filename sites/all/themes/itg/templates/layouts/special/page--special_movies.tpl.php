@@ -55,7 +55,7 @@ if ($theme != 'itgadmin') {
       endif;
       ?>
     <!-- Movies top section -->
-    <div class="movies-top-section">
+    <div class="movies-top-section section-movies">
       <div class="container">
     <div class="row itg-top-section itg-layout-580">
         <div class="top-block">
@@ -478,7 +478,7 @@ if ($theme != 'itgadmin') {
                               <div class="droppable <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name'] . $widget_data['itg-block-8']['widget_display_name']; ?>">
                                       <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-8']['block_title'])) { ?>
-                                        <span class="widget-title"><?php print $widget_data['itg-block-8']['block_title']; ?></span>
+                                        <a href="/photo/movies"><span class="widget-title"><?php print $widget_data['itg-block-8']['block_title']; ?></span></a>
                                       <?php } ?>
                                       <!-- for admin  -->
                                       <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
@@ -511,7 +511,7 @@ if ($theme != 'itgadmin') {
                               <div class="droppable <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name'] . $widget_data['itg-block-9']['widget_display_name']; ?>">
                                       <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-9']['block_title'])) { ?>
-                                        <span class="widget-title"><?php print $widget_data['itg-block-9']['block_title']; ?></span>
+                                        <a href="/videos/movies"><span class="widget-title"><?php print $widget_data['itg-block-9']['block_title']; ?></span></a>
                                       <?php } ?>
                                       <!-- for admin  -->
                                       <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
