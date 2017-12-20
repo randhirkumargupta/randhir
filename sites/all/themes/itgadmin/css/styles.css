@@ -13491,6 +13491,7 @@ div.ctools-modal-content .form-submit {
 .section_right_side_block .multi-right-block {
   position: absolute;
   bottom: 0px;
+  top: 64px;
   left: 571px;
   border-radius: 1px;
   border: 1px solid #1fb5ad;
