@@ -61,7 +61,7 @@ if ($theme != 'itgadmin') {
       endif;
       ?>
     <!-- Movies top section -->
-    <div class="movies-top-section">
+    <div class="movies-top-section section-movies">
       <div class="container">
     <div class="row itg-top-section itg-layout-580">
         <div class="top-block">
