@@ -608,7 +608,7 @@ if ($theme != 'itgadmin') {
                                   </div>               
                               </div>  
                           </div>
-                          <div class="col-md-4 col-sm-5 col-xs-4 col-lg-4 mt-50">
+                          <div class="col-md-4 col-sm-5 col-xs-12 col-lg-4 mt-50">
                               <div class="widget-help-text">Section card ( <strong>Watch</strong> )</div>
                               <div class="itg-widget">
                                   <div class="droppable <?php print $gray_bg_layout; ?>">

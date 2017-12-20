@@ -1,5 +1,7 @@
 <?php
 global $base_url;
+drupal_add_css(".logo {display:none !important}", "inline");
+drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
 <div id="section-header-event-1206755" class="india-today-woman-summit">
     <div class="header-ads header_ltop_container">
