@@ -4,29 +4,29 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
 ?>
 
 <header role="banner" id="header">
-  <a href="<?php print $base_url; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
-    <amp-img src="<?php print $base_url; ?>/sites/all/themes/amptheme/amptheme/logo.png" alt="<?php print t('Home'); ?>" height="58" width = "71"></amp-img>
-  </a>
- <form method="GET"
-  class="search-form"
-  action=<?php print $search_url; ?>
-  target="_top">
-    <input type="search" 
-      placeholder="Search..."
-      name="search">
-  <input type="submit" name="submitlogin"
-    value="OK"
-    class="ampstart-btn caps">
-  <a href="#" class="search" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>
-</form>
-  <nav id="navbar">
-    <amp-accordion disable-session-states>
+<nav id="navbar">
+<amp-accordion disable-session-states>
       <section>
         <h2>
           <span class="show-more"><i class="fa fa-bars"></i></span>
           <span class="show-less"><i class="fa fa-times"></i></span>
         </h2>
         <ul class="header-menu">
+            <li class="search-section-amp">
+                <form method="GET"
+                      class="search-form"
+                      action=<?php print $search_url; ?>
+                      target="_top">
+                    <input type="search"
+                           placeholder="Search..."
+                           name="search">
+                    <input type="submit" name="submitlogin"
+                           value="OK"
+                           class="ampstart-btn caps">
+                    <a href="#" class="search" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a>
+                </form>
+            </li>
+
           <?php
           $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
           // Contion to check fucntion isset.
@@ -56,6 +56,15 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
                 $url_type = $menu_link_data['url_type'];
                 $style_tag = '';
                 $color_value = '';
+                $icon_path = $menu_link_data['icon_path'];
+
+                if (!empty($icon_path)) {
+                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img width='21' height='20' class='itg-user-icon navimgamp' src='" . file_create_url($icon_path) . "'  /></span>";
+                } else {
+                  $default_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default_for_all_48_32.jpeg');
+                  $link_text_icon  = "<span class='menu-icons-amp'><amp-img width='21' height='20' class='itg-user-icon navimgamp' src=$default_image alt='' /></span>";
+                }
+                $link_text = $link_text_icon . $menu_link_data['link_title_for_vertical'];
                 if (!empty($sponsored_class)) {
                   $color_value = $menu_data['db_data']['bk_color'];
                 }
@@ -82,43 +91,49 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
           
           // code for sharing
           $arg = arg();
-          if(function_exists('itg_get_node_details')) {
-          //$nid = get_nid_form_url($_SERVER['REQUEST_URI']);  
-          $title = itg_get_node_details($arg[1]);
-          $share_title = $title[0]['title'];
-          $image = file_load($title[0]['field_story_extra_large_image_fid']);
-          $share_image = file_create_url($image->uri);
-          }
-          $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-          $amp_link = str_replace('?amp', '', $actual_link);
-          $short_url = shorten_url($amp_link, 'goo.gl');
-          $fb_url = 'https://www.facebook.com/sharer/sharer.php?u='.$amp_link.'&title='.$share_title.'&picture='.$share_image;
-          $twitter_url = 'https://twitter.com/intent/tweet?text='.urlencode($share_title).'&url='.$short_url.'&via=IndiaToday';
-          $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
+          if (function_exists('itg_get_node_details')) {
+              $title = itg_get_node_details($arg[1]);
+              $share_title = $title[0]['title'];
+              $image = file_load($title[0]['field_story_extra_large_image_fid']);
+              $share_image = file_create_url($image->uri);
+            }
+            $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . '/amp' . $_SERVER['REQUEST_URI'];
+            $amp_link = str_replace('?amp', '', $actual_link);
+            $short_url = shorten_url($amp_link, 'goo.gl');
+            $fb_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $amp_link . '&title=' . $share_title . '&picture=' . $share_image;
+            $twitter_url = 'https://twitter.com/intent/tweet?text=' . urlencode($share_title) . '&url=' . $short_url . '&via=IndiaToday';
+            $google_url = 'https://plus.google.com/share?url=' . urlencode($amp_link);
           ?>
         </ul>
       </section>
     </amp-accordion>
-    <div class="nav-right">
-<!--      <div class="phone"><i class="fa fa-phone" aria-hidden="true"></i></div>
-      <div class="comment"><i class="fa fa-comment" aria-hidden="true"></i></div>-->
-      <div class="social-share">
-      <amp-accordion disable-session-states>
-        <section>
-          <h2>
-            <span class="show-more"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
-            <span class="show-less"><i class="fa fa-share-alt" aria-hidden="true"></i></span>
-          </h2>
-          <div class="share-link">
-            <a href="<?php print $twitter_url; ?>" target="_blank" title="share on twitter"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-            <a href="<?php print $fb_url; ?>" target="_blank" title="share on facebook"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-            <a href="<?php print $google_url;?>" target="_blank" title="share on G+"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
+
+<div class="container top-nav">                  
+    <div class="main-nav">
+       <div class="nav-container-menu">
+         <div class="nav-centerall">
+         <div class="top-first-menu">
+          <?php print drupal_render($data['itg_top_manu_header']); ?>
           </div>
-        </section>
-      </amp-accordion>
-      </div>
+             <!--logo start -->
+            <?php $logo_itg = file_create_url(file_default_scheme() . '://../sites/all/themes/amptheme/amptheme/logo.png'); ?>
+              <div class="container headeritg-logo">    
+              <?php if ($logo_itg): ?>
+              <div class="logo">
+                  <a href="<?php print $base_url; ?>" title="<?php //print t('Home'); ?>" rel="home" id="logo">
+                      <amp-img src="<?php print $logo_itg; ?>" alt="<?php  t('Home'); ?>" height="30" width = "70"></amp-img>
+                  </a>
+              </div>
+              <?php endif; ?>
+              </div>
+            <!--logo end -->
+            <?php print drupal_render($data['itg_top_manu_header_second']); ?>
+            </div>
+       </div>
     </div>
+  </div>
   </nav>
+</header>
 
 </header>
 <?php if(($title[0]['type'] == 'story') || ($title[0]['type'] == 'breaking_news')) { ?>

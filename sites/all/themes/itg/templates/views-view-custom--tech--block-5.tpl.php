@@ -1,4 +1,5 @@
 <?php drupal_add_library('flexslider', 'flexslider');
+global $base_url;
 ?>
 <div class="flexslider">
     <ul class="slides"> 
@@ -9,9 +10,11 @@
 
                 <div class="detail">
                     <p class="flex-count"><i class="fa fa-camera"></i> <?php print $row['delta']; ?> images</p>
-                    <p class="flex-caption" title="<?php echo strip_tags($row['title']); ?>">
+                    <a  href="<?php echo $base_url . '/' . drupal_get_path_alias("node/" . $row['nid']); ?>">
+                      <p class="flex-caption" title="<?php echo strip_tags($row['title']); ?>">                    
                         <?php print itg_common_get_smiley_title($row['nid'], 0, 150); ?>
-                    </p>
+                      </p>
+                    </a>
                 </div>
 
             </li>

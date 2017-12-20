@@ -1077,10 +1077,6 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
     $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
-  if ($form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event draft
-    $form['title']['#autocomplete_path'] = 'content-title-event/draft/autocomplete';
-    $form['title']['#attributes'] = array('placeholder' => t('Title'));
-  }
   if ($form["#id"] == 'views-exposed-form-Sponsor-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/sponsor/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
@@ -1927,7 +1923,7 @@ function itg_event_backend_highlights_block_content() {
         $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
       }
     }
-     if(!empty($text)) {
+    if(!empty($text)) {
       $output .= $text . '</div></div>';
     }else{
       $output = '';
@@ -2457,3 +2453,50 @@ function itg_event_backend_sponsor_details($nid) {
   return $result;
 }
 
+/**
+ * Implement funciton for Event Section detail
+ */
+function itg_event_backend_section_detail($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('fes', array('field_event_section_target_id'));
+  $query->leftjoin('field_data_field_event_section', 'fes', 'fes.entity_id = n.nid');
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  if (count($result) > 0) {
+    return $result[0]->field_event_section_target_id;
+  }
+  return FALSE;
+}
+
+/**
+ * Implement funciton for Event Section menu detail
+ */
+function itg_event_backend_section_menu_detail($nid) {
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title', 'nid'));
+  $query->fields('fesd', array('field_event_start_date_value'));
+  $query->fields('skt', array('field_story_kicker_text_value'));
+  $query->fields('fch', array('field_config_home_value'));
+  $query->fields('fcp', array('field_config_programme_value'));
+  $query->fields('fcs', array('field_config_speakers_value'));
+  $query->fields('dfcs', array('field_config_sponsors_value'));
+  $query->fields('dfcf', array('field_config_flashback_value'));
+  $query->fields('dfet', array('field_event_types_tid'));
+  $query->fields('femfc', array('field_e_menu_font_color_rgb'));
+  $query->fields('fehfc', array('field_e_highlighted_font_color_rgb'));
+
+  $query->leftjoin('field_data_field_event_start_date', 'fesd', 'fesd.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_home', 'fch', 'fch.entity_id = n.nid');
+  $query->leftjoin('field_data_field_story_kicker_text', 'skt', 'skt.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_programme', 'fcp', 'fcp.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_speakers', 'fcs', 'fcs.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_sponsors', 'dfcs', 'dfcs.entity_id = n.nid');
+  $query->leftjoin('field_data_field_config_flashback', 'dfcf', 'dfcf.entity_id = n.nid');
+  $query->leftjoin('field_data_field_event_types', 'dfet', 'dfet.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_menu_font_color', 'femfc', 'femfc.entity_id = n.nid');
+  $query->leftjoin('field_data_field_e_highlighted_font_color', 'fehfc', 'fehfc.entity_id = n.nid');
+
+  $query->condition('n.nid', $nid, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}

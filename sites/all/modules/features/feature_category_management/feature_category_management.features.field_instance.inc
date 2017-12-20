@@ -610,6 +610,46 @@ function feature_category_management_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'taxonomy_term-category_management-field_is_section_header'.
+  $field_instances['taxonomy_term-category_management-field_is_section_header'] = array(
+    'bundle' => 'category_management',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 27,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_is_section_header',
+    'label' => 'Is Section Header',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 24,
+    ),
+  );
+
+  // Exported field_instance:
   // 'taxonomy_term-category_management-field_is_sponsor'.
   $field_instances['taxonomy_term-category_management-field_is_sponsor'] = array(
     'bundle' => 'category_management',
@@ -824,6 +864,142 @@ function feature_category_management_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_buttons',
       'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_section_menu'.
+  $field_instances['taxonomy_term-category_management-field_section_menu'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'menu_reference',
+        'settings' => array(
+          'link' => TRUE,
+        ),
+        'type' => 'menu_reference_links',
+        'weight' => 28,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_section_menu',
+    'label' => 'Section Menu',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'menu_reference',
+      'settings' => array(),
+      'type' => 'menu_reference_select',
+      'weight' => 25,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'taxonomy_term-category_management-field_section_right_side_block'.
+  $field_instances['taxonomy_term-category_management-field_section_right_side_block'] = array(
+    'bundle' => 'category_management',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'blockreference',
+        'settings' => array(
+          'show_empty_blocks' => FALSE,
+        ),
+        'type' => 'blockreference_default',
+        'weight' => 29,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'exclude_cv' => 0,
+    'field_name' => 'field_section_right_side_block',
+    'label' => 'Section Right Side Block',
+    'required' => 0,
+    'settings' => array(
+      'blockreference_modules' => array(
+        'amp' => 0,
+        'apachesolr_search' => 0,
+        'autologout' => 0,
+        'block' => 'block',
+        'blog' => 0,
+        'comment' => 0,
+        'content_theme_debugger' => 0,
+        'diff' => 0,
+        'formblock' => 0,
+        'itg_ads' => 'itg_ads',
+        'itg_akamai' => 0,
+        'itg_api' => 0,
+        'itg_ask_expert' => 'itg_ask_expert',
+        'itg_astro' => 'itg_astro',
+        'itg_auto_search' => 0,
+        'itg_bestcolleges' => 0,
+        'itg_blog' => 'itg_blog',
+        'itg_breaking_news' => 'itg_breaking_news',
+        'itg_budget_predictor' => 'itg_budget_predictor',
+        'itg_category_manager' => 'itg_category_manager',
+        'itg_custom_widget' => 'itg_custom_widget',
+        'itg_event_backend' => 0,
+        'itg_front_end_common' => 'itg_front_end_common',
+        'itg_layout_manager' => 'itg_layout_manager',
+        'itg_live_tv' => 0,
+        'itg_loyalty_reward' => 0,
+        'itg_mega_reviews_critics' => 'itg_mega_reviews_critics',
+        'itg_menu_manager' => 0,
+        'itg_msi' => 'itg_msi',
+        'itg_newsletter' => 'itg_newsletter',
+        'itg_personalization' => 0,
+        'itg_photogallery' => 'itg_photogallery',
+        'itg_podcast' => 'itg_podcast',
+        'itg_poll' => 'itg_poll',
+        'itg_quiz' => 'itg_quiz',
+        'itg_recipe' => 0,
+        'itg_related' => 'itg_related',
+        'itg_reporter' => 'itg_reporter',
+        'itg_reports' => 'itg_reports',
+        'itg_social_media' => 'itg_social_media',
+        'itg_story' => 'itg_story',
+        'itg_survey' => 'itg_survey',
+        'itg_ugc_comment' => 'itg_ugc_comment',
+        'itg_videogallery' => 'itg_videogallery',
+        'itg_widget' => 'itg_widget',
+        'logintoboggan' => 0,
+        'menu' => 0,
+        'msnf' => 0,
+        'node' => 0,
+        'print' => 0,
+        'print_pdf' => 0,
+        'print_ui' => 0,
+        'search' => 0,
+        'shortcut' => 0,
+        'shorten' => 0,
+        'simplesamlphp_auth' => 0,
+        'superfish' => 0,
+        'system' => 0,
+        'user' => 0,
+        'views' => 'views',
+        'webform' => 0,
+        'workbench' => 0,
+      ),
+      'exclude_cv' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 26,
     ),
   );
 
@@ -1112,6 +1288,7 @@ function feature_category_management_field_default_field_instances() {
   t('Image Size (40x35)');
   t('Image Size (650x45)');
   t('Impact Text');
+  t('Is Section Header');
   t('Is Sponsored');
   t('Issue free');
   t('No Follow');
@@ -1124,6 +1301,8 @@ function feature_category_management_field_default_field_instances() {
   t('Redirection URL');
   t('Result format');
   t('Schedule duration');
+  t('Section Menu');
+  t('Section Right Side Block');
   t('Section flag');
   t('Section type');
   t('Select template');
