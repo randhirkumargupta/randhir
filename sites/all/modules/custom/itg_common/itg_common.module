@@ -18,17 +18,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
  * {@inheritdoc}
  */
 function itg_common_init() {
-  if ($arg[1] == 'shravan') {
-    
-    $block  = block_load('itg_widget', 'top_stories_ordering');
-    $renderable_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-    $output = render($renderable_array);
-
-     // Print out the content of the proceeding call
-     print $output;
-    
-     exit;
-  }
+  
   global $user, $base_url, $theme;
   $arg = arg();
   
