@@ -89,6 +89,9 @@ function photogallery_strongarm() {
       'print' => array(
         'custom_settings' => FALSE,
       ),
+      'amp' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -111,6 +114,10 @@ function photogallery_strongarm() {
       'display' => array(
         'flag_my_saved_content' => array(
           'default' => array(
+            'weight' => '10',
+            'visible' => TRUE,
+          ),
+          'amp' => array(
             'weight' => '10',
             'visible' => TRUE,
           ),
