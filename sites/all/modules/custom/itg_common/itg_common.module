@@ -18,7 +18,7 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
  * {@inheritdoc}
  */
 function itg_common_init() {
-  if ($arg[0] == 'shravan') {
+  if ($arg[1] == 'shravan') {
     
     $block  = block_load('itg_widget', 'we_may_suggest');
     $renderable_array = _block_get_renderable_array(_block_render_blocks(array($block)));
