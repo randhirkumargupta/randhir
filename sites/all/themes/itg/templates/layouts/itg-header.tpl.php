@@ -86,15 +86,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                 // Contion to check fucntion isset.
                 $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
                 $default_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default_for_all_48_32.jpeg');
-                ?>
-                <li class="nav-items ripple-effect hidden-desktop">
-                    <a href="<?php print $base_url ?>" class="second-level-child">`
-                        <span class='menu-icons hidden-desktop'><img class='itg-user-icon-home' src="<?php print $default_image ?>" alt='' /></span>
-<?php print t('Home'); ?>
-                    </a>
-                </li>
-
-                <?php
+              
                 $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
                 // Contion to check fucntion isset.
                 $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
@@ -132,8 +124,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                           'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
                         );
                       }
-
-                      $link_title_for_vertical = $link_text_icon . $menu_link_data['link_title_for_vertical'];
+                     $link_title_for_vertical = $menu_link_data['link_text_icon'] . $menu_link_data['link_title_for_vertical'];
                       ?>
                                       <li <?php echo $style_tag; ?> class="nav-items <?php
                       if (!$data['detect']) {
@@ -158,7 +149,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
             </ul>         
 
 
-
+<?php //die(); ?>
             <div class="menu-login mhide">
 
                 <div class="social-nav mhide">

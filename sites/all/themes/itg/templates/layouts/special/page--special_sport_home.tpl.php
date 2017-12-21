@@ -8,6 +8,7 @@
  */
 global $theme, $user;
 $preview = NULL;
+$tax_name = '';
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
@@ -22,6 +23,11 @@ if ($theme == 'itgadmin' && !isset($preview)) {
 $itg_class = 'itg-admin';
 if ($theme != 'itgadmin') {
   $itg_class = 'itg-front';
+}
+if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2)) && !arg(3)) {
+  $tax_id = arg(2);
+  $tax_name_arr = get_term_name_from_tid($tax_id);
+  $tax_name = strtolower($tax_name_arr->name);
 }
 ?>
 <!--------------------------------Code for Front tpl---------------------------------------->
@@ -251,7 +257,11 @@ if ($theme != 'itgadmin') {
                                           <div class="droppable <?php print $gray_bg_layout; ?>">
                                               <div class="widget-wrapper <?php print $widget_data['itg-block-5']['widget_name'] . $widget_data['itg-block-5']['widget_display_name']; ?>">                      
                                                   <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-5']['block_title'])) { ?>
-                                                    <a href="/photo/sports"><span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span></a>
+                                                    <?php if (isset($tax_name)) : ?>  
+                                                      <a href="/photo/<?php print $tax_name;?>"><span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span></a>
+                                                    <?php else: ?>
+                                                      <span class="widget-title"><?php print $widget_data['itg-block-5']['block_title']; ?></span>
+                                                    <?php endif; ?>
                                                   <?php } ?>
                                                   <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
                                                     <div class="widget-settings">
@@ -406,7 +416,11 @@ if ($theme != 'itgadmin') {
                                         <div class="droppable <?php print $gray_bg_layout; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-11']['widget_name'] . $widget_data['itg-block-11']['widget_display_name']; ?>">
 											<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title'])) { ?>
-                                                <a href="/videos/sports"><span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span></a>
+                                                <?php if (isset($tax_name)) : ?>
+                                                  <a href="/videos/<?php print $tax_name;?>"><span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span></a>
+                                                <?php else: ?>
+                                                  <span class="widget-title"><?php print $widget_data['itg-block-11']['block_title']; ?></span>
+                                                <?php endif; ?>
                                                 <?php } ?>
                                                 <!-- for admin  -->
                                                 <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>

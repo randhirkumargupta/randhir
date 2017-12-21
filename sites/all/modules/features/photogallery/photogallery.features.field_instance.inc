@@ -636,6 +636,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 17,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -676,6 +683,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 68,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -718,6 +732,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 19,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -756,6 +777,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 20,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'file',
@@ -826,6 +854,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 54,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -868,6 +903,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -910,6 +952,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Credit/Source',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 21,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -949,6 +998,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Set As Featured',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 3,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -988,6 +1044,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 66,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1030,6 +1093,19 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'field_collection',
+        'settings' => array(
+          'add' => 'Add',
+          'delete' => 'Delete',
+          'description' => TRUE,
+          'edit' => 'Edit',
+          'view_mode' => 'full',
+        ),
+        'type' => 'field_collection_view',
+        'weight' => 18,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'field_collection',
@@ -1081,6 +1157,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 64,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1123,6 +1206,12 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 49,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1165,6 +1254,12 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 50,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -1206,6 +1301,20 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 63,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -1265,6 +1374,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 67,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1307,6 +1423,15 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Photo By',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 56,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -1352,6 +1477,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Enter see pic link title',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 71,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1395,6 +1527,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'hidden',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 62,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'list',
@@ -1434,6 +1573,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 61,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1476,6 +1622,12 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 52,
+      ),
       'default' => array(
         'label' => 'hidden',
         'settings' => array(),
@@ -1517,6 +1669,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 29,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -1556,6 +1715,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 16,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -1595,6 +1761,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Comment question',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 70,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1638,6 +1811,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 57,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1680,6 +1860,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 69,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1721,6 +1908,16 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (647 x 363)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 4,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -1799,6 +1996,16 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (88 x 66)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 9,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -1876,6 +2083,16 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 35,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -1954,6 +2171,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Facebook narrative',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 34,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -1995,6 +2219,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 46,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'file',
@@ -2066,6 +2297,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Photogallery Tags',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 30,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'taxonomy',
@@ -2111,6 +2349,16 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (483 x 271)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 6,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -2187,6 +2435,16 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (370 x 208)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 7,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -2265,6 +2523,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 51,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2308,6 +2573,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 38,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2351,6 +2623,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 39,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2393,6 +2672,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 40,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2435,6 +2721,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 59,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2476,6 +2769,16 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Image Size (170 x 127)',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 8,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -2554,6 +2857,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Social media',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 33,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -2593,6 +2903,18 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 31,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'number',
@@ -2641,6 +2963,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 32,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2683,6 +3012,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 58,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2725,6 +3061,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Syndication',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 60,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'list',
@@ -2763,6 +3106,20 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 41,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -2822,6 +3179,20 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 43,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -2881,6 +3252,20 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+          'show_remaining_days' => FALSE,
+        ),
+        'type' => 'date_default',
+        'weight' => 42,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'date',
@@ -2941,6 +3326,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => 'Twitter Narrative',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 36,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'text',
@@ -2982,6 +3374,16 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => '',
+          'image_style' => '',
+        ),
+        'type' => 'image',
+        'weight' => 37,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'image',
@@ -3058,6 +3460,13 @@ function photogallery_field_default_field_instances() {
     'deleted' => 0,
     'description' => '',
     'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'module' => 'file',
+        'settings' => array(),
+        'type' => 'file_default',
+        'weight' => 48,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'file',
