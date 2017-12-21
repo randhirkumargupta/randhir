@@ -22,7 +22,7 @@ function itg_common_init() {
     
     $block  = block_load('itg_widget', 'we_may_suggest');
     $renderable_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-    $output = drupal_render($renderable_array);
+    $output = render($renderable_array);
 
      // Print out the content of the proceeding call
      print $output;
