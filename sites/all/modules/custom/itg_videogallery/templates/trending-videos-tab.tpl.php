@@ -2,10 +2,10 @@
   <ul class="trending-videos">
       <?php foreach ($data as $entity) { ?>
         <li class="<?php print $entity['type'] ?> trending-videos-list">
-            <?php if (!empty($entity['uri']) && file_exists($entity['uri'])) { ?>            
+            <?php if (!empty($entity['si_file_uri']) && file_exists($entity['si_file_uri'])) { ?>            
               <a class="pic" href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $entity['nid']); ?>">
-                  <?php $extra_large_image_url = image_style_url("widget_small", $entity['uri']); ?>
-                  <img src="<?php print $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_large_image_alt'] ?>" title="<?php echo $entity['field_story_extra_large_image_title'] ?>" />
+                  <?php $extra_large_image_url = image_style_url("widget_small", $entity['si_file_uri']); ?>
+                  <img src="<?php print $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_small_image_alt'] ?>" title="<?php echo $entity['field_story_small_image_title'] ?>" />
               </a>
               <?php
             }
