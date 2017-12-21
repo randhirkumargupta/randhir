@@ -472,6 +472,12 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
     }
   }
 
+  if (!empty($icon_object->uri)) {
+    $img_path_new = file_create_url($icon_object->uri);
+    $link_text_icon = "<span class='menu-icons hidden-desktop'><img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . $img_path_new . "' alt='".$link_title_for_vertical."' /></span>";
+  }
+   
+        
   $sponsored_class = ($menu_data['db_data']['extra'] == 'Yes') ? "sponsored-active" : "";
   // if tid is not 0 then its internal url
   if (($tid && $url_type == 'internal')) {
@@ -518,6 +524,8 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $menu_link_data_array['link_title_for_vertical'] = $link_title_for_vertical;
   $menu_link_data_array['url_type'] = "url-type-" . $url_type;
   $menu_link_data_array['display_icon'] = $display_icon_attribute;
+  $menu_link_data_array['link_text_icon'] = $link_text_icon;
+  $menu_link_data_array['icon_object_uri'] = $icon_object->uri;
   return $menu_link_data_array;
 }
 
