@@ -135,7 +135,10 @@ $argum = base64_encode(arg(1));
             </ul>
         </div>
         <div class="photo-by-slider">
-            <?php foreach ($rows as $index => $row): ?>
+            <?php foreach ($rows as $index => $row): ?>              
+              <?php if(!empty($row['field_credit'])) : ?>
+                <p class="photo-by"><?php print t('PHOTO:'); ?> <?php print $row['field_credit']; ?></p>
+              <?php endif; ?>
               <?php if (!empty($row['field_photo_byline'])) { ?>
                 <p class="photo-by"><?php print t('PHOTO:'); ?> <?php print $row['field_photo_byline']; ?></p>
                 <?php
