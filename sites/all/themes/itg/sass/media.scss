@@ -4595,7 +4595,8 @@
         color: #666;
         font-size: 14px;
         font-weight: 300;
-        height: 35px;
+        height: 42px;
+        line-height: 42px;
     }
     #block-itg-layout-manager-header-block .navigation .container {
         padding: 0px;
@@ -4617,14 +4618,15 @@
         display: inline-block
     }
     #block-itg-layout-manager-header-block .navigation .second-level-menu.menu li .menu-icons {
-        width: 21px;
-        height: 18px;
+        width:48px;
+        height:32px;
         margin: 0px 10px 0px 0px;
         position: relative;
-        top: 9px;
+        top: 5px;
+        text-align:center;
     }
     #block-itg-layout-manager-header-block .navigation .second-level-menu.menu li .menu-icons img {
-        width: 100%
+        width: auto;
     }
     #block-itg-layout-manager-header-block .navigation .menu li.search-icon-parent-mobile a {
         float: left;

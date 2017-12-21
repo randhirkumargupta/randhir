@@ -87,10 +87,7 @@ global $base_url;
         print __html_output_with_tags($row['field_story_kicker_text']);
       } ?></p>
       <?php
-      elseif ($row['type'] == 'photogallery'): ?>
-        <p><?php if(!empty($row['field_gallery_kicer'])) {
-          print __html_output_with_tags($row['field_gallery_kicer']); }?></p>
-      <?php elseif ($row['type'] == 'photogallery'): ?>
+      elseif ($row['type'] == 'photogallery'): ?> 
         <p><?php print __html_output_with_tags($row['field_story_expert_description']); ?></p>
       <?php endif; ?>
       <?php

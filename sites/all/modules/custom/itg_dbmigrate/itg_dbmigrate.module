@@ -83,6 +83,27 @@ function itg_flag_insert_like_dislike($nid, $like, $dis_like) {
   
 }
 
+
+/**
+ * insert value of flag count in db update script.
+ * @param int $nid
+ * @param string $type
+ * @param string $val
+ */
+function itg_flag_insert_like_dislike_update($nid, $like, $dis_like) {
+  $active = db_update('itg_custom_flag_count')
+          ->fields(array(
+              'like_count' => $like,
+              'dislike_count' => $dis_like,
+              'created' => date('Y-m-d G:i:s'),
+          ))
+          ->condition('nid', $nid, '=')
+          ->execute();
+  
+}
+
+
+
 /**
  * Implements function for mosimage replace
  * @param string $body_string
@@ -188,6 +209,33 @@ function itg_db_migrate_bylines($byline_nid, $story_nid){
   $query->condition('type', 'reporter', '=');
   $query->condition('nid', $byline_nid, '=');
   $result = $query->execute()->fetchAll();
+  db_insert('itg_multi_byline_info')
+          ->fields(array(
+            'byline_id' => $byline_nid,
+            'uniqueid' => 'migrated-'.$story_nid,
+            'created' => REQUEST_TIME,
+            'nid' => $story_nid,
+           'publish_status' => $result[0]->status,
+          ))
+          ->execute();
+}
+
+
+/**
+ * Implement function for migrate bylines
+ */
+function itg_db_migrate_bylines_update($byline_nid, $story_nid){
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'status'));
+  $query->condition('type', 'reporter', '=');
+  $query->condition('nid', $byline_nid, '=');
+  $result = $query->execute()->fetchAll();
+  
+  $num_deleted = db_delete('itg_multi_byline_info')
+  ->condition('nid', $story_nid)
+  ->condition('byline_id', $byline_nid)
+  ->execute();
+  
   db_insert('itg_multi_byline_info')
           ->fields(array(
             'byline_id' => $byline_nid,
@@ -330,5 +378,17 @@ function __insert_orignal_image($uri, $fid) {
     'fid' => $fid,
     'orignal_fid' => $fid,
     'url' => $file_url
+  ))->execute();
+}
+
+/**
+ * Insert updated date in database
+ */
+function __insert_modified_date_flag_table($type, $time_stamp, $nid) {
+    watchdog('success_update_table', '<pre>'.print_r('rea').'<pre>');
+    db_insert('itg_node_update_updation')->fields(array(
+    'type' => $type,
+    'timestamp' => $time_stamp,
+    'nid' => $nid,    
   ))->execute();
 }
