@@ -1023,9 +1023,18 @@ class ItgStoryListMigration extends XMLMigration {
       field_attach_update('node', $node);
     }
     //code for like and dislike
-    if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+    /*if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
       itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+    }*/
+    
+     if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+        if((int) $row->xml->video_update == 1){
+            itg_flag_insert_like_dislike_update($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);  
+        }else{
+            itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+        }
     }
+    
     $fid = '';
     $caption_text = '';
     
@@ -1044,7 +1053,11 @@ class ItgStoryListMigration extends XMLMigration {
 
         $source_bid = get_itg_destination_id('migrate_map_itgbyline', $final_byline);
         if (!empty($source_bid)) {
-          $value = itg_db_migrate_bylines($source_bid, $node->nid);
+          if((int) $row->xml->video_update == 1){
+             $value = itg_db_migrate_bylines_update($source_bid, $node->nid);
+          }else{
+            $value = itg_db_migrate_bylines($source_bid, $node->nid);
+          }
         }
       }
     }
@@ -1074,6 +1087,11 @@ class ItgStoryListMigration extends XMLMigration {
           'gallery_position' => 'story',
           'gallery_id' => $gall_id,
         ))->execute();
+    
+    if((int) $row->xml->video_update == 1) {
+        $time_stamp = (string) $row->xml->modifieddate;
+        __insert_modified_date_flag_table('story', $time_stamp, $node->nid);
+    }
   }
   
     public function read_folder_xml_story() {
