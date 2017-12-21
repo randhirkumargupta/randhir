@@ -20,16 +20,13 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
 function itg_common_init() {
   if ($arg[1] == 'shravan') {
     
-    /*$block  = block_load('itg_widget', 'we_may_suggest');
+    $block  = block_load('itg_widget', 'top_stories_ordering');
     $renderable_array = _block_get_renderable_array(_block_render_blocks(array($block)));
     $output = render($renderable_array);
 
      // Print out the content of the proceeding call
-     print $output;*/
-     $block = block_load('itg_event_backend', 'post_event_block');
-        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-        $output = render($render_array);
-        print $output;
+     print $output;
+    
      exit;
   }
   global $user, $base_url, $theme;
