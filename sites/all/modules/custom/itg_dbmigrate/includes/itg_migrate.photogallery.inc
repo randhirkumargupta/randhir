@@ -615,9 +615,18 @@ class ItgPhotogalleryMigration extends XMLMigration {
     ordering_set_of_content($node, (string) $row->xml->ordering);
     //}
     //code for like and dislike
-    if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+   /* if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
       itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+    }*/
+    
+     if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+        if((int) $row->xml->video_update == 1){
+            itg_flag_insert_like_dislike_update($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);  
+        }else{
+            itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+        }
     }
+    
     // Related content save in db
    /* if (isset($row->xml->relatedcontents->relatedcontent) && !empty($row->xml->relatedcontents->relatedcontent)) {
       //$arr = array();
@@ -780,6 +789,12 @@ class ItgPhotogalleryMigration extends XMLMigration {
       }
       field_attach_update('node', $node);
     }
+    
+    if((int) $row->xml->video_update == 1) {
+        $time_stamp = (string) $row->xml->modified;
+        __insert_modified_date_flag_table('story', $time_stamp, $node->nid);
+    }
+    
   }
   
   public function read_folder_xml_photo() {

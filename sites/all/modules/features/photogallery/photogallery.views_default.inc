@@ -4885,6 +4885,14 @@ echo $total_items = $view->query->pager->get_total_items();
     'image_style' => 'image88x66scale',
     'image_link' => '',
   );
+  /* Field: Field collection item: Credit/Source */
+  $handler->display->display_options['fields']['field_credit']['id'] = 'field_credit';
+  $handler->display->display_options['fields']['field_credit']['table'] = 'field_data_field_credit';
+  $handler->display->display_options['fields']['field_credit']['field'] = 'field_credit';
+  $handler->display->display_options['fields']['field_credit']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['field_credit']['label'] = '';
+  $handler->display->display_options['fields']['field_credit']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_credit']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['filter_groups']['groups'] = array(

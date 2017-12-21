@@ -658,6 +658,7 @@ class ItgVideogalleryMigration extends XMLMigration {
             $chk_variable = (string) $bitrate;
 
             if (!empty($chk_variable)) {
+                if((int) $row->xml->video_update != 1){
               db_insert('itg_video_transcoding')
                   ->fields(array(
                     'nid' => $node->nid,
@@ -676,6 +677,7 @@ class ItgVideogalleryMigration extends XMLMigration {
                     'video_url' => ($video_url ? $video_url : NULL),
                   ))
                   ->execute();
+                }
             }
           }
         }
@@ -685,10 +687,18 @@ class ItgVideogalleryMigration extends XMLMigration {
 
     //code for like and dislike
     if (isset($row->xml->like_dislike->like) || isset($row->xml->like_dislike->dislike)) {
+        if((int) $row->xml->video_update == 1){
+         itg_flag_insert_like_dislike_update($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);  
+        }else{
       itg_flag_insert_like_dislike($node->nid, $row->xml->like_dislike->like, $row->xml->like_dislike->dislike);
+        }
     }
 
-
+    if((int) $row->xml->video_update == 1) {
+        $time_stamp = (string) $row->xml->modifieddate;
+        __insert_modified_date_flag_table('story', $time_stamp, $node->nid);
+    }
+    
     //code for order set
     //if (isset($row->xml->ordering)) {
     ordering_set_of_content($node, (string) $row->xml->ordering);
