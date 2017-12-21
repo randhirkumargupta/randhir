@@ -440,7 +440,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
       $icon_object = file_load((int) $icon_fid);
       // Set icon for internal menu used for vertical menu.
       if (!empty($amp)) {
-        $link_text = $vertical_menu_icon = "<img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='amp-image' />"; 
+        $link_text = $vertical_menu_icon = "<img width='152' height='85' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='amp-image' />"; 
       } else {
         //$img_path = image_style_url('menu_manager_icons' , $icon_object->uri);
         $link_text = $vertical_menu_icon =   "<img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='".$link_title_for_vertical."' />";
@@ -465,8 +465,8 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
         $link_text = $vertical_menu_icon = "<img width='152'  height= '85' src='" . file_create_url($sponser_logo_uri) . "' alt='amp-image' />"; 
         $image_class = "has-image";
       } else {
-        $img_path = image_style_url('menu_manager_icons' , $sponser_logo_uri);
-        $link_text = $vertical_menu_icon =   "<img width='152' height='85' title='" . $sponser_logo_title . "'  src='" . $img_path . "' alt='".$sponser_logo_alt."' />";
+        //$img_path = image_style_url('menu_manager_icons' , $sponser_logo_uri);
+        $link_text = $vertical_menu_icon =   "<img width='48' height='32' title='" . file_create_url($sponser_logo_uri) . "'  src='" . $img_path . "' alt='".$sponser_logo_alt."' />";
         $image_class = "has-image";
       }
     }
