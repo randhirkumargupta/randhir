@@ -17,12 +17,14 @@ function itg_breaking_news_menu() {
     'page callback' => 'cricket_live_blog_content_callback',
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'include/itg_breaking_news.inc',
   );
   $items['cricket_live_blog_content_db/%/%'] = array(
     'page callback' => 'get_commentary_data_db_callback',
     'page arguments' => array(1, 2),
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
+    'file' => 'include/itg_breaking_news.inc',
   );
   $items['breakingnews'] = array(
     'title' => 'Breaking News',
@@ -500,21 +502,6 @@ function redirect_breakingnews_to_latest_node() {
 }
 
 /**
- * Function for ajax request callback
- */
-function cricket_live_blog_content_callback() {
-  $match_id = $_POST['match_id'];
-  if (isset($match_id)) {
-    $html = get_cricket_live_blog_data($match_id);
-    print json_encode(array('status' => 'success', 'data' => $html));
-  }
-  else {
-    print json_encode(array('status' => 'error'));
-  }
-  drupal_exit();
-}
-
-/**
  * function for show Cricket data from json.
  * @param string $match_id
  * @param int $start
@@ -555,23 +542,6 @@ function get_cricket_live_blog_data($match_id, $limit = NULL) {
       return theme('cricket_live_blog_commentary', array('data' => $commentary));
     }
   }
-}
-
-/**
- * Menu callback for load commentary from db
- * @param int $nid
- * @param int $page
- * 
- */
-function get_commentary_data_db_callback($nid, $page = 0) {
-  $data = get_commentary_data_db($nid, $page);
-  if ($data) {
-    print json_encode(array('status' => 'success', 'data' => $data));
-  }
-  else {
-    print json_encode(array('status' => 'error'));
-  }
-  drupal_exit();
 }
 
 /**
