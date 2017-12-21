@@ -470,10 +470,10 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
         $image_class = "has-image";
       }
     }
-  }
+  } 
 
-  if (!empty($icon_object->uri)) {
-    $img_path_new = file_create_url($icon_object->uri);
+  if (!empty($sponser_logo_uri)) {
+    $img_path_new = file_create_url($sponser_logo_uri);
     $link_text_icon = "<span class='menu-icons hidden-desktop'><img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . $img_path_new . "' alt='".$link_title_for_vertical."' /></span>";
   }
    
