@@ -12,11 +12,12 @@
     <div id="Element" class="itg-form-section-wrapper">
       <h2 class="story-title active"><?php print t('Gallery Basic details'); ?></h2>
       <div class="itg-form-section">
+		  <?php //print_r($form);die; ?>
         <?php print drupal_render($form['title']); ?>
         <?php print drupal_render($form['field_photo_see_pic_link']); ?>
         <?php print drupal_render($form['field_story_category']); ?>
         <?php print drupal_render($form['field_primary_cat_data']); ?>
-        <?php print drupal_render($form['field_gallery_kicer']); ?>
+        <?php print drupal_render($form['field_story_expert_description']); ?>
         <?php print drupal_render($form['field_story_itg_tags']); ?>        
       </div>
     </div>
