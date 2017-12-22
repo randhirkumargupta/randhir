@@ -252,6 +252,8 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
+            $n_widget = array();
+            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -463,6 +465,8 @@ function homePageJsonPackagelist_lifestyle() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
+            $n_widget = array();
+            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -671,6 +675,8 @@ function homePageJsonPackagelist_world() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
+            $n_widget = array();
+            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -823,6 +829,8 @@ function homePageJsonTopstories() {
             $data_newslist[$home_list_count]['n_polls'] = $n_polls;
             $data_newslist[$home_list_count]['n_rating'] = $n_rating;
             $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
+            $n_widget = array();
+            $data_newslist[$home_list_count]['n_widget'] = $n_widget;
             $home_list_count++;
         }
     }
@@ -1030,6 +1038,8 @@ function homePageJsonNewslist_india() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
+            $n_widget = array();
+            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -1241,6 +1251,8 @@ function homePageJsonNewslist_world() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
+            $n_widget = array();
+            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -1301,6 +1313,8 @@ function homePageJsonMagazine() {
     $data_newslist[0]['n_polls'] = $n_polls;
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
+    $n_widget = array();
+    $data_newslist[0]['n_widget'] = $n_widget;
 
     $data_magazine['news'] = (array) $data_newslist;
 
@@ -1605,6 +1619,8 @@ function homePageJsonPoll() {
     $data_newslist[0]['n_polls'] = $n_polls['data'];
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
+    $n_widget = array();
+    $data_newslist[0]['n_widget'] = $n_widget;
 
     $data_magazine['news'] = (array) $data_newslist;
     //$data_magazine = (array) $data_magazine;
@@ -1812,6 +1828,8 @@ function homePageJsonNewslist_lifestyle() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
+            $n_widget = array();
+            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
