@@ -2,7 +2,7 @@
 global $base_url;
 // configuration for sharing
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . '/funalytics';
-$short_url = shorten_url($row->url, 'goo.gl');
+$short_url = $row->url; //shorten_url($row->url, 'goo.gl');
 ?>
 <span class="close-popup"><i class="fa fa-times" aria-hidden="true"></i></span>
         <div class="funalytics-slider-wrapper">

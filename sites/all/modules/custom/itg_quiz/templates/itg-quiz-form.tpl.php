@@ -23,7 +23,7 @@ else {
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $node->title);
 $fb_share_title= 'Quiz: '.htmlentities($search_title, ENT_QUOTES);    
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link;
 $share_desc = '';
 $src = '';
 $comment_value = variable_get('COMMENT_CONFIG');

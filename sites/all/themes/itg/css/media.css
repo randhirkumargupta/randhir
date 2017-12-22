@@ -3923,6 +3923,9 @@
     width: 55px;
     position: absolute;
     top: 15px; } }
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  #block-itg-layout-manager-header-block .navigation {
+    display: block !important; } }
 /* css end add by arun */
 
 /*# sourceMappingURL=media.css.map */

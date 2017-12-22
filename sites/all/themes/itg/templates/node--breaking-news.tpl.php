@@ -8,7 +8,7 @@
  */
 global $base_url;
 $share_page_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$short_url = shorten_url($share_page_link, 'goo.gl');
+$short_url = $share_page_link; //shorten_url($share_page_link, 'goo.gl');
 $share_desc = '';
 $share_image = '';
 $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];

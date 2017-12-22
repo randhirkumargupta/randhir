@@ -659,7 +659,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
       $alias = 'node/' . $node->nid;
     }
     // Get short url
-    $short_url = shorten_url($base_url . '/' . $alias, 'goo.gl');
+    $short_url = $base_url . '/' . $alias; //shorten_url($base_url . '/' . $alias, 'goo.gl');
 
     switch ($type) {
       case 'videos':
@@ -975,7 +975,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
       $alias = 'node/' . $node->nid;
     }
     // Get short url
-    $short_url = shorten_url($base_url . '/' . $alias, 'goo.gl');
+    $short_url = $base_url . '/' . $alias;
     $media_files = [$path];
     // will hold the uploaded IDs
     $media_ids = [];
@@ -1078,7 +1078,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
     }
 
     // Get short url
-    $short_url = shorten_url($base_url . '/' . $alias, 'goo.gl');
+    $short_url = $base_url . '/' . $alias;
     $fp = fopen($path, 'r');
 
     // INIT the upload

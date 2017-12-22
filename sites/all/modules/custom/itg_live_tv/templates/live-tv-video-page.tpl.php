@@ -6,7 +6,7 @@
  */
 $share_title = 'India Today Live TV';
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link; //shorten_url($actual_link, 'goo.gl');
 $useragent = $_SERVER['HTTP_USER_AGENT'];
 if (function_exists('mobile_user_agent_switch')) {
   $flag = mobile_user_agent_switch();

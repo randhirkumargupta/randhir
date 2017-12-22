@@ -9,7 +9,7 @@
 global $base_url;
 $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] .'/amp'. $_SERVER['REQUEST_URI'];
 $amp_link = str_replace('?amp', '', $actual_link);
-$short_url = shorten_url($amp_link, 'goo.gl');
+$short_url = $amp_link; //shorten_url($amp_link, 'goo.gl');
 $share_desc = '';
 $share_image = '';
 $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
