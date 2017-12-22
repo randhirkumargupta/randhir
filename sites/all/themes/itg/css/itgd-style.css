@@ -539,6 +539,7 @@ ul.pron-cons-img li img {
 .story-right .description p:first-child:first-letter {
     font-size: 46px;
     font-weight: bold;
+    padding-right:5px;
 }
 .droppable.hide-widget{
 	display:none;
