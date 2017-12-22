@@ -2742,7 +2742,7 @@ function get_rhs_block_display_condtion($delta = '') {
     $top_takes_display_nodes = variable_get('top_takes_block_condition');
     $top_takes_node_array = explode(",", $top_takes_display_nodes);
     $story_category = (!empty($page_argument[0]->field_story_category['und'])) ? $page_argument[0]->field_story_category['und'] : "";
-    $story_primary_category = (!empty($page_argument[0]->field_primary_category['und'])) ? $page_argument[0]->field_primary_category['und'] : "";
+   
     if (!empty($story_category)) {
         foreach ($story_category as $category) {
             $ipl_category[] = $category['tid'];
