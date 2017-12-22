@@ -19,7 +19,7 @@ foreach($rows as $id => $row):
     }
     $fb_share_image = '';
     $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    $short_url = shorten_url($actual_link, 'goo.gl');
+    $short_url = $actual_link;
     $factoidsSocialShare_title = preg_replace("/'/", "\\'", $row['title']);
     $fb_share_title = htmlentities($factoidsSocialShare_title, ENT_QUOTES);
     preg_match('/(src=["\'](.*?)["\'])/', $row['field_poll_banner'], $match);  //find src="X" or src='X'

@@ -91,7 +91,7 @@ if (!empty($data['node_data'])) :
                   $bigstory_fb_share = itg_common_only_text_string($share_title);
                 }
                 $actual_link = $base_url . '/' . drupal_get_path_alias("node/{$data['node_data']->nid}");
-                $short_url = shorten_url($actual_link, 'goo.gl');
+                $short_url = $actual_link;
                 $pipelinetext = "";
                 $pipelineclass = "";
                 if (!empty($data['node_data']->type) && $data['node_data']->type == 'story') {

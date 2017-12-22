@@ -27,7 +27,7 @@
 <?php global $base_url; ?>
 <?php
   $actual_link = $base_url . '/node/' . $row->nid;
-  $short_url = shorten_url($actual_link, 'goo.gl');
+  $short_url = $actual_link;
   $fb_title = itg_common_only_text_string($row->field_field_breaking_tile[0]['rendered']['#markup']);  
   $image = '';
   $share_desc = '';

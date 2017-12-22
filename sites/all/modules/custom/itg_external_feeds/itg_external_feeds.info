@@ -1,0 +1,9 @@
+name = ITG External feeds
+description = "ITG Custom module to show AajTak & BusinessToday feeds on home Page."
+core = 7.x
+package = ITG
+
+
+
+
+

@@ -3,7 +3,7 @@ global $user, $base_url;
 $node = $data['node'];
 $nid = $node->nid;   
 $actual_link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link;
 $fb_title = addslashes($node->title);
 $share_desc = '';
 $image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);

@@ -518,7 +518,7 @@ ul.pron-cons-img {
     list-style: none!important
 }
 ul.pron-cons-img li img {
-    margin-top: -10px!important
+    margin-top: -37px!important
 }
 .story-section .story-right .stryimg img {
     width: 100%
@@ -539,4 +539,11 @@ ul.pron-cons-img li img {
 .story-right .description p:first-child:first-letter {
     font-size: 46px;
     font-weight: bold;
+    padding-right:5px;
+}
+.droppable.hide-widget{
+	display:none;
+}
+.sport-home-layout-page .tech-block_8 .osscar-video ul .dont-miss-listing{
+    padding: 0 10px 25px 10px;
 }
