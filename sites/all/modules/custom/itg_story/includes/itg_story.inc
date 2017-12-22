@@ -493,3 +493,21 @@ function itg_story_mega_review_node_embed($node) {
   $output .= '</article>';
   print $output;
 }
+
+/**
+ * Menu callback function for embeding tech gallery.
+ * @param int $jsp_gallid
+ * @return string
+ */
+function itg_story_technology_embedgalery($jsp_gallid) {
+  $return = '';
+  if (!empty($jsp_gallid) && is_numeric($jsp_gallid)) {
+    $dest_nid = get_itg_destination_id('migrate_map_itgphotogallery', $jsp_gallid);
+    if (!empty($dest_nid) && is_numeric($dest_nid)) {
+      $gall_images = itg_commom_get_gallery_image_array_by_gid($dest_nid);
+      $tech_gallery_alias = drupal_get_path_alias('node/' . $dest_nid);
+      $return = itg_story_photogallery_plugin_data($gall_images, $tech_gallery_alias);
+    }
+  }
+  return $return;
+}
