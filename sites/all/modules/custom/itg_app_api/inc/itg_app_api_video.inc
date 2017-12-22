@@ -1094,6 +1094,8 @@ function topstoriesList($source) {
         $data_newslist[$home_list_count]['n_polls'] = $n_polls;
         $data_newslist[$home_list_count]['n_rating'] = $n_rating;
         $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
+        $n_widget = array();
+        $data_newslist[$home_list_count]['n_widget'] = $n_widget;
         $home_list_count++;
 //}
     }
