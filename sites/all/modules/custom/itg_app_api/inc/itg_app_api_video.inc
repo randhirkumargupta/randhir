@@ -1230,27 +1230,27 @@ function dailyCapsuleApi(){
  */
 function news_dailyCapsule(){
     $breaking_news = array();
-    $news_list = array();
-    
+    $news_list = array();    
     $breaking_news['title'] = "Breaking News";
-    $breaking_news['icon_url'] = "http image url";
-    
+    $breaking_news['icon_url'] = "http image url";    
     $new_data = topstoriesList("daily_capsule");
     $loopc = 0;
-    foreach ($new_data as $value) {
-        p($value);
-        $news_list[$loopc]['n_id'] = "1069033";
-        $news_list[$loopc]['n_title'] = "Filmmaker and actor Neeraj Vora dies at the age of 54";
-        $news_list[$loopc]['n_type'] = "story";
-        $news_list[$loopc]['updated_datetime'] = "2017-12-14 10:52:50"; 
+    foreach ($new_data as $value) {        
+        $n_id = $value['nid'];
+        $n_title = $value['title'];
+        $n_type = $value['type'];
+        $updated_datetime = $value['created'];  
+        $changed_datetime = date("Y-m-d H:i:s", $updated_datetime);        
+        $news_list[$loopc]['n_id'] = "$n_id";
+        $news_list[$loopc]['n_title'] = "$n_title";
+        $news_list[$loopc]['n_type'] = "$n_type";
+        $news_list[$loopc]['updated_datetime'] = "$changed_datetime"; 
         if($loopc == 4){
             break;
         }
         $loopc++;
-    }
-       
+    }      
     
-    $breaking_news['news'] = $news_list;
-    
+    $breaking_news['news'] = $news_list;    
     return $breaking_news;
 }
