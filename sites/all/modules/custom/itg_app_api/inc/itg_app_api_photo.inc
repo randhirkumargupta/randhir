@@ -76,8 +76,7 @@ function generatePhotoCategoryList($tid, $pageno) {
     $order_by = 'ASC';
     $type = "photogallery";
     $photo_list_array = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
 
 // code vid=14  start
@@ -139,8 +138,8 @@ function generatePhotoCategoryList($tid, $pageno) {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1=date('Y-m-d', strtotime("-180 days"));
-        $d2=date(strtotime($d1));
+        $d1 = date('Y-m-d', strtotime("-180 days"));
+        $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         //change in query
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
@@ -464,7 +463,7 @@ function generatePhotoStoryDetailList($nid) {
             $photo_story_img = completeFilePath($photo_story_img_fid);
             $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
             $caption = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
-            $byline = $entity_obj[$val['value']]->field_credit['und'][0]['value']; 
+            $byline = $entity_obj[$val['value']]->field_credit['und'][0]['value'];
             //$byline = getImgByline($photo_story_img_fid);
             $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
             $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
