@@ -1109,3 +1109,130 @@ function topstoriesList($source) {
     }
     return $data_topstories;
 }
+
+/* Change request v1 */
+/**
+ * function for  dailyCapsuleApi
+ * @return array
+ */
+
+function dailyCapsuleApi(){
+    //p($_SERVER);
+    $data = array();
+    $order = array();
+    $newswrap = array();
+    $score_card = array();
+    $big_strory = array();
+    $top_strory = array();    
+    $breaking_news = array();
+    
+    $breaking_news = news_dailyCapsule();
+    
+    $data['status_code'] = "1";
+    $data['custom_message'] = "";
+    
+    $order[0]['order_id'] = "1";
+    $order[0]['type'] = "newswrap";
+    $order[0]['name'] = "newswrap";
+    $order[0]['is_enabled'] = "1";    
+    $order[1]['order_id'] = "2";
+    $order[1]['type'] = "breaking";
+    $order[1]['name'] = "breaking";
+    $order[1]['is_enabled'] = "1";    
+    $order[2]['order_id'] = "3";
+    $order[2]['type'] = "web_view";
+    $order[2]['name'] = "score_card";
+    $order[2]['is_enabled'] = "1";    
+    $order[3]['order_id'] = "4";
+    $order[3]['type'] = "big_strory";
+    $order[3]['name'] = "big_strory";
+    $order[3]['is_enabled'] = "1";    
+    $order[4]['order_id'] = "5";
+    $order[4]['type'] = "top_strory";
+    $order[4]['name'] = "top_strory";
+    $order[4]['is_enabled'] = "1";
+    $data['data']['order'] = $order;
+    
+    $newswrap['title'] = "Newswrap";
+    $newswrap['icon_url'] = "http image url";
+    $newswrap['tag_title'] = "newsrap";
+    $newswrap['api'] = "https://feeds.intoday.in/rss-feeds/ver1.0/appboy/cb430068/indiatoday/notification/it_notification.json";
+    $data['data']['newswrap'] = $newswrap;
+    
+    $data['data']['breaking'] = $breaking_news;
+    
+    $score_card['title'] = "Scorecard";
+    $score_card['icon_url'] = "http image url";
+    $score_card['score_card_link'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v3.html";
+    $data['data']['score_card'] = $score_card;
+    /* get big story data*/
+    $big_story_block_data = array();
+    $widget_name = "big_story_format_widget";
+    if (!empty($widget_name)) {
+      $query = db_select('itg_widget_order', 'iwo')->fields('iwo', array('nid', 'extra'))->orderBy('iwo.weight', 'ASC')->condition('widget', $widget_name);
+      $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+      foreach ($result as $big_story_data) {
+        if ($big_story_data['extra'] == 'big_story_live_tv_active' && $big_story_data['nid'] == 0) {
+          $big_story_block_data[] = array("is_live_tv" => TRUE);
+        }
+        elseif ($big_story_data['nid']) {
+          $big_story_block_data[] = array("node_load_data" => node_load($big_story_data['nid']));
+        }
+      }
+    }
+    // varibale for feed tag
+    $title = $big_story_block_data[1]['node_load_data']->title;
+    $type = $big_story_block_data[1]['node_load_data']->type;
+    $nid = $big_story_block_data[1]['node_load_data']->nid;
+    $created = $big_story_block_data[1]['node_load_data']->created;
+    $file_small_img_url = completeFilePath($big_story_block_data[1]['node_load_data']->field_story_small_image['und'][0]['fid']);
+    $file_medium_img_url = completeFilePath($big_story_block_data[1]['node_load_data']->field_story_medium_image['und'][0]['fid']);
+
+    $related = relatedContentNodeType($big_story_block_data[1]['node_load_data']->field_common_related_content['und'][0]['value'], $type);
+
+    $create_date = date("F d, Y", $created);
+    $create_datetime = date(DATE_ATOM, $created);
+    $big_strory['title'] = "Big Strory";
+    $big_strory['icon_url'] = "http image url";
+    $big_strory['story_id'] = "$nid";
+    $big_strory['story_image'] = "$file_medium_img_url";
+    $big_strory['story_title'] = "$title";
+    $big_strory['story_short_desc'] = "Neeraj Vora, who was in coma for a year, died on Thursday morning.";
+    $big_strory['updated_datetime'] = "2017-12-14 10:52:50";
+    $data['data']['big_strory'] = $big_strory;
+    
+    $top_strory['title'] = "Top Strories";
+    $top_strory['icon_url'] = "http image url";
+    $top_strory['category_id'] = "0";
+    $top_strory['type'] = "topstories";
+    $top_strory['display_count'] = "5";
+    $data['data']['top_strory'] = $top_strory;
+    
+    
+    return $data;
+    
+}
+/**
+ * function for news in dailyCapsule
+ * @return array
+ */
+function news_dailyCapsule(){
+    $breaking_news = array();
+    $news_list = array();
+    
+    $breaking_news['title'] = "Breaking News";
+    $breaking_news['icon_url'] = "http image url";
+    
+    $news_list[0]['n_id'] = "1069033";
+    $news_list[0]['n_title'] = "Filmmaker and actor Neeraj Vora dies at the age of 54";
+    $news_list[0]['n_type'] = "story";
+    $news_list[0]['updated_datetime'] = "2017-12-14 10:52:50";    
+    $news_list[1]['n_id'] = "1069032";
+    $news_list[1]['n_title'] = "5 reasons why it is crucial for Rahul Gandhi to win Gujarat election 2017";
+    $news_list[1]['n_type'] = "story";
+    $news_list[1]['updated_datetime'] = "2017-12-14 10:35:22";
+    $breaking_news['news'] = $news_list;
+    
+    return $breaking_news;
+}

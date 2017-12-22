@@ -2446,6 +2446,34 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
+        /* Change request v1 */
+        // topstories custom resource declaration.....
+        'daily_capsule' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves daily_capsule schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_daily_capsule',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -6177,3 +6205,34 @@ function itg_rapid_api_topstories($token) {
     $jsondata = json_decode($jsondata, true);
     return $jsondata;
 }
+/* Change request v1 */
+/**
+ * Call back function for daily_capsule API 
+ * @pram $_GET
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_daily_capsule($token) {
+    //valid id
+    $id = $_GET['id'];
+    $suffix = $id;
+    if (!is_numeric($id)) {
+        $id = 0;
+    }
+
+    $redis_key = "itg_rapid_api_daily_capsule";
+    $result_get = getRedis($redis_key);
+
+    if ($result_get['key_value11'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = dailyCapsuleApi();
+        $jsondata = json_encode($jsondata);
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
+    $jsondata = json_decode($jsondata, true);
+    return $jsondata;
+}
+
+
