@@ -540,3 +540,6 @@ ul.pron-cons-img li img {
     font-size: 46px;
     font-weight: bold;
 }
+.droppable.hide-widget{
+display:none;
+}
