@@ -99,7 +99,7 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
             }
             $actual_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . '/amp' . $_SERVER['REQUEST_URI'];
             $amp_link = str_replace('?amp', '', $actual_link);
-            $short_url = shorten_url($amp_link, 'goo.gl');
+            $short_url = $amp_link; //shorten_url($amp_link, 'goo.gl');
             $fb_url = 'https://www.facebook.com/sharer/sharer.php?u=' . $amp_link . '&title=' . $share_title . '&picture=' . $share_image;
             $twitter_url = 'https://twitter.com/intent/tweet?text=' . urlencode($share_title) . '&url=' . $short_url . '&via=IndiaToday';
             $google_url = 'https://plus.google.com/share?url=' . urlencode($amp_link);

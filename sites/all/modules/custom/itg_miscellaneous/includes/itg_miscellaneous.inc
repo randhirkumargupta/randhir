@@ -247,5 +247,46 @@ function itg_change_text_field_max_length($field_name, $new_length) {
 }
 
 function itg_sso_nid_callback() {
-db_query("ALTER TABLE  `itg_global_loyality_point` CHANGE  `nid`  `nid` VARCHAR( 255 ) NOT NULL DEFAULT  '0'");
+  insert_helper_table_data();
+//db_query("ALTER TABLE  `itg_global_loyality_point` CHANGE  `nid`  `nid` VARCHAR( 255 ) NOT NULL DEFAULT  '0'");
+}
+
+
+
+
+function insert_helper_table_data_new() {
+
+  $result = db_select('itg_widget_helper', 'n')->fields('n', array('nid', 'tid'))->range(1,50000)->execute()->fetchAll();
+  if (!empty($result)) {
+    foreach ($result as $key => $res) {
+      
+      $node = node_load($res->nid , null , TRUE);
+      
+      $node_data = serialize($node);
+      
+      //update table
+      
+      $inserted_data = db_update('itg_widget_helper')->fields(array(
+            'node_data' => $node_data))->condition('tid', $res->tid, '=')
+          ->execute();
+      
+      //insert data for update
+       db_insert('test_helper_update')
+              ->fields(array(
+                'tid',
+                'nid',                
+                )
+              )
+              ->values(
+                array(
+                  'tid' => $res->tid,
+                  'nid' => $res->nid,
+                )
+              )->execute();
+       
+      print $res->tid.',';
+    }
+  }
+  
+  
 }

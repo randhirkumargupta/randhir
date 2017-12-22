@@ -24,7 +24,7 @@
 <?php
 if (isset($row->field_field_story_template_factoids) && !empty($row->field_field_story_template_factoids)) {
   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-  $short_url = shorten_url($actual_link, 'goo.gl');
+  $short_url = $actual_link;
   $title = 'Factoids';
   $share_desc = $row->field_field_story_template_factoids[0]['raw']['value'];
   ?>
