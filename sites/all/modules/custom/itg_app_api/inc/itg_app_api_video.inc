@@ -1180,9 +1180,11 @@ function dailyCapsuleApi(){
           $big_story_block_data[] = array("node_load_data" => node_load($big_story_data['nid']));
         }
       }
-    }
-    p($big_story_block_data);
+    }    
     // varibale for feed tag
+    $desc = $big_story_block_data[1]['node_load_data']->field_common_short_description['und'][0]['value'];
+    $changed = $big_story_block_data[1]['node_load_data']->changed;
+    $changed_datetime = date("Y-m-d H:i:s", $changed);
     $title = $big_story_block_data[1]['node_load_data']->title;
     $type = $big_story_block_data[1]['node_load_data']->type;
     $nid = $big_story_block_data[1]['node_load_data']->nid;
@@ -1200,8 +1202,8 @@ function dailyCapsuleApi(){
         $big_strory['story_id'] = "$nid";
         $big_strory['story_image'] = "$file_medium_img_url";
         $big_strory['story_title'] = "$title";
-        $big_strory['story_short_desc'] = "Neeraj Vora, who was in coma for a year, died on Thursday morning.";
-        $big_strory['updated_datetime'] = "2017-12-14 10:52:50";
+        $big_strory['story_short_desc'] = "$desc";
+        $big_strory['updated_datetime'] = "$changed_datetime";
     }
     
     $data['data']['big_strory'] = $big_strory;
