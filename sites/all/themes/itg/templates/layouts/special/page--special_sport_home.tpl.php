@@ -313,14 +313,14 @@ $hide_widget = '';
                             <div class="col-md-12 col-sm-6 itg-layout-195 mt-10">
                                 <div class="widget-help-text"><?php print t('Draggable'); ?> ( <strong><?php print t('Scorecard'); ?></strong> )</div>
                                 <div class="itg-widget">
-									<?php									  
-									  if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-6']['widget']))){
-									    $hide_widget = 'hide-widget';
-									  }
-									  else{
-										$hide_widget = '';
-									  }
-								    ?>
+                                    <?php									  
+                                      if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-6']['widget']))){
+                                        $hide_widget = 'hide-widget';
+                                      }
+                                      else{
+                                      $hide_widget = '';
+                                      }
+                                    ?>
                                     <div class="droppable <?php print $gray_bg_layout; ?> <?php print $hide_widget; ?>">
                                         <div class="widget-wrapper <?php print $widget_data['itg-block-6']['widget_name'] . $widget_data['itg-block-6']['widget_display_name']; ?>">                      
                                             <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-6']['block_title'])) { ?>
@@ -355,14 +355,14 @@ $hide_widget = '';
                             <div class="col-md-12 col-sm-6 itg-layout-260">
                                 <div class="widget-help-text"><?php print t(' Draggable'); ?> ( <strong><?php print t('Points tally'); ?></strong> )</div>
                                 <div class="itg-widget">
-									<?php									  
-									  if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-7']['widget']))){
-									    $hide_widget = 'hide-widget';
-									  }
-									  else{
-										$hide_widget = '';
-									  }
-								    ?>									
+                                    <?php									  
+                                      if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-7']['widget']))){
+                                        $hide_widget = 'hide-widget';
+                                      }
+                                      else{
+                                      $hide_widget = '';
+                                      }
+                                    ?>									
                                     <div class="droppable <?php print $gray_bg_layout; ?> <?php print $hide_widget; ?>">
                                         <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'] . $widget_data['itg-block-7']['widget_display_name']; ?>">                      
                                             <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-7']['block_title'])) { ?>
@@ -395,14 +395,14 @@ $hide_widget = '';
                                 <div class="col-md-12 col-sm-6 itg-layout-375">
                                     <div class="widget-help-text"><?php print t(' Draggable'); ?> ( <strong><?php print t('Top performers'); ?></strong> )</div>
                                     <div class="itg-widget">
-										<?php							  
-										  if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-8']['widget']))){
-											$hide_widget = 'hide-widget';
-										  }
-										  else{
-											$hide_widget = '';
-										  }
-										?>
+                                        <?php							  
+                                          if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-8']['widget']))){
+                                          $hide_widget = 'hide-widget';
+                                          }
+                                          else{
+                                          $hide_widget = '';
+                                          }
+                                        ?>
                                         <div class="droppable <?php print $gray_bg_layout; ?> <?php print $hide_widget; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-8']['widget_name'] . $widget_data['itg-block-8']['widget_display_name']; ?>">
                                                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-8']['block_title'])) { ?>
@@ -440,14 +440,14 @@ $hide_widget = '';
                                 <div class="col-md-12 col-sm-6 itg-layout-315">
                                   <div class="widget-help-text"><?php print t('Special widgets');?> ( <strong><?php print t('Video');?></strong> )</div>
                                     <div class="itg-widget">
-										<?php									  
-										  if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-11']['widget']))){
-											$hide_widget = 'hide-widget';
-										  }
-										  else{
-											$hide_widget = '';
-										  }
-										?>
+                                        <?php									  
+                                          if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-11']['widget']))){
+                                          $hide_widget = 'hide-widget';
+                                          }
+                                          else{
+                                          $hide_widget = '';
+                                          }
+                                        ?>
                                         <div class="droppable <?php print $gray_bg_layout; ?> <?php print $hide_widget; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-11']['widget_name'] . $widget_data['itg-block-11']['widget_display_name']; ?>">
 											<?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-11']['block_title'])) { ?>
@@ -487,14 +487,14 @@ $hide_widget = '';
                                 <div class="col-md-12 col-sm-6 itg-layout-315">
                                     <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Poll'); ?></strong> )</div>
                                     <div class="itg-widget">
-									<?php									  
-									  if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-9']['widget']))){
-									    $hide_widget = 'hide-widget';
-									  }
-									  else{
-										$hide_widget = '';
-									  }
-								    ?>
+                                        <?php									  
+                                          if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-9']['widget']))){
+                                            $hide_widget = 'hide-widget';
+                                          }
+                                          else{
+                                          $hide_widget = '';
+                                          }
+                                        ?>
                                         <div class="droppable <?php print $gray_bg_layout; ?> <?php print $hide_widget; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-9']['widget_name'] . $widget_data['itg-block-9']['widget_display_name']; ?>">
                                                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-9']['block_title'])) { ?>
