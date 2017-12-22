@@ -146,12 +146,13 @@ define('INDEX_PAGE_URL', 'node/2');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 define('taxonomy_terms_per_page_admin' , 20);
 
-if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") { 
+/*if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") { 
     $site_protocol = 'https://';
 } else { 
     $site_protocol = 'http://';
-}
+}*/
 
+$site_protocol = 'https://';
 define('SITE_PROTOCOL' , $site_protocol);
 /**
  * Function for debugging arrays and objects.
