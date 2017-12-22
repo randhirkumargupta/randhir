@@ -994,7 +994,6 @@ function _latest_from_aajtak() {
     if(function_exists(getthirdPartyData)) {
       $aajtak_data = getthirdPartyData('at');
     }
-    //p($aajtak_data);
     $related_dt = '';
     if (!empty($aajtak_data[0]['content_id'])) {
       $related_dt = '<span class="widget-title">' . t('LATEST FROM AAJ TAK') . '</span>';
