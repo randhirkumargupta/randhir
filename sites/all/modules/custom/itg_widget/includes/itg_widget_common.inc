@@ -2217,10 +2217,10 @@ function itg_widget_block_view_alter(&$data, $block) {
             }
         }
         if (!empty($story_primary_category)) {
-			$story_primary_category_tid = $story_primary_category[0]['value'];
-		}
-    }
-	$is_programme = is_programme($story_primary_category_tid);
+          $story_primary_category_tid = $story_primary_category[0]['value'];
+        }
+  }
+	  $is_programme = is_programme($story_primary_category_tid);
     if (isset($block->delta) && $block->delta == 'programmes-rhs_programmes') {
         $arraynid = array();
         $arraynid = explode(',', variable_get('ipl_rhs_nids'));
@@ -3304,17 +3304,18 @@ function ajax_dependent_dropdown_state_key_candidate(&$form, $form_state) {
 
 /**
  * Function is used to check programme
- */ 
-
-function is_programme($tid){
-	if(empty($tid)){
-		return FALSE;
-	}
-	$all_terms = taxonomy_get_parents_all($tid);
-	$number_parent = count($all_terms);
-	$section_key = $number_parent - 1;
-	if(!empty($all_terms[$section_key]) && $all_terms[$section_key]->tid == variable_get('program_category_id_for_programmes')){
-		return TRUE;
-	}
-	return FALSE;
+ * @param type $tid
+ * @return boolean
+ */
+function is_programme($tid) {
+  if (empty($tid)) {
+    return FALSE;
+  }
+  $all_terms = taxonomy_get_parents_all($tid);
+  $number_parent = count($all_terms);
+  $section_key = $number_parent - 1;
+  if (!empty($all_terms[$section_key]) && $all_terms[$section_key]->tid == variable_get('program_category_id_for_programmes')) {
+    return TRUE;
+  }
+  return FALSE;
 }
