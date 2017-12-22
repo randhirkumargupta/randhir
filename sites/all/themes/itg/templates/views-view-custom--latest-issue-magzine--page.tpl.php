@@ -2,12 +2,17 @@
   <?php foreach ($rows as $index => $row): ?>
     <div class="magazin-top">
       <div class="magazin-top-left">
-        <span class="web-excl"><?php print t('web exclusive'); ?></span>
         <?php
         if($row['field_story_source_type'] == 'migrated'){
+        ?>
+        <span class="web-excl"><?php print t('Cover Story'); ?></span>
+        <?php
         $issue_attribute_date = strip_tags($row['field_issue_title_1']);
         print views_embed_view('magazine_top_story', 'block_2',$issue_attribute_date);
         }else{
+        ?>
+        <span class="web-excl"><?php print t('web exclusive'); ?></span>
+        <?php
         $issue_attribute_date = strip_tags($row['field_issue_title_1']);
         print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);
         }
