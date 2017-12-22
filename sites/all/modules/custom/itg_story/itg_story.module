@@ -131,6 +131,14 @@ function itg_story_menu() {
     'file' => 'includes/itg_follow_story_refresh.inc',
     'type' => MENU_CALLBACK,
   );
+  
+  $items['technology/embedegallery/%'] = array(
+    'page callback' => 'itg_story_technology_embedgalery',
+    'page arguments' => array(2),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
 
   return $items;
 }

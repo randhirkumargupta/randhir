@@ -986,34 +986,35 @@ function _latest_from_pti() {
 function _latest_from_aajtak() {
   if (empty(variable_get('disable_third_party_api'))) {
     global $base_url;
-    $url = variable_get('aaj_tak_json_url');
-    $JSON = file_get_contents($url);
+    //$url = variable_get('aaj_tak_json_url');
+    //$JSON = file_get_contents($url);
     // You can decode it to process it in PHP
-    $aajtak_data = json_decode($JSON);
+    //$aajtak_data = json_decode($JSON);
+    $aajtak_data = array();
+    if(function_exists(getthirdPartyData)) {
+      $aajtak_data = getthirdPartyData('at');
+    }
     $related_dt = '';
-    if (!empty($aajtak_data[0]->id)) {
+    if (!empty($aajtak_data[0]['content_id'])) {
       $related_dt = '<span class="widget-title">' . t('LATEST FROM AAJ TAK') . '</span>';
     }
-    if (!empty($aajtak_data[0]->id)) {
+    if (!empty($aajtak_data[0]['content_id'])) {
       $related_dt.= "<ul>";
       $i = 0;
       foreach ($aajtak_data as $key => $value) {
-        if (!empty($value->title)) {
-          $related_title = mb_strimwidth($value->title, 0, 200, "..");
-          $path = $value->story_url;
-          if (url_exists($value->thumb_image)) {
-            $img_url = $value->thumb_image;
+        if (!empty($value['content_title'])) {
+          $related_title = mb_strimwidth($value['content_title'], 0, 200, "..");
+          $path = $value['content_url'];
+          if ($value['content_thumb_image']) {
+            $img_url = $value['content_thumb_image'];
           }
           else {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
           }
-
           $related_dt.= '<li class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
           $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
         }
         $i++;
-        if ($i == 5)
-          break;
       }
       $related_dt.= "</ul>";
     }
@@ -1027,34 +1028,35 @@ function _latest_from_aajtak() {
 function _latest_from_businesstoday() {
   if (empty(variable_get('disable_third_party_api'))) {
     global $base_url;
-    $url = variable_get('business_today_json_url');
-    $JSON = file_get_contents($url);
+    //$url = variable_get('business_today_json_url');
+    //$JSON = file_get_contents($url);
     // You can decode it to process it in PHP
-    $business_data = json_decode($JSON);
+    //$business_data = json_decode($JSON);
+    $business_data = array();
+    if(function_exists(getthirdPartyData)) {
+      $business_data = getthirdPartyData('bt');
+    }
     $related_dt = '';
-    if (!empty($business_data[0]->id)) {
+    if (!empty($business_data[0]['content_id'])) {
       $related_dt = '<span class="widget-title">' . t('LATEST FROM BUSINESS TODAY') . '</span>';
     }
-    if (!empty($business_data[0]->id)) {
+    if (!empty($business_data[0]['content_id'])) {
       $related_dt.= "<ul>";
       $i = 0;
       foreach ($business_data as $key => $value) {
-        if (!empty($value->title)) {
-          $related_title = mb_strimwidth($value->title, 0, 200, "..");
-          $path = $value->story_url;
-          if (url_exists($value->thumb_image)) {
-            $img_url = $value->thumb_image;
+        if (!empty($value['content_title'])) {
+          $related_title = mb_strimwidth($value['content_title'], 0, 200, "..");
+          $path = $value['content_url'];
+          if ($value['content_thumb_image']) {
+            $img_url = $value['content_thumb_image'];
           }
           else {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
           }
-
           $related_dt.= '<li class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
           $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
         }
         $i++;
-        if ($i == 5)
-          break;
       }
       $related_dt.= "</ul>";
     }
@@ -1224,5 +1226,29 @@ function itg_get_node_status($nid) {
     $result = $query->execute()->fetchField();
 
     return $result;
+  }
+}
+
+/*
+ * Get third Party Data of AT and BT
+ * @param $type
+ * @return array
+ */
+function getthirdPartyData($type) {
+  if (!empty($type)) {
+    $records = array();
+    if(db_table_exists('itg_external_feed_data')) {
+      $query = db_select('itg_external_feed_data', 'ifd');
+      $query->fields('ifd', array('content_id'))
+            ->fields('ifd', array('content_title'))
+            ->fields('ifd', array('content_url'))  
+            ->fields('ifd', array('content_thumb_image'))  
+            ->condition('ifd.content_site', $type)
+            ->range(0, 5);
+      $query->orderBy('ifd.id', 'ASC'); 
+      $result = $query->execute();
+      $records = $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+    return $records;
   }
 }
