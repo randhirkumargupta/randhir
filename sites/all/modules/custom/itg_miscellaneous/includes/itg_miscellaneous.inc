@@ -254,7 +254,7 @@ function itg_sso_nid_callback() {
 
 
 
-function insert_helper_table_data_new() {
+/*function insert_helper_table_data_new() {
 
   $result = db_select('itg_widget_helper', 'n')->fields('n', array('nid', 'tid'))->range(1,50000)->execute()->fetchAll();
   if (!empty($result)) {
@@ -289,4 +289,4 @@ function insert_helper_table_data_new() {
   }
   
   
-}
+}*/
