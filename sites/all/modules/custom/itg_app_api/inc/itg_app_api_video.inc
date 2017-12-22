@@ -1006,6 +1006,11 @@ function topstoriesList($source) {
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $result_fs = featuresWidgetData();
     $result = array_merge($result_fs, $result_ts);
+    
+    if($source = "daily_capsule"){
+       return $result; 
+    }
+    
     //$result = array_merge($result_ts, $result_fs);
 
     $data_topstories['id'] = "0";
@@ -1230,14 +1235,21 @@ function news_dailyCapsule(){
     $breaking_news['title'] = "Breaking News";
     $breaking_news['icon_url'] = "http image url";
     
-    $news_list[0]['n_id'] = "1069033";
-    $news_list[0]['n_title'] = "Filmmaker and actor Neeraj Vora dies at the age of 54";
-    $news_list[0]['n_type'] = "story";
-    $news_list[0]['updated_datetime'] = "2017-12-14 10:52:50";    
-    $news_list[1]['n_id'] = "1069032";
-    $news_list[1]['n_title'] = "5 reasons why it is crucial for Rahul Gandhi to win Gujarat election 2017";
-    $news_list[1]['n_type'] = "story";
-    $news_list[1]['updated_datetime'] = "2017-12-14 10:35:22";
+    $new_data = topstoriesList("daily_capsule");
+    $loopc = 0;
+    foreach ($new_data as $value) {
+        p($value);
+        $news_list[$loopc]['n_id'] = "1069033";
+        $news_list[$loopc]['n_title'] = "Filmmaker and actor Neeraj Vora dies at the age of 54";
+        $news_list[$loopc]['n_type'] = "story";
+        $news_list[$loopc]['updated_datetime'] = "2017-12-14 10:52:50"; 
+        if($loopc == 4){
+            break;
+        }
+        $loopc++;
+    }
+       
+    
     $breaking_news['news'] = $news_list;
     
     return $breaking_news;
