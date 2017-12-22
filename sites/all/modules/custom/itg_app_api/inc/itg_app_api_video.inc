@@ -1129,7 +1129,7 @@ function dailyCapsuleApi(){
     $breaking_news = news_dailyCapsule();
     
     $data['status_code'] = "1";
-    $data['custom_message'] = "";
+    $data['status_message'] = "";
     
     $order[0]['order_id'] = "1";
     $order[0]['type'] = "newswrap";
@@ -1181,6 +1181,7 @@ function dailyCapsuleApi(){
         }
       }
     }
+    p($big_story_block_data);
     // varibale for feed tag
     $title = $big_story_block_data[1]['node_load_data']->title;
     $type = $big_story_block_data[1]['node_load_data']->type;
@@ -1193,19 +1194,22 @@ function dailyCapsuleApi(){
 
     $create_date = date("F d, Y", $created);
     $create_datetime = date(DATE_ATOM, $created);
-    $big_strory['title'] = "Big Strory";
-    $big_strory['icon_url'] = "http image url";
-    $big_strory['story_id'] = "$nid";
-    $big_strory['story_image'] = "$file_medium_img_url";
-    $big_strory['story_title'] = "$title";
-    $big_strory['story_short_desc'] = "Neeraj Vora, who was in coma for a year, died on Thursday morning.";
-    $big_strory['updated_datetime'] = "2017-12-14 10:52:50";
+    if($title){
+        $big_strory['title'] = "Big Strory";
+        $big_strory['icon_url'] = "http image url";
+        $big_strory['story_id'] = "$nid";
+        $big_strory['story_image'] = "$file_medium_img_url";
+        $big_strory['story_title'] = "$title";
+        $big_strory['story_short_desc'] = "Neeraj Vora, who was in coma for a year, died on Thursday morning.";
+        $big_strory['updated_datetime'] = "2017-12-14 10:52:50";
+    }
+    
     $data['data']['big_strory'] = $big_strory;
     
     $top_strory['title'] = "Top Strories";
     $top_strory['icon_url'] = "http image url";
     $top_strory['category_id'] = "0";
-    $top_strory['type'] = "topstories";
+    $top_strory['type'] = "newslist";
     $top_strory['display_count'] = "5";
     $data['data']['top_strory'] = $top_strory;
     
