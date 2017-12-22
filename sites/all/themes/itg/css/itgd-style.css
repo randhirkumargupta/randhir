@@ -541,5 +541,8 @@ ul.pron-cons-img li img {
     font-weight: bold;
 }
 .droppable.hide-widget{
-display:none;
+	display:none;
+}
+.sport-home-layout-page .tech-block_8 .osscar-video ul .dont-miss-listing{
+    padding: 0 10px 25px 10px;
 }
