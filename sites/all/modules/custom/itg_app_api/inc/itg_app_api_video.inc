@@ -1007,9 +1007,7 @@ function topstoriesList($source) {
     $result_fs = featuresWidgetData();
     $result = array_merge($result_fs, $result_ts);
     
-    if($source = "daily_capsule"){
-       return $result; 
-    }
+    
     
     //$result = array_merge($result_ts, $result_fs);
 
