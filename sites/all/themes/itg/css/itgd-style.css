@@ -341,7 +341,7 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
     font-family: RobotoSlab-Regular;
     font-weight: 400
 }
-.section-movies #block-itg-ads-ads-super-banner-top-nav-728x90 {
+.page-taxonomy-term.section-movies #block-itg-ads-ads-super-banner-top-nav-728x90, .page-taxonomy-term.section-television #block-itg-ads-ads-super-banner-top-nav-728x90{
     margin-bottom: 10px
 }
 .section-movies .featured-news {
@@ -379,10 +379,10 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
     background: #1f1f1f;
     padding: 10px
 }
-.section-movies header {
+.page-taxonomy-term.section-movies header, .page-taxonomy-term.section-television header {
     margin-bottom: 0
 }
-.section-movies #block-itg-layout-manager-front-end-breadcrumb {
+.page-taxonomy-term.section-movies #block-itg-layout-manager-front-end-breadcrumb, .page-taxonomy-term.section-television #block-itg-layout-manager-front-end-breadcrumb {
     display: none
 }
 .section-movies .featured-news .featured-post h2 a {
