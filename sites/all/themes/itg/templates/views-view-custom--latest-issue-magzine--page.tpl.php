@@ -4,8 +4,14 @@
       <div class="magazin-top-left">
         <span class="web-excl"><?php print t('web exclusive'); ?></span>
         <?php
+        if($row['field_story_source_type'] == 'migrated'){
+        $issue_attribute_date = strip_tags($row['field_issue_title_1']);
+        print views_embed_view('magazine_top_story', 'block_2',$issue_attribute_date);
+        }else{
         $issue_attribute_date = strip_tags($row['field_issue_title_1']);
         print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);
+        }
+
         ?>
       </div>
 
@@ -74,9 +80,10 @@
     $class = ' class="col-md-6 col-sm-6 col-xs-12 mt-50"';
   }
   $style_name = 'section_ordering_widget';
-  if (!empty($data)) {
-    foreach ($data as $parent_key => $parent_value) {
-      $sub_title = '';
+if (!empty($data)) {
+  foreach ($data as $parent_key => $parent_value) {
+    $sub_title = '';
+    if ($parent_key != '1206509') {
       foreach ($parent_value as $key => $value) {
         // get status of lock story
         if (function_exists(itg_msi_get_lock_story_status)) {
@@ -109,6 +116,7 @@
           }
         }
       }
+    }
       if (!empty($lock_story)) {
         $lock_class = 'class="lock"';
       }
