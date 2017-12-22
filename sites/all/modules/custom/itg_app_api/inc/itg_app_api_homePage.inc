@@ -15,10 +15,12 @@ function homePageJson() {
     $data_topstories = array();
     $data_news = array();
     $data_magazine = array();
+    $homePageJsonWidget1 = array();
+    $homePageJsonWidget2 = array();
 
     $data_packagelist_india = homePageJsonPackagelist_india();
-    //$data_packagelist_lifestyle = homePageJsonPackagelist_lifestyle();
-    //$data_packagelist_world = homePageJsonPackagelist_world();
+    $homePageJsonWidget1 = homePageJsonWidget_1();
+    $homePageJsonWidget2 = homePageJsonWidget_2();
     
     //$data_topstories = homePageJsonTopstories();
     $data_topstories = topstoriesList('home');
@@ -32,18 +34,16 @@ function homePageJson() {
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
-
-    $data['data'][0] = $data_packagelist_india;
-    //$data['data'][1] = $data_packagelist_lifestyle;
-   // $data['data'][2] = $data_packagelist_world;
-    $data['data'][1] = $data_topstories;
-    $data['data'][2] = $data_news_india;
-
-    $data['data'][3] = $data_news_lifestyle;
-
-    $data['data'][4] = $data_news_world;
-    $data['data'][5] = $data_magazine;
-    $data['data'][6] = $data_poll;
+    
+    $data['data'][0] = $homePageJsonWidget1;
+    $data['data'][1] = $homePageJsonWidget2;
+    $data['data'][2] = $data_packagelist_india;   
+    $data['data'][3] = $data_topstories;
+    $data['data'][4] = $data_news_india;
+    $data['data'][5] = $data_news_lifestyle;
+    $data['data'][6] = $data_news_world;
+    $data['data'][7] = $data_magazine;
+    $data['data'][8] = $data_poll;
 
     return $data;
 }
@@ -104,7 +104,7 @@ function homePageJsonPackagelist_india() {
         // code vid=14  end
 
         $data_news['id'] = "$tid";
-        $data_news['order'] = "1";
+        $data_news['order'] = "3";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "$term_name_m";
         $data_news['label'] = "$term_name_m";
@@ -890,7 +890,7 @@ function homePageJsonNewslist_india() {
         // code vid=14  end
 
         $data_news['id'] = "1206578";
-        $data_news['order'] = "3";
+        $data_news['order'] = "5";
         $data_news['type'] = "newslist";
         $data_news['title'] = "India";
         $data_news['label'] = "India";
@@ -1103,7 +1103,7 @@ function homePageJsonNewslist_world() {
         // code vid=14  end
 
         $data_news['id'] = "$tid";
-        $data_news['order'] = "5";
+        $data_news['order'] = "7";
         $data_news['type'] = "newslist";
         $data_news['title'] = "World";
         $data_news['label'] = "World";
@@ -1281,7 +1281,7 @@ function homePageJsonMagazine() {
     $n_magazine = $n_magazine_data['data'];
 
     $data_magazine['id'] = "0";
-    $data_magazine['order'] = "6";
+    $data_magazine['order'] = "8";
     $data_magazine['type'] = "magazine";
     $data_magazine['title'] = "From The Magazine";
     $data_magazine['label'] = "From The Magazine";
@@ -1587,7 +1587,7 @@ function homePageJsonPoll() {
     $n_polls = array();  
     $n_polls = polls_open_datalist(0, "home");
     $data_magazine['id'] = "0";
-    $data_magazine['order'] = "7";
+    $data_magazine['order'] = "9";
     $data_magazine['type'] = "poll";
     $data_magazine['title'] = "poll";
     $data_magazine['label'] = "poll";
@@ -1680,7 +1680,7 @@ function homePageJsonNewslist_lifestyle() {
         // code vid=14  end
 
         $data_news['id'] = "1206567";
-        $data_news['order'] = "4";
+        $data_news['order'] = "6";
         $data_news['type'] = "newslist";
         $data_news['title'] = "Lifestyle";
         $data_news['label'] = "Lifestyle";
@@ -1837,5 +1837,119 @@ function homePageJsonNewslist_lifestyle() {
 
     $data_news['news'] = (array) $data_newslist;
 
+    return $data_news;
+}
+/**
+ * main function for generate homePage Widget1 array
+ *
+ * @return array
+ */
+function homePageJsonWidget_1() {
+    global $base_url;
+    $data_news = array();
+    $data_newslist = array();
+    $comman = array();
+    $n_widget = array();
+    $listcount = 0;
+    
+
+    $data_news['id'] = "0";
+    $data_news['order'] = "1";
+    $data_news['type'] = "webview";
+    $data_news['title'] = "Widget";
+    $data_news['label'] = "Widget";
+    $data_news['show_label'] = "0";
+    $data_news['n_template_id'] = "1";
+
+    $data_newslist[$listcount]['n_id'] = "0";    
+    $data_newslist[$listcount]['n_template_id'] = "";
+    $data_newslist[$listcount]['n_type'] = "story";
+    $data_newslist[$listcount]['n_is_developing'] = "0";
+    $data_newslist[$listcount]['n_is_sponsored'] = "0";
+    $data_newslist[$listcount]['n_share_link'] = "";
+    $data_newslist[$listcount]['n_title'] = "";
+    $data_newslist[$listcount]['n_description'] = "0";
+    $data_newslist[$listcount]['n_pcategory_id'] = "0";
+    $data_newslist[$listcount]['n_pcategory_name'] = "";
+    $data_newslist[$listcount]['n_comment_count'] = "";
+    $data_newslist[$listcount]['n_small_image'] = "";
+    $data_newslist[$listcount]['n_large_image'] = "";
+    $data_newslist[$listcount]['n_image_credit'] = "";
+    $data_newslist[$listcount]['n_updated_datetime'] = "";
+
+    $data_newslist[$listcount]['n_photo'] = $comman;
+    $data_newslist[$listcount]['n_video'] = $comman;
+    $data_newslist[$listcount]['n_polls'] = $comman;
+    $data_newslist[$listcount]['n_rating'] = $comman;
+    $data_newslist[$listcount]['n_magazine'] = $comman; 
+    
+    $n_widget['type'] = "2";
+    $n_widget['type_label'] = "scorecard";
+    $n_widget['tilte'] = "Scorecard";
+    $n_widget['short_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v1.html?team=ind";
+    $n_widget['extended_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v3.html?team=ind";
+    $n_widget['action'] = "webview";
+    $n_widget['is_india_match'] = "1";
+    
+    $data_newslist[$listcount]['n_widget'] = $n_widget;
+
+    $data_news['news'] = (array) $data_newslist;
+    return $data_news;
+}
+
+/**
+ * main function for generate homePage Widget2 array
+ *
+ * @return array
+ */
+function homePageJsonWidget_2() {
+    global $base_url;
+    $data_news = array();
+    $data_newslist = array();
+    $comman = array();
+    $n_widget = array();
+    $listcount = 0;
+    
+
+    $data_news['id'] = "0";
+    $data_news['order'] = "2";
+    $data_news['type'] = "webview";
+    $data_news['title'] = "Widget";
+    $data_news['label'] = "Widget";
+    $data_news['show_label'] = "0";
+    $data_news['n_template_id'] = "1";
+
+    $data_newslist[$listcount]['n_id'] = "0";    
+    $data_newslist[$listcount]['n_template_id'] = "";
+    $data_newslist[$listcount]['n_type'] = "story";
+    $data_newslist[$listcount]['n_is_developing'] = "0";
+    $data_newslist[$listcount]['n_is_sponsored'] = "0";
+    $data_newslist[$listcount]['n_share_link'] = "";
+    $data_newslist[$listcount]['n_title'] = "";
+    $data_newslist[$listcount]['n_description'] = "0";
+    $data_newslist[$listcount]['n_pcategory_id'] = "0";
+    $data_newslist[$listcount]['n_pcategory_name'] = "";
+    $data_newslist[$listcount]['n_comment_count'] = "";
+    $data_newslist[$listcount]['n_small_image'] = "";
+    $data_newslist[$listcount]['n_large_image'] = "";
+    $data_newslist[$listcount]['n_image_credit'] = "";
+    $data_newslist[$listcount]['n_updated_datetime'] = "";
+
+    $data_newslist[$listcount]['n_photo'] = $comman;
+    $data_newslist[$listcount]['n_video'] = $comman;
+    $data_newslist[$listcount]['n_polls'] = $comman;
+    $data_newslist[$listcount]['n_rating'] = $comman;
+    $data_newslist[$listcount]['n_magazine'] = $comman; 
+    
+    $n_widget['type'] = "4";
+    $n_widget['type_label'] = "live";
+    $n_widget['tilte'] = "Watch Live";
+    $n_widget['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
+    $n_widget['extended_url'] = "";
+    $n_widget['action'] = "webview";    
+    
+    $data_newslist[$listcount]['n_widget'] = $n_widget;
+
+    $data_news['news'] = (array) $data_newslist;
     return $data_news;
 }

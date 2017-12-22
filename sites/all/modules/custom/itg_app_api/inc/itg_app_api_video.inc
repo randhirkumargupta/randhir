@@ -1007,7 +1007,9 @@ function topstoriesList($source) {
     $result_fs = featuresWidgetData();
     $result = array_merge($result_fs, $result_ts);
     
-    
+    if($source == "daily_capsule"){
+       return $result; 
+    }
     
     //$result = array_merge($result_ts, $result_fs);
 
@@ -1017,7 +1019,7 @@ function topstoriesList($source) {
     $data_topstories['show_label'] = "0";
     if($source == 'home'){
         $data_topstories['id'] = "0";
-        $data_topstories['order'] = "2";
+        $data_topstories['order'] = "4";
         $data_topstories['type'] = "topstories";
         $data_topstories['title'] = "Top Stories";
         $data_topstories['label'] = "Top Stories";
