@@ -429,6 +429,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $icon_fid = (int) $menu_data['db_data']['menu_name'];
   $display_icon_attribute = $display_icon;
   $sponser_logo_uri = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['uri']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['uri'] : 0;
+ 
   $vertical_menu_icon = "";
   $sponser_logo_alt = $menu_data['term_load']->field_sponser_logo['und'][0]['alt'];
   $sponser_logo_title = $menu_data['term_load']->field_sponser_logo['und'][0]['title'];
@@ -467,17 +468,23 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
       } else {
         //$img_path = image_style_url('menu_manager_icons' , $sponser_logo_uri);
         $link_text = $vertical_menu_icon =   "<img width='48' height='32' title='" . $sponser_logo_title . "'  src='" . file_create_url($sponser_logo_uri) . "' alt='".$sponser_logo_alt."' />";
+        $link_text_icon = "<span class='menu-icons hidden-desktop'><img width='48' height='32' title='" . $sponser_logo_title . "'  src='" . file_create_url($sponser_logo_uri) . "' alt='".$sponser_logo_alt."' /></span>";
         $image_class = "has-image";
       }
     }
-  } 
-
-  if (!empty($sponser_logo_uri)) {
-    $img_path_new = file_create_url($sponser_logo_uri);
-    $link_text_icon = "<span class='menu-icons hidden-desktop'><img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . $img_path_new . "' alt='".$link_title_for_vertical."' /></span>";
   }
-   
-        
+
+  if (!empty($menu_data['db_data']['menu_level']) && $menu_data['db_data']['menu_level'] == 'second') {
+    $temp_data = taxonomy_term_load($tid);
+    $link_text_icon_uri = '';
+    $link_text_mobile = isset($temp_data->name) ? $temp_data->name : $title_array[0];
+    if (!empty($temp_data->field_sponser_logo['und'][0]['uri']) && file_exists($temp_data->field_sponser_logo['und'][0]['uri'])) {
+      $link_text_icon_uri = $temp_data->field_sponser_logo['und'][0]['uri'];
+      $img_path_new = file_create_url($link_text_icon_uri);
+      $link_text_icon = "<span class='menu-icons hidden-desktop'><img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . $img_path_new . "' alt='" . $link_title_for_vertical . "' /></span>";
+    }
+  }
+
   $sponsored_class = ($menu_data['db_data']['extra'] == 'Yes') ? "sponsored-active" : "";
   // if tid is not 0 then its internal url
   if (($tid && $url_type == 'internal')) {
@@ -525,7 +532,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $menu_link_data_array['url_type'] = "url-type-" . $url_type;
   $menu_link_data_array['display_icon'] = $display_icon_attribute;
   $menu_link_data_array['link_text_icon'] = $link_text_icon;
-  $menu_link_data_array['icon_object_uri'] = $icon_object->uri;
+  $menu_link_data_array['link_text_mobile'] = $link_text_mobile;
   return $menu_link_data_array;
 }
 
