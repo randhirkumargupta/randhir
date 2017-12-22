@@ -648,7 +648,7 @@ function _personalization_show_content() {
         if (function_exists('itg_get_node_status') && itg_get_node_status($value['nid']) == '1') {
           $alias = drupal_get_path_alias('node/' . $value['nid']);
           $actual_link = $base_url . '/' . $alias;
-          $short_url = shorten_url($actual_link, 'goo.gl');
+          $short_url = $actual_link;
           $fbShare_title = str_replace("'", "", $value['title']);
           $fbSocial_share_title = htmlentities($fbShare_title, ENT_QUOTES);
           $fbdesc = '';

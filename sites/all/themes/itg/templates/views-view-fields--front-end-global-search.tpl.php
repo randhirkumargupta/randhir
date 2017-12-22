@@ -28,7 +28,7 @@
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $row->label);
 $search_share_title= htmlentities($search_title, ENT_QUOTES);    
-$short_url = shorten_url($row->url, 'goo.gl');
+$short_url = $row->url; //shorten_url($row->url, 'goo.gl');
 $share_title = addslashes($row->label);
 $share_desc = '';
 preg_match('/(src=["\'](.*?)["\'])/', $row->sm_thumb_medium_field_story_extra_large_image[0], $match);  //find src="X" or src='X'

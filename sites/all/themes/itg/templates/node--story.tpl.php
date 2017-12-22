@@ -21,7 +21,7 @@ if (!empty($content)):
   $scheme = SITE_PROTOCOL;
   $actual_link = $scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   $uri = base64_encode($actual_link);
-  $short_url = shorten_url($actual_link, 'goo.gl');
+  $short_url = $actual_link;
   $fb_title = addslashes($node->title);
   $share_desc = '';
   $image = '';

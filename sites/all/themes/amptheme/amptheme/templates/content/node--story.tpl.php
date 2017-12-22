@@ -19,7 +19,7 @@ if (!empty($content)):
   // prepare url for sharing
   $actual_link = 'http://' . $_SERVER['HTTP_HOST'] .'/amp'. $_SERVER['REQUEST_URI'];
   $amp_link = str_replace('?amp', '', $actual_link);
-  $short_url = shorten_url($amp_link, 'goo.gl');
+  $short_url = $amp_link;
   $fb_title = addslashes($node->title);
   $share_desc = '';
   $image = '';

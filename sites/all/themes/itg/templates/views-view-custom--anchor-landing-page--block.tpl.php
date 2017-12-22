@@ -3,7 +3,7 @@ global $base_url;
 $anchor = $rows[0];
 $nid = $anchor['nid'];
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link;
 $fb_title = itg_common_only_text_string($anchor['title']);
 $src = '';
 // prepare url for sharing

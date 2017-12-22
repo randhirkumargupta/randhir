@@ -26,7 +26,7 @@
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $row->node_title);
 $fb_share_title= htmlentities($search_title, ENT_QUOTES);    
-$short_url = shorten_url($row->url, 'goo.gl');
+$short_url = $row->url;
 $twitter_title = addslashes($row->node_title);
 $share_desc = '';
 $image = file_create_url($row->field_field_itg_funalytics_image[0]['rendered']['#item']['uri']);

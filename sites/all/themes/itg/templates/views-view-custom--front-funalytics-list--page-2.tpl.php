@@ -5,7 +5,7 @@ foreach($rows as $row) {
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $search_title = preg_replace("/'/", "\\'", $row['title']);
 $fb_share_title= htmlentities($search_title, ENT_QUOTES);    
-$short_url = shorten_url($row->url, 'goo.gl');
+$short_url = $row->url;
 $twitter_title = addslashes($row['title']);
 $share_desc = '';
 

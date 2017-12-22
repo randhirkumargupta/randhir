@@ -54,7 +54,7 @@ foreach ($view->result as $item): ?>
 
               $fb_title = itg_common_only_text_string($item->node_title);
               $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-              $short_url = shorten_url($actual_link, 'goo.gl');
+              $short_url = $actual_link;
               $share_desc = '';
               $src = '';
 
