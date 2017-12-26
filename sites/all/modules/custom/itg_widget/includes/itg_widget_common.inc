@@ -3399,7 +3399,7 @@ function autocomplete_widget_path_with_filter() {
  */
 function is_programme($tid, $flag_occupation, $page_argument) {
   $arg = arg();
-  if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+  if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (empty($tid) && isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
 	return TRUE;
   }	
   if (empty($tid)) {
