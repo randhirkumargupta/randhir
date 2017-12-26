@@ -8,8 +8,9 @@
  */
 global $base_url;
 ?>
-<?php 
-foreach ($view->result as $item): ?>
+<?php
+foreach ($view->result as $id => $item): ?>
+<div<?php if ($classes_array[$id]) { print ' class="' . $classes_array[$id] .'"';  } ?>>
 <div class="anchor-listing">
   <div class="pic">
    <?php if (empty($item->_field_data['nid']['entity']->field_story_extra_large_image['und'][0]['uri'])) { ?>
@@ -71,4 +72,5 @@ foreach ($view->result as $item): ?>
       </div>
   </div>
 </div>  
+</div>
 <?php endforeach; ?>
