@@ -1507,8 +1507,11 @@ function itg_story_add_byline_popup($ajax) {
  * @param Array $tech_photo_arr
  * @return string
  */
-function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias) {
+function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, $view_mode = null) {
   $count = 0;
+  if($view_mode == 'amp'){
+    $count = -1; 
+  }
   $output = '';
   $output .= '<div class="tech-photos">';
   $output .= '<div class="tech-photos-head-section"><h3 class="tech-photo-head">Photos</h3>';
@@ -1526,7 +1529,12 @@ function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_
     $photo_img_title = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['title'];
     $output .= '<div class="tech-photo-item">';
     $output .= '<a href="/' . $tech_gallery_alias . '" target="_blank">';
-    $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
+    if($view_mode == 'amp'){
+	  $output .= '<amp-img height="127" width="170" src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"></amp-img>';
+	}
+	else{
+	  $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';	
+	}    
     $output .= '</a>';
     if ($count == 2) {
       $output .= '<div class="tech-photo-overlay">';
@@ -1761,5 +1769,23 @@ function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $p
         }
       }
     }
+  }
+}
+
+/**
+ * function for large image url.
+ * @param int $nid
+ * @return string
+ */
+function itg_get_story_extra_large_image($nid) {
+  if (!empty($nid)) {
+    $query = db_select('node', 'n');
+    $query->leftjoin('field_data_field_story_extra_large_image', 'sm', 'sm.entity_id = n.nid');
+    $query->leftJoin('file_managed', 'fm', 'fm.fid = sm.field_story_extra_large_image_fid');
+    $query->fields('fm', array('uri'));
+    $query->condition('n.nid', $nid);
+    $query->orderBy('n.created', 'DESC');
+    $result = $query->execute();
+    return $query->execute()->fetchField();
   }
 }

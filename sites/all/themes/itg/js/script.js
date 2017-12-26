@@ -615,6 +615,10 @@ jQuery(document).ready(function () {
         }
 
     })
+    
+    /**
+     * Comment to change state map on change
+     * 
     jQuery('#map-state').change(function () {
         jQuery('#consTable').hide();
         var getstate_id = jQuery(this).val();
@@ -645,6 +649,7 @@ jQuery(document).ready(function () {
             }
         });
     });
+    **/
 
     //    //saved message
     //    var getmsgsaves = jQuery('.saved-photogallery').text();
