@@ -2,10 +2,21 @@
   <?php foreach ($rows as $index => $row): ?>
     <div class="magazin-top">
       <div class="magazin-top-left">
+        <?php
+        if($row['field_story_source_type'] == 'migrated'){
+        ?>
+        <span class="web-excl"><?php print t('Cover Story'); ?></span>
+        <?php
+        $issue_attribute_date = strip_tags($row['field_issue_title_1']);
+        print views_embed_view('magazine_top_story', 'block_2',$issue_attribute_date);
+        }else{
+        ?>
         <span class="web-excl"><?php print t('web exclusive'); ?></span>
         <?php
         $issue_attribute_date = strip_tags($row['field_issue_title_1']);
         print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);
+        }
+
         ?>
       </div>
 
@@ -14,13 +25,7 @@
         <span class="latest-issue"><?php print t('latest issue'); ?></span>
         <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
         <div class="issue-title">
-          <?php 
-          if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($row['nid'], 0, 999), "node/" . $row['nid'], array("html" => TRUE , 'attributes' => array("title" => $row['title'])));
-          } else {
-            print $row['field_issue_title'];
-          }
-          ?>
+          <?php print $row['field_issue_title']; ?>
         </div>
         <?php
         $current_issues = itg_msi_get_current_issue();
@@ -46,15 +51,7 @@
     <div class="magazin-subscribe">
       <span class="latest-issue"><?php print t('latest issue'); ?></span>
       <div class="issue-image"><?php print $row['field_issue_large_cover_image']; ?></div>
-        <div class="issue-title">
-          <?php 
-          if (function_exists('itg_common_get_smiley_title')) {
-            echo l(itg_common_get_smiley_title($row['nid'], 0, 999), "node/" . $row['nid'], array("html" => TRUE , 'attributes' => array("title" => $row['title'])));
-          } else {
-            print $row['field_issue_title'];
-          }
-          ?>
-        </div>
+        <div class="issue-title"><?php print $row['field_issue_title']; ?></div>
       <?php
       $current_issues = itg_msi_get_current_issue();
       $current_issue = explode(' 00:', $current_issues);
@@ -73,9 +70,12 @@
   <?php
   global $base_url;
 // category based story according issue date
-  $data = itg_msi_issue_category_data($issue_attribute_date);
-
-  $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date);
+  if (function_exists('itg_msi_issue_category_data')) {
+    $data = itg_msi_issue_category_data($issue_attribute_date);
+  }
+  if (function_exists('itg_msi_issue_suppliment_data')) {
+    $supplement_value = itg_msi_issue_suppliment_data($issue_attribute_date);
+  }
   if (isset($supplement_value)) {
     $class = '';
     print '<div class="col-md-6 col-sm-6 col-xs-12 mt-50">';
@@ -85,9 +85,10 @@
     $class = ' class="col-md-6 col-sm-6 col-xs-12 mt-50"';
   }
   $style_name = 'section_ordering_widget';
-  if (!empty($data)) {
-    foreach ($data as $parent_key => $parent_value) {
-      $sub_title = '';
+if (!empty($data)) {
+  foreach ($data as $parent_key => $parent_value) {
+    $sub_title = '';
+    if ($parent_key != '1206509') {
       foreach ($parent_value as $key => $value) {
         // get status of lock story
         if (function_exists(itg_msi_get_lock_story_status)) {
@@ -95,29 +96,32 @@
         }
         if ($key == 0) {
           if (!empty($value->uri)) {
-            $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt=""/>';
+            $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
           }
           else {
-            $img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt='' />";
+            $img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
           }
+          // Get the short headline for a node data
+          $shortheadline_cat = $value->field_story_short_headline_value;
           if (!empty($lock_story)) {
             $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
-            $title = l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+            $title = l(t($shortheadline_cat), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
           }
           else {
             $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
-            $title = l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'node/' . $value->nid);
+            $title = l(t($shortheadline_cat), 'node/' . $value->nid);
           }
         }
         elseif ($key > 0 && $key < 3) {
           if (!empty($lock_story)) {
-            $sub_title .= '<p class="lock">' . l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
+            $sub_title .= '<p class="lock">' . l(t($value->field_story_short_headline_value), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
           }
           else {
-            $sub_title .= '<p>' . l(t(truncate_utf8($value->title, 40, TRUE, TRUE)), 'node/' . $value->nid) . '</p>';
+            $sub_title .= '<p>' . l(t($value->field_story_short_headline_value), 'node/' . $value->nid) . '</p>';
           }
         }
       }
+    }
       if (!empty($lock_story)) {
         $lock_class = 'class="lock"';
       }
@@ -156,26 +160,28 @@
         }
         if ($key == 0) {
           if (!empty($s_value->uri)) {
-            $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '" alt="" />';
+            $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '" alt="" title="" />';
           }
           else {
-            $supp_img_url = "<img src='" . $base_url . '/' . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg' alt='' />";
+            $supp_img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
           }
+          // Get the short headline for a node data
+          $shortheadline_supp = $s_value->field_story_short_headline_value;
           if (!empty($lock_story)) {
             $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
-            $supp_title = l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+            $supp_title = l(t($shortheadline_supp), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
           }
           else {
             $supp_img = l($supp_img_url, 'node/' . $s_value->nid, array('html' => TRUE));
-            $supp_title = l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $s_value->nid);
+            $supp_title = l(t($shortheadline_supp), 'node/' . $s_value->nid);
           }
         }
         elseif ($key > 0 && $key < 3) {
           if (!empty($lock_story)) {
-            $sup_sub_title .= '<p class="lock">' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
+            $sup_sub_title .= '<p class="lock">' . l(t($s_value->field_story_short_headline_value), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
           }
           else {
-            $sup_sub_title .= '<p>' . l(t(truncate_utf8($s_value->title, 40, TRUE, TRUE)), 'node/' . $s_value->nid) . '</p>';
+            $sup_sub_title .= '<p>' . l(t($s_value->field_story_short_headline_value), 'node/' . $s_value->nid) . '</p>';
           }
         }
       }      
@@ -196,4 +202,4 @@
     print '</div>';
   }
   ?>
-</div>
+</div>
