@@ -2257,7 +2257,7 @@ function itg_widget_block_view_alter(&$data, $block) {
   }
 
 
-  $is_programme = is_programme($story_primary_category_tid);
+  $is_programme = is_programme($story_primary_category_tid, $flag_occupation, $page_argument);
   if (isset($block->delta) && $block->delta == 'programmes-rhs_programmes') {
     $arraynid = array();
     $arraynid = explode(',', variable_get('ipl_rhs_nids'));
@@ -2752,13 +2752,14 @@ function get_rhs_block_display_condtion($delta = '') {
   $arg = arg();
   $item = menu_get_item();
   $page_argument = $item['page_arguments'];
-  $ipl_category = array();
+  $ipl_category = $flag_occupation = array();
   $we_may_suggest_display_nodes = variable_get('we_may_suggest_block_condition');
   $we_may_suggest_node_array = explode(",", $we_may_suggest_display_nodes);
   $watch_right_now_display_nodes = variable_get('watch_right_now_block_condition');
   $watch_right_now_node_array = explode(",", $watch_right_now_display_nodes);
   $top_takes_display_nodes = variable_get('top_takes_block_condition');
   $top_takes_node_array = explode(",", $top_takes_display_nodes);
+  $occupation = isset($page_argument[0]->field_celebrity_pro_occupation['und']) ? $page_argument[0]->field_celebrity_pro_occupation['und'] : array();
   $story_category = (!empty($page_argument[0]->field_story_category['und'])) ? $page_argument[0]->field_story_category['und'] : "";
   $story_primary_category = (!empty($page_argument[0]->field_primary_category['und'])) ? $page_argument[0]->field_primary_category['und'] : "";
   if (!empty($story_category)) {
@@ -2766,11 +2767,16 @@ function get_rhs_block_display_condtion($delta = '') {
       $ipl_category[] = $category['tid'];
     }
   }
+  if (!empty($occupation)) {
+	foreach ($occupation as $occupation_taxonomy) {
+	  $flag_occupation[] = strtolower($occupation_taxonomy['taxonomy_term']->name);
+	}
+  }
   $story_primary_category_tid = '';
   if (!empty($story_primary_category)) {
     $story_primary_category_tid = $story_primary_category[0]['value'];
   }
-  $is_programme = is_programme($story_primary_category_tid);
+  $is_programme = is_programme($story_primary_category_tid, $flag_occupation, $page_argument);
   $display_block = itg_block_display_condition();
   $user_link = (!empty($arg[1])) ? drupal_get_path_alias('node/' . $arg[1]) : "";
   if ($user_link == 'ipl-venue' || $user_link == 'ipl-schedule' || $user_link == 'ipl-teams' || $user_link == 'ipl-stadiums' || $arg[0] == 'photo-list' || $arg[0] == 'video-list' || in_array(variable_get('ipl_for_widget'), $ipl_category)) {
@@ -3359,7 +3365,11 @@ function autocomplete_widget_path_with_filter() {
  * @param type $tid
  * @return boolean
  */
-function is_programme($tid) {
+function is_programme($tid, $flag_occupation, $page_argument) {
+  $arg = arg();
+  if ($arg[0] == 'livetv' || $arg[0] == 'anchors-list' || (in_array('anchor', $flag_occupation)) || (isset($page_argument[0]->type) && $page_argument[0]->type == 'videogallery' && empty($_GET['sid']))) {
+	return TRUE;
+  }	
   if (empty($tid)) {
     return FALSE;
   }
