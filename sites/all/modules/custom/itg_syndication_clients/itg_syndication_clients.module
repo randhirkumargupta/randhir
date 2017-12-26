@@ -317,6 +317,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_rss_hltapps_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-feeds/scribd/live_issue'] = array(
+    'page callback' => 'itg_scribd_feed_live_issue',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_scribd_live_issue.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -706,7 +712,7 @@ function get_img_tag_detail($result) {
  */
 function get_video_embed_tags($body) {
   if (empty($body)) {
-    return emptygetVideoTag();
+    return itg_emptygetVideoTag();
   }
   $doc = new DOMDocument();
   $doc->loadHTML($body);
@@ -741,7 +747,7 @@ function get_video_embed_tags($body) {
     $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
   }
   else {
-    $videotag = emptygetVideoTag();
+    $videotag = itg_emptygetVideoTag();
   }
   return $videotag;
 }
@@ -750,7 +756,7 @@ function get_video_embed_tags($body) {
  * function for generate Empty video xml tag
  * @return array
  */
-function emptygetVideoTag() {
+function itg_emptygetVideoTag() {
   $videotag = "";
   $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
   return $videotag;
@@ -940,7 +946,7 @@ function related_content_node_type($node_list = "", $type) {
  * @return the details video xml tags
  */
 
-function video_detail_formats($nid, $source_type) {
+function itg_video_detail_formats($nid, $source_type) {
 
   $video_detail = array();
 
@@ -984,7 +990,7 @@ function video_detail_formats($nid, $source_type) {
     $video_path_mp4 = "https://www.dailymotion.com/video/" . $video_id . "";
     $video_format['videoparts_mp4'] = $video_path_mp4;
     $video_detail[$video_status]['bitate_url'] = $video_format;
-    $dailymotion_download = dailymotion_download_video_uri($video_id);
+    $dailymotion_download = itg_dailymotion_download_video_uri($video_id);
     $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
   }
   elseif ($source_type == 'migrated') {
@@ -1007,7 +1013,7 @@ function video_detail_formats($nid, $source_type) {
  * @param type $video_id
  * @return type
  */
-function dailymotion_download_video_uri($video_id) {
+function itg_dailymotion_download_video_uri($video_id) {
   $query = db_select('field_data_field_bitrate_video_id', 'bvi');
   $query->leftJoin('field_data_field_video_url', 'v_url', 'v_url.entity_id = bvi.entity_id');
   $query->fields('v_url', array('field_video_url_value'));
