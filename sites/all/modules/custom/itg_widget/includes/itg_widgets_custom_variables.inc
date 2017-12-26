@@ -408,12 +408,12 @@ function itg_widgets_custom_variables() {
       '#default_value' => variable_get('disable_livetv_embed'), // for default checked and false is not checked
   );
 
-$form['technology_review_tid'] = array(
-	'#type' => 'textfield',
-	'#title' => t('Technology Review TID'),
-	'#attributes' => array('placeholder' => t('Enter Technology Review Taxonomy ID')),
-	'#default_value' => variable_get('technology_review_tid'),
-);
-  
+  $form['technology_review_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Technology Review TID'),
+    '#attributes' => array('placeholder' => t('Enter Technology Review Taxonomy ID')),
+    '#default_value' => variable_get('technology_review_tid'),
+  );
+
   return system_settings_form($form);
 }

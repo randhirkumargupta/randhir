@@ -400,11 +400,11 @@ if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'].$widget_data['itg-block-7']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-7']['block_title'])) { ?>
-					 <?php if (isset($tech_review_url)) : ?>
-						<a href="<?php print $tech_review_url; ?>"><span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span></a>
-					 <?php else: ?>
-						<span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
-					 <?php endif; ?>
+                    <?php if (isset($tech_review_url)) : ?>
+                     <a href="<?php print $tech_review_url; ?>"><span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span></a>
+                    <?php else: ?>
+                     <span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
+                    <?php endif; ?>
                   <?php } ?>
                      <!-- for admin  -->
                   <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
