@@ -1883,13 +1883,13 @@ function homePageJsonWidget_1() {
     $data_newslist[$listcount]['n_rating'] = $comman;
     $data_newslist[$listcount]['n_magazine'] = $comman; 
     
-    $n_widget['type'] = "2";
-    $n_widget['type_label'] = "scorecard";
-    $n_widget['tilte'] = "Scorecard";
-    $n_widget['short_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v1.html?team=ind";
-    $n_widget['extended_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v3.html?team=ind";
-    $n_widget['action'] = "webview";
-    $n_widget['is_india_match'] = "1";
+    $n_widget[0]['type'] = "2";
+    $n_widget[0]['type_label'] = "scorecard";
+    $n_widget[0]['tilte'] = "Scorecard";
+    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v1.html?team=ind";
+    $n_widget[0]['extended_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v3.html?team=ind";
+    $n_widget[0]['action'] = "webview";
+    $n_widget[0]['is_india_match'] = "1";
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
 
@@ -1941,12 +1941,12 @@ function homePageJsonWidget_2() {
     $data_newslist[$listcount]['n_rating'] = $comman;
     $data_newslist[$listcount]['n_magazine'] = $comman; 
     
-    $n_widget['type'] = "4";
-    $n_widget['type_label'] = "live";
-    $n_widget['tilte'] = "Watch Live";
-    $n_widget['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
-    $n_widget['extended_url'] = "";
-    $n_widget['action'] = "webview";    
+    $n_widget[0]['type'] = "4";
+    $n_widget[0]['type_label'] = "live";
+    $n_widget[0]['tilte'] = "Watch Live";
+    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
+    $n_widget[0]['extended_url'] = "";
+    $n_widget[0]['action'] = "webview";    
     
     $data_newslist[$listcount]['n_widget'] = $n_widget;
 
