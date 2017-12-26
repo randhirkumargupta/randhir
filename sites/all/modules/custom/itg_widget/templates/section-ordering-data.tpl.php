@@ -1529,7 +1529,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             <?php if ($count == 0) : ?>
               <?php if (!empty($extra_large_image_url)) { ?>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
-                    <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
+                    <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_large_image_alt']; ?>" title="<?php echo $entity['field_story_large_image_title']; ?>" />
                 </a>
                 <?php
               }
