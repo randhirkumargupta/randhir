@@ -292,7 +292,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
 
   //for Magazine Story
   if (!empty($entity_object->type) && $entity_object->type == 'story' && !empty($entity_object->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'])) {
-    $section_link .= ' / ' . l('Magazine', 'calendar/0/0/magazine.html');
+    $section_link .= ' / ' . l('Magazine', 'magazine');
   }
 
   if (!empty($id)) {
