@@ -26,7 +26,7 @@ function itg_video_watch_later_refresh() {
     $watch_html.= '<a title="Watch later" href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" class="user-icon sso-click"><i class="fa fa-clock-o"></i> <span>Watch Later</span></a>';
   }
   
-    $default_html .= '<a class="def-cur-pointer video-login-akamai" title="Submit Video" href="javascript:"><i class="fa fa-share"></i><span>Submit Video</span></a>';
+    $default_html .= '<a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a>';
   
   $default_response = array('default_render' => $default_html, 'default_type' => 'normal', 'html_render' => $watch_html, 'type' => 'watch');
   print json_encode($default_response);

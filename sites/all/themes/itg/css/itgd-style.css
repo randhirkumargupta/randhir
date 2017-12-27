@@ -341,7 +341,7 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
     font-family: RobotoSlab-Regular;
     font-weight: 400
 }
-.section-movies #block-itg-ads-ads-super-banner-top-nav-728x90 {
+.page-taxonomy-term.section-movies #block-itg-ads-ads-super-banner-top-nav-728x90, .page-taxonomy-term.section-television #block-itg-ads-ads-super-banner-top-nav-728x90{
     margin-bottom: 10px
 }
 .section-movies .featured-news {
@@ -379,10 +379,10 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
     background: #1f1f1f;
     padding: 10px
 }
-.section-movies header {
+.page-taxonomy-term.section-movies header, .page-taxonomy-term.section-television header {
     margin-bottom: 0
 }
-.section-movies #block-itg-layout-manager-front-end-breadcrumb {
+.page-taxonomy-term.section-movies #block-itg-layout-manager-front-end-breadcrumb, .page-taxonomy-term.section-television #block-itg-layout-manager-front-end-breadcrumb {
     display: none
 }
 .section-movies .featured-news .featured-post h2 a {
@@ -518,7 +518,7 @@ ul.pron-cons-img {
     list-style: none!important
 }
 ul.pron-cons-img li img {
-    margin-top: -10px!important
+    margin-top: -37px!important
 }
 .story-section .story-right .stryimg img {
     width: 100%
@@ -537,6 +537,29 @@ ul.pron-cons-img li img {
     position: relative;
 }
 .story-right .description p:first-child:first-letter {
-    font-size: 46px;
+    font-size: 50px;
     font-weight: bold;
+    padding-right:5px;
+    float:left;
+    line-height:52px;
+}
+.droppable.hide-widget{
+	display:none;
+}
+.sport-home-layout-page .tech-block_8 .osscar-video ul .dont-miss-listing{
+    padding: 0 10px 25px 10px;
+}
+.story-section .story-right .description iframe.story_video{width:100%; height:325px}
+
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li{ border:0px;}
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li a{line-height: 20px;}
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu{ width:172px;}
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
+
+@media (max-width: 768px){
+.story-section .story-right .description iframe.story_video{height: 415px;}
+}
+@media (max-width: 767px){
+.story-section .story-right .description iframe.story_video{ height: 195px;}
+ul.pron-cons-img li img { margin-top: -12px!important;}
 }

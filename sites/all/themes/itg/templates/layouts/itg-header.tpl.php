@@ -82,20 +82,14 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                 </li>
 
                 <?php
-                $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
+
                 // Contion to check fucntion isset.
                 $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
                 $default_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default_for_all_48_32.jpeg');
-                ?>
-                <li class="nav-items ripple-effect hidden-desktop">
-                    <a href="<?php print $base_url ?>" class="second-level-child">`
-                        <span class='menu-icons hidden-desktop'><img class='itg-user-icon-home' src="<?php print $default_image ?>" alt='' /></span>
-<?php print t('Home'); ?>
-                    </a>
-                </li>
-
-                <?php
+              
                 $menu_manager = !empty($data['menu_manager']) ? $data['menu_manager'] : '';
+               
+               
                 // Contion to check fucntion isset.
                 $load_parent = (null != arg(2)) ? itg_common_taxonomy_get_parents(arg(2)) : array();
                 if (!empty($menu_manager)) {
@@ -103,6 +97,7 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                     if (function_exists('itg_menu_manager_get_menu')) {
                       // Logic to exclude inactive category.
                       $menu_link_data = itg_menu_manager_get_menu($menu_data, arg(), $load_parent);
+                     
                       $image_class = $menu_link_data['image_class'];
                       $link_text = $menu_link_data['link_text'];
                       $link_url = $menu_link_data['link_url'];
@@ -132,10 +127,10 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                           'class' => array("second-level-child", "second-level-child-$key", $active_cls, $sponsored_class, $parent_class, $url_type)
                         );
                       }
-
-                      $link_title_for_vertical = $link_text_icon . $menu_link_data['link_title_for_vertical'];
+     
+                     $link_title_for_vertical = $menu_link_data['link_text_icon'] . $menu_link_data['link_text_mobile'];
                       ?>
-                                      <li <?php echo $style_tag; ?> class="nav-items <?php
+                      <li <?php echo $style_tag; ?> class="nav-items <?php
                       if (!$data['detect']) {
                         print $image_class;
                       }
@@ -154,11 +149,12 @@ $uri = base64_encode($scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
                     }
                   endforeach;
                 }
+               // die();
               ?>
             </ul>         
 
 
-
+<?php //die(); ?>
             <div class="menu-login mhide">
 
                 <div class="social-nav mhide">

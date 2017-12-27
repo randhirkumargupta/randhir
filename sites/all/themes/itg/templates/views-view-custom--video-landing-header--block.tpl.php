@@ -8,7 +8,7 @@ $tid = $video_node->field_primary_category[LANGUAGE_NONE][0]['value'];
 $term = taxonomy_term_load($tid);
 $primary_category_name = itg_common_custompath_insert_val($term->name);
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link; //shorten_url($actual_link, 'goo.gl');
 $fb_title = addslashes($video_node->title);
 $share_desc = '';
 $image = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
@@ -261,12 +261,12 @@ $uri = base64_encode($actual_link);
                           <?php } if ($config_name == 'other') { ?> 
                             <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                           <?php } ?>
-                          <?php if ($user->uid > 0): ?>
+                          <!-- Comment by vishal <?php if ($user->uid > 0): ?>
                             <li><a class="def-cur-pointer video-login-akamai" title="Submit Video" href="javascript:"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                           <?php else: ?>
                             <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
-                          <?php endif; ?>
-                            
+                          <?php endif; ?>-->
+                          <li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>  
                       </ul>
                   </div>
                   <div class="clearfix"></div>
@@ -312,13 +312,13 @@ $uri = base64_encode($actual_link);
                               <?php } if ($config_name == 'other') { ?> 
                                 <li><a href="javascript:void(0)" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span>Comment</span></a></li>
                               <?php } ?>
-                              <?php if ($user->uid > 0): ?>
+                              <!-- Comment by Vishal<?php if ($user->uid > 0): ?>
                                 <li><a class="def-cur-pointer video-login-akamai" title="Submit Video" href="javascript:"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                               <?php else: ?>
                                 <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
-                              <?php endif; ?>
+                              <?php endif; ?>-->
                               <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=550&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i></span></a>  
-
+							  <li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                           </ul>
                       </div>
                       <?php print $description_slider; ?>

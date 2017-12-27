@@ -178,13 +178,14 @@ function itg_mobile_services_feed_generator_of_contents($node) {
  * @param string $file_path
  */
 function itg_mobile_services_mail($service_email_address, $file_path) {
+  $file_path_with_dir = "public:/".$file_path;
   $attachment = array(
-    'filepath' => $file_path,
+    'filepath' => $file_path_with_dir,
   );
   $params = array(
     'key' => 'itg_syndication',
     'to' => $service_email_address,
-    //'from' => 'noreply@indiatoday.com',
+    'from' => 'care@intoday.in',
     'subject' => 'VAS feed',
     'body' => 'Please check attached xml file.',
     'attachment' => $attachment,
@@ -192,7 +193,7 @@ function itg_mobile_services_mail($service_email_address, $file_path) {
       'MIME-Version: 1.0' . "\r\n",
       'Content-type: text/html; charset=iso-8859-1' . "\r\n",
       'To: ' . $service_email_address . "\r\n",
-    //'From: India Today <noreply@indiatoday.com>' . "\r\n",
+      'From: India Today <care@intoday.in>' . "\r\n",
     ),
   );
   $language = language_default();

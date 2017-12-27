@@ -146,12 +146,13 @@ define('INDEX_PAGE_URL', 'node/2');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 define('taxonomy_terms_per_page_admin' , 20);
 
-if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") { 
+/*if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") { 
     $site_protocol = 'https://';
 } else { 
     $site_protocol = 'http://';
-}
+}*/
 
+$site_protocol = 'https://';
 define('SITE_PROTOCOL' , $site_protocol);
 /**
  * Function for debugging arrays and objects.
@@ -357,4 +358,19 @@ function get_other_gallery_amp($primary_category, $nid, $bundle, $limit) {
  */
 function itg_watchdog($error_type , $message) {
     watchdog($error_type, "<pre>".print_r($message , 1)."</pre>");
+}
+
+/**
+ * Function for getting collection id array for gallery images.
+ * @param int $gallery_id
+ * @return type array
+ */
+function itg_commom_get_gallery_image_array_by_gid($gallery_id) {
+  $query = db_select('field_data_field_gallery_image', 'fdg');
+  $query->fields('fdg', array('field_gallery_image_value'));
+  $query->condition('fdg.entity_id', $gallery_id);
+  $query->condition('fdg.entity_type', 'node');
+  $query->condition('fdg.bundle', 'photogallery');
+  $result = $query->execute()->fetchAll();
+  return $result;
 }

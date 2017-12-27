@@ -21,7 +21,7 @@ if (!empty($content)):
   $scheme = SITE_PROTOCOL;
   $actual_link = $scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
   $uri = base64_encode($actual_link);
-  $short_url = shorten_url($actual_link, 'goo.gl');
+  $short_url = $actual_link;
   $fb_title = addslashes($node->title);
   $share_desc = '';
   $image = '';
@@ -212,8 +212,8 @@ if (!empty($content)):
                       print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                     }
                     else {
-                      $file = 'default_images/user-default.png';
-                      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                      $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+                      print '<img alt="" title="" src="'.$file.'">';
                     }
                   ?>
                 </div>
@@ -781,8 +781,9 @@ if (!empty($content)):
                 // Code for Tech Photo gallery
                 if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {				  
                   if (!empty($node->field_technology_photogallery['und'])) {
-                    $tech_gallery_images = $node->field_technology_photogallery['und'][0]['entity']->field_gallery_image;
-                    $tech_gallery_alias = drupal_get_path_alias('node/' . $node->field_technology_photogallery['und'][0]['entity']->nid);
+                    $gallery_nid = $node->field_technology_photogallery['und'][0]['entity']->nid;
+                    $tech_gallery_images = itg_commom_get_gallery_image_array_by_gid($gallery_nid);
+                    $tech_gallery_alias = drupal_get_path_alias('node/' . $gallery_nid);
                     $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias);
                     $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
                   }
@@ -980,15 +981,15 @@ if (!empty($content)):
         </div>
         <!-- End here -->
         <div class="section-left-bototm">
-          <a title = "Submit Your Story" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a>
+          <!-- Comment by vishal <a title = "Submit Your Story" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a>-->
           <div class="social-list">
             <ul>
-              <?php if ($user->uid > 0): ?>
+              <!--Comment by vishal<?php if ($user->uid > 0): ?>-->
                 <!--<li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer" href="<?php print $base_url; ?>/personalization/my-content/"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>-->
-                <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer story-login-follow" href="javascript:"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
+                <!--<li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer story-login-follow" href="javascript:"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
               <?php else: ?>
                 <li class="mhide"><a title = "Submit Your Story" class="def-cur-pointer colorbox-load" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $node->type; ?>"><i class="fa fa-share"></i><span><?php print t('Submit Your Story'); ?></span></a></li>
-              <?php endif; ?>
+              <?php endif; ?>-->
               <li class="mhide"><div id="fb-root"></div><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
               <li class="mhide"><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
               <li class="mhide"><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="#" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
