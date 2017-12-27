@@ -89,7 +89,6 @@ global $base_url;
 <div id="iframe-display" style="display: none"></div>
 
 <?php
-echo time();
 if(!empty($sso_msg)) {
   print '<div class = "activate-message">
          <div class = "message-body">
