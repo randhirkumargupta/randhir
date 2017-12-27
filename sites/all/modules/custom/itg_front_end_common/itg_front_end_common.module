@@ -252,7 +252,13 @@ function _vukkul_block_content() {
   if(!empty($comma_sep_tag)) {
     $tag = implode(',', $comma_sep_tag);
   }
-  $unique_id = $node->type . '_' . $node->nid;
+  
+  if($node->field_story_source_type[LANGUAGE_NONE][0]['value'] == 'migrated') {
+   $unique_id = $node->type . '_' . $node->field_story_source_id[LANGUAGE_NONE][0]['value'];
+  } else {
+   $unique_id = $node->type . '_' . $node->nid;
+  }
+  
   $author = base64_encode($reporter_node);
   drupal_add_js('https://vuukle.com/js/vuukle.js', array('type' => 'external'));
   $output = '<script type="text/javascript">
