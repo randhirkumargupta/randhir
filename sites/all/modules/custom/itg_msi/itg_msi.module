@@ -887,7 +887,7 @@ function itg_msi_theme($existing, $type, $theme, $path) {
  * @return array
  */
 function itg_msi_calendar_data() {
-    $cur_year = date('Y');
+    $cur_year = date('Y', strtotime('+15 days'));
     $years = $cur_year - 1975;
     for ($i = 0; $i <= $years; $i++) {
         $output_year[] = $cur_year--;
@@ -899,7 +899,7 @@ function itg_msi_calendar_data() {
  * Implement function for get last issue of year in calander
  */
 function itg_msi_last_issue_calendar($current_year) {
-  $present_date = date('Y-m-d', time());
+  $present_date = date($current_year . '-m-d', time());
   $query = db_select('node', 'n');
   $query->fields('ft', array('field_issue_title_value'));
   $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
@@ -958,13 +958,10 @@ function itg_msi_validate_date($date, $format = 'Y-m-d H:i:s')
  * @return string
  */
 function itg_msi_next_week_issue() {
-    $current_time = date('Y-m-d', time());
     $query = db_select('node', 'n');
-    //$query = db_select('field_data_field_issue_title', 'ft');
     $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
     $query->fields('ft', array('field_issue_title_value'));
-    $query->condition('ft.field_issue_title_value', $current_time, '>');
-    $query->orderBy('ft.field_issue_title_value', 'ASC');
+    $query->orderBy('ft.field_issue_title_value', 'DESC');
     $query->condition('n.type', 'issue', '=');
     $query->condition('n.status', 1, '=');
     $query->range(0, 1);
@@ -974,11 +971,29 @@ function itg_msi_next_week_issue() {
 }
 
 /**
+ * Implements function for itg_msi_issue_attribute_date
+ * @return string
+ */
+function itg_msi_issue_attribute_date() {
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
+    $query->fields('ft', array('field_issue_title_value'));
+    $query->orderBy('ft.field_issue_title_value', 'DESC');
+    $query->condition('n.type', 'issue', '=');
+    $query->condition('n.status', 1, '=');
+    $query->range(0, 1);
+    $result = strtotime($query->execute()->fetchField());
+    $result = $query->execute()->fetchField();
+    return $result;
+}
+
+/**
  * Implements function for get current date issue.
  * @return string
  */
 function itg_msi_get_current_time_issue() {
-    $current_time = date('Y-m-d', time());
+    $year_arr = !empty(arg(1)) ? explode('-',arg(1)) : '';
+    $current_time = !empty($year_arr[2]) ? $year_arr[2] : date('Y-m-d', time());
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
     $query->fields('ft', array('field_issue_title_value'));
@@ -1051,12 +1066,14 @@ function itg_msi_check_magazine_widget($issue_date) {
  */
 function itg_msi_get_current_issue() {
     $current_issue = itg_msi_get_current_time_issue();
-    $cur_year = date('Y');
+    $year_arr = !empty(arg(1)) ? explode('-',arg(1)) : '';
+    $cur_year = !empty($year_arr[2]) ? $year_arr[2] : date('Y');
+
     if (!empty($current_issue)) {
         $output = $current_issue;
     }
     else {
-        $current_time = date('Y-m-d', time());
+        $current_time = date($cur_year .'-m-d', time());
         //$query = db_select('field_data_field_issue_title', 'ft');
         $query = db_select('node', 'n');
         $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');

@@ -4,11 +4,18 @@
       <div class="magazin-top-left">
         <span class="web-excl"><?php print t('web exclusive'); ?></span>
         <?php
-        $issue_attribute_date = strip_tags($row['field_issue_title_1']);
+        $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
+        if (empty($year_arr[2])) {
+          $year = itg_msi_issue_attribute_date();
+          $issue_attribute_date = strip_tags(date('Y-m-d', strtotime($year)));
+        }
+        else {
+          $issue_attribute_date = strip_tags($row['field_issue_title_1']);
+        }
+
         print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);
         ?>
       </div>
-
 
       <div class="magazin-subscribe magazin-desktop">
         <span class="latest-issue"><?php print t('latest issue'); ?></span>
