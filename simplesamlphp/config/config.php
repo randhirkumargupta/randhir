@@ -336,7 +336,7 @@ $config = array(
      * Example:
      *  'session.cookie.domain' => '.example.org',
      */
-    'session.cookie.domain' => '.indiatoday.in',
+    'session.cookie.domain' => '.indiatodayonline.in',
 
     /*
      * Set the secure flag in the cookie.
