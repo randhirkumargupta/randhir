@@ -154,7 +154,7 @@ function itg_front_end_common_block_view($delta = '') {
       $data = get_personlization_front_block_data(FALSE);
       $block['content'] = theme("personlization_front_end", array("data" => $data));
       
-      /*drupal_add_js('jQuery(document).ready(function() {
+      drupal_add_js('jQuery(document).ready(function() {
     jQuery(".recommended-slider").slick({
       slidesToShow: 3,
       slidesToScroll: 1,
@@ -178,7 +178,7 @@ function itg_front_end_common_block_view($delta = '') {
         }       
       ]
     });
-  });', array("type" => "inline"));*/
+  });', array("type" => "inline"));
      
       break;
   }
@@ -352,7 +352,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           $description = 'summary_large_image';
         }
         if ($value == 'site') {
-          $description = '@itg';
+          $description = '@indiatoday';
         }
         if ($value == 'creator') {
           $description = '@indiatoday';
@@ -965,7 +965,8 @@ function _related_podcast_bottom_block_content() {
  */
 function _latest_from_pti() {
   global $base_url;
-  $related_content = itg_third_party_section_card_content('PTI', 5);
+  //$related_content = itg_third_party_section_card_content('PTI', 5);
+  $related_content = itg_section_card_content_by_tid(variable_get('pti_section_id', 1206640), 5);
   $related_dt = '';
   if (!empty($related_content)) {
     $related_dt = '<span class="widget-title">' . t('LATEST FROM PTI') . '</span>';
@@ -1257,4 +1258,24 @@ function getthirdPartyData($type) {
     }
     return $records;
   }
+}
+
+/**
+ * function for get content from section
+ * @param int $tid
+ * @param int $limit
+ * @return array $result
+ */
+function itg_section_card_content_by_tid($tid, $limit) {
+  $query = db_select('node', 'n');
+  $query->join('taxonomy_index', 'ti', 'n.nid = ti.nid');
+  $query->fields('n');
+  $query->condition('ti.tid', $tid, '=');
+  $query->condition('n.type', 'story');
+  $query->condition('n.status', 1);
+  $query->range(0, $limit);
+  $query->orderBy('n.created', 'DESC'); //ORDER BY created
+  $result = $query->execute();
+  //return $record = $result->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
 }
