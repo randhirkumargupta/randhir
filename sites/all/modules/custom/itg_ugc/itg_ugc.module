@@ -1089,7 +1089,7 @@ function itg_ugc_view_content($unique_id) {
                                                 width: "622",
                                                 height: "446",
                                                 aspectratio: "4:3",
-                                                "stretching": "exactfit",
+                                                "stretching": "uniform",
                                                 androidhls: "true",
                                                 fallback: "false",
 

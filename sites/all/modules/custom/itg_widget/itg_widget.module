@@ -1152,7 +1152,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
                             primary: "flash",
                             width: "100%",
                             aspectratio: "16:9",
-                            stretching: "exactfit",
+                            stretching: "uniform",
                             androidhls: "true",
                             fallback: "false",
                             hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},

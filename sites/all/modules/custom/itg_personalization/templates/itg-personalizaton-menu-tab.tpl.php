@@ -21,9 +21,9 @@
       }
       ?>  
     </li>
-    <li class="my-content">      
-      <?php echo l(t('My Content'), 'personalization/my-content'); ?>
-    </li>
+    <!--<li class="my-content">      
+      <?php //echo l(t('My Content'), 'personalization/my-content'); ?>
+    </li>-->
     <li class="my-preferences">      
       <?php echo l(t('My Preferences'), 'personalization/my-preferences'); ?>    
     </li>
