@@ -212,8 +212,8 @@ if (!empty($content)):
                       print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
                     }
                     else {
-                      $file = 'default_images/user-default.png';
-                      print theme('image_style', array('style_name' => 'user_picture', 'path' => $file));
+                      $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+                      print '<img alt="" title="" src="'.$file.'">';
                     }
                   ?>
                 </div>
