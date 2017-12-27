@@ -43,7 +43,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
           width: "100%",
           height: "100%",
           aspectratio: "4:3",
-          "stretching": "exactfit",
+          "stretching": "uniform",
           androidhls: "true",
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},

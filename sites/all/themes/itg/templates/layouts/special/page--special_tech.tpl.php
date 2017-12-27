@@ -6,9 +6,11 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-global $theme, $user;
+global $theme, $user, $base_url;
 $preview = NULL;
 $tax_name = '';
+$tech_review_tid = '';
+$tech_review_url = '';
 if (arg(2) == 'preview') {
   $preview = 'preview';  
 }
@@ -27,6 +29,8 @@ if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2
   $tax_id = arg(2);
   $tax_name_arr = get_term_name_from_tid($tax_id);
   $tax_name = strtolower($tax_name_arr->name);
+  $tech_review_tid = variable_get('technology_review_tid', 1207760);
+  $tech_review_url = $base_url . '/' . drupal_get_path_alias('taxonomy/term/' . $tech_review_tid);
 }
 ?>
 <!--------------------------------Code for Front tpl---------------------------------------->
@@ -396,7 +400,11 @@ if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2
               <div class="droppable <?php print $gray_bg_layout; ?>">
                <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'].$widget_data['itg-block-7']['widget_display_name']; ?>">
                  <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-7']['block_title'])) { ?>
+                    <?php if (isset($tech_review_url)) : ?>
+                     <a href="<?php print $tech_review_url; ?>"><span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span></a>
+                    <?php else: ?>
                      <span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
+                    <?php endif; ?>
                   <?php } ?>
                      <!-- for admin  -->
                   <?php if ($theme == 'itgadmin'  && !isset($preview)) { ?>
