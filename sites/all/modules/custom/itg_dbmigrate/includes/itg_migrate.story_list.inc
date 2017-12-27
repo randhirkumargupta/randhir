@@ -343,7 +343,8 @@ class ItgStoryListMigration extends XMLMigration {
     $this->addFieldMapping('field_story_mosimage', 'mosimage')->xpath('mosimage/image');
     $this->addFieldMapping('field_story_source_id', 'id')->xpath('id'); // source id
     $this->addFieldMapping('field_story_external_url', 'external_url')->xpath('external_url'); // source id
-
+    $this->addFieldMapping('field_story_type')
+            ->defaultValue('other_story');
 
     $this->addUnmigratedDestinations(array('promote', 'sticky', 'revision', 'log', 'language', 'tnid', 'translate', 'revision_uid', 'is_new', 'body:summary', 'field_common_by_line_reporter_id', 'field_common_related_content', 'field_emoji', 'field_emoji:format', 'field_emoji_position', 'field_facebook_animated_image:file_class',
       'field_facebook_animated_image:destination_dir',
@@ -505,7 +506,7 @@ class ItgStoryListMigration extends XMLMigration {
       'field_story_twitter_video:urlencode',
       'field_story_twitter_video:description',
       'field_story_twitter_video:display',
-      'field_story_type',
+      //'field_story_type',
       'field_story_ugc_source_id',
       'field_stroy_city',
       'field_stroy_city:source_type',
