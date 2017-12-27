@@ -410,40 +410,6 @@ function syndication_feature_field_default_field_instances() {
   );
 
   // Exported field_instance:
-  // 'field_collection_item-field_syndication_rule_details-field_syndication_sc_category'.
-  $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_sc_category'] = array(
-    'bundle' => 'field_syndication_rule_details',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 12,
-      ),
-    ),
-    'entity_type' => 'field_collection_item',
-    'exclude_cv' => 0,
-    'field_name' => 'field_syndication_sc_category',
-    'label' => 'Select category',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 4,
-    ),
-  );
-
-  // Exported field_instance:
   // 'field_collection_item-field_syndication_rule_details-field_syndication_select_section'.
   $field_instances['field_collection_item-field_syndication_rule_details-field_syndication_select_section'] = array(
     'bundle' => 'field_syndication_rule_details',
@@ -1219,7 +1185,6 @@ function syndication_feature_field_default_field_instances() {
   t('Select Feed type');
   t('Select Frequency');
   t('Select Section');
-  t('Select category');
   t('Set Date');
   t('Set Day');
   t('Set Time');
