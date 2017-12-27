@@ -414,6 +414,26 @@ function itg_widgets_custom_variables() {
     '#attributes' => array('placeholder' => t('Enter Technology Review Taxonomy ID')),
     '#default_value' => variable_get('technology_review_tid'),
   );
+  
+  $form['add_traffic_script'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Add Traffic Script'),
+    '#required' => FALSE,
+    '#default_value' => variable_get('add_traffic_script'), // for default checked and false is not checked
+  );
+
+  $form['traffic_script_js'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Traffic Script JS'),
+    '#default_value' => variable_get('traffic_script_js'),
+  );
+
+  $form['pti_section_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('PTI Section TID'),
+    '#attributes' => array('placeholder' => t('Enter PTI Section TID')),
+    '#default_value' => variable_get('pti_section_id'),
+  );
 
   return system_settings_form($form);
 }

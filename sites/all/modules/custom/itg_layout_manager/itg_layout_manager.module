@@ -664,7 +664,7 @@ function itg_layout_manager_preprocess_page(&$vars) {
     $vars['widget_data'] = $data;
     
     //js for personalization_slider
-    drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('scope' => 'footer', 'weight' => 5));
+    //drupal_add_js($base_url . '/sites/all/themes/itg/js/personlization_slider.js', array('scope' => 'footer', 'weight' => 5));
     drupal_add_js(drupal_get_path('module', 'itg_layout_manager') . '/js/itg_more_section_card.js', array('scope' => 'footer'));
   }
 

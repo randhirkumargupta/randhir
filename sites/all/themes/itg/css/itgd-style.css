@@ -562,4 +562,5 @@ ul.pron-cons-img li img {
 @media (max-width: 767px){
 .story-section .story-right .description iframe.story_video{ height: 195px;}
 ul.pron-cons-img li img { margin-top: -12px!important;}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id{margin-top: 20px;}
 }
