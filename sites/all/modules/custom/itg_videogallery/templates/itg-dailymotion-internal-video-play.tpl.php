@@ -42,7 +42,7 @@ var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
           width: "100%",
           height: "100%",
           aspectratio: "16:9",
-          "stretching": "exactfit",
+          "stretching": "uniform",
           androidhls: "true",
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
