@@ -1261,10 +1261,12 @@ function getthirdPartyData($type) {
 }
 
 /**
- * 
+ * function for get content from section
+ * @param int $tid
+ * @param int $limit
+ * @return array $result
  */
-
-function itg_section_card_content_by_tid($tid, $limit){
+function itg_section_card_content_by_tid($tid, $limit) {
   $query = db_select('node', 'n');
   $query->join('taxonomy_index', 'ti', 'n.nid = ti.nid');
   $query->fields('n');
