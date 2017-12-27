@@ -277,9 +277,9 @@ function itg_preprocess_html(&$vars) {
     }
   }
   if (!empty(FRONT_URL) && $base_url == FRONT_URL) {
-    $add_script = varibale_get('add_traffic_script');
+    $add_script = variable_get('add_traffic_script');
     if ($add_script) {
-      $script_js = varibale_get('traffic_script_js');
+      $script_js = variable_get('traffic_script_js');
       $script = array(
         '#tag' => 'script',
         '#attributes' => array('type' => 'text/javascript'),
