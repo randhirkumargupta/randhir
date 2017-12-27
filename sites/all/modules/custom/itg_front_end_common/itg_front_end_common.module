@@ -349,7 +349,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           $description = '@itg';
         }
         if ($value == 'creator') {
-          $description = '@ankushgautam76';
+          $description = '@indiatoday';
         }
         if ($value == 'title') {
           $description = mb_strimwidth(strip_tags($node->title), 0, 130, "..");
