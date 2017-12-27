@@ -105,10 +105,12 @@
 if (!empty($data)) {
   foreach ($data as $parent_key => $parent_value) {
     $sub_title = '';
+    $all_terms = array();
     $all_terms = taxonomy_get_parents_all($parent_key);
     $number_parent = count($all_terms);
     $section_key = $number_parent - 1;
-    if (($parent_key != '1206509' || $all_terms[$section_key]->tid != '1206499') && $row['field_story_source_type'] == 'migrated') {
+	
+    if($parent_key != '1206509' && $all_terms[$section_key]->tid != '1206499') {
       foreach ($parent_value as $key => $value) {
         // get status of lock story
         if (function_exists(itg_msi_get_lock_story_status)) {
@@ -139,7 +141,7 @@ if (!empty($data)) {
           }
         }
       }
-    }
+    
       if (!empty($lock_story)) {
         $lock_class = 'class="lock"';
       }
@@ -159,7 +161,7 @@ if (!empty($data)) {
       }
       print '<div ' . $class . '><div class="section-ordering">' . $output . '</div></div>';
     }
-  }
+  }}
   if (isset($supplement_value) && !empty($supplement_value)) {
     print '</div>';
   }
