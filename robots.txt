@@ -63,6 +63,3 @@ Disallow: /?q=user/password/
 Disallow: /?q=user/register/
 Disallow: /?q=user/login/
 Disallow: /?q=user/logout/
-Allow: /lifestyle/story/air-travel-skin-tanning-uva-uvb-rays-tanning-on-flight-lifest-349792-2016-11-02
-Allow: /technology/photos/photo/iphone-x-iphone-8-plus-have-smaller-battery-than-the-iphone-7-plus-842155-2017-09-28
-Allow: /programme/gadgets-gizmos/videos/xiaomi-redmi-note-3-launched-in-india-take-a-look-at-it-440930-2016-03-05
