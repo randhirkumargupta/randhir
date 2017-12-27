@@ -1048,8 +1048,11 @@ class ItgStoryListMigration extends XMLMigration {
         image_caption_insert_db($caption_text, $fid);
       }
     }
-    ordering_set_of_content($node, $row->xml->ordering);
-
+    if((int) $row->xml->video_update == 1){
+        ordering_set_of_content_update($node, (string) $row->xml->ordering);
+    }
+        ordering_set_of_content($node, (string) $row->xml->ordering);
+    
     
     if (isset($row->xml->bylines->byline) && !empty($row->xml->bylines->byline)) {
       foreach ($row->xml->bylines->byline as $final_byline) {
