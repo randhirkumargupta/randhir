@@ -53,7 +53,7 @@ global $base_url;
                <div class="cell">
                    <h4><?php print t('Education:') ;?></h4>
                    <?php print drupal_render($data['education_footer']); ?>
-                   <h4>Online Shopping:</h4>
+                   <!--<h4>Online Shopping:</h4>-->
                    <?php print drupal_render($data['shopping_footer']); ?>
                </div>
                <div class="cell">
