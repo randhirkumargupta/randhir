@@ -30,7 +30,7 @@ function itg_widget_section_wise_ordering_from_custom_table($info, $widget_style
           'edu-sample-paper' => 5,
           'edu-from-the-magazine' => 4,
           'edu-gov-jobs' => 4,
-          'buying-guid' => 6,
+          'buying-guid' => 7,
           'standpoint' => 5,
           'edu-notification' => 4,
           'tech-tips' => 4,
