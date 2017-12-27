@@ -105,7 +105,10 @@
 if (!empty($data)) {
   foreach ($data as $parent_key => $parent_value) {
     $sub_title = '';
-    if ($parent_key != '1206509') {
+    $all_terms = taxonomy_get_parents_all($parent_key);
+    $number_parent = count($all_terms);
+    $section_key = $number_parent - 1;
+    if (($parent_key != '1206509' || $all_terms[$section_key]->tid != '1206499') && $row['field_story_source_type'] == 'migrated') {
       foreach ($parent_value as $key => $value) {
         // get status of lock story
         if (function_exists(itg_msi_get_lock_story_status)) {
