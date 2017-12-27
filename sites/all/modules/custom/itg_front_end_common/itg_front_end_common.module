@@ -966,7 +966,7 @@ function _related_podcast_bottom_block_content() {
 function _latest_from_pti() {
   global $base_url;
   //$related_content = itg_third_party_section_card_content('PTI', 5);
-  $related_content = itg_section_card_content_by_tid(variable_get('pti_section_id', 1206640), 5);
+  $related_content = itg_section_card_content_by_tid(variable_get('pti_section_id', 1206640), 7);
   $related_dt = '';
   if (!empty($related_content)) {
     $related_dt = '<span class="widget-title">' . t('LATEST FROM PTI') . '</span>';
