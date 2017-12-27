@@ -225,9 +225,9 @@ $config = array(
         'authfacebook:Facebook',
         // Register your Facebook application on http://www.facebook.com/developers
         // App ID or API key (requests with App ID should be faster; https://github.com/facebook/php-sdk/issues/214)
-        'api_key' => '818014665028782',
+        'api_key' => '693568120778492',
         // App Secret
-        'secret' => 'ffd844186f58362fb53ccf4fbb46221d',
+        'secret' => 'f9b8c79ac94b9bc413528839ee86195e',
         // which additional data permissions to request from user
         // see http://developers.facebook.com/docs/authentication/permissions/ for the full list
         'req_perms' => 'email,user_birthday,public_profile',
@@ -252,8 +252,8 @@ $config = array(
     //  http://twitter.com/oauth_clients
     'twitter' => array(
         'authtwitter:Twitter',
-        'key' => 'TNq0xMrcHjANFPap1bMymAPai',
-        'secret' => 'o6tK6hxXAHkNXlgSEx6vxgT3pWstcKrgzIskf5SZhlIB7wAWFf',
+        'key' => 'T1FHZFT26l8qkwHjPpkpLxMSN',
+        'secret' => 'Tqdnh86gznHUd1kfrGfpYOYPzCcfurpvdNqpeKnohQidZxCkPV',
         // Forces the user to enter their credentials to ensure the correct users account is authorized.
         // Details: https://dev.twitter.com/docs/api/1/get/oauth/authenticate
         'force_login' => FALSE,
