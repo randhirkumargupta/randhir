@@ -165,51 +165,6 @@ function features_for_print_team_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-print_team_integration-field_add_member'.
-  $field_instances['node-print_team_integration-field_add_member'] = array(
-    'bundle' => 'print_team_integration',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'entityreference',
-        'settings' => array(
-          'link' => FALSE,
-        ),
-        'type' => 'entityreference_label',
-        'weight' => 18,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'exclude_cv' => 0,
-    'field_name' => 'field_add_member',
-    'label' => 'Add Member',
-    'required' => 0,
-    'settings' => array(
-      'exclude_cv' => FALSE,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'entityreference',
-      'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
-      ),
-      'type' => 'entityreference_autocomplete',
-      'weight' => 22,
-    ),
-  );
-
   // Exported field_instance:
   // 'node-print_team_integration-field_primary_category'.
   $field_instances['node-print_team_integration-field_primary_category'] = array(
@@ -774,7 +729,6 @@ function features_for_print_team_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Add Member');
   t('Comment');
   t('Idea Brief');
   t('Idea Status');
