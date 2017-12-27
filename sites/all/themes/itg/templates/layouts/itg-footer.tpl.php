@@ -9,9 +9,9 @@ global $base_url;
         
         <div class="footer-social-link">
             <ul>
-                <li><a rel="nofollow" href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                <li><a rel="nofollow" href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                <li><a rel="nofollow" href="#" title=""><i class="fa fa-google-plus"></i></a></li>
+                <li><a rel="nofollow" href="https://www.facebook.com/IndiaToday/" title=""><i class="fa fa-facebook"></i></a></li>
+                <li><a rel="nofollow" href="https://twitter.com/indiatoday" title=""><i class="fa fa-twitter"></i></a></li>
+                <li><a rel="nofollow" href="https://plus.google.com/+indiatoday" title=""><i class="fa fa-google-plus"></i></a></li>
                 <li><a href="<?php echo $base_url .'/rss' ?>" title=""><i class="fa fa-rss"></i></a></li>                
                 <li class="search-icon-parent">
                   <a href="javascript:void(0)" class="search-icon-default" title=""><i class="fa fa-search"></i></a>
