@@ -419,6 +419,7 @@ function itg_common_round_rating($average_rating) {
  *   total share count
  */
 function itg_total_share_count($actual_link, $type = NULL) {
+  return 0;
   if (!empty($actual_link)) {
     $fb_google_count = $fb_count = $google_count = $twitter_count = 0;
 
