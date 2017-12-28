@@ -407,8 +407,9 @@ return date(\'Y\');
   $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$img = \'<img src="https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/itg_image237x133.jpg">\';
-print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
+$img = file_create_url(file_default_scheme() . \'://../sites/all/themes/itg/images/itg_image237x133.jpg\');
+$img_src = \'<img src="\'.$img.\'">\';
+print l($img_src, \'node/\'.$data->nid, array(\'html\' => TRUE));
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
@@ -430,6 +431,7 @@ print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
   $handler->display->display_options['fields']['field_story_large_image']['table'] = 'field_data_field_story_large_image';
   $handler->display->display_options['fields']['field_story_large_image']['field'] = 'field_story_large_image';
   $handler->display->display_options['fields']['field_story_large_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_large_image']['empty'] = '[php]';
   $handler->display->display_options['fields']['field_story_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_large_image']['settings'] = array(
     'image_style' => 'magazine_top_three_story_237x133',
@@ -508,8 +510,9 @@ print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
   $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$img = \'<img src="https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/itg_image483x271.jpg">\';
-print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
+$img = file_create_url(file_default_scheme() . \'://../sites/all/themes/itg/images/itg_image483x271.jpg\');
+$img_src = \'<img src="\'.$img.\'">\';
+print l($img_src, \'node/\'.$data->nid, array(\'html\' => TRUE));
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
@@ -598,8 +601,9 @@ print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
   $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$img = \'<img src="https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/itg_image483x271.jpg">\';
-print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
+$img = file_create_url(file_default_scheme() . \'://../sites/all/themes/itg/images/itg_image483x271.jpg\');
+$img_src = \'<img src="\'.$img.\'">\';
+print l($img_src, \'node/\'.$data->nid, array(\'html\' => TRUE));
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
@@ -702,8 +706,9 @@ print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
   $handler->display->display_options['fields']['php']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$img = \'<img src="https://static-dev.indiatodayonline.in/sites/all/themes/itg/images/itg_image237x133.jpg">\';
-print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
+$img = file_create_url(file_default_scheme() . \'://../sites/all/themes/itg/images/itg_image237x133.jpg\');
+$img_src = \'<img src="\'.$img.\'">\';
+print l($img_src, \'node/\'.$data->nid, array(\'html\' => TRUE));
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
@@ -725,6 +730,7 @@ print l($img, \'node/\'.$row->nid, array(\'html\' => TRUE));
   $handler->display->display_options['fields']['field_story_large_image']['table'] = 'field_data_field_story_large_image';
   $handler->display->display_options['fields']['field_story_large_image']['field'] = 'field_story_large_image';
   $handler->display->display_options['fields']['field_story_large_image']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_story_large_image']['empty'] = '[php]';
   $handler->display->display_options['fields']['field_story_large_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_story_large_image']['settings'] = array(
     'image_style' => 'magazine_top_three_story_237x133',
