@@ -2,19 +2,31 @@
   <?php foreach ($rows as $index => $row): ?>
     <div class="magazin-top">
       <div class="magazin-top-left">
-        <span class="web-excl"><?php print t('web exclusive'); ?></span>
-        <?php
-        $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
-        if (empty($year_arr[2])) {
-          $year = itg_msi_issue_attribute_date();
-          $issue_attribute_date = strip_tags(date('Y-m-d', strtotime($year)));
-        }
-        else {
-          $issue_attribute_date = strip_tags($row['field_issue_title_1']);
-        }
-
-        print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);
-        ?>
+          <?php
+          $migrated = $row['field_story_source_type'];
+          $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
+          if (empty($year_arr[2])) {
+            $year = itg_msi_issue_attribute_date();
+            $issue_attribute_date = strip_tags(date('Y-m-d', strtotime($year)));
+          }
+          else {
+            $issue_attribute_date = strip_tags($row['field_issue_title_1']);
+          }
+          $view = views_get_view_result('magazine_top_story', 'block_2', $issue_attribute_date);
+          $count_issue = count($view);
+          ?>
+          <?php if ($row['field_story_source_type'] == 'migrated' && $count_issue > 0) { ?>
+            <span class="web-excl"><?php print t('Cover Story'); ?></span>
+            <?php
+            print_r(views_embed_view('magazine_top_story', 'block_2', $issue_attribute_date));
+          }
+          else {
+            ?>
+            <span class="web-excl"><?php print t('web exclusive'); ?></span>
+            <?php
+            print views_embed_view('magazine_top_story', 'block_1', $issue_attribute_date);
+          }
+          ?>
       </div>
 
       <div class="magazin-subscribe magazin-desktop">
@@ -38,7 +50,14 @@
     </div>
 
     <div class="magazin-bottom">
-      <?php print views_embed_view('magazine_top_story', 'block', $issue_attribute_date); ?>
+      <?php 
+        if ($row['field_story_source_type'] == 'migrated' && $count_issue > 0) {
+          print views_embed_view('magazine_top_story', 'block_3', $issue_attribute_date);
+        }
+        else {
+          print views_embed_view('magazine_top_story', 'block', $issue_attribute_date);
+        }
+        ?>
     </div>
   <?php endforeach; ?>
 </div>
@@ -83,7 +102,12 @@
   $style_name = 'section_ordering_widget';
   if (!empty($data)) {
     foreach ($data as $parent_key => $parent_value) {
-      $sub_title = '';
+    $sub_title = '';
+    $all_terms = array();
+    $all_terms = taxonomy_get_parents_all($parent_key);
+    $number_parent = count($all_terms);
+    $section_key = $number_parent - 1;
+    if($parent_key != '1206509' && $all_terms[$section_key]->tid != '1206499' && $migrated == 'migrated') {
       foreach ($parent_value as $key => $value) {
         // get status of lock story
         if (function_exists(itg_msi_get_lock_story_status)) {
@@ -135,6 +159,7 @@
       }
       print '<div ' . $class . '><div class="section-ordering">' . $output . '</div></div>';
     }
+   }
   }
   if (isset($supplement_value) && !empty($supplement_value)) {
     print '</div>';
