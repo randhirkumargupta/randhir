@@ -65,6 +65,24 @@ function ordering_set_of_content($node, $count) {
  
 
 /**
+ * Implement function for update
+ */
+function ordering_set_of_content_update($node, $count) {  
+  
+  $nid = $node->nid;
+  db_delete('itg_widget_order')
+                    ->condition('widget', 'section_wise_widget')
+                    ->condition('content_type', 'All')
+                    ->condition('nid', $nid)->execute();
+
+            db_delete('itg_widget_order_section')
+                    ->condition('content_type', $node->type)
+                    ->condition('widget', 'section_wise_widget')
+                    ->condition('nid', $nid)->execute();
+} 
+
+
+/**
  * insert value of flag count in db.
  * @param int $nid
  * @param string $type
@@ -391,4 +409,13 @@ function __insert_modified_date_flag_table($type, $time_stamp, $nid) {
     'timestamp' => $time_stamp,
     'nid' => $nid,    
   ))->execute();
+}
+
+
+function itg_dbmigrate_apachesolr_exclude($entity_id, $entity_type, $row, $env_id) {
+  // Never index media entities to core_1
+  if ($entity_type == 'story' && $entity_type == 'photogallery' && $entity_type == 'videogallery') {
+    return TRUE;
+  }
+  return FALSE;
 }

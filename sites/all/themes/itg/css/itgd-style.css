@@ -555,11 +555,12 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li a{line-height: 20px;}
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu{ width:172px;}
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
-
+body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
 @media (max-width: 768px){
 .story-section .story-right .description iframe.story_video{height: 415px;}
 }
 @media (max-width: 767px){
 .story-section .story-right .description iframe.story_video{ height: 195px;}
 ul.pron-cons-img li img { margin-top: -12px!important;}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id{margin-top: 20px;}
 }

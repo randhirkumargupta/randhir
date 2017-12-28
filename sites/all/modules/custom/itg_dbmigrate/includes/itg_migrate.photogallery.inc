@@ -612,6 +612,10 @@ class ItgPhotogalleryMigration extends XMLMigration {
 
     //code for order set
     //if (isset($row->xml->ordering) && !empty($row->xml->ordering)) {
+    
+    if((int) $row->xml->video_update == 1){
+        ordering_set_of_content_update($node, (string) $row->xml->ordering);
+    }
     ordering_set_of_content($node, (string) $row->xml->ordering);
     //}
     //code for like and dislike

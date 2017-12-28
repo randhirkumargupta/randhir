@@ -344,7 +344,7 @@ function itg_sso_logout_form_submit(&$form, &$form_state) {
  */
 function itguser_logout() {
   global $user;
-  setrawcookie("itg_forced_login", "null", -1,'/','.indiatodayonline.in');
+  setrawcookie("itg_forced_login", "null", -1,'/','.indiatoday.in');
   
   if ($user->uid > 0) {
     $domains = variable_get('signout-domain', '');

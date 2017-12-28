@@ -1,4 +1,4 @@
-<span class="widget-title">calendar</span>
+<span class="widget-title"><?php print t('MAGAZINE ISSUES'); ?></span>
 <?php
 
 /**
