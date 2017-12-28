@@ -327,7 +327,7 @@ if (!empty($content)):
             </div>
                 <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
               <div class="briefcase mhide">
-                <h4><?php print t('Highlights'); ?></h4>
+                <h4><?php print t('Briefcase'); ?></h4>
                 <ul>
                   <?php
                   foreach ($node->field_story_highlights['und'] as $high) {
@@ -954,7 +954,7 @@ if (!empty($content)):
         $dislike = "no-of-dislikes_" . $get_val;
         ?>
         <div class="agbutton story-like-dislike">
-          <div id="name-dv"><?php print t('Do You Like This Story'); ?>
+          <div id="name-dv"><?php print t('Do You Like This Story?'); ?>
             <span id="lky"><button title="Like" id="like_count" data-rel="<?php print $get_val; ?>" data-tag="sty" data-type="story"><i class="fa fa-thumbs-o-up"></i> <span id="<?php print $like; ?>"><?php print $like_count_like; ?></span> </button>
               <span id="sty-dv" style="display:none">Awesome! <br/> Now share the story <br/> <a title="share on facebook" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>')"><i class="fa fa-facebook"></i></a> 
                 <a title="share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a>
