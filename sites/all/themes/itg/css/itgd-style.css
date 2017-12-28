@@ -556,7 +556,7 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu{ width:172px;}
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
-.front .sidebar-second .watch-right-now-video ul li{padding:10px 0px 10px 0px;}
+.front .watch-right-now-video ul li{padding:10px 0px 10px 0px;}
 @media (max-width: 768px){
 .story-section .story-right .description iframe.story_video{height: 415px;}
 }
