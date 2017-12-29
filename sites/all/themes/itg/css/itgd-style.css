@@ -518,7 +518,7 @@ ul.pron-cons-img {
     list-style: none!important
 }
 ul.pron-cons-img li img {
-    margin-top: -37px!important
+    margin-top:0px;
 }
 .story-section .story-right .stryimg img {
     width: 100%
@@ -556,6 +556,7 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu{ width:172px;}
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
+.story-section .description h3{ text-transform: uppercase; font-weight:bold;}
 @media (max-width: 768px){
 .story-section .story-right .description iframe.story_video{height: 415px;}
 }

@@ -3976,7 +3976,11 @@
         margin-left: 0%;
         overflow: hidden;
         width: 100%;
+        font-size: 24px;
+        line-height: 28px;
     }
+    .tech-pros-cons-main h2 strong{display:none;}
+
     ul.pron-cons-img {
         width: 100%;
         margin-bottom: 10px;
@@ -3987,11 +3991,11 @@
         width: 100%;
     }
     ul.tech-pros {
-        margin-left: 6%;
+        margin-left:20px;
     }
     ul.tech-pros,
     ul.tech-cons {
-        width: 46%;
+        width: 100%;
     }
 }
 
