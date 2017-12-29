@@ -966,7 +966,8 @@ function itg_msi_next_week_issue() {
     $query->condition('n.status', 1, '=');
     $query->range(0, 1);
     $result = strtotime($query->execute()->fetchField());
-    $date_format_result = format_date($result, $type = 'itg', $format = '', $timezone = NULL, $langcode = NULL);
+    $cur_year = strtotime("+7 day", $result);
+    $date_format_result = format_date($cur_year, $type = 'itg', $format = '', $timezone = NULL, $langcode = NULL);
     return $date_format_result;
 }
 
@@ -1081,27 +1082,38 @@ function itg_msi_check_magazine_widget($issue_date) {
  * @return string
  */
 function itg_msi_get_current_issue() {
-    $current_issue = itg_msi_get_current_time_issue();
-    $year_arr = !empty(arg(1)) ? explode('-',arg(1)) : '';
-    $cur_year = !empty($year_arr[2]) ? $year_arr[2] : date('Y');
-
-    if (!empty($current_issue)) {
-        $output = $current_issue;
+  $current_issue = itg_msi_get_current_time_issue();
+  if (!empty($current_issue)) {
+    $output = $current_issue;
+  }
+  else {
+    $year_15_days_ago = date('Y', strtotime('+15 days'));
+    if ($year_15_days_ago > date('Y')) {
+      $last_issue_ass_story_date = itg_msi_issue_attribute_date();
+      $current_time = date('Y-m-d', strtotime($last_issue_ass_story_date));
+      $condition_type = '=';
     }
     else {
-        $current_time = date($cur_year .'-m-d', time());
-        //$query = db_select('field_data_field_issue_title', 'ft');
-        $query = db_select('node', 'n');
-        $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
-        $query->fields('ft', array('field_issue_title_value'));
-        $query->condition('ft.field_issue_title_value', $current_time, '<');
-        $query->orderBy('ft.field_issue_title_value', 'DESC');
-        $query->condition('n.type', 'issue', '=');
-        $query->condition('n.status', 1, '=');
-        $query->range(0, 1);
-        $output = $query->execute()->fetchField();
+      $cur_year = !empty(arg(1)) ? $arg(1) : '';
+      if (arg(0) != 'magazine' && !empty($cur_year)) {
+        $current_time = date('Y-m-d', strtotime(date($cur_year)));
+      }
+      else {
+        $current_time = date('Y-m-d', time());
+      }
+      $condition_type = '<';
     }
-    return $output;
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
+    $query->fields('ft', array('field_issue_title_value'));
+    $query->condition('ft.field_issue_title_value', $current_time, $condition_type);
+    $query->orderBy('ft.field_issue_title_value', 'DESC');
+    $query->condition('n.type', 'issue', '=');
+    $query->condition('n.status', 1, '=');
+    $query->range(0, 1);
+    $output = $query->execute()->fetchField();
+  }
+  return $output;
 }
 
 /**
