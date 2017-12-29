@@ -58,7 +58,7 @@ function itg_users_form_alter(&$form, &$form_state, $form_id) {
     }
     $form['pass']['#attributes']['autocomplete'] = 'off';
   }
-user_login
+
   if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
 
         
