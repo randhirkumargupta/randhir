@@ -107,7 +107,7 @@
     $all_terms = taxonomy_get_parents_all($parent_key);
     $number_parent = count($all_terms);
     $section_key = $number_parent - 1;
-    if(TRUE || $parent_key != '1206509' && $all_terms[$section_key]->tid != '1206499' && $migrated == 'migrated') {
+    if($parent_key != '1206509' && $all_terms[$section_key]->tid != '1206499' && $migrated == 'migrated') {
       foreach ($parent_value as $key => $value) {
         // get status of lock story
         if (function_exists(itg_msi_get_lock_story_status)) {
