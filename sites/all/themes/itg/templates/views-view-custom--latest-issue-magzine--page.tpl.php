@@ -101,13 +101,25 @@
   }
   $style_name = 'section_ordering_widget';
   if (!empty($data)) {
-    foreach ($data as $parent_key => $parent_value) {
-    $sub_title = '';
-    $all_terms = array();
-    $all_terms = taxonomy_get_parents_all($parent_key);
-    $number_parent = count($all_terms);
-    $section_key = $number_parent - 1;
-    if($parent_key != '1206509' && $all_terms[$section_key]->tid != '1206499' && $migrated == 'migrated') {
+	//~ var_dump(count($supplement_value));die;  
+	foreach ($data as $parent_key1 => $parent_value1) {
+		$sub_title = '';
+		$all_terms = array();
+		$all_terms = taxonomy_get_parents_all($parent_key1);
+		$number_parent = count($all_terms);
+		$section_key = $number_parent - 1;
+		if($parent_key1 != '1206509' && $all_terms[$section_key]->tid != '1206499' && $migrated == 'migrated') {
+			$section_data_final[$parent_key1] = $parent_value1;
+		}
+	}
+    
+	
+	$section_data_first = $section_data_final;
+	if(count($supplement_value) > 0){
+		$section_data_first = array_slice($section_data_final, 0, count($supplement_value));
+	}
+	//~ echo '<pre>';print_r($data);die;  
+    foreach ($section_data_first as $parent_key => $parent_value) {
       foreach ($parent_value as $key => $value) {
         // get status of lock story
         if (function_exists(itg_msi_get_lock_story_status)) {
@@ -158,7 +170,6 @@
         $output .= $sub_title;
       }
       print '<div ' . $class . '><div class="section-ordering">' . $output . '</div></div>';
-    }
    }
   }
   if (isset($supplement_value) && !empty($supplement_value)) {

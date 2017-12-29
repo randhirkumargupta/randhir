@@ -181,7 +181,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['filters']['field_issue_title_value']['id'] = 'field_issue_title_value';
   $handler->display->display_options['filters']['field_issue_title_value']['table'] = 'field_data_field_issue_title';
   $handler->display->display_options['filters']['field_issue_title_value']['field'] = 'field_issue_title_value';
-  $handler->display->display_options['filters']['field_issue_title_value']['default_date'] = 'now';
+  $handler->display->display_options['filters']['field_issue_title_value']['default_date'] = 'now +7 day';
   $handler->display->display_options['filters']['field_issue_title_value']['default_to_date'] = 'Sunday this week';
   $handler->display->display_options['filters']['field_issue_title_value']['year_range'] = '-3:+0';
   /* Filter criterion: Content: Title (field_issue_title) */
@@ -190,7 +190,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['filters']['field_issue_title_value_1']['field'] = 'field_issue_title_value';
   $handler->display->display_options['filters']['field_issue_title_value_1']['operator'] = '<=';
   $handler->display->display_options['filters']['field_issue_title_value_1']['granularity'] = 'year';
-  $handler->display->display_options['filters']['field_issue_title_value_1']['default_date'] = 'now';
+  $handler->display->display_options['filters']['field_issue_title_value_1']['default_date'] = 'now +7 day';
   $handler->display->display_options['path'] = 'magazine';
 
   /* Display: Right side issue block */
