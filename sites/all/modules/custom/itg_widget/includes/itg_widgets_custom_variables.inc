@@ -434,6 +434,13 @@ function itg_widgets_custom_variables() {
     '#attributes' => array('placeholder' => t('Enter PTI Section TID')),
     '#default_value' => variable_get('pti_section_id'),
   );
+  
+  $form['sso_cookie_domain'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Enter sso cookie domain'),
+		'#attributes' => array('placeholder' => t('Ex: .indiatoday.in')),
+		'#default_value' => variable_get('sso_cookie_domain'),
+	);
 
   return system_settings_form($form);
 }
