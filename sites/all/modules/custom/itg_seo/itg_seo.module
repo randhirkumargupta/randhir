@@ -305,7 +305,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     }
     else {
       foreach ($section_tids as $chunks) {
-        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/'
+        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/&nbsp;'
             . l('<span itemprop="title">&nbsp;' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       }
     }
