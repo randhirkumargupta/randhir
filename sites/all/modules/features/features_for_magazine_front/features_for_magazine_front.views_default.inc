@@ -181,7 +181,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['filters']['field_issue_title_value']['id'] = 'field_issue_title_value';
   $handler->display->display_options['filters']['field_issue_title_value']['table'] = 'field_data_field_issue_title';
   $handler->display->display_options['filters']['field_issue_title_value']['field'] = 'field_issue_title_value';
-  $handler->display->display_options['filters']['field_issue_title_value']['default_date'] = 'now';
+  $handler->display->display_options['filters']['field_issue_title_value']['default_date'] = 'now +7 day';
   $handler->display->display_options['filters']['field_issue_title_value']['default_to_date'] = 'Sunday this week';
   $handler->display->display_options['filters']['field_issue_title_value']['year_range'] = '-3:+0';
   /* Filter criterion: Content: Title (field_issue_title) */
@@ -190,7 +190,7 @@ function features_for_magazine_front_views_default_views() {
   $handler->display->display_options['filters']['field_issue_title_value_1']['field'] = 'field_issue_title_value';
   $handler->display->display_options['filters']['field_issue_title_value_1']['operator'] = '<=';
   $handler->display->display_options['filters']['field_issue_title_value_1']['granularity'] = 'year';
-  $handler->display->display_options['filters']['field_issue_title_value_1']['default_date'] = 'now';
+  $handler->display->display_options['filters']['field_issue_title_value_1']['default_date'] = 'now +7 day';
   $handler->display->display_options['path'] = 'magazine';
 
   /* Display: Right side issue block */
@@ -266,7 +266,7 @@ function features_for_magazine_front_views_default_views() {
 $val = strtotime(arg(1));
 return date(\'Y\', $val);
 }elseif(arg(0) == \'magazine\' && empty(arg(1))){
-return date(\'Y\');
+return date(\'Y\', strtotime(\'+7 days\'));
 }
 ';
   $handler->display->display_options['arguments']['field_issue_title_value']['summary']['number_of_records'] = '0';
@@ -296,7 +296,7 @@ return date(\'Y\');
   $handler->display->display_options['filters']['field_issue_title_value']['table'] = 'field_data_field_issue_title';
   $handler->display->display_options['filters']['field_issue_title_value']['field'] = 'field_issue_title_value';
   $handler->display->display_options['filters']['field_issue_title_value']['operator'] = '<';
-  $handler->display->display_options['filters']['field_issue_title_value']['default_date'] = 'now';
+  $handler->display->display_options['filters']['field_issue_title_value']['default_date'] = 'now +7 day';
   $export['latest_issue_magzine'] = $view;
 
   $view = new view();
