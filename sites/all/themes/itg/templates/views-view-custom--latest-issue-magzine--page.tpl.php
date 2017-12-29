@@ -131,7 +131,7 @@
             $title = l(t($shortheadline_cat), 'node/' . $value->nid);
           }
         }
-        elseif ($key > 0 && $key < 3) {
+        elseif ($key > 0) {
           if (!empty($lock_story)) {
             $sub_title .= '<p class="lock">' . l(t($value->field_story_short_headline_value), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
           }
@@ -195,7 +195,7 @@
             $supp_title = l(t($shortheadline_supp), 'node/' . $s_value->nid);
           }
         }
-        elseif ($key > 0 && $key < 3) {
+        elseif ($key > 0) {
           if (!empty($lock_story)) {
             $sup_sub_title .= '<p class="lock">' . l(t($s_value->field_story_short_headline_value), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
           }
