@@ -13445,8 +13445,7 @@ span.story-sponsor-powered-text::last-word {
   font-weight: bold;
   padding: 0 0 0 10px;
   float: left;
-  margin-left: 42%;
-  width: 58%;
+  width: 100%;
   margin-bottom: 10px;
   background: #000;
   border-bottom: 2px solid #cccc; }
@@ -13469,14 +13468,15 @@ ul.tech-pron-cons-img {
 
 ul.tech-pros {
   list-style: disc;
-  width: 27%;
+  width: 25%;
   float: left;
   margin-left: 4%; }
 
 ul.tech-cons {
   list-style: disc;
-  width: 27%;
-  float: left; }
+  width: 25%;
+  float: left;
+  margin-left: 4%; }
 
 ul.tech-cons li,
 ul.tech-pros li {
