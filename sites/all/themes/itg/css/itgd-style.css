@@ -557,6 +557,9 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
 .story-section .description h3{ text-transform: uppercase; font-weight:bold;}
+.section-education-today .itg-layout-two-blocks .itg-widget-parent .droppable {min-height: 235px;}
+.section-education-today .itg-layout-two-blocks .itg-widget-child .droppable {min-height: 315px;}
+.section-education-today .widget-title{ padding:5px 10px 0}
 @media (max-width: 768px){
 .story-section .story-right .description iframe.story_video{height: 415px;}
 }
