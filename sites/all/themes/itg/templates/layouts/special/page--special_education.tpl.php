@@ -248,7 +248,7 @@ if ($theme != 'itgadmin') {
                               </div>               
                           </div>
                       </div>
-                      <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
+                      <div class="col-md-4 col-sm-12 col-xs-12 mt-50 itg-layout-two-blocks">
                           <div class="row">
                               <div class="col-md-12 col-sm-6 col-xs-12">
                                   <div class="widget-help-text"><?php print t('Non Draggable'); ?> ( <strong><?php print t('Register for more updates'); ?></strong> )</div>

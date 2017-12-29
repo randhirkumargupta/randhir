@@ -414,8 +414,8 @@ function __insert_modified_date_flag_table($type, $time_stamp, $nid) {
 
 function itg_dbmigrate_apachesolr_exclude($entity_id, $entity_type, $row, $env_id) {
   // Never index media entities to core_1
-  if ($entity_type == 'story' && $entity_type == 'photogallery' && $entity_type == 'videogallery') {
+  /*if ($entity_type == 'story' && $entity_type == 'photogallery' && $entity_type == 'videogallery') {
     return TRUE;
-  }
+  }*/
   return FALSE;
 }
