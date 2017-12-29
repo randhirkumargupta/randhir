@@ -164,7 +164,7 @@ function getVideoTag($node) {
        $img_url = file_create_url($node->field_story_medium_image['und'][0]['uri']);
      }
      $videotag = video_detail_formats($node->nid,$source_type);
-     print_r($videotag);
+     
   }elseif(strpos($video_path, '/embeded-video/')){ //Daily motion video
     $dailymotion_vid = end(explode("/",$video_path));
     //$daily_motion_video_details = itg_videogallery_get_all_video_info_by_video_id($dailymotion_vid);
@@ -188,31 +188,10 @@ function getVideoTag($node) {
       $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
     }
     $videotag = $video_detail;
-    //print_r($videotag);
+   
   }
 
-//  if ($node->attributes->length > 0) {
-//    //It has Youtube video
-//     $src =  $node->attributes->getNamedItem('src')->nodeValue;
-//    //$src = '';
-//  }elseif ($add_video != '') {
-//    //It has uploaded video
-//    if (strpos($add_video, "dailymotion_video_dir") > 0) {
-//      // It has Daily Motion Video
-//      $video_name = substr(strstr($add_video, 'dir/'), 4);
-//      $video_node = dailymotion_video_name_to_nid($video_name);
-//      $video_field = node_load($video_node);
-//      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
-//      $src = $add_video;
-//    }
-//    else {
-//      //It is Migrated video
-//      $video_nid = migrated_video_to_nid($add_video);
-//      $video_field = node_load($video_nid);
-//      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
-//      $src = $add_video;
-//    }
-//  }
+
   if (!empty($videotag['migrated'])) { 
     $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
   }elseif (!empty($videotag['dailymotion'])) {
