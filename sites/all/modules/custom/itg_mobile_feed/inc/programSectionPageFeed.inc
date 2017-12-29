@@ -51,13 +51,13 @@ function programSectionPageFeed() {
         $child_term_url = nodeCategoryFrontUrl($value, 'term');
 
         $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
-        $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
+        $term_name = html_entity_decode($term_name);
         $term_file_name = $term_name . ".xml";
         // section xml feed file name
         $listcount++;
         $cat_icon_img = sectionCategoryIconImg($value);
         // child xml node
-        $child_node .= "<item><title><![CDATA[" . $term_name . "]]></title><url>" . $term_file_name . "</url><weburl><![CDATA[" . $base_url . "/" . $child_term_url . "]]></weburl><sectionimage>" . $cat_icon_img . "</sectionimage></item>";
+        $child_node .= "<item><title><![CDATA[" . $term_name . "]]></title><url><![CDATA[" . $term_file_name . "]]></url><weburl><![CDATA[" . $base_url . "/" . $child_term_url . "]]></weburl><sectionimage>" . $cat_icon_img . "</sectionimage></item>";
       }
     }
     //write xml node of storysectionlisting

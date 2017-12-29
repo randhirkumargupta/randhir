@@ -164,7 +164,6 @@ function getVideoTag($node) {
       $img_url = file_create_url($node->field_story_medium_image['und'][0]['uri']);
     }
     $videotag = video_detail_formats($node->nid, $source_type);
-    print_r($videotag);
     // Daily motion video
   }
   elseif (strpos($video_path, '/embeded-video/')) {
@@ -190,7 +189,6 @@ function getVideoTag($node) {
       $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
     }
     $videotag = $video_detail;
-    //print_r($videotag);
   }
 
   
