@@ -117,8 +117,9 @@
 	$section_data_first = $section_data_final;
 	if(count($supplement_value) > 0){
 		$section_data_first = array_slice($section_data_final, 0, count($supplement_value));
+		$section_data_second = array_slice($section_data_final, count($supplement_value));
 	}
-	//~ echo '<pre>';print_r($data);die;  
+	
     foreach ($section_data_first as $parent_key => $parent_value) {
       foreach ($parent_value as $key => $value) {
         // get status of lock story
@@ -231,5 +232,61 @@
     }
     print '</div>';
   }
+  ?>
+  <?php
+  foreach ($section_data_second as $parent_key => $parent_value) {
+	  print '<div class="col-md-6 col-sm-6 col-xs-12 mt-50">';
+      foreach ($parent_value as $key => $value) {
+        // get status of lock story
+        if (function_exists(itg_msi_get_lock_story_status)) {
+          $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
+        }
+        if ($key == 0) {
+          if (!empty($value->uri)) {
+            $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
+          }
+          else {
+            $img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />";
+          }
+          // Get the short headline for a node data
+          $shortheadline_cat = $value->field_story_short_headline_value;
+          if (!empty($lock_story)) {
+            $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
+            $title = l(t($shortheadline_cat), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+          }
+          else {
+            $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
+            $title = l(t($shortheadline_cat), 'node/' . $value->nid);
+          }
+        }
+        elseif ($key > 0) {
+          if (!empty($lock_story)) {
+            $sub_title .= '<p class="lock">' . l(t($value->field_story_short_headline_value), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage') . '</p>';
+          }
+          else {
+            $sub_title .= '<p>' . l(t($value->field_story_short_headline_value), 'node/' . $value->nid) . '</p>';
+          }
+        }
+      }
+      if (!empty($lock_story)) {
+        $lock_class = 'class="lock"';
+      }
+
+      $output = '<span class="widget-title">' . t($value->name) . '</span>';
+      $output .= $img;
+
+      if (!empty($lock_story)) {
+        $output .= '<h3 class="lock" title="' . strip_tags($title) . '">' . $title . '</h3>';
+      }
+      else {
+        $output .= '<h3 title="' . strip_tags($title) . '">' . $title . '</h3>';
+      }
+
+      if (!empty($sub_title)) {
+        $output .= $sub_title;
+      }
+      print '<div ' . $class . '><div class="section-ordering">' . $output . '</div></div>';
+      print '</div>';
+   }
   ?>
 </div>
