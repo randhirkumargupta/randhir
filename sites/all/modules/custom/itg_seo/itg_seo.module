@@ -300,12 +300,12 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_tids = array_reverse($section_tids);
     
     if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]) && count($section_tids) == 1) {
-      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
+      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> / '
           .'<h1>' . itg_seo_get_term_name_by_tid($arg[2]) . '</h1></div>';
     }
     else {
       foreach ($section_tids as $chunks) {
-        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
+        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> / '
             . l('<span itemprop="title">' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       }
     }
