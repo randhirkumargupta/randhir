@@ -301,7 +301,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     
     if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]) && count($section_tids) == 1) {
       $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/'
-          .'&nbsp;<h1>' . itg_seo_get_term_name_by_tid($arg[2]) . '</h1></div>';
+          .'&nbsp;<span itemprop="title">' . itg_seo_get_term_name_by_tid($arg[2]) . '</span></div>';
     }
     else {
       foreach ($section_tids as $chunks) {
