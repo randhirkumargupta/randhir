@@ -352,7 +352,7 @@ function itg_front_search_views_pre_render(&$view) {
       $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </div>';
     }
 
-    $bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Video' => 'Videos', 'photogallery' => 'Photos', 'Magazine' => 'Magazine', 'Blog' => 'Blog', 'Podcast' => 'Podcast');
+    $bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Video' => 'Videos', 'photogallery' => 'Photos', 'Magazine' => 'Magazine');
     $search_url = 'topic';
     $all_bundle = $arg[1];
     foreach ($bundle_name as $key => $val) {

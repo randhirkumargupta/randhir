@@ -400,7 +400,8 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           '#attributes' => array(
             'property' => 'og:image',
             'content' => $fb_image,
-          )
+          ),
+          '#weight' => -10,
         );
       
       $fb_og_title = array(
