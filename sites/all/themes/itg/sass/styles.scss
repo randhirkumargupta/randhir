@@ -607,7 +607,7 @@ header {
             cursor: pointer;
             i {
                 font-size: 7px;
-                color: #000;
+                color: #e0e0e0;
             }
         }
         ul#newlist {
@@ -2069,7 +2069,7 @@ footer {
         overflow-x: auto;
         .views-exposed-widget {
             float: none;
-            display: inline-block;
+            display: none;
             vertical-align: top;
         }
     }
@@ -2448,7 +2448,7 @@ footer {
                 }
             }
             &.social-share {
-                display: none;
+                display: initial;
             }
         }
     }
@@ -14020,6 +14020,7 @@ span.story-sponsor-powered-text::last-word {
         color: #086DC7;
         +a {
             color: #086DC7;
+            display: initial;
         }
     }
 }

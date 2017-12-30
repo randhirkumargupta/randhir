@@ -3270,6 +3270,7 @@
             overflow-x: inherit;
             .views-exposed-widget {
                 float: left;
+                display: none;
                 &.views-submit-button {
                     width: 165px;
                 }
