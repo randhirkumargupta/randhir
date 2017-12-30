@@ -1104,6 +1104,17 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
         }
         //drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
         echo "<script src='https://content.jwplatform.com/libraries/V30NJ3Gt.js'></script>";
+        ?>
+        <script type="text/javascript">
+          function defer(method) {
+            if (window.jwplayer) {
+              method();
+            } else {
+              setTimeout(function() { defer(method) }, 50);
+            }
+          }
+        </script>
+        <?php
         $hide_player = "";
         $description_slider = "";
         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
@@ -1140,7 +1151,8 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
                 <div class="iframe-video-embed">
                     <div id="videoplayer_<?php echo $keys; ?>"></div> 
                     <script type="text/javascript">
-                        jwplayer('videoplayer_<?php echo $keys; ?>').setup({
+                        function jwplayer_callback_<?php echo $keys; ?>(){
+                          jwplayer('videoplayer_<?php echo $keys; ?>').setup({
                             playlist: [{
                                     title: "<?php print $row['title']; ?>",
                                     image: "<?php echo $image_url; ?>",
@@ -1166,6 +1178,8 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
                                 idstring: "<?php print $row['title']; ?>",
                             }
                         });
+                      }
+                      defer(jwplayer_callback_<?php echo $keys; ?>);
                     </script>
                 </div>
             </div>
@@ -1174,6 +1188,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
         }
         $description_slider .= '</ul></div>';
         $newimageds .= '</ul></div></div></div>';
+        
     }
 
     print '</div>';
