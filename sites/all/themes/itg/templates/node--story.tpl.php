@@ -327,7 +327,7 @@ if (!empty($content)):
             </div>
                 <?php if (!empty($node->field_story_highlights[LANGUAGE_NONE][0]['value'])) { ?>
               <div class="briefcase mhide">
-                <h4><?php print t('Briefcase'); ?></h4>
+                <h4><?php print t('HIGHLIGHTS'); ?></h4>
                 <ul>
                   <?php
                   foreach ($node->field_story_highlights['und'] as $high) {
