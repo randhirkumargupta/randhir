@@ -1181,9 +1181,6 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
          <script type="text/javascript">
 			defer(jwplayer_callback);
 			function defer(method) {
-				console.log(window.jwplayer);
-				console.log(jwplayer);
-				
 				if (window.jwplayer) {
 					method();
 				} else {
