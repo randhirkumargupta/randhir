@@ -641,7 +641,7 @@ header {
       cursor: pointer; }
       #block-itg-layout-manager-header-block .navigation .all-menu i {
         font-size: 7px;
-        color: #000; }
+        color: #e0e0e0; }
     #block-itg-layout-manager-header-block .navigation ul#newlist {
       padding-left: 0;
       padding-right: 0;
@@ -1752,7 +1752,7 @@ footer {
     clear: both; }
   .view-front-end-global-search .searh-all-filters .views-exposed-widget {
     float: none;
-    display: inline-block;
+    display: none;
     vertical-align: top; }
 .view-front-end-global-search .view-filters {
   font-family: "Roboto-Regular";
@@ -2170,7 +2170,7 @@ footer {
           .story-section .comment-mobile ul li a.unflag-action span {
             font-family: "Roboto-Regular"; }
     .story-section .comment-mobile ul.social-share {
-      display: none; }
+      display: initial; }
 .story-section .story-left-section {
   zoom: 1;
   margin-top: 20px; }
@@ -13142,7 +13142,8 @@ span.story-sponsor-powered-text::last-word {
 .pipeline-added .add-on-story-pipline {
   color: #086DC7; }
   .pipeline-added .add-on-story-pipline + a {
-    color: #086DC7; }
+    color: #086DC7;
+    display: initial; }
 
 /*css end pipeline-added*/
 /*css start add by arun */
@@ -13445,8 +13446,7 @@ span.story-sponsor-powered-text::last-word {
   font-weight: bold;
   padding: 0 0 0 10px;
   float: left;
-  margin-left: 42%;
-  width: 58%;
+  width: 100%;
   margin-bottom: 10px;
   background: #000;
   border-bottom: 2px solid #cccc; }
@@ -13469,14 +13469,15 @@ ul.tech-pron-cons-img {
 
 ul.tech-pros {
   list-style: disc;
-  width: 27%;
+  width: 25%;
   float: left;
   margin-left: 4%; }
 
 ul.tech-cons {
   list-style: disc;
-  width: 27%;
-  float: left; }
+  width: 25%;
+  float: left;
+  margin-left: 4%; }
 
 ul.tech-cons li,
 ul.tech-pros li {

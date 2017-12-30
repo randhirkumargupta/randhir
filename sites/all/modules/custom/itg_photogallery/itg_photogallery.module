@@ -947,4 +947,16 @@ function itg_photogallery_views_query_alter(&$view, &$query) {
       }
   }
 }
- 
+
+/**
+ * Implements hook_views_pre_view().
+ * {@inheritdoc}
+ */
+function itg_photogallery_views_pre_view(&$view, &$display_id, &$args) {
+  if ($view->name == 'photo_list_of_category' && $view->current_display == 'block_2') {
+    $node = menu_get_object();
+    if(isset($node->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])){
+      $view->args[0] = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+    }
+  }
+} 

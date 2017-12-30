@@ -518,7 +518,7 @@ ul.pron-cons-img {
     list-style: none!important
 }
 ul.pron-cons-img li img {
-    margin-top: -37px!important
+    margin-top:0px;
 }
 .story-section .story-right .stryimg img {
     width: 100%
@@ -556,6 +556,8 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu{ width:172px;}
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
+.story-section .description h3{ text-transform: uppercase; font-weight:bold;}
+.front .watch-right-now-video ul li{padding:10px 0px 10px 0px;}
 @media (max-width: 768px){
 .story-section .story-right .description iframe.story_video{height: 415px;}
 }
@@ -563,4 +565,28 @@ body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active
 .story-section .story-right .description iframe.story_video{ height: 195px;}
 ul.pron-cons-img li img { margin-top: -12px!important;}
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id{margin-top: 20px;}
+.front .widget-wrapper.top_stories_ordering, .widget-wrapper.most_popular{border:0;}
+.front .itg-top-section .home-top-story .data-holder .itg-listing li{padding:15px 10px 10px 25px;}
+.front .itg-listing li:before{display:block;}
+.featured-news .featured-post a{font-weight:bold;}
+.front .itg-top-section .top-rhs-add-child .ad-widget{padding:0; margin-top:20px;}
+footer .footer-top .footer-social-link{display:block; opacity:0;}
+
 }
+
+.view-display-id-block_5 .detail {  position: relative; top: -18px;}
+@media screen and (max-width:800px){
+.view-display-id-block_5 .detail {  position: initial; top: initial;}
+}
+
+.section-television #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing + .dont-miss-listing, .section-television #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing + .dont-miss-listing, .section-television .osscar-video ul .dont-miss-listing + .dont-miss-listing{padding:0 10px 25px 0;}
+@media screen and (max-width:767px){
+.top-n-most-popular-stories {margin-top: 15px;}
+.top_stories_ordering .widget-title, .special-top-news .widget-title { padding: 5px 7px 1px 0;}
+.story-section .comment-mobile{background: none;}
+}
+@media screen and (max-width:360px){
+.story-section .comment-mobile ul li a{  padding: 10px 5px;}
+.story-section .comment-mobile{ margin: 0px -8px 20px; }
+}
+#block-itg-widget-home-page-feature .featured-news .featured-post a {display: inline;} 

@@ -525,10 +525,7 @@ function features_for_photo_list_of_category_views_default_views() {
   $handler->display->display_options['arguments']['field_story_category_tid']['table'] = 'field_data_field_story_category';
   $handler->display->display_options['arguments']['field_story_category_tid']['field'] = 'field_story_category_tid';
   $handler->display->display_options['arguments']['field_story_category_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_options']['code'] = 'if (!empty($_GET[\'category\']) && !empty($_GET[\'sid\'])) {
-return $_GET[\'category\'];
-}';
+  $handler->display->display_options['arguments']['field_story_category_tid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_story_category_tid']['summary_options']['items_per_page'] = '25';

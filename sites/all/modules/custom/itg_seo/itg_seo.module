@@ -300,12 +300,12 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_tids = array_reverse($section_tids);
     
     if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]) && count($section_tids) == 1) {
-      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
-          .'<h1>' . itg_seo_get_term_name_by_tid($arg[2]) . '</h1></div>';
+      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/'
+          .'&nbsp;<span itemprop="title">' . itg_seo_get_term_name_by_tid($arg[2]) . '</span></div>';
     }
     else {
       foreach ($section_tids as $chunks) {
-        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
+        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/&nbsp;'
             . l('<span itemprop="title">' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       }
     }
@@ -430,14 +430,6 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
       );
       drupal_add_html_head($markup, 'sd_json');
       
-      // canonical for home page
-      $home_canonical = $base_url . '/' . $node->path['alias'];
-      $canonical = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#attributes' => array('rel' => 'canonical', 'href' => $home_canonical),
-      );
-      drupal_add_html_head($canonical, 'canonical');
       // meta name description for home page
       $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
       if (isset($meta_description) && !empty($meta_description)) {
