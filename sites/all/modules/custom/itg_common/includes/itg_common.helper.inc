@@ -145,6 +145,7 @@ define('BACKEND_URL', variable_get('itg_backend_url'));
 define('INDEX_PAGE_URL', 'node/2');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 define('taxonomy_terms_per_page_admin' , 20);
+define('SSO_COOKIE_DOMAIN' , variable_get('sso_cookie_domain'));
 
 /*if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") { 
     $site_protocol = 'https://';
