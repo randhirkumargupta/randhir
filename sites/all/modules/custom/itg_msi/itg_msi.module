@@ -993,7 +993,10 @@ function itg_msi_issue_attribute_date() {
  * @return string
  */
 function itg_msi_get_current_time_issue() {
-    $year_arr = !empty(arg(1)) ? explode('-',arg(1)) : '';
+  $year_15_days_ago = date('Y', strtotime('+15 days'));
+  $result = '';
+  if ($year_15_days_ago == date('Y')) {
+    $year_arr = !empty(arg(1)) ? explode('-', arg(1)) : '';
     $current_time = !empty($year_arr[2]) ? $year_arr[2] : date('Y-m-d', time());
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
@@ -1002,7 +1005,8 @@ function itg_msi_get_current_time_issue() {
     $query->condition('n.type', 'issue', '=');
     $query->condition('n.status', 1, '=');
     $result = $query->execute()->fetchField();
-    return $result;
+  }
+  return $result;
 }
 
 /**
