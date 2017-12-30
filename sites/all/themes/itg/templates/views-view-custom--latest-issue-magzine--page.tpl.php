@@ -154,9 +154,9 @@
 	  if($final_value['type'] == 'section'){
 		  unset($final_value['type']);
 		  $parent_value = $final_value;
+		  $sub_title = '';
 		  foreach ($parent_value as $key => $value) {
 			// get status of lock story
-			$sub_title = '';
 			if (function_exists(itg_msi_get_lock_story_status)) {
 			  $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
 			}
@@ -215,9 +215,9 @@
 	  if($final_value['type'] == 'section'){
 		  unset($final_value['type']);
 		  $parent_value = $final_value;
+		  $sub_title = '';
 		  foreach ($parent_value as $key => $value) {
 			// get status of lock story
-			$sub_title = '';
 			if (function_exists(itg_msi_get_lock_story_status)) {
 			  $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
 			}
@@ -269,8 +269,7 @@
 	  }else if($final_value['type'] == 'suppliment'){
 			  unset($final_value['type']);
 			  $supplement_value = $final_value;
-		      $sup_sub_title = '';
-		      
+		      $sup_sub_title = '';		      
 			  foreach ($supplement_value as $key => $s_value) {
 				// get status of lock story
 				if (function_exists(itg_msi_get_lock_story_status)) {
