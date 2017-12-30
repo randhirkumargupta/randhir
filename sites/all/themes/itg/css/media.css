@@ -2700,7 +2700,8 @@
     white-space: inherit;
     overflow-x: inherit; }
     .view-front-end-global-search .searh-all-filters .views-exposed-widget {
-      float: left; }
+      float: left;
+      display: none; }
       .view-front-end-global-search .searh-all-filters .views-exposed-widget.views-submit-button {
         width: 165px; }
   .view-front-end-global-search .view-filters {
