@@ -1140,32 +1140,42 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
                 <div class="iframe-video-embed">
                     <div id="videoplayer_<?php echo $keys; ?>"></div> 
                     <script type="text/javascript">
-                        jwplayer('videoplayer_<?php echo $keys; ?>').setup({
-                            playlist: [{
-                                    title: "<?php print $row['title']; ?>",
-                                    image: "<?php echo $image_url; ?>",
-                                    sources: [
-                                        {
-                                            file: "<?php print $video_value->field_migrated_video_url_value; ?>"
-                                        }]
-                                }],
-                            primary: "flash",
-                            width: "100%",
-                            aspectratio: "16:9",
-                            stretching: "uniform",
-                            androidhls: "true",
-                            fallback: "false",
-                            hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
-                            advertising: {
-                                client: "vast",
-                                skipoffset: 5,
-                                schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
+                        defer(jwplayer_callback);
+						function defer(method) {
+							if (window.jwplayer) {
+								method();
+							} else {
+								setTimeout(function() { defer(method) }, 50);
+							}
+						}						
+						function jwplayer_callback(){
+							jwplayer('videoplayer_<?php echo $keys; ?>').setup({
+								playlist: [{
+										title: "<?php print $row['title']; ?>",
+										image: "<?php echo $image_url; ?>",
+										sources: [
+											{
+												file: "<?php print $video_value->field_migrated_video_url_value; ?>"
+											}]
+									}],
+								primary: "flash",
+								width: "100%",
+								aspectratio: "16:9",
+								stretching: "uniform",
+								androidhls: "true",
+								fallback: "false",
+								hlslabels: {"156": "lowest", "364": "low", "512": "medium", "864": "high", "996": "Highest"},
+								advertising: {
+									client: "vast",
+									skipoffset: 5,
+									schedule: {"myAds": {"offset": "pre", "tag": "<?php print $ads_url; ?>"}}
 
-                            },
-                            ga: {
-                                idstring: "<?php print $row['title']; ?>",
-                            }
-                        });
+								},
+								ga: {
+									idstring: "<?php print $row['title']; ?>",
+								}
+							});
+						}
                     </script>
                 </div>
             </div>
