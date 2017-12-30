@@ -1104,21 +1104,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
         }
         //drupal_add_js('http://content.jwplatform.com/libraries/V30NJ3Gt.js', 'external');
         echo "<script src='https://content.jwplatform.com/libraries/V30NJ3Gt.js'></script>";
-        ?>
-        <script type="text/javascript">
-        defer(jwplayer_callback);
-		function defer(method) {
-			console.log(window.jwplayer);
-			console.log(jwplayer);
-			
-			if (window.jwplayer) {
-				method();
-			} else {
-				setTimeout(function() { defer(method) }, 50);
-			}
-		}
-		</script>
-	    <?php
+        
         $hide_player = "";
         $description_slider = "";
         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
@@ -1191,6 +1177,21 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
         }
         $description_slider .= '</ul></div>';
         $newimageds .= '</ul></div></div></div>';
+        ?>
+         <script type="text/javascript">
+			defer(jwplayer_callback);
+			function defer(method) {
+				console.log(window.jwplayer);
+				console.log(jwplayer);
+				
+				if (window.jwplayer) {
+					method();
+				} else {
+					setTimeout(function() { defer(method) }, 50);
+				}
+			}
+		</script>
+        <?php
     }
 
     print '</div>';
