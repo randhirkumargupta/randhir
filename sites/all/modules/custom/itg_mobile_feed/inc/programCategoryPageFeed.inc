@@ -131,11 +131,13 @@ function generateProgramCategoryPage($tid) {
       $query->fields('vd', array('field_video_duration_value'));
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
       $query->fields('fss', array('field_story_syndication_value'));
+      
+      $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
+      $feed_date_range = date(strtotime($feed_date));
 
-
-      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
+      if (count($result) > 0) {
       foreach ($result as $reskey => $resvalue) {
         $listcount++;
 
@@ -158,6 +160,9 @@ function generateProgramCategoryPage($tid) {
 
         $output .= "<item><title><![CDATA[" . $title . "]]></title><shortdescription><![CDATA[" . $field_story_kicker_text_value . "]]></shortdescription><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate></item>";
         $fl = generateVideoDetailPageFeed($nid);
+      }
+      }else{
+        $output .= "<item><title><![CDATA[]]></title><shortdescription><![CDATA[]]></shortdescription><thumbimage><![CDATA[]]></thumbimage><url></url><createddate></createddate></item>";
       }
     }
     $data['lcount'] = $listcount;

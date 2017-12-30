@@ -133,9 +133,13 @@ function generateVideoCategoryPage($tid) {
       $query->fields('vd', array('field_video_duration_value'));
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
       $query->fields('fss', array('field_story_syndication_value'));
-      //end
-      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+      
+      $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
+      $feed_date_range = date(strtotime($feed_date));
+      
+      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      if (count($result) > 0) {
       foreach ($result as $reskey => $resvalue) {
         // node feed tag
         $listcount++;
@@ -147,11 +151,11 @@ function generateVideoCategoryPage($tid) {
         $is_fav = getNidIsFavorite($nid);
         $alias = drupal_get_path_alias('node/' . $nid . '');
         $weburl = $base_url . "/" . $alias;
-	    $is_syndications = '0';
+        $is_syndications = '0';
         if ($resvalue['field_story_syndication_value'] == 'Yes') {
           $is_syndications = '1';
         }
-        
+
         $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
         $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
@@ -165,6 +169,10 @@ function generateVideoCategoryPage($tid) {
         $fl = generateVideoDetailPageFeed($nid);
       }
     }
+    else {
+      $output .= "<item><title></title><mediumimage><![CDATA[]]></mediumimage><thumbimage><![CDATA[]]></thumbimage><url></url><create_date></create_date><create_datetime></create_datetime><syndications></syndications><is_favorite></is_favorite><relateds><photos></photos><videos></videos><stories></stories></relateds></item>";
+    }
+  }
     $data['lcount'] = $listcount;
     $data['data'] = $output;
     $data_fi = $listcount . "##listcount##" . $output;

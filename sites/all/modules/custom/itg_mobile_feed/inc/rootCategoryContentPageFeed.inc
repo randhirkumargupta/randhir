@@ -128,9 +128,13 @@ function generateLeftMainCategoryPage($tid, $term_name) {
       $query->fields('vd', array('field_video_duration_value'));
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
 
-
-      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+      $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
+      $feed_date_range = date(strtotime($feed_date));
+    
+      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      
+      if (count($result) > 0) {
       foreach ($result as $reskey => $resvalue) {
 
         $listcount++;
@@ -163,7 +167,10 @@ function generateLeftMainCategoryPage($tid, $term_name) {
         // generate story detail page
         $fl = generateStoryDetailPageFeed($nid, $loop_file_name);
       }
+    }else{
+      $output .= "<article><title><![CDATA[]]></title><thumbimage><![CDATA[]]></thumbimage><kickerimage><![CDATA[]]></kickerimage><url></url><create_date></create_date><create_datetime></create_datetime><relateds><photos></photos><videos></videos><stories></stories></relateds></article>";
     }
+  }
     $data['lcount'] = $listcount;
     $data['data'] = $output;
     $data_fi = $listcount . "##listcount##" . $output;

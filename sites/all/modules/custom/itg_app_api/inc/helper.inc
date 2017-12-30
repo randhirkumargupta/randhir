@@ -22,7 +22,12 @@ define('HOME_PAGE_JSON_MOVIES', 1206533);
 define('HOME_PAGE_JSON_MOVIES_PHOTO', 1208598);
 define('HOME_PAGE_JSON_MOVIES_VIDEO', 1207303);
 define('HOME_PAGE_JSON_ELECTION', 1206795);// 1768551
-
+/* XML feed Program/story/photo/video list create date range (pass value in days like -90 days)*/
+$feed_data_limit = '-90 days';
+if(!empty(variable_get('itg_feed_data_date_range'))){
+  $feed_data_limit = variable_get('itg_feed_data_date_range');
+}
+define('FEED_DATA_LIMIT', $feed_data_limit);
 /**
  * Common Function to create short url of node
  * @global type $base_url

@@ -128,10 +128,14 @@ function generatePhotoCategoryPage($tid) {
       $query->fields('kt', array('field_story_kicker_text_value'));
       $query->fields('vd', array('field_video_duration_value'));
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+      
+      $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
+      $feed_date_range = date(strtotime($feed_date));
 
-
-      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      
+      if (count($result) > 0) {
       foreach ($result as $reskey => $resvalue) {
         $listcount++;
 
@@ -153,6 +157,10 @@ function generatePhotoCategoryPage($tid) {
         $fl = generatePhotoDetailPageFeed($nid);
       }
     }
+    else {
+      $output .= "<item><title><![CDATA[]]></title><thumbimage><![CDATA[]]></thumbimage><url></url><create_date></create_date><create_datetime></create_datetime><is_favorite></is_favorite><relateds><photos></photos><videos></videos><stories></stories></relateds><weburl><![CDATA[]]></weburl></item>";
+    }
+  }
     $data['lcount'] = $listcount;
     $data['data'] = $output;
     $data_fi = $listcount . "##listcount##" . $output;
