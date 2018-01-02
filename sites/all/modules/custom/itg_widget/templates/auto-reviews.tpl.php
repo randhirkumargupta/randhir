@@ -12,7 +12,9 @@
           <?php if (!empty($node_data['uri'])) { ?>
             <div class="dm-pic">
               <a class="<?php echo $video_class;?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$node_data['nid']}") ?>">
-                <img src="<?php print image_style_url("widget_small", $node_data['uri']); ?>" alt="<?php echo $node_data['field_story_small_image_alt'];?>" title="<?php echo $node_data['field_story_small_image_title'];?>"/>
+                <?php $file_uri = file_create_url($node_data['si_file_uri']); ?>
+                <img src="<?php print $file_uri; ?>" alt="<?php echo $node_data['field_story_small_image_alt'];?>" title="<?php echo $node_data['field_story_small_image_title'];?>"/>
+<!--                <img src="<?php //print image_style_url("widget_small", $node_data['uri']); ?>" alt="<?php //echo $node_data['field_story_small_image_alt'];?>" title="<?php //echo $node_data['field_story_small_image_title'];?>"/>-->
               </a>
             </div>
             <?php
