@@ -1033,6 +1033,10 @@ function _latest_from_pti() {
   //$related_content = itg_third_party_section_card_content('PTI', 5);
   $related_content = itg_section_card_content_by_tid(variable_get('pti_section_id', 1206640), 7);
   $related_dt = '';
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+    $data_tb_region_item = 'data-tb-region-item';  
+  }
   if (!empty($related_content)) {
     $related_dt = '<span class="widget-title">' . t('LATEST FROM PTI') . '</span>';
   }
@@ -1043,7 +1047,7 @@ function _latest_from_pti() {
       if (!empty($value->title)) {
         $related_title = mb_strimwidth($value->title, 0, 200, "..");
         $path = drupal_get_path_alias('node/' . $value->nid);
-        $related_dt.= "<li class='third-party-list'><span class='tile'>" . l($related_title, $path, array("attributes" => array("title" => $related_title))) . "</span></li>";
+        $related_dt.= "<li " . $data_tb_region_item . " class='third-party-list'><span class='tile'>" . l($related_title, $path, array("attributes" => array("title" => $related_title))) . "</span></li>";
       }
       $i++;
     }
@@ -1067,6 +1071,10 @@ function _latest_from_aajtak() {
       $aajtak_data = getthirdPartyData('at');
     }
     $related_dt = '';
+    $data_tb_region_item = '';
+    if(drupal_is_front_page()){
+  	  $data_tb_region_item = 'data-tb-region-item';  
+    }
     if (!empty($aajtak_data[0]['content_id'])) {
       $related_dt = '<span class="widget-title">' . t('LATEST FROM AAJ TAK') . '</span>';
     }
@@ -1083,7 +1091,7 @@ function _latest_from_aajtak() {
           else {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
           }
-          $related_dt.= '<li class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
+          $related_dt.= '<li ' . $data_tb_region_item . ' class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
           $related_dt.= "<div class='title'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
         }
         $i++;
@@ -1108,6 +1116,10 @@ function _latest_from_businesstoday() {
     if(function_exists(getthirdPartyData)) {
       $business_data = getthirdPartyData('bt');
     }
+    $data_tb_region_item = '';
+    if(drupal_is_front_page()){
+  	  $data_tb_region_item = 'data-tb-region-item';  
+    }
     $related_dt = '';
     if (!empty($business_data[0]['content_id'])) {
       $related_dt = '<span class="widget-title">' . t('LATEST FROM BUSINESS TODAY') . '</span>';
@@ -1125,7 +1137,7 @@ function _latest_from_businesstoday() {
           else {
             $img_url = $base_url . '/sites/all/themes/itg/images/itg_image170x127.jpg';
           }
-          $related_dt.= '<li class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
+          $related_dt.= '<li ' . $data_tb_region_item . ' class="third-party-list"><a class="pic" href="' . $path . '" target="_blank" title="' . $related_title . '"><img src="' . $img_url . '" alt="' . $related_title . '" title="" /></a>';
           $related_dt.= "<div class='tile'>" . l($related_title, $path, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</div></li>";
         }
         $i++;

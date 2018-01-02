@@ -1821,3 +1821,30 @@ function _get_calender_week_start_end_date($week, $year) {
   $ret['week_end'] = $dto->modify('+6 days')->format('Y-m-d');
   return $ret;
 }
+
+/**
+ * Function is used to convert String space
+ * */
+function itg_get_dive_region_name($str, $type = '') {
+  if (empty($str)) {
+    return '';
+  }
+  $pattern = "/<a ?.*>(.*)<\/a>/";
+  preg_match($pattern, $str, $matches);
+  if (count($matches) > 0) {
+    $str = $matches[1];
+  }
+  $text = preg_replace('~&~', 'and', $str);
+  $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+  $text = preg_replace('~[^-\w]+~', '', $text);
+  $text = trim($text, '-');
+  $text = preg_replace('~-+~', '-', $text);
+  $text = strtolower($text);
+  $textarray = explode('-', $text);
+  $return = $type;
+  foreach ($textarray as $value) {
+    $return .= ucfirst($value);
+  }
+  return $return;
+}
