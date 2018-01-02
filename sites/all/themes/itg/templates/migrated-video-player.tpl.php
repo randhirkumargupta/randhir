@@ -9,7 +9,7 @@ global $base_url;
 <script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
 
 <?php
-
+echo $url;
 $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
 
 ?>
