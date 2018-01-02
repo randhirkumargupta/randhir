@@ -19,11 +19,11 @@ function itg_front_end_common_block_info() {
     'info' => t('May we recommend'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['recommend_new_block'] = array(
+  $blocks['recommend_news_block'] = array(
     'info' => t('Recommended'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
-  $blocks['crowdy_news_block'] = array(
+  $blocks['crowdy_newss_block'] = array(
     'info' => t('Crowdy News'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
@@ -106,11 +106,11 @@ function itg_front_end_common_block_view($delta = '') {
       $block['content'] = _may_be_recommend_block_content();
       break;
     
-    case 'recommend_new_block':
+    case 'recommend_news_block':
       $block['content'] = _recommend_new_block_content();
       break;
     
-    case 'crowdy_news_block':
+    case 'crowdy_newss_block':
       $block['content'] = _crowdy_news_block_content();
       break;
 
