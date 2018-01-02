@@ -19,6 +19,10 @@ function itg_front_end_common_block_info() {
     'info' => t('May we recommend'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['crowdy_news_block'] = array(
+    'info' => t('Crowdy News'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   $blocks['vukkul_block'] = array(
     'info' => t('vukkul Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -96,6 +100,10 @@ function itg_front_end_common_block_view($delta = '') {
     
     case 'may_be_recommend_block':
       $block['content'] = _may_be_recommend_block_content();
+      break;
+    
+    case 'crowdy_news_block':
+      $block['content'] = _crowdy_news_block_content();
       break;
 
     case 'vukkul_block':
@@ -211,6 +219,22 @@ function _may_be_recommend_block_content() {
     else {
       $output = '';
       watchdog('may be recommed script', 'Please add may be recommed script in setting page.');
+    }
+  return $output;
+}
+
+/**
+ * Implements Crowdy News block content
+ */
+function _crowdy_news_block_content() {
+  $output = '';
+    if (!empty(variable_get('third_party_crowdynews_block')) && empty(variable_get('disable_third_party_api'))) {
+      //$output = '<div class="may-be-recommend"><h3><span>' . t('May we recommend') . '</span></h3>' . variable_get('third_party_crowdynews_block') . '</div>';
+      $output = '<div class="crody-news-content" data-crowdynews-widget="IndiaToday_indiatoday-vertical">' . variable_get('third_party_crowdynews_block') . '</div>';
+    }
+    else {
+      $output = '';
+      watchdog('crowdy news script', 'Please add crowdy news script in setting page.');
     }
   return $output;
 }

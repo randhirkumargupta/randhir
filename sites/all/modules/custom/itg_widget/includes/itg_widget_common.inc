@@ -2290,6 +2290,15 @@ function itg_widget_block_view_alter(&$data, $block) {
             $data['content'] = array();
         }
     }
+    if ($block->delta == 'crowdy_news_block') {
+        $arg = arg();
+        $ntype = menu_get_object('node');
+        if ($ntype->type == 'story' || $ntype->type == 'photogallery' || $ntype->type == 'videogallery') {
+            return TRUE;
+        } else {
+            $data['content'] = array();
+        }
+    }
 }
 
 /**
