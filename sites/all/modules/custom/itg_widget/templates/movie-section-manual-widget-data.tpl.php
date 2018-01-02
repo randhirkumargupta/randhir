@@ -1,3 +1,9 @@
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
+?>
 <div class="row">
     <div class="col-md-8">
         <div class="auto-block-1">
@@ -26,7 +32,7 @@
                           print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image483x271.jpg' />";
                         }
                         ?>
-                        <h2 title="<?php echo strip_tags($desc); ?>">
+                        <h2 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($desc); ?>">
                             <?php
                             if (function_exists('itg_common_get_smiley_title')) {
                               echo l(itg_common_get_smiley_title($row['node_obj'], 0, 68), "node/" . $row['nid'], array("html" => TRUE));
@@ -65,7 +71,7 @@
                           print "<img  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image237x133.jpg' />";
                         }
                         ?>
-                        <h3 title="<?php echo strip_tags($desc); ?>">
+                        <h3 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($desc); ?>">
                             <?php
                             if (function_exists('itg_common_get_smiley_title')) {
                               echo l(itg_common_get_smiley_title($row['node_obj'], 0, 80), "node/" . $row['nid'], array("html" => TRUE));
