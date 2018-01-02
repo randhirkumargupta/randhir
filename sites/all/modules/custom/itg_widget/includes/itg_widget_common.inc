@@ -2293,7 +2293,7 @@ function itg_widget_block_view_alter(&$data, $block) {
             $data['content'] = array();
         }
     }
-    if ($block->delta == 'crowdy_news_block') {
+    if ($block->delta == 'crowdy_newss_block') {
         $arg = arg();
         $ntype = menu_get_object('node');
         if ($ntype->type == 'story') {
@@ -2302,7 +2302,7 @@ function itg_widget_block_view_alter(&$data, $block) {
             $data['content'] = array();
         }
     }
-    if ($block->delta == 'recommend_new_block') {
+    if ($block->delta == 'recommend_news_block') {
         $arg = arg();
         $ntype = menu_get_object('node');
         if ($ntype->type == 'story' || $ntype->type == 'photogallery' || $ntype->type == 'videogallery') {
