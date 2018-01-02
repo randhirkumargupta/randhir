@@ -591,4 +591,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .story-section .comment-mobile{ margin: 0px -8px 20px; }
 }
 #block-itg-widget-home-page-feature .featured-news .featured-post a {display: inline;}
+.front-title-hide {
+  display: none; 
+}
  
