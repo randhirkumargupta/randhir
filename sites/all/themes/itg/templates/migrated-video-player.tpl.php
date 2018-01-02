@@ -9,6 +9,13 @@ global $base_url;
 <script type="text/javascript" src="<?php echo $base_url . '/sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js'; ?>"></script>
 
 <?php
+$nid = 989186;
+$videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+print_r($videoids);
+foreach ($videoids as $keys => $video_value) {
+    $url = $video_value->field_migrated_video_url_value;
+            
+}
 echo $url."-andy";
 $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
 
