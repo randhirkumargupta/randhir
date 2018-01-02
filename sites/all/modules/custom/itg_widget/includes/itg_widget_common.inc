@@ -2284,10 +2284,30 @@ function itg_widget_block_view_alter(&$data, $block) {
     if ($block->delta == 'may_be_recommend_block') {
         $arg = arg();
         $ntype = menu_get_object('node');
-        if ($ntype->type == 'story' || $ntype->type == 'poll' || $ntype->type == 'mega_review_critic' || $ntype->type == 'quiz' || $arg[0] == 'itg_active_polls' || $arg[0] == 'rss') {
-            return TRUE;
+        if ($ntype->type == 'story') {
+          return TRUE;
         } else {
-            $data['content'] = array();
+          $data['content'] = array();
+        }
+    }
+    
+    if ($block->delta == 'crowdy_newss_block') {
+        $arg = arg();
+        $ntype = menu_get_object('node');
+        if ($ntype->type == 'story') {
+          return TRUE;
+        } else {
+          $data['content'] = array();
+        }
+    }
+    
+    if ($block->delta == 'recommend_news_block') {
+        $arg = arg();
+        $ntype = menu_get_object('node');
+        if ($ntype->type == 'story' || $ntype->type == 'photogallery' || $ntype->type == 'videogallery') {
+          return TRUE;
+        } else {
+          $data['content'] = array();
         }
     }
 }

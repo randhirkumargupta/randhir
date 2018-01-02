@@ -19,6 +19,14 @@ function itg_front_end_common_block_info() {
     'info' => t('May we recommend'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  $blocks['recommend_news_block'] = array(
+    'info' => t('Recommended'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['crowdy_newss_block'] = array(
+    'info' => t('Crowdy News'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
   $blocks['vukkul_block'] = array(
     'info' => t('vukkul Block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
@@ -97,7 +105,15 @@ function itg_front_end_common_block_view($delta = '') {
     case 'may_be_recommend_block':
       $block['content'] = _may_be_recommend_block_content();
       break;
-
+	
+	case 'recommend_news_block':
+      $block['content'] = _recommend_new_block_content();
+      break;
+    
+    case 'crowdy_newss_block':
+      $block['content'] = _crowdy_news_block_content();
+      break;
+	
     case 'vukkul_block':
       $is_front_page = drupal_is_front_page();
       if ($is_front_page) {
@@ -201,17 +217,48 @@ function _taboola_block_content() {
 }
 
 /**
- * Implements May be recommend block content
+ * Implements Suggested Stories block content
  */
 function _may_be_recommend_block_content() {
   $output = '';
-    if (!empty(variable_get('third_party_may_recommend_block')) && empty(variable_get('disable_third_party_api'))) {
-      $output = '<div class="may-be-recommend"><h3><span>' . t('May we recommend') . '</span></h3>' . variable_get('third_party_may_recommend_block') . '</div>';
-    }
-    else {
-      $output = '';
-      watchdog('may be recommed script', 'Please add may be recommed script in setting page.');
-    }
+  if (!empty(variable_get('third_party_may_recommend_block')) && empty(variable_get('disable_third_party_api'))) {
+    $output = '<div class="may-be-recommend"><h3><span>' . t('Suggested Stories') . '</span></h3>' . variable_get('third_party_may_recommend_block') . '</div>';
+  }
+  else {
+    $output = '';
+    watchdog('Suggested Stories', 'Please add Suggested Stories script in setting page.');
+  }
+  return $output;
+}
+
+/**
+ * Implements Recommended Stories block content
+ */
+function _recommend_new_block_content() {
+  $output = '';
+  if (!empty(variable_get('third_party_recommend_new_block')) && empty(variable_get('disable_third_party_api'))) {
+    $output = '<div class="may-be-recommend"><h3><span>' . t('Recommended') . '</span></h3>' . variable_get('third_party_recommend_new_block') . '</div>';
+  }
+  else {
+    $output = '';
+    watchdog('Recommended script', 'Please add Recommended script in setting page.');
+  }
+  return $output;
+}
+
+/**
+ * Implements Crowdy News block content
+ */
+function _crowdy_news_block_content() {
+  $output = '';
+  if (!empty(variable_get('third_party_crowdynews_block')) && empty(variable_get('disable_third_party_api'))) {
+    //$output = '<div class="may-be-recommend"><h3><span>' . t('May we recommend') . '</span></h3>' . variable_get('third_party_crowdynews_block') . '</div>';
+    $output = '<div class="crody-news-content" data-crowdynews-widget="IndiaToday_indiatoday-vertical">' . variable_get('third_party_crowdynews_block') . '</div>';
+  }
+  else {
+    $output = '';
+    watchdog('crowdy news script', 'Please add crowdy news script in setting page.');
+  }
   return $output;
 }
 
