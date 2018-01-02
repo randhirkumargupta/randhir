@@ -4,15 +4,28 @@
  * add_nofollow_in_body
  */
 function add_nofollow_in_body($bodytext) {
- 
+  $site_name = $_SERVER['SERVER_NAME'];
+  $live_url = 'indiatoday.intoday.in';
   $body_html_dom = filter_dom_load($bodytext);
   $body_links = $body_html_dom->getElementsByTagName('a');
   foreach ($body_links as $body_link) {
     $body_url = parse_url($body_link->getAttribute('href'));
-    $body_link->setAttribute('rel', 'nofollow');
+    if ($body_url['host']) {
+      $path = $body_url['host'];
+    }
+    else {
+      $path_arr = explode('/', $body_url['path']);
+      if (is_array($path_arr) && !empty($path_arr[0])) {
+        $path = $path_arr['0'];
+      }
+    }
+
+    $skip_sites = array($site_name, $live_url);
+    if (!in_array($path, $skip_sites)) {
+      $body_link->setAttribute('rel', 'nofollow');
+    }
   }
   $new_body_text = filter_dom_serialize($body_html_dom);
-
   return $new_body_text;
 }
 
