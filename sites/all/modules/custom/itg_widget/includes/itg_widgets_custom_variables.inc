@@ -362,12 +362,16 @@ function itg_widgets_custom_variables() {
 		'#title' => t('May we recommend (taboola script)'),
 		'#default_value' => variable_get('third_party_may_recommend_block'),
 	);
-  
+  $form['third_party_crowdynews_block'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Crowdy News Ads Script'),
+		'#default_value' => variable_get('third_party_crowdynews_block'),
+	);
   $form['disable_third_party_api'] = array(
-      '#type' =>'checkbox',
-      '#title'=>t('Disable third party api'),
-      '#required'=> FALSE,
-      '#default_value' => variable_get('disable_third_party_api'), // for default checked and false is not checked
+    '#type' =>'checkbox',
+    '#title'=>t('Disable third party api'),
+    '#required'=> FALSE,
+    '#default_value' => variable_get('disable_third_party_api'), // for default checked and false is not checked
   );
   
   $form['amp_photo_ad'] = array(
