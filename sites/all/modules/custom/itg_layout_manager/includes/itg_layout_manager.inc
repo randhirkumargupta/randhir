@@ -160,6 +160,7 @@ function itg_layout_gethomecarddata() {
   $block_name = array($widget_name1, $widget_name2, $widget_name3);
   $section = 'home_page';
   $template_name = 'page--front';
+  $_GET['is_home_front'] = TRUE;
   $data = get_layout_details_by_block_name($section, $template_name, 'front', $block_name);
   $nextdata = itg_layout_gethomecarddata_new_pre($sectinno + 3);
 
@@ -168,7 +169,7 @@ function itg_layout_gethomecarddata() {
   if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name'])) {
 
     print '<div class="row itg-common-section"  id="content-section-widget">
-              <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name1 . '">
+              <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" data-tb-region="' . itg_get_dive_region_name($widget_data[$widget_name1]['block_title'], 'Home') . '" id="section-cart-' . $widget_name1 . '">
               <div class="itg-widget">
               <div class="droppable ' . $gray_bg_layout . '">
               <div class="widget-wrapper ' . $widget_data[$widget_name1]['widget_name'] . '">';
@@ -178,7 +179,7 @@ function itg_layout_gethomecarddata() {
     }
 
     print' <div class="data-holder" id="' . $widget_name1 . '">' . $widget_data[$widget_name1]['widget'] . '</div></div></div></div></div>
-              <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name2 . '">
+              <div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" data-tb-region="' . itg_get_dive_region_name($widget_data[$widget_name2]['block_title'], 'Home') . '" id="section-cart-' . $widget_name2 . '">
               <div class="itg-widget">
               <div class="droppable ' . $gray_bg_layout . '">
               <div class="widget-wrapper ' . $widget_data[$widget_name2]['widget_name'] . '">';
@@ -189,7 +190,7 @@ function itg_layout_gethomecarddata() {
 
     print '<div class="data-holder" id="' . $widget_name2 . '">' . $widget_data[$widget_name2]['widget'] . '</div></div></div></div></div>';
 
-    print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart" id="section-cart-' . $widget_name3 . '">
+    print '<div class="col-md-4 col-sm-4 col-xs-12 mt-50 sectioncart"  data-tb-region="' . itg_get_dive_region_name($widget_data[$widget_name3]['block_title'], 'Home') . '" id="section-cart-' . $widget_name3 . '">
               <div class="itg-widget">
               <div class="droppable ' . $gray_bg_layout . '">
               <div class="widget-wrapper ' . $widget_data[$widget_name3]['widget_name'] . '">';

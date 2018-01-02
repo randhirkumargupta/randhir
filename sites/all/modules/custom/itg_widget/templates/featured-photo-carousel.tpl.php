@@ -1,12 +1,21 @@
 <?php
 if(!empty($data)) {
     ?>
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()) {
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
+  else if(isset($_GET['is_home_front']) && $_GET['is_home_front']) {
+	$data_tb_region_item = 'data-tb-region-item';  
+}
+?>
     <div class="flexslider">
         <ul class="slides"> 
             <?php
             foreach($data as $key => $entity_data_node) {
                 ?>
-                <li>
+                <li <?php echo $data_tb_region_item;?>>
     <?php 
         $full_image = '<img src="'. $entity_data_node['file_url'] .'" title="'. $entity_data_node['image_title'] .'" alt="'. $entity_data_node['image_alt'].'" />';
     ?>                   

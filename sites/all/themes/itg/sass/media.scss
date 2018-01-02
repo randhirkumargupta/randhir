@@ -1086,7 +1086,8 @@
         margin-bottom: 40px;
     }
     .education-layout-page .itg-layout-565 .itg-widget-parent .droppable {
-        height: 300px;
+        height: auto;
+        min-height: initial;
         &.m-bottom40 {
             margin-bottom: 0;
         }

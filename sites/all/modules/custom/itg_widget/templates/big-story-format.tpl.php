@@ -24,6 +24,10 @@ if (!empty($data['node_data'])) :
   if ($is_videogallery) {
     print '<div id="videogallery-iframe"></div>';
   }
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+    $data_tb_region_item = 'data-tb-region-item';
+  }
   $fb_image = '';
   $uri = base64_encode(SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
   ?>
@@ -107,7 +111,7 @@ if (!empty($data['node_data'])) :
                   }
                 }
                 ?>
-                <h1 title="<?php echo strip_tags($node_title); ?>" class="<?php echo $pipelineclass; ?> big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?> <?php print $pipelineclass; ?>">
+                <h1 <?php echo $data_tb_region_item;?> title="<?php echo strip_tags($node_title); ?>" class="<?php echo $pipelineclass; ?> big-story-first big-story-<?php print $data['node_data']->nid . ' ' . $red_dot_class ?> <?php print $pipelineclass; ?>">
                 <?php echo l($node_title, "node/" . $data['node_data']->nid, array('html' => TRUE, "attributes" => array("title" => $share_title))); ?>
                 <?php echo $pipelinetext; ?>
                 </h1>
