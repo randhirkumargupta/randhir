@@ -8107,7 +8107,8 @@ section.sidebar .block-itg-ads {
   .education-layout-page .itg-layout-565 .droppable {
     height: 565px; }
   .education-layout-page .itg-layout-565 .itg-widget-parent .droppable {
-    height: 225px; }
+    height: auto;
+    min-height: initial; }
   .education-layout-page .itg-layout-565 .itg-widget-child .droppable {
     height: 300px; }
     .education-layout-page .itg-layout-565 .itg-widget-child .droppable .widget-wrapper {
@@ -8142,7 +8143,7 @@ section.sidebar .block-itg-ads {
         left: 10px; }
     .education-layout-page .shadow-on .more {
       padding: 10px 20px 20px 0px;
-      position: absolute;
+      position: unset;
       right: 0px;
       bottom: 0px; }
   .education-layout-page .section_wise_order-edu-from-the-magazine {
@@ -8211,7 +8212,7 @@ section.sidebar .block-itg-ads {
     border: 1px solid #ddd;
     padding: 10px; }
     .education-layout-page .section_wise_order-edu-tips-and-trick .auto-tips-n-tricks {
-      height: 220px;
+      height: 344px;
       overflow: auto; }
   .education-layout-page .auto-tips-n-tricks ul li {
     padding: 18px 0; }
@@ -13996,5 +13997,18 @@ ul.pron-cons-img li img {
     box-shadow: 0 0 0 0 rgba(214, 2, 12, 0); } }
 .front .ad-widget .sidebar-ad .block-itg-ads {
   margin: 0px auto 0; }
+
+.education-layout-page .widget-title {
+  padding: 5px; }
+
+.education-layout-page .col-md-12.col-sm-6.col-xs-12.mt-10 .itg-widget-child.shadow-on .droppable, .education-layout-page .page-user form .col-md-12.col-sm-6.col-xs-12.form-type-password .itg-widget-child.shadow-on .droppable, .page-user form .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-type-password .itg-widget-child.shadow-on .droppable,
+.education-layout-page .page-user form .col-md-12.col-sm-6.col-xs-12.form-actions .itg-widget-child.shadow-on .droppable,
+.page-user form .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-actions .itg-widget-child.shadow-on .droppable,
+.education-layout-page .page-signup form .col-md-12.col-sm-6.col-xs-12.form-type-password .itg-widget-child.shadow-on .droppable,
+.page-signup form .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-type-password .itg-widget-child.shadow-on .droppable,
+.education-layout-page .page-signup form .col-md-12.col-sm-6.col-xs-12.form-actions .itg-widget-child.shadow-on .droppable,
+.page-signup form .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-actions .itg-widget-child.shadow-on .droppable, .education-layout-page #block-formblock-ask-an-expert .col-md-12.col-sm-6.col-xs-12.form-submit .itg-widget-child.shadow-on .droppable, #block-formblock-ask-an-expert .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-submit .itg-widget-child.shadow-on .droppable, .education-layout-page .col-md-12.col-sm-6.col-xs-12.question-heading .itg-widget-child.shadow-on .droppable {
+  height: 314px;
+  min-height: initial; }
 
 /*# sourceMappingURL=styles.css.map */
