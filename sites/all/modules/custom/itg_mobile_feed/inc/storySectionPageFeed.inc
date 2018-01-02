@@ -7,7 +7,7 @@
 /**
  * main function for generate storySectionPage xml feed
  *
- * @return array
+ * @return string $output
  */
 function storySectionPageFeed() {
   //check into redis
@@ -41,7 +41,7 @@ function storySectionPageFeed() {
       // check section is story
       $node_count = customNodeCount('story', $value);
       if ($node_count > 0) {
-	$value = trim($value);
+        $value = trim($value);
         $term = taxonomy_term_load($value);
         $term_name = $term->name;
         $term_url = nodeCategoryFrontUrl($value, 'term');
@@ -70,11 +70,12 @@ function storySectionPageFeed() {
   }
 
   if ($output) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $term_feed_path = "public://xml_it/stories";
     $file_name = "storysectionlisting.xml";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
-//  header('Content-Type: application/xml; charset=utf-8');
-//  echo $output;
-//  die();
+  header('Content-Type: application/xml; charset=utf-8');
+  echo $output;
+  drupal_exit();
 }
+

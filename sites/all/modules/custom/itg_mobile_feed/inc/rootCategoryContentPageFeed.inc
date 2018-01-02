@@ -7,7 +7,7 @@
 /**
  * main function for generate rootCategoryContentPageFeed xml feed
  *
- * @return array
+ * @return string $output
  */
 function rootCategoryContentPageFeed() {
   $output = "";
@@ -22,12 +22,12 @@ function rootCategoryContentPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+  $term_feed_path = "public://xml_it/stories";
   $return_flag = "";
   foreach ($section_list as $key => $value) {
-    
+
     $node_count = customNodeCount('story', $value);
-    $term_status = itg_category_manager_term_state(trim($value),CATEGORY_MANAGMENT);
+    $term_status = itg_category_manager_term_state(trim($value), CATEGORY_MANAGMENT);
     if ($node_count > 0 && $term_status == 1) {
 
       $cattid = $value;
@@ -50,21 +50,22 @@ function rootCategoryContentPageFeed() {
         $output .= getMobileFeedXmlFooter();
         // xml file writing..
         if ($output) {
-
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
     }
   }
-//  header('Content-Type: application/xml; charset=utf-8');
-//  echo $output;
-//  die();
+  header('Content-Type: application/xml; charset=utf-8');
+  echo $output;
+  drupal_exit();
 }
 
 /**
  * function for generate storyCategoryPage xml feed
+ * @pram int $tid
+ * @pram string $term_name
  *
- * @return array
+ * @return array $data
  */
 function generateLeftMainCategoryPage($tid, $term_name) {
   $redis_key = "itgd_generateLeftMainCategoryPage" . $tid;
@@ -127,9 +128,13 @@ function generateLeftMainCategoryPage($tid, $term_name) {
       $query->fields('vd', array('field_video_duration_value'));
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
 
-
-      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+      $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
+      $feed_date_range = date(strtotime($feed_date));
+    
+      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      
+      if (count($result) > 0) {
       foreach ($result as $reskey => $resvalue) {
 
         $listcount++;
@@ -141,7 +146,8 @@ function generateLeftMainCategoryPage($tid, $term_name) {
         $is_fav = getNidIsFavorite($nid);
         $alias = drupal_get_path_alias('node/' . $nid . '');
         $weburl = $base_url . "/" . $alias;
-        if ($tid == '1206689' || $tid == '1206688') { // auto 
+        // auto
+        if ($tid == '1206689' || $tid == '1206688') {
           $loop_file_name = 'story' . $nid . ".xml";
         }
         else {
@@ -161,7 +167,10 @@ function generateLeftMainCategoryPage($tid, $term_name) {
         // generate story detail page
         $fl = generateStoryDetailPageFeed($nid, $loop_file_name);
       }
+    }else{
+      $output .= "<article><title><![CDATA[]]></title><thumbimage><![CDATA[]]></thumbimage><kickerimage><![CDATA[]]></kickerimage><url></url><create_date></create_date><create_datetime></create_datetime><relateds><photos></photos><videos></videos><stories></stories></relateds></article>";
     }
+  }
     $data['lcount'] = $listcount;
     $data['data'] = $output;
     $data_fi = $listcount . "##listcount##" . $output;
@@ -170,3 +179,4 @@ function generateLeftMainCategoryPage($tid, $term_name) {
   }
   return $data;
 }
+

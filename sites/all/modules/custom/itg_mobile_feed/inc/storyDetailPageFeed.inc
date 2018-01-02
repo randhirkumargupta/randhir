@@ -7,7 +7,7 @@
 /**
  * main function for generate storyDetailPage xml feed
  *
- * @return array
+ * @return string $output
  */
 function storyDetailPageFeed() {
   $output = "";
@@ -17,39 +17,38 @@ function storyDetailPageFeed() {
   else {
     $output = generateStoryDetailPageFeed(arg(1));
   }
-
-
-//  echo $output;
-//  die();
+  echo $output;
+  drupal_exit();
 }
 
 /**
  * function for generate generateStoryDetailPageFeed xml feed file
+ * @pram int $nid
+ * @pram string $file_name, $term_feed_path, $type
  *
- * @return array
+ * @return string $return_flag
  */
 function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
-
   $imgtag = "";
   if (!$file_name) {
     $file_name = "story" . $nid . ".xml";
   }
   if (!$term_feed_path) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $term_feed_path = "public://xml_it/stories";
   }
   elseif ($type) {
     if ($type == "photogallery") {
-      $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
+      $term_feed_path = "public://xml_it/photos";
     }
     elseif ($type == "story") {
-      $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+      $term_feed_path = "public://xml_it/stories";
     }
     elseif ($type == "videogallery") {
-      $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+      $term_feed_path = "public://xml_it/videos";
     }
   }
 
-//field_image_caption
+  //field_image_caption
   $output = "";
   if (!$nid) {
     $output = "Nid is missing";
@@ -80,7 +79,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $create_date = date("F d, Y", $node->created);
       $create_datetime = date(DATE_ATOM, $node->created);
       $full_body = $node->body['und']['0']['value'];
-      $body_android = getBodyDataForAndroid($full_body,$node);
+      $body_android = getBodyDataForAndroid($full_body, $node);
       $output .= getMobileFeedXmlHeader();
       $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit><![CDATA[" . $reporter_node . "]]> </credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city><![CDATA[" . $city . "]]></city><courtesy><![CDATA[]]></courtesy>";
       $output .= "<body><![CDATA[" . html_entity_decode($full_body) . "]]></body>";
@@ -95,7 +94,6 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       }
       //get video tag
       $imgtag = getImgTag($node);
-      
       if ($imgtag) {
         $output .= $imgtag;
       }
@@ -134,8 +132,9 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
 
 /**
  * function for generate video xml tag
+ * @pram object $node
  *
- * @return array
+ * @return string $videotag
  */
 function getVideoTag($node) {
   $videotag = "";
@@ -152,21 +151,23 @@ function getVideoTag($node) {
   $nodelist = $xpath->query("//iframe");
   // gets the 1st image
   $node = $nodelist->item(0);
-   $iframe_code = getStringBetween($html, '<iframe', '</iframe>');
-   $video_path = getStringBetween($iframe_code, 'src="', '"');
-  if (strpos($video_path, '/embed/')) { // Migrated video
-     $encrypted_nid = end(explode("/",$video_path));
-     $video_nid = decryptForEmbed($encrypted_nid);
-     $node_id = embed_video_nid($video_nid);
-     $node = node_load($node_id);
-     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
-     if(!empty($node->field_story_medium_image['und'][0]['uri'])){
-       $img_url = file_create_url($node->field_story_medium_image['und'][0]['uri']);
-     }
-     $videotag = video_detail_formats($node->nid,$source_type);
-     
-  }elseif(strpos($video_path, '/embeded-video/')){ //Daily motion video
-    $dailymotion_vid = end(explode("/",$video_path));
+  $iframe_code = getStringBetween($html, '<iframe', '</iframe>');
+  $video_path = getStringBetween($iframe_code, 'src="', '"');
+  // Migrated video
+  if (strpos($video_path, '/embed/')) {
+    $encrypted_nid = end(explode("/", $video_path));
+    $video_nid = decryptForEmbed($encrypted_nid);
+    $node_id = embed_video_nid($video_nid);
+    $node = node_load($node_id);
+    $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+    if (!empty($node->field_story_medium_image['und'][0]['uri'])) {
+      $img_url = file_create_url($node->field_story_medium_image['und'][0]['uri']);
+    }
+    $videotag = video_detail_formats($node->nid, $source_type);
+    // Daily motion video
+  }
+  elseif (strpos($video_path, '/embeded-video/')) {
+    $dailymotion_vid = end(explode("/", $video_path));
     //$daily_motion_video_details = itg_videogallery_get_all_video_info_by_video_id($dailymotion_vid);
     $video_detail = array();
     $video_status = 'dailymotion';
@@ -174,7 +175,7 @@ function getVideoTag($node) {
     $query->fields('itgv', array('bitate_url', 'bitates_field'));
     $query->condition('itgv.video_id', $dailymotion_vid);
     $result2 = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    
+
     $video_format = array();
     foreach ($result2 as $res_data) {
       $video_format[$res_data['bitates_field']] = $res_data['bitate_url'];
@@ -184,40 +185,42 @@ function getVideoTag($node) {
     $video_detail[$video_status]['bitate_url'] = $video_format;
     $dailymotion_download = dailymotion_download_video_uri($video_id);
     $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
-    if(!empty($video_field->field_story_medium_image['und'][0]['uri'])){
+    if (!empty($video_field->field_story_medium_image['und'][0]['uri'])) {
       $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
     }
     $videotag = $video_detail;
-   
   }
 
-
-  if (!empty($videotag['migrated'])) { 
+  
+  if (!empty($videotag['migrated'])) {
     $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
-  }elseif (!empty($videotag['dailymotion'])) {
+  }
+  elseif (!empty($videotag['dailymotion'])) {
     $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
-  }else{
+  }
+  else {
     $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
   }
   return $videotag;
 }
 
-/*
+/**
  * Function for getting dailymotion videoname to nid
+ * @pram string $video_name
+ *
+ * @return string $qry
  */
-
 function dailymotion_video_name_to_nid($video_name) {
-  $qry = db_select('dailymotion_response_details', 'vd')
-          ->fields('vd', array('nid'))
-          ->condition('vd.title', $video_name)
-          ->execute()->fetchField();
+  $qry = db_select('dailymotion_response_details', 'vd')->fields('vd', array('nid'))->condition('vd.title', $video_name)->execute()->fetchField();
   return $qry;
 }
 
-/*
+/**
  * Get Nid by migrated video name
+ * @pram string $video_uri
+ *
+ * @return array $all_result
  */
-
 function migrated_video_to_nid($video_uri) {
 
   $query = db_select('field_data_field_migrated_video_url', 'mv');
@@ -227,6 +230,12 @@ function migrated_video_to_nid($video_uri) {
   return $all_result = $query->execute()->fetchField();
 }
 
+/**
+ * function uploaded_video_to_nid
+ * @pram string $video_uri
+ *
+ * @return array $all_result
+ */
 function uploaded_video_to_nid($video_uri) {
 
   $query = db_select('file_managed', 'f');
@@ -237,10 +246,12 @@ function uploaded_video_to_nid($video_uri) {
   return $all_result = $query->execute()->fetchField();
 }
 
-/*
+/**
  * Get string betwee tags
+ * @pram string $str, $from, $to
+ *
+ * @return string
  */
-
 function getStringBetween($str, $from, $to) {
 
   $sub = substr($str, strpos($str, $from) + strlen($from), strlen($str));
@@ -250,7 +261,7 @@ function getStringBetween($str, $from, $to) {
 /**
  * function for generate Empty video xml tag
  *
- * @return array
+ * @return string $videotag
  */
 function emptygetVideoTag() {
   $videotag = "";
@@ -261,7 +272,7 @@ function emptygetVideoTag() {
 /**
  * function for generate empty image xml tag
  *
- * @return array
+ * @return string $imgtag
  */
 function emptygetImgTag() {
   $imgtag = "";
@@ -271,17 +282,17 @@ function emptygetImgTag() {
 
 /**
  * function for generate image xml tag
+ * @pram object $node
  *
- * @return array
+ * @return string $imgtag
  */
 function getImgTag($node) {
-   
   $imgtag = "";
   $src = "";
   $img_caption_val = "";
   $story_large_fid = $node->field_story_extra_large_image['und'][0]['fid'];
   $story_large_img = completeFilePath($story_large_fid);
-  
+
 
   $html = $node->body['und']['0']['value'];
   $doc = new DOMDocument();
@@ -291,24 +302,20 @@ function getImgTag($node) {
   $xpath = new DOMXPath($doc);
   // find your image
   $nodelist = $xpath->query("//img");
-  
   // gets the 1st image
   $node = $nodelist->item(0);
   if ($node->attributes->length > 0) {
     //It has img
-    
     $src = $node->attributes->getNamedItem('src')->nodeValue;
-  
     //$img_caption_val = getStringBetween($html, '<div class="body_caption">', '</div>');
   }
   $src = "";
   if ($src) {
-    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
-  }else{
-    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $story_large_img . "]]></lowres><highres><![CDATA[" . $story_large_img . "]]></highres><caption>".$img_caption_val."</caption></image></bodyimages>";
+    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
   }
-  return $imgtag; 
+  else {
+    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $story_large_img . "]]></lowres><highres><![CDATA[" . $story_large_img . "]]></highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
+  }
+  return $imgtag;
 }
-
-
 

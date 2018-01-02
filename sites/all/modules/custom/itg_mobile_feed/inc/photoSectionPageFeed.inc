@@ -7,7 +7,7 @@
 /**
  * main function for generate photoSectionPage xml feed
  *
- * @return array
+ * @return string $output
  */
 function photoSectionPageFeed() {
   //check into redis
@@ -39,8 +39,8 @@ function photoSectionPageFeed() {
     $section_list = $conf_array['photo_sec_tid'];
     foreach ($section_list as $key => $value) {
       $node_count = customNodeCount('photogallery', $value);
-      $term_status = itg_category_manager_term_state(trim($value),CATEGORY_MANAGMENT);
-      
+      $term_status = itg_category_manager_term_state(trim($value), CATEGORY_MANAGMENT);
+
       if ($node_count > 0 && $term_status == 1) {
         $value = trim($value);
         $term = taxonomy_term_load($value);
@@ -75,12 +75,12 @@ function photoSectionPageFeed() {
   // write xml file - photosectionlisting.xml
 
   if ($output) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
-    //$term_feed_path = "public://xml_it/photos";
+    $term_feed_path = "public://xml_it/photos";
     $file_name = "photosectionlisting.xml";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
-//header('Content-Type: application/xml; charset=utf-8');
-//echo $output;
-//  die();
+  header('Content-Type: application/xml; charset=utf-8');
+  echo $output;
+  drupal_exit();
 }
+

@@ -1,7 +1,12 @@
 <?php
 
 /**
+ * Inc file contains global configurations
+ */
+
+/**
  * Common function to define the some Primary values
+ *
  * @return string
  */
 function get_notification_config() {
@@ -14,7 +19,9 @@ function get_notification_config() {
   return $config;
 }
 
-//notification?website=aajtak&contentid=11&title=Test Aaj Tak&kicker=Test Kicker&contenttype=test&app_id=12&device=232
+/**
+ * Common function to build notification page
+ */
 function notification_page() {
   $params = drupal_get_query_parameters();
   generate_notification_all($params);
@@ -22,10 +29,10 @@ function notification_page() {
 
 /**
  * Create notification file based on args
+ *
  * @param type $params
  */
 function generate_notification_all($params) {
-
   $idsection = 1;
   $section = 'Notifications';
   $file_name = '';
@@ -41,7 +48,7 @@ function generate_notification_all($params) {
   //1 - iOS; 2 - BB; 3 - Android; 4 - Nokia ASHA; 5 - Windows Phone; 7 - OS X; 8 - Windows 8; 9 - Amazon; 10 - Safari; 11 - Chrome
   $device = isset($params['device']) ? $params['device'] : '';
   //defined the path in tidconfig.inc
-  $term_feed_path = getcwd() . FEED_NOTIFICATION_PATH;
+  $term_feed_path = "public://xml_it/notifications";
 
   //XML Files Generation Based on App Id
   if ($app_id == '4') {
@@ -93,9 +100,6 @@ function generate_notification_all($params) {
         $file_name = 'notification_chrome.xml';
         $output = chrome_notification_xml();
       }
-      else {
-        
-      }
 
       if ($output && $output != '') {
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
@@ -110,14 +114,16 @@ function generate_notification_all($params) {
   if (isset($app_output) && $app_output != '') {
     $return_flag .= writeFeedFile($term_feed_path, $app_file_name, $app_output);
   }
-//  echo $return_flag;
-//  die();
+  echo $return_flag;
+  drupal_exit();
 }
 
 /**
- * 
+ * Common Function to get weburl
  * @global type $base_url
+ *
  * @param type $nid
+ *
  * @return string
  */
 function get_web_url($nid) {
@@ -129,32 +135,29 @@ function get_web_url($nid) {
 
 /**
  * Function for getting the xml output for notification_all, android, ios
- * @return type
+ *
+ * @return string $output
  */
 function default_xml_feed() {
-
   $totalarticle = count(message_data());
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index><footersharemsg>" . $config['footersharemsg'] . "</footersharemsg>";
   $output .= notifications_article();
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
 /**
  * Function for getting the Ipad notification Xml Output
- * @return type
+ *
+ * @return string $output
  */
 function ipad_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
@@ -197,7 +200,7 @@ function ipad_notification_xml() {
         $web_url = $data->mobile_url;
         if ($data->message_url != '') {
           $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== false) {
+          if ($live_url !== FALSE) {
             $url = '/hltapps/api/livetv.xml';
             $section = $data->category;
           }
@@ -218,7 +221,8 @@ function ipad_notification_xml() {
 
 /**
  * Function for getting the chrome notification Xml Output
- * @return type
+ *
+ * @return string $output
  */
 function chrome_notification_xml() {
 
@@ -267,7 +271,7 @@ function chrome_notification_xml() {
         $web_url = $data->mobile_url;
         if ($data->message_url != '') {
           $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== false) {
+          if ($live_url !== FALSE) {
             $url = '/hltapps/api/livetv.xml';
             $section = $data->category;
           }
@@ -276,30 +280,26 @@ function chrome_notification_xml() {
             $section = '';
           }
         }
-
         $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><url>" . $url . "</url><weburl>" . $web_url . "</weburl ><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
 /**
  * Function for getting the safari notification Xml Output
- * @return type
+ *
+ * @return string $output
  */
 function safari_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
-
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
@@ -307,7 +307,6 @@ function safari_notification_xml() {
       $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
       $cat = taxonomy_term_load($primary_cat);
       $section = $cat->name;
-
       $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
       $kicker_image = '';
       $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
@@ -338,7 +337,7 @@ function safari_notification_xml() {
         $web_url = $data->mobile_url;
         if ($data->message_url != '') {
           $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== false) {
+          if ($live_url !== FALSE) {
             $url = '/hltapps/api/livetv.xml';
             $section = $data->category;
           }
@@ -347,35 +346,29 @@ function safari_notification_xml() {
             $section = '';
           }
         }
-
         $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
       }
     }
   }
-
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
 /**
  * Function for getting the amazon notification Xml Output
- * @return type
+ *
+ * @return string $output
  */
 function amazon_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
-
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
-
       $android_header = $data->android_header;
       $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
       $cat = taxonomy_term_load($primary_cat);
@@ -411,7 +404,7 @@ function amazon_notification_xml() {
         $web_url = $data->mobile_url;
         if ($data->message_url != '') {
           $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== false) {
+          if ($live_url !== FALSE) {
             $url = '/hltapps/api/livetv.xml';
             $section = $data->category;
           }
@@ -426,24 +419,21 @@ function amazon_notification_xml() {
     }
   }
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
 /**
  * Function for getting the Window 8 notification Xml Output
- * @return type
+ *
+ * @return string $output
  */
 function windows8_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
-
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
@@ -483,7 +473,7 @@ function windows8_notification_xml() {
         $web_url = $data->mobile_url;
         if ($data->message_url != '') {
           $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== false) {
+          if ($live_url !== FALSE) {
             $url = '/hltapps/api/livetv.xml';
             $section = $data->category;
           }
@@ -496,30 +486,25 @@ function windows8_notification_xml() {
       }
     }
   }
-
   $output .= getMobileFeedXmlFooter();
-
   return $output;
 }
 
 /**
  * Function for getting the osx notification Xml Output
- * @return type
+ *
+ * @return string $output
  */
 function osx_notification_xml() {
-
   $all_data = message_data();
   $totalarticle = count($all_data);
   $config = get_notification_config();
-
   $output = '';
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
-
   if ($totalarticle > 0) {
     foreach ($all_data as $data) {
       $msg_node = node_load($data->content_id);
-
       $android_header = $data->android_header;
       $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
       $cat = taxonomy_term_load($primary_cat);
@@ -555,7 +540,7 @@ function osx_notification_xml() {
         $web_url = $data->mobile_url;
         if ($data->message_url != '') {
           $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== false) {
+          if ($live_url !== FALSE) {
             $url = '/hltapps/api/livetv.xml';
             $section = $data->category;
           }
@@ -577,7 +562,8 @@ function osx_notification_xml() {
 
 /**
  * Function for getting the Nokia Asha notification Xml Output
- * @return array
+ *
+ * @return string $output
  */
 function nokiaasha_notification_xml() {
 
@@ -628,7 +614,7 @@ function nokiaasha_notification_xml() {
         $web_url = $data->mobile_url;
         if ($data->message_url != '') {
           $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== false) {
+          if ($live_url !== FALSE) {
             $url = '/hltapps/api/livetv.xml';
             $section = $data->category;
           }
@@ -648,10 +634,11 @@ function nokiaasha_notification_xml() {
   return $output;
 }
 
-/*
+/**
  * Function for getting the BB Xml Output
+ *
+ * @return string $output
  */
-
 function bb_notification_xml() {
 
   $all_data = message_data();
@@ -701,7 +688,7 @@ function bb_notification_xml() {
         $web_url = $data->mobile_url;
         if ($data->message_url != '') {
           $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== false) {
+          if ($live_url !== FALSE) {
             $url = '/hltapps/api/livetv.xml';
             $section = $data->category;
           }
@@ -720,8 +707,9 @@ function bb_notification_xml() {
 }
 
 /**
- * Function for getting the default Xml Output
- * @return string
+ * Function for getting notifications article
+ *
+ * @return string $output
  */
 function notifications_article() {
 
@@ -766,7 +754,7 @@ function notifications_article() {
         $web_url = $data->mobile_url;
         if ($data->message_url != '') {
           $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== false) {
+          if ($live_url !== FALSE) {
             $url = '/hltapps/api/livetv.xml';
             $section = $data->category;
           }
@@ -784,8 +772,9 @@ function notifications_article() {
 }
 
 /**
- * Get The notification data 
- * @return Message array
+ * Function for getting message_data
+ *
+ * @return string $res
  */
 function message_data() {
   $config = get_notification_config();
@@ -796,3 +785,4 @@ function message_data() {
   $message_data = json_decode($all_data);
   return $message_data;
 }
+

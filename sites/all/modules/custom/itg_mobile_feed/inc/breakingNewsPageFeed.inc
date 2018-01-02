@@ -7,7 +7,7 @@
 /**
  * main function for generate breakingNewsPage xml feed
  *
- * @return array
+ * @return string $output
  */
 function breakingNewsPageFeed() {
   //check into redis
@@ -20,7 +20,7 @@ function breakingNewsPageFeed() {
   else {
     // variable declation
     global $base_url;
-    $img_base = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public";
+    $img_base = ITGD_MUM_DEV_FILES_PATH;
     $output = "";
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $output .= getMobileFeedXmlHeader();
@@ -63,11 +63,12 @@ function breakingNewsPageFeed() {
   }
 
   if ($output) {
-    $feed_file_path = getcwd() . "/sites/default/files/xml_it/stories";
+    $feed_file_path = "public://xml_it/stories";
     $feed_file_name = "breakingnews.xml";
     $return_flag = writeFeedFile($feed_file_path, $feed_file_name, $output);
   }
-//  header('Content-Type: application/xml; charset=utf-8');
-//  echo $output;
-//  die();
+  header('Content-Type: application/xml; charset=utf-8');
+  echo $output;
+  drupal_exit();
 }
+

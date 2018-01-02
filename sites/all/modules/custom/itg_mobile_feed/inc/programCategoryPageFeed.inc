@@ -7,14 +7,12 @@
 /**
  * main function for generate programCategoryPageFeed xml feed
  *
- * @return array
+ * @return string $output
  */
 function programCategoryPageFeed() {
   $output = "";
   $conf_array = tidConfig();
-
   $storytag = array();
-
   // check tid argument
   $tid_arg = arg(1);
   if ($tid_arg && is_numeric($tid_arg)) {
@@ -25,7 +23,7 @@ function programCategoryPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+  $term_feed_path = "public://xml_it/videos";
   $return_flag = "";
   foreach ($section_list as $key => $value) {
 
@@ -55,21 +53,21 @@ function programCategoryPageFeed() {
         $output .= program_section_page_feed_footer();
         // xml file writing..
         if ($output) {
-
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
     }
   }
-//  header('Content-Type: application/xml; charset=utf-8');
-//  echo $output;
-//  die();
+  header('Content-Type: application/xml; charset=utf-8');
+  echo $output;
+  drupal_exit();
 }
 
 /**
  * function for generate photoVideoPage xml feed
+ * @pram int $tid
  *
- * @return array
+ * @return array $data
  */
 function generateProgramCategoryPage($tid) {
   //check into redis
@@ -78,7 +76,6 @@ function generateProgramCategoryPage($tid) {
 
   if ($result_get['key_value'] != "") {
     $data_str = $result_get['key_value'];
-    //echo "redis get - ". $output; exit();
     $data_ar = explode("##listcount##", $data_str);
     $data['lcount'] = $data_ar[0];
     $data['data'] = $data_ar[1];
@@ -134,13 +131,14 @@ function generateProgramCategoryPage($tid) {
       $query->fields('vd', array('field_video_duration_value'));
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
       $query->fields('fss', array('field_story_syndication_value'));
+      
+      $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
+      $feed_date_range = date(strtotime($feed_date));
 
-
-      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
+      if (count($result) > 0) {
       foreach ($result as $reskey => $resvalue) {
-
         $listcount++;
 
         $title = html_entity_decode($resvalue['title']);
@@ -163,6 +161,9 @@ function generateProgramCategoryPage($tid) {
         $output .= "<item><title><![CDATA[" . $title . "]]></title><shortdescription><![CDATA[" . $field_story_kicker_text_value . "]]></shortdescription><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate></item>";
         $fl = generateVideoDetailPageFeed($nid);
       }
+      }else{
+        $output .= "<item><title><![CDATA[]]></title><shortdescription><![CDATA[]]></shortdescription><thumbimage><![CDATA[]]></thumbimage><url></url><createddate></createddate></item>";
+      }
     }
     $data['lcount'] = $listcount;
     $data['data'] = $output;
@@ -170,6 +171,6 @@ function generateProgramCategoryPage($tid) {
 
     $result_set = setRedis($redis_key, $data_fi, $ttl);
   }
-
   return $data;
 }
+

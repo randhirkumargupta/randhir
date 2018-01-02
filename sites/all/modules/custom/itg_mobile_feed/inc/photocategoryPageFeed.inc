@@ -7,7 +7,7 @@
 /**
  * main function for generate photoCategoryPage xml feed
  *
- * @return array
+ * @return string $output
  */
 function photocategoryPageFeed() {
   $output = "";
@@ -23,7 +23,7 @@ function photocategoryPageFeed() {
   }
   $list_count = 0;
   $catFile = "";
-  $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
+  $term_feed_path = "public://xml_it/photos";
 
   $return_flag = "";
   // loop on section
@@ -52,22 +52,21 @@ function photocategoryPageFeed() {
         $output .= getMobileFeedXmlFooter();
         // xml file writing..
         if ($output) {
-
           $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
         }
       }
     }
   }
-  //return $return_flag;
-//  header('Content-Type: application/xml; charset=utf-8');
-//  echo $output;
-//  die();
+
+  header('Content-Type: application/xml; charset=utf-8');
+  echo $output;
+  drupal_exit();
 }
 
 /**
  * function for generate photoCategoryPage xml feed
  *
- * @return array
+ * @return array $data
  */
 function generatePhotoCategoryPage($tid) {
   //check into redis
@@ -95,9 +94,7 @@ function generatePhotoCategoryPage($tid) {
     $order_by = 'ASC';
     $type = "photogallery"; {
       $listcount = 0;
-
       // select node belong from current term id or child term id
-
       $query = db_select('taxonomy_index', 'ti');
       $query->leftJoin('node', 'n', 'n.nid=ti.nid');
       //join  for field value
@@ -126,17 +123,20 @@ function generatePhotoCategoryPage($tid) {
       $query->fields('mi', array('field_story_medium_image_fid'));
       $query->fields('si', array('field_story_small_image_fid'));
       $query->fields('rc', array('field_common_related_content_value'));
-      $query->fields('esi',array('field_story_extra_small_image_fid'));
+      $query->fields('esi', array('field_story_extra_small_image_fid'));
 
       $query->fields('kt', array('field_story_kicker_text_value'));
       $query->fields('vd', array('field_video_duration_value'));
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+      
+      $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
+      $feed_date_range = date(strtotime($feed_date));
 
-
-      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+      
+      if (count($result) > 0) {
       foreach ($result as $reskey => $resvalue) {
-
         $listcount++;
 
         $title = html_entity_decode($resvalue['title']);
@@ -157,6 +157,10 @@ function generatePhotoCategoryPage($tid) {
         $fl = generatePhotoDetailPageFeed($nid);
       }
     }
+    else {
+      $output .= "<item><title><![CDATA[]]></title><thumbimage><![CDATA[]]></thumbimage><url></url><create_date></create_date><create_datetime></create_datetime><is_favorite></is_favorite><relateds><photos></photos><videos></videos><stories></stories></relateds><weburl><![CDATA[]]></weburl></item>";
+    }
+  }
     $data['lcount'] = $listcount;
     $data['data'] = $output;
     $data_fi = $listcount . "##listcount##" . $output;
@@ -166,3 +170,4 @@ function generatePhotoCategoryPage($tid) {
 
   return $data;
 }
+

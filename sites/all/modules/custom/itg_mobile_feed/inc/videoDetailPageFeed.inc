@@ -7,48 +7,44 @@
 /**
  * main function for generate videoDetailPage xml feed
  *
- * @return array
+ * @return string $output
  */
 function videoDetailPageFeed() {
   $output = "";
-
   if (count(arg()) < 2) {
     $output = "Please pass video node nid in url";
   }
   else {
     $output = generateVideoDetailPageFeed(arg(1));
   }
-
-
-//  echo $output;
-//  die();
+  echo $output;
+  die();
 }
 
 /**
  * function for generate generateVideoDetailPageFeed xml feed file
+ * @pram int $nid
+ * @pram string $file_name, $term_feed_path, $type
  *
- * @return array
+ * @return string $return_flag
  */
 function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = '', $type) {
-
   $imgtag = "";
-
-
   if (!$file_name) {
     $file_name = "video" . $nid . ".xml";
   }
   if (!$term_feed_path) {
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+    $term_feed_path = "public://xml_it/videos";
   }
   elseif ($type) {
     if ($type == "photogallery") {
-      $term_feed_path = getcwd() . "/sites/default/files/xml_it/photos";
+      $term_feed_path = "public://xml_it/photos";
     }
     elseif ($type == "story") {
-      $term_feed_path = getcwd() . "/sites/default/files/xml_it/stories";
+      $term_feed_path = "public://xml_it/stories";
     }
     elseif ($type == "videogallery") {
-      $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+      $term_feed_path = "public://xml_it/videos";
     }
   }
   //field_image_caption
@@ -59,15 +55,11 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
   else {
     //check into redis
     $redis_key = "itgd_video" . $nid;
-
     $result_get = getRedis($redis_key);
-
-
     if ($result_get['key_value'] != "") {
       $output = $result_get['key_value'];
     }
     else {
-
       global $base_url;
       $ttl = DEFAULT_REDIS_EXPIRE_TIME;
       $node = node_load($nid);
@@ -89,10 +81,8 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
       $syndications = getNidIsSyndications($nid);
       $field_video_upload = $node->field_video_upload['und'][0]['value'];
       $file_id = file_usage($field_video_upload);
-
       $load_collection = field_collection_item_load($field_video_upload);
       $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
-
       // get video path
       //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
       $metatags_title = html_entity_decode($node->metatags['und']['keywords']['value']);
@@ -100,22 +90,19 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
 
       $output .= getMobileFeedXmlHeader();
       $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[" . $reporter_node . "]]></credit><date><![CDATA[" . $create_date . "]]></date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage><mediaid></mediaid><uurl></uurl>";
-
       //get video tag
-      //$videotag = getVideoTagDetail($video_path_info, $daily_motion_fid);
       $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
-      $videotag = video_detail_formats($nid,$source_type);
+      $videotag = video_detail_formats($nid, $source_type);
       $video_size = migrated_video_transcoding($nid);
 
-      if (!empty($videotag['migrated'])) { //migrated video
-        $output .= "<videoparts><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts><size_364bit>".$video_size."</size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['video_path_mp4'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
-      }elseif (!empty($videotag['dailymotion'])) {
-        $output .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>".$videotag['dailymotion']['filsize']."</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
+      // migrated video
+      if (!empty($videotag['migrated'])) {
+        $output .= "<videoparts><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['video_path_mp4'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
       }
-
-
+      elseif (!empty($videotag['dailymotion'])) {
+        $output .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
+      }
       $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[" . $metatags_title . "]]></metakeyword><metadescription><![CDATA[" . $metatags_description . "]]></metadescription><weburl>" . $weburl . "</weburl>";
-
       //get body img tag
       $imgtag = getImgTagDetail($node);
       if ($imgtag) {
@@ -152,20 +139,30 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
   return $return_flag;
 }
 
+/**
+ * function for generate all_video_format
+ * @pram int $file_id
+ *
+ * @return array $all_video_data
+ */
 function all_video_format($file_id) {
-  $query = db_select('dailymotion_response_details', 'avf');
-  $query->innerJoin('itg_video_bitrates_data', 'dma', 'dma.video_id = avf.video_id');
-  //$query->fields('dma', array('responce'));// bitate_url
-  $query->fields('dma', array('bitate_url'));// bitate_url
-  $query->condition('avf.fid', $file_id);
-  $all_result = $query->execute()->fetchField();
-  return $all_video_data = json_decode($all_result, TRUE);
+  if ($file_id) {
+      $query = db_select('dailymotion_response_details', 'avf');
+	  $query->innerJoin('itg_video_bitrates_data', 'dma', 'dma.video_id = avf.video_id');
+	  
+	  $query->fields('dma', array('bitate_url'));
+	  $query->condition('avf.fid', $file_id);
+	  $all_result = $query->execute()->fetchField();
+	  return $all_video_data = json_decode($all_result, TRUE);
+  }
 }
 
 /**
  * function for generate video xml tag
+ * @pram array $video_path_info
+ * @pram int  $file_id
  *
- * @return array
+ * @return string $output
  */
 function getVideoTagDetail($video_path_info, $file_id = NULL) {
   $output = "";
@@ -175,11 +172,10 @@ function getVideoTagDetail($video_path_info, $file_id = NULL) {
   $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
   $videoparts_3gp = str_replace(".mp4", ".3gp", $video_path_mp4);
 
-//to get the video of all the other formats
+  //to get the video of all the other formats
   $video_formats = all_video_format($file_id);
 
   if ($video_path_info['dailymtion_flag'] == "yes") {
-
     $output .= "<videoparts><part>" . $videoparts_3gp . "</part></videoparts><size_364bit>" . $filesize . "</size_364bit><videoparts_mp4><part>" . $video_path_mp4 . "</part></videoparts_mp4><videoparts_m3u8><part>" . $video_formats['stream_h264_hd_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $video_formats['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $video_formats['stream_h264_ld_url'] . "</part></videoparts_3gp>";
   }
   else {
@@ -192,8 +188,9 @@ function getVideoTagDetail($video_path_info, $file_id = NULL) {
 
 /**
  * function for generate image xml tag
+ * @pram object $node
  *
- * @return array
+ * @return string $imgtag
  */
 function getImgTagDetail($node) {
   $field_story_small_image = $node->field_story_small_image['und'][0]['fid'];
@@ -210,10 +207,9 @@ function getImgTagDetail($node) {
 /**
  * function for generate Empty image xml tag
  *
- *
+ * @return string $imgtag
  */
 function emptygetImgTagDetail() {
-
   $imgtag = "";
   $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
   return $imgtag;
@@ -221,24 +217,30 @@ function emptygetImgTagDetail() {
 
 /**
  * Function check file id
-  o filename
- * @param $fid
- * @return string
+ * filename
+ *
+ * @param int $fid
+ *
+ * @return int $ids
  */
 function file_usage($id) {
   $ids = "";
-  $query = db_select('file_usage', 'fu');
-  $query->condition('fu.id', $id);
-  $query->fields('fu', array('fid'));
-  $results = $query->execute()->fetchAll();
-  $ids = $results[0]->fid;
-  return $ids;
+  if ($id) {
+    $query = db_select('file_usage', 'fu');
+    $query->condition('fu.id', $id);
+    $query->fields('fu', array('fid'));
+    $results = $query->execute()->fetchAll();
+    $ids = $results[0]->fid;
+    return $ids;
+  }
 }
 
 /**
  * Function check exist video filename
- * @param $fid
- * @return string
+ *
+ * @param int fid, $nid, $field_video_upload
+ *
+ * @return array $video_path_info
  */
 function videoCheckExistFile($fid, $nid, $field_video_upload) {
   $video_path_info = array();
@@ -253,9 +255,8 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
   $uri = $results[0]->uri;
   $filename = $results[0]->filename;
   $filesize = $results[0]->filesize;
-
   // for daily motion vedio
-  if (strpos($uri, 'dailymotion_video_dir') !== false) {
+  if (strpos($uri, 'dailymotion_video_dir') !== FALSE) {
     $dailymotion_path = getDailymotionPath($fid, $filename);
     $dailymtion_flag = "yes";
   }
@@ -272,15 +273,16 @@ function videoCheckExistFile($fid, $nid, $field_video_upload) {
   $video_path_info['dailymtion_flag'] = $dailymtion_flag;
   $video_path_info['video_path_mp4'] = $dailymotion_path;
   $video_path_info['filesize'] = $filesize;
-
-
   return $video_path_info;
 }
 
 /**
  * Function get dailymotion video path
- * @param $fid
- * @return string
+ *
+ * @param int $fid
+ * @pram string $filename
+ *
+ * @return string $video_path
  */
 function getDailymotionPath($fid, $filename) {
   $query = db_select('dailymotion_response_details', 'drd');
@@ -296,36 +298,32 @@ function getDailymotionPath($fid, $filename) {
   $filename_ar = explode(".", $filename);
   $final_filename = $filename_ar[0];
   $final_filename = str_replace("_", "-", $final_filename);
-
-
-  //$video_path = "https://www.dailymotion.com/video/".$video_id."_public-dailymotion-".$type."-".$final_filename."-".$ext."_".$channel."";
   $video_path = "https://www.dailymotion.com/video/" . $video_id . "";
   return $video_path;
 }
 
-/*
+/**
  * All video format responce
- * @param $nid
- * @return the details video xml tags
+ *
+ * @param int $nid
+ * @pram string $source_type
+ *
+ * @return array $video_detail
  */
-
- function video_detail_formats($nid, $source_type) {
-
+function video_detail_formats($nid, $source_type) {
   $video_detail = array();
-
   if ($source_type != 'migrated') {
     $video_status = 'dailymotion';
     $videoids = get_video_in_fieldcollection_by_nid($nid);
-
     foreach ($videoids as $keys => $video_value) {
-      if($video_value->video_id != ''){
+      if ($video_value->video_id != '') {
         $video_id = $video_value->video_id;
-      }elseif ($video_value->solr_video_id != '') {
+      }
+      elseif ($video_value->solr_video_id != '') {
         $video_id = $video_value->solr_video_id;
-      }else{}
+      }
       $video_detail[$video_status]['video_id'] = $video_id;
       $file_id = $video_value->fid;
-
     }
 
     $query = db_select('file_managed', 'fm');
@@ -352,77 +350,84 @@ function getDailymotionPath($fid, $filename) {
     $video_detail[$video_status]['bitate_url'] = $video_format;
     $dailymotion_download = dailymotion_download_video_uri($video_id);
     $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
+  }
+  elseif ($source_type == 'migrated') {
+    $video_status = 'migrated';
+    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+    foreach ($videoids as $keys => $video_value) {
+      $video_path_mp4 = $video_value->field_migrated_video_url_value;
     }
-    elseif ($source_type == 'migrated') {
-        $video_status = 'migrated';
-        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-        foreach ($videoids as $keys => $video_value) {
-            $video_path_mp4 = $video_value->field_migrated_video_url_value;
-        } 
-        $video_path_mp4 = str_replace('http://medias3d.intoday.in/', 'http://indiatoday-pdelivery.akamaized.net/', $video_path_mp4);
-        $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
-        
-        $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
-        $rr = explode('/', $video_path_mp4);
-        $mp4_last_fname = end($rr);
-        $gp_file_path = '3gp/' . $mp4_last_fname . '';
-        $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
-        $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);        //m3u8        
-        $m3u8_tags = mcu8_tags($nid);
-        
-        if (!empty($m3u8_tags)) {
-            $m3 = implode(',', $m3u8_tags);
-            $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
-            $videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
-        } else {
-            $m3 = "";
-            $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
-            $videoparts_m3u = str_replace('.mp4', $new_m3, $video_path_mp4);
-        }
-        //$videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
-        $videoparts_m3u8 = str_replace('http://indiatoday-pdelivery.akamaized.net', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
-        //end         
-        $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
-        $video_detail[$video_status]['flv_url'] = $flv_url;
-        $video_detail[$video_status]['videoparts_m3u8'] = $videoparts_m3u8;
-        $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
-        //$output .= "" . $videoparts_3gp . "" . $video_path_mp4 . "" . $videoparts_3gp . "" . $flv_url . "" . $videoparts_3gp . "";         
+    $video_path_mp4 = str_replace('http://medias3d.intoday.in/', 'http://indiatoday-pdelivery.akamaized.net/', $video_path_mp4);
+    $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
+    $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
+    $rr = explode('/', $video_path_mp4);
+    $mp4_last_fname = end($rr);
+    $gp_file_path = '3gp/' . $mp4_last_fname . '';
+    $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
+    // m3u8
+    $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);
+    $m3u8_tags = mcu8_tags($nid);
+
+    if (!empty($m3u8_tags)) {
+      $m3 = implode(',', $m3u8_tags);
+      $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+      $videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
     }
-//p($video_detail);
-    return $video_detail;
+    else {
+      $m3 = "";
+      $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+      $videoparts_m3u = str_replace('.mp4', $new_m3, $video_path_mp4);
+    }
+    //$videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
+    $videoparts_m3u8 = str_replace('http://indiatoday-pdelivery.akamaized.net', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
+    //end
+    $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
+    $video_detail[$video_status]['flv_url'] = $flv_url;
+    $video_detail[$video_status]['videoparts_m3u8'] = $videoparts_m3u8;
+    $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
+    //$output .= "" . $videoparts_3gp . "" . $video_path_mp4 . "" . $videoparts_3gp . "" . $flv_url . "" . $videoparts_3gp . "";
+  }
+  return $video_detail;
 }
+
 /**
  * Get the dailymotion download video url
+ *
  * @param type $video_id
+ *
  * @return type
  */
-function dailymotion_download_video_uri($video_id){
-  $query = db_select('field_data_field_bitrate_video_id','bvi');
-  $query->leftJoin('field_data_field_video_url','v_url','v_url.entity_id = bvi.entity_id');
-  $query->fields('v_url',array('field_video_url_value'));
-  $query->condition('bvi.field_bitrate_video_id_value',$video_id);
+function dailymotion_download_video_uri($video_id) {
+  $query = db_select('field_data_field_bitrate_video_id', 'bvi');
+  $query->leftJoin('field_data_field_video_url', 'v_url', 'v_url.entity_id = bvi.entity_id');
+  $query->fields('v_url', array('field_video_url_value'));
+  $query->condition('bvi.field_bitrate_video_id_value', $video_id);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return $result[0]['field_video_url_value'];
-} 
+}
+
 /**
  * function for getmcu8 url of vedio
+ *
  * @param type $nid
+ *
  * @return type
  */
-
 function mcu8_tags($nid) {
-    //$nid = 17378;
-    $query = db_select('field_data_field_multi_bitrate', 'mvr');
-    $query->fields('mvr', array('field_multi_bitrate_value'));
-    $query->condition('mvr.entity_id', $nid);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $tags = array();
-    if (count($result) > 0) {
-        foreach ($result as $data) {
-            $first_char = strstr($data['field_multi_bitrate_value'], '@', true);
-            if ($first_char == 'B' || $first_char == 'M') {
-                $tags[] = substr(strstr($data['field_multi_bitrate_value'], '@'), 1);
-            }
-        }
-    } return $tags;
+  //$nid = 17378;
+  $query = db_select('field_data_field_multi_bitrate', 'mvr');
+  $query->fields('mvr', array('field_multi_bitrate_value'));
+  $query->condition('mvr.entity_id', $nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $tags = array();
+  if (count($result) > 0) {
+    foreach ($result as $data) {
+      $first_char = strstr($data['field_multi_bitrate_value'], '@', TRUE);
+      if ($first_char == 'B' || $first_char == 'M') {
+        $tags[] = substr(strstr($data['field_multi_bitrate_value'], '@'), 1);
+      }
+    }
+  }
+  return $tags;
 }
+

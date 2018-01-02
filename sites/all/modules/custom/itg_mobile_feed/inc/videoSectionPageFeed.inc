@@ -5,9 +5,9 @@
  */
 
 /**
- * main function for generate videoSectionPage xml feed
+ * main function for generate videoSectionPage xml feed *
  *
- * @return array
+ * @return string $output
  */
 function videoSectionPageFeed() {
   $redis_key = "itgd_videoSectionPageFeed";
@@ -38,11 +38,9 @@ function videoSectionPageFeed() {
     $section_list = $conf_array['video_sec_tid'];
     foreach ($section_list as $key => $value) {
       $node_count = customNodeCount('videogallery', $value);
-      $term_status = itg_category_manager_term_state(trim($value),CATEGORY_MANAGMENT);
-      
+      $term_status = itg_category_manager_term_state(trim($value), CATEGORY_MANAGMENT);
       if ($node_count > 0 && $term_status == 1) {
-
-	      $value = trim($value);
+        $value = trim($value);
         $term = taxonomy_term_load($value);
         $term_name = $term->name;
         $term_url = nodeCategoryFrontUrl($value, 'term');
@@ -55,7 +53,6 @@ function videoSectionPageFeed() {
         $cat_icon_img = sectionCategoryIconImg($value);
         // child xml node
         $child_node .= "<item><section><![CDATA[" . $term_name . "]]></section><sectionurl><![CDATA[" . $term_file_name . "]]></sectionurl>";
-
         // get videogallery node tag
         $child_node .= getNodeFeedTag($value, 'videogallery', 2);
 
@@ -79,10 +76,11 @@ function videoSectionPageFeed() {
 
   if ($output) {
     $file_name = "videsectionlist.xml";
-    $term_feed_path = getcwd() . "/sites/default/files/xml_it/videos";
+    $term_feed_path = "public://xml_it/videos";
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
-//  header('Content-Type: application/xml; charset=utf-8');
-//  echo $output;
-//  die();
+  header('Content-Type: application/xml; charset=utf-8');
+  echo $output;
+  die();
 }
+
