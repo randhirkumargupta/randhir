@@ -38,15 +38,15 @@ function itg_mega_review_filter_callback($title) {
 function itg_mega_review_migration() {
   $arg = arg();
   $megareview_section_id = !empty($arg['2']) ? $arg['2'] : '';
-  if($megareview_section_id) {
+  if ($megareview_section_id) {
     $query = db_select('node', 'n')
-      ->fields('n', array('nid'));
+        ->fields('n', array('nid'));
     $query->condition('type', 'mega_review_critic', '=');
     $result = $query->execute()->fetchAll();
     foreach ($result AS $row) {
       $nid = $row->nid;
       $node = node_load($nid);
-      if(empty($node->field_story_category['und'])) {
+      if (empty($node->field_story_category['und'])) {
         $node->field_story_category['und'][0]['tid'] = $megareview_section_id;
         $newpath = itg_common_custompath_insert_load($node);
         $node->path['alias'] = $newpath;
