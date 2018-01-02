@@ -339,7 +339,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
       drupal_add_js(drupal_get_path('module', 'itg_front_end_common') . '/js/itg_front_end_common.js', array('weight' => 2, 'scope' => 'footer'));
     }
     
-  $ctype = array('story', 'photogallery', 'videogallery', 'mega_review_critic', 'blog', 'breaking_news', 'podcast');
+  $ctype = array('story', 'photogallery', 'videogallery', 'mega_review_critic', 'blog', 'breaking_news', 'podcast', 'page');
   if (in_array($node->type, $ctype)) {
       if (!empty($node->field_gallery_image['und'][0]['value']) && $node->type == 'photogallery') {
         $entity = entity_load('field_collection_item', array($node->field_gallery_image['und'][0]['value']));
@@ -379,7 +379,15 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         if ($value == 'image' && $node->type == 'photogallery' && !empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
           $description = file_create_url($photo_image);
         }
-        
+        if ($is_fron_page) {
+          if ($value == 'card') {
+            $description = '';
+          }
+          if ($value == 'creator') {
+            $description = '';
+          }
+        }
+
         $twitter_tag = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
@@ -393,7 +401,16 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         
       }
       
+      $og_desc = $node->metatags[LANGUAGE_NONE]['description']['value'];
       $fb_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+      $type = $node->type;
+      if ($is_fron_page) {
+         $type = 'news';
+         $fb_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/logo.png');
+         $og_desc = 'Check out the latest news from India and around the world. Latest India news on Bollywood, Politics, Business, Cricket, Technology and Travel.';
+      }
+      
+      
       $fb_image_tag = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
@@ -417,7 +434,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           '#tag' => 'meta',
           '#attributes' => array(
             'property' => 'og:type',
-            'content' => $node->type,
+            'content' => $type,
           )
         );
       
@@ -480,7 +497,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           '#tag' => 'meta',
           '#attributes' => array(
             'property' => 'og:description',
-            'content' => $node->metatags[LANGUAGE_NONE]['description']['value'],
+            'content' => $og_desc,
           )
         );
       
