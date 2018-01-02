@@ -8441,7 +8441,8 @@ section.sidebar {
         }
         .itg-widget-parent {
             .droppable {
-                height: 225px;
+                height: auto;
+                min-height: initial;
             }
         }
         .itg-widget-child {
@@ -8502,7 +8503,7 @@ section.sidebar {
         }
         .more {
             padding: 10px 20px 20px 0px;
-            position: absolute;
+            position: unset;
             right: 0px;
             bottom: 0px;
         }
@@ -8594,7 +8595,7 @@ section.sidebar {
         border: 1px solid #ddd;
         padding: 10px;
         .auto-tips-n-tricks {
-            height: 220px;
+            height: 344px;
             overflow: auto;
         }
     }
@@ -14950,3 +14951,6 @@ ul.pron-cons-img li img {
 }
 
 .front .ad-widget .sidebar-ad .block-itg-ads{margin:0px auto 0;}
+.education-layout-page .widget-title{padding:5px;}
+.education-layout-page .col-md-12.col-sm-6.col-xs-12.mt-10 .itg-widget-child.shadow-on .droppable {height: 314px; min-height: initial;}
+
