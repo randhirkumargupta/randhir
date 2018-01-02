@@ -276,7 +276,18 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  
+  if (!empty(FRONT_URL) && $base_url == FRONT_URL) {
+    $add_script = variable_get('add_traffic_script');
+    if ($add_script) {
+      $script_js = variable_get('traffic_script_js');
+      $script = array(
+        '#tag' => 'script',
+        '#attributes' => array('type' => 'text/javascript'),
+        '#value' => $script_js,
+      );
+      drupal_add_html_head($script, 'script');
+    }
+  }
 }
 
 /**
@@ -286,6 +297,18 @@ function itg_html_head_alter(&$head_elements) {
   $arg = arg();
   global $base_url;
   
+  // canonical for home page
+  if (drupal_is_front_page()) {
+    $home_canonical = $base_url . '/';
+    $head_elements['canonical_0'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'canonical',
+        'href' => $home_canonical
+      ),
+    );
+  }
   // Updating meta name keywords to news_keyword sitewide
   $meta_name_keyword = array_keys($head_elements);
   if (in_array('metatag_keywords_0', $meta_name_keyword)) {
@@ -379,6 +402,7 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['og_image_height']['#weight'] = -978;
   $head_elements['og_image_width']['#weight'] = -977;
   $head_elements['og_image']['#weight'] = -976;
+  $head_elements['canonical_0']['#weight'] = -1001;
 }
 
 /**

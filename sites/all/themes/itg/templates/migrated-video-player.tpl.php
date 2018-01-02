@@ -41,7 +41,7 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
           width: "100%",
           height: "100%",
           aspectratio: "4:3",
-          "stretching": "exactfit",
+          "stretching": "uniform",
           androidhls: "true",
           fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},

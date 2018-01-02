@@ -17,7 +17,7 @@ $term = taxonomy_term_load($tid);
 $primary_category_name = itg_common_custompath_insert_val($term->name);
 $f_collection = entity_load('field_collection_item', array($photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']));
 $actual_link = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-$short_url = shorten_url($actual_link, 'goo.gl');
+$short_url = $actual_link;
 $share_title = addslashes($photo_node->title);
 $share_desc = '';
 $image = file_create_url($f_collection[$photo_node->field_gallery_image[LANGUAGE_NONE][0]['value']]->field_images[LANGUAGE_NONE][0]['uri']);
@@ -87,12 +87,13 @@ $argum = base64_encode(arg(1));
                 }
                 ?>
                 </div>  
-                <?php if ($user->uid > 0): ?>
+                <!-- Comment by vishal <?php if ($user->uid > 0): ?>
                   <li><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                 <?php else: ?>
                   <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                 <?php endif; ?>
-               <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   
+               <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   -->
+               <li class="replace-submit-story"><a class="" title="post content" href="#"><i class="fa fa-share"></i></a></li>
             </ul>
         </div>
     </div>
@@ -135,7 +136,10 @@ $argum = base64_encode(arg(1));
             </ul>
         </div>
         <div class="photo-by-slider">
-            <?php foreach ($rows as $index => $row): ?>
+            <?php foreach ($rows as $index => $row): ?>              
+              <?php if(!empty($row['field_credit'])) : ?>
+                <p class="photo-by"><?php print t('PHOTO:'); ?> <?php print $row['field_credit']; ?></p>
+              <?php endif; ?>
               <?php if (!empty($row['field_photo_byline'])) { ?>
                 <p class="photo-by"><?php print t('PHOTO:'); ?> <?php print $row['field_photo_byline']; ?></p>
                 <?php
@@ -214,12 +218,12 @@ $argum = base64_encode(arg(1));
                             </div>
                         </div>
                     </li>
-                    <?php if ($user->uid > 0): ?>
+                    <!-- Comment by Vishal<?php if ($user->uid > 0): ?>
                       <li class="mhide"><a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a></li>
                     <?php else: ?>
                       <li class="mhide replace-submit-story"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
-                    <?php endif; ?>
-                    
+                    <?php endif; ?> -->
+                    <li class="mhide replace-submit-story"><a class="" title="post content" href="#"><i class="fa fa-share"></i></a></li>
                     <div class = "photo-refresh-bottom">
                     <?php global $user; ?>
                     <?php

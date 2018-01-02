@@ -429,6 +429,7 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $icon_fid = (int) $menu_data['db_data']['menu_name'];
   $display_icon_attribute = $display_icon;
   $sponser_logo_uri = !empty($menu_data['term_load']->field_sponser_logo['und'][0]['uri']) ? $menu_data['term_load']->field_sponser_logo['und'][0]['uri'] : 0;
+ 
   $vertical_menu_icon = "";
   $sponser_logo_alt = $menu_data['term_load']->field_sponser_logo['und'][0]['alt'];
   $sponser_logo_title = $menu_data['term_load']->field_sponser_logo['und'][0]['title'];
@@ -442,8 +443,8 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
       if (!empty($amp)) {
         $link_text = $vertical_menu_icon = "<img width='152' height='85' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='amp-image' />"; 
       } else {
-        $img_path = image_style_url('menu_manager_icons' , $icon_object->uri);
-        $link_text = $vertical_menu_icon =   "<img width='152' height='85' title='" . $link_title_for_vertical . "'  src='" . $img_path . "' alt='".$link_title_for_vertical."' />";
+        //$img_path = image_style_url('menu_manager_icons' , $icon_object->uri);
+        $link_text = $vertical_menu_icon =   "<img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . file_create_url($icon_object->uri) . "' alt='".$link_title_for_vertical."' />";
       }
       if (!empty($icon_object->uri)) {
         $image_class = "has-image";
@@ -465,10 +466,22 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
         $link_text = $vertical_menu_icon = "<img width='152'  height= '85' src='" . file_create_url($sponser_logo_uri) . "' alt='amp-image' />"; 
         $image_class = "has-image";
       } else {
-        $img_path = image_style_url('menu_manager_icons' , $sponser_logo_uri);
-        $link_text = $vertical_menu_icon =   "<img width='152' height='85' title='" . $sponser_logo_title . "'  src='" . $img_path . "' alt='".$sponser_logo_alt."' />";
+        //$img_path = image_style_url('menu_manager_icons' , $sponser_logo_uri);
+        $link_text = $vertical_menu_icon =   "<img width='48' height='32' title='" . $sponser_logo_title . "'  src='" . file_create_url($sponser_logo_uri) . "' alt='".$sponser_logo_alt."' />";
+        $link_text_icon = "<span class='menu-icons hidden-desktop'><img width='48' height='32' title='" . $sponser_logo_title . "'  src='" . file_create_url($sponser_logo_uri) . "' alt='".$sponser_logo_alt."' /></span>";
         $image_class = "has-image";
       }
+    }
+  }
+
+  if (!empty($menu_data['db_data']['menu_level']) && $menu_data['db_data']['menu_level'] == 'second') {
+    $temp_data = taxonomy_term_load($tid);
+    $link_text_icon_uri = '';
+    $link_text_mobile = isset($temp_data->name) ? $temp_data->name : $title_array[0];
+    if (!empty($temp_data->field_sponser_logo['und'][0]['uri']) && file_exists($temp_data->field_sponser_logo['und'][0]['uri'])) {
+      $link_text_icon_uri = $temp_data->field_sponser_logo['und'][0]['uri'];
+      $img_path_new = file_create_url($link_text_icon_uri);
+      $link_text_icon = "<span class='menu-icons hidden-desktop'><img width='48' height='32' title='" . $link_title_for_vertical . "'  src='" . $img_path_new . "' alt='" . $link_title_for_vertical . "' /></span>";
     }
   }
 
@@ -518,6 +531,8 @@ function itg_menu_manager_get_menu($menu_data, $argument, $load_parent = array()
   $menu_link_data_array['link_title_for_vertical'] = $link_title_for_vertical;
   $menu_link_data_array['url_type'] = "url-type-" . $url_type;
   $menu_link_data_array['display_icon'] = $display_icon_attribute;
+  $menu_link_data_array['link_text_icon'] = $link_text_icon;
+  $menu_link_data_array['link_text_mobile'] = $link_text_mobile;
   return $menu_link_data_array;
 }
 

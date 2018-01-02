@@ -1,1 +1,594 @@
-.section-news .widget-title{background:#a00606;color:#fff;padding:0 7px;font-size:14px;font-weight:200}.section-news .widget-title a{color:#fff}.section-news .section-ordering p{padding:5px 0 5px 12px}.section-news .data-holder .section-ordering p:before{top:17px}.section-news .section-ordering .kicker{color:#939393;padding:8px 0 0}.section-news .news-photo-section .photo-list{list-style:none;margin:0}.section-news .news-photo-section .photo-list li{list-style:none}.section-news figure{position:relative;margin-bottom:5px}.section-news figure a{display:block}.section-news figure figcaption{position:absolute;bottom:0;background:rgba(0,0,0,.5);color:#fff;padding:2px 5px}.section-news figure figcaption i.fa{margin-right:3px}.section-news .tile .posted-on{color:#939393;font-size:13px;font-weight:100;padding-bottom:5px;display:block}.section-news .news-photo-section h3,.section-news h2.news-head{text-transform:uppercase;font-weight:700;color:#bb0a0a;text-align:left;position:relative;margin-bottom:20px}.section-news .news-photo-section h3:before,.section-news h2.news-head:before{content:'';position:absolute;left:0;width:100%;bottom:8px;height:5px;margin-top:-2px;background:#ddd}.section-news h2.news-head:before{bottom:15px}.section-news .news_content{margin-top:30px}.section-news .news-photo-section{margin:40px 0 0}.section-news .news-photo-section h3 span,.section-news h2.news-head span{padding:5px 20px 0 15px;background:#fff;z-index:1;position:relative;text-transform:uppercase;font-weight:700;color:#bb0a0a}.section-news h2.news-head span{color:#333;padding:5px 20px 0 0}.section-news .news-photo-section,.section-news .news_content{clear:both;float:left;width:100%;overflow:hidden}.section-news .mt-30{margin-top:30px}.section-news .news-heading{border-bottom:1px solid #ddd;margin-bottom:15px;padding:5px 0;font-size:20px;text-transform:uppercase;font-weight:600}.section-news h3.news-page-feature{padding-left:15px;margin-bottom:10px;position:relative}.section-news h3.news-page-feature:before{position:absolute;top:12px;left:0;content:'';border-radius:100%;background:#a00606;height:5px;width:5px}@media all and (max-width:700px){.section-news figure img{width:100%}}.view-sitemap ul{margin:0 0 0 40px}.view-sitemap ul li{color:#a00606;padding:5px 20px}.view-sitemap ul li a{color:#333}.embed-mega-review a{text-decoration:none;font-family:"Roboto Slab",sans-serif}.embed-mega-review .field-name-field-story-movie-description .field-item{font-family:"Roboto Slab",sans-serif;padding:10px 0;font-size:.9375rem;line-height:27px}.megareview iframe.embed-megareview{background:#f0f0f0}.embed-mega-review{padding-bottom:15px}@media all and (max-width:767px){article.node-mega-review-critic .movie-review-wrapper .movie-review-text,article.node-mega-review-critic .movie-review-wrapper .movie-trailer{width:50%}article.node-mega-review-critic .movie-review-wrapper .movie-review-text{height:170px;overflow-y:auto}}article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .social-info{display:block;border-top:0;width:auto}article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .movie-rating{height:60px;margin-top:20px}@media all and (max-width:560px){article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .social-info{display:none}article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .movie-rating{height:40px;margin-top:0}article.node-mega-review-critic .embed-mega-review .movie-review-wrapper .movie-review-text,article.node-mega-review-critic .embed-mega-review .movie-review-wrapper .movie-trailer{height:auto;width:100%}}.side_chunk_event_chairman:after,.side_chunk_event_chairman:before{content:"";width:33px;height:33px;display:inline-block}.side_chunk_event_chairman:before{background:url(http://media2.intoday.in/conclave/conclave/images/Quot_Top.jpg) no-repeat;margin:0 10px 0 0}.side_chunk_event_chairman:after{background:url(http://media2.intoday.in/conclave/conclave/images/quot_Bottom.jpg) no-repeat;margin:0 0 0 10px;position:absolute}#block-views-event-photo-slider-block-2 h2{font-size:24px;color:#ef3c24;font-family:RobotoSlab-Regular;margin:15px 0;text-transform:capitalize}.side_chunk_event_chairman{color:#4C4C4C;font:700 12px/15px arial;margin-top:10px}.event_chairman_title{font:700 11px/16px arial;color:#000;padding-top:15px} .budget-predictor-msg{font-size:16px;font-weight:400;margin-bottom:20px}@media only screen and (max-width:767px){.budget-predictor-table th.title{font-size:14px;padding:10px 5px;min-width:70px;max-width:70px}.budget-predictor-table td{padding:0}#main-container-budget #sortable1 li,#main-container-budget #sortable2 li,#main-container-budget #sortable3 li,#main-container-budget #sortable4 li{width:40px;height:40px;margin:10px 5px}.budget-predictor-table .cheaper-deaper-action button{padding:3px 9px 1px;font-size:13px}}.megareview .iframe-video{position: inherit;height: inherit;padding: 0;}.megareview  .iframe-video iframe{position: inherit;}
+.section-news .widget-title {
+    background: #a00606;
+    color: #fff;
+    padding: 0 7px;
+    font-size: 14px;
+    font-weight: 200
+}
+.section-news .widget-title a {
+    color: #fff
+}
+.section-news .section-ordering p {
+    padding: 5px 0 5px 12px
+}
+.section-news .data-holder .section-ordering p:before {
+    top: 17px
+}
+.section-news .section-ordering .kicker {
+    color: #939393;
+    padding: 8px 0 0
+}
+.section-news .news-photo-section .photo-list {
+    list-style: none;
+    margin: 0
+}
+.section-news .news-photo-section .photo-list li {
+    list-style: none
+}
+.section-news figure {
+    position: relative;
+    margin-bottom: 5px
+}
+.section-news figure a {
+    display: block
+}
+.section-news figure figcaption {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    padding: 2px 5px
+}
+.section-news figure figcaption i.fa {
+    margin-right: 3px
+}
+.section-news .tile .posted-on {
+    color: #939393;
+    font-size: 13px;
+    font-weight: 100;
+    padding-bottom: 5px;
+    display: block
+}
+.section-news .news-photo-section h3,
+.section-news h2.news-head {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #bb0a0a;
+    text-align: left;
+    position: relative;
+    margin-bottom: 20px
+}
+.section-news .news-photo-section h3:before,
+.section-news h2.news-head:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 8px;
+    height: 5px;
+    margin-top: -2px;
+    background: #ddd
+}
+.section-news h2.news-head:before {
+    bottom: 15px
+}
+.section-news .news_content {
+    margin-top: 30px
+}
+.section-news .news-photo-section {
+    margin: 40px 0 0
+}
+.section-news .news-photo-section h3 span,
+.section-news h2.news-head span {
+    padding: 5px 20px 0 15px;
+    background: #fff;
+    z-index: 1;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #bb0a0a
+}
+.section-news h2.news-head span {
+    color: #333;
+    padding: 5px 20px 0 0
+}
+.section-news .news-photo-section,
+.section-news .news_content {
+    clear: both;
+    float: left;
+    width: 100%;
+    overflow: hidden
+}
+.section-news .mt-30 {
+    margin-top: 30px
+}
+.section-news .news-heading {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 5px 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 600
+}
+.section-news h3.news-page-feature {
+    padding-left: 15px;
+    margin-bottom: 10px;
+    position: relative
+}
+.section-news h3.news-page-feature:before {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    content: '';
+    border-radius: 100%;
+    background: #a00606;
+    height: 5px;
+    width: 5px
+}
+@media all and (max-width: 700px) {
+    .section-news figure img {
+        width: 100%
+    }
+}
+.view-sitemap ul {
+    margin: 0 0 0 40px
+}
+.view-sitemap ul li {
+    color: #a00606;
+    padding: 5px 20px
+}
+.view-sitemap ul li a {
+    color: #333
+}
+.embed-mega-review a {
+    text-decoration: none;
+    font-family: "Roboto Slab", sans-serif
+}
+.embed-mega-review .field-name-field-story-movie-description .field-item {
+    font-family: "Roboto Slab", sans-serif;
+    padding: 10px 0;
+    font-size: .9375rem;
+    line-height: 27px
+}
+.megareview iframe.embed-megareview {
+    background: #f0f0f0
+}
+.embed-mega-review {
+    padding-bottom: 15px
+}
+@media all and (max-width: 767px) {
+    article.node-mega-review-critic .movie-review-wrapper .movie-review-text,
+    article.node-mega-review-critic .movie-review-wrapper .movie-trailer {
+        width: 50%
+    }
+    article.node-mega-review-critic .movie-review-wrapper .movie-review-text {
+        height: 170px;
+        overflow-y: auto
+    }
+}
+article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .social-info {
+    display: block;
+    border-top: 0;
+    width: auto
+}
+article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .movie-rating {
+    height: 60px;
+    margin-top: 20px
+}
+@media all and (max-width: 560px) {
+    article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .social-info {
+        display: none
+    }
+    article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .movie-rating {
+        height: 40px;
+        margin-top: 0
+    }
+    article.node-mega-review-critic .embed-mega-review .movie-review-wrapper .movie-review-text,
+    article.node-mega-review-critic .embed-mega-review .movie-review-wrapper .movie-trailer {
+        height: auto;
+        width: 100%
+    }
+}
+.side_chunk_event_chairman:after,
+.side_chunk_event_chairman:before {
+    content: "";
+    width: 33px;
+    height: 33px;
+    display: inline-block
+}
+.side_chunk_event_chairman:before {
+    background: url(http://media2.intoday.in/conclave/conclave/images/Quot_Top.jpg) no-repeat;
+    margin: 0 10px 0 0
+}
+.side_chunk_event_chairman:after {
+    background: url(http://media2.intoday.in/conclave/conclave/images/quot_Bottom.jpg) no-repeat;
+    margin: 0 0 0 10px;
+    position: absolute
+}
+#block-views-event-photo-slider-block-2 h2 {
+    font-size: 24px;
+    color: #ef3c24;
+    font-family: RobotoSlab-Regular;
+    margin: 15px 0;
+    text-transform: capitalize
+}
+.side_chunk_event_chairman {
+    color: #4C4C4C;
+    font: 700 12px/15px arial;
+    margin-top: 10px
+}
+.event_chairman_title {
+    font: 700 11px/16px arial;
+    color: #000;
+    padding-top: 15px
+}
+.budget-predictor-msg {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px
+}
+@media only screen and (max-width: 767px) {
+    .budget-predictor-table th.title {
+        font-size: 14px;
+        padding: 10px 5px;
+        min-width: 70px;
+        max-width: 70px
+    }
+    .budget-predictor-table td {
+        padding: 0
+    }
+    #main-container-budget #sortable1 li,
+    #main-container-budget #sortable2 li,
+    #main-container-budget #sortable3 li,
+    #main-container-budget #sortable4 li {
+        width: 40px;
+        height: 40px;
+        margin: 10px 5px
+    }
+    .budget-predictor-table .cheaper-deaper-action button {
+        padding: 3px 9px 1px;
+        font-size: 13px
+    }
+}
+.megareview .iframe-video {
+    position: inherit;
+    height: inherit;
+    padding: 0
+}
+.megareview .iframe-video iframe {
+    position: inherit
+}
+.view-program-schedule .left-side-event-contents .common-class {
+    display: none
+}
+.view-program-schedule .top-tab ul li.active {
+    background: #a00606!important;
+    color: #fff
+}
+.view-program-schedule .top-tab ul li {
+    display: inline-block;
+    vertical-align: top;
+    background: #eee;
+    padding: 6px 20px;
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer
+}
+.view-program-schedule .top-tab ul {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px
+}
+.front .itg-top-section .top-rhs-add .home-trending-video {
+    margin-top: 30px
+}
+.front .itg-top-section .top-rhs-add-child .ad-widget {
+    padding: 15px;
+    height: 283px
+}
+.front .itg-top-section .top-rhs-add-child .ad-widget .sidebar-ad {
+    background: #fff;
+    margin: 0
+}
+.front .itg-top-section .top-rhs-add-child .ad-widget .sidebar-ad .block-itg-ads {
+    margin: 0
+}
+.front .itg-top-section .home-top-story .data-holder .itg-listing li {
+    padding: 10px
+}
+.front .itg-top-section .home-top-story .itg-sponsor-title {
+    top: -8px;
+    left: 0;
+    padding: 4px 5px 5px 10px
+}
+.front .itg-top-section .home-top-story .droppable {
+    height: 620px
+}
+@media screen and (min-width: 991px) and (max-width: 1024px) {
+    .front .itg-top-section .top-rhs-add {
+        margin-top: 40px
+    }
+    .front .itg-top-section .top-rhs-add .home-trending-video {
+        margin-top: 0
+    }
+    .front .itg-top-section .home-top-story .droppable {
+        height: 620px
+    }
+    .front .itg-top-section .top-rhs-add-child .ad-widget {
+        width: 333px;
+        margin: 0 auto
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .front .itg-top-section .home-top-story .droppable {
+        height: 515px
+    }
+    .front .itg-top-section .top-rhs-add {
+        margin-top: 40px
+    }
+    .front .itg-top-section .top-rhs-add .home-trending-video {
+        margin-top: 0
+    }
+    
+   .section-movies .movies-featured-news .movies-featured-post { width:50%; float:left;}
+   .section-movies .movies-featured-news .movies-featured-post img{width:95%;}
+}
+.may-be-recommend .trc_rbox_container .video-label.video-title {
+    font-size: .875rem;
+    line-height: 19px;
+    color: #323232;
+    font-family: RobotoSlab-Regular;
+    font-weight: 400
+}
+.page-taxonomy-term.section-movies #block-itg-ads-ads-super-banner-top-nav-728x90, .page-taxonomy-term.section-television #block-itg-ads-ads-super-banner-top-nav-728x90{
+    margin-bottom: 10px
+}
+.section-movies .featured-news {
+    padding: 0;
+    border: 0
+}
+.itg-h385-section .widget-wrapper.tech-movie_latest {
+    height: 100%;
+    padding: 10px;
+    background-color: #f3f3f3
+}
+.section-movies .widget-title {
+    position: absolute!important;
+    background: #a00606;
+    padding: 0 7px;
+    color: #fff;
+    font-size: 14px
+}
+.section-movies .widget-title a {
+    color: #fff;
+    font-size: 14px
+}
+.section-movies .rhs-movie-list .widget-wrapper {
+    padding-top: 40px
+}
+.section-movies .rhs-movie-list .widget-wrapper .widget-title {
+    margin-left: 9px;
+    margin-top: 9px
+}
+.movies-top-section {
+    background: url(../images/pattern.jpg);
+    padding: 40px 0
+}
+.movies-top-section .backbg {
+    background: #1f1f1f;
+    padding: 10px
+}
+.page-taxonomy-term.section-movies header, .page-taxonomy-term.section-television header {
+    margin-bottom: 0
+}
+.page-taxonomy-term.section-movies #block-itg-layout-manager-front-end-breadcrumb, .page-taxonomy-term.section-television #block-itg-layout-manager-front-end-breadcrumb {
+    display: none
+}
+.section-movies .featured-news .featured-post h2 a {
+    color: #fff
+}
+.section-movies .movies-featured-news .movies-featured-post h3 a {
+    color: #fff;
+    font-size: 14px;
+    display: block;
+    line-height: 18px;
+    padding: 10px 0;
+    font-weight: 400
+}
+.ad-widget .sidebar-ad .block-itg-ads {
+    width: 300px;
+    margin: 35px auto 0
+}
+.bestbox .info1,
+.bestbox .info2,
+.bestbox .info3 {
+    text-indent: -9999px;
+    margin: 0 auto;
+    height: 216px
+}
+
+@media all and (max-width: 700px) {
+    .section-movies .featured-news .featured-post h2 a,
+    .section-movies .movies-featured-news .movies-featured-post h3 a {
+        font-size: 16px;
+        line-height: 22px
+    }
+    .section-movies .movies-featured-news .movies-featured-post img {
+        width: 100%
+    }
+    .section-movies .movies-featured-news .movies-featured-post { width:100%; float:none;}
+   .section-movies .movies-featured-news .movies-featured-post img{width:100%;}
+}
+.bestbox .info1 {
+    background: url(../images/Info-1-BW.jpg) top left no-repeat;
+    width: 220px
+}
+.bestbox .active1,
+.bestbox .info1:hover {
+    background: url(../images/Info-1-Colour.jpg) top left no-repeat;
+    width: 220px;
+    height: 216px;
+    text-indent: -9999px
+}
+.bestbox .info2 {
+    background: url(../images/Info-2-BW.jpg) top left no-repeat;
+    width: 220px
+}
+.bestbox .active2,
+.bestbox .info2:hover {
+    background: url(../images/Info-2-Colour.jpg) top left no-repeat;
+    width: 220px;
+    height: 216px;
+    text-indent: -9999px
+}
+.bestbox .info3 {
+    background: url(../images/Info-3-BW.jpg) top left no-repeat;
+    width: 220px
+}
+.bestbox .active3,
+.bestbox .info3:hover {
+    background: url(../images/Info-3-Colour.jpg) top left no-repeat;
+    width: 220px;
+    height: 216px;
+    text-indent: -9999px
+}
+.slider_outer .slick-next,
+.slider_outer .slick-prev {
+    cursor: pointer;
+    height: 85px;
+    width: 45px;
+    color: #000;
+    font-size: 40px;
+    top: 40%;
+    text-indent: -9999px;
+    position: absolute
+}
+.slider_outer .slick-next {
+    margin-left: -10px;
+    background: rgba(96, 96, 96, .5);
+    padding: 32px 14px 40px 3px;
+    border-radius: 100px 0 0 100px;
+    right: 10px;
+    border: none;
+    background-image: url(../images/slider-next.png);
+    background-repeat: no-repeat;
+    background-position: center center
+}
+.slider_outer .slick-prev {
+    z-index: 9;
+    border: none;
+    margin-left: 0;
+    background-color: rgba(96, 96, 96, .5);
+    padding: 32px 10px 40px 0;
+    border-radius: 0 100px 100px 0;
+    left: 10px;
+    background-image: url(../images/slider-pre.png);
+    background-repeat: no-repeat;
+    background-position: center center
+}
+.city_wise {
+    height: 35px;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-user-select: none;
+    background-image: url(../images/dropdown.png);
+    background-position: 97% 55%;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    margin: 0;
+    width: 100%;
+    font-family: roboto;
+    padding: 2px 15px 2px 5px
+}
+.agbutton.story-like-dislike #name-dv #dlky #dsty-dv:before,
+.agbutton.story-like-dislike #name-dv #dlky #sty-dv:before,
+.agbutton.story-like-dislike #name-dv #lky #dsty-dv:before,
+.agbutton.story-like-dislike #name-dv #lky #sty-dv:before {
+    content: '';
+    height: 21px;
+    background: url(../images/story-up-arrow-icon.png) no-repeat;
+    position: absolute;
+    left: 12px;
+    top: -21px;
+    width: 25px
+}
+ul.pron-cons-img {
+    list-style: none!important
+}
+ul.pron-cons-img li img {
+    margin-top:0px;
+}
+.story-section .story-right .stryimg img {
+    width: 100%
+}
+.itg-mosimage {
+    font-size: .8125rem;
+    line-height: 18px;
+    color: #929292;
+}
+.itg-mosimage img {
+    margin-bottom: 5px;
+}
+.story-section .story-right .description p.review_quote {
+    color: #000;
+    font: 600 20px/28px "RobotoSlab-Regular";
+    position: relative;
+}
+.story-right .description p:first-child:first-letter {
+    font-size: 50px;
+    font-weight: bold;
+    padding-right:5px;
+    float:left;
+    line-height:52px;
+}
+.droppable.hide-widget{
+	display:none;
+}
+.sport-home-layout-page .tech-block_8 .osscar-video ul .dont-miss-listing{
+    padding: 0 10px 25px 10px;
+}
+.story-section .story-right .description iframe.story_video{width:100%; height:325px}
+
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li{ border:0px;}
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li a{line-height: 20px;}
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu{ width:172px;}
+#block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
+body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
+.story-section .description h3{ text-transform: uppercase; font-weight:bold;}
+.front .watch-right-now-video ul li{padding:10px 0px 10px 0px;}
+@media (max-width: 768px){
+.story-section .story-right .description iframe.story_video{height: 415px;}
+}
+@media (max-width: 767px){
+.story-section .story-right .description iframe.story_video{ height: 195px;}
+ul.pron-cons-img li img { margin-top: -12px!important;}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id{margin-top: 20px;}
+.front .widget-wrapper.top_stories_ordering, .widget-wrapper.most_popular{border:0;}
+.front .itg-top-section .home-top-story .data-holder .itg-listing li{padding:15px 10px 10px 25px;}
+.front .itg-listing li:before{display:block;}
+.featured-news .featured-post a{font-weight:bold;}
+.front .itg-top-section .top-rhs-add-child .ad-widget{padding:0; margin-top:20px;}
+footer .footer-top .footer-social-link{display:block; opacity:0;}
+
+}
+
+.view-display-id-block_5 .detail {  position: relative; top: -18px;}
+@media screen and (max-width:800px){
+.view-display-id-block_5 .detail {  position: initial; top: initial;}
+}
+
+.section-television #block-itg-widget-yearende-left-top-news .top-news ul .dont-miss-listing + .dont-miss-listing, .section-television #block-itg-widget-yearende-left-top-videos .top-video ul .dont-miss-listing + .dont-miss-listing, .section-television .osscar-video ul .dont-miss-listing + .dont-miss-listing{padding:0 10px 25px 0;}
+@media screen and (max-width:767px){
+.top-n-most-popular-stories {margin-top: 15px;}
+.top_stories_ordering .widget-title, .special-top-news .widget-title { padding: 5px 7px 1px 0;}
+.story-section .comment-mobile{background: none;}
+.story-section .comment-mobile ul li a.share-icon {display: none;}
+}
+@media screen and (max-width:360px){
+.story-section .comment-mobile ul li a{  padding: 10px 5px;}
+.story-section .comment-mobile{ margin: 0px -8px 20px; }
+}
+#block-itg-widget-home-page-feature .featured-news .featured-post a {display: inline;}
+ 

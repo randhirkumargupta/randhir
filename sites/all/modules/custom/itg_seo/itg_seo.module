@@ -150,7 +150,12 @@ function itg_seo_form_alter(&$form, &$form_state, $form_id) {
 function itg_custom_meta_tags_alias_set($form, &$form_state) {
   $nodeid = arg(1);
   if (isset($form['path']) && !empty($form['path'])) {
-    $edited_sef_url = itg_get_sef_url($form['path']['alias']['#value'], $nodeid);
+    $query = db_select('url_alias', 'ua');
+    $query->fields('ua', array('alias'));
+    $query->orderBy('pid', 'DESC');
+    $query->condition('source', 'node/'.$nodeid, '=');
+    $result = $query->execute()->fetchField();
+    $edited_sef_url = itg_get_sef_url($result, $nodeid);
     $form['path']['alias']['#value'] = $edited_sef_url;
   }
   return $form;
@@ -287,7 +292,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
 
   //for Magazine Story
   if (!empty($entity_object->type) && $entity_object->type == 'story' && !empty($entity_object->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'])) {
-    $section_link .= ' / ' . l('Magazine', 'calendar/0/0/magazine.html');
+    $section_link .= ' / ' . l('Magazine', 'magazine');
   }
 
   if (!empty($id)) {
@@ -295,12 +300,12 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_tids = array_reverse($section_tids);
     
     if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]) && count($section_tids) == 1) {
-      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
-          .'<h1>' . itg_seo_get_term_name_by_tid($arg[2]) . '</h1></div>';
+      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/'
+          .'&nbsp;<span itemprop="title">' . itg_seo_get_term_name_by_tid($arg[2]) . '</span></div>';
     }
     else {
       foreach ($section_tids as $chunks) {
-        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
+        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/&nbsp;'
             . l('<span itemprop="title">' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       }
     }
@@ -425,14 +430,6 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
       );
       drupal_add_html_head($markup, 'sd_json');
       
-      // canonical for home page
-      $home_canonical = $base_url . '/' . $node->path['alias'];
-      $canonical = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#attributes' => array('rel' => 'canonical', 'href' => $home_canonical),
-      );
-      drupal_add_html_head($canonical, 'canonical');
       // meta name description for home page
       $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
       if (isset($meta_description) && !empty($meta_description)) {
@@ -492,16 +489,17 @@ function itg_seo_node_insert($node) {
         'alias' => $newpath, // Any alias that you want to set.
       );
       path_save($path);
-    }else{
+    } else {
       if (in_array($node->type, $ctype_array) && isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      $newpath = itg_common_custompath_insert_load($node);
-      $node->path['alias'] = $newpath;
+        $newpath = itg_common_custompath_insert_load($node);
+        $node->path['alias'] = $newpath;
+      }
+      if (($node->type == 'breaking_news') || $node->type == 'poll' || $node->type == 'quiz' || $node->type == 'survey' || $node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
+        $newpath = itg_common_custompath_insert_load($node);
+        $node->path['alias'] = $newpath;
+      }
     }
-    if (($node->type == 'breaking_news') || $node->type == 'poll' || $node->type == 'quiz' || $node->type == 'survey' || $node->type == 'mega_review_critic' || $node->type == 'podcast' || $node->type == 'reporter' || $node->type == 'itg_funalytics' || $node->type == 'page' || $node->type == 'blog') {
-      $newpath = itg_common_custompath_insert_load($node);
-      $node->path['alias'] = $newpath;
-    }
-    }
+    watchdog("seo_insert1", "<pre> ".print_r($node, true)."</pre>");
   }
 }
 
@@ -538,6 +536,18 @@ function itg_seo_node_update($node) {
   if (itg_workflow_stop_node_update_batch_for_widgets()) {
     return;
   }
+  watchdog("seo_update1", "<pre> ".print_r($node, true)."</pre>");
+  if (!isset($node->op) && is_valid_content_type_for_sef_url($node->type) && isset($node->migrate['machineName']) && !empty($node->migrate['machineName'])) {
+    if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
+      $newpath = itg_common_custompath_migrated_load($node, 'migration_node_update');
+      $node->path['alias'] = $newpath;
+      $path = array(
+        'source' => "node/{$node->nid}",
+        'alias' => $newpath, // Any alias that you want to set.
+      );
+      path_save($path);
+    }
+  } else {
   if (isset($node->op) && is_valid_content_type_for_sef_url($node->type)) {
     if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value'])) {
       $newpath = itg_common_custompath_insert_load($node);
@@ -577,6 +587,7 @@ function itg_seo_node_update($node) {
       path_save($path);
     }
   }
+ }
 }
 
 /**

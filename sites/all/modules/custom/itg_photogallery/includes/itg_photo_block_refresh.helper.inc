@@ -26,7 +26,7 @@ function itg_photo_block_refresh() {
     $photo_watch_html.= '<li><a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" class="user-icon sso-click"><i class="fa fa-bookmark"></i> <span></span> </a></li>';
   }
   
-  $default_html .= '<a class="def-cur-pointer photo-login-akamai" title="post content" href="javascript:"><i class="fa fa-share"></i></a>';
+  $default_html .= '<a class="" title="post content" href="#"><i class="fa fa-share"></i></a>';
   
   $default_response = array('default_render' => $default_html, 'default_type' => 'normal', 'html_render' => $photo_watch_html, 'type' => 'watch');
   print json_encode($default_response);

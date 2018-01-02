@@ -69,9 +69,9 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 
 		$form['field_story_category'][LANGUAGE_NONE]['#title'] = '<label for="edit-title">' . $form['field_story_category'][LANGUAGE_NONE]['#title'] . ' <span title="This field is required." class="form-required">*</span></label>';
 		//code for common syndication field hide
-		drupal_add_js('jQuery(document).ready(function() {
+		/*drupal_add_js('jQuery(document).ready(function() {
               jQuery("#edit-field-story-expert-description").hide();              
-            });', array('type' => 'inline', 'scope' => 'footer'));
+            });', array('type' => 'inline', 'scope' => 'footer'));*/
 
 		$form['upload'] = array(
 			'#type' => 'plupload',
@@ -947,4 +947,16 @@ function itg_photogallery_views_query_alter(&$view, &$query) {
       }
   }
 }
- 
+
+/**
+ * Implements hook_views_pre_view().
+ * {@inheritdoc}
+ */
+function itg_photogallery_views_pre_view(&$view, &$display_id, &$args) {
+  if ($view->name == 'photo_list_of_category' && $view->current_display == 'block_2') {
+    $node = menu_get_object();
+    if(isset($node->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])){
+      $view->args[0] = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+    }
+  }
+} 

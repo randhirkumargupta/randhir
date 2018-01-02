@@ -35,6 +35,17 @@ function itg_widget_views_pre_render(&$view) {
       $view->attachment_before = $header_content;
     }
   }
+  elseif ($view->name == "section_wise_top_story_widget_order_reorder" && $view->current_display == 'page') {
+    if (!isset($_POST['views_bulk_operations'])) {
+      $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
+      if (isset($_GET['category_tid']) && !empty($_GET['category_tid'])) {
+        $section_wise_query = $color_box_query;
+        $section_wise_query['category_tid'] = $_GET['category_tid'];
+        $header_content .= l(t('Section manual order widget'), 'section-manual-order-widget-listing', array('query' => $section_wise_query, 'attributes' => $color_box_class));
+      }
+      $view->attachment_before = $header_content;
+    }
+  }
   elseif ($view->name == "report_filed_content" && $view->current_display == 'page') {
     $header_content = '<span class="count">Count (' . $view->total_rows . ') </span>';
     $view->attachment_before = $header_content;

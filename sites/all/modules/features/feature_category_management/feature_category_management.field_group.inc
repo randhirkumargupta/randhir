@@ -72,6 +72,9 @@ function feature_category_management_field_group_info() {
       3 => 'field_cm_select_template_type',
       4 => 'field_cm_select_type',
       5 => 'field_set_as_featured_cate',
+      6 => 'field_is_section_header',
+      7 => 'field_section_menu',
+      8 => 'field_section_right_side_block',
     ),
     'format_type' => 'div',
     'format_settings' => array(

@@ -4,3 +4,4 @@ package = "ITG"
 core = 7.x
 
 files[] = itg_common.module
+files[] = itg_common.drush.inc

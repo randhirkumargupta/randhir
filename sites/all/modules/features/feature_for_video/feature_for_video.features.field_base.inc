@@ -298,34 +298,6 @@ function feature_for_video_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_video_assign_to_widget'.
-  $field_bases['field_video_assign_to_widget'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_video_assign_to_widget',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        'watch_right_now_widget' => 'Watch Right Now',
-        'top_takes_video_widget' => 'Top Takes',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_text',
-  );
-
   // Exported field_base: 'field_video_configurations'.
   $field_bases['field_video_configurations'] = array(
     'active' => 1,

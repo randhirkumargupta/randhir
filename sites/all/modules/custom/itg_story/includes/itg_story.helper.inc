@@ -100,15 +100,31 @@ function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $p
         if (!$is_node_in_widget) {
           if ($widget_name == 'big_story_format_widget') {
             $extra = '[]';
-            itg_widget_insert_widget_data($nid, $widget_name, $category_tid, $extra);
+              db_delete('itg_widget_order')
+                ->condition('widget' , $widget_name)
+                ->condition('extra' , '[]')
+                ->execute();
+              $node_load_data = itg_widget_get_required_node_data_for_widget($node);
+              $query = db_insert('itg_widget_order')
+                ->fields(array(
+                  'nid' => $nid ,
+                  'widget' => $widget_name ,
+                  'content_type' => $node_load_data->type,
+                  'cat_id' => 0 ,
+                  'weight' => 0 ,
+                  'extra' => $extra ,
+                ))
+                ->execute();
+
           }
           else {
             itg_widget_insert_widget_data($nid, $widget_name, 0);
+            itg_widget_delete_old_data_by_limit($widget_name);
           }
         }
       }
     }
-    itg_widget_delete_old_data_by_limit($widget_name);
+
     foreach ($previous_story_assign as $row) {
       $widget_value = $row['value'];
       if ($widget_value != $result[$row['value']]) {
@@ -178,31 +194,39 @@ function itg_story_save_original_sample_image($fid) {
   }
 }
 
-/**
+ /** 
  * Function return tech photogallery html
  * @param Array $tech_photo_arr
  * @return string
  */
-function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias) {
+function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, $view_mode = null) {
   $count = 0;
+  if ($view_mode == 'amp') {
+    $count = -1;
+  }
   $output = '';
   $output .= '<div class="tech-photos">';
   $output .= '<div class="tech-photos-head-section"><h3 class="tech-photo-head">Photos</h3>';
-  $output .= '<span class="tech-photos-count">' . count($tech_gallery_images[LANGUAGE_NONE]) . ' Photos</span></div>';
-  foreach ($tech_gallery_images[LANGUAGE_NONE] as $num => $val) {
+  $output .= '<span class="tech-photos-count">' . count($tech_gallery_images) . ' Photos</span></div>';
+  foreach ($tech_gallery_images as $num => $val) {
     if ($count == 3) {
       break;
     }
     $photo_img_alt = '';
     $photo_img_title = '';
-    $gallery_entity = entity_load('field_collection_item', array($val['value']));
-    $photo_img_path = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['uri'];
+    $gallery_entity = entity_load('field_collection_item', array($val->field_gallery_image_value));
+    $photo_img_path = $gallery_entity[$val->field_gallery_image_value]->field_images[LANGUAGE_NONE][0]['uri'];
     $photo_img = image_style_url('video_landing_page_170_x_127', $photo_img_path);
-    $photo_img_alt = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['alt'];
-    $photo_img_title = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['title'];
+    $photo_img_alt = $gallery_entity[$val->field_gallery_image_value]->field_images[LANGUAGE_NONE][0]['alt'];
+    $photo_img_title = $gallery_entity[$val->field_gallery_image_value]->field_images[LANGUAGE_NONE][0]['title'];
     $output .= '<div class="tech-photo-item">';
     $output .= '<a href="/' . $tech_gallery_alias . '" target="_blank">';
-    $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
+    if ($view_mode == 'amp') {
+      $output .= '<amp-img height="127" width="135" src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"></amp-img>';
+    }
+    else {
+      $output .= '<img src="' . $photo_img . '"  alt="' . $photo_img_alt . '" title="' . $photo_img_title . '"/>';
+    }
     $output .= '</a>';
     if ($count == 2) {
       $output .= '<div class="tech-photo-overlay">';

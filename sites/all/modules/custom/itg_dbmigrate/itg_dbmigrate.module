@@ -65,6 +65,24 @@ function ordering_set_of_content($node, $count) {
  
 
 /**
+ * Implement function for update
+ */
+function ordering_set_of_content_update($node, $count) {  
+  
+  $nid = $node->nid;
+  db_delete('itg_widget_order')
+                    ->condition('widget', 'section_wise_widget')
+                    ->condition('content_type', 'All')
+                    ->condition('nid', $nid)->execute();
+
+            db_delete('itg_widget_order_section')
+                    ->condition('content_type', $node->type)
+                    ->condition('widget', 'section_wise_widget')
+                    ->condition('nid', $nid)->execute();
+} 
+
+
+/**
  * insert value of flag count in db.
  * @param int $nid
  * @param string $type
@@ -82,6 +100,27 @@ function itg_flag_insert_like_dislike($nid, $like, $dis_like) {
       ->execute();
   
 }
+
+
+/**
+ * insert value of flag count in db update script.
+ * @param int $nid
+ * @param string $type
+ * @param string $val
+ */
+function itg_flag_insert_like_dislike_update($nid, $like, $dis_like) {
+  $active = db_update('itg_custom_flag_count')
+          ->fields(array(
+              'like_count' => $like,
+              'dislike_count' => $dis_like,
+              'created' => date('Y-m-d G:i:s'),
+          ))
+          ->condition('nid', $nid, '=')
+          ->execute();
+  
+}
+
+
 
 /**
  * Implements function for mosimage replace
@@ -188,6 +227,33 @@ function itg_db_migrate_bylines($byline_nid, $story_nid){
   $query->condition('type', 'reporter', '=');
   $query->condition('nid', $byline_nid, '=');
   $result = $query->execute()->fetchAll();
+  db_insert('itg_multi_byline_info')
+          ->fields(array(
+            'byline_id' => $byline_nid,
+            'uniqueid' => 'migrated-'.$story_nid,
+            'created' => REQUEST_TIME,
+            'nid' => $story_nid,
+           'publish_status' => $result[0]->status,
+          ))
+          ->execute();
+}
+
+
+/**
+ * Implement function for migrate bylines
+ */
+function itg_db_migrate_bylines_update($byline_nid, $story_nid){
+  $query = db_select('node', 'n');
+  $query->fields('n', array('nid', 'status'));
+  $query->condition('type', 'reporter', '=');
+  $query->condition('nid', $byline_nid, '=');
+  $result = $query->execute()->fetchAll();
+  
+  $num_deleted = db_delete('itg_multi_byline_info')
+  ->condition('nid', $story_nid)
+  ->condition('byline_id', $byline_nid)
+  ->execute();
+  
   db_insert('itg_multi_byline_info')
           ->fields(array(
             'byline_id' => $byline_nid,
@@ -331,4 +397,25 @@ function __insert_orignal_image($uri, $fid) {
     'orignal_fid' => $fid,
     'url' => $file_url
   ))->execute();
+}
+
+/**
+ * Insert updated date in database
+ */
+function __insert_modified_date_flag_table($type, $time_stamp, $nid) {
+    watchdog('success_update_table', '<pre>'.print_r('rea').'<pre>');
+    db_insert('itg_node_update_updation')->fields(array(
+    'type' => $type,
+    'timestamp' => $time_stamp,
+    'nid' => $nid,    
+  ))->execute();
+}
+
+
+function itg_dbmigrate_apachesolr_exclude($entity_id, $entity_type, $row, $env_id) {
+  // Never index media entities to core_1
+  /*if ($entity_type == 'story' && $entity_type == 'photogallery' && $entity_type == 'videogallery') {
+    return TRUE;
+  }*/
+  return FALSE;
 }
