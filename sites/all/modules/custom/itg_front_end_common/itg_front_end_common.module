@@ -103,7 +103,7 @@ function itg_front_end_common_block_view($delta = '') {
       break;
     
     case 'crowdy_news_block':
-      $block['content'] = _may_be_recommend_block_content();
+      $block['content'] = _crowdy_news_block_content();
       break;
     
     case 'vukkul_block':
