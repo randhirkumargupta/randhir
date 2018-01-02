@@ -971,7 +971,7 @@ function _latest_from_pti() {
   $related_dt = '';
   $data_tb_region_item = '';
   if(drupal_is_front_page()){
-	$data_tb_region_item = 'data-tb-region-item';  
+    $data_tb_region_item = 'data-tb-region-item';  
   }
   if (!empty($related_content)) {
     $related_dt = '<span class="widget-title">' . t('LATEST FROM PTI') . '</span>';
@@ -1009,7 +1009,7 @@ function _latest_from_aajtak() {
     $related_dt = '';
     $data_tb_region_item = '';
     if(drupal_is_front_page()){
-  	$data_tb_region_item = 'data-tb-region-item';  
+  	  $data_tb_region_item = 'data-tb-region-item';  
     }
     if (!empty($aajtak_data[0]['content_id'])) {
       $related_dt = '<span class="widget-title">' . t('LATEST FROM AAJ TAK') . '</span>';
@@ -1054,7 +1054,7 @@ function _latest_from_businesstoday() {
     }
     $data_tb_region_item = '';
     if(drupal_is_front_page()){
-  	$data_tb_region_item = 'data-tb-region-item';  
+  	  $data_tb_region_item = 'data-tb-region-item';  
     }
     $related_dt = '';
     if (!empty($business_data[0]['content_id'])) {

@@ -3,7 +3,8 @@
   $data_tb_region_item = '';
   if(drupal_is_front_page()){
 	$data_tb_region_item = 'data-tb-region-item';  
-  }else if(isset($_GET['is_home_front']) && $_GET['is_home_front']){
+  } 
+  else if(isset($_GET['is_home_front']) && $_GET['is_home_front']){
 	$data_tb_region_item = 'data-tb-region-item';  
  }
 ?>

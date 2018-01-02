@@ -1,7 +1,7 @@
 <div class="section-ordering">
     <?php
     if (!empty($data)) {
-	  $data_tb_region_item = '';
+      $data_tb_region_item = '';
       if(drupal_is_front_page()){
         $data_tb_region_item = 'data-tb-region-item';  
       }	

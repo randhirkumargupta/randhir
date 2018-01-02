@@ -1,16 +1,15 @@
 <?php
 global $base_url;
-
-
 if (!empty($data)) {
   ?>
 <?php 
   $data_tb_region_item = '';
-  if(drupal_is_front_page()){
+  if(drupal_is_front_page()) {
 	$data_tb_region_item = 'data-tb-region-item';  
-  }else if(isset($_GET['is_home_front']) && $_GET['is_home_front']){
-	$data_tb_region_item = 'data-tb-region-item';  
- }
+  }
+  else if(isset($_GET['is_home_front']) && $_GET['is_home_front']) {
+    $data_tb_region_item = 'data-tb-region-item';  
+}
 ?>
   <div class="container">
     <div class="carousel">
