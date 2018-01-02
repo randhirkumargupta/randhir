@@ -359,10 +359,14 @@ function itg_widgets_custom_variables() {
   
   $form['third_party_may_recommend_block'] = array(
 		'#type' => 'textarea',
-		'#title' => t('May we recommend (taboola script)'),
+		'#title' => t('Suggested Stories (taboola script)'),
 		'#default_value' => variable_get('third_party_may_recommend_block'),
 	);
-  
+  $form['third_party_recommend_new_block'] = array(
+		'#type' => 'textarea',
+		'#title' => t('Recommended (taboola script)'),
+		'#default_value' => variable_get('third_party_recommend_new_block'),
+	);
   $form['third_party_crowdynews_block'] = array(
 		'#type' => 'textarea',
 		'#title' => t('Crowdy News Ads Script'),
