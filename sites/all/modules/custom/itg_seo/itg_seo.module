@@ -281,7 +281,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
   $detect = new Mobile_Detect;
   $isMobile = $detect->isMobile();
-  $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
+  $str_breadcrumb = 'https://data-vocabulary.org/Breadcrumb';
   $title_val = '';
   $arg = arg();
   if (isset($entity_object->title)) {
