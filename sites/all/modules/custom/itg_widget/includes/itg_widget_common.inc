@@ -1341,6 +1341,10 @@ function itg_widget_views_query_alter(&$view, &$query) {
             'value' => $program_cat_value,
             'operator' => '=',
         );
+        $programm_ids = variable_get('itg_programmes_order_by');
+        if(isset($programm_ids) && !empty($programm_ids)){
+          $query->orderby[0]['field'] = "FIELD(taxonomy_term_data.tid, $programm_ids)";
+        }
         array_push($query->where[1]['conditions'], $program_where_condition);
     }
 
