@@ -4899,7 +4899,7 @@ h1.category-heading {
             padding-bottom: 72.3%;
             padding-top: 0;
             .jwplayer {
-                position: static !important;
+                position:relative;
             }
         }
         @include video-detail-page-sociallike;
@@ -6789,7 +6789,7 @@ section.sidebar {
     }
     .itg-h396-section {
         .droppable {
-            height: 396px;
+            height: 425px;
             background: #f3f3f3;
             padding: 10px;
         }
@@ -8868,7 +8868,7 @@ section.sidebar {
 }
 
 .section-sport-ipl-bg {
-    background: url('../images/sports-bg.png') no-repeat center 135px;
+    background: url('../images/sports-bg.png') no-repeat center 235px;
     main.container {
         background: #fff;
     }

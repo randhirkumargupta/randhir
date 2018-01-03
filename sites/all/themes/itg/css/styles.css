@@ -4878,7 +4878,7 @@ h1.category-heading {
       padding-bottom: 72.3%;
       padding-top: 0; }
       #block-views-video-landing-header-block .video-header-left .iframe-video .jwplayer {
-        position: static !important; }
+        position: relative; }
     #block-views-video-landing-header-block .video-header-left .social-likes {
       float: none;
       width: 100%;
@@ -6861,7 +6861,7 @@ section.sidebar .block-itg-ads {
   .tech-layout-page .itg-h385-section .section_wise_order-buying-guid .widget-title {
     position: absolute; }
   .tech-layout-page .itg-h396-section .droppable {
-    height: 396px;
+    height: 425px;
     background: #f3f3f3;
     padding: 10px; }
   .tech-layout-page .itg-h396-section .section_wise_order-in-depth .widget-title {
@@ -8483,7 +8483,7 @@ section.sidebar .block-itg-ads {
       display: none; }
 
 .section-sport-ipl-bg {
-  background: url("../images/sports-bg.png") no-repeat center 135px; }
+  background: url("../images/sports-bg.png") no-repeat center 235px; }
   .section-sport-ipl-bg main.container {
     background: #fff; }
 
