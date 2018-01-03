@@ -78,18 +78,18 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
     $xml .= '<language>en-US</language>';
     $xml .= '<news>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $meta_tags = get_node_metatags_by_nid($value['nid']);
-      if($meta_tags){
-		$keywords = unserialize($meta_tags['data']);
-		$keywords = $keywords['keywords']['value'];
-		if(!empty($keywords) && (strpos($keywords,"jio") || strpos($keywords,"reliance") || strpos($keywords,"vodafone") || strpos($keywords,"idea") || strpos($keywords,"bsnl") || strpos($keywords,"tata docomo") || strpos($keywords,"aircel")  || strpos($keywords,"telenor")  || strpos($keywords,"mts"))){
-		  continue;		
-		}
-	  }	
-      
+      if ($meta_tags) {
+        $keywords = unserialize($meta_tags['data']);
+        $keywords = $keywords['keywords']['value'];
+        if (!empty($keywords) && (strpos($keywords, "jio") || strpos($keywords, "reliance") || strpos($keywords, "vodafone") || strpos($keywords, "idea") || strpos($keywords, "bsnl") || strpos($keywords, "tata docomo") || strpos($keywords, "aircel") || strpos($keywords, "telenor") || strpos($keywords, "mts"))) {
+          continue;
+        }
+      }
+
       $publish_date = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
       $modify_date = date("Y-m-d\TH:i:sP", $value['changed']);
       $place = get_content_city($value['nid']);

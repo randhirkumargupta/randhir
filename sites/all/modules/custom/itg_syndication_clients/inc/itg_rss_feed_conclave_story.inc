@@ -64,7 +64,7 @@ function get_rss_conclave_story_sid_xml($result, $sid, $section_name) {
     $xml .= '<url>' . $logo . '</url>';
     $xml .= '</image>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);

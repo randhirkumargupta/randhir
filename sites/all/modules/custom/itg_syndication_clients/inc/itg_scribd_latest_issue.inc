@@ -70,7 +70,7 @@ function genrate_scribd_latest_issue_syndication_xml($result = NULL, $issue_titl
     $xml .= '<title><![CDATA[' . $issue_title . ']]></title>';
     $xml .= '<link><![CDATA[' . $base_url . ']]></link>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $nid = $value['nid'];

@@ -67,7 +67,7 @@ function genrate_newsfromindiatoday_story_syndication_xml($result = NULL, $categ
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $publish_date = date("Y-m-d H:i:s", strtotime($value['field_itg_content_publish_date_value']));

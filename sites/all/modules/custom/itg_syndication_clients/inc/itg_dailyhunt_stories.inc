@@ -62,7 +62,7 @@ function genrate_dailyhunt_story_syndication_xml($result = NULL) {
     global $base_url;
     $xml = '<Data>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $publish_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));

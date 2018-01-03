@@ -285,4 +285,3 @@ function genrate_samsungtv_it_live_now_xml($result) {
   $xml .= '</Root>';
   return $xml;
 }
-

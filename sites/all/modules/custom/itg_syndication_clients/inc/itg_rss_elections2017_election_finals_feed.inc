@@ -87,7 +87,7 @@ function genrate_elections2017_election_finals_xml($result = NULL, $category, $s
     $xml = '<state>';
     $xml .= '<name>' . $category . '</name>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $nid = $value['nid'];

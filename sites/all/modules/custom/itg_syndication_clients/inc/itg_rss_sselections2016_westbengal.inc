@@ -68,7 +68,7 @@ function genrate_rsselections2016_westbengal_syndication_xml($result = NULL, $se
     $xml .= '<start_index>0</start_index>';
     $xml .= '<end_index>' . count($result) . '</end_index>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $publish_date = date("M d, Y", strtotime($value['field_itg_content_publish_date_value']));

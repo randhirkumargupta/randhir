@@ -67,7 +67,7 @@ function genrate_rss_it_latest_issue_syndication_xml($result = NULL, $issue_titl
     $xml .= '<link><![CDATA[' . $base_url . ']]></link>';
     $xml .= '<pubdate>' . $issue_title . '</pubdate>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $nid = $value['nid'];

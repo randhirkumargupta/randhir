@@ -28,7 +28,7 @@ function itg_genrate_celtick_feed_story_syndication($section_id = NULL, $file_na
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'sli', 'sli.entity_id=n.nid');
-    
+
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
@@ -64,7 +64,7 @@ function genrate_celtick_feed_story_syndication_xml($result = NULL, $category) {
     global $base_url;
     $xml = '<root>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $nid = $value['nid'];

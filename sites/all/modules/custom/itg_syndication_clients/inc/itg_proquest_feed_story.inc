@@ -63,7 +63,7 @@ function genrate_proquest_feed_story_syndication_xml($result = NULL, $category) 
     global $base_url;
     $xml = '<root>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $nid = $value['nid'];

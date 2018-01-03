@@ -65,7 +65,7 @@ function get_rss_feed_from_sid_xml($result, $sid, $section_name) {
     $xml .= '<description>India Today</description>';
     $xml .= '</image>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);

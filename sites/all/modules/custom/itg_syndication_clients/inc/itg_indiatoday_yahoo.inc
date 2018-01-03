@@ -102,7 +102,7 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
     $xml .= '<channel>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       date_default_timezone_set("GMT");
@@ -203,9 +203,9 @@ function genrate_indiatoday_yahoo_static_section_syndication_xml($result = NULL,
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
     $xml .= '<channel>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
-      }	
+      }
       $guid = genrate_uniqui_guid();
       $publish_date = date("Y-m-d\TH:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
@@ -299,7 +299,7 @@ function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $sec
     $xml .= '</image>';
     $xml .= '<language>en</language>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $guid = genrate_uniqui_guid();
@@ -383,7 +383,7 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
     $xml .= '</image>';
     $xml .= '<language>en</language>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $guid = genrate_uniqui_guid();

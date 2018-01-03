@@ -51,7 +51,7 @@ function get_rss_article_news_republic_xml($result) {
     $xml .= '<language>en-us</language>';
     $xml .= '<atom:link rel="hub" href="http://pubsubhubbub.appspot.com"/>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $nid = $value['nid'];
@@ -129,7 +129,7 @@ function get_rss_education_article_news_republic_xml($result) {
     $xml .= '<language>en-us</language>';
     $xml .= '<atom:link rel="hub" href="http://pubsubhubbub.appspot.com"/>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $nid = $value['nid'];

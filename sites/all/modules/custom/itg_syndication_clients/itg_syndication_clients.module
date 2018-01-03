@@ -337,44 +337,44 @@ function itg_syndication_clients_menu() {
  * @return array
  */
 function itg_syndication_clients_theme() {
-    return array(
-      'hltapps_homesectionslist' => array(
-        'template' => 'templates/hltapps_homesectionslist_template',
-      ),
-      'hltapps_sectionslist' => array(
-        'template' => 'templates/hltapps_sectionslist_template',
-      ),
-      'hltapps_video_sectionslist' => array(
-        'template' => 'templates/hltapps_video_sectionslist_template',
-      ),
-      'hltapps_photo_sectionslist' => array(
-        'template' => 'templates/hltapps_photo_sectionslist_template',
-      ),
-      'hltapps_static_about_us' => array(
-        'template' => 'templates/hltapps_static_about_us_template',
-      ),
-      'hltapps_static_livetv_text' => array(
-        'template' => 'templates/hltapps_static_livetv_text_template',
-      ),
-      'hltapps_static_playbook_ad' => array(
-        'template' => 'templates/hltapps_static_playbook_ad_template',
-      ),
-      'hltapps_static_bb_ad' => array(
-        'template' => 'templates/hltapps_static_bb_ad_template',
-      ),
-      'hltapps_static_api_livetv' => array(
-        'template' => 'templates/hltapps_static_api_livetv_template',
-      ),
-      'hltapps_static_api' => array(
-        'template' => 'templates/hltapps_static_api',
-      ),
-      'msn_static_stories_what_to_expect' => array(
-        'template' => 'templates/msn_static_stories_what_to_expect',
-      ),
-      'msn_static_stories_top_news' => array(
-        'template' => 'templates/msn_static_stories_top_news',
-      )
-    );
+  return array(
+    'hltapps_homesectionslist' => array(
+      'template' => 'templates/hltapps_homesectionslist_template',
+    ),
+    'hltapps_sectionslist' => array(
+      'template' => 'templates/hltapps_sectionslist_template',
+    ),
+    'hltapps_video_sectionslist' => array(
+      'template' => 'templates/hltapps_video_sectionslist_template',
+    ),
+    'hltapps_photo_sectionslist' => array(
+      'template' => 'templates/hltapps_photo_sectionslist_template',
+    ),
+    'hltapps_static_about_us' => array(
+      'template' => 'templates/hltapps_static_about_us_template',
+    ),
+    'hltapps_static_livetv_text' => array(
+      'template' => 'templates/hltapps_static_livetv_text_template',
+    ),
+    'hltapps_static_playbook_ad' => array(
+      'template' => 'templates/hltapps_static_playbook_ad_template',
+    ),
+    'hltapps_static_bb_ad' => array(
+      'template' => 'templates/hltapps_static_bb_ad_template',
+    ),
+    'hltapps_static_api_livetv' => array(
+      'template' => 'templates/hltapps_static_api_livetv_template',
+    ),
+    'hltapps_static_api' => array(
+      'template' => 'templates/hltapps_static_api',
+    ),
+    'msn_static_stories_what_to_expect' => array(
+      'template' => 'templates/msn_static_stories_what_to_expect',
+    ),
+    'msn_static_stories_top_news' => array(
+      'template' => 'templates/msn_static_stories_top_news',
+    )
+  );
 }
 
 /**
@@ -1162,7 +1162,6 @@ function get_term_description_by_tid($tid = NULL) {
   return $tdescription;
 }
 
-
 /**
  * function is used to get parent category name
  * @param int $tid
@@ -1258,18 +1257,17 @@ function get_samsung_breaking_news_lists($result) {
   return $breaking_xml;
 }
 
-
-function is_lock_story($nid){
-  if(empty($nid)){
+function is_lock_story($nid) {
+  if (empty($nid)) {
     return FALSE;
   }
   $query1 = db_select('field_data_field_story_configurations', 'fsc');
   $query1->fields('fsc', array('entity_id'));
   $query1->condition('fsc.field_story_configurations_value', 'lock_story', 'LIKE');
-  $query1->condition('fsc.entity_id', $nid, '=');  
+  $query1->condition('fsc.entity_id', $nid, '=');
   $result1 = $query1->execute()->fetchAll();
-  if(!empty($result1)){
-	return TRUE;
+  if (!empty($result1)) {
+    return TRUE;
   }
   return FALSE;
 }

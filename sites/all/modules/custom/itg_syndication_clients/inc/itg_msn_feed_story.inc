@@ -16,15 +16,14 @@ function itg_msn_feed_story_syndication() {
  * Function for generate msn static feed
  */
 function itg_rss_msnstaticfeeds() {
- itg_generate_msn_static_stories_what_to_expect();
- itg_generate_msn_static_stories_top_news();
+  itg_generate_msn_static_stories_what_to_expect();
+  itg_generate_msn_static_stories_top_news();
 }
 
 /**
  * Generate static msn stories feed
  */
-
-function itg_generate_msn_static_stories_what_to_expect(){
+function itg_generate_msn_static_stories_what_to_expect() {
   $data = array();
   $xml = theme('msn_static_stories_what_to_expect', array('data' => $data));
   $xml_path = 'public://msn/stories/';
@@ -37,8 +36,7 @@ function itg_generate_msn_static_stories_what_to_expect(){
 /**
  * Generate static msn stories feed
  */
-
-function itg_generate_msn_static_stories_top_news(){
+function itg_generate_msn_static_stories_top_news() {
   $data = array();
   $xml = theme('msn_static_stories_top_news', array('data' => $data));
   $xml_path = 'public://msn/stories/';
@@ -103,7 +101,7 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
     $xml .= '</NewsEnvelope>';
 
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $nid = $value['nid'];

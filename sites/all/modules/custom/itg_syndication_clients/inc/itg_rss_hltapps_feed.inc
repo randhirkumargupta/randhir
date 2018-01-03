@@ -193,7 +193,7 @@ function genrate_hltapps_stories_xml($result = NULL, $category, $section_id) {
     $xml .= '<title><![CDATA[ ' . $category . ' ]]></title>';
     $xml .= '<itemcount>' . count($result) . '</itemcount>';
     foreach ($result as $key => $value) {
-	  if(is_lock_story($value['nid'])){
+      if (is_lock_story($value['nid'])) {
         continue;
       }
       $nid = $value['nid'];
@@ -731,9 +731,9 @@ function genrate_hltapps_mixed_feed($result, $sections, $feed_name) {
       $nid = $value['nid'];
 
       if ($value['type'] == 'story') {
-		if(is_lock_story($value['nid'])){
-		  continue;
-        }  
+        if (is_lock_story($value['nid'])) {
+          continue;
+        }
         $section_id = $sections['story'];
         $category = get_term_name_by_tid($section_id);
         $detail_file_name = 'stories/story' . $nid . '.xml';
@@ -1109,13 +1109,11 @@ function itg_generate_hltapps_static_api() {
   fclose($fpd);
 }
 
-
 /**
  * Function for generate progamme feed
  * @global string $base_url
  * @param int $section_id
  */
-
 function itg_generate_hltapps_programme_static($section_id) {
   $sections = get_parent_category_name_by_tid($section_id);
   global $base_url;
