@@ -337,7 +337,7 @@ $drupal_hash_salt = 'BZnuQD04vRdNaVhNBkzPqLTKjvWfHMAEwOMT7qIqPJQ';
  * It is not allowed to have a trailing slash; Drupal will add it
  * for you.
  */
- $base_url = 'https://www.indiatoday.in';  // NO trailing slash!
+ // $base_url = 'https://www.indiatoday.in';  // NO trailing slash!
 
 /**
  * PHP settings:
@@ -667,6 +667,6 @@ MongoCursor::$slaveOkay = true;
 $conf['image_suppress_itok_output'] = TRUE;
 $conf['image_allow_insecure_derivatives'] = TRUE;
 $conf['block_cache_bypass_node_grants'] = TRUE;
-$base_url = 'https://'.$_SERVER['SERVER_NAME'];
+$base_url = 'https://www.indiatoday.in';
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;
