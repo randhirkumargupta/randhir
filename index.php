@@ -14,6 +14,11 @@
 /**
  * Root directory of Drupal installation.
  */
+if ($_SERVER['HTTP_HOST'] == 'staging-it.indiatodayonline.in') {
+  $old_url = $_SERVER['SCRIPT_URL'];
+  drupal_goto('http://uat-it.indiatodayonline.in/'.$old_url);
+}
+
 define('DRUPAL_ROOT', getcwd());
 
 require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
