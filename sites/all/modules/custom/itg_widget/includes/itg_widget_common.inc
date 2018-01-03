@@ -2995,23 +2995,23 @@ function itg_widget_node_update($node) {
 
         if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) &&!empty($node->op)) {
             __itg_widget_helper_data_insert($node->nid);
-            watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
-            $nid = $node->nid;
-            $cat_id = $node->field_story_category['und'];
-
-            db_delete('itg_widget_order')
-                    ->condition('widget', 'section_wise_widget')
-                    ->condition('content_type', 'All')
-                    ->condition('nid', $nid)->execute();
-
-            db_delete('itg_widget_order_section')
-                    ->condition('content_type', $node->type)
-                    ->condition('widget', 'section_wise_widget')
-                    ->condition('nid', $nid)->execute();
-            foreach ($cat_id as $category) {
-                manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
-                manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
-            }
+//            watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
+//            $nid = $node->nid;
+//            $cat_id = $node->field_story_category['und'];
+//
+//            db_delete('itg_widget_order')
+//                    ->condition('widget', 'section_wise_widget')
+//                    ->condition('content_type', 'All')
+//                    ->condition('nid', $nid)->execute();
+//
+//            db_delete('itg_widget_order_section')
+//                    ->condition('content_type', $node->type)
+//                    ->condition('widget', 'section_wise_widget')
+//                    ->condition('nid', $nid)->execute();
+//            foreach ($cat_id as $category) {
+//                manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
+//                manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
+//            }
         }
     }
     
