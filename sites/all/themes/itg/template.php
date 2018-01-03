@@ -608,7 +608,7 @@ function itgd_chart_beat_code(){
    drupal_add_js("var _sf_async_config = _sf_async_config || {};
       /** CONFIGURATION START **/
     _sf_async_config.uid = 60355;
-    _sf_async_config.domain = 'intoday.in';
+    _sf_async_config.domain = 'indiatoday.in';
     _sf_async_config.useCanonical = true;
     _sf_async_config.sections = '".$chart_sections."';  
     _sf_async_config.authors = '".$chart_authors."';    
