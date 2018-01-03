@@ -18,9 +18,9 @@ if (!empty($refral_site)) {
     $used_on = 'embed';
   }
 }
-$autostart = TRUE;
+$autostart = "TRUE";
 if ($used_on == 'embed') {
-  $autostart = FALSE;
+  $autostart = "FALSE";
 }
 
 $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $external_side);

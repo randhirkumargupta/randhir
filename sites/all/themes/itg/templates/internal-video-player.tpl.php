@@ -21,9 +21,9 @@ if (!empty($refral_site)) {
     $used_on = 'embed';
   }
 }
-$autostart = TRUE;
+$autostart = "TRUE";
 if ($used_on == 'embed') {
-  $autostart = FALSE;
+  $autostart = "FALSE";
 }
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on, $external_side);
 ?>
