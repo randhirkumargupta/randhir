@@ -240,7 +240,9 @@ function itg_fia_xml_node_feed($query) {
         }
       }
     }
-    $node_body = implode("<p>", $body_vals);    
+    $node_body = implode("<p>", $body_vals);  
+    $node_body = str_replace(['<iframe', '</iframe>'], ['<figure class="op-interactive"><iframe', '</iframe></figure>'], $node_body); 
+    $node_body = str_replace(['<img', '</>'], ['<figure><img', '</></figure>'], $node_body); 
     $node_body = itg_fia_split_by_words($node_body, 200);
     $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
