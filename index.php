@@ -17,7 +17,7 @@
 
 if ($_SERVER['HTTP_HOST'] == 'staging-it.indiatodayonline.in') {
   $old_url = $_SERVER['SCRIPT_URL'];
-  $url_re = 'https://uat-it.indiatodayonline.in/'.$old_url;
+  $url_re = 'https://uat-it.indiatodayonline.in'.$old_url;
   header('Location: ' . $url_re);
   echo 'test';
   exit;
