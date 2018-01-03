@@ -247,6 +247,7 @@ function itg_fia_xml_node_feed($query) {
     $replacement = '<figure>$1</figure>';
     // run preg_replace() on the $content
     $node_body = preg_replace( $pattern, $replacement, $node_body ); 
+    $node_body = preg_replace('/<div class=\"itg-mosimage"\>(.*?)<\/div>/', "$1", $node_body);
     $node_body = itg_fia_split_by_words($node_body, 200);
     $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
