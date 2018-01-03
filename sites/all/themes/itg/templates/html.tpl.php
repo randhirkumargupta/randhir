@@ -95,7 +95,19 @@
             (new Image).src = "https://sb.scorecardresearch.com/b?c1\x3d2\x26c2\x3d8549097\x26c8\x3d" + encodeURIComponent(document.title) + "\x26c7\x3d" + encodeURIComponent(document.location.href) + "\x26c9\x3d" + encodeURIComponent(document.referrer) + "\x26rn\x3d" + ("" + (new Date).getTime())
         }
     </script>
+    <?php if(drupal_is_front_page()):?>
+    <script type="text/javascript">
+     var _sf_async_config = _sf_async_config || {};
+     /** CONFIGURATION START **/
+      _sf_async_config.uid = 60355;
+      _sf_async_config.domain = 'intoday.in';
+   _sf_async_config.useCanonical = true;
+     /** CONFIGURATION END **/
+     var _sf_startpt = (new Date()).getTime();
+	</script><script src="//static.chartbeat.com/js/chartbeat_mab.js"></script>
+	<?php else:?>
     <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
+    <?php endif;?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>

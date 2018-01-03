@@ -581,9 +581,8 @@ function itgd_chart_beat_code(){
   $chart_path = $base_url;
   $chart_js = '//static.chartbeat.com/js/chartbeat.js';	
   $node = menu_get_object('node');
-  if ($node->type == 'story') {
-	   $chart_sections = '';
-    if(!empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node->field_story_category['und'])){
+  if (!drupal_is_front_page() && isset($node) && !empty($node)) {
+	if(!empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node->field_story_category['und'])){
 		$primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
 		foreach($node->field_story_category['und'] as $p_cat){
 			if($p_cat['tid'] == $primary_cat){
@@ -601,29 +600,11 @@ function itgd_chart_beat_code(){
 	$chart_authors = $auths_name . ',Edited by '.itg_get_story_edited_authors_name($node->uid);
     $chart_title = $node->title;
     $chart_path = drupal_get_path_alias('node/' . $node->nid);
+    if($node->type == 'videogallery'){
+	  $chart_js = '//static.chartbeat.com/js/chartbeat_video.js';
+	}
    }
-   elseif ($node->type == 'videogallery') {
-	   if (isset($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
-      $get_authors_name = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
-    }
-    $auths_name = '';    
-    if(!empty($get_authors_name)){
-      $auths_name = itg_get_story_authors_name($get_authors_name);
-    }  
-    $chart_sections = '';
-    if(!empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node->field_story_category['und'])){
-		$primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
-		foreach($node->field_story_category['und'] as $p_cat){
-			if($p_cat['tid'] == $primary_cat){
-				$chart_sections = $p_cat['taxonomy_term']->name;
-			}
-		}
-	} 	
-	$chart_authors = $auths_name . ',Edited by '.itg_get_story_edited_authors_name($node->uid);
-    $chart_title = $node->title;
-    $chart_path = drupal_get_path_alias('node/' . $node->nid);  
-    $chart_js = '//static.chartbeat.com/js/chartbeat_video.js';
-   }   
+     
    drupal_add_js("var _sf_async_config = _sf_async_config || {};
       /** CONFIGURATION START **/
     _sf_async_config.uid = 60355;
