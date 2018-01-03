@@ -604,6 +604,32 @@ function itgd_chart_beat_code() {
     if ($node->type == 'videogallery') {
       $chart_js = '//static.chartbeat.com/js/chartbeat_video.js';
     }
+    
+    if ($node->type == 'story') {
+      drupal_add_js('//ht-itw.hoverr.media/js/tera_indiatoday_web.js',  array('type' => 'external', 'scope' => 'footer'));
+      drupal_add_js('var unruly = window.unruly || {};
+					unruly.native = unruly.native || {};
+					unruly.native.siteId = 321603', array('type' => 'inline', 'scope' => 'footer'));
+	  drupal_add_js('//video.unrulymedia.com/native/native-loader.js', array('type' => 'external', 'scope' => 'footer'));
+	  drupal_add_js('var $ImpulseID ="IMPL-ITDG-INDIATODAY-WEB-ARTICLE";
+					(function() {
+					var _Impulser = document.createElement('script'); _Impulser.type = "text/javascript";
+					_Impulser.async = true;
+					_Impulser.src = ("https:" == document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+					var _scripter = document.getElementsByTagName("script")[0];
+					_scripter.parentNode.insertBefore(_Impulser, _scripter);
+					})();', array('type' => 'inline', 'scope' => 'footer'));
+    }
+    if ($node->type == 'photogallery') {
+		drupal_add_js('var $ImpulseID ="IMPL-ITDG-INDIATODAY-WEB-ARTICLE";
+					(function() {
+					var _Impulser = document.createElement('script'); _Impulser.type = "text/javascript";
+					_Impulser.async = true;
+					_Impulser.src = ("https:" == document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+					var _scripter = document.getElementsByTagName("script")[0];
+					_scripter.parentNode.insertBefore(_Impulser, _scripter);
+					})();', array('type' => 'inline', 'scope' => 'footer'));
+	}
   }
 
   drupal_add_js("var _sf_async_config = _sf_async_config || {};
