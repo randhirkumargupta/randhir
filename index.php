@@ -14,7 +14,8 @@
 /**
  * Root directory of Drupal installation.
  */
-p($_SERVER['HTTP_HOST']);
+print_r($_SERVER['HTTP_HOST']);
+exit;
 if ($_SERVER['HTTP_HOST'] == 'staging-it.indiatodayonline.in') {
   $old_url = $_SERVER['SCRIPT_URL'];
   $url_re = 'https://uat-it.indiatodayonline.in/'.$old_url;
