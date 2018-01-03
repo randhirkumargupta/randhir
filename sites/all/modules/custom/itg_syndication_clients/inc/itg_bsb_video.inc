@@ -83,8 +83,8 @@ function genrate_bsb_video_syndication_xml($result = NULL, $section_id, $categor
 
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
-      $xml .= '<mediumimage><![CDATA[' . $medium_img['imag_url'] . ']]></mediumimage>';
-      $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
+      $xml .= '<mediumimage><![CDATA[' . $small_img['imag_url'] . ']]></mediumimage>';
+      $xml .= '<thumbimage><![CDATA[' . $medium_img['imag_url'] . ']]></thumbimage>';
       $xml .= '<url>' . $video_file_name . '</url>';
       $xml .= '<create_date>' . $created_date . '</create_date>';
       $xml .= '<create_datetime>' . $created_datetime . '</create_datetime>';
@@ -143,9 +143,17 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $video_xml .= '<mediaid></mediaid><uurl></uurl>';
   $source_type = $result['field_story_source_type_value'];
   $videotag = itg_video_detail_formats($nid, $source_type);
+  $video_size = migrated_video_transcoding($nid);
 
   if (!empty($videotag['migrated'])) { //migrated video
-    $video_xml .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
+    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+    foreach ($videoids as $keys => $video_value) {
+      $url = $video_value->field_migrated_video_url_value;
+    }
+    $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+    $bitrate_url = $data_video['bitrate_url'];
+    $mp4_url = $data_video['file_url'];
+    $video_xml .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
   }
   elseif (!empty($videotag['dailymotion'])) {
     $video_xml .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";

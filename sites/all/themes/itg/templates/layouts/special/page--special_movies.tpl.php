@@ -9,6 +9,8 @@
 global $theme, $user;
 $preview = NULL;
 $tax_name = '';
+$movie_review_tid = '';
+$movie_review_url = '';
 if (arg(2) == 'preview') {
   $preview = 'preview';
 }
@@ -26,7 +28,9 @@ if ($theme != 'itgadmin') {
 if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2)) && !arg(3)) {
   $tax_id = arg(2);
   $tax_name_arr = get_term_name_from_tid($tax_id);
-  $tax_name = strtolower($tax_name_arr->name);
+  $tax_name = strtolower($tax_name_arr->name);  
+  $movie_review_tid = variable_get('movies_review_tid', 1207047);
+  $movie_review_url = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $movie_review_tid);
 }
 ?>
 <!--------------------------------Code for Front tpl---------------------------------------->
@@ -431,7 +435,11 @@ if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2
                               <div class="droppable <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-7']['widget_name'] . $widget_data['itg-block-7']['widget_display_name']; ?>">
                                       <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-7']['block_title'])) { ?>
-                                        <span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
+                                        <?php if (isset($movie_review_url)) : ?>
+                                          <a href="<?php print $movie_review_url; ?>"><span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span></a>
+                                        <?php else: ?>
+                                          <span class="widget-title"><?php print $widget_data['itg-block-7']['block_title']; ?></span>
+                                        <?php endif; ?>
                                       <?php } ?>
                                       <!-- for admin  -->
                                       <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>

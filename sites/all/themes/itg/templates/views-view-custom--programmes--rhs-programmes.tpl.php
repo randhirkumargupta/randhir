@@ -4,6 +4,11 @@
         <?php
         global $base_url;
         foreach ($rows as $row) :
+          $view = views_get_view('programme_content');
+		  $args = array($row['tid']);
+		  $view->preview('block' , $args);
+		  $view_result = $view->result;
+		  $recent_video_under_cat = $view_result[0]->nid;
           if (function_exists('itg_category_manager_term_state')) {
             $status = itg_category_manager_term_state($row['tid']);
           } else {
@@ -13,7 +18,7 @@
             <li>
                 <h4>
                     <?php if (!empty($row['field_cm_display_title'])) : ?>
-                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'program', array('html' => TRUE)); ?>
+                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'node/' . $recent_video_under_cat , array('html' => TRUE)); ?>
                     <?php endif; ?>
                 </h4>
                 <span class="time">

@@ -323,6 +323,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_scribd_live_issue.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-feeds/celtick/it_stories'] = array(
+    'page callback' => 'itg_celtick_feed_it_stories',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_celtick_feed_it_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -331,44 +337,44 @@ function itg_syndication_clients_menu() {
  * @return array
  */
 function itg_syndication_clients_theme() {
-    return array(
-      'hltapps_homesectionslist' => array(
-        'template' => 'templates/hltapps_homesectionslist_template',
-      ),
-      'hltapps_sectionslist' => array(
-        'template' => 'templates/hltapps_sectionslist_template',
-      ),
-      'hltapps_video_sectionslist' => array(
-        'template' => 'templates/hltapps_video_sectionslist_template',
-      ),
-      'hltapps_photo_sectionslist' => array(
-        'template' => 'templates/hltapps_photo_sectionslist_template',
-      ),
-      'hltapps_static_about_us' => array(
-        'template' => 'templates/hltapps_static_about_us_template',
-      ),
-      'hltapps_static_livetv_text' => array(
-        'template' => 'templates/hltapps_static_livetv_text_template',
-      ),
-      'hltapps_static_playbook_ad' => array(
-        'template' => 'templates/hltapps_static_playbook_ad_template',
-      ),
-      'hltapps_static_bb_ad' => array(
-        'template' => 'templates/hltapps_static_bb_ad_template',
-      ),
-      'hltapps_static_api_livetv' => array(
-        'template' => 'templates/hltapps_static_api_livetv_template',
-      ),
-      'hltapps_static_api' => array(
-        'template' => 'templates/hltapps_static_api',
-      ),
-      'msn_static_stories_what_to_expect' => array(
-        'template' => 'templates/msn_static_stories_what_to_expect',
-      ),
-      'msn_static_stories_top_news' => array(
-        'template' => 'templates/msn_static_stories_top_news',
-      )
-    );
+  return array(
+    'hltapps_homesectionslist' => array(
+      'template' => 'templates/hltapps_homesectionslist_template',
+    ),
+    'hltapps_sectionslist' => array(
+      'template' => 'templates/hltapps_sectionslist_template',
+    ),
+    'hltapps_video_sectionslist' => array(
+      'template' => 'templates/hltapps_video_sectionslist_template',
+    ),
+    'hltapps_photo_sectionslist' => array(
+      'template' => 'templates/hltapps_photo_sectionslist_template',
+    ),
+    'hltapps_static_about_us' => array(
+      'template' => 'templates/hltapps_static_about_us_template',
+    ),
+    'hltapps_static_livetv_text' => array(
+      'template' => 'templates/hltapps_static_livetv_text_template',
+    ),
+    'hltapps_static_playbook_ad' => array(
+      'template' => 'templates/hltapps_static_playbook_ad_template',
+    ),
+    'hltapps_static_bb_ad' => array(
+      'template' => 'templates/hltapps_static_bb_ad_template',
+    ),
+    'hltapps_static_api_livetv' => array(
+      'template' => 'templates/hltapps_static_api_livetv_template',
+    ),
+    'hltapps_static_api' => array(
+      'template' => 'templates/hltapps_static_api',
+    ),
+    'msn_static_stories_what_to_expect' => array(
+      'template' => 'templates/msn_static_stories_what_to_expect',
+    ),
+    'msn_static_stories_top_news' => array(
+      'template' => 'templates/msn_static_stories_top_news',
+    )
+  );
 }
 
 /**
@@ -953,7 +959,6 @@ function itg_video_detail_formats($nid, $source_type) {
   if ($source_type != 'migrated') {
     $video_status = 'dailymotion';
     $videoids = get_video_in_fieldcollection_by_nid($nid);
-
     foreach ($videoids as $keys => $video_value) {
       if ($video_value->video_id != '') {
         $video_id = $video_value->video_id;
@@ -961,13 +966,9 @@ function itg_video_detail_formats($nid, $source_type) {
       elseif ($video_value->solr_video_id != '') {
         $video_id = $video_value->solr_video_id;
       }
-      else {
-        
-      }
       $video_detail[$video_status]['video_id'] = $video_id;
       $file_id = $video_value->fid;
     }
-
     $query = db_select('file_managed', 'fm');
     $query->condition('fm.fid', $file_id);
     $query->fields('fm', array('filename', 'uri', 'filemime', 'filesize', 'status'));
@@ -977,12 +978,10 @@ function itg_video_detail_formats($nid, $source_type) {
     $uri = $results[0]->uri;
     $video_detail[$video_status]['filename'] = $results[0]->filename;
     $video_detail[$video_status]['filsize'] = $results[0]->filesize;
-
     $query = db_select('itg_video_bitrates_data', 'itgv');
     $query->fields('itgv', array('bitate_url', 'bitates_field'));
     $query->condition('itgv.video_id', $video_id);
     $result2 = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     $video_format = array();
     foreach ($result2 as $res_data) {
       $video_format[$res_data['bitates_field']] = $res_data['bitate_url'];
@@ -990,7 +989,7 @@ function itg_video_detail_formats($nid, $source_type) {
     $video_path_mp4 = "https://www.dailymotion.com/video/" . $video_id . "";
     $video_format['videoparts_mp4'] = $video_path_mp4;
     $video_detail[$video_status]['bitate_url'] = $video_format;
-    $dailymotion_download = itg_dailymotion_download_video_uri($video_id);
+    $dailymotion_download = dailymotion_download_video_uri($video_id);
     $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
   }
   elseif ($source_type == 'migrated') {
@@ -999,10 +998,31 @@ function itg_video_detail_formats($nid, $source_type) {
     foreach ($videoids as $keys => $video_value) {
       $video_path_mp4 = $video_value->field_migrated_video_url_value;
     }
+    $video_path_mp4 = str_replace('http://medias3d.intoday.in/', 'http://indiatoday-pdelivery.akamaized.net/', $video_path_mp4);
     $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
     $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
-    $videoparts_3gp = str_replace(".mp4", ".3gp", $video_path_mp4);
+    $rr = explode('/', $video_path_mp4);
+    $mp4_last_fname = end($rr);
+    $gp_file_path = '3gp/' . $mp4_last_fname . '';
+    $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
+    // m3u8
+    $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);
+    $m3u8_tags = itg_mcu8_tags($nid);
+    if (!empty($m3u8_tags)) {
+      $m3 = implode(',', $m3u8_tags);
+      $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+      $videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
+    }
+    else {
+      $m3 = "";
+      $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+      $videoparts_m3u = str_replace('.mp4', $new_m3, $video_path_mp4);
+    }
+    $videoparts_m3u8 = str_replace('http://indiatoday-pdelivery.akamaized.net', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
+    //end
+    $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
     $video_detail[$video_status]['flv_url'] = $flv_url;
+    $video_detail[$video_status]['videoparts_m3u8'] = $videoparts_m3u8;
     $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
   }
   return $video_detail;
@@ -1156,7 +1176,6 @@ function get_term_description_by_tid($tid = NULL) {
   return $tdescription;
 }
 
-
 /**
  * function is used to get parent category name
  * @param int $tid
@@ -1250,4 +1269,44 @@ function get_samsung_breaking_news_lists($result) {
   }
 
   return $breaking_xml;
+}
+
+function is_lock_story($nid) {
+  if (empty($nid)) {
+    return FALSE;
+  }
+  $query1 = db_select('field_data_field_story_configurations', 'fsc');
+  $query1->fields('fsc', array('entity_id'));
+  $query1->condition('fsc.field_story_configurations_value', 'lock_story', 'LIKE');
+  $query1->condition('fsc.entity_id', $nid, '=');
+  $result1 = $query1->execute()->fetchAll();
+  if (!empty($result1)) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * function for getmcu8 url of vedio
+ *
+ * @param type $nid
+ *
+ * @return type
+ */
+function itg_mcu8_tags($nid) {
+  //$nid = 17378;
+  $query = db_select('field_data_field_multi_bitrate', 'mvr');
+  $query->fields('mvr', array('field_multi_bitrate_value'));
+  $query->condition('mvr.entity_id', $nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $tags = array();
+  if (count($result) > 0) {
+    foreach ($result as $data) {
+      $first_char = strstr($data['field_multi_bitrate_value'], '@', TRUE);
+      if ($first_char == 'B' || $first_char == 'M') {
+        $tags[] = substr(strstr($data['field_multi_bitrate_value'], '@'), 1);
+      }
+    }
+  }
+  return $tags;
 }

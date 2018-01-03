@@ -41,6 +41,9 @@ function itg_zuppit_feed_latest_story() {
   $top_stories = get_top_story_for_zupit();
   $json_output['data']['top'] = array();
   foreach ($top_stories as $top_story) {
+    if (is_lock_story($top_story['nid'])) {
+      continue;
+    }
     $pub_date = strtotime($top_story['field_itg_content_publish_date_value']);
     $larg_img = get_image_info_by_fid($top_story['field_story_large_image_fid']);
     $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $top_story['nid']);
@@ -59,6 +62,9 @@ function itg_zuppit_feed_latest_story() {
   // For Rows key
   $json_output['data']['rows'] = array();
   foreach ($result as $value) {
+    if (is_lock_story($value['nid'])) {
+      continue;
+    }
     $nid = $value['nid'];
     $publish_date = strtotime($value['field_itg_content_publish_date_value']);
     $city = get_content_city($value['nid']);

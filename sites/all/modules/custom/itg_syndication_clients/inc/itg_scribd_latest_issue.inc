@@ -45,7 +45,7 @@ function itg_genrate_scribd_latest_issue_syndication($issue_result = NULL) {
     $query->fields('kt', array('field_story_kicker_text_value'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_scribd_latest_issue_syndication_xml($result, $issue_title, $issue_result);
-    $xml_path = 'public://rss-feeds/ver1.0/scribd/cbb1e171/it/stories/';
+    $xml_path = 'public://rss-feeds/xml_data/scribd/it/stories/';
     $file_path = $xml_path . 'it-latest-issue.xml';
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -70,6 +70,9 @@ function genrate_scribd_latest_issue_syndication_xml($result = NULL, $issue_titl
     $xml .= '<title><![CDATA[' . $issue_title . ']]></title>';
     $xml .= '<link><![CDATA[' . $base_url . ']]></link>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $nid = $value['nid'];
       $publish_date = date("Y-m-d H:i", strtotime($value['field_itg_content_publish_date_value']));
       $author = get_byline_name_by_nid($nid);

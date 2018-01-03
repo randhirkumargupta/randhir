@@ -278,7 +278,10 @@ function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
  * @param object $entity_object
  */
 function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_url = NULL) {
-  $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
+  module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
+  $detect = new Mobile_Detect;
+  $isMobile = $detect->isMobile();
+  $str_breadcrumb = 'https://data-vocabulary.org/Breadcrumb';
   $title_val = '';
   $arg = arg();
   if (isset($entity_object->title)) {
@@ -312,13 +315,25 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     
   }
   if (!empty($entity_object->type) && $entity_object->type == 'story') {
-    $section_link .= ' / ' . $node_title;
+    if (empty($isMobile)) {
+      $section_link .= ' / ' . $node_title;
+    }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
-    $section_link .= ' / Video / ' . $node_title;
+    if (empty($isMobile)) {
+      $section_link .= ' / Video / ' . $node_title;
+    }
+    else {
+      $section_link .= ' / Video';
+    }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'photogallery') {
-    $section_link .= ' / Gallery / ' . $node_title;
+    if (empty($isMobile)) {
+      $section_link .= ' / Gallery / ' . $node_title;
+    }
+    else {
+      $section_link .= ' / Gallery';
+    }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'podcast') {
     $section_link .= ' / ' . l("Podcast", "podcast") . ' / ' . $node_title;
