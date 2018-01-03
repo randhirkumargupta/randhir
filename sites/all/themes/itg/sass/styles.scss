@@ -527,6 +527,7 @@ header {
     .navigation {
         @include clearfix;
         margin-top: 20px;
+        overflow:visible;
         background: #a00606;
         box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
         .container {
