@@ -43,7 +43,7 @@ function generate_notification_all($params) {
 
   $footersharemsg = isset($params['title']) ? $params['title'] : '';
   $website = isset($params['website']) ? $params['website'] : '';
-  //Application ID 1-India Today 4-India Today Ipad
+  //Application ID 1-India Today 4-India Today Ipad 6:test all devices
   $app_id = isset($params['app_id']) ? $params['app_id'] : '';
   //1 - iOS; 2 - BB; 3 - Android; 4 - Nokia ASHA; 5 - Windows Phone; 7 - OS X; 8 - Windows 8; 9 - Amazon; 10 - Safari; 11 - Chrome
   $device = isset($params['device']) ? $params['device'] : '';
@@ -55,6 +55,55 @@ function generate_notification_all($params) {
 
     $app_file_name = 'notification_ipad.xml';
     $app_output .= ipad_notification_xml();
+  }elseif ($app_id == '6') {
+    // XML Files Generation Based on Device Id
+    $dev = explode(',', $params['device']);
+    foreach ($dev as $dev_id) {
+      if ($dev_id == '1') {
+        $file_name = 'notification_ios_test.xml';
+        $output .= default_xml_feed();
+      }
+      elseif ($dev_id == '2') {
+        $file_name = 'notification_bb_test.xml';
+        $output = bb_notification_xml();
+      }
+      elseif ($dev_id == '3') {
+        $file_name = 'notification_android_test.xml';
+        $output = default_xml_feed();
+      }
+      elseif ($dev_id == '4') {
+        $file_name = 'notification_nokiaasha_test.xml';
+        $output = nokiaasha_notification_xml();
+      }
+      elseif ($dev_id == '5') {
+        $file_name = 'notification_windowsphone_test.xml';
+        $output = default_xml_feed();
+      }
+      elseif ($dev_id == '7') {
+        $file_name = 'notification_osx_test.xml';
+        $output = osx_notification_xml();
+      }
+      elseif ($dev_id == '8') {
+        $file_name = 'notification_windows8_test.xml';
+        $output = windows8_notification_xml();
+      }
+      elseif ($dev_id == '9') {
+        $file_name = 'notification_amazon_test.xml';
+        $output = amazon_notification_xml();
+      }
+      elseif ($dev_id == '10') {
+        $file_name = 'notification_safari_test.xml';
+        $output = safari_notification_xml();
+      }
+      elseif ($dev_id == '11') {
+        $file_name = 'notification_chrome_test.xml';
+        $output = chrome_notification_xml();
+      }
+
+      if ($output && $output != '') {
+        $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
+      }
+    }
   }
   elseif ($app_id == '1') {
     // XML Files Generation Based on Device Id

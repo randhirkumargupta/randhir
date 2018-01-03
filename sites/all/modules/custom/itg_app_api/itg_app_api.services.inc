@@ -5248,7 +5248,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
     $anchor_data['author'] = $author_list;
     $anchor_data['topic'] = $topics_list;
 
-    if ($anchor_c > 0) {
+    if ($anchor_c > 0 || $anchor_c1 > 0 || $anchor_c2 > 0) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
         $output_array['data'] = $anchor_data;
