@@ -16,7 +16,9 @@
  */
 if ($_SERVER['HTTP_HOST'] == 'staging-it.indiatodayonline.in') {
   $old_url = $_SERVER['SCRIPT_URL'];
-  drupal_goto('http://uat-it.indiatodayonline.in/'.$old_url);
+  $url_re = 'http://uat-it.indiatodayonline.in/'.$old_url;
+  header('Location: ' . $url_re);
+  //drupal_goto('http://uat-it.indiatodayonline.in/'.$old_url);
 }
 
 define('DRUPAL_ROOT', getcwd());
