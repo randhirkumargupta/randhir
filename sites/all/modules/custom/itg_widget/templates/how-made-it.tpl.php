@@ -1,10 +1,16 @@
 <?php if (!empty($data)) : global $base_url; ?>
+<?php 
+  $data_tb_region_item = '';
+  if(drupal_is_front_page()){
+	$data_tb_region_item = 'data-tb-region-item';  
+  }
+?>
   <div class="how-made-it">
     <ul>
       <?php foreach ($data as $key => $entity) {
          
         ?>
-        <li>
+        <li <?php echo $data_tb_region_item;?>>
           <?php if (!empty($entity['esi_file_uri'])) { ?>
             <span class="dm-pic">
               <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/{$entity['nid']}") ?>">

@@ -64,6 +64,9 @@ function get_education_rss_feed_from_cid_xml($result, $cid, $cat_name) {
     $xml .= '<description>Education Today</description>';
     $xml .= '</image>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];

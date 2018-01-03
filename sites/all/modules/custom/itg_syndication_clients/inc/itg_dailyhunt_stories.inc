@@ -42,7 +42,7 @@ function itg_genrate_dailyhunt_story_syndication($section_id = NULL, $file_name)
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     $xml = genrate_dailyhunt_story_syndication_xml($result);
-    $destination = "public://rss-feeds/ver1.0/dailyhunt/83951470/it/stories/";
+    $destination = "public://rss-feeds/xml_data/dailyhunt/it/stories/";
     $file_path = $destination . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -62,6 +62,9 @@ function genrate_dailyhunt_story_syndication_xml($result = NULL) {
     global $base_url;
     $xml = '<Data>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $publish_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);

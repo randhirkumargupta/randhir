@@ -581,6 +581,7 @@ header {
   #block-itg-layout-manager-header-block .navigation {
     zoom: 1;
     margin-top: 20px;
+    overflow: visible;
     background: #a00606;
     box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1); }
     #block-itg-layout-manager-header-block .navigation:before, #block-itg-layout-manager-header-block .navigation:after {
@@ -641,7 +642,7 @@ header {
       cursor: pointer; }
       #block-itg-layout-manager-header-block .navigation .all-menu i {
         font-size: 7px;
-        color: #000; }
+        color: #e0e0e0; }
     #block-itg-layout-manager-header-block .navigation ul#newlist {
       padding-left: 0;
       padding-right: 0;
@@ -1752,7 +1753,7 @@ footer {
     clear: both; }
   .view-front-end-global-search .searh-all-filters .views-exposed-widget {
     float: none;
-    display: inline-block;
+    display: none;
     vertical-align: top; }
 .view-front-end-global-search .view-filters {
   font-family: "Roboto-Regular";
@@ -2170,7 +2171,7 @@ footer {
           .story-section .comment-mobile ul li a.unflag-action span {
             font-family: "Roboto-Regular"; }
     .story-section .comment-mobile ul.social-share {
-      display: none; }
+      display: initial; }
 .story-section .story-left-section {
   zoom: 1;
   margin-top: 20px; }
@@ -4878,7 +4879,7 @@ h1.category-heading {
       padding-bottom: 72.3%;
       padding-top: 0; }
       #block-views-video-landing-header-block .video-header-left .iframe-video .jwplayer {
-        position: static !important; }
+        position: relative; }
     #block-views-video-landing-header-block .video-header-left .social-likes {
       float: none;
       width: 100%;
@@ -6861,7 +6862,7 @@ section.sidebar .block-itg-ads {
   .tech-layout-page .itg-h385-section .section_wise_order-buying-guid .widget-title {
     position: absolute; }
   .tech-layout-page .itg-h396-section .droppable {
-    height: 396px;
+    height: 425px;
     background: #f3f3f3;
     padding: 10px; }
   .tech-layout-page .itg-h396-section .section_wise_order-in-depth .widget-title {
@@ -8107,7 +8108,8 @@ section.sidebar .block-itg-ads {
   .education-layout-page .itg-layout-565 .droppable {
     height: 565px; }
   .education-layout-page .itg-layout-565 .itg-widget-parent .droppable {
-    height: 225px; }
+    height: auto;
+    min-height: initial; }
   .education-layout-page .itg-layout-565 .itg-widget-child .droppable {
     height: 300px; }
     .education-layout-page .itg-layout-565 .itg-widget-child .droppable .widget-wrapper {
@@ -8142,7 +8144,7 @@ section.sidebar .block-itg-ads {
         left: 10px; }
     .education-layout-page .shadow-on .more {
       padding: 10px 20px 20px 0px;
-      position: absolute;
+      position: unset;
       right: 0px;
       bottom: 0px; }
   .education-layout-page .section_wise_order-edu-from-the-magazine {
@@ -8211,7 +8213,7 @@ section.sidebar .block-itg-ads {
     border: 1px solid #ddd;
     padding: 10px; }
     .education-layout-page .section_wise_order-edu-tips-and-trick .auto-tips-n-tricks {
-      height: 220px;
+      height: 344px;
       overflow: auto; }
   .education-layout-page .auto-tips-n-tricks ul li {
     padding: 18px 0; }
@@ -8482,7 +8484,7 @@ section.sidebar .block-itg-ads {
       display: none; }
 
 .section-sport-ipl-bg {
-  background: url("../images/sports-bg.png") no-repeat center 135px; }
+  background: url("../images/sports-bg.png") no-repeat center 235px; }
   .section-sport-ipl-bg main.container {
     background: #fff; }
 
@@ -13142,7 +13144,8 @@ span.story-sponsor-powered-text::last-word {
 .pipeline-added .add-on-story-pipline {
   color: #086DC7; }
   .pipeline-added .add-on-story-pipline + a {
-    color: #086DC7; }
+    color: #086DC7;
+    display: initial; }
 
 /*css end pipeline-added*/
 /*css start add by arun */
@@ -13445,8 +13448,7 @@ span.story-sponsor-powered-text::last-word {
   font-weight: bold;
   padding: 0 0 0 10px;
   float: left;
-  margin-left: 42%;
-  width: 58%;
+  width: 100%;
   margin-bottom: 10px;
   background: #000;
   border-bottom: 2px solid #cccc; }
@@ -13469,14 +13471,15 @@ ul.tech-pron-cons-img {
 
 ul.tech-pros {
   list-style: disc;
-  width: 27%;
+  width: 25%;
   float: left;
   margin-left: 4%; }
 
 ul.tech-cons {
   list-style: disc;
-  width: 27%;
-  float: left; }
+  width: 25%;
+  float: left;
+  margin-left: 4%; }
 
 ul.tech-cons li,
 ul.tech-pros li {
@@ -13995,5 +13998,18 @@ ul.pron-cons-img li img {
     box-shadow: 0 0 0 0 rgba(214, 2, 12, 0); } }
 .front .ad-widget .sidebar-ad .block-itg-ads {
   margin: 0px auto 0; }
+
+.education-layout-page .widget-title {
+  padding: 5px; }
+
+.education-layout-page .col-md-12.col-sm-6.col-xs-12.mt-10 .itg-widget-child.shadow-on .droppable, .education-layout-page .page-user form .col-md-12.col-sm-6.col-xs-12.form-type-password .itg-widget-child.shadow-on .droppable, .page-user form .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-type-password .itg-widget-child.shadow-on .droppable,
+.education-layout-page .page-user form .col-md-12.col-sm-6.col-xs-12.form-actions .itg-widget-child.shadow-on .droppable,
+.page-user form .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-actions .itg-widget-child.shadow-on .droppable,
+.education-layout-page .page-signup form .col-md-12.col-sm-6.col-xs-12.form-type-password .itg-widget-child.shadow-on .droppable,
+.page-signup form .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-type-password .itg-widget-child.shadow-on .droppable,
+.education-layout-page .page-signup form .col-md-12.col-sm-6.col-xs-12.form-actions .itg-widget-child.shadow-on .droppable,
+.page-signup form .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-actions .itg-widget-child.shadow-on .droppable, .education-layout-page #block-formblock-ask-an-expert .col-md-12.col-sm-6.col-xs-12.form-submit .itg-widget-child.shadow-on .droppable, #block-formblock-ask-an-expert .education-layout-page .col-md-12.col-sm-6.col-xs-12.form-submit .itg-widget-child.shadow-on .droppable, .education-layout-page .col-md-12.col-sm-6.col-xs-12.question-heading .itg-widget-child.shadow-on .droppable {
+  height: 314px;
+  min-height: initial; }
 
 /*# sourceMappingURL=styles.css.map */

@@ -527,6 +527,7 @@ header {
     .navigation {
         @include clearfix;
         margin-top: 20px;
+        overflow:visible;
         background: #a00606;
         box-shadow: 0 6px 5px -3px rgba(0, 0, 0, 0.1);
         .container {
@@ -607,7 +608,7 @@ header {
             cursor: pointer;
             i {
                 font-size: 7px;
-                color: #000;
+                color: #e0e0e0;
             }
         }
         ul#newlist {
@@ -2069,7 +2070,7 @@ footer {
         overflow-x: auto;
         .views-exposed-widget {
             float: none;
-            display: inline-block;
+            display: none;
             vertical-align: top;
         }
     }
@@ -2448,7 +2449,7 @@ footer {
                 }
             }
             &.social-share {
-                display: none;
+                display: initial;
             }
         }
     }
@@ -4899,7 +4900,7 @@ h1.category-heading {
             padding-bottom: 72.3%;
             padding-top: 0;
             .jwplayer {
-                position: static !important;
+                position:relative;
             }
         }
         @include video-detail-page-sociallike;
@@ -6789,7 +6790,7 @@ section.sidebar {
     }
     .itg-h396-section {
         .droppable {
-            height: 396px;
+            height: 425px;
             background: #f3f3f3;
             padding: 10px;
         }
@@ -8441,7 +8442,8 @@ section.sidebar {
         }
         .itg-widget-parent {
             .droppable {
-                height: 225px;
+                height: auto;
+                min-height: initial;
             }
         }
         .itg-widget-child {
@@ -8502,7 +8504,7 @@ section.sidebar {
         }
         .more {
             padding: 10px 20px 20px 0px;
-            position: absolute;
+            position: unset;
             right: 0px;
             bottom: 0px;
         }
@@ -8594,7 +8596,7 @@ section.sidebar {
         border: 1px solid #ddd;
         padding: 10px;
         .auto-tips-n-tricks {
-            height: 220px;
+            height: 344px;
             overflow: auto;
         }
     }
@@ -8867,7 +8869,7 @@ section.sidebar {
 }
 
 .section-sport-ipl-bg {
-    background: url('../images/sports-bg.png') no-repeat center 135px;
+    background: url('../images/sports-bg.png') no-repeat center 235px;
     main.container {
         background: #fff;
     }
@@ -14020,6 +14022,7 @@ span.story-sponsor-powered-text::last-word {
         color: #086DC7;
         +a {
             color: #086DC7;
+            display: initial;
         }
     }
 }
@@ -14372,8 +14375,7 @@ span.story-sponsor-powered-text::last-word {
     font-weight: bold;
     padding: 0 0 0 10px;
     float: left;
-    margin-left: 42%;
-    width: 58%;
+    width:100%;
     margin-bottom: 10px;
     background: #000;
     border-bottom: 2px solid #cccc;
@@ -14400,15 +14402,16 @@ ul.tech-pron-cons-img {
 
 ul.tech-pros {
     list-style: disc;
-    width: 27%;
+    width: 25%;
     float: left;
     margin-left: 4%;
 }
 
 ul.tech-cons {
     list-style: disc;
-    width: 27%;
+    width: 25%;
     float: left;
+    margin-left: 4%;
 }
 
 ul.tech-cons li,
@@ -14949,3 +14952,6 @@ ul.pron-cons-img li img {
 }
 
 .front .ad-widget .sidebar-ad .block-itg-ads{margin:0px auto 0;}
+.education-layout-page .widget-title{padding:5px;}
+.education-layout-page .col-md-12.col-sm-6.col-xs-12.mt-10 .itg-widget-child.shadow-on .droppable {height: 314px; min-height: initial;}
+

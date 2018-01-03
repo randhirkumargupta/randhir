@@ -929,7 +929,11 @@ jQuery(document).ready(function () {
 
     });
 
-    jQuery('#modalCarousel').carousel({ interval: false });
+    var element = document.getElementById('#modalCarousel');
+    if (typeof (element) != 'undefined' && element != null)
+    {
+        jQuery('#modalCarousel').carousel({interval: false});
+    }
 
     jQuery('#modalCarousel').on('slid.bs.carousel', function () {
         jQuery('.modal-title').html(jQuery(this).find('.active').attr("title"));

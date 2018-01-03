@@ -113,6 +113,8 @@ function _issues_options($magazine) {
     $itg_query->join('field_data_field_issue_magazine', 'sc', 'n.nid = sc.entity_id');
     $itg_query->condition('sc.field_issue_magazine_target_id', $magazine);
     $itg_query->condition('n.type', 'issue');
+    $itg_query->condition('n.status', 1);
+    $itg_query->orderBy('n.created', 'DESC');
     $itg_query->range(0, 10);
     $itg_result = $itg_query->execute()->fetchAll();
     foreach($itg_result as $key => $data) {

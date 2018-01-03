@@ -278,7 +278,10 @@ function itg_additional_settings_element_hide($form, &$form_state, $form_id) {
  * @param object $entity_object
  */
 function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_url = NULL) {
-  $str_breadcrumb = 'http://data-vocabulary.org/Breadcrumb';
+  module_load_include('php', 'itg_loyalty_reward', 'includes/Mobile_Detect');
+  $detect = new Mobile_Detect;
+  $isMobile = $detect->isMobile();
+  $str_breadcrumb = 'https://data-vocabulary.org/Breadcrumb';
   $title_val = '';
   $arg = arg();
   if (isset($entity_object->title)) {
@@ -300,25 +303,37 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_tids = array_reverse($section_tids);
     
     if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]) && count($section_tids) == 1) {
-      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
-          .'<h1>' . itg_seo_get_term_name_by_tid($arg[2]) . '</h1></div>';
+      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/'
+          .'&nbsp;<span itemprop="title">' . itg_seo_get_term_name_by_tid($arg[2]) . '</span></div>';
     }
     else {
       foreach ($section_tids as $chunks) {
-        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"> /'
+        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/&nbsp;'
             . l('<span itemprop="title">' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       }
     }
     
   }
   if (!empty($entity_object->type) && $entity_object->type == 'story') {
-    $section_link .= ' / ' . $node_title;
+    if (empty($isMobile)) {
+      $section_link .= ' / ' . $node_title;
+    }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
-    $section_link .= ' / Video / ' . $node_title;
+    if (empty($isMobile)) {
+      $section_link .= ' / Video / ' . $node_title;
+    }
+    else {
+      $section_link .= ' / Video';
+    }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'photogallery') {
-    $section_link .= ' / Gallery / ' . $node_title;
+    if (empty($isMobile)) {
+      $section_link .= ' / Gallery / ' . $node_title;
+    }
+    else {
+      $section_link .= ' / Gallery';
+    }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'podcast') {
     $section_link .= ' / ' . l("Podcast", "podcast") . ' / ' . $node_title;
@@ -430,14 +445,6 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
       );
       drupal_add_html_head($markup, 'sd_json');
       
-      // canonical for home page
-      $home_canonical = $base_url . '/' . $node->path['alias'];
-      $canonical = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#attributes' => array('rel' => 'canonical', 'href' => $home_canonical),
-      );
-      drupal_add_html_head($canonical, 'canonical');
       // meta name description for home page
       $meta_description = $node->metatags[LANGUAGE_NONE]['description']['value'];
       if (isset($meta_description) && !empty($meta_description)) {
@@ -448,6 +455,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
             'name' => 'description',
             'content' => $meta_description,
           ),
+          '#weight' => -1000,
         );
         drupal_add_html_head($metatag_description, 'description');
       }
@@ -461,6 +469,7 @@ function itg_seo_node_view($node, $view_mode, $langcode) {
             'name' => 'news_keyword',
             'content' => $meta_keyword,
           ),
+          '#weight' => -999,
         );
         drupal_add_html_head($meta_keyword, 'news_keyword');
       }

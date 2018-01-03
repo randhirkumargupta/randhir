@@ -83,8 +83,8 @@ function genrate_bsb_video_syndication_xml($result = NULL, $section_id, $categor
 
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
-      $xml .= '<mediumimage><![CDATA[' . $medium_img['imag_url'] . ']]></mediumimage>';
-      $xml .= '<thumbimage><![CDATA[' . $small_img['imag_url'] . ']]></thumbimage>';
+      $xml .= '<mediumimage><![CDATA[' . $small_img['imag_url'] . ']]></mediumimage>';
+      $xml .= '<thumbimage><![CDATA[' . $medium_img['imag_url'] . ']]></thumbimage>';
       $xml .= '<url>' . $video_file_name . '</url>';
       $xml .= '<create_date>' . $created_date . '</create_date>';
       $xml .= '<create_datetime>' . $created_datetime . '</create_datetime>';

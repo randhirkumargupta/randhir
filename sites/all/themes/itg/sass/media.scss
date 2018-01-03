@@ -1086,7 +1086,8 @@
         margin-bottom: 40px;
     }
     .education-layout-page .itg-layout-565 .itg-widget-parent .droppable {
-        height: 300px;
+        height: auto;
+        min-height: initial;
         &.m-bottom40 {
             margin-bottom: 0;
         }
@@ -1105,7 +1106,7 @@
     .sport-home-layout-page {
         .right-side {
             .col-md-12 {
-                min-height: 260px;
+                min-height:auto;
                 .ad-widget {
                     margin-top: 40px;
                 }
@@ -1185,6 +1186,7 @@
             display: block;
             position: relative;
             margin-top: 15px;
+            float: right;
             &:after {
                 content: '';
                 width: 0;
@@ -1205,16 +1207,17 @@
             float: none;
             width: 95px;
             top: 45px;
-            left: 15px;
+            right: 15px;
             display: none;
+
             li {
                 display: block;
                 a {
                     font-weight: 500;
                     font-size: 10px;
-                    height: 30px;
-                    line-height: 30px;
-                    padding: 0 8px 0 8px;
+                    height:auto;
+                    line-height:14px;
+                    padding: 10px 8px 10px 8px;
                     &:hover,
                     &.active {
                         background: #3d3b3c;
@@ -3270,6 +3273,7 @@
             overflow-x: inherit;
             .views-exposed-widget {
                 float: left;
+                display: none;
                 &.views-submit-button {
                     width: 165px;
                 }

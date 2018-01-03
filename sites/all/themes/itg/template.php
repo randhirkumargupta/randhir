@@ -276,6 +276,13 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
+  itgd_chart_beat_code();
+  $newsroomjs = get_newsroom_js();
+  $script_code = array(
+	'#type' => 'markup',
+	'#markup' => $newsroomjs,
+  );
+  drupal_add_html_head($script_code, 'newsroomjs');
   if (!empty(FRONT_URL) && $base_url == FRONT_URL) {
     $add_script = variable_get('add_traffic_script');
     if ($add_script) {
@@ -297,6 +304,18 @@ function itg_html_head_alter(&$head_elements) {
   $arg = arg();
   global $base_url;
   
+  // canonical for home page
+  if (drupal_is_front_page()) {
+    $home_canonical = $base_url . '/';
+    $head_elements['canonical_0'] = array(
+      '#type' => 'html_tag',
+      '#tag' => 'link',
+      '#attributes' => array(
+        'rel' => 'canonical',
+        'href' => $home_canonical
+      ),
+    );
+  }
   // Updating meta name keywords to news_keyword sitewide
   $meta_name_keyword = array_keys($head_elements);
   if (in_array('metatag_keywords_0', $meta_name_keyword)) {
@@ -390,6 +409,7 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['og_image_height']['#weight'] = -978;
   $head_elements['og_image_width']['#weight'] = -977;
   $head_elements['og_image']['#weight'] = -976;
+  $head_elements['canonical_0']['#weight'] = -1001;
 }
 
 /**
@@ -510,3 +530,134 @@ function itg_image($variables) {
   return '<img' . drupal_attributes($attributes) . ' />';
 }
 
+/**
+ * Get newsroom js ad code
+ */ 
+function get_newsroom_js(){
+	if(drupal_is_front_page()){
+		return <<<jscode
+	<!-- NEWSROOM SCRIPT -->
+<script>
+window._newsroom = window._newsroom || [];
+window._newsroom.push({pageTemplate: 'home'});
+window._newsroom.push({pageDashboard: 'home'});
+window._newsroom.push('auditClicks');
+window._newsroom.push('trackPage');
+
+!function (e, f, u) {
+	e.async = 1;
+	e.src = u;
+	f.parentNode.insertBefore(e, f);
+}(document.createElement('script'),
+		document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indiatoday/newsroom.js');
+</script>
+<!-- END NEWSROOM SCRIPT -->
+jscode;
+	}else{
+		return <<<jscode
+		<!-- NEWSROOM SCRIPT -->
+<script>
+    window._newsroom = window._newsroom || [];
+ 
+    !function (e, f, u) {
+        e.async = 1;
+        e.src = u;
+        f.parentNode.insertBefore(e, f);
+    }(document.createElement('script'),
+            document.getElementsByTagName('script')[0], '//c2.taboola.com/nr/indiatoday-indiatoday/newsroom.js');
+</script>
+<!-- END NEWSROOM SCRIPT -->
+jscode;
+	}
+}
+
+/**
+ * Function for add chart beat js code
+ */
+function itgd_chart_beat_code() {
+  global $base_url;
+  $chart_sections = '';
+  $chart_authors = '';
+  $chart_title = '';
+  $chart_path = $base_url;
+  $chart_js = '//static.chartbeat.com/js/chartbeat.js';
+  $node = menu_get_object('node');
+  if (!drupal_is_front_page() && isset($node) && !empty($node)) {
+    if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node->field_story_category['und'])) {
+      $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+      foreach ($node->field_story_category['und'] as $p_cat) {
+        if ($p_cat['tid'] == $primary_cat) {
+          $chart_sections = $p_cat['taxonomy_term']->name;
+        }
+      }
+    }
+    if (isset($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
+      $get_authors_name = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
+    }
+    $auths_name = '';
+    if (!empty($get_authors_name)) {
+      $auths_name = itg_get_story_authors_name($get_authors_name) . ',';
+    }
+    $chart_authors = $auths_name . 'Edited by ' . itg_get_story_edited_authors_name($node->uid);
+    $chart_title = $node->title;
+    $chart_path = drupal_get_path_alias('node/' . $node->nid);
+    if ($node->type == 'videogallery') {
+      $chart_js = '//static.chartbeat.com/js/chartbeat_video.js';
+    }
+    
+    if ($node->type == 'story') {
+      drupal_add_js('http://821.tm.zedo.com/v1/7217327e-2fc7-4b32-bd53-1c943009b4ca/tm.js',  array('type' => 'external', 'scope' => 'footer'));
+      drupal_add_js('//ht-itw.hoverr.media/js/tera_indiatoday_web.js',  array('type' => 'external', 'scope' => 'footer'));
+      drupal_add_js('var unruly = window.unruly || {};
+					unruly.native = unruly.native || {};
+					unruly.native.siteId = 321603', array('type' => 'inline', 'scope' => 'footer'));
+	  drupal_add_js('//video.unrulymedia.com/native/native-loader.js', array('type' => 'external', 'scope' => 'footer'));
+	  /*drupal_add_js('var $ImpulseID ="IMPL-ITDG-INDIATODAY-WEB-ARTICLE";
+					(function() {
+					var _Impulser = document.createElement("script"); _Impulser.type = "text/javascript";
+					_Impulser.async = true;
+					_Impulser.src = ("https:" == document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+					var _scripter = document.getElementsByTagName("script")[0];
+					_scripter.parentNode.insertBefore(_Impulser, _scripter);
+					})();', array('type' => 'inline', 'scope' => 'footer'));*/
+    }
+    if ($node->type == 'photogallery') {
+		/*drupal_add_js('var $ImpulseID ="IMPL-ITDG-INDIATODAY-WEB-ARTICLE";
+					(function() {
+					var _Impulser = document.createElement("script"); _Impulser.type = "text/javascript";
+					_Impulser.async = true;
+					_Impulser.src = ("https:" == document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+					var _scripter = document.getElementsByTagName("script")[0];
+					_scripter.parentNode.insertBefore(_Impulser, _scripter);
+					})();', array('type' => 'inline', 'scope' => 'footer'));*/
+	}
+  }
+
+  drupal_add_js("var _sf_async_config = _sf_async_config || {};
+      /** CONFIGURATION START **/
+    _sf_async_config.uid = 60355;
+    _sf_async_config.domain = 'indiatoday.in';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = '" . $chart_sections . "';  
+    _sf_async_config.authors = '" . $chart_authors . "';    
+	_sf_async_config.title = '" . $chart_title . "';
+	_sf_async_config.path = '" . $chart_path . "';
+    /** CONFIGURATION END **/
+     (function () {
+          function loadChartbeat() { 
+               window._sf_endpt = (new Date()).getTime();
+               var e = document.createElement('script');
+               e.setAttribute('language', 'javascript');
+               e.setAttribute('type', 'text/javascript');
+               e.setAttribute('src', '" . $chart_js . "');
+               document.body.appendChild(e);
+          }
+          var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };	  
+		  
+     })();", array('type' => 'inline', 'scope' => 'footer'));
+}
