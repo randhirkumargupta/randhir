@@ -4,6 +4,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
+drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
 global $base_url;
 ?>
 
@@ -16,9 +18,9 @@ if (!empty($refral_site)) {
     $used_on = 'embed';
   }
 }
-$autostart = TRUE;
+$autostart = "TRUE";
 if ($used_on == 'embed') {
-  $autostart = FALSE;
+  $autostart = "FALSE";
 }
 
 $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $external_side);
@@ -79,6 +81,6 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
 </script>
 
 <?php
-drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
-drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
+//drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
+//drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
 ?>
