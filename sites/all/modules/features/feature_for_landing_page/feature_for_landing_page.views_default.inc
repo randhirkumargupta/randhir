@@ -52,7 +52,7 @@ function feature_for_landing_page_views_default_views() {
     'image_style' => 'anchors_landing',
     'image_link' => 'content',
   );
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -118,7 +118,7 @@ function feature_for_landing_page_views_default_views() {
     'image_style' => 'anchors_landing',
     'image_link' => 'content',
   );
-  /* Field: Content: Description */
+  /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
@@ -412,6 +412,18 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['field_time_period']['id'] = 'field_time_period';
   $handler->display->display_options['fields']['field_time_period']['table'] = 'field_data_field_time_period';
   $handler->display->display_options['fields']['field_time_period']['field'] = 'field_time_period';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '1207797,1207722,1207827,1208900,1208902,1208095,1768536,1208173,1207755,1206960,1207972,1208898,1208061';
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['tid']['break_phrase'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Taxonomy vocabulary: Machine name */
@@ -485,6 +497,18 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['field_time_period']['id'] = 'field_time_period';
   $handler->display->display_options['fields']['field_time_period']['table'] = 'field_data_field_time_period';
   $handler->display->display_options['fields']['field_time_period']['field'] = 'field_time_period';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Taxonomy term: Term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '1207797,1207722,1207827,1208900,1208902,1208095,1768536,1208173,1207755,1206960,1207972,1208898,1208061';
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['tid']['break_phrase'] = TRUE;
   $export['programmes'] = $view;
 
   return $export;
