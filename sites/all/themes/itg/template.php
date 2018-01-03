@@ -595,9 +595,9 @@ function itgd_chart_beat_code(){
     } 
 	$auths_name = '';    
     if(!empty($get_authors_name)){
-      $auths_name = itg_get_story_authors_name($get_authors_name);
+      $auths_name = itg_get_story_authors_name($get_authors_name) . ',';
     }
-	$chart_authors = $auths_name . ',Edited by '.itg_get_story_edited_authors_name($node->uid);
+	$chart_authors = $auths_name . 'Edited by '.itg_get_story_edited_authors_name($node->uid);
     $chart_title = $node->title;
     $chart_path = drupal_get_path_alias('node/' . $node->nid);
     if($node->type == 'videogallery'){
