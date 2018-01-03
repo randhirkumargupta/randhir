@@ -400,43 +400,6 @@ return date(\'Y\', strtotime(\'+7 days\'));
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
   $handler->display->display_options['pager']['options']['offset'] = '1';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Global: PHP */
-  $handler->display->display_options['fields']['php']['id'] = 'php';
-  $handler->display->display_options['fields']['php']['table'] = 'views';
-  $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$img = file_create_url(file_default_scheme() . \'://../sites/all/themes/itg/images/itg_image237x133.jpg\');
-$img_src = \'<img src="\'.$img.\'">\';
-print l($img_src, \'node/\'.$data->nid, array(\'html\' => TRUE));
-?>';
-  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
-  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Field: Content: Extra large image */
-  $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['table'] = 'field_data_field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['field'] = 'field_story_extra_large_image';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['label'] = '';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_story_extra_large_image']['empty'] = '[php]';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_extra_large_image']['settings'] = array(
-    'image_style' => 'magazine_top_three_story_237x133',
-    'image_link' => 'content',
-  );
-  /* Field: Field: Large image */
-  $handler->display->display_options['fields']['field_story_large_image']['id'] = 'field_story_large_image';
-  $handler->display->display_options['fields']['field_story_large_image']['table'] = 'field_data_field_story_large_image';
-  $handler->display->display_options['fields']['field_story_large_image']['field'] = 'field_story_large_image';
-  $handler->display->display_options['fields']['field_story_large_image']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_story_large_image']['empty'] = '[php]';
-  $handler->display->display_options['fields']['field_story_large_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_story_large_image']['settings'] = array(
-    'image_style' => 'magazine_top_three_story_237x133',
-    'image_link' => 'content',
-  );
   /* Field: Global: Dynamic Clone Link */
   $handler->display->display_options['fields']['dynamic_clone_link']['id'] = 'dynamic_clone_link';
   $handler->display->display_options['fields']['dynamic_clone_link']['table'] = 'views';
@@ -460,7 +423,6 @@ print l($img_src, \'node/\'.$data->nid, array(\'html\' => TRUE));
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="magazin-post">
-[field_story_large_image]
 <h3>[dynamic_clone_link]</h3>
 </div>';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
