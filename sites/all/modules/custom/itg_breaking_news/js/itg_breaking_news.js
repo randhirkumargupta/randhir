@@ -19,7 +19,9 @@
       }
       
       var type = $('#edit-field-type-und').val();
-      
+      if (type == 'Cricket Live Blog') {
+        $('#edit-field-breaking-coverage-end-time').show();
+      }
        $('#custom_add_another_item').click(function() {
          //ajax-new-content
          $('input[name="field_breaking_content_details_add_more"]').mousedown();
@@ -86,6 +88,9 @@
         var typevalue = $('#edit-field-type-und').val();
         if (typevalue == 'Breaking News') {
           $('#edit-field-story-expires-und-yes').attr('checked', false);
+        }
+        if (typevalue == 'Cricket Live Blog') {
+          $('#edit-field-breaking-coverage-end-time').show();
         }
       });
 
