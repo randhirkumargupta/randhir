@@ -759,7 +759,8 @@ $config = array(
      */
     'memcache_store.servers' => array(
         array(
-            array('hostname' => 'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com'),//prod
+            array('hostname' => 'itgd-cms-mem-prod-1.yissgx.0001.aps1.cache.amazonaws.com'),//new prod
+            //array('hostname' => 'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com'),//prod
            // array('hostname' => 'itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com'),//uat
         ),
     ),
