@@ -37,7 +37,7 @@ $conf = array(
 'cache_default_class' => 'MemCacheDrupal',
 'cache_class_cache_form' => 'DrupalDatabaseCache',
   'memcache_servers' => array(
-   'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com:11211' => 'default',   
+   'itgd-cms-mem-prod-1.yissgx.0001.aps1.cache.amazonaws.com:11211' => 'default',   
   ),
   'memcache_bins' => array(
     'cache' => 'default',
