@@ -65,13 +65,13 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
 
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
-  //~ playerInstance.on('setupError', function (event) {
-      //~ if (event.message == 'Error loading player: No playable sources found') {
-          //~ document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
-      //~ } else {
-          //~ loadplayerjw();
-      //~ }
-  //~ });
+  // playerInstance.on('setupError', function (event) {
+      // if (event.message == 'Error loading player: No playable sources found') {
+          // document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
+      // } else {
+          // loadplayerjw();
+      // }
+  // });
   //jQuery(document).ready(function () {
       //playerInstance.play();
   //});
