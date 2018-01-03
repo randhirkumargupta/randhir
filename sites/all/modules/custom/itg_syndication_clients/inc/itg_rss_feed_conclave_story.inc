@@ -64,6 +64,9 @@ function get_rss_conclave_story_sid_xml($result, $sid, $section_name) {
     $xml .= '<url>' . $logo . '</url>';
     $xml .= '</image>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $pub_date = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];

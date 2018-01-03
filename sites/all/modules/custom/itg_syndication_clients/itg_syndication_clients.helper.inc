@@ -154,7 +154,12 @@ function get_cabbytabby_feed_videos_array() {
  */
 function get_ola_feed_videos_array() {
   $cabbytabby_feed_videos = array(
-    '1207580' => 'sosorry.xml'
+    '1207580' => 'sosorry.xml',
+    '1207978' => 'auto_today.xml',
+    '1207304' => 'lifestyle.xml',
+    '1208898' => 'person_of_interest.xml',
+    '1208061' => 'the_long_story.xml',
+    '1208898' => 'person_of_interest.xml',
   );
   return $cabbytabby_feed_videos;
 }
@@ -192,6 +197,20 @@ function getproquest_feed_story_client_array() {
     '1206584' => 'topstories.xml',
     '1206589' => 'travel.xml',
     '1206577' => 'world.xml',
+  );
+  return $story_sectios;
+}
+
+/**
+ * Function is used to get Proquest Story tids and File
+ * @return array
+ */
+function getceltick_feed_story_client_array() {
+  $story_sectios = array(
+    '1206578' => 'india.xml',
+    '1206795' => 'fyi.xml',
+    '1206567' => 'lifestyle.xml',
+    '1206533' => 'movies.xml',
   );
   return $story_sectios;
 }
