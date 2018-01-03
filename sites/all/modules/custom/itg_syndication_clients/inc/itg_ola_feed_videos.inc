@@ -42,7 +42,7 @@ function itg_genrate_ola_feed_videos_syndication($section_id = NULL, $file_name)
     $query->groupBy('n.nid')->range(0, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_ola_feed_videos_syndication_xml($result, $section_id, $section_name);
-    $xml_path = 'public://rss-feeds/ver1.0/olaplay/14a969e0/it/videos/';
+    $xml_path = 'public://rss-feeds/xml_data/olaplay/it/videos/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);

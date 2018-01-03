@@ -47,7 +47,7 @@ function itg_genrate_scribd_live_issue_syndication($issue_result = NULL) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     //print strtr((string) $query, $query->arguments());die;
     $xml = genrate_scribd_live_issue_syndication_xml($result, $issue_title, $issue_result);
-    $xml_path = 'public://rss-feeds/ver1.0/googlenewstand/497870a3/it/stories/';
+    $xml_path = 'public://rss-feeds/xml_data/googlenewstand/it/stories/';
     $file_path = $xml_path . 'it-latest-issue.xml';
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);

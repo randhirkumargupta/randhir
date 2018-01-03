@@ -42,7 +42,7 @@ function itg_genrate_proquest_feed_story_syndication($section_id = NULL, $file_n
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     $xml = genrate_proquest_feed_story_syndication_xml($result, $section_name);
-    $xml_path = 'public://rss-feeds/ver1.0/proquest/42ecea07/it/stories/';
+    $xml_path = 'public://rss-feeds/xml_data/proquest/it/stories/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
