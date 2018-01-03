@@ -6060,7 +6060,7 @@ function itg_rapid_api_daily_capsule($token) {
     $redis_key = "itg_rapid_api_daily_capsule";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value11'] != "") {
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
