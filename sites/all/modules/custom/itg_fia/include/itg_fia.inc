@@ -52,11 +52,15 @@ function itg_fia_xml_node_feed($query) {
     $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
     $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
     
-    if (empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
-      $fb_instant_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-    } else {
+    if (!empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
       $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
+    } 
+    else if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+      $fb_instant_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     }
+    else{
+		$fb_instant_image = '';
+	}
     
     $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
     if (isset($node->field_map_embed_code[LANGUAGE_NONE][0]['value']) && !empty($node->field_map_embed_code[LANGUAGE_NONE][0]['value'])) {
