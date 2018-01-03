@@ -422,7 +422,7 @@ function itg_widgets_custom_variables() {
     '#type' => 'textfield',
     '#title' => t('Technology Review TID'),
     '#attributes' => array('placeholder' => t('Enter Technology Review Taxonomy ID')),
-    '#default_value' => variable_get('technology_review_tid'),
+    '#default_value' => variable_get('technology_review_tid', 1207760),
   );
   
   $form['add_traffic_script'] = array(
@@ -451,6 +451,13 @@ function itg_widgets_custom_variables() {
 		'#attributes' => array('placeholder' => t('Ex: .indiatoday.in')),
 		'#default_value' => variable_get('sso_cookie_domain'),
 	);
+	
+  $form['movies_review_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Movies Review TID'),
+    '#attributes' => array('placeholder' => t('Enter Movies Review Taxonomy ID')),
+    '#default_value' => variable_get('movies_review_tid', 1207047),
+  );
 
   return system_settings_form($form);
 }
