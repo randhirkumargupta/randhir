@@ -58,10 +58,10 @@ function itg_pti_content() {
                   $category_name = trim($pti_value->category);
 
                   if (!empty($category_name)) {
-                    $category_name = $category_name;
+                    $category_name = 'PTI feed'; //$category_name;
                   }
                   else {
-                    $category_name = 'PTI';
+                    $category_name = 'PTI feed';
                   }
 
                   $term_id = itg_api_get_term_id($category_name, CATEGORY_MANAGMENT);

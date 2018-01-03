@@ -376,9 +376,10 @@ else if ($widget_style == 'in-depth') {
 else if ($widget_style == 'movies-celebrities') {
   ?>
   <div class="row buying-guides tech-in-depth">
-      <div class="col-md-6 col-sm-6 section-ordering">
+      <div class="col-md-6 col-sm-6">
           <?php
           if (!empty($data)) {
+            $movie_cnt=1;
             foreach ($data as $count => $entity) {
               $video_class = "pic-no-icon";
               if (strtolower($entity['type']) == 'videogallery') {
@@ -416,24 +417,34 @@ else if ($widget_style == 'movies-celebrities') {
                 </h3>
                 <?php
               }
-              else if ($count == 1 || $count == 2) {
+              else if ($count == 1) {
+                print "<ul class='moviesinglelist'>";                
                 ?>
-                <p <?php echo $data_tb_region_item;?> title="<?php echo $desc; ?>">
-                    <?php
-                    if (!empty($entity['field_photo_see_pic_link_value'])) {
-                      echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
-                    }
-                    ?>
-                    <?php
-                    if (function_exists('itg_common_get_smiley_title')) {
-                      echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 90), "node/" . $nid, array("html" => TRUE));
-                    }
-                    else {
-                      echo l(mb_strimwidth(ucfirst($desc), 0, 100, ".."), "node/" . $nid);
-                    }
-                    ?>
-                </p>
+                <li <?php echo $data_tb_region_item;?> title="<?php echo $desc; ?>">
+                    <span class="pic  <?php echo $video_class; ?>"> 
+                        <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
+                                <img  height="66" width="88" src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_extra_small_image_alt']; ?>" title="<?php echo $entity['field_story_extra_small_image_title']; ?>"/>
+                            </a>
+                    </span> 
+                    <p title="<?php echo $desc; ?>">
+                            <?php
+                            if (!empty($entity['field_photo_see_pic_link_value'])) {
+                              echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
+                            }
+                            ?>
+                            <?php
+                            if (function_exists('itg_common_get_smiley_title')) {
+                              echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 90), "node/" . $nid, array("html" => TRUE));
+                            }
+                            else {
+                              echo l(mb_strimwidth(ucfirst($desc), 0, 100, ".."), "node/" . $nid);
+                            }
+                            ?>
+                        </p> 
+                    
+                </li>
                 <?php
+                    print "</ul>";  
               }
             }
           }
