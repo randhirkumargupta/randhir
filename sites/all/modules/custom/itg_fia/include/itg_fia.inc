@@ -50,7 +50,9 @@ function itg_fia_xml_node_feed($query) {
     $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
     $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
     $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
-    $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
+    if(!empty($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri'])){
+	  $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
+	}   
     
     if (!empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
       $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
