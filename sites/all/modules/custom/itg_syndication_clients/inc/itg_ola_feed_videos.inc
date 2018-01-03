@@ -47,6 +47,13 @@ function itg_genrate_ola_feed_videos_syndication($section_id = NULL, $file_name)
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
+    if($file_name == 'lifestyle.xml'){
+		$xml_path = 'public://rss-feeds/xml_data/olaplay/it/videos/';
+		$file_path = $xml_path . 'yoga.xml';
+		$fp = fopen($file_path, "w");
+		fwrite($fp, $xml);
+		fclose($fp);
+	}
   }
 }
 

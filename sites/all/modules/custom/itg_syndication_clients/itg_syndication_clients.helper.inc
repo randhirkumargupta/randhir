@@ -154,7 +154,12 @@ function get_cabbytabby_feed_videos_array() {
  */
 function get_ola_feed_videos_array() {
   $cabbytabby_feed_videos = array(
-    '1207580' => 'sosorry.xml'
+    '1207580' => 'sosorry.xml',
+    '1207978' => 'auto_today.xml',
+    '1207304' => 'lifestyle.xml',
+    '1208898' => 'person_of_interest.xml',
+    '1208061' => 'the_long_story.xml',
+    '1208898' => 'person_of_interest.xml',
   );
   return $cabbytabby_feed_videos;
 }

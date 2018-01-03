@@ -127,7 +127,7 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
         $xml .= '</items>';
         $xml .= '</image>';
       }
-      if (!empty($value['field_story_medium_image_fid'])) {
+      if (!empty($value['field_story_large_image_fid'])) {
         $medium_img = get_image_info_by_fid($value['field_story_large_image_fid']);
         $xml .= '<image>';
         $xml .= '<caption><![CDATA[' . $medium_img["caption"] . ']]></caption>';
