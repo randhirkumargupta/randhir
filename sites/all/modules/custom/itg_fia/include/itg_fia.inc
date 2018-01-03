@@ -109,6 +109,7 @@ function itg_fia_xml_node_feed($query) {
     
     // facebook instant article body placement
     $node_body = $node->body[LANGUAGE_NONE][0]['value'];
+    $node_body = itg_fia_split_by_words($node_body, 200);
     $numLine = explode("<p>", $node_body);
 
     unset($numLine[0]);

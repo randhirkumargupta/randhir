@@ -52,3 +52,27 @@ function itg_fia_uninstall() {
   // Delete variables.
   variable_del('itg_fia_config');
 }
+
+function itg_fia_split_by_words($text, $splitLength = 200) {
+	// explode the text into an array of words
+	$wordArray = explode(' ', $text);
+	$count = 0;
+	// Too many words
+	while( sizeof($wordArray) > $count )
+	{
+		// Split words into two arrays
+		$firstWordArray = array_slice($wordArray, $count, $splitLength);
+		//$lastWordArray = array_slice($wordArray, $splitLength+1, sizeof($wordArray));
+
+		// Turn array back into two split strings 
+		$firstString = implode(' ', $firstWordArray);
+		//$lastString = implode(' ', $lastWordArray);
+		$ad_string = "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+		$return_string .= $firstString.$ad_string;
+		$count = $count+$splitLength+1;
+		
+		//return array($firstString, $lastString);
+	}
+	// if our array is under the limit, just send it straight back
+	return $return_string;
+}
