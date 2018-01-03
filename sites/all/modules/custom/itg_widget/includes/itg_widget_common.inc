@@ -1711,17 +1711,17 @@ function itg_widget_views_query_alter(&$view, &$query) {
         array_unshift($query->orderby, $order_by);
     }
     if ($view->name == 'programmes' && ($view->current_display == 'rhs_programmes' || $view->current_display == 'page')) {
-        $programm_ids = variable_get('itg_programmes_order_by');
-        if(isset($programm_ids) && !empty($programm_ids)){
-          $query->orderby[0]['field'] = "FIELD(taxonomy_term_data.tid, $programm_ids)";
-        }
+      $programm_ids = variable_get('itg_programmes_order_by');
+      if (isset($programm_ids) && !empty($programm_ids)) {
+        $query->orderby[0]['field'] = "FIELD(taxonomy_term_data.tid, $programm_ids)";
+      }
     }
-    if ($view->name == 'live_tv_programs' && $view->current_display == 'page') {
-        $programm_ids = variable_get('itg_programmes_order_by');
-        if(isset($programm_ids) && !empty($programm_ids)){
-          $query->orderby[0]['field'] = "FIELD(taxonomy_term_data.tid, $programm_ids)";
-        }
+  if ($view->name == 'live_tv_programs' && $view->current_display == 'page') {
+    $programm_ids = variable_get('itg_programmes_order_by');
+    if (isset($programm_ids) && !empty($programm_ids)) {
+      $query->orderby[0]['field'] = "FIELD(taxonomy_term_data.tid, $programm_ids)";
     }
+  }
 }
 
 function itg_widget_query_issue_magazine_widget_alter(QueryAlterableInterface $query) {
