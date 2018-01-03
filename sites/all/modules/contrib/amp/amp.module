@@ -779,7 +779,7 @@ function amp_node_view($node, $view_mode, $langcode) {
       ),
       '#value' => json_encode($metadata_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT), array('node' => $node),
     );
-    drupal_add_html_head($element, 'amp_metadata');
+    //drupal_add_html_head($element, 'amp_metadata');
   }
 }
 

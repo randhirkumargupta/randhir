@@ -214,6 +214,45 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $matchid = $_GET['matchid'];
       $newmatchurl = $base_url.'/scorecard/matchcenter/'.$matchid;
       drupal_goto($newmatchurl);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'story')) ) {  // lite/story
+      $storyarg = $arg[4];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgstorylist';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $ampstoryurl = '/amp/'.$redirecturl;
+      $newmatchurl = $base_url.$ampstoryurl;
+      drupal_goto($newmatchurl);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'gallery')) ) {  // lite/gallery
+      $storyarg = $arg[4];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgphotogallery';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $ampstoryurl = '/amp/'.$redirecturl;
+      $newmatchurl = $base_url.$ampstoryurl;
+      drupal_goto($newmatchurl);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'live-blogs')) ) {  // lite/gallery
+      $storyarg = $arg[3];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgbreakingnews';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $ampstoryurl = '/amp/'.$redirecturl;
+      $newmatchurl = $base_url.$ampstoryurl;
+      drupal_goto($newmatchurl);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'calendar')) && !empty($arg[1]) && (is_numeric($arg[1])) && !empty ($arg[2]) && (is_numeric($arg[2]))) {  // Pattern embed/@#trfg
+      $magazine_issue_id = $arg[1];
+      $mag_issue_id = get_new_seccat_by_mig_id($magazine_issue_id,'migrate_map_itgissue');
+      $query = db_select('node', 'n');
+      $query->fields('n', array('title'));  
+      $query->condition('n.nid', $mag_issue_id);
+      $magazine_title = $query->execute()->fetchField();
+      $url = 'magazine/'.format_date(strtotime($magazine_title),'custom', 'd-m-Y');
+      drupal_goto($url);
   } else if ((!empty($arg[0]) && ($arg[0] == 'embed')) && !empty ($arg[1])) {  // Pattern embed/@#trfg
       $videoembed = $arg[1];
       $newmatchurl = getNewVideoEmbedUrl($videoembed);

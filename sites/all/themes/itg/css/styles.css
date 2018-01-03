@@ -481,7 +481,8 @@ header {
 
 #block-itg-layout-manager-header-block {
   padding-top: 20px;
-  background: #fff; }
+  background: #fff;
+  position: relative; }
   #block-itg-layout-manager-header-block .header-top {
     height: 163px; }
   #block-itg-layout-manager-header-block a {

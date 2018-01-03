@@ -5888,7 +5888,7 @@ article.node-mega-review-critic .movie-review-wrapper .movie-review-text .movie-
     vertical-align: top;
     width: 100%; }
     #block-views-video-landing-header-block .video-header-right .ads {
-      display: inline-block;
+      display: block;
       vertical-align: top;
       width: 100%; }
 

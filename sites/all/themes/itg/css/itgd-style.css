@@ -605,4 +605,8 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .front #block-itg-widget-home-page-feature .featured-news .featured-post a {display: block; overflow:hidden;}
 .front-title-hide { display: none; }
 .crody-news-content.cnwidget.cnvw{margin:0 auto;}
+.section-movies .itg-h321-section .widget-title {
+    position: relative!important;
+    margin-top: 5px;
+}
  
