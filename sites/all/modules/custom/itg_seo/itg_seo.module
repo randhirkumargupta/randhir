@@ -233,7 +233,7 @@ function itg_meta_tags_extra_element_hide($form, &$form_state) {
  * itg_seo_latest_headlines()
  */
 function itg_seo_latest_headlines() {
-  $query = db_select('node', 'n');
+  /*$query = db_select('node', 'n');
   $query->leftJoin('field_data_field_photo_see_pic_link', 'se', 'n.nid = se.entity_id');
       $query->fields('n', array('title', 'nid'));
       $query->fields('se', array('field_photo_see_pic_link_value'));
@@ -241,8 +241,15 @@ function itg_seo_latest_headlines() {
       //->condition('n.type', 'story')
       $query->condition('n.type', array('story','photogallery','videogallery'),'IN');
       $query->range(0, 4);
-      $query->orderBy('n.created', 'DESC');
-  $result = $query->execute()->fetchAll();
+      $query->orderBy('n.created', 'DESC');*/
+  $query = db_query("SELECT n.title AS title, n.nid AS nid, se.field_photo_see_pic_link_value AS field_photo_see_pic_link_value FROM
+node n FORCE INDEX(node_created)
+LEFT OUTER JOIN field_data_field_photo_see_pic_link se ON n.nid = se.entity_id
+WHERE  (n.status = '1') AND (n.type IN  ('story', 'photogallery', 'videogallery'))
+ORDER BY n.created DESC
+LIMIT 4 OFFSET 0");
+  //$result = $query->execute()->fetchAll();
+  $result = $query->fetchAll();
   $headlines = array();
   foreach ($result as $key => $val) {
     if(!empty($val->field_photo_see_pic_link_value)) {
