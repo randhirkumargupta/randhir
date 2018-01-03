@@ -606,6 +606,7 @@ function itgd_chart_beat_code() {
     }
     
     if ($node->type == 'story') {
+      drupal_add_js('http://821.tm.zedo.com/v1/7217327e-2fc7-4b32-bd53-1c943009b4ca/tm.js',  array('type' => 'external', 'scope' => 'footer'));
       drupal_add_js('//ht-itw.hoverr.media/js/tera_indiatoday_web.js',  array('type' => 'external', 'scope' => 'footer'));
       drupal_add_js('var unruly = window.unruly || {};
 					unruly.native = unruly.native || {};
