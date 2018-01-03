@@ -243,8 +243,8 @@ function itg_fia_xml_node_feed($query) {
     $node_body = implode("<p>", $body_vals);  
     $node_body = str_replace(['<iframe', '</iframe>'], ['<figure class="op-interactive"><iframe', '</iframe></figure>'], $node_body);    
     $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1</figure>', $node_body ); 
-    $node_body = str_replace(['<p><figure', '<figure', $node_body);
-    $node_body = str_replace(['</figure></p>', '</figure>', $node_body);
+    $node_body = str_replace('<p><figure', '<figure', $node_body);
+    $node_body = str_replace('</figure></p>', '</figure>', $node_body);
     $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);
     $node_body = itg_fia_split_by_words($node_body, 200);
     $node_body_content = '<p>' . $node_body;
