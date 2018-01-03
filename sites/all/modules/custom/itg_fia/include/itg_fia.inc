@@ -247,12 +247,12 @@ function itg_fia_xml_node_feed($query) {
 		foreach($matches[1] as $val){
 			$arr = explode('/>', $val);
 			if(!empty($arr[1])){
-			$node_body = str_replace($arr[1], '<figcaption>'.$arr[1].'</figcaption>', $node_body);
+			$node_body = str_replace($arr[1], '<figcaption>'.$arr[1].'</figcaption></figure>', $node_body);
 		}				
 		}
 	}
     $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);    
-    $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1</figure>', $node_body ); 
+    $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
     $node_body = str_replace('<p><figure', '<figure', $node_body);
     $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body); 
     $node_body = preg_replace('/<p[^>]*><\\/p[^>]*>/', '', $node_body);    
