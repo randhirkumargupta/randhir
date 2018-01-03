@@ -64,6 +64,9 @@ function genrate_celtick_feed_story_syndication_xml($result = NULL, $category) {
     global $base_url;
     $xml = '<root>';
     foreach ($result as $key => $value) {
+	  if(is_lock_story($value['nid'])){
+        continue;
+      }
       $nid = $value['nid'];
       $publish_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
       $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);

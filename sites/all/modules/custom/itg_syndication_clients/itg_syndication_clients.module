@@ -1257,3 +1257,19 @@ function get_samsung_breaking_news_lists($result) {
 
   return $breaking_xml;
 }
+
+
+function is_lock_story($nid){
+  if(empty($nid)){
+    return FALSE;
+  }
+  $query1 = db_select('field_data_field_story_configurations', 'fsc');
+  $query1->fields('fsc', array('entity_id'));
+  $query1->condition('fsc.field_story_configurations_value', 'lock_story', 'LIKE');
+  $query1->condition('fsc.entity_id', $nid, '=');  
+  $result1 = $query1->execute()->fetchAll();
+  if(!empty($result1)){
+	return TRUE;
+  }
+  return FALSE;
+}
