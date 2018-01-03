@@ -23,13 +23,13 @@ function itg_genrate_dekkho_feed_videos_syndication($section_id = NULL, $file_na
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_large_image', 'ssi', 'ssi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_expert_description', 'sed', 'sed.entity_id=n.nid');
 
 
     $query->fields('n', array('nid', 'title', 'created'));
-    $query->fields('ssi', array('field_story_small_image_fid'));
+    $query->fields('ssi', array('field_story_extra_large_image_fid'));
     $query->fields('sst', array('field_story_source_type_value'));
     $query->fields('sed', array('field_story_expert_description_value'));
 
@@ -41,7 +41,7 @@ function itg_genrate_dekkho_feed_videos_syndication($section_id = NULL, $file_na
     $query->groupBy('n.nid')->range(0, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_dekkho_feed_videos_syndication_xml($result, $section_id, $section_name);
-    $xml_path = 'public://rss-feeds/ver1.0/dekkho/8db533a4/it/videos/';
+    $xml_path = 'public://rss-feeds/xml_data/dekkho/it/videos/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
@@ -72,7 +72,7 @@ function genrate_dekkho_feed_videos_syndication_xml($result = NULL, $section_id,
       $video_file_name = 'video' . $nid . '.xml';
       $created_date = date("Y-m-d H:i:s", $value['created']);
       $catname = get_term_name_by_tid($section_id);
-      $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
+      $small_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
       $source_type = $value['field_story_source_type_value'];
       $videotag = itg_video_detail_formats($nid, $source_type);
       $video_data = get_itg_video_transcoding($nid);

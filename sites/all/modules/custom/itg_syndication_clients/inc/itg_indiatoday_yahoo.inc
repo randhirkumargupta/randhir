@@ -62,15 +62,15 @@ function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $fi
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_large_image', 'smi', 'smi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_small_image', 'ssi', 'ssi.entity_id=n.nid');
 
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
-    $query->fields('smi', array('field_story_medium_image_fid'));
-    $query->fields('ssi', array('field_story_small_image_fid'));
+    $query->fields('smi', array('field_story_extra_large_image_fid'));
+    $query->fields('ssi', array('field_story_extra_small_image_fid'));
     $query->fields('ti', array('tid'));
 
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
@@ -102,14 +102,18 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
     $xml .= '<channel>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
+      date_default_timezone_set("GMT");
       $guid = genrate_uniqui_guid();
-      $publish_date = date("Y-m-d\TH:i:s P", strtotime($value['field_itg_content_publish_date_value']));
+      $publish_date = date("D, d M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
       $section_name = get_term_name_by_tid($value['tid']);
       $metatags = get_node_metatags_by_nid($value['nid']);
-      $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
-      $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
+      $small_img = get_image_info_by_fid($value['field_story_extra_small_image_fid']);
+      $medium_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $keywords = '';
       if ($metatags) {
@@ -119,7 +123,7 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link>' . $url . '</link>';
       $xml .= '<category>' . $section_name . '></category>';
-      $xml .= '<pubDate>' . $publish_date . '></pubDate>';
+      $xml .= '<pubDate>' . $publish_date . ' +0000></pubDate>';
       $xml .= '<guid>' . $guid . '</guid>';
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';
@@ -199,6 +203,9 @@ function genrate_indiatoday_yahoo_static_section_syndication_xml($result = NULL,
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
     $xml .= '<channel>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $guid = genrate_uniqui_guid();
       $publish_date = date("Y-m-d\TH:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
@@ -292,6 +299,9 @@ function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $sec
     $xml .= '</image>';
     $xml .= '<language>en</language>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $guid = genrate_uniqui_guid();
       $publish_date = date("Ymd\THis", strtotime($value['field_itg_content_publish_date_value']));
       $body = remove_extra_tag_in_body($value["body_value"]);
@@ -373,6 +383,9 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
     $xml .= '</image>';
     $xml .= '<language>en</language>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
       $guid = genrate_uniqui_guid();
       $publish_date = date("Ymd\THis", strtotime($value['field_itg_content_publish_date_value']));
       $body = remove_extra_tag_in_body($value["body_value"]);

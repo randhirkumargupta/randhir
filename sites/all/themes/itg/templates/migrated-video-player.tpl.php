@@ -18,9 +18,9 @@ if (!empty($refral_site)) {
     $used_on = 'embed';
   }
 }
-$autostart = "TRUE";
+$autostart = "true";
 if ($used_on == 'embed') {
-  $autostart = "FALSE";
+  $autostart = "false";
 }
 
 $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $external_side);
@@ -58,7 +58,7 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
                       schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
               idstring: "<?php echo stripslashes($title); ?>",
-              label: "<?php echo $player_content["ga_code"]; ?>"
+              label: "<?php echo $data_video["ga_code"]; ?>"
           }
       });
   }
