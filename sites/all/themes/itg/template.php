@@ -485,9 +485,6 @@ function itg_js_alter(&$javascript) {
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/jquery.cropit.js']);
   unset($javascript['sites/all/modules/custom/itg_image_croping/js/imagecroping.js']);
   unset($javascript['sites/all/modules/custom/itg_image_search/js/imagesearch.js']);
-  unset($javascript['sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js']);
-  unset($javascript['https://vuukle.com/js/vuukle.js']);
-  unset($javascript['sites/all/modules/custom/itg_videogallery/js/jwplayer.min.js']);
   
   if (drupal_is_front_page()) {
     unset($javascript['sites/all/libraries/colorbox/jquery.colorbox-min.js']);
@@ -663,34 +660,4 @@ function itgd_chart_beat_code() {
             };	  
 		  
      })();", array('type' => 'inline', 'scope' => 'footer'));
-}
-
-/**
- * Implementation of hook_css_alter().
- * {@inheritdoc}
- * @param array $variables
- * @return string
- */
-function itg_css_alter(&$css) {
-  global $user;
-  $exclude = array(
-    // Contrib CSS
-    'modules/system/system.base.css' => FALSE,
-    'modules/comment/comment.css' => FALSE,
-    'sites/all/modules/contrib/date/date_api/date.css' => FALSE,
-    'sites/all/modules/contrib/date/date_popup/themes/datepicker.1.7.css' => FALSE,
-    'sites/all/modules/contrib/logintoboggan/logintoboggan.css' => FALSE,
-    'modules/node/node.css' => FALSE,
-    'modules/search/search.css' => FALSE,
-    'modules/user/user.css' => FALSE,
-    'sites/all/modules/contrib/youtube/css/youtube.css' => FALSE,
-    'sites/all/modules/contrib/views/css/views.css' => FALSE,
-    'sites/all/modules/contrib/ckeditor/css/ckeditor.css' => FALSE,
-    'sites/all/modules/contrib/colorbox/styles/default/colorbox_style.css' => FALSE,
-    'sites/all/modules/contrib/ctools/css/ctools.css' => FALSE,
-  );
-  // Exclude unnecessary CSS for anonymous users.
-  if ($user->uid == 0) {
-    $css = array_diff_key($css, $exclude);
-  }
 }
