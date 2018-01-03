@@ -335,14 +335,14 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "    <header>\n";
   $output .= "    <figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
   // <!-- The header image shown inside your article --> 
-  $output .= "    <figure>";
   if((isset($fb_instant_image)) && (!empty($fb_instant_image))){
-    $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";
-  }  
-  $output .= "     <figcaption class='op-vertical-below'>";
-  $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>";
-  $output .= "     </figcaption>";
-  $output .= "    </figure>";
+    $output .= "    <figure>";  
+    $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";    
+    $output .= "     <figcaption class='op-vertical-below'>";
+    $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>";
+    $output .= "     </figcaption>";
+    $output .= "    </figure>";
+  }
   $output .= "    <h1>" . $title . "</h1>";
   $output .= "    <h2>" . $kicker . "</h2>";
   // <!-- A kicker for your article -->
