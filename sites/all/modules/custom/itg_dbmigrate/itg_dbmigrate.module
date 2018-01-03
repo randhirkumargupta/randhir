@@ -70,6 +70,9 @@ function ordering_set_of_content($node, $count) {
 function ordering_set_of_content_update($node, $count) {  
   
   $nid = $node->nid;
+     if (function_exists('__itg_widget_helper_data_insert')) {
+                            __itg_widget_helper_data_insert($node->nid);
+                        }
   db_delete('itg_widget_order')
                     ->condition('widget', 'section_wise_widget')
                     ->condition('content_type', 'All')

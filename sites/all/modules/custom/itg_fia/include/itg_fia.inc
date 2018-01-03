@@ -241,6 +241,22 @@ function itg_fia_xml_node_feed($query) {
       }
     }
     $node_body = implode("<p>", $body_vals);
+    $node_body = str_replace(['<iframe', '</iframe>'], ['<figure class="op-interactive"><iframe', '</iframe></figure>'], $node_body);
+    preg_match_all('#<div class="itg-mosimage"[^>]*>(.*?)</div>#', $node_body, $matches);
+    if (!empty($matches[1])) {
+      foreach ($matches[1] as $val) {
+        $arr = explode('/>', $val);
+        if (!empty($arr[1])) {
+          $node_body = str_replace($arr[1], '<figcaption>' . $arr[1] . '</figcaption></figure>', $node_body);
+        }
+      }
+    }
+    $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);    
+    $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
+    $node_body = str_replace('<p><figure', '<figure', $node_body);
+    $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body); 
+    $node_body = preg_replace('/<p[^>]*><\\/p[^>]*>/', '', $node_body);    
+    $node_body = itg_fia_split_by_words($node_body, 200);
     $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
@@ -295,20 +311,22 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "    <html lang='en' prefix='op: http://media.facebook.com/op#'>\n";
   $output .= "    <head>\n";
   $output .= "    <meta charset='utf-8'>\n";
-  $output .= "    <meta property ='fb:op-recirculation-ads' content=placement_id=".'xxxxxx'.">\n";
+  $output .= "    <meta property ='fb:op-recirculation-ads' content=placement_id=".'1634971070080984_1853363621575060'.">\n";
   $output .= "    <meta property='fb:use_automatic_ad_placement' content='enable=true ad_density=default'>\n";
   $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
+  $output .= "    <meta property='fb:use_automatic_ad_placement' content='true'>";
   $output .= "    <meta property='og:title' content='" . $title . "'>\n";
   $output .= "    <meta property='og:description' content='" . $desc . "'>\n";
-  $output .= "    <link rel='canonical' href='" . $link . "'>\n";
-  $output .= "    <link rel='stylesheet' title='default' href='#'>";
-  $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
+  $output .= "    <link rel='canonical' href='" . $link . "?sr=fbia'>\n";
+  //$output .= "    <link rel='stylesheet' title='default' href='#'>";
+  //$output .= "    <meta property='op:markup_version' content='v1.0'>\n";
   $output .= "    </head>\n\n";
   $output .= "    <body>\n";
   $output .= "    <article>\n";
   $output .= "    <header>\n";
+  $output .= "    <figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
   // <!-- The header image shown inside your article --> 
-  $output .= "    <figure data-feedback='fb:likes, fb:comments'>";
+  $output .= "    <figure>";
   $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";
   $output .= "     <figcaption class='op-vertical-below'>";
   $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>";
@@ -317,22 +335,14 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "    <h1>" . $title . "</h1>";
   $output .= "    <h2>" . $kicker . "</h2>";
   // <!-- A kicker for your article -->
-  $output .= "      <details><summary>" . $kicker . "</details></summary>\n";
+  $output .= "      <details><summary>" . $kicker . "</summary></details>\n";
   // <!-- The author of your article -->
   $output .= "      <address>" . $name . "</address>\n";
   $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
   $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>\n";
   $output .= "    </header>\n\n";
-  $output .= "    <div property='content:encoded'>" . $node_body_content . "</div>\n";
-  $output .= "    <footer>\n";
-  // <!-- Credits for your article -->
-  $output .= "    <aside>The footer section can be used for acknowledgements, author bios, related articles, or any other supplemental information.</aside>\n";
-  // <!-- Copyright details for your article -->
-  $output .= "    <small>© Facebook</small>\n";
-  $output .= '<figure class="op-tracker"><iframe><script>(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function()
-              { (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,"script","//www.google-analytics.com/analytics.js","ga"); ga("create", "'.$fia_ga.'", "auto"); ga("set", "referrer", "http://instant.facebook.com/c_id='.$id.'"); ga("send", "pageview");</script></iframe></figure> ';
-  $output .= '<figure class="op-tracker"><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: "2", c2: "8549097",options: { url_append: "comscorekw=fbia" }});(function(){ var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();</script><noscript><img src="http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia" /></noscript><!-- End comScore Tag --></iframe></figure>';
-  $output .= "    </footer>\n\n";
+  $output .= "    <div property='content:encoded'>" . $node_body_content . "</div>\n"; 
+  $output .= "    <figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-7530357-9', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: '2', c2: '8549097',options: { url_append: 'comscorekw=fbia' }});(function() { var s = document.createElement('script'), el = document.getElementsByTagName('script')[0]; s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js'; el.parentNode.insertBefore(s, el); })();</script><noscript><img src='http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia' /></noscript><!-- End comScore Tag --></iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
   $output .= "    </article>\n\n";
   $output .= "    </body>\n\n";
   $output .= "    </html>\n\n";
