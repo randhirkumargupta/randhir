@@ -418,11 +418,7 @@ else if ($widget_style == 'movies-celebrities') {
                 <?php
               }
               else if ($count == 1) {
-            //  if($movie_cnt ==1) {
-                print "<ul>";  
-             // } 
-              
-                
+                print "<ul class='moviesinglelist'>";                
                 ?>
                 <li <?php echo $data_tb_region_item;?> title="<?php echo $desc; ?>">
                     <span class="pic  <?php echo $video_class; ?>"> 
@@ -448,9 +444,7 @@ else if ($widget_style == 'movies-celebrities') {
                     
                 </li>
                 <?php
-                // if($movie_cnt ==1) {
                     print "</ul>";  
-               //   }  
               }
             }
           }
