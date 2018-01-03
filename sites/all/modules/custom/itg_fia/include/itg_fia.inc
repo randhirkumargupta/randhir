@@ -338,10 +338,7 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   // <!-- The header image shown inside your article --> 
   if((isset($fb_instant_image)) && (!empty($fb_instant_image))){
     $output .= "    <figure>";  
-    $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";    
-    $output .= "     <figcaption class='op-vertical-below'>";
-    $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>";
-    $output .= "     </figcaption>";
+    $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";
     $output .= "    </figure>";
   }
   $output .= "    <h1>" . $title . "</h1>";
