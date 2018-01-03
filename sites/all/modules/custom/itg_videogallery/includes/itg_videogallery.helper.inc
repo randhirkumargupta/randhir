@@ -533,7 +533,7 @@ function get_header_tab_related_video_block_content() {
       $url = $base_url ."/" . drupal_get_path_alias('node/' . $current_entity_id);
       $related_image = '<img class="related-default" alt="' . $img_alt . '" title="" src="' . $related_image_url . '">';
       if (!empty($related_title)) {
-        $related_video .= "<li class='related_content_tabs'><figure><a href='$related_data->url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";
+        $related_video .= "<li class='related_content_tabs'><figure><a href='$url' target='_blank' title='$related_title' class='pic'>" . $related_image . "<figcaption><i class='fa fa-play-circle'></i> " . $related_video_duration . "</figcaption>";
         $related_video .= "</figure></a><p class='title'>" . l($related_title, $url, array("attributes" => array("target" => "_blank", "title" => $related_title))) . "</p></li>";
       }
     }
