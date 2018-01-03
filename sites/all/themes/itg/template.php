@@ -641,7 +641,7 @@ function itgd_chart_beat_code() {
     _sf_async_config.sections = '" . $chart_sections . "';  
     _sf_async_config.authors = '" . $chart_authors . "';    
 	_sf_async_config.title = '" . $chart_title . "';
-	_sf_async_config.path = '" . $chart_path . "';
+	_sf_async_config.path = '/'.'" . $chart_path . "';
     /** CONFIGURATION END **/
      (function () {
           function loadChartbeat() { 
