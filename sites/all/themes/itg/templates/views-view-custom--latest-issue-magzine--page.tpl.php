@@ -149,20 +149,25 @@
             $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
           }
           if ($key == 0) {
+            $img_url = '';
             if (!empty($value->uri)) {
               $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
             }
-            else {
+            /*else {
               $img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') . "' alt='' title='' />";
-            }
+            }*/
             // Get the short headline for a node data
             $shortheadline_cat = $value->field_story_short_headline_value;
             if (!empty($lock_story)) {
-              $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
+              if(!empty($img_url)) {
+                    $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
+              }
               $title = l(t($shortheadline_cat), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
             }
             else {
-              $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
+              if(!empty($img_url)) {  
+                $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
+              }
               $title = l(t($shortheadline_cat), 'node/' . $value->nid);
             }
           }
@@ -210,20 +215,25 @@
             $lock_story = itg_msi_get_lock_story_status($value->nid, 'lock_story');
           }
           if ($key == 0) {
+              $img_url = '';
             if (!empty($value->uri)) {
               $img_url = '<img src="' . image_style_url($style_name, $value->uri) . '" alt="" title=""/>';
             }
-            else {
+            /*else {
               $img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') . "' alt='' title='' />";
-            }
+            }*/
             // Get the short headline for a node data
             $shortheadline_cat = $value->field_story_short_headline_value;
             if (!empty($lock_story)) {
-              $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
+              if(!empty($img_url)) {  
+                $img = l($img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
+              }
               $title = l(t($shortheadline_cat), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
             }
             else {
-              $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
+              if(!empty($img_url)) {  
+                $img = l($img_url, 'node/' . $value->nid, array('html' => TRUE));
+              }
               $title = l(t($shortheadline_cat), 'node/' . $value->nid);
             }
           }
@@ -266,20 +276,25 @@
             $lock_story = itg_msi_get_lock_story_status($s_value->nid, 'lock_story');
           }
           if ($key == 0) {
+              $supp_img_url = '';
             if (!empty($s_value->uri)) {
               $supp_img_url = '<img src="' . image_style_url($style_name, $s_value->uri) . '" alt="" title="" />';
             }
-            else {
+           /* else {
               $supp_img_url = "<img src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') . "' alt='' title='' />";
-            }
+            }*/
             // Get the short headline for a node data
             $shortheadline_supp = $s_value->field_story_short_headline_value;
             if (!empty($lock_story)) {
-              $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
+              if(!empty($supp_img_url)) {  
+                $supp_img = l($supp_img_url, 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage', array('html' => TRUE));
+              }
               $supp_title = l(t($shortheadline_supp), 'http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
             }
             else {
-              $supp_img = l($supp_img_url, 'node/' . $s_value->nid, array('html' => TRUE));
+              if(!empty($supp_img_url)) {
+                $supp_img = l($supp_img_url, 'node/' . $s_value->nid, array('html' => TRUE));
+              }
               $supp_title = l(t($shortheadline_supp), 'node/' . $s_value->nid);
             }
           }
