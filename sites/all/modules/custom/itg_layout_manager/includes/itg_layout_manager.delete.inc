@@ -22,8 +22,14 @@ function itg_layout_delete() {
       db_delete('itg_layout_tpl')->condition('id', $row->id)->execute(); 
     }
     
-    $msg = 'Template Name('.arg(1).') has been deleted';
-    drupal_set_message($msg);
+    if (function_exists('get_term_name_from_tid') && is_numeric(arg(1))) { 
+      $t_name = get_term_name_from_tid(arg(1));
+      $msg = $t_name->name.' template has been deleted';
+      drupal_set_message($msg);
+    }
+    
+    
+    
     drupal_goto('itg-layout-list/'.$_GET['destination']);
    
   }

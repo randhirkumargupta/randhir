@@ -1161,7 +1161,7 @@ function itg_widget_dailymotion_get_videogallery_slider($nid, $type = 'gallery')
                                             file: "<?php print $video_value->field_migrated_video_url_value; ?>"
                                         }]
                                 }],
-                            primary: "flash",
+                            primary: "html5",
                             width: "100%",
                             aspectratio: "16:9",
                             stretching: "uniform",
