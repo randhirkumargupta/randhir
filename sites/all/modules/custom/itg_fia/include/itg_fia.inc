@@ -26,6 +26,8 @@ function itg_fia_xml_node_feed($query) {
   $fia_ga = isset($fia_ga_data) ? $fia_ga_data : " ";
   $nodes = node_load_multiple($query);
   $items = '';
+  $last_build = FALSE;
+  $last_build_date = '';
   foreach ($nodes as $node) {
     if ($node->workbench_moderation['current']->state == 'published') {
       $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
@@ -34,7 +36,11 @@ function itg_fia_xml_node_feed($query) {
       $op_pub = date('F j, h:i a', $node->created);
       $pubdate = date('Y-m-d h:i:s\+05:30', $node->created);
     }
-    $guid = $node->nid . " at " . $base_url;
+    if(!$last_build){
+	  $last_build_date = $pubdate;
+	  $last_build = TRUE;
+	}
+    $guid = $node->nid;
     $op_modified = date('F j, h:i a', $node->changed);
     $modified = date('Y-m-d h:i:s\+05:30', $node->changed);
     $auth_name = get_author_name($node->nid);
@@ -46,10 +52,10 @@ function itg_fia_xml_node_feed($query) {
     $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
     $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
     
-    if (empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
-      $fb_instant_image = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
+    if (empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+      $fb_instant_image = '';
     } else {
-      $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
+      $fb_instant_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     }
     
     $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
@@ -269,27 +275,30 @@ function itg_fia_xml_node_feed($query) {
       'link' => $base_url . '/' . current_path(),
   );
 
-  $output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>\n";
+  /*$output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>\n";
   $output .= "<rss version='2.0' xml:base='" . $xml_base . "' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:atom='http://www.w3.org/2005/Atom'>\n";
   $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items);
-  drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');
+  drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');*/
+  $output = "<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" version=\"2.0\">\n";
+  $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items, $last_build_date);
   print $output;
 }
 
 /**
  * Creates the xml channel.
  */
-function itg_fia_xml_format_rss_channel($title, $link, $items) {
+function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date) {
 
   $output = "  <channel>\n";
   $output .= "    <title>" . $title . "</title>\n";
-  $output .= "    <link>" . check_url($link) . "</link>\n";
-  $output .= "    <description>" . t("Facebook Instant Articles feed") . "</description>\n";
+  $output .= "    <link>" . FRONT_URL . "</link>\n";
+  $output .= "    <description>" . t("India Today News - Check out the latest breaking News from India and around the world. The latest news headlines, world, politics, business, sport, entertainment and technology news from IndiaToday.in") . "</description>\n";
   $output .= "    <language>en</language>\n";
-  $output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />\n";
+  $output .= "    <lastBuildDate>" . $last_build_date . "</lastBuildDate>\n";
+  //$output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />\n";
   $output .= $items;
   $output .= "  </channel>\n";
-  $output .= "</rss>\n";
+  //$output .= "</rss>\n";
 
   return $output;
 }
@@ -327,7 +336,9 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "    <figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
   // <!-- The header image shown inside your article --> 
   $output .= "    <figure>";
-  $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";
+  if((isset($fb_instant_image)) && (!empty($fb_instant_image))){
+    $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";
+  }  
   $output .= "     <figcaption class='op-vertical-below'>";
   $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>";
   $output .= "     </figcaption>";
