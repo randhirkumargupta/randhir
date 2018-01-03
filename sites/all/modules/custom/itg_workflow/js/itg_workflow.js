@@ -22,7 +22,7 @@
                 jQuery(".reasons-form").hide();              
                 jQuery("#edit-log").val("");
 
-                 /*jQuery("#edit-workbench-moderation-state-new").change(function() {
+                 jQuery("#edit-workbench-moderation-state-new").change(function() {
                   jQuery("#edit-log").val("");
                   if(jQuery("#edit-workbench-moderation-state-new").val() == "rejected") {                  
                     jQuery(".form-item-log").hide();
@@ -36,7 +36,7 @@
                     jQuery(".form-item-log").show();
                     jQuery(".reasons-form").hide();
                   }
-                });*/
+                });
              }
              if (workflowState == 'needs_modification') {
                 jQuery("#edit-workbench-moderation-state-new").val("needs_modification");
