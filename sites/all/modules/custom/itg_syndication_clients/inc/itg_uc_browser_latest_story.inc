@@ -39,6 +39,9 @@ function itg_uc_browser_feed_latest_story() {
   $json_output['data']['nextPage'] = $base_url . '/ucbrowser/story/feed/??pageNumber=' . ($page_number + 1) . '&pagesize=' . $pagesize . '&partner=' . $partner;
   $json_output['data']['rows'] = array();
   foreach ($result as $value) {
+	if(is_lock_story($value['nid'])){
+       continue;
+    }
     $nid = $value['nid'];
     $publish_date = strtotime($value['field_itg_content_publish_date_value']);
     $place = get_content_city($value['nid']);

@@ -75,6 +75,9 @@ function genrate_scribd_live_issue_syndication_xml($result = NULL, $issue_title,
     $xml .= '<language>en-us</language>';
     $xml .= '<atom:link href="'.$base_url.'" rel="alternate" type="application/xml" />';
     foreach ($result as $key => $value) {
+	  if(is_lock_story($value['nid'])){
+        continue;
+      }
       $nid = $value['nid'];
       $publish_date = date("D, j M Y H:i:s T", strtotime($value['field_itg_content_publish_date_value']));
       $author = get_byline_name_by_nid($nid);

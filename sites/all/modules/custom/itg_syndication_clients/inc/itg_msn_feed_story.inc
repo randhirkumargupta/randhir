@@ -103,7 +103,9 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
     $xml .= '</NewsEnvelope>';
 
     foreach ($result as $key => $value) {
-
+	  if(is_lock_story($value['nid'])){
+        continue;
+      }
       $nid = $value['nid'];
       $publish_date = date("Ymd\THisP", $value['created']);
       $modify_date = date("Ymd\THisP", $value['changed']);

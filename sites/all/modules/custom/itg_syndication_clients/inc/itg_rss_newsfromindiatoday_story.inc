@@ -44,7 +44,7 @@ function itg_genrate_newsfromindiatoday_syndication($section_id = NULL, $file_na
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 30);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $xml = genrate_bsb_story_syndication_xml($result, $section_name);
+    $xml = genrate_newsfromindiatoday_story_syndication_xml($result, $section_name);
     $xml_path = 'public://indiatoday/rss/';
     $file_path = $xml_path . $file_name;
     $fp = fopen($file_path, "w");
@@ -60,13 +60,16 @@ function itg_genrate_newsfromindiatoday_syndication($section_id = NULL, $file_na
  * @param string $category
  * @return string
  */
-function genrate_bsb_story_syndication_xml($result = NULL, $category) {
+function genrate_newsfromindiatoday_story_syndication_xml($result = NULL, $category) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     foreach ($result as $key => $value) {
+	  if(is_lock_story($value['nid'])){
+        continue;
+      }
       $publish_date = date("Y-m-d H:i:s", strtotime($value['field_itg_content_publish_date_value']));
       $modify_date = date("Y-m-d\TH:i:sP", $value['changed']);
       $place = get_content_city($value['nid']);

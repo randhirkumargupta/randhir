@@ -78,6 +78,9 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
     $xml .= '<language>en-US</language>';
     $xml .= '<news>';
     foreach ($result as $key => $value) {
+	  if(is_lock_story($value['nid'])){
+        continue;
+      }	
       $publish_date = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
       $modify_date = date("Y-m-d\TH:i:sP", $value['changed']);
       $place = get_content_city($value['nid']);
