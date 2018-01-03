@@ -31,10 +31,10 @@ function itg_fia_xml_node_feed($query) {
   foreach ($nodes as $node) {
     if ($node->workbench_moderation['current']->state == 'published') {
       $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
-      $pubdate = date('Y-m-d h:i:s\+05:30', $node->workbench_moderation['current']->timestamp);
+      $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->workbench_moderation['current']->timestamp);
     } else {
       $op_pub = date('F j, h:i a', $node->created);
-      $pubdate = date('Y-m-d h:i:s\+05:30', $node->created);
+      $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->created);
     }
     if(!$last_build){
 	  $last_build_date = $pubdate;
@@ -42,7 +42,7 @@ function itg_fia_xml_node_feed($query) {
 	}
     $guid = $node->nid;
     $op_modified = date('F j, h:i a', $node->changed);
-    $modified = date('Y-m-d h:i:s\+05:30', $node->changed);
+    $modified = date('Y-m-d\TH:i:s\+05:30', $node->changed);
     $auth_name = get_author_name($node->nid);
     $desc = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
@@ -298,7 +298,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date)
   //$output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />\n";
   $output .= $items;
   $output .= "  </channel>\n";
-  //$output .= "</rss>\n";
+  $output .= "</rss>\n";
 
   return $output;
 }
