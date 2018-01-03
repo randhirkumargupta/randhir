@@ -418,7 +418,7 @@ else if ($widget_style == 'movies-celebrities') {
                 <?php
               }
               else if ($count == 1) {
-                print "<ul>";
+              print "<ul class='moviesinglelist'>";  
               
               if ((!empty($entity['esi_file_uri']) && file_exists($entity['esi_file_uri']))) {
                 $extra_large_image_url = image_style_url("widget_very_small", $entity['esi_file_uri']);
@@ -426,7 +426,7 @@ else if ($widget_style == 'movies-celebrities') {
               else {
                 $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg');
               }
-        ?>
+              ?>
                 <li <?php echo $data_tb_region_item;?> title="<?php echo $desc; ?>">
                     <span class="pic  <?php echo $video_class; ?>"> 
                         <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">

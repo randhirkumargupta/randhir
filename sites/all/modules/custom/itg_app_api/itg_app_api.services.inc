@@ -2315,34 +2315,6 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
-        /* Change request v1 */
-        // topstories custom resource declaration.....
-        'daily_capsule' => array(
-            'operations' => array(
-                'retrieve' => array(
-                    'help' => 'Retrieves daily_capsule schemes info.',
-                    'file' => array(
-                        'type' => 'inc',
-                        'module' => 'itg_app_api',
-                        'name' => 'itg_app_api.services',
-                    ),
-                    'callback' => 'itg_rapid_api_daily_capsule',
-                    'access callback' => 'user_access',
-                    'access arguments' => array('access content'),
-                    'access arguments append' => FALSE,
-                    'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
-                    ),
-                ),
-            ),
-        ),
     );
 
     return $api;
@@ -5088,25 +5060,35 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
         if ($value['nid']) {
             // 837259
             $node_data = node_load($value['nid']);
+
             if ($value['ntype'] == "anchor" && $value['status'] == 1) {
                 $a_id = $node_data->nid;
+
                 $anchor_list[$anchor_c]['a_id'] = "$a_id";
+
                 $anchor_c++;
             } elseif ($value['ntype'] == "author" && $value['status'] == 1) {
                 $a_id = $node_data->nid;
+
                 $author_list[$anchor_c1]['a_id'] = "$a_id";
+
                 $anchor_c1++;
             } elseif ($value['ntype'] == "tag" && $value['status'] == 1) {
                 $a_id = $value['nid'];
+
                 $topics_list[$anchor_c2]['t_id'] = "$a_id";
+
                 $anchor_c2++;
             }
         }
     }
+
+
     $anchor_data['anchor'] = $anchor_list;
     $anchor_data['author'] = $author_list;
     $anchor_data['topic'] = $topics_list;
-    if ($anchor_c > 0 || $anchor_c1 > 0 || $anchor_c2 > 0) {
+
+    if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
         $output_array['data'] = $anchor_data;
@@ -6059,38 +6041,6 @@ function itg_rapid_api_topstories($token) {
     } else {
         // call function from return data..
         $jsondata = topstoriesList();
-        $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
-    $jsondata = json_decode($jsondata, TRUE);
-    return $jsondata;
-}
-
-/* Change request v1 */
-
-/**
- * Call back function for daily_capsule API
- * @pram $_GET
- *
- * @return array - The processed information array.
- */
-function itg_rapid_api_daily_capsule($token) {
-    //valid id
-    $id = $_GET['id'];
-    $suffix = $id;
-    if (!is_numeric($id)) {
-        $id = 0;
-    }
-
-    $redis_key = "itg_rapid_api_daily_capsule";
-    $result_get = getRedis($redis_key);
-
-    if ($result_get['key_value11'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
-        // call function from return data..
-        $jsondata = dailyCapsuleApi();
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);

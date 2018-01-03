@@ -15,28 +15,30 @@ function homePageJson() {
     $data_topstories = array();
     $data_news = array();
     $data_magazine = array();
-    $homePageJsonWidget1 = array();
-    $homePageJsonWidget2 = array();
+
     $data_packagelist_india = homePageJsonPackagelist_india();
-    $homePageJsonWidget1 = homePageJsonWidget_1();
-    $homePageJsonWidget2 = homePageJsonWidget_2();
     $data_topstories = topstoriesList('home');
     $data_news_india = homePageJsonNewslist_india();
+
     $data_news_lifestyle = homePageJsonNewslist_lifestyle();
+
     $data_news_world = homePageJsonNewslist_world();
     $data_magazine = homePageJsonMagazine();
     $data_poll = homePageJsonPoll();
+
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
-    $data['data'][0] = $homePageJsonWidget1;
-    $data['data'][1] = $homePageJsonWidget2;
-    $data['data'][2] = $data_packagelist_india;
-    $data['data'][3] = $data_topstories;
-    $data['data'][4] = $data_news_india;
-    $data['data'][5] = $data_news_lifestyle;
-    $data['data'][6] = $data_news_world;
-    $data['data'][7] = $data_magazine;
-    $data['data'][8] = $data_poll;
+    $data['data'][0] = $data_packagelist_india;
+
+    $data['data'][1] = $data_topstories;
+    $data['data'][2] = $data_news_india;
+
+    $data['data'][3] = $data_news_lifestyle;
+
+    $data['data'][4] = $data_news_world;
+    $data['data'][5] = $data_magazine;
+    $data['data'][6] = $data_poll;
+
     return $data;
 }
 
@@ -46,6 +48,7 @@ function homePageJson() {
  * @return array
  */
 function homePageJsonPackagelist_india() {
+
     global $base_url;
     $data_news = array();
     $data_newslist = array();
@@ -66,6 +69,7 @@ function homePageJsonPackagelist_india() {
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
     }
+
     $order_by = 'ASC';
     $type = array("videogallery", "photogallery", "story");
     $news_list_array = array();
@@ -90,7 +94,7 @@ function homePageJsonPackagelist_india() {
         $tid_list[] = $tid;
         // code vid=14  end
         $data_news['id'] = "$tid";
-        $data_news['order'] = "3";
+        $data_news['order'] = "1";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "$term_name_m";
         $data_news['label'] = "$term_name_m";
@@ -113,16 +117,20 @@ function homePageJsonPackagelist_india() {
         $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
         $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
         $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
         $query->fields('mi_file', array('uri'));
         $query->fields('si_file', array('uri'));
         $query->fields('esi_file', array('uri'));
+
         $query->fields('mi', array('field_story_medium_image_fid'));
         $query->fields('si', array('field_story_small_image_fid'));
         $query->fields('rc', array('field_common_related_content_value'));
         $query->fields('li', array('field_story_large_image_fid'));
+
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
@@ -134,7 +142,9 @@ function homePageJsonPackagelist_india() {
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
         foreach ($result as $reskey => $resvalue) {
             $title = $resvalue['title'];
             $type = $resvalue['type'];
@@ -149,11 +159,14 @@ function homePageJsonPackagelist_india() {
             $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
             $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
             $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
+
             //related content
             $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
             $comment_cont = getCommentsCount($nid);
+
             // create date formating
             $firebase_url = get_node_firebase_weburl($nid);
+
             if ($created) {
                 $create_datetime = date("Y-m-d H:i:s", $created);
                 $create_date = date("Y-m-d H:i:s", $created);
@@ -191,6 +204,7 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
@@ -198,6 +212,7 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
             $photolist = array();
+
             // video list array
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
@@ -205,6 +220,7 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_video'] = (array) $videolist;
             // re-insalize vediolist
             $videolist = array();
+
             // homepage.inc
             $n_polls = getPolllist($node);
             // story.inc
@@ -215,8 +231,7 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
+
             $listcount++;
         }
     }
@@ -232,6 +247,7 @@ function homePageJsonPackagelist_india() {
  * @return array
  */
 function homePageJsonPackagelist_lifestyle() {
+
     global $base_url;
     $data_news = array();
     $data_newslist = array();
@@ -279,7 +295,10 @@ function homePageJsonPackagelist_lifestyle() {
         $data_news['label'] = "Movies Photo";
         $data_news['show_label'] = "0";
         $data_news['n_template_id'] = "1";
+
+
         // select node belong from current term id or child term id
+
         $query = db_select('taxonomy_index', 'ti');
         $query->leftJoin('node', 'n', 'n.nid=ti.nid');
         //join  for field value
@@ -296,15 +315,19 @@ function homePageJsonPackagelist_lifestyle() {
         $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
         $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
         $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
         $query->fields('mi_file', array('uri'));
         $query->fields('si_file', array('uri'));
         $query->fields('esi_file', array('uri'));
+
         $query->fields('mi', array('field_story_medium_image_fid'));
         $query->fields('si', array('field_story_small_image_fid'));
         $query->fields('rc', array('field_common_related_content_value'));
+
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
@@ -315,7 +338,9 @@ function homePageJsonPackagelist_lifestyle() {
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
         foreach ($result as $reskey => $resvalue) {
             $title = $resvalue['title'];
             $type = $resvalue['type'];
@@ -332,6 +357,7 @@ function homePageJsonPackagelist_lifestyle() {
             //related content
             $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
             $comment_cont = getCommentsCount($nid);
+
             // create date formating
             $firebase_url = get_node_firebase_weburl($nid);
 
@@ -372,7 +398,9 @@ function homePageJsonPackagelist_lifestyle() {
             $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+
             // photo list array
+
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
@@ -386,6 +414,7 @@ function homePageJsonPackagelist_lifestyle() {
             $data_newslist[$listcount]['n_video'] = (array) $videolist;
             // re-insalize vediolist
             $videolist = array();
+
             // homepage.inc
             $n_polls = getPolllist($node);
             // story.inc
@@ -396,14 +425,13 @@ function homePageJsonPackagelist_lifestyle() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
     }
 
     $data_news['news'] = (array) $data_newslist;
+
     return $data_news;
 }
 
@@ -413,6 +441,7 @@ function homePageJsonPackagelist_lifestyle() {
  * @return array
  */
 function homePageJsonPackagelist_world() {
+
     global $base_url;
     $data_news = array();
     $data_newslist = array();
@@ -452,6 +481,7 @@ function homePageJsonPackagelist_world() {
                 $tid_list[] = $value->tid;
             }
         }
+
         // code vid=14  end
         $data_news['id'] = "$tid";
         $data_news['order'] = "3";
@@ -460,6 +490,7 @@ function homePageJsonPackagelist_world() {
         $data_news['label'] = "Movies video";
         $data_news['show_label'] = "0";
         $data_news['n_template_id'] = "1";
+
         // select node belong from current term id or child term id
         $query = db_select('taxonomy_index', 'ti');
         $query->leftJoin('node', 'n', 'n.nid=ti.nid');
@@ -477,18 +508,23 @@ function homePageJsonPackagelist_world() {
         $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
         $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
         $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
         $query->fields('mi_file', array('uri'));
         $query->fields('si_file', array('uri'));
         $query->fields('esi_file', array('uri'));
+
         $query->fields('mi', array('field_story_medium_image_fid'));
         $query->fields('si', array('field_story_small_image_fid'));
         $query->fields('rc', array('field_common_related_content_value'));
+
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+
         //end
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
@@ -497,7 +533,9 @@ function homePageJsonPackagelist_world() {
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
         foreach ($result as $reskey => $resvalue) {
             $title = $resvalue['title'];
             $type = $resvalue['type'];
@@ -512,11 +550,14 @@ function homePageJsonPackagelist_world() {
             // file url
             $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
             $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+
             //related content
             $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
             $comment_cont = getCommentsCount($nid);
+
             // create date formating
             $firebase_url = get_node_firebase_weburl($nid);
+
             if ($created) {
                 $create_datetime = date("Y-m-d H:i:s", $created);
                 $create_date = date("Y-m-d H:i:s", $created);
@@ -554,20 +595,25 @@ function homePageJsonPackagelist_world() {
             $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+
             // photo list array
+
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
             $photolist = array();
+
             // video list array
+
             if ($type == "videogallery") {
                 $videolist = getVideolist($nid);
             }
             $data_newslist[$listcount]['n_video'] = (array) $videolist;
             // re-insalize vediolist
             $videolist = array();
+
             // homepage.inc
             $n_polls = getPolllist($node);
             // story.inc
@@ -578,14 +624,13 @@ function homePageJsonPackagelist_world() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
     }
 
     $data_news['news'] = (array) $data_newslist;
+
     return $data_news;
 }
 
@@ -607,6 +652,7 @@ function homePageJsonTopstories() {
     $range_max = 10;
     $range_min = 0;
     $order_by = 'ASC';
+
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');
@@ -624,23 +670,30 @@ function homePageJsonTopstories() {
     $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
     $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
     $query->fields('mi_file', array('uri'));
     $query->fields('si_file', array('uri'));
     $query->fields('esi_file', array('uri'));
+
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
     $query->fields('li', array('field_story_large_image_fid'));
+
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('ti', array('tid'));
+
+
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
     $data_topstories['id'] = "0";
     $data_topstories['order'] = "2";
     $data_topstories['type'] = "topstories";
@@ -648,6 +701,7 @@ function homePageJsonTopstories() {
     $data_topstories['label'] = "Top Stories";
     $data_topstories['show_label'] = "0";
     $data_topstories['n_template_id'] = "1";
+
     // xml tag wring for features widget..
     foreach ($result as $key => $value) {
         // varibale for json tag
@@ -658,15 +712,19 @@ function homePageJsonTopstories() {
         $changed = $value['changed'];
         $tid = $value['tid'];
         $field_story_kicker_text_value = $value['field_story_kicker_text_value'];
+
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
+
         // file url
         $file_small_img_url = completeFilePath($value['field_story_small_image_fid']);
         $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);
         $file_large_img_url = completeFilePath($value['field_story_large_image_fid']);
         $comment_cont = getCommentsCount($nid);
+
         // create date formating
         $firebase_url = get_node_firebase_weburl($nid);
+
         if ($created) {
             $create_datetime = date("Y-m-d H:i:s", $created);
             $create_date = date("Y-m-d H:i:s", $created);
@@ -683,6 +741,7 @@ function homePageJsonTopstories() {
         if ($type == "story") {
             $n_rating = getRating($node);
             $n_magazine = array();
+
             // custom function for get img caption
             $caption = getImgCaption($value['field_story_medium_image_fid']);
             // custom function for get img byline
@@ -712,8 +771,6 @@ function homePageJsonTopstories() {
             $data_newslist[$home_list_count]['n_polls'] = $n_polls;
             $data_newslist[$home_list_count]['n_rating'] = $n_rating;
             $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$home_list_count]['n_widget'] = $n_widget;
             $home_list_count++;
         }
     }
@@ -768,10 +825,11 @@ function homePageJsonNewslist_india() {
                 $tid_list[] = $value->tid;
             }
         }
+
         // code vid=14  end
 
         $data_news['id'] = "1206578";
-        $data_news['order'] = "5";
+        $data_news['order'] = "3";
         $data_news['type'] = "newslist";
         $data_news['title'] = "India";
         $data_news['label'] = "India";
@@ -909,8 +967,6 @@ function homePageJsonNewslist_india() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -972,7 +1028,7 @@ function homePageJsonNewslist_world() {
         // code vid=14  end
 
         $data_news['id'] = "$tid";
-        $data_news['order'] = "7";
+        $data_news['order'] = "5";
         $data_news['type'] = "newslist";
         $data_news['title'] = "World";
         $data_news['label'] = "World";
@@ -1112,8 +1168,6 @@ function homePageJsonNewslist_world() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -1140,7 +1194,7 @@ function homePageJsonMagazine() {
     $n_magazine = $n_magazine_data['data'];
 
     $data_magazine['id'] = "0";
-    $data_magazine['order'] = "8";
+    $data_magazine['order'] = "6";
     $data_magazine['type'] = "magazine";
     $data_magazine['title'] = "From The Magazine";
     $data_magazine['label'] = "From The Magazine";
@@ -1171,8 +1225,6 @@ function homePageJsonMagazine() {
     $data_newslist[0]['n_polls'] = $n_polls;
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
-    $n_widget = array();
-    $data_newslist[0]['n_widget'] = $n_widget;
 
     $data_magazine['news'] = (array) $data_newslist;
 
@@ -1236,7 +1288,12 @@ function getMagazineList() {
         $issue[$loop_count]['story'] = $story;
         $loop_count++;
     }
+
+
     $magazine['issue'] = $issue;
+
+
+
     return $magazine;
 }
 
@@ -1247,9 +1304,11 @@ function getMagazineList() {
  */
 function getMagazineStory($issue_date) {
     $story = array();
+
     // select issue stories
     $range_min = 0;
     $range_max = 5;
+
     $query = db_select('node', 'n');
     //join  for field value
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
@@ -1279,25 +1338,32 @@ function getMagazineStory($issue_date) {
     $query->leftJoin('field_data_field_reporter_unique_id', 'fsri', 'fsri.entity_id=n.nid');
     //field_data_field_primary_category
     $query->leftJoin('field_data_field_primary_category', 'fci', 'fci.entity_id=n.nid');
+
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
     $query->fields('mi_file', array('uri'));
     $query->fields('si_file', array('uri'));
     $query->fields('esi_file', array('uri'));
+
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
+
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+
     $query->fields('fsbl', array('field_itg_common_by_line_name_value'));
     $query->fields('fsri', array('field_reporter_unique_id_value'));
     $query->fields('fci', array('field_primary_category_value'));
+
     //end
     $query->condition('n.status', 1)->condition('n.type', 'story')->condition('fsid.field_story_issue_date_value', $issue_date)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $loop_count = 0;
+
     foreach ($result as $reskey => $resvalue) {
+
         $title = $resvalue['title'];
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
@@ -1310,10 +1376,13 @@ function getMagazineStory($issue_date) {
         // file url
         $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
         $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
+
         //related content
         $comment_cont = getCommentsCount($nid);
+
         // create date formating
         $firebase_url = get_node_firebase_weburl($nid);
+
         if ($created) {
             $create_datetime = date("Y-m-d H:i:s", $created);
             $create_date = date("Y-m-d H:i:s", $created);
@@ -1335,9 +1404,11 @@ function getMagazineStory($issue_date) {
         $field_itg_common_by_line_name_value = $resvalue['field_itg_common_by_line_name_value'];
         $field_reporter_unique_id_value = $resvalue['field_reporter_unique_id_value'];
         $field_reporter_unique_id_value = str_replace("byline_", "", $field_reporter_unique_id_value);
+
         $field_primary_category_value = $resvalue['field_primary_category_value'];
         $term = taxonomy_term_load($field_primary_category_value);
         $term_name = $term->name;
+
         $story[$loop_count]['s_id'] = "$nid";
         $story[$loop_count]['s_title'] = "$title";
         $story[$loop_count]['s_share_link'] = "$firebase_url";
@@ -1401,7 +1472,7 @@ function getNodeBodyByNid_Report($nid) {
  *
  * @return obj term_object;
  */
-function getNodePrimeCatByNid($nid) {
+function getNodePrimeCatByNid_($nid) {
     $query = db_select('field_data_field_primary_category', 'fpc');
     $query->fields('fpc', array('field_primary_category_value'));
     $query->condition('fpc.entity_id', $nid);
@@ -1425,10 +1496,12 @@ function homePageJsonPoll() {
     $n_polls = array();
     $n_rating = array();
     $n_magazine = array();
+
     $n_polls = array();
     $n_polls = polls_open_datalist(0, "home");
+
     $data_magazine['id'] = "0";
-    $data_magazine['order'] = "9";
+    $data_magazine['order'] = "7";
     $data_magazine['type'] = "poll";
     $data_magazine['title'] = "poll";
     $data_magazine['label'] = "poll";
@@ -1459,8 +1532,7 @@ function homePageJsonPoll() {
     $data_newslist[0]['n_polls'] = $n_polls['data'];
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
-    $n_widget = array();
-    $data_newslist[0]['n_widget'] = $n_widget;
+
     $data_magazine['news'] = (array) $data_newslist;
     return $data_magazine;
 }
@@ -1541,19 +1613,25 @@ function homePageJsonNewslist_lifestyle() {
         $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
         $query->fields('mi_file', array('uri'));
         $query->fields('si_file', array('uri'));
         $query->fields('esi_file', array('uri'));
+
         $query->fields('mi', array('field_story_medium_image_fid'));
         $query->fields('si', array('field_story_small_image_fid'));
         $query->fields('rc', array('field_common_related_content_value'));
         $query->fields('li', array('field_story_large_image_fid'));
+
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+
+
         //end
+
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
@@ -1561,7 +1639,9 @@ function homePageJsonNewslist_lifestyle() {
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
         foreach ($result as $reskey => $resvalue) {
 
             $title = $resvalue['title'];
@@ -1581,6 +1661,7 @@ function homePageJsonNewslist_lifestyle() {
             //related content
             $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
             $comment_cont = getCommentsCount($nid);
+
             // create date formating
             $firebase_url = get_node_firebase_weburl($nid);
 
@@ -1621,6 +1702,7 @@ function homePageJsonNewslist_lifestyle() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
@@ -1648,8 +1730,6 @@ function homePageJsonNewslist_lifestyle() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -1657,107 +1737,5 @@ function homePageJsonNewslist_lifestyle() {
 
     $data_news['news'] = (array) $data_newslist;
 
-    return $data_news;
-}
-
-/**
- * main function for generate homePage Widget1 array
- *
- * @return array
- */
-function homePageJsonWidget_1() {
-    global $base_url;
-    $data_news = array();
-    $data_newslist = array();
-    $comman = array();
-    $n_widget = array();
-    $listcount = 0;
-    $data_news['id'] = "0";
-    $data_news['order'] = "1";
-    $data_news['type'] = "webview";
-    $data_news['title'] = "Widget";
-    $data_news['label'] = "Widget";
-    $data_news['show_label'] = "0";
-    $data_news['n_template_id'] = "1";
-
-    $data_newslist[$listcount]['n_id'] = "0";
-    $data_newslist[$listcount]['n_template_id'] = "";
-    $data_newslist[$listcount]['n_type'] = "story";
-    $data_newslist[$listcount]['n_is_developing'] = "0";
-    $data_newslist[$listcount]['n_is_sponsored'] = "0";
-    $data_newslist[$listcount]['n_share_link'] = "";
-    $data_newslist[$listcount]['n_title'] = "";
-    $data_newslist[$listcount]['n_description'] = "0";
-    $data_newslist[$listcount]['n_pcategory_id'] = "0";
-    $data_newslist[$listcount]['n_pcategory_name'] = "";
-    $data_newslist[$listcount]['n_comment_count'] = "";
-    $data_newslist[$listcount]['n_small_image'] = "";
-    $data_newslist[$listcount]['n_large_image'] = "";
-    $data_newslist[$listcount]['n_image_credit'] = "";
-    $data_newslist[$listcount]['n_updated_datetime'] = "";
-    $data_newslist[$listcount]['n_photo'] = $comman;
-    $data_newslist[$listcount]['n_video'] = $comman;
-    $data_newslist[$listcount]['n_polls'] = $comman;
-    $data_newslist[$listcount]['n_rating'] = $comman;
-    $data_newslist[$listcount]['n_magazine'] = $comman;
-    $n_widget[0]['type'] = "2";
-    $n_widget[0]['type_label'] = "scorecard";
-    $n_widget[0]['tilte'] = "Scorecard";
-    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v1.html?team=ind";
-    $n_widget[0]['extended_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v3.html?team=ind";
-    $n_widget[0]['action'] = "webview";
-    $n_widget[0]['is_india_match'] = "1";
-    $data_newslist[$listcount]['n_widget'] = $n_widget;
-    $data_news['news'] = (array) $data_newslist;
-    return $data_news;
-}
-
-/**
- * main function for generate homePage Widget2 array
- *
- * @return array
- */
-function homePageJsonWidget_2() {
-    global $base_url;
-    $data_news = array();
-    $data_newslist = array();
-    $comman = array();
-    $n_widget = array();
-    $listcount = 0;
-    $data_news['id'] = "0";
-    $data_news['order'] = "2";
-    $data_news['type'] = "webview";
-    $data_news['title'] = "Widget";
-    $data_news['label'] = "Widget";
-    $data_news['show_label'] = "0";
-    $data_news['n_template_id'] = "1";
-    $data_newslist[$listcount]['n_id'] = "0";
-    $data_newslist[$listcount]['n_template_id'] = "";
-    $data_newslist[$listcount]['n_type'] = "story";
-    $data_newslist[$listcount]['n_is_developing'] = "0";
-    $data_newslist[$listcount]['n_is_sponsored'] = "0";
-    $data_newslist[$listcount]['n_share_link'] = "";
-    $data_newslist[$listcount]['n_title'] = "";
-    $data_newslist[$listcount]['n_description'] = "0";
-    $data_newslist[$listcount]['n_pcategory_id'] = "0";
-    $data_newslist[$listcount]['n_pcategory_name'] = "";
-    $data_newslist[$listcount]['n_comment_count'] = "";
-    $data_newslist[$listcount]['n_small_image'] = "";
-    $data_newslist[$listcount]['n_large_image'] = "";
-    $data_newslist[$listcount]['n_image_credit'] = "";
-    $data_newslist[$listcount]['n_updated_datetime'] = "";
-    $data_newslist[$listcount]['n_photo'] = $comman;
-    $data_newslist[$listcount]['n_video'] = $comman;
-    $data_newslist[$listcount]['n_polls'] = $comman;
-    $data_newslist[$listcount]['n_rating'] = $comman;
-    $data_newslist[$listcount]['n_magazine'] = $comman;
-    $n_widget[0]['type'] = "4";
-    $n_widget[0]['type_label'] = "live";
-    $n_widget[0]['tilte'] = "Watch Live";
-    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
-    $n_widget[0]['extended_url'] = "";
-    $n_widget[0]['action'] = "webview";
-    $data_newslist[$listcount]['n_widget'] = $n_widget;
-    $data_news['news'] = (array) $data_newslist;
     return $data_news;
 }
