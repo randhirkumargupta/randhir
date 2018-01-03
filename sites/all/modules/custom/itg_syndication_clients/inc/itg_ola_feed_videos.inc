@@ -26,14 +26,14 @@ function itg_genrate_ola_feed_videos_syndication($section_id = NULL, $file_name)
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_expert_description', 'sed', 'sed.entity_id=n.nid');
-	$query->leftJoin('itg_video_transcoding', 'ivt', 'ivt.nid=n.nid');
+    $query->leftJoin('itg_video_transcoding', 'ivt', 'ivt.nid=n.nid');
 
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('sst', array('field_story_source_type_value'));
     $query->fields('sed', array('field_story_expert_description_value'));
-	
-	$query->condition('ivt.bitrate', '996', '=');
+
+    $query->condition('ivt.bitrate', '996', '=');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
@@ -100,17 +100,17 @@ function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $c
 
       $video_url = '';
       if ($source_type = 'migrated') { //migrated video
-		$videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-		foreach ($videoids as $keys => $video_value) {
-			$url = $video_value->field_migrated_video_url_value;
-		}
-		$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
-		$bitrate_url = $data_video['bitrate_url'];
-		$mp4_url = $data_video['file_url'];
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+          $url = $video_value->field_migrated_video_url_value;
+        }
+        $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+        $bitrate_url = $data_video['bitrate_url'];
+        $mp4_url = $data_video['file_url'];
         $video_url = $mp4_url;
       }
       else {
-		$videotag = itg_video_detail_formats($nid, $source_type);
+        $videotag = itg_video_detail_formats($nid, $source_type);
         $video_url = $videotag['dailymotion']['bitate_url']['videoparts_mp4'];
       }
       $video_url = str_replace('512.mp4', '996.mp4', $video_url);

@@ -76,7 +76,7 @@ function genrate_dekkho_feed_videos_syndication_xml($result = NULL, $section_id,
       $catname = get_term_name_by_tid($section_id);
       $small_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
       $source_type = $value['field_story_source_type_value'];
-      
+
       $video_data = get_itg_video_transcoding($nid);
       $meta_tags = get_node_metatags_by_nid($nid);
       $tags = get_content_tags($nid, TRUE);
@@ -94,17 +94,17 @@ function genrate_dekkho_feed_videos_syndication_xml($result = NULL, $section_id,
 
       $video_url = '';
       if ($source_type = 'migrated') { //migrated video
-		$videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-		foreach ($videoids as $keys => $video_value) {
-			$url = $video_value->field_migrated_video_url_value;
-		}
-		$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
-		$bitrate_url = $data_video['bitrate_url'];
-		$mp4_url = $data_video['file_url'];
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+          $url = $video_value->field_migrated_video_url_value;
+        }
+        $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+        $bitrate_url = $data_video['bitrate_url'];
+        $mp4_url = $data_video['file_url'];
         $video_url = $mp4_url;
       }
       else {
-		$videotag = itg_video_detail_formats($nid, $source_type);
+        $videotag = itg_video_detail_formats($nid, $source_type);
         $video_url = $videotag['dailymotion']['bitate_url']['videoparts_mp4'];
       }
       $video_url = str_replace('512.mp4', '996.mp4', $video_url);
