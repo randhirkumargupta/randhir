@@ -308,6 +308,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date)
  * Creates the xml item.
  */
 function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+  $desc = str_replace('<p>&nbsp;</p>', '', $desc);
   $output = "    <item>\n";
   $output .= "      <title>" . $title . "</title>\n";
   $output .= "      <link>" . check_url($link) . "</link>\n";
