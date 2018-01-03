@@ -53,26 +53,47 @@ function itg_fia_uninstall() {
   variable_del('itg_fia_config');
 }
 
-function itg_fia_split_by_words($text, $splitLength = 200) {
-	// explode the text into an array of words
-	$wordArray = explode(' ', $text);
-	$count = 0;
-	// Too many words
-	while( sizeof($wordArray) > $count )
-	{
-		// Split words into two arrays
-		$firstWordArray = array_slice($wordArray, $count, $splitLength);
-		//$lastWordArray = array_slice($wordArray, $splitLength+1, sizeof($wordArray));
+function itg_fia_split_by_words($content, $after_word1 = 200) {
+	// Insert at the end of the paragraph every 300 words
+    //$after_word1 = 300;
+	$len = strlen($content);
+	$i=0;
+	// Keep adding untill end of content or $max_ads number of ads has ben inserted
+	while($i<$len) {
+		// Work our way untill the apropriate length
+		$word_cout = 0;
+		$in_tag = false;
+		while(++$i < $len && $word_cout < $after_word1) {
+			if(!$in_tag && ctype_space($content[$i])) {
+				// Whitespace
+				$word_cout++;
+			}
+			else if(!$in_tag && $content[$i] == '<') {
+				// Begin tag
+				$in_tag = true;
+				$word_cout++;
+			}
+			else if($in_tag && $content[$i] == '>') {
+				// End tag
+				$in_tag = false;
+			}
+		}
 
-		// Turn array back into two split strings 
-		$firstString = implode(' ', $firstWordArray);
-		//$lastString = implode(' ', $lastWordArray);
-		$ad_string = "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
-		$return_string .= $firstString.$ad_string;
-		$count = $count+$splitLength+1;
-		
-		//return array($firstString, $lastString);
+		// Find the next '</p>'
+		$i = strpos($content, "</p>", $i);
+		if($i === false) {
+			// No more paragraph endings
+			break;
+		}
+		else {
+			// Add the length of </p>
+			$i += 4;			
+			$ad = "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+			$content = substr($content, 0, $i) . $ad . substr($content, $i);
+
+			// Set the correct i
+			$i+= strlen($ad);
+		}
 	}
-	// if our array is under the limit, just send it straight back
-	return $return_string;
+    return $content;
 }
