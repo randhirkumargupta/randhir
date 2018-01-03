@@ -460,9 +460,8 @@ function itg_widgets_custom_variables() {
   );
 	
   $form['itg_programmes_order_by'] = array(
-    '#type' => 'textfield',
+    '#type' => 'textarea',
     '#title' => t('Programmes category ids for order'),
-    '#attributes' => array('placeholder' => t('Programmes category ids for order')),
     '#default_value' => variable_get('itg_programmes_order_by'),
   );
 
