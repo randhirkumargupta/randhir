@@ -233,7 +233,7 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
     margin-bottom: 15px;
     font-size: 20px;
 }
-.movie-layout-page .buying-guides.tech-in-depth ul li{ margin-bottom:15px;}
+
 @media only screen and (max-width: 767px) {
     .budget-predictor-table th.title {
         font-size: 14px;
@@ -256,6 +256,7 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
         padding: 3px 9px 1px;
         font-size: 13px
     }
+    .movie-layout-page .buying-guides.tech-in-depth ul.moviesinglelist li{ margin-bottom:15px;}
 }
 .megareview .iframe-video {
     position: inherit;
