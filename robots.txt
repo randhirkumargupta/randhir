@@ -12,18 +12,23 @@
 #
 # For more information about the robots.txt standard, see:
 # http://www.robotstxt.org/robotstxt.html
-# Mahesh
+
+User-agent: * 
+
+Sitemap: https://www.indiatoday.in/sitemapindex.xml
+
+Sitemap: https://www.indiatoday.in/sitemap.xml
 
 User-agent: Twitterbot
 Disallow:
 
 User-agent: facebookexternalhit
-Disallow: /
+
 
 User-agent: *
 Crawl-delay: 10
 # Directories
-Disallow: /
+
 Disallow: /includes/
 Disallow: /misc/
 Disallow: /modules/
