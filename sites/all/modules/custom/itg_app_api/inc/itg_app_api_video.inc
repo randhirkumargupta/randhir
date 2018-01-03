@@ -11,15 +11,18 @@
  * @return array
  */
 function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
+
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
+
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
         $term_name = "Latest";
     }
+
     // list array building
     $data = generateVideoCategoryList($tid, $pageno);
     if ($data['lcount'] > 0) {
@@ -86,6 +89,7 @@ function generateVideoCategoryList($tid, $pageno) {
                 $tid_list[] = $value->tid;
             }
         }
+
         // code vid=14  end
         // select node belong from current term id or child term id
         // filter user data list
@@ -123,11 +127,13 @@ function generateVideoCategoryList($tid, $pageno) {
         $query->fields('mi_file', array('uri'));
         $query->fields('si_file', array('uri'));
         $query->fields('esi_file', array('uri'));
+
         $query->fields('mi', array('field_story_medium_image_fid'));
         $query->fields('li', array('field_story_large_image_fid'));
         $query->fields('si', array('field_story_small_image_fid'));
         $query->fields('eli', array('field_story_extra_large_image_fid'));
         $query->fields('rc', array('field_common_related_content_value'));
+
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
@@ -136,6 +142,7 @@ function generateVideoCategoryList($tid, $pageno) {
         $query->fields('fvu', array('field_video_upload_value'));
         $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('ffd', array('field_story_expert_description_value'));
+
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
@@ -146,6 +153,7 @@ function generateVideoCategoryList($tid, $pageno) {
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
         foreach ($result as $reskey => $resvalue) {
             // node feed tag
             $title = $resvalue['title'];
@@ -171,8 +179,10 @@ function generateVideoCategoryList($tid, $pageno) {
             $desc = str_replace("\n", "", $desc);
             $desc = str_replace("\r", "", $desc);
             $desc = str_replace("\t", "", $desc);
+
             //related content
             $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
+
             $field_story_reporter_target_id = $resvalue['field_story_reporter_target_id'];
             $reporter_node = itg_common_get_node_title($field_story_reporter_target_id);
             //video url start
@@ -180,12 +190,16 @@ function generateVideoCategoryList($tid, $pageno) {
             $file_id = file_usage($field_video_upload);
             //to get the video of all the other formats
             $load_collection = field_collection_item_load($field_video_upload);
+
             $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+
             // return all the video details
             $source_type = $resvalue['field_story_source_type_value'];
             $videotag = video_detail_formats($resvalue['nid'], $source_type);
+
             // create date formating
             $firebase_url = get_node_firebase_weburl($nid);
+
             if ($created) {
                 $create_datetime = date("Y-m-d H:i:s", $created);
                 $create_date = date("Y-m-d H:i:s", $created);
@@ -232,6 +246,7 @@ function generateVideoCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['v_video_size'] = "300";
             $photo_list_array[$listcount]['v_subcategory_id'] = "$field_primary_category_value";
             $photo_list_array[$listcount]['v_subcategory_title'] = "$term_name_pri";
+
             $listcount++;
         }
     }
@@ -267,11 +282,13 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
+
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
         $term_name = "Latest";
     }
+
     // list array building
     $data = generateProgramCategoryList($tid, $pageno);
     if ($data['lcount'] > 0) {
@@ -293,8 +310,10 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['program_display_count'] = "10";
     $data_array['program_pagination_cap'] = "50";
     $data_array['updated_datetime'] = "$data_up_time";
+
     $data_array['program'] = $data['data'];
     $output_array['data'] = $data_array;
+
     return $output_array;
 }
 
@@ -330,6 +349,7 @@ function generateProgramCategoryList($tid, $pageno) {
     $loop_count = 0;
     {
         $listcount = 0;
+
         // code vid=14  start
         if ($tid > 0) {
             $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
@@ -342,6 +362,7 @@ function generateProgramCategoryList($tid, $pageno) {
                 $tid_list[] = $value->tid;
             }
         }
+
         // select node belong from current term id or child term id
         $query = db_select('taxonomy_index', 'ti');
         $query->leftJoin('node', 'n', 'n.nid=ti.nid');
@@ -361,21 +382,25 @@ function generateProgramCategoryList($tid, $pageno) {
         $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
         $query->leftJoin('field_data_field_video_upload', 'fvu', 'fvu.entity_id=n.nid');
         $query->leftJoin('field_data_field_story_source_type', 'st', 'st.entity_id = n.nid');
+
         $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
         $query->leftJoin('field_data_field_story_syndication', 'fss', 'fss.entity_id=n.nid');
         $query->leftJoin('field_data_field_story_reporter', 'fsr', 'fsr.entity_id=n.nid');
         $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
         $query->leftJoin('field_data_field_story_expert_description', 'ffd', 'ffd.entity_id=n.nid');
+
         $query->fields('eli_file', array('uri'));
         $query->fields('li_file', array('uri'));
         $query->fields('mi_file', array('uri'));
         $query->fields('si_file', array('uri'));
         $query->fields('esi_file', array('uri'));
+
         $query->fields('mi', array('field_story_medium_image_fid'));
         $query->fields('li', array('field_story_large_image_fid'));
         $query->fields('si', array('field_story_small_image_fid'));
         $query->fields('eli', array('field_story_extra_large_image_fid'));
         $query->fields('rc', array('field_common_related_content_value'));
+
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
@@ -386,6 +411,7 @@ function generateProgramCategoryList($tid, $pageno) {
         $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('ffd', array('field_story_expert_description_value'));
         //end
+
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
@@ -394,7 +420,9 @@ function generateProgramCategoryList($tid, $pageno) {
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
         foreach ($result as $reskey => $resvalue) {
             // node feed tag
             $title = $resvalue['title'];
@@ -428,6 +456,8 @@ function generateProgramCategoryList($tid, $pageno) {
             $desc = str_replace("\n", "", $desc);
             $desc = str_replace("\r", "", $desc);
             $desc = str_replace("\t", "", $desc);
+
+
             //display all the video sounce check and format
             $source_type = $resvalue['field_story_source_type_value'];
             $videotag = video_detail_formats($resvalue['nid'], $source_type);
@@ -435,6 +465,7 @@ function generateProgramCategoryList($tid, $pageno) {
             //video url end
             // create date formating
             $firebase_url = get_node_firebase_weburl($nid);
+
             if ($created) {
                 $create_datetime = date("Y-m-d H:i:s", $created);
                 $create_date = date("Y-m-d H:i:s", $created);
@@ -447,6 +478,7 @@ function generateProgramCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
+
             $photo_list_array[$listcount]['p_id'] = "$nid";
             $photo_list_array[$listcount]['p_title'] = "$title";
             $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
@@ -455,6 +487,7 @@ function generateProgramCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
             $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
             $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
+
             //if($video_path_mp4){
             if (!empty($videotag['dailymotion'])) {
                 $photo_list_array[$listcount]['p_is_default_player'] = "1";
@@ -555,10 +588,13 @@ function generateProgramSectionList($Program_section_list) {
         $p_short_description = str_replace("\n", "", $p_short_description);
         $p_short_description = str_replace("\r", "", $p_short_description);
         $p_short_description = str_replace("\t", "", $p_short_description);
+
         $p_schedule = $term->field_program_timing_in_days['und'][0]['value'];
+
         $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
         $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
         $cat_icon_img = sectionCategoryIconImg($value);
+
         $data[$listcount]['p_id'] = "$value";
         $data[$listcount]['p_title'] = "$term->name";
         $data[$listcount]['p_image'] = "$cat_icon_img";
@@ -571,6 +607,7 @@ function generateProgramSectionList($Program_section_list) {
     $output_ar['data'] = $data;
     $output_ar['lcount'] = $listcount;
     $output_ar['updated_datetime'] = $update_time;
+
     return $output_ar;
 }
 
@@ -635,6 +672,7 @@ function generateVideoDetail($nid) {
         $changed = $node->changed;
         $field_story_kicker_text_value = $node->field_video_kicker['und']['0']['value'];
         $field_primary_category_value = $node->field_primary_category['und']['0']['value'];
+
         $nv_cont = getNodeViewCount($nid);
         $alias = drupal_get_path_alias('node/' . $nid . '');
         $weburl = $base_url . "/" . $alias;
@@ -644,12 +682,15 @@ function generateVideoDetail($nid) {
         $file_medium_img_url = completeFilePath($node->field_story_medium_image['und']['0']['fid']);
         $file_large_img_url = completeFilePath($node->field_story_large_image['und']['0']['fid']);
         $file_extra_large_img_url = completeFilePath($node->field_story_extra_large_image['und']['0']['fid']);
+
         $desc = strip_tags($node->field_story_expert_description['und']['0']['value']);
         $desc = str_replace("\n", "", $desc);
         $desc = str_replace("\r", "", $desc);
         $desc = str_replace("\t", "", $desc);
+
         //related content
         $related = relatedContentNodeType($node->field_common_related_content['und']['0']['value']);
+
         $field_story_reporter_target_id = $node->field_story_reporter['und']['0']['target_id'];
         $reporter_node = itg_common_get_node_title($field_story_reporter_target_id);
         //video url start
@@ -657,12 +698,16 @@ function generateVideoDetail($nid) {
         $file_id = file_usage($field_video_upload);
         //to get the video of all the other formats
         $load_collection = field_collection_item_load($field_video_upload);
+
         $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+
         // return all the video details
         $source_type = $node->field_story_source_type['und']['0']['value'];
         $videotag = video_detail_formats($nid, $source_type);
+
         // create date formating
         $firebase_url = get_node_firebase_weburl($nid);
+
         if ($created) {
             $create_datetime = date("Y-m-d H:i:s", $created);
             $create_date = date("Y-m-d H:i:s", $created);
@@ -675,6 +720,7 @@ function generateVideoDetail($nid) {
         } else {
             $changed_datetime = "";
         }
+
         $photo_list_array[$listcount]['v_id'] = "$nid";
         $photo_list_array[$listcount]['v_title'] = "$title";
         $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
@@ -746,6 +792,7 @@ function generateProgramDetail($nid) {
         $file_medium_img_url = completeFilePath($node->field_story_medium_image['und']['0']['fid']);
         $file_large_img_url = completeFilePath($node->field_story_large_image['und']['0']['fid']);
         $file_extra_large_img_url = completeFilePath($node->field_story_extra_large_image['und']['0']['fid']);
+
         //related content
         $related = relatedContentNodeType($node->field_common_related_content['und']['0']['value']);
         $field_story_reporter_target_id = $node->field_story_reporter['und']['0']['target_id'];
@@ -761,6 +808,7 @@ function generateProgramDetail($nid) {
         $desc = str_replace("\n", "", $desc);
         $desc = str_replace("\r", "", $desc);
         $desc = str_replace("\t", "", $desc);
+
         //display all the video sounce check and format
         $source_type = $node->field_story_source_type['und']['0']['value'];
         $videotag = video_detail_formats($nid, $source_type);
@@ -768,6 +816,7 @@ function generateProgramDetail($nid) {
         //video url end
         // create date formating
         $firebase_url = get_node_firebase_weburl($nid);
+
         if ($created) {
             $create_datetime = date("Y-m-d H:i:s", $created);
             $create_date = date("Y-m-d H:i:s", $created);
@@ -780,6 +829,7 @@ function generateProgramDetail($nid) {
         } else {
             $changed_datetime = "";
         }
+
         $photo_list_array[$listcount]['p_id'] = "$nid";
         $photo_list_array[$listcount]['p_title'] = "$title";
         $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
@@ -788,6 +838,7 @@ function generateProgramDetail($nid) {
         $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
         $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
         $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
+
         //if($video_path_mp4){
         if (!empty($videotag['dailymotion'])) {
             $photo_list_array[$listcount]['p_is_default_player'] = "1";
@@ -837,6 +888,7 @@ function featuresWidgetData() {
     $range_max = 3;
     $range_min = 0;
     $order_by = 'ASC';
+
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     //join  for field value
@@ -853,19 +905,25 @@ function featuresWidgetData() {
     $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
     $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
+
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
     $query->fields('mi_file', array('uri'));
     $query->fields('si_file', array('uri'));
     $query->fields('esi_file', array('uri'));
+
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
     $query->fields('li', array('field_story_large_image_fid'));
+
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
+
+
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -913,27 +971,30 @@ function topstoriesList($source) {
     $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
 
     $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
+
     $query->fields('eli_file', array('uri'));
     $query->fields('li_file', array('uri'));
     $query->fields('mi_file', array('uri'));
     $query->fields('si_file', array('uri'));
     $query->fields('esi_file', array('uri'));
+
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
     $query->fields('li', array('field_story_large_image_fid'));
+
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('ti', array('tid'));
+
+
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $result_fs = featuresWidgetData();
     $result = array_merge($result_fs, $result_ts);
-    if ($source == "daily_capsule") {
-        return $result;
-    }
+    //$result = array_merge($result_ts, $result_fs);
 
     $data_topstories['id'] = "0";
     $data_topstories['title'] = "Top Stories";
@@ -941,13 +1002,14 @@ function topstoriesList($source) {
     $data_topstories['show_label'] = "0";
     if ($source == 'home') {
         $data_topstories['id'] = "0";
-        $data_topstories['order'] = "4";
+        $data_topstories['order'] = "2";
         $data_topstories['type'] = "topstories";
         $data_topstories['title'] = "Top Stories";
         $data_topstories['label'] = "Top Stories";
         $data_topstories['show_label'] = "0";
         $data_topstories['n_template_id'] = "1";
     }
+
     // loop on top stories.
     foreach ($result as $key => $value) {
         // varibale for json tag
@@ -958,15 +1020,19 @@ function topstoriesList($source) {
         $changed = $value['changed'];
         $tid = $value['tid'];
         $field_story_kicker_text_value = $value['field_story_kicker_text_value'];
+
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
+
         // file url
         $file_small_img_url = completeFilePath($value['field_story_small_image_fid']);
         $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);
         $file_large_img_url = completeFilePath($value['field_story_large_image_fid']);
         $comment_cont = getCommentsCount($nid);
+
         // create date formating
         $firebase_url = get_node_firebase_weburl($nid);
+
         if ($created) {
             $create_datetime = date("Y-m-d H:i:s", $created);
             $create_date = date("Y-m-d H:i:s", $created);
@@ -979,8 +1045,13 @@ function topstoriesList($source) {
         } else {
             $changed_datetime = date("Y-m-d H:i:s", $created);
         }
+        //json tag writing
+        //if ($type == "story") {
+        // news list
+
         $n_rating = getRating($node);
         $n_magazine = array();
+
         // custom function for get img caption
         $caption = getImgCaption($value['field_story_medium_image_fid']);
         // custom function for get img byline
@@ -1011,142 +1082,15 @@ function topstoriesList($source) {
         $data_newslist[$home_list_count]['n_polls'] = $n_polls;
         $data_newslist[$home_list_count]['n_rating'] = $n_rating;
         $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
-        $n_widget = array();
-        $data_newslist[$home_list_count]['n_widget'] = $n_widget;
         $home_list_count++;
+        //}
     }
+
+
     if ($source == 'home') {
         $data_topstories['news'] = (array) $data_newslist;
     } else {
         $data_topstories['data'] = (array) $data_newslist;
     }
     return $data_topstories;
-}
-
-/* Change request v1 */
-
-/**
- * function for  dailyCapsuleApi
- *
- * @return array
- */
-function dailyCapsuleApi() {
-    //p($_SERVER);
-    $data = array();
-    $order = array();
-    $newswrap = array();
-    $score_card = array();
-    $big_strory = array();
-    $top_strory = array();
-    $breaking_news = array();
-    $breaking_news = news_dailyCapsule();
-    $data['status_code'] = "1";
-    $data['status_message'] = "";
-    $order[0]['order_id'] = "1";
-    $order[0]['type'] = "newswrap";
-    $order[0]['name'] = "newswrap";
-    $order[0]['is_enabled'] = "1";
-    $order[1]['order_id'] = "2";
-    $order[1]['type'] = "breaking";
-    $order[1]['name'] = "breaking";
-    $order[1]['is_enabled'] = "1";
-    $order[2]['order_id'] = "3";
-    $order[2]['type'] = "web_view";
-    $order[2]['name'] = "score_card";
-    $order[2]['is_enabled'] = "1";
-    $order[3]['order_id'] = "4";
-    $order[3]['type'] = "big_strory";
-    $order[3]['name'] = "big_strory";
-    $order[3]['is_enabled'] = "1";
-    $order[4]['order_id'] = "5";
-    $order[4]['type'] = "top_strory";
-    $order[4]['name'] = "top_strory";
-    $order[4]['is_enabled'] = "1";
-    $data['data']['order'] = $order;
-    $newswrap['title'] = "Newswrap";
-    $newswrap['icon_url'] = "http image url";
-    $newswrap['tag_title'] = "newsrap";
-    $newswrap['api'] = "https://feeds.intoday.in/rss-feeds/ver1.0/appboy/cb430068/indiatoday/notification/it_notification.json";
-    $data['data']['newswrap'] = $newswrap;
-    $data['data']['breaking'] = $breaking_news;
-    $score_card['title'] = "Scorecard";
-    $score_card['icon_url'] = "http image url";
-    $score_card['score_card_link'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v3.html";
-    $data['data']['score_card'] = $score_card;
-    /* get big story data */
-    $big_story_block_data = array();
-    $widget_name = "big_story_format_widget";
-    if (!empty($widget_name)) {
-        $query = db_select('itg_widget_order', 'iwo')->fields('iwo', array('nid', 'extra'))->orderBy('iwo.weight', 'ASC')->condition('widget', $widget_name);
-        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $big_story_data) {
-            if ($big_story_data['extra'] == 'big_story_live_tv_active' && $big_story_data['nid'] == 0) {
-                $big_story_block_data[] = array("is_live_tv" => TRUE);
-            } elseif ($big_story_data['nid']) {
-                $big_story_block_data[] = array("node_load_data" => node_load($big_story_data['nid']));
-            }
-        }
-    }
-    // varibale for feed tag
-    $desc = $big_story_block_data[1]['node_load_data']->field_common_short_description['und'][0]['value'];
-    $changed = $big_story_block_data[1]['node_load_data']->changed;
-    $changed_datetime = date("Y-m-d H:i:s", $changed);
-    $title = $big_story_block_data[1]['node_load_data']->title;
-    $type = $big_story_block_data[1]['node_load_data']->type;
-    $nid = $big_story_block_data[1]['node_load_data']->nid;
-    $created = $big_story_block_data[1]['node_load_data']->created;
-    $file_small_img_url = completeFilePath($big_story_block_data[1]['node_load_data']->field_story_small_image['und'][0]['fid']);
-    $file_medium_img_url = completeFilePath($big_story_block_data[1]['node_load_data']->field_story_medium_image['und'][0]['fid']);
-    $related = relatedContentNodeType($big_story_block_data[1]['node_load_data']->field_common_related_content['und'][0]['value'], $type);
-    $create_date = date("F d, Y", $created);
-    $create_datetime = date(DATE_ATOM, $created);
-    if ($title) {
-        $big_strory['title'] = "Big Strory";
-        $big_strory['icon_url'] = "http image url";
-        $big_strory['story_id'] = "$nid";
-        $big_strory['story_image'] = "$file_medium_img_url";
-        $big_strory['story_title'] = "$title";
-        $big_strory['story_short_desc'] = "$desc";
-        $big_strory['updated_datetime'] = "$changed_datetime";
-    }
-    $data['data']['big_strory'] = $big_strory;
-    $top_strory['title'] = "Top Strories";
-    $top_strory['icon_url'] = "http image url";
-    $top_strory['category_id'] = "0";
-    $top_strory['type'] = "newslist";
-    $top_strory['display_count'] = "5";
-    $data['data']['top_strory'] = $top_strory;
-    return $data;
-}
-
-/**
- * function for news in dailyCapsule
- *
- * @return array
- */
-function news_dailyCapsule() {
-    $breaking_news = array();
-    $news_list = array();
-    $breaking_news['title'] = "Breaking News";
-    $breaking_news['icon_url'] = "http image url";
-    $new_data = topstoriesList("daily_capsule");
-    $loopc = 0;
-    foreach ($new_data as $value) {
-        $n_id = $value['nid'];
-        $n_title = $value['title'];
-        $n_type = $value['type'];
-        $updated_datetime = $value['created'];
-        $changed_datetime = date("Y-m-d H:i:s", $updated_datetime);
-        $news_list[$loopc]['n_id'] = "$n_id";
-        $news_list[$loopc]['n_title'] = "$n_title";
-        $news_list[$loopc]['n_type'] = "$n_type";
-        $news_list[$loopc]['updated_datetime'] = "$changed_datetime";
-        if ($loopc == 4) {
-            break;
-        }
-        $loopc++;
-    }
-
-    $breaking_news['news'] = $news_list;
-    return $breaking_news;
 }
