@@ -29,7 +29,7 @@ function itg_genrate_bsb_story_syndication($section_id = NULL, $file_name) {
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_itg_tags', 'story_tags', 'story_tags.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_large_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
 
     if ($section_id == '1206584') {
@@ -45,7 +45,7 @@ function itg_genrate_bsb_story_syndication($section_id = NULL, $file_name) {
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('sheadline', array('field_story_short_headline_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
-    $query->fields('smi', array('field_story_medium_image_fid'));
+    $query->fields('smi', array('field_story_large_image_fid'));
     $query->fields('ssi', array('field_story_small_image_fid'));
 
     $query->condition('n.status', 1);
@@ -78,6 +78,18 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
     $xml .= '<language>en-US</language>';
     $xml .= '<news>';
     foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
+      $meta_tags = get_node_metatags_by_nid($value['nid']);
+      if ($meta_tags) {
+        $keywords = unserialize($meta_tags['data']);
+        $keywords = $keywords['keywords']['value'];
+        if (!empty($keywords) && (strpos($keywords, "jio") || strpos($keywords, "reliance") || strpos($keywords, "vodafone") || strpos($keywords, "idea") || strpos($keywords, "bsnl") || strpos($keywords, "tata docomo") || strpos($keywords, "aircel") || strpos($keywords, "telenor") || strpos($keywords, "mts"))) {
+          continue;
+        }
+      }
+
       $publish_date = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
       $modify_date = date("Y-m-d\TH:i:sP", $value['changed']);
       $place = get_content_city($value['nid']);
@@ -107,16 +119,16 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
         $xml .= '<caption><![CDATA[' . $small_img["caption"] . ']]></caption>';
         $xml .= '<items>';
         $xml .= '<item>';
-        $xml .= '<width>170</width>';
-        $xml .= '<height>127</height>';
+        $xml .= '<width>180</width>';
+        $xml .= '<height>118</height>';
         $xml .= '<url><![CDATA[' . $small_img["imag_url"] . ']]></url>';
         $xml .= '<format>' . $small_img["mime_type"] . '></format>';
         $xml .= '</item>';
         $xml .= '</items>';
         $xml .= '</image>';
       }
-      if (!empty($value['field_story_medium_image_fid'])) {
-        $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
+      if (!empty($value['field_story_large_image_fid'])) {
+        $medium_img = get_image_info_by_fid($value['field_story_large_image_fid']);
         $xml .= '<image>';
         $xml .= '<caption><![CDATA[' . $medium_img["caption"] . ']]></caption>';
         $xml .= '<items>';

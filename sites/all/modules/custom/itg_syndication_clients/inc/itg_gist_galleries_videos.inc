@@ -33,7 +33,7 @@ function itg_genrate_gist_photo_syndication() {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   $xml = genrate_gist_photo_syndication_xml($result);
-  $xml_path = 'public://rss-feeds/ver1.0/gist/9b9fdf70/it/galleries/';
+  $xml_path = 'public://rss-feeds/xml_data/gist/it/galleries/';
   $file_path = $xml_path . 'gallery.xml';
   $fp = fopen($file_path, "w");
   fwrite($fp, $xml);
