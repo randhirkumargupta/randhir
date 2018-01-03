@@ -6,7 +6,7 @@
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728148
  */
-global $theme, $user, $base_url;
+global $theme, $user;
 $preview = NULL;
 $tax_name = '';
 $movie_review_tid = '';
@@ -30,7 +30,7 @@ if ((arg(0) == 'taxonomy') && (arg(1) == 'term') && (arg(2)) && is_numeric(arg(2
   $tax_name_arr = get_term_name_from_tid($tax_id);
   $tax_name = strtolower($tax_name_arr->name);  
   $movie_review_tid = variable_get('movies_review_tid', 1207047);
-  $movie_review_url = $base_url . '/' . drupal_get_path_alias('taxonomy/term/' . $movie_review_tid);
+  $movie_review_url = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $movie_review_tid);
 }
 ?>
 <!--------------------------------Code for Front tpl---------------------------------------->
