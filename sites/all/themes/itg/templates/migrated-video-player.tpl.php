@@ -4,6 +4,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
+drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
 global $base_url;
 ?>
 
@@ -16,6 +18,11 @@ if (!empty($refral_site)) {
     $used_on = 'embed';
   }
 }
+$autostart = "TRUE";
+if ($used_on == 'embed') {
+  $autostart = "FALSE";
+}
+
 $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $external_side);
 ?>
 <div id="videoplayer"> </div>
@@ -36,16 +43,16 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
 
                       }]
               }],
-          primary: "flash",
-          autostart: "true",
+          primary: "html5",
+          autostart: "<?php echo $autostart; ?>",
           width: "100%",
           height: "100%",
           aspectratio: "4:3",
           "stretching": "uniform",
           androidhls: "true",
-          fallback: "false",
+          //fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
-          autostart: true,
+          //autostart: true,
                   advertising: {
                       client: "googima", skipoffset: 5,
                       schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
@@ -74,6 +81,6 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
 </script>
 
 <?php
-drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
-drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
+//drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
+//drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
 ?>

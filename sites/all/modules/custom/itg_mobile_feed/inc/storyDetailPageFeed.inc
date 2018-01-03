@@ -57,7 +57,6 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     //check into redis
     $redis_key = "itgd_story" . $nid;
     $result_get = getRedis($redis_key);
-
     if ($result_get['key_value'] != "") {
       $output = $result_get['key_value'];
     }
@@ -140,7 +139,6 @@ function getVideoTag($node) {
   $videotag = "";
   $src = "";
   $img_url = '';
-
   $html = html_entity_decode($node->body['und']['0']['value']);
   $doc = new DOMDocument();
   libxml_use_internal_errors(TRUE);
@@ -164,7 +162,6 @@ function getVideoTag($node) {
       $img_url = file_create_url($node->field_story_medium_image['und'][0]['uri']);
     }
     $videotag = video_detail_formats($node->nid, $source_type);
-    print_r($videotag);
     // Daily motion video
   }
   elseif (strpos($video_path, '/embeded-video/')) {
@@ -176,7 +173,6 @@ function getVideoTag($node) {
     $query->fields('itgv', array('bitate_url', 'bitates_field'));
     $query->condition('itgv.video_id', $dailymotion_vid);
     $result2 = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     $video_format = array();
     foreach ($result2 as $res_data) {
       $video_format[$res_data['bitates_field']] = $res_data['bitate_url'];
@@ -190,10 +186,7 @@ function getVideoTag($node) {
       $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
     }
     $videotag = $video_detail;
-    //print_r($videotag);
-  }
-
-  
+  }  
   if (!empty($videotag['migrated'])) {
     $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
   }
@@ -239,7 +232,6 @@ function migrated_video_to_nid($video_uri) {
  * @return array $all_result
  */
 function uploaded_video_to_nid($video_uri) {
-
   $query = db_select('file_managed', 'f');
   $query->innerJoin('field_data_field_videogallery_video_upload', 'vp', 'vp.field_videogallery_video_upload_fid = f.fid');
   $query->innerJoin('field_data_field_video_upload', 'vo', 'vo.field_video_upload_value = vp.entity_id');
@@ -255,7 +247,6 @@ function uploaded_video_to_nid($video_uri) {
  * @return string
  */
 function getStringBetween($str, $from, $to) {
-
   $sub = substr($str, strpos($str, $from) + strlen($from), strlen($str));
   return substr($sub, 0, strpos($sub, $to));
 }
@@ -294,8 +285,6 @@ function getImgTag($node) {
   $img_caption_val = "";
   $story_large_fid = $node->field_story_extra_large_image['und'][0]['fid'];
   $story_large_img = completeFilePath($story_large_fid);
-
-
   $html = $node->body['und']['0']['value'];
   $doc = new DOMDocument();
   libxml_use_internal_errors(TRUE);
