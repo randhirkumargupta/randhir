@@ -32,8 +32,8 @@ jQuery(document).ready(function() {
 	});
 
 	var MaxBitrate=0
-/*
-	playerInstance.on('visualQuality', function(e) {
+
+	/*playerInstance.on('visualQuality', function(e) {
 		ga("send","event","video",'visualQuality-type', e.type);
 		ga("send","event","video",'visualQuality-mode', e.mode);
 		ga("send","event","video",'visualQuality-reason', e.reason);
@@ -46,7 +46,7 @@ jQuery(document).ready(function() {
 			ga("send","event","video",'Max Bitrate', MaxBitrate);
 		}
 		ga("send","event","video",'visualQuality-level-label', e.level.label);
-	}); */
+	});*/
 
 	playerInstance.on('buffer', function(e) { 
 		var state1=e.oldstate;
@@ -126,8 +126,8 @@ jQuery(document).ready(function() {
 		obj = JSON.parse(pv);
 	    ga("send","event","video",'provider',obj.name);
 	}); 
- /*
-	playerInstance.on('adClick', function(e) {
+ 
+	/*playerInstance.on('adClick', function(e) {
 		ga("send","event","video",'adClick', true);
 		ga("send","event","video",'adClick-client', e.client);
 		ga("send","event","video",'adClick-id', e.id);
@@ -145,7 +145,7 @@ jQuery(document).ready(function() {
 		ga("send","event","video",'adCompanions-stringify', JSON.stringify(e));
 		ga("send","event","video",'adCompanions', JSON.stringify(e.companions));
 		ga("send","event","video",'adCompanions-tag', e.tag);
-	}); */
+	});*/
 
 	playerInstance.on('adComplete', function(e) {
 		ga("send","event","video",'adComplete', true);
@@ -154,7 +154,7 @@ jQuery(document).ready(function() {
 		ga("send","event","video",'adComplete-tag', e.tag);
 	}); 
 	
-/*	playerInstance.on('adSkipped', function(e) {
+	/*playerInstance.on('adSkipped', function(e) {
 		ga("send","event","video",'adSkipped', "Yes");
 		ga("send","event","video",'adSkipped-adsystem', e.adsystem);
 		ga("send","event","video",'adSkipped-linear', e.linear);
@@ -162,8 +162,7 @@ jQuery(document).ready(function() {
 		ga("send","event","video",'adSkipped-type', e.type);
 		ga("send","event","video",'adSkipped-duration', e.duration);
 		ga("send","event","video",'adSkipped-adtitle', e.adtitle);
-	});
-*/
+	});*/
 	playerInstance.on('adError', function(e) {
 		ga("send","event","video",'adError', true);
 		ga("send","event","video",'adError-message', e.message); //
