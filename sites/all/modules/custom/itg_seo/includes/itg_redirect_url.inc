@@ -102,7 +102,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   global $base_url;
   $old_content_id = '';
   $arg = arg();
-  p($_SERVER);
+  //p($_SERVER);
   $type = 'story'; // use photogallery & videogallery in condition if you have
   $rss_url = '';
   $query_alias = '';
