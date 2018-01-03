@@ -261,7 +261,7 @@ function itg_fia_xml_node_feed($query) {
     $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
     $node_body = str_replace('<p><figure', '<figure', $node_body);
     $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body); 
-    $node_body = preg_replace('/<p[^>]*><\\/p[^>]*>/', '', $node_body);
+    $node_body = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $node_body);
     $node_body = str_replace('<p>&nbsp;</p>', '', $node_body);    
     $node_body = itg_fia_split_by_words($node_body, 200);
     $node_body_content = '<p>' . $node_body;
@@ -308,7 +308,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date)
  * Creates the xml item.
  */
 function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
-  $desc = str_replace('<p>&nbsp;</p>', '', $desc);
+  $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
   $output = "    <item>\n";
   $output .= "      <title>" . $title . "</title>\n";
   $output .= "      <link>" . check_url($link) . "</link>\n";
