@@ -197,6 +197,21 @@ function getproquest_feed_story_client_array() {
 }
 
 /**
+ * Function is used to get Proquest Story tids and File
+ * @return array
+ */
+function getceltick_feed_story_client_array() {
+  $story_sectios = array(
+    '1206578' => 'india.xml',
+    '1206795' => 'fyi.xml',
+    '1206567' => 'lifestyle.xml',
+    '1206533' => 'movies.xml',
+    
+  );
+  return $story_sectios;
+}
+
+/**
  * Function is used to get Dailyhunt story tids and File
  * @return array
  */

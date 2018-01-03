@@ -323,6 +323,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_scribd_live_issue.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-feeds/celtick/it_stories'] = array(
+    'page callback' => 'itg_celtick_feed_it_stories',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_celtick_feed_it_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
