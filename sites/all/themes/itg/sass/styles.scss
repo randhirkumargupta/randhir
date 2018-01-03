@@ -392,6 +392,7 @@ header {
 #block-itg-layout-manager-header-block {
     padding-top: 20px;
     background: #fff;
+    position: relative;
     .header-top {
         height: 163px;
     }
@@ -5983,14 +5984,20 @@ h1.category-heading {
         ul {
             @include clearfix;
             @extend .list-none;
+            margin-left: 28px;
+            padding: 0;
             li {
-                @include calculate-width(3);
-                padding: 0 10px;
+                width:auto;
+                padding: 0;
                 @include float(left);
+                list-style: disc;
+				margin: 0;
+				color:#a00606;
             }
         }
         h3 {
-            margin-top: 10px;
+            margin-top: 5px;
+            font-size:16px;
         }
     }
 }

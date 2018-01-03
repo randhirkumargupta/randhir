@@ -1465,9 +1465,41 @@ button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} bu
 }
         </style>
     </head>
+    <?php
+    $node_title = '';
+    if (arg(0) == 'node' && arg(1) && is_numeric(arg(1))) {
+      $node = menu_get_object('node');
+      $node_title = $node->title;
+    }
+    ?>
     <body class="<?php print $classes; ?>" <?php print $attributes; ?>>
         <?php print $page_top; ?>
         <?php print $page; ?>
         <?php print $page_bottom; ?>
+    <amp-analytics type="comscore">
+		<script type="application/json">
+			{
+			  "vars": {
+				"c2": "8549097"
+			  }
+			}
+		</script>
+	</amp-analytics>
+	<amp-analytics type="googleanalytics" id="analytics2"><script type="application/json">
+	{
+	  "vars": {
+		"account": "UA-34080153-10"
+	  },
+	  "triggers": {
+		"defaultPageview": {
+		  "on": "visible",
+		  "request": "pageview",
+		  "vars": {
+			"title": "<?php print $node_title;?>"
+		  }
+		}
+	  }
+	}
+	</script></amp-analytics>
     </body>
 </html>

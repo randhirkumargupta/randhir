@@ -514,8 +514,7 @@ function get_image_info_by_fid($fid = NULL) {
     }
     $img_url = get_thumbnail_by_fid($fid);
     $image_data['imag_url'] = $img_url;
-    $ext = end(explode(".", $img_url));
-    $image_data['mime_type'] = $ext;
+    $image_data['mime_type'] = 'jpg';
   }
   return $image_data;
 }
