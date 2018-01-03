@@ -100,7 +100,7 @@
      var _sf_async_config = _sf_async_config || {};
      /** CONFIGURATION START **/
       _sf_async_config.uid = 60355;
-      _sf_async_config.domain = 'intoday.in';
+      _sf_async_config.domain = 'indiatoday.in';
    _sf_async_config.useCanonical = true;
      /** CONFIGURATION END **/
      var _sf_startpt = (new Date()).getTime();

@@ -323,20 +323,21 @@ function itg_get_story_author_name($auth_id){
 /*
  * Returns Story Author Name for story rich snippett
  */
-function itg_get_story_authors_name($auth_ids){
-  $auth_ids = explode(',', $auth_ids);	
-  if(!empty($auth_ids)) {
-	$query = db_select('node', 'n');
+
+function itg_get_story_authors_name($auth_ids) {
+  $auth_ids = explode(',', $auth_ids);
+  if (!empty($auth_ids)) {
+    $query = db_select('node', 'n');
     $query->fields('n', array('title'));
     $query->condition('n.nid', $auth_ids, 'IN');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $auth_names = '';
-    if(count($result) > 0){
-		foreach($result as $value){
-			$auth_names[] = $value['title'];
-		}
-		return implode(',', $auth_names);
-	}
+    if (count($result) > 0) {
+      foreach ($result as $value) {
+        $auth_names[] = $value['title'];
+      }
+      return implode(',', $auth_names);
+    }
     return $auth_names;
   }
 }
@@ -344,8 +345,9 @@ function itg_get_story_authors_name($auth_ids){
 /*
  * Returns Edited by
  */
-function itg_get_story_edited_authors_name($uid){
-  if(!empty($uid)) {
+
+function itg_get_story_edited_authors_name($uid) {
+  if (!empty($uid)) {
     $author_name = db_query("SELECT name from {users} WHERE uid = :uid ", array(":uid" => $uid))->fetchField();
     return $author_name;
   }
