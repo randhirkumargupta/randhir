@@ -2316,33 +2316,7 @@ function itg_app_api_resource() {
             ),
         ),
         /* Change request v1 */
-        // topstories custom resource declaration.....
-        'daily_capsule' => array(
-            'operations' => array(
-                'retrieve' => array(
-                    'help' => 'Retrieves daily_capsule schemes info.',
-                    'file' => array(
-                        'type' => 'inc',
-                        'module' => 'itg_app_api',
-                        'name' => 'itg_app_api.services',
-                    ),
-                    'callback' => 'itg_rapid_api_daily_capsule',
-                    'access callback' => 'user_access',
-                    'access arguments' => array('access content'),
-                    'access arguments append' => FALSE,
-                    'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
-                    ),
-                ),
-            ),
-        ),
+       
     );
 
     return $api;
@@ -6086,7 +6060,7 @@ function itg_rapid_api_daily_capsule($token) {
     $redis_key = "itg_rapid_api_daily_capsule";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value11'] != "") {
+    if ($result_get['key_value'] != "") {
         $jsondata = $result_get['key_value'];
     } else {
         // call function from return data..
