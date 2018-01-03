@@ -178,7 +178,13 @@ $uri = base64_encode($actual_link);
                           $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
                           $video_kicker = get_video_kicker_by_nid($nid);
                         }
-
+                        
+                        if(isset($video_node->field_story_expert_description[LANGUAGE_NONE])) {
+							$description = $video_node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
+				        } else {
+							$description = $video_kicker[0]->field_video_kicker_value;
+						}
+							  			
                         $hide_player = "";
                         $description_slider = "";
                         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images "><ul >';
@@ -216,7 +222,7 @@ $uri = base64_encode($actual_link);
                           </div>
 
                           <?php
-                          $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_kicker[0]->field_video_kicker_value) . '</p></li>';
+                          $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($description) . '</p></li>';
                         }
                         $description_slider.='</ul></div>';
                         $newimageds.='</ul></div></div></div>';
