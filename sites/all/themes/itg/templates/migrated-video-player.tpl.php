@@ -11,13 +11,15 @@ global $base_url;
 <?php
 $nid = 989186;
 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-print_r($videoids);
+//print_r($videoids);
 foreach ($videoids as $keys => $video_value) {
     $url = $video_value->field_migrated_video_url_value;
             
 }
 echo $url."-andy";
 $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+print_r($data_video);
+
 
 ?>
 <script>
