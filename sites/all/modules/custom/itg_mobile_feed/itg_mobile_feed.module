@@ -11,7 +11,6 @@ module_load_include('inc', 'itg_mobile_feed', 'inc/photoDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/storyDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/videoDetailPageFeed');
 module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
-
 /**
  * Implements hook_menu().
  */
@@ -676,11 +675,9 @@ function getNodeFeedTag($tid, $type, $count) {
   $query->fields('mi_file', array('uri'));
   $query->fields('si_file', array('uri'));
   $query->fields('esi_file', array('uri'));
-
   $query->fields('mi', array('field_story_medium_image_fid'));
   $query->fields('si', array('field_story_small_image_fid'));
   $query->fields('rc', array('field_common_related_content_value'));
-
   $query->fields('kt', array('field_story_kicker_text_value'));
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
@@ -698,10 +695,8 @@ function getNodeFeedTag($tid, $type, $count) {
     // file url
     $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
     $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-
     //related content
     $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
-
     // create date formating
     $create_date = date("Y-m-d H:i:s", $created);
     $create_datetime = date(DATE_ATOM, $created);
@@ -742,7 +737,6 @@ function getImgCaption($fid) {
   $query->condition('fic.entity_id', $fid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $caption = $result['0']['field_image_caption_value'];
-
   return $caption;
 }
 
@@ -762,7 +756,6 @@ function getImgByline($fid) {
   $query->condition('n.type', 'reporter');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $byline = $result['0']['title'];
-
   return $byline;
 }
 
@@ -1256,6 +1249,7 @@ function itg_mobile_feed_cronapi($op, $job = NULL) {
 function itg_mobile_feed_xml_feed_url_cron() {
   global $base_url;
   $xml_feed_url = array();
+  // below code for time commented 
   /* $xml_feed_url[] = "home-page-feed";
     $xml_feed_url[] = "program-section-page-feed";
     $xml_feed_url[] = "program-category-page-feed/1206960";
@@ -1308,8 +1302,6 @@ function itg_mobile_feed_xml_feed_url_cron() {
     $xml_feed_url[] = "story-detail-page-feed/664";
     $xml_feed_url[] = "video-detail-page-feed/18815";
     $xml_feed_url[] = "photo-detail-page-feed/626";*/
-
-
   // Education today
   $xml_feed_url[] = "root-category-content-page-feed/1206666";
 
