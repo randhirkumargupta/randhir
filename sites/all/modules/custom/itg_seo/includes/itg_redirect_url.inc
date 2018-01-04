@@ -102,7 +102,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   global $base_url;
   $old_content_id = '';
   $arg = arg();
-
+  
+  if ($_SERVER['HTTP_HOST'] == 'staging-it.indiatodayonline.in') {
+    $old_url = substr($_SERVER['REDIRECT_URL'], 1);    
+    $new_url = redirect_load_by_source($old_url);  
+    $url_re = 'https://uat-it.indiatodayonline.in/'.$new_url;
+    drupal_goto($url_re);    
+    exit;    
+  }
   $type = 'story'; // use photogallery & videogallery in condition if you have
   $rss_url = '';
   $query_alias = '';
