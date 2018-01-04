@@ -1086,7 +1086,8 @@ function itg_msi_check_magazine_widget($issue_date) {
  * @return string
  */
 function itg_msi_get_current_issue() {
-  $current_issue = itg_msi_get_current_time_issue();
+  //$current_issue = itg_msi_get_current_time_issue();
+  $current_issue = itg_msi_issue_attribute_date();
   if (!empty($current_issue)) {
     $output = $current_issue;
   }
