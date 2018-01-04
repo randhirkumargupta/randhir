@@ -103,16 +103,20 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   $old_content_id = '';
   $arg = arg();
   
-  if ($_SERVER['HTTP_HOST'] == 'staging-it.indiatodayonline.in') {
-    $old_url = substr($_SERVER['REDIRECT_URL'], 1);
-	  //pr($_SERVER);
-     //pr($old_url);	  
-    $new_url = redirect_load_by_source($old_url); 
-	  //pr($new_url);
-    $url_re = 'https://uat-it.indiatodayonline.in/'.$new_url->redirect;
+  if ($_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
+    $old_url = substr($_SERVER['REDIRECT_URL'], 1);	  
+    $new_url = redirect_load_by_source($old_url);
+    
+    if (!empty($new_url)) {	  
+      $url_re = 'https://www.indiatoday.in/'.$new_url->redirect;     
+    } else {
+        $url_re = 'https://www.indiatoday.in'.$_SERVER['REDIRECT_URL'];       
+    }
+     
     drupal_goto($url_re);    
-    exit;    
+    exit;
   }
+  
   $type = 'story'; // use photogallery & videogallery in condition if you have
   $rss_url = '';
   $query_alias = '';

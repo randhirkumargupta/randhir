@@ -458,6 +458,12 @@ function itg_widgets_custom_variables() {
     '#attributes' => array('placeholder' => t('Enter Movies Review Taxonomy ID')),
     '#default_value' => variable_get('movies_review_tid', 1207047),
   );
+	
+  $form['itg_programmes_order_by'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Programmes category ids for order'),
+    '#default_value' => variable_get('itg_programmes_order_by'),
+  );
 
   return system_settings_form($form);
 }

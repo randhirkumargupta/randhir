@@ -791,7 +791,7 @@ function getBodyDataForAndroid($str, $node = NULL) {
   $str = preg_replace('/<div class=\"body_caption\">.*<\/div>/', '', $str);
   $str = str_replace('src="', 'width="100%" src="', $str);
   $str = str_replace("src='", "width='100%' src='", $str);
-  //$mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
+  $str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
   //add listicle content data
   if (strpos($str, '[ITG:LISTICLES]')) {
     $str = listicle_story_body($str, $node);

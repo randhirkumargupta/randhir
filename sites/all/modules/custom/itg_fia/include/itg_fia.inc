@@ -11,7 +11,7 @@ function itg_fia_data() {
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
   $query->orderBy('n.created', 'DESC');
-  $query->range(0, 10);
+  $query->range(0, 100);
   $query = $query->execute()->fetchCol();
   itg_fia_xml_node_feed($query);
 }
@@ -26,17 +26,23 @@ function itg_fia_xml_node_feed($query) {
   $fia_ga = isset($fia_ga_data) ? $fia_ga_data : " ";
   $nodes = node_load_multiple($query);
   $items = '';
+  $last_build = FALSE;
+  $last_build_date = '';
   foreach ($nodes as $node) {
     if ($node->workbench_moderation['current']->state == 'published') {
       $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
-      $pubdate = date('Y-m-d h:i:s\+05:30', $node->workbench_moderation['current']->timestamp);
+      $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->workbench_moderation['current']->timestamp);
     } else {
       $op_pub = date('F j, h:i a', $node->created);
-      $pubdate = date('Y-m-d h:i:s\+05:30', $node->created);
+      $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->created);
     }
-    $guid = $node->nid . " at " . $base_url;
+    if (!$last_build) {
+      $last_build_date = $pubdate;
+      $last_build = TRUE;
+    }
+    $guid = $node->nid;
     $op_modified = date('F j, h:i a', $node->changed);
-    $modified = date('Y-m-d h:i:s\+05:30', $node->changed);
+    $modified = date('Y-m-d\TH:i:s\+05:30', $node->changed);
     $auth_name = get_author_name($node->nid);
     $desc = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
@@ -44,14 +50,20 @@ function itg_fia_xml_node_feed($query) {
     $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
     $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
     $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
-    $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
-    
-    if (empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
-      $fb_instant_image = $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image370x208.jpg";
-    } else {
+    if (!empty($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri'])) {
+      $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
+    }
+
+    if (!empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
       $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
     }
-    
+    else if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+      $fb_instant_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    }
+    else {
+      $fb_instant_image = '';
+    }
+
     $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
     if (isset($node->field_map_embed_code[LANGUAGE_NONE][0]['value']) && !empty($node->field_map_embed_code[LANGUAGE_NONE][0]['value'])) {
       $map_data = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
@@ -109,6 +121,7 @@ function itg_fia_xml_node_feed($query) {
     
     // facebook instant article body placement
     $node_body = $node->body[LANGUAGE_NONE][0]['value'];
+    $node_body = str_replace("'", '&#39;', $node_body);
     $numLine = explode("<p>", $node_body);
 
     unset($numLine[0]);
@@ -254,12 +267,28 @@ function itg_fia_xml_node_feed($query) {
     $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);    
     $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
     $node_body = str_replace('<p><figure', '<figure', $node_body);
+    $node_body = str_replace('</figure></p>', '</figure>', $node_body);
     $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body); 
-    $node_body = preg_replace('/<p[^>]*><\\/p[^>]*>/', '', $node_body);    
-    $node_body = itg_fia_split_by_words($node_body, 200);
+    $node_body = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $node_body);
+    $node_body = str_replace('<p>&nbsp;</p>', '', $node_body);
+    $node_body = str_replace('</p></p>', '</p>', $node_body);
+    $node_body = str_replace('<p></p>', '', $node_body);
+    $node_body = str_replace('<p> </p>', '', $node_body);
+    $node_body = str_replace(array('<li></li>', '<li> </li>', '<li>   </li>'), '', $node_body);
+    $node_body = str_replace('<blockquote class="twitter-tweet" lang="en"><blockquote class="twitter-tweet" lang="en">', '<blockquote class="twitter-tweet" lang="en">', $node_body);
+    $node_body = str_replace('</blockquote></blockquote>', '</blockquote>', $node_body);
+    $node_body = str_replace('</blockquote><script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '</blockquote><script charset="utf-8" src="//platform.twitter.com/widgets.js"></script>', $node_body);
+	  $node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
+	  $node_body = str_replace('<script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js></script></iframe></figure>', $node_body);
+	  $node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);    
+    $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+    $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
     $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+    $node_body_content = str_replace('<br />', '', $node_body_content);
+    $desc = str_replace('<br />', '', $desc);    
+    $desc = str_replace("'", '&#39;', $desc);
     $items .= itg_fia_xml_format_rss_item('story-'.$node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
 
@@ -269,24 +298,27 @@ function itg_fia_xml_node_feed($query) {
       'link' => $base_url . '/' . current_path(),
   );
 
-  $output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>\n";
+  /*$output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>\n";
   $output .= "<rss version='2.0' xml:base='" . $xml_base . "' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:atom='http://www.w3.org/2005/Atom'>\n";
   $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items);
-  drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');
+  drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');*/
+  $output = "<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" version=\"2.0\">\n";
+  $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items, $last_build_date);
   print $output;
 }
 
 /**
  * Creates the xml channel.
  */
-function itg_fia_xml_format_rss_channel($title, $link, $items) {
+function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date) {
 
   $output = "  <channel>\n";
   $output .= "    <title>" . $title . "</title>\n";
-  $output .= "    <link>" . check_url($link) . "</link>\n";
-  $output .= "    <description>" . t("Facebook Instant Articles feed") . "</description>\n";
+  $output .= "    <link>" . FRONT_URL . "</link>\n";
+  $output .= "    <description>" . t("India Today News - Check out the latest breaking News from India and around the world. The latest news headlines, world, politics, business, sport, entertainment and technology news from IndiaToday.in") . "</description>\n";
   $output .= "    <language>en</language>\n";
-  $output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />\n";
+  $output .= "    <lastBuildDate>" . $last_build_date . "</lastBuildDate>\n";
+  //$output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />\n";
   $output .= $items;
   $output .= "  </channel>\n";
   $output .= "</rss>\n";
@@ -298,6 +330,7 @@ function itg_fia_xml_format_rss_channel($title, $link, $items) {
  * Creates the xml item.
  */
 function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
+  $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
   $output = "    <item>\n";
   $output .= "      <title>" . $title . "</title>\n";
   $output .= "      <link>" . check_url($link) . "</link>\n";
@@ -326,12 +359,11 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "    <header>\n";
   $output .= "    <figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
   // <!-- The header image shown inside your article --> 
-  $output .= "    <figure>";
-  $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";
-  $output .= "     <figcaption class='op-vertical-below'>";
-  $output .= "      <h1>" . "CAPTION GOES HERE" . "</h1>";
-  $output .= "     </figcaption>";
-  $output .= "    </figure>";
+  if((isset($fb_instant_image)) && (!empty($fb_instant_image))){
+    $output .= "    <figure>";  
+    $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";
+    $output .= "    </figure>";
+  }
   $output .= "    <h1>" . $title . "</h1>";
   $output .= "    <h2>" . $kicker . "</h2>";
   // <!-- A kicker for your article -->
