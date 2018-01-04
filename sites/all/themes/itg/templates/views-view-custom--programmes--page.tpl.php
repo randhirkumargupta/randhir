@@ -15,7 +15,7 @@ global $base_url;
           <?php if (!empty($row['field_sponser_logo'])) : ?>
             <div class="pic">
                 <?php if ($recent_video_under_cat) : ?>
-                  <?php print l($row['field_sponser_logo'] , 'node/' . $recent_video_under_cat , array('html' => TRUE)); ?>
+                  <?php print l($row['field_sponser_logo'] , 'taxonomy/term/' . $row['tid'] , array('html' => TRUE)); ?>
                 <?php else : ?>
                   <?php echo $row['field_sponser_logo']; ?>
                 <?php endif; ?>
