@@ -275,6 +275,8 @@ function itg_fia_xml_node_feed($query) {
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     $node_body_content = str_replace('<br />', '', $node_body_content);
     $desc = str_replace('<br />', '', $desc);
+    $node_body_content = str_replace("'", '&#39', $node_body_content);
+    $desc = str_replace("'", '&#39', $desc);
     $items .= itg_fia_xml_format_rss_item('story-'.$node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
 
