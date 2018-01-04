@@ -12,9 +12,11 @@ global $base_url;
 <?php
 $width = 622;
 $height = 446;
+echo $data."hi andy";
 $data_video = itg_videogallery_get_video_xml_data_by_fid($data);
 $video_all_data = json_decode($data_video[0]->video_xml_data, TRUE);
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
+print_r($player_content);
 
 ?>
 <script>
