@@ -26,7 +26,7 @@ global $base_url;
                 $img = "<img width='88' height='66'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg')."' alt='' title='' />";
                 ?>
                 <?php if ($recent_video_under_cat) : ?>
-                  <?php print l($img , 'node/' . $recent_video_under_cat , array('html' => TRUE)); ?>
+                  <?php print l($img , 'taxonomy/term/' . $row['tid'] , array('html' => TRUE)); ?>
                 <?php else : ?>
                   <?php echo $img; ?>
                 <?php endif; ?>
@@ -36,7 +36,7 @@ global $base_url;
               <?php if (isset($row['field_cm_display_title'])) : ?>
                 <div class="programe-title">
                     <?php if ($recent_video_under_cat) : ?>
-                      <?php print html_entity_decode(l($row['field_cm_display_title'] , 'node/' . $recent_video_under_cat , array('html' => TRUE))); ?>
+                      <?php print html_entity_decode(l($row['field_cm_display_title'] , 'taxonomy/term/' . $row['tid'] , array('html' => TRUE))); ?>
                     <?php else : ?>
                       <?php echo html_entity_decode($row['field_cm_display_title']); ?>
                     <?php endif; ?>
