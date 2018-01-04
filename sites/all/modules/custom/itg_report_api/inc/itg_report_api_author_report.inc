@@ -227,6 +227,7 @@ function author_report($start_date) {
     $author_loop_cont++;
   }
   //static author data
+  /*
   $auhtor_data[0]['author_id'] = "1568";
   $auhtor_data[0]['author_email'] = "anand.patel@aajtak.com";
   $auhtor_data[0]['author_name'] = "Anand Patel";
@@ -242,6 +243,7 @@ function author_report($start_date) {
   $auhtor_data[0]['contents']['site_id'] = "1";
   $auhtor_data[0]['contents']['content_url'] = "";
   $auhtor_data[0]['contents']['page_title'] = "Sharad Yadav shoots letter to";
+  */
   //$auhtor_data[0]['contents']['author_id'] = "1";
 
 
