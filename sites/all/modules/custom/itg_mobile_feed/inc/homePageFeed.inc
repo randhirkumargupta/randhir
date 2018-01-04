@@ -184,7 +184,7 @@ function topStoriesWidgetData() {
 
   $output = "";
   $widget_name = "top_stories_widget";
-  $range_max = 7;
+  $range_max = 10 - $home_list_count;
   $range_min = 0;
   $order_by = 'ASC';
 
