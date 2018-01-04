@@ -104,8 +104,11 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   $arg = arg();
   
   if ($_SERVER['HTTP_HOST'] == 'staging-it.indiatodayonline.in') {
-    $old_url = substr($_SERVER['REDIRECT_URL'], 1);    
-    $new_url = redirect_load_by_source($old_url);  
+    $old_url = substr($_SERVER['REDIRECT_URL'], 1);
+	  pr($_SERVER);
+     pr($old_url);	  
+    $new_url = redirect_load_by_source($old_url); 
+	  pr($new_url);
     $url_re = 'https://uat-it.indiatodayonline.in/'.$new_url;
     drupal_goto($url_re);    
     exit;    
