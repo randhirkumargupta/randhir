@@ -568,6 +568,7 @@ body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active
 .front .watch-right-now-video ul li{padding:10px 0px 10px 0px;}
 @media screen and (max-width: 768px){
 .story-section .story-right .description iframe.story_video{height: 415px;}
+.breakingnew-home .new-detail .marquee-container .marquee-child a * {line-height:25px;}
 }
 @media screen and (max-width: 767px){
 .story-section .story-right .description iframe.story_video{ height: 195px;}
@@ -609,4 +610,5 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
     position: relative!important;
     margin-top: 5px;
 }
+.story-section .story-left .byline .profile-detail ul.date-update li:nth-child(1){display:none}
  
