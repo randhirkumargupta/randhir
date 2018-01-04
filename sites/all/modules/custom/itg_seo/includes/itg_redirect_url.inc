@@ -110,7 +110,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
     if (!empty($new_url)) {	  
       $url_re = 'https://www.indiatoday.in/'.$new_url->redirect;     
     } else {
-        $url_re = 'https://www.indiatoday.in'.$_SERVER['REDIRECT_URL'];       
+        $url_re = 'https://www.indiatoday.in'.$_SERVER['REQUEST_URI'];       
     }
      
     drupal_goto($url_re);    
