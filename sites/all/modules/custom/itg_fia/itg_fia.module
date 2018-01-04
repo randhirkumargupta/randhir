@@ -105,7 +105,7 @@ function itg_fia_split_by_words($fullBodaydata, $content_id, $adCode) {
     $FinalBodayAds = '';
     $BodyWithAds = '';
     $c = 0;
-    $wordcount = 200;
+    $wordcount = 230;
     $NewString = '';
     $newIssue = '';
     $fullBodaydata = str_replace('<', ' <', $fullBodaydata);
