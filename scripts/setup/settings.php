@@ -720,6 +720,6 @@ if (file_exists($local_settings)) {
 $conf['image_suppress_itok_output'] = TRUE;
 $conf['image_allow_insecure_derivatives'] = TRUE;
 $conf['block_cache_bypass_node_grants'] = TRUE;
-$base_url = 'https://www.indiatoday.in';
+$base_url = 'https://'.$_SERVER['SERVER_NAME'];
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;
