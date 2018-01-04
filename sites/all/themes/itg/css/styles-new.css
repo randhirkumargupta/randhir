@@ -2749,13 +2749,13 @@ body.has-cart-popup {
     transform: scale(2);
     opacity: 0; } }
 /* CSS For Block quotes */
-blockquote {
+.quotes blockquote {
   color: #000;
   font: 600 20px/28px "RobotoSlab-Regular";
   position: relative;
   text-align: justify;
   text-indent: 40px; }
-  blockquote:before {
+  .quotes blockquote:before {
     content: "\201C";
     display: inline-block;
     font: bold 60px/28px Georgia, serif;
@@ -2764,7 +2764,7 @@ blockquote {
     left: 0;
     top: 12px;
     text-indent: 0; }
-  blockquote:after {
+  .quotes blockquote:after {
     content: "\201D";
     display: inline-block;
     font: bold 60px/0px Georgia, serif;
