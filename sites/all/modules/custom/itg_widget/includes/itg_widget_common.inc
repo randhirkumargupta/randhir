@@ -3007,6 +3007,7 @@ function itg_widget_node_update($node) {
 
         if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) &&!empty($node->op)) {
             __itg_widget_helper_data_insert($node->nid);
+            if($node->original->status == 0 && $node->status == 1) {
             watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
@@ -3023,6 +3024,7 @@ function itg_widget_node_update($node) {
             foreach ($cat_id as $category) {
                 manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
                 manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
+            }    
             }
         }
     }
