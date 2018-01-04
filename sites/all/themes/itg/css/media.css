@@ -2026,14 +2026,26 @@
         left: 5px; }
   .magazin-lhs-top .magazin-bottom ul {
     overflow: auto;
-    white-space: nowrap; }
+    white-space: nowrap;
+    margin-left: 0;
+    padding-left: 20px; }
     .magazin-lhs-top .magazin-bottom ul li {
-      width: 145px;
+      width: auto;
       float: none;
-      display: inline-block;
+      display: block;
       vertical-align: top;
       padding: 0 5px;
-      margin-top: 20px; }
+      margin-top: 0px;
+      position: relative; }
+      .magazin-lhs-top .magazin-bottom ul li:before {
+        position: absolute;
+        top: 8px;
+        left: -10px;
+        content: '';
+        border-radius: 100%;
+        background: #a00606;
+        height: 5px;
+        width: 5px; }
       .magazin-lhs-top .magazin-bottom ul li h3 {
         margin-top: 10px;
         white-space: pre-wrap;
