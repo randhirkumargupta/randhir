@@ -36,10 +36,10 @@ function itg_fia_xml_node_feed($query) {
       $op_pub = date('F j, h:i a', $node->created);
       $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->created);
     }
-    if(!$last_build){
-	  $last_build_date = $pubdate;
-	  $last_build = TRUE;
-	}
+    if (!$last_build) {
+      $last_build_date = $pubdate;
+      $last_build = TRUE;
+    }
     $guid = $node->nid;
     $op_modified = date('F j, h:i a', $node->changed);
     $modified = date('Y-m-d\TH:i:s\+05:30', $node->changed);
@@ -50,20 +50,20 @@ function itg_fia_xml_node_feed($query) {
     $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
     $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
     $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
-    if(!empty($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri'])){
-	  $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
-	}   
-    
+    if (!empty($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri'])) {
+      $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
+    }
+
     if (!empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
       $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
-    } 
-    else if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+    }
+    else if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
       $fb_instant_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     }
-    else{
-		$fb_instant_image = '';
-	}
-    
+    else {
+      $fb_instant_image = '';
+    }
+
     $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
     if (isset($node->field_map_embed_code[LANGUAGE_NONE][0]['value']) && !empty($node->field_map_embed_code[LANGUAGE_NONE][0]['value'])) {
       $map_data = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
@@ -272,15 +272,15 @@ function itg_fia_xml_node_feed($query) {
     $node_body = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $node_body);
     $node_body = str_replace('<p>&nbsp;</p>', '', $node_body);
     $node_body = str_replace('</p></p>', '</p>', $node_body);
-	$node_body = str_replace('<p></p>', '', $node_body);
-	$node_body = str_replace('<p> </p>', '', $node_body);
-	$text_arr = str_replace(array('<li></li>','<li> </li>','<li>   </li>'), '', $text_arr);
+    $node_body = str_replace('<p></p>', '', $node_body);
+    $node_body = str_replace('<p> </p>', '', $node_body);
+    $node_body = str_replace(array('<li></li>', '<li> </li>', '<li>   </li>'), '', $node_body);
     $node_body = str_replace('<blockquote class="twitter-tweet" lang="en"><blockquote class="twitter-tweet" lang="en">', '<blockquote class="twitter-tweet" lang="en">', $node_body);
-	$node_body = str_replace('</blockquote></blockquote>', '</blockquote>', $node_body);
-	$node_body = str_replace('</blockquote><script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '</blockquote><script charset="utf-8" src="//platform.twitter.com/widgets.js"></script>', $node_body);
-	$node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
-	$node_body = str_replace('<script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js></script></iframe></figure>', $node_body);
-	$node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);    
+    $node_body = str_replace('</blockquote></blockquote>', '</blockquote>', $node_body);
+    $node_body = str_replace('</blockquote><script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '</blockquote><script charset="utf-8" src="//platform.twitter.com/widgets.js"></script>', $node_body);
+	  $node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
+	  $node_body = str_replace('<script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js></script></iframe></figure>', $node_body);
+	  $node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);    
     $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
     $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
     $node_body_content = '<p>' . $node_body;
