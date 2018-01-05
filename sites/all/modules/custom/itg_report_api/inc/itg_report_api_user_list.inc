@@ -21,7 +21,7 @@ function getUserList_Report($user_type, $user_sub_type) {
 
   $query = db_select('node', 'n');
   $query->leftJoin('users', 'u', 'u.uid=n.uid');
-  $query->leftJoin('users_roles', 'ur', 'ur.uid=n.uid');
+  $query->leftJoin('users_roles', 'ur', 'ur.uid=u.uid');
   $query->fields('u', array('uid', 'name', 'mail', 'status'));
   
   //filter of content type
