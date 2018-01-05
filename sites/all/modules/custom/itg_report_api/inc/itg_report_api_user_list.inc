@@ -27,12 +27,9 @@ function getUserList_Report($user_type, $user_sub_type) {
   //filter of content type
   $query->condition('ur.rid', 25, '!=');
   if ($user_type != "na" || $user_type != "") {
-    if($user_type == "user"){
-        
-    }
-    elseif($user_type == "author"){
+    if($user_type == "author"){
         $query->condition('ur.rid', 4, '=');
-    }
+    }    
   }
 
 
