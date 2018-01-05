@@ -11,7 +11,7 @@ function itg_fia_data() {
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
   $query->orderBy('n.created', 'DESC');
-  $query->range(0, 100);
+  $query->range(0, 10);
   $query = $query->execute()->fetchCol();
   itg_fia_xml_node_feed($query);
 }
@@ -134,21 +134,11 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($audio_url)) {
       if (in_array($audio_pos, $bk)) {
         $body_vals[$audio_pos] = $body_vals[$audio_pos] .
-          '<figure>
-             <img src="' . $img_path . '" alt="" title="">
-             <audio title="audio title" autoplay="autoplay" muted="muted">
-               <source src="' . $audio_url . '">
-            </audio>
-           </figure>';
+          '<figure><img src="' . $img_path . '" alt="" title=""><audio title="audio title" autoplay="autoplay" muted="muted"><source src="' . $audio_url . '"></audio></figure>';
       } else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] .
-          '<figure>
-             <img src="' . $img_path . '" alt="" title="">
-             <audio title="audio title" autoplay="autoplay" muted="muted">
-              <source src="' . $audio_url . '">
-            </audio>
-          </figure>';
+          '<figure><img src="' . $img_path . '" alt="" title=""><audio title="audio title" autoplay="autoplay" muted="muted"><source src="' . $audio_url . '"></audio></figure>';
       }
     }
 
@@ -156,15 +146,11 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($img_path)) {
       if (in_array($img_position, $bk)) {
         $body_vals[$img_position] = $body_vals[$img_position] .
-          '<figure>
-            <img src="' . $img_path . '" alt="" title="" />
-          </figure>';
+          '<figure><img src="' . $img_path . '" alt="" title="" /></figure>';
       } else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] .
-          '<figure>
-            <img src="' . $img_path . '" alt="" title="" />
-          </figure>';
+          '<figure><img src="' . $img_path . '" alt="" title="" /></figure>';
       }
     }
 
@@ -172,47 +158,11 @@ function itg_fia_xml_node_feed($query) {
     if (!empty($get_place_name)) {
       if (in_array($map_pos, $bk)) {
         $body_vals[$map_pos] = $body_vals[$map_pos] .
-          '<figure class="op-map">
-            <script type="application/json" class="op-geotag">
-              {
-                "type": "Feature",
-                "geometry":
-                  {
-                    "type": "Point",
-                    "coordinates": [' . $lat . ', ' . $lng . ']
-                  },
-                "properties":
-                  {
-                    "title": "' . $get_place_name . '",
-                    "radius": 10000,
-                    "pivot": true,   
-                    "style": "satellite",
-                  }
-               }
-            </script>
-          </figure>';
+          '<figure class="op-map"><script type="application/json" class="op-geotag">{"type": "Feature", "geometry":{"type": "Point", "coordinates": [' . $lat . ', ' . $lng . ']},"properties":{"title": "' . $get_place_name . '", "radius": 10000, "pivot": true, "style": "satellite",}}</script></figure>';
       } else {
         $last_postion = end($bk);
         $body_vals[$last_postion] = $body_vals[$last_postion] .
-          '<figure class="op-map">
-            <script type="application/json" class="op-geotag">
-              {
-                "type": "Feature",
-                "geometry":
-                  {
-                    "type": "Point",
-                    "coordinates": [' . $lat . ', ' . $lng . ']
-                  },
-                "properties":
-                  {
-                    "title": "' . $get_place_name . '",
-                    "radius": 10000,
-                    "pivot": true,   
-                    "style": "satellite",
-                  }
-               }
-            </script>
-          </figure>';
+          '<figure class="op-map"><script type="application/json" class="op-geotag">{"type": "Feature", "geometry":{"type": "Point", "coordinates": [' . $lat . ', ' . $lng . ']},"properties":{ "title": "' . $get_place_name . '", "radius": 10000, "pivot": true, "style": "satellite",}}</script></figure>';
       }
     }
     
@@ -283,6 +233,8 @@ function itg_fia_xml_node_feed($query) {
 	  $node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);    
     $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
     $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
+    $node_body = str_replace('\n', '', $node_body);
+    $node_body = trim($node_body);
     $node_body_content = '<p>' . $node_body;
     $node->link = url("node/$node->nid", ['absolute' => TRUE]);
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
@@ -298,12 +250,12 @@ function itg_fia_xml_node_feed($query) {
       'link' => $base_url . '/' . current_path(),
   );
 
-  /*$output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>\n";
-  $output .= "<rss version='2.0' xml:base='" . $xml_base . "' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:atom='http://www.w3.org/2005/Atom'>\n";
+  /*$output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>";
+  $output .= "<rss version='2.0' xml:base='" . $xml_base . "' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:atom='http://www.w3.org/2005/Atom'>";
   $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items);
   drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');*/
-  $output = "<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" version=\"2.0\">\n";
-  $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items, $last_build_date);
+  $output = "<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" version=\"2.0\">";
+  $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items, $last_build_date);  
   print $output;
 }
 
@@ -312,16 +264,16 @@ function itg_fia_xml_node_feed($query) {
  */
 function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date) {
 
-  $output = "  <channel>\n";
-  $output .= "    <title>" . $title . "</title>\n";
-  $output .= "    <link>" . FRONT_URL . "</link>\n";
-  $output .= "    <description>" . t("India Today News - Check out the latest breaking News from India and around the world. The latest news headlines, world, politics, business, sport, entertainment and technology news from IndiaToday.in") . "</description>\n";
-  $output .= "    <language>en</language>\n";
-  $output .= "    <lastBuildDate>" . $last_build_date . "</lastBuildDate>\n";
-  //$output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />\n";
+  $output = "  <channel>";
+  $output .= "    <title>" . $title . "</title>";
+  $output .= "    <link>" . FRONT_URL . "</link>";
+  $output .= "    <description>" . t("India Today News - Check out the latest breaking News from India and around the world. The latest news headlines, world, politics, business, sport, entertainment and technology news from IndiaToday.in") . "</description>";
+  $output .= "    <language>en</language>";
+  $output .= "    <lastBuildDate>" . $last_build_date . "</lastBuildDate>";
+  //$output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />";
   $output .= $items;
-  $output .= "  </channel>\n";
-  $output .= "</rss>\n";
+  $output .= "  </channel>";
+  $output .= "</rss>";
 
   return $output;
 }
@@ -331,32 +283,32 @@ function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date)
  */
 function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
-  $output = "    <item>\n";
-  $output .= "      <title>" . $title . "</title>\n";
-  $output .= "      <link>" . check_url($link) . "</link>\n";
-  $output .= "      <guid>" . $guid . "</guid>\n";
-  $output .= "      <pubDate><![CDATA[" . $pubdate . "]]></pubDate>\n";
-  $output .= "      <author>" . $name . "</author>\n";
-  $output .= "      <description>" . $desc . "</description>\n";
-  $output .= "    <content:encoded>\n";
-  $output .= "    <![CDATA[\n";
-  $output .= "    <!doctype html>\n";
-  $output .= "    <html lang='en' prefix='op: http://media.facebook.com/op#'>\n";
-  $output .= "    <head>\n";
-  $output .= "    <meta charset='utf-8'>\n";
-  $output .= "    <meta property ='fb:op-recirculation-ads' content=placement_id=".'1634971070080984_1853363621575060'.">\n";
-  $output .= "    <meta property='fb:use_automatic_ad_placement' content='enable=true ad_density=default'>\n";
-  $output .= "    <meta property='op:markup_version' content='v1.0'>\n";
+  $output = "    <item>";
+  $output .= "      <title>" . $title . "</title>";
+  $output .= "      <link>" . check_url($link) . "</link>";
+  $output .= "      <guid>" . $guid . "</guid>";
+  $output .= "      <pubDate><![CDATA[" . $pubdate . "]]></pubDate>";
+  $output .= "      <author>" . $name . "</author>";
+  $output .= "      <description>" . $desc . "</description>";
+  $output .= "    <content:encoded>";
+  $output .= "    <![CDATA[";
+  $output .= "    <!doctype html>";
+  $output .= "    <html lang='en' prefix='op: http://media.facebook.com/op#'>";
+  $output .= "    <head>";
+  $output .= "    <meta charset='utf-8'>";
+  $output .= "    <meta property ='fb:op-recirculation-ads' content=placement_id=".'1634971070080984_1853363621575060'.">";
+  $output .= "    <meta property='fb:use_automatic_ad_placement' content='enable=true ad_density=default'>";
+  $output .= "    <meta property='op:markup_version' content='v1.0'>";
   $output .= "    <meta property='fb:use_automatic_ad_placement' content='true'>";
-  $output .= "    <meta property='og:title' content='" . $title . "'>\n";
-  $output .= "    <meta property='og:description' content='" . $desc . "'>\n";
-  $output .= "    <link rel='canonical' href='" . $link . "?sr=fbia'>\n";
+  $output .= "    <meta property='og:title' content='" . $title . "'>";
+  $output .= "    <meta property='og:description' content='" . $desc . "'>";
+  $output .= "    <link rel='canonical' href='" . $link . "?sr=fbia'>";
   //$output .= "    <link rel='stylesheet' title='default' href='#'>";
-  //$output .= "    <meta property='op:markup_version' content='v1.0'>\n";
-  $output .= "    </head>\n\n";
-  $output .= "    <body>\n";
-  $output .= "    <article>\n";
-  $output .= "    <header>\n";
+  //$output .= "    <meta property='op:markup_version' content='v1.0'>";
+  $output .= "    </head>";
+  $output .= "    <body>";
+  $output .= "    <article>";
+  $output .= "    <header>";
   $output .= "    <figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
   // <!-- The header image shown inside your article --> 
   if((isset($fb_instant_image)) && (!empty($fb_instant_image))){
@@ -367,20 +319,20 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "    <h1>" . $title . "</h1>";
   $output .= "    <h2>" . $kicker . "</h2>";
   // <!-- A kicker for your article -->
-  $output .= "      <details><summary>" . $kicker . "</summary></details>\n";
+  $output .= "      <details><summary>" . $kicker . "</summary></details>";
   // <!-- The author of your article -->
-  $output .= "      <address>" . $name . "</address>\n";
-  $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>\n";
-  $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>\n";
-  $output .= "    </header>\n\n";
-  $output .= "    <div property='content:encoded'>" . $node_body_content . "</div>\n"; 
+  $output .= "      <address>" . $name . "</address>";
+  $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
+  $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
+  $output .= "    </header>";
+  $output .= "    <div property='content:encoded'>" . $node_body_content . "</div>"; 
   $output .= "    <figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-7530357-9', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: '2', c2: '8549097',options: { url_append: 'comscorekw=fbia' }});(function() { var s = document.createElement('script'), el = document.getElementsByTagName('script')[0]; s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js'; el.parentNode.insertBefore(s, el); })();</script><noscript><img src='http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia' /></noscript><!-- End comScore Tag --></iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
-  $output .= "    </article>\n\n";
-  $output .= "    </body>\n\n";
-  $output .= "    </html>\n\n";
-  $output .= "    ]]>\n\n";
-  $output .= "    </content:encoded>\n\n";
-  $output .= "    </item>\n\n";
+  $output .= "    </article>";
+  $output .= "    </body>";
+  $output .= "    </html>";
+  $output .= "    ]]>";
+  $output .= "    </content:encoded>";
+  $output .= "    </item>";
   return $output;
 }
 
