@@ -43,7 +43,7 @@ function getUserList_Report($user_type, $user_sub_type) {
         }
     } elseif ($user_type == "author") {
         $query_n = db_select('node', 'n');
-        $query->leftJoin('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
+        $query_n->leftJoin('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
         $query_n->fields('n', array('nid', 'title', 'status'));
         $query_n->fields('re', array('field_reporter_email_id_value'));
         $query_n->condition('n.type', 'reporter', '=');
