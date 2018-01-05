@@ -14,8 +14,9 @@ function author_report_tvtn($start_date) {
   global $base_url;
   $data = array();
   $prev_day = time() - (24 * 60 * 60);
-  $today = date("d-F-Y");
-  $yesterday = date("d-F-Y", $prev_day);
+  $hour = 01;
+  $today = strtotime($hour . ':00:00');
+  $yesterday = strtotime('-1 day', $today);
   $month = date("M-Y", $start_date);
   $year = date("Y", $start_date);
   $site_id = 1;
@@ -103,22 +104,7 @@ function author_report_tvtn($start_date) {
     }
     $author_loop_cont++;
   }
-  //static author data
-  $auhtor_data[0]['author_id'] = "1568";
-  $auhtor_data[0]['author_email'] = "anand.patel@aajtak.com";
-  $auhtor_data[0]['author_name'] = "Anand Patel";
-  $auhtor_data[0]['site_id'] = "1";
-  $auhtor_data[0]['today'] = "1";
-  $auhtor_data[0]['yesterday'] = "1";
-  $auhtor_data[0]['month'] = "1";
-  $auhtor_data[0]['year'] = "1";
-
-  $auhtor_data[0]['contents']['author_id'] = "1568";
-  $auhtor_data[0]['contents']['author_email'] = "anand.patel@aajtak.com";
-  $auhtor_data[0]['contents']['author_name'] = "Anand Patel";
-  $auhtor_data[0]['contents']['site_id'] = "1";
-  $auhtor_data[0]['contents']['content_url'] = "";
-  $auhtor_data[0]['contents']['page_title'] = "Sharad Yadav shoots letter to";
+  
   //$auhtor_data[0]['contents']['author_id'] = "1";
   $data['auhtorwise_data']['auhtor_data'] = $auhtor_data;
 
@@ -135,8 +121,9 @@ function author_report($start_date) {
   global $base_url;
   $data = array();
   $prev_day = time() - (24 * 60 * 60);
-  $today = date("d-F-Y");
-  $yesterday = date("d-F-Y", $prev_day);
+  $hour = 01;
+  $today = strtotime($hour . ':00:00');
+  $yesterday = strtotime('-1 day', $today);
   $month = date("M-Y", $start_date);
   $year = date("Y", $start_date);
   $site_id = 1;

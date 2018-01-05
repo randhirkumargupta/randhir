@@ -20,7 +20,7 @@ function story_video_photo_field_report($start_date, $end_date) {
 
   $section_list_count = nodeCountByDateWise_Report($start_date, $end_date, $section_list);
 
-  $hour = 12;
+  $hour = 01;
   $today = strtotime($hour . ':00:00');
   $yesterday = strtotime('-1 day', $today);
   $dayBeforeYesterday = strtotime('-1 day', $yesterday);
@@ -220,7 +220,7 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
 function countVideo($start_date, $end_date, $tid) {
   //video count between $start_date & $end_date
 
-  $hour = 12;
+  $hour = 01;
   $today = strtotime($hour . ':00:00');
   $yesterday = strtotime('-1 day', $today);
   $dayBeforeYesterday = strtotime('-1 day', $yesterday);
@@ -274,7 +274,7 @@ function countVideo($start_date, $end_date, $tid) {
 function countPhoto($start_date, $end_date, $tid) {
   //video count between $start_date & $end_date
 
-  $hour = 12;
+  $hour = 01;
   $today = strtotime($hour . ':00:00');
   $yesterday = strtotime('-1 day', $today);
   $dayBeforeYesterday = strtotime('-1 day', $yesterday);
@@ -328,7 +328,7 @@ function countPhoto($start_date, $end_date, $tid) {
 function countStory($start_date, $end_date, $tid) {
   //video count between $start_date & $end_date
 
-  $hour = 12;
+  $hour = 01;
   $today = strtotime($hour . ':00:00');
   $yesterday = strtotime('-1 day', $today);
   $dayBeforeYesterday = strtotime('-1 day', $yesterday);
