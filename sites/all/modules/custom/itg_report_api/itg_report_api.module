@@ -1,30 +1,29 @@
 <?php
 
 /**
- * Implements hook_init(). 
+ * Implements hook_init().
  */
-function itg_report_api_init(){
-    module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_story_count_report');
-    module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_user_list');
-    module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_get_story_api');
-    module_load_include('inc', 'itg_report_api', 'inc/story_video_photo_field_report');
-    module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_author_report');
-    module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_auscovery_dashboard_web');
+function itg_report_api_init() {
+  module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_story_count_report');
+  module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_user_list');
+  module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_get_story_api');
+  module_load_include('inc', 'itg_report_api', 'inc/story_video_photo_field_report');
+  module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_author_report');
+  module_load_include('inc', 'itg_report_api', 'inc/itg_report_api_auscovery_dashboard_web');
 }
 
 /**
  * Implements hook_services_resources().
  * Create service resource for APIs to return the necessary json data.
  */
-
 function itg_report_api_services_resources() {
 
   $resources = array();
 
-//Include the necessary inc files.
+  //Include the necessary inc files.
   module_load_include('inc', 'itg_report_api', 'itg_report_api.services');
 
-//Service Apis for contents.
+  //Service Apis for contents.
   $resources += itg_report_api_resource();
 
   return $resources;
@@ -33,11 +32,10 @@ function itg_report_api_services_resources() {
 /**
  * Implements hook_url_inbound_alter().
  */
-
 function itg_report_api_url_inbound_alter(&$result, $path, $path_language) {
-    if(arg(0) == "reportapi" && count(arg()) == 2 ){
-       
-            $result = $path."/it";
-       
-   }
+  if (arg(0) == "reportapi" && count(arg()) == 2) {
+
+    $result = $path . "/it";
+  }
 }
+
