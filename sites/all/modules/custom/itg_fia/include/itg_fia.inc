@@ -11,7 +11,7 @@ function itg_fia_data() {
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
   $query->orderBy('n.created', 'DESC');
-  $query->range(0, 10);
+  $query->range(0, 100);
   $query = $query->execute()->fetchCol();
   itg_fia_xml_node_feed($query);
 }
