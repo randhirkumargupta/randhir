@@ -11,9 +11,15 @@ function itg_fia_data() {
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
   $query->orderBy('n.created', 'DESC');
-  $query->range(0, 100);
+  $query->range(0, 10);
   $query = $query->execute()->fetchCol();
-  itg_fia_xml_node_feed($query);
+  $xml = itg_fia_xml_node_feed($query);
+  $xml_path = 'public://fbinsight/';
+  $file_name = 'indiatoday-latestnews.xml';
+  $file_path = $xml_path . $file_name;
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
 }
 
 /**
@@ -29,237 +35,246 @@ function itg_fia_xml_node_feed($query) {
   $last_build = FALSE;
   $last_build_date = '';
   foreach ($nodes as $node) {
-    if ($node->workbench_moderation['current']->state == 'published') {
-      $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
-      $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->workbench_moderation['current']->timestamp);
-    } else {
-      $op_pub = date('F j, h:i a', $node->created);
-      $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->created);
-    }
-    if (!$last_build) {
-      $last_build_date = $pubdate;
-      $last_build = TRUE;
-    }
-    $guid = $node->nid;
-    $op_modified = date('F j, h:i a', $node->changed);
-    $modified = date('Y-m-d\TH:i:s\+05:30', $node->changed);
-    $auth_name = get_author_name($node->nid);
-    $desc = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-    $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
-    $embed_code_data = $node->field_social_embed_code[LANGUAGE_NONE][0]['value'];
-    $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
-    $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
-    $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
-    if (!empty($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri'])) {
-      $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
-    }
-
-    if (!empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
-      $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
-    }
-    else if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-      $fb_instant_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
-    }
-    else {
-      $fb_instant_image = '';
-    }
-
-    $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
-    if (isset($node->field_map_embed_code[LANGUAGE_NONE][0]['value']) && !empty($node->field_map_embed_code[LANGUAGE_NONE][0]['value'])) {
-      $map_data = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
-      // getting map data from map <iframe>
-      if (strpos($map_data, '<iframe') !== false) {
-        $map_data_iframe = $map_data;
-        $get_map_iframe = explode(" ", $map_data_iframe);
-        $get_map_data = explode("!", $get_map_iframe[1]);
-        $get_map_lat = explode("2d", $get_map_data[5]);
-        $get_map_lng = explode("3d", $get_map_data[6]);
-        $lat = number_format($get_map_lat[1], 6);
-        $lng = number_format($get_map_lng[1], 6);
-        $get_iframe_place = $get_map_data[18];
-        $get_iframe_places = explode('2s', $get_map_data[18]);
-        $get_place_name = str_replace("+", " ", $get_iframe_places[1]);
-      } else {
-        // getting map data from map url
-        $get_map = explode("place", $map_data);
-        $get_map_coordinate = explode("@", $get_map[1]);
-        $get_place = str_replace("/", "", $get_map_coordinate[0]);
-        $get_place_name = str_replace("+", " ", $get_place);
-        $coordinate_map = explode(",", $get_map_coordinate[1]);
-        $lat = $coordinate_map[0];
-        $lng = $coordinate_map[1];
+    if (!is_lock_story()) {
+      if ($node->workbench_moderation['current']->state == 'published') {
+        $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
+        $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->workbench_moderation['current']->timestamp);
       }
-    }
+      else {
+        $op_pub = date('F j, h:i a', $node->created);
+        $pubdate = date('Y-m-d\TH:i:s\+05:30', $node->created);
+      }
+      if (!$last_build) {
+        $last_build_date = $pubdate;
+        $last_build = TRUE;
+      }
+      $guid = $node->nid;
+      $op_modified = date('F j, h:i a', $node->changed);
+      $modified = date('Y-m-d\TH:i:s\+05:30', $node->changed);
+      $auth_name = get_author_name($node->nid);
+      $desc = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+      $embed_code_pos = $node->field_social_embed_code_position[LANGUAGE_NONE][0]['value'];
+      $embed_code_data = $node->field_social_embed_code[LANGUAGE_NONE][0]['value'];
+      $audio_pos = $node->field_facebook_audio_position[LANGUAGE_NONE][0]['value'];
+      $audio_url = $node->field_facebook_instant_audio_url[LANGUAGE_NONE][0]['value'];
+      $img_position = $node->field_animated_image_position[LANGUAGE_NONE][0]['value'];
+      if (!empty($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri'])) {
+        $img_path = file_create_url($node->field_facebook_animated_image[LANGUAGE_NONE][0]['uri']);
+      }
 
-    // getting gallery data
-    $target_nids = NULL;
-    $gall_position = NULL;
-    if (is_array($node->field_facebook_gallery_associate[LANGUAGE_NONE]) && !empty($node->field_facebook_gallery_associate[LANGUAGE_NONE])) {
-      $associate_gallery = $node->field_facebook_gallery_associate[LANGUAGE_NONE];
-      foreach ($associate_gallery as $fc_k => $fc_v) {
-        $fc_ids = $fc_v['value'];
-        $load_fc = field_collection_item_load($fc_ids);
-        $gall_position = $load_fc->field_gallery_position[LANGUAGE_NONE][0]['value'];
-        $target_nids[$gall_position][] = $load_fc->field_associate_gallery_id[LANGUAGE_NONE];
-        $query = db_select('field_data_field_gallery_image' , 'n');
-        $query->leftJoin('field_data_field_api_image', 'fdfi', 'n.field_gallery_image_value = fdfi.entity_id');
-        $query->fields('fdfi', array('field_api_image_fid'));
-        $query->condition('n.entity_id' , $load_fc->field_associate_gallery_id[LANGUAGE_NONE]);
-        $result = $query->execute();
-        $get_fc = $result->fetchAll();
-        $get_script = '';
-        foreach ($get_fc as $get_fck => $get_fcv) {
-          if (!empty($get_fcv->field_api_image_fid)) {
-            $file = file_load($get_fcv->field_api_image_fid);
-            $imgs_path = file_create_url($file->uri);
-            $get_script .= '<figure><img src="' . $imgs_path . '" alt="" title="" /></figure>';
+      if (!empty($node->field_story_big_image[LANGUAGE_NONE][0]['uri'])) {
+        $fb_instant_image = file_create_url($node->field_story_big_image[LANGUAGE_NONE][0]['uri']);
+      }
+      else if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+        $fb_instant_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+      }
+      else {
+        $fb_instant_image = '';
+      }
+
+      $map_pos = $node->field_facebook_map_position[LANGUAGE_NONE][0]['value'];
+      if (isset($node->field_map_embed_code[LANGUAGE_NONE][0]['value']) && !empty($node->field_map_embed_code[LANGUAGE_NONE][0]['value'])) {
+        $map_data = $node->field_map_embed_code[LANGUAGE_NONE][0]['value'];
+        // getting map data from map <iframe>
+        if (strpos($map_data, '<iframe') !== false) {
+          $map_data_iframe = $map_data;
+          $get_map_iframe = explode(" ", $map_data_iframe);
+          $get_map_data = explode("!", $get_map_iframe[1]);
+          $get_map_lat = explode("2d", $get_map_data[5]);
+          $get_map_lng = explode("3d", $get_map_data[6]);
+          $lat = number_format($get_map_lat[1], 6);
+          $lng = number_format($get_map_lng[1], 6);
+          $get_iframe_place = $get_map_data[18];
+          $get_iframe_places = explode('2s', $get_map_data[18]);
+          $get_place_name = str_replace("+", " ", $get_iframe_places[1]);
+        }
+        else {
+          // getting map data from map url
+          $get_map = explode("place", $map_data);
+          $get_map_coordinate = explode("@", $get_map[1]);
+          $get_place = str_replace("/", "", $get_map_coordinate[0]);
+          $get_place_name = str_replace("+", " ", $get_place);
+          $coordinate_map = explode(",", $get_map_coordinate[1]);
+          $lat = $coordinate_map[0];
+          $lng = $coordinate_map[1];
+        }
+      }
+
+      // getting gallery data
+      $target_nids = NULL;
+      $gall_position = NULL;
+      if (is_array($node->field_facebook_gallery_associate[LANGUAGE_NONE]) && !empty($node->field_facebook_gallery_associate[LANGUAGE_NONE])) {
+        $associate_gallery = $node->field_facebook_gallery_associate[LANGUAGE_NONE];
+        foreach ($associate_gallery as $fc_k => $fc_v) {
+          $fc_ids = $fc_v['value'];
+          $load_fc = field_collection_item_load($fc_ids);
+          $gall_position = $load_fc->field_gallery_position[LANGUAGE_NONE][0]['value'];
+          $target_nids[$gall_position][] = $load_fc->field_associate_gallery_id[LANGUAGE_NONE];
+          $query = db_select('field_data_field_gallery_image', 'n');
+          $query->leftJoin('field_data_field_api_image', 'fdfi', 'n.field_gallery_image_value = fdfi.entity_id');
+          $query->fields('fdfi', array('field_api_image_fid'));
+          $query->condition('n.entity_id', $load_fc->field_associate_gallery_id[LANGUAGE_NONE]);
+          $result = $query->execute();
+          $get_fc = $result->fetchAll();
+          $get_script = '';
+          foreach ($get_fc as $get_fck => $get_fcv) {
+            if (!empty($get_fcv->field_api_image_fid)) {
+              $file = file_load($get_fcv->field_api_image_fid);
+              $imgs_path = file_create_url($file->uri);
+              $get_script .= '<figure><img src="' . $imgs_path . '" alt="" title="" /></figure>';
+            }
+          }
+          if (isset($get_script) && !empty($get_script)) {
+            $full_script_slider[$gall_position][] = '<figure class="op-slideshow">' . $get_script . '</figure>';
           }
         }
-        if(isset($get_script) && !empty($get_script)){
-		  $full_script_slider[$gall_position][] = '<figure class="op-slideshow">' . $get_script . '</figure>';
-		}        
       }
-    }
-    
-    // facebook instant article body placement
-    $node_body = $node->body[LANGUAGE_NONE][0]['value'];
-    //$node_body = str_replace("'", '&#39;', $node_body);
-    $numLine = explode("<p>", $node_body);
 
-    unset($numLine[0]);
-    foreach ($numLine as $body_key => $body_val) {
-      $bk[$body_key] = $body_key;
-      $body_vals[$body_key] = $numLine[$body_key];
-    }
+      // facebook instant article body placement
+      $node_body = $node->body[LANGUAGE_NONE][0]['value'];
+      //$node_body = str_replace("'", '&#39;', $node_body);
+      $numLine = explode("<p>", $node_body);
 
-    // facebook instant article audio placement
-    if (!empty($audio_url)) {
-      if (in_array($audio_pos, $bk)) {
-        $body_vals[$audio_pos] = $body_vals[$audio_pos] .
-          '<figure><img src="' . $img_path . '" alt="" title=""><audio title="audio title" autoplay="autoplay" muted="muted"><source src="' . $audio_url . '"></audio></figure>';
-      } else {
-        $last_postion = end($bk);
-        $body_vals[$last_postion] = $body_vals[$last_postion] .
-          '<figure><img src="' . $img_path . '" alt="" title=""><audio title="audio title" autoplay="autoplay" muted="muted"><source src="' . $audio_url . '"></audio></figure>';
+      unset($numLine[0]);
+      foreach ($numLine as $body_key => $body_val) {
+        $bk[$body_key] = $body_key;
+        $body_vals[$body_key] = $numLine[$body_key];
       }
-    }
 
-    // facebook instant article animated image placement
-    if (!empty($img_path)) {
-      if (in_array($img_position, $bk)) {
-        $body_vals[$img_position] = $body_vals[$img_position] .
-          '<figure><img src="' . $img_path . '" alt="" title="" /></figure>';
-      } else {
-        $last_postion = end($bk);
-        $body_vals[$last_postion] = $body_vals[$last_postion] .
-          '<figure><img src="' . $img_path . '" alt="" title="" /></figure>';
+      // facebook instant article audio placement
+      if (!empty($audio_url)) {
+        if (in_array($audio_pos, $bk)) {
+          $body_vals[$audio_pos] = $body_vals[$audio_pos] .
+              '<figure><img src="' . $img_path . '" alt="" title=""><audio title="audio title" autoplay="autoplay" muted="muted"><source src="' . $audio_url . '"></audio></figure>';
+        }
+        else {
+          $last_postion = end($bk);
+          $body_vals[$last_postion] = $body_vals[$last_postion] .
+              '<figure><img src="' . $img_path . '" alt="" title=""><audio title="audio title" autoplay="autoplay" muted="muted"><source src="' . $audio_url . '"></audio></figure>';
+        }
       }
-    }
 
-    // facebook instant article map placement
-    if (!empty($get_place_name)) {
-      if (in_array($map_pos, $bk)) {
-        $body_vals[$map_pos] = $body_vals[$map_pos] .
-          '<figure class="op-map"><script type="application/json" class="op-geotag">{"type": "Feature", "geometry":{"type": "Point", "coordinates": [' . $lat . ', ' . $lng . ']},"properties":{"title": "' . $get_place_name . '", "radius": 10000, "pivot": true, "style": "satellite",}}</script></figure>';
-      } else {
-        $last_postion = end($bk);
-        $body_vals[$last_postion] = $body_vals[$last_postion] .
-          '<figure class="op-map"><script type="application/json" class="op-geotag">{"type": "Feature", "geometry":{"type": "Point", "coordinates": [' . $lat . ', ' . $lng . ']},"properties":{ "title": "' . $get_place_name . '", "radius": 10000, "pivot": true, "style": "satellite",}}</script></figure>';
+      // facebook instant article animated image placement
+      if (!empty($img_path)) {
+        if (in_array($img_position, $bk)) {
+          $body_vals[$img_position] = $body_vals[$img_position] .
+              '<figure><img src="' . $img_path . '" alt="" title="" /></figure>';
+        }
+        else {
+          $last_postion = end($bk);
+          $body_vals[$last_postion] = $body_vals[$last_postion] .
+              '<figure><img src="' . $img_path . '" alt="" title="" /></figure>';
+        }
       }
-    }
-    
-    // Creating Slideshow for facebook instant article data
-    if (!empty($imgs_path)) {
-      $slider_keys = array_keys($full_script_slider);
-      foreach ($slider_keys as $k => $sliderkey) {
-        $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey][0];
-      }
-    }
 
-    // Creating Social Embed Code for facebook instant article data
-    if (!empty($embed_code_data)) {
-      if (in_array($embed_code_pos, $bk)) {
-        $eic = substr_count($embed_code_data, '<iframe');
-        if ($eic > 1) {
-          $newiframe = str_replace(" />", "></iframe>", $embed_code_data);
-          $fie = explode("<iframe", $newiframe);
-          unset($fie[0]);
-          foreach ($fie as $fie_key => $fie_val) {
-            $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . '<figure class="op-interactive"><iframe ' . $fie_val . '</figure>';
+      // facebook instant article map placement
+      if (!empty($get_place_name)) {
+        if (in_array($map_pos, $bk)) {
+          $body_vals[$map_pos] = $body_vals[$map_pos] .
+              '<figure class="op-map"><script type="application/json" class="op-geotag">{"type": "Feature", "geometry":{"type": "Point", "coordinates": [' . $lat . ', ' . $lng . ']},"properties":{"title": "' . $get_place_name . '", "radius": 10000, "pivot": true, "style": "satellite",}}</script></figure>';
+        }
+        else {
+          $last_postion = end($bk);
+          $body_vals[$last_postion] = $body_vals[$last_postion] .
+              '<figure class="op-map"><script type="application/json" class="op-geotag">{"type": "Feature", "geometry":{"type": "Point", "coordinates": [' . $lat . ', ' . $lng . ']},"properties":{ "title": "' . $get_place_name . '", "radius": 10000, "pivot": true, "style": "satellite",}}</script></figure>';
+        }
+      }
+
+      // Creating Slideshow for facebook instant article data
+      if (!empty($imgs_path)) {
+        $slider_keys = array_keys($full_script_slider);
+        foreach ($slider_keys as $k => $sliderkey) {
+          $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey][0];
+        }
+      }
+
+      // Creating Social Embed Code for facebook instant article data
+      if (!empty($embed_code_data)) {
+        if (in_array($embed_code_pos, $bk)) {
+          $eic = substr_count($embed_code_data, '<iframe');
+          if ($eic > 1) {
+            $newiframe = str_replace(" />", "></iframe>", $embed_code_data);
+            $fie = explode("<iframe", $newiframe);
+            unset($fie[0]);
+            foreach ($fie as $fie_key => $fie_val) {
+              $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . '<figure class="op-interactive"><iframe ' . $fie_val . '</figure>';
+            }
           }
-        } else {
-          $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . '<figure class="op-interactive">' . $embed_code_data . '</figure>';
-        }
-      } else {
-        $last_postion = end($bk);
-        $eic = substr_count($embed_code_data, '<iframe');
-        if ($eic > 1) {
-          $newiframe = str_replace(" />", "></iframe>", $embed_code_data);
-          $fie = explode("<iframe", $newiframe);
-          unset($fie[0]);
-          foreach ($fie as $fie_key => $fie_val) {
-            $body_vals[$last_postion] = $body_vals[$last_postion] . '<figure class="op-interactive"><iframe ' . $fie_val . '</figure>';
+          else {
+            $body_vals[$embed_code_pos] = $body_vals[$embed_code_pos] . '<figure class="op-interactive">' . $embed_code_data . '</figure>';
           }
-        } else {
-          $body_vals[$last_postion] = $body_vals[$last_postion] . '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+        }
+        else {
+          $last_postion = end($bk);
+          $eic = substr_count($embed_code_data, '<iframe');
+          if ($eic > 1) {
+            $newiframe = str_replace(" />", "></iframe>", $embed_code_data);
+            $fie = explode("<iframe", $newiframe);
+            unset($fie[0]);
+            foreach ($fie as $fie_key => $fie_val) {
+              $body_vals[$last_postion] = $body_vals[$last_postion] . '<figure class="op-interactive"><iframe ' . $fie_val . '</figure>';
+            }
+          }
+          else {
+            $body_vals[$last_postion] = $body_vals[$last_postion] . '<figure class="op-interactive">' . $embed_code_data . '</figure>';
+          }
         }
       }
-    }
-    $node_body = implode("<p>", $body_vals);
-    $node_body = str_replace(['<iframe', '</iframe>'], ['<figure class="op-interactive"><iframe', '</iframe></figure>'], $node_body);
-    preg_match_all('#<div class="itg-mosimage"[^>]*>(.*?)</div>#', $node_body, $matches);
-    if (!empty($matches[1])) {
-      foreach ($matches[1] as $val) {
-        $arr = explode('/>', $val);
-        if (!empty($arr[1])) {
-          $node_body = str_replace($arr[1], '<figcaption>' . $arr[1] . '</figcaption></figure>', $node_body);
+      $node_body = implode("<p>", $body_vals);
+      $node_body = str_replace(['<iframe', '</iframe>'], ['<figure class="op-interactive"><iframe', '</iframe></figure>'], $node_body);
+      preg_match_all('#<div class="itg-mosimage"[^>]*>(.*?)</div>#', $node_body, $matches);
+      if (!empty($matches[1])) {
+        foreach ($matches[1] as $val) {
+          $arr = explode('/>', $val);
+          if (!empty($arr[1])) {
+            $node_body = str_replace($arr[1], '<figcaption>' . $arr[1] . '</figcaption></figure>', $node_body);
+          }
         }
       }
+      $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);
+      $node_body = preg_replace('/(<img\b\s+.*?data-mosimage=\")/', '<figure>$1', $node_body);
+      $node_body = preg_replace("/(<img data-mosimage='([^\"]*)')/", '<figure>$1', $node_body);
+      $node_body = str_replace('<p><figure', '<figure', $node_body);
+      $node_body = str_replace('</figure></p>', '</figure>', $node_body);
+      $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body);
+      $node_body = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $node_body);
+      $node_body = str_replace('<p>&nbsp;</p>', '', $node_body);
+      $node_body = str_replace('</p></p>', '</p>', $node_body);
+      $node_body = str_replace('<p></p>', '', $node_body);
+      $node_body = str_replace('<p> </p>', '', $node_body);
+      $node_body = str_replace(array('<li></li>', '<li> </li>', '<li>   </li>'), '', $node_body);
+      $node_body = str_replace('</ul></ul>', '</ul>', $node_body);
+      $node_body = str_replace('</figure></iframe>', '</iframe></figure>', $node_body);
+      $node_body = str_replace('</iframe></figure></p>', '</iframe></figure>', $node_body);
+      $node_body = str_replace('<figcaption></figcaption>', '', $node_body);
+      $node_body = str_replace('<blockquote class="twitter-tweet" lang="en"><blockquote class="twitter-tweet" lang="en">', '<blockquote class="twitter-tweet" lang="en">', $node_body);
+      $node_body = str_replace('</blockquote></blockquote>', '</blockquote>', $node_body);
+      $node_body = str_replace('</blockquote><script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '</blockquote><script charset="utf-8" src="//platform.twitter.com/widgets.js"></script>', $node_body);
+      $node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
+      $node_body = str_replace('<script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js></script></iframe></figure>', $node_body);
+      $node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
+      $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+      $node_body = preg_replace("/ITG:SURVEY:([0-9]+)/", "", $node_body);
+      $node_body = preg_replace("/ITG:QUIZ:([0-9]+)/", "", $node_body);
+      $node_body = preg_replace("/ITG:POLL:([0-9]+)/", "", $node_body);
+      $node_body = str_replace("[ITG:FACTOIDS]", "", $node_body);
+      $node_body = str_replace("[ITG:EXPERT-CHUNK]", "", $node_body);
+      $node_body = str_replace("[ITG:TECH-PHOTOS]", "", $node_body);
+      $node_body = str_replace("[ITG:TECH-PHOTO-GALLERY]", "", $node_body);
+      $node_body = str_replace("[ITG:LISTICLES]", "", $node_body);
+      $node_body = str_replace("100%", "300", $node_body);
+      $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
+      $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
+      $node_body = trim($node_body);
+      $node_body_content = '<p>' . $node_body;
+      $node->link = url("node/$node->nid", ['absolute' => TRUE]);
+      $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+      $node_body_content = str_replace('<br />', '', $node_body_content);
+      $desc = str_replace('<br />', '', $desc);
+      //$desc = str_replace("'", '&#39;', $desc);
+      $items .= itg_fia_xml_format_rss_item('story-' . $node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
     }
-    $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);
-    $node_body = preg_replace('/(<img\b\s+.*?data-mosimage=\")/', '<figure>$1', $node_body );
-    $node_body = preg_replace("/(<img data-mosimage='([^\"]*)')/", '<figure>$1', $node_body );
-    $node_body = str_replace('<p><figure', '<figure', $node_body);
-    $node_body = str_replace('</figure></p>', '</figure>', $node_body);
-    $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body); 
-    $node_body = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $node_body);
-    $node_body = str_replace('<p>&nbsp;</p>', '', $node_body);
-    $node_body = str_replace('</p></p>', '</p>', $node_body);
-    $node_body = str_replace('<p></p>', '', $node_body);
-    $node_body = str_replace('<p> </p>', '', $node_body);
-    $node_body = str_replace(array('<li></li>', '<li> </li>', '<li>   </li>'), '', $node_body);
-    $node_body = str_replace('</ul></ul>', '</ul>', $node_body);
-    $node_body = str_replace('</figure></iframe>', '</iframe></figure>', $node_body);
-    $node_body = str_replace('</iframe></figure></p>', '</iframe></figure>', $node_body);
-    $node_body = str_replace('<figcaption></figcaption>', '', $node_body);
-    $node_body = str_replace('<blockquote class="twitter-tweet" lang="en"><blockquote class="twitter-tweet" lang="en">', '<blockquote class="twitter-tweet" lang="en">', $node_body);
-    $node_body = str_replace('</blockquote></blockquote>', '</blockquote>', $node_body);
-    $node_body = str_replace('</blockquote><script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '</blockquote><script charset="utf-8" src="//platform.twitter.com/widgets.js"></script>', $node_body);
-	  $node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
-	  $node_body = str_replace('<script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js></script></iframe></figure>', $node_body);
-	  $node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);    
-    $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";    
-    $node_body = preg_replace("/ITG:SURVEY:([0-9]+)/", "", $node_body);
-    $node_body = preg_replace("/ITG:QUIZ:([0-9]+)/", "", $node_body);
-    $node_body = preg_replace("/ITG:POLL:([0-9]+)/", "", $node_body);
-    $node_body = str_replace("[ITG:FACTOIDS]", "", $node_body);
-    $node_body = str_replace("[ITG:EXPERT-CHUNK]", "", $node_body);
-    $node_body = str_replace("[ITG:TECH-PHOTOS]", "", $node_body);
-    $node_body = str_replace("[ITG:TECH-PHOTO-GALLERY]", "", $node_body);
-    $node_body = str_replace("[ITG:LISTICLES]", "", $node_body);
-    $node_body = str_replace("100%", "300", $node_body);
-    $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
-    $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
-    $node_body = trim($node_body);
-    $node_body_content = '<p>' . $node_body;
-    $node->link = url("node/$node->nid", ['absolute' => TRUE]);
-    $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
-    $node_body_content = str_replace('<br />', '', $node_body_content);
-    $desc = str_replace('<br />', '', $desc);    
-    //$desc = str_replace("'", '&#39;', $desc);
-    $items .= itg_fia_xml_format_rss_item('story-'.$node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
-
   global $base_url;
   $channel_defaults = array(
       'title' => variable_get('site_name', 'Drupal'),
@@ -272,7 +287,7 @@ function itg_fia_xml_node_feed($query) {
   drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');*/
   $output = "<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" version=\"2.0\">";
   $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items, $last_build_date);  
-  print $output;
+  return $output;
 }
 
 /**
