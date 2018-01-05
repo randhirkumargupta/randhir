@@ -2186,11 +2186,11 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
 
     $query = db_select('itg_widget_order', 'iwo'); //
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
-    $query->leftJoin('taxonomy_index', 'tx', 'wh.nid=tx.nid');
+    //$query->leftJoin('taxonomy_index', 'tx', 'wh.nid=tx.nid');
     //end
     $query->condition('iwo.widget', $widget_name)
             ->condition('wh.node_status', 1)
-            ->condition('tx.tid', $cat_id)
+            ->condition('iwo.cat_id', $cat_id)
             ->condition('wh.node_type', $valid_content_type)
             ->orderBy('iwo.weight', 'ASC')
             ->orderBy('wh.nid', 'DESC')

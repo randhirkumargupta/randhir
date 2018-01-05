@@ -1445,6 +1445,10 @@ ul.header-menu li {
     border-bottom: 1px solid #ccc;
     width: 270px;
 }
+.story_ad_block.custom-amp-ad{margin-top:15px;}
+section.sidebar .block-itg-ads > div {
+    margin: auto;
+}
 button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} button.searchbut .fa-search { top: 1px; right: 0px;}
 @media only screen and (max-width: 767px) {
     ul.pron-cons-img {

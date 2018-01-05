@@ -43,12 +43,12 @@
                           <?php
                           $img = $row['field_sponser_logo'];
                           ?>
-                          <?php print l($img, 'program', array('html' => TRUE)); ?>
+                          <?php print l($img, 'taxonomy/term/' . $row['tid'], array('html' => TRUE)); ?>
                         <?php else : ?>
                           <?php
                           $img = "<img width='88' height='66'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') ."' alt='' title='' />";
                           ?>
-                          <?php print l($img, 'program', array('html' => TRUE)); ?>
+                          <?php print l($img, 'taxonomy/term/' . $row['tid'], array('html' => TRUE)); ?>
 
                         <?php endif; ?>
                     </div>

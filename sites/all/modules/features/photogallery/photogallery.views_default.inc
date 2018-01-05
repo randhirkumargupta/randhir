@@ -4893,6 +4893,17 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_credit']['label'] = '';
   $handler->display->display_options['fields']['field_credit']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_credit']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Field collection item: Order (field_gallery_order) */
+  $handler->display->display_options['sorts']['field_gallery_order_value']['id'] = 'field_gallery_order_value';
+  $handler->display->display_options['sorts']['field_gallery_order_value']['table'] = 'field_data_field_gallery_order';
+  $handler->display->display_options['sorts']['field_gallery_order_value']['field'] = 'field_gallery_order_value';
+  $handler->display->display_options['sorts']['field_gallery_order_value']['relationship'] = 'field_gallery_image_value';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['filter_groups']['groups'] = array(
