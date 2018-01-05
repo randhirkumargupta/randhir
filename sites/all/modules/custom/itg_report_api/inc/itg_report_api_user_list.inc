@@ -18,38 +18,41 @@ function getUserList_Report($user_type, $user_sub_type) {
   $list = array();
   $data = array();
   $total_cont = 0;
-  $query = db_select('node', 'n');
-  $query->leftJoin('users', 'u', 'u.uid=n.uid');
-  $query->leftJoin('users_roles', 'ur', 'ur.uid=u.uid');
-  $query->fields('u', array('uid', 'name', 'mail', 'status'));
-  
-  //filter of content type 
-  $query->condition('ur.rid', 25, '<>');
-  if ($user_type != "na" || $user_type != "") {
-    if($user_type == "author"){        
-        $query->condition('ur.rid', 6, '=');
-    }    
+  if($user_type == "user"){
+    $query = db_select('node', 'n');
+    $query->leftJoin('users', 'u', 'u.uid=n.uid');
+    $query->leftJoin('users_roles', 'ur', 'ur.uid=u.uid');
+    $query->fields('u', array('uid', 'name', 'mail', 'status'));  
+    //filter of content type 
+    $query->condition('ur.rid', 25, '<>');
+    $query->orderBy('u.name', 'DESC');
+    $query->groupBy('n.uid');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $reskey => $resvalue) {
+      $uid = $resvalue['uid'];
+      $name = $resvalue['name'];
+      $mail = $resvalue['mail'];
+      $status = $resvalue['status'];
+      // list data
+      $list[$total_cont]['user_id'] = "$uid";
+      $list[$total_cont]['name'] = "$name";
+      $list[$total_cont]['email'] = "$mail";
+      $list[$total_cont]['status'] = "$status";
+
+      $total_cont++;
+    }
   }
+  elseif ($user_type == "author") {
+        $query_n = db_select('node', 'n');
+        $query_n->fields('n', array('nid'));  
+        $query_n->condition('n.type', 'reporter', '=');
+        $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result_n as $reskey_n => $resvalue_n) {
+            p(node_load($resvalue_n['nid']));
+        }
+    }
 
-
-  $query->orderBy('u.name', 'DESC');
-  $query->groupBy('n.uid');
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  foreach ($result as $reskey => $resvalue) {
-    $uid = $resvalue['uid'];
-    $name = $resvalue['name'];
-    $mail = $resvalue['mail'];
-    $status = $resvalue['status'];
-    // list data
-    $list[$total_cont]['user_id'] = "$uid";
-    $list[$total_cont]['name'] = "$name";
-    $list[$total_cont]['email'] = "$mail";
-    $list[$total_cont]['status'] = "$status";
-
-    $total_cont++;
-  }
-
-  $data['results'] = $list;
+    $data['results'] = $list;
   $data['total_records'] = "$total_cont";
   return $data;
 }
