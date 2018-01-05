@@ -349,7 +349,7 @@ function itg_report_api_detail() {
   $redis_key = "itg_report_api_data_list_report" . $suffix;
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
+  if ($result_get['key_value11'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
