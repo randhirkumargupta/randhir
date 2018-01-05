@@ -54,7 +54,8 @@
                     </div>
                     <div class="discription">
                         <?php if (!empty($row['description'])) : ?>
-                          <?php print html_entity_decode($row['description']); ?>
+                          <?php 
+                          echo html_entity_decode(htmlspecialchars_decode($row['description'], ENT_QUOTES)); ?>
                         <?php endif; ?>
 
                     </div>

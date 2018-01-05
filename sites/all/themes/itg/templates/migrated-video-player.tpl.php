@@ -7,6 +7,8 @@
 drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
 drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
 global $base_url;
+$node_url_data = url(current_path(), array('absolute' => false));
+$explode_url = explode('/', $node_url_data);
 ?>
 
 <?php
@@ -58,13 +60,15 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
                       schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
               idstring: "<?php echo stripslashes($title); ?>",
-              label: "<?php echo $data_video["ga_code"]; ?>"
+              label: ""
           }
       });
   }
 
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
+   ga('create', '<?php echo $data_video["ga_code"]; ?>', '<?php echo $explode_url[1];?>'');
+   ga('send', 'pageview');
   // playerInstance.on('setupError', function (event) {
       // if (event.message == 'Error loading player: No playable sources found') {
           // document.getElementById("videoplayer").innerHTML = '<span class="flasherror">Install Flash to Watch this Video</span><a target="_blank" href="https://get.adobe.com/flashplayer/" class="flashlogo"><img src="http://media2.intoday.in/images/getadobeflashplayer.gif" width="100"></a>';
