@@ -24,12 +24,12 @@ function getUserList_Report($user_type, $user_sub_type) {
   $query->fields('u', array('uid', 'name', 'mail', 'status'));
   
   //filter of content type
-  $query->condition('ur.rid', 25, '!=');
-  if ($user_type != "na" || $user_type != "") {
-    if($user_type == "author"){
-        $query->condition('ur.rid', 4, '=');
-    }    
-  }
+//  $query->condition('ur.rid', 25, '!=');
+//  if ($user_type != "na" || $user_type != "") {
+//    if($user_type == "author"){
+//        $query->condition('ur.rid', 4, '=');
+//    }    
+//  }
 
 
   $query->orderBy('u.name', 'DESC');
