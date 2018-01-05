@@ -485,29 +485,54 @@ function itg_story_form_views_exposed_form_alter(&$form, &$form_state, $form_id)
   if (in_array($form['#id'], $soruce_type_filter_display_views)) {
     if ($form['#id'] == 'views-exposed-form-videogallery-management-page-1' || $form['#id'] == 'views-exposed-form-videogallery-management-page' || $form['#id'] == 'views-exposed-form-videogallery-management-page-2' || $form['#id'] == 'views-exposed-form-videogallery-management-page-5') {
       $cn_type = 'videogallery';
+      $option = array(
+          '' => '-Any-',
+          'videogallery' => 'Video',
+          'migrated' => 'Migrated',
+          'OCTOPUS' => 'OCTOPUS',
+          'UGC' => 'UGC'
+      );
     }
     elseif ($form['#id'] == 'views-exposed-form-photo-gallery-management-page-1' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-2' || $form['#id'] == 'views-exposed-form-photo-gallery-management-page-5') {
       $cn_type = 'photogallery';
+      $option = array(
+          '' => '-Any-',
+          'photogallery' => 'Photogallery',
+          'migrated' => 'Migrated',
+          'UGC' => 'UGC',
+      );
     }
     else {
       $cn_type = 'story';
+        $option = array("" => '-Any-',
+        'story' => 'Internal Story',
+        'Magazine Story' => 'Magazine Story',
+        'Clone Story' => 'Clone Story',
+        'breaking' => 'Breaking',
+        'UGC' => 'UGC',
+        'migrated' => 'Migrated',
+        'AP' => 'AP',
+        'Mail Today' => 'Mail Today',
+        'Reuters' => 'Reuters',
+        'IANS' => 'IANS',
+        'PTI' => 'PTI');
     }
-    $option = array("" => '-Any-', $cn_type => $cn_type);
-    $query = db_select('field_data_field_story_source_type', 'st');
-    $query->leftJoin('node', 'n', 'n.nid=st.entity_id');
-    $query->condition('n.type', $cn_type)->distinct()
-        ->fields('st', array('field_story_source_type_value'));
-    $result = $query->execute()->fetchAll();
-    foreach ($result as $option_values) {
-      if ($option_values->field_story_source_type_value == 'videogallery') {
-        $option[$option_values->field_story_source_type_value] = 'Video';
-      } else if ($option_values->field_story_source_type_value == 'story') {
-        $option[$option_values->field_story_source_type_value] = 'Internal Story';
-      }
-      else {
-        $option[$option_values->field_story_source_type_value] = ucwords($option_values->field_story_source_type_value);
-      }
-    }
+  //  $option = array("" => '-Any-', $cn_type => $cn_type);
+//    $query = db_select('field_data_field_story_source_type', 'st');
+//    $query->leftJoin('node', 'n', 'n.nid=st.entity_id');
+//    $query->condition('n.type', $cn_type)->distinct()
+//        ->fields('st', array('field_story_source_type_value'));
+//    $result = $query->execute()->fetchAll();
+//    foreach ($result as $option_values) {
+//      if ($option_values->field_story_source_type_value == 'videogallery') {
+//        $option[$option_values->field_story_source_type_value] = 'Video';
+//      } else if ($option_values->field_story_source_type_value == 'story') {
+//        $option[$option_values->field_story_source_type_value] = 'Internal Story';
+//      }
+//      else {
+//        $option[$option_values->field_story_source_type_value] = ucwords($option_values->field_story_source_type_value);
+//      }
+//    }
 
     $source_type = "<select class='form-item form-type-select' id='fake-soruce-type'>";
     foreach ($option as $option_value => $option_element) {
