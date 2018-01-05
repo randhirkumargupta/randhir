@@ -50,26 +50,6 @@ $conf = array(
     'cache_class_cache_form' => 'default',
   ),
 );
-$conf['memcache_stampede_protection'] = TRUE;
-$conf['memcache_stampede_protection_ignore'] = array(
-    // Ignore some cids in 'cache_bootstrap'.
-    'cache_bootstrap' => array(
-      'module_implements',
-      'variables',
-      'lookup_cache',
-      'schema:runtime:*',
-      'theme_registry:runtime:*',
-      '_drupal_file_scan_cache',
-    ),
-    // Ignore all cids in the 'cache' bin starting with 'i18n:string:'
-    'cache' => array(
-      'i18n:string:*',
-    ),
-    // Disable stampede protection for the entire 'cache_path' and 'cache_rules'
-    // bins.
-    'cache_path',
-    'cache_rules',
-  );
 
 $conf['memcache_key_prefix'] = 'itgmem';
 $conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
