@@ -247,6 +247,7 @@ function itg_fia_xml_node_feed($query) {
     $node_body = str_replace("[ITG:TECH-PHOTOS]", "", $node_body);
     $node_body = str_replace("[ITG:TECH-PHOTO-GALLERY]", "", $node_body);
     $node_body = str_replace("[ITG:LISTICLES]", "", $node_body);
+    $node_body = str_replace("100%", "300", $node_body);
     $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
     $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
     $node_body = trim($node_body);
