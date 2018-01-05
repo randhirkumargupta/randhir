@@ -13,7 +13,7 @@
  *
  * @return array userList
  */
-function getUserList_Report($user_type, $user_sub_type, $start_date, $end_date) {
+function getUserList_Report($user_type, $user_sub_type) {
   global $base_url;
   $list = array();
   $data = array();
@@ -21,24 +21,17 @@ function getUserList_Report($user_type, $user_sub_type, $start_date, $end_date) 
 
   $query = db_select('node', 'n');
   $query->leftJoin('users', 'u', 'u.uid=n.uid');
-  //$query->fields('n', array('uid', 'nid'));
+  $query->leftJoin('users_roles', 'ur', 'ur.uid=u.uid');
   $query->fields('u', array('uid', 'name', 'mail', 'status'));
-  $start_date = strtotime($start_date. " 01:01:00");
-  $end_date = strtotime($end_date. " 23:59:00");
-  //filter of content type
-  if ($user_type != "na") {
-    $query->condition('n.type', $user_type, '=');
+  
+  //filter of content type 
+  $query->condition('ur.rid', 25, '<>');
+  if ($user_type != "na" || $user_type != "") {
+    if($user_type == "author"){        
+        $query->condition('ur.rid', 6, '=');
+    }    
   }
 
-  //filter of user type
-  if ($user_sub_type == "created_by") {
-    $query->condition('n.created', $start_date, '>=');
-    $query->condition('n.created', $end_date, '<=');
-  }
-  elseif ($user_sub_type == "modified by" || $user_sub_type == "modified_by") {
-    $query->condition('n.changed', $start_date, '>=');
-    $query->condition('n.changed', $end_date, '<=');
-  }
   $query->orderBy('u.name', 'DESC');
   $query->groupBy('n.uid');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
