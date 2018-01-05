@@ -18,7 +18,7 @@ function getUserList_Report($user_type, $user_sub_type) {
   $list = array();
   $data = array();
   $total_cont = 0;
-
+p($_GET);
   $query = db_select('node', 'n');
   $query->leftJoin('users', 'u', 'u.uid=n.uid');
   $query->leftJoin('users_roles', 'ur', 'ur.uid=u.uid');

@@ -431,7 +431,7 @@ function itg_report_api_user_list() {
   //echo $redis_key; die();
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
+  if ($result_get['key_value11'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
