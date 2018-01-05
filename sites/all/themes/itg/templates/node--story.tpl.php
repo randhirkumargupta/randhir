@@ -868,7 +868,7 @@ if (!empty($content)):
                 </div>
           <?php } ?>
            <?php if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) && $node->field_primary_category[LANGUAGE_NONE][0]['value'] == variable_get('pti_section_id', 1206640)) : ?>
-				<div class="pti-news-claim"> This is unedited, unformatted feed from the Press Trust of India wire. </div>
+              <div class="pti-news-claim"> This is unedited, unformatted feed from the Press Trust of India wire. </div>
             <?php endif; ?>
             </div>           
           </div>
