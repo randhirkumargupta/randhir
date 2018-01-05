@@ -23,8 +23,8 @@ function getUserList_Report($user_type, $user_sub_type, $start_date, $end_date) 
   $query->leftJoin('users', 'u', 'u.uid=n.uid');
   //$query->fields('n', array('uid', 'nid'));
   $query->fields('u', array('uid', 'name', 'mail', 'status'));
-  $start_date = strtotime($start_date);
-  $end_date = strtotime($end_date);
+  $start_date = strtotime($start_date. " 01:01:00");
+  $end_date = strtotime($end_date. " 23:59:00");
   //filter of content type
   if ($user_type != "na") {
     $query->condition('n.type', $user_type, '=');

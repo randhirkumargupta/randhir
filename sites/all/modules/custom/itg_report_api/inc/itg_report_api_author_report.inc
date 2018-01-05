@@ -103,22 +103,7 @@ function author_report_tvtn($start_date) {
     }
     $author_loop_cont++;
   }
-  //static author data
-  $auhtor_data[0]['author_id'] = "1568";
-  $auhtor_data[0]['author_email'] = "anand.patel@aajtak.com";
-  $auhtor_data[0]['author_name'] = "Anand Patel";
-  $auhtor_data[0]['site_id'] = "1";
-  $auhtor_data[0]['today'] = "1";
-  $auhtor_data[0]['yesterday'] = "1";
-  $auhtor_data[0]['month'] = "1";
-  $auhtor_data[0]['year'] = "1";
-
-  $auhtor_data[0]['contents']['author_id'] = "1568";
-  $auhtor_data[0]['contents']['author_email'] = "anand.patel@aajtak.com";
-  $auhtor_data[0]['contents']['author_name'] = "Anand Patel";
-  $auhtor_data[0]['contents']['site_id'] = "1";
-  $auhtor_data[0]['contents']['content_url'] = "";
-  $auhtor_data[0]['contents']['page_title'] = "Sharad Yadav shoots letter to";
+  
   //$auhtor_data[0]['contents']['author_id'] = "1";
   $data['auhtorwise_data']['auhtor_data'] = $auhtor_data;
 

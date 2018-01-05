@@ -410,14 +410,14 @@ function itg_report_api_get_story_api() {
  */
 function itg_report_api_story_video_photo_field_report() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
 
   if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date']);
+    $end_date = strtotime($_GET['end_date']. " 23:59:00");
   }
   else {
     $end_date = $_GET['end_date'];
@@ -450,7 +450,7 @@ function itg_report_api_story_video_photo_field_report() {
  */
 function itg_report_api_author_report() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
@@ -482,7 +482,7 @@ function itg_report_api_author_report() {
  */
 function itg_report_api_author_report_tvtn() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
@@ -512,13 +512,13 @@ function itg_report_api_author_report_tvtn() {
  */
 function itg_report_api_auscovery_dashboard_web() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
   if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date']);
+    $end_date = strtotime($_GET['end_date']. " 23:59:00");
   }
   else {
     $end_date = $_GET['end_date'];
@@ -551,13 +551,13 @@ function itg_report_api_auscovery_dashboard_web() {
  */
 function itg_report_api_auscovery_dashboard_mob() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
   if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date']);
+    $end_date = strtotime($_GET['end_date']. " 23:59:00");
   }
   else {
     $end_date = $_GET['end_date'];
