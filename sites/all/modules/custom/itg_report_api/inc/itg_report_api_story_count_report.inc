@@ -321,7 +321,16 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     elseif (strpos($video_path, '/embeded-video/')) {
       $video_embed = 'Yes';
     }
-    // list data
+    $social_query = db_select('jos_social_media_sharing', 'sm')
+                        ->fields('sm', array('is_promoted', 'promotion_remark'))
+                        ->condition('sm.content_id', $nid)
+                        ->condition('sm.content_type', $type)
+                        ->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $is_promoted = $social_query[0]['is_promoted'];
+        $promotion_remark = $social_query[0]['promotion_remark'];
+        // list data
+    $list[$nid]['is_promoted'] = "$is_promoted";
+    $list[$nid]['promotion_remark'] = "$promotion_remark";
     $list[$nid]['id'] = "$nid";
     $list[$nid]['title'] = "$title";
     $list[$nid]['url'] = "$url";
