@@ -264,15 +264,15 @@ function itg_fia_xml_node_feed($query) {
  */
 function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date) {
 
-  $output = "  <channel>";
-  $output .= "    <title>" . $title . "</title>";
-  $output .= "    <link>" . FRONT_URL . "</link>";
-  $output .= "    <description>" . t("India Today News - Check out the latest breaking News from India and around the world. The latest news headlines, world, politics, business, sport, entertainment and technology news from IndiaToday.in") . "</description>";
-  $output .= "    <language>en</language>";
-  $output .= "    <lastBuildDate>" . $last_build_date . "</lastBuildDate>";
+  $output = "<channel>";
+  $output .= "<title>" . $title . "</title>";
+  $output .= "<link>" . FRONT_URL . "</link>";
+  $output .= "<description>" . t("India Today News - Check out the latest breaking News from India and around the world. The latest news headlines, world, politics, business, sport, entertainment and technology news from IndiaToday.in") . "</description>";
+  $output .= "<language>en</language>";
+  $output .= "<lastBuildDate>" . $last_build_date . "</lastBuildDate>";
   //$output .= "    <atom:link href='" . check_url($link) . "' rel='self' type='application/rss+xml' />";
   $output .= $items;
-  $output .= "  </channel>";
+  $output .= "</channel>";
   $output .= "</rss>";
 
   return $output;
@@ -283,56 +283,56 @@ function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date)
  */
 function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
-  $output = "    <item>";
-  $output .= "      <title>" . $title . "</title>";
-  $output .= "      <link>" . check_url($link) . "</link>";
-  $output .= "      <guid>" . $guid . "</guid>";
-  $output .= "      <pubDate><![CDATA[" . $pubdate . "]]></pubDate>";
-  $output .= "      <author>" . $name . "</author>";
-  $output .= "      <description>" . $desc . "</description>";
-  $output .= "    <content:encoded>";
-  $output .= "    <![CDATA[";
-  $output .= "    <!doctype html>";
-  $output .= "    <html lang='en' prefix='op: http://media.facebook.com/op#'>";
-  $output .= "    <head>";
-  $output .= "    <meta charset='utf-8'>";
-  $output .= "    <meta property ='fb:op-recirculation-ads' content=placement_id=".'1634971070080984_1853363621575060'.">";
-  $output .= "    <meta property='fb:use_automatic_ad_placement' content='enable=true ad_density=default'>";
-  $output .= "    <meta property='op:markup_version' content='v1.0'>";
-  $output .= "    <meta property='fb:use_automatic_ad_placement' content='true'>";
-  $output .= "    <meta property='og:title' content='" . $title . "'>";
-  $output .= "    <meta property='og:description' content='" . $desc . "'>";
-  $output .= "    <link rel='canonical' href='" . $link . "?sr=fbia'>";
+  $output = "<item>";
+  $output .= "<title>" . $title . "</title>";
+  $output .= "<link>" . check_url($link) . "</link>";
+  $output .= "<guid>" . $guid . "</guid>";
+  $output .= "<pubDate><![CDATA[" . $pubdate . "]]></pubDate>";
+  $output .= "<author>" . $name . "</author>";
+  $output .= "<description>" . $desc . "</description>";
+  $output .= "<content:encoded>";
+  $output .= "<![CDATA[";
+  $output .= "<!doctype html>";
+  $output .= "<html lang='en' prefix='op: http://media.facebook.com/op#'>";
+  $output .= "<head>";
+  $output .= "<meta charset='utf-8'>";
+  $output .= "<meta property ='fb:op-recirculation-ads' content=placement_id=".'1634971070080984_1853363621575060'.">";
+  $output .= "<meta property='fb:use_automatic_ad_placement' content='enable=true ad_density=default'>";
+  $output .= "<meta property='op:markup_version' content='v1.0'>";
+  $output .= "<meta property='fb:use_automatic_ad_placement' content='true'>";
+  $output .= "<meta property='og:title' content='" . $title . "'>";
+  $output .= "<meta property='og:description' content='" . $desc . "'>";
+  $output .= "<link rel='canonical' href='" . $link . "?sr=fbia'>";
   //$output .= "    <link rel='stylesheet' title='default' href='#'>";
   //$output .= "    <meta property='op:markup_version' content='v1.0'>";
-  $output .= "    </head>";
-  $output .= "    <body>";
-  $output .= "    <article>";
-  $output .= "    <header>";
-  $output .= "    <figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+  $output .= "</head>";
+  $output .= "<body>";
+  $output .= "<article>";
+  $output .= "<header>";
+  $output .= "<figure class='op-ad'> <iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
   // <!-- The header image shown inside your article --> 
   if((isset($fb_instant_image)) && (!empty($fb_instant_image))){
-    $output .= "    <figure>";  
-    $output .= "     <img src='" . $fb_instant_image . "' alt='' title='' />";
-    $output .= "    </figure>";
+    $output .= "<figure>";  
+    $output .= "<img src='" . $fb_instant_image . "' alt='' title='' />";
+    $output .= "</figure>";
   }
-  $output .= "    <h1>" . $title . "</h1>";
-  $output .= "    <h2>" . $kicker . "</h2>";
+  $output .= "<h1>" . $title . "</h1>";
+  $output .= "<h2>" . $kicker . "</h2>";
   // <!-- A kicker for your article -->
-  $output .= "      <details><summary>" . $kicker . "</summary></details>";
+  $output .= "<details><summary>" . $kicker . "</summary></details>";
   // <!-- The author of your article -->
-  $output .= "      <address>" . $name . "</address>";
-  $output .= "      <time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
-  $output .= "      <time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
-  $output .= "    </header>";
-  $output .= "    <div property='content:encoded'>" . $node_body_content . "</div>"; 
-  $output .= "    <figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-7530357-9', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: '2', c2: '8549097',options: { url_append: 'comscorekw=fbia' }});(function() { var s = document.createElement('script'), el = document.getElementsByTagName('script')[0]; s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js'; el.parentNode.insertBefore(s, el); })();</script><noscript><img src='http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia' /></noscript><!-- End comScore Tag --></iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
-  $output .= "    </article>";
-  $output .= "    </body>";
-  $output .= "    </html>";
-  $output .= "    ]]>";
-  $output .= "    </content:encoded>";
-  $output .= "    </item>";
+  $output .= "<address>" . $name . "</address>";
+  $output .= "<time class='op-published' dateTime='" . $pubdate . "'>" . $op_pub . "</time>";
+  $output .= "<time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
+  $output .= "</header>";
+  $output .= "<div property='content:encoded'>" . $node_body_content . "</div>"; 
+  $output .= "<figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-7530357-9', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: '2', c2: '8549097',options: { url_append: 'comscorekw=fbia' }});(function() { var s = document.createElement('script'), el = document.getElementsByTagName('script')[0]; s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js'; el.parentNode.insertBefore(s, el); })();</script><noscript><img src='http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia' /></noscript><!-- End comScore Tag --></iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
+  $output .= "</article>";
+  $output .= "</body>";
+  $output .= "</html>";
+  $output .= "]]>";
+  $output .= "</content:encoded>";
+  $output .= "</item>";
   return $output;
 }
 
