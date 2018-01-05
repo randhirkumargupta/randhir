@@ -208,7 +208,7 @@ function itg_fia_xml_node_feed($query) {
     $node_body = implode("<p>", $body_vals);
     $node_body = str_replace(['<iframe', '</iframe>'], ['<figure class="op-interactive"><iframe', '</iframe></figure>'], $node_body);    
     $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);    
-    $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
+    $node_body = preg_replace('/(<img([^>](data-mosimage="yes")*)>)/i', '<figure>$1', $node_body ); 
     preg_match_all('#<div class="itg-mosimage"[^>]*>(.*?)</div>#', $node_body, $matches);
     if (!empty($matches[1])) {
       foreach ($matches[1] as $val) {
