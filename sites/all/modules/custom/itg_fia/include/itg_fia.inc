@@ -300,7 +300,7 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
   $output = "<item>";
   $output .= "<title>" . $title . "</title>";
-  $output .= "<link>" . check_url($link) . "</link>";
+  $output .= "<link>" . check_url($link) . "?sr=fbia</link>";
   $output .= "<guid>" . $guid . "</guid>";
   $output .= "<pubDate><![CDATA[" . $pubdate . "]]></pubDate>";
   $output .= "<author>" . $name . "</author>";
