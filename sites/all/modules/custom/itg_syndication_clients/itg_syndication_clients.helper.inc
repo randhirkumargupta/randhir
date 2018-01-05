@@ -457,3 +457,8 @@ function getelections2016_westbenga_sections() {
     1206846 => 'assemblyelections2016-westbengal.xml'
   );
 }
+
+
+function get_feed_base_url(){
+  return 'http://feeds.intoday.in';
+}

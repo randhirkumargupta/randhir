@@ -896,7 +896,7 @@ function genrate_msn_hlt_videos_xml($result, $section_name, $section_id) {
   $xml .= '<id>' . $section_id . '</id>';
   $xml .= '<title><![CDATA[' . $section_name . ']]></title>';
   $xml .= '<itemcount>' . count($result) . '</itemcount>';
-  $file_base_path = 'http://feeds.intoday.in/msn/hlt/videos';//file_create_url('public://msn/hlt/videos/');
+  $file_base_path = get_feed_base_url() . '/msn/hlt/videos'; //file_create_url('public://msn/hlt/videos/');
   if (!empty($result)) {
     foreach ($result as $value) {
       $nid = $value['nid'];
