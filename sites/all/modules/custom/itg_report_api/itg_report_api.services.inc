@@ -372,7 +372,7 @@ function itg_report_api_story_count_report() {
     $pageno = $_GET['pageno'];
     //valid tid & pageno
     
-    echo strtotime("2017-12-20 00:01"); echo "<br>";echo strtotime("2017-12-20 23:59"); die();
+    echo strtotime("2017-12-20 00:01:00"); echo "<br>";echo strtotime("2017-12-20 23:59:00"); die();
 
     if (!is_numeric($status)) {
         $status = 0;
