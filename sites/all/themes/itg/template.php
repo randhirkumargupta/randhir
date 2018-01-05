@@ -166,6 +166,8 @@ function itg_preprocess_page(&$variables) {
   global $base_url;
   $base_root;
   $arg = arg();
+  $path_request = request_path();
+  $path_request_array = explode('/', $path_request);
   
   // add condition to hide header and footer for signup, forgot-password page
   if (isset($_GET['ReturnTo']) && !empty($_GET['ReturnTo'])) {
@@ -191,7 +193,10 @@ function itg_preprocess_page(&$variables) {
   }
 
   // For single column page
-  if ($arg[0] == 'be-lucky-today') {
+  if ($arg[0] == 'be-lucky-today' || $path_request_array['0'] == 'app') {
+	  if($path_request_array['0'] == 'app') {
+		  drupal_set_title('');
+      }		  
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';
   }
 
