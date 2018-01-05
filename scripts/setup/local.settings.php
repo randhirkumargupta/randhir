@@ -64,11 +64,16 @@ $conf = array(
     'users' => 'default',
     'cache_pathdst' => 'default',
     'cache_pathsrc' => 'default',
+    'cache_class_cache_form' => 'default',
   ),
 );
+
 $conf['memcache_key_prefix'] = 'itgmem';
 $conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
-$conf['memcache_stampede_protection'] = TRUE;
+
+// Don't bootstrap the database when serving pages from the cache.
+$conf['page_cache_without_database'] = TRUE;
+$conf['page_cache_invoke_hooks'] = FALSE;
 
 #MongoDB 
 $conf['mongodb_connections'] = array(
