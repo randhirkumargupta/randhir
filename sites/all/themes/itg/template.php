@@ -295,6 +295,13 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script, 'script');
     }
   }
+  if ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
+    $term = menu_get_object('taxonomy_term', 2);
+    if (!empty($term)) {
+      $title = $term->metatags[LANGUAGE_NONE]['title']['value'];
+      $vars['head_title'] = $title;
+    }
+  }
 }
 
 /**
@@ -333,6 +340,18 @@ function itg_html_head_alter(&$head_elements) {
           '#attributes' => array(
             'name' => 'news_keyword',
             'content' => $meta_keywords
+          ),
+        );
+      }
+      
+      $meta_description = $term->metatags[LANGUAGE_NONE]['description']['value'];
+      if (isset($meta_description) && !empty($meta_description)) {
+        $head_elements['metatag_description_0'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'meta',            
+          '#attributes' => array(
+            'name' => 'description',
+            'content' => $meta_description
           ),
         );
       }

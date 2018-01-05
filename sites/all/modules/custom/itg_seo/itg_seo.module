@@ -292,7 +292,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   $title_val = '';
   $arg = arg();
   if (isset($entity_object->title)) {
-    $title_val = ucfirst(mb_strimwidth($entity_object->title, 0, 100));
+    $title_val = mb_strimwidth($entity_object->title, 0, 100);
   }
 
   //$node_title = '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathtwo"><span itemprop="title">' . t($title_val) . '</span></div>';
