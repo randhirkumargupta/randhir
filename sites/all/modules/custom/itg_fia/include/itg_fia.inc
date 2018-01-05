@@ -217,7 +217,8 @@ function itg_fia_xml_node_feed($query) {
       }
     }
     $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);    
-    $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
+    //$node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
+    $node_body = preg_replace('(<img\b\s+.*?data-mosimage=\")(.*?yes:.*?)(\">)/i', '<figure>$1', $node_body );
     $node_body = str_replace('<p><figure', '<figure', $node_body);
     $node_body = str_replace('</figure></p>', '</figure>', $node_body);
     $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body); 
