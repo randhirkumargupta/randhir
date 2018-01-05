@@ -371,6 +371,8 @@ function itg_report_api_story_count_report() {
     $item_per_page = $_GET['item_per_page'];
     $pageno = $_GET['pageno'];
     //valid tid & pageno
+    
+    echo strtotime("2017-12-20 00:01"); echo "<br>";echo strtotime("2017-12-20 23:59"); die();
 
     if (!is_numeric($status)) {
         $status = 0;
