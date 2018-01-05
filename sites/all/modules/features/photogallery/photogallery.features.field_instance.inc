@@ -185,6 +185,53 @@ function photogallery_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'field_collection_item-field_gallery_image-field_gallery_order'.
+  $field_instances['field_collection_item-field_gallery_image-field_gallery_order'] = array(
+    'bundle' => 'field_gallery_image',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'number',
+        'settings' => array(
+          'decimal_separator' => '.',
+          'prefix_suffix' => TRUE,
+          'scale' => 0,
+          'thousand_separator' => '',
+        ),
+        'type' => 'number_integer',
+        'weight' => 14,
+      ),
+    ),
+    'entity_type' => 'field_collection_item',
+    'exclude_cv' => 1,
+    'field_name' => 'field_gallery_order',
+    'label' => 'Order',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'max' => 100,
+      'min' => 0,
+      'prefix' => '',
+      'suffix' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance:
   // 'field_collection_item-field_gallery_image-field_image_caption'.
   $field_instances['field_collection_item-field_gallery_image-field_image_caption'] = array(
     'bundle' => 'field_gallery_image',
@@ -3572,6 +3619,7 @@ function photogallery_field_default_field_instances() {
   t('Large image');
   t('Medium image');
   t('Node Identity');
+  t('Order');
   t('Photo By');
   t('Photogallery Tags');
   t('Posted By Instagram');
