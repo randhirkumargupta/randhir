@@ -36,11 +36,11 @@ function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_p
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     //end   
     if ($start_date != "na") {
-        $start_date_timestamp = strtotime($start_date);
+        $start_date_timestamp = strtotime($start_date. " 01:01:00");
         $query->condition('n.created', $start_date_timestamp, ">=");
     }
     if ($end_date != "na") {
-        $end_date_timestamp = strtotime($end_date);
+        $end_date_timestamp = strtotime($end_date. " 23:59:00");
         $query->condition('n.created', $end_date_timestamp, "<=");
     }
     if ($type != "na") {
@@ -131,11 +131,11 @@ function totalRecordsCount($start_date, $end_date, $type, $status, $item_per_pag
     $query_cont->fields('n', array('nid'));
     //end   
     if ($start_date != "na") {
-        $start_date_timestamp = strtotime($start_date);
+        $start_date_timestamp = strtotime($start_date. " 01:01:00");
         $query_cont->condition('n.created', $start_date_timestamp, ">=");
     }
     if ($end_date != "na") {
-        $end_date_timestamp = strtotime($end_date);
+        $end_date_timestamp = strtotime($end_date. " 23:59:00");
         $query_cont->condition('n.created', $end_date_timestamp, "<=");
     }
     if ($type != "na") {
@@ -215,8 +215,8 @@ function getSectionCountData_report($start_date, $end_date){
 function countTidNode_report($start_date, $end_date, $tid){
     //story count between
     //echo $start_date; echo "###"; echo $end_date; echo "###"; echo $tid; die();
-    $start_date_timestamp = strtotime($start_date);
-    $end_date_timestamp = strtotime($end_date);
+    $start_date_timestamp = strtotime($start_date. " 01:01:00");
+    $end_date_timestamp = strtotime($end_date. " 23:59:00");
     $n_count = 0;
     $query = db_select('node', 'n');
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
@@ -262,11 +262,11 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     //end   
     if ($start_date != "na") {
-        $start_date_timestamp = strtotime($start_date);
+        $start_date_timestamp = strtotime($start_date. " 01:01:00");
         $query->condition('n.created', $start_date_timestamp, ">=");
     }
     if ($end_date != "na") {
-        $end_date_timestamp = strtotime($end_date);
+        $end_date_timestamp = strtotime($end_date. " 23:59:00");
         $query->condition('n.created', $end_date_timestamp, "<=");
     }
     if ($type != "na") {
@@ -368,11 +368,11 @@ function report_totalRecordsCount($start_date, $end_date, $type, $status, $synd,
     $query_cont->fields('n', array('nid'));
     //end   
     if ($start_date != "na") {
-        $start_date_timestamp = strtotime($start_date);
+        $start_date_timestamp = strtotime($start_date. " 01:01:00");
         $query_cont->condition('n.created', $start_date_timestamp, ">=");
     }
     if ($end_date != "na") {
-        $end_date_timestamp = strtotime($end_date);
+        $end_date_timestamp = strtotime($end_date. " 23:59:00");
         $query_cont->condition('n.created', $end_date_timestamp, "<=");
     }
     if ($type != "na") {
