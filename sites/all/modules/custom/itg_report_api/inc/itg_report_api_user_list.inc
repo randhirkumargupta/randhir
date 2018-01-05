@@ -23,7 +23,7 @@ function getUserList_Report($user_type, $user_sub_type) {
   $query->leftJoin('users_roles', 'ur', 'ur.uid=u.uid');
   $query->fields('u', array('uid', 'name', 'mail', 'status'));
   
-  //filter of content type
+  //filter of content type 
 //  $query->condition('ur.rid', 25, '!=');
 //  if ($user_type != "na" || $user_type != "") {
 //    if($user_type == "author"){
