@@ -10,7 +10,7 @@ function itg_fia_data() {
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
-  $query->orderBy('n.created', 'DESC');
+  $query->orderBy('n.changed', 'DESC');
   $query->range(0, 10);
   $query = $query->execute()->fetchCol();
   itg_fia_xml_node_feed($query);
@@ -216,9 +216,8 @@ function itg_fia_xml_node_feed($query) {
         }
       }
     }
-    $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);    
-    //$node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
-    //$node_body = preg_replace('(<img\b\s+.*?data-mosimage=\")(.*?yes:.*?)(\">)/i', '<figure>$1', $node_body );
+    $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);
+    $node_body = preg_replace('/(<img\b\s+.*?data-mosimage=\")/', '<figure>$1', $node_body );
     $node_body = str_replace('<p><figure', '<figure', $node_body);
     $node_body = str_replace('</figure></p>', '</figure>', $node_body);
     $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body); 
@@ -234,7 +233,15 @@ function itg_fia_xml_node_feed($query) {
 	  $node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
 	  $node_body = str_replace('<script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js></script></iframe></figure>', $node_body);
 	  $node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);    
-    $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
+    $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";    
+    $node_body = preg_replace("/ITG:SURVEY:([0-9]+)/", "", $node_body);
+    $node_body = preg_replace("/ITG:QUIZ:([0-9]+)/", "", $node_body);
+    $node_body = preg_replace("/ITG:POLL:([0-9]+)/", "", $node_body);
+    $node_body = str_replace("[ITG:FACTOIDS]", "", $node_body);
+    $node_body = str_replace("[ITG:EXPERT-CHUNK]", "", $node_body);
+    $node_body = str_replace("[ITG:TECH-PHOTOS]", "", $node_body);
+    $node_body = str_replace("[ITG:TECH-PHOTO-GALLERY]", "", $node_body);
+    $node_body = str_replace("[ITG:LISTICLES]", "", $node_body);
     $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
     $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
     $node_body = trim($node_body);
