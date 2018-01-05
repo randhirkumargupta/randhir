@@ -30,7 +30,7 @@
 
         <?php if (isset($row['title'])) : ?>
         <p  title="<?php print strip_tags($row['title']) ; ?>">
-            <?php print l(html_entity_decode($row['title']), 'node/' . $row['nid']); ?>
+            <?php print l(html_entity_decode($row['title']), 'node/' . $row['nid'], array('html' => TRUE)); ?>
         </p>
         <?php endif; ?>
       </span>
