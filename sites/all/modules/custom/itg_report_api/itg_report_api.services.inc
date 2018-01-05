@@ -8,7 +8,7 @@
  */
 
 /**
- * Function for APP API resource declaration.
+ * Function for APP API resource declaration. 
  */
 function itg_report_api_resource() {
   /**
@@ -258,34 +258,111 @@ function itg_report_api_resource() {
         ),
       ),
     ),
+    // get the recent data of Story/Photo/Vieo based on args .....
+    'report_api_data_list' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Report API.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_report_api',
+            'name' => 'itg_report_api.services',
+          ),
+          'callback' => 'itg_report_api_detail',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
   return $api;
 }
 
 /**
- * Call back function for testing API
+ * Call back function for testing API 
  * @pram $_GET
- *
  * @return array - The processed information array.
  */
 function itg_report_api_testing_report($token) {
-  // code for check POST method only start
+  // code for check POST method only start   
+  /*  $user = user_load_by_name("rakesh1234@mailinator.com");
+    p($user);
+    die(); */
+
+
   $str = '{
-	  "status_code": "0",
-	  "status_message": "Customised Message",
-	  "data": {}
-  }';
+	"status_code": "0",
+	"status_message": "Customised Message",
+	"data": {}
+}';
+
+
   $jsondata = $str;
-  $obj = json_decode($jsondata, TRUE);
+  $obj = json_decode($jsondata, true);
   $return_obj = $obj;
   return $return_obj;
 }
 
 /**
- * Call back function for story_count_report API
+ * Call back function for story_count_report API 
  * @pram $_GET
- *
+ * @return array - The processed information array.
+ */
+function itg_report_api_detail() {
+  $start_date = $_GET['start_date'];
+  $end_date = $_GET['end_date'];
+  $type = $_GET['type'];
+  $status = $_GET['status'];
+  $synd = $_GET['synd'];
+  $item_per_page = $_GET['item_per_page'];
+  //valid tid & pageno
+  if ($status == 'publish') {
+    $status = 1;
+  }
+  elseif ($status == 'unpublish') {
+    $status = 0;
+  }
+  if (!is_numeric($item_per_page)) {
+    $item_per_page = 0;
+  }
+  $suffix = $start_date . "_" . $end_date . "_" . $type . "_" . $status . "_" . $synd . "_" . $item_per_page;
+  if ($pageno == "na") {
+    $pageno = 0;
+  }
+
+  $redis_key = "itg_report_api_data_list_report" . $suffix;
+  $result_get = getRedis($redis_key);
+
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    // call function from return data..
+    $jsondata = get_datalist_report($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
+    $jsondata = json_encode($jsondata);
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+
+  $jsondata = json_decode($jsondata, true);
+  return $jsondata;
+}
+
+/**
+ * Call back function for story_count_report API 
+ * @pram $_GET
  * @return array - The processed information array.
  */
 function itg_report_api_story_count_report() {
@@ -296,6 +373,7 @@ function itg_report_api_story_count_report() {
   $item_per_page = $_GET['item_per_page'];
   $pageno = $_GET['pageno'];
   //valid tid & pageno
+
   if (!is_numeric($status)) {
     $status = 0;
   }
@@ -322,14 +400,13 @@ function itg_report_api_story_count_report() {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, TRUE);
+  $jsondata = json_decode($jsondata, true);
   return $jsondata;
 }
 
 /**
- * Call back function for user_list API
+ * Call back function for user_list API 
  * @pram $_GET
- *
  * @return array - The processed information array.
  */
 function itg_report_api_user_list() {
@@ -337,6 +414,9 @@ function itg_report_api_user_list() {
   $user_sub_type = $_GET['sub_type'];
   $start_date = $_GET['start_date'];
   $end_date = $_GET['end_date'];
+
+
+
   if (!is_numeric($item_per_page)) {
     $item_per_page = 0;
   }
@@ -344,8 +424,11 @@ function itg_report_api_user_list() {
   if ($pageno == "na") {
     $pageno = 0;
   }
+
   $redis_key = "itg_report_api_user_list_" . $suffix;
+  //echo $redis_key; die();
   $result_get = getRedis($redis_key);
+
   if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
@@ -357,14 +440,14 @@ function itg_report_api_user_list() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-  $jsondata = json_decode($jsondata, TRUE);
+
+  $jsondata = json_decode($jsondata, true);
   return $jsondata;
 }
 
 /**
- * Call back function for get_story_api API
+ * Call back function for get_story_api API 
  * @pram $_GET
- *
  * @return array - The processed information array.
  */
 function itg_report_api_get_story_api() {
@@ -375,7 +458,9 @@ function itg_report_api_get_story_api() {
   $user_sub_type = $_GET['user_sub_type'];
   $userid = $_GET['userid'];
   $content_type = $_GET['content_type'];
+
   //valid tid & pageno
+
   if (!is_numeric($status)) {
     $status = 0;
   }
@@ -386,8 +471,11 @@ function itg_report_api_get_story_api() {
   if ($pageno == "na") {
     $pageno = 0;
   }
+
   $redis_key = "itg_report_api_get_story_api" . $suffix;
+  //echo $redis_key; die();
   $result_get = getRedis($redis_key);
+
   if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
@@ -398,14 +486,14 @@ function itg_report_api_get_story_api() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-  $jsondata = json_decode($jsondata, TRUE);
+
+  $jsondata = json_decode($jsondata, true);
   return $jsondata;
 }
 
 /**
- * Call back function for story_video_photo_field_report API
+ * Call back function for story_video_photo_field_report API 
  * @pram $_GET
- *
  * @return array - The processed information array.
  */
 function itg_report_api_story_video_photo_field_report() {
@@ -422,9 +510,11 @@ function itg_report_api_story_video_photo_field_report() {
   else {
     $end_date = $_GET['end_date'];
   }
+
+
   $suffix = $start_date . "_" . $end_date;
   $redis_key = "itg_report_api_story_video_photo_field_report" . $suffix;
-
+  // echo $redis_key; die();
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -438,14 +528,13 @@ function itg_report_api_story_video_photo_field_report() {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, TRUE);
+  $jsondata = json_decode($jsondata, true);
   return $jsondata;
 }
 
 /**
- * Call back function for author_report API
+ * Call back function for author_report API 
  * @pram $_GET
- *
  * @return array - The processed information array.
  */
 function itg_report_api_author_report() {
@@ -455,9 +544,11 @@ function itg_report_api_author_report() {
   else {
     $start_date = $_GET['start_date'];
   }
+
+
   $suffix = $start_date;
   $redis_key = "itg_report_api_author_report_" . $suffix;
-
+  //echo $redis_key; die();
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -470,14 +561,14 @@ function itg_report_api_author_report() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-  $jsondata = json_decode($jsondata, TRUE);
+
+  $jsondata = json_decode($jsondata, true);
   return $jsondata;
 }
 
 /**
- * Call back function for author_report_tvtn API
+ * Call back function for author_report_tvtn API 
  * @pram $_GET
- *
  * @return array - The processed information array.
  */
 function itg_report_api_author_report_tvtn() {
@@ -487,9 +578,13 @@ function itg_report_api_author_report_tvtn() {
   else {
     $start_date = $_GET['start_date'];
   }
+
+
   $suffix = $start_date;
   $redis_key = "itg_report_api_author_report_tvtn_" . $suffix;
+  // echo $redis_key; die();
   $result_get = getRedis($redis_key);
+
   if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
@@ -500,14 +595,14 @@ function itg_report_api_author_report_tvtn() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-  $jsondata = json_decode($jsondata, TRUE);
+
+  $jsondata = json_decode($jsondata, true);
   return $jsondata;
 }
 
 /**
- * Call back function for auscovery_dashboard_web API
+ * Call back function for auscovery_dashboard_web API 
  * @pram $_GET
- *
  * @return array - The processed information array.
  */
 function itg_report_api_auscovery_dashboard_web() {
@@ -526,7 +621,7 @@ function itg_report_api_auscovery_dashboard_web() {
 
   $suffix = $start_date . "_" . $end_date;
   $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
-
+  //echo $redis_key; die();
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -539,14 +634,14 @@ function itg_report_api_auscovery_dashboard_web() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-  $jsondata = json_decode($jsondata, TRUE);
+
+  $jsondata = json_decode($jsondata, true);
   return $jsondata;
 }
 
 /**
- * Call back function for auscovery_dashboard_mob API
+ * Call back function for auscovery_dashboard_mob API 
  * @pram $_GET
- *
  * @return array - The processed information array.
  */
 function itg_report_api_auscovery_dashboard_mob() {
@@ -565,7 +660,7 @@ function itg_report_api_auscovery_dashboard_mob() {
 
   $suffix = $start_date . "_" . $end_date;
   $redis_key = "itg_report_api_auscovery_dashboard_mob" . $suffix;
-
+  //echo $redis_key; die();
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -579,7 +674,6 @@ function itg_report_api_auscovery_dashboard_mob() {
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
-  $jsondata = json_decode($jsondata, TRUE);
+  $jsondata = json_decode($jsondata, true);
   return $jsondata;
 }
-

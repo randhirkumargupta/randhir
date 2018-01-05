@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions for story_Count_report API
+ * Inc file contains the functions for story_Count_report API 
  */
 
 /**
@@ -11,102 +11,110 @@
  * @pram string $type
  * @pram int $status
  * @pram int $item_per_page
- *
  * @return array
  */
 function getStoryCountReport($start_date, $end_date, $type, $status, $item_per_page, $pageno = 0) {
 
-  global $base_url;
-  $list = array();
-  $data = array();
-  $total_cont = 0;
-  $range_max = $item_per_page;
-  $range_min = 0;
-  if (!$pageno == 0) {
-    $range_min = $pageno * $range_max;
-  }
-  
-  $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
-  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-  $query->fields('fpc', array('field_primary_category_value'));
-  $query->fields('dbody', array('body_value'));
-  $query->fields('npd', array('field_itg_content_publish_date_value'));
-  //end
-  if ($start_date != "na") {
-    $start_date_timestamp = strtotime($start_date);
-    $query->condition('n.created', $start_date_timestamp, ">=");
-  }
-  if ($end_date != "na") {
-    $end_date_timestamp = strtotime($end_date);
-    $query->condition('n.created', $end_date_timestamp, "<=");
-  }
-  if ($type != "na") {
-    $query->condition('n.type', $type);
-  }
-  $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-  //$total_records = $query->countQuery()->execute()->fetchField();
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    global $base_url;
+    $list = array();
+    $data = array();
+    $total_cont = 0;
+    $range_max = $item_per_page;
+    //$photolist = array();
+    if (!$pageno == 0) {
+        $range_min = $pageno * $range_max;
+    } else {
+        $range_min = 0;
+    }
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+    $query->fields('fpc', array('field_primary_category_value'));
+    $query->fields('dbody', array('body_value'));
+    $query->fields('npd', array('field_itg_content_publish_date_value'));
+    //end   
+    if ($start_date != "na") {
+        $start_date_timestamp = strtotime($start_date);
+        $query->condition('n.created', $start_date_timestamp, ">=");
+    }
+    if ($end_date != "na") {
+        $end_date_timestamp = strtotime($end_date);
+        $query->condition('n.created', $end_date_timestamp, "<=");
+    }
+    if ($type != "na") {
+        $query->condition('n.type', $type);
+    }
+    $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    //$total_records = $query->countQuery()->execute()->fetchField();
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
-  foreach ($result as $reskey => $resvalue) {
+    foreach ($result as $reskey => $resvalue) {
+        //p($resvalue); die();
+        $total_cont++;
+        $nid = $resvalue['nid'];
+        $title = $resvalue['title'];
+        $created = $resvalue['created'];
+        $type = $resvalue['type'];
+        $uid = $resvalue['uid'];
+        $changed = $resvalue['changed'];
+        $field_primary_category_value = $resvalue['field_primary_category_value'];
+        $body_value = $resvalue['body_value'];
+        $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
 
-    $total_cont++;
-    $nid = $resvalue['nid'];
-    $title = $resvalue['title'];
-    $created = $resvalue['created'];
-    $type = $resvalue['type'];
-    $uid = $resvalue['uid'];
-    $changed = $resvalue['changed'];
-    $field_primary_category_value = $resvalue['field_primary_category_value'];
-    $body_value = $resvalue['body_value'];
-    $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
+        $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+        $created_by = getNodeCreatedBy_UserName($uid);
+        $wordcount = count(explode(" ", strip_tags(trim($body_value))));
+        $created_datetime = date("Y-m-d H:i:s", $created);
+        $prime_cat = getNodePrimeCatByNid($nid);
 
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
-    $created_by = getNodeCreatedBy_UserName($uid);
-    $wordcount = count(explode(" ", strip_tags(trim($body_value))));
-    $created_datetime = date("Y-m-d H:i:s", $created);
-    $prime_cat = getNodePrimeCatByNid($nid);
-
-    // list data
-    $list[$nid]['id'] = "$nid";
-    $list[$nid]['title'] = "$title";
-    $list[$nid]['url'] = "$url";
-    $list[$nid]['word_count'] = "$wordcount";
-    $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
-    $list[$nid]['section_name'] = "$prime_cat->name";
-    $list[$nid]['created_datetime'] = "$created_datetime";
-    $list[$nid]['video_embed'] = "$nid";
-    $list[$nid]['created_by'] = "$created_by";
-  }
-  //$start_date, $end_date, $type, $status, $item_per_page, $pageno = 0
-  $total_records = totalRecordsCount($start_date, $end_date, $type, $status, $item_per_page, $pageno);
-  $next_page_no = $pageno + 1;
-  $next_page_url = $base_url . "/reportapi/story_count_report?start_date=" . $start_date . "&end_date=" . $end_date . "&type=" . $type . "&status=" . $status . "&item_per_page=" . $item_per_page . "&pageno=" . $next_page_no . "";
-  $data['results'] = $list;
-  $data['total_records'] = "$total_records";
-  $data['next_page_url'] = "$next_page_url";
-  //secrtion data report
-  $section_data = array();
-  $section_data = getSectionCountData_report($start_date, $end_date);
-  $data['section_data'] = $section_data;
-  return $data;
+        // list data
+        $list[$nid]['id'] = "$nid";
+        $list[$nid]['title'] = "$title";
+        $list[$nid]['url'] = "$url";
+        $list[$nid]['word_count'] = "$wordcount";
+        $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
+        $list[$nid]['section_name'] = "$prime_cat->name";
+        $list[$nid]['created_datetime'] = "$created_datetime";
+        $list[$nid]['video_embed'] = "$nid";
+        $list[$nid]['created_by'] = "$created_by";
+    }
+    //$start_date, $end_date, $type, $status, $item_per_page, $pageno = 0
+    $total_records = totalRecordsCount($start_date, $end_date, $type, $status, $item_per_page, $pageno);
+    $next_page_no = $pageno + 1;
+    $next_page_url = $base_url . "/reportapi/story_count_report?start_date=" . $start_date . "&end_date=" . $end_date . "&type=" . $type . "&status=" . $status . "&item_per_page=" . $item_per_page . "&pageno=" . $next_page_no . "";
+    $data['results'] = $list;
+    $data['total_records'] = "$total_records";
+    $data['next_page_url'] = "$next_page_url";
+    //secrtion data report
+    $section_data = array();
+    $section_data = getSectionCountData_report($start_date, $end_date);
+    
+//    $section_data[0]['count'] = "4";
+//    $section_data[0]['section'] = "Auto";
+//    $section_data[0]['section_id'] = "230";
+//    
+//    $section_data[1]['count'] = "4";
+//    $section_data[1]['section'] = "Auto";
+//    $section_data[1]['section_id'] = "230";
+    
+    $data['section_data'] = $section_data;
+    return $data;
 }
 
 /**
  * function for Created By user name
- * @pram int $uid
- *
+ * @pram int $uid 
  * @return string $published_datetime;
  */
 function getNodeCreatedBy_UserName($uid) {
-  $query = db_select('users', 'u');
-  $query->fields('u', array('name'));
-  $query->condition('u.uid', $uid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $name = $result[0]['name'];
-  return $name;
+    $query = db_select('users', 'u');
+    $query->fields('u', array('name'));
+    $query->condition('u.uid', $uid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $name = $result[0]['name'];
+    return $name;
 }
 
 /**
@@ -116,60 +124,84 @@ function getNodeCreatedBy_UserName($uid) {
  * @pram string $type
  * @pram int $status
  * @pram int $item_per_page
- *
- * @return int $total_records
+ * @return int $total_records 
  */
 function totalRecordsCount($start_date, $end_date, $type, $status, $item_per_page, $pageno) {
-  $query_cont = db_select('node', 'n');
-  $query_cont->fields('n', array('nid'));
-  //end
-  if ($start_date != "na") {
-    $start_date_timestamp = strtotime($start_date);
-    $query_cont->condition('n.created', $start_date_timestamp, ">=");
-  }
-  if ($end_date != "na") {
-    $end_date_timestamp = strtotime($end_date);
-    $query_cont->condition('n.created', $end_date_timestamp, "<=");
-  }
-  if ($type != "na") {
-    $query_cont->condition('n.type', $type);
-  }
-  $query_cont->condition('n.status', 1);
-  $result_cont = $query_cont->execute()->fetchAll();
-  //return $query->countQuery()->execute()->fetchField();
-  $total_records = count($result_cont);
-  return $total_records;
+    $query_cont = db_select('node', 'n');
+    $query_cont->fields('n', array('nid'));
+    //end   
+    if ($start_date != "na") {
+        $start_date_timestamp = strtotime($start_date);
+        $query_cont->condition('n.created', $start_date_timestamp, ">=");
+    }
+    if ($end_date != "na") {
+        $end_date_timestamp = strtotime($end_date);
+        $query_cont->condition('n.created', $end_date_timestamp, "<=");
+    }
+    if ($type != "na") {
+        $query_cont->condition('n.type', $type);
+    }
+    $query_cont->condition('n.status', 1);
+    $result_cont = $query_cont->execute()->fetchAll();
+    //return $query->countQuery()->execute()->fetchField();
+    $total_records = count($result_cont);
+    return $total_records;
+}
+
+function report_getSectionCountData_report($start_date, $end_date,$all_tids){
+    global $base_url;
+    $section_data = array();
+    $section_list_count = array();
+    $unique_tids = array_unique($all_tids);
+    $loop_count = 0;
+     foreach ($unique_tids as $value) {
+        //p($value);die();
+        $n_cont = 0;
+        $n_cont = countTidNode_report($start_date, $end_date, $value);
+        if($n_cont){
+            $ntid = $value;
+            $term = taxonomy_term_load($ntid);
+            $section_data[$loop_count]['count'] = "$n_cont";
+            $section_data[$loop_count]['section'] = "$term->name";
+            $section_data[$loop_count]['section_id'] = "$ntid";
+            $loop_count++;
+        }
+        
+     }
+     return $section_data;
+     
 }
 
 /**
  * function for get section data
  * @pram datetime $start_date
  * @pram datetime $end_date
- *
  * @return array $section_data;
  */
-function getSectionCountData_report($start_date, $end_date) {
-  global $base_url;
-  $section_data = array();
-  $section_list_count = array();
-  $vid = 14;
-  $section_list = getSectionListByVID($vid);
 
-  $loop_count = 0;
-  foreach ($section_list as $key => $value) {
-
-    $n_cont = 0;
-    $n_cont = countTidNode_report($start_date, $end_date, $value['tid']);
-    if ($n_cont) {
-      $ntid = $value['tid'];
-      $term = taxonomy_term_load($ntid);
-      $section_data[$loop_count]['count'] = "$n_cont";
-      $section_data[$loop_count]['section'] = "$term->name";
-      $section_data[$loop_count]['section_id'] = "$ntid";
-      $loop_count++;
-    }
-  }
-  return $section_data;
+function getSectionCountData_report($start_date, $end_date){
+    global $base_url;
+    $section_data = array();
+    $section_list_count = array();
+    $vid = 14;
+    $section_list = getSectionListByVID($vid);
+    //p($section_list);die();
+    $loop_count = 0;
+     foreach ($section_list as $key => $value) {
+        //p($value);die();
+        $n_cont = 0;
+        $n_cont = countTidNode_report($start_date, $end_date, $value['tid']);
+        if($n_cont){
+            $ntid = $value['tid'];
+            $term = taxonomy_term_load($ntid);
+            $section_data[$loop_count]['count'] = "$n_cont";
+            $section_data[$loop_count]['section'] = "$term->name";
+            $section_data[$loop_count]['section_id'] = "$ntid";
+            $loop_count++;
+        }
+        
+     }
+     return $section_data;
 }
 
 /**
@@ -177,22 +209,194 @@ function getSectionCountData_report($start_date, $end_date) {
  * @pram datetime $start_date
  * @pram datetime $end_date
  * @pram int $tid
- *
  * @return int $n_count;
  */
-function countTidNode_report($start_date, $end_date, $tid) {
-  //story count between
 
-  $start_date_timestamp = strtotime($start_date);
-  $end_date_timestamp = strtotime($end_date);
-  $n_count = 0;
-  $query = db_select('node', 'n');
-  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
-  $query->fields('n', array('nid'));
-  $query->condition('n.created', $start_date_timestamp, '>=')->condition('n.created', $end_date_timestamp, '<=')->condition('ti.tid', $tid);
-  //$query->condition('ti.tid', $tid);
-  $result = $query->execute()->fetchAll();
-  $total_records_between = count($result);
-  return $total_records_between;
+function countTidNode_report($start_date, $end_date, $tid){
+    //story count between
+    //echo $start_date; echo "###"; echo $end_date; echo "###"; echo $tid; die();
+    $start_date_timestamp = strtotime($start_date);
+    $end_date_timestamp = strtotime($end_date);
+    $n_count = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->fields('n', array('nid'));
+    $query->condition('n.created', $start_date_timestamp, '>=')->condition('n.created', $end_date_timestamp, '<=')->condition('ti.tid', $tid);
+    //$query->condition('ti.tid', $tid);
+    $result = $query->execute()->fetchAll();
+    $total_records_between = count($result);
+    return $total_records_between;
 }
+
+/**
+ * main function for generate story/photo/video datalist report
+ * @pram datetime $start_date
+ * @pram datetime $end_date
+ * @pram string $type
+ * @pram int $status
+ * @param boolen $synd 
+ * @pram int $item_per_page
+ * @return array
+ */
+function get_datalist_report($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno = 0) {
+
+    global $base_url;
+    $list = array();
+    $data = array();
+    $total_cont = 0;
+    $range_max = $item_per_page;
+    $all_tids = array();
+    //$photolist = array();
+    if (!$pageno == 0) {
+        $range_min = $pageno * $range_max;
+    } else {
+        $range_min = 0;
+    }
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+    $query->fields('fpc', array('field_primary_category_value'));
+    $query->fields('dbody', array('body_value'));
+    $query->fields('npd', array('field_itg_content_publish_date_value'));
+    //end   
+    if ($start_date != "na") {
+        $start_date_timestamp = strtotime($start_date);
+        $query->condition('n.created', $start_date_timestamp, ">=");
+    }
+    if ($end_date != "na") {
+        $end_date_timestamp = strtotime($end_date);
+        $query->condition('n.created', $end_date_timestamp, "<=");
+    }
+    if ($type != "na") {
+        $query->condition('n.type', $type);
+    }
+    if($synd == 'Yes'){
+      $query->leftJoin('field_data_field_story_syndication', 'syn', 'syn.entity_id=n.nid');
+      $query->fields('syn', array('field_story_syndication_value'));
+      $query->condition('syn.field_story_syndication_value', $synd);
+    }
+    if($status != ''){
+      $query->condition('n.status', $status);
+    }
+    $query->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $reskey => $resvalue) {
+        $total_cont++;
+        $nid = $resvalue['nid'];
+        $title = $resvalue['title'];
+        $created = $resvalue['created'];
+        $type = $resvalue['type'];
+        $uid = $resvalue['uid'];
+        $changed = $resvalue['changed'];
+        $field_primary_category_value = $resvalue['field_primary_category_value'];
+        $body_value = $resvalue['body_value'];
+        $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
+
+        $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+        $created_by = getNodeCreatedBy_UserName($uid);
+        $wordcount = str_word_count($body_value);
+        $created_datetime = date("Y-m-d H:i:s", $created);
+        $prime_cat = get_prime_cat_by_nid($nid);
+        $all_tids[] = $prime_cat->tid;
+        
+        $html = html_entity_decode($body_value);
+        $doc = new DOMDocument();
+        libxml_use_internal_errors(TRUE);
+        $doc->loadHTML($html);
+        $xpath = new DOMXPath($doc);
+        $nodelist = $xpath->query("//iframe");
+        $node = $nodelist->item(0);
+        $iframe_code = getStringBetween($html, '<iframe', '</iframe>');
+        $video_path = getStringBetween($iframe_code, 'src="', '"');
+        $video_embed = 'No';
+        if (strpos($video_path, '/embed/')) {
+         $video_embed = 'Yes';
+        }elseif (strpos($video_path, '/embeded-video/')) {
+          $video_embed = 'Yes';
+        }
+        
+        $social_query = db_select('jos_social_media_sharing','sm')
+                 ->fields('sm',array('is_promoted','promotion_remark'))
+                 ->condition('sm.content_id',	$nid)
+                 ->condition('sm.content_type',$type)
+                 ->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $is_promoted = $social_query[0]['is_promoted'];
+        $promotion_remark = $social_query[0]['promotion_remark'];
+        // list data
+        $list[$nid]['is_promoted'] = "$is_promoted";
+        $list[$nid]['promotion_remark'] = "$promotion_remark";
+        $list[$nid]['id'] = "$nid";
+        $list[$nid]['title'] = "$title";
+        $list[$nid]['url'] = "$url";
+        $list[$nid]['word_count'] = "$wordcount";
+        $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
+        $list[$nid]['section_name'] = "$prime_cat->name";
+        $list[$nid]['created_datetime'] = "$created_datetime";
+        $list[$nid]['video_embed'] = "$video_embed";
+        $list[$nid]['created_by'] = "$created_by";
+    }
+    $total_records = report_totalRecordsCount($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
+    $next_page_no = $pageno + 1;
+    $next_page_url = $base_url . "/reportapi/report_api_data_list?start_date=" . $start_date . "&end_date=" . $end_date . "&type=" . $type . "&status=" . $status . "&synd=". $synd ."&item_per_page=" . $item_per_page . "&pageno=" . $next_page_no . "";
+    $data['results'] = $list;
+    $data['total_records'] = "$total_records";
+    $data['next_page_url'] = "$next_page_url";
+    //secrtion data report
+    $section_data = array();
+    $section_data = report_getSectionCountData_report($start_date, $end_date,$all_tids);
+    $data['section_data'] = $section_data;
+    //p($data);
+    return $data;
+}
+
+/**
+ * function for get primary term 
+ * @param $nid node id
+ */
+function get_prime_cat_by_nid($nid){
+    $query = db_select('field_data_field_primary_category', 'fpc');
+    $query->fields('fpc', array('field_primary_category_value'));
+    $query->condition('fpc.entity_id', $nid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $field_primary_category_value = $result[0]['field_primary_category_value'];
+    return taxonomy_term_load($field_primary_category_value);
+}
+
+/**
+ * function for totalRecordsCount
+ * @pram datetime $start_date
+ * @pram datetime $end_date
+ * @pram string $type
+ * @pram int $status
+ * @pram int $item_per_page
+ * @return int $total_records 
+ */
+function report_totalRecordsCount($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno) {
+    $query_cont = db_select('node', 'n');
+    $query_cont->fields('n', array('nid'));
+    //end   
+    if ($start_date != "na") {
+        $start_date_timestamp = strtotime($start_date);
+        $query_cont->condition('n.created', $start_date_timestamp, ">=");
+    }
+    if ($end_date != "na") {
+        $end_date_timestamp = strtotime($end_date);
+        $query_cont->condition('n.created', $end_date_timestamp, "<=");
+    }
+    if ($type != "na") {
+        $query_cont->condition('n.type', $type);
+    }
+    if($synd == 'Yes'){
+      $query_cont->leftJoin('field_data_field_story_syndication', 'syn', 'syn.entity_id=n.nid');
+      $query_cont->fields('syn', array('field_story_syndication_value'));
+      $query_cont->condition('syn.field_story_syndication_value', $synd);
+    }
+    $query_cont->condition('n.status', $status);
+    $result_cont = $query_cont->execute()->fetchAll();
+    $total_records = count($result_cont);
+    return $total_records;
+}
+
 
