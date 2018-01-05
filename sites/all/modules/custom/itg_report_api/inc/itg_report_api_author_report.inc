@@ -13,8 +13,9 @@ function author_report_tvtn($start_date) {
     global $base_url;
     $data = array();
     $prev_day = time() - ( 24 * 60 * 60);
-    $today = date("d-F-Y");
-    $yesterday = date("d-F-Y", $prev_day);
+    $hour = 01;
+  $today = strtotime($hour . ':00:00');
+  $yesterday = strtotime('-1 day', $today);
     $month = date("M-Y", $start_date);
     $year = date("Y", $start_date);
     $site_id = 1;
@@ -135,8 +136,9 @@ function author_report($start_date) {
     global $base_url;
     $data = array();
     $prev_day = time() - ( 24 * 60 * 60);
-    $today = date("d-F-Y");
-    $yesterday = date("d-F-Y", $prev_day);
+    $hour = 01;
+  $today = strtotime($hour . ':00:00');
+  $yesterday = strtotime('-1 day', $today);
     $month = date("M-Y", $start_date);
     $year = date("Y", $start_date);
     $site_id = 1;

@@ -19,10 +19,10 @@ function story_video_photo_field_report($start_date, $end_date) {
     //p($section_list); die();
     $section_list_count = nodeCountByDateWise_Report($start_date, $end_date, $section_list);
     
-    $hour = 12;
-    $today = strtotime($hour . ':00:00');
-    $yesterday = strtotime('-1 day', $today);
-    $dayBeforeYesterday = strtotime('-1 day', $yesterday);
+    $hour = 01;
+  $today = strtotime($hour . ':00:00');
+  $yesterday = strtotime('-1 day', $today);
+  $dayBeforeYesterday = strtotime('-1 day', $yesterday);
     
     $today_key = date("Y-m-d", $today);
     $yesterday_key = date("Y-m-d", $yesterday);
@@ -223,10 +223,10 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
 function countVideo($start_date, $end_date, $tid) {
     //video count between $start_date & $end_date
 
-    $hour = 12;
-    $today = strtotime($hour . ':00:00');
-    $yesterday = strtotime('-1 day', $today);
-    $dayBeforeYesterday = strtotime('-1 day', $yesterday);
+    $hour = 01;
+  $today = strtotime($hour . ':00:00');
+  $yesterday = strtotime('-1 day', $today);
+  $dayBeforeYesterday = strtotime('-1 day', $yesterday);
     $total_records = array();
 
     //video count btween
@@ -276,10 +276,10 @@ function countVideo($start_date, $end_date, $tid) {
 function countPhoto($start_date, $end_date, $tid) {
     //video count between $start_date & $end_date
 
-    $hour = 12;
-    $today = strtotime($hour . ':00:00');
-    $yesterday = strtotime('-1 day', $today);
-    $dayBeforeYesterday = strtotime('-1 day', $yesterday);
+    $hour = 01;
+  $today = strtotime($hour . ':00:00');
+  $yesterday = strtotime('-1 day', $today);
+  $dayBeforeYesterday = strtotime('-1 day', $yesterday);
     $total_records = array();
 
     //photo count between
@@ -329,10 +329,10 @@ function countPhoto($start_date, $end_date, $tid) {
 function countStory($start_date, $end_date, $tid) {
     //video count between $start_date & $end_date
 
-    $hour = 12;
-    $today = strtotime($hour . ':00:00');
-    $yesterday = strtotime('-1 day', $today);
-    $dayBeforeYesterday = strtotime('-1 day', $yesterday);
+    $hour = 01;
+  $today = strtotime($hour . ':00:00');
+  $yesterday = strtotime('-1 day', $today);
+  $dayBeforeYesterday = strtotime('-1 day', $yesterday);
     $total_records = array();
 
     //story count between
