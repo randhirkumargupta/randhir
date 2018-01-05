@@ -115,7 +115,9 @@ function itg_fia_xml_node_feed($query) {
             $get_script .= '<figure><img src="' . $imgs_path . '" alt="" title="" /></figure>';
           }
         }
-        $full_script_slider[$gall_position][] = '<figure class="op-slideshow">' . $get_script . '</figure>';
+        if(isset($get_script) && !empty($get_script)){
+		  $full_script_slider[$gall_position][] = '<figure class="op-slideshow">' . $get_script . '</figure>';
+		}        
       }
     }
     
@@ -204,7 +206,9 @@ function itg_fia_xml_node_feed($query) {
       }
     }
     $node_body = implode("<p>", $body_vals);
-    $node_body = str_replace(['<iframe', '</iframe>'], ['<figure class="op-interactive"><iframe', '</iframe></figure>'], $node_body);
+    $node_body = str_replace(['<iframe', '</iframe>'], ['<figure class="op-interactive"><iframe', '</iframe></figure>'], $node_body);    
+    $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);    
+    $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
     preg_match_all('#<div class="itg-mosimage"[^>]*>(.*?)</div>#', $node_body, $matches);
     if (!empty($matches[1])) {
       foreach ($matches[1] as $val) {
@@ -214,8 +218,6 @@ function itg_fia_xml_node_feed($query) {
         }
       }
     }
-    $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);    
-    $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1', $node_body ); 
     $node_body = str_replace('<p><figure', '<figure', $node_body);
     $node_body = str_replace('</figure></p>', '</figure>', $node_body);
     $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body); 
@@ -240,7 +242,7 @@ function itg_fia_xml_node_feed($query) {
     $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
     $node_body_content = str_replace('<br />', '', $node_body_content);
     $desc = str_replace('<br />', '', $desc);    
-    $desc = str_replace("'", '&#39;', $desc);
+    //$desc = str_replace("'", '&#39;', $desc);
     $items .= itg_fia_xml_format_rss_item('story-'.$node->nid, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $node->title, $node->link, $pubdate, $auth_name, $desc, $op_pub, $modified, $op_modified);
   }
 
