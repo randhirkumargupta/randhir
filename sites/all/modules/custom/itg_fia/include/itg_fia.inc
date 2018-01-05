@@ -227,6 +227,10 @@ function itg_fia_xml_node_feed($query) {
     $node_body = str_replace('<p></p>', '', $node_body);
     $node_body = str_replace('<p> </p>', '', $node_body);
     $node_body = str_replace(array('<li></li>', '<li> </li>', '<li>   </li>'), '', $node_body);
+    $node_body = str_replace('</ul></ul>', '</ul>', $node_body);
+    $node_body = str_replace('</figure></iframe>', '</iframe></figure>', $node_body);
+    $node_body = str_replace('</iframe></figure></p>', '</iframe></figure>', $node_body);
+    $node_body = str_replace('<figcaption></figcaption>', '', $node_body);
     $node_body = str_replace('<blockquote class="twitter-tweet" lang="en"><blockquote class="twitter-tweet" lang="en">', '<blockquote class="twitter-tweet" lang="en">', $node_body);
     $node_body = str_replace('</blockquote></blockquote>', '</blockquote>', $node_body);
     $node_body = str_replace('</blockquote><script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '</blockquote><script charset="utf-8" src="//platform.twitter.com/widgets.js"></script>', $node_body);
