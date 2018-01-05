@@ -61,15 +61,14 @@ $conf = array(
     'cache_filter' => 'default',
     'cache_menu' => 'default',
     'cache_page' => 'default',
-   // 'session' => 'session',
     'users' => 'default',
     'cache_pathdst' => 'default',
     'cache_pathsrc' => 'default',
   ),
 );
 $conf['memcache_key_prefix'] = 'itgmem';
-
 $conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
+$conf['memcache_stampede_protection'] = TRUE;
 
 #MongoDB 
 $conf['mongodb_connections'] = array(
