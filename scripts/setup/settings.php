@@ -270,7 +270,7 @@ $databases['sso_db']['default'] = array(
 //#####################################################################################
 
 //for production setting
-$databases['default']['master'][] = array (
+/*$databases['default']['master'][] = array (
   'database' => 'indiatoday',
   'username' => 'prod_it_write',
   'password' => 'pr0d_!t@64',
@@ -311,7 +311,44 @@ $databases['default']['default'] = array (
   //'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
   'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
   'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'") // For MySQL InnoDB, make sure isolation level doesn't interfere with our intentions. Defaults to empty.
+);*/
+
+// one slave setting
+$databases['default']['default'] = array(
+  'driver' => 'autoslave',
+  'master' => array('master', 'autoslave'), // optional, defaults to 'master'
+  'slave' => array('autoslave', 'master'), // optional, defaults to 'autoslave'  
+  // Always use "master" for tables "semaphore" and "sessions"
+  'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
+  'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'"),
+  'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
+  'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
+  //'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
+  'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
 );
+
+
+$databases['default']['master'] = array(
+  'database' => 'indiatoday',
+  'username' => 'prod_it_write',
+  'password' => 'pr0d_!t@64',
+  'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'port' => '3306',
+  'driver' => 'mysql',
+  'prefix' => '',
+);
+
+$databases['default']['autoslave'] = array(
+  'database' => 'indiatoday',
+  'username' => 'prod_it_read',
+  'password' => 'pr0d_!t@98',
+  'host' => 'itgd-drupal-db-it-prod-replica1.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'port' => '',
+  'driver' => 'mysql',
+  'prefix' => '',
+  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work) 
+);
+
 
 $databases['sso_db']['default'] = array(
   'database' => 'IndiaToday_sso',
