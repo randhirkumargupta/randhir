@@ -51,6 +51,7 @@ $conf = array(
 );
 $conf['memcache_key_prefix'] = 'itgmem';
 $conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
+$conf['memcache_stampede_protection'] = TRUE;
 
 
 #MongoDB 
