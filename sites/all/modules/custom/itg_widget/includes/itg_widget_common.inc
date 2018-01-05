@@ -1710,6 +1710,18 @@ function itg_widget_views_query_alter(&$view, &$query) {
         $order_by['direction'] = 'DESC';
         array_unshift($query->orderby, $order_by);
     }
+    if ($view->name == 'programmes' && ($view->current_display == 'rhs_programmes' || $view->current_display == 'page')) {
+      $programm_ids = variable_get('itg_programmes_order_by');
+      if (isset($programm_ids) && !empty($programm_ids)) {
+        $query->orderby[0]['field'] = "FIELD(taxonomy_term_data.tid, $programm_ids)";
+      }
+    }
+  if ($view->name == 'live_tv_programs' && $view->current_display == 'page') {
+    $programm_ids = variable_get('itg_programmes_order_by');
+    if (isset($programm_ids) && !empty($programm_ids)) {
+      $query->orderby[0]['field'] = "FIELD(taxonomy_term_data.tid, $programm_ids)";
+    }
+  }
 }
 
 function itg_widget_query_issue_magazine_widget_alter(QueryAlterableInterface $query) {
@@ -2995,6 +3007,7 @@ function itg_widget_node_update($node) {
 
         if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) &&!empty($node->op)) {
             __itg_widget_helper_data_insert($node->nid);
+            if($node->original->status == 0 && $node->status == 1) {
             watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
@@ -3011,6 +3024,7 @@ function itg_widget_node_update($node) {
             foreach ($cat_id as $category) {
                 manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
                 manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
+            }    
             }
         }
     }

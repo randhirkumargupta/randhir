@@ -7,7 +7,7 @@
   foreach ($rows as $key => $row) :
     if (isset($row['cat_id'])) {
       if ($key == 0) {
-        $url = l("More »", 'node/' . $row['nid'], array('html' => TRUE));
+        $url = l("More »", 'taxonomy/term/' . $row['cat_id'], array('html' => TRUE));
       }
       if ($key > 3) {
         continue;

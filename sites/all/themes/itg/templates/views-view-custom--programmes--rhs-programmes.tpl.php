@@ -18,7 +18,7 @@
             <li>
                 <h4>
                     <?php if (!empty($row['field_cm_display_title'])) : ?>
-                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'node/' . $recent_video_under_cat , array('html' => TRUE)); ?>
+                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'taxonomy/term/' . $row['tid'] , array('html' => TRUE)); ?>
                     <?php endif; ?>
                 </h4>
                 <span class="time">
