@@ -47,12 +47,36 @@ $conf = array(
     'users' => 'default',
     'cache_pathdst' => 'default',
     'cache_pathsrc' => 'default',
+    'cache_class_cache_form' => 'default',
   ),
 );
+$conf['memcache_stampede_protection'] = TRUE;
+$conf['memcache_stampede_protection_ignore'] = array(
+    // Ignore some cids in 'cache_bootstrap'.
+    'cache_bootstrap' => array(
+      'module_implements',
+      'variables',
+      'lookup_cache',
+      'schema:runtime:*',
+      'theme_registry:runtime:*',
+      '_drupal_file_scan_cache',
+    ),
+    // Ignore all cids in the 'cache' bin starting with 'i18n:string:'
+    'cache' => array(
+      'i18n:string:*',
+    ),
+    // Disable stampede protection for the entire 'cache_path' and 'cache_rules'
+    // bins.
+    'cache_path',
+    'cache_rules',
+  );
+
 $conf['memcache_key_prefix'] = 'itgmem';
 $conf['path_inc'] = 'sites/all/modules/contrib/pathcache/path.inc';
-$conf['memcache_stampede_protection'] = TRUE;
 
+// Don't bootstrap the database when serving pages from the cache.
+$conf['page_cache_without_database'] = TRUE;
+$conf['page_cache_invoke_hooks'] = FALSE;
 
 #MongoDB 
 //prodreplica and uatreplica
