@@ -331,7 +331,8 @@ $databases['sso_db']['default'] = array(
 //end production setting
 
 // Use locking that supports force master
-$conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
+// $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
+$conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/memcache-lock.inc';
 
 //$conf['cache_default_class'] = 'AutoslaveCache';
 //$conf['autoslave_cache_default_class'] = 'ConsistentCache';
