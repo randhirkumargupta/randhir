@@ -42,14 +42,19 @@
     <!--[if lt IE 9]>
     <script src="<?php print $base_path . $path_to_zen; ?>/js/respond.js"></script>
     <![endif]-->
-  <?php endif; ?>
+  <?php endif; 
+  $node_data = menu_get_object();
+  $arg = arg();
+  ?>
 <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
       { (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-795349-17', 'auto');
+      <?php if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { ?>
+       ga('create', 'UA-795349-17', 'auto');
+    <?php } ?>
+     
       <?php
       $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
       $type = isset($menu_item['page_arguments'][0]->type) ? $menu_item['page_arguments'][0]->type : "";
@@ -63,7 +68,9 @@
       <?php if(!empty($bylines)) :?>
       ga('set', 'dimension1', '<?php echo $bylines ?>');
       <?php endif; ?>
+        <?php if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { ?>
       ga('send', 'pageview');
+      <?php } ?>
     </script>
     <!-- Default comscore -->
     <script type='text/javascript'>
