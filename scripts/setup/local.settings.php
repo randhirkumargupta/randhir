@@ -48,6 +48,7 @@ $conf = array(
     'cache_pathdst' => 'default',
     'cache_pathsrc' => 'default',
     'cache_class_cache_form' => 'default',
+    'cache_field' => 'default',
   ),
 );
 
