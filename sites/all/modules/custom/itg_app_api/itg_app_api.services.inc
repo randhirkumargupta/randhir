@@ -4158,9 +4158,10 @@ function itg_rapid_api_edit_profile($token) {
     $HTTP_RAW_POST_DATA;
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $pram['user_id'] = array($params['user_id']); 
     $rand = rand();
     $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-    $result = callAPI("GET", $url, $params);
+    $result = callAPI("GET", $url, $pram);
     $result_obj = json_decode($result);
 
     // raw input validation
