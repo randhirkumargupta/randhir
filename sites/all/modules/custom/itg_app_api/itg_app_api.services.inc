@@ -5430,6 +5430,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
+    
+    p(node_load(1069009));
    
    $program_ar = array(1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061);
    $program_key = "itg_programmes_order_by";
