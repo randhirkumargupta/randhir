@@ -1874,7 +1874,7 @@ function homePageJsonWidget_1() {
     $n_widget[0]['type'] = "2";
     $n_widget[0]['type_label'] = "scorecard";
     $n_widget[0]['tilte'] = "Scorecard";
-    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v1.html?team=ind";
+    $n_widget[0]['short_url'] = "http://feeds.intoday.in/xml_it/commentary/scrapp_v1.html";
     $n_widget[0]['extended_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v3.html?team=ind";
     $n_widget[0]['action'] = "webview";
     $n_widget[0]['is_india_match'] = "1";
