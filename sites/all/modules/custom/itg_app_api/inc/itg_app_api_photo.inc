@@ -194,6 +194,7 @@ function generatePhotoCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
+            $title = strip_tags($title);
             // photo detail for listing
             $term_pri = taxonomy_term_load($field_primary_category_value);
             $term_name_pri = $term_pri->name;
@@ -414,6 +415,7 @@ function generatePhotoStoryDeatilList($id) {
     // list array building
     $photo_list_array = generatePhotoStoryDetailList($nid);
     $toptlapics = $photo_list_array['listcont'];
+    $title = strip_tags($title);
     //data array building
     $firebase_url = get_node_firebase_weburl($nid);
     $data_array['id'] = "$nid";
@@ -465,6 +467,8 @@ function generatePhotoStoryDetailList($nid) {
             $caption = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
             $byline = $entity_obj[$val['value']]->field_credit['und'][0]['value'];
             //$byline = getImgByline($photo_story_img_fid);
+            $caption = strip_tags($caption);
+            $photo_story_desc = strip_tags($photo_story_desc);
             $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
             $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
             $photo_list_array[$listcont]['p_credit'] = "$byline";

@@ -141,6 +141,8 @@ function generateStoryDeatilList($id) {
     
 
     //data array building
+    $title = strip_tags($title);
+    $image_caption = strip_tags($image_caption);
 
     $data_array['category_id'] = "$tid";
     $data_array['category_title'] = "$term_name";
@@ -263,6 +265,7 @@ function getHighlight($node) {
     $loop_cont = 0;
     foreach ($heighlight_obj as $key => $value) {
         $text = $value['value'];
+        $text = strip_tags($text);
         $heighlight[$loop_cont]['h_title'] = "$text";
         $loop_cont++;
     }

@@ -216,6 +216,8 @@ function generateVideoCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
+            $title = strip_tags($title);
+            $desc = strip_tags($desc);
             $comment_cont = getCommentsCount($nid);
             $photo_list_array[$listcount]['v_id'] = "$nid";
             $photo_list_array[$listcount]['v_title'] = "$title";
@@ -494,7 +496,8 @@ function generateProgramCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
-
+            $title = strip_tags($title);
+            $desc = strip_tags($desc);
             $photo_list_array[$listcount]['p_id'] = "$nid";
             $photo_list_array[$listcount]['p_title'] = "$title";
             $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
@@ -618,6 +621,7 @@ function generateProgramSectionList($Program_section_list) {
         $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
         $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
         $cat_icon_img = sectionCategoryIconImg($value);
+        $p_short_description = strip_tags($p_short_description);
 
         $data[$listcount]['p_id'] = "$value";
         $data[$listcount]['p_title'] = "$term->name";
@@ -737,7 +741,8 @@ function generateVideoDetail($nid) {
         } else {
             $changed_datetime = "";
         }
-
+        $title = strip_tags($title);
+        $desc = strip_tags($desc);
         $photo_list_array[$listcount]['v_id'] = "$nid";
         $photo_list_array[$listcount]['v_title'] = "$title";
         $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
@@ -844,7 +849,8 @@ function generateProgramDetail($nid) {
         } else {
             $changed_datetime = "";
         }
-
+        $title = strip_tags($title);
+        $desc = strip_tags($desc);
         $photo_list_array[$listcount]['p_id'] = "$nid";
         $photo_list_array[$listcount]['p_title'] = "$title";
         $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
