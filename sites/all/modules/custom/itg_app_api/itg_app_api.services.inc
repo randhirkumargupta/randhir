@@ -4175,7 +4175,7 @@ function itg_rapid_api_edit_profile($token) {
     }
     if (!$result_obj->uid) {
         $account_err['status_code'] = "0";
-        $account_err['status_message'] = "Invalid User_ID1";
+        $account_err['status_message'] = "Invalid User_ID";
         return $account_err;
     }
     //$params = $_POST;
