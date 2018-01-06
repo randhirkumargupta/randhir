@@ -135,8 +135,10 @@ function generateStoryDeatilList($id) {
     $tech_photo_gallery = $node->field_technology_photogallery['und'][0]['target_id'];
     $caption = "";
     $byline = "";
-    //$byline = $node->field_story_extra_large_image['und'][0]['alt'];
-    $caption = $node->field_story_extra_large_image['und'][0]['title'];
+    $img_info = getInfoData($large_image_fid);
+    $image_courtesy = $img_info['image_courtesy'];
+    $image_caption = $img_info['image_caption'];
+    
 
     //data array building
 
@@ -145,8 +147,8 @@ function generateStoryDeatilList($id) {
     $data_array['id'] = "$nid";
     $data_array['title'] = "$title";
     $data_array['large_image'] = "$extra_large_image";
-    $data_array['image_credit'] = "$byline";
-    $data_array['image_caption'] = "$caption";
+    $data_array['image_credit'] = "$image_courtesy";
+    $data_array['image_caption'] = "$image_caption";
     $data_array['updated_datetime'] = "$changed_datetime";
     $data_array['published_datetime'] = "$published_date";
     $data_array['buzzflag'] = "$buzz_temp_flag";
@@ -806,5 +808,20 @@ function generateAuthorTagStory($node, $status) {
   $output['a_image'] = "$a_image";
   $output['a_twitter_handler'] = "$a_twitter_handler";
   return $output;
+}
+
+function getInfoData($fid){
+    $data = array();
+    if($fid){
+        $query = db_select('image_info', 'iminfo');
+        $query->fields('iminfo', array('image_courtesy', 'image_caption'));
+        $query->condition('iminfo.fid', $fid , '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $k => $res) {
+            $data['image_courtesy'] = $res['image_courtesy'];
+            $data['image_caption'] = $res['image_caption'];
+        }
+    }
+    return $data;
 }
 
