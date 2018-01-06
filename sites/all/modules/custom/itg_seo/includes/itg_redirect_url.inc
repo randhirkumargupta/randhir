@@ -105,12 +105,12 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   
   if ($_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
     $old_url = substr($_SERVER['REDIRECT_URL'], 1);	  
-    $new_url = redirect_load_by_source($old_url);
-    
-    if (!empty($new_url)) {	  
-      $url_re = 'https://www.indiatoday.in/'.$new_url->redirect;     
+    $source_url = redirect_load_by_source($old_url);    
+    if (!empty($source_url)) {
+      $new_url = drupal_get_path_alias($source_url->redirect);
+      $url_re = 'https://www.indiatoday.in/'.$new_url;     
     } else {
-        $url_re = 'https://www.indiatoday.in'.$_SERVER['REQUEST_URI'];       
+        $url_re = 'https://www.indiatoday.in'.$_SERVER['REDIRECT_URL'];       
     }
      
     drupal_goto($url_re);    
