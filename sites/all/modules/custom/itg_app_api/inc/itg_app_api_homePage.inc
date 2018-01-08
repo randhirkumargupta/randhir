@@ -210,6 +210,9 @@ function homePageJsonPackagelist_india() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
+            if ($type == 'story') {
+                $type = getStoryType($nid);
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             //$data_newslist[$listcount]['n_template_id'] = "";
@@ -423,6 +426,9 @@ function homePageJsonPackagelist_lifestyle() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
+            if ($type == 'story') {
+                $type = getStoryType($nid);
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             //$data_newslist[$listcount]['n_template_id'] = "";
@@ -633,6 +639,9 @@ function homePageJsonPackagelist_world() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
+            if ($type == 'story') {
+                $type = getStoryType($nid);
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             //$data_newslist[$listcount]['n_template_id'] = "";
@@ -807,6 +816,9 @@ function homePageJsonTopstories() {
             $conf = getStoryConfigVal($nid);
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
+            }
+            if ($type == 'story') {
+                $type = getStoryType($nid);
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$home_list_count]['n_id'] = "$nid";
@@ -995,6 +1007,9 @@ function homePageJsonNewslist_india() {
             $conf = getStoryConfigVal($nid);
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
+            }
+            if ($type == 'story') {
+                $type = getStoryType($nid);
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
@@ -1208,6 +1223,9 @@ function homePageJsonNewslist_world() {
             $conf = getStoryConfigVal($nid);
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
+            }
+            if ($type == 'story') {
+                $type = getStoryType($nid);
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
@@ -1774,6 +1792,9 @@ function homePageJsonNewslist_lifestyle() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
+            if ($type == 'story') {
+                $type = getStoryType($nid);
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             //$data_newslist[$listcount]['n_template_id'] = "2";
@@ -1851,7 +1872,7 @@ function homePageJsonWidget_1() {
 
     $data_newslist[$listcount]['n_id'] = "0";    
     $data_newslist[$listcount]['n_template_id'] = "";
-    $data_newslist[$listcount]['n_type'] = "story";
+    $data_newslist[$listcount]['n_type'] = "widget";
     $data_newslist[$listcount]['n_is_developing'] = "0";
     $data_newslist[$listcount]['n_is_sponsored'] = "0";
     $data_newslist[$listcount]['n_share_link'] = "";
@@ -1875,7 +1896,7 @@ function homePageJsonWidget_1() {
     $n_widget[0]['type_label'] = "scorecard";
     $n_widget[0]['tilte'] = "Scorecard";
     $n_widget[0]['short_url'] = "http://feeds.intoday.in/xml_it/commentary/scrapp_v1.html";
-    $n_widget[0]['extended_url'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v3.html?team=ind";
+    $n_widget[0]['extended_url'] = "http://feeds.intoday.in/xml_it/commentary/scrapp_v3.html";
     $n_widget[0]['action'] = "webview";
     $n_widget[0]['is_india_match'] = "1";
     
@@ -1909,7 +1930,7 @@ function homePageJsonWidget_2() {
 
     $data_newslist[$listcount]['n_id'] = "0";    
     $data_newslist[$listcount]['n_template_id'] = "";
-    $data_newslist[$listcount]['n_type'] = "story";
+    $data_newslist[$listcount]['n_type'] = "widget";
     $data_newslist[$listcount]['n_is_developing'] = "0";
     $data_newslist[$listcount]['n_is_sponsored'] = "0";
     $data_newslist[$listcount]['n_share_link'] = "";

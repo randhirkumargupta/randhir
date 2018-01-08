@@ -1085,6 +1085,9 @@ function topstoriesList($source) {
         if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
             $is_developing = 1;
         }
+        if ($type == 'story') {
+                $type = getStoryType($nid);
+            }
         $prime_cat = getNodePrimeCatByNid($nid);
         $data_newslist[$home_list_count]['n_id'] = "$nid";
 //$data_newslist[$home_list_count]['n_template_id'] = "";
