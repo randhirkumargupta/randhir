@@ -1,7 +1,26 @@
 ! function(t) {
     Drupal.behaviors.itg_sso_login = {
         attach: function(s, e) {
-            var ssoLoginCheck = Drupal.settings.itg_sso_login.settings.sso_login_check;
+            
+           //get Cookie for sso login
+           function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+            var ssoLoginCheck = getCookie('itg_forced_login');
+            console.log(ssoLoginCheck);
+            //end code get Cookie for sso login
+            
             var o = Drupal.settings.itg_sso_login.settings.base_url,
                 i = Drupal.settings.itg_sso_login.settings.uid,
                 n = Drupal.settings.itg_sso_login.settings.check_sso_url,
@@ -31,7 +50,8 @@
                     }
                 })
             }), jQuery("#itg-sso-reg-password-form  label[for='edit-pass-pass1']").text("New password")
-            if (ssoLoginCheck == 'yes') {
+            if (ssoLoginCheck != 'null') {
+                console.log(ssoLoginCheck);
                 jQuery.ajax({
                     url: Drupal.settings.itg_widget.settings.base_url + "/itg-load-my-account",
                     type: "post",

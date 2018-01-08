@@ -314,11 +314,11 @@ function itg_layout_manager_block_view($delta = '') {
       $settings['base_url'] = $base_url;
       $settings['sso_url'] = trim(PARENT_SSO);
       $settings['front_url'] = base64_encode(trim(FRONT_URL));
-      if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {
+      /*if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {
          $settings['sso_login_check'] = 'yes';
       } else{
           $settings['sso_login_check'] = 'no';
-      }
+      }*/
       if (!empty(variable_get('logoutsec_time'))) {
         $settings['logoutsec'] = variable_get('logoutsec_time');
       } else {
