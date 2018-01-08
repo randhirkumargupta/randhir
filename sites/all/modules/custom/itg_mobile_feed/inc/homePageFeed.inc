@@ -110,7 +110,7 @@ function homePageFeaturesWidgetData() {
   global $home_list_count;
   $output = "";
   $widget_name = "home_page_feature_widget";
-  $range_max = 2;
+  $range_max = 3;
   $range_min = 0;
   $order_by = 'ASC';
 
