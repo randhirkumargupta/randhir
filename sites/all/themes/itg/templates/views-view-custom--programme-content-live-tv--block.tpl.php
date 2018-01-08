@@ -35,7 +35,7 @@
 
         <?php if (isset($row['title'])) : ?>
           
-            <?php print l(html_entity_decode($row['title']), 'node/' . $row['nid']); ?>
+        <?php print html_entity_decode(l($row['title'], 'node/' . $row['nid'])); ?>
           
         <?php endif; ?>
       </span>

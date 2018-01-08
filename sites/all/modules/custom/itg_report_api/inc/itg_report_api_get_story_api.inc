@@ -28,8 +28,8 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
     $range_min = $pageno * $range_max;
   }
   
-  $start_date = strtotime($start_date);
-  $end_date = strtotime($end_date);
+  $start_date = strtotime($start_date. " 01:01:00");
+  $end_date = strtotime($end_date. " 23:59:00");
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -115,11 +115,11 @@ function totalRecordsCount_StoryAPI($start_date, $end_date, $type, $status, $ite
   $query_cont->fields('n', array('nid'));
   //end
   if ($start_date != "na") {
-    $start_date_timestamp = strtotime($start_date);
+    $start_date_timestamp = strtotime($start_date. " 01:01:00");
     $query_cont->condition('n.created', $start_date_timestamp, ">=");
   }
   if ($end_date != "na") {
-    $end_date_timestamp = strtotime($end_date);
+    $end_date_timestamp = strtotime($end_date. " 23:59:00");
     $query_cont->condition('n.created', $end_date_timestamp, "<=");
   }
   if ($type != "na") {

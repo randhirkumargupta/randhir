@@ -42,14 +42,19 @@
     <!--[if lt IE 9]>
     <script src="<?php print $base_path . $path_to_zen; ?>/js/respond.js"></script>
     <![endif]-->
-  <?php endif; ?>
+  <?php endif; 
+  $node_data = menu_get_object();
+  $arg = arg();
+  ?>
 <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
       { (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-795349-17', 'auto');
+      <?php if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { ?>
+       ga('create', 'UA-795349-17', 'auto');
+    <?php } ?>
       <?php
       $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
       $type = isset($menu_item['page_arguments'][0]->type) ? $menu_item['page_arguments'][0]->type : "";
@@ -63,7 +68,9 @@
       <?php if(!empty($bylines)) :?>
       ga('set', 'dimension1', '<?php echo $bylines ?>');
       <?php endif; ?>
+        <?php if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { ?>
       ga('send', 'pageview');
+      <?php } ?>
     </script>
     <!-- Default comscore -->
     <script type='text/javascript'>
@@ -108,6 +115,16 @@
 	<?php else:?>
     <script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>  
     <?php endif;?>
+    <script type="text/javascript">
+		(function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
+		branch.init('key_live_cgwzd2EvhB7X2XUsBd2N6joitydwu3OS');
+		branch.setBranchViewData({
+		  data: {
+		    '$deeplink_path': window.location.pathname + window.location.search + window.location.hash,
+			'user_id': '45123'
+		  }
+		});
+	</script>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
   <?php if ($skip_link_text && $skip_link_anchor): ?>

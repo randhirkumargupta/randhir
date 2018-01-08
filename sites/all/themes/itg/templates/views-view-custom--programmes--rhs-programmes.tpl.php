@@ -18,7 +18,7 @@
             <li>
                 <h4>
                     <?php if (!empty($row['field_cm_display_title'])) : ?>
-                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'node/' . $recent_video_under_cat , array('html' => TRUE)); ?>
+                      <?php print l(__html_output_with_tags($row['field_cm_display_title']), 'taxonomy/term/' . $row['tid'] , array('html' => TRUE)); ?>
                     <?php endif; ?>
                 </h4>
                 <span class="time">
@@ -43,18 +43,19 @@
                           <?php
                           $img = $row['field_sponser_logo'];
                           ?>
-                          <?php print l($img, 'program', array('html' => TRUE)); ?>
+                          <?php print l($img, 'taxonomy/term/' . $row['tid'], array('html' => TRUE)); ?>
                         <?php else : ?>
                           <?php
                           $img = "<img width='88' height='66'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg') ."' alt='' title='' />";
                           ?>
-                          <?php print l($img, 'program', array('html' => TRUE)); ?>
+                          <?php print l($img, 'taxonomy/term/' . $row['tid'], array('html' => TRUE)); ?>
 
                         <?php endif; ?>
                     </div>
                     <div class="discription">
                         <?php if (!empty($row['description'])) : ?>
-                          <?php print html_entity_decode($row['description']); ?>
+                          <?php 
+                          echo html_entity_decode(htmlspecialchars_decode($row['description'], ENT_QUOTES)); ?>
                         <?php endif; ?>
 
                     </div>
