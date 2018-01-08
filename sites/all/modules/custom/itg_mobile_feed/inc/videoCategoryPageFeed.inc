@@ -134,7 +134,7 @@ function generateVideoCategoryPage($tid) {
       $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
       $query->fields('fss', array('field_story_syndication_value'));
       //end
-      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+      $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
       foreach ($result as $reskey => $resvalue) {
         // node feed tag
