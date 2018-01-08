@@ -66,6 +66,7 @@
         <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
         <script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
         <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+        <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
 
         <style amp-custom>
             #header,
@@ -1443,6 +1444,10 @@ ul.header-menu {
 ul.header-menu li {
     border-bottom: 1px solid #ccc;
     width: 270px;
+}
+.story_ad_block.custom-amp-ad{margin-top:15px;}
+section.sidebar .block-itg-ads > div {
+    margin: auto;
 }
 button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} button.searchbut .fa-search { top: 1px; right: 0px;}
 @media only screen and (max-width: 767px) {

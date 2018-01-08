@@ -94,7 +94,7 @@ function itg_pti_content() {
                     $kicker1 = trim(strip_tags($kicker1));
                     $pre_final_kicker = preg_split('/(?<!\d)\.(?!\d)/', $kicker1);
                     $final_kicker = $kicker . ' ' . $pre_final_kicker[0];
-                    $final_kicker = str_replace(array('\'', '"'), '', $final_kicker);
+                    //$final_kicker = str_replace(array('\'', '"'), '', $final_kicker);
                     $final_kicker = substr($final_kicker, 0, 250);
                     $final_kicker = $final_kicker . '..';
                     $final_kicker = trim(preg_replace('/[\s\t\n\r\s]+/', ' ', $final_kicker));

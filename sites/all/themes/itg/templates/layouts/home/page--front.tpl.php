@@ -277,7 +277,7 @@ if ($theme != 'itgadmin') {
                     </div>
                 </div>
                 <?php
-                if ($user->uid == 0 && $arg[0] != "itg-layout-manager") {
+                /*if ($user->uid == 0 && $arg[0] != "itg-layout-manager") {
                   if (isset($_COOKIE['recomended_for_you'])) {
                     $value = itg_user_log_get_sections($_COOKIE['recomended_for_you']);
                     $recomended_array_count = count(explode(",", $value));
@@ -295,7 +295,7 @@ if ($theme != 'itgadmin') {
                   <section class="recommended-for-you" data-tb-region="homeRecommendedForYouPersonlization">
                       <div class="container"><span class="widget-title">RECOMMENDED FOR YOU</span> <?php print $widget_data['personlization'] ?></div>
                   </section>
-                <?php } ?>
+                <?php }*/ ?>
                 <div class="itg-layout-container itg-front">
                     <!--Common section strat here-->
                     <?php if (isset($widget_data['itg-block-7']['widget_name']) || isset($widget_data['itg-block-8']['widget_name']) || isset($widget_data['itg-block-9']['widget_name']) || $theme == 'itgadmin') { ?>

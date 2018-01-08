@@ -695,11 +695,11 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
     }
     if (count($result) && !$is_long_headline) {
       if (!empty($left_smiles) || !empty($right_smiles)) {
-        $titlte = ucfirst(mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, ".."));
+        $titlte = mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, "..");
       }
       else {
         $max_limit += 10;
-        $titlte = ucfirst(mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, ".."));
+        $titlte = mb_strimwidth($result[0]['field_story_short_headline_value'], $min_limit, $max_limit, "..");
       }
       // Add smiley to right;
       $titlte = $left_smiles . _widget_title($titlte , FALSE) . $right_smiles;
@@ -707,18 +707,18 @@ function itg_common_get_smiley_title($node_obj, $min_limit = 0, $max_limit = 255
     }
     else {
       if (!empty($left_smiles) || !empty($right_smiles)) {
-        $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
+        $titlte = mb_strimwidth($result[0]['title'], $min_limit, $max_limit, "..");
       }
       else {
         $max_limit += 10;
-        $titlte = ucfirst(mb_strimwidth($result[0]['title'], $min_limit, $max_limit, ".."));
+        $titlte = mb_strimwidth($result[0]['title'], $min_limit, $max_limit, "..");
       }
       $titlte = $left_smiles . _widget_title($titlte , FALSE) . $right_smiles;
       return $titlte;
     }
   }
   else {
-    return ucfirst(mb_strimwidth(_widget_title($result[0]['title'] , FALSE), $min_limit, $max_limit, ".."));
+    return mb_strimwidth(_widget_title($result[0]['title'] , FALSE), $min_limit, $max_limit, "..");
   }
 }
 

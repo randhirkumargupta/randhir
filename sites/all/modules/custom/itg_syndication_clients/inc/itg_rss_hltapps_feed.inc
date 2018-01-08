@@ -896,7 +896,7 @@ function genrate_msn_hlt_videos_xml($result, $section_name, $section_id) {
   $xml .= '<id>' . $section_id . '</id>';
   $xml .= '<title><![CDATA[' . $section_name . ']]></title>';
   $xml .= '<itemcount>' . count($result) . '</itemcount>';
-  $file_base_path = file_create_url('public://msn/hlt/videos/');
+  $file_base_path = get_feed_base_url() . '/msn/hlt/videos'; //file_create_url('public://msn/hlt/videos/');
   if (!empty($result)) {
     foreach ($result as $value) {
       $nid = $value['nid'];
@@ -957,7 +957,7 @@ function genrate_msn_hlt_video_detail_xml($value, $section_id, $section_name, $v
   $video_xml .= '<mediaid></mediaid>';
   $video_xml .= '<uurl></uurl>';
   if (!empty($videotag['migrated'])) { //migrated video
-    $video_xml .= "<videoparts><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts><size_364bit></size_364bit><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
+    $video_xml .= "<videoparts><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts><size_364bit></size_364bit><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
   }
   elseif (!empty($videotag['dailymotion'])) {
     $video_xml .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";

@@ -329,6 +329,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_celtick_feed_it_stories.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-feeds/videsectionlist_india_rss_fun_on_go'] = array(
+    'page callback' => 'videsectionlist_india_rss_fun_on_go',
+    'access arguments' => array('access content'),
+    'file' => 'inc/videsectionlist_india_rss_fun_on_go.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 

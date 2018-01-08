@@ -103,6 +103,20 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   $old_content_id = '';
   $arg = arg();
   
+  if ($_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
+    $old_url = substr($_SERVER['REDIRECT_URL'], 1);	  
+    $new_url = redirect_load_by_source($old_url);
+    
+    if (!empty($new_url)) {	  
+      $url_re = 'https://www.indiatoday.in/'.$new_url->redirect;     
+    } else {
+        $url_re = 'https://www.indiatoday.in'.$_SERVER['REDIRECT_URL'];       
+    }
+     
+    drupal_goto($url_re);    
+    exit;
+  }
+  
   $type = 'story'; // use photogallery & videogallery in condition if you have
   $rss_url = '';
   $query_alias = '';
@@ -253,6 +267,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $magazine_title = $query->execute()->fetchField();
       $url = 'magazine/'.format_date(strtotime($magazine_title),'custom', 'd-m-Y');
       drupal_goto($url);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'calendar')) && ($arg[1] == 0) && (is_numeric($arg[1])) && !empty ($arg[2]) && (is_numeric($arg[2]))) {  // Pattern embed/@#trfg
+      $year = $arg[2];
+      $current_time = date('Y-m-d', strtotime(date($year . '-01-01')));
+      $output = get_first_issue_by_year($current_time);
+      $current_issue = explode(' 00:', $output);
+      $url = 'magazine/'.format_date(strtotime($current_issue[0]),'custom', 'd-m-Y');
+      drupal_goto($url);
   } else if ((!empty($arg[0]) && ($arg[0] == 'embed')) && !empty ($arg[1])) {  // Pattern embed/@#trfg
       $videoembed = $arg[1];
       $newmatchurl = getNewVideoEmbedUrl($videoembed);
@@ -331,6 +352,24 @@ function get_new_seccat_by_mig_id($sourceid, $table) {
   $query->fields('scc', array('destid1'));  
   $query->condition('sourceid1', $sourceid);
   return $query->execute()->fetchField();
+}
+
+/**
+ * function for get first issue from year
+ * @param int $year
+ * @return string $output
+ */
+function get_first_issue_by_year($year){
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
+  $query->fields('ft', array('field_issue_title_value'));
+  $query->condition('ft.field_issue_title_value', $year, '>=');
+  $query->orderBy('n.title', 'ASC');
+  $query->condition('n.type', 'issue', '=');
+  $query->condition('n.status', 1, '=');
+  $query->range(0, 1);
+  $output = $query->execute()->fetchField();
+  return $output;
 }
 
 /*
