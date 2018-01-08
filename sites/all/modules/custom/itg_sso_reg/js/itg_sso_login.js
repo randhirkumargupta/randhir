@@ -1,6 +1,7 @@
 ! function(t) {
     Drupal.behaviors.itg_sso_login = {
         attach: function(s, e) {
+            var ssoLoginCheck = Drupal.settings.itg_sso_login.settings.sso_login_check;
             var o = Drupal.settings.itg_sso_login.settings.base_url,
                 i = Drupal.settings.itg_sso_login.settings.uid,
                 n = Drupal.settings.itg_sso_login.settings.check_sso_url,
@@ -30,6 +31,21 @@
                     }
                 })
             }), jQuery("#itg-sso-reg-password-form  label[for='edit-pass-pass1']").text("New password")
+            if (ssoLoginCheck == 'yes') {
+                jQuery.ajax({
+                    url: Drupal.settings.itg_widget.settings.base_url + "/itg-load-my-account",
+                    type: "post",
+                    data: "",
+                    beforeSend: function() {},
+                    success: function(t) {
+                        0 != t.length && jQuery(".user-menu").html(t)
+                    },
+                    error: function(t, s, e) {
+                        console.log(t), console.log("Details: " + s + "\nError:" + e)
+                    }
+                });
+            }
+            
         }
     }
 }(jQuery, Drupal, this, this.document);
