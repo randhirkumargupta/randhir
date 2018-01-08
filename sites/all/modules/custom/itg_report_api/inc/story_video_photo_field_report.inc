@@ -96,9 +96,9 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
   foreach ($section_list as $key => $value) {
     //p($value);die();
 
-    $story_cont = countStory($start_date, $end_date, $value['tid']);
-    $video_cont = countVideo($start_date, $end_date, $value['tid']);
-    $photo_cont = countPhoto($start_date, $end_date, $value['tid']);
+    $story_cont = countStoryToday($start_date, $end_date, $value['tid']);
+    $video_cont = countVideoToday($start_date, $end_date, $value['tid']);
+    $photo_cont = countPhotoToday($start_date, $end_date, $value['tid']);
     $sum_between = 0;
     $sum_today = 0;
     $sum_yesteday = 0;
@@ -459,9 +459,9 @@ function nodeCountByToday_Report($start_date, $end_date, $section_list) {
   // loop on section list
   foreach ($section_list as $key => $value) {
 
-    $story_cont = countStory($start_date, $end_date, $value['tid']);
-    $video_cont = countVideo($start_date, $end_date, $value['tid']);
-    $photo_cont = countPhoto($start_date, $end_date, $value['tid']);   
+    $story_cont = countStoryToday($start_date, $end_date, $value['tid']);
+    $video_cont = countVideoToday($start_date, $end_date, $value['tid']);
+    $photo_cont = countPhotoToday($start_date, $end_date, $value['tid']);   
     $sum_today = 0;  
 
     $sum_today += $story_cont['total_records_today'] + $story_cont['total_records_today_inhouse'] + $story_cont['total_records_today_agency'];
@@ -520,4 +520,90 @@ function nodeCountByToday_Report($start_date, $end_date, $section_list) {
   } 
   $section_list_count['today'] = $today_list_count;  
   return $section_list_count;
+}
+
+
+/**
+ * function for get tid Video node count value today
+ * @pram datetime $start_date
+ * @pram datetime $end_date
+ * @pram int $tid
+ *
+ * @return array $total_records
+ */
+function countVideoToday($start_date, $end_date, $tid) {
+
+  //video count btween
+  $query = db_select('node', 'n');
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->fields('n', array('nid'));
+  $query->condition('n.created', $start_date, '>=')->condition('n.created', $end_date, '<=')->condition('ti.tid', $tid)->condition('n.type', 'videogallery');
+  $result = $query->execute()->fetchAll();
+  $total_records_between = count($result);
+  $total_records['total_records_between'] = $total_records_between;
+  return $total_records;
+}
+
+/**
+ * function for get tid Photo node count value today
+ * @pram datetime $start_date
+ * @pram datetime $end_date
+ * @pram int $tid
+ *
+ * @return array $total_records
+ */
+function countPhotoToday($start_date, $end_date, $tid) {
+  //photo count between
+  $query = db_select('node', 'n');
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->fields('n', array('nid'));
+  $query->condition('n.created', $start_date, '>=')->condition('n.created', $end_date, '<=')->condition('ti.tid', $tid)->condition('n.type', 'photogallery');
+  $result = $query->execute()->fetchAll();
+  $total_records_between = count($result);  
+
+  $total_records['total_records_between'] = $total_records_between;
+  $total_records['total_records_today'] = $total_records_today;
+  $total_records['total_records_yesterday'] = $total_records_yesterday;
+
+  return $total_records;
+}
+/**
+ * function for get tid Story node count value today
+ * @pram datetime $start_date
+ * @pram datetime $end_date
+ * @pram int $tid
+ *
+ * @return array $total_records
+ */
+function countStoryToday($start_date, $end_date, $tid) {
+
+  //story count between
+  $query = db_select('node', 'n');
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->fields('n', array('nid'));
+  $query->condition('n.created', $start_date, '>=')->condition('n.created', $end_date, '<=')->condition('ti.tid', $tid)->condition('n.type', 'story');
+  $result = $query->execute()->fetchAll();
+  $total_records_between = count($result);
+
+  
+  //story count between
+  $query = "";
+  $result = "";
+
+  $query = db_select('node', 'n');
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+  $query->leftJoin('field_data_field_story_syndication', 'syn', 'syn.entity_id=n.nid');
+  $query->fields('n', array('nid'));
+  $query->condition('n.created', $start_date, '>=')->condition('n.created', $end_date, '<=')->condition('ti.tid', $tid)->condition('n.type', 'story')->condition('syn.field_story_syndication_value', 'yes');
+  $result = $query->execute()->fetchAll();
+  $syndication_records_between = count($result);  
+
+  // today count array merging
+
+  $total_records['total_records_between_inhouse'] = $total_records_between - $syndication_records_between;
+
+  $total_records['total_records_between_agency'] = $syndication_records_between;
+  
+
+  return $total_records;
 }
