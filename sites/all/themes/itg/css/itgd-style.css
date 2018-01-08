@@ -664,3 +664,15 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .pti-news-claim { background: #FBF9FA; border: 1px solid #EFEFEF; color: #737373; font-size: 14px; margin-top: 20px; padding: 10px; line-height: 18px; margin-bottom: 20px; }
 .view-display-id-so_sorry_page {margin: 0 -15px 15px;position: relative;}
 section.sidebar .block-itg-ads > div {margin: auto;}
+
+.education-layout-page .itg-295-layout .droppable {
+     height: 455px;
+}
+ .education-layout-page .itg-345-layout .droppable {
+     height: 512px;
+}
+ .education-layout-page .itg-325-layout .droppable {
+     min-height: 380px;
+     height: 380px;
+}
+
