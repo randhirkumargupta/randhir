@@ -12,32 +12,47 @@
  * @return array
  */
 function story_video_photo_field_report($start_date, $end_date) {
-  global $base_url;
-  $data = array();
-  $section_list_count = array();
-  $vid = 14;
-  $section_list = getSectionListByVID($vid);
+    global $base_url;
+    $data = array();
+    $section_list_count = array();
+    $vid = 14;
+    $section_list = getSectionListByVID($vid);
 
-  $section_list_count = nodeCountByDateWise_Report($start_date, $end_date, $section_list);
+    $section_list_count = nodeCountByDateWise_Report($start_date, $end_date, $section_list);
 
-  $hour = 01;
-  $today = strtotime($hour . ':00:00');
-  $yesterday = strtotime('-1 day', $today);
-  $dayBeforeYesterday = strtotime('-1 day', $yesterday);
+    $hour = 01;
+    $today = strtotime($hour . ':00:00');
+    $yesterday = strtotime('-1 day', $today);
+    $dayBeforeYesterday = strtotime('-1 day', $yesterday);
 
-  $today_key = date("Y-m-d", $today);
-  $yesterday_key = date("Y-m-d", $yesterday);
+    $today_key = date("Y-m-d", $today);
+    $yesterday_key = date("Y-m-d", $yesterday);
 
-  $data['overall']['category'] = $section_list_count['between'];
-  $data['overall']['total'] = $section_list_count['between'];
+    $data['overall']['category'] = $section_list_count['between'];
+    $data['overall']['total'] = $section_list_count['between'];
 
-  $data['datewise_data'][$today_key]['category'] = $section_list_count['today'];
-  $data['datewise_data'][$today_key]['total'] = $section_list_count['today'];
+    /* date loop start */
+    $datediff = $end_date - $start_date;
+    $datediff_c = floor($datediff / (60 * 60 * 24));
+    $date_l_c = 0;
+    while ($date_l_c <= $datediff_c) {
+        if ($date_l_c == 0) {
+            $today_key = date("Y-m-d", $start_date);
+            $start_epoc = $start_date;
+        } else {
+            $start_epoc = $epoch_to_next = 86400 * $date_l_c;
+            $today_key = date("Y-m-d", ($start_date + $epoch_to_next));
+        }
+        $end_epoc = $start_date + (3600 * 22);
+        $section_list_count_t = nodeCountByDateWise_Report($start_date, $end_epoc, $section_list);
 
-  $data['datewise_data'][$yesterday_key]['category'] = $section_list_count['yesterday'];
-  $data['datewise_data'][$yesterday_key]['total'] = $section_list_count['yesterday'];
+        $data['datewise_data'][$today_key]['category'] = $section_list_count_t['between'];
+        $data['datewise_data'][$today_key]['total'] = $section_list_count_t['between'];
+        $date_l_c++;
+    }
+    /* date loop end */
 
-  return $data;
+    return $data;
 }
 
 /**
