@@ -221,6 +221,11 @@ function itg_layout_manager_block_info() {
     'info' => t('election widget block'),
     'cache' => DRUPAL_CACHE_GLOBAL,
   );
+  
+  $blocks['latest_headlines404_block'] = array(
+    'info' => t('Latest Headlines'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
 
   return $blocks;
 }
@@ -498,6 +503,14 @@ function itg_layout_manager_block_view($delta = '') {
       $election_widgets_form = drupal_get_form('election_widgets_search_form');
       $widget_array['election_widgets_form'] = drupal_render($election_widgets_form);
       $block['content'] = theme('layout_election_widgets_block', array('data' => $widget_array));
+      break;
+    
+    case 'latest_headlines404_block':
+      if (function_exists(itg_seo_latest_headlines)) {
+        $latest_headlines = itg_seo_latest_headlines();
+      }
+      
+      $block['content'] = $latest_headlines;
       break;
   }
 
