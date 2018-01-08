@@ -52,7 +52,7 @@ $uri = base64_encode($actual_link);
                           $description = $video_node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
                         }
                         else {
-                          $description = $video_node[0]->field_video_kicker_value;
+                          $description = $video_node->field_video_kicker[LANGUAGE_NONE][0]['value'];
                         }
                             
                         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
