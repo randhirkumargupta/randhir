@@ -258,6 +258,33 @@ function itg_report_api_resource() {
         ),
       ),
     ),
+      // get the recent data of Story/Photo/Vieo based on args .....
+    'report_api_data_list' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Report API.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_report_api',
+            'name' => 'itg_report_api.services',
+          ),
+          'callback' => 'itg_report_api_detail',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
   return $api;
@@ -573,6 +600,51 @@ function itg_report_api_auscovery_dashboard_mob() {
   else {
     // call function from return data..
     $jsondata = auscovery_dashboard_mob($start_date, $end_date);
+    $jsondata = json_encode($jsondata);
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+
+  $jsondata = json_decode($jsondata, TRUE);
+  return $jsondata;
+}
+/**
+ * Call back function for story_count_report API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_report_api_detail() {
+  $start_date = $_GET['start_date'];
+  $end_date = $_GET['end_date'];
+  $type = $_GET['type'];
+  $status = $_GET['status'];
+  $synd = $_GET['synd'];
+  $item_per_page = $_GET['item_per_page'];
+  //valid tid & pageno
+  if ($status == 'publish') {
+    $status = 1;
+  }
+  elseif ($status == 'unpublish') {
+    $status = 0;
+  }
+  if (!is_numeric($item_per_page)) {
+    $item_per_page = 0;
+  }
+  $suffix = $start_date . "_" . $end_date . "_" . $type . "_" . $status . "_" . $synd . "_" . $item_per_page;
+  if ($pageno == "na") {
+    $pageno = 0;
+  }
+
+  $redis_key = "itg_report_api_data_list_report" . $suffix;
+  $result_get = getRedis($redis_key);
+
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    // call function from return data..
+    $jsondata = get_datalist_report($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
