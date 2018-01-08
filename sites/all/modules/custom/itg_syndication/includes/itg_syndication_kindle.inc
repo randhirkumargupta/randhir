@@ -427,14 +427,14 @@ function _formet_xml($xml) {
  */
 function kindle_get_sections_for_node($nid) {
     try {
-        $query = db_select('field_data_field_story_category', 'fdc');
-        $query->leftJoin('itg_category_manager', 'cm', 'cm.tid=fdc.field_story_category_tid');
-        $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = fdc.field_story_category_tid');
-        $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = fdc.field_story_category_tid');
-        $query->fields("fdc", array("field_story_category_tid"));
+        $query = db_select('field_data_field_primary_category', 'fdc');
+        $query->leftJoin('itg_category_manager', 'cm', 'cm.tid=fdc.field_primary_category_value');
+        $query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid = fdc.field_primary_category_value');
+        $query->leftJoin('taxonomy_term_data', 'td', 'td.tid = fdc.field_primary_category_value');
+        $query->fields("fdc", array("field_primary_category_value"));
         $query->fields("td", array("name"));
         $query->condition('fdc.entity_id', $nid);
-        $query->condition('th.parent', 0);
+        //$query->condition('th.parent', 0);
         $query->condition('cm.status', 1);
         $result = $query->execute()->fetchAllAssoc('name');
     } catch(Exception $ex) {
