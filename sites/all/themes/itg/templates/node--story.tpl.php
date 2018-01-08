@@ -1091,7 +1091,7 @@ if (!empty($content)):
             <?php } ?>
         </div>
           <div class="vukkul-comment">
-            <div id="vuukle-emote"></div>
+            
             <?php
               if (function_exists('taboola_view')) {
                 taboola_view();
@@ -1102,15 +1102,16 @@ if (!empty($content)):
               }
             ?>
             <div class="c_ques"><?php print $question; ?></div>
-            <div id="vuukle_div"></div>
+            <div id="vuukle-emote"></div>
+            <div id="vuukle_div"></div>                       
             <?php
             if (function_exists('vukkul_view')) {
-              vukkul_view();
-            }
+                  vukkul_view();
+                }
             ?>
-          </div>
-          <?php
-        }
+              </div>
+              <?php
+            }
         if (is_array($config) && $config_name == 'other' && in_array('commentbox', $config)) {
           ?>
           <div id="other-comment">
