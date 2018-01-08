@@ -1624,8 +1624,23 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
 
         $value2 = '<script(.*)src=\"//platform.twitter.com/widgets.js\"></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
-
+		
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        // With Https        
+        $value2 = '<script src="https://platform.twitter.com/widgets.js" async="" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" ></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         
       }
