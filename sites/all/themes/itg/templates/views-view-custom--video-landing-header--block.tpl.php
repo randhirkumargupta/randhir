@@ -47,6 +47,14 @@ $uri = base64_encode($actual_link);
                       if (!empty($videoids) && $video_node->field_story_source_type[LANGUAGE_NONE][0]['value'] != "migrated") {
                         $hide_player = "";
                         $description_slider = "";
+                        // For Description
+                        if(isset($video_node->field_story_expert_description[LANGUAGE_NONE])) {
+                          $description = $video_node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
+                        }
+                        else {
+                          $description = $video_node[0]->field_video_kicker_value;
+                        }
+                            
                         $newimageds = '<div class="row"><div class="col-md-12"><div class="video-slider-images"><ul>';
                         $description_slider = '<div class="video-slider-description"><ul>';
 
@@ -74,13 +82,14 @@ $uri = base64_encode($actual_link);
                               </div>
 
                               <?php
-                              $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
+                              $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($description) . '</p></li>';
                             }
                           }
                         }
                         else {
 
                           foreach ($videoids as $keys => $video_value) {
+                           
                             if ($keys != 0) {
                               $hide_player = 'hide-player';
                               $autoplay = 0;
@@ -162,7 +171,7 @@ $uri = base64_encode($actual_link);
                             ?>
 
                             <?php
-                            $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($video_value->field_video_title_value) . '</p></li>';
+                            $description_slider.= '<li><p id="video_dec_' . $video_value->video_id . '" >' . ucfirst($description) . '</p></li>';
                           }
                         }
 
@@ -180,10 +189,10 @@ $uri = base64_encode($actual_link);
                         }
                         
                         if(isset($video_node->field_story_expert_description[LANGUAGE_NONE])) {
-							$description = $video_node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
-				        } else {
-							$description = $video_kicker[0]->field_video_kicker_value;
-						}
+                          $description = $video_node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
+                            } else {
+                          $description = $video_kicker[0]->field_video_kicker_value;
+                        }
 							  			
                         $hide_player = "";
                         $description_slider = "";
