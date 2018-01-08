@@ -51,7 +51,7 @@
                 })
             }), jQuery("#itg-sso-reg-password-form  label[for='edit-pass-pass1']").text("New password")
             if (ssoLoginCheck != '' && ssoLoginCheck != 'null') {
-                console.log(ssoLoginCheck);
+                alert(ssoLoginCheck);
                 jQuery.ajax({
                     url: Drupal.settings.itg_widget.settings.base_url + "/itg-load-my-account",
                     type: "post",
