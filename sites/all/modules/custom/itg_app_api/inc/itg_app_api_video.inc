@@ -569,6 +569,9 @@ function programCategoryListlPageRerourceValue($token) {
     $conf_array = tidConfig();
     $program_key = "itg_programmes_order_by";
     $Program_section_list = variable_get($program_key);
+    if(count($Program_section_list) <= 0){
+        $Program_section_list = $conf_array['program_sec_tid'];
+    }
 
     // list array building
     $data = generateProgramSectionList($Program_section_list);
