@@ -55,7 +55,6 @@ function itg_indiatoday_yahoo_static_latest_issue_syndication() {
 function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $file_name) {
   if (!empty($section_ids)) {
 
-    $type = array('story');
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
@@ -72,11 +71,21 @@ function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $fi
     $query->fields('smi', array('field_story_extra_large_image_fid'));
     $query->fields('ssi', array('field_story_extra_small_image_fid'));
     $query->fields('ti', array('tid'));
-
+    
+    $max_day_ago = 10;
+    foreach($section_ids as $sec_id){
+      $temp = get_content_fetch_time($sec_id);      
+      if($max_day_ago < $temp){
+        $max_day_ago = $temp;
+      }
+    }
+    
+    $days_ago = strtotime(date('Y-m-d', strtotime('-' . $max_day_ago . ' days')));
+    $query->condition('n.created', $days_ago, '>=');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_ids, 'IN');
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -164,6 +173,10 @@ function itg_genrate_indiatoday_yahoo_static_section_syndication($section_id = N
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->fields('ti', array('tid'));
       $query->condition('ti.tid', $section_id, '=');
+      if($days_ago = get_content_fetch_time($section_id)){
+        $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+        $query->condition('n.created', $days_ago, '>=');
+      }
     }
 
     $query->fields('n', array('nid', 'title', 'created'));
@@ -176,7 +189,7 @@ function itg_genrate_indiatoday_yahoo_static_section_syndication($section_id = N
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
 
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -260,10 +273,15 @@ function itg_genrate_indiatoday_yahoo_static_mailtoday_syndication($section_id) 
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
 
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
+    
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -343,9 +361,12 @@ function itg_genrate_indiatoday_yahoo_static_latest_stories_syndication() {
   $query->fields('pc', array('field_primary_category_value'));
   $query->fields('synopsis', array('field_story_kicker_text_value'));
 
+  $days_ago = strtotime(date('Y-m-d', strtotime('-10 days')));
+  $query->condition('n.created', $days_ago, '>=');
+  
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 25);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -436,7 +457,7 @@ function itg_genrate_indiatoday_yahoo_static_latest_issue_syndication($issue_res
   $query->condition('isuue.field_story_issue_date_value', $title, '=');
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 25);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

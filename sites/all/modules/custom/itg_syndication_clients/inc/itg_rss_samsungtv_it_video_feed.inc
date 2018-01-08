@@ -32,7 +32,7 @@ function itg_rss_samsungtv_it_videobreakingnews_feed() {
   $query->fields('ssi', array('field_story_small_image_fid'));
   $query->condition('ft.field_type_value', 'Breaking News', '=');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'breaking_news', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -59,7 +59,7 @@ function itg_rss_indiatoday_videobreakingnews_feed() {
   $query->fields('ssi', array('field_story_small_image_fid'));
   $query->condition('ft.field_type_value', 'Breaking News', '=');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'breaking_news', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -100,7 +100,10 @@ function itg_genrate_samsungtv_it_videos_syndication($section_id = NULL, $file_n
 
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $section_id, '=');
-
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('ssi', array('field_story_small_image_fid'));

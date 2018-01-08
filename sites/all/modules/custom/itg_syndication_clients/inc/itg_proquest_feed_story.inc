@@ -28,6 +28,10 @@ function itg_genrate_proquest_feed_story_syndication($section_id = NULL, $file_n
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
 
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
@@ -36,7 +40,7 @@ function itg_genrate_proquest_feed_story_syndication($section_id = NULL, $file_n
     $query->fields('synopsis', array('field_story_kicker_text_value'));
 
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

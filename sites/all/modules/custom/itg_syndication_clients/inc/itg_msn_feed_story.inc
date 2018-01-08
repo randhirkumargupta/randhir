@@ -53,8 +53,7 @@ function itg_generate_msn_static_stories_top_news() {
  */
 function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
-    $section_name = get_terms_name_by_ids(array($section_id));
-    $section_name = $section_name[0]['name'];
+    $section_name = get_term_name_by_tid($section_id);
     $type = array('story');
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -68,9 +67,12 @@ function itg_genrate_msn_feed_story_syndication($section_id = NULL, $file_name) 
     $query->fields('dbody', array('body_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
 
-
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 20);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
