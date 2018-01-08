@@ -125,7 +125,7 @@ function get_top_story_for_zupit() {
   $query->condition('n.created', $days_ago, '>=');
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
-  $query->condition('n.type', 'story', 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 10);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
