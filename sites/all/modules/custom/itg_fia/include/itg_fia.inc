@@ -35,7 +35,7 @@ function itg_fia_xml_node_feed($query) {
   $last_build = FALSE;
   $last_build_date = '';
   foreach ($nodes as $node) {
-	$body_vals = array();
+    $body_vals = array();
     if (!is_lock_story()) {
       if ($node->workbench_moderation['current']->state == 'published') {
         $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
