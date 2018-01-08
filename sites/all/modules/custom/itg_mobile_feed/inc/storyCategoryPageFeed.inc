@@ -122,7 +122,7 @@ function generateStoryCategoryPage($tid) {
 
 
       //end
-      $query->condition('ti.tid', $tid_list, 'IN')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+      $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
 
       $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
