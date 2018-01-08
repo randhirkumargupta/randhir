@@ -31,11 +31,29 @@ function story_video_photo_field_report($start_date, $end_date) {
   $data['overall']['category'] = $section_list_count['between'];
   $data['overall']['total'] = $section_list_count['between'];
 
-  $data['datewise_data'][$today_key]['category'] = $section_list_count['today'];
-  $data['datewise_data'][$today_key]['total'] = $section_list_count['today'];
-
-  $data['datewise_data'][$yesterday_key]['category'] = $section_list_count['yesterday'];
-  $data['datewise_data'][$yesterday_key]['total'] = $section_list_count['yesterday'];
+  /*date loop start*/
+  
+  $datediff = $e - $s;
+  $datediff_c = floor($datediff / (60 * 60 * 24));
+  $date_l_c = 0;
+  while($date_l_c <= $datediff_c){
+      
+      if($date_l_c == 0){
+          $today_key = date("Y-m-d", $start_date); 
+          $start_epoc = $start_date;                  
+      }
+      else{
+          $start_epoc = $epoch_to_next = 86400 * $date_l_c;
+          $today_key = date("Y-m-d", ($start_date + $epoch_to_next));
+      }
+      $end_epoc = $start_date + (3600 * 22);  
+      $section_list_count_t = nodeCountByToday_Report($start_date, $end_epoc, $section_list);
+    
+    $data['datewise_data'][$today_key]['category'] = $section_list_count_t['today'];
+    $data['datewise_data'][$today_key]['total'] = $section_list_count_t['today'];
+    $date_l_c++;
+  }
+/*date loop end*/
 
   return $data;
 }
@@ -421,3 +439,85 @@ function countStory($start_date, $end_date, $tid) {
   return $total_records;
 }
 
+/**
+ * function for get section list with node count Report array by today
+ * @pram datetime $start_date
+ * @pram datetime $end_date
+ * @pram array $section_list
+ *
+ * @return array $section_list_count
+ */
+function nodeCountByToday_Report($start_date, $end_date, $section_list) {
+  $section_list_count = array();
+  $between_list_count = array();
+  $today_list_count = array();
+  $yesterday_list_count = array();
+  $video_cont = array();
+  $photo_cont = array();
+  $story_cont = array();
+  $loop_count = 0;
+  // loop on section list
+  foreach ($section_list as $key => $value) {
+
+    $story_cont = countStory($start_date, $end_date, $value['tid']);
+    $video_cont = countVideo($start_date, $end_date, $value['tid']);
+    $photo_cont = countPhoto($start_date, $end_date, $value['tid']);   
+    $sum_today = 0;  
+
+    $sum_today += $story_cont['total_records_today'] + $story_cont['total_records_today_inhouse'] + $story_cont['total_records_today_agency'];
+    $sum_today += $video_cont['total_records_today'] + $video_cont['total_records_today_inhouse'] + $video_cont['total_records_today_agency'];
+    $sum_today += $photo_cont['total_records_today'] + $photo_cont['total_records_today_inhouse'] + $photo_cont['total_records_today_agency'];    
+
+    $term_name = $value['name'];
+    $term_tid = $value['tid'];
+
+
+    //Inhouce count merging
+
+    if ($story_cont['total_records_today_inhouse'] > 0) {
+      $today_list_count[$term_name]['inhouse'] = $story_cont['total_records_today_inhouse'];
+    }
+    else {
+      if ($sum_today > 0) {
+        $today_list_count[$term_name]['inhouse'] = 0;
+      }
+    }
+ 
+
+    //Agency count merging
+    if ($story_cont['total_records_today_agency'] > 0) {
+      $today_list_count[$term_name]['agency'] = $story_cont['total_records_today_agency'];
+    }
+    else {
+      if ($sum_today > 0) {
+        $today_list_count[$term_name]['agency'] = 0;
+      }
+    }
+
+    //video count merging
+
+    if ($video_cont['total_records_today'] > 0) {
+      $today_list_count[$term_name]['video'] = $video_cont['total_records_today'];
+    }
+    else {
+      if ($sum_today > 0) {
+        $today_list_count[$term_name]['video'] = 0;
+      }
+    }
+
+
+    //photo count merging
+
+    if ($photo_cont['total_records_today'] > 0) {
+      $today_list_count[$term_name]['photo'] = $photo_cont['total_records_today'];
+    }
+    else {
+      if ($sum_today > 0) {
+        $today_list_count[$term_name]['photo'] = 0;
+      }
+    }
+
+  } 
+  $section_list_count['today'] = $today_list_count;  
+  return $section_list_count;
+}
