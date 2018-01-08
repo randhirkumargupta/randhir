@@ -621,6 +621,7 @@ function itg_report_api_detail() {
   $status = $_GET['status'];
   $synd = $_GET['synd'];
   $item_per_page = $_GET['item_per_page'];
+  $pageno = $_GET['pageno'];
   //valid tid & pageno
   if ($status == 'publish') {
     $status = 1;
@@ -628,10 +629,16 @@ function itg_report_api_detail() {
   elseif ($status == 'unpublish') {
     $status = 0;
   }
+  if($type == 'video'){
+    $type = 'videogallery';
+  }
+  if($type == 'gallery'){
+    $type = 'photogallery';
+  }
   if (!is_numeric($item_per_page)) {
     $item_per_page = 0;
   }
-  $suffix = $start_date . "_" . $end_date . "_" . $type . "_" . $status . "_" . $synd . "_" . $item_per_page;
+  $suffix = $start_date . "_" . $end_date . "_" . $type . "_" . $status . "_" . $synd . "_" . $item_per_page."_".$pageno;
   if ($pageno == "na") {
     $pageno = 0;
   }

@@ -309,7 +309,21 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
   }
   $total_records = report_totalRecordsCount($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
   $next_page_no = $pageno + 1;
+  if($type == 'videogallery'){
+    $type = 'video';
+  }
+  if($type == 'photogallery'){
+    $type = 'gallery';
+  }
+  if($status == 0){
+    $status = 'unpublish';
+  }elseif ($status == 1) {
+    $status = 'publish';
+  }
   $next_page_url = $base_url . "/reportapi/report_api_data_list?start_date=" . $start_date . "&end_date=" . $end_date . "&type=" . $type . "&status=" . $status . "&synd=" . $synd . "&item_per_page=" . $item_per_page . "&pageno=" . $next_page_no . "";
+  if(count($result) < $item_per_page){
+    $next_page_url = '';
+  }
   $data['results'] = $list;
   $data['total_records'] = "$total_records";
   $data['next_page_url'] = "$next_page_url";
