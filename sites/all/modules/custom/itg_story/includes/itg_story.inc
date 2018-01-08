@@ -192,6 +192,7 @@ function itg_story_byline($title) {
   $query->fields('re', array('field_reporter_email_id_value'));
   $query->condition('n.title', '%' . $title . '%', 'LIKE');
   $query->condition('n.type', 'reporter', '=');
+  $query->condition('n.status', 1, '=');
   $query->range(0, 20);
   //field_reporter_profile_type_value
   $result = $query->execute();
