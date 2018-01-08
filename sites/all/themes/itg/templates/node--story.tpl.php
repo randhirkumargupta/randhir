@@ -197,7 +197,7 @@ if (!empty($content)):
       endif;
     ?>
       <div class="story-left-section">
-        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) {// && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value']) ?> 
+        <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE])) { ?> 
           <div class="story-left">
             <div class="byline">
               <?php
@@ -222,15 +222,50 @@ if (!empty($content)):
               <?php else:
                 print $sponsor_text; ?>
               <?php endif; ?>
-              <div class="profile-detail">               
-                <?php if ($sponsor_text == ''): ?>
+              <div class="profile-detail">
+                 <?php if ($sponsor_text == ''): ?>
                  <?php 
                  $lbyline_detail = '';
+                 $date_update_class= "date-update";
+                 $cunt= 1;
                  foreach($byline_id as $key => $value) {
+                   $date_update_class = ($cunt == 1) ? "date-update" : "";
+                   
                  ?> 
-                  <ul>
+                  <ul class="<?php print $date_update_class; ?>">
                     <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?></li>
-                    <?php
+                    <?php 
+                    if ($cunt == 1) {
+                              if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+                                ?>
+                                <li><?php
+                                    $city = array();
+                                    foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+                                      $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+                                    }
+                                    print implode(' | ', $city);
+                                    ?>
+                                </li>
+                                <?php 
+                                  } 
+                                ?>
+                            <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+                            <li>
+                                <?php
+                                print t('UPDATED ');
+                                if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+                                  print date('H:i', $node->created);
+                                }
+                                else {
+                                  print date('H:i', $node->changed);
+                                }
+                                print t(' IST');
+                                ?>
+                            </li>
+
+                    <?php } 
+                    
+                      $cunt++;
                       $twitter_handle = '';
                       if(!empty($value['twitter_handle'])) {
                       $twitter_handle = $value['twitter_handle'];
@@ -255,43 +290,11 @@ if (!empty($content)):
    
                   </ul>
                  <?php } ?>
-                <?php endif; ?>
-                <ul class="date-update">
-                  <li class="mhide">
-                    <span class="share-count">
-                      <?php
-                      if (!empty($tot_count)) {
-                        print $tot_count;
-                      }
-                      else {
-                        print 0;
-                      }
-                      ?>
-                    </span>
-                  <?php print t('SHARES'); ?>
-                  </li>
-                  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                  <li>
-                    <?php
-                    print t('UPDATED ');
-                    if(in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
-                        print date('H:i', $node->created);
-                    } else {
-                        print date('H:i', $node->changed);  
-                    }
-                    print t(' IST');
-                    ?>
-                  </li>
-                  <?php if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
-                    <li><?php
-                      $city = array();
-                    foreach($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
-                      $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
-                    }
-                    print implode(' | ', $city); ?></li>
-                  <?php } ?>
-                </ul>
+                <?php endif; ?>  
+              
+                 
                 <ul class="social-links mhide">
+                                       
                   <li><a title = "share on facebook" href="javascript:void(0)"  onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $node->nid; ?>')"><i class="fa fa-facebook"></i></a></li>
                   <li><a title = "share on twitter" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" href="javascript:void(0)" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
                   <li><a title="share on google+" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
