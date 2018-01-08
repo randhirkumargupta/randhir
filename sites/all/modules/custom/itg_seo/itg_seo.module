@@ -43,15 +43,16 @@ function itg_access_denied() {
  * @return array
  */
 function itg_not_found() {
-  //$video_id = decryptForEmbed("jthgoy4f1c");
-  //p($video_id);
-  //var_dump($video_id);
-
   
-  if (function_exists(itg_seo_latest_headlines)) {
-    $latest_headlines = itg_seo_latest_headlines();
-  }
-  return theme('itg_not_found', array('data' => $latest_headlines));
+//  if (function_exists(itg_seo_latest_headlines)) {
+//    $latest_headlines = itg_seo_latest_headlines();
+//  }
+  
+  $block = block_load('itg_layout_manager', 'latest_headlines404_block');
+  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+  
+  
+  return theme('itg_not_found', array('data' => $render_array));
 }
 
 /*function decryptForEmbed($string){
@@ -243,21 +244,23 @@ function itg_seo_latest_headlines() {
       $query->range(0, 4);
       $query->orderBy('n.created', 'DESC');*/
   $query = db_query("SELECT n.title AS title, n.nid AS nid, se.field_photo_see_pic_link_value AS field_photo_see_pic_link_value FROM
-node n FORCE INDEX(node_created)
-LEFT OUTER JOIN field_data_field_photo_see_pic_link se ON n.nid = se.entity_id
-WHERE  (n.status = '1') AND (n.type IN  ('story', 'photogallery', 'videogallery'))
-ORDER BY n.created DESC
-LIMIT 4 OFFSET 0");
-  //$result = $query->execute()->fetchAll();
+                      node n FORCE INDEX(node_created)
+                      LEFT OUTER JOIN field_data_field_photo_see_pic_link se ON n.nid = se.entity_id
+                      WHERE  (n.status = '1') AND (n.type IN  ('story', 'photogallery', 'videogallery'))
+                      ORDER BY n.created DESC
+                      LIMIT 4 OFFSET 0");  
   $result = $query->fetchAll();
-  $headlines = array();
+  
   foreach ($result as $key => $val) {
     if(!empty($val->field_photo_see_pic_link_value)) {
-    $title = '<span class="see_pic_not_found">'.$val->field_photo_see_pic_link_value.' : </span>'.$val->title;
+      $title = '<span class="see_pic_not_found">'.$val->field_photo_see_pic_link_value.' : </span>'.$val->title;
     } else {
-    $title =  $val->title;
+      $title =  $val->title;
     }
-    $headlines[$val->nid] = $title;
+    
+    $s_url = url('node/'. $val->nid);
+    
+    $headlines .= '<a href="'.$s_url.'" target="_blank"><li>'.$title.'</li></a>';
    
   }
   return $headlines;

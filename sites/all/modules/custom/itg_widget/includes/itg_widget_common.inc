@@ -1743,9 +1743,9 @@ function _itg_analytics_relationship_views($view_name, $view_current_display) {
         if ($view_name == "so_sorry" && $view_current_display == "most_watched ") {
             $flag = TRUE;
         }
-        if ($view_name == "most_read_widget" && $view_current_display == "most_read_widget_contents") {
-            $flag = TRUE;
-        }
+//        if ($view_name == "most_read_widget" && $view_current_display == "most_read_widget_contents") {
+//            $flag = TRUE;
+//        }
     }
     return $flag;
 }
