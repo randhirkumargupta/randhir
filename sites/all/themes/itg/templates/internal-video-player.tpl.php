@@ -7,6 +7,8 @@
 drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
 drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
 global $base_url;
+$node_url_data = url(current_path(), array('absolute' => false));
+$explode_url = explode('/', $node_url_data);
 ?>
 <?php
 $width = 622;
@@ -59,25 +61,14 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
                       schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
               idstring: "<?php echo stripslashes($title); ?>",
-              label: "<?php echo $player_content["ga_code"]; ?>"
+              label: ""
           }
       });
   }
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
-  playerInstance.on('setupError', function (event) {
-      if (event.message == 'Error loading player: No playable sources found') {
-          // document.getElementById("videoplayer").innerHTML = "<span class=flasherror>Install Flash to Watch this Video</span><a target=_blank href=https://get.adobe.com/flashplayer/ class=flashlogo><img src=http://media2intoday.in/images/getadobeflashplayer.gif width="100" alt=''></a>';
-      } else {
-          loadplayerjw();
-      }
-  });
-  jQuery(document).ready(function () {
-
-      playerInstance.play();
-
-  });
-
+  ga('create', '<?php echo $player_content["ga_code"]; ?>', '<?php echo $explode_url[1];?>');
+ ga('send', 'pageview');
 </script>
 
 <?php

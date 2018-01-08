@@ -333,14 +333,13 @@ function itg_report_api_story_count_report() {
  * @return array - The processed information array.
  */
 function itg_report_api_user_list() {
-  $user_type = $_GET['type'];
-  $user_sub_type = $_GET['sub_type'];
-  $start_date = $_GET['start_date'];
-  $end_date = $_GET['end_date'];
+  $user_type = $_GET['user_type'];
+  $user_sub_type = $_GET['user_sub_type'];
+
   if (!is_numeric($item_per_page)) {
     $item_per_page = 0;
   }
-  $suffix = $user_type . "_" . $user_sub_type . "_" . $start_date . "_" . $end_date;
+  $suffix = $user_type . "_" . $user_sub_type;
   if ($pageno == "na") {
     $pageno = 0;
   }
@@ -352,7 +351,7 @@ function itg_report_api_user_list() {
   else {
     // call function from return data..
     //$jsondata = getUserList_Report($user_type, $user_sub_type, $item_per_page, $pageno);
-    $jsondata = getUserList_Report($user_type, $user_sub_type, $start_date, $end_date);
+    $jsondata = getUserList_Report($user_type, $user_sub_type);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
@@ -410,14 +409,14 @@ function itg_report_api_get_story_api() {
  */
 function itg_report_api_story_video_photo_field_report() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
 
   if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date']);
+    $end_date = strtotime($_GET['end_date']. " 23:59:00");
   }
   else {
     $end_date = $_GET['end_date'];
@@ -450,7 +449,7 @@ function itg_report_api_story_video_photo_field_report() {
  */
 function itg_report_api_author_report() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
@@ -482,7 +481,7 @@ function itg_report_api_author_report() {
  */
 function itg_report_api_author_report_tvtn() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
@@ -512,13 +511,13 @@ function itg_report_api_author_report_tvtn() {
  */
 function itg_report_api_auscovery_dashboard_web() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
   if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date']);
+    $end_date = strtotime($_GET['end_date']. " 23:59:00");
   }
   else {
     $end_date = $_GET['end_date'];
@@ -551,13 +550,13 @@ function itg_report_api_auscovery_dashboard_web() {
  */
 function itg_report_api_auscovery_dashboard_mob() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']);
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
   if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date']);
+    $end_date = strtotime($_GET['end_date']. " 23:59:00");
   }
   else {
     $end_date = $_GET['end_date'];

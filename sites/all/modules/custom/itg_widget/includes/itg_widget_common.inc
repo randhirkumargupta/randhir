@@ -1710,6 +1710,18 @@ function itg_widget_views_query_alter(&$view, &$query) {
         $order_by['direction'] = 'DESC';
         array_unshift($query->orderby, $order_by);
     }
+    if ($view->name == 'programmes' && ($view->current_display == 'rhs_programmes' || $view->current_display == 'page')) {
+      $programm_ids = variable_get('itg_programmes_order_by');
+      if (isset($programm_ids) && !empty($programm_ids)) {
+        $query->orderby[0]['field'] = "FIELD(taxonomy_term_data.tid, $programm_ids)";
+      }
+    }
+  if ($view->name == 'live_tv_programs' && $view->current_display == 'page') {
+    $programm_ids = variable_get('itg_programmes_order_by');
+    if (isset($programm_ids) && !empty($programm_ids)) {
+      $query->orderby[0]['field'] = "FIELD(taxonomy_term_data.tid, $programm_ids)";
+    }
+  }
 }
 
 function itg_widget_query_issue_magazine_widget_alter(QueryAlterableInterface $query) {
@@ -2174,11 +2186,11 @@ function get_view_nodes_form_custom_table_review_widgets($widget_name, $cat_id, 
 
     $query = db_select('itg_widget_order', 'iwo'); //
     $query->leftJoin('itg_widget_helper', 'wh', 'wh.nid=iwo.nid');
-    $query->leftJoin('taxonomy_index', 'tx', 'wh.nid=tx.nid');
+    //$query->leftJoin('taxonomy_index', 'tx', 'wh.nid=tx.nid');
     //end
     $query->condition('iwo.widget', $widget_name)
             ->condition('wh.node_status', 1)
-            ->condition('tx.tid', $cat_id)
+            ->condition('iwo.cat_id', $cat_id)
             ->condition('wh.node_type', $valid_content_type)
             ->orderBy('iwo.weight', 'ASC')
             ->orderBy('wh.nid', 'DESC')
@@ -2995,23 +3007,25 @@ function itg_widget_node_update($node) {
 
         if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) &&!empty($node->op)) {
             __itg_widget_helper_data_insert($node->nid);
-//            watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
-//            $nid = $node->nid;
-//            $cat_id = $node->field_story_category['und'];
-//
-//            db_delete('itg_widget_order')
-//                    ->condition('widget', 'section_wise_widget')
-//                    ->condition('content_type', 'All')
-//                    ->condition('nid', $nid)->execute();
-//
-//            db_delete('itg_widget_order_section')
-//                    ->condition('content_type', $node->type)
-//                    ->condition('widget', 'section_wise_widget')
-//                    ->condition('nid', $nid)->execute();
-//            foreach ($cat_id as $category) {
-//                manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
-//                manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
-//            }
+            if($node->original->status == 0 && $node->status == 1) {
+            watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
+            $nid = $node->nid;
+            $cat_id = $node->field_story_category['und'];
+
+            db_delete('itg_widget_order')
+                    ->condition('widget', 'section_wise_widget')
+                    ->condition('content_type', 'All')
+                    ->condition('nid', $nid)->execute();
+
+            db_delete('itg_widget_order_section')
+                    ->condition('content_type', $node->type)
+                    ->condition('widget', 'section_wise_widget')
+                    ->condition('nid', $nid)->execute();
+            foreach ($cat_id as $category) {
+                manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
+                manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
+            }    
+            }
         }
     }
     

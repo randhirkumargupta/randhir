@@ -2451,13 +2451,26 @@
             ul {
                 overflow: auto;
                 white-space: nowrap;
+                margin-left: 0;
+				padding-left: 20px;
                 li {
-                    width: 145px;
+                    width:auto;
                     float: none;
-                    display: inline-block;
+                    display:block;
                     vertical-align: top;
                     padding: 0 5px;
-                    margin-top: 20px;
+                    margin-top:0px;
+                    position: relative;
+                    &:before{
+                        position: absolute;
+                        top: 8px;
+                        left: -10px;
+                        content: '';
+                        border-radius: 100%;
+                        background: #a00606;
+                        height: 5px;
+                        width: 5px;
+                    }
                     h3 {
                         margin-top: 10px;
                         white-space: pre-wrap;

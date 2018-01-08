@@ -152,10 +152,10 @@ else if ($widget_style == 'buying-guid') {
                     ?>
                     <?php
                     if (function_exists('itg_common_get_smiley_title')) {
-                      echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 65), "node/" . $nid, array("html" => TRUE));
+                      echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 255), "node/" . $nid, array("html" => TRUE));
                     }
                     else {
-                      echo l(mb_strimwidth(ucfirst($desc), 0, 75, ".."), "node/" . $nid);
+                      echo l(mb_strimwidth(ucfirst($desc), 0, 255, ".."), "node/" . $nid);
                     }
                     ?>
                 </h3>
@@ -270,10 +270,10 @@ else if ($widget_style == 'in-depth') {
                     ?>
                     <?php
                     if (function_exists('itg_common_get_smiley_title')) {
-                      echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 60), "node/" . $nid, array("html" => TRUE));
+                      echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 255), "node/" . $nid, array("html" => TRUE));
                     }
                     else {
-                      echo l(mb_strimwidth(ucfirst($desc), 0, 70, ".."), "node/" . $nid);
+                      echo l(mb_strimwidth(ucfirst($desc), 0, 255, ".."), "node/" . $nid);
                     }
                     ?>
                 </h3>
@@ -408,10 +408,10 @@ else if ($widget_style == 'movies-celebrities') {
                     ?>
                     <?php
                     if (function_exists('itg_common_get_smiley_title')) {
-                      echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 60), "node/" . $nid, array("html" => TRUE));
+                      echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 255), "node/" . $nid, array("html" => TRUE));
                     }
                     else {
-                      echo l(mb_strimwidth(ucfirst($desc), 0, 70, ".."), "node/" . $nid);
+                      echo l(mb_strimwidth(ucfirst($desc), 0, 255, ".."), "node/" . $nid);
                     }
                     ?>
                 </h3>
@@ -548,10 +548,10 @@ else if ($widget_style == 'movies-lifestyle') {
                     ?>
                     <?php
                     if (function_exists('itg_common_get_smiley_title')) {
-                      echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 60), "node/" . $nid, array("html" => TRUE));
+                      echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 255), "node/" . $nid, array("html" => TRUE));
                     }
                     else {
-                      echo l(mb_strimwidth(ucfirst($desc), 0, 70, ".."), "node/" . $nid);
+                      echo l(mb_strimwidth(ucfirst($desc), 0, 255, ".."), "node/" . $nid);
                     }
                     ?>
                 </h3>
@@ -673,10 +673,10 @@ else if ($widget_style == 'oscar-news') {
                         ?>
                         <?php
                         if (function_exists('itg_common_get_smiley_title')) {
-                          echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 60), "node/" . $nid, array("html" => TRUE));
+                          echo l(itg_common_get_smiley_title($entity['node_obj'], 0, 255), "node/" . $nid, array("html" => TRUE));
                         }
                         else {
-                          echo l(mb_strimwidth(ucfirst($desc), 0, 70, ".."), "node/" . $nid);
+                          echo l(mb_strimwidth(ucfirst($desc), 0, 255, ".."), "node/" . $nid);
                         }
                         ?>
                     </h3>
@@ -1303,7 +1303,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                 </a>
               <?php } ?>
               <h3 <?php echo $data_tb_region_item;?> title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
-                  <?php echo l(mb_strimwidth($entity['title'], 0, 55, ".."), "node/" . $nid); ?>
+                  <?php echo l($entity['title'] , "node/" . $nid); ?>
               </h3>
             <?php endif; ?>
             <?php if ($count != 0) : ?>

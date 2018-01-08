@@ -42,7 +42,7 @@ foreach ($data as $year) {
 
   <div class="calendar-year">
 
-<span><a href="<?php print base_path(); ?>magazine/15-01-2018">2018</a></span>
+<span><a href="<?php print base_path().'magazine/'.itg_msi_last_issue_calendar(2018); ?>">2018</a></span>
 
 <span><a href="<?php print base_path(); ?>magazine/04-12-2017">2017</a></span>
 

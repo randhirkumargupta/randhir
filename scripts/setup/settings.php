@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Drupal site-specific configuration file.
+ * Drupal site-specific configuration file
  *
  * IMPORTANT NOTE:
  * This file may have been set to read-only by the Drupal installation program.
