@@ -24,7 +24,8 @@ function itg_uc_browser_feed_latest_story() {
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('sli', array('field_story_large_image_fid'));
   $query->fields('pc', array('field_primary_category_value'));
-
+  $days_ago = strtotime(date('Y-m-d', strtotime('-30 days')));
+  $query->condition('n.created', $days_ago, '>=');
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
   $query->condition('n.type', $type, 'IN');

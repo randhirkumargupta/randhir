@@ -18,17 +18,20 @@ function itg_bsb_photo_syndication() {
  */
 function itg_genrate_bsb_photo_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
-    $section_name = get_terms_name_by_ids(array($section_id));
-    $section_name = $section_name[0]['name'];
-    $type = array('photogallery');
+    $section_name = get_term_name_by_tid($section_id);
+    
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->fields('n', array('nid', 'title', 'created'));
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'photogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

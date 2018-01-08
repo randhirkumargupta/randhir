@@ -19,7 +19,7 @@ function itg_dekkho_feed_videos_syndication() {
 function itg_genrate_dekkho_feed_videos_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
     $section_name = 'dekkho';
-    $type = array('videogallery');
+    
     $query = db_select('node', 'n');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
@@ -33,12 +33,17 @@ function itg_genrate_dekkho_feed_videos_syndication($section_id = NULL, $file_na
     $query->fields('ssi', array('field_story_extra_large_image_fid'));
     $query->fields('sst', array('field_story_source_type_value'));
     $query->fields('sed', array('field_story_expert_description_value'));
-
+    
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
+    
     $query->condition('ivt.bitrate', '996', '=');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'videogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

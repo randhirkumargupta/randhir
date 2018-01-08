@@ -18,9 +18,8 @@ function itg_bsb_story_syndication() {
  */
 function itg_genrate_bsb_story_syndication($section_id = NULL, $file_name) {
   if (!empty($section_id)) {
-    $section_name = get_terms_name_by_ids(array($section_id));
-    $section_name = $section_name[0]['name'];
-    $type = array('story');
+    $section_name = get_term_name_by_tid($section_id);
+    
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
@@ -47,11 +46,15 @@ function itg_genrate_bsb_story_syndication($section_id = NULL, $file_name) {
     $query->fields('synopsis', array('field_story_kicker_text_value'));
     $query->fields('smi', array('field_story_large_image_fid'));
     $query->fields('ssi', array('field_story_small_image_fid'));
-
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 30);
+    
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $xml = genrate_bsb_story_syndication_xml($result, $section_name);
     $xml_path = 'public://bsb/';
