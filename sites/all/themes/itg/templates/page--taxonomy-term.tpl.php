@@ -123,15 +123,17 @@
                 //show heading and list/grid view if category is not sponsored.
                 if (!_is_sponsored_category($arg[2])) {
                   $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
-                  $query = drupal_get_query_parameters();
-                  if ($query['view_type'] == 'list') {
-                    $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('page' => $_GET['page'] , 'view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('html' => true, 'query' => array('page' => $_GET['page'] , 'view_type' => 'grid'))) . '</div>';
-                  }
-                  elseif ($query['view_type'] == 'grid') {
-                    $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('html' => true, 'query' => array('page' => $_GET['page'] , 'view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('page' => $_GET['page'] , 'view_type' => 'grid'))) . '</div>';
-                  }
-                  else {
-                    $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('page' => $_GET['page'] , 'view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('html' => true, 'query' => array('page' => $_GET['page'] , 'view_type' => 'grid'))) . '</div>';
+                  if ($arg[2] !== variable_get('pti_section_id', 1206640)) {
+                    $query = drupal_get_query_parameters();
+                    if ($query['view_type'] == 'list') {
+                      $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'grid'))) . '</div>';
+                    }
+                    elseif ($query['view_type'] == 'grid') {
+                      $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'grid'))) . '</div>';
+                    }
+                    else {
+                      $header_content .= '<div class="list-grid">' . l('<i class="fa fa-list" aria-hidden="true"></i>' . t(' List'), $taxonomy_url, array('attributes' => array('class' => 'active'), 'html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'list'))) . '<span class="pipline"> | </span>' . l('<i class="fa fa-th" aria-hidden="true"></i>' . t(' Grid'), $taxonomy_url, array('html' => true, 'query' => array('page' => $_GET['page'], 'view_type' => 'grid'))) . '</div>';
+                    }
                   }
                   print $header_content;
                 }

@@ -514,7 +514,7 @@ function customNodeCountChild($tid, $type, $child_count = TRUE) {
   $langs = array($language->language);
   $langs[] = 'und';
   $query = db_select('taxonomy_index', 't');
-  $query->condition('tid', $tids, 'IN');
+  $query->condition('tid', $tid, '=');
   $query->join('node', 'n', 't.nid = n.nid');
   $query->condition('n.status', 1, '=');
   $query->condition('n.type', $type);

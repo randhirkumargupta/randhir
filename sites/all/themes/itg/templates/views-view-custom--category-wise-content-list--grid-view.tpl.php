@@ -28,6 +28,7 @@ global $base_url;
      $video_class = 'video-icon';
   }?>
     <div class="catagory-grid-view col-md-3 col-sm-4 col-xs-6">
+     <?php if (arg(2) !== variable_get('pti_section_id', 1206640)) : ?>
       <div class="pic <?php echo $video_class;?>">
         <?php if ($row['field_story_small_image'] != ''): ?>
           <?php print $row['field_story_small_image']; ?>
@@ -43,6 +44,7 @@ global $base_url;
             <figcaption><i class="fa fa-play-circle"></i> <?php print $row['field_video_duration']; ?></figcaption>
       <?php } ?>
       </div>
+      <?php endif; ?>
       <div class="detail">
           <h3 class="<?php echo $pipelineclass; ?>" title="<?php echo strip_tags($row['title']);?>">
           <?php

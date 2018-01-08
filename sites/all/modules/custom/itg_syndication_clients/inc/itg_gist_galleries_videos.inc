@@ -24,10 +24,13 @@ function itg_genrate_gist_photo_syndication() {
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('smi', array('field_story_medium_image_fid'));
   $query->fields('ssi', array('field_story_small_image_fid'));
-
+  
+  $days_ago = strtotime(date('Y-m-d', strtotime('-10 days')));
+  $query->condition('n.created', $days_ago, '>=');
+  
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'photogallery', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 15);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
