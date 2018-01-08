@@ -33,7 +33,7 @@ function story_video_photo_field_report($start_date, $end_date) {
 
   /*date loop start*/
   
-  $datediff = $start_date - $end_date;
+  $datediff = $end_date - $start_date;
   $datediff_c = floor($datediff / (60 * 60 * 24));
   $date_l_c = 0;
   while($date_l_c <= $datediff_c){
