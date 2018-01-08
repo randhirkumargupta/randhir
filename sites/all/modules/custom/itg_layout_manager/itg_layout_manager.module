@@ -314,6 +314,11 @@ function itg_layout_manager_block_view($delta = '') {
       $settings['base_url'] = $base_url;
       $settings['sso_url'] = trim(PARENT_SSO);
       $settings['front_url'] = base64_encode(trim(FRONT_URL));
+      if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {
+         $settings['sso_login_check'] = 'yes';
+      } else{
+          $settings['sso_login_check'] = 'no';
+      }
       if (!empty(variable_get('logoutsec_time'))) {
         $settings['logoutsec'] = variable_get('logoutsec_time');
       } else {
@@ -322,7 +327,7 @@ function itg_layout_manager_block_view($delta = '') {
       drupal_add_js(array('itg_sso_login' => array('settings' => $settings)), array('type' => 'setting'));
       drupal_add_js(drupal_get_path('module', 'itg_sso_reg') . '/js/itg_sso_login.js', array('cache' => FALSE, 'defer' => TRUE));
       
-      if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {       
+      /*if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {       
         $js_check_user = 'jQuery(document).ready(function() {
                             try {
                                 jQuery.ajax({
@@ -340,7 +345,7 @@ function itg_layout_manager_block_view($delta = '') {
                             } catch (t) {}
                         });';
          drupal_add_js($js_check_user, array('type' => 'inline', 'scope' => 'footer'));
-      }
+      }*/
       /* end here */
 
       $data = get_itg_footer_menu();
