@@ -1743,9 +1743,9 @@ function _itg_analytics_relationship_views($view_name, $view_current_display) {
         if ($view_name == "so_sorry" && $view_current_display == "most_watched ") {
             $flag = TRUE;
         }
-        if ($view_name == "most_read_widget" && $view_current_display == "most_read_widget_contents") {
-            $flag = TRUE;
-        }
+//        if ($view_name == "most_read_widget" && $view_current_display == "most_read_widget_contents") {
+//            $flag = TRUE;
+//        }
     }
     return $flag;
 }
@@ -1917,11 +1917,13 @@ function itg_widget_anchor_landing_menu($nid) {
     $cat_query = db_select('field_data_field_video_anchor', 'video_anchor');
     $cat_query->leftJoin('field_data_field_story_category', 'cat', 'video_anchor.entity_id = cat.entity_id');
     $cat_query->leftJoin('taxonomy_term_data', 'ttd', 'ttd.tid=cat.field_story_category_tid');
+    $cat_query->leftJoin('taxonomy_term_hierarchy', 'th', 'th.tid=ttd.tid');
     $cat_query->fields('cat', array('field_story_category_tid'));
     $cat_query->distinct('cat.field_story_category_tid');
     $cat_query->fields('ttd', array('name'));
     $cat_query->condition('video_anchor.field_video_anchor_target_id', $nid, '=');
     $cat_query->condition('cat.bundle', 'videogallery', '=');
+    $cat_query->condition('th.parent', 0, '=');
     $categories_of_anchor = $cat_query->execute();
     foreach ($categories_of_anchor as $cate) {
         $result[$cate->field_story_category_tid] = $cate->name;

@@ -27,6 +27,10 @@ function itg_genrate_rsselections2016_westbengal_syndication($section_id = NULL,
     $query->leftJoin('field_data_field_story_medium_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
 
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->condition('ti.tid', $section_id, '=');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
 
@@ -36,7 +40,7 @@ function itg_genrate_rsselections2016_westbengal_syndication($section_id = NULL,
     $query->fields('ssi', array('field_story_small_image_fid'));
 
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

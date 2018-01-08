@@ -18,7 +18,9 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
  * {@inheritdoc}
  */
 function itg_common_init() {
-  
+  /*if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {
+    echo $_COOKIE['itg_forced_login'];
+  }*/
   global $user, $base_url, $theme;
   $arg = arg();
   
@@ -1624,8 +1626,23 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
 
         $value2 = '<script(.*)src=\"//platform.twitter.com/widgets.js\"></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
-
+		
         $value2 = '<script async="" src="//platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        // With Https        
+        $value2 = '<script src="https://platform.twitter.com/widgets.js" async="" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" charset="utf-8" src="https://platform.twitter.com/widgets.js"></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        
+        $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" ></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         
       }

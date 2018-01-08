@@ -111,7 +111,7 @@ function itg_rss_breakingnews_feed() {
   $query->fields('ssi', array('field_story_small_image_fid'));
   $query->condition('ft.field_type_value', 'Breaking News', '=');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'breaking_news', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -148,6 +148,10 @@ function itg_genrate_hltapps_stories_syndication($section_id = NULL, $file_name)
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
+      if ($days_ago = get_content_fetch_time($section_id)) {
+        $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+        $query->condition('n.created', $days_ago, '>=');
+      }
     }
     else {
       $section_id = 1;
@@ -295,6 +299,10 @@ function itg_genrate_hltapps_videos_syndication($section_id = NULL, $file_name, 
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
+      if ($days_ago = get_content_fetch_time($section_id)) {
+        $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+        $query->condition('n.created', $days_ago, '>=');
+      }
     }
     else {
       $section_id = 1;
@@ -446,6 +454,11 @@ function itg_genrate_hltapps_photos_syndication($section_id = NULL, $file_name, 
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
 
+    if ($days_ago = get_content_fetch_time($section_id)) {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
+
     $query->condition('ti.tid', $section_id, '=');
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
@@ -453,7 +466,7 @@ function itg_genrate_hltapps_photos_syndication($section_id = NULL, $file_name, 
     $query->fields('sli', array('field_story_large_image_fid'));
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'photogallery', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, $limit);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -593,6 +606,10 @@ function itg_genrate_hltapps_programme_syndication($section_id = NULL, $file_nam
     if (!empty($section_id) && $section_id != -1) {
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $section_id, '=');
+      if ($days_ago = get_content_fetch_time($section_id)) {
+        $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+        $query->condition('n.created', $days_ago, '>=');
+      }
     }
     else {
       $section_id = 1;
@@ -688,6 +705,15 @@ function itg_genrate_hltapps_mixed_feed_syndication($sections = NULL, $file_name
   if (count($categories_id) > 0) {
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $categories_id, 'IN');
+    $max_day_ago = 10;
+    foreach ($categories_id as $sec_id) {
+      $temp = get_content_fetch_time($sec_id);
+      if ($max_day_ago < $temp) {
+        $max_day_ago = $temp;
+      }
+    }
+    $days_ago = strtotime(date('Y-m-d', strtotime('-' . $max_day_ago . ' days')));
+    $query->condition('n.created', $days_ago, '>=');
   }
   $query->fields('dbody', array('body_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
@@ -858,6 +884,10 @@ function itg_genrate_msn_hlt_videos_feed_syndication($section_id = NULL, $file_n
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $section_id, '=');
 
+    if ($days_ago = get_content_fetch_time($section_id)) {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
     $query->fields('sli', array('field_story_large_image_fid'));

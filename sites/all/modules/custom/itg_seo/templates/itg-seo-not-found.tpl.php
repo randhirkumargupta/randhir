@@ -21,11 +21,10 @@ global $base_url;
       <span class="error-or">OR</span>
       <h3><?php print t('Check out Latest Headlines'); ?></h3>
       <ul class="latest-headlines-list">
-          <?php 
-          foreach ($data as $key => $val) { 
-          ?>
-          <a href="<?php print url('node/'. $key); ?>" target="_blank"><li><?php print_r($val); ?></li></a>
-          <?php } ?>
+        <?php
+        echo render($data);
+        ?>
+          
       </ul>
     </div>
   </div>

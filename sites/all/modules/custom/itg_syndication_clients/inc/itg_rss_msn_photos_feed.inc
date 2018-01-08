@@ -20,7 +20,7 @@ function itg_rss_msn_photos_feed() {
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'photogallery', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 25);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

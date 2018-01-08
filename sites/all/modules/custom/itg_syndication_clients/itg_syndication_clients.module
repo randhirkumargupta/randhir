@@ -335,6 +335,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/videsectionlist_india_rss_fun_on_go.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-feeds/factiva_stories'] = array(
+    'page callback' => 'factiva_stories_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/factiva_stories_syndication.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -551,6 +557,10 @@ function get_thumbnail_by_fid($fid = NULL, $style = NULL) {
  * @return string
  */
 function get_term_name_by_tid($tid = NULL) {
+  if ($cached = cache_get('taxonomy_' . $tid, 'cache')) {
+    $tname = $cached->data;
+    return $tname;
+  }
   $tname = '';
   if (!empty($tid)) {
     $query = db_select('taxonomy_term_data', 'ttd');
@@ -561,6 +571,7 @@ function get_term_name_by_tid($tid = NULL) {
       $tname = $tname[0]['name'];
     }
   }
+  cache_set('taxonomy_' . $tid, $tname, 'cache', 60 * 60 * 24 * 7); //7 days
   return $tname;
 }
 

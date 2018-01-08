@@ -56,21 +56,23 @@ global $base_url;
           </div>
       </div>
     <?php else: ?>
+    <?php if (arg(2) !== variable_get('pti_section_id', 1206640)) : ?>
     <div class="pic <?php echo $video_class;?> ">
-  <?php if ($row['field_story_small_image'] != ''): ?>
-    <?php print $row['field_story_small_image']; ?>
-  <?php else: ?>
-        <?php if ($row['type'] == 'videogallery'): ?>
-          <?php $image_link = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />"; ?>
-        <?php else: ?>
-          <?php $image_link = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />"; ?>
-          <?php print l($image_link, "node/" . $row['nid'], array("html" => true)); ?>
-        <?php endif; ?>    
-      <?php endif; ?>
-      <?php if(!empty($row['field_video_duration'])) { ?>
-            <figcaption><i class="fa fa-play-circle"></i> <?php print $row['field_video_duration']; ?></figcaption>
-      <?php } ?>
-    </div>
+      <?php if ($row['field_story_small_image'] != ''): ?>
+        <?php print $row['field_story_small_image']; ?>
+      <?php else: ?>
+            <?php if ($row['type'] == 'videogallery'): ?>
+              <?php $image_link = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />"; ?>
+            <?php else: ?>
+              <?php $image_link = "<img width='170' height='127'  src='" . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image170x127.jpg') ."' alt='' title='' />"; ?>
+              <?php print l($image_link, "node/" . $row['nid'], array("html" => true)); ?>
+            <?php endif; ?>    
+          <?php endif; ?>
+          <?php if(!empty($row['field_video_duration'])) { ?>
+                <figcaption><i class="fa fa-play-circle"></i> <?php print $row['field_video_duration']; ?></figcaption>
+          <?php } ?>
+        </div>
+    <?php endif; ?>
     <div class="detail"><h3 class="<?php echo $pipelineclass; ?>" title="<?php echo strip_tags($row['title']);?>"><?php
       if (function_exists('itg_common_get_smiley_title')) {
         print l(itg_common_get_smiley_title($row['nid'], 0, 100), "node/" . $row['nid'], array("html" => TRUE));
