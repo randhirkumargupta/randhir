@@ -18,7 +18,9 @@ module_load_include('inc', 'itg_common', 'includes/itg_common_list_magazine_issu
  * {@inheritdoc}
  */
 function itg_common_init() {
-  
+  if (isset($_COOKIE['itg_forced_login']) && $_COOKIE['itg_forced_login'] != 'null') {
+    echo $_COOKIE['itg_forced_login'];
+  }
   global $user, $base_url, $theme;
   $arg = arg();
   
