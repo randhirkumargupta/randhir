@@ -341,6 +341,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/factiva_stories_syndication.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-feeds/syndication-cms'] = array(
+    'page callback' => 'syndication_interface_cms',
+    'access arguments' => array('access content'),
+    'file' => 'inc/syndication_interface_cms.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
