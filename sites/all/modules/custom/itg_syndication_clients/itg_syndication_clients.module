@@ -913,7 +913,7 @@ function related_content_node_type($node_list = "", $type) {
     $nid = $resvalue['nid'];
     if ($resvalue['type'] == "story") {
       $type_ar['stories'] = "YES";
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
       $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
       $related_story_xml .= '<story>';
       $related_story_xml .= '<title>' . $resvalue['title'] . '</title>';
@@ -923,7 +923,7 @@ function related_content_node_type($node_list = "", $type) {
     }
     elseif ($resvalue['type'] == "videogallery") {
       $type_ar['videos'] = "YES";
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
       $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
       $related_video_xml .= '<video>';
       $related_video_xml .= '<title>' . $resvalue['title'] . '</title>';
@@ -933,7 +933,7 @@ function related_content_node_type($node_list = "", $type) {
     }
     elseif ($resvalue['type'] == "photogallery") {
       $type_ar['photos'] = "YES";
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
       $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
       $related_photo_xml .= '<photo>';
       $related_photo_xml .= '<title>' . $resvalue['title'] . '</title>';

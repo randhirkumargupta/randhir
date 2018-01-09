@@ -94,7 +94,7 @@ function genrate_elections2017_election_finals_xml($result = NULL, $category, $s
         continue;
       }
       $nid = $value['nid'];
-      $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $value["nid"]);
+      $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value["nid"]);
       $xml_story_file = 'story' . $nid . '.xml';
       $xml .= '<nlink>';
       $xml .= '<news>';
@@ -154,7 +154,7 @@ function genrate_elections2017_election_finals_detail_xml($value, $category, $xm
   $place = get_content_city($value['nid']);
   $body = remove_extra_tag_in_body($value["body_value"]);
   $sectionname = get_term_name_by_tid($section_id);
-  $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $value["nid"]);
+  $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value["nid"]);
   $courtesy = $value['field_story_courtesy_value'];
   $related = related_content_node_type($value['nid'], 'story');
   $xml_detail = '<Root>';

@@ -122,7 +122,7 @@ function genrate_video_detail_xml($result, $section_id, $category, $filename, $s
   $title = $result['title'];
   $primary_cat = get_term_name_by_tid($result['field_primary_category_value']);
   $credit = $result['field_story_courtesy_value'];
-  $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+  $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
   $created_date = date("Y-m-d", $result['created']);
   $created_datetime = date("Y-m-d\TH:i:sP", $result['created']);
   $is_fav = get_nid_is_favorite($nid);

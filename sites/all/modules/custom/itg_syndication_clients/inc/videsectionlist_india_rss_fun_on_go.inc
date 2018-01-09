@@ -58,7 +58,7 @@ function genrate_fun_on_go_videos_syndication_xml($result = NULL) {
   $xml .= '<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">';
   $xml .= '<channel>';
   $xml .= "<title>India Today's Videos Feed</title>";
-  $xml .= '<link>' . $base_url . '</link>';
+  $xml .= '<link>' . FRONT_URL . '</link>';
   $xml .= "<description>India Today's Videos Feed</description>";
   if (!empty($result)) {
     foreach ($result as $value) {

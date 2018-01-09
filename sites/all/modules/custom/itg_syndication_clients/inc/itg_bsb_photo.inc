@@ -92,7 +92,7 @@ function generate_photo_detail_xml($nid, $title, $section_id, $section_name, $ph
 
   $gallery_img_fc = get_all_associated_photos($nid);
   $image_count = count($gallery_img_fc);
-  $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+  $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
   $photo_xml .= '<Root>';
   $photo_xml .= '<idgallery>' . $nid . '</idgallery>';
   $photo_xml .= '<gallery><![CDATA[' . $title . ']]></gallery>';
