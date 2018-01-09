@@ -8,29 +8,32 @@
 
 jQuery(document).ready(function () {
     var story_nid = Drupal.settings.itg_story.settings.story_nid;
+    var readLoginCheck = getCookie('itg_forced_login');
     try {
-        jQuery.ajax({
-            url: Drupal.settings.itg_widget.settings.base_url + '/itg-read-later-refresh/' + story_nid,
-            type: 'post',
-            data: '',
-            beforeSend: function () {
-            },
-            success: function (userdata) {
-                var obj = jQuery.parseJSON(userdata);
+        if (readLoginCheck != '' && readLoginCheck != 'null') {
+            jQuery.ajax({
+                url: Drupal.settings.itg_widget.settings.base_url + '/itg-read-later-refresh/' + story_nid,
+                type: 'post',
+                data: '',
+                beforeSend: function () {
+                },
+                success: function (userdata) {
+                    var obj = jQuery.parseJSON(userdata);
 
-                if (userdata.length != 0) {
-                    if (obj.type == 'buzz') {
-                        jQuery('.buzz-akamai-refresh-read-later').html(obj.html_render);
+                    if (userdata.length != 0) {
+                        if (obj.type == 'buzz') {
+                            jQuery('.buzz-akamai-refresh-read-later').html(obj.html_render);
+                        }
+                        if (obj.default_type == 'normal') {
+                            jQuery('.not-buzz-case').html(obj.default_render);
+                        }
                     }
-                    if (obj.default_type == 'normal') {
-                        jQuery('.not-buzz-case').html(obj.default_render);
-                    }
+                },
+                error: function (xhr, desc, err) {
+
                 }
-            },
-            error: function (xhr, desc, err) {
-
-            }
-        });
+            });
+        }
     } catch (e) {
 
     }
