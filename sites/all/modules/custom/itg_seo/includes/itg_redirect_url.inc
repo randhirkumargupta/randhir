@@ -108,11 +108,27 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
     $source_url = redirect_load_by_source($old_url);    
     if (!empty($source_url)) {
       $new_url = drupal_get_path_alias($source_url->redirect);
-      $url_re = 'https://www.indiatoday.in/'.$new_url;     
+      $url_re = 'https://www.indiatoday.in/'.$new_url;
     } else {
-        $url_re = 'https://www.indiatoday.in'.$_SERVER['REDIRECT_URL'];       
+        $url_re = 'https://www.indiatoday.in'.$_SERVER['REDIRECT_URL'];
+        if ($_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
+          if(($arg[0] == 'education' || $arg[0] == 'technology') && ($arg[1] == 'story') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+            $storyarg = $arg[4];
+            $newurl = getNewStoryUrl($storyarg);
+            if ($newurl) {
+              $url_re = $newurl;
+            }
+          } else if(($arg[0] == 'story') && !empty($arg[1]) && !empty($arg[2] && !empty($arg[3]))) {
+            $storyarg = $arg[3];
+            $newurl = getNewStoryUrl($storyarg);
+            if ($newurl) {
+              $url_re = $newurl;
+            }
+          } else {
+              $url_re = 'https://www.indiatoday.in'.$_SERVER['REDIRECT_URL'];
+          }
+        }
     }
-     
     drupal_goto($url_re, array(), 301);    
     exit;
   }
@@ -273,7 +289,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newmatchurl) {
         drupal_goto($newmatchurl);
       }
-  } else if ($arg[0] == 'node' && empty($arg[1])) {
+  } else if ((!empty($arg[0]) && ($arg[0] == 'gallery' || $arg[0] == 'section')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
+      $urlarg = $arg[2];
+      if ($urlarg > 1) {
+        $newmatchurl = $base_url.'/'.$arg[0].'/'.$arg[1].'/1/'.$arg[3];
+        drupal_goto($newmatchurl);
+      } 
+  }
+  else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
   // Code for url redirection:
@@ -382,4 +405,22 @@ function getNewVideoEmbedUrl($videoembed) {
     $newurl = $base_url.'/video/' . $primary_category_name.'/embed/'.$video_decode;
   }
   return $newurl;
+}
+
+/*
+ * Get Story url from .html pattern
+ * @param String
+ */
+function getNewStoryUrl($storyarg) {
+  global $base_url;
+  $newmatchurl = '';
+  $storyarg_exp = explode('.html', $storyarg);
+  $old_content_id = $storyarg_exp[0];
+  $table = 'migrate_map_itgstorylist';
+  $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+  if ($newcontentid) {
+    $redirecturl = get_redirect_url($newcontentid);
+    $newmatchurl = $base_url.'/'.$redirecturl;
+  }
+  return $newmatchurl;
 }
