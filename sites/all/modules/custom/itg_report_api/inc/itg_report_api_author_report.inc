@@ -122,24 +122,27 @@ function author_report($start_date) {
   $data = array();
   $prev_day = time() - (24 * 60 * 60);
   $hour = 01;
-  $today = strtotime($start_date);
-  $yesterday = strtotime('-1 day', $today);
+  
+  $yesterday = strtotime('-1 day', $start_date);
   $month = date("M-Y", $start_date);
   $year = date("Y", $start_date);
   $site_id = 1;
   $site_name = "India Today";
 
   // date details
-  $data['date details']['today'] = date("d-F-Y", $today);
+  $data['date details']['today'] = date("d-F-Y", $start_date);
   $data['date details']['yesterday'] = date("d-F-Y", $yesterday);;
   $data['date details']['month'] = $month;
   $data['date details']['year'] = $year;
 
   // site_snapshot  
-  $today_unix = strtotime($start_date . '00:00:00');
+  $today_unix = strtotime($start_date);
   $yesterday_unix = strtotime('-1 day', $today_unix);
   $month_prev_unix = strtotime('-1 month', $today_unix);
   $year_prev_unix = strtotime('-1 year', $today_unix);
+  
+  echo $today_unix; echo "<br>";  echo $yesterday_unix; echo "<br>";  echo $month_prev_unix; echo "<br>"; echo $year_prev_unix; 
+  p($data);
 
   $today_total = getContentCountByDate($today_unix);
   $yesterday_total = getContentCountByDate($yesterday_unix);
