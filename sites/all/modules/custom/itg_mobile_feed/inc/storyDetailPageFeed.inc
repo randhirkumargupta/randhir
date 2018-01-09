@@ -74,7 +74,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $related_node = relatedContentNodeType($nid, "story");
       $city = getCityByNid($nid);
       $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = $base_url . "/" . $alias;
+      $weburl = FRONT_URL . "/" . $alias;
       $create_date = date("F d, Y", $node->created);
       $create_datetime = date(DATE_ATOM, $node->created);
       $full_body = $node->body['und']['0']['value'];

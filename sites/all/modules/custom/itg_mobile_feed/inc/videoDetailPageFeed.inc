@@ -67,7 +67,7 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $related_node = relatedContentNodeType($nid, "videogallery");
             $city = getCityByNid($nid);
             $alias = drupal_get_path_alias('node/' . $nid . '');
-            $weburl = $base_url . "/" . $alias;
+            $weburl = FRONT_URL . "/" . $alias;
             $create_date = date("F d, Y", $node->created);
             $create_datetime = date(DATE_ATOM, $node->created);
             $thumbimage = completeFilePath($node->field_story_medium_image['und'][0]['fid']);

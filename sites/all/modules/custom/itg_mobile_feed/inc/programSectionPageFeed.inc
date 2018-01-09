@@ -52,7 +52,7 @@ function programSectionPageFeed() {
                 $cat_icon_img = sectionCategoryIconImg($value);
                 
                 // child xml node
-                $child_node .= "<item><title><![CDATA[" . $term_name . "]]></title><url>" . $term_file_name . "</url><weburl><![CDATA[" . $base_url . "/" . $child_term_url . "]]></weburl><sectionimage>" . $cat_icon_img . "</sectionimage></item>";
+                $child_node .= "<item><title><![CDATA[" . $term_name . "]]></title><url>" . $term_file_name . "</url><weburl><![CDATA[" . FRONT_URL . "/" . $child_term_url . "]]></weburl><sectionimage>" . $cat_icon_img . "</sectionimage></item>";
             }
         }
         //write xml node of storysectionlisting
