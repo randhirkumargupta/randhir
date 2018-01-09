@@ -122,7 +122,7 @@ function author_report($start_date) {
   $data = array();
   $prev_day = time() - (24 * 60 * 60);
   $hour = 01;
-  $today = strtotime($hour . ':00:00');
+  $today = strtotime($start_date . '00:00:00');
   $yesterday = strtotime('-1 day', $today);
   $month = date("M-Y", $start_date);
   $year = date("Y", $start_date);
@@ -130,14 +130,13 @@ function author_report($start_date) {
   $site_name = "India Today";
 
   // date details
-  $data['date details']['today'] = $today;
-  $data['date details']['yesterday'] = $yesterday;
+  $data['date details']['today'] = date("d-F-Y", $today);
+  $data['date details']['yesterday'] = date("d-F-Y", $yesterday);;
   $data['date details']['month'] = $month;
   $data['date details']['year'] = $year;
 
-  // site_snapshot
-  $hour = 12;
-  $today_unix = strtotime($hour . ':00:00');
+  // site_snapshot  
+  $today_unix = strtotime($start_date . '00:00:00');
   $yesterday_unix = strtotime('-1 day', $today_unix);
   $month_prev_unix = strtotime('-1 month', $today_unix);
   $year_prev_unix = strtotime('-1 year', $today_unix);
