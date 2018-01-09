@@ -110,7 +110,7 @@ define('ITGDATE', 'd/m/Y');
 define('ITG_INDIATODAY_SITENAME_XML', 'India Today');
 define('FRONT_THEME_NAME', 'itg');
 define('AMP_THEME_NAME', 'amptheme');
-define('EXTRA_SECTION_CARDS', 21);
+define('EXTRA_SECTION_CARDS', 9);
 define('SECTION_TAB', 20);
 $extra_large_image_style = array('photgallery_landing_slider_753x543', 'big_story_widget' ,'photo_slider_753x543', 'image_750x363', 'photogallery_slide');
 define('EXTRA_LARGE_IMAGE_STYLES', $extra_large_image_style);
