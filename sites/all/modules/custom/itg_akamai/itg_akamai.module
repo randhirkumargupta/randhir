@@ -335,19 +335,22 @@ function itg_akamai_varnish_host_mapping($paths) {
  */
 function itg_akamai_send_for_host_mapping_for_amp($paths) {
   // Getting AMP url patten from configuration
-  $amp_pattern = '/amp';
+  //$amp_pattern = '/amp'; //old code
+  $amp_pattern = '/amp/';
   $path_new_array = array();
   if (is_array($paths)) {
     if (isset($paths) && !empty($paths)) {
       foreach ($paths as $paths_chunk) {
         $path_new_array[] = $paths_chunk;
-        $path_new_array[] = $paths_chunk . $amp_pattern;
+        //$path_new_array[] = $paths_chunk . $amp_pattern;
+        $path_new_array[] = $amp_pattern . $paths_chunk;
       }
     }
   }
   else {
     $path_new_array[] = $paths;
-    $path_new_array[] = $paths . $amp_pattern;
+    //$path_new_array[] = $paths . $amp_pattern;
+    $path_new_array[] = $amp_pattern . $paths;
   }
   return $path_new_array;
 }
