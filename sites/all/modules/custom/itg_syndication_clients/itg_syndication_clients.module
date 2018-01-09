@@ -1326,3 +1326,15 @@ function itg_mcu8_tags($nid) {
   }
   return $tags;
 }
+
+/**
+ * Function for remove tags from content
+ * @param string $content
+ * @return string
+ */
+function itg_remove_tags_from_body($content){
+  $content = strip_tags($content, '<p>');
+  $content = preg_replace('<div(.*?)class="itg-mosimage"(.*?)div>',"", $content);
+  $content = preg_replace('/<img(.*?)src=("|\'|)(.*?)("|\'| )(.*?)>/s',"", $content);
+  return $content;
+}
