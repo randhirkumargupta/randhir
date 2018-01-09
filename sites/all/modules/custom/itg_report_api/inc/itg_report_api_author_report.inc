@@ -170,6 +170,7 @@ function author_report($start_date) {
 
   //auhtor_data
   $author_list = getAuthorList_Report(1511548200, 1514177943); 
+  p($author_list);
 
   // start loop on author list array
   $author_loop_cont = 0;
@@ -257,13 +258,13 @@ function getAuthorList_Report($s_date, $e_date) {
   $total_cont = 0;
   $query = db_select('itg_multi_byline_info', 'byi');
   $query->leftJoin('node', 'n', 'n.nid=byi.nid');
-  $query->fields('byi', array('id', 'nid'));
+  $query->fields('byi', array('id', 'byline_id', 'nid'));
   $query->condition('n.created', $s_date, '>=');
   $query->condition('n.created', $e_date, '<=');
   $query->groupBy('byi.id');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
-      $id = $resvalue['id'];
+      $id = $resvalue['byline_id'];
       $list[$id] = getBYlineDetail($id);
   }
   return $list;
