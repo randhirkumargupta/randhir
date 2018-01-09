@@ -169,20 +169,19 @@ function author_report($start_date) {
   $data['auhtorwise_data']['site_id'] = "$site_id";
 
   //auhtor_data
-  $author_list = getAuthorList_Report();
+  $author_list = getAuthorList_Report($today_unix, $today_end);
 
   // start loop on author list array
   $author_loop_cont = 0;
   $auhtor_data = array();
   foreach ($author_list as $key => $value) {
-    $user_id = $value['user_id'];
-    $name = $value['name'];
-    $mail = $value['mail'];
-
-    $today_total_uid = getContentCountByDateAndByUid($today_unix, $user_id);
-    $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $user_id);
-    $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $user_id);
-    $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $user_id);
+    $user_id = $value['nid'];
+    $name = $value['title'];
+    $mail = $value['email'];
+    $today_total_uid = getContentCountByDateAndByUid($today_unix,$today_end, $user_id);
+    $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix,$yesterday_unix_end, $user_id);
+    $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $user_id);
+    $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $user_id);
 
     $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
     $auhtor_data[$author_loop_cont]['author_email'] = "$mail";
@@ -252,7 +251,24 @@ function getContentCountByDate($start_date, $end_date) {
  *
  * @return array authorList
  */
-function getAuthorList_Report() {
+function getAuthorList_Report($s_date, $e_date) {
+  global $base_url;
+  $list = array();
+  $total_cont = 0;
+  $query = db_select('itg_multi_byline_info', 'byi');
+  $query->leftJoin('node', 'n', 'n.nid=byi.nid');
+  $query->fields('byi', array('id', 'nid'));
+  $query->condition('n.created', $s_date, '>=');
+  $query->condition('n.created', $e_date, '<=');
+  $query->groupBy('byi.id');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($result as $reskey => $resvalue) {
+      $id = $resvalue['id'];
+      $list[$id] = getBYlineDetail($resvalue['nid']);
+  }
+  return $list;
+}
+function getAuthorList_Report_bk() {
   global $base_url;
   $list = array();
   $total_cont = 0;
@@ -287,7 +303,26 @@ function getAuthorList_Report() {
  *
  * @return int $count
  */
-function getContentCountByDateAndByUid($start_date, $uid) {
+
+function getContentCountByDateAndByUid($start_date, $end_date, $uid) {
+  $query_cont = db_select('node', 'n');
+  $query->leftJoin('itg_multi_byline_info', 'byi', 'n.nid=byi.nid');
+  $query_cont->fields('n', array('nid'));
+  //end
+  if ($start_date != "na") {    
+    $query_cont->condition('n.created', $start_date, ">=");
+  }
+  if ($end_date != "na") {    
+    $query_cont->condition('n.created', $end_date, "<=");
+  }
+  $query_cont->condition('byi.nid', $uid);
+  $result_cont = $query_cont->execute()->fetchAll();  
+  $total_records = count($result_cont);
+  $query_cont = "";
+  $result_cont = "";
+  return $total_records;
+}
+function getContentCountByDateAndByUid_bk($start_date, $uid) {
   $query_cont = db_select('node', 'n');
   $query_cont->fields('n', array('nid'));
   //end
@@ -330,5 +365,29 @@ function todayContentsByUid($start_date, $uid) {
   $query = "";
   $result = "";
   return $list;
+}
+
+function getBYlineDetail($nid) {
+    $byline_data = array();
+    if($nid){
+        $query_n = db_select('node', 'n');
+        $query_n->leftJoin('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
+        $query_n->fields('n', array('nid', 'title', 'status'));
+        $query_n->fields('re', array('field_reporter_email_id_value'));
+        $query_n->condition('n.nid', $nid, '=');
+        $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result_n as $reskey_n => $resvalue_n) {
+            $nid = $resvalue_n['nid'];
+            $title = $resvalue_n['title'];
+            $status = $resvalue_n['status'];
+            $field_reporter_email_id_value = $resvalue_n['field_reporter_email_id_value'];        
+            $byline_data['nid'] = $nid;
+            $byline_data['title'] = $title;
+            $byline_data['status'] = $status;
+            $byline_data['email'] = $field_reporter_email_id_value;
+
+        }
+    }
+    return $byline_data;
 }
 
