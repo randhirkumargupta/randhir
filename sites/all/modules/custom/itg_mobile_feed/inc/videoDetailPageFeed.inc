@@ -51,9 +51,9 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
         //check into redis
         $redis_key = "itgd_video" . $nid;
         $result_get = getRedis($redis_key);
-        if ($result_get['key_value'] != "") {
-            $output = $result_get['key_value'];
-        } else {
+//        if ($result_get['key_value'] != "") {
+//            $output = $result_get['key_value'];
+//        } else {
             global $base_url;
             $ttl = DEFAULT_REDIS_EXPIRE_TIME;
             $node = node_load($nid);
@@ -87,6 +87,9 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
             $videotag = video_detail_formats($nid, $source_type);
             $video_size = migrated_video_transcoding($nid);
+//            $video_id = 'x60hf26';
+//            $data_video_info = xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
+//            p($data_video_info);
             // migrated video
             if (!empty($videotag['migrated'])) {
                 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
@@ -122,7 +125,7 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             }
             $output .= "</item>" . getMobileFeedXmlFooter();
             $result_set = setRedis($redis_key, $output, $ttl);
-        }
+//        }
     }
     if ($output) {
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
@@ -199,7 +202,7 @@ function getImgTagDetail($node) {
  */
 function emptygetImgTagDetail() {
     $imgtag = "";
-    $imgtag = "<bodyimages><image><lowres></lowres><highres></highres><caption></caption></image></bodyimages>";
+    $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
     return $imgtag;
 }
 
@@ -311,6 +314,7 @@ function video_detail_formats($nid, $source_type) {
             $video_detail[$video_status]['video_id'] = $video_id;
             $file_id = $video_value->fid;
         }
+        internal_video_bitrate_data($video_id);
         $query = db_select('file_managed', 'fm');
         $query->condition('fm.fid', $file_id);
         $query->fields('fm', array('filename', 'uri', 'filemime', 'filesize', 'status'));
@@ -407,4 +411,39 @@ function mcu8_tags($nid) {
         }
     }
     return $tags;
+}
+
+/**
+ * Get the internal uploaded video on the Site
+ */
+function internal_video_bitrate_data($video_id) {
+  $data_video_info = xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
+  echo "Daily motion table details<br>";
+  print_r($data_video_info);
+  if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
+    echo "INTERNAL VIDEO type<br>";
+    $data_from_solr = itg_videogallery_getsolr_data_for_internal_video($video_id);
+    print_r($data_from_solr);
+    $video_data = $data_from_solr[0];
+    $video_all_data = json_decode($video_data, TRUE);
+    $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
+    echo "<br>player details";
+    p($player_content);
+  }else{
+    echo "Video type is not internal";
+  }
+  p();
+}
+
+/**
+ * Implements itg_videogallery_get_all_video_info_by_video_id
+ * @param string $video_id
+ * @param array $result
+ */
+function xml_itg_videogallery_get_all_video_info_by_video_id($video_id) {
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd');
+  $query->condition('video_id', $video_id, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
 }
