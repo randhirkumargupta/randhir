@@ -137,13 +137,13 @@ function author_report($start_date) {
 
   // site_snapshot  
   $today_unix = $start_date;
-  $today_end = $start_date + 86400;
+  $today_end = $start_date + 86399;
   $yesterday_unix = strtotime('-1 day', $today_unix);
-  $yesterday_unix_end = $yesterday_unix + 86400;
+  $yesterday_unix_end = $yesterday_unix + 86399;
   $month_prev_unix = strtotime('-1 month', $today_unix);
-  $month_prev_unix_end = $month_prev_unix + 2629743;
+  $month_prev_unix_end = $month_prev_unix + 2629742;
   $year_prev_unix = strtotime('-1 year', $today_unix); 
-  $year_prev_unix_end = $year_prev_unix + 31556926;
+  $year_prev_unix_end = $year_prev_unix + 31556925;
   
   echo $today_unix; echo "<br>";
   echo $today_end; echo "<br>";
