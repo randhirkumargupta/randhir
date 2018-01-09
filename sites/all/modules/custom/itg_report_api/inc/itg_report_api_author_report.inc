@@ -315,7 +315,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $uid) {
   if ($end_date != "na") {    
     $query_cont->condition('n.created', $end_date, "<=");
   }
-  $query_cont->condition('byi.nid', $uid);
+  $query_cont->condition('byi.id', $uid);
   $result_cont = $query_cont->execute()->fetchAll();  
   $total_records = count($result_cont);
   $query_cont = "";
