@@ -194,7 +194,7 @@ function author_report($start_date) {
     $auhtor_data[$author_loop_cont]['year'] = "$year_total_uid";
 
     //auhtor_data contents
-    $author_today_data = todayContentsByUid($today_unix, $user_id);
+    $author_today_data = todayContentsByUid(1511548200, 1514177943, $user_id);
 
     //loop author today data
     $author_inner_loop_cont = 0;
@@ -348,7 +348,33 @@ function getContentCountByDateAndByUid_bk($start_date, $uid) {
  *
  * @return int $count
  */
-function todayContentsByUid($start_date, $uid) {
+function todayContentsByUid($start_date, $end_date,  $uid) {
+  $list = array();
+  $query_cont = db_select('node', 'n');
+  $query_cont->leftJoin('itg_multi_byline_info', 'byi', 'n.nid=byi.nid');
+  $query_cont->fields('n', array('nid', 'title'));
+  //end
+  if ($start_date != "na") {    
+    $query_cont->condition('n.created', $start_date, ">=");
+  }
+  if ($end_date != "na") {    
+    $query_cont->condition('n.created', $end_date, "<=");
+  }
+  $query_cont->condition('byi.byline_id', $uid);
+  $result = $query_cont->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $loop_cont = 0;
+  foreach ($result as $reskey => $resvalue) {
+    $nid = $resvalue[nid];
+    $title = $resvalue[title];
+    $list[$loop_cont]['nid'] = $nid;
+    $list[$loop_cont]['title'] = $title;
+    $loop_cont++;
+  }
+  $query = "";
+  $result = "";
+  return $list;
+}
+function todayContentsByUid_bk($start_date, $end_date,  $uid) {
   $list = array();
   $query = db_select('node', 'n');
   $query->fields('n', array('nid', 'title'));
