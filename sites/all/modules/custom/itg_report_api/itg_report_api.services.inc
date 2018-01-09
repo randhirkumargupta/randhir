@@ -508,7 +508,7 @@ function itg_report_api_author_report() {
  */
 function itg_report_api_author_report_tvtn() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']. " 01:01:00");
+    $start_date = strtotime($_GET['start_date']);
   }
   else {
     $start_date = $_GET['start_date'];

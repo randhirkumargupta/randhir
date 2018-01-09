@@ -15,30 +15,33 @@ function author_report_tvtn($start_date) {
   $data = array();
   $prev_day = time() - (24 * 60 * 60);
   $hour = 01;
-  $today = strtotime($hour . ':00:00');
-  $yesterday = strtotime('-1 day', $today);
+  
+  $yesterday = strtotime('-1 day', $start_date);
   $month = date("M-Y", $start_date);
   $year = date("Y", $start_date);
   $site_id = 1;
   $site_name = "India Today";
 
   // date details
-  $data['date details']['today'] = $today;
-  $data['date details']['yesterday'] = $yesterday;
+  $data['date details']['today'] = date("d-F-Y", $start_date);
+  $data['date details']['yesterday'] = date("d-F-Y", $yesterday);;
   $data['date details']['month'] = $month;
   $data['date details']['year'] = $year;
 
-  // site_snapshot
-  $hour = 12;
-  $today_unix = strtotime($hour . ':00:00');
+  // site_snapshot  
+  $today_unix = $start_date;
+  $today_end = $start_date + 86399;
   $yesterday_unix = strtotime('-1 day', $today_unix);
+  $yesterday_unix_end = $yesterday_unix + 86399;
   $month_prev_unix = strtotime('-1 month', $today_unix);
-  $year_prev_unix = strtotime('-1 year', $today_unix);
-
-  $today_total = getContentCountByDate($today_unix);
-  $yesterday_total = getContentCountByDate($yesterday_unix);
-  $month_total = getContentCountByDate($month_prev_unix);
-  $year_total = getContentCountByDate($year_prev_unix);
+  $month_prev_unix_end = $month_prev_unix + 2629743;
+  $year_prev_unix = strtotime('-1 year', $today_unix); 
+  $year_prev_unix_end = $year_prev_unix + 31556926;
+  
+  $today_total = getContentCountByDate($today_unix, $today_end);
+  $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
+  $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
+  $year_total = getContentCountByDate($year_prev_unix, $year_prev_unix_end);
 
   $data['site_snapshot']['site_name'] = "$site_name";
   $data['site_snapshot']['today'] = "$today_total";
