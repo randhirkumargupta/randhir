@@ -122,8 +122,7 @@ function author_report($start_date) {
   $data = array();
   $prev_day = time() - (24 * 60 * 60);
   $hour = 01;
-  $today = date("d-F-Y", $start_date);
-  echo $today; die();
+  $today = strtotime($start_date);
   $yesterday = strtotime('-1 day', $today);
   $month = date("M-Y", $start_date);
   $year = date("Y", $start_date);
