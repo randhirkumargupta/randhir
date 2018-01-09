@@ -1827,8 +1827,8 @@ function formateNodeBodyToken($n_body) {
     $n_body = str_replace('<iframe', '<iframe style="width:100%;height: auto;"', $n_body);    
     $n_body = fbiframeupdtae($n_body);
     //jira:78 start
-    $n_body = str_replace('<div class="quotes"', '<div class="quotes" style="border-left:2px solid #eb5a5b; padding: 1em !important;"', $n_body);
-    //$n_body = str_replace('<blockquote', '<blockquote" style="margin: 1em !important;"', $n_body);
+    $n_body = str_replace('<div class="quotes"', '<div class="quotes" style="border-left:2px solid #eb5a5b; "', $n_body);
+    $n_body = str_replace('<blockquote', '<blockquote" style="padding: 0.5em !important;"', $n_body);
     //jira:78 end
     $data['n_body'] = $n_body;
     $data['poll_id'] = $poll_id;
