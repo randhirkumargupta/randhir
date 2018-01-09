@@ -235,6 +235,10 @@ function homePageJsonPackagelist_india() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
+            elseif($type == "photostory"){
+                $photo_list_array = generatePhotoStoryDetailList($nid);
+                $photolist = $photo_list_array['data'];
+            }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
             $photolist = array();
@@ -451,6 +455,10 @@ function homePageJsonPackagelist_lifestyle() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
+            elseif($type == "photostory"){
+                $photo_list_array = generatePhotoStoryDetailList($nid);
+                $photolist = $photo_list_array['data'];
+            }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
             $photolist = array();
@@ -663,6 +671,10 @@ function homePageJsonPackagelist_world() {
 
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
+            }
+            elseif($type == "photostory"){
+                $photo_list_array = generatePhotoStoryDetailList($nid);
+                $photolist = $photo_list_array['data'];
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
@@ -1033,6 +1045,10 @@ function homePageJsonNewslist_india() {
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
             }
+            elseif($type == "photostory"){
+                $photo_list_array = generatePhotoStoryDetailList($nid);
+                $photolist = $photo_list_array['data'];
+            }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
             $photolist = array();
@@ -1248,6 +1264,10 @@ function homePageJsonNewslist_world() {
 
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
+            }
+            elseif($type == "photostory"){
+                $photo_list_array = generatePhotoStoryDetailList($nid);
+                $photolist = $photo_list_array['data'];
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
@@ -1816,6 +1836,10 @@ function homePageJsonNewslist_lifestyle() {
 
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
+            }
+            elseif($type == "photostory"){
+                $photo_list_array = generatePhotoStoryDetailList($nid);
+                $photolist = $photo_list_array['data'];
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
