@@ -3,10 +3,13 @@
 /**
  * Implementing itg_fia_data().
  */
-function itg_fia_data() {
+function itg_fia_data() {  
+  $end_time = strtotime("-7 day");
+  $start_time = strtotime("now");    
   $query = db_select('node', 'n');
   $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
   $query->fields('n', array('nid', 'created'));
+  $query->condition('n.created', array($start_time, $end_time), 'BETWEEN'); 
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
