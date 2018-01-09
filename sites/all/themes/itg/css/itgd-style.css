@@ -676,3 +676,28 @@ section.sidebar .block-itg-ads > div {margin: auto;}
      height: 380px;
 }
 
+.location-area {
+     width: 100%;
+     margin-bottom: 25px;
+}
+ .location-area span {
+     display: block;
+     text-align: center;
+     margin: 33px 0 15px;
+}
+ .location-area h2 {
+     background: #bb2123 url(../images/round-icon.png) no-repeat 5px 7px;
+     font-size: 15px;
+     text-align: center;
+     line-height: 22px;
+     color: #fff;
+     font-family: 'Roboto', sans-serif;
+     min-height: 30px;
+     padding: 7px 0 7px 6px;
+     width: 96%;
+}
+ .location-area h2 a {
+     color: #eccc2c;
+}
+
+
