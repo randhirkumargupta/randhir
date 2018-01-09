@@ -404,19 +404,23 @@ function itg_live_tv_page_video_category() {
   }
 }
 
-function international_live_tv_block_content(){	
-	$sad_round_icon = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/sad-round-icon.png');
-	$video_section_id = variable_get('tid_videos', 1206552);
-	$newstoday_section_id = variable_get('news_today_tid', 1207797);
-	$video_section_alias = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $video_section_id); 
-	$news_today_alias = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $newstoday_section_id); 
-	$output = '';
-	$output .= '<div class="location-area">';
-	$output .= '<span><img src="'.$sad_round_icon.'" alt=""></span>';
-	$output .= '<h2>Live TV is not available at your location. You can watch <a href="https://www.mydish.com/station/INDT">here</a> if you subscribe.<br>';
-	$output .= 'You can however watch our freshly recorded programmes <a href="'.$video_section_alias.'">here</a>. <br>';
-	$output .= 'All Rajdeep Sardesai shows <a href="'.$news_today_alias.'">here</a>.';
-	$output .= '</h2>';
-	$output .= '</div>';
-	return $output;
+/**
+ * International live tv block
+ * @return string
+ */
+function international_live_tv_block_content() {
+  $sad_round_icon = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/sad-round-icon.png');
+  $video_section_id = variable_get('tid_videos', 1206552);
+  $newstoday_section_id = variable_get('news_today_tid', 1207797);
+  $video_section_alias = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $video_section_id);
+  $news_today_alias = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $newstoday_section_id);
+  $output = '';
+  $output .= '<div class="location-area">';
+  $output .= '<span><img src="' . $sad_round_icon . '" alt=""></span>';
+  $output .= '<h2>Live TV is not available at your location. You can watch <a href="https://www.mydish.com/station/INDT">here</a> if you subscribe.<br>';
+  $output .= 'You can however watch our freshly recorded programmes <a href="' . $video_section_alias . '">here</a>. <br>';
+  $output .= 'All Rajdeep Sardesai shows <a href="' . $news_today_alias . '">here</a>.';
+  $output .= '</h2>';
+  $output .= '</div>';
+  return $output;
 }
