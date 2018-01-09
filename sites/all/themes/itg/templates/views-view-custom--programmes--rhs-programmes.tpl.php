@@ -39,7 +39,12 @@
 
                 <div class="detail">
                     <div class="pic">
-                        <?php if (isset($row['field_sponser_logo'])) : ?>
+						<?php if (isset($row['field_programme_category_image'])) : ?>
+                          <?php
+                          $img = $row['field_programme_category_image'];
+                          ?>
+                          <?php print l($img, 'taxonomy/term/' . $row['tid'], array('html' => TRUE)); ?>
+                        <?php elseif (isset($row['field_sponser_logo'])) : ?>
                           <?php
                           $img = $row['field_sponser_logo'];
                           ?>

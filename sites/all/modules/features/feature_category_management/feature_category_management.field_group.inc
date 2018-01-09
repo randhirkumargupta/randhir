@@ -33,7 +33,8 @@ function feature_category_management_field_group_info() {
       7 => 'field_is_sponsor',
       8 => 'field_powered_by_text',
       9 => 'field_show_fields',
-      10 => 'name',
+      10 => 'field_programme_category_image',
+      11 => 'name',
     ),
     'format_type' => 'div',
     'format_settings' => array(

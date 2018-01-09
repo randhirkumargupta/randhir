@@ -418,6 +418,17 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['field_time_period']['id'] = 'field_time_period';
   $handler->display->display_options['fields']['field_time_period']['table'] = 'field_data_field_time_period';
   $handler->display->display_options['fields']['field_time_period']['field'] = 'field_time_period';
+  /* Field: Taxonomy term: Programme Category Image */
+  $handler->display->display_options['fields']['field_programme_category_image']['id'] = 'field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['table'] = 'field_data_field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['field'] = 'field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['label'] = '';
+  $handler->display->display_options['fields']['field_programme_category_image']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_programme_category_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_programme_category_image']['settings'] = array(
+    'image_style' => 'programme_category_image',
+    'image_link' => '',
+  );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Taxonomy term: Term ID */
   $handler->display->display_options['arguments']['tid']['id'] = 'tid';
@@ -503,6 +514,15 @@ function feature_for_landing_page_views_default_views() {
   $handler->display->display_options['fields']['field_time_period']['id'] = 'field_time_period';
   $handler->display->display_options['fields']['field_time_period']['table'] = 'field_data_field_time_period';
   $handler->display->display_options['fields']['field_time_period']['field'] = 'field_time_period';
+  /* Field: Taxonomy term: Programme Category Image */
+  $handler->display->display_options['fields']['field_programme_category_image']['id'] = 'field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['table'] = 'field_data_field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['field'] = 'field_programme_category_image';
+  $handler->display->display_options['fields']['field_programme_category_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_programme_category_image']['settings'] = array(
+    'image_style' => 'programme_category_image',
+    'image_link' => '',
+  );
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Taxonomy term: Term ID */
   $handler->display->display_options['arguments']['tid']['id'] = 'tid';
