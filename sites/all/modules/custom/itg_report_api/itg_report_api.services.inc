@@ -11,7 +11,6 @@
  * Function for APP API resource declaration.
  */
 function itg_report_api_resource() {
-
   /**
    * custom resource for ITG Report
    */
@@ -259,7 +258,7 @@ function itg_report_api_resource() {
         ),
       ),
     ),
-    // get the recent data of Story/Photo/Vieo based on args .....
+      // get the recent data of Story/Photo/Vieo based on args .....
     'report_api_data_list' => array(
       'operations' => array(
         'retrieve' => array(
@@ -299,69 +298,15 @@ function itg_report_api_resource() {
  */
 function itg_report_api_testing_report($token) {
   // code for check POST method only start
-  /*  $user = user_load_by_name("rakesh1234@mailinator.com");
-      p($user);
-      die(); */
-
-
-
   $str = '{
-	"status_code": "0",
-	"status_message": "Customised Message",
-	"data": {}
-}';
-
-
+	  "status_code": "0",
+	  "status_message": "Customised Message",
+	  "data": {}
+  }';
   $jsondata = $str;
   $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
   return $return_obj;
-}
-
-/**
- * Call back function for story_count_report API
- * @pram $_GET
- *
- * @return array - The processed information array.
- */
-function itg_report_api_detail() {
-  $start_date = $_GET['start_date'];
-  $end_date = $_GET['end_date'];
-  $type = $_GET['type'];
-  $status = $_GET['status'];
-  $synd = $_GET['synd'];
-  $item_per_page = $_GET['item_per_page'];
-  //valid tid & pageno
-  if ($status == 'publish') {
-    $status = 1;
-  }
-  elseif ($status == 'unpublish') {
-    $status = 0;
-  }
-  if (!is_numeric($item_per_page)) {
-    $item_per_page = 0;
-  }
-  $suffix = $start_date . "_" . $end_date . "_" . $type . "_" . $status . "_" . $synd . "_" . $item_per_page;
-  if ($pageno == "na") {
-    $pageno = 0;
-  }
-
-  $redis_key = "itg_report_api_data_list_report" . $suffix;
-  $result_get = getRedis($redis_key);
-
-  if ($result_get['key_value11'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    // call function from return data..
-    $jsondata = get_datalist_report($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
-    $jsondata = json_encode($jsondata);
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
-
-  $jsondata = json_decode($jsondata, TRUE);
-  return $jsondata;
 }
 
 /**
@@ -378,7 +323,6 @@ function itg_report_api_story_count_report() {
   $item_per_page = $_GET['item_per_page'];
   $pageno = $_GET['pageno'];
   //valid tid & pageno
-
   if (!is_numeric($status)) {
     $status = 0;
   }
@@ -426,12 +370,9 @@ function itg_report_api_user_list() {
   if ($pageno == "na") {
     $pageno = 0;
   }
-
   $redis_key = "itg_report_api_user_list_" . $suffix;
-  //echo $redis_key; die();
   $result_get = getRedis($redis_key);
-
-  if ($result_get['key_value11'] != "") {
+  if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
@@ -442,7 +383,6 @@ function itg_report_api_user_list() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
@@ -461,9 +401,7 @@ function itg_report_api_get_story_api() {
   $user_sub_type = $_GET['user_sub_type'];
   $userid = $_GET['userid'];
   $content_type = $_GET['content_type'];
-
   //valid tid & pageno
-
   if (!is_numeric($status)) {
     $status = 0;
   }
@@ -474,11 +412,8 @@ function itg_report_api_get_story_api() {
   if ($pageno == "na") {
     $pageno = 0;
   }
-
   $redis_key = "itg_report_api_get_story_api" . $suffix;
-  //echo $redis_key; die();
   $result_get = getRedis($redis_key);
-
   if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
@@ -489,7 +424,6 @@ function itg_report_api_get_story_api() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
@@ -502,23 +436,21 @@ function itg_report_api_get_story_api() {
  */
 function itg_report_api_story_video_photo_field_report() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date'] . " 01:01:00");
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
 
   if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date'] . " 23:59:00");
+    $end_date = strtotime($_GET['end_date']. " 23:59:00");
   }
   else {
     $end_date = $_GET['end_date'];
   }
-
-
   $suffix = $start_date . "_" . $end_date;
   $redis_key = "itg_report_api_story_video_photo_field_report" . $suffix;
-  // echo $redis_key; die();
+
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -544,16 +476,14 @@ function itg_report_api_story_video_photo_field_report() {
  */
 function itg_report_api_author_report() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date'] . " 01:01:00");
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
-
-
   $suffix = $start_date;
   $redis_key = "itg_report_api_author_report_" . $suffix;
-  //echo $redis_key; die();
+
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -566,7 +496,6 @@ function itg_report_api_author_report() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
@@ -579,18 +508,14 @@ function itg_report_api_author_report() {
  */
 function itg_report_api_author_report_tvtn() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date'] . " 01:01:00");
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
-
-
   $suffix = $start_date;
   $redis_key = "itg_report_api_author_report_tvtn_" . $suffix;
-  // echo $redis_key; die();
   $result_get = getRedis($redis_key);
-
   if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
@@ -601,7 +526,6 @@ function itg_report_api_author_report_tvtn() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
@@ -614,13 +538,13 @@ function itg_report_api_author_report_tvtn() {
  */
 function itg_report_api_auscovery_dashboard_web() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date'] . " 01:01:00");
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
   if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date'] . " 23:59:00");
+    $end_date = strtotime($_GET['end_date']. " 23:59:00");
   }
   else {
     $end_date = $_GET['end_date'];
@@ -628,7 +552,7 @@ function itg_report_api_auscovery_dashboard_web() {
 
   $suffix = $start_date . "_" . $end_date;
   $redis_key = "itg_report_api_auscovery_dashboard_web" . $suffix;
-  //echo $redis_key; die();
+
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -641,7 +565,6 @@ function itg_report_api_auscovery_dashboard_web() {
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
-
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
@@ -654,13 +577,13 @@ function itg_report_api_auscovery_dashboard_web() {
  */
 function itg_report_api_auscovery_dashboard_mob() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date'] . " 01:01:00");
+    $start_date = strtotime($_GET['start_date']. " 01:01:00");
   }
   else {
     $start_date = $_GET['start_date'];
   }
   if ($_GET['end_date'] != "na") {
-    $end_date = strtotime($_GET['end_date'] . " 23:59:00");
+    $end_date = strtotime($_GET['end_date']. " 23:59:00");
   }
   else {
     $end_date = $_GET['end_date'];
@@ -668,7 +591,7 @@ function itg_report_api_auscovery_dashboard_mob() {
 
   $suffix = $start_date . "_" . $end_date;
   $redis_key = "itg_report_api_auscovery_dashboard_mob" . $suffix;
-  //echo $redis_key; die();
+
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -677,6 +600,58 @@ function itg_report_api_auscovery_dashboard_mob() {
   else {
     // call function from return data..
     $jsondata = auscovery_dashboard_mob($start_date, $end_date);
+    $jsondata = json_encode($jsondata);
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+
+  $jsondata = json_decode($jsondata, TRUE);
+  return $jsondata;
+}
+/**
+ * Call back function for story_count_report API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_report_api_detail() {
+  $start_date = $_GET['start_date'];
+  $end_date = $_GET['end_date'];
+  $type = $_GET['type'];
+  $status = $_GET['status'];
+  $synd = $_GET['synd'];
+  $item_per_page = $_GET['item_per_page'];
+  $pageno = $_GET['pageno'];
+  //valid tid & pageno
+  if ($status == 'publish') {
+    $status = 1;
+  }
+  elseif ($status == 'unpublish') {
+    $status = 0;
+  }
+  if($type == 'video'){
+    $type = 'videogallery';
+  }
+  if($type == 'gallery'){
+    $type = 'photogallery';
+  }
+  if (!is_numeric($item_per_page)) {
+    $item_per_page = 0;
+  }
+  $suffix = $start_date . "_" . $end_date . "_" . $type . "_" . $status . "_" . $synd . "_" . $item_per_page."_".$pageno;
+  if ($pageno == "na") {
+    $pageno = 0;
+  }
+
+  $redis_key = "itg_report_api_data_list_report" . $suffix;
+  $result_get = getRedis($redis_key);
+
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    // call function from return data..
+    $jsondata = get_datalist_report($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions for story_Count_report API
+ * Inc file contains the functions for auscovery_dashboard_web report API
  */
 
 /**
@@ -19,13 +19,11 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $item_per_page = 10;
   $range_max = $item_per_page;
   $pageno = 0;
-  //$photolist = array();
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+
   $type = "story";
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
@@ -53,7 +51,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($result as $reskey => $resvalue) {
-    //p($resvalue);die();
+
     $nid = $resvalue['nid'];
     $title = $resvalue['title'];
     $created = $resvalue['created'];
@@ -78,7 +76,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $profile_type = $created_by['field_reporter_profile_type_value'];
 
     // list data
-    //p($created_by);die();
+
     $list[$loop_cont]['content_id'] = "$nid";
     $list[$loop_cont]['author_id'] = "$author_id";
     $list[$loop_cont]['author_email'] = "$author_email";
@@ -93,9 +91,8 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $list[$loop_cont]['published_on'] = "$field_itg_content_publish_date_value";
 
     $loop_cont++;
-    //p($list);die();
   }
-  //p($list);die();
+
   $data['data'] = $list;
   return $data;
 }
@@ -115,13 +112,11 @@ function auscovery_dashboard_mob($start_date, $end_date) {
   $item_per_page = 10;
   $range_max = $item_per_page;
   $pageno = 0;
-  //$photolist = array();
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
+  
   $type = "story";
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
@@ -148,7 +143,7 @@ function auscovery_dashboard_mob($start_date, $end_date) {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($result as $reskey => $resvalue) {
-    //p($resvalue);die();
+
     $nid = $resvalue['nid'];
     $title = $resvalue['title'];
     $created = $resvalue['created'];
@@ -173,7 +168,7 @@ function auscovery_dashboard_mob($start_date, $end_date) {
     $profile_type = $created_by['field_reporter_profile_type_value'];
 
     // list data
-    //p($created_by);die();
+
     $list[$loop_cont]['content_id'] = "$nid";
     $list[$loop_cont]['author_id'] = "$author_id";
     $list[$loop_cont]['author_email'] = "$author_email";
@@ -188,9 +183,8 @@ function auscovery_dashboard_mob($start_date, $end_date) {
     $list[$loop_cont]['published_on'] = "$field_itg_content_publish_date_value";
 
     $loop_cont++;
-    //p($list);die();
   }
-  //p($list);die();
+
   $data['data'] = $list;
   return $data;
 }
@@ -202,7 +196,7 @@ function auscovery_dashboard_mob($start_date, $end_date) {
  * @return array $user_profile;
  */
 function getUserProfile_report($uid) {
-  //p(user_load($uid));die();
+
   $user_profile = array();
   $query = db_select('users', 'u');
   $query->leftJoin('field_data_field_reporter_profile_type', 'upt', 'upt.entity_id=u.uid');
@@ -217,7 +211,7 @@ function getUserProfile_report($uid) {
     $user_profile['status'] = $value['status'];
     $user_profile['profile_type'] = $value['field_reporter_profile_type_value'];
   }
-  //p($user_profile);die();
+
   return $user_profile;
 }
 

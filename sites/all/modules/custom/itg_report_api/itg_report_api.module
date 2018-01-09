@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * @file
+ * The ITG rest service report module.
+ *
+ * Contains functionality related to rest service report.
+ */
+
+/**
  * Implements hook_init().
  */
 function itg_report_api_init() {

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions for story_Count_report API
+ * Inc file contains the functions for getStoryAPI report API
  */
 
 /**
@@ -23,15 +23,13 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
   $total_cont = 0;
   $range_max = 20;
   $pageno = 0;
-  //$photolist = array();
+  $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-  else {
-    $range_min = 0;
-  }
-  $start_date = strtotime($start_date . " 01:01:00");
-  $end_date = strtotime($end_date . " 23:59:00");
+  
+  $start_date = strtotime($start_date. " 01:01:00");
+  $end_date = strtotime($end_date. " 23:59:00");
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -62,12 +60,11 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
 
   //$query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-  //$total_records = $query->countQuery()->execute()->fetchField();
-  //echo $query; die();
+
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($result as $reskey => $resvalue) {
-    //p($resvalue); die();
+
     $total_cont++;
     $nid = $resvalue['nid'];
     $title = $resvalue['title'];
@@ -96,10 +93,7 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
     $list[$nid]['video_embed'] = "$nid";
     $list[$nid]['created_by'] = "$created_by";
   }
-  //$start_date, $end_date, $type, $status, $item_per_page, $pageno = 0
-  //$total_records = totalRecordsCount_StoryAPI($start_date, $end_date, $type, $status, $item_per_page, $pageno);
-  //$next_page_no = $pageno + 1;
-  //$next_page_url = $base_url . "/reportapi/story_count_report?start_date=" . $start_date . "&end_date=" . $end_date . "&type=" . $type . "&status=" . $status . "&item_per_page=" . $item_per_page . "&pageno=" . $next_page_no . "";
+
   $data['results'] = $list;
   $data['total_records'] = "$total_cont";
   //$data['next_page_url'] = "$next_page_url";
@@ -121,11 +115,11 @@ function totalRecordsCount_StoryAPI($start_date, $end_date, $type, $status, $ite
   $query_cont->fields('n', array('nid'));
   //end
   if ($start_date != "na") {
-    $start_date_timestamp = strtotime($start_date . " 01:01:00");
+    $start_date_timestamp = strtotime($start_date. " 01:01:00");
     $query_cont->condition('n.created', $start_date_timestamp, ">=");
   }
   if ($end_date != "na") {
-    $end_date_timestamp = strtotime($end_date . " 23:59:00");
+    $end_date_timestamp = strtotime($end_date. " 23:59:00");
     $query_cont->condition('n.created', $end_date_timestamp, "<=");
   }
   if ($type != "na") {
@@ -133,7 +127,7 @@ function totalRecordsCount_StoryAPI($start_date, $end_date, $type, $status, $ite
   }
   $query_cont->condition('n.status', 1);
   $result_cont = $query_cont->execute()->fetchAll();
-  //return $query->countQuery()->execute()->fetchField();
+
   $total_records = count($result_cont);
   return $total_records;
 }
