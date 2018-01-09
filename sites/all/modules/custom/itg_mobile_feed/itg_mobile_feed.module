@@ -414,15 +414,6 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
   }
   // write log into database table
 
-  db_insert('itg_mobile_feed_log')->fields(array(
-      'uid' => $user->uid,
-      'agent' => 1,
-      'status' => $status,
-      'ip' => $ip_add,
-      'file' => $feed_file_name,
-      'path' => $feed_file_path,
-      'created' => REQUEST_TIME,
-    ))->execute();
   fclose($fileHandle);
   return $return_flag;
 }

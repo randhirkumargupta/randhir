@@ -200,7 +200,7 @@ function feature_for_most_election_popular_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: Content: Display title (Landing page) */
+  /* Field: Content: Constituancy */
   $handler->display->display_options['fields']['field_constituancy']['id'] = 'field_constituancy';
   $handler->display->display_options['fields']['field_constituancy']['table'] = 'field_data_field_constituancy';
   $handler->display->display_options['fields']['field_constituancy']['field'] = 'field_constituancy';
@@ -304,7 +304,7 @@ function feature_for_most_election_popular_views_default_views() {
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Field: Content: Display title (Landing page) */
+  /* Field: Content: Constituancy */
   $handler->display->display_options['fields']['field_constituancy']['id'] = 'field_constituancy';
   $handler->display->display_options['fields']['field_constituancy']['table'] = 'field_data_field_constituancy';
   $handler->display->display_options['fields']['field_constituancy']['field'] = 'field_constituancy';
