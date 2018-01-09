@@ -486,7 +486,7 @@ function itg_report_api_author_report() {
 
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value11'] != "") {
+  if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
