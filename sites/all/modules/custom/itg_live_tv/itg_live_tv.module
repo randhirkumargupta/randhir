@@ -409,7 +409,7 @@ function itg_live_tv_page_video_category() {
  * @return string
  */
 function international_live_tv_block_content() {
-  $sad_round_icon = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/sad-round-icon.png');
+  $sad_round_icon = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/sad-round-icon.png');
   $video_section_id = variable_get('tid_videos', 1206552);
   $newstoday_section_id = variable_get('news_today_tid', 1207797);
   $video_section_alias = FRONT_URL . '/' . drupal_get_path_alias('taxonomy/term/' . $video_section_id);
