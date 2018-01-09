@@ -8195,7 +8195,7 @@ section.sidebar .block-itg-ads {
       zoom: 1;
       padding: 10px 0;
       position: relative;
-      padding-bottom: 50px; }
+      padding-bottom: 10px; }
       .education-layout-page .how-made-it ul li:before, .education-layout-page .how-made-it ul li:after {
         content: "";
         display: block;
