@@ -610,7 +610,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
     position: relative!important;
     margin-top: 5px;
 }
-.story-section .story-left .byline .profile-detail ul.date-update li:nth-child(1){display:none}
+/* .story-section .story-left .byline .profile-detail ul.date-update li:nth-child(1){display:none} */
 
 /* App page css */
 .app-area-wrapper{width:1160px; margin:0px auto;}
