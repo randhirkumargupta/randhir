@@ -854,7 +854,7 @@ function feature_category_management_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'exclude_cv' => 0,
     'field_name' => 'field_programme_category_image',
-    'label' => 'Programme Category Image',
+    'label' => 'Programme Category Image (320X240)',
     'required' => 0,
     'settings' => array(
       'alt_field' => 0,
@@ -1371,7 +1371,7 @@ function feature_category_management_field_default_field_instances() {
   t('Please select content type, this category will be associated to selected content types. You can associate one category with multiple content types.');
   t('Powered By Text');
   t('Program timing in days');
-  t('Programme Category Image');
+  t('Programme Category Image (320X240)');
   t('Redirection URL');
   t('Result format');
   t('Schedule duration');

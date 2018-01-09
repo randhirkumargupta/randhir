@@ -12,7 +12,15 @@ global $base_url;
       $recent_video_under_cat = $view_result[0]->nid;
       ?>
       <div class="program-row">
-          <?php if (!empty($row['field_sponser_logo'])) : ?>
+		  <?php if (!empty($row['field_programme_category_image'])) : ?>
+            <div class="pic">
+                <?php if ($recent_video_under_cat) : ?>
+                  <?php print l($row['field_programme_category_image'] , 'taxonomy/term/' . $row['tid'] , array('html' => TRUE)); ?>
+                <?php else : ?>
+                  <?php echo $row['field_programme_category_image']; ?>
+                <?php endif; ?>
+            </div>
+          <?php elseif (!empty($row['field_sponser_logo'])) : ?>
             <div class="pic">
                 <?php if ($recent_video_under_cat) : ?>
                   <?php print l($row['field_sponser_logo'] , 'taxonomy/term/' . $row['tid'] , array('html' => TRUE)); ?>
