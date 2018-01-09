@@ -170,7 +170,7 @@ function author_report($start_date) {
 
   //auhtor_data
   $author_list = getAuthorList_Report(1511548200, 1514177943); 
-  p($author_list);
+  p($author_list); 
 
   // start loop on author list array
   $author_loop_cont = 0;
