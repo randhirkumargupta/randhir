@@ -27,7 +27,11 @@ function itg_genrate_micromax_video_syndication($section_id = NULL, $file_name, 
 
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $section_id, '=');
-
+    
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     $query->fields('synopsis', array('field_story_kicker_text_value'));
     $query->fields('ssi', array('field_story_small_image_fid'));

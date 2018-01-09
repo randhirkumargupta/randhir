@@ -35,8 +35,13 @@ function itg_genrate_dailyhunt_story_syndication($section_id = NULL, $file_name)
     $query->fields('synopsis', array('field_story_kicker_text_value'));
     $query->fields('smi', array('field_story_medium_image_fid'));
 
+    if ($days_ago = get_content_fetch_time($section_id)) {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
+
     $query->condition('n.status', 1);
-    $query->condition('n.type', $type, 'IN');
+    $query->condition('n.type', 'story', '=');
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -89,7 +94,7 @@ function genrate_dailyhunt_story_syndication_xml($result = NULL) {
  * Generate Breaking news feed
  */
 function itg_rss_breakingnewsOctober072017_syndication() {
-  $type = array('breaking_news');
+
 //  $end_time = strtotime(date('Y-m-d', strtotime('+1 day', strtotime('07-10-2017'))));
   $end_time = strtotime(date('Y-m-d', strtotime('+1 day', strtotime('19-09-2017'))));
   $start_time = strtotime(date('Y-m-d', strtotime('-1 day', strtotime('19-09-2017'))));
@@ -106,7 +111,7 @@ function itg_rss_breakingnewsOctober072017_syndication() {
   $query->condition('ft.field_type_value', 'Breaking News', '=');
   $query->condition('n.created', array($start_time, $end_time), 'BETWEEN');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'breaking_news', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 1);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -168,7 +173,6 @@ function genrate_breaking_news_7oct2017($result) {
  * Generate breakingnewscategorypageurl.xml feed
  */
 function itg_dailyhunt_feed_breakingnews_syndication() {
-  $type = array('breaking_news');
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
@@ -179,7 +183,7 @@ function itg_dailyhunt_feed_breakingnews_syndication() {
 
   $query->condition('ft.field_type_value', 'Breaking News', '=');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'breaking_news', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 3);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

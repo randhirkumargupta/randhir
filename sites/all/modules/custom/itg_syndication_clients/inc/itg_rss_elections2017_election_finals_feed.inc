@@ -50,7 +50,10 @@ function itg_genrate_elections2017_election_finals_syndication($section_id = NUL
 
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $section_id, '=');
-
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     $query->fields('n', array('nid', 'title', 'created', 'changed'));
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));

@@ -22,6 +22,10 @@ function itg_rss_article_news_republic() {
   if (!empty($sid)) {
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $sid, '=');
+    if($days_ago = get_content_fetch_time($sid)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
   }
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 25);
@@ -100,6 +104,10 @@ function itg_rss_education_article_news_republic() {
   if (!empty($cid)) {
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $cid, '=');
+  }
+  if($days_ago = get_content_fetch_time($cid)){
+    $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+    $query->condition('n.created', $days_ago, '>=');
   }
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 11);

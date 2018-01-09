@@ -5,7 +5,7 @@
            //get Cookie for sso login
            
             var ssoLoginCheck = getCookie('itg_forced_login');
-            console.log(ssoLoginCheck);
+            
             //end code get Cookie for sso login
             
             var o = Drupal.settings.itg_sso_login.settings.base_url,
@@ -37,8 +37,8 @@
                     }
                 })
             }), jQuery("#itg-sso-reg-password-form  label[for='edit-pass-pass1']").text("New password")
-            if (ssoLoginCheck != '' && ssoLoginCheck != 'null') {
-                console.log(ssoLoginCheck);
+            
+            if (ssoLoginCheck != '' && ssoLoginCheck != 'null') {               
                 jQuery.ajax({
                     url: Drupal.settings.itg_widget.settings.base_url + "/itg-load-my-account",
                     type: "post",
@@ -57,35 +57,18 @@
     }
 }(jQuery, Drupal, this, this.document);
 
-/*jQuery(document).ready(function() {
-    try {
-        jQuery.ajax({
-            url: Drupal.settings.itg_widget.settings.base_url + "/itg-load-my-account",
-            type: "post",
-            data: "",
-            beforeSend: function() {},
-            success: function(t) {
-                0 != t.length && jQuery(".user-menu").html(t)
-            },
-            error: function(t, s, e) {
-                console.log(t), console.log("Details: " + s + "\nError:" + e)
-            }
-        })
-    } catch (t) {}
-});*/
 
-function getCookie(cname) {
-               
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for(var i = 0; i < ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
+function getCookie(cname) {               
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}

@@ -25,9 +25,11 @@ function itg_zuppit_feed_latest_story() {
   $query->fields('sli', array('field_story_large_image_fid'));
   $query->fields('pc', array('field_primary_category_value'));
 
+  $days_ago = strtotime(date('Y-m-d', strtotime('-30 days')));
+  $query->condition('n.created', $days_ago, '>=');
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range($page_number, $pagesize);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
@@ -118,10 +120,12 @@ function get_top_story_for_zupit() {
   $query->fields('sli', array('field_story_large_image_fid'));
   $query->fields('pc', array('field_primary_category_value'));
   $query->fields('synopsis', array('field_story_kicker_text_value'));
-
+  
+  $days_ago = strtotime(date('Y-m-d', strtotime('-30 days')));
+  $query->condition('n.created', $days_ago, '>=');
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 10);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);

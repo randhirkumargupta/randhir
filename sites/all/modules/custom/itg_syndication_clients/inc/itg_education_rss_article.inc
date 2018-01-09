@@ -19,10 +19,15 @@ function itg_education_rss_article() {
   $query->fields('synopsis', array('field_story_kicker_text_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
 
+  if ($days_ago = get_content_fetch_time($cid)) {
+    $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+    $query->condition('n.created', $days_ago, '>=');
+  }
+
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('ti.tid', $cid, '=');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 25);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
