@@ -148,7 +148,7 @@ function generateProgramCategoryPage($tid) {
                     $fl = generateVideoDetailPageFeed($nid);
                 }
             } else {
-                $output .= "<item><title><![CDATA[]]></title><shortdescription><![CDATA[]]></shortdescription><thumbimage><![CDATA[]]></thumbimage><url></url><createddate></createddate></item>";
+                $output .= "<item><title></title><shortdescription></shortdescription><thumbimage></thumbimage><url></url><createddate></createddate></item>";
             }
         }
         $data['lcount'] = $listcount;

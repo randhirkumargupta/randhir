@@ -199,7 +199,7 @@ function getImgTagDetail($node) {
  */
 function emptygetImgTagDetail() {
     $imgtag = "";
-    $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
+    $imgtag = "<bodyimages><image><lowres></lowres><highres></highres><caption></caption></image></bodyimages>";
     return $imgtag;
 }
 

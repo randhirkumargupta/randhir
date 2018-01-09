@@ -151,7 +151,7 @@ function generateLeftMainCategoryPage($tid, $term_name) {
                     $fl = generateStoryDetailPageFeed($nid, $loop_file_name);
                 }
             } else {
-                $output .= "<article><title><![CDATA[]]></title><thumbimage><![CDATA[]]></thumbimage><kickerimage><![CDATA[]]></kickerimage><url></url><create_date></create_date><create_datetime></create_datetime><relateds><photos></photos><videos></videos><stories></stories></relateds></article>";
+                $output .= "<article><title></title><thumbimage></thumbimage><kickerimage></kickerimage><url></url><create_date></create_date><create_datetime></create_datetime><relateds><photos></photos><videos></videos><stories></stories></relateds></article>";
             }
         }
         $data['lcount'] = $listcount;

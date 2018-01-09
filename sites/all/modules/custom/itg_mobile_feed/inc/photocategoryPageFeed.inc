@@ -141,7 +141,7 @@ function generatePhotoCategoryPage($tid) {
                     $fl = generatePhotoDetailPageFeed($nid);
                 }
             } else {
-                $output .= "<item><title><![CDATA[]]></title><thumbimage><![CDATA[]]></thumbimage><url></url><create_date></create_date><create_datetime></create_datetime><is_favorite></is_favorite><relateds><photos></photos><videos></videos><stories></stories></relateds><weburl><![CDATA[]]></weburl></item>";
+                $output .= "<item><title></title><thumbimage></thumbimage><url></url><create_date></create_date><create_datetime></create_datetime><is_favorite></is_favorite><relateds><photos></photos><videos></videos><stories></stories></relateds><weburl></weburl></item>";
             }
         }
         $data['lcount'] = $listcount;
