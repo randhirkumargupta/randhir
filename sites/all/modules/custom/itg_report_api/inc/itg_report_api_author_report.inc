@@ -169,8 +169,7 @@ function author_report($start_date) {
   $data['auhtorwise_data']['site_id'] = "$site_id";
 
   //auhtor_data
-  $author_list = getAuthorList_Report(1511548200, 1514177943);
-  p($author_list); 
+  $author_list = getAuthorList_Report(1511548200, 1514177943); 
 
   // start loop on author list array
   $author_loop_cont = 0;
@@ -265,7 +264,7 @@ function getAuthorList_Report($s_date, $e_date) {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
       $id = $resvalue['id'];
-      $list[$id] = getBYlineDetail($resvalue['nid']);
+      $list[$id] = getBYlineDetail($id);
   }
   return $list;
 }
