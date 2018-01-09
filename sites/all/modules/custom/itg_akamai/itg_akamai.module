@@ -336,7 +336,7 @@ function itg_akamai_varnish_host_mapping($paths) {
 function itg_akamai_send_for_host_mapping_for_amp($paths) {
   // Getting AMP url patten from configuration
   //$amp_pattern = '/amp'; //old code
-  $amp_pattern = '/amp/';
+  $amp_pattern = 'amp/';
   $path_new_array = array();
   if (is_array($paths)) {
     if (isset($paths) && !empty($paths)) {
