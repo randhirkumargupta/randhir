@@ -141,25 +141,14 @@ function author_report($start_date) {
   $yesterday_unix = strtotime('-1 day', $today_unix);
   $yesterday_unix_end = $yesterday_unix + 86399;
   $month_prev_unix = strtotime('-1 month', $today_unix);
-  $month_prev_unix_end = $month_prev_unix + 2629742;
+  $month_prev_unix_end = $month_prev_unix + 2629743;
   $year_prev_unix = strtotime('-1 year', $today_unix); 
-  $year_prev_unix_end = $year_prev_unix + 31556925;
+  $year_prev_unix_end = $year_prev_unix + 31556926;
   
-  echo $today_unix; echo "<br>";
-  echo $today_end; echo "<br>";
-  echo $yesterday_unix; echo "<br>";
-  echo $yesterday_unix_end; echo "<br>";
-  echo $month_prev_unix; echo "<br>";
-  echo $month_prev_unix_end; echo "<br>";
-  echo $year_prev_unix; echo "<br>";
-  echo $year_prev_unix_end; echo "<br>"; die();
-  
-  
-  
-  $today_total = getContentCountByDate($today_unix);
-  $yesterday_total = getContentCountByDate($yesterday_unix);
-  $month_total = getContentCountByDate($month_prev_unix);
-  $year_total = getContentCountByDate($year_prev_unix);
+  $today_total = getContentCountByDate($today_unix, $today_end);
+  $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
+  $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
+  $year_total = getContentCountByDate($year_prev_unix, $year_prev_unix_end);
 
   $data['site_snapshot']['site_name'] = "$site_name";
   $data['site_snapshot']['today'] = "$today_total";
@@ -239,18 +228,16 @@ function author_report($start_date) {
  *
  * @return int $count
  */
-function getContentCountByDate($start_date) {
+function getContentCountByDate($start_date, $end_date) {
   $query_cont = db_select('node', 'n');
   $query_cont->fields('n', array('nid'));
   //end
-  if ($start_date != "na") {
-    //$start_date_timestamp = strtotime($start_date);
+  if ($start_date != "na") {    
     $query_cont->condition('n.created', $start_date, ">=");
-    $query_cont->condition('n.created', $start_date, "<=");
+    $query_cont->condition('n.created', $end_date, "<=");
   }
-  //$query_cont->condition('n.status', 1);
-  $result_cont = $query_cont->execute()->fetchAll();
-  //return $query->countQuery()->execute()->fetchField();
+  $query_cont->condition('n.status', 1);
+  $result_cont = $query_cont->execute()->fetchAll();  
   $total_records = count($result_cont);
   $query_cont = "";
   $result_cont = "";
