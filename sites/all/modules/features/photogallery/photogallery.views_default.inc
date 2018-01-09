@@ -4894,16 +4894,16 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_credit']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_credit']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Field collection item: Order (field_gallery_order) */
-  $handler->display->display_options['sorts']['field_gallery_order_value']['id'] = 'field_gallery_order_value';
-  $handler->display->display_options['sorts']['field_gallery_order_value']['table'] = 'field_data_field_gallery_order';
-  $handler->display->display_options['sorts']['field_gallery_order_value']['field'] = 'field_gallery_order_value';
-  $handler->display->display_options['sorts']['field_gallery_order_value']['relationship'] = 'field_gallery_image_value';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Field collection item: Order (field_gallery_order) */
+  $handler->display->display_options['sorts']['field_gallery_order_value']['id'] = 'field_gallery_order_value';
+  $handler->display->display_options['sorts']['field_gallery_order_value']['table'] = 'field_data_field_gallery_order';
+  $handler->display->display_options['sorts']['field_gallery_order_value']['field'] = 'field_gallery_order_value';
+  $handler->display->display_options['sorts']['field_gallery_order_value']['relationship'] = 'field_gallery_image_value';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['operator'] = 'OR';
   $handler->display->display_options['filter_groups']['groups'] = array(
@@ -4964,7 +4964,7 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['field_images']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_images']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_images']['settings'] = array(
-    'image_style' => 'photgallery_landing_slider_753x543',
+    'image_style' => 'photo_slider_753x543',
     'image_link' => '',
   );
   /* Field: Field collection item: Caption */
@@ -4999,18 +4999,6 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['counter']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   $handler->display->display_options['fields']['counter']['reverse'] = 0;
-  /* Field: Field collection item: Image */
-  $handler->display->display_options['fields']['field_images_1']['id'] = 'field_images_1';
-  $handler->display->display_options['fields']['field_images_1']['table'] = 'field_data_field_images';
-  $handler->display->display_options['fields']['field_images_1']['field'] = 'field_images';
-  $handler->display->display_options['fields']['field_images_1']['relationship'] = 'field_gallery_image_value';
-  $handler->display->display_options['fields']['field_images_1']['label'] = '';
-  $handler->display->display_options['fields']['field_images_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_images_1']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_images_1']['settings'] = array(
-    'image_style' => 'photo_landing_slider_thumb_88_86',
-    'image_link' => '',
-  );
   /* Field: Field collection item: Photo By */
   $handler->display->display_options['fields']['field_photo_byline']['id'] = 'field_photo_byline';
   $handler->display->display_options['fields']['field_photo_byline']['table'] = 'field_data_field_photo_byline';
@@ -5033,6 +5021,16 @@ echo $total_items = $view->query->pager->get_total_items();
   $handler->display->display_options['fields']['item_id']['relationship'] = 'field_gallery_image_value';
   $handler->display->display_options['fields']['item_id']['exclude'] = TRUE;
   $handler->display->display_options['fields']['item_id']['separator'] = '';
+  /* Field: Field collection item: Thumb Image */
+  $handler->display->display_options['fields']['field_photo_small_image']['id'] = 'field_photo_small_image';
+  $handler->display->display_options['fields']['field_photo_small_image']['table'] = 'field_data_field_photo_small_image';
+  $handler->display->display_options['fields']['field_photo_small_image']['field'] = 'field_photo_small_image';
+  $handler->display->display_options['fields']['field_photo_small_image']['relationship'] = 'field_gallery_image_value';
+  $handler->display->display_options['fields']['field_photo_small_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_photo_small_image']['settings'] = array(
+    'image_style' => 'image88x66scale',
+    'image_link' => '',
+  );
   $handler->display->display_options['block_description'] = 'photogallery-story-block';
   $export['photo_landing_slider'] = $view;
 
