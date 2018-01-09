@@ -175,14 +175,13 @@ function author_report($start_date) {
   // start loop on author list array
   $author_loop_cont = 0;
   $auhtor_data = array();
-  foreach ($author_list as $key => $value) {
-      p($value); 
+  foreach ($author_list as $key => $value) {    
     $user_id = $value['nid'];
     $name = $value['title'];
     $mail = $value['email'];
-    $today_total_uid = getContentCountByDateAndByUid($today_unix,$today_end, $user_id);
-    $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix,$yesterday_unix_end, $user_id);
-    $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $user_id);
+    $today_total_uid = getContentCountByDateAndByUid(1511548200, 1514177943, $user_id);
+    $yesterday_total_uid = getContentCountByDateAndByUid(1511548200, 1514177943, $user_id);
+    $month_total_uid = getContentCountByDateAndByUid(1511548200, 1514177943, $user_id);
     $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $user_id);
 
     $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
@@ -317,7 +316,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $uid) {
   if ($end_date != "na") {    
     $query_cont->condition('n.created', $end_date, "<=");
   }
-  $query_cont->condition('byi.id', $uid);
+  $query_cont->condition('byi.byline_id', $uid);
   $result_cont = $query_cont->execute()->fetchAll();  
   $total_records = count($result_cont);
   $query_cont = "";
