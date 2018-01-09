@@ -464,6 +464,12 @@ function itg_widgets_custom_variables() {
     '#title' => t('Programmes category ids for order'),
     '#default_value' => variable_get('itg_programmes_order_by'),
   );
+  
+  $form['news_today_tid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('News Today Section TID'),
+    '#default_value' => variable_get('news_today_tid', 1207797),
+  );
 
   return system_settings_form($form);
 }

@@ -194,7 +194,7 @@ function getVideoTag($node) {
     $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
   }
   else {
-    $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+    $videotag = "<video_embed><videoparts_mp4><part></part><img_url></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url></img_url></videoparts_m3u8></video_embed>";
   }
   return $videotag;
 }
@@ -258,7 +258,7 @@ function getStringBetween($str, $from, $to) {
  */
 function emptygetVideoTag() {
   $videotag = "";
-  $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+  $videotag = "<video_embed><videoparts_mp4><part></part><img_url></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url></img_url></videoparts_m3u8></video_embed>";
   return $videotag;
 }
 
@@ -269,7 +269,7 @@ function emptygetVideoTag() {
  */
 function emptygetImgTag() {
   $imgtag = "";
-  $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
+  $imgtag = "<bodyimages><image><lowres></lowres><highres></highres><caption></caption></image></bodyimages>";
   return $imgtag;
 }
 
