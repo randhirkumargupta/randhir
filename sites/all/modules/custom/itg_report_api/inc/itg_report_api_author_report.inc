@@ -137,9 +137,25 @@ function author_report($start_date) {
 
   // site_snapshot  
   $today_unix = $start_date;
+  $today_end = $start_date + 86400;
   $yesterday_unix = strtotime('-1 day', $today_unix);
+  $yesterday_unix_end = $yesterday_unix + 86400;
   $month_prev_unix = strtotime('-1 month', $today_unix);
-  $year_prev_unix = strtotime('-1 year', $today_unix);  
+  $month_prev_unix_end = $month_prev_unix + 2629743;
+  $year_prev_unix = strtotime('-1 year', $today_unix); 
+  $year_prev_unix_end = $year_prev_unix + 31556926;
+  
+  echo $today_unix; echo "<br>";
+  echo $today_end; echo "<br>";
+  echo $yesterday_unix; echo "<br>";
+  echo $yesterday_unix_end; echo "<br>";
+  echo $month_prev_unix; echo "<br>";
+  echo $month_prev_unix_end; echo "<br>";
+  echo $year_prev_unix; echo "<br>";
+  echo $year_prev_unix_end; echo "<br>"; die();
+  
+  
+  
   $today_total = getContentCountByDate($today_unix);
   $yesterday_total = getContentCountByDate($yesterday_unix);
   $month_total = getContentCountByDate($month_prev_unix);
@@ -230,6 +246,7 @@ function getContentCountByDate($start_date) {
   if ($start_date != "na") {
     //$start_date_timestamp = strtotime($start_date);
     $query_cont->condition('n.created', $start_date, ">=");
+    $query_cont->condition('n.created', $start_date, "<=");
   }
   //$query_cont->condition('n.status', 1);
   $result_cont = $query_cont->execute()->fetchAll();
