@@ -170,7 +170,7 @@ function author_report($start_date) {
 
   //auhtor_data
   $author_list = getAuthorList_Report(1511548200, 1514177943); 
-  p($author_list);
+  //p($author_list);
 
   // start loop on author list array
   $author_loop_cont = 0;
@@ -307,7 +307,7 @@ function getAuthorList_Report_bk() {
 
 function getContentCountByDateAndByUid($start_date, $end_date, $uid) {
   $query_cont = db_select('node', 'n');
-  $query->leftJoin('itg_multi_byline_info', 'byi', 'n.nid=byi.nid');
+  $query_cont->leftJoin('itg_multi_byline_info', 'byi', 'n.nid=byi.nid');
   $query_cont->fields('n', array('nid'));
   //end
   if ($start_date != "na") {    
@@ -378,7 +378,7 @@ function getBYlineDetail($nid) {
         $query_n->condition('n.nid', $nid, '=');
         $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result_n as $reskey_n => $resvalue_n) {
-            $nid = $resvalue_n['nid'];
+            //$nid = $resvalue_n['nid'];
             $title = $resvalue_n['title'];
             $status = $resvalue_n['status'];
             $field_reporter_email_id_value = $resvalue_n['field_reporter_email_id_value'];        
