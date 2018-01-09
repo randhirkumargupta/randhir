@@ -39,6 +39,9 @@ function itg_fia_xml_node_feed($query) {
   $last_build_date = '';
   foreach ($nodes as $node) {
     $body_vals = array();
+    $img_path = '';
+    $get_place_name = '';
+    $imgs_path = '';
     if (!is_lock_story()) {
       if ($node->workbench_moderation['current']->state == 'published') {
         $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
@@ -159,7 +162,7 @@ function itg_fia_xml_node_feed($query) {
       }
 
       // facebook instant article animated image placement
-      if (!empty($img_path)) {
+      if (isset($img_path) && !empty($img_path)) {
         if (in_array($img_position, $bk)) {
           $body_vals[$img_position] = $body_vals[$img_position] .
               '<figure><img src="' . $img_path . '" alt="" title="" /></figure>';
@@ -172,7 +175,7 @@ function itg_fia_xml_node_feed($query) {
       }
 
       // facebook instant article map placement
-      if (!empty($get_place_name)) {
+      if (isset($get_place_name) && !empty($get_place_name)) {
         if (in_array($map_pos, $bk)) {
           $body_vals[$map_pos] = $body_vals[$map_pos] .
               '<figure class="op-map"><script type="application/json" class="op-geotag">{"type": "Feature", "geometry":{"type": "Point", "coordinates": [' . $lat . ', ' . $lng . ']},"properties":{"title": "' . $get_place_name . '", "radius": 10000, "pivot": true, "style": "satellite",}}</script></figure>';
@@ -185,7 +188,7 @@ function itg_fia_xml_node_feed($query) {
       }
 
       // Creating Slideshow for facebook instant article data
-      if (!empty($imgs_path)) {
+      if (isset($imgs_path) && !empty($imgs_path)) {
         $slider_keys = array_keys($full_script_slider);
         foreach ($slider_keys as $k => $sliderkey) {
           $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey][0];
