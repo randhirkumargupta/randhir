@@ -231,7 +231,7 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['filters']['content_type']['field'] = 'content_type';
   $handler->display->display_options['filters']['content_type']['relationship'] = 'reverse_field_story_category_node';
   $handler->display->display_options['filters']['content_type']['value'] = 'videogallery';
-  $handler->display->display_options['path'] = 'international/livetv';
+  $handler->display->display_options['path'] = 'international-livetv';
   $export['live_tv_programs'] = $view;
 
   $view = new view();
