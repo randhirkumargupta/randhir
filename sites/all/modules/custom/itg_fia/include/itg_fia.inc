@@ -3,10 +3,13 @@
 /**
  * Implementing itg_fia_data().
  */
-function itg_fia_data() {
+function itg_fia_data() {  
+  $end_time = strtotime("-7 day");
+  $start_time = strtotime("now");    
   $query = db_select('node', 'n');
   $query->join('field_data_field_story_social_media_integ', 'fsmi', 'n.nid = fsmi.entity_id');
   $query->fields('n', array('nid', 'created'));
+  $query->condition('n.created', array($start_time, $end_time), 'BETWEEN'); 
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('fsmi.field_story_social_media_integ_value', 'facebook_instant_article', '=');
@@ -36,6 +39,9 @@ function itg_fia_xml_node_feed($query) {
   $last_build_date = '';
   foreach ($nodes as $node) {
     $body_vals = array();
+    $img_path = '';
+    $get_place_name = '';
+    $imgs_path = '';
     if (!is_lock_story()) {
       if ($node->workbench_moderation['current']->state == 'published') {
         $op_pub = date('F j, h:i a', $node->workbench_moderation['current']->timestamp);
@@ -156,7 +162,7 @@ function itg_fia_xml_node_feed($query) {
       }
 
       // facebook instant article animated image placement
-      if (!empty($img_path)) {
+      if (isset($img_path) && !empty($img_path)) {
         if (in_array($img_position, $bk)) {
           $body_vals[$img_position] = $body_vals[$img_position] .
               '<figure><img src="' . $img_path . '" alt="" title="" /></figure>';
@@ -169,7 +175,7 @@ function itg_fia_xml_node_feed($query) {
       }
 
       // facebook instant article map placement
-      if (!empty($get_place_name)) {
+      if (isset($get_place_name) && !empty($get_place_name)) {
         if (in_array($map_pos, $bk)) {
           $body_vals[$map_pos] = $body_vals[$map_pos] .
               '<figure class="op-map"><script type="application/json" class="op-geotag">{"type": "Feature", "geometry":{"type": "Point", "coordinates": [' . $lat . ', ' . $lng . ']},"properties":{"title": "' . $get_place_name . '", "radius": 10000, "pivot": true, "style": "satellite",}}</script></figure>';
@@ -182,7 +188,7 @@ function itg_fia_xml_node_feed($query) {
       }
 
       // Creating Slideshow for facebook instant article data
-      if (!empty($imgs_path)) {
+      if (isset($imgs_path) && !empty($imgs_path)) {
         $slider_keys = array_keys($full_script_slider);
         foreach ($slider_keys as $k => $sliderkey) {
           $body_vals[$sliderkey] = $body_vals[$sliderkey] . $full_script_slider[$sliderkey][0];
@@ -254,6 +260,10 @@ function itg_fia_xml_node_feed($query) {
       $node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
       $node_body = str_replace('<script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js></script></iframe></figure>', $node_body);
       $node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
+      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
+      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" mce_src="https://platform.twitter.com/widgets.js" charset="utf-8"> </script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
+      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" mce_src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
+      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"> </script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
       $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
       $node_body = preg_replace("/ITG:SURVEY:([0-9]+)/", "", $node_body);
       $node_body = preg_replace("/ITG:QUIZ:([0-9]+)/", "", $node_body);
