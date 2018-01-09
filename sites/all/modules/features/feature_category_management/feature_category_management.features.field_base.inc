@@ -539,6 +539,31 @@ function feature_category_management_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_programme_category_image'.
+  $field_bases['field_programme_category_image'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_programme_category_image',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'fid' => array(
+        0 => 'fid',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'image',
+    'settings' => array(
+      'default_image' => 0,
+      'uri_scheme' => 'public',
+    ),
+    'translatable' => 0,
+    'type' => 'image',
+  );
+
   // Exported field_base: 'field_section_menu'.
   $field_bases['field_section_menu'] = array(
     'active' => 1,
