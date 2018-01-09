@@ -136,13 +136,13 @@ function author_report($start_date) {
   $data['date details']['year'] = $year;
 
   // site_snapshot  
-  $today_unix = strtotime($start_date);
+  $today_unix = $start_date;
   $yesterday_unix = strtotime('-1 day', $today_unix);
   $month_prev_unix = strtotime('-1 month', $today_unix);
   $year_prev_unix = strtotime('-1 year', $today_unix);
   
-  echo $today_unix; echo "<br>";  echo $yesterday_unix; echo "<br>";  echo $month_prev_unix; echo "<br>"; echo $year_prev_unix; 
-  p($data);
+  echo $today_unix; echo "<br>";  echo $yesterday_unix; echo "<br>";  echo $month_prev_unix; echo "<br>"; echo $year_prev_unix; die();
+
 
   $today_total = getContentCountByDate($today_unix);
   $yesterday_total = getContentCountByDate($yesterday_unix);
