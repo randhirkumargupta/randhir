@@ -298,6 +298,7 @@ function itg_report_api_resource() {
  */
 function itg_report_api_testing_report($token) {
   // code for check POST method only start
+    echo url('<front>'); die();
   $str = '{
 	  "status_code": "0",
 	  "status_message": "Customised Message",
