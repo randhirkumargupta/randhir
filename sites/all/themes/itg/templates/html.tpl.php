@@ -71,7 +71,7 @@
       <?php endif; ?>
         <?php //if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { 
         if(($arg[0] != 'video' && $arg[2] != 'embed')) { ?>
-      ga('send', 'pageview');
+        ga('send', 'pageview');
       <?php } ?>
     </script>
     <!-- Default comscore -->
