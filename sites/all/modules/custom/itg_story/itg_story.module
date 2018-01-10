@@ -1030,9 +1030,6 @@ function itg_story_node_presave($node) {
 function itg_story_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'story' && $view_mode != 'search_index') {
     global $user, $theme;
-    $body_text = $node->body[LANGUAGE_NONE][0]['value'];
-    $body_text = str_replace('http://indiatoday.intoday.in/embed/', 'https://www.indiatoday.in/embed/', $body_text);
-    $node->body[LANGUAGE_NONE][0]['value'] = $body_text;
     // for lock story
     if ($view_mode != 'search_index' && ($theme == FRONT_THEME_NAME || $theme == 'amptheme') && (in_array(FRONT_USER, $user->roles) || $user->uid == 0)) {
       $config = array();
@@ -1169,6 +1166,11 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       $right_emoji_html = itg_get_emoji_amp_html($rightimages[0]);
 
       $node->content['amp_title'] = $left_emoji_html . $node->title . $right_emoji_html;
+    }
+    if ($view_mode == 'full' && ($theme == FRONT_THEME_NAME)) {
+      $body_text = $node->body[LANGUAGE_NONE][0]['value'];
+      $body_text = str_replace('http://indiatoday.intoday.in/embed/', 'https://www.indiatoday.in/embed/', $body_text);
+      $node->body[LANGUAGE_NONE][0]['value'] = $body_text;
     }
   }
 }
