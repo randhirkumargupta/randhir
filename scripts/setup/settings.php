@@ -724,3 +724,5 @@ $conf['block_cache_bypass_node_grants'] = TRUE;
 $base_url = 'https://'.$_SERVER['SERVER_NAME'];
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;
+// add the following in my setting.php file.// Default root dir for the advagg files; see advagg_get_root_files_dir().
+$conf['advagg_root_dir_prefix'] = 's3://';
