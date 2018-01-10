@@ -89,22 +89,22 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $video_size = migrated_video_transcoding($nid);
             // migrated video
             if (!empty($videotag['migrated'])) {
-                $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-                foreach ($videoids as $keys => $video_value) {
-                    $url = $video_value->field_migrated_video_url_value;
-                }
-                $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
-                $bitrate_url = $data_video['bitrate_url'];
-                $mp4_url = $data_video['file_url'];
-                $output .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
-            }elseif (!empty($videotag['dailymotion'])) {
+              $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+              foreach ($videoids as $keys => $video_value) {
+                $url = $video_value->field_migrated_video_url_value;
+              }
+              $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+              $bitrate_url = $data_video['bitrate_url'];
+              $mp4_url = $data_video['file_url'];
+              $output .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
+            } elseif (!empty($videotag['dailymotion'])) {
                 $videoids = get_video_in_fieldcollection_by_nid($nid);
                 foreach ($videoids as $keys => $video_value) {
-                    if ($video_value->video_id != '') {
-                        $video_id = $video_value->video_id;
-                    } elseif ($video_value->solr_video_id != '') {
-                        $video_id = $video_value->solr_video_id;
-                    }
+                  if ($video_value->video_id != '') {
+                    $video_id = $video_value->video_id;
+                  } elseif ($video_value->solr_video_id != '') {
+                    $video_id = $video_value->solr_video_id;
+                  }
                 }
                 $inter_video_details = internal_video_bitrate_data($video_id);
                 $output .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
@@ -113,9 +113,9 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             //get body img tag
             $imgtag = getImgTagDetail($node);
             if ($imgtag) {
-                $output .= $imgtag;
+              $output .= $imgtag;
             } else {
-                $output .= emptygetImgTagDetail();
+              $output .= emptygetImgTagDetail();
             }
             //related node
             if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
