@@ -11,7 +11,6 @@ module_load_include('inc', 'itg_mobile_feed', 'inc/photoDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/storyDetailPageFeed');
 module_load_include('inc', 'itg_mobile_feed', 'inc/videoDetailPageFeed');
 module_load_include('inc', 'itg_rapid_api', 'inc/itg_rapid_api_photo');
-
 /**
  * Implements hook_menu().
  */
@@ -415,15 +414,6 @@ function writeFeedFile($feed_file_path, $feed_file_name, $output) {
   }
   // write log into database table
 
-  db_insert('itg_mobile_feed_log')->fields(array(
-      'uid' => $user->uid,
-      'agent' => 1,
-      'status' => $status,
-      'ip' => $ip_add,
-      'file' => $feed_file_name,
-      'path' => $feed_file_path,
-      'created' => REQUEST_TIME,
-    ))->execute();
   fclose($fileHandle);
   return $return_flag;
 }
@@ -515,7 +505,7 @@ function customNodeCountChild($tid, $type, $child_count = TRUE) {
   $langs = array($language->language);
   $langs[] = 'und';
   $query = db_select('taxonomy_index', 't');
-  $query->condition('tid', $tids, 'IN');
+  $query->condition('tid', $tid, '=');
   $query->join('node', 'n', 't.nid = n.nid');
   $query->condition('n.status', 1, '=');
   $query->condition('n.type', $type);
@@ -676,11 +666,9 @@ function getNodeFeedTag($tid, $type, $count) {
   $query->fields('mi_file', array('uri'));
   $query->fields('si_file', array('uri'));
   $query->fields('esi_file', array('uri'));
-
   $query->fields('mi', array('field_story_medium_image_fid'));
   $query->fields('si', array('field_story_small_image_fid'));
   $query->fields('rc', array('field_common_related_content_value'));
-
   $query->fields('kt', array('field_story_kicker_text_value'));
   $query->fields('vd', array('field_video_duration_value'));
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
@@ -698,10 +686,8 @@ function getNodeFeedTag($tid, $type, $count) {
     // file url
     $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
     $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-
     //related content
     $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
-
     // create date formating
     $create_date = date("Y-m-d H:i:s", $created);
     $create_datetime = date(DATE_ATOM, $created);
@@ -742,7 +728,6 @@ function getImgCaption($fid) {
   $query->condition('fic.entity_id', $fid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $caption = $result['0']['field_image_caption_value'];
-
   return $caption;
 }
 
@@ -762,7 +747,6 @@ function getImgByline($fid) {
   $query->condition('n.type', 'reporter');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $byline = $result['0']['title'];
-
   return $byline;
 }
 
@@ -798,7 +782,7 @@ function getBodyDataForAndroid($str, $node = NULL) {
   $str = preg_replace('/<div class=\"body_caption\">.*<\/div>/', '', $str);
   $str = str_replace('src="', 'width="100%" src="', $str);
   $str = str_replace("src='", "width='100%' src='", $str);
-  //$mob_str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
+  $str = preg_replace('/<iframe.*?\/iframe>/i', '', $str);
   //add listicle content data
   if (strpos($str, '[ITG:LISTICLES]')) {
     $str = listicle_story_body($str, $node);
@@ -1141,7 +1125,7 @@ function getRelatedNodeXmlTag($nidar) {
   $related_flag_video = 0;
   foreach ($nidar as $key => $value) {
     $title = $value['title'];
-    $url = $base_url . "/node/" . $value['nid'];
+    $url = FRONT_URL . "/node/" . $value['nid'];
     $img_url = completeFilePath($value['field_story_small_image_fid']);
 
     if ($value['type'] == "story") {
@@ -1256,6 +1240,7 @@ function itg_mobile_feed_cronapi($op, $job = NULL) {
 function itg_mobile_feed_xml_feed_url_cron() {
   global $base_url;
   $xml_feed_url = array();
+  // below code for time commented 
   /* $xml_feed_url[] = "home-page-feed";
     $xml_feed_url[] = "program-section-page-feed";
     $xml_feed_url[] = "program-category-page-feed/1206960";
@@ -1308,8 +1293,6 @@ function itg_mobile_feed_xml_feed_url_cron() {
     $xml_feed_url[] = "story-detail-page-feed/664";
     $xml_feed_url[] = "video-detail-page-feed/18815";
     $xml_feed_url[] = "photo-detail-page-feed/626";*/
-
-
   // Education today
   $xml_feed_url[] = "root-category-content-page-feed/1206666";
 
@@ -1322,7 +1305,7 @@ function itg_mobile_feed_xml_feed_url_cron() {
       'timeout' => 30,
       'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
     );
-    $url = $base_url . "/" . $value;
+    $url = FRONT_URL . "/" . $value;
     //$result = drupal_http_request($url, $options);
     $res = callAPI('GET', $url, $data = FALSE);
   }

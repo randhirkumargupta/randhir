@@ -57,7 +57,6 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     //check into redis
     $redis_key = "itgd_story" . $nid;
     $result_get = getRedis($redis_key);
-
     if ($result_get['key_value'] != "") {
       $output = $result_get['key_value'];
     }
@@ -75,13 +74,13 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $related_node = relatedContentNodeType($nid, "story");
       $city = getCityByNid($nid);
       $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = $base_url . "/" . $alias;
+      $weburl = FRONT_URL . "/" . $alias;
       $create_date = date("F d, Y", $node->created);
       $create_datetime = date(DATE_ATOM, $node->created);
       $full_body = $node->body['und']['0']['value'];
       $body_android = getBodyDataForAndroid($full_body, $node);
       $output .= getMobileFeedXmlHeader();
-      $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit><![CDATA[" . $reporter_node . "]]> </credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city><![CDATA[" . $city . "]]></city><courtesy><![CDATA[]]></courtesy>";
+      $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit>" . xml_cdata_filter($reporter_node) . "</credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city>". xml_cdata_filter($city)."</city><courtesy></courtesy>";
       $output .= "<body><![CDATA[" . html_entity_decode($full_body) . "]]></body>";
       $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
       //get video tag
@@ -140,7 +139,6 @@ function getVideoTag($node) {
   $videotag = "";
   $src = "";
   $img_url = '';
-
   $html = html_entity_decode($node->body['und']['0']['value']);
   $doc = new DOMDocument();
   libxml_use_internal_errors(TRUE);
@@ -175,7 +173,6 @@ function getVideoTag($node) {
     $query->fields('itgv', array('bitate_url', 'bitates_field'));
     $query->condition('itgv.video_id', $dailymotion_vid);
     $result2 = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
     $video_format = array();
     foreach ($result2 as $res_data) {
       $video_format[$res_data['bitates_field']] = $res_data['bitate_url'];
@@ -189,17 +186,15 @@ function getVideoTag($node) {
       $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
     }
     $videotag = $video_detail;
-  }
-
-  
+  }  
   if (!empty($videotag['migrated'])) {
-    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
+    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part><img_url>". xml_cdata_filter($img_url)."</img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part><img_url>".xml_cdata_filter($img_url)."</img_url></videoparts_m3u8></video_embed>";
   }
   elseif (!empty($videotag['dailymotion'])) {
-    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
+    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part><img_url>". xml_cdata_filter($img_url) ."</img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part><img_url>". xml_cdata_filter($img_url)."</img_url></videoparts_m3u8></video_embed>";
   }
   else {
-    $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+    $videotag = "<video_embed><videoparts_mp4><part></part><img_url></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url></img_url></videoparts_m3u8></video_embed>";
   }
   return $videotag;
 }
@@ -237,7 +232,6 @@ function migrated_video_to_nid($video_uri) {
  * @return array $all_result
  */
 function uploaded_video_to_nid($video_uri) {
-
   $query = db_select('file_managed', 'f');
   $query->innerJoin('field_data_field_videogallery_video_upload', 'vp', 'vp.field_videogallery_video_upload_fid = f.fid');
   $query->innerJoin('field_data_field_video_upload', 'vo', 'vo.field_video_upload_value = vp.entity_id');
@@ -253,7 +247,6 @@ function uploaded_video_to_nid($video_uri) {
  * @return string
  */
 function getStringBetween($str, $from, $to) {
-
   $sub = substr($str, strpos($str, $from) + strlen($from), strlen($str));
   return substr($sub, 0, strpos($sub, $to));
 }
@@ -265,7 +258,7 @@ function getStringBetween($str, $from, $to) {
  */
 function emptygetVideoTag() {
   $videotag = "";
-  $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+  $videotag = "<video_embed><videoparts_mp4><part></part><img_url></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url></img_url></videoparts_m3u8></video_embed>";
   return $videotag;
 }
 
@@ -276,7 +269,7 @@ function emptygetVideoTag() {
  */
 function emptygetImgTag() {
   $imgtag = "";
-  $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
+  $imgtag = "<bodyimages><image><lowres></lowres><highres></highres><caption></caption></image></bodyimages>";
   return $imgtag;
 }
 
@@ -292,8 +285,6 @@ function getImgTag($node) {
   $img_caption_val = "";
   $story_large_fid = $node->field_story_extra_large_image['und'][0]['fid'];
   $story_large_img = completeFilePath($story_large_fid);
-
-
   $html = $node->body['und']['0']['value'];
   $doc = new DOMDocument();
   libxml_use_internal_errors(TRUE);
@@ -311,10 +302,10 @@ function getImgTag($node) {
   }
   $src = "";
   if ($src) {
-    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
+    $imgtag = "<bodyimages><image><lowres>". xml_cdata_filter($src)."</lowres><highres>". xml_cdata_filter($src)."</highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
   }
   else {
-    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $story_large_img . "]]></lowres><highres><![CDATA[" . $story_large_img . "]]></highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
+    $imgtag = "<bodyimages><image><lowres>". xml_cdata_filter($story_large_img)."</lowres><highres>". xml_cdata_filter($story_large_img)."</highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
   }
   return $imgtag;
 }

@@ -110,7 +110,7 @@ function homePageFeaturesWidgetData() {
   global $home_list_count;
   $output = "";
   $widget_name = "home_page_feature_widget";
-  $range_max = 10 - $home_list_count;
+  $range_max = 3;
   $range_min = 0;
   $order_by = 'ASC';
 
@@ -184,7 +184,7 @@ function topStoriesWidgetData() {
 
   $output = "";
   $widget_name = "top_stories_widget";
-  $range_max = 10 - $home_list_count;
+  $range_max = 12 - $home_list_count; 
   $range_min = 0;
   $order_by = 'ASC';
 
