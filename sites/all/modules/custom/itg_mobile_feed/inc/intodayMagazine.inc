@@ -117,7 +117,7 @@ function generateIntodayMagazinePage($tid) {
       $created = $resvalue['created'];
       $is_fav = getNidIsFavorite($nid);
       $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = $base_url . "/" . $alias;
+      $weburl = FRONT_URL . "/" . $alias;
       $loop_file_name = "fromindiatodaymagazine" . $nid . ".xml";
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);

@@ -6,7 +6,7 @@
  * Theme implementation for Magazine Calendar.
  * 
  */
-/*$count = 1;
+$count = 1;
 foreach ($data as $year) {
   if ($count % 24 == 1) {
     $output .= "<li>";
@@ -20,11 +20,11 @@ foreach ($data as $year) {
     $output .= "</li>";
   }
   $count++;
-}*/
+}
 ?>
-<?php //print '<ul class="calanderslide">' . $output . '</ul>'; ?>
+<?php print '<ul class="calanderslide">' . $output . '</ul>'; ?>
 
-<!--<script>
+<script>
     jQuery(document).ready(function(){    
         jQuery('.calanderslide').slick({
             slidesToShow: 1,
@@ -35,28 +35,28 @@ foreach ($data as $year) {
             nextArrow:'<button class="slick-next"><i class="fa fa-chevron-left"></i></button>'
         });    
     });
-</script>-->
+</script>
 
 
-<div class="magazine-calendar">
+<!--<div class="magazine-calendar">
 
   <div class="calendar-year">
 
-<span><a href="<?php print base_path().'magazine/'.itg_msi_last_issue_calendar(2018); ?>">2018</a></span>
+<span><a href="<?php //print base_path().'magazine/'.itg_msi_last_issue_calendar(2018); ?>">2018</a></span>
 
-<span><a href="<?php print base_path(); ?>magazine/04-12-2017">2017</a></span>
+<span><a href="<?php //print base_path(); ?>magazine/04-12-2017">2017</a></span>
 
-<span><a href="<?php print base_path(); ?>magazine/26-12-2016">2016</a></span>
+<span><a href="<?php //print base_path(); ?>magazine/26-12-2016">2016</a></span>
 
-<span><a href="<?php print base_path(); ?>magazine/28-12-2015">2015</a></span>
+<span><a href="<?php //print base_path(); ?>magazine/28-12-2015">2015</a></span>
 
 </div>
 
 <div class="msg-archive">The archives will return soon.</div>
 
-</div>
+</div>-->
 
-<style>
+<!--<style>
 
 .magazine-calendar{position: relative;border: 1px solid #ddd;overflow: hidden;}
 .magazine-calendar .calendar-year{ display: block; overflow: hidden;}
@@ -68,4 +68,4 @@ foreach ($data as $year) {
 
 .msg-archive{background: #eaeaea; font-size:14px; color:#808080; padding:3px 0; text-align: center; line-height:16px;}
 
-</style>
+</style>-->

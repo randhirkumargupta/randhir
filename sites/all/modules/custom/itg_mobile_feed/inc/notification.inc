@@ -154,7 +154,7 @@ function generate_notification_all($params) {
 function get_web_url($nid) {
     global $base_url;
     $alias = drupal_get_path_alias('node/' . $nid . '');
-    $weburl = $base_url . "/" . $alias;
+    $weburl = FRONT_URL . "/" . $alias;
     return $weburl;
 }
 
