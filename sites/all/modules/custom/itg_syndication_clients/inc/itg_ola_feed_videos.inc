@@ -115,8 +115,17 @@ function genrate_ola_feed_videos_syndication_xml($result = NULL, $section_id, $c
         $video_url = $mp4_url;
       }
       else {
-        $videotag = itg_video_detail_formats($nid, $source_type);
-        $video_url = $videotag['dailymotion']['bitate_url']['videoparts_mp4'];
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+          if ($video_value->video_id != '') {
+            $video_id = $video_value->video_id;
+          } elseif ($video_value->solr_video_id != '') {
+            $video_id = $video_value->solr_video_id;
+          }
+        }
+        $inter_video_details = itg_internal_video_bitrate_data($video_id);
+        //$videotag = itg_video_detail_formats($nid, $source_type);
+        $video_url = $inter_video_details['file_url'];
       }
       $video_url = str_replace('512.mp4', '996.mp4', $video_url);
       $xml .= '<item>';
