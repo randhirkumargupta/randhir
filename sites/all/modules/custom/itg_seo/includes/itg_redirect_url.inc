@@ -102,7 +102,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   global $base_url;
   $old_content_id = '';
   $arg = arg();
-  p($_SERVER['REDIRECT_URL']);
+  p($_SERVER);
   if ($_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
     $old_url = substr($_SERVER['REDIRECT_URL'], 1);	  
     $source_url = redirect_load_by_source($old_url);    
