@@ -51,81 +51,86 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
         //check into redis
         $redis_key = "itgd_video" . $nid;
         $result_get = getRedis($redis_key);
-//        if ($result_get['key_value'] != "") {
-//            $output = $result_get['key_value'];
-//        } else {
-            global $base_url;
-            $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-            $node = node_load($nid);
-            $title = html_entity_decode($node->title);
-            $tid = $node->field_primary_category['und'][0]['value'];
-            $term = taxonomy_term_load($tid);
-            $term_name = $term->name;
-            $comment_cont = $node->comment;
-            $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-            $reporter_node = itg_common_get_node_title($byline_id);
-            $related_node = relatedContentNodeType($nid, "videogallery");
-            $city = getCityByNid($nid);
-            $alias = drupal_get_path_alias('node/' . $nid . '');
-            $weburl = $base_url . "/" . $alias;
-            $create_date = date("F d, Y", $node->created);
-            $create_datetime = date(DATE_ATOM, $node->created);
-            $thumbimage = completeFilePath($node->field_story_medium_image['und'][0]['fid']);
-            $is_fav = getNidIsFavorite($nid);
-            $syndications = getNidIsSyndications($nid);
-            $field_video_upload = $node->field_video_upload['und'][0]['value'];
-            $file_id = file_usage($field_video_upload);
-            $load_collection = field_collection_item_load($field_video_upload);
-            $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
-            // get video path
-            //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
-            $metatags_title = html_entity_decode($node->metatags['und']['keywords']['value']);
-            $metatags_description = html_entity_decode($node->metatags['und']['description']['value']);
-            $output .= getMobileFeedXmlHeader();
-            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[" . $reporter_node . "]]></credit><date><![CDATA[" . $create_date . "]]></date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage><mediaid></mediaid><uurl></uurl>";
-            //get video tag
-            $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
-            $videotag = video_detail_formats($nid, $source_type);
-            $video_size = migrated_video_transcoding($nid);
-//            $video_id = 'x60hf26';
-//            $data_video_info = xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
-//            p($data_video_info);
-            // migrated video
-            if (!empty($videotag['migrated'])) {
-                $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        if ($result_get['key_value'] != "") {
+            $output = $result_get['key_value'];
+        } else {
+        global $base_url;
+        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        $node = node_load($nid);
+        $title = html_entity_decode($node->title);
+        $tid = $node->field_primary_category['und'][0]['value'];
+        $term = taxonomy_term_load($tid);
+        $term_name = $term->name;
+        $comment_cont = $node->comment;
+        $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+        $reporter_node = itg_common_get_node_title($byline_id);
+        $related_node = relatedContentNodeType($nid, "videogallery");
+        $city = getCityByNid($nid);
+        $alias = drupal_get_path_alias('node/' . $nid . '');
+        $weburl = FRONT_URL . "/" . $alias;
+        $create_date = date("F d, Y", $node->created);
+        $create_datetime = date(DATE_ATOM, $node->created);
+        $thumbimage = completeFilePath($node->field_story_medium_image['und'][0]['fid']);
+        $is_fav = getNidIsFavorite($nid);
+        $syndications = getNidIsSyndications($nid);
+        $field_video_upload = $node->field_video_upload['und'][0]['value'];
+        $file_id = file_usage($field_video_upload);
+        $load_collection = field_collection_item_load($field_video_upload);
+        $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+        // get video path
+        //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
+        $metatags_title = html_entity_decode($node->metatags['und']['keywords']['value']);
+        $metatags_description = html_entity_decode($node->metatags['und']['description']['value']);
+        $output .= getMobileFeedXmlHeader();
+        $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[" . $reporter_node . "]]></credit><date><![CDATA[" . $create_date . "]]></date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage><mediaid></mediaid><uurl></uurl>";
+        //get video tag
+        $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+        $videotag = video_detail_formats($nid, $source_type);
+        $video_size = migrated_video_transcoding($nid);
+        if (!empty($videotag['migrated'])) {
+            $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+            foreach ($videoids as $keys => $video_value) {
+                $url = $video_value->field_migrated_video_url_value;
+            }
+            $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+            $bitrate_url = $data_video['bitrate_url'];
+            $mp4_url = $data_video['file_url'];
+            $output .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
+        } elseif (!empty($videotag['dailymotion'])) {
+                $videoids = get_video_in_fieldcollection_by_nid($nid);
                 foreach ($videoids as $keys => $video_value) {
-                    $url = $video_value->field_migrated_video_url_value;
+                    if ($video_value->video_id != '') {
+                        $video_id = $video_value->video_id;
+                    } elseif ($video_value->solr_video_id != '') {
+                        $video_id = $video_value->solr_video_id;
+                    }
                 }
-                $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
-                $bitrate_url = $data_video['bitrate_url'];
-                $mp4_url = $data_video['file_url'];
-                $output .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
-            } elseif (!empty($videotag['dailymotion'])) {
-                $output .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
-            }
-            $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[" . $metatags_title . "]]></metakeyword><metadescription><![CDATA[" . $metatags_description . "]]></metadescription><weburl>" . $weburl . "</weburl>";
-            //get body img tag
-            $imgtag = getImgTagDetail($node);
-            if ($imgtag) {
-                $output .= $imgtag;
-            } else {
-                $output .= emptygetImgTagDetail();
-            }
-            //related node
-            if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
-                $output .= getRelatedNodeXmlTag($related_node['nid']);
-            } else {
-                $output .= emptygetRelatedNodeXmlTag();
-            }
-            //function for get comment xml tag
-            if ($comment_cont > 0) {
-                $output .= getCommentXmlTag($node);
-            } else {
-                $output .= emptygetCommentXmlTag();
-            }
-            $output .= "</item>" . getMobileFeedXmlFooter();
-            $result_set = setRedis($redis_key, $output, $ttl);
-//        }
+                $inter_video_details = internal_video_bitrate_data($video_id);
+                $output .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
+        }
+        $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[" . $metatags_title . "]]></metakeyword><metadescription><![CDATA[" . $metatags_description . "]]></metadescription><weburl>" . $weburl . "</weburl>";
+        //get body img tag
+        $imgtag = getImgTagDetail($node);
+        if ($imgtag) {
+            $output .= $imgtag;
+        } else {
+            $output .= emptygetImgTagDetail();
+        }
+        //related node
+        if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
+            $output .= getRelatedNodeXmlTag($related_node['nid']);
+        } else {
+            $output .= emptygetRelatedNodeXmlTag();
+        }
+        //function for get comment xml tag
+        if ($comment_cont > 0) {
+            $output .= getCommentXmlTag($node);
+        } else {
+            $output .= emptygetCommentXmlTag();
+        }
+        $output .= "</item>" . getMobileFeedXmlFooter();
+        $result_set = setRedis($redis_key, $output, $ttl);
+        }
     }
     if ($output) {
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
@@ -202,7 +207,7 @@ function getImgTagDetail($node) {
  */
 function emptygetImgTagDetail() {
     $imgtag = "";
-    $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
+    $imgtag = "<bodyimages><image><lowres></lowres><highres></highres><caption></caption></image></bodyimages>";
     return $imgtag;
 }
 
@@ -417,22 +422,14 @@ function mcu8_tags($nid) {
  * Get the internal uploaded video on the Site
  */
 function internal_video_bitrate_data($video_id) {
-  $data_video_info = xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
-  echo "Daily motion table details<br>";
-  print_r($data_video_info);
-  if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
-    echo "INTERNAL VIDEO type<br>";
-    $data_from_solr = xml_itg_videogallery_getsolr_data_for_internal_video($data_video_info[0]->video_id);
-    print_r($data_from_solr);
-    $video_data = $data_from_solr[0];
-    $video_all_data = json_decode($video_data, TRUE);
-    $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
-    echo "<br>player details";
-    p($player_content);
-  }else{
-    echo "Video type is not internal";
-  }
-  p();
+    $data_video_info = xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
+    if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
+        $data_from_solr = xml_itg_videogallery_getsolr_data_for_internal_video($data_video_info[0]->video_id);
+        $video_data = $data_from_solr[0];
+        $video_all_data = json_decode($video_data, TRUE);
+        $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
+    }
+    return $player_content;
 }
 
 /**
@@ -441,11 +438,11 @@ function internal_video_bitrate_data($video_id) {
  * @param array $result
  */
 function xml_itg_videogallery_get_all_video_info_by_video_id($video_id) {
-  $query = db_select('dailymotion_response_details', 'drd');
-  $query->fields('drd');
-  $query->condition('video_id', $video_id, '=');
-  $result = $query->execute()->fetchAll();
-  return $result;
+    $query = db_select('dailymotion_response_details', 'drd');
+    $query->fields('drd');
+    $query->condition('video_id', $video_id, '=');
+    $result = $query->execute()->fetchAll();
+    return $result;
 }
 
 /**
@@ -453,31 +450,29 @@ function xml_itg_videogallery_get_all_video_info_by_video_id($video_id) {
  * @param string $video_id
  */
 function xml_itg_videogallery_getsolr_data_for_internal_video($video_id) {
-  if (function_exists('apachesolr_server_status')) {
-    echo "function found<br>";
-    $ping = apachesolr_server_status(variable_get('solr_server_url'));
-  }
-  if ($ping) {
-    $solr = apachesolr_get_solr();
-    if (function_exists('itg_apache_solr_get_site_hash')) {
-      echo "hash function found<br>";
-      $hash = itg_apache_solr_get_site_hash();
+    if (function_exists('apachesolr_server_status')) {
+        $ping = apachesolr_server_status(variable_get('solr_server_url'));
     }
-    $all_video_ids = array();
-    $hashvalue = implode(' OR ', array_keys($hash));
-    $str = 'hash:(' . $hashvalue . ')';
-    $query = apachesolr_drupal_query("custom");
-    $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
-    $query->addParam('qf', 'sm_field_video_id'); // Only search in title
+    if ($ping) {
+        $solr = apachesolr_get_solr();
+        if (function_exists('itg_apache_solr_get_site_hash')) {
+            $hash = itg_apache_solr_get_site_hash();
+        }
+        $all_video_ids = array();
+        $hashvalue = implode(' OR ', array_keys($hash));
+        $str = 'hash:(' . $hashvalue . ')';
+        $query = apachesolr_drupal_query("custom");
+        $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+        $query->addParam('qf', 'sm_field_video_id'); // Only search in title
 //The bundle which you want to search
-    $query->replaceParam("fq", '(' . $str . ')');
-    $query->addFilter("bundle", "itg_solr_video");
-    $query->addFilter("sm_field_video_id", $video_id);
-    $query->setSolrsort('sort_label', 'desc');
-    $resp_search = $query->search();
-    $all_data = $resp_search->response->docs;
-    if (!empty($all_data)) {
-      return $all_data[0]->sm_field_all_xml_content;
+        $query->replaceParam("fq", '(' . $str . ')');
+        $query->addFilter("bundle", "itg_solr_video");
+        $query->addFilter("sm_field_video_id", $video_id);
+        $query->setSolrsort('sort_label', 'desc');
+        $resp_search = $query->search();
+        $all_data = $resp_search->response->docs;
+        if (!empty($all_data)) {
+            return $all_data[0]->sm_field_all_xml_content;
+        }
     }
-  }
 }
