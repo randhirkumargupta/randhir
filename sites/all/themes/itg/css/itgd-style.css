@@ -557,7 +557,7 @@ ul.pron-cons-img li img {
 .sport-home-layout-page .tech-block_8 .osscar-video ul .dont-miss-listing{
     padding: 0 10px 25px 10px;
 }
-.story-section .story-right .description iframe.story_video{width:100%; height:325px}
+.story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{width:100%; height:325px}
 
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li{ border:0px;}
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li a{line-height: 20px;}
@@ -567,11 +567,11 @@ body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active
 .story-section .description h3{ text-transform: uppercase; font-weight:bold;}
 .front .watch-right-now-video ul li{padding:10px 0px 10px 0px;}
 @media screen and (max-width: 768px){
-.story-section .story-right .description iframe.story_video{height: 415px;}
+.story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{height: 415px;}
 .breakingnew-home .new-detail .marquee-container .marquee-child a * {line-height:25px;}
 }
 @media screen and (max-width: 767px){
-.story-section .story-right .description iframe.story_video{ height: 195px;}
+.story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{ height: 210px;}
 ul.pron-cons-img li img { margin-top: -12px!important;}
 .home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id{margin-top: 20px;}
 .front .widget-wrapper.top_stories_ordering, .widget-wrapper.most_popular{border:0;}
@@ -606,10 +606,9 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .front #block-itg-widget-home-page-feature .featured-news .featured-post a {display: block; overflow:hidden;}
 .front-title-hide { display: none; }
 .crody-news-content.cnwidget.cnvw{margin:0 auto;}
-.section-movies .itg-h321-section .widget-title {
-    position: relative!important;
-    margin-top: 5px;
+.section-movies .itg-h321-section .widget-title {position: relative!important;margin-top: 5px;
 }
+
 /* .story-section .story-left .byline .profile-detail ul.date-update li:nth-child(1){display:none} */
 
 /* App page css */
@@ -702,4 +701,5 @@ section.sidebar .block-itg-ads > div {margin: auto;}
 .section-news .itg-layout-container .ad-widget .sidebar-ad{
 background:none;
 }
+#block-itg-ads-ads-page-pusher-1x1{position: relative; overflow: hidden;}
 
