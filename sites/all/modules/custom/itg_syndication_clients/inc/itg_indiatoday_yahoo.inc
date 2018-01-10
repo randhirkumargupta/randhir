@@ -131,15 +131,15 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link>' . $url . '</link>';
-      $xml .= '<category>' . $section_name . '></category>';
-      $xml .= '<pubDate>' . $publish_date . ' +0000></pubDate>';
+      $xml .= '<category>' . $section_name . '</category>';
+      $xml .= '<pubDate>' . $publish_date . ' +0000</pubDate>';
       $xml .= '<guid>' . $guid . '</guid>';
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';
       $xml .= '<keywords><![CDATA[' . $keywords . ']]></keywords>';
       $xml .= '<media:content url="' . $medium_img["imag_url"] . '" type="image/' . $medium_img["mime_type"] . '"/>';
       $xml .= '<media:thumbnail url="' . $small_img["imag_url"] . '" type="image/' . $small_img["mime_type"] . '"/>';
-      $xml .= '<category>' . $section_name . '></category>';
+      $xml .= '<category>' . $section_name . '</category>';
       $xml .= '</item>';
     }
     $load_xml = simplexml_load_file("http://feeds.intoday.in/indiatoday/yahoo/top-businesstoday.xml");
@@ -242,7 +242,7 @@ function genrate_indiatoday_yahoo_static_section_syndication_xml($result = NULL,
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link>' . $url . '</link>';
-      $xml .= '<pubDate>' . $publish_date . '></pubDate>';
+      $xml .= '<pubDate>' . $publish_date . '</pubDate>';
       $xml .= '<guid>' . $guid . '</guid>';
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
       $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';
@@ -333,10 +333,10 @@ function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $sec
       }
       $xml .= '<item>';
       $xml .= '<title>' . $value['title'] . '</title>';
-      $xml .= '<pubDate>' . $publish_date . '></pubDate>';
+      $xml .= '<pubDate>' . $publish_date . '</pubDate>';
       $xml .= '<guid>' . $guid . '</guid>';
       $xml .= '<description><![CDATA[' . $body . ']]></description>';
-      $xml .= '<category>' . $section_name . '></category>';
+      $xml .= '<category>' . $section_name . '</category>';
       $xml .= '<keywords><![CDATA[' . $keywords . ']]></keywords>';
       $xml .= '</item>';
     }
