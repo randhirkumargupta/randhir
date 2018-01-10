@@ -80,12 +80,14 @@ function author_report_tvtn($start_date) {
         foreach ($author_today_data as $today_key => $today_val) {
             $title = $today_val['title'];
             $nid = $today_val['nid'];
+            $desc = kickerByNid($nid);
             $title_path = drupal_get_path_alias('node/' . $nid . '');
             $contents[$author_inner_loop_cont]['author_id'] = "$user_id";
             $contents[$author_inner_loop_cont]['author_email'] = "$mail";
             $contents[$author_inner_loop_cont]['author_name'] = "$name";
             $contents[$author_inner_loop_cont]['site_id'] = "$site_id";
             $contents[$author_inner_loop_cont]['content_id'] = "$nid";
+            $contents[$author_inner_loop_cont]['introtext'] = "$desc";
             $contents[$author_inner_loop_cont]['content_url'] = "$title_path";
             $contents[$author_inner_loop_cont]['page_title'] = "$title";
             $author_inner_loop_cont++;
@@ -179,12 +181,14 @@ function author_report($start_date) {
         foreach ($author_today_data as $today_key => $today_val) {
             $title = $today_val['title'];
             $nid = $today_val['nid'];
+            $desc = kickerByNid($nid);
             $title_path = $base_url . "/" . drupal_get_path_alias('node/' . $nid . '');
             $contents[$author_inner_loop_cont]['author_id'] = "$user_id";
             $contents[$author_inner_loop_cont]['author_email'] = "$mail";
             $contents[$author_inner_loop_cont]['author_name'] = "$name";
             $contents[$author_inner_loop_cont]['site_id'] = "$site_id";
             $contents[$author_inner_loop_cont]['content_id'] = "$nid";
+            $contents[$author_inner_loop_cont]['introtext'] = "$desc";
             $contents[$author_inner_loop_cont]['content_url'] = "$title_path";
             $contents[$author_inner_loop_cont]['page_title'] = "$title";
             $author_inner_loop_cont++;
@@ -331,4 +335,22 @@ function getBYlineDetail($nid) {
         }
     }
     return $byline_data;
+}
+/**
+ * function for kickerByNid
+ * @pram int $nid
+ * @return string $desc
+ */
+function kickerByNid($nid){
+    $desc = "";
+    if($nid){
+        $query_n = db_select('field_data_field_story_kicker_text', 'kt');
+        $query_n->fields('kt', array('field_story_kicker_text_value'));
+        $query_n->condition('kt.entity_id', $nid, '=');
+        $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result_n as $reskey_n => $resvalue_n) {
+            $desc = $resvalue_n['field_story_kicker_text_value'];
+        }
+    }
+    return $desc;
 }
