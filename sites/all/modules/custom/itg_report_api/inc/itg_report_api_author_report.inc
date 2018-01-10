@@ -15,20 +15,17 @@ function author_report_tvtn($start_date) {
     $data = array();
     $prev_day = time() - (24 * 60 * 60);
     $hour = 01;
-
     $yesterday = strtotime('-1 day', $start_date);
     $month = date("M-Y", $start_date);
     $year = date("Y", $start_date);
     $site_id = 1;
     $site_name = "India Today";
-
     // date details
     $data['date details']['today'] = date("d-F-Y", $start_date);
     $data['date details']['yesterday'] = date("d-F-Y", $yesterday);
     ;
     $data['date details']['month'] = $month;
     $data['date details']['year'] = $year;
-
     // site_snapshot  
     $today_unix = $start_date;
     $today_end = $start_date + 86399;
@@ -38,27 +35,23 @@ function author_report_tvtn($start_date) {
     $month_prev_unix_end = $month_prev_unix + 2629743;
     $year_prev_unix = strtotime('-1 year', $today_unix);
     $year_prev_unix_end = $year_prev_unix + 31556926;
-
     $today_total = getContentCountByDate($today_unix, $today_end);
     $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
     $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
     $year_total = getContentCountByDate($year_prev_unix, $year_prev_unix_end);
-
     $data['site_snapshot']['site_name'] = "$site_name";
     $data['site_snapshot']['today'] = "$today_total";
     $data['site_snapshot']['yesterday'] = "$yesterday_total";
     $data['site_snapshot']['month'] = "$month_total";
     $data['site_snapshot']['year'] = "$year_total";
     $data['site_snapshot']['site_id'] = "$site_id";
-
     // auhtorwise_data
     $data['auhtorwise_data']['site_name'] = "$site_name";
     $data['auhtorwise_data']['today'] = "$today_total";
     $data['auhtorwise_data']['yesterday'] = "$yesterday_total";
     $data['auhtorwise_data']['month'] = "$month_total";
     $data['auhtorwise_data']['year'] = "$year_total";
-    $data['auhtorwise_data']['site_id'] = "$site_id";
-    //auhtor_data
+    $data['auhtorwise_data']['site_id'] = "$site_id";    //auhtor_data
     $author_list = getAuthorList_Report($today_unix, $today_end);
     // start loop on author list array
     $author_loop_cont = 0;
@@ -67,12 +60,10 @@ function author_report_tvtn($start_date) {
         $user_id = $value['user_id'];
         $name = $value['name'];
         $mail = $value['mail'];
-
         $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $user_id);
         $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $user_id);
         $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $user_id);
         $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $user_id);
-
         $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
         $auhtor_data[$author_loop_cont]['author_email'] = "$mail";
         $auhtor_data[$author_loop_cont]['author_name'] = "$name";
@@ -81,10 +72,8 @@ function author_report_tvtn($start_date) {
         $auhtor_data[$author_loop_cont]['yesterday'] = "$yesterday_total_uid";
         $auhtor_data[$author_loop_cont]['month'] = "$month_total_uid";
         $auhtor_data[$author_loop_cont]['year'] = "$year_total_uid";
-
         //auhtor_data contents
         $author_today_data = todayContentsByUid($today_unix, $today_end, $user_id);
-
         //loop author today data
         $author_inner_loop_cont = 0;
         $contents = array();
@@ -110,7 +99,6 @@ function author_report_tvtn($start_date) {
 
     //$auhtor_data[0]['contents']['author_id'] = "1";
     $data['auhtorwise_data']['auhtor_data'] = $auhtor_data;
-
     return $data;
 }
 
@@ -125,19 +113,16 @@ function author_report($start_date) {
     $data = array();
     $prev_day = time() - (24 * 60 * 60);
     $hour = 01;
-
     $yesterday = strtotime('-1 day', $start_date);
     $month = date("M-Y", $start_date);
     $year = date("Y", $start_date);
     $site_id = 1;
     $site_name = "India Today";
-
     // date details
     $data['date details']['today'] = date("d-F-Y", $start_date);
     $data['date details']['yesterday'] = date("d-F-Y", $yesterday);
     $data['date details']['month'] = $month;
     $data['date details']['year'] = $year;
-
     // site_snapshot  
     $today_unix = $start_date;
     $today_end = $start_date + 86399;
@@ -147,19 +132,16 @@ function author_report($start_date) {
     $month_prev_unix_end = $month_prev_unix + 2629743;
     $year_prev_unix = strtotime('-1 year', $today_unix);
     $year_prev_unix_end = $year_prev_unix + 31556926;
-
     $today_total = getContentCountByDate($today_unix, $today_end);
     $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
     $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
     $year_total = getContentCountByDate($year_prev_unix, $year_prev_unix_end);
-
     $data['site_snapshot']['site_name'] = "$site_name";
     $data['site_snapshot']['today'] = "$today_total";
     $data['site_snapshot']['yesterday'] = "$yesterday_total";
     $data['site_snapshot']['month'] = "$month_total";
     $data['site_snapshot']['year'] = "$year_total";
     $data['site_snapshot']['site_id'] = "$site_id";
-
     // auhtorwise_data
     $data['auhtorwise_data']['site_name'] = "$site_name";
     $data['auhtorwise_data']['today'] = "$today_total";
@@ -167,11 +149,8 @@ function author_report($start_date) {
     $data['auhtorwise_data']['month'] = "$month_total";
     $data['auhtorwise_data']['year'] = "$year_total";
     $data['auhtorwise_data']['site_id'] = "$site_id";
-
     //auhtor_data
     $author_list = getAuthorList_Report($today_unix, $today_end);
-
-
     // start loop on author list array
     $author_loop_cont = 0;
     $auhtor_data = array();
@@ -183,7 +162,6 @@ function author_report($start_date) {
         $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $user_id);
         $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $user_id);
         $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $user_id);
-
         $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
         $auhtor_data[$author_loop_cont]['author_email'] = "$mail";
         $auhtor_data[$author_loop_cont]['author_name'] = "$name";
@@ -192,10 +170,8 @@ function author_report($start_date) {
         $auhtor_data[$author_loop_cont]['yesterday'] = "$yesterday_total_uid";
         $auhtor_data[$author_loop_cont]['month'] = "$month_total_uid";
         $auhtor_data[$author_loop_cont]['year'] = "$year_total_uid";
-
         //auhtor_data contents
         $author_today_data = todayContentsByUid($today_unix, $today_end, $user_id);
-
         //loop author today data
         $author_inner_loop_cont = 0;
         $contents = array();
@@ -218,9 +194,7 @@ function author_report($start_date) {
         }
         $author_loop_cont++;
     }
-
     $data['auhtorwise_data']['auhtor_data'] = $auhtor_data;
-
     return $data;
 }
 
