@@ -73,7 +73,7 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $comment_cont = $node->comment;
       $related_node = relatedContentNodeType($nid, "photogallery");
       $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = $base_url . "/" . $alias;
+      $weburl = FRONT_URL . "/" . $alias;
       $galleryimg = $node->field_gallery_image['und'];
       $toptlapics = count($galleryimg);
       $output .= getMobileFeedXmlHeader();

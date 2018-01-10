@@ -48,7 +48,7 @@ function breakingNewsPageFeed() {
     $create_datetime = date(DATE_ATOM, $result[0]['created']);
     $file_medium_img_url = completeFilePath($result[0]['field_story_medium_image_fid']);
     $field_story_small_image_fid = completeFilePath($result[0]['field_story_small_image_fid']);
-    $web_url = $base_url . "/" . $alias;
+    $web_url = FRONT_URL . "/" . $alias;
 
     $city = getCityByNid($nid);
 

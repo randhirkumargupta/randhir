@@ -140,7 +140,7 @@ function generateVideoCategoryPage($tid) {
                     $created = $resvalue['created'];
                     $is_fav = getNidIsFavorite($nid);
                     $alias = drupal_get_path_alias('node/' . $nid . '');
-                    $weburl = $base_url . "/" . $alias;
+                    $weburl = FRONT_URL . "/" . $alias;
                     $is_syndications = '0';
                     if ($resvalue['field_story_syndication_value'] == 'Yes') {
                         $is_syndications = '1';
