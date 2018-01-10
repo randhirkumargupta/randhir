@@ -82,40 +82,40 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $metatags_title = html_entity_decode($node->metatags['und']['keywords']['value']);
             $metatags_description = html_entity_decode($node->metatags['und']['description']['value']);
             $output .= getMobileFeedXmlHeader();
-            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[" . $reporter_node . "]]></credit><date><![CDATA[" . $create_date . "]]></date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $thumbimage . "]]></thumbimage><mediaid></mediaid><uurl></uurl>";
+            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit>".xml_cdata_filter($reporter_node)."</credit><date>".xml_cdata_filter($create_date)."</date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($thumbimage)."</thumbimage><mediaid></mediaid><uurl></uurl>";
             //get video tag
             $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
             $videotag = video_detail_formats($nid, $source_type);
             $video_size = migrated_video_transcoding($nid);
             // migrated video
             if (!empty($videotag['migrated'])) {
-                $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
-                foreach ($videoids as $keys => $video_value) {
-                    $url = $video_value->field_migrated_video_url_value;
-                }
-                $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
-                $bitrate_url = $data_video['bitrate_url'];
-                $mp4_url = $data_video['file_url'];
-                $output .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
-            }elseif (!empty($videotag['dailymotion'])) {
+              $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+              foreach ($videoids as $keys => $video_value) {
+                $url = $video_value->field_migrated_video_url_value;
+              }
+              $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+              $bitrate_url = $data_video['bitrate_url'];
+              $mp4_url = $data_video['file_url'];
+              $output .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
+            } elseif (!empty($videotag['dailymotion'])) {
                 $videoids = get_video_in_fieldcollection_by_nid($nid);
                 foreach ($videoids as $keys => $video_value) {
-                    if ($video_value->video_id != '') {
-                        $video_id = $video_value->video_id;
-                    } elseif ($video_value->solr_video_id != '') {
-                        $video_id = $video_value->solr_video_id;
-                    }
+                  if ($video_value->video_id != '') {
+                    $video_id = $video_value->video_id;
+                  } elseif ($video_value->solr_video_id != '') {
+                    $video_id = $video_value->solr_video_id;
+                  }
                 }
                 $inter_video_details = internal_video_bitrate_data($video_id);
                 $output .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
             }
-            $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[" . $metatags_title . "]]></metakeyword><metadescription><![CDATA[" . $metatags_description . "]]></metadescription><weburl>" . $weburl . "</weburl>";
+            $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword>".xml_cdata_filter($metatags_title)."</metakeyword><metadescription>".xml_cdata_filter($metatags_description)."</metadescription><weburl>" . $weburl . "</weburl>";
             //get body img tag
             $imgtag = getImgTagDetail($node);
             if ($imgtag) {
-                $output .= $imgtag;
+              $output .= $imgtag;
             } else {
-                $output .= emptygetImgTagDetail();
+              $output .= emptygetImgTagDetail();
             }
             //related node
             if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
@@ -197,7 +197,7 @@ function getImgTagDetail($node) {
     // custom function for get img caption
     $caption = getImgCaption($field_story_small_image);
     $imgtag = "";
-    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $lowres . "]]></lowres><highres><![CDATA[" . $highres . "]]></highres><caption>" . $caption . "</caption></image></bodyimages>";
+    $imgtag = "<bodyimages><image><lowres>".xml_cdata_filter($lowres)."</lowres><highres>".xml_cdata_filter($highres)."</highres><caption>" . $caption . "</caption></image></bodyimages>";
     return $imgtag;
 }
 

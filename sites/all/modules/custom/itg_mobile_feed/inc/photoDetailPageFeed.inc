@@ -77,7 +77,7 @@ function generatePhotoDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $galleryimg = $node->field_gallery_image['und'];
       $toptlapics = count($galleryimg);
       $output .= getMobileFeedXmlHeader();
-      $output .= "<idgallery>" . $nid . "</idgallery><gallery><![CDATA[" . $title . "]]></gallery><idsection>" . $tid . "</idsection><section>" . $term_name . "</section><totalpics>" . $toptlapics . "</totalpics><weburl><![CDATA[" . $weburl . "]]></weburl>";
+      $output .= "<idgallery>" . $nid . "</idgallery><gallery>". xml_cdata_filter($title) ."</gallery><idsection>" . $tid . "</idsection><section>" . $term_name . "</section><totalpics>" . $toptlapics . "</totalpics><weburl><![CDATA[" . $weburl . "]]></weburl>";
       //get gallery img tag
       $imgtag = getGalleryImgTag($node);
 
@@ -136,7 +136,7 @@ function getGalleryImgTag($node) {
       $caption = $fc->field_image_caption['und'][0]['value'];
       $byline = $fc->field_credit['und'][0]['value'];
       //$photo_story_img = image_style_url('photo_slider_753x543', $uri);
-      $output .= "<item><imageid>" . $fid . "</imageid><image><![CDATA[" . $file_uri . "]]></image><largeimage><![CDATA[" . $file_uri . "]]></largeimage><caption><![CDATA[" . $caption . "]]> </caption><byline>" . $byline . "</byline></item>";
+      $output .= "<item><imageid>" . $fid . "</imageid><image>" . xml_cdata_filter($file_uri) ."</image><largeimage>" . xml_cdata_filter($file_uri) ."</largeimage><caption>".xml_cdata_filter($caption)."</caption><byline>" . $byline . "</byline></item>";
     }
 
   }
