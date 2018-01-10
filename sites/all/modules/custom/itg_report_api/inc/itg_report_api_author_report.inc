@@ -85,6 +85,7 @@ function author_report_tvtn($start_date) {
             $contents[$author_inner_loop_cont]['author_email'] = "$mail";
             $contents[$author_inner_loop_cont]['author_name'] = "$name";
             $contents[$author_inner_loop_cont]['site_id'] = "$site_id";
+            $contents[$author_inner_loop_cont]['content_id'] = "$nid";
             $contents[$author_inner_loop_cont]['content_url'] = "$title_path";
             $contents[$author_inner_loop_cont]['page_title'] = "$title";
             $author_inner_loop_cont++;
@@ -183,6 +184,7 @@ function author_report($start_date) {
             $contents[$author_inner_loop_cont]['author_email'] = "$mail";
             $contents[$author_inner_loop_cont]['author_name'] = "$name";
             $contents[$author_inner_loop_cont]['site_id'] = "$site_id";
+            $contents[$author_inner_loop_cont]['content_id'] = "$nid";
             $contents[$author_inner_loop_cont]['content_url'] = "$title_path";
             $contents[$author_inner_loop_cont]['page_title'] = "$title";
             $author_inner_loop_cont++;
