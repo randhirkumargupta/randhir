@@ -194,7 +194,7 @@ function kindle_feed_generate_form_submit($form, &$form_state) {
             //create section file which are active.
             _create_section_file($section_with_nids_array, $directory_name);
             // Create zip in temp location.
-            _create_tmp_zip("indiatoday/kindle/$directory_name");
+            _create_tmp_zip("public://indiatoday/kindle/$directory_name");
         }
     }
 }

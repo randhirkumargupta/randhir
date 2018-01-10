@@ -14,7 +14,7 @@ function latestnews_rss_feed() {
   $output = "";
   $redis_key = "itgd_rss_latestnewsRSSFeed";
   $top_stories_section = 1206584;
-  $section_url = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $top_stories_section);
+  $section_url = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $top_stories_section);
 //    $result_get = getRedis($redis_key);
 
   if (FALSE && $result_get['key_value'] != "") {
@@ -71,7 +71,7 @@ function get_latest_news_item_rss() {
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('kt', array('field_story_kicker_text_value'));
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->condition('ti.tid', $must_read_section, '=');
   $query->condition('n.nid', $exclude_ids, 'NOT IN');
   $query->orderBy('n.created', 'DESC');
@@ -82,6 +82,9 @@ function get_latest_news_item_rss() {
 
   $counter = 0;
   foreach ($total_result as $reskey => $resvalue) {
+    if (is_lock_story_rss_feed($resvalue['nid'])) {
+      continue;
+    }
     $counter++;
     if ($counter == 5) {
       $output .= '<item>';
@@ -92,7 +95,7 @@ function get_latest_news_item_rss() {
     }
     $title = $resvalue['title'];
     $nid = $resvalue['nid'];
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
     $created = $resvalue['created'];
     $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
     date_default_timezone_set("GMT");

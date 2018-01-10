@@ -570,7 +570,7 @@ if ($theme != 'itgadmin') {
                       </div>
                       <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
                           <div class="widget-help-text"><?php print t('HTML Widget'); ?></div>
-                          <div class="itg-widget">
+                          <div class="itg-widget shadow-on">
                               <div class="droppable grey-bg <?php print $gray_bg_layout; ?>">
                                   <div class="widget-wrapper <?php print $widget_data['itg-block-12']['widget_name'] . $widget_data['itg-block-12']['widget_display_name']; ?>">
                                       <?php if (($theme != 'itgadmin' || isset($preview)) && !empty($widget_data['itg-block-12']['block_title'])) { ?>

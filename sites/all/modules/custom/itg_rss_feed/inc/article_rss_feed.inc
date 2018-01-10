@@ -18,7 +18,7 @@ function article_rss_feed() {
   $section_url = NULL;
   if (!empty($section_id)) {
     $term_name = taxonomy_term_load($section_id)->name;
-    $section_url = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $section_id);
+    $section_url = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $section_id);
   }
   $redis_key = "itgd_rss_articleRSSFeed_" . $section_id;
 //    $result_get = getRedis($redis_key);
@@ -86,7 +86,7 @@ function get_article_item_rss($section_id, $term_name, $section_url) {
   $query->fields('kt', array('field_story_kicker_text_value'));
 
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   if (!empty($section_id)) {
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $tid_list, 'IN');
@@ -97,6 +97,9 @@ function get_article_item_rss($section_id, $term_name, $section_url) {
   $list_cont = 0;
   $counter = 0;
   foreach ($result as $reskey => $resvalue) {
+    if (is_lock_story_rss_feed($resvalue['nid'])) {
+      continue;
+    }
     $counter++;
     if ($counter == 5) {
       $output .= '<item>';
@@ -109,7 +112,7 @@ function get_article_item_rss($section_id, $term_name, $section_url) {
     $nid = $resvalue['nid'];
     $body_value = $resvalue['body_value'];
     $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
     $image_data = get_thumbnails_by_fid($field_story_extra_large_image_fid);
     $img_url = $image_data->imageurl;
     $created = $resvalue['created'];
@@ -134,7 +137,7 @@ function article_rss_feed_google_newsstand() {
   $section_url = NULL;
   if (!empty($section_id)) {
     $term_name = taxonomy_term_load($section_id)->name;
-    $section_url = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $section_id);
+    $section_url = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $section_id);
   }
   $redis_key = "itgd_rss_article_google_newsstandRSSFeed_" . $section_id;
 //    $result_get = getRedis($redis_key);
@@ -207,7 +210,7 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
   $query->fields('kt', array('field_story_kicker_text_value'));
 
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   if (!empty($section_id)) {
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $tid_list, 'IN');
@@ -216,11 +219,14 @@ function get_article_google_stand_item_rss($section_id, $term_name, $section_url
   $query->groupBy('n.nid')->range($range_min, $range_max);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
+    if (is_lock_story_rss_feed($resvalue['nid'])) {
+      continue;
+    }
     $title = $resvalue['title'];
     $nid = $resvalue['nid'];
     $body_value = $resvalue['body_value'];
     $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
     //$image_data = get_thumbnail_by_fid($field_story_extra_large_image_fid);
     $reporter = (isset($resvalue['reporter_title']) ? $resvalue['reporter_title'] : '');
     //$img_url = $image_data->imageurl;

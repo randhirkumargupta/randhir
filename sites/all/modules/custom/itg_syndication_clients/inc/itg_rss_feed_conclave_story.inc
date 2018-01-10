@@ -62,7 +62,7 @@ function get_rss_conclave_story_sid_xml($result, $sid, $section_name) {
     $xml .= '<atom:link type="application/rss+xml" rel="self" href="http://feeds.intoday.in/xml/conclave/stories/conclave_story.xml"/>';
     $xml .= '<title>India Today - Jio</title>';
     $xml .= '<link>http://conclave.intoday.in/</link>';
-    $xml .= '<description>Conclave updates from ' . $base_url . ' for Jio </description>';
+    $xml .= '<description>Conclave updates from ' . FRONT_URL . ' for Jio </description>';
     $xml .= '<language>en-gb</language><copyright></copyright><docs>http://conclave.intoday.in/</docs>';
     $xml .= '<image>';
     $xml .= '<title>India Today - Jio</title>';
@@ -73,7 +73,7 @@ function get_rss_conclave_story_sid_xml($result, $sid, $section_name) {
       if (is_lock_story($value['nid'])) {
         continue;
       }
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $pub_date = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];
       $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);

@@ -44,7 +44,7 @@ function get_miscellaneous_item_rss() {
   $range_min = 0;
   $range_max = 25;
   $miscellaneous_section = 1206633;
-  //$type = array("videogallery", "photogallery", "story");
+  
   $type = array("story");
 
   //Get top 1 stories from top stories section
@@ -52,12 +52,15 @@ function get_miscellaneous_item_rss() {
   $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->condition('ti.tid', $miscellaneous_section, '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 100);
   $miscellaneous_story = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($miscellaneous_story as $reskey => $resvalue) {
+    if (is_lock_story_rss_feed($resvalue['nid'])) {
+      continue;
+    }
     $title = $resvalue['title'];
     $nid = $resvalue['nid'];
     $created = $resvalue['created'];

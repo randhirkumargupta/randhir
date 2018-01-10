@@ -131,7 +131,7 @@ function generateLeftMainCategoryPage($tid, $term_name) {
                     $created = $resvalue['created'];
                     $is_fav = getNidIsFavorite($nid);
                     $alias = drupal_get_path_alias('node/' . $nid . '');
-                    $weburl = $base_url . "/" . $alias;
+                    $weburl = FRONT_URL . "/" . $alias;
                     // auto
                     if ($tid == '1206689' || $tid == '1206688') {
                         $loop_file_name = 'story' . $nid . ".xml";

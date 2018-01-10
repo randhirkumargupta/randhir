@@ -30,7 +30,7 @@ function issue_rss_feed() {
   else {
     if (count($result) > 0) {
       $issue_title = date('F d, Y', strtotime($result[0]['title']));
-      $issue_url = $base_url . "/" . drupal_get_path_alias('node/' . $result[0]['nid']);
+      $issue_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $result[0]['nid']);
     }
 
     //anchorRSSFeed writing...
@@ -101,7 +101,7 @@ function get_issue_article_item_rss($issue_title = NULL, $issue_url = NULL) {
     }
     $title = $resvalue['title'];
     $nid = $resvalue['nid'];
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
     $created = $resvalue['created'];
     $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
     date_default_timezone_set("GMT");

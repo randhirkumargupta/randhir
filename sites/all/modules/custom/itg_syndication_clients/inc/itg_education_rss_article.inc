@@ -53,8 +53,8 @@ function get_education_rss_feed_from_cid_xml($result, $cid, $cat_name) {
     $last_build_date = end($result);
     $last_build_date = date("D, j M Y H:i:s P", strtotime($last_build_date['field_itg_content_publish_date_value']));
     $logo = theme_get_setting('logo');
-    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $cid);
-    $edu_cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/1207412');
+    $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $cid);
+    $edu_cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/1207412');
     $xml .= '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ Education Today | ' . $parent_cat_name . ' | ' . $cat_name . ']]></title>';
@@ -72,7 +72,7 @@ function get_education_rss_feed_from_cid_xml($result, $cid, $cat_name) {
       if (is_lock_story($value['nid'])) {
         continue;
       }
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];
       $xml .= '<item>';
