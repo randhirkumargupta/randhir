@@ -77,7 +77,6 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
   <?php
   $arg = arg();
   if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
-   //ga('create', '<?php //echo $data_video["ga_code"]; ?>', 'auto');
    ga('create', 'UA-20047041-23', 'auto');
    ga('send', 'pageview');
   <?php } ?>
