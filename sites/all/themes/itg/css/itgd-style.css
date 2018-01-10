@@ -699,5 +699,7 @@ section.sidebar .block-itg-ads > div {margin: auto;}
  .location-area h2 a {
      color: #eccc2c;
 }
-
+.section-news .itg-layout-container .ad-widget .sidebar-ad{
+background:none;
+}
 
