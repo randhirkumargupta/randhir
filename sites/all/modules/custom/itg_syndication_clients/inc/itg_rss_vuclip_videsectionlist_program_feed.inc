@@ -101,7 +101,8 @@ function genrate_vuclip_programme_xml($result, $section_name, $section_id) {
       $metatags = get_node_metatags_by_nid($nid);
       $keywords = '';
       if ($metatags) {
-        $keywords = $metatags['keywords']['value'];
+        $temp = unserialize($metatags['data']);
+        $keywords = $temp['keywords']['value'];
       }
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';

@@ -182,7 +182,7 @@ function author_report($start_date) {
             $title = $today_val['title'];
             $nid = $today_val['nid'];
             $desc = kickerByNid($nid);
-            $title_path = $base_url . "/" . drupal_get_path_alias('node/' . $nid . '');
+            $title_path = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid . '');
             $contents[$author_inner_loop_cont]['author_id'] = "$user_id";
             $contents[$author_inner_loop_cont]['author_email'] = "$mail";
             $contents[$author_inner_loop_cont]['author_name'] = "$name";

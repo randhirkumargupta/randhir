@@ -125,7 +125,8 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $keywords = '';
       if ($metatags) {
-        $keywords = $metatags['keywords']['value'];
+        $temp = unserialize($metatags['data']);
+        $keywords = $temp['keywords']['value'];
       }
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
@@ -235,7 +236,8 @@ function genrate_indiatoday_yahoo_static_section_syndication_xml($result = NULL,
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $keywords = '';
       if ($metatags) {
-        $keywords = $metatags['keywords']['value'];
+        $temp = unserialize($metatags['data']);
+        $keywords = $temp['keywords']['value'];
       }
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
@@ -326,7 +328,8 @@ function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $sec
       $metatags = get_node_metatags_by_nid($value['nid']);
       $keywords = '';
       if ($metatags) {
-        $keywords = $metatags['keywords']['value'];
+        $temp = unserialize($metatags['data']);
+        $keywords = $temp['keywords']['value'];
       }
       $xml .= '<item>';
       $xml .= '<title>' . $value['title'] . '</title>';
@@ -414,7 +417,8 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $keywords = '';
       if ($metatags) {
-        $keywords = $metatags['keywords']['value'];
+        $temp = unserialize($metatags['data']);
+        $keywords = $temp['keywords']['value'];
       }
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
