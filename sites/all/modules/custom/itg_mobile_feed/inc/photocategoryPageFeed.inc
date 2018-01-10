@@ -137,7 +137,7 @@ function generatePhotoCategoryPage($tid) {
                     $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
                     $create_date = date("F d, Y", $created);
                     $create_datetime = date(DATE_ATOM, $created);
-                    $output .= "<item><title><![CDATA[" . $title . "]]></title><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>photo" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds><weburl><![CDATA[" . $weburl . "]]></weburl></item>";
+                    $output .= "<item><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($file_small_img_url)."</thumbimage><url>photo" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds><weburl><![CDATA[" . $weburl . "]]></weburl></item>";
                     $fl = generatePhotoDetailPageFeed($nid);
                 }
             } else {
