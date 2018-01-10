@@ -77,7 +77,7 @@ define('ITG_IMAGE_FOLDER', 'images/');
 define('ITG_NEWSLETTER_EMAIL', 'care@intoday.in');
 define('ITG_NEWSLETTER_FROMNAME', 'India Today');
 define('JWPLAYER_DFP_TAG','https://pubads.g.doubleclick.net/gampad/ads?sz=400x300|640x480&iu=/1007232/Indiatoday_VOD_Pre_Roll_WEB&impl=s&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]');
-define('ITG_GA_CODE', 'UA-20047041-23');
+define('ITG_GA_CODE', 'UA-795349-17');
 
 
 /**
@@ -110,7 +110,7 @@ define('ITGDATE', 'd/m/Y');
 define('ITG_INDIATODAY_SITENAME_XML', 'India Today');
 define('FRONT_THEME_NAME', 'itg');
 define('AMP_THEME_NAME', 'amptheme');
-define('EXTRA_SECTION_CARDS', 21);
+define('EXTRA_SECTION_CARDS', 9);
 define('SECTION_TAB', 20);
 $extra_large_image_style = array('photgallery_landing_slider_753x543', 'big_story_widget' ,'photo_slider_753x543', 'image_750x363', 'photogallery_slide');
 define('EXTRA_LARGE_IMAGE_STYLES', $extra_large_image_style);

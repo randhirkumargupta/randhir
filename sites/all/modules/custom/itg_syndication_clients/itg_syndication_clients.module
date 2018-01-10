@@ -341,6 +341,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/factiva_stories_syndication.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['rss-feeds/syndication-cms'] = array(
+    'page callback' => 'syndication_interface_cms',
+    'access arguments' => array('access content'),
+    'file' => 'inc/syndication_interface_cms.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -907,7 +913,7 @@ function related_content_node_type($node_list = "", $type) {
     $nid = $resvalue['nid'];
     if ($resvalue['type'] == "story") {
       $type_ar['stories'] = "YES";
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
       $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
       $related_story_xml .= '<story>';
       $related_story_xml .= '<title>' . $resvalue['title'] . '</title>';
@@ -917,7 +923,7 @@ function related_content_node_type($node_list = "", $type) {
     }
     elseif ($resvalue['type'] == "videogallery") {
       $type_ar['videos'] = "YES";
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
       $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
       $related_video_xml .= '<video>';
       $related_video_xml .= '<title>' . $resvalue['title'] . '</title>';
@@ -927,7 +933,7 @@ function related_content_node_type($node_list = "", $type) {
     }
     elseif ($resvalue['type'] == "photogallery") {
       $type_ar['photos'] = "YES";
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
       $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
       $related_photo_xml .= '<photo>';
       $related_photo_xml .= '<title>' . $resvalue['title'] . '</title>';
@@ -1332,9 +1338,68 @@ function itg_mcu8_tags($nid) {
  * @param string $content
  * @return string
  */
-function itg_remove_tags_from_body($content){
+function itg_remove_tags_from_body($content) {
   $content = strip_tags($content, '<p>');
-  $content = preg_replace('<div(.*?)class="itg-mosimage"(.*?)div>',"", $content);
-  $content = preg_replace('/<img(.*?)src=("|\'|)(.*?)("|\'| )(.*?)>/s',"", $content);
+  $content = preg_replace('<div(.*?)class="itg-mosimage"(.*?)div>', "", $content);
+  $content = preg_replace('/<img(.*?)src=("|\'|)(.*?)("|\'| )(.*?)>/s', "", $content);
   return $content;
+}
+
+/**
+ * Get the internal uploaded video on the Site
+ */
+function itg_internal_video_bitrate_data($video_id) {
+  $data_video_info = itg_xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
+  if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
+    $data_from_solr = itg_xml_itg_videogallery_getsolr_data_for_internal_video($data_video_info[0]->video_id);
+    $video_data = $data_from_solr[0];
+    $video_all_data = json_decode($video_data, TRUE);
+    $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
+  }
+  return $player_content;
+}
+
+/**
+ * Implements itg_videogallery_get_all_video_info_by_video_id
+ * @param string $video_id
+ * @param array $result
+ */
+function itg_xml_itg_videogallery_get_all_video_info_by_video_id($video_id) {
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd');
+  $query->condition('video_id', $video_id, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement itg_videogallery_getsolr_data_for_internal_video
+ * @param string $video_id
+ */
+function itg_xml_itg_videogallery_getsolr_data_for_internal_video($video_id) {
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    $all_video_ids = array();
+    $hashvalue = implode(' OR ', array_keys($hash));
+    $str = 'hash:(' . $hashvalue . ')';
+    $query = apachesolr_drupal_query("custom");
+    $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'sm_field_video_id'); // Only search in title
+//The bundle which you want to search
+    $query->replaceParam("fq", '(' . $str . ')');
+    $query->addFilter("bundle", "itg_solr_video");
+    $query->addFilter("sm_field_video_id", $video_id);
+    $query->setSolrsort('sort_label', 'desc');
+    $resp_search = $query->search();
+    $all_data = $resp_search->response->docs;
+    if (!empty($all_data)) {
+      return $all_data[0]->sm_field_all_xml_content;
+    }
+  }
 }

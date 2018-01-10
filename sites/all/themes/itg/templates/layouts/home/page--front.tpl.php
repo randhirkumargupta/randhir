@@ -761,25 +761,26 @@ if ($theme != 'itgadmin') {
                                   </div>               
                               </div>          
                           </div>
-                          <?php if ($theme == 'itgadmin') { ?>
+                          <!--<?php if ($theme == 'itgadmin') { ?>
                             <div class="load-more-wrapper">
                                 <a href="javascript:void(0)" class="add-more-block">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
                             </div>
                             <?php
                           }
-                          ?>
+                          ?>-->
                       </div>
                     <?php } ?>
                     <!--End of Common section-->                    
                     <!--Common section add more strat here-->
                     <?php
-                    if ($theme == 'itgadmin') {
+                   // if ($theme == 'itgadmin') {
                       $count_widget = 19;
                       ?>
                       <?php
                       $last_val = 0;
                       $divcounter = 1;
                       $divcou = 0;
+                      
                       ?>
                       <?php for ($count = 1; $count <= EXTRA_SECTION_CARDS; $count += 3) { ?>
                         <?php
@@ -789,13 +790,13 @@ if ($theme != 'itgadmin') {
                         ?>
                         <?php if (!empty($widget_data[$widget_name1]['widget_name']) || !empty($widget_data[$widget_name2]['widget_name']) || !empty($widget_data[$widget_name3]['widget_name']) || $theme == 'itgadmin') { ?>
                           <?php
-                          $display_style = 'style="display:none"';
+                        //  $display_style = 'style="display:none"';
                           if ($widget_data[$widget_name1]['widget_name'] != null || $widget_data[$widget_name2]['widget_name'] != null || $widget_data[$widget_name3]['widget_name'] != null) {
                             $last_val++;
-                            $display_style = 'style="display:block"';
+                           // $display_style = 'style="display:block"';
                           }
                           if ($theme != 'itgadmin') {
-                            $display_style = 'style="display:none"';
+                           // $display_style = 'style="display:none"';
                           }
                           ?>
                           <div class="row itg-common-section mt-50 show-on-add" <?php echo $display_style; ?> id="content-section-widget-<?php print $divcounter; ?>">
@@ -904,13 +905,14 @@ if ($theme != 'itgadmin') {
                                       </div>               
                                   </div>          
                               </div>
-                              <?php $divcou = 3 + $divcou; ?><div class="load-more-wrapper">
+                              <?php $divcou = 3 + $divcou; ?>
+<!--                              <div class="load-more-wrapper">
                               <?php if ((EXTRA_SECTION_CARDS != $divcou) && ($divcou != $last_val)) { ?>
                                     <a href="javascript:void(0)" class="add-more-block">Load More <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
                                   <?php } if ($theme == 'itgadmin') { ?>
                                     <a href="javascript:void(0)" class="removes-more-block">Less <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a>
                                   <?php } ?>
-                              </div>
+                              </div>-->
                           </div>
                         <?php } ?>
                         <?php
@@ -919,7 +921,7 @@ if ($theme != 'itgadmin') {
                         ?>
                         <?php
                       }
-                    }
+                   // }
                     ?>
                     <!--End of Common section-->
                     <div class="no-more-card" style="display:none">No More Result Found.</div>
@@ -978,7 +980,7 @@ if ($theme != 'itgadmin') {
                       }
                     }
                     ?>
-                    <?php
+                    <!--<?php
                     if ($theme != 'itgadmin') {
                       print '<div id="second-section-card"></div>';
                       if (!empty($widget_data['itg-block-20']['widget']) || !empty($widget_data['itg-block-21']['widget']) || !empty($widget_data['itg-block-22']['widget'])) {
@@ -989,7 +991,7 @@ if ($theme != 'itgadmin') {
                         <?php
                       }
                     }
-                    ?>
+                    ?> -->
                     
                 </div>
             </div>

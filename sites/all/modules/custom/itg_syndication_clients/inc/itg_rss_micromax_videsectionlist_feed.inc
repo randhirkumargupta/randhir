@@ -63,7 +63,7 @@ function genrate_micromax_programme_xml($result) {
   global $base_url;
   $json_output = array();
   $json_output['title'] = "India Today's Videos Feed";
-  $json_output['link'] = $base_url;
+  $json_output['link'] = FRONT_URL;
   $json_output['description'] = "India Today's Videos Feed";
   $json_output['item'] = array();
   if (!empty($result)) {

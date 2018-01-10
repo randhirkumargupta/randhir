@@ -50,7 +50,7 @@ function get_rss_article_news_republic_xml($result) {
     $xml .= '<rss xmlns:content="http://purl.org/rss/1.0/modules/content" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title>India Today</title>';
-    $xml .= '<link>' . $base_url . '</link>';
+    $xml .= '<link>' . FRONT_URL . '</link>';
     $xml .= '<description>India Today</description>';
     $xml .= '<language>en-us</language>';
     $xml .= '<atom:link rel="hub" href="http://pubsubhubbub.appspot.com"/>';
@@ -59,7 +59,7 @@ function get_rss_article_news_republic_xml($result) {
         continue;
       }
       $nid = $value['nid'];
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
       $author = get_byline_name_by_nid($nid);
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];
@@ -128,7 +128,7 @@ function get_rss_education_article_news_republic_xml($result) {
   $xml = '';
   if (!empty($result)) {
     global $base_url;
-    $edu_cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/1207412');
+    $edu_cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/1207412');
     $xml .= '<rss xmlns:content="http://purl.org/rss/1.0/modules/content" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title>Education Today</title>';
@@ -141,7 +141,7 @@ function get_rss_education_article_news_republic_xml($result) {
         continue;
       }
       $nid = $value['nid'];
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
       $author = get_byline_name_by_nid($nid);
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];

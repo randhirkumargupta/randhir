@@ -67,7 +67,7 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
 
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
-   ga('create', '<?php echo $data_video["ga_code"]; ?>', '<?php echo $explode_url[1];?>');
+   ga('create', '<?php echo $data_video["ga_code"]; ?>', 'auto');
    ga('send', 'pageview');
   // playerInstance.on('setupError', function (event) {
       // if (event.message == 'Error loading player: No playable sources found') {

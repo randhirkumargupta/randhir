@@ -1125,7 +1125,7 @@ function getRelatedNodeXmlTag($nidar) {
   $related_flag_video = 0;
   foreach ($nidar as $key => $value) {
     $title = $value['title'];
-    $url = $base_url . "/node/" . $value['nid'];
+    $url = FRONT_URL . "/node/" . $value['nid'];
     $img_url = completeFilePath($value['field_story_small_image_fid']);
 
     if ($value['type'] == "story") {
@@ -1305,7 +1305,7 @@ function itg_mobile_feed_xml_feed_url_cron() {
       'timeout' => 30,
       'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
     );
-    $url = $base_url . "/" . $value;
+    $url = FRONT_URL . "/" . $value;
     //$result = drupal_http_request($url, $options);
     $res = callAPI('GET', $url, $data = FALSE);
   }
