@@ -76,7 +76,7 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
     $body_value = $resvalue['body_value'];
     $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
 
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
     $created_by = getNodeCreatedBy_UserName($uid);
     $wordcount = count(explode(" ", strip_tags(trim($body_value))));
     $created_datetime = date("Y-m-d H:i:s", $created);
