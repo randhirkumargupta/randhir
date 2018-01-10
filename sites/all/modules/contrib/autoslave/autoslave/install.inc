@@ -54,7 +54,7 @@ class DatabaseTasks_autoslave extends DatabaseTasks {
     }
     $msg[] = '<strong>Master pools:</strong> (' . implode(', ', $master_pool) . ')';
     $msg[] = '<strong>Slave pools:</strong> (' . implode(', ', $slave_pool) . ')';
-    $path = 'misc/';
+    $path = '/misc/';
     $rows = array();
     foreach ($pool['all'] as $id => $conninfo) {
       if ($conninfo['driver'] == 'autoslave') {
@@ -82,7 +82,7 @@ class DatabaseTasks_autoslave extends DatabaseTasks {
         }
         $dsn = $conninfo['driver'] . '://' . $conninfo['host'];
       }
-      $status = '<img title="' . $message . '" src="' . url($path . $icon) . '"/>';
+      $status = '<img title="' . $message . '" src="' . $path . $icon . '"/>';
 
       if (!empty($conninfo['connected'])) {
         $status .= ' (connected)';
@@ -92,7 +92,7 @@ class DatabaseTasks_autoslave extends DatabaseTasks {
       if(isset($conninfo['readonly']) && $conninfo['readonly'] === TRUE) {
          $readonly = "message-16-ok.png";
       }
-      $readonly = '<img title="Readonly" src="' . url($path . $readonly) . '"/>';
+      $readonly = '<img title="Readonly" src="' . $path . $readonly . '"/>';
 
       $rows[] = array($id, $conninfo['target'], $dsn, $status, $readonly);
     }
