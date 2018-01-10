@@ -67,7 +67,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
   }
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
-  ga('create', '<?php echo $player_content["ga_code"]; ?>', '<?php echo $explode_url[1];?>');
+  ga('create', '<?php echo $player_content["ga_code"]; ?>', 'auto');
  ga('send', 'pageview');
 </script>
 
