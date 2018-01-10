@@ -6,9 +6,14 @@
  */
 drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.min.js', array('scope' => 'header'));
 drupal_add_js(drupal_get_path('module', 'itg_videogallery') . '/js/jwplayer.gaevent.js', array('scope' => 'header'));
+drupal_add_js('https://sb.scorecardresearch.com/c2/plugins/streamingtag_plugin_jwplayer.js', array('type' => 'external', 'scope' => 'header'));
 global $base_url;
 $node_url_data = url(current_path(), array('absolute' => false));
 $explode_url = explode('/', $node_url_data);
+$pub_date = get_content_publish_date($nid);
+if (!empty($pub_date)) {
+  $pub_date = date('Y-m-d', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+}
 ?>
 <?php
 $width = 622;
@@ -37,6 +42,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
       jwplayer('videoplayer').setup({
           playlist: [{
                   title: "<?php echo stripslashes($title); ?>",
+                  mediaid:"vod_<?php echo $nid; ?>",
                   'image': "<?php echo $player_content['player_image']; ?>",
                   sources: [
                       {
@@ -69,6 +75,13 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
   loadplayerjw();
   ga('create', '<?php echo $player_content["ga_code"]; ?>', 'auto');
  ga('send', 'pageview');
+ playerInstance.on('ready', function () {
+   console.log('playerready');
+   ns_.StreamingAnalytics.JWPlayer(playerInstance, {
+   publisherId: "8549097",
+   labelmapping: "c3=\"99000\", ns_st_pu=\"Indiatoday Group\", ns_st_ia=\"0\", ns_st_ge=\"Video\", ns_st_ddt=\"<?php echo $pub_date; ?>\", ns_st_ce=\"FullEpisode\", ns_st_tdt=\"<?php echo $pub_date;?>\", ns_st_title=\"<?php echo stripslashes($title); ?>\""
+	}); 
+}); 
 </script>
 
 <?php
