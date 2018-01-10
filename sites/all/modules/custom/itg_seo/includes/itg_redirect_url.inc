@@ -102,15 +102,15 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   global $base_url;
   $old_content_id = '';
   $arg = arg();
-  p($_SERVER);
+  //p($_SERVER);
   if ($_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in' || $_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
-    $old_url = substr($_SERVER['REDIRECT_URL'], 1);	  
+    $old_url = substr($_SERVER['REQUEST_URI'], 1);	  
     $source_url = redirect_load_by_source($old_url);    
     if (!empty($source_url)) {
       $new_url = drupal_get_path_alias($source_url->redirect);
       $url_re = 'https://www.indiatoday.in/'.$new_url;
     } else {
-        $url_re = 'https://www.indiatoday.in'.$_SERVER['REDIRECT_URL'];
+        $url_re = 'https://www.indiatoday.in'.$_SERVER['REQUEST_URI'];
         if ($_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
           if(($arg[0] == 'education' || $arg[0] == 'technology') && ($arg[1] == 'story') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
             $storyarg = $arg[4];
@@ -125,7 +125,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
               $url_re = $newurl;
             }
           } else {
-              $url_re = 'https://www.indiatoday.in'.$_SERVER['REDIRECT_URL'];
+              $url_re = 'https://www.indiatoday.in'.$_SERVER['REQUEST_URI'];
           }
         }
     }
