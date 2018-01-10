@@ -75,6 +75,7 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
   loadplayerjw();
   <?php
   $arg = arg();
+  p($arg);
   if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
    //ga('create', '<?php //echo $data_video["ga_code"]; ?>', 'auto');
    ga('create', 'UA-20047041-23', 'auto');
