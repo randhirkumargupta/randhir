@@ -135,7 +135,6 @@ function author_report($start_date) {
     // date details
     $data['date details']['today'] = date("d-F-Y", $start_date);
     $data['date details']['yesterday'] = date("d-F-Y", $yesterday);
-    ;
     $data['date details']['month'] = $month;
     $data['date details']['year'] = $year;
 
