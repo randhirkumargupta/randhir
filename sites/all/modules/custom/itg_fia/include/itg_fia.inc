@@ -241,6 +241,9 @@ function itg_fia_xml_node_feed($query) {
       $node_body = preg_replace("/<\/?div[^>]*\>/i", "$1", $node_body);
       $node_body = preg_replace('/(<img\b\s+.*?data-mosimage=\")/', '<figure>$1', $node_body);
       $node_body = preg_replace("/(<img data-mosimage='([^\"]*)')/", '<figure>$1', $node_body);
+      if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
+        $node_body = preg_replace('/(<img([^>]*)>)/i', '<figure>$1</figure>', $node_body );
+      }
       $node_body = str_replace('<p><figure', '<figure', $node_body);
       $node_body = str_replace('</figure></p>', '</figure>', $node_body);
       $node_body = str_replace('</figcaption></p>', '</figcaption>', $node_body);
@@ -260,10 +263,10 @@ function itg_fia_xml_node_feed($query) {
       $node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
       $node_body = str_replace('<script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js></script></iframe></figure>', $node_body);
       $node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
-      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
-      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" mce_src="https://platform.twitter.com/widgets.js" charset="utf-8"> </script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
-      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" mce_src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
-      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"> </script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
+      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset="utf-8" src="https://platform.twitter.com/widgets.js" type="mce-no/type"></script></iframe></figure>', $node_body);
+      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" mce_src="https://platform.twitter.com/widgets.js" charset="utf-8"> </script>', '<script charset="utf-8" src="https://platform.twitter.com/widgets.js" type="mce-no/type"></script></iframe></figure>', $node_body);
+      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" mce_src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset="utf-8" src="https://platform.twitter.com/widgets.js" type="mce-no/type"></script></iframe></figure>', $node_body);
+      $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"> </script>', '<script charset="utf-8" src="https://platform.twitter.com/widgets.js" type="mce-no/type"></script></iframe></figure>', $node_body);
       $ad_code = "<figure class='op-ad'><iframe width='300' height='250' style='border:0; margin:0;' src='https://www.facebook.com/adnw_request?placement=1634971070080984_1635110376733720&adtype=banner300x250'></iframe></figure>";
       $node_body = preg_replace("/ITG:SURVEY:([0-9]+)/", "", $node_body);
       $node_body = preg_replace("/ITG:QUIZ:([0-9]+)/", "", $node_body);
