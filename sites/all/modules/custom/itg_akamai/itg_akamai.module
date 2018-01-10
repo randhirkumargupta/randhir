@@ -1043,6 +1043,7 @@ function itg_akamai_init() {
         $parm = isset($_GET['q']) ? $_GET['q'] : NULL;
         // Checking if page is Taxonomy page
         $parms = explode('/', $parm);
+        p($parms);
         if ($is_front_page) {   // Checking if page is front page
           $homepage_ttl = variable_get('itg_akamai_other_hpage');
           if (isset($homepage_ttl) && !empty($homepage_ttl)) {
