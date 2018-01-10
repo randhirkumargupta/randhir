@@ -1126,3 +1126,4 @@ if (!empty($content)):
       </div>            
     </div>
 <?php endif; ?>
+<?php print $story_zedo_ad;?>
