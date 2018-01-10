@@ -63,9 +63,11 @@ function get_home_top_article_item_rss() {
   $query->fields('kt', array('field_story_kicker_text_value'));
 
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  //echo '<pre>';print_r($result);die;
   $counter = 0;
   foreach ($result as $reskey => $resvalue) {
+    if (is_lock_story_rss_feed($resvalue['nid'])) {
+      continue;
+    }
     $counter++;
     if ($counter == 5) {
       $output .= '<item>';
@@ -76,7 +78,7 @@ function get_home_top_article_item_rss() {
     }
     $title = $resvalue['title'];
     $nid = $resvalue['nid'];
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
     $created = $resvalue['created'];
     $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
     date_default_timezone_set("GMT");

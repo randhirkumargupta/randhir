@@ -971,6 +971,7 @@ function genrate_msn_hlt_video_detail_xml($value, $section_id, $section_name, $v
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
   $source_type = $value['field_story_source_type_value'];
   $videotag = itg_video_detail_formats($nid, $source_type);
+  $video_size = migrated_video_transcoding($nid);
   $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
 
   $video_xml = '<root>';
@@ -987,10 +988,26 @@ function genrate_msn_hlt_video_detail_xml($value, $section_id, $section_name, $v
   $video_xml .= '<mediaid></mediaid>';
   $video_xml .= '<uurl></uurl>';
   if (!empty($videotag['migrated'])) { //migrated video
-    $video_xml .= "<videoparts><part>" . $videotag['migrated']['video_path_mp4'] . "</part></videoparts><size_364bit></size_364bit><flvvideoparts><part>" . $videotag['migrated']['flv_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['migrated']['videoparts_3gp'] . "</part></videoparts_3gp>";
+    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+    foreach ($videoids as $keys => $video_value) {
+      $url = $video_value->field_migrated_video_url_value;
+    }
+    $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+    $bitrate_url = $data_video['bitrate_url'];
+    $mp4_url = $data_video['file_url'];
+    $video_xml .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit></size_364bit><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
   }
   elseif (!empty($videotag['dailymotion'])) {
-    $video_xml .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
+    $videoids = get_video_in_fieldcollection_by_nid($nid);
+    foreach ($videoids as $keys => $video_value) {
+      if ($video_value->video_id != '') {
+        $video_id = $video_value->video_id;
+      } elseif ($video_value->solr_video_id != '') {
+        $video_id = $video_value->solr_video_id;
+      }
+    }
+    $inter_video_details = internal_video_bitrate_data($video_id);
+    $video_xml .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
   }
   $video_xml .= '<images>';
   $video_xml .= '<image>';
