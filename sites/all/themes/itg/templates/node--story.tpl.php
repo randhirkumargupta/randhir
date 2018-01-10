@@ -228,7 +228,8 @@ if (!empty($content)):
                  $lbyline_detail = '';
                  $date_update_class= "date-update";
                  $cunt= 1;
-                 foreach($byline_id as $key => $value) {
+                 if (is_array($byline_id) && count($byline_id) > 0) {
+                  foreach($byline_id as $key => $value) {
                    $date_update_class = ($cunt == 1) ? "date-update" : "";
                    
                  ?> 
@@ -289,7 +290,41 @@ if (!empty($content)):
                   <?php endif; ?>
    
                   </ul>
-                 <?php } ?>
+                  <?php 
+                    }
+                  } 
+                  else {
+                  ?> 
+                      <ul class="date-update">
+
+                        <?php 
+                        if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+                        ?>
+                          <li><?php
+                                    $city = array();
+                                    foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+                                      $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+                                    }
+                                    print implode(' | ', $city);
+                                ?>
+                           </li>
+                          <?php } ?>
+                          <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+                          <li>
+                            <?php
+                            print t('UPDATED ');
+                            if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+                              print date('H:i', $node->created);
+                            }
+                            else {
+                              print date('H:i', $node->changed);
+                            }
+                            print t(' IST');
+                            ?>
+                          </li>
+
+                        </ul>
+                <?php } ?>
                 <?php endif; ?>  
               
                  
