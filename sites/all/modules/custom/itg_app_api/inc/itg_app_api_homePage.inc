@@ -35,15 +35,15 @@ function homePageJson() {
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
     
-    $data['data'][0] = $homePageJsonWidget1;
-    $data['data'][1] = $homePageJsonWidget2;
-    $data['data'][2] = $data_packagelist_india;   
-    $data['data'][3] = $data_topstories;
-    $data['data'][4] = $data_news_india;
-    $data['data'][5] = $data_news_lifestyle;
-    $data['data'][6] = $data_news_world;
-    $data['data'][7] = $data_magazine;
-    $data['data'][8] = $data_poll;
+    //$data['data'][0] = $homePageJsonWidget1;
+    //$data['data'][1] = $homePageJsonWidget2;
+    //$data['data'][2] = $data_packagelist_india;   
+    $data['data'][0] = $data_topstories;
+    $data['data'][1] = $data_news_india;
+    $data['data'][2] = $data_news_lifestyle;
+    $data['data'][3] = $data_news_world;
+    $data['data'][4] = $data_magazine;
+    //$data['data'][8] = $data_poll;
 
     return $data;
 }
@@ -914,7 +914,7 @@ function homePageJsonNewslist_india() {
         // code vid=14  end
 
         $data_news['id'] = "1206578";
-        $data_news['order'] = "5";
+        $data_news['order'] = "1";
         $data_news['type'] = "newslist";
         $data_news['title'] = "India";
         $data_news['label'] = "India";
@@ -1134,7 +1134,7 @@ function homePageJsonNewslist_world() {
         // code vid=14  end
 
         $data_news['id'] = "$tid";
-        $data_news['order'] = "7";
+        $data_news['order'] = "4";
         $data_news['type'] = "newslist";
         $data_news['title'] = "World";
         $data_news['label'] = "World";
@@ -1319,7 +1319,7 @@ function homePageJsonMagazine() {
     $n_magazine = $n_magazine_data['data'];
 
     $data_magazine['id'] = "0";
-    $data_magazine['order'] = "8";
+    $data_magazine['order'] = "5";
     $data_magazine['type'] = "magazine";
     $data_magazine['title'] = "From The Magazine";
     $data_magazine['label'] = "From The Magazine";
@@ -1706,7 +1706,7 @@ function homePageJsonNewslist_lifestyle() {
         // code vid=14  end
 
         $data_news['id'] = "1206567";
-        $data_news['order'] = "6";
+        $data_news['order'] = "2";
         $data_news['type'] = "newslist";
         $data_news['title'] = "Lifestyle";
         $data_news['label'] = "Lifestyle";
