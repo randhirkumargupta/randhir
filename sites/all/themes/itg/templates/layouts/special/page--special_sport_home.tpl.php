@@ -546,9 +546,13 @@ $hide_widget = '';
                                                   </div>
                                                 <?php } ?>  
                                                 <div class="data-holder" id="itg-block-10"><?php
-                                                    $block = module_invoke('itg_widget', 'block_view', 'ipl_tweets');
-                                                    print render($block['content']);
-                                                    ?></div>
+                                                    if (isset($widget_data['itg-block-10']['widget'])) {
+                                                      print $widget_data['itg-block-10']['widget'];
+                                                    }
+                                                    else {
+                                                      print '<div class="widget-placeholder"><span>' . t('Tweets') . '</span></div>';
+                                                    }
+                                                    ?>
                                             </div>             
                                         </div>               
                                     </div>  
