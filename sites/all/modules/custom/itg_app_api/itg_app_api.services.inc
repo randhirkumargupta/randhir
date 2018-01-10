@@ -3997,10 +3997,9 @@ function itg_rapid_api_edit_profile($token) {
     $HTTP_RAW_POST_DATA;
     $method = "POST";
     $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    $pram['user_id'] = array($params['user_id']);
     $rand = rand();
     $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-    $result = callAPI("GET", $url, $pram);
+    $result = callAPI("GET", $url, $params);
     $result_obj = json_decode($result);
 
     // raw input validation
@@ -5129,7 +5128,7 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
     $anchor_data['author'] = $author_list;
     $anchor_data['topic'] = $topics_list;
 
-    if ($anchor_c > 0 || $anchor_c1 > 0 || $anchor_c2 > 0) {
+    if ($anchor_c > 0) {
         $output_array['status_code'] = "1";
         $output_array['status_message'] = "";
         $output_array['data'] = $anchor_data;

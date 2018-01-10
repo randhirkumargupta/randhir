@@ -189,9 +189,6 @@ function homePageJsonPackagelist_india() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
-            if ($type == 'story') {
-                $type = getStoryType($nid);
-            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -211,9 +208,6 @@ function homePageJsonPackagelist_india() {
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
-            } elseif ($type == "photostory") {
-                $photo_list_array = generatePhotoStoryDetailList($nid);
-                $photolist = $photo_list_array['data'];
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
@@ -237,8 +231,6 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -391,9 +383,6 @@ function homePageJsonPackagelist_lifestyle() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
-            if ($type == 'story') {
-                $type = getStoryType($nid);
-            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -414,9 +403,6 @@ function homePageJsonPackagelist_lifestyle() {
 
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
-            } elseif ($type == "photostory") {
-                $photo_list_array = generatePhotoStoryDetailList($nid);
-                $photolist = $photo_list_array['data'];
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
@@ -439,8 +425,6 @@ function homePageJsonPackagelist_lifestyle() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -596,9 +580,6 @@ function homePageJsonPackagelist_world() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
-            if ($type == 'story') {
-                $type = getStoryType($nid);
-            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -619,9 +600,6 @@ function homePageJsonPackagelist_world() {
 
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
-            } elseif ($type == "photostory") {
-                $photo_list_array = generatePhotoStoryDetailList($nid);
-                $photolist = $photo_list_array['data'];
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
@@ -646,8 +624,6 @@ function homePageJsonPackagelist_world() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -775,9 +751,6 @@ function homePageJsonTopstories() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
-            if ($type == 'story') {
-                $type = getStoryType($nid);
-            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$home_list_count]['n_id'] = "$nid";
             $data_newslist[$home_list_count]['n_type'] = "$type";
@@ -798,8 +771,6 @@ function homePageJsonTopstories() {
             $data_newslist[$home_list_count]['n_polls'] = $n_polls;
             $data_newslist[$home_list_count]['n_rating'] = $n_rating;
             $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$home_list_count]['n_widget'] = $n_widget;
             $home_list_count++;
         }
     }
@@ -954,9 +925,6 @@ function homePageJsonNewslist_india() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
-            if ($type == 'story') {
-                $type = getStoryType($nid);
-            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -976,9 +944,6 @@ function homePageJsonNewslist_india() {
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
-            } elseif ($type == "photostory") {
-                $photo_list_array = generatePhotoStoryDetailList($nid);
-                $photolist = $photo_list_array['data'];
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
@@ -1002,8 +967,6 @@ function homePageJsonNewslist_india() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -1161,9 +1124,6 @@ function homePageJsonNewslist_world() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
-            if ($type == 'story') {
-                $type = getStoryType($nid);
-            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -1184,9 +1144,6 @@ function homePageJsonNewslist_world() {
 
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
-            } elseif ($type == "photostory") {
-                $photo_list_array = generatePhotoStoryDetailList($nid);
-                $photolist = $photo_list_array['data'];
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
@@ -1211,8 +1168,6 @@ function homePageJsonNewslist_world() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
@@ -1270,8 +1225,6 @@ function homePageJsonMagazine() {
     $data_newslist[0]['n_polls'] = $n_polls;
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
-    $n_widget = array();
-    $data_newslist[0]['n_widget'] = $n_widget;
 
     $data_magazine['news'] = (array) $data_newslist;
 
@@ -1536,7 +1489,6 @@ function getNodePrimeCatByNid_($nid) {
 function homePageJsonPoll() {
     /* static poll show at front. */
 
-
     $data_magazine = array();
     $data_newslist = array();
     $n_photo = array();
@@ -1580,8 +1532,6 @@ function homePageJsonPoll() {
     $data_newslist[0]['n_polls'] = $n_polls['data'];
     $data_newslist[0]['n_rating'] = $n_rating;
     $data_newslist[0]['n_magazine'] = $n_magazine;
-    $n_widget = array();
-    $data_newslist[0]['n_widget'] = $n_widget;
 
     $data_magazine['news'] = (array) $data_newslist;
     return $data_magazine;
@@ -1737,9 +1687,6 @@ function homePageJsonNewslist_lifestyle() {
             if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
                 $is_developing = 1;
             }
-            if ($type == 'story') {
-                $type = getStoryType($nid);
-            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -1759,9 +1706,6 @@ function homePageJsonNewslist_lifestyle() {
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
-            } elseif ($type == "photostory") {
-                $photo_list_array = generatePhotoStoryDetailList($nid);
-                $photolist = $photo_list_array['data'];
             }
             $data_newslist[$listcount]['n_photo'] = (array) $photolist;
             // re-insalize photolist
@@ -1786,8 +1730,6 @@ function homePageJsonNewslist_lifestyle() {
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-            $n_widget = array();
-            $data_newslist[$listcount]['n_widget'] = $n_widget;
 
             $listcount++;
         }
