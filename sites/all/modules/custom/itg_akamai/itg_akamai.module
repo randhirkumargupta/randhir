@@ -693,7 +693,7 @@ function itg_akamai_taxonomy_term_delete($term) {
 function itg_akamai_node_view($node, $view_type) {
   // Use the global page cache maximum age variable if none is set.
   global $theme;
-  if ($theme == FRONT_THEME_NAME) {
+  if (($theme == FRONT_THEME_NAME) || (function_exists('amp_is_amp_request') && (amp_is_amp_request() == TRUE))) {
     $max_age = get_itg_akamai_content_setting($node->nid, $node->type);
     akamai_max_age($max_age);
   }
@@ -1037,7 +1037,7 @@ function itg_akamai_init() {
     if (!itg_akamai_check_pattern_for_by_passing_url(arg(0))) {
 // Adding TTL for some specified pages
       global $theme;
-      if (($theme == FRONT_THEME_NAME) || (function_exists('amp_is_amp_request') && (amp_is_amp_request() == TRUE))) {
+      if ($theme == FRONT_THEME_NAME) {
         // Akamai Setting for Home Page
         $is_front_page = drupal_is_front_page();
         $parm = isset($_GET['q']) ? $_GET['q'] : NULL;

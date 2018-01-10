@@ -1728,7 +1728,7 @@ function itg_event_backend_vukkul_content($nid) {
 
                var ARTICLE_TITLE = "' . $n_title . '";
 
-               var GA_CODE = "UA-20047041-23";
+               var GA_CODE = "UA-795349-17";
 
                var VUUKLE_API_KEY = "dc34b5cc-453d-468a-96ae-075a66cd9eb7";
 
