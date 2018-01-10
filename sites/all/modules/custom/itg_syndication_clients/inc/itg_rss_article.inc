@@ -53,12 +53,12 @@ function get_rss_feed_from_sid_xml($result, $sid, $section_name) {
     $last_build_date = end($result);
     $last_build_date = date("D, j M Y H:i:s P", strtotime($last_build_date['field_itg_content_publish_date_value']));
     $logo = theme_get_setting('logo');
-    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
+    $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $sid);
     $xml .= '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ India Today | ' . $section_name . ']]></title>';
     $xml .= '<description>India Today</description>';
-    $xml .= '<link><![CDATA[ ' . $base_url . ']]></link>';
+    $xml .= '<link><![CDATA[ ' . FRONT_URL . ']]></link>';
     $xml .= '<lastBuildDate>' . $last_build_date . '</lastBuildDate>';
     $xml .= '<generator>FeedCreator 1.7.2</generator>';
     $xml .= '<image>';
@@ -71,7 +71,7 @@ function get_rss_feed_from_sid_xml($result, $sid, $section_name) {
       if (is_lock_story($value['nid'])) {
         continue;
       }
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];
       $xml .= '<item>';

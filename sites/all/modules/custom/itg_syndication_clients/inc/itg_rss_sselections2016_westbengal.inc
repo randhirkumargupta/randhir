@@ -77,7 +77,7 @@ function genrate_rsselections2016_westbengal_syndication_xml($result = NULL, $se
       }
       $publish_date = date("M d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $create_datetime = date("Y-m-d\TH:i:sP", strtotime($value['field_itg_content_publish_date_value']));
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
       $related = related_content_node_type($nid, 'story');

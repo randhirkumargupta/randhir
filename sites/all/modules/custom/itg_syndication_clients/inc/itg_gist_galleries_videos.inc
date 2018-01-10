@@ -56,12 +56,12 @@ function genrate_gist_photo_syndication_xml($result = NULL) {
     $xml_pub_date = date("Y-m-d H:i:s", $result[0]['created']);
     $logo = theme_get_setting('logo');
     $copy_right_yr = date("Y");
-    $cat_link = $base_url . "/" . drupal_get_path_alias('taxonomy/term/1208589');
+    $cat_link = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/1208589');
     $xml .= '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ India Today | Photos | Exclusive Photo ]]></title>';
     $xml .= '<description>India Today</description>';
-    $xml .= '<link><![CDATA[' . $base_url . '/?utm_source=rss]]></link>';
+    $xml .= '<link><![CDATA[' . FRONT_URL . '/?utm_source=rss]]></link>';
     $xml .= '<lastBuildDate>' . $xml_pub_date . '</lastBuildDate>';
     $xml .= '<generator>FeedCreator 1.7.2</generator>';
     $xml .= '<image>';
@@ -73,7 +73,7 @@ function genrate_gist_photo_syndication_xml($result = NULL) {
 
     foreach ($result as $photo) {
       $nid = $photo['nid'];
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
       $small_img = get_image_info_by_fid($photo['field_story_small_image_fid']);
       $medium_img = get_image_info_by_fid($photo['field_story_medium_image_fid']);
       $publish_date = date("D, j M Y H:i:s P", strtotime($photo['field_itg_content_publish_date_value']));

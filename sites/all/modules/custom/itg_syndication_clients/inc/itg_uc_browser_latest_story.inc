@@ -37,7 +37,7 @@ function itg_uc_browser_feed_latest_story() {
   $json_output['code'] = 200;
   $json_output['error'] = '';
   $json_output['data']['size'] = count($result);
-  $json_output['data']['nextPage'] = $base_url . '/ucbrowser/story/feed/??pageNumber=' . ($page_number + 1) . '&pagesize=' . $pagesize . '&partner=' . $partner;
+  $json_output['data']['nextPage'] = FRONT_URL . '/ucbrowser/story/feed/??pageNumber=' . ($page_number + 1) . '&pagesize=' . $pagesize . '&partner=' . $partner;
   $json_output['data']['rows'] = array();
   foreach ($result as $value) {
     if (is_lock_story($value['nid'])) {
@@ -61,7 +61,7 @@ function itg_uc_browser_feed_latest_story() {
       $key_words = $meta_tags['keywords']['value'];
       $description = $meta_tags['description']['value'];
     }
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
     $body = remove_extra_tag_in_body($value["body_value"]);
     $category_name = get_term_name_by_tid($value['field_primary_category_value']);
     $json_output['data']['rows'][] = array(

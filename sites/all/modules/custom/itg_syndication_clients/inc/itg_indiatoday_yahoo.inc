@@ -116,7 +116,7 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       }
       $guid = genrate_uniqui_guid();
       $publish_date = gmdate("D, d M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
       $section_name = get_term_name_by_tid($value['tid']);
       $metatags = get_node_metatags_by_nid($value['nid']);
@@ -220,7 +220,7 @@ function genrate_indiatoday_yahoo_static_section_syndication_xml($result = NULL,
       }
       $guid = genrate_uniqui_guid();
       $publish_date = date("Y-m-d\TH:i:s P", strtotime($value['field_itg_content_publish_date_value']));
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
       if ($section_id != 'top') {
         $section_name = get_term_name_by_tid($section_id);
@@ -388,18 +388,18 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
   if (!empty($result)) {
     global $base_url;
     $last_node = end($result);
-    $last_node_url = $base_url . "/" . drupal_get_path_alias('node/' . $last_node['nid']);
+    $last_node_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $last_node['nid']);
     $last_pub_date = date("F d, Y H:i:s P", strtotime($last_node['field_itg_content_publish_date_value']));
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[ INDIA TODAY ]]></title>';
     $xml .= '<description><![CDATA[ INDIA TODAY ]]></description>';
-    $xml .= '<link><![CDATA[ ' . $base_url . ' ]]></link>';
+    $xml .= '<link><![CDATA[ ' . FRONT_URL . ' ]]></link>';
     $xml .= '<pubDate>' . $last_pub_date . '</pubDate>';
     $xml .= '<image>';
     $xml .= '<title><![CDATA[ INDIA TODAY ]]></title>';
     $xml .= '<link><![CDATA[ ' . $last_node_url . ' ]]></link>';
-    $xml .= '<url><![CDATA[ ' . $base_url . ' ]]></url>';
+    $xml .= '<url><![CDATA[ ' . FRONT_URL . ' ]]></url>';
     $xml .= '</image>';
     $xml .= '<language>en</language>';
     foreach ($result as $key => $value) {
@@ -411,7 +411,7 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
       $body = remove_extra_tag_in_body($value["body_value"]);
       $section_name = get_term_name_by_tid($value['field_primary_category_value']);
       $metatags = get_node_metatags_by_nid($value['nid']);
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $keywords = '';
       if ($metatags) {
         $keywords = $metatags['keywords']['value'];

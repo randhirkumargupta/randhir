@@ -113,7 +113,7 @@ function genrate_msn_feed_story_syndication_xml($result = NULL, $category) {
       if (empty($reporter)) {
         $reporter = 'IndiaToday.in';
       }
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
 
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));

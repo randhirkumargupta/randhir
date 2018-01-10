@@ -97,7 +97,7 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
       $modify_date = date("Y-m-d\TH:i:sP", $value['changed']);
       $place = get_content_city($value['nid']);
       $keyword = get_content_tags($value['nid'], TRUE);
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
       $body = itg_remove_tags_from_body($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
@@ -155,7 +155,7 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
       if (count($related_nodes) > 0) {
         $xml .= '<related>';
         foreach ($related_nodes as $value) {
-          $related_node_url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+          $related_node_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
           $xml .= '<item>';
           $xml .= '<id>' . $value["nid"] . '</id>';
           $xml .= '<title><![CDATA[' . $value["title"] . ']]></title>';

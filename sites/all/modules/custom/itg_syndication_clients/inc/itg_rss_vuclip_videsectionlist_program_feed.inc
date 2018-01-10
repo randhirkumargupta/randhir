@@ -85,7 +85,7 @@ function genrate_vuclip_programme_xml($result, $section_name, $section_id) {
   $xml = '<rss xmlns:media="http://search.yahoo.com/mrss" version="2.0">';
   $xml .= '<channel>';
   $xml .= "<title>India Today's Videos Feed</title>";
-  $xml .= '<link>' . $base_url . '</link>';
+  $xml .= '<link>' . FRONT_URL . '</link>';
   $xml .= "<description>India Today's Videos Feed</description>";
 
   if (!empty($result)) {
@@ -190,7 +190,7 @@ function genrate_mauj_programme_xml($result) {
   $xml = '<rss xmlns:media="http://search.yahoo.com/mrss" version="2.0">';
   $xml .= '<channel>';
   $xml .= "<title>India Today's Videos Feed</title>";
-  $xml .= '<link>' . $base_url . '</link>';
+  $xml .= '<link>' . FRONT_URL . '</link>';
   $xml .= "<description>India Today's Videos Feed</description>";
 
   if (!empty($result)) {

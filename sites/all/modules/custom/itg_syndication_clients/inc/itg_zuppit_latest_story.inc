@@ -38,7 +38,7 @@ function itg_zuppit_feed_latest_story() {
   $json_output['code'] = 200;
   $json_output['error'] = NULL;
   $json_output['data']['size'] = count($result);
-  $json_output['data']['nextPage'] = $base_url . '/ucbrowser/story/feed/??pageNumber=' . ($page_number + 1) . '&pagesize=' . $pagesize . '&partner=' . $partner;
+  $json_output['data']['nextPage'] = FRONT_URL . '/ucbrowser/story/feed/??pageNumber=' . ($page_number + 1) . '&pagesize=' . $pagesize . '&partner=' . $partner;
   // For Top key
   $top_stories = get_top_story_for_zupit();
   $json_output['data']['top'] = array();
@@ -48,7 +48,7 @@ function itg_zuppit_feed_latest_story() {
     }
     $pub_date = strtotime($top_story['field_itg_content_publish_date_value']);
     $larg_img = get_image_info_by_fid($top_story['field_story_large_image_fid']);
-    $content_url = $base_url . "/" . drupal_get_path_alias('node/' . $top_story['nid']);
+    $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $top_story['nid']);
     $category_name = get_term_name_by_tid($top_story['field_primary_category_value']);
     $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($top_story['field_story_kicker_text_value']));
     $json_output['data']['top'][] = array(
@@ -73,7 +73,7 @@ function itg_zuppit_feed_latest_story() {
     $tags = get_content_tags($value['nid']);
     $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
 
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
     $body = remove_extra_tag_in_body($value["body_value"]);
     $category_name = get_term_name_by_tid($value['field_primary_category_value']);
     $json_output['data']['rows'][] = array(

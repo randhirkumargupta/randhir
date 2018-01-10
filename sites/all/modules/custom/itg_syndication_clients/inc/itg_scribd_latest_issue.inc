@@ -68,7 +68,7 @@ function genrate_scribd_latest_issue_syndication_xml($result = NULL, $issue_titl
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[' . $issue_title . ']]></title>';
-    $xml .= '<link><![CDATA[' . $base_url . ']]></link>';
+    $xml .= '<link><![CDATA[' . FRONT_URL . ']]></link>';
     foreach ($result as $key => $value) {
       if (is_lock_story($value['nid'])) {
         continue;
@@ -76,7 +76,7 @@ function genrate_scribd_latest_issue_syndication_xml($result = NULL, $issue_titl
       $nid = $value['nid'];
       $publish_date = date("Y-m-d H:i", strtotime($value['field_itg_content_publish_date_value']));
       $author = get_byline_name_by_nid($nid);
-      $url = $base_url . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
