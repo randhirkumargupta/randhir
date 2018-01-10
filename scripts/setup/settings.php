@@ -332,6 +332,7 @@ $databases['default']['default'] = array (
   'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
   //'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
   'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
+  'affected tables backend' => 'includes/database/autoslave/autoslave.affected_tables.memcache.inc',
   'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'") // For MySQL InnoDB, make sure isolation level doesn't interfere with our intentions. Defaults to empty.
 );
 
