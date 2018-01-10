@@ -146,6 +146,7 @@ define('INDEX_PAGE_URL', 'node/2');
 define('ACCORD_URL', 'http://businesstoday.accordhostings.com/TopIndicesCtrl.aspx');
 define('taxonomy_terms_per_page_admin' , 20);
 define('SSO_COOKIE_DOMAIN' , variable_get('sso_cookie_domain'));
+define('BUCKET_FOLDER' , 'indiatoday');
 
 /*if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") { 
     $site_protocol = 'https://';
@@ -229,7 +230,7 @@ function get_email_by_roll($id) {
  */
 function _widget_title($string , $is_for_attribute = TRUE) {
   if($is_for_attribute) {
-    return str_replace(array('\'', '"' , '>' , '<' , '\/', '/'), '', html_entity_decode($string));
+    return str_replace(array('\'', '"' , '>' , '<' , '\/'), '', html_entity_decode($string));
   } else {
     return str_replace(array('>' , '<' , '\/', '/'), '', html_entity_decode($string));
   }
