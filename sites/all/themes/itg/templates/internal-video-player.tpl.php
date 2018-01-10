@@ -73,8 +73,12 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
   }
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
-  ga('create', '<?php echo $player_content["ga_code"]; ?>', 'auto');
- ga('send', 'pageview');
+<?php
+  $arg = arg();
+  if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
+   ga('create', 'UA-20047041-23', 'auto');
+   ga('send', 'pageview');
+<?php } ?>
  playerInstance.on('ready', function () {
    console.log('playerready');
    ns_.StreamingAnalytics.JWPlayer(playerInstance, {
