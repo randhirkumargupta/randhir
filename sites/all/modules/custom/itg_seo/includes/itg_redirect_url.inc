@@ -220,7 +220,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
         $table = 'migrate_map_itgcategory';
       }
   } else if (($arg[0] == 'index.php' && !empty($_GET['option']) && $_GET['option'] == 'com_magazine')) { // Pattern http://indiatoday.intoday.in/index.php?option=com_magazine&opt=section&sectionid=89&Itemid=1&issueid=95
-      drupal_goto(FRONT_URL);
+      drupal_goto(FRONT_URL, array(), 301);
   } else if ((!empty ($arg[0]) && $arg[0] == 'calendar') && !empty($arg[1]) && (!empty($arg[2]) && $arg[2] == 'online.html')) {  // Pattern calendar/16-10-2017/online.html
       $old_content_id = $arg[1];
       $table = 'none';
@@ -239,11 +239,11 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $rss_url = 'topic';
   } else if ((!empty($arg[0]) && ($arg[0] == 'feedback.jsp')) && (!empty($_GET['refUrl']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
       $refurl = $_GET['refUrl'];
-      drupal_goto($refurl);
+      drupal_goto($refurl, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter.jsp')) && (!empty($_GET['matchid']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
       $matchid = $_GET['matchid'];
       $newmatchurl = $base_url.'/scorecard/matchcenter/'.$matchid;
-      drupal_goto($newmatchurl);
+      drupal_goto($newmatchurl, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'story')) ) {  // lite/story
       $storyarg = $arg[4];
       $storyarg_exp = explode('.html', $storyarg);
@@ -253,7 +253,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $redirecturl = get_redirect_url($newcontentid);
       $ampstoryurl = '/amp/'.$redirecturl;
       $newmatchurl = $base_url.$ampstoryurl;
-      drupal_goto($newmatchurl);
+      drupal_goto($newmatchurl, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'gallery')) ) {  // lite/gallery
       $storyarg = $arg[4];
       $storyarg_exp = explode('.html', $storyarg);
@@ -263,7 +263,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $redirecturl = get_redirect_url($newcontentid);
       $ampstoryurl = '/amp/'.$redirecturl;
       $newmatchurl = $base_url.$ampstoryurl;
-      drupal_goto($newmatchurl);
+      drupal_goto($newmatchurl, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'live-blogs')) ) {  // lite/gallery
       $storyarg = $arg[3];
       $storyarg_exp = explode('.html', $storyarg);
@@ -273,7 +273,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $redirecturl = get_redirect_url($newcontentid);
       $ampstoryurl = '/amp/'.$redirecturl;
       $newmatchurl = $base_url.$ampstoryurl;
-      drupal_goto($newmatchurl);
+      drupal_goto($newmatchurl, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'calendar')) && !empty($arg[1]) && (is_numeric($arg[1])) && !empty ($arg[2]) && (is_numeric($arg[2]))) {  // Pattern embed/@#trfg
       $magazine_issue_id = $arg[1];
       $mag_issue_id = get_new_seccat_by_mig_id($magazine_issue_id,'migrate_map_itgissue');
@@ -282,21 +282,31 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $query->condition('n.nid', $mag_issue_id);
       $magazine_title = $query->execute()->fetchField();
       $url = 'magazine/'.format_date(strtotime($magazine_title),'custom', 'd-m-Y');
-      drupal_goto($url);
+      drupal_goto($url, array(), 301);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'calendar')) && ($arg[1] == 0) && (is_numeric($arg[1])) && !empty ($arg[2]) && (is_numeric($arg[2]))) {
+      $year = $arg[2];
+      $current_time = date('Y-m-d', strtotime(date($year . '-01-01')));
+      $output = get_first_issue_by_year($current_time);
+      $current_issue = explode(' 00:', $output);
+      $url = 'magazine/'.format_date(strtotime($current_issue[0]),'custom', 'd-m-Y');
+      drupal_goto($url, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'embed')) && !empty ($arg[1])) {  // Pattern embed/@#trfg
       $videoembed = $arg[1];
       $newmatchurl = getNewVideoEmbedUrl($videoembed);
       if ($newmatchurl) {
-        drupal_goto($newmatchurl);
+        drupal_goto($newmatchurl, array(), 301);
       }
   } else if ((!empty($arg[0]) && ($arg[0] == 'gallery' || $arg[0] == 'section')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
       $urlarg = $arg[2];
       if ($urlarg > 1) {
         $newmatchurl = $base_url.'/'.$arg[0].'/'.$arg[1].'/1/'.$arg[3];
-        drupal_goto($newmatchurl);
+        drupal_goto($newmatchurl, array(), 301);
       } 
-  }
-  else if ($arg[0] == 'node' && empty($arg[1])) {
+  } else if ((!empty($arg[0]) && ($arg[0] == 'people')) && !empty ($arg[1]) && !empty ($arg[2])) {  // Pattern embed/@#trfg
+      $people = $arg[1];
+      $newmatchurl = $base_url.'/topic/'.$people;
+      drupal_goto($newmatchurl, array(), 301);
+  } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
   // Code for url redirection:
@@ -324,7 +334,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       }
       //$alias = get_redirect_url($content_id);
       if (isset($alias)) {
-        drupal_goto($alias, $paging);
+        drupal_goto($alias, $paging, 301);
       }
       drupal_not_found();
       drupal_exit();
@@ -423,4 +433,22 @@ function getNewStoryUrl($storyarg) {
     $newmatchurl = $base_url.'/'.$redirecturl;
   }
   return $newmatchurl;
+}
+
+/**
+ * function for get first issue from year
+ * @param int $year
+ * @return string $output
+ */
+function get_first_issue_by_year($year){
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_field_issue_title', 'ft', 'ft.entity_id = n.nid');
+  $query->fields('ft', array('field_issue_title_value'));
+  $query->condition('ft.field_issue_title_value', $year, '>=');
+  $query->orderBy('n.title', 'ASC');
+  $query->condition('n.type', 'issue', '=');
+  $query->condition('n.status', 1, '=');
+  $query->range(0, 1);
+  $output = $query->execute()->fetchField();
+  return $output;
 }
