@@ -58,7 +58,7 @@ function author_report_tvtn($start_date) {
   $data['auhtorwise_data']['year'] = "$year_total";
   $data['auhtorwise_data']['site_id'] = "$site_id";
   //auhtor_data
-  $author_list = getAuthorList_Report();
+  $author_list = getAuthorList_Report(1511548200, 1514177943);
   // start loop on author list array
   $author_loop_cont = 0;
   $auhtor_data = array();
@@ -67,10 +67,10 @@ function author_report_tvtn($start_date) {
     $name = $value['name'];
     $mail = $value['mail'];
 
-    $today_total_uid = getContentCountByDateAndByUid($today_unix, $user_id);
-    $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $user_id);
-    $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $user_id);
-    $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $user_id);
+    $today_total_uid = getContentCountByDateAndByUid(1511548200, 1514177943, $user_id);
+    $yesterday_total_uid = getContentCountByDateAndByUid(1511548200, 1514177943, $user_id);
+    $month_total_uid = getContentCountByDateAndByUid(1511548200, 1514177943, $user_id);
+    $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $user_id);
 
     $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
     $auhtor_data[$author_loop_cont]['author_email'] = "$mail";
