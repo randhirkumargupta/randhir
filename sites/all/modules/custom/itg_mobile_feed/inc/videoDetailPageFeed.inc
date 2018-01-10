@@ -97,10 +97,21 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
                 $bitrate_url = $data_video['bitrate_url'];
                 $mp4_url = $data_video['file_url'];
                 $output .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
-            } elseif (!empty($videotag['dailymotion'])) {
-                $output .= "<videoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_hq_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_ld_url'] . "</part></videoparts_3gp>";
             }
-            $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[" . $metatags_title . "]]></metakeyword><metadescription><![CDATA[" . $metatags_description . "]]></metadescription><weburl>" . $weburl . "</weburl>";
+            elseif (!empty($videotag['dailymotion'])) {
+                $videoids = get_video_in_fieldcollection_by_nid($nid);
+                foreach ($videoids as $keys => $video_value) {
+                  if ($video_value->video_id != '') {
+                    $video_id = $video_value->video_id;
+                  }
+                  elseif ($video_value->solr_video_id != '') {
+                    $video_id = $video_value->solr_video_id;
+                  }
+                }
+                $inter_video_details = internal_video_bitrate_data($video_id);
+                $output .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
+            }
+      $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword><![CDATA[" . $metatags_title . "]]></metakeyword><metadescription><![CDATA[" . $metatags_description . "]]></metadescription><weburl>" . $weburl . "</weburl>";
             //get body img tag
             $imgtag = getImgTagDetail($node);
             if ($imgtag) {
@@ -407,4 +418,63 @@ function mcu8_tags($nid) {
         }
     }
     return $tags;
+}
+
+/**
+ * Get the internal uploaded video on the Site
+ */
+function internal_video_bitrate_data($video_id) {
+  $data_video_info = xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
+  if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
+    $data_from_solr = xml_itg_videogallery_getsolr_data_for_internal_video($data_video_info[0]->video_id);
+    $video_data = $data_from_solr[0];
+    $video_all_data = json_decode($video_data, TRUE);
+    $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
+  }
+  return $player_content;
+}
+
+/**
+ * Implements itg_videogallery_get_all_video_info_by_video_id
+ * @param string $video_id
+ * @param array $result
+ */
+function xml_itg_videogallery_get_all_video_info_by_video_id($video_id) {
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd');
+  $query->condition('video_id', $video_id, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement itg_videogallery_getsolr_data_for_internal_video
+ * @param string $video_id
+ */
+function xml_itg_videogallery_getsolr_data_for_internal_video($video_id) {
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    $all_video_ids = array();
+    $hashvalue = implode(' OR ', array_keys($hash));
+    $str = 'hash:(' . $hashvalue . ')';
+    $query = apachesolr_drupal_query("custom");
+    $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'sm_field_video_id'); // Only search in title
+//The bundle which you want to search
+    $query->replaceParam("fq", '(' . $str . ')');
+    $query->addFilter("bundle", "itg_solr_video");
+    $query->addFilter("sm_field_video_id", $video_id);
+    $query->setSolrsort('sort_label', 'desc');
+    $resp_search = $query->search();
+    $all_data = $resp_search->response->docs;
+    if (!empty($all_data)) {
+      return $all_data[0]->sm_field_all_xml_content;
+    }
+  }
 }
