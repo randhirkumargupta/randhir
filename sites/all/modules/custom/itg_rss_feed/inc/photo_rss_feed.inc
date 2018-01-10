@@ -17,7 +17,7 @@ function photo_rss_feed() {
   $section_url = NULL;
   if (!empty($section_id)) {
     $term_name = taxonomy_term_load($section_id)->name;
-    $section_url = $base_url . "/" . drupal_get_path_alias('taxonomy/term/' . $section_id);
+    $section_url = FRONT_URL . "/" . drupal_get_path_alias('taxonomy/term/' . $section_id);
   }
   $redis_key = "itgd_rss_videoRSSFeed_" . $section_id;
   //$result_get = getRedis($redis_key);
@@ -83,7 +83,7 @@ function get_photo_item_rss($section_id, $term_name, $section_url) {
   $query->fields('eli', array('field_story_extra_large_image_fid'));
 
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'photogallery', '=');
   if (!empty($section_id)) {
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $tid_list, 'IN');
@@ -95,6 +95,9 @@ function get_photo_item_rss($section_id, $term_name, $section_url) {
   $counter = 0;
   $copyright_yr = date("Y");
   foreach ($result as $reskey => $resvalue) {
+    if (is_lock_story_rss_feed($resvalue['nid'])) {
+      continue;
+    }
     $counter++;
     if ($counter == 5) {
       $output .= '<item>';
@@ -106,7 +109,7 @@ function get_photo_item_rss($section_id, $term_name, $section_url) {
     $title = $resvalue['title'];
     $nid = $resvalue['nid'];
     $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
     $image_data = get_thumbnails_by_fid($field_story_extra_large_image_fid);
     $img_url = $image_data->imageurl;
 

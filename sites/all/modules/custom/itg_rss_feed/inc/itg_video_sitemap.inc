@@ -55,13 +55,16 @@ function get_video_sitemap_item() {
   $query->fields('st', array('field_story_source_type_value'));
   $query->fields('eli', array('field_story_extra_large_image_fid'));
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'videogallery', '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range($range_min, $range_max);
 
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   $output = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">';
   foreach ($result as $reskey => $resvalue) {
+    if (is_lock_story_rss_feed($resvalue['nid'])) {
+      continue;
+    }
     $videotag = _itg_rss_video_detail_formats($resvalue['nid'], $resvalue['field_story_source_type_value']);
     $duration = 0;
     $video_dur = explode(':', $videotag->video_duration);
@@ -77,7 +80,7 @@ function get_video_sitemap_item() {
     $nid = $resvalue['nid'];
     $body_value = $resvalue['field_story_short_headline_value'];
     $field_story_extra_large_image_fid = $resvalue['field_story_extra_large_image_fid'];
-    $url = $base_url . "/" . drupal_get_path_alias('node/' . $nid);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
     $image_data = get_thumbnails_by_fid($field_story_extra_large_image_fid);
     $img_url = $image_data->imageurl;
     $created = $resvalue['created'];
