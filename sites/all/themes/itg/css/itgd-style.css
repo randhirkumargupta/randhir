@@ -648,6 +648,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area-wrapper{width:100%;}
 .app-area .top-area .right-area{width:71%;}
 .app-area .bottom-area ul li{width:226px;}
+footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 99999;border-radius: 0 40px 40px 0;}
 }
 @media only screen and (max-width: 767px) {
 .app-area-wrapper{width:94%; padding:0 3%}
@@ -662,6 +663,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area .top-area .right-area ul li:last-child a{ display:block;}
 #block-itg-layout-manager-header-block{position: fixed;width: 100%; top: 0; z-index:99995;}
 header#header{padding-top: 60px;}
+footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 99999;border-radius: 0 40px 40px 0;}
 }
 .pti-news-claim { background: #FBF9FA; border: 1px solid #EFEFEF; color: #737373; font-size: 14px; margin-top: 20px; padding: 10px; line-height: 18px; margin-bottom: 20px; }
 .view-display-id-so_sorry_page {margin: 0 -15px 15px;position: relative;}
