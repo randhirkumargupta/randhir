@@ -660,7 +660,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area .top-area .right-area ul li:last-child{width: 134%;background: #eee; margin: 0 -59px;display: block;text-align: center; padding:10px 0;}
 .app-area .top-area .right-area ul li:last-child span{ display:none;}
 .app-area .top-area .right-area ul li:last-child a{ display:block;}
-#block-itg-layout-manager-header-block{position: fixed;width: 100%; top: 0;}
+#block-itg-layout-manager-header-block{position: fixed;width: 100%; top: 0; z-index:99995;}
 header#header{padding-top: 60px;}
 }
 .pti-news-claim { background: #FBF9FA; border: 1px solid #EFEFEF; color: #737373; font-size: 14px; margin-top: 20px; padding: 10px; line-height: 18px; margin-bottom: 20px; }

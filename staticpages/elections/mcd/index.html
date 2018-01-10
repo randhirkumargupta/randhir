@@ -33,7 +33,7 @@ function zd_get_placements(){
 <link href="/elections/mcd/css/it-responsive-15-New1.css" type="text/css" rel="stylesheet"/>
 <link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.5/resources/elections/assembly-elections/2017/images/dot-in-fav-icon.ico'/><link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css'><link href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.5/resources/elections/mcd-elections/2017/assembly-election-2016.css" type="text/css" rel="stylesheet"/>
 <link href="/elections/mcd/css/navigation-2016.css" rel="stylesheet"/>
-<link rel="stylesheet" href=/elections/mcd/css/election2017.css" type="text/css"/>
+<link rel="stylesheet" href="/elections/mcd/css/election2017.css" type="text/css"/>
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"><script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.5/resources/js/jquery1.8.js" type="text/javascript"></script><script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.5/resources/elections/mcd-elections/2017/election_2017.js"></script><style>.storysection{ margin-top:15px;}.election-bgbox{display:block !important;}.topzone1 a{color:#000 !important;}
     .posFxd{position:fixed; left:0; bottom:0;z-index:999999;}
     .posFxd > div > div > div > div > iframe{width:313px !important; height:190px !important;}

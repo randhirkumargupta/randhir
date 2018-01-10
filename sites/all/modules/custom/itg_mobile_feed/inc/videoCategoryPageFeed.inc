@@ -151,7 +151,7 @@ function generateVideoCategoryPage($tid) {
                     // create date formating
                     $create_date = date("Y-m-d", $created);
                     $create_datetime = date(DATE_ATOM, $created);
-                    $output .= "<item><title>" . $title . "</title><mediumimage><![CDATA[" . $file_large_img_url . "]]></mediumimage><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><syndications>" . $is_syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
+                    $output .= "<item><title>" . $title . "</title><mediumimage>".xml_cdata_filter($file_large_img_url)."</mediumimage><thumbimage>".xml_cdata_filter($file_small_img_url)."</thumbimage><url>video" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><syndications>" . $is_syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
                     // generate video detail page
                     $fl = generateVideoDetailPageFeed($nid);
                 }
