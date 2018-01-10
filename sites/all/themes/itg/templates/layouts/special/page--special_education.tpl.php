@@ -479,7 +479,7 @@ if ($theme != 'itgadmin') {
                       <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
                           <div class="widget-help-text"><?php print t('Non Draggable'); ?> ( <strong><?php print t('Ad widget'); ?></strong> )</div>
                           <div class="itg-widget-parent">
-                              <div class="itg-widget">
+                              <div class="itg-widget shadow-on">
                                   <div class="ad-widget">
                                       <div class="sidebar-ad">
                                           <?php

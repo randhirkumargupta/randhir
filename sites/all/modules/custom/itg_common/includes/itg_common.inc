@@ -595,9 +595,9 @@ function itg_get_fb_share($id , $type) {
 /**
  * itg_get_multi_byline_details
  */
-function itg_get_multi_byline_details($nid , $status) {
+function itg_get_multi_byline_details($nid , $status = NULL) {
   $options = '';
-  if ($nid) {
+  if (!empty($nid) && !empty($status)) {
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_extra_large_image', 're', 'n.nid = re.entity_id');
     $query->leftJoin('field_data_field_reporter_twitter_handle', 'frq', 'n.nid = frq.entity_id');
