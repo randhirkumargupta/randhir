@@ -1091,6 +1091,7 @@ function itg_akamai_init() {
           }
         }
         else {
+          pr($parm);
           $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);
           pr($ttl_for_custom_url);
           if (isset($ttl_for_custom_url)) {
