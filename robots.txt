@@ -14,7 +14,6 @@
 # http://www.robotstxt.org/robotstxt.html
 
 User-agent: *
-Disallow: /
 
 Sitemap: https://www.indiatoday.in/sitemapindex.xml
 
