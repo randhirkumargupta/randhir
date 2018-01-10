@@ -229,7 +229,7 @@ function get_email_by_roll($id) {
  */
 function _widget_title($string , $is_for_attribute = TRUE) {
   if($is_for_attribute) {
-    return str_replace(array('\'', '"' , '>' , '<' , '\/', '/'), '', html_entity_decode($string));
+    return str_replace(array('\'', '"' , '>' , '<' , '\/'), '', html_entity_decode($string));
   } else {
     return str_replace(array('>' , '<' , '\/', '/'), '', html_entity_decode($string));
   }
