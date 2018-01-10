@@ -95,9 +95,6 @@ function itg_preprocess_node(&$variables) {
 
   // code start for Akamai Puposes (Self refresh content)
   if ($variables['type'] == 'story') {
-	$body_text = $variables['content'];
-    $body_text = str_replace('http://indiatoday.intoday.in/embed/', 'https://www.indiatoday.in/embed/', $body_text);
-    $variables['content'] = $body_text;
     drupal_add_js(drupal_get_path('theme', 'itg') . '/js/story_altr.js');
     $variables['story_zedo_ad'] = "<div id='z61b6b10d-8ff4-41e3-b8b0-c46bf2be1e7e' style='display:none' ></div>";
   }
