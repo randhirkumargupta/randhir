@@ -52,7 +52,8 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      <?php if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { ?>
+      <?php //if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { 
+      if($arg[0] != 'video' && $arg[2] != 'embed') { ?>
        ga('create', 'UA-795349-17', 'auto');
     <?php } ?>
       <?php
@@ -68,7 +69,8 @@
       <?php if(!empty($bylines)) :?>
       ga('set', 'dimension1', '<?php echo $bylines ?>');
       <?php endif; ?>
-        <?php if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { ?>
+        <?php //if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { 
+        if(($arg[0] != 'video' && $arg[2] != 'embed')) { ?>
       ga('send', 'pageview');
       <?php } ?>
     </script>
