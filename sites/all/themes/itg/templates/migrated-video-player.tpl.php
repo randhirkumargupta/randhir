@@ -73,8 +73,12 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $e
 
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
-   ga('create', '<?php echo $data_video["ga_code"]; ?>', 'auto');
-   ga('send', 'pageview');
+  <?php
+    $arg = arg();
+    if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
+      ga('create', 'UA-20047041-23', 'auto');
+      ga('send', 'pageview');
+   <?php } ?>
    playerInstance.on('ready', function () {
    console.log('playerready');
    ns_.StreamingAnalytics.JWPlayer(playerInstance, {
