@@ -36,8 +36,13 @@ function rootCategoryContentPageFeed() {
             $catFile = "";
             // cat xml feed file name
             $catFile = drupal_strtolower(str_replace(" ", "-", $term_name));
-            $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
-            $catFile = $catFile . ".xml";
+            $term_name = drupal_strtolower(str_replace("&", "and", $term_name));            
+            if($cattid == 1206533){
+                $catFile = $catFile . "_s.xml";
+            }
+            else{
+                $catFile = $catFile . ".xml";
+            }
             // generate cat xml file string
             if ($storytag['data'] != "") {
                 $output = "";
