@@ -302,6 +302,28 @@ $databases['default']['slave'][] = array (
   'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
 );
 
+$databases['default']['slave'][] = array (
+  'database' => 'indiatoday',
+  'username' => 'prod_it_read',
+  'password' => 'pr0d_!t@98',
+  'host' => 'itgd-drupal-db-it-prod-replica3.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'port' => '',
+  'driver' => 'mysql',
+  'prefix' => '',
+  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
+);
+
+$databases['default']['slave'][] = array (
+  'database' => 'indiatoday',
+  'username' => 'prod_it_read',
+  'password' => 'pr0d_!t@98',
+  'host' => 'itgd-drupal-db-it-prod-replica4.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'port' => '',
+  'driver' => 'mysql',
+  'prefix' => '',
+  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
+);
+
 $databases['default']['default'] = array (
   'driver' => 'autoslave',
   'master' => array('master', 'slave'),
