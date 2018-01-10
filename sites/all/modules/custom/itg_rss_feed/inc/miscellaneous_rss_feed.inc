@@ -51,6 +51,8 @@ function get_miscellaneous_item_rss() {
   $query = db_select('node', 'n');
   $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
+  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
+  $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('ti.tid', $miscellaneous_section, '=');
