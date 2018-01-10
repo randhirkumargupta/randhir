@@ -399,7 +399,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
           $last_file_uri = itg_sitemap_chunk_get_xml_file_name($first_file_number, $feed_dir_for_delete, $CT, $year);
           // Delete last file we will create it again.
           $file_delete = file_unmanaged_delete($last_file_uri);
-          $aws_file_path = 's3fs-public/' . explode("public://", $last_file_uri)[1];
+          $aws_file_path = BUCKET_FOLDER.'/' . explode("public://", $last_file_uri)[1];
           $postition = strpos($aws_file_path, date('Y'));
           if ($postition) {
             $isRecreate = TRUE;
@@ -412,7 +412,7 @@ function itg_sitemap_chunks_create_xml_sitemap_for_content_type() {
         do {
           $file_uri = itg_sitemap_chunk_get_xml_file_name($file_num, $feed_dir, $CT, $year);
           // Check If xml already exist then skip the loop.
-          $aws_file_path = 's3fs-public/' . explode("public://", $file_uri)[1];
+          $aws_file_path = BUCKET_FOLDER.'/' . explode("public://", $file_uri)[1];
           if (empty(file_get_contents(file_create_url($file_uri))) || $isRecreate) {
             // Query to get node by range of limit.
             $query = db_select('node', 'n');
@@ -481,7 +481,7 @@ function __get_old_xml_of_content_type($content_type) {
 
 function __get_s3_path_from_strem_wrapper_uri($file_uri) {
     $file_name_chunk = explode("public://", $file_uri);
-    return 's3fs-public/' . $file_name_chunk[1];
+    return BUCKET_FOLDER.'/' . $file_name_chunk[1];
 }
 
 /**
