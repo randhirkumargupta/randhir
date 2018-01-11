@@ -233,9 +233,9 @@ $databases = array (
       'username' => 'itgd_it_write',
       'password' => '!tgd@!t@re@d@102',
       'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-      'port' => '',
+      'port' => '3306',
       'driver' => 'mysql',
-      'prefix' => '3306',
+      'prefix' => '',
     ),
   ),
 );
