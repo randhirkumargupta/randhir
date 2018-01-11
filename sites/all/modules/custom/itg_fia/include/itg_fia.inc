@@ -30,7 +30,7 @@ function itg_fia_data() {
  */
 function itg_fia_xml_node_feed($query) {
   global $base_url;
-  $xml_base = $base_url . '/' . current_path();
+  $xml_base = FRONT_URL . '/' . current_path();
   $fia_ga_data = variable_get('ga_code');
   $fia_ga = isset($fia_ga_data) ? $fia_ga_data : " ";
   $nodes = node_load_multiple($query);
@@ -319,7 +319,7 @@ function itg_fia_xml_node_feed($query) {
   global $base_url;
   $channel_defaults = array(
       'title' => variable_get('site_name', 'Drupal'),
-      'link' => $base_url . '/' . current_path(),
+      'link' => FRONT_URL . '/' . current_path(),
   );
 
   /*$output = "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\" ?>";
