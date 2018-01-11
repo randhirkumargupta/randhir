@@ -72,9 +72,9 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
       $reporter_node = "";
       $reporter_node = itg_common_get_node_title($byline_id);
-      if($reporter_node == NULL){
-         $reporter_node = "";
-      }
+      if ($reporter_node == NULL) {
+                $reporter_node = "";
+            }
       $related_node = relatedContentNodeType($nid, "story");
       $city = getCityByNid($nid);
       $alias = drupal_get_path_alias('node/' . $nid . '');
