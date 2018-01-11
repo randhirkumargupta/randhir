@@ -130,8 +130,6 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-sports.xml' => 1207681,
     'msn/mailtoday/story-states.xml' => 1207682,
     'msn/mailtoday/story-entertainment.xml' => 1207680,
-    'xml_it/stories/fromthemagazine.xml' => 1207044,
-    'xml_it/stories/movies.xml' => 1206533,
     'msn/mailtoday/story-cricket.xml' => 1208384
   );
   return $msn_story;

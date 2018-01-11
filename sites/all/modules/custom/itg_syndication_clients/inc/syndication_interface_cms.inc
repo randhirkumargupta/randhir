@@ -61,7 +61,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
     $xml .= '<magazine>India Today</magazine>';
     $xml .= '<frequency>Weekly</frequency>';
     foreach ($result as $key => $value) {
-      $primary_cat = get_term_name_by_tid($result['field_primary_category_value']);
+      $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
       $byline = get_byline_name_by_nid($value['nid']);
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $publish_date = date("F d, Y", strtotime($issue_title));
@@ -102,7 +102,7 @@ function genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result
 
 
     foreach ($result as $key => $value) {
-      $primary_cat = get_term_name_by_tid($result['field_primary_category_value']);
+      $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
       $byline = get_byline_name_by_nid($value['nid']);
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $publish_date = date("F d, Y", strtotime($issue_title));
@@ -151,7 +151,7 @@ function genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_
     $xml .= '<edition>' . $publish_date . '</edition>';
     $xml .= '<items>';
     foreach ($result as $key => $value) {
-      $primary_cat = get_term_name_by_tid($result['field_primary_category_value']);
+      $primary_cat = get_term_name_by_tid($value['field_primary_category_value']);
       $byline = get_byline_name_by_nid($value['nid']);
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $body = remove_extra_tag_in_body($value["body_value"]);
