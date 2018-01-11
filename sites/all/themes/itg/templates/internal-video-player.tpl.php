@@ -14,7 +14,6 @@ $pub_date = get_content_publish_date($nid);
 if (!empty($pub_date)) {
   $pub_date = date('Y-m-d', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
 }
-
 ?>
 <?php
 $width = 622;
@@ -34,6 +33,9 @@ if ($used_on == 'embed') {
   $autostart = "FALSE";
 }
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on, $external_side);
+if(!empty($player_image)) {
+  $player_content['player_image'] = $player_image;
+}
 ?>
 <div id="videoplayer"> </div>
 <script type="text/javascript">
@@ -68,7 +70,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
                       schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
               idstring: "<?php echo stripslashes($title); ?>",
-              label: ""
+              label: "<?php echo $node_id; ?>",
           }
       });
   }

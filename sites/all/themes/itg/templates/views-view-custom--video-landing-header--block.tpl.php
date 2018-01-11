@@ -12,6 +12,9 @@ $short_url = $actual_link; //shorten_url($actual_link, 'goo.gl');
 $fb_title = addslashes($video_node->title);
 $share_desc = '';
 $image = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+if(isset($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) && !empty($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+$player_image = $video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+}
 $videoids = "";
 if (function_exists('get_video_in_fieldcollection_by_nid')) {
   $videoids = get_video_in_fieldcollection_by_nid($nid);
@@ -135,7 +138,7 @@ $uri = base64_encode($actual_link);
                                       <div class=" video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
-                                           print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'video', 'title' => $fb_title));
+                                           print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'video', 'title' => $fb_title , 'player_image'=>$player_image , 'node_id'=>$nid));
                                           }
                                           ?>
                                       </div>
