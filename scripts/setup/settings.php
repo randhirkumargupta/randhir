@@ -224,23 +224,6 @@
 // setting for UAT
 //#####################################################################################
 
-/*$databases = array (
-  'default' => 
-  array (
-    'default' => 
-    array (
-      'database' => 'indiatoday_migrate',
-      'username' => 'itgd_it_write',
-      'password' => '!tgd@!t@re@d@102',
-      'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-      'port' => '3306',
-      'driver' => 'mysql',
-      'prefix' => '',
-    ),
-  ),
-);*/
-
-
 // one slave setting
 /*$databases['default']['default'] = array(
   'driver' => 'autoslave',
