@@ -15,8 +15,8 @@ ini_set('session.cookie_lifetime', 2000000);
 #$conf['cache_default_class'] = 'DrupalMongoDBCache';
 
 # -- Don't touch SQL if in Cache
-#$conf['page_cache_without_database'] = TRUE;
-#$conf['page_cache_invoke_hooks'] = TRUE;
+$conf['page_cache_without_database'] = TRUE;
+$conf['page_cache_invoke_hooks'] = TRUE;
 
 # Session Caching
 // $conf['session_inc'] = 'sites/all/modules/contrib/mongodb/mongodb_session/mongodb_session.inc';
