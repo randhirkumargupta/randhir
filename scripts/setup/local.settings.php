@@ -50,6 +50,7 @@ $conf = array(
     'cache_class_cache_form' => 'default',
     'cache_field' => 'default',
     'cache_bootstrap' => 'default',
+    'cache_block' => 'default',
   ),
 );
 
