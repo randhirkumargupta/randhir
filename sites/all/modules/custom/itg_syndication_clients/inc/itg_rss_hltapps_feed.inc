@@ -236,6 +236,7 @@ function genrate_hltapps_stories_detail_xml($value, $category, $xml_story_file, 
   $byline = get_byline_name_by_nid($value['nid']);
   $place = get_content_city($value['nid']);
   $body = remove_extra_tag_in_body($value["body_value"]);
+  $body = itg_remove_extra_custom_tags($body);
   $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
   $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
   $courtesy = $value['field_story_courtesy_value'];
