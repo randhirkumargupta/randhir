@@ -27,7 +27,7 @@ function rootCategoryContentPageFeed() {
         $node_count = customNodeCount('story', $value);
         $term_status = itg_category_manager_term_state(trim($value), CATEGORY_MANAGMENT);
         if ($node_count > 0 && $term_status == 1) {
-            p(arg());
+            
             $cattid = $value;
             $term = taxonomy_term_load($value);
             $term_name = $term->name;
@@ -122,8 +122,9 @@ function generateLeftMainCategoryPage($tid, $term_name) {
             $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
             $feed_date_range = date(strtotime($feed_date));
             $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
-            echo $query; die();
+            
             $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+            echo $query; p($result);
             if (count($result) > 0) {
                 foreach ($result as $reskey => $resvalue) {
                     $listcount++;
