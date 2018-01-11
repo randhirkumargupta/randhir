@@ -4,14 +4,18 @@
  * Function which is used to insert data in helper table for nid.
  * @param int $nid
  */
-function __itg_widget_helper_data_insert($nid) {
-  itg_watchdog("request", $_REQUEST['op']);
+function __itg_widget_helper_data_insert($nid, $node_data = null) {
+  //itg_watchdog("request", $_REQUEST['op']);
    // if ($nid && $_REQUEST['op'] !='Apply' && $_REQUEST['op'] !='Save') {
         __itg_widget_helper_data_delete($nid);
-        $node_load_data = node_load($nid , null , TRUE);
+        if (empty($node_data)) {
+          $node_load_data = node_load($nid , null , TRUE);
+        } else {
+            $node_load_data = $node_data;
+        }
         $node_load_data->status = itg_common_get_node_status_from_tbl($nid);
-        itg_watchdog("helper_insert" , time());
-        itg_watchdog("helper_insert_status" , array($node_load_data->status , itg_common_get_node_status_from_tbl($nid)));
+        //itg_watchdog("helper_insert" , time());
+        //itg_watchdog("helper_insert_status" , array($node_load_data->status , itg_common_get_node_status_from_tbl($nid)));
         try {
             db_insert('itg_widget_helper')
               ->fields(array(
