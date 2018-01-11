@@ -22,11 +22,8 @@ global $base_url;
       <h3><?php print t('Check out Latest Headlines'); ?></h3>
       <ul class="latest-headlines-list">
           <?php 
-            $latest_headlines = itg_seo_latest_headlines();
-            foreach ($latest_headlines as $key => $val) {
-          ?>
-          <a href="<?php print url('node/'. $key); ?>" target="_blank"><li><?php print_r($val); ?></li></a>
-          <?php } ?>
+            print itg_seo_latest_headlines();
+            ?>
       </ul>
     </div>
   </div>
