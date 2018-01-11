@@ -100,7 +100,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       else {
         $output .= emptygetImgTag();
       }
-        echo $output."andy";die();
+        
       //web url tag
       $output .= "<weburl><![CDATA[" . $weburl . "]]></weburl>";
       if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
@@ -116,6 +116,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       else {
         $output .= emptygetCommentXmlTag();
       }
+      echo $output."andys";die();
       //call function getMobileFeedXmlFooter
       $output .= "</item>" . getMobileFeedXmlFooter();
       $result_set = setRedis($redis_key, $output, $ttl);
