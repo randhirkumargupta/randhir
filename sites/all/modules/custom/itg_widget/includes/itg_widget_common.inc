@@ -3000,7 +3000,7 @@ function get_max_weight_for_special($type) {
  * {@inheritdoc}
  */
 function itg_widget_node_update($node) {
-    itg_watchdog("status_test", array($node->nid, $node->status, $node->revision, $node->op));
+    //itg_watchdog("status_test", array($node->nid, $node->status, $node->revision, $node->op));
     if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic')) {
         $arg = arg();
         if (itg_workflow_stop_node_update_batch_for_widgets()) {
@@ -3008,9 +3008,9 @@ function itg_widget_node_update($node) {
         }
 
         if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) &&!empty($node->op)) {
-            __itg_widget_helper_data_insert($node->nid);
+            __itg_widget_helper_data_insert($node->nid, $node);
             if($node->original->status == 0 && $node->status == 1) {
-            watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
+            //watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
 
