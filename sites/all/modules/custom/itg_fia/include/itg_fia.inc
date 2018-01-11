@@ -280,28 +280,28 @@ function itg_fia_xml_node_feed($query) {
       $node_body = str_replace("[ITG:TECH-PHOTO-GALLERY]", "", $node_body);
       //$node_body = str_replace("[ITG:LISTICLES]", "", $node_body);
       //Code for the listicle token
-		if (strpos($node_body, '[ITG:LISTICLES]')) {
-		  $listicle_output = '';
-		  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-		  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
-		   $listicle_output .= '<span>' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</span>';
-		  }
-		  $buzz_output.= '';
-		  $num = 1;
-		  $listicle_output.= '<ul>';
-		  foreach ($node->field_story_listicle['und'] as $buzz_item) {
-			$listicletype = '';			
-			$field_collection_id = $buzz_item['value'];
-			$entity = entity_load('field_collection_item', array($field_collection_id));
-			$type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
-			$description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];			
-			$listicle_output.= '<li>' . $listicletype . $description . '</li>';
-			$num++;
-		  }
-		  $listicle_output.= '</ul>';
-		  $node_body = str_replace('[ITG:LISTICLES]', $listicle_output, $node_body);		  
-		 }
-		}
+      if (strpos($node_body, '[ITG:LISTICLES]')) {
+        $listicle_output = '';
+        if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+          if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+            $listicle_output .= '<span>' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</span>';
+          }
+          $buzz_output.= '';
+          $num = 1;
+          $listicle_output.= '<ul>';
+          foreach ($node->field_story_listicle['und'] as $buzz_item) {
+            $listicletype = '';
+            $field_collection_id = $buzz_item['value'];
+            $entity = entity_load('field_collection_item', array($field_collection_id));
+            $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
+            $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
+            $listicle_output.= '<li>' . $listicletype . $description . '</li>';
+            $num++;
+          }
+          $listicle_output.= '</ul>';
+          $node_body = str_replace('[ITG:LISTICLES]', $listicle_output, $node_body);
+        }
+      }
       $node_body = str_replace("100%", "300", $node_body);
       $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
       $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
