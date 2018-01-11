@@ -80,7 +80,7 @@ var zflag_nid="821"; var zflag_cid="2044/1137"; var zflag_sid="2"; var zflag_wid
 <title>IPL - Indian Premier League 2015 | IPL Cricket news, live scores, fixtures, features and statistics</title>
 <meta name="description" content="Indian Premier League coverage by India Today. Get latest IPL 8 news, fixtures, photos, squads, competitions, results, tour stats and history from the 2015 Indian Premier League." />
 <meta name="keywords" content="IPL 2015,IPL 8, ipl players, Indian Premier League 2015,Live scores, indian premier league, live ipl" />
-<link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.indiatoday.in/category/ipl-2015/1/984.html" />
+
 <script type="text/javascript">
 function canonicalUrlRedirection() {
 

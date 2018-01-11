@@ -14,6 +14,7 @@ $pub_date = get_content_publish_date($nid);
 if (!empty($pub_date)) {
   $pub_date = date('Y-m-d', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
 }
+
 ?>
 <?php
 $width = 622;
@@ -73,8 +74,13 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
   }
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
-  ga('create', '<?php echo $player_content["ga_code"]; ?>', 'auto');
- ga('send', 'pageview');
+  <?php
+  $arg = arg();
+  if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
+   //ga('create', '<?php //echo $data_video["ga_code"]; ?>', 'auto');
+   ga('create', 'UA-20047041-23', 'auto');
+   ga('send', 'pageview');
+  <?php } ?>
  playerInstance.on('ready', function () {
    console.log('playerready');
    ns_.StreamingAnalytics.JWPlayer(playerInstance, {

@@ -37,7 +37,12 @@ function rootCategoryContentPageFeed() {
             // cat xml feed file name
             $catFile = drupal_strtolower(str_replace(" ", "-", $term_name));
             $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
-            $catFile = $catFile . ".xml";
+            if($cattid == 1206533){
+                $catFile = $catFile . "_s.xml";
+            }
+            else{
+                $catFile = $catFile . ".xml";
+            }
             // generate cat xml file string
             if ($storytag['data'] != "") {
                 $output = "";
@@ -120,7 +125,7 @@ function generateLeftMainCategoryPage($tid, $term_name) {
             $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
             $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
             $feed_date_range = date(strtotime($feed_date));
-            $query->condition('ti.tid', $tid, '=')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+            $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.created', $feed_date_range, '>=')->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
             $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) > 0) {
                 foreach ($result as $reskey => $resvalue) {

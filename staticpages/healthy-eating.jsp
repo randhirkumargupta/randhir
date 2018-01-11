@@ -49,7 +49,7 @@ h1.section-heading, h1.section-heading span { margin: -5px auto 20px;}
     height: 415px;
 }
 .posrel .share-icon{background-color:#ffcc3f; background:#ffcc3f url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/shares.png) no-repeat 0 5px;}
-</style><link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.indiatoday.in/category/kellogs-healthy-eating/1/1332.html"/><script type="text/javascript">
+</style><script type="text/javascript">
 function canonicalUrlRedirection() {
 
 var canonicalUrl = "";var links = document.getElementsByTagName("link");
