@@ -61,7 +61,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $output = $result_get['key_value'];
     }
     else {
-        echo "andy";die();
+      
       global $base_url;
       $ttl = DEFAULT_REDIS_EXPIRE_TIME;
       $node = node_load($nid);
@@ -100,6 +100,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       else {
         $output .= emptygetImgTag();
       }
+        echo $output."andy";die();
       //web url tag
       $output .= "<weburl><![CDATA[" . $weburl . "]]></weburl>";
       if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
