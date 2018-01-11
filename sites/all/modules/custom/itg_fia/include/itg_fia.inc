@@ -17,12 +17,12 @@ function itg_fia_data() {
   $query->range(0, 100);
   $query = $query->execute()->fetchCol();
   $xml = itg_fia_xml_node_feed($query);
-  //~ $xml_path = 'public://fbinsight/';
-  //~ $file_name = 'indiatoday-latestnews.xml';
-  //~ $file_path = $xml_path . $file_name;
-  //~ $fp = fopen($file_path, "w");
-  //~ fwrite($fp, $xml);
-  //~ fclose($fp);
+  $xml_path = 'public://fbinsight/';
+  $file_name = 'indiatoday-latestnews.xml';
+  $file_path = $xml_path . $file_name;
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $xml);
+  fclose($fp);
 }
 
 /**
@@ -328,7 +328,7 @@ function itg_fia_xml_node_feed($query) {
   drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');*/
   $output = "<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" version=\"2.0\">";
   $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items, $last_build_date);  
-  print $output;
+  return $output;
 }
 
 /**
