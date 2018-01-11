@@ -128,7 +128,7 @@ function generateVideoCategoryPage($tid) {
             $query->fields('fss', array('field_story_syndication_value'));
             $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
             $feed_date_range = date(strtotime($feed_date));
-            $query->condition('ti.tid', $tid, '=')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+            $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
             $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) > 0) {
                 foreach ($result as $reskey => $resvalue) {
@@ -151,7 +151,7 @@ function generateVideoCategoryPage($tid) {
                     // create date formating
                     $create_date = date("Y-m-d", $created);
                     $create_datetime = date(DATE_ATOM, $created);
-                    $output .= "<item><title>" . $title . "</title><mediumimage><![CDATA[" . $file_large_img_url . "]]></mediumimage><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><syndications>" . $is_syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
+                    $output .= "<item><title>" . $title . "</title><mediumimage>".xml_cdata_filter($file_large_img_url)."</mediumimage><thumbimage>".xml_cdata_filter($file_small_img_url)."</thumbimage><url>video" . $nid . ".xml</url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><syndications>" . $is_syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
                     // generate video detail page
                     $fl = generateVideoDetailPageFeed($nid);
                 }

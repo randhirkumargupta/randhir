@@ -47,7 +47,6 @@ ul.myli  li{  list-style-type:circle !important; font-family:Georgia,"Times New 
 <link href="/electionscorecard/css/homepage-new.css" type="text/css" rel="stylesheet" />
 <script src="/electionscorecard/js/sitejs.js"></script>
 
-<link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.indiatoday.in//video/lt-general-dalbir-singh-suhag-army-cheif-general-bikram-singh-bjp-upa-election-commission-lok-sabha-polls-2014/1/361484.html" />
 <script type="text/javascript">
 function canonicalUrlRedirection() {
 
