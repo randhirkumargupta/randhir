@@ -111,23 +111,6 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $url_re = 'https://www.indiatoday.in/'.$new_url;
     } else {
         $url_re = 'https://www.indiatoday.in'.$_SERVER['REQUEST_URI'];
-        if ($_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
-          if(($arg[0] == 'education' || $arg[0] == 'technology') && ($arg[1] == 'story') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
-            $storyarg = $arg[4];
-            $newurl = getNewStoryUrl($storyarg);
-            if ($newurl) {
-              $url_re = $newurl;
-            }
-          } else if(($arg[0] == 'story') && !empty($arg[1]) && !empty($arg[2] && !empty($arg[3]))) {
-            $storyarg = $arg[3];
-            $newurl = getNewStoryUrl($storyarg);
-            if ($newurl) {
-              $url_re = $newurl;
-            }
-          } else {
-              $url_re = 'https://www.indiatoday.in'.$_SERVER['REQUEST_URI'];
-          }
-        }
     }
     drupal_goto($url_re, array(), 301);    
     exit;
@@ -179,6 +162,25 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $table = 'migrate_map_itgcategory';
       $type = 'category';
       $query_alias = $arg[3];
+  } else if ((!empty($arg[0]) && ($arg[0] == 'videolist' || $arg[0] == 'programmelist')) && !empty($arg[1]) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern gallerylist/photos-television/6/163.html
+      $photo_cat = $arg[3];
+      $query_alias = $arg[2];
+      $photo_cat_explode = explode('.html', $photo_cat);
+      $old_content_id = $photo_cat_explode[0];
+      $type = 'category';
+      $table = 'migrate_map_itgcategory'; 
+  } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto') && ($arg[1] == 'story') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+    $storyarg = $arg[4];
+    $newurl = getNewStoryUrl($storyarg);
+    if ($newurl) {
+      drupal_goto($newurl, array(), 301);
+    }
+  } else if(($arg[0] == 'story') && !empty($arg[1]) && !empty($arg[2] && !empty($arg[3]))) {
+    $storyarg = $arg[3];
+    $newurl = getNewStoryUrl($storyarg);
+    if ($newurl) {
+      drupal_goto($newurl, array(), 301);
+    }
   } else if((((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'article.jsp')) || ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'rss') && (!empty($arg[2]) && $arg[2] == 'article.jsp')))) {      
       if (!empty($_GET['sid']) || !empty($_GET['cid']) || !empty($_GET['scid']) || !empty($_GET['sscid'])) {
         if ($_GET['sid']) {        
