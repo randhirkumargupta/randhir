@@ -63,7 +63,11 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $term_name = $term->name;
             $comment_cont = $node->comment;
             $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+            $reporter_node = "";
             $reporter_node = itg_common_get_node_title($byline_id);
+            if($reporter_node == NULL){
+                $reporter_node = "";
+            }            
             $related_node = relatedContentNodeType($nid, "videogallery");
             $city = getCityByNid($nid);
             $alias = drupal_get_path_alias('node/' . $nid . '');
