@@ -27,14 +27,19 @@ function author_report_tvtn($start_date) {
     $data['date details']['month'] = $month;
     $data['date details']['year'] = $year;
     // site_snapshot  
+    $month_s = date("M", $start_date);
+    $year_s = date("Y", $start_date);
+    $month_time_s = strtotime("".$year_s."-".$month_s."-01");
+    $year_time_s = strtotime("".$year_s."-01-01");    
     $today_unix = $start_date;
-    $today_end = $start_date + 86399;
+    $today_end = $start_date + 86399;    
     $yesterday_unix = strtotime('-1 day', $today_unix);
     $yesterday_unix_end = $yesterday_unix + 86399;
-    $month_prev_unix = strtotime('-1 month', $today_unix);
-    $month_prev_unix_end = $month_prev_unix + 2629743;
-    $year_prev_unix = strtotime('-1 year', $today_unix);
-    $year_prev_unix_end = $year_prev_unix + 31556926;
+    $month_prev_unix = $month_time_s;
+    $month_prev_unix_end = $today_end;
+    $year_prev_unix = $year_time_s;
+    $year_prev_unix_end = $today_end;
+    
     $today_total = getContentCountByDate($today_unix, $today_end);
     $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
     $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
@@ -127,14 +132,19 @@ function author_report($start_date) {
     $data['date details']['month'] = $month;
     $data['date details']['year'] = $year;
     // site_snapshot  
+    $month_s = date("M", $start_date);
+    $year_s = date("Y", $start_date);
+    $month_time_s = strtotime("".$year_s."-".$month_s."-01");
+    $year_time_s = strtotime("".$year_s."-01-01");    
     $today_unix = $start_date;
-    $today_end = $start_date + 86399;
+    $today_end = $start_date + 86399;    
     $yesterday_unix = strtotime('-1 day', $today_unix);
     $yesterday_unix_end = $yesterday_unix + 86399;
-    $month_prev_unix = strtotime('-1 month', $today_unix);
-    $month_prev_unix_end = $month_prev_unix + 2629743;
-    $year_prev_unix = strtotime('-1 year', $today_unix);
-    $year_prev_unix_end = $year_prev_unix + 31556926;
+    $month_prev_unix = $month_time_s;
+    $month_prev_unix_end = $today_end;
+    $year_prev_unix = $year_time_s;
+    $year_prev_unix_end = $today_end;
+    
     $today_total = getContentCountByDate($today_unix, $today_end);
     $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
     $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
@@ -212,6 +222,7 @@ function author_report($start_date) {
  */
 function getContentCountByDate($start_date, $end_date) {
     $query_cont = db_select('node', 'n');
+    $query_cont->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query_cont->fields('n', array('nid'));
     //end
     if ($start_date != "na") {
@@ -219,6 +230,7 @@ function getContentCountByDate($start_date, $end_date) {
         $query_cont->condition('n.created', $end_date, "<=");
     }
     $query_cont->condition('n.status', 1);
+    $query_cont->condition('fst.field_story_source_type_value', 'story', '=');
     $result_cont = $query_cont->execute()->fetchAll();
     $total_records = count($result_cont);
     $query_cont = "";
@@ -236,10 +248,12 @@ function getAuthorList_Report($s_date, $e_date) {
     $list = array();
     $total_cont = 0;
     $query = db_select('itg_multi_byline_info', 'byi');
+    $query->leftJoin('field_data_field_reporter_email_id', 're', 're.entity_id = re.entity_id');
     $query->leftJoin('node', 'n', 'n.nid=byi.nid');
     $query->fields('byi', array('id', 'byline_id', 'nid'));
     $query->condition('n.created', $s_date, '>=');
     $query->condition('n.created', $e_date, '<=');
+    $query->condition('re.field_reporter_email_id_value', '%' . db_like('aajtak.com') , 'LIKE');    
     $query->groupBy('byi.id');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
@@ -259,6 +273,7 @@ function getAuthorList_Report($s_date, $e_date) {
 function getContentCountByDateAndByUid($start_date, $end_date, $uid) {
     $query_cont = db_select('node', 'n');
     $query_cont->leftJoin('itg_multi_byline_info', 'byi', 'n.nid=byi.nid');
+    $query_cont->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query_cont->fields('n', array('nid'));
     //end
     if ($start_date != "na") {
@@ -268,6 +283,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $uid) {
         $query_cont->condition('n.created', $end_date, "<=");
     }
     $query_cont->condition('byi.byline_id', $uid);
+    $query_cont->condition('fst.field_story_source_type_value', 'story', '=');
     $result_cont = $query_cont->execute()->fetchAll();
     $total_records = count($result_cont);
     $query_cont = "";
@@ -286,6 +302,7 @@ function todayContentsByUid($start_date, $end_date, $uid) {
     $list = array();
     $query_cont = db_select('node', 'n');
     $query_cont->leftJoin('itg_multi_byline_info', 'byi', 'n.nid=byi.nid');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query_cont->fields('n', array('nid', 'title'));
     //end
     if ($start_date != "na") {
@@ -295,6 +312,7 @@ function todayContentsByUid($start_date, $end_date, $uid) {
         $query_cont->condition('n.created', $end_date, "<=");
     }
     $query_cont->condition('byi.byline_id', $uid);
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
     $result = $query_cont->execute()->fetchAll(PDO::FETCH_ASSOC);
     $loop_cont = 0;
     foreach ($result as $reskey => $resvalue) {
