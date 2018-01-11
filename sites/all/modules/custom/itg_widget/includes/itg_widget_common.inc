@@ -2831,7 +2831,7 @@ function itg_widget_node_insert($node) {
                         continue;
                     } else {
                         if (function_exists('__itg_widget_helper_data_insert')) {
-                            __itg_widget_helper_data_insert($node->nid);
+                            __itg_widget_helper_data_insert($node->nid, $node);
                         }
                         $single_max_result = get_max_weight_for_node_insert($category['tid'], $node->type);
                         $max_result = $single_max_result['content_type'];
