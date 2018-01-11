@@ -194,8 +194,8 @@ function itg_preprocess_page(&$variables) {
   }
 
   // For single column page
-  if ($arg[0] == 'be-lucky-today' || $path_request_array['0'] == 'app') {
-	  if($path_request_array['0'] == 'app') {
+  if ($arg[0] == 'be-lucky-today' || $path_request_array['0'] == 'applications') {
+	  if($path_request_array['0'] == 'applications') {
 		  drupal_set_title('');
       }		  
     $variables['theme_hook_suggestions'][] = 'page__singlecolumn';

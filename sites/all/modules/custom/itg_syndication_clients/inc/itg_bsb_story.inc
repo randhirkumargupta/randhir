@@ -100,6 +100,7 @@ function genrate_bsb_story_syndication_xml($result = NULL, $category) {
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
       $body = itg_remove_tags_from_body($body);
+      $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<item>';
       $xml .= '<id>' . $value['nid'] . '</id>';

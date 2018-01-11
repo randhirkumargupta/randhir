@@ -74,6 +74,7 @@ function genrate_rss_it_latest_issue_syndication_xml($result = NULL, $issue_titl
       $author = get_byline_name_by_nid($nid);
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
       $xml .= '<item>';

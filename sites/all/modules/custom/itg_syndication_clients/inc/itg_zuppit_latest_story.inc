@@ -75,6 +75,7 @@ function itg_zuppit_feed_latest_story() {
 
     $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
     $body = remove_extra_tag_in_body($value["body_value"]);
+    $body = itg_remove_extra_custom_tags($body);
     $category_name = get_term_name_by_tid($value['field_primary_category_value']);
     $json_output['data']['rows'][] = array(
       'id' => $nid,

@@ -118,23 +118,7 @@ $argum = base64_encode(arg(1));
                   </figure>
               </li>
             <?php endforeach; ?>
-        </ul>
-        <div class="slick-thumbs">
-            <ul class="slick-thumbs-slider">
-                <?php foreach ($rows as $index => $row): ?>
-                  <li data-slide-number="<?php echo $index ?>">
-                      <?php
-                      if (!empty($row['field_photo_small_image'])) {
-                        print $row['field_photo_small_image'];
-                      }
-                      else {
-                        print '<img  src="' . file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image88x66.jpg').'" alt="" title="" />';
-                      }
-                      ?>
-                  </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+        </ul>        
         <div class="photo-by-slider">
             <?php foreach ($rows as $index => $row): ?>              
               <?php if(!empty($row['field_credit'])) : ?>
