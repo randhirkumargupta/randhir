@@ -94,7 +94,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 <link href="/staticpages/css/responsive.css" type="text/css" rel="stylesheet" />
 <link rel="canonical" href="http://indiatoday.intoday.in/" /> 
 <script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
-<link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.indiatoday.in" />
+
 
 
 
