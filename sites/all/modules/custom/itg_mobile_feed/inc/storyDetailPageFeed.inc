@@ -119,6 +119,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $result_set = setRedis($redis_key, $output, $ttl);
     }
   }
+  echo $output."andy";die();
   if ($output) {
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
