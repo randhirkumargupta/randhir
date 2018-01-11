@@ -224,7 +224,7 @@
 // setting for UAT
 //#####################################################################################
 
-$databases = array (
+/*$databases = array (
   'default' => 
   array (
     'default' => 
@@ -238,11 +238,11 @@ $databases = array (
       'prefix' => '',
     ),
   ),
-);
+);*/
 
 
 // one slave setting
-/*$databases['default']['default'] = array(
+$databases['default']['default'] = array(
   'driver' => 'autoslave',
   'master' => array('master', 'autoslave'), // optional, defaults to 'master'
   'slave' => array('autoslave', 'master'), // optional, defaults to 'autoslave'  
@@ -279,7 +279,7 @@ $databases['default']['autoslave'] = array(
   'prefix' => '',
   'readonly' => TRUE
 );
-*/
+
 $databases['sso_db']['default'] = array(
   'database' => 'IndiaToday_sso',
       'username' => 'itgd_it_write',
