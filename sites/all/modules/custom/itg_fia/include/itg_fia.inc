@@ -17,12 +17,12 @@ function itg_fia_data() {
   $query->range(0, 100);
   $query = $query->execute()->fetchCol();
   $xml = itg_fia_xml_node_feed($query);
-  $xml_path = 'public://fbinsight/';
-  $file_name = 'indiatoday-latestnews.xml';
-  $file_path = $xml_path . $file_name;
-  $fp = fopen($file_path, "w");
-  fwrite($fp, $xml);
-  fclose($fp);
+  //~ $xml_path = 'public://fbinsight/';
+  //~ $file_name = 'indiatoday-latestnews.xml';
+  //~ $file_path = $xml_path . $file_name;
+  //~ $fp = fopen($file_path, "w");
+  //~ fwrite($fp, $xml);
+  //~ fclose($fp);
 }
 
 /**
@@ -260,7 +260,9 @@ function itg_fia_xml_node_feed($query) {
       $node_body = str_replace('<blockquote class="twitter-tweet" lang="en"><blockquote class="twitter-tweet" lang="en">', '<blockquote class="twitter-tweet" lang="en">', $node_body);
       $node_body = str_replace('</blockquote></blockquote>', '</blockquote>', $node_body);
       $node_body = str_replace('</blockquote><script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '</blockquote><script charset="utf-8" src="//platform.twitter.com/widgets.js"></script>', $node_body);
-      $node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
+      //$node_body = str_replace('<blockquote', '<figure class="op-interactive"><iframe><blockquote ', $node_body);
+      $node_body = preg_replace('/(<blockquote class="([^\"]*)")/', '<figure class="op-interactive"><iframe>$1', $node_body);
+      $node_body = preg_replace("/(<blockquote class='([^\"]*)')/", "<figure class='op-interactive'><iframe>$1", $node_body);
       $node_body = str_replace('<script async="" src="//platform.twitter.com/widgets.js" mce_src="//platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js></script></iframe></figure>', $node_body);
       $node_body = str_replace('<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script>', '<script charset=utf-8 src=//platform.twitter.com/widgets.js type=mce-no/type></script></iframe></figure>', $node_body);
       $node_body = str_replace('<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>', '<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></iframe></figure>', $node_body);
@@ -276,7 +278,30 @@ function itg_fia_xml_node_feed($query) {
       $node_body = str_replace("[ITG:EXPERT-CHUNK]", "", $node_body);
       $node_body = str_replace("[ITG:TECH-PHOTOS]", "", $node_body);
       $node_body = str_replace("[ITG:TECH-PHOTO-GALLERY]", "", $node_body);
-      $node_body = str_replace("[ITG:LISTICLES]", "", $node_body);
+      //$node_body = str_replace("[ITG:LISTICLES]", "", $node_body);
+      //Code for the listicle token
+		if (strpos($node_body, '[ITG:LISTICLES]')) {
+		  $listicle_output = '';
+		  if (!empty($node->field_story_listicle[LANGUAGE_NONE]) && !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+		  if (isset($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) {
+		   $listicle_output .= '<span>' . $node->field_story_template_guru[LANGUAGE_NONE][0]['value'] . '</span>';
+		  }
+		  $buzz_output.= '';
+		  $num = 1;
+		  $listicle_output.= '<ul>';
+		  foreach ($node->field_story_listicle['und'] as $buzz_item) {
+			$listicletype = '';			
+			$field_collection_id = $buzz_item['value'];
+			$entity = entity_load('field_collection_item', array($field_collection_id));
+			$type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
+			$description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];			
+			$listicle_output.= '<li>' . $listicletype . $description . '</li>';
+			$num++;
+		  }
+		  $listicle_output.= '</ul>';
+		  $node_body = str_replace('[ITG:LISTICLES]', $listicle_output, $node_body);		  
+		 }
+		}
       $node_body = str_replace("100%", "300", $node_body);
       $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
       $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
@@ -303,7 +328,7 @@ function itg_fia_xml_node_feed($query) {
   drupal_add_http_header('Content-Type:application/rss+xml; charset=utf-8');*/
   $output = "<rss xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" version=\"2.0\">";
   $output .= itg_fia_xml_format_rss_channel($channel_defaults['title'], $channel_defaults['link'], $items, $last_build_date);  
-  return $output;
+  print $output;
 }
 
 /**
