@@ -423,11 +423,11 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link><![CDATA[ ' . $url . ' ]]></link>';
-      $xml .= '<pubDate>' . $publish_date . '></pubDate>';
+      $xml .= '<pubDate>' . $publish_date . '</pubDate>';
       $xml .= '<guid>' . $url . '</guid>';
       $xml .= '<description><![CDATA[' . $value['field_story_kicker_text_value'] . ']]></description>';
       $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';
-      $xml .= '<category>' . $section_name . '></category>';
+      $xml .= '<category>' . $section_name . '</category>';
       $xml .= '<keywords><![CDATA[' . $keywords . ']]></keywords>';
       $xml .= '</item>';
     }
