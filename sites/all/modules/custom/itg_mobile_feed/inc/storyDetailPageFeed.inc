@@ -57,7 +57,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     //check into redis
     $redis_key = "itgd_story" . $nid;
     $result_get = getRedis($redis_key);
-    if ($result_get['key_value'] != "") {
+    if ($result_get['key_value11'] != "") {
       $output = $result_get['key_value'];
     }
     else {
