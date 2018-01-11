@@ -19,6 +19,8 @@ function rootCategoryContentPageFeed() {
     } else {
         $section_list = $conf_array['left_main_tid'];
     }
+    print_r($section_list);
+    p(arg());
     $list_count = 0;
     $catFile = "";
     $term_feed_path = "public://xml_it/stories";
