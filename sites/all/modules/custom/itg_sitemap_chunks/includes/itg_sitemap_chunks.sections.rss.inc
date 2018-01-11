@@ -231,10 +231,11 @@ function itg_sitemap_chunks_common_rss($section_tid, $content_type) {
     $query->condition('n.status', 1);
     if (!empty($childrens)) {
       $query->condition('wos.cat_id', $childrens, 'IN');
-    } else {
-	  $days_ago = strtotime(date('Y-m-d', strtotime('-15 days')));
+    }
+    else {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-15 days')));
       $query->condition('n.created', $days_ago, '>=');
-	}
+    }
     $query->condition('wos.content_type', $content_type);
     $query->condition('wos.widget', 'section_wise_widget');
     $query->range(0, $limit);
