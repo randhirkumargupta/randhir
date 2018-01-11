@@ -1388,7 +1388,17 @@ function embed_video_nid($video_id) {
     return $qry;
   }
 }
-function xml_cdata_filter($title){
-    return $title;
+/**
+ * function to filter CDATA field value
+ * @args $value of the tags
+ * @return with CDATA tags or without
+ */
+function xml_cdata_filter($value) {
+    if ($value != '') {
+        $value = "<![CDATA[" . $value . "]]>";
+    } else {
+        $value = $value;
+    }
+    return $value;
 }
 
