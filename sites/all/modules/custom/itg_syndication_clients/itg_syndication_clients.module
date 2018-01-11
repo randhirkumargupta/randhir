@@ -1403,3 +1403,10 @@ function itg_xml_itg_videogallery_getsolr_data_for_internal_video($video_id) {
     }
   }
 }
+
+
+function itg_remove_extra_custom_tags($content){
+  $content = str_replace('[ITG:FACTOIDS]', '', $content);
+  $content = str_replace('[ITG:LISTICLES]', '', $content);
+  return $content;
+}

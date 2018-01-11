@@ -64,6 +64,7 @@ function get_rss_article_news_republic_xml($result) {
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_remove_extra_custom_tags($body);
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
@@ -146,6 +147,7 @@ function get_rss_education_article_news_republic_xml($result) {
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_remove_extra_custom_tags($body);
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';

@@ -241,7 +241,7 @@ if (!empty($content)):
                                 ?>
                                 <li><?php
                                     $city = array();
-                                    foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+                                    foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
                                       $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
                                     }
                                     print implode(' | ', $city);
