@@ -1389,3 +1389,6 @@ function embed_video_nid($video_id) {
   }
 }
 
+function xml_cdata_filter($title){
+    return $title;
+}

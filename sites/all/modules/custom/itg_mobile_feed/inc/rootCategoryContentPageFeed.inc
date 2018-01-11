@@ -18,16 +18,15 @@ function rootCategoryContentPageFeed() {
         $section_list[] = $tid_arg;
     } else {
         $section_list = $conf_array['left_main_tid'];
-    }    
+    }
     $list_count = 0;
     $catFile = "";
-    $term_feed_path = "public://xml_it/stories"; 
+    $term_feed_path = "public://xml_it/stories";
     $return_flag = "";
     foreach ($section_list as $key => $value) {
         $node_count = customNodeCount('story', $value);
         $term_status = itg_category_manager_term_state(trim($value), CATEGORY_MANAGMENT);
         if ($node_count > 0 && $term_status == 1) {
-            
             $cattid = $value;
             $term = taxonomy_term_load($value);
             $term_name = $term->name;
@@ -38,7 +37,12 @@ function rootCategoryContentPageFeed() {
             // cat xml feed file name
             $catFile = drupal_strtolower(str_replace(" ", "-", $term_name));
             $term_name = drupal_strtolower(str_replace("&", "and", $term_name));            
-            $catFile = $catFile . ".xml";
+            if($cattid == 1206533){
+                $catFile = $catFile . "_s.xml";
+            }
+            else{
+                $catFile = $catFile . ".xml";
+            }
             // generate cat xml file string
             if ($storytag['data'] != "") {
                 $output = "";
@@ -68,7 +72,7 @@ function rootCategoryContentPageFeed() {
 function generateLeftMainCategoryPage($tid, $term_name) {
     $redis_key = "itgd_generateLeftMainCategoryPage" . $tid;
     $result_get = getRedis($redis_key);
-    if ($result_get['key_value11'] != "") {
+    if ($result_get['key_value'] != "") {
         $data_str = $result_get['key_value'];
         $data_ar = explode("##listcount##", $data_str);
         $data['lcount'] = $data_ar[0];
@@ -122,9 +126,7 @@ function generateLeftMainCategoryPage($tid, $term_name) {
             $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
             $feed_date_range = date(strtotime($feed_date));
             $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
-            
             $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-            
             if (count($result) > 0) {
                 foreach ($result as $reskey => $resvalue) {
                     $listcount++;
@@ -163,6 +165,5 @@ function generateLeftMainCategoryPage($tid, $term_name) {
         // set into redis
         $result_set = setRedis($redis_key, $data_fi, $ttl);
     }
-    p($data);
     return $data;
 }

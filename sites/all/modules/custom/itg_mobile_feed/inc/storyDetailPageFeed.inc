@@ -57,11 +57,10 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
     //check into redis
     $redis_key = "itgd_story" . $nid;
     $result_get = getRedis($redis_key);
-    if ($result_get['key_value11'] != "") {
+    if ($result_get['key_value'] != "") {
       $output = $result_get['key_value'];
     }
     else {
-      
       global $base_url;
       $ttl = DEFAULT_REDIS_EXPIRE_TIME;
       $node = node_load($nid);
@@ -85,7 +84,6 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $output .= "<body><![CDATA[" . html_entity_decode($full_body) . "]]></body>";
       $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
       //get video tag
-      echo $output."andyss1";die();
       $videotag = getVideoTag($node);
       if ($videotag) {
         $output .= $videotag;
@@ -101,7 +99,6 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       else {
         $output .= emptygetImgTag();
       }
-        
       //web url tag
       $output .= "<weburl><![CDATA[" . $weburl . "]]></weburl>";
       if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
@@ -122,7 +119,6 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $result_set = setRedis($redis_key, $output, $ttl);
     }
   }
-  
   if ($output) {
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
