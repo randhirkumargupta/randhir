@@ -18,9 +18,7 @@ function rootCategoryContentPageFeed() {
         $section_list[] = $tid_arg;
     } else {
         $section_list = $conf_array['left_main_tid'];
-    }
-    print_r($section_list);
-    p(arg());
+    }    
     $list_count = 0;
     $catFile = "";
     $term_feed_path = "public://xml_it/stories"; 
@@ -39,12 +37,7 @@ function rootCategoryContentPageFeed() {
             // cat xml feed file name
             $catFile = drupal_strtolower(str_replace(" ", "-", $term_name));
             $term_name = drupal_strtolower(str_replace("&", "and", $term_name));            
-            if($cattid == 1206533){
-                $catFile = $catFile . "_s.xml";
-            }
-            else{
-                $catFile = $catFile . ".xml";
-            }
+            $catFile = $catFile . ".xml";
             // generate cat xml file string
             if ($storytag['data'] != "") {
                 $output = "";
@@ -167,5 +160,6 @@ function generateLeftMainCategoryPage($tid, $term_name) {
         // set into redis
         $result_set = setRedis($redis_key, $data_fi, $ttl);
     }
+    p($data);
     return $data;
 }
