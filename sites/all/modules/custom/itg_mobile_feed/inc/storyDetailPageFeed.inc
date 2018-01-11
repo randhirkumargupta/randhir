@@ -85,6 +85,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $output .= "<body><![CDATA[" . html_entity_decode($full_body) . "]]></body>";
       $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
       //get video tag
+      echo $output."andyss1";die();
       $videotag = getVideoTag($node);
       if ($videotag) {
         $output .= $videotag;
@@ -116,7 +117,6 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       else {
         $output .= emptygetCommentXmlTag();
       }
-      echo $output."andys";die();
       //call function getMobileFeedXmlFooter
       $output .= "</item>" . getMobileFeedXmlFooter();
       $result_set = setRedis($redis_key, $output, $ttl);
