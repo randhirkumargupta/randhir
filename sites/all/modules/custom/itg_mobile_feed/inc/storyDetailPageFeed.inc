@@ -61,6 +61,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $output = $result_get['key_value'];
     }
     else {
+        echo "andy";die();
       global $base_url;
       $ttl = DEFAULT_REDIS_EXPIRE_TIME;
       $node = node_load($nid);
@@ -119,7 +120,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $result_set = setRedis($redis_key, $output, $ttl);
     }
   }
-  echo $output."andy";die();
+  
   if ($output) {
     $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
   }
