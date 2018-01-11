@@ -12,13 +12,7 @@
 function storyCategoryPageFeed() {
   $output = "";
   $storytag = array();
-  $tid_arg = arg(1);
-  $conf_array = tidConfig();
-    if ($tid_arg && is_numeric($tid_arg)) {
-        $section_list[] = $tid_arg;
-    } else {
-        $section_list = $conf_array['left-main-tid'];
-    }
+  $section_list = categoryManagerSectionTid('story');
   $list_count = 0;
   $catFile = "";
   $term_feed_path = "public://xml_it/stories";
