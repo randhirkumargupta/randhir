@@ -298,16 +298,33 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newmatchurl) {
         drupal_goto($newmatchurl, array(), 301);
       }
-  } else if ((!empty($arg[0]) && ($arg[0] == 'gallery' || $arg[0] == 'section')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
+  } else if ((!empty($arg[0]) && ($arg[0] == 'gallery')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
       $urlarg = $arg[2];
       if ($urlarg > 1) {
         $newmatchurl = $base_url.'/'.$arg[0].'/'.$arg[1].'/1/'.$arg[3];
         drupal_goto($newmatchurl, array(), 301);
       } 
-  } else if ((!empty($arg[0]) && ($arg[0] == 'people')) && !empty ($arg[1]) && !empty ($arg[2])) {  // Pattern embed/@#trfg
+  } else if ((!empty($arg[0]) && ($arg[0] == 'section')) && !empty ($arg[1]) && !empty ($arg[2]) && !empty ($arg[3])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
+      $old_content_id = $arg[1];
+      $query_alias = $arg[2];
+      $type = 'category';
+      $table = 'migrate_map_itgsection';
+  } else if ((!empty($arg[0]) && ($arg[0] == 'site')) && (!empty($arg[1]) && ($arg[1] == 'section')) && !empty ($arg[2]) && !empty ($arg[3]) && !empty ($arg[4])) {  // Pattern gallery/2001-the-year-of-the-last-kumbh-mela-9-11-parliament-attack-and-some-major-events/31/8583.html
+      $old_content_id = $arg[2];
+      $query_alias = $arg[3];
+      $type = 'category';
+      $table = 'migrate_map_itgsection';
+  } else if ((!empty($arg[0]) && ($arg[0] == 'people' || $arg[0] == 'author')) && !empty ($arg[1]) && !empty ($arg[2])) {  // Pattern embed/@#trfg
       $people = $arg[1];
       $newmatchurl = $base_url.'/topic/'.$people;
       drupal_goto($newmatchurl, array(), 301);
+  } else if((((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'rssGenerator.jsp')) && (!empty($_GET['secId'])) )) {      
+    if ($_GET['secId']) {        
+      $old_content_id = $_GET['secId'];
+      $table = 'migrate_map_itgsection';
+    } 
+    $type = 'rss';
+    $rss_url = 'rss';
   } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
