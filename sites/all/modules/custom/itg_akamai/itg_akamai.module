@@ -845,7 +845,7 @@ function itg_akamai_add_cc_button($form, &$form_state) {
 function itg_akamai_node_insert($node) {
   if ($node->status == 1) {
     watchdog("akamai_insert1", "<pre> ".print_r($node, true)."</pre>");
-    $mapping = itg_akamai_getting_mapped_content_type();
+    /*$mapping = itg_akamai_getting_mapped_content_type();
     if (in_array($node->type, $mapping)) {
       $current_url = NULL;
       if (function_exists('itg_common_custompath_insert_load')) {
@@ -861,7 +861,7 @@ function itg_akamai_node_insert($node) {
       }
       // This line has been added for testing
       $varnish_paths = itg_akamai_varnish_host_mapping($current_url);
-      /*if (module_exists('httprl')) {
+      if (module_exists('httprl')) {
         $varnish_paths = array_map(function($item) {
           return rtrim($item, '/\\');
         }, $varnish_paths);
@@ -869,8 +869,8 @@ function itg_akamai_node_insert($node) {
         if (isset($varnish_paths) && !empty($varnish_paths)) {
           akamai_recacher_crawler($varnish_paths);
         }
-      }*/
-    }
+      }
+    }*/
 
     // Setting metadata for the TTL for each node id 
     if (user_access("administer itg akamai")) {
