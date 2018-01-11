@@ -80,7 +80,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $full_body = $node->body['und']['0']['value'];
       $body_android = getBodyDataForAndroid($full_body, $node);
       $output .= getMobileFeedXmlHeader();
-      $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit><![CDATA[" . $reporter_node . "]]> </credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city><![CDATA[" . $city . "]]></city><courtesy><![CDATA[]]></courtesy>";
+      $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit>" . xml_cdata_filter($reporter_node) . "</credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city>". xml_cdata_filter($city)."</city><courtesy></courtesy>";
       $output .= "<body><![CDATA[" . html_entity_decode($full_body) . "]]></body>";
       $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
       //get video tag
@@ -188,10 +188,10 @@ function getVideoTag($node) {
     $videotag = $video_detail;
   }  
   if (!empty($videotag['migrated'])) {
-    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
+    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['migrated']['video_path_mp4'] . "</part><img_url>". xml_cdata_filter($img_url)."</img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['migrated']['videoparts_m3u8'] . "</part><img_url>".xml_cdata_filter($img_url)."</img_url></videoparts_m3u8></video_embed>";
   }
   elseif (!empty($videotag['dailymotion'])) {
-    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
+    $videotag = "<video_embed><videoparts_mp4><part>" . $videotag['dailymotion']['bitate_url']['videoparts_mp4'] . "</part><img_url>". xml_cdata_filter($img_url) ."</img_url></videoparts_mp4><videoparts_m3u8><part>" . $videotag['dailymotion']['bitate_url']['stream_h264_url'] . "</part><img_url>". xml_cdata_filter($img_url)."</img_url></videoparts_m3u8></video_embed>";
   }
   else {
     $videotag = "<video_embed><videoparts_mp4><part></part><img_url></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url></img_url></videoparts_m3u8></video_embed>";
@@ -302,10 +302,10 @@ function getImgTag($node) {
   }
   $src = "";
   if ($src) {
-    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $src . "]]></lowres><highres><![CDATA[" . $src . "]]></highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
+    $imgtag = "<bodyimages><image><lowres>". xml_cdata_filter($src)."</lowres><highres>". xml_cdata_filter($src)."</highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
   }
   else {
-    $imgtag = "<bodyimages><image><lowres><![CDATA[" . $story_large_img . "]]></lowres><highres><![CDATA[" . $story_large_img . "]]></highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
+    $imgtag = "<bodyimages><image><lowres>". xml_cdata_filter($story_large_img)."</lowres><highres>". xml_cdata_filter($story_large_img)."</highres><caption>" . $img_caption_val . "</caption></image></bodyimages>";
   }
   return $imgtag;
 }

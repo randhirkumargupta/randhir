@@ -54,7 +54,7 @@ function itg_video_get_sitemap_xmls() {
     try {
         $objects = $s3->getIterator('ListObjects', array(
             'Bucket' => $bucket,
-            "Prefix" => 's3fs-public/' . SITEMAP_BUCKET . '/'
+            "Prefix" => BUCKET_FOLDER.'/' . SITEMAP_BUCKET . '/'
         ));
         foreach ($objects as $object) {
             if (end(explode('.', $object['Key'])) == 'gz') {

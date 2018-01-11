@@ -225,7 +225,7 @@ hoverClass: "ui-state-hover",
 })(jQuery);
 </script>
 
-<link rel="alternate" media="only screen and (max-width: 640px)" href="http://m.indiatoday.in/yearender2015/"/>
+
 	 <script type="text/javascript">if ((navigator.userAgent).toLowerCase().indexOf('iphone') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=510733452" />'); } else if ((navigator.userAgent).toLowerCase().indexOf('ipad') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=560404098" />');}</script>
          <script type="text/javascript">function canonicalUrlRedirection(){for(var e="",i=document.getElementsByTagName("link"),a=0;a<i.length;a++)if("only screen and (max-width: 640px)"==i[a].getAttribute("media")){e=i[a].getAttribute("href");break}""!=e&&(window.location.href=e)}var redirectagent=navigator.userAgent.toLowerCase(),mode=window.location.toString().split("mode=")[1],redirect_devices=["vnd.wap.xhtml+xml","sony","symbian","S60","SymbOS","nokia","samsung","mobile","windows ce","epoc","opera mini","nitro","j2me","midp-","cldc-","netfront","mot","up.browser","up.link","audiovox","blackberry","ericsson","panasonic","philips","sanyo","sharp","sie-","portalmmm","blazer","avantgo","danger","palm","series60","palmsource","pocketpc","smartphone","rover","ipaq","au-mic","alcatel","ericy","vodafone","wap1","wap2","teleca","playstation","lge","lg-","iphone","android","htc","dream","webos","bolt","nintendo"];if(!(redirectagent.indexOf("ipad")>=0))for(var i in redirect_devices)-1!=redirectagent.indexOf(redirect_devices[i])&&"classic"!=mode&&canonicalUrlRedirection();</script>
 

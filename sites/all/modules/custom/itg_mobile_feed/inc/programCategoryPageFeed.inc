@@ -45,7 +45,7 @@ function programCategoryPageFeed() {
             if ($storytag['data'] != "") {
                 $output = "";
                 $output .= program_section_page_feed_header();
-                $output .= "<id>" . $cattid . "</id><title><![CDATA[" . $term_name . "]]></title><description><![CDATA[" . $term_description . "]]></description><itemcount>" . $list_count . "</itemcount>";
+                $output .= "<id>" . $cattid . "</id><title><![CDATA[" . $term_name . "]]></title><description>".xml_cdata_filter($term_description)."</description><itemcount>" . $list_count . "</itemcount>";
                 $output .= $storytag['data'];
                 $output .= program_section_page_feed_footer();
                 // xml file writing..
@@ -125,7 +125,7 @@ function generateProgramCategoryPage($tid) {
             $query->fields('fss', array('field_story_syndication_value'));
             $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
             $feed_date_range = date(strtotime($feed_date));
-            $query->condition('ti.tid', $tid, '=')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+            $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
             $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) > 0) {
                 foreach ($result as $reskey => $resvalue) {
@@ -144,7 +144,7 @@ function generateProgramCategoryPage($tid) {
                     $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
                     $create_date = date("F d, Y", $created);
                     $create_datetime = date(DATE_ATOM, $created);
-                    $output .= "<item><title><![CDATA[" . $title . "]]></title><shortdescription><![CDATA[" . $field_story_kicker_text_value . "]]></shortdescription><thumbimage><![CDATA[" . $file_small_img_url . "]]></thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate></item>";
+                    $output .= "<item><title><![CDATA[" . $title . "]]></title><shortdescription>".xml_cdata_filter($field_story_kicker_text_value)."</shortdescription><thumbimage>". xml_cdata_filter($file_small_img_url)."</thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate></item>";
                     $fl = generateVideoDetailPageFeed($nid);
                 }
             } else {
