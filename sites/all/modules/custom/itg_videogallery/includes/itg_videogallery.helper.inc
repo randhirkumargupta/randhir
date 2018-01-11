@@ -585,12 +585,8 @@ function itg_videogallery_make_parm_for_jwpalyer($video_data, $used_on, $externa
   if (!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
 
     if ($used_on == 'embed') {
-      if ($external == 1) {
-        $retrun_array['dfp_tags'] = $dfp_data[0]->dfp_tags_external;
-      }
-      else {
         $retrun_array['dfp_tags'] = $dfp_data[0]->dfp_tags_internal;
-      }
+        $retrun_array['dfp_tags_external'] = $dfp_data[0]->dfp_tags_external;  
     }
     else {
       $retrun_array['dfp_tags'] = $dfp_data[0]->dfp_tags;

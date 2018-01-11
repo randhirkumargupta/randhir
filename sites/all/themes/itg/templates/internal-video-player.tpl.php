@@ -33,7 +33,7 @@ if ($used_on == 'embed') {
   $autostart = "FALSE";
 }
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on, $external_side);
-if(!empty($player_image)) {
+if (!empty($player_image)) {
   $player_content['player_image'] = $player_image;
 }
 ?>
@@ -41,11 +41,23 @@ if(!empty($player_image)) {
 <script type="text/javascript">
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
   function loadplayerjw() {
-      var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
+      var dfp_int = '<?php echo urlencode($player_content['dfp_tags']) ?>';
+      var dpf_ext = '<?php echo urlencode($player_content['dfp_tags_external'])?>';
+      var referrer = document.referrer;
+      ItgdDomain = null;
+      if (referrer.length > 0) {
+          ItgdDomain = getDomain(referrer);
+      }
+      if (ItgdDomain == 'indiatoday.in' || ItgdDomain == 'aajtak.in' || ItgdDomain == 'intoday.in') {
+          var player_dfp = dfp_int;
+      }
+      else {
+          var player_dfp = dpf_ext;
+      }
       jwplayer('videoplayer').setup({
           playlist: [{
                   title: "<?php echo stripslashes($title); ?>",
-                  mediaid:"vod_<?php echo $nid; ?>",
+                  mediaid: "vod_<?php echo $nid; ?>",
                   'image': "<?php echo $player_content['player_image']; ?>",
                   sources: [
                       {
@@ -65,9 +77,9 @@ if(!empty($player_image)) {
           //fallback: "false",
           hlslabels: {"156": "lowest", "410": "low", "512": "medium", "996": "Highest"},
           //autostart: true,
-                  advertising: {
-                      client: "googima", skipoffset: 5,
-                      schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
+          advertising: {
+              client: "googima", skipoffset: 5,
+              schedule: {"myAds": {"offset": "pre", "tag": decodeURIComponent(player_dfp)}}},
           ga: {
               idstring: "<?php echo stripslashes($title); ?>",
               label: "<?php echo $node_id; ?>",
@@ -76,20 +88,24 @@ if(!empty($player_image)) {
   }
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
-  <?php
-  $arg = arg();
-  if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
-   //ga('create', '<?php //echo $data_video["ga_code"]; ?>', 'auto');
-   ga('create', 'UA-20047041-23', 'auto');
-   ga('send', 'pageview');
-  <?php } ?>
- playerInstance.on('ready', function () {
-   console.log('playerready');
-   ns_.StreamingAnalytics.JWPlayer(playerInstance, {
-   publisherId: "8549097",
-   labelmapping: "c3=\"99000\", ns_st_pu=\"Indiatoday Group\", ns_st_ia=\"0\", ns_st_ge=\"Video\", ns_st_ddt=\"<?php echo $pub_date; ?>\", ns_st_ce=\"FullEpisode\", ns_st_tdt=\"<?php echo $pub_date;?>\", ns_st_title=\"<?php echo stripslashes($title); ?>\""
-	}); 
-}); 
+
+  playerInstance.on('ready', function () {
+      console.log('playerready');
+      ns_.StreamingAnalytics.JWPlayer(playerInstance, {
+          publisherId: "8549097",
+          labelmapping: "c3=\"99000\", ns_st_pu=\"Indiatoday Group\", ns_st_ia=\"0\", ns_st_ge=\"Video\", ns_st_ddt=\"<?php echo $pub_date; ?>\", ns_st_ce=\"FullEpisode\", ns_st_tdt=\"<?php echo $pub_date; ?>\", ns_st_title=\"<?php echo stripslashes($title); ?>\""
+      });
+  });
+
+  function getDomain(url) {
+      if (url) {
+          var match = /(?:https?:\/\/)?(?:\w+:\/)?[^:?#\/\s]*?([^.\s]+\.(?:[a-z]{2,}|co\.uk|org\.uk|ac\.uk|org\.au|com\.au))(?:[:?#\/]|$)/gi
+                  .exec(url);
+          return match ? match[1] : null;
+      } else
+          return null;
+  }
+
 </script>
 
 <?php
