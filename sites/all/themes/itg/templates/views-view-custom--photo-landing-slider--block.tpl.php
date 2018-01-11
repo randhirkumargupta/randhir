@@ -1,7 +1,7 @@
 <?php
 global $base_url;
 // configuration for social sharing
-$photo_node = node_load(arg(1), null, TRUE);
+$photo_node = node_load(arg(1));
 
 $comment_flag = FALSE;
 if (!empty($photo_node->field_photogallery_configuration['und'])) {
