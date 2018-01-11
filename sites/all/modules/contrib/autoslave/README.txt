@@ -1,7 +1,4 @@
 == Installation ==
-pre-installation:
- - see the autoslave module folder for information about recommended core patches patches/README.txt
- - apply the above referenced patches;
 
 Copy the autoslave directory from the modules directory to includes/database/, e.g.
 
@@ -54,27 +51,6 @@ if (drupal_is_cli() || basename($_SERVER['PHP_SELF']) == 'update.php') {
   $databases['default']['default'] = $databases['default']['master'];
 }
 
-?>
-OR if you prefer this drush/update.php workaround instead:
-
-<?php
-//added this to settings.php
-//begin section.
-  if (drupal_is_cli() || basename($_SERVER['PHP_SELF'] == 'update.php')) {
-    $databases['default']['default'] = $databases['default']['master1'];
-  }
-  else {
-    $databases['default']['default'] = array (
-      'driver' => 'autoslave',
-      'master' => array('master1', 'master2'),
-      'slave' => array('slave'),
-      'use_autoslave_schema' => TRUE,
-    );
-    //put the rest of the settings.php autoslave configuration options here
-    //also put your memcache options here too
-    // I will try to soon add some more examples, but you should get the idea.
-  }
-//end of section.
 ?>
 
 === Extreme ===
@@ -164,11 +140,7 @@ $conf['lock_inc'] = 'sites/all/modules/autoslave/lock.inc';
 // Workaround for Drush (Drush doesn't support non-pdo database drivers).
 // Workaround for update.php (similar problem as Drush).
 if (drupal_is_cli() || basename($_SERVER['PHP_SELF']) == 'update.php') {
-  //put this code block in your settings.php
   $databases['default']['default'] = $databases['default']['master'];
-}
-else {
-  //autoslave specific configuration in settings.php, I will try to provide some more examples soon.
 }
 
 ?>
@@ -179,5 +151,14 @@ http://drupal.org/node/1889328 - Not all objects respect the query option "throw
 
 
 == Patches ==
-see patches/README.txt for recommended (or required) core patches (patches to Drupal core 7.54 or higher is recommended).
- you should patch your core with these.
+Bundled with AutoSlave are a couple of patches:
+
+* deadlock-mitigation-7.22.patch:
+Instead of delete a row from the variable table when using variable_del(), the variable is just set to NULL. This is to reduce the effect of gap-locking under MySQLs REPEATABLE-READ isolation level. This will of course make the variable table grow in size, but reduce potential deadlocks. The NULL values are not cached, thereby keeping the variable cache at the same size (or less) as without the patch.
+
+* drush-pdo-7.x-5.8.patch:
+Drush checks the $databases configuration directly against PDO. As the "autoslave" drivers is not a PDO extension, this check will fail. The patch bypasses this check. If using this patch (which is recommended), the above workaround in the example should not be used.
+
+* update-pdo-7.22.patch:
+update.php checks the $databases configuration directly against PDO. As the "autoslave" drivers is not a PDO extension, this check will fail. The patch bypasses this check for autoslave configurations. If using this patch (which is recommended), the above workaround in the example should not be used.
+
