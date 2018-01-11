@@ -37,12 +37,7 @@ function rootCategoryContentPageFeed() {
             // cat xml feed file name
             $catFile = drupal_strtolower(str_replace(" ", "-", $term_name));
             $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
-            if($cattid == 1206533){
-                $catFile = $catFile . "_s.xml";
-            }
-            else{
-                $catFile = $catFile . ".xml";
-            }
+            $catFile = $catFile . ".xml";
             // generate cat xml file string
             if ($storytag['data'] != "") {
                 $output = "";
@@ -151,7 +146,12 @@ function generateLeftMainCategoryPage($tid, $term_name) {
                     // create date formating
                     $create_date = date("F d, Y", $created);
                     $create_datetime = date(DATE_ATOM, $created);
-                    $output .= "<article><title><![CDATA[" . $title . "]]></title><thumbimage>". xml_cdata_filter($file_small_img_url)."</thumbimage><kickerimage>". xml_cdata_filter($file_medium_img_url)."</kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
+                    if ($tid == 1206533 || $tid == '1206533') {
+                        $output .= "<article><title>" . $title . "</title><thumbimage>" . xml_cdata_filter($file_small_img_url) . "</thumbimage><kickerimage>" . xml_cdata_filter($file_medium_img_url) . "</kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
+                    } else {
+                        $output .= "<article><title><![CDATA[" . $title . "]]></title><thumbimage>" . xml_cdata_filter($file_small_img_url) . "</thumbimage><kickerimage>" . xml_cdata_filter($file_medium_img_url) . "</kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
+                    }
+
                     // generate story detail page
                     $fl = generateStoryDetailPageFeed($nid, $loop_file_name);
                 }
