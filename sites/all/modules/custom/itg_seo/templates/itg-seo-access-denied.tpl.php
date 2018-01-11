@@ -21,9 +21,10 @@ global $base_url;
       <span class="error-or"><?php print t('OR'); ?></span>
       <h3><?php print t('Check out Latest Headlines'); ?></h3>
       <ul class="latest-headlines-list">
-          <?php 
-            print itg_seo_latest_headlines();
-            ?>
+        <?php
+        echo render($data);
+        ?>
+          
       </ul>
     </div>
   </div>
