@@ -23,7 +23,7 @@ function storyCategoryPageFeed() {
   $catFile = "";
   $term_feed_path = "public://xml_it/stories";
   $return_flag = "";
-p($section_list);
+
   foreach ($section_list as $key => $value) {
 
     $node_count = customNodeCount('story', $value);
