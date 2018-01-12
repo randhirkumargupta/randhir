@@ -574,10 +574,8 @@ function programCategoryListlPageRerourceValue($token) {
     $updated_datetime = "";
     $conf_array = tidConfig();
     $program_key = "itg_programmes_order_by";
-    $Program_section_list = variable_get($program_key);
-    if (count($Program_section_list) <= 0) {
-        $Program_section_list = $conf_array['program_sec_tid'];
-    }
+    $Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061);
+    
 
     // list array building
     $data = generateProgramSectionList($Program_section_list);
