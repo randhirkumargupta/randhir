@@ -96,6 +96,7 @@ function get_syndication_client_feed_xml($result, $sid, $section_name, $fulltext
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
       if ($fulltext == 1) {
         $body = remove_extra_tag_in_body($value["body_value"]);
+        $body = itg_replace_token_with_data($body, $value['nid']);
         $body = itg_remove_extra_custom_tags($body);
         $xml .= '<description><![CDATA[' . $body . ']]></description>';
       }
