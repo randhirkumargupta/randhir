@@ -11,10 +11,12 @@ function itg_rss_article_news_republic() {
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('dbody', array('body_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('kt', array('field_story_kicker_text_value'));
+  $query->fields('eli', array('field_story_extra_large_image_fid'));
 
   $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
   $query->condition('n.status', 1);
@@ -22,7 +24,7 @@ function itg_rss_article_news_republic() {
   if (!empty($sid)) {
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $sid, '=');
-    if($days_ago = get_content_fetch_time($sid)){
+    if ($days_ago = get_content_fetch_time($sid)) {
       $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
       $query->condition('n.created', $days_ago, '>=');
     }
@@ -65,6 +67,11 @@ function get_rss_article_news_republic_xml($result) {
       $kicker_text = $value['field_story_kicker_text_value'];
       $body = remove_extra_tag_in_body($value["body_value"]);
       $body = itg_remove_extra_custom_tags($body);
+      $medium_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
+      $large_img = '';
+      if (!empty($medium_img)) {
+        $large_img = '<figure><img src="' . $medium_img["imag_url"] . '" width="650"  /><figcaption>' . $medium_img["caption"] . '</figcaption></figure>';
+      }
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
@@ -72,7 +79,7 @@ function get_rss_article_news_republic_xml($result) {
       $xml .= '<pubDate>' . $pub_date . '</pubDate>';
       $xml .= '<dc:creator>' . $author . '</dc:creator>';
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
-      $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';
+      $xml .= '<content:encoded><![CDATA[' . $large_img . $body . ']]></content:encoded>';
       $xml .= '</item>';
     }
     $xml .= '</channel>';
@@ -95,6 +102,8 @@ function itg_rss_education_article_news_republic() {
   $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
+  $query->fields('eli', array('field_story_extra_large_image_fid'));
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('dbody', array('body_value'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
@@ -106,7 +115,7 @@ function itg_rss_education_article_news_republic() {
     $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
     $query->condition('ti.tid', $cid, '=');
   }
-  if($days_ago = get_content_fetch_time($cid)){
+  if ($days_ago = get_content_fetch_time($cid)) {
     $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
     $query->condition('n.created', $days_ago, '>=');
   }
@@ -148,6 +157,11 @@ function get_rss_education_article_news_republic_xml($result) {
       $kicker_text = $value['field_story_kicker_text_value'];
       $body = remove_extra_tag_in_body($value["body_value"]);
       $body = itg_remove_extra_custom_tags($body);
+      $medium_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
+      $large_img = '';
+      if (!empty($medium_img)) {
+        $large_img = '<figure><img src="' . $medium_img["imag_url"] . '" width="650"  /><figcaption>' . $medium_img["caption"] . '</figcaption></figure>';
+      }
       $xml .= '<item>';
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
@@ -155,7 +169,7 @@ function get_rss_education_article_news_republic_xml($result) {
       $xml .= '<pubDate>' . $pub_date . '</pubDate>';
       $xml .= '<dc:creator>' . $author . '</dc:creator>';
       $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
-      $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';
+      $xml .= '<content:encoded><![CDATA[' . $large_img . $body . ']]></content:encoded>';
       $xml .= '</item>';
     }
     $xml .= '</channel>';
