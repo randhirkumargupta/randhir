@@ -1404,8 +1404,7 @@ function itg_xml_itg_videogallery_getsolr_data_for_internal_video($video_id) {
   }
 }
 
-
-function itg_remove_extra_custom_tags($content){
+function itg_remove_extra_custom_tags($content) {
   $content = str_replace('[ITG:FACTOIDS]', '', $content);
   $content = str_replace('[ITG:LISTICLES]', '', $content);
   $content = str_replace('[ITG:EXPERT-CHUNK]', '', $content);
@@ -1414,7 +1413,7 @@ function itg_remove_extra_custom_tags($content){
   return $content;
 }
 
-function itg_replace_token_with_data($node_body, $nid){
+function itg_replace_token_with_data($node_body, $nid) {
   if (strpos($node_body, '[ITG:LISTICLES]')) {
     $query = db_select('field_data_field_story_listicle', 'fsl');
     $query->leftJoin('field_data_field_story_template_guru', 'stg', 'stg.entity_id=fsl.entity_id');
@@ -1427,19 +1426,19 @@ function itg_replace_token_with_data($node_body, $nid){
       if (isset($result[0]['field_story_template_guru_value'])) {
         $listicle_output .= '<span>' . $result[0]['field_story_template_guru_value'] . '</span>';
       }
-      $buzz_output.= '';
+      $buzz_output .= '';
       $num = 1;
-      $listicle_output.= '<ul>';
+      $listicle_output .= '<ul>';
       foreach ($result as $buzz_item) {
         $listicletype = '';
         $field_collection_id = $buzz_item['field_story_listicle_value'];
         $entity = entity_load('field_collection_item', array($field_collection_id));
         $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
         $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
-        $listicle_output.= '<li>' . $listicletype . $description . '</li>';
+        $listicle_output .= '<li>' . $listicletype . $description . '</li>';
         $num++;
       }
-      $listicle_output.= '</ul>';
+      $listicle_output .= '</ul>';
       $node_body = str_replace('[ITG:LISTICLES]', $listicle_output, $node_body);
     }
   }
