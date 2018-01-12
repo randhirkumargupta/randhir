@@ -63,13 +63,8 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $term_name = $term->name;
             $comment_cont = $node->comment;
             $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-            $reporter_node = itg_get_multi_byline_details($node->nid, $node->status);
-            foreach($reporter_node as $reporter_data){
-              $reporter_names[] = $reporter_data['title'];
-            }
-            $reporter_list = implode(',',$reporter_names);
             $reporter_node = itg_common_get_node_title($byline_id);
-            if ($reporter_node == NULL) {
+            if (is_null($reporter_node)) {
                 $reporter_node = "";
             }
             $related_node = relatedContentNodeType($nid, "videogallery");
@@ -91,7 +86,7 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $metatags_description = html_entity_decode($node->metatags['und']['description']['value']);
             $output .= program_section_page_feed_header();
             $createddate = format_date($node->created, 'custom', 'd/m/Y');
-            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit>".xml_cdata_filter($reporter_list)."</credit><createddate>".xml_cdata_filter($create_datetime)."</createddate><date>".$create_date."</date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($thumbimage)."</thumbimage><mediaid></mediaid><uurl></uurl>";
+            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit>".xml_cdata_filter($reporter_node)."</credit><createddate>".xml_cdata_filter($create_datetime)."</createddate><date>".$create_date."</date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($thumbimage)."</thumbimage><mediaid></mediaid><uurl></uurl>";
             //get video tag
             $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
             $videotag = video_detail_formats($nid, $source_type);
