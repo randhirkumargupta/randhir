@@ -238,7 +238,7 @@ function getContentCountByDate($start_date, $end_date) {
         $nid = $resvalue['nid'];
         $status = $resvalue['status'];
         $flag = getbylineFlag($nid, $status);
-        if ($flag == 1) {
+        if ($flag > 0) {
             $cont++;
         }
     }
@@ -323,7 +323,7 @@ function getAuthorList_Report($s_date, $e_date) {
         $nid = $resvalue['nid'];
         $status = $resvalue['status'];
         $flag = getbylineFlag($nid, $status);
-        if ($flag == 1) {
+        if ($flag > 0) {
             $list[$cont] = getbylineDetail($nid, $status);
             $cont++;
         }
@@ -358,7 +358,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
         $nid = $resvalue['nid'];
         $status = $resvalue['status'];
         $flag = getbylineFlagByEmail($nid, $status, $email);
-        if ($flag == 1) {
+        if ($flag > 0) {
             $cont++;
         }
     }
@@ -419,7 +419,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
         $status = $resvalue['status'];
         $title = $resvalue['title'];
         $flag = getbylineFlagByEmail($nid, $status, $mail);
-        if ($flag == 1) {
+        if ($flag > 0) {
             $list[$cont]['nid'] = $nid;
             $list[$cont]['title'] = $title;
             $cont++;
