@@ -1,9 +1,8 @@
 <?php
 /**
  * @file
- * feature_for_app_rest_api.features.inc
+ * feature_for_app_rest_api.features.inc 
  */
-
 /**
  * Implements hook_ctools_plugin_api().
  */

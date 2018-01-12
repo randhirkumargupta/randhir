@@ -1,3 +1,2 @@
 # India Today CMS (Drupal)
-~ KelltonTech  Team.
-
+KelltonTech  Team.

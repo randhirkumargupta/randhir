@@ -54,6 +54,8 @@ function get_video_sitemap_item() {
   $query->fields('dbody', array('field_story_short_headline_value'));
   $query->fields('st', array('field_story_source_type_value'));
   $query->fields('eli', array('field_story_extra_large_image_fid'));
+  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
+  $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'videogallery', '=');
   $query->orderBy('n.created', 'DESC');

@@ -5,7 +5,7 @@
            //get Cookie for sso login
            
             var ssoLoginCheck = getCookie('itg_forced_login');
-            
+            console.log(ssoLoginCheck);
             //end code get Cookie for sso login
             
             var o = Drupal.settings.itg_sso_login.settings.base_url,
@@ -38,7 +38,8 @@
                 })
             }), jQuery("#itg-sso-reg-password-form  label[for='edit-pass-pass1']").text("New password")
             
-            if (ssoLoginCheck != '' && ssoLoginCheck != 'null') {               
+            if (ssoLoginCheck != '' && ssoLoginCheck != 'null') {
+                console.log(ssoLoginCheck);
                 jQuery.ajax({
                     url: Drupal.settings.itg_widget.settings.base_url + "/itg-load-my-account",
                     type: "post",

@@ -240,38 +240,12 @@ class DatabaseConnection_autoslave extends DatabaseConnection {
       $options['target'] = $this->deriveTargetFromQuery($query);
     }
     $tx = NULL;
-    $is_write_query = $this->isWriteQuery($query);
-    if ($this->transactionalizeWrite() && $is_write_query) {
+    if ($this->transactionalizeWrite() && $this->isWriteQuery($query)) {
       $tx = db_transaction();
     }
     $result = DatabaseSafeConnection::create($this, $options['target'])->query($query, $args, $options);
-
-    $updated = TRUE;
-    if ($tx && $is_write_query) {
-      // If no rows were updated, we don't need to add affected table.
-      $temp_options = $options + array(
-        'return' => Database::RETURN_STATEMENT
-      );
-      switch ($temp_options['return']) {
-        case Database::RETURN_AFFECTED:
-          $updated = $result > 0;
-          break;
-
-        case Database::RETURN_STATEMENT:
-          $updated = $result->rowCount() > 0;
-          break;
-
-        case Database::RETURN_INSERT_ID:
-        case Database::RETURN_NULL:
-          break;
-
-        default:
-          throw new PDOException('Invalid return directive: ' . $temp_options['return']);
-      }
-    }
-
     if ($tx) {
-      $this->deriveBackendFromQuery($query, $updated);
+      $this->deriveBackendFromQuery($query);
       unset($tx);
     }
     return $result;
@@ -712,7 +686,7 @@ class DatabaseConnection_autoslave extends DatabaseConnection {
    */
   function goReadOnly() {
     $this->__readonly = TRUE;
-    drupal_set_message(t('The system is currently in read-only mode. Any changes you make will not be saved!'), 'error');
+    drupal_set_message(t('The system is currently in read-only mode. Any changes you make will not be saved!'), 'error');    
   }
 
   /**
@@ -958,7 +932,7 @@ class DatabaseConnection_autoslave extends DatabaseConnection {
    * @param $query
    *   The query to examine.
    */
-  private function deriveBackendFromQuery($query, $updated = TRUE) {
+  private function deriveBackendFromQuery($query) {
     $this->ensureAffectedTables();
 
     // Find all tables used in the query.
@@ -968,7 +942,7 @@ class DatabaseConnection_autoslave extends DatabaseConnection {
     if ($this->isWriteQuery($query)) { 
       // Even if forceMaster() is true, we still need to tag tables that have been written to,
       // in case we go back to forceMaster() false later on.
-      if ($updated && $tables) {
+      if ($tables) {
         // Only add the first table, since it's not possible to do multi-table insert/update anyways.
         // ... at least not if using ANSI-SQL ... There are engine specific syntax for this though,
         // which is why we provide the "flag all tables" option if necessary.
@@ -1003,7 +977,7 @@ class DatabaseConnection_autoslave extends DatabaseConnection {
     elseif (is_string($table)) {
       return isset($this->__tables[$table]) ? $this->determineMasterTarget() : $this->determineSlaveTarget();      
     }
-    elseif ($table instanceOf SelectQueryInterface) {
+    elseif ($table instanceOf SelectQuery) {
       $tables = $this->findTablesInQuery($table);
       return array_intersect($tables, $this->__tables) ? $this->determineMasterTarget() : $this->determineSlaveTarget();
     }
@@ -1276,7 +1250,7 @@ class DatabaseConnection_autoslave extends DatabaseConnection {
   /**
    * Recursively collect used tables in a SelectQuery.
    *
-   * @param SelectQueryInterface $query
+   * @param SelectQuery $query
    *
    * @return array
    *   Tables present in query.
@@ -1284,7 +1258,7 @@ class DatabaseConnection_autoslave extends DatabaseConnection {
   function findTablesInQuery($query) {
     $tables = array();
     foreach ($query->getTables() as $tableinfo) {
-      if ($tableinfo['table'] instanceOf SelectQueryInterface) {
+      if ($tableinfo['table'] instanceOf SelectQuery) {
         $tables = array_merge($tables, $this->findTablesInQuery($tableinfo['table']));
       }
       else {
