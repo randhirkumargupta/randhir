@@ -24,7 +24,9 @@ function get_notification_config() {
  */
 function notification_page() {
     $params = drupal_get_query_parameters();
-    generate_notification_all($params);
+    if(!empty($params)){
+      generate_notification_all($params);
+    }
 }
 
 /**
@@ -86,55 +88,72 @@ function generate_notification_all($params) {
             } elseif ($dev_id == '11') {
                 $file_name = 'notification_chrome_test.xml';
                 $output = chrome_notification_xml();
+            }else{
+                $file_name = 'notification_all_test.xml';
+                $output = default_xml_feed();
             }
             if ($output && $output != '') {
                 $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
             }
-        }
+        } 
+        
     } elseif ($app_id == '1') {
         // XML Files Generation Based on Device Id
         $dev = explode(',', $params['device']);
+        $status = '0';
         foreach ($dev as $dev_id) {
             if ($dev_id == '1') {
+                $status = '1';
                 $file_name = 'notification_ios.xml';
                 $output .= default_xml_feed();
             } elseif ($dev_id == '2') {
+                $status = '1';
                 $file_name = 'notification_bb.xml';
                 $output = bb_notification_xml();
             } elseif ($dev_id == '3') {
+                $status = '1';
                 $file_name = 'notification_android.xml';
                 $output = default_xml_feed();
             } elseif ($dev_id == '4') {
+                $status = '1';
                 $file_name = 'notification_nokiaasha.xml';
                 $output = nokiaasha_notification_xml();
             } elseif ($dev_id == '5') {
+                $status = '1';
                 $file_name = 'notification_windowsphone.xml';
                 $output = default_xml_feed();
             } elseif ($dev_id == '7') {
+                $status = '1';
                 $file_name = 'notification_osx.xml';
                 $output = osx_notification_xml();
             } elseif ($dev_id == '8') {
+                $status = '1';
                 $file_name = 'notification_windows8.xml';
                 $output = windows8_notification_xml();
             } elseif ($dev_id == '9') {
+                $status = '1';
                 $file_name = 'notification_amazon.xml';
                 $output = amazon_notification_xml();
             } elseif ($dev_id == '10') {
+                $status = '1';
                 $file_name = 'notification_safari.xml';
                 $output = safari_notification_xml();
             } elseif ($dev_id == '11') {
+                $status = '1';
                 $file_name = 'notification_chrome.xml';
                 $output = chrome_notification_xml();
             }
-
-            if ($output && $output != '') {
+            if ($output && $status == '1') {
                 $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
             }
         }
+        if($status == '1'){
+          $default_output = default_xml_feed();
+          $default_file_name = 'notification_all.xml';
+          $return_flag .= writeFeedFile($term_feed_path, $default_file_name, $default_output);
+        }
     }
-    $default_output = default_xml_feed();
-    $default_file_name = 'notification_all.xml';
-    $return_flag .= writeFeedFile($term_feed_path, $default_file_name, $default_output);
+    
 
     if (isset($app_output) && $app_output != '') {
         $return_flag .= writeFeedFile($term_feed_path, $app_file_name, $app_output);
@@ -210,7 +229,7 @@ function ipad_notification_xml() {
             $created_date_time = $data->schedule_datetime;
 
             if ($data->content_id > 0) {
-                $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+                $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header>".xml_cdata_filter($android_header)."</header><section_name>".xml_cdata_filter($section)."</section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
             } else {
                 $msg_created_date = $data->schedule_datetime;
                 $msg_created_date_time = $data->schedule_datetime;
@@ -229,7 +248,7 @@ function ipad_notification_xml() {
                     }
                 }
 
-                $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+                $output .= "<article><title>".xml_cdata_filter($data->message)."</title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
             }
         }
     }
