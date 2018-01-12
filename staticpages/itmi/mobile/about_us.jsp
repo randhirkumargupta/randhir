@@ -7,7 +7,7 @@
     <meta http-equiv="content-language" content="hi" />
     <meta name="description" content="ITMI (India today media institute) also known as aajtak media institute situated in Noida is among top colleges for mass communication in India." />
     <meta name="keywords" content="ITMI, Mass communication college in noida , Top mass communication college, aajtak media institute." />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
 <link rel="stylesheet" href="css/mob_style.css" type="text/css" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
 <script src="/itmi/mobile/js/itmi_mobile.js"></script>

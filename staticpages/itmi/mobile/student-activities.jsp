@@ -7,7 +7,7 @@
     <meta http-equiv="content-language" content="hi" />
      <meta name="description" content="India Today Media Institute(ITMI) which is ready to bring in its 9th batch, has produced brilliant reporters, anchors and media professionals who have carved a niche with their academic knowledge and practical training." />
     <meta name="keywords" content="India Today Media Institute, ITMI Media Institute, Aaj Tak ITMI, Media Institute, college, Diploma, degree, Journalism, broadcast journalism, Headlines Today, Aaj tak, Anchor, anchoring, reporting, Production, news production, News Writing, Video Editing, Editing, Course, Camera, Training, Studio, internship, job, media job, vacancy, recruitment, entrance, Post Graduation, diploma, Studio, Workshop, Application, Noida" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
 <link rel="stylesheet" href="css/mob_style.css" type="text/css" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
 <script src="/itmi/mobile/js/itmi_mobile.js"></script>
@@ -190,27 +190,27 @@ ul.activities-images li:nth-child(21){border-bottom:10px solid #e6e6e6;}
   </div>
   <div class="act-center">
   <ul class="activities-images">
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/1.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/2.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/3.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/4.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/5.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/6.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/7.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/8.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/9.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/10.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/11.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/12.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/13.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/14.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/15.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/16.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/17.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/18.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/19.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/20.jpg" alt=""></li>
-            <li><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/21.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/1.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/2.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/3.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/4.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/5.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/6.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/7.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/8.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/9.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/10.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/11.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/12.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/13.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/14.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/15.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/16.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/17.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/18.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/19.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/20.jpg" alt=""></li>
+            <li><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/activities/21.jpg" alt=""></li>
           </ul>
           </div>
             

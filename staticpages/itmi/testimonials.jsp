@@ -7,9 +7,9 @@
 <title>India Today Media Institute(ITMI) - PG Program in Broadcast Journalism</title>
 <meta name="description" content="">
 <meta name="keywords" content="" />
-        <link rel="apple-touch-icon" sizes="72x72" href="http://media2.intoday.in/indiatoday/itmi/itmi-72x72.png"/>
-        <link rel="apple-touch-icon" sizes="114x114" href="http://media2.intoday.in/indiatoday/itmi/itmi-144x144.png"/>        
-        <link rel='shortcut icon' type='image/x-icon' href='http://media2.intoday.in/indiatoday/itmi/itmi.ico'/>  
+        <link rel="apple-touch-icon" sizes="72x72" href="https://smedia2.intoday.in/indiatoday/itmi/itmi-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="https://smedia2.intoday.in/indiatoday/itmi/itmi-144x144.png"/>        
+        <link rel='shortcut icon' type='image/x-icon' href='https://smedia2.intoday.in/indiatoday/itmi/itmi.ico'/>  
         
         
         <link href="/itmi/css/style.css" type="text/css" rel="stylesheet" />
@@ -49,7 +49,7 @@
             <link rel="alternate" media="only screen and (max-width: 640px)" href="/itmi/mobile/"/> 
    <script type="text/javascript">if ((navigator.userAgent).toLowerCase().indexOf('iphone') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=510733452" />'); } else if ((navigator.userAgent).toLowerCase().indexOf('ipad') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=560404098" />');}</script>
          <script type="text/javascript">function canonicalUrlRedirection(){for(var e="",i=document.getElementsByTagName("link"),a=0;a<i.length;a++)if("only screen and (max-width: 640px)"==i[a].getAttribute("media")){e=i[a].getAttribute("href");break}""!=e&&(window.location.href=e)}var redirectagent=navigator.userAgent.toLowerCase(),mode=window.location.toString().split("mode=")[1],redirect_devices=["vnd.wap.xhtml+xml","sony","symbian","S60","SymbOS","nokia","samsung","mobile","windows ce","epoc","opera mini","nitro","j2me","midp-","cldc-","netfront","mot","up.browser","up.link","audiovox","blackberry","ericsson","panasonic","philips","sanyo","sharp","sie-","portalmmm","blazer","avantgo","danger","palm","series60","palmsource","pocketpc","smartphone","rover","ipaq","au-mic","alcatel","ericy","vodafone","wap1","wap2","teleca","playstation","lge","lg-","iphone","android","htc","dream","webos","bolt","nintendo"];if(!(redirectagent.indexOf("ipad")>=0))for(var i in redirect_devices)-1!=redirectagent.indexOf(redirect_devices[i])&&"classic"!=mode&&canonicalUrlRedirection();</script>
-    <script src="http://media2.intoday.in/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
+    <script src="https://smedia2.intoday.in/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
 <script src="js/marquee.js"></script>
 <script src="js/common.js"></script>                 
 </head>
@@ -74,26 +74,26 @@ ul.navbar li a {padding: 8px 17px;}
 </style>
 <div class="topheader">
   <div class="wrapper"> 
-    <!--<img border="0" alt="" src="http://media2.intoday.in/indiatoday/itmi/images/Star.png" class="star">-->
+    <!--<img border="0" alt="" src="https://smedia2.intoday.in/indiatoday/itmi/images/Star.png" class="star">-->
     <ul>
-      <li><a href="http://www.indiatoday.in/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
-      <li><a href="http://www.aajtak.in/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
-<!--  <li><a  href="http://www.headlinestoday.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
-      <li><a href="http://www.businesstoday.in/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
-      <li><a href="http://www.menshealthindia.in/" target="_blank"  ><img src="http://media2.intoday.in/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
-      <li><a href="http://www.wonderwoman.in" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
-      <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="http://media2.intoday.in/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
-      <li><a href="http://oyefm.in/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
+      <li><a href="http://www.indiatoday.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
+      <li><a href="http://www.aajtak.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
+<!--  <li><a  href="http://www.headlinestoday.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
+      <li><a href="http://www.businesstoday.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
+      <li><a href="http://www.menshealthindia.in/" target="_blank"  ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
+      <li><a href="http://www.wonderwoman.in" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
+      <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
+      <li><a href="http://oyefm.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
     </ul>
   </div>
 </div>
 <div class="bottomheader">    
   <div class="wrapper">
-    <div class="logo"> <a href="/itmi/index.jsp"><img src=" http://media2.intoday.in/indiatoday/itmi/images/itmi-logo.png" alt="" border="0" /></a> 
-      <!--<a href="index.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/ITMI_logo.gif" alt="" border="0" /></a>--> 
+    <div class="logo"> <a href="/itmi/index.jsp"><img src=" https://smedia2.intoday.in/indiatoday/itmi/images/itmi-logo.png" alt="" border="0" /></a> 
+      <!--<a href="index.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/ITMI_logo.gif" alt="" border="0" /></a>--> 
     </div>
     <div class="bottomleft"> 
-      <!-- <a href=""><h2>Industry Buzz </h2><span><img src="http://media2.intoday.in/indiatoday/itmi/images/right-list-img.jpg" width="8" height="18" alt="" /></span></a>
+      <!-- <a href=""><h2>Industry Buzz </h2><span><img src="https://smedia2.intoday.in/indiatoday/itmi/images/right-list-img.jpg" width="8" height="18" alt="" /></span></a>
                     <p>28 top companies go on campus recritment drive this fall</p>--> 
       
         
@@ -103,8 +103,8 @@ ul.navbar li a {padding: 8px 17px;}
         
         </div>
         
-      <!--<img src="http://media2.intoday.in/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
-    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="http://media2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
+      <!--<img src="https://smedia2.intoday.in/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
+    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
   </div>
   <div class="searchBoxs">
     <div class="search-engin">
@@ -190,19 +190,19 @@ ul.navbar li a {padding: 8px 17px;}
 </style>
 <div class="bannerBox">
 <div id="social-area">
-  <div><a href="http://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="http://media2.intoday.in/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
-    <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="http://media2.intoday.in/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
-    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="http://media2.intoday.in/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
+  <div><a href="http://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
+    <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
+    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
 
 </div>
           <div class="belt">
                 <ul>
-                    <li><a href="/itmi/gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner6.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner4.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner3.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner1.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner5.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="http://media2.intoday.in/indiatoday/itmi/images/banner2.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner6.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner4.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner3.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner1.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner5.jpg" width="1000"  alt="" /></a></li>
+                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner2.jpg" width="1000"  alt="" /></a></li>
                 </ul>
                 <div class="text-banner"><h1>INDIA TODAY MEDIA INSTITUTE</h1></div>
             </div>
@@ -257,7 +257,7 @@ ul.navbar li a {padding: 8px 17px;}
 <br />
 <div class="testi-row">
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/KAPIL-SHARMA.png" />
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/KAPIL-SHARMA.png" />
 <h3>Kapil Sharma(205-06)</h3> <br /> 
 <span>- Aajtak</span>
 <p>
@@ -265,14 +265,14 @@ Other colleges and institutes imparts knowledge, but ITMI believes in sharpen th
 </div>
 
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/SMRITI-SINGH-CHANDEL.png" /><h3>SMRITI SINGH CHANDEL (2015-16)
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/SMRITI-SINGH-CHANDEL.png" /><h3>SMRITI SINGH CHANDEL (2015-16)
 </h3> <br /> <span>- The Quint</span>
 <p>
 ITMI is the best place to learn and grow in the field of journalism. With the practical approach and internships offered at the nation's best news channels, ITMI provides an unmatched practical insight in the world of journalism. My time at ITMI has been a life changing revelation. ITMI is the secret behind my success.</p>
 </div>
 
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/BADSHA-RAY.png" /><h3>BADSHA RAY (2015-16)
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/BADSHA-RAY.png" /><h3>BADSHA RAY (2015-16)
 </h3> <br /> <span>- The Quint</span>
 <p>
 Making a transition from Engineering to Media studies was never easy for me. I was scared and doubted my self. I was warned beforehand that training was going to be robust and rigorous. But, first day into Institute and I was asked to let go of my inhibitions and be crazy. Yes, this place gave me the freedom to express my self, made me push my limits, face my fears and allow me to be 'me'. From mentors to my fellow ITMIANS, everyone helped me grow from strength to strength. Today I look back and cherish every single day I spent here. Thank you ITMI. Miss You!   </p>
@@ -280,7 +280,7 @@ Making a transition from Engineering to Media studies was never easy for me. I w
 
 
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/NEHA-UPADHYAY.png" /><h3>NEHA UPADHYAY (2011-13)
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/NEHA-UPADHYAY.png" /><h3>NEHA UPADHYAY (2011-13)
 </h3> <br /> <span>- Aajtak</span>
 <p>
 चैनल मतलब आजतक और इंस्टीट्यूट मतलब ITMI.. किसी के करियर की इससे अच्छी शुरुआत नहीं हो सकती.. अबतक के अपने छोटे से करियर में मैनें रिर्पोटिंग की.. एंकरिंग की.. वेबसाइट के लिए काम किया.. और इतने बड़े नेटवर्क में अपना हर सपना पूरा किया.. और ये मुमकिन सिर्फ इसलिए हो पाया क्योंकि मैं ITMI की स्टूडेंट थी.. आपको यहां शून्य से शिखर तक पहुंचना सिखाया जाता है, वो भी ठीक वैसे ही जैसे किसी छोटे बच्चे को शिक्षा मिलती है </p>
@@ -288,7 +288,7 @@ Making a transition from Engineering to Media studies was never easy for me. I w
 
 
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/SHUBHANG-SURESH-CHAUHAN.png" /><h3>SHUBHANG SURESH CHAUHAN (2015-16)
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/SHUBHANG-SURESH-CHAUHAN.png" /><h3>SHUBHANG SURESH CHAUHAN (2015-16)
 </h3> <br /> <span>-  Zee Media</span>
 <p>
 ITMI will teach you to follow the right track of journalism which has somewhat become dusty in today's world. Subjects are taught here on experience rather than fat books. The fascinating part is, one gets to meet the top-notch journalists from the industry sharing their own hands on experience and fanning out their views. </p>
@@ -296,7 +296,7 @@ ITMI will teach you to follow the right track of journalism which has somewhat b
 
 
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Harshit-Joshi.png" /><h3>HARSHIT JOSHI (2013-14)
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Harshit-Joshi.png" /><h3>HARSHIT JOSHI (2013-14)
 </h3> <br /> <span>- India Today TV</span>
 <p>
 Being someone who had no past educational qualifications in journalism and media never took a toll on my studies in TVTMI, such is the level of training and teaching in the institute. Faculties and facilities provided are exactly what a fresher needs to achieve endeavours in his or her journey in the industry. The way students are sent to newsroom is one of its kind training program. It not only trains us to handle all the domains of a media organisation but also makes us an all rounder media professional, the need of the hour! </p>
@@ -304,7 +304,7 @@ Being someone who had no past educational qualifications in journalism and media
 
 
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Pallavi-Sati.png" /><h3>PALLAVI SATI (2013-14)
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Pallavi-Sati.png" /><h3>PALLAVI SATI (2013-14)
 </h3> <br /> <span>- India Today TV</span>
 <p>
 ITMI is not just an institute that imparts knowledge, it is a kindgom of exploration. You not only refine your skills and channelize your inclination; you rediscover and make yourself from the scratch in the industry. Not to forget the mentors, they are simply the best you can get.</p>
@@ -312,7 +312,7 @@ ITMI is not just an institute that imparts knowledge, it is a kindgom of explora
 
 
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Debanjana-Bhattacharya.png" /><h3>DEBANJANA BHATTACHARYA (2014-15)
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Debanjana-Bhattacharya.png" /><h3>DEBANJANA BHATTACHARYA (2014-15)
 </h3> <br /> <span>- NDTV</span>
 <p>
 Success comes in a lot of ways and only money and fame. It comes from having a meaning in your life, it comes when you do what you love and being passionate about what you do. ITMI is the exactly the place where dreams can come true, where the faculties are working on shaping you to achieve the dreams and within you feel the capacity of knowing it all.</p>
@@ -320,7 +320,7 @@ Success comes in a lot of ways and only money and fame. It comes from having a m
 
 
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Pankaj-Jain.png" /><h3>PANKAJ JAIN (2012-14)
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Pankaj-Jain.png" /><h3>PANKAJ JAIN (2012-14)
 </h3> <br /> <span>- Aajtak</span>
 <p>
 I am immensely thankful to ITMI for providing the training program which helped me in grooming and prepared me for the challenges of news industries. The flexible, innovative and professional environment for learning provides you the opportunity to explore yourself. The Faculty and staff are all dedicated to the student's success and growth. </p>
@@ -328,7 +328,7 @@ I am immensely thankful to ITMI for providing the training program which helped 
 
 
 <div class="testimonial-outer">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Roshni-bhatiwal.png" /><h3>Roshani Thokne Bhatiwal (2010-12)
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/testimonials/Roshni-bhatiwal.png" /><h3>Roshani Thokne Bhatiwal (2010-12)
 </h3> <br /> <span>- Aajtak</span>
 <p>
 A place where you not only learn but you experience a professional life. ITMI is a platform where you get a chance to explore your skills and enhance your capability. Your mentors guide to overcome every challenge which stops you to achieve greater heights. I am proud to be an ITMI student.</p>
@@ -395,7 +395,7 @@ As Mr. Aroon Purie often says, "You are as good as your last story." India Today
 
               
             <iframe src="https://specials.intoday.in/specials/itmi/applynow_second.jsp?source=null"   height="950" width="300" scrolling="no" frameborder="0" ></iframe>
-            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
+            <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
                 
 </div>
             
@@ -432,7 +432,7 @@ As Mr. Aroon Purie often says, "You are as good as your last story." India Today
 <!--
 
 <div id="footer-add">
-	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
+	<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
 </div>
 
 <div class="copyright">

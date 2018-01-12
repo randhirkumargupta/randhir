@@ -7,7 +7,7 @@
     <meta http-equiv="content-language" content="hi" />
     <meta name="description" content="India Today Media Institute(ITMI) which is ready to bring in its 9th batch, has produced brilliant reporters, anchors and media professionals who have carved a niche with their academic knowledge and practical training." />
     <meta name="keywords" content="India Today Media Institute, ITMI Media Institute, Aaj Tak ITMI, Media Institute, college, Diploma, degree, Journalism, broadcast journalism, Headlines Today, Aaj tak, Anchor, anchoring, reporting, Production, news production, News Writing, Video Editing, Editing, Course, Camera, Training, Studio, internship, job, media job, vacancy, recruitment, entrance, Post Graduation, diploma, Studio, Workshop, Application, Noida" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
 <link rel="stylesheet" href="css/mob_style.css" type="text/css" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
 <script src="/itmi/mobile/js/itmi_mobile.js"></script>
@@ -167,7 +167,7 @@ if (!mobile) {
 </div>
 <div class="body_section">
   <div class="outer_box_cont"> <span class="black_hdn">Whatsupp @ ITMI</span>
-    <div class="back_hdn_img"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/faculty.jpg" alt="img"> </div>
+    <div class="back_hdn_img"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/faculty.jpg" alt="img"> </div>
   </div>
 
   <div class="outer_box_cont">
