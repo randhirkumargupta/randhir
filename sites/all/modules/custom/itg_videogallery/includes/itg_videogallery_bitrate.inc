@@ -4,7 +4,7 @@
  * This function use for get video bitrate url
  * 
  */
-function itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on) {
+function itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $external = NULL) {
   $return_array = array();
   $query = db_select('itg_video_transcoding', 'ivt');
   $query->fields('ivt');
@@ -36,12 +36,15 @@ function itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on) {
   $return_array['dfp_tags'] = JWPLAYER_DFP_TAG;
   if (!empty($dfp_data) && !empty($dfp_data[0]->dfp_tags)) {
     if ($used_on == 'video') {
-       $retrun_array['dfp_tags'] = $dfp_data[0]->dfp_tags;
-       
+      $retrun_array['dfp_tags'] = $dfp_data[0]->dfp_tags;
     }
     else {
+      if ($external == 1) {
+        $retrun_array['dfp_tags'] = $dfp_data[0]->dfp_tags_external;
+      }
+      else {
         $retrun_array['dfp_tags'] = $dfp_data[0]->dfp_tags_internal;
-        $retrun_array['dfp_tags_external'] = $dfp_data[0]->dfp_tags_external;
+      }
     }
   }
     if (!empty($dfp_data)) {

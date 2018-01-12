@@ -30,26 +30,13 @@ if ($used_on == 'embed') {
   $autostart = "false";
 }
 
-$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on);
-
+$data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on, $external_side);
 ?>
 <div id="videoplayer"> </div>
 <script type="text/javascript">
   jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
   function loadplayerjw() {
-    var dfp_int = '<?php echo urlencode($data_video['dfp_tags']) ?>';
-      var dpf_ext = '<?php echo urlencode($data_video['dfp_tags_external'])?>';
-      var referrer = document.referrer;
-      ItgdDomain = null;
-      if (referrer.length > 0) {
-          ItgdDomain = getDomain(referrer);
-      }
-      if (ItgdDomain == 'indiatoday.in' || ItgdDomain == 'aajtak.in' || ItgdDomain == 'intoday.in') {
-          var player_dfp = dfp_int;
-      }
-      else {
-          var player_dfp = dpf_ext;
-      }
+      var player_dfp = "<?php echo urlencode($data_video['dfp_tags']); ?>";
       jwplayer('videoplayer').setup({
           playlist: [{
                   title: "<?php echo stripslashes($title); ?>",
@@ -86,6 +73,13 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on);
 
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
+  <?php
+  $arg = arg();
+  if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
+   //ga('create', '<?php //echo $data_video["ga_code"]; ?>', 'auto');
+   ga('create', 'UA-20047041-23', 'auto');
+   ga('send', 'pageview');
+  <?php } ?>
    playerInstance.on('ready', function () {
    console.log('playerready');
    ns_.StreamingAnalytics.JWPlayer(playerInstance, {
@@ -103,14 +97,7 @@ $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid, $used_on);
   //jQuery(document).ready(function () {
       //playerInstance.play();
   //});
-function getDomain(url) {
-      if (url) {
-          var match = /(?:https?:\/\/)?(?:\w+:\/)?[^:?#\/\s]*?([^.\s]+\.(?:[a-z]{2,}|co\.uk|org\.uk|ac\.uk|org\.au|com\.au))(?:[:?#\/]|$)/gi
-                  .exec(url);
-          return match ? match[1] : null;
-      } else
-          return null;
-  }
+
 </script>
 
 <?php
