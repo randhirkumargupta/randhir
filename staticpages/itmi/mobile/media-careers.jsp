@@ -7,7 +7,7 @@
     <meta http-equiv="content-language" content="hi" />
     <meta name="description" content="ITMI is among top institute of mass communication. The college provides all courses for mass communication " />
     <meta name="keywords" content="colleges for mass communication, courses in mass communication, career in mass communication, institute of mass communication, mass communication media" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
 <link rel="stylesheet" href="css/mob_style.css" type="text/css" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
 <script src="/itmi/mobile/js/itmi_mobile.js"></script>

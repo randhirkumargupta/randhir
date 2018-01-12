@@ -7,7 +7,7 @@
     <meta http-equiv="content-language" content="hi" />
     <meta name="description" content="ITMI is considered as one of the best mass communication institute in India. We provide Post graduate diploma in Advertising and PR , Journalism , Digital media and Marketing , and Audio Visual Production." />
     <meta name="keywords" content="Advertising and PR , Journalism , Digital media and Marketing , Mass communication , Post graduate diploma in masscomm." />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
 <link rel="stylesheet" href="css/mob_style.css" type="text/css" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
 <script src="/itmi/mobile/js/itmi_mobile.js"></script>
