@@ -260,7 +260,7 @@ function getbylineFlag($nid, $status) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             $email = $resvalue['field_reporter_email_id_value'];
-            if (strpos($email, '@aajtak.com') !== false) {
+            if (strpos($email, 'aajtak.com') !== false) {
                 $flag = 1;
                 break;
             }
@@ -287,7 +287,7 @@ function getbylineDetail($nid, $status) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             $email = $resvalue['field_reporter_email_id_value'];
-            if (strpos($email, '@aajtak.com') !== false) {
+            if (strpos($email, 'aajtak.com') !== false) {
                 $data['author_id'] = $resvalue['nid'];
                 $data['author_name'] = $resvalue['title'];
                 $data['author_email'] = $email;
