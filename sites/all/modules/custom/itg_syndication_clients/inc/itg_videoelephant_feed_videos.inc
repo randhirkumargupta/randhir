@@ -37,12 +37,8 @@ function itg_genrate_videoelephant_feed_videos_syndication($section_id = NULL, $
     $query->fields('sed', array('field_story_expert_description_value'));
 
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
-    if ($days_ago = get_content_fetch_time($section_id)) {
+    if($days_ago = get_content_fetch_time($section_id)){
       $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
-      $query->condition('n.created', $days_ago, '>=');
-    }
-    else {
-      $days_ago = strtotime(date('Y-m-d', strtotime('-30 days')));
       $query->condition('n.created', $days_ago, '>=');
     }
     $query->condition('ti.tid', $section_id, '=');

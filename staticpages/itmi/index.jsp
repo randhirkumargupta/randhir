@@ -1,4 +1,5 @@
-<?php include('header.php');?>    
+<?php include('header.php');?>
+    
     <div class="contentCn">
     	<div class="wrapper">
         
@@ -43,18 +44,18 @@ $(document).ready(function(e) {
                             
       <div class="about_subbox aboutsubboxtop" style="display:none;">
                            <ul>
-             <li><a href="/itmi/audiovisual-communication.jsp">Audiovisual Production </a></li>
+             <li><a href="audiovisual-communication.jsp">Audiovisual Production </a></li>
               <!--<li><a href="digital-media.jsp">Digital Media </a></li>-->
               <!--<li><a href="communication-managemnet.jsp">Media and Communication Management </a></li>-->
-              <li><a href="/itmi/communication-managemnet.jsp">Advertising and Public Relation  </a></li>
-              <li><a href="/itmi/journalism.jsp">Journalism</a></li>
+              <li><a href="communication-managemnet.jsp">Advertising and Public Relation  </a></li>
+              <li><a href="journalism.jsp">Journalism</a></li>
             </ul>
                             
                             </div>                      
          <div class="about_subbox about_subbox01" style="display:none;">
                            <ul>
-              <li><a href="/itmi/what-we-offer-broadcastjournalism.jsp">Broadcast journalism </a></li>
-              <li><a href="/itmi/media-marketing-planning-sales-management.jsp">Media Marketing, Planning &amp; Sales Management </a></li> 
+              <li><a href="what-we-offer-broadcastjournalism.jsp">Broadcast journalism </a></li>
+              <li><a href="media-marketing-planning-sales-management.jsp">Media Marketing, Planning &amp; Sales Management </a></li> 
             </ul>
                             
                             </div>                   
@@ -67,10 +68,10 @@ $(document).ready(function(e) {
                     	<div class="aboutText one">
                         	<div class="top-heading box-one">About Us</div>
                         	<figure>
-                            	<img src="http://media2.intoday.in/indiatoday/itmi/images/about_us_image.jpg" alt="" />
+                            	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/about_us_image.jpg" alt="" />
                             </figure>
                             <h2><a href="#">ITMI Could not have been founded on firmer grounding...</a></h2>
-                            <a href="/itmi/about_us.jsp">More</a>
+                            <a href="about_us.jsp">More</a>
                         </div>
                     </li>
                     <li class="lessmarg">
@@ -94,7 +95,7 @@ $(document).ready(function(e) {
                     	<div class="aboutText two">
                             <div class="top-heading box-two">Faculty </div>
                         	<figure>
-                            	<img src="http://media2.intoday.in/indiatoday/itmi/images/FACULTY.jpg" alt="" />
+                            	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/FACULTY.jpg" alt="" />
                             </figure>
                             <h2><a href="#">Getting you to realise your dreams is all we do...</a></h2>
                             <a href="faculty-members.jsp">More</a>
@@ -104,7 +105,7 @@ $(document).ready(function(e) {
                     	<div class="aboutText four">
                             <div class="top-heading box-four">AlumniSpeak</div>
                         	<figure>
-                            	<a href="/itmi/testimonials.jsp" target="_blank"><img src="http://media2.intoday.in/indiatoday/itmi/images/alumina.jpg" alt="" /></a>
+                            	<a href="/itmi/testimonials.jsp" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/alumina.jpg" alt="" /></a>
                             </figure>
                             <h2><a href="/itmi/testimonials.jsp">Hear it from, all who have been there and done that...</a></h2>
                            <!-- <a href="#">More</a>-->
@@ -114,7 +115,7 @@ $(document).ready(function(e) {
                     	<div class="aboutText five">
                             <div class="top-heading box-five">Chairman's message</div>
                         	<figure>
-                            	<img src="http://media2.intoday.in/indiatoday/itmi/images/CHAIRMAN.jpg" alt="" />
+                            	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/CHAIRMAN.jpg" alt="" />
                             </figure>
                             <h2><a href="#">In its 10th year, ITMI will now offer one and two year...</a></h2>
                             <a href="chairman-message.jsp">More</a>
@@ -134,7 +135,7 @@ $(document).ready(function(e) {
                     	<!--<div class="aboutText six">
                             <div class="top-heading box-six">Dean's message</div>
                         	<figure>
-                            	<img src="http://media2.intoday.in/indiatoday/itmi/dean-message-img.jpg" alt="" width="306" height="198" />
+                            	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/dean-message-img.jpg" alt="" width="306" height="198" />
                             </figure>
                             <h2><a href="#">It's great to belong to one of the biggest media conglomerates...</a></h2>
                             <a href="dean-message.jsp">More</a>
@@ -248,8 +249,8 @@ $(document).ready(function(e) {
 			<div class="rightBar">
 
               
-            <iframe src="https://specials.intoday.in/specials/itmi/applynow_second.jsp"   height="950" width="300" scrolling="no" frameborder="0" ></iframe>
-            <img src="http://media2.intoday.in/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
+            <iframe src="https://subscriptions.intoday.in/subscriptions/itmi/applynow_second.jsp?source=null"   height="950" width="300" scrolling="no" frameborder="0" ></iframe>
+            <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Contact-number.jpg" style="display:none;">
                 
 </div>
             
@@ -271,7 +272,7 @@ $(document).ready(function(e) {
         </ul>  
         
         
-        <iframe width="98%" scrolling="no" height="170" frameborder="0" src="http://media2.intoday.in/microsites/common/common_it_footer.html"
+        <iframe width="98%" scrolling="no" height="170" frameborder="0" src="/staticpages/main/microsites/common/common_it_footer.html"
          style="margin-top: 20px;"></iframe>
         
     </div>
@@ -286,7 +287,7 @@ $(document).ready(function(e) {
 <!--
 
 <div id="footer-add">
-	<img src="http://media2.intoday.in/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
+	<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/add.jpg" width="728" height="90" alt="" />
 </div>
 
 <div class="copyright">
