@@ -8,13 +8,13 @@ function __itg_widget_helper_data_insert($nid, $node_data = null) {
   //itg_watchdog("request", $_REQUEST['op']);
    // if ($nid && $_REQUEST['op'] !='Apply' && $_REQUEST['op'] !='Save') {
         __itg_widget_helper_data_delete($nid);
-       /* if (empty($node_data)) {
-          $node_load_data = node_load($nid);
+        if (empty($node_data)) {
+          $node_load_data = node_load($nid, null, TRUE);
         } else {
             $node_load_data = $node_data;
-        } */
+        }
   
-        $node_load_data = node_load($nid, null, TRUE);
+        //$node_load_data = node_load($nid, null, TRUE);
 
         $node_load_data->status = itg_common_get_node_status_from_tbl($nid);
         //itg_watchdog("helper_insert" , time());
@@ -32,7 +32,7 @@ function __itg_widget_helper_data_insert($nid, $node_data = null) {
                 array(
                   'nid' => $nid,
                   'node_data' => serialize($node_load_data),
-                  'node_status' => itg_common_get_node_status_from_tbl($nid),
+                  'node_status' => $node_load_data->status,
                   'node_type' => $node_load_data->type,
                 )
               )->execute();
@@ -52,7 +52,7 @@ function itg_common_get_node_status_from_tbl($nid) {
  * @param int $nid
  */
 function __itg_widget_helper_data_delete($nid) {
-  itg_watchdog("helper_delete" , $nid);
+  //itg_watchdog("helper_delete" , $nid);
     if ($nid) {
         try {
             db_delete('itg_widget_helper')->condition("nid", $nid)->execute();

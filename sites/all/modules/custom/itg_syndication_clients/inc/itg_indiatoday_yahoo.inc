@@ -89,6 +89,7 @@ function itg_genrate_indiatoday_yahoo_story_syndication($section_ids = NULL, $fi
     $query->orderBy('n.created', 'DESC');
     $query->groupBy('n.nid')->range(0, 25);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    
     $xml = genrate_indiatoday_yahoo_story_syndication_xml($result);
     $xml_path = 'public://indiatoday/yahoo/';
     $file_path = $xml_path . $file_name;
@@ -118,6 +119,7 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $publish_date = gmdate("D, d M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_extra_custom_tags($body);
       $section_name = get_term_name_by_tid($value['tid']);
       $metatags = get_node_metatags_by_nid($value['nid']);
@@ -224,6 +226,7 @@ function genrate_indiatoday_yahoo_static_section_syndication_xml($result = NULL,
       $publish_date = date("Y-m-d\TH:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_extra_custom_tags($body);
       if ($section_id != 'top') {
         $section_name = get_term_name_by_tid($section_id);
@@ -326,6 +329,7 @@ function genrate_indiatoday_yahoo_static_mailtoday_syndication_xml($result, $sec
       $guid = genrate_uniqui_guid();
       $publish_date = date("Ymd\THis", strtotime($value['field_itg_content_publish_date_value']));
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_extra_custom_tags($body);
       $section_name = get_term_name_by_tid($section_id);
       $metatags = get_node_metatags_by_nid($value['nid']);
@@ -415,6 +419,7 @@ function genrate_indiatoday_yahoo_static_latest_stories_syndication_xml($result)
       $guid = genrate_uniqui_guid();
       $publish_date = date("Ymd\THis", strtotime($value['field_itg_content_publish_date_value']));
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_extra_custom_tags($body);
       $section_name = get_term_name_by_tid($value['field_primary_category_value']);
       $metatags = get_node_metatags_by_nid($value['nid']);
