@@ -1043,9 +1043,10 @@ if (!empty($content)):
               if ($config_name == 'vukkul') {
                 ?>
                 <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i> <span><?php
-                      if (function_exists(itg_vukkul_comment_count)) {
-                        print itg_vukkul_comment_count('story_' . arg(1));
-                      }
+                      // Hide vukul comment by Shashnak due to long time take:
+                      //if (function_exists(itg_vukkul_comment_count)) {
+                        //print itg_vukkul_comment_count('story_' . arg(1));
+                      //}
                       ?></span></a></li>
               <?php } if ($config_name == 'other') { ?> 
                 <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $get_comment_count; ?></span></a></li>
