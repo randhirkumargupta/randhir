@@ -15,13 +15,13 @@ function homePageJson() {
     $data_topstories = array();
     $data_news = array();
     $data_magazine = array();
-    $homePageJsonWidget1 = array();
-    $homePageJsonWidget2 = array();
 
     $data_packagelist_india = homePageJsonPackagelist_india();
     $data_topstories = topstoriesList('home');
     $data_news_india = homePageJsonNewslist_india();
+
     $data_news_lifestyle = homePageJsonNewslist_lifestyle();
+
     $data_news_world = homePageJsonNewslist_world();
     $data_magazine = homePageJsonMagazine();
     $data_poll = homePageJsonPoll();
@@ -32,7 +32,9 @@ function homePageJson() {
 
     $data['data'][0] = $data_topstories;
     $data['data'][1] = $data_news_india;
+
     $data['data'][2] = $data_news_lifestyle;
+
     $data['data'][3] = $data_news_world;
     $data['data'][4] = $data_magazine;
     //$data['data'][6] = $data_poll;
@@ -1205,7 +1207,6 @@ function homePageJsonNewslist_world() {
             $n_rating = getRating($node);
             // homepage.inc
             $n_magazine = array();
-
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
