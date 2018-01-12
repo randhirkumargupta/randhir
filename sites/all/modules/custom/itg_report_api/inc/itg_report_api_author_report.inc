@@ -245,7 +245,7 @@ function getContentCountByDate($start_date, $end_date) {
         $author_nid = $resvalue['field_story_reporter_target_id'];        
         $author = node_load($author_nid);
         $author_email = $author->field_reporter_email_id['und'][0]['value'];   
-        echo $author_email;die();
+        echo $author_email;die(); 
         if (strpos($author_email, 'aajtak.com') !== false) {
             $cont++;
         }
