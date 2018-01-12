@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,700,300italic,100italic,100,300,400italic,500,500italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300italic,100italic,100,300,400italic,500,500italic,700italic);
 * { padding: 0px; margin:0px;}
 html, body { padding: 0px; margin:0px; text-align:left;}
 body { background: #ffffff; }
@@ -176,8 +176,8 @@ header, figure{ display:block;}
 .aboutText ul { padding:0px; margin:0px; overflow:hidden; background:#f1f1f1; margin-top:25px;}  
 .aboutText ul li { list-style:none; display:block; width:100%; height:auto !important ;  margin-top:20px; background:#e1dfe0; padding-left:7px;}
 .aboutText ul li:hover{ background:#bebcbd;}
-.aboutText ul li a { text-decoration:none; background: #e1dfe0 url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/banner/itmiarrow.jpg) right top no-repeat; color:#333333; padding: 10px 0px 10px 0px;}
-.aboutText ul li a:hover { text-decoration:none; background: #bebcbd url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/banner/itmiarrow-h.jpg) right top no-repeat;}
+.aboutText ul li a { text-decoration:none; background: #e1dfe0 url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/banner/itmiarrow.jpg) right top no-repeat; color:#333333; padding: 10px 0px 10px 0px;}
+.aboutText ul li a:hover { text-decoration:none; background: #bebcbd url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/banner/itmiarrow-h.jpg) right top no-repeat;}
 .leftBar ol { padding:0px; margin:0px; }
 .leftBar ol  li { float:none; width:auto; background:none; padding:0px; height:auto}
 

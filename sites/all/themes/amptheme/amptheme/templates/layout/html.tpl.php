@@ -1468,6 +1468,10 @@ button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} bu
         box-sizing: border-box
     }
 }
+
+.video_dec_amp {
+    text-align: left;
+  }
         </style>
     </head>
     <?php
