@@ -4,7 +4,7 @@ drupal_add_css(".logo {display:none !important}", "inline");
 drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
 <div id="section-header-event-1208864" class="india-today-woman-summit">
-    <header id="conclave2018-header">
+    <header id="conclave2018-header" class="clearfix">
         <div class="container">
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-12">
