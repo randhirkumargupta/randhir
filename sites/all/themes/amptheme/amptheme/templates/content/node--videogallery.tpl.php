@@ -16,6 +16,13 @@
                   type="slides">
     <?php
     if (!empty($videoids)) {
+      if(isset($node->field_story_expert_description[LANGUAGE_NONE])) {
+        $description = $node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
+      }
+      else {
+        $description = $node->field_video_kicker[LANGUAGE_NONE][0]['value'];
+      }
+                        
       foreach ($videoids as $keys => $video_value) {
         if (function_exists('get_amp_video_time')) {
         $video_time = get_amp_video_time($node->nid, 'videogallery', 'field_video_duration');
@@ -57,6 +64,8 @@
             }
             ?>
                     <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
+                    <div class="video_dec_<?php print $video_value->video_id; ?>" ><?php print ucfirst($description); ?></div>
+                    
                 </div>
             </div>        
 
@@ -75,12 +84,22 @@
               <?php    
               if (function_exists('get_video_in_fieldcollection_by_nid_mirtaed')) {
                 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($node->nid);
-              } ?>
+                $video_kicker = get_video_kicker_by_nid($node->nid);
+              } 
+              
+                        
+              if(isset($node->field_story_expert_description[LANGUAGE_NONE])) {
+                $description = $node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
+                  } else {
+                $description = $video_kicker[0]->field_video_kicker_value;
+              }
+              ?>
         <amp-carousel width="300"
                   height="280"
                   layout="responsive"
                   type="slides">
               <?php foreach ($videoids as $keys => $video_value) {
+                
                 if(strpos($video_value->field_migrated_video_url_value, 'https') === FALSE) {
                  $video_id = str_replace("http","https",$video_value->field_migrated_video_url_value);
                 } else {
@@ -96,6 +115,8 @@
                        <source type="video/webm" src="<?php print $video_id;?>">
                       </amp-video>
                     <div class="video-caption"><span><?php print date('F d, Y, H:i A', $node->created);?></span><p><?php print $video_value->field_video_title_value;?></p></div>
+                    <div class="video_dec_<?php print $video_value->video_id; ?>" ><?php print ucfirst($description); ?></div>
+                    
                 </div>
             </div>    
         
