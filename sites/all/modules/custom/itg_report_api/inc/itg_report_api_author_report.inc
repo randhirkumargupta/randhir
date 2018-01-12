@@ -239,14 +239,14 @@ function getContentCountByDate($start_date, $end_date) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('fst.field_story_source_type_value', 'story', '=');
+    $query->range(1, 10);
     
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);      
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];        
         $author_nid = $resvalue['field_story_reporter_target_id'];        
         $author = node_load($author_nid);
-        $author_email = $author->field_reporter_email_id['und'][0]['value'];   
-        echo $author_email;die(); 
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];           
         if (strpos($author_email, 'aajtak.com') !== false) {
             $cont++;
         }
@@ -324,12 +324,13 @@ function getAuthorList_Report($s_date, $e_date) {
     $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
-        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
-        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+        //$query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        //$query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('fst.field_story_source_type_value', 'story', '=');
+    $query->range(1, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];        
@@ -366,12 +367,13 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
     $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
-        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
-        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+        //$query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        //$query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('fst.field_story_source_type_value', 'story', '=');
+    $query->range(1, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];        
@@ -430,12 +432,13 @@ function todayContentsByUid($start_date, $end_date, $mail) {
     $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
-        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
-        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+        //$query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        //$query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('fst.field_story_source_type_value', 'story', '=');
+    $query->range(1, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];        
