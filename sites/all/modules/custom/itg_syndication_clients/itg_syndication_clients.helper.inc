@@ -507,7 +507,7 @@ function get_content_fetch_time($section_id) {
     return $time_array[$section_id];
   }
   else {
-    return 730;
+    return FALSE;
   }
 }
 

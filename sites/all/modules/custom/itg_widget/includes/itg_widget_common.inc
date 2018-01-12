@@ -2823,22 +2823,16 @@ function itg_widget_node_insert($node) {
         if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
-            
-            if (function_exists('__itg_widget_helper_data_insert')) {
-              __itg_widget_helper_data_insert($node->nid, $node);
-            }
-            
             if (isset($node->field_story_category['und'])) {
                 $primary_category = $node->field_primary_category['und'][0]['value'];
-                
                 foreach ($cat_id as $category) {
 
                     if ($node->field_story_source_type['und'][0]['value'] == 'migrated' && $category['tid'] == $primary_category) {
                         continue;
                     } else {
-                        /*if (function_exists('__itg_widget_helper_data_insert')) {
+                        if (function_exists('__itg_widget_helper_data_insert')) {
                             __itg_widget_helper_data_insert($node->nid, $node);
-                        }*/
+                        }
                         $single_max_result = get_max_weight_for_node_insert($category['tid'], $node->type);
                         $max_result = $single_max_result['content_type'];
                         $max_result_all = $single_max_result['All'];
@@ -3014,7 +3008,7 @@ function itg_widget_node_update($node) {
         }
 
         if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) &&!empty($node->op)) {
-            __itg_widget_helper_data_insert($node->nid);
+            __itg_widget_helper_data_insert($node->nid, $node);
             if($node->original->status == 0 && $node->status == 1) {
             //watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
             $nid = $node->nid;

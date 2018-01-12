@@ -653,7 +653,7 @@ function itg_report_api_detail() {
     // call function from return data..
     $jsondata = get_datalist_report($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
     $jsondata = json_encode($jsondata);
-    $ttl = 30; //DEFAULT_REDIS_EXPIRE_TIME;
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
     $result_set = setRedis($redis_key, $jsondata, $ttl);
   }
 
