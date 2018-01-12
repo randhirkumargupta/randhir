@@ -16,7 +16,7 @@
 #conclave2018-header .top_head_Sec h5:after{position: absolute; top: 0; right: -20px; content: ""; width: 0; height: 0; border-top: 40px solid #000; border-right: 20px solid transparent;}
 #conclave2018-header .top_head_Sechm{ text-align: center}
 #conclave2018-header .rightIndiaTodayLogo img{ width:70%}
-#conclave2018-header ~ #block-menu-menu-event-menu ul.menu{ margin-left:125px;}
+#block-itg-layout-manager-header-block #conclave2018-header + .itg-logo-container #block-menu-menu-event-menu ul.menu{ margin-left:125px;}
 
 @media (min-width: 992px) and (max-width: 1170px) {
 /*Nav Swiper*/
@@ -95,5 +95,7 @@
     text-align: center;
     margin: 0;
 }
+#block-itg-layout-manager-header-block #conclave2018-header + #block-menu-menu-event-menu .wrap-mobile-social .mobile-nav{ margin-left:55px;}
+
 }
 
