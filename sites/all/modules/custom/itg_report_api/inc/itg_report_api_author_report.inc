@@ -143,6 +143,8 @@ function author_report($start_date) {
     $month_prev_unix_end = $today_end;
     $year_prev_unix = $year_time_s;
     $year_prev_unix_end = $today_end;
+    
+    
 
     $today_total = getContentCountByDate($today_unix, $today_end);
     $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
@@ -220,25 +222,30 @@ function author_report($start_date) {
  * @return int $count
  */
 function getContentCountByDate($start_date, $end_date) {
+    
     $cont = 0;
     $flag = 0;
     $query = db_select('node', 'n');
-    //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
     $query->fields('n', array('nid', 'status'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
         $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
         $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
-    //$query->condition('fst.field_story_source_type_value', 'story', '=');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
-        $nid = $resvalue['nid'];
-        $status = $resvalue['status'];
-        $flag = getbylineFlag($nid, $status);
-        if ($flag > 0) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if (strpos($author_email, 'aajtak.com') !== false) {
             $cont++;
         }
     }
@@ -308,24 +315,31 @@ function getAuthorList_Report($s_date, $e_date) {
     $cont = 0;
     $flag = 0;
     $query = db_select('node', 'n');
-    //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
     $query->fields('n', array('nid', 'status'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
         $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
         $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
-    //$query->condition('fst.field_story_source_type_value', 'story', '=');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
-        $nid = $resvalue['nid'];
-        $status = $resvalue['status'];
-        $flag = getbylineFlag($nid, $status);
-        if ($flag > 0) {
-            $list[$cont] = getbylineDetail($nid, $status);
-            $cont++;
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if (strpos($author_email, 'aajtak.com') !== false) {
+                $data['author_id'] = $resvalue['nid'];
+                $data['author_name'] = $resvalue['title'];
+                $data['author_email'] = $email;
+                $list[$cont] = getbylineDetail($nid, $status);
+                $cont++;
         }
     }
 
@@ -343,22 +357,26 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
     $cont = 0;
     $flag = 0;
     $query = db_select('node', 'n');
-    //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
     $query->fields('n', array('nid', 'status'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
         $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
         $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
-    //$query->condition('fst.field_story_source_type_value', 'story', '=');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
-        $nid = $resvalue['nid'];
-        $status = $resvalue['status'];
-        $flag = getbylineFlagByEmail($nid, $status, $email);
-        if ($flag > 0) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if ($email == $author_email) {
             $cont++;
         }
     }
@@ -403,25 +421,29 @@ function todayContentsByUid($start_date, $end_date, $mail) {
     $cont = 0;
     $flag = 0;
     $query = db_select('node', 'n');
-    //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
-    $query->fields('n', array('nid', 'status'));
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query->fields('n', array('nid', 'status', 'title'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
         $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
         $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
-    //$query->condition('fst.field_story_source_type_value', 'story', '=');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
-        $nid = $resvalue['nid'];
-        $status = $resvalue['status'];
-        $title = $resvalue['title'];
-        $flag = getbylineFlagByEmail($nid, $status, $mail);
-        if ($flag > 0) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if ($author_email == $mail) {
             $list[$cont]['nid'] = $nid;
             $list[$cont]['title'] = $title;
+            $cont++;
             $cont++;
         }
     }
