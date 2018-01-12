@@ -66,6 +66,7 @@ function get_rss_article_news_republic_xml($result) {
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_extra_custom_tags($body);
       $medium_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
       $large_img = '';
@@ -156,6 +157,7 @@ function get_rss_education_article_news_republic_xml($result) {
       $pub_date = date("D, j M Y H:i:s P", strtotime($value['field_itg_content_publish_date_value']));
       $kicker_text = $value['field_story_kicker_text_value'];
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_extra_custom_tags($body);
       $medium_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
       $large_img = '';
