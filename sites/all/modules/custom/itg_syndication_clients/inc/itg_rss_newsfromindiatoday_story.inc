@@ -81,6 +81,7 @@ function genrate_newsfromindiatoday_story_syndication_xml($result = NULL, $categ
       $keyword = get_content_tags($value['nid'], TRUE);
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);

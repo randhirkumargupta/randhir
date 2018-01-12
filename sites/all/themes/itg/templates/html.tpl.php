@@ -47,6 +47,15 @@
   $arg = arg();
   ?>
 <script>
+  function getDomain(url) {
+      if (url) {
+          var match = /(?:https?:\/\/)?(?:\w+:\/)?[^:?#\/\s]*?([^.\s]+\.(?:[a-z]{2,}|co\.uk|org\.uk|ac\.uk|org\.au|com\.au))(?:[:?#\/]|$)/gi
+                  .exec(url);
+          return match ? match[1] : null;
+      } else
+          return null;
+  }
+  
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
       { (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -55,8 +64,22 @@
       <?php //if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { 
       if($arg[0] != 'video' && $arg[2] != 'embed') { ?>
        ga('create', 'UA-795349-17', 'auto');
-    <?php } ?>
+    <?php }else if($arg[0] == 'video' && $arg[2] == 'embed'){ ?>
+         
+        var referrer = document.referrer;
+        ItgdDomain = null;
+        if (referrer.length > 0) {
+        ItgdDomain = getDomain(referrer);
+        }
+        if (ItgdDomain == 'indiatoday.in' || ItgdDomain == 'aajtak.in' || ItgdDomain == 'intoday.in') {
+        ga('create', 'UA-795349-17', 'auto');
+        }
+        else {
+       ga('create', 'UA-20047041-23', 'auto');
+        }    
+                  
       <?php
+    }
       $nid = isset($menu_item['page_arguments'][0]->nid) ? $menu_item['page_arguments'][0]->nid : "";
       $type = isset($menu_item['page_arguments'][0]->type) ? $menu_item['page_arguments'][0]->type : "";
       $bylines = NULL;
@@ -69,10 +92,7 @@
       <?php if(!empty($bylines)) :?>
       ga('set', 'dimension1', '<?php echo $bylines ?>');
       <?php endif; ?>
-        <?php //if($node_data->type != 'videogallery' && ($arg[0] != 'video' || $arg[2] != 'embed')) { 
-        if(($arg[0] != 'video' && $arg[2] != 'embed')) { ?>
         ga('send', 'pageview');
-      <?php } ?>
     </script>
     <!-- Default comscore -->
     <script type='text/javascript'>

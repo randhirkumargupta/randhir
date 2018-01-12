@@ -23,18 +23,22 @@ function author_report_tvtn($start_date) {
     // date details
     $data['date details']['today'] = date("d-F-Y", $start_date);
     $data['date details']['yesterday'] = date("d-F-Y", $yesterday);
-    ;
     $data['date details']['month'] = $month;
     $data['date details']['year'] = $year;
     // site_snapshot  
+    $month_s = date("M", $start_date);
+    $year_s = date("Y", $start_date);
+    $month_time_s = strtotime("" . $year_s . "-" . $month_s . "-01");
+    $year_time_s = strtotime("" . $year_s . "-01-01");
     $today_unix = $start_date;
     $today_end = $start_date + 86399;
     $yesterday_unix = strtotime('-1 day', $today_unix);
     $yesterday_unix_end = $yesterday_unix + 86399;
-    $month_prev_unix = strtotime('-1 month', $today_unix);
-    $month_prev_unix_end = $month_prev_unix + 2629743;
-    $year_prev_unix = strtotime('-1 year', $today_unix);
-    $year_prev_unix_end = $year_prev_unix + 31556926;
+    $month_prev_unix = $month_time_s;
+    $month_prev_unix_end = $today_end;
+    $year_prev_unix = $year_time_s;
+    $year_prev_unix_end = $today_end;
+
     $today_total = getContentCountByDate($today_unix, $today_end);
     $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
     $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
@@ -57,13 +61,13 @@ function author_report_tvtn($start_date) {
     $author_loop_cont = 0;
     $auhtor_data = array();
     foreach ($author_list as $key => $value) {
-        $user_id = $value['user_id'];
-        $name = $value['name'];
-        $mail = $value['mail'];
-        $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $user_id);
-        $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $user_id);
-        $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $user_id);
-        $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $user_id);
+        $user_id = $value['author_id'];
+        $name = $value['author_name'];
+        $mail = $value['author_email'];
+        $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
+        $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
+        $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $mail);
+        $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $mail);
         $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
         $auhtor_data[$author_loop_cont]['author_email'] = "$mail";
         $auhtor_data[$author_loop_cont]['author_name'] = "$name";
@@ -73,7 +77,7 @@ function author_report_tvtn($start_date) {
         $auhtor_data[$author_loop_cont]['month'] = "$month_total_uid";
         $auhtor_data[$author_loop_cont]['year'] = "$year_total_uid";
         //auhtor_data contents
-        $author_today_data = todayContentsByUid($today_unix, $today_end, $user_id);
+        $author_today_data = todayContentsByUid($today_unix, $today_end, $mail);
         //loop author today data
         $author_inner_loop_cont = 0;
         $contents = array();
@@ -127,14 +131,21 @@ function author_report($start_date) {
     $data['date details']['month'] = $month;
     $data['date details']['year'] = $year;
     // site_snapshot  
+    $month_s = date("M", $start_date);
+    $year_s = date("Y", $start_date);
+    $month_time_s = strtotime("" . $year_s . "-" . $month_s . "-01");
+    $year_time_s = strtotime("" . $year_s . "-01-01");
     $today_unix = $start_date;
     $today_end = $start_date + 86399;
     $yesterday_unix = strtotime('-1 day', $today_unix);
     $yesterday_unix_end = $yesterday_unix + 86399;
-    $month_prev_unix = strtotime('-1 month', $today_unix);
-    $month_prev_unix_end = $month_prev_unix + 2629743;
-    $year_prev_unix = strtotime('-1 year', $today_unix);
-    $year_prev_unix_end = $year_prev_unix + 31556926;
+    $month_prev_unix = $month_time_s;
+    $month_prev_unix_end = $today_end;
+    $year_prev_unix = $year_time_s;
+    $year_prev_unix_end = $today_end;
+    
+    
+
     $today_total = getContentCountByDate($today_unix, $today_end);
     $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
     $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
@@ -158,13 +169,13 @@ function author_report($start_date) {
     $author_loop_cont = 0;
     $auhtor_data = array();
     foreach ($author_list as $key => $value) {
-        $user_id = $value['nid'];
-        $name = $value['title'];
-        $mail = $value['email'];
-        $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $user_id);
-        $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $user_id);
-        $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $user_id);
-        $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $user_id);
+        $user_id = $value['author_id'];
+        $name = $value['author_name'];
+        $mail = $value['author_email'];
+        $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
+        $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
+        $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $mail);
+        $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $mail);
         $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
         $auhtor_data[$author_loop_cont]['author_email'] = "$mail";
         $auhtor_data[$author_loop_cont]['author_name'] = "$name";
@@ -174,7 +185,7 @@ function author_report($start_date) {
         $auhtor_data[$author_loop_cont]['month'] = "$month_total_uid";
         $auhtor_data[$author_loop_cont]['year'] = "$year_total_uid";
         //auhtor_data contents
-        $author_today_data = todayContentsByUid($today_unix, $today_end, $user_id);
+        $author_today_data = todayContentsByUid($today_unix, $today_end, $mail);
         //loop author today data
         $author_inner_loop_cont = 0;
         $contents = array();
@@ -211,19 +222,88 @@ function author_report($start_date) {
  * @return int $count
  */
 function getContentCountByDate($start_date, $end_date) {
-    $query_cont = db_select('node', 'n');
-    $query_cont->fields('n', array('nid'));
+    
+    $cont = 0;
+    $flag = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query->fields('n', array('nid', 'status'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
-        $query_cont->condition('n.created', $start_date, ">=");
-        $query_cont->condition('n.created', $end_date, "<=");
+        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
-    $query_cont->condition('n.status', 1);
-    $result_cont = $query_cont->execute()->fetchAll();
-    $total_records = count($result_cont);
-    $query_cont = "";
-    $result_cont = "";
-    return $total_records;
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->range(1, 10);
+    
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);      
+    foreach ($result as $reskey => $resvalue) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];           
+        if (strpos($author_email, 'aajtak.com') !== false) {
+            $cont++;
+        }
+    }
+    return $cont;
+}
+
+/**
+ * function for generate author Flag array
+ * @pram int $nid, $status
+ * @return int authorflag
+ */
+function getbylineFlag($nid, $status) {
+    $flag = 0;
+    if (!empty($nid) && !empty($status)) {
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_reporter_email_id', 'rem', 'n.nid = rem.entity_id');
+        $query->fields('rem', array('field_reporter_email_id_value'));
+        $query->condition('n.nid', $nid, '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $reskey => $resvalue) {
+            $email = $resvalue['field_reporter_email_id_value'];
+            if (strpos($email, 'aajtak.com') !== false) {
+                $flag = 1;
+                break;
+            }
+        }
+    }
+    return $flag;
+}
+
+/**
+ * function for generate author detail array
+ * @pram $nid, $status
+ * @return array authorDetail
+ */
+function getbylineDetail($nid, $status) {
+    $data = array();
+    if (!empty($nid) && !empty($status)) {
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_reporter_email_id', 'rem', 'n.nid = rem.entity_id');
+        $query->fields('rem', array('field_reporter_email_id_value'));
+        $query->fields('n');
+        $query->condition('s.nid', $nid, '=');
+        $query->condition('s.publish_status', $status, '=');
+        $query->condition('n.type', 'reporter', '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $reskey => $resvalue) {
+            $email = $resvalue['field_reporter_email_id_value'];
+            if (strpos($email, 'aajtak.com') !== false) {
+                $data['author_id'] = $resvalue['nid'];
+                $data['author_name'] = $resvalue['title'];
+                $data['author_email'] = $email;
+            }
+        }
+    }
+    return $data;
 }
 
 /**
@@ -234,18 +314,38 @@ function getContentCountByDate($start_date, $end_date) {
 function getAuthorList_Report($s_date, $e_date) {
     global $base_url;
     $list = array();
-    $total_cont = 0;
-    $query = db_select('itg_multi_byline_info', 'byi');
-    $query->leftJoin('node', 'n', 'n.nid=byi.nid');
-    $query->fields('byi', array('id', 'byline_id', 'nid'));
-    $query->condition('n.created', $s_date, '>=');
-    $query->condition('n.created', $e_date, '<=');
-    $query->groupBy('byi.id');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $reskey => $resvalue) {
-        $id = $resvalue['byline_id'];
-        $list[$id] = getBYlineDetail($id);
+    $cont = 0;
+    $flag = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query->fields('n', array('nid', 'status'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
+    //end
+    if ($start_date != "na") {
+        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->range(1, 10);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
+    foreach ($result as $reskey => $resvalue) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if (strpos($author_email, 'aajtak.com') !== false) {
+                $data['author_id'] = $resvalue['nid'];
+                $data['author_name'] = $resvalue['title'];
+                $data['author_email'] = $email;
+                $list[$cont] = getbylineDetail($nid, $status);
+                $cont++;
+        }
+    }
+
     return $list;
 }
 
@@ -256,23 +356,61 @@ function getAuthorList_Report($s_date, $e_date) {
  *
  * @return int $count
  */
-function getContentCountByDateAndByUid($start_date, $end_date, $uid) {
-    $query_cont = db_select('node', 'n');
-    $query_cont->leftJoin('itg_multi_byline_info', 'byi', 'n.nid=byi.nid');
-    $query_cont->fields('n', array('nid'));
+function getContentCountByDateAndByUid($start_date, $end_date, $email) {
+    $cont = 0;
+    $flag = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query->fields('n', array('nid', 'status'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
-        $query_cont->condition('n.created', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
-    if ($end_date != "na") {
-        $query_cont->condition('n.created', $end_date, "<=");
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->range(1, 10);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
+    foreach ($result as $reskey => $resvalue) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if ($email == $author_email) {
+            $cont++;
+        }
     }
-    $query_cont->condition('byi.byline_id', $uid);
-    $result_cont = $query_cont->execute()->fetchAll();
-    $total_records = count($result_cont);
-    $query_cont = "";
-    $result_cont = "";
-    return $total_records;
+    return $cont;
+}
+
+/**
+ * function for generate author Flag by email array
+ * @pram int $nid, $status
+ * @return int authorflag
+ */
+function getbylineFlagByEmail($nid, $status, $email) {
+    $flag = 0;
+    if (!empty($nid) && !empty($status)) {
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_reporter_email_id', 'rem', 'n.nid = rem.entity_id');
+        $query->fields('rem', array('field_reporter_email_id_value'));
+        $query->condition('s.nid', $nid, '=');
+        $query->condition('s.publish_status', $status, '=');
+        $query->condition('n.type', 'reporter', '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $reskey => $resvalue) {
+            $email_g = $resvalue['field_reporter_email_id_value'];
+            if ($email_g == $email) {
+                $flag = 1;
+                break;
+            }
+        }
+    }
+    return $flag;
 }
 
 /**
@@ -282,68 +420,52 @@ function getContentCountByDateAndByUid($start_date, $end_date, $uid) {
  *
  * @return int $count
  */
-function todayContentsByUid($start_date, $end_date, $uid) {
+function todayContentsByUid($start_date, $end_date, $mail) {
     $list = array();
-    $query_cont = db_select('node', 'n');
-    $query_cont->leftJoin('itg_multi_byline_info', 'byi', 'n.nid=byi.nid');
-    $query_cont->fields('n', array('nid', 'title'));
+    $cont = 0;
+    $flag = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query->fields('n', array('nid', 'status', 'title'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
-        $query_cont->condition('n.created', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
-    if ($end_date != "na") {
-        $query_cont->condition('n.created', $end_date, "<=");
-    }
-    $query_cont->condition('byi.byline_id', $uid);
-    $result = $query_cont->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $loop_cont = 0;
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->range(1, 10);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
-        $nid = $resvalue[nid];
-        $title = $resvalue[title];
-        $list[$loop_cont]['nid'] = $nid;
-        $list[$loop_cont]['title'] = $title;
-        $loop_cont++;
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if ($author_email == $mail) {
+            $list[$cont]['nid'] = $nid;
+            $list[$cont]['title'] = $title;
+            $cont++;
+            $cont++;
+        }
     }
-    $query = "";
-    $result = "";
+
     return $list;
 }
 
-/**
- * function for getBYlineDetail
- * @pram int 
- * @return array
- */
-function getBYlineDetail($nid) {
-    $byline_data = array();
-    if ($nid) {
-        $query_n = db_select('node', 'n');
-        $query_n->leftJoin('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
-        $query_n->fields('n', array('nid', 'title', 'status'));
-        $query_n->fields('re', array('field_reporter_email_id_value'));
-        $query_n->condition('n.nid', $nid, '=');
-        $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result_n as $reskey_n => $resvalue_n) {
-            //$nid = $resvalue_n['nid'];
-            $title = $resvalue_n['title'];
-            $status = $resvalue_n['status'];
-            $field_reporter_email_id_value = $resvalue_n['field_reporter_email_id_value'];
-            $byline_data['nid'] = $nid;
-            $byline_data['title'] = $title;
-            $byline_data['status'] = $status;
-            $byline_data['email'] = $field_reporter_email_id_value;
-        }
-    }
-    return $byline_data;
-}
+
+
 /**
  * function for kickerByNid
  * @pram int $nid
  * @return string $desc
  */
-function kickerByNid($nid){
+function kickerByNid($nid) {
     $desc = "";
-    if($nid){
+    if ($nid) {
         $query_n = db_select('field_data_field_story_kicker_text', 'kt');
         $query_n->fields('kt', array('field_story_kicker_text_value'));
         $query_n->condition('kt.entity_id', $nid, '=');
