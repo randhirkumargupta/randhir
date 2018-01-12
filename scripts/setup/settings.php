@@ -312,7 +312,7 @@ $databases['default']['slave'][] = array (
   'prefix' => '',
   'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
 );
-
+/*
 $databases['default']['slave'][] = array (
   'database' => 'indiatoday',
   'username' => 'prod_it_read',
@@ -322,7 +322,7 @@ $databases['default']['slave'][] = array (
   'driver' => 'mysql',
   'prefix' => '',
   'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
-);
+);*/
 
 $databases['default']['default'] = array (
   'driver' => 'autoslave',
