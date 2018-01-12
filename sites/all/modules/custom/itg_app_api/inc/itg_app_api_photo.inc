@@ -385,7 +385,6 @@ function generatePhotoStoryDeatilList($id) {
   // list array building
   $photo_list_array = generatePhotoStoryDetailList($nid);
   $toptlapics = $photo_list_array['listcont'];
-  $title = strip_tags($title);
   //data array building
   $firebase_url = get_node_firebase_weburl($nid);
   $data_array['id'] = "$nid";
@@ -437,17 +436,11 @@ function generatePhotoStoryDetailList($nid) {
       $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
       $caption = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       $byline = $entity_obj[$val['value']]->field_credit['und'][0]['value'];
-      //$byline = getImgByline($photo_story_img_fid);
-      $caption = strip_tags($caption);
-      $img_info = getInfoData($large_image_fid);
-      $image_courtesy = $img_info['image_courtesy'];
-      $image_caption = strip_tags($img_info['image_caption']);
-
-      $photo_story_desc = strip_tags($photo_story_desc);
+      
       $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
       $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
-      $photo_list_array[$listcont]['p_credit'] = "$image_courtesy";
-      $photo_list_array[$listcont]['p_caption'] = "$image_caption";
+      $photo_list_array[$listcont]['p_credit'] = "$byline";
+      $photo_list_array[$listcont]['p_caption'] = "$caption";
       $photo_list_array[$listcont]['p_desc_withouthtml'] = "$photo_story_desc";
       $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_desc";
       $listcont++;

@@ -35,10 +35,6 @@ function itg_genrate_factiva_story_syndication($section_id = NULL, $file_name) {
         $query->condition('n.created', $days_ago, '>=');
       }
     }
-    else {
-      $days_ago = strtotime(date('Y-m-d', strtotime('-10 days')));
-      $query->condition('n.created', $days_ago, '>=');
-    }
 
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
 
@@ -85,7 +81,6 @@ function genrate_factiva_story_syndication_xml($result = NULL, $category) {
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $publish_date = date("F d, Y", strtotime($value['field_itg_content_publish_date_value']));
       $body = remove_extra_tag_in_body($value["body_value"]);
-      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
       $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
