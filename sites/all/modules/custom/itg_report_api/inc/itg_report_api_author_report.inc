@@ -112,7 +112,6 @@ function author_report_tvtn($start_date) {
 /**
  * main function for generate author report array
  * @pram datetime $start_date
- *
  * @return array
  */
 function author_report($start_date) {
