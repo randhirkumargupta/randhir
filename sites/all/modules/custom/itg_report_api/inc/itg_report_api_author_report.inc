@@ -228,7 +228,7 @@ function getContentCountByDate($start_date, $end_date) {
     $query = db_select('node', 'n');    
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');    
     $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');    
-    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.nid=repr.entity_id');
+    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
     $query->fields('n', array('nid', 'status'));
     $query->fields('byli', array('byline_id'));
     $query->fields('repr', array('field_reporter_email_id_value'));
@@ -311,7 +311,7 @@ function getAuthorList_Report($s_date, $e_date) {
     $query = db_select('itg_multi_byline_info', 'byli');        
     $query->leftJoin('node', 'n', 'byli.nid=n.nid');    
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
-    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'repr.entity_id=byli.nid');
+    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'repr.entity_id=byli.byline_id');
     $query->fields('n', array('nid', 'status'));
     $query->fields('byli', array('byline_id'));
     $query->fields('repr', array('field_reporter_email_id_value'));
@@ -351,7 +351,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
     $query = db_select('node', 'n');    
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');    
     $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');    
-    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.nid=repr.entity_id');
+    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
     $query->fields('n', array('nid', 'status'));
     $query->fields('byli', array('byline_id'));
     $query->fields('repr', array('field_reporter_email_id_value'));
@@ -409,7 +409,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
     $query = db_select('node', 'n');    
     $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');    
     $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');    
-    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.nid=repr.entity_id');
+    $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
     $query->fields('n', array('nid', 'status', 'title'));
     $query->fields('byli', array('byline_id'));
     $query->fields('repr', array('field_reporter_email_id_value'));
