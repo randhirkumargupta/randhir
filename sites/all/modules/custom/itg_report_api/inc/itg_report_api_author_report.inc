@@ -225,7 +225,7 @@ function getContentCountByDate($start_date, $end_date) {
     $query = db_select('node', 'n');
     //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
-    $query->fields('n', array('nid,title,status'));
+    $query->fields('n', array('nid', 'status'));
     //end
     if ($start_date != "na") {
         $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
@@ -310,7 +310,7 @@ function getAuthorList_Report($s_date, $e_date) {
     $query = db_select('node', 'n');
     //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
-    $query->fields('n', array('nid,title,status'));
+    $query->fields('n', array('nid', 'status'));
     //end
     if ($start_date != "na") {
         $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
@@ -345,7 +345,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
     $query = db_select('node', 'n');
     //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
-    $query->fields('n', array('nid,title,status'));
+    $query->fields('n', array('nid', 'status'));
     //end
     if ($start_date != "na") {
         $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
@@ -405,7 +405,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
     $query = db_select('node', 'n');
     //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
-    $query->fields('n', array('nid,title,status'));
+    $query->fields('n', array('nid', 'status'));
     //end
     if ($start_date != "na") {
         $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
