@@ -35,6 +35,10 @@ function itg_genrate_factiva_story_syndication($section_id = NULL, $file_name) {
         $query->condition('n.created', $days_ago, '>=');
       }
     }
+    else {
+      $days_ago = strtotime(date('Y-m-d', strtotime('-10 days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
 
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
 
