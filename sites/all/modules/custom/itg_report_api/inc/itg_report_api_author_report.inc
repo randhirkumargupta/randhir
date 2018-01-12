@@ -303,15 +303,15 @@ function getbylineDetail($nid, $status) {
  *
  * @return array authorList
  */
-function getAuthorList_Report($s_date, $e_date) {
+function getAuthorList_Report($s_date, $e_date) { 
     global $base_url;
     $list = array();
     $cont = 0;
     $flag = 0;
-    $query = db_select('node', 'n');    
-    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');    
-    $query->leftJoin('itg_milti_byline_info', 'byli', 'byli.nid=n.nid');    
-    $query->leftJoin('field_data_field_story_reporter', 'repr', 'byli.nid=repr.entity_id');
+    $query = db_select('itg_milti_byline_info', 'byli');        
+    $query->leftJoin('node', 'n', 'byli.nid=n.nid');    
+    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'repr', 'repr.entity_id=byli.nid');
     $query->fields('n', array('nid', 'status'));
     $query->fields('byli', array('byline_id'));
     $query->fields('repr', array('field_reporter_email_id_value'));
