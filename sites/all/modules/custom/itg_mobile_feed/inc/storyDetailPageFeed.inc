@@ -30,6 +30,7 @@ function storyDetailPageFeed() {
  */
 function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = "", $type) {
   $imgtag = "";
+  $story_byline = "";
   if (!$file_name) {
     $file_name = "story" . $nid . ".xml";
   }
@@ -70,11 +71,10 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $term_name = $term->name;
       $comment_cont = $node->comment;
       $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
-      $reporter_node = "";
-      $reporter_node = itg_common_get_node_title($byline_id);
-      if ($reporter_node == NULL) {
-                $reporter_node = "";
-            }
+      $story_byline = $node->field_itg_common_by_line_name['und'][0]['value'];
+      if (is_null($story_byline)) {
+          $story_byline = "";
+      }
       $related_node = relatedContentNodeType($nid, "story");
       $city = getCityByNid($nid);
       $alias = drupal_get_path_alias('node/' . $nid . '');
@@ -84,7 +84,7 @@ function generateStoryDetailPageFeed($nid, $file_name = "", $term_feed_path = ""
       $full_body = $node->body['und']['0']['value'];
       $body_android = getBodyDataForAndroid($full_body, $node);
       $output .= getMobileFeedXmlHeader();
-      $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit>" . xml_cdata_filter($reporter_node) . "</credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city>". xml_cdata_filter($city)."</city><courtesy></courtesy>";
+      $output .= "<item><storyid>" . $nid . "</storyid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]> </section><headline><![CDATA[" . $title . "]]></headline><credit>" . xml_cdata_filter($story_byline) . "</credit><date>$create_date</date><datetime>" . $create_datetime . "</datetime><city>". xml_cdata_filter($city)."</city><courtesy></courtesy>";
       $output .= "<body><![CDATA[" . html_entity_decode($full_body) . "]]></body>";
       $output .= "<body_android><![CDATA[" . $body_android . "]]></body_android>";
       //get video tag
