@@ -7,7 +7,7 @@
 <meta http-equiv="content-language" content="hi" />
 <meta name="description" content="India Today Media Institute(ITMI) which is ready to bring in its 9th batch, has produced brilliant reporters, anchors and media professionals who have carved a niche with their academic knowledge and practical training." />
 <meta name="keywords" content="India Today Media Institute, ITMI Media Institute, Aaj Tak ITMI, Media Institute, college, Diploma, degree, Journalism, broadcast journalism, Headlines Today, Aaj tak, Anchor, anchoring, reporting, Production, news production, News Writing, Video Editing, Editing, Course, Camera, Training, Studio, internship, job, media job, vacancy, recruitment, entrance, Post Graduation, diploma, Studio, Workshop, Application, Noida" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,700,500,400,900"/>
 <link rel="stylesheet" href="css/mob_style.css" type="text/css" />
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
 <script src="/itmi/mobile/js/marquee.js" type="text/javascript"></script>
@@ -165,14 +165,14 @@ if (!mobile) {
   </ul>
 </div>
 
-<div class="banner_section"> <a href="#" class="logo"></a> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/main_banner.jpg" alt="itmi" />
+<div class="banner_section"> <a href="#" class="logo"></a> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/main_banner.jpg" alt="itmi" />
   <h1 class="caption">India Today Media Institute</h1>
 </div>
 
 <div class="body_section">
   <div class="outer_box">
     <h2>About us</h2>
-    <div class="box"> <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/about_img.jpg" alt="" />
+    <div class="box"> <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/about_img.jpg" alt="" />
       <p>India Today Media Institute (ITMI) which is ready to bring in its 9th batch...</p>
     </div>
   </div>
@@ -193,7 +193,7 @@ if (!mobile) {
   </div>
   <div class="common_outer">
     <h2>Chairman's message</h2>
-    <div class="common_box"> <a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/com_img.jpg" alt="" /> </a><span>Let me compliment you  on considering ITMI for admission. For the past nine years, our endeavour has  been to train students... <strong><a href="chairman-message.jsp">Read More</a> </strong></span> </div>
+    <div class="common_box"> <a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/wap/com_img.jpg" alt="" /> </a><span>Let me compliment you  on considering ITMI for admission. For the past nine years, our endeavour has  been to train students... <strong><a href="chairman-message.jsp">Read More</a> </strong></span> </div>
   </div>
   <div class="common_outer">
     <h2 class="bg4">Blog</h2>
@@ -202,7 +202,7 @@ if (!mobile) {
   </div>
   <!--<div class="common_outer">
     <h2 class="bg4">Dean Message</h2>
-    <div class="common_box"> <a href="#"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/dean-message-img.jpg" alt="" style="width:133px; height:87px;" /></a> <span>It's great to belong to one of the biggest  media conglomerates in India,  because few people.. <strong><a href="dean-message.jsp">Read More</a></strong></span> </div>
+    <div class="common_box"> <a href="#"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/dean-message-img.jpg" alt="" style="width:133px; height:87px;" /></a> <span>It's great to belong to one of the biggest  media conglomerates in India,  because few people.. <strong><a href="dean-message.jsp">Read More</a></strong></span> </div>
     
   </div>-->
 </div>
