@@ -153,8 +153,6 @@ function generate_notification_all($params) {
           $return_flag .= writeFeedFile($term_feed_path, $default_file_name, $default_output);
         }
     }
-    
-
     if (isset($app_output) && $app_output != '') {
         $return_flag .= writeFeedFile($term_feed_path, $app_file_name, $app_output);
     }
