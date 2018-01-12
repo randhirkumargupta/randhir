@@ -1,1321 +1,478 @@
 <?php
 
 /**
- * @file
- * ITG Akamai module.
+ * Inc file contains the functions for author report - TVTN report API
+ */
+
+/**
+ * main function for generate author report - TVTN array
+ * @pram datetime $start_date
  *
- * Provides customizations and functions for Akamai.
- *
- */
-if (!defined('ITG_AKAMAI_EVENT_BACKEND')) {
-  define('ITG_AKAMAI_EVENT_BACKEND', 'event_backend');
-}
-
-/**
- * Implements hook_permission().
- */
-function itg_akamai_permission() {
-  return array(
-    'administer itg akamai' => array(
-      'description' => t('Configure the Akamai integration settings. Username, password, etc.'),
-      'title' => t('ITG Administer Akamai Settings'),
-    ),
-    'purge itg akamai cache' => array(
-      'description' => t('Allowed to clear content from the Akamai cache.'),
-      'title' => t('ITG Purge Akamai Cache'),
-    ),
-  );
-}
-
-/**
- * Implements hook_menu().
- */
-function itg_akamai_menu() {
-  $items = array();
-
-  $items['admin/config/system/itg_akamai'] = array(
-    'title' => 'ITG Akamai Settings',
-    'description' => 'Akamai integration settings and cache clearing utility',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_akamai_settings'),
-    'access arguments' => array('administer itg akamai'),
-    'file' => 'includes/itg_akamai.admin.inc',
-  );
-
-  $items['admin/config/system/itg_akamai/settings'] = array(
-    'title' => 'Settings',
-    'weight' => -10,
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-  );
-
-  $items['admin/config/system/itg_akamai/refresh'] = array(
-    'title' => 'Cache Control Utility',
-    'description' => 'Admin interface to flush Drupal resources from the Akamai cache',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_akamai_cache_control'),
-    'access arguments' => array('purge itg akamai cache'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_LOCAL_TASK,
-  );
-
-  $items['admin/config/system/itg_akamai/akamai_log'] = array(
-    'title' => 'Akamai Cache Log',
-    'description' => 'Admin interface to view Cache Activity Log',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_akamai_cache_akamai_log'),
-    'access arguments' => array('purge itg akamai cache'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_LOCAL_TASK,
-  );
-
-  $items['admin/config/system/itg_akamai/akamai_not_implemented'] = array(
-    'title' => 'Akamai Pages Akamai TTL(node) not implemented',
-    'description' => 'Admin interface',
-    'page callback' => 'itg_akamai_akamai_not_implemented_rows',
-    'access arguments' => array('purge itg akamai cache'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['admin/config/system/itg_akamai/akamais_not_implemented'] = array(
-    'title' => 'Akamai Pages Akamai TTL(section) not implemented',
-    'description' => 'Admin interface',
-    'page callback' => 'itg_akamai_akamais_not_implemented_rows',
-    'access arguments' => array('purge itg akamai cache'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['admin/config/system/itg_akamai/comp_widgt_ttl_not_implemented'] = array(
-    'title' => 'List of Block/Widget where TTL(Time to Live) is not set',
-    'description' => 'Admin interface',
-    'page callback' => 'itg_akamai_comp_widgt_ttl_not_implemented',
-    'access arguments' => array('purge itg akamai cache'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_CALLBACK,
-  );
-
-
-  $items['admin/config/system/itg_akamai/akamai_ccpurge'] = array(
-    'title' => 'Akamai Purge Content type Node',
-    'description' => 'Admin interface to clear Akamai Purge Content type Node',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_akamai_cache_akamai_ccpurge'),
-    'access arguments' => array('purge itg akamai cache'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_LOCAL_TASK,
-  );
-
-  $items['admin/config/system/itg_akamai/akamai_section'] = array(
-    'title' => 'Akamai Section/Category Setting',
-    'description' => 'Admin interface for Akamai Section/Category Setting',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_akamai_cache_akamai_section'),
-    'access arguments' => array('administer itg akamai'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_LOCAL_TASK,
-  );
-
-  $items['admin/config/system/itg_akamai/other_conf'] = array(
-    'title' => 'Custom URL Settings',
-    'description' => 'Admin interface for Custom URL Settings',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('itg_akamai_cache_akamai_other'),
-    'access arguments' => array('administer itg akamai'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_LOCAL_TASK,
-  );
-
-  $items['admin/config/system/itg_akamai/akamai_ccs/%ctools_js/%'] = array(
-    'title' => 'Akamai Content type Settings',
-    'description' => '',
-    'page callback' => 'itg_akamai_cache_akamai_ccpurge_settings',
-    'page arguments' => array(5, 6),
-    'access arguments' => array('administer itg akamai'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['admin/config/system/itg_akamai/akamai_ccc/%'] = array(
-    'title' => 'Akamai Content type Settings',
-    'description' => '',
-    'page callback' => 'itg_akamai_cache_akamai_ccpurge_clear',
-    'page arguments' => array(5),
-    'access arguments' => array('administer itg akamai'),
-    'file' => 'includes/itg_akamai.admin.inc',
-    'type' => MENU_CALLBACK,
-  );
-
-  $items['itg-akamai-cc-button-purge'] = array(
-    'title' => 'Akamai Content Type Purge',
-    'description' => '',
-    'page callback' => 'itg_akamai_cc_button_purge',
-    'page arguments' => array(1),
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
-
-  return $items;
-}
-
-/**
- * Clear a URL from ITG Akamai. Clears node/id and any URL aliases.
- *
- * @param array $paths_in
- *   An array of paths or single path to clear.
- * @param array $params
- *   (optional) An array of params for the API call.
- * @param object $node
- *   (optional)
- *
- * @return bool
- *    TRUE if it was successfully cleared, FALSE otherwise.
- */
-function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
-  // To prevent purging for Elysia Cron run
-  if (module_exists('elysia_cron')) {
-    if (arg(0) == 'admin' && arg(1) == 'config' && arg(2) == 'system' && arg(3) == 'cron' && arg(4) == 'execute') {
-      return TRUE;
-    }
-  }
-  // First of all request should not be part of drupal CLI
-  if (!drupal_is_cli()) {
-    global $user;
-    module_load_include('inc', 'itg_akamai', 'includes/akamai_purge');
-    if (variable_get('itg_akamai_disabled', FALSE)) {
-      watchdog('itg_akamai', 'Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.');
-      drupal_set_message(t('Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.'), 'warning');
-      return FALSE;
-    }
-
-    if (!is_array($paths_in)) {
-      $paths_in = array($paths_in);
-    }
-    // Get the system path and all aliases to this url
-    $paths = array();
-
-    foreach ($paths_in as $path) {
-      $paths[] = $path;
-    }
-    // It is possible to have no paths at this point if other modules have
-    // altered the paths.
-    if (empty($paths)) {
-      watchdog('akamai', 'No resultant paths to clear for %paths', array('%paths' => implode(', ', $paths_in)), WATCHDOG_NOTICE);
-      return FALSE;
-    }
-    $paths = array_unique($paths);
-    $paths = array_map('trim', $paths);
-    // Sending for clearing cache for varnish before hitting to Varnish
-    if (module_exists('varnish')) {
-      if (function_exists('varnish_expire_cache')) {
-        varnish_expire_cache($paths);
-      }
-    }
-    global $base_url;
-    $varnish_paths = itg_akamai_varnish_host_mapping($paths);
-    $paths = itg_akamai_send_for_host_mapping($paths);
-    //$paths = itg_akamai_send_for_host_mapping_for_amp($paths);  // Preparing data for AMP URLs
-    $paths_data = $paths;
-    if (!empty($paths)) {
-      $url = implode(',', $paths);
-    }
-    else {
-      $url = '';
-      watchdog('ITG Akamai Exception', t('URL is empty'));
-      return;
-    }
-    $urls = explode(',', $url);
-    if (is_array($urls)) {
-      $url = '';
-      foreach ($urls as $singleUrl) {
-        $url .= '"' . $singleUrl . '",';
-      }
-      $url = substr($url, 0, -1);
-    }
-    else {
-      $url = '"' . $url . '"';
-    }
-    $client = new Akamai\Open\EdgeGrid\Client(['base_uri' => AKAMAI_BASE_URI]);
-    $client->setAuth(AKAMAI_CLIENT_TOKEN, AKAMAI_CLIENT_SECRET, AKAMAI_ACCESS_TOKEN);
-    // use $client just as you would \Guzzle\Http\Client 
-    if ($params['action'] == 'remove') {
-      $data = '{ "objects" : [ ' . $url . '], "action" : "remove" }';
-    }
-    else {
-      $data = '{ "objects" : [ ' . $url . '] }';
-    }
-    $request_success_flag = 0;
-    try {
-      $response = $client->post(AKAMAI_API_ENDPOINT, [
-        'body' => $data,
-        'headers' => ['Content-Type' => 'application/json']
-      ]);
-      $response_data_decoded = json_decode($response->getBody());
-      $data_for_log = ItgAkamaiUtility::itgAkamaiGetDataForLog($paths_data, $data, $response->getBody(), $user->uid, $response_data_decoded->httpStatus, $response_data_decoded->purgeId);
-      $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
-      $request_success_flag = 1;
-      // Passing / Saving akamai purging log to drupal watchdog 
-      watchdog('ITG-Akamai log', 'Url have been purged successfully! Data =>' . json_encode($data_for_log));
-    }
-    catch (Exception $e) {
-      $response_data_decoded = json_decode($e->getMessage());
-      $data_for_log = ItgAkamaiUtility::itgAkamaiSetDataForLog($data, $e->getMessage(), $user->uid, $response_data_decoded->httpStatus, 0);
-      $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
-      watchdog('ITG-Akamai log', 'OOPS unable to purge URL and error is : ' . $e->getMessage());
-      drupal_set_message(t("OOPS unable to purge URL and error is :" . $e->getMessage()), 'error');
-      $request_success_flag = 0;
-    }
-
-    // Sending for Recaching
-    /*if (module_exists('httprl')) {
-      $varnish_paths = array_map(function($item) {
-        return rtrim($item, '/\\');
-      }, $varnish_paths);
-      module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
-      if (isset($varnish_paths) && !empty($varnish_paths)) {
-        akamai_recacher_crawler($varnish_paths);
-      }
-    }*/
-    // End code for Recaching
-    return $request_success_flag;
-  }
-}
-
-/**
- * For Host mapping purposes
- * @param array $paths
- */
-function itg_akamai_send_for_host_mapping($paths) {
-  $host = variable_get('itg_akamai_mapping_host');
-  $lastchar = substr($host, -1);
-
-  if ($lastchar != '/') {
-    $host .= '/';
-  }
-
-  $path_new_array = array();
-
-  if (isset($paths) && !empty($paths)) {
-    foreach ($paths as $paths_chunk) {
-      if (!empty($paths_chunk))
-        $path_new_array[] = $host . $paths_chunk;
-    }
-  }
-  return $path_new_array;
-}
-
-/**
- * For Varnish Host mapping purposes
- * @param array $paths
- */
-function itg_akamai_varnish_host_mapping($paths) {
-  $host = variable_get('varnish_control_terminal', '127.0.0.1:6082');
-  $hosts = explode(' ', $host);
-  $final_host = array();
-  foreach ($hosts as $host_chunk) {
-    $fip = str_replace(":6082", "", $host_chunk);
-    $final_host[] = 'http://' . $fip . '/';
-  }
-
-  $path_new_array = array();
-
-  if (isset($paths) && !empty($paths)) {
-    foreach ($paths as $paths_chunk) {
-      foreach ($final_host as $final_host_c) {
-        $path_new_array[] = $final_host_c . $paths_chunk;
-      }
-    }
-  }
-  return $path_new_array;
-}
-
-/**
- * For Host mapping for AMP including original url
- * @param array $paths
- */
-function itg_akamai_send_for_host_mapping_for_amp($paths) {
-  // Getting AMP url patten from configuration
-  //$amp_pattern = '/amp'; //old code
-  $amp_pattern = 'amp/';
-  $path_new_array = array();
-  if (is_array($paths)) {
-    if (isset($paths) && !empty($paths)) {
-      foreach ($paths as $paths_chunk) {
-        $path_new_array[] = $paths_chunk;
-        //$path_new_array[] = $paths_chunk . $amp_pattern;
-        $path_new_array[] = $amp_pattern . $paths_chunk;
-      }
-    }
-  }
-  else {
-    $path_new_array[] = $paths;
-    //$path_new_array[] = $paths . $amp_pattern;
-    $path_new_array[] = $amp_pattern . $paths;
-  }
-  return $path_new_array;
-}
-
-/**
- * Implements hook_form_FORM_ID_alter()
- * @param array $form
- * @param array $form_state
- */
-function itg_akamai_form_node_type_form_alter(&$form, &$form_state) {
-  $default_value = TRUE;
-  if (user_access("administer itg akamai")) {
-    $type = $form['#node_type'];
-    $form['itg_akamai_setting'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Akamai Cache Setting'),
-      '#weight' => 12,
-      '#collapsible' => TRUE,
-      '#collapsed' => false,
-      '#group' => 'additional_settings',
-      '#attached' => array(
-      ),
-    );
-    $key = $form['#node_type']->type;
-    $name = $form['#node_type']->name;
-
-    $form['itg_akamai_setting']['akamai_timeout_' . $key] = array(
-      '#type' => 'textfield',
-      '#title' => t("$name (in seconds)"),
-      '#default_value' => variable_get('akamai_timeout_' . $key, ''),
-      '#description' => t("Timeout Length for <strong>$name</strong>, the timeout used by when sending the cache clear request to Akamai's servers"),
-    );
-
-    $form['itg_akamai_setting']['akamai_config_cctype_flag_' . $key] = array(
-      '#type' => 'select',
-      '#options' => array('_none' => '-Select-', 'yes' => 'Yes', 'no' => 'No'),
-      '#title' => t("You want to use this configuration for $name"),
-      '#default_value' => variable_get('akamai_config_cctype_flag_' . $key, ''),
-      '#description' => t("Please select content type flag whether you want to use with akamai cache or not!"),
-    );
-
-    // Adding own submit for handling the configuration for Akamai Cache
-    $form['#submit'][] = 'itg_akamai_node_form_submit';
-  }
-}
-
-/**
- * 
- * @param type $param
- */
-function itg_akamai_node_form_submit($form, &$form_state) {
-  $akamai_timeout = $form_state['values']['akamai_timeout_' . $form_state['values']['type']];
-  $akamai_config_cctype_flag = $form_state['values']['akamai_config_cctype_flag_' . $form_state['values']['type']];
-  variable_set('akamai_timeout_' . $form_state['values']['type'], $akamai_timeout);
-  variable_set('akamai_config_cctype_flag_' . $form_state['values']['type'], $akamai_config_cctype_flag);
-}
-
-/**
- * Implements hook_block_info().
- */
-function itg_akamai_block_info() {
-  $blocks['itg_akamai'] = array(
-    'info' => t('ITG Akamai Cache Control'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-  return $blocks;
-}
-
-/**
- * Implements hook_block_view().
- */
-function itg_akamai_block_view($delta) {
-  if ($delta == 'itg_akamai') {
-    global $user;
-    if (user_access("purge itg akamai cache")) {
-      if (arg(0) == 'admin') // preventing this form for admin pages 
-        return;
-
-      $cache_control_form = drupal_get_form('itg_akamai_page_cache_control_form');
-      $block = array(
-        'subject' => '<none>',
-        'content' => $cache_control_form,
-      );
-      return $block;
-    }
-  }
-}
-
-/**
- * Form builder for purging the current URL from the ITG Akamai cache.
- *
- * @see itg_akamai_block_view()
- */
-function itg_akamai_page_cache_control_form() {
-  $form = array();
-  $nid = arg(1);
-  $is_front_page = drupal_is_front_page();
-  if ($is_front_page) {
-    $path[] = drupal_get_path_alias($_GET['q']);
-    $path[] = $_GET['q'];
-  }
-  else {
-    if (arg(0) == 'node' && is_numeric($nid)) {
-      $node = node_load($nid);
-      $url = drupal_get_path_alias('node/' . $nid);
-      $current_url = NULL;
-      if (function_exists('itg_common_custompath_insert_load')) {
-        $path = itg_common_custompath_insert_load($node);
-      }
-      else {
-        $path = $node->path['alias'];
-      }
-    }
-    else {
-      $path = drupal_get_path_alias($_GET['q']);
-      $form['#node'] = NULL;
-    }
-  }
-
-  $form['path'] = array(
-    '#type' => 'hidden',
-    '#value' => $path
-  );
-
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Refresh Akamai Cache'),
-  );
-
-  return $form;
-}
-
-/**
- * Form submission handler for itg_akamai_page_cache_control_form().
- *
- * Purge the 'path' variable from the ITG Akamai cache.
- */
-function itg_akamai_page_cache_control_form_submit($form, &$form_state) {
-  $values = $form_state['values'];
-  $path = $values['path'];
-  $did_clear = itg_akamai_clear_url($path, array(), $form['#node']);
-  if ($did_clear) {
-    $message = t("Akamai Cache Request has been made successfully.");
-    drupal_set_message($message);
-  }
-  else {
-    drupal_set_message(t("There was a problem clearing the cache for this page.  Check your log messages for more information."), 'error');
-  }
-}
-
-/**
- * Implements hook_node_update().
- *
- * When nodes are modified, clear URL from the Akamai
- * cache. Clear base node/% url as well as aliases.
- */
-function itg_akamai_node_update($node) {
-
-  // Skipping batch for widget only
-  if (function_exists('itg_workflow_stop_node_update_batch_for_widgets')) {
-    if (itg_workflow_stop_node_update_batch_for_widgets()) {
-      return;
-    }
-  }
-  
-
-  $mapping = itg_akamai_getting_mapped_content_type();
-
-  if (in_array($node->type, $mapping)) { //p($node);
-    //if (user_access("purge itg akamai cache")) {
-    //if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    $url = drupal_get_path_alias('node/' . $node->nid);
-    // Checking if URL alias changed removing Old one.
-    $current_url = NULL;
-    $current_url_c = NULL;
-    $previous_url = NULL;
-    if (function_exists('itg_common_custompath_insert_load')) {
-      $current_url = itg_common_custompath_insert_load($node);
-    }
-    else {
-      $current_url = $node->path['alias'];
-    }
-    $previous_url = $node->path['old_alias'];
-
-    $current_url_c = $current_url;
-    $amp_types = itg_akamai_amp_cc_mapping();
-
-    // Adding AMP urls for node types
-    if (in_array($node->type, $amp_types)) {
-      $current_url = itg_akamai_send_for_host_mapping_for_amp($current_url);
-    }
-    // This line has been added for testing
-    itg_akamai_clear_url($current_url, array(), $node);
-
-    if ($current_url_c != $previous_url) {
-      $action = array(
-        'action' => 'remove',
-      );
-
-      // Adding AMP urls for node types
-      if (in_array($node->type, $amp_types)) {
-        $previous_url = itg_akamai_send_for_host_mapping_for_amp($previous_url);
-      }
-      itg_akamai_clear_url($previous_url, $overrides);
-    }
-    //}
-    //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
-    if ($node->type == 'videogallery') {
-      itg_akamai_purge_story_related_to_video($node->nid);
-    }
-    // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
-    //}
-    // Checking akamai permission for logged in user
-    if (user_access("administer itg akamai")) {
-      // Setting metadata for the TTL for each node id 
-      if ($node->status == 1) { // Akamai setting for node content level if node is published 
-        itg_akamai_content_setting($node);
-      }
-    }
-  }
-
-  // Sending request for purging Magazine page
-  if ($node->type == 'story' && $node->status == 1 && isset($node->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
-    $pattern_magazine_url = 'magazine/' . date('d-m-Y', strtotime($node->field_story_issue_date[LANGUAGE_NONE][0]['value']));
-    itg_akamai_clear_url($pattern_magazine_url);
-  }
-}
-
-/**
- * Implements hook_node_delete().
- *
- * When nodes are modified, clear URL from the Akamai
- * cache. Clear base node/% url as well as aliases.
- */
-function itg_akamai_node_delete($node) {
-  $mapping = itg_akamai_getting_mapped_content_type();
-
-  if (in_array($node->type, $mapping)) {
-    if (user_access("purge itg akamai cache")) {
-      //if (isset($node->field_story_source_type[LANGUAGE_NONE][0]['value']) && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      $url = drupal_get_path_alias('node/' . $node->nid);
-      $action = array(
-        'action' => 'remove',
-      );
-
-      // Adding AMP urls also
-      $amp_types = itg_akamai_amp_cc_mapping();
-
-      if (in_array($node->type, $amp_types)) {
-        $url = itg_akamai_send_for_host_mapping_for_amp($url);
-      }
-
-      itg_akamai_clear_url($url, $overrides);
-      //}
-      //Start code Send purge request to Akamai for to purge those stories which is related to passed video id
-      if ($node->type == 'videogallery') {
-        itg_akamai_purge_story_related_to_video($node->nid);
-      }
-      // End code  Start code Send purge request to Akamai for to purge those stories which is related to passed video id
-    }
-  }
-}
-
-/**
- * 
- * @param type $op
- * @param type $job
- */
-function itg_akamai_cronapi($op, $job = NULL) {
-  $items['itg_akamai_auto_purge_cc_type'] = array(
-    'description' => 'Publish Event',
-    'callback' => 'itg_akamai_auto_purge_cc_type_callback',
-  );
-  return $items;
-}
-
-function itg_akamai_auto_purge_cc_type_callback() {
-
-  $allnodes = node_type_get_types();
-  $all_node_settings = array();
-
-  // There are three configuration that we are going to check
-  // Timeout , Node Limit, Content type Flag
-  foreach ($allnodes as $key => $value) {
-    $all_node_settings[$key]['akamai_timeout'] = variable_get('akamai_timeout_' . $key, '');
-    $all_node_settings[$key]['akamai_max_nodelimit'] = variable_get('akamai_max_nodelimit_' . $key, '');
-    $all_node_settings[$key]['akamai_config_cctype_flag'] = variable_get('akamai_config_cctype_flag_' . $key, '');
-  }
-}
-
-/**
- * Implements hook_taxonomy_term_update().
- *
- * When term are modified, clear URL from the Akamai
- * cache. Clear base taxonomy/term/% url as well as aliases.
- */
-function itg_akamai_taxonomy_term_update($term) {
-  if (user_access("purge itg akamai cache")) {
-    if (isset($term->field_story_source_type[LANGUAGE_NONE][0]['value']) && $term->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      $url = drupal_get_path_alias('taxonomy/term/' . $term->tid);
-      itg_akamai_clear_url($url, array(), $term);
-    }
-  }
-
-  // Setting TTL for category manager taxonomy
-  if (user_access("administer itg akamai")) {
-    if ($term->vid == CATEGORY_MANAGMENT) { // Akamai setting for taxonomy content level 
-      itg_akamai_taxonomy_setting($term);
-    }
-  }
-}
-
-/**
- * Implements hook_taxonomy_term_delete().
- *
- * When term are modified, clear URL from the Akamai
- * cache. Clear base taxonomy/term/% url as well as aliases.
- */
-function itg_akamai_taxonomy_term_delete($term) {
-
-  if (user_access("purge itg akamai cache")) {
-    if (isset($term->field_story_source_type[LANGUAGE_NONE][0]['value']) && $term->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-      $url = drupal_get_path_alias('taxonomy/term/' . $term->tid);
-      itg_akamai_clear_url($url, array(), $term);
-    }
-  }
-}
-
-//###################### Code started for header expirtion  ##########################/
-
-/**
- * @file
- * Allows finer grained control over page cache maximum age.
- */
-
-/**
- * Implements hook_node_view().
- */
-function itg_akamai_node_view($node, $view_type) {
-  // Use the global page cache maximum age variable if none is set.
-  global $theme;
-  if (($theme == FRONT_THEME_NAME) || (function_exists('amp_is_amp_request') && (amp_is_amp_request() == TRUE))) {
-    $max_age = get_itg_akamai_content_setting($node->nid, $node->type);
-    akamai_max_age($max_age);
-  }
-  if ($view_type == 'full') {
-    $setting = array('itg_akamai' => array('currentobjectid' => base64_encode($node->nid)));
-    $node->content['#attached']['js'][] = array(
-      'data' => $setting,
-      'type' => 'setting',
-    );
-  }
-}
-
-/**
- * If there are multiple content-types on a page, use the smallest max-age.
- */
-function akamai_max_age($age = NULL) {
-  static $max_age = NULL;
-  if (isset($age) && /* $age >= 0 && */ (!isset($max_age) || $age < $max_age)) {
-    $max_age = $age;
-  }
-  return $max_age;
-}
-
-/**
- * Implements hook_exit().
- */
-function itg_akamai_exit() {
-  global $theme;
-  if (!itg_akamai_check_pattern_for_by_passing_url($_SERVER['REDIRECT_URL'])) {
-    if (!function_exists('drupal_is_front_page')) {
-      require_once DRUPAL_ROOT . '/' . variable_get('path_inc', 'includes/path.inc');
-    }
-
-    if (!drupal_is_front_page()) {
-      if (($theme == FRONT_THEME_NAME) || (function_exists('amp_is_amp_request') && (amp_is_amp_request() == TRUE))) {
-        $max_age = akamai_max_age();
-        if (!empty($max_age)) {
-          $formated_expire_date = itg_akamai_set_expiration_date($max_age);
-          drupal_add_http_header('Edge-control', 'cache-maxage=' . $max_age . 's');
-          drupal_add_http_header('Cache-Control', 'public, max-age=' . $max_age);
-          drupal_add_http_header('Expires', $formated_expire_date);
-        }
-        else if ($max_age == 0) {
-          drupal_add_http_header('Edge-control', 'no-store');
-          drupal_add_http_header('Cache-Control', 'no-store');
-        }
-        if (!empty($_SESSION['messages']['error'])) {
-          $msg = "The system is currently in read-only mode. Any changes you make will not be saved!";
-          $key = array_search($msg, $_SESSION['messages']['error']);
-
-          if ($key !== FALSE) {
-            unset($_SESSION['messages']['status'][$key]);
-          }
-        }
-      }
-    }
-  }
-}
-
-/**
- * Implements hook_form_alter()
- */
-function itg_akamai_form_alter(&$form, &$form_state, $form_id) {
-
-  if (user_access("administer itg akamai")) {
-
-    if (strpos($form_id, '_node_form') !== false) {
-      $akamai_timeout_default = NULL;
-      $akamai_config_cctype_flag = NULL;
-
-      // Checking whether the Akamai content level configration have been saved or not 
-      $mapping = itg_akamai_getting_mapped_content_type();
-
-      if (isset($form['#node']->nid) && in_array($form['#node']->type, $mapping)) {
-        $akamai_timeout_default = get_itg_akamai_content_setting($form['#node']->nid, $form['#node']->type);
-      }
-
-      if (!isset($form['#node']->nid) && in_array($form['#node']->type, $mapping)) {
-        $akamai_timeout_default = variable_get('akamai_timeout_' . $form['#node']->type, '');
-      }
-
-      if (in_array($form['#node']->type, $mapping)) {
-        $form['akamai_timeout'] = array(
-          '#type' => 'textfield',
-          '#title' => t("Enter TTL"),
-          '#default_value' => $akamai_timeout_default,
-          '#description' => t("Timeout Length, the timeout used by when sending the cache clear request to Akamai's servers"),
-        );
-
-        // Setting configuration for Event so that for Akamai TTL visibility
-        if ($form['#node']->type == 'event_backend') {
-          if (isset($form['#steps']['step_configuration']->children)) {
-            $form['#steps']['step_configuration']->children[] = 'akamai_timeout';
-          }
-          if (isset($form['#step_children']['akamai_timeout'])) {
-            $form['#step_children']['akamai_timeout'] = 'step_configuration';
-          }
-        }
-      }
-    }
-  }
-
-  // Adding Akamai Purge Button 
-  $mapping = itg_akamai_getting_mapped_content_type();
-  $formid_cc_type = isset($form['#node']->type) ? $form['#node']->type : NULL;
-
-  // Adding Purge Akamai Cache Button
-  if (in_array($formid_cc_type, $mapping)) {
-    $form['#after_build'][] = 'itg_akamai_add_cc_button';
-  }
-}
-
-/**
- * Add preview button
- * @param array $form
- * @param array $form_state
  * @return array
  */
-function itg_akamai_add_cc_button($form, &$form_state) {
-  unset($form['actions']['purge_akamai_cache']);
-  if (isset($form_state['node']->nid)) {
+function author_report_tvtn($start_date) {
     global $base_url;
-    $qry_array = drupal_get_query_parameters();
-    $data = array(
-      'nid' => $form_state['node']->nid,
-      'type' => $form_state['node']->type
-    );
+    $data = array();
+    $prev_day = time() - (24 * 60 * 60);
+    $hour = 01;
+    $yesterday = strtotime('-1 day', $start_date);
+    $month = date("M-Y", $start_date);
+    $year = date("Y", $start_date);
+    $site_id = 1;
+    $site_name = "India Today";
+    // date details
+    $data['date details']['today'] = date("d-F-Y", $start_date);
+    $data['date details']['yesterday'] = date("d-F-Y", $yesterday);
+    $data['date details']['month'] = $month;
+    $data['date details']['year'] = $year;
+    // site_snapshot  
+    $month_s = date("M", $start_date);
+    $year_s = date("Y", $start_date);
+    $month_time_s = strtotime("" . $year_s . "-" . $month_s . "-01");
+    $year_time_s = strtotime("" . $year_s . "-01-01");
+    $today_unix = $start_date;
+    $today_end = $start_date + 86399;
+    $yesterday_unix = strtotime('-1 day', $today_unix);
+    $yesterday_unix_end = $yesterday_unix + 86399;
+    $month_prev_unix = $month_time_s;
+    $month_prev_unix_end = $today_end;
+    $year_prev_unix = $year_time_s;
+    $year_prev_unix_end = $today_end;
 
-    if ($form_state['node']->type == 'story' && isset($form_state['node']->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !empty($form_state['node']->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
-      $data['field_story_issue_date'] = date('d-m-Y', strtotime($form_state['node']->field_story_issue_date[LANGUAGE_NONE][0]['value']));
-    }
-
-    $return_data = base64_encode(json_encode(array($_GET['q'], array_reverse($qry_array))));
-    $purge_url = $base_url . '/itg-akamai-cc-button-purge/' . base64_encode(json_encode($data)) . '?return_data=' . $return_data;
-    $purge_akamai_cache_link = '<a  class="btn-submit" href="' . $purge_url . '">Purge Akamai Cache</a>';
-    $form['actions']['purge_akamai_cache'] = array(
-      '#markup' => $purge_akamai_cache_link,
-      '#weight' => 19,
-    );
-  }
-
-  return $form;
-}
-
-/**
- * Implements hook_node_insert()
- * @param type $node
- */
-function itg_akamai_node_insert($node) {
-  if ($node->status == 1) {
-    //watchdog("akamai_insert1", "<pre> ".print_r($node, true)."</pre>");
-    
-   /* $mapping = itg_akamai_getting_mapped_content_type();
-    if (in_array($node->type, $mapping)) {
-      $current_url = NULL;
-      if (function_exists('itg_common_custompath_insert_load')) {
-        $current_url = itg_common_custompath_insert_load($node);
-      }
-      else {
-        $current_url = $node->path['alias'];
-      }
-      $amp_types = itg_akamai_amp_cc_mapping();
-      // Adding AMP urls for node types
-      if (in_array($node->type, $amp_types)) {
-        $current_url = itg_akamai_send_for_host_mapping_for_amp($current_url);
-      }
-      // This line has been added for testing
-      $varnish_paths = itg_akamai_varnish_host_mapping($current_url);
-    
-      if (module_exists('httprl')) {
-        $varnish_paths = array_map(function($item) {
-          return rtrim($item, '/\\');
-        }, $varnish_paths);
-        module_load_include('inc', 'itg_akamai', 'includes/akamai_recache');
-        if (isset($varnish_paths) && !empty($varnish_paths)) {
-          akamai_recacher_crawler($varnish_paths);
+    $today_total = getContentCountByDate($today_unix, $today_end);
+    $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
+    $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
+    $year_total = getContentCountByDate($year_prev_unix, $year_prev_unix_end);
+    $data['site_snapshot']['site_name'] = "$site_name";
+    $data['site_snapshot']['today'] = "$today_total";
+    $data['site_snapshot']['yesterday'] = "$yesterday_total";
+    $data['site_snapshot']['month'] = "$month_total";
+    $data['site_snapshot']['year'] = "$year_total";
+    $data['site_snapshot']['site_id'] = "$site_id";
+    // auhtorwise_data
+    $data['auhtorwise_data']['site_name'] = "$site_name";
+    $data['auhtorwise_data']['today'] = "$today_total";
+    $data['auhtorwise_data']['yesterday'] = "$yesterday_total";
+    $data['auhtorwise_data']['month'] = "$month_total";
+    $data['auhtorwise_data']['year'] = "$year_total";
+    $data['auhtorwise_data']['site_id'] = "$site_id";    //auhtor_data
+    $author_list = getAuthorList_Report($today_unix, $today_end);
+    // start loop on author list array
+    $author_loop_cont = 0;
+    $auhtor_data = array();
+    foreach ($author_list as $key => $value) {
+        $user_id = $value['author_id'];
+        $name = $value['author_name'];
+        $mail = $value['author_email'];
+        $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
+        $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
+        $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $mail);
+        $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $mail);
+        $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
+        $auhtor_data[$author_loop_cont]['author_email'] = "$mail";
+        $auhtor_data[$author_loop_cont]['author_name'] = "$name";
+        $auhtor_data[$author_loop_cont]['site_id'] = "$site_id";
+        $auhtor_data[$author_loop_cont]['today'] = "$today_total_uid";
+        $auhtor_data[$author_loop_cont]['yesterday'] = "$yesterday_total_uid";
+        $auhtor_data[$author_loop_cont]['month'] = "$month_total_uid";
+        $auhtor_data[$author_loop_cont]['year'] = "$year_total_uid";
+        //auhtor_data contents
+        $author_today_data = todayContentsByUid($today_unix, $today_end, $mail);
+        //loop author today data
+        $author_inner_loop_cont = 0;
+        $contents = array();
+        foreach ($author_today_data as $today_key => $today_val) {
+            $title = $today_val['title'];
+            $nid = $today_val['nid'];
+            $desc = kickerByNid($nid);
+            $title_path = drupal_get_path_alias('node/' . $nid . '');
+            $contents[$author_inner_loop_cont]['author_id'] = "$user_id";
+            $contents[$author_inner_loop_cont]['author_email'] = "$mail";
+            $contents[$author_inner_loop_cont]['author_name'] = "$name";
+            $contents[$author_inner_loop_cont]['site_id'] = "$site_id";
+            $contents[$author_inner_loop_cont]['content_id'] = "$nid";
+            $contents[$author_inner_loop_cont]['introtext'] = "$desc";
+            $contents[$author_inner_loop_cont]['content_url'] = "$title_path";
+            $contents[$author_inner_loop_cont]['page_title'] = "$title";
+            $author_inner_loop_cont++;
         }
-      }
-    }*/
-
-    // Setting metadata for the TTL for each node id 
-    if (user_access("administer itg akamai")) {
-      //if ($node->status == 1) { // Akamai setting for node content level if node is published 
-      itg_akamai_content_setting($node);
-      //}
-    }
-  }
-}
-
-/**
- * Setting the metadata for node level content (TTL) for Akamai
- * @param object $node
- */
-function itg_akamai_content_setting($node) {
-
-  if (isset($node->type) && !empty($node->type)) {
-    $mapping = itg_akamai_getting_mapped_content_type();
-    if (in_array($node->type, $mapping)) {
-      if (isset($node->akamai_timeout) && !empty($node->akamai_timeout)) {
-        try {
-          $url = 'node/' . $node->nid;
-          // Returning program control whene default TTL and node form set TTL are same.And this time we will set default TTL
-          $default_ttl = variable_get('akamai_timeout_' . $node->type);
-          if ($node->akamai_timeout == $default_ttl) {
-            return;
-          }
-
-          db_merge('itg_akamai_content_setting')
-              ->key(array('entity_id' => $node->nid, 'entity_type' => $node->type))
-              ->fields(array(
-                'timestamp' => time(),
-                'entity_id' => $node->nid,
-                'entity_type' => $node->type,
-                'url' => $url,
-                'cache_time' => $node->akamai_timeout,
-              ))
-              ->execute();
+        if ($author_inner_loop_cont) {
+            $auhtor_data[$author_loop_cont]['contents'] = $contents;
+        } else {
+            unset($auhtor_data[$author_loop_cont]);
         }
-        catch (Exception $e) {
-          watchdog('ITG Akamai', 'Error:' . $e->getMessage());
-        }
-      }
+        $author_loop_cont++;
     }
-  }
+
+    //$auhtor_data[0]['contents']['author_id'] = "1";
+    $data['auhtorwise_data']['auhtor_data'] = $auhtor_data;
+    return $data;
 }
 
 /**
- * Get TTL for specific content from itg_akamai_content_setting
- */
-function get_itg_akamai_content_setting($entity_id, $entity_type) {
-  $cache_time = db_query("SELECT cache_time from {itg_akamai_content_setting} WHERE entity_id = :entity_id and entity_type = :entity_type LIMIT 1", array(":entity_id" => $entity_id, ":entity_type" => $entity_type))->fetchField();
-
-  // Returning TTL if Cache is available for specific entity id
-  if (isset($cache_time) && !empty($cache_time)) {
-    return $cache_time;
-  }
-  // Returning default cache timeout
-  return variable_get('akamai_timeout_' . $entity_type, '');
-}
-
-/**
- * Returning expiration header by adding max age
- * @param string $max_age
- * @return string
- */
-function itg_akamai_set_expiration_date($max_age) {
-  return gmdate(DATE_RFC7231, time() + $max_age);
-}
-
-/**
- * Returning itg akamai translate time
- * @param string $max_age
- * @return string
- */
-function itg_akamai_translate_time($timestring) {
-  if (preg_match('/^(?:(?<hours>\d+)h\s*)?(?:(?<minutes>\d+)m\s*)?(?:(?<seconds>\d+)s\s*)?$/', $timestring, $matches)) {
-    $time = 0;
-    if (isset($matches['hours']) && !empty($matches['hours'])) {
-      $time = (int) $matches['hours'] * 60 * 60;
-    }
-    if (isset($matches['minutes']) && !empty($matches['minutes'])) {
-      $time = (int) $matches['minutes'] * 60;
-    }
-    if (isset($matches['seconds']) && !empty($matches['seconds'])) {
-      $time = (int) $matches['seconds'];
-    }
-    return $time;
-  }
-}
-
-/**
- *  Implements hook_form_FORM_ID_alter().
- */
-function itg_akamai_form_taxonomy_form_term_alter(&$form, &$form_state, $form_id) {
-  if (user_access("administer itg akamai")) {
-    if ($form['#vocabulary']->machine_name == 'category_management') {
-      $akamai_timeout_default = NULL;
-      $akamai_timeout_default = get_itg_akamai_content_setting($form['#term']['tid'], 'taxonomy');
-      $form['akamai_timeout'] = array(
-        '#type' => 'textfield',
-        '#title' => t("Enter TTL (For Akamai)"),
-        '#default_value' => $akamai_timeout_default,
-        '#description' => t("Timeout Length, the timeout used by when sending the cache clear request to Akamai's servers"),
-      );
-    }
-  }
-}
-
-/**
- * Setting the metadata for taxonomy level content (TTL) for Akamai
- * @param object $term
- */
-function itg_akamai_taxonomy_setting($term) {
-  if (isset($term->akamai_timeout) && !empty($term->akamai_timeout)) {
-    // returning control when default TTL and section form TTL is same.
-    $default_ttl = variable_get('akamai_timeout_taxonomy');
-    if ($term->akamai_timeout == $default_ttl) {
-      return;
-    }
-
-    // Else seprate entry for taxonomy
-
-    try {
-      $url = 'taxonomy/term/' . $term->tid;
-      db_merge('itg_akamai_content_setting')
-          ->key(array('entity_id' => $term->tid, 'entity_type' => 'taxonomy'))
-          ->fields(array(
-            'timestamp' => REQUEST_TIME,
-            'entity_id' => $term->tid,
-            'entity_type' => 'taxonomy',
-            'url' => $url,
-            'cache_time' => $term->akamai_timeout,
-          ))
-          ->execute();
-    }
-    catch (Exception $e) {
-      watchdog('ITG Akamai', 'Error:' . $e->getMessage());
-    }
-  }
-}
-
-/**
- * Implements hook_taxonomy_term_insert().
+ * main function for generate author report array
+ * @pram datetime $start_date
  *
- * When term are insrted, setting Akamai TTL 
- * cache. Clear base taxonomy/term/% url as well as aliases.
+ * @return array
  */
-function itg_akamai_taxonomy_term_insert($term) {
-  // Setting TTL for category manager taxonomy
-  if (user_access("administer itg akamai")) {
-    if ($term->vid == CATEGORY_MANAGMENT) { // Akamai setting for taxonomy content level 
-      itg_akamai_taxonomy_setting($term);
+function author_report($start_date) {
+    global $base_url;
+    $data = array();
+    $prev_day = time() - (24 * 60 * 60);
+    $hour = 01;
+    $yesterday = strtotime('-1 day', $start_date);
+    $month = date("M-Y", $start_date);
+    $year = date("Y", $start_date);
+    $site_id = 1;
+    $site_name = "India Today";
+    // date details
+    $data['date details']['today'] = date("d-F-Y", $start_date);
+    $data['date details']['yesterday'] = date("d-F-Y", $yesterday);
+    $data['date details']['month'] = $month;
+    $data['date details']['year'] = $year;
+    // site_snapshot  
+    $month_s = date("M", $start_date);
+    $year_s = date("Y", $start_date);
+    $month_time_s = strtotime("" . $year_s . "-" . $month_s . "-01");
+    $year_time_s = strtotime("" . $year_s . "-01-01");
+    $today_unix = $start_date;
+    $today_end = $start_date + 86399;
+    $yesterday_unix = strtotime('-1 day', $today_unix);
+    $yesterday_unix_end = $yesterday_unix + 86399;
+    $month_prev_unix = $month_time_s;
+    $month_prev_unix_end = $today_end;
+    $year_prev_unix = $year_time_s;
+    $year_prev_unix_end = $today_end;
+    
+    
+
+    $today_total = getContentCountByDate($today_unix, $today_end);
+    $yesterday_total = getContentCountByDate($yesterday_unix, $yesterday_unix_end);
+    $month_total = getContentCountByDate($month_prev_unix, $month_prev_unix_end);
+    $year_total = getContentCountByDate($year_prev_unix, $year_prev_unix_end);
+    $data['site_snapshot']['site_name'] = "$site_name";
+    $data['site_snapshot']['today'] = "$today_total";
+    $data['site_snapshot']['yesterday'] = "$yesterday_total";
+    $data['site_snapshot']['month'] = "$month_total";
+    $data['site_snapshot']['year'] = "$year_total";
+    $data['site_snapshot']['site_id'] = "$site_id";
+    // auhtorwise_data
+    $data['auhtorwise_data']['site_name'] = "$site_name";
+    $data['auhtorwise_data']['today'] = "$today_total";
+    $data['auhtorwise_data']['yesterday'] = "$yesterday_total";
+    $data['auhtorwise_data']['month'] = "$month_total";
+    $data['auhtorwise_data']['year'] = "$year_total";
+    $data['auhtorwise_data']['site_id'] = "$site_id";
+    //auhtor_data
+    $author_list = getAuthorList_Report($today_unix, $today_end);
+    // start loop on author list array
+    $author_loop_cont = 0;
+    $auhtor_data = array();
+    foreach ($author_list as $key => $value) {
+        $user_id = $value['author_id'];
+        $name = $value['author_name'];
+        $mail = $value['author_email'];
+        $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
+        $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
+        $month_total_uid = getContentCountByDateAndByUid($month_prev_unix, $month_prev_unix_end, $mail);
+        $year_total_uid = getContentCountByDateAndByUid($year_prev_unix, $year_prev_unix_end, $mail);
+        $auhtor_data[$author_loop_cont]['author_id'] = "$user_id";
+        $auhtor_data[$author_loop_cont]['author_email'] = "$mail";
+        $auhtor_data[$author_loop_cont]['author_name'] = "$name";
+        $auhtor_data[$author_loop_cont]['site_id'] = "$site_id";
+        $auhtor_data[$author_loop_cont]['today'] = "$today_total_uid";
+        $auhtor_data[$author_loop_cont]['yesterday'] = "$yesterday_total_uid";
+        $auhtor_data[$author_loop_cont]['month'] = "$month_total_uid";
+        $auhtor_data[$author_loop_cont]['year'] = "$year_total_uid";
+        //auhtor_data contents
+        $author_today_data = todayContentsByUid($today_unix, $today_end, $mail);
+        //loop author today data
+        $author_inner_loop_cont = 0;
+        $contents = array();
+        foreach ($author_today_data as $today_key => $today_val) {
+            $title = $today_val['title'];
+            $nid = $today_val['nid'];
+            $desc = kickerByNid($nid);
+            $title_path = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid . '');
+            $contents[$author_inner_loop_cont]['author_id'] = "$user_id";
+            $contents[$author_inner_loop_cont]['author_email'] = "$mail";
+            $contents[$author_inner_loop_cont]['author_name'] = "$name";
+            $contents[$author_inner_loop_cont]['site_id'] = "$site_id";
+            $contents[$author_inner_loop_cont]['content_id'] = "$nid";
+            $contents[$author_inner_loop_cont]['introtext'] = "$desc";
+            $contents[$author_inner_loop_cont]['content_url'] = "$title_path";
+            $contents[$author_inner_loop_cont]['page_title'] = "$title";
+            $author_inner_loop_cont++;
+        }
+        if ($author_inner_loop_cont) {
+            $auhtor_data[$author_loop_cont]['contents'] = $contents;
+        } else {
+            unset($auhtor_data[$author_loop_cont]);
+        }
+        $author_loop_cont++;
     }
-  }
+    $data['auhtorwise_data']['auhtor_data'] = $auhtor_data;
+    return $data;
 }
 
 /**
- * Implements hook_init()
+ * function for get total contents by date
+ * @pram datetime $start_date
+ *
+ * @return int $count
  */
-function itg_akamai_init() {
+function getContentCountByDate($start_date, $end_date) {
+    
+    $cont = 0;
+    $flag = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query->fields('n', array('nid', 'status'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
+    //end
+    if ($start_date != "na") {
+        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+    }
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->range(1, 10);
+    
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);      
+    foreach ($result as $reskey => $resvalue) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];           
+        if (strpos($author_email, 'aajtak.com') !== false) {
+            $cont++;
+        }
+    }
+    return $cont;
+}
 
-  if (!drupal_is_cli()) {
-    if (!itg_akamai_check_pattern_for_by_passing_url(arg(0))) {
-// Adding TTL for some specified pages
-      global $theme;
-      if ($theme == FRONT_THEME_NAME) {
-        // Akamai Setting for Home Page
-        $is_front_page = drupal_is_front_page();
-        $parm = isset($_GET['q']) ? $_GET['q'] : NULL;
-        // Checking if page is Taxonomy page
-        $parms = explode('/', $parm);
-        
-        if ($is_front_page) {   // Checking if page is front page
-          $homepage_ttl = variable_get('itg_akamai_other_hpage');
-          if (isset($homepage_ttl) && !empty($homepage_ttl)) {
-            $itg_max_age = akamai_max_age($homepage_ttl);
-            if (!empty($itg_max_age)) {
-              $formated_expire_date = itg_akamai_set_expiration_date($itg_max_age);
-              drupal_add_http_header('Edge-control', 'cache-maxage=' . $itg_max_age . 's');
-              drupal_add_http_header('Cache-Control', 'public, max-age=' . $itg_max_age);
-              drupal_add_http_header('Expires', $formated_expire_date);
+/**
+ * function for generate author Flag array
+ * @pram int $nid, $status
+ * @return int authorflag
+ */
+function getbylineFlag($nid, $status) {
+    $flag = 0;
+    if (!empty($nid) && !empty($status)) {
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_reporter_email_id', 'rem', 'n.nid = rem.entity_id');
+        $query->fields('rem', array('field_reporter_email_id_value'));
+        $query->condition('n.nid', $nid, '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $reskey => $resvalue) {
+            $email = $resvalue['field_reporter_email_id_value'];
+            if (strpos($email, 'aajtak.com') !== false) {
+                $flag = 1;
+                break;
             }
-          }
         }
-        else if ($parms[0] == "taxonomy" && $parms[1] == "term" && is_numeric($parms[2]) && $parms[3] == "") {
-          $max_age = get_itg_akamai_content_setting($parms[2], 'taxonomy');
-          akamai_max_age($max_age);
-        }
-        else if (($parms[0] == "magazine" && $parms[1] != "" && $parms[3] == "") || ($parms[0] == "magazine" && $parms[1] == "" && $parms[3] == "")) {
-          try {
-            $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);
-            if (isset($ttl_for_custom_url)) {
-              $max_age = $ttl_for_custom_url;
+    }
+    return $flag;
+}
+
+/**
+ * function for generate author detail array
+ * @pram $nid, $status
+ * @return array authorDetail
+ */
+function getbylineDetail($nid, $status) {
+    $data = array();
+    if (!empty($nid) && !empty($status)) {
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_reporter_email_id', 'rem', 'n.nid = rem.entity_id');
+        $query->fields('rem', array('field_reporter_email_id_value'));
+        $query->fields('n');
+        $query->condition('s.nid', $nid, '=');
+        $query->condition('s.publish_status', $status, '=');
+        $query->condition('n.type', 'reporter', '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $reskey => $resvalue) {
+            $email = $resvalue['field_reporter_email_id_value'];
+            if (strpos($email, 'aajtak.com') !== false) {
+                $data['author_id'] = $resvalue['nid'];
+                $data['author_name'] = $resvalue['title'];
+                $data['author_email'] = $email;
             }
-            else {
-              $max_age = variable_get('akamai_timeout_magazine');
+        }
+    }
+    return $data;
+}
+
+/**
+ * function for generate author list array
+ *
+ * @return array authorList
+ */
+function getAuthorList_Report($s_date, $e_date) {
+    global $base_url;
+    $list = array();
+    $cont = 0;
+    $flag = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query->fields('n', array('nid', 'status'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
+    //end
+    if ($start_date != "na") {
+        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+    }
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->range(1, 10);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
+    foreach ($result as $reskey => $resvalue) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if (strpos($author_email, 'aajtak.com') !== false) {
+                $data['author_id'] = $resvalue['nid'];
+                $data['author_name'] = $resvalue['title'];
+                $data['author_email'] = $email;
+                $list[$cont] = getbylineDetail($nid, $status);
+                $cont++;
+        }
+    }
+
+    return $list;
+}
+
+/**
+ * function for get total contents by date & uid
+ * @pram datetime $start_date
+ * @pram int $uid
+ *
+ * @return int $count
+ */
+function getContentCountByDateAndByUid($start_date, $end_date, $email) {
+    $cont = 0;
+    $flag = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query->fields('n', array('nid', 'status'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
+    //end
+    if ($start_date != "na") {
+        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+    }
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->range(1, 10);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
+    foreach ($result as $reskey => $resvalue) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if ($email == $author_email) {
+            $cont++;
+        }
+    }
+    return $cont;
+}
+
+/**
+ * function for generate author Flag by email array
+ * @pram int $nid, $status
+ * @return int authorflag
+ */
+function getbylineFlagByEmail($nid, $status, $email) {
+    $flag = 0;
+    if (!empty($nid) && !empty($status)) {
+        $query = db_select('node', 'n');
+        $query->leftJoin('field_data_field_reporter_email_id', 'rem', 'n.nid = rem.entity_id');
+        $query->fields('rem', array('field_reporter_email_id_value'));
+        $query->condition('s.nid', $nid, '=');
+        $query->condition('s.publish_status', $status, '=');
+        $query->condition('n.type', 'reporter', '=');
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result as $reskey => $resvalue) {
+            $email_g = $resvalue['field_reporter_email_id_value'];
+            if ($email_g == $email) {
+                $flag = 1;
+                break;
             }
-            akamai_max_age($max_age);
-          }
-          catch (Exception $e) {
-            watchdog('ITG Akamai', 'Error:' . $e->getMessage());
-          }
         }
-        // Setting TTL for Akamai including all internal pages, ie. Home, Program, Speaker, Registration and Sponser
-        // TTL will be reflected in HTTP header as Cache-Control:public, max-age=SOME_INTEGER 
-        // Also it will change the Eadge Header and Expiry as well 
-        // Checking the event and its related urls with all pattern,  and if it is found then setting TTL as desired
-        else if ($parms[0] == "event" && $parms[1] != "" && is_numeric($parms[2]) && $parms[3] != "") {
-          // Getting the entity ID.
-          $entity_id = $parms[2];
-          if (isset($entity_id) && !empty($entity_id)) {
-            // Checking where entity ID is exist or not 
-            // Passing the default parm for node entity 
-            // This will return the TTL that have been set from backend
-            $max_age = get_itg_akamai_content_setting($entity_id, ITG_AKAMAI_EVENT_BACKEND);
-            akamai_max_age($max_age);
-          }
+    }
+    return $flag;
+}
+
+/**
+ * function for today contents by uid
+ * @pram datetime $start_date
+ * @pram int $uid
+ *
+ * @return int $count
+ */
+function todayContentsByUid($start_date, $end_date, $mail) {
+    $list = array();
+    $cont = 0;
+    $flag = 0;
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query->fields('n', array('nid', 'status', 'title'));
+    $query->fields('fr', array('field_story_reporter_target_id'));
+    //end
+    if ($start_date != "na") {
+        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+    }
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story');
+    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->range(1, 10);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
+    foreach ($result as $reskey => $resvalue) {
+        $nid = $resvalue['nid'];        
+        $author_nid = $resvalue['field_story_reporter_target_id'];        
+        $author = node_load($author_nid);
+        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
+        if ($author_email == $mail) {
+            $list[$cont]['nid'] = $nid;
+            $list[$cont]['title'] = $title;
+            $cont++;
+            $cont++;
         }
-        else if (arg(0) == 'video' && arg(2) == 'embed') {
-          $ttl_for_custom_url = 1800;
-	  akamai_max_age($ttl_for_custom_url);
-	}
-        else {          
-          $ttl_for_custom_url = itg_akamai_get_ttl_for_custom_url($parm);          
-          if (isset($ttl_for_custom_url)) {
-            akamai_max_age($ttl_for_custom_url);
-          }
+    }
+
+    return $list;
+}
+
+
+
+/**
+ * function for kickerByNid
+ * @pram int $nid
+ * @return string $desc
+ */
+function kickerByNid($nid) {
+    $desc = "";
+    if ($nid) {
+        $query_n = db_select('field_data_field_story_kicker_text', 'kt');
+        $query_n->fields('kt', array('field_story_kicker_text_value'));
+        $query_n->condition('kt.entity_id', $nid, '=');
+        $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result_n as $reskey_n => $resvalue_n) {
+            $desc = $resvalue_n['field_story_kicker_text_value'];
         }
-      } // End of theme conditon
     }
-  }
-}
-
-/**
- * This method will return the TTL for custom or other urls
- * @param type $param
- */
-function itg_akamai_get_ttl_for_custom_url($url_part) {
-  $query = db_select('itg_akamai_custom_url_ttl', 't');
-  $query->condition('t.url', $url_part);
-  $query->fields('t', array('ttl'));
-  $result = $query->execute();
-
-  // Getting all the data 
-  $actual_data = array();
-  if (isset($result)) {
-    foreach ($result->fetchObject() as $data) {
-      $actual_data[] = $data;
-    }
-  }
-
-  // Return only the first single data
-  if (isset($actual_data[0])) {
-    return $actual_data[0];
-  }
-}
-
-/**
- *  Getting Story list associated with video
- */
-function itg_akamai_get_story_list_assc_video($video_nid = NULL) {
-  $story_ids = array();
-  if (!empty($video_nid)) {
-    $query = db_select('field_data_field_story_associate_video', 'v');
-    $query->join('node', 'n', 'n.nid=v.entity_id');
-    $query->condition('v.field_story_associate_video_target_id', $video_nid);
-    $query->condition('v.bundle', 'story');
-    $query->fields('v', array('entity_id'));
-    $result = $query->execute();
-    foreach ($result as $row) {
-      $story_ids[] = 'node/' . $row->entity_id;
-    }
-    return $story_ids;
-  }
-  return;
-}
-
-/**
- * Returns bulk alias by source
- * @param array $param
- */
-function itg_akamai_get_story_bulk_alias($source) {
-  $alias = array();
-  $query = db_select('url_alias', 'ul');
-  $query->condition('ul.source', $source, 'IN');
-  $query->addExpression('MAX(pid)', 'max_pid');
-  $query->fields('ul', array('alias'));
-  $query->groupBy('source');
-  $result = $query->execute();
-  foreach ($result as $row) {
-    $alias[] = $row->alias;
-  }
-  return $alias;
-}
-
-/**
- * Send purge request to akamai for story which is related to video
- * @param int $video_id
- */
-function itg_akamai_purge_story_related_to_video($video_id) {
-  if (isset($video_id) && !empty($video_id)) {
-    $stories_ids = itg_akamai_get_story_list_assc_video($video_id);
-    if (!empty($stories_ids)) {
-      $itg_akamai_get_story_alias = itg_akamai_get_story_bulk_alias($stories_ids);
-      if (!empty($itg_akamai_get_story_alias)) {
-        $itg_akamai_get_story_alias = itg_akamai_send_for_host_mapping_for_amp($itg_akamai_get_story_alias);
-        itg_akamai_clear_url($itg_akamai_get_story_alias);
-      }
-    }
-  }
-}
-
-/**
- * Setting the TTL for akamai section cart
- * @param type $param
- */
-function itg_akamai_setting_ttl_for_section_cart() {
-  module_load_include('inc', 'itg_akamai', 'includes/itg_akamai');
-  try {
-    $ttl = ItgAkamaiMain::itgAkamaiGettingTTLforAkamaiSectionCart();
-  }
-  catch (Exception $e) {
-    watchdog('ITG Akamai', 'Error:' . $e->getMessage());
-  }
-  try {
-    ItgAkamaiMain::itgAkamaiSettingTtlForSectionCart($ttl);
-  }
-  catch (Exception $e) {
-    watchdog('ITG Akamai', 'Error:' . $e->getMessage());
-  }
-}
-
-/**
- * Getting mapped Content Type for Akamai
- */
-function itg_akamai_getting_mapped_content_type() {
-  $mapping = array();
-  $itg_akamai_cc_conf_list = variable_get('itg_akamai_cc_conf_list');
-  foreach ($itg_akamai_cc_conf_list as $content_type) {
-    if (isset($content_type) && !empty($content_type)) {
-      $mapping[] = $content_type;
-    }
-  }
-  return $mapping;
-}
-
-/**
- * Convert to String Time
- * @param type $num_seconds
- * @return type
- */
-function itg_akamai_convert_to_string_time($seconds) {
-  $dtF = new \DateTime('@0');
-  $dtT = new \DateTime("@$seconds");
-  return $dtF->diff($dtT)->format('%a days, %h hours, %i minutes and %s seconds');
-}
-
-/**
- * Convert to String Time
- * @param type $num_seconds
- * @return type
- */
-function itg_akamai_cc_button_purge($entity_data) {
-  if (isset($entity_data) && !empty($entity_data)) {
-    $node_data = json_decode(base64_decode($entity_data));
-    $url = drupal_get_path_alias('node/' . $node_data->nid);
-    $amp_types = itg_akamai_amp_cc_mapping();
-    // Adding AMP urls for node types
-    if (in_array($node_data->type, $amp_types)) {
-      $url = itg_akamai_send_for_host_mapping_for_amp($url);
-      itg_akamai_clear_url($url);
-      drupal_set_message(t('Content have been purged successfully.'));
-    }
-    else {
-      if ($node_data->type == ITG_AKAMAI_EVENT_BACKEND) {
-        $url = array();
-        $event_url_mapping = array('programme', 'sponsors', 'speakers', 'registration', 'sponsor-details', 'speaker-details', 'sing-and-win', 'flashback');
-        $event_title = drupal_get_path_alias('node/' . $node_data->nid);
-        $url[] = $event_title;
-        foreach ($event_url_mapping as $program_url_part) {
-          $url[] = $event_title . '/' . $program_url_part;
-        }
-        $overrides = array(
-          'action' => 'remove',
-        );
-        try {
-          itg_akamai_clear_url($url, $overrides);
-        }
-        catch (Exception $e) {
-          watchdog('akamai_purge_error', 'Unable to purge url due to Error:' . $e->getMessage());
-        }
-        drupal_set_message(t('Content have been purged successfully.'));
-      }
-      else {
-        itg_akamai_clear_url($url);
-        drupal_set_message(t('Content have been purged successfully.'));
-      }
-    }
-    //Start code sending purge request to Akamai to purge those stories which is related to passed video id
-    if ($node_data->type == 'videogallery') {
-      itg_akamai_purge_story_related_to_video($node_data->nid);
-    }
-    // End code  sending purge request to Akamai to purge those stories which is related to passed video id
-    // Sending request for purging Magazine page
-    if ($node_data->type == 'story') {
-      if (isset($node_data->field_story_issue_date) && !empty($node_data->field_story_issue_date)) {
-        $pattern_magazine_url = 'magazine/' . $node_data->field_story_issue_date;
-        itg_akamai_clear_url($pattern_magazine_url);
-      }
-    }
-    if (isset($_GET['return_data']) && !empty($_GET['return_data'])) {
-      $return_data = json_decode(base64_decode($_GET['return_data']), TRUE);
-      drupal_goto($return_data[0], array('query' => $return_data[1]));
-    }
-    else {
-      drupal_goto('<front>');
-    }
-  }
-}
-
-/**
- * Getting AMP mapping for ITG Akamai
- */
-function itg_akamai_amp_cc_mapping() {
-  return array('story', 'photogallery', 'videogallery');
-}
-
-/**
- * Getting Domain without protocal
- */
-function itg_akamai_getting_domain_without_protocal() {
-  $strn = str_replace('http://', '', FRONT_URL);
-  $strn = str_replace('https://', '', $strn);
-  return $strn;
-}
-
-/**
- * Checking pattern for by passing some urls 
- * @param string $string
- */
-function itg_akamai_check_pattern_for_by_passing_url($string) {
-  if (strpos($string, 'itg_akamai_block_refresh') !== false) {
-    return true;
-  }
-  return;
+    return $desc;
 }
