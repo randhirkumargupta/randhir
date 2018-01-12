@@ -2315,46 +2315,73 @@ function itg_app_api_resource() {
                 ),
             ),
         ),
-         //Social share in report API   
-    'social_share_save_it' => array(
-      'operations' => array(
-        'create' => array(
-          'help' => 'Social Share Rest API save data',
-          'file' => array(
-            'type' => 'inc',
-            'module' => 'itg_app_api',
-            'name' => 'itg_app_api.services',
-          ),
-          'callback' => 'social_share_save_it_detail',
-          'access callback' => 'user_access',
-          'access arguments' => array('access content'),
-          'access arguments append' => FALSE,
-          'args' => array(
-            array(
-              'name' => 'website_id',
-              'optional' => TRUE,
-              'source' => array('data'),
-              'description' => 'First Name',
-              'type' => 'array',
+        //Social share in report API   
+        'social_share_save_it' => array(
+            'operations' => array(
+                'create' => array(
+                    'help' => 'Social Share Rest API save data',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'social_share_save_it_detail',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'website_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'First Name',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'content_id',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'Last Name',
+                            'type' => 'array',
+                        ),
+                        array(
+                            'name' => 'content_type',
+                            'optional' => TRUE,
+                            'source' => array('data'),
+                            'description' => 'User email or mobile number',
+                            'type' => 'array',
+                        ),
+                    ),
+                ),
             ),
-            array(
-              'name' => 'content_id',
-              'optional' => TRUE,
-              'source' => array('data'),
-              'description' => 'Last Name',
-              'type' => 'array',
-            ),
-            array(
-              'name' => 'content_type',
-              'optional' => TRUE,
-              'source' => array('data'),
-              'description' => 'User email or mobile number',
-              'type' => 'array',
-            ),
-          ),
         ),
-      ),
-    ),
+        // aboutus custom resource declaration.....
+        'aboutus' => array(
+            'operations' => array(
+                'retrieve' => array(
+                    'help' => 'Retrieves aboutus schemes info.',
+                    'file' => array(
+                        'type' => 'inc',
+                        'module' => 'itg_app_api',
+                        'name' => 'itg_app_api.services',
+                    ),
+                    'callback' => 'itg_rapid_api_aboutus',
+                    'access callback' => 'user_access',
+                    'access arguments' => array('access content'),
+                    'access arguments append' => FALSE,
+                    'args' => array(
+                        array(
+                            'name' => 'token',
+                            'type' => 'string',
+                            'description' => 'Function to perform',
+                            'source' => array('path' => 0),
+                            'optional' => TRUE,
+                            'default' => '*',
+                        ),
+                    ),
+                ),
+            ),
+        ),
     );
 
     return $api;
@@ -6089,6 +6116,7 @@ function itg_rapid_api_topstories($token) {
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
 }
+
 /**
  * Call back function for Social Share API
  * @pram $_POST in JSON formate
@@ -6096,66 +6124,88 @@ function itg_rapid_api_topstories($token) {
  * @return array - The processed information array.
  */
 function social_share_save_it_detail($website_id, $content_id, $content_type, $args) {
-  $HTTP_RAW_POST_DATA;
-  $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+    $HTTP_RAW_POST_DATA;
+    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
 
-  $website_id = $params['website_id'];
-  $content_id = $params['content_id'];
-  $content_type = $params['content_type'];
-  $content_title = $params['content_title'];
-  $content_url = $params['content_url'];
-  $category = $params['category'];
-  $share_status = $params['share_status'];
-  $share_comment = $params['share_comment'];
-  $message = '';
+    $website_id = $params['website_id'];
+    $content_id = $params['content_id'];
+    $content_type = $params['content_type'];
+    $content_title = $params['content_title'];
+    $content_url = $params['content_url'];
+    $category = $params['category'];
+    $share_status = $params['share_status'];
+    $share_comment = $params['share_comment'];
+    $message = '';
 
-  if ($website_id == '' || $content_id == '') {
-    echo "Please pass the website_id & content_id properly";
-    exit;
-  }
-
-  $query = db_select('jos_social_media_sharing', 'sm');
-  $query->fields('sm', array('id'));
-  $query->condition('sm.content_type', $content_type);
-  $query->condition('sm.content_id', $content_id);
-  $result_id = $query->execute()->fetchField();
-
-  $current_time = date('Y-m-d H:i:s');
-  if ($result_id == '') {
-    //Insert the value
-    $query = db_insert('jos_social_media_sharing')
-            ->fields(array(
-              'content_id' => isset($content_id) ? $content_id : '',
-              'website_id' => isset($website_id) ? $website_id : '',
-              'content_type' => isset($content_type) ? $content_type : '',
-              'content_title' => isset($content_title) ? $content_title : '',
-              'content_url' => isset($content_url) ? $content_url : '',
-              'category' => isset($category) ? $category : '',
-              'is_promoted' => isset($share_status) ? $share_status : '',
-              'promotion_remark' => isset($share_comment) ? $share_comment : '',
-              'promotion_datetime' => $current_time,
-              'created_datetime' => $current_time,
-            ))->execute();
-
-    $message = 'Data has been Inserted successfully';
-  }
-  else {
-    //Update the value
-    $query = db_update('jos_social_media_sharing')
-            ->fields(array(
-              'content_id' => $content_id,
-              'content_type' => $content_type,
-              'content_title' => $content_title,
-              'content_url' => $content_url,
-              'category' => $category,
-              'is_promoted' => $share_status,
-              'promotion_remark' => $share_comment,
-              'promotion_datetime' => date('Y-m-d H:i:s'),
-            ))->condition('id', $result_id)->execute();
-    if ($query) {
-      $message = 'Data has been updated successfully';
+    if ($website_id == '' || $content_id == '') {
+        echo "Please pass the website_id & content_id properly";
+        exit;
     }
-  }
-  echo $message;
-  drupal_exit();
+
+    $query = db_select('jos_social_media_sharing', 'sm');
+    $query->fields('sm', array('id'));
+    $query->condition('sm.content_type', $content_type);
+    $query->condition('sm.content_id', $content_id);
+    $result_id = $query->execute()->fetchField();
+
+    $current_time = date('Y-m-d H:i:s');
+    if ($result_id == '') {
+        //Insert the value
+        $query = db_insert('jos_social_media_sharing')
+                        ->fields(array(
+                            'content_id' => isset($content_id) ? $content_id : '',
+                            'website_id' => isset($website_id) ? $website_id : '',
+                            'content_type' => isset($content_type) ? $content_type : '',
+                            'content_title' => isset($content_title) ? $content_title : '',
+                            'content_url' => isset($content_url) ? $content_url : '',
+                            'category' => isset($category) ? $category : '',
+                            'is_promoted' => isset($share_status) ? $share_status : '',
+                            'promotion_remark' => isset($share_comment) ? $share_comment : '',
+                            'promotion_datetime' => $current_time,
+                            'created_datetime' => $current_time,
+                        ))->execute();
+
+        $message = 'Data has been Inserted successfully';
+    } else {
+        //Update the value
+        $query = db_update('jos_social_media_sharing')
+                        ->fields(array(
+                            'content_id' => $content_id,
+                            'content_type' => $content_type,
+                            'content_title' => $content_title,
+                            'content_url' => $content_url,
+                            'category' => $category,
+                            'is_promoted' => $share_status,
+                            'promotion_remark' => $share_comment,
+                            'promotion_datetime' => date('Y-m-d H:i:s'),
+                        ))->condition('id', $result_id)->execute();
+        if ($query) {
+            $message = 'Data has been updated successfully';
+        }
+    }
+    echo $message;
+    drupal_exit();
+}
+/**
+ * Call back function for aboutus API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_aboutus($token){
+    $jsondata = '{  
+    "status_code": "1",
+    "status_message": "",
+    "data": {  
+        "id": "1",
+        "title": "About Us",
+        "website": "India Today",
+        "thumb_image": "",
+        "short_desc": "",
+        "description": "<p>India Today was launched in 1975. And in just a few years, it became the leading news magazine in the country. Now, with editions in five languages, it is the most widely-read publication in India-a position it has held for over a decade-with a readership of over 11 million (Source: IRS)</p><p>At present, India Today is published in Hindi, Tamil, Telugu and Malayalam. These editions deliver the same credibility, incisiveness and authority to our readers, that has become the hallmark of India Today. To keep pace with the diversifying interests of its affluent readers, the India Today Group has added 5 magazines to its value proposition - Simply, Aspire, Woman, Spice & Home.</p><p>In its online avatar, www.indiatoday.in brings you a daily connect with India\'s leading news magazine through special articles, blogs, columns, breaking news coverage and more. Also available on mobile handsets at m.indiatoday.in. The India Today Magazine is also available digitally across devices like the Kindle, iPad, Smartphones, Mac, Personal Computers,Windows phone and other tablets.</p>",
+        "web_url": "http://indiatoday.intoday.in"
+    }
+}';
+    $jsondata = json_decode($jsondata, TRUE);
+    return $jsondata;
 }
