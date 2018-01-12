@@ -256,9 +256,7 @@ function getbylineFlag($nid, $status) {
         $query = db_select('node', 'n');
         $query->leftJoin('field_data_field_reporter_email_id', 'rem', 'n.nid = rem.entity_id');
         $query->fields('rem', array('field_reporter_email_id_value'));
-        $query->condition('s.nid', $nid, '=');
-        $query->condition('s.publish_status', $status, '=');
-        $query->condition('n.type', 'reporter', '=');
+        $query->condition('n.nid', $nid, '=');
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             $email = $resvalue['field_reporter_email_id_value'];
