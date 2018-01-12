@@ -1077,6 +1077,10 @@ function itg_event_backend_form_views_exposed_form_alter(&$form, &$form_state, $
     $form['title']['#autocomplete_path'] = 'content-title-event/close/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
+  if ($form["#id"] == 'views-exposed-form-Event-backend-page-3') { // for event draft
+    $form['title']['#autocomplete_path'] = 'content-title-event/draft/autocomplete';
+    $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
   if ($form["#id"] == 'views-exposed-form-Sponsor-page') {
     $form['title']['#autocomplete_path'] = 'content-title-list/sponsor/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
@@ -1923,7 +1927,7 @@ function itg_event_backend_highlights_block_content() {
         $text .= '<div class="h-list">' . $highlights_detail[$highlights_arr['value']]->field_highlights_text[LANGUAGE_NONE][0]['value'] . itg_event_backend_highlights_like_dislike($highlights_arr['value']) . '</div>';
       }
     }
-    if(!empty($text)) {
+     if(!empty($text)) {
       $output .= $text . '</div></div>';
     }else{
       $output = '';
