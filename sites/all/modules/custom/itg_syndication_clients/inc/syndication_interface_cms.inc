@@ -66,6 +66,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $publish_date = date("F d, Y", strtotime($issue_title));
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
 
@@ -107,6 +108,7 @@ function genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $publish_date = date("F d, Y", strtotime($issue_title));
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<article>';
@@ -155,6 +157,7 @@ function genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_
       $byline = get_byline_name_by_nid($value['nid']);
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
 
