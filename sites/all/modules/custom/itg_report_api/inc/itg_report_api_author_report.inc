@@ -431,33 +431,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
     return $list;
 }
 
-/**
- * function for getBYlineDetail
- * @pram int 
- * @return array
- */
-function getBYlineDetail($nid) {
-    $byline_data = array();
-    if ($nid) {
-        $query_n = db_select('node', 'n');
-        $query_n->leftJoin('field_data_field_reporter_email_id', 're', 'n.nid = re.entity_id');
-        $query_n->fields('n', array('nid', 'title', 'status'));
-        $query_n->fields('re', array('field_reporter_email_id_value'));
-        $query_n->condition('n.nid', $nid, '=');
-        $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result_n as $reskey_n => $resvalue_n) {
-            //$nid = $resvalue_n['nid'];
-            $title = $resvalue_n['title'];
-            $status = $resvalue_n['status'];
-            $field_reporter_email_id_value = $resvalue_n['field_reporter_email_id_value'];
-            $byline_data['nid'] = $nid;
-            $byline_data['title'] = $title;
-            $byline_data['status'] = $status;
-            $byline_data['email'] = $field_reporter_email_id_value;
-        }
-    }
-    return $byline_data;
-}
+
 
 /**
  * function for kickerByNid
