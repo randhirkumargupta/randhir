@@ -2823,11 +2823,14 @@ function itg_widget_node_insert($node) {
         if ($node->field_story_source_type['und'][0]['value'] != 'migrated') {
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
+            
+            if (function_exists('__itg_widget_helper_data_insert')) {
+              __itg_widget_helper_data_insert($node->nid, $node);
+            }
+            
             if (isset($node->field_story_category['und'])) {
                 $primary_category = $node->field_primary_category['und'][0]['value'];
-                if (function_exists('__itg_widget_helper_data_insert')) {
-                  __itg_widget_helper_data_insert($node->nid, $node);
-                }
+                
                 foreach ($cat_id as $category) {
 
                     if ($node->field_story_source_type['und'][0]['value'] == 'migrated' && $category['tid'] == $primary_category) {
