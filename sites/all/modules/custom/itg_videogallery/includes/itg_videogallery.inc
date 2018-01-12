@@ -350,13 +350,7 @@ function itg_videogallery_getvideoplayer() {
   $video_title = $_GET['video_title'];
   $video_data = itg_videogallery_get_video_info_by_fid($fid);
   if($video_data[0]->video_repo_type == 'INTERNAL') {
-    if($video_data[0]->nid != "") {
-    $node_obj = node_load($video_data[0]->nid );
-    if(isset($node_obj->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']) && !empty($node_obj->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-    $player_image = $node_obj->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
-  }
-  }
-   print theme('internal_video_player' , array("data" => $fid , 'used_on' =>$getvideousedon,'title' => $video_title ,'player_image'=>$player_image , 'node_id'=>$video_data[0]->nid)); 
+   print theme('internal_video_player' , array("data" => $fid , 'used_on' =>$getvideousedon,'title' => $video_title)); 
   }else {
   print theme('itg_videogallery_getvideoplayer' , array('video_data' => $video_data , 'tabindex' => $tabindex));
   }
