@@ -225,32 +225,24 @@ function getContentCountByDate($start_date, $end_date) {
     
     $cont = 0;
     $flag = 0;
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
-    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query = db_select('node', 'n');    
+    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');    
+    $query->leftJoin('itg_milti_byline_info', 'byli', 'byli.nid=n.nid');    
+    $query->leftJoin('field_data_field_story_reporter', 'repr', 'byli.nid=repr.entity_id');
     $query->fields('n', array('nid', 'status'));
-    $query->fields('fr', array('field_story_reporter_target_id'));
+    $query->fields('byli', array('byline_id'));
+    $query->fields('repr', array('field_reporter_email_id_value'));
     //end
     if ($start_date != "na") {
-        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
-        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+        $query->condition('n.created', $start_date, ">=");
+        $query->condition('n.created', $end_date, "<=");
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
-    $query->condition('fst.field_story_source_type_value', 'story', '=');
-    //$query->range(1, 10);
-    
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);      
-    foreach ($result as $reskey => $resvalue) {
-        $nid = $resvalue['nid'];        
-        $author_nid = $resvalue['field_story_reporter_target_id'];        
-        $author = node_load($author_nid);
-        $author_email = $author->field_reporter_email_id['und'][0]['value'];           
-        if (strpos($author_email, 'aajtak.com') !== false) {
-            $cont++;
-        }
-    }
+    $query->condition('ti.tid', '1206640', '<>');     
+    $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+    $result = $query->execute();      
+    $cont = $result->rowCount();
     return $cont;
 }
 
@@ -316,36 +308,33 @@ function getAuthorList_Report($s_date, $e_date) {
     $list = array();
     $cont = 0;
     $flag = 0;
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
-    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query = db_select('node', 'n');    
+    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');    
+    $query->leftJoin('itg_milti_byline_info', 'byli', 'byli.nid=n.nid');    
+    $query->leftJoin('field_data_field_story_reporter', 'repr', 'byli.nid=repr.entity_id');
     $query->fields('n', array('nid', 'status'));
-    $query->fields('fr', array('field_story_reporter_target_id'));
+    $query->fields('byli', array('byline_id'));
+    $query->fields('repr', array('field_reporter_email_id_value'));
     //end
     if ($start_date != "na") {
-        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
-        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+        $query->condition('n.created', $start_date, ">=");
+        $query->condition('n.created', $end_date, "<=");
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
-    $query->condition('fst.field_story_source_type_value', 'story', '=');
-    //$query->range(1, 10);
+    $query->condition('ti.tid', '1206640', '<>');     
+    $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');        
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
-    foreach ($result as $reskey => $resvalue) {
-        $nid = $resvalue['nid'];        
-        $author_nid = $resvalue['field_story_reporter_target_id'];        
-        $author = node_load($author_nid);
-        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
-        if (strpos($author_email, 'aajtak.com') !== false) {
-                $data['author_id'] = $resvalue['nid'];
-                $data['author_name'] = $resvalue['title'];
-                $data['author_email'] = $email;
-                $list[$cont] = getbylineDetail($nid, $status);
-                $cont++;
-        }
+    foreach ($result as $reskey => $resvalue) {              
+        $author_nid = $resvalue['byline_id'];        
+        $author = node_load($author_nid);              
+        $data['author_id'] = $author_nid;
+        $data['author_name'] = $author_email->title;
+        $data['author_email'] = $resvalue['field_reporter_email_id_value'];
+        $list[$cont] = $data;
+        $cont++;
     }
-
+    $list = array_unique($list);
     return $list;
 }
 
@@ -359,31 +348,24 @@ function getAuthorList_Report($s_date, $e_date) {
 function getContentCountByDateAndByUid($start_date, $end_date, $email) {
     $cont = 0;
     $flag = 0;
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
-    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query = db_select('node', 'n');    
+    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');    
+    $query->leftJoin('itg_milti_byline_info', 'byli', 'byli.nid=n.nid');    
+    $query->leftJoin('field_data_field_story_reporter', 'repr', 'byli.nid=repr.entity_id');
     $query->fields('n', array('nid', 'status'));
-    $query->fields('fr', array('field_story_reporter_target_id'));
+    $query->fields('byli', array('byline_id'));
+    $query->fields('repr', array('field_reporter_email_id_value'));
     //end
     if ($start_date != "na") {
-        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
-        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+        $query->condition('n.created', $start_date, ">=");
+        $query->condition('n.created', $end_date, "<=");
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
-    $query->condition('fst.field_story_source_type_value', 'story', '=');
-    //$query->range(1, 10);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
-    foreach ($result as $reskey => $resvalue) {
-        $nid = $resvalue['nid'];        
-        $author_nid = $resvalue['field_story_reporter_target_id'];        
-        $author = node_load($author_nid);
-        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
-        if ($email == $author_email) {
-            $cont++;
-        }
-    }
+    $query->condition('ti.tid', '1206640', '<>');     
+    $query->condition('repr.field_reporter_email_id_value', $email, '=');
+    $result = $query->execute();      
+    $cont = $num_of_results = $result->rowCount();
     return $cont;
 }
 
@@ -424,33 +406,28 @@ function todayContentsByUid($start_date, $end_date, $mail) {
     $list = array();
     $cont = 0;
     $flag = 0;
-    $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
-    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_reporter', 'fr', 'fr.entity_id=n.nid');
+    $query = db_select('node', 'n');    
+    $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');    
+    $query->leftJoin('itg_milti_byline_info', 'byli', 'byli.nid=n.nid');    
+    $query->leftJoin('field_data_field_story_reporter', 'repr', 'byli.nid=repr.entity_id');
     $query->fields('n', array('nid', 'status', 'title'));
-    $query->fields('fr', array('field_story_reporter_target_id'));
+    $query->fields('byli', array('byline_id'));
+    $query->fields('repr', array('field_reporter_email_id_value'));
     //end
     if ($start_date != "na") {
-        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
-        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+        $query->condition('n.created', $start_date, ">=");
+        $query->condition('n.created', $end_date, "<=");
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
-    $query->condition('fst.field_story_source_type_value', 'story', '=');
-    //$query->range(1, 10);
+    $query->condition('ti.tid', '1206640', '<>');     
+    $query->condition('repr.field_reporter_email_id_value', $mail, '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
-        $nid = $resvalue['nid'];        
-        $author_nid = $resvalue['field_story_reporter_target_id'];        
-        $author = node_load($author_nid);
-        $author_email = $author->field_reporter_email_id['und'][0]['value'];        
-        if ($author_email == $mail) {
-            $list[$cont]['nid'] = $nid;
-            $list[$cont]['title'] = $title;
-            $cont++;
-            $cont++;
-        }
+        $nid = $resvalue['nid'];
+        $list[$cont]['nid'] = $nid;
+        $list[$cont]['title'] = $resvalue['title'];
+        $cont++;
     }
 
     return $list;
