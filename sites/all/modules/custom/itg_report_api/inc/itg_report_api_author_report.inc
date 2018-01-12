@@ -240,7 +240,7 @@ function getContentCountByDate($start_date, $end_date) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('ti.tid', '1206640', '<>');     
-    $query->condition('repr.field_reporter_email_id_value', '%gmail.com', 'LIKE');
+    $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
     $result = $query->execute();      
     $cont = $result->rowCount();
     return $cont;
@@ -261,7 +261,7 @@ function getbylineFlag($nid, $status) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             $email = $resvalue['field_reporter_email_id_value'];
-            if (strpos($email, 'gmail.com') !== false) {
+            if (strpos($email, 'aajtak.com') !== false) {
                 $flag = 1;
                 break;
             }
@@ -288,7 +288,7 @@ function getbylineDetail($nid, $status) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             $email = $resvalue['field_reporter_email_id_value'];
-            if (strpos($email, 'gmail.com') !== false) {
+            if (strpos($email, 'aajtak.com') !== false) {
                 $data['author_id'] = $resvalue['nid'];
                 $data['author_name'] = $resvalue['title'];
                 $data['author_email'] = $email;
@@ -323,7 +323,7 @@ function getAuthorList_Report($s_date, $e_date) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('ti.tid', '1206640', '<>');     
-    $query->condition('repr.field_reporter_email_id_value', '%gmail.com', 'LIKE');    
+    $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');    
     //print strtr((string)$query, $query->arguments());die;    
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {              
