@@ -164,6 +164,7 @@ function author_report($start_date) {
     $data['auhtorwise_data']['site_id'] = "$site_id";
     //auhtor_data
     $author_list = getAuthorList_Report($today_unix, $today_end);
+    //echo '<pre>';var_dump($today_unix, $today_end);die;
     // start loop on author list array
     $author_loop_cont = 0;
     $auhtor_data = array();
@@ -239,7 +240,7 @@ function getContentCountByDate($start_date, $end_date) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('ti.tid', '1206640', '<>');     
-    $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+    $query->condition('repr.field_reporter_email_id_value', '%gmail.com', 'LIKE');
     $result = $query->execute();      
     $cont = $result->rowCount();
     return $cont;
@@ -260,7 +261,7 @@ function getbylineFlag($nid, $status) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             $email = $resvalue['field_reporter_email_id_value'];
-            if (strpos($email, 'aajtak.com') !== false) {
+            if (strpos($email, 'gmail.com') !== false) {
                 $flag = 1;
                 break;
             }
@@ -287,7 +288,7 @@ function getbylineDetail($nid, $status) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result as $reskey => $resvalue) {
             $email = $resvalue['field_reporter_email_id_value'];
-            if (strpos($email, 'aajtak.com') !== false) {
+            if (strpos($email, 'gmail.com') !== false) {
                 $data['author_id'] = $resvalue['nid'];
                 $data['author_name'] = $resvalue['title'];
                 $data['author_email'] = $email;
@@ -316,13 +317,14 @@ function getAuthorList_Report($s_date, $e_date) {
     $query->fields('repr', array('field_reporter_email_id_value'));
     //end
     if ($start_date != "na") {
-        $query->condition('n.created', $start_date, ">=");
-        $query->condition('n.created', $end_date, "<=");
+        $query->condition('n.created', $s_date, ">=");
+        $query->condition('n.created', $e_date, "<=");
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('ti.tid', '1206640', '<>');     
-    $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');        
+    $query->condition('repr.field_reporter_email_id_value', '%gmail.com', 'LIKE');    
+    //print strtr((string)$query, $query->arguments());die;    
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {              
         $author_nid = $resvalue['byline_id'];        
