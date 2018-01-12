@@ -2354,34 +2354,7 @@ function itg_app_api_resource() {
                     ),
                 ),
             ),
-        ),
-        // aboutus custom resource declaration.....
-        'aboutus' => array(
-            'operations' => array(
-                'retrieve' => array(
-                    'help' => 'Retrieves aboutus schemes info.',
-                    'file' => array(
-                        'type' => 'inc',
-                        'module' => 'itg_app_api',
-                        'name' => 'itg_app_api.services',
-                    ),
-                    'callback' => 'itg_rapid_api_aboutus',
-                    'access callback' => 'user_access',
-                    'access arguments' => array('access content'),
-                    'access arguments append' => FALSE,
-                    'args' => array(
-                        array(
-                            'name' => 'token',
-                            'type' => 'string',
-                            'description' => 'Function to perform',
-                            'source' => array('path' => 0),
-                            'optional' => TRUE,
-                            'default' => '*',
-                        ),
-                    ),
-                ),
-            ),
-        ),
+        ),        
     );
 
     return $api;
@@ -6186,26 +6159,4 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
     echo $message;
     drupal_exit();
 }
-/**
- * Call back function for aboutus API
- * @pram $_GET
- *
- * @return array - The processed information array.
- */
-function itg_rapid_api_aboutus($token){
-    $jsondata = '{  
-    "status_code": "1",
-    "status_message": "",
-    "data": {  
-        "id": "1",
-        "title": "About Us",
-        "website": "India Today",
-        "thumb_image": "",
-        "short_desc": "",
-        "description": "<p>India Today was launched in 1975. And in just a few years, it became the leading news magazine in the country. Now, with editions in five languages, it is the most widely-read publication in India-a position it has held for over a decade-with a readership of over 11 million (Source: IRS)</p><p>At present, India Today is published in Hindi, Tamil, Telugu and Malayalam. These editions deliver the same credibility, incisiveness and authority to our readers, that has become the hallmark of India Today. To keep pace with the diversifying interests of its affluent readers, the India Today Group has added 5 magazines to its value proposition - Simply, Aspire, Woman, Spice & Home.</p><p>In its online avatar, www.indiatoday.in brings you a daily connect with India\'s leading news magazine through special articles, blogs, columns, breaking news coverage and more. Also available on mobile handsets at m.indiatoday.in. The India Today Magazine is also available digitally across devices like the Kindle, iPad, Smartphones, Mac, Personal Computers,Windows phone and other tablets.</p>",
-        "web_url": "http://indiatoday.intoday.in"
-    }
-}';
-    $jsondata = json_decode($jsondata, TRUE);
-    return $jsondata;
-}
+
