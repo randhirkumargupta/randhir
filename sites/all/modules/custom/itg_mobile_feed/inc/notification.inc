@@ -95,7 +95,7 @@ function generate_notification_all($params) {
             if ($output && $output != '') {
                 $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
             }
-        }
+        } 
         
     } elseif ($app_id == '1') {
         // XML Files Generation Based on Device Id
