@@ -1207,7 +1207,6 @@ function homePageJsonNewslist_world() {
             $n_rating = getRating($node);
             // homepage.inc
             $n_magazine = array();
-
             $data_newslist[$listcount]['n_polls'] = $n_polls;
             $data_newslist[$listcount]['n_rating'] = $n_rating;
             $data_newslist[$listcount]['n_magazine'] = $n_magazine;
