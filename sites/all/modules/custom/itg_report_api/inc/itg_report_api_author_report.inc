@@ -239,7 +239,7 @@ function getContentCountByDate($start_date, $end_date) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('fst.field_story_source_type_value', 'story', '=');
-    $query->range(1, 10);
+    //$query->range(1, 10);
     
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);      
     foreach ($result as $reskey => $resvalue) {
@@ -330,7 +330,7 @@ function getAuthorList_Report($s_date, $e_date) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('fst.field_story_source_type_value', 'story', '=');
-    $query->range(1, 10);
+    //$query->range(1, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];        
@@ -373,7 +373,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('fst.field_story_source_type_value', 'story', '=');
-    $query->range(1, 10);
+    //$query->range(1, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];        
@@ -438,7 +438,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('fst.field_story_source_type_value', 'story', '=');
-    $query->range(1, 10);
+    //$query->range(1, 10);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];        
