@@ -223,7 +223,7 @@ function getContentCountByDate($start_date, $end_date) {
     $cont = 0;
     $flag = 0;
     $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
     $query->fields('n', array('nid,title,status'));
     //end
@@ -232,7 +232,7 @@ function getContentCountByDate($start_date, $end_date) {
         $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
-    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->condition('fst.field_story_source_type_value', 'story', '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];
@@ -308,7 +308,7 @@ function getAuthorList_Report($s_date, $e_date) {
     $cont = 0;
     $flag = 0;
     $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
     $query->fields('n', array('nid,title,status'));
     //end
@@ -317,7 +317,7 @@ function getAuthorList_Report($s_date, $e_date) {
         $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
-    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->condition('fst.field_story_source_type_value', 'story', '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];
@@ -343,7 +343,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
     $cont = 0;
     $flag = 0;
     $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
     $query->fields('n', array('nid,title,status'));
     //end
@@ -352,7 +352,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
         $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
-    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->condition('fst.field_story_source_type_value', 'story', '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];
@@ -403,7 +403,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
     $cont = 0;
     $flag = 0;
     $query = db_select('node', 'n');
-    $query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
+    //$query->leftJoin('field_data_field_story_source_type', 'fst', 'fst.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=n.nid');
     $query->fields('n', array('nid,title,status'));
     //end
@@ -412,7 +412,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
         $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
-    $query->condition('fst.field_story_source_type_value', 'story', '=');
+    //$query->condition('fst.field_story_source_type_value', 'story', '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];
