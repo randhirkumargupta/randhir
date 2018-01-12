@@ -617,6 +617,42 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['filters']['created']['operator'] = '>';
   $handler->display->display_options['filters']['created']['value']['value'] = '-30 day';
   $handler->display->display_options['filters']['created']['value']['type'] = 'offset';
+  $handler->display->display_options['filters']['created']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['label'] = 'Created Date';
+  $handler->display->display_options['filters']['created']['expose']['description'] = 'Ex "-30 day"';
+  $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
+  $handler->display->display_options['filters']['created']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
+  );
   $handler->display->display_options['path'] = 'manage-newsletter';
 
   /* Display: Draft */

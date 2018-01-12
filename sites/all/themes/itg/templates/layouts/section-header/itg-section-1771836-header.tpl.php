@@ -3,7 +3,7 @@ global $base_url;
 drupal_add_css(".logo {display:none !important}", "inline");
 drupal_add_css(drupal_get_path('theme', 'itg') . '/css/section-header.css');
 ?>
-<div id="section-header-event-1771836" class="india-today-woman-summit">
+<div id="section-header-event-1771836" class="conclave2018-page">
     <header id="conclave2018-header" class="clearfix">
         <div class="container">
             <div class="row">
