@@ -249,10 +249,10 @@ ul.navbar li a {padding: 8px 17px;}
 Prashant Kothari for academics<br>
                      Email : itmi.admissions@aajtak.com<br>
                      Timing : 10 AM to 6 PM, Monday to Friday<br>
-                     <h2 style="padding:0px 0 0 0; margin:-10px 0 0 0 ;font-size:14px">Tel: 0120 - 4545635</h2><br>
-                     <h2 style="padding:0px 0 0 0; margin:-10px 0 0 0 ;font-size:14px">Tel: 0120 - 4545638</h2><br>
-                     <h2 style="padding:0px 0 0 0; margin:-10px 0 0 0 ;font-size:14px">Tel: 0120 - 4545720</h2><br>
-                     <h2 style="padding:0px 0 0 0; margin:-10px 0 0 0 ;font-size:14px">Tel: 0120 - 4545721</h2><br>
+                     <h2 style="padding:0px 0 0 0; margin:-10px 0 0 0 ;font-size:14px">Tel: 0120 - 4590630</h2><br>
+                     <h2 style="padding:0px 0 0 0; margin:-10px 0 0 0 ;font-size:14px">Tel: 0120 - 4590634</h2><br>
+                     <h2 style="padding:0px 0 0 0; margin:-10px 0 0 0 ;font-size:14px">Tel: 0120 - 4590635</h2><br>
+                     
                      <h2 style="padding:0px 0 0 0; margin:-10px 0 0 0 ;font-size:14px">Mob: 9560065465</h2><br>                     
                    </p>
                    <!--<p>Now, just give us a missed call on 0 80306 36017 for any admission-related enquiry, and we will call you back.</p>-->
