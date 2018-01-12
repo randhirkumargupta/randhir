@@ -212,6 +212,8 @@ function generateVideoCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
+            $title = strip_tags($title);
+            $desc = strip_tags($desc);
             $comment_cont = getCommentsCount($nid);
             $photo_list_array[$listcount]['v_id'] = "$nid";
             $photo_list_array[$listcount]['v_title'] = "$title";
@@ -342,6 +344,7 @@ function generateProgramCategoryList($tid, $pageno) {
 
     // filter user data list
     /* Testing user id, i will remove after testing. */
+
     $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350, 1148, 2573);
     $order_by = 'ASC';
     $type = "videogallery";
@@ -478,7 +481,8 @@ function generateProgramCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
-
+            $title = strip_tags($title);
+            $desc = strip_tags($desc);
             $photo_list_array[$listcount]['p_id'] = "$nid";
             $photo_list_array[$listcount]['p_title'] = "$title";
             $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
@@ -542,8 +546,9 @@ function programCategoryListlPageRerourceValue($token) {
     $program_list_array = array();
     $updated_datetime = "";
     $conf_array = tidConfig();
+    $program_key = "itg_programmes_order_by";
     $Program_section_list = variable_get($program_key);
-    if(count($Program_section_list) <= 0){
+    if (count($Program_section_list) <= 0) {
         $Program_section_list = $conf_array['program_sec_tid'];
     }
 
@@ -597,6 +602,7 @@ function generateProgramSectionList($Program_section_list) {
         $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
         $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
         $cat_icon_img = sectionCategoryIconImg($value);
+        $p_short_description = strip_tags($p_short_description);
 
         $data[$listcount]['p_id'] = "$value";
         $data[$listcount]['p_title'] = "$term->name";
@@ -723,7 +729,8 @@ function generateVideoDetail($nid) {
         } else {
             $changed_datetime = "";
         }
-
+        $title = strip_tags($title);
+        $desc = strip_tags($desc);
         $photo_list_array[$listcount]['v_id'] = "$nid";
         $photo_list_array[$listcount]['v_title'] = "$title";
         $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
@@ -832,7 +839,8 @@ function generateProgramDetail($nid) {
         } else {
             $changed_datetime = "";
         }
-
+        $title = strip_tags($title);
+        $desc = strip_tags($desc);
         $photo_list_array[$listcount]['p_id'] = "$nid";
         $photo_list_array[$listcount]['p_title'] = "$title";
         $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
@@ -1064,6 +1072,9 @@ function topstoriesList($source) {
         if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
             $is_developing = 1;
         }
+        if ($type == 'story') {
+            $type = getStoryType($nid);
+        }
         $prime_cat = getNodePrimeCatByNid($nid);
         $data_newslist[$home_list_count]['n_id'] = "$nid";
         //$data_newslist[$home_list_count]['n_template_id'] = "";
@@ -1085,6 +1096,8 @@ function topstoriesList($source) {
         $data_newslist[$home_list_count]['n_polls'] = $n_polls;
         $data_newslist[$home_list_count]['n_rating'] = $n_rating;
         $data_newslist[$home_list_count]['n_magazine'] = $n_magazine;
+        $n_widget = array();
+        $data_newslist[$home_list_count]['n_widget'] = $n_widget;
         $home_list_count++;
         //}
     }

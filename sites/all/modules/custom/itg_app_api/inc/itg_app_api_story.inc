@@ -135,17 +135,23 @@ function generateStoryDeatilList($id) {
   $tech_photo_gallery = $node->field_technology_photogallery['und'][0]['target_id'];
   $caption = "";
   $byline = "";
-  
+  $img_info = getInfoData($large_image_fid);
+  $image_courtesy = $img_info['image_courtesy'];
+  $image_caption = $img_info['image_caption'];
+
   $caption = $node->field_story_extra_large_image['und'][0]['title'];
 
   //data array building
+  $title = strip_tags($title);
+  $image_caption = strip_tags($image_caption);
+
   $data_array['category_id'] = "$tid";
   $data_array['category_title'] = "$term_name";
   $data_array['id'] = "$nid";
   $data_array['title'] = "$title";
   $data_array['large_image'] = "$extra_large_image";
-  $data_array['image_credit'] = "$byline";
-  $data_array['image_caption'] = "$caption";
+  $data_array['image_credit'] = "$image_courtesy";
+  $data_array['image_caption'] = "$image_caption";
   $data_array['updated_datetime'] = "$changed_datetime";
   $data_array['published_datetime'] = "$published_date";
   $data_array['buzzflag'] = "$buzz_temp_flag";
@@ -340,9 +346,11 @@ function getStoryTechs($node) {
   $content_org = $content;
   /* remove pros & cons from contents start */
 
+
   $content = preg_replace('#<div class="tech-pros"(.|\s)+</div>#', '', $content);
   $content = preg_replace('#<div class="tech-cons"(.|\s)+</div>#', '', $content);
   /* remove pros & cons from contents start */
+
 
   $tect_img = $node->field_story_technology['und'];
 
@@ -734,5 +742,25 @@ function generateAuthorTagStory($node, $status) {
   $output['a_image'] = "$a_image";
   $output['a_twitter_handler'] = "$a_twitter_handler";
   return $output;
+}
+/**
+ * function for get getInfoData
+ * @pram int
+ *
+ * @return array
+ */
+function getInfoData($fid) {
+  $data = array();
+  if ($fid) {
+    $query = db_select('image_info', 'iminfo');
+    $query->fields('iminfo', array('image_courtesy', 'image_caption'));
+    $query->condition('iminfo.fid', $fid, '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $k => $res) {
+      $data['image_courtesy'] = $res['image_courtesy'];
+      $data['image_caption'] = $res['image_caption'];
+    }
+  }
+  return $data;
 }
 
