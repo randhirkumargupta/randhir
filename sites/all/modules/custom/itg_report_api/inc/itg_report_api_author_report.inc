@@ -233,8 +233,8 @@ function getContentCountByDate($start_date, $end_date) {
     $query->fields('fr', array('field_story_reporter_target_id'));
     //end
     if ($start_date != "na") {
-        $query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
-        $query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
+        //$query->condition('pd.field_itg_content_publish_date_value', $start_date, ">=");
+        //$query->condition('pd.field_itg_content_publish_date_value', $end_date, "<=");
     }
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
