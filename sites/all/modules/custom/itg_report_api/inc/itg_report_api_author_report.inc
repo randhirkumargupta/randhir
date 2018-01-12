@@ -239,8 +239,7 @@ function getContentCountByDate($start_date, $end_date) {
     $query->condition('n.status', 1);
     $query->condition('n.type', 'story');
     $query->condition('fst.field_story_source_type_value', 'story', '=');
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
-    echo "andy"; die();
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);      
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];        
         $author_nid = $resvalue['field_story_reporter_target_id'];        
