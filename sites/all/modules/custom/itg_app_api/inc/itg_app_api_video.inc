@@ -195,6 +195,7 @@ function generateVideoCategoryList($tid, $pageno) {
             pr($resvalue['nid']);
             echo "<br>---";
             p($source_type);
+            die("test");
             $videotag = video_detail_formats($resvalue['nid'], $source_type);
 
             // create date formating
