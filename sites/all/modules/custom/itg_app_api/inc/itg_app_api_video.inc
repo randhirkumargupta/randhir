@@ -526,9 +526,11 @@ function generateProgramCategoryList($tid, $pageno) {
                     }
                 }
                 $inter_video_details = internal_video_bitrate_data($video_id);
+                $bitrate_url = $inter_video_details['bitrate_url'];
+                $file_url_1 = $inter_video_details['file_url'];
                 $photo_list_array[$listcount]['p_is_default_player'] = "0";
-                $photo_list_array[$listcount]['p_url'] = $inter_video_details['bitrate_url']; //$videotag['dailymotion']['video_id'];
-                $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['file_url'];
+                $photo_list_array[$listcount]['p_url'] = "$bitrate_url"; //$videotag['dailymotion']['video_id'];
+                $photo_list_array[$listcount]['p_download_url'] = "$file_url_1";
                 // if ($videotag['dailymotion']['bitate_url']['download_url']) {
                     // $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['bitrate_url'];
                 // } else
@@ -554,7 +556,6 @@ function generateProgramCategoryList($tid, $pageno) {
             $listcount++;
         }
     }
-    p($photo_list_array);
     $data['lcount'] = $listcount;
     $data['data'] = $photo_list_array;
     $data['updated_datetime'] = $changed_datetime;
