@@ -192,6 +192,9 @@ function generateVideoCategoryList($tid, $pageno) {
 
             // return all the video details
             $source_type = $resvalue['field_story_source_type_value'];
+            pr($resvalue['nid']);
+            echo "<br>---";
+            p($source_type);
             $videotag = video_detail_formats($resvalue['nid'], $source_type);
 
             // create date formating
