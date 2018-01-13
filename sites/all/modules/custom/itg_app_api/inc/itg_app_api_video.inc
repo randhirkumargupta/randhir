@@ -503,7 +503,8 @@ function generateProgramCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
             $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
             $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
-            
+            pr($videotag);
+
             //if($video_path_mp4){
             if (!empty($videotag['dailymotion'])) {
                 $videoids = get_video_in_fieldcollection_by_nid($nid);

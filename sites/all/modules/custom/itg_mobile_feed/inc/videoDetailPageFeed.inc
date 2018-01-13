@@ -49,11 +49,11 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
         $output = "Nid is missing";
     } else {
         //check into redis
-        $redis_key = "itgd_video" . $nid;
-        $result_get = getRedis($redis_key);
-        if ($result_get['key_value'] != "") {
-            $output = $result_get['key_value'];
-        } else {
+        //$redis_key = "itgd_video" . $nid;
+        //$result_get = getRedis($redis_key);
+        //if ($result_get['key_value'] != "") {
+            //$output = $result_get['key_value'];
+        //} else {
             global $base_url;
             $ttl = DEFAULT_REDIS_EXPIRE_TIME;
             $node = node_load($nid);
@@ -92,6 +92,8 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $videotag = video_detail_formats($nid, $source_type);
             $video_size = migrated_video_transcoding($nid);
             // migrated video
+            pr($videotag);
+            echo "<br>----";
             if (!empty($videotag['migrated'])) {
               $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
               foreach ($videoids as $keys => $video_value) {
@@ -110,7 +112,11 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
                     $video_id = $video_value->solr_video_id;
                   }
                 }
+                pr($videoids);
+                echo "<br>----";
+                
                 $inter_video_details = internal_video_bitrate_data($video_id);
+                p($inter_video_details);
                 $output .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
             }
             $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword>".xml_cdata_filter($metatags_title)."</metakeyword><longdescription>".xml_cdata_filter($metatags_description)."</longdescription><weburl>" . $weburl . "</weburl>";
@@ -136,7 +142,7 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $output .= "</item>" . program_section_page_feed_footer();
             $result_set = setRedis($redis_key, $output, $ttl);
         }
-    }
+    //}
     if ($output) {
         $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
     } else {
