@@ -3,9 +3,9 @@
 
 /**
  * @file
- * Drupal site-specific configuration file
+ * Drupal site-specific configuration file.
  *
- * IMPORTANT NOTE:
+ * IMPORTANT NOTE:.
  * This file may have been set to read-only by the Drupal installation program.
  * If you make changes to this file, be sure to protect it again after making
  * your modifications. Failure to remove write permissions to this file is a
@@ -225,18 +225,22 @@
 //#####################################################################################
 
 // one slave setting
-/*$databases['default']['default'] = array(
+$databases['default']['default'] = array(
   'driver' => 'autoslave',
-  'master' => 'master', // optional, defaults to 'master'
-  'slave' => 'autoslave', // optional, defaults to 'autoslave'  
-// Always use "master" for tables "semaphore" and "sessions"
+  'master' => array('master', 'autoslave'), // optional, defaults to 'master'
+  'slave' => array('autoslave', 'master'), // optional, defaults to 'autoslave'  
+  // Always use "master" for tables "semaphore" and "sessions"
   'tables' => array('sessions', 'semaphore', 'watchdog'), // optional, defaults to array('sessions', 'semaphore', 'watchdog')
+  'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'"),
+  'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
+  'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
+  //'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
+  'watchdog on shutdown' => TRUE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
 );
 
 
-$databases['default']['master'] = array(
-  //'database' => 'indiatoday_migrate',
-  'database' => 'indiatoday_migrate',
+$databases['default']['master'] = array(  
+  'database' => 'indiatoday_staging',
   'username' => 'itgd_it_write',
   'password' => '!tgd@!t@wr!te@101',
   'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
@@ -245,19 +249,18 @@ $databases['default']['master'] = array(
   'prefix' => '',
 );
 
-$databases['default']['autoslave'] = array(
-  //'database' => 'indiatoday_migrate',
-  'database' => 'indiatoday_migrate',
+$databases['default']['autoslave'] = array(  
+  'database' => 'indiatoday_staging',
   'username' => 'itgd_it_read',
   'password' => '!tgd@!t@re@d@102',
-  'host' => 'itgd-drupal-db-dev-replica2.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  //'host' => 'itgd-drupal-db-dev-replica.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
+  'host' => 'itgd-drupal-db-dev.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
   'port' => '3306',
   'driver' => 'mysql',
   'prefix' => '',
+  'readonly' => TRUE
 );
 
-$databases['sso_db']['default'] = array(
+/*$databases['sso_db']['default'] = array(
   'database' => 'IndiaToday_sso',
       'username' => 'itgd_it_write',
       'password' => '!tgd@!t@wr!te@101',
@@ -269,87 +272,8 @@ $databases['sso_db']['default'] = array(
 // end setting for UAT
 //#####################################################################################
 
-//for production setting
-$databases['default']['master'][] = array (
-  'database' => 'indiatoday',
-  'username' => 'prod_it_write',
-  'password' => 'pr0d_!t@64',
-  'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
-);
-
-$databases['default']['slave'][] = array (
-  'database' => 'indiatoday',
-  'username' => 'prod_it_read',
-  'password' => 'pr0d_!t@98',
-  'host' => 'itgd-drupal-db-it-prod-replica1.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '',
-  'driver' => 'mysql',
-  'prefix' => '',
-  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
-);
-
-$databases['default']['slave'][] = array (
-  'database' => 'indiatoday',
-  'username' => 'prod_it_read',
-  'password' => 'pr0d_!t@98',
-  'host' => 'itgd-drupal-db-it-prod-replica2a.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '',
-  'driver' => 'mysql',
-  'prefix' => '',
-  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
-);
-
-$databases['default']['slave'][] = array (
-  'database' => 'indiatoday',
-  'username' => 'prod_it_read',
-  'password' => 'pr0d_!t@98',
-  'host' => 'itgd-drupal-db-it-prod-replica3a.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '',
-  'driver' => 'mysql',
-  'prefix' => '',
-  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
-);
-/*
-$databases['default']['slave'][] = array (
-  'database' => 'indiatoday',
-  'username' => 'prod_it_read',
-  'password' => 'pr0d_!t@98',
-  'host' => 'itgd-drupal-db-it-prod-replica4.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-  'port' => '',
-  'driver' => 'mysql',
-  'prefix' => '',
-  'readonly' => TRUE, // (defaults to FALSE, required for failover from master to slave to work)  
-);*/
-
-$databases['default']['default'] = array (
-  'driver' => 'autoslave',
-  'master' => array('master', 'slave'),
-  'slave' => array('slave', 'master'),
-  // 'replication lag' => 2, // (defaults to $conf['autoslave_assumed_replication_lag'])
-  'global replication lag' => TRUE, // Make replication lag mitigation work cross requests for all users. Defaults to TRUE.
-  // 'invalidation path' => 'sites/default/files', // Path to store invalidation file for flagging unavailable connections. Defaults to empty.
-  'watchdog on shutdown' => FALSE, // Enable watchdog logging during shutdown handlers. Defaults to FALSE. Enable only if using non-db watchdog logging.
-  'init_commands' => array('autoslave' => "SET SESSION tx_isolation ='READ-COMMITTED'") // For MySQL InnoDB, make sure isolation level doesn't interfere with our intentions. Defaults to empty.
-);
-
-$databases['sso_db']['default'] = array(
-  'database' => 'IndiaToday_sso',
-      'username' => 'prod_it_write',
-      'password' => 'pr0d_!t@64',
-      'host' => 'itgd-drupal-db-it-prod.cutaeeaxqfbl.ap-south-1.rds.amazonaws.com',
-      'port' => '3306',
-      'driver' => 'mysql',
-      'prefix' => '',
-);
-//end production setting
-
 // Use locking that supports force master
-// $conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
-$conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/memcache-lock.inc';
-// $conf['lock_inc'] = 'sites/all/modules/contrib/memcache_storage/includes/lock.inc';
+$conf['lock_inc'] = 'sites/all/modules/contrib/autoslave/lock.inc';
 
 //$conf['cache_default_class'] = 'AutoslaveCache';
 //$conf['autoslave_cache_default_class'] = 'ConsistentCache';
@@ -413,7 +337,7 @@ $drupal_hash_salt = 'BZnuQD04vRdNaVhNBkzPqLTKjvWfHMAEwOMT7qIqPJQ';
  * It is not allowed to have a trailing slash; Drupal will add it
  * for you.
  */
-# $base_url = 'http://www.example.com';  // NO trailing slash!
+ // $base_url = 'https://www.indiatoday.in';  // NO trailing slash!
 
 /**
  * PHP settings:
@@ -746,5 +670,3 @@ $conf['block_cache_bypass_node_grants'] = TRUE;
 $base_url = 'https://'.$_SERVER['SERVER_NAME'];
 //$conf['cache_default_class'] = 'ConsistentCache';
 //$conf['consistent_cache_default_safe'] = FALSE;
-// add the following in my setting.php file.// Default root dir for the advagg files; see advagg_get_root_files_dir().
-$conf['advagg_root_dir_prefix'] = 's3://';

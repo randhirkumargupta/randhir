@@ -70,15 +70,15 @@ $config = array(
  // The filesystem path of the Drupal directory.
  //'drupalroot' => '/var/www/simplesamlphp/www/drupal-sso',
  //'drupalroot' => '/var/www/html/',
- 'drupalroot' => '/opt/httpd/vhosts/indiatodayonline.in/httpdocs/',
+ 'drupalroot' => '/opt/httpd/vhosts/staging.indiatodayonline.in/httpdocs/',
  // Whether to turn on debug
  'debug' => true,
 
- // the URL of the Drupal logout page
- 'drupal_logout_url' => 'http://auth.indiatoday.in/user/logout',
+ // URL of the Drupal logout page
+ 'drupal_logout_url' => 'http://staging-sso.indiatodayonline.in/user/logout',
 
- // the URL of the Drupal login page
- 'drupal_login_url' => 'http://auth.indiatoday.in/user',
+ // URL of the Drupal login page
+ 'drupal_login_url' => 'http://staging-sso.indiatodayonline.in/user',
 
  // Which attributes should be retrieved from the Drupal site.
 
@@ -224,9 +224,9 @@ $config = array(
         'authfacebook:Facebook',
         // Register your Facebook application on http://www.facebook.com/developers
         // App ID or API key (requests with App ID should be faster; https://github.com/facebook/php-sdk/issues/214)
-        'api_key' => '693568120778492',
+        'api_key' => '265688930492076',
         // App Secret
-        'secret' => 'f9b8c79ac94b9bc413528839ee86195e',
+        'secret' => '6ae376197bd3fdd68a135890b79ff608',
         // which additional data permissions to request from user
         // see http://developers.facebook.com/docs/authentication/permissions/ for the full list
         'req_perms' => 'email,user_birthday,public_profile',
@@ -251,8 +251,8 @@ $config = array(
     //  http://twitter.com/oauth_clients
     'twitter' => array(
         'authtwitter:Twitter',
-        'key' => 'T1FHZFT26l8qkwHjPpkpLxMSN',
-        'secret' => 'Tqdnh86gznHUd1kfrGfpYOYPzCcfurpvdNqpeKnohQidZxCkPV',
+        'key' => 'KGWrGyf2Exw0Ah7g5WwnveNV8',
+        'secret' => 'Leh78TMDDIKBAmwT0cPLNux9Ve3aveUj6fm9VfpaAoAVt2kQmX',
 
         // Forces the user to enter their credentials to ensure the correct users account is authorized.
         // Details: https://dev.twitter.com/docs/api/1/get/oauth/authenticate
