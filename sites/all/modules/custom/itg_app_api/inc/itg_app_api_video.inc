@@ -516,7 +516,7 @@ function generateProgramCategoryList($tid, $pageno) {
                 }
                 pr($videoids);
                 echo "<br>---";
-                pr($videotag);
+                pr($video_id);
                 echo "<br>---";
                 $inter_video_details = internal_video_bitrate_data($video_id);
                 p($inter_video_details);
