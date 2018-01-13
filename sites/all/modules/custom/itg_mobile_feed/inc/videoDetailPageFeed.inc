@@ -89,9 +89,6 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit>".xml_cdata_filter($reporter_node)."</credit><createddate>".xml_cdata_filter($create_datetime)."</createddate><date>".$create_date."</date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($thumbimage)."</thumbimage><mediaid></mediaid><uurl></uurl>";
             //get video tag
             $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
-            pr($nid);
-            echo "<br>----";
-            p($source_type);
             $videotag = video_detail_formats($nid, $source_type);
             $video_size = migrated_video_transcoding($nid);
             // migrated video

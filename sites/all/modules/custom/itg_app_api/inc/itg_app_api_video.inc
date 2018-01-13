@@ -536,10 +536,6 @@ function generateProgramCategoryList($tid, $pageno) {
                 // } else
                     // $photo_list_array[$listcount]['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
             }
-            pr($resvalue['nid']);
-            echo "<br>---";
-            p($source_type);
-            die("test");
             $field_primary_category_value = $resvalue['field_primary_category_value'];
             $term = taxonomy_term_load($field_primary_category_value);
             $term_name = $term->name;
