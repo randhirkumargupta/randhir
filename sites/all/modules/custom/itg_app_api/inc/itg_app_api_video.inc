@@ -339,6 +339,7 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
  * @return array
  */
 function generateProgramCategoryList($tid, $pageno) {
+  p("test");
     // variable declaration
     global $base_url;
     $node_count = "";

@@ -2601,8 +2601,8 @@ function itg_rapid_api_programlist($token) {
         // call function from return data..
         $jsondata = programcategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $result_set = setRedis($redis_key, $jsondata, $ttl);
+        //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        //$result_set = setRedis($redis_key, $jsondata, $ttl);
     //}
 
     $jsondata = json_decode($jsondata, TRUE);
