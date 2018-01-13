@@ -339,7 +339,6 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
  * @return array
  */
 function generateProgramCategoryList($tid, $pageno) {
-  p("test");
     // variable declaration
     global $base_url;
     $node_count = "";
@@ -438,7 +437,7 @@ function generateProgramCategoryList($tid, $pageno) {
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
+        pr($result);
         foreach ($result as $reskey => $resvalue) {
             // node feed tag
             $title = $resvalue['title'];
@@ -506,7 +505,7 @@ function generateProgramCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
             print_r($videotag);
             echo "<br>---";
-            
+            die();
             //if($video_path_mp4){
             if (!empty($videotag['dailymotion'])) {
                 $videoids = get_video_in_fieldcollection_by_nid($nid);
