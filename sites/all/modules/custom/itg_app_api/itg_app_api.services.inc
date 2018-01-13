@@ -2592,18 +2592,18 @@ function itg_rapid_api_programlist($token) {
         $cpageno = 0;
     }
 
-    $redis_key = "itgd_rapid_api_programlist_" . $suffix;
-    $result_get = getRedis($redis_key);
+    //$redis_key = "itgd_rapid_api_programlist_" . $suffix;
+    //$result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+    //if ($result_get['key_value'] != "") {
+        //$jsondata = $result_get['key_value'];
+    //} else {
         // call function from return data..
         $jsondata = programcategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
         $ttl = DEFAULT_REDIS_EXPIRE_TIME;
         $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+    //}
 
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
