@@ -503,33 +503,9 @@ function generateProgramCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
             $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
             $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
-            pr($videotag);
 
             //if($video_path_mp4){
-            if (!empty($videotag['dailymotion'])) {
-                $videoids = get_video_in_fieldcollection_by_nid($nid);
-                foreach ($videoids as $keys => $video_value) {
-                    if ($video_value->video_id != '') {
-                        $video_id = $video_value->video_id;
-                    } elseif ($video_value->solr_video_id != '') {
-                        $video_id = $video_value->solr_video_id;
-                    }
-                }
-                pr($videoids);
-                echo "<br>---";
-                pr($video_id);
-                echo "<br>---";
-                $inter_video_details = internal_video_bitrate_data($video_id);
-                p($inter_video_details);
-                $photo_list_array[$listcount]['p_is_default_player'] = "0";
-                $photo_list_array[$listcount]['p_url'] = $inter_video_details['bitrate_url']; //$videotag['dailymotion']['video_id'];
-                $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['file_url'];
-                // if ($videotag['dailymotion']['bitate_url']['download_url']) {
-                    // $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['bitrate_url'];
-                // } else
-                    // $photo_list_array[$listcount]['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
-            }
-            elseif (!empty($videotag['migrated'])) {
+            if (!empty($videotag['migrated'])) {
                 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
                 foreach ($videoids as $keys => $video_value) {
                     $url = $video_value->field_migrated_video_url_value;
@@ -540,7 +516,25 @@ function generateProgramCategoryList($tid, $pageno) {
                 $photo_list_array[$listcount]['p_is_default_player'] = "0";
                 $photo_list_array[$listcount]['p_url'] = $mp4_url;
                 $photo_list_array[$listcount]['p_download_url'] = $mp4_url;
+            } elseif (!empty($videotag['dailymotion'])) {
+                $videoids = get_video_in_fieldcollection_by_nid($nid);
+                foreach ($videoids as $keys => $video_value) {
+                    if ($video_value->video_id != '') {
+                        $video_id = $video_value->video_id;
+                    } elseif ($video_value->solr_video_id != '') {
+                        $video_id = $video_value->solr_video_id;
+                    }
+                }
+                $inter_video_details = internal_video_bitrate_data($video_id);
+                $photo_list_array[$listcount]['p_is_default_player'] = "0";
+                $photo_list_array[$listcount]['p_url'] = $inter_video_details['bitrate_url']; //$videotag['dailymotion']['video_id'];
+                $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['file_url'];
+                // if ($videotag['dailymotion']['bitate_url']['download_url']) {
+                    // $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['bitrate_url'];
+                // } else
+                    // $photo_list_array[$listcount]['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
             }
+            
             $field_primary_category_value = $resvalue['field_primary_category_value'];
             $term = taxonomy_term_load($field_primary_category_value);
             $term_name = $term->name;
