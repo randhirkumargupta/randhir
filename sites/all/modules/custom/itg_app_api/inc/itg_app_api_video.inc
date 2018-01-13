@@ -503,7 +503,9 @@ function generateProgramCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
             $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
             $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
-
+            print_r($videotag);
+            echo "<br>---";
+            
             //if($video_path_mp4){
             if (!empty($videotag['dailymotion'])) {
                 $videoids = get_video_in_fieldcollection_by_nid($nid);
@@ -535,6 +537,7 @@ function generateProgramCategoryList($tid, $pageno) {
                 $photo_list_array[$listcount]['p_url'] = $mp4_url;
                 $photo_list_array[$listcount]['p_download_url'] = $mp4_url;
             }
+            p($photo_list_array);
             $field_primary_category_value = $resvalue['field_primary_category_value'];
             $term = taxonomy_term_load($field_primary_category_value);
             $term_name = $term->name;
