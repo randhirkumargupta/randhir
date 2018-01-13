@@ -336,7 +336,7 @@ $config = array(
      * Example:
      *  'session.cookie.domain' => '.example.org',
      */
-    'session.cookie.domain' => '.indiatoday.in',
+    'session.cookie.domain' => '.indiatodayonline.in',
 
     /*
      * Set the secure flag in the cookie.
@@ -759,9 +759,8 @@ $config = array(
      */
     'memcache_store.servers' => array(
         array(
-            array('hostname' => 'itgd-cms-mem-prod-1.yissgx.0001.aps1.cache.amazonaws.com'),//new prod
-            //array('hostname' => 'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com'),//prod
-           // array('hostname' => 'itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com'),//uat
+           // array('hostname' => 'itgd-drupal-mem-prod.yissgx.cfg.aps1.cache.amazonaws.com'),//prod
+            array('hostname' => 'itgd-drupal-memc-dev.yissgx.cfg.aps1.cache.amazonaws.com'),//uat
         ),
     ),
 
@@ -774,7 +773,7 @@ $config = array(
      * than one instance is using memcache, you probably want to assign
      * a unique value per instance to this setting to avoid data collision.
      */
-    'memcache_store.prefix' => 'SimpleSAMLphp',
+    'memcache_store.prefix' => 'staging_SimpleSAMLphp',
 
 
     /*
