@@ -437,7 +437,7 @@ function generateProgramCategoryList($tid, $pageno) {
         $query->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-        pr($result);
+
         foreach ($result as $reskey => $resvalue) {
             // node feed tag
             $title = $resvalue['title'];
@@ -503,9 +503,7 @@ function generateProgramCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
             $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
             $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
-            print_r($videotag);
-            echo "<br>---";
-            die();
+            
             //if($video_path_mp4){
             if (!empty($videotag['dailymotion'])) {
                 $videoids = get_video_in_fieldcollection_by_nid($nid);
@@ -516,7 +514,12 @@ function generateProgramCategoryList($tid, $pageno) {
                         $video_id = $video_value->solr_video_id;
                     }
                 }
+                pr($videoids);
+                echo "<br>---";
+                pr($videotag);
+                echo "<br>---";
                 $inter_video_details = internal_video_bitrate_data($video_id);
+                p($inter_video_details);
                 $photo_list_array[$listcount]['p_is_default_player'] = "0";
                 $photo_list_array[$listcount]['p_url'] = $inter_video_details['bitrate_url']; //$videotag['dailymotion']['video_id'];
                 $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['file_url'];
@@ -537,7 +540,6 @@ function generateProgramCategoryList($tid, $pageno) {
                 $photo_list_array[$listcount]['p_url'] = $mp4_url;
                 $photo_list_array[$listcount]['p_download_url'] = $mp4_url;
             }
-            p($photo_list_array);
             $field_primary_category_value = $resvalue['field_primary_category_value'];
             $term = taxonomy_term_load($field_primary_category_value);
             $term_name = $term->name;
