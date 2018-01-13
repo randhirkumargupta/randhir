@@ -554,7 +554,7 @@ function generateProgramCategoryList($tid, $pageno) {
             $listcount++;
         }
     }
-
+    p($photo_list_array);
     $data['lcount'] = $listcount;
     $data['data'] = $photo_list_array;
     $data['updated_datetime'] = $changed_datetime;
