@@ -6074,15 +6074,15 @@ function itg_rapid_api_videodetail($token) {
     $redis_key = "itg_rapid_api_videodetail_" . $suffix;
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+    //if ($result_get['key_value'] != "") {
+        //$jsondata = $result_get['key_value'];
+    //} else {
         // call function from return data..
         $jsondata = generateVideoDetail($id);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+        //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        //$result_set = setRedis($redis_key, $jsondata, $ttl);
+    //}
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
 }
