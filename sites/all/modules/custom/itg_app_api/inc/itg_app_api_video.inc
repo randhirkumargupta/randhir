@@ -251,7 +251,7 @@ function generateVideoCategoryList($tid, $pageno) {
                 $bitrate_url = $data_video['bitrate_url'];
                 $mp4_url = $data_video['file_url'];
                 $photo_list_array[$listcount]['v_is_default_player'] = "0";
-                $photo_list_array[$listcount]['v_url'] = $mp4_url;
+                $photo_list_array[$listcount]['v_url'] = $bitrate_url; //$mp4_url;
                 //$video_path_mp4
                 $photo_list_array[$listcount]['v_download_url'] = $mp4_url;
             }
@@ -519,7 +519,7 @@ function generateProgramCategoryList($tid, $pageno) {
                 $bitrate_url = $data_video['bitrate_url'];
                 $mp4_url = $data_video['file_url'];
                 $photo_list_array[$listcount]['p_is_default_player'] = "0";
-                $photo_list_array[$listcount]['p_url'] = $mp4_url;
+                $photo_list_array[$listcount]['p_url'] = $bitrate_url; //$mp4_url;
                 $photo_list_array[$listcount]['p_download_url'] = $mp4_url;
             } elseif (!empty($videotag['dailymotion'])) {
                 $videoids = get_video_in_fieldcollection_by_nid($nid);
@@ -924,7 +924,7 @@ function generateProgramDetail($nid) {
             $mp4_url = $data_video['file_url'];
             $video_path_mp4 = $video_path_info['video_path_mp4'];
             $photo_list_array[$listcount]['p_is_default_player'] = "0";
-            $photo_list_array[$listcount]['p_url'] = $mp4_url;
+            $photo_list_array[$listcount]['p_url'] = $bitrate_url; //$mp4_url;
             $photo_list_array[$listcount]['p_download_url'] = $mp4_url;
         }
         $field_primary_category_value = $node->field_primary_category['und']['0']['value'];
