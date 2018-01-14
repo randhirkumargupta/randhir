@@ -16,10 +16,3 @@ permissions:
     mode: 777
     type:
       - file
-hooks:
-   BeforeInstall:
-    - location: scripts/before_install.sh
-      runas: root
-   AfterInstall:
-    - location: scripts/after_install.sh
-      runas: root
