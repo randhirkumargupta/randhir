@@ -534,8 +534,8 @@ function generateProgramCategoryList($tid, $pageno) {
                 $bitrate_url = $inter_video_details['bitrate_url'];
                 $file_url_1 = $inter_video_details['file_url'];
                 $photo_list_array[$listcount]['p_is_default_player'] = "0";
-                $photo_list_array[$listcount]['p_url'] = "$bitrate_url"; //$videotag['dailymotion']['video_id'];
-                $photo_list_array[$listcount]['p_download_url'] = "$file_url_1";
+                $photo_list_array[$listcount]['p_url'] = $bitrate_url; //$videotag['dailymotion']['video_id'];
+                $photo_list_array[$listcount]['p_download_url'] = $file_url_1;
                 // if ($videotag['dailymotion']['bitate_url']['download_url']) {
                     // $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['bitrate_url'];
                 // } else
