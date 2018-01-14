@@ -907,7 +907,9 @@ function generateProgramDetail($nid) {
                 }
             }
             $inter_video_details = internal_video_bitrate_data($video_id);
+            echo "inter_video_details";
             print_r($inter_video_details);
+            echo "<br>";
             $photo_list_array[$listcount]['p_is_default_player'] = "1";
             $photo_list_array[$listcount]['p_url'] = $inter_video_details['bitrate_url'];
             $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['file_url'];
