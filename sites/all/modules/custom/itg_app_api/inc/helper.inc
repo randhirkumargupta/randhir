@@ -40,7 +40,7 @@ function get_node_firebase_weburl($nid) {
         global $base_url;
         $firebase_url = "";
         $alias = drupal_get_path_alias('node/' . $nid . '');
-        $weburl = $base_url . "/" . $alias;
+        $weburl = FRONT_URL . "/" . $alias;
         return $weburl;
     }
 }
