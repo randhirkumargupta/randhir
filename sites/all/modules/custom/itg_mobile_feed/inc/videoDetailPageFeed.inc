@@ -426,15 +426,9 @@ function mcu8_tags($nid) {
  * Get the internal uploaded video on the Site
  */
 function internal_video_bitrate_data($video_id) {
-    echo "data video info";
     $data_video_info = xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
-    print_r($data_video_info);
-    echo "<br>";
     if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
         $data_from_solr = xml_itg_videogallery_getsolr_data_for_internal_video($data_video_info[0]->video_id);
-        echo "get solar data";
-        print_r($data_from_solr);
-        echo "<br>";
         $video_data = $data_from_solr[0];
         $video_all_data = json_decode($video_data, TRUE);
         $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);

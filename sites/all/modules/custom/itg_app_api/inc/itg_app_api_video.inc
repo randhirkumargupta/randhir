@@ -893,9 +893,6 @@ function generateProgramDetail($nid) {
         $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
         $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
         $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
-        echo "video tags";
-        print_r($videotag);
-        echo "<br>";
         //if($video_path_mp4){
         if (!empty($videotag['dailymotion'])) {
             $videoids = get_video_in_fieldcollection_by_nid($nid);
@@ -907,10 +904,7 @@ function generateProgramDetail($nid) {
                 }
             }
             $inter_video_details = internal_video_bitrate_data($video_id);
-            echo "inter_video_details";
-            print_r($inter_video_details);
-            echo "<br>";
-            $photo_list_array[$listcount]['p_is_default_player'] = "1";
+            $photo_list_array[$listcount]['p_is_default_player'] = "0";
             $photo_list_array[$listcount]['p_url'] = $inter_video_details['bitrate_url'];
             $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['file_url'];
         }
