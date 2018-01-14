@@ -229,15 +229,10 @@ function generateVideoCategoryList($tid, $pageno) {
                         $video_id = $video_value->solr_video_id;
                     }
                 }
-                
                 $inter_video_details = internal_video_bitrate_data($video_id);
-                
                 $photo_list_array[$listcount]['v_is_default_player'] = "1";
-                $photo_list_array[$listcount]['v_url'] = $videotag['dailymotion']['video_id'];
-                if ($videotag['dailymotion']['bitate_url']['download_url']) {
-                    $photo_list_array[$listcount]['v_download_url'] = $inter_video_details['bitrate_url'];
-                } else
-                    $photo_list_array[$listcount]['v_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+                $photo_list_array[$listcount]['v_url'] = $inter_video_details['bitrate_url'];
+                $photo_list_array[$listcount]['v_download_url'] = $inter_video_details['file_url'];
             }
             elseif (!empty($videotag['migrated'])) {
                 $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
@@ -778,11 +773,8 @@ function generateVideoDetail($nid) {
             }
             $inter_video_details = internal_video_bitrate_data($video_id);
             $photo_list_array[$listcount]['v_is_default_player'] = "1";
-            $photo_list_array[$listcount]['v_url'] = $videotag['dailymotion']['video_id'];
-            if ($videotag['dailymotion']['bitate_url']['download_url']) {
-                $photo_list_array[$listcount]['v_download_url'] = $inter_video_details['bitrate_url'];
-            } else
-                $photo_list_array[$listcount]['v_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+            $photo_list_array[$listcount]['v_url'] = $inter_video_details['bitrate_url'];
+            $photo_list_array[$listcount]['v_download_url'] = $inter_video_details['file_url'];
         }
         elseif (!empty($videotag['migrated'])) {
             $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);

@@ -432,9 +432,18 @@ function getVideolist($nid, $source = 0) {
     $videolist['nv_large_image'] = "$file_large_img_url";
 
     if (!empty($videotag['dailymotion'])) {
+      $videoids = get_video_in_fieldcollection_by_nid($nid);
+      foreach ($videoids as $keys => $video_value) {
+        if ($video_value->video_id != '') {
+         $video_id = $video_value->video_id;
+        } elseif ($video_value->solr_video_id != '') {
+         $video_id = $video_value->solr_video_id;
+        }
+      }
+      $inter_video_details = internal_video_bitrate_data($video_id);
       $videolist['nv_is_jwplayer'] = "1";
-      $videolist['nv_url'] = $videotag['dailymotion']['video_id'];
-      $videolist['nv_download_url'] = "";
+      $videolist['nv_url'] = $inter_video_details['bitrate_url'];
+      $videolist['nv_download_url'] = $inter_video_details['file_url'];
     }
     elseif (!empty($videotag['migrated'])) {
       $videolist['nv_is_jwplayer'] = "0";
