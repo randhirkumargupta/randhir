@@ -245,14 +245,14 @@ function ipad_notification_xml() {
         $url = 'photo' . $msg_node->nid . '.xml';
         generatePhotoDetailPageFeed($msg_node->nid);
       }
-      $created_date = $data->schedule_datetime;
+      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
       $created_date_time = $data->schedule_datetime;
 
       if ($data->content_id > 0) {
         $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
-        $msg_created_date = $data->schedule_datetime;
+        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
         $msg_created_date_time = $data->schedule_datetime;
         $header = $data->android_header;
         $section = $data->category;
@@ -312,13 +312,13 @@ function chrome_notification_xml() {
         $url = 'photo' . $msg_node->nid . '.xml';
         generatePhotoDetailPageFeed($msg_node->nid);
       }
-      $created_date = $data->schedule_datetime;
+      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
       $created_date_time = $data->schedule_datetime;
       if ($data->content_id > 0) {
         $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
-        $msg_created_date = $data->schedule_datetime;
+        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
         $msg_created_date_time = $data->schedule_datetime;
         $header = $data->android_header;
         $section = $data->category;
@@ -377,14 +377,14 @@ function safari_notification_xml() {
         $url = 'photo' . $msg_node->nid . '.xml';
         generatePhotoDetailPageFeed($msg_node->nid);
       }
-      $created_date = $data->schedule_datetime;
+      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
       $created_date_time = $data->schedule_datetime;
 
       if ($data->content_id > 0) {
         $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
-        $msg_created_date = $data->schedule_datetime;
+        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
         $msg_created_date_time = $data->schedule_datetime;
         $header = $data->android_header;
         $section = $data->category;
@@ -444,14 +444,14 @@ function amazon_notification_xml() {
         $url = 'photo' . $msg_node->nid . '.xml';
         generatePhotoDetailPageFeed($msg_node->nid);
       }
-      $created_date = $data->schedule_datetime;
+      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
       $created_date_time = $data->schedule_datetime;
 
       if ($data->content_id > 0) {
         $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
-        $msg_created_date = $data->schedule_datetime;
+        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
         $msg_created_date_time = $data->schedule_datetime;
         $header = $data->android_header;
         $section = $data->category;
@@ -513,14 +513,14 @@ function windows8_notification_xml() {
         $url = 'photo' . $msg_node->nid . '.xml';
         generatePhotoDetailPageFeed($msg_node->nid);
       }
-      $created_date = $data->schedule_datetime;
+      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
       $created_date_time = $data->schedule_datetime;
 
       if ($data->content_id > 0) {
         $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
-        $msg_created_date = $data->schedule_datetime;
+        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
         $msg_created_date_time = $data->schedule_datetime;
         $header = $data->android_header;
         $section = $data->category;
@@ -579,14 +579,14 @@ function osx_notification_xml() {
         $url = 'photo' . $msg_node->nid . '.xml';
         generatePhotoDetailPageFeed($msg_node->nid);
       }
-      $created_date = $data->schedule_datetime;
+      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
       $created_date_time = $data->schedule_datetime;
 
       if ($data->content_id > 0) {
         $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
-        $msg_created_date = $data->schedule_datetime;
+        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
         $msg_created_date_time = $data->schedule_datetime;
         $header = $data->android_header;
         $section = $data->category;
@@ -647,14 +647,14 @@ function nokiaasha_notification_xml() {
         $url = 'photo' . $msg_node->nid . '.xml';
         generatePhotoDetailPageFeed($msg_node->nid);
       }
-      $created_date = $data->schedule_datetime;
+      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
       $created_date_time = $data->schedule_datetime;
 
       if ($data->content_id > 0) {
         $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
-        $msg_created_date = $data->schedule_datetime;
+        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
         $msg_created_date_time = $data->schedule_datetime;
         $header = $data->android_header;
         $section = $data->category;
@@ -713,13 +713,13 @@ function bb_notification_xml() {
         $url = 'photo' . $msg_node->nid . '.xml';
         generatePhotoDetailPageFeed($msg_node->nid);
       }
-      $created_date = $data->schedule_datetime;
+      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
       $created_date_time = $data->schedule_datetime;
       if ($data->content_id > 0) {
         $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
-        $msg_created_date = $data->schedule_datetime;
+        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
         $msg_created_date_time = $data->schedule_datetime;
         $header = $data->android_header;
         $section = $data->category;
@@ -775,13 +775,13 @@ function notifications_article() {
         $url = 'photo' . $msg_node->nid . '.xml';
         generatePhotoDetailPageFeed($msg_node->nid);
       }
-      $created_date = $data->schedule_datetime;
+      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
       $created_date_time = $data->schedule_datetime;
       if ($data->content_id > 0) {
         $output .= "<article><title><![CDATA[" . $title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
       }
       else {
-        $msg_created_date = $data->schedule_datetime;
+        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
         $msg_created_date_time = $data->schedule_datetime;
         $header = $data->android_header;
         $section = $data->category;
