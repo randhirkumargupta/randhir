@@ -440,9 +440,10 @@ function generatePhotoStoryDetailList($nid) {
       //$byline = getImgByline($photo_story_img_fid);
       $caption = strip_tags($caption);
       $img_info = getInfoData($large_image_fid);
-      $image_courtesy = $img_info['image_courtesy'];
-      $image_caption = strip_tags($img_info['image_caption']);
-
+      $photo_image_info = itg_story_get_image_info($photo_story_img_fid);
+      $image_caption = strip_tags($photo_image_info[0]->image_caption);
+      $image_courtesy = strip_tags($photo_image_info[0]->image_courtesy);
+      
       $photo_story_desc = strip_tags($photo_story_desc);
       $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
       $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
