@@ -2012,3 +2012,17 @@ function getNodePrimeCatByNid($nid) {
   }
 }
 
+/**
+ * function get section/category icon img
+ * @pram int $tid
+ *
+ * @return string url
+ */
+function sectionPrgramIconImg($tid) {
+  $query = db_select('field_data_field_programme_category_image', 'icimg');
+  $query->fields('icimg', array('field_programme_category_image_fid'));
+  $query->condition('icimg.entity_id', $tid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return completeFilePath($result[0]['field_programme_category_image_fid']);
+}
+

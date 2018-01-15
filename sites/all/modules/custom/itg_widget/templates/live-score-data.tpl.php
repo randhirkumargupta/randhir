@@ -1,8 +1,8 @@
 <?php
 if (!empty($data)) : global $base_url;
-  $parts = parse_url($data['match_link']);
-  parse_str($parts['query'], $query);
-  $match_id = $query['matchid'];
+  //$parts = parse_url($data['match_id']);
+  //parse_str($parts['query'], $query);
+  $match_id = $data['match_id'];
 
 ?>
 <div class="live-scorecard">

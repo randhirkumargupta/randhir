@@ -646,16 +646,16 @@ function itg_report_api_detail() {
   $redis_key = "itg_report_api_data_list_report" . $suffix;
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
+  //if ($result_get['key_value'] != "") {
+    //$jsondata = $result_get['key_value'];
+  //}
+  //else {
     // call function from return data..
     $jsondata = get_datalist_report($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
     $jsondata = json_encode($jsondata);
-    $ttl = 30; //DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+    //$ttl = 30; //DEFAULT_REDIS_EXPIRE_TIME;
+    //$result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
 
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;

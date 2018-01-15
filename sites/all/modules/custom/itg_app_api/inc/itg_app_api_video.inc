@@ -632,7 +632,8 @@ function generateProgramSectionList($Program_section_list) {
 
         $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
         $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
-        $cat_icon_img = sectionCategoryIconImg($value);
+        //$cat_icon_img = sectionCategoryIconImg($value);
+        $cat_icon_img = sectionPrgramIconImg($value);
         $p_short_description = strip_tags($p_short_description);
 
         $data[$listcount]['p_id'] = "$value";
