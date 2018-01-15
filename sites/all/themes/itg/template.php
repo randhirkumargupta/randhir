@@ -638,6 +638,27 @@ function itgd_chart_beat_code() {
 					unruly.native.siteId = 321603', array('type' => 'inline', 'scope' => 'footer'));
 	  drupal_add_js('//video.unrulymedia.com/native/native-loader.js', array('type' => 'external', 'scope' => 'footer'));
     }
+    
+    if ($node->type == 'story' || $node->type == 'photogallery') {
+      drupal_add_js('function EmbedScript() {
+              var _Impulser = window.parent.document.createElement("script"); _Impulser.type = "text/javascript";
+              _Impulser.async = true;
+              _Impulser.src = ("https:" == window.parent.document.location.protocol ? "https://" : "http://") + "impulse.forkcdn.com/impulse3/config/impulse.js";
+              var _scripter = window.parent.document.getElementsByTagName("script")[0]; _scripter.parentNode.insertBefore(_Impulser, _scripter);
+          };
+          function inIframe() {
+              try {
+                  return window.self !== window.top;
+              } catch (e) {
+                  return true;
+              }
+          }
+          if (inIframe()) {
+              window.parent.$ImpulseID = "IMPL-ITDG-INDIATODAY-RESP-GENERIC"; EmbedScript();
+          } else {
+              $ImpulseID = "IMPL-ITDG-INDIATODAY-RESP-GENERIC"; EmbedScript();
+          }', array('type' => 'inline', 'scope' => 'footer'));
+    }
   }
 
   drupal_add_js("var _sf_async_config = _sf_async_config || {};
