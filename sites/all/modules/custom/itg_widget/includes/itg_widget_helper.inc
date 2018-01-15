@@ -5,7 +5,7 @@
  * @param int $nid
  */
 function __itg_widget_helper_data_insert($nid, $node_data = null) {
-  //itg_watchdog("request", $_REQUEST['op']);
+  
    // if ($nid && $_REQUEST['op'] !='Apply' && $_REQUEST['op'] !='Save') {
         __itg_widget_helper_data_delete($nid);
         if (empty($node_data)) {
@@ -14,11 +14,9 @@ function __itg_widget_helper_data_insert($nid, $node_data = null) {
             $node_load_data = $node_data;
         }
   
-        //$node_load_data = node_load($nid, null, TRUE);
 
         $node_load_data->status = itg_common_get_node_status_from_tbl($nid);
-        //itg_watchdog("helper_insert" , time());
-        //itg_watchdog("helper_insert_status" , array($node_load_data->status , itg_common_get_node_status_from_tbl($nid)));
+        
         try {
             db_insert('itg_widget_helper')
               ->fields(array(
