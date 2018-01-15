@@ -164,7 +164,7 @@ function author_report($start_date) {
     $data['auhtorwise_data']['site_id'] = "$site_id";
     //auhtor_data
     $author_list = getAuthorList_Report($today_unix, $today_end);
-    //echo '<pre>';var_dump($today_unix, $today_end);die;
+    //~ echo '<pre>';var_dump($author_list);die;
     // start loop on author list array
     $author_loop_cont = 0;
     $auhtor_data = array();
@@ -241,6 +241,7 @@ function getContentCountByDate($start_date, $end_date) {
     $query->condition('n.type', 'story');
     $query->condition('ti.tid', '1206640', '<>');     
     $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+    $query->groupBy('n.nid');
     $result = $query->execute();      
     $cont = $result->rowCount();
     return $cont;
@@ -324,8 +325,10 @@ function getAuthorList_Report($s_date, $e_date) {
     $query->condition('n.type', 'story');
     $query->condition('ti.tid', '1206640', '<>');     
     $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');    
-    //print strtr((string)$query, $query->arguments());die;    
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
+    $query->groupBy('n.nid');
+    //~ print strtr((string)$query, $query->arguments());die;    
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC); 
+    
     foreach ($result as $reskey => $resvalue) {              
         $author_nid = $resvalue['byline_id'];        
         $author = node_load($author_nid);              
@@ -335,7 +338,8 @@ function getAuthorList_Report($s_date, $e_date) {
         $list[$cont] = $data;
         $cont++;
     }
-    $list = array_unique($list);
+    
+    //$list = array_unique($list);  
     return $list;
 }
 
@@ -365,6 +369,7 @@ function getContentCountByDateAndByUid($start_date, $end_date, $email) {
     $query->condition('n.type', 'story');
     $query->condition('ti.tid', '1206640', '<>');     
     $query->condition('repr.field_reporter_email_id_value', $email, '=');
+    $query->groupBy('n.nid');
     $result = $query->execute();      
     $cont = $num_of_results = $result->rowCount();
     return $cont;
@@ -423,6 +428,7 @@ function todayContentsByUid($start_date, $end_date, $mail) {
     $query->condition('n.type', 'story');
     $query->condition('ti.tid', '1206640', '<>');     
     $query->condition('repr.field_reporter_email_id_value', $mail, '=');
+    $query->groupBy('n.nid');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);    
     foreach ($result as $reskey => $resvalue) {
         $nid = $resvalue['nid'];
