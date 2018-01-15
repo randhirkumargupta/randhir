@@ -580,11 +580,13 @@ class ItgStoryListMigration extends XMLMigration {
   public function prepareRow($row) {
     if (!empty($row->xml->createdby) && isset($row->xml->createdby)) {
       $row->xml->createdby = get_itg_destination_id('migrate_map_itguser', (int) $row->xml->createdby);
-    }else{
-      $row->xml->createdby = 970;
+    } else{
+        $row->xml->createdby = 970;
     }
-
-    if (empty((string) $row->xml->metatags->sefurl)) {
+    
+    $sef_xml_value = (string) $row->xml->metatags->sefurl;
+    
+    if (empty($sef_xml_value)) {
       $row->xml->metatags->sefurl = itg_common_custompath_insert_val(trim((string) $row->xml->longheadline));
     }
 
