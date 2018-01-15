@@ -335,7 +335,7 @@ function getAuthorList_Report($s_date, $e_date) {
         $data['author_id'] = $author_nid;
         $data['author_name'] = $author_email->title;
         $data['author_email'] = $resvalue['field_reporter_email_id_value'];
-        $list[$cont] = $data;
+        $list[$author_nid] = $data;
         $cont++;
     }
     
