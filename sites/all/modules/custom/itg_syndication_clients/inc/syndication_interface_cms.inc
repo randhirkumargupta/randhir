@@ -73,7 +73,7 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $xml .= '<section>' . $primary_cat . '</section>';
       $xml .= '<edition>' . $publish_date . '</edition>';
       $xml .= '<byline>' . $byline . '</byline>';
-      $xml .= '<headline>' . $value['field_story_short_headline_value'] . '</headline>';
+      $xml .= '<headline>' . $value['title'] . '</headline>';
       $xml .= '<introtext>' . $kicker_text . '</introtext>';
       $xml .= '<bodytext>' . $body;
       $xml .= '<copyright>Reproduced From India Today Online. Copyright ' . date("Y") . '. LMIL. All rights reserved.</copyright>';
@@ -121,7 +121,7 @@ function genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result
       $xml .= '<byline>' . $byline . '</byline>';
       $xml .= '<volumenumber></volumenumber>';
       $xml .= '<intellectualpropertyowner>Living Media India Limited</intellectualpropertyowner>';
-      $xml .= '<headline>' . $value['field_story_short_headline_value'] . '</headline>';
+      $xml .= '<headline>' . $value['title'] . '</headline>';
       $xml .= '<secondaryheadline>' . $kicker_text . '</secondaryheadline>';
       $xml .= '<bodytext>' . $body . '</bodytext>';
       $xml .= '</article>';
@@ -163,7 +163,7 @@ function genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_
 
       $xml .= '<section name="' . $primary_cat . '">';
       $xml .= '<article>';
-      $xml .= '<headline>' . $value['field_story_short_headline_value'] . '</headline>';
+      $xml .= '<headline>' . $value['title'] . '</headline>';
       $xml .= '<byline>' . $byline . '</byline>';
       $xml .= '<introtext>' . $kicker_text . '</introtext>';
       $xml .= '<bodytext>' . $body . '</bodytext>';

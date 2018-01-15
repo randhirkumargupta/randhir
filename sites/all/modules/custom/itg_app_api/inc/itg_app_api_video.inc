@@ -234,7 +234,7 @@ function generateVideoCategoryList($tid, $pageno) {
                 
                 $bitrate_url = $inter_video_details['bitrate_url'];
                 $file_url_1 = $inter_video_details['file_url'];
-                $photo_list_array[$listcount]['p_is_default_player'] = "0";
+                $photo_list_array[$listcount]['v_is_default_player'] = "0";
                 $photo_list_array[$listcount]['v_url'] = $bitrate_url;
                 $photo_list_array[$listcount]['v_download_url'] = $file_url_1;
                 //if ($videotag['dailymotion']['bitate_url']['download_url']) {
@@ -782,7 +782,7 @@ function generateVideoDetail($nid) {
             $inter_video_details = internal_video_bitrate_data($video_id);
             $bitrate_url = $inter_video_details['bitrate_url'];
             $file_url_1 = $inter_video_details['file_url'];
-            $photo_list_array[$listcount]['p_is_default_player'] = "0";
+            $photo_list_array[$listcount]['v_is_default_player'] = "0";
             $photo_list_array[$listcount]['v_url'] = $bitrate_url;
             $photo_list_array[$listcount]['v_download_url'] = $file_url_1;
             //if ($videotag['dailymotion']['bitate_url']['download_url']) {
