@@ -2827,14 +2827,14 @@ function itg_rapid_api_program_category_list($token) {
     $redis_key = "itg_rapid_api_program_category_list";
     $result_get = getRedis($redis_key);
 
-    if ($result_get['key_value'] != "") {
-        $jsondata = $result_get['key_value'];
-    } else {
+    //if ($result_get['key_value'] != "") {
+        //$jsondata = $result_get['key_value'];
+   // } else {
         $jsondata = programCategoryListlPageRerourceValue();
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-        $result_set = setRedis($redis_key, $jsondata, $ttl);
-    }
+        //$ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        //$result_set = setRedis($redis_key, $jsondata, $ttl);
+    //}
 
     $obj = json_decode($jsondata, TRUE);
     $return_obj = $obj;
