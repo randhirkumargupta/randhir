@@ -11,9 +11,10 @@
  * @ingroup views_templates
  */
 ?>
+<?php print '<rss xmlns:content="http://purl.org/rss/1.0/modules/content" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">'; ?>
 <?php
   global $base_url;
-  $logo = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/mastlogo_googleeditorspic_250x40.png');
+  $logo = file_create_url(file_default_scheme() . '://sites/all/themes/itg/images/mastlogo_googleeditorspic_250x40.png');
 ?>
 <<?php print "channel"; ?>>
 <<?php print $xml_tag['path']; ?>><![CDATA[<?php print $base_url; ?>]]></<?php print $xml_tag['path']; ?>>
