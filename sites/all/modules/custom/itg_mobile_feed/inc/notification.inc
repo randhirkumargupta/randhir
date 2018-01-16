@@ -6,7 +6,6 @@
 
 /**
  * Common function to define the some Primary values
- *
  * @return string
  */
 function get_notification_config() {
@@ -183,9 +182,7 @@ function generate_notification_all($params) {
 /**
  * Common Function to get weburl
  * @global type $base_url
- *
  * @param type $nid
- *
  * @return string
  */
 function get_web_url($nid) {
@@ -197,7 +194,6 @@ function get_web_url($nid) {
 
 /**
  * Function for getting the xml output for notification_all, android, ios
- *
  * @return string $output
  */
 function default_xml_feed() {
@@ -224,55 +220,7 @@ function ipad_notification_xml() {
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
   if ($totalarticle > 0) {
-    foreach ($all_data as $data) {
-      $msg_node = node_load($data->content_id);
-      $android_header = $data->android_header;
-      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-      $cat = taxonomy_term_load($primary_cat);
-      $section = $cat->name;
-      $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-      $kicker_image = '';
-      $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
-      if ($msg_node->type == 'story') {
-        $url = 'story' . $msg_node->nid . '.xml';
-        generateStoryDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'videogallery') {
-        $url = 'video' . $msg_node->nid . '.xml';
-        generateVideoDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'photogallery') {
-        $url = 'photo' . $msg_node->nid . '.xml';
-        generatePhotoDetailPageFeed($msg_node->nid);
-      }
-      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $created_date_time = $data->schedule_datetime;
-
-      if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-      }
-      else {
-        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-        $msg_created_date_time = $data->schedule_datetime;
-        $header = $data->android_header;
-        $section = $data->category;
-        $thumb_img = $data->android_banner;
-        $web_url = $data->mobile_url;
-        if ($data->message_url != '') {
-          $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== FALSE) {
-            $url = '/hltapps/api/livetv.xml';
-            $section = $data->category;
-          }
-          else {
-            $url = '';
-            $section = '';
-          }
-        }
-
-        $output .= "<article><title>" . xml_cdata_filter($data->message) . "</title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-      }
-    }
+    $output .= xml_output_data($all_data);
   }
   $output .= getMobileFeedXmlFooter();
   return $output;
@@ -291,53 +239,7 @@ function chrome_notification_xml() {
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index><footersharemsg>" . $config['footersharemsg'] . "</footersharemsg>";
   if ($totalarticle > 0) {
-    foreach ($all_data as $data) {
-      $msg_node = node_load($data->content_id);
-      $android_header = $data->android_header;
-      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-      $cat = taxonomy_term_load($primary_cat);
-      $section = $cat->name;
-      $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-      $kicker_image = '';
-      $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
-      if ($msg_node->type == 'story') {
-        $url = 'story' . $msg_node->nid . '.xml';
-        generateStoryDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'videogallery') {
-        $url = 'video' . $msg_node->nid . '.xml';
-        generateVideoDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'photogallery') {
-        $url = 'photo' . $msg_node->nid . '.xml';
-        generatePhotoDetailPageFeed($msg_node->nid);
-      }
-      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $created_date_time = $data->schedule_datetime;
-      if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-      }
-      else {
-        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-        $msg_created_date_time = $data->schedule_datetime;
-        $header = $data->android_header;
-        $section = $data->category;
-        $thumb_img = $data->android_banner;
-        $web_url = $data->mobile_url;
-        if ($data->message_url != '') {
-          $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== FALSE) {
-            $url = '/hltapps/api/livetv.xml';
-            $section = $data->category;
-          }
-          else {
-            $url = '';
-            $section = '';
-          }
-        }
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><url>" . $url . "</url><weburl>" . $web_url . "</weburl ><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-      }
-    }
+    $output .= xml_output_data($all_data);
   }
   $output .= getMobileFeedXmlFooter();
   return $output;
@@ -356,54 +258,7 @@ function safari_notification_xml() {
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
   if ($totalarticle > 0) {
-    foreach ($all_data as $data) {
-      $msg_node = node_load($data->content_id);
-      $android_header = $data->android_header;
-      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-      $cat = taxonomy_term_load($primary_cat);
-      $section = $cat->name;
-      $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-      $kicker_image = '';
-      $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
-      if ($msg_node->type == 'story') {
-        $url = 'story' . $msg_node->nid . '.xml';
-        generateStoryDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'videogallery') {
-        $url = 'video' . $msg_node->nid . '.xml';
-        generateVideoDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'photogallery') {
-        $url = 'photo' . $msg_node->nid . '.xml';
-        generatePhotoDetailPageFeed($msg_node->nid);
-      }
-      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $created_date_time = $data->schedule_datetime;
-
-      if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-      }
-      else {
-        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-        $msg_created_date_time = $data->schedule_datetime;
-        $header = $data->android_header;
-        $section = $data->category;
-        $thumb_img = $data->android_banner;
-        $web_url = $data->mobile_url;
-        if ($data->message_url != '') {
-          $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== FALSE) {
-            $url = '/hltapps/api/livetv.xml';
-            $section = $data->category;
-          }
-          else {
-            $url = '';
-            $section = '';
-          }
-        }
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-      }
-    }
+    $output .= xml_output_data($all_data);
   }
   $output .= getMobileFeedXmlFooter();
   return $output;
@@ -422,56 +277,7 @@ function amazon_notification_xml() {
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
   if ($totalarticle > 0) {
-    foreach ($all_data as $data) {
-      $msg_node = node_load($data->content_id);
-      $android_header = $data->android_header;
-      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-      $cat = taxonomy_term_load($primary_cat);
-      $section = $cat->name;
-
-      $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-      $kicker_image = '';
-      $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
-      if ($msg_node->type == 'story') {
-        $url = 'story' . $msg_node->nid . '.xml';
-        generateStoryDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'videogallery') {
-        $url = 'video' . $msg_node->nid . '.xml';
-        generateVideoDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'photogallery') {
-        $url = 'photo' . $msg_node->nid . '.xml';
-        generatePhotoDetailPageFeed($msg_node->nid);
-      }
-      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $created_date_time = $data->schedule_datetime;
-
-      if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-      }
-      else {
-        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-        $msg_created_date_time = $data->schedule_datetime;
-        $header = $data->android_header;
-        $section = $data->category;
-        $thumb_img = $data->android_banner;
-        $web_url = $data->mobile_url;
-        if ($data->message_url != '') {
-          $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== FALSE) {
-            $url = '/hltapps/api/livetv.xml';
-            $section = $data->category;
-          }
-          else {
-            $url = '';
-            $section = '';
-          }
-        }
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-      }
-    }
+    $output .= xml_output_data($all_data);
   }
   $output .= getMobileFeedXmlFooter();
   return $output;
@@ -490,56 +296,7 @@ function windows8_notification_xml() {
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
   if ($totalarticle > 0) {
-    foreach ($all_data as $data) {
-      $msg_node = node_load($data->content_id);
-
-      $android_header = $data->android_header;
-      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-      $cat = taxonomy_term_load($primary_cat);
-      $section = $cat->name;
-
-      $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-      $kicker_image = '';
-      $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
-      if ($msg_node->type == 'story') {
-        $url = 'story' . $msg_node->nid . '.xml';
-        generateStoryDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'videogallery') {
-        $url = 'video' . $msg_node->nid . '.xml';
-        generateVideoDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'photogallery') {
-        $url = 'photo' . $msg_node->nid . '.xml';
-        generatePhotoDetailPageFeed($msg_node->nid);
-      }
-      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $created_date_time = $data->schedule_datetime;
-
-      if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-      }
-      else {
-        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-        $msg_created_date_time = $data->schedule_datetime;
-        $header = $data->android_header;
-        $section = $data->category;
-        $thumb_img = $data->android_banner;
-        $web_url = $data->mobile_url;
-        if ($data->message_url != '') {
-          $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== FALSE) {
-            $url = '/hltapps/api/livetv.xml';
-            $section = $data->category;
-          }
-          else {
-            $url = '';
-            $section = '';
-          }
-        }
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-      }
-    }
+    $output .= xml_output_data($all_data);
   }
   $output .= getMobileFeedXmlFooter();
   return $output;
@@ -558,57 +315,8 @@ function osx_notification_xml() {
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
   if ($totalarticle > 0) {
-    foreach ($all_data as $data) {
-      $msg_node = node_load($data->content_id);
-      $android_header = $data->android_header;
-      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-      $cat = taxonomy_term_load($primary_cat);
-      $section = $cat->name;
-      $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-      $kicker_image = '';
-      $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
-      if ($msg_node->type == 'story') {
-        $url = 'story' . $msg_node->nid . '.xml';
-        generateStoryDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'videogallery') {
-        $url = 'video' . $msg_node->nid . '.xml';
-        generateVideoDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'photogallery') {
-        $url = 'photo' . $msg_node->nid . '.xml';
-        generatePhotoDetailPageFeed($msg_node->nid);
-      }
-      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $created_date_time = $data->schedule_datetime;
-
-      if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-      }
-      else {
-        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-        $msg_created_date_time = $data->schedule_datetime;
-        $header = $data->android_header;
-        $section = $data->category;
-        $thumb_img = $data->android_banner;
-        $web_url = $data->mobile_url;
-        if ($data->message_url != '') {
-          $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== FALSE) {
-            $url = '/hltapps/api/livetv.xml';
-            $section = $data->category;
-          }
-          else {
-            $url = '';
-            $section = '';
-          }
-        }
-
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-      }
-    }
+    $output .= xml_output_data($all_data);
   }
-
   $output .= getMobileFeedXmlFooter();
   return $output;
 }
@@ -626,54 +334,7 @@ function nokiaasha_notification_xml() {
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
   if ($totalarticle > 0) {
-    foreach ($all_data as $data) {
-      $msg_node = node_load($data->content_id);
-      $android_header = $data->android_header;
-      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-      $cat = taxonomy_term_load($primary_cat);
-      $section = $cat->name;
-      $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-      $kicker_image = '';
-      $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
-      if ($msg_node->type == 'story') {
-        $url = 'story' . $msg_node->nid . '.xml';
-        generateStoryDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'videogallery') {
-        $url = 'video' . $msg_node->nid . '.xml';
-        generateVideoDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'photogallery') {
-        $url = 'photo' . $msg_node->nid . '.xml';
-        generatePhotoDetailPageFeed($msg_node->nid);
-      }
-      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $created_date_time = $data->schedule_datetime;
-
-      if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-      }
-      else {
-        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-        $msg_created_date_time = $data->schedule_datetime;
-        $header = $data->android_header;
-        $section = $data->category;
-        $thumb_img = $data->android_banner;
-        $web_url = $data->mobile_url;
-        if ($data->message_url != '') {
-          $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== FALSE) {
-            $url = '/hltapps/api/livetv.xml';
-            $section = $data->category;
-          }
-          else {
-            $url = '';
-            $section = '';
-          }
-        }
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-      }
-    }
+    $output .= xml_output_data($all_data);
   }
   $output .= getMobileFeedXmlFooter();
   return $output;
@@ -692,53 +353,7 @@ function bb_notification_xml() {
   $output .= getMobileFeedXmlHeader();
   $output .= "<idsection>" . $config['idsection'] . "</idsection><section>" . $config['section'] . "</section><totalarticle>" . $totalarticle . "</totalarticle><start_index>" . $config['start_index'] . "</start_index><end_index>" . $config['end_index'] . "</end_index>";
   if ($totalarticle > 0) {
-    foreach ($all_data as $data) {
-      $msg_node = node_load($data->content_id);
-      $android_header = $data->android_header;
-      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-      $cat = taxonomy_term_load($primary_cat);
-      $section = $cat->name;
-      $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-      $kicker_image = '';
-      $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
-      if ($msg_node->type == 'story') {
-        $url = 'story' . $msg_node->nid . '.xml';
-        generateStoryDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'videogallery') {
-        $url = 'video' . $msg_node->nid . '.xml';
-        generateVideoDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'photogallery') {
-        $url = 'photo' . $msg_node->nid . '.xml';
-        generatePhotoDetailPageFeed($msg_node->nid);
-      }
-      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $created_date_time = $data->schedule_datetime;
-      if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-      }
-      else {
-        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-        $msg_created_date_time = $data->schedule_datetime;
-        $header = $data->android_header;
-        $section = $data->category;
-        $thumb_img = $data->android_banner;
-        $web_url = $data->mobile_url;
-        if ($data->message_url != '') {
-          $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== FALSE) {
-            $url = '/hltapps/api/livetv.xml';
-            $section = $data->category;
-          }
-          else {
-            $url = '';
-            $section = '';
-          }
-        }
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-      }
-    }
+    $output .= xml_output_data($all_data);
   }
   $output .= getMobileFeedXmlFooter();
   return $output;
@@ -746,69 +361,19 @@ function bb_notification_xml() {
 
 /**
  * Function for getting notifications article
- *
  * @return string $output
  */
 function notifications_article() {
   $all_data = message_data();
   $totalarticle = count($all_data);
   if ($totalarticle > 0) {
-    foreach ($all_data as $data) {
-      $msg_node = node_load($data->content_id);
-      $android_header = $data->android_header;
-      $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-      $kicker_image = '';
-      $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-      $cat = taxonomy_term_load($primary_cat);
-      $section = $cat->name;
-      $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
-      $title = isset($msg_node->title) ? $msg_node->title : '';
-      if ($msg_node->type == 'story') {
-        $url = 'story' . $msg_node->nid . '.xml';
-        generateStoryDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'videogallery') {
-        $url = 'video' . $msg_node->nid . '.xml';
-        generateVideoDetailPageFeed($msg_node->nid);
-      }
-      elseif ($msg_node->type == 'photogallery') {
-        $url = 'photo' . $msg_node->nid . '.xml';
-        generatePhotoDetailPageFeed($msg_node->nid);
-      }
-      $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $created_date_time = $data->schedule_datetime;
-      if ($data->content_id > 0) {
-        $output .= "<article><title><![CDATA[" . $title . "]]></title><header><![CDATA[" . $android_header . "]]></header><section_name><![CDATA[" . $section . "]]></section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-      }
-      else {
-        $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-        $msg_created_date_time = $data->schedule_datetime;
-        $header = $data->android_header;
-        $section = $data->category;
-        $thumb_img = $data->android_banner;
-        $web_url = $data->mobile_url;
-        if ($data->message_url != '') {
-          $live_url = strpos($data->message_url, 'livetv.jsp');
-          if ($live_url !== FALSE) {
-            $url = '/hltapps/api/livetv.xml';
-            $section = $data->category;
-          }
-          else {
-            $url = '';
-            $section = '';
-          }
-        }
-        $output .= "<article><title><![CDATA[" . $data->message . "]]></title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><url>" . $url . "</url><weburl>" . $web_url . "</weburl><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-      }
-      //Attach the node type details
-    }
+    $output .= xml_output_data($all_data);
   }
   return $output;
 }
 
 /**
  * Function for getting message_data
- *
  * @return string $res
  */
 function message_data() {
@@ -818,4 +383,53 @@ function message_data() {
   $all_data = file_get_contents($message_data_url);
   $message_data = json_decode($all_data);
   return $message_data;
+}
+
+/** Common function to generate articles data
+ * @param $data array 
+ * @return $output string
+ */
+function xml_output_data($all_data) {
+  foreach ($all_data as $data) {
+    $msg_node = node_load($data->content_id);
+    $android_header = $data->android_header;
+    $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
+    $cat = taxonomy_term_load($primary_cat);
+    $section = $cat->name;
+    $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
+    $kicker_image = '';
+    $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
+    if ($msg_node->type == 'story') {
+      $url = 'story' . $msg_node->nid . '.xml';
+      generateStoryDetailPageFeed($msg_node->nid);
+    }
+    elseif ($msg_node->type == 'videogallery') {
+      $url = 'video' . $msg_node->nid . '.xml';
+      generateVideoDetailPageFeed($msg_node->nid);
+    }
+    elseif ($msg_node->type == 'photogallery') {
+      $url = 'photo' . $msg_node->nid . '.xml';
+      generatePhotoDetailPageFeed($msg_node->nid);
+    }
+    $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
+    $created_date_time = $data->schedule_datetime;
+    if ($data->category == 'Live TV') {
+      $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
+      $msg_created_date_time = $data->schedule_datetime;
+      $header = $data->android_header;
+      $section = $data->category;
+      $thumb_img = $data->android_banner;
+      $web_url = $data->mobile_url;
+      $url = '/hltapps/api/livetv.xml';
+      $section = $data->category;
+      $output .= "<article><title>" . xml_cdata_filter($data->message) . "</title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><url>" . $url . "</url><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+    }
+    else if ($data->content_id == '0' && empty($data->custom_data) && $data->message_url == '') {
+      $output .= "<article><title>" . xml_cdata_filter($data->message) . "</title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><url></url><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+    }
+    else {
+      $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+    }
+  }
+  return $output;
 }
