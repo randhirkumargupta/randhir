@@ -308,6 +308,10 @@ function itg_preprocess_html(&$vars) {
       $vars['head_title'] = $title;
     }
   }
+  
+  if($arg[0] == 'magazine') {
+      $vars['head_title'] = 'India Today Headlines Archive- Get News headlines by date | '.variable_get('site_name');
+  }
 }
 
 /**

@@ -113,3 +113,41 @@ function itg_miscellaneous_advagg_get_root_files_dir_alter(&$css_paths, &$js_pat
   }
   
 } 
+
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function itg_miscellaneous_preprocess_page(&$vars) {
+  // Set meta data for required pages.
+  if ('magazine' == arg(0)) {
+    $description = "Select a date from the calendar to get the day's news headlines from India. All archive news, photos and videos available here.";
+    $og_description = 'Archive India Today, India, World, Sports, politics, Cricket, movies reviews, videos';
+  
+  // Prepare meta data.
+  if (isset($description) && isset($og_description)) {
+    $html_head = array(
+        'keyword' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'keyword',
+          'content' => $og_description,
+          )
+        ),
+      'description' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'description',
+          'content' => $description,
+          )
+        ),
+  
+    );
+    // Push data to HTML head.
+    foreach ($html_head as $key => $value) {
+      drupal_add_html_head($value, $key);
+    }
+  }
+  }
+}
+
