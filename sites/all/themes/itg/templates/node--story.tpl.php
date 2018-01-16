@@ -1048,9 +1048,18 @@ if (!empty($content)):
                         //print itg_vukkul_comment_count('story_' . arg(1));
                       //}
                       ?></span></a></li>
-              <?php } if ($config_name == 'other') { ?> 
-                <li class="mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> <span><?php print $get_comment_count; ?></span></a></li>
+              <?php } if ($config_name == 'other') { 
+                 $comment_count_class = !empty($get_comment_count) ? "itg-comment-count" : "";
+                ?> 
+                <li class="<?php print $comment_count_class; ?>mhide"><a class= "def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i> 
+                        <?php 
+                          if (!empty($get_comment_count)) {
+                              print "<span>" . $get_comment_count . "</span>";
+                            }
+                            ?>
+                        </a></li>
                   <?php } ?>
+              <?php /*          
               <li class="mhide"><span class="share-count"><?php
                   if (!empty($tot_count)) {
                     print $tot_count;
@@ -1059,6 +1068,9 @@ if (!empty($content)):
                     print 0;
                   }
                   ?></span><?php print t('SHARES'); ?></li>
+                                
+               */
+                ?>  
               <?php if (!empty($node_author['fname'])) { ?>
                 <li class="mhide"><span class="posted-by"><?php print t('Posted by'); ?></span><span class="posted-name"><?php print $node_author['fname'] . ' ' . $node_author['lname']; ?></span></li>
               <?php } ?>   
@@ -1070,9 +1082,12 @@ if (!empty($content)):
                 endif;
               else:
                 ?>
+              <?php /*    
                 <li class="mhide">
                   <a title="follow story" href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>"><?php print t('follow the story'); ?></a>
-                </li>
+                </li> 
+               */
+              ?>  
             <?php endif; ?>
             </ul>
           </div>
