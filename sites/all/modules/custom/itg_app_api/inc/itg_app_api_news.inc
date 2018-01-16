@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions for news API
+ * Inc file contains the functions for news API 
  */
 
 /**
@@ -161,6 +161,9 @@ function generateNewsCategoryList($tid, $pageno) {
 
       if ($type == 'story') {
         $type = getStoryType($nid);
+      }
+      if ($type == 'videogallery') {
+        $type = "video";
       }
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
