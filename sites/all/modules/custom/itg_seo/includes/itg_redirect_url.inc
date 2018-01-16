@@ -13,7 +13,7 @@ function itg_get_node_redirect_url($node, $op) {
     
     if (isset($node->type) && ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'videogallery' || $node->type == 'podcast' || $node->type == 'blog')) {
       
-      $story_expiry_date = '';
+      /*$story_expiry_date = '';
       $current_time = time();
 
       if (!empty($node->field_story_expiry_date[LANGUAGE_NONE][0]['value'])) {
@@ -30,7 +30,7 @@ function itg_get_node_redirect_url($node, $op) {
         } else {
             drupal_goto('<front>');
         }       
-      }
+      }*/
     } else {
         if ($op == 'full' && ($itg_status == 0)) {
           drupal_goto('<front>');
