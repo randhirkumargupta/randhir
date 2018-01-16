@@ -956,9 +956,13 @@ function get_header_body_start_end_code() {
           if (strpos($header['value'], '[ITGD:ads:1]') && strpos($header['value'], '[ITGD:ads:2]')) {
             $section_header_s = 'ROS';
             $category_header_s = 'ROS';
+            $ads3value = '';
+            $ads4value = '';
             if($header_section = get_ads_headerscript_section($arg, $taxonomy_array, $node_object)){
               $section_geader_s = str_replace("'", "", $header_section['section_header_s']);
               $category_geader_s = str_replace("'", "", $header_section['category_geader_s']);
+              $ads3value = str_replace("'", "", $header_section['node_type']);
+              $ads4value = str_replace("'", "", $header_section['node_id']);
             }
             if (strpos($header['value'], '[ITGD:ads:1]')) {
               $header['value'] = str_replace('[ITGD:ads:1]', $section_geader_s, $header['value']);
@@ -966,18 +970,12 @@ function get_header_body_start_end_code() {
             if (strpos($header['value'], '[ITGD:ads:2]')) {
               $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
             }
-            // for story
-            if(isset($node_type) && $node_type = 'story') {
-              if (strpos($header['value'], '[ITGD:ads:3]')) {
-                $header['value'] = str_replace('[ITGD:ads:3]', $node_type , $header['value']);
-              }
-              if (strpos($header['value'], '[ITGD:ads:4]')) {
-                $header['value'] = str_replace('[ITGD:ads:4]', $node_nid , $header['value']);
-              }
-            } else {
-              $header['value'] = str_replace('[ITGD:ads:3]', '' , $header['value']);
-              $header['value'] = str_replace('[ITGD:ads:4]', '' , $header['value']);
-            }          
+            if (strpos($header['value'], '[ITGD:ads:3]')) {
+              $header['value'] = str_replace('[ITGD:ads:3]', $ads3value , $header['value']);
+            }
+            if (strpos($header['value'], '[ITGD:ads:4]')) {
+              $header['value'] = str_replace('[ITGD:ads:4]', $ads4value , $header['value']);
+            }         
           }
           $adsheaderbody['header'][] = $header['value'];
         }
@@ -990,9 +988,13 @@ function get_header_body_start_end_code() {
           if (strpos($header['value'], '[ITGD:ads:1]') && strpos($header['value'], '[ITGD:ads:2]')) {
             $section_header_s = 'ROS';
             $category_header_s = 'ROS';
+            $ads3value = '';
+            $ads4value = '';
             if($header_section = get_ads_headerscript_section($arg, $taxonomy_array, $node_object)){
               $section_geader_s = str_replace("'", "", $header_section['section_header_s']);
               $category_geader_s = str_replace("'", "", $header_section['category_geader_s']);
+              $ads3value = str_replace("'", "", $header_section['node_type']);
+              $ads4value = str_replace("'", "", $header_section['node_id']);
             }
             if (strpos($header['value'], '[ITGD:ads:1]')) {
               $header['value'] = str_replace('[ITGD:ads:1]', $section_geader_s, $header['value']);
@@ -1000,17 +1002,11 @@ function get_header_body_start_end_code() {
             if (strpos($header['value'], '[ITGD:ads:2]')) {
               $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
             }
-            // for story
-            if(isset($node_type) && $node_type = 'story') {
-              if (strpos($header['value'], '[ITGD:ads:3]')) {
-                $header['value'] = str_replace('[ITGD:ads:3]', $node_type , $header['value']);
-              }
-              if (strpos($header['value'], '[ITGD:ads:4]')) {
-                $header['value'] = str_replace('[ITGD:ads:4]', $node_nid , $header['value']);
-              }
-            } else {
-              $header['value'] = str_replace('[ITGD:ads:3]', '' , $header['value']);
-              $header['value'] = str_replace('[ITGD:ads:4]', '' , $header['value']);
+            if (strpos($header['value'], '[ITGD:ads:3]')) {
+              $header['value'] = str_replace('[ITGD:ads:3]', $ads3value , $header['value']);
+            }
+            if (strpos($header['value'], '[ITGD:ads:4]')) {
+              $header['value'] = str_replace('[ITGD:ads:4]', $ads4value , $header['value']);
             }
           }
           $adsheaderbody['header'][] = $header['value'];
@@ -1186,9 +1182,13 @@ function get_ads_headerscript_section($arg, $data, $node_object){
 		if (count($term_data) > 1 && !empty($term_data[0]->name)) {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
 			$return['category_geader_s'] = $taxname1.ucfirst($node_object->type);
+      $return['node_type'] = ucfirst($node_object->type);
+      $return['node_id'] = ucfirst($node_object->nid);
 		} else {
 			$return['section_header_s'] = (!empty($term_data[0]->name) ? $taxname1 : 'ROS');
 			$return['category_geader_s'] = (!empty($taxname1) ? ($taxname1.ucfirst($node_object->type)) : 'ROS');
+      $return['node_type'] = ucfirst($node_object->type);
+      $return['node_id'] = ucfirst($node_object->nid);
 		}
 	}
 	return $return;
