@@ -179,7 +179,7 @@ ul.navbar li a {padding: 8px 17px;}
           <li><a href="/itmi/what-we-offer-broadcastjournalism.jsp">Full time 11 month Post graduate diploma </a>
           <ul>
               <li><a href="what-we-offer-broadcastjournalism.jsp">Broadcast journalism </a></li>
-              <li><a href="media-marketing-planning-sales-management.jsp">Media Marketing, Planning &amp; Sales Management </a></li> 
+              <li><a href="media-marketing-planning-sales-management.jsp">Media &amp; Entertainment Management</a></li> 
             </ul>
           
           
