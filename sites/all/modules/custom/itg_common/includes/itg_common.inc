@@ -588,21 +588,20 @@ function itg_get_fb_share($id , $type) {
 /**
  * itg_get_multi_byline_details
  */
-function itg_get_multi_byline_details($byline_id) {
+function itg_get_multi_byline_details($nid , $status = NULL) {
   $options = '';
-  $id_arr = array();
-  foreach ($byline_id as $key => $value) {
-    $id_arr[] = $value['byline_id'];
-  }
-  if (!empty($id_arr)) {
+  if (!empty($nid) && !empty($status)) {
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_extra_large_image', 're', 'n.nid = re.entity_id');
     $query->leftJoin('field_data_field_reporter_twitter_handle', 'frq', 'n.nid = frq.entity_id');
+    $query->leftJoin('itg_multi_byline_info', 's', 'n.nid = s.byline_id');
     $query->fields('n');
     $query->fields('frq', array('field_reporter_twitter_handle_value'));
     $query->fields('re', array('field_story_extra_large_image_fid'));
-    $query->condition('n.nid', $id_arr, 'IN');
+    $query->condition('s.nid', $nid, '=');
+    $query->condition('s.publish_status', $status, '=');
     $query->condition('n.type', 'reporter', '=');
+    $query->orderBy("s.byline_weight", "ASC");
     $result = $query->execute();
     $key = 0;
     while ($record = $result->fetchAssoc()) {

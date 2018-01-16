@@ -729,8 +729,8 @@ function getBalanklist($nid) {
  * @return array
  */
 function generateAuthorTagStory($node, $status) {
-  $byline = itg_common_get_latest_byline($node->nid, $status);
-  $byline_data = itg_get_multi_byline_details($byline);
+  //$byline = itg_common_get_latest_byline($node->nid, $status);
+  $byline_data = itg_get_multi_byline_details($node->nid, $status);
   $aid = $byline_data[0]['nid'];
   $a_title = $byline_data[0]['title'];
   $extra_laarge_file = file_load($byline_data[0]['extra_large_image']);
