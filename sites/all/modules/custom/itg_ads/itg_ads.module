@@ -974,6 +974,9 @@ function get_header_body_start_end_code() {
               if (strpos($header['value'], '[ITGD:ads:4]')) {
                 $header['value'] = str_replace('[ITGD:ads:4]', $node_nid , $header['value']);
               }
+            } else {
+              $header['value'] = str_replace('[ITGD:ads:3]', '' , $header['value']);
+              $header['value'] = str_replace('[ITGD:ads:4]', '' , $header['value']);
             }          
           }
           $adsheaderbody['header'][] = $header['value'];
@@ -996,6 +999,18 @@ function get_header_body_start_end_code() {
             }
             if (strpos($header['value'], '[ITGD:ads:2]')) {
               $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
+            }
+            // for story
+            if(isset($node_type) && $node_type = 'story') {
+              if (strpos($header['value'], '[ITGD:ads:3]')) {
+                $header['value'] = str_replace('[ITGD:ads:3]', $node_type , $header['value']);
+              }
+              if (strpos($header['value'], '[ITGD:ads:4]')) {
+                $header['value'] = str_replace('[ITGD:ads:4]', $node_nid , $header['value']);
+              }
+            } else {
+              $header['value'] = str_replace('[ITGD:ads:3]', '' , $header['value']);
+              $header['value'] = str_replace('[ITGD:ads:4]', '' , $header['value']);
             }
           }
           $adsheaderbody['header'][] = $header['value'];
