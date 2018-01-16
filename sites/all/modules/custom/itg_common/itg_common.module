@@ -1574,7 +1574,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
     if ($frame_url['scheme'] != 'https') {
       $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
     }
-    else if ((strpos($frame_url['path'], 'mega-review/embed') !== false) && ($frame_url['path'] == FRONT_URL)) {
+    else if ((strpos($frame_url['path'], 'mega-review/embed') !== false) && ($frame_url['host'] == FRONT_URL)) {
       $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
     }
     else {
