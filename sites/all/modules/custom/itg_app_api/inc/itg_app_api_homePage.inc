@@ -104,7 +104,7 @@ function homePageJsonPackagelist_india() {
         // code vid=14  end
 
         $data_news['id'] = "$tid";
-        $data_news['order'] = "3";
+        $data_news['order'] = "2";
         $data_news['type'] = "packagelist";
         $data_news['title'] = "$term_name_m";
         $data_news['label'] = "$term_name_m";
