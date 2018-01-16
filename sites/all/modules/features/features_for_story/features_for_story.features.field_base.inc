@@ -2669,7 +2669,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_story_tech_pros_cons_ratin',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'indexes' => array(
       'value' => array(
