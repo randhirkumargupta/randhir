@@ -435,7 +435,7 @@ function generatePhotoStoryDetailList($nid) {
       $photo_story_img_fid = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid'];
       $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
       $photo_story_img = completeFilePath($photo_story_img_fid);
-      $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
+      $photo_story_desc_html = $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
       $caption = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       $byline = $entity_obj[$val['value']]->field_credit['und'][0]['value'];
       //$byline = getImgByline($photo_story_img_fid);
@@ -444,14 +444,14 @@ function generatePhotoStoryDetailList($nid) {
       $photo_image_info = itg_story_get_image_info($photo_story_img_fid);
       $image_caption = strip_tags($photo_image_info[0]->image_caption);
       $image_courtesy = strip_tags($photo_image_info[0]->image_courtesy);
-      
+      $photo_story_desc_html = str_replace('<div class="body_caption">', '<div class="body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;">', $photo_story_desc_html);
       $photo_story_desc = strip_tags($photo_story_desc);
       $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
       $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
       $photo_list_array[$listcont]['p_credit'] = "$image_courtesy";
       $photo_list_array[$listcont]['p_caption'] = "$image_caption";
       $photo_list_array[$listcont]['p_desc_withouthtml'] = "$photo_story_desc";
-      $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_desc";
+      $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_desc_html";
       $listcont++;
     }
   }
