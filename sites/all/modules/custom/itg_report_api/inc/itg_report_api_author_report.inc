@@ -312,7 +312,7 @@ function getAuthorList_Report($s_date, $e_date) {
   $query->leftJoin('node', 'n', 'byli.nid=n.nid');
   $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'repr.entity_id=byli.byline_id');
-  $query->fields('n', array('nid', 'status'));
+  $query->fields('n', array('nid', 'status','title'));
   $query->fields('byli', array('byline_id'));
   $query->fields('repr', array('field_reporter_email_id_value'));
   //end
@@ -324,6 +324,7 @@ function getAuthorList_Report($s_date, $e_date) {
   $query->condition('n.type', 'story');
   $query->condition('ti.tid', '1206640', '<>');
   $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+  $query->orderBy('n.title', 'ASC');
   $query->groupBy('n.nid');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
@@ -331,7 +332,7 @@ function getAuthorList_Report($s_date, $e_date) {
     $author_nid = $resvalue['byline_id'];
     $author = node_load($author_nid);
     $data['author_id'] = $author_nid;
-    $data['author_name'] = $author_email->title;
+    $data['author_name'] = $resvalue['title'];
     $data['author_email'] = $resvalue['field_reporter_email_id_value'];
     $list[$author_nid] = $data;
     $cont++;
