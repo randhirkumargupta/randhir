@@ -10,7 +10,6 @@
  * @return string $output
  */
 function rootCategoryContentPageFeed() {
-    //p(arg());
     $output = "";
     $conf_array = tidConfig();
     $storytag = array();
@@ -121,7 +120,7 @@ function generateLeftMainCategoryPage($tid, $term_name) {
             $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
             $feed_date = date('Y-m-d', strtotime(FEED_DATA_LIMIT));
             $feed_date_range = date(strtotime($feed_date));
-            $query->condition('ti.tid', $tid, '=')->condition('n.created', $feed_date_range, '>=')->condition('n.status', 1)->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
+            $query->condition('ti.tid', $tid, '=')->condition('n.status', 1)->condition('n.created', $feed_date_range, '>=')->condition('n.type', $type)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
             $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) > 0) {
                 foreach ($result as $reskey => $resvalue) {
@@ -147,7 +146,12 @@ function generateLeftMainCategoryPage($tid, $term_name) {
                     // create date formating
                     $create_date = date("F d, Y", $created);
                     $create_datetime = date(DATE_ATOM, $created);
-                    $output .= "<article><title><![CDATA[" . $title . "]]></title><thumbimage>". xml_cdata_filter($file_small_img_url)."</thumbimage><kickerimage>". xml_cdata_filter($file_medium_img_url)."</kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
+                    if ($tid == 1206533 || $tid == '1206533') {
+                        $output .= "<article><title>" . $title . "</title><thumbimage>" . xml_cdata_filter($file_small_img_url) . "</thumbimage><kickerimage>" . xml_cdata_filter($file_medium_img_url) . "</kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
+                    } else {
+                        $output .= "<article><title><![CDATA[" . $title . "]]></title><thumbimage>" . xml_cdata_filter($file_small_img_url) . "</thumbimage><kickerimage>" . xml_cdata_filter($file_medium_img_url) . "</kickerimage><url>" . $loop_file_name . " </url><create_date>" . $create_date . "</create_date><create_datetime>" . $create_datetime . "</create_datetime><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></article>";
+                    }
+
                     // generate story detail page
                     $fl = generateStoryDetailPageFeed($nid, $loop_file_name);
                 }

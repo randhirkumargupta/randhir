@@ -7,15 +7,14 @@
 /**
  * main function for generate videoCategoryPage array
  * @pram int $tid, $pageno
+ *
  * @return array
  */
 function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
-
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
     $updated_datetime = "";
-
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
     if (!$tid) {
@@ -35,7 +34,6 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_up_time = $data['updated_datetime'];
 
     //data array building
-
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
     $data_array['layout_id'] = "0";
@@ -44,16 +42,15 @@ function videocategoryPageRerourceValue($tid = 0, $pageno = 0) {
     $data_array['video_display_count'] = "10";
     $data_array['video_pagination_cap'] = "50";
     $data_array['updated_datetime'] = "$data_up_time";
-
     $data_array['video'] = $data['data'];
     $output_array['data'] = $data_array;
-
     return $output_array;
 }
 
 /**
  * function for generate videoCategoryPage list
  * @pram int $tid, $pageno
+ *
  * @return array
  */
 function generateVideoCategoryList($tid, $pageno) {
@@ -66,16 +63,15 @@ function generateVideoCategoryList($tid, $pageno) {
     $tid_list[] = $tid;
     $listcount = 0;
     $range_max = 10;
+    $range_min = 0;
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
-    } else {
-        $range_min = 0;
     }
+
     $order_by = 'ASC';
     $type = "videogallery";
     $photo_list_array = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
 
         // code vid=14  start
@@ -144,12 +140,10 @@ function generateVideoCategoryList($tid, $pageno) {
         $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('ffd', array('field_story_expert_description_value'));
 
-        //end
-
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-180 days"));
+        $d1 = date('Y-m-d', strtotime("-360 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
@@ -158,7 +152,6 @@ function generateVideoCategoryList($tid, $pageno) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-
             // node feed tag
             $title = $resvalue['title'];
             $type = $resvalue['type'];
@@ -180,9 +173,9 @@ function generateVideoCategoryList($tid, $pageno) {
             $file_extra_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
 
             $desc = strip_tags($resvalue['field_story_expert_description_value']);
-            $desc = str_replace("\n","",$desc);
-            $desc = str_replace("\r","",$desc);
-            $desc = str_replace("\t","",$desc);
+            $desc = str_replace("\n", "", $desc);
+            $desc = str_replace("\r", "", $desc);
+            $desc = str_replace("\t", "", $desc);
 
             //related content
             $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -227,19 +220,40 @@ function generateVideoCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['v_small_image'] = "$file_small_img_url";
             $photo_list_array[$listcount]['v_large_image'] = "$file_large_img_url";
             $photo_list_array[$listcount]['v_extralarge_image'] = "$file_extra_large_img_url";
-            //if($video_path_mp4){
             if (!empty($videotag['dailymotion'])) {
-                $photo_list_array[$listcount]['v_is_default_player'] = "1";
-                $photo_list_array[$listcount]['v_url'] = $videotag['dailymotion']['video_id'];
-                if ($videotag['dailymotion']['bitate_url']['download_url'])
-                    $photo_list_array[$listcount]['v_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
-                else
-                    $photo_list_array[$listcount]['v_download_url'] = "https://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/dailymotion_bitates_video/x5o9vhw_848x480.mp4";
+                $videoids = get_video_in_fieldcollection_by_nid($nid);
+                foreach ($videoids as $keys => $video_value) {
+                    if ($video_value->video_id != '') {
+                        $video_id = $video_value->video_id;
+                    } elseif ($video_value->solr_video_id != '') {
+                        $video_id = $video_value->solr_video_id;
+                    }
+                }
+                
+                $inter_video_details = internal_video_bitrate_data($video_id);
+                
+                $bitrate_url = $inter_video_details['bitrate_url'];
+                $file_url_1 = $inter_video_details['file_url'];
+                $photo_list_array[$listcount]['v_is_default_player'] = "0";
+                $photo_list_array[$listcount]['v_url'] = $bitrate_url;
+                $photo_list_array[$listcount]['v_download_url'] = $file_url_1;
+                //if ($videotag['dailymotion']['bitate_url']['download_url']) {
+                    //$photo_list_array[$listcount]['v_download_url'] = $inter_video_details['bitrate_url'];
+                //} else
+                    //$photo_list_array[$listcount]['v_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
             }
             elseif (!empty($videotag['migrated'])) {
+                $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+                foreach ($videoids as $keys => $video_value) {
+                    $url = $video_value->field_migrated_video_url_value;
+                }
+                $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+                $bitrate_url = $data_video['bitrate_url'];
+                $mp4_url = $data_video['file_url'];
                 $photo_list_array[$listcount]['v_is_default_player'] = "0";
-                $photo_list_array[$listcount]['v_url'] = $videotag['migrated']['video_path_mp4'];
-                $photo_list_array[$listcount]['v_download_url'] = $videotag['migrated']['video_path_mp4']; //$video_path_mp4
+                $photo_list_array[$listcount]['v_url'] = $bitrate_url; //$mp4_url;
+                //$video_path_mp4
+                $photo_list_array[$listcount]['v_download_url'] = $mp4_url;
             }
             $term_pri = taxonomy_term_load($field_primary_category_value);
             $term_name_pri = $term_pri->name;
@@ -257,13 +271,9 @@ function generateVideoCategoryList($tid, $pageno) {
         }
     }
 
-
-
     $data['lcount'] = $listcount;
     $data['data'] = $photo_list_array;
     $data['updated_datetime'] = $changed_datetime;
-
-
     return $data;
 }
 
@@ -274,24 +284,20 @@ function generateVideoCategoryList($tid, $pageno) {
  */
 
 function fid_videoid($video_fid) {
-
-    $qry = db_select('dailymotion_response_details', 'dr')
-                    ->fields('dr', array('video_id'))
-                    ->condition('dr.fid', $video_fid)
-                    ->execute()->fetchField();
-    return $qry;
+    if ($video_fid) {
+        $qry = db_select('dailymotion_response_details', 'dr')->fields('dr', array('video_id'))->condition('dr.fid', $video_fid)->execute()->fetchField();
+        return $qry;
+    }
 }
 
 /**
  * main function for generate programCategoryPage array
  * @pram int $tid, $pageno
+ *
  * @return array
  */
 function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
-
-
     // variable decalartion
-
     $output_array = array();
     $data_array = array();
     $photo_list_array = array();
@@ -314,9 +320,7 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
     }
     $datacount = $data['lcount'];
     $data_up_time = $data['updated_datetime'];
-
     //data array building
-
     $data_array['id'] = "$tid";
     $data_array['title'] = "$term_name";
     $data_array['layout_id'] = "0";
@@ -336,6 +340,7 @@ function programcategoryPageRerourceValue($tid = 0, $pageno = 0) {
 /**
  * function for  generateProgramCategoryList list
  * @pram int $tid, $pageno
+ *
  * @return array
  */
 function generateProgramCategoryList($tid, $pageno) {
@@ -350,18 +355,19 @@ function generateProgramCategoryList($tid, $pageno) {
     $range_max = 10;
     $term = taxonomy_term_load($tid);
     $term_name = $term->name;
+    $range_min = 0;
     if (!$pageno == 0) {
         $range_min = $pageno * $range_max;
-    } else {
-        $range_min = 0;
     }
+
     // filter user data list
+    /* Testing user id, i will remove after testing. */
+
     $filter_user_data = array(2744, 1584, 1162, 1155, 1141, 1137, 970, 1156, 1190, 1522, 3, 1350, 1148, 2573);
     $order_by = 'ASC';
     $type = "videogallery";
     $photo_list_array = array();
-    $loop_count = 0;
-    {
+    $loop_count = 0; {
         $listcount = 0;
 
         // code vid=14  start
@@ -378,7 +384,6 @@ function generateProgramCategoryList($tid, $pageno) {
         }
 
         // select node belong from current term id or child term id
-
         $query = db_select('taxonomy_index', 'ti');
         $query->leftJoin('node', 'n', 'n.nid=ti.nid');
         //join  for field value
@@ -430,7 +435,7 @@ function generateProgramCategoryList($tid, $pageno) {
         if (count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
         }
-        $d1 = date('Y-m-d', strtotime("-180 days"));
+        $d1 = date('Y-m-d', strtotime("-360 days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
@@ -439,10 +444,7 @@ function generateProgramCategoryList($tid, $pageno) {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-
             // node feed tag
-
-
             $title = $resvalue['title'];
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
@@ -471,14 +473,14 @@ function generateProgramCategoryList($tid, $pageno) {
             $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
             $anchor_id = getVedioAnchor($nid);
             $desc = strip_tags($resvalue['field_story_expert_description_value']);
-            $desc = str_replace("\n","",$desc);
-            $desc = str_replace("\r","",$desc);
-            $desc = str_replace("\t","",$desc);
+            $desc = str_replace("\n", "", $desc);
+            $desc = str_replace("\r", "", $desc);
+            $desc = str_replace("\t", "", $desc);
 
 
             //display all the video sounce check and format
             $source_type = $resvalue['field_story_source_type_value'];
-            $videotag = video_detail_formats($resvalue['nid'], $source_type);
+            $videotag = video_detail_formats($nid, $source_type);
             $filesize = $videotag['dailymotion']['filsize'];
             //video url end
             // create date formating
@@ -508,19 +510,36 @@ function generateProgramCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
 
             //if($video_path_mp4){
-            if (!empty($videotag['dailymotion'])) {
-                $photo_list_array[$listcount]['p_is_default_player'] = "1";
-                $photo_list_array[$listcount]['p_url'] = $videotag['dailymotion']['video_id'];
-                if ($videotag['dailymotion']['bitate_url']['download_url'])
-                    $photo_list_array[$listcount]['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
-                else
-                    $photo_list_array[$listcount]['p_download_url'] = "https://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/dailymotion_bitates_video/x5o9vhw_848x480.mp4";
-            }
-            elseif (!empty($videotag['migrated'])) {
-                $video_path_mp4 = $video_path_info['video_path_mp4'];
+            if (!empty($videotag['migrated'])) {
+                $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+                foreach ($videoids as $keys => $video_value) {
+                    $url = $video_value->field_migrated_video_url_value;
+                }
+                $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+                $bitrate_url = $data_video['bitrate_url'];
+                $mp4_url = $data_video['file_url'];
                 $photo_list_array[$listcount]['p_is_default_player'] = "0";
-                $photo_list_array[$listcount]['p_url'] = $videotag['migrated']['video_path_mp4'];
-                $photo_list_array[$listcount]['p_download_url'] = $videotag['migrated']['video_path_mp4'];
+                $photo_list_array[$listcount]['p_url'] = $bitrate_url; //$mp4_url;
+                $photo_list_array[$listcount]['p_download_url'] = $mp4_url;
+            } elseif (!empty($videotag['dailymotion'])) {
+                $videoids = get_video_in_fieldcollection_by_nid($nid);
+                foreach ($videoids as $keys => $video_value) {
+                    if ($video_value->video_id != '') {
+                        $video_id = $video_value->video_id;
+                    } elseif ($video_value->solr_video_id != '') {
+                        $video_id = $video_value->solr_video_id;
+                    }
+                }
+                $inter_video_details = internal_video_bitrate_data($video_id);
+                $bitrate_url = $inter_video_details['bitrate_url'];
+                $file_url_1 = $inter_video_details['file_url'];
+                $photo_list_array[$listcount]['p_is_default_player'] = "0";
+                $photo_list_array[$listcount]['p_url'] = $bitrate_url; //$videotag['dailymotion']['video_id'];
+                $photo_list_array[$listcount]['p_download_url'] = $file_url_1;
+                // if ($videotag['dailymotion']['bitate_url']['download_url']) {
+                    // $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['bitrate_url'];
+                // } else
+                    // $photo_list_array[$listcount]['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
             }
             $field_primary_category_value = $resvalue['field_primary_category_value'];
             $term = taxonomy_term_load($field_primary_category_value);
@@ -541,13 +560,9 @@ function generateProgramCategoryList($tid, $pageno) {
             $listcount++;
         }
     }
-
-
-
     $data['lcount'] = $listcount;
     $data['data'] = $photo_list_array;
     $data['updated_datetime'] = $changed_datetime;
-
 
     return $data;
 }
@@ -555,23 +570,18 @@ function generateProgramCategoryList($tid, $pageno) {
 /**
  * function for  programCategoryListlPageRerourceValue
  * @pram string $token
+ *
  * @return array
  */
 function programCategoryListlPageRerourceValue($token) {
-
-
-    // variable decalartion
-
     $output_array = array();
     $data_array = array();
     $program_list_array = array();
     $updated_datetime = "";
     $conf_array = tidConfig();
     $program_key = "itg_programmes_order_by";
-    $Program_section_list = variable_get($program_key);
-    if(count($Program_section_list) <= 0){
-        $Program_section_list = $conf_array['program_sec_tid'];
-    }
+    $Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061);
+    
 
     // list array building
     $data = generateProgramSectionList($Program_section_list);
@@ -590,17 +600,16 @@ function programCategoryListlPageRerourceValue($token) {
     } else {
         $changed_datetime = "";
     }
-
     //data array building
     $output_array['data']['updated_datetime'] = $changed_datetime;
     $output_array['data']['program'] = $data['data'];
-
     return $output_array;
 }
 
 /**
  * function for  generateProgramSectionList
  * @pram array $program_section_list
+ *
  * @return array
  */
 function generateProgramSectionList($Program_section_list) {
@@ -615,15 +624,16 @@ function generateProgramSectionList($Program_section_list) {
         $term_url = nodeCategoryFrontUrl($value, 'term');
         $child_term_url = nodeCategoryFrontUrl($value, 'term');
         $p_short_description = strip_tags($term->description);
-        $p_short_description = str_replace("\n","",$p_short_description);
-        $p_short_description = str_replace("\r","",$p_short_description);
-        $p_short_description = str_replace("\t","",$p_short_description);
+        $p_short_description = str_replace("\n", "", $p_short_description);
+        $p_short_description = str_replace("\r", "", $p_short_description);
+        $p_short_description = str_replace("\t", "", $p_short_description);
 
         $p_schedule = $term->field_program_timing_in_days['und'][0]['value'];
 
         $term_name = drupal_strtolower(str_replace(" ", "-", $term_name));
         $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
-        $cat_icon_img = sectionCategoryIconImg($value);
+        //$cat_icon_img = sectionCategoryIconImg($value);
+        $cat_icon_img = sectionPrgramIconImg($value);
         $p_short_description = strip_tags($p_short_description);
 
         $data[$listcount]['p_id'] = "$value";
@@ -645,32 +655,38 @@ function generateProgramSectionList($Program_section_list) {
 /**
  * function for  getLatestNodeTime
  * @pram int $tid
+ *
  * @return array
  */
 function getLatestNodeTime($tid) {
-
-    $query = db_select('taxonomy_index', 'txi');
-    $query->fields('txi', array('created'));
-    $query->condition('txi.tid', $tid);
-    $query->orderBy('txi.created', 'DESC');
-    $query->range(0, 1);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $published_statp = $result[0]['created'];
-    return $published_statp;
+    if ($tid) {
+        $query = db_select('taxonomy_index', 'txi');
+        $query->fields('txi', array('created'));
+        $query->condition('txi.tid', $tid);
+        $query->orderBy('txi.created', 'DESC');
+        $query->range(0, 1);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $published_statp = $result[0]['created'];
+        return $published_statp;
+    }
 }
 
 /**
  * function for  return anchor id
+ *
  * @param type $nid
+ *
  * @return $anchor_id
  */
 function getVedioAnchor($nid) {
-    $query = db_select('field_data_field_video_anchor', 'fda');
-    $query->fields('fda', array('field_video_anchor_target_id'));
-    $query->condition('fda.entity_id', $nid);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $anchor_id = $result[0]['field_video_anchor_target_id'];
-    return $anchor_id;
+    if ($nid) {
+        $query = db_select('field_data_field_video_anchor', 'fda');
+        $query->fields('fda', array('field_video_anchor_target_id'));
+        $query->condition('fda.entity_id', $nid);
+        $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+        $anchor_id = $result[0]['field_video_anchor_target_id'];
+        return $anchor_id;
+    }
 }
 
 /* Change request */
@@ -678,6 +694,7 @@ function getVedioAnchor($nid) {
 /**
  * function for generate VideoDetail
  * @pram int $nid
+ *
  * @return array
  */
 function generateVideoDetail($nid) {
@@ -708,9 +725,9 @@ function generateVideoDetail($nid) {
         $file_extra_large_img_url = completeFilePath($node->field_story_extra_large_image['und']['0']['fid']);
 
         $desc = strip_tags($node->field_story_expert_description['und']['0']['value']);
-        $desc = str_replace("\n","",$desc);
-        $desc = str_replace("\r","",$desc);
-        $desc = str_replace("\t","",$desc);
+        $desc = str_replace("\n", "", $desc);
+        $desc = str_replace("\r", "", $desc);
+        $desc = str_replace("\t", "", $desc);
 
         //related content
         $related = relatedContentNodeType($node->field_common_related_content['und']['0']['value']);
@@ -755,17 +772,37 @@ function generateVideoDetail($nid) {
         $photo_list_array[$listcount]['v_large_image'] = "$file_large_img_url";
         $photo_list_array[$listcount]['v_extralarge_image'] = "$file_extra_large_img_url";
         if (!empty($videotag['dailymotion'])) {
-            $photo_list_array[$listcount]['v_is_default_player'] = "1";
-            $photo_list_array[$listcount]['v_url'] = $videotag['dailymotion']['video_id'];
-            if ($videotag['dailymotion']['bitate_url']['download_url'])
-                $photo_list_array[$listcount]['v_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
-            else
-                $photo_list_array[$listcount]['v_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+            $videoids = get_video_in_fieldcollection_by_nid($nid);
+            foreach ($videoids as $keys => $video_value) {
+                if ($video_value->video_id != '') {
+                    $video_id = $video_value->video_id;
+                } elseif ($video_value->solr_video_id != '') {
+                    $video_id = $video_value->solr_video_id;
+                }
+            }
+            $inter_video_details = internal_video_bitrate_data($video_id);
+            $bitrate_url = $inter_video_details['bitrate_url'];
+            $file_url_1 = $inter_video_details['file_url'];
+            $photo_list_array[$listcount]['v_is_default_player'] = "0";
+            $photo_list_array[$listcount]['v_url'] = $bitrate_url;
+            $photo_list_array[$listcount]['v_download_url'] = $file_url_1;
+            //if ($videotag['dailymotion']['bitate_url']['download_url']) {
+                //$photo_list_array[$listcount]['v_download_url'] = $inter_video_details['bitrate_url'];
+            //} else
+                //$photo_list_array[$listcount]['v_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
         }
         elseif (!empty($videotag['migrated'])) {
+            $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+            foreach ($videoids as $keys => $video_value) {
+                $url = $video_value->field_migrated_video_url_value;
+            }
+            $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+            $bitrate_url = $data_video['bitrate_url'];
+            $mp4_url = $data_video['file_url'];
             $photo_list_array[$listcount]['v_is_default_player'] = "0";
-            $photo_list_array[$listcount]['v_url'] = $videotag['migrated']['video_path_mp4'];
-            $photo_list_array[$listcount]['v_download_url'] = $videotag['migrated']['video_path_mp4']; //$video_path_mp4
+            $photo_list_array[$listcount]['v_url'] = $bitrate_url; //$mp4_url;
+            //$video_path_mp4
+            $photo_list_array[$listcount]['v_download_url'] = $mp4_url;
         }
         $comment_cont = getCommentsCount($nid);
         $term_pri = taxonomy_term_load($field_primary_category_value);
@@ -789,6 +826,7 @@ function generateVideoDetail($nid) {
 /**
  * function for  generateProgramDetail
  * @pram int $nid
+ *
  * @return array
  */
 function generateProgramDetail($nid) {
@@ -828,9 +866,9 @@ function generateProgramDetail($nid) {
         $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
         $anchor_id = getVedioAnchor($nid);
         $desc = strip_tags($node->field_story_expert_description['und']['0']['value']);
-        $desc = str_replace("\n","",$desc);
-        $desc = str_replace("\r","",$desc);
-        $desc = str_replace("\t","",$desc);
+        $desc = str_replace("\n", "", $desc);
+        $desc = str_replace("\r", "", $desc);
+        $desc = str_replace("\t", "", $desc);
 
         //display all the video sounce check and format
         $source_type = $node->field_story_source_type['und']['0']['value'];
@@ -862,21 +900,33 @@ function generateProgramDetail($nid) {
         $photo_list_array[$listcount]['p_small_image'] = "$file_small_img_url";
         $photo_list_array[$listcount]['p_large_image'] = "$file_large_img_url";
         $photo_list_array[$listcount]['p_extralarge_image'] = "$file_extra_large_img_url";
-
         //if($video_path_mp4){
         if (!empty($videotag['dailymotion'])) {
-            $photo_list_array[$listcount]['p_is_default_player'] = "1";
-            $photo_list_array[$listcount]['p_url'] = $videotag['dailymotion']['video_id'];
-            if ($videotag['dailymotion']['bitate_url']['download_url'])
-                $photo_list_array[$listcount]['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
-            else
-                $photo_list_array[$listcount]['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+            $videoids = get_video_in_fieldcollection_by_nid($nid);
+            foreach ($videoids as $keys => $video_value) {
+                if ($video_value->video_id != '') {
+                    $video_id = $video_value->video_id;
+                } elseif ($video_value->solr_video_id != '') {
+                    $video_id = $video_value->solr_video_id;
+                }
+            }
+            $inter_video_details = internal_video_bitrate_data($video_id);
+            $photo_list_array[$listcount]['p_is_default_player'] = "0";
+            $photo_list_array[$listcount]['p_url'] = $inter_video_details['bitrate_url'];
+            $photo_list_array[$listcount]['p_download_url'] = $inter_video_details['file_url'];
         }
         elseif (!empty($videotag['migrated'])) {
+            $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+            foreach ($videoids as $keys => $video_value) {
+                $url = $video_value->field_migrated_video_url_value;
+            }
+            $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+            $bitrate_url = $data_video['bitrate_url'];
+            $mp4_url = $data_video['file_url'];
             $video_path_mp4 = $video_path_info['video_path_mp4'];
             $photo_list_array[$listcount]['p_is_default_player'] = "0";
-            $photo_list_array[$listcount]['p_url'] = $videotag['migrated']['video_path_mp4'];
-            $photo_list_array[$listcount]['p_download_url'] = $videotag['migrated']['video_path_mp4'];
+            $photo_list_array[$listcount]['p_url'] = $bitrate_url; //$mp4_url;
+            $photo_list_array[$listcount]['p_download_url'] = $mp4_url;
         }
         $field_primary_category_value = $node->field_primary_category['und']['0']['value'];
         $term = taxonomy_term_load($field_primary_category_value);
@@ -902,6 +952,7 @@ function generateProgramDetail($nid) {
 
 /**
  * function for featuresWidgetData list
+ *
  * @return array
  */
 function featuresWidgetData() {
@@ -914,7 +965,7 @@ function featuresWidgetData() {
 
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
-//join  for field value
+    //join  for field value
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
@@ -947,7 +998,7 @@ function featuresWidgetData() {
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid'));
 
 
-//end
+    //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result;
@@ -955,10 +1006,11 @@ function featuresWidgetData() {
 
 /**
  * function for  topstoriesList
+ *
  * @return array
  */
 function topstoriesList($source) {
-// variable declation
+    // variable declation
     $data_topstories = array();
     $data_newslist = array();
     $n_photo = array();
@@ -968,7 +1020,7 @@ function topstoriesList($source) {
     $home_list_count = 0;
     $widget_name = "top_stories_widget";
     $range_max = 15;
-    if($source == 'home'){
+    if ($source == 'home') {
         $range_max = 7;
     }
     $range_min = 0;
@@ -977,7 +1029,7 @@ function topstoriesList($source) {
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
     $query->leftJoin('taxonomy_index', 'ti', 'n.nid=ti.nid');
-//join  for field value
+    //join  for field value
     $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
@@ -1011,23 +1063,18 @@ function topstoriesList($source) {
     $query->fields('ti', array('tid'));
 
 
-//end
+    //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     $result_fs = featuresWidgetData();
     $result = array_merge($result_fs, $result_ts);
-    
-    if($source == "daily_capsule"){
-       return $result; 
-    }
-    
     //$result = array_merge($result_ts, $result_fs);
 
     $data_topstories['id'] = "0";
     $data_topstories['title'] = "Top Stories";
     $data_topstories['label'] = "Top Stories";
     $data_topstories['show_label'] = "0";
-    if($source == 'home'){
+    if ($source == 'home') {
         $data_topstories['id'] = "0";
         $data_topstories['order'] = "1";
         $data_topstories['type'] = "topstories";
@@ -1037,9 +1084,9 @@ function topstoriesList($source) {
         $data_topstories['n_template_id'] = "1";
     }
 
-// loop on top stories.
+    // loop on top stories.
     foreach ($result as $key => $value) {
-// varibale for json tag
+        // varibale for json tag
         $title = $value['title'];
         $type = $value['type'];
         $nid = $value['nid'];
@@ -1051,13 +1098,13 @@ function topstoriesList($source) {
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;
 
-// file url
+        // file url
         $file_small_img_url = completeFilePath($value['field_story_small_image_fid']);
         $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);
         $file_large_img_url = completeFilePath($value['field_story_large_image_fid']);
         $comment_cont = getCommentsCount($nid);
 
-// create date formating
+        // create date formating
         $firebase_url = get_node_firebase_weburl($nid);
 
         if ($created) {
@@ -1072,16 +1119,16 @@ function topstoriesList($source) {
         } else {
             $changed_datetime = date("Y-m-d H:i:s", $created);
         }
-//json tag writing
-//if ($type == "story") {
-// news list
+        //json tag writing
+        //if ($type == "story") {
+        // news list
 
         $n_rating = getRating($node);
         $n_magazine = array();
 
-// custom function for get img caption
+        // custom function for get img caption
         $caption = getImgCaption($value['field_story_medium_image_fid']);
-// custom function for get img byline
+        // custom function for get img byline
         $byline = getImgByline($value['field_story_medium_image_fid']);
         $is_developing = 0;
         $conf = getStoryConfigVal($nid);
@@ -1089,11 +1136,11 @@ function topstoriesList($source) {
             $is_developing = 1;
         }
         if ($type == 'story') {
-                $type = getStoryType($nid);
-            }
+            $type = getStoryType($nid);
+        }
         $prime_cat = getNodePrimeCatByNid($nid);
         $data_newslist[$home_list_count]['n_id'] = "$nid";
-//$data_newslist[$home_list_count]['n_template_id'] = "";
+        //$data_newslist[$home_list_count]['n_template_id'] = "";
         $data_newslist[$home_list_count]['n_type'] = "$type";
         $data_newslist[$home_list_count]['n_is_developing'] = "$is_developing";
         $data_newslist[$home_list_count]['n_is_sponsored'] = "0";
@@ -1115,155 +1162,14 @@ function topstoriesList($source) {
         $n_widget = array();
         $data_newslist[$home_list_count]['n_widget'] = $n_widget;
         $home_list_count++;
-//}
+        //}
     }
 
-    
-    if($source == 'home'){
+
+    if ($source == 'home') {
         $data_topstories['news'] = (array) $data_newslist;
-    }
-    else{
+    } else {
         $data_topstories['data'] = (array) $data_newslist;
     }
     return $data_topstories;
-}
-
-/* Change request v1 */
-/**
- * function for  dailyCapsuleApi
- * @return array
- */
-
-function dailyCapsuleApi(){
-    //p($_SERVER);
-    $data = array();
-    $order = array();
-    $newswrap = array();
-    $score_card = array();
-    $big_strory = array();
-    $top_strory = array();    
-    $breaking_news = array();
-    
-    $breaking_news = news_dailyCapsule();
-    
-    $data['status_code'] = "1";
-    $data['status_message'] = "";
-    
-    $order[0]['order_id'] = "1";
-    $order[0]['type'] = "newswrap";
-    $order[0]['name'] = "newswrap";
-    $order[0]['is_enabled'] = "1";    
-    $order[1]['order_id'] = "2";
-    $order[1]['type'] = "breaking";
-    $order[1]['name'] = "breaking";
-    $order[1]['is_enabled'] = "1";    
-    $order[2]['order_id'] = "3";
-    $order[2]['type'] = "web_view";
-    $order[2]['name'] = "score_card";
-    $order[2]['is_enabled'] = "1";    
-    $order[3]['order_id'] = "4";
-    $order[3]['type'] = "big_strory";
-    $order[3]['name'] = "big_strory";
-    $order[3]['is_enabled'] = "1";    
-    $order[4]['order_id'] = "5";
-    $order[4]['type'] = "top_strory";
-    $order[4]['name'] = "top_strory";
-    $order[4]['is_enabled'] = "1";
-    $data['data']['order'] = $order;
-    
-    $newswrap['title'] = "Newswrap";
-    $newswrap['icon_url'] = "http image url";
-    $newswrap['tag_title'] = "newsrap";
-    $newswrap['api'] = "https://feeds.intoday.in/rss-feeds/ver1.0/appboy/cb430068/indiatoday/notification/it_notification.json";
-    $data['data']['newswrap'] = $newswrap;
-    
-    $data['data']['breaking'] = $breaking_news;
-    
-    $score_card['title'] = "Scorecard";
-    $score_card['icon_url'] = "http image url";
-    $score_card['score_card_link'] = "http://media2.intoday.in/microsites/scorecard/newdesign/drop/scrapp_v3.html";
-    $data['data']['score_card'] = $score_card;
-    /* get big story data*/
-    $big_story_block_data = array();
-    $widget_name = "big_story_format_widget";
-    if (!empty($widget_name)) {
-      $query = db_select('itg_widget_order', 'iwo')->fields('iwo', array('nid', 'extra'))->orderBy('iwo.weight', 'ASC')->condition('widget', $widget_name);
-      $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-      foreach ($result as $big_story_data) {
-        if ($big_story_data['extra'] == 'big_story_live_tv_active' && $big_story_data['nid'] == 0) {
-          $big_story_block_data[] = array("is_live_tv" => TRUE);
-        }
-        elseif ($big_story_data['nid']) {
-          $big_story_block_data[] = array("node_load_data" => node_load($big_story_data['nid']));
-        }
-      }
-    }    
-    // varibale for feed tag
-    $desc = $big_story_block_data[1]['node_load_data']->field_common_short_description['und'][0]['value'];
-    $changed = $big_story_block_data[1]['node_load_data']->changed;
-    $changed_datetime = date("Y-m-d H:i:s", $changed);
-    $title = $big_story_block_data[1]['node_load_data']->title;
-    $type = $big_story_block_data[1]['node_load_data']->type;
-    $nid = $big_story_block_data[1]['node_load_data']->nid;
-    $created = $big_story_block_data[1]['node_load_data']->created;
-    $file_small_img_url = completeFilePath($big_story_block_data[1]['node_load_data']->field_story_small_image['und'][0]['fid']);
-    $file_medium_img_url = completeFilePath($big_story_block_data[1]['node_load_data']->field_story_medium_image['und'][0]['fid']);
-
-    $related = relatedContentNodeType($big_story_block_data[1]['node_load_data']->field_common_related_content['und'][0]['value'], $type);
-
-    $create_date = date("F d, Y", $created);
-    $create_datetime = date(DATE_ATOM, $created);
-    if($title){
-        $big_strory['title'] = "Big Strory";
-        $big_strory['icon_url'] = "http image url";
-        $big_strory['story_id'] = "$nid";
-        $big_strory['story_image'] = "$file_medium_img_url";
-        $big_strory['story_title'] = "$title";
-        $big_strory['story_short_desc'] = "$desc";
-        $big_strory['updated_datetime'] = "$changed_datetime";
-    }
-    
-    $data['data']['big_strory'] = $big_strory;
-    
-    $top_strory['title'] = "Top Strories";
-    $top_strory['icon_url'] = "http image url";
-    $top_strory['category_id'] = "0";
-    $top_strory['type'] = "newslist";
-    $top_strory['display_count'] = "5";
-    $data['data']['top_strory'] = $top_strory;
-    
-    
-    return $data;
-    
-}
-/**
- * function for news in dailyCapsule
- * @return array
- */
-function news_dailyCapsule(){
-    $breaking_news = array();
-    $news_list = array();    
-    $breaking_news['title'] = "Breaking News";
-    $breaking_news['icon_url'] = "http image url";    
-    $new_data = topstoriesList("daily_capsule");
-    $loopc = 0;
-    foreach ($new_data as $value) {        
-        $n_id = $value['nid'];
-        $n_title = $value['title'];
-        $n_type = $value['type'];
-        $updated_datetime = $value['created'];  
-        $changed_datetime = date("Y-m-d H:i:s", $updated_datetime);        
-        $news_list[$loopc]['n_id'] = "$n_id";
-        $news_list[$loopc]['n_title'] = "$n_title";
-        $news_list[$loopc]['n_type'] = "$n_type";
-        $news_list[$loopc]['updated_datetime'] = "$changed_datetime"; 
-        if($loopc == 4){
-            break;
-        }
-        $loopc++;
-    }      
-    
-    $breaking_news['news'] = $news_list;    
-    return $breaking_news;
 }

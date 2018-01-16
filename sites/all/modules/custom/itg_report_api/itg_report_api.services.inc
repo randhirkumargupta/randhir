@@ -298,7 +298,6 @@ function itg_report_api_resource() {
  */
 function itg_report_api_testing_report($token) {
   // code for check POST method only start
-    echo url('<front>'); die();
   $str = '{
 	  "status_code": "0",
 	  "status_message": "Customised Message",
@@ -437,7 +436,7 @@ function itg_report_api_get_story_api() {
  */
 function itg_report_api_story_video_photo_field_report() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']. " 01:01:00");
+    $start_date = strtotime($_GET['start_date']);
   }
   else {
     $start_date = $_GET['start_date'];
@@ -485,9 +484,9 @@ function itg_report_api_author_report() {
   $suffix = $start_date;
   $redis_key = "itg_report_api_author_report_" . $suffix;
 
-  $result_get = getRedis($redis_key);
+  //$result_get = getRedis($redis_key);
 
-  if ($result_get['key_value11'] != "") {
+  if ($result_get['key_value'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
@@ -495,7 +494,7 @@ function itg_report_api_author_report() {
     $jsondata = author_report($start_date);
     $jsondata = json_encode($jsondata);
     $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
+    //$result_set = setRedis($redis_key, $jsondata, $ttl);
   }
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
@@ -539,7 +538,7 @@ function itg_report_api_author_report_tvtn() {
  */
 function itg_report_api_auscovery_dashboard_web() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']. " 01:01:00");
+    $start_date = strtotime($_GET['start_date']);
   }
   else {
     $start_date = $_GET['start_date'];
@@ -578,7 +577,7 @@ function itg_report_api_auscovery_dashboard_web() {
  */
 function itg_report_api_auscovery_dashboard_mob() {
   if ($_GET['start_date'] != "na") {
-    $start_date = strtotime($_GET['start_date']. " 01:01:00");
+    $start_date = strtotime($_GET['start_date']);
   }
   else {
     $start_date = $_GET['start_date'];
@@ -647,16 +646,16 @@ function itg_report_api_detail() {
   $redis_key = "itg_report_api_data_list_report" . $suffix;
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
+  //if ($result_get['key_value'] != "") {
+    //$jsondata = $result_get['key_value'];
+  //}
+  //else {
     // call function from return data..
     $jsondata = get_datalist_report($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
     $jsondata = json_encode($jsondata);
-    $ttl = 3;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+    //$ttl = 30; //DEFAULT_REDIS_EXPIRE_TIME;
+    //$result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
 
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
