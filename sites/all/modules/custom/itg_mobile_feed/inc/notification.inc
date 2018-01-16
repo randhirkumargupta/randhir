@@ -397,7 +397,7 @@ function xml_output_data($all_data) {
     $cat = taxonomy_term_load($primary_cat);
     $section = $cat->name;
     $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-    $kicker_image = '';
+    $kicker_image = isset($msg_node->field_story_medium_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_medium_image['und'][0]['uri']) : '';
     $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
     if ($msg_node->type == 'story') {
       $url = 'story' . $msg_node->nid . '.xml';
@@ -422,13 +422,13 @@ function xml_output_data($all_data) {
       $web_url = $data->mobile_url;
       $url = '/hltapps/api/livetv.xml';
       $section = $data->category;
-      $output .= "<article><title>" . xml_cdata_filter($data->message) . "</title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><url>" . $url . "</url><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+      $output .= "<article><title>" . xml_cdata_filter($data->message) . "</title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
     }
     else if ($data->content_id == '0' && empty($data->custom_data) && $data->message_url == '') {
-      $output .= "<article><title>" . xml_cdata_filter($data->message) . "</title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $thumb_img . "</kickerimage><url></url><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
+      $output .= "<article><title>" . xml_cdata_filter($data->message) . "</title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url></url><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
     }
     else {
-      $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $thumb_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+      $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
     }
   }
   return $output;
