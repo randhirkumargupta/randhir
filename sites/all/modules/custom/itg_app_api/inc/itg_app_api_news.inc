@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions for news API
+ * Inc file contains the functions for news API 
  */
 
 /**

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions for homePgae API
+ * Inc file contains the functions for homePgae API 
  */
 
 /**

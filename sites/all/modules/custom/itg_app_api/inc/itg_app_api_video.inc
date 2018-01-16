@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions video API
+ * Inc file contains the functions video API 
  */
 
 /**
