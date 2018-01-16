@@ -110,7 +110,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $new_url = drupal_get_path_alias($source_url->redirect);
       $url_re = 'https://www.indiatoday.in/'.$new_url;
     } else {
-      if ($_SERVER['HTTP_HOST'] == 'm.indiatoday.in') {
+      if ($_SERVER['HTTP_HOST'] == 'm.indiatoday.in' || $_SERVER['HTTP_HOST'] == 'indiatoday.intoday.in') {
         if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'story')) ) {  // lite/story
           $storyarg = $arg[4];
           $storyarg_exp = explode('.html', $storyarg);
@@ -278,7 +278,7 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
   } else if ((!empty($arg[0]) && ($arg[0] == 'feedback.jsp')) && (!empty($_GET['refUrl']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
       $refurl = $_GET['refUrl'];
       drupal_goto($refurl, array(), 301);
-  } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter.jsp')) && (!empty($_GET['matchid']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
+  } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter.jsp' || $arg[1] == 'matchcenter-new.jsp')) && (!empty($_GET['matchid']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
       $matchid = $_GET['matchid'];
       $newmatchurl = $base_url.'/scorecard/matchcenter/'.$matchid;
       drupal_goto($newmatchurl, array(), 301);
