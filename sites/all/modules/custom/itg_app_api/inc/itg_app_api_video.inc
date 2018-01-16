@@ -1138,6 +1138,9 @@ function topstoriesList($source) {
         if ($type == 'story') {
             $type = getStoryType($nid);
         }
+        if ($type == 'videogallery') {
+            $type = "video";
+        }
         $prime_cat = getNodePrimeCatByNid($nid);
         $data_newslist[$home_list_count]['n_id'] = "$nid";
         //$data_newslist[$home_list_count]['n_template_id'] = "";

@@ -192,6 +192,9 @@ function homePageJsonPackagelist_india() {
             if ($type == 'story') {
                 $type = getStoryType($nid);
             }
+            if ($type == 'videogallery') {
+                $type = "video";
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -393,6 +396,9 @@ function homePageJsonPackagelist_lifestyle() {
             }
             if ($type == 'story') {
                 $type = getStoryType($nid);
+            }
+            if ($type == 'videogallery') {
+                $type = "video";
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
@@ -599,6 +605,9 @@ function homePageJsonPackagelist_world() {
             if ($type == 'story') {
                 $type = getStoryType($nid);
             }
+            if ($type == 'videogallery') {
+                $type = "video";
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
             $data_newslist[$listcount]['n_type'] = "$type";
@@ -778,6 +787,9 @@ function homePageJsonTopstories() {
             if ($type == 'story') {
                 $type = getStoryType($nid);
             }
+            if ($type == 'videogallery') {
+                $type = "video";
+            }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$home_list_count]['n_id'] = "$nid";
             $data_newslist[$home_list_count]['n_type'] = "$type";
@@ -956,6 +968,9 @@ function homePageJsonNewslist_india() {
             }
             if ($type == 'story') {
                 $type = getStoryType($nid);
+            }
+            if ($type == 'videogallery') {
+                $type = "video";
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
@@ -1163,6 +1178,9 @@ function homePageJsonNewslist_world() {
             }
             if ($type == 'story') {
                 $type = getStoryType($nid);
+            }
+            if ($type == 'videogallery') {
+                $type = "video";
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";
@@ -1738,6 +1756,9 @@ function homePageJsonNewslist_lifestyle() {
             }
             if ($type == 'story') {
                 $type = getStoryType($nid);
+            }
+            if ($type == 'videogallery') {
+                $type = "video";
             }
             $prime_cat = getNodePrimeCatByNid($nid);
             $data_newslist[$listcount]['n_id'] = "$nid";

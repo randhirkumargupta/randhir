@@ -162,6 +162,9 @@ function generateNewsCategoryList($tid, $pageno) {
       if ($type == 'story') {
         $type = getStoryType($nid);
       }
+      if ($type == 'videogallery') {
+        $type = "video";
+      }
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
