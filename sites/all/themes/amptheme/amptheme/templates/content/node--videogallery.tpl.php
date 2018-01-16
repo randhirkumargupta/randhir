@@ -58,7 +58,7 @@
                        src="<?php print $video_urls;?>"  
                        layout="responsive"
                        controls>
-                       <source type="video/webm" src="<?php $video_urls;?>">
+                       <source type="video/webm" src="<?php print $video_urls;?>">
               </amp-video>
             <?php
             }

@@ -111,8 +111,17 @@ function itg_newsletter_content_preview_data($download_action = TRUE) {
     else {
       $thumbnail = $base_url . '/' . drupal_get_path('theme', 'itg') . '/images/newlatter_default_350X350.jpg';
     }
-    $link = FRONT_URL . 'node/' . $news_detail->nid;
-    $content .= '<tr class="node-'.$news_detail->nid.'">
+     $url = explode('/', FRONT_URL);
+     if(count($url) == 4) {
+        $front_url = FRONT_URL;
+      }
+      else {
+        $front_url = FRONT_URL . '/';
+      }
+
+      $link = $front_url . drupal_get_path_alias('node/' . $news_detail->nid);
+
+      $content .= '<tr class="node-'.$news_detail->nid.'">
                <td style="padding: 20px 10px 20px 20px; vertical-align: top; border-bottom: 2px solid #d9d9d9;"><img style="width:100px; height: 62px" src="' . $thumbnail . '" alt="" title="" /></td>
                <td style="padding: 20px 20px 20px 10px; border-bottom: 2px solid #d9d9d9;">
                 <h2 style="margin: 0; color: #337ab7; font-size: 18px; padding-bottom: 10px;">' . l($title , $link , array('attributes' => array('target' => '_blank'))) . '</h2>
