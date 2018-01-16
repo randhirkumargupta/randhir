@@ -12,7 +12,7 @@
  * {@inheritdoc}
  *
  * ##Code started for new block creation as per suggested sheet 6 block name have been given as follows##
- * 1.Page pusher 1x1
+ * 1.Page pusher 1x1.
  * 2.Overlay 1x1
  * 3.Super Banner (Top Nav) 728x90
  * 4.Super Banner (Bottom nav) 728x90
@@ -919,6 +919,8 @@ function get_header_body_start_end_code() {
   }
   else if ($arg[0] == 'node' && is_numeric($arg[1])) {
     $node_object = menu_get_object();
+    $node_nid = $node_object->nid;
+    $node_type = $node_object->type;
     $tid = isset($node_object->field_primary_category[$node_object->language][0]['value']) ? $node_object->field_primary_category[$node_object->language][0]['value'] : NULL;
     if (isset($tid) && !empty($tid)) {
       $taxonomy_array = taxonomy_get_parents_all($tid);
@@ -964,6 +966,18 @@ function get_header_body_start_end_code() {
             if (strpos($header['value'], '[ITGD:ads:2]')) {
               $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
             }
+            // for story
+            if(isset($node_type) && $node_type = 'story') {
+              if (strpos($header['value'], '[ITGD:ads:3]')) {
+                $header['value'] = str_replace('[ITGD:ads:3]', $node_type , $header['value']);
+              }
+              if (strpos($header['value'], '[ITGD:ads:4]')) {
+                $header['value'] = str_replace('[ITGD:ads:4]', $node_nid , $header['value']);
+              }
+            } else {
+              $header['value'] = str_replace('[ITGD:ads:3]', '' , $header['value']);
+              $header['value'] = str_replace('[ITGD:ads:4]', '' , $header['value']);
+            }          
           }
           $adsheaderbody['header'][] = $header['value'];
         }
@@ -985,6 +999,18 @@ function get_header_body_start_end_code() {
             }
             if (strpos($header['value'], '[ITGD:ads:2]')) {
               $header['value'] = str_replace('[ITGD:ads:2]', $category_geader_s, $header['value']);
+            }
+            // for story
+            if(isset($node_type) && $node_type = 'story') {
+              if (strpos($header['value'], '[ITGD:ads:3]')) {
+                $header['value'] = str_replace('[ITGD:ads:3]', $node_type , $header['value']);
+              }
+              if (strpos($header['value'], '[ITGD:ads:4]')) {
+                $header['value'] = str_replace('[ITGD:ads:4]', $node_nid , $header['value']);
+              }
+            } else {
+              $header['value'] = str_replace('[ITGD:ads:3]', '' , $header['value']);
+              $header['value'] = str_replace('[ITGD:ads:4]', '' , $header['value']);
             }
           }
           $adsheaderbody['header'][] = $header['value'];

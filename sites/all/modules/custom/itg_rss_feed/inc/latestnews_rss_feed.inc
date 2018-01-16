@@ -56,8 +56,10 @@ function get_latest_news_item_rss() {
   $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('kt', array('field_story_kicker_text_value'));
+  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
+  $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
-  $query->condition('n.type', $type, 'IN');
+  $query->condition('n.type', 'story', '=');
   $query->condition('ti.tid', $top_stories_section, '=');
   $query->orderBy('n.created', 'DESC');
   $query->groupBy('n.nid')->range(0, 1);
@@ -70,6 +72,8 @@ function get_latest_news_item_rss() {
   $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('kt', array('field_story_kicker_text_value'));
+  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
+  $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
   $query->condition('ti.tid', $must_read_section, '=');

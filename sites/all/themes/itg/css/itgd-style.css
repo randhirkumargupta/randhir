@@ -582,7 +582,7 @@ ul.pron-cons-img li img { margin-top: -12px!important;}
 footer .footer-top .footer-social-link{display:block; opacity:0;}
 .front .itg-top-section .home-top-story .droppable{height: auto;}
 .tech-layout-page .auto-block-2,.auto-layout-page .auto-block-2, .education-layout-page .itg-layout-672 .droppable .auto-block-2,.sport-home-layout-page .itg-layout-615 .auto-block-2{height: auto;}
-
+#block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .speaker-designation{width:100%; padding-left:0;}
 }
 
 .view-display-id-block_5 .detail {  position: relative; top: -18px;}
@@ -709,3 +709,6 @@ background:none;
 .section-pti-feed .view-category-wise-content-list .catagory-listing .detail h3{font-size: 1.2rem;font-weight: normal;line-height: 24px;}
 .section-pti-feed .view-category-wise-content-list .catagory-listing{border-bottom: 1px dotted #ccc; }
 .section-pti-feed .view-category-wise-content-list .item-list{clear: both;margin-top: 20px;overflow: hidden;}
+.magazin-lhs-top .magazin-bottom ul li{
+ float:none !important;
+}

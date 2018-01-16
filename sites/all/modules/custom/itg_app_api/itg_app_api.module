@@ -1872,7 +1872,14 @@ function formateNodeBodyToken($n_body) {
   // add AD block after 1st <p> end
   $n_body = str_replace('<img', '<img style="width:100%;height: auto;"', $n_body);
   $n_body = str_replace('<iframe', '<iframe style="width:100%;height: auto;"', $n_body);
+  $n_body = str_replace('<div class="body_caption">', '<div class="body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;">', $n_body);
   $n_body = fbiframeupdtae($n_body);
+  //jira:78 start
+  $n_body = str_replace('<div class="quotes"', '<div class="quotes" style="border-left:2px solid #eb5a5b; "', $n_body);
+  $n_body = str_replace('<blockquote', '<blockquote" style="padding: 0.5em !important; display:block;"', $n_body);
+  $n_body = str_replace('//www.youtube.com', 'https://www.youtube.com', $n_body);
+  $n_body = str_replace('https:https://www.youtube.com', 'https://www.youtube.com', $n_body);
+  //jira:78 end
   $data['n_body'] = $n_body;
   $data['poll_id'] = $poll_id;
   return $data;
@@ -1887,15 +1894,16 @@ function formateNodeBodyToken($n_body) {
 function fbiframeupdtae($n_body) {
   preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $n_body, $iframes_m);
   foreach ($iframes_m as $iframes) {
-
-
     foreach ($iframes as $iframes_s) {
       preg_match('/src="([^"]+)"/', $iframes_s, $match);
       $find = $iframes_s;
-      $find_up = str_replace('auto', '80vh', $iframes_s);
+      $find_up = str_replace('auto', '168vw', $iframes_s);
+      $find_youtube = str_replace('auto', '52vw', $iframes_s);
       if (strpos($match[1], 'https://www.facebook.com') !== FALSE) {
-
         $n_body = str_replace($find, $find_up, $n_body);
+      }
+      if (strpos($match[1], 'https://www.youtube.com') !== FALSE) {
+        $n_body = str_replace($find, $find_youtube, $n_body);
       }
       $loop2++;
     }
@@ -2004,5 +2012,19 @@ function getNodePrimeCatByNid($nid) {
     $field_primary_category_value = $result[0]['field_primary_category_value'];
     return taxonomy_term_load($field_primary_category_value);
   }
+}
+
+/**
+ * function get section/category icon img
+ * @pram int $tid
+ *
+ * @return string url
+ */
+function sectionPrgramIconImg($tid) {
+  $query = db_select('field_data_field_programme_category_image', 'icimg');
+  $query->fields('icimg', array('field_programme_category_image_fid'));
+  $query->condition('icimg.entity_id', $tid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return completeFilePath($result[0]['field_programme_category_image_fid']);
 }
 

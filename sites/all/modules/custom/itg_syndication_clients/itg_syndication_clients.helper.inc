@@ -224,7 +224,7 @@ function get_dailyhunt_sections_for_feed() {
     '1206600' => 'gossip.xml',
     '1206578' => 'india.xml',
     '1206567' => 'lifestyle.xml',
-    '1206514' => 'magazine.xml',
+    '1206598' => 'magazine.xml',
     '1206572' => 'mailtoday.xml',
     '1206533' => 'movies.xml',
     '1206550' => 'sports.xml',

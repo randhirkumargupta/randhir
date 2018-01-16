@@ -392,7 +392,9 @@ function itg_users_views_pre_render(&$view) {
  *
  */
 function itg_users_user_logout($account) {
+
   setrawcookie("itg_forced_login", "null", -1,'/', SSO_COOKIE_DOMAIN);
+
   $_GET['destination'] = 'user';
 }
 

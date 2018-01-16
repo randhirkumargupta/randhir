@@ -653,13 +653,20 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
     $prog['p_extralarge_image'] = "$file_extra_large_img_url";
 
     if (!empty($videotag['dailymotion'])) {
-      $prog['p_is_default_player'] = "1";
-      $prog['p_url'] = $videotag['dailymotion']['video_id'];
-      $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
-      if ($videotag['dailymotion']['bitate_url']['download_url']) {
-        $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
+      $videoids = get_video_in_fieldcollection_by_nid($res['nid']);
+      foreach ($videoids as $keys => $video_value) {
+        if ($video_value->video_id != '') {
+          $video_id = $video_value->video_id;
+        } elseif ($video_value->solr_video_id != '') {
+          $video_id = $video_value->solr_video_id;
+        }
       }
-      else $prog['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+      $inter_video_details = internal_video_bitrate_data($video_id);
+      $bitrate_url = $inter_video_details['bitrate_url'];
+      $file_url_1 = $inter_video_details['file_url'];       
+      $prog['p_is_default_player'] = "0";
+      $prog['p_url'] = $bitrate_url; //$videotag['dailymotion']['video_id'];
+      $prog['p_download_url'] = $file_url_1; //$videotag['dailymotion']['bitate_url']['download_url'];
     }
     elseif (!empty($videotag['migrated'])) {
       $prog['p_is_default_player'] = "0";
@@ -805,12 +812,21 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
       $prog['p_extralarge_image'] = "$file_extra_large_img_url";
 
       if (!empty($videotag['dailymotion'])) {
-        $prog['p_is_default_player'] = "1";
-        $prog['p_url'] = $videotag['dailymotion']['video_id'];
-        if ($videotag['dailymotion']['bitate_url']['download_url']) {
-          $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
+        $videoids = get_video_in_fieldcollection_by_nid($res['nid']);
+        foreach ($videoids as $keys => $video_value) {
+          if ($video_value->video_id != '') {
+            $video_id = $video_value->video_id;
+          } elseif ($video_value->solr_video_id != '') {
+            $video_id = $video_value->solr_video_id;
+          }
         }
-        else $prog['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+        $inter_video_details = internal_video_bitrate_data($video_id);
+        $bitrate_url = $inter_video_details['bitrate_url'];
+        $file_url_1 = $inter_video_details['file_url']; 
+      
+        $prog['p_is_default_player'] = "0";
+        $prog['p_url'] = $bitrate_url; //$videotag['dailymotion']['video_id'];
+        $prog['p_download_url'] = $file_url_1;
       }
       elseif (!empty($videotag['migrated'])) {
         $prog['p_is_default_player'] = "0";

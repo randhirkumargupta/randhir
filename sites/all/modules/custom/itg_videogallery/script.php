@@ -1292,13 +1292,14 @@ function itg_common_node_for_photogallery_update_image() {
  * This function use for update image in photogallery
  */
 function itg_common_node_for_story_update_image() {
-  $data_list = check_node_is_maped_all('story');
-  $query = db_select('migrate_map_itgstorylist', 'n');
+  //$data_list = check_node_is_maped_all('story');
+ $query = db_select('migrate_map_itgstorylist', 'n');
   $query->addField('n', 'destid1', 'nid');
   $query->join('field_data_field_story_category', 'fdfsc', 'fdfsc.entity_id = n.destid1');
-  $query->condition('fdfsc.field_story_category_tid', '1 206640', '!= ');
-  $query->condition('n.destid1', $data_list, 'NOT IN')->groupBy('n.destid1')->range(0, 100);
+  $query->condition('fdfsc.field_story_category_tid', '1206640', '!= ');
+  $query->condition('n.destid1', 210434, '>')->groupBy('n.destid1');
   $result = $query->execute()->fetchAll();
+
   foreach ($result as $res) {
     $extra_large_image = array();
     $large_image = array();
@@ -1348,11 +1349,11 @@ function itg_common_node_for_story_update_image() {
                     ->execute()
                     ->rowCount();
                 if ($insert_count) {
-                  $image_name = urlencode($image_name);
+                  // = urlencode($image_name);
                   $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
                 }
                 else {
-                  $image_name = urlencode($image_name);
+                //  $image_name = urlencode($image_name);
                   $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
                 }
                 if ($file) {
@@ -1393,11 +1394,11 @@ function itg_common_node_for_story_update_image() {
                     ->execute()
                     ->rowCount();
                 if ($insert_count) {
-                  $image_name = urlencode($image_name);
+                  //$image_name = urlencode($image_name);
                   $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
                 }
                 else {
-                  $image_name = urlencode($image_name);
+                 // $image_name = urlencode($image_name);
                   $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
                 }
                 if ($file) {
@@ -1443,11 +1444,11 @@ function itg_common_node_for_story_update_image() {
                     ->execute()
                     ->rowCount();
                 if ($insert_count) {
-                  $image_name = urlencode($image_name);
+                  //$image_name = urlencode($image_name);
                   $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
                 }
                 else {
-                  $image_name = urlencode($image_name);
+                 // $image_name = urlencode($image_name);
                   $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
                 } if ($file) {
                   $inserted_data = db_delete('s3fs_file')->condition('uri', $fid_photo_story_uri, '=')->execute();
@@ -1468,7 +1469,7 @@ function itg_common_node_for_story_update_image() {
         $file_image = file_create_url($extra_large_image['uri']);
         $imagedata = file_get_contents($file_image);
         if ($imagedata === FALSE) {
-          print $file_image;
+   
           _insert_failed_image($res->nid, $extra_large_image ['fid']);
         }
         else {
@@ -1485,11 +1486,11 @@ function itg_common_node_for_story_update_image() {
                 ->execute()
                 ->rowCount();
             if ($insert_count) {
-              $image_name = urlencode($image_name);
+             // $image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
             }
             else {
-              $image_name = urlencode($image_name);
+             // $image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
             }
             if ($file) {
@@ -1508,7 +1509,7 @@ function itg_common_node_for_story_update_image() {
         $file_image = file_create_url($large_image['uri']);
         $imagedata = file_get_contents($file_image);
         if ($imagedata === FALSE) {
-          print $file_image;
+       //   print $file_image;
           _insert_failed_image($res->nid, $large_image ['fid']);
         }
         else {
@@ -1525,11 +1526,11 @@ function itg_common_node_for_story_update_image() {
                 ->execute()
                 ->rowCount();
             if ($insert_count) {
-              $image_name = urlencode($image_name);
+             // $image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
             }
             else {
-              $image_name = urlencode($image_name);
+             // $image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
             }
             if ($file) {
@@ -1549,7 +1550,7 @@ function itg_common_node_for_story_update_image() {
         $file_image = file_create_url($medium_image['uri']);
         $imagedata = file_get_contents($file_image);
         if ($imagedata === FALSE) {
-          print $file_image;
+        //  print $file_image;
           _insert_failed_image($res->nid, $medium_image ['fid']);
         }
         else {
@@ -1566,11 +1567,11 @@ function itg_common_node_for_story_update_image() {
                 ->execute()
                 ->rowCount();
             if ($insert_count) {
-              $image_name = urlencode($image_name);
+            //  $image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
             }
             else {
-              $image_name = urlencode($image_name);
+             // $image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
             }
             if ($file) {
@@ -1590,7 +1591,7 @@ function itg_common_node_for_story_update_image() {
         $file_image = file_create_url($small_image['uri']);
         $imagedata = file_get_contents($file_image);
         if ($imagedata === FALSE) {
-          print $file_image;
+          //print $file_image;
           _insert_failed_image($res->nid, $small_image ['fid']);
         }
         else {
@@ -1607,11 +1608,11 @@ function itg_common_node_for_story_update_image() {
                 ->execute()
                 ->rowCount();
             if ($insert_count) {
-              $image_name = urlencode($image_name);
+              //$image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
             }
             else {
-              $image_name = urlencode($image_name);
+            //  $image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
             }
             if ($file) {
@@ -1648,11 +1649,11 @@ function itg_common_node_for_story_update_image() {
                 ->execute()
                 ->rowCount();
             if ($insert_count) {
-              $image_name = urlencode($image_name);
+            //  $image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
             }
             else {
-              $image_name = urlencode($image_name);
+             // $image_name = urlencode($image_name);
               $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
             }
             if ($file) {
@@ -1687,11 +1688,11 @@ function itg_common_node_for_story_update_image() {
                   ->execute()
                   ->rowCount();
               if ($insert_count) {
-                $image_name = urlencode($image_name);
+               // $image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
               }
               else {
-                $image_name = urlencode($image_name);
+                //$image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
               }
               if ($file) {
@@ -1729,11 +1730,11 @@ function itg_common_node_for_story_update_image() {
                   ->execute()
                   ->rowCount();
               if ($insert_count) {
-                $image_name = urlencode($image_name);
+               // $image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
               }
               else {
-                $image_name = urlencode($image_name);
+                //$image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
               }
               if ($file) {
@@ -1769,11 +1770,11 @@ function itg_common_node_for_story_update_image() {
                   ->execute()
                   ->rowCount();
               if ($insert_count) {
-                $image_name = urlencode($image_name);
+              //  $image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
               }
               else {
-                $image_name = urlencode($image_name);
+                //$image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
               }
               if ($file) {
@@ -1809,11 +1810,11 @@ function itg_common_node_for_story_update_image() {
                   ->execute()
                   ->rowCount();
               if ($insert_count) {
-                $image_name = urlencode($image_name);
+               // $image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
               }
               else {
-                $image_name = urlencode($image_name);
+               // $image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
               }
               if ($file) {
@@ -1849,11 +1850,11 @@ function itg_common_node_for_story_update_image() {
                   ->execute()
                   ->rowCount();
               if ($insert_count) {
-                $image_name = urlencode($image_name);
+              //  $image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
               }
               else {
-                $image_name = urlencode($image_name);
+                //$image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
               }
               if ($file) {
@@ -1889,11 +1890,11 @@ function itg_common_node_for_story_update_image() {
                   ->execute()
                   ->rowCount();
               if ($insert_count) {
-                $image_name = urlencode($image_name);
+                //$image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_RENAME);
               }
               else {
-                $image_name = urlencode($image_name);
+                //$image_name = urlencode($image_name);
                 $file = file_unmanaged_save_data($imagedata, file_default_scheme() . '://' . $filedir . '/' . $image_name, FILE_EXISTS_REPLACE);
               }
               if ($file) {

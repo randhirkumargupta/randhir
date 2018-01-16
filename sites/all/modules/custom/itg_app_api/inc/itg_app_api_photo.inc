@@ -306,14 +306,15 @@ function generatePhotoDetailList($galleryimg) {
       if (!$fid > 0) {
         $fid = $fc->field_images['und'][0]['fid'];
       }
-      $uri = $fc->field_images['und'][0]['filename'];
+      //$uri = $fc->field_images['und'][0]['filename'];
+      $uri = $fc->field_images['und'][0]['uri'];
       $file_uri = file_create_url($uri);
       $fid_file = $fid;
       $img_url = completeFilePath($fid_file);
       $caption = $fc->field_image_caption['und'][0]['value'];
 
       $byline = $fc->field_credit['und'][0]['value'];
-      $photo_story_img = image_style_url('photo_slider_753x543', $uri);
+      $photo_story_img = $file_uri; //image_style_url('photo_slider_753x543', $uri);
       $photo_list_array[$listcont]['p_id'] = "$fid";
       $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
       $photo_list_array[$listcont]['p_credit'] = "$byline";
@@ -440,9 +441,10 @@ function generatePhotoStoryDetailList($nid) {
       //$byline = getImgByline($photo_story_img_fid);
       $caption = strip_tags($caption);
       $img_info = getInfoData($large_image_fid);
-      $image_courtesy = $img_info['image_courtesy'];
-      $image_caption = strip_tags($img_info['image_caption']);
-
+      $photo_image_info = itg_story_get_image_info($photo_story_img_fid);
+      $image_caption = strip_tags($photo_image_info[0]->image_caption);
+      $image_courtesy = strip_tags($photo_image_info[0]->image_courtesy);
+      
       $photo_story_desc = strip_tags($photo_story_desc);
       $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
       $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
