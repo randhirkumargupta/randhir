@@ -139,13 +139,16 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
     if (!empty($result)) {
             foreach ($result as $widget_data) {
               $webcast_val = '';
+              $is_sponsor = FALSE;
               $node_load_data = unserialize($widget_data->node_data);
-              if (isset($node_load_data->field_story_configurations['und'])) {
+              if ((isset($node_load_data->field_story_configurations['und'])) && (!empty($node_load_data->field_story_configurations['und']))) {
                 foreach ($node_load_data->field_story_configurations['und'] as $id => $id_arr) {
                   if ($id_arr['value'] == 'webcast') {
                     $webcast_val = $node_load_data->field_story_embed_webcast['und'][0]['value'];
-                    break;
                   }
+                  if ($id_arr['value'] == 'sponsor') {
+					$is_sponsor = TRUE;
+				  }
                 }
               }
             $emoji_position1 = isset($node_load_data->field_emoji_position['und'][0]['value']) ? $node_load_data->field_emoji_position['und'][0]['value'] : "";
@@ -216,6 +219,7 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               'field_story_extra_large_image_title' => isset($node_load_data->field_story_extra_large_image['und'][0]['title']) ? $node_load_data->field_story_extra_large_image['und'][0]['title'] : "",
               'node_obj' => $node_smily_data,
               'webcast_val' => $webcast_val,
+              'is_spnoser' => $is_sponsor,
             );
         }
     }
