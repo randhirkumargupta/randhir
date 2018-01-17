@@ -49,7 +49,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $query->condition('n.type', $type);
   }
   //$query->condition('ti.tid', '1206640', '<>');
-  $query->condition('repr.field_reporter_email_id_value', '', '<>');
+  $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
   $query->range($range_min, $range_max);
@@ -138,7 +138,7 @@ function auscovery_dashboard_mob($start_date, $end_date) {
     $query->condition('n.type', $type);
   }
   //$query->condition('ti.tid', '1206640', '<>');
-  $query->condition('repr.field_reporter_email_id_value', '', '<>');
+  $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
   $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
   $query->range($range_min, $range_max);
