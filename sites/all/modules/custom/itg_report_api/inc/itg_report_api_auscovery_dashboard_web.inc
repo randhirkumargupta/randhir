@@ -16,7 +16,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $data = array();
   $list = array();
   $loop_cont = 0;
-  $item_per_page = 10;
+  $item_per_page = 100;
   $range_max = $item_per_page;
   $pageno = 0;
   $range_min = 0;
@@ -34,6 +34,8 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));
   $query->fields('fpc', array('field_primary_category_value'));  
   $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('byli', array('byline_id'));
+  $query->fields('repr', array('field_reporter_email_id_value'));
   //end
   if ($start_date != "na") {    
     $query->condition('n.created', $start_date, ">=");
@@ -46,7 +48,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
   }
   $query->condition('ti.tid', '1206640', '<>');
   $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
-  $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
+  $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->range($range_min, $range_max);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
     $nid = $resvalue['nid'];
@@ -63,8 +65,8 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $created_by = getUserProfile_report($uid);    
     $created_datetime = date("Y-m-d H:i:s", $created);
     $prime_cat = getNodePrimeCatByNid($nid);
-    $author_id = $created_by['uid'];
-    $author_email = $created_by['mail'];
+    $author_id = $created_by['byline_id'];
+    $author_email = $created_by['field_reporter_email_id_value'];
     $author_name = $created_by['name'];
     $author_status = $created_by['status'];
     $profile_type = $created_by['field_reporter_profile_type_value'];
