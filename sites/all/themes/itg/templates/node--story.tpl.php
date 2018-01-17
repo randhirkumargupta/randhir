@@ -235,7 +235,7 @@ if (!empty($content)):
                    
                  ?> 
                   <ul class="<?php print $date_update_class; ?>">
-                    <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?></li>
+                    <?php if ($sponsor_text == ''): ?> <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?></li> <?php endif; ?>
                     <?php 
                     if ($cunt == 1) {
                               if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
