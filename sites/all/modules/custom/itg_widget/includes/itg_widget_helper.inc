@@ -147,8 +147,8 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
                     $webcast_val = $node_load_data->field_story_embed_webcast['und'][0]['value'];
                   }
                   if ($id_arr['value'] == 'sponsor') {
-					$is_sponsor = TRUE;
-				  }
+                    $is_sponsor = TRUE;
+                  }
                 }
               }
             $emoji_position1 = isset($node_load_data->field_emoji_position['und'][0]['value']) ? $node_load_data->field_emoji_position['und'][0]['value'] : "";
