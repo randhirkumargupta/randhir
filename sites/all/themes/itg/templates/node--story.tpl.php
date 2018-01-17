@@ -290,7 +290,7 @@ if (!empty($content)):
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>                
                     <?php } ?>
                     <?php
-                    if (!empty($byline_id)) {
+                    if ((!empty($byline_id)) && ($sponsor_text == '')) {
                       print itg_story_follow_unfollow_print($value['nid'], 'author', 'follow_story', '');
                     }
                     ?>
