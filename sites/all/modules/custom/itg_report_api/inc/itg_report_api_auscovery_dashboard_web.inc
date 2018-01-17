@@ -34,7 +34,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));
   $query->fields('fpc', array('field_primary_category_value'));  
   $query->fields('npd', array('field_itg_content_publish_date_value'));
-  $query->fields('byli', array('byline_id'));
+  $query->fields('byli', array('byline_id', 'publish_status'));
   $query->fields('repr', array('field_reporter_email_id_value'));
   //end
   if ($start_date != "na") {    
@@ -61,15 +61,14 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $field_primary_category_value = $resvalue['field_primary_category_value'];
     $body_value = $resvalue['body_value'];
     $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
-    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
-    $created_by = getUserProfile_report($uid);    
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);    $   
     $created_datetime = date("Y-m-d H:i:s", $created);
     $prime_cat = getNodePrimeCatByNid($nid);
-    $author_id = $created_by['byline_id'];
-    $author_email = $created_by['field_reporter_email_id_value'];
-    $author_name = $created_by['name'];
-    $author_status = $created_by['status'];
-    $profile_type = $created_by['field_reporter_profile_type_value'];
+    $author_id = $resvalue['byline_id'];
+    $author_email = $resvalue['field_reporter_email_id_value'];
+    $author_name = "";
+    $author_status = $resvalue['publish_status'];
+    $profile_type = "";
     // list data
     $list[$loop_cont]['content_id'] = "$nid";
     $list[$loop_cont]['author_id'] = "$author_id";
