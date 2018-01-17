@@ -224,7 +224,7 @@ if (!empty($content)):
                 print $sponsor_text; ?>
               <?php endif; ?>
               <div class="profile-detail">
-                 <?php if ($sponsor_text == ''): ?>
+                 <?php //if ($sponsor_text == ''): ?>
                  <?php 
                  $lbyline_detail = '';
                  $date_update_class= "date-update";
@@ -326,7 +326,7 @@ if (!empty($content)):
 
                         </ul>
                 <?php } ?>
-                <?php endif; ?>  
+                <?php //endif; ?>  
               
                  
                 <ul class="social-links mhide">
