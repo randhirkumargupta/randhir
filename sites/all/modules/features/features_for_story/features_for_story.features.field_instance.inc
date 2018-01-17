@@ -2690,6 +2690,54 @@ function features_for_story_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-story-field_story_embed_webcast'.
+  $field_instances['node-story-field_story_embed_webcast'] = array(
+    'bundle' => 'story',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'amp' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 133,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'exclude_cv' => 0,
+    'field_name' => 'field_story_embed_webcast',
+    'label' => 'Embed Webcast',
+    'required' => 0,
+    'settings' => array(
+      'exclude_cv' => FALSE,
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 114,
+    ),
+  );
+
   // Exported field_instance: 'node-story-field_story_expert_description'.
   $field_instances['node-story-field_story_expert_description'] = array(
     'bundle' => 'story',
@@ -6857,6 +6905,7 @@ function features_for_story_field_default_field_instances() {
   t('Courtesy');
   t('Date');
   t('Director');
+  t('Embed Webcast');
   t('Emoji position');
   t('Expert Name');
   t('Expert description');
