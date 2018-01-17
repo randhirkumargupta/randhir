@@ -316,8 +316,8 @@ function itg_report_api_testing_report($token) {
  * @return array - The processed information array.
  */
 function itg_report_api_story_count_report() {
-  $start_date = $_GET['start_date'];
-  $end_date = $_GET['end_date'];
+  $start_date = strtotime($_GET['start_date']);
+  $end_date = strtotime($_GET['end_date']. " 23:59:00");
   $type = $_GET['type'];
   $status = $_GET['status'];
   $item_per_page = $_GET['item_per_page'];
