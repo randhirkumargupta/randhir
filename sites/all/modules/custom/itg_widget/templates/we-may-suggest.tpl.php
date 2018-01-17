@@ -6,7 +6,7 @@
 	  if($is_fron_page){
 		$data_tb_region_item = 'data-tb-region-item';  
 	  }
-      ?><h3><span><?php print t("May We Suggest") ?></span></h3><?php } ?>
+      ?><h3><span><?php print t("READ THIS") ?></span></h3><?php } ?>
     <ul>
         <?php foreach ($data as $key => $entity_info) { ?>
         <li <?php echo $data_tb_region_item;?> class="may-we-suggest">
