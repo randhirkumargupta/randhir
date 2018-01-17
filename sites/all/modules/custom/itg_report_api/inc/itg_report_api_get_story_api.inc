@@ -26,20 +26,21 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
-  }
-  
-  $start_date = strtotime($start_date. " 01:01:00");
-  $end_date = strtotime($end_date. " 23:59:00");
+  }  
   $query = db_select('node', 'n');
+  $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
-  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
+  $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
+  $query->leftJoin('field_data_field_reporter_profile_type', 'repro', 'byli.byline_id=repro.entity_id');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
-  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-  $query->fields('fpc', array('field_primary_category_value'));
-  $query->fields('dbody', array('body_value'));
+  $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));
+  $query->fields('fpc', array('field_primary_category_value'));  
   $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('byli', array('byline_id', 'publish_status'));
+  $query->fields('repr', array('field_reporter_email_id_value'));
+  $query->fields('repro', array('field_reporter_profile_type_value'));
   //end
-
   //filter of user type
   if ($user_sub_type == "created_by") {
     $query->condition('n.created', $start_date, '>=');
@@ -57,9 +58,10 @@ function getStoryAPI($start_date, $end_date, $user_type, $user_sub_type, $userid
   if ($userid != "na") {
     $query->condition('n.uid', $userid);
   }
-
-  //$query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-  $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+  //$query->condition('ti.tid', '1206640', '<>');
+  $query->condition('repr.field_reporter_email_id_value', NULL, 'IS NOT');
+  $query->groupBy('n.nid');
+  $query->condition('n.status', $status)->orderBy('n.created', 'DESC');
 
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
