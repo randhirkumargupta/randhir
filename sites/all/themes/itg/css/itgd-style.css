@@ -306,9 +306,16 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
     padding: 10px
 }
 .front .itg-top-section .home-top-story .itg-sponsor-title {
-    top: -8px;
-    left: 0;
-    padding: 4px 5px 5px 10px
+   left: 0;
+   padding: 0;
+   position: relative;
+   display: block;
+   font-weight: bold;
+   letter-spacing: 1px;
+}
+.itg-sponsor-section-title{
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 .front .itg-top-section .home-top-story .droppable {
     height: 620px
@@ -723,8 +730,22 @@ background:none;
 .section-pti-feed .view-category-wise-content-list .catagory-listing .detail h3{font-size: 1.2rem;font-weight: normal;line-height: 24px;}
 .section-pti-feed .view-category-wise-content-list .catagory-listing{border-bottom: 1px dotted #ccc; }
 .section-pti-feed .view-category-wise-content-list .item-list{clear: both;margin-top: 20px;overflow: hidden;}
-.magazin-lhs-top .magazin-bottom ul li{
- float:none !important;
+
+.magazin-lhs-top .magazin-bottom ul li{float:none !important;}
+.story-section .social-list li i.fa-comment{padding:10px 0}
+.story-section .social-list li.itg-comment-count i.fa-comment{padding:0}
+.story-section .social-list li:last-child { line-height: inherit;}
+.live-webcast-coverage iframe{width:100%}
+.section_wise_order-talking-point ul.trending-videos li.trending-videos-list h4{ font-size:13px; color:#a00606}
+.section-movies .tech-movie_latest .osscar-video ul .dont-miss-listing .dm-pic{width: auto;}
+
+/* story byline css */
+.mobile-twitter{ display:none;}
+@media only screen and (max-width: 767px) {
+.story-section .byline .profile-detail ul li.title{ border-right:0px; line-height: 15px;}
+.story-section .byline .profile-detail ul.date-update li + li{ border-left:0px;}
+.story-section .byline .profile-detail ul.date-update li{ width:100%; margin-bottom:4px;}
+.story-section .byline .profile-detail ul.date-update li:nth-child(3),.story-section .byline .profile-detail ul.date-update li:nth-child(4){ width:auto;}
+.story-section .byline .mobile-twitter{color:#1b95e0; margin-left:4px;display: inline-block;} .story-section .byline .mobile-twitter a, .story-section .byline .mobile-twitter a:hover{ color:#1b95e0; text-decoration:none;}
+.story-section .byline .profile-detail ul li.twitter{ display:none;}
 }
-
-

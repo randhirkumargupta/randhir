@@ -588,7 +588,7 @@ function itg_workflow_node_view($node, $view_mode, $langcode) {
   // code for redirect_url
   $is_fron_page = drupal_is_front_page();
   if (empty($is_fron_page)) {
-    if (arg(0) == 'node' && is_numeric(arg(1))) {
+    if (arg(0) == 'node' && is_numeric(arg(1)) && $node->status == 0) {
       if (function_exists('itg_get_node_redirect_url')) {
         itg_get_node_redirect_url($node, $view_mode);
       }

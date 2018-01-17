@@ -1877,6 +1877,8 @@ function formateNodeBodyToken($n_body) {
   //jira:78 start
   $n_body = str_replace('<div class="quotes"', '<div class="quotes" style="border-left:2px solid #eb5a5b; "', $n_body);
   $n_body = str_replace('<blockquote', '<blockquote" style="padding: 0.5em !important; display:block;"', $n_body);
+  $n_body = str_replace('//www.youtube.com', 'https://www.youtube.com', $n_body);
+  $n_body = str_replace('https:https://www.youtube.com', 'https://www.youtube.com', $n_body);
   //jira:78 end
   $data['n_body'] = $n_body;
   $data['poll_id'] = $poll_id;
@@ -2010,5 +2012,19 @@ function getNodePrimeCatByNid($nid) {
     $field_primary_category_value = $result[0]['field_primary_category_value'];
     return taxonomy_term_load($field_primary_category_value);
   }
+}
+
+/**
+ * function get section/category icon img
+ * @pram int $tid
+ *
+ * @return string url
+ */
+function sectionPrgramIconImg($tid) {
+  $query = db_select('field_data_field_programme_category_image', 'icimg');
+  $query->fields('icimg', array('field_programme_category_image_fid'));
+  $query->condition('icimg.entity_id', $tid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return completeFilePath($result[0]['field_programme_category_image_fid']);
 }
 
