@@ -49,8 +49,6 @@ function itg_sitemap_chunks_create_xml_sitemap_index() {
     if (!empty($sitemapindex_url) && !empty($sitemapreplace_url)) {
       $sitemap_flag = TRUE;
     }
-    $getsitemapurl = variable_get('site_mapindexurl');
-    
     if(!empty($xml_files_info['file_url']) && !empty($xml_files_info['last_mod'])) {
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\r\n";
         $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\r\n";
