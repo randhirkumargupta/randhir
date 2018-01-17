@@ -46,10 +46,10 @@ function videoCategoryPageFeed() {
             // generate cat xml file string
             if ($storytag['data'] != "") {
                 $output = "";
-                $output .= program_section_page_feed_header();
+                $output .= getMobileFeedXmlHeader();
                 $output .= "<idsection>" . $cattid . "</idsection><section>" . $term_name . "</section><totalvideos>" . $list_count . "</totalvideos><start_index>0</start_index><end_index>" . $list_count . "</end_index>";
                 $output .= $storytag['data'];
-                $output .= program_section_page_feed_footer();
+                $output .= getMobileFeedXmlFooter();
                 // xml file writing..
                 if ($output) {
                     $return_flag .= writeFeedFile($term_feed_path, $catFile, $output);
@@ -150,9 +150,10 @@ function generateVideoCategoryPage($tid) {
                     $related = relatedContentNodeType($resvalue['field_common_related_content_value'], $type);
                     // create date formating
                     $create_date = date("F d, Y", $created);
+                    $create_date_1 = date("Y-m-d", $created);
                     $create_datetime = date(DATE_ATOM, $created);
                     //$output .= "<item><title>" . $title . "</title><mediumimage>".xml_cdata_filter($file_large_img_url)."</mediumimage><thumbimage>".xml_cdata_filter($file_small_img_url)."</thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate><create_datetime>" . $create_datetime . "</create_datetime><syndications>" . $is_syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
-                    $output .= "<item><title>" . $title . "</title><mediumimage>".xml_cdata_filter($file_large_img_url)."</mediumimage><thumbimage>".xml_cdata_filter($file_small_img_url)."</thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate><create_datetime>" . $create_datetime . "</create_datetime><syndications>" . $is_syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
+                    $output .= "<item><title>" . $title . "</title><mediumimage>".xml_cdata_filter($file_large_img_url)."</mediumimage><thumbimage>".xml_cdata_filter($file_small_img_url)."</thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate><create_datetime>" . $create_datetime . "</create_datetime><create_date>" . $create_date_1 . "</create_date><syndications>" . $is_syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><relateds><photos>" . $related['photos'] . "</photos><videos>" . $related['videos'] . "</videos><stories>" . $related['stories'] . "</stories></relateds></item>";
                     // generate video detail page
                     $fl = generateVideoDetailPageFeed($nid);
                 }
