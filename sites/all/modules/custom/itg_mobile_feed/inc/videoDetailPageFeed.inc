@@ -84,9 +84,9 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
             $metatags_title = html_entity_decode($node->metatags['und']['keywords']['value']);
             $metatags_description = html_entity_decode($node->metatags['und']['description']['value']);
-            $output .= program_section_page_feed_header();
+            $output .= getMobileFeedXmlHeader();
             $createddate = format_date($node->created, 'custom', 'd/m/Y');
-            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit>".xml_cdata_filter($reporter_node)."</credit><createddate>".xml_cdata_filter($create_datetime)."</createddate><date>".$create_date."</date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($thumbimage)."</thumbimage><mediaid></mediaid><uurl></uurl>";
+            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit>".xml_cdata_filter($reporter_node)."</credit><date>".xml_cdata_filter($create_date)."</date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($thumbimage)."</thumbimage><mediaid></mediaid><uurl></uurl>";
             //get video tag
             $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
             $videotag = video_detail_formats($nid, $source_type);
@@ -115,6 +115,12 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             }
             $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword>".xml_cdata_filter($metatags_title)."</metakeyword><metadescription>".xml_cdata_filter($metatags_description)."</metadescription><longdescription>".xml_cdata_filter($metatags_description)."</longdescription><weburl>" . $weburl . "</weburl>";
             //get body img tag
+            $imgtag1 = getImgTagDetail($node);
+            if ($imgtag1) {
+              $output .= $imgtag1;
+            } else {
+              $output .= emptygetImgTagDetail();
+            }
             $imgtag = getBodyImgTagDetail($node);
             if ($imgtag) {
               $output .= $imgtag;
@@ -133,7 +139,7 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             } else {
                 $output .= emptygetCommentXmlTag();
             }
-            $output .= "</item>" . program_section_page_feed_footer();
+            $output .= "</item>" . getMobileFeedXmlFooter();
             $result_set = setRedis($redis_key, $output, $ttl);
         }
     }
