@@ -233,9 +233,25 @@ if (!empty($content)):
                   foreach($byline_id as $key => $value) {
                    $date_update_class = ($cunt == 1) ? "date-update" : "";
                    
+                  $twitter_handle = '';
+				  if(!empty($value['twitter_handle'])) {
+				  $twitter_handle = $value['twitter_handle'];
+				  $twitter_handle = str_replace('@', '', $twitter_handle);
+				  }
+                   
                  ?> 
                   <ul class="<?php print $date_update_class; ?>">
-                    <?php if ($sponsor_text == ''): ?> <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?></li> <?php endif; ?>
+
+                    <?php if ($sponsor_text == '') { ?> 
+                     <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?>
+                      <?php if(!empty($twitter_handle)) { ?> 
+                      <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                      </span>
+                      <?php } ?>
+                      </li>
+						
+				   <?php } ?>
+
                     <?php 
                     if ($cunt == 1) {
                               if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
@@ -268,11 +284,7 @@ if (!empty($content)):
                     <?php } 
                     
                       $cunt++;
-                      $twitter_handle = '';
-                      if(!empty($value['twitter_handle'])) {
-                      $twitter_handle = $value['twitter_handle'];
-                      $twitter_handle = str_replace('@', '', $twitter_handle);
-                      }
+                      
                       if (!empty($twitter_handle)) {
                       ?>
                       <li class="twitter"><a href="https://twitter.com/<?php print $twitter_handle; ?>" class="twitter-follow-button" data-show-count="false">Follow @TwitterDev</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></li>                
