@@ -101,17 +101,17 @@ function itg_videogallery_push_itg_video() {
               ->fields($data_insert)
               ->execute();
           if ($insert_id) {
-			$ratio_exp = explode('@', $video_ratio);
-		    $bitrates_exp = explode('@', $video_bitrate);
-		    foreach($bitrates_exp as $bitr){
-			  $response_xml .= '<item><transcoding_id>'.$video_info['trans_id'].'</transcoding_id><file_path>'.$results[0]->path.'</file_path><bitrate>'.$bitr.'</bitrate><aspect_ratio>'.$ratio_exp[0].'</aspect_ratio><id>'.$results[0]->video_id.'</id><action>INSERT</action></item>';  
-   		    }
-			//$rtn = array('code=>200', 'video_id' => $video_id,'msg' => 'This video pushed successfully');
+            $ratio_exp = explode('@', $video_ratio);
+            $bitrates_exp = explode('@', $video_bitrate);
+            foreach ($bitrates_exp as $bitr) {
+              $response_xml .= '<item><transcoding_id>' . $video_info['trans_id'] . '</transcoding_id><file_path>' . $results[0]->path . '</file_path><bitrate>' . $bitr . '</bitrate><aspect_ratio>' . $ratio_exp[0] . '</aspect_ratio><id>' . $results[0]->video_id . '</id><action>INSERT</action></item>';
+            }
+            //$rtn = array('code=>200', 'video_id' => $video_id,'msg' => 'This video pushed successfully');
             //http_response_code(200);
             //print json_encode($rtn);
           }
           else {
-			$response_xml .= '<item><transcoding_id>'.$video_info['trans_id'].'</transcoding_id></item>';  
+            $response_xml .= '<item><transcoding_id>' . $video_info['trans_id'] . '</transcoding_id></item>';
             //$rtn = array('code=>500', 'video_id' => $video_id, 'msg' => 'something wrong happened');
             //http_response_code(500);
             //print json_encode($rtn);
@@ -126,12 +126,12 @@ function itg_videogallery_push_itg_video() {
       }
     }
     else {
-	  $ratio_exp = explode('@', $results[0]->aspect_ratio);
-	  $bitrates_exp = explode('@', $results[0]->bitrate);
-	  foreach($bitrates_exp as $bitr){
-		$response_xml .= '<item><transcoding_id>'.$video_info['trans_id'].'</transcoding_id><file_path>'.$results[0]->path.'</file_path><bitrate>'.$bitr.'</bitrate><aspect_ratio>'.$ratio_exp[0].'</aspect_ratio><id>'.$results[0]->video_id.'</id><action>UPDATE</action></item>';  
+      $ratio_exp = explode('@', $results[0]->aspect_ratio);
+      $bitrates_exp = explode('@', $results[0]->bitrate);
+      foreach ($bitrates_exp as $bitr) {
+        $response_xml .= '<item><transcoding_id>' . $video_info['trans_id'] . '</transcoding_id><file_path>' . $results[0]->path . '</file_path><bitrate>' . $bitr . '</bitrate><aspect_ratio>' . $ratio_exp[0] . '</aspect_ratio><id>' . $results[0]->video_id . '</id><action>UPDATE</action></item>';
       }
-      $rtn = array('code=>422', 'msg' => 'This video Already pushed');
+      //$rtn = array('code=>422', 'msg' => 'This video Already pushed');
       //http_response_code(422);
       //print json_encode($rtn);
     }
