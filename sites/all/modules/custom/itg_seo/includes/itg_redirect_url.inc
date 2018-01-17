@@ -218,27 +218,27 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       drupal_goto($newurl, array(), 301);
     }
   } else if((((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'article.jsp')) || ((!empty($arg[0]) && $arg[0] == 'site') && (!empty($arg[1]) && $arg[1] == 'rss') && (!empty($arg[2]) && $arg[2] == 'article.jsp')))) {      
-      if (!empty($_GET['sid']) || !empty($_GET['cid']) || !empty($_GET['scid']) || !empty($_GET['sscid'])) {
-        if ($_GET['sid']) {        
-          $old_content_id = $_GET['sid'];
-          $table = 'migrate_map_itgsection';
-        } else if ($_GET['cid']) {        
-          $old_content_id = $_GET['cid'];
-          $table = 'migrate_map_itgcategory';
-        } else if ($_GET['scid']) {        
-          $old_content_id = $_GET['scid'];
-          $table = 'migrate_map_itgsubcategory';
-        } else if ($_GET['sscid']) {        
-          $old_content_id = $_GET['sscid'];
-          $table = 'migrate_map_itgsubsubcategory';
-        }
+    if (!empty($_GET['sid']) || !empty($_GET['cid']) || !empty($_GET['scid']) || !empty($_GET['sscid'])) {
+      if ($_GET['sid']) {        
+        $old_content_id = $_GET['sid'];
+        $table = 'migrate_map_itgsection';
+      } else if ($_GET['cid']) {        
+        $old_content_id = $_GET['cid'];
+        $table = 'migrate_map_itgcategory';
+      } else if ($_GET['scid']) {        
+        $old_content_id = $_GET['scid'];
+        $table = 'migrate_map_itgsubcategory';
+      } else if ($_GET['sscid']) {        
+        $old_content_id = $_GET['sscid'];
+        $table = 'migrate_map_itgsubsubcategory';
       }
-      else {
-        $old_content_id = 'nzero';
-        $table = 'none';
-      }
-      $type = 'rss';
-      $rss_url = 'rss';
+    }
+    else {
+      $old_content_id = 'nzero';
+      $table = 'none';
+    }
+    $type = 'rss';
+    $rss_url = 'rss';
   } else if(((!empty($arg[0]) && $arg[0] == 'rss') && (!empty($arg[1]) && $arg[1] == 'gallery.jsp'))) { // Pattern http://indiatoday.intoday.in/rss/gallery.jsp?gid=2 http://indiatoday.intoday.in/rss/gallery.jsp?gid=0 http://indiatoday.intoday.in/rss/gallery.jsp 
       $old_content_id = 'none';
       $table = 'none';
@@ -331,7 +331,37 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
     } 
     $type = 'rss';
     $rss_url = 'rss';
-  } else if ($arg[0] == 'node' && empty($arg[1])) {
+  } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'story')) ) {  // lite/story
+      $storyarg = $arg[4];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgstorylist';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $ampstoryurl = '/amp/'.$redirecturl;
+      $newurl = FRONT_URL.$ampstoryurl;
+      drupal_goto($newurl, array(), 301);
+    } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'gallery')) ) {  // lite/gallery
+      $storyarg = $arg[4];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgphotogallery';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $ampstoryurl = '/amp/'.$redirecturl;
+      $newurl = FRONT_URL.$ampstoryurl;
+      drupal_goto($newurl, array(), 301);
+    } else if ((!empty($arg[0]) && ($arg[0] == 'lite')) && (!empty($arg[1]) && ($arg[1] == 'live-blogs')) ) {  // lite/gallery
+      $storyarg = $arg[3];
+      $storyarg_exp = explode('.html', $storyarg);
+      $old_content_id = $storyarg_exp[0];
+      $table = 'migrate_map_itgbreakingnews';
+      $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
+      $redirecturl = get_redirect_url($newcontentid);
+      $ampstoryurl = '/amp/'.$redirecturl;
+      $newurl = FRONT_URL.$ampstoryurl;
+      drupal_goto($newurl, array(), 301);
+    } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
   // Code for url redirection:
