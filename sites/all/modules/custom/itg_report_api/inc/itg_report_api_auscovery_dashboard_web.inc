@@ -16,7 +16,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $data = array();
   $list = array();
   $loop_cont = 0;
-  $item_per_page = 100;
+  $item_per_page = 10;
   $range_max = $item_per_page;
   $pageno = 0;
   $range_min = 0;
@@ -105,7 +105,7 @@ function auscovery_dashboard_mob($start_date, $end_date) {
   $data = array();
   $list = array();
   $loop_cont = 0;
-  $item_per_page = 100;
+  $item_per_page = 10;
   $range_max = $item_per_page;
   $pageno = 0;
   $range_min = 0;
