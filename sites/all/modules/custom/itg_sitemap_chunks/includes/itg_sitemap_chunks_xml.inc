@@ -43,12 +43,22 @@ function itg_sitemap_chunks_create_xml_sitemap_cron() {
 
 function itg_sitemap_chunks_create_xml_sitemap_index() {
     $xml_files_info = itg_video_get_sitemap_xmls();
+    $sitemapindex_url = varaiable_get('site_mapindexurl');
+    $sitemapreplace_url = varaiable_get('site_replaceurl');
+    $sitemap_flag = FALSE;
+    if (!empty($sitemapindex_url) && !empty($sitemapreplace_url)) {
+      $sitemap_flag = TRUE;
+    }
+    $getsitemapurl = variable_get('site_mapindexurl');
+    
     if(!empty($xml_files_info['file_url']) && !empty($xml_files_info['last_mod'])) {
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\r\n";
         $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\r\n";
         foreach($xml_files_info['file_url'] as $key => $data) {
             $xml .= '<sitemap>' . "\r\n";
-            $xml .= '<loc>' . str_replace('https://instore-tosshub-com.s3.ap-south-1.amazonaws.com', 'https://indiatoday.intoday.in', $xml_files_info['file_url'][$key]) . '</loc>' . "\r\n";
+            if (!empty($getsitemapurl)) {
+              $xml .= '<loc>' . str_replace($sitemapindex_url, $sitemapreplace_url, $xml_files_info['file_url'][$key]) . '</loc>' . "\r\n";
+            }
             $xml .= '<lastmod>' . $xml_files_info['last_mod'][$key] . '</lastmod>' . "\r\n";
             $xml .= '</sitemap>' . "\r\n";
         }
