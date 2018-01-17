@@ -12,7 +12,7 @@
  * @return array
  */
 function auscovery_dashboard_web($start_date, $end_date) {
-  global $base_url;
+  global $base_url; 
   $data = array();
   $list = array();
   $loop_cont = 0;
