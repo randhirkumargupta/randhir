@@ -43,8 +43,8 @@ function itg_sitemap_chunks_create_xml_sitemap_cron() {
 
 function itg_sitemap_chunks_create_xml_sitemap_index() {
     $xml_files_info = itg_video_get_sitemap_xmls();
-    $sitemapindex_url = varaiable_get('site_mapindexurl');
-    $sitemapreplace_url = varaiable_get('site_replaceurl');
+    $sitemapindex_url = variable_get('site_mapindexurl');
+    $sitemapreplace_url = variable_get('site_replaceurl');
     $sitemap_flag = FALSE;
     if (!empty($sitemapindex_url) && !empty($sitemapreplace_url)) {
       $sitemap_flag = TRUE;
