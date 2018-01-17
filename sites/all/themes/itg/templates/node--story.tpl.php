@@ -40,7 +40,7 @@ if (!empty($content)):
   $follow_status = $content["follow_status"];
   $migrated_count = $content["migrated_count"];
   //get byline id based on order reorder
-  $byline_id = $content["byline_id"];
+  $byline_id_mobile = $byline_id = $content["byline_id"];
     // for activate_live_tv
     $activate_live_tv = FALSE;
     $is_sponsor_story = FALSE;
@@ -240,9 +240,9 @@ if (!empty($content)):
 				  }
                    
                  ?> 
-                  <ul class="<?php print $date_update_class; ?>">
+                  <ul class="<?php print $date_update_class; ?> mhide">
 
-                    <?php if ($sponsor_text == '') { ?> 
+                    <?php if ($sponsor_text == '') { ?>	 
                      <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?>
                       <?php if(!empty($twitter_handle)) { ?> 
                       <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -338,8 +338,58 @@ if (!empty($content)):
 
                         </ul>
                 <?php } ?>
-                <?php //endif; ?>  
-              
+                
+                <ul class="profile-byline">
+                <?php
+                // For Mobile 
+                
+					if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  $mobile_twitter_handle = '';
+						  if(!empty($mobile_val['twitter_handle'])) {
+						  $mobile_twitter_handle = $mobile_val['twitter_handle'];
+						  $mobile_twitter_handle = str_replace('@', '', $mobile_twitter_handle);
+						  }
+						      ?>
+						<?php if ($sponsor_text == '') { ?>	 
+						 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?>
+						  <?php if(!empty($mobile_twitter_handle)) { ?> 
+						  <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $mobile_twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+						  </span>
+						  <?php } ?>
+						  </li>
+							
+					   <?php }      	
+					   }
+					}   
+				 ?>
+				
+						 <?php 
+                        if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+                        ?>
+                          <li><?php
+                                    $city = array();
+                                    foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+                                      $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+                                    }
+                                    print implode(' | ', $city);
+                                ?>
+                           </li>
+                          <?php } ?>
+                          <li class="pubdata"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+                          <li class="update-data">
+                            <?php
+                            print t('UPDATED ');
+                            if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+                              print date('H:i', $node->created);
+                            }
+                            else {
+                              print date('H:i', $node->changed);
+                            }
+                            print t(' IST');
+                            ?>
+                          </li>
+                     </ul>      
                  
                 <ul class="social-links mhide">
                                        
