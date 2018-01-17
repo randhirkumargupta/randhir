@@ -63,8 +63,9 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $field_primary_category_value = $resvalue['field_primary_category_value'];
     $body_value = $resvalue['body_value'];
     $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
-    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);    
-    $create_date = date("Y-m-d", $created);
+    //$url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);  
+    $url = drupal_get_path_alias('node/' . $nid);  
+    $create_date = date("Y-m-d H:i:s", $created);
     $prime_cat = getNodePrimeCatByNid($nid);
     $author_id = $resvalue['byline_id'];
     $author_email = $resvalue['field_reporter_email_id_value'];
@@ -81,7 +82,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $list[$loop_cont]['title'] = "$title";
     $list[$loop_cont]['content_url'] = "$url";
     $list[$loop_cont]['primary_category'] = "$prime_cat->tid";
-    $list[$loop_cont]['created'] = "$created_datetime";
+    $list[$loop_cont]['created'] = "$create_date";
     $list[$loop_cont]['content_status'] = "$node_satatus";
     $list[$loop_cont]['published_on'] = "$field_itg_content_publish_date_value";
     $loop_cont++;
