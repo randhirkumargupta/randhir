@@ -113,13 +113,13 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
                 $inter_video_details = internal_video_bitrate_data($video_id);
                 $output .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
             }
-            $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword>".xml_cdata_filter($metatags_title)."</metakeyword><longdescription>".xml_cdata_filter($metatags_description)."</longdescription><weburl>" . $weburl . "</weburl>";
+            $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword>".xml_cdata_filter($metatags_title)."</metakeyword><metadescription>".xml_cdata_filter($metatags_description)."</metadescription><longdescription>".xml_cdata_filter($metatags_description)."</longdescription><weburl>" . $weburl . "</weburl>";
             //get body img tag
-            $imgtag = getImgTagDetail($node);
+            $imgtag = getBodyImgTagDetail($node);
             if ($imgtag) {
               $output .= $imgtag;
             } else {
-              $output .= emptygetImgTagDetail();
+              $output .= emptygetBodyImgTagDetail();
             }
             //related node
             if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
@@ -202,6 +202,35 @@ function getImgTagDetail($node) {
     $caption = getImgCaption($field_story_small_image);
     $imgtag = "";
     $imgtag = "<images><image><thumbimage>".xml_cdata_filter($lowres)."</thumbimage><caption>" . xml_cdata_filter($caption) . "</caption></image></images>";
+    return $imgtag;
+}
+
+/**
+ * function for generate image xml tag
+ * @pram object $node
+ *
+ * @return string $imgtag
+ */
+function getBodyImgTagDetail($node) {
+    $field_story_small_image = $node->field_story_small_image['und'][0]['fid'];
+    $field_story_large_image = $node->field_story_large_image['und'][0]['fid'];
+    $lowres = completeFilePath($field_story_small_image);
+    $highres = completeFilePath($field_story_large_image);
+    // custom function for get img caption
+    $caption = getImgCaption($field_story_small_image);
+    $imgtag = "";
+    $imgtag = "<bodyimages><image><lowres>".xml_cdata_filter($lowres)."</lowres><highres>".xml_cdata_filter($highres)."</highres><caption>" . xml_cdata_filter($caption) . "</caption></image></bodyimages>";
+    return $imgtag;
+}
+
+/**
+ * function for generate Empty image xml tag
+ *
+ * @return string $imgtag
+ */
+function emptygetBodyImgTagDetail() {
+    $imgtag = "";
+    $imgtag = "<bodyimages><image><lowres></lowres><highres></highres><caption></caption></image></bodyimages>";
     return $imgtag;
 }
 
