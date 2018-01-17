@@ -44,8 +44,15 @@ $('.pos').click(function(){
 	$('ul.submenus01').slideUp();
 	$('ul.submenus').slideToggle();
 	$('.pos').toggleClass('opens');
-	})
-$('.spos01').click(function(){
+	});
+	
+$('.salespos01').click(function(){ alert("Hi");
+	$('em').removeClass('opens02');
+	//$('ul.submenus01').slideUp();
+	$('ul.submenus02').slideToggle();
+	$('.salespos01').toggleClass('opens02');
+	});
+$('.spos01').click(function(){ 
 	$('em').removeClass('opens');
 	$('ul.submenus').slideUp();
 	$('ul.submenus01').slideToggle();
@@ -56,6 +63,21 @@ $('.spos01').click(function(){
 		duration:20000, 
 		padding:10, 
 	})
+$('.pos02').click(function(){ 
+	$('em').removeClass('opens');
+	$('ul.submenus').slideUp();
+	$('ul.submenus02').slideToggle();
+	$('.pos02').toggleClass('opens02');
+	})	
+		$(function (){
+		createMarquee({
+		duration:20000, 
+		padding:10, 
+	})
+	})
 	});
+	});
+	$(document).ready(function(){
+		$('#testimonials').addClass('current');
 	});
 	
