@@ -1138,7 +1138,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_story_big_image',
     'field_permissions' => array(
-      'type' => 0,
+      'type' => 2,
     ),
     'indexes' => array(
       'fid' => array(
@@ -1265,6 +1265,7 @@ function features_for_story_field_default_field_bases() {
         'developing_story' => 'Developing Story',
         'activate_live_tv' => 'Activate Live TV',
         'sponsor' => 'Sponsor Story',
+        'webcast' => 'Webcast',
       ),
       'allowed_values_function' => '',
     ),
@@ -1291,6 +1292,28 @@ function features_for_story_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
+  );
+
+  // Exported field_base: 'field_story_embed_webcast'.
+  $field_bases['field_story_embed_webcast'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_story_embed_webcast',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'text_long',
   );
 
   // Exported field_base: 'field_story_expert_description'.
@@ -2669,7 +2692,7 @@ function features_for_story_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_story_tech_pros_cons_ratin',
     'field_permissions' => array(
-      'type' => 2,
+      'type' => 0,
     ),
     'indexes' => array(
       'value' => array(

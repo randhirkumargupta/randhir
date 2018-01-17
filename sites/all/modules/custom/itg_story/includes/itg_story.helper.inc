@@ -531,28 +531,18 @@ function itg_get_emoji_amp_html($result, $arr = NULL) {
  * @return false or external url
  */
 function _is_external_url_story_article($nid) {
-  
   $is_external_url = FALSE;
-  //commented by shravan and discussed with shashank
- /* if (isset($nid)) {
-    if (db_table_exists('field_data_field_story_external_url')) {
-      $type_query = db_select('node', 'n');
-      $type_query->fields('n', array('type'));
-      $type_query->condition('n.nid', $nid, '=');
-      $node_type = $type_query->execute()->fetchField();
-      if ($node_type == 'story') {
-        $query = db_select('field_data_field_story_external_url', 'eu');
-        $query->fields('eu', array('field_story_external_url_value'));
-        $query->isNotNull('eu.field_story_external_url_value');
-        $query->condition('eu.entity_id', $nid, '=');
-        $query->condition('eu.bundle', 'story', '=');
-        $query->condition('eu.entity_type', 'node', '=');
-        $query_result = $query->execute()->fetchAll();
-        if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value) && filter_var(trim($query_result[0]->field_story_external_url_value), FILTER_VALIDATE_URL)) {
-          $is_external_url = trim($query_result[0]->field_story_external_url_value);
-        }
-      }
+  if (isset($nid)) {
+    $query = db_select('field_data_field_story_external_url', 'eu');
+    $query->fields('eu', array('field_story_external_url_value'));
+    $query->isNotNull('eu.field_story_external_url_value');
+    $query->condition('eu.entity_id', $nid, '=');
+    $query->condition('eu.bundle', 'story', '=');
+    $query->condition('eu.entity_type', 'node', '=');
+    $query_result = $query->execute()->fetchAll();
+    if (!empty($query_result) && !empty($query_result[0]->field_story_external_url_value) && filter_var(trim($query_result[0]->field_story_external_url_value), FILTER_VALIDATE_URL)) {
+      $is_external_url = trim($query_result[0]->field_story_external_url_value);
     }
-  }*/
+  }
   return $is_external_url;
 }
