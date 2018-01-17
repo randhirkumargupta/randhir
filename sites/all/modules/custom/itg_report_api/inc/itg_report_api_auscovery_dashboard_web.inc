@@ -30,12 +30,14 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
   $query->leftJoin('itg_multi_byline_info', 'byli', 'byli.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'byli.byline_id=repr.entity_id');
+  $query->leftJoin('field_data_field_reporter_profile_type', 'repro', 'byli.byline_id=repro.entity_id');
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));
   $query->fields('fpc', array('field_primary_category_value'));  
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('byli', array('byline_id', 'publish_status'));
   $query->fields('repr', array('field_reporter_email_id_value'));
+  $query->fields('repro', array('field_reporter_profile_type_value'));
   //end
   if ($start_date != "na") {    
     $query->condition('n.created', $start_date, ">=");
@@ -62,13 +64,13 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $body_value = $resvalue['body_value'];
     $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
     $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);    
-    $create_date = date("Y-m-d H:i:s", $created);
+    $create_date = date("Y-m-d", $created);
     $prime_cat = getNodePrimeCatByNid($nid);
     $author_id = $resvalue['byline_id'];
     $author_email = $resvalue['field_reporter_email_id_value'];
     $author_name = "";
     $author_status = $resvalue['publish_status'];
-    $profile_type = "";
+    $profile_type = $resvalue['field_reporter_profile_type_value'];
     // list data
     $list[$loop_cont]['content_id'] = "$nid";
     $list[$loop_cont]['author_id'] = "$author_id";
