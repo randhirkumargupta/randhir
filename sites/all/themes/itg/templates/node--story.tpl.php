@@ -241,12 +241,17 @@ if (!empty($content)):
                    
                  ?> 
                   <ul class="<?php print $date_update_class; ?>">
-                      <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?>
+
+                    <?php if ($sponsor_text == '') { ?> 
+                     <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?>
                       <?php if(!empty($twitter_handle)) { ?> 
                       <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                       </span>
                       <?php } ?>
                       </li>
+						
+				   <?php } ?>
+
                     <?php 
                     if ($cunt == 1) {
                               if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
