@@ -354,15 +354,6 @@ function itg_html_head_alter(&$head_elements) {
           ),
         );
       }
-      // Add canonical for taxonomy page:
-      $head_elements['canonical_0'] = array(
-        '#type' => 'html_tag',
-        '#tag' => 'link',
-        '#attributes' => array(
-          'rel' => 'canonical',
-          'href' => FRONT_URL.'/'.$term_url_alias
-        ),
-      );
       $meta_description = $term->metatags[LANGUAGE_NONE]['description']['value'];
       if (isset($meta_description) && !empty($meta_description)) {
         $head_elements['metatag_description_0'] = array(
@@ -409,6 +400,15 @@ function itg_html_head_alter(&$head_elements) {
             );
           }
         }
+        // Add canonical for taxonomy page:
+        $head_elements['canonical_0'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array(
+            'rel' => 'canonical',
+            'href' => FRONT_URL.'/'.$term_url_alias
+          ),
+        );
       }
     }
   
