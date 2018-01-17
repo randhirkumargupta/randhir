@@ -43,7 +43,6 @@ function itg_sitemap_chunks_create_xml_sitemap_cron() {
 
 function itg_sitemap_chunks_create_xml_sitemap_index() {
     $xml_files_info = itg_video_get_sitemap_xmls();
-    p($xml_files_info);
     if(!empty($xml_files_info['file_url']) && !empty($xml_files_info['last_mod'])) {
         $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\r\n";
         $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\r\n";
