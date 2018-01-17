@@ -48,7 +48,7 @@ function getUserList_Report($user_type, $user_sub_type) {
         $query_n->fields('n', array('nid', 'title', 'status'));
         $query_n->fields('re', array('field_reporter_email_id_value'));
         $query_n->condition('n.type', 'reporter', '=');
-        $query->condition('re.field_reporter_email_id_value', NULL, 'IS NOT');
+        $query_n->condition('re.field_reporter_email_id_value', NULL, 'IS NOT');
         $result_n = $query_n->execute()->fetchAll(PDO::FETCH_ASSOC);
         foreach ($result_n as $reskey_n => $resvalue_n) {
             $nid = $resvalue_n['nid'];
