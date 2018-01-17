@@ -470,6 +470,15 @@ function itg_widgets_custom_variables() {
     '#title' => t('News Today Section TID'),
     '#default_value' => variable_get('news_today_tid', 1207797),
   );
-
+  $form['site_mapindexurl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Site Map Index url'),
+    '#default_value' => variable_get('site_mapindexurl', 'https://instore-tosshub-com.s3.ap-south-1.amazonaws.com'),
+  );
+  $form['site_replaceurl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Site Map Replace url'),
+    '#default_value' => variable_get('site_replaceurl', 'indiatoday.intoday.in'),
+  );
   return system_settings_form($form);
 }
