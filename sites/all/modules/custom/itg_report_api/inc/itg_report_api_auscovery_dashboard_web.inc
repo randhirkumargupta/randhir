@@ -79,7 +79,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $list[$loop_cont]['title'] = "$title";
     $list[$loop_cont]['content_url'] = "$url";
     $list[$loop_cont]['primary_category'] = "$prime_cat->tid";
-    $list[$loop_cont]['created'] = "$created_datetime";
+    $list[$loop_cont]['created'] = "$created";
     $list[$loop_cont]['content_status'] = "$node_satatus";
     $list[$loop_cont]['published_on'] = "$field_itg_content_publish_date_value";
     $loop_cont++;
