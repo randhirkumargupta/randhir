@@ -50,6 +50,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
   }
   //$query->condition('ti.tid', '1206640', '<>');
   //$query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+  $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
@@ -137,6 +138,7 @@ function auscovery_dashboard_mob($start_date, $end_date) {
   }
   //$query->condition('ti.tid', '1206640', '<>');
   //$query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
+  $query->groupBy('n.nid');
   $query->condition('n.status', 1)->orderBy('n.created', 'DESC');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result as $reskey => $resvalue) {
