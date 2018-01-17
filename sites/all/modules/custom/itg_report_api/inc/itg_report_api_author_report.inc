@@ -62,7 +62,7 @@ function author_report_tvtn($start_date) {
   $auhtor_data = array();
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
-    $name = getAuthorNameDashboard($user_id);
+    $name = $value['author_name'];
     $mail = $value['author_email'];
     $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
     $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
@@ -168,7 +168,7 @@ function author_report($start_date) {
   $auhtor_data = array();
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
-    $name = getAuthorNameDashboard($user_id);
+    $name = $value['author_name'];
     $mail = $value['author_email'];
     $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
     $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
@@ -312,7 +312,7 @@ function getAuthorList_Report($s_date, $e_date) {
   $query->leftJoin('node', 'n', 'byli.nid=n.nid');
   $query->leftJoin('taxonomy_index', 'ti', 'ti.nid=n.nid');
   $query->leftJoin('field_data_field_reporter_email_id', 'repr', 'repr.entity_id=byli.byline_id');
-  $query->fields('n', array('nid', 'status','title'));
+  $query->fields('n', array('nid', 'status'));
   $query->fields('byli', array('byline_id'));
   $query->fields('repr', array('field_reporter_email_id_value'));
   //end
@@ -324,15 +324,14 @@ function getAuthorList_Report($s_date, $e_date) {
   $query->condition('n.type', 'story');
   $query->condition('ti.tid', '1206640', '<>');
   $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
-  $query->orderBy('repr.field_reporter_email_id_value', 'ASC');
   $query->groupBy('n.nid');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($result as $reskey => $resvalue) {
     $author_nid = $resvalue['byline_id'];
-    $author = node_load($author_nid);
+    $author_name = getAuthorNameDashboard($author_id);
     $data['author_id'] = $author_nid;
-    $data['author_name'] = $resvalue['title'];
+    $data['author_name'] = $author_name;
     $data['author_email'] = $resvalue['field_reporter_email_id_value'];
     $list[$author_nid] = $data;
     $cont++;
