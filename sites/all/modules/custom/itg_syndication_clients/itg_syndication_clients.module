@@ -703,7 +703,7 @@ function genrate_uniqui_guid() {
  * @return type
  */
 function itg_genrate_uniqui_guid($uniq_id) {
-  return md5(uniqid($uniq_id));
+  return md5($uniq_id);
 }
 
 /**
