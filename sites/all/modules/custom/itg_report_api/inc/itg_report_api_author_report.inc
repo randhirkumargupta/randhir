@@ -62,7 +62,7 @@ function author_report_tvtn($start_date) {
   $auhtor_data = array();
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
-    $name = $value['author_name'];
+    $name = getAuthorNameDashboard(author_id);
     $mail = $value['author_email'];
     $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
     $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
@@ -168,7 +168,7 @@ function author_report($start_date) {
   $auhtor_data = array();
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
-    $name = $value['author_name'];
+    $name = getAuthorNameDashboard($author_id);
     $mail = $value['author_email'];
     $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
     $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
@@ -324,7 +324,7 @@ function getAuthorList_Report($s_date, $e_date) {
   $query->condition('n.type', 'story');
   $query->condition('ti.tid', '1206640', '<>');
   $query->condition('repr.field_reporter_email_id_value', '%aajtak.com', 'LIKE');
-  $query->orderBy('n.title', 'ASC');
+  $query->orderBy('repr.field_reporter_email_id_value', 'ASC');
   $query->groupBy('n.nid');
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
