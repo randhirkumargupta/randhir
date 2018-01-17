@@ -453,7 +453,7 @@ function itg_report_api_story_video_photo_field_report() {
 
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
+  if ($result_get['key_value11'] != "") {
     $jsondata = $result_get['key_value'];
   }
   else {
@@ -556,7 +556,7 @@ function itg_report_api_auscovery_dashboard_web() {
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value']; 
+    $jsondata = $result_get['key_value'];
   }
   else {
     // call function from return data..
