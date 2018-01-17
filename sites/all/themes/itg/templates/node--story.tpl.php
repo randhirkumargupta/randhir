@@ -339,10 +339,9 @@ if (!empty($content)):
                         </ul>
                 <?php } ?>
                 
-                <ul class="profile-byline">
+                <ul class="profile-byline desktop-hide">
                 <?php
-                // For Mobile 
-                
+                   // For Mobile 
 					if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {	
 					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
 						  $mobile_twitter_handle = '';
@@ -350,8 +349,8 @@ if (!empty($content)):
 						  $mobile_twitter_handle = $mobile_val['twitter_handle'];
 						  $mobile_twitter_handle = str_replace('@', '', $mobile_twitter_handle);
 						  }
-						      ?>
-						<?php if ($sponsor_text == '') { ?>	 
+				
+					if ($sponsor_text == '') { ?>	 
 						 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?>
 						  <?php if(!empty($mobile_twitter_handle)) { ?> 
 						  <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $mobile_twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -362,34 +361,31 @@ if (!empty($content)):
 					   <?php }      	
 					   }
 					}   
-				 ?>
 				
-						 <?php 
-                        if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
-                        ?>
-                          <li><?php
-                                    $city = array();
-                                    foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
-                                      $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
-                                    }
-                                    print implode(' | ', $city);
-                                ?>
-                           </li>
-                          <?php } ?>
-                          <li class="pubdata"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
-                          <li class="update-data">
-                            <?php
-                            print t('UPDATED ');
-                            if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
-                              print date('H:i', $node->created);
-                            }
-                            else {
-                              print date('H:i', $node->changed);
-                            }
-                            print t(' IST');
-                            ?>
-                          </li>
-                     </ul>      
+                if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+				  <li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+						?>
+				   </li>
+				  <?php } ?>
+				  <li class="pubdata"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+				  <li class="update-data">
+					<?php
+					print t('UPDATED ');
+					if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+					  print date('H:i', $node->created);
+					}
+					else {
+					  print date('H:i', $node->changed);
+					}
+					print t(' IST');
+					?>
+				  </li>
+			  </ul>      
                  
                 <ul class="social-links mhide">
                                        
