@@ -40,10 +40,10 @@ function auscovery_dashboard_web($start_date, $end_date) {
   $query->fields('repro', array('field_reporter_profile_type_value'));
   //end
   if ($start_date != "na") {    
-    $query->condition('npd.field_itg_content_publish_date_value', $start_date, ">=");
+    $query->condition('n.created', $start_date, ">=");
   }
   if ($end_date != "na") {    
-    $query->condition('npd.field_itg_content_publish_date_value', $end_date, "<=");
+    $query->condition('n.created', $end_date, "<=");
   }
   if ($type != "na") {
     $query->condition('n.type', $type);
@@ -127,10 +127,10 @@ function auscovery_dashboard_mob($start_date, $end_date) {
   $query->fields('repro', array('field_reporter_profile_type_value'));
   //end
   if ($start_date != "na") {    
-    $query->condition('npd.field_itg_content_publish_date_value', $start_date, ">=");
+    $query->condition('n.created', $start_date, ">=");
   }
   if ($end_date != "na") {    
-    $query->condition('npd.field_itg_content_publish_date_value', $end_date, "<=");
+    $query->condition('n.created', $end_date, "<=");
   }
   if ($type != "na") {
     $query->condition('n.type', $type);
