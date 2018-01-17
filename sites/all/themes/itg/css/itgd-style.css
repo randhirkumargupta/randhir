@@ -713,3 +713,6 @@ background:none;
 .story-section .social-list li i.fa-comment{padding:10px 0}
 .story-section .social-list li.itg-comment-count i.fa-comment{padding:0}
 .story-section .social-list li:last-child { line-height: inherit;}
+.live-webcast-coverage iframe{width:100%}
+.section_wise_order-talking-point ul.trending-videos li.trending-videos-list h4{ font-size:13px; color:#a00606}
+.section-movies .tech-movie_latest .osscar-video ul .dont-miss-listing .dm-pic{width: auto;}
