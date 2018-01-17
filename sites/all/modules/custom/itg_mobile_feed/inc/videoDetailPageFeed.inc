@@ -217,6 +217,24 @@ function getImgTagDetail($node) {
  *
  * @return string $imgtag
  */
+function getImgTagDetaillarge($node) {
+    $field_story_small_image = $node->field_story_small_image['und'][0]['fid'];
+    $field_story_large_image = $node->field_story_large_image['und'][0]['fid'];
+    $lowres = completeFilePath($field_story_small_image);
+    $highres = completeFilePath($field_story_large_image);
+    // custom function for get img caption
+    $caption = getImgCaption($field_story_small_image);
+    $imgtag = "";
+    $imgtag = "<images><image><thumbimage>".xml_cdata_filter($lowres)."</thumbimage><largeimage>".xml_cdata_filter($highres)."</largeimage><caption>" . xml_cdata_filter($caption) . "</caption></image></images>";
+    return $imgtag;
+}
+
+/**
+ * function for generate image xml tag
+ * @pram object $node
+ *
+ * @return string $imgtag
+ */
 function getBodyImgTagDetail($node) {
     $field_story_small_image = $node->field_story_small_image['und'][0]['fid'];
     $field_story_large_image = $node->field_story_large_image['und'][0]['fid'];
@@ -248,6 +266,17 @@ function emptygetBodyImgTagDetail() {
 function emptygetImgTagDetail() {
     $imgtag = "";
     $imgtag = "<images><image><thumbimage></thumbimage><caption></caption></image></images>";
+    return $imgtag;
+}
+
+/**
+ * function for generate Empty image xml tag
+ *
+ * @return string $imgtag
+ */
+function emptygetImgTagDetaillarge() {
+    $imgtag = "";
+    $imgtag = "<images><image><thumbimage></thumbimage><largeimage></largeimage><caption></caption></image></images>";
     return $imgtag;
 }
 
@@ -611,11 +640,11 @@ function generateVideoDetailPageFeedForProgram($nid, $file_name = '', $term_feed
             }
             $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword>".xml_cdata_filter($metatags_title)."</metakeyword><metadescription>".xml_cdata_filter($metatags_description)."</metadescription><longdescription>".xml_cdata_filter($metatags_description)."</longdescription><weburl>" . $weburl . "</weburl>";
             //get body img tag
-            $imgtag1 = getImgTagDetail($node);
+            $imgtag1 = getImgTagDetaillarge($node);
             if ($imgtag1) {
               $output .= $imgtag1;
             } else {
-              $output .= emptygetImgTagDetail();
+              $output .= emptygetImgTagDetaillarge();
             }
             $imgtag = getBodyImgTagDetail($node);
             if ($imgtag) {
