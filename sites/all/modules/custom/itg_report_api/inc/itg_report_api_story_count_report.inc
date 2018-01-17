@@ -173,7 +173,6 @@ function getSectionCountData_report($start_date, $end_date, $type, $status) {
 
     $loop_count = 0;
     foreach ($section_list as $key => $value) {
-
         $n_cont = 0;
         $n_cont = countTidNode_report($start_date, $end_date, $value['tid'], $type, $status);
         if ($n_cont) {
