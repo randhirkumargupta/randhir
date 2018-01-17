@@ -62,7 +62,7 @@ function author_report_tvtn($start_date) {
   $auhtor_data = array();
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
-    $name = getAuthorNameDashboard(author_id);
+    $name = getAuthorNameDashboard($user_id);
     $mail = $value['author_email'];
     $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
     $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
@@ -168,7 +168,7 @@ function author_report($start_date) {
   $auhtor_data = array();
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
-    $name = getAuthorNameDashboard($author_id);
+    $name = getAuthorNameDashboard($user_id);
     $mail = $value['author_email'];
     $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
     $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
