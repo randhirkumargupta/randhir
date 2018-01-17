@@ -54,7 +54,7 @@ function itg_sitemap_chunks_create_xml_sitemap_index() {
         $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\r\n";
         foreach($xml_files_info['file_url'] as $key => $data) {
             $xml .= '<sitemap>' . "\r\n";
-            if (!empty($getsitemapurl)) {
+            if (!empty($sitemap_flag)) {
               $xml .= '<loc>' . str_replace($sitemapindex_url, $sitemapreplace_url, $xml_files_info['file_url'][$key]) . '</loc>' . "\r\n";
             } else {
               $xml .= '<loc>' . $xml_files_info['file_url'][$key] . '</loc>' . "\r\n";
