@@ -39,9 +39,9 @@ function story_video_photo_field_report($start_date, $end_date) {
             $today_key = date("Y-m-d", ($start_date + $epoch_to_next));
         }
         $end_epoc = $start_epoc + 86399;
-        echo $start_epoc; echo "<br>and";echo $end_epoc;die();
+        //echo $start_epoc; echo "<br>and";echo $end_epoc;die();
         $section_list_count_t = nodeCountByDateWise_Report($start_epoc, $end_epoc, $section_list);
-
+        p($section_list_count_t);
         $data['datewise_data'][$today_key]['category'] = $section_list_count_t['between'];
         $data['datewise_data'][$today_key]['total'] = $section_list_count_t['between'];
         $date_l_c++;
