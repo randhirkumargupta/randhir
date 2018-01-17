@@ -40,7 +40,7 @@
     $auth_name = itg_seo_editors_pick_data($rev_path2[3]);
   }
 ?>
-<<?php print "author"; ?>><![CDATA[<?php print $auth_name; ?>]]></<?php print "author"; ?>>
+<<?php print "dc:creator"; ?>><![CDATA[<?php print $auth_name; ?>]]></<?php print "dc:creator"; ?>>
 </<?php print $item_node; ?>>
 <?php endforeach; ?>
 </<?php print "channel"; ?>>

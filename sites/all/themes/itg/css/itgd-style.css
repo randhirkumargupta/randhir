@@ -306,10 +306,21 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
     padding: 10px
 }
 .front .itg-top-section .home-top-story .itg-sponsor-title {
-    top: -8px;
-    left: 0;
-    padding: 4px 5px 5px 10px
+   left: 0;
+   padding: 0;
+   position: relative;
+   display: block;
+   font-weight: bold;
+   letter-spacing: 1px;
 }
+.itg-sponsor-section-title{
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.catagory-listing .big-pic img{
+width: 100%;
+}
+.front #block-itg-widget-home-page-feature .featured-news .featured-post h2 a{ display:inline;}
 .front .itg-top-section .home-top-story .droppable {
     height: 620px
 }
@@ -642,7 +653,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area .bottom-area ul li:last-child{padding-right:0; border:0;}
 .app-area .bottom-area ul li h3{font:bold 20px/22px 'Roboto', sans-serif; color:#404040; display:inline-block; width:100%; text-transform:uppercase; text-align:center; margin:50px 0 5px 0;}
 .app-area .bottom-area ul li p{font:14px/22px 'Roboto', sans-serif; color:#6d6d6d; display:block; margin:0}
-
+.share_bar{ display:none;}
 @media only screen and (max-width: 768px) {
 .app-area-wrapper{width:100%;}
 .app-area .top-area .right-area{width:71%;}
@@ -663,6 +674,20 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 #block-itg-layout-manager-header-block{position: fixed;width: 100%; top: 0; z-index:99995;}
 header#header{padding-top: 60px;}
 footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 99999;border-radius: 0 40px 40px 0;}
+.comment-mobile { display:none;}
+.share_bar{box-sizing: border-box;padding: 10px 0 10px; display:block; overflow: hidden;}
+.share_bar .social-share{margin: 0 auto;padding: 0;text-align: center;float: left;width: 100%;display: table}
+.share_bar .social-share li{display: table-cell;text-align: center;vertical-align: middle}
+.share_bar .social-share li a{display: block;height:24px;width:24px;margin: 0 auto}
+.share_bar .social-share i{height:24px;width: 24px;display: table-cell}
+.share_bar .sprite{background: url(http://instore-tosshub-com.s3.amazonaws.com/sites/all/themes/itg/images/socialicon-sprit-mobile.png) no-repeat }
+.share_bar .facebook{background-position:-3px -3px}
+.share_bar .twitter{background-position: -33px -3px}
+.share_bar .youtube{background-position: -92px -3px}
+.share_bar .whatsapp {background-position: -178px -3px;}
+.share_bar .gplus{background-position: -62px -3px}
+.share_bar .readelater{background-position: -149px -3px}
+.share_bar .email{background-position: -121px -3px}
 }
 .pti-news-claim { background: #FBF9FA; border: 1px solid #EFEFEF; color: #737373; font-size: 14px; margin-top: 20px; padding: 10px; line-height: 18px; margin-bottom: 20px; }
 .view-display-id-so_sorry_page {margin: 0 -15px 15px;position: relative;}
@@ -709,6 +734,23 @@ background:none;
 .section-pti-feed .view-category-wise-content-list .catagory-listing .detail h3{font-size: 1.2rem;font-weight: normal;line-height: 24px;}
 .section-pti-feed .view-category-wise-content-list .catagory-listing{border-bottom: 1px dotted #ccc; }
 .section-pti-feed .view-category-wise-content-list .item-list{clear: both;margin-top: 20px;overflow: hidden;}
-.magazin-lhs-top .magazin-bottom ul li{
- float:none !important;
+
+.magazin-lhs-top .magazin-bottom ul li{float:none !important;}
+.story-section .social-list li i.fa-comment{padding:10px 0}
+.story-section .social-list li.itg-comment-count i.fa-comment{padding:0}
+.story-section .social-list li:last-child { line-height: inherit;}
+.live-webcast-coverage iframe{width:100%}
+.section_wise_order-talking-point ul.trending-videos li.trending-videos-list h4{ font-size:13px; color:#a00606}
+.section-movies .tech-movie_latest .osscar-video ul .dont-miss-listing .dm-pic{width: auto;}
+
+/* story byline css */
+.mobile-twitter{ display:none;}
+@media only screen and (max-width: 767px) {
+.story-section .byline .profile-detail ul li.title{ border-right:0px; line-height: 15px;}
+.story-section .byline .profile-detail ul.date-update li + li{ border-left:0px;}
+.story-section .byline .profile-detail ul.date-update li{ width:100%; margin-bottom:4px;}
+.story-section .byline .profile-detail ul.date-update li.pubdata,.story-section .byline .profile-detail ul.date-update li.update-data{ width:auto;}
+.story-section .byline .mobile-twitter{color:#1b95e0; margin-left:4px;display: inline-block;} .story-section .byline .mobile-twitter a, .story-section .byline .mobile-twitter a:hover{ color:#1b95e0; text-decoration:none;}
+.story-section .byline .profile-detail ul li.twitter{ display:none;}
+.byline .story-sponsor-header{margin: 0 0 0 15px;}
 }
