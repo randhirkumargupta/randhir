@@ -150,6 +150,7 @@
                     <?php print drupal_render($form['field_common_related_content']); ?>
                     <?php print drupal_render($form['field_story_show_fields']); ?>
                     <?php print drupal_render($form['field_story_assign_to_widget']); ?>
+                    <?php print drupal_render($form['field_story_embed_webcast']); ?>
                 </div>
             </div>
             <div id="DateTime" class="itg-sidebar-form-section">
