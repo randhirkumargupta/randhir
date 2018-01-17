@@ -61,8 +61,7 @@ function auscovery_dashboard_web($start_date, $end_date) {
     $field_primary_category_value = $resvalue['field_primary_category_value'];
     $body_value = $resvalue['body_value'];
     $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
-    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);    $   
-    //$created_datetime = date("Y-m-d H:i:s", $created);
+    $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);    
     $create_date = date("Y-m-d H:i:s", $created);
     $prime_cat = getNodePrimeCatByNid($nid);
     $author_id = $resvalue['byline_id'];
@@ -111,27 +110,22 @@ function auscovery_dashboard_mob($start_date, $end_date) {
   
   $type = "story";
   $query = db_select('node', 'n');
-  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
-  //$query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');  
   $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
   $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed', 'status'));
-  $query->fields('fpc', array('field_primary_category_value'));
-  //$query->fields('dbody', array('body_value'));
+  $query->fields('fpc', array('field_primary_category_value'));  
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   //end
-  if ($start_date != "na") {
-    //$start_date_timestamp = strtotime($start_date);
+  if ($start_date != "na") {    
     $query->condition('n.created', $start_date, ">=");
   }
-  if ($end_date != "na") {
-    //$end_date_timestamp = strtotime($end_date);
+  if ($end_date != "na") {    
     $query->condition('n.created', $end_date, "<=");
   }
   if ($type != "na") {
     $query->condition('n.type', $type);
   }
-  $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-  //$query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid');
+  $query->condition('n.status', 1)->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);  
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($result as $reskey => $resvalue) {
