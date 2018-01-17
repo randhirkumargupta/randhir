@@ -341,6 +341,7 @@ function itg_html_head_alter(&$head_elements) {
 
   if ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
       $term = taxonomy_term_load($arg[2]);
+      $term_url_alias = drupal_get_path_alias('taxonomy/term/'.$term->tid);
       $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
       if (!empty($meta_keywords)) {
         $head_elements['metatag_keywords_0'] = array(
@@ -353,7 +354,15 @@ function itg_html_head_alter(&$head_elements) {
           ),
         );
       }
-      
+      // Add canonical for taxonomy page:
+      $head_elements['canonical_0'] = array(
+        '#type' => 'html_tag',
+        '#tag' => 'link',
+        '#attributes' => array(
+          'rel' => 'canonical',
+          'href' => FRONT_URL.'/'.$term_url_alias
+        ),
+      );
       $meta_description = $term->metatags[LANGUAGE_NONE]['description']['value'];
       if (isset($meta_description) && !empty($meta_description)) {
         $head_elements['metatag_description_0'] = array(
