@@ -35,7 +35,7 @@ global $base_url;
     <?php if(($is_sponsor) && ($id == 0)): ?>
       <div class="big-pic <?php echo $video_class;?> ">
         <?php if ($row['field_story_extra_large_image_1'] != ''): ?>        
-          <?php print $row['field_story_extra_large_image_1']; ?>
+          <?php print l($row['field_story_extra_large_image_1'], "node/" . $row['nid'], array("html" => true)); ?>
         <?php else: ?>
           <!-- If large image not found then show big default image. -->
           <?php $image_link = "<img width='647' height='363'  src='" . $base_url . "/" . drupal_get_path('theme', 'itg') . "/images/itg_image_770x432.jpg' alt='' title='' />"; ?>

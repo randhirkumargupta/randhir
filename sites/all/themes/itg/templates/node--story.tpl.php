@@ -71,7 +71,7 @@ if (!empty($content)):
     $itg_sso_url = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
   }
   // Check if it is sponsor story.
-  $is_sponsor_story = FALSE;
+  //$is_sponsor_story = FALSE;
   $sponsor_text = '';
   $flag = FALSE;
 //  if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
@@ -224,7 +224,7 @@ if (!empty($content)):
                 print $sponsor_text; ?>
               <?php endif; ?>
               <div class="profile-detail">
-                 <?php if ($sponsor_text == ''): ?>
+                 <?php //if ($sponsor_text == ''): ?>
                  <?php 
                  $lbyline_detail = '';
                  $date_update_class= "date-update";
@@ -333,7 +333,7 @@ if (!empty($content)):
 
                         </ul>
                 <?php } ?>
-                <?php endif; ?>  
+                <?php //endif; ?>  
               
                  
                 <ul class="social-links mhide">
