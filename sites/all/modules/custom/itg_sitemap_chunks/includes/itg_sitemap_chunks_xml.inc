@@ -58,6 +58,8 @@ function itg_sitemap_chunks_create_xml_sitemap_index() {
             $xml .= '<sitemap>' . "\r\n";
             if (!empty($getsitemapurl)) {
               $xml .= '<loc>' . str_replace($sitemapindex_url, $sitemapreplace_url, $xml_files_info['file_url'][$key]) . '</loc>' . "\r\n";
+            } else {
+              $xml .= '<loc>' . $xml_files_info['file_url'][$key] . '</loc>' . "\r\n";
             }
             $xml .= '<lastmod>' . $xml_files_info['last_mod'][$key] . '</lastmod>' . "\r\n";
             $xml .= '</sitemap>' . "\r\n";
