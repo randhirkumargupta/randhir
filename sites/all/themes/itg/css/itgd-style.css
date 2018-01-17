@@ -748,7 +748,8 @@ background:none;
 .story-section .byline .profile-detail ul li.title{ border-right:0px; line-height: 15px;}
 .story-section .byline .profile-detail ul.date-update li + li{ border-left:0px;}
 .story-section .byline .profile-detail ul.date-update li{ width:100%; margin-bottom:4px;}
-.story-section .byline .profile-detail ul.date-update li:nth-child(3),.story-section .byline .profile-detail ul.date-update li:nth-child(4){ width:auto;}
+.story-section .byline .profile-detail ul.date-update li.pubdata,.story-section .byline .profile-detail ul.date-update li.update-data{ width:auto;}
 .story-section .byline .mobile-twitter{color:#1b95e0; margin-left:4px;display: inline-block;} .story-section .byline .mobile-twitter a, .story-section .byline .mobile-twitter a:hover{ color:#1b95e0; text-decoration:none;}
 .story-section .byline .profile-detail ul li.twitter{ display:none;}
+.byline .story-sponsor-header{margin: 0 0 0 15px;}
 }
