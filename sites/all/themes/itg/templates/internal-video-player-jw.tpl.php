@@ -82,7 +82,7 @@ function deferjw(method) {
               label: ""
           }
       });
-      var playerInstance = jwplayer('videoplayer');
+      
   }
   
   deferjw(loadplayerjw);
@@ -92,13 +92,7 @@ function deferjw(method) {
    ga('create', 'UA-20047041-23', 'auto');
    ga('send', 'pageview');
 <?php } ?>
- playerInstance.on('ready', function () {
-   console.log('playerready');
-   ns_.StreamingAnalytics.JWPlayer(playerInstance, {
-   publisherId: "8549097",
-   labelmapping: "c3=\"99000\", ns_st_pu=\"Indiatoday Group\", ns_st_ia=\"0\", ns_st_ge=\"Video\", ns_st_ddt=\"<?php echo $pub_date; ?>\", ns_st_ce=\"FullEpisode\", ns_st_tdt=\"<?php echo $pub_date;?>\", ns_st_title=\"<?php echo stripslashes($title); ?>\""
-	}); 
-}); 
+
 </script>
 
 <?php
