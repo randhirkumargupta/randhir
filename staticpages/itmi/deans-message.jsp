@@ -12,7 +12,7 @@
   })();
 </script>
 <noscript>
-<img src="http://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+<img src="https://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
 </noscript>
 <!-- End comScore Tag -->
 <script>
@@ -49,7 +49,7 @@
           <p>Dear prospective applicant,</p>
           <p>It’s great to belong to one of the biggest media conglomerates in India, because few people truly understand and appreciate the need for quality education in communication as those who communicate for a living. The success of our institute, reflected in the quality and levels of employment, owes itself for the most part to our uncompromising—if exacting—standards of input.</p>
           <p>This year we will have both the excitement and the challenge of expanding our horizons beyond our much-proven success. What started as a broadcast journalism institute will now be a full-fledged communication institute.</p>
-          <p>If you think you’ll make a good communicator <em>(read section “<a href="http://aajtak.intoday.in/itmi/dean-message.php" target="">Why Choose Communication?</a>”)</em>, you’re in good company. In 2013-14, the growth—at 12%—by the M&amp;E industry remains way higher than average. This should be music to your ears, as you aspire to be a part of this industry. The growth will sustain over a long term, so that provides further optimism.</p>
+          <p>If you think you’ll make a good communicator <em>(read section “<a href="https://aajtak.intoday.in/itmi/dean-message.php" target="">Why Choose Communication?</a>”)</em>, you’re in good company. In 2013-14, the growth—at 12%—by the M&amp;E industry remains way higher than average. This should be music to your ears, as you aspire to be a part of this industry. The growth will sustain over a long term, so that provides further optimism.</p>
           <p>Most of you will agree that there remains so much to be done in media! Since 1992 when the media was liberalized, we have been grappling with our function in the society. Today, 22 years later, we have distinguished between information, education and entertainment, but the aspiration of the first two towards the third remains. Such flux is not a bad thing, but it requires thinking minds—visionaries—to intervene.</p>
           <p>What, then, will catalyze you? We believe it is independent thought and, stemming from it, responsible action. <em>Independent, critical thinking</em> is a result of the ability to analyse the world around, and we will train you in that direction. But implementation is key, and that too, in a globally competitive arena. Competitiveness and entrepreneurship, too, will be major drivers of your success. An interdisciplinary approach to pedagogy is badly needed in our country, and we will pioneer it. Most of all, you should take full advantage of the excellent resources our group boasts of—some of the biggest names in the industry who are always ready to guide you, state-of-the-art technology, and international recognition.</p>
           <p>This is why that industry beckons you—not merely to join the bandwagon but to learn the ropes enough to make a positive change in the industry.</p>
@@ -57,17 +57,17 @@
           <p><em>Chase a dream. Find yourself. Surprise yourself.</em></p>
           <div><br>
           </div>
-          <img src="http://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+          <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
           <map name="Map" id="Map">
-            <area shape="rect" coords="6,6,96,51" href="http://indiatoday.intoday.in/" target="_blank">
-            <area shape="rect" coords="99,7,245,51" href="http://businesstoday.intoday.in/" target="_blank">
-            <area shape="rect" coords="253,10,339,52" href="http://indiatoday.intoday.in/" target="_blank">
+            <area shape="rect" coords="6,6,96,51" href="https://indiatoday.intoday.in/" target="_blank">
+            <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">
+            <area shape="rect" coords="253,10,339,52" href="https://indiatoday.intoday.in/" target="_blank">
             <area shape="rect" coords="344,10,399,52" href="aajtak.intoday.in" target="_blank">
-            <area shape="rect" coords="403,11,511,52" href="http://cosmo.intoday.in/" target="_blank">
-            <area shape="rect" coords="67,65,166,113" href="http://www.readersdigest.co.in/" target="_blank">
-            <area shape="rect" coords="170,65,230,110" href="http://aajtak.intoday.in/dilliaajtak/" target="_blank">
-            <area shape="rect" coords="312,64,350,112" href="http://aajtak.intoday.in/itmi" target="_blank">
-            <area shape="rect" coords="363,64,441,113" href="http://oyefm.in/" target="_blank">
+            <area shape="rect" coords="403,11,511,52" href="https://cosmo.intoday.in/" target="_blank">
+            <area shape="rect" coords="67,65,166,113" href="https://www.readersdigest.co.in/" target="_blank">
+            <area shape="rect" coords="170,65,230,110" href="https://aajtak.intoday.in/dilliaajtak/" target="_blank">
+            <area shape="rect" coords="312,64,350,112" href="https://aajtak.intoday.in/itmi" target="_blank">
+            <area shape="rect" coords="363,64,441,113" href="https://oyefm.in/" target="_blank">
           </map>
         </div>
         

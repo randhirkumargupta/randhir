@@ -12,7 +12,7 @@
   })();
 </script>
 <noscript>
-  <img src="http://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+  <img src="https://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
 </noscript>
 <!-- End comScore Tag -->
 <script>
@@ -88,14 +88,14 @@ ul.navbar li a {padding: 8px 17px;}
   <div class="wrapper"> 
     <!--<img border="0" alt="" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Star.png" class="star">-->
     <ul>
-      <li><a href="http://www.indiatoday.in/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
-      <li><a href="http://www.aajtak.in/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
-<!--  <li><a  href="http://www.headlinestoday.in/" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
-      <li><a href="http://www.businesstoday.in/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
-      <li><a href="http://www.menshealthindia.in/" target="_blank"  ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
-      <li><a href="http://www.wonderwoman.in" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
-      <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
-      <li><a href="http://oyefm.in/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
+      <li><a href="https://www.indiatoday.in/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
+      <li><a href="https://www.aajtak.in/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
+<!--  <li><a  href="https://www.headlinestoday.in/" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
+      <li><a href="https://www.businesstoday.in/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
+      <li><a href="https://www.menshealthindia.in/" target="_blank"  ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
+      <li><a href="https://www.wonderwoman.in" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
+      <li><a href="https://www.cosmopolitan.in/" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
+      <li><a href="https://oyefm.in/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
     </ul>
   </div>
 </div>
@@ -116,7 +116,7 @@ ul.navbar li a {padding: 8px 17px;}
         </div>
         
       <!--<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
-    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
+    <div class="bottomRright"> <a href="https://www.indiatodaygroup.com/" target="_blank" ><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
   </div>
   <div class="searchBoxs">
     <div class="search-engin">
@@ -150,7 +150,7 @@ ul.navbar li a {padding: 8px 17px;}
           <li><a href="gallery.jsp">July-December 2014</a></li>
         </ul>
       </li>-->
-      <li><a href="http://indiatodaymediainstitute.wordpress.com/">Blog</a></li>
+      <li><a href="https://indiatodaymediainstitute.wordpress.com/">Blog</a></li>
       <li><a href="#">Programmes</a> 
         <ul style="width:300px;">
           <li><a href="/itmi/what-we-offer-masscommunication.jsp">Two-year, full-time Postgraduate Diploma in Mass Communication</a>
@@ -201,7 +201,7 @@ ul.navbar li a {padding: 8px 17px;}
 </style>
 <div class="bannerBox">
 <div id="social-area">
-	<div><a href="http://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
+	<div><a href="https://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
     <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
     <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
 
@@ -236,7 +236,7 @@ ul.navbar li a {padding: 8px 17px;}
         
               <h3>Media Careers</h3>
               
-              <img src="http://specials.indiatoday.com/aajtaknew/tvtmi/mc.jpg">
+              <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/mc.jpg">
               
               
           <p>As media economy solidifies and expands, it has brought about two phenomena: more job opportunities, and more competition for jobs in traditional and new domains. Before you join, please take a reality check-and let's help you do so.</p>
@@ -280,17 +280,17 @@ ul.navbar li a {padding: 8px 17px;}
           <div></div>
           <div><br>
               </div>
-      <img src="http://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+      <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
               <map name="Map" id="Map">
-            <area shape="rect" coords="6,6,96,51" href="http://indiatoday.intoday.in/" target="_blank">
-            <area shape="rect" coords="99,7,245,51" href="http://businesstoday.intoday.in/" target="_blank">
-            <area shape="rect" coords="253,10,339,52" href="http://indiatoday.intoday.in/" target="_blank">
+            <area shape="rect" coords="6,6,96,51" href="https://indiatoday.intoday.in/" target="_blank">
+            <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">
+            <area shape="rect" coords="253,10,339,52" href="https://indiatoday.intoday.in/" target="_blank">
             <area shape="rect" coords="344,10,399,52" href="aajtak.intoday.in" target="_blank">
-            <area shape="rect" coords="403,11,511,52" href="http://cosmo.intoday.in/" target="_blank">
-            <area shape="rect" coords="67,65,166,113" href="http://www.readersdigest.co.in/" target="_blank">
-            <area shape="rect" coords="170,65,230,110" href="http://aajtak.intoday.in/dilliaajtak/" target="_blank">
-            <area shape="rect" coords="312,64,350,112" href="http://aajtak.intoday.in/itmi" target="_blank">
-            <area shape="rect" coords="363,64,441,113" href="http://oyefm.in/" target="_blank">
+            <area shape="rect" coords="403,11,511,52" href="https://cosmo.intoday.in/" target="_blank">
+            <area shape="rect" coords="67,65,166,113" href="https://www.readersdigest.co.in/" target="_blank">
+            <area shape="rect" coords="170,65,230,110" href="https://aajtak.intoday.in/dilliaajtak/" target="_blank">
+            <area shape="rect" coords="312,64,350,112" href="https://aajtak.intoday.in/itmi" target="_blank">
+            <area shape="rect" coords="363,64,441,113" href="https://oyefm.in/" target="_blank">
           </map>
             </div>
             
