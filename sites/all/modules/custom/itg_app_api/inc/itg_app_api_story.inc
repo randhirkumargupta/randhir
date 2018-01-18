@@ -140,7 +140,7 @@ function generateStoryDeatilList($id) {
   $image_caption = $img_info['image_caption'];
 
   $caption = $node->field_story_extra_large_image['und'][0]['title'];
-  $style_js = '<style>
+  $style = '<style>
 *
 { margin:0; padding:0}
 
@@ -163,7 +163,7 @@ iframe[src*="https://www.indiatoday.in/"]
 {width: 100%; height: calc((100vw - -12vw) * 0.5625)}
 
 </style>';
-  $style_js .= '<script type="text/javascript">
+  $js = '<script type="text/javascript">
 var iframesrc = document.querySelectorAll("iframe[src*="https://www.facebook.com/"]");
 //console.log(iframesrc.length)
 for(var idx=0;idx < iframesrc.length;idx++){
@@ -183,7 +183,7 @@ else
 }
 </script>';
   
-  $body_with_html = $style_js."".$body_with_html;
+  $body_with_html = $style."".$body_with_html."".$js;
  
 
     //data array building
