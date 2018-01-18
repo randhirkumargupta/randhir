@@ -33,6 +33,9 @@ if ($used_on == 'embed') {
   $autostart = "FALSE";
 }
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on, $external_side);
+if(empty($image)){
+  $image = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg';
+}
 ?>
 <div id="videoplayer"> </div>
 <script type="text/javascript">
@@ -43,7 +46,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
           playlist: [{
                   title: "<?php echo stripslashes($title); ?>",
                   mediaid:"vod_<?php echo $nid; ?>",
-                  'image': "<?php echo $player_content['player_image']; ?>",
+                  'image': "<?php echo $image; ?>",
                   sources: [
                       {
                           file: "<?php echo $player_content['bitrate_url']; ?>"
