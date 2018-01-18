@@ -218,7 +218,7 @@ function itg_seo_node_data($node) {
     //$imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
     $thumb_uri = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
     $extra_large_image = file_create_url($thumb_uri);
-    $thumbnail_url = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
+    //$thumbnail_url = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
     $markup = array(
         '#type' => 'markup',
         '#markup' => '<script type="application/ld+json">
