@@ -281,7 +281,7 @@ $uri = base64_encode($actual_link);
                           <?php else: ?>
                             <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                           <?php endif; ?>-->
-                          <li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>  
+                          <!--<li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>-->  
                       </ul>
                   </div>
                   <div class="clearfix"></div>
@@ -333,7 +333,7 @@ $uri = base64_encode($actual_link);
                                 <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                               <?php endif; ?>-->
                               <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=550&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i></span></a>  
-							  <li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+							  <!--<li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>-->
                           </ul>
                       </div>
                       <?php print $description_slider; ?>
