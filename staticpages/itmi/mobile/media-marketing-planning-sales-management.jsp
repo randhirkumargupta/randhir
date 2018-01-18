@@ -68,7 +68,7 @@ if (!mobile) {
   <!--Body Content Start Here-->
   <div class="normaltxt">
     <div>
-      <h3 id="tab1"><strong>Full â€“ Time Postgraduate Diploma in Media and Entertainment Management.</strong></h3>
+      <h3 id="tab1"><strong>Full –  Time Postgraduate Diploma in Media and Entertainment Management.</strong></h3>
       <div class="down" id="down1">
         <div id="dif">
           <p><strong>Structure:</strong> This is a one-year programme, including six months of on-campus and six months of internship in the TV Today Network system's various channels and Departments. The internship is uniquely structured to include training in media marketing planning and sales management. The course is targeted to fulfill the market needs in media and entertainment sector as a whole and an allied career in Planning and Buying Agencies, Marketing and sales division of all TV channels, Newspaper, Magazines, FM Channels and digital platforms for better growth oriented career opportunities. Beside the corporate houses NGOs also require the specific manpower for their organization.</p>
@@ -85,7 +85,7 @@ if (!mobile) {
             1B. Specialization level<br>
             1.	Media Planning<br>
             2.	Media buying<br>
-            3.	Media Sales â€“ Print/TV<br>
+            3.	Media Sales - Print/TV<br>
             4.	PR, Brand Communication<br>
             5.	Media research and Practices<br>
             6.	Media scheduling and operations<br>
