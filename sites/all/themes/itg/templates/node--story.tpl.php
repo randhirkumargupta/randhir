@@ -297,7 +297,7 @@ if (!empty($content)):
                    <?php if ($sponsor_text == ''): ?>
                     <li class="mailto mhide">
                       <i class="fa fa-envelope-o"></i> &nbsp;<?php
-                      print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Email Author') . "</a>";
+                      print "<a title ='Email Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Email Author') . "</a>";
                       ?>
                     </li>
                   <?php endif; ?>
