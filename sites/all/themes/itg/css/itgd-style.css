@@ -752,6 +752,7 @@ background:none;
 /* story byline css */
 .mobile-twitter{ display:none;}
 @media only screen and (max-width: 767px) {
+.story-section .byline .profile-detail { width: 78%;}
 .story-section .byline .profile-detail ul li.title{ border-right:0px; line-height: 15px;}
 .story-section .byline .profile-detail ul.date-update li + li{ border-left:0px;}
 .story-section .byline .profile-detail ul.date-update li{ width:100%; margin-bottom:4px;}
@@ -762,7 +763,7 @@ background:none;
 
 .story-section .byline .profile-detail ul.profile-byline li{ float:none; display:block; margin-bottom:4px;}
 .story-section .byline .profile-detail ul.profile-byline li.title{ display:inline-block;line-height: 15px;}
-.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2){border-left: 1px solid #ddd;}
+.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(2),.story-section .byline .profile-detail ul.profile-byline li.title:nth-child(3){border-left: 1px solid #ddd;}
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{ width:auto; display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 

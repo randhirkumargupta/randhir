@@ -67,7 +67,7 @@ if (!empty($content)):
     $photo_story_section_class = ' photo-story-section';
   }
   if (function_exists(itg_sso_url)) {
-    $itg_sso_url_mobile = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="sprite readelater"></i></a>';
+    $itg_sso_url_mobile = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i></a>';
     $itg_sso_url = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
   }
   // Check if it is sponsor story.
