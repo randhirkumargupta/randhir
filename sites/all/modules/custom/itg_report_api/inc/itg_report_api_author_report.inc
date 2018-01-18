@@ -62,7 +62,7 @@ function author_report_tvtn($start_date) {
   $auhtor_data = array();
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
-    $name = $value['author_name'];
+    $name = getAuthorNameDashboard($user_id);
     $mail = $value['author_email'];
     $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
     $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
@@ -168,7 +168,7 @@ function author_report($start_date) {
   $auhtor_data = array();
   foreach ($author_list as $key => $value) {
     $user_id = $value['author_id'];
-    $name = $value['author_name'];
+    $name = getAuthorNameDashboard($user_id);
     $mail = $value['author_email'];
     $today_total_uid = getContentCountByDateAndByUid($today_unix, $today_end, $mail);
     $yesterday_total_uid = getContentCountByDateAndByUid($yesterday_unix, $yesterday_unix_end, $mail);
@@ -329,9 +329,9 @@ function getAuthorList_Report($s_date, $e_date) {
 
   foreach ($result as $reskey => $resvalue) {
     $author_nid = $resvalue['byline_id'];
-    $author = node_load($author_nid);
+    $author_name = getAuthorNameDashboard($author_id);
     $data['author_id'] = $author_nid;
-    $data['author_name'] = $author_email->title;
+    $data['author_name'] = $author_name;
     $data['author_email'] = $resvalue['field_reporter_email_id_value'];
     $list[$author_nid] = $data;
     $cont++;
