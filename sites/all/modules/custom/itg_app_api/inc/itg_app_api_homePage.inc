@@ -1846,7 +1846,7 @@ function homePageJsonWidget_1() {
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
     $n_widget[0]['tilte'] = "Watch Live";
-    $n_widget[0]['short_url'] = "http://media2.intoday.in/microsites/rapidvalue/banner.html";
+    $n_widget[0]['short_url'] = "http://itgdrapid.indiatodayonline.in/appLTV.html";
     $n_widget[0]['extended_url'] = "http://conclave.intoday.in/2018/south/";
     $n_widget[0]['action'] = "webview";    
     
