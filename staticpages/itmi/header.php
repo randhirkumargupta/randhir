@@ -89,7 +89,7 @@ ul.navbar li a {padding: 8px 17px;}
           <div class="bottomleft">
             <div class="topdate_Addmiss"> <a href="javascript:void();" target="_blank" style="cursor:default">ADMISSION TEST - 10th March 2018</a> </div>
           </div>
-          <div class="bottomRright"> <a href="https://www.indiatodaygroup.com/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0"></a> </div>
+          <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0"></a> </div>
         </div>
         <div class="searchBoxs">
           <div class="search-engin">
