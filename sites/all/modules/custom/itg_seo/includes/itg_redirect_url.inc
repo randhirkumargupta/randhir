@@ -207,13 +207,15 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $table = 'migrate_map_itgcategory'; 
   } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto') && ($arg[1] == 'story') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
     $storyarg = $arg[4];
-    $newurl = getNewStoryUrl($storyarg);
+    $table = 'migrate_map_itgstorylist';
+    $newurl = getNewStoryUrl($storyarg, $table);
     if ($newurl) {
       drupal_goto($newurl, array(), 301);
     }
   } else if(($arg[0] == 'story') && !empty($arg[1]) && !empty($arg[2] && !empty($arg[3]))) {
     $storyarg = $arg[3];
-    $newurl = getNewStoryUrl($storyarg);
+    $table = 'migrate_map_itgstorylist';
+    $newurl = getNewStoryUrl($storyarg, $table);
     if ($newurl) {
       drupal_goto($newurl, array(), 301);
     }
@@ -361,6 +363,13 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $ampstoryurl = '/amp/'.$redirecturl;
       $newurl = FRONT_URL.$ampstoryurl;
       drupal_goto($newurl, array(), 301);
+    } else if(($arg[0] == 'video' || $arg[0] == 'programme') && !empty($arg[1]) && (!empty($arg[2] && is_numeric($arg[2])) && !empty($arg[3]))) {
+      $storyarg = $arg[3];
+      $table = 'migrate_map_itgvideogallery';
+      $newurl = getNewStoryUrl($storyarg, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
     } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
@@ -476,12 +485,12 @@ function getNewVideoEmbedUrl($videoembed) {
  * Get Story url from .html pattern
  * @param String
  */
-function getNewStoryUrl($storyarg) {
+function getNewStoryUrl($storyarg, $table) {
   global $base_url;
   $newmatchurl = '';
   $storyarg_exp = explode('.html', $storyarg);
   $old_content_id = $storyarg_exp[0];
-  $table = 'migrate_map_itgstorylist';
+  //$table = 'migrate_map_itgstorylist';
   $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
   if ($newcontentid) {
     $redirecturl = get_redirect_url($newcontentid);
