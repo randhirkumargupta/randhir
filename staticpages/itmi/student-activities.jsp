@@ -84,7 +84,7 @@
           </ul>
           <br>
           <br>
-          <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" width="480" border="0">
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" width="480" border="0">
           <map name="Map" id="Map">
             <area shape="rect" coords="6,6,96,51" href="/" target="_blank">
             <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">

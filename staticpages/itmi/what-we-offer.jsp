@@ -46,7 +46,7 @@
           <div class="normaltxt">
             <h3>Programmes</h3>
             <br>
-            <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/wwo.jpg"> <br />
+            <img src="https://specials.intoday.in/aajtaknew/tvtmi/wwo.jpg"> <br />
             <br />
             <div>
               <h3 id="tab1"><strong>Two-year, full-time Postgraduate Diploma in Mass Communication</strong></h3>
@@ -153,7 +153,7 @@
             <p>&nbsp;</p>
             <h2 style="display: inline;font:bold 12px Georgia; color:#000000;">&nbsp;</h2>
           </div>
-          <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
           <map name="Map" id="Map">
             <area shape="rect" coords="6,6,96,51" href="/" target="_blank">
             <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">

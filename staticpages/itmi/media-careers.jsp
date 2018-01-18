@@ -56,7 +56,7 @@
           <!--Body Content Start Here-->
           
           <h3>Media Careers</h3>
-          <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/mc.jpg">
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/mc.jpg">
           <p>As media economy solidifies and expands, it has brought about two phenomena: more job opportunities, and more competition for jobs in traditional and new domains. Before you join, please take a reality check-and let's help you do so.</p>
           <div>
             <h2 id="tab1"><strong>Journalism</strong></h2>
@@ -98,7 +98,7 @@
           <div></div>
           <div><br>
           </div>
-          <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
           <map name="Map" id="Map">
             <area shape="rect" coords="6,6,96,51" href="/" target="_blank">
             <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">

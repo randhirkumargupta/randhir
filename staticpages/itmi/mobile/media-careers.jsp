@@ -67,7 +67,7 @@ if (!mobile) {
 <div class="text-containt"> 
   <!--Body Content Start Here-->
   <div class="normaltxt">
-    <div> <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/mc.jpg" alt="" style="width:100%;"> <br>
+    <div> <img src="https://specials.intoday.in/aajtaknew/tvtmi/mc.jpg" alt="" style="width:100%;"> <br>
       <p>As media economy solidifies and expands, it has brought about two phenomena: more job opportunities, and more competition for jobs in traditional and new domains. Before you join, please take a reality check-and let's help you do so.</p>
       <div class="down" id="down1">
         <div id="dif">

@@ -56,7 +56,7 @@
         <div class="normaltxt">
           <h3 style="margin-bottom:5px;">CURRICULA FOR FULL-TIME POSTGRADUATE PROGRAMMES</h3>
           <p><em>(Refer to the curriculum packet, available when you enrol, for detailed syllabi)</em></p>
-          <!--<img src="https://specials.indiatoday.com/aajtaknew/tvtmi/wwo.jpg">-->
+          <!--<img src="https://specials.intoday.in/aajtaknew/tvtmi/wwo.jpg">-->
           
           <div class="common_box">
             <h4>One Year Postgraduate Diploma In Broadcast Journalism</h4>
@@ -295,7 +295,7 @@
               </ul>
             </div>
           </div>
-          <span class="clear"></span> <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+          <span class="clear"></span> <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
           <map name="Map" id="Map">
             <area shape="rect" coords="6,6,96,51" href="/" target="_blank">
             <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">

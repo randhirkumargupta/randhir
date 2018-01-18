@@ -57,7 +57,7 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="424">&nbsp;</td>
-                <td width="66"><a href="https://aajtak.intoday.in/itmi" target=_blank ><img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/itmi.jpg" width="60"></a></td>
+                <td width="66"><a href="https://aajtak.intoday.in/itmi" target=_blank ><img src="https://specials.intoday.in/aajtaknew/tvtmi/images/itmi.jpg" width="60"></a></td>
               </tr>
             </table>
             <h2 class="faq">Frequently Asked Questions</h2>
@@ -149,7 +149,7 @@
           </ul>
           <br>
           <br>
-          <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
           <map name="Map" id="Map">
             <area shape="rect" coords="6,6,96,51" href="/" target="_blank">
             <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">

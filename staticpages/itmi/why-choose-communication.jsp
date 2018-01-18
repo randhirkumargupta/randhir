@@ -44,7 +44,7 @@
           <!--Body Content Start Here-->
           
           <h3>Why choose communication?</h3>
-          <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/wcc.jpg" width="490">
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/wcc.jpg" width="490">
           <p>&nbsp;</p>
           <p><strong>Will Communication Work For Me?</strong></p>
           <p>If you're guessing journalism, television content, advertising and public relations is not for everybody, you're on the right track. Too often we hear rather flaccid reasons during interviews with hopefuls: "I love interacting with people, and I know I am creative." Not good enough.</p>
@@ -57,7 +57,7 @@
           <div></div>
           <div><br>
           </div>
-          <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
           <map name="Map" id="Map">
             <area shape="rect" coords="6,6,96,51" href="https://indiatoday.intoday.in/" target="_blank">
             <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">

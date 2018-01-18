@@ -61,7 +61,7 @@
           <p><strong>Academic : </strong>Entrance to ITMI is competitive, but we do not consider your marks at degree or other levels either for a "cut-off" or for merit for admission. The age limit for the course is 30 years as on date of admission. Our testing process alone will make you eligible or ineligible.</p>
           <p>All our postgraduate programmes require you to be a graduate. Three-year diplomas will be considered. A minimum of 15 years of schooling (1st standard through college) is required for admission.</p>
           <p><strong>Incomplete graduation:</strong>If you are in the final year of undergraduate study, you may apply. Submit copies of previous marksheets. Copies of final marksheets and passing certificate must be submitted as soon as results are announced.</p>
-          <p>All academic backlogs must be clear by the time you join, and your admission will remain conditional at your risk. If you obtain a backlog or otherwise fail to graduate, you must leave the institute and reapply after successful completion of your graduation. We will adjust your fees towards readmission, and admission is guaranteed on the basis of the previous admission process. Should you prefer to withdraw your admission, refund will only be on the basis of our Refund Policy.<a href="https://specials.indiatoday.com/aajtaknew/tvtmi/fees-refund.htm">Refer to Fees and refunds page for the policy.</a></p>
+          <p>All academic backlogs must be clear by the time you join, and your admission will remain conditional at your risk. If you obtain a backlog or otherwise fail to graduate, you must leave the institute and reapply after successful completion of your graduation. We will adjust your fees towards readmission, and admission is guaranteed on the basis of the previous admission process. Should you prefer to withdraw your admission, refund will only be on the basis of our Refund Policy.<a href="https://specials.intoday.in/aajtaknew/tvtmi/fees-refund.htm">Refer to Fees and refunds page for the policy.</a></p>
           <p><strong>TIMELINES</strong><br>
           </p>
           <p>Specific dates for tests, interviews and orientation will be communicated to you separately.</p>
@@ -83,7 +83,7 @@
           </ol>
           <div></div>
           <p>.</p>
-          <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
           <map name="Map" id="Map">
             <area shape="rect" coords="6,6,96,51" href="/" target="_blank">
             <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">

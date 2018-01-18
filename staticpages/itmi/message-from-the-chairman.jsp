@@ -236,7 +236,7 @@ Welcome to a great future in the media.
 
 Aroon Purie</p>
               <p> Over the  last 35 years, the group has evolved with its namesake. Through its  subscribers, readers, viewers, surfers and listeners, the India Today Group has reached out to over 50 million  consumers; reflected public opinion as well as shaped it; delivered India to the world and the world to India. With  ITMI, the Group now looks forward to changing the world of media education.</p>
-              <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+              <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
               <map name="Map" id="Map">
             <area shape="rect" coords="6,6,96,51" href="https://indiatoday.intoday.in/" target="_blank">
             <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">

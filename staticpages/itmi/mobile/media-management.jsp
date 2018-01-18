@@ -68,7 +68,7 @@ if (!mobile) {
   <!--Body Content Start Here-->
   <div class="normaltxt">
     <h3>Programmes</h3>
-    <!--<img src="https://specials.indiatoday.com/aajtaknew/tvtmi/wwo.jpg">-->
+    <!--<img src="https://specials.intoday.in/aajtaknew/tvtmi/wwo.jpg">-->
     <div>
       <h3 id="tab1"><strong>Full-time Postgraduate Diploma in Media Management</strong></h3>
       <div class="down" id="down1">

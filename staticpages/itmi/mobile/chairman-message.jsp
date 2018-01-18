@@ -68,7 +68,7 @@ if (!mobile) {
 <div class="text-containt"> 
   <!--Body Content Start Here-->
   <div class="outer_box_cont">
-    <div class="back_hdn_img"> <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/arun-puri.jpg" alt="img"> </div>
+    <div class="back_hdn_img"> <img src="https://specials.intoday.in/aajtaknew/tvtmi/arun-puri.jpg" alt="img"> </div>
   </div>
   <div class="normaltxt">
     <p>Dear prospective ITMI-ian,</p>
