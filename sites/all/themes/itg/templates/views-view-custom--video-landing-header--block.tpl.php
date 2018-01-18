@@ -122,6 +122,11 @@ $uri = base64_encode($actual_link);
                             else {
                               $vide_dm_id = $video_value->solr_video_id;
                             }
+                            $image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg';
+                            if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
+                              $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+                            }
+                            
                             ?>
 
                             <?php if ($keys == 0) { ?>
@@ -135,7 +140,7 @@ $uri = base64_encode($actual_link);
                                       <div class=" video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
-                                           print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'video', 'title' => $fb_title));
+                                           print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'video', 'title' => $fb_title, 'image' => $image_url));
                                           }
                                           ?>
                                       </div>
@@ -281,7 +286,7 @@ $uri = base64_encode($actual_link);
                           <?php else: ?>
                             <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                           <?php endif; ?>-->
-                          <li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>  
+                          <!--<li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>-->  
                       </ul>
                   </div>
                   <div class="clearfix"></div>
@@ -333,7 +338,7 @@ $uri = base64_encode($actual_link);
                                 <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="Submit Video" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
                               <?php endif; ?>-->
                               <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=550&iframe=true&type=<?php print $video_node->type; ?>"><i class="fa fa-share"></i></span></a>  
-							  <li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>
+							  <!--<li class="replace-submit-story"><a class="" title="Submit Video" href="#"><i class="fa fa-share"></i><span>Submit Video</span></a></li>-->
                           </ul>
                       </div>
                       <?php print $description_slider; ?>
