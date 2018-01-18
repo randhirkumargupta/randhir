@@ -122,6 +122,11 @@ $uri = base64_encode($actual_link);
                             else {
                               $vide_dm_id = $video_value->solr_video_id;
                             }
+                            $image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg';
+                            if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
+                              $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+                            }
+                            
                             ?>
 
                             <?php if ($keys == 0) { ?>
@@ -135,7 +140,7 @@ $uri = base64_encode($actual_link);
                                       <div class=" video-iframe-wrapper" id="video_0">
                                           <?php
                                           if ($videoids[0]->video_repo_type == 'INTERNAL') {
-                                           print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'video', 'title' => $fb_title));
+                                           print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'video', 'title' => $fb_title, 'image' => $image_url));
                                           }
                                           ?>
                                       </div>
