@@ -87,10 +87,10 @@
             <area shape="rect" coords="253,10,339,52" href="/" target="_blank">
             <area shape="rect" coords="344,10,399,52" href="aajtak.intoday.in" target="_blank">
             <area shape="rect" coords="403,11,511,52" href="https://cosmo.intoday.in/" target="_blank">
-            <area shape="rect" coords="67,65,166,113" href="https://www.readersdigest.co.in/" target="_blank">
+            <area shape="rect" coords="67,65,166,113" href="http://www.readersdigest.co.in/" target="_blank">
             <area shape="rect" coords="170,65,230,110" href="https://aajtak.intoday.in/dilliaajtak/" target="_blank">
             <area shape="rect" coords="312,64,350,112" href="https://aajtak.intoday.in/itmi" target="_blank">
-            <area shape="rect" coords="363,64,441,113" href="https://oyefm.in/" target="_blank">
+            <area shape="rect" coords="363,64,441,113" href="http://oyefm.in/" target="_blank">
           </map>
         </div>
         

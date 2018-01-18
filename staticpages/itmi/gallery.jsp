@@ -84,7 +84,7 @@ ul.navbar li a {padding: 8px 17px;}
       <li><a href="https://www.menshealthindia.in/" target="_blank"  ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
       <li><a href="https://www.wonderwoman.in" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
       <li><a href="https://www.cosmopolitan.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
-      <li><a href="https://oyefm.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
+      <li><a href="http://oyefm.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
     </ul>
   </div>
 </div>
