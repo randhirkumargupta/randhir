@@ -18,7 +18,7 @@
   })();
 </script>
 <noscript>
-<img src="https://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+<img src="https://sb.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
 </noscript>
 <!-- End comScore Tag -->
 <script>
