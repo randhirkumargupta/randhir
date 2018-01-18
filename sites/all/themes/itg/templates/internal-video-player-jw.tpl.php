@@ -48,9 +48,10 @@ function deferjw(method) {
 }
 </script>
 <script type="text/javascript">
-  jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
+  
   function loadplayerjw() {
       var player_dfp = "<?php echo urlencode($player_content['dfp_tags']); ?>";
+      jwplayer.key = "XRiQ7SgnSBR9/smfQ9+YZsn3S7EMc/Am440mYg==";
       jwplayer('videoplayer').setup({
           playlist: [{
                   title: "<?php echo stripslashes($title); ?>",
