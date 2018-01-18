@@ -215,8 +215,10 @@ function itg_seo_node_data($node) {
     }
     $createdate = date('Y-m-d\Th:i:s+5:30', $node->created);
     $contenturl = $base_url . '/' . $node->path['alias'];
-    $imgarray = explode('//', $node->field_story_extra_small_image[LANGUAGE_NONE][0]['uri']);
-    $thumbnail_url = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
+    //$imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    $thumb_uri = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+    $extra_large_image = file_create_url($thumb_uri);
+    //$thumbnail_url = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
     $markup = array(
         '#type' => 'markup',
         '#markup' => '<script type="application/ld+json">
@@ -225,12 +227,11 @@ function itg_seo_node_data($node) {
         "@type": "VideoObject",
         "name": "' . $name . '",
           "description":"' . $description . '",
-          "thumbnailUrl": "' . $thumbnail_url . '",
+          "thumbnailUrl": "' . $extra_large_image . '",
             "duration":"' . $video_duration . '",
             "genre":"",  
             "inLanguage":"",
-            "thumbnail": "' . $thumbnail_url . '",
-            "playerType":"Dailymotion",
+            "thumbnail": "' . $extra_large_image . '",
             "uploadDate":"' . $createdate . '",
             "contentURL":"' . $contenturl . '",
             "url":"' . $contenturl . '",

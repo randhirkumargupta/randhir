@@ -100,9 +100,9 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
 
         //Add cancel button to magazine, supplement and issue form
         $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+            '#markup' => l(t('Close'), $destination, array('attributes' => array('class' => 'button'))),
             '#weight' => 21,
-            '#value' => t('Cancel'),
+            '#value' => t('Close'),
         );
 
         //Add submit handler for redirect form to their corresponding page after node has been created susccessfully.

@@ -321,7 +321,7 @@ function itg_photogallery_after_build($form, &$form_state) {
 	}
 
 	$form['actions']['cancel'] = array(
-		'#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button'))),
+		'#markup' => l(t('Close'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button'))),
 		'#weight' => 25,
 	);
 	global $user, $base_url;

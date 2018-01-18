@@ -40,7 +40,7 @@ if (!empty($content)):
   $follow_status = $content["follow_status"];
   $migrated_count = $content["migrated_count"];
   //get byline id based on order reorder
-  $byline_id = $content["byline_id"];
+  $byline_id_mobile = $byline_id = $content["byline_id"];
     // for activate_live_tv
     $activate_live_tv = FALSE;
     $is_sponsor_story = FALSE;
@@ -67,7 +67,7 @@ if (!empty($content)):
     $photo_story_section_class = ' photo-story-section';
   }
   if (function_exists(itg_sso_url)) {
-    $itg_sso_url_mobile = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="sprite readelater"></i></a>';
+    $itg_sso_url_mobile = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i></a>';
     $itg_sso_url = '<a href="' . PARENT_SSO . '/saml_login/other/' . $uri . '" title="READ LATER"><i class="fa fa-bookmark"></i> <span>' . t('READ LATER') . '</span></a>';
   }
   // Check if it is sponsor story.
@@ -240,9 +240,9 @@ if (!empty($content)):
 				  }
                    
                  ?> 
-                  <ul class="<?php print $date_update_class; ?>">
+                  <ul class="<?php print $date_update_class; ?> mhide">
 
-                    <?php if ($sponsor_text == '') { ?> 
+                    <?php if ($sponsor_text == '') { ?>	 
                      <li class="title"><?php if(!empty($value['title'])) { print t($value['title']); } ?>
                       <?php if(!empty($twitter_handle)) { ?> 
                       <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -297,7 +297,7 @@ if (!empty($content)):
                    <?php if ($sponsor_text == ''): ?>
                     <li class="mailto mhide">
                       <i class="fa fa-envelope-o"></i> &nbsp;<?php
-                      print "<a title ='Mail To Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Mail To Author') . "</a>";
+                      print "<a title ='Email Author' href='mailto:".ITG_SUPPORT_EMAIL."'>" . t('Email Author') . "</a>";
                       ?>
                     </li>
                   <?php endif; ?>
@@ -338,8 +338,54 @@ if (!empty($content)):
 
                         </ul>
                 <?php } ?>
-                <?php //endif; ?>  
-              
+                
+                <ul class="profile-byline desktop-hide">
+                <?php
+                   // For Mobile 
+					if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  $mobile_twitter_handle = '';
+						  if(!empty($mobile_val['twitter_handle'])) {
+						  $mobile_twitter_handle = $mobile_val['twitter_handle'];
+						  $mobile_twitter_handle = str_replace('@', '', $mobile_twitter_handle);
+						  }
+				
+					if ($sponsor_text == '') { ?>	 
+						 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?>
+						  <?php if(!empty($mobile_twitter_handle)) { ?> 
+						  <span class="mobile-twitter">  <a href="https://twitter.com/intent/follow?screen_name=<?php print $mobile_twitter_handle; ?>"><i class="fa fa-twitter"></i></a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+						  </span>
+						  <?php } ?>
+						  </li>
+							
+					   <?php }      	
+					   }
+					}   
+				
+                if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) { ?>
+				  <li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+						?>
+				   </li>
+				  <?php } ?>
+				  <li class="pubdata"><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?>   </li>
+				  <li class="update-data">
+					<?php
+					print t('UPDATED ');
+					if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+					  print date('H:i', $node->created);
+					}
+					else {
+					  print date('H:i', $node->changed);
+					}
+					print t(' IST');
+					?>
+				  </li>
+			  </ul>      
                  
                 <ul class="social-links mhide">
                                        
@@ -393,23 +439,23 @@ if (!empty($content)):
 			<!-- social icon list for mobile only  -->  
 			<div class="share_bar clearfix desktop-hide">
 			<ul class="list-inline social-share">
-			<li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="sprite facebook"></i></a></li>
-			<li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="sprite twitter"></i></a></li>
-			<li><a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw?sub_confirmation=1" target="_blank"><i class="sprite youtube"></i></a></li>
-			<li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="sprite gplus"></i></a></li>
-			<li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="sprite whatsapp"></i></a></li>
+			<li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+			<li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+			<!-- <li><a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw?sub_confirmation=1" target="_blank"><i class="fa fa-youtube-play"></i></a></li> -->
+			<li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+			<li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
 
 			<li>
 			 <?php
 			  if ($user->uid > 0) {
 				if (empty($opt['status']) || $opt['status'] == 0) {
 				  ?> 
-				  <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="sprite readelater"></i></a>
+				  <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a>
 				  <?php
 				}
 				else {
 				  ?>
-				  <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="sprite readelater"></i></a>
+				  <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a>
 				  <?php
 				}
 			  }
@@ -419,9 +465,9 @@ if (!empty($content)):
 			 ?>   
 			</li>
 			<?php if ($config_name == 'vukkul') { ?>
-			  <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="sprite email"></i></a></li>
+			  <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
 			<?php } if ($config_name == 'other') { ?> 
-			  <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="sprite email"></i></a></li>
+			  <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
 			<?php } ?>
 			</ul>
 			</div>

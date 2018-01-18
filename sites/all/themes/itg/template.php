@@ -33,6 +33,10 @@ function itg_theme() {
     'path' => drupal_get_path('theme', 'itg') . '/templates',
     'template' => 'migrated-video-player',
   );
+  $items['internal_video_player_jw'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'internal-video-player-jw',
+  );
   return $items;
 }
 
