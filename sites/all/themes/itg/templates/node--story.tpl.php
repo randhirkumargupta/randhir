@@ -439,23 +439,23 @@ if (!empty($content)):
 			<!-- social icon list for mobile only  -->  
 			<div class="share_bar clearfix desktop-hide">
 			<ul class="list-inline social-share">
-			<li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="sprite facebook"></i></a></li>
-			<li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="sprite twitter"></i></a></li>
-			<li><a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw?sub_confirmation=1" target="_blank"><i class="sprite youtube"></i></a></li>
-			<li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="sprite gplus"></i></a></li>
-			<li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="sprite whatsapp"></i></a></li>
+			<li><a title = "share on facebook" class="def-cur-pointer" onclick="fbpop('<?php print $actual_link; ?>', '<?php print $fb_title; ?>', '<?php print $share_desc; ?>', '<?php print $image; ?>', '<?php print $base_url; ?>', '<?php print $nid; ?>')"><i class="fa fa-facebook"></i></a></li>
+			<li><a title = "share on twitter" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="twitter_share" data-status="1" onclick="twitter_popup('<?php print urlencode($node->title); ?>', '<?php print urlencode($short_url); ?>')"><i class="fa fa-twitter"></i></a></li>
+			<li><a href="https://www.youtube.com/channel/UCYPvAwZP8pZhSMW8qs7cVCw?sub_confirmation=1" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+			<li><a title="share on google+" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="google_share" data-status="1" onclick="return googleplusbtn('<?php print $actual_link; ?>')"><i class="fa fa-google-plus"></i></a></li>
+			<li><a href="whatsapp://send?text=<?php print $whatsapp_text; ?>" data-text="<?php print $node->title; ?>" data-href="<?php print $actual_link; ?>"><i class="fa fa-whatsapp"></i></a></li>
 
 			<li>
 			 <?php
 			  if ($user->uid > 0) {
 				if (empty($opt['status']) || $opt['status'] == 0) {
 				  ?> 
-				  <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="sprite readelater"></i></a>
+				  <a title = "Read Later" href="javascript:void(0)" class="user-activity" data-rel="<?php print $node->nid; ?>" data-tag="<?php print $node->type; ?>" data-activity="read_later" data-status="1" class="def-cur-pointer"><i class="fa fa-bookmark"></i></a>
 				  <?php
 				}
 				else {
 				  ?>
-				  <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="sprite readelater"></i></a>
+				  <a title = "Read Later" href="javascript:void(0)" class="def-cur-pointer unflag-action"><i class="fa fa-bookmark"></i></a>
 				  <?php
 				}
 			  }
@@ -465,9 +465,9 @@ if (!empty($content)):
 			 ?>   
 			</li>
 			<?php if ($config_name == 'vukkul') { ?>
-			  <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="sprite email"></i></a></li>
+			  <li><a class= "def-cur-pointer" onclick ="scrollToAnchor('vuukle-emotevuukle_div');" title="comment"><i class="fa fa-comment"></i></a></li>
 			<?php } if ($config_name == 'other') { ?> 
-			  <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="sprite email"></i></a></li>
+			  <li><a class="def-cur-pointer" onclick ="scrollToAnchor('other-comment');" title="comment"><i class="fa fa-comment"></i></a></li>
 			<?php } ?>
 			</ul>
 			</div>

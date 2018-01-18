@@ -685,16 +685,15 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .share_bar{box-sizing: border-box;padding:0px 0 10px; display:block; overflow: hidden;}
 .share_bar .social-share{margin: 0 auto;padding: 0;text-align: center;float: left;width: 100%;display: table}
 .share_bar .social-share li{display: table-cell;text-align: center;vertical-align: middle}
-.share_bar .social-share li a{display: block;height:24px;width:24px;margin: 0 auto}
-.share_bar .social-share i{height:24px;width: 24px;display: table-cell}
-.share_bar .sprite{background: url(http://instore-tosshub-com.s3.amazonaws.com/sites/all/themes/itg/images/socialicon-sprit-mobile.png) no-repeat }
-.share_bar .facebook{background-position:-3px -3px}
-.share_bar .twitter{background-position: -33px -3px}
-.share_bar .youtube{background-position: -92px -3px}
-.share_bar .whatsapp {background-position: -178px -3px;}
-.share_bar .gplus{background-position: -62px -3px}
-.share_bar .readelater{background-position: -149px -3px}
-.share_bar .email{background-position: -121px -3px}
+.share_bar .social-share li a{display: block;height: 30px;width: 30px;margin: 0 auto;border:1px solid #ccc;border-radius: 100%;text-align: center;}
+.share_bar .social-share i{ height: 30px; width: 30px;display: table-cell;line-height: 29px;font-size: 16px;}
+.share_bar .social-share .fa-facebook{color: #373985;}
+.share_bar .social-share .fa-twitter{color: #4099d1;}
+.share_bar .social-share .fa-youtube-play{color: #d00727;}
+.share_bar .social-share .fa-google-plus{color: #ed001a;}
+.share_bar .social-share .fa-whatsapp{color: #0dbe50;}
+.share_bar .social-share .fa-bookmark{color: #607083;}
+.share_bar .social-share .fa-comment{color: #a2a2a2;}
 }
 .pti-news-claim { background: #FBF9FA; border: 1px solid #EFEFEF; color: #737373; font-size: 14px; margin-top: 20px; padding: 10px; line-height: 18px; margin-bottom: 20px; }
 .view-display-id-so_sorry_page {margin: 0 -15px 15px;position: relative;}
