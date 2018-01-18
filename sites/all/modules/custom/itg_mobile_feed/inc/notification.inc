@@ -400,7 +400,7 @@ function xml_output_data($all_data) {
       $url = 'story' . $msg_node->nid . '.xml';
       generateStoryDetailPageFeed($msg_node->nid);
     }
-    elseif ($msg_node->type == 'video') {
+    elseif ($msg_node->type == 'videogallery') {
       $url = 'video' . $msg_node->nid . '.xml';
       generateVideoDetailPageFeed($msg_node->nid);
     }
