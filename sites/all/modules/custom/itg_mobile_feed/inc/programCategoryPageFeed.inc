@@ -145,7 +145,7 @@ function generateProgramCategoryPage($tid) {
                     $create_date = date("F d, Y", $created);
                     $create_datetime = date(DATE_ATOM, $created);
                     $output .= "<item><title><![CDATA[" . $title . "]]></title><shortdescription>".xml_cdata_filter($field_story_kicker_text_value)."</shortdescription><thumbimage>". xml_cdata_filter($file_small_img_url)."</thumbimage><url>video" . $nid . ".xml</url><createddate>" . $create_date . "</createddate></item>";
-                    $fl = generateVideoDetailPageFeed($nid);
+                    $fl = generateVideoDetailPageFeedForProgram($nid);
                 }
             } else {
                 $output .= "<item><title></title><shortdescription></shortdescription><thumbimage></thumbimage><url></url><createddate></createddate></item>";
