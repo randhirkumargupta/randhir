@@ -84,6 +84,9 @@ function nodeCountByDateWise_Report($start_date, $end_date, $section_list) {
     $loop_count = 0;
     // loop on section list
     foreach ($section_list as $key => $value) {
+        $video_cont = array();
+        $photo_cont = array();
+        $story_cont = array();
         $story_cont = countStory($start_date, $end_date, $value['tid']);
         $video_cont = countVideo($start_date, $end_date, $value['tid']);
         $photo_cont = countPhoto($start_date, $end_date, $value['tid']);
