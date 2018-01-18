@@ -73,12 +73,12 @@ ul.navbar li a {padding: 8px 17px;}
       <div class="topheader">
         <div class="wrapper">
           <ul>
-            <li><a href="http://www.indiatoday.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/IT.png" alt="it"><span>India today</span></a></li>
-            <li><a href="http://www.aajtak.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/At.png" alt="it"><span>Aaj Tak</span></a></li>
-            <li><a href="http://www.businesstoday.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/BT.png" alt="it"><span>Business today</span></a></li>
-            <li><a href="http://www.menshealthindia.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/MH.png" alt="it"><span>Men's Health</span></a></li>
-            <li><a href="http://www.wonderwoman.in" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/WW.png" alt="it"><span>Wonder Woman</span></a></li>
-            <li><a href="http://www.cosmopolitan.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Cosmo.png" alt="it"><span>Cosmopolitan</span></a></li>
+            <li><a href="https://www.indiatoday.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/IT.png" alt="it"><span>India today</span></a></li>
+            <li><a href="https://www.aajtak.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/At.png" alt="it"><span>Aaj Tak</span></a></li>
+            <li><a href="https://www.businesstoday.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/BT.png" alt="it"><span>Business today</span></a></li>
+            <li><a href="https://www.menshealthindia.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/MH.png" alt="it"><span>Men's Health</span></a></li>
+            <li><a href="https://www.wonderwoman.in" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/WW.png" alt="it"><span>Wonder Woman</span></a></li>
+            <li><a href="https://www.cosmopolitan.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Cosmo.png" alt="it"><span>Cosmopolitan</span></a></li>
             <li><a href="http://oyefm.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Oye.png" alt=""><span>Oye! 104.8 FM</span></a></li>
           </ul>
         </div>
@@ -89,7 +89,7 @@ ul.navbar li a {padding: 8px 17px;}
           <div class="bottomleft">
             <div class="topdate_Addmiss"> <a href="javascript:void();" target="_blank" style="cursor:default">ADMISSION TEST - 10th March 2018</a> </div>
           </div>
-          <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0"></a> </div>
+          <div class="bottomRright"> <a href="https://www.indiatodaygroup.com/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0"></a> </div>
         </div>
         <div class="searchBoxs">
           <div class="search-engin">
@@ -116,7 +116,7 @@ ul.navbar li a {padding: 8px 17px;}
                 <li><a href="/itmi/testimonials.jsp">Testimonials</a></li>
               </ul>
             </li>
-            <li><a href="http://indiatodaymediainstitute.wordpress.com/">Blog</a></li>
+            <li><a href="https://indiatodaymediainstitute.wordpress.com/">Blog</a></li>
             <li><a href="#">Programmes</a>
               <ul style="width:300px;">
                 <li><a href="/itmi/what-we-offer-masscommunication.jsp">Two-year, full-time Postgraduate Diploma in Mass Communication</a>

@@ -19,7 +19,7 @@
   })();
 </script>
 <noscript>
-<img src="https://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+<img src="https://sb.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
 </noscript>
 <!-- End comScore Tag -->
 <script>
@@ -68,7 +68,7 @@ if (!mobile) {
 <div class="text-containt"> 
   <!--Body Content Start Here-->
   <div class="outer_box_cont">
-    <div class="back_hdn_img"> <img src="https://specials.indiatoday.com/aajtaknew/tvtmi/arun-puri.jpg" alt="img"> </div>
+    <div class="back_hdn_img"> <img src="https://specials.intoday.in/aajtaknew/tvtmi/arun-puri.jpg" alt="img"> </div>
   </div>
   <div class="normaltxt">
     <p>Dear prospective ITMI-ian,</p>

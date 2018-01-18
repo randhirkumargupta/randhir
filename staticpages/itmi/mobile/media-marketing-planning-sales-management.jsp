@@ -30,8 +30,8 @@
   ga('create', 'UA-795349-72', 'intoday.in');
   ga('send', 'pageview');
 </script>
-<link rel="canonical" href="/itmi/contact_us.jsp" />
-<script type="text/javascript"> 
+<link rel="canonical" href="/itmi/" />
+<script type="text/javascript">
 function canonicalUrlRedirection() {
 	//if (window.innerWidth > 985) {    
 		var canonicalUrl = ""; 
@@ -60,37 +60,47 @@ if (!mobile) {
 <?php include('header.php');?>
 <div class="body_section">
   <div class="outer_box">
-    <h2>Contact Us</h2>
+    <h2>Programmes</h2>
   </div>
 </div>
 <div class="clearfix"></div>
-<!--Body Content Start Here-->
 <div class="text-containt"> 
   <!--Body Content Start Here-->
   <div class="normaltxt">
-    <p><strong>Noida</strong></p>
-    <p><strong>Contact Person :</strong><br>
-      Swati Mitra or Anand Khare for admissions<br>
-      Prashant Kothari for academics<br>
-      Email : itmi.admissions@aajtak.com<br>
-      Timing : 10 AM to 6 PM, Monday to Friday <br>
-      <br>
-      <br>
-    <strong>
-    <p>Tel: 0120 - 4590630</p>
-    </strong> <strong>
-    <p>Tel: 0120 - 4590634</p>
-    </strong> <strong>
-    <p>Tel: 0120 - 4590635</p>
-    </strong> <strong>
-    <p>Mob: 9560065465</p>
-    </strong> <strong> <br>
-    <br>
-    <br>
-    <p><strong>Institute Address:</strong><br>
-      India Today Media Institute (ITMI)<br>
-      B-31, Sector - 57<br>
-      Noida - 201 301, UP</p>
+    <div>
+      <h3 id="tab1"><strong>Full â€“ Time Postgraduate Diploma in Media and Entertainment Management.</strong></h3>
+      <div class="down" id="down1">
+        <div id="dif">
+          <p><strong>Structure:</strong> This is a one-year programme, including six months of on-campus and six months of internship in the TV Today Network system's various channels and Departments. The internship is uniquely structured to include training in media marketing planning and sales management. The course is targeted to fulfill the market needs in media and entertainment sector as a whole and an allied career in Planning and Buying Agencies, Marketing and sales division of all TV channels, Newspaper, Magazines, FM Channels and digital platforms for better growth oriented career opportunities. Beside the corporate houses NGOs also require the specific manpower for their organization.</p>
+          <p><strong>Academic Approach:</strong> This is a practical orientated programme - less than half of your programme will be in classrooms; your tenure will entail hands-on learning in simulated settings on campus, through field work and an internship in Planning and Buying Agencies, Marketing and sales division of all TV channels, Newspaper, Magazines, FM Channels and digital platforms for better growth oriented career opportunities.</p>
+          <p><strong>Internship and placements:</strong> After a 6-month internship spanning the major departments of our television channels and the India Today Group, our trainees are seriously considered for final employment in the TV Today Network. Interviews are guaranteed for all eligible candidates. </p>
+          <p><strong>Graduates are eligible.</strong> </p>
+          <p>Graduates from any discipline are eligible. Intermediate to advanced knowledge of English and math is required.</p>
+          <p><strong>Course structure</strong> 1A Foundation level
+            First three months will be the foundation course for the basic understanding.</p>
+          <p>1.	Marketing management<br>
+            2.	Sales management<br>
+            3.	Consumer behavior<br>
+            4.	Marcomm management & Experiential marketing<br>
+            1B. Specialization level<br>
+            1.	Media Planning<br>
+            2.	Media buying<br>
+            3.	Media Sales â€“ Print/TV<br>
+            4.	PR, Brand Communication<br>
+            5.	Media research and Practices<br>
+            6.	Media scheduling and operations<br>
+            7.	Media software<br>
+            8.	Agency client relationship and direct marketing<br>
+            9.	BTL, Event and OOH.<br>
+            10. Digital brand and promotional strategies<br>
+            Note :- The candidates /students will be taught the subjects mentioned above to understand the nuances of the specialized areas and the possible career path.<br>
+            2. The course nomenclature and the subjects mentioned above are subject to change if the academic board desire before the commencement of the programme.<br>
+            3. The minimum batch size will be required to operate will be 20. However , The academic board may decide the course of action on the basis of the admission process.</p>
+          <p>&nbsp;</p>
+        </div>
+        <!--down end--> 
+      </div>
+    </div>
   </div>
   <!--BODY text-containt end--> 
 </div>

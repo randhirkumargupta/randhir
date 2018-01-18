@@ -30,7 +30,7 @@
   })();
 </script>
 <noscript>
-<img src="http://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+<img src="https://sb.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
 </noscript>
 <!-- End comScore Tag -->
 <script>
@@ -55,7 +55,7 @@
         <!--Body Content Start Here-->
         <div class="normaltxt">
           <h3>Programmes</h3>
-          <!--<img src="http://specials.indiatoday.com/aajtaknew/tvtmi/wwo.jpg">-->
+          <!--<img src="https://specials.intoday.in/aajtaknew/tvtmi/wwo.jpg">-->
           <div>
             <h3 id="tab1"><strong>Two-Year, Full-Time Postgraduate Diploma in Mass Communication (Journalism)</strong></h3>
             <div class="down" id="down1">
@@ -77,16 +77,16 @@
               <!--down end--> 
             </div>
           </div>
-          <img src="http://specials.indiatoday.com/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
+          <img src="https://specials.intoday.in/aajtaknew/tvtmi/images/aajtak_all_logos.jpg" usemap="#Map" border="0" width="480">
           <map name="Map" id="Map">
             <area shape="rect" coords="6,6,96,51" href="/" target="_blank">
-            <area shape="rect" coords="99,7,245,51" href="http://businesstoday.intoday.in/" target="_blank">
+            <area shape="rect" coords="99,7,245,51" href="https://businesstoday.intoday.in/" target="_blank">
             <area shape="rect" coords="253,10,339,52" href="/" target="_blank">
             <area shape="rect" coords="344,10,399,52" href="aajtak.intoday.in" target="_blank">
-            <area shape="rect" coords="403,11,511,52" href="http://cosmo.intoday.in/" target="_blank">
+            <area shape="rect" coords="403,11,511,52" href="https://cosmo.intoday.in/" target="_blank">
             <area shape="rect" coords="67,65,166,113" href="http://www.readersdigest.co.in/" target="_blank">
-            <area shape="rect" coords="170,65,230,110" href="http://aajtak.intoday.in/dilliaajtak/" target="_blank">
-            <area shape="rect" coords="312,64,350,112" href="http://aajtak.intoday.in/itmi" target="_blank">
+            <area shape="rect" coords="170,65,230,110" href="https://aajtak.intoday.in/dilliaajtak/" target="_blank">
+            <area shape="rect" coords="312,64,350,112" href="https://aajtak.intoday.in/itmi" target="_blank">
             <area shape="rect" coords="363,64,441,113" href="http://oyefm.in/" target="_blank">
           </map>
         </div>
