@@ -393,17 +393,14 @@ function xml_output_data($all_data) {
   foreach ($all_data as $data) {
     $msg_node = node_load($data->content_id);
     $android_header = $data->android_header;
-    $primary_cat = $msg_node->field_story_category['und'][0]['tid'];
-    $cat = taxonomy_term_load($primary_cat);
-    $section = $cat->name;
-    $thumb_image = isset($msg_node->field_story_small_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_small_image['und'][0]['uri']) : '';
-    $kicker_image = isset($msg_node->field_story_medium_image['und'][0]['uri']) ? file_create_url($msg_node->field_story_medium_image['und'][0]['uri']) : '';
-    $weburl = isset($msg_node->nid) ? get_web_url($msg_node->nid) : '';
+    $title = $data->message;
+    $section = $data->category;
+    $android_banner = $data->android_banner;
     if ($msg_node->type == 'story') {
       $url = 'story' . $msg_node->nid . '.xml';
       generateStoryDetailPageFeed($msg_node->nid);
     }
-    elseif ($msg_node->type == 'videogallery') {
+    elseif ($msg_node->type == 'video') {
       $url = 'video' . $msg_node->nid . '.xml';
       generateVideoDetailPageFeed($msg_node->nid);
     }
@@ -412,24 +409,21 @@ function xml_output_data($all_data) {
       generatePhotoDetailPageFeed($msg_node->nid);
     }
     $created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-    $created_date_time = $data->schedule_datetime;
-    if ($data->category == 'Live TV') {
-      $msg_created_date = format_date(strtotime($data->schedule_datetime), 'custom', 'F d, Y');
-      $msg_created_date_time = $data->schedule_datetime;
-      $header = $data->android_header;
-      $section = $data->category;
-      $thumb_img = $data->android_banner;
-      $web_url = $data->mobile_url;
-      $url = '/hltapps/api/livetv.xml';
-      $section = $data->category;
-      $output .= "<article><title>" . xml_cdata_filter($data->message) . "</title><header>" . $header . "</header><section_name>" . $section . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-    }
-    else if ($data->content_id == '0' && empty($data->custom_data) && $data->message_url == '') {
-      $output .= "<article><title>" . xml_cdata_filter($data->message) . "</title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_img . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url></url><create_date>" . $msg_created_date . "</create_date><create_datetime>" . $msg_created_date_time . "</create_datetime></article>";
-    }
-    else {
-      $output .= "<article><title><![CDATA[" . $msg_node->title . "]]></title><header>" . xml_cdata_filter($android_header) . "</header><section_name>" . xml_cdata_filter($section) . "</section_name><thumbimage>" . $thumb_image . "</thumbimage><kickerimage>" . $kicker_image . "</kickerimage><url>" . $url . "</url><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
-    }
+    $created_date_time = $data->schedule_datetime.' +5:30';
+    $weburl = $data->mobile_url;
+    $live_tv = strpos($data->mobile_url,"/livetv");
+      if($data->content_id > 0){
+        $url = $url;
+        $output .= "<article><title><![CDATA[" . $title . "]]></title><header><![CDATA[".$android_header."]]></header><section_name><![CDATA[".$section."]]></section_name><thumbimage>" . $android_banner . "</thumbimage><kickerimage>" . $android_banner . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+      }else{
+        $url = '/hltapps/api/livetv.xml';
+        if($data->mobile_url != '' && $live_tv > 0){
+            $output .= "<article><title><![CDATA[" . $title . "]]></title><header><![CDATA[".$android_header."]]></header><section_name><![CDATA[".$section."]]></section_name><thumbimage>" . $android_banner . "</thumbimage><kickerimage>" . $android_banner . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        }else{
+          $url = '';
+          $output .= "<article><title><![CDATA[" . $title . "]]></title><header><![CDATA[".$android_header."]]></header><section_name><![CDATA[".$section."]]></section_name><thumbimage>" . $android_banner . "</thumbimage><kickerimage>" . $android_banner . "</kickerimage><url>" . $url . "</url><weburl><![CDATA[" . $weburl . "]]></weburl><create_date>" . $created_date . "</create_date><create_datetime>" . $created_date_time . "</create_datetime></article>";
+        }
+      }
   }
   return $output;
 }
