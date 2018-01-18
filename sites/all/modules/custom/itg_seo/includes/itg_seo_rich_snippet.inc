@@ -88,13 +88,19 @@ function itg_seo_node_data($node) {
     }
     $modified_date = date('Y-m-d\Th:i:s+5:30', $node->changed);
     $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
-    if (isset($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
-      $get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    //if (isset($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
+      //$get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    //}
+    //if(!empty($get_author_name) && is_numeric($get_author_name)){
+    $bylines = itg_get_multi_byline_details($node->nid, 1);
+    $authname = array();
+    foreach ($bylines AS $bylines_val) {
+      $authname[] = $bylines_val['title'];
     }
-    if(!empty($get_author_name) && is_numeric($get_author_name)){
-      $auth_name = itg_get_story_author_name($get_author_name);
+    if (is_array($authname) && count($authname) > 0) {
+      $authors = implode(',', $authname);
     } else {
-      $auth_name = 'India Today';
+      $authors = 'India Today';
     }
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
@@ -116,7 +122,7 @@ function itg_seo_node_data($node) {
                     "description": "' . $description . '",
                     "author": {
                     "@type": "Person",
-                    "name": "' . $auth_name . '"
+                    "name": "' . $authors . '"
                     },
                     "publisher": {
                     "@type": "Organization",
