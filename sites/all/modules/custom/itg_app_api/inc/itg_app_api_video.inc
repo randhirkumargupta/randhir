@@ -1103,6 +1103,24 @@ function topstoriesList($source) {
         $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);
         $file_large_img_url = completeFilePath($value['field_story_large_image_fid']);
         $comment_cont = getCommentsCount($nid);
+        // photo list array
+        if ($type == "photogallery") {
+            $photolist = getPhotolist($nid);
+        } elseif ($type == "photostory") {
+            $photo_list_array = generatePhotoStoryDetailList($nid);
+            $photolist = $photo_list_array['data'];
+        }
+        $data_newslist[$listcount]['n_photo'] = (array) $photolist;
+        // re-insalize photolist
+        $photolist = array();
+
+        // video list array
+        if ($type == "videogallery") {
+            $videolist = getVideolist($nid);
+        }
+        $data_newslist[$listcount]['n_video'] = (array) $videolist;
+        // re-insalize vediolist
+        $videolist = array();
 
         // create date formating
         $firebase_url = get_node_firebase_weburl($nid);
