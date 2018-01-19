@@ -141,7 +141,7 @@ function generateStoryDeatilList($id) {
 
   $caption = $node->field_story_extra_large_image['und'][0]['title'];
   $style = '<style>*{ margin:0; padding:0}.allVideoSection{margin:10px auto; }.iframepotr{ width:100%!Important;height: calc(100vw * 1.7425)}.iframeland{ width:100%!Important;height: calc(100vw * 0.5625)}.iframesqu{width:100%!Important;height: calc(100vw)}iframe[src*="https://www.youtube.com/"]{ width:100%;height: calc(100vw * 0.5625)}iframe[src*="https://www.indiatoday.in/"]{width: 100%; height: calc((100vw - -12vw) * 0.5625)}</style>';
-  $js = '<script type="text/javascript">var iframesrc = document.querySelectorAll("iframe[src*="https://www.facebook.com/"]");//console.log(iframesrc.length)for(var idx=0;idx < iframesrc.length;idx++){var url_string = iframesrc[idx].src; //window.location.hrefvar url = new URL(url_string);var hheight = iframesrc[idx].height;var wwidth = url.searchParams.get("width");if(hheight == wwidth){ iframesrc[idx].classList.add("iframesqu") }else if(hheight > wwidth){ iframesrc[idx].classList.add("iframepotr") }else{ iframesrc[idx].classList.add("iframeland") }}</script>';
+  $js = '<script type="text/javascript">var iframesrc = document.querySelectorAll("iframe[src*="https://www.facebook.com/"]");for(var idx=0;idx < iframesrc.length;idx++){var url_string = iframesrc[idx].src; var url = new URL(url_string);var hheight = iframesrc[idx].height;var wwidth = url.searchParams.get("width");if(hheight == wwidth){ iframesrc[idx].classList.add("iframesqu") }else if(hheight > wwidth){ iframesrc[idx].classList.add("iframepotr") }else{ iframesrc[idx].classList.add("iframeland") }}</script>';
   
   $body_with_html = $style."".$body_with_html."".$js; 
  
