@@ -198,13 +198,12 @@ function generateStoryDeatilList($id) {
   }
 
   if ($tech_photo_gallery) {
- 
-    $photo_list_array = generatePhotoStoryDetailList($tech_photo_gallery);
-     p($photo_list_array);
-    $photolist = $photo_list_array['data'];
-    $data_array['tech_photo_gallery'] = (array) $photolist; 
-  }
-  else {
+
+        $photo_list_array = getPhotolist($tech_photo_gallery);
+
+        $photolist = $photo_list_array['data'];
+        $data_array['tech_photo_gallery'] = (array) $photolist;
+    } else {
     $tech_photo_gallery = new stdClass();
     $data_array['tech_photo_gallery'] = $tech_photo_gallery;
   }
