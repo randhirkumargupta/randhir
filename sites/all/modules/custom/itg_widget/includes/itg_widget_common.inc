@@ -3006,37 +3006,80 @@ function get_max_weight_for_special($type) {
  * {@inheritdoc}
  */
 function itg_widget_node_update($node) {
-    //itg_watchdog("status_test", array($node->nid, $node->status, $node->revision, $node->op));
-    if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic')) {
-        $arg = arg();
-        if (itg_workflow_stop_node_update_batch_for_widgets()) {
-            return;
-        }
+  if ($node->status == 0 && $node->original->status == 1 && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic')) {
+    db_delete('itg_widget_order')
+        ->condition('widget', 'section_wise_widget')
+        ->condition('content_type', 'All')
+        ->condition('nid', $node->nid)->execute();
 
-        if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) &&!empty($node->op)) {
-            __itg_widget_helper_data_insert($node->nid);
-            if($node->original->status == 0 && $node->status == 1) {
-            //watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
-            $nid = $node->nid;
-            $cat_id = $node->field_story_category['und'];
-
-            db_delete('itg_widget_order')
-                    ->condition('widget', 'section_wise_widget')
-                    ->condition('content_type', 'All')
-                    ->condition('nid', $nid)->execute();
-
-            db_delete('itg_widget_order_section')
-                    ->condition('content_type', $node->type)
-                    ->condition('widget', 'section_wise_widget')
-                    ->condition('nid', $nid)->execute();
-            foreach ($cat_id as $category) {
-                manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
-                manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
-            }    
-            }
-        }
+    db_delete('itg_widget_order_section')
+        ->condition('content_type', $node->type)
+        ->condition('widget', 'section_wise_widget')
+        ->condition('nid', $node->nid)->execute();
+  }
+  if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic')) {
+    $arg = arg();
+    if (itg_workflow_stop_node_update_batch_for_widgets()) {
+      return;
     }
-    
+
+    if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) && !empty($node->op)) {
+      __itg_widget_helper_data_insert($node->nid);
+      if ($node->original->status == 0 && $node->status == 1) {
+        //watchdog("node_update", "<pre>" . print_r($node, true) . "</pre>");
+        $nid = $node->nid;
+        $cat_id = $node->field_story_category['und'];
+
+        db_delete('itg_widget_order')
+            ->condition('widget', 'section_wise_widget')
+            ->condition('content_type', 'All')
+            ->condition('nid', $nid)->execute();
+
+        db_delete('itg_widget_order_section')
+            ->condition('content_type', $node->type)
+            ->condition('widget', 'section_wise_widget')
+            ->condition('nid', $nid)->execute();
+        foreach ($cat_id as $category) {
+          manage_widget_order_during_node_update($node->nid, $category['tid'], $node->type);
+          manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
+        }
+      }
+    }
+    elseif (($node->original->status == 1 && $node->status == 1)) {
+      $ins_cat_arr = array();
+      $del_cat_arr = array();
+      $nid = $node->nid;
+      foreach ($node->field_story_category['und'] as $key => $val) {
+        $new_cat_arr[] = $val['tid'];
+      }
+      foreach ($node->original->field_story_category['und'] as $orig_key => $orig_val) {
+        $orig_cat_arr[] = $orig_val['tid'];
+      }
+      $ins_cat_arr = array_diff($new_cat_arr, $orig_cat_arr);
+      if ((!empty($ins_cat_arr)) && (count($ins_cat_arr) > 0)) {
+        foreach ($ins_cat_arr as $ins_cat_id) {
+          manage_widget_order_during_node_update($node->nid, $ins_cat_id, $node->type);
+          manage_widget_order_during_node_update($node->nid, $ins_cat_id, "All");
+        }
+      }
+      $del_cat_arr = array_diff($orig_cat_arr, $new_cat_arr);
+      if ((!empty($del_cat_arr)) && (count($del_cat_arr) > 0)) {
+        foreach ($del_cat_arr as $del_cat_id) {
+          db_delete('itg_widget_order')
+              ->condition('widget', 'section_wise_widget')
+              ->condition('content_type', 'All')
+              ->condition('cat_id', $del_cat_id)
+              ->condition('nid', $nid)->execute();
+
+          db_delete('itg_widget_order_section')
+              ->condition('content_type', $node->type)
+              ->condition('widget', 'section_wise_widget')
+              ->condition('cat_id', $del_cat_id)
+              ->condition('nid', $nid)->execute();
+        }
+      }
+    }
+  }
 }
 
 /**
