@@ -32,9 +32,9 @@ $arg = arg();
 if ($arg[2] != 'story' && $external_url = _is_external_url_story_article($row->nid)) {
   print l($row->_field_data['nid']['entity']->title, $external_url);
 } else if ($field->view->name == 'strory_menegment' && $field->view->current_display == 'page' && $row->_field_data['nid']['entity']->type == 'story') {
-	print l($row->_field_data['nid']['entity']->title, 'node/' . $row->nid . '/edit', array(
-        'query' => drupal_get_destination()
-      ));
+   print l($row->_field_data['nid']['entity']->title, 'node/' . $row->nid . '/edit', array(
+    'query' => drupal_get_destination()
+  ));
 } else if ($field->view->name == 'speaker_option_for_event' || $field->view->name == 'autocomplete_for_event' || $field->view->name == 'autocomplete_event_photo' || $field->view->name == 'podcast_for_event' || $field->view->name == 'manage_survey' || $field->view->name == 'manage_quiz' || $field->view->name == 'bitrates_videos') {
   
   if ($field->view->name == 'manage_survey') {
