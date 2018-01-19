@@ -3045,7 +3045,7 @@ function itg_widget_node_update($node) {
         }
       }
     }
-    elseif (($node->original->status == 1 && $node->status == 1)) {
+    else if ($node->original->status == 1 && $node->status == 1) {
       $ins_cat_arr = array();
       $del_cat_arr = array();
       $nid = $node->nid;
