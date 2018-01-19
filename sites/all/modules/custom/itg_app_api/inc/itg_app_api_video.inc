@@ -1121,7 +1121,6 @@ function topstoriesList($source) {
         $data_newslist[$listcount]['n_video'] = (array) $videolist;
         // re-insalize vediolist
         $videolist = array();
-
         // create date formating
         $firebase_url = get_node_firebase_weburl($nid);
 
