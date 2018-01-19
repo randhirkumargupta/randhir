@@ -19,7 +19,7 @@
   })();
 </script>
 <noscript>
-<img src="https://b.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
+<img src="https://sb.scorecardresearch.com/p?c1=2&amp;ac2=8549097&amp;cv=2.0&amp;cj=1"/>
 </noscript>
 <!-- End comScore Tag -->
 <script>
@@ -68,7 +68,7 @@ if (!mobile) {
   <!--Body Content Start Here-->
   <div class="normaltxt">
     <h3>Programmes</h3>
-    <!--<img src="https://specials.indiatoday.com/aajtaknew/tvtmi/wwo.jpg">-->
+    <!--<img src="https://specials.intoday.in/aajtaknew/tvtmi/wwo.jpg">-->
     <div>
       <h3 id="tab1"><strong>Full-time Postgraduate Diploma in Media Management</strong></h3>
       <div class="down" id="down1">

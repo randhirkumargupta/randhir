@@ -88,13 +88,15 @@ function itg_seo_node_data($node) {
     }
     $modified_date = date('Y-m-d\Th:i:s+5:30', $node->changed);
     $description = strip_tags(substr($node->body[LANGUAGE_NONE][0]['value'],0,120));
-    if (isset($node->field_story_reporter[LANGUAGE_NONE][0]['target_id'])) {
-      $get_author_name = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+    $bylines = itg_get_multi_byline_details($node->nid, 1);
+    $authname = array();
+    foreach ($bylines AS $bylines_val) {
+      $authname[] = $bylines_val['title'];
     }
-    if(!empty($get_author_name) && is_numeric($get_author_name)){
-      $auth_name = itg_get_story_author_name($get_author_name);
+    if (is_array($authname) && count($authname) > 0) {
+      $authors = implode(',', $authname);
     } else {
-      $auth_name = 'India Today';
+      $authors = 'India Today';
     }
     $logo = $base_url . '/' . drupal_get_path('theme', $theme_key) . '/logo.png';
     if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
@@ -116,7 +118,7 @@ function itg_seo_node_data($node) {
                     "description": "' . $description . '",
                     "author": {
                     "@type": "Person",
-                    "name": "' . $auth_name . '"
+                    "name": "' . $authors . '"
                     },
                     "publisher": {
                     "@type": "Organization",
@@ -215,8 +217,10 @@ function itg_seo_node_data($node) {
     }
     $createdate = date('Y-m-d\Th:i:s+5:30', $node->created);
     $contenturl = $base_url . '/' . $node->path['alias'];
-    $imgarray = explode('//', $node->field_story_extra_small_image[LANGUAGE_NONE][0]['uri']);
-    $thumbnail_url = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
+    //$imgarray = explode('//', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+    $thumb_uri = $node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'];
+    $extra_large_image = file_create_url($thumb_uri);
+    //$thumbnail_url = $base_url . '/' . 'sites/default/files/' . $imgarray[1];
     $markup = array(
         '#type' => 'markup',
         '#markup' => '<script type="application/ld+json">
@@ -225,12 +229,11 @@ function itg_seo_node_data($node) {
         "@type": "VideoObject",
         "name": "' . $name . '",
           "description":"' . $description . '",
-          "thumbnailUrl": "' . $thumbnail_url . '",
+          "thumbnailUrl": "' . $extra_large_image . '",
             "duration":"' . $video_duration . '",
             "genre":"",  
             "inLanguage":"",
-            "thumbnail": "' . $thumbnail_url . '",
-            "playerType":"Dailymotion",
+            "thumbnail": "' . $extra_large_image . '",
             "uploadDate":"' . $createdate . '",
             "contentURL":"' . $contenturl . '",
             "url":"' . $contenturl . '",

@@ -21,7 +21,7 @@
       <div class="leftBar">
         <div class="text-containt">
           <h3>Message from the Chairman</h3>
-          <div align="justify" class="normaltxt"> <img src="http://specials.indiatoday.com/aajtaknew/tvtmi/arun-puri.jpg">
+          <div align="justify" class="normaltxt"> <img src="https://specials.intoday.in/aajtaknew/tvtmi/arun-puri.jpg">
             <p></p>
             <p>Dear prospective ITMI-ian,</p>
             <p>Let me compliment you on considering ITMI for admission. For the past 10 years, our endeavour has been to train students to be superior professionals in broadcast journalism: Nearly 300 such professionals now adorn the industry, and many of them are names to reckon with. </p>
