@@ -40,10 +40,10 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         if (variable_get('mail_template_emails') != '') {
           $to_mail = $to_mail . ' , ' . variable_get('mail_template_emails');
         }
-        if($node->status == 1){
-		  $byline_emails = get_node_byline_emails($node);
-		  $to_mail = $to_mail .' , ' . $byline_emails;
-	    }
+        if ($node->status == 1) {
+          $byline_emails = get_node_byline_emails($node);
+          $to_mail = $to_mail . ' , ' . $byline_emails;
+        }
         $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
         $alias = drupal_get_path_alias('node/' . $node->nid . '');
         $weburl = $base_url . "/" . $alias;
@@ -86,10 +86,10 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         if(variable_get('mail_template_emails') != ''){
             $to_mail = $to_mail.' , '.variable_get('mail_template_emails');
         }
-        if($node->status == 1){
-		  $byline_emails = get_node_byline_emails($node);
-		  $to_mail = $to_mail .' , ' . $byline_emails;
-	    }
+        if ($node->status == 1) {
+          $byline_emails = get_node_byline_emails($node);
+          $to_mail = $to_mail . ' , ' . $byline_emails;
+        }
         $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
         $alias = drupal_get_path_alias('node/' . $node->nid . '');
         $weburl = $base_url . "/" . $alias;
@@ -151,7 +151,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       $mail_content = $mail_node_author;
     }
   }
-  elseif ($event == 'update') {var_dump($node->status == 1 && $node->original->status == 0);die;
+  elseif ($event == 'update') {
     if ($review == 'needs_review') {
       $to_mail = implode(',', $to);
       if (function_exists('itg_mail_templates_get_mailcontent')) {
@@ -306,10 +306,10 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           if(variable_get('mail_template_emails') != ''){
             $to_mail = $to_mail.' , '.variable_get('mail_template_emails');
           }
-          if($node->status == 1 && $node->original->status == 0){
-			$byline_emails = get_node_byline_emails($node);
-			$to_mail = $to_mail .' , ' . $byline_emails;
-		  }          
+          if ($node->status == 1 && $node->original->status == 0) {
+            $byline_emails = get_node_byline_emails($node);
+            $to_mail = $to_mail . ' , ' . $byline_emails;
+          }
           $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
           $weburl = $base_url . "/" . $alias;
@@ -352,10 +352,10 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
            if(variable_get('mail_template_emails') != ''){
             $to_mail = $to_mail.' , '.variable_get('mail_template_emails');
           }
-          if($node->status == 1 && $node->original->status == 0){
-			$byline_emails = get_node_byline_emails($node);
-			$to_mail = $to_mail .' , ' . $byline_emails;
-		  }
+          if ($node->status == 1 && $node->original->status == 0) {
+            $byline_emails = get_node_byline_emails($node);
+            $to_mail = $to_mail . ' , ' . $byline_emails;
+          }
           $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
           $weburl = $base_url . "/" . $alias;
