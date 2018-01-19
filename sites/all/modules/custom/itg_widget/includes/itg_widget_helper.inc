@@ -11,7 +11,7 @@ function __itg_widget_helper_data_insert($nid, $node_data = null) {
         if (empty($node_data)) {
           $node_load_data = node_load($nid, null, TRUE);
         }
-        elseif ((!empty($node_data)) && ($node_data->status == 1) && (!isset($node_data->original))) {
+        else if ((!empty($node_data)) && ($node_data->status == 1) && (!isset($node_data->original))) {
           $node_load_data = node_load($nid, null, TRUE);
         }
         else {
