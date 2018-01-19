@@ -172,7 +172,7 @@ function generateStoryDeatilList($id) {
   $data_array['sponsored_icon'] = "";
   $data_array['sponsored_url'] = "";
   $data_array['desc_withouthtml'] = "$body_without_html";
-  $data_array['desc_withhtml'] = '$body_with_html';
+  $data_array['desc_withhtml'] = "$body_with_html";
   $data_array['tag'] = $tag;
   $data_array['highlight'] = $heighligth;
   if (count($listicle_data['data']) && $listicle_data['data'][0]['description'] != "") {
