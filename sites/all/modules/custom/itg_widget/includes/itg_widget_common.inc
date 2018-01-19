@@ -3022,7 +3022,6 @@ function itg_widget_node_update($node) {
     if (itg_workflow_stop_node_update_batch_for_widgets()) {
       return;
     }
-
     if (isset($arg[1]) && $arg[1] != 'add' && isset($node->op) && !empty($node->op)) {
       __itg_widget_helper_data_insert($node->nid);
       if ($node->original->status == 0 && $node->status == 1) {
@@ -3045,7 +3044,8 @@ function itg_widget_node_update($node) {
         }
       }
     }
-    else if ($node->original->status == 1 && $node->status == 1) {
+    
+    if ($node->original->status == 1 && $node->status == 1) {
       $ins_cat_arr = array();
       $del_cat_arr = array();
       $nid = $node->nid;
