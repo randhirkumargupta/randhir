@@ -3043,42 +3043,42 @@ function itg_widget_node_update($node) {
           manage_widget_order_during_node_update($node->nid, $category['tid'], "All");
         }
       }
-    }
-    
-    if ($node->original->status == 1 && $node->status == 1) {
-      $ins_cat_arr = array();
-      $del_cat_arr = array();
-      $nid = $node->nid;
-      foreach ($node->field_story_category['und'] as $key => $val) {
-        $new_cat_arr[] = $val['tid'];
-      }
-      foreach ($node->original->field_story_category['und'] as $orig_key => $orig_val) {
-        $orig_cat_arr[] = $orig_val['tid'];
-      }
-      $ins_cat_arr = array_diff($new_cat_arr, $orig_cat_arr);
-      if ((!empty($ins_cat_arr)) && (count($ins_cat_arr) > 0)) {
-        foreach ($ins_cat_arr as $ins_cat_id) {
-          manage_widget_order_during_node_update($node->nid, $ins_cat_id, $node->type);
-          manage_widget_order_during_node_update($node->nid, $ins_cat_id, "All");
+      else if ($node->original->status == 1 && $node->status == 1) {
+        $ins_cat_arr = array();
+        $del_cat_arr = array();
+        $nid = $node->nid;
+        foreach ($node->field_story_category['und'] as $key => $val) {
+          $new_cat_arr[] = $val['tid'];
         }
-      }
-      $del_cat_arr = array_diff($orig_cat_arr, $new_cat_arr);
-      if ((!empty($del_cat_arr)) && (count($del_cat_arr) > 0)) {
-        foreach ($del_cat_arr as $del_cat_id) {
-          db_delete('itg_widget_order')
-              ->condition('widget', 'section_wise_widget')
-              ->condition('content_type', 'All')
-              ->condition('cat_id', $del_cat_id)
-              ->condition('nid', $nid)->execute();
+        foreach ($node->original->field_story_category['und'] as $orig_key => $orig_val) {
+          $orig_cat_arr[] = $orig_val['tid'];
+        }
+        $ins_cat_arr = array_diff($new_cat_arr, $orig_cat_arr);
+        if ((!empty($ins_cat_arr)) && (count($ins_cat_arr) > 0)) {
+          foreach ($ins_cat_arr as $ins_cat_id) {
+            manage_widget_order_during_node_update($node->nid, $ins_cat_id, $node->type);
+            manage_widget_order_during_node_update($node->nid, $ins_cat_id, "All");
+          }
+        }
+        $del_cat_arr = array_diff($orig_cat_arr, $new_cat_arr);
+        if ((!empty($del_cat_arr)) && (count($del_cat_arr) > 0)) {
+          foreach ($del_cat_arr as $del_cat_id) {
+            db_delete('itg_widget_order')
+                ->condition('widget', 'section_wise_widget')
+                ->condition('content_type', 'All')
+                ->condition('cat_id', $del_cat_id)
+                ->condition('nid', $nid)->execute();
 
-          db_delete('itg_widget_order_section')
-              ->condition('content_type', $node->type)
-              ->condition('widget', 'section_wise_widget')
-              ->condition('cat_id', $del_cat_id)
-              ->condition('nid', $nid)->execute();
+            db_delete('itg_widget_order_section')
+                ->condition('content_type', $node->type)
+                ->condition('widget', 'section_wise_widget')
+                ->condition('cat_id', $del_cat_id)
+                ->condition('nid', $nid)->execute();
+          }
         }
       }
-    }
+    } 
+    
   }
 }
 
