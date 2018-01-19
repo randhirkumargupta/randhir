@@ -198,7 +198,9 @@ function generateStoryDeatilList($id) {
   }
 
   if ($tech_photo_gallery) {
-    $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
+    $photo_list_array = generatePhotoStoryDetailList($nid);
+    $photolist = $photo_list_array['data'];
+    $data_array['tech_photo_gallery'] = (array) $photolist;
   }
   else {
     $tech_photo_gallery = new stdClass();
