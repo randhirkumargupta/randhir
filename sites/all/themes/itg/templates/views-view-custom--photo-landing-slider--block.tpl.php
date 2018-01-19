@@ -93,7 +93,7 @@ $argum = base64_encode(arg(1));
                   <li class="replace-submit-story"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                 <?php endif; ?>
                <a title = "post content" class="def-cur-pointer colorbox-load akamai-submit-story-col hide" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=470&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></span></a>   -->
-               <li class="replace-submit-story"><a class="" title="post content" href="#"><i class="fa fa-share"></i></a></li>
+               <!--<li class="replace-submit-story"><a class="" title="post content" href="#"><i class="fa fa-share"></i></a></li>-->
             </ul>
         </div>
     </div>
@@ -207,7 +207,7 @@ $argum = base64_encode(arg(1));
                     <?php else: ?>
                       <li class="mhide replace-submit-story"><a class="def-cur-pointer colorbox-load" title="post content" href="<?php print $base_url; ?>/node/add/ugc?width=650&height=650&iframe=true&type=<?php print $photo_node->type; ?>"><i class="fa fa-share"></i></a></li>
                     <?php endif; ?> -->
-                    <li class="mhide replace-submit-story"><a class="" title="post content" href="#"><i class="fa fa-share"></i></a></li>
+                    <!--<li class="mhide replace-submit-story"><a class="" title="post content" href="#"><i class="fa fa-share"></i></a></li>-->
                     <div class = "photo-refresh-bottom">
                     <?php global $user; ?>
                     <?php

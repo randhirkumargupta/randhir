@@ -81,7 +81,7 @@
                             ?>
                             <li title="<?php echo strip_tags($desc); ?>">
                             <?php if ($entity['is_spnoser']): ?>
-                              <span class="itg-sponsor-section-title"><?php print t('SPONSORED'); ?></span>
+                              <span class="itg-sponsor-section-title"><?php print t('IMPACT FEATURE'); ?></span>
                             <?php endif; ?>
                                 <?php
                                 if (function_exists('itg_common_get_smiley_title')) {

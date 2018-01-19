@@ -96,7 +96,7 @@
               ?>
               <li title="<?php echo strip_tags($desc); ?>" class="<?php print $pipelineclass; ?>">
               <?php if (_is_sponsor_story_article($row['nid'])):?>
-                <span class="itg-sponsor-title"><?php print t('SPONSORED'); ?></span>
+                <span class="itg-sponsor-title"><?php print t('IMPACT FEATURE'); ?></span>
               <?php endif; ?>
               <?php
                 if (function_exists('itg_common_get_smiley_title')) {
