@@ -598,7 +598,7 @@ if (!empty($content)):
           </div>
         <?php } ?>
         <?php if(!empty(variable_get('amp_story_second_ad'))) { ?>
-          <div class="custom-amp-ad">
+          <div class="custom-amp-ad ad-btf">
             <?php print variable_get('amp_story_second_ad'); ?> 
           </div>
         <?php } ?>
