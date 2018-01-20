@@ -598,10 +598,10 @@ if (!empty($content)):
           </div>
         <?php } ?>
         <?php if(!empty(variable_get('amp_story_second_ad'))) { ?>
-		  <div class="custom-amp-ad">
-		    <?php print variable_get('amp_story_second_ad'); ?> 
-		  </div>
-		<?php } ?>
+          <div class="custom-amp-ad">
+            <?php print variable_get('amp_story_second_ad'); ?> 
+          </div>
+        <?php } ?>
           <!-- code for related content -->   
           <?php if (!empty($related_content)) { ?>
             <div class="related-story related-story-bottom">
