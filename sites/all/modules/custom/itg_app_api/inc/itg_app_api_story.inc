@@ -198,16 +198,17 @@ function generateStoryDeatilList($id) {
   }
 
   if ($tech_photo_gallery) {
-        /*$photo_list_array = getPhotolist($tech_photo_gallery);
+        $photo_list_array = getPhotolistforPhotostory($tech_photo_gallery);
         $photolist = $photo_list_array;
-        $data_array['tech_photo_gallery'] = (array) $photolist;*/
-      $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
+        $data_array['tech_photo_gallery'][0]['title'] = "SAMPLE PHOTOS";
+        $data_array['tech_photo_gallery'][0]['data'] = (array) $photolist[0]['photos'];
+     // $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
     } else {
     $tech_photo_gallery = new stdClass();
     $data_array['tech_photo_gallery'] = $tech_photo_gallery;
-  }
-
-  $data_array['tech_photos'] = $story_tech;
+  }  
+  $data_array['tech_photos'][0]['title'] = "PHOTOS";
+  $data_array['tech_photos'][0]['data'] = $story_tech[0]['data'];
   if ($tech_pros['listcont'] > 0) {
     unset($tech_pros['listcont']);
     $data_array['tech_pros_cons'] = $tech_pros;
@@ -367,8 +368,15 @@ function getStoryTechs($node) {
     $load_collection = field_collection_item_load($val_fid);
     $photo_ttile = $load_collection->field_technology_photo_title['und'][0]['value'];
     $img_url = completeFilePath($load_collection->field_technology_sample_photo['und'][0]['fid']);
-    $storytech['data'][$listcont]['title'] = $photo_ttile;
-    $storytech['data'][$listcont]['img'] = $img_url;
+    $img_info = getInfoData($val_fid);
+    $p_credit = $img_info['image_courtesy'];
+    $p_captions = $img_info['image_caption'];
+    $image_date = $img_info['image_date'];
+    $storytech['data'][$listcont]['title'] = "$photo_ttile";
+    $storytech['data'][$listcont]['img'] = "$img_url";
+    $storytech['data'][$listcont]['photo_date'] = "$img_url";
+    $storytech['data'][$listcont]['p_credit'] = "$p_credit";
+    $storytech['data'][$listcont]['p_captions'] = "$p_captions";
     $listcont++;
   }
   $storytech_fi[] = (array) $storytech;
@@ -761,12 +769,13 @@ function getInfoData($fid) {
   $data = array();
   if ($fid) {
     $query = db_select('image_info', 'iminfo');
-    $query->fields('iminfo', array('image_courtesy', 'image_caption'));
+    $query->fields('iminfo', array('image_courtesy', 'image_caption', 'image_date'));
     $query->condition('iminfo.fid', $fid, '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $k => $res) {
       $data['image_courtesy'] = $res['image_courtesy'];
       $data['image_caption'] = $res['image_caption'];
+      $data['image_date'] = $res['image_date'];
     }
   }
   return $data;

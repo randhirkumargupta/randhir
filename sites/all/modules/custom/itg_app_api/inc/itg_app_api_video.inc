@@ -172,7 +172,7 @@ function generateVideoCategoryList($tid, $pageno) {
             $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
             $file_extra_large_img_url = completeFilePath($resvalue['field_story_extra_large_image_fid']);
 
-            $desc = strip_tags($resvalue['field_story_expert_description_value']);
+            $desc = $resvalue['field_story_expert_description_value'];
             $desc = str_replace("\n", "", $desc);
             $desc = str_replace("\r", "", $desc);
             $desc = str_replace("\t", "", $desc);
@@ -210,7 +210,7 @@ function generateVideoCategoryList($tid, $pageno) {
                 $changed_datetime = "";
             }
             $title = strip_tags($title);
-            $desc = strip_tags($desc);
+            //$desc = strip_tags($desc);
             $comment_cont = getCommentsCount($nid);
             $photo_list_array[$listcount]['v_id'] = "$nid";
             $photo_list_array[$listcount]['v_title'] = "$title";
@@ -472,7 +472,7 @@ function generateProgramCategoryList($tid, $pageno) {
             $load_collection = field_collection_item_load($field_video_upload);
             $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
             $anchor_id = getVedioAnchor($nid);
-            $desc = strip_tags($resvalue['field_story_expert_description_value']);
+            $desc = $resvalue['field_story_expert_description_value'];
             $desc = str_replace("\n", "", $desc);
             $desc = str_replace("\r", "", $desc);
             $desc = str_replace("\t", "", $desc);
@@ -499,7 +499,7 @@ function generateProgramCategoryList($tid, $pageno) {
                 $changed_datetime = "";
             }
             $title = strip_tags($title);
-            $desc = strip_tags($desc);
+            //$desc = strip_tags($desc);
             $photo_list_array[$listcount]['p_id'] = "$nid";
             $photo_list_array[$listcount]['p_title'] = "$title";
             $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
@@ -634,7 +634,7 @@ function generateProgramSectionList($Program_section_list) {
         $term_name = drupal_strtolower(str_replace("&", "and", $term_name));
         //$cat_icon_img = sectionCategoryIconImg($value);
         $cat_icon_img = sectionPrgramIconImg($value);
-        $p_short_description = strip_tags($p_short_description);
+        $p_short_description = $p_short_description;
 
         $data[$listcount]['p_id'] = "$value";
         $data[$listcount]['p_title'] = "$term->name";
@@ -724,7 +724,7 @@ function generateVideoDetail($nid) {
         $file_large_img_url = completeFilePath($node->field_story_large_image['und']['0']['fid']);
         $file_extra_large_img_url = completeFilePath($node->field_story_extra_large_image['und']['0']['fid']);
 
-        $desc = strip_tags($node->field_story_expert_description['und']['0']['value']);
+        $desc = $node->field_story_expert_description['und']['0']['value'];
         $desc = str_replace("\n", "", $desc);
         $desc = str_replace("\r", "", $desc);
         $desc = str_replace("\t", "", $desc);
@@ -762,7 +762,7 @@ function generateVideoDetail($nid) {
             $changed_datetime = "";
         }
         $title = strip_tags($title);
-        $desc = strip_tags($desc);
+        //$desc = strip_tags($desc);
         $photo_list_array[$listcount]['v_id'] = "$nid";
         $photo_list_array[$listcount]['v_title'] = "$title";
         $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
@@ -865,7 +865,7 @@ function generateProgramDetail($nid) {
         $load_collection = field_collection_item_load($field_video_upload);
         $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
         $anchor_id = getVedioAnchor($nid);
-        $desc = strip_tags($node->field_story_expert_description['und']['0']['value']);
+        $desc = $node->field_story_expert_description['und']['0']['value'];
         $desc = str_replace("\n", "", $desc);
         $desc = str_replace("\r", "", $desc);
         $desc = str_replace("\t", "", $desc);
@@ -891,7 +891,7 @@ function generateProgramDetail($nid) {
             $changed_datetime = "";
         }
         $title = strip_tags($title);
-        $desc = strip_tags($desc);
+        //$desc = strip_tags($desc);
         $photo_list_array[$listcount]['p_id'] = "$nid";
         $photo_list_array[$listcount]['p_title'] = "$title";
         $photo_list_array[$listcount]['p_credit'] = "$reporter_node";
