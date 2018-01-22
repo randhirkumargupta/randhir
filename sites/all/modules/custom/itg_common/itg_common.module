@@ -1118,7 +1118,7 @@ function itg_apache_solr_get_site_hash() {
  * {@inheritdoc}
  */
 function itg_common_mail_alter(&$message) {
-  return;
+
   global $user, $base_url;
   //$message['send'] = FALSE;
   $to_mail = $message['to'];
@@ -1126,9 +1126,9 @@ function itg_common_mail_alter(&$message) {
 
   $sendto = array();
   foreach ($to_mails as $mail_to) {
-    if (!preg_match('/aajtak|intoday|indiatoday/', $mail_to)) {
+    //if (!preg_match('/aajtak|intoday|indiatoday/', $mail_to)) {
       $sendto[] = $mail_to;
-    }
+    //}
   }
   $sendmails = implode(',', $sendto);
 
