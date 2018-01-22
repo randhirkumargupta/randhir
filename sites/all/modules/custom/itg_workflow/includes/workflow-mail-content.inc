@@ -20,7 +20,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   }
   else {
     $node_url = l($node->title, FRONT_URL . '/node/' . $node->nid);
-    $actual_node_url = FRONT_URL . '/node/' . $node->nid;
+    $actual_node_url = FRONT_URL . '/' . drupal_get_path_alias('node/' . $node->nid);
   }
 
   if ($event == 'create' && $review == 'published') {
@@ -398,7 +398,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
                             <tr>
                                 <td style="padding: 10px 20px;">
                                     <h2 style="font-size: 18px; margin: 20px 0 30px;">' . $body_htwo . ' :</h2>
-                                    <strong style="font-size: 16px;">Dear SEO Team,</strong>
+                                    <strong style="font-size: 16px;">Dear Team,</strong>
                                     <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . ucwords($content_type) . ' <strong style="color: #000;">: ' . $node_url . ' </strong></p>
                                     <p style="font-size: 16px; color: #595959; margin: 20px 0;"> Url: ' . $actual_node_url . '</p>
                                     <p style="font-size: 16px; color: #595959; margin: 20px 0;">has been ' . $subject_line_upd . '.</p>
