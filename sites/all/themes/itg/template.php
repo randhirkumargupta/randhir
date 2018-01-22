@@ -286,7 +286,9 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  itgd_chart_beat_code();
+  if ($arg[2] != 'embed') {
+    itgd_chart_beat_code();
+  }
   $newsroomjs = get_newsroom_js();
   $script_code = array(
 	'#type' => 'markup',
