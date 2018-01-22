@@ -504,7 +504,7 @@ function itg_widgets_custom_variables() {
     '#title' => t('Amp tabola ad script'),
     '#default_value' => variable_get('amp_taboola_ad_script'),
   );
-  // AMP Tabola Ad script
+  // Unpublish content email alert
   $form['unpublish_alert_emails'] = array(
     '#type' => 'textarea',
     '#title' => t('Story/Photo/Video Unpublish content email alert'),
