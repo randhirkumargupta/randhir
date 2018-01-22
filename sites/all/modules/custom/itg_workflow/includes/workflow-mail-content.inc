@@ -16,9 +16,11 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   $review = $node->workbench_moderation_state_new;
   if ($review == 'needs_review' || $review == 'rejected' || $review == 'needs_modification') {
     $node_url = l($node->title, $base_url . '/node/' . $node->nid . '/edit');
+    $actual_node_url = $base_url . '/node/' . $node->nid . '/edit';
   }
   else {
     $node_url = l($node->title, FRONT_URL . '/node/' . $node->nid);
+    $actual_node_url = FRONT_URL . '/node/' . $node->nid;
   }
 
   if ($event == 'create' && $review == 'published') {
@@ -381,7 +383,10 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $subject_line_upd = 'published';
         $body_htwo = strtoupper($content_type) . ' PUBLISHED';
       }
-      $to_mail = implode(',', $to);
+      
+     if(variable_get('unpublish_alert_emails') != ''){
+       $to_mail = variable_get('unpublish_alert_emails');
+     }
       $subject = 'A new ' . $content_type . ' has been ' . $subject_line_upd . ', please find details below.';
       $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
                         <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
@@ -394,8 +399,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
                                 <td style="padding: 10px 20px;">
                                     <h2 style="font-size: 18px; margin: 20px 0 30px;">' . $body_htwo . ' :</h2>
                                     <strong style="font-size: 16px;">Dear SEO Team,</strong>
-                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . ucwords($content_type) . ' <strong style="color: #000;">title.</strong></p>
-                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . $node_url . '</p>
+                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . ucwords($content_type) . ' <strong style="color: #000;">: ' . $node_url . ' </strong></p>
+                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;"> Url: ' . $actual_node_url . '</p>
                                     <p style="font-size: 16px; color: #595959; margin: 20px 0;">has been ' . $subject_line_upd . '.</p>
                                     <p style="font-size: 16px; color: #595959; margin: 20px 0;"><strong style="color: #000;">Thanks,</strong><br>India Today Team</p>
                                 </td>
@@ -421,8 +426,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     'body' => $content,
     'subject' => $subject,
   );
-  
-  $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'indiatodaydigital@gmail.com', TRUE);
+  $to_mail = preg_replace('/\s+/', '', $to_mail);
+  $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'care@intoday.in', TRUE);
   if ($mail['result']) {
     return TRUE;
   }

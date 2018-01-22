@@ -1,8 +1,3 @@
-<?php if(!empty(variable_get('amp_video_ad'))) { ?>
-<div class="custom-amp-ad">
-<?php print variable_get('amp_video_ad'); ?>     
-</div>
-<?php } ?>
 <div class="black-box">
   <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
    <?php
