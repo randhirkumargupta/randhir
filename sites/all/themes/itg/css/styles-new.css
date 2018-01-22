@@ -2753,7 +2753,6 @@ body.has-cart-popup {
   color: #000;
   font: 600 20px/28px "RobotoSlab-Regular";
   position: relative;
-  text-align: justify;
   text-indent: 40px; }
   .quotes blockquote:before {
     content: "\201C";

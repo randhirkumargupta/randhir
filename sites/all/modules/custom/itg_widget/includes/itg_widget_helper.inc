@@ -10,11 +10,15 @@ function __itg_widget_helper_data_insert($nid, $node_data = null) {
         __itg_widget_helper_data_delete($nid);
         if (empty($node_data)) {
           $node_load_data = node_load($nid, null, TRUE);
-        } else {
-            $node_load_data = $node_data;
         }
-  
-        //$node_load_data = node_load($nid, null, TRUE);
+        else if ((!empty($node_data)) && ($node_data->status == 1) && (!isset($node_data->original))) {
+          $node_load_data = node_load($nid, null, TRUE);
+        }
+        else {
+          $node_load_data = $node_data;
+        }
+
+  //$node_load_data = node_load($nid, null, TRUE);
 
         $node_load_data->status = itg_common_get_node_status_from_tbl($nid);
         //itg_watchdog("helper_insert" , time());

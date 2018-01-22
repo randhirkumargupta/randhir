@@ -141,6 +141,27 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
           $ampstoryurl = '/amp/'.$redirecturl;
           $newurl = 'https://www.indiatoday.in'.$ampstoryurl;
           drupal_goto($newurl, array(), 301);
+        } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto') && ($arg[1] == 'story') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+          $storyarg = $arg[4];
+          $table = 'migrate_map_itgstorylist';
+          $newurl = getNewStoryUrl($storyarg, $table);
+          if ($newurl) {
+            drupal_goto($newurl, array(), 301);
+          }
+        } else if(($arg[0] == 'technology' || $arg[0] == 'auto') && ($arg[1] == 'gallery') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+          $storyarg = $arg[4];
+          $table = 'migrate_map_itgphotogallery';
+          $newurl = getNewStoryUrl($storyarg, $table);
+          if ($newurl) {
+            drupal_goto($newurl, array(), 301);
+          }
+        } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto') && ($arg[1] == 'video') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
+          $storyarg = $arg[4];
+          $table = 'migrate_map_itgvideogallery';
+          $newurl = getNewStoryUrl($storyarg, $table);
+          if ($newurl) {
+            drupal_goto($newurl, array(), 301);
+          }
         } else {
             $url_re = 'https://www.indiatoday.in'.$_SERVER['REQUEST_URI'];
         }
@@ -205,13 +226,6 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       $old_content_id = $photo_cat_explode[0];
       $type = 'category';
       $table = 'migrate_map_itgcategory'; 
-  } else if(($arg[0] == 'education' || $arg[0] == 'technology' || $arg[0] == 'auto') && ($arg[1] == 'story') && !empty($arg[2]) && !empty($arg[3] && !empty($arg[4]))) {
-    $storyarg = $arg[4];
-    $table = 'migrate_map_itgstorylist';
-    $newurl = getNewStoryUrl($storyarg, $table);
-    if ($newurl) {
-      drupal_goto($newurl, array(), 301);
-    }
   } else if(($arg[0] == 'story') && !empty($arg[1]) && !empty($arg[2] && !empty($arg[3]))) {
     $storyarg = $arg[3];
     $table = 'migrate_map_itgstorylist';

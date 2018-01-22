@@ -1446,9 +1446,11 @@ ul.header-menu li {
     width: 270px;
 }
 .story_ad_block.custom-amp-ad{margin-top:15px;}
+.node-type-photogallery .story_ad_block.custom-amp-ad, .node-type-videogallery .story_ad_block.custom-amp-ad{margin-bottom:8px;}
 section.sidebar .block-itg-ads > div {
     margin: auto;
 }
+.custom-amp-ad.ad-btf{margin-bottom:50px;}
 button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} button.searchbut .fa-search { top: 1px; right: 0px;}
 @media only screen and (max-width: 767px) {
     ul.pron-cons-img {

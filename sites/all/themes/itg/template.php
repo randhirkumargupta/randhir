@@ -286,7 +286,9 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  itgd_chart_beat_code();
+  if ($arg[2] != 'embed') {
+    itgd_chart_beat_code();
+  }
   $newsroomjs = get_newsroom_js();
   $script_code = array(
 	'#type' => 'markup',
@@ -641,7 +643,7 @@ function itgd_chart_beat_code() {
       $auths_name = itg_get_story_authors_name($get_authors_name) . ',';
     }
     $chart_authors = $auths_name . 'Edited by ' . itg_get_story_edited_authors_name($node->uid);
-    $chart_title = $node->title;
+    $chart_title = str_replace("'", "", $node->title);
     $chart_path = drupal_get_path_alias('node/' . $node->nid);
     $chart_path = '/' . $chart_path;
     if ($node->type == 'videogallery') {
