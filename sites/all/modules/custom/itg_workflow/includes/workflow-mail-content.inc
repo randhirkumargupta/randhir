@@ -20,7 +20,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   else {
     $node_url = l($node->title, FRONT_URL . '/node/' . $node->nid);
   }
-
+var_dump($review, $vbo_state);die;
   if ($event == 'create' && $review == 'published') {
     $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
     $to_mail = $author_mail[0];
@@ -381,7 +381,10 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $subject_line_upd = 'published';
         $body_htwo = strtoupper($content_type) . ' PUBLISHED';
       }
-      $to_mail = implode(',', $to);
+      
+      if(variable_get('unpublish_alert_emails') != ''){
+		$to_mail = variable_get('unpublish_alert_emails');
+	  }
       $subject = 'A new ' . $content_type . ' has been ' . $subject_line_upd . ', please find details below.';
       $mail_content = '<div style="max-width: 502px; margin: 0 auto; font-family: sans-serif; color: #000;">
                         <table style="border-collapse: collapse; border: 1px solid #ececec;"> 
