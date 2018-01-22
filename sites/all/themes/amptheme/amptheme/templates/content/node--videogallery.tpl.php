@@ -1,6 +1,3 @@
-<?php 
-$node->title = str_replace(array('\'', '"'), '', $node->title); 
-?>
 <div class="black-box">
   <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
    <?php
