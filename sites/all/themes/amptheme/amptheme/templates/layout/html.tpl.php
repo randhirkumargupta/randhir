@@ -1446,6 +1446,7 @@ ul.header-menu li {
     width: 270px;
 }
 .story_ad_block.custom-amp-ad{margin-top:15px;}
+.node-type-photogallery .story_ad_block.custom-amp-ad, .node-type-videogallery .story_ad_block.custom-amp-ad{margin-bottom:8px;}
 section.sidebar .block-itg-ads > div {
     margin: auto;
 }
