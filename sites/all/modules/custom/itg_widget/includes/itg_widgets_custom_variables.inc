@@ -480,5 +480,29 @@ function itg_widgets_custom_variables() {
     '#title' => t('Site Map Replace url'),
     '#default_value' => variable_get('site_replaceurl', 'indiatoday.intoday.in'),
   );
+  // AMP Second ad variables
+  $form['amp_photo_second_ad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp photo second ad script'),
+    '#default_value' => variable_get('amp_photo_second_ad'),
+  );
+
+  $form['amp_video_second_ad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp video second ad script'),
+    '#default_value' => variable_get('amp_video_second_ad'),
+  );
+
+  $form['amp_story_second_ad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp story second ad script'),
+    '#default_value' => variable_get('amp_story_second_ad'),
+  );
+  // AMP Tabola Ad script
+  $form['amp_taboola_ad_script'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp tabola ad script'),
+    '#default_value' => variable_get('amp_taboola_ad_script'),
+  );
   return system_settings_form($form);
 }

@@ -1,3 +1,8 @@
+<?php if(!empty(variable_get('amp_photo_ad'))) { ?>
+<div class="custom-amp-ad">
+<?php print variable_get('amp_photo_ad'); ?> 
+</div>
+<?php } ?>
 <div class="black-box">
   <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
   <div class="amp-photo-slider">
@@ -69,10 +74,15 @@
 ?>
   </div>
 </div>
-<?php if(!empty(variable_get('amp_photo_ad'))) { ?>
-<div class="custom-amp-ad">
-<?php print variable_get('amp_photo_ad'); ?> 
-</div>
+<?php if(!empty(variable_get('amp_taboola_ad_script'))) { ?>
+  <div class="amp-taboola">
+	<?php print variable_get('amp_taboola_ad_script'); ?>
+  </div>
+<?php } ?>
+<?php if(!empty(variable_get('amp_photo_second_ad'))) { ?>
+  <div class="custom-amp-ad ad-btf">
+    <?php print variable_get('amp_photo_second_ad'); ?> 
+  </div>
 <?php } ?>
 <div class="amp-other-gallery">
 <?php

@@ -308,7 +308,7 @@ if (!empty($content)):
                   } 
                   else {
                   ?> 
-                      <ul class="date-update">
+                      <ul class="date-update mhide">
 
                         <?php 
                         if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {

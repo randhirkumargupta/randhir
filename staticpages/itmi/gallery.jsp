@@ -13,7 +13,7 @@
         <link rel='shortcut icon' type='image/x-icon' href='https://smedia2.intoday.in/indiatoday/itmi/itmi.ico'/>  
         
         
-        <link href="/itmi/css/style.css" type="text/css" rel="stylesheet" />
+        <link href="css/style.css" type="text/css" rel="stylesheet" />
         <script>
   var _comscore = _comscore || [];
   _comscore.push({ c1: "2", c2: "8549097" });
@@ -51,254 +51,52 @@
    <script type="text/javascript">if ((navigator.userAgent).toLowerCase().indexOf('iphone') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=510733452" />'); } else if ((navigator.userAgent).toLowerCase().indexOf('ipad') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=560404098" />');}</script>
          <script type="text/javascript">function canonicalUrlRedirection(){for(var e="",i=document.getElementsByTagName("link"),a=0;a<i.length;a++)if("only screen and (max-width: 640px)"==i[a].getAttribute("media")){e=i[a].getAttribute("href");break}""!=e&&(window.location.href=e)}var redirectagent=navigator.userAgent.toLowerCase(),mode=window.location.toString().split("mode=")[1],redirect_devices=["vnd.wap.xhtml+xml","sony","symbian","S60","SymbOS","nokia","samsung","mobile","windows ce","epoc","opera mini","nitro","j2me","midp-","cldc-","netfront","mot","up.browser","up.link","audiovox","blackberry","ericsson","panasonic","philips","sanyo","sharp","sie-","portalmmm","blazer","avantgo","danger","palm","series60","palmsource","pocketpc","smartphone","rover","ipaq","au-mic","alcatel","ericy","vodafone","wap1","wap2","teleca","playstation","lge","lg-","iphone","android","htc","dream","webos","bolt","nintendo"];if(!(redirectagent.indexOf("ipad")>=0))for(var i in redirect_devices)-1!=redirectagent.indexOf(redirect_devices[i])&&"classic"!=mode&&canonicalUrlRedirection();</script>
     <script src="https://smedia2.intoday.in/indiatoday/v1/jquery1.8.js" type="text/javascript"></script>
-<script src="js/marquee.js"></script>
-<script src="js/common.js"></script>                 
-</head>
-<body>
-
-
-<div class="outerWrapper">
-
-  
-    <header>
-    <style>
-.menuBox ul {padding-left: 16%;}
-.menuBox li a {padding: 0 10px;}
-.bottomheader .logo {background: none repeat scroll 0 0;top: 23px;left: 6px;padding: 5px}
-.bottomheader .bottomleft {float: left;padding: 26px 0 0 22%;width: 67%;}
-.star {position: absolute;left: 15px;top: 199px;z-index: 9999}
-.belt ul {position: relative;}
-.belt ul li {width: 1000px;float: left;}
-.menuBox ul {padding: 0;top: -6px;margin-left: 146px;float: left;}
-ul.navbar li a {padding: 8px 17px;}
-
-</style>
-<div class="topheader">
-  <div class="wrapper"> 
-    <!--<img border="0" alt="" src="https://smedia2.intoday.in/indiatoday/itmi/images/Star.png" class="star">-->
-    <ul>
-      <li><a href="https://www.indiatoday.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/IT.png" alt="it" /><span>India today</span></a></li>
-      <li><a href="https://www.aajtak.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/At.png" alt="it" /><span>Aaj Tak</span></a></li>
-<!--  <li><a  href="https://www.headlinestoday.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/HLT.png" alt="it" /><span>Headlines today</span></a></li>-->
-      <li><a href="https://www.businesstoday.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/BT.png" alt="it" /><span>Business today</span></a></li>
-      <li><a href="https://www.menshealthindia.in/" target="_blank"  ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/MH.png" alt="it" /><span>Men's Health</span></a></li>
-      <li><a href="https://www.wonderwoman.in" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/WW.png" alt="it" /><span>Wonder Woman</span></a></li>
-      <li><a href="https://www.cosmopolitan.in/" target="_blank"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Cosmo.png" alt="it" /><span>Cosmopolitan</span></a></li>
-      <li><a href="http://oyefm.in/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Oye.png" alt="" /><span>Oye! 104.8 FM</span></a></li>
-    </ul>
-  </div>
-</div>
-<div class="bottomheader">    
-  <div class="wrapper">
-    <div class="logo"> <a href="/itmi/index.jsp"><img src=" https://smedia2.intoday.in/indiatoday/itmi/images/itmi-logo.png" alt="" border="0" /></a> 
-      <!--<a href="index.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/ITMI_logo.gif" alt="" border="0" /></a>--> 
-    </div>
-    <div class="bottomleft"> 
-      <!-- <a href=""><h2>Industry Buzz </h2><span><img src="https://smedia2.intoday.in/indiatoday/itmi/images/right-list-img.jpg" width="8" height="18" alt="" /></span></a>
-                    <p>28 top companies go on campus recritment drive this fall</p>--> 
-      
-        
-          <div class="topdate_Addmiss">
-             <!--  <a href="#" target="_blank">ADMISSION CLOSE FOR 2017</a> -->
-              <a href="javascript:void();" target="_blank" style="cursor:default">ADMISSION TEST - 10th March 2018</a> 
-        
-        </div>
-        
-      <!--<img src="https://smedia2.intoday.in/indiatoday/itmi/images/header-mast.jpg"  alt="" /> --> </div>
-    <div class="bottomRright"> <a href="http://www.indiatodaygroup.com/" target="_blank" ><img src="https://smedia2.intoday.in/indiatoday/itmi/images/Group_logo.png" alt="" border="0" /></a> </div>
-  </div>
-  <div class="searchBoxs">
-    <div class="search-engin">
-      <div class="wrapper">
-        <input type="text" class="field" />
-        <input type="submit" class="btton" value="Search">
-      </div>
-    </div>
-  </div>
-</div>
-<div class="menuBox">
-  <div class="wrapper">
-    <ul class="navbar cf">
-      <li><a href="/itmi/about_us.jsp">About US</a>
-        <ul>
-          <li><a href="/itmi/faculty-members.jsp">Faculty</a></li>
-          <li><a href="/itmi/chairman-message.jsp">Chairman's Message</a></li>
-          <!--<li><a href="/itmi/dean-message.jsp">Dean's Message</a></li>
-          <li><a href="/itmi/dean-profile.jsp">Dean's Profile</a></li>-->
-        </ul>
-      </li>
-      <li> <a href="#">Career</a>
-        <ul>
-          <li><a href="/itmi/media-careers.jsp">Media Careers</a></li>
-          <li><a href="/itmi/placements.jsp">Placement</a></li>
-          <li><a href="/itmi/testimonials.jsp">Testimonials</a></li>
-        </ul>
-      </li>
-      <!--<li> <a href="#">Whatsup@itmi</a>
-        <ul>
-          <li><a href="gallery.jsp">July-December 2014</a></li>
-        </ul>
-      </li>-->
-      <li><a href="https://indiatodaymediainstitute.wordpress.com/">Blog</a></li>
-      <li><a href="#">Programmes</a> 
-        <ul style="width:300px;">
-          <li><a href="/itmi/what-we-offer-masscommunication.jsp">Two-year, full-time Postgraduate Diploma in Mass Communication</a>
-            <ul>
-              <li><a href="/itmi/audiovisual-communication.jsp">Audiovisual Production </a></li>
-              <!--<li><a href="/itmi/digital-media.jsp">Digital Media </a></li> -->
-              <li><a href="/itmi/communication-managemnet.jsp">Advertising and Public Relations</a></li>    
-              <!--<li><a href="/itmi/social-managemnet.jsp">Social Communication </a></li>-->
-              <li><a href="/itmi/journalism.jsp">Journalism</a></li>
-            </ul>
-          </li>
-          <li><a href="/itmi/what-we-offer-broadcastjournalism.jsp">Full time 11 month Post graduate diploma </a>
-          <ul>
-              <li><a href="/itmi/what-we-offer-broadcastjournalism.jsp">Broadcast journalism </a></li>
-              <li><a href="/itmi/media-marketing-planning-sales-management.jsp">Media &amp; Entertainment Management</a></li> 
-            </ul>
-          
-          
-          
-          </li>
-          <!--<li><a href="#">4 Months short term Certificate programmes</a>
-            <ul>
-              <li><a href="https://indiatoday.intoday.in/itmi/digitalmedia-communication.jsp">Certificate Programme in Digital Media Communication</a></li>
-              <li><a href="https://indiatoday.intoday.in/itmi/documentary-filmmaking.jsp">Certificate Programme in News Programmes and Documentary Filmmaking </a></li>
-            </ul>
-          </li>-->
-          <li><a href="/itmi/curricula-for-full-time-postgraduate-programmes.jsp">CURRICULUM</a></li>
-          
-          
-        </ul>
-      </li>
-      <li><a href="/itmi/faqs.jsp">FAQs</a>
-            <ul>
-              <li><a href="/itmi/fees.jsp">Fee and refund</a></li>
-              <li><a href="/itmi/eligibility-criteria.jsp">Eligibility criteria</a></li>
-            </ul>
-      </li>
-      <li><a href="/itmi/contact-us.jsp">Contact us</a></li>
-      <li><a href="/itmi/facilities.jsp">Facilities</a></li>
-      <li><a href="/itmi/student-activities.jsp" style="padding-right:0px; border-right:0px;">STUDENT ACTIVITIES</a></li>
-    </ul>
-  </div>
-</div>
-
-        
-    <style>
-.belt{ position:relative;}
-.text-banner{ position:absolute; width:760px; height:60px; bottom:5px; left:0;}
-</style>
-<div class="bannerBox">
-<div id="social-area">
-  <div><a href="https://www.facebook.com/IndiaTodayMediaInstitute" target="_blank" title="facebook"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/FB.gif"  alt="" /></a></div>
-    <div><a href="https://twitter.com/ITMIIndia" target="_blank" title="twiter"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/twitter.gif"  alt="" /></a></div>
-    <div><a href="https://www.youtube.com/channel/UCXSvRGOXxrfP40nmDOuBSpQ" target="_blank" title="youtube"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/you-tube.gif"  alt="" /></a></div>
-
-</div>
-          <div class="belt">
-                <ul>
-                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner6.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner4.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner3.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner1.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner5.jpg" width="1000"  alt="" /></a></li>
-                    <li><a href="/itmi/gallery.jsp"><img src="https://smedia2.intoday.in/indiatoday/itmi/images/banner2.jpg" width="1000"  alt="" /></a></li>
-                </ul>
-                <div class="text-banner"><h1>INDIA TODAY MEDIA INSTITUTE</h1></div>
-            </div>
-        </div>
-  
-  
-  
-        
-        
-        
-        
-            
-        
-<div class="wrapper">
-
-<div class="container">
-  <!--<div class="marquee-sibling"> Breaking News </div>-->
-  <div class="marquee">
-    <ul class="marquee-content-items">
-        <li>Now, just give us a missed call on 08030636023 for any admission-related enquiry, and we will call you back.</li>   
-    </ul>
-  </div>
-</div>
-
-</div>
-
-    </header>
-      <div class="contentCn">
-    <div class="wrapper">
-    
-		<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-<link href='https://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
-<style>
+ <style>
 .clr {
-	clear: both;
+  clear: both;
 }
 .accordion {
-	width: 670px;
-	margin-top: 30px;
-	float: left;
-	margin-right: 20px;
-	}
-
+  width: 670px;
+  margin-top: 30px;
+  float: left;
+  margin-right: 20px;
+  }
 .accordion h2 {
-	margin-bottom:10px;
-	padding: 5px;
-	background: #f2f2f2;
-	font-size: 15px;
-	font-family: roboto;
-	line-height: 25px;
-	border: 1px solid #d3d3d3;
-	float:left;
-	width:660px;
+  margin-bottom:10px;
+  padding: 5px;
+  background: #f2f2f2;
+  font-size: 15px;
+  font-family: roboto;
+  line-height: 25px;
+  border: 1px solid #d3d3d3;
+  float:left;
+  width:660px;
 }
 .accordion h2 a {
-	text-decoration: none;
-	color: #000;
-	float:left;
+  text-decoration: none;
+  color: #000;
+  float:left;
 }
-
-.accordion h2 a span{ float:left; margin-right:4px;width:610px;	display:block;}
-
-
+.accordion h2 a span{ float:left; margin-right:4px;width:610px; display:block;}
 .accordion h2 a img{ float:right;margin-top:5px;}
-
-
-
-
 .accordion h3 {
-	color: #000;
-	padding: 0;
-	margin: 0;
+  color: #000;
+  padding: 0;
+  margin: 0;
 }
 .list-image {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 .list-image li {
-	list-style: none;
-	float: left;
-	margin: 8px;
-	position: relative;
+  list-style: none;
+  float: left;
+  margin: 8px;
+  position: relative;
  }
-
 .list-image li img {border:3px solid #ccc;box-shadow: 2px 1px 7px 1px #ddd;width: 313px;}
-
-
-
 </style>
-<script src="/staticpages/main/js/jquery.min.1.8.2.js" type="text/javascript"></script>
-<script>
+      <script>
 $(document).ready(function(e) {
   var allPanels = $('.accordion h3').hide();
   $('.accordion h2 a').click(function() {
@@ -308,12 +106,20 @@ $(document).ready(function(e) {
   });
 });
 </script>
-<link rel="alternate" media="only screen and (max-width: 640px)" href="/itmi/mobile/"/>	
-	 <script type="text/javascript">if ((navigator.userAgent).toLowerCase().indexOf('iphone') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=510733452" />'); } else if ((navigator.userAgent).toLowerCase().indexOf('ipad') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=560404098" />');}</script>
-         <script type="text/javascript">function canonicalUrlRedirection(){for(var e="",i=document.getElementsByTagName("link"),a=0;a<i.length;a++)if("only screen and (max-width: 640px)"==i[a].getAttribute("media")){e=i[a].getAttribute("href");break}""!=e&&(window.location.href=e)}var redirectagent=navigator.userAgent.toLowerCase(),mode=window.location.toString().split("mode=")[1],redirect_devices=["vnd.wap.xhtml+xml","sony","symbian","S60","SymbOS","nokia","samsung","mobile","windows ce","epoc","opera mini","nitro","j2me","midp-","cldc-","netfront","mot","up.browser","up.link","audiovox","blackberry","ericsson","panasonic","philips","sanyo","sharp","sie-","portalmmm","blazer","avantgo","danger","palm","series60","palmsource","pocketpc","smartphone","rover","ipaq","au-mic","alcatel","ericy","vodafone","wap1","wap2","teleca","playstation","lge","lg-","iphone","android","htc","dream","webos","bolt","nintendo"];if(!(redirectagent.indexOf("ipad")>=0))for(var i in redirect_devices)-1!=redirectagent.indexOf(redirect_devices[i])&&"classic"!=mode&&canonicalUrlRedirection();</script>
-</head>
 
+</head>
 <body>
+
+
+<div class="outerWrapper">
+
+  
+   <?php include('header.php');?>
+  <?php include('banner.php');?>
+      <div class="contentCn">
+    <div class="wrapper">
+    
+	
 <div class="accordion">
   <h2><a href=""><span>A guest session with our very own Mr Rajdeep Sardesai, Consulting Editor, TV Today Network, on "Media of the future: How long will the nosy, noisy, eyeballs-catchy era last?" </span><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/itmi/images/camera-icon.png" /></a></h2>
   <h3>
@@ -444,8 +250,7 @@ $(document).ready(function(e) {
   
 
 </div>
-</body>
-</html>
+
 
         
 		<div class="rightBar">
