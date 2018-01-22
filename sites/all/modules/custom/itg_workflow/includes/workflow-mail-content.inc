@@ -400,7 +400,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
                                     <h2 style="font-size: 18px; margin: 20px 0 30px;">' . $body_htwo . ' :</h2>
                                     <strong style="font-size: 16px;">Dear SEO Team,</strong>
                                     <p style="font-size: 16px; color: #595959; margin: 20px 0;">' . ucwords($content_type) . ' <strong style="color: #000;">: ' . $node_url . ' </strong></p>
-                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;"> Link: ' . $node_url . '</p>
+                                    <p style="font-size: 16px; color: #595959; margin: 20px 0;"> Url: ' . $actual_node_url . '</p>
                                     <p style="font-size: 16px; color: #595959; margin: 20px 0;">has been ' . $subject_line_upd . '.</p>
                                     <p style="font-size: 16px; color: #595959; margin: 20px 0;"><strong style="color: #000;">Thanks,</strong><br>India Today Team</p>
                                 </td>
