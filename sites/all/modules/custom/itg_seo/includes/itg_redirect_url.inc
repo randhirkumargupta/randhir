@@ -508,7 +508,7 @@ function getNewStoryUrl($storyarg, $table) {
   $newcontentid = get_new_seccat_by_mig_id($old_content_id, $table);
   if ($newcontentid) {
     $redirecturl = get_redirect_url($newcontentid);
-    $newmatchurl = $base_url.'/'.$redirecturl;
+    $newmatchurl = FRONT_URL.'/'.$redirecturl;
   }
   return $newmatchurl;
 }
