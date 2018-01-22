@@ -3008,11 +3008,9 @@ function get_max_weight_for_special($type) {
 function itg_widget_node_update($node) {
   if ($node->status == 0 && $node->original->status == 1 && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic')) {
     db_delete('itg_widget_order')
-        ->condition('content_type', 'All')
         ->condition('nid', $node->nid)->execute();
 
     db_delete('itg_widget_order_section')
-        ->condition('content_type', $node->type)
         ->condition('nid', $node->nid)->execute();
   }
   if (!empty($node->op) && ($node->type == 'story' || $node->type == 'videogallery' || $node->type == 'photogallery' || $node->type == 'breaking_news' || $node->type == 'mega_review_critic')) {
