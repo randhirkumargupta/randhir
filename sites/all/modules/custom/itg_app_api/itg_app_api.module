@@ -1879,8 +1879,8 @@ function formateNodeBodyToken($n_body) {
   $n_body = str_replace('<blockquote', '<blockquote style="padding: 0.5em !important; display:block;"', $n_body);
   $n_body = str_replace('//www.youtube.com', 'https://www.youtube.com', $n_body);
   $n_body = str_replace('https:https://www.youtube.com', 'https://www.youtube.com', $n_body);
-  $n_body = str_replace('<blockquote style="padding: 0.5em !important; display:block;" class="instagram-media"', '<blockquote class="instagram"', $n_body);
-  $n_body = str_replace('<blockquote class="instagram-media"', '<blockquote class="instagram"', $n_body);
+  $n_body = str_replace('<blockquote style="padding: 0.5em !important; display:block;" class="instagram-media"', '<blockquote class="instagram-media"', $n_body);
+  //$n_body = str_replace('<blockquote class="instagram-media"', '<blockquote class="instagram"', $n_body);
   //jira:78 end 
   $data['n_body'] = $n_body;
   $data['poll_id'] = $poll_id;
