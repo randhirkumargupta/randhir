@@ -136,11 +136,19 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
 </header>
 
 </header>
-<?php if(($title[0]['type'] == 'story') || ($title[0]['type'] == 'breaking_news')) { ?>
+<?php if (($title[0]['type'] == 'photogallery') && (!empty(variable_get('amp_photo_ad')))) : ?>  
+  <div class="story_ad_block custom-amp-ad">
+    <?php print variable_get('amp_photo_ad'); ?> 
+  </div>
+<?php elseif (($title[0]['type'] == 'videogallery') && (!empty(variable_get('amp_video_ad')))) : ?>
+  <div class="story_ad_block custom-amp-ad">
+    <?php print variable_get('amp_video_ad'); ?>     
+  </div>
+<?php else : ?>
 <div class="story_ad_block custom-amp-ad">
-            <?php
-            $block = module_invoke('itg_front_end_common', 'block_view', 'amp_story_ad_block');
-            print render($block['content']);
-            ?>
+  <?php
+    $block = module_invoke('itg_front_end_common', 'block_view', 'amp_story_ad_block');
+    print render($block['content']);
+  ?>
 </div>
-<?php } ?>
+<?php endif; ?>
