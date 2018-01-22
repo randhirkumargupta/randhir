@@ -4059,8 +4059,11 @@ function itg_rapid_api_edit_profile($token) {
 
         //if ($result_obj->uid) {
         $responce_object_rs = saveUpdatedProfile($params);
+        $user_val = user_load_by_name($params['user_id']);
+        $profile_image = completeFilePath($user_val->field_user_picture['und'][0]['fid']);
         $responce_object['status_code'] = "1";
         $responce_object['status_message'] = "";
+        $responce_object['data']['profile_image'] = "$profile_image";
         //}
     }
     return $responce_object;
