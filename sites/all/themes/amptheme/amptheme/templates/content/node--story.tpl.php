@@ -70,8 +70,8 @@ if (!empty($content)):
   $node_title = $content['amp_title'];
   $node_image_alt = '';
   $node_image_title = '';
-  $node_image_alt = $node->title = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']); 
-  $node_image_title = $node->title = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']);
+  $node_image_alt = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']); 
+  $node_image_title = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']);
   ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
     <div class='<?php print $classes ?>'>      
