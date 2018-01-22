@@ -457,6 +457,7 @@ function itg_html_head_alter(&$head_elements) {
   $status = drupal_get_http_header("status");
   if ($status === '404 Not Found'){
 	unset($head_elements['canonical_0']);
+	unset($head_elements['canonical']);
   }
 }
 
