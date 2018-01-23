@@ -47,6 +47,13 @@ function itg_msi_menu() {
         'type' => MENU_CALLBACK,
         'file' => 'includes/itg_msi.inc',
     );
+    
+    $items['itg-update-external-url'] = array(
+        'page callback' => 'itg_update_external_url',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+        'file' => 'includes/itg_msi.inc',
+    );
 
     return $items;
 }
