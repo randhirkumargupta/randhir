@@ -213,9 +213,15 @@ function generateStoryDeatilList($id) {
     } else {
     $tech_photo_gallery = new stdClass();
     $data_array['tech_photo_gallery'] = $tech_photo_gallery;
-  }  
-  $data_array['tech_photos'][0]['title'] = "PHOTOS";
-  $data_array['tech_photos'][0]['data'] = $story_tech[0]['data'];
+  }
+  if(count($story_tech[0]['data']) > 0){
+      $data_array['tech_photos'][0]['title'] = "PHOTOS";
+      $data_array['tech_photos'][0]['data'] = $story_tech[0]['data'];
+    }
+    else{
+      $data_array['tech_photos'][0]['title'] = "";
+      $data_array['tech_photos'][0]['data'] = array();
+    }
   if ($tech_pros['listcont'] > 0) {
     unset($tech_pros['listcont']);
     $data_array['tech_pros_cons'] = $tech_pros;
