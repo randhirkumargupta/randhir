@@ -53,8 +53,15 @@ function generateStoryDeatilList($id) {
 
   $director = $node->field_mega_review_director[LANGUAGE_NONE]['0']['value'];
   $movie_plot = $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value'];
-  $star_cast = $node->field_mega_review_cast['und'][0]['target_id'];
-  $star_cast_name = getCastName($star_cast);
+  $star_cast = $node->field_mega_review_cast['und'];
+  $star_cast_name = "";
+  if(count($star_cast) > 0){
+  foreach ($star_cast as $key => $value) {
+        $star_cast_name .= getCastName($value['target_id']).", ";
+    }
+    $star_cast_name = rtrim($star_cast_name, ", ");
+  }
+  
   $n_body = $node->body['und']['0']['value'];
   //$body_with_html = story_body_with_html($node);
   $body_with_html_data = formateNodeBodyToken($n_body);
@@ -140,8 +147,14 @@ function generateStoryDeatilList($id) {
   $image_caption = $img_info['image_caption'];
 
   $caption = $node->field_story_extra_large_image['und'][0]['title'];
+  $style = '<style>*{ margin:0; padding:0}.allVideoSection{margin:10px auto; }.iframepotr{ width:100%!Important;height: calc(100vw * 1.7425)}.iframeland{ width:100%!Important;height: calc(100vw * 0.5625)}.iframesqu{width:100%!Important;height: calc(100vw)}iframe[src*="https://www.youtube.com/"]{ width:100%;height: calc(100vw * 0.5625)}iframe[src*="https://www.indiatoday.in/"]{width: 100%; height: calc(100vw * 0.5625)}</style>';
+  //$style = '<style>*{ margin:0; padding:0}.allVideoSection{margin:10px auto; }.iframepotr{ width:100%!Important;height: calc(100vw * 1.7425)}.iframeland{ width:100%!Important;height: calc(100vw * 0.5625)}.iframesqu{width:100%!Important;height: calc(100vw)}iframe[src*=\"https://www.youtube.com/\"]{ width:100%;height: calc(100vw * 0.5625)}iframe[src*=\"https://www.indiatoday.in/\"]{width: 100%; height: calc((100vw) * 0.5625)}</style>';
+  $js = '<script type="text/javascript"> var iframesrc = document.querySelectorAll("iframe[src*=\'www.facebook.com\']");for(var idx=0;idx < iframesrc.length;idx++){var url_string = iframesrc[idx].src;var url = new URL(url_string);var hheight = iframesrc[idx].height;var wwidth = url.searchParams.get("width");if(hheight == wwidth){iframesrc[idx].classList.add(\'iframesqu\')}else if(hheight > wwidth){iframesrc[idx].classList.add(\'iframepotr\')}else{iframesrc[idx].classList.add(\'iframeland\')}}</script>';
+  
+  //$body_with_html = $style."".$body_with_html."".$js; 
+ 
 
-  //data array building
+    //data array building
   $title = strip_tags($title);
   $image_caption = strip_tags($image_caption);
 
@@ -192,14 +205,23 @@ function generateStoryDeatilList($id) {
   }
 
   if ($tech_photo_gallery) {
-    $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
-  }
-  else {
+        $photo_list_array = getPhotolistforPhotostory($tech_photo_gallery);
+        $photolist = $photo_list_array;
+        $data_array['tech_photo_gallery'][0]['title'] = "SAMPLE PHOTOS";
+        $data_array['tech_photo_gallery'][0]['data'] = (array) $photolist[0]['photos'];
+     // $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
+    } else {
     $tech_photo_gallery = new stdClass();
     $data_array['tech_photo_gallery'] = $tech_photo_gallery;
   }
-
-  $data_array['tech_photos'] = $story_tech;
+  if(count($story_tech[0]['data']) > 0){
+      $data_array['tech_photos'][0]['title'] = "PHOTOS";
+      $data_array['tech_photos'][0]['data'] = $story_tech[0]['data'];
+    }
+    else{
+      $data_array['tech_photos'][0]['title'] = "";
+      $data_array['tech_photos'][0]['data'] = array();
+    }
   if ($tech_pros['listcont'] > 0) {
     unset($tech_pros['listcont']);
     $data_array['tech_pros_cons'] = $tech_pros;
@@ -302,15 +324,12 @@ function getRating($node) {
  * @return type
  */
 function getRatings($node) {
-  $rating = array();
-  if ($field_story_rating != "") {
+    $rating = array();
     $field_story_rating = trim($node->field_story_rating['und'][0]['value']);
     $rating['r_cur_value'] = "$field_story_rating";
-    $rating['r_upper_range'] = "$field_story_rating";
+    $rating['r_upper_range'] = "5";
     $rating['r_is_star_rating'] = "$field_story_rating";
-  }
-
-  return $rating;
+    return $rating;
 }
 
 /**
@@ -320,13 +339,18 @@ function getRatings($node) {
  * @return array
  */
 function getCastName($nid) {
+  $title = "";
   if ($nid) {
     $query = db_select('node', 'n');
     $query->fields('n', array('title'));
     $query->condition('n.nid', $nid);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    return $result[0]['title'];
+    //return $result[0]['title'];    
+    foreach ($result as $key => $value) {
+        $title = $value['title'];
+    }
   }
+  return $title;
 }
 
 /**
@@ -359,8 +383,15 @@ function getStoryTechs($node) {
     $load_collection = field_collection_item_load($val_fid);
     $photo_ttile = $load_collection->field_technology_photo_title['und'][0]['value'];
     $img_url = completeFilePath($load_collection->field_technology_sample_photo['und'][0]['fid']);
-    $storytech['data'][$listcont]['title'] = $photo_ttile;
-    $storytech['data'][$listcont]['img'] = $img_url;
+    $img_info = getInfoData($val_fid);
+    $p_credit = $img_info['image_courtesy'];
+    $p_captions = $img_info['image_caption'];
+    $image_date = $img_info['image_date'];
+    $storytech['data'][$listcont]['title'] = "$photo_ttile";
+    $storytech['data'][$listcont]['img'] = "$img_url";
+    $storytech['data'][$listcont]['photo_date'] = "$img_url";
+    $storytech['data'][$listcont]['p_credit'] = "$p_credit";
+    $storytech['data'][$listcont]['p_captions'] = "$p_captions";
     $listcont++;
   }
   $storytech_fi[] = (array) $storytech;
@@ -753,12 +784,13 @@ function getInfoData($fid) {
   $data = array();
   if ($fid) {
     $query = db_select('image_info', 'iminfo');
-    $query->fields('iminfo', array('image_courtesy', 'image_caption'));
+    $query->fields('iminfo', array('image_courtesy', 'image_caption', 'image_date'));
     $query->condition('iminfo.fid', $fid, '=');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $k => $res) {
       $data['image_courtesy'] = $res['image_courtesy'];
       $data['image_caption'] = $res['image_caption'];
+      $data['image_date'] = $res['image_date'];
     }
   }
   return $data;

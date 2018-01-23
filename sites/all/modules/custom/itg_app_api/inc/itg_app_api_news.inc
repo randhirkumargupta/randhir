@@ -286,6 +286,50 @@ function generateNewsCategoryList($tid, $pageno) {
  *
  * @return array
  */
+function getPhotolistforPhotostory($nid, $source = 0) {
+  // variable decalaration
+  $photolist = array();
+  $photolist_loop = array();
+  $node = node_load($nid);
+  $galleryimg = $node->field_gallery_image['und'];
+  $lcont = 0;
+  foreach ($galleryimg as $key => $value) {
+    $fc = field_collection_field_get_entity($value);
+
+    $fid = $fc->field_image_id['und'][0]['value'];
+    if (!$fid > 0) {
+      $fid = $fc->field_images['und'][0]['fid'];
+    }
+    $uri = $fc->field_images['und'][0]['uri'];
+    $file_uri = file_create_url($uri);
+    $fid_file = $fid;
+    $img_url = completeFilePath($fid_file);
+    $caption = $fc->field_image_caption['und'][0]['value'];
+    $byline = $fc->field_credit['und'][0]['value'];
+    $photo_date = date("Y-m-d H:i:s", $node->created);    
+    $photo_story_img = image_style_url('photo_slider_753x543', $uri);
+    $photolist_loop[$lcont]['title'] = "$fc->title";
+    $photolist_loop[$lcont]['img'] = "$photo_story_img";
+    $photolist_loop[$lcont]['photo_date'] = "$photo_date";
+    $photolist_loop[$lcont]['p_credit'] = "$byline";
+    $photolist_loop[$lcont]['p_caption'] = "$caption";
+    $lcont++;
+  }
+  if ($source == 1) {
+    $photolist['photos'] = (array) $photolist_loop;
+  }
+  else {
+    $photolist[0]['photos'] = (array) $photolist_loop;
+  }
+  return $photolist;
+}
+
+/**
+ * function for generate getPhotolist array
+ * @pram int $nid
+ *
+ * @return array
+ */
 function getPhotolist($nid, $source = 0) {
   // variable decalaration
   $photolist = array();
