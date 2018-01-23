@@ -520,7 +520,8 @@ function getVideolist($nid, $source = 0) {
  * @return int $nv_count
  */
 function getNodeViewCount($nid) {
-
+  $nc_view = 0;
+  return $nc_view;
   $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
   $nc_view = $node_anyalytics['node_view_count'];
   return $nc_view;
