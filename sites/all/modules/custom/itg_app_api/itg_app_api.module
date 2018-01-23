@@ -382,7 +382,8 @@ function server_error_master_json() {
  * @pram int $nc_count
  */
 function getCommentsCount($nid) {
-
+  $cont = 0;
+  return $cont;
   $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
   $nc_count = $node_anyalytics['data_count_node_comment'];
   return $nc_count;
