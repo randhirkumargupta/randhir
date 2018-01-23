@@ -236,11 +236,10 @@ function generateStoryDeatilList($id) {
     $data_array['author'] = $author;
   }
   if (trim($rating['r_cur_value']) == "" && trim($rating['r_upper_range']) == "" && trim($rating['r_is_star_rating']) == "") {
-    
+    $rating = new stdClass();
     $data_array['rating'] = $rating;
   }
   else {
-    $rating = new stdClass();
     $data_array['rating'] = $rating;
   }
 
@@ -312,15 +311,12 @@ function getRating($node) {
  * @return type
  */
 function getRatings($node) {
-  $rating = array();
-  if ($field_story_rating != "") {
+    $rating = array();
     $field_story_rating = trim($node->field_story_rating['und'][0]['value']);
     $rating['r_cur_value'] = "$field_story_rating";
     $rating['r_upper_range'] = "$field_story_rating";
     $rating['r_is_star_rating'] = "$field_story_rating";
-  }
-
-  return $rating;
+    return $rating;
 }
 
 /**
