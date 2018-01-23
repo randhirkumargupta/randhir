@@ -286,7 +286,9 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  itgd_chart_beat_code();
+  if ($arg[2] != 'embed') {
+    itgd_chart_beat_code();
+  }
   $newsroomjs = get_newsroom_js();
   $script_code = array(
 	'#type' => 'markup',
@@ -452,6 +454,10 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['og_image_width']['#weight'] = -977;
   $head_elements['og_image']['#weight'] = -976;
   $head_elements['canonical_0']['#weight'] = -1001;
+  $status = drupal_get_http_header("status");
+  if ($status === '404 Not Found'){
+	unset($head_elements['metatag_canonical']);
+  }
 }
 
 /**
@@ -641,7 +647,7 @@ function itgd_chart_beat_code() {
       $auths_name = itg_get_story_authors_name($get_authors_name) . ',';
     }
     $chart_authors = $auths_name . 'Edited by ' . itg_get_story_edited_authors_name($node->uid);
-    $chart_title = $node->title;
+    $chart_title = str_replace("'", "", $node->title);
     $chart_path = drupal_get_path_alias('node/' . $node->nid);
     $chart_path = '/' . $chart_path;
     if ($node->type == 'videogallery') {

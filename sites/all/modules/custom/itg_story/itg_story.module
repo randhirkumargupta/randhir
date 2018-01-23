@@ -1047,6 +1047,16 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       if (in_array('lock_story' , $config) && empty($_GET['preview_log'])) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
       }
+      if (isset($node->type) && $node->type == 'story' && $node->status == 1) {
+        if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+          foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+            if ($val['value'] == 'display_lock') {
+              $subscription_url = "http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITStorypage";
+              drupal_goto($subscription_url);
+            }
+          }
+        }
+      }
     }
     
     if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value'])) {
