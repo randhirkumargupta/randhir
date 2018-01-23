@@ -33,6 +33,10 @@ function itg_theme() {
     'path' => drupal_get_path('theme', 'itg') . '/templates',
     'template' => 'migrated-video-player',
   );
+  $items['internal_video_player_jw'] = array(
+    'path' => drupal_get_path('theme', 'itg') . '/templates',
+    'template' => 'internal-video-player-jw',
+  );
   return $items;
 }
 
@@ -282,7 +286,9 @@ function itg_preprocess_html(&$vars) {
       drupal_add_html_head($script_code, $ads_key);
     }
   }
-  itgd_chart_beat_code();
+  if ($arg[2] != 'embed') {
+    itgd_chart_beat_code();
+  }
   $newsroomjs = get_newsroom_js();
   $script_code = array(
 	'#type' => 'markup',
@@ -307,6 +313,10 @@ function itg_preprocess_html(&$vars) {
       $title = $term->metatags[LANGUAGE_NONE]['title']['value'];
       $vars['head_title'] = $title;
     }
+  }
+  
+  if($arg[0] == 'magazine') {
+      $vars['head_title'] = 'India Today Headlines Archive- Get News headlines by date | '.variable_get('site_name');
   }
 }
 
@@ -337,6 +347,7 @@ function itg_html_head_alter(&$head_elements) {
 
   if ($arg[0] == 'taxonomy' && is_numeric($arg[2])) {
       $term = taxonomy_term_load($arg[2]);
+      $term_url_alias = drupal_get_path_alias('taxonomy/term/'.$term->tid);
       $meta_keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
       if (!empty($meta_keywords)) {
         $head_elements['metatag_keywords_0'] = array(
@@ -349,7 +360,6 @@ function itg_html_head_alter(&$head_elements) {
           ),
         );
       }
-      
       $meta_description = $term->metatags[LANGUAGE_NONE]['description']['value'];
       if (isset($meta_description) && !empty($meta_description)) {
         $head_elements['metatag_description_0'] = array(
@@ -396,6 +406,15 @@ function itg_html_head_alter(&$head_elements) {
             );
           }
         }
+        // Add canonical for taxonomy page:
+        $head_elements['canonical_0'] = array(
+          '#type' => 'html_tag',
+          '#tag' => 'link',
+          '#attributes' => array(
+            'rel' => 'canonical',
+            'href' => FRONT_URL.'/'.$term_url_alias
+          ),
+        );
       }
     }
   
@@ -435,6 +454,10 @@ function itg_html_head_alter(&$head_elements) {
   $head_elements['og_image_width']['#weight'] = -977;
   $head_elements['og_image']['#weight'] = -976;
   $head_elements['canonical_0']['#weight'] = -1001;
+  $status = drupal_get_http_header("status");
+  if ($status === '404 Not Found'){
+	unset($head_elements['metatag_canonical']);
+  }
 }
 
 /**
@@ -624,7 +647,7 @@ function itgd_chart_beat_code() {
       $auths_name = itg_get_story_authors_name($get_authors_name) . ',';
     }
     $chart_authors = $auths_name . 'Edited by ' . itg_get_story_edited_authors_name($node->uid);
-    $chart_title = $node->title;
+    $chart_title = str_replace("'", "", $node->title);
     $chart_path = drupal_get_path_alias('node/' . $node->nid);
     $chart_path = '/' . $chart_path;
     if ($node->type == 'videogallery') {
@@ -638,9 +661,7 @@ function itgd_chart_beat_code() {
 					unruly.native.siteId = 321603', array('type' => 'inline', 'scope' => 'footer'));
 	  drupal_add_js('//video.unrulymedia.com/native/native-loader.js', array('type' => 'external', 'scope' => 'footer'));
     }
-  }
-
-  drupal_add_js("var _sf_async_config = _sf_async_config || {};
+    drupal_add_js("var _sf_async_config = _sf_async_config || {};
       /** CONFIGURATION START **/
     _sf_async_config.uid = 60355;
     _sf_async_config.domain = 'indiatoday.in';
@@ -667,4 +688,31 @@ function itgd_chart_beat_code() {
             };	  
 		  
      })();", array('type' => 'inline', 'scope' => 'footer'));
+  } else {
+  drupal_add_js("var _sf_async_config = _sf_async_config || {};
+      /** CONFIGURATION START **/
+    _sf_async_config.uid = 60355;
+    _sf_async_config.domain = 'indiatoday.in';
+    _sf_async_config.useCanonical = true;
+    _sf_async_config.sections = '" . $chart_sections . "';  
+    _sf_async_config.authors = '" . $chart_authors . "';
+    /** CONFIGURATION END **/
+     (function () {
+          function loadChartbeat() { 
+               window._sf_endpt = (new Date()).getTime();
+               var e = document.createElement('script');
+               e.setAttribute('language', 'javascript');
+               e.setAttribute('type', 'text/javascript');
+               e.setAttribute('src', '" . $chart_js . "');
+               document.body.appendChild(e);
+          }
+          var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };	  
+		  
+     })();", array('type' => 'inline', 'scope' => 'footer'));
+  }
 }

@@ -84,9 +84,9 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
             $metatags_title = html_entity_decode($node->metatags['und']['keywords']['value']);
             $metatags_description = html_entity_decode($node->metatags['und']['description']['value']);
-            $output .= program_section_page_feed_header();
+            $output .= getMobileFeedXmlHeader();
             $createddate = format_date($node->created, 'custom', 'd/m/Y');
-            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit>".xml_cdata_filter($reporter_node)."</credit><createddate>".xml_cdata_filter($create_datetime)."</createddate><date>".$create_date."</date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($thumbimage)."</thumbimage><mediaid></mediaid><uurl></uurl>";
+            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[".$reporter_node."]]></credit><date>".xml_cdata_filter($create_date)."</date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($thumbimage)."</thumbimage><mediaid></mediaid><uurl></uurl>";
             //get video tag
             $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
             $videotag = video_detail_formats($nid, $source_type);
@@ -113,13 +113,19 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
                 $inter_video_details = internal_video_bitrate_data($video_id);
                 $output .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
             }
-            $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword>".xml_cdata_filter($metatags_title)."</metakeyword><longdescription>".xml_cdata_filter($metatags_description)."</longdescription><weburl>" . $weburl . "</weburl>";
+            $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword>".xml_cdata_filter($metatags_title)."</metakeyword><metadescription>".xml_cdata_filter($metatags_description)."</metadescription><longdescription>".xml_cdata_filter($metatags_description)."</longdescription><weburl>" . $weburl . "</weburl>";
             //get body img tag
-            $imgtag = getImgTagDetail($node);
+            $imgtag1 = getImgTagDetail($node);
+            if ($imgtag1) {
+              $output .= $imgtag1;
+            } else {
+              $output .= emptygetImgTagDetail();
+            }
+            $imgtag = getBodyImgTagDetail($node);
             if ($imgtag) {
               $output .= $imgtag;
             } else {
-              $output .= emptygetImgTagDetail();
+              $output .= emptygetBodyImgTagDetail();
             }
             //related node
             if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
@@ -133,7 +139,7 @@ function generateVideoDetailPageFeed($nid, $file_name = '', $term_feed_path = ''
             } else {
                 $output .= emptygetCommentXmlTag();
             }
-            $output .= "</item>" . program_section_page_feed_footer();
+            $output .= "</item>" . getMobileFeedXmlFooter();
             $result_set = setRedis($redis_key, $output, $ttl);
         }
     }
@@ -206,6 +212,53 @@ function getImgTagDetail($node) {
 }
 
 /**
+ * function for generate image xml tag
+ * @pram object $node
+ *
+ * @return string $imgtag
+ */
+function getImgTagDetaillarge($node) {
+    $field_story_small_image = $node->field_story_small_image['und'][0]['fid'];
+    $field_story_large_image = $node->field_story_large_image['und'][0]['fid'];
+    $lowres = completeFilePath($field_story_small_image);
+    $highres = completeFilePath($field_story_large_image);
+    // custom function for get img caption
+    $caption = getImgCaption($field_story_small_image);
+    $imgtag = "";
+    $imgtag = "<images><image><thumbimage>".xml_cdata_filter($lowres)."</thumbimage><largeimage>".xml_cdata_filter($highres)."</largeimage><caption>" . xml_cdata_filter($caption) . "</caption></image></images>";
+    return $imgtag;
+}
+
+/**
+ * function for generate image xml tag
+ * @pram object $node
+ *
+ * @return string $imgtag
+ */
+function getBodyImgTagDetail($node) {
+    $field_story_small_image = $node->field_story_small_image['und'][0]['fid'];
+    $field_story_large_image = $node->field_story_large_image['und'][0]['fid'];
+    $lowres = completeFilePath($field_story_small_image);
+    $highres = completeFilePath($field_story_large_image);
+    // custom function for get img caption
+    $caption = getImgCaption($field_story_small_image);
+    $imgtag = "";
+    $imgtag = "<bodyimages><image><lowres>".xml_cdata_filter($lowres)."</lowres><highres>".xml_cdata_filter($highres)."</highres><caption>" . xml_cdata_filter($caption) . "</caption></image></bodyimages>";
+    return $imgtag;
+}
+
+/**
+ * function for generate Empty image xml tag
+ *
+ * @return string $imgtag
+ */
+function emptygetBodyImgTagDetail() {
+    $imgtag = "";
+    $imgtag = "<bodyimages><image><lowres></lowres><highres></highres><caption></caption></image></bodyimages>";
+    return $imgtag;
+}
+
+/**
  * function for generate Empty image xml tag
  *
  * @return string $imgtag
@@ -213,6 +266,17 @@ function getImgTagDetail($node) {
 function emptygetImgTagDetail() {
     $imgtag = "";
     $imgtag = "<images><image><thumbimage></thumbimage><caption></caption></image></images>";
+    return $imgtag;
+}
+
+/**
+ * function for generate Empty image xml tag
+ *
+ * @return string $imgtag
+ */
+function emptygetImgTagDetaillarge() {
+    $imgtag = "";
+    $imgtag = "<images><image><thumbimage></thumbimage><largeimage></largeimage><caption></caption></image></images>";
     return $imgtag;
 }
 
@@ -477,4 +541,137 @@ function xml_itg_videogallery_getsolr_data_for_internal_video($video_id) {
             return $all_data[0]->sm_field_all_xml_content;
         }
     }
+}
+
+
+
+/**
+ * function for generate generateVideoDetailPageFeed xml feed file
+ * @pram int $nid
+ * @pram string $file_name, $term_feed_path, $type
+ *
+ * @return string $return_flag
+ */
+function generateVideoDetailPageFeedForProgram($nid, $file_name = '', $term_feed_path = '', $type) {
+    $imgtag = "";
+    if (!$file_name) {
+        $file_name = "video" . $nid . ".xml";
+    }
+    if (!$term_feed_path) {
+        $term_feed_path = "public://xml_it/videos";
+    } elseif ($type) {
+        if ($type == "photogallery") {
+            $term_feed_path = "public://xml_it/photos";
+        } elseif ($type == "story") {
+            $term_feed_path = "public://xml_it/stories";
+        } elseif ($type == "videogallery") {
+            $term_feed_path = "public://xml_it/videos";
+        }
+    }
+    //field_image_caption
+    $output = "";
+    if (!$nid) {
+        $output = "Nid is missing";
+    } else {
+        //check into redis
+        $redis_key = "itgd_video" . $nid;
+        $result_get = getRedis($redis_key);
+        if ($result_get['key_value'] != "") {
+            $output = $result_get['key_value'];
+        } else {
+            global $base_url;
+            $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+            $node = node_load($nid);
+            $title = html_entity_decode($node->title);
+            $tid = $node->field_primary_category['und'][0]['value'];
+            $term = taxonomy_term_load($tid);
+            $term_name = $term->name;
+            $comment_cont = $node->comment;
+            $byline_id = $node->field_story_reporter[LANGUAGE_NONE][0]['target_id'];
+            $reporter_node = itg_common_get_node_title($byline_id);
+            if (is_null($reporter_node)) {
+                $reporter_node = "";
+            }
+            $related_node = relatedContentNodeType($nid, "videogallery");
+            $city = getCityByNid($nid);
+            $alias = drupal_get_path_alias('node/' . $nid . '');
+            $weburl = FRONT_URL . "/" . $alias;
+            $create_date = date("F d, Y", $node->created);
+            $create_datetime = date(DATE_ATOM, $node->created);
+            $thumbimage = completeFilePath($node->field_story_medium_image['und'][0]['fid']);
+            $is_fav = getNidIsFavorite($nid);
+            $syndications = getNidIsSyndications($nid);
+            $field_video_upload = $node->field_video_upload['und'][0]['value'];
+            $file_id = file_usage($field_video_upload);
+            $load_collection = field_collection_item_load($field_video_upload);
+            $daily_motion_fid = $load_collection->field_videogallery_video_upload['und'][0]['fid'];
+            // get video path
+            //$video_path_info = videoCheckExistFile($daily_motion_fid, $nid, $field_video_upload);
+            $metatags_title = html_entity_decode($node->metatags['und']['keywords']['value']);
+            $metatags_description = html_entity_decode($node->metatags['und']['description']['value']);
+            $output .= program_section_page_feed_header();
+            $createddate = format_date($node->created, 'custom', 'd/m/Y');
+            $output .= "<item><videoid>" . $nid . "</videoid><idsection>" . $tid . "</idsection><section><![CDATA[" . $term_name . "]]></section><credit><![CDATA[".$reporter_node."]]></credit><createddate>".$create_date."</createddate><date>".xml_cdata_filter($create_date)."</date><datetime><![CDATA[" . $create_datetime . "]]></datetime><title><![CDATA[" . $title . "]]></title><thumbimage>".xml_cdata_filter($thumbimage)."</thumbimage><mediaid></mediaid><uurl></uurl>";
+            //get video tag
+            $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+            $videotag = video_detail_formats($nid, $source_type);
+            $video_size = migrated_video_transcoding($nid);
+            // migrated video
+            if (!empty($videotag['migrated'])) {
+              $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+              foreach ($videoids as $keys => $video_value) {
+                $url = $video_value->field_migrated_video_url_value;
+              }
+              $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+              $bitrate_url = $data_video['bitrate_url'];
+              $mp4_url = $data_video['file_url'];
+              $output .= "<videoparts><part>" . $bitrate_url . "</part></videoparts><size_364bit>" . $video_size . "</size_364bit><videoparts_mp4><part>" . $mp4_url . "</part></videoparts_mp4><videoparts_m3u8><part>" . $bitrate_url . "</part></videoparts_m3u8><flvvideoparts><part>" . $mp4_url . "</part></flvvideoparts><videoparts_3gp><part>" . $mp4_url . "</part></videoparts_3gp>";
+            } elseif (!empty($videotag['dailymotion'])) {
+                $videoids = get_video_in_fieldcollection_by_nid($nid);
+                foreach ($videoids as $keys => $video_value) {
+                  if ($video_value->video_id != '') {
+                    $video_id = $video_value->video_id;
+                  } elseif ($video_value->solr_video_id != '') {
+                    $video_id = $video_value->solr_video_id;
+                  }
+                }
+                $inter_video_details = internal_video_bitrate_data($video_id);
+                $output .= "<videoparts><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts><size_364bit>" . $videotag['dailymotion']['filsize'] . "</size_364bit><videoparts_mp4><part>" . $inter_video_details['file_url'] . "</part></videoparts_mp4><videoparts_m3u8><part>" . $inter_video_details['bitrate_url'] . "</part></videoparts_m3u8><flvvideoparts><part>" . $inter_video_details['file_url'] . "</part></flvvideoparts><videoparts_3gp><part>" . $inter_video_details['file_url'] . "</part></videoparts_3gp>";
+            }
+            $output .= "<create_date><![CDATA[" . $create_date . "]]></create_date><create_datetime><![CDATA[" . $create_datetime . "]]></create_datetime><syndications>" . $syndications . "</syndications><is_favorite>" . $is_fav . "</is_favorite><metakeyword>".xml_cdata_filter($metatags_title)."</metakeyword><metadescription>".xml_cdata_filter($metatags_description)."</metadescription><longdescription>".xml_cdata_filter($metatags_description)."</longdescription><weburl>" . $weburl . "</weburl>";
+            //get body img tag
+            $imgtag1 = getImgTagDetaillarge($node);
+            if ($imgtag1) {
+              $output .= $imgtag1;
+            } else {
+              $output .= emptygetImgTagDetaillarge();
+            }
+            $imgtag = getBodyImgTagDetail($node);
+            if ($imgtag) {
+              $output .= $imgtag;
+            } else {
+              $output .= emptygetBodyImgTagDetail();
+            }
+            //related node
+            if (isset($related_node['nid']) && count($related_node['nid']) > 0) {
+                $output .= getRelatedNodeXmlTag($related_node['nid']);
+            } else {
+                $output .= emptygetRelatedNodeXmlTag();
+            }
+            //function for get comment xml tag
+            if ($comment_cont > 0) {
+                $output .= getCommentXmlTag($node);
+            } else {
+                $output .= emptygetCommentXmlTag();
+            }
+            $output .= "</item>" . program_section_page_feed_footer();
+            $result_set = setRedis($redis_key, $output, $ttl);
+        }
+    }
+    if ($output) {
+        $return_flag .= writeFeedFile($term_feed_path, $file_name, $output);
+    } else {
+        $return_flag .= "Nid is missing";
+    }
+    return $return_flag;
 }

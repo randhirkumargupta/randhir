@@ -115,7 +115,8 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       if (is_lock_story($value['nid'])) {
         continue;
       }
-      $guid = genrate_uniqui_guid();
+      $uniq_id = "indiatoday.in".$value['nid'];
+      $guid = itg_genrate_uniqui_guid($uniq_id);
       $publish_date = gmdate("D, d M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);

@@ -347,6 +347,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/syndication_interface_cms.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['pti-feeds/genrate_pti_feeds'] = array(
+    'page callback' => 'itg_generate_pti_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/generate_pti_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -695,6 +701,15 @@ function get_node_metatags_by_nid($nid = NULL) {
  */
 function genrate_uniqui_guid() {
   return md5(uniqid(rand(), true));
+}
+
+/**
+ * Function is used to generate unique String
+ * @param type $uniq_id
+ * @return type
+ */
+function itg_genrate_uniqui_guid($uniq_id) {
+  return md5($uniq_id);
 }
 
 /**

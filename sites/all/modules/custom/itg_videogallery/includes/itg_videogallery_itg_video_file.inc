@@ -12,12 +12,13 @@ function itg_videogallery_push_itg_video() {
 
   $data = file_get_contents('php://input');
   $xml_data = simplexml_load_string($data);
+  $response_xml = '<transcodes><transcode>';
   foreach ($xml_data->transcode as $xml) {
     $video_info = (array) $xml->in;
     $client_name = $video_info['client'];
     $query = db_select('dailymotion_response_details', 'drd');
     $query->condition('transcode_id', $video_info['trans_id'], '=');
-    $query->fields('drd', array('title'));
+    $query->fields('drd', array('title', 'path', 'bitrate', 'aspect_ratio', 'video_id'));
     $query->range(0, 1);
     $results = $query->execute()->fetchAll();
     if (empty($results)) {
@@ -100,14 +101,20 @@ function itg_videogallery_push_itg_video() {
               ->fields($data_insert)
               ->execute();
           if ($insert_id) {
-            $rtn = array('code=>200', 'video_id' => $video_id,'msg' => 'This video pushed successfully');
-            http_response_code(200);
-            print json_encode($rtn);
+            $ratio_exp = explode('@', $video_ratio);
+            $bitrates_exp = explode('@', $video_bitrate);
+            foreach ($bitrates_exp as $bitr) {
+              $response_xml .= '<item><transcoding_id>' . $video_info['trans_id'] . '</transcoding_id><file_path>' . $results[0]->path . '</file_path><bitrate>' . $bitr . '</bitrate><aspect_ratio>' . $ratio_exp[0] . '</aspect_ratio><id>' . str_replace("PROD","", $video_id) . '</id><action>INSERT</action></item>';
+            }
+            //$rtn = array('code=>200', 'video_id' => $video_id,'msg' => 'This video pushed successfully');
+            //http_response_code(200);
+            //print json_encode($rtn);
           }
           else {
-            $rtn = array('code=>500', 'video_id' => $video_id, 'msg' => 'something wrong happened');
-            http_response_code(500);
-            print json_encode($rtn);
+            $response_xml .= '<item><transcoding_id>' . $video_info['trans_id'] . '</transcoding_id></item>';
+            //$rtn = array('code=>500', 'video_id' => $video_id, 'msg' => 'something wrong happened');
+            //http_response_code(500);
+            //print json_encode($rtn);
           }
           // rename($path_xml . $file_name, $path_xml_old . $file_name);
         }
@@ -119,11 +126,20 @@ function itg_videogallery_push_itg_video() {
       }
     }
     else {
-      $rtn = array('code=>422', 'msg' => 'This video Already pushed');
-      http_response_code(422);
-      print json_encode($rtn);
+      $ratio_exp = explode('@', $results[0]->aspect_ratio);
+      $bitrates_exp = explode('@', $results[0]->bitrate);
+      foreach ($bitrates_exp as $bitr) {
+        $response_xml .= '<item><transcoding_id>' . $video_info['trans_id'] . '</transcoding_id><file_path>' . $results[0]->path . '</file_path><bitrate>' . $bitr . '</bitrate><aspect_ratio>' . $ratio_exp[0] . '</aspect_ratio><id>' . str_replace("PROD","",$results[0]->video_id) . '</id><action>UPDATE</action></item>';
+      }
+      //$rtn = array('code=>422', 'msg' => 'This video Already pushed');
+      //http_response_code(422);
+      //print json_encode($rtn);
     }
   }
+  $response_xml .= '</transcode></transcodes>';
+  header('Content-Type: application/xml; charset=utf-8');
+  print $response_xml;
+  drupal_exit();
 }
 
 /**

@@ -6731,7 +6731,7 @@ section.sidebar .block-itg-ads {
   /*End photo section slider*/ }
   .auto-layout-page .auto-block-1,
   .auto-layout-page .auto-block-2 {
-    height: 605px;
+    height: 705px;
     overflow: hidden; }
   .auto-layout-page .auto-block-3 .itg-widget-child .droppable {
     height: 245px;
@@ -7246,9 +7246,7 @@ section.sidebar .block-itg-ads {
             vertical-align: middle;
             padding-left: 15px;
             color: #6e6e6e;
-            font-weight: normal; 
-            width:178px;
-            }
+            font-weight: normal; }
             #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .speaker-designation .speaker-title {
               font-weight: 700; }
           #block-itg-event-backend-program-tab-block .event-listing .side-right .listing-detail .profile-detail .profile-loop {
@@ -8493,9 +8491,9 @@ section.sidebar .block-itg-ads {
       display: none; }
 
 .section-sport-ipl-bg {
-  background: url("../images/sports-bg.png") no-repeat center 235px; }
+  background: url("../images/sports-bg.png") no-repeat center 409px; }
   .section-sport-ipl-bg main.container {
-    background: #fff; }
+    background: transparent; }
 
 .sport-home-layout-page .widget-title {
   display: block;

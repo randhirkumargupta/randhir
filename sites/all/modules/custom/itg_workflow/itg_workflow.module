@@ -561,7 +561,8 @@ function itg_workflow_node_access($node, $op, $account) {
     }
   }
 
-  // code for lock story  
+  // code for lock story
+/* We don't need to send on access denied page.  
   if (isset($node->type) && $node->type == 'story' && $node->status == 1) {
     if (!array_key_exists(COPY_EDITOR, $user->roles) && !array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) && !array_key_exists(EDITOR, $user->roles)) {
       if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
@@ -573,7 +574,7 @@ function itg_workflow_node_access($node, $op, $account) {
       }
     }
   }
-
+*/
   return NODE_ACCESS_IGNORE;
 }
 
@@ -588,7 +589,7 @@ function itg_workflow_node_view($node, $view_mode, $langcode) {
   // code for redirect_url
   $is_fron_page = drupal_is_front_page();
   if (empty($is_fron_page)) {
-    if (arg(0) == 'node' && is_numeric(arg(1))) {
+    if (arg(0) == 'node' && is_numeric(arg(1)) && $node->status == 0) {
       if (function_exists('itg_get_node_redirect_url')) {
         itg_get_node_redirect_url($node, $view_mode);
       }

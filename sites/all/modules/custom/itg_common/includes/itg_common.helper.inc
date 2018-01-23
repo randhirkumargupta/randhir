@@ -376,3 +376,27 @@ function itg_commom_get_gallery_image_array_by_gid($gallery_id) {
   $result = $query->execute()->fetchAll();
   return $result;
 }
+
+
+/**
+ * Function for get Byline Emails
+ * @param type $node
+ * @return type
+ */
+function get_node_byline_emails($node) {
+  $emails = '';
+  if ($node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value']) {
+    $byline_ids = $node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value'];
+    $byline_ids = explode(',', $byline_ids);
+    $query = db_select('field_data_field_reporter_email_id', 'frei');
+    $query->fields('frei', array('field_reporter_email_id_value'));
+    $query->condition('frei.entity_id', $byline_ids, 'IN');
+    $result = $query->execute()->fetchAll();
+    $email = array();
+    foreach ($result as $value) {
+      $email[] = $value->field_reporter_email_id_value;
+    }
+    $emails = implode(',', $email);
+  }
+  return $emails;
+}

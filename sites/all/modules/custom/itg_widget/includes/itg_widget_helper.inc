@@ -10,11 +10,15 @@ function __itg_widget_helper_data_insert($nid, $node_data = null) {
         __itg_widget_helper_data_delete($nid);
         if (empty($node_data)) {
           $node_load_data = node_load($nid, null, TRUE);
-        } else {
-            $node_load_data = $node_data;
         }
-  
-        //$node_load_data = node_load($nid, null, TRUE);
+        else if ((!empty($node_data)) && ($node_data->status == 1) && (!isset($node_data->original))) {
+          $node_load_data = node_load($nid, null, TRUE);
+        }
+        else {
+          $node_load_data = $node_data;
+        }
+
+  //$node_load_data = node_load($nid, null, TRUE);
 
         $node_load_data->status = itg_common_get_node_status_from_tbl($nid);
         //itg_watchdog("helper_insert" , time());
@@ -137,9 +141,20 @@ function _itg_widget_get_old_data() {
  */
 function _get_widget_display_data_as_per_db_result($result = array()) {
     if (!empty($result)) {
-        foreach ($result as $widget_data) {
-
-            $node_load_data = unserialize($widget_data->node_data);
+            foreach ($result as $widget_data) {
+              $webcast_val = '';
+              $is_sponsor = FALSE;
+              $node_load_data = unserialize($widget_data->node_data);
+              if ((isset($node_load_data->field_story_configurations['und'])) && (!empty($node_load_data->field_story_configurations['und']))) {
+                foreach ($node_load_data->field_story_configurations['und'] as $id => $id_arr) {
+                  if ($id_arr['value'] == 'webcast') {
+                    $webcast_val = $node_load_data->field_story_embed_webcast['und'][0]['value'];
+                  }
+                  if ($id_arr['value'] == 'sponsor') {
+                    $is_sponsor = TRUE;
+                  }
+                }
+              }
             $emoji_position1 = isset($node_load_data->field_emoji_position['und'][0]['value']) ? $node_load_data->field_emoji_position['und'][0]['value'] : "";
             $emoji_position2 = isset($node_load_data->field_emoji_position['und'][1]['value']) ? $node_load_data->field_emoji_position['und'][1]['value'] : "";
             $node_smily_data = array('field_story_short_headline_value' => isset($node_load_data->field_story_short_headline['und'][0]['value']) ? $node_load_data->field_story_short_headline['und'][0]['value'] : "",
@@ -207,6 +222,8 @@ function _get_widget_display_data_as_per_db_result($result = array()) {
               'field_story_extra_large_image_alt' => isset($node_load_data->field_story_extra_large_image['und'][0]['alt']) ? $node_load_data->field_story_extra_large_image['und'][0]['alt'] : "",
               'field_story_extra_large_image_title' => isset($node_load_data->field_story_extra_large_image['und'][0]['title']) ? $node_load_data->field_story_extra_large_image['und'][0]['title'] : "",
               'node_obj' => $node_smily_data,
+              'webcast_val' => $webcast_val,
+              'is_spnoser' => $is_sponsor,
             );
         }
     }
