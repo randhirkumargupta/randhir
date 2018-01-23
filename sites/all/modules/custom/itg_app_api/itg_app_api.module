@@ -1894,6 +1894,7 @@ function formateNodeBodyToken($n_body) {
   $n_body = str_replace('<blockquote style="padding: 0.5em !important; display:block;" class="instagram-media"', '<blockquote class="instagram-media"', $n_body);
   //$n_body = str_replace('<blockquote class="instagram-media"', '<blockquote class="instagram"', $n_body);
   $n_body = str_replace('src="//', 'src="https://', $n_body);
+  $n_body = str_replace('<div class="itg-mosimage"', '<div class="itg-mosimage" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;"', $n_body);
   //jira:78 end 
   $data['n_body'] = $n_body;
   $data['poll_id'] = $poll_id;
