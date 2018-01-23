@@ -641,7 +641,7 @@ print \' | <a href="move-dont-miss-widget-node/section_manual_order_widget//\'.$
 $query->join(\'node\', \'n\', \'n.nid=t.nid\'); 
 $query->fields(\'t\', array(\'nid\')); 
 $query->condition(\'t.tid\', $row->tid); 
-$query->condition(\'n.type\', array(\'story\', \'photogallery\', \'videogallery\'), \'IN\'); 
+$query->condition(\'n.type\', array(\'story\', \'photogallery\', \'videogallery\', \'breaking_news\', \'mega_review_critic\'), \'IN\'); 
 $count = $query->execute()->rowCount(); 
 if ($count == 0){
  return TRUE; 
