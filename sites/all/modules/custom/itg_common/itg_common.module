@@ -194,6 +194,22 @@ function itg_common_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
+  
+   $items['manage-score-card'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('itg_manage_score_card'),
+    'access arguments' => array('administer itg_term settings'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'includes/itg_scorecard.inc',
+  );
+  
+  $items['score-title-list/%/autocomplete'] = array(
+    'page callback' => 'itg_score_get_content_title',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_scorecard.inc',
+  );
+  
   return $items;
 }
 
