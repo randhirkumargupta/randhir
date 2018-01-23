@@ -326,13 +326,18 @@ function getRatings($node) {
  * @return array
  */
 function getCastName($nid) {
+  $title = "";
   if ($nid) {
     $query = db_select('node', 'n');
     $query->fields('n', array('title'));
     $query->condition('n.nid', $nid);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    return $result[0]['title'];
+    //return $result[0]['title'];    
+    foreach ($result as $key => $value) {
+        $title .= $value['title']. "  ";
+    }
   }
+  return $title;
 }
 
 /**
