@@ -53,8 +53,13 @@ function generateStoryDeatilList($id) {
 
   $director = $node->field_mega_review_director[LANGUAGE_NONE]['0']['value'];
   $movie_plot = $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value'];
-  $star_cast = $node->field_mega_review_cast['und'][0]['target_id'];
-  $star_cast_name = getCastName($star_cast);
+  $star_cast = $node->field_mega_review_cast['und'];
+  $star_cast_name = "";
+  foreach ($result as $key => $value) {
+        $star_cast_name .= getCastName($value['target_id']).", ";
+    }
+    $star_cast_name = rtrim($star_cast_name, ",");
+  
   $n_body = $node->body['und']['0']['value'];
   //$body_with_html = story_body_with_html($node);
   $body_with_html_data = formateNodeBodyToken($n_body);
@@ -334,7 +339,7 @@ function getCastName($nid) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     //return $result[0]['title'];    
     foreach ($result as $key => $value) {
-        $title .= $value['title']. "  ";
+        $title = $value['title'];
     }
   }
   return $title;
