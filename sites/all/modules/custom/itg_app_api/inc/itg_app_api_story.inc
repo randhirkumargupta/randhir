@@ -59,7 +59,7 @@ function generateStoryDeatilList($id) {
   foreach ($star_cast as $key => $value) {
         $star_cast_name .= getCastName($value['target_id']).", ";
     }
-    $star_cast_name = rtrim($star_cast_name, ",");
+    $star_cast_name = rtrim($star_cast_name, ", ");
   }
   
   $n_body = $node->body['und']['0']['value'];
