@@ -248,7 +248,7 @@ function generateStoryDeatilList($id) {
 
     $data_array['author'] = $author;
   }
-  if (trim($rating['r_cur_value']) == "" && trim($rating['r_upper_range']) == "" && trim($rating['r_is_star_rating']) == "") {
+  if (trim($rating['r_cur_value']) == ""  && trim($rating['r_is_star_rating']) == "") {
     $rating = new stdClass();
     $data_array['rating'] = $rating;
   }
