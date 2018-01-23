@@ -64,6 +64,52 @@ function itg_story_get_content_title($title) {
     }
 }
 
+
+
+/**
+ * callback for all the story of title
+ * @param $title
+ */
+function itg_state_get_content_title($title) {
+
+    if (strlen(trim($title)) > 0) {
+        $content_type = arg(1);
+        $state = arg(2);
+        
+        $options = '';
+        $title = strtolower(trim($title));
+        $query = db_select('node', 'n');
+        $query->fields('n', array('title'));
+        
+        if ($state == 'unpublished') {
+          $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
+          $query->condition('sp.field_supp_publish_value', 1, '=');
+          $query->condition('n.status', 0);
+        } else if ($state == 'published') {
+          $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
+          $query->condition('sp.field_supp_publish_value', 1, '=');
+          $query->condition('n.status', 1);
+        } else if ($state == 'draft') {
+          $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
+          $query->isNull('sp.field_supp_publish_value');
+          $query->condition('n.status', 0);
+        }
+        
+        $query->condition('title', '%' . $title . '%', 'LIKE');
+        $query->condition('n.type', $content_type, '=');
+        
+        $query->range(0, 20);
+
+        $result = $query->execute();
+
+        while ($record = $result->fetchAssoc()) {
+            $options[$record['title']] = $record['title'];
+        }
+
+        drupal_json_output($options);
+    }
+}
+
 /**
  * callback for all the workbench story of title
  * @param $title

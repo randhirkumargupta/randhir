@@ -2824,21 +2824,19 @@ function itg_widget_node_insert($node) {
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
             
-            if (function_exists('__itg_widget_helper_data_insert')) {
-              __itg_widget_helper_data_insert($node->nid, $node);
-            }
+             if ($node->status == 1 && !empty($node->op)) {
+                if (function_exists('__itg_widget_helper_data_insert')) {
+                  __itg_widget_helper_data_insert($node->nid, $node);
+                }
+             }
             
-            if (isset($node->field_story_category['und'])) {
+            if (isset($node->field_story_category['und']) && ($node->status == 1 && !empty($node->op))) {
                 $primary_category = $node->field_primary_category['und'][0]['value'];
                 
                 foreach ($cat_id as $category) {
-
                     if ($node->field_story_source_type['und'][0]['value'] == 'migrated' && $category['tid'] == $primary_category) {
                         continue;
-                    } else {
-                        /*if (function_exists('__itg_widget_helper_data_insert')) {
-                            __itg_widget_helper_data_insert($node->nid, $node);
-                        }*/
+                    } else {                       
                         $single_max_result = get_max_weight_for_node_insert($category['tid'], $node->type);
                         $max_result = $single_max_result['content_type'];
                         $max_result_all = $single_max_result['All'];
@@ -2867,6 +2865,7 @@ function itg_widget_node_insert($node) {
                         //Delete Logic
                         // As we do not want to keep more data in table.
                         _delete_old_data_from_section_widget('itg_widget_order', $category['tid'], "all");
+                        
                         $single_insert_query_all = db_insert('itg_widget_order_section')->fields(
                                 array(
                                     'nid',
@@ -2896,9 +2895,9 @@ function itg_widget_node_insert($node) {
                 }
             }
         }
-        if ($node->status == 0 && !empty($node->op)) {
+        /*if ($node->status == 0 && !empty($node->op)) {
             itg_widget_handle_unpublished_node($node->nid);
-        }
+        }*/
     }
 }
 
@@ -2947,9 +2946,9 @@ function get_max_weight_for_node_insert($tid, $type) {
     $max_query = db_select('itg_widget_order_section');
     $max_query->addExpression('MAX(weight)', 'weight');
     $max_query->condition('cat_id', $tid);
-    $max_query->condition('content_type', array($type), 'IN');
+    $max_query->condition('content_type', $type, '=');
     $max_query->condition('widget', 'section_wise_widget');
-    $max_query->groupBy('content_type');
+    //$max_query->groupBy('content_type');
     $max_result = $max_query->execute()->fetchCol();
 
     $max_query_all = db_select('itg_widget_order');
@@ -2957,7 +2956,7 @@ function get_max_weight_for_node_insert($tid, $type) {
     $max_query_all->condition('cat_id', $tid);
     $max_query_all->condition('content_type', 'All');
     $max_query_all->condition('widget', 'section_wise_widget');
-    $max_query_all->groupBy('content_type');
+    //$max_query_all->groupBy('content_type');
     $max_result_all = $max_query_all->execute()->fetchCol();
 
     $all_weight = !empty($max_result_all[0]) ? $max_result_all[0] : 1;

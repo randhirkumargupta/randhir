@@ -27,6 +27,12 @@ function itg_story_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
+  $items['content-state-title-list/%/%/autocomplete'] = array(
+    'page callback' => 'itg_state_get_content_title',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
   $items['content-workbench-title-list/%/%/autocomplete'] = array(
     'page callback' => 'itg_story_get_workbench_title',
     'access arguments' => array('access itg story'),
