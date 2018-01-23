@@ -520,8 +520,8 @@ function itg_genrate_indiatoday_yahoo_unionbudget2018_syndication($section_ids =
     $query->fields('ti', array('tid'));
     
     
-    //$days_ago = strtotime(date('Y-m-d', strtotime('-60 days')));
-    //$query->condition('n.created', $days_ago, '>=');
+    $days_ago = strtotime(date('Y-m-d', strtotime('-60 days')));
+    $query->condition('n.created', $days_ago, '>=');
     
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('ti.tid', $section_ids, 'IN');
