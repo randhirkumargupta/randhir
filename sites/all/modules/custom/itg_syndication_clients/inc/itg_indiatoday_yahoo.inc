@@ -34,6 +34,17 @@ function itg_indiatoday_yahoo_static_latest_stories_syndication() {
 }
 
 /**
+ * @file
+ * The ITG Syndication clients for yahoo budget Story
+ */
+function itg_indiatoday_yahoo_unionbudget2018_syndication() {
+  $sections = itg_indiatoday_yahoo_unionbudget2018_section();
+  foreach ($sections as $key => $value) {
+    itg_genrate_indiatoday_yahoo_unionbudget2018_syndication($value, $key);
+  }
+}
+
+/**
  * Menu callback
  */
 function itg_indiatoday_yahoo_static_latest_issue_syndication() {
@@ -481,4 +492,104 @@ function itg_genrate_indiatoday_yahoo_static_latest_issue_syndication($issue_res
   $fp = fopen($file_path, "w");
   fwrite($fp, $xml);
   fclose($fp);
+}
+
+
+/**
+ * 
+ * @param int $section_id
+ * @param string $file_name
+ */
+function itg_genrate_indiatoday_yahoo_unionbudget2018_syndication($section_ids = NULL, $file_name) {
+  if (!empty($section_ids)) {
+    $query = db_select('node', 'n');
+    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+    $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_large_image', 'smi', 'smi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_extra_small_image', 'ssi', 'ssi.entity_id=n.nid');
+
+    $query->fields('n', array('nid', 'title', 'created'));
+    $query->fields('dbody', array('body_value'));
+    $query->fields('npd', array('field_itg_content_publish_date_value'));
+    $query->fields('synopsis', array('field_story_kicker_text_value'));
+    $query->fields('smi', array('field_story_extra_large_image_fid'));
+    $query->fields('ssi', array('field_story_extra_small_image_fid'));
+    $query->fields('ti', array('tid'));
+    
+    
+    //$days_ago = strtotime(date('Y-m-d', strtotime('-60 days')));
+    //$query->condition('n.created', $days_ago, '>=');
+    
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    $query->condition('ti.tid', $section_ids, 'IN');
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'story', '=');
+    $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid')->range(0, 25);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    
+    $xml = genrate_indiatoday_yahoo_story_unionbudget2018_syndication_xml($result);
+    $xml_path = 'public://rss-feeds/xml_data/yahoo/it/stories/budget/2018/';
+    $file_path = $xml_path . $file_name;
+    $fp = fopen($file_path, "w");
+    fwrite($fp, $xml);
+    fclose($fp);
+  }
+}
+
+/**
+ * 
+ * @global string $base_url
+ * @param array $result
+ * @return string
+ */
+function genrate_indiatoday_yahoo_story_unionbudget2018_syndication_xml($result = NULL) {
+  $xml = '';
+  if (!empty($result)) {
+    global $base_url;
+    $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
+    $xml .= '<channel>';
+    foreach ($result as $key => $value) {
+      if (is_lock_story($value['nid'])) {
+        continue;
+      }
+      $uniq_id = "indiatoday.in".$value['nid'];
+      $guid = itg_genrate_uniqui_guid($uniq_id);
+      $publish_date = gmdate("D, d M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
+      $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
+      $body = itg_remove_extra_custom_tags($body);
+      $section_name = get_term_name_by_tid($value['tid']);
+      $metatags = get_node_metatags_by_nid($value['nid']);
+      $small_img = get_image_info_by_fid($value['field_story_extra_small_image_fid']);
+      $medium_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
+      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+      $keywords = '';
+      if ($metatags) {
+        $temp = unserialize($metatags['data']);
+        $keywords = $temp['keywords']['value'];
+      }
+      $xml .= '<item>';
+      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
+      $xml .= '<link>' . $url . '</link>';
+      $xml .= '<category>' . $section_name . '</category>';
+      $xml .= '<pubDate>' . $publish_date . ' +0000</pubDate>';
+      $xml .= '<guid>' . $guid . '</guid>';
+      $xml .= '<description><![CDATA[' . $kicker_text . ']]></description>';
+      $xml .= '<content:encoded><![CDATA[' . $body . ']]></content:encoded>';
+      $xml .= '<keywords><![CDATA[' . $keywords . ']]></keywords>';
+      $xml .= '<media:content url="' . $medium_img["imag_url"] . '" type="image/' . $medium_img["mime_type"] . '"/>';
+      $xml .= '<media:thumbnail url="' . $small_img["imag_url"] . '" type="image/' . $small_img["mime_type"] . '"/>';
+      $xml .= '<category>' . $section_name . '</category>';
+      $xml .= '</item>';
+    }
+    
+    $xml .= '</channel>';
+    $xml .= '</rss>';
+  }
+  return $xml;
 }
