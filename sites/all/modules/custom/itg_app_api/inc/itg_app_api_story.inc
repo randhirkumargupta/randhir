@@ -211,7 +211,7 @@ function generateStoryDeatilList($id) {
         $data_array['tech_photo_gallery'][0]['data'] = (array) $photolist[0]['photos'];
      // $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
     } else {
-    $tech_photo_gallery = new stdClass();
+    $tech_photo_gallery = array();
     $data_array['tech_photo_gallery'] = $tech_photo_gallery;
   }
   if(count($story_tech[0]['data']) > 0){
