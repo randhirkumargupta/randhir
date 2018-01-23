@@ -193,6 +193,12 @@ function itg_videogallery_menu() {
       'file' => 'includes/itg_video_watch_later_refresh.helper.inc',
       'type' => MENU_CALLBACK,
     );
+    $items['transcoader/get_publish_status'] = array(
+     'type' => MENU_CALLBACK,
+     'page callback' => 'itg_videogallery_get_publish_status',
+     'access arguments' => array('access content'),
+     'file' => 'includes/itg_dailymotion_video_dashboard.inc',
+  );
 
   return $items;
 }
