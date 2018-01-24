@@ -366,3 +366,37 @@ function delete_daily_motion_video_callback() {
     drupal_goto('daily-motion-video-dashboard');
   }
 }
+
+
+function itg_videogallery_get_publish_status() {
+  $video_ids = $_GET['remoteIds'];
+  if (!empty($video_ids)) {
+    $video_ids = explode(',', $video_ids);
+    $video_ids = array_map(function($vid) {
+      return 'PROD' . $vid;
+    }, $video_ids);
+    $query = db_select('dailymotion_response_details', 'drd');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'pd', 'pd.entity_id=drd.nid');
+    $query->fields('drd', array('nid', 'video_id', 'dailymotion_published', 'upload_time'));
+    $query->fields('pd', array('field_itg_content_publish_date_value'));
+    $query->condition('drd.video_id', $video_ids, 'IN');
+    $query->condition('drd.dailymotion_published', 1);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $xml = '<chanel>';
+    foreach ($result as $value) {
+      $publish_as = $value['nid'];
+      $video_id = str_replace('PROD', '', $value['video_id']);
+      $time_stamp = (empty($value['field_itg_content_publish_date_value']) ? $value['upload_time'] : strtotime($value['field_itg_content_publish_date_value']));
+      $publish_datetime = date("Y-m-d H:i:s", $time_stamp);
+      $xml .= '<item>';
+      $xml .= '<id> ' . $video_id . ' </id>';
+      $xml .= '<publish_as> ' . $publish_as . ' </publish_as>';
+      $xml .= '<publish_datetime> ' . $publish_datetime . ' </publish_datetime>';
+      $xml .= '</item>';
+    }
+    $xml .= '</chanel>';
+    header('Content-Type: application/xml; charset=utf-8');
+    print $xml;
+    drupal_exit();
+  }
+}
