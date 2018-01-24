@@ -120,7 +120,10 @@ if (!empty($device[0])) {
                       </div>      
                   </div>    
                 <?php endif; ?>
-                <div class="row budget-top-block">
+                <?php if ($widget_data['itg-block-2']['block_title'] == "") { 
+					$display_title = 'style="display:none"';
+				?>
+                <div class="row budget-top-block" <?php print $display_title; ?>>
                     <div class="col-md-12">
                         <?php
                         $display_title = "";
@@ -141,6 +144,7 @@ if (!empty($device[0])) {
 <?php } ?>          
                     </div>
                 </div>
+               <?php } ?>
                 <!--budget predictor with first block-->  
 <?php if ($_GET['type'] == 'budget-predictor') { ?>
                   <div class="row">  
@@ -200,18 +204,29 @@ if (!empty($device[0])) {
                 <?php }
                 else { ?>
                   <div class="row itg-325-layout">
-                      <?php if ($live_url != "" || !empty($highlights['node_data']->field_story_highlights['und']) || $theme == 'itgadmin') { ?>
-                        <div class="col-md-4 col-sm-12 mt-50">
+                      <?php if (isset($widget_data['itg-block-1']['widget_name']) || isset($widget_data['itg-block-2']['widget_name']) || $theme == 'itgadmin') { ?>
+                        <div class="col-md-4 col-sm-12 mt-50">							
                             <div class="widget-help-text">Non Draggable ( <strong>Live Tv</strong> )</div>
                             <div class="itg-widget">
+							  <div class=" droppable <?php print $gray_bg_layout; ?>">
+							  <?php if ($theme == 'itgadmin' && !isset($preview)) { ?>
+								<div class="widget-settings">
+								  <span><a  href="javascript:void(0)" class="delete-block-widget" delete-block-id="itg-block-1"><i class="fa fa-times"></i></a></span>
+								</div>
+							  <?php } ?>
                                 <div class=" <?php print $gray_bg_layout; ?>">
+                                <?php if (isset($widget_data['itg-block-1']['widget'])) { ?>
                                     <div class="widget-wrapper <?php print $widget_data['itg-block-1']['widget_name']; ?>">
                                         <h4 class="heading">LIVE TV</h4>
                                         <!-- for admin  -->
-                                        <div class="data-holder" id="itg-block-1"><div class="video-wrapper"><?php print $live_url; ?></div></div>
-                                    </div>             
+                                        <div class="data-holder" id="itg-block-1"><div class="video-wrapper"><?php print $live_url; ?></div></div>                                        
+                                    </div>   
+                                <?php }  else { 
+									print '<div class="widget-placeholder"><span>' . t('Live TV') . '</span></div>';
+								 } ?>         
                                 </div>
                             </div>
+                           </div>
                         </div>
                         <div class="col-md-4 col-sm-6 mt-50">
                             <div class="widget-help-text">Highlights widgets ( <strong>Highlights</strong> )</div>
@@ -247,6 +262,7 @@ if (!empty($device[0])) {
                                 </div>
                             </div>
                         </div>
+                        <?php if (isset($widget_data['itg-block-2']['widget'])) { ?>
                         <div class="col-md-4 col-sm-6 mt-50"> 
                             <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>
                             <div class="itg-widget-parent">
@@ -263,6 +279,7 @@ if (!empty($device[0])) {
                                 </div>
                             </div>                    
                         </div>
+                        <?php } ?>
                   <?php } ?>
                   </div>
 <?php } ?>
@@ -307,6 +324,22 @@ if (!empty($device[0])) {
                             </div>                       
                         </div>
                         <div class="col-md-4 mt-50">
+						<?php if (!isset($widget_data['itg-block-2']['widget'])) { ?>
+                            <div class="widget-help-text">Non Draggable ( <strong>Ads</strong> )</div>
+                            <div class="itg-widget-parent">
+                                <div class="itg-widget">
+                                    <div class="ad-widget budget-ad">
+                                        <div class="sidebar-ad">
+                                            <?php
+                                            $block = block_load('itg_ads', ADS_RHS1);
+                                            $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                                            print render($render_array);
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
                             <div class="widget-help-text">Special widgets ( <strong>Live Chat</strong> )</div>
                             <div class="itg-widget">
                                 <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -345,7 +378,7 @@ if (!empty($device[0])) {
                                     </div>             
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
   <?php } ?>
                   </div>
 <?php } ?>
