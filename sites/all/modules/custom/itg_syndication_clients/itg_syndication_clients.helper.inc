@@ -98,6 +98,17 @@ function getindiatoday_yahoo_client_sections() {
 }
 
 /**
+ * Function is used to get Yahoo video tids and File
+ * @return array
+ */
+function itg_indiatoday_yahoo_unionbudget2018_section() {
+  $unionbudget2018 = array(
+    'unionbudget2018.xml' => array(1778508, 1783640, 1783624, 1783641, 1783642, 1783643)
+  );
+  return $unionbudget2018;
+}
+
+/**
  * Function is used to get msn story tids and File
  * @return array
  */

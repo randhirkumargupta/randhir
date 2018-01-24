@@ -236,6 +236,17 @@ function itg_app_api_menu() {
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
+  
+  // for redish ttl
+  
+  $items['admin/api-configuration/rest-api/redish-ttl'] = array(
+    'title' => 'update Rest API redish TTL',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('redish_ttl'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   return $items;
 }
@@ -371,7 +382,8 @@ function server_error_master_json() {
  * @pram int $nc_count
  */
 function getCommentsCount($nid) {
-
+  $cont = 0;
+  return $cont;
   $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
   $nc_count = $node_anyalytics['data_count_node_comment'];
   return $nc_count;
@@ -1870,17 +1882,20 @@ function formateNodeBodyToken($n_body) {
   $paragraph_rep = $paragraph . "<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>";
   $n_body = str_replace($paragraph, $paragraph_rep, $n_body);
   // add AD block after 1st <p> end
-  $n_body = str_replace('<img', '<img style="width:100%;height: auto;"', $n_body);
-  $n_body = str_replace('<iframe', '<iframe style="width:100%;height: auto;"', $n_body);
+  $n_body = str_replace('<img', '<img style="width:100%;height:auto;"', $n_body);
+  $n_body = str_replace('<iframe', '<iframe width="100%" ', $n_body);
   $n_body = str_replace('<div class="body_caption">', '<div class="body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;">', $n_body);
-  $n_body = fbiframeupdtae($n_body);
+  //$n_body = fbiframeupdtae($n_body);
   //jira:78 start
   $n_body = str_replace('<div class="quotes"', '<div class="quotes" style="border-left:2px solid #eb5a5b; "', $n_body);
-  $n_body = str_replace('<blockquote', '<blockquote" style="padding: 0.5em !important; display:block;"', $n_body);
+  $n_body = str_replace('<blockquote', '<blockquote style="padding: 0.5em !important; display:block;"', $n_body);
   $n_body = str_replace('//www.youtube.com', 'https://www.youtube.com', $n_body);
   $n_body = str_replace('https:https://www.youtube.com', 'https://www.youtube.com', $n_body);
-  $n_body = str_replace('<blockquote" style="padding: 0.5em !important; display:block;" class="instagram-media"', '<blockquote', $n_body);
-  //jira:78 end
+  $n_body = str_replace('<blockquote style="padding: 0.5em !important; display:block;" class="instagram-media"', '<blockquote class="instagram-media"', $n_body);
+  //$n_body = str_replace('<blockquote class="instagram-media"', '<blockquote class="instagram"', $n_body);
+  $n_body = str_replace('src="//', 'src="https://', $n_body);
+  $n_body = str_replace('<div class="itg-mosimage"', '<div class="itg-mosimage body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;"', $n_body);
+  //jira:78 end 
   $data['n_body'] = $n_body;
   $data['poll_id'] = $poll_id;
   return $data;
@@ -2027,5 +2042,353 @@ function sectionPrgramIconImg($tid) {
   $query->condition('icimg.entity_id', $tid);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
   return completeFilePath($result[0]['field_programme_category_image_fid']);
+}
+
+/**
+ * redish_ttl form decalation
+ *
+ * @return type
+ */
+function redish_ttl() {
+  drupal_add_js(
+'jQuery(document).ready(function () {
+  //called when key is pressed in textbox
+  jQuery("input[type=text]").keypress(function (e) {
+     //if the letter is not digit then display error 
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        alert("Digits Only");
+               return false;
+    }
+   });
+});',
+ array(
+  'type' => 'inline'  
+));
+  $form = array();
+  
+    $form['default_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Default ttl'),
+    '#default_value' => variable_get('default_ttl'),
+    '#required' => TRUE,  
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+
+  $form['config_update_status_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('config update status ttl'),
+    '#default_value' => variable_get('config_update_status_ttl'),
+    '#required' => TRUE,   
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['master_config_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('master config ttl'),
+    '#default_value' => variable_get('master_config_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['hamburger_menu_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('hamburger menu ttl'),
+    '#default_value' => variable_get('hamburger_menu_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['horizontal_menu_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('horizontal menu ttl'),
+    '#default_value' => variable_get('horizontal_menu_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['server_error_master_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('server error master ttl'),
+    '#default_value' => variable_get('server_error_master_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['photolist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('photolist ttl'),
+    '#default_value' => variable_get('photolist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['photodetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('photodetail ttl'),
+    '#default_value' => variable_get('photodetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['programlist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('programlist ttl'),
+    '#default_value' => variable_get('programlist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['newslist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('newslist ttl'),
+    '#default_value' => variable_get('newslist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['videolist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('videolist ttl'),
+    '#default_value' => variable_get('videolist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['adconfig_android_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('adconfig android ttl'),
+    '#default_value' => variable_get('adconfig_android_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['adconfig_ipad_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('adconfig ipad ttl'),
+    '#default_value' => variable_get('adconfig_ipad_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['adconfig_iphone_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('adconfig iphone ttl'),
+    '#default_value' => variable_get('adconfig_iphone_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['adconfig_tab_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('adconfig tab ttl'),
+    '#default_value' => variable_get('adconfig_tab_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['videodetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('videodetail ttl'),
+    '#default_value' => variable_get('videodetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['programdetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('programdetail ttl'),
+    '#default_value' => variable_get('programdetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['topstories_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('topstories ttl'),
+    '#default_value' => variable_get('topstories_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['photostorydetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('photostorydetail ttl'),
+    '#default_value' => variable_get('photostorydetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['program_category_list_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('program category list ttl'),
+    '#default_value' => variable_get('program_category_list_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['ad_config_json_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('ad config json ttl'),
+    '#default_value' => variable_get('ad_config_json_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_channellist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv channellist ttl'),
+    '#default_value' => variable_get('livetv_channellist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['otherapps_ios_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('otherapps ios ttl'),
+    '#default_value' => variable_get('otherapps_ios_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['otherapps_android_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('otherapps android ttl'),
+    '#default_value' => variable_get('otherapps_android_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['magazine_coverstories_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('magazine coverstories ttl'),
+    '#default_value' => variable_get('magazine_coverstories_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['magazine_editionlist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('magazine editionlist ttl'),
+    '#default_value' => variable_get('magazine_editionlist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['magazine_edition_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('magazine edition ttl'),
+    '#default_value' => variable_get('magazine_edition_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['storydetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('storydetail ttl'),
+    '#default_value' => variable_get('storydetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['home_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('home ttl'),
+    '#default_value' => variable_get('home_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_indiatoday_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv indiatoday ttl'),
+    '#default_value' => variable_get('livetv_indiatoday_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_aajtak_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv aajtak ttl'),
+    '#default_value' => variable_get('livetv_aajtak_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_delhiaajtak_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv delhiaajtak ttl'),
+    '#default_value' => variable_get('livetv_delhiaajtak_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_tej_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv_tej_ttl'),
+    '#default_value' => variable_get('livetv_tej_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['author_story_list_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('author story list ttl'),
+    '#default_value' => variable_get('author_story_list_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['polls_open_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('polls_open_ttl'),
+    '#default_value' => variable_get('polls_open_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['polls_close_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('polls close ttl'),
+    '#default_value' => variable_get('polls_close_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['poll_detail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('poll_detail_ttl'),
+    '#default_value' => variable_get('poll_detail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['anchor_programm_list_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('anchor programm list ttl'),
+    '#default_value' => variable_get('anchor_programm_list_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['newswrap_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('newswrap ttl'),
+    '#default_value' => variable_get('newswrap_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['anchor_detail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('anchor detail ttl'),
+    '#default_value' => variable_get('anchor_detail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+
+  return system_settings_form($form);
 }
 

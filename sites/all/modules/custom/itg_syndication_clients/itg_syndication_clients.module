@@ -353,6 +353,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/generate_pti_feed.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['indiatoday/yahoo/unionbudget2018'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_unionbudget2018_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
