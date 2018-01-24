@@ -600,6 +600,12 @@ print \' | <a href="move-dont-miss-widget-node/section_manual_order_widget//\'.$
   $handler->display->display_options['fields']['name']['label'] = '';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['name']['link_to_taxonomy'] = TRUE;
+  /* Field: Taxonomy term: Term ID */
+  $handler->display->display_options['fields']['tid']['id'] = 'tid';
+  $handler->display->display_options['fields']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['tid']['field'] = 'tid';
+  $handler->display->display_options['fields']['tid']['relationship'] = 'tid';
+  $handler->display->display_options['fields']['tid']['exclude'] = TRUE;
   /* Sort criterion: Category Manager: created field */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'itg_category_manager';
@@ -626,6 +632,23 @@ print \' | <a href="move-dont-miss-widget-node/section_manual_order_widget//\'.$
   $handler->display->display_options['filters']['status']['table'] = 'itg_category_manager';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
+  /* Filter criterion: Global: PHP */
+  $handler->display->display_options['filters']['php']['id'] = 'php';
+  $handler->display->display_options['filters']['php']['table'] = 'views';
+  $handler->display->display_options['filters']['php']['field'] = 'php';
+  $handler->display->display_options['filters']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['filters']['php']['php_filter'] = '$query = db_select(\'taxonomy_index\', \'t\'); 
+$query->join(\'node\', \'n\', \'n.nid=t.nid\'); 
+$query->fields(\'t\', array(\'nid\')); 
+$query->condition(\'t.tid\', $row->tid); 
+$query->condition(\'n.type\', array(\'story\', \'photogallery\', \'videogallery\', \'breaking_news\', \'mega_review_critic\'), \'IN\'); 
+$count = $query->execute()->rowCount(); 
+if ($count == 0){
+ return TRUE; 
+} 
+ else{
+  return FALSE; 
+}';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

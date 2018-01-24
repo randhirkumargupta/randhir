@@ -322,7 +322,7 @@ article.node-mega-review-critic .embed-mega-review .rating-and-social-wrapper .m
 .catagory-listing .big-pic img{
 width: 100%;
 }
-.front #block-itg-widget-home-page-feature .featured-news .featured-post h2 a{ display:inline;}
+.front #block-itg-widget-home-page-feature .featured-news .featured-post h2 a, .front #block-itg-widget-home-page-feature .featured-news .featured-post h3 a{ display:inline;}
 .front .itg-top-section .home-top-story .droppable {
     height: 620px
 }
