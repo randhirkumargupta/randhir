@@ -837,13 +837,24 @@ function itg_workflow_stop_email_during_bulk_operation($request) {
  * @param array $tids
  * @return string
   */
-function story_city_list($tids){
+function story_city_list($tids) {
   $city = array();
-  foreach ($tids as $tax){
-    $city[] = $tax['taxonomy_term']->name;
-
+  $city_name = array();
+  foreach ($tids as $tax) {
+    $city[] = $tax['tid'];
   }
-  return $all_city = implode(',', $city);
+  if (count($city) > 0) {
+    $query = db_select('taxonomy_term_data', 'ttd');
+    $query->condition('ttd.tid', $tids, 'IN');
+    $query->fields('ttd', array('name'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) > 0) {
+      foreach ($result as $name) {
+        $city_name[] = $name['name'];
+      }
+    }
+  }
+  return $all_city = implode(',', $city_name);
 }
 
 /**
