@@ -1846,7 +1846,7 @@ function homePageJsonWidget_1() {
     $n_widget[0]['type'] = "4";
     $n_widget[0]['type_label'] = "watchlive";
     $n_widget[0]['tilte'] = "Watch India Today Live"; 
-    $n_widget[0]['short_url'] = "https://instore-tosshub-com.s3.amazonaws.com/appLTV.html";
+    $n_widget[0]['short_url'] = "http://feeds.intoday.in/indiatoday/livetv/indiatodayembed.html";
     $n_widget[0]['extended_url'] = "";
     $n_widget[0]['action'] = "webview";    
     
