@@ -48,7 +48,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         }
         $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
         $alias = drupal_get_path_alias('node/' . $node->nid . '');
-        $weburl = $base_url . "/" . $alias;
+        $weburl = FRONT_URL . "/" . $alias;
         $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
         $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
         $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
@@ -66,7 +66,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         
         $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
         $alias = drupal_get_path_alias('node/' . $node->nid . '');
-        $weburl = $base_url . "/" . $alias;
+        $weburl = FRONT_URL . "/" . $alias;
         $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
         $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
         $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
@@ -94,7 +94,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         }
         $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
         $alias = drupal_get_path_alias('node/' . $node->nid . '');
-        $weburl = $base_url . "/" . $alias;
+        $weburl = FRONT_URL . "/" . $alias;
         $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
         $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
         $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
@@ -314,7 +314,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           }
           $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
-          $weburl = $base_url . "/" . $alias;
+          $weburl = FRONT_URL . "/" . $alias;
           $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
           $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
           $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
@@ -332,7 +332,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           
           $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
-          $weburl = $base_url . "/" . $alias;
+          $weburl = FRONT_URL . "/" . $alias;
           $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
           $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
           $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
@@ -360,7 +360,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           }
           $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
-          $weburl = $base_url . "/" . $alias;
+          $weburl = FRONT_URL . "/" . $alias;
           $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
           $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
           $mail_node_type = str_replace('[itg_mail_token:itg_node_type]', $node->type, $mail_node_url);
