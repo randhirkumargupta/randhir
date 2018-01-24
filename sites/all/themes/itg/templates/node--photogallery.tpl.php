@@ -13,7 +13,7 @@ if (!empty($node->field_photogallery_configuration['und'])) {
 
 if (function_exists('taboola_view')) {
   $tab_org = '_taboola.push({article:"auto"});';
-  $tab_rep = '_taboola.push({Photo:"auto"});';
+  $tab_rep = '_taboola.push({photo:"auto"});';
   str_replace($tab_org, $tab_rep, taboola_view());
 }
      
