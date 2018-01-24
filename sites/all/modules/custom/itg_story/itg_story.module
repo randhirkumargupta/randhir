@@ -422,7 +422,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
   $request_destination = $_REQUEST['destination'];
   $redirect_path = $_REQUEST['destination'];
 
-  if ($request_destination == 'published-story') {
+  if ($request_destination == 'published-story' && $form_state['input']['op'] != 'Apply') {
     $redirect_path .= "?field_story_syndication_value_op=all";
     $_GET['destination'] = $redirect_path;
   }
