@@ -207,7 +207,7 @@ function generateStoryDeatilList($id) {
   if ($tech_photo_gallery) {
         $photo_list_array = getPhotolistforPhotostory($tech_photo_gallery);
         $photolist = $photo_list_array;
-        $data_array['tech_photo_gallery'][0]['title'] = "SAMPLE PHOTOS";
+        $data_array['tech_photo_gallery'][0]['title'] = "PHOTO GALLERY";
         $data_array['tech_photo_gallery'][0]['data'] = (array) $photolist[0]['photos'];
      // $data_array['tech_photo_gallery']['p_id'] = "$tech_photo_gallery";
     } else {
@@ -215,12 +215,11 @@ function generateStoryDeatilList($id) {
     $data_array['tech_photo_gallery'] = $tech_photo_gallery;
   }
   if(count($story_tech[0]['data']) > 0){
-      $data_array['tech_photos'][0]['title'] = "PHOTOS";
+      $data_array['tech_photos'][0]['title'] = "SAMPLE PHOTOS";
       $data_array['tech_photos'][0]['data'] = $story_tech[0]['data'];
     }
     else{
-      $data_array['tech_photos'][0]['title'] = "";
-      $data_array['tech_photos'][0]['data'] = array();
+      $data_array['tech_photos'] = array();
     }
   if ($tech_pros['listcont'] > 0) {
     unset($tech_pros['listcont']);
