@@ -837,7 +837,7 @@ function itg_workflow_stop_email_during_bulk_operation($request) {
  * @param array $tids
  * @return string
   */
- function story_city_list($tids) {
+function story_city_list($tids) {
   $city = array();
   $city_name = array();
   foreach ($tids as $tax) {
