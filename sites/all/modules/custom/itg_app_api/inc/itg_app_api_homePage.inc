@@ -32,14 +32,13 @@ function homePageJson() {
     $data['status_message'] = "customised_message";
     //$data['data'][0] = $data_packagelist_india;
 
-    $data['data'][0] = $homePageJsonWidget_1;
-    $data['data'][1] = $data_topstories;
-    $data['data'][2] = $data_news_india;
+    //$data['data'][0] = $homePageJsonWidget_1;
+    $data['data'][0] = $data_topstories;
+    $data['data'][1] = $data_news_india;
+    $data['data'][2] = $data_news_lifestyle;
 
-    $data['data'][3] = $data_news_lifestyle;
-
-    $data['data'][4] = $data_news_world;
-    $data['data'][5] = $data_magazine;
+    $data['data'][3] = $data_news_world;
+    $data['data'][4] = $data_magazine;
     //$data['data'][6] = $data_poll;
 
     return $data;
