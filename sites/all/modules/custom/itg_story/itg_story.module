@@ -404,7 +404,6 @@ function itg_story_form_custom_callback($form, &$form_state) {
   if ($form_state['input']['op'] == 'Apply' && $form_state['node']->status == '1') {
       $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
       $_GET['destination'] = $redirect_path;
-      //$form_state['redirect'] = $form_state['values']['nid'] . '/edit');
       //drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
   }
 
