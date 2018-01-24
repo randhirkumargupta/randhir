@@ -19,6 +19,14 @@ function itg_rss_samsungtv_it_livenow_listing_feed() {
 }
 
 /**
+ * Function for generate samsung json feed
+ */
+function itg_indiatoday_samsung_jsonfeed_syndication(){
+  itg_generate_samsung_json_feed_newslist();
+  itg_generate_samsung_json_feed_video_newslist();
+}
+
+/**
  * Function for generatesamsung breaking news feed
  */
 function itg_rss_samsungtv_it_videobreakingnews_feed() {
@@ -287,4 +295,61 @@ function genrate_samsungtv_it_live_now_xml($result) {
   }
   $xml .= '</Root>';
   return $xml;
+}
+
+
+function itg_generate_samsung_json_feed_newslist(){
+  $query = db_select('node', 'n');
+  $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
+  $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+  $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+  $query->leftJoin('field_data_field_story_large_image', 'smi', 'smi.entity_id=n.nid');
+
+  $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+
+  $query->fields('n', array('nid', 'title'));
+  $query->fields('npd', array('field_itg_content_publish_date_value'));
+  $query->fields('synopsis', array('field_story_kicker_text_value'));
+  $query->fields('smi', array('field_story_large_image_fid'));
+  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
+  $query->condition('n.created', $days_ago, '>=');
+  $query->condition('n.status', 1);
+  $query->condition('n.type', 'story', '=');
+  $query->orderBy('n.created', 'DESC');
+  $query->groupBy('n.nid')->range(0, 20);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $json = array(
+    'status_code' => 1,
+    'status_message' => 1,
+    'data' => array(
+      'id' => 1,
+      'title' => 'Top Stories',
+    )
+  );
+  foreach($result as $value){
+    if (is_lock_story($value['nid'])) {
+      continue;
+    }
+    $publish_date = date("Y-m-d H:i:s", strtotime($value['field_itg_content_publish_date_value']));
+    $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+    $medium_img = get_image_info_by_fid($value['field_story_large_image_fid']);
+    $json['data']['news'][] = array(
+      'n_id' => $value['nid'],
+      'n_title' => $value['title'],
+      'n_id' => $kicker_text,
+      'n_small_image' => $medium_img["imag_url"],
+      'n_updated_datetime' => $publish_date
+    );
+  }
+  $json_output = json_encode($json);
+  $json_path = 'public://rss-feeds/xml_data/samsung/at/stories/';
+  $file_path = $json_path . 'newslist.json';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $json_output);
+  fclose($fp);
+}
+
+function itg_generate_samsung_json_feed_video_newslist(){
+  
 }

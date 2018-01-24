@@ -526,3 +526,8 @@ function get_factiva_sections() {
   return array('1206578' => 'india.xml',
     '-1' => 'latest-news.xml');
 }
+
+
+function get_samsung_video_category(){
+  
+}
