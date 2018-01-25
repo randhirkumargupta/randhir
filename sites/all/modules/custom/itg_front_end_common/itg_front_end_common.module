@@ -1240,6 +1240,7 @@ function _related_story_amp_block_content() {
       }
       
       $related_title = mb_strimwidth($display_title, 0, 80, "..");
+      $related_title = str_replace(array('\'', '"'), '', $related_title); 
       
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_src_set = '';
@@ -1247,7 +1248,7 @@ function _related_story_amp_block_content() {
         $related_image_data = 170;
         $related_src_set = $related_image_url . ' ' . $related_image_data . 'w';
       }
-      $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '" srcset="'.$related_src_set.'"><div fallback>offline</div></amp-img>';
+      $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '"><div fallback>offline</div></amp-img>';
 
         if (function_exists('itg_apache_solr_get_site_url')) {
             $hash_url = itg_apache_solr_get_site_url();
