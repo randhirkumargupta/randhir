@@ -90,7 +90,9 @@ $uri = base64_encode($actual_link);
                     $sso_arg_url = '/saml_login/other/' . $uri;
                 ?>
                 <?php if(empty($user_id)) { ?>
-                      <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="Go (550, 500, 50, 'indiatoday', '', '<?php print PARENT_SSO; ?>', '<?php print $sso_arg_url; ?>')"><?php print t('Submit'); ?></button></div>
+                      <div class="cheaper-deaper-action">
+						  <a href="<?php print PARENT_SSO; ?>/saml_login/other/<?php print $uri; ?>" class="user-icon sso-click btn-submit"><?php print t('Submit'); ?></a>
+						  </div>
                 <?php } else { ?>
                       <div class="cheaper-deaper-action"><button class="btn-submit" type="button" onclick="captureCurrentDiv(<?php print $section_id; ?>)"><?php print t('Submit'); ?></button></div>
                 <?php } ?>
