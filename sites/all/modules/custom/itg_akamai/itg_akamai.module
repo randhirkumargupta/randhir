@@ -327,7 +327,7 @@ function itg_akamai_varnish_host_mapping($paths) {
     }
   }
   echo "<pre>";
-  p($final_host);
+  p($path_new_array);
   return $path_new_array;
 }
 
