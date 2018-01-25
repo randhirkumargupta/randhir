@@ -529,5 +529,23 @@ function get_factiva_sections() {
 
 
 function get_samsung_video_category(){
-  
+  return array(
+    'videolist-featured.json' => 1, 
+    'videolist-popular-now.json' => 1207974, 
+    'videolist-india.json' => 1206955, 
+    'videolist-movie.json' => array(1207303,1207980),
+    'videolist-tech.json' => 1207486, 
+    'videolist-sosorry.json' => 1207580, 
+    'videolist-news-today.json' => 1207797, 
+    'videolist-newsroom.json' => 1207827, 
+    'videolist-to-the-point.json' => 1207722, 
+    'videolist-people-court.json' => 1208900, 
+    'videolist-india-first.json' => 1208095, 
+    'videolist-5ive-live.json' => 1208902, 
+    'videolist-in-the-club.json' => 1208173, 
+    'videolist-first-up.json' => 1207755, 
+    'videolist-sports-today.json' => 1206960, 
+    'videolist-auto-today.json' => 1207978, 
+    'videolist-long-story.json' => 1208061, 
+  );
 }

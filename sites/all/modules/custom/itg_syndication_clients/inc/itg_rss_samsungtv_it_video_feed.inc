@@ -22,7 +22,7 @@ function itg_rss_samsungtv_it_livenow_listing_feed() {
  * Function for generate samsung json feed
  */
 function itg_indiatoday_samsung_jsonfeed_syndication(){
-  itg_generate_samsung_json_feed_newslist();
+  //itg_generate_samsung_json_feed_newslist();
   itg_generate_samsung_json_feed_video_newslist();
 }
 
@@ -337,7 +337,7 @@ function itg_generate_samsung_json_feed_newslist(){
     $json['data']['news'][] = array(
       'n_id' => $value['nid'],
       'n_title' => $value['title'],
-      'n_id' => $kicker_text,
+      'n_short_desc' => $kicker_text,
       'n_small_image' => $medium_img["imag_url"],
       'n_updated_datetime' => $publish_date
     );
@@ -351,5 +351,135 @@ function itg_generate_samsung_json_feed_newslist(){
 }
 
 function itg_generate_samsung_json_feed_video_newslist(){
-  
+  $sections = get_samsung_video_category();
+  $json = array(
+    'status_code' => 1,
+    'status_message' => '',
+    'data' => array(),
+  );
+  foreach($sections as $filename => $sections){
+    if(is_array($sections)){
+      $section_name = get_term_name_by_tid($sections);
+      $sections_id = $sections[0];
+    }else if ($sections == 1){
+      $section_name = 'Featured';
+      $sections_id = 1;
+    }else{
+      $section_name = get_term_name_by_tid($sections);
+      $sections_id = $sections;
+    }
+    
+    $json['data']['category'][] = array(
+      'id' => $sections_id,
+      'title' => $section_name,
+      'url' => $filename
+    );
+    itg_generate_samsung_json_video($filename, $sections, $section_name);
+  }
+  $json_data = json_decode($json);
+  $xml_path = 'public://rss-feeds/xml_data/samsung/at/videos/';
+  $file_path = $xml_path . 'categorylist.json';
+  $fp = fopen($file_path, "w");
+  fwrite($fp, $json_data);
+  fclose($fp);
+}
+
+function itg_generate_samsung_json_video($filename, $sections, $section_name){
+  if(!empty($sections)){
+    $type = array('videogallery');
+    $query = db_select('node', 'n');
+    
+    $query->join('field_data_field_story_syndication', 'ss', 'ss.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_large_image', 'smi', 'smi.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
+    $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+    $query->leftJoin('itg_video_transcoding', 'ivt', 'ivt.nid=n.nid');
+
+    if(is_array($sections)){
+      $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+      $query->condition('ti.tid', $sections, 'IN');
+    }else if ($sections != 1){
+      $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
+      $query->condition('ti.tid', $sections, '=');
+    }
+    
+    $query->fields('synopsis', array('field_story_kicker_text_value'));
+    $query->fields('smi', array('field_story_large_image_fid'));
+    $query->fields('n', array('nid', 'title', 'created'));
+    $query->fields('ssi', array('field_story_small_image_fid'));
+    $query->fields('sst', array('field_story_source_type_value'));
+    
+//    if($days_ago = get_content_fetch_time($section_id)){
+//      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+//      $query->condition('n.created', $days_ago, '>=');
+//    }
+    
+    $query->condition('ivt.bitrate', '996', '=');
+    $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
+    $query->condition('n.status', 1);
+    $query->condition('n.type', 'videogallery', '=');
+    $query->orderBy('n.created', 'DESC');
+    $query->groupBy('n.nid')->range(0, 10);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    
+    $jsondetail = array(
+      'status_code' => 1,
+      'status_message' => 'Video',
+      'data' => array(
+        'id' => 2,
+        'title' => 'video',
+      ),
+    );
+    foreach($result as $value){
+      $nid = $value['nid'];
+      $created_date = date("Y-m-d H:i:s", $value['created']);
+      $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
+      $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
+      $source_type = $value['field_story_source_type_value'];
+      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+      
+      $video_data = get_itg_video_transcoding($nid);
+      $byline = get_byline_name_by_nid($nid);
+      
+      $duration = '';
+      if (count($video_data) > 0) {
+        $duration = $video_data[0]->video_duration;
+      }
+
+      $video_url = '';
+      if ($source_type = 'migrated') { //migrated video
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+          $url = $video_value->field_migrated_video_url_value;
+        }
+        $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
+        $bitrate_url = $data_video['bitrate_url'];
+        $mp4_url = $data_video['file_url'];
+        $video_url = $mp4_url;
+      }
+      else {
+        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        foreach ($videoids as $keys => $video_value) {
+          if ($video_value->video_id != '') {
+            $video_id = $video_value->video_id;
+          } elseif ($video_value->solr_video_id != '') {
+            $video_id = $video_value->solr_video_id;
+          }
+        }
+        $inter_video_details = itg_internal_video_bitrate_data($video_id);
+        $video_url = $inter_video_details['file_url'];
+      }
+      
+      $jsondetail['data']['video'][] = array(
+        'v_id' => $nid,
+        'v_title' => $value['title'],
+        'v_credit' => FRONT_URL,
+        'v_byline' => $byline,
+        'v_desc' => $kicker_text,
+        'v_small_image' => $kicker_text,
+      );
+      
+    }
+  }
 }
