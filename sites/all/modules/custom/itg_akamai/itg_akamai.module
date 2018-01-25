@@ -235,6 +235,8 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     else {
       $url = '"' . $url . '"';
     }
+    pr($url);
+    echo "<br>----";
     $client = new Akamai\Open\EdgeGrid\Client(['base_uri' => AKAMAI_BASE_URI]);
     $client->setAuth(AKAMAI_CLIENT_TOKEN, AKAMAI_CLIENT_SECRET, AKAMAI_ACCESS_TOKEN);
     // use $client just as you would \Guzzle\Http\Client 
@@ -265,7 +267,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       drupal_set_message(t("OOPS unable to purge URL and error is :" . $e->getMessage()), 'error');
       $request_success_flag = 0;
     }
-
+    p($activity_log);
     // Sending for Recaching
     /*if (module_exists('httprl')) {
       $varnish_paths = array_map(function($item) {
