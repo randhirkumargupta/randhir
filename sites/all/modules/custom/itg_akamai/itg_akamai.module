@@ -317,6 +317,7 @@ function itg_akamai_varnish_host_mapping($paths) {
     $fip = str_replace(":6082", "", $host_chunk);
     $final_host[] = 'http://' . $fip . '/';
   }
+
   $path_new_array = array();
 
   if (isset($paths) && !empty($paths)) {
@@ -326,8 +327,6 @@ function itg_akamai_varnish_host_mapping($paths) {
       }
     }
   }
-  echo "<pre>";
-  p($path_new_array);
   return $path_new_array;
 }
 
