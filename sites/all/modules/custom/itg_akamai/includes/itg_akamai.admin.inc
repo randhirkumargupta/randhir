@@ -116,7 +116,7 @@ function itg_akamai_cache_control() {
   $form['refresh'] = array(
     '#type' => 'radios',
     '#title' => t('Clearing Action Type'),
-    '#default_value' => variable_get('itg_akamai_action', 'invalidate'),
+    '#default_value' => variable_get('itg_akamai_action', ''),
     '#options' => array(
       'remove' => t('Remove'),
       'invalidate' => t('Invalidate'),
@@ -142,7 +142,6 @@ function itg_akamai_cache_control_submit($form, &$form_state) {
   $paths = array_map('trim', $paths);
   $paths = itg_akamai_cache_control_get_path_alias($paths);
   $action = $form_state['values']['refresh'];
-  variable_set('itg_akamai_action', $action);
   $overrides = array(
     'action' => $form_state['values']['refresh'],
   );
@@ -154,7 +153,7 @@ function itg_akamai_cache_control_submit($form, &$form_state) {
     $message = t('There was a problem with your cache clearing request. Please check the watchdog logs for details.');
     $status = 'error';
   }
-  
+
   drupal_set_message($message, $status);
 }
 
