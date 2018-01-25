@@ -172,6 +172,7 @@ function itg_akamai_menu() {
  *    TRUE if it was successfully cleared, FALSE otherwise.
  */
 function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
+  $params['action'] == 'invalidate';
   // To prevent purging for Elysia Cron run
   if (module_exists('elysia_cron')) {
     if (arg(0) == 'admin' && arg(1) == 'config' && arg(2) == 'system' && arg(3) == 'cron' && arg(4) == 'execute') {
