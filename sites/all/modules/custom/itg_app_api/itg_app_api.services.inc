@@ -6224,7 +6224,7 @@ function list_itg_rapid_api_anchor_list_default() {
     $anchor_list = array();
     $anchor_data = array();
     $anchor_list_dump = array();
-    $query = db_select('itg_widget_order group', 'iwo');
+    $query = db_select('itg_widget_order', 'iwo');
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
