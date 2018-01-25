@@ -773,4 +773,82 @@ background:none;
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2, .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2 {margin-bottom: 30px;}
 }
 
+.people-story p{
+    padding: 10px 0;
+     font-size: .9375rem;
+     font-size: 15px;
+     line-height: 27px;
+}
+ .people-related-story h3{
+    font:700 25px/35px Roboto-Regular,sans-serif;
+     margin-bottom:20px;
+}
+ .people-related-story h3 span,.people-related-photovideo h3 span{
+     color:#a00606
+}
+ .people-related-story .main-top-story a{
+    font:500 20px/25px Roboto-Regular,sans-serif;
+}
+ .people-related-story,.people-related-photovideo {
+     border-bottom:1px solid #ccc;
+     padding-bottom:10px;
+     margin-bottom:30px;
+}
+ .people-related-story .story-list ul li{
+     width:46%;
+     float: left;
+     border-bottom:1px solid #ccc;
+     padding:10px 0 10px 15px;
+     list-style:none;
+     margin-right: 4%;
+     position: relative;
+}
+ .people-related-story .story-list ul li:before{
+    position: absolute;
+     top: 18px;
+     left: 0;
+     content: '';
+     border-radius: 100%;
+     background: #a00606;
+     height: 5px;
+     width: 5px;
+}
+ .pmore {
+     text-align: right;
+     font:700 12px Roboto-Regular,sans-serif;
+     color: #d71920;
+     margin-top: 15px;
+}
+ .people-related-photovideo .photo-list{
+     padding:20px 0;
+}
+ .people-related-photovideo ul li figure,.people-related-photovideo ul li figure a{
+     list-style:none;
+     position: relative;
+     display: block;
+}
+.people-related-photovideo ul li{
+     list-style:none;
+     min-height: 220px;
+}
+ .people-related-photovideo ul li p{
+     padding-top:5px;
+}
+ .people-related-photovideo ul li img.pvicon{
+     position: absolute;
+     right:5px;
+     bottom:5px;
+}
+ @media all and (max-width:767px) {
+     .people-story iframe.story-video{
+         width:100%;
+         height:230px;
+    }
+     .people-related-story .story-list ul li{
+         width:100%;
+        float:none;
+        margin-right:0;
+    }
+}
+
 
