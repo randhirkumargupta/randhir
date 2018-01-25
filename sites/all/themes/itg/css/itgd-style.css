@@ -770,3 +770,7 @@ background:none;
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2, .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2 {margin-bottom: 30px;}
 }
+
+.cheaper-deaper-action a.btn-submit{padding: 3px 20px 1px;border: 1px solid #cd070f; background-color: #cd070f;color: #fff;font-size: 24px; text-transform: uppercase; font-weight: 600;margin-bottom: 36px;
+     font-family: RobotoSlab-Regular;}
+     
