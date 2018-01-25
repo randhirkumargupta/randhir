@@ -43,12 +43,18 @@ $entity = entity_load('field_collection_item', array($last_item));
 $last_cov_tm = explode(" ", $entity[$last_item]->field_breaking_publish_time['und'][0]['value']);
 $coverage_end_date = $last_cov_tm[0];
 $coverage_end_time = $last_cov_tm[1];
-$coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
+$coverage_end_final_date = '';
+if(!empty($last_cov_tm[0])){
+ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time; 
+}
 } else {
 $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);
 $coverage_end_date = date('Y-m-d', $coverage_end);
 $coverage_end_time = date('h:i:s', $coverage_end);
-$coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
+$coverage_end_final_date = '';
+if(!empty($coverage_end)){
+ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time; 
+}
 }
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
