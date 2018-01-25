@@ -4516,7 +4516,7 @@ function itg_rapid_api_anchor_list($token) {
 
 
     // check args
-    if ($args != '0') {
+    if ($user_id > 0) {          
         $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
     } else {
         $jsondata = list_itg_rapid_api_anchor_list_default();
