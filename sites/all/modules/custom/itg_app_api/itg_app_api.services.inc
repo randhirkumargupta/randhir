@@ -4400,7 +4400,7 @@ function itg_rapid_api_anchor_list($token) {
 
 
     // check args
-    if ($params['user_id'] !="") {
+    if ($args != '0') {
         $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
     } else {
         $jsondata = list_itg_rapid_api_anchor_list_default();
