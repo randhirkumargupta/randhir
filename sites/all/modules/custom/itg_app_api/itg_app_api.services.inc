@@ -6229,6 +6229,7 @@ function list_itg_rapid_api_anchor_list_default() {
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
     $query->orderBy('iwo.weight', 'ASC');
+    echo sprintf($query);die();
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);
