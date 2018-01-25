@@ -847,13 +847,13 @@ function itg_widget_block_view($delta = '') {
           break;
         case 'score_card_iframe_widget':
 			global $theme;
-			$sid = 2;
+			$sid = 1;
 			$query = db_select('itg_score_card', 'm');
 			$query->condition('m.id', $sid, '=');
 			$query->fields('m', array('score_description', 'score_story', 'score_photo', 'score_video', 'score_status'));
 			$data = $query->execute()->fetchObject();
 			if (is_object($data) && count($data) > 0) {
-			   if ($data->score_status == 1) {
+			   if (drupal_is_front_page() && $data->score_status == 1) {
 				   $block['content'] = theme("secore_card_iframe", array("data" => $data));
 			   } 	   	                 
 		    }				
