@@ -425,7 +425,7 @@ function itg_story_form_custom_callback($form, &$form_state) {
     $redirect_path .= "?field_story_syndication_value_op=all";
     $_GET['destination'] = $redirect_path;
   }
-
+  p($_GET['destination']);
   // redirection for clone story
   if ($request_destination == 'clone-story' && !empty($clone_id)) {
     if (arg(1) == 'add') {
