@@ -633,11 +633,8 @@ function itgd_chart_beat_code() {
   if (!drupal_is_front_page() && isset($node) && !empty($node)) {
     if (!empty($node->field_primary_category[LANGUAGE_NONE][0]['value']) && !empty($node->field_story_category['und'])) {
       $primary_cat = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
-      foreach ($node->field_story_category['und'] as $p_cat) {
-        if ($p_cat['tid'] == $primary_cat) {
-          $chart_sections = $p_cat['taxonomy_term']->name;
-        }
-      }
+      $section_tids = array_reverse(taxonomy_get_parents_all($primary_cat));
+      $chart_sections = $section_tids[0]->name;
     }
     if (isset($node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'])) {
       $get_authors_name = $node->field_reporter_publish_id[LANGUAGE_NONE][0]['value'];
