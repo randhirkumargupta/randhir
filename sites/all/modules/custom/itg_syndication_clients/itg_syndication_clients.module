@@ -1471,3 +1471,13 @@ function itg_replace_token_with_data($node_body, $nid) {
   }
   return $node_body;
 }
+
+
+function get_highest_bitrate_video_by_nid($nid){
+  $query = db_select('itg_video_transcoding', 'ivt');
+  $query->fields('ivt', array('bitrate'));
+  $query->condition('ivt.nid', $nid, '=');
+  $query->orderBy('ivt.bitrate', 'DESC');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}

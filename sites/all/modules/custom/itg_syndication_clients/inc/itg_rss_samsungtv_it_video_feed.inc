@@ -394,8 +394,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
     $query->leftJoin('field_data_field_story_large_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
-    $query->leftJoin('itg_video_transcoding', 'ivt', 'ivt.nid=n.nid');
-
+    
     if(is_array($sections)){
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $sections, 'IN');
@@ -415,7 +414,6 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
 //      $query->condition('n.created', $days_ago, '>=');
 //    }
     
-    $query->condition('ivt.bitrate', '996', '=');
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('n.status', 1);
     $query->condition('n.type', 'videogallery', '=');
@@ -446,7 +444,22 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       if (count($video_data) > 0) {
         $duration = $video_data[0]->video_duration;
       }
-
+      $highest_bit = get_highest_bitrate_video_by_nid($nid);
+      $bitrate_replace = '512.mp4';
+      if(!empty($highest_bit)){
+        $temp = array();
+        $flag = 0;
+        foreach($highest_bit as $value){
+          $temp[] = $value['bitrate'];
+          $flag++;
+          if($flag == 2){
+            break;
+          }
+        }
+        $bitrate_replace = implode(',', $temp);
+        $bitrate_replace = $bitrate_replace.'.mp4';
+      }
+      
       $video_url = '';
       if ($source_type = 'migrated') { //migrated video
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
@@ -456,7 +469,8 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
         $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
         $bitrate_url = $data_video['bitrate_url'];
         $mp4_url = $data_video['file_url'];
-        $video_url = $mp4_url;
+        $video_url = $bitrate_url;
+        var_dump($bitrate_url);
       }
       else {
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
@@ -471,15 +485,22 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
         $video_url = $inter_video_details['file_url'];
       }
       
+      $video_url = str_replace('512.mp4', $bitrate_replace, $video_url);
       $jsondetail['data']['video'][] = array(
         'v_id' => $nid,
         'v_title' => $value['title'],
         'v_credit' => FRONT_URL,
         'v_byline' => $byline,
         'v_desc' => $kicker_text,
-        'v_small_image' => $kicker_text,
+        'v_small_image' => $small_img["imag_url"],
+        'v_large_image' => $large_img["imag_url"],
+        'v_download_url' => $video_url,
+        'v_updated_datetime' => $created_date,
+        'v_duration' => $duration,
+        'v_show_ad' => 0,
       );
       
     }
+//    print json_encode($jsondetail);die;
   }
 }
