@@ -4400,7 +4400,7 @@ function itg_rapid_api_anchor_list($token) {
 
 
     // check args
-    if ($args != '0') {
+    if ($params['user_id'] !="") {
         $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
     } else {
         $jsondata = list_itg_rapid_api_anchor_list_default();
@@ -6228,8 +6228,7 @@ function list_itg_rapid_api_anchor_list_default() {
     $query = db_select('itg_widget_order', 'iwo');
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
-    $query->orderBy('iwo.weight', 'ASC');
-    echo sprintf($query);die();
+    $query->orderBy('iwo.weight', 'ASC');    
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);
@@ -6261,8 +6260,8 @@ function list_itg_rapid_api_anchor_list_default() {
     $anchor_data['id'] = "";
     $anchor_data['display_label'] = "Anchors";
     $anchor_data['anchor_count'] = "$anchor_c";
-    $anchor_data['anchor_display_count'] = "50";
-    $anchor_data['anchor_pagination_cap'] = "50";
+    $anchor_data['anchor_display_count'] = "40";
+    $anchor_data['anchor_pagination_cap'] = "40";
 
     //$anchor_list = removeduplicatefrommiltiD($anchor_list);
     $anchor_data['anchor'] = $anchor_list;
