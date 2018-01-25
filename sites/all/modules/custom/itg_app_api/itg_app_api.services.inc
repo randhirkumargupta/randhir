@@ -6260,8 +6260,8 @@ function list_itg_rapid_api_anchor_list_default() {
     $anchor_data['id'] = "";
     $anchor_data['display_label'] = "Anchors";
     $anchor_data['anchor_count'] = "$anchor_c";
-    $anchor_data['anchor_display_count'] = "40";
-    $anchor_data['anchor_pagination_cap'] = "40";
+    $anchor_data['anchor_display_count'] = "50";
+    $anchor_data['anchor_pagination_cap'] = "50";
 
     //$anchor_list = removeduplicatefrommiltiD($anchor_list);
     $anchor_data['anchor'] = $anchor_list;
