@@ -65,6 +65,7 @@ function itg_manage_score_card() {
   }
 
   $form = array();
+  /*
   module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_autocomplete');
   $op = score_card_tid_by_content_type();
   $form['score_section'] = array(
@@ -74,49 +75,48 @@ function itg_manage_score_card() {
     '#required' => TRUE,
     '#default_value' => isset($results->score_section) ? $results->score_section : '',
   );
-
+  
   $form['score_title'] = array(
     '#type' => 'textfield',
     '#title' => t('Title'),
     '#default_value' => isset($results->score_title) ? $results->score_title : '',
     '#required' => TRUE
   );
-  $form['score_description'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Description'),
-    '#default_value' => ($results->score_description) ? $results->score_description : '',
-    '#required' => TRUE
-  );
-
-  $form['score_story'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Assign to Story'),
-    '#default_value' => ($results->score_story) ? $results->score_story : '',
-    '#autocomplete_path' => 'score-title-list/story/autocomplete',
-    '#required' => TRUE
-  );
-
-  $form['score_photo'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Assign to Photo'),
-    '#default_value' => ($results->score_photo) ? $results->score_photo : '',
-    '#autocomplete_path' => 'score-title-list/photo/autocomplete',
-    '#required' => TRUE
-  );
-  
-  $form['score_video'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Assign to Video'),
-    '#default_value' => ($results->score_video) ? $results->score_video : '',
-    '#autocomplete_path' => 'score-title-list/video/autocomplete',
-    '#required' => TRUE
-  );
+  */
   
   $form['score_status'] = array(
     '#type' => 'radios',
     '#title' => t('Score status'),
     '#options' => array(1 => "Active", 2 => "Inactive"),
     '#default_value' => ($results->score_status) ? $results->score_status : 1,
+    '#required' => TRUE
+  );
+
+  $form['score_story'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Associate to Story/Live Blog'),
+    '#default_value' => ($results->score_story) ? $results->score_story : '',
+    '#required' => TRUE
+  );
+
+  $form['score_photo'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Associate to Photo'),
+    '#default_value' => ($results->score_photo) ? $results->score_photo : '',
+    '#required' => TRUE
+  );
+  
+  $form['score_video'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Associate to Video'),
+    '#default_value' => ($results->score_video) ? $results->score_video : '',
+    '#required' => TRUE
+  );
+  
+   $form['score_description'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Description'),
+    '#default_value' => ($results->score_description) ? $results->score_description : '',
     '#required' => TRUE
   );
 
