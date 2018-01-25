@@ -208,7 +208,22 @@ function itg_front_end_common_block_view($delta = '') {
 function _taboola_block_content() {
   $output = '';
   if (!empty(variable_get('taboola_bottom_block')) && empty(variable_get('disable_third_party_api'))) {
-    $output = variable_get('taboola_bottom_block');
+    $node = menu_get_object('node');
+    if (isset($node) && $node->type == 'photogallery') {
+      $tab_org = "_taboola.push({article:";
+      $tab_rep = "_taboola.push({photo:";
+      $output = variable_get('taboola_bottom_block');
+      $output = str_replace($tab_org, $tab_rep, $output);
+    }
+    else if (isset($node) && $node->type == 'videogallery') {
+      $tab_org = "_taboola.push({article:";
+      $tab_rep = "_taboola.push({video:";
+      $output = variable_get('taboola_bottom_block');
+      $output = str_replace($tab_org, $tab_rep, $output);
+    }
+    else {
+      $output = variable_get('taboola_bottom_block');
+    }
   } else {
     $output = '';
     watchdog('taboola script', 'Please add taboola script in setting page.');
