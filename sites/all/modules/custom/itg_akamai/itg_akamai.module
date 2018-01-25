@@ -317,7 +317,8 @@ function itg_akamai_varnish_host_mapping($paths) {
     $fip = str_replace(":6082", "", $host_chunk);
     $final_host[] = 'http://' . $fip . '/';
   }
-
+  echo "<pre>";
+  p($final_host);
   $path_new_array = array();
 
   if (isset($paths) && !empty($paths)) {
