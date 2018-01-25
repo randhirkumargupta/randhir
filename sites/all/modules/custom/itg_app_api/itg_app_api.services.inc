@@ -4059,8 +4059,11 @@ function itg_rapid_api_edit_profile($token) {
 
         //if ($result_obj->uid) {
         $responce_object_rs = saveUpdatedProfile($params);
+        $user_val = user_load_by_name($params['user_id']);
+        $profile_image = completeFilePath($user_val->field_user_picture['und'][0]['fid']);
         $responce_object['status_code'] = "1";
         $responce_object['status_message'] = "";
+        $responce_object['data']['profile_image'] = "$profile_image";
         //}
     }
     return $responce_object;
@@ -4400,7 +4403,7 @@ function itg_rapid_api_anchor_list($token) {
     if ($args != '0') {
         $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
     } else {
-        $jsondata = $message_array;
+        $jsondata = list_itg_rapid_api_anchor_list_default();
     }
 
     return $jsondata;
@@ -5299,6 +5302,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
+    p(node_load(1069041));
     $str = '{
     "status_code": "0",
     "status_message": "Customised Message",
@@ -6209,3 +6213,80 @@ function itg_rapid_api_aboutus($token){
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
 }
+/**
+ * Helper function to list_itg_rapid_api_anchor_list_default. 
+ *
+ * @return array
+ */
+function list_itg_rapid_api_anchor_list_default() {
+    $loopc = 0;
+    $anchor_c = 0;
+    $anchor_list = array();
+    $anchor_data = array();
+    $anchor_list_dump = array();
+    $query = db_select('itg_widget_order group', 'iwo');
+    $query->fields('iwo', array('nid'));
+    $query->condition('iwo.widget', 'anchors_listing_widget');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
+    foreach ($result as $reskey => $resvalue) {
+        $node_data = node_load($resvalue['nid']);
+
+        $a_id = $node_data->nid;
+        $a_title = $node_data->title;
+        $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
+        $a_is_following = '0';
+        if (!empty($uid)) {
+            $user_status = itg_rapid_api_get_user_status($uid, 'anchor', $document['nid']);
+            $a_is_following = !empty($user_status) ? $user_status : '0';
+        }
+        $a_profile_image = completeFilePath($a_profile_image_fid);
+        $a_follower_count = get_follower_count($a_id);
+        $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value'];
+        $a_location = "";
+        $a_desc = $node_data->body['und'][0]['value'];
+
+        $dup_flag = 0;
+        $dup_flag = searchIn2DArray($a_id, $anchor_list_dump);
+        if ($dup_flag == 2) {
+
+            $anchor_list[$anchor_c]['a_id'] = "$a_id";
+            $anchor_list[$anchor_c]['a_title'] = "$a_title";
+            $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
+            $anchor_list[$anchor_c]['a_is_following'] = "$a_is_following";
+            $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
+            $anchor_list[$anchor_c]['a_twitter_handler'] = "$a_twitter_handler";
+            $anchor_list[$anchor_c]['a_location'] = "";
+            $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
+
+            $anchor_list_dump[]['a_id'] = $a_id;
+            $anchor_c++;
+        }
+
+        // }
+    }
+
+
+    $anchor_data['id'] = "";
+    $anchor_data['display_label'] = "Anchors";
+    $anchor_data['anchor_count'] = "$anchor_c";
+    $anchor_data['anchor_display_count'] = "50";
+    $anchor_data['anchor_pagination_cap'] = "50";
+
+    //$anchor_list = removeduplicatefrommiltiD($anchor_list);
+    $anchor_data['anchor'] = $anchor_list;
+    //$anchor_data = array_unique($anchor_data);
+
+
+    if ($anchor_c > 0) {
+        $output_array['status_code'] = "1";
+        $output_array['status_message'] = "";
+        $output_array['data'] = $anchor_data;
+    } else {
+        $data = array();
+        $output_array['status_code'] = "0";
+        $output_array['status_message'] = "customised_message";
+        $output_array['data'] = $data;
+    }
+    return $output_array;
+}
+

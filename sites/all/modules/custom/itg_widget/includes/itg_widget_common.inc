@@ -1686,12 +1686,15 @@ function itg_widget_views_query_alter(&$view, &$query) {
         $term_id = arg(2);
         $arg = arg();
         if ($arg[0] == 'taxonomy' && $arg[1] = 'term' && $term_id) {
+          
             foreach ($query->where[1]['conditions'] as $key => $condition) {
                 if ($condition['field'] == 'itg_widget_order.cat_id') {
                     $query->where[1]['conditions'][$key]['value'] = $term_id;
+                    $query->where[1]['conditions'][$key]['operator'] = '=';
                 }
             }
         }
+        
         unset($query->table_queue['node_itg_widget_order']);
     }
     // Adding relationship.

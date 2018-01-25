@@ -12,7 +12,10 @@ if (!empty($node->field_photogallery_configuration['und'])) {
 }
 
 if (function_exists('taboola_view')) {
-  taboola_view();
+  $tab_org = "_taboola.push({article:";
+  $tab_rep = "_taboola.push({photo:";
+  $tabula_view = taboola_view();
+  str_replace($tab_org, $tab_rep, $tabula_view);
 }
      
 if (function_exists(global_comment_last_record)) {
