@@ -140,10 +140,9 @@ function generateVideoCategoryList($tid, $pageno) {
         $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('ffd', array('field_story_expert_description_value'));
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
@@ -432,10 +431,9 @@ function generateProgramCategoryList($tid, $pageno) {
         $query->fields('ffd', array('field_story_expert_description_value'));
         //end
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');

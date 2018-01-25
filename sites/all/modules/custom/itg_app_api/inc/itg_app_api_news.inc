@@ -142,10 +142,9 @@ function generateNewsCategoryList($tid, $pageno) {
 
     //end
 
-    if (count($tid_list) > 0) {
-      $query->condition('ti.tid', $tid_list, 'IN');
-    }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    $query->condition('ti.tid', $tid, '=');
+    $interval = itg_app_time_interval($tid);    
+    $d1 = date('Y-m-d', strtotime("-".$interval." days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
