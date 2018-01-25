@@ -1126,9 +1126,9 @@ function itg_common_mail_alter(&$message) {
 
   $sendto = array();
   foreach ($to_mails as $mail_to) {
-    //if (!preg_match('/aajtak|intoday|indiatoday/', $mail_to)) {
+    if (!preg_match('/aajtak|intoday|indiatoday/', $mail_to)) {
       $sendto[] = $mail_to;
-    //}
+    }
   }
   $sendmails = implode(',', $sendto);
 
@@ -1536,7 +1536,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
   
   $fullReplacesBodyText = trim(preg_replace('/mce_href=[^>]*/', '', $fullReplacesBodyText));
 
-  //$fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));  
+  //$fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));
   $fullReplacesBodyText = trim(preg_replace('/mce_src="[^"]*/', '', $fullReplacesBodyText));
   $fullReplacesBodyText = trim(preg_replace("/mce_src='[^']*/", "", $fullReplacesBodyText));
 
