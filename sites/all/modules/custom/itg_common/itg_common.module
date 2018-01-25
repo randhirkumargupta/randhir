@@ -1536,7 +1536,9 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
   
   $fullReplacesBodyText = trim(preg_replace('/mce_href=[^>]*/', '', $fullReplacesBodyText));
 
-  $fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));
+  //$fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));  
+  $fullReplacesBodyText = trim(preg_replace('/mce_src="[^"]*/', '', $fullReplacesBodyText));
+  $fullReplacesBodyText = trim(preg_replace("/mce_src='[^']*/", "", $fullReplacesBodyText));
 
   $fullReplacesBodyText = trim(preg_replace('/style=[^>]*/', '', $fullReplacesBodyText));
 
@@ -1559,7 +1561,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
     $i++;
   }
 
-  preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $fullReplacesBodyText, $iframes);
+  preg_match_all('/<iframe.*src=\"(.*)\".*>(.*)<\/iframe>/isU', $fullReplacesBodyText, $iframes);
 
   foreach ($iframes[0] as $iframes) {
     preg_match('/src="([^"]+)"/', $iframes, $match);
