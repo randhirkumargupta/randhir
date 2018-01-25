@@ -247,6 +247,14 @@ function itg_app_api_menu() {
     'access arguments' => array('itg mobile feed'),
     'type' => MENU_NORMAL_ITEM,
   );
+  $items['admin/api-configuration/rest-api/time-interval'] = array(
+    'title' => 'update Rest API redish TTL',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('time_interval'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   return $items;
 }
@@ -2391,4 +2399,203 @@ function redish_ttl() {
 
   return system_settings_form($form);
 }
+/**
+ * redish_ttl form decalation
+ *
+ * @return type
+ */
+function time_interval() {
+    drupal_add_js(
+            'jQuery(document).ready(function () {
+  //called when key is pressed in textbox
+  jQuery("input[type=text]").keypress(function (e) {
+     //if the letter is not digit then display error 
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        alert("Digits Only");
+               return false;
+    }
+   });
+});', array(
+        'type' => 'inline'
+    ));
+    $form = array();
 
+    $form['itgapp_cat_0'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Default Section'),
+        '#default_value' => variable_get('itgapp_cat_0'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+
+    $form['itgapp_cat_1206552'] = array(
+        '#type' => 'textfield',
+        '#title' => t('VIDEOS Section'),
+        '#default_value' => variable_get('itgapp_cat_1206552'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206578'] = array(
+        '#type' => 'textfield',
+        '#title' => t('INDIA Section'),
+        '#default_value' => variable_get('itgapp_cat_1206578'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206577'] = array(
+        '#type' => 'textfield',
+        '#title' => t('WORLD Section'),
+        '#default_value' => variable_get('itgapp_cat_1206577'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206676'] = array(
+        '#type' => 'textfield',
+        '#title' => t('CRICKET Section'),
+        '#default_value' => variable_get('itgapp_cat_1206676'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206533'] = array(
+        '#type' => 'textfield',
+        '#title' => t('MOVIES Section'),
+        '#default_value' => variable_get('itgapp_cat_1206533'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206689'] = array(
+        '#type' => 'textfield',
+        '#title' => t('AUTO Section'),
+        '#default_value' => variable_get('itgapp_cat_1206689'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206550'] = array(
+        '#type' => 'textfield',
+        '#title' => t('SPORTS Section'),
+        '#default_value' => variable_get('itgapp_cat_1206550'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206567'] = array(
+        '#type' => 'textfield',
+        '#title' => t('LIFESTYLE Section'),
+        '#default_value' => variable_get('itgapp_cat_1206567'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206688'] = array(
+        '#type' => 'textfield',
+        '#title' => t('TECHNOLOGY Section'),
+        '#default_value' => variable_get('itgapp_cat_1206688'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206572'] = array(
+        '#type' => 'textfield',
+        '#title' => t('MAIL TODAY Section'),
+        '#default_value' => variable_get('itgapp_cat_1206572'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206955'] = array(
+        '#type' => 'textfield',
+        '#title' => t('VIDEOS >> INDIA'),
+        '#default_value' => variable_get('itgapp_cat_1206955'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1207303'] = array(
+        '#type' => 'textfield',
+        '#title' => t('VIDEOS >> MOVIES'),
+        '#default_value' => variable_get('itgapp_cat_1207303'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1208598'] = array(
+        '#type' => 'textfield',
+        '#title' => t('PHOTOS >> MOVIES'),
+        '#default_value' => variable_get('itgapp_cat_1208598'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1208618'] = array(
+        '#type' => 'textfield',
+        '#title' => t('PHOTOS >> CRICKET'),
+        '#default_value' => variable_get('itgapp_cat_1208618'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1208589'] = array(
+        '#type' => 'textfield',
+        '#title' => t('PHOTOS >> LIFESTYLE'),
+        '#default_value' => variable_get('itgapp_cat_1208589'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1208561'] = array(
+        '#type' => 'textfield',
+        '#title' => t('PHOTOS >> SPORTS'),
+        '#default_value' => variable_get('itgapp_cat_1208561'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    return system_settings_form($form);
+    
+}
+
+    
+     /**
+     * function for get time interval
+     * @pram int $tid
+     *
+     * @return int
+     */
+    function itg_app_time_interval($tid) {
+        $interval = variable_get('itgapp_cat_0');
+        $var_key = "";
+        if ($tid > 0) {
+            $var_key = "itgapp_cat_" . $tid . "";
+            if (variable_get($var_key) > 0) {
+                $interval = variable_get($var_key);
+            }
+        }
+
+        return $interval;
+    }
+    
