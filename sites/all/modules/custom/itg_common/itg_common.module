@@ -203,9 +203,10 @@ function itg_common_menu() {
     'file' => 'includes/itg_scorecard.inc',
   );
   
-  $items['score-title-list/%/autocomplete'] = array(
-    'page callback' => 'itg_score_get_content_title',
-    'access arguments' => array('access itg story'),
+  $items['manage-score-list'] = array(
+    'title' => t('Score Card List'),
+    'page callback' => 'itg_manage_score_list',
+    'access arguments' => array('administer itg_term settings'),
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_scorecard.inc',
   );

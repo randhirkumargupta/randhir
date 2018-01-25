@@ -55,7 +55,7 @@ function itg_manage_score_card() {
     $query = db_select('itg_score_card', 'm');
     $query->condition('m.id', $action, '=');
     # get the desired fields from the database
-    $query->fields('m', array('id', 'score_section', 'score_title', 'score_description', 'score_story', 'score_photo', 'score_video', 'score_status'));
+    $query->fields('m', array('id', 'score_section', 'score_description', 'score_story', 'score_photo', 'score_video', 'score_status'));
     # execute the query
     $results = $query->execute()->fetchObject();
   }
@@ -65,25 +65,7 @@ function itg_manage_score_card() {
   }
 
   $form = array();
-  /*
-  module_load_include('inc', 'itg_layout_manager', 'includes/itg_layout_autocomplete');
-  $op = score_card_tid_by_content_type();
-  $form['score_section'] = array(
-    '#type' => 'select',
-    '#title' => t('Select Section'),
-    '#options' => $op,
-    '#required' => TRUE,
-    '#default_value' => isset($results->score_section) ? $results->score_section : '',
-  );
-  
-  $form['score_title'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Title'),
-    '#default_value' => isset($results->score_title) ? $results->score_title : '',
-    '#required' => TRUE
-  );
-  */
-  
+
   $form['score_status'] = array(
     '#type' => 'radios',
     '#title' => t('Score status'),
@@ -91,7 +73,7 @@ function itg_manage_score_card() {
     '#default_value' => ($results->score_status) ? $results->score_status : 1,
     '#required' => TRUE
   );
-
+  
   $form['score_story'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Story/Live Blog'),
@@ -115,7 +97,7 @@ function itg_manage_score_card() {
   
    $form['score_description'] = array(
     '#type' => 'textarea',
-    '#title' => t('Description'),
+    '#title' => t('Score card iframe'),
     '#default_value' => ($results->score_description) ? $results->score_description : '',
     '#required' => TRUE
   );
@@ -144,6 +126,7 @@ function itg_manage_score_card() {
  * This function is used to score form validation
  * {@inheritdoc}
  */
+/* 
 function itg_manage_score_card_validate($form, &$form_state) {
   $score_action = $form_state['input']['score_action'];
   $score_section = $form_state['values']['score_section'];
@@ -159,6 +142,7 @@ function itg_manage_score_card_validate($form, &$form_state) {
     form_set_error('field', t('Score card already exist.'));
   }
 }
+*/
 
 /**
  * This function is used to score form submit.
@@ -166,8 +150,7 @@ function itg_manage_score_card_validate($form, &$form_state) {
  */
 function itg_manage_score_card_submit($form, &$form_state) {
   global $user;
-  $score_title = $form_state['values']['score_title'];
-  $score_section = $form_state['values']['score_section'];
+  $score_section = isset($form_state['values']['score_section']) ? $form_state['values']['score_section'] : 0;
   $score_description = $form_state['values']['score_description'];
   $score_story = $form_state['values']['score_story'];
   $score_photo = $form_state['values']['score_photo'];
@@ -176,11 +159,10 @@ function itg_manage_score_card_submit($form, &$form_state) {
   $score_action = $form_state['input']['score_action'];
 
 
-  if (isset($budget_action) && $budget_action > 0) {
+  if (isset($score_action) && $score_action > 0) {
     db_update('itg_score_card')
         ->fields(array(
-			'score_section' => $score_section,
-			'score_title' => $score_title,
+			'score_section' => 0,
 			'score_description' => $score_description,
 			'score_story' => $score_story,
 			'score_photo' => $score_photo,
@@ -194,8 +176,7 @@ function itg_manage_score_card_submit($form, &$form_state) {
   else {
     db_insert('itg_score_card')
         ->fields(array(
-          'score_section' => $score_section,
-          'score_title' => $score_title,
+          'score_section' => 0,
           'score_description' => $score_description,
           'score_story' => $score_story,
           'score_photo' => $score_photo,
@@ -230,29 +211,72 @@ function score_card_tid_by_content_type() {
 }
 
 /**
- * callback for all the story of title
- * @param $title
+ * function for list of score card
+ * @global string $base_url
+ * @return string
  */
-function itg_score_get_content_title($title) {
+function itg_manage_score_list() {
+  global $base_url;
+  $build = array();
+  $query = db_select('itg_score_card', 's')->extend('PagerDefault');
+  $query->fields('s', array('id','score_story', 'score_photo','score_video','score_status'))
+      ->orderBy('id', 'DESC')
+      ->limit(10);
 
-    if (strlen(trim($title)) > 0) {
-        $content_type = arg(1);
-        $options = '';
-        $title = strtolower(trim($title));
-        $query = db_select('node', 'n');
-        $query->fields('n', array('nid','title'));
-        $query->condition('title', '%' . $title . '%', 'LIKE');
-        $query->condition('n.type', $content_type, '=');
-        $query->condition('n.status', 1);
-        $query->range(0, 20);
+  # execute the query
+  $results = $query->execute();
+  $header = array(
+    '1' => t('S. No.'),
+    '2' => array('data' => t('Score story'), 'sort' => 'desc'),
+    '3' => array('data' => t('Score photo'), 'sort' => 'desc'),
+    '4' => array('data' => t('Score video'), 'sort' => 'desc'),
+    '5' => array('data' => t('Score Status'), 'sort' => 'desc'),
+    '6' => t('Action'),
+  );
+  # build the table fields
+  $rows = array();
+  $i = 1;
 
-        $result = $query->execute();
-
-        while ($record = $result->fetchAssoc()) {
-			$key = $record['title'] . "(" . $record['nid'] . ")";
-            $options[$key] = $record['title'];
-        }
-
-        drupal_json_output($options);
+  if (!empty($results)) {
+    foreach ($results as $row) {
+	  $score_id = $row->id;	
+      $score_story = !empty($row->score_story) ? $row->score_story : '0';
+      $score_photo = !empty($row->score_photo) ? $row->score_photo : '0';
+      $score_video = !empty($row->score_video) ? $row->score_video : '0';
+      if ($row->score_status == 1) {
+        $status = 'Active';
+      }
+      elseif ($row->score_status == 2) {
+        $status = 'Inactive';
+      }
+      $action = l(t('Edit'), 'manage-score-card/edit/' . $score_id, array('query' => array('destination' => 'manage-score-list')));
+      $rows[] = array($i,
+        $score_story,
+        $score_photo,
+        $score_video,
+        $status,
+        $action
+      );
+      $i++;
     }
+  }
+
+  $caption_table_edit = l(t('Add Score card'), 'manage-score-card');
+
+  // Format and print out the table.
+  $output = theme('table', array('header' => $header, 'rows' => $rows, 'caption' => $caption_table_edit, 'attributes' => array('class' => array('views-table'))));
+
+  $build['content'] = array(
+    'itg_score_card_content' => array(
+      '#markup' => $output,
+    ),
+  );
+
+  # add the pager
+  $build['pager'] = array(
+    '#theme' => 'pager',
+    '#weight' => 5,
+  );
+
+  return $build;
 }
