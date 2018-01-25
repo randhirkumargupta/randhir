@@ -208,7 +208,22 @@ function itg_front_end_common_block_view($delta = '') {
 function _taboola_block_content() {
   $output = '';
   if (!empty(variable_get('taboola_bottom_block')) && empty(variable_get('disable_third_party_api'))) {
-    $output = variable_get('taboola_bottom_block');
+    $node = menu_get_object('node');
+    if (isset($node) && $node->type == 'photogallery') {
+      $tab_org = "_taboola.push({article:";
+      $tab_rep = "_taboola.push({photo:";
+      $output = variable_get('taboola_bottom_block');
+      $output = str_replace($tab_org, $tab_rep, $output);
+    }
+    else if (isset($node) && $node->type == 'videogallery') {
+      $tab_org = "_taboola.push({article:";
+      $tab_rep = "_taboola.push({video:";
+      $output = variable_get('taboola_bottom_block');
+      $output = str_replace($tab_org, $tab_rep, $output);
+    }
+    else {
+      $output = variable_get('taboola_bottom_block');
+    }
   } else {
     $output = '';
     watchdog('taboola script', 'Please add taboola script in setting page.');
@@ -1240,6 +1255,7 @@ function _related_story_amp_block_content() {
       }
       
       $related_title = mb_strimwidth($display_title, 0, 80, "..");
+      $related_title = str_replace(array('\'', '"'), '', $related_title);
       
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_src_set = '';
@@ -1247,7 +1263,7 @@ function _related_story_amp_block_content() {
         $related_image_data = 170;
         $related_src_set = $related_image_url . ' ' . $related_image_data . 'w';
       }
-      $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '" srcset="'.$related_src_set.'"><div fallback>offline</div></amp-img>';
+      $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '"><div fallback>offline</div></amp-img>';
 
         if (function_exists('itg_apache_solr_get_site_url')) {
             $hash_url = itg_apache_solr_get_site_url();
