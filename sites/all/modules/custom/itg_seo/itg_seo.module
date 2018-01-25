@@ -167,12 +167,17 @@ function itg_custom_pathauto_sef_checkbox_status($form, &$form_state) {
     $entity_type = $form['#node']->type;
     $entity_id = $form['#node']->nid;
     $state = itg_custom_pathauto_get_sef_url_state($entity_id, $entity_type);
-    if (isset($state)) {
-      $pathauto_state = $state;
-    }
+    if ($form['#node']->status == 1) {
+	  $pathauto_state = 0;
+	}
     else {
-      $pathauto_state = 0;
-    }
+	  if (isset($state)) {
+	    $pathauto_state = $state;
+	  }
+	  else {
+	    $pathauto_state = 0;
+	 }
+   }
   }
   else {
     //Give default sef checked while node/add form.
