@@ -140,7 +140,11 @@ function generateVideoCategoryList($tid, $pageno) {
         $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('ffd', array('field_story_expert_description_value'));
 
-        $query->condition('ti.tid', $tid, '=');
+        if ($tid == 0 && count($tid_list) > 0) {
+            $query->condition('ti.tid', $tid_list, 'IN');
+        } else {
+            $query->condition('ti.tid', $tid, '=');
+        }
         $interval = itg_app_time_interval($tid);
         $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
@@ -431,7 +435,11 @@ function generateProgramCategoryList($tid, $pageno) {
         $query->fields('ffd', array('field_story_expert_description_value'));
         //end
 
-        $query->condition('ti.tid', $tid, '=');
+        if ($tid == 0 && count($tid_list) > 0) {
+            $query->condition('ti.tid', $tid_list, 'IN');
+        } else {
+            $query->condition('ti.tid', $tid, '=');
+        }
         $interval = itg_app_time_interval($tid);
         $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));

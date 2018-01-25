@@ -130,7 +130,12 @@ function generatePhotoCategoryList($tid, $pageno) {
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fpc', array('field_primary_category_value'));
 
-    $query->condition('ti.tid', $tid, '=');
+    if ($tid == 0 && count($tid_list) > 0) {
+        $query->condition('ti.tid', $tid_list, 'IN');
+    }
+    else{
+        $query->condition('ti.tid', $tid, '=');
+    }
     $interval = itg_app_time_interval($tid);    
     $d1 = date('Y-m-d', strtotime("-".$interval." days"));
     $d2 = date(strtotime($d1));
