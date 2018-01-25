@@ -377,6 +377,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
+  
   if ($form_state['node']->status == '1') {
     /* Assign story to widget */
     if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
@@ -393,35 +394,23 @@ function itg_story_form_custom_callback($form, &$form_state) {
       }
     }
     /* End for Assign story to widget */
-  }
-
-  if ($form_state['input']['op'] == 'Apply' && $form_state['node']->status == '1') {
-      $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-      $_GET['destination'] = $redirect_path;
-      drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
-  }
-
+  } 
+  
+  
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
+  
   $node_type = str_replace("_", " ", $node_type);
   $title = ucfirst($form_state['node']->title);
+  
   $clone_id = $_GET['clone_id'];
-  // code insert image in custom table
- 
-  if (isset($_SESSION['messages']['status'])) {
-    unset($_SESSION['messages']['status']);
-  }
-
+  
   $request_destination = $_REQUEST['destination'];
   $redirect_path = $_REQUEST['destination'];
-
-  if ($request_destination == 'published-story') {
-    $redirect_path .= "?field_story_syndication_value_op=all";
-    $_GET['destination'] = $redirect_path;
-  }
-
-  // redirection for clone story
-  if ($request_destination == 'clone-story' && !empty($clone_id)) {
+  
+  if ($form_state['input']['op'] == 'Apply' && $form_state['node']->status == '1') { // redirection for Apply button
+    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];    
+  } else if ($request_destination == 'clone-story' && !empty($clone_id)) { // redirection for clone story
     if (arg(1) == 'add') {
       if ($workbench_current_state == 'published') {
         $op = 'cloned and published.';
@@ -431,15 +420,20 @@ function itg_story_form_custom_callback($form, &$form_state) {
         $op = 'created';
         drupal_set_message(t($node_type . ' <b>' . $title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
       }
-      $_GET['destination'] = 'published-story?field_story_syndication_value_op=all';
+      $redirect_path = 'published-story?field_story_syndication_value_op=all';
     }
+  } else if ($request_destination == 'published-story' && $form_state['input']['op'] != 'Apply') { // redirection for published-story
+    $redirect_path .= "?field_story_syndication_value_op=all";    
   }
-
-  //if ($form_state['input']['op'] != 'Save as Draft') {
+  
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+ 
   if (function_exists('itg_custom_message')) {
     itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
   }
-  //}
+ 
 }
 
 /**
