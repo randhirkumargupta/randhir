@@ -1574,7 +1574,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
     }
     else {
     $frame = '<amp-iframe width="200" height="100"
-    sandbox="allow-scripts allow-same-origin"
+    sandbox="allow-scripts"
     layout="responsive"
     frameborder="0"
     src="' . $match[1] . '">
