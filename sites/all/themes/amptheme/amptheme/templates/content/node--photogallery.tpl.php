@@ -43,6 +43,7 @@
                             }
 
                             //$srcset = $amp_image . ' ' . $width . 'w' . $small_src_set;
+							$caption = trim(preg_replace('/mce_href=[^>]*/', '', $caption));
                             ?>
               <figure>
                   <div class="fixed-height-container">
