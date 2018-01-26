@@ -83,6 +83,9 @@ define('ITG_GA_CODE', 'UA-795349-17');
 /**
  * value define for image.
  */
+define('EXTRA_BIG_IMAGE_WIDTH', 1024);
+define('EXTRA_BIG_IMAGE_HEIGHT', 768);
+ 
 define('EXTRA_LARGE_IMAGE_WIDTH', 647);
 define('EXTRA_LARGE_IMAGE_HEIGHT', 363);
 define('LARGE_IMAGE_WIDTH', 483);
