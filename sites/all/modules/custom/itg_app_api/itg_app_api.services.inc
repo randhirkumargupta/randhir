@@ -6390,19 +6390,19 @@ function list_itg_rapid_api_anchor_list_default() {
     $anchor_list = array();
     $anchor_data = array();
     $anchor_list_dump = array();
-   /* $query = db_select('itg_widget_order', 'iwo');
-    $query->leftJoin('taxonomy_index', 'ti', 'iwo.nid=ti.nid');
+   $query = db_select('itg_widget_order', 'iwo');
+    $query->Join('field_data_field_celebrity_pro_occupation', 'fco', 'iwo.nid=fco.entity_id');
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
-    $query->condition('ti.tid', 285903);
-    $query->orderBy('iwo.weight', 'ASC');  */
-    $query = db_select('node', 'n');
+    $query->condition('fco.field_celebrity_pro_occupation_tid', 285903);
+    $query->orderBy('iwo.weight', 'ASC'); 
+    /*$query = db_select('node', 'n');
     $query->Join('field_data_field_celebrity_pro_occupation', 'fco', 'n.nid=fco.entity_id');
     $query->fields('n', array('nid'));
     $query->condition('n.status', 1);
     $query->condition('n.type', 'reporter');
     $query->condition('fco.field_celebrity_pro_occupation_tid', 285903);
-    $query->orderBy('n.created', 'DESC');
+    $query->orderBy('n.created', 'DESC');*/
     
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
