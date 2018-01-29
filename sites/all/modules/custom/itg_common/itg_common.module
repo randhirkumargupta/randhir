@@ -1866,8 +1866,10 @@ function itg_get_dive_region_name($str, $type = '') {
  * Implements hook_node_update
  * @param type $node
  */
+/*
 function itg_common_node_update($node) {
   if ((isset($node->workbench_moderation_state_current)) && ($node->workbench_moderation_state_current == 'published') && (isset($node->workbench_moderation_state_new)) && ($node->workbench_moderation_state_new == 'draft')) {
     $node->workbench_moderation_state_new = 'published';
   }
 }
+*/ 
