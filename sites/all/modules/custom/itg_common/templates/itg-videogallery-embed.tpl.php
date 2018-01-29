@@ -56,7 +56,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                           <div class="video-iframe-wrapper" id="video_0">
                               <?php
                               if ($videoids[0]->video_repo_type == 'INTERNAL') {
-                                print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'embed', 'image' => $image_url));
+                                print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'embed', 'image' => $image_url, 'nid' => $nid));
                               }
                               ?>
                           </div>

@@ -16,7 +16,7 @@ $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
  
 <?php
 // code for schema header script
-if($node->field_type['und']['0']['value'] == 'Live Blog') {
+if($node->field_type['und']['0']['value'] == 'Live Blog' || $node->field_type['und']['0']['value'] == 'Cricket Live Blog') {
 $embed_path = $base_url.'/'.drupal_get_path_alias('node/'.$node->nid);
 $embed_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 if(!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
@@ -43,12 +43,18 @@ $entity = entity_load('field_collection_item', array($last_item));
 $last_cov_tm = explode(" ", $entity[$last_item]->field_breaking_publish_time['und'][0]['value']);
 $coverage_end_date = $last_cov_tm[0];
 $coverage_end_time = $last_cov_tm[1];
-$coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
+$coverage_end_final_date = '';
+if(!empty($last_cov_tm[0])){
+ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time; 
+}
 } else {
 $coverage_end = strtotime($node->field_breaking_coverage_end_time[LANGUAGE_NONE][0]['value']);
 $coverage_end_date = date('Y-m-d', $coverage_end);
 $coverage_end_time = date('h:i:s', $coverage_end);
-$coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
+$coverage_end_final_date = '';
+if(!empty($coverage_end)){
+ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time; 
+}
 }
 ?>
 <div itemtype="http://schema.org/LiveBlogPosting" itemscope="itemscope" id="blogIdjson">
@@ -58,7 +64,7 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
     <meta itemprop="description" content="<?php print $short_description_source; ?>">
     <div class="bolg-content" id="bolgcontent">    
 <?php
-  if (!empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
+  if ($node->field_type['und']['0']['value'] == 'Live Blog' && !empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
       foreach ($node->field_breaking_content_details['und'] as $blog_item) {
         $collection_ids[] = $blog_item['value'];
       }
@@ -96,6 +102,29 @@ $coverage_end_final_date = $coverage_end_date.'T'.$coverage_end_time;
 
 
 <?php } } ?> 
+ <?php if ($node->field_type['und']['0']['value'] == 'Cricket Live Blog'){
+        $created_date = date('Y-m-d H:i:s', $node->created);
+        $modify_date = date('Y-m-d H:i:s', $node->changed); ?>
+        <div itemtype="http://schema.org/BlogPosting"   itemprop="liveBlogUpdate" itemscope="itemscope" data-type="text">
+          <p itemprop="headline" content="<?php print $node->title; ?>"></p>
+          <h2 itemprop="articleBody" style="display:none"></h2>
+          <meta itemprop="datePublished" content="<?php print $created_date;?>">
+          <meta itemprop="author" content="IndiaToday.in">
+          <meta itemprop="dateModified" content="<?php print $modify_date;?>">
+          <span itemprop="image" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+              <meta itemprop="url" content="<?php print $embed_image; ?>">
+              <meta itemprop="width" content="650">
+              <meta itemprop="height" content="450">
+          </span>
+          <span itemprop="publisher" itemscope="itemscope" itemtype="https://schema.org/Organization">
+              <span itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject">
+                  <meta itemprop="url" content="<?php print $embed_logo; ?>">
+              </span>
+              <meta itemprop="name" content="India Today">
+          </span>
+          <meta itemprop="mainEntityOfPage" content="<?php print $embed_path; ?>">
+      </div>
+ <?php } ?>       
 </div> </div>
 <?php } ?>
 
