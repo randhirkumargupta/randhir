@@ -6383,8 +6383,7 @@ function itg_rapid_api_aboutus($token){
  *
  * @return array
  */
-function list_itg_rapid_api_anchor_list_default() {
-    echo "andy";die();
+function list_itg_rapid_api_anchor_list_default() {    
     $data = array();
     $loopc = 0;
     $anchor_c = 0;
@@ -6397,7 +6396,7 @@ function list_itg_rapid_api_anchor_list_default() {
     $query->condition('iwo.widget', 'anchors_listing_widget');
     $query->condition('ti.tid', 1206554);
     $query->orderBy('iwo.weight', 'ASC');    
-    sprintf($query);die();
+    dpq($query);die();
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);
