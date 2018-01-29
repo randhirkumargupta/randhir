@@ -6384,6 +6384,7 @@ function itg_rapid_api_aboutus($token){
  * @return array
  */
 function list_itg_rapid_api_anchor_list_default() {
+    echo "andy";die();
     $data = array();
     $loopc = 0;
     $anchor_c = 0;
