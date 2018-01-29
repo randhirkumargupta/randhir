@@ -6391,8 +6391,10 @@ function list_itg_rapid_api_anchor_list_default() {
     $anchor_data = array();
     $anchor_list_dump = array();
     $query = db_select('itg_widget_order', 'iwo');
+    $query->leftJoin('taxonomy_index', 'ti', 'iwo.nid=ti.nid');
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
+    $query->condition('ti.tid', 285903);
     $query->orderBy('iwo.weight', 'ASC');    
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
