@@ -340,6 +340,7 @@ width: 100%;
         width: 333px;
         margin: 0 auto
     }
+    #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
     .front .itg-top-section .home-top-story .droppable {
@@ -354,6 +355,8 @@ width: 100%;
     
    .section-movies .movies-featured-news .movies-featured-post { width:50%; float:left;}
    .section-movies .movies-featured-news .movies-featured-post img{width:95%;}
+   #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
+   .front .mt-50 {margin-top: 30px;}
 }
 .may-be-recommend .trc_rbox_container .video-label.video-title {
     font-size: .875rem;
