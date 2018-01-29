@@ -349,8 +349,9 @@ function itg_videogallery_getvideoplayer() {
   $tabindex = $_GET['tabindex'];
   $video_title = $_GET['video_title'];
   $video_data = itg_videogallery_get_video_info_by_fid($fid);
+  $nid = $_GET['nid'];
   if($video_data[0]->video_repo_type == 'INTERNAL') {
-   print theme('internal_video_player' , array("data" => $fid , 'used_on' =>$getvideousedon,'title' => $video_title)); 
+   print theme('internal_video_player' , array("data" => $fid , 'used_on' =>$getvideousedon,'title' => $video_title, 'nid' => $nid)); 
   }else {
   print theme('itg_videogallery_getvideoplayer' , array('video_data' => $video_data , 'tabindex' => $tabindex));
   }
