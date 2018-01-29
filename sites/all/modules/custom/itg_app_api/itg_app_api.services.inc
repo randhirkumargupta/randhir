@@ -4400,7 +4400,7 @@ function itg_rapid_api_anchor_list($token) {
 
 
     // check args
-    if ($args != '0') {
+    if ($user_id > 0) {
         $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
     } else {
         $jsondata = list_itg_rapid_api_anchor_list_default();
@@ -6219,18 +6219,21 @@ function itg_rapid_api_aboutus($token){
  * @return array
  */
 function list_itg_rapid_api_anchor_list_default() {
+    $data = array();
     $loopc = 0;
     $anchor_c = 0;
     $anchor_list = array();
     $anchor_data = array();
     $anchor_list_dump = array();
     $query = db_select('itg_widget_order', 'iwo');
+    $query->Join('field_data_field_celebrity_pro_occupation', 'fco', 'iwo.nid=fco.entity_id');
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
+    $query->condition('fco.field_celebrity_pro_occupation_tid', 285903);
+    $query->orderBy('iwo.weight', 'ASC');    
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);
-
         $a_id = $node_data->nid;
         $a_title = $node_data->title;
         $a_profile_image_fid = $node_data->field_story_extra_large_image['und'][0]['fid'];
@@ -6244,25 +6247,15 @@ function list_itg_rapid_api_anchor_list_default() {
         $a_twitter_handler = $node_data->field_reporter_twitter_handle['und'][0]['value'];
         $a_location = "";
         $a_desc = $node_data->body['und'][0]['value'];
-
-        $dup_flag = 0;
-        $dup_flag = searchIn2DArray($a_id, $anchor_list_dump);
-        if ($dup_flag == 2) {
-
-            $anchor_list[$anchor_c]['a_id'] = "$a_id";
-            $anchor_list[$anchor_c]['a_title'] = "$a_title";
-            $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
-            $anchor_list[$anchor_c]['a_is_following'] = "$a_is_following";
-            $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
-            $anchor_list[$anchor_c]['a_twitter_handler'] = "$a_twitter_handler";
-            $anchor_list[$anchor_c]['a_location'] = "";
-            $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
-
-            $anchor_list_dump[]['a_id'] = $a_id;
-            $anchor_c++;
-        }
-
-        // }
+        $anchor_list[$anchor_c]['a_id'] = "$a_id";
+        $anchor_list[$anchor_c]['a_title'] = "$a_title";
+        $anchor_list[$anchor_c]['a_profile_image'] = "$a_profile_image";
+        $anchor_list[$anchor_c]['a_is_following'] = "$a_is_following";
+        $anchor_list[$anchor_c]['a_follower_count'] = "$a_follower_count";
+        $anchor_list[$anchor_c]['a_twitter_handler'] = "$a_twitter_handler";
+        $anchor_list[$anchor_c]['a_location'] = "";
+        $anchor_list[$anchor_c]['a_desc'] = "$a_desc";
+        $anchor_c++;
     }
 
 
@@ -6289,4 +6282,3 @@ function list_itg_rapid_api_anchor_list_default() {
     }
     return $output_array;
 }
-
