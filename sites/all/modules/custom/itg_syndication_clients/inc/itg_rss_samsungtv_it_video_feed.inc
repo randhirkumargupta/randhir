@@ -466,11 +466,12 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
         foreach ($videoids as $keys => $video_value) {
           $url = $video_value->field_migrated_video_url_value;
         }
+        var_dump($videoids);die;
         $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
         $bitrate_url = $data_video['bitrate_url'];
         $mp4_url = $data_video['file_url'];
         $video_url = $bitrate_url;
-        var_dump($bitrate_url);
+        
       }
       else {
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
