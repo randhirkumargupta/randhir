@@ -311,6 +311,7 @@ if (!empty($content)):
               <div class="story-movie">
                 <?php if (!empty($node->field_story_rating)): ?>
                   <div class="movie-rating" data-star-value="<?php print $node->field_story_rating[LANGUAGE_NONE]['0']['value'] * 20 . "%"; ?>">                            
+                  </div>
                 <?php endif; ?>
                 <div class="movie-detail">
                   <?php if (!empty($node->field_mega_review_cast)): ?>
