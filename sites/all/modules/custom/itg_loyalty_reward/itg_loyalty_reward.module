@@ -289,6 +289,12 @@ function itg_loyalty_reward_views_pre_render(&$view) {
   }
   if ($view->name == 'sold_item_history') {
     $header_content_loyalty = '<span class="count">Count(' . $view->total_rows . ')&nbsp;</span>';
+    
+    if ($view->total_rows == 0) {
+      drupal_add_js('jQuery(document).ready(function() {
+      jQuery("#edit-submit").hide();
+      });', array('type' => 'inline', 'scope' => 'footer'));
+    }
     $view->attachment_before = $header_content_loyalty;
   }
 }
