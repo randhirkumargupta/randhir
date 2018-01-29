@@ -516,11 +516,12 @@ function get_predefine_variables_value($node = '', $variable) {
             } else {
                 $published_date = $node->created;
             }
-            $value = "<![CDATA[" . gmdate('D, d M Y H:i:s T', $published_date) . "]]>";
+            $value = "<![CDATA[" . date('D, d M Y H:i:s T', $published_date) . "]]>";
+            P($value);
             break;
         case 'node_last_updated_date':
             $changed_date = $node->changed;
-            $value = "<![CDATA[ " . gmdate('D, d M Y H:i:s T', $changed_date) . " ]]>";
+            $value = "<![CDATA[ " . date('D, d M Y H:i:s T', $changed_date) . " ]]>";
             break;
         case 'node_author':
             $user_profile_data = user_load($node->uid);
@@ -570,7 +571,7 @@ function get_predefine_variables_value($node = '', $variable) {
             $value = t('http://indiatoday.intoday.in');
             break;
         case 'xml_creation_date':
-            $value = gmdate('D, d M Y H:i:s T', time());
+            $value = date('D, d M Y H:i:s T', time());
             break;
         case 'web_logo_url':
             $value = theme_get_setting('logo', 'itg');
