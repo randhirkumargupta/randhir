@@ -517,7 +517,6 @@ function get_predefine_variables_value($node = '', $variable) {
                 $published_date = $node->created;
             }
             $value = "<![CDATA[" . date('D, d M Y H:i:s T', $published_date) . "]]>";
-            P($value);
             break;
         case 'node_last_updated_date':
             $changed_date = $node->changed;
