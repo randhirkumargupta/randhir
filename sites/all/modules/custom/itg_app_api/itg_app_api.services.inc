@@ -6226,9 +6226,11 @@ function list_itg_rapid_api_anchor_list_default() {
     $anchor_data = array();
     $anchor_list_dump = array();
     $query = db_select('itg_widget_order', 'iwo');
+    $query->Join('field_data_field_celebrity_pro_occupation', 'fco', 'iwo.nid=fco.entity_id');
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
-    $query->orderBy('iwo.weight', 'ASC');    
+    $query->condition('fco.field_celebrity_pro_occupation_tid', 285903);
+    $query->orderBy('iwo.weight', 'ASC');   
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);
