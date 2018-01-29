@@ -280,7 +280,6 @@ function itg_image_croping_change_image_aspect_ratio() {
   $aspect_ratio = trim($_POST['aspect_ratio']);
 
   $file = file_load($image_id);
-   p($file);
   if (empty($file)) {
     drupal_set_message(t('This image is not valid!'));
   }
