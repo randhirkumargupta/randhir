@@ -29,7 +29,15 @@
                 });
                 if (maxCountError) {
                     maxCountError = false;
-                    alert("You can upload only "+uploader.settings.max_file_count+" images at once");
+                    try {
+                        $('.plupload_header').show();
+                        $('.plupload_header .plupload_header_content .plupload_header_title').addClass('messages');
+                        $('.plupload_header .plupload_header_content .plupload_header_title').addClass('error');
+                        $('.plupload_header .plupload_header_content .plupload_header_title').html("You can upload only "+uploader.settings.max_file_count+" images at once.");
+                        $('.plupload_header .plupload_header_content .plupload_header_text').html('');
+                    } catch (err) {
+                        console.log('Error' + err);
+                    }
                 }
                 
                 for (var j = 0; j < uploader.files.length; j++) {
