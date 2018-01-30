@@ -665,6 +665,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 #block-itg-menu-manager-magazine-node-third-level-menu .menu-wrapper{height:60px;background: #595959}
 /*technology home page title red and breadcrumb */
 .tech-layout-page span.widget-title {line-height: 22px;padding: 0 7px;text-transform: uppercase; color: #fff;font-family: "Roboto-Regular"; z-index: 1;white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 100%; background: #a00606;font-size: 14px;}
+.tech-layout-page span.widget-title a{color:#fff;}
 #block-itg-layout-manager-front-end-breadcrumb .container a:hover{text-decoration: none;}
 #block-itg-layout-manager-front-end-breadcrumb .container a:after {content: "/";padding: 0px 3px;}
 
@@ -680,9 +681,10 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .story-section .byline .mobile-twitter{color:#1b95e0; margin-left:4px;display: inline-block;} .story-section .byline .mobile-twitter a, .story-section .byline .mobile-twitter a:hover{ color:#1b95e0; text-decoration:none;}
 /* home page extra space fix */
-.front .itg-top-section .top-rhs-add-child .ad-widget {padding: 32px 10px; height: 314px;}
-.front .itg-layout-container .itg-h321-section .ad-widget{ height: 330px;padding: 39px 0;width: 322px;margin: 0 auto;background: #f3f3f3;}
+.front .itg-top-section .top-rhs-add-child .ad-widget {padding:20px 10px; height:290px;}
+.front .itg-layout-container .itg-h321-section .ad-widget{ height: 315px;padding: 30px 0;width: 322px;margin: 0 auto;background: #f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
+.itg-h321-section .dont-miss ul li{width:100%}
 .itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:none}
 }
 @media only screen and (max-width: 767px) {
