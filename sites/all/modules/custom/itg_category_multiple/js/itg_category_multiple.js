@@ -127,7 +127,7 @@ $( document ).ready( function() {
           // Comment code from Shashank by fix of Primary category:
           //if ( item.pcat.length > 0 ) {
             //$( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
-            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', '' )
+            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', '' );
             $( '#edit-itg-primary-category' ).val( item.pcat );
           //}
           itg_category_multiple_data_sync(); // Sync data 
