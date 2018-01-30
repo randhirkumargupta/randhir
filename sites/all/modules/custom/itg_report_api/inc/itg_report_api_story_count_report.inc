@@ -304,7 +304,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $field_primary_category_value = $resvalue['field_primary_category_value'];
         $body_value = $resvalue['body_value'];
         $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value']; 
-        $last_pub_date = date("F d, Y H:i:s P", strtotime($field_itg_content_publish_date_value));
+        $last_pub_date = date("Y-m-d H:i:s", strtotime($field_itg_content_publish_date_value));
 
         $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
         $created_by = getNodeCreatedBy_UserName($uid);
