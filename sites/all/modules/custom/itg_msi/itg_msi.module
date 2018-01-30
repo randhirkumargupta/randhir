@@ -534,6 +534,7 @@ function itg_msi_node_validate($node, $form, &$form_state) {
         }
 
         foreach ($file as $result) {
+            $xml_file = '';
             $xml_file = file_load($result['fid']);
 
             $fileuri = file_create_url($xml_file->uri);
