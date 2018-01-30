@@ -1923,7 +1923,14 @@ function homePageJsonNewslist_business() {
     $n_video = array();
     $n_polls = array();
     $n_rating = array();
-    $tid = 1206574;
+    if($_SERVER['SERVER_NAME'] == "appfeeds.intoday.in"){
+        $tid = 1778508;
+        $label = "Union Budget 2018";
+    }
+    else{
+        $tid = 1206574;
+        $label = "Business";
+    }
     $node_count = "";
     $output = "";
     $data = array();
@@ -1959,11 +1966,11 @@ function homePageJsonNewslist_business() {
 
         // code vid=14  end
 
-        $data_news['id'] = "1206574";
+        $data_news['id'] = "$tid";
         $data_news['order'] = "2";
         $data_news['type'] = "newslist";
-        $data_news['title'] = "Business";
-        $data_news['label'] = "Business";
+        $data_news['title'] = "$label";
+        $data_news['label'] = "$label";
         $data_news['show_label'] = "0";
         $data_news['n_template_id'] = "1";
         // select node belong from current term id or child term id
