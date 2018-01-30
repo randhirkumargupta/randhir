@@ -10,7 +10,7 @@
  * Implements hook_init(). 
  */
 function itg_app_manager_init() {
-    //module_load_include('inc', 'itg_app_manager', 'inc/comman');
+    module_load_include('inc', 'itg_app_manager', 'inc/comman');
 }
 /**
  * Implements hook_user_login(). 
@@ -230,6 +230,13 @@ function itg_app_manager_menu() {
         'title' => 'Daily Capsule Manager',
         'page callback' => 'drupal_get_form',
         'page arguments' => array('itg_app_daily_capsule_manager_form'),
+        'access arguments' => array('administer app manager'),
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['itg-app-arrange-home'] = array(
+        'title' => 'Arrange Home Page',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('itg_app_arrange_home_form'),
         'access arguments' => array('administer app manager'),
         'type' => MENU_NORMAL_ITEM,
     );
@@ -2238,7 +2245,8 @@ function itg_app_manager_packages_form($form, &$form_state) {
         $term_query->condition('th.parent', $pack_obj->tid, '=');
         $term_query_results = $term_query->execute()->fetchAll();
         foreach ($term_query_results as $key => $val) {
-            $term_options[$val->tid] = $val->name . l('Config Settings', 'package-config/nojs/form/' . $val->tid . '', array('attributes' => array('class' => 'ctools-use-modal')));
+            //$term_options[$val->tid] = $val->name . l('Config Settings', 'package-config/nojs/form/' . $val->tid . '', array('attributes' => array('class' => 'ctools-use-modal')));
+            $term_options[$val->tid] = $val->name;
         }
     }
 
@@ -2553,7 +2561,7 @@ function top_stories_management_form($form, &$form_state) {
     $form['top_stories_management'] = array(
         '#type' => 'radios',
         '#title' => 'Top Stories',
-        '#options' => array('10' => 'Top 10', '15' => 'Top 15', '20' => 'Top 20', '25' => 'Top 25'),
+        '#options' => array('5' => 'Top 5','7' => 'Top 7','10' => 'Top 10', '15' => 'Top 15', '20' => 'Top 20', '25' => 'Top 25'),
         '#default_value' => fetchMasterConfigData('top_stories_management')
     );
     $form['submit_button'] = array(
@@ -3114,8 +3122,10 @@ function itg_app_dashboard_form($form, &$form_state) {
     $img_tag = "<img src='$image_file' style='width: 30px;' />";
     $image_file_list = $base_url . "/" . drupal_get_path('module', 'itg_app_manager') . '/img/list-icon.png';
     $img_tag_list = "<img src='$image_file_list' style='width: 30px;' />";
-    $image_file_seting = $base_url . "/" . drupal_get_path('module', 'itg_app_manager') . '/img/seting-icon.png';
+    $image_file_seting = $base_url . "/" . drupal_get_path('module', 'itg_app_manager') . '/img/seting-icon.png';    
     $img_tag_seting = "<img src='$image_file_seting' style='width: 30px;' />";
+    $image_file_arrange = $base_url . "/" . drupal_get_path('module', 'itg_app_manager') . '/img/arrange-icon.jpeg';
+    $img_arrange = "<img src='$image_file_arrange' style='width: 30px;' />";
 
     $form['widget_group'] = array(
         '#type' => 'fieldset',
@@ -3226,7 +3236,8 @@ function itg_app_dashboard_form($form, &$form_state) {
     $form['hamburger_menu_group']['hamburger_menu_config_options'] = array(
         '#type' => 'radios',
         '#options' => array(0 => 'In Active', 1 => 'Active'),
-        '#default_value' => fetchMasterConfigData('hamburger_menu_config_options'),
+        '#default_value' => 1,
+        '#disabled' => TRUE
     );
     $form['hamburger_menu_group']['hamburger_menu_information'] = array(
         '#markup' => "<a href='$base_url/hamburger-menu-management' target='_blank'>$img_tag</a>",
@@ -3243,13 +3254,23 @@ function itg_app_dashboard_form($form, &$form_state) {
     $form['horizontal_menu_group']['horizontal_menu_config_options'] = array(
         '#type' => 'radios',
         '#options' => array(0 => 'In Active', 1 => 'Active'),
-        '#default_value' => fetchMasterConfigData('horizontal_menu_config_options'),
+        '#default_value' => 1,
+        '#disabled' => TRUE
     );
     $form['horizontal_menu_group']['horizontal_menu_information'] = array(
         '#markup' => "<a href='$base_url/horizontal-menu-management' target='_blank'>$img_tag</a>",
     );
     $form['horizontal_menu_group']['horizontal_menu_information_list'] = array(
         '#markup' => "<a href='$base_url/horizontal-menu-list' target='_blank'>$img_tag_list</a>",
+    );
+    $form['arrange_home_group'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Arrange Home'),
+        '#collapsible' => FALSE,
+        '#collapsed' => FALSE,
+    );
+    $form['arrange_home_group']['arrange_home_group_information'] = array(
+        '#markup' => "<a href='$base_url/itg-app-arrange-home' target='_blank'>$img_arrange</a>",
     );
     $form['other_group'] = array(
         '#type' => 'fieldset',
@@ -3703,4 +3724,83 @@ function getMenuTypeLabel($m_id, $label) {
         $menu_name = db_query('SELECT menu_name FROM {itg_app_menu_master} where menu_id=' . $m_id . '')->fetchField();
         return $menu_name;
     }
+}
+
+/**
+ * itg app arrange home menu callback
+ * @param array $form
+ * @param array $form_state
+ * @return array
+ */
+function itg_app_arrange_home_form($form, &$form_state) {
+    drupal_add_css(drupal_get_path('module', 'itg_app_manager') . '/css/itg_app_manager.css');
+    global $base_url;
+    $form = array();
+    
+    $form['homeapi_order_packages'] = array(
+        '#type' => 'select',
+        '#title' => t('Packages order'),
+        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
+        '#default_value' => fetchMasterConfigData('homeapi_order_packages')       
+    );
+    $form['homeapi_order_topstories'] = array(
+        '#type' => 'select',
+        '#title' => t('Topstories order'),
+        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
+        '#default_value' => fetchMasterConfigData('homeapi_order_topstories')       
+    );
+    $form['homeapi_order_categories'] = array(
+        '#type' => 'select',
+        '#title' => t('Categories order'),
+        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
+        '#default_value' => fetchMasterConfigData('homeapi_order_categories')       
+    );
+    $form['homeapi_order_magazines'] = array(
+        '#type' => 'select',
+        '#title' => t('Magazines order'),
+        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
+        '#default_value' => fetchMasterConfigData('homeapi_order_magazines')       
+    );
+    $form['homeapi_order_polls'] = array(
+        '#type' => 'select',
+        '#title' => t('Polls order'),
+        '#options' => array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5),
+        '#default_value' => fetchMasterConfigData('homeapi_order_polls')       
+    );
+
+    $form['home_arra_submit_button'] = array(
+        '#type' => 'submit',
+        '#value' => t('Save'),
+        '#submit' => array('itg_app_arrange_home_form_submit'),
+    );
+
+    return $form;
+}
+
+/**
+ * submit callback for arrange home form
+ * @param array $form
+ * @param array $form_state
+ */
+function itg_app_arrange_home_form_submit($form, &$form_state) {
+    form_state_values_clean($form_state);
+    foreach ($form_state['values'] as $key => $val) {
+        $key_val = "";
+        $key_val = fetchMasterConfigData($key);
+        if ($key_val != "") {
+            // uapdete query
+            db_update('itg_app_master_config_internal')
+                    ->fields(array(
+                        'config_val' => $val,
+                    ))->condition('config_key', $key, '=')->execute();
+        } else {
+            // insert query
+            $data = array(
+                'config_key' => $key,
+                'config_val' => $val,
+            );
+            drupal_write_record('itg_app_master_config_internal', $data);
+        }
+    }
+    drupal_set_message(t('Data saved successfully.'), 'status');
 }
