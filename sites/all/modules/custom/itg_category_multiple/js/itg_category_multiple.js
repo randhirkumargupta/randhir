@@ -83,6 +83,7 @@ $( document ).ready( function() {
         success: function( html ) {
           //console.log(html);
           var item = JSON.parse( html );
+          console.log(item);
           if ( item.main.length > 0 ) {
             $( '.form-item-itg-category' ).show();
           }
@@ -128,6 +129,8 @@ $( document ).ready( function() {
           if ( item.pcat.length > 0 ) {
             $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat )
             $( '#edit-itg-primary-category' ).val( item.pcat );
+          } else {
+            $( '#edit-itg-primary-category' ).val('');
           }
           itg_category_multiple_data_sync(); // Sync data 
 
