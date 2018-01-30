@@ -312,7 +312,7 @@ function itg_generate_samsung_json_feed_newslist(){
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('synopsis', array('field_story_kicker_text_value'));
   $query->fields('smi', array('field_story_large_image_fid'));
-  $days_ago = strtotime(date('Y-m-d', strtotime('-367 days')));
+  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
   $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
@@ -400,12 +400,15 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
     $query->leftJoin('field_data_field_video_kicker', 'synopsis', 'synopsis.entity_id=n.nid');
     
+    $section_id = 0;
     if(is_array($sections)){
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $sections, 'IN');
+      $section_id = $sections[0];
     }else if ($sections != 1){
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
       $query->condition('ti.tid', $sections, '=');
+      $section_id = $sections;
     }
     
     $query->fields('synopsis', array('field_video_kicker_value'));
@@ -414,10 +417,10 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
     $query->fields('ssi', array('field_story_small_image_fid'));
     $query->fields('sst', array('field_story_source_type_value'));
     
-//    if($days_ago = get_content_fetch_time($section_id)){
-//      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
-//      $query->condition('n.created', $days_ago, '>=');
-//    }
+    if($days_ago = get_content_fetch_time($section_id)){
+      $days_ago = strtotime(date('Y-m-d', strtotime('-' . $days_ago . ' days')));
+      $query->condition('n.created', $days_ago, '>=');
+    }
     
     $query->condition('ss.field_story_syndication_value', 'Yes', 'LIKE');
     $query->condition('n.status', 1);
