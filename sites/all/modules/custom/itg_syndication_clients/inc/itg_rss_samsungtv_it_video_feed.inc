@@ -408,7 +408,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       $query->condition('ti.tid', $sections, '=');
     }
     
-    $query->fields('synopsis', array('field_story_kicker_text_value'));
+    $query->fields('synopsis', array('field_video_kicker_value'));
     $query->fields('smi', array('field_story_large_image_fid'));
     $query->fields('n', array('nid', 'title', 'created'));
     $query->fields('ssi', array('field_story_small_image_fid'));
