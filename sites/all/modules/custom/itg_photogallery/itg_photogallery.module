@@ -79,7 +79,12 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
 			'#upload_validators' => array(
 				'file_validate_extensions' => array("png gif jpg jpeg"),
 			),
-			'#description' => t('88x66 smallest size of image.'),
+			'#description' => t('88x66 smallest size of image. Max '. variable_get('max_upload_image_limit', 6) .' file upload at once.'),
+      '#plupload_settings' => array(
+        'unique_names' => TRUE,
+        'rename'=>TRUE,
+				'max_file_count' => variable_get('max_upload_image_limit', 6), 
+			  ),
 		);
 		$form['field_common_audio_file']['#states'] = array(
 			'visible' => array(

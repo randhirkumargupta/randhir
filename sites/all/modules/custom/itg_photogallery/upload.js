@@ -15,8 +15,32 @@
             if (!uploader) {
                 return false;
             }
-
-            uploader.bind('FilesAdded', function() {
+            
+            uploader.bind('FilesAdded', function (up, files) {
+                var i = 0,
+                maxCountError = false;
+                plupload.each(files, function (file) {                        
+                    if (uploader.settings.max_file_count && i >= uploader.settings.max_file_count) {
+                        maxCountError = true;
+                        setTimeout(function () {
+                            up.removeFile(file);
+                        }, 50);
+                    }
+                    i++;
+                });
+                if (maxCountError) {
+                    alert("You can upload only "+uploader.settings.max_file_count+" images at once");
+                }
+                
+                for (var j = 0; j < uploader.files.length; j++) {
+                    if (uploader.files[j].name.indexOf("_IT_") !== undefined && uploader.files[j].name.indexOf("_IT_") < 0) {
+                        org_filename = uploader.files[j].name;
+                        extention = org_filename.substr((org_filename.lastIndexOf('.') + 1));
+                        filename = org_filename.substr(0, (org_filename.lastIndexOf('.')));
+                        file_timestamp = new Date().getTime();
+                        uploader.files[j].name = filename + "_IT_" + file_timestamp + '.' + extention;
+                    }
+                }
                 // start upload automatically once files have been added to queue
                 that.start();
             });
