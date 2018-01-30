@@ -62,7 +62,9 @@ if(!empty($coverage_end)){
     <meta itemprop="coverageEndTime" content="<?php print $coverage_end_final_date; ?>">
     <meta itemprop="url" content="<?php print $embed_path; ?>">
     <meta itemprop="description" content="<?php print $short_description_source; ?>">
+    <?php if($node->field_type['und']['0']['value'] == 'Live Blog'):?>
     <div class="bolg-content" id="bolgcontent">    
+    <?php endif;?>	    
 <?php
   if ($node->field_type['und']['0']['value'] == 'Live Blog' && !empty($node->field_breaking_content_details[LANGUAGE_NONE])) {
       foreach ($node->field_breaking_content_details['und'] as $blog_item) {
@@ -125,7 +127,10 @@ if(!empty($coverage_end)){
           <meta itemprop="mainEntityOfPage" content="<?php print $embed_path; ?>">
       </div>
  <?php } ?>       
-</div> </div>
+</div> 
+<?php if($node->field_type['und']['0']['value'] == 'Live Blog'):?>
+</div>
+<?php endif;?>
 <?php } ?>
 
 <div class="live-block">
