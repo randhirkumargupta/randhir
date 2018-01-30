@@ -1074,7 +1074,7 @@ function itg_image_croping_crop_form($form, $form_state, $field_name, $imagedata
     else {
 
       $checkoption = array(
-        'field_story_big_image' => t("Facebook Instant Article Image $extrabigimagesize"),
+        //'field_story_big_image' => t("Facebook Instant Article Image $extrabigimagesize"),
         'field_story_large_image' => t(" Large Image  $largsize"),
         'field_story_medium_image' => t(" Medium Image $mediumsize"),
         'field_story_small_image' => t(" Small Image  $smallsize"),
