@@ -19,7 +19,7 @@ else if (arg(0) == 'photo-list' || arg(0) == 'video-list') {
 }
 else if(arg(0) == 'node' &&  is_numeric(arg(1))){
   $node = menu_get_object();
-  $cat_id = $node->field_story_category[LANGUAGE_NONE][0]['tid'];
+  $cat_id = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
   $cat_flag = TRUE;
 }
 else if ($cat_flag == FALSE) {
@@ -39,7 +39,7 @@ if ($cat_id == "") {
     }
   }
 }
-if (arg(0) == 'taxonomy' && arg(1) == 'term' && arg(2)) {
+if (isset($cat_id) && is_numeric($cat_id)) {
   $section_tids = array_reverse(taxonomy_get_parents_all($cat_id));
   $section_tid = $section_tids[0]->tid;
   if($cat_id != $section_tid){
