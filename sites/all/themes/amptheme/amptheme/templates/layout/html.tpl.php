@@ -402,10 +402,8 @@ img {
     color: #b1b1b1;
     display: block
 }
-.story-section .story-tech-chunk {
-    background: #f3f3f3;
-    padding: 10px;
-    position: relative
+.story-section .story-tech-chunk .field-label{
+	display: none;
 }
 .field .field-label {
     font-weight: 700
@@ -427,8 +425,38 @@ img {
     width: 111px;
     height: 18px;
     margin: 20px 0;
-    position: relative
+    position: relative;
+    background: url(/sites/all/themes/itg/images/rating-grey.png) 0 0px no-repeat;
 }
+.movie-rating:after{
+	content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url(/sites/all/themes/itg/images/rating-red.png) 0 0px no-repeat;
+    height: 60px;
+    width: 0;
+	}
+.movie-rating[data-star-value="10%"]:after {
+  width: 10%; }
+.movie-rating[data-star-value="20%"]:after {
+  width: 20%; }
+.movie-rating[data-star-value="30%"]:after {
+  width: 30%; }
+.movie-rating[data-star-value="40%"]:after {
+  width: 40%; }
+.movie-rating[data-star-value="50%"]:after {
+  width: 50%; }
+.movie-rating[data-star-value="60%"]:after {
+  width: 60%; }
+.movie-rating[data-star-value="70%"]:after {
+  width: 70%; }
+.movie-rating[data-star-value="80%"]:after {
+  width: 80%; }
+.movie-rating[data-star-value="90%"]:after {
+  width: 90%; }
+.movie-rating[data-star-value="100%"]:after {
+  width: 100%; }
 .grey-star,
 .red-star {
     position: absolute;
@@ -1386,9 +1414,9 @@ ul.pron-cons-img li img {
 }
 .tech-pros-cons-main {
     width: 100%;
-    float: left;
     padding: 10px;
-    background-color: #edebec
+    background-color: #edebec;
+    overflow: hidden;
 }
 .tech-photos .tech-photos-head-section {
     display: block
