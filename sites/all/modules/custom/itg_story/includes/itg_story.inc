@@ -71,11 +71,11 @@ function itg_story_get_content_title($title) {
  * @param $title
  */
 function itg_state_get_content_title($title) {
-
+    global $user;
     if (strlen(trim($title)) > 0) {
         $content_type = arg(1);
         $state = arg(2);
-        
+        $cur_date = date('Y-m-d H:i:s');
         $options = '';
         $title = strtolower(trim($title));
         $query = db_select('node', 'n');
@@ -85,14 +85,18 @@ function itg_state_get_content_title($title) {
           $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
           $query->condition('sp.field_supp_publish_value', 1, '=');
           $query->condition('n.status', 0);
+          $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '=<'));
         } else if ($state == 'published') {
           $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
           $query->condition('sp.field_supp_publish_value', 1, '=');
           $query->condition('n.status', 1);
+          $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
         } else if ($state == 'draft') {
           $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
           $query->isNull('sp.field_supp_publish_value');
-          $query->condition('n.status', 0);
+          $query->condition('n.status', 0);          
+          $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
+          $query->condition('n.uid', $user->uid);
         }
         
         $query->condition('title', '%' . $title . '%', 'LIKE');
