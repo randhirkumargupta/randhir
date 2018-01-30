@@ -141,7 +141,12 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-sports.xml' => 1207681,
     'msn/mailtoday/story-states.xml' => 1207682,
     'msn/mailtoday/story-entertainment.xml' => 1207680,
-    'msn/mailtoday/story-cricket.xml' => 1208384
+    'msn/mailtoday/story-cricket.xml' => 1208384,
+    'msn/mailtoday/story-world.xml' => 1206577,
+    'msn/mailtoday/story-india.xml' => 1206578,
+    'msn/mailtoday/story-top-stories.xml' => 1206584,
+    'msn/mailtoday/story-technology.xml' => 1206688,
+    'msn/mailtoday/story-auto.xml' => 1206689
   );
   return $msn_story;
 }
@@ -525,4 +530,27 @@ function get_content_fetch_time($section_id) {
 function get_factiva_sections() {
   return array('1206578' => 'india.xml',
     '-1' => 'latest-news.xml');
+}
+
+
+function get_samsung_video_category(){
+  return array(
+    'videolist-featured.json' => 1, 
+    'videolist-popular-now.json' => 1207974, 
+    'videolist-india.json' => 1206955, 
+    'videolist-movie.json' => array(1207303,1207980),
+    'videolist-tech.json' => 1207486, 
+    'videolist-sosorry.json' => 1207580, 
+    'videolist-news-today.json' => 1207797, 
+    'videolist-newsroom.json' => 1207827, 
+    'videolist-to-the-point.json' => 1207722, 
+    'videolist-people-court.json' => 1208900, 
+    'videolist-india-first.json' => 1208095, 
+    'videolist-5ive-live.json' => 1208902, 
+    'videolist-in-the-club.json' => 1208173, 
+    'videolist-first-up.json' => 1207755, 
+    'videolist-sports-today.json' => 1206960, 
+    'videolist-auto-today.json' => 1207978, 
+    'videolist-long-story.json' => 1208061, 
+  );
 }
