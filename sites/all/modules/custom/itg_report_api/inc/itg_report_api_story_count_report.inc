@@ -283,7 +283,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     if ($type != "na") {
         $query->condition('n.type', $type);
     }
-    if ($synd == 'Yes') {
+    if ($synd == 'Yes') { 
         $query->leftJoin('field_data_field_story_syndication', 'syn', 'syn.entity_id=n.nid');
         $query->fields('syn', array('field_story_syndication_value'));
         $query->condition('syn.field_story_syndication_value', $synd);
