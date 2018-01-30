@@ -83,10 +83,10 @@ function itg_state_get_content_title($title) {
         
         if ($state == 'unpublished') {
           $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
-          $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
+          //$query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
           $query->condition('sp.field_supp_publish_value', 1, '=');
           $query->condition('n.status', 0);
-          $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '=<'));
+          //$query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '=<'));
         } else if ($state == 'published') {
           $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
           $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
