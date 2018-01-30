@@ -359,6 +359,12 @@ function itg_syndication_clients_menu() {
     'file' => 'inc/itg_indiatoday_yahoo.inc',
     'type' => MENU_CALLBACK,
   );
+  $items['indiatoday/samsung/jsonfeed'] = array(
+    'page callback' => 'itg_indiatoday_samsung_jsonfeed_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
   return $items;
 }
 
@@ -1431,6 +1437,7 @@ function itg_remove_extra_custom_tags($content) {
   $content = str_replace('[ITG:EXPERT-CHUNK]', '', $content);
   $content = str_replace('[ITG:TECH-PHOTOS]', '', $content);
   $content = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $content);
+  $content = stripInvalidXml($content);
   return $content;
 }
 
@@ -1464,4 +1471,38 @@ function itg_replace_token_with_data($node_body, $nid) {
     }
   }
   return $node_body;
+}
+
+
+function get_highest_bitrate_video_by_nid($nid){
+  $query = db_select('itg_video_transcoding', 'ivt');
+  $query->fields('ivt', array('bitrate'));
+  $query->condition('ivt.nid', $nid, '=');
+  $query->orderBy('ivt.bitrate', 'DESC');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+function stripInvalidXml($value) {
+  $ret = "";
+  $current;
+  if (empty($value)) {
+    return $ret;
+  }
+  $length = strlen($value);
+  for ($i = 0; $i < $length; $i++) {
+    $current = ord($value{$i});
+    if (($current == 0x9) ||
+        ($current == 0xA) ||
+        ($current == 0xD) ||
+        (($current >= 0x20) && ($current <= 0xD7FF)) ||
+        (($current >= 0xE000) && ($current <= 0xFFFD)) ||
+        (($current >= 0x10000) && ($current <= 0x10FFFF))) {
+      $ret .= chr($current);
+    }
+    else {
+      $ret .= " ";
+    }
+  }
+  return $ret;
 }
