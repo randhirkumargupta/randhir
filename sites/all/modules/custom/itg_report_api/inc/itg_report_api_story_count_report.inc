@@ -303,7 +303,8 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $changed = $resvalue['changed'];
         $field_primary_category_value = $resvalue['field_primary_category_value'];
         $body_value = $resvalue['body_value'];
-        $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];      
+        $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value']; 
+        $last_pub_date = date("F d, Y H:i:s P", strtotime($field_itg_content_publish_date_value));
 
         $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
         $created_by = getNodeCreatedBy_UserName($uid);
@@ -341,7 +342,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $list[$nid]['title'] = "$title";
         $list[$nid]['url'] = "$url";
         $list[$nid]['word_count'] = "$wordcount";
-        $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
+        $list[$nid]['published_datetime'] = "$last_pub_date";
         $list[$nid]['section_name'] = "$prime_cat->name";
         $list[$nid]['created_datetime'] = "$created_datetime";
         $list[$nid]['video_embed'] = "$video_embed";
