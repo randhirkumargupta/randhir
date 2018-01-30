@@ -73,24 +73,29 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
               jQuery("#edit-field-story-expert-description").hide();              
             });', array('type' => 'inline', 'scope' => 'footer'));*/
 
-		$form['upload'] = array(
-			'#type' => 'plupload',
-			'#weight' => 21,
-			'#upload_validators' => array(
-				'file_validate_extensions' => array("png gif jpg jpeg"),
-			),
-			'#description' => t('88x66 smallest size of image.'),
-		);
-		$form['field_common_audio_file']['#states'] = array(
-			'visible' => array(
-				':input[name="field_common_audio[und][1]"]' => array('checked' => TRUE),
-			),
-		);
-		$form['field_credit_name']['#states'] = array(
-			'visible' => array(
-				':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
-			),
-		);
+    $form['upload'] = array(
+      '#type' => 'plupload',
+      '#weight' => 21,
+      '#upload_validators' => array(
+        'file_validate_extensions' => array("png gif jpg jpeg"),
+      ),
+      '#description' => t('88x66 smallest size of image. Max ' . variable_get('max_upload_image_limit', 6) . ' file upload at once.'),
+      '#plupload_settings' => array(
+        'unique_names' => TRUE,
+        'rename' => TRUE,
+        'max_file_count' => variable_get('max_upload_image_limit', 6),
+      ),
+    );
+    $form['field_common_audio_file']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_common_audio[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
+    $form['field_credit_name']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
 
 //		$form['field_story_comment_question']['#states'] = array(
 //			'visible' => array(
