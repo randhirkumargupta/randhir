@@ -245,9 +245,17 @@ function itg_survey_views_pre_render(&$view) {
 function itg_survey_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
   if ($form['#id'] == 'views-exposed-form-manage-survey-page' || $form['#id'] == 'views-exposed-form-manage-survey-page-1' || $form['#id'] == 'views-exposed-form-manage-survey-page-2') {
     // Call function autocomplete to show matching titles
-    $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
+    //$form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
   }
+  
+  if ($form['#id'] == 'views-exposed-form-manage-survey-page') {
+     $form['title']['#autocomplete_path'] = 'content-state-title-list/survey/published/autocomplete';
+   } else if ($form['#id'] == 'views-exposed-form-manage-survey-page-1') {
+     $form['title']['#autocomplete_path'] = 'content-state-title-list/survey/draft/autocomplete';
+   } else if ($form['#id'] == 'views-exposed-form-manage-survey-page-2') {
+     $form['title']['#autocomplete_path'] = 'content-state-title-list/survey/unpublished/autocomplete';
+   }
 }
 
 /**

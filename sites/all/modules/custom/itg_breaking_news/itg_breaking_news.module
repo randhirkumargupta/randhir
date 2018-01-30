@@ -448,6 +448,7 @@ function itg_breaking_news_node_presave($node) {
 
   if ($node->type == 'breaking_news') {
     $type = $node->field_type[LANGUAGE_NONE][0]['value'];
+    $node->status = 1;
     if ($type == 'Live Blog') {
       $node->field_display_on[LANGUAGE_NONE][0]['value'] = 'Section';
     }

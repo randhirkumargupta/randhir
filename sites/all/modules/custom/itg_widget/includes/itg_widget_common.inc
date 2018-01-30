@@ -1689,6 +1689,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
             foreach ($query->where[1]['conditions'] as $key => $condition) {
                 if ($condition['field'] == 'itg_widget_order.cat_id') {
                     $query->where[1]['conditions'][$key]['value'] = $term_id;
+                    $query->where[1]['conditions'][$key]['operator'] = '=';
                 }
             }
         }
@@ -2824,11 +2825,13 @@ function itg_widget_node_insert($node) {
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
             
-            if (function_exists('__itg_widget_helper_data_insert')) {
-              __itg_widget_helper_data_insert($node->nid, $node);
-            }
+             if ($node->status == 1 && !empty($node->op)) {
+              if (function_exists('__itg_widget_helper_data_insert')) {
+                __itg_widget_helper_data_insert($node->nid, $node);
+              }
+             }
             
-            if (isset($node->field_story_category['und'])) {
+            if (isset($node->field_story_category['und']) && ($node->status == 1 && !empty($node->op))) {
                 $primary_category = $node->field_primary_category['und'][0]['value'];
                 
                 foreach ($cat_id as $category) {
@@ -2896,9 +2899,9 @@ function itg_widget_node_insert($node) {
                 }
             }
         }
-        if ($node->status == 0 && !empty($node->op)) {
+        /*if ($node->status == 0 && !empty($node->op)) {
             itg_widget_handle_unpublished_node($node->nid);
-        }
+        }*/
     }
 }
 

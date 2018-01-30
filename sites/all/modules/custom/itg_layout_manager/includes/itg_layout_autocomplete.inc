@@ -17,7 +17,8 @@ function itg_category_autocomplete_list($string) {
   } else {
     $itg_query = db_select('taxonomy_term_data', 'itg');
     $itg_query->condition('vid', CATEGORY_MANAGMENT, '=');
-    $itg_query->condition('name', '%' . $string . '%', 'LIKE')
+    //$itg_query->condition('name', '%' . $string . '%', 'LIKE')
+    $itg_query->condition('name', $string . '%', 'LIKE')
               ->fields('itg', array('tid', 'name'));
 
     $result = $itg_query->execute()->fetchAll();
@@ -152,7 +153,8 @@ function custom_taxonomy_get_tree($string, $vid, $parent = 0, $max_depth = NULL,
       ->fields('t')
       ->fields('h', array('parent'))
       ->condition('t.vid', $vid)
-      ->condition('t.name', '%' . $string . '%', 'LIKE')
+      //->condition('t.name', '%' . $string . '%', 'LIKE')
+      ->condition('t.name', $string . '%', 'LIKE')
       ->orderBy('t.weight')
       ->orderBy('t.name')
       ->execute();

@@ -260,9 +260,9 @@ function itg_category_manager_taxonomy_view_page($term) {
       }
     }
   }
-  $voc = taxonomy_vocabulary_load($term->vid);
-  switch ($voc->machine_name) {
-    case 'category_management':
+  //$voc = taxonomy_vocabulary_load($term->vid);
+  switch ($term->vid) {
+    case CATEGORY_MANAGMENT:
       $maped_with = '';
       for ($i = 0; $i < count($term->field_cm_select_type[LANGUAGE_NONE]); $i++) {
         $maped_with .= ucwords($term->field_cm_select_type[LANGUAGE_NONE][$i]['value']) . ', ';
