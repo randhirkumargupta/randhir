@@ -306,7 +306,7 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
 
   //for Magazine Story
   if (!empty($entity_object->type) && $entity_object->type == 'story' && !empty($entity_object->field_story_select_magazine[LANGUAGE_NONE][0]['target_id'])) {
-    $section_link .= ' / ' . l('Magazine', 'magazine');
+    $section_link .= l('Magazine', 'magazine');
   }
 
   if (!empty($id)) {
@@ -314,12 +314,11 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
     $section_tids = array_reverse($section_tids);
     
     if($arg[0] == 'taxonomy' && $arg[1] == 'term' && is_numeric($arg[2]) && count($section_tids) == 1) {
-      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/'
-          .'&nbsp;<span itemprop="title">' . itg_seo_get_term_name_by_tid($arg[2]) . '</span></div>';
+      $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone"><span itemprop="title">' . itg_seo_get_term_name_by_tid($arg[2]) . '</span></div>';
     }
     else {
       foreach ($section_tids as $chunks) {
-        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">&nbsp;/&nbsp;'
+        $section_link .= '<div itemscope itemtype="' . $str_breadcrumb . '" class="lft pathone">'
             . l('<span itemprop="title">' . $chunks->name . '</span>', drupal_get_path_alias('taxonomy/term/' . $chunks->tid), array('html' => TRUE, 'attributes' => array('itemprop' => 'url'))) . '</div>';
       }
     }
@@ -327,45 +326,45 @@ function frontend_breadcrumb_display($id = NULL, $entity_object = NULL, $single_
   }
   if (!empty($entity_object->type) && $entity_object->type == 'story') {
     if (empty($isMobile)) {
-      $section_link .= ' / ' . $node_title;
+      $section_link .= $node_title;
     }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'videogallery') {
     if (empty($isMobile)) {
-      $section_link .= ' / Video / ' . $node_title;
+      $section_link .= 'Video' . $node_title;
     }
     else {
-      $section_link .= ' / Video';
+      $section_link .= 'Video';
     }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'photogallery') {
     if (empty($isMobile)) {
-      $section_link .= ' / Gallery / ' . $node_title;
+      $section_link .= 'Gallery' . $node_title;
     }
     else {
-      $section_link .= ' / Gallery';
+      $section_link .= 'Gallery';
     }
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'podcast') {
-    $section_link .= ' / ' . l("Podcast", "podcast") . ' / ' . $node_title;
+    $section_link .= l("Podcast", "podcast"). $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'poll') {
-    $section_link .= ' / Polls';
+    $section_link .= 'Polls';
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'blog') {
-    $section_link .= ' / ' . l('Blog', 'blog') . ' / ' . $node_title;
+    $section_link .= l('Blog', 'blog') . $node_title;
   }
   elseif (!empty($entity_object->type) && $entity_object->type == 'reporter') {
-    $section_link .= ' / ' . l("Anchors", "anchors-list") . ' / ' . $node_title;
+    $section_link .= l("Anchors", "anchors-list") . $node_title;
   }
   else if (!empty($entity_object->type) && $entity_object->type == 'breaking_news') {
-    $section_link .= ' / ' . $entity_object->field_type[LANGUAGE_NONE][0]['value'] . '/' . $node_title;
+    $section_link .= $entity_object->field_type[LANGUAGE_NONE][0]['value'] . $node_title;
   }
   elseif (!empty($entity_object->type)) {
-    $section_link .= ' / ' . $node_title;
+    $section_link .=  $node_title;
   }
   elseif (!empty($single_url)) {
-    $section_link .= ' / ' . t($single_url);
+    $section_link .= t($single_url);
   }
   return $section_link;
 }
