@@ -520,7 +520,7 @@ if ($theme != 'itgadmin') {
                     <!--Don't miss and Ad section starts here-->
                     <?php if (isset($widget_data['itg-block-10']['widget_name']) || $theme == 'itgadmin') { ?>  
                       <div class="row itg-h321-section">
-                          <div class="col-md-8 col-sm-12 col-xs-12 mt-50" data-tb-region="HomeDoNotMiss">
+                          <div class="col-md-8 col-sm-6 col-xs-12 mt-50" data-tb-region="HomeDoNotMiss">
                               <div class="widget-help-text">Template widgets ( <strong>Don't Miss</strong> )</div>
                               <div class="itg-widget">
                                   <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -554,7 +554,7 @@ if ($theme != 'itgadmin') {
                                   </div>               
                               </div>  
                           </div>
-                          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
+                          <div class="col-md-4 col-sm-6 col-xs-12 mt-50">
                               <div class="widget-help-text">Non Draggable ( <strong>Ad Widget</strong> )</div>
                               <div class="itg-widget">
                                   <div class="ad-widget">
