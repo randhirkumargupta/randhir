@@ -280,7 +280,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     if ($status != '') {
         $query->condition('n.status', $status);
     }
-    $query->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $total_cont++;
