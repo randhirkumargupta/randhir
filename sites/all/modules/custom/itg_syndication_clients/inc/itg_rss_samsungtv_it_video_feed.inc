@@ -22,7 +22,7 @@ function itg_rss_samsungtv_it_livenow_listing_feed() {
  * Function for generate samsung json feed
  */
 function itg_indiatoday_samsung_jsonfeed_syndication(){
-  //itg_generate_samsung_json_feed_newslist();
+  itg_generate_samsung_json_feed_newslist();
   itg_generate_samsung_json_feed_video_newslist();
 }
 
@@ -312,7 +312,7 @@ function itg_generate_samsung_json_feed_newslist(){
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('synopsis', array('field_story_kicker_text_value'));
   $query->fields('smi', array('field_story_large_image_fid'));
-  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
+  $days_ago = strtotime(date('Y-m-d', strtotime('-367 days')));
   $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'story', '=');
@@ -343,7 +343,7 @@ function itg_generate_samsung_json_feed_newslist(){
     );
   }
   $json_output = json_encode($json);
-  $json_path = 'public://rss-feeds/xml_data/samsung/at/stories/';
+  $json_path = 'public://rss-feeds/xml_data/samsung/it/videos/';
   $file_path = $json_path . 'newslist.json';
   $fp = fopen($file_path, "w");
   fwrite($fp, $json_output);
@@ -359,7 +359,7 @@ function itg_generate_samsung_json_feed_video_newslist(){
   );
   foreach($sections as $filename => $sections){
     if(is_array($sections)){
-      $section_name = get_term_name_by_tid($sections);
+      $section_name = get_term_name_by_tid($sections[0]);
       $sections_id = $sections[0];
     }else if ($sections == 1){
       $section_name = 'Featured';
@@ -376,8 +376,13 @@ function itg_generate_samsung_json_feed_video_newslist(){
     );
     itg_generate_samsung_json_video($filename, $sections, $section_name);
   }
-  $json_data = json_decode($json);
-  $xml_path = 'public://rss-feeds/xml_data/samsung/at/videos/';
+  $json['data']['category'][] = array(
+      'id' => 1,
+      'title' => 'News',
+      'url' => 'newslist.json'
+    );
+  $json_data = json_encode($json);
+  $xml_path = 'public://rss-feeds/xml_data/samsung/it/videos/';
   $file_path = $xml_path . 'categorylist.json';
   $fp = fopen($file_path, "w");
   fwrite($fp, $json_data);
@@ -393,7 +398,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
     $query->leftJoin('field_data_field_story_small_image', 'ssi', 'ssi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_large_image', 'smi', 'smi.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_source_type', 'sst', 'sst.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
+    $query->leftJoin('field_data_field_video_kicker', 'synopsis', 'synopsis.entity_id=n.nid');
     
     if(is_array($sections)){
       $query->join('taxonomy_index', 'ti', 'ti.nid=n.nid');
@@ -435,7 +440,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       $small_img = get_image_info_by_fid($value['field_story_small_image_fid']);
       $large_img = get_image_info_by_fid($value['field_story_large_image_fid']);
       $source_type = $value['field_story_source_type_value'];
-      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+      $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_video_kicker_value']));
       
       $video_data = get_itg_video_transcoding($nid);
       $byline = get_byline_name_by_nid($nid);
@@ -445,7 +450,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
         $duration = $video_data[0]->video_duration;
       }
       $highest_bit = get_highest_bitrate_video_by_nid($nid);
-      $bitrate_replace = '512.mp4';
+      /*$bitrate_replace = '512.mp4';
       if(!empty($highest_bit)){
         $temp = array();
         $flag = 0;
@@ -458,15 +463,14 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
         }
         $bitrate_replace = implode(',', $temp);
         $bitrate_replace = $bitrate_replace.'.mp4';
-      }
+      }*/
       
       $video_url = '';
-      if ($source_type = 'migrated') { //migrated video
+      if ($source_type == 'migrated') { //migrated video
         $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
         foreach ($videoids as $keys => $video_value) {
           $url = $video_value->field_migrated_video_url_value;
         }
-        var_dump($videoids);die;
         $data_video = itg_videogallery_get_video_bitrate_by_url($url, $nid);
         $bitrate_url = $data_video['bitrate_url'];
         $mp4_url = $data_video['file_url'];
@@ -483,10 +487,10 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
           }
         }
         $inter_video_details = itg_internal_video_bitrate_data($video_id);
-        $video_url = $inter_video_details['file_url'];
+        $video_url = $inter_video_details['bitrate_url'];
       }
       
-      $video_url = str_replace('512.mp4', $bitrate_replace, $video_url);
+      $video_url = str_replace(',156,', ',', $video_url);
       $jsondetail['data']['video'][] = array(
         'v_id' => $nid,
         'v_title' => $value['title'],
@@ -502,6 +506,11 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
       );
       
     }
-//    print json_encode($jsondetail);die;
+    $json_data1 = json_encode($jsondetail);
+    $xml_path1 = 'public://rss-feeds/xml_data/samsung/it/videos/';
+    $file_path1 = $xml_path1 . $filename;
+    $fp1 = fopen($file_path1, "w");
+    fwrite($fp1, $json_data1);
+    fclose($fp1);
   }
 }
