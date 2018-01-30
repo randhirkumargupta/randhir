@@ -87,15 +87,15 @@ function itg_photogallery_form_alter(&$form, &$form_state, $form_id) {
       ),
     );
     $form['field_common_audio_file']['#states'] = array(
-			'visible' => array(
-				':input[name="field_common_audio[und][1]"]' => array('checked' => TRUE),
-			),
-		);
-		$form['field_credit_name']['#states'] = array(
-			'visible' => array(
-				':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
-			),
-		);
+      'visible' => array(
+        ':input[name="field_common_audio[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
+    $form['field_credit_name']['#states'] = array(
+      'visible' => array(
+        ':input[name="field_credit_to_all[und][1]"]' => array('checked' => TRUE),
+      ),
+    );
 
 //		$form['field_story_comment_question']['#states'] = array(
 //			'visible' => array(
