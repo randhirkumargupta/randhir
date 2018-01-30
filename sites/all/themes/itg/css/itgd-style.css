@@ -659,6 +659,10 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area .bottom-area ul li h3{font:bold 20px/22px 'Roboto', sans-serif; color:#404040; display:inline-block; width:100%; text-transform:uppercase; text-align:center; margin:50px 0 5px 0;}
 .app-area .bottom-area ul li p{font:14px/22px 'Roboto', sans-serif; color:#6d6d6d; display:block; margin:0}
 .share_bar{ display:none;}
+#block-itg-menu-manager-magazine-node-third-level-menu{display:none;}
+.page-magazine #block-itg-menu-manager-magazine-node-third-level-menu, .node-type-story.section-magazine #block-itg-menu-manager-magazine-node-third-level-menu{display:block;}
+#block-itg-menu-manager-magazine-node-third-level-menu img {padding-top: 10px;max-height: 50px;}
+#block-itg-menu-manager-magazine-node-third-level-menu .menu-wrapper{height:60px;background: #595959}
 @media only screen and (max-width: 768px) {
 .app-area-wrapper{width:100%;}
 .app-area .top-area .right-area{width:71%;}
