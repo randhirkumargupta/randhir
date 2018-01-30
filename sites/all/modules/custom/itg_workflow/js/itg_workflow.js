@@ -89,6 +89,7 @@ jQuery(document).ready(function() {
              jQuery("#edit-submit").click();
              return true;
         }
+        setTimeout(function(){jQuery(this).parent().children().css( 'pointer-events', 'auto' );},50);
         return false; 
        } else {
             if(title != '') {
@@ -115,6 +116,7 @@ jQuery(document).ready(function() {
                 if (msg == true) {
                     return true;
                 }
+                setTimeout(function(){jQuery(this).parent().children().css( 'pointer-events', 'auto' );},50);
                 return false; 
             }
             return true;  
