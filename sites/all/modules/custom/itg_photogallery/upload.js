@@ -11,14 +11,13 @@
             uploader = $('.plupload-element', context).pluploadQueue();
             
             this.context = context;
-            
+            var maxCountError = false;
             if (!uploader) {
                 return false;
             }
             
             uploader.bind('FilesAdded', function (up, files) {
-                var i = 0,
-                maxCountError = false;
+                var i = 0;
                 plupload.each(files, function (file) {                        
                     if (uploader.settings.max_file_count && i >= uploader.settings.max_file_count) {
                         maxCountError = true;
@@ -29,6 +28,7 @@
                     i++;
                 });
                 if (maxCountError) {
+                    maxCountError = false;
                     alert("You can upload only "+uploader.settings.max_file_count+" images at once");
                 }
                 
