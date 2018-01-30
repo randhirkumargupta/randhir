@@ -283,7 +283,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     if ($type != "na") {
         $query->condition('n.type', $type);
     }
-    if ($synd == 'Yes') { 
+    if ($synd == 'Yes') {
         $query->leftJoin('field_data_field_story_syndication', 'syn', 'syn.entity_id=n.nid');
         $query->fields('syn', array('field_story_syndication_value'));
         $query->condition('syn.field_story_syndication_value', $synd);
@@ -291,7 +291,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     if ($status != '') {
         $query->condition('n.status', $status);
     }
-    $query->orderBy('npd.field_itg_content_publish_date_value', 'ASC')->range($range_min, $range_max);
+    $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $total_cont++;
@@ -301,7 +301,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $type = $resvalue['type'];
         $uid = $resvalue['uid'];
         $changed = $resvalue['changed'];
-        $field_primary_category_value = $resvalue['field_primary_category_value'];
+        $field_primary_category_value = date("Y-m-d H:i:s",$resvalue['field_primary_category_value']);
         $body_value = $resvalue['body_value'];
         $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
 
