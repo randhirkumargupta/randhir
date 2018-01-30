@@ -510,5 +510,10 @@ function itg_widgets_custom_variables() {
     '#title' => t('Story/Photo/Video Unpublish content email alert'),
     '#default_value' => variable_get('unpublish_alert_emails'),
   );
+  $form['max_upload_image_limit'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Max image count for upload'),
+    '#default_value' => variable_get('max_upload_image_limit', 6),
+  );
   return system_settings_form($form);
 }
