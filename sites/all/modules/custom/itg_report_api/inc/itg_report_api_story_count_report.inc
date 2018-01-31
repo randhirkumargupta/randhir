@@ -293,18 +293,19 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     }
     $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     //$result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $query = "SELECT n.nid AS nid, n.title AS title, from_unixtime(n.created) AS created, n.type AS type, n.uid AS uid, from_unixtime(n.changed) AS changed, fpc.field_primary_category_value AS field_primary_category_value, dbody.body_value AS body_value, npd.field_itg_content_publish_date_value AS field_itg_content_publish_date_value FROM node n LEFT OUTER JOIN field_data_field_primary_category fpc ON fpc.entity_id=n.nid LEFT OUTER JOIN field_data_body dbody ON dbody.entity_id=n.nid LEFT OUTER JOIN field_data_field_itg_content_publish_date npd ON npd.entity_id=n.nid WHERE";
+    $query = "SELECT n.nid AS nid, n.title AS title, from_unixtime(n.created) AS created, n.type AS type, n.uid AS uid, from_unixtime(n.changed) AS changed, fpc.field_primary_category_value AS field_primary_category_value, dbody.body_value AS body_value, npd.field_itg_content_publish_date_value AS field_itg_content_publish_date_value FROM node n LEFT OUTER JOIN field_data_field_primary_category fpc ON fpc.entity_id=n.nid LEFT OUTER JOIN field_data_body dbody ON dbody.entity_id=n.nid LEFT OUTER JOIN field_data_field_itg_content_publish_date npd ON npd.entity_id=n.nid WHERE 1=1";
     if ($type != "na") {
-        $query .= " n.type = '".$type."'";
+        $query .= " AND n.type = '".$type."'";
     }
     if ($status != '') {
-        $query .= " n.status = '".$status."'";
+        $query .= " AND n.status = '".$status."'";
     }
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 12:01:00";
         $end_date_timestamp = $end_date . " 23:59:00";
         $query .= " AND npd.field_itg_content_publish_date_value BETWEEN '".$start_date_timestamp."' AND '".$end_date_timestamp."'";
     }
+    $query .= " GROUP BY n.nid ORDER BY npd.field_itg_content_publish_date_value DESC LIMIT ".$range_max." OFFSET ".$range_min."";
     $result =db_query($query);
     //foreach ($result as $reskey => $resvalue) {
         while($resvalue = db_fetch_array($result)){
