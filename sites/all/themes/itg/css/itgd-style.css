@@ -666,6 +666,8 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 /*technology home page title red and breadcrumb */
 .tech-layout-page span.widget-title {line-height: 22px;padding: 0 7px;text-transform: uppercase; color: #fff;font-family: "Roboto-Regular"; z-index: 1;white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 100%; background: #a00606;font-size: 14px;}
 .tech-layout-page span.widget-title a{color:#fff;}
+.tech-layout-page .auto-block-2 .special-top-news  span.widget-title,.tech-layout-page .auto-block-3 .tech_most_read-block_5  span.widget-title,.tech-layout-page .itg-h321-section .tech_reviews-block_5 span.widget-title{position: static!important;}
+.tech-layout-page .itg-h385-section .section_wise_order-tech-tips span.widget-title,.tech-layout-page .itg-h396-section .section_wise_order-talking-point span.widget-title{position: static!important; margin-bottom:0px;}
 #block-itg-layout-manager-front-end-breadcrumb .container a:hover{text-decoration: none;}
 #block-itg-layout-manager-front-end-breadcrumb .container a:after {content: "/";padding: 0px 3px;}
 
@@ -686,6 +688,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
 .itg-h321-section .dont-miss ul li{width:100%}
 .itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:none}
+.mobile-body-ad > div{margin:0px auto;}
 }
 @media only screen and (max-width: 767px) {
 .app-area-wrapper{width:94%; padding:0 3%}
