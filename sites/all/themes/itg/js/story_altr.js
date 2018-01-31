@@ -40,21 +40,21 @@ jQuery(document).ready(function() {
     // Place ad in Mobile body.
     if (jQuery(window).width() < 768) {
         var ad_div = '';
-		if(jQuery(".mobile-body-ad").length > 0) {
-			ad_div += "<script>";
-			ad_div += "googletag.cmd.push(function() {"
-			ad_div += "googletag.defineSlot('/1007232/Indiatoday_Story_300x250_Inarticle', [300, 250], 'div-gpt-ad-1515155454292-0').addService(googletag.pubads());";
-			ad_div += "googletag.pubads().enableSingleRequest();"
-			ad_div += "googletag.pubads().collapseEmptyDivs();"
-			ad_div += "googletag.enableServices();"
-			ad_div += "})"
-			ad_div += "</script>"
-			ad_div += "<div id='div-gpt-ad-1515155454292-0' style='height:250px; width:300px;'></div>";
-			ad_div += "<script>";
-			ad_div += "googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515155454292-0'); });";
-			ad_div += "</script>";
-			ad_div += "</div>";
-			jQuery( ".mobile-body-ad" ).append(ad_div);
-		}
-	}
+        if (jQuery(".mobile-body-ad").length > 0) {
+            ad_div += "<script>";
+            ad_div += "googletag.cmd.push(function() {"
+            ad_div += "googletag.defineSlot('/1007232/Indiatoday_Story_300x250_Inarticle', [300, 250], 'div-gpt-ad-1515155454292-0').addService(googletag.pubads());";
+            ad_div += "googletag.pubads().enableSingleRequest();"
+            ad_div += "googletag.pubads().collapseEmptyDivs();"
+            ad_div += "googletag.enableServices();"
+            ad_div += "})"
+            ad_div += "</script>"
+            ad_div += "<div id='div-gpt-ad-1515155454292-0' style='height:250px; width:300px;'></div>";
+            ad_div += "<script>";
+            ad_div += "googletag.cmd.push(function() { googletag.display('div-gpt-ad-1515155454292-0'); });";
+            ad_div += "</script>";
+            ad_div += "</div>";
+            jQuery(".mobile-body-ad").append(ad_div);
+        }
+    }
 });
