@@ -78,7 +78,7 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-    //jQuery(document).ready(function(){
+    jQuery(document).ready(function(){
         jQuery('.marquee-child').liMarquee({        
             direction: 'left', 
             scrolldelay: 0, 
@@ -86,5 +86,5 @@
             circular: true, 
             hoverstop: true
         });
-    //});
+    });
 </script>
