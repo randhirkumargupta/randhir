@@ -56,9 +56,6 @@ class itg_breaking_news_views_handler_field_dynamic_band_link extends views_hand
     $url = '';
     if (!empty($values->field_field_breaking_redirection_url[0]['raw']['value'])) {
       $url = $values->field_field_breaking_redirection_url[0]['raw']['value'];
-      if (!preg_match('/^http\/\//', $url)) {
-        $url = '//' . $url;
-      }
     }
     else {
       $url = 'node/' . $values->nid;
