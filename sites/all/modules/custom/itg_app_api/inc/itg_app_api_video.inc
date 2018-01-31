@@ -1026,8 +1026,11 @@ function topstoriesList($source) {
     $home_list_count = 0;
     $widget_name = "top_stories_widget";
     $range_max = 15;
+    $result_fs = featuresWidgetData();
     if ($source == 'home') {
-        $range_max = 7;
+        $result_fs_cont_ar = $result_fs;
+        $result_fs_cont = count($result_fs_cont_ar);
+        $range_max = 5- $result_fs_cont;
     }
     $range_min = 0;
     $order_by = 'ASC';
@@ -1072,7 +1075,7 @@ function topstoriesList($source) {
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $result_fs = featuresWidgetData();
+    
     $result = array_merge($result_fs, $result_ts);
     //$result = array_merge($result_ts, $result_fs);
 
