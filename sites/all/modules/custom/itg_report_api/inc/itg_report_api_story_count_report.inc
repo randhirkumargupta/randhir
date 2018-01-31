@@ -264,13 +264,10 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     //end
-    if ($start_date != "na") {
+    if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = strtotime($start_date . " 01:01:00");
-        $query->condition('n.created', $start_date_timestamp, ">=");
-    }
-    if ($end_date != "na") {
         $end_date_timestamp = strtotime($end_date . " 23:59:00");
-        $query->condition('n.created', $end_date_timestamp, "<=");
+        $query->condition('npd.field_itg_content_publish_date_value', array(gmdate('Y-m-d H:i:s', $start_date_timestamp),gmdate('Y-m-d H:i:s', $end_date_timestamp)), 'BETWEEN');
     }
     if ($type != "na") {
         $query->condition('n.type', $type);
@@ -283,7 +280,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     if ($status != '') {
         $query->condition('n.status', $status);
     }
-    $query->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $total_cont++;
@@ -296,7 +293,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $field_primary_category_value = $resvalue['field_primary_category_value'];
         $body_value = $resvalue['body_value'];
         $field_itg_content_publish_date_value = $resvalue['field_itg_content_publish_date_value'];
-
+        $last_pub_date = date("Y-m-d H:i:s", strtotime($field_itg_content_publish_date_value));
         $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $nid);
         $created_by = getNodeCreatedBy_UserName($uid);
         $wordcount = str_word_count($body_value);
@@ -333,7 +330,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $list[$nid]['title'] = "$title";
         $list[$nid]['url'] = "$url";
         $list[$nid]['word_count'] = "$wordcount";
-        $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
+        $list[$nid]['published_datetime'] = "$last_pub_date";
         $list[$nid]['section_name'] = "$prime_cat->name";
         $list[$nid]['created_datetime'] = "$created_datetime";
         $list[$nid]['video_embed'] = "$video_embed";

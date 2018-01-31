@@ -126,7 +126,7 @@ $( document ).ready( function() {
           }
 
           if ( item.pcat.length > 0 ) {
-            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat )
+            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
             $( '#edit-itg-primary-category' ).val( item.pcat );
           }
           itg_category_multiple_data_sync(); // Sync data 
@@ -218,7 +218,7 @@ $( document ).ready( function() {
 
 
           if ( item.pcat.length > 0 ) {
-            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat )
+            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
             $( '#edit-itg-primary-category' ).val( item.pcat );
           }
 
@@ -297,7 +297,7 @@ $( document ).ready( function() {
           }
 
           if ( item.pcat.length > 0 ) {
-            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat )
+            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
             $( '#edit-itg-primary-category' ).val( item.pcat );
           }
 
@@ -370,7 +370,7 @@ $( document ).ready( function() {
 
 
           if ( item.pcat.length > 0 ) {
-            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat )
+            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
             $( '#edit-itg-primary-category' ).val( item.pcat );
           }
           itg_category_multiple_data_sync(); // Sync data 
@@ -422,7 +422,7 @@ $( document ).ready( function() {
           $( '#edit-itg-primary-category' ).empty();
           $( '#edit-itg-primary-category' ).append( item.primary );
           if ( item.pcat.length > 0 ) {
-            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat )
+            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
             $( '#edit-itg-primary-category' ).val( item.pcat );
           }
           itg_category_multiple_data_sync(); // Sync data 

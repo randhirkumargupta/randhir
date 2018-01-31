@@ -89,6 +89,18 @@ jQuery(document).ready(function() {
              jQuery("#edit-submit").click();
              return true;
         }
+        setTimeout($.proxy(function () {
+            jQuery(this).parent().children().css('pointer-events', 'auto');
+            jQuery(this).parent().children().css('background-color', '');
+            jQuery(this).parent().children().css('border-color', '');
+            jQuery(this).parent().children().last().css('background-color', '#ee4d4d');
+            jQuery(this).parent().children().last().css('border-color', '#ee4d4d');
+            jQuery('.top-actions').children().css('pointer-events', 'auto');
+            jQuery('.top-actions').children().css('background-color', '');
+            jQuery('.top-actions').children().css('border-color', '');
+            jQuery('.top-actions').children().last().css('background-color', '#ee4d4d');
+            jQuery('.top-actions').children().last().css('border-color', '#ee4d4d');
+        }, this), 500);
         return false; 
        } else {
             if(title != '') {
@@ -115,6 +127,18 @@ jQuery(document).ready(function() {
                 if (msg == true) {
                     return true;
                 }
+                setTimeout($.proxy(function () {
+                    jQuery(this).parent().children().css('pointer-events', 'auto');
+                    jQuery(this).parent().children().css('background-color', '');
+                    jQuery(this).parent().children().css('border-color', '');
+                    jQuery(this).parent().children().last().css('background-color', '#ee4d4d');
+                    jQuery(this).parent().children().last().css('border-color', '#ee4d4d');
+                    jQuery('.top-actions').children().css('pointer-events', 'auto');
+                    jQuery('.top-actions').children().css('background-color', '');
+                    jQuery('.top-actions').children().css('border-color', '');
+                    jQuery('.top-actions').children().last().css('background-color', '#ee4d4d');
+                    jQuery('.top-actions').children().last().css('border-color', '#ee4d4d');
+                }, this), 500);
                 return false; 
             }
             return true;  
