@@ -258,7 +258,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->Join('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fpc', array('field_primary_category_value'));
     $query->fields('dbody', array('body_value'));
@@ -344,7 +344,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $list[$nid]['title'] = "$title";
         $list[$nid]['url'] = "$url";
         $list[$nid]['word_count'] = "$wordcount";
-        $list[$nid]['published_datetime'] = "$last_pub_date";
+        $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
         $list[$nid]['section_name'] = "$prime_cat->name";
         $list[$nid]['created_datetime'] = "$created_datetime";
         $list[$nid]['video_embed'] = "$video_embed";
