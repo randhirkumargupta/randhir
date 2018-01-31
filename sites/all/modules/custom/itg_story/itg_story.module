@@ -1182,20 +1182,20 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       $body_text = $node->body[LANGUAGE_NONE][0]['value'];
       $body_text = str_replace('http://indiatoday.intoday.in/embed/', 'https://www.indiatoday.in/embed/', $body_text);
       // Body Mobile Ad
-      $paragraphAfter = variable_get('place_mobile_ad_after_paragraph', 2); 
+      $paragraphAfter = variable_get('place_mobile_ad_after_paragraph', 2);
       $mobile_ad_code = variable_get('mobile_body_ad_code');
-      if(isset($mobile_ad_code) && isset($paragraphAfter)){
-		  $body_text = explode("</p>", $body_text);	  
-		  $new_body_text = '';
-		  for ($i = 0; $i < count($body_text); $i++) {
-			if ($i == $paragraphAfter) {
-				$new_body_text .= '<div class="desktop-hide mobile-body-ad">';
-				$new_body_text .= $mobile_ad_code;
-				$new_body_text .= '</div>';
-			}
-			$new_body_text .= $body_text[$i] . "</p>";
-		  }
-	  }	  
+      if (isset($mobile_ad_code) && isset($paragraphAfter)) {
+        $body_text = explode("</p>", $body_text);
+        $new_body_text = '';
+        for ($i = 0; $i < count($body_text); $i++) {
+          if ($i == $paragraphAfter) {
+            $new_body_text .= '<div class="desktop-hide mobile-body-ad">';
+            $new_body_text .= $mobile_ad_code;
+            $new_body_text .= '</div>';
+          }
+          $new_body_text .= $body_text[$i] . "</p>";
+        }
+      }
       $node->body[LANGUAGE_NONE][0]['value'] = $new_body_text;
     }
   }
