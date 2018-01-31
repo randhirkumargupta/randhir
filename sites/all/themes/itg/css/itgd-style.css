@@ -670,6 +670,13 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .tech-layout-page .itg-h385-section .section_wise_order-tech-tips span.widget-title,.tech-layout-page .itg-h396-section .section_wise_order-talking-point span.widget-title{position: static!important; margin-bottom:0px;}
 #block-itg-layout-manager-front-end-breadcrumb .container a:hover{text-decoration: none;}
 #block-itg-layout-manager-front-end-breadcrumb .container a:after {content: "/";padding: 0px 3px;}
+#itg-scorecard-container{background: #000;padding: 10px 0;}
+#itg-scorecard-container .scorecard-stripcontent ul li{list-style: none; display: inline-block; border-right: 1px solid #4f4f4f; padding: 0 5px;}
+#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(3){border-right:0px}
+#itg-scorecard-container .scorecard-stripcontent{ padding:0px;position: relative; height: 20px;}
+#itg-scorecard-container .scorecard-stripcontent ul{position: absolute;top: 50%;transform: translateY(-50%);-webkit-transform: translateY(-50%);}
+#itg-scorecard-container .scorecard-stripcontent ul li a{color: #fff; font-family: "Roboto-Regular";font-weight:normal; font-size: 14px; }
+#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 438px;display: inline-block;line-height: 14px;}
 
 @media only screen and (max-width: 768px) {
 .app-area-wrapper{width:100%;}
