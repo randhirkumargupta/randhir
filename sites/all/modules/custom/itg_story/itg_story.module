@@ -1195,8 +1195,11 @@ function itg_story_node_view($node, $view_mode, $langcode) {
           }
           $new_body_text .= $body_text[$i] . "</p>";
         }
+        $node->body[LANGUAGE_NONE][0]['value'] = $new_body_text;
       }
-      $node->body[LANGUAGE_NONE][0]['value'] = $new_body_text;
+      else {
+        $node->body[LANGUAGE_NONE][0]['value'] = $body_text;
+      }
     }
   }
 }
