@@ -808,7 +808,7 @@ function itg_widget_theme() {
             'template' => 'templates/movie-section-manual-widget-data',
         ),
         'secore_card_iframe' => array(
-            'template' => 'templates/secore-card-iframe',
+            'template' => 'templates/score-card-iframe',
         ),
       
     );

@@ -5,19 +5,19 @@
  *
  *
  */
- 
+
 /**
  * This function is used to manage score card form
  * @return string
  */
 function itg_manage_score_card() {
- $query = db_select('itg_score_card', 's')
+  $query = db_select('itg_score_card', 's')
       ->fields('s', array('id'))
       ->execute();
   $num = $query->rowCount();
- if($num >= 1){
-	 drupal_goto('manage-score-list');
- }
+  if ($num >= 1) {
+    drupal_goto('manage-score-list');
+  }
   $arg = arg();
   if (isset($arg) && $arg[1] == 'edit') {
     drupal_set_title(t('Edit Score Card'));
@@ -43,7 +43,7 @@ function itg_manage_score_card() {
     '#default_value' => ($results->score_status) ? $results->score_status : 1,
     '#required' => TRUE
   );
-  
+
   $form['score_story'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Story/Live Blog'),
@@ -57,15 +57,15 @@ function itg_manage_score_card() {
     '#default_value' => ($results->score_photo) ? $results->score_photo : '',
     '#required' => TRUE
   );
-  
+
   $form['score_video'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Video'),
     '#default_value' => ($results->score_video) ? $results->score_video : '',
     '#required' => TRUE
   );
-  
-   $form['score_description'] = array(
+
+  $form['score_description'] = array(
     '#type' => 'textarea',
     '#title' => t('Score card iframe'),
     '#default_value' => ($results->score_description) ? $results->score_description : '',
@@ -110,12 +110,12 @@ function itg_manage_score_card_submit($form, &$form_state) {
   if (isset($score_action) && $score_action > 0) {
     db_update('itg_score_card')
         ->fields(array(
-			'score_section' => 0,
-			'score_description' => $score_description,
-			'score_story' => $score_story,
-			'score_photo' => $score_photo,
-			'score_video' => $score_video,
-			'score_status' => $score_status,
+          'score_section' => 0,
+          'score_description' => $score_description,
+          'score_story' => $score_story,
+          'score_photo' => $score_photo,
+          'score_video' => $score_video,
+          'score_status' => $score_status,
         ))
         ->condition('id', $score_action, '=')
         ->execute();
@@ -142,20 +142,20 @@ function itg_manage_score_card_submit($form, &$form_state) {
  * @return type
  */
 function score_card_tid_by_content_type() {
-  $array = array('story', 'photo', 'video');	
+  $array = array('story', 'photo', 'video');
   $query = db_select('field_data_field_cm_select_type', 's');
-      $query->fields('s',array(entity_id));
-      $query->fields('t',array(name));
-      $query->leftJoin('taxonomy_term_data', 't', 's.entity_id=t.tid');
-      $query->condition('s.field_cm_select_type_value', $array, 'IN');
-      $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-      $op = array("" => "-- Section --");
-      if(is_array($result) && count($result) > 0) {
-        foreach ($result as $key => $value) {
-          $op[$value['entity_id']] = $value['name'];
-        }
-      }
-    return $op;
+  $query->fields('s', array(entity_id));
+  $query->fields('t', array(name));
+  $query->leftJoin('taxonomy_term_data', 't', 's.entity_id=t.tid');
+  $query->condition('s.field_cm_select_type_value', $array, 'IN');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $op = array("" => "-- Section --");
+  if (is_array($result) && count($result) > 0) {
+    foreach ($result as $key => $value) {
+      $op[$value['entity_id']] = $value['name'];
+    }
+  }
+  return $op;
 }
 
 /**
@@ -167,7 +167,7 @@ function itg_manage_score_list() {
   global $base_url;
   $build = array();
   $query = db_select('itg_score_card', 's')->extend('PagerDefault');
-  $query->fields('s', array('id','score_story', 'score_photo','score_video','score_status'))
+  $query->fields('s', array('id', 'score_story', 'score_photo', 'score_video', 'score_status'))
       ->orderBy('id', 'DESC')
       ->limit(10);
 
@@ -187,7 +187,7 @@ function itg_manage_score_list() {
 
   if (!empty($results)) {
     foreach ($results as $row) {
-	  $score_id = $row->id;	
+      $score_id = $row->id;
       $score_story = !empty($row->score_story) ? $row->score_story : '0';
       $score_photo = !empty($row->score_photo) ? $row->score_photo : '0';
       $score_video = !empty($row->score_video) ? $row->score_video : '0';
