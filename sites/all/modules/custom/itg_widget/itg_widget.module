@@ -869,7 +869,7 @@ function itg_widget_block_view($delta = '') {
           $data = $query->execute()->fetchObject();
           if (is_object($data) && count($data) > 0) {
              if (drupal_is_front_page() && $data->score_status == 1) {
-               $block['content'] = theme("secore_card_iframe", array("data" => $data));
+               $block['content'] = theme("score_card_iframe", array("data" => $data));
              } 	   	                 
           }				
           break;
