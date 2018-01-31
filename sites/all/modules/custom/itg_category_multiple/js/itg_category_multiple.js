@@ -127,8 +127,9 @@ $( document ).ready( function() {
           // Comment code from Shashank by fix of Primary category:
           //if ( item.pcat.length > 0 ) {
             //$( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
+            //$( '#edit-itg-primary-category' ).val( item.pcat );
             $( '#edit-field-primary-category-und-0-value' ).attr( 'value', '' );
-            $( '#edit-itg-primary-category' ).val( item.pcat );
+            $( '#edit-itg-primary-category' ).val( '' );
           //}
           itg_category_multiple_data_sync(); // Sync data 
 
@@ -218,8 +219,9 @@ $( document ).ready( function() {
           // Comment code from Shashank by fix of Primary category:
           //if ( item.pcat.length > 0 ) {
             //$( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
+            //$( '#edit-itg-primary-category' ).val( item.pcat );
             $( '#edit-field-primary-category-und-0-value' ).attr( 'value', '' );
-            $( '#edit-itg-primary-category' ).val( item.pcat );
+            $( '#edit-itg-primary-category' ).val( '' );
           //}
 
           itg_category_multiple_data_sync(); // Sync data 
@@ -299,8 +301,9 @@ $( document ).ready( function() {
           // Comment code from Shashank by fix of Primary category:
           //if ( item.pcat.length > 0 ) {
             //$( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
+            //$( '#edit-itg-primary-category' ).val( item.pcat );
             $( '#edit-field-primary-category-und-0-value' ).attr( 'value', '' );
-            $( '#edit-itg-primary-category' ).val( item.pcat );
+            $( '#edit-itg-primary-category' ).val( '' );
           //}
 
           itg_category_multiple_data_sync(); // Sync data 
@@ -373,8 +376,9 @@ $( document ).ready( function() {
           // Comment code from Shashank by fix of Primary category:
           //if ( item.pcat.length > 0 ) {
             //$( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat );
+            //$( '#edit-itg-primary-category' ).val( item.pcat );
             $( '#edit-field-primary-category-und-0-value' ).attr( 'value', '' );
-            $( '#edit-itg-primary-category' ).val( item.pcat );
+            $( '#edit-itg-primary-category' ).val( '' );
           //}
           itg_category_multiple_data_sync(); // Sync data 
         }
@@ -424,10 +428,12 @@ $( document ).ready( function() {
           var item = JSON.parse( html );
           $( '#edit-itg-primary-category' ).empty();
           $( '#edit-itg-primary-category' ).append( item.primary );
-          if ( item.pcat.length > 0 ) {
-            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat )
-            $( '#edit-itg-primary-category' ).val( item.pcat );
-          }
+          //if ( item.pcat.length > 0 ) {
+            //$( '#edit-field-primary-category-und-0-value' ).attr( 'value', item.pcat )
+            //$( '#edit-itg-primary-category' ).val( item.pcat );
+            $( '#edit-field-primary-category-und-0-value' ).attr( 'value', '' );
+            $( '#edit-itg-primary-category' ).val( '' );
+          //}
           itg_category_multiple_data_sync(); // Sync data 
 
         }
