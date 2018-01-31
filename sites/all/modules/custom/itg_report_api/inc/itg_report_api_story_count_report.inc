@@ -258,7 +258,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->Join('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
+    $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fpc', array('field_primary_category_value'));
     $query->fields('dbody', array('body_value'));
@@ -293,7 +293,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     if ($status != '') {
         $query->condition('n.status', $status);
     }
-    $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    $query->orderBy(strtotime(npd.field_itg_content_publish_date_value), 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $total_cont++;
