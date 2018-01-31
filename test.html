@@ -1,0 +1,42 @@
+<script type="text/javascript">
+	var request = new XMLHttpRequest();
+	//request.open("GET", "http://localhost/test/demo.xml", false);
+	request.open("GET", "http://amt10.activemediatech.in/budget/fetchData.jsp", true);
+	request.send();
+	var xml = request.responseXML;
+	/*var responses = xml.getElementsByTagName("response");
+	var total_val = 0;
+	for(var i = 0; i < responses.length; i++) {
+		var response = responses[i];
+		var totals = response.getElementsByTagName("total");
+		var total_val = totals[0].childNodes[0].nodeValue;
+	}*/
+	// yes option
+	var options_1 = xml.getElementsByTagName("option-1");
+	var subkeyword_yes = 0;
+	var subkeyword_yes_count = 0;
+	for(var i = 0; i < options_1.length; i++) {
+		var option_1 = options_1[i];
+		var subkeyword = option_1.getElementsByTagName("subkeyword");
+		var subkeyword_yes = subkeyword[0].childNodes[0].nodeValue; 
+		var subkeywordyescount = option_1.getElementsByTagName("count");
+		var subkeyword_yes_count = subkeywordyescount[0].childNodes[0].nodeValue;
+	}
+	//alert(subkeyword_yes+':'+subkeyword_yes_count);
+	// No option
+	var options_2 = xml.getElementsByTagName("option-2");
+	var subkeyword_no = 0;
+	var subkeyword_no_count = 0;
+	for(var i = 0; i < options_2.length; i++) {
+		var option_2 = options_2[i];
+		var subkeywordno = option_2.getElementsByTagName("subkeyword");
+		var subkeyword_no = subkeywordno[0].childNodes[0].nodeValue; 
+		var subkeywordnocount = option_2.getElementsByTagName("count");
+		var subkeyword_no_count = subkeywordnocount[0].childNodes[0].nodeValue;
+	}
+
+	var total_no = parseInt(subkeyword_yes_count) + parseInt(subkeyword_no_count);
+	var yes_percent = parseInt(subkeyword_yes_count / total_no * 100);
+	var no_percent = parseInt(subkeyword_no_count / total_no * 100);
+	alert(total_no+':'+yes_percent+':'+no_percent);
+</script>
