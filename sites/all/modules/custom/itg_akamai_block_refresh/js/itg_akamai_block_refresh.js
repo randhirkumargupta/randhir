@@ -82,7 +82,7 @@
           var contents = $(data).html();
           // if this is a panel, preserve panel title.
           var oldh2 = $(element + ' h2.pane-title');
-          $(element).html(contents);
+          $(element).html(data);
           if (panels) {
             if (oldh2.length) {
               $(element + ' h2:first-child').replaceWith(oldh2);

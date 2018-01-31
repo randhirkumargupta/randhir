@@ -49,7 +49,7 @@
       <div class="title"><?php print t('Breaking'); ?></div>
       <?php } ?>
       <div class="new-detail">  
-          <div class="marquee-container" onLoad="breaking_band_marquee();">
+          <div class="marquee-container">
             <div class="marquee-child">
                 <?php print $field->content; ?>        
             </div>
@@ -78,7 +78,7 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-    /*jQuery(document).ready(function(){
+    jQuery(document).ready(function(){
         jQuery('.marquee-child').liMarquee({        
             direction: 'left', 
             scrolldelay: 0, 
@@ -86,5 +86,5 @@
             circular: true, 
             hoverstop: true
         });
-    });*/
+    });
 </script>
