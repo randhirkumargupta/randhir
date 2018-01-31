@@ -255,6 +255,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     } else {
         $range_min = 0;
     }
+    $range_min = 0; $range_max = 100;
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -292,6 +293,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $query->condition('n.status', $status);
     }
     $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    print strtr((string) $query, $query->arguments());die();
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $reskey => $resvalue) {
         $total_cont++;
