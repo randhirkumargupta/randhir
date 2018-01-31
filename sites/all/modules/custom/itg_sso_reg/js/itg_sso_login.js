@@ -5,7 +5,7 @@
            //get Cookie for sso login
            
             var ssoLoginCheck = getCookie('itg_forced_login');
-            console.log(ssoLoginCheck);
+            //console.log(ssoLoginCheck);
             //end code get Cookie for sso login
             
             var o = Drupal.settings.itg_sso_login.settings.base_url,
