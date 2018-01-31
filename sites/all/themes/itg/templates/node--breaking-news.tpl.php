@@ -204,7 +204,7 @@ $coverage_end_final_date = '';
             </ul>            
             <?php if($node->field_type['und']['0']['value'] == 'Live Blog'):?>
               <span class="refresh-icon">Check Latest Updates <i onclick="location.reload();" style="cursor: pointer;" class="fa fa-refresh" aria-hidden="true"></i></span>
-			<?php endif; ?>
+            <?php endif; ?>
         </div>
 
         <?php
