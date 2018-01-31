@@ -649,7 +649,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
 function itg_story_after_build($form, &$form_state) {
 
   global $user, $base_url;
-echo '<pre>';print_r($form);die;
+
   // apply button for editor and siteadmin role
   if (array_key_exists(EDITOR, $user->roles) || array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(SECTION_EDITOR_ANCHOR, $user->roles) || array_key_exists(COPY_EDITOR, $user->roles) || array_key_exists(INTERN, $user->roles)) {
     if (!empty($form['nid']['#value']) && arg(2) == 'edit' && $form['#node']->type == 'story' && $form['#node']->status == '1') {
@@ -1181,24 +1181,7 @@ function itg_story_node_view($node, $view_mode, $langcode) {
     if ($view_mode == 'full' && ($theme == FRONT_THEME_NAME)) {
       $body_text = $node->body[LANGUAGE_NONE][0]['value'];
       $body_text = str_replace('http://indiatoday.intoday.in/embed/', 'https://www.indiatoday.in/embed/', $body_text);
-      // Body Mobile Ad
-      $paragraphAfter = variable_get('place_mobile_ad_after_paragraph', 2);
-      //$mobile_ad_code = variable_get('mobile_body_ad_code');
-      if (isset($paragraphAfter)) {
-        $body_text = explode("</p>", $body_text);
-        $new_body_text = '';
-        for ($i = 0; $i < count($body_text); $i++) {
-          if ($i == $paragraphAfter) {
-            $new_body_text .= '<div class="mobile-body-ad">';
-            $new_body_text .= '</div>';
-          }
-          $new_body_text .= $body_text[$i] . "</p>";
-        }
-        $node->body[LANGUAGE_NONE][0]['value'] = $new_body_text;
-      }
-      else {
-        $node->body[LANGUAGE_NONE][0]['value'] = $body_text;
-      }
+      $node->body[LANGUAGE_NONE][0]['value'] = $body_text;
     }
   }
 }
