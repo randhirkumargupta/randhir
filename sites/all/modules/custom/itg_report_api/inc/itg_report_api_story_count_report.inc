@@ -264,24 +264,22 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     //end
-    if ($start_date != "na") {
-        //$start_date_timestamp = strtotime($start_date . " 01:01:00");
-        $start_date_timestamp = $start_date . " 12:01:00";
+    /*if ($start_date != "na") {
+        $start_date_timestamp = strtotime($start_date . " 01:01:00");
         //$query->condition('n.created', $start_date_timestamp, ">=");
         $query->condition('npd.field_itg_content_publish_date_value', $start_date_timestamp, ">=");
     }
     if ($end_date != "na") {
-        //$end_date_timestamp = strtotime($end_date . " 23:59:00");
-        $end_date_timestamp = $end_date . " 23:59:00";
+        $end_date_timestamp = strtotime($end_date . " 23:59:00");
         //$query->condition('n.created', $end_date_timestamp, "<=");
         $query->condition('npd.field_itg_content_publish_date_value', $end_date_timestamp, "<=");
-    }
+    }*/
     
-//    if($start_date != "na" && $end_date != "na"){
-//        $start_date_timestamp = strtotime($start_date . " 01:01:00");
-//        $end_date_timestamp = strtotime($end_date . " 23:59:00");
-//        $query->condition('npd.field_itg_content_publish_date_value', array(gmdate('Y-m-d H:i:s', $start_date_timestamp),gmdate('Y-m-d H:i:s', $end_date_timestamp)), 'BETWEEN');
-//    }
+    if($start_date != "na" && $end_date != "na"){
+        $start_date_timestamp = strtotime($start_date . " 01:01:00");
+        $end_date_timestamp = strtotime($end_date . " 23:59:00");
+        $query->condition('npd.field_itg_content_publish_date_value', array(gmdate('Y-m-d H:i:s', $start_date_timestamp),gmdate('Y-m-d H:i:s', $end_date_timestamp)), 'BETWEEN');
+    }
     if ($type != "na") {
         $query->condition('n.type', $type);
     }
@@ -293,9 +291,23 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     if ($status != '') {
         $query->condition('n.status', $status);
     }
-    $query->orderBy(strtotime(npd.field_itg_content_publish_date_value), 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($result as $reskey => $resvalue) {
+    $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
+    //$result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $query = "SELECT n.nid AS nid, n.title AS title, from_unixtime(n.created) AS created, n.type AS type, n.uid AS uid, from_unixtime(n.changed) AS changed, fpc.field_primary_category_value AS field_primary_category_value, dbody.body_value AS body_value, npd.field_itg_content_publish_date_value AS field_itg_content_publish_date_value FROM node n LEFT OUTER JOIN field_data_field_primary_category fpc ON fpc.entity_id=n.nid LEFT OUTER JOIN field_data_body dbody ON dbody.entity_id=n.nid LEFT OUTER JOIN field_data_field_itg_content_publish_date npd ON npd.entity_id=n.nid WHERE";
+    if ($type != "na") {
+        $query .= " n.type = '".$type."'";
+    }
+    if ($status != '') {
+        $query .= " n.status = '".$status."'";
+    }
+    if($start_date != "na" && $end_date != "na"){
+        $start_date_timestamp = $start_date . " 12:01:00";
+        $end_date_timestamp = $end_date . " 23:59:00";
+        $query .= " AND npd.field_itg_content_publish_date_value BETWEEN '".$start_date_timestamp."' AND '".$end_date_timestamp."'";
+    }
+    $result =db_query($query);
+    //foreach ($result as $reskey => $resvalue) {
+        while($resvalue = db_fetch_array($result)){
         $total_cont++;
         $nid = $resvalue['nid'];
         $title = $resvalue['title'];
@@ -344,7 +356,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $list[$nid]['title'] = "$title";
         $list[$nid]['url'] = "$url";
         $list[$nid]['word_count'] = "$wordcount";
-        $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
+        $list[$nid]['published_datetime'] = "$last_pub_date";
         $list[$nid]['section_name'] = "$prime_cat->name";
         $list[$nid]['created_datetime'] = "$created_datetime";
         $list[$nid]['video_embed'] = "$video_embed";
