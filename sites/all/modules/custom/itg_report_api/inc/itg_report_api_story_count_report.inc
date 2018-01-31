@@ -307,6 +307,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     }
     $query .= " GROUP BY n.nid ORDER BY npd.field_itg_content_publish_date_value DESC LIMIT ".$range_max." OFFSET ".$range_min."";
     //$result =db_query($query);
+    echo $query; die();
     $result = db_query($query)->fetchAssoc();
     foreach ($result as $reskey => $resvalue) {
         //while($resvalue = db_fetch_array($result)){
