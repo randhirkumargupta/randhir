@@ -53,7 +53,14 @@ class itg_breaking_news_views_handler_field_dynamic_band_link extends views_hand
    */
   function render($values) {
     global $base_url;
-    $title = l(trim($values->field_field_breaking_tile[0]['raw']['value']), 'node/' . $values->nid, array('html' => TRUE));   
+    $url = '';
+    if(!empty($values->field_field_breaking_redirection_url[0]['raw']['value'])){
+	  $url = $values->field_field_breaking_redirection_url[0]['raw']['value'];
+	}
+	else{
+	 $url = 'node/' . $values->nid;
+	}
+    $title = l(trim($values->field_field_breaking_tile[0]['raw']['value']), $url, array('html' => TRUE));   
     return $title;
   }
 
