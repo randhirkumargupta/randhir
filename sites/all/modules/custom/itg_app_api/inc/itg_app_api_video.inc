@@ -1020,8 +1020,11 @@ function topstoriesList($source) {
     $home_list_count = 0;
     $widget_name = "top_stories_widget";
     $range_max = 15;
+    $result_fs = featuresWidgetData();
     if ($source == 'home') {
-        $range_max = 7;
+        $result_fs_cont_ar = $result_fs;
+        $result_fs_cont = count($result_fs_cont_ar);
+        $range_max = 5- $result_fs_cont;
     }
     $range_min = 0;
     $order_by = 'ASC';
