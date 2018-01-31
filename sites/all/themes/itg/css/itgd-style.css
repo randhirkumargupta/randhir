@@ -678,7 +678,22 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 #itg-scorecard-container .scorecard-stripcontent ul{position: absolute;top: 7px;}
 #itg-scorecard-container .scorecard-stripcontent ul li a{color: #fff; font-family: "Roboto-Regular";font-weight:normal; font-size: 14px; }
 #itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 340px;display: inline-block;line-height: 14px;}
-
+/*poll Home section */
+.home_page_poll_widget_block .poll-data .active-poll-title h2 {color: #fff;font-size: 16px; line-height: 22px;margin: 0;padding: 5px 10px;}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id {padding: 10px 0 0;max-height: inherit;overflow-y: auto;margin-top: 0;}
+.home_page_poll_widget_block .poll-data .active-poll-title {background-color: #000;float: left;width: 100%;height: auto;overflow: hidden;}
+.home_page_poll_widget_block .poll-data form label {display: inline-block;vertical-align: top;padding: 0;text-transform: uppercase;font-family:"Roboto-Regular"; }
+/* pr news */
+.section-pr-newswire #w4315_landing{overflow: hidden;overflow-x: hidden;}
+.section-pr-newswire #w4315_landing ul{ margin-top:30px;}
+.section-pr-newswire #w4315_landing ul li a{line-height: 24px;  margin-bottom:5px;color: #323232;text-decoration: none; }
+.section-pr-newswire #w4315_landing ul li a:hover{color: #1a3c8d;}
+.section-pr-newswire #w4315_landing ul li.w4315_release{    padding: 10px 5px 10px 110px;}
+.section-pr-newswire  #w4315_landing div.w4315_footer{padding-top:15px; text-align: center ;}
+.section-pr-newswire  #w4315_landing div.w4315_footer .w4315_pagination *{font-size:16px;text-align: center;}
+.section-pr-newswire #w4315_landing ul li .w4315_datetime{   font-size: 13px;color: #696969; margin-bottom: 10px;}
+.section-pr-newswire #w4315_landing  .addthis_toolbox{text-align: right;float: right;}
+.live-block .breaking-section .breaking-date{font-size:1.3rem;}
 @media only screen and (max-width: 768px) {
 .app-area-wrapper{width:100%;}
 .app-area .top-area .right-area{width:71%;}
