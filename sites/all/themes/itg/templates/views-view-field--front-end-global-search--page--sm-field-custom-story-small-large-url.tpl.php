@@ -44,3 +44,24 @@ if(!empty($related_data->sm_field_magazine_small_url[0]) && $related_data->bundl
 <?php
 } 
 ?>
+
+<?php 
+
+ 
+  //$related_data = itg_get_related_story_content($row->entity_id);
+  $position = $related_data->sm_field_emoji_position[0];
+  $emoji_image = $related_data->sm_field_custom_emoji[0];
+  preg_match_all('/<img[^>]*>/s', $emoji_image, $images);
+  $smilies = implode("", $images[0]);
+  $label = html_entity_decode($related_data->label, ENT_QUOTES);
+  if (function_exists('itg_apache_solr_get_site_url')) {
+    $hash_url = itg_apache_solr_get_site_url();
+  }
+  $front_url = $hash_url[$related_data->hash] . '/' . $related_data->path_alias;
+
+if(!empty($position) && $position == 'left') {
+  ?>
+<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><span class="smily-im"><?php print $smilies; ?></span> <?php print l(mb_strimwidth($label, 0, 500, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?></h2></div>
+<?php } else { ?>
+<div class="n-title search-detail"><h2 title="<?php print strip_tags($label); ?>"><?php print l(mb_strimwidth($label, 0, 500, ".."), $front_url, array("attributes" => array("target" => "_blank", "title" => $label))); ?> <span class="smily-im"><?php print $smilies; ?></span></h2></div>
+<?php } ?>
