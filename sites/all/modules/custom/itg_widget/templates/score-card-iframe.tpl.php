@@ -1,4 +1,9 @@
-<?php global $base_url;?>
+<?php global $base_url;
+$node_title = '';
+if(isset($data->score_story)){
+  $node_title = itg_common_get_node_title($data->score_story);
+}
+?>
 <div id="itg-scorecard-container">
     <div class="container">
         <div class="clearfix">
