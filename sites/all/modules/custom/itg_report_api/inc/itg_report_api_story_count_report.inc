@@ -306,10 +306,10 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $query .= " AND npd.field_itg_content_publish_date_value BETWEEN '".$start_date_timestamp."' AND '".$end_date_timestamp."'";
     }
     $query .= " GROUP BY n.nid ORDER BY npd.field_itg_content_publish_date_value DESC LIMIT ".$range_max." OFFSET ".$range_min."";
-    $result =db_query($query);
+    $result =mysql_query($query);
     //echo $query; die();
     //foreach ($result as $reskey => $resvalue) {
-        while($resvalue = $result->fetchAssoc()){
+        while ($resvalue = mysql_fetch_assoc($result)) {
         $total_cont++;
         $nid = $resvalue['nid'];
         $title = $resvalue['title'];
