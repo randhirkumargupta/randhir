@@ -60,7 +60,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <link rel="stylesheet" type="text/css" href="/elections/assembly/2015/bihar/css/it-common-15.css"/>
 <link rel="stylesheet" type="text/css" href="/elections/assembly/2015/bihar/css/it-inner-15.css"/>
 <link href="/elections/assembly/2015/bihar/css/it-responsive-15.css" type="text/css" rel="stylesheet"/>
-<link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' />
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' />
 
 
 <link href="css/assembly-election.css" type="text/css" rel="stylesheet" />
@@ -86,7 +86,7 @@ else if(document.getElementsByTagName("body").length>0)document.getElementsByTag
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 
-		<script type="text/javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery-1.11.3.min.js"></script>
 
 <div id="toppanel" class="clearfix">
   <div class="container">
@@ -179,8 +179,8 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1496915828862-0');
   <!-- Main Navigation -->
   <div id="main-navigation" class="container-fluid">
     <style>
-li.livetv{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/images/live_iconnav2.png) no-repeat 5px 5px;}
-li.livetv:hover,li.livetv.navactive{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/images/LIVE_White2.png) no-repeat 5px 5px;}
+li.livetv{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/images/live_iconnav2.png) no-repeat 5px 5px;}
+li.livetv:hover,li.livetv.navactive{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/css/images/LIVE_White2.png) no-repeat 5px 5px;}
 </style>
 <script>
 var siteurl="http://indiatoday.intoday.in/";
@@ -281,8 +281,8 @@ var siteurl="http://indiatoday.intoday.in/";
               <li class="livetv ">
                 <div style="display:none;" class="close"></div>
             <a href="http://indiatoday.intoday.in/livetv.jsp" title="Live Tv">
-            <!--<img class="navliveicon redicon" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/live_iconnav.png" alt="India Today Live TV">
-            <img class="navliveicon whiteicon" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/LIVE_White.png" alt="India Today Live TV">-->TV</a>
+            <!--<img class="navliveicon redicon" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/live_iconnav.png" alt="India Today Live TV">
+            <img class="navliveicon whiteicon" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/LIVE_White.png" alt="India Today Live TV">-->TV</a>
 
               </li>
               <li class="magazine   ">
@@ -423,23 +423,23 @@ var siteurl="http://indiatoday.intoday.in/";
 
 </style>
 <!--<div class="container_bestcol">
-<iframe class="iframe_bestcol" frameborder="0" scrolling="no" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/best-college-sponsor/sponsor.html"></iframe>
+<iframe class="iframe_bestcol" frameborder="0" scrolling="no" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/best-college-sponsor/sponsor.html"></iframe>
 </div>-->
 
 <!--<div class="clearfix"></div>
- <div id="conclaceamt"><iframe src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>
+ <div id="conclaceamt"><iframe src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/conclave/2017/sponsor/strip01.html" scrolling="no" frameborder="0" allowfullscreen="" width="100%" height="100%"></iframe></div>
  <div class="clearfix"></div>-->
 
   </div>
 </div>
 
-<script type="text/javascript" language="javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/js/maps2.js" type="text/javascript"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/js/highcharts.js"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/js/tooltip.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/js/maps2.js" type="text/javascript"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/js/highcharts.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/elections/js/tooltip.js" type="text/javascript"></script>
 
 <div style="width:1004px; margin:auto; margin-top:8px;position: relative;" class="bihar-sum">
-    <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/biharelection-mhead.jpg" alt="BIHAR ASSEMBLY ELECTION" title="BIHAR ASSEMBLY ELECTION"  width="1000">
+    <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/biharelection-mhead.jpg" alt="BIHAR ASSEMBLY ELECTION" title="BIHAR ASSEMBLY ELECTION"  width="1000">
     <h1>BIHAR ASSEMBLY ELECTION</h1>
 </div>
 
@@ -465,7 +465,7 @@ $(this).attr('stroke-width', '2');
 });
 
 
-var domain = "http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/";
+var domain = "https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/";
 var fpath = "elections/bihar-2015/";
 
 function  getStateMapDetails(sName,ncID)
@@ -641,7 +641,7 @@ $.ajax({type: "GET",url: feedURL,dataType: "jsonp", cache: "true",crossDomain: t
     $("#cons"+consID).attr('onclick',"getJSONFeedDetails('"+consID+"')");
 
 	var tr;
-  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:10px;top: 8px;'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
+  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:10px;top: 8px;'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
 	var itemsArray = data.loksabha.items;
 	  for(var i = 0;i<itemsArray.length;i++)
 	  {
@@ -674,7 +674,7 @@ $.ajax({type: "GET",url: feedURL,dataType: "jsonp", cache: "true",crossDomain: t
 	{
 
 	var tr;
-  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:10px;top: 8px;'><img src='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_bihar_2015/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
+  tr = "<tr><td colspan = '4' style='position:relative'><div class='p_head'>"+data.loksabha.cName+"</div><div style='position: absolute;right:10px;top: 8px;'><img src='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_bihar_2015/live-poll/close.gif' style = 'cursor:pointer;' onclick = 'tabclose();'/></div></td></tr>";
 	var itemsArray = data.loksabha.items;
 	  for(var i = 0;i<itemsArray.length;i++)
 	  {
@@ -827,7 +827,7 @@ $(document).ready(function() {
 #tabs1 ul li:last-child, #tabs2 ul li:last-child{border-bottom:0;}
 #tabs1 ul li a img, #tabs2 ul li a img{float:left; margin-right:5px;}
 #tabs1 ul li a strong, #tabs2 ul li a strong{display:block; font-weight:normal;}
-.ytbbot{bottom:11px; width: 25px; height: 15px; display: block; position: absolute; z-index: 111; background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -243px -655px; left: 5px;
+.ytbbot{bottom:11px; width: 25px; height: 15px; display: block; position: absolute; z-index: 111; background: url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -243px -655px; left: 5px;
 }
 @media only screen and (max-width: 800px) {
 .homeleft{width:98%;}
@@ -861,20 +861,20 @@ $(document).ready(function() {
           <div class="clear"></div>
           <div id="tabs1" data-tb-region="top-news-tab">
             <ul>
-              <li><a href="http://indiatoday.intoday.in/story/bihar-election-itg-cicero-poll-predicts-a-tight-fight/1/493982.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sardesai_88_100815085926.jpg" alt="" /><strong>Bihar Elections: ITG-Cicero poll predicts a tight fight</strong></a></li>
-              <li><a href="http://indiatoday.intoday.in/story/live-india-today-cicero-poll-on-bihar-elections/1/493845.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_88-3_100815072606.jpg" alt="" /><strong>India Today-Cicero poll on Bihar: Nitish still the popular leader</strong></a></li>
-                <li><a href="http://indiatoday.intoday.in/story/10-big-takeaways-from-india-today-cicero-bihar-election-survey/1/470955.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2015October/3_110515121334.jpg" alt="" /><strong>Bihar polls: 10 big India Today-Cicero survey takeaways</strong></a></li>
-                <li><a href="http://indiatoday.intoday.in/story/nda-slightly-ahead-of-grand-alliance-in-bihar-nitish-still-popular-cm-choice-india-today-cicero-pre-poll-survey/1/470885.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modi-nitish_88_091115083442.jpg" alt="" /><strong>NDA slightly ahead of Grand Alliance in Bihar, Nitish still popular CM choice: India Today Cicero pre-poll survey</strong></a></li>
-       <li><a href="http://indiatoday.intoday.in/story/bjp-can-win-bihar-projects-india-today-cicero-pre-poll-survey/1/470735.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pm-modi_88_091015100752.jpg" alt="" /><strong>BJP can win Bihar, projects India Today-Cicero pre-poll survey</strong></a></li>
+              <li><a href="http://indiatoday.intoday.in/story/bihar-election-itg-cicero-poll-predicts-a-tight-fight/1/493982.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sardesai_88_100815085926.jpg" alt="" /><strong>Bihar Elections: ITG-Cicero poll predicts a tight fight</strong></a></li>
+              <li><a href="http://indiatoday.intoday.in/story/live-india-today-cicero-poll-on-bihar-elections/1/493845.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/collage_88-3_100815072606.jpg" alt="" /><strong>India Today-Cicero poll on Bihar: Nitish still the popular leader</strong></a></li>
+                <li><a href="http://indiatoday.intoday.in/story/10-big-takeaways-from-india-today-cicero-bihar-election-survey/1/470955.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/2015October/3_110515121334.jpg" alt="" /><strong>Bihar polls: 10 big India Today-Cicero survey takeaways</strong></a></li>
+                <li><a href="http://indiatoday.intoday.in/story/nda-slightly-ahead-of-grand-alliance-in-bihar-nitish-still-popular-cm-choice-india-today-cicero-pre-poll-survey/1/470885.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modi-nitish_88_091115083442.jpg" alt="" /><strong>NDA slightly ahead of Grand Alliance in Bihar, Nitish still popular CM choice: India Today Cicero pre-poll survey</strong></a></li>
+       <li><a href="http://indiatoday.intoday.in/story/bjp-can-win-bihar-projects-india-today-cicero-pre-poll-survey/1/470735.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/pm-modi_88_091015100752.jpg" alt="" /><strong>BJP can win Bihar, projects India Today-Cicero pre-poll survey</strong></a></li>
             </ul>
           </div>
           <div id="tabs2" data-tb-region="most-read-tab" style="display: none;">
             <ul>
-              <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-poll-why-bihar-election-is-important/1/494182.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/elections-video_88_100915121330.jpg" alt="" /><strong>India Today-Cicero poll: Why Bihar election is so important</strong></a><span class="ytbbot"></span></li>
-               <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-poll-where-the-parties-stand-now/1/494155.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/survey-video_88_100815112307.jpg" alt="" /><strong>India Today-Cicero poll: Where the parties stand now</strong></a><span class="ytbbot"></span></li>
-                 <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-poll-projects-nitish-kumar-victory-in-bihar/1/494100.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bihar-video_88_100815101755.jpg" alt="" /><strong>India Today-Cicero poll projects Nitish's victory in Bihar</strong></a><span class="ytbbot"></span></li>
-                <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-pre-poll-survey-nitish-kumar-still-cm-choice-in-bihar-polls/1/470896.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/nitish-video_88_091115091659.jpg" alt="" /><strong>India Today Cicero pre-poll survey: Nitish still CM choice in Bihar polls</strong></a><span class="ytbbot"></span></li>
-               <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-pre-poll-survey-report-card-of-nitish-kumar/1/470811.html" target="_blank"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/nitish_88_091015081525_091015110736.jpg" alt="" /><strong>India Today Cicero pre-poll survey: Report card of Nitish Kumar</strong></a><span class="ytbbot"></span></li>
+              <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-poll-why-bihar-election-is-important/1/494182.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/elections-video_88_100915121330.jpg" alt="" /><strong>India Today-Cicero poll: Why Bihar election is so important</strong></a><span class="ytbbot"></span></li>
+               <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-poll-where-the-parties-stand-now/1/494155.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/survey-video_88_100815112307.jpg" alt="" /><strong>India Today-Cicero poll: Where the parties stand now</strong></a><span class="ytbbot"></span></li>
+                 <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-poll-projects-nitish-kumar-victory-in-bihar/1/494100.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bihar-video_88_100815101755.jpg" alt="" /><strong>India Today-Cicero poll projects Nitish's victory in Bihar</strong></a><span class="ytbbot"></span></li>
+                <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-pre-poll-survey-nitish-kumar-still-cm-choice-in-bihar-polls/1/470896.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/nitish-video_88_091115091659.jpg" alt="" /><strong>India Today Cicero pre-poll survey: Nitish still CM choice in Bihar polls</strong></a><span class="ytbbot"></span></li>
+               <li><a href="http://indiatoday.intoday.in/video/india-today-cicero-pre-poll-survey-report-card-of-nitish-kumar/1/470811.html" target="_blank"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/nitish_88_091015081525_091015110736.jpg" alt="" /><strong>India Today Cicero pre-poll survey: Report card of Nitish Kumar</strong></a><span class="ytbbot"></span></li>
             </ul>
             <div class="clear"></div>
           </div>
@@ -935,7 +935,7 @@ $(document).ready(function() {
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/if-bjp-loses-in-bihar-crackers-will-be-burnt-in-pakistan-amit-shah/1/511360.html" title="If BJP loses in Bihar, crackers will be burnt in Pak: Amit Shah">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/amitshah88_102915073313_103015092952.jpg" title="" alt="" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/amitshah88_102915073313_103015092952.jpg" title="" alt="" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -947,7 +947,7 @@ If BJP loses in Bihar, crackers will be burnt in Pak: Amit Shah
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/nitish-babus-computer-has-lalu-virus-pm-modi/1/507445.html" title="Nitish babu's computer has Lalu virus: PM Modi">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modi-video_88_102615045001.jpg" title="PM Narendra Modi" alt="PM Narendra Modi" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modi-video_88_102615045001.jpg" title="PM Narendra Modi" alt="PM Narendra Modi" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -959,7 +959,7 @@ Nitish babu's computer has Lalu virus: PM Modi
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/watch-how-lalu-prasad-dismisses-giriraj-singh/1/498397.html" title="Watch how Lalu Prasad dismisses Giriraj Singh">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/lalu-exclusive-_88_101415040724.jpg" title="" alt="" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/lalu-exclusive-_88_101415040724.jpg" title="" alt="" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -971,7 +971,7 @@ Watch how Lalu Prasad dismisses Giriraj Singh
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/will-ban-cow-slaughter-if-bjp-wins-bihar-polls-sushil-modi/1/491249.html" title="Not only cow meat, Lalu can eat anything for power: Sushil Modi">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sushil_100915011002.jpg" title="" alt="" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sushil_100915011002.jpg" title="" alt="" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -984,7 +984,7 @@ Not only cow meat, Lalu can eat anything for power: Sushil Modi
   </div>
   <div class="rt-colum">
 
-      <h2><a href="http://indiatoday.intoday.in/galleries" title="PHOTOS" data-tb-region="homeRightfeaturedPHOTOS" >PHOTOS</a></h2><div class="photo-slider"><div class="photobelt"><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/bigg-boss-11-popular-yet-footage-hungry-contestants-hina-vikas-and-sapna-get-nominated-lifetv/1/20203.html" title="Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_101017112425.jpg" alt="Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated" title="Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/bigg-boss-11-popular-yet-footage-hungry-contestants-hina-vikas-and-sapna-get-nominated-lifetv/1/20203.html" title="Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated"><span class="photo-icon spritbg"></span>Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/bigg-boss-priyank-controversial-celebs-expelled-from-the-house-vulgar-abusive-priyanka-jagga-om-swami-lifetv/1/20200.html" title="Bigg Boss: 8 controversial contestants who were expelled from the house"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_100917032836.jpg" alt="Bigg Boss: 8 controversial contestants who were expelled from the house" title="Bigg Boss: 8 controversial contestants who were expelled from the house" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/bigg-boss-priyank-controversial-celebs-expelled-from-the-house-vulgar-abusive-priyanka-jagga-om-swami-lifetv/1/20200.html" title="Bigg Boss: 8 controversial contestants who were expelled from the house"><span class="photo-icon spritbg"></span>Bigg Boss: 8 controversial contestants who were expelled from the house</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/kareena-kapoor-taimur-ali-khan-sridevi-malaika-arora/1/20198.html" title="Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_100817053655.jpg" alt="Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport" title="Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/kareena-kapoor-taimur-ali-khan-sridevi-malaika-arora/1/20198.html" title="Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport"><span class="photo-icon spritbg"></span>Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/gauri-khan-47-birthday-shah-rukh-khan-elegant-style-dress-saree-sophisticated-classy-fashion/1/20197.html" title="5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_300x350_100817121001.jpg" alt="5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare" title="5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/gauri-khan-47-birthday-shah-rukh-khan-elegant-style-dress-saree-sophisticated-classy-fashion/1/20197.html" title="5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare"><span class="photo-icon spritbg"></span>5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/arjun-kapoor-ileana-dcruz-kriti-sanon-evelyn-sharma-sophie-choudry-shruti-haasan-glamour-hot-stunning-sizzling-fashion-lifest/1/20195.html" title="Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_100617043955.jpg" alt="Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening" title="Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/arjun-kapoor-ileana-dcruz-kriti-sanon-evelyn-sharma-sophie-choudry-shruti-haasan-glamour-hot-stunning-sizzling-fashion-lifest/1/20195.html" title="Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening"><span class="photo-icon spritbg"></span>Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/naga-chaitanya-and-samantha-ruth-prabhus-fairytale-wedding/1/20196.html" title="In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding "><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_100617105213.jpg" alt="In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding " title="In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding " width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/naga-chaitanya-and-samantha-ruth-prabhus-fairytale-wedding/1/20196.html" title="In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding "><span class="photo-icon spritbg"></span>In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding </a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/sridevi-shilpa-shetty-raveena-tandon-anil-kapoor-karva-chauth-party/1/20199.html" title="Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300x350_100917015916.jpg" alt="Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood" title="Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/sridevi-shilpa-shetty-raveena-tandon-anil-kapoor-karva-chauth-party/1/20199.html" title="Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood"><span class="photo-icon spritbg"></span>Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/priyanka-chopra-actress-rome-italy-vacation-travel-lifetr/1/20201.html" title="Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_100917065516.jpg" alt="Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city" title="Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/priyanka-chopra-actress-rome-italy-vacation-travel-lifetr/1/20201.html" title="Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city"><span class="photo-icon spritbg"></span>Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city</a></div></div></div><a class="spritbg" id="photoprev" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotonext', 'click','ITRightPhotonext', 1, {'nonInteraction': 1});return true;" style="display: block;">Prev</a><a class="spritbg" id="photonext" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotoprev', 'click','ITRightPhotoprev', 1, {'nonInteraction': 1});return true;">Next</a></div>
+      <h2><a href="http://indiatoday.intoday.in/galleries" title="PHOTOS" data-tb-region="homeRightfeaturedPHOTOS" >PHOTOS</a></h2><div class="photo-slider"><div class="photobelt"><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/bigg-boss-11-popular-yet-footage-hungry-contestants-hina-vikas-and-sapna-get-nominated-lifetv/1/20203.html" title="Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_101017112425.jpg" alt="Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated" title="Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/bigg-boss-11-popular-yet-footage-hungry-contestants-hina-vikas-and-sapna-get-nominated-lifetv/1/20203.html" title="Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated"><span class="photo-icon spritbg"></span>Bigg Boss 11: Quarrelsome threesome Hina Khan, Vikas Gupta, Sapna Chaudhary among the nominated</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/bigg-boss-priyank-controversial-celebs-expelled-from-the-house-vulgar-abusive-priyanka-jagga-om-swami-lifetv/1/20200.html" title="Bigg Boss: 8 controversial contestants who were expelled from the house"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_100917032836.jpg" alt="Bigg Boss: 8 controversial contestants who were expelled from the house" title="Bigg Boss: 8 controversial contestants who were expelled from the house" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/bigg-boss-priyank-controversial-celebs-expelled-from-the-house-vulgar-abusive-priyanka-jagga-om-swami-lifetv/1/20200.html" title="Bigg Boss: 8 controversial contestants who were expelled from the house"><span class="photo-icon spritbg"></span>Bigg Boss: 8 controversial contestants who were expelled from the house</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/kareena-kapoor-taimur-ali-khan-sridevi-malaika-arora/1/20198.html" title="Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_100817053655.jpg" alt="Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport" title="Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/kareena-kapoor-taimur-ali-khan-sridevi-malaika-arora/1/20198.html" title="Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport"><span class="photo-icon spritbg"></span>Celeb spotting: Kareena-Taimur and Sridevi make heads turn at the airport</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/gauri-khan-47-birthday-shah-rukh-khan-elegant-style-dress-saree-sophisticated-classy-fashion/1/20197.html" title="5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/collage_300x350_100817121001.jpg" alt="5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare" title="5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/gauri-khan-47-birthday-shah-rukh-khan-elegant-style-dress-saree-sophisticated-classy-fashion/1/20197.html" title="5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare"><span class="photo-icon spritbg"></span>5 times birthday girl Gauri Khan's elegant sense of style made us stop and stare</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/arjun-kapoor-ileana-dcruz-kriti-sanon-evelyn-sharma-sophie-choudry-shruti-haasan-glamour-hot-stunning-sizzling-fashion-lifest/1/20195.html" title="Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300_100617043955.jpg" alt="Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening" title="Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/arjun-kapoor-ileana-dcruz-kriti-sanon-evelyn-sharma-sophie-choudry-shruti-haasan-glamour-hot-stunning-sizzling-fashion-lifest/1/20195.html" title="Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening"><span class="photo-icon spritbg"></span>Arjun Kapoor to Ileana D'Cruz:  The stars who graced this glamorous event last evening</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/naga-chaitanya-and-samantha-ruth-prabhus-fairytale-wedding/1/20196.html" title="In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding "><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_100617105213.jpg" alt="In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding " title="In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding " width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/naga-chaitanya-and-samantha-ruth-prabhus-fairytale-wedding/1/20196.html" title="In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding "><span class="photo-icon spritbg"></span>In pics: Naga Chaitanya and Samantha Ruth Prabhu's fairytale wedding </a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/sridevi-shilpa-shetty-raveena-tandon-anil-kapoor-karva-chauth-party/1/20199.html" title="Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb_300x350_100917015916.jpg" alt="Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood" title="Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/sridevi-shilpa-shetty-raveena-tandon-anil-kapoor-karva-chauth-party/1/20199.html" title="Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood"><span class="photo-icon spritbg"></span>Inside Anil Kapoor's Karva Chauth party: Shilpa Shetty and Sridevi are in a celebratory mood</a></div></div><div class="photo-list" data-tb-region-item><a href="http://indiatoday.intoday.in/gallery/priyanka-chopra-actress-rome-italy-vacation-travel-lifetr/1/20201.html" title="Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/Photo_gallery/thumb-300_100917065516.jpg" alt="Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city" title="Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city" width="305" height="356"></a><div class="captionWicon"> <a href="http://indiatoday.intoday.in/gallery/priyanka-chopra-actress-rome-italy-vacation-travel-lifetr/1/20201.html" title="Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city"><span class="photo-icon spritbg"></span>Priyanka Chopra's vacation pictures from Rome will make you want to book a trip to the city</a></div></div></div><a class="spritbg" id="photoprev" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotonext', 'click','ITRightPhotonext', 1, {'nonInteraction': 1});return true;" style="display: block;">Prev</a><a class="spritbg" id="photonext" href="javascript:void(0);" onclick="ga('send', 'event', 'ITRightPhotoprev', 'click','ITRightPhotoprev', 1, {'nonInteraction': 1});return true;">Next</a></div>
 
 
   </div>
@@ -999,7 +999,7 @@ Not only cow meat, Lalu can eat anything for power: Sushil Modi
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/jaish-e-muhammad-khalid-killed-in-encounter-kashmir/1/1064746.html" title="Kashmir: JeM commander Khalid killed in Ladoora">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/khalid-background-story-88_100917030629_100917053212.jpg" title="Khalid" alt="Khalid" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/khalid-background-story-88_100917030629_100917053212.jpg" title="Khalid" alt="Khalid" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1011,7 +1011,7 @@ Kashmir: JeM commander Khalid killed in Ladoora
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/diwali-supreme-court-upholds-ban-on-sale-of-firecrackers-in-delhi-ncr/1/1064668.html" title="Cracker-less Diwali: Supreme Court upholds ban on sale of firecrackers in Delhi, NCR">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/crackers-diwali_story_88_100917040326.jpg" title="Diwali without crackers" alt="Diwali without crackers" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/crackers-diwali_story_88_100917040326.jpg" title="Diwali without crackers" alt="Diwali without crackers" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1023,7 +1023,7 @@ Cracker-less Diwali: Supreme Court upholds ban on sale of firecrackers in Delhi,
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/godhra-train-burning-case-gujarat-riots-high-court-verdict-death-row-convicts-life-imprisonment/1/1064520.html" title="Godhra train burning case: Gujarat HC commutes sentence of 11 death row convicts to life term">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/godhra_video_88_100917122721.jpg" title="Godhra train burning case" alt="Godhra train burning case" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/godhra_video_88_100917122721.jpg" title="Godhra train burning case" alt="Godhra train burning case" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1035,7 +1035,7 @@ Godhra train burning case: Gujarat HC commutes sentence of 11 death row convicts
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/kannur-bomb-attack-cpm-workers-cops-country-made-bomb/1/1064367.html" title="Violence returns to Kannur, 5 CPM workers, 4 cops injured in country-made bomb attack">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bomb-video_88_100817095214.jpg" title="Kannur bomb attack" alt="Kannur bomb attack" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/bomb-video_88_100817095214.jpg" title="Kannur bomb attack" alt="Kannur bomb attack" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1048,7 +1048,7 @@ Violence returns to Kannur, 5 CPM workers, 4 cops injured in country-made bomb a
   </div>
     <div class="rt-colum">
   	 	<h2><a href="/sosorry">So sorry</a></h2>     <div class="showing">
-      <div class="list-showing" data-tb-region-item > <a href="http://indiatoday.intoday.in/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html" title="Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights"><img width="313" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/images/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/so-sorry-video_305_100817092736.jpg" alt="So Sorry" title="So Sorry" /></a>
+      <div class="list-showing" data-tb-region-item > <a href="http://indiatoday.intoday.in/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html" title="Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights"><img width="313" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/resources/images/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/so-sorry-video_305_100817092736.jpg" alt="So Sorry" title="So Sorry" /></a>
        <div class="captionWicon"><a href="http://indiatoday.intoday.in/video/congress-president-rahul-gandhi-after-diwali-sonia-gandhi/1/1063951.html" title="Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights"><span class="video-icon spritbg"></span>Ready or not, here I come: How a chair is giving Rahul Gandhi sleepless nights</a></div>
        </div>       </div>
 
@@ -1061,7 +1061,7 @@ Violence returns to Kannur, 5 CPM workers, 4 cops injured in country-made bomb a
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/dera-chief-gurmeet-ram-rahim-family-visit-rohtak-jail/1/1065206.html" title="Dera Chief Gurmeet Ram Rahim's family members visit him in Rohtak jail">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/dera-vdo_88_101017125348.jpg" title="Dera Chief Gurmeet Ram Rahim's family members visit him in Rohtak jail" alt="Dera Chief Gurmeet Ram Rahim's family members visit him in Rohtak jail" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/dera-vdo_88_101017125348.jpg" title="Dera Chief Gurmeet Ram Rahim's family members visit him in Rohtak jail" alt="Dera Chief Gurmeet Ram Rahim's family members visit him in Rohtak jail" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1073,7 +1073,7 @@ Dera Chief Gurmeet Ram Rahim's family members visit him in Rohtak jail
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/rahul-gandhi-narendra-modi-government-bjp-jay-shah-amit-shah/1/1064907.html" title="Gujarat: Rahul Gandhi mocks Modi govt over media report on Jay Shah's company">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rahul-gandhi-for-video_88_100917110650.jpg" title="Rahul Gandhi" alt="Rahul Gandhi" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/rahul-gandhi-for-video_88_100917110650.jpg" title="Rahul Gandhi" alt="Rahul Gandhi" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1085,7 +1085,7 @@ Gujarat: Rahul Gandhi mocks Modi govt over media report on Jay Shah's company
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/defence-minister-nirmala-sitharaman-interacts-with-chinese-soldiers-at-nathu-la/1/1064114.html" title="Defence Minister Nirmala Sitharaman interacts with Chinese soldiers at Nathu La">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sitharaman-video_88_100817031217.jpg" title="Nirmala Sitharaman" alt="Nirmala Sitharaman" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/sitharaman-video_88_100817031217.jpg" title="Nirmala Sitharaman" alt="Nirmala Sitharaman" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1097,7 +1097,7 @@ Defence Minister Nirmala Sitharaman interacts with Chinese soldiers at Nathu La
 <li>
 <div class="watch_chunk"><a href="http://indiatoday.intoday.in/video/diwali-arrived-a-fortnight-earlier-says-pm-on-gst-tweak/1/1063926.html" title="Diwali arrived a fortnight earlier, says PM Modi on GST tweak">
 <div class="watch_chunk_left">
-<img  src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modi88-compressed_100817010101.jpg" title="Diwali arrived a fortnight earlier" alt="Diwali arrived a fortnight earlier" />
+<img  src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/lazyload-grey.gif" data-original="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/stories/modi88-compressed_100817010101.jpg" title="Diwali arrived a fortnight earlier" alt="Diwali arrived a fortnight earlier" />
 <span class="ytb_icon_red"></span>
 </div>
 <div class="watch_chunk_right">
@@ -1269,7 +1269,7 @@ var zflag_nid="821"; var zflag_cid="1217/1137"; var zflag_sid="2"; var zflag_wid
   <h3>Distribution</h3>
   <ul>
     <li> <a href="http://aajtak.intoday.in/distribution/index.php" target="_blank">Rate Card</a></li>
-     <li> <a href="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/images/das_application/DAS-Application-form.pdf" target="_blank">DAS Application form</a></li>
+     <li> <a href="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/images/das_application/DAS-Application-form.pdf" target="_blank">DAS Application form</a></li>
       <li> <a href="http://aajtak.intoday.in/distribution/das_phase_three.php" target="_blank">Contact persons for DAS phase III</a></li>
   </ul>
 </div>
@@ -1363,11 +1363,11 @@ if(myUserAgent.match('ipad')) { $('.leftad, .rightad').remove(); }
     })();
 </script>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.bxslider.min.js"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.lazyload.new.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/javascript-2015.js"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jshome-2016.js" type="text/javascript"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.bxslider.min.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.lazyload.new.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/javascript-2015.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jshome-2016.js" type="text/javascript"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/1.0.4/resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
 $(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.leftad').offset().top - parseFloat($('.leftad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.leftad a').addClass('fixed');} else {$('.leftad a').removeClass('fixed');}});}});
 $(function () {var msie6 = $.browser == 'msie' && $.browser.version < 7;if (!msie6) {var top = $('.rightad').offset().top - parseFloat($('.rightad').css('margin-top').replace(/auto/, 0));$(window).scroll(function (event) {var y = $(this).scrollTop();if (y >= top) {$('.rightad a').addClass('fixed-r');} else {$('.rightad a').removeClass('fixed-r');}});}});
@@ -1417,7 +1417,7 @@ zzp.src="http://m4.zedo.com/log/p.gif?a=2520674;c=821003063;x=23040;n=821;e=i;i=
 <!-- End Lotame -->
 
 <!--<div id="footer-cont" >
-<iframe width="100%" height="500" frameborder="0" scrolling="no" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe></div>-->
+<iframe width="100%" height="500" frameborder="0" scrolling="no" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe></div>-->
 <!-- END ANDBEYOND TAG -->
 
 <style>.topstories .thumbs ul li.actives, .thumbs ul li.actives {background: #eb1c24 none repeat scroll 0 0 !important;}

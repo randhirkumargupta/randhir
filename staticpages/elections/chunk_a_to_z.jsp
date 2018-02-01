@@ -87,13 +87,13 @@
     text-align: center;
     width: 88px;}
 .atoz_slider h6 .hover_span { float:left;}
-.atoz_slider h6 span { position: absolute; width: 313px; height: auto; line-height: 60px; padding: 7px; background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/subtitle_bg.png") repeat; color: #fff; z-index: 99999; bottom: 40px; font: bold 18px Roboto, sans-serif; }
+.atoz_slider h6 span { position: absolute; width: 313px; height: auto; line-height: 60px; padding: 7px; background: url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/subtitle_bg.png") repeat; color: #fff; z-index: 99999; bottom: 40px; font: bold 18px Roboto, sans-serif; }
 .atoz_slider h6 span a { text-decoration: none; color: #000000; }
 .atoz_slider h6 span a:hover { text-decoration: none; color: #5e5e5e; }
 .belt_wrapper { height: 138px; overflow: hidden; width: 595px; margin-top: 28px; margin-left: 35px; }
 .belt_large { margin-top: 0px; overflow: hidden; position: relative; height: 125px; width: 660px; }
-.parrow,.parrow1 { background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Left-arrow.gif") no-repeat scroll left top rgba(0, 0, 0, 0); display: block; float: left; height: 22px; position: absolute; text-indent: -9999px; top: 60px; width: 20px; left: 15px; }
-.narrow,.narrow1 { background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Right-arrow.gif") no-repeat scroll left top rgba(0, 0, 0, 0); display: block; float: right; height: 22px; text-indent: -9999px; width: 20px; position: absolute; top: 60px; right: 20px; }
+.parrow,.parrow1 { background: url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Left-arrow.gif") no-repeat scroll left top rgba(0, 0, 0, 0); display: block; float: left; height: 22px; position: absolute; text-indent: -9999px; top: 60px; width: 20px; left: 15px; }
+.narrow,.narrow1 { background: url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Right-arrow.gif") no-repeat scroll left top rgba(0, 0, 0, 0); display: block; float: right; height: 22px; text-indent: -9999px; width: 20px; position: absolute; top: 60px; right: 20px; }
 .parrow1 { top: 48px; }
 .narrow1 { top: 65px; width: 58px; }
  
@@ -101,8 +101,8 @@
 /*a2z slider css end*/
 
 .belt_large2 { margin-top: 0px; overflow: hidden; position: relative; height: 132px; width: 660px; }
-.left_arrow,.left_arrow1 { background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Left-arrow.gif") no-repeat scroll left top rgba(0, 0, 0, 0); display: block; float: left; height: 22px; position: absolute; text-indent: -9999px; top: 60px; width: 20px; left: 15px; }
-.right_arrow,.right_arrow1{ background: url("http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Right-arrow.gif") no-repeat scroll left top rgba(0, 0, 0, 0); display: block; float: right; height: 22px; text-indent: -9999px; width: 20px; position: absolute; top: 60px; right: 20px; }
+.left_arrow,.left_arrow1 { background: url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Left-arrow.gif") no-repeat scroll left top rgba(0, 0, 0, 0); display: block; float: left; height: 22px; position: absolute; text-indent: -9999px; top: 60px; width: 20px; left: 15px; }
+.right_arrow,.right_arrow1{ background: url("https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Right-arrow.gif") no-repeat scroll left top rgba(0, 0, 0, 0); display: block; float: right; height: 22px; text-indent: -9999px; width: 20px; position: absolute; top: 60px; right: 20px; }
 .left_arrow1 { top: 48px; }
 .right_arrow1 { top: 65px; width: 58px; }
 .slid-content { background: none repeat scroll 0 0 #666666;
