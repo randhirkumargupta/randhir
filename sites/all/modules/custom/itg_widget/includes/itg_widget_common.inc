@@ -807,6 +807,9 @@ function itg_widget_theme() {
         'movie_section_manual_widget_data' => array(
             'template' => 'templates/movie-section-manual-widget-data',
         ),
+        'score_card_iframe' => array(
+            'template' => 'templates/score-card-iframe',
+        ),
       
     );
     return $themes;
@@ -1307,7 +1310,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
             }
         }
     }
-    if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && ($_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
+    if ($view->name == 'section_wise_draggable_content_order' && $view->current_display == 'big_story_format' && (empty($_GET['type']) || $_GET['type'] == 'All' || $_GET['type'] == 'story' || $_GET['type'] == 'photogallery' || $_GET['type'] == 'videogallery')) {
 
         foreach ($query->table_queue as $queue => $queue_value) {
             if ($queue == 'field_data_field_type') {

@@ -138,13 +138,14 @@ function genrate_indiatoday_yahoo_story_syndication_xml($result = NULL) {
       $small_img = get_image_info_by_fid($value['field_story_extra_small_image_fid']);
       $medium_img = get_image_info_by_fid($value['field_story_extra_large_image_fid']);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
+      $kicker_text = stripInvalidXml($kicker_text);
       $keywords = '';
       if ($metatags) {
         $temp = unserialize($metatags['data']);
         $keywords = $temp['keywords']['value'];
       }
       $xml .= '<item>';
-      $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
+      $xml .= '<title><![CDATA[' . stripInvalidXml($value['title']) . ']]></title>';
       $xml .= '<link>' . $url . '</link>';
       $xml .= '<category>' . $section_name . '</category>';
       $xml .= '<pubDate>' . $publish_date . ' +0000</pubDate>';
