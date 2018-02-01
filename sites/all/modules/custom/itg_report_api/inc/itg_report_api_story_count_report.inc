@@ -255,7 +255,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     } else {
         $range_min = 0;
     }
-    $query = db_select('node', 'n');
+    $query = db_select('node', 'n')->distinct();
     $query->leftJoin('field_data_field_primary_category', 'fpc', 'fpc.entity_id=n.nid');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
     $query->leftJoin('field_data_field_itg_content_publish_date', 'npd', 'npd.entity_id=n.nid');
