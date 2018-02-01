@@ -565,7 +565,6 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
       if($view_mode != 'amp') {
         $og_path = $base_url . drupal_get_path_alias('node/' . $node->nid);
       } else {
-        //$og_path = $base_url.'/amp/'.$node->path['alias'];
         $og_path = $base_url . '/amp/' . drupal_get_path_alias('node/' . $node->nid);
       }
       $fb_og_url = array(
