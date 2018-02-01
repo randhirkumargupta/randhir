@@ -12,15 +12,15 @@
  */
 function itg_manage_score_card() {
   $arg = arg();
-  if(isset($arg[0]) && $arg[0] == 'manage-score-card' && !isset($arg[1])){
-	  $query = db_select('itg_score_card', 's')
-		  ->fields('s', array('id'))
-		  ->execute();
-	  $num = $query->rowCount();
-	  if ($num >= 1) {
-		drupal_goto('manage-score-list');
-	  }
-  }  
+  if (isset($arg[0]) && $arg[0] == 'manage-score-card' && !isset($arg[1])) {
+    $query = db_select('itg_score_card', 's')
+        ->fields('s', array('id'))
+        ->execute();
+    $num = $query->rowCount();
+    if ($num >= 1) {
+      drupal_goto('manage-score-list');
+    }
+  }
   if (isset($arg) && $arg[1] == 'edit') {
     drupal_set_title(t('Edit Score Card'));
     $action = $arg[2];
