@@ -343,17 +343,17 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $is_promoted = $social_query[0]['is_promoted'];
         $promotion_remark = $social_query[0]['promotion_remark'];
         // list data
-        $list["$nid"]["is_promoted"] = "$is_promoted";
-        $list["$nid"]["promotion_remark"] = "$promotion_remark";
-        $list["$nid"]["id"] = "$nid";
-        $list["$nid"]["title"] = "$title";
-        $list["$nid"]["url"] = "$url";
-        $list["$nid"]["word_count"] = "$wordcount";
-        $list["$nid"]["published_datetime"] = "$field_itg_content_publish_date_value";
-        $list["$nid"]["section_name"] = "$prime_cat->name";
-        $list["$nid"]["created_datetime"] = "$created_datetime";
-        $list["$nid"]["video_embed"] = "$video_embed";
-        $list["$nid"]["created_by"] = "$created_by";
+        $list[$nid]['is_promoted'] = "$is_promoted";
+        $list[$nid]['promotion_remark'] = "$promotion_remark";
+        $list[$nid]['id'] = "$nid";
+        $list[$nid]['title'] = "$title";
+        $list[$nid]['url'] = "$url";
+        $list[$nid]['word_count'] = "$wordcount";
+        $list[$nid]['published_datetime'] = "$field_itg_content_publish_date_value";
+        $list[$nid]['section_name'] = "$prime_cat->name";
+        $list[$nid]['created_datetime'] = "$created_datetime";
+        $list[$nid]['video_embed'] = "$video_embed";
+        $list[$nid]['created_by'] = "$created_by";
     }
     $total_records = report_totalRecordsCount($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
     $next_page_no = $pageno + 1;
