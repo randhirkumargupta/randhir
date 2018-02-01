@@ -968,6 +968,7 @@ function featuresWidgetData() {
     $range_max = 3;
     $range_min = 0;
     $order_by = 'ASC';
+    $type = array("videogallery", "photogallery", "story");
 
     $query = db_select('itg_widget_order', 'iwo');
     $query->leftJoin('node', 'n', 'n.nid=iwo.nid');
@@ -1005,7 +1006,7 @@ function featuresWidgetData() {
 
 
     //end
-    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
+    $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
@@ -1030,7 +1031,7 @@ function topstoriesList($source) {
     if ($source == 'home') {
         $result_fs_cont_ar = $result_fs;
         $result_fs_cont = count($result_fs_cont_ar);
-        $range_max = 5- $result_fs_cont;
+        $range_max = 10- $result_fs_cont;
     }
     $range_min = 0;
     $order_by = 'ASC';
