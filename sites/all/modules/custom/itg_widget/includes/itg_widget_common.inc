@@ -2927,7 +2927,6 @@ function _get_last_twenty_four_hour_data() {
  */
 function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
     $keep_row = (int) variable_get('section_widget_keep_row_count');
-    $keep_row = 1;
     try {
         $old_rows = db_select($table, "widget");
         $old_rows->fields("widget", array("id", "nid"));
