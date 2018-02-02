@@ -14,7 +14,6 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   $author_mail = array();
   $content_type = $node->type;
   $review = $node->workbench_moderation_state_new;
-  
   if ($review == 'needs_review' || $review == 'rejected' || $review == 'needs_modification') {
     $node_url = l($node->title, $base_url . '/node/' . $node->nid . '/edit');
     $actual_node_url = $base_url . '/node/' . $node->nid . '/edit';
@@ -297,7 +296,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     else if ($review == 'published') {
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
       $to_mail = $author_mail[0];
-	var_dump($node->status == 1 && $node->original->status == 0, $mail_data_cat, $to_mail, $event, $review);die;
+
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, 'update');
         $mail_data_cat = $mail_data->field_mail_templates_category[LANGUAGE_NONE][0]['value'];
