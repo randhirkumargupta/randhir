@@ -14,7 +14,6 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   $author_mail = array();
   $content_type = $node->type;
   $review = $node->workbench_moderation_state_new;
-  var_dump($node->status == 1 && $node->original->status == 0, $node->status,$node->original->status, $to_mail, $event, $review);die;
   if ($review == 'needs_review' || $review == 'rejected' || $review == 'needs_modification') {
     $node_url = l($node->title, $base_url . '/node/' . $node->nid . '/edit');
     $actual_node_url = $base_url . '/node/' . $node->nid . '/edit';
