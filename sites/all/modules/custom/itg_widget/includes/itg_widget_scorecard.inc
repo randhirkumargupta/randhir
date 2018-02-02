@@ -50,21 +50,18 @@ function itg_manage_score_card() {
     '#type' => 'textfield',
     '#title' => t('Associate to Story/Live Blog'),
     '#default_value' => ($results->score_story) ? $results->score_story : '',
-    '#required' => TRUE
   );
 
   $form['score_photo'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Photo'),
     '#default_value' => ($results->score_photo) ? $results->score_photo : '',
-    '#required' => TRUE
   );
 
   $form['score_video'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Video'),
     '#default_value' => ($results->score_video) ? $results->score_video : '',
-    '#required' => TRUE
   );
 
   $form['score_description'] = array(
