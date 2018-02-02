@@ -7,10 +7,10 @@ if(!empty($data->score_story)){
 <div id="itg-scorecard-container">
     <div class="container">
         <div class="clearfix">
-            <div class="col-lg-6 col-ms-6 col-xs-12">
+            <div class="col-lg-7 col-sm-12 col-xs-12">
                 <?php print $data->score_description; ?>
             </div>
-            <div class="col-lg-6 col-ms-6 mhide scorecard-stripcontent">
+            <div class="col-lg-5 col-sm-12 mhide scorecard-stripcontent">
                 <ul>
                   <?php if (!empty($data->score_story)) : ?>
                     <li><a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $data->score_story); ?>" title=""><?php print $node_title; ?></a></li>
