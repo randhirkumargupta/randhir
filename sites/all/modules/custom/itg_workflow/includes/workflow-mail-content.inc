@@ -316,6 +316,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
             $byline_emails = get_node_byline_emails($node);
             $to_mail = $to_mail . ' , ' . $byline_emails;
           }
+          var_dump($node->status == 1 && $node->original->status == 0, $node->status,$node->original->status, $to_mail);die;
           $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
           $weburl = FRONT_URL . "/" . $alias;
