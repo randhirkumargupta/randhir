@@ -12,7 +12,7 @@ if(isset($data->score_story)){
             </div>
             <div class="col-lg-6 col-ms-6 mhide scorecard-stripcontent">
                 <ul>
-				  <?php if(isset($data->score_story)) : ?>
+                  <?php if(isset($data->score_story)) : ?>
                     <li><a href="<?php print $base_url . '/' . drupal_get_path_alias("node/" . $data->score_story); ?>" title=""><?php print $node_title; ?></a></li>
                   <?php endif; ?>
                   <?php if(isset($data->score_photo)) : ?>
