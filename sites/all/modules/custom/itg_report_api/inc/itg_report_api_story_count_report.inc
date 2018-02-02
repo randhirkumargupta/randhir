@@ -299,6 +299,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $result =db_query($query);
     //echo $query; die();
     */
+    $loopc = 0;
     foreach ($result as $reskey => $resvalue) {
         //while($resvalue = $result->fetchAssoc()){
         $total_cont++;
@@ -343,7 +344,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $is_promoted = $social_query[0]['is_promoted'];
         $promotion_remark = $social_query[0]['promotion_remark'];
         // list data
-        $loopc = 0;
+        
         $list[$loopc]['is_promoted'] = "$is_promoted";
         $list[$loopc]['promotion_remark'] = "$promotion_remark";
         $list[$loopc]['id'] = "$nid";
