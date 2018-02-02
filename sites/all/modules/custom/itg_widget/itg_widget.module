@@ -231,7 +231,13 @@ function itg_widget_menu() {
       'page arguments' => array('insert_data_in_widget_helper_form'),
       'access arguments' => array('access administrator'),
     );
-
+    
+    $items['delete-section-cron-helper-table'] = array(
+      'page callback' => '_get_last_twenty_four_hour_data',
+      'type' => MENU_CALLBACK,
+      'file' => 'includes/itg_widget_common.inc',
+      'access arguments' => array('access content'),
+    );
     return $items;
 }
 
