@@ -299,7 +299,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $result =db_query($query);
     //echo $query; die();
     */
-    $loopc = 0;
+    $loopc = 1;
     foreach ($result as $reskey => $resvalue) {
         //while($resvalue = $result->fetchAssoc()){
         $total_cont++;
