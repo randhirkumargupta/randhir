@@ -682,8 +682,20 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .section-pr-newswire  #w4315_landing div.w4315_footer .w4315_pagination *{font-size:16px;text-align: center;}
 .section-pr-newswire #w4315_landing ul li .w4315_datetime{   font-size: 13px;color: #696969; margin-bottom: 10px;}
 .section-pr-newswire #w4315_landing  .addthis_toolbox{text-align: right;float: right;}
+/*technology home page title red */
+.tech-layout-page span.widget-title {position: absolute!important; line-height: 22px;padding: 0 7px;text-transform: uppercase; color: #fff;font-family: "Roboto-Regular"; z-index: 1;white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 100%; background: #a00606;font-size: 14px;}
+.tech-layout-page span.widget-title a{color:#fff;}
+.tech-layout-page .auto-block-2 .special-top-news  span.widget-title,.tech-layout-page .auto-block-3 .tech_most_read-block_5  span.widget-title,.tech-layout-page .itg-h321-section .tech_reviews-block_5 span.widget-title{position: static!important;}
+.tech-layout-page .itg-h385-section .section_wise_order-tech-tips span.widget-title,.tech-layout-page .itg-h396-section .section_wise_order-talking-point span.widget-title{position: static!important; margin-bottom:0px;}
+/* Magagine third menu level image*/
+#block-itg-menu-manager-magazine-node-third-level-menu{display:none;}
+.page-magazine #block-itg-menu-manager-magazine-node-third-level-menu, .node-type-story.section-magazine #block-itg-menu-manager-magazine-node-third-level-menu{display:block;}
+#block-itg-menu-manager-magazine-node-third-level-menu img {padding-top: 10px;max-height: 50px;}
+#block-itg-menu-manager-magazine-node-third-level-menu .menu-wrapper{height:60px;background: #595959}
+
 .live-block .breaking-section .breaking-date{font-size:1.3rem;}
 span.refresh-icon{float: right;position: relative;top: -20px;}
+.mobile-body-ad > div{margin:0px auto;}
 @media only screen and (max-width: 768px) {
 .app-area-wrapper{width:100%;}
 .app-area .top-area .right-area{width:71%;}

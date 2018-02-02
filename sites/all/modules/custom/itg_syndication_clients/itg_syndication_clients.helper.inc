@@ -146,7 +146,8 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-india.xml' => 1206578,
     'msn/mailtoday/story-top-stories.xml' => 1206584,
     'msn/mailtoday/story-technology.xml' => 1206688,
-    'msn/mailtoday/story-auto.xml' => 1206689
+    'msn/mailtoday/story-auto.xml' => 1206689,
+    'msn/mailtoday/story-education.xml' => 1206666
   );
   return $msn_story;
 }
@@ -378,7 +379,8 @@ function get_hltapps_sections($type) {
         'india.xml' => array('section' => '1206955', 'limit' => 15),
         'world.xml' => array('section' => '1206956', 'limit' => 15),
         'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
-        'entertainment.xml' => array('section' => '1206952', 'limit' => 15)
+        'entertainment.xml' => array('section' => '1206952', 'limit' => 15),
+        'movies.xml' => array('section' => '1207303', 'limit' => 15)
       );
       break;
     case 'programmes':
