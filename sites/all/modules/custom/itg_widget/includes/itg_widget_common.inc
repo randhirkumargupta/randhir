@@ -2912,10 +2912,10 @@ function itg_widget_node_insert($node) {
  * Implement function get 24 hour data which added.
  */
 function _get_last_twenty_four_hour_data() {
-    $table = 'itg_widget_order_section';
+   /* $table = 'itg_widget_order_section';
     $cat_id = '1207080';
     $content_type = 'story';
-    _delete_old_data_from_section_widget($table, $cat_id, $content_type);
+    _delete_old_data_from_section_widget($table, $cat_id, $content_type);*/
     
 }
 
