@@ -618,6 +618,8 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 @media screen and (max-width:360px){
 .story-section .comment-mobile ul li a{  padding: 10px 5px;}
 .story-section .comment-mobile{ margin: 0px -8px 20px; }
+#itg-scorecard-container .container{padding:0px;}
+#itg-scorecard-container .container .col-xs-12{padding:0 5px;}
 }
 #block-itg-widget-home-page-feature .featured-news .featured-post a {display: inline;}
 .front #block-itg-widget-home-page-feature .featured-news .featured-post a {display: block; overflow:hidden;}
