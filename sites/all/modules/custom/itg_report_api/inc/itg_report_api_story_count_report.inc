@@ -282,6 +282,7 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     }
     $query->orderBy('npd.field_itg_content_publish_date_value', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $loopc = 1;
     foreach ($result as $reskey => $resvalue) {
         $total_cont++;
         $nid = $resvalue['nid'];
@@ -324,17 +325,18 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
         $is_promoted = $social_query[0]['is_promoted'];
         $promotion_remark = $social_query[0]['promotion_remark'];
         // list data
-        $list[$nid]['is_promoted'] = "$is_promoted";
-        $list[$nid]['promotion_remark'] = "$promotion_remark";
-        $list[$nid]['id'] = "$nid";
-        $list[$nid]['title'] = "$title";
-        $list[$nid]['url'] = "$url";
-        $list[$nid]['word_count'] = "$wordcount";
-        $list[$nid]['published_datetime'] = "$last_pub_date";
-        $list[$nid]['section_name'] = "$prime_cat->name";
-        $list[$nid]['created_datetime'] = "$created_datetime";
-        $list[$nid]['video_embed'] = "$video_embed";
-        $list[$nid]['created_by'] = "$created_by";
+        $list[$loopc]['is_promoted'] = "$is_promoted";
+        $list[$loopc]['promotion_remark'] = "$promotion_remark";
+        $list[$loopc]['id'] = "$nid";
+        $list[$loopc]['title'] = "$title";
+        $list[$loopc]['url'] = "$url";
+        $list[$loopc]['word_count'] = "$wordcount";
+        $list[$loopc]['published_datetime'] = "$last_pub_date";
+        $list[$loopc]['section_name'] = "$prime_cat->name";
+        $list[$loopc]['created_datetime'] = "$created_datetime";
+        $list[$loopc]['video_embed'] = "$video_embed";
+        $list[$loopc]['created_by'] = "$created_by";
+        $loopc++;
     }
     $total_records = report_totalRecordsCount($start_date, $end_date, $type, $status, $synd, $item_per_page, $pageno);
     $next_page_no = $pageno + 1;
