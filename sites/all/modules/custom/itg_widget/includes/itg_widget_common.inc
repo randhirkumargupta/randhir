@@ -2907,13 +2907,25 @@ function itg_widget_node_insert($node) {
     }
 }
 
+
+/**
+ * Implement function get 24 hour data which added.
+ */
+function _get_last_twenty_four_hour_data() {
+   /* $table = 'itg_widget_order_section';
+    $cat_id = '1207080';
+    $content_type = 'story';
+    _delete_old_data_from_section_widget($table, $cat_id, $content_type);*/
+    
+}
+
 /**
  * Function responsible to delete old data.
  * @param string $table
  * @param int $cat_id
  * @param string $content_type
  */
-function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
+function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {   
     $keep_row = (int) variable_get('section_widget_keep_row_count');
     try {
         $old_rows = db_select($table, "widget");
@@ -2921,25 +2933,48 @@ function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
         $old_rows->condition("widget.cat_id", $cat_id);
         $old_rows->condition("widget.content_type", $content_type);
         $old_rows->condition("widget.widget", 'section_wise_widget');
-        $old_rows->orderBy("widget.id", "DESC");
-        $count_row = $old_rows->execute()->rowCount();
-        $data = $old_rows->range($keep_row, $count_row)->execute()->fetchAll();
+        $data = '';
+        if($keep_row != 100) {
+            $old_rows->orderBy("widget.id", "DESC");
+            $count_row = $old_rows->execute()->rowCount();
+            $data = $old_rows->range($keep_row, $count_row)->execute()->fetchAll();
+        }else {
+            $old_rows->orderBy("widget.id", "ASC");
+            $data = $old_rows->range(0,1)->execute()->fetchAll();
+        }
     } catch (Exception $ex) {
         drupal_set_message($ex->getMessage(), 'error');
     }
-
+    
+    
     if (!empty($data)) {
         try {
             $delete_query = db_delete($table);
+            $nid_array = array();
+            $id_array = array();
             foreach ($data as $tid) {
-                $delete_query->condition("id", $tid->id);
-                _itg_widget_delete_node_data_from_helper_table($tid->nid);
+               // $delete_query->condition("id", $tid->id);
+                //_itg_widget_delete_node_data_from_helper_table($tid->nid); old function
+               $id_array[$tid->id] = $tid->id;
+               $nid_array[$tid->nid] =  $tid->nid;
             }
+            $delete_query->condition("id", $id_array);
             $delete_query->execute();
+            if(!empty($nid_array)) {
+            __itg_widget_new_delete_node_data_from_helper_table($nid_array);
+            }
         } catch (Exception $ex) {
             drupal_set_message($ex->getMessage(), 'error');
         }
     }
+}
+
+
+/**
+ * Implement function delete node from helper table insteadof 100 node.
+ */
+function __itg_widget_new_delete_node_data_from_helper_table($nid_array) {
+     db_delete('itg_widget_helper')->condition("nid", $nid_array)->execute();
 }
 
 /**
