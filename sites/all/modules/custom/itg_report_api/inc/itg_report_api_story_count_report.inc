@@ -264,10 +264,10 @@ function get_datalist_report($start_date, $end_date, $type, $status, $synd, $ite
     $query->fields('dbody', array('body_value'));
     $query->fields('npd', array('field_itg_content_publish_date_value'));
     //end
-    if($start_date != "na" && $end_date != "na"){
-        $start_date_timestamp = strtotime($start_date . " 01:01:00");
-        $end_date_timestamp = strtotime($end_date . " 23:59:00");
-        $query->condition('npd.field_itg_content_publish_date_value', array(gmdate('Y-m-d H:i:s', $start_date_timestamp),gmdate('Y-m-d H:i:s', $end_date_timestamp)), 'BETWEEN');
+     if($start_date != "na" && $end_date != "na"){
+        $start_date_timestamp = $start_date . " 12:01:00";
+        $end_date_timestamp = $end_date . " 23:59:00";
+        $query->condition('npd.field_itg_content_publish_date_value', array($start_date_timestamp, $end_date_timestamp), 'BETWEEN');
     }
     if ($type != "na") {
         $query->condition('n.type', $type);
