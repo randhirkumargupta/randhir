@@ -687,6 +687,11 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .tech-layout-page span.widget-title a{color:#fff;}
 .tech-layout-page .auto-block-2 .special-top-news  span.widget-title,.tech-layout-page .auto-block-3 .tech_most_read-block_5  span.widget-title,.tech-layout-page .itg-h321-section .tech_reviews-block_5 span.widget-title{position: static!important;}
 .tech-layout-page .itg-h385-section .section_wise_order-tech-tips span.widget-title,.tech-layout-page .itg-h396-section .section_wise_order-talking-point span.widget-title{position: static!important; margin-bottom:0px;}
+/* Magagine third menu level image*/
+#block-itg-menu-manager-magazine-node-third-level-menu{display:none;}
+.page-magazine #block-itg-menu-manager-magazine-node-third-level-menu, .node-type-story.section-magazine #block-itg-menu-manager-magazine-node-third-level-menu{display:block;}
+#block-itg-menu-manager-magazine-node-third-level-menu img {padding-top: 10px;max-height: 50px;}
+#block-itg-menu-manager-magazine-node-third-level-menu .menu-wrapper{height:60px;background: #595959}
 
 .live-block .breaking-section .breaking-date{font-size:1.3rem;}
 span.refresh-icon{float: right;position: relative;top: -20px;}
