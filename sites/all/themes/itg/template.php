@@ -588,7 +588,7 @@ function get_newsroom_js(){
 <script>
 window._newsroom = window._newsroom || [];
 window._newsroom.push({pageTemplate: 'home'});
-window._newsroom.push({pageDashboard: 'home'});
+window._newsroom.push({pageDashboard: 'home-mobile'});
 window._newsroom.push('auditClicks');
 window._newsroom.push('trackPage');
 
