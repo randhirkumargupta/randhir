@@ -684,6 +684,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .section-pr-newswire #w4315_landing  .addthis_toolbox{text-align: right;float: right;}
 .live-block .breaking-section .breaking-date{font-size:1.3rem;}
 span.refresh-icon{float: right;position: relative;top: -20px;}
+.mobile-body-ad > div{margin:0px auto;}
 @media only screen and (max-width: 768px) {
 .app-area-wrapper{width:100%;}
 .app-area .top-area .right-area{width:71%;}
