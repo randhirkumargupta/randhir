@@ -2954,8 +2954,8 @@ function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
             }
             $delete_query->condition("id", $id_array);
             $delete_query->execute();
-            if(!empty($nid_array)) {
-            __itg_widget_new_delete_node_data_from_helper_table($nid_array);
+            if(!empty($id_array)) {
+            __itg_widget_new_delete_node_data_from_helper_table($id_array);
             }
         } catch (Exception $ex) {
             drupal_set_message($ex->getMessage(), 'error');
