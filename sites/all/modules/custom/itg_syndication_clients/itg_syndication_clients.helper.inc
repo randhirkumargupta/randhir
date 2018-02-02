@@ -121,7 +121,7 @@ function getmsn_story_section_array() {
     'msn/indiatoday/latest-news.xml' => 1206578,
     'msn/mailtoday/story-msn-mail-today.xml' => 1206734,
     'msn/indiatoday/story-national.xml' => 1207674,
-    'msn/indiatoday/story-sports.xml' => 1207675,
+    'msn/indiatoday/story-sports.xml' => 1206550,
     'msn/indiatoday/story-states.xml' => 1207676,
     'msn/indiatoday/story-health.xml' => 1207677,
     'msn/indiatoday/story-leisure.xml' => 1207678,
