@@ -33,7 +33,7 @@ if (!empty($data['node_data'])) :
   ?>
   <!-- Big news Block -->
   <span class="widget-title"><a title="<?php echo _widget_title($data['node_data']->title); ?>" href='<?php echo $href ?>' <?php print $data_nid . $has_ajax; ?>>News</a></span>
-  <div class="big-news big-news-content-<?php print $data['node_data']->type ?>">
+  <div data-tb-region="homeBigStory" class="big-news big-news-content-<?php print $data['node_data']->type ?>">
       <div class="row">
           <div class="big-story-col-1">
               <!-- LIVE TV IS PUT IN PLACE OF EXTRA LARGE IMAGE  -->

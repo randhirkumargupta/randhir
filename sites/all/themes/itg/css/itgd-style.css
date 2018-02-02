@@ -341,6 +341,7 @@ width: 100%;
         margin: 0 auto
     }
     #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
+    #itg-scorecard-container .scorecard-stripcontent{display:none;}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
     .front .itg-top-section .home-top-story .droppable {
