@@ -140,11 +140,11 @@ else if ($widget_style == 'buying-guid') {
 
               if ($count == 0) {
                 ?>
-
+				<div <?php echo $data_tb_region_item;?>>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
                 </a>
-                <h3 <?php echo $data_tb_region_item;?> title="<?php echo $desc; ?>">
+                <h3 title="<?php echo $desc; ?>">
                     <?php
                     if (!empty($entity['field_photo_see_pic_link_value'])) {
                       echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
@@ -159,6 +159,7 @@ else if ($widget_style == 'buying-guid') {
                     }
                     ?>
                 </h3>
+                </div>
                 <?php
               }
               else if ($count == 1) {
@@ -259,10 +260,10 @@ else if ($widget_style == 'in-depth') {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
                 }
                 ?>
-
+				<div <?php echo $data_tb_region_item;?>>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>"><img src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>"/> </a></span>
 
-                <h3 <?php echo $data_tb_region_item;?> title="<?php echo $desc; ?>">
+                <h3 title="<?php echo $desc; ?>">
                     <?php
                     if (!empty($entity['field_photo_see_pic_link_value'])) {
                       echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
@@ -277,6 +278,7 @@ else if ($widget_style == 'in-depth') {
                     }
                     ?>
                 </h3>
+                </div>
                 <?php
               }
               else if ($count == 1) {
@@ -396,11 +398,11 @@ else if ($widget_style == 'movies-celebrities') {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
                 }
                 ?>
-
+				<div <?php echo $data_tb_region_item;?>>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" /> </a>
 
-                <h3 <?php echo $data_tb_region_item;?> title="<?php echo $desc; ?>">
+                <h3 title="<?php echo $desc; ?>">
                     <?php
                     if (!empty($entity['field_photo_see_pic_link_value'])) {
                       echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
@@ -415,6 +417,7 @@ else if ($widget_style == 'movies-celebrities') {
                     }
                     ?>
                 </h3>
+                </div>
                 <?php
               }
               else if ($count == 1) {
@@ -536,11 +539,11 @@ else if ($widget_style == 'movies-lifestyle') {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
                 }
                 ?>
-
+				<div <?php echo $data_tb_region_item;?>>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>"/> </a>
 
-                <h3 <?php echo $data_tb_region_item;?> title="<?php echo $desc; ?>">
+                <h3 title="<?php echo $desc; ?>">
                     <?php
                     if (!empty($entity['field_photo_see_pic_link_value'])) {
                       echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
@@ -555,6 +558,7 @@ else if ($widget_style == 'movies-lifestyle') {
                     }
                     ?>
                 </h3>
+                </div>
                 <?php
               }
               else if ($count == 1 || $count == 2) {
@@ -660,12 +664,12 @@ else if ($widget_style == 'oscar-news') {
                   $extra_large_image_url = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg');
                 }
                 ?>
-                <div class="col-md-12">
+                <div class="col-md-12" <?php echo $data_tb_region_item;?>>
                     <a href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                         <span class="pic  <?php echo $video_class; ?>">
                             <img src="<?php echo $extra_large_image_url; ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" /></span>
                     </a>
-                    <h3 <?php echo $data_tb_region_item;?> title="<?php echo $desc; ?>">
+                    <h3 title="<?php echo $desc; ?>">
                         <?php
                         if (!empty($entity['field_photo_see_pic_link_value'])) {
                           echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
@@ -1154,6 +1158,7 @@ else if ($widget_style == 'election-so-sorry') {
             ?>
             <?php if ($count == 0) : ?>
               <?php if (!empty($extra_large_image_url)) { ?>
+				<div <?php echo $data_tb_region_item;?>>  
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
                 </a>
@@ -1161,11 +1166,12 @@ else if ($widget_style == 'election-so-sorry') {
               }
               else {
                 ?>
+                <div <?php echo $data_tb_region_item;?>>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img  height="208" width="370" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg'); ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>" />
                 </a>
               <?php } ?>
-              <h3 <?php echo $data_tb_region_item;?> title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['title'] ?> ">
+              <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['title'] ?> ">
                   <?php
                   if (!empty($entity['field_photo_see_pic_link_value'])) {
                     echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
@@ -1180,6 +1186,7 @@ else if ($widget_style == 'election-so-sorry') {
                   }
                   ?>
               </h3>
+              </div>
             <?php endif; ?>
 
             <?php
@@ -1291,6 +1298,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             ?>
             <?php if ($count == 0) : ?>
               <?php if (!empty($extra_large_image_url)) { ?>
+				<div <?php echo $data_tb_region_item;?>>  
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>"/>
                 </a>
@@ -1298,13 +1306,15 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
               }
               else {
                 ?>
+                <div <?php echo $data_tb_region_item;?>>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img height="208" width="370" src="<?php print image_style_url("anchors_landing", drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg'); ?>" alt="<?php echo $entity['field_story_medium_image_alt']; ?>" title="<?php echo $entity['field_story_medium_image_title']; ?>"/>
                 </a>
               <?php } ?>
-              <h3 <?php echo $data_tb_region_item;?> title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
+              <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
                   <?php echo l($entity['title'] , "node/" . $nid); ?>
               </h3>
+              </div>
             <?php endif; ?>
             <?php if ($count != 0) : ?>
               <p title="<?php echo $entity['title']; ?>" class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
@@ -1387,7 +1397,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             }
             ?>
             <?php if ($count == 0) : ?>
-              <div class="magazine-detail">
+              <div class="magazine-detail" <?php echo $data_tb_region_item;?>>
 
                   <?php if (!empty($extra_large_image_url)) { ?>
                     <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
@@ -1402,7 +1412,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                     </a>
                   <?php } ?>
                   <div class="small-detail">
-                      <h3 <?php echo $data_tb_region_item;?> title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
+                      <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
                           <?php
                           if (!empty($entity['field_photo_see_pic_link_value'])) {
                             echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
@@ -1552,6 +1562,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
             ?>
             <?php if ($count == 0) : ?>
               <?php if (!empty($extra_large_image_url)) { ?>
+				<div <?php echo $data_tb_region_item;?>>  
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img  src="<?php print $extra_large_image_url ?>" alt="<?php echo $entity['field_story_large_image_alt']; ?>" title="<?php echo $entity['field_story_large_image_title']; ?>" />
                 </a>
@@ -1559,11 +1570,12 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
               }
               else {
                 ?>
+                <div <?php echo $data_tb_region_item;?>>
                 <a class="<?php echo $video_class; ?>" href="<?php echo $base_url . '/' . drupal_get_path_alias("node/$nid"); ?>">
                     <img  height="208" width="370" src="<?php print file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/' . 'itg_image370x208.jpg'); ?>" alt="" title="" />
                 </a>
               <?php } ?>
-              <h3 <?php echo $data_tb_region_item;?> title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
+              <h3 title="<?php echo $entity['title']; ?>" class="frist-heading heading-<?php echo $nid ?> <?php echo $entity['type'] ?> ">
                   <?php
                   if (!empty($entity['field_photo_see_pic_link_value'])) {
                     echo "<span class='see-picture'>" . l($entity['field_photo_see_pic_link_value'], "node/" . $nid) . '</span>';
@@ -1578,6 +1590,7 @@ else if ($widget_style == 'edu-exam' || $widget_style == 'edu-gov-jobs') {
                   }
                   ?>
               </h3>
+              </div>
             <?php endif; ?>
             <?php if ($count != 0) : ?>
               <p <?php echo $data_tb_region_item;?> title="<?php echo $entity['title']; ?>" class="<?php print $entity['type'] ?> section-order-<?php print $nid ?>">
