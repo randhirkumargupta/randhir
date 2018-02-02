@@ -115,6 +115,11 @@ function itg_menu_manager_block_info() {
       'info' => t('Vertical Menu'),
       'cache' => DRUPAL_NO_CACHE
     );
+    
+    $blocks['magazine_node_third_level_menu'] = array(
+      'info' => t('Magazine Third Level Menu'),
+      'cache' => DRUPAL_NO_CACHE
+    );
     return $blocks;
 }
 
@@ -167,6 +172,9 @@ function itg_menu_manager_block_view($delta = '') {
             }
 
             $block['content'] = theme('third_level_menu', array("data" => $data, "node_load" => $node_data));
+            break;
+        case 'magazine_node_third_level_menu':
+            $block['content'] = magazine_node_third_level_menu_content();
             break;
     }
     return $block;
