@@ -11,14 +11,16 @@
  * @return string
  */
 function itg_manage_score_card() {
-  $query = db_select('itg_score_card', 's')
-      ->fields('s', array('id'))
-      ->execute();
-  $num = $query->rowCount();
-  if ($num >= 1) {
-    drupal_goto('manage-score-list');
-  }
   $arg = arg();
+  if (isset($arg[0]) && $arg[0] == 'manage-score-card' && !isset($arg[1])) {
+    $query = db_select('itg_score_card', 's')
+        ->fields('s', array('id'))
+        ->execute();
+    $num = $query->rowCount();
+    if ($num >= 1) {
+      drupal_goto('manage-score-list');
+    }
+  }
   if (isset($arg) && $arg[1] == 'edit') {
     drupal_set_title(t('Edit Score Card'));
     $action = $arg[2];
@@ -48,21 +50,18 @@ function itg_manage_score_card() {
     '#type' => 'textfield',
     '#title' => t('Associate to Story/Live Blog'),
     '#default_value' => ($results->score_story) ? $results->score_story : '',
-    '#required' => TRUE
   );
 
   $form['score_photo'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Photo'),
     '#default_value' => ($results->score_photo) ? $results->score_photo : '',
-    '#required' => TRUE
   );
 
   $form['score_video'] = array(
     '#type' => 'textfield',
     '#title' => t('Associate to Video'),
     '#default_value' => ($results->score_video) ? $results->score_video : '',
-    '#required' => TRUE
   );
 
   $form['score_description'] = array(

@@ -104,7 +104,7 @@ if ($theme != 'itgadmin') {
                 <!-- End of Breaking news band -->
                 <?php if (isset($widget_data['big_story'])) : ?>
                   <div class="row">
-                      <div class="col-md-12" data-tb-region="homeBigStory">
+                      <div class="col-md-12">
                           <?php print $widget_data['big_story']; ?>
                       </div>            
                   </div>
