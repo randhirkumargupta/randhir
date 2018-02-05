@@ -48,9 +48,11 @@
                $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, 'video', 0);
               }
               if(strpos($player_content['file_url'], 'https') === FALSE) {
-                $video_urls = str_replace("http","https",$player_content['file_url']);
+                //$video_urls = str_replace("http","https",$player_content['file_url']);
+                $video_urls = str_replace("http","https",$player_content['bitrate_url']);
              } else {
-                $video_urls = $player_content['file_url'];
+                //$video_urls = $player_content['file_url'];
+               $video_urls = $player_content['bitrate_url'];
              }
             ?>
               <amp-video width="300"
