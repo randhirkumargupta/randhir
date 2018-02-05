@@ -326,6 +326,9 @@ width: 100%;
 .front .itg-top-section .home-top-story .droppable {
     height: 620px
 }
+@media only screen and (max-width: 1024px) {
+.itg-layout-container .itg-h321-section .droppable{height: 275px;}
+}
 @media screen and (min-width: 991px) and (max-width: 1024px) {
     .front .itg-top-section .top-rhs-add {
         margin-top: 40px
@@ -342,7 +345,10 @@ width: 100%;
     }
     #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
     #itg-scorecard-container .scorecard-stripcontent{display:none;}
+    .front .mt-50 { margin-top: 30px;}
+	  
 }
+
 @media screen and (min-width: 768px) and (max-width: 991px) {
     .front .itg-top-section .home-top-story .droppable {
         height: 515px
