@@ -17,6 +17,11 @@ else if (arg(0) == 'photo-list' || arg(0) == 'video-list') {
   $ipl_link = "<button class='live-tv'><i class='fa fa-circle'></i> LIVE TV</button>";
   $cat_flag = TRUE;
 }
+else if(arg(0) == 'node' &&  is_numeric(arg(1))){
+  $node = menu_get_object();
+  $cat_id = $node->field_primary_category[LANGUAGE_NONE][0]['value'];
+  $cat_flag = TRUE;
+}
 else if ($cat_flag == FALSE) {
   $cat_id = arg(2);
 }
@@ -34,7 +39,13 @@ if ($cat_id == "") {
     }
   }
 }
-
+if (isset($cat_id) && is_numeric($cat_id)) {
+  $section_tids = array_reverse(taxonomy_get_parents_all($cat_id));
+  $section_tid = $section_tids[0]->tid;
+  if($cat_id != $section_tid){
+    $cat_id = $section_tid;
+  } 
+}
 $section_banner_data = taxonomy_term_load($cat_id);
 $uri = !empty($section_banner_data->field_cm_category_banner['und'][0]['uri']) ? $section_banner_data->field_cm_category_banner['und'][0]['uri'] : "";
 if (!empty($uri)) {
@@ -50,7 +61,7 @@ $field_cm_category_color = isset($section_banner_data->field_cm_category_color['
               <div class="col-md-6 col-sm-9 col-xs-9">
                   <?php
                   if (!empty($src) && isset($uri)) {
-                    print l("<img src='" . $src . "' alt='' title='' />" , "taxonomy/term/" . arg(2) , array("html" => TRUE));
+                    print l("<img src='" . $src . "' alt='' title='' />" , "taxonomy/term/" . $cat_id , array("html" => TRUE));
                   }
                   ?>
               </div>

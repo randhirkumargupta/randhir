@@ -341,6 +341,7 @@ width: 100%;
         margin: 0 auto
     }
     #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
+    #itg-scorecard-container .scorecard-stripcontent{display:none;}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
     .front .itg-top-section .home-top-story .droppable {
@@ -617,6 +618,8 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 @media screen and (max-width:360px){
 .story-section .comment-mobile ul li a{  padding: 10px 5px;}
 .story-section .comment-mobile{ margin: 0px -8px 20px; }
+#itg-scorecard-container .container{padding:0px;}
+#itg-scorecard-container .container .col-xs-12{padding:0 5px;}
 }
 #block-itg-widget-home-page-feature .featured-news .featured-post a {display: inline;}
 .front #block-itg-widget-home-page-feature .featured-news .featured-post a {display: block; overflow:hidden;}
@@ -659,6 +662,43 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .app-area .bottom-area ul li h3{font:bold 20px/22px 'Roboto', sans-serif; color:#404040; display:inline-block; width:100%; text-transform:uppercase; text-align:center; margin:50px 0 5px 0;}
 .app-area .bottom-area ul li p{font:14px/22px 'Roboto', sans-serif; color:#6d6d6d; display:block; margin:0}
 .share_bar{ display:none;}
+/*  Score card Changes */
+#itg-scorecard-container{background: #000;padding: 10px 0;}
+#itg-scorecard-container .scorecard-stripcontent ul li{list-style: none; display: inline-block; border-right: 1px solid #4f4f4f; padding: 0 5px;}
+#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(3){border-right:0px}
+#itg-scorecard-container .scorecard-stripcontent{ padding:0px;position: relative; height: 20px;}
+#itg-scorecard-container .scorecard-stripcontent ul{position: absolute;top: 7px;}
+#itg-scorecard-container .scorecard-stripcontent ul li a{color: #fff; font-family: "Roboto-Regular";font-weight:normal; font-size: 14px; }
+#itg-scorecard-container .scorecard-stripcontent ul li:nth-child(1) a{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 340px;display: inline-block;line-height: 14px;}
+/*poll Home section */
+.home_page_poll_widget_block .poll-data .active-poll-title h2 {color: #fff;font-size: 16px; line-height: 22px;margin: 0;padding: 5px 10px;}
+.home_page_poll_widget_block .poll-wrapper .poll-data .poll-replace-id {padding: 10px 0 0;max-height: inherit;overflow-y: auto;margin-top: 0;}
+.home_page_poll_widget_block .poll-data .active-poll-title {background-color: #000;float: left;width: 100%;height: auto;overflow: hidden;}
+.home_page_poll_widget_block .poll-data form label {display: inline-block;vertical-align: top;padding: 0;text-transform: uppercase;font-family:"Roboto-Regular"; }
+/* pr news */
+.section-pr-newswire #w4315_landing{overflow: hidden;overflow-x: hidden;}
+.section-pr-newswire #w4315_landing ul{ margin-top:30px;}
+.section-pr-newswire #w4315_landing ul li a{line-height: 24px;  margin-bottom:5px;color: #323232;text-decoration: none; }
+.section-pr-newswire #w4315_landing ul li a:hover{color: #1a3c8d;}
+.section-pr-newswire #w4315_landing ul li.w4315_release{    padding: 10px 5px 10px 110px;}
+.section-pr-newswire  #w4315_landing div.w4315_footer{padding-top:15px; text-align: center ;}
+.section-pr-newswire  #w4315_landing div.w4315_footer .w4315_pagination *{font-size:16px;text-align: center;}
+.section-pr-newswire #w4315_landing ul li .w4315_datetime{   font-size: 13px;color: #696969; margin-bottom: 10px;}
+.section-pr-newswire #w4315_landing  .addthis_toolbox{text-align: right;float: right;}
+/*technology home page title red */
+.tech-layout-page span.widget-title {position: absolute!important; line-height: 22px;padding: 0 7px;text-transform: uppercase; color: #fff;font-family: "Roboto-Regular"; z-index: 1;white-space: nowrap; overflow: hidden;text-overflow: ellipsis; max-width: 100%; background: #a00606;font-size: 14px;}
+.tech-layout-page span.widget-title a{color:#fff;}
+.tech-layout-page .auto-block-2 .special-top-news  span.widget-title,.tech-layout-page .auto-block-3 .tech_most_read-block_5  span.widget-title,.tech-layout-page .itg-h321-section .tech_reviews-block_5 span.widget-title{position: static!important;}
+.tech-layout-page .itg-h385-section .section_wise_order-tech-tips span.widget-title,.tech-layout-page .itg-h396-section .section_wise_order-talking-point span.widget-title{position: static!important; margin-bottom:0px;}
+/* Magagine third menu level image*/
+#block-itg-menu-manager-magazine-node-third-level-menu{display:none;}
+.page-magazine #block-itg-menu-manager-magazine-node-third-level-menu, .node-type-story.section-magazine #block-itg-menu-manager-magazine-node-third-level-menu{display:block;}
+#block-itg-menu-manager-magazine-node-third-level-menu img {padding-top: 10px;max-height: 50px;}
+#block-itg-menu-manager-magazine-node-third-level-menu .menu-wrapper{height:60px;background: #595959}
+
+.live-block .breaking-section .breaking-date{font-size:1.3rem;}
+span.refresh-icon{float: right;position: relative;top: -20px;}
+.mobile-body-ad > div{margin:0px auto;}
 @media only screen and (max-width: 768px) {
 .app-area-wrapper{width:100%;}
 .app-area .top-area .right-area{width:71%;}
@@ -670,7 +710,12 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{ width:auto; display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .story-section .byline .mobile-twitter{color:#1b95e0; margin-left:4px;display: inline-block;} .story-section .byline .mobile-twitter a, .story-section .byline .mobile-twitter a:hover{ color:#1b95e0; text-decoration:none;}
-
+/* home page extra space fix */
+.front .itg-top-section .top-rhs-add-child .ad-widget {padding:20px 10px; height:290px;}
+.front .itg-layout-container .itg-h321-section .ad-widget{ height: 315px;padding: 30px 0;width: 322px;margin: 0 auto;background: #f3f3f3;}
+.front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
+.itg-h321-section .dont-miss ul li{width:100%}
+.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:none}
 }
 @media only screen and (max-width: 767px) {
 .app-area-wrapper{width:94%; padding:0 3%}
@@ -699,6 +744,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .share_bar .social-share .fa-whatsapp{color: #0dbe50;}
 .share_bar .social-share .fa-bookmark{color: #607083;}
 .share_bar .social-share .fa-comment{color: #a2a2a2;}
+iframe.embed-responsive-item {height:50px}
 }
 .pti-news-claim { background: #FBF9FA; border: 1px solid #EFEFEF; color: #737373; font-size: 14px; margin-top: 20px; padding: 10px; line-height: 18px; margin-bottom: 20px; }
 .view-display-id-so_sorry_page {margin: 0 -15px 15px;position: relative;}
@@ -772,6 +818,12 @@ background:none;
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{ width:auto; display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2, .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2 {margin-bottom: 30px;}
+/* home page extra space fix */
+.front .itg-top-section .top-rhs-add-child .ad-widget {padding:0; height:auto;}
+.front .itg-layout-container .itg-h321-section .ad-widget{ height:auto;padding:0;width:300px;margin: 0 auto;background: #f3f3f3;}
+.front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
+.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:block}
+.front .mt-50 {margin-top: 30px;}
 }
 
 .cheaper-deaper-action a.btn-submit{padding: 3px 20px 1px;border: 1px solid #cd070f; background-color: #cd070f;color: #fff;font-size: 24px; text-transform: uppercase; font-weight: 600;margin-bottom: 36px;
