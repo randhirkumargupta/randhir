@@ -2933,15 +2933,17 @@ function _delete_old_data_from_section_widget($table, $cat_id, $content_type) {
         $old_rows->condition("widget.cat_id", $cat_id);
         $old_rows->condition("widget.content_type", $content_type);
         $old_rows->condition("widget.widget", 'section_wise_widget');
-        $data = '';
-        if($keep_row != 100) {
+        $old_rows->orderBy("widget.id", "DESC");
+        $count_row = $old_rows->execute()->rowCount();
+        $data = $old_rows->range($keep_row, $count_row)->execute()->fetchAll();
+        /*if($keep_row != 100) {
             $old_rows->orderBy("widget.id", "DESC");
             $count_row = $old_rows->execute()->rowCount();
             $data = $old_rows->range($keep_row, $count_row)->execute()->fetchAll();
         }else {
             $old_rows->orderBy("widget.id", "ASC");
             $data = $old_rows->range(0,1)->execute()->fetchAll();
-        }
+        }*/
     } catch (Exception $ex) {
         drupal_set_message($ex->getMessage(), 'error');
     }
