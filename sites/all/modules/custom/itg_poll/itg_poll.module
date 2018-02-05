@@ -532,8 +532,9 @@ function itg_poll_views_pre_render(&$view) {
  */
 function itg_poll_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
   //Get the Form Id
+  
   if ($form["#id"] == 'views-exposed-form-poll-listing-page') {
-    $form['title']['#autocomplete_path'] = 'content-title-list/poll/autocomplete';
+    //$form['title']['#autocomplete_path'] = 'content-title-list/poll/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
     $form['nid']['#autocomplete_path'] = 'content-nid-list/poll/autocomplete';
     $form['nid']['#attributes'] = array('placeholder' => t('Poll ID'));
@@ -546,6 +547,14 @@ function itg_poll_form_views_exposed_form_alter(&$form , &$form_state , $form_id
       ) ,
     );
     views_poll_insert_field($form , 'poll_status' , 3);
+  }
+  
+  if ($form['#id'] == 'views-exposed-form-poll-listing-page') {
+    $form['title']['#autocomplete_path'] = 'content-state-title-list/poll/published/autocomplete';
+  } else if ($form['#id'] == 'views-exposed-form-poll-listing-page-1') {
+     $form['title']['#autocomplete_path'] = 'content-state-title-list/poll/draft/autocomplete';
+  } else if ($form['#id'] == 'views-exposed-form-poll-listing-page-2') {
+     $form['title']['#autocomplete_path'] = 'content-state-title-list/poll/unpublished/autocomplete';
   }
 }
 
