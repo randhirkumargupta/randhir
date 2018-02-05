@@ -326,6 +326,9 @@ width: 100%;
 .front .itg-top-section .home-top-story .droppable {
     height: 620px
 }
+@media only screen and (max-width: 1024px) {
+.itg-layout-container .itg-h321-section .droppable{height: 275px;}
+}
 @media screen and (min-width: 991px) and (max-width: 1024px) {
     .front .itg-top-section .top-rhs-add {
         margin-top: 40px
@@ -342,7 +345,10 @@ width: 100%;
     }
     #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
     #itg-scorecard-container .scorecard-stripcontent{display:none;}
+    .front .mt-50 { margin-top: 30px;}
+	  
 }
+
 @media screen and (min-width: 768px) and (max-width: 991px) {
     .front .itg-top-section .home-top-story .droppable {
         height: 515px
@@ -710,7 +716,12 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{ width:auto; display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .story-section .byline .mobile-twitter{color:#1b95e0; margin-left:4px;display: inline-block;} .story-section .byline .mobile-twitter a, .story-section .byline .mobile-twitter a:hover{ color:#1b95e0; text-decoration:none;}
-
+/* home page extra space fix */
+.front .itg-top-section .top-rhs-add-child .ad-widget {padding:20px 10px; height:290px;}
+.front .itg-layout-container .itg-h321-section .ad-widget{ height: 315px;padding: 30px 0;width: 322px;margin: 0 auto;background: #f3f3f3;}
+.front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
+.itg-h321-section .dont-miss ul li{width:100%}
+.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:none}
 }
 @media only screen and (max-width: 767px) {
 .app-area-wrapper{width:94%; padding:0 3%}
@@ -813,6 +824,12 @@ background:none;
 .story-section .byline .profile-detail ul.profile-byline li.pubdata,.story-section .byline .profile-detail ul.profile-byline li.update-data{ width:auto; display:inline-block;}
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2, .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2 {margin-bottom: 30px;}
+/* home page extra space fix */
+.front .itg-top-section .top-rhs-add-child .ad-widget {padding:0; height:auto;}
+.front .itg-layout-container .itg-h321-section .ad-widget{ height:auto;padding:0;width:300px;margin: 0 auto;background: #f3f3f3;}
+.front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
+.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:block}
+.front .mt-50 {margin-top: 30px;}
 }
 
 .cheaper-deaper-action a.btn-submit{padding: 3px 20px 1px;border: 1px solid #cd070f; background-color: #cd070f;color: #fff;font-size: 24px; text-transform: uppercase; font-weight: 600;margin-bottom: 36px;
