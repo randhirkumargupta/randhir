@@ -198,7 +198,7 @@ function itg_preprocess_page(&$variables) {
   }
 
   // For single column page
-  if ($arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436)) {
+  if ($arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'matchcenter')) {
 	  if($arg[0] == 'node' && $arg[1] == 1124436) {
 		  drupal_set_title('');
     }		  
@@ -588,7 +588,7 @@ function get_newsroom_js(){
 <script>
 window._newsroom = window._newsroom || [];
 window._newsroom.push({pageTemplate: 'home'});
-window._newsroom.push({pageDashboard: 'home'});
+window._newsroom.push({pageDashboard: 'home-mobile'});
 window._newsroom.push('auditClicks');
 window._newsroom.push('trackPage');
 

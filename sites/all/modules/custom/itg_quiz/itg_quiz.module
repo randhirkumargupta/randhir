@@ -314,11 +314,19 @@ function itg_quiz_views_pre_render(&$view) {
 function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
    if ($form['#id'] == 'views-exposed-form-manage-quiz-page' || $form['#id'] == 'views-exposed-form-manage-quiz-page-1' || $form['#id'] == 'views-exposed-form-manage-quiz-page-2') {     
      // Call function autocomplete to show matching titles.
-     $form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
+     //$form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));
      $form['nid']['#autocomplete_path'] = 'content-nid-list/quiz/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Quiz id'));
    }
+   
+    if ($form['#id'] == 'views-exposed-form-manage-quiz-page') {
+        $form['title']['#autocomplete_path'] = 'content-state-title-list/quiz/published/autocomplete';
+    } else if ($form['#id'] == 'views-exposed-form-manage-quiz-page-1') {
+        $form['title']['#autocomplete_path'] = 'content-state-title-list/quiz/draft/autocomplete';
+    } else if ($form['#id'] == 'views-exposed-form-manage-quiz-page-2') {
+        $form['title']['#autocomplete_path'] = 'content-state-title-list/quiz/unpublished/autocomplete';
+    }
 }
 
 /*******************************Node Related hooks*****************************/
