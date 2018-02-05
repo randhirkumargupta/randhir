@@ -51,6 +51,7 @@
         <div id="browse-image" class="itg-form-section-wrapper browse-media-file">
             <h2 class="story-title"><?php print t('Browse Image'); ?></h2>
             <div class="itg-form-section hide">
+				<?php print drupal_render($form['field_story_big_image']); ?>
                 <?php print drupal_render($form['field_story_extra_large_image']); ?>
                 <div class="pre-desc"><?php print t('This image will be resized by the system into pre-defined dimensions'); ?></div>    
                 <?php print drupal_render($form['field_story_large_image']); ?>
@@ -171,7 +172,7 @@
                     <?php print drupal_render($form['field_story_facebook_video']); ?>                    <!-- Facebook Instant Article -->
                     <?php print drupal_render($form['field_facebook_audio_position']); ?>
                     <?php print drupal_render($form['field_facebook_instant_audio_url']); ?>
-                    <?php print drupal_render($form['field_story_big_image']); ?>
+                    <?php // print drupal_render($form['field_story_big_image']); ?>
 
                     <?php print drupal_render($form['field_animated_image_position']); ?>
                     <?php print drupal_render($form['field_facebook_animated_image']); ?>
