@@ -406,14 +406,16 @@ jQuery(document).ajaxSuccess(function () {
 
 jQuery(window).load(function() {
     try {
-      jQuery(".flexslider").flexslider({
-     animation: "slide",
-     prevText: "",
-     nextText: "",
-         animation: "slide",
-         prevText: "",
-         nextText: "",
-      });
+		if(jQuery('#flexslider').length && typeof flexslider == 'function'){
+			jQuery(".flexslider").flexslider({
+			 animation: "slide",
+			 prevText: "",
+			 nextText: "",
+				 animation: "slide",
+				 prevText: "",
+				 nextText: "",
+			  });
+		}		     
      }
      catch(err) {
          console.log(err.message);
@@ -422,10 +424,11 @@ jQuery(window).load(function() {
 
 jQuery(window).load(function() {
     try {
-     
-         jQuery(".flexslider-video").flexslider({
-         animation: "slide"
-         });
+         if(jQuery('#flexslider').length && typeof flexslider == 'function'){
+			 jQuery(".flexslider-video").flexslider({
+				animation: "slide"
+			 });
+		 }	         
      }
      catch(err) {
          console.log(err.message);
