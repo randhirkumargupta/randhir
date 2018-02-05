@@ -42,6 +42,6 @@ function itg_common_get_scorecard($matchid) {
   }
   $iframe_url = '';
   $iframe_url .= '<iframe  id="si-scorecard"   class="mhide"  width="100%"   height="740" src="https://assets-indiatoday.sportz.io/cricket/matchcentre.html?matchid=' . $matchid . '" frameborder="0"></iframe>';
-  $iframe_url .= '<iframe class="desktop-hide"  width="100%" height="740" src="https://assets-indiatoday.sportz.io/cricket/matchcentre-mobile.html?matchid=' . $matchid . '" frameborder="0"></iframe>';
+  $iframe_url .= '<iframe style=" margin-top: 20px;" class="desktop-hide"  width="100%" height="740" src="https://assets-indiatoday.sportz.io/cricket/matchcentre-mobile.html?matchid=' . $matchid . '" frameborder="0"></iframe>';
   return $iframe_url;
 }
