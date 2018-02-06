@@ -308,14 +308,16 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
         }
         elseif ($mail_data_cat == 'story') {
-          if(variable_get('mail_template_emails') != ''){
-            //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
-            $to_mail = variable_get('mail_template_emails');
-          }
+          
           if ($node->status == 1 && $node->original->status == 0) {
+            if (variable_get('mail_template_emails') != '') {
+              //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+              $to_mail = variable_get('mail_template_emails');
+            }
             $byline_emails = get_node_byline_emails($node);
             $to_mail = $to_mail . ' , ' . $byline_emails;
           }
+
           $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
           $weburl = FRONT_URL . "/" . $alias;
@@ -330,11 +332,13 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_short_desc);
         }
         elseif ($mail_data_cat == 'photogallery') {
-          if(variable_get('mail_template_emails') != ''){
-            //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
-            $to_mail = variable_get('mail_template_emails');
+		      if ($node->status == 1 && $node->original->status == 0) {
+            if (variable_get('mail_template_emails') != '') {
+              //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+              $to_mail = variable_get('mail_template_emails');
+            }
           }
-          
+
           $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
           $weburl = FRONT_URL . "/" . $alias;
@@ -356,11 +360,12 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
         }
         elseif ($mail_data_cat == 'videogallery') {
-           if(variable_get('mail_template_emails') != ''){
-            //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
-            $to_mail = variable_get('mail_template_emails');
-          }
+
           if ($node->status == 1 && $node->original->status == 0) {
+            if (variable_get('mail_template_emails') != '') {
+              //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+              $to_mail = variable_get('mail_template_emails');
+            }
             $byline_emails = get_node_byline_emails($node);
             $to_mail = $to_mail . ' , ' . $byline_emails;
           }
@@ -433,6 +438,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     'subject' => $subject,
   );
   $to_mail = preg_replace('/\s+/', '', $to_mail);
+  if(empty($to_mail)){
+    return FALSE;
+  }
   $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'care@intoday.in', TRUE);
   if ($mail['result']) {
     return TRUE;
