@@ -347,7 +347,6 @@ function itg_front_search_views_pre_render(&$view) {
     /*
     if (!empty($arg[0])) {
       $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>' . str_replace("-", " ", $arg[1]) . '</h1></div>';
-      $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found For&nbsp<h1>' . str_replace("-", " ", $arg[1]) . '</h1></div>';
     }
     else {
       $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </div>';
