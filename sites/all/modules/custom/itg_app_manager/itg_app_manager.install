@@ -252,5 +252,52 @@ function itg_app_manager_schema() {
     ),
     'primary key' => array('id'),
   );
+ $schema['itg_app_master_info_internal'] = array(
+    'description' => 'The base table for itg master info internal.',
+    'fields' => array(
+        'id' => array(
+            'description' => 'The primary identifier',
+            'type' => 'serial',
+            'unsigned' => TRUE,
+            'not null' => TRUE,
+        ),
+        'org_id' => array(
+            'description' => 'org content id',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_id' => array(
+            'description' => 'info id- cat/menu id',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_type' => array(
+            'description' => 'info type- cat/menu/poll',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_key' => array(
+            'description' => 'info key',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+        'info_value' => array(
+            'description' => 'info value',
+            'type' => 'varchar',
+            'length' => 255,
+            'not null' => TRUE,
+            'default' => '',
+        ),
+    ),
+    'primary key' => array('id'),
+);
   return $schema;
 }
