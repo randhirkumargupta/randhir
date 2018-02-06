@@ -40,7 +40,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       }
       elseif ($mail_data_cat == 'story') {
         if (variable_get('mail_template_emails') != '') {
-          $to_mail = $to_mail . ' , ' . variable_get('mail_template_emails');
+          //$to_mail = $to_mail . ' , ' . variable_get('mail_template_emails');
+          $to_mail = variable_get('mail_template_emails');
         }
         if ($node->status == 1) {
           $byline_emails = get_node_byline_emails($node);
@@ -61,7 +62,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       }
       elseif ($mail_data_cat == 'photogallery') {
         if(variable_get('mail_template_emails') != ''){
-            $to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+            //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+            $to_mail = variable_get('mail_template_emails');
         }
         
         $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
@@ -86,7 +88,8 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       }
       elseif ($mail_data_cat == 'videogallery') {
         if(variable_get('mail_template_emails') != ''){
-            $to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+            //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+            $to_mail = variable_get('mail_template_emails');
         }
         if ($node->status == 1) {
           $byline_emails = get_node_byline_emails($node);
@@ -108,7 +111,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       $mail_content = $mail_node_author;
     }
   }
-  elseif ($event == 'create' && $review == 'needs_review') {
+  elseif (FALSE && $event == 'create' && $review == 'needs_review') { // We don't need this feature right now
     $to_mail = implode(',', $to);
     if (function_exists('itg_mail_templates_get_mailcontent')) {
       $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
@@ -154,7 +157,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     }
   }
   elseif ($event == 'update') {
-    if ($review == 'needs_review') {
+    if (FALSE && $review == 'needs_review') {// We don't need this feature right now
       $to_mail = implode(',', $to);
       if (function_exists('itg_mail_templates_get_mailcontent')) {
         $mail_data = itg_mail_templates_get_mailcontent($content_type, $review);
@@ -199,7 +202,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $mail_content = $mail_node_author;
       }
     }
-    else if ($review == 'rejected') {
+    else if (FALSE && $review == 'rejected') { // We don't need this feature right now
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
       $to_mail = $author_mail[0];
 
@@ -245,7 +248,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $mail_content = $mail_node_author;
       }
     }
-    else if ($review == 'needs_modification') {
+    else if (FALSE && $review == 'needs_modification') { // We don't need this feature right now
       $author_mail[] = db_query("SELECT mail from {users} WHERE uid = :uid AND status = 1", array(":uid" => $node->uid))->fetchField();
       $to_mail = $author_mail[0];
 
@@ -305,13 +308,16 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
         }
         elseif ($mail_data_cat == 'story') {
-          if(variable_get('mail_template_emails') != ''){
-            $to_mail = $to_mail.' , '.variable_get('mail_template_emails');
-          }
+          
           if ($node->status == 1 && $node->original->status == 0) {
+            if (variable_get('mail_template_emails') != '') {
+              //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+              $to_mail = variable_get('mail_template_emails');
+            }
             $byline_emails = get_node_byline_emails($node);
             $to_mail = $to_mail . ' , ' . $byline_emails;
           }
+
           $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
           $weburl = FRONT_URL . "/" . $alias;
@@ -326,10 +332,13 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_short_desc);
         }
         elseif ($mail_data_cat == 'photogallery') {
-          if(variable_get('mail_template_emails') != ''){
-            $to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+		      if ($node->status == 1 && $node->original->status == 0) {
+            if (variable_get('mail_template_emails') != '') {
+              //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+              $to_mail = variable_get('mail_template_emails');
+            }
           }
-          
+
           $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
           $weburl = FRONT_URL . "/" . $alias;
@@ -351,10 +360,12 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
         }
         elseif ($mail_data_cat == 'videogallery') {
-           if(variable_get('mail_template_emails') != ''){
-            $to_mail = $to_mail.' , '.variable_get('mail_template_emails');
-          }
+
           if ($node->status == 1 && $node->original->status == 0) {
+            if (variable_get('mail_template_emails') != '') {
+              //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
+              $to_mail = variable_get('mail_template_emails');
+            }
             $byline_emails = get_node_byline_emails($node);
             $to_mail = $to_mail . ' , ' . $byline_emails;
           }
@@ -427,6 +438,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     'subject' => $subject,
   );
   $to_mail = preg_replace('/\s+/', '', $to_mail);
+  if(empty($to_mail)){
+    return FALSE;
+  }
   $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'care@intoday.in', TRUE);
   if ($mail['result']) {
     return TRUE;

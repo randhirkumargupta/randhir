@@ -1009,7 +1009,8 @@ function itg_story_node_presave($node) {
         }
       }
     }
-
+    $node->body[LANGUAGE_NONE][0]['value'] = replace_emoji($node->body[LANGUAGE_NONE][0]['value']);
+    $_REQUEST['body'][LANGUAGE_NONE][0]['value'] = replace_emoji($node->body[LANGUAGE_NONE][0]['value']);
     // Prevent expiry date to save if expiry checkbox is unchecked
 
     if (empty($node->field_story_expires[LANGUAGE_NONE][0]['value'])) {
@@ -1375,4 +1376,16 @@ function itg_get_story_extra_large_image($nid) {
     $result = $query->execute();
     return $query->execute()->fetchField();
   }
+}
+
+/**
+ * Function for replace emoji characters from string
+ */ 
+function replace_emoji($text){
+  $string = str_replace("?", "{%}", $text);
+  $string = mb_convert_encoding($string, "ISO-8859-1", "UTF-8");
+  $string = mb_convert_encoding($string, "UTF-8", "ISO-8859-1");
+  $string = str_replace(array("?", "? ", " ?"), array(""), $string);
+  $string = str_replace("{%}", "?", $string);
+  return trim($string);
 }
