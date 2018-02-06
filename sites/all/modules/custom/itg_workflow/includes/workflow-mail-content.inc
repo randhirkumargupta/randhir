@@ -438,6 +438,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
     'subject' => $subject,
   );
   $to_mail = preg_replace('/\s+/', '', $to_mail);
+  if(empty($to_mail)){
+    return FALSE;
+  }
   $mail = drupal_mail('itg_workflow', 'send_mail_to_task', $to_mail, language_default(), $params, 'care@intoday.in', TRUE);
   if ($mail['result']) {
     return TRUE;
