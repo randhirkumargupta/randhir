@@ -757,7 +757,7 @@ function itg_workflow_node_update($node) {
       $query->condition('n.nid', $node->nid, '=');
       $result = $query->execute();
       $num_of_results = $result->rowCount();
-      if ($num_of_results >= 1) {
+      if ($num_of_results >= 1 && $node->status != 1) {
         $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO, EDITOR);
         $user_email = get_email_by_roll($rid);
         workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name, 'pub-unpub', $node_state);
@@ -797,7 +797,7 @@ function itg_workflow_node_update($node) {
               $user_email = get_email_by_roll($rid);
               workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name);
             }
-            else {
+            else if ($node->type != 'story') { // We don't need this feature right now
               $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
               $user_email = get_email_by_roll($rid);
               workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name);
