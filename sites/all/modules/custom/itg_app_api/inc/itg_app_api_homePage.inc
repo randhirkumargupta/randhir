@@ -28,7 +28,7 @@ function homePageJson() {
     $homePageJsonWidget_1 = array();
     $homePageJsonWidget_1 = homePageJsonWidget_1();
     $business = array();
-    $business = homePageJsonNewslist_business();
+    //$business = homePageJsonNewslist_business();
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
@@ -36,12 +36,11 @@ function homePageJson() {
 
     //$data['data'][0] = $homePageJsonWidget_1;
     $data['data'][0] = $data_topstories;
-    $data['data'][1] = $business;
-    $data['data'][2] = $data_news_india;
-    $data['data'][3] = $data_news_lifestyle;
-
-    $data['data'][4] = $data_news_world;
-    $data['data'][5] = $data_magazine;
+    //$data['data'][1] = $business;
+    $data['data'][1] = $data_news_india;
+    $data['data'][2] = $data_news_lifestyle;
+    $data['data'][3] = $data_news_world;
+    $data['data'][4] = $data_magazine;
     //$data['data'][6] = $data_poll;
 
     return $data;
