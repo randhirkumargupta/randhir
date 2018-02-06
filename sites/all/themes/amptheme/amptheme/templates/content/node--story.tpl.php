@@ -49,7 +49,7 @@ if (!empty($content)):
   $migrated_count = $content["migrated_count"];
   //get byline id based on order reorder
 
-  $byline_id = $content["byline_id"];
+  $byline_id_mobile = $byline_id = $content["byline_id"];
 
   //get byline detail
   $reporter_node = '';
@@ -119,8 +119,51 @@ if (!empty($content)):
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
           <div class="story-left"> 
               <div class="posted-by">
-                  <span><?php if(!empty($reporter_node->title)) { print t('By ' . $reporter_node->title) . ' | '; } ?></span>
-                  <span><?php print date('F j, Y', $node->created); ?>   </span>
+                  <?php
+				  $byline_detail = $byline_id[0];
+				  $extra_large_file = file_load($byline_detail['extra_large_image']);
+					$bylineextra_large_image = $extra_large_file->uri;
+					?>
+					<div class="profile-pic">
+					  <?php
+					  if(!empty($bylineextra_large_image)) {
+						  $file = $bylineextra_large_image;
+						  $file = file_create_url($file);
+						}
+						else {
+						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+						}
+						print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="'.$file.'"></amp-img>';
+					  ?>
+					</div>
+					<div class="profile-detail">
+					<ul class="profile-byline">
+					<?php
+					  if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
+					   echo '<li><ul>';	  	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  if (!empty($mobile_val['title'])) { ?>	 
+							 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
+						<?php }      	
+						   }
+					  echo '</ul></li>';
+						} 
+					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+						?>
+						<li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+							?>
+						</li>
+						<?php 
+						  } 
+						?>
+					  <li><?php print date('F j, Y', $node->created); ?> UPDATED <?php print date('H:i', $node->created); ?> IST </li>
+					  </ul>
+                 </div>
               </div>
           </div>
         <?php } ?>
@@ -128,8 +171,51 @@ if (!empty($content)):
         <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
           <div class="buzzfeed-byline">
             <div class="posted-by">
-                  <span><?php if(!empty($reporter_node->title)) { print t('By ' . $reporter_node->title) . ' | '; } ?></span>
-                  <span><?php print date('F j, Y', $node->created); ?>   </span>
+                  <?php
+				  $byline_detail = $byline_id[0];
+				  $extra_large_file = file_load($byline_detail['extra_large_image']);
+					$bylineextra_large_image = $extra_large_file->uri;
+					?>
+					<div class="profile-pic">
+					  <?php
+					  if(!empty($bylineextra_large_image)) {
+						  $file = $bylineextra_large_image;
+						  $file = file_create_url($file);
+						}
+						else {
+						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+						}
+						print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="'.$file.'"></amp-img>';
+					  ?>
+					</div>
+					<div class="profile-detail">
+					<ul class="profile-byline">
+					<?php
+					  if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
+					   echo '<li><ul>';	  	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  if (!empty($mobile_val['title'])) { ?>	 
+							 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
+						<?php }      	
+						   }
+					  echo '</ul></li>';
+						} 
+					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+						?>
+						<li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+							?>
+						</li>
+						<?php 
+						  } 
+						?>
+					  <li><?php print date('F j, Y', $node->created); ?> UPDATED <?php print date('H:i', $node->created); ?> IST </li>
+					  </ul>
+                 </div>
               </div>
           </div>
 
