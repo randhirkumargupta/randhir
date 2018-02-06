@@ -31,7 +31,6 @@ if (isset($row->field_field_story_template_factoids) && !empty($row->field_field
 
 <div class="factoids-page">
   <div class="fun-facts"><h2><?php print t('Funfacts');?></h2> </div>
-  <?php /*
   <div class="social-share">
   <ul>
       <li><a href="javascript:void(0)" class="share"><i class="fa fa-share-alt"></i></a></li>
@@ -40,8 +39,7 @@ if (isset($row->field_field_story_template_factoids) && !empty($row->field_field
       <li><a class="google" title="share on google+" href="javascript:void(0)" onclick="return googleplusbtn('<?php print $actual_link; ?>')"></a></li>
   </ul>      
   </div>
-  */
-  ?> 
+  
 </div>
 
 
