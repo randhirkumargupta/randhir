@@ -98,7 +98,6 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
         unset($form['title']);
         $destination = 'manage-issues';
         $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
-        $form['field_issue_title']['name'] = 'Issue Date';
     }
 
     //Add cancel button for magazine, supplement and issue
