@@ -80,8 +80,7 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
         $destination = 'manage-supplements';
         $form['title']['#description'] = '<p>' . t('Please enter supplement title.') . '</p>';
         $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
-        $form['title']['#required'] = FALSE; 
-               
+        $form['title']['#required'] = FALSE;               
     }
 
     //Set destination for issue form
@@ -447,7 +446,7 @@ function itg_msi_node_presave($node) {
             $node->status = $publish;
             field_attach_update('node', $node);
         }        
-      itg_msi_set_node_title($node);
+        itg_msi_set_node_title($node);
     }
 
     //Publish/Unpublish functionality for magazine
@@ -1315,21 +1314,6 @@ function _get_nid_from_title($title) {
       ->condition("n.title" , $title)->execute()->fetchField();
 }
 
-function itg_msi_get_all_unique_supplements(){
-	$options = array();
-	$query = db_select('node', 'n');
-	$query->fields('n' , array('nid', 'title'));
-	$query->condition('n.type', 'supplement', '=');
-	$query->groupBy('n.title');
-	//$query->orderBy('n.nid', 'DESC');
-	$result = $query->execute()->fetchAll();
-	
-	foreach($result as $supp_id => $supp_name){
-		$options[$supp_id] = $supp_name;
-	} 
-	return $options;
-}
-
 /**
  * Implements hook_node_submit().
  *
@@ -1342,6 +1326,10 @@ function itg_msi_node_submit($node, $form, &$form_state) {
   }
 }
 
+/**
+ * Function for setting the supplement title
+ * @param type $node
+ */
 function itg_msi_set_node_title(&$node){
 	$node->title = $node->field_supplement_name[LANGUAGE_NONE][0]['value'] . '_' .$node->field_supp_issue[LANGUAGE_NONE][0]['value'];
 }
