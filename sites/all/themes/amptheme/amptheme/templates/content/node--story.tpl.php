@@ -72,6 +72,8 @@ if (!empty($content)):
   $node_image_title = '';
   $node_image_alt = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']); 
   $node_image_title = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']);
+  // source type array
+  $source_type_arr = array('PTI' , 'IANS', 'ANI');
   ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
     <div class='<?php print $classes ?>'>      
@@ -160,7 +162,16 @@ if (!empty($content)):
 						<?php 
 						  } 
 						?>
-					  <li><?php print date('F j, Y', $node->created); ?> UPDATED <?php print date('H:i', $node->created); ?> IST </li>
+					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <?php
+					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+							print date('H:i', $node->created);
+						}
+						else {
+							print date('H:i', $node->changed);
+						}
+					  ?>
+					   IST </li>
 					  </ul>
                  </div>
               </div>
@@ -211,7 +222,16 @@ if (!empty($content)):
 						<?php 
 						  } 
 						?>
-					  <li><?php print date('F j, Y', $node->created); ?> UPDATED <?php print date('H:i', $node->created); ?> IST </li>
+					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <?php
+					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+							print date('H:i', $node->created);
+						}
+						else {
+							print date('H:i', $node->changed);
+						}
+					  ?>
+					   IST </li>
 					  </ul>
                  </div>
               </div>
