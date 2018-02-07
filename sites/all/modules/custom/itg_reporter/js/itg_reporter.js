@@ -13,7 +13,7 @@
             var reporter = settings.itg_reporter.settings.reporter;
             var cmpny = $('#edit-field-byline-company-und').val();
             var dprt = $('#edit-field-byline-department-und').val();
-            $('.edit-field-author-report-und').hide();
+            $('.form-item-field-author-report-und>label').hide();
             var intialcelebrityvalue = $('#edit-field-celebrity-pro-occupation-und').val();
             if (intialcelebrityvalue) {
                 var initialhasexist = intialcelebrityvalue.indexOf(anchor) != -1;
