@@ -212,7 +212,9 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $news_list_array[$listcount]['n_highlight'] = $heighligth;
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
@@ -413,7 +415,9 @@ function homePageJsonPackagelist_lifestyle() {
             $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $news_list_array[$listcount]['n_highlight'] = $heighligth;
             // photo list array
 
             if ($type == "photogallery") {
@@ -617,7 +621,9 @@ function homePageJsonPackagelist_world() {
             $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $news_list_array[$listcount]['n_highlight'] = $heighligth;
             // photo list array
 
             if ($type == "photogallery") {
@@ -974,7 +980,9 @@ function homePageJsonNewslist_india() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $news_list_array[$listcount]['n_highlight'] = $heighligth;
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
@@ -1180,7 +1188,9 @@ function homePageJsonNewslist_world() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $news_list_array[$listcount]['n_highlight'] = $heighligth;
             // photo list array
 
             if ($type == "photogallery") {
@@ -1754,7 +1764,9 @@ function homePageJsonNewslist_lifestyle() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $news_list_array[$listcount]['n_highlight'] = $heighligth;
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
@@ -2080,7 +2092,9 @@ function homePageJsonNewslist_business() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $news_list_array[$listcount]['n_highlight'] = $heighligth;
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
