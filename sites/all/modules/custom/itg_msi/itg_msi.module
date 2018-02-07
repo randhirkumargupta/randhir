@@ -75,10 +75,12 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'supplement_node_form') {
       if($user->uid != 1) {
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
+        $form['title']['#access'] = FALSE;
       }
         $destination = 'manage-supplements';
         $form['title']['#description'] = '<p>' . t('Please enter supplement title.') . '</p>';
         $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
+        $form['title']['#required'] = FALSE;               
     }
 
     //Set destination for issue form
@@ -443,7 +445,8 @@ function itg_msi_node_presave($node) {
             $publish = $node->field_supp_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
             $node->status = $publish;
             field_attach_update('node', $node);
-        }
+        }        
+        itg_msi_set_node_title($node);
     }
 
     //Publish/Unpublish functionality for magazine
@@ -460,6 +463,14 @@ function itg_msi_node_presave($node) {
     //Set date in title
     if ($node->type == 'issue') {
         $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
+        if ($node->is_new == 1) {
+            $node->status = $node->field_issue_publish[LANGUAGE_NONE][0]['value'];
+        }
+        else {
+            $publish = $node->field_issue_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+            $node->status = $publish;
+            field_attach_update('node', $node);
+        }
     }
 }
 
@@ -1309,4 +1320,24 @@ function _get_nid_from_title($title) {
     return db_select('node' , 'n')
       ->fields('n' , array("nid"))
       ->condition("n.title" , $title)->execute()->fetchField();
+}
+
+/**
+ * Implements hook_node_submit().
+ *
+ * Generate the node title as soon as the form has been submitted. That way
+ * the node preview is shown right too.
+ */
+function itg_msi_node_submit($node, $form, &$form_state) {
+  if ($node->type == 'supplement') {
+    itg_msi_set_node_title($node);
+  }
+}
+
+/**
+ * Function for setting the supplement title
+ * @param type $node
+ */
+function itg_msi_set_node_title(&$node){
+	$node->title = $node->field_supplement_name[LANGUAGE_NONE][0]['value'] . '_' .$node->field_supp_issue[LANGUAGE_NONE][0]['value'];
 }
