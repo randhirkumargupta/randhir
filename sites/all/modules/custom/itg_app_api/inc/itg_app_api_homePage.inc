@@ -1900,7 +1900,7 @@ function homePageJsonWidget_2() {
     $n_widget[0]['type_label'] = "scorecard";
     $n_widget[0]['tilte'] = "Scorecard"; 
     $n_widget[0]['short_url'] = "https://feeds.intoday.in/xml_it/commentary/scrapp_new.html";
-    $n_widget[0]['extended_url'] = "http://feeds.intoday.in/xml_it/commentary/scrapp_v3.html";
+    $n_widget[0]['extended_url'] = "https://feeds.intoday.in/xml_it/commentary/scrapp_v3.html";
     $n_widget[0]['action'] = "webview"; 
     $n_widget[0]['is_india_match'] = "1";
     
