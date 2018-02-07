@@ -20,7 +20,11 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   }
   else {
     $node_url = l($node->title, FRONT_URL . '/node/' . $node->nid);
-    $actual_node_url = FRONT_URL . '/' . drupal_get_path_alias('node/' . $node->nid);
+    $alias_un = drupal_get_path_alias('node/' . $node->nid);
+    if($alias_un == 'node/'.$node->nid && !empty($node->path['alias'])){
+	  $alias_un = $node->path['alias'];
+    }
+    $actual_node_url = FRONT_URL . '/' . $alias_un;
   }
 
   if ($event == 'create' && $review == 'published') {
@@ -49,6 +53,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         }
         $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
         $alias = drupal_get_path_alias('node/' . $node->nid . '');
+        if($alias == 'node/'.$node->nid && !empty($node->path['alias'])){
+		  $alias = $node->path['alias'];
+		}
         $weburl = FRONT_URL . "/" . $alias;
         $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
         $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
@@ -68,6 +75,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         
         $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
         $alias = drupal_get_path_alias('node/' . $node->nid . '');
+        if($alias == 'node/'.$node->nid && !empty($node->path['alias'])){
+		  $alias = $node->path['alias'];
+		}
         $weburl = FRONT_URL . "/" . $alias;
         $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
         $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
@@ -97,6 +107,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         }
         $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
         $alias = drupal_get_path_alias('node/' . $node->nid . '');
+        if($alias == 'node/'.$node->nid && !empty($node->path['alias'])){
+		  $alias = $node->path['alias'];
+		}
         $weburl = FRONT_URL . "/" . $alias;
         $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
         $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
@@ -320,6 +333,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
 
           $subject = $mail_data->field_mail_subject_story[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
+          if($alias == 'node/'.$node->nid && !empty($node->path['alias'])){
+		    $alias = $node->path['alias'];
+		  }
           $weburl = FRONT_URL . "/" . $alias;
           $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_story[LANGUAGE_NONE][0]['value']);
           $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
@@ -341,6 +357,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
 
           $subject = $mail_data->field_mail_subject_photo_gallery[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
+          if($alias == 'node/'.$node->nid && !empty($node->path['alias'])){
+		    $alias = $node->path['alias'];
+		  }
           $weburl = FRONT_URL . "/" . $alias;
           $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_photo_gallery[LANGUAGE_NONE][0]['value']);
           $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
@@ -371,6 +390,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
           }
           $subject = $mail_data->field_mail_subject_video[LANGUAGE_NONE][0]['value'];
           $alias = drupal_get_path_alias('node/' . $node->nid . '');
+          if($alias == 'node/'.$node->nid && !empty($node->path['alias'])){
+		    $alias = $node->path['alias'];
+		  }
           $weburl = FRONT_URL . "/" . $alias;
           $mail_node_title = str_replace('[itg_mail_token:itg_node_title]', $node->title, $mail_data->field_mail_body_video[LANGUAGE_NONE][0]['value']);
           $mail_node_url = str_replace('[itg_mail_token:itg_node_title_link]', $node_url, $mail_node_title);
