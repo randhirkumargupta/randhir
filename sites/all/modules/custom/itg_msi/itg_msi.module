@@ -463,6 +463,14 @@ function itg_msi_node_presave($node) {
     //Set date in title
     if ($node->type == 'issue') {
         $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
+        if ($node->is_new == 1) {
+            $node->status = $node->field_issue_publish[LANGUAGE_NONE][0]['value'];
+        }
+        else {
+            $publish = $node->field_issue_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+            $node->status = $publish;
+            field_attach_update('node', $node);
+        }
     }
 }
 
