@@ -121,6 +121,7 @@ if (!empty($content)):
               <div class="posted-by">
                   <?php
 				  $byline_detail = $byline_id[0];
+				  echo '<pre>';print_r($byline_id);die;
 				  $extra_large_file = file_load($byline_detail['extra_large_image']);
 					$bylineextra_large_image = $extra_large_file->uri;
 					?>
@@ -173,7 +174,7 @@ if (!empty($content)):
             <div class="posted-by">
                   <?php
 				  $byline_detail = $byline_id[0];
-				  echo '<pre>';print_r($byline_id);die;
+				  
 				  $extra_large_file = file_load($byline_detail['extra_large_image']);
 					$bylineextra_large_image = $extra_large_file->uri;
 					?>
