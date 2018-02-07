@@ -497,15 +497,15 @@ function itg_msi_node_validate($node, $form, &$form_state) {
         }
 
         //Set error for duplicacy
-        if (isset($matches) && !empty($matches)) {
+        if (isset($matches) && !empty($matches) && $node->type == 'magazine') {
             form_set_error('title', t('@contenttype title <strong>@contenttitle</strong> is already exist.', array('@contenttype' => ucfirst($node->type), '@contenttitle' => $title)));
 
             //Change message order for type "Magazine"
-            if ($node->type == 'magazine') {
+            //if ($node->type == 'magazine') {
                 $message_arr = $_SESSION['messages']['error'];
                 $message_arr_new = array($message_arr[1], $message_arr[0]);
                 $_SESSION['messages']['error'] = $message_arr_new;
-            }
+            //}
         }
 
         if ($node->type == 'supplement') {
@@ -1339,5 +1339,5 @@ function itg_msi_node_submit($node, $form, &$form_state) {
  * @param type $node
  */
 function itg_msi_set_node_title(&$node){
-	$node->title = $node->field_supplement_name[LANGUAGE_NONE][0]['value'] . '_' .$node->field_supp_issue[LANGUAGE_NONE][0]['value'];
+	$node->title = $node->field_supplement_name[LANGUAGE_NONE][0]['value'];
 }
