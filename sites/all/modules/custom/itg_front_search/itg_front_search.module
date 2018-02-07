@@ -572,7 +572,11 @@ function itg_get_all_bylineinfo($reporter_unique_id) {
  * {@inheritdoc}
  */
 function topic_form_submit_handler($form, &$form_state) {
-  //$bundle = array_values($form_state['input']['bundle_name']);
+  if (!empty($_REQUEST['keyword'])) {
+	   $search_web_url = 'topic/' . $_REQUEST['keyword']; 
+      drupal_goto($search_web_url);
+  }
+  /*
   $hash = array_values($form_state['values']['hash']);
   $search_key['keyword'] = $form_state['values']['keyword'];
   $search_key['bundle_name'][''] = 'All';
@@ -591,4 +595,5 @@ function topic_form_submit_handler($form, &$form_state) {
   unset($_GET['q']);
   $options = array('query' => $search_key);
   drupal_goto($search_web_url, $options);
+  */ 
 }
