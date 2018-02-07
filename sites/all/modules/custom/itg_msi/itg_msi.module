@@ -75,12 +75,19 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'supplement_node_form') {
       if($user->uid != 1) {
       $form['field_story_source_type']['#attributes']['class'][] = 'element-hidden';
-        $form['title']['#access'] = FALSE;
       }
         $destination = 'manage-supplements';
         $form['title']['#description'] = '<p>' . t('Please enter supplement title.') . '</p>';
         $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
-        $form['title']['#required'] = FALSE;               
+        //
+        $form['field_supp_issue']['#required'] = FALSE;
+        $form['field_issue_supp_large_image']['#required'] = FALSE;
+        $form['field_issue_supp_small_image']['#required'] = FALSE;
+        $form['field_supp_issue']['#access'] = FALSE;
+        $form['field_issue_supp_large_image']['#access'] = FALSE;
+        $form['field_issue_supp_small_image']['#access'] = FALSE;
+        $form['group_supp_import_xml']['#access'] = FALSE;
+        $form['field_supp_import_xml']['#access'] = FALSE;
     }
 
     //Set destination for issue form
@@ -91,6 +98,7 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
         unset($form['title']);
         $destination = 'manage-issues';
         $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
+        $form['field_issue_title']['name'] = 'Issue Date';
     }
 
     //Add cancel button for magazine, supplement and issue
@@ -445,8 +453,7 @@ function itg_msi_node_presave($node) {
             $publish = $node->field_supp_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
             $node->status = $publish;
             field_attach_update('node', $node);
-        }        
-        itg_msi_set_node_title($node);
+        }
     }
 
     //Publish/Unpublish functionality for magazine
@@ -463,14 +470,14 @@ function itg_msi_node_presave($node) {
     //Set date in title
     if ($node->type == 'issue') {
         $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
-        if ($node->is_new == 1) {
-            $node->status = $node->field_issue_publish[LANGUAGE_NONE][0]['value'];
-        }
-        else {
-            $publish = $node->field_issue_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
-            $node->status = $publish;
-            field_attach_update('node', $node);
-        }
+         if ($node->is_new == 1) {
+			$node->status = $node->field_issue_publish[LANGUAGE_NONE][0]['value'];
+		}
+		else {
+			$publish = $node->field_issue_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+			$node->status = $publish;
+		    field_attach_update('node', $node);
+		}
     }
 }
 
@@ -497,15 +504,15 @@ function itg_msi_node_validate($node, $form, &$form_state) {
         }
 
         //Set error for duplicacy
-        if (isset($matches) && !empty($matches) && $node->type == 'magazine') {
+        if (isset($matches) && !empty($matches)) {
             form_set_error('title', t('@contenttype title <strong>@contenttitle</strong> is already exist.', array('@contenttype' => ucfirst($node->type), '@contenttitle' => $title)));
 
             //Change message order for type "Magazine"
-            //if ($node->type == 'magazine') {
+            if ($node->type == 'magazine') {
                 $message_arr = $_SESSION['messages']['error'];
                 $message_arr_new = array($message_arr[1], $message_arr[0]);
                 $_SESSION['messages']['error'] = $message_arr_new;
-            //}
+            }
         }
 
         if ($node->type == 'supplement') {
@@ -545,7 +552,6 @@ function itg_msi_node_validate($node, $form, &$form_state) {
         }
 
         foreach ($file as $result) {
-            $xml_file = '';
             $xml_file = file_load($result['fid']);
 
             $fileuri = file_create_url($xml_file->uri);
@@ -1320,24 +1326,4 @@ function _get_nid_from_title($title) {
     return db_select('node' , 'n')
       ->fields('n' , array("nid"))
       ->condition("n.title" , $title)->execute()->fetchField();
-}
-
-/**
- * Implements hook_node_submit().
- *
- * Generate the node title as soon as the form has been submitted. That way
- * the node preview is shown right too.
- */
-function itg_msi_node_submit($node, $form, &$form_state) {
-  if ($node->type == 'supplement') {
-    itg_msi_set_node_title($node);
-  }
-}
-
-/**
- * Function for setting the supplement title
- * @param type $node
- */
-function itg_msi_set_node_title(&$node){
-	$node->title = $node->field_supplement_name[LANGUAGE_NONE][0]['value'];
 }
