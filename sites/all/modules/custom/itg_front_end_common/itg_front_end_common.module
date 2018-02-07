@@ -1142,7 +1142,7 @@ function _latest_from_businesstoday() {
     }
     $related_dt = '';
     if (!empty($business_data[0]['content_id'])) {
-      $related_dt = '<span class="widget-title">' . t('LATEST FROM BUSINESS TODAY') . '</span>';
+      $related_dt = '<span class="widget-title">' . t('LATEST FROM DAILYO') . '</span>';
     }
     if (!empty($business_data[0]['content_id'])) {
       $related_dt.= "<ul>";
