@@ -127,8 +127,7 @@ if (!empty($content)):
 					<div class="profile-pic">
 					  <?php
 					  if(!empty($bylineextra_large_image)) {
-						  $file = $bylineextra_large_image;
-						  $file = file_create_url($file);
+						  $file = image_style_url('user_picture', $bylineextra_large_image);
 						}
 						else {
 						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
@@ -179,8 +178,7 @@ if (!empty($content)):
 					<div class="profile-pic">
 					  <?php
 					  if(!empty($bylineextra_large_image)) {
-						  $file = $bylineextra_large_image;
-						  $file = file_create_url($file);
+						  $file = image_style_url('user_picture', $bylineextra_large_image);
 						}
 						else {
 						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
