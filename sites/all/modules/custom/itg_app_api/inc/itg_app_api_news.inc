@@ -217,7 +217,7 @@ function generateNewsCategoryList($tid, $pageno) {
       $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
       $heighligth = array();
       $heighligth = (array) getHighlightByNid($nid);      
-      if ($type == "story") {
+      if ($type == 'story') {
           $news_list_array[$listcount]['n_highlight'] = $heighligth;
       }
       if ($type == "photogallery") {
