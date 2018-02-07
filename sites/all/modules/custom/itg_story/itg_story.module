@@ -598,6 +598,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
     }
 
     // Code for issue exit or not.
+    //print_r($node->field_story_issue_date);die;
     if (!empty($node->field_story_issue_date[LANGUAGE_NONE][0]['value'])) {
       $issue = itg_story_checked_issue($node->field_story_issue_date[LANGUAGE_NONE][0]['value']);
       if (!$issue) {
@@ -719,7 +720,6 @@ function itg_story_after_build($form, &$form_state) {
  */
 function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-
   // condition for first blank reporter field on edit
   if ($form_id == 'story_node_form' && !empty($form['nid']['#value'])) {
     $field_name = 'field_story_reporter';
@@ -750,6 +750,12 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   else {
     $magazine_id = !empty($form_state['input'][$magazine_field][LANGUAGE_NONE]) ? $form_state['input'][$magazine_field][LANGUAGE_NONE] : '';
   }
+  if (isset($form['#node']->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
+    $issue_date = $form['#node']->field_story_issue_date[LANGUAGE_NONE][0]['value'];
+  }
+  else {
+    $issue_date = !empty($form_state['values']['field_story_issue_date'][LANGUAGE_NONE]) ? $form_state['values']['field_story_issue_date'][LANGUAGE_NONE][0]['value'] : '';
+  }
 
   if (isset($form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
     $date_val = $form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value'];
@@ -759,12 +765,11 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // add ajax on magazine field
-  $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+  $form['field_story_issue_date'][LANGUAGE_NONE][0]['#ajax'] = array(
     'event' => 'change',
     'callback' => 'itg_story_magazine_ajax_callback',
     'wrapper' => $supplement_field . '_replace',
   );
-
   // add ajax on tv date field
   $form[$tv_date_field][LANGUAGE_NONE][0]['#ajax'] = array(
     'event' => 'change',
@@ -776,9 +781,9 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $supplement_field . '_replace">';
   $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 
-  if (function_exists('itg_common_dropdown_supplement')) {
-    if(!empty($magazine_id)) {
-    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+  if (function_exists('itg_story_dropdown_supplement')) {
+    if(!empty($issue_date)) {
+      $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_story_dropdown_supplement($issue_date);
     }
   }
 
@@ -1364,4 +1369,24 @@ function itg_get_story_extra_large_image($nid) {
     $result = $query->execute();
     return $query->execute()->fetchField();
   }
+}
+
+function itg_story_dropdown_supplement($issue_date){
+	// Fetch supplements for selected magazine
+  $select = t('- None -');
+  $data = array('_none' => $select);
+  $query = db_select('field_data_field_issue_supplement' , 'm');
+  $query->join('node' , 'n' , 'm.entity_id = n.nid');
+  $query->join('node' , 'ns' , 'm.field_issue_supplement_target_id = ns.nid');
+  $query->fields('m' , array('entity_id', 'field_issue_supplement_target_id'));
+  $query->fields('n' , array('title'));
+  $query->fields('ns' , array('title'));
+  $query->condition('n.status' , 1 , '=');
+  $query->condition('n.title' , $issue_date , '=');
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $data[$record['field_issue_supplement_target_id']] = $record['ns_title'];
+  }
+  return $data;
 }
