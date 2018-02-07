@@ -52,10 +52,13 @@
                 $('#edit-field-reporter-profile-type').show();
                 $('#edit-field-byline-company').show();
                 $('#edit-field-byline-department').show();
+                $('#edit-field-author-report-und-author-report').hide();
             } else {
                 $('#edit-field-reporter-profile-type').hide();
                 $('#edit-field-byline-company').hide();
                 $('#edit-field-byline-department').hide();
+                $('#edit-field-author-report-und-author-report').hide();
+                
             }
             // Hide by default movie name field.
             $('#edit-field-reporter-movie-name').hide();
@@ -98,12 +101,14 @@
                     $('#edit-field-reporter-profile-type').show();
                     $('#edit-field-byline-company').show();
                     $('#edit-field-byline-department').show();
+                    $('#edit-field-author-report-und-author-report').show();
                 } else {
                     $('#edit-field-reporter-profile-type').hide();
                     $("#edit-field-reporter-profile-type option:selected").prop('selected', false);
                     $('#edit-field-byline-company').hide();
                     //$("#edit-field-byline-company option:selected").prop('selected', false);
                     $('#edit-field-byline-department').hide();
+                    $('#edit-field-author-report-und-author-report').hide();
                     //$("#edit-field-byline-department option:selected").prop('selected', false);
                 }
                 // Show hide logic for career graph field.
