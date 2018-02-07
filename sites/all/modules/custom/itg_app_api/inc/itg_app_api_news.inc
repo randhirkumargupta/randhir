@@ -215,6 +215,11 @@ function generateNewsCategoryList($tid, $pageno) {
       $news_list_array[$listcount]['n_pcategory_name'] = "$term_name";
       $news_list_array[$listcount]['n_rating'] = "";
       $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
+      $heighligth = array();
+      $heighligth = (array) getHighlightByNid($nid);
+      if ($type == "story") {
+          $news_list_array[$listcount]['highlight'] = "$heighligth";
+      }
       if ($type == "photogallery") {
         $node_data = node_load($nid);
 
