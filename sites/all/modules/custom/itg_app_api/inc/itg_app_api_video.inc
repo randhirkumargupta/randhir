@@ -1165,10 +1165,10 @@ function topstoriesList($source) {
         $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
         $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
         
-            $heighligth = array();
-            $heighligth = (array) getHighlightByNid($nid);
-            $news_list_array[$listcount]['n_highlight'] = $heighligth;
-        
+        $heighligth = array();
+        $heighligth = (array) getHighlightByNid($nid);
+        $news_list_array[$listcount]['n_highlight'] = $heighligth;
+
         //$data_newslist[$home_list_count]['n_photo'] = $n_photo;
         //$data_newslist[$home_list_count]['n_video'] = $n_video;
         // photo list array

@@ -3590,7 +3590,7 @@ function itg_rapid_api_login_request($token) {
     $result = callAPI("GET", $url, $data);
     $result_obj = json_decode($result);
     if (!$result_obj->uid) {
-        $account_err['status_code'] = "0";
+        $account_err['status_code'] = "2";
         $account_err['status_message'] = "Wrong username or password.";
         return $account_err;
     }
@@ -4520,7 +4520,7 @@ function itg_rapid_api_anchor_list($token) {
 
 
     // check args
-    if ($user_id > 0) {          
+    if ($user_id > 0) {
         $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
     } else {
         $jsondata = list_itg_rapid_api_anchor_list_default();
@@ -6381,13 +6381,12 @@ function itg_rapid_api_aboutus($token){
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
 }
-
 /**
  * Helper function to list_itg_rapid_api_anchor_list_default. 
  *
  * @return array
  */
-function list_itg_rapid_api_anchor_list_default() {    
+function list_itg_rapid_api_anchor_list_default() {
     $data = array();
     $loopc = 0;
     $anchor_c = 0;
@@ -6399,7 +6398,7 @@ function list_itg_rapid_api_anchor_list_default() {
     $query->fields('iwo', array('nid'));
     $query->condition('iwo.widget', 'anchors_listing_widget');
     $query->condition('fco.field_celebrity_pro_occupation_tid', 285903);
-    $query->orderBy('iwo.weight', 'ASC');     
+    $query->orderBy('iwo.weight', 'ASC');   
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);  
     foreach ($result as $reskey => $resvalue) {
         $node_data = node_load($resvalue['nid']);

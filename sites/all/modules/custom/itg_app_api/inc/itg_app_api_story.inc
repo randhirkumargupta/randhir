@@ -316,7 +316,7 @@ function getHighlightByNid($nid) {
     $heighlight[$loop_cont]['h_title'] = "$text";
     $loop_cont++;
   }
-  return $heighlight;
+  return $heighlight; 
 }
 /**
  * function for get story rating
