@@ -1692,6 +1692,7 @@ function itg_widget_views_query_alter(&$view, &$query) {
             foreach ($query->where[1]['conditions'] as $key => $condition) {
                 if ($condition['field'] == 'itg_widget_order.cat_id') {
                     $query->where[1]['conditions'][$key]['value'] = $term_id;
+                    $query->where[1]['conditions'][$key]['operator'] = '=';
                 }
             }
         }
