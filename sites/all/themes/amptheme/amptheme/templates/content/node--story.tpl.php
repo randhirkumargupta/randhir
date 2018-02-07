@@ -121,15 +121,17 @@ if (!empty($content)):
               <div class="posted-by">
                   <?php
 				  $byline_detail = $byline_id[0];
-				  echo '<pre>';print_r($byline_id);die;
+				  
 				  $extra_large_file = file_load($byline_detail['extra_large_image']);
 					$bylineextra_large_image = $extra_large_file->uri;
+					echo '<pre>';print_r($bylineextra_large_image);
 					?>
 					<div class="profile-pic">
 					  <?php
 					  if(!empty($bylineextra_large_image)) {
 						  $file = $bylineextra_large_image;
 						  $file = file_create_url($file);
+						  echo '<pre>';print_r($file);die;
 						}
 						else {
 						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
