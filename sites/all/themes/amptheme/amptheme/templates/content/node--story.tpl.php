@@ -368,7 +368,8 @@ if (!empty($content)):
                     $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
 
                     $factoidsSocialShare['icons'] = '<div class="factoids-page">
-                                 <div class="fun-facts"><h2>' . t('Funfacts') . '</h2> </div>
+                                 <div class="fun-facts"><h2>' . t('Funfacts') . '</h2> </div></div>';
+                                 /*
                                   <div class="social-share">
                                   <amp-accordion disable-session-states>
                                   <section>
@@ -385,6 +386,7 @@ if (!empty($content)):
                                  </amp-accordion>
                                  </div>
                                  </div>';
+                                */ 
                     $factoidsSocialShare['slider'] = '<div class="factoids-slider"><div class="scroll-x"><ul>';
                     foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
                       $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
