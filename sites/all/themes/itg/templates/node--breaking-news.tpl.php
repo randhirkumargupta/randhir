@@ -154,7 +154,7 @@ $coverage_end_final_date = '';
             $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
         }
         else {
-            $title = '<h1><span>' . $type . '</span>: ' . $node->title . '</h1>';
+            $title = '<h1>' . $node->title . '</h1>';
         }
         print $title;
         ?>
@@ -189,7 +189,7 @@ $coverage_end_final_date = '';
           $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
         }
         else {
-          $title = '<h1><span>' . $type . '</span>: ' . $node->title . '</h1>';
+          $title = '<h1>' . $node->title . '</h1>';
         }
 
         $share_title = $node->title;
