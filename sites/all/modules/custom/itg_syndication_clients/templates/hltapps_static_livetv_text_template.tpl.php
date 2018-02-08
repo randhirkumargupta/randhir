@@ -1,0 +1,31 @@
+<Root>
+<content>
+    <type>live_stream_IT</type>
+    <iphone>
+        http://lmil.live-s.cdn.bitgravity.com/cdn-live/_definst_/lmil/live/indiatoday_app.smil/playlist.m3u8
+    </iphone>
+    <ipad>
+        http://lmil.live-s.cdn.bitgravity.com/cdn-live/_definst_/lmil/live/indiatoday_app.smil/playlist.m3u8
+    </ipad>
+    <android>http://feeds.intoday.in/hltapps/api/livetv.php</android>
+    <playbook>
+        http://lmil.live-s.cdn.bitgravity.com/cdn-live/_definst_/lmil/live/indiatoday_app.smil/playlist.m3u8
+    </playbook>
+    <bb>
+        http://lmil.live-s.cdn.bitgravity.com/cdn-live/_definst_/lmil/live/indiatoday_app.smil/playlist.m3u8
+    </bb>
+    <mp4sream>
+        http://lmil.live-s.cdn.bitgravity.com/cdn-live/_definst_/lmil/live/indiatoday_app.smil/manifest
+    </mp4sream>
+    <wp7>
+        http://lmil.live-s.cdn.bitgravity.com/cdn-live/_definst_/lmil/live/indiatoday_app.smil/manifest
+    </wp7>
+    <live_stream_IT>http://m.indiatoday.in/hlt/indiatodaystream.html</live_stream_IT>
+    <audio>
+        <url>
+            http://lmil.live-s.cdn.bitgravity.com/cdn-live/_definst_/lmil/live/aajtak_150k/playlist.m3u8?wowzaaudioonly
+        </url>
+        <status>1</status>
+    </audio>
+</content>
+</Root>

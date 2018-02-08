@@ -1,0 +1,1537 @@
+<?php
+
+/**
+ * @file
+ * The ITG Syndication clients.
+ * Contains functionality for ITG Syndication for clients.
+ */
+module_load_include('inc', 'itg_syndication_clients', 'itg_syndication_clients.helper');
+
+/**
+ * Implements hook_menu().
+ */
+function itg_syndication_clients_menu() {
+  $items['bsb/story'] = array(
+    'page callback' => 'itg_bsb_story_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_bsb_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['bsb/photos'] = array(
+    'page callback' => 'itg_bsb_photo_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_bsb_photo.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['bsb/videos'] = array(
+    'page callback' => 'itg_bsb_video_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_bsb_video.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/yahoo'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['feeds/msnfeeds/story'] = array(
+    'page callback' => 'itg_msn_feed_story_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_msn_feed_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['feeds/msnfeeds/staticstory'] = array(
+    'page callback' => 'itg_rss_msnstaticfeeds',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_msn_feed_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeeds/cabbytabby/videos'] = array(
+    'page callback' => 'itg_cabbytabby_feed_videos_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_cabbytabby_feed_videos.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeeds/proquest/story'] = array(
+    'page callback' => 'itg_proquest_feed_story_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_proquest_feed_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeeds/ola/video'] = array(
+    'page callback' => 'itg_ola_feed_videos_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_ola_feed_videos.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeeds/dekkho/video'] = array(
+    'page callback' => 'itg_dekkho_feed_videos_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_dekkho_feed_videos.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeeds/videoelephant/video'] = array(
+    'page callback' => 'itg_videoelephant_feed_videos_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_videoelephant_feed_videos.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeeds/gist/galleries'] = array(
+    'page callback' => 'itg_gist_feed_galleries_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_gist_galleries_videos.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeeds/dailyhunt/stories'] = array(
+    'page callback' => 'itg_dailyhunt_feed_stories_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_dailyhunt_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeeds/dailyhunt/breakingnews'] = array(
+    'page callback' => 'itg_dailyhunt_feed_breakingnews_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_dailyhunt_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeeds/scribd/latest_issue'] = array(
+    'page callback' => 'itg_scribd_feed_latest_issue',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_scribd_latest_issue.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['clients/indiatoday-new'] = array(
+    'page callback' => 'itg_uc_browser_feed_latest_story',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_uc_browser_latest_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['clients/indiatoday-zuppit-top'] = array(
+    'page callback' => 'itg_zuppit_feed_latest_story',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_zuppit_latest_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/syndication-article'] = array(
+    'page callback' => 'itg_rss_syndication_article',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_syndication_article.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/article'] = array(
+    'page callback' => 'itg_rss_article',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_article.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-education/article'] = array(
+    'page callback' => 'itg_education_rss_article',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_education_rss_article.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/it-latest-issue'] = array(
+    'page callback' => 'itg_rss_it_latest_issue_article',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_it_latest_issue_article.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss/article-news-republic'] = array(
+    'page callback' => 'itg_rss_article_news_republic',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_article_news_republic.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-education/article-news-republic'] = array(
+    'page callback' => 'itg_rss_education_article_news_republic',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_article_news_republic.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/stories'] = array(
+    'page callback' => 'itg_rss_hltapps_stories',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/videos'] = array(
+    'page callback' => 'itg_rss_hltapps_videos',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/photos'] = array(
+    'page callback' => 'itg_rss_hltapps_photos',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/programme'] = array(
+    'page callback' => 'itg_rss_hltapps_programme',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/mixed-xml-feed'] = array(
+    'page callback' => 'itg_rss_hltapps_mixed_rss_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/videos/livenow_listing'] = array(
+    'page callback' => 'itg_rss_hltapps_livenow_listing_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['msn/hlt/videos'] = array(
+    'page callback' => 'itg_rss_msn_hlt_videos_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['headlinestoday/vuclip/videsectionlist_program'] = array(
+    'page callback' => 'itg_rss_vuclip_videsectionlist_program_videos_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_vuclip_videsectionlist_program_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['headlinestoday/mauj/videos'] = array(
+    'page callback' => 'itg_rss_mauj_videsectionlist_program_videos_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_vuclip_videsectionlist_program_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/samsungtv_it/videos'] = array(
+    'page callback' => 'itg_rss_samsungtv_it_video_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/samsungtv_it/home'] = array(
+    'page callback' => 'itg_rss_samsungtv_it_video_home_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/samsungtv_it/livenow-listing'] = array(
+    'page callback' => 'itg_rss_samsungtv_it_livenow_listing_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/samsungtv_it/videobreakingnews'] = array(
+    'page callback' => 'itg_rss_samsungtv_it_videobreakingnews_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/indiatoday/breakingnews'] = array(
+    'page callback' => 'itg_rss_indiatoday_videobreakingnews_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['xml/election2017/election-finals'] = array(
+    'page callback' => 'itg_rss_elections2017_election_finals_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_elections2017_election_finals_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['micromax/videsectionlist'] = array(
+    'page callback' => 'itg_rss_micromax_videsectionlist_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_micromax_videsectionlist_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/yahoo/static/section'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_static_section_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/yahoo/static/mailtoday'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_static_mailtoday_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/yahoo/static/latest_stories'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_static_latest_stories_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/yahoo/static/latest_issue'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_static_latest_issue_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/static'] = array(
+    'page callback' => 'itg_rss_feed_static_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_feed_static.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/conclave/stories'] = array(
+    'page callback' => 'itg_rss_conclave_story_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_feed_conclave_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/newsfromindiatoday'] = array(
+    'page callback' => 'itg_rss_newsfromindiatoday_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_newsfromindiatoday_story.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/rsselections2016-westbengal'] = array(
+    'page callback' => 'itg_rss_rsselections2016_westbengal_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_sselections2016_westbengal.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rssfeed/breakingnewsOctober072017-dailyhunt'] = array(
+    'page callback' => 'itg_rss_breakingnewsOctober072017_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_dailyhunt_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/staticfeeds'] = array(
+    'page callback' => 'itg_rss_hltappsstaticfeeds',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/programme_static'] = array(
+    'page callback' => 'itg_rss_programme_static',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['hltapps/breakingnews-feed'] = array(
+    'page callback' => 'itg_rss_breakingnews_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_hltapps_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-feeds/scribd/live_issue'] = array(
+    'page callback' => 'itg_scribd_feed_live_issue',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_scribd_live_issue.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-feeds/celtick/it_stories'] = array(
+    'page callback' => 'itg_celtick_feed_it_stories',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_celtick_feed_it_stories.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-feeds/videsectionlist_india_rss_fun_on_go'] = array(
+    'page callback' => 'videsectionlist_india_rss_fun_on_go',
+    'access arguments' => array('access content'),
+    'file' => 'inc/videsectionlist_india_rss_fun_on_go.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-feeds/factiva_stories'] = array(
+    'page callback' => 'factiva_stories_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/factiva_stories_syndication.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['rss-feeds/syndication-cms'] = array(
+    'page callback' => 'syndication_interface_cms',
+    'access arguments' => array('access content'),
+    'file' => 'inc/syndication_interface_cms.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['pti-feeds/genrate_pti_feeds'] = array(
+    'page callback' => 'itg_generate_pti_feed',
+    'access arguments' => array('access content'),
+    'file' => 'inc/generate_pti_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/yahoo/unionbudget2018'] = array(
+    'page callback' => 'itg_indiatoday_yahoo_unionbudget2018_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['indiatoday/samsung/jsonfeed'] = array(
+    'page callback' => 'itg_indiatoday_samsung_jsonfeed_syndication',
+    'access arguments' => array('access content'),
+    'file' => 'inc/itg_rss_samsungtv_it_video_feed.inc',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * hook_theme
+ * @return array
+ */
+function itg_syndication_clients_theme() {
+  return array(
+    'hltapps_homesectionslist' => array(
+      'template' => 'templates/hltapps_homesectionslist_template',
+    ),
+    'hltapps_sectionslist' => array(
+      'template' => 'templates/hltapps_sectionslist_template',
+    ),
+    'hltapps_video_sectionslist' => array(
+      'template' => 'templates/hltapps_video_sectionslist_template',
+    ),
+    'hltapps_photo_sectionslist' => array(
+      'template' => 'templates/hltapps_photo_sectionslist_template',
+    ),
+    'hltapps_static_about_us' => array(
+      'template' => 'templates/hltapps_static_about_us_template',
+    ),
+    'hltapps_static_livetv_text' => array(
+      'template' => 'templates/hltapps_static_livetv_text_template',
+    ),
+    'hltapps_static_playbook_ad' => array(
+      'template' => 'templates/hltapps_static_playbook_ad_template',
+    ),
+    'hltapps_static_bb_ad' => array(
+      'template' => 'templates/hltapps_static_bb_ad_template',
+    ),
+    'hltapps_static_api_livetv' => array(
+      'template' => 'templates/hltapps_static_api_livetv_template',
+    ),
+    'hltapps_static_api' => array(
+      'template' => 'templates/hltapps_static_api',
+    ),
+    'msn_static_stories_what_to_expect' => array(
+      'template' => 'templates/msn_static_stories_what_to_expect',
+    ),
+    'msn_static_stories_top_news' => array(
+      'template' => 'templates/msn_static_stories_top_news',
+    )
+  );
+}
+
+/**
+ * Implements hook_cronapi().
+ * {@inheritdoc}
+ */
+function itg_syndication_clients_cronapi($op, $job = NULL) {
+  $items['itg-bsb-story-syndication-cron'] = array(
+    'description' => 'Syndication BSB story cron.',
+    'callback' => 'itg_bsb_story_syndication',
+    'file' => 'inc/itg_bsb_story.inc',
+  );
+  $items['itg-bsb-photo-syndication-cron'] = array(
+    'description' => 'Syndication BSB Photo cron.',
+    'callback' => 'itg_bsb_photo_syndication',
+    'file' => 'inc/itg_bsb_photo.inc',
+  );
+  $items['itg-bsb-video-syndication-cron'] = array(
+    'description' => 'Syndication BSB Video cron.',
+    'callback' => 'itg_bsb_video_syndication',
+    'file' => 'inc/itg_bsb_video.inc',
+  );
+  $items['itg-indiatoday-yahoo-syndication-cron'] = array(
+    'description' => 'Syndication Yahoo cron.',
+    'callback' => 'itg_indiatoday_yahoo_syndication',
+    'file' => 'inc/itg_indiatoday_yahoo.inc',
+  );
+  $items['itg-msn-feed-story-syndication-cron'] = array(
+    'description' => 'Syndication MSN story cron.',
+    'callback' => 'itg_msn_feed_story_syndication',
+    'file' => 'inc/itg_msn_feed_story.inc',
+  );
+  $items['itg-cabbytabby-feed-videos-syndication-cron'] = array(
+    'description' => 'Syndication Cabbytabby video cron.',
+    'callback' => 'itg_cabbytabby_feed_videos_syndication',
+    'file' => 'inc/itg_cabbytabby_feed_videos.inc',
+  );
+  $items['itg-proquest-feed-story-syndication-cron'] = array(
+    'description' => 'Syndication Proquest story cron.',
+    'callback' => 'itg_proquest_feed_story_syndication',
+    'file' => 'inc/itg_proquest_feed_story.inc',
+  );
+  $items['itg-ola-feed-videos-syndication-cron'] = array(
+    'description' => 'Syndication Ola Video cron.',
+    'callback' => 'itg_ola_feed_videos_syndication',
+    'file' => 'inc/itg_ola_feed_videos.inc',
+  );
+  $items['itg-dekkho-feed-videos-syndication-cron'] = array(
+    'description' => 'Syndication Dekkho video cron.',
+    'callback' => 'itg_dekkho_feed_videos_syndication',
+    'file' => 'inc/itg_dekkho_feed_videos.inc',
+  );
+  $items['itg-videoelephant-feed-videos-syndication-cron'] = array(
+    'description' => 'Syndication Video Elephant video cron.',
+    'callback' => 'itg_videoelephant_feed_videos_syndication',
+    'file' => 'inc/itg_videoelephant_feed_videos.inc',
+  );
+  $items['itg-gist-feed-galleries-syndication-cron'] = array(
+    'description' => 'Syndication Gist galleries cron.',
+    'callback' => 'itg_gist_feed_galleries_syndication',
+    'file' => 'inc/itg_gist_galleries_videos.inc',
+  );
+  $items['itg-dailyhunt-feed-stories-syndication-cron'] = array(
+    'description' => 'Syndication Dailyhunt stories cron.',
+    'callback' => 'itg_dailyhunt_feed_stories_syndication',
+    'file' => 'inc/itg_dailyhunt_stories.inc',
+  );
+  $items['itg-dailyhunt-feed-breakingnews-syndication-cron'] = array(
+    'description' => 'Syndication Dailyhunt breaking news cron.',
+    'callback' => 'itg_dailyhunt_feed_breakingnews_syndication',
+    'file' => 'inc/itg_dailyhunt_stories.inc',
+  );
+  $items['itg-scribd-feed-latest-issue-cron'] = array(
+    'description' => 'Syndication Scribd Latest issue cron.',
+    'callback' => 'itg_scribd_feed_latest_issue',
+    'file' => 'inc/itg_scribd_latest_issue.inc',
+  );
+  $items['itg-it-latest-issue-cron'] = array(
+    'description' => 'Syndication IT Latest issue cron.',
+    'callback' => 'itg_rss_it_latest_issue_article',
+    'file' => 'inc/itg_rss_it_latest_issue_article.inc',
+  );
+  return $items;
+}
+
+/**
+ * Function for generate slug from String
+ * @param string $text
+ * @return string
+ */
+function slugify($text) {
+  $text = preg_replace('~&~', 'and', $text);
+  $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+  $text = preg_replace('~[^-\w]+~', '', $text);
+  $text = trim($text, '-');
+  $text = preg_replace('~-+~', '-', $text);
+  $text = strtolower($text);
+  if (empty($text)) {
+    return 'n-a';
+  }
+  return $text;
+}
+
+/**
+ * Function is used to get term name by Tids
+ * @param int $tids
+ * @return boolean / array
+ */
+function get_terms_name_by_ids($tids = array()) {
+  if (count($tids) <= 0)
+    return FALSE;
+
+  $query = db_select('taxonomy_term_data', 'ttd');
+  $query->fields('ttd', array('tid', 'name'));
+  $query->condition('ttd.tid', $tids, 'IN');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Function is used to get Image Detail by Fid
+ * @param int $fid
+ * @return array $image_data
+ */
+function get_image_info_by_fid($fid = NULL) {
+  $image_data = array();
+  if (!empty($fid)) {
+    $query = db_select('image_info', 'ii');
+    $query->fields('ii', array('image_caption', 'alt'));
+    $query->condition('ii.fid', $fid, '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $image_data['caption'] = '';
+    if (count($result) > 0) {
+      $image_data['caption'] = $result[0]['image_caption'];
+      $image_data['alt'] = $result[0]['alt'];
+    }
+    $img_url = get_thumbnail_by_fid($fid);
+    $image_data['imag_url'] = $img_url;
+    $image_data['mime_type'] = 'jpg';
+  }
+  return $image_data;
+}
+
+/**
+ * Function is used to get Image thumbnail
+ * @param int $fid
+ * @param string $style
+ * @return boolean / string
+ */
+function get_thumbnail_by_fid($fid = NULL, $style = NULL) {
+  if (!empty($fid)) {
+    $file_obj = file_load($fid);
+    if (empty($style)) {
+      $img_url = file_create_url($file_obj->uri);
+    }
+    else {
+      $img_url = image_style_url($style, $file_obj->uri);
+    }
+    return $img_url;
+  }
+  return FALSE;
+}
+
+/**
+ * Function is used to get Term name.
+ * @param int $tid
+ * @return string
+ */
+function get_term_name_by_tid($tid = NULL) {
+  if ($cached = cache_get('taxonomy_' . $tid, 'cache')) {
+    $tname = $cached->data;
+    return $tname;
+  }
+  $tname = '';
+  if (!empty($tid)) {
+    $query = db_select('taxonomy_term_data', 'ttd');
+    $query->fields('ttd', array('name'));
+    $query->condition('ttd.tid', $tid, '=');
+    $tname = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($tname) > 0) {
+      $tname = $tname[0]['name'];
+    }
+  }
+  cache_set('taxonomy_' . $tid, $tname, 'cache', 60 * 60 * 24 * 7); //7 days
+  return $tname;
+}
+
+/**
+ * Function is used to get node City
+ * @param int $nid
+ * @return string
+ */
+function get_content_city($nid = NULL) {
+  $city = '';
+  if (!empty($nid)) {
+    $query = db_select('field_data_field_stroy_city', 'city');
+    $query->leftJoin('taxonomy_term_data', 'tdata', 'tdata.tid=city.field_stroy_city_tid');
+    $query->fields('tdata', array('name'));
+    $query->fields('city', array('field_stroy_city_tid'));
+    $query->condition('city.entity_id', $nid, '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) > 0) {
+      $city = $result[0]['name'];
+    }
+  }
+  return $city;
+}
+
+/**
+ * Function is used to get Byline
+ * @param int $nid
+ * @return string
+ */
+function get_byline_by_nid($nid = NULL) {
+  $city = '';
+  if (!empty($nid)) {
+    $query = db_select('field_data_field_stroy_city', 'city');
+    $query->leftJoin('taxonomy_term_data', 'tdata', 'tdata.tid=city.field_stroy_city_tid');
+    $query->fields('tdata', array('name'));
+    $query->fields('city', array('field_stroy_city_tid'));
+    $query->condition('city.entity_id', $nid, '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) > 0) {
+      $city = $result[0]['name'];
+    }
+  }
+  return $city;
+}
+
+/**
+ * Function is used to get node tags
+ * @param int $nid
+ * @param boolean $isStr
+ * @return array / string
+ */
+function get_content_tags($nid = NULL, $isStr = FALSE) {
+  $tags = array();
+  if (!empty($nid)) {
+    $query = db_select('field_data_field_story_itg_tags', 'tags');
+    $query->leftJoin('taxonomy_term_data', 'tdata', 'tdata.tid=tags.field_story_itg_tags_tid');
+    $query->fields('tdata', array('name'));
+    $query->fields('tags', array('field_story_itg_tags_tid'));
+    $query->condition('tags.entity_id', $nid, '=');
+    $tags = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if ($isStr) {
+      $keywords = array();
+      foreach ($tags as $value) {
+        $keywords[] = $value['name'];
+      }
+      $tags = implode(',', $keywords);
+    }
+  }
+  return $tags;
+}
+
+/**
+ * Function is used to get related content from node
+ * @param int $nid
+ * @return array $related_content
+ */
+function get_releted_content_by_nid($nid = NULL) {
+  $related_content = array();
+  if (!empty($nid)) {
+    $query = db_select('field_data_field_common_related_content', 'rc');
+    $query->fields('rc', array('field_common_related_content_value'));
+    $query->condition('rc.entity_id', $nid, '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) > 0) {
+      $related_str = explode('|~|', $result[0]['field_common_related_content_value']);
+      $nids = array();
+      foreach ($related_str as $value) {
+        $nids[] = end(explode('IT_', $value));
+      }
+      $query = db_select('node', 'rn');
+      $query->fields('rn', array('nid', 'title'));
+      $query->condition('rn.nid', $nids, 'IN');
+      $related_content = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    }
+  }
+  return $related_content;
+}
+
+/**
+ * Function is used to get node metatags
+ * @param int $nid
+ * @return boolean / array
+ */
+function get_node_metatags_by_nid($nid = NULL) {
+  if (empty($nid)) {
+    return FALSE;
+  }
+  $result = db_select('metatag', 'mt')->fields('mt', array('data'))->condition('mt.entity_id', $nid, '=')->execute()->fetchAssoc();
+  return $result;
+}
+
+/**
+ * Function is used to generate unique String
+ * @return String
+ */
+function genrate_uniqui_guid() {
+  return md5(uniqid(rand(), true));
+}
+
+/**
+ * Function is used to generate unique String
+ * @param type $uniq_id
+ * @return type
+ */
+function itg_genrate_uniqui_guid($uniq_id) {
+  return md5($uniq_id);
+}
+
+/**
+ * Function is used to get Node byline
+ * @param int $nid
+ * @return String
+ */
+function get_byline_name_by_nid($nid = NULL) {
+  $byline = '';
+  if (!empty($nid)) {
+    $query = db_select('itg_multi_byline_info', 'bi');
+    $query->leftJoin('node', 'n', 'bi.byline_id=n.nid');
+    $query->fields('n', array('title'));
+    $query->condition('bi.publish_status', 1, '=');
+    $query->condition('bi.nid', $nid, '=');
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) > 0) {
+      $byline = $result[0]['title'];
+    }
+  }
+  return $byline;
+}
+
+/**
+ * function for generate image xml tag
+ * @param array $result
+ * @return string
+ */
+function get_img_tag_detail($result) {
+  if (empty($result[field_story_medium_image_fid])) {
+    return empty_get_img_tag_detail();
+  }
+  $highres = get_image_info_by_fid($result['field_story_medium_image_fid']);
+  $lowres = get_image_info_by_fid($result['field_story_small_image_fid']);
+  $imgtag = "<bodyimages><image><lowres><![CDATA[" . $lowres['imag_url'] . "]]></lowres><highres><![CDATA[" . $highres['imag_url'] . "]]></highres><caption>" . $highres['caption'] . "</caption></image></bodyimages>";
+  return $imgtag;
+}
+
+/**
+ * Function is used to get Video embed tags.
+ * @param array $body
+ * @return String
+ */
+function get_video_embed_tags($body) {
+  if (empty($body)) {
+    return itg_emptygetVideoTag();
+  }
+  $doc = new DOMDocument();
+  $doc->loadHTML($body);
+  $xpath = new DOMXPath($doc);
+  // find your image
+  $nodelist = $xpath->query("//iframe");
+  // gets the 1st image
+  $node = $nodelist->item(0);
+  if ($node->attributes->length > 0) {
+    //It has Youtube video
+    $src = 'http:' . $node->attributes->getNamedItem('src')->nodeValue;
+  }
+  elseif ($add_video != '') {
+    //It has uploaded video
+    if (strpos($add_video, "dailymotion_video_dir") > 0) {
+      // It has Daily Motion Video
+      $video_name = substr(strstr($add_video, 'dir/'), 4);
+      $video_node = dailymotion_video_name_to_nid($video_name);
+      $video_field = node_load($video_node);
+      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+      $src = $add_video;
+    }
+    else {
+      //It is Migrated video
+      $video_nid = migrated_video_to_nid($add_video);
+      $video_field = node_load($video_nid);
+      $img_url = file_create_url($video_field->field_story_medium_image['und'][0]['uri']);
+      $src = $add_video;
+    }
+  }
+  if ($src) {
+    $videotag = "<video_embed><videoparts_mp4><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_mp4><videoparts_m3u8><part>" . $src . "</part><img_url><![CDATA[" . $img_url . "]]></img_url></videoparts_m3u8></video_embed>";
+  }
+  else {
+    $videotag = itg_emptygetVideoTag();
+  }
+  return $videotag;
+}
+
+/**
+ * function for generate Empty video xml tag
+ * @return array
+ */
+function itg_emptygetVideoTag() {
+  $videotag = "";
+  $videotag = "<video_embed><videoparts_mp4><part></part><img_url><![CDATA[]]></img_url></videoparts_mp4><videoparts_m3u8><part></part><img_url><![CDATA[]]></img_url></videoparts_m3u8></video_embed>";
+  return $videotag;
+}
+
+/**
+ * function for generate comment xml tag
+ * @return array
+ */
+function get_comment_xml_tag($nid) {
+  $node = node_load($nid);
+
+  if (count($node->comment) <= 0) {
+    return emptyget_comment_xml_tag();
+  }
+  // variable declation
+  $mode = "COMMENT_MODE_FLAT";
+  $comments_per_page = 10;
+  $commentsflag = 0;
+  $comment_tag = "";
+  $output = "";
+  $comments_list = comment_get_thread($node, $mode, $comments_per_page);
+  // writng comments tag
+  foreach ($comments_list as $key => $value) {
+    $cid = $value;
+    $commentsflag = 1;
+    $commens_obj = comment_load($cid);
+    $commenttext = $commens_obj->comment_body['und'][0]['value'];
+    $name = $commens_obj->name;
+    $create_date = date("F d, Y", $commens_obj->created);
+    $create_datetime = date("Y-m-d\TH:i:sP", $commens_obj->created);
+    $email = $commens_obj->mail;
+    $comment_tag .= "<comment><commenttext>" . $commenttext . "</commenttext><name>" . $name . "</name><createddate>" . $create_date . "</createddate><createddatetime>" . $create_datetime . "</createddatetime><email>" . $email . "</email></comment>";
+  }
+
+  if ($commentsflag) {
+    $output .= "<comments>";
+    $output .= $comment_tag;
+    $output .= "</comments>";
+  }
+  else {
+    $output .= emptyget_comment_xml_tag();
+  }
+  return $output;
+}
+
+/**
+ * function for generate Empty comment xml tag
+ * @return string
+ */
+function emptyget_comment_xml_tag() {
+  $commenttext = "";
+  $name = '';
+  $create_date = '';
+  $create_datetime = "";
+  $email = "";
+  // writng comments tag
+  $comment_tag .= "<comment><commenttext>" . $commenttext . "</commenttext><name>" . $name . "</name><createddate>" . $create_date . "</createddate><createddatetime>" . $create_datetime . "</createddatetime><email>" . $email . "</email></comment>";
+  $output .= "<comments>";
+  $output .= $comment_tag;
+  $output .= "</comments>";
+  return $output;
+}
+
+/**
+ * function for generate Empty comment xml tag
+ * @return string
+ */
+function get_empty_related_story_tag() {
+  return "<story><title></title><url></url><thumbimage></thumbimage></story>";
+}
+
+/**
+ * function for generate Empty comment xml tag
+ * @return string
+ */
+function get_empty_related_video_tag() {
+  return "<video><title></title><url></url><thumbimage></thumbimage></video>";
+}
+
+/**
+ * function for generate Empty comment xml tag
+ * @return string
+ */
+function get_empty_related_photo_tag() {
+  return "<photo><title></title><url></url><thumbimage></thumbimage></photo>";
+}
+
+/**
+ * common function for return related content node type
+ * @return array
+ * @pram $node_list
+ * @pram $type
+ */
+function related_content_node_type($node_list = "", $type) {
+  global $base_url;
+  $file_name = "";
+  $term_feed_path = "";
+  $type_ar = array('photos' => 'NO', 'videos' => 'NO', 'stories' => 'NO');
+  $related_ar = array();
+  $count = 0;
+  $query = db_select('field_data_field_common_related_content', 'frc');
+  $query->fields('frc', array('field_common_related_content_value'));
+  $query->condition('frc.entity_id', $node_list);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $node_str = $result[0]['field_common_related_content_value'];
+
+  // replace enviroment name: AWS_, UAT_ etc
+  $node_str = str_replace("AWS_", "", $node_str);
+  $node_str = str_replace("UAT_", "", $node_str);
+  $node_str = str_replace("IT_", "", $node_str);
+  $node_str = str_replace("|~|", ",", $node_str);
+
+  $nid_list = explode(",", $node_str);
+  $query_type = db_select('node', 'n');
+  $query_type->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
+  $query_type->fields('n', array('type', 'nid', 'title'));
+  $query_type->fields('si', array('field_story_small_image_fid'));
+  $query_type->condition('n.nid', $nid_list, 'IN');
+  $result_type = $query_type->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  $related_story_xml = '';
+  $related_video_xml = '';
+  $related_photo_xml = '';
+  foreach ($result_type as $reskey => $resvalue) {
+    $nid = $resvalue['nid'];
+    if ($resvalue['type'] == "story") {
+      $type_ar['stories'] = "YES";
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
+      $related_story_xml .= '<story>';
+      $related_story_xml .= '<title>' . $resvalue['title'] . '</title>';
+      $related_story_xml .= '<url>' . $url . '</url>';
+      $related_story_xml .= '<thumbimage>' . $small_img['imag_url'] . '</thumbimage>';
+      $related_story_xml .= '</story>';
+    }
+    elseif ($resvalue['type'] == "videogallery") {
+      $type_ar['videos'] = "YES";
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
+      $related_video_xml .= '<video>';
+      $related_video_xml .= '<title>' . $resvalue['title'] . '</title>';
+      $related_video_xml .= '<url>' . $url . '</url>';
+      $related_video_xml .= '<thumbimage>' . $small_img['imag_url'] . '</thumbimage>';
+      $related_video_xml .= '</video>';
+    }
+    elseif ($resvalue['type'] == "photogallery") {
+      $type_ar['photos'] = "YES";
+      $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $resvalue['nid']);
+      $small_img = get_image_info_by_fid($resvalue['field_story_small_image_fid']);
+      $related_photo_xml .= '<photo>';
+      $related_photo_xml .= '<title>' . $resvalue['title'] . '</title>';
+      $related_photo_xml .= '<url>' . $url . '</url>';
+      $related_photo_xml .= '<thumbimage>' . $small_img['imag_url'] . '</thumbimage>';
+      $related_photo_xml .= '</photo>';
+    }
+    $count++;
+  }
+  $type_ar['nid'] = $related_ar;
+  if (empty($related_story_xml)) {
+    $type_ar['related_story_xml'] = get_empty_related_story_tag();
+  }
+  else {
+    $type_ar['related_story_xml'] = $related_story_xml;
+  }
+
+  if (empty($related_photo_xml)) {
+    $type_ar['related_photo_xml'] = get_empty_related_photo_tag();
+  }
+  else {
+    $type_ar['related_photo_xml'] = $related_photo_xml;
+  }
+
+  if (empty($related_video_xml)) {
+    $type_ar['related_video_xml'] = get_empty_related_video_tag();
+  }
+  else {
+    $type_ar['related_video_xml'] = $related_video_xml;
+  }
+
+  return $type_ar;
+}
+
+/*
+ * All video format responce
+ * @param $nid
+ * @return the details video xml tags
+ */
+
+function itg_video_detail_formats($nid, $source_type) {
+
+  $video_detail = array();
+
+  if ($source_type != 'migrated') {
+    $video_status = 'dailymotion';
+    $videoids = get_video_in_fieldcollection_by_nid($nid);
+    foreach ($videoids as $keys => $video_value) {
+      if ($video_value->video_id != '') {
+        $video_id = $video_value->video_id;
+      }
+      elseif ($video_value->solr_video_id != '') {
+        $video_id = $video_value->solr_video_id;
+      }
+      $video_detail[$video_status]['video_id'] = $video_id;
+      $file_id = $video_value->fid;
+    }
+    $query = db_select('file_managed', 'fm');
+    $query->condition('fm.fid', $file_id);
+    $query->fields('fm', array('filename', 'uri', 'filemime', 'filesize', 'status'));
+    $query->orderBy('fm.fid', 'DESC');
+    $query->range(0, 1);
+    $results = $query->execute()->fetchAll();
+    $uri = $results[0]->uri;
+    $video_detail[$video_status]['filename'] = $results[0]->filename;
+    $video_detail[$video_status]['filsize'] = $results[0]->filesize;
+    $query = db_select('itg_video_bitrates_data', 'itgv');
+    $query->fields('itgv', array('bitate_url', 'bitates_field'));
+    $query->condition('itgv.video_id', $video_id);
+    $result2 = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $video_format = array();
+    foreach ($result2 as $res_data) {
+      $video_format[$res_data['bitates_field']] = $res_data['bitate_url'];
+    }
+    $video_path_mp4 = "https://www.dailymotion.com/video/" . $video_id . "";
+    $video_format['videoparts_mp4'] = $video_path_mp4;
+    $video_detail[$video_status]['bitate_url'] = $video_format;
+    $dailymotion_download = dailymotion_download_video_uri($video_id);
+    $video_detail[$video_status]['bitate_url']['download_url'] = "$dailymotion_download";
+  }
+  elseif ($source_type == 'migrated') {
+    $video_status = 'migrated';
+    $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+    foreach ($videoids as $keys => $video_value) {
+      $video_path_mp4 = $video_value->field_migrated_video_url_value;
+    }
+    $video_path_mp4 = str_replace('http://medias3d.intoday.in/', 'http://indiatoday-pdelivery.akamaized.net/', $video_path_mp4);
+    $video_detail[$video_status]['video_path_mp4'] = $video_path_mp4;
+    $flv_url = str_replace(".mp4", ".flv", $video_path_mp4);
+    $rr = explode('/', $video_path_mp4);
+    $mp4_last_fname = end($rr);
+    $gp_file_path = '3gp/' . $mp4_last_fname . '';
+    $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
+    // m3u8
+    $videoparts_3gp = str_replace(".mp4", ".3gp", $videoparts_3gp1);
+    $m3u8_tags = itg_mcu8_tags($nid);
+    if (!empty($m3u8_tags)) {
+      $m3 = implode(',', $m3u8_tags);
+      $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+      $videoparts_m3u = str_replace('512.mp4', $new_m3, $video_path_mp4);
+    }
+    else {
+      $m3 = "";
+      $new_m3 = ',' . $m3 . ',.mp4.csmil/master.m3u8';
+      $videoparts_m3u = str_replace('.mp4', $new_m3, $video_path_mp4);
+    }
+    $videoparts_m3u8 = str_replace('http://indiatoday-pdelivery.akamaized.net', 'http://indiatoday-vh.akamaihd.net/i', $videoparts_m3u);
+    //end
+    $videoparts_3gp1 = str_replace($mp4_last_fname, $gp_file_path, $video_path_mp4);
+    $video_detail[$video_status]['flv_url'] = $flv_url;
+    $video_detail[$video_status]['videoparts_m3u8'] = $videoparts_m3u8;
+    $video_detail[$video_status]['videoparts_3gp'] = $videoparts_3gp;
+  }
+  return $video_detail;
+}
+
+/**
+ * Get the dailymotion download video url
+ * @param type $video_id
+ * @return type
+ */
+function itg_dailymotion_download_video_uri($video_id) {
+  $query = db_select('field_data_field_bitrate_video_id', 'bvi');
+  $query->leftJoin('field_data_field_video_url', 'v_url', 'v_url.entity_id = bvi.entity_id');
+  $query->fields('v_url', array('field_video_url_value'));
+  $query->condition('bvi.field_bitrate_video_id_value', $video_id);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result[0]['field_video_url_value'];
+}
+
+/**
+ * Function is to get node favorite status
+ * @param type $nid
+ * @return string
+ */
+function get_nid_is_favorite($nid) {
+  $flag = "";
+  $result = db_select('field_data_field_featured', 'ffd')->fields('ffd', array('field_featured_value'))->condition('ffd.entity_id', $nid, '=')->execute()->fetchAssoc();
+  if (isset($result['field_featured_value']) && ($result['field_featured_value'] == "yes" || $result['field_featured_value'] == "Yes")) {
+    $flag = "true";
+  }
+  else {
+    $flag = "false";
+  }
+  return $flag;
+}
+
+/**
+ * function get nid is syndications
+ * @pram $tid
+ * @return type
+ */
+function get_nid_is_syndications($nid) {
+  // variable declation
+  $flag = 0;
+  $result = db_select('field_data_field_story_syndication', 'fss')->fields('fss', array('field_story_syndication_value'))->condition('fss.entity_id', $nid, '=')->execute()->fetchAssoc();
+
+  if (isset($result['field_featured_value']) && ($result['field_featured_value'] == "yes" || $result['field_featured_value'] == "Yes")) {
+    $flag = 1;
+  }
+  else {
+    $flag = 0;
+  }
+  return $flag;
+}
+
+/**
+ * function for generate Empty image xml tag
+ * @return string
+ */
+function empty_get_img_tag_detail() {
+  $imgtag = "<bodyimages><image><lowres><![CDATA[]]></lowres><highres><![CDATA[]]></highres><caption></caption></image></bodyimages>";
+  return $imgtag;
+}
+
+/**
+ * Function is used to get Video Transcoding 
+ * @param int $nid
+ * @return array
+ */
+function get_itg_video_transcoding($nid) {
+  if (empty($nid)) {
+    return '';
+  }
+  $query = db_select('itg_video_transcoding', 'tra');
+  $query->fields('tra', array('file_size', 'video_duration'));
+  $query->condition('tra.nid', $nid);
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * function is used get error xml
+ * @return string
+ */
+function not_found_syndication_xml() {
+  $xml = '<Error>
+      <Code>' . t('AccessDenied') . '</Code>
+      <Message>' . t('No items Found') . '</Message>
+  </Error>';
+  return $xml;
+}
+
+/**
+ * function is used to get parent category name
+ * @param int $tid
+ * @return string
+ */
+function get_parent_category_name_by_tid($tid = NULL) {
+  $tname = '';
+  $query = db_select('taxonomy_term_data', 'ttd');
+  $query->leftJoin('taxonomy_term_hierarchy', 'tth', 'tth.parent = ttd.tid');
+  $query->fields('ttd', array('name'));
+  $query->condition('tth.tid', $tid);
+  $result = $query->execute()->fetchAll();
+  if (count($result) > 0) {
+    $tname = $result[0]->name;
+  }
+  return $tname;
+}
+
+/**
+ * Function is used to get all gallery images.
+ * @param int $nid
+ * @return array
+ */
+function get_all_associated_photos($nid) {
+  $query = db_select('field_data_field_gallery_image', 'gi');
+  $query->join('field_data_field_images', 'fi', 'fi.entity_id=gi.field_gallery_image_value');
+  $query->leftjoin('field_data_field_photo_small_image', 'gsi', 'gsi.entity_id=gi.field_gallery_image_value');
+  $query->leftjoin('field_data_field_image_caption', 'ic', 'ic.entity_id=gi.field_gallery_image_value');
+  $query->leftjoin('field_data_field_photo_byline', 'pb', 'pb.entity_id=gi.field_gallery_image_value');
+  $query->leftjoin('node', 'byline', 'byline.nid=pb.field_photo_byline_target_id');
+  $query->condition('gi.entity_id', $nid, '=');
+  $query->condition('gi.entity_type', 'node', '=');
+  $query->condition('gi.bundle', 'photogallery', '=');
+  $query->fields('gi', array('field_gallery_image_value'));
+  $query->fields('fi', array('field_images_fid'));
+  $query->fields('gsi', array('field_photo_small_image_fid'));
+  $query->fields('byline', array('title'));
+  $query->fields('ic', array('field_image_caption_value'));
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Function is used to get term description
+ * @param int $tid
+ * @return string
+ */
+function get_term_description_by_tid($tid = NULL) {
+  $tdescription = '';
+  if (!empty($tid)) {
+    $query = db_select('taxonomy_term_data', 'ttd');
+    $query->fields('ttd', array('description'));
+    $query->condition('ttd.tid', $tid, '=');
+    $tname = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    if (count($tname) > 0) {
+      $tdescription = $tname[0]['description'];
+    }
+  }
+  return $tdescription;
+}
+
+/**
+ * function is used to get parent category name
+ * @param int $tid
+ * @return string
+ */
+function get_all_children_by_tid($tid = NULL) {
+  $tname = '';
+  $query = db_select('taxonomy_term_data', 'ttd');
+  $query->leftJoin('taxonomy_term_hierarchy', 'tth', 'tth.parent = ttd.tid');
+  $query->fields('ttd', array('name'));
+  $query->condition('tth.tid', $tid);
+  $result = $query->execute()->fetchAll();
+  if (count($result) > 0) {
+    $tname = $result[0]->name;
+  }
+  return $tname;
+}
+
+/**
+ * 
+ * @param array $result
+ * @return string
+ */
+function itg_genrate_samsungtv_it_breakingnews_syndication($result) {
+  if (!empty($result)) {
+
+    $xml = '<Root>';
+    $xml .= get_samsung_breaking_news_lists($result);
+    $xml .= '</Root>';
+    return $xml;
+  }
+}
+
+/**
+ * 
+ * @param array $result
+ * @return string
+ */
+function get_samsung_breaking_news_lists($result) {
+  $result = $result[0];
+  $nid = $result['nid'];
+  $query = db_select('field_data_field_breaking_content_details', 'bcd');
+  $query->leftJoin('field_data_field_breaking_tile', 'bt', '(bt.entity_id = bcd.field_breaking_content_details_value)');
+  $query->leftJoin('field_data_field_breaking_publish_time', 'bpt', '(bpt.entity_id = bcd.field_breaking_content_details_value)');
+
+  $query->fields('bt', array('field_breaking_tile_value'));
+  $query->fields('bpt', array('field_breaking_publish_time_value'));
+
+  $query->condition('bcd.entity_id', $nid, '=');
+  $query->condition('bcd.bundle', 'breaking_news', '=');
+  $query->condition('bcd.entity_type', 'node', '=');
+  $query->condition('bt.bundle', 'field_breaking_content_details', '=');
+  $query->condition('bt.entity_type', 'field_collection_item', '=');
+  $query_result = $query->execute()->fetchAll();
+  if (count($query_result) <= 0) {
+    return "<item>
+          <enable>0</enable>
+          <id/>
+          <title/>
+          <credit/>
+          <createddate/>
+          <createdtime/>
+          <city/>
+          <courtesy/>
+          <thumbimage/>
+          <longdescription/>
+          </item>";
+  }
+
+
+  $breaking_xml = '';
+  $publish_date = date("D, j M Y H:i", $result['created']);
+  $small_img = get_image_info_by_fid($result['field_story_small_image_fid']);
+  foreach ($query_result as $value) {
+    $time = '';
+    if (!empty($value->field_breaking_publish_time_value)) {
+      $time = date("H.i A", strtotime($value->field_breaking_publish_time_value)) . '>>';
+    }
+    $breaking_xml .= '<item>';
+    $breaking_xml .= '<enable>1</enable>';
+    $breaking_xml .= '<id>' . $nid . '</id>';
+    $breaking_xml .= '<title>' . $value->field_breaking_tile_value . '</title>';
+    $breaking_xml .= '<credit></credit>';
+    $breaking_xml .= '<createddate>' . $publish_date . '</createddate>';
+    $breaking_xml .= '<createdtime>' . $time . '</createdtime>';
+    $breaking_xml .= '<city></city>';
+    $breaking_xml .= '<courtesy></courtesy>';
+    $breaking_xml .= '<thumbimage>' . $small_img["imag_url"] . '</thumbimage>';
+    $breaking_xml .= '<longdescription></longdescription>';
+    $breaking_xml .= '</item>';
+  }
+
+  return $breaking_xml;
+}
+
+function is_lock_story($nid) {
+  if (empty($nid)) {
+    return FALSE;
+  }
+  $query1 = db_select('field_data_field_story_configurations', 'fsc');
+  $query1->fields('fsc', array('entity_id'));
+  $query1->condition('fsc.field_story_configurations_value', 'lock_story', 'LIKE');
+  $query1->condition('fsc.entity_id', $nid, '=');
+  $result1 = $query1->execute()->fetchAll();
+  if (!empty($result1)) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * function for getmcu8 url of vedio
+ *
+ * @param type $nid
+ *
+ * @return type
+ */
+function itg_mcu8_tags($nid) {
+  //$nid = 17378;
+  $query = db_select('field_data_field_multi_bitrate', 'mvr');
+  $query->fields('mvr', array('field_multi_bitrate_value'));
+  $query->condition('mvr.entity_id', $nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $tags = array();
+  if (count($result) > 0) {
+    foreach ($result as $data) {
+      $first_char = strstr($data['field_multi_bitrate_value'], '@', TRUE);
+      if ($first_char == 'B' || $first_char == 'M') {
+        $tags[] = substr(strstr($data['field_multi_bitrate_value'], '@'), 1);
+      }
+    }
+  }
+  return $tags;
+}
+
+/**
+ * Function for remove tags from content
+ * @param string $content
+ * @return string
+ */
+function itg_remove_tags_from_body($content) {
+  $content = strip_tags($content, '<p>');
+  $content = preg_replace('<div(.*?)class="itg-mosimage"(.*?)div>', "", $content);
+  $content = preg_replace('/<img(.*?)src=("|\'|)(.*?)("|\'| )(.*?)>/s', "", $content);
+  return $content;
+}
+
+/**
+ * Get the internal uploaded video on the Site
+ */
+function itg_internal_video_bitrate_data($video_id) {
+  $data_video_info = itg_xml_itg_videogallery_get_all_video_info_by_video_id($video_id);
+  if ($data_video_info[0]->video_type == 'INTERNAL' || $_POST['getvideo_repo'] == 'INTERNAL') {
+    $data_from_solr = itg_xml_itg_videogallery_getsolr_data_for_internal_video($data_video_info[0]->video_id);
+    $video_data = $data_from_solr[0];
+    $video_all_data = json_decode($video_data, TRUE);
+    $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data);
+  }
+  return $player_content;
+}
+
+/**
+ * Implements itg_videogallery_get_all_video_info_by_video_id
+ * @param string $video_id
+ * @param array $result
+ */
+function itg_xml_itg_videogallery_get_all_video_info_by_video_id($video_id) {
+  $query = db_select('dailymotion_response_details', 'drd');
+  $query->fields('drd');
+  $query->condition('video_id', $video_id, '=');
+  $result = $query->execute()->fetchAll();
+  return $result;
+}
+
+/**
+ * Implement itg_videogallery_getsolr_data_for_internal_video
+ * @param string $video_id
+ */
+function itg_xml_itg_videogallery_getsolr_data_for_internal_video($video_id) {
+  if (function_exists('apachesolr_server_status')) {
+    $ping = apachesolr_server_status(variable_get('solr_server_url'));
+  }
+  if ($ping) {
+    $solr = apachesolr_get_solr();
+    if (function_exists('itg_apache_solr_get_site_hash')) {
+      $hash = itg_apache_solr_get_site_hash();
+    }
+    $all_video_ids = array();
+    $hashvalue = implode(' OR ', array_keys($hash));
+    $str = 'hash:(' . $hashvalue . ')';
+    $query = apachesolr_drupal_query("custom");
+    $query->addParam('rows', '1'); // How many rows of result to display default it is 10.
+    $query->addParam('qf', 'sm_field_video_id'); // Only search in title
+//The bundle which you want to search
+    $query->replaceParam("fq", '(' . $str . ')');
+    $query->addFilter("bundle", "itg_solr_video");
+    $query->addFilter("sm_field_video_id", $video_id);
+    $query->setSolrsort('sort_label', 'desc');
+    $resp_search = $query->search();
+    $all_data = $resp_search->response->docs;
+    if (!empty($all_data)) {
+      return $all_data[0]->sm_field_all_xml_content;
+    }
+  }
+}
+
+function itg_remove_extra_custom_tags($content) {
+  $content = str_replace('[ITG:FACTOIDS]', '', $content);
+  $content = str_replace('[ITG:LISTICLES]', '', $content);
+  $content = str_replace('[ITG:EXPERT-CHUNK]', '', $content);
+  $content = str_replace('[ITG:TECH-PHOTOS]', '', $content);
+  $content = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $content);
+  $content = stripInvalidXml($content);
+  return $content;
+}
+
+function itg_replace_token_with_data($node_body, $nid) {
+  if (strpos($node_body, '[ITG:LISTICLES]')) {
+    $query = db_select('field_data_field_story_listicle', 'fsl');
+    $query->leftJoin('field_data_field_story_template_guru', 'stg', 'stg.entity_id=fsl.entity_id');
+    $query->condition('fsl.entity_id', array($nid), 'IN');
+    $query->fields('fsl', array('field_story_listicle_value'));
+    $query->fields('stg', array('field_story_template_guru_value'));
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $listicle_output = '';
+    if (!empty($result) && count($result) > 0) {
+      if (isset($result[0]['field_story_template_guru_value'])) {
+        $listicle_output .= '<span>' . $result[0]['field_story_template_guru_value'] . '</span>';
+      }
+      $buzz_output .= '';
+      $num = 1;
+      $listicle_output .= '<ul>';
+      foreach ($result as $buzz_item) {
+        $listicletype = '';
+        $field_collection_id = $buzz_item['field_story_listicle_value'];
+        $entity = entity_load('field_collection_item', array($field_collection_id));
+        $type = $entity[$field_collection_id]->field_story_listicle_type['und'][0]['value'];
+        $description = $entity[$field_collection_id]->field_story_listicle_description['und'][0]['value'];
+        $listicle_output .= '<li>' . $listicletype . $description . '</li>';
+        $num++;
+      }
+      $listicle_output .= '</ul>';
+      $node_body = str_replace('[ITG:LISTICLES]', $listicle_output, $node_body);
+    }
+  }
+  return $node_body;
+}
+
+
+function get_highest_bitrate_video_by_nid($nid){
+  $query = db_select('itg_video_transcoding', 'ivt');
+  $query->fields('ivt', array('bitrate'));
+  $query->condition('ivt.nid', $nid, '=');
+  $query->orderBy('ivt.bitrate', 'DESC');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+function stripInvalidXml($value) {
+  $ret = "";
+  $current;
+  if (empty($value)) {
+    return $ret;
+  }
+  $length = strlen($value);
+  for ($i = 0; $i < $length; $i++) {
+    $current = ord($value{$i});
+    if (($current == 0x9) ||
+        ($current == 0xA) ||
+        ($current == 0xD) ||
+        (($current >= 0x20) && ($current <= 0xD7FF)) ||
+        (($current >= 0xE000) && ($current <= 0xFFFD)) ||
+        (($current >= 0x10000) && ($current <= 0x10FFFF))) {
+      $ret .= chr($current);
+    }
+    else {
+      $ret .= " ";
+    }
+  }
+  $ret = preg_replace("[^\\x00-\\x7f]", "", $ret);
+  $chr_map = array(
+   // Windows codepage 1252
+   "\xC2\x82" => "'", // U+0082⇒U+201A single low-9 quotation mark
+   "\xC2\x84" => '"', // U+0084⇒U+201E double low-9 quotation mark
+   "\xC2\x8B" => "'", // U+008B⇒U+2039 single left-pointing angle quotation mark
+   "\xC2\x91" => "'", // U+0091⇒U+2018 left single quotation mark
+   "\xC2\x92" => "'", // U+0092⇒U+2019 right single quotation mark
+   "\xC2\x93" => '"', // U+0093⇒U+201C left double quotation mark
+   "\xC2\x94" => '"', // U+0094⇒U+201D right double quotation mark
+   "\xC2\x9B" => "'", // U+009B⇒U+203A single right-pointing angle quotation mark
+
+   "\xC2\xAB"     => '"', // U+00AB left-pointing double angle quotation mark
+   "\xC2\xBB"     => '"', // U+00BB right-pointing double angle quotation mark
+   "\xE2\x80\x98" => "'", // U+2018 left single quotation mark
+   "\xE2\x80\x99" => "'", // U+2019 right single quotation mark
+   "\xE2\x80\x9A" => "'", // U+201A single low-9 quotation mark
+   "\xE2\x80\x9B" => "'", // U+201B single high-reversed-9 quotation mark
+   "\xE2\x80\x9C" => '"', // U+201C left double quotation mark
+   "\xE2\x80\x9D" => '"', // U+201D right double quotation mark
+   "\xE2\x80\x9E" => '"', // U+201E double low-9 quotation mark
+   "\xE2\x80\x9F" => '"', // U+201F double high-reversed-9 quotation mark
+   "\xE2\x80\xB9" => "'", // U+2039 single left-pointing angle quotation mark
+   "\xE2\x80\xBA" => "'", // U+203A single right-pointing angle quotation mark
+);
+$chr = array_keys  ($chr_map); // but: for efficiency you should
+$rpl = array_values($chr_map); // pre-calculate these two arrays
+$ret = str_replace($chr, $rpl, html_entity_decode($ret, ENT_QUOTES, "UTF-8"));
+
+  return $ret;
+}

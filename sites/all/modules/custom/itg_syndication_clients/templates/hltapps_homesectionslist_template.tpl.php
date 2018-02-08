@@ -1,0 +1,74 @@
+<root>
+<id>1</id>
+<itemcount>5</itemcount>
+<item>
+    <title>Latest News</title>
+    <section>topnews.xml</section>
+    <story>topnews.xml</story>
+    <photo>must-see.xml</photo>
+    <video>news.xml</video>
+    <url>news-mixed-view.xml</url>
+    <onmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/khabren-col.png
+    </onmodeicon>
+    <offmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/khabren-bw.png
+    </offmodeicon>
+</item>
+<item>
+    <title>India</title>
+    <section>india.xml</section>
+    <story>india.xml</story>
+    <photo>india.xml</photo>
+    <video>india.xml</video>
+    <url>india-mixed-view.xml</url>
+    <onmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/deshcol.png
+    </onmodeicon>
+    <offmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/deshbw.png
+    </offmodeicon>
+</item>
+<item>
+    <title>World</title>
+    <section>world.xml</section>
+    <story>world.xml</story>
+    <photo>world.xml</photo>
+    <video>world.xml</video>
+    <url>world-mixed-view.xml</url>
+    <onmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/duniyacol.png
+    </onmodeicon>
+    <offmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/duniyabw.png
+    </offmodeicon>
+</item>
+<item>
+    <title>So Sorry</title>
+    <section>so-sorry.xml</section>
+    <story>so-sorry.xml</story>
+    <photo>so-sorry.xml</photo>
+    <video>so-sorry.xml</video>
+    <url>sosorry-mixed-view.xml</url>
+    <onmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/khelcol.png
+    </onmodeicon>
+    <offmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/khelbw.png
+    </offmodeicon>
+</item>
+<item>
+    <title>Entertainment</title>
+    <section>entertainment.xml</section>
+    <story>entertainment.xml</story>
+    <photo>entertainment.xml</photo>
+    <video>entertainment.xml</video>
+    <url>entertainment-mixed-view.xml</url>
+    <onmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/manoranjancol.png
+    </onmodeicon>
+    <offmodeicon>
+        http://media2.intoday.in/indiatoday/images/icons/manoranjanbw.png
+    </offmodeicon>
+</item>
+</root>
