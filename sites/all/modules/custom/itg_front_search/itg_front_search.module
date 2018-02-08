@@ -108,12 +108,13 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       if(!empty($arg[1])) {
       $form['keyword']['#value'] = str_replace("-", " ", $arg[1]);
       }
-      $form['keyword']['#attributes'] = array('readonly' => 'readonly');
+      // $form['keyword']['#attributes'] = array('readonly' => 'readonly');
       
       if(!empty($_REQUEST['keyword'])) {
-      $form['#submit'][0]= 'topic_form_submit_handler';
-      }
-     
+          $form['#submit'][0]= 'topic_form_submit_handler';
+      } else {
+		  $form['keyword']['#required'] = TRUE; 
+	  }	     
   }
   // handler close
   
@@ -572,7 +573,13 @@ function itg_get_all_bylineinfo($reporter_unique_id) {
  * {@inheritdoc}
  */
 function topic_form_submit_handler($form, &$form_state) {
-  //$bundle = array_values($form_state['input']['bundle_name']);
+  if (!empty($_REQUEST['keyword'])) {
+		$string = trim($_REQUEST['keyword']);
+		$keyword = rtrim(preg_replace('/[^A-Za-z0-9\-]/', '-', $string),'-');  
+		$search_web_url = 'topic/' . $keyword; 
+		drupal_goto($search_web_url);
+  }	
+  /*
   $hash = array_values($form_state['values']['hash']);
   $search_key['keyword'] = $form_state['values']['keyword'];
   $search_key['bundle_name'][''] = 'All';
@@ -591,4 +598,6 @@ function topic_form_submit_handler($form, &$form_state) {
   unset($_GET['q']);
   $options = array('query' => $search_key);
   drupal_goto($search_web_url, $options);
+  
+  */
 }
