@@ -109,11 +109,11 @@ function itg_front_search_form_alter(&$form, &$form_state, $form_id) {
       $form['keyword']['#value'] = str_replace("-", " ", $arg[1]);
       }
       // $form['keyword']['#attributes'] = array('readonly' => 'readonly');
-      
       if(!empty($_REQUEST['keyword'])) {
-      $form['#submit'][0]= 'topic_form_submit_handler';
+        $form['#submit'][0]= 'topic_form_submit_handler';
+      } else {
+		$form['keyword']['#required'] = TRUE;  
       }
-     
   }
   // handler close
   
@@ -573,7 +573,9 @@ function itg_get_all_bylineinfo($reporter_unique_id) {
  */
 function topic_form_submit_handler($form, &$form_state) {
   if (!empty($_REQUEST['keyword'])) {
-	   $search_web_url = 'topic/' . $_REQUEST['keyword']; 
+	  $string = trim($_REQUEST['keyword']);
+      $keyword = rtrim(preg_replace('/[^A-Za-z0-9\-]/', '-', $string),'-');  
+	  $search_web_url = 'topic/' . $keyword; 
       drupal_goto($search_web_url);
   }
   /*
