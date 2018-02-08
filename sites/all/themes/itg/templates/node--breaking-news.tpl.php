@@ -12,7 +12,7 @@ $short_url = $share_page_link; //shorten_url($share_page_link, 'goo.gl');
 $share_desc = '';
 $share_image = '';
 if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
-	$share_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+  $share_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
 }
 $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 ?>
