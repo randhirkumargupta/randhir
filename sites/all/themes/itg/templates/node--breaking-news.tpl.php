@@ -11,6 +11,9 @@ $share_page_link = SITE_PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI
 $short_url = $share_page_link; //shorten_url($share_page_link, 'goo.gl');
 $share_desc = '';
 $share_image = '';
+if (!empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+  $share_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+}
 $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
 ?>
  
@@ -151,7 +154,7 @@ $coverage_end_final_date = '';
             $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
         }
         else {
-            $title = '<h1><span>' . $type . '</span>: ' . $node->title . '</h1>';
+            $title = '<h1>' . $node->title . '</h1>';
         }
         print $title;
         ?>
@@ -186,7 +189,7 @@ $coverage_end_final_date = '';
           $title = '<h1><span>' . $node->field_constituancy[LANGUAGE_NONE][0]['value'] . '</span>: ' . $node->title . '</h1>';
         }
         else {
-          $title = '<h1><span>' . $type . '</span>: ' . $node->title . '</h1>';
+          $title = '<h1>' . $node->title . '</h1>';
         }
 
         $share_title = $node->title;
