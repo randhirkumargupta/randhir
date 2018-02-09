@@ -67,6 +67,9 @@ function genrate_scribd_live_issue_syndication_xml($result = NULL, $issue_title,
   $xml = '';
   if (!empty($result)) {
     global $base_url;
+    $issue_title_n = "[India Today Magazine - ".$issue_title;
+    $issue_identifier = $issue_title;
+    $issue_cover_image = getIssueCoverImgScribed($issue_title);
     $xml = '<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[' . $issue_title . ']]></title>';
@@ -89,6 +92,9 @@ function genrate_scribd_live_issue_syndication_xml($result = NULL, $issue_title,
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       //   $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
       $xml .= '<item>';
+      $xml .= '<issue_title><![CDATA[' . $issue_title_n . ']]></issue_title>';
+      $xml .= '<issue_identifier><![CDATA[' . $issue_identifier . ']]></issue_identifier>';
+      $xml .= '<issue_cover_image>'.$issue_cover_image.'</issue_cover_image>'; 
       $xml .= '<title>' . $value['title'] . '</title>';
       $xml .= '<link><![CDATA[' . $url . ']]></link>';
       $xml .= '<guid><![CDATA[' . $url . ']]></guid>';
