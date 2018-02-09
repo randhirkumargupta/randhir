@@ -2405,7 +2405,11 @@ function itg_rapid_api_master_config($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('master_config_json');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('master_config_ttl')){
+            $ttl = variable_get('master_config_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2428,7 +2432,11 @@ function itg_rapid_api_config_update_status($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('config_update_status_json');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('config_update_status_ttl')){
+            $ttl = variable_get('config_update_status_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2452,7 +2460,11 @@ function itg_rapid_api_hamburger_menu($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('hamburger_menu_json');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('hamburger_menu_ttl')){
+            $ttl = variable_get('hamburger_menu_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2476,7 +2488,11 @@ function itg_rapid_api_horizontal_menu($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('horizontal_menu_json');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('horizontal_menu_ttl')){
+            $ttl = variable_get('horizontal_menu_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2500,7 +2516,11 @@ function itg_rapid_api_server_error_master($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('server_error_master_json');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('server_error_master_ttl')){
+            $ttl = variable_get('server_error_master_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2536,7 +2556,11 @@ function itg_rapid_api_photolist($token) {
         // call function from return data..
         $jsondata = photocategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('photolist_ttl')){
+            $ttl = variable_get('photolist_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2567,7 +2591,11 @@ function itg_rapid_api_photodetail($token) {
         // call function from return data..
         $jsondata = photoDetailPageRerourceValue($id);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('photodetail_ttl')){
+            $ttl = variable_get('photodetail_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
     $jsondata = json_decode($jsondata, TRUE);
@@ -2601,7 +2629,11 @@ function itg_rapid_api_programlist($token) {
         // call function from return data..
         $jsondata = programcategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('programlist_ttl')){
+            $ttl = variable_get('programlist_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2638,7 +2670,11 @@ function itg_rapid_api_newslist($token) {
         $realtime = 1;
         $jsondata_realtime = $jsondata = newscategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME;
+        if(variable_get('newslist_ttl')){
+            $ttl = variable_get('newslist_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
     if ($realtime) {
@@ -2676,7 +2712,11 @@ function itg_rapid_api_videolist($token) {
         // call function from return data..
         $jsondata = videocategoryPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('videolist_ttl')){
+            $ttl = variable_get('videolist_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2698,7 +2738,11 @@ function itg_rapid_api_adconfig_android($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('adconfig_android');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('adconfig_android_ttl')){
+            $ttl = variable_get('adconfig_android_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2722,7 +2766,11 @@ function itg_rapid_api_adconfig_ipad($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('adconfig_ipad');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('adconfig_ipad_ttl')){
+            $ttl = variable_get('adconfig_ipad_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2746,7 +2794,11 @@ function itg_rapid_api_adconfig_iphone($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('adconfig_iphone');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('adconfig_iphone_ttl')){
+            $ttl = variable_get('adconfig_iphone_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2770,7 +2822,11 @@ function itg_rapid_api_adconfig_tab($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('adconfig_tab');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('adconfig_tab_ttl')){
+            $ttl = variable_get('adconfig_tab_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2808,7 +2864,11 @@ function itg_rapid_api_photostorydetail($token) {
         // call function from return data..
         $jsondata = photoStoryDetailPageRerourceValue($id);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('photostorydetail_ttl')){
+            $ttl = variable_get('photostorydetail_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2832,7 +2892,11 @@ function itg_rapid_api_program_category_list($token) {
     } else {
         $jsondata = programCategoryListlPageRerourceValue();
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('program_category_list_ttl')){
+            $ttl = variable_get('program_category_list_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2856,7 +2920,11 @@ function itg_rapid_api_ad_config_json($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('ad_config_json');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('ad_config_json_ttl')){
+            $ttl = variable_get('ad_config_json_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2881,7 +2949,11 @@ function itg_rapid_api_livetv_channellist_json($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('livetv_channellist_json');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('livetv_channellist_ttl')){
+            $ttl = variable_get('livetv_channellist_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2907,7 +2979,11 @@ function itg_rapid_api_otherapps_ios_json($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('otherapps_ios_json');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('otherapps_ios_ttl')){
+            $ttl = variable_get('otherapps_ios_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2932,7 +3008,11 @@ function itg_rapid_api_otherapps_android_json($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('otherapps_android_json');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('otherapps_android_ttl')){
+            $ttl = variable_get('otherapps_android_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2969,7 +3049,11 @@ function itg_rapid_api_magazine_edition($token) {
         // call function from return data..
         $jsondata = magazineEditionPageRerourceValue($id, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('magazine_edition_ttl')){
+            $ttl = variable_get('magazine_edition_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -2995,7 +3079,11 @@ function itg_rapid_api_magazine_coverstories($token) {
     } else {
         $jsondata = magazineCoverstoriesPageRerourceValue();
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('magazine_coverstories_ttl')){
+            $ttl = variable_get('magazine_coverstories_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -3031,7 +3119,11 @@ function itg_rapid_api_magazine_editionlist($token) {
         // call function from return data..
         $jsondata = magazineEditionListPageRerourceValue($sdate, $tdate, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('magazine_editionlist_ttl')){
+            $ttl = variable_get('magazine_editionlist_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -3066,7 +3158,11 @@ function itg_rapid_api_storydetail($token) {
         // call function from return data..
         $jsondata = StoryDetailPageRerourceValue($id);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('storydetail_ttl')){
+            $ttl = variable_get('storydetail_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -3091,7 +3187,11 @@ function itg_rapid_api_homePage($token) {
         // call function from return data..
         $jsondata = homePageJson();
         $jsondata = json_encode($jsondata);
-        $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
+        if(variable_get('home_ttl')){
+            $ttl = variable_get('home_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -3115,7 +3215,11 @@ function itg_rapid_api_livetv_aajtak($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('livetv_aajtak');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('livetv_aajtak_ttl')){
+            $ttl = variable_get('livetv_aajtak_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -3140,7 +3244,11 @@ function itg_rapid_api_livetv_indiatoday($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('livetv_indiatoday');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('livetv_indiatoday_ttl')){
+            $ttl = variable_get('livetv_indiatoday_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -3165,7 +3273,11 @@ function itg_rapid_api_livetv_delhiaajtak($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('livetv_delhiaajtak');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('livetv_delhiaajtak_ttl')){
+            $ttl = variable_get('livetv_delhiaajtak_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -3190,7 +3302,11 @@ function itg_rapid_api_livetv_tej($token) {
         $jsondata = $result_get['key_value'];
     } else {
         $jsondata = variable_get('livetv_tej');
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('livetv_tej_ttl')){
+            $ttl = variable_get('livetv_tej_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -4498,7 +4614,11 @@ function author_latest_story($token) {
         // call function from return data..
         $jsondata = author_story_list($author_id, $story_type, $cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = '10';
+        if(variable_get('author_story_list_ttl')){
+            $ttl = variable_get('author_story_list_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -4527,7 +4647,11 @@ function polls_open($token) {
         // call function from return data..
         $jsondata = polls_open_list($cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('polls_open_ttl')){
+            $ttl = variable_get('polls_open_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -4555,7 +4679,11 @@ function polls_close($token) {
         // call function from return data..
         $jsondata = polls_close_list($cpageno);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('polls_close_ttl')){
+            $ttl = variable_get('polls_close_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -4658,7 +4786,11 @@ function author_detail($token, $author_id) {
         // call function from return data..
         $jsondata = author_detail_data($author_id);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('author_detail_ttl')){
+            $ttl = variable_get('author_detail_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -4687,7 +4819,11 @@ function news_wrap($token) {
         // call function from return data..
         $jsondata = news_wrap_list();
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('newswrap_ttl')){
+            $ttl = variable_get('newswrap_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -5373,7 +5509,11 @@ function poll_detail($token, $poll_id) {
         // call function from return data..
         $jsondata = poll_detail_data($poll_id);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('poll_detail_ttl')){
+            $ttl = variable_get('poll_detail_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -5474,7 +5614,11 @@ function anchor_detail($token, $anchor_id) {
         // call function from return data..
         $jsondata = anchor_detail_data($anchor_id);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('anchor_detail_ttl')){
+            $ttl = variable_get('anchor_detail_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
 
@@ -5517,11 +5661,19 @@ function anchor_programm_list($token, $anchor_id, $type) {
     $redis_key = "itg_rapid_api_anchor_" . $redis_type . "_programmlist" . $suffix;
 
     $result_get = getRedis($redis_key);
-
-
-    $jsondata = anchor_programm_data_list($anchor_id, $type, $cpageno);
-    $jsondata = json_encode($jsondata);
-
+    if ($result_get['key_value'] != "") {
+        $jsondata = $result_get['key_value'];
+    } else {
+        // call function from return data..
+        $jsondata = anchor_programm_data_list($anchor_id, $type, $cpageno);
+        $jsondata = json_encode($jsondata);
+        if(variable_get('anchor_programm_list_ttl')){
+            $ttl = variable_get('anchor_programm_list_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
+        $result_set = setRedis($redis_key, $jsondata, $ttl);
+    }
 
     $jsondata = json_decode($jsondata, TRUE);
     return $jsondata;
@@ -6058,7 +6210,11 @@ function itg_rapid_api_programdetail($token) {
         // call function from return data..
         $jsondata = generateProgramDetail($id);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('programdetail_ttl')){
+            $ttl = variable_get('programdetail_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
     $jsondata = json_decode($jsondata, TRUE);
@@ -6088,7 +6244,11 @@ function itg_rapid_api_videodetail($token) {
         // call function from return data..
         $jsondata = generateVideoDetail($id);
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('videodetail_ttl')){
+            $ttl = variable_get('videodetail_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
     $jsondata = json_decode($jsondata, TRUE);
@@ -6118,7 +6278,11 @@ function itg_rapid_api_topstories($token) {
         // call function from return data..
         $jsondata = topstoriesList();
         $jsondata = json_encode($jsondata);
-        $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+        if(variable_get('topstories_ttl')){
+            $ttl = variable_get('topstories_ttl');
+        }else{
+            $ttl = variable_get('default_ttl');
+        }
         $result_set = setRedis($redis_key, $jsondata, $ttl);
     }
     $jsondata = json_decode($jsondata, TRUE);
