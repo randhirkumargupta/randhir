@@ -105,7 +105,7 @@ table.feestable tr td{ padding:10px 5px; }
               <tr>
                 <td valign="top" width="223"><p>GST @18%</p></td>
                 <td valign="top" width="150"><p align="right">43,020 </p></td>
-                <td valign="top" width="150"><p align="right">32457.6 </p></td>
+                <td valign="top" width="150"><p align="right">32,457.6 </p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Refundable equipment and library deposit</p></td>
@@ -114,15 +114,15 @@ table.feestable tr td{ padding:10px 5px; }
               </tr>
               <tr>
                 <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
-                <td valign="top" width="150"><p align="right"><strong>287020</strong></p></td>
-                <td valign="top" width="150"><p align="right"><strong>212,778</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,12,778</strong></p></td>
               </tr>
               
               
               <tr>
                 <td valign="top" width="223"><p>*Taxes as applicable on the date of rendering of service will be charged extra</p></td>
                 <td valign="top" width="150"></td>
-                <td valign="top" width="150"><p align="right">499,798</p></td>
+                <td valign="top" width="150"><p align="right">4,99,798</p></td>
               </tr>
               
               
