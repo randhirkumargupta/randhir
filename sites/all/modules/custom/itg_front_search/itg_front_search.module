@@ -375,8 +375,10 @@ function itg_front_search_views_pre_render(&$view) {
       '#prefix' => '<div class="suggest_links">',
       '#suffix' => '</div>',
     );
-
-    $front_search .='<div class="search-menu">' . $url . '</div>';
+    
+    if (!empty($arg[1])) {
+      $front_search .='<div class="search-menu">' . $url . '</div>';
+    }
     $view->attachment_before = $front_search;
   }
 
