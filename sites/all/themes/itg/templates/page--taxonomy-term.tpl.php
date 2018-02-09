@@ -119,7 +119,7 @@
 
                 <?php
                 global $base_url;
-                $taxonomy_url = $base_url . "/taxonomy/term/$arg[2]";
+                $taxonomy_url = $base_url . '/' . drupal_get_path_alias("taxonomy/term/$arg[2]");
                 //show heading and list/grid view if category is not sponsored.
                 if (!_is_sponsored_category($arg[2])) {
                   $header_content = '<h1 class="category-heading">' . $term->name . '</h1>';
