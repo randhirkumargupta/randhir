@@ -368,12 +368,15 @@ function itg_front_search_views_pre_render(&$view) {
       unset($_GET['page']); //remove page no.
       $url .= l($val, $search_url . '/' . $arg[1] . '/' . $key, array('attributes' => array('class' => array($lnk_class)))) . ' ';
     }
-
-    $form['suggest_links'] = array(
-      '#markup' => $url,
-      '#prefix' => '<div class="suggest_links">',
-      '#suffix' => '</div>',
-    );
+    
+    if (!empty($arg[1])) {
+		$form['suggest_links'] = array(
+		  '#markup' => $url,
+		  '#prefix' => '<div class="suggest_links">',
+		  '#suffix' => '</div>',
+		);
+	}	 
+    
 
     $front_search .='<div class="search-menu">' . $url . '</div>';
     $view->attachment_before = $front_search;
