@@ -351,7 +351,8 @@ function itg_front_search_views_pre_render(&$view) {
     else {
       $front_search = '<div class="count">(' . $view->total_rows . ')&nbsp;Entries Were Found </div>';
     }
-    */ 
+    */
+
     $bundle_name = array('All' => 'All', 'Story' => 'Articles', 'Video' => 'Videos', 'photogallery' => 'Photos', 'Magazine' => 'Magazine');
     $search_url = 'topic';
     $all_bundle = $arg[1];
@@ -369,16 +370,18 @@ function itg_front_search_views_pre_render(&$view) {
       $url .= l($val, $search_url . '/' . $arg[1] . '/' . $key, array('attributes' => array('class' => array($lnk_class)))) . ' ';
     }
     
-    if (!empty($arg[1])) {
-		$form['suggest_links'] = array(
+    $form['suggest_links'] = array(
 		  '#markup' => $url,
 		  '#prefix' => '<div class="suggest_links">',
 		  '#suffix' => '</div>',
 		);
+		
+    if (!empty($arg[1])) {
+		$front_search .='<div class="search-menu">' . $url . '</div>';
 	}	 
     
 
-    $front_search .='<div class="search-menu">' . $url . '</div>';
+    
     $view->attachment_before = $front_search;
   }
 
