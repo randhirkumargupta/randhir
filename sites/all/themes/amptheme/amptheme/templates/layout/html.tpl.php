@@ -1480,6 +1480,16 @@ section.sidebar .block-itg-ads > div {
 }
 .custom-amp-ad.ad-btf{margin-bottom:50px;}
 button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} button.searchbut .fa-search { top: 1px; right: 0px;}
+.node-type-story .posted-by{overflow:hidden;}
+.node-type-story .posted-by .profile-pic, .node-type-story .posted-by .profile-detail { float: left;}
+.node-type-story .posted-by .profile-pic{width: 50px;height: 50px; border-radius: 50%;}
+.node-type-story .posted-by .profile-pic img { width: 50px;height: 50px; border-radius: 50%;border: 2px solid #e4e4e4;}
+.node-type-story .posted-by .profile-detail li{list-style:none; font-size:12px;}
+.node-type-story .posted-by .profile-detail{width: 78%; margin: 0 0 0 15px;}
+.node-type-story .posted-by .profile-detail ul.profile-byline ul li.title{display: inline-block;color: #6b6b6b;font-size: 12px;line-height:14px;font-weight: 500; border-left:1px solid #ddd;padding:0 5px;}
+.node-type-story .posted-by .profile-detail ul.profile-byline ul li.title:nth-child(1){border-left:0px;padding-left:0px;}
+.node-type-story .posted-by .profile-detail ul.profile-byline ul{ font-size:0px; margin:0px;line-height: 0px;}
+
 @media only screen and (max-width: 767px) {
     ul.pron-cons-img {
         width: 100%
