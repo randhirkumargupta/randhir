@@ -116,7 +116,7 @@ if (!mobile) {
         <tr>
           <td valign="top" width="223"><p>GST @18% </p></td>
           <td valign="top" width="150"><p align="right">43,020 </p></td>
-          <td valign="top" width="150"><p align="right">32457.6 </p></td>
+          <td valign="top" width="150"><p align="right">32,457.6 </p></td>
         </tr>
         <tr>
           <td valign="top" width="223"><p>Refundable equipment and library deposit</p></td>
@@ -124,13 +124,14 @@ if (!mobile) {
           <td valign="top" width="150"><p align="right">..</p></td>
         </tr>
         <tr>
-          <td valign="top" width="223"><p>GRAND TOTAL</p></td>
-          <td valign="top" width="150"><p align="right">2,87,020</p></td>
-          <td valign="top" width="150"><p align="right">2,12,778</p></td>
+          <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
+          <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
+          <td valign="top" width="150"><p align="right"><strong>2,12,778</strong></p></td>
         </tr>
         <tr>
-          <td valign="top" width="223" colspan="2"><p>*Taxes as applicable on the date of rendering of service will be charged extra</p></td>
-          <td valign="top" width="150"><p align="right">499,798</p></td>
+          <td valign="top" width="223"><p>*Taxes as applicable on the date of rendering of service will be charged extra</p></td>
+          <td valign="top" width="150"></td>
+          <td valign="top" width="150"><p align="right">4,99,798</p></td>
         </tr>
       </tbody>
     </table>
@@ -179,8 +180,8 @@ if (!mobile) {
           <td valign="top" width="150"><p align="right">5,000</p></td>
         </tr>
         <tr>
-          <td valign="top" width="223"><p>GRAND TOTAL</p></td>
-          <td valign="top" width="150"><p align="right">2,87,020</p></td>
+          <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
+          <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
         </tr>
       </tbody>
     </table>
@@ -230,8 +231,8 @@ if (!mobile) {
           <td valign="top" width="150"><p align="right">5,000</p></td>
         </tr>
         <tr>
-          <td valign="top" width="223"><p>GRAND TOTAL</p></td>
-          <td valign="top" width="150"><p align="right">2,87,020</p></td>
+          <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
+          <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
         </tr>
       </tbody>
     </table>

@@ -10,6 +10,10 @@
 <link rel="apple-touch-icon" sizes="114x114" href="https://smedia2.intoday.in/indiatoday/itmi/itmi-144x144.png"/>
 <link rel='shortcut icon' type='image/x-icon' href='https://smedia2.intoday.in/indiatoday/itmi/itmi.ico'/>
 <link href="css/style.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+table.feestable tr td{ padding:10px 5px; }
+.text-containt table.feestable p{ margin-bottom: 0px; }
+</style>
 <script>
   var _comscore = _comscore || [];
   _comscore.push({ c1: "2", c2: "8549097" });
@@ -41,25 +45,9 @@
   ga('create', 'UA-795349-72', 'intoday.in');
   ga('send', 'pageview');
 </script>
-
 <link rel="alternate" media="only screen and (max-width: 640px)" href="/itmi/mobile/fees.jsp"/>
 <script type="text/javascript">if ((navigator.userAgent).toLowerCase().indexOf('iphone') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=510733452" />'); } else if ((navigator.userAgent).toLowerCase().indexOf('ipad') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=560404098" />');}</script>
-
-<script type="text/javascript">
-  function canonicalUrlRedirection() {
-    for (var e = "", i = document.getElementsByTagName("link"), a = 0; a < i.length; a++)
-        if ("only screen and (max-width: 640px)" == i[a].getAttribute("media")) {
-            e = i[a].getAttribute("href");
-            break
-        }
-    "" != e && (window.location.href = e)
-}
-var redirectagent = navigator.userAgent.toLowerCase(),
-    mode = window.location.toString().split("mode=")[1],
-    redirect_devices = ["vnd.wap.xhtml+xml", "sony", "symbian", "S60", "SymbOS", "nokia", "samsung", "mobile", "windows ce", "epoc", "opera mini", "nitro", "j2me", "midp-", "cldc-", "netfront", "mot", "up.browser", "up.link", "audiovox", "blackberry", "ericsson", "panasonic", "philips", "sanyo", "sharp", "sie-", "portalmmm", "blazer", "avantgo", "danger", "palm", "series60", "palmsource", "pocketpc", "smartphone", "rover", "ipaq", "au-mic", "alcatel", "ericy", "vodafone", "wap1", "wap2", "teleca", "playstation", "lge", "lg-", "iphone", "android", "htc", "dream", "webos", "bolt", "nintendo"];
-if (!(redirectagent.indexOf("ipad") >= 0))
-    for (var i in redirect_devices) - 1 != redirectagent.indexOf(redirect_devices[i]) && "classic" != mode && canonicalUrlRedirection();
-</script>
+<script type="text/javascript">function canonicalUrlRedirection(){for(var e="",i=document.getElementsByTagName("link"),a=0;a<i.length;a++)if("only screen and (max-width: 640px)"==i[a].getAttribute("media")){e=i[a].getAttribute("href");break}""!=e&&(window.location.href=e)}var redirectagent=navigator.userAgent.toLowerCase(),mode=window.location.toString().split("mode=")[1],redirect_devices=["vnd.wap.xhtml+xml","sony","symbian","S60","SymbOS","nokia","samsung","mobile","windows ce","epoc","opera mini","nitro","j2me","midp-","cldc-","netfront","mot","up.browser","up.link","audiovox","blackberry","ericsson","panasonic","philips","sanyo","sharp","sie-","portalmmm","blazer","avantgo","danger","palm","series60","palmsource","pocketpc","smartphone","rover","ipaq","au-mic","alcatel","ericy","vodafone","wap1","wap2","teleca","playstation","lge","lg-","iphone","android","htc","dream","webos","bolt","nintendo"];if(!(redirectagent.indexOf("ipad")>=0))for(var i in redirect_devices)-1!=redirectagent.indexOf(redirect_devices[i])&&"classic"!=mode&&canonicalUrlRedirection();</script>
 </head><body>
 <div class="outerWrapper">
   <?php include('header.php');?>
@@ -67,14 +55,12 @@ if (!(redirectagent.indexOf("ipad") >= 0))
   <div class="contentCn">
     <div class="wrapper">
       <div class="leftBar">
-        <div class="text-containt"> 
-          
-          <!--Body Content Start Here-->
-          
+        <div class="text-containt">           
+          <!--Body Content Start Here-->          
           <h3>FEES</h3>
           <strong>Two-Year Full Time Postgraduate Diploma in <span id="t89xx197_5">Mass Communication</span></strong>
           </p>
-          <table border="1" cellpadding="0" cellspacing="0" width="650">
+          <table border="1" cellpadding="0" cellspacing="0" width="650" class="feestable">
             <tbody>
               <tr>
                 <td valign="top" width="223"><strong>Charges</strong></td>
@@ -119,7 +105,7 @@ if (!(redirectagent.indexOf("ipad") >= 0))
               <tr>
                 <td valign="top" width="223"><p>GST @18%</p></td>
                 <td valign="top" width="150"><p align="right">43,020 </p></td>
-                <td valign="top" width="150"><p align="right">32457.6 </p></td>
+                <td valign="top" width="150"><p align="right">32,457.6 </p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Refundable equipment and library deposit</p></td>
@@ -127,15 +113,16 @@ if (!(redirectagent.indexOf("ipad") >= 0))
                 <td valign="top" width="150"><p align="right">..</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>GRAND TOTAL</p></td>
-                <td valign="top" width="150"><p align="right">287020</p></td>
-                <td valign="top" width="150"><p align="right">212,778</p></td>
+                <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,12,778</strong></p></td>
               </tr>
               
               
               <tr>
-                <td valign="top" width="223" colspan="2"><p>*Taxes as applicable on the date of rendering of service will be charged extra</p></td>
-                <td valign="top" width="150"><p align="right">499,798</p></td>
+                <td valign="top" width="223"><p>*Taxes as applicable on the date of rendering of service will be charged extra</p></td>
+                <td valign="top" width="150"></td>
+                <td valign="top" width="150"><p align="right">4,99,798</p></td>
               </tr>
               
               
@@ -144,7 +131,7 @@ if (!(redirectagent.indexOf("ipad") >= 0))
           <!--<p style="padding:0; margin:0; font-size:14px; line-height:26px; color:blue; font-family:"Roboto",Arial, Helvetica, sans-serif;"></p>-->
           <br>
           <p><strong>Full Time Post Graduate Diploma in <span id="t89xx197_2">Broadcast Journalism</span></strong></p>
-          <table border="1" cellpadding="0" cellspacing="0" width="650">
+          <table border="1" cellpadding="0" cellspacing="0" width="650" class="feestable">
             <tbody>
               <tr>
                 <td valign="top" width="223"><strong>Charges</strong></td>
@@ -187,15 +174,15 @@ if (!(redirectagent.indexOf("ipad") >= 0))
                 <td valign="top" width="150"><p align="right">5,000</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>GRAND TOTAL</p></td>
-                <td valign="top" width="150"><p align="right">2,87,020 </p></td>
+                <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
               </tr>
             </tbody>
           </table>
           <!--<p style="padding:0; margin:0; font-size:14px; line-height:26px; color:blue; font-family:"Roboto",Arial, Helvetica, sans-serif;">*Taxes as applicable on the date of rendering of service will be charged extra</p>-->
           <br>
           <p><strong>Full Time Postgraduate Diploma in <span id="t89xx197_2">Media & Entertainment Management</span></strong></p>
-          <table border="1" cellpadding="0" cellspacing="0" width="650">
+          <table border="1" cellpadding="0" cellspacing="0" width="650" class="feestable">
             <tbody>
               <tr>
                 <td valign="top" width="223"><strong>Charges</strong></td>
@@ -238,8 +225,8 @@ if (!(redirectagent.indexOf("ipad") >= 0))
                 <td valign="top" width="150"><p align="right">5,000</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>GRAND TOTAL</p></td>
-                <td valign="top" width="150"><p align="right">2,87,020 </p></td>
+                <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
               </tr>
             </tbody>
           </table>
