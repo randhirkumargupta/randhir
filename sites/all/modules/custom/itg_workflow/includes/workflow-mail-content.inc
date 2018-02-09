@@ -14,7 +14,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
   $author_mail = array();
   $content_type = $node->type;
   $review = $node->workbench_moderation_state_new;
-  if ($review == 'needs_review' || $review == 'rejected' || $review == 'needs_modification') {
+  if (FALSE && $review == 'needs_review' || $review == 'rejected' || $review == 'needs_modification') {// We don't need this feature right now
     $node_url = l($node->title, $base_url . '/node/' . $node->nid . '/edit');
     $actual_node_url = $base_url . '/node/' . $node->nid . '/edit';
   }
@@ -407,7 +407,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $mail_content = $mail_node_author;
       }
     }
-    else if (!empty ($vbo_state) && $vbo_state == 'pub-unpub'){
+    else if (!empty ($vbo_state) && $vbo_state == 'pub-unpub' && ($review != 'needs_review' && $review != 'rejected' && $review != 'needs_modification')){
       if ($vbo_update == 'published') {
         $subject_line_upd = 'unpublished';
         $body_htwo = strtoupper($content_type) . ' UNPUBLISHED';
