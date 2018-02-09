@@ -481,7 +481,7 @@ function itg_generate_samsung_json_video($filename, $sections, $section_name){
         
       }
       else {
-        $videoids = get_video_in_fieldcollection_by_nid_mirtaed($nid);
+        $videoids = get_video_in_fieldcollection_by_nid($nid);
         foreach ($videoids as $keys => $video_value) {
           if ($video_value->video_id != '') {
             $video_id = $video_value->video_id;
