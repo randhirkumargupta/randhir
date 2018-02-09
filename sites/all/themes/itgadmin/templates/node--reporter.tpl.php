@@ -61,6 +61,12 @@
           print render($content['field_celebrity_pro_occupation']);
         }
         ?>
+         <?php
+        $field_author_report = $content['field_author_report'];
+        if (!empty($field_author_report)) {
+          print render($content['field_author_report']);
+        }
+        ?>
 
         <?php
         $extra_large = $content['field_story_extra_large_image'];
