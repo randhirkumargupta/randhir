@@ -13,24 +13,25 @@
 })(jQuery, Drupal, this, this.document);
 
 jQuery(document).ready(function () {
+    if(Drupal.settings.itg_front_end_common !== undefined){
+        var to_val = timeStringToFloat(Drupal.settings.itg_front_end_common.settings.last);
+        var from_val = timeStringToFloat(Drupal.settings.itg_front_end_common.settings.first);
 
-    var to_val = timeStringToFloat(Drupal.settings.itg_front_end_common.settings.last);
-    var from_val = timeStringToFloat(Drupal.settings.itg_front_end_common.settings.first);
 
-
-    var input_range = jQuery('#slider-range').val();
-    jQuery("#slider-range").ionRangeSlider({
-        min: from_val,
-        max: to_val,
-        from: from_val,
-        step: 1,
-        onStart: function () {
-            setTimeout(function () {
-                jQuery('.irs-slider.single').text(Drupal.settings.itg_front_end_common.settings.first);
-            }, 0);
-        },
-        onChange: timeline
-    });
+        var input_range = jQuery('#slider-range').val();
+        jQuery("#slider-range").ionRangeSlider({
+            min: from_val,
+            max: to_val,
+            from: from_val,
+            step: 1,
+            onStart: function () {
+                setTimeout(function () {
+                    jQuery('.irs-slider.single').text(Drupal.settings.itg_front_end_common.settings.first);
+                }, 0);
+            },
+            onChange: timeline
+        });
+    }    
 
     function timeStringToFloat(time) {
         var timeVal = time.split(":");
