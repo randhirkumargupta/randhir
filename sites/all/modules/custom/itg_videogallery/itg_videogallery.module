@@ -193,6 +193,12 @@ function itg_videogallery_menu() {
       'file' => 'includes/itg_video_watch_later_refresh.helper.inc',
       'type' => MENU_CALLBACK,
     );
+    $items['transcoader/get_publish_status'] = array(
+     'type' => MENU_CALLBACK,
+     'page callback' => 'itg_videogallery_get_publish_status',
+     'access arguments' => array('access content'),
+     'file' => 'includes/itg_dailymotion_video_dashboard.inc',
+  );
 
   return $items;
 }
@@ -376,7 +382,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
       );
       $form['mail_template_emails'] = array(
         '#type' => 'textarea',
-        '#title' => 'Story/Photo/Video Mail Template Emails',
+        '#title' => 'Story/Photo/Video Publish Email alert',
         '#default_value' => variable_get('mail_template_emails'),
         '#size' => 10,
       );

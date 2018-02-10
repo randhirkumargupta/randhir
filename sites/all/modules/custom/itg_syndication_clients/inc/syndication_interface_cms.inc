@@ -66,13 +66,14 @@ function genrate_factiva_latest_issue_xml($result, $issue_title, $issue_result) 
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $publish_date = date("F d, Y", strtotime($issue_title));
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
 
       $xml .= '<section>' . $primary_cat . '</section>';
       $xml .= '<edition>' . $publish_date . '</edition>';
       $xml .= '<byline>' . $byline . '</byline>';
-      $xml .= '<headline>' . $value['field_story_short_headline_value'] . '</headline>';
+      $xml .= '<headline>' . $value['title'] . '</headline>';
       $xml .= '<introtext>' . $kicker_text . '</introtext>';
       $xml .= '<bodytext>' . $body;
       $xml .= '<copyright>Reproduced From India Today Online. Copyright ' . date("Y") . '. LMIL. All rights reserved.</copyright>';
@@ -107,6 +108,7 @@ function genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $publish_date = date("F d, Y", strtotime($issue_title));
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $xml .= '<article>';
@@ -119,7 +121,7 @@ function genrate_para_text_latest_issue_xml($result, $issue_title, $issue_result
       $xml .= '<byline>' . $byline . '</byline>';
       $xml .= '<volumenumber></volumenumber>';
       $xml .= '<intellectualpropertyowner>Living Media India Limited</intellectualpropertyowner>';
-      $xml .= '<headline>' . $value['field_story_short_headline_value'] . '</headline>';
+      $xml .= '<headline>' . $value['title'] . '</headline>';
       $xml .= '<secondaryheadline>' . $kicker_text . '</secondaryheadline>';
       $xml .= '<bodytext>' . $body . '</bodytext>';
       $xml .= '</article>';
@@ -155,12 +157,13 @@ function genrate_syndication_xml_latest_issue_xml($result, $issue_title, $issue_
       $byline = get_byline_name_by_nid($value['nid']);
       $byline = empty($byline) ? 'IndiaToday.in' : $byline;
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_tags_from_body($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
 
       $xml .= '<section name="' . $primary_cat . '">';
       $xml .= '<article>';
-      $xml .= '<headline>' . $value['field_story_short_headline_value'] . '</headline>';
+      $xml .= '<headline>' . $value['title'] . '</headline>';
       $xml .= '<byline>' . $byline . '</byline>';
       $xml .= '<introtext>' . $kicker_text . '</introtext>';
       $xml .= '<bodytext>' . $body . '</bodytext>';

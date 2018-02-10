@@ -5,7 +5,7 @@
  * @file
  * Drupal site-specific configuration file.
  *
- * IMPORTANT NOTE:
+ * IMPORTANT NOTE:.
  * This file may have been set to read-only by the Drupal installation program.
  * If you make changes to this file, be sure to protect it again after making
  * your modifications. Failure to remove write permissions to this file is a

@@ -844,7 +844,7 @@ function itg_social_media_twitter_promote_by_nid($nid) {
 function itg_social_media_form_submit($form, &$form_state) {
   $nid = check_plain($form_state['values']['nid']);
   $node = node_load($nid);
-  date_default_timezone('Asia/Kolkata');
+  //date_default_timezone('Asia/Kolkata');
   // Facebook section
   if (isset($form_state['values']['itg_smi']['facebook']) && $form_state['values']['itg_smi']['facebook'] === 'facebook') {
     // Facebook Image

@@ -83,6 +83,9 @@ define('ITG_GA_CODE', 'UA-795349-17');
 /**
  * value define for image.
  */
+define('EXTRA_BIG_IMAGE_WIDTH', 1024);
+define('EXTRA_BIG_IMAGE_HEIGHT', 768);
+ 
 define('EXTRA_LARGE_IMAGE_WIDTH', 647);
 define('EXTRA_LARGE_IMAGE_HEIGHT', 363);
 define('LARGE_IMAGE_WIDTH', 483);
@@ -90,9 +93,11 @@ define('LARGE_IMAGE_HEIGHT', 271);
 define('MEDIUM_IMAGE_WIDTH', 370);
 define('MEDIUM_IMAGE_HEIGHT', 208);
 define('SMALL_IMAGE_WIDTH', 170);
-define('SMALL_IMAGE_HEIGHT', 127);
+define('SMALL_IMAGE_HEIGHT', 96);
+//define('SMALL_IMAGE_HEIGHT', 127);
 define('EXTRA_SMALL_IMAGE_WIDTH', 88);
-define('EXTRA_SMALL_IMAGE_HEIGHT', 66);
+define('EXTRA_SMALL_IMAGE_HEIGHT', 50);
+//define('EXTRA_SMALL_IMAGE_HEIGHT', 66);
 define('ISSUE_LARGE_IMAGE_WIDTH', 300);
 define('ISSUE_LARGE_IMAGE_HEIGHT', 225);
 define('ISSUE_SMALL_WIDTH', 210);
@@ -121,10 +126,11 @@ define('LARGE_IMAGE_STYLES', $large_image_style);
 $medium_image_style = array('home_page_feature_small', 'section_ordering_widget' , 'anchors_landing', 'magazine_top_three_story_237x133');
 define('MEDIUM_IMAGE_STYLES', $medium_image_style);
 
-$small_image_style = array('image170x127' , 'video_landing_page_170_x_127');
+//$small_image_style = array('image170x127' , 'video_landing_page_170_x_127');
+$small_image_style = array('image170x127');
 define('SMALL_IMAGE_STYLES', $small_image_style);
 
-$small_extra_image_style = array('widget_very_small' , 'image88x66scale' , 'photo_landing_slider_thumb_88_86' );
+$small_extra_image_style = array('widget_very_small');
 define('SMALL_EXTRA_IMAGE_STYLES', $small_extra_image_style);
 
 define('CATEGORY_MANAGMENT', variable_get('category_manager_vid'));
@@ -375,4 +381,28 @@ function itg_commom_get_gallery_image_array_by_gid($gallery_id) {
   $query->condition('fdg.bundle', 'photogallery');
   $result = $query->execute()->fetchAll();
   return $result;
+}
+
+
+/**
+ * Function for get Byline Emails
+ * @param type $node
+ * @return type
+ */
+function get_node_byline_emails($node) {
+  $emails = '';
+  if ($node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value']) {
+    $byline_ids = $node->field_common_by_line_reporter_id[LANGUAGE_NONE][0]['value'];
+    $byline_ids = explode(',', $byline_ids);
+    $query = db_select('field_data_field_reporter_email_id', 'frei');
+    $query->fields('frei', array('field_reporter_email_id_value'));
+    $query->condition('frei.entity_id', $byline_ids, 'IN');
+    $result = $query->execute()->fetchAll();
+    $email = array();
+    foreach ($result as $value) {
+      $email[] = $value->field_reporter_email_id_value;
+    }
+    $emails = implode(',', $email);
+  }
+  return $emails;
 }

@@ -65,6 +65,9 @@ function genrate_scribd_latest_issue_syndication_xml($result = NULL, $issue_titl
   $xml = '';
   if (!empty($result)) {
     global $base_url;
+    $issue_title_n = "[India Today Magazine - ".$issue_title;
+    $issue_identifier = $issue_title;
+    $issue_cover_image = getIssueCoverImgScribed($issue_title);
     $xml = '<rss xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">';
     $xml .= '<channel>';
     $xml .= '<title><![CDATA[' . $issue_title . ']]></title>';
@@ -78,10 +81,14 @@ function genrate_scribd_latest_issue_syndication_xml($result = NULL, $issue_titl
       $author = get_byline_name_by_nid($nid);
       $url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value['nid']);
       $body = remove_extra_tag_in_body($value["body_value"]);
+      $body = itg_replace_token_with_data($body, $value['nid']);
       $body = itg_remove_extra_custom_tags($body);
       $kicker_text = preg_replace('/&(?!#?[a-z0-9]+;)/', ' ', html_entity_decode($value['field_story_kicker_text_value']));
       $medium_img = get_image_info_by_fid($value['field_story_medium_image_fid']);
-      $xml .= '<item>';
+      $xml .= '<item>';      
+      $xml .= '<issue_title><![CDATA[' . $issue_title_n . ']]></issue_title>';
+      $xml .= '<issue_identifier><![CDATA[' . $issue_identifier . ']]></issue_identifier>';
+      $xml .= '<issue_cover_image>'.$issue_cover_image.'</issue_cover_image>';      
       $xml .= '<title><![CDATA[' . $value['title'] . ']]></title>';
       $xml .= '<pubdate>' . $publish_date . '</pubdate>';
       $xml .= '<author><![CDATA[' . $author . ']]></author>';

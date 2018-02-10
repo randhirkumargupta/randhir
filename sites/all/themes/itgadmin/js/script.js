@@ -222,9 +222,10 @@ jQuery(document).ready(function () {
             var at_offset = $('.action-with-title').offset();
             var at_height = $('.action-with-title').outerHeight(true);
             var at_top = at_offset.top;
+            
             $('.action-with-title').closest('#content').css('padding-top', at_height);
             $(window).scroll(function () {
-                if ($(this).scrollTop() >= at_top) {
+                if ($(this).scrollTop() >= 202) {
                     $('.action-with-title').addClass('fixed');
                 } else {
                     $('.action-with-title').removeClass('fixed');

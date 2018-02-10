@@ -303,6 +303,7 @@ function itg_fia_xml_node_feed($query) {
         }
       }
       $node_body = str_replace("100%", "300", $node_body);
+      $node_body = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $node_body);
       $node_body = itg_fia_split_by_words($node_body, $node->nid, $ad_code);
       $node_body = trim(preg_replace('/\s+/', ' ', $node_body));
       $node_body = trim($node_body);
@@ -355,6 +356,8 @@ function itg_fia_xml_format_rss_channel($title, $link, $items, $last_build_date)
  */
 function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_image, $guid, $node_body_content, $title, $link, $pubdate, $name, $desc, $op_pub, $modified, $op_modified) {
   $desc = preg_replace("#<p>(\s|&nbsp;|</?\s?br\s?/?>)*</?p>#", "", $desc);
+  $desc = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $desc);
+  $title = preg_replace('/&(?!#?[a-z0-9]+;)/', '&amp;', $title);
   $output = "<item>";
   $output .= "<title>" . $title . "</title>";
   $output .= "<link>" . check_url($link) . "?sr=fbia</link>";
@@ -398,7 +401,7 @@ function itg_fia_xml_format_rss_item($id, $kicker, $target_nids, $fb_instant_ima
   $output .= "<time class='op-modified' dateTime='" . $modified . "'>" . $op_modified . "</time>";
   $output .= "</header>";
   $output .= "<div property='content:encoded'>" . $node_body_content . "</div>"; 
-  $output .= "<figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-7530357-9', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: '2', c2: '8549097',options: { url_append: 'comscorekw=fbia' }});(function() { var s = document.createElement('script'), el = document.getElementsByTagName('script')[0]; s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js'; el.parentNode.insertBefore(s, el); })();</script><noscript><img src='http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia' /></noscript><!-- End comScore Tag --></iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
+  $output .= "<figure class='op-tracker'><iframe><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-795349-17', 'auto'); ga('set', 'referrer', 'http://instant.facebook.com/c_id=story-1122321'); ga('send', 'pageview');</script></iframe></figure> <figure class='op-tracker'><iframe><!-- Begin comScore Tag --><script>var _comscore = _comscore || [];_comscore.push({ c1: '2', c2: '8549097',options: { url_append: 'comscorekw=fbia' }});(function() { var s = document.createElement('script'), el = document.getElementsByTagName('script')[0]; s.async = true; s.src = (document.location.protocol == 'https:' ? 'https://sb' : 'http://b') + '.scorecardresearch.com/beacon.js'; el.parentNode.insertBefore(s, el); })();</script><noscript><img src='http://b.scorecardresearch.com/p?c1=2&c2=6723616&cv=2.0&cj=1&comscorekw=fbia' /></noscript><!-- End comScore Tag --></iframe></figure><footer><aside>India Today Editorial</aside><small>Copyright &#169; 2018 Living Media India Limited</small></footer>";
   $output .= "</article>";
   $output .= "</body>";
   $output .= "</html>";

@@ -3,6 +3,7 @@
     <?php print drupal_render($form['title']); ?>
     <?php print drupal_render($form['field_reporter_email_id']); ?>
     <?php print drupal_render($form['field_celebrity_pro_occupation']); ?>
+    <?php print drupal_render($form['field_author_report']); ?> 
     <?php print drupal_render($form['field_reporter_profile_type']); ?>
     <?php print drupal_render($form['field_byline_company']); ?>
     <?php print drupal_render($form['field_byline_department']); ?>

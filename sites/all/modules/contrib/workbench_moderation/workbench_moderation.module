@@ -729,7 +729,7 @@ function workbench_moderation_node_presave($node) {
     if ($node->workbench_moderation_state_new == workbench_moderation_state_published()) {
       $node->status = 1;
     }
-    else {
+    elseif (empty($node->workbench_moderation['published']) || $node->vid != $node->workbench_moderation['published']->vid) {
       $node->status = 0;
     }
   }

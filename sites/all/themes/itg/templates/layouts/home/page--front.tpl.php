@@ -104,7 +104,7 @@ if ($theme != 'itgadmin') {
                 <!-- End of Breaking news band -->
                 <?php if (isset($widget_data['big_story'])) : ?>
                   <div class="row">
-                      <div class="col-md-12" data-tb-region="homeBigStory">
+                      <div class="col-md-12">
                           <?php print $widget_data['big_story']; ?>
                       </div>            
                   </div>
@@ -520,7 +520,7 @@ if ($theme != 'itgadmin') {
                     <!--Don't miss and Ad section starts here-->
                     <?php if (isset($widget_data['itg-block-10']['widget_name']) || $theme == 'itgadmin') { ?>  
                       <div class="row itg-h321-section">
-                          <div class="col-md-8 col-sm-12 col-xs-12 mt-50" data-tb-region="HomeDoNotMiss">
+                          <div class="col-md-8 col-sm-6 col-xs-12 mt-50" data-tb-region="HomeDoNotMiss">
                               <div class="widget-help-text">Template widgets ( <strong>Don't Miss</strong> )</div>
                               <div class="itg-widget">
                                   <div class="droppable <?php print $gray_bg_layout; ?>">
@@ -554,7 +554,7 @@ if ($theme != 'itgadmin') {
                                   </div>               
                               </div>  
                           </div>
-                          <div class="col-md-4 col-sm-12 col-xs-12 mt-50">
+                          <div class="col-md-4 col-sm-6 col-xs-12 mt-50">
                               <div class="widget-help-text">Non Draggable ( <strong>Ad Widget</strong> )</div>
                               <div class="itg-widget">
                                   <div class="ad-widget">

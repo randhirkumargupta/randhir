@@ -79,8 +79,10 @@ function feature_live_tv_front_page_views_default_views() {
   );
   $handler->display->display_options['filters']['machine_name']['group'] = 1;
 
-  /* Display: Live Tv */
-  $handler = $view->new_display('page', 'Live Tv', 'page');
+  /* Display: Live TV */
+  $handler = $view->new_display('page', 'Live TV', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Live TV';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '13';
@@ -155,10 +157,10 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['filters']['content_type']['value'] = 'videogallery';
   $handler->display->display_options['path'] = 'livetv';
 
-  /* Display: International Live Tv */
-  $handler = $view->new_display('page', 'International Live Tv', 'page_1');
+  /* Display: International Live TV */
+  $handler = $view->new_display('page', 'International Live TV', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'International Live Tv';
+  $handler->display->display_options['title'] = 'International Live TV';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '13';

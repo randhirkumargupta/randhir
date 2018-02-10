@@ -130,10 +130,14 @@ function generatePhotoCategoryList($tid, $pageno) {
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fpc', array('field_primary_category_value'));
 
-    if (count($tid_list) > 0) {
-      $query->condition('ti.tid', $tid_list, 'IN');
+    if ($tid == 0 && count($tid_list) > 0) {
+        $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    else{
+        $query->condition('ti.tid', $tid, '=');
+    }
+    $interval = itg_app_time_interval($tid);    
+    $d1 = date('Y-m-d', strtotime("-".$interval." days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     //change in query
@@ -306,14 +310,15 @@ function generatePhotoDetailList($galleryimg) {
       if (!$fid > 0) {
         $fid = $fc->field_images['und'][0]['fid'];
       }
-      $uri = $fc->field_images['und'][0]['filename'];
+      //$uri = $fc->field_images['und'][0]['filename'];
+      $uri = $fc->field_images['und'][0]['uri'];
       $file_uri = file_create_url($uri);
       $fid_file = $fid;
       $img_url = completeFilePath($fid_file);
       $caption = $fc->field_image_caption['und'][0]['value'];
 
       $byline = $fc->field_credit['und'][0]['value'];
-      $photo_story_img = image_style_url('photo_slider_753x543', $uri);
+      $photo_story_img = $file_uri; //image_style_url('photo_slider_753x543', $uri);
       $photo_list_array[$listcont]['p_id'] = "$fid";
       $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
       $photo_list_array[$listcont]['p_credit'] = "$byline";
@@ -385,6 +390,7 @@ function generatePhotoStoryDeatilList($id) {
   // list array building
   $photo_list_array = generatePhotoStoryDetailList($nid);
   $toptlapics = $photo_list_array['listcont'];
+  $title = strip_tags($title);
   //data array building
   $firebase_url = get_node_firebase_weburl($nid);
   $data_array['id'] = "$nid";
@@ -433,16 +439,23 @@ function generatePhotoStoryDetailList($nid) {
       $photo_story_img_fid = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['fid'];
       $photo_story_file_name = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['filename'];
       $photo_story_img = completeFilePath($photo_story_img_fid);
-      $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
+      $photo_story_desc_html = $photo_story_desc = $entity_obj[$val['value']]->field_photo_story_description['und'][0]['value'];
       $caption = $entity_obj[$val['value']]->field_photo_story_image['und'][0]['alt'];
       $byline = $entity_obj[$val['value']]->field_credit['und'][0]['value'];
-      
+      //$byline = getImgByline($photo_story_img_fid);
+      $caption = strip_tags($caption);
+      $img_info = getInfoData($large_image_fid);
+      $photo_image_info = itg_story_get_image_info($photo_story_img_fid);
+      $image_caption = strip_tags($photo_image_info[0]->image_caption);
+      $image_courtesy = strip_tags($photo_image_info[0]->image_courtesy);
+      $photo_story_desc_html = str_replace('<div class="body_caption">', '<div class="body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;">', $photo_story_desc_html);
+      $photo_story_desc = strip_tags($photo_story_desc);
       $photo_list_array[$listcont]['p_id'] = "$photo_story_img_fid";
       $photo_list_array[$listcont]['p_image'] = "$photo_story_img";
-      $photo_list_array[$listcont]['p_credit'] = "$byline";
-      $photo_list_array[$listcont]['p_caption'] = "$caption";
+      $photo_list_array[$listcont]['p_credit'] = "$image_courtesy";
+      $photo_list_array[$listcont]['p_caption'] = "$image_caption";
       $photo_list_array[$listcont]['p_desc_withouthtml'] = "$photo_story_desc";
-      $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_desc";
+      $photo_list_array[$listcont]['p_desc_withhtml'] = "$photo_story_desc_html";
       $listcont++;
     }
   }

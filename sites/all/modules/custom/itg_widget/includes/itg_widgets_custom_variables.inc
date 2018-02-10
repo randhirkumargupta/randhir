@@ -470,6 +470,55 @@ function itg_widgets_custom_variables() {
     '#title' => t('News Today Section TID'),
     '#default_value' => variable_get('news_today_tid', 1207797),
   );
+  $form['site_mapindexurl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Site Map Index url'),
+    '#default_value' => variable_get('site_mapindexurl', 'https://instore-tosshub-com.s3.ap-south-1.amazonaws.com'),
+  );
+  $form['site_replaceurl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Site Map Replace url'),
+    '#default_value' => variable_get('site_replaceurl', 'indiatoday.intoday.in'),
+  );
+  // AMP Second ad variables
+  $form['amp_photo_second_ad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp photo second ad script'),
+    '#default_value' => variable_get('amp_photo_second_ad'),
+  );
 
+  $form['amp_video_second_ad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp video second ad script'),
+    '#default_value' => variable_get('amp_video_second_ad'),
+  );
+
+  $form['amp_story_second_ad'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp story second ad script'),
+    '#default_value' => variable_get('amp_story_second_ad'),
+  );
+  // AMP Tabola Ad script
+  $form['amp_taboola_ad_script'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Amp tabola ad script'),
+    '#default_value' => variable_get('amp_taboola_ad_script'),
+  );
+  // Unpublish content email alert
+  $form['unpublish_alert_emails'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Story/Photo/Video Unpublish content email alert'),
+    '#default_value' => variable_get('unpublish_alert_emails'),
+  );
+  $form['max_upload_image_limit'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Max image count for upload'),
+    '#default_value' => variable_get('max_upload_image_limit', 6),
+  );
+  $form['place_mobile_ad_after_paragraph'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Place Mobile Ad After Paragraph'),
+    '#default_value' => variable_get('place_mobile_ad_after_paragraph', 2),
+  );
   return system_settings_form($form);
 }

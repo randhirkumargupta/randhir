@@ -14,8 +14,8 @@
         ?>
         <li <?php echo $data_tb_region_item;?> title="<?php echo _widget_title($entity['title']);  ?>" class="most-popular-<?php print $entity['nid'] ?>">
           <?php
-          if (_is_sponsor_story_article($entity['nid'])):?>
-            <span class="itg-sponsor-title"><?php print t('SPONSORED'); ?></span>
+          if ($entity['is_spnoser']): ?>
+            <span class="itg-sponsor-title"><?php print t('IMPACT FEATURE'); ?></span>
           <?php 
           endif; ?>
           <?php

@@ -53,9 +53,11 @@
       <?php } ?>   
       <div class="new-detail">  
           <div class="marquee-container">
+		<marquee onmouseover="this.stop();" onmouseout="this.start();" scrollamount="5" scrolldelay="0">
          <div class="marquee-child">
                 <?php print $field->content; ?>        
-            </div>   
+         </div>   
+         </marquee>
           </div>
           <div class="ltv-and-ss"> 
           <div class="live-tv-link">
@@ -81,7 +83,7 @@
 <?php endforeach; ?>
 
 <script type="text/javascript">
-    jQuery(document).ready(function(){
+    /*jQuery(document).ready(function(){
         jQuery('.marquee-child').liMarquee({        
             direction: 'left', 
             scrolldelay: 0, 
@@ -89,5 +91,5 @@
             circular: true, 
             hoverstop: true
         });
-    });
+    });*/
 </script>

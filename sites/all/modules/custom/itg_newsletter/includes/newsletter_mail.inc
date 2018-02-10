@@ -342,11 +342,12 @@ function itg_newsletter_content_data() {
 
   $getnid = $_POST['content_id'];
   if (isset($getnid) && !empty($getnid)) {
+	$type = array("videogallery", "photogallery", "story");
     $query = db_select('node', 'n');
 //    $query->join('workbench_moderation_node_history', 'mnh', 'n.nid = mnh.nid');
     $query->fields('n', array('nid'));
     $query->condition('n.status', 1, '=');
-    $query->condition('n.type', 'story', '=');
+    $query->condition('n.type', $type, 'IN');
     $query->condition('n.nid', $getnid, '=');
 //    $query->condition('mnh.state', 'published', '=');
     $result = $query->execute();
@@ -356,6 +357,10 @@ function itg_newsletter_content_data() {
       $node = node_load($record_nid);
       if ($node->type == 'story') {
         $kicker = $node->field_story_kicker_text[LANGUAGE_NONE][0]['value'];
+      } else if ($node->type == 'videogallery') {
+        $kicker = $node->field_video_kicker[LANGUAGE_NONE][0]['value'];
+      } else if ($node->type == 'photogallery') {
+        $kicker = $node->field_story_expert_description[LANGUAGE_NONE][0]['value'];
       } else {
         $kicker = '';
       }

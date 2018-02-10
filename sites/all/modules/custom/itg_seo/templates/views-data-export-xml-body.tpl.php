@@ -13,7 +13,7 @@
 ?>
 <?php
   global $base_url;
-  $logo = $base_url . '/' . drupal_get_path('theme', 'itg') . '/googleeditorspics.png';
+  $logo = file_create_url(file_default_scheme() . '://sites/all/themes/itg/images/mastlogo_googleeditorspic_250x40.png');
 ?>
 <<?php print "channel"; ?>>
 <<?php print $xml_tag['path']; ?>><![CDATA[<?php print $base_url; ?>]]></<?php print $xml_tag['path']; ?>>
@@ -40,7 +40,7 @@
     $auth_name = itg_seo_editors_pick_data($rev_path2[3]);
   }
 ?>
-<<?php print "author"; ?>><![CDATA[<?php print $auth_name; ?>]]></<?php print "author"; ?>>
+<<?php print "dc:creator"; ?>><![CDATA[<?php print $auth_name; ?>]]></<?php print "dc:creator"; ?>>
 </<?php print $item_node; ?>>
 <?php endforeach; ?>
 </<?php print "channel"; ?>>

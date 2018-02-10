@@ -208,7 +208,22 @@ function itg_front_end_common_block_view($delta = '') {
 function _taboola_block_content() {
   $output = '';
   if (!empty(variable_get('taboola_bottom_block')) && empty(variable_get('disable_third_party_api'))) {
-    $output = variable_get('taboola_bottom_block');
+    $node = menu_get_object('node');
+    if (isset($node) && $node->type == 'photogallery') {
+      $tab_org = "_taboola.push({article:";
+      $tab_rep = "_taboola.push({photo:";
+      $output = variable_get('taboola_bottom_block');
+      $output = str_replace($tab_org, $tab_rep, $output);
+    }
+    else if (isset($node) && $node->type == 'videogallery') {
+      $tab_org = "_taboola.push({article:";
+      $tab_rep = "_taboola.push({video:";
+      $output = variable_get('taboola_bottom_block');
+      $output = str_replace($tab_org, $tab_rep, $output);
+    }
+    else {
+      $output = variable_get('taboola_bottom_block');
+    }
   } else {
     $output = '';
     watchdog('taboola script', 'Please add taboola script in setting page.');
@@ -392,7 +407,7 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         $entity = entity_load('field_collection_item', array($node->field_gallery_image['und'][0]['value']));
         $photo_image = $entity[$node->field_gallery_image['und'][0]['value']]->field_images['und'][0]['uri'];
       }
-      
+      $og_desc = $node->metatags[LANGUAGE_NONE]['description']['value'];
       $twitter_arr = array('card', 'site', 'creator', 'title', 'description', 'image');
       foreach ($twitter_arr as $key => $value) {
         if ($value == 'card') {
@@ -408,16 +423,15 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
           $description = mb_strimwidth(strip_tags($node->title), 0, 130, "..");
         }
         if ($value == 'description' && $node->type == 'story') {
-          //$description = mb_strimwidth(strip_tags($node->body[LANGUAGE_NONE][0]['value']), 1, 140, "..");
-          $description = mb_strimwidth(strip_tags($node->title), 0, 130, "..");
+          $description = $og_desc;
         }
         if ($value == 'description' && $node->type == 'videogallery') {
-         $description = mb_strimwidth(strip_tags($node->title), 0, 130, "..");
+          $description = $og_desc;
         }
         if ($value == 'description' && $node->type == 'photogallery') {
-          $description = mb_strimwidth(strip_tags($node->title), 0, 130, "..");
+          $description = $og_desc;
         }
-        if ($value == 'image' && $node->type == 'story' && !empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
+        if ($value == 'image' && ($node->type == 'story' || $node->type == 'breaking_news') && !empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
           $description = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
         }
         if ($value == 'image' && $node->type == 'videogallery' && !empty($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'])) {
@@ -448,7 +462,6 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         
       }
       
-      $og_desc = $node->metatags[LANGUAGE_NONE]['description']['value'];
       $fb_image = file_create_url($node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
       $type = $node->type;
       if ($is_fron_page) {
@@ -549,11 +562,10 @@ function itg_front_end_common_node_view($node, $view_mode, $langcode) {
         );
       
       if($view_mode != 'amp') {
-        $og_path = $base_url.'/'.$node->path['alias'];
+        $og_path = $base_url . '/' . drupal_get_path_alias('node/' . $node->nid);
       } else {
-        $og_path = $base_url.'/amp/'.$node->path['alias'];
+        $og_path = $base_url . '/amp/' . drupal_get_path_alias('node/' . $node->nid);
       }
-      
       $fb_og_url = array(
           '#type' => 'html_tag',
           '#tag' => 'meta',
@@ -1128,7 +1140,7 @@ function _latest_from_businesstoday() {
     }
     $related_dt = '';
     if (!empty($business_data[0]['content_id'])) {
-      $related_dt = '<span class="widget-title">' . t('LATEST FROM BUSINESS TODAY') . '</span>';
+      $related_dt = '<span class="widget-title">' . t('LATEST FROM DAILYO') . '</span>';
     }
     if (!empty($business_data[0]['content_id'])) {
       $related_dt.= "<ul>";
@@ -1241,6 +1253,7 @@ function _related_story_amp_block_content() {
       }
       
       $related_title = mb_strimwidth($display_title, 0, 80, "..");
+      $related_title = str_replace(array('\'', '"'), '', $related_title); 
       
       $related_image_url = $related_data->sm_field_custom_story_small_large_url[0];
       $related_src_set = '';
@@ -1248,12 +1261,12 @@ function _related_story_amp_block_content() {
         $related_image_data = 170;
         $related_src_set = $related_image_url . ' ' . $related_image_data . 'w';
       }
-      $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '" srcset="'.$related_src_set.'"><div fallback>offline</div></amp-img>';
+      $related_image = '<amp-img height="127" layout="responsive" width="170" alt="'.$related_title.'" title="'.$related_title.'" src="' . $related_image_url . '"><div fallback>offline</div></amp-img>';
 
         if (function_exists('itg_apache_solr_get_site_url')) {
             $hash_url = itg_apache_solr_get_site_url();
         }
-        $front_url = $hash_url[$related_data->hash].'/'.$related_data->path_alias;
+        $front_url = $hash_url[$related_data->hash].'/'.url($related_data->path_alias);
         $request = parse_url($front_url);
         $host = $request['host'];
         $path = $request['path'];

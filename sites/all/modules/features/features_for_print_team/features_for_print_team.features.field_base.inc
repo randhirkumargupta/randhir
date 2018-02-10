@@ -10,43 +10,6 @@
 function features_for_print_team_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_add_member'.
-  $field_bases['field_add_member'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_add_member',
-    'field_permissions' => array(
-      'type' => 0,
-    ),
-    'indexes' => array(
-      'target_id' => array(
-        0 => 'target_id',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'entityreference',
-    'settings' => array(
-      'handler' => 'views',
-      'handler_settings' => array(
-        'behaviors' => array(
-          'views-select-list' => array(
-            'status' => 0,
-          ),
-        ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => 'entityreference_1',
-          'view_name' => 'add_member',
-        ),
-      ),
-      'target_type' => 'user',
-    ),
-    'translatable' => 0,
-    'type' => 'entityreference',
-  );
-
   // Exported field_base: 'field_pti_idea_status'.
   $field_bases['field_pti_idea_status'] = array(
     'active' => 1,

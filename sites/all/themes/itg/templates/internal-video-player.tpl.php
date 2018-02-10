@@ -11,10 +11,18 @@ global $base_url;
 $node_url_data = url(current_path(), array('absolute' => false));
 $explode_url = explode('/', $node_url_data);
 $pub_date = get_content_publish_date($nid);
+$section_name = '';
+$section_id = '';
+$section_arr = itg_common_get_type_category($nid);
+if(!empty($section_arr)){
+  $section_id = $section_arr[0]['field_primary_category_value'];
+}
+if(isset($section_id) && is_numeric($section_id)){
+  $section_name = get_term_name_from_tid($section_id)->name;
+}
 if (!empty($pub_date)) {
   $pub_date = date('Y-m-d', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
 }
-
 ?>
 <?php
 $width = 622;
@@ -34,6 +42,9 @@ if ($used_on == 'embed') {
   $autostart = "FALSE";
 }
 $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used_on, $external_side);
+if(empty($image)){
+  $image = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg';
+}
 ?>
 <div id="videoplayer"> </div>
 <script type="text/javascript">
@@ -44,7 +55,7 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
           playlist: [{
                   title: "<?php echo stripslashes($title); ?>",
                   mediaid:"vod_<?php echo $nid; ?>",
-                  'image': "<?php echo $player_content['player_image']; ?>",
+                  'image': "<?php echo $image; ?>",
                   sources: [
                       {
                           file: "<?php echo $player_content['bitrate_url']; ?>"
@@ -74,18 +85,17 @@ $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, $used
   }
   var playerInstance = jwplayer('videoplayer');
   loadplayerjw();
-  <?php
+<?php
   $arg = arg();
   if(($arg[0] == 'video' && $arg[2] == 'embed')) { ?>
-   //ga('create', '<?php //echo $data_video["ga_code"]; ?>', 'auto');
    ga('create', 'UA-20047041-23', 'auto');
    ga('send', 'pageview');
-  <?php } ?>
+<?php } ?>
  playerInstance.on('ready', function () {
    console.log('playerready');
    ns_.StreamingAnalytics.JWPlayer(playerInstance, {
    publisherId: "8549097",
-   labelmapping: "c3=\"99000\", ns_st_pu=\"Indiatoday Group\", ns_st_ia=\"0\", ns_st_ge=\"Video\", ns_st_ddt=\"<?php echo $pub_date; ?>\", ns_st_ce=\"FullEpisode\", ns_st_tdt=\"<?php echo $pub_date;?>\", ns_st_title=\"<?php echo stripslashes($title); ?>\""
+   labelmapping: "c3=\"99000\", ns_st_pu=\"Indiatoday Group\", ns_st_ia=\"0\", ns_st_ge=\"<?php echo stripslashes($section_name); ?>\", ns_st_ddt=\"<?php echo $pub_date; ?>\", ns_st_ce=\"1\", ns_st_tdt=\"<?php echo $pub_date;?>\", ns_st_title=\"<?php echo stripslashes($title); ?>\", ns_st_ep=\"<?php echo stripslashes($title); ?>\", ns_st_pr=\"<?php echo stripslashes($title); ?>\""
 	}); 
 }); 
 </script>

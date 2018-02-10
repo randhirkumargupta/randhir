@@ -27,6 +27,12 @@ function itg_story_menu() {
     'type' => MENU_CALLBACK,
     'file' => 'includes/itg_story.inc',
   );
+  $items['content-state-title-list/%/%/autocomplete'] = array(
+    'page callback' => 'itg_state_get_content_title',
+    'access arguments' => array('access itg story'),
+    'type' => MENU_CALLBACK,
+    'file' => 'includes/itg_story.inc',
+  );
   $items['content-workbench-title-list/%/%/autocomplete'] = array(
     'page callback' => 'itg_story_get_workbench_title',
     'access arguments' => array('access itg story'),
@@ -377,6 +383,7 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
  * {@inheritdoc}
  */
 function itg_story_form_custom_callback($form, &$form_state) {
+  
   if ($form_state['node']->status == '1') {
     /* Assign story to widget */
     if (is_array($form['#node']->field_story_assign_to_widget[LANGUAGE_NONE])) {
@@ -393,35 +400,23 @@ function itg_story_form_custom_callback($form, &$form_state) {
       }
     }
     /* End for Assign story to widget */
-  }
-
-  if ($form_state['input']['op'] == 'Apply' && $form_state['node']->status == '1') {
-      $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];
-      $_GET['destination'] = $redirect_path;
-      drupal_goto('node/' . $form_state['values']['nid'] . '/edit');
-  }
-
+  } 
+  
+  
   $workbench_current_state = $form_state['node']->workbench_moderation_state_new;
   $node_type = ucfirst($form_state['node']->type);
+  
   $node_type = str_replace("_", " ", $node_type);
   $title = ucfirst($form_state['node']->title);
+  
   $clone_id = $_GET['clone_id'];
-  // code insert image in custom table
- 
-  if (isset($_SESSION['messages']['status'])) {
-    unset($_SESSION['messages']['status']);
-  }
-
+  
   $request_destination = $_REQUEST['destination'];
   $redirect_path = $_REQUEST['destination'];
-
-  if ($request_destination == 'published-story') {
-    $redirect_path .= "?field_story_syndication_value_op=all";
-    $_GET['destination'] = $redirect_path;
-  }
-
-  // redirection for clone story
-  if ($request_destination == 'clone-story' && !empty($clone_id)) {
+  
+  if ($form_state['input']['op'] == 'Apply' && $form_state['node']->status == '1') { // redirection for Apply button
+    $redirect_path = 'node/' . $form_state['values']['nid'] . '/edit?destination=' . $_GET['destination'];    
+  } else if ($request_destination == 'clone-story' && !empty($clone_id)) { // redirection for clone story
     if (arg(1) == 'add') {
       if ($workbench_current_state == 'published') {
         $op = 'cloned and published.';
@@ -431,15 +426,20 @@ function itg_story_form_custom_callback($form, &$form_state) {
         $op = 'created';
         drupal_set_message(t($node_type . ' <b>' . $title . '</b> has been ' . $op . ' successfully and submitted for further review and approval.'));
       }
-      $_GET['destination'] = 'published-story?field_story_syndication_value_op=all';
+      $redirect_path = 'published-story?field_story_syndication_value_op=all';
     }
+  } else if ($request_destination == 'published-story' && $form_state['input']['op'] != 'Apply') { // redirection for published-story
+    $redirect_path .= "?field_story_syndication_value_op=all";    
   }
-
-  //if ($form_state['input']['op'] != 'Save as Draft') {
+  
+  if (isset($_SESSION['messages']['status'])) {
+    unset($_SESSION['messages']['status']);
+  }
+ 
   if (function_exists('itg_custom_message')) {
     itg_custom_message($node_type, $workbench_current_state, arg(1), $title, $redirect_path, $action);
   }
-  //}
+ 
 }
 
 /**
@@ -750,6 +750,12 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   else {
     $magazine_id = !empty($form_state['input'][$magazine_field][LANGUAGE_NONE]) ? $form_state['input'][$magazine_field][LANGUAGE_NONE] : '';
   }
+  if (isset($form['#node']->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
+    $issue_date = $form['#node']->field_story_issue_date[LANGUAGE_NONE][0]['value'];
+  }
+  else {
+    $issue_date = !empty($form_state['values']['field_story_issue_date'][LANGUAGE_NONE]) ? $form_state['values']['field_story_issue_date'][LANGUAGE_NONE][0]['value'] : '';
+  }
 
   if (isset($form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
     $date_val = $form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value'];
@@ -759,7 +765,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // add ajax on magazine field
-  $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+  $form['field_story_issue_date'][LANGUAGE_NONE][0]['#ajax'] = array(
     'event' => 'change',
     'callback' => 'itg_story_magazine_ajax_callback',
     'wrapper' => $supplement_field . '_replace',
@@ -776,9 +782,9 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $supplement_field . '_replace">';
   $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 
-  if (function_exists('itg_common_dropdown_supplement')) {
-    if(!empty($magazine_id)) {
-    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+  if (function_exists('itg_story_dropdown_supplement')) {
+    if(!empty($issue_date)) {
+    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_story_dropdown_supplement($issue_date);
     }
   }
 
@@ -1015,7 +1021,9 @@ function itg_story_node_presave($node) {
         }
       }
     }
-
+    
+    $node->body[LANGUAGE_NONE][0]['value'] = replace_emoji($node->body[LANGUAGE_NONE][0]['value']);
+    $_REQUEST['body'][LANGUAGE_NONE][0]['value'] = replace_emoji($node->body[LANGUAGE_NONE][0]['value']);
     // Prevent expiry date to save if expiry checkbox is unchecked
 
     if (empty($node->field_story_expires[LANGUAGE_NONE][0]['value'])) {
@@ -1028,6 +1036,12 @@ function itg_story_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_story_node_view($node, $view_mode, $langcode) {
+	if (!empty($_GET['iframe'])) {
+		drupal_add_js('jQuery(document).ready(function() {           
+                jQuery("#cboxLoadedContent").find("iframe").removeAttr("style");               
+             });', array('type' => 'inline', 'scope' => 'footer'));
+	}	
+             
   if ($node->type == 'story' && $view_mode != 'search_index') {
     global $user, $theme;
     // for lock story
@@ -1040,6 +1054,16 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       }
       if (in_array('lock_story' , $config) && empty($_GET['preview_log'])) {
         drupal_goto('http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITHomepage');
+      }
+      if (isset($node->type) && $node->type == 'story' && $node->status == 1) {
+        if (!empty($node->field_story_configurations[LANGUAGE_NONE])) {
+          foreach ($node->field_story_configurations[LANGUAGE_NONE] as $key => $val) {
+            if ($val['value'] == 'display_lock') {
+              $subscription_url = "http://subscriptions.intoday.in/subscriptions/itoday/ite_offer_mailer.jsp?source=ITStorypage";
+              drupal_goto($subscription_url);
+            }
+          }
+        }
       }
     }
     
@@ -1056,9 +1080,10 @@ function itg_story_node_view($node, $view_mode, $langcode) {
       $node->content['photo_story_bottom_html'] = itg_story_photo_story_bottom_html($node);
     }
     
-    /*if ($external_url = _is_external_url_story_article($node->nid)) {
+    if((isset($node->field_story_external_url)) && (!empty($node->field_story_external_url[LANGUAGE_NONE][0]['value']))) {
+      $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
       drupal_goto($external_url);
-    }*/
+    }
     
     // modified code external url code
     if ($view_mode != 'search_index' && ($theme == FRONT_THEME_NAME || $theme == 'amptheme') && (in_array(FRONT_USER, $user->roles) || $user->uid == 0)) {
@@ -1353,4 +1378,37 @@ function itg_get_story_extra_large_image($nid) {
     $result = $query->execute();
     return $query->execute()->fetchField();
   }
+}
+
+/**
+ * Function for replace emoji characters from string
+ */ 
+function replace_emoji($text){
+  $string = str_replace("?", "{%}", $text);
+  $string = mb_convert_encoding($string, "ISO-8859-1", "UTF-8");
+  $string = mb_convert_encoding($string, "UTF-8", "ISO-8859-1");
+  $string = str_replace(array("?", "? ", " ?"), array(""), $string);
+  $string = str_replace("{%}", "?", $string);
+  return trim($string);
+  //return preg_replace('/([0-9|#][\x{20E3}])|[\x{00ae}|\x{00a9}|\x{203C}|\x{2047}|\x{2048}|\x{2049}|\x{3030}|\x{303D}|\x{2139}|\x{2122}|\x{3297}|\x{3299}][\x{FE00}-\x{FEFF}]?|[\x{2190}-\x{21FF}][\x{FE00}-\x{FEFF}]?|[\x{2300}-\x{23FF}][\x{FE00}-\x{FEFF}]?|[\x{2460}-\x{24FF}][\x{FE00}-\x{FEFF}]?|[\x{25A0}-\x{25FF}][\x{FE00}-\x{FEFF}]?|[\x{2600}-\x{27BF}][\x{FE00}-\x{FEFF}]?|[\x{2900}-\x{297F}][\x{FE00}-\x{FEFF}]?|[\x{2B00}-\x{2BF0}][\x{FE00}-\x{FEFF}]?|[\x{1F000}-\x{1F6FF}][\x{FE00}-\x{FEFF}]?/u', '', $text);
+}
+
+function itg_story_dropdown_supplement($issue_date){
+	// Fetch supplements for selected magazine
+  $select = t('- None -');
+  $data = array('_none' => $select);
+  $query = db_select('field_data_field_issue_supplement' , 'm');
+  $query->join('node' , 'n' , 'm.entity_id = n.nid');
+  $query->join('node' , 'ns' , 'm.field_issue_supplement_target_id = ns.nid');
+  $query->fields('m' , array('entity_id', 'field_issue_supplement_target_id'));
+  $query->fields('n' , array('title'));
+  $query->fields('ns' , array('title'));
+  $query->condition('n.status' , 1 , '=');
+  $query->condition('n.title' , $issue_date , '=');
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $data[$record['field_issue_supplement_target_id']] = $record['ns_title'];
+  }
+  return $data;
 }

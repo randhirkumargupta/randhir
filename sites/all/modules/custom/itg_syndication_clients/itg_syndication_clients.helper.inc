@@ -98,6 +98,17 @@ function getindiatoday_yahoo_client_sections() {
 }
 
 /**
+ * Function is used to get Yahoo video tids and File
+ * @return array
+ */
+function itg_indiatoday_yahoo_unionbudget2018_section() {
+  $unionbudget2018 = array(
+    'unionbudget2018.xml' => array(1778508, 1783640, 1783624, 1783641, 1783642, 1783643)
+  );
+  return $unionbudget2018;
+}
+
+/**
  * Function is used to get msn story tids and File
  * @return array
  */
@@ -130,7 +141,13 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-sports.xml' => 1207681,
     'msn/mailtoday/story-states.xml' => 1207682,
     'msn/mailtoday/story-entertainment.xml' => 1207680,
-    'msn/mailtoday/story-cricket.xml' => 1208384
+    'msn/mailtoday/story-cricket.xml' => 1208384,
+    'msn/mailtoday/story-world.xml' => 1206577,
+    'msn/mailtoday/story-india.xml' => 1206578,
+    'msn/mailtoday/story-top-stories.xml' => 1206584,
+    'msn/mailtoday/story-technology.xml' => 1206688,
+    'msn/mailtoday/story-auto.xml' => 1206689,
+    'msn/mailtoday/story-education.xml' => 1206666
   );
   return $msn_story;
 }
@@ -224,7 +241,7 @@ function get_dailyhunt_sections_for_feed() {
     '1206600' => 'gossip.xml',
     '1206578' => 'india.xml',
     '1206567' => 'lifestyle.xml',
-    '1206514' => 'magazine.xml',
+    '1206598' => 'magazine.xml',
     '1206572' => 'mailtoday.xml',
     '1206533' => 'movies.xml',
     '1206550' => 'sports.xml',
@@ -362,7 +379,8 @@ function get_hltapps_sections($type) {
         'india.xml' => array('section' => '1206955', 'limit' => 15),
         'world.xml' => array('section' => '1206956', 'limit' => 15),
         'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
-        'entertainment.xml' => array('section' => '1206952', 'limit' => 15)
+        'entertainment.xml' => array('section' => '1206952', 'limit' => 15),
+        'movies.xml' => array('section' => '1207303', 'limit' => 15)
       );
       break;
     case 'programmes':
@@ -507,11 +525,34 @@ function get_content_fetch_time($section_id) {
     return $time_array[$section_id];
   }
   else {
-    return FALSE;
+    return 730;
   }
 }
 
 function get_factiva_sections() {
   return array('1206578' => 'india.xml',
     '-1' => 'latest-news.xml');
+}
+
+
+function get_samsung_video_category(){
+  return array(
+    'videolist-featured.json' => 1, 
+    'videolist-popular-now.json' => 1207974, 
+    'videolist-india.json' => 1206955, 
+    'videolist-movie.json' => array(1207303,1207980),
+    'videolist-tech.json' => 1207486, 
+    'videolist-sosorry.json' => 1207580, 
+    'videolist-news-today.json' => 1207797, 
+    'videolist-newsroom.json' => 1207827, 
+    'videolist-to-the-point.json' => 1207722, 
+    'videolist-people-court.json' => 1208900, 
+    'videolist-india-first.json' => 1208095, 
+    'videolist-5ive-live.json' => 1208902, 
+    'videolist-in-the-club.json' => 1208173, 
+    'videolist-first-up.json' => 1207755, 
+    'videolist-sports-today.json' => 1206960, 
+    'videolist-auto-today.json' => 1207978, 
+    'videolist-long-story.json' => 1208061, 
+  );
 }

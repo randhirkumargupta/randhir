@@ -45,6 +45,10 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                 if ($video_value->field_include_ads_value == 'yes') {
                   $ads_flag = 0;
                 }
+                $image_url = $base_url . "/" . drupal_get_path('theme', 'itg') . '/images/itg_image370x208.jpg';
+                if ($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri'] != "") {
+                  $image_url = file_create_url($video_node->field_story_extra_large_image[LANGUAGE_NONE][0]['uri']);
+                }
                 ?>
                 <?php if ($keys == 0) { ?>
                   <div class="<?php echo $hide_player; ?>" id="video_palyer_container"> <div class = "video-iframe-wrapper">
@@ -52,7 +56,7 @@ if (function_exists('itg_common_get_node_title') && !empty($arg)) {
                           <div class="video-iframe-wrapper" id="video_0">
                               <?php
                               if ($videoids[0]->video_repo_type == 'INTERNAL') {
-                                print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'embed'));
+                                print theme('internal_video_player', array("data" => $videoids[0]->fid, 'used_on' => 'embed', 'image' => $image_url, 'nid' => $nid));
                               }
                               ?>
                           </div>

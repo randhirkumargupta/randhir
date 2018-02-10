@@ -79,6 +79,15 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
         $destination = 'manage-supplements';
         $form['title']['#description'] = '<p>' . t('Please enter supplement title.') . '</p>';
         $form['actions']['submit']['#submit'][] = 'itg_msi_issue_form_custom_submit_callback';
+        //
+        $form['field_supp_issue']['#required'] = FALSE;
+        $form['field_issue_supp_large_image']['#required'] = FALSE;
+        $form['field_issue_supp_small_image']['#required'] = FALSE;
+        $form['field_supp_issue']['#access'] = FALSE;
+        $form['field_issue_supp_large_image']['#access'] = FALSE;
+        $form['field_issue_supp_small_image']['#access'] = FALSE;
+        $form['group_supp_import_xml']['#access'] = FALSE;
+        $form['field_supp_import_xml']['#access'] = FALSE;
     }
 
     //Set destination for issue form
@@ -100,9 +109,9 @@ function itg_msi_form_alter(&$form, &$form_state, $form_id) {
 
         //Add cancel button to magazine, supplement and issue form
         $form['actions']['cancel'] = array(
-            '#markup' => l(t('Cancel'), $destination, array('attributes' => array('class' => 'button'))),
+            '#markup' => l(t('Close'), $destination, array('attributes' => array('class' => 'button'))),
             '#weight' => 21,
-            '#value' => t('Cancel'),
+            '#value' => t('Close'),
         );
 
         //Add submit handler for redirect form to their corresponding page after node has been created susccessfully.
@@ -460,6 +469,14 @@ function itg_msi_node_presave($node) {
     //Set date in title
     if ($node->type == 'issue') {
         $node->title = $node->field_issue_title[LANGUAGE_NONE][0]['value'];
+         if ($node->is_new == 1) {
+			$node->status = $node->field_issue_publish[LANGUAGE_NONE][0]['value'];
+		}
+		else {
+			$publish = $node->field_issue_publish[LANGUAGE_NONE][0]['value'] ? 1 : 0;
+			$node->status = $publish;
+		    field_attach_update('node', $node);
+		}
     }
 }
 

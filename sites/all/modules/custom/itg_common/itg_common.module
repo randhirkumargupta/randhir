@@ -748,13 +748,13 @@ function itg_common_cancel_button($form, &$form_state) {
   }
   if (!empty($form['nid']['#value'])) {
     $form['actions']['cancel'] = array(
-      '#markup' => '<a data-dest="' . $destination . '?' . $query_str . '" data-widget="' . arg(1) . '" class="button cancle-itg-btn" href="javascript:void(0)">Cancel</a>',
+      '#markup' => '<a data-dest="' . $destination . '?' . $query_str . '" data-widget="' . arg(1) . '" class="button cancle-itg-btn" href="javascript:void(0)">Close</a>',
       '#weight' => 22,
     );
   }
   else {
     $form['actions']['cancel'] = array(
-      '#markup' => l(t('Cancel'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button', 'data-widget' => arg(1)))),
+      '#markup' => l(t('Close'), $destination, array("query" => $query_array, 'attributes' => array('class' => 'button', 'data-widget' => arg(1)))),
       '#weight' => 22,
     );
   }
@@ -1126,9 +1126,9 @@ function itg_common_mail_alter(&$message) {
 
   $sendto = array();
   foreach ($to_mails as $mail_to) {
-    if (!preg_match('/aajtak|intoday|indiatoday/', $mail_to)) {
+    //if (!preg_match('/aajtak|intoday|indiatoday/', $mail_to)) {
       $sendto[] = $mail_to;
-    }
+    //}
   }
   $sendmails = implode(',', $sendto);
 
@@ -1321,29 +1321,22 @@ function itg_common_url_friendly_path($pathdata) {
  */
 function _is_sponsor_story_article($nid) {
   $is_sponsor = FALSE;
-  //code commented by shravan
-  /*if (isset($nid)) {
-    $type_query = db_select('node', 'n');
-    $type_query->fields('n', array('type'));
-    $type_query->condition('n.nid', $nid, '=');
-    $node_type = $type_query->execute()->fetchField();
-    if ($node_type == 'story') {
-      $query = db_select('field_data_field_story_configurations', 'fc');
-      $query->fields('fc', array('field_story_configurations_value'));
-      $query->condition('fc.entity_id', $nid, '=');
-      $query->condition('fc.bundle', 'story', '=');
-      $query->condition('fc.entity_type', 'node', '=');
-      $query_result = $query->execute()->fetchAll();
-      if (!empty($query_result)) {
-        foreach ($query_result as $config_val) {
-          if ($config_val->field_story_configurations_value == 'sponsor') {
-            $is_sponsor = TRUE;
-            break;
-          }
+  if (isset($nid)) {
+    $query = db_select('field_data_field_story_configurations', 'fc');
+    $query->fields('fc', array('field_story_configurations_value'));
+    $query->condition('fc.entity_id', $nid, '=');
+    $query->condition('fc.bundle', 'story', '=');
+    $query->condition('fc.entity_type', 'node', '=');
+    $query_result = $query->execute()->fetchAll();
+    if (!empty($query_result)) {
+      foreach ($query_result as $config_val) {
+        if ($config_val->field_story_configurations_value == 'sponsor') {
+          $is_sponsor = TRUE;
+          break;
         }
       }
     }
-  }*/
+  }
   return $is_sponsor;
 }
 
@@ -1543,7 +1536,9 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
   
   $fullReplacesBodyText = trim(preg_replace('/mce_href=[^>]*/', '', $fullReplacesBodyText));
 
-  $fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));
+  //$fullReplacesBodyText = trim(preg_replace('/mce_src=[^>]*/', '', $fullReplacesBodyText));
+  $fullReplacesBodyText = trim(preg_replace('/mce_src="[^"]*/', '', $fullReplacesBodyText));
+  $fullReplacesBodyText = trim(preg_replace("/mce_src='[^']*/", "", $fullReplacesBodyText));
 
   $fullReplacesBodyText = trim(preg_replace('/style=[^>]*/', '', $fullReplacesBodyText));
 
@@ -1566,7 +1561,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
     $i++;
   }
 
-  preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $fullReplacesBodyText, $iframes);
+  preg_match_all('/<iframe.*src=\"(.*)\".*>(.*)<\/iframe>/isU', $fullReplacesBodyText, $iframes);
 
   foreach ($iframes[0] as $iframes) {
     preg_match('/src="([^"]+)"/', $iframes, $match);
@@ -1574,7 +1569,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
     if ($frame_url['scheme'] != 'https') {
       $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
     }
-    if (strpos($frame_url, 'mega-review/embed') !== false) {
+    else if ((strpos($frame_url['path'], 'mega-review/embed') !== false)) {
       $fullReplacesBodyText = str_replace($iframes, "", $fullReplacesBodyText);
     }
     else {
@@ -1701,6 +1696,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
           $value2 = '<script async="" defer="" src="//platform.instagram.com/en_US/embeds.js" ></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
           $value2 = '<script async="" defer="defer" src="//platform.instagram.com/en_US/embeds.js"></script>';
+          $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+          $value2 = '<script async="" defer="defer" src="//platform.instagram.com/en_US/embeds.js" "></script>';
           $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         }
       }
@@ -1864,4 +1861,15 @@ function itg_get_dive_region_name($str, $type = '') {
     $return .= ucfirst($value);
   }
   return $return;
+}
+
+/**
+ * Do not allow to change modearation state from published to draft.
+ * Implements hook_node_update
+ * @param type $node
+ */ 
+function itg_common_node_update($node) {
+  if ((isset($node->workbench_moderation_state_current)) && ($node->workbench_moderation_state_current == 'published') && (isset($node->workbench_moderation_state_new)) && ($node->workbench_moderation_state_new == 'draft')) {
+    $node->workbench_moderation_state_new = 'published';
+  }
 }

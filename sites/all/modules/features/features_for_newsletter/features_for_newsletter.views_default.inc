@@ -185,7 +185,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -365,7 +365,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -394,7 +394,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
   $handler->display->display_options['fields']['changed']['custom_date_format'] = 'd/m/Y';
   $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
-  /* Field: Content: Date */
+  /* Field: Content: Survey Start Date  */
   $handler->display->display_options['fields']['field_survey_start_date']['id'] = 'field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['table'] = 'field_data_field_survey_start_date';
   $handler->display->display_options['fields']['field_survey_start_date']['field'] = 'field_survey_start_date';
@@ -610,6 +610,49 @@ function features_for_newsletter_views_default_views() {
     29 => 0,
     28 => 0,
   );
+  /* Filter criterion: Content: Post date */
+  $handler->display->display_options['filters']['created']['id'] = 'created';
+  $handler->display->display_options['filters']['created']['table'] = 'node';
+  $handler->display->display_options['filters']['created']['field'] = 'created';
+  $handler->display->display_options['filters']['created']['operator'] = '>';
+  $handler->display->display_options['filters']['created']['value']['value'] = '-30 day';
+  $handler->display->display_options['filters']['created']['value']['type'] = 'offset';
+  $handler->display->display_options['filters']['created']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['label'] = 'Created Date';
+  $handler->display->display_options['filters']['created']['expose']['description'] = 'Ex "-30 day"';
+  $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
+  $handler->display->display_options['filters']['created']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
+  );
   $handler->display->display_options['path'] = 'manage-newsletter';
 
   /* Display: Draft */
@@ -664,7 +707,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
   $handler->display->display_options['fields']['field_first_name']['exclude'] = TRUE;
-  /* Field: Field: Day */
+  /* Field: Field: Last name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -807,7 +850,7 @@ function features_for_newsletter_views_default_views() {
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '0';
-  /* Filter criterion: Content: State Flag (field_op_flag) */
+  /* Filter criterion: Content: op_flag (field_op_flag) */
   $handler->display->display_options['filters']['field_op_flag_value']['id'] = 'field_op_flag_value';
   $handler->display->display_options['filters']['field_op_flag_value']['table'] = 'field_data_field_op_flag';
   $handler->display->display_options['filters']['field_op_flag_value']['field'] = 'field_op_flag_value';

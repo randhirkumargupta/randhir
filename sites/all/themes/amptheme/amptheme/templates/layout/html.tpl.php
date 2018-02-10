@@ -402,10 +402,8 @@ img {
     color: #b1b1b1;
     display: block
 }
-.story-section .story-tech-chunk {
-    background: #f3f3f3;
-    padding: 10px;
-    position: relative
+.story-section .story-tech-chunk .field-label{
+	display: none;
 }
 .field .field-label {
     font-weight: 700
@@ -427,8 +425,39 @@ img {
     width: 111px;
     height: 18px;
     margin: 20px 0;
-    position: relative
+    position: relative;
+    background: url(/sites/all/themes/itg/images/rating-grey.png) 0 0px no-repeat;
 }
+.movie-rating:after{
+	content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url(/sites/all/themes/itg/images/rating-red.png) 0 0px no-repeat;
+    height: 60px;
+    width: 0;
+	}
+.movie-rating[data-star-value="10%"]:after {
+  width: 10%; }
+.movie-rating[data-star-value="20%"]:after {
+  width: 20%; }
+.movie-rating[data-star-value="30%"]:after {
+  width: 30%; }
+.movie-rating[data-star-value="40%"]:after {
+  width: 40%; }
+.movie-rating[data-star-value="50%"]:after {
+  width: 50%; }
+.movie-rating[data-star-value="60%"]:after {
+  width: 60%; }
+.movie-rating[data-star-value="70%"]:after {
+  width: 70%; }
+.movie-rating[data-star-value="80%"]:after {
+  width: 80%; }
+.movie-rating[data-star-value="90%"]:after {
+  width: 90%; }
+.movie-rating[data-star-value="100%"]:after {
+  width: 100%; }
+
 .grey-star,
 .red-star {
     position: absolute;
@@ -1386,9 +1415,9 @@ ul.pron-cons-img li img {
 }
 .tech-pros-cons-main {
     width: 100%;
-    float: left;
     padding: 10px;
-    background-color: #edebec
+    background-color: #edebec;
+    overflow: hidden;
 }
 .tech-photos .tech-photos-head-section {
     display: block
@@ -1446,10 +1475,21 @@ ul.header-menu li {
     width: 270px;
 }
 .story_ad_block.custom-amp-ad{margin-top:15px;}
+.node-type-photogallery .story_ad_block.custom-amp-ad, .node-type-videogallery .story_ad_block.custom-amp-ad{margin-bottom:8px;}
 section.sidebar .block-itg-ads > div {
     margin: auto;
 }
+.custom-amp-ad.ad-btf{margin-bottom:50px;}
 button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} button.searchbut .fa-search { top: 1px; right: 0px;}
+.node-type-story .posted-by{overflow:hidden;}
+.node-type-story .posted-by .profile-pic, .node-type-story .posted-by .profile-detail { float: left;}
+.node-type-story .posted-by .profile-pic{width: 50px;height: 50px; border-radius: 50%;}
+.node-type-story .posted-by .profile-pic img { width: 50px;height: 50px; border-radius: 50%;border: 2px solid #e4e4e4;}
+.node-type-story .posted-by .profile-detail li{list-style:none; font-size:12px;}
+.node-type-story .posted-by .profile-detail{width: 78%; margin: 0 0 0 15px;}
+.node-type-story .posted-by .profile-detail ul.profile-byline ul li.title{display: inline-block;color: #6b6b6b;font-size: 12px;line-height:14px;font-weight: 500; border-left:1px solid #ddd;padding:0 5px;}
+.node-type-story .posted-by .profile-detail ul.profile-byline ul li.title:nth-child(1){border-left:0px;padding-left:0px;}
+.node-type-story .posted-by .profile-detail ul.profile-byline ul{ font-size:0px; margin:0px;line-height: 0px;}
 @media only screen and (max-width: 767px) {
     ul.pron-cons-img {
         width: 100%
@@ -1468,6 +1508,10 @@ button.searchbut{float: right; width: 27px; height: 27px; margin-right: 5px;} bu
         box-sizing: border-box
     }
 }
+
+.video_dec_amp {
+    text-align: left;
+  }
         </style>
     </head>
     <?php

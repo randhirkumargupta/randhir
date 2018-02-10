@@ -81,7 +81,8 @@ function get_photo_item_rss($section_id, $term_name, $section_url) {
   $query->fields('n', array('nid', 'title', 'created'));
   $query->fields('npd', array('field_itg_content_publish_date_value'));
   $query->fields('eli', array('field_story_extra_large_image_fid'));
-
+  $days_ago = strtotime(date('Y-m-d', strtotime('-7 days')));
+  $query->condition('n.created', $days_ago, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'photogallery', '=');
   if (!empty($section_id)) {

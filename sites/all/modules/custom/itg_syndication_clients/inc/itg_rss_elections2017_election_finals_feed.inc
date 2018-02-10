@@ -153,6 +153,7 @@ function genrate_elections2017_election_finals_detail_xml($value, $category, $xm
   $byline = get_byline_name_by_nid($value['nid']);
   $place = get_content_city($value['nid']);
   $body = remove_extra_tag_in_body($value["body_value"]);
+  $body = itg_replace_token_with_data($body, $value['nid']);
   $body = itg_remove_extra_custom_tags($body);
   $sectionname = get_term_name_by_tid($section_id);
   $content_url = FRONT_URL . "/" . drupal_get_path_alias('node/' . $value["nid"]);

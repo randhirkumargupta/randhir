@@ -180,6 +180,6 @@ function itg_app_api_schema() {
 
 function itg_app_api_install() {
 
-    db_add_field('itg_polls', 'ip', array('type' => 'varchar', 'length' => 30, 'default' => NULL, 'comment' => 'ip address of the client',));
-    db_add_field('itg_polls', 'device', array('type' => 'varchar', 'length' => 30, 'default' => NULL, 'comment' => 'device name of the client'));
+    db_add_field('itg_polls', 'ip', array('type' => 'varchar', 'length' => 255, 'default' => NULL, 'comment' => 'ip address of the client',));
+    db_add_field('itg_polls', 'device', array('type' => 'varchar', 'length' => 255, 'default' => NULL, 'comment' => 'device name of the client'));
 }

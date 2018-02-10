@@ -653,8 +653,9 @@ function amp_node_view($node, $view_mode, $langcode) {
     drupal_add_html_head_link(array('rel' => 'amphtml', 'href' => url($uri['path'], $uri['options'])), TRUE);
   }*/
   
-  // amp add in url :: 10 july 2017
-  if ($view_mode == 'full' && node_is_page($node) && in_array($node->type, amp_get_enabled_types())) {
+  // amp add in url :: 01 Jan 2016
+  $show_amp_time = strtotime('2016-01-01 12:00:01');  
+  if ($view_mode == 'full' && node_is_page($node) && in_array($node->type, amp_get_enabled_types()) && $node->created >= $show_amp_time) {
     if ($node->type == 'breaking_news' && $node->field_type['und']['0']['value'] == 'Live Blog') {
       $uri = entity_uri('node', $node);
       $uri['options']['absolute'] = TRUE;

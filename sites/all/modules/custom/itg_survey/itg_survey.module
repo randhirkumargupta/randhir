@@ -245,8 +245,16 @@ function itg_survey_views_pre_render(&$view) {
 function itg_survey_form_views_exposed_form_alter(&$form , &$form_state , $form_id) {
   if ($form['#id'] == 'views-exposed-form-manage-survey-page' || $form['#id'] == 'views-exposed-form-manage-survey-page-1' || $form['#id'] == 'views-exposed-form-manage-survey-page-2') {
     // Call function autocomplete to show matching titles
-    $form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
+    //$form['title']['#autocomplete_path'] = 'content-title-list/survey/autocomplete';
     $form['title']['#attributes'] = array('placeholder' => t('Title'));
+  }
+  
+  if ($form['#id'] == 'views-exposed-form-manage-survey-page') {
+    $form['title']['#autocomplete_path'] = 'content-state-title-list/survey/published/autocomplete';
+  } else if ($form['#id'] == 'views-exposed-form-manage-survey-page-1') {
+    $form['title']['#autocomplete_path'] = 'content-state-title-list/survey/draft/autocomplete';
+  } else if ($form['#id'] == 'views-exposed-form-manage-survey-page-2') {
+    $form['title']['#autocomplete_path'] = 'content-state-title-list/survey/unpublished/autocomplete';
   }
 }
 
@@ -922,7 +930,10 @@ function itg_survey_pqs_associate_poll_with_story($nid) {
   if (!empty($node->nid) && $node->type == 'poll') {
     $poll_banner_image = '';
     if (isset($node->field_poll_banner[$node->language][0]['uri']) && !empty($node->field_poll_banner[$node->language][0]['uri'])) {
-      $poll_banner_image = theme('image_style' , array('style_name' => 'home_page_poll_images_style' , 'path' => $node->field_poll_banner[$node->language][0]['uri']));
+      $poll_banner_image = theme('image_style' , array('style_name' => 'home_page_poll_images_style' , 'path' => $node->field_poll_banner[$node->language][0]['uri'],
+          'alt' => $node->field_poll_banner[$node->language][0]['alt'],
+          'title' => $node->field_poll_banner[$node->language][0]['title']
+          ));
     }
     else {
       $poll_banner_image = '<img src ="' . $base_url . "/" . drupal_get_path('theme' , 'itg') . '/images/itg_image370x208.jpg" alt="" title="" />';
