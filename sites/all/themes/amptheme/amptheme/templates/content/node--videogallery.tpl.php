@@ -23,8 +23,8 @@
         $description = $node->field_video_kicker[LANGUAGE_NONE][0]['value'];
       }
       if(function_exists('itg_custom_amp_body_filter')) {
-	    $description = itg_custom_amp_body_filter($description);
-	  }
+	      $description = itg_custom_amp_body_filter($description);
+	    }
                         
       foreach ($videoids as $keys => $video_value) {
         if (function_exists('get_amp_video_time')) {
@@ -97,8 +97,8 @@
                 $description = $video_kicker[0]->field_video_kicker_value;
               }
               if(function_exists('itg_custom_amp_body_filter')) {
-			    $description = itg_custom_amp_body_filter($description);
-		      }
+                $description = itg_custom_amp_body_filter($description);
+              }
               ?>
         <amp-carousel width="300"
                   height="280"
