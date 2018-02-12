@@ -2,6 +2,9 @@
   <div class="photo-title"><h1><?php print $node->title; ?></h1></div>
    <?php
     $source_type = $node->field_story_source_type[LANGUAGE_NONE][0]['value'];
+    if(function_exists('itg_custom_amp_body_filter')) {
+	  $description = itg_custom_amp_body_filter($description);
+	}
     if($source_type != 'migrated') { ?>
     <div class="amp-photo-slider">
     <?php
