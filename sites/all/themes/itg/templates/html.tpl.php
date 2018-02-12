@@ -148,6 +148,5 @@
         });
       });
     </script>
-    <script src="//assets-indiatoday.sportz.io/multisport/js/mwl-init.js"></script>
 </body>
 </html> 
