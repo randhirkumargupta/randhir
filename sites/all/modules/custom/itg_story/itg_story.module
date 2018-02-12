@@ -261,6 +261,13 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
         }
         $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = $values;
       }
+      // Unset defualy value if attached gallery is unpublished.
+      if(isset($form['#node']->nid) && !empty($form['#node']->field_technology_photogallery[LANGUAGE_NONE][0]['target_id'])){
+		 $gallery_id = $form['#node']->field_technology_photogallery[LANGUAGE_NONE][0]['target_id'];
+		 if(itg_common_get_node_status($gallery_id) == 0){
+	       $form['field_technology_photogallery'][LANGUAGE_NONE][0]['target_id']['#default_value'] = '';
+		 }		 
+	  }
 
       if ($user->uid != 1) {
         unset($form['field_story_long_head_line']);
