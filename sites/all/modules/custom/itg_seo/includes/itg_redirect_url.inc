@@ -296,8 +296,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       drupal_goto($refurl, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter.jsp' || $arg[1] == 'matchcenter-new.jsp')) && (!empty($_GET['matchid']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
       $matchid = $_GET['matchid'];
-      $newmatchurl = $base_url.'/scorecard/matchcenter/'.$matchid;
-      drupal_goto($newmatchurl, array(), 301);
+      $paging = array('query' => array('matchid' => $matchid));
+      $newmatchurl = $base_url.'/scorecard/live-cricket-score';
+      drupal_goto($newmatchurl, $paging, 301);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter')) && (!empty($_GET['matchid']))) {  
+      $matchid = $_GET['matchid'];
+      $paging = array('query' => array('matchid' => $matchid));
+      $newmatchurl = $base_url.'/scorecard/live-cricket-score';
+      drupal_goto($newmatchurl, $paging, 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'calendar')) && !empty($arg[1]) && (is_numeric($arg[1])) && !empty ($arg[2]) && (is_numeric($arg[2]))) {  // Pattern embed/@#trfg
       $magazine_issue_id = $arg[1];
       $mag_issue_id = get_new_seccat_by_mig_id($magazine_issue_id,'migrate_map_itgissue');
