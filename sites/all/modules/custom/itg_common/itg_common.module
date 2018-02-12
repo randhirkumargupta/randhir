@@ -1544,6 +1544,7 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
 
   $fullReplacesBodyText = trim(preg_replace('/<style(.*)\/style>/', '', $fullReplacesBodyText));
   $fullReplacesBodyText = preg_replace('#<div class="clicktoenlarge"[^>]*>(.*?)</div>#', '', $fullReplacesBodyText);
+  $fullReplacesBodyText = str_replace('xml:lang="en"', '', $fullReplacesBodyText);
   preg_match_all('/<img.*src=\"(.*)\".*>/isU', $fullReplacesBodyText, $matches);
 
   $i = 0;
@@ -1638,6 +1639,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         
         $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" " charset="utf-8"></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         
       }
