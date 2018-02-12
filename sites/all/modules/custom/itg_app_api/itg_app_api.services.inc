@@ -6323,6 +6323,8 @@ function social_share_save_it_detail($website_id, $content_id, $content_type, $a
     $current_time = date('Y-m-d H:i:s');
     if ($result_id == '') {
         //Insert the value
+        $content_title = addslashes($content_title);
+        $category = addslashes($category);
         $query = db_insert('jos_social_media_sharing')
                         ->fields(array(
                             'content_id' => isset($content_id) ? $content_id : '',
