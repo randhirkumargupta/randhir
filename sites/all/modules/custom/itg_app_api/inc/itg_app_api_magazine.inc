@@ -505,9 +505,9 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
   $tid_list[] = $tid;
   $issue_list_array = array();
   $listcount = 0;
-  $range_max = 10;
-  $sdate_fi = strtotime($sdate);
-  $tdate_fi = strtotime($tdate);
+  $range_max = 10;  
+  $sdate_fi = strtotime($sdate . " 00:00:00");
+  $tdate_fi = strtotime($tdate ." 23:59:00");
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
