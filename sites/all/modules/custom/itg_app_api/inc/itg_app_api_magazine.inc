@@ -495,7 +495,7 @@ function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno =
  *
  * @return array
  */
-function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
+function magazineEditionListPageRerourceValueList($sdate, $tdate, $pageno) {
   // variable declaration
   global $base_url;
   $node_count = "";
