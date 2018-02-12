@@ -109,7 +109,7 @@ function magazine_node_third_level_menu_content() {
     //~ if (!empty($uri)) {
     //~ $src = file_create_url($uri);
     //~ }
-    $src = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/FROM-THE-MAGAZINE.gif');
+    $src = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/FROM-THE-MAGAZINE.png');
     $output .= '<div class="menu-wrapper">';
     $output .= '<div class="container">';
     $output .= '<div class="row">';
