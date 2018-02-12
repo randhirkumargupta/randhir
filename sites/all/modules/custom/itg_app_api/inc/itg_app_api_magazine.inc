@@ -67,6 +67,8 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
   $node = node_load($issueid);
   $field_issue_large_cover_image_fid = $node->field_issue_large_cover_image['und'][0]['fid'];
   $issue_cover_image = $field_issue_large_cover_image_url = completeFilePath($field_issue_large_cover_image_fid);
+  $lar_img_uri = $node->field_issue_large_cover_image['und'][0]['uri'];
+  $lar_img = image_style_url('magazine_top_issue_172x240', $lar_img_uri);
 
   $field_issue_small_cover_image_fid = $node->field_issue_small_cover_image['und'][0]['fid'];
   $issue_digitalmag_url = $field_issue_small_cover_image_url = completeFilePath($field_issue_small_cover_image_fid);
@@ -218,7 +220,7 @@ function magazineEditionPageRerourceValueList($issueid, $pageno) {
 
   $data['issue_date'] = $issue_date;
   $data['issue_nid'] = $issue_nid;
-  $data['issue_cover_image'] = $issue_cover_image;
+  $data['issue_cover_image'] = $lar_img;
   $data['issue_digitalmag_url'] = $issue_digitalmag_url;
 
 
@@ -493,19 +495,19 @@ function magazineEditionListPageRerourceValue($sdate = 0, $tdate = 0, $cpageno =
  *
  * @return array
  */
-function magazineEditionListPageRerourceValueList($sdate, $tdate, $cpageno) {
+function magazineEditionListPageRerourceValueList($sdate, $tdate, $pageno) {
   // variable declaration
   global $base_url;
   $node_count = "";
   $output = "";
   $data = array();
   $tid_list = array();
-  $tid_list[] = $tid;
+  $tid_list[] = $tid; 
   $issue_list_array = array();
   $listcount = 0;
-  $range_max = 10;
-  $sdate_fi = strtotime($sdate);
-  $tdate_fi = strtotime($tdate);
+  $range_max = 10;  
+  $sdate_fi = strtotime($sdate . " 00:00:00");
+  $tdate_fi = strtotime($tdate ." 23:59:00");
   $range_min = 0;
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
