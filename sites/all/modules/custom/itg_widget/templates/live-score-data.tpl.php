@@ -17,7 +17,8 @@ if (!empty($data)) : global $base_url;
         </div>
         <span><?php print t('Live: Commentary'); ?></span> |
             <?php 
-            $search_url = "scorecard/matchcenter/" . $match_id;
+            //$search_url = "scorecard/matchcenter/" . $match_id;
+            $search_url = "scorecard/live-cricket-score?matchid=".$match_id;
             print l(t('Full Scorecard'), $search_url , array('attributes' => array('target' => '_blank', 'class' => array($arch_class))));
             ?> |</span></a>
             <span><?php print t('Graphs'); ?></span>       
