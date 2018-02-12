@@ -502,7 +502,7 @@ function magazineEditionListPageRerourceValueList($sdate, $tdate, $pageno) {
   $output = "";
   $data = array();
   $tid_list = array();
-  $tid_list[] = $tid;
+  $tid_list[] = $tid; 
   $issue_list_array = array();
   $listcount = 0;
   $range_max = 10;  
