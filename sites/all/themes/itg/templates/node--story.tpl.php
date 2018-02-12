@@ -926,7 +926,7 @@ if (!empty($content)):
                 }
                 // Code for Tech Photo gallery
                 if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) {				  
-                  if (!empty($node->field_technology_photogallery['und'])) {
+                  if ((!empty($node->field_technology_photogallery['und'])) && ($node->field_technology_photogallery['und'][0]['entity']->status == 1)) {
                     $gallery_nid = $node->field_technology_photogallery['und'][0]['entity']->nid;
                     $tech_gallery_images = itg_commom_get_gallery_image_array_by_gid($gallery_nid);
                     $tech_gallery_alias = drupal_get_path_alias('node/' . $gallery_nid);
