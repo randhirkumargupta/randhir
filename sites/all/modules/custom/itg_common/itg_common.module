@@ -128,7 +128,12 @@ function itg_common_menu() {
     'file' => 'includes/itg_scorecard.inc',
     'type' => MENU_CALLBACK,
   );
-
+  $items['scorecard/live-cricket-score'] = array(
+    'page callback' => 'itg_scorecard_live',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_scorecard.inc',
+    'type' => MENU_CALLBACK,
+  );
   $items['get-magazine-issue'] = array(
     'page callback' => 'itg_get_magazine_issue_callback',
     'access callback' => TRUE,
