@@ -121,7 +121,7 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  $items['scorecard/matchcenter/%'] = array(
+  $items['scorecard/matchcenter'] = array(
     'page callback' => 'itg_common_get_scorecard',
     'access callback' => TRUE,
     'page arguments' => array(2),
