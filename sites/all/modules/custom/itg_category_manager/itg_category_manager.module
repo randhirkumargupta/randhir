@@ -684,7 +684,14 @@ function itg_category_manager_term_validate($form , &$form_state) {
   $tid = $form_state['values']['tid'];
   $cat_arr = $form_state['input']['parent']['hierarchical_select']['selects'];
   $num_cat_selected = count($cat_arr);
-
+  $all_children = array();
+  if(!empty($cat_arr[0]) && $cat_arr[0] != 0){
+		$_all_children = taxonomy_get_children($cat_arr[0]);
+		foreach($_all_children as $_term){
+			$all_children[] = $_term->name;
+		}
+	}
+	
   if ($form_state['triggering_element']['#value'] != 'Delete') {
     if (($cat_arr[0] == 'label_0')) {
       form_set_error('parent' , t('Section field is required.'));
@@ -702,16 +709,15 @@ function itg_category_manager_term_validate($form , &$form_state) {
     if (!empty($erros)) {
       $new_rparent = $termParent != 0 ? taxonomy_get_parents_all($termParent) : 0;
       $new_rparent = is_array($new_rparent) ? $new_rparent[count($new_rparent) - 1]->tid : 0;
-
-      foreach ($dup_parents as $value) {
+			foreach ($dup_parents as $value) {
         if (isset($value->tid) && $value->tid == $new_rparent) {
           form_set_error('name' , t('Category name already exists.'));
         }
         elseif (is_numeric(arg(2)) && $term_load->name != $form_state['values']['name'] && $new_rparent == 0 && $value->name == $form_state['values']['name']) {
           form_set_error('name' , t('Category name already exists2.'));
         }
-        elseif (!is_numeric(arg(2)) && $new_rparent == 0 && $value->name == $form_state['values']['name']) {
-          form_set_error('name' , t('Category name already exists3.'));
+        elseif (!is_numeric(arg(2)) && $new_rparent == 0 && $value->name == $form_state['values']['name'] && ((count($all_children) <= 0) || (count($all_children) > 0 && in_array($form_state['values']['name'], $all_children)))) {
+					form_set_error('name' , t('Category name already exists3.'));
         }
         else {
           
