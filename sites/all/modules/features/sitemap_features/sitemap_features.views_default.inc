@@ -221,6 +221,46 @@ function sitemap_features_views_default_views() {
   );
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['vocabulary'] = 'category_management';
   $handler->display->display_options['filters']['shs_term_node_tid_depth']['depth'] = '0';
+  /* Filter criterion: Content: Nid */
+  $handler->display->display_options['filters']['nid']['id'] = 'nid';
+  $handler->display->display_options['filters']['nid']['table'] = 'node';
+  $handler->display->display_options['filters']['nid']['field'] = 'nid';
+  $handler->display->display_options['filters']['nid']['group'] = 1;
+  $handler->display->display_options['filters']['nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['nid']['expose']['operator_id'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['label'] = 'Content Id';
+  $handler->display->display_options['filters']['nid']['expose']['operator'] = 'nid_op';
+  $handler->display->display_options['filters']['nid']['expose']['identifier'] = 'nid';
+  $handler->display->display_options['filters']['nid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
+  );
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -637,11 +677,12 @@ print \' | <a href="move-dont-miss-widget-node/section_manual_order_widget//\'.$
   $handler->display->display_options['filters']['php']['table'] = 'views';
   $handler->display->display_options['filters']['php']['field'] = 'php';
   $handler->display->display_options['filters']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['filters']['php']['php_filter'] = '$query = db_select(\'taxonomy_index\', \'t\'); 
-$query->join(\'node\', \'n\', \'n.nid=t.nid\'); 
-$query->fields(\'t\', array(\'nid\')); 
-$query->condition(\'t.tid\', $row->tid); 
+  $handler->display->display_options['filters']['php']['php_filter'] = '$query = db_select(\'itg_widget_order\', \'iw\'); 
+$query->join(\'node\', \'n\', \'n.nid=iw.nid\'); 
+$query->fields(\'iw\', array(\'nid\')); 
+$query->condition(\'iw.cat_id\', $row->tid); 
 $query->condition(\'n.type\', array(\'story\', \'photogallery\', \'videogallery\', \'breaking_news\', \'mega_review_critic\'), \'IN\'); 
+$query->condition(\'n.status\', 1);
 $count = $query->execute()->rowCount(); 
 if ($count == 0){
  return TRUE; 
