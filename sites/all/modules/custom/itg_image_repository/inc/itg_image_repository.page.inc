@@ -566,7 +566,7 @@ function itg_image_repository_inaccessible_directory($dirname, $itg_image_reposi
     $dirname = utf8_encode($dirname);
     $diruri = itg_image_repository_dir_uri($itg_image_repository, $dirname);
     drupal_set_message(t('Directory %dirname is not accessible.', array('%dirname' => $dirname)), 'error');
-    watchdog('itg_image_repository', 'Access to %directory was denied.', array('%directory' => $diruri), WATCHDOG_ERROR);
+    //watchdog('itg_image_repository', 'Access to %directory was denied.', array('%directory' => $diruri), WATCHDOG_ERROR);
   }
   return FALSE;
 }

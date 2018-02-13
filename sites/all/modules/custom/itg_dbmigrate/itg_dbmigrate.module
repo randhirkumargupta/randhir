@@ -406,7 +406,7 @@ function __insert_orignal_image($uri, $fid) {
  * Insert updated date in database
  */
 function __insert_modified_date_flag_table($type, $time_stamp, $nid) {
-    watchdog('success_update_table', '<pre>'.print_r('rea').'<pre>');
+    //watchdog('success_update_table', '<pre>'.print_r('rea').'<pre>');
     db_insert('itg_node_update_updation')->fields(array(
     'type' => $type,
     'timestamp' => $time_stamp,
