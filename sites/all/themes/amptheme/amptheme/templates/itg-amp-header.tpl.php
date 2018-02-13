@@ -64,7 +64,8 @@ $search_url = FRONT_URL.'/get-amp-search-keyword';
                   $default_image = file_create_url(file_default_scheme() . '://../sites/all/themes/itg/images/default_for_all_48_32.jpeg');
                   $link_text_icon  = "<span class='menu-icons-amp'><amp-img width='21' height='20' class='itg-user-icon navimgamp' src=$default_image alt='' /></span>";
                 }
-                $link_text = $link_text_icon . $menu_link_data['link_title_for_vertical'];
+                $link_text = $menu_link_data['link_title_for_vertical'];
+                // $link_text = $link_text_icon . $menu_link_data['link_title_for_vertical'];
                 if (!empty($sponsored_class)) {
                   $color_value = $menu_data['db_data']['bk_color'];
                 }

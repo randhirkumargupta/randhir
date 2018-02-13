@@ -4,7 +4,7 @@ global $base_url;
 <section class="footer-top">
     <div class="container">
         <div class="footer-top-link">
-            <?php print drupal_render($data['footer-top-menu']); ?>
+            <?php print t('INDIATODAY.IN'); ?>
         </div>
         
         <div class="footer-social-link">
