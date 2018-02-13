@@ -825,4 +825,6 @@ background:none;
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2, .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2 {margin-bottom: 30px;}
 }
-
+/* Home Listing page qoutes and footer */
+.view-category-wise-content-list .catagory-listing .pic{padding-top: 5px;}.front .itg-layout-container .itg-h321-section .droppable{ height:280px;}.front .trending-videos .trending-videos-list {overflow: hidden; padding: 12px 10px;}.front .itg-layout-container .ad-widget {border: 1px solid #ddd; height: 280px; padding: 14px 37px;}.quotes blockquote {color: #a00606;}.footer .footer-top .footer-top-link{font-size: 22px;color: #fff;overflow: hidden;line-height: 35px; float:left;}
+@media only screen and (max-width: 768px){.front .itg-layout-container .itg-h321-section .ad-widget {height: 300px;padding: 24px 0; width: 322px; margin: 0 auto; background: #f3f3f3;}footer .footer-top .footer-social-link{display:none} footer .footer-top .footer-top-link{font-size:19px;   line-height: 44px;}}@media only screen and (max-width: 1024px){.front .itg-layout-container .itg-h321-section .droppable { height: 252px;}.front .itg-layout-container .ad-widget{height: 250px; padding: 0px 8px; width: 320px;}}
