@@ -179,6 +179,19 @@ function itg_common_get_node_type($nid) {
 }
 
 /**
+ * Get node status using nid
+ * @param int $nid
+ * @return string
+ */
+function itg_common_get_node_status($nid) {
+  $query = db_select('node' , 'n')
+      ->fields('n' , array('status'))
+      ->condition('n.nid' , $nid , '=');
+
+  return $query->execute()->fetchField();
+}
+
+/**
  * Get node type and primary category from nid
  * @param int $nid
  * @return string
