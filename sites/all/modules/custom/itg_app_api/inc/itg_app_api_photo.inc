@@ -306,7 +306,8 @@ function generatePhotoDetailList($galleryimg) {
     $output = "";
     foreach ($galleryimg as $key => $value) {
       $fc = field_collection_field_get_entity($value);
-      $fid = $fc->field_image_id['und'][0]['value'];
+      //$fid = $fc->field_image_id['und'][0]['value'];
+      $fid = $fc->field_images['und'][0]['fid'];
       if (!$fid > 0) {
         $fid = $fc->field_images['und'][0]['fid'];
       }
