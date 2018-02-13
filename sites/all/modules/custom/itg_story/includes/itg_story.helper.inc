@@ -214,11 +214,20 @@ function itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_
     }
     $photo_img_alt = '';
     $photo_img_title = '';
-    $gallery_entity = entity_load('field_collection_item', array($val->field_gallery_image_value));
-    $photo_img_path = $gallery_entity[$val->field_gallery_image_value]->field_images[LANGUAGE_NONE][0]['uri'];
-    $photo_img = image_style_url('video_landing_page_170_x_127', $photo_img_path);
-    $photo_img_alt = $gallery_entity[$val->field_gallery_image_value]->field_images[LANGUAGE_NONE][0]['alt'];
-    $photo_img_title = $gallery_entity[$val->field_gallery_image_value]->field_images[LANGUAGE_NONE][0]['title'];
+    if ($view_mode == 'amp') {
+      $gallery_entity = entity_load('field_collection_item', array($val['value']));
+      $photo_img_path = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['uri'];
+      $photo_img = image_style_url('video_landing_page_170_x_127', $photo_img_path);
+      $photo_img_alt = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['alt'];
+      $photo_img_title = $gallery_entity[$val['value']]->field_images[LANGUAGE_NONE][0]['title'];
+    }
+    else {
+      $gallery_entity = entity_load('field_collection_item', array($val->field_gallery_image_value));
+      $photo_img_path = $gallery_entity[$val->field_gallery_image_value]->field_images[LANGUAGE_NONE][0]['uri'];
+      $photo_img = image_style_url('video_landing_page_170_x_127', $photo_img_path);
+      $photo_img_alt = $gallery_entity[$val->field_gallery_image_value]->field_images[LANGUAGE_NONE][0]['alt'];
+      $photo_img_title = $gallery_entity[$val->field_gallery_image_value]->field_images[LANGUAGE_NONE][0]['title'];
+    }
     $output .= '<div class="tech-photo-item">';
     $output .= '<a href="/' . $tech_gallery_alias . '" target="_blank">';
     if ($view_mode == 'amp') {
