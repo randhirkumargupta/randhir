@@ -439,7 +439,7 @@ function itg_loyalty_reward_points_expire_notification_callback() {
         $user_mail = $value->mail;
       }
       // for mail code
-      watchdog('Loyalty point notification', '<pre>'.print_r($data, true).'</pre>');
+      //watchdog('Loyalty point notification', '<pre>'.print_r($data, true).'</pre>');
       itg_common_get_mail_content($data, $user_mail, 'lrp_point', 'India Today | Loyalty Points Notification');
     }
   }

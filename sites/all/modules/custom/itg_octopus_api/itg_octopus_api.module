@@ -698,13 +698,13 @@ function itg_octopus_api_ftp_connection_setup() {
   $conn_id = ftp_connect($ftp_ip, $ftp_port);
   $login_result = ftp_login($conn_id, $ftp_username, $ftp_password);
   if ((!$conn_id)) {
-    watchdog("WATCHDOG_INFO_octopus", "FTP connection has failed");
+    //watchdog("WATCHDOG_INFO_octopus", "FTP connection has failed");
     itg_octopus_api_send_email_to_support("Octopus:Unable to create connection with FTP server", 'Unable to create connection with FTP server');
     return false;
   }
 
   if ((!$login_result)) {
-    watchdog("WATCHDOG_INFO_octopus", "Unable to login  on FTP server");
+    //watchdog("WATCHDOG_INFO_octopus", "Unable to login  on FTP server");
     itg_octopus_api_send_email_to_support("Octopus:Unable to login  on FTP server", 'Unable to login  on FTP server');
     return false;
   }

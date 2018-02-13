@@ -184,7 +184,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     global $user;
     module_load_include('inc', 'itg_akamai', 'includes/akamai_purge');
     if (variable_get('itg_akamai_disabled', FALSE)) {
-      watchdog('itg_akamai', 'Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.');
+      //watchdog('itg_akamai', 'Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.');
       drupal_set_message(t('Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.'), 'warning');
       return FALSE;
     }

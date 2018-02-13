@@ -96,9 +96,9 @@ function itg_send_mail_newsletter($node, $news_eng_type, $type = NULL) {
     $campaign['listId'] = NETCORE_LIST_ID;
     $mail_scehdule = itg_netcore_mail_scehdule_campaign($campaign);
 
-    watchdog("netcore content", '<pre>' . print_r($data_email, TRUE) . '</pre>');
-    watchdog("netcore create campaign", '<pre>' . print_r($create_campaign, TRUE) . '</pre>');
-    watchdog("netcore mail", '<pre>' . print_r($mail_scehdule, TRUE) . '</pre>');
+    //watchdog("netcore content", '<pre>' . print_r($data_email, TRUE) . '</pre>');
+    //atchdog("netcore create campaign", '<pre>' . print_r($create_campaign, TRUE) . '</pre>');
+    //watchdog("netcore mail", '<pre>' . print_r($mail_scehdule, TRUE) . '</pre>');
   }
   /* $params = array(
     'body' => $mail_content,

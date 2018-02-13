@@ -213,7 +213,7 @@ class itg_auto_save {
       // Create entity of type field collection
       if ($this->validation) {
 
-        watchdog('Field Collection Validation', $this->validation . ' Auto Save' . $key);
+        //watchdog('Field Collection Validation', $this->validation . ' Auto Save' . $key);
 
         $this->fc_item = entity_create('field_collection_item', array('field_name' => $field_name));
         $this->fc_item->setHostEntity('node', $node);

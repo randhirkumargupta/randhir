@@ -192,7 +192,7 @@ function get_content_id_for_syndication($data, $created_date) {
             $contentid .= $itg_val->nid . ',';
         }
     }
-    watchdog("Syndication", '<pre>' . print_r($contentid, TRUE) . '</pre>');
+    //watchdog("Syndication", '<pre>' . print_r($contentid, TRUE) . '</pre>');
 
     $data_array = array(
         'web_property' => $data['content_type'],
@@ -207,7 +207,7 @@ function get_content_id_for_syndication($data, $created_date) {
     );
     $file_path = feed_generator_of_contents($data_array);
     $file_url = $file_path['file_path'];
-    watchdog("syndication_file_url", "File url : $file_url");
+    //watchdog("syndication_file_url", "File url : $file_url");
 
     return $file_url;
 }

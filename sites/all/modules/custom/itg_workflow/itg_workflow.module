@@ -694,7 +694,7 @@ function itg_workflow_node_update($node) {
     return;
   }
   //if (isset($node->op)) {
-  watchdog("email_test_asd", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
+  //watchdog("email_test_asd", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_update");
     // get preview log ID.
