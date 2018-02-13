@@ -20,9 +20,11 @@ function _get_section_wise_widget_node_data($nid) {
  * {@inheritdocs}
  */
 function section_wise_widget_form($form, &$form_state) {
+  $node_id = '';
   $type = !empty($_GET['type']) ? $_GET['type'] : "All";
   $cat_id = !empty($_GET['category_tid']) ? $_GET['category_tid'] : 0;
   $item_per_page = !empty($_GET['items_per_page']) ? $_GET['items_per_page'] : 10;
+  $node_id = $_GET['nid'];
   $table = 'itg_widget_order_section';
   if (strtolower($type) == 'all') {
     $table = 'itg_widget_order';
@@ -32,6 +34,9 @@ function section_wise_widget_form($form, &$form_state) {
   $db_query->condition('iwo.widget', 'section_wise_widget');
   $db_query->condition('iwo.content_type', $type);
   $db_query->condition('iwo.cat_id', $cat_id);
+  if(!empty($node_id) && is_numeric($node_id)){
+	$db_query->condition('iwo.nid', $node_id);
+  }
   $db_query->orderBy('iwo.weight', 'DESC');
   $result = $db_query->execute()->fetchAll(PDO::FETCH_ASSOC);
   if (count($result)) {
