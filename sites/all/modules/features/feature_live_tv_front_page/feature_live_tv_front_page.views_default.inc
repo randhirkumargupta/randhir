@@ -79,10 +79,8 @@ function feature_live_tv_front_page_views_default_views() {
   );
   $handler->display->display_options['filters']['machine_name']['group'] = 1;
 
-  /* Display: Live TV */
-  $handler = $view->new_display('page', 'Live TV', 'page');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Live TV';
+  /* Display: Live Tv */
+  $handler = $view->new_display('page', 'Live Tv', 'page');
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '13';
@@ -134,7 +132,7 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '1207797,1207827,1207722,1208900,1208095,1208902,1208173,1207755,1206960,1207972,1208898,1208061';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
@@ -157,8 +155,8 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['filters']['content_type']['value'] = 'videogallery';
   $handler->display->display_options['path'] = 'livetv';
 
-  /* Display: International Live TV */
-  $handler = $view->new_display('page', 'International Live TV', 'page_1');
+  /* Display: International Live Tv */
+  $handler = $view->new_display('page', 'International Live Tv', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'LIVE TV';
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -212,7 +210,7 @@ function feature_live_tv_front_page_views_default_views() {
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '1207797,1207827,1207722,1208900,1208095,1208902,1208173,1207755,1206960,1207972,1208898,1208061';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';

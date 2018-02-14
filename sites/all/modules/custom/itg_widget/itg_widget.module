@@ -1629,10 +1629,11 @@ function update_something(&$item, $key) {
  * Html output to decode.
  */
 function __html_output_with_tags($string, $start = 0, $end = 100) {
-    $html = html_entity_decode(drupal_html_to_text($string));
-    $doc = new DOMDocument();
-    @$doc->loadHTML($html, LIBXML_HTML_NODEFDTD);
-    return $doc->saveHTML();
+    //~ $html = html_entity_decode(drupal_html_to_text($string));
+    //~ $doc = new DOMDocument();
+    //~ @$doc->loadHTML($html, LIBXML_HTML_NODEFDTD);
+    //~ return $doc->saveHTML();
+    return drupal_html_to_text($string);
 }
 
 /**
