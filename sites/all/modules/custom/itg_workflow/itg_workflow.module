@@ -532,7 +532,7 @@ function itg_workflow_node_access($node, $op, $account) {
     //~ if ($node->uid != $user->uid) {
       //~ return NODE_ACCESS_DENY;
     //~ }
-    if ((!(in_array('Site Admin', $user->roles)) || !(in_array('Editor', $user->roles)) || !(in_array('administrator', $user->roles))) && ($node->uid != $user->uid)) {
+    if (!(array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(ADMINISTRATOR, $user->roles)) && ($node->uid != $user->uid)) {
 	  return NODE_ACCESS_DENY;
 	}
   }
