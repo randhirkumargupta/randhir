@@ -2830,13 +2830,13 @@ function itg_widget_node_insert($node) {
             $nid = $node->nid;
             $cat_id = $node->field_story_category['und'];
             
-             if ($node->status == 1 && !empty($node->op)) {
+             if (($node->status == 1 && !empty($node->op)) || ($node->status == 1 && $node->field_story_source_type['und'][0]['value'] == 'PTI')) {
                 if (function_exists('__itg_widget_helper_data_insert')) {
                   __itg_widget_helper_data_insert($node->nid, $node);
                 }
              }
             
-            if (isset($node->field_story_category['und']) && ($node->status == 1 && !empty($node->op))) {
+            if ((isset($node->field_story_category['und']) && ($node->status == 1 && !empty($node->op))) || ($node->status == 1 && $node->field_story_source_type['und'][0]['value'] == 'PTI' && isset($node->field_story_category['und']))) {
                 $primary_category = $node->field_primary_category['und'][0]['value'];
                 
                 foreach ($cat_id as $category) {
