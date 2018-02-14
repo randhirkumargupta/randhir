@@ -706,7 +706,7 @@ function itg_category_manager_term_validate($form , &$form_state) {
 		}else if(is_numeric(arg(2))){
 			$all_children_edited = taxonomy_get_tree(CATEGORY_MANAGMENT, arg(2));
 			foreach($all_children_edited as $value){
-				if(in_array($value->name, $all_children_edited)){
+				if(in_array($value->name, $all_children)){
 					form_set_error('name' , t('Category name already exists5.'));
 				}
 			}
