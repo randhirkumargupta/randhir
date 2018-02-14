@@ -417,7 +417,7 @@
      font-weight: bold;
      color: #000;
     float: left;
-    width: calc(100% - 135px);
+    width: calc(100% - 142px);
     line-height: 32px;
  }
  .slider_outer1 .remove_padd_right{ padding-left: 0px;}
@@ -497,8 +497,9 @@
      margin-right: 0px;
      background: #000;
      color: #fff;     
-     position: relative;
-     bottom: -10px;
+     position:absolute;
+     bottom:0px;
+     right:0px;
  }
  .slider_outer1 .item-list li.pager-next.last {
      margin-right: 0;
@@ -519,7 +520,7 @@
      display: none !important;
  }
  .slider_outer1 .pager li a {
-     color: #fff !important;padding: 10px; display: block;
+     color: #fff !important;padding:5px; line-height:10px; display: block;
  }
  .slider_outer1 .btn-group {
      width: 100%
