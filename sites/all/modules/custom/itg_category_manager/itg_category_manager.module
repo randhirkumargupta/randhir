@@ -687,11 +687,11 @@ function itg_category_manager_term_validate($form , &$form_state) {
   $all_children = array();
   if (!empty($cat_arr[0]) && $cat_arr[0] != 0) {
     $_all_children = taxonomy_get_children($cat_arr[0]);
+    $all_children[] = get_term_name_from_tid($cat_arr[0])->name;
     foreach ($_all_children as $_term) {
       $all_children[] = $_term->name;
     }
   }
-
   if ($form_state['triggering_element']['#value'] != 'Delete') {
     if (($cat_arr[0] == 'label_0')) {
       form_set_error('parent' , t('Section field is required.'));
