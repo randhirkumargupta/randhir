@@ -310,8 +310,6 @@ function itg_bestcolleges_block_info() {
    $blocks['bestcollege_image_slider'] = array(
     'info' => t('Widget: Bestcolleges Image Slider'),
     'visibility' => BLOCK_VISIBILITY_LISTED,
-    'region' => 'Second sidebar',
-    'pages' => "bestcolleges/*\nbestcolleges/",
   );
   return $blocks;
 }
