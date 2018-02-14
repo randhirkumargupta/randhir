@@ -1,4 +1,4 @@
-<?php if (is_array($data) && count($data)) {  ?>
+<?php if (is_array($data) && count($data) > 0) {  ?>
 <div class="slider_besrCollage slider_outer">
     <?php foreach($data as $index => $row) { 
          $file = file_load($row['field_story_extra_large_image_fid']);
@@ -20,6 +20,7 @@
         </div>
   <?php } ?>
 </div>
+<?php } ?>
 
 <script>
 jQuery(document).ready(function () {
@@ -31,4 +32,4 @@ jQuery(document).ready(function () {
     });
 });
 </script>
-<?php } ?>
+
