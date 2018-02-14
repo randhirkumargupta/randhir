@@ -111,12 +111,12 @@ if ($theme != 'itgadmin') {
                     </div>
                 </div>
               <?php } else {
-                      if($url_get[2] != '2014' && $url_get[2] != '2013') {
+                      if($url_get[2] >= '2015') {
                         $block = block_load('itg_bestcolleges', 'bestcollege_image_slider');
                         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                         print $output = render($render_array);
                         
-                      } else {
+                      } else if($url_get[2] != '2014' && $url_get[2] != '2013') {
                           print bestcollege_get_sponser_data('Best college graph');
                       }
                } ?>
