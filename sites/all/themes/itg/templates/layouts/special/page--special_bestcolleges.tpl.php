@@ -100,19 +100,23 @@ if ($theme != 'itgadmin') {
                     <div class="itg-widget">
                       <div class="droppable <?php print $gray_bg_layout; ?>">
                       <?php
-                        if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
-                            print views_embed_view('best_college_image_slider', 'block');
-                        }
+                        $block = block_load('itg_bestcolleges', 'bestcollege_image_slider');
+                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                        if(is_array($render_array)) {
+                          print render($render_array);
+                        } 
+                       
                       ?>
                         </div>
                     </div>
                 </div>
               <?php } else {
-                      if($url_get[2] != '2014' && $url_get[2] != '2013') {
-                          if (array_filter(views_get_view_result('best_college_image_slider', 'block'))) {
-                              print views_embed_view('best_college_image_slider', 'block');
-                          }
-                      } else {
+                      if($url_get[2] >= '2015') {
+                        $block = block_load('itg_bestcolleges', 'bestcollege_image_slider');
+                        $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
+                        print $output = render($render_array);
+                        
+                      } else if($url_get[2] != '2014' && $url_get[2] != '2013') {
                           print bestcollege_get_sponser_data('Best college graph');
                       }
                } ?>
