@@ -419,7 +419,7 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
       
      if ($node->type == 'videogallery' && variable_get('unpublish_alert_emails_videos') != '') {
 			  $to_mail = variable_get('unpublish_alert_emails_videos');
-		 }else (variable_get('unpublish_alert_emails') != '') {
+		 } else if(variable_get('unpublish_alert_emails') != '') {
        $to_mail = variable_get('unpublish_alert_emails');
      }
       $subject = 'A new ' . $content_type . ' has been ' . $subject_line_upd . ', please find details below.';
