@@ -1,12 +1,12 @@
 jQuery(document).ready(function() {	  
 	playerInstance = jwplayer('videoplayer');
 	var playlist=playerInstance.getPlaylist();
-	ga("send","event","video",'playlist', JSON.stringify(playlist));
+	//ga("send","event","video",'playlist', JSON.stringify(playlist));
 
 	var fileName=playlist[0].sources[0].file;
 	var ext = fileName.split('.').pop();
 
-	ga("send","event","video",'playlist-sources-file', playlist[0].sources[0].file);
+	//ga("send","event","video",'playlist-sources-file', playlist[0].sources[0].file);
 	ga("send","event","video",'playlist-sources-extn', ext);
 //	ga("send","event","video",'playlist-sources-type', playlist[0].sources[0].type);
 
@@ -21,13 +21,13 @@ jQuery(document).ready(function() {
 		var current = Math.floor(e.position / 60);
 		if (current > upto) {
 			upto = current;
-			ga("send","event","video",'video-time-stringify', JSON.stringify(parseInt(e.position)));
+			//ga("send","event","video",'video-time-stringify', JSON.stringify(parseInt(e.position)));
 		}
 		var current_10 = Math.floor(e.position / 10);
 
 		if (current_10 > upto1) {
 			upto1 = current_10;
-			ga("send","event","video",'video-time-10Sec-played', "1");
+			//ga("send","event","video",'video-time-10Sec-played', "1");
 		}
 	});
 
@@ -57,7 +57,7 @@ jQuery(document).ready(function() {
 
 	playerInstance.on('levelsChanged', function(e) {
 		var getCurrentQuality=playerInstance.getCurrentQuality();
-		ga("send","event","video",'getCurrentQualitychange', JSON.stringify(getCurrentQuality));
+		//ga("send","event","video",'getCurrentQualitychange', JSON.stringify(getCurrentQuality));
 	});
 
 	playerInstance.on('audioTrackChanged',function(e) {
@@ -70,11 +70,11 @@ jQuery(document).ready(function() {
 	}); 
 
 	playerInstance.on('adCompanions',function(e) {
-		ga("send","event","video",'adCompanions', JSON.stringify(e));
+		//ga("send","event","video",'adCompanions', JSON.stringify(e));
 	}); 
  
 	playerInstance.on('adComplete',function(e) {
-		ga("send","event","video",'adComplete', JSON.stringify(e));
+		//ga("send","event","video",'adComplete', JSON.stringify(e));
 	}); 
  
 	playerInstance.on('ready', function(event) {
@@ -100,7 +100,7 @@ jQuery(document).ready(function() {
 		var ld=obj.loadTime;
 		var ld=parseInt(ld) / 1000;
 		var ld=parseInt(ld);
-		ga("send","event","video",'firstFrame',ld);
+		//ga("send","event","video",'firstFrame',ld);
 	}); 
  
 	playerInstance.on('mute',function(e) {
@@ -114,7 +114,7 @@ jQuery(document).ready(function() {
 		ga("send","event","video",'volume', v1);
 	}); 
 	playerInstance.on('fullscreen',function(e) {
-		ga("send","event","video",'fullscreen', JSON.stringify(e));
+		//ga("send","event","video",'fullscreen', JSON.stringify(e));
 	}); 
 	/*playerInstance.on('resize',function(e) {
 		ga("send","event","video",'resize', JSON.stringify(e));
@@ -124,7 +124,7 @@ jQuery(document).ready(function() {
 		var provider=playerInstance.getProvider();
 		var pv=JSON.stringify(provider);
 		obj = JSON.parse(pv);
-	    ga("send","event","video",'provider',obj.name);
+	    //ga("send","event","video",'provider',obj.name);
 	}); 
  
 	/*playerInstance.on('adClick', function(e) {
@@ -149,9 +149,9 @@ jQuery(document).ready(function() {
 
 	playerInstance.on('adComplete', function(e) {
 		ga("send","event","video",'adComplete', true);
-		ga("send","event","video",'adComplete-client', e.client);
-		ga("send","event","video",'adComplete-creativetype', e.creativetype);
-		ga("send","event","video",'adComplete-tag', e.tag);
+		//ga("send","event","video",'adComplete-client', e.client);
+		//ga("send","event","video",'adComplete-creativetype', e.creativetype);
+		//ga("send","event","video",'adComplete-tag', e.tag);
 	}); 
 	
 	/*playerInstance.on('adSkipped', function(e) {
@@ -164,15 +164,15 @@ jQuery(document).ready(function() {
 		ga("send","event","video",'adSkipped-adtitle', e.adtitle);
 	});*/
 	playerInstance.on('adError', function(e) {
-		ga("send","event","video",'adError', true);
+		//ga("send","event","video",'adError', true);
 		ga("send","event","video",'adError-message', e.message); //
 	});
 
 	playerInstance.on('adRequest', function(e) {
 		ga("send","event","video",'adRequest', true);
-		ga("send","event","video",'adRequest-adposition', e.adposition);
-		ga("send","event","video",'adRequest-client', e.client);
-		ga("send","event","video",'adRequest-offset', e.offset);
+		//ga("send","event","video",'adRequest-adposition', e.adposition);
+		//ga("send","event","video",'adRequest-client', e.client);
+		//ga("send","event","video",'adRequest-offset', e.offset);
 		ga("send","event","video",'adRequest-tag', e.tag);
 	});
 
@@ -180,49 +180,49 @@ jQuery(document).ready(function() {
 	playerInstance.on('adStarted', function(e) {
 		AdPlays++;
 		ga("send","event","video",'adStarted', true);
-		ga("send","event","video",'adStarted-creativetype', e.creativetype);
-		ga("send","event","video",'adStarted-tag', e.tag);
-		ga("send","event","video",'Ad Plays', AdPlays);
+		//ga("send","event","video",'adStarted-creativetype', e.creativetype);
+		//ga("send","event","video",'adStarted-tag', e.tag);
+		//ga("send","event","video",'Ad Plays', AdPlays);
 	});
 	playerInstance.on('adImpression', function(e) {
 		ga("send","event","video",'adImpression', true);
-		ga("send","event","video",'adImpression-client', e.client);
-		ga("send","event","video",'adImpression-adsystem', e.adsystem);
-		ga("send","event","video",'adImpression-creativetype', e.creativetype);
-		ga("send","event","video",'adImpression-linear', e.linear);
-		ga("send","event","video",'adImpression-tag', e.tag);
-		ga("send","event","video",'adImpression-adposition', e.adposition);
-		ga("send","event","video",'adImpression-type', e.type);
-		ga("send","event","video",'adImpression-adtitle', e.adtitle);
+		//ga("send","event","video",'adImpression-client', e.client);
+		//ga("send","event","video",'adImpression-adsystem', e.adsystem);
+		//ga("send","event","video",'adImpression-creativetype', e.creativetype);
+		//ga("send","event","video",'adImpression-linear', e.linear);
+		//ga("send","event","video",'adImpression-tag', e.tag);
+		//ga("send","event","video",'adImpression-adposition', e.adposition);
+		//ga("send","event","video",'adImpression-type', e.type);
+		//ga("send","event","video",'adImpression-adtitle', e.adtitle);
 		ga("send","event","video",'adImpression_vastversion', e.vastversion);  
 	});
 
 	playerInstance.on('adPlay', function(e) {
 		ga("send","event","video",'adPlay', "1");
-		ga("send","event","video",'adPlay-tag', e.tag);
-		ga("send","event","video",'adPlay-linear', e.linear);
+		//ga("send","event","video",'adPlay-tag', e.tag);
+		//ga("send","event","video",'adPlay-linear', e.linear);
 		ga("send","event","video",'Ad Title', e.adtitle);//adPlay-adtitle
 		ga("send","event","video",'adPlay-adsystem', e.adsystem);
-		ga("send","event","video",'Ad Duration', e.duration);
-		ga("send","event","video",'Ad Partner Id', e.client);//adPlay-client 
-		ga("send","event","video",'adPlay-type', e.type);
-		ga("send","event","video",'adPlay-creativetype', e.creativetype);
-		ga("send","event","video",'Ad Placement', e.adposition); //adPlay-adposition
+		//ga("send","event","video",'Ad Duration', e.duration);
+		//ga("send","event","video",'Ad Partner Id', e.client);//adPlay-client 
+		//ga("send","event","video",'adPlay-type', e.type);
+		//ga("send","event","video",'adPlay-creativetype', e.creativetype);
+		//ga("send","event","video",'Ad Placement', e.adposition); //adPlay-adposition
 	});
 
 	playerInstance.on('adPause', function(e) {
-		ga("send","event","video",'adPause', true);
-		ga("send","event","video",'adPause-tag', e.tag);
-		ga("send","event","video",'adPause-adtitle', e.adtitle);
-		ga("send","event","video",'adPause-adsystem', e.adsystem);
-		ga("send","event","video",'adPause-creativetype', e.creativetype);
-		ga("send","event","video",'adPause-duration', e.duration);
-		ga("send","event","video",'adPause-linear', e.linear);
-		ga("send","event","video",'adPause-id', e.id);
-		ga("send","event","video",'adPause-adposition', e.adposition);
-		ga("send","event","video",'adPause-newstate', e.newstate);
-		ga("send","event","video",'adPause-client', e.client);
-		ga("send","event","video",'adPause-type', e.type);
-		ga("send","event","video",'adPause-oldstate', e.oldstate);
+		//ga("send","event","video",'adPause', true);
+		//ga("send","event","video",'adPause-tag', e.tag);
+		//ga("send","event","video",'adPause-adtitle', e.adtitle);
+		//ga("send","event","video",'adPause-adsystem', e.adsystem);
+		//ga("send","event","video",'adPause-creativetype', e.creativetype);
+		//ga("send","event","video",'adPause-duration', e.duration);
+		//ga("send","event","video",'adPause-linear', e.linear);
+		//ga("send","event","video",'adPause-id', e.id);
+		//ga("send","event","video",'adPause-adposition', e.adposition);
+		//ga("send","event","video",'adPause-newstate', e.newstate);
+		//ga("send","event","video",'adPause-client', e.client);
+		//ga("send","event","video",'adPause-type', e.type);
+		//ga("send","event","video",'adPause-oldstate', e.oldstate);
 	});
 });
