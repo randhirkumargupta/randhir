@@ -902,60 +902,6 @@ function itg_bestcollege_get_term_tid($tid, $stream) {
   }
 }
 
-/**
- * Implementation of hook_views_query_alter
- * @param object reference $view
- * @param object reference $query
- */
-function itg_bestcolleges_views_query_alter(&$view, &$query) {
-  if (isset($view->name) && $view->name === 'best_college_image_slider') {
-    if ($view->current_display == 'block') {
-      if (isset($view->query->where[0]['conditions'][0]['field'])) {
-        $url_get = explode('/', $_SERVER['REQUEST_URI']);
-        $year = $url_get[2];
-        $story_data = array();
-        $json = variable_get('bestcollege_get_video', '');
-        $related_result = (array) json_decode($json);
-        if (is_object($related_result['image_slider']) && count($related_result['image_slider']) > 0) {
-          $story_data = $related_result['image_slider']->{$year};
-        }
-
-        if(is_array($story_data) && count($story_data) > 0) {
-          if ($view->query->where[0]['conditions'][0]['operator'] = 'IN') {
-            $view->query->where[0]['conditions'][0]['field'] = 'node.nid';
-            $view->query->where[0]['conditions'][0]['value'] = $story_data;
-          }
-        }
-      }
-    }
-    else {
-      $page_type = isset($_GET['page']) ? $_GET['page'] : '';
-      if (!empty($page_type)) {
-        if (isset($view->query->where[1]['conditions'][2]['field'])) {
-          if ($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
-            $year = arg(1);
-            $query = db_select('field_data_field_bestcollege_year', 'y');
-            $query->join('field_data_field_bestcollege_rank', 'r', 'y.entity_id = r.entity_id');
-            $query->distinct();
-            $query->fields('r', array('field_bestcollege_rank_value'))
-                ->condition('y.field_bestcollege_year_value', $year)
-                ->condition('r.field_bestcollege_rank_value', 10, '>')
-                ->orderBy('r.field_bestcollege_rank_value', 'ASC');
-            $results = $query->execute()->fetchAll();
-            if (is_array($results) && count($results) > 0) {
-              foreach ($results as $results_key => $results_val) {
-                $rank_array[] = $results_val->field_bestcollege_rank_value;
-              }
-              $pre_array = $view->query->where[1]['conditions'][2]['value'];
-              $final_array = array_merge($pre_array, $rank_array);
-              $view->query->where[1]['conditions'][2]['value'] = $final_array;
-            }
-          }
-        }
-      }
-    }
-  }
-}
 
 //-------------------------------------------------------------------------------------------|
 //  Start import of the CSV file
