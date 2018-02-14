@@ -529,9 +529,12 @@ function itg_workflow_node_access($node, $op, $account) {
 
 
   if (isset($node->workbench_moderation['current']->from_state) && $node->workbench_moderation['current']->from_state == 'draft' && $node->workbench_moderation['current']->state == 'draft' && $node->field_story_source_type[LANGUAGE_NONE][0]['value'] != 'migrated') {
-    if ($node->uid != $user->uid) {
-      return NODE_ACCESS_DENY;
-    }
+    //~ if ($node->uid != $user->uid) {
+      //~ return NODE_ACCESS_DENY;
+    //~ }
+    if (!(array_key_exists(SITE_ADMIN, $user->roles) || array_key_exists(EDITOR, $user->roles) || array_key_exists(ADMINISTRATOR, $user->roles)) && ($node->uid != $user->uid)) {
+	  return NODE_ACCESS_DENY;
+	}
   }
 
   if (isset($node->type) && $node->type == 'story' && $op == 'update' && (isset($node->field_story_source_type[LANGUAGE_NONE]) && !in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $arr_source_type))) {
@@ -694,7 +697,7 @@ function itg_workflow_node_update($node) {
     return;
   }
   //if (isset($node->op)) {
-  watchdog("email_test_asd", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
+  //watchdog("email_test_asd", "<pre>" . print_r($_REQUEST, TRUE) . "</pre>");
   if ($node->type == 'story' || $node->type == 'photogallery' || $node->type == 'blog' || $node->type == 'podcast' || $node->type == 'videogallery') {
     //drupal_set_message("under itg_workflow_node_update");
     // get preview log ID.
@@ -758,7 +761,7 @@ function itg_workflow_node_update($node) {
       $query->condition('n.nid', $node->nid, '=');
       $result = $query->execute();
       $num_of_results = $result->rowCount();
-      if ($num_of_results >= 1) {
+      if ($num_of_results >= 1 && $node->status != 1) {
         $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, SEO, EDITOR);
         $user_email = get_email_by_roll($rid);
         workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name, 'pub-unpub', $node_state);
@@ -798,7 +801,7 @@ function itg_workflow_node_update($node) {
               $user_email = get_email_by_roll($rid);
               workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name);
             }
-            else {
+            else if ($node->type != 'story') { // We don't need this feature right now
               $rid = array(COPY_EDITOR, SECTION_EDITOR_ANCHOR, EDITOR);
               $user_email = get_email_by_roll($rid);
               workflow_get_mail_content($node, 'update', $user_email, $node->name, $user->name);

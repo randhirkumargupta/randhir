@@ -190,7 +190,7 @@ function itg_payment_payment_fail() {
  * @param array $data
  */
 function itg_payment_initial_info_update($data) {
-  watchdog($data['PAYMENT_GATEWAY'] . "_insert" , '<pre>' . print_r($data , TRUE) . '</pre>');
+  //watchdog($data['PAYMENT_GATEWAY'] . "_insert" , '<pre>' . print_r($data , TRUE) . '</pre>');
   try {
     db_insert('itg_payment_order_details')
         ->fields(array(
@@ -404,7 +404,7 @@ function update_event_registration_after_success($order_id) {
         if (function_exists('itg_global_loyality_get_sso_id')) {
           $sso_id = itg_global_loyality_get_sso_id($user->uid);
         }
-        itg_watchdog("event_registration_loyality" , $event_id);
+        //itg_watchdog("event_registration_loyality" , $event_id);
         itg_global_loyality_send_data($user->uid, 'event_registration', $event_id, '', $sso_id);
     }
 }

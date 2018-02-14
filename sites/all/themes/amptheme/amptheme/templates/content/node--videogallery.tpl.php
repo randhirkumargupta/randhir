@@ -22,7 +22,9 @@
       else {
         $description = $node->field_video_kicker[LANGUAGE_NONE][0]['value'];
       }
-                        
+      if(function_exists('itg_custom_amp_body_filter')) {
+	    $description = itg_custom_amp_body_filter($description);
+	  }                 
       foreach ($videoids as $keys => $video_value) {
         if (function_exists('get_amp_video_time')) {
         $video_time = get_amp_video_time($node->nid, 'videogallery', 'field_video_duration');
@@ -48,11 +50,9 @@
                $player_content = itg_videogallery_make_parm_for_jwpalyer($video_all_data, 'video', 0);
               }
               if(strpos($player_content['file_url'], 'https') === FALSE) {
-                //$video_urls = str_replace("http","https",$player_content['file_url']);
-                $video_urls = str_replace("http","https",$player_content['bitrate_url']);
+                $video_urls = str_replace("http","https",$player_content['file_url']);
              } else {
-                //$video_urls = $player_content['file_url'];
-               $video_urls = $player_content['bitrate_url'];
+                $video_urls = $player_content['file_url'];
              }
             ?>
               <amp-video width="300"
@@ -95,6 +95,9 @@
                   } else {
                 $description = $video_kicker[0]->field_video_kicker_value;
               }
+              if(function_exists('itg_custom_amp_body_filter')) {
+			    $description = itg_custom_amp_body_filter($description);
+		      }
               ?>
         <amp-carousel width="300"
                   height="280"

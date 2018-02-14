@@ -953,7 +953,7 @@ function itg_ugc_node_insert($node) {
       }
     }
     if ($source_type == 'UGC' && !empty($source_id)) {
-      watchdog('ugc_insert', 'called');
+      //watchdog('ugc_insert', 'called');
       itg_ugc_node_status_update($source_id, $title, $node->type, $node->status, $node->nid);
     }
   }
@@ -981,7 +981,7 @@ function itg_ugc_node_update($node) {
       }
     }
     if ($source_type == 'UGC' && !empty($source_id)) {
-      watchdog('ugc_update', 'called');
+     // watchdog('ugc_update', 'called');
       itg_ugc_node_status_update($source_id, $title, $node->type, $node->status, $node->nid);
     }
   }

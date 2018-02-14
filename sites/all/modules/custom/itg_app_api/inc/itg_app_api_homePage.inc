@@ -28,7 +28,7 @@ function homePageJson() {
     $homePageJsonWidget_1 = array();
     $homePageJsonWidget_1 = homePageJsonWidget_1();
     $business = array();
-    $business = homePageJsonNewslist_business();
+    //$business = homePageJsonNewslist_business();
 
     $data['status_code'] = "1";
     $data['status_message'] = "customised_message";
@@ -36,12 +36,11 @@ function homePageJson() {
 
     //$data['data'][0] = $homePageJsonWidget_1;
     $data['data'][0] = $data_topstories;
-    $data['data'][1] = $business;
-    $data['data'][2] = $data_news_india;
-    $data['data'][3] = $data_news_lifestyle;
-
-    $data['data'][4] = $data_news_world;
-    $data['data'][5] = $data_magazine;
+    //$data['data'][1] = $business;
+    $data['data'][1] = $data_news_india;
+    $data['data'][2] = $data_news_lifestyle;
+    $data['data'][3] = $data_news_world;
+    $data['data'][4] = $data_magazine;
     //$data['data'][6] = $data_poll;
 
     return $data;
@@ -140,10 +139,9 @@ function homePageJsonPackagelist_india() {
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
         //end
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -212,7 +210,9 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array(); 
+            $heighligth = (array) getHighlightByNid($nid);
+            $data_newslist[$listcount]['n_highlight'] = $heighligth;
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
@@ -344,10 +344,9 @@ function homePageJsonPackagelist_lifestyle() {
         $query->fields('kt', array('field_story_kicker_text_value'));
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -414,7 +413,9 @@ function homePageJsonPackagelist_lifestyle() {
             $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $data_newslist[$listcount]['n_highlight'] = $heighligth;
             // photo list array
 
             if ($type == "photogallery") {
@@ -547,10 +548,9 @@ function homePageJsonPackagelist_world() {
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
         //end
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -619,7 +619,9 @@ function homePageJsonPackagelist_world() {
             $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $data_newslist[$listcount]['n_highlight'] = $heighligth;
             // photo list array
 
             if ($type == "photogallery") {
@@ -905,10 +907,9 @@ function homePageJsonNewslist_india() {
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
         //end
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -977,7 +978,9 @@ function homePageJsonNewslist_india() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $data_newslist[$listcount]['n_highlight'] = $heighligth;
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
@@ -1112,10 +1115,9 @@ function homePageJsonNewslist_world() {
         $query->fields('vd', array('field_video_duration_value'));
         $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -1184,7 +1186,9 @@ function homePageJsonNewslist_world() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $data_newslist[$listcount]['n_highlight'] = $heighligth;
             // photo list array
 
             if ($type == "photogallery") {
@@ -1686,10 +1690,9 @@ function homePageJsonNewslist_lifestyle() {
 
         //end
 
-        if (count($tid_list) > 0) {
-            $query->condition('ti.tid', $tid_list, 'IN');
-        }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $query->condition('ti.tid', $tid, '=');
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -1759,7 +1762,9 @@ function homePageJsonNewslist_lifestyle() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $data_newslist[$listcount]['n_highlight'] = $heighligth;
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
@@ -2027,7 +2032,9 @@ function homePageJsonNewslist_business() {
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
             $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
+            $heighligth = array();
+            $heighligth = (array) getHighlightByNid($nid);
+            $data_newslist[$listcount]['n_highlight'] = $heighligth;
             // photo list array
             if ($type == "photogallery") {
                 $photolist = getPhotolist($nid);
