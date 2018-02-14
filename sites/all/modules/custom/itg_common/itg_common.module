@@ -121,14 +121,19 @@ function itg_common_menu() {
     'type' => MENU_CALLBACK,
   );
 
-  $items['scorecard/matchcenter/%'] = array(
+  $items['scorecard/matchcenter'] = array(
     'page callback' => 'itg_common_get_scorecard',
     'access callback' => TRUE,
     'page arguments' => array(2),
     'file' => 'includes/itg_scorecard.inc',
     'type' => MENU_CALLBACK,
   );
-
+  $items['scorecard/live-cricket-score'] = array(
+    'page callback' => 'itg_scorecard_live',
+    'access callback' => TRUE,
+    'file' => 'includes/itg_scorecard.inc',
+    'type' => MENU_CALLBACK,
+  );
   $items['get-magazine-issue'] = array(
     'page callback' => 'itg_get_magazine_issue_callback',
     'access callback' => TRUE,
@@ -1088,7 +1093,7 @@ function itg_content_inactive() {
   $itg_query->condition('expiry.field_story_expiry_date_value', $current_time, '<');
   $itg_query->isNotNull('expiry.field_story_expiry_date_value');
   $itg_result = $itg_query->execute()->fetchAll();
-  itg_watchdog("nodes_expiry" , $itg_result);
+  //itg_watchdog("nodes_expiry" , $itg_result);
   foreach ($itg_result as $itg_val) {
     $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
@@ -1543,7 +1548,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
   $fullReplacesBodyText = trim(preg_replace('/style=[^>]*/', '', $fullReplacesBodyText));
 
   $fullReplacesBodyText = trim(preg_replace('/<style(.*)\/style>/', '', $fullReplacesBodyText));
-
+  $fullReplacesBodyText = preg_replace('#<div class="clicktoenlarge"[^>]*>(.*?)</div>#', '', $fullReplacesBodyText);
+  $fullReplacesBodyText = str_replace('xml:lang="en"', '', $fullReplacesBodyText);
   preg_match_all('/<img.*src=\"(.*)\".*>/isU', $fullReplacesBodyText, $matches);
 
   $i = 0;
@@ -1638,6 +1644,8 @@ function itg_custom_amp_body_filter($fullReplacesBodyText) {
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         
         $value2 = '<script async="" src="https://platform.twitter.com/widgets.js" ></script>';
+        $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
+        $value2 = '<script async="" src="//platform.twitter.com/widgets.js" " charset="utf-8"></script>';
         $fullReplacesBodyText = str_replace($value2, "", $fullReplacesBodyText);
         
       }

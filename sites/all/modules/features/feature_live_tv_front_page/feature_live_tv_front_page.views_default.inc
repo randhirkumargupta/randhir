@@ -160,7 +160,7 @@ function feature_live_tv_front_page_views_default_views() {
   /* Display: International Live TV */
   $handler = $view->new_display('page', 'International Live TV', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'International Live TV';
+  $handler->display->display_options['title'] = 'LIVE TV';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '13';

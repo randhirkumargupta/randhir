@@ -12,7 +12,7 @@ function akamai_recacher_crawler($dburls) {
   //if (lock_acquire(__FUNCTION__)) {
   // Only continue if there any URLs found.
   if (empty($dburls)) {
-    watchdog('Akamai Recacher', 'No URLs needed to be crawled.', array(), WATCHDOG_INFO);
+    //watchdog('Akamai Recacher', 'No URLs needed to be crawled.', array(), WATCHDOG_INFO);
     //lock_release(__FUNCTION__);
     return 0;
   }
