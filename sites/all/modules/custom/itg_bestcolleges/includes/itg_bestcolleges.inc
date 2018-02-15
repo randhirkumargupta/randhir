@@ -26,13 +26,6 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   $getsyears = itg_bestcollege_getStreamYear('year-comparecollege', NULL);
   $directory_stream = itg_bestcollege_getStreamYear('readyrecnor-directory-list', $year);
   $form = array();
-  $block = block_load('itg_ads', ADS_RHS1);
-  $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
-
-  $form['bestcolleg_adds_rhs'] = array(
-    '#markup' => '<div class = "bestcolleg_adds_rhs">' . render($render_array) . '</div>',
-    '#weight' => -7,
-  );
   $form['bestcollege_year_item'] = array(
     '#type' => 'item',
     '#title' => t('BEST COLLEGES YEAR'),

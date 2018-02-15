@@ -201,7 +201,7 @@ if(isset($related_image_value['relatedimg_count']) && $related_image_value['rela
 <div>
 <div class="clearfix"></div>
 <div class="col-sm-12 remove_padd_right">
-<div class="row list-group college">
+<div class="list-group college">
       <div class="clr_chn right_align_bestcollege" >
 
 
