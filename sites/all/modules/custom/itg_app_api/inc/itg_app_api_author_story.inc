@@ -588,7 +588,11 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
   $query->fields('fsr', array('field_story_reporter_target_id'));
   $query->fields('fpc', array('field_primary_category_value'));
   $query->fields('st', array('field_story_source_type_value'));
-
+  
+  $interval = 180;    
+  $d1 = date('Y-m-d', strtotime("-".$interval." days"));
+  $d2 = date(strtotime($d1));
+  $query->condition('n.created', $d2, '>=');
   $query->condition('n.status', 1);
   $query->condition('n.type', 'videogallery')->orderBy('n.nid', 'DESC')->groupBy('n.nid');
   $query->condition('av.field_video_anchor_target_id', $anchor_id);
