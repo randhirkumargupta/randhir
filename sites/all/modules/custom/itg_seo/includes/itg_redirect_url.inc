@@ -435,6 +435,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
+    } else if(!empty($arg[2]) && $arg[2] == 'comparecollege.jsp') {
+      $year1 = $_GET['year1'];
+      if (!empty($year1)) {
+        $bestclgurl = FRONT_URL.'/'.$arg[0].'/'.$arg[1].'/compare-college/'. strtolower($_GET['stream']) . "/" . $_GET['year1'] . "-" . $_GET['year2'];
+      } else {
+        $bestclgurl = FRONT_URL.'/'.$arg[0].'/'.$arg[1].'/compare-college/' . $_GET['year'] . "-" . strtolower($_GET['stream1']) . "-" . strtolower($_GET['stream2']);
+      }
+      drupal_goto($bestclgurl, array(), 301);
     } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }
