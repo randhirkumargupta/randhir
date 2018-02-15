@@ -321,7 +321,7 @@ function itg_videogallery_custom_validate($form, &$form_state) {
     }
   }
   if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
-    if (empty($fids) && $node->status == 1) {
+    if (empty($fids) && ($node->status == 1 || $form_state['values']['workbench_moderation_state_new'] == workbench_moderation_state_published())) {
       form_set_error('field_video_upload', t("Please select video."));
     }
   }
