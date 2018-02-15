@@ -1,7 +1,6 @@
 <script type="text/javascript">
 	var request = new XMLHttpRequest();
-	//request.open("GET", "http://localhost/test/demo.xml", false);
-	request.open("GET", "https://akm-img-a-in.tosshub.com/indiatoday/fetchData.jsp", true);
+	request.open("GET", "https://instore-tosshub-com.s3.ap-south-1.amazonaws.com/indiatoday/fetchData.jsp", true);
 	request.send();
 	var xml = request.responseXML;
 	/*var responses = xml.getElementsByTagName("response");
