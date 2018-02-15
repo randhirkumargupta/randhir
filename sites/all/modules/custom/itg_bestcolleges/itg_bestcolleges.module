@@ -16,7 +16,7 @@ function itg_bestcolleges_init() {
   if ($path_request_array[0] == 'bestcolleges') {
     drupal_add_css(drupal_get_path('module', 'itg_bestcolleges') . '/css/itg_bestcollege.css', array('type' => 'file'));
     drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/custom.js', array('type' => 'file', 'scope' => 'footer'));
-    drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/scroll_top.js', array('type' => 'file', 'scope' => 'footer'));
+    // drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/scroll_top.js', array('type' => 'file', 'scope' => 'footer'));
   }
 }
 
@@ -128,6 +128,37 @@ function bestcollege_migrate_video() {
  * @return type
  */
 function itg_bestcolleges_deatils() {
+  $arg = arg();
+  $tid = !empty($arg[3]) ? $arg[3] : '';
+  
+  if (!empty($tid)) {
+	  $term = taxonomy_term_load($tid);
+	  $title = $term->metatags[LANGUAGE_NONE]['title']['value'];
+	  $description = $term->metatags[LANGUAGE_NONE]['description']['value'];
+	  $keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
+	  drupal_set_title($title);
+	  $html_head = array(
+		'description' => array(
+		  '#tag' => 'meta',
+		  '#attributes' => array(
+			'name' => 'description',
+			'content' => $description,
+		  ),
+		  '#weight' => -10,
+		),
+		'keywords' => array(
+		  '#tag' => 'meta',
+		  '#attributes' => array(
+			'name' => 'keywords',
+			'content' => $keywords,
+		  ),
+		  '#weight' => -10,
+		),
+	  );
+	  foreach ($html_head as $key => $data) {
+		drupal_add_html_head($data, $key);
+	  }	  
+  }	    
   return theme('itg_bestcolleges_template');
 }
 
@@ -307,7 +338,31 @@ function itg_bestcolleges_block_view($delta = '') {
  * @return string
  */
 function itg_bestcollege_emerging($year, $type, $stream) {
-  drupal_set_title(t('EMERGING COLLEGES RANKING: BEST ' . drupal_strtoupper($stream) . ' COLLEGES'));
+    drupal_set_title(t('EMERGING COLLEGES RANKING: BEST ' . drupal_strtoupper($stream) . ' COLLEGES'));
+    $title = t('Best Emerging Colleges ' . $year . ' in commerce India Today Survey');
+    $description = t('Best Emerging Colleges ' . $year . ' in commerce India Today Survey, India Today Survey ' . $year);
+    $keywords = t('Best Emerging Colleges ' . $year . ' in commerce India Today Survey, India Today Survey '. $year);
+    $html_head = array(
+    'description' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'description',
+      'content' => $description,
+      ),
+      '#weight' => -10,
+    ),
+    'keywords' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'keywords',
+      'content' => $keywords,
+      ),
+      '#weight' => -10,
+    ),
+    );
+    foreach ($html_head as $key => $data) {
+    drupal_add_html_head($data, $key);
+    }  
   $result_data = itg_bestcollege_getData($type, $year, $stream);
   $data = $result_data;
   $output = theme('itg_bestcollege_emerging_colleges_rank', array('data' => $data));
@@ -328,6 +383,30 @@ function itg_bestcollege_streamcompare($year, $type, $stream_year) {
   $stream1 = $stream_year_exp[1];
   $stream2 = $stream_year_exp[2];
   drupal_set_title(t($year . ' ' . drupal_strtoupper($stream1) . ' Vs ' . drupal_strtoupper($stream2)));
+    $description = t($year . ' ' . drupal_strtoupper($stream1) . ' Vs ' . drupal_strtoupper($stream2));
+    $keywords = t($year . ' ' . drupal_strtoupper($stream1) . ' Vs ' . drupal_strtoupper($stream2));
+    $html_head = array(
+    'description' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'description',
+      'content' => $description,
+      ),
+      '#weight' => -9,
+    ),
+    'keywords' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'keywords',
+      'content' => $keywords,
+      ),
+      '#weight' => -10,
+    ),
+    );
+    foreach ($html_head as $keys => $datas) {
+      drupal_add_html_head($datas, $keys);
+    }
+    
   $result_data = array();
   $result_data_stream1 = itg_bestcollege_getData('stream-comparecollege', $year, $stream1);
   $result_data_stream2 = itg_bestcollege_getData('stream-comparecollege', $year, $stream2);
@@ -371,6 +450,29 @@ function itg_bestcollege_streamcompare($year, $type, $stream_year) {
 function itg_bestcollege_yearcompare($year, $type, $stream, $years) {
   $years_exp = explode('-', $years);
   drupal_set_title(t(drupal_ucfirst($stream) . ' ' . $years_exp[0] . ' Vs ' . $years_exp[1]));
+  $description = t(drupal_ucfirst($stream) . ' ' . $years_exp[0] . ' Vs ' . $years_exp[1]);
+    $keywords = t(drupal_ucfirst($stream) . ' ' . $years_exp[0] . ' Vs ' . $years_exp[1]);
+    $html_head = array(
+    'description' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'description',
+      'content' => $description,
+      ),
+      '#weight' => -9,
+    ),
+    'keywords' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'keywords',
+      'content' => $keywords,
+      ),
+      '#weight' => -10,
+    ),
+    );
+    foreach ($html_head as $key => $data) {
+    drupal_add_html_head($data, $key);
+    } 
   $result_data = array();
   $result_data_yr1 = itg_bestcollege_getData('year-comparecollege', $years_exp[0], $stream);
   $result_data_yr2 = itg_bestcollege_getData('year-comparecollege', $years_exp[1], $stream);
@@ -437,6 +539,30 @@ function itg_readyrecnor_directory_list($year, $stype) {
   $stream = $stype_exp[0];
   $type = $stype_exp[1];
   drupal_set_title(t('DIRECTORY OF BEST COLLEGES ' . $year . ': ' . drupal_strtoupper($stream)));
+  $description = t('Best Emerging Colleges ' . $year . ' '.strtolower($stream) .' best colleges '. $year .', India Today Survey ' . $year);
+  $keywords = t('Best Emerging Colleges ' . $year . ' '.strtolower($stream) .' best colleges '. $year .', India Today Survey ' . $year);
+    
+   $html_head = array(
+    'description' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'description',
+      'content' => $description,
+      ),
+      '#weight' => -9,
+    ),
+    'keywords' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'keywords',
+      'content' => $keywords,
+      ),
+      '#weight' => -10,
+    ),
+    );
+    foreach ($html_head as $key => $data) {
+    drupal_add_html_head($data, $key);
+    } 
   $result_data = itg_bestcollege_getData('readyrecnor-directory-list', $year, $stream);
   $data = array();
   foreach ($result_data as $result_data_key => $result_data_val) {
@@ -455,6 +581,30 @@ function itg_zone_wise_list($year, $stype) {
   $stype_exp = explode('-', $stype);
   $stream = $stype_exp[1];
   drupal_set_title(t('ZONEWISE RANKING: BEST ' . drupal_strtoupper($stream) . ' COLLEGES'));
+    $description = t('Best '.$stream.' Collages '.$year.' Delhi, Delhi best colleges '.$year.', India Today Survey '.$year);
+    $keywords = t('Best '.$stream.' Collages '.$year.' Delhi, Delhi best colleges '.$year.', India Today Survey '.$year);
+    $html_head = array(
+    'description' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'description',
+      'content' => $description,
+      ),
+      '#weight' => -9,
+    ),
+    'keywords' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'keywords',
+      'content' => $keywords,
+      ),
+      '#weight' => -10,
+    ),
+    );
+    foreach ($html_head as $key => $data) {
+    drupal_add_html_head($data, $key);
+    }
+    
   $result_data = itg_bestcollege_getData('zone-wise-list', $year, $stream);
   $data = array();
   foreach ($result_data as $result_data_key => $result_data_val) {
@@ -499,6 +649,29 @@ function itg_city_wise_list($year, $scity) {
   $stream = $scity_exp[1];
   $city = $scity_exp[2];
   drupal_set_title(t('CITYWISE RANKING: BEST ' . drupal_strtoupper($stream) . ' COLLEGES'));
+    $description = t("India best colleges ".$year." - Find the rankings of Best colleges for Commerce, Arts, Science, Engineering, Fashion, BCA, Mass Comm, Fine Arts, Law, Medicine, BBA & Hotel Management in india ".$year);
+    $keywords = t("India best colleges ".$year.", top Colleges in India ".$year.", Commerce best colleges, Arts best colleges, Science best colleges, Engineering best colleges, Fashion best colleges, BCA best colleges, Mass Comm best colleges, Fine Arts best colleges, Law best colleges, Medicine best colleges, BBA & Hotel Management best colleges");
+    $html_head = array(
+    'description' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'description',
+      'content' => $description,
+      ),
+      '#weight' => -10,
+    ),
+    'keywords' => array(
+      '#tag' => 'meta',
+      '#attributes' => array(
+      'name' => 'keywords',
+      'content' => $keywords,
+      ),
+      '#weight' => -10,
+    ),
+    );
+    foreach ($html_head as $key => $data) {
+    drupal_add_html_head($data, $key);
+    } 
   $result_data = itg_bestcollege_getData('citywise-list', $year, $stream, $city);
   $data = array();
   $data['city_name'] = $city;
@@ -2367,4 +2540,87 @@ function itg_bestcollege_image_slider() {
 		return $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
     }
   }
+}
+
+/**
+ * Common function to itg_bestcollege_get_years_serveys
+ * @param int $byear
+ * @return string
+ */
+function itg_bestcollege_get_years_serveys($byear) {
+	global $base_url;
+	if($byear == 2009 || $byear == 2008 || $byear == 2007 || $byear == 2006 || $byear == 2005) {
+	  $byear = '2010';	
+	}	
+	$results = array(
+	'2017' => array(
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-arts-colleges-195933-2014-06-06' => 'ARTS', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-top-commerce-colleges-195932-2014-06-06' => 'COMMERCE', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-engineering-colleges-195935-2014-06-06' => 'ENGINEERING', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-law-colleges-195936-2014-06-06' => 'LAW', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-medical-colleges-195937-2014-06-06' => 'MEDICAL', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-science-colleges-195940-2014-06-06' => 'SCIENCE'
+		    ),
+	'2016' => array(
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-arts-colleges-195933-2014-06-06' => 'ARTS', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-top-commerce-colleges-195932-2014-06-06' => 'COMMERCE', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-engineering-colleges-195935-2014-06-06' => 'ENGINEERING', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-law-colleges-195936-2014-06-06' => 'LAW', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-medical-colleges-195937-2014-06-06' => 'MEDICAL', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-science-colleges-195940-2014-06-06' => 'SCIENCE'
+		    ),
+	'2015' => array(
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-arts-colleges-195933-2014-06-06' => 'ARTS', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-top-commerce-colleges-195932-2014-06-06' => 'COMMERCE', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-engineering-colleges-195935-2014-06-06' => 'ENGINEERING', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-law-colleges-195936-2014-06-06' => 'LAW', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-medical-colleges-195937-2014-06-06' => 'MEDICAL', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-science-colleges-195940-2014-06-06' => 'SCIENCE'
+		    ),
+	'2014' => array(
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-arts-colleges-195933-2014-06-06' => 'ARTS', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-top-commerce-colleges-195932-2014-06-06' => 'COMMERCE', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-engineering-colleges-195935-2014-06-06' => 'ENGINEERING', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-law-colleges-195936-2014-06-06' => 'LAW', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-medical-colleges-195937-2014-06-06' => 'MEDICAL', 
+			$base_url. '/india/best-colleges/story/india-today-best-colleges-survey-top-science-colleges-195940-2014-06-06' => 'SCIENCE'
+		    ),
+	'2013' => array(
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-arts-colleges-105063-2012-06-08' => 'ARTS', 
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-commerce-colleges-105062-2012-06-08' => 'COMMERCE', 
+			$base_url. '/india/best-colleges/story/16-year-engineering-toppers-105061-2012-06-08' => 'ENGINEERING', 
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-law-colleges-105059-2012-06-08' => 'LAW', 
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-medical-colleges-105058-2012-06-08' => 'MEDICAL', 
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-science-colleges-105060-2012-06-08' => 'SCIENCE'
+		    ),
+	'2012' => array(
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-arts-colleges-105063-2012-06-08' => 'ARTS', 
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-commerce-colleges-105062-2012-06-08' => 'COMMERCE', 
+			$base_url. '/india/best-colleges/story/16-year-engineering-toppers-105061-2012-06-08' => 'ENGINEERING', 
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-law-colleges-105059-2012-06-08' => 'LAW', 
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-medical-colleges-105058-2012-06-08' => 'MEDICAL', 
+			$base_url. '/india/best-colleges/story/16-year-toppers-in-science-colleges-105060-2012-06-08' => 'SCIENCE'
+		    ),
+	'2011' => array(
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-arts-colleges-125813-2011-07-08' => 'ARTS', 
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-commerce-colleges-125814-2011-07-08' => 'COMMERCE', 
+			$base_url. '/india/best-colleges/story/14-year-engineering-toppers-125815-2011-07-08' => 'ENGINEERING', 
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-law-colleges-125817-2011-07-08' => 'LAW', 
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-medical-colleges-125818-2011-07-08' => 'MEDICAL', 
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-science-colleges-125816-2011-07-08' => 'SCIENCE'
+		    ),
+	'2010' => array(
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-arts-colleges-125813-2011-07-08' => 'ARTS', 
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-commerce-colleges-125814-2011-07-08' => 'COMMERCE', 
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-law-colleges-125817-2011-07-08' => 'LAW', 
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-medical-colleges-125818-2011-07-08' => 'MEDICAL', 
+			$base_url. '/india/best-colleges/story/14-year-toppers-in-science-colleges-125816-2011-07-08' => 'SCIENCE'
+		    )	    	    	    	    	    	    
+	);
+	$data = array();
+	$data['_none'] = t("---Select Course---");
+	foreach ($results[$byear] as $results_key => $results_val) {
+	  $data[$results_key] = $results_val;
+	}
+	return $data;
 }
