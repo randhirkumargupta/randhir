@@ -97,9 +97,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $mail_node_author = str_replace('[itg_mail_token:itg_author]', $current_user_name, $mail_node_type);
       }
       elseif ($mail_data_cat == 'videogallery') {
-        if(variable_get('mail_template_emails') != ''){
+        if(variable_get('publish_alert_emails_videos') != ''){
             //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
-            $to_mail = variable_get('mail_template_emails');
+            $to_mail = variable_get('publish_alert_emails_videos');
         }
         if ($node->status == 1) {
           $byline_emails = get_node_byline_emails($node);
@@ -381,9 +381,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         elseif ($mail_data_cat == 'videogallery') {
 
           if ($node->status == 1 && $node->original->status == 0) {
-            if (variable_get('mail_template_emails') != '') {
+            if (variable_get('publish_alert_emails_videos') != '') {
               //$to_mail = $to_mail.' , '.variable_get('mail_template_emails');
-              $to_mail = variable_get('mail_template_emails');
+              $to_mail = variable_get('publish_alert_emails_videos');
             }
             $byline_emails = get_node_byline_emails($node);
             $to_mail = $to_mail . ' , ' . $byline_emails;
@@ -417,7 +417,9 @@ function workflow_get_mail_content($node, $event, $to, $user_name, $current_user
         $body_htwo = strtoupper($content_type) . ' PUBLISHED';
       }
       
-     if(variable_get('unpublish_alert_emails') != ''){
+     if ($node->type == 'videogallery' && variable_get('unpublish_alert_emails_videos') != '') {
+			  $to_mail = variable_get('unpublish_alert_emails_videos');
+		 } else if(variable_get('unpublish_alert_emails') != '') {
        $to_mail = variable_get('unpublish_alert_emails');
      }
       $subject = 'A new ' . $content_type . ' has been ' . $subject_line_upd . ', please find details below.';

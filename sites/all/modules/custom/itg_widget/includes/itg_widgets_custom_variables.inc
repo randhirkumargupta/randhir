@@ -507,7 +507,7 @@ function itg_widgets_custom_variables() {
   // Unpublish content email alert
   $form['unpublish_alert_emails'] = array(
     '#type' => 'textarea',
-    '#title' => t('Story/Photo/Video Unpublish content email alert'),
+    '#title' => t('Story/Photo Unpublish content email alert'),
     '#default_value' => variable_get('unpublish_alert_emails'),
   );
 
@@ -520,6 +520,17 @@ function itg_widgets_custom_variables() {
     '#type' => 'textfield',
     '#title' => t('Place Mobile Ad After Paragraph'),
     '#default_value' => variable_get('place_mobile_ad_after_paragraph', 2),
+  );
+  // Unpublish content email alert
+  $form['unpublish_alert_emails_videos'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Video Unpublish content email alert'),
+    '#default_value' => variable_get('unpublish_alert_emails_videos'),
+  );
+  $form['publish_alert_emails_videos'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Video publish content email alert'),
+    '#default_value' => variable_get('publish_alert_emails_videos'),
   );
   return system_settings_form($form);
 }
