@@ -734,6 +734,7 @@ function generateVideoDetail($nid) {
         $desc = str_replace("\n", "", $desc);
         $desc = str_replace("\r", "", $desc);
         $desc = str_replace("\t", "", $desc);
+        $desc = str_replace("&nbsp;", "", $desc);
 
         //related content
         $related = relatedContentNodeType($node->field_common_related_content['und']['0']['value']);
