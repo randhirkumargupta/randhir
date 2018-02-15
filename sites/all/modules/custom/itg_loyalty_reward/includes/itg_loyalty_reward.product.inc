@@ -60,7 +60,7 @@ function itg_loyalty_reward_addtocart($node_id, $action = NULL, $new_quantity = 
     }
    
     if(!empty($cart_point)) {
-      watchdog('cart_total_point', $cart_point);
+      //watchdog('cart_total_point', $cart_point);
       $remaining_point = $remaining_previous_point - $cart_point;
     } else {
       $remaining_point = $remaining_previous_point;

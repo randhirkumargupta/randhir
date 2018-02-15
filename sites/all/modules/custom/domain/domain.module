@@ -4021,7 +4021,7 @@ function domain_update_zero_records($tables) {
     }
     catch (Exception $e) {
       $transaction->rollback();
-      watchdog_exception('domain_repair', $e);
+      //watchdog_exception('domain_repair', $e);
       drupal_set_message(t('The update failed due to a duplicate record. You must manually correct the {@table} table in your database.', array('@table' => $table)), 'error');
       $success = FALSE;
     }

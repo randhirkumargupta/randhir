@@ -226,7 +226,7 @@ function _taboola_block_content() {
     }
   } else {
     $output = '';
-    watchdog('taboola script', 'Please add taboola script in setting page.');
+    //watchdog('taboola script', 'Please add taboola script in setting page.');
   }
   return $output;
 }
@@ -241,7 +241,7 @@ function _may_be_recommend_block_content() {
   }
   else {
     $output = '';
-    watchdog('Suggested Stories', 'Please add Suggested Stories script in setting page.');
+    //watchdog('Suggested Stories', 'Please add Suggested Stories script in setting page.');
   }
   return $output;
 }
@@ -256,7 +256,7 @@ function _recommend_new_block_content() {
   }
   else {
     $output = '';
-    watchdog('Recommended script', 'Please add Recommended script in setting page.');
+    //watchdog('Recommended script', 'Please add Recommended script in setting page.');
   }
   return $output;
 }
@@ -272,7 +272,7 @@ function _crowdy_news_block_content() {
   }
   else {
     $output = '';
-    watchdog('crowdy news script', 'Please add crowdy news script in setting page.');
+    //watchdog('crowdy news script', 'Please add crowdy news script in setting page.');
   }
   return $output;
 }
@@ -286,7 +286,7 @@ function _amp_story_ad_block() {
     $output = variable_get('amp_story_ad');
   } else {
     $output = '';
-   watchdog('Amp story ad block', 'Please add script in setting page.'); 
+   //watchdog('Amp story ad block', 'Please add script in setting page.'); 
   }
   return $output;
 }
