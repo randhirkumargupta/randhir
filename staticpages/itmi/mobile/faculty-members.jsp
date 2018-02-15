@@ -72,7 +72,7 @@ if (!mobile) {
           <li><strong><a href="javascript:void(0)" style="color:black; text-decoration:none;">Priyanka Gupta</a></strong></li>
           <li><strong><a href="javascript:void(0)" style="color:black; text-decoration:none;">Hemant Kaushik</a></strong></li>
           <!--<li><strong><a href="/itmi/manas_mishra.jsp" target="_blank" style="color:black; text-decoration:none;">Manas Mishra</a></strong></li>-->
-          <li><strong><a href="javascript:void(0)"  style="color:black; text-decoration:none;">Devesh Kishore</a></strong></li>
+          <!-- <li><strong><a href="javascript:void(0)"  style="color:black; text-decoration:none;">Devesh Kishore</a></strong></li> -->
           <!--<li><strong><a href="javascript:void(0)"  style="color:black; text-decoration:none;">Sneha Bhati</a></strong></li>-->
           <li><strong><a href="javascript:void(0)"  style="color:black; text-decoration:none;">Prashant Kothari</a></strong></li>
         </ul>
