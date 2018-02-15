@@ -701,12 +701,12 @@ function itg_category_manager_term_validate($form , &$form_state) {
     if ($num_cat_selected > 4) {
       form_set_error('parent' , t('Sorry! You can not create more than 4 levels of categories within a section.'));
     }
-    if(((count($all_children) > 0 && in_array(trim($form_state['values']['name']), $all_children)))){
+    if(!is_numeric(arg(2)) && ((count($all_children) > 0 && in_array(trim($form_state['values']['name']), $all_children)))){
 			form_set_error('name' , t('Category name already exists4.'));
 		}else if(is_numeric(arg(2))){
 			$all_children_edited = taxonomy_get_tree(CATEGORY_MANAGMENT, arg(2));
 			foreach($all_children_edited as $value){
-				if(in_array($value->name, $all_children)){
+				if(($value->tid != arg(2)) && in_array($value->name, $all_children)){
 					form_set_error('name' , t('Category name already exists5.'));
 				}
 			}
