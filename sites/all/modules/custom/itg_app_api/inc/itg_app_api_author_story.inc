@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Inc file contains the functions author story api
+ * Inc file contains the functions author story api 
  */
 
 /**
@@ -758,7 +758,10 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
     $query->fields('fsr', array('field_story_reporter_target_id'));
     $query->fields('fpc', array('field_primary_category_value'));
 
-    
+
+    $query->condition('n.nid', $pop_res_k);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
     foreach ($result as $k => $res) {
       $comment_cont = getCommentsCount($res['nid']);
       $changed = $res['changed'];
