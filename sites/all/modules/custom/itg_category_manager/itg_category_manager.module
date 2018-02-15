@@ -682,7 +682,16 @@ function itg_category_manager_term_validate($form , &$form_state) {
   $tid = $form_state['values']['tid'];
   $cat_arr = $form_state['input']['parent']['hierarchical_select']['selects'];
   $num_cat_selected = count($cat_arr);
-
+  $all_children = array();
+  
+  if (!empty($cat_arr[0]) && $cat_arr[0] != 0) {
+    $_all_children = taxonomy_get_tree(CATEGORY_MANAGMENT, $cat_arr[0]);
+    $all_children[] = get_term_name_from_tid($cat_arr[0])->name;
+    foreach ($_all_children as $_term) {
+      $all_children[] = $_term->name;
+    }
+  }
+  
   if ($form_state['triggering_element']['#value'] != 'Delete') {
     if (($cat_arr[0] == 'label_0')) {
       form_set_error('parent' , t('Section field is required.'));
@@ -690,7 +699,18 @@ function itg_category_manager_term_validate($form , &$form_state) {
     if ($num_cat_selected > 4) {
       form_set_error('parent' , t('Sorry! You can not create more than 4 levels of categories within a section.'));
     }
-    //Check for duplicate category    
+    if(!is_numeric(arg(2)) && ((count($all_children) > 0 && in_array(trim($form_state['values']['name']), $all_children)))){
+			form_set_error('name' , t('Category name already exists4.'));
+		}else if(is_numeric(arg(2))){
+			$all_children_edited = taxonomy_get_tree(CATEGORY_MANAGMENT, arg(2));
+			foreach($all_children_edited as $value){
+				if(($value->tid != arg(2)) && in_array($value->name, $all_children)){
+					form_set_error('name' , t('Category name already exists5'));
+				}
+			}
+		}
+		
+		//Check for duplicate category    
     $dup_parents = itg_category_manager_is_dupe_term($term , $vid , $tid);
     $erros = $dup_parents ? array_filter($dup_parents) : NULL;
     
@@ -705,10 +725,10 @@ function itg_category_manager_term_validate($form , &$form_state) {
         if (isset($value->tid) && $value->tid == $new_rparent) {
           form_set_error('name' , t('Category name already exists.'));
         }
-        elseif (is_numeric(arg(2)) && $term_load->name != $form_state['values']['name'] && $new_rparent == 0 && $value->name == $form_state['values']['name']) {
+        elseif (is_numeric(arg(2)) && $term_load->name != trim($form_state['values']['name']) && $new_rparent == 0 && $value->name == trim($form_state['values']['name'])) {
           form_set_error('name' , t('Category name already exists2.'));
         }
-        elseif (!is_numeric(arg(2)) && $new_rparent == 0 && $value->name == $form_state['values']['name']) {
+        elseif (!is_numeric(arg(2)) && $new_rparent == 0 && $value->name == trim($form_state['values']['name']) && ((count($all_children) <= 0) || (count($all_children) > 0 && in_array(trim($form_state['values']['name']), $all_children)))) {
           form_set_error('name' , t('Category name already exists3.'));
         }
         else {
