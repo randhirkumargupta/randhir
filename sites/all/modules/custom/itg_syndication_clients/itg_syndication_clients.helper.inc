@@ -121,7 +121,7 @@ function getmsn_story_section_array() {
     'msn/indiatoday/latest-news.xml' => 1206578,
     'msn/mailtoday/story-msn-mail-today.xml' => 1206734,
     'msn/indiatoday/story-national.xml' => 1207674,
-    'msn/indiatoday/story-sports.xml' => 1207675,
+    'msn/indiatoday/story-sports.xml' => 1206550,
     'msn/indiatoday/story-states.xml' => 1207676,
     'msn/indiatoday/story-health.xml' => 1207677,
     'msn/indiatoday/story-leisure.xml' => 1207678,
@@ -146,7 +146,8 @@ function getmsn_story_section_array() {
     'msn/mailtoday/story-india.xml' => 1206578,
     'msn/mailtoday/story-top-stories.xml' => 1206584,
     'msn/mailtoday/story-technology.xml' => 1206688,
-    'msn/mailtoday/story-auto.xml' => 1206689
+    'msn/mailtoday/story-auto.xml' => 1206689,
+    'msn/mailtoday/story-education.xml' => 1206666
   );
   return $msn_story;
 }
@@ -225,6 +226,8 @@ function getceltick_feed_story_client_array() {
     '1206795' => 'fyi.xml',
     '1206567' => 'lifestyle.xml',
     '1206533' => 'movies.xml',
+    '1206550' => 'sports.xml',
+    '1206676' => 'cricket.xml'
   );
   return $story_sectios;
 }
@@ -378,7 +381,8 @@ function get_hltapps_sections($type) {
         'india.xml' => array('section' => '1206955', 'limit' => 15),
         'world.xml' => array('section' => '1206956', 'limit' => 15),
         'so-sorry.xml' => array('section' => '1207580', 'limit' => 15),
-        'entertainment.xml' => array('section' => '1206952', 'limit' => 15)
+        'entertainment.xml' => array('section' => '1206952', 'limit' => 15),
+        'movies.xml' => array('section' => '1207303', 'limit' => 15)
       );
       break;
     case 'programmes':

@@ -19,6 +19,8 @@ function itg_common_dropdown_supplement($id = '') {
   $query->fields('n' , array('title'));
   $query->condition('n.status' , 1 , '=');
   $query->condition('m.field_supp_select_magazine_target_id' , $id , '=');
+  $query->groupBy('n.title');
+  $query->orderBy('n.nid', 'DESC');
   $result = $query->execute();
 
   while ($record = $result->fetchAssoc()) {
@@ -173,6 +175,19 @@ function itg_common_get_node_title($nid) {
 function itg_common_get_node_type($nid) {
   $query = db_select('node' , 'n')
       ->fields('n' , array('type'))
+      ->condition('n.nid' , $nid , '=');
+
+  return $query->execute()->fetchField();
+}
+
+/**
+ * Get node status using nid
+ * @param int $nid
+ * @return string
+ */
+function itg_common_get_node_status($nid) {
+  $query = db_select('node' , 'n')
+      ->fields('n' , array('status'))
       ->condition('n.nid' , $nid , '=');
 
   return $query->execute()->fetchField();

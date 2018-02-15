@@ -11,65 +11,9 @@
  * {@inheritdoc}
  */
 function itg_bestcolleges_init() {
-  global $base_url;
   $path_request = request_path();
   $path_request_array = explode('/', $path_request);
-
-  if ($path_request_array['0'] == 'specials' && $path_request_array['1'] == 'bestcolleges') {
-    array_splice($path_request_array, 0, 1);
-  }
-
-  $params = drupal_get_query_parameters();
-  $ext = pathinfo($path_request_array['2'], PATHINFO_EXTENSION);
-
-  if ($ext == 'jsp') {
-    switch ($path_request_array['2']) {
-      case 'comparecollege.jsp':
-        if (!empty($params['year1'])) {
-          $final_path = $path_request_array['0'] . "/" . $path_request_array['1'] . "/compare-college/" . strtolower($params['stream']) . "/" . $params['year1'] . "-" . $params['year2'];
-        }
-        else {
-          $final_path = $path_request_array['0'] . "/" . $path_request_array['1'] . "/compare-college/" . $params['year'] . "-" . strtolower($params['stream1']) . "-" . strtolower($params['stream2']);
-        }
-
-        break;
-      case 'emerging_colleges_rank.jsp':
-        $final_path = $path_request_array['0'] . "/" . $path_request_array['1'] . "/emerging-colleges-rank/" . strtolower($params['ST']);
-        break;
-      case 'readyrecnor_directory_list.jsp':
-        $final_path = $path_request_array['0'] . "/" . $path_request_array['1'] . "/" . strtolower($params['ST']) . "-bestcollege";
-        break;
-      case 'zone-wise-list.jsp':
-        $final_path = $path_request_array['0'] . "/" . $path_request_array['1'] . "/zonewiselist-" . strtolower($params['ST']);
-        break;
-      case 'ranks.jsp':
-        if (!empty($params['ST'])) {
-          $term_name = "Bestcolleges " . $path_request_array['1'];
-          $term = reset(array_values(taxonomy_get_term_by_name($term_name, 'category_management')));
-          $term_data = reset(taxonomy_get_children($term->tid));
-          if ($term_data->name == strtolower($params['ST'])) {
-            $final_path = $path_request_array['0'] . "/" . $path_request_array['1'] . "/ranks/" . $term_data->tid;
-          }
-        }
-        else {
-          $final_path = $path_request_array['0'] . "/" . $path_request_array['1'];
-        }
-        break;
-      case 'citycolleges.jsp':
-        $final_path = $path_request_array['0'] . "/" . $path_request_array['1'] . "/citycolleges-" . strtolower($params['ST']) . "-" . strtolower($params['CT']);
-        break;
-      default:
-        break;
-    }
-
-    if (!empty($final_path)) {
-      drupal_goto($final_path);
-      exit;
-    }
-  }
-
-  $path = $path_request_array[0];
-  if ($path == 'bestcolleges') {
+  if ($path_request_array[0] == 'bestcolleges') {
     drupal_add_css(drupal_get_path('module', 'itg_bestcolleges') . '/css/itg_bestcollege.css', array('type' => 'file'));
     drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/custom.js', array('type' => 'file', 'scope' => 'footer'));
     drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/scroll_top.js', array('type' => 'file', 'scope' => 'footer'));
@@ -241,6 +185,11 @@ function itg_bestcolleges_theme($existing, $type, $theme, $path) {
     'bestcollege_section_ordering' => array(
       'template' => 'templates/bestcollege-section-ordering',
     ),
+    'bestcollege_image_sliders' => array(
+      'variable' => array('data' => NULL),
+      'template' => 'bestcollege-image-slider',
+      'path' => drupal_get_path('module', 'itg_bestcolleges') . '/templates',
+    ),
   );
   return $themes;
 }
@@ -302,6 +251,10 @@ function itg_bestcolleges_block_info() {
     'region' => 'Second sidebar',
     'pages' => "bestcolleges/*\nbestcolleges/",
   );
+   $blocks['bestcollege_image_slider'] = array(
+    'info' => t('Widget: Bestcolleges Image Slider'),
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+  );
   return $blocks;
 }
 
@@ -337,7 +290,10 @@ function itg_bestcolleges_block_view($delta = '') {
         $data = bestcollege_get_sponser_data('Best college Sponser');
         $block['content'] = $data;
       }
-
+      break;
+    case 'bestcollege_image_slider':
+      $data = itg_bestcollege_image_slider();
+      $block['content'] = theme("bestcollege_image_sliders", array("data" => $data));
       break;
   }
   return $block;
@@ -888,59 +844,6 @@ function itg_bestcollege_get_term_tid($tid, $stream) {
   }
 }
 
-/**
- * Implementation of hook_views_query_alter
- * @param object reference $view
- * @param object reference $query
- */
-function itg_bestcolleges_views_query_alter(&$view, &$query) {
-  if (isset($view->name) && $view->name === 'best_college_image_slider') {
-    if ($view->current_display == 'block') {
-      if (isset($view->query->where[0]['conditions'][0]['field'])) {
-        $url_get = explode('/', $_SERVER['REQUEST_URI']);
-        $year = $url_get[2];
-        $story_data = array();
-        $json = variable_get('bestcollege_get_video', '');
-        $related_result = (array) json_decode($json);
-        if (is_object($related_result['image_slider']) && count($related_result['image_slider']) > 0) {
-          $story_data = $related_result['image_slider']->{$year};
-        }
-        if(is_array($story_data) && count($story_data) > 0) {
-          if ($view->query->where[0]['conditions'][0]['operator'] = 'IN') {
-            $view->query->where[0]['conditions'][0]['field'] = 'node.nid';
-            $view->query->where[0]['conditions'][0]['value'] = $story_data;
-          }
-        }
-      }
-    }
-    else {
-      $page_type = isset($_GET['page']) ? $_GET['page'] : '';
-      if (!empty($page_type)) {
-        if (isset($view->query->where[1]['conditions'][2]['field'])) {
-          if ($view->query->where[1]['conditions'][2]['operator'] == 'IN') {
-            $year = arg(1);
-            $query = db_select('field_data_field_bestcollege_year', 'y');
-            $query->join('field_data_field_bestcollege_rank', 'r', 'y.entity_id = r.entity_id');
-            $query->distinct();
-            $query->fields('r', array('field_bestcollege_rank_value'))
-                ->condition('y.field_bestcollege_year_value', $year)
-                ->condition('r.field_bestcollege_rank_value', 10, '>')
-                ->orderBy('r.field_bestcollege_rank_value', 'ASC');
-            $results = $query->execute()->fetchAll();
-            if (is_array($results) && count($results) > 0) {
-              foreach ($results as $results_key => $results_val) {
-                $rank_array[] = $results_val->field_bestcollege_rank_value;
-              }
-              $pre_array = $view->query->where[1]['conditions'][2]['value'];
-              $final_array = array_merge($pre_array, $rank_array);
-              $view->query->where[1]['conditions'][2]['value'] = $final_array;
-            }
-          }
-        }
-      }
-    }
-  }
-}
 
 //-------------------------------------------------------------------------------------------|
 //  Start import of the CSV file
@@ -2436,5 +2339,32 @@ function itg_bestcollege_zonecampuswiseranking_migrate($line, $session_nid, &$co
     // Query failed; recover based on $e->getMessage()
     drupal_set_message(check_plain(t('Fail line 2017 !var college id = !var1')), array('!var' => $line[0], '!var1' => $collegeid));
     itg_watchdog('zonecampuswiseranking_fail', $line);
+  }
+}
+
+/**
+ * function for itg_bestcollege_image_slider().
+ * @return type
+ */
+function itg_bestcollege_image_slider() {
+  $url_get = explode('/', $_SERVER['REQUEST_URI']);
+  $year = isset($url_get[2]) ? $url_get[2] : '';
+  $story_data = array();
+  $json = variable_get('bestcollege_get_video', '');
+  $related_result = (array) json_decode($json);
+  $image_slider = $related_result['image_slider'];
+  if (!empty($year)) {
+    if (is_object($related_result['image_slider']) && count($related_result['image_slider']) > 0) {
+      $story_data = $related_result['image_slider']->{$year};
+    }
+    if (is_array($story_data) && count($story_data) > 0) {
+		$query = db_select('node', 'n');
+		$query->leftjoin('field_data_field_story_extra_large_image', 'sm', 'sm.entity_id = n.nid');
+		$query->fields('n', array('nid', 'title'));
+		$query->fields('sm', array('field_story_extra_large_image_fid'));
+		$query->condition('n.type', 'story');
+		$query->condition('n.nid', ($story_data), 'IN');
+		return $results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    }
   }
 }

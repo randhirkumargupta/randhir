@@ -341,6 +341,7 @@ width: 100%;
         margin: 0 auto
     }
     #block-itg-front-end-common-latest-from-aajtak ul, #block-itg-front-end-common-latest-from-pti ul, #block-itg-front-end-common-latest-from-businesstoday ul { overflow-y: auto; max-height: 350px;}
+    #itg-scorecard-container .scorecard-stripcontent{display:none;}
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
     .front .itg-top-section .home-top-story .droppable {
@@ -573,6 +574,7 @@ ul.pron-cons-img li img {
 .sport-home-layout-page .tech-block_8 .osscar-video ul .dont-miss-listing{
     padding: 0 10px 25px 10px;
 }
+.sport-home-layout-page .itg-layout-315 .droppable{border-bottom: 1px solid #ddd;}
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{width:100%; height:400px}
 
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li{ border:0px;}
@@ -581,7 +583,7 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
 .story-section .description h3{ text-transform: uppercase; font-weight:bold;}
-.front .watch-right-now-video ul li{padding:10px 0px 10px 0px;}
+.front .watch-right-now-video ul li{padding:12px 0px 12px 0px;}
 @media screen and (max-width: 768px){
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{height: 415px;}
 .breakingnew-home .new-detail .marquee-container .marquee-child a * {line-height:25px;}
@@ -695,6 +697,7 @@ footer .footer-top .footer-social-link{display:block; opacity:0;}
 .section-pr-newswire #w4315_landing  .addthis_toolbox{text-align: right;float: right;}
 .live-block .breaking-section .breaking-date{font-size:1.3rem;}
 span.refresh-icon{float: right;position: relative;top: -20px;}
+.node-type-videogallery .jw-title.jw-reset{display:none;}
 @media only screen and (max-width: 768px) {
 .app-area-wrapper{width:100%;}
 .app-area .top-area .right-area{width:71%;}
@@ -711,7 +714,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .front .itg-layout-container .itg-h321-section .ad-widget{ height: 315px;padding: 30px 0;width: 322px;margin: 0 auto;background: #f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
 .itg-h321-section .dont-miss ul li{width:100%}
-.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:none}
+.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:none}
 .mobile-body-ad > div{margin:0px auto;}
 }
 @media only screen and (max-width: 767px) {
@@ -745,7 +748,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .front .itg-top-section .top-rhs-add-child .ad-widget {padding:0; height:auto;}
 .front .itg-layout-container .itg-h321-section .ad-widget{ height:auto;padding:0;width:300px;margin: 0 auto;background: #f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
-.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:block}
+.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:block}
 iframe.embed-responsive-item {height:50px}
 }
 .pti-news-claim { background: #FBF9FA; border: 1px solid #EFEFEF; color: #737373; font-size: 14px; margin-top: 20px; padding: 10px; line-height: 18px; margin-bottom: 20px; }
@@ -823,4 +826,6 @@ background:none;
 .story-section .byline .profile-detail ul.profile-byline li.update-data{padding:0px;}
 .tech-layout-page .auto-block-1, .tech-layout-page .auto-block-2, .auto-layout-page .auto-block-1, .auto-layout-page .auto-block-2 {margin-bottom: 30px;}
 }
-
+/* Home Listing page qoutes and footer */
+.view-category-wise-content-list .catagory-listing .pic{padding-top: 5px;}.front .itg-layout-container .itg-h321-section .droppable{ height:300px;}front .trending-videos .trending-videos-list {overflow: hidden; padding: 14px 10px;float:left}.front .itg-layout-container .ad-widget {border: 1px solid #ddd; height: 280px; padding: 14px 37px;}.quotes blockquote {color: #a00606;}.footer .footer-top .footer-top-link{font-size: 22px;color: #fff;overflow: hidden;line-height: 35px; float:left;}
+@media only screen and (max-width: 768px){.front .itg-layout-container .itg-h321-section .ad-widget {height: 300px;padding: 24px 0; width: 322px; margin: 0 auto; background: #f3f3f3;}.front .itg-layout-container .itg-h321-section .droppable{ height:auto;} footer .footer-top .footer-social-link{display:none} footer .footer-top .footer-top-link{font-size:19px;   line-height: 44px;}}@media only screen and (max-width: 1024px){.front .itg-layout-container .itg-h321-section .droppable { height: 252px;}.front .itg-layout-container .ad-widget{height: 250px; padding: 0px 8px; width: 320px;}}

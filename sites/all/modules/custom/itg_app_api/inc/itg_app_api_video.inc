@@ -140,10 +140,13 @@ function generateVideoCategoryList($tid, $pageno) {
         $query->fields('fpc', array('field_primary_category_value'));
         $query->fields('ffd', array('field_story_expert_description_value'));
 
-        if (count($tid_list) > 0) {
+        if ($tid == 0 && count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
+        } else {
+            $query->condition('ti.tid', $tid, '=');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
@@ -432,10 +435,13 @@ function generateProgramCategoryList($tid, $pageno) {
         $query->fields('ffd', array('field_story_expert_description_value'));
         //end
 
-        if (count($tid_list) > 0) {
+        if ($tid == 0 && count($tid_list) > 0) {
             $query->condition('ti.tid', $tid_list, 'IN');
+        } else {
+            $query->condition('ti.tid', $tid, '=');
         }
-        $d1 = date('Y-m-d', strtotime("-360 days"));
+        $interval = itg_app_time_interval($tid);
+        $d1 = date('Y-m-d', strtotime("-" . $interval . " days"));
         $d2 = date(strtotime($d1));
         $query->condition('n.created', $d2, '>=');
         $query->condition('n.uid', $filter_user_data, 'NOT IN');
@@ -580,7 +586,8 @@ function programCategoryListlPageRerourceValue($token) {
     $updated_datetime = "";
     $conf_array = tidConfig();
     $program_key = "itg_programmes_order_by";
-    $Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061);
+    //$Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061);
+    $Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1208173,1207755,1206960,1207972,1208061);
     
 
     // list array building
@@ -1025,7 +1032,7 @@ function topstoriesList($source) {
     if ($source == 'home') {
         $result_fs_cont_ar = $result_fs;
         $result_fs_cont = count($result_fs_cont_ar);
-        $range_max = 5- $result_fs_cont;
+        $range_max = 10- $result_fs_cont;
     }
     $range_min = 0;
     $order_by = 'ASC';
@@ -1070,7 +1077,7 @@ function topstoriesList($source) {
     //end
     $query->condition('iwo.widget', $widget_name)->condition('n.status', 1)->condition('n.type', 'story')->groupBy('n.nid')->orderBy('iwo.weight', $order_by)->orderBy('n.nid', 'DESC')->range($range_min, $range_max)->fields('iwo', array('nid', 'extra', 'weight'));
     $result_ts = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $result_fs = featuresWidgetData();
+    
     $result = array_merge($result_fs, $result_ts);
     //$result = array_merge($result_ts, $result_fs);
 
@@ -1158,6 +1165,11 @@ function topstoriesList($source) {
         $data_newslist[$home_list_count]['n_large_image'] = "$file_large_img_url";
         $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
         $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
+        
+        $heighligth = array();
+        $heighligth = (array) getHighlightByNid($nid);
+        $data_newslist[$home_list_count]['n_highlight'] = $heighligth;
+
         //$data_newslist[$home_list_count]['n_photo'] = $n_photo;
         //$data_newslist[$home_list_count]['n_video'] = $n_video;
         // photo list array

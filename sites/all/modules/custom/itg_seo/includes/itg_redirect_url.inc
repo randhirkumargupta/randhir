@@ -296,17 +296,47 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       drupal_goto($refurl, array(), 301);
   } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter.jsp' || $arg[1] == 'matchcenter-new.jsp')) && (!empty($_GET['matchid']))) {  // Pattern advanced_search.jsp?advsearch=1&searchtext=chinese+official+media&searchphrase=all&searchtype=archive
       $matchid = $_GET['matchid'];
-      $newmatchurl = $base_url.'/scorecard/matchcenter/'.$matchid;
-      drupal_goto($newmatchurl, array(), 301);
-  } else if ((!empty($arg[0]) && ($arg[0] == 'calendar')) && !empty($arg[1]) && (is_numeric($arg[1])) && !empty ($arg[2]) && (is_numeric($arg[2]))) {  // Pattern embed/@#trfg
-      $magazine_issue_id = $arg[1];
-      $mag_issue_id = get_new_seccat_by_mig_id($magazine_issue_id,'migrate_map_itgissue');
-      $query = db_select('node', 'n');
-      $query->fields('n', array('title'));  
-      $query->condition('n.nid', $mag_issue_id);
-      $magazine_title = $query->execute()->fetchField();
-      $url = 'magazine/'.format_date(strtotime($magazine_title),'custom', 'd-m-Y');
-      drupal_goto($url, array(), 301);
+      $paging = array('query' => array('matchid' => $matchid));
+      $newmatchurl = $base_url.'/scorecard/live-cricket-score';
+      drupal_goto($newmatchurl, $paging, 301);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter')) && (!empty($_GET['matchid']))) {  
+      $matchid = $_GET['matchid'];
+      $paging = array('query' => array('matchid' => $matchid));
+      $newmatchurl = $base_url.'/scorecard/live-cricket-score';
+      drupal_goto($newmatchurl, $paging, 301);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'scorecard')) && (!empty($arg[1]) && ($arg[1] == 'matchcenter')) && (!empty($_GET['matchid']))) {  
+      $matchid = $_GET['matchid'];
+      $paging = array('query' => array('matchid' => $matchid));
+      $newmatchurl = $base_url.'/scorecard/live-cricket-score';
+      drupal_goto($newmatchurl, $paging, 301);
+  } else if ((!empty($arg[0]) && ($arg[0] == 'comment')) && (!empty($arg[1]) && $arg[1] == 'story') && (!empty($arg[2]) && (is_numeric($arg[2]))) && (!empty($arg[3]) && (is_numeric($arg[3])))) {  // Pattern embed/@#trfg
+      $storyid = $arg[3];
+      $table = 'migrate_map_itgstorylist';
+      $newurl = getNewStoryUrl($storyid, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
+  } else if ((!empty($arg[0]) && ($arg[0] == 'content_mail.php')) && (!empty($_GET['option']) && $_GET['option'] == 'com_content') && (!empty($_GET['name']) && $_GET['name'] == 'print') && (!empty($_GET['id']))) {  // Pattern embed/@#trfg
+      $storyid = $_GET['id'];
+      $table = 'migrate_map_itgstorylist';
+      $newurl = getNewStoryUrl($storyid, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
+  } else if ((!empty($arg[0]) && ($arg[0] == 'Story')) && (!empty($arg[1]) && is_numeric($arg[1])) && !empty($arg[2]) && !empty($arg[3])) {  // Pattern embed/@#trfg
+      $storyid = $arg[1];
+      $table = 'migrate_map_itgstorylist';
+      $newurl = getNewStoryUrl($storyid, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
+  } else if ((!empty($arg[0]) && ($arg[0] == 'Video')) && (!empty($arg[1]) && is_numeric($arg[1])) && (!empty($arg[2]) && is_numeric ($arg[2])) && (!empty($arg[3]) && $arg[3] == 'Videos') && !empty($arg[4])) {  // Pattern embed/@#trfg
+      $videoid = $arg[1];
+      $table = 'migrate_map_itgvideogallery';
+      $newurl = getNewStoryUrl($videoid, $table);
+      if ($newurl) {
+        drupal_goto($newurl, array(), 301);
+      }
   } else if ((!empty($arg[0]) && ($arg[0] == 'calendar')) && ($arg[1] == 0) && (is_numeric($arg[1])) && !empty ($arg[2]) && (is_numeric($arg[2]))) {
       $year = $arg[2];
       $current_time = date('Y-m-d', strtotime(date($year . '-01-01')));
@@ -405,6 +435,14 @@ function itg_seo_url_inbound_alter(&$path, $original_path, $path_language) {
       if ($newurl) {
         drupal_goto($newurl, array(), 301);
       }
+    } else if(!empty($arg[2]) && $arg[2] == 'comparecollege.jsp') {
+      $year1 = $_GET['year1'];
+      if (!empty($year1)) {
+        $bestclgurl = FRONT_URL.'/'.$arg[0].'/'.$arg[1].'/compare-college/'. strtolower($_GET['stream']) . "/" . $_GET['year1'] . "-" . $_GET['year2'];
+      } else {
+        $bestclgurl = FRONT_URL.'/'.$arg[0].'/'.$arg[1].'/compare-college/' . $_GET['year'] . "-" . strtolower($_GET['stream1']) . "-" . strtolower($_GET['stream2']);
+      }
+      drupal_goto($bestclgurl, array(), 301);
     } else if ($arg[0] == 'node' && empty($arg[1])) {
       drupal_goto(FRONT_URL);
   }

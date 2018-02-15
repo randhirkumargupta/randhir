@@ -141,11 +141,14 @@ function generateNewsCategoryList($tid, $pageno) {
 
 
     //end
-
-    if (count($tid_list) > 0) {
-      $query->condition('ti.tid', $tid_list, 'IN');
+    if ($tid == 0 && count($tid_list) > 0) {
+        $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    else{
+        $query->condition('ti.tid', $tid, '=');
+    }
+    $interval = itg_app_time_interval($tid);    
+    $d1 = date('Y-m-d', strtotime("-".$interval." days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -212,6 +215,9 @@ function generateNewsCategoryList($tid, $pageno) {
       $news_list_array[$listcount]['n_pcategory_name'] = "$term_name";
       $news_list_array[$listcount]['n_rating'] = "";
       $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
+      $heighligth = array();
+      $heighligth = (array) getHighlightByNid($nid);      
+      $news_list_array[$listcount]['n_highlight'] = $heighligth;
       if ($type == "photogallery") {
         $node_data = node_load($nid);
 

@@ -10,7 +10,7 @@
  */
 function protected_pages_enter_password($form, &$form_state) {
   if (!isset($_GET['destination']) || empty($_GET['protected_page']) || !is_numeric($_GET['protected_page'])) {
-    watchdog('protected_page', 'Illegal call to /protected-page', array(), WATCHDOG_WARNING);
+    //watchdog('protected_page', 'Illegal call to /protected-page', array(), WATCHDOG_WARNING);
     drupal_access_denied();
     exit();
   }
@@ -21,7 +21,7 @@ function protected_pages_enter_password($form, &$form_state) {
       ->execute()
       ->fetchField();
   if (!$pid) {
-    watchdog('protected_page', 'Invalid pid (@pid) used with /protected-page', array('@pid' => $_GET['protected_page']), WATCHDOG_WARNING);
+    //watchdog('protected_page', 'Invalid pid (@pid) used with /protected-page', array('@pid' => $_GET['protected_page']), WATCHDOG_WARNING);
     drupal_access_denied();
     exit();
   }

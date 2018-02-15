@@ -535,7 +535,7 @@ function itg_content_inactive_videogallery() {
   $itg_query->condition('expiry.field_story_expiry_date_value', $current_time, '<');
   $itg_query->isNotNull('expiry.field_story_expiry_date_value');
   $itg_result = $itg_query->execute()->fetchAll();
-  itg_watchdog("nodes_expiry" , $itg_result);
+  //itg_watchdog("nodes_expiry" , $itg_result);
   foreach ($itg_result as $itg_val) {
     $node_data = node_load($itg_val->nid);
     $nodeid[] = $node->nid;
@@ -546,7 +546,7 @@ function itg_content_inactive_videogallery() {
     node_save($node_data);
     itg_widget_handle_unpublished_node($node->nid);
   }
-  itg_watchdog("nodes_expiry" , $nodeid);
+  //itg_watchdog("nodes_expiry" , $nodeid);
 }
 
 /**

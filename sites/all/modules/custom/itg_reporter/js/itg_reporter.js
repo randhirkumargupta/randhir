@@ -12,8 +12,8 @@
             var politician = settings.itg_reporter.settings.politician;
             var reporter = settings.itg_reporter.settings.reporter;
             var cmpny = $('#edit-field-byline-company-und').val();
-            var dprt = $('#edit-field-byline-department-und').val();
-
+            var dprt = $('#edit-field-byline-department-und').val();            
+            $('.form-item-field-author-report-und-author-report>label').hide();
             var intialcelebrityvalue = $('#edit-field-celebrity-pro-occupation-und').val();
             if (intialcelebrityvalue) {
                 var initialhasexist = intialcelebrityvalue.indexOf(anchor) != -1;
@@ -52,10 +52,17 @@
                 $('#edit-field-reporter-profile-type').show();
                 $('#edit-field-byline-company').show();
                 $('#edit-field-byline-department').show();
+                //$('#edit-field-author-report-und-author-report').show();
+                $('.form-item-field-author-report-und-author-report').show();
+                $('.form-item-field-author-report-und>label').show();
             } else {
                 $('#edit-field-reporter-profile-type').hide();
                 $('#edit-field-byline-company').hide();
                 $('#edit-field-byline-department').hide();
+                //$('#edit-field-author-report-und-author-report').hide();
+                $('.form-item-field-author-report-und-author-report').hide();
+                $('.form-item-field-author-report-und>label').hide();
+                
             }
             // Hide by default movie name field.
             $('#edit-field-reporter-movie-name').hide();
@@ -98,12 +105,18 @@
                     $('#edit-field-reporter-profile-type').show();
                     $('#edit-field-byline-company').show();
                     $('#edit-field-byline-department').show();
+                    //$('#edit-field-author-report-und-author-report').show();
+                    $('.form-item-field-author-report-und-author-report').show();
+                    $('.form-item-field-author-report-und>label').show();
                 } else {
                     $('#edit-field-reporter-profile-type').hide();
                     $("#edit-field-reporter-profile-type option:selected").prop('selected', false);
                     $('#edit-field-byline-company').hide();
                     //$("#edit-field-byline-company option:selected").prop('selected', false);
                     $('#edit-field-byline-department').hide();
+                    //$('#edit-field-author-report-und-author-report').hide();
+                    $('.form-item-field-author-report-und-author-report').hide();
+                    $('.form-item-field-author-report-und>label').hide();
                     //$("#edit-field-byline-department option:selected").prop('selected', false);
                 }
                 // Show hide logic for career graph field.

@@ -314,11 +314,19 @@ function itg_quiz_views_pre_render(&$view) {
 function itg_quiz_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
    if ($form['#id'] == 'views-exposed-form-manage-quiz-page' || $form['#id'] == 'views-exposed-form-manage-quiz-page-1' || $form['#id'] == 'views-exposed-form-manage-quiz-page-2') {     
      // Call function autocomplete to show matching titles.
-     $form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
+     //$form['title']['#autocomplete_path'] = 'content-title-list/quiz/autocomplete';
      $form['title']['#attributes'] = array('placeholder' => t('Title'));
      $form['nid']['#autocomplete_path'] = 'content-nid-list/quiz/autocomplete';
      $form['nid']['#attributes'] = array('placeholder' => t('Quiz id'));
    }
+   
+    if ($form['#id'] == 'views-exposed-form-manage-quiz-page') {
+        $form['title']['#autocomplete_path'] = 'content-state-title-list/quiz/published/autocomplete';
+    } else if ($form['#id'] == 'views-exposed-form-manage-quiz-page-1') {
+        $form['title']['#autocomplete_path'] = 'content-state-title-list/quiz/draft/autocomplete';
+    } else if ($form['#id'] == 'views-exposed-form-manage-quiz-page-2') {
+        $form['title']['#autocomplete_path'] = 'content-state-title-list/quiz/unpublished/autocomplete';
+    }
 }
 
 /*******************************Node Related hooks*****************************/
@@ -767,7 +775,7 @@ function itg_quiz_quiz_form_submit($form, &$form_state) {
     $user_type = 'authenticated';
     $user_name = $user->name;
     $user_alt_mail = itg_get_user_alt_email($user->uid);
-    watchdog('quiz_user_alt_email', $user_alt_mail);
+    //watchdog('quiz_user_alt_email', $user_alt_mail);
     if ((strpos($user->mail, '@twitter.com') !== false || strpos($user->mail, '@facebook.com') !== false) && !empty($user_alt_mail)) {
       $user_mail = $user_alt_mail;
     }
