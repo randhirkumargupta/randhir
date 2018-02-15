@@ -769,7 +769,7 @@ function generateVideoDetail($nid) {
             $changed_datetime = "";
         }
         $title = strip_tags($title);
-        //$desc = strip_tags($desc);
+        $desc = strip_tags($desc);
         $photo_list_array[$listcount]['v_id'] = "$nid";
         $photo_list_array[$listcount]['v_title'] = "$title";
         $photo_list_array[$listcount]['v_credit'] = "$reporter_node";
