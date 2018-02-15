@@ -11,7 +11,6 @@ define('HOME_PAGE_JSON_NEWS_LIST_INDIA', 1206578);
 /* till middleware implementation */
 define('HOME_PAGE_JSON_NEWS_LIST_WORLD', 1206577);
 /* till middleware implementation */
-define('ANCHOR_TID', 285903);
 /* till middleware implementation */
 define('AUTHOR_TID', 285750);
 /* till middleware implementation */
