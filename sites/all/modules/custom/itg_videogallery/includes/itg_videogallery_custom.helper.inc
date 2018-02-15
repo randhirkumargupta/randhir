@@ -295,6 +295,7 @@ function itg_videogallery_custom_submit($form, &$form_state) {
  */
 function itg_videogallery_custom_validate($form, &$form_state) {
 //schedule date & expiry date validation
+  $node = $form_state['node'];
   $is_migrate_validate = 0;
   $current_time = time();
   $schedule_date = strtotime($form_state['values']['field_story_schedule_date_time'][LANGUAGE_NONE][0]['value']);
@@ -320,7 +321,7 @@ function itg_videogallery_custom_validate($form, &$form_state) {
     }
   }
   if ($form_state['values']['field_story_source_type'][LANGUAGE_NONE][0]['value'] != 'migrated') {
-    if (empty($fids)) {
+    if (empty($fids) && $node->status == 1) {
       form_set_error('field_video_upload', t("Please select video."));
     }
   }

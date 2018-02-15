@@ -528,7 +528,15 @@ $hide_widget = '';
                                 <div class="col-md-12 col-sm-6 itg-layout-340">
                                     <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Tweets'); ?></strong> )</div>
                                     <div class="itg-widget">
-                                        <div class="droppable <?php print $gray_bg_layout; ?>">
+                                        <?php									  
+                                          if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-10']['widget']))){
+                                            $hide_widget = 'hide-widget';
+                                          }
+                                          else{
+                                            $hide_widget = '';
+                                          }
+                                        ?>
+                                        <div class="droppable <?php print $gray_bg_layout; ?> <?php print $hide_widget; ?>">
                                             <div class="widget-wrapper <?php print $widget_data['itg-block-10']['widget_name'] . $widget_data['itg-block-10']['widget_display_name']; ?>">
                                                 <?php if (($theme != 'itgadmin' || isset($preview)) && isset($widget_data['itg-block-10']['block_title'])) { ?>
                                                   <span class="widget-title"><?php print $widget_data['itg-block-10']['block_title']; ?></span>
