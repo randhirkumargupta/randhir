@@ -528,7 +528,7 @@ $hide_widget = '';
                                 <div class="col-md-12 col-sm-6 itg-layout-340">
                                     <div class="widget-help-text"><?php print t('Special widgets'); ?> ( <strong><?php print t('Tweets'); ?></strong> )</div>
                                     <div class="itg-widget">
-										<?php									  
+                                        <?php									  
                                           if(($theme != 'itgadmin' || isset($preview)) && (!isset($widget_data['itg-block-10']['widget']))){
                                             $hide_widget = 'hide-widget';
                                           }
