@@ -80,7 +80,7 @@
     width: 1px;
 }
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-   background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/scrol-but.png) repeat-y 0 0;
+   background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/scrol-but.png) repeat-y 0 0;
 }
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
     border-radius: 10px;
@@ -94,7 +94,7 @@ box-shadow:         0px -2px 0px 0px rgba(50, 50, 50, 0.75);
 border-bottom:1px solid #B3B3B3;
 }
 .mCSB_scrollTools .mCSB_draggerRail {
-    background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/scroller-bg.png) repeat-y 0 0;
+    background: url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/scroller-bg.png) repeat-y 0 0;
 }
 .mCSB_scrollTools .mCSB_draggerRail {
     border-radius: 10px;
@@ -116,14 +116,14 @@ border-bottom:1px solid #B3B3B3;
 .desc{float:left; width:135px; padding:5px;}
 .lost_won{width:50px; float:left; margin-left:10px;}
 .desc-title{ font-weight:bold; font-size:15px; color:#969696}
-.lost{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg) no-repeat 0 16px; width:45px; height:78px;}
+.lost{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/aajtak/elections/2014/lost.jpg) no-repeat 0 16px; width:45px; height:78px;}
 .won{ background:url(won.jpg) no-repeat  0 16px; width:45px; height:78px;}
 .candidate-name{ font-size:15px; color:#969696; padding-left:5px;}
 .party-txt{ padding-left:5px;}
 .resulttxt{};
-.resulttxt.losstxt{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Lost3.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
-.losstxt{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Lost3.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
-.resulttxt.wontxt{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Won.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
+.resulttxt.losstxt{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Lost3.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
+.losstxt{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Lost3.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
+.resulttxt.wontxt{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election_delhi_2015/Won.png) no-repeat 0 0; width:45px; height:57px; text-indent:-99999px;}
 .resulttxt{ margin:0;}
 </style>
 </head>
@@ -134,7 +134,7 @@ border-bottom:1px solid #B3B3B3;
  
 </ul></div>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
 		(function($){
 			$(window).load(function(){
