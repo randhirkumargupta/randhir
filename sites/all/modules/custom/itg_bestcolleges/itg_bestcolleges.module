@@ -16,7 +16,7 @@ function itg_bestcolleges_init() {
   if ($path_request_array[0] == 'bestcolleges') {
     drupal_add_css(drupal_get_path('module', 'itg_bestcolleges') . '/css/itg_bestcollege.css', array('type' => 'file'));
     drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/custom.js', array('type' => 'file', 'scope' => 'footer'));
-    drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/scroll_top.js', array('type' => 'file', 'scope' => 'footer'));
+    // drupal_add_js(drupal_get_path('module', 'itg_bestcolleges') . '/js/scroll_top.js', array('type' => 'file', 'scope' => 'footer'));
   }
 }
 
@@ -128,6 +128,37 @@ function bestcollege_migrate_video() {
  * @return type
  */
 function itg_bestcolleges_deatils() {
+  $arg = arg();
+  $tid = !empty($arg[3]) ? $arg[3] : '';
+  
+  if (!empty($tid)) {
+	  $term = taxonomy_term_load($tid);
+	  $title = $term->metatags[LANGUAGE_NONE]['title']['value'];
+	  $description = $term->metatags[LANGUAGE_NONE]['description']['value'];
+	  $keywords = $term->metatags[LANGUAGE_NONE]['keywords']['value'];
+	  drupal_set_title($title);
+	  $html_head = array(
+		'description' => array(
+		  '#tag' => 'meta',
+		  '#attributes' => array(
+			'name' => 'description',
+			'content' => $description,
+		  ),
+		  '#weight' => -10,
+		),
+		'keywords' => array(
+		  '#tag' => 'meta',
+		  '#attributes' => array(
+			'name' => 'keywords',
+			'content' => $keywords,
+		  ),
+		  '#weight' => -10,
+		),
+	  );
+	  foreach ($html_head as $key => $data) {
+		drupal_add_html_head($data, $key);
+	  }	  
+  }	    
   return theme('itg_bestcolleges_template');
 }
 
