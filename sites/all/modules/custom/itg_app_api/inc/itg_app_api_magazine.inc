@@ -319,7 +319,7 @@ function magazineCoverstoriesPageRerourceValueList() {
   $query_issue->condition('n.status', 1);
   $query_issue->condition('n.type', 'issue');
   $query_issue->condition('n.nid', $magazine_nids, 'IN');
-  //$query_issue->range($range_min, $range_max);
+  $query_issue->range($range_min, $range_max);
 
   $result_issue = $query_issue->execute()->fetchAll(PDO::FETCH_ASSOC);
   foreach ($result_issue as $reskey => $resvalue) {
