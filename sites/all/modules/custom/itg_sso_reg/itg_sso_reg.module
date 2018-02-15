@@ -546,9 +546,9 @@ function itg_sso_itgredirect() {
   $arg = arg();
   drupal_add_http_header('Cache-Control', 'no-store');
   drupal_add_css(drupal_get_path('module', 'itg_sso_reg') . '/css/itg_login_popup.css');
-  watchdog('user_page', 'pass');
+  //watchdog('user_page', 'pass');
   $redirect = base64_decode($arg[1]);
-  watchdog('redirect_sso', $redirect);
+  //watchdog('redirect_sso', $redirect);
   $loader = $base_url . '/sites/all/themes/itg/images/loader.svg';
   $login_html = '<div class="please-wait-loading"><span><img height="50" width="50" class="profile-loader" align="center" src="' . $loader . '" alt="Loading..." /> Please wait while we are logging you in..</span></div>';
   

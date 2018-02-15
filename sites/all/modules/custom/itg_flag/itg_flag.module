@@ -237,11 +237,11 @@ function itg_user_activity_front() {
  * Implements itg_fb_share_callback().
  */
 function itg_fb_share_callback() {
-  watchdog('fb_insert_callback', '<pre>'.print_r(arg(), true).'</pre>');
+  //watchdog('fb_insert_callback', '<pre>'.print_r(arg(), true).'</pre>');
   $arg = arg();
   $count = 0;
   if (!empty($arg[1])) {
-    watchdog('fb_insert', $arg[1]);
+    //watchdog('fb_insert', $arg[1]);
     $query = db_select('itg_node_share_count', 'insc')
         ->fields('insc', array('share_count'))
         ->condition('insc.nid', $arg[1], '=');
@@ -254,7 +254,7 @@ function itg_fb_share_callback() {
   }
   
   if (!empty($arg[1]) && $arg[2] > 0) {
-    watchdog('fb_mongo_insert', $arg[2]);
+    //watchdog('fb_mongo_insert', $arg[2]);
     $activity_date = date('d-m-Y');
     $activity_date_time = date('d-m-Y h:i:s');
     $con = mongodb();

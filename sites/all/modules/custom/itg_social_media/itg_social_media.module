@@ -748,7 +748,7 @@ function itg_social_media_facebook_post($fid, $desc, $type, $node, $stime) {
       $pre_save['social_media'] = 'facebook ' . $type;
       $pre_save['status'] = 1;
       $mtype = $type == 'photos' ? 'Image' : 'Video';
-      watchdog('Facebook pre', '<pre>' . print_r($pre_save, TRUE) . '</pre>');
+      //watchdog('Facebook pre', '<pre>' . print_r($pre_save, TRUE) . '</pre>');
       // INSERT INTO DATABASE    
       drupal_write_record('itg_social_media_logs', $pre_save);
 
@@ -1000,7 +1000,7 @@ function itg_social_media_twitter_photo_post($fid, $desc, $node, $is_scheduled_i
       'media_ids' => $media_id
     ]);
 
-    watchdog('twitter image', '<pre>' . print_r($reply, TRUE) . '</pre>');
+    //watchdog('twitter image', '<pre>' . print_r($reply, TRUE) . '</pre>');
     if (isset($reply->id) && $is_scheduled_id === NULL) {
       $pre_save = array(
         'nid' => $node->nid,
@@ -1124,7 +1124,7 @@ function itg_social_media_tvideo_post($fid, $desc, $node, $is_scheduled_id = NUL
       'media_ids' => $media_id
     ]);
 
-    watchdog('twitter video', '<pre>' . print_r($reply, TRUE) . '</pre>');
+    //watchdog('twitter video', '<pre>' . print_r($reply, TRUE) . '</pre>');
     if (isset($reply->id) && $is_scheduled === NULL) {
       $pre_save = array(
         'nid' => $node->nid,

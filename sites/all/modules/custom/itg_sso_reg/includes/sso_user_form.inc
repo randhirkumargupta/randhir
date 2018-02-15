@@ -618,7 +618,7 @@ function itg_sso_reg_multistep_form_submit($form, &$form_state) {
         }
       }
       catch (Exception $e) {
-        watchdog('error on user save', $e->getMessage());
+        //watchdog('error on user save', $e->getMessage());
         drupal_set_message('Error:' . $e->getMessage(), 'error');
       }
     }

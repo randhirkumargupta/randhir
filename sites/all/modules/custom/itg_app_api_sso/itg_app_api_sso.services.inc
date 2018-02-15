@@ -886,7 +886,7 @@ function itg_rapid_api_login_request_sso($token) {
   if ($user->uid) {
     return $user;
   }
-  watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+  //watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
   return services_error(t('Wrong username or password.'), 401);
 }
 
@@ -997,7 +997,7 @@ function itg_rapid_api_signup_sso($token) {
     }
   }
   catch (Exception$e) {
-    watchdog('error on user save', $e->getMessage());
+    //watchdog('error on user save', $e->getMessage());
     drupal_set_message('Error:' . $e->getMessage(), 'error');
     $account = $e;
   }
@@ -1308,7 +1308,7 @@ function itg_rapid_api_log_out_sso($token) {
   $user_id = $_POST['user_id'];
   $user = user_load_by_name($user_id);
 
-  watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+  //watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
 
   $original_session_state = drupal_save_session();
   drupal_save_session(TRUE);

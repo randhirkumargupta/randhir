@@ -128,7 +128,7 @@ function itg_story_assign_to_widget($nid, array $story_widget, $category_tid, $p
     foreach ($previous_story_assign as $row) {
       $widget_value = $row['value'];
       if ($widget_value != $result[$row['value']]) {
-        itg_watchdog('widget_value_inner', $widget_value);
+        //itg_watchdog('widget_value_inner', $widget_value);
         if (!empty($widget_value)) {
           itg_widget_delete_data_from_widget($widget_value, $nid);
         }

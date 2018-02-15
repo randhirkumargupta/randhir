@@ -33,7 +33,7 @@ function itg_syndication_generate_xml($data) {
     $delivery_mode_type = 'web_url';
   }
 
-  watchdog("Syndication", "delivery_mode_type : $delivery_mode_type");
+  //watchdog("Syndication", "delivery_mode_type : $delivery_mode_type");
   // Decide sharing mode
   switch ($delivery_mode_type) {
     // 1. Fetch web URL (our server)
@@ -228,7 +228,7 @@ function get_syndication_content_details() {
     if (!empty($itg_val->cron_details)) {
       $data = unserialize($itg_val->cron_details);
       $data['fid'] = $itg_val->fid;
-      watchdog("Syndication", "Rule id : $itg_val->id");
+      //watchdog("Syndication", "Rule id : $itg_val->id");
       //pr($itg_val->last_cron_time);
       $content_value = get_content_id_for_syndication($data, $itg_val->last_cron_time);
       //code for update cron time

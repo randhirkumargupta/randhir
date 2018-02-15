@@ -184,7 +184,7 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
     global $user;
     module_load_include('inc', 'itg_akamai', 'includes/akamai_purge');
     if (variable_get('itg_akamai_disabled', FALSE)) {
-      watchdog('itg_akamai', 'Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.');
+      //watchdog('itg_akamai', 'Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.');
       drupal_set_message(t('Request to clear paths ignored because clearing is disabled. Check ITG Akamai module settings.'), 'warning');
       return FALSE;
     }
@@ -256,13 +256,13 @@ function itg_akamai_clear_url($paths_in, $params = array(), $node = NULL) {
       $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
       $request_success_flag = 1;
       // Passing / Saving akamai purging log to drupal watchdog 
-      watchdog('ITG-Akamai log', 'Url have been purged successfully! Data =>' . json_encode($data_for_log));
+      //watchdog('ITG-Akamai log', 'Url have been purged successfully! Data =>' . json_encode($data_for_log));
     }
     catch (Exception $e) {
       $response_data_decoded = json_decode($e->getMessage());
       $data_for_log = ItgAkamaiUtility::itgAkamaiSetDataForLog($data, $e->getMessage(), $user->uid, $response_data_decoded->httpStatus, 0);
       $activity_log = ItgAkamaiUtility::itgAkamaiSetActivityLog($data_for_log);
-      watchdog('ITG-Akamai log', 'OOPS unable to purge URL and error is : ' . $e->getMessage());
+      //watchdog('ITG-Akamai log', 'OOPS unable to purge URL and error is : ' . $e->getMessage());
       drupal_set_message(t("OOPS unable to purge URL and error is :" . $e->getMessage()), 'error');
       $request_success_flag = 0;
     }
