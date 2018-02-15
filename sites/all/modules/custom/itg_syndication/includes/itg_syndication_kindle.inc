@@ -267,7 +267,7 @@ function _create_section_file($section_with_nids = array(), $directory_name) {
         foreach($fresh_sections_with_nids as $section_name => $node_array) {
             // Section file started
             $section_file_name = "Section_" . _get_correct_file_name($section_name) . ".xml";
-            itg_watchdog("section_node_count", array($section_file_name, $node_array));
+            //itg_watchdog("section_node_count", array($section_file_name, $node_array));
             $xml = "<?xml version='1.0' encoding='utf-8'?>";
             $xml .= "<rss version='2.0'>";
             $xml .= "<channel>";
@@ -558,7 +558,7 @@ function _create_manifest_file($section_array = array(), $section_with_nids_arra
     $data['file_name'] = 'manifest.xml';
     // Get sections which have valid story , which have not future story and expried story.
     $fresh_sections = array_keys(_get_sections_with_corrected_nids($section_with_nids_array));
-    itg_watchdog("sections_with_nids", array($fresh_sections, $section_array));
+    //itg_watchdog("sections_with_nids", array($fresh_sections, $section_array));
     if(!empty($section_array)) {
         $current_time = date(sprintf('Y-m-d\TH:i:s%s', substr(microtime(), 1, 4)));
         $xml = "<?xml version='1.0' encoding='utf-8'?><rss version='2.0'>";

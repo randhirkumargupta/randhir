@@ -91,7 +91,7 @@ function userloginFB_sso($uname, $uidget, $password) {
       return $return;
     }
   }
-  watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+  //watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
   return services_error(t('Wrong username or password.'), 401);
 }
 
@@ -182,7 +182,7 @@ function userSignupFB_sso($uname_social, $uid_social, $password) {
     }
   }
   catch (Exception$e) {
-    watchdog('error on user save', $e->getMessage());
+    //watchdog('error on user save', $e->getMessage());
     drupal_set_message('Error:' . $e->getMessage(), 'error');
     $account = $e;
   }
