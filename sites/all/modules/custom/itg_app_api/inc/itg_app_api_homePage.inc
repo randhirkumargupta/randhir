@@ -10,267 +10,240 @@
  * @return array
  */
 function homePageJson() {
+  global $order;
   $data = array();
   $data_packagelist = array();
   $data_topstories = array();
   $data_news = array();
   $data_magazine = array();
+  $order = "1";
+  $data_cat_news = array();
+  $data_poll = array();
+  $data_topstories = array();
+  $data_middleware = array();
+  $total_count = 0;
 
-  $data_packagelist_india = homePageJsonPackagelist_india();  
-  $data_topstories = topstoriesList('home');
-  $data_news_india = homePageJsonNewslist_india();
+  $middleware_packages_config = fetchMasterConfigData('packages_config_options');
+  if ($middleware_packages_config == 1) {
+    $data_middleware = home_page_packages();
+    $total_count += count($data_middleware);
+  }
 
-  $data_news_lifestyle = homePageJsonNewslist_lifestyle();
+  $middleware_topstories_config = fetchMasterConfigData('top_stories_config_options');
+  // enable
+  if ($middleware_topstories_config == 1) {
+    //$data_topstories = homepage_topstories();
+    $data_topstories = topstoriesList('home');
+    $total_count += count($data_topstories);
+  }
 
-  $data_news_world = homePageJsonNewslist_world();
-  $data_magazine = homePageJsonMagazine();
-  $data_poll = homePageJsonPoll();
+  $middleware_cat_config = fetchMasterConfigData('categories_config_options');
+  // enable
+  if ($middleware_cat_config == 1) {
+    $data_cat_news = home_page_newslist_cat();
+    $total_count += count($data_cat_news);
+  }
 
-  $data['status_code'] = "1";
-  $data['status_message'] = "customised_message";
-  $data['data'][0] = $data_packagelist_india;
-  
-  $data['data'][1] = $data_topstories;
-  $data['data'][2] = $data_news_india;
+  $middleware_magazine_config = fetchMasterConfigData('magazine_config_options');
+  // enable
+  if ($middleware_magazine_config == 1) {
+    $data_magazine = homePageJsonMagazine();
+    $total_count += count($data_magazine);
+  }
 
-  $data['data'][3] = $data_news_lifestyle;
+  $middleware_polls_config = fetchMasterConfigData('polls_config_options');
+  // enable
+  if ($middleware_polls_config == 1) {
+    $data_poll = homePageJsonPoll();
+    $total_count += count($data_poll);
+  }
 
-  $data['data'][4] = $data_news_world;
-  $data['data'][5] = $data_magazine;
-  $data['data'][6] = $data_poll;
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
+  if ($total_count > 0) {
+    $data['status_code'] = "1";
+    $data['status_message'] = "$success_status_message";
+  }
+  else {
+    $data['status_code'] = "0";
+    $data['status_message'] = "";
+  }
+  $order_config = homepage_order_config();
+  foreach ($order_config as $order_data) {
+    if ($order_data['config_key'] == 'homeapi_order_packages') {
+      if (count($data_middleware) > 0) {
+        $data['data'][] = $data_middleware;
+      }
+    }
+    elseif ($order_data['config_key'] == 'homeapi_order_topstories') {
+      if (count($data_topstories) > 0) {
+        $data['data'][] = $data_topstories;
+      }
+    }
+    elseif ($order_data['config_key'] == 'homeapi_order_categories') {
+      if (count($data_cat_news) > 0) {
+        $data['data'][] = $data_cat_news;
+      }
+    }
+    elseif ($order_data['config_key'] == 'homeapi_order_magazines') {
+      if (count($data_magazine) > 0) {
+        $data['data'][] = $data_magazine;
+      }
+    }
+    elseif ($order_data['config_key'] == 'homeapi_order_polls') {
+      if (count($data_poll) > 0) {
+        $data['data'][] = $data_poll;
+      }
+    }
+  }
+  if (count($data) == 2) {
+    $data['data'] = array();
+  }
   return $data;
+}
+
+/**
+ * Get the order of the home api middleware from backend
+ *
+ * @return array
+ */
+function homepage_order_config() {
+  $key_list = array('homeapi_order_packages', 'homeapi_order_topstories', 'homeapi_order_categories', 'homeapi_order_magazines', 'homeapi_order_polls');
+  $query = db_select('itg_app_master_config_internal', 'con');
+  $query->fields('con');
+  $query->condition('con.config_key', $key_list, 'IN');
+  $query->orderBy('config_val', 'ASC');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+/**
+ * Get Package category listing from the middleware
+ *
+ * @return type
+ */
+function homepage_topstories() {
+  $top_story_list = array();
+  $top_story_data = fetchMasterConfigData('top_stories_management');
+  $top_story_limit = isset($top_story_data) ? $top_story_data : '10';
+
+  $top_story_list = homePageJsonTopstories($top_story_limit);
+  return $top_story_list;
+}
+
+/**
+ * Get Package category listing from the middleware
+ *
+ * @return type
+ */
+function home_page_newslist_cat() {
+  $query = db_select('itg_app_middleware', 'am');
+  $query->fields('am', array('ids'));
+  $query->condition('am.identifier', 'categories_options');
+  $query->condition('am.ids', '0', '!=');
+  $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  //p($query_results);
+  $cat_news_list = array();
+  foreach ($query_results as $tid) {
+    $cat_news_list[] = homePageCatNewslist($tid['ids']);
+  }
+  return $cat_news_list;
+  //p($list_arr);
+}
+
+/**
+ * Get Magazine node listing from the middleware
+ *
+ * @return type
+ */
+function home_page_magazine_node_list() {
+  $mag_news_list = array();
+
+  $query = db_select('itg_app_middleware', 'am');
+  $query->fields('am', array('ids'));
+  $query->condition('am.identifier', 'magazine_options');
+  $query->condition('am.ids', '0', '!=');
+  $result_query = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($result_query as $result_data) {
+    $mag_news_list[] = $result_data['ids'];
+  }
+  return $mag_news_list;
+}
+
+/**
+ * Get Magazine node listing from the middleware
+ *
+ * @return type
+ */
+function home_page_polls_node_list() {
+  $polls_node_list = array();
+
+  $query = db_select('itg_app_middleware', 'am');
+  $query->fields('am', array('ids'));
+  $query->condition('am.identifier', 'poll_options');
+  $query->condition('am.ids', '0', '!=');
+  $result_query = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  foreach ($result_query as $result_data) {
+    $polls_node_list[] = $result_data['ids'];
+  }
+  return $polls_node_list;
+}
+
+/**
+ * Get Package category listing from the middleware
+ *
+ * @return type
+ */
+function home_page_packages() {
+  $query = db_select('itg_app_middleware', 'am');
+  $query->fields('am', array('ids'));
+  $query->condition('am.identifier', 'itg_package');
+  $query->condition('am.ids', '0', '!=');
+  $query_results = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+
+  $list_arr = array();
+  foreach ($query_results as $tid) {
+    $list_arr[] = homePageJsonPackagelist($tid['ids']);
+  }
+  return $list_arr;
 }
 
 /**
  * main function for generate homePageJsonPackagelist_india array
  *
- * @return array
- */
-function homePageJsonPackagelist_india() {
-
-  global $base_url;
-  $data_news = array();
-  $data_newslist = array();
-  $n_photo = array();
-  $n_video = array();
-  $n_polls = array();
-  $n_rating = array();
-  $tid = HOME_PAGE_JSON_ELECTION;
-  $term_m = taxonomy_term_load($tid);
-  $term_name_m = $term_m->name;
-  $node_count = "";
-  $output = "";
-  $data = array();
-  $tid_list = array();
-  $listcount = 0;
-  $range_max = 3;
-  $range_min = 0;
-  if (!$pageno == 0) {
-    $range_min = $pageno * $range_max;
-  }
-
-  $order_by = 'ASC';
-  $type = array("videogallery", "photogallery", "story");
-  $news_list_array = array();
-  $photolist = array();
-  $videolist = array();
-  $loop_count = 0; {
-    $listcount = 0;
-    // code vid=14  start
-    if ($tid > 0) {
-      $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-    }
-    else {
-      $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-    }
-    $term_tree_count = count($term_tree);
-    if ($term_tree_count) {
-      foreach ($term_tree as $key => $value) {
-        $tid_list[] = $value->tid;
-      }
-    }
-    $tid_list = array();
-    $tid_list[] = $tid;
-    // code vid=14  end
-    $data_news['id'] = "$tid";
-    $data_news['order'] = "1";
-    $data_news['type'] = "packagelist";
-    $data_news['title'] = "$term_name_m";
-    $data_news['label'] = "$term_name_m";
-    $data_news['show_label'] = "0";
-    $data_news['n_template_id'] = "1";
-    // select node belong from current term id or child term id
-    $query = db_select('taxonomy_index', 'ti');
-    $query->leftJoin('node', 'n', 'n.nid=ti.nid');
-    //join  for field value
-    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
-    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
-    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
-    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
-    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
-    $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
-
-    $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-
-    $query->fields('eli_file', array('uri'));
-    $query->fields('li_file', array('uri'));
-    $query->fields('mi_file', array('uri'));
-    $query->fields('si_file', array('uri'));
-    $query->fields('esi_file', array('uri'));
-
-    $query->fields('mi', array('field_story_medium_image_fid'));
-    $query->fields('si', array('field_story_small_image_fid'));
-    $query->fields('rc', array('field_common_related_content_value'));
-    $query->fields('li', array('field_story_large_image_fid'));
-
-    $query->fields('kt', array('field_story_kicker_text_value'));
-    $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-    //end
-    if (count($tid_list) > 0) {
-      $query->condition('ti.tid', $tid_list, 'IN');
-    }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
-    $d2 = date(strtotime($d1));
-    $query->condition('n.created', $d2, '>=');
-    $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($result as $reskey => $resvalue) {
-      $title = $resvalue['title'];
-      $type = $resvalue['type'];
-      $nid = $resvalue['nid'];
-      $created = $resvalue['created'];
-      $changed = $resvalue['changed'];
-      $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-      $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = $base_url . "/" . $alias;
-      $field_video_duration_value = $resvalue['field_video_duration_value'];
-      // file url
-      $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
-      $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-      $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
-
-      //related content
-      $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
-      $comment_cont = getCommentsCount($nid);
-
-      // create date formating
-      $firebase_url = get_node_firebase_weburl($nid);
-
-      if ($created) {
-        $create_datetime = date("Y-m-d H:i:s", $created);
-        $create_date = date("Y-m-d H:i:s", $created);
-      }
-      else {
-        $create_datetime = "";
-        $create_date = "";
-      }
-      if ($changed) {
-        $changed_datetime = date("Y-m-d H:i:s", $changed);
-      }
-      else {
-        $changed_datetime = "";
-      }
-
-      // custom function for get img caption
-      $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
-      // custom function for get img byline
-      $byline = getImgByline($resvalue['field_story_medium_image_fid']);
-      $is_developing = 0;
-      $conf = getStoryConfigVal($nid);
-      if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
-        $is_developing = 1;
-      }
-      $prime_cat = getNodePrimeCatByNid($nid);
-      $data_newslist[$listcount]['n_id'] = "$nid";
-      $data_newslist[$listcount]['n_type'] = "$type";
-      $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
-      $data_newslist[$listcount]['n_is_sponsored'] = "0";
-      $data_newslist[$listcount]['n_share_link'] = "$firebase_url";
-      $data_newslist[$listcount]['n_title'] = "$title";
-      $data_newslist[$listcount]['n_description'] = "$field_story_kicker_text_value";
-      $data_newslist[$listcount]['n_pcategory_id'] = "$prime_cat->tid";
-      $data_newslist[$listcount]['n_pcategory_name'] = "$prime_cat->name";
-      $data_newslist[$listcount]['n_comment_count'] = "$comment_cont";
-      $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
-      $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
-      $data_newslist[$listcount]['n_image_credit'] = "$byline";
-      $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
-      // photo list array
-      if ($type == "photogallery") {
-        $photolist = getPhotolist($nid);
-      }
-      $data_newslist[$listcount]['n_photo'] = (array) $photolist;
-      // re-insalize photolist
-      $photolist = array();
-
-      // video list array
-      if ($type == "videogallery") {
-        $videolist = getVideolist($nid);
-      }
-      $data_newslist[$listcount]['n_video'] = (array) $videolist;
-      // re-insalize vediolist
-      $videolist = array();
-
-      // homepage.inc
-      $n_polls = getPolllist($node);
-      // story.inc
-      $n_rating = getRating($node);
-      // homepage.inc
-      $n_magazine = array();
-
-      $data_newslist[$listcount]['n_polls'] = $n_polls;
-      $data_newslist[$listcount]['n_rating'] = $n_rating;
-      $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-
-      $listcount++;
-    }
-  }
-
-  $data_news['news'] = (array) $data_newslist;
-
-  return $data_news;
-}
-
-/**
- * main function for generate homePageJsonPackagelist_lifestyle array
+ * @param int $tid term id
  *
  * @return array
  */
-function homePageJsonPackagelist_lifestyle() {
+function homePageJsonPackagelist($tid) {
 
-  global $base_url;
+  global $base_url, $order;
   $data_news = array();
   $data_newslist = array();
   $n_photo = array();
   $n_video = array();
   $n_polls = array();
   $n_rating = array();
-  $tid = HOME_PAGE_JSON_MOVIES_PHOTO;
+  $tid = $tid;
   $node_count = "";
   $output = "";
   $data = array();
   $tid_list = array();
+  //$tid_list[] = $tid;
   $listcount = 0;
   $range_max = 3;
-  $range_min = 0;
+  //$photolist = array();
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-
+  else {
+    $range_min = 0;
+  }
   $order_by = 'ASC';
-  $type = array("photogallery");
+  $type = array("story");
   $news_list_array = array();
   $photolist = array();
   $videolist = array();
@@ -289,12 +262,16 @@ function homePageJsonPackagelist_lifestyle() {
         $tid_list[] = $value->tid;
       }
     }
+
     // code vid=14  end
+    $term_name = get_term_name_from_tid_for_report($tid);
+    $home_page_api_pck_order = fetchMasterConfigData('homeapi_order_packages ');
+    $package_order = isset($home_page_api_pck_order) ? $home_page_api_pck_order : "";
     $data_news['id'] = "$tid";
-    $data_news['order'] = "2";
+    $data_news['order'] = "$package_order";
     $data_news['type'] = "packagelist";
-    $data_news['title'] = "Movies Photo";
-    $data_news['label'] = "Movies Photo";
+    $data_news['title'] = "$term_name";
+    $data_news['label'] = "$term_name";
     $data_news['show_label'] = "0";
     $data_news['n_template_id'] = "1";
 
@@ -333,207 +310,14 @@ function homePageJsonPackagelist_lifestyle() {
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-    if (count($tid_list) > 0) {
-      $query->condition('ti.tid', $tid_list, 'IN');
-    }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
-    $d2 = date(strtotime($d1));
-    $query->condition('n.created', $d2, '>=');
-    $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
 
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($result as $reskey => $resvalue) {
-      $title = $resvalue['title'];
-      $type = $resvalue['type'];
-      $nid = $resvalue['nid'];
-      $created = $resvalue['created'];
-      $changed = $resvalue['changed'];
-      $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-      $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = $base_url . "/" . $alias;
-      $field_video_duration_value = $resvalue['field_video_duration_value'];
-      // file url
-      $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
-      $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-      //related content
-      $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
-      $comment_cont = getCommentsCount($nid);
-
-      // create date formating
-      $firebase_url = get_node_firebase_weburl($nid);
-
-      if ($created) {
-        $create_datetime = date("Y-m-d H:i:s", $created);
-        $create_date = date("Y-m-d H:i:s", $created);
-      }
-      else {
-        $create_datetime = "";
-        $create_date = "";
-      }
-      if ($changed) {
-        $changed_datetime = date("Y-m-d H:i:s", $changed);
-      }
-      else {
-        $changed_datetime = "";
-      }
-
-      // custom function for get img caption
-      $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
-      // custom function for get img byline
-      $byline = getImgByline($resvalue['field_story_medium_image_fid']);
-      $is_developing = 0;
-      $conf = getStoryConfigVal($nid);
-      if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
-        $is_developing = 1;
-      }
-      $prime_cat = getNodePrimeCatByNid($nid);
-      $data_newslist[$listcount]['n_id'] = "$nid";
-      $data_newslist[$listcount]['n_type'] = "$type";
-      $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
-      $data_newslist[$listcount]['n_is_sponsored'] = "0";
-      $data_newslist[$listcount]['n_share_link'] = "$firebase_url";
-      $data_newslist[$listcount]['n_title'] = "$title";
-      $data_newslist[$listcount]['n_description'] = "$field_story_kicker_text_value";
-      $data_newslist[$listcount]['n_pcategory_id'] = "$prime_cat->tid";
-      $data_newslist[$listcount]['n_pcategory_name'] = "$prime_cat->name";
-      $data_newslist[$listcount]['n_comment_count'] = "$comment_cont";
-      $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
-      $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
-      $data_newslist[$listcount]['n_image_credit'] = "$byline";
-      $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
-      // photo list array
-
-      if ($type == "photogallery") {
-        $photolist = getPhotolist($nid);
-      }
-      $data_newslist[$listcount]['n_photo'] = (array) $photolist;
-      // re-insalize photolist
-      $photolist = array();
-      // video list array
-      if ($type == "videogallery") {
-        $videolist = getVideolist($nid);
-      }
-      $data_newslist[$listcount]['n_video'] = (array) $videolist;
-      // re-insalize vediolist
-      $videolist = array();
-
-      // homepage.inc
-      $n_polls = getPolllist($node);
-      // story.inc
-      $n_rating = getRating($node);
-      // homepage.inc
-      $n_magazine = array();
-
-      $data_newslist[$listcount]['n_polls'] = $n_polls;
-      $data_newslist[$listcount]['n_rating'] = $n_rating;
-      $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-
-      $listcount++;
-    }
-  }
-
-  $data_news['news'] = (array) $data_newslist;
-
-  return $data_news;
-}
-
-/**
- * main function for generate homePageJsonPackagelist_world array
- *
- * @return array
- */
-function homePageJsonPackagelist_world() {
-
-  global $base_url;
-  $data_news = array();
-  $data_newslist = array();
-  $n_photo = array();
-  $n_video = array();
-  $n_polls = array();
-  $n_rating = array();
-  $tid = HOME_PAGE_JSON_MOVIES_VIDEO;
-  $node_count = "";
-  $output = "";
-  $data = array();
-  $tid_list = array();
-  $listcount = 0;
-  $range_max = 3;
-  $range_min = 0;
-  if (!$pageno == 0) {
-    $range_min = $pageno * $range_max;
-  }
-
-  $order_by = 'ASC';
-  $type = array("videogallery");
-  $news_list_array = array();
-  $photolist = array();
-  $videolist = array();
-  $loop_count = 0; {
-    $listcount = 0;
-    // code vid=14  start
-    if ($tid > 0) {
-      $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-    }
-    else {
-      $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-    }
-    $term_tree_count = count($term_tree);
-    if ($term_tree_count) {
-      foreach ($term_tree as $key => $value) {
-        $tid_list[] = $value->tid;
-      }
-    }
-
-    // code vid=14  end
-    $data_news['id'] = "$tid";
-    $data_news['order'] = "3";
-    $data_news['type'] = "packagelist";
-    $data_news['title'] = "Movies video";
-    $data_news['label'] = "Movies video";
-    $data_news['show_label'] = "0";
-    $data_news['n_template_id'] = "1";
-
-    // select node belong from current term id or child term id
-    $query = db_select('taxonomy_index', 'ti');
-    $query->leftJoin('node', 'n', 'n.nid=ti.nid');
-    //join  for field value
-    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
-    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
-    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
-    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
-    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
-    $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
-
-    $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-
-    $query->fields('eli_file', array('uri'));
-    $query->fields('li_file', array('uri'));
-    $query->fields('mi_file', array('uri'));
-    $query->fields('si_file', array('uri'));
-    $query->fields('esi_file', array('uri'));
-
-    $query->fields('mi', array('field_story_medium_image_fid'));
-    $query->fields('si', array('field_story_small_image_fid'));
-    $query->fields('rc', array('field_common_related_content_value'));
-
-    $query->fields('kt', array('field_story_kicker_text_value'));
-    $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
 
     //end
+
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    $d1 = date('Y-m-d', strtotime("-90 days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -541,6 +325,10 @@ function homePageJsonPackagelist_world() {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $reskey => $resvalue) {
+
+      // node feed tag
+
+
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
@@ -588,6 +376,7 @@ function homePageJsonPackagelist_world() {
       }
       $prime_cat = getNodePrimeCatByNid($nid);
       $data_newslist[$listcount]['n_id'] = "$nid";
+      //$data_newslist[$listcount]['n_template_id'] = "";
       $data_newslist[$listcount]['n_type'] = "$type";
       $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
       $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -636,7 +425,7 @@ function homePageJsonPackagelist_world() {
   }
 
   $data_news['news'] = (array) $data_newslist;
-
+  $order++;
   return $data_news;
 }
 
@@ -645,8 +434,9 @@ function homePageJsonPackagelist_world() {
  *
  * @return array
  */
-function homePageJsonTopstories() {
+function homePageJsonTopstories($top_story_limit) {
   // variable declation
+  global $order;
   $data_topstories = array();
   $data_newslist = array();
   $n_photo = array();
@@ -655,7 +445,7 @@ function homePageJsonTopstories() {
   $n_rating = array();
   $home_list_count = 0;
   $widget_name = "top_stories_widget";
-  $range_max = 10;
+  $range_max = $top_story_limit;
   $range_min = 0;
   $order_by = 'ASC';
 
@@ -688,7 +478,6 @@ function homePageJsonTopstories() {
   $query->fields('mi', array('field_story_medium_image_fid'));
   $query->fields('si', array('field_story_small_image_fid'));
   $query->fields('rc', array('field_common_related_content_value'));
-  $query->fields('li', array('field_story_large_image_fid'));
 
   $query->fields('kt', array('field_story_kicker_text_value'));
   $query->fields('vd', array('field_video_duration_value'));
@@ -701,8 +490,8 @@ function homePageJsonTopstories() {
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   $data_topstories['id'] = "0";
-  $data_topstories['order'] = "2";
-  $data_topstories['type'] = "topstories";
+  $data_topstories['order'] = "$order";
+  $data_topstories['type'] = "newslist";
   $data_topstories['title'] = "Top Stories";
   $data_topstories['label'] = "Top Stories";
   $data_topstories['show_label'] = "0";
@@ -725,7 +514,6 @@ function homePageJsonTopstories() {
     // file url
     $file_small_img_url = completeFilePath($value['field_story_small_image_fid']);
     $file_medium_img_url = completeFilePath($value['field_story_medium_image_fid']);
-    $file_large_img_url = completeFilePath($value['field_story_large_image_fid']);
     $comment_cont = getCommentsCount($nid);
 
     // create date formating
@@ -747,6 +535,10 @@ function homePageJsonTopstories() {
     }
     //json tag writing
     if ($type == "story") {
+      // news list
+      //      $n_photo = getPhotolist($nid);
+      //      $n_video = getVideolist($nid);
+      //      $n_polls = getPolllist($node);
       $n_rating = getRating($node);
       $n_magazine = array();
 
@@ -761,6 +553,7 @@ function homePageJsonTopstories() {
       }
       $prime_cat = getNodePrimeCatByNid($nid);
       $data_newslist[$home_list_count]['n_id'] = "$nid";
+      //$data_newslist[$home_list_count]['n_template_id'] = "";
       $data_newslist[$home_list_count]['n_type'] = "$type";
       $data_newslist[$home_list_count]['n_is_developing'] = "$is_developing";
       $data_newslist[$home_list_count]['n_is_sponsored'] = "0";
@@ -771,7 +564,7 @@ function homePageJsonTopstories() {
       $data_newslist[$home_list_count]['n_pcategory_name'] = "$prime_cat->name";
       $data_newslist[$home_list_count]['n_comment_count'] = "$comment_cont";
       $data_newslist[$home_list_count]['n_small_image'] = "$file_small_img_url";
-      $data_newslist[$home_list_count]['n_large_image'] = "$file_large_img_url";
+      $data_newslist[$home_list_count]['n_large_image'] = "$file_medium_img_url";
       $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
       $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
       $data_newslist[$home_list_count]['n_photo'] = $n_photo;
@@ -784,6 +577,7 @@ function homePageJsonTopstories() {
   }
 
   $data_topstories['news'] = (array) $data_newslist;
+  $order++;
   return $data_topstories;
 }
 
@@ -792,15 +586,15 @@ function homePageJsonTopstories() {
  *
  * @return array
  */
-function homePageJsonNewslist_india() {
-  global $base_url;
+function homePageCatNewslist($tid) {
+  global $base_url, $order;
   $data_news = array();
   $data_newslist = array();
   $n_photo = array();
   $n_video = array();
   $n_polls = array();
   $n_rating = array();
-  $tid = HOME_PAGE_JSON_NEWS_LIST_INDIA;
+  $tid = $tid;
   $node_count = "";
   $output = "";
   $data = array();
@@ -808,11 +602,13 @@ function homePageJsonNewslist_india() {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 5;
-  $range_min = 0;
+  //$photolist = array();
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-
+  else {
+    $range_min = 0;
+  }
   $order_by = 'ASC';
   $type = array("videogallery", "photogallery", "story");
   $news_list_array = array();
@@ -835,15 +631,21 @@ function homePageJsonNewslist_india() {
     }
 
     // code vid=14  end
+    $term_name = get_term_name_from_tid_for_report($tid);
+    $home_page_api_pck_cat = fetchMasterConfigData('homeapi_order_categories');
+    $cat_order = isset($home_page_api_pck_cat) ? $home_page_api_pck_cat : "";
 
-    $data_news['id'] = "1206578";
-    $data_news['order'] = "3";
+    $data_news['id'] = "$tid";
+    $data_news['order'] = "$cat_order";
     $data_news['type'] = "newslist";
-    $data_news['title'] = "India";
-    $data_news['label'] = "India";
+    $data_news['title'] = "$term_name";
+    $data_news['label'] = "$term_name";
     $data_news['show_label'] = "0";
     $data_news['n_template_id'] = "1";
+
+
     // select node belong from current term id or child term id
+
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
@@ -872,17 +674,18 @@ function homePageJsonNewslist_india() {
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
-    $query->fields('li', array('field_story_large_image_fid'));
 
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
+
+
     //end
 
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    $d1 = date('Y-m-d', strtotime("-90 days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -890,19 +693,23 @@ function homePageJsonNewslist_india() {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $reskey => $resvalue) {
+
+      // node feed tag
+
+
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+      //$weburl = $base_url . "/node/" . $nid;
       $alias = drupal_get_path_alias('node/' . $nid . '');
       $weburl = $base_url . "/" . $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];
       // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-      $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -937,6 +744,7 @@ function homePageJsonNewslist_india() {
       }
       $prime_cat = getNodePrimeCatByNid($nid);
       $data_newslist[$listcount]['n_id'] = "$nid";
+      //$data_newslist[$listcount]['n_template_id'] = "1";
       $data_newslist[$listcount]['n_type'] = "$type";
       $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
       $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -947,208 +755,7 @@ function homePageJsonNewslist_india() {
       $data_newslist[$listcount]['n_pcategory_name'] = "$prime_cat->name";
       $data_newslist[$listcount]['n_comment_count'] = "$comment_cont";
       $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
-      $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
-      $data_newslist[$listcount]['n_image_credit'] = "$byline";
-      $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
-
-      // photo list array
-      if ($type == "photogallery") {
-        $photolist = getPhotolist($nid);
-      }
-      $data_newslist[$listcount]['n_photo'] = (array) $photolist;
-      // re-insalize photolist
-      $photolist = array();
-
-      // video list array
-      if ($type == "videogallery") {
-        $videolist = getVideolist($nid);
-      }
-      $data_newslist[$listcount]['n_video'] = (array) $videolist;
-      // re-insalize vediolist
-      $videolist = array();
-
-      // homepage.inc
-      $n_polls = getPolllist($node);
-      // story.inc
-      $n_rating = getRating($node);
-      // homepage.inc
-      $n_magazine = array();
-
-      $data_newslist[$listcount]['n_polls'] = $n_polls;
-      $data_newslist[$listcount]['n_rating'] = $n_rating;
-      $data_newslist[$listcount]['n_magazine'] = $n_magazine;
-
-      $listcount++;
-    }
-  }
-
-  $data_news['news'] = (array) $data_newslist;
-
-  return $data_news;
-}
-
-/**
- * main function for generate homePageJsonNewslist_world array
- *
- * @return array
- */
-function homePageJsonNewslist_world() {
-  global $base_url;
-  $data_news = array();
-  $data_newslist = array();
-  $n_photo = array();
-  $n_video = array();
-  $n_polls = array();
-  $n_rating = array();
-  $tid = HOME_PAGE_JSON_NEWS_LIST_WORLD;
-  $node_count = "";
-  $output = "";
-  $data = array();
-  $tid_list = array();
-  $tid_list[] = $tid;
-  $listcount = 0;
-  $range_max = 5;
-  $range_min = 0;
-  if (!$pageno == 0) {
-    $range_min = $pageno * $range_max;
-  }
-
-  $order_by = 'ASC';
-  $type = array("videogallery", "photogallery", "story");
-  $news_list_array = array();
-  $photolist = array();
-  $videolist = array();
-  $loop_count = 0; {
-    $listcount = 0;
-    // code vid=14  start
-    if ($tid > 0) {
-      $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, $tid, $max_depth = NULL, $load_entities = FALSE);
-    }
-    else {
-      $term_tree = taxonomy_get_tree(CATEGORY_MANAGMENT, 0, $max_depth = NULL, $load_entities = FALSE);
-    }
-    $term_tree_count = count($term_tree);
-
-    if ($term_tree_count) {
-      foreach ($term_tree as $key => $value) {
-        $tid_list[] = $value->tid;
-      }
-    }
-
-    // code vid=14  end
-
-    $data_news['id'] = "$tid";
-    $data_news['order'] = "5";
-    $data_news['type'] = "newslist";
-    $data_news['title'] = "World";
-    $data_news['label'] = "World";
-    $data_news['show_label'] = "0";
-    $data_news['n_template_id'] = "3";
-
-    // select node belong from current term id or child term id
-    $query = db_select('taxonomy_index', 'ti');
-    $query->leftJoin('node', 'n', 'n.nid=ti.nid');
-    //join  for field value
-    $query->leftJoin('field_data_field_story_extra_large_image', 'eli', 'eli.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_large_image', 'li', 'li.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_medium_image', 'mi', 'mi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_extra_small_image', 'esi', 'esi.entity_id=n.nid');
-    $query->leftJoin('field_data_field_story_kicker_text', 'kt', 'kt.entity_id=n.nid');
-    $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
-    $query->leftJoin('field_data_field_video_duration', 'vd', 'vd.entity_id=n.nid');
-    $query->leftJoin('file_managed', 'eli_file', 'eli_file.fid=eli.field_story_extra_large_image_fid');
-    $query->leftJoin('file_managed', 'li_file', 'li_file.fid=li.field_story_large_image_fid');
-    $query->leftJoin('file_managed', 'mi_file', 'mi_file.fid=mi.field_story_medium_image_fid');
-    $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
-    $query->leftJoin('file_managed', 'esi_file', 'esi_file.fid=esi.field_story_extra_small_image_fid');
-
-    $query->leftJoin('field_data_field_common_related_content', 'rc', 'rc.entity_id=n.nid');
-
-    $query->fields('eli_file', array('uri'));
-    $query->fields('li_file', array('uri'));
-    $query->fields('mi_file', array('uri'));
-    $query->fields('si_file', array('uri'));
-    $query->fields('esi_file', array('uri'));
-
-    $query->fields('mi', array('field_story_medium_image_fid'));
-    $query->fields('si', array('field_story_small_image_fid'));
-    $query->fields('rc', array('field_common_related_content_value'));
-    $query->fields('li', array('field_story_large_image_fid'));
-
-    $query->fields('kt', array('field_story_kicker_text_value'));
-    $query->fields('vd', array('field_video_duration_value'));
-    $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
-
-    if (count($tid_list) > 0) {
-      $query->condition('ti.tid', $tid_list, 'IN');
-    }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
-    $d2 = date(strtotime($d1));
-    $query->condition('n.created', $d2, '>=');
-    $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
-
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($result as $reskey => $resvalue) {
-      $title = $resvalue['title'];
-      $type = $resvalue['type'];
-      $nid = $resvalue['nid'];
-      $created = $resvalue['created'];
-      $changed = $resvalue['changed'];
-      $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
-      $alias = drupal_get_path_alias('node/' . $nid . '');
-      $weburl = $base_url . "/" . $alias;
-      $field_video_duration_value = $resvalue['field_video_duration_value'];
-      // file url
-      $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
-      $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-      $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
-
-      //related content
-      $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
-      $comment_cont = getCommentsCount($nid);
-
-      // create date formating
-      $firebase_url = get_node_firebase_weburl($nid);
-
-      if ($created) {
-        $create_datetime = date("Y-m-d H:i:s", $created);
-        $create_date = date("Y-m-d H:i:s", $created);
-      }
-      else {
-        $create_datetime = "";
-        $create_date = "";
-      }
-      if ($changed) {
-        $changed_datetime = date("Y-m-d H:i:s", $changed);
-      }
-      else {
-        $changed_datetime = "";
-      }
-
-      // custom function for get img caption
-      $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
-      // custom function for get img byline
-      $byline = getImgByline($resvalue['field_story_medium_image_fid']);
-      $is_developing = 0;
-      $conf = getStoryConfigVal($nid);
-      if (in_multiarray("developing_story", $conf, "field_story_configurations_value")) {
-        $is_developing = 1;
-      }
-      $prime_cat = getNodePrimeCatByNid($nid);
-      $data_newslist[$listcount]['n_id'] = "$nid";
-      $data_newslist[$listcount]['n_type'] = "$type";
-      $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
-      $data_newslist[$listcount]['n_is_sponsored'] = "0";
-      $data_newslist[$listcount]['n_share_link'] = "$firebase_url";
-      $data_newslist[$listcount]['n_title'] = "$title";
-      $data_newslist[$listcount]['n_description'] = "$field_story_kicker_text_value";
-      $data_newslist[$listcount]['n_pcategory_id'] = "$prime_cat->tid";
-      $data_newslist[$listcount]['n_pcategory_name'] = "$prime_cat->name";
-      $data_newslist[$listcount]['n_comment_count'] = "$comment_cont";
-      $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
-      $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
+      $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
       $data_newslist[$listcount]['n_image_credit'] = "$byline";
       $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
 
@@ -1186,7 +793,7 @@ function homePageJsonNewslist_world() {
   }
 
   $data_news['news'] = (array) $data_newslist;
-
+  $order++;
   return $data_news;
 }
 
@@ -1196,17 +803,23 @@ function homePageJsonNewslist_world() {
  * @return array
  */
 function homePageJsonMagazine() {
+  global $order;
   $data_magazine = array();
   $data_newslist = array();
   $n_photo = array();
   $n_video = array();
   $n_polls = array();
   $n_rating = array();
+
+  // homepage.inc
+  //$n_magazine = getMagazineList();
   $n_magazine_data = magazineCoverstoriesPageRerourceValueList();
   $n_magazine = $n_magazine_data['data'];
+  $home_page_api_mag_order = fetchMasterConfigData('homeapi_order_magazines ');
+  $mag_order = isset($home_page_api_mag_order) ? $home_page_api_mag_order : "";
 
   $data_magazine['id'] = "0";
-  $data_magazine['order'] = "6";
+  $data_magazine['order'] = "$mag_order";
   $data_magazine['type'] = "magazine";
   $data_magazine['title'] = "From The Magazine";
   $data_magazine['label'] = "From The Magazine";
@@ -1219,6 +832,7 @@ function homePageJsonMagazine() {
     $is_developing = 1;
   }
   $data_newslist[0]['n_id'] = "";
+  //$data_newslist[0]['n_template_id'] = "";
   $data_newslist[0]['n_type'] = "";
   $data_newslist[0]['n_is_developing'] = "$is_developing";
   $data_newslist[0]['n_is_sponsored'] = "";
@@ -1239,7 +853,7 @@ function homePageJsonMagazine() {
   $data_newslist[0]['n_magazine'] = $n_magazine;
 
   $data_magazine['news'] = (array) $data_newslist;
-
+  $order++;
   return $data_magazine;
 }
 
@@ -1267,6 +881,7 @@ function getMagazineList() {
   $range_min = 0;
   $range_max = 5;
   // issue list query..
+
   $query_issue = db_select('node', 'n');
   $query_issue->leftJoin('field_data_field_issue_large_cover_image', 'fsli', 'fsli.entity_id=n.nid');
   $query_issue->leftJoin('field_data_field_issue_small_cover_image', 'fssi', 'fssi.entity_id=n.nid');
@@ -1438,6 +1053,9 @@ function getMagazineStory($issue_date) {
     $story[$loop_count]['s_pcategory_title'] = "$term_name";
     $loop_count++;
   }
+
+
+
   return $story;
 }
 
@@ -1470,14 +1088,12 @@ function in_multiarray($elem, $array, $field) {
  * @return string $field_data_body;
  */
 function getNodeBodyByNid_Report($nid) {
-  if ($nid) {
-    $query = db_select('field_data_body', 'nb');
-    $query->fields('nb', array('body_value'));
-    $query->condition('nb.entity_id', $nid);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    $field_data_body = $result[0]['body_value'];
-    return $field_data_body;
-  }
+  $query = db_select('field_data_body', 'nb');
+  $query->fields('nb', array('body_value'));
+  $query->condition('nb.entity_id', $nid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $field_data_body = $result[0]['body_value'];
+  return $field_data_body;
 }
 
 /**
@@ -1486,7 +1102,7 @@ function getNodeBodyByNid_Report($nid) {
  *
  * @return obj term_object;
  */
-function getNodePrimeCatByNid_($nid) {
+function getNodePrimeCatByNid($nid) {
   $query = db_select('field_data_field_primary_category', 'fpc');
   $query->fields('fpc', array('field_primary_category_value'));
   $query->condition('fpc.entity_id', $nid);
@@ -1501,8 +1117,7 @@ function getNodePrimeCatByNid_($nid) {
  * @return array
  */
 function homePageJsonPoll() {
-  /* static poll show at front. */
-
+  global $order;
   $data_magazine = array();
   $data_newslist = array();
   $n_photo = array();
@@ -1513,9 +1128,10 @@ function homePageJsonPoll() {
 
   $n_polls = array();
   $n_polls = polls_open_datalist(0, "home");
-
+  $home_page_api_poll_order = fetchMasterConfigData('homeapi_order_polls');
+  $poll_order = isset($home_page_api_poll_order) ? $home_page_api_poll_order : "";
   $data_magazine['id'] = "0";
-  $data_magazine['order'] = "7";
+  $data_magazine['order'] = "$poll_order";
   $data_magazine['type'] = "poll";
   $data_magazine['title'] = "poll";
   $data_magazine['label'] = "poll";
@@ -1528,6 +1144,7 @@ function homePageJsonPoll() {
     $is_developing = 1;
   }
   $data_newslist[0]['n_id'] = "";
+  //$data_newslist[0]['n_template_id'] = "";
   $data_newslist[0]['n_type'] = "";
   $data_newslist[0]['n_is_developing'] = "$is_developing";
   $data_newslist[0]['n_is_sponsored'] = "";
@@ -1548,6 +1165,9 @@ function homePageJsonPoll() {
   $data_newslist[0]['n_magazine'] = $n_magazine;
 
   $data_magazine['news'] = (array) $data_newslist;
+  //$data_magazine = (array) $data_magazine;
+
+
   return $data_magazine;
 }
 
@@ -1564,7 +1184,7 @@ function homePageJsonNewslist_lifestyle() {
   $n_video = array();
   $n_polls = array();
   $n_rating = array();
-  $tid = HOME_PAGE_JSON_NEWS_LIST_LIFE_STYLE;
+  $tid = HOME_PAGE_JSON_NEWS_LIST_INDIA;
   $node_count = "";
   $output = "";
   $data = array();
@@ -1572,11 +1192,13 @@ function homePageJsonNewslist_lifestyle() {
   $tid_list[] = $tid;
   $listcount = 0;
   $range_max = 5;
-  $range_min = 0;
+  //$photolist = array();
   if (!$pageno == 0) {
     $range_min = $pageno * $range_max;
   }
-
+  else {
+    $range_min = 0;
+  }
   $order_by = 'ASC';
   $type = array("videogallery", "photogallery", "story");
   $news_list_array = array();
@@ -1600,15 +1222,17 @@ function homePageJsonNewslist_lifestyle() {
 
     // code vid=14  end
 
-    $data_news['id'] = "$tid";
-    $data_news['order'] = "4";
+    $data_news['id'] = "1206567";
+    $data_news['order'] = "6";
     $data_news['type'] = "newslist";
     $data_news['title'] = "Lifestyle";
     $data_news['label'] = "Lifestyle";
     $data_news['show_label'] = "0";
     $data_news['n_template_id'] = "2";
 
+
     // select node belong from current term id or child term id
+
     $query = db_select('taxonomy_index', 'ti');
     $query->leftJoin('node', 'n', 'n.nid=ti.nid');
     //join  for field value
@@ -1637,7 +1261,6 @@ function homePageJsonNewslist_lifestyle() {
     $query->fields('mi', array('field_story_medium_image_fid'));
     $query->fields('si', array('field_story_small_image_fid'));
     $query->fields('rc', array('field_common_related_content_value'));
-    $query->fields('li', array('field_story_large_image_fid'));
 
     $query->fields('kt', array('field_story_kicker_text_value'));
     $query->fields('vd', array('field_video_duration_value'));
@@ -1649,7 +1272,7 @@ function homePageJsonNewslist_lifestyle() {
     if (count($tid_list) > 0) {
       $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    $d1 = date('Y-m-d', strtotime("-90 days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -1658,19 +1281,22 @@ function homePageJsonNewslist_lifestyle() {
 
     foreach ($result as $reskey => $resvalue) {
 
+      // node feed tag
+
+
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
       $created = $resvalue['created'];
       $changed = $resvalue['changed'];
       $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+      //$weburl = $base_url . "/node/" . $nid;
       $alias = drupal_get_path_alias('node/' . $nid . '');
       $weburl = $base_url . "/" . $alias;
       $field_video_duration_value = $resvalue['field_video_duration_value'];
       // file url
       $file_small_img_url = completeFilePath($resvalue['field_story_small_image_fid']);
       $file_medium_img_url = completeFilePath($resvalue['field_story_medium_image_fid']);
-      $file_large_img_url = completeFilePath($resvalue['field_story_large_image_fid']);
 
       //related content
       $related = relatedContentNodeType($resvalue['field_common_related_content_value']);
@@ -1705,6 +1331,7 @@ function homePageJsonNewslist_lifestyle() {
       }
       $prime_cat = getNodePrimeCatByNid($nid);
       $data_newslist[$listcount]['n_id'] = "$nid";
+      //$data_newslist[$listcount]['n_template_id'] = "2";
       $data_newslist[$listcount]['n_type'] = "$type";
       $data_newslist[$listcount]['n_is_developing'] = "$is_developing";
       $data_newslist[$listcount]['n_is_sponsored'] = "0";
@@ -1715,11 +1342,12 @@ function homePageJsonNewslist_lifestyle() {
       $data_newslist[$listcount]['n_pcategory_name'] = "$prime_cat->name";
       $data_newslist[$listcount]['n_comment_count'] = "$comment_cont";
       $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
-      $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
+      $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
       $data_newslist[$listcount]['n_image_credit'] = "$byline";
       $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
 
       // photo list array
+
       if ($type == "photogallery") {
         $photolist = getPhotolist($nid);
       }

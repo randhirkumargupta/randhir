@@ -20,6 +20,7 @@ module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_author_story');
 module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_polls');
 module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_edit_profile');
 module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_bookmark');
+module_load_include('inc', 'itg_app_api', 'inc/itg_app_api_middleware');
 
 /**
  * Function for APP API resource declaration.
@@ -69,6 +70,33 @@ function itg_app_api_resource() {
             'name' => 'itg_app_api.services',
           ),
           'callback' => 'itg_rapid_api_master_config',
+          'access callback' => 'user_access',
+          'access arguments' => array('access content'),
+          'access arguments append' => FALSE,
+          'args' => array(
+            array(
+              'name' => 'token',
+              'type' => 'string',
+              'description' => 'Function to perform',
+              'source' => array('path' => 0),
+              'optional' => TRUE,
+              'default' => '*',
+            ),
+          ),
+        ),
+      ),
+    ),
+    //Master config internal
+    'master_config_internal' => array(
+      'operations' => array(
+        'retrieve' => array(
+          'help' => 'Retrieves master config data from middleware info.',
+          'file' => array(
+            'type' => 'inc',
+            'module' => 'itg_app_api',
+            'name' => 'itg_app_api.services',
+          ),
+          'callback' => 'itg_rapid_api_master_config_internal',
           'access callback' => 'user_access',
           'access arguments' => array('access content'),
           'access arguments append' => FALSE,
@@ -843,6 +871,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'first_name',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'First Name',
               'type' => 'array',
@@ -850,6 +880,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'last_name',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'last_name'),
               'source' => array('data'),
               'description' => 'Last Name',
               'type' => 'array',
@@ -857,6 +889,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'User email or mobile number',
               'type' => 'array',
@@ -864,6 +898,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'password',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Password',
               'type' => 'array',
@@ -871,6 +907,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'confirm_password',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Confirm Password',
               'type' => 'array',
@@ -878,6 +916,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'login_type',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'login_type'),
               'source' => array('data'),
               'description' => '0=for traditional, 1=socail media',
               'type' => 'array',
@@ -885,6 +925,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'email_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Email Id',
               'type' => 'array',
@@ -892,6 +934,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'phone_number',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Phone Number',
               'type' => 'array',
@@ -899,6 +943,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'location',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Location',
               'type' => 'array',
@@ -906,6 +952,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'profile_image',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Profile image',
               'type' => 'array',
@@ -913,6 +961,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'gender',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Gender',
               'type' => 'array',
@@ -920,6 +970,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'date_of_birth',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Date of birth',
               'type' => 'array',
@@ -927,6 +979,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Device id',
               'type' => 'array',
@@ -934,6 +988,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'Device type',
               'type' => 'array',
@@ -960,6 +1016,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user email or mobile',
               'type' => 'array',
@@ -967,6 +1025,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'password',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'password'),
               'source' => array('data'),
               'description' => 'user password',
               'type' => 'array',
@@ -974,6 +1034,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'login_type'),
               'source' => array('data'),
               'description' => 'device_id ',
               'type' => 'array',
@@ -981,6 +1043,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'token_id'),
               'source' => array('data'),
               'description' => 'device_type',
               'type' => 'array',
@@ -1007,6 +1071,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -1014,6 +1080,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'auth_token',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'auth_token',
               'type' => 'array',
@@ -1021,6 +1089,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'device_id',
               'type' => 'array',
@@ -1028,6 +1098,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'device_type',
               'type' => 'array',
@@ -1054,6 +1126,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -1061,6 +1135,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'auth_token',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'auth token',
               'type' => 'array',
@@ -1068,6 +1144,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'old_password',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'old password',
               'type' => 'array',
@@ -1075,6 +1153,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'new_password',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'new password',
               'type' => 'array',
@@ -1082,6 +1162,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'confirm_password',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'confirm password',
               'type' => 'array',
@@ -1089,6 +1171,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device id',
               'type' => 'array',
@@ -1096,6 +1180,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device type',
               'type' => 'array',
@@ -1122,6 +1208,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -1129,6 +1217,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device_id',
               'type' => 'array',
@@ -1136,6 +1226,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device_type',
               'type' => 'array',
@@ -1162,6 +1254,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -1169,6 +1263,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'otp_code',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'otp_code',
               'type' => 'array',
@@ -1176,6 +1272,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device_id',
               'type' => 'array',
@@ -1183,6 +1281,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device_type',
               'type' => 'array',
@@ -1237,6 +1337,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -1244,6 +1346,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -1270,6 +1374,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -1277,6 +1383,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -1284,6 +1392,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'first_name',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'first_name',
               'type' => 'array',
@@ -1291,6 +1401,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'last_name',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'last_name',
               'type' => 'array',
@@ -1298,6 +1410,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'zipcode',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'zipcode',
               'type' => 'array',
@@ -1305,6 +1419,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'address',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'address',
               'type' => 'array',
@@ -1312,6 +1428,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'profile_image',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'profile_image',
               'type' => 'array',
@@ -1319,6 +1437,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'gender',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'gender',
               'type' => 'array',
@@ -1326,6 +1446,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'date_of_birth',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'date_of_birth',
               'type' => 'array',
@@ -1352,6 +1474,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -1359,6 +1483,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -1385,6 +1511,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -1392,6 +1520,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -1399,6 +1529,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'preference',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'node_id',
               'type' => 'array',
@@ -1425,6 +1557,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -1432,6 +1566,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'new_password',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'new password',
               'type' => 'array',
@@ -1439,6 +1575,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'confirm_password',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'confirm password',
               'type' => 'array',
@@ -1446,6 +1584,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device id',
               'type' => 'array',
@@ -1453,6 +1593,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device type',
               'type' => 'array',
@@ -1479,6 +1621,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'user mobile or email',
               'type' => 'array',
@@ -1486,6 +1630,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'auth_token',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'auth token',
               'type' => 'array',
@@ -1493,6 +1639,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device id',
               'type' => 'array',
@@ -1500,6 +1648,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'device_type',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'user_id'),
               'source' => array('data'),
               'description' => 'device type',
               'type' => 'array',
@@ -1769,6 +1919,7 @@ function itg_app_api_resource() {
               'name' => 'author_id',
               'optional' => FALSE,
               'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'description' => 'Author id',
               'type' => 'string',
             ),
@@ -2182,6 +2333,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'authtoken_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'authtoken_id',
               'type' => 'array',
@@ -2189,6 +2342,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'user_id',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'user_id',
               'type' => 'array',
@@ -2196,6 +2351,8 @@ function itg_app_api_resource() {
             array(
               'name' => 'profile_image',
               'optional' => TRUE,
+              //'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'source' => array('data'),
               'description' => 'profile_image',
               'type' => 'array',
@@ -2231,6 +2388,7 @@ function itg_app_api_resource() {
               'name' => 'anchor_id',
               'optional' => FALSE,
               'source' => 'data',
+              //'source' => array('data' => 'first_name'),
               'description' => 'Anchor User id',
               'type' => 'string',
             ),
@@ -2336,7 +2494,7 @@ function itg_app_api_resource() {
  * @return array - The processed information array.
  */
 function itg_rapid_api_master_config($token) {
-  $redis_key = "itgd_rapid_master_config_json";
+  $redis_key = "devitgd_rapid_master_config_json";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2354,13 +2512,38 @@ function itg_rapid_api_master_config($token) {
 }
 
 /**
+ * Call back function for master_config API
+ * @pram $_GET
+ *
+ * @return array - The processed information array.
+ */
+function itg_rapid_api_master_config_internal($token) {
+  $redis_key = "devitgd_rapid_master_config_json_internal";
+  $result_get = getRedis($redis_key);
+
+  if ($result_get['key_value'] != "") {
+    $jsondata = $result_get['key_value'];
+  }
+  else {
+    $jsondata = master_config_interenal();
+    $jsondata = json_encode($jsondata);
+    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+    $result_set = setRedis($redis_key, $jsondata, $ttl);
+  }
+
+  $obj = json_decode($jsondata, TRUE);
+  $return_obj = $obj;
+  return $return_obj;
+}
+
+/**
  * Call back function for config_update_status API
  * @pram $_GET
  *
  * @return array - The processed information array.
  */
 function itg_rapid_api_config_update_status($token) {
-  $redis_key = "itgd_rapid_config_update_status_json";
+  $redis_key = "devitgd_rapid_config_update_status_json";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2385,17 +2568,18 @@ function itg_rapid_api_config_update_status($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_hamburger_menu($token) {
-  $redis_key = "itgd_rapid_hamburger_menu_json";
+  $redis_key = "devitgd_rapid_hamburger_menu_json";
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    $jsondata = variable_get('hamburger_menu_json');
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+  //    if ($result_get['key_value'] != "") {
+  //        $jsondata = $result_get['key_value'];
+  //    } else {
+  //variable_get('hamburger_menu_json');
+  $jsondata = hamburger_menu_middleware_data();
+  $jsondata = json_encode($jsondata);
+  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
 
   $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
@@ -2410,21 +2594,21 @@ function itg_rapid_api_hamburger_menu($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_horizontal_menu($token) {
-  $redis_key = "itgd_rapid_horizontal_menu_json";
+  $redis_key = "devitgd_rapid_horizontal_menu_json";
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    $jsondata = variable_get('horizontal_menu_json');
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+  //    if ($result_get['key_value'] != "") {
+  //        $jsondata = $result_get['key_value'];
+  //    } else {
+  //variable_get('horizontal_menu_json');
+  $jsondata = horizontal_menu_middleware_data();
+  $jsondata = json_encode($jsondata);
+  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
 
   $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
-
   return $return_obj;
 }
 
@@ -2435,7 +2619,7 @@ function itg_rapid_api_horizontal_menu($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_server_error_master($token) {
-  $redis_key = "itgd_rapid_server_error_master_json";
+  $redis_key = "devitgd_rapid_server_error_master_json";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2470,19 +2654,18 @@ function itg_rapid_api_photolist($token) {
     $cpageno = 0;
   }
 
-  $redis_key = "itgd_rapid_api_photolist_" . $suffix;
+  $redis_key = "devitgd_rapid_api_photolist_" . $suffix;
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    // call function from return data..
-    $jsondata = photocategoryPageRerourceValue($id, $cpageno);
-    $jsondata = json_encode($jsondata);
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+  //    if ($result_get['key_value'] != "") {
+  //        $jsondata = $result_get['key_value'];
+  //    } else {
+  // call function from return data..
+  $jsondata = photocategoryPageRerourceValue($id, $cpageno);
+  $jsondata = json_encode($jsondata);
+  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
 
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
@@ -2497,12 +2680,13 @@ function itg_rapid_api_photolist($token) {
 function itg_rapid_api_photodetail($token) {
   //valid id
   $id = $_GET['id'];
+  //$cpageno = $_GET['cpageno'];
   $suffix = $id;
   if (!is_numeric($id)) {
     $id = 0;
   }
 
-  $redis_key = "itgd_rapid_api_photodetail_" . $suffix;
+  $redis_key = "devitgd_rapid_api_photodetail_" . $suffix;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2537,19 +2721,18 @@ function itg_rapid_api_programlist($token) {
     $cpageno = 0;
   }
 
-  $redis_key = "itgd_rapid_api_programlist_" . $suffix;
+  $redis_key = "devitgd_rapid_api_programlist_" . $suffix;
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    // call function from return data..
-    $jsondata = programcategoryPageRerourceValue($id, $cpageno);
-    $jsondata = json_encode($jsondata);
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+  //    if ($result_get['key_value'] != "") {
+  //        $jsondata = $result_get['key_value'];
+  //    } else {
+  // call function from return data..
+  $jsondata = programcategoryPageRerourceValue($id, $cpageno);
+  $jsondata = json_encode($jsondata);
+  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
 
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
@@ -2574,20 +2757,19 @@ function itg_rapid_api_newslist($token) {
     $cpageno = 0;
   }
 
-  $redis_key = "itgd_rapid_api_newslist_" . $suffix;
+  $redis_key = "devitgd_rapid_api_newslist_" . $suffix;
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    // call function from return data..
-    $realtime = 1;
-    $jsondata_realtime = $jsondata = newscategoryPageRerourceValue($id, $cpageno);
-    $jsondata = json_encode($jsondata);
-    $ttl = RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+  //    if ($result_get['key_value'] != "") {
+  //        $jsondata = $result_get['key_value'];
+  //    } else {
+  // call function from return data..
+  $realtime = 1;
+  $jsondata_realtime = $jsondata = newscategoryPageRerourceValue($id, $cpageno);
+  $jsondata = json_encode($jsondata);
+  $ttl = RAPID_API_NEWSLIST_REDIS_EXPIRE_TIME;
+  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
   if ($realtime) {
     return $jsondata_realtime;
   }
@@ -2615,7 +2797,7 @@ function itg_rapid_api_videolist($token) {
     $cpageno = 0;
   }
 
-  $redis_key = "itgd_rapid_api_videolist_" . $suffix;
+  $redis_key = "devitgd_rapid_api_videolist_" . $suffix;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2640,7 +2822,7 @@ function itg_rapid_api_videolist($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_adconfig_android($token) {
-  $redis_key = "itgd_rapid_adconfig_android";
+  $redis_key = "devitgd_rapid_adconfig_android";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2665,7 +2847,7 @@ function itg_rapid_api_adconfig_android($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_adconfig_ipad($token) {
-  $redis_key = "itgd_rapid_adconfig_ipad";
+  $redis_key = "devitgd_rapid_adconfig_ipad";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2690,7 +2872,7 @@ function itg_rapid_api_adconfig_ipad($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_adconfig_iphone($token) {
-  $redis_key = "itgd_rapid_adconfig_iphone";
+  $redis_key = "devitgd_rapid_adconfig_iphone";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2715,7 +2897,7 @@ function itg_rapid_api_adconfig_iphone($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_adconfig_tab($token) {
-  $redis_key = "itgd_rapid_aadconfig_tab";
+  $redis_key = "devitgd_rapid_aadconfig_tab";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2751,8 +2933,9 @@ function itg_rapid_api_photostorydetail($token) {
   }
 
   // call function for return data..
+
   $suffix = $id;
-  $redis_key = "itg_rapid_api_photostorydetail_" . $suffix;
+  $redis_key = "devitg_rapid_api_photostorydetail_" . $suffix;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2778,18 +2961,18 @@ function itg_rapid_api_photostorydetail($token) {
  */
 function itg_rapid_api_program_category_list($token) {
 
-  $redis_key = "itg_rapid_api_program_category_list";
+
+  $redis_key = "devitg_rapid_api_program_category_list";
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    $jsondata = programCategoryListlPageRerourceValue();
-    $jsondata = json_encode($jsondata);
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+  //    if ($result_get['key_value'] != "") {
+  //        $jsondata = $result_get['key_value'];
+  //    } else {
+  $jsondata = programCategoryListlPageRerourceValue();
+  $jsondata = json_encode($jsondata);
+  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  // }
 
   $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
@@ -2804,7 +2987,7 @@ function itg_rapid_api_program_category_list($token) {
  */
 function itg_rapid_api_ad_config_json($token) {
 
-  $redis_key = "itg_rapid_api_ad_config_json";
+  $redis_key = "devitg_rapid_api_ad_config_json";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2830,7 +3013,7 @@ function itg_rapid_api_ad_config_json($token) {
 function itg_rapid_api_livetv_channellist_json($token) {
 
 
-  $redis_key = "itg_rapid_api_livetv_channellist_json";
+  $redis_key = "devitg_rapid_api_livetv_channellist_json";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2857,7 +3040,7 @@ function itg_rapid_api_livetv_channellist_json($token) {
 function itg_rapid_api_otherapps_ios_json($token) {
 
 
-  $redis_key = "itg_rapid_api_otherapps_ios_json";
+  $redis_key = "devitg_rapid_api_otherapps_ios_json";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2883,7 +3066,7 @@ function itg_rapid_api_otherapps_ios_json($token) {
 function itg_rapid_api_otherapps_android_json($token) {
 
 
-  $redis_key = "itg_rapid_api_otherapps_android_json";
+  $redis_key = "devitg_rapid_api_otherapps_android_json";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2919,7 +3102,7 @@ function itg_rapid_api_magazine_edition($token) {
 
 
   $suffix = $id . "_" . $cpageno;
-  $redis_key = "itg_rapid_api_magazine_edition_" . $suffix;
+  $redis_key = "devitg_rapid_api_magazine_edition_" . $suffix;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2947,7 +3130,7 @@ function itg_rapid_api_magazine_coverstories($token) {
 
   // call function from return data..
 
-  $redis_key = "itg_rapid_api_magazine_coverstories";
+  $redis_key = "devitg_rapid_api_magazine_coverstories";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -2983,7 +3166,7 @@ function itg_rapid_api_magazine_editionlist($token) {
 
 
   $suffix = $sdate . "_" . $tdate . "_" . $cpageno;
-  $redis_key = "itg_rapid_api_magazine_editionlist_" . $suffix;
+  $redis_key = "devitg_rapid_api_magazine_editionlist_" . $suffix;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -3019,19 +3202,18 @@ function itg_rapid_api_storydetail($token) {
 
 
   $suffix = $id;
-  $redis_key = "itg_rapid_api_storydetail" . $suffix;
+  $redis_key = "devitg_rapid_api_storydetail" . $suffix;
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    // call function from return data..
-    $jsondata = StoryDetailPageRerourceValue($id);
-    $jsondata = json_encode($jsondata);
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+  //    if ($result_get['key_value'] != "") {
+  //        $jsondata = $result_get['key_value'];
+  //    } else {
+  // call function from return data..
+  $jsondata = StoryDetailPageRerourceValue($id);
+  $jsondata = json_encode($jsondata);
+  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
 
   $jsondata = json_decode($jsondata, FALSE);
   return $jsondata;
@@ -3045,19 +3227,18 @@ function itg_rapid_api_storydetail($token) {
  */
 function itg_rapid_api_homePage($token) {
 
-  $redis_key = "itg_rapid_api_homePage";
+  $redis_key = "devitg_rapid_api_homePage";
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    // call function from return data..
-    $jsondata = homePageJson();
-    $jsondata = json_encode($jsondata);
-    $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+  //    if ($result_get['key_value'] != "") {
+  //        $jsondata = $result_get['key_value'];
+  //    } else {
+  // call function from return data..
+  $jsondata = homePageJson();
+  $jsondata = json_encode($jsondata);
+  $ttl = RAPID_API_HOMEPAGE_REDIS_EXPIRE_TIME;
+  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
 
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
@@ -3072,7 +3253,7 @@ function itg_rapid_api_homePage($token) {
 function itg_rapid_api_livetv_aajtak($token) {
 
 
-  $redis_key = "itg_rapid_api_livetv_aajtak";
+  $redis_key = "devitg_rapid_api_livetv_aajtak";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -3098,7 +3279,7 @@ function itg_rapid_api_livetv_aajtak($token) {
 function itg_rapid_api_livetv_indiatoday($token) {
 
 
-  $redis_key = "itg_rapid_api_livetv_indiatoday";
+  $redis_key = "devitg_rapid_api_livetv_indiatoday";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -3124,7 +3305,7 @@ function itg_rapid_api_livetv_indiatoday($token) {
 function itg_rapid_api_livetv_delhiaajtak($token) {
 
 
-  $redis_key = "itg_rapid_api_livetv_delhiaajtak";
+  $redis_key = "devitg_rapid_api_livetv_delhiaajtak";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -3150,7 +3331,7 @@ function itg_rapid_api_livetv_delhiaajtak($token) {
 function itg_rapid_api_livetv_tej($token) {
 
 
-  $redis_key = "itg_rapid_api_livetv_tej";
+  $redis_key = "devitg_rapid_api_livetv_tej";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -3243,8 +3424,10 @@ function itg_rapid_api_signup($token) {
         $session_id = $cookie_val['session_id'];
         $session_name = $cookie_val['session_name'];
         $result_obj = json_decode($result);
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
         $account['status_code'] = "1";
-        $account['status_message'] = "";
+        $account['status_message'] = "$success_status_message";
         $account['data']['user_id'] = "$uname";
         $account['data']['auth_token'] = "$result->token";
         $account['data']['session_id'] = "$session_id";
@@ -3264,10 +3447,9 @@ function itg_rapid_api_signup($token) {
 
     $method = "POST";
 
-
-
     $data = array();
     $password = rand(0, 9999);
+    //$_GET['password'] = $password;
     $data = $params;
     $uname_fi = $params['user_id'];
     $data['password'] = $password;
@@ -3316,9 +3498,12 @@ function itg_rapid_api_signup($token) {
         $is_first_login = 0;
       }
       if ($auth_token) {
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
         $user = updateUsedrProfileAtSignup_rapid($data, 1);
         $account['status_code'] = "1";
-        $account['status_message'] = "";
+        $account['status_message'] = "$success_status_message";
         $account['data']['user_id'] = "$name";
         $account['data']['auth_token'] = "$auth_token";
         $account['data']['session_id'] = "$session_id";
@@ -3326,6 +3511,7 @@ function itg_rapid_api_signup($token) {
       }
       else {
         watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+        //return services_error(t('Wrong username or password.'), 401);
         $account = array();
         $account['status_code'] = "0";
         $account['status_message'] = "Wrong username or password.";
@@ -3334,6 +3520,7 @@ function itg_rapid_api_signup($token) {
     }
     else {
       watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+      //return services_error(t('Wrong username or passwordfb.'), 401);
       $account = array();
       $account['status_code'] = "0";
       $account['status_message'] = "Wrong username or password1.";
@@ -3343,9 +3530,13 @@ function itg_rapid_api_signup($token) {
     return $account;
   }
   elseif ($login_type == 2) {
+
+
     $method = "POST";
+
     $data = array();
     $password = rand(0, 9999);
+    //$_GET['password'] = $password;
     $data = $params;
     $uname_fi = $params['user_id'];
     $data['password'] = $password;
@@ -3396,8 +3587,10 @@ function itg_rapid_api_signup($token) {
       }
       if ($auth_token) {
         $user = updateUsedrProfileAtSignup_rapid($data, 1);
+        $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+        $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
         $account['status_code'] = "1";
-        $account['status_message'] = "";
+        $account['status_message'] = "$success_status_message";
         $account['data']['user_id'] = "$name";
         $account['data']['auth_token'] = "$auth_token";
         $account['data']['session_id'] = "$session_id";
@@ -3405,6 +3598,7 @@ function itg_rapid_api_signup($token) {
       }
       else {
         watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+        //return services_error(t('Wrong username or password.'), 401);
         $account = array();
         $account['status_code'] = "0";
         $account['status_message'] = "Wrong username or password.";
@@ -3413,6 +3607,7 @@ function itg_rapid_api_signup($token) {
     }
     else {
       watchdog('user', 'Invalid login attempt for %username.', array('%username' => $username));
+      //return services_error(t('Wrong username or passwordtwt.'), 401);
       $account = array();
       $account['status_code'] = "0";
       $account['status_message'] = "Wrong username or password.";
@@ -3432,7 +3627,9 @@ function itg_rapid_api_signup($token) {
 function itg_rapid_api_login_request($token) {
 
   $HTTP_RAW_POST_DATA;
+  //$params = $_POST;
   $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
   $method = "POST";
   $data = $params;
   // login raw input validation
@@ -3473,6 +3670,7 @@ function itg_rapid_api_login_request($token) {
   $field_logged_in_count = $result_obj->user->field_logged_in_count->und[0]->value;
 
   if ($uid) {
+    //$local_account = localSignup($params);
     $local_account = localLogin($params);
     $cookie_val = getSmlCookie();
     $session_id = $cookie_val['session_id'];
@@ -3494,6 +3692,7 @@ function itg_rapid_api_login_request($token) {
       $profile_image = completeFilePath($local_account->user->field_user_picture['und'][0]['fid']);
       $gender = $local_account->user->field_user_gender['und'][0]['value'];
       $date_of_birth = $local_account->user->field_story_issue_date['und'][0]['value'];
+      //$mail = $result_obj->mail;
       $phone_number = "";
       $mail = "";
       if (is_numeric($name)) {
@@ -3502,8 +3701,11 @@ function itg_rapid_api_login_request($token) {
       else {
         $mail = $name;
       }
+      $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+      $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
       $account['status_code'] = "1";
-      $account['status_message'] = "";
+      $account['status_message'] = "$success_status_message";
       $account['data']['user_id'] = "$name";
       $account['data']['auth_token'] = "$auth_token";
       $account['data']['is_authenticated'] = "0";
@@ -3611,6 +3813,7 @@ function itg_rapid_api_edit_user_image($token) {
     // crate profile img tmp file
     file_put_contents($profile_img_tmp, $profile_img);
     $imagedata = file_get_contents($profile_img_tmp);
+    //$file_data_temp = file_save_data($imagedata, file_default_scheme() . '://' . $image_url);
     $file_data = file_save_data($imagedata, file_default_scheme() . '://' . $image_name);
 
 
@@ -3621,9 +3824,12 @@ function itg_rapid_api_edit_user_image($token) {
 
     // Save user object.
     $resp = user_save($user_detail);
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     if ($resp->uid) {
       $data['status_code'] = "1";
-      $data['status_message'] = "";
+      $data['status_message'] = "$success_status_message";
     }
     else {
       $data['status_code'] = "0";
@@ -3640,49 +3846,62 @@ function itg_rapid_api_edit_user_image($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_log_out($token) {
-    $HTTP_RAW_POST_DATA;
-    global $base_url;
-    $params = (array) json_decode(file_get_contents('php://input'), TRUE);
-    // check valid user_id
-    $rand = rand();
-    $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-    $result = callAPI("GET", $url, $params);
-    $token = $params['auth_token'];
-    $result_obj = json_decode($result);
-    if (!$result_obj->uid) {
-        $account_err['status_code'] = "0";
-        $account_err['status_message'] = "Invalid User_ID";
-        return $account_err;
-    }
-    $token_val_flag = 0;
-    $token_val_flag = tokenValidator($params['user_id'], $token);
-    if (!drupal_valid_token($token, 'services')) {       
-        $res['status_code'] = "0";
-        $res['status_message'] = "invalid token";
-        return $res;
-    }    
-          
-        $method = "POST";
-        $url = PARENT_SSO . "/appapisso/log_out";
-        $result = callAPI($method, $url, $params);
-        $user_id = $params['user_id'];
-        $user = user_load_by_name($user_id);
-        watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
-        $original_session_state = drupal_save_session();
-        drupal_save_session(TRUE);
-        // Destroy the current session.
-        module_invoke_all('user_logout', $user);
-        session_destroy();
-        // Load the anonymous user.
-        $user = drupal_anonymous_user();
-        drupal_save_session($original_session_state);
-        // call custom function to clean token in custom table
-        cleanToken_Rapid($params);            
-    
-    $data['status_code'] = "1";
-    $data['status_message'] = "";
+  $HTTP_RAW_POST_DATA;
+  global $base_url;
+  $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+  // check valid user_id
+  $rand = rand();
+  $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
+  $result = callAPI("GET", $url, $params);
+  $token = $params['auth_token'];
+  $result_obj = json_decode($result);
 
-    return $data;
+  if (!$result_obj->uid) {
+    $account_err['status_code'] = "0";
+    $account_err['status_message'] = "Invalid User_ID";
+    return $account_err;
+  }
+
+  $token_val_flag = 0;
+  $token_val_flag = tokenValidator($params['user_id'], $token);
+  if (!drupal_valid_token($token, 'services')) {
+    //if (!$token_val_flag) {
+    $res['status_code'] = "0";
+    $res['status_message'] = "invalid token";
+    return $res;
+  }
+
+  //$params = $_POST; {
+    // call sso server api
+    $method = "POST";
+    $url = PARENT_SSO . "/appapisso/log_out";
+    $result = callAPI($method, $url, $params);
+    $user_id = $params['user_id'];
+    $user = user_load_by_name($user_id);
+
+    watchdog('user', 'Session closed for %name.', array('%name' => $user->name));
+
+    $original_session_state = drupal_save_session();
+    drupal_save_session(TRUE);
+
+    // Destroy the current session.
+    module_invoke_all('user_logout', $user);
+    session_destroy();
+
+    // Load the anonymous user.
+    $user = drupal_anonymous_user();
+
+    drupal_save_session($original_session_state);
+    // call custom function to clean token in custom table
+    cleanToken_Rapid($params);
+  }
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+  $data['status_code'] = "1";
+  $data['status_message'] = "$success_status_message";
+
+  return $data;
 }
 
 /**
@@ -3753,13 +3972,18 @@ function itg_rapid_api_change_password($token) {
 
     drupal_save_session($original_session_state);
     deviceTokenReset_Rapid($params);
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "Password has changed";
+
     $data['status_code'] = "1";
-    $data['status_message'] = "Password has changed";
+    $data['status_message'] = "$success_status_message";
   }
   else {
     $data['status_code'] = "2";
     $data['status_message'] = "Password has not changed";
   }
+
+
 
   return $data;
 }
@@ -3774,6 +3998,7 @@ function itg_rapid_api_forgot_password($token) {
   $HTTP_RAW_POST_DATA;
   $method = "POST";
   $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+  //$params = $_POST;
   // login raw input validation
   $validation_error = array();
   $validation_error_str = "";
@@ -3817,8 +4042,11 @@ function itg_rapid_api_forgot_password($token) {
     itg_otp_device_info_insert_rapid($params, $result_obj_otp[0]->otp, 1, $result_obj_otp[0]->created);
   }
   cleanToken_Rapid($params);
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
   $data['status_code'] = "1";
-  $data['status_message'] = "";
+  $data['status_message'] = "$success_status_message";
 
   return $data;
 }
@@ -3876,8 +4104,11 @@ function itg_rapid_api_otp_verification($token) {
     }
     //login scritp end
     $uname = $params['user_id'];
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     $data['status_code'] = "1";
-    $data['status_message'] = "";
+    $data['status_message'] = "$success_status_message";
     $data['data']['user_id'] = "$uname";
     $data['data']['is_authenticated'] = "1";
     //$data['data']['auth_token'] = "$return->token";
@@ -3911,6 +4142,7 @@ function itg_rapid_api_resend_otp($token, $user_id) {
     $account_err['status_message'] = "$validation_error_str";
     return $account_err;
   }
+  //$params = $_POST;
   $rand = rand();
   $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
   $result = callAPI("GET", $url, $params);
@@ -3926,8 +4158,11 @@ function itg_rapid_api_resend_otp($token, $user_id) {
   $result = callAPI($method, $url, $params);
   $result_obj = json_decode($result);
 
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
   $data['status_code'] = "1";
-  $data['status_message'] = "";
+  $data['status_message'] = "$success_status_message";
 
   return $data;
 }
@@ -3952,24 +4187,30 @@ function itg_rapid_api_get_login_user_detail($token) {
     $account_err['status_message'] = "Invalid User_ID";
     return $account_err;
   }
+  //$params = $_POST;
   $authtoken_id = $params['authtoken_id'];
   $user_id = $params['user_id'];
   $token = $params['authtoken_id'];
   $token_val_flag = 0;
   $token_val_flag = tokenValidator($params['user_id'], $authtoken_id);
   if (!drupal_valid_token($token, 'services')) {
+    //if (!$token_val_flag) {
     $data['status_code'] = "0";
     $data['status_message'] = "invalid token";
   }
   else {
     $account = user_load_by_name($user_id);
+    //$user_id = $account->uid;
     $first_name = $account->field_first_name['und'][0]['value'];
     $last_name = $account->field_last_name['und'][0]['value'];
     $email_id = $account->mail;
     $phone_number = $account->field_mobile_number['und'][0]['value'];
     $location = "";
+
     $location = $account->field_short_description['und'][0]['value'];
+
     $profile_image = completeFilePath($account->field_user_picture['und'][0]['fid']);
+    //$profile_image = $account->field_user_picture['und'][0]['fid'];
     $gender = $account->field_user_gender['und'][0]['value'];
     $date_of_birth = $account->field_story_issue_date['und'][0]['value'];
     $login_type = "0";
@@ -3980,8 +4221,11 @@ function itg_rapid_api_get_login_user_detail($token) {
       $login_type = 2;
     }
 
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     $data['status_code'] = "1";
-    $data['status_message'] = "";
+    $data['status_message'] = "$success_status_message";
 
     $data['data']['user_profile_detail']['token_id'] = "$authtoken_id";
     $data['data']['user_profile_detail']['login_type'] = "$login_type";
@@ -4030,6 +4274,7 @@ function itg_rapid_api_edit_profile($token) {
     $account_err['status_message'] = "Invalid User_ID";
     return $account_err;
   }
+  //$params = $_POST;
   $token = $params['authtoken_id'];
   $token_val_flag = 0;
   $token_val_flag = tokenValidator($params['user_id'], $token);
@@ -4045,8 +4290,12 @@ function itg_rapid_api_edit_profile($token) {
 
     //if ($result_obj->uid) {
     $responce_object_rs = saveUpdatedProfile($params);
+
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
     $responce_object['status_code'] = "1";
-    $responce_object['status_message'] = "";
+    $responce_object['status_message'] = "$success_status_message";
     //}
   }
   return $responce_object;
@@ -4081,10 +4330,17 @@ function itg_rapid_api_get_preference($token) {
   }
   else {
     $account = user_load_by_name($user_id);
+
     $preference_tid = get_personalization_saved_value_service($account->uid);
+
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+    // return data of personalization-preferences value
     $data['status_code'] = "1";
-    $data['status_message'] = "";
+    $data['status_message'] = "$success_status_message";
     $data['data']['updated_datetime'] = "$last_access_date";
+    //$data['data']['preference_type'] = "default/implicit/explicit";
     $data['data']['preference_type'] = "explicit";
     $loop_count = 0;
     //get personalization-preferences value
@@ -4114,6 +4370,7 @@ function itg_rapid_api_update_preference($token) {
   global $user;
   $HTTP_RAW_POST_DATA;
   $data = array();
+
   $params = (array) json_decode(file_get_contents('php://input'), TRUE);
   $user_id = $params['user_id'];
   $authtoken_id = $params['authtoken_id'];
@@ -4168,8 +4425,11 @@ function itg_rapid_api_update_preference($token) {
         ))->execute();
     }
   }
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
   $data['status_code'] = "1";
-  $data['status_message'] = "";
+  $data['status_message'] = "$success_status_message";
   return $data;
 }
 
@@ -4195,7 +4455,7 @@ function itg_rapid_api_reset_password($token) {
   }
   $rand = rand();
   $url = PARENT_SSO . "/appapisso/check_user/" . $rand;
-  
+  // echo $url; die();
   $result = callAPI("GET", $url, $params);
   $result_obj = json_decode($result);
 
@@ -4230,8 +4490,10 @@ function itg_rapid_api_reset_password($token) {
 
     drupal_save_session($original_session_state);
     deviceTokenReset_Rapid($params);
+    $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+    $success_status_message = isset($success_status_mess) ? $success_status_mess : "password has been changed";
     $data['status_code'] = "1";
-    $data['status_message'] = "password has been changed";
+    $data['status_message'] = "$success_status_message";
   }
   else {
     $data['status_code'] = "2";
@@ -4252,7 +4514,10 @@ function itg_rapid_api_reset_password($token) {
 function itg_rapid_api_authtoken_verification($token) {
 
   $HTTP_RAW_POST_DATA;
+  //$params = $_POST;
   $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
+
   $token = $params['auth_token'];
   $data = array();
   $method = "POST";
@@ -4281,14 +4546,19 @@ function itg_rapid_api_authtoken_verification($token) {
     $token_val_flag = 0;
     $token_val_flag = tokenValidator($params['user_id'], $token);
     if (!drupal_valid_token($token, 'services')) {
+      //if (!$token_val_flag) {
+
       $res['status_code'] = "0";
       $res['status_message'] = "invalid token";
     }
     else {
+      $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+      $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
       $res['status_code'] = "1";
-      $res['status_message'] = "";
+      $res['status_message'] = "$success_status_message";
     }
   }
+
   return $res;
 }
 
@@ -4301,13 +4571,17 @@ function itg_rapid_api_authtoken_verification($token) {
 function itg_rapid_api_author_list($token) {
   $HTTP_RAW_POST_DATA;
   $params = (array) json_decode(file_get_contents('php://input'), TRUE);
+
   // user name of the logend in user
   $user_name = $params['user_id'];
   $user_load = user_load_by_name($user_name);
   $user_id = $user_load->uid;
   $authtoken_id = $params['authtoken_id'];
   $cpageno = $params['cpageno'];
+
+
   $message_array = array();
+
   $args = '0';
   if ($user_id != '0' && isset($authtoken_id)) {
     $args = '1';
@@ -4331,6 +4605,8 @@ function itg_rapid_api_author_list($token) {
     $message_array['status_message'] = "invalid token";
     $message_array['data'] = array();
   }
+
+
   // check args
   if ($args != '0') {
     $jsondata = list_itg_rapid_api_author_list($user_id, $cpageno);
@@ -4338,6 +4614,7 @@ function itg_rapid_api_author_list($token) {
   else {
     $jsondata = $message_array;
   }
+
   return $jsondata;
 }
 
@@ -4418,6 +4695,8 @@ function itg_rapid_api_get_the_user_follow_status($token) {
   $user_load = user_load_by_name($user_name);
   $user_id = $user_load->uid;
   $authtoken_id = $params['authtoken_id'];
+
+
   $message_array = array();
 
   $args = '0';
@@ -4444,6 +4723,7 @@ function itg_rapid_api_get_the_user_follow_status($token) {
     $message_array['data'] = array();
   }
 
+
   // check args
   if ($args != '0') {
     $jsondata = list_itg_rapid_api_get_the_user_follow_status($user_id);
@@ -4451,6 +4731,7 @@ function itg_rapid_api_get_the_user_follow_status($token) {
   else {
     $jsondata = $message_array;
   }
+
   return $jsondata;
 }
 
@@ -4482,7 +4763,7 @@ function author_latest_story($token) {
   }
 
   $suffix = $author_id . '_' . $cpageno;
-  $redis_key = "itg_rapid_api_author_" . $type . "_storylist" . $suffix;
+  $redis_key = "devitg_rapid_api_author_" . $type . "_storylist" . $suffix;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -4512,7 +4793,7 @@ function polls_open($token) {
     $cpageno = 0;
   }
 
-  $redis_key = "itg_rapid_api_open_polls_" . $cpageno;
+  $redis_key = "devitg_rapid_api_open_polls_" . $cpageno;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -4541,7 +4822,7 @@ function polls_close($token) {
   if (!is_numeric($cpageno)) {
     $cpageno = 0;
   }
-  $redis_key = "itg_rapid_api_close_polls_" . $cpageno;
+  $redis_key = "devitg_rapid_api_close_polls_" . $cpageno;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -4650,7 +4931,7 @@ function itg_rapid_api_poll_cast($poll_id, $option_id, $user_id, $args) {
 function author_detail($token, $author_id) {
 
   $author_id = $_GET['author_id'];
-  $redis_key = "itg_rapid_api_author_" . $author_id . "_detail";
+  $redis_key = "devitg_rapid_api_author_" . $author_id . "_detail";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -4680,7 +4961,7 @@ function author_detail($token, $author_id) {
  */
 function news_wrap($token) {
 
-  $redis_key = "itg_rapid_newswrap";
+  $redis_key = "devitg_rapid_newswrap";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -5148,26 +5429,27 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
   $anchor_c = 0;
   $anchor_c1 = 0;
   $anchor_c2 = 0;
+  //$data = array_unique($data); field_reporter_twitter_handle]
   foreach ($data as $key => $value) {
     if ($value['nid']) {
       // 837259
       $node_data = node_load($value['nid']);
 
-      if ($value['ntype'] == "anchor" && $value['status'] == 1) {
+      if ($value['ntype'] == "anchor") {
         $a_id = $node_data->nid;
 
         $anchor_list[$anchor_c]['a_id'] = "$a_id";
 
         $anchor_c++;
       }
-      elseif ($value['ntype'] == "author" && $value['status'] == 1) {
+      elseif ($value['ntype'] == "author") {
         $a_id = $node_data->nid;
 
         $author_list[$anchor_c1]['a_id'] = "$a_id";
 
         $anchor_c1++;
       }
-      elseif ($value['ntype'] == "tag" && $value['status'] == 1) {
+      elseif ($value['ntype'] == "tag") {
         $a_id = $value['nid'];
 
         $topics_list[$anchor_c2]['t_id'] = "$a_id";
@@ -5182,9 +5464,12 @@ function list_itg_rapid_api_get_the_user_follow_status($uid) {
   $anchor_data['author'] = $author_list;
   $anchor_data['topic'] = $topics_list;
 
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
   if ($anchor_c > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
     $output_array['data'] = $anchor_data;
   }
   else {
@@ -5309,6 +5594,8 @@ function itg_rapid_api_user_follow_topic_list($token) {
     $message_array['status_message'] = "invalid token";
     $message_array['data'] = array();
   }
+
+
   // check args
   if ($args != '0') {
     $jsondata = list_user_follow_topic_list($user_id);
@@ -5316,6 +5603,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
   else {
     $jsondata = $message_array;
   }
+
   return $jsondata;
 }
 
@@ -5330,11 +5618,17 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
+
+  echo $term_feed_path = "public://xml_it/photos";
+  die();
+
   $str = '{
-    "status_code": "0",
-    "status_message": "Customised Message",
-    "data": {}
-  }';
+	"status_code": "0",
+	"status_message": "Customised Message",
+	"data": {}
+}';
+
+
   $jsondata = $str;
   $obj = json_decode($jsondata, TRUE);
   $return_obj = $obj;
@@ -5347,7 +5641,7 @@ function itg_rapid_api_testing($token) {
 /*
  * Common function for checking poll is open or close
  * @param $poll_id
- * return 0|1 , if return 0 then poll is closed , if return 1 then poll is open , 
+ * return 0|1 , if return 0 then poll is closed , if return 1 then poll is open ,
  */
 function check_poll_status($poll_id) {
 
@@ -5371,9 +5665,11 @@ function check_poll_status($poll_id) {
       $poll_status = '1';
     }
     elseif ($res['field_poll_end_date_value'] == '') {
+      //&& $res['field_poll_start_date_value'] >= $current_time
       $poll_status = '1';
     }
   }
+  //if status is 1 then poll is open otherwise poll is closed
 
   return $poll_status;
 }
@@ -5387,8 +5683,9 @@ function check_poll_status($poll_id) {
  * 	array of open polls.
  */
 function poll_detail($token, $poll_id) {
+
   $poll_id = $_GET['poll_id'];
-  $redis_key = "itg_rapid_poll_details_" . $poll_id;
+  $redis_key = "devitg_rapid_poll_details_" . $poll_id;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -5491,7 +5788,7 @@ function update_preference($user_id, $tid) {
 function anchor_detail($token, $anchor_id) {
 
   $anchor_id = $_GET['anchor_id'];
-  $redis_key = "itg_rapid_api_anchor_" . $anchor_id . "_detail";
+  $redis_key = "devitg_rapid_api_anchor_" . $anchor_id . "_detail";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -5512,13 +5809,16 @@ function anchor_detail($token, $anchor_id) {
 /**
  * Returns all the programm which is filled by particular anchor.
  *
- * @param string $token
- * @param int $anchor_id
- * @param string $type
+ * @param $anchor_id
+ *   The Anchor id
+ *   Type [0/1 where 0 can be for Latest and 1 for Popular]
  *
  * @return array
+ * 	array of programms.
  */
 function anchor_programm_list($token, $anchor_id, $type) {
+
+  //valid id
   $anchor_id = $_GET['anchor_id'];
   $story_type = $_GET['type'];
   $cpageno = $_GET['cpageno'];
@@ -5543,7 +5843,7 @@ function anchor_programm_list($token, $anchor_id, $type) {
     $type = '';
   }
   $suffix = $anchor_id . '_' . $cpageno;
-  $redis_key = "itg_rapid_api_anchor_" . $redis_type . "_programmlist" . $suffix;
+  $redis_key = "devitg_rapid_api_anchor_" . $redis_type . "_programmlist" . $suffix;
 
   $result_get = getRedis($redis_key);
 
@@ -5591,12 +5891,17 @@ function list_anchor_data_responce($uid) {
         $loopc++;
       }
     }
+    //return $data;
   }
 
+
   $anchor_data['anchor'] = $anchor_list;
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
   if ($loopc > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
     $output_array['data'] = $anchor_data;
   }
   else {
@@ -5626,6 +5931,8 @@ function list_author_data_responce($uid) {
     $anchor_list = array();
     $anchor_data = array();
     foreach ($cursor as $document) {
+
+
       if ($document['ntype'] == "author" && $document['status'] == 1) {
         $node_data = node_load($document['nid']);
         $a_id = $node_data->nid;
@@ -5641,12 +5948,17 @@ function list_author_data_responce($uid) {
         $loopc++;
       }
     }
+    //return $data;
   }
+
+
   $anchor_data['author'] = $anchor_list;
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
   if ($loopc > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
     $output_array['data'] = $anchor_data;
   }
   else {
@@ -5701,6 +6013,7 @@ function list_itg_rapid_api_author_list($uid, $cpageno) {
     $loopc = 0;
     foreach ($cursor as $document) {
 
+
       if ($document['status'] == 1 && $document['ntype'] == 'author') {
         $node_data = node_load($document['nid']);
         $a_id = $node_data->nid;
@@ -5716,20 +6029,29 @@ function list_itg_rapid_api_author_list($uid, $cpageno) {
         $loopc++;
       }
     }
+    //return $data;
   }
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+  $dis_count = fetchMasterConfigData('author_list_display_count');
+  $display_count = isset($dis_count) ? $dis_count : "25";
+
+  $pag_cap = fetchMasterConfigData('author_list_pagination_cap');
+  $pagination_cap = isset($pag_cap) ? $pag_cap : "25";
 
 
   $anchor_data['id'] = "$uid";
   $anchor_data['title'] = "Authors";
   $anchor_data['author_count'] = "$loopc";
-  $anchor_data['author_display_count'] = "25";
-  $anchor_data['author_pagination_cap'] = "25";
+  $anchor_data['author_display_count'] = "$display_count";
+  $anchor_data['author_pagination_cap'] = "$pagination_cap";
 
   $anchor_data['author'] = $anchor_list;
 
   if ($loopc > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
     $output_array['data'] = $anchor_data;
   }
   else {
@@ -5790,6 +6112,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
     $anchor_list_dump = array();
 
     foreach ($cursor as $document) {
+      //if($document['status'] == 1 && $document['ntype'] == 'anchor'){
       $node_data = node_load($document['nid']);
 
       $a_id = $node_data->nid;
@@ -5825,13 +6148,22 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
 
       // }
     }
+    //return $data;
   }
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+  $dis_count = fetchMasterConfigData('anchor_list_display_count');
+  $display_count = isset($dis_count) ? $dis_count : "50";
+
+  $pag_cap = fetchMasterConfigData('anchor_list_pagination_cap');
+  $pagination_cap = isset($pag_cap) ? $pag_cap : "50";
 
   $anchor_data['id'] = "$uid";
   $anchor_data['display_label'] = "Anchors";
   $anchor_data['anchor_count'] = "$anchor_c";
-  $anchor_data['anchor_display_count'] = "50";
-  $anchor_data['anchor_pagination_cap'] = "50";
+  $anchor_data['anchor_display_count'] = "$display_count";
+  $anchor_data['anchor_pagination_cap'] = "$pagination_cap";
 
   //$anchor_list = removeduplicatefrommiltiD($anchor_list);
   $anchor_data['anchor'] = $anchor_list;
@@ -5840,7 +6172,7 @@ function list_itg_rapid_api_anchor_list($uid, $cpageno, $showall) {
 
   if ($anchor_c > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
     $output_array['data'] = $anchor_data;
   }
   else {
@@ -5923,9 +6255,12 @@ function follow_topic_data_responce($user_id, $author_id, $type) {
     $data['limit_crossed'] = '0';
   }
 
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
   if (!empty($response)) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
     $output_array['data'] = $data;
   }
   else {
@@ -5962,12 +6297,19 @@ function list_user_follow_topic_list($uid) {
       $loopc++;
       //  }
     }
+    //return $data;
   }
+
+
+
   $anchor_data['topic'] = $data;
+
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
   if ($loopc > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
     $output_array['data'] = $anchor_data;
   }
   else {
@@ -5993,6 +6335,7 @@ function removeduplicatefrommiltiD($array) {
   $usedEmails = array();
 
   for ($i = 0; $i < count($array); $i++) {
+
     if (in_array($array[$i][2], $usedEmails)) {
       unset($copy[$i]);
     }
@@ -6052,13 +6395,11 @@ function tokenValidator($uname, $token) {
  */
 function resetToken($uname, $token) {
   $time_now = time();
-  if ($uname) {
-    $user_load = user_load_by_name($uname);
-    $uid = $user_load->uid;
-    db_update('itg_app_device')->expression('token', 'token + :token', array(':token' => $time_now))->condition('uid', $uid)->condition('token', $token)->execute();
-  }
-  return $cook_val;
+  $user_load = user_load_by_name($uname);
+  $uid = $user_load->uid;
+  db_update('itg_app_device')->expression('token', 'token + :token', array(':token' => $time_now))->condition('uid', $uid)->condition('token', $token)->execute();
 }
+
 /**
  * Helper function to get cookie value
  *
@@ -6089,7 +6430,7 @@ function itg_rapid_api_programdetail($token) {
     $id = 0;
   }
 
-  $redis_key = "itg_rapid_api_programdetail_" . $suffix;
+  $redis_key = "devitg_rapid_api_programdetail_" . $suffix;
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {
@@ -6120,19 +6461,18 @@ function itg_rapid_api_videodetail($token) {
     $id = 0;
   }
 
-  $redis_key = "itg_rapid_api_videodetail_" . $suffix;
+  $redis_key = "devitg_rapid_api_videodetail_" . $suffix;
   $result_get = getRedis($redis_key);
 
-  if ($result_get['key_value'] != "") {
-    $jsondata = $result_get['key_value'];
-  }
-  else {
-    // call function from return data..
-    $jsondata = generateVideoDetail($id);
-    $jsondata = json_encode($jsondata);
-    $ttl = DEFAULT_REDIS_EXPIRE_TIME;
-    $result_set = setRedis($redis_key, $jsondata, $ttl);
-  }
+  //    if ($result_get['key_value'] != "") {
+  //        $jsondata = $result_get['key_value'];
+  //    } else {
+  // call function from return data..
+  $jsondata = generateVideoDetail($id);
+  $jsondata = json_encode($jsondata);
+  $ttl = DEFAULT_REDIS_EXPIRE_TIME;
+  $result_set = setRedis($redis_key, $jsondata, $ttl);
+  //}
   $jsondata = json_decode($jsondata, TRUE);
   return $jsondata;
 }
@@ -6151,7 +6491,7 @@ function itg_rapid_api_topstories($token) {
     $id = 0;
   }
 
-  $redis_key = "itg_rapid_api_topstories";
+  $redis_key = "devitg_rapid_api_topstories";
   $result_get = getRedis($redis_key);
 
   if ($result_get['key_value'] != "") {

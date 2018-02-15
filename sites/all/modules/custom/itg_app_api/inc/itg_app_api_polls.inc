@@ -15,21 +15,27 @@ function polls_open_list($cpageno) {
   $output_array = array();
   $data_array = array();
   $updated_datetime = "";
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
   // list array building
   $data = polls_open_datalist($cpageno);
+
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
   }
   else {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
+
   //data array building
-  //testing id, after testing we will change. $poll_id
-  $data_array['id'] = "";
-  //testing title, after testing we will change. $poll_title
-  $data_array['title'] = "";
+
+  //$poll_id
+  $data_array['id'] = "1234";
+  //$poll_title
+  $data_array['title'] = "Test title";
   $data_array['polls'] = $data['data'];
   $output_array['data'] = $data_array;
 
@@ -47,23 +53,31 @@ function polls_close_list($cpageno) {
   $output_array = array();
   $data_array = array();
   $updated_datetime = "";
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
   // list array building
+
   $data = polls_close_datalist($cpageno);
+
+
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
   }
   else {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
+
   //data array building
-  $data_array['id'] = "";
-  $data_array['title'] = "";
+
+  $data_array['id'] = "1234";
+  $data_array['title'] = "Test Title";
 
   $data_array['polls'] = $data['data'];
   $output_array['data'] = $data_array;
+
   return $output_array;
 }
 
@@ -75,6 +89,8 @@ function polls_close_list($cpageno) {
  * @return the poll info in array
  */
 function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) {
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
   if (isset($option_id) && $option_id != '') {
     $dsp_result = itg_poll_get_display_result($poll_id);
@@ -94,7 +110,7 @@ function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) 
         ))->execute();
 
       $output_array['status_code'] = "1";
-      $output_array['status_message'] = "";
+      $output_array['status_message'] = "$success_status_message";
     }
     else {
 
@@ -105,7 +121,7 @@ function poll_cast_list($poll_id, $option_id, $device_id, $ip_address, $device) 
   }
   else {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
   }
 
   $data = poll_cast_datalist($poll_id);
@@ -192,6 +208,7 @@ function poll_cast_datalist($poll_id) {
     $news2[] = $news;
   }
 
+
   $data['data'] = $news;
   $data['id'] = $res['id'];
   $data['title'] = $res['title'];
@@ -204,23 +221,31 @@ function poll_cast_datalist($poll_id) {
  *  @return the poll info in array
  */
 function poll_detail_data($poll_id) {
+
   $output_array = array();
   $data_array = array();
   $updated_datetime = "";
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
   // list array building
+
   $data = poll_detail_datalist($poll_id);
+
+
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
   }
   else {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
+
   //$poll_id
-  $data_array['id'] = "";
+  $data_array['id'] = "1234";
   //$poll_title
-  $data_array['title'] = "";
+  $data_array['title'] = "Test Title";
   $data_array['polls'] = $data['data'];
   $output_array['data'] = $data_array;
 
@@ -230,22 +255,27 @@ function poll_detail_data($poll_id) {
 /**
  * Return the data of open poll
  * @pram int $cpageno
- * @pram string $from
  *
  * @return array
  */
 function polls_open_datalist($cpageno, $from) {
   $range_max = 10;
+  $dis_count = fetchMasterConfigData('poll_display_count_newslist_cell');
+  if (!empty($dis_count) && is_numeric($dis_count)) {
+    $range_max = $dis_count;
+  }
+
   if ($from == "home") {
     $range_max = 1;
   }
-  $range_min = 0;
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-
-
+  else {
+    $range_min = 0;
+  }
   $current_time = date('Y-m-d H:i:s', time());
+  $poll_node_list = home_page_polls_node_list();
 
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_poll_banner', 'pb', 'pb.entity_id = n.nid');
@@ -262,10 +292,10 @@ function polls_open_datalist($cpageno, $from) {
   $query->fields('qi', array('field_poll_question_image_fid'));
 
   $query->condition('n.type', 'poll');
-  $query->condition('st.field_poll_start_date_value', $current_time, '<');
+  $query->condition('n.nid', $poll_node_list, 'IN');
   $query->condition('n.status', '1');
   $query->orderBy('n.nid', 'DESC');
-  $query->range($range_min, $range_max);
+  //$query->range($range_min, $range_max);
   $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   foreach ($result as $k => $res) {
@@ -307,9 +337,6 @@ function open_poll_list($res) {
   $query2->fields('ot', array('field_poll_answer_text_value'));
   $query2->fields('ai', array('field_poll_answer_image_fid'));
   $query2->condition('pa.entity_id', $res['nid']);
-  if ($from == "home") {
-    $query2->range(0, 1);
-  }
   $result_option = $query2->execute()->fetchAll(PDO::FETCH_ASSOC);
 
   $options2 = array();
@@ -343,11 +370,17 @@ function open_poll_list($res) {
 function polls_close_datalist($cpageno) {
   $news2 = array();
   $range_max = 10;
-  $range_min = 0;
+  $dis_count = fetchMasterConfigData('closed_poll_display_count');
+  if (!empty($dis_count) && is_numeric($dis_count)) {
+    $range_max = $dis_count;
+  }
+
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-
+  else {
+    $range_min = 0;
+  }
 
   $current_time = date('Y-m-d H:i:s', time());
 
@@ -498,6 +531,7 @@ function poll_detail_datalist($poll_id) {
     $options = array();
     foreach ($result_option as $p => $pv) {
       $total_voter = poll_voter_count($res['nid'], $pv['field_poll_answer_value']);
+
       $options['o_id'] = isset($pv['field_poll_answer_value']) ? $pv['field_poll_answer_value'] : "";
       $options['o_title'] = isset($pv['field_poll_answer_text_value']) ? $pv['field_poll_answer_text_value'] : "";
       $options['o_image'] = completeFilePath($pv['field_poll_answer_image_fid']);
@@ -584,8 +618,8 @@ function poll_result($nid) {
       if ($result_format == 1) {
         $poll_options['o_title'] = $polls_answer_text_render;
         $poll_options['o_res'] = $percentage . '%';
+        // Number of votes
       }
-      // Number of votes
       elseif ($result_format == 2) {
         $poll_options['o_title'] = $polls_answer_text_render;
         $poll_options['o_res'] = $optioncnt;
@@ -621,12 +655,10 @@ function poll_voter_count($node_id, $option_id) {
  * @return array
  */
 function poll_participants($node_id) {
-  if ($node_id) {
-    $query = db_select('itg_polls', 'p');
-    $query->condition('p.nid', $node_id);
-    $query->addExpression('COUNT(p.id)', 'optionCnt');
-    $results = $query->execute()->fetchField();
-    return $results;
-  }
+  $query = db_select('itg_polls', 'p');
+  $query->condition('p.nid', $node_id);
+  $query->addExpression('COUNT(p.id)', 'optionCnt');
+  $results = $query->execute()->fetchField();
+  return $results;
 }
 

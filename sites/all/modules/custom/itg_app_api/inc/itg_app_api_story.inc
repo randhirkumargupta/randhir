@@ -12,20 +12,28 @@
  */
 function StoryDetailPageRerourceValue($id) {
   // variable decalartion
+
   $output_array = array();
   $data_array = array();
   $photo_list_array = array();
+
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+
   // list array building
   $data = generateStoryDeatilList($id);
   if (!empty($data['data']['title'])) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
   }
   else {
     $output_array['status_code'] = "0";
     $output_array['status_message'] = "customised_message";
   }
+
   $output_array['data'] = $data['data'];
+
   return $output_array;
 }
 
@@ -110,6 +118,8 @@ function generateStoryDeatilList($id) {
   $content_org = $content;
   $tech_pros = array();
   $tech_pros = (array) getTechPros($content_org);
+
+  //$field_story_select_templates = $node->field_story_select_templates['und'][0]['value'];
   if (count($buzz_data) > 0) {
     $buzz_temp_flag = "1";
   }
@@ -133,12 +143,9 @@ function generateStoryDeatilList($id) {
 
   $tech_photo_gallery = "";
   $tech_photo_gallery = $node->field_technology_photogallery['und'][0]['target_id'];
-  $caption = "";
-  $byline = "";
-  
-  $caption = $node->field_story_extra_large_image['und'][0]['title'];
 
   //data array building
+
   $data_array['category_id'] = "$tid";
   $data_array['category_title'] = "$term_name";
   $data_array['id'] = "$nid";
@@ -240,6 +247,7 @@ function generateStoryDeatilList($id) {
  */
 function getTag($node) {
   $tag = array();
+
   $tag_obj = $node->field_story_itg_tags['und'];
   $loop_cont = 0;
   foreach ($tag_obj as $key => $value) {
@@ -250,6 +258,7 @@ function getTag($node) {
     $tag[$loop_cont]['t_title'] = "$term_name";
     $loop_cont++;
   }
+
   return $tag;
 }
 
@@ -261,6 +270,7 @@ function getTag($node) {
  */
 function getHighlight($node) {
   $heighlight = array();
+
   $heighlight_obj = $node->field_story_highlights['und'];
   $loop_cont = 0;
   foreach ($heighlight_obj as $key => $value) {
@@ -268,6 +278,7 @@ function getHighlight($node) {
     $heighlight[$loop_cont]['h_title'] = "$text";
     $loop_cont++;
   }
+
   return $heighlight;
 }
 
@@ -289,12 +300,6 @@ function getRating($node) {
   return $rating;
 }
 
-/**
- *
- * @param type $node
- *
- * @return type
- */
 function getRatings($node) {
   $rating = array();
   if ($field_story_rating != "") {
@@ -314,13 +319,70 @@ function getRatings($node) {
  * @return array
  */
 function getCastName($nid) {
-  if ($nid) {
-    $query = db_select('node', 'n');
-    $query->fields('n', array('title'));
-    $query->condition('n.nid', $nid);
-    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-    return $result[0]['title'];
+  $query = db_select('node', 'n');
+  $query->fields('n', array('title'));
+  $query->condition('n.nid', $nid);
+
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return $result[0]['title'];
+}
+
+/**
+ * function for story body html
+ * @pram object $node
+ *
+ * @return string
+ */
+function story_body_with_html($node) {
+  $full_body = $node->body['und']['0']['value'];
+  $body_android = getBodyDataForAndroid($full_body);
+  $extra_large_image = file_create_url($node->field_story_extra_large_image['und'][0]['uri']);
+  $large_image_fid = $node->field_story_extra_large_image['und'][0]['fid'];
+  $caption = getImgCaption($large_image_fid);
+  $getHighlight_ar = getHighlight($node);
+  $getHighlight_str = "";
+  foreach ($getHighlight_ar as $key => $value) {
+    $text = $value['h_title'];
+    $getHighlight_str .= "<li>" . $text . "</li>";
   }
+  $output = '';
+  $output .= '<div class="story-section">
+<div class="story-right ">
+                      <div class="">
+
+                              <div class="stryimg"><img alt="" title="" src="' . $extra_large_image . '">
+
+                                      <div class="photoby">
+                                                                    <div class="photoby-text">' . $caption . '</div>
+                                          </div>
+
+
+
+
+                </div>
+
+                  <div class="image-alt">' . $caption . '</div>
+
+              </div>
+
+                                <div class="briefcase desktop-hide">
+                    <h4>Briefcase</h4>
+                    <ul>
+                      ' . $getHighlight_str . '                   </ul>
+                  </div>
+
+              <div class="story-movie">
+                                <div class="movie-detail">
+                                                                      </div>
+              </div>
+              <div class="ad-blocker"></div>';
+  $output .= '<div class="description">' . $body_android . '
+                </div>';
+  $output .= ' <!-- render story technology chunk -->
+                          </div>
+</div>';
+
+  return $output;
 }
 
 /**
@@ -345,6 +407,7 @@ function getStoryTechs($node) {
   /* remove pros & cons from contents start */
 
   $tect_img = $node->field_story_technology['und'];
+  //$storytech['tech_photo_gallery']['p_id'] = "";
 
   foreach ($tect_img as $key => $value) {
     $val_fid = $value['value'];
@@ -355,6 +418,12 @@ function getStoryTechs($node) {
     $storytech['data'][$listcont]['img'] = $img_url;
     $listcont++;
   }
+  //get tech pros
+  //$storytech['tech_pros_cons'] = $tech_pros;
+  //get tech pros
+  // static photo section
+  //$storytech['photos']['p_id'] = "358749";
+  //$storytech['photos']['p_image'] = "http://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/crop_image/intoday-mag2_54441497856379.jpeg";
   $storytech_fi[] = (array) $storytech;
   if ($listcont) {
     return $storytech_fi;
@@ -374,6 +443,7 @@ function getStoryTechs($node) {
 function buildListicleNode($node) {
   $listiclenode = array();
   $listcont = 0;
+
   //get listcle temp
   $field_story_templates = $node->field_story_templates['und'][0]['value'];
   // get title
@@ -381,16 +451,19 @@ function buildListicleNode($node) {
   $listcont = 0;
   $listiclenode['templates'] = "$field_story_templates";
   $listiclenode['title'] = "$field_story_template_guru";
+  //$listiclenode['title'] = "$field_story_template_guru";
   //listicle loop data
   $field_story_listicle = $node->field_story_listicle['und'];
   //$listcont = 1;
   foreach ($field_story_listicle as $key => $value) {
     $collection_id = $value['value'];
     $load_collection = field_collection_item_load($collection_id);
+
     $color = $load_collection->field_listicle_color_new['und'][0]['jquery_colorpicker'];
     $type = $load_collection->field_story_listicle_type['und'][0]['value'];
     $description = $load_collection->field_story_listicle_description['und'][0]['value'];
     // loop data
+    //$listiclenode[$listcont]['templates'] = "$field_story_templates";
     $listiclenode['data'][$listcont]['description'] = "$description";
     $listiclenode['data'][$listcont]['type'] = "$type";
     $listiclenode['data'][$listcont]['color'] = "$color";
@@ -413,6 +486,9 @@ function buildFactoidNode($node) {
   $field_story_factoids_title = $node->field_story_factoids_title['und'][0]['value'];
   $listcont = 0;
   $factoidnode['title'] = "$field_story_factoids_title";
+  //$factoidnode['title'] = "$field_story_factoids_title";
+  //$listcont = 1;
+  // loop data - field_story_template_factoids
   $field_story_template_factoids = $node->field_story_template_factoids['und'];
   foreach ($field_story_template_factoids as $key => $value) {
     $factoids = $value['value'];
@@ -489,6 +565,7 @@ function getTechPros($content_org) {
   $dom->loadHTML($html);
   $xpath = new DOMXPath($dom);
   $nodes = $xpath->query('//*[@class="tech-pros"]');
+  //$nodes = $xpath->query('//ul[class="tech-pros"]');
   $listcont_flag = 0;
 
   $data = array();
@@ -510,6 +587,7 @@ function getTechPros($content_org) {
     $rate = "";
     foreach ($str_html->find('strong') as $element) {
       $rate = $element;
+      //$rate_dup = $rate;
     }
     $rate = ltrim($rate, "<strong>");
     $rate = rtrim($rate, "</strong>");
@@ -533,7 +611,9 @@ function getTechPros($content_org) {
       $listcont_flag = 1;
     }
   }
-
+  if (count($techpross_data['pros']['data']) < 0) {
+    //$techpross_data['pros']['label'] = "";
+  }
   $tech_cons = array();
   $tech_cons = getTechCons($content_org);
   $techpross_data['cons'] = $tech_cons;
@@ -549,6 +629,9 @@ function getTechPros($content_org) {
  * @return array
  */
 function getTechCons($content_org) {
+
+
+
   $techpross = array();
   $listcont = 0;
   $html = $content_org;
@@ -556,6 +639,7 @@ function getTechCons($content_org) {
   $dom->loadHTML($html);
   $xpath = new DOMXPath($dom);
   $nodes = $xpath->query('//*[@class="tech-cons"]');
+  //$nodes = $xpath->query('//ul[class="tech-pros"]');
 
   $data = array();
   for ($i = 0; $i < $nodes->length; $i++) {
@@ -575,6 +659,12 @@ function getTechCons($content_org) {
     $techpross_data['data'][$listcont]['title'] = $value;
     $listcont++;
   }
+
+  if (count($techpross_data['data']) < 0) {
+    //$techpross_data['label'] = "";
+  }
+
+
   return $techpross_data;
 }
 
@@ -592,12 +682,8 @@ function getPollsData($poll_id) {
   return $poll_data;
 }
 
-/**
+/*
  * Return the data of  poll
- *
- * @param int $poll_id
- *
- * @return array
  */
 function pollsdatalist($poll_id) {
 
@@ -625,12 +711,14 @@ function pollsdatalist($poll_id) {
     $news2[$lcont] = getPollLData($res);
     $lcont++;
   }
+
+
   return $news2;
 }
 
 /*
  * function for associative array based on expected json
- * @pram array 
+ * @pram array
  * @return array
  */
 function getPollLData($res) {

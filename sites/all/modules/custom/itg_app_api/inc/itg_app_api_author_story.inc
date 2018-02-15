@@ -12,26 +12,36 @@
  */
 function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
   // variable decalartion
-  $data = '';
   $output_array = array();
   $data_array = array();
   $updated_datetime = "";
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+  $dis_count = fetchMasterConfigData('author_story_display_count');
+  $display_count = isset($dis_count) ? $dis_count : "10";
+
+  $pag_cap = fetchMasterConfigData('author_story_pagination_cap');
+  $pagination_cap = isset($pag_cap) ? $pag_cap : "10";
+
 
   // list array building
   // latest story
   if ($story_type == '0') {
     $data = author_latest_storylist($author_id, $cpageno);
+    // popular story
   }
-  // popular story
   elseif ($story_type == '1') {
     $data = author_popular_storylist($author_id, $cpageno);
   }
-
+  else {
+    $data = '';
+  }
 
 
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
   }
   else {
     $output_array['status_code'] = "0";
@@ -44,8 +54,8 @@ function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
 
   $data_array['author_id'] = "$author_id";
   $data_array['news_count'] = "$datacount";
-  $data_array['news_display_count'] = "10";
-  $data_array['news_pagination_cap'] = "10";
+  $data_array['news_display_count'] = "$display_count";
+  $data_array['news_pagination_cap'] = "$pagination_cap";
 
 
   $data_array['news'] = isset($data['data']) ? $data['data'] : array();
@@ -63,13 +73,18 @@ function author_story_list($author_id = 0, $story_type = 0, $cpageno = 0) {
 function author_latest_storylist($author_id, $cpageno) {
   global $base_url;
   $range_max = 10;
-  $range_min = 0;
-  $changed_datetime = "";
+
+  $dis_count = fetchMasterConfigData('author_story_display_count');
+  if (!empty($dis_count) && is_numeric($dis_count)) {
+    $range_max = $dis_count;
+  }
 
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-
+  else {
+    $range_min = 0;
+  }
 
   $data = array();
   $type = array("story");
@@ -126,16 +141,30 @@ function author_latest_storylist($author_id, $cpageno) {
     $short_desc = isset($res['field_story_kicker_text_value']) ? $res['field_story_kicker_text_value'] : '';
 
     if ($res['field_story_source_type_value'] != 'migrated') {
-      $file_small_img_url = '';
       if ($res['uri'] != '') {
         $file_small_img_url = image_style_url('170x127', $res['uri']);
       }
+      else {
+        $file_small_img_url = '';
+      }
+
       if ($res['li_file_uri'] != '') {
+        //$file_large_img_url = image_style_url('magazine_top_story_483x271', $res['li_file_uri']);
         $file_large_img_url = completeFilePath($res['field_story_large_image_fid']);
       }
+      else {
+        $file_large_img_url = '';
+      }
+
       if ($res['eli_file_uri'] != '') {
         $file_extra_large_img_url = image_style_url('photo_slider_753x543', $res['eli_file_uri']);
       }
+      else {
+        $file_extra_large_img_url = '';
+      }
+      //$file_small_img_url = completeFilePath($res['field_story_small_image_fid'],'170x127');
+      //$file_large_img_url = completeFilePath($res['field_story_large_image_fid'],'483x271');
+      //$file_extra_large_img_url = completeFilePath($res['field_story_extra_large_image_fid'],'647x363');
     }
     else {
       $file_small_img_url = completeFilePath($res['field_story_small_image_fid']);
@@ -149,7 +178,9 @@ function author_latest_storylist($author_id, $cpageno) {
     if ($changed) {
       $changed_datetime = date("Y-m-d H:i:s", $changed);
     }
-
+    else {
+      $changed_datetime = "";
+    }
 
     $news['n_id'] = "$nid";
     $news['n_type'] = "$type";
@@ -184,13 +215,17 @@ function author_latest_storylist($author_id, $cpageno) {
  */
 function author_popular_storylist($author_id, $cpageno) {
   global $base_url;
-  $changed_datetime = "";
-  $range_max = 10;
-  $range_min = 0;
+
+  //$range_max = 10;
+  $dis_count = fetchMasterConfigData('author_story_display_count');
+  $range_max = isset($dis_count) ? $dis_count : 10;
+
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-
+  else {
+    $range_min = 0;
+  }
 
   $type = array("story");
   $data = array();
@@ -263,7 +298,9 @@ function author_popular_storylist($author_id, $cpageno) {
       if ($changed) {
         $changed_datetime = date("Y-m-d H:i:s", $changed);
       }
-
+      else {
+        $changed_datetime = "";
+      }
 
       $news['n_id'] = "$node_id";
       $news['n_type'] = "$node_type";
@@ -303,6 +340,10 @@ function author_detail_data($author_id) {
   $data_array = array();
   $updated_datetime = "";
 
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_story_extra_large_image', 'ai', 'ai.entity_id = n.nid');
   $query->leftJoin('field_data_field_celebrity_pro_occupation', 'occ', 'occ.entity_id = n.nid');
@@ -316,7 +357,7 @@ function author_detail_data($author_id) {
   $query->condition('n.status', 1);
   $query->condition('n.nid', $author_id);
   // Author term id
-  $query->condition('occ.field_celebrity_pro_occupation_tid', AUTHOR_TID);
+  $query->condition('occ.field_celebrity_pro_occupation_tid', 285750);
   $query->condition('n.type', 'reporter');
   $result = $query->execute()->fetchAssoc();
 
@@ -324,7 +365,7 @@ function author_detail_data($author_id) {
 
   if ($num_of_results > 1) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
 
     $data_array['id'] = isset($result['nid']) ? $result['nid'] : '';
     $data_array['title'] = isset($result['title']) ? $result['title'] : '';
@@ -357,6 +398,9 @@ function anchor_detail_data($anchor_id) {
   $output_array = array();
   $data_array = array();
   $updated_datetime = "";
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
 
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_story_extra_large_image', 'ai', 'ai.entity_id = n.nid');
@@ -371,7 +415,7 @@ function anchor_detail_data($anchor_id) {
   $query->condition('n.status', 1);
   $query->condition('n.nid', $anchor_id);
   // Anchor term id
-  $query->condition('occ.field_celebrity_pro_occupation_tid', ANCHOR_TID);
+  $query->condition('occ.field_celebrity_pro_occupation_tid', 285903);
   $query->condition('n.type', 'reporter');
   $result = $query->execute()->fetchAssoc();
 
@@ -379,7 +423,7 @@ function anchor_detail_data($anchor_id) {
 
   if ($num_of_results > 1) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
 
     $data_array['id'] = isset($result['nid']) ? $result['nid'] : '';
     $data_array['title'] = isset($result['title']) ? $result['title'] : '';
@@ -401,15 +445,15 @@ function anchor_detail_data($anchor_id) {
 }
 
 /**
- * Return Newswrap list
- *
- * @return array
+ * Return Newswrap list,
  */
 function news_wrap_list() {
   // variable decalartion
   $output_array = array();
   $data_array = array();
   $updated_datetime = "";
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
   // list array building
   $data = news_wrap_datalist();
@@ -417,7 +461,7 @@ function news_wrap_list() {
 
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
   }
   else {
     $output_array['status_code'] = "0";
@@ -431,16 +475,13 @@ function news_wrap_list() {
   return $output_array;
 }
 
-/**
+/*
  * Return all the recent stories having highlights
- *
- * @return array
  */
 function news_wrap_datalist() {
   global $base_url;
 
   $data = array();
-  $changed_datetime = "";
 
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_common_by_line_reporter_id', 'bl', 'bl.entity_id = n.nid');
@@ -479,7 +520,9 @@ function news_wrap_datalist() {
     if ($changed) {
       $changed_datetime = date("Y-m-d H:i:s", $changed);
     }
-
+    else {
+      $changed_datetime = "";
+    }
 
     $news['n_id'] = isset($res['nid']) ? $res['nid'] : "";
     $news['n_title'] = isset($res['title']) ? $res['title'] : "";
@@ -506,25 +549,36 @@ function news_wrap_datalist() {
 function anchor_programm_data_list($anchor_id, $type, $cpageno) {
   // variable decalartion
   $output_array = array();
-  $data = '';
   $data_array = array();
   $updated_datetime = "";
+
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
+  $dis_count = fetchMasterConfigData('anchor_program_display_count');
+  $display_count = isset($dis_count) ? $dis_count : "10";
+
+  $pag_cap = fetchMasterConfigData('anchor_program_pagination_cap');
+  $pagination_cap = isset($pag_cap) ? $pag_cap : "10";
+
 
   // list array building
   // latest Programm
   if ($type == '0') {
     $data = anchor_latest_programm_list($anchor_id, $cpageno);
+    // popular Programm
   }
-  // popular Programm
   elseif ($type == '1') {
     $data = anchor_popular_programm_list($anchor_id, $cpageno);
   }
-
+  else {
+    $data = '';
+  }
 
 
   if ($data['lcount'] > 0) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
   }
   else {
     $output_array['status_code'] = "0";
@@ -536,8 +590,8 @@ function anchor_programm_data_list($anchor_id, $type, $cpageno) {
   $data_up_time = $data['updated_datetime'];
 
   $data_array['program_count'] = "$datacount";
-  $data_array['program_display_count'] = "10";
-  $data_array['program_pagination_cap'] = "10";
+  $data_array['program_display_count'] = "$display_count";
+  $data_array['program_pagination_cap'] = "$pagination_cap";
 
   $data_array['program'] = isset($data['data']) ? $data['data'] : array();
   $output_array['data'] = $data_array;
@@ -554,12 +608,17 @@ function anchor_programm_data_list($anchor_id, $type, $cpageno) {
 function anchor_latest_programm_list($anchor_id, $cpageno) {
 
   $range_max = 10;
-  $changed_datetime = "";
-  $range_min = 0;
+  $dis_count = fetchMasterConfigData('anchor_program_display_count');
+  if (!empty($dis_count) && is_numeric($dis_count)) {
+    $range_max = $dis_count;
+  }
+
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-
+  else {
+    $range_min = 0;
+  }
 
   $data = array();
 
@@ -617,7 +676,9 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
     if ($changed) {
       $changed_datetime = date("Y-m-d H:i:s", $changed);
     }
-
+    else {
+      $changed_datetime = "";
+    }
 
     $field_video_upload = $res['field_video_upload_value'];
     $file_id = file_usage($field_video_upload);
@@ -659,7 +720,7 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
       if ($videotag['dailymotion']['bitate_url']['download_url']) {
         $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
       }
-      else $prog['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+      else $prog['p_download_url'] = "https://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/dailymotion_bitates_video/x5o9vhw_848x480.mp4";
     }
     elseif (!empty($videotag['migrated'])) {
       $prog['p_is_default_player'] = "0";
@@ -699,14 +760,20 @@ function anchor_latest_programm_list($anchor_id, $cpageno) {
  */
 function anchor_popular_programm_list($anchor_id, $cpageno) {
   $range_max = 10;
-  $range_min = 0;
-  $changed_datetime = "";
+  $dis_count = fetchMasterConfigData('anchor_program_display_count');
+  if (!empty($dis_count) && is_numeric($dis_count)) {
+    $range_max = $dis_count;
+  }
+
   if (!$cpageno == 0) {
     $range_min = $cpageno * $range_max;
   }
-
+  else {
+    $range_min = 0;
+  }
 
   $data = array();
+
   $query = db_select('node', 'n');
   $query->leftJoin('field_data_field_video_anchor', 'av', 'av.entity_id = n.nid');
   $query->fields('n', array('nid'));
@@ -726,6 +793,7 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
   $prog2 = array();
 
   foreach ($popular_res as $pop_res_k => $pop_res_v) {
+
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_field_story_small_image', 'si', 'si.entity_id = n.nid');
     $query->leftJoin('file_managed', 'si_file', 'si_file.fid=si.field_story_small_image_fid');
@@ -752,6 +820,7 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
     $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($result as $k => $res) {
+
       $comment_cont = getCommentsCount($res['nid']);
       $changed = $res['changed'];
       $n_view_count = getNodeViewCount($res['nid']);
@@ -770,7 +839,9 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
       if ($changed) {
         $changed_datetime = date("Y-m-d H:i:s", $changed);
       }
-
+      else {
+        $changed_datetime = "";
+      }
 
       $field_video_upload = $res['field_video_upload_value'];
       $file_id = file_usage($field_video_upload);
@@ -810,7 +881,7 @@ function anchor_popular_programm_list($anchor_id, $cpageno) {
         if ($videotag['dailymotion']['bitate_url']['download_url']) {
           $prog['p_download_url'] = $videotag['dailymotion']['bitate_url']['download_url'];
         }
-        else $prog['p_download_url'] = "" . BITARATES_BASE_PATH . "/x5o9vhw_848x480.mp4";
+        else $prog['p_download_url'] = "https://itgd-mum-dev-static.s3.ap-south-1.amazonaws.com/s3fs-public/dailymotion_bitates_video/x5o9vhw_848x480.mp4";
       }
       elseif (!empty($videotag['migrated'])) {
         $prog['p_is_default_player'] = "0";
@@ -912,9 +983,12 @@ function follow_author_data_responce($user_id, $author_id, $type) {
     $data['limit_crossed'] = '0';
   }
 
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
+
   if (!empty($response)) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
     $output_array['data'] = $data;
   }
   else {
@@ -933,6 +1007,7 @@ function follow_author_data_responce($user_id, $author_id, $type) {
  */
 function follow_anchor_data_responce($user_id, $author_id, $type) {
   // variable decalartion
+
   $data = array();
   $output_array = array();
   $data_array = array();
@@ -991,10 +1066,12 @@ function follow_anchor_data_responce($user_id, $author_id, $type) {
     $data['is_saved'] = 1;
     $data['limit_crossed'] = '0';
   }
+  $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
+  $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
   if (!empty($response)) {
     $output_array['status_code'] = "1";
-    $output_array['status_message'] = "";
+    $output_array['status_message'] = "$success_status_message";
     $output_array['data'] = $data;
   }
   else {
