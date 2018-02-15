@@ -3894,7 +3894,7 @@ function itg_rapid_api_log_out($token) {
     drupal_save_session($original_session_state);
     // call custom function to clean token in custom table
     cleanToken_Rapid($params);
-  }
+  
   $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
   $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
 
