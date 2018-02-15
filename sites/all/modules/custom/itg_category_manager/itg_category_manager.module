@@ -701,7 +701,7 @@ function itg_category_manager_term_validate($form , &$form_state) {
     if ($num_cat_selected > 4) {
       form_set_error('parent' , t('Sorry! You can not create more than 4 levels of categories within a section.'));
     }
-    if(((count($all_children) > 0 && in_array($form_state['values']['name'], $all_children)))){
+    if(((count($all_children) > 0 && in_array(trim($form_state['values']['name']), $all_children)))){
 			form_set_error('name' , t('Category name already exists4.'));
 		}else if(is_numeric(arg(2))){
 			$all_children_edited = taxonomy_get_tree(CATEGORY_MANAGMENT, arg(2));
@@ -723,10 +723,10 @@ function itg_category_manager_term_validate($form , &$form_state) {
         if (isset($value->tid) && $value->tid == $new_rparent) {
           form_set_error('name' , t('Category name already exists.'));
         }
-        elseif (is_numeric(arg(2)) && $term_load->name != $form_state['values']['name'] && $new_rparent == 0 && $value->name == $form_state['values']['name']) {
+        elseif (is_numeric(arg(2)) && $term_load->name != trim($form_state['values']['name']) && $new_rparent == 0 && $value->name == trim($form_state['values']['name'])) {
           form_set_error('name' , t('Category name already exists2.'));
         }
-        elseif (!is_numeric(arg(2)) && $new_rparent == 0 && $value->name == $form_state['values']['name'] && ((count($all_children) <= 0) || (count($all_children) > 0 && in_array($form_state['values']['name'], $all_children)))) {
+        elseif (!is_numeric(arg(2)) && $new_rparent == 0 && $value->name == trim($form_state['values']['name']) && ((count($all_children) <= 0) || (count($all_children) > 0 && in_array(trim($form_state['values']['name']), $all_children)))) {
           form_set_error('name' , t('Category name already exists3.'));
         }
         else {
