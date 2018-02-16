@@ -382,7 +382,7 @@ function itg_videogallery_form_alter(&$form, &$form_state, $form_id) {
       );
       $form['mail_template_emails'] = array(
         '#type' => 'textarea',
-        '#title' => 'Story/Photo/Video Publish Email alert',
+        '#title' => 'Story/Photo Publish Email alert',
         '#default_value' => variable_get('mail_template_emails'),
         '#size' => 10,
       );

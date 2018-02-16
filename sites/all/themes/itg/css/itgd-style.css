@@ -581,6 +581,7 @@ ul.pron-cons-img li img {
 .sport-home-layout-page .tech-block_8 .osscar-video ul .dont-miss-listing{
     padding: 0 10px 25px 10px;
 }
+.sport-home-layout-page .itg-layout-315 .droppable{border-bottom: 1px solid #ddd;}
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{width:100%; height:400px}
 
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li + li{ border:0px;}
@@ -589,7 +590,7 @@ ul.pron-cons-img li img {
 #block-itg-layout-manager-header-block .menu-login .user-menu ul.menu li{ display:block; float:none;}
 body.front #block-itg-layout-manager-header-block .top-nav .main-nav li a.active{color:#a9a9a9 ;}
 .story-section .description h3{ text-transform: uppercase; font-weight:bold;}
-.front .watch-right-now-video ul li{padding:10px 0px 10px 0px;}
+.front .watch-right-now-video ul li{padding:13px 0px 13px 0px;}
 @media screen and (max-width: 768px){
 .story-section .story-right .description iframe.story_video,.story-section .story-right .description iframe.multy-video-iframe{height: 415px;}
 .breakingnew-home .new-detail .marquee-container .marquee-child a * {line-height:25px;}
@@ -725,7 +726,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .front .itg-layout-container .itg-h321-section .ad-widget{ height: 315px;padding: 30px 0;width: 322px;margin: 0 auto;background: #f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
 .itg-h321-section .dont-miss ul li{width:100%}
-.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:none}
+.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){{ display:none}
 }
 @media only screen and (max-width: 767px) {
 .app-area-wrapper{width:94%; padding:0 3%}
@@ -832,7 +833,7 @@ background:none;
 .front .itg-top-section .top-rhs-add-child .ad-widget {padding:0; height:auto;}
 .front .itg-layout-container .itg-h321-section .ad-widget{ height:auto;padding:0;width:300px;margin: 0 auto;background: #f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
-.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4){ display:block}
+.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:block}
 .front .mt-50 {margin-top: 30px;}
 /* embed code page scroll */
 .show-embed-code-link .show-embed-code-div{left: -150%;}
@@ -849,7 +850,7 @@ background:none;
 }
  .front .trending-videos .trending-videos-list {
     overflow: hidden;
-     padding: 12px 10px;
+     padding: 14px 10px;
 }
  .front .itg-layout-container .ad-widget {
     border: 1px solid #ddd;
@@ -868,7 +869,7 @@ background:none;
 }
  @media only screen and (max-width: 1024px){
      .front .itg-layout-container .itg-h321-section .droppable {
-         height:300px;
+         height:280px;
     }
      .front .itg-layout-container .ad-widget{
         padding:10px;

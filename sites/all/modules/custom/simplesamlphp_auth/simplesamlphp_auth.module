@@ -534,7 +534,7 @@ function simplesamlphp_auth_user_insert(&$edit, $account, $category = NULL) {
       }
       catch (Exception $e) {
         drupal_set_message(t('Your user name was not provided by your identity provider (IDP).'), "error");
-        watchdog('simplesamlphp_auth', $e->getMessage(), NULL, WATCHDOG_CRITICAL);
+        //watchdog('simplesamlphp_auth', $e->getMessage(), NULL, WATCHDOG_CRITICAL);
       }
 
       try {
@@ -555,7 +555,7 @@ function simplesamlphp_auth_user_insert(&$edit, $account, $category = NULL) {
       }
       catch (Exception $e)  {
         drupal_set_message(t('Your e-mail address was not provided by your identity provider (IDP).'), "error");
-        watchdog('simplesamlphp_auth', $e->getMessage(), NULL, WATCHDOG_CRITICAL);
+        //watchdog('simplesamlphp_auth', $e->getMessage(), NULL, WATCHDOG_CRITICAL);
       }
 
       if (!empty($mail_address)) {

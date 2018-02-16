@@ -814,7 +814,7 @@ function itg_following_details_callback() {
 function itg_personalization_user_login(&$edit, $account) {
   global $user;
   if ($user->uid > 0) {
-  watchdog('itg_forced_login', $user->uid);
+  //watchdog('itg_forced_login', $user->uid);
     $expire = time() + 86400;
     setrawcookie("itg_forced_login", "itg_user" . $user->uid, $expire,'/', SSO_COOKIE_DOMAIN);
   }

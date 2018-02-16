@@ -62,7 +62,7 @@ function itg_external_latest_feed_bt() {
           'content_site' => 'bt',
         ))->execute();
     }
-    watchdog('itg_external_feeds', 'BT feed has been successfully updated.');
+    //watchdog('itg_external_feeds', 'BT feed has been successfully updated.');
     drupal_set_message('BT feed has been successfully updated.');
   }
   else {
@@ -92,7 +92,7 @@ function itg_external_latest_feed_at() {
           'content_site' => 'at',
         ))->execute();
     }
-    watchdog('itg_external_feeds', 'AT feed has been successfully updated.');
+    //watchdog('itg_external_feeds', 'AT feed has been successfully updated.');
     drupal_set_message('AT feed has been successfully updated.');
   }
   else {

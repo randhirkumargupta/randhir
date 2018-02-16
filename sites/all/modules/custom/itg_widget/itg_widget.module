@@ -1396,7 +1396,7 @@ function itg_widget_insert_widget_data($node, $widget_name, $category_tid, $extr
   try {
     $max_weight = get_min_weight_for_special($widget_name, $category_tid);
     $node_load_data = itg_widget_get_required_node_data_for_widget($node);
-    itg_watchdog('node_load_data', $node_load_data);
+    //itg_watchdog('node_load_data', $node_load_data);
     if (!empty($widget_name) && $widget_name != '_none') {
       db_insert('itg_widget_order')
           ->fields(array(
@@ -1625,10 +1625,11 @@ function update_something(&$item, $key) {
  * Html output to decode.
  */
 function __html_output_with_tags($string, $start = 0, $end = 100) {
-    $html = html_entity_decode(drupal_html_to_text($string));
-    $doc = new DOMDocument();
-    @$doc->loadHTML($html, LIBXML_HTML_NODEFDTD);
-    return $doc->saveHTML();
+    //~ $html = html_entity_decode(drupal_html_to_text($string));
+    //~ $doc = new DOMDocument();
+    //~ @$doc->loadHTML($html, LIBXML_HTML_NODEFDTD);
+    //~ return $doc->saveHTML();
+    return drupal_html_to_text($string);
 }
 
 /**

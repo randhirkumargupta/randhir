@@ -979,7 +979,7 @@ function itg_syndication_form_syndication_feed_from_pattern_node_form_validate(&
         if (count($result) >= 1) {
             form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Pattern already exists for this client");
         }
-        watchdog('debug', "Total " . count($result) . " results founds for combination");
+        //watchdog('debug', "Total " . count($result) . " results founds for combination");
     }
 
     // For retaing value of markup field.
@@ -1002,14 +1002,14 @@ function is_all_vars_valid($xml_pattern, $content_type) {
     foreach ($var_array[1] as $field_name) {
         if (!isValidField($field_name, $content_type)) {
             $invalid_vars[] = $field_name;
-            watchdog('syndication', "invalid variables found");
+            //watchdog('syndication', "invalid variables found");
         }
     }
     if (!empty($invalid_vars)) {
         $invalid_vars_str = implode("<b>, </b>", $invalid_vars);
         form_set_error("itg_syndication_form_syndication_feed_from_pattern_node_form", "Invalid variables are $invalid_vars_str");
     }
-    watchdog('syndication', "Variable validation pass");
+    //watchdog('syndication', "Variable validation pass");
 }
 
 /**
