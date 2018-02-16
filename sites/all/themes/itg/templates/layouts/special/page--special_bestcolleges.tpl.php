@@ -116,7 +116,7 @@ if ($theme != 'itgadmin') {
                         $render_array = _block_get_renderable_array(_block_render_blocks(array($block)));
                         print $output = render($render_array);
                         
-                      } elseif($url_get[2] == '2014' && $url_get[2] == '2013') {
+                      } elseif($url_get[2] == '2014' || $url_get[2] == '2013') {
                           print bestcollege_get_sponser_data('Best college graph');
                       }
                } ?>
