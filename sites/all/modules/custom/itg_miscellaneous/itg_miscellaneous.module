@@ -151,5 +151,36 @@ function itg_miscellaneous_preprocess_page(&$vars) {
     }
   }
   }
+  
+    // Set meta data for required pages.
+  if ('livetv' == arg(0) || 'international-livetv' == arg(0)) {
+    $description_live = "India Today Live TV Streaming: Watch live tv news from worldwide and get live tv streaming by 24*7 online.";
+    $og_description_live = 'india today, tv online, live streaming, live tv online, live tv streaming, watch live tv';
+  
+  // Prepare meta data.
+    $html_head_live = array(
+        'keyword' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'keyword',
+          'content' => $og_description_live,
+          ),
+         '#weight' => -99
+        ),
+      'description' => array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+          'name' => 'description',
+          'content' => $description_live,
+          ),
+         '#weight' => -99
+        ),
+  
+    );
+    // Push data to HTML head.
+    foreach ($html_head_live as $key => $value) {
+      drupal_add_html_head($value, $key);
+    }
+  }
 }
 
