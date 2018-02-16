@@ -167,9 +167,23 @@ if ($node->field_type['und']['0']['value'] == 'Live Blog') {
                       }
                     }
                     else {
-						$live_url = str_replace('<iframe', '<amp-iframe', $live_url);
-					    $live_url = str_replace('</iframe>', '</amp-iframe>', $live_url);
-					    $live_url = str_replace('style="z-index:4"', 'sandbox="allow-scripts allow-same-origin"', $live_url);
+						preg_match_all('/<iframe.*src=\"(.*)\".*>(.*)<\/iframe>/isU', $live_url, $iframes);
+					  foreach ($iframes[0] as $iframes) {
+						preg_match('/src="([^"]+)"/', $iframes, $match);
+						$frame_url = parse_url($match[1]);
+						if ($frame_url['scheme'] != 'https') {
+						  $live_url = str_replace($iframes, "", $live_url);
+						}
+						else {
+						$frame = '<amp-iframe width="200" height="100"
+						sandbox="allow-scripts allow-same-origin"
+						layout="responsive"
+						frameborder="0"
+						src="' . $match[1] . '">
+						</amp-iframe>';
+						  $live_url = str_replace($iframes, $frame, $live_url);
+						}
+					  }
                         print $live_url;
                     }
                   }
