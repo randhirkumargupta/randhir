@@ -49,7 +49,7 @@
 
 <div class="clearfix"></div>
 <div class="col-sm-12 remove_padd_right">
-<div class="row list-group college">
+<div class="list-group college">
       <div class="clr_chn right_align_bestcollege" >
 
 
