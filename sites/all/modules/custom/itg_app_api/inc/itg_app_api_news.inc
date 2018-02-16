@@ -248,7 +248,7 @@ function generateNewsCategoryList($tid, $pageno) {
         $news_list_array[$listcount]['n_large_image'] = "$file_large_img_url";
         $news_list_array[$listcount]['n_extralarge_image'] = "$file_ext_large_img_url";
       }
-      $news_list_array[$listcount]['n_updated_datetime'] = "$changed_datetime";
+      $news_list_array[$listcount]['n_updated_datetime'] = "$create_datetime";
 
       // photo list array
 
