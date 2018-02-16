@@ -198,6 +198,13 @@ function generateNewsCategoryList($tid, $pageno) {
       else {
         $changed_datetime = "";
       }
+      // Get Publish time:
+      $pub_date = get_content_publish_date($nid);
+      if (!empty($pub_date)) {  
+        $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+      } else {
+        $pub_date = "";
+      }
       $field_primary_category_value = $resvalue['field_primary_category_value'];
       $term = taxonomy_term_load($field_primary_category_value);
       $term_name = $term->name;
@@ -245,7 +252,7 @@ function generateNewsCategoryList($tid, $pageno) {
         $news_list_array[$listcount]['n_large_image'] = "$file_large_img_url";
         $news_list_array[$listcount]['n_extralarge_image'] = "$file_ext_large_img_url";
       }
-      $news_list_array[$listcount]['n_updated_datetime'] = "$changed_datetime";
+      $news_list_array[$listcount]['n_updated_datetime'] = "$pub_date";
 
       // photo list array
 
@@ -279,7 +286,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
   $data['lcount'] = $listcount;
   $data['data'] = $news_list_array;
-  $data['updated_datetime'] = $changed_datetime;
+  $data['updated_datetime'] = $pub_date;
   return $data;
 }
 
