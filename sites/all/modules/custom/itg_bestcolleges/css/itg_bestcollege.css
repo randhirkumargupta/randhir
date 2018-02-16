@@ -546,8 +546,8 @@
      min-height: 450px;
      max-height: 450px;
  }
- .grid-group-item .cl a{ display:inline-block}
- .grid-group-item .cl a span{padding:0 5px;}
+ .grid-group-item .cl a,.list-group-item .cl a{ display:inline-block}
+ .grid-group-item .cl span,.list-group-item .cl span{padding:0 5px;}
 
  .list-group-item .thumbnail .thumbnail-img{position: absolute;left: 175px;}
  .list-group-item .list-group-item-heading{position: absolute;
