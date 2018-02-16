@@ -1175,4 +1175,3 @@ function follow_anchor_data_responce($user_id, $author_id, $type) {
   }
   return $output_array;
 }
-
