@@ -1144,6 +1144,13 @@ function topstoriesList($source) {
         } else {
             $changed_datetime = date("Y-m-d H:i:s", $created);
         }
+        // Get Publish time:
+        $pub_date = get_content_publish_date($nid);
+        if (!empty($pub_date)) {  
+          $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+        } else {
+          $pub_date = "";
+        }
         //json tag writing
         //if ($type == "story") {
         // news list
@@ -1178,7 +1185,7 @@ function topstoriesList($source) {
         $data_newslist[$home_list_count]['n_small_image'] = "$file_small_img_url";
         $data_newslist[$home_list_count]['n_large_image'] = "$file_large_img_url";
         $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
-        $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
+        $data_newslist[$home_list_count]['n_updated_datetime'] = "$pub_date";
         
         $heighligth = array();
         $heighligth = (array) getHighlightByNid($nid);
