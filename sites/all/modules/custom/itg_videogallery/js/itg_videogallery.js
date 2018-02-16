@@ -102,6 +102,39 @@
             } catch (e) {
 
             }
+            // Code to Disable Submit button
+           jQuery('.top-actions input[type="submit"]').click(function (){
+               if(jQuery('.node-videogallery-form').valid()){
+                jQuery(this).css("background-color", "#d9d9d9"); 
+                jQuery(this).css("border-color", "#d9d9d9");
+                jQuery(this).parent().children().css( 'pointer-events', 'none' );
+                jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+               }               
+           });
+           jQuery('.top-actions .published.btn-submit').click(function (){
+               if(jQuery('.node-videogallery-form').valid()){
+                jQuery(this).css("background-color", "#d9d9d9"); 
+                jQuery(this).css("border-color", "#d9d9d9");
+                jQuery(this).parent().children().css( 'pointer-events', 'none' );
+                jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+               }               
+           });
+           jQuery('.itg-form-action .form-actions input[type="submit"]').click(function (){
+               if(jQuery('.node-videogallery-form').valid()){
+                jQuery(this).css("background-color", "#d9d9d9"); 
+                jQuery(this).css("border-color", "#d9d9d9"); 
+                jQuery(this).parent().children().css( 'pointer-events', 'none' );
+                jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+               }               
+           });
+           jQuery('.itg-form-action .form-actions .published.btn-submit').click(function (){
+               if(jQuery('.node-videogallery-form').valid()){
+                jQuery(this).css("background-color", "#d9d9d9"); 
+                jQuery(this).css("border-color", "#d9d9d9"); 
+                jQuery(this).parent().children().css( 'pointer-events', 'none' );
+                jQuery(this).parent().children().last().css( 'pointer-events', 'auto' );
+               }               
+           });
 
         }
 
