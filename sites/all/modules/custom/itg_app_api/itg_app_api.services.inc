@@ -3474,7 +3474,7 @@ function itg_rapid_api_login_request($token) {
     $result = callAPI("GET", $url, $data);
     $result_obj = json_decode($result);
     if (!$result_obj->uid) {
-        $account_err['status_code'] = "2";
+        $account_err['status_code'] = "0";
         $account_err['status_message'] = "Wrong username or password.";
         return $account_err;
     }
@@ -4405,11 +4405,11 @@ function itg_rapid_api_anchor_list($token) {
 
     // check args
     if ($user_id > 0) {
-        $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
+        //$jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
+        $jsondata = list_itg_rapid_api_anchor_list_default();
     } else {
         $jsondata = list_itg_rapid_api_anchor_list_default();
     }
-
     return $jsondata;
 }
 
