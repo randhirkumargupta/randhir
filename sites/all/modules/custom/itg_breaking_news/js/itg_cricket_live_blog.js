@@ -18,9 +18,9 @@ jQuery(document).ready(function () {
             if (!flag_n) {
                 flag_n = true;
                 jQuery.ajax({
-                    url: base_url + '/cricket_live_blog_content',
-                    type: "post",
-                    data: {"match_id": match_id},
+                    url: base_url + '/cricket_live_blog_content?match_id='+match_id,
+                    type: "get",
+                    //data: {"match_id": match_id},
                     success: function (d) {
                         if (d !== undefined) {
                             var data = JSON.parse(d);
@@ -75,9 +75,9 @@ function load_more_after_interval() {
             var last_commentary_id = jQuery("#bolgcontent .para-live-blog").last().attr('commentary-id');
             var current_inn = jQuery("#bolgcontent .para-live-blog").last().attr('current-inn');
             jQuery.ajax({
-                url: base_url + '/cricket_live_blog_content',
-                type: "post",
-                data: {"match_id": match_id, "commentary_id": last_commentary_id, "is_load_new": false, "current_inn": current_inn},
+                url: base_url + '/cricket_live_blog_content?match_id='+match_id+'&commentary_id='+last_commentary_id+'&is_load_new=false&current_inn='+current_inn,
+                type: "get",
+                //data: {"match_id": match_id, "commentary_id": last_commentary_id, "is_load_new": false, "current_inn": current_inn},
                 success: function (d) {
                     if (d !== undefined) {
                         var data = JSON.parse(d);
