@@ -11,7 +11,7 @@
 .more{color: #3b3b3b; font: 800 13px roboto,sans-serif; padding: 2px 10px; text-align: right; position: relative}
 #right-section .rt-colum h2{ background:#323232; color:#fff; font:bold 18px/24px Roboto; display: block; padding:2px 5px; position: relative; float: left; width:100%;    box-sizing: border-box !important;}
 #right-section .rt-colum h2 a{ background:#323232; color:#fff; font:bold 18px/24px Roboto; display: block; padding:2px 5px;}
-.captionWicon span.photo-icon{ display: block;background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/photo_icon.png) no-repeat center 0; padding-top:20px; height:20px; text-align: center;}
+.captionWicon span.photo-icon{ display: block;background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/photo_icon.png) no-repeat center 0; padding-top:20px; height:20px; text-align: center;}
 .captionWicon span.withicontext { float: right; width: 255px;box-sizing: border-box !important; padding: 10px;color:#fff; 
 font:17px/20px Roboto; margin-left:0px; }
 .captionWicon{ padding-bottom:0px;}
@@ -33,15 +33,15 @@ select.mapSelectBox{ position: absolute; right:10px; top:5px; border: none; padd
 .loading_image_center { width: 100%; float: left; text-align: center; display:none;}
 .load-btn {  border: 1px solid #8e8e8e; font: 800 24px/30px 'Roboto Slab', serif; color: #575757; padding: 10px 45px; border-radius: 1px;  text-transform: uppercase;
     margin: 5px auto 30px; display: inline-block; cursor: pointer;text-align: center}
-.photo-slider a#photoprev-elec16{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -173px -296px;}
-.photo-slider a#photonext-elec16{ background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -219px -296px;}
+.photo-slider a#photoprev-elec16{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -173px -296px;}
+.photo-slider a#photonext-elec16{ background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/Sprit-IT-Home.png) -219px -296px;}
 #right-section .photo-slider { padding:3px; margin:0}
 #wapper {  margin: 0 auto;}
 
 .storysection{ margin-top:15px;}
 .assembly_widget_container{ float:left; background:#f3f3f3; margin-top:20px; }
 .assembly_widget_container .assembly_nav{ width:647px; position:relative; top: 184px; z-index:9999; margin-left: 5px;}
-.assembly_widget_container .assembly_nav .arrow_odd{ cursor:pointer; width:25px; height:26px; float:left; display:block; background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/oddnaari/resources/images/oddnaari_leftright_it_widget.png) no-repeat;}
+.assembly_widget_container .assembly_nav .arrow_odd{ cursor:pointer; width:25px; height:26px; float:left; display:block; background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/oddnaari/resources/images/oddnaari_leftright_it_widget.png) no-repeat;}
 .assembly_widget_container .assembly_nav .odd_left_arrow{ background-position:0 0; }
 .assembly_widget_container .assembly_nav .odd_right_arrow{ float:right;background-position:-26px 0;}
 .assembly_widget_container .assembly_cont{width:647px; float:left;margin:5px;position:relative; overflow:hidden; margin-top:-20px;}
@@ -65,7 +65,7 @@ h2 { background: #323232; color: #fff; font: bold 18px/24px Roboto; display: blo
 .images { height: auto; width: 100%; }
 a img { border: 0; }
 .tabcontent2 { margin-bottom: 30px; }
-.bottom_shd_h { width: 100%; position: absolute; bottom: 0; z-index: 99999; background: url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/photo_bg.png); }
+.bottom_shd_h { width: 100%; position: absolute; bottom: 0; z-index: 99999; background: url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/homenew/photo_bg.png); }
 .bottom_shd_h p { color: #fff; font-size: 24px; font-weight: bold; left: 0px; line-height: 24px; margin: 0; padding: 10px; position: relative; top: 0; }
 .tab_asem_3,.tab_asem_2{ display:none;}
 .coverage-nav ul li{ margin-right:10px;}            

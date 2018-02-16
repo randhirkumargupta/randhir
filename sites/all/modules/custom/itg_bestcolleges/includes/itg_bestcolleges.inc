@@ -25,6 +25,7 @@ function bestcollege_rhssearch_form($form, &$form_state) {
   $getstream = itg_bestcollege_getStreamYear('emerging', $year);
   $getsyears = itg_bestcollege_getStreamYear('year-comparecollege', NULL);
   $directory_stream = itg_bestcollege_getStreamYear('readyrecnor-directory-list', $year);
+  $years_serveys = itg_bestcollege_get_years_serveys($year);
   $form = array();
   $form['bestcollege_year_item'] = array(
     '#type' => 'item',
@@ -192,6 +193,28 @@ function bestcollege_rhssearch_form($form, &$form_state) {
     '#prefix' => '<div class ="col-lg-8 col-sm-12 col-md-12 remove_padd_left remove_padd_right">',
     '#suffix' => '</div></div><p><small>*Not available for new streams</small></p><div class="clearfix"></div></div>',
   );
+
+   if (count($years_serveys) > 0) {
+	$years = substr((int)$year + 3, -2);
+    $form['serverydir_rhs'] = array(
+      '#type' => 'item',
+      '#title' => t('LAST '.$years.' Years BEST COLLEGE SURVEYS'),
+      '#weight' => 10,
+      '#prefix' => '<div class = "right_view">',
+      '#suffix' => '</div>',
+    );
+    $form['serverydir_stream'] = array(
+      '#type' => 'select',
+      '#title' => t(''),
+      '#weight' => 11,
+      '#options' => $years_serveys,
+      '#default_value' => $years_serveys,
+      '#attributes' => array('class' => array('city_wise')),
+      '#prefix' => '<div class = "detail_box">',
+      '#suffix' => '</div>',
+    );
+  }
+  
   if (count($directory_stream) > 0) {
     $form['clgdir_rhs'] = array(
       '#type' => 'item',
