@@ -1159,9 +1159,9 @@ jQuery(window).load(function () {
     // For Next button in slider thumbnails
     jQuery('div.slick-thumbs ul.slick-thumbs-slider button.slick-next').attr('onclick', "ga('send', 'event', 'SliderThumbNext', 'click','1', 1, {'nonInteraction': 1});return true;");
     // For Slider Main Prev
-    jQuery('div.col-md-8 ul.slickslide button.slick-prev').attr('onclick', "ga('send', 'event', 'SliderMainPrev', 'click','1', 1, {'nonInteraction': 1});return true;");
+    jQuery('div.col-md-8 ul.slickslide button.slick-prev').attr('onclick', "ga('send', 'event', 'SliderMainPrev', 'click','1', 1, {'nonInteraction': 1}); ga('send', {hitType: 'pageview',page: location.pathname}); return true;");
     // For Slider Main Next
-    jQuery('div.col-md-8 ul.slickslide button.slick-next').attr('onclick', "ga('send', 'event', 'SliderMainNext', 'click','1', 1, {'nonInteraction': 1});return true;");
+    jQuery('div.col-md-8 ul.slickslide button.slick-next').attr('onclick', "ga('send', 'event', 'SliderMainNext', 'click','1', 1, {'nonInteraction': 1}); ga('send', {hitType: 'pageview',page: location.pathname}); return true;");
     // For Slider Counter Next
     jQuery('div.col-md-4 div.other-details-main ul.counterslide button.slick-next').attr('onclick', "ga('send', 'event', 'CounterSliderNext', 'click','1', 1, {'nonInteraction': 1});return true;");
     // For Slider Counter Prev

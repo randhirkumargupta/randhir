@@ -28,8 +28,8 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
         'body' => $mail_content,
         'subject' => 'India Today | Refer a friend',
       );
-      watchdog('Refer_a_friend_param', '<pre>'.print_r($params, true).'</pre>');
-      watchdog('Refer_a_friend_mail', '<pre>'.print_r($to, true).'</pre>');
+      //watchdog('Refer_a_friend_param', '<pre>'.print_r($params, true).'</pre>');
+      //watchdog('Refer_a_friend_mail', '<pre>'.print_r($to, true).'</pre>');
       
       try {
       $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
@@ -43,7 +43,7 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
       'body' => $data,  
       'subject' => $subject,
     );
-    watchdog('Personalization Mail', '<pre>'.print_r($params, true).'</pre>');
+    //watchdog('Personalization Mail', '<pre>'.print_r($params, true).'</pre>');
     $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   }
   
@@ -60,7 +60,7 @@ function itg_common_get_mail_content($data, $to, $key = NULL, $subject = NULL) {
       'body' => $mail_content,
       'subject' => $mail_subject,
     );
-    watchdog('Expiration point mail Result', '<pre>'.print_r($params, true).'</pre>');
+    //watchdog('Expiration point mail Result', '<pre>'.print_r($params, true).'</pre>');
     $mail = drupal_mail('itg_common', $key, $to, language_default(), $params, 'no-reply@kelltontech.com', TRUE);
   }
   

@@ -416,7 +416,7 @@ function itg_get_global_point_history() {
   $data['redeemed_points'] = 0;
   $data['remaining_point'] = 0;
   $data['unit_description'] = array();
-  watchdog('result', '<pre>' . print_r($itg_result, true) . '</pre>');
+  //watchdog('result', '<pre>' . print_r($itg_result, true) . '</pre>');
   if(!empty($itg_result)) {
   foreach ($itg_result as $key => $value) {
      if ($key == 0) {

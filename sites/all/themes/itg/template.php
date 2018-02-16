@@ -198,7 +198,7 @@ function itg_preprocess_page(&$variables) {
   }
 
   // For single column page
-  if ($arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436)) {
+  if ($arg[0] == 'be-lucky-today' || ($arg[0] == 'node' && $arg[1] == 1124436) || (arg(0) == 'scorecard' && arg(1) == 'live-cricket-score')) {
 	  if($arg[0] == 'node' && $arg[1] == 1124436) {
 		  drupal_set_title('');
     }		  
@@ -317,6 +317,9 @@ function itg_preprocess_html(&$vars) {
   
   if($arg[0] == 'magazine') {
       $vars['head_title'] = 'India Today Headlines Archive- Get News headlines by date | '.variable_get('site_name');
+  }
+  if($arg[0] == 'livetv' || $arg[0] == 'international-livetv') {
+      $vars['head_title'] = 'India Today Live TV Online: Live TV News Streaming, Watch Live TV News | '.variable_get('site_name');
   }
 }
 
@@ -588,7 +591,7 @@ function get_newsroom_js(){
 <script>
 window._newsroom = window._newsroom || [];
 window._newsroom.push({pageTemplate: 'home'});
-window._newsroom.push({pageDashboard: 'home'});
+window._newsroom.push({pageDashboard: 'home-mobile'});
 window._newsroom.push('auditClicks');
 window._newsroom.push('trackPage');
 

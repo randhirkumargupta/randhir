@@ -6,8 +6,8 @@
                 <?php print drupal_render($form['field_story_type']); ?>
                 <?php print drupal_render($form['field_story_magazine_story_issue']); ?>
                 <?php print drupal_render($form['field_story_select_magazine']); ?>
-                <?php print drupal_render($form['field_story_select_supplement']); ?>
                 <?php print drupal_render($form['field_story_issue_date']); ?>
+                <?php print drupal_render($form['field_story_select_supplement']); ?>
                 <?php print drupal_render($form['title']); ?>
                 <?php print drupal_render($form['field_emoji_position']); ?>
                 <?php print drupal_render($form['field_emoji']); ?>

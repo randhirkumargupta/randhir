@@ -33,7 +33,7 @@ function itg_syndication_generate_xml($data) {
     $delivery_mode_type = 'web_url';
   }
 
-  watchdog("Syndication", "delivery_mode_type : $delivery_mode_type");
+  //watchdog("Syndication", "delivery_mode_type : $delivery_mode_type");
   // Decide sharing mode
   switch ($delivery_mode_type) {
     // 1. Fetch web URL (our server)

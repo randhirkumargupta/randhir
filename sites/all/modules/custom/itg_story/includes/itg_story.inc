@@ -81,26 +81,60 @@ function itg_state_get_content_title($title) {
         $query = db_select('node', 'n');
         $query->fields('n', array('title'));
         
-        if ($state == 'unpublished') {
-          $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
-          $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
-          //$query->condition('sp.field_supp_publish_value', 1, '=');
-          //$query->condition('n.status', 0);
-          $query->condition('ed.field_survey_end_date_value', $cur_date , '<');
-          //$query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '=<'));
-        } else if ($state == 'published') {
-          $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
-          $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
-          $query->condition('sp.field_supp_publish_value', 1, '=');
-          $query->condition('n.status', 1);
-          $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
-        } else if ($state == 'draft') {
-          $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
-          $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
-          $query->isNull('sp.field_supp_publish_value');
-          $query->condition('n.status', 0);          
-          $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
-          $query->condition('n.uid', $user->uid);
+        if ($content_type == 'survey') {
+          if ($state == 'unpublished') {
+            $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
+            $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
+            //$query->condition('sp.field_supp_publish_value', 1, '=');
+            //$query->condition('n.status', 0);
+            $query->condition('ed.field_survey_end_date_value', $cur_date , '<');
+            //$query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '=<'));
+          } else if ($state == 'published') {
+            $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
+            $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
+            $query->condition('sp.field_supp_publish_value', 1, '=');
+            $query->condition('n.status', 1);
+            $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
+          } else if ($state == 'draft') {
+            $query->leftJoin('field_data_field_supp_publish', 'sp', 'sp.entity_id = n.nid');
+            $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
+            $query->isNull('sp.field_supp_publish_value');
+            $query->condition('n.status', 0);          
+            $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
+            $query->condition('n.uid', $user->uid);
+          }
+        } else if ($content_type == 'quiz') {
+            if ($state == 'unpublished') {
+              $query->leftJoin('field_data_field_quuiz_publish', 'sp', 'sp.entity_id = n.nid');
+              $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');            
+              $query->condition('ed.field_survey_end_date_value', $cur_date , '<');            
+            } else if ($state == 'published') {
+              $query->leftJoin('field_data_field_quuiz_publish', 'sp', 'sp.entity_id = n.nid');
+              $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
+              $query->condition('sp.field_quuiz_publish_value', 1, '=');
+              $query->condition('n.status', 1);
+              $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
+            } else if ($state == 'draft') {
+              $query->leftJoin('field_data_field_quuiz_publish', 'sp', 'sp.entity_id = n.nid');
+              $query->leftjoin('field_data_field_survey_end_date' , 'ed' , 'n.nid = ed.entity_id');
+              $query->isNull('sp.field_quuiz_publish_value');
+              $query->condition('n.status', 0);          
+              $query->condition(db_or()->isNull('ed.field_survey_end_date_value')->condition('ed.field_survey_end_date_value' , $cur_date , '>='));
+              $query->condition('n.uid', $user->uid);
+            }
+        } else if ($content_type == 'poll') {
+            if ($state == 'unpublished') {
+              $query->leftJoin('field_data_field_poll_itg_state', 'sp', 'sp.entity_id = n.nid');
+              $query->condition('sp.field_poll_itg_state_value', 1); 
+              $query->condition('n.status', 0);           
+            } else if ($state == 'published') {              
+                $query->condition('n.status', 1);                
+            } else if ($state == 'draft') {
+                $query->leftJoin('field_data_field_poll_itg_state', 'sp', 'sp.entity_id = n.nid');
+                $query->condition('sp.field_poll_itg_state_value', 0); 
+                $query->condition('n.status', 0);
+                $query->condition('n.uid', $user->uid);
+            }
         }
         
         $query->condition('title', '%' . $title . '%', 'LIKE');

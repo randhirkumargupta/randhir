@@ -49,7 +49,7 @@ function generateStoryDeatilList($id) {
   $tid = $node->field_primary_category['und'][0]['value'];
   $extra_large_image = file_create_url($node->field_story_extra_large_image['und'][0]['uri']);
   $large_image_fid = $node->field_story_extra_large_image['und'][0]['fid'];
-  $body_without_html = $node->body['und'][0]['value'];
+  $body_without_html = strip_tags($node->body['und'][0]['value']);
 
   $director = $node->field_mega_review_director[LANGUAGE_NONE]['0']['value'];
   $movie_plot = $node->field_mega_review_movie_plot[LANGUAGE_NONE]['0']['value'];
@@ -298,6 +298,26 @@ function getHighlight($node) {
   return $heighlight;
 }
 
+/**
+ * function for getHighlightByNid
+ * @pram int $nid
+ *
+ * @return array
+ */
+function getHighlightByNid($nid) {
+  $heighlight = array();
+  $query = db_select('field_data_field_story_highlights', 'shl');
+  $query->fields('shl', array('field_story_highlights_value'));
+  $query->condition('shl.entity_id', $nid, '=');
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  $loop_cont = 0;
+  foreach ($result as $reskey => $resvalue) {
+    $text = $resvalue['field_story_highlights_value'];
+    $heighlight[$loop_cont]['h_title'] = "$text";
+    $loop_cont++;
+  }
+  return $heighlight; 
+}
 /**
  * function for get story rating
  * @pram object $node

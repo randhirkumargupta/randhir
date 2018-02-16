@@ -49,7 +49,7 @@ if (!empty($content)):
   $migrated_count = $content["migrated_count"];
   //get byline id based on order reorder
 
-  $byline_id = $content["byline_id"];
+  $byline_id_mobile = $byline_id = $content["byline_id"];
 
   //get byline detail
   $reporter_node = '';
@@ -72,6 +72,8 @@ if (!empty($content)):
   $node_image_title = '';
   $node_image_alt = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['alt']); 
   $node_image_title = str_replace(array('\'', '"'), '', $node->field_story_extra_large_image[LANGUAGE_NONE][0]['title']);
+  // source type array
+  $source_type_arr = array('PTI' , 'IANS', 'ANI');
   ?>
   <div class="story-section <?php print $class_buzz . "" . $class_related . "" . $class_listicle. $photo_story_section_class;?>">
     <div class='<?php print $classes ?>'>      
@@ -119,8 +121,59 @@ if (!empty($content)):
         <?php if (empty($node->field_story_template_buzz[LANGUAGE_NONE]) && empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>
           <div class="story-left"> 
               <div class="posted-by">
-                  <span><?php if(!empty($reporter_node->title)) { print t('By ' . $reporter_node->title) . ' | '; } ?></span>
-                  <span><?php print date('F j, Y', $node->created); ?>   </span>
+                  <?php
+				  $byline_detail = $byline_id[0];
+				  $extra_large_file = file_load($byline_detail['extra_large_image']);
+					$bylineextra_large_image = $extra_large_file->uri;
+					?>
+					<div class="profile-pic">
+					  <?php
+					  if(!empty($bylineextra_large_image)) {
+						  $file = image_style_url('user_picture', $bylineextra_large_image);
+						}
+						else {
+						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+						}
+						print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="'.$file.'"></amp-img>';
+					  ?>
+					</div>
+					<div class="profile-detail">
+					<ul class="profile-byline">
+					<?php
+					  if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
+					   echo '<li><ul>';	  	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  if (!empty($mobile_val['title'])) { ?>	 
+							 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
+						<?php }      	
+						   }
+					  echo '</ul></li>';
+						} 
+					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+						?>
+						<li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+							?>
+						</li>
+						<?php 
+						  } 
+						?>
+					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <?php
+					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+							print date('H:i', $node->created);
+						}
+						else {
+							print date('H:i', $node->changed);
+						}
+					  ?>
+					   IST </li>
+					  </ul>
+                 </div>
               </div>
           </div>
         <?php } ?>
@@ -128,8 +181,59 @@ if (!empty($content)):
         <?php if (!empty($node->field_story_template_buzz[LANGUAGE_NONE]) || !empty($node->field_story_template_guru[LANGUAGE_NONE][0]['value'])) { ?>                       
           <div class="buzzfeed-byline">
             <div class="posted-by">
-                  <span><?php if(!empty($reporter_node->title)) { print t('By ' . $reporter_node->title) . ' | '; } ?></span>
-                  <span><?php print date('F j, Y', $node->created); ?>   </span>
+                  <?php
+				  $byline_detail = $byline_id[0];
+				  $extra_large_file = file_load($byline_detail['extra_large_image']);
+					$bylineextra_large_image = $extra_large_file->uri;
+					?>
+					<div class="profile-pic">
+					  <?php
+					  if(!empty($bylineextra_large_image)) {
+						  $file = image_style_url('user_picture', $bylineextra_large_image);
+						}
+						else {
+						  $file = file_create_url(file_default_scheme() . '://images/default-user.png');
+						}
+						print '<amp-img height="50" width="50" layout="responsive" alt="" title="" src="'.$file.'"></amp-img>';
+					  ?>
+					</div>
+					<div class="profile-detail">
+					<ul class="profile-byline">
+					<?php
+					  if(is_array($byline_id_mobile) && count($byline_id_mobile) > 0) {
+					   echo '<li><ul>';	  	
+					   foreach($byline_id_mobile as $mobile_key => $mobile_val) {
+						  if (!empty($mobile_val['title'])) { ?>	 
+							 <li class="title"><?php if(!empty($mobile_val['title'])) { print t($mobile_val['title']); } ?></li>
+						<?php }      	
+						   }
+					  echo '</ul></li>';
+						} 
+					  if (!empty($node->field_stroy_city[LANGUAGE_NONE][0]['taxonomy_term']->name)) {
+						?>
+						<li><?php
+							$city = array();
+							foreach ($node->field_stroy_city[LANGUAGE_NONE] as $key => $term_value) {
+							  $city[] = $node->field_stroy_city[LANGUAGE_NONE][$key]['taxonomy_term']->name;
+							}
+							print implode(' | ', $city);
+							?>
+						</li>
+						<?php 
+						  } 
+						?>
+					  <li><?php print date('F j, Y', strtotime($node->field_itg_content_publish_date[LANGUAGE_NONE][0]['value'])); ?> UPDATED 
+					  <?php
+					  if (in_array($node->field_story_source_type[LANGUAGE_NONE][0]['value'], $source_type_arr)) {
+							print date('H:i', $node->created);
+						}
+						else {
+							print date('H:i', $node->changed);
+						}
+					  ?>
+					   IST </li>
+					  </ul>
+                 </div>
               </div>
           </div>
 
@@ -367,7 +471,8 @@ if (!empty($content)):
                     $google_url = 'https://plus.google.com/share?url='.  urlencode($amp_link);
 
                     $factoidsSocialShare['icons'] = '<div class="factoids-page">
-                                 <div class="fun-facts"><h2>' . t('Funfacts') . '</h2> </div>
+                                 <div class="fun-facts"><h2>' . $factoidsSocialShare['title'] . '</h2> </div></div>';
+                                 /*
                                   <div class="social-share">
                                   <amp-accordion disable-session-states>
                                   <section>
@@ -383,7 +488,7 @@ if (!empty($content)):
                                  </section>
                                  </amp-accordion>
                                  </div>
-                                 </div>';
+                                 </div>'; */
                     $factoidsSocialShare['slider'] = '<div class="factoids-slider"><div class="scroll-x"><ul>';
                     foreach ($node->field_story_template_factoids[LANGUAGE_NONE] as $key => $value) {
                       $factoidsSocialShare['slider'] .='<li><span>' . $value['value'] . '</span></li>';
@@ -429,12 +534,17 @@ if (!empty($content)):
                 }
                 // Code for Tech Photo gallery
                 if (strpos($story_body, '[ITG:TECH-PHOTO-GALLERY]')) { 
-                  if (!empty($node->field_technology_photogallery['und'])) {
-                    $gallery_node = node_load($node->field_technology_photogallery['und'][0]['target_id']);
-                    $tech_gallery_images = $gallery_node->field_gallery_image;
-                    $tech_gallery_alias = drupal_get_path_alias('node/' . $gallery_node->nid);
-                    $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, 'amp');
-                    $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
+                  if ((!empty($node->field_technology_photogallery['und']))) {
+				    if(itg_common_get_node_status($node->field_technology_photogallery['und'][0]['target_id']) == 1){
+                      $gallery_node = node_load($node->field_technology_photogallery['und'][0]['target_id']);
+                      $tech_gallery_images = $gallery_node->field_gallery_image[LANGUAGE_NONE];
+                      $tech_gallery_alias = drupal_get_path_alias('node/' . $gallery_node->nid);
+                      $photo_gallery_html = itg_story_photogallery_plugin_data($tech_gallery_images, $tech_gallery_alias, 'amp');
+                      $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', $photo_gallery_html, $story_body);
+					}
+					else{
+					  $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);
+					}
                   }
                   else {
                     $story_body = str_replace('[ITG:TECH-PHOTO-GALLERY]', '', $story_body);

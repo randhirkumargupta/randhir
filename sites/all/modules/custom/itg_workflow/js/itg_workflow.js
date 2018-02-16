@@ -85,6 +85,7 @@ jQuery(document).ready(function() {
         if (msg == true) {
             if(title != '') {
                 jQuery("#edit-workbench-moderation-state-new").val(story_state);
+                jQuery("#edit-submit").addClass('publish-clicked');
             }
              jQuery("#edit-submit").click();
              return true;
@@ -105,6 +106,7 @@ jQuery(document).ready(function() {
        } else {
             if(title != '') {
                 jQuery("#edit-workbench-moderation-state-new").val(story_state);
+                jQuery("#edit-submit").addClass('publish-clicked');
             }
             jQuery("#edit-submit").click();
        }
@@ -144,7 +146,18 @@ jQuery(document).ready(function() {
             return true;  
         }
     
-    });                  
+    }); 
+    // 
+    jQuery('#edit-submit').click(function() {
+		var publish_clicked = jQuery( "#edit-submit" ).hasClass( "publish-clicked" );		
+		if(publish_clicked){
+			var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];
+			jQuery("#edit-workbench-moderation-state-new").val(story_state);
+		}
+		else{
+			jQuery("#edit-workbench-moderation-state-new").val('draft');
+		}
+	});                 
 });
 
 

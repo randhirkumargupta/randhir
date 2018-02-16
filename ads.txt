@@ -294,6 +294,14 @@ pubmatic.com, 156595, RESELLER, 5d62403b186f2ace
 freewheel.tv, 144617, RESELLER
 freewheel.tv, 144633, RESELLER
 beachfront.com, 2779, RESELLER
+vi.ai, 465407262951234, DIRECT
+spotx.tv, 122515, RESELLER, 7842df1d2fe2db34
+spotx.tv, 74964, RESELLER, 7842df1d2fe2db34
+spotx.tv, 104684, RESELLER, 7842df1d2fe2db34
+spotx.tv,113481,RESELLER,7842df1d2fe2db34
+freewheel.tv, 662914, RESELLER
+freewheel.tv, 662930, RESELLER
+
 
 #Andbeyond
 Andbeyond.media, 63833091, DIRECT
@@ -393,6 +401,7 @@ sovrn.com, 239753, RESELLER, fafdf38b16bf6b2b
 lijit.com, 239753, RESELLER, fafdf38b16bf6b2b
 freewheel.tv, 144617, RESELLER
 freewheel.tv, 144633, RESELLER
+improvedigital.com, 1091, RESELLER
 
 #Adzouk
 google.com, pub-9611340043830472, RESELLER, f08c47fec0942fa0
@@ -612,3 +621,7 @@ pubmatic.com, 137711, RESELLER
 pubmatic.com, 156212, RESELLER
 pubmatic.com, 62483, RESELLER
 contextweb.com, 558511, RESELLER
+
+#Performena
+smartadserver.com, 2538, RESELLER 
+advertising.com, 24300, RESELLER

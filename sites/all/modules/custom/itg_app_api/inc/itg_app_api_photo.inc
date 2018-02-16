@@ -130,10 +130,14 @@ function generatePhotoCategoryList($tid, $pageno) {
     $query->fields('n', array('nid', 'title', 'created', 'type', 'uid', 'changed'));
     $query->fields('fpc', array('field_primary_category_value'));
 
-    if (count($tid_list) > 0) {
-      $query->condition('ti.tid', $tid_list, 'IN');
+    if ($tid == 0 && count($tid_list) > 0) {
+        $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    else{
+        $query->condition('ti.tid', $tid, '=');
+    }
+    $interval = itg_app_time_interval($tid);    
+    $d1 = date('Y-m-d', strtotime("-".$interval." days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     //change in query
@@ -180,7 +184,6 @@ function generatePhotoCategoryList($tid, $pageno) {
         $create_date = date("Y-m-d H:i:s", $created);
       }
       else {
-
         $create_date = "";
       }
       if ($changed) {
@@ -188,6 +191,13 @@ function generatePhotoCategoryList($tid, $pageno) {
       }
       else {
         $changed_datetime = "";
+      }
+      // Get Publish time:
+      $pub_date = get_content_publish_date($nid);
+      if (!empty($pub_date)) {  
+        $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+      } else {
+        $pub_date = "";
       }
       // photo detail for listing
       $term_pri = taxonomy_term_load($field_primary_category_value);
@@ -200,7 +210,7 @@ function generatePhotoCategoryList($tid, $pageno) {
       $photo_list_array[$loop_count]['p_count'] = "$toptlapics";
       $photo_list_array[$loop_count]['p_comment_count'] = "$comment_cont";
       $photo_list_array[$loop_count]['p_share_link'] = "$firebase_url";
-      $photo_list_array[$loop_count]['p_updated_datetime'] = "$changed_datetime";
+      $photo_list_array[$loop_count]['p_updated_datetime'] = "$pub_date";
       $photo_list_array[$loop_count]['p_subcategory_id'] = "$field_primary_category_value";
       $photo_list_array[$loop_count]['p_subcategory_title'] = "$term_name_pri";
       $loop_count++;
@@ -301,7 +311,7 @@ function generatePhotoDetailList($galleryimg) {
     // loop on gallery img
     $output = "";
     foreach ($galleryimg as $key => $value) {
-      $fc = field_collection_field_get_entity($value);;
+      $fc = field_collection_field_get_entity($value);
       $fid = $fc->field_image_id['und'][0]['value'];
       if (!$fid > 0) {
         $fid = $fc->field_images['und'][0]['fid'];

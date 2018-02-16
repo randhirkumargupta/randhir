@@ -141,11 +141,14 @@ function generateNewsCategoryList($tid, $pageno) {
 
 
     //end
-
-    if (count($tid_list) > 0) {
-      $query->condition('ti.tid', $tid_list, 'IN');
+    if ($tid == 0 && count($tid_list) > 0) {
+        $query->condition('ti.tid', $tid_list, 'IN');
     }
-    $d1 = date('Y-m-d', strtotime("-360 days"));
+    else{
+        $query->condition('ti.tid', $tid, '=');
+    }
+    $interval = itg_app_time_interval($tid);    
+    $d1 = date('Y-m-d', strtotime("-".$interval." days"));
     $d2 = date(strtotime($d1));
     $query->condition('n.created', $d2, '>=');
     $query->condition('n.status', 1)->condition('n.type', $type, 'IN')->orderBy('n.created', 'DESC')->groupBy('n.nid')->range($range_min, $range_max);
@@ -158,7 +161,7 @@ function generateNewsCategoryList($tid, $pageno) {
       $title = $resvalue['title'];
       $type = $resvalue['type'];
       $nid = $resvalue['nid'];
-
+      
       if ($type == 'story') {
         $type = getStoryType($nid);
       }
@@ -198,6 +201,13 @@ function generateNewsCategoryList($tid, $pageno) {
       else {
         $changed_datetime = "";
       }
+      // Get Publish time:
+      $pub_date = get_content_publish_date($nid);
+      if (!empty($pub_date)) {  
+        $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+      } else {
+        $pub_date = "";
+      }
       $field_primary_category_value = $resvalue['field_primary_category_value'];
       $term = taxonomy_term_load($field_primary_category_value);
       $term_name = $term->name;
@@ -212,6 +222,9 @@ function generateNewsCategoryList($tid, $pageno) {
       $news_list_array[$listcount]['n_pcategory_name'] = "$term_name";
       $news_list_array[$listcount]['n_rating'] = "";
       $news_list_array[$listcount]['n_comment_count'] = "$comment_cont";
+      $heighligth = array();
+      $heighligth = (array) getHighlightByNid($nid);      
+      $news_list_array[$listcount]['n_highlight'] = $heighligth;
       if ($type == "photogallery") {
         $node_data = node_load($nid);
 
@@ -242,7 +255,7 @@ function generateNewsCategoryList($tid, $pageno) {
         $news_list_array[$listcount]['n_large_image'] = "$file_large_img_url";
         $news_list_array[$listcount]['n_extralarge_image'] = "$file_ext_large_img_url";
       }
-      $news_list_array[$listcount]['n_updated_datetime'] = "$changed_datetime";
+      $news_list_array[$listcount]['n_updated_datetime'] = "$pub_date";
 
       // photo list array
 
@@ -276,7 +289,7 @@ function generateNewsCategoryList($tid, $pageno) {
 
   $data['lcount'] = $listcount;
   $data['data'] = $news_list_array;
-  $data['updated_datetime'] = $changed_datetime;
+  $data['updated_datetime'] = $pub_date;
   return $data;
 }
 

@@ -19,7 +19,7 @@ var zflag_nid="821"; var zflag_cid="2045/1137"; var zflag_sid="2"; var zflag_wid
 <meta name="viewport" content="width=device-width; initial-scale=1.0" />
 <link href="/elections/assembly/2015/bihar/css/homepage-new.css" type="text/css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-<link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' /> 
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' /> 
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> 
@@ -1286,7 +1286,7 @@ if (document.body.offsetWidth>=1250) {
 <script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
 <script src="/staticpages/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
-<script type='text/javascript' src='http://indiatoday.intoday.in/js/copypaste_common.js' ></script>
+<script type='text/javascript' src='/staticpages/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 <img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">
 <script src="http://tags.crwdcntrl.net/c/9709/cc_af.js"></script>

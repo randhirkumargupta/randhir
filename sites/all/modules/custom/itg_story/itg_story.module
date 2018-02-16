@@ -261,6 +261,13 @@ function itg_story_form_alter(&$form, &$form_state, $form_id) {
         }
         $form['field_story_configurations'][LANGUAGE_NONE]['#default_value'] = $values;
       }
+      // Unset defualy value if attached gallery is unpublished.
+      if (isset($form['#node']->nid) && !empty($form['#node']->field_technology_photogallery[LANGUAGE_NONE][0]['target_id'])) {
+        $gallery_id = $form['#node']->field_technology_photogallery[LANGUAGE_NONE][0]['target_id'];
+        if (itg_common_get_node_status($gallery_id) == 0) {
+          $form['field_technology_photogallery'][LANGUAGE_NONE][0]['target_id']['#default_value'] = '';
+        }
+      }
 
       if ($user->uid != 1) {
         unset($form['field_story_long_head_line']);
@@ -750,6 +757,12 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   else {
     $magazine_id = !empty($form_state['input'][$magazine_field][LANGUAGE_NONE]) ? $form_state['input'][$magazine_field][LANGUAGE_NONE] : '';
   }
+  if (isset($form['#node']->field_story_issue_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
+    $issue_date = $form['#node']->field_story_issue_date[LANGUAGE_NONE][0]['value'];
+  }
+  else {
+    $issue_date = !empty($form_state['values']['field_story_issue_date'][LANGUAGE_NONE]) ? $form_state['values']['field_story_issue_date'][LANGUAGE_NONE][0]['value'] : '';
+  }
 
   if (isset($form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value']) && !isset($form_state['triggering_element'])) {
     $date_val = $form['#node']->field_poll_start_date[LANGUAGE_NONE][0]['value'];
@@ -759,7 +772,7 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // add ajax on magazine field
-  $form[$magazine_field][LANGUAGE_NONE]['#ajax'] = array(
+  $form['field_story_issue_date'][LANGUAGE_NONE][0]['#ajax'] = array(
     'event' => 'change',
     'callback' => 'itg_story_magazine_ajax_callback',
     'wrapper' => $supplement_field . '_replace',
@@ -776,9 +789,9 @@ function itg_story_form_story_node_form_alter(&$form, &$form_state, $form_id) {
   $form[$supplement_field][LANGUAGE_NONE]['#prefix'] = '<div id="' . $supplement_field . '_replace">';
   $form[$supplement_field][LANGUAGE_NONE]['#suffix'] = '</div>';
 
-  if (function_exists('itg_common_dropdown_supplement')) {
-    if(!empty($magazine_id)) {
-    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_common_dropdown_supplement($magazine_id);
+  if (function_exists('itg_story_dropdown_supplement')) {
+    if(!empty($issue_date)) {
+    $form[$supplement_field][LANGUAGE_NONE]['#options'] = itg_story_dropdown_supplement($issue_date);
     }
   }
 
@@ -1015,7 +1028,9 @@ function itg_story_node_presave($node) {
         }
       }
     }
-
+    
+    $node->body[LANGUAGE_NONE][0]['value'] = replace_emoji($node->body[LANGUAGE_NONE][0]['value']);
+    $_REQUEST['body'][LANGUAGE_NONE][0]['value'] = replace_emoji($node->body[LANGUAGE_NONE][0]['value']);
     // Prevent expiry date to save if expiry checkbox is unchecked
 
     if (empty($node->field_story_expires[LANGUAGE_NONE][0]['value'])) {
@@ -1028,6 +1043,12 @@ function itg_story_node_presave($node) {
  * {@inheritdoc}
  */
 function itg_story_node_view($node, $view_mode, $langcode) {
+	if (!empty($_GET['iframe'])) {
+		drupal_add_js('jQuery(document).ready(function() {           
+                jQuery("#cboxLoadedContent").find("iframe").removeAttr("style");               
+             });', array('type' => 'inline', 'scope' => 'footer'));
+	}	
+             
   if ($node->type == 'story' && $view_mode != 'search_index') {
     global $user, $theme;
     // for lock story
@@ -1364,4 +1385,37 @@ function itg_get_story_extra_large_image($nid) {
     $result = $query->execute();
     return $query->execute()->fetchField();
   }
+}
+
+/**
+ * Function for replace emoji characters from string
+ */ 
+function replace_emoji($text){
+  $string = str_replace("?", "{%}", $text);
+  $string = mb_convert_encoding($string, "ISO-8859-1", "UTF-8");
+  $string = mb_convert_encoding($string, "UTF-8", "ISO-8859-1");
+  $string = str_replace(array("?", "? ", " ?"), array(""), $string);
+  $string = str_replace("{%}", "?", $string);
+  return trim($string);
+  //return preg_replace('/([0-9|#][\x{20E3}])|[\x{00ae}|\x{00a9}|\x{203C}|\x{2047}|\x{2048}|\x{2049}|\x{3030}|\x{303D}|\x{2139}|\x{2122}|\x{3297}|\x{3299}][\x{FE00}-\x{FEFF}]?|[\x{2190}-\x{21FF}][\x{FE00}-\x{FEFF}]?|[\x{2300}-\x{23FF}][\x{FE00}-\x{FEFF}]?|[\x{2460}-\x{24FF}][\x{FE00}-\x{FEFF}]?|[\x{25A0}-\x{25FF}][\x{FE00}-\x{FEFF}]?|[\x{2600}-\x{27BF}][\x{FE00}-\x{FEFF}]?|[\x{2900}-\x{297F}][\x{FE00}-\x{FEFF}]?|[\x{2B00}-\x{2BF0}][\x{FE00}-\x{FEFF}]?|[\x{1F000}-\x{1F6FF}][\x{FE00}-\x{FEFF}]?/u', '', $text);
+}
+
+function itg_story_dropdown_supplement($issue_date){
+	// Fetch supplements for selected magazine
+  $select = t('- None -');
+  $data = array('_none' => $select);
+  $query = db_select('field_data_field_issue_supplement' , 'm');
+  $query->join('node' , 'n' , 'm.entity_id = n.nid');
+  $query->join('node' , 'ns' , 'm.field_issue_supplement_target_id = ns.nid');
+  $query->fields('m' , array('entity_id', 'field_issue_supplement_target_id'));
+  $query->fields('n' , array('title'));
+  $query->fields('ns' , array('title'));
+  $query->condition('n.status' , 1 , '=');
+  $query->condition('n.title' , $issue_date , '=');
+  $result = $query->execute();
+
+  while ($record = $result->fetchAssoc()) {
+    $data[$record['field_issue_supplement_target_id']] = $record['ns_title'];
+  }
+  return $data;
 }

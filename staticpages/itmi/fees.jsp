@@ -10,6 +10,10 @@
 <link rel="apple-touch-icon" sizes="114x114" href="https://smedia2.intoday.in/indiatoday/itmi/itmi-144x144.png"/>
 <link rel='shortcut icon' type='image/x-icon' href='https://smedia2.intoday.in/indiatoday/itmi/itmi.ico'/>
 <link href="css/style.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+table.feestable tr td{ padding:10px 5px; }
+.text-containt table.feestable p{ margin-bottom: 0px; }
+</style>
 <script>
   var _comscore = _comscore || [];
   _comscore.push({ c1: "2", c2: "8549097" });
@@ -41,7 +45,7 @@
   ga('create', 'UA-795349-72', 'intoday.in');
   ga('send', 'pageview');
 </script>
-<link rel="alternate" media="only screen and (max-width: 640px)" href="/itmi/mobile/"/>
+<link rel="alternate" media="only screen and (max-width: 640px)" href="/itmi/mobile/fees.jsp"/>
 <script type="text/javascript">if ((navigator.userAgent).toLowerCase().indexOf('iphone') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=510733452" />'); } else if ((navigator.userAgent).toLowerCase().indexOf('ipad') >= 0) { document.write('<meta name="apple-itunes-app" content="app-id=560404098" />');}</script>
 <script type="text/javascript">function canonicalUrlRedirection(){for(var e="",i=document.getElementsByTagName("link"),a=0;a<i.length;a++)if("only screen and (max-width: 640px)"==i[a].getAttribute("media")){e=i[a].getAttribute("href");break}""!=e&&(window.location.href=e)}var redirectagent=navigator.userAgent.toLowerCase(),mode=window.location.toString().split("mode=")[1],redirect_devices=["vnd.wap.xhtml+xml","sony","symbian","S60","SymbOS","nokia","samsung","mobile","windows ce","epoc","opera mini","nitro","j2me","midp-","cldc-","netfront","mot","up.browser","up.link","audiovox","blackberry","ericsson","panasonic","philips","sanyo","sharp","sie-","portalmmm","blazer","avantgo","danger","palm","series60","palmsource","pocketpc","smartphone","rover","ipaq","au-mic","alcatel","ericy","vodafone","wap1","wap2","teleca","playstation","lge","lg-","iphone","android","htc","dream","webos","bolt","nintendo"];if(!(redirectagent.indexOf("ipad")>=0))for(var i in redirect_devices)-1!=redirectagent.indexOf(redirect_devices[i])&&"classic"!=mode&&canonicalUrlRedirection();</script>
 </head><body>
@@ -51,59 +55,57 @@
   <div class="contentCn">
     <div class="wrapper">
       <div class="leftBar">
-        <div class="text-containt"> 
-          
-          <!--Body Content Start Here-->
-          
+        <div class="text-containt">           
+          <!--Body Content Start Here-->          
           <h3>FEES</h3>
-          <strong>Two-Year Postgraduate Diploma in <span id="t89xx197_5">Mass Communication</span></strong>
+          <strong>Two-Year Full Time Postgraduate Diploma in <span id="t89xx197_5">Mass Communication</span></strong>
           </p>
-          <table border="1" cellpadding="0" cellspacing="0" width="650">
+          <table border="1" cellpadding="0" cellspacing="0" width="650" class="feestable">
             <tbody>
               <tr>
                 <td valign="top" width="223"><strong>Charges</strong></td>
-                <td valign="top" width="150"><p align="right"><strong>Annual fees (Rs)- I Year</strong></p></td>
-                <td valign="top" width="150"><p align="right"><strong>Annual fees (Rs) – II year</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>1st Year Annual fee (Rs)</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2nd Year Annual fee (Rs)</strong></p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Tuition</p></td>
-                <td valign="top" width="150"><p align="right">1,85,000</p></td>
-                <td valign="top" width="150"><p align="right">1,78,000</p></td>
+                <td valign="top" width="150"><p align="right">2,00,000</p></td>
+                <td valign="top" width="150"><p align="right">1,52,320</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p><span id="t89xx197_1">Medical insurance</span></p></td>
-                <td valign="top" width="150"><p align="right">1,000</p></td>
+                <td valign="top" width="150"><p align="right">2,000</p></td>
                 <td valign="top" width="150"><p align="right">1,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Admissions and examinations</p></td>
-                <td valign="top" width="150"><p align="right">12,000</p></td>
-                <td valign="top" width="150"><p align="right">12,000</p></td>
+                <td valign="top" width="150"><p align="right">15,000</p></td>
+                <td valign="top" width="150"><p align="right">15,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Student activities</p></td>
-                <td valign="top" width="150"><p align="right">7,000</p></td>
-                <td valign="top" width="150"><p align="right">7,000</p></td>
+                <td valign="top" width="150"><p align="right">10,000</p></td>
+                <td valign="top" width="150"><p align="right">10,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Alumni fund</p></td>
-                <td valign="top" width="150"><p align="right">..</p></td>
+                <td valign="top" width="150"><p align="right">2,000</p></td>
                 <td valign="top" width="150"><p align="right">2,000</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>Educational Trip</p></td>
+                <td valign="top" width="223"><p>Academic Project</p></td>
                 <td valign="top" width="150"><p align="right">10,000</p></td>
                 <td valign="top" width="150"><p align="right">..</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p><strong>TOTAL</strong></p></td>
-                <td valign="top" width="150"><p align="right"><strong>2,10,000</strong></p></td>
-                <td valign="top" width="150"><p align="right"><strong>2,00,000</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,39,000</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>1,80,320</strong></p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>Service Tax @15% </p></td>
-                <td valign="top" width="150"><p align="right">31,500 </p></td>
-                <td valign="top" width="150"><p align="right">30,000 </p></td>
+                <td valign="top" width="223"><p>GST @18%</p></td>
+                <td valign="top" width="150"><p align="right">43,020 </p></td>
+                <td valign="top" width="150"><p align="right">32,457.6 </p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Refundable equipment and library deposit</p></td>
@@ -111,16 +113,25 @@
                 <td valign="top" width="150"><p align="right">..</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>GRAND TOTAL</p></td>
-                <td valign="top" width="150"><p align="right">2,46,500</p></td>
-                <td valign="top" width="150"><p align="right">2,30,000</p></td>
+                <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,12,778</strong></p></td>
               </tr>
+              
+              
+              <tr>
+                <td valign="top" width="223"><p>*Taxes as applicable on the date of rendering of service will be charged extra</p></td>
+                <td valign="top" width="150"></td>
+                <td valign="top" width="150"><p align="right">4,99,798</p></td>
+              </tr>
+              
+              
             </tbody>
           </table>
-          <p style="padding:0; margin:0; font-size:14px; line-height:26px; color:blue; font-family:"Roboto",Arial, Helvetica, sans-serif;">*Taxes as applicable on the date of rendering of service will be charged extra</p>
+          <!--<p style="padding:0; margin:0; font-size:14px; line-height:26px; color:blue; font-family:"Roboto",Arial, Helvetica, sans-serif;"></p>-->
           <br>
-          <p><strong>11 Month  Full time  Postgraduate Diploma in <span id="t89xx197_2">Broadcast Journalism</span></strong></p>
-          <table border="1" cellpadding="0" cellspacing="0" width="650">
+          <p><strong>Full Time Post Graduate Diploma in <span id="t89xx197_2">Broadcast Journalism</span></strong></p>
+          <table border="1" cellpadding="0" cellspacing="0" width="650" class="feestable">
             <tbody>
               <tr>
                 <td valign="top" width="223"><strong>Charges</strong></td>
@@ -128,7 +139,7 @@
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Tuition</p></td>
-                <td valign="top" width="150"><p align="right">1,97,000</p></td>
+                <td valign="top" width="150"><p align="right">2,00,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Medical insurance</p></td>
@@ -136,42 +147,42 @@
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Admissions and examinations</p></td>
-                <td valign="top" width="150"><p align="right">12,000</p></td>
+                <td valign="top" width="150"><p align="right">15,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Student activities</p></td>
-                <td valign="top" width="150"><p align="right">7,000</p></td>
+                <td valign="top" width="150"><p align="right">10,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Alumni fund</p></td>
                 <td valign="top" width="150"><p align="right">2,000</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>Educational Trip</p></td>
+                <td valign="top" width="223"><p>Academic Project</p></td>
                 <td valign="top" width="150"><p align="right">10,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p><strong>TOTAL</strong></p></td>
-                <td valign="top" width="150"><p align="right"><strong>2,30,000</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,39,000</strong></p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>Service Tax @15% </p></td>
-                <td valign="top" width="150"><p align="right">34,500 </p></td>
+                <td valign="top" width="223"><p>GST @18%</p></td>
+                <td valign="top" width="150"><p align="right">43,020 </p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Refundable equipment and library deposit</p></td>
                 <td valign="top" width="150"><p align="right">5,000</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>GRAND TOTAL</p></td>
-                <td valign="top" width="150"><p align="right">2,69,500 </p></td>
+                <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
               </tr>
             </tbody>
           </table>
-          <p style="padding:0; margin:0; font-size:14px; line-height:26px; color:blue; font-family:"Roboto",Arial, Helvetica, sans-serif;">*Taxes as applicable on the date of rendering of service will be charged extra</p>
+          <!--<p style="padding:0; margin:0; font-size:14px; line-height:26px; color:blue; font-family:"Roboto",Arial, Helvetica, sans-serif;">*Taxes as applicable on the date of rendering of service will be charged extra</p>-->
           <br>
-          <p><strong>11 Month Full Time Postgraduate Diploma in Media Marketing, <span id="t89xx197_2">Planning & Sales Management</span></strong></p>
-          <table border="1" cellpadding="0" cellspacing="0" width="650">
+          <p><strong>Full Time Postgraduate Diploma in <span id="t89xx197_2">Media & Entertainment Management</span></strong></p>
+          <table border="1" cellpadding="0" cellspacing="0" width="650" class="feestable">
             <tbody>
               <tr>
                 <td valign="top" width="223"><strong>Charges</strong></td>
@@ -179,7 +190,7 @@
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Tuition</p></td>
-                <td valign="top" width="150"><p align="right">1,97,000</p></td>
+                <td valign="top" width="150"><p align="right">2,00,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Medical insurance</p></td>
@@ -187,57 +198,58 @@
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Admissions and examinations</p></td>
-                <td valign="top" width="150"><p align="right">12,000</p></td>
+                <td valign="top" width="150"><p align="right">15,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Student activities</p></td>
-                <td valign="top" width="150"><p align="right">7,000</p></td>
+                <td valign="top" width="150"><p align="right">10,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Alumni fund</p></td>
                 <td valign="top" width="150"><p align="right">2,000</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>Educational Trip</p></td>
+                <td valign="top" width="223"><p>Academic Project</p></td>
                 <td valign="top" width="150"><p align="right">10,000</p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p><strong>TOTAL</strong></p></td>
-                <td valign="top" width="150"><p align="right"><strong>2,30,000</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,39,000</strong></p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>Service Tax @15% </p></td>
-                <td valign="top" width="150"><p align="right">34,500 </p></td>
+                <td valign="top" width="223"><p>GST @18% </p></td>
+                <td valign="top" width="150"><p align="right">43,020 </p></td>
               </tr>
               <tr>
                 <td valign="top" width="223"><p>Refundable equipment and library deposit</p></td>
                 <td valign="top" width="150"><p align="right">5,000</p></td>
               </tr>
               <tr>
-                <td valign="top" width="223"><p>GRAND TOTAL</p></td>
-                <td valign="top" width="150"><p align="right">2,69,500 </p></td>
+                <td valign="top" width="223"><p><strong>GRAND TOTAL</strong></p></td>
+                <td valign="top" width="150"><p align="right"><strong>2,87,020</strong></p></td>
               </tr>
             </tbody>
           </table>
-          <p style="padding:0; margin:0; font-size:14px; line-height:26px; color:blue; font-family:"Roboto",Arial, Helvetica, sans-serif;">*Taxes as applicable on the date of rendering of service will be charged extra</p>
+          <!--<p style="padding:0; margin:0; font-size:14px; line-height:26px; color:blue; font-family:"Roboto",Arial, Helvetica, sans-serif;">*Taxes as applicable on the date of rendering of service will be charged extra</p>-->
           <br>
           <p><strong>REFUND  POLICY</strong><br>
             <br>
-            The commitment amount of Rs 40,000 is non refundable as per the company policy. <br>
-            <br>
-            Should you choose to withdraw within the first few weeks you may be eligible for part refund as follows:<br>
-            <br>
-            15 days before day of commencement of classes: 50% of fees paid plus a full refund of the lab and library deposit.<br>
-            <br>
-            Between 16th day before and the first day of classes: 25% of fees paid plus a full refund of the lab and library deposit.<br>
-            <br>
-            No refund will be available beyond the above day except a full refund of the lab and library deposit.<br>
-            <br>
-            Refund requests on the basis of signed applications will be accepted on receipt. Any other form of request will not be considered.<br>
-            <br>
-            Refund requests must be accompanied by "No Dues" certificates (format available at office) from librarian, computer lab manager, and studio in-charge.<br>
-            <br>
-            No certificate or diploma will be awarded to any trainee who withdraws at any time (or absents himself/herself beyond permitted limit) before official end of academic terms. <br>
+            The commitment amount of Rs 40,000 is non refundable as per the company policy. <br><br>
+
+Should you choose to withdraw within the first few weeks you may be eligible for part refund as follows:<br><br>
+
+15 days before day of commencement of classes: 50% of fees paid plus a full refund of the lab and library deposit.<br><br>
+
+Between 16th day before and the first day of classes: 25% of fees paid plus a full refund of the lab and library deposit.<br><br>
+
+No refund will be available beyond the above day except a full refund of the lab and library deposit.<br><br>
+
+Refund requests on the basis of signed applications will be accepted on receipt. Any other form of request will not be considered.<br><br>
+
+Refund requests must be accompanied by "No Dues" certificates (format available at office) from librarian, computer lab manager, and studio in-charge.<br><br>
+
+No certificate or diploma will be awarded to any trainee who withdraws at any time (or absents himself/herself beyond permitted limit) before official end of academic terms. 
+ <br>
           </p>
           <div>
             <div><br>

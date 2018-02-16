@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width; initial-scale=1.0" />
 <link href="/elections/assembly/2015/bihar/css/homepage-new.css" type="text/css" rel="stylesheet" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-<link rel='shortcut icon' type='image/x-icon' href='http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' /> 
+<link rel='shortcut icon' type='image/x-icon' href='https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/images/dot-in-fav-icon.ico' /> 
 <!-- html5.js for IE less than 9 -->
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> 
@@ -23,8 +23,8 @@
 <link href='http://fonts.googleapis.com/css?family=Roboto:700,500,400,900' rel='stylesheet' type='text/css' />
 <link href="/elections/assembly/2015/bihar/css/responsive.css" type="text/css" rel="stylesheet" />
 <link rel="canonical" href="/" /> 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
-<script type="text/javascript" language="javascript" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/jquery.min.1.8.2.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/ajaxinclude.js"></script>
 <style type="text/css">
 body{ background:#fff!Important;}
 a,a img, img{border:none; outline:none;}
@@ -50,7 +50,7 @@ a { outline: medium none; text-decoration: none;}
 
 
 #top-web { height:15px;}
-#amlesh{background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Mast_bg.gif); height:187px; }
+#amlesh{background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Mast_bg.gif); height:187px; }
 .itgd_links {background-color: #3b3b3b !important; color: #fff; font: bold 12px/15px roboto;margin: 0; padding: 0.3%; text-align: center;display: flex; border-bottom:1px solid #fff;}
 .redborder { border-top:1px solid #C7C7C7;}
 .itgd_links a {color: #a29ca6;text-decoration: none;  font: bold 12px/15px Roboto, sans-serif; }
@@ -62,7 +62,7 @@ a { outline: medium none; text-decoration: none;}
 header{height:147px;  width:1000px; margin:0 auto; position:relative }
 .logo{width:180px; height:132px; float:left; padding-top:10px; }
 .sensex-itgd { float:right;}
-#sesex-header {background:url(http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Social_Sensex2_logo.png) center right no-repeat;}
+#sesex-header {background:url(https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Social_Sensex2_logo.png) center right no-repeat;}
 .ad{margin-top: 20px;
     position: absolute;
     right: 0; z-index: 99;}	
@@ -147,8 +147,8 @@ width: 1000px;
 <div class="clear"></div>
 
 <header id="sesex-header">
-<div class="logo"><a href="http://indiatoday.intoday.in/elections/"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Your_vote_logo.png"></a></div>
-<div class="sensex-itgd"><a href="http://indiatoday.intoday.in"><img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/ITG_logo.png"></a></div>
+<div class="logo"><a href="http://indiatoday.intoday.in/elections/"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/Your_vote_logo.png"></a></div>
+<div class="sensex-itgd"><a href="http://indiatoday.intoday.in"><img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/ITG_logo.png"></a></div>
 
 </header>
 
@@ -167,7 +167,7 @@ width: 1000px;
 <div id="main_container" style="position:relative;">
 
 <div id="wapper-two">
-<img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/connect-logo.gif" style="float:right; margin:10px 10px 0px 0px">
+<img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/connect-logo.gif" style="float:right; margin:10px 10px 0px 0px">
 <div id="iframe-chunk">
 <iframe src="http://socialsensex.konnectsocial.com/" width="998" height="1850" scrolling="no" frameborder="0"></iframe>
 </div>
@@ -175,7 +175,7 @@ width: 1000px;
 <div class="index-footer">
 <div id="sesex-footer">
 CONNECT WITH US!  
- <img src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/social_icon.png" usemap="#Map">
+ <img src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/election2014/social_icon.png" usemap="#Map">
  <map name="Map">
    <area shape="circle" coords="29,29,27" target="_blank" href="https://www.facebook.com/IndiaToday">
    <area shape="circle" coords="135,29,27" href="https://twitter.com/IndiaToday" target="">
@@ -187,7 +187,7 @@ CONNECT WITH US!
   
 <footer style="margin:0px auto;" >
 <div id="footer1" style="display:block !important">
-	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe>
+	<iframe width="100%" scrolling="no" height="455" frameborder="0" src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/it-footer2015.html"></iframe>
     </div>
   </div>
   </div>
@@ -310,10 +310,10 @@ if (document.body.offsetWidth>=1250) {
 		}
 </script>
 
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/funalytics/jquery.bxslider.min.js"></script> 
 <script src="/staticpages/js/jquery.lazyload.js" type="text/javascript" charset="utf-8"></script>
-<script src="http://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
-<script type='text/javascript' src='http://indiatoday.intoday.in/js/copypaste_common.js' ></script>
+<script src="https://itgd-mum-dev-static.s3.amazonaws.com/media/others/mediaintoday/indiatoday/js/javascript.js" type="text/javascript" charset="utf-8"></script>
+<script type='text/javascript' src='/staticpages/js/copypaste_common.js' ></script>
 <script type="text/javascript" >$(document).ready(function(){insertCustomSymbols();copypasteinit();});</script>
 <img height="1" width="1" src="http://s3-pixel.c1exchange.com/pubpixel/82493" style="display:none;">
 <script src="http://tags.crwdcntrl.net/c/9709/cc_af.js"></script>
