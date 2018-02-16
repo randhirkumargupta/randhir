@@ -546,6 +546,8 @@
      min-height: 450px;
      max-height: 450px;
  }
+ .grid-group-item .cl a{ display:inline-block}
+ .grid-group-item .cl a span{padding:0 5px;}
 
  .list-group-item .thumbnail .thumbnail-img{position: absolute;left: 175px;}
  .list-group-item .list-group-item-heading{position: absolute;
@@ -565,7 +567,7 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width:170px; float: left; margin-left: 0px;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .title{ padding:0px 0 0 10px;}
 .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .title a{ font-weight: normal; font-size:14px;}
-.block-itg-bestcolleges .bb1-text1{ background:#d0d0d0; padding:10px; margin-top:0px;}
+.block-itg-bestcolleges .bb1-text1{ background:#d0d0d0; padding:3px 10px; margin-top:0px;}
 .block-itg-bestcolleges .bb1-text1 a{font-size: 13px;font-weight: bold;color: #464646;}
 /*EMERGING COLLEGES RANKING TABLE CSS */
 .emergingCollege-section{ margin-bottom:40px;}
@@ -642,6 +644,8 @@ left: 0px;top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-
 .besthead {text-align:center; margin-top:10px; text-transform:uppercase; color:#666666; font:normal 18px arial;}
 .besthead a {text-decoration:none; color:#666666;}
 .besthead a:hover { text-decoration:underline}
+
+.list-group.college .item.col-xs-12.col-sm-6.col-lg-3.grid-group-item {padding: 0 5px;}
 
 @media screen and (max-width: 1024px){
     .sidebar-second .watch-right-now-video.bestcollege-rhs-video ul li.watch-right-now-list .pic{ width: 100px;}
