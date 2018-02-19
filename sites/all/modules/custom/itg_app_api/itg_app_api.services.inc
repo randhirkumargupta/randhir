@@ -3897,7 +3897,6 @@ function itg_rapid_api_log_out($token) {
   
   $success_status_mess = fetchMasterConfigData('master_config_internal_msg');
   $success_status_message = isset($success_status_mess) ? $success_status_mess : "";
-
   $data['status_code'] = "1";
   $data['status_message'] = "$success_status_message";
 
