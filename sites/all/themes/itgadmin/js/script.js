@@ -1220,6 +1220,7 @@ jQuery(document).ready(function () {
                                                         
                             if(flag){
 							    window.parent.jQuery('#widget-ajex-loader').hide();
+							    flag = false;
 							}
 							flag = true;
                         } catch (err) {
