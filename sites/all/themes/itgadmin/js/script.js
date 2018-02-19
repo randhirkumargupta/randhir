@@ -1228,6 +1228,7 @@ jQuery(document).ready(function () {
                             }
 
                             window.parent.jQuery('#widget-ajex-loader').hide();
+                            location.reload();
                         } catch (err) {
 
                         }
