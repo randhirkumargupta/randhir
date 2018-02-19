@@ -1166,22 +1166,22 @@ jQuery(document).ready(function () {
         });
 
         if (selected_check_boxes_index == 0) {
-            //alert("Please select video file.");
+            alert("Please select video file.");
         } else {
             if (unique.length > 1) {
-                //alert("Please select same plateform video.");
-                //return false;
+                alert("Please select same plateform video.");
+                return false;
             }
             var getvideo_tyepe = window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
             if (getvideo_tyepe != "") {
                 if (unique[0] == 'DM' && getvideo_tyepe == 'INTERNAL') {
                     alert("Please remove Internal plateform Video ");
-                    //return false;
+                    return false;
 
                 }
                 if (unique[0] == 'INTERNAL' && getvideo_tyepe == 'DM') {
                     alert("Please remove Dailymotion plateform Video ");
-                    //return false;
+                    return false;
                 }
             }
 
