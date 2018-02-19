@@ -212,6 +212,13 @@ function generateVideoCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
+            // Get Publish time:
+            $pub_date = get_content_publish_date($nid);
+            if (!empty($pub_date)) {  
+              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            } else {
+              $pub_date = "";
+            }
             $title = strip_tags($title);
             //$desc = strip_tags($desc);
             $comment_cont = getCommentsCount($nid);
@@ -263,7 +270,7 @@ function generateVideoCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['v_view_count'] = "$nv_cont";
             $photo_list_array[$listcount]['v_comment_count'] = "$comment_cont";
             $photo_list_array[$listcount]['v_share_url'] = "$firebase_url";
-            $photo_list_array[$listcount]['v_updated_datetime'] = "$changed_datetime";
+            $photo_list_array[$listcount]['v_updated_datetime'] = "$pub_date";
             $photo_list_array[$listcount]['v_duration'] = "$field_video_duration_value";
             $photo_list_array[$listcount]['v_show_ad'] = "0";
             $photo_list_array[$listcount]['v_video_size'] = "300";
@@ -276,7 +283,7 @@ function generateVideoCategoryList($tid, $pageno) {
 
     $data['lcount'] = $listcount;
     $data['data'] = $photo_list_array;
-    $data['updated_datetime'] = $changed_datetime;
+    $data['updated_datetime'] = $pub_date;
     return $data;
 }
 
@@ -504,6 +511,13 @@ function generateProgramCategoryList($tid, $pageno) {
             } else {
                 $changed_datetime = "";
             }
+            // Get Publish time:
+            $pub_date = get_content_publish_date($nid);
+            if (!empty($pub_date)) {  
+              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            } else {
+              $pub_date = "";
+            }
             $title = strip_tags($title);
             //$desc = strip_tags($desc);
             $photo_list_array[$listcount]['p_id'] = "$nid";
@@ -555,7 +569,7 @@ function generateProgramCategoryList($tid, $pageno) {
             $photo_list_array[$listcount]['p_view_count'] = "$nv_cont";
             $photo_list_array[$listcount]['p_comment_count'] = "$comment_cont";
             $photo_list_array[$listcount]['p_share_url'] = "$firebase_url";
-            $photo_list_array[$listcount]['p_updated_datetime'] = "$changed_datetime";
+            $photo_list_array[$listcount]['p_updated_datetime'] = "$pub_date";
             $photo_list_array[$listcount]['p_duration'] = "$field_video_duration_value";
             $photo_list_array[$listcount]['p_show_ad'] = "0";
             $photo_list_array[$listcount]['p_subcategory_id'] = "$trem_id";
@@ -568,7 +582,7 @@ function generateProgramCategoryList($tid, $pageno) {
     }
     $data['lcount'] = $listcount;
     $data['data'] = $photo_list_array;
-    $data['updated_datetime'] = $changed_datetime;
+    $data['updated_datetime'] = $pub_date;
 
     return $data;
 }
@@ -586,7 +600,8 @@ function programCategoryListlPageRerourceValue($token) {
     $updated_datetime = "";
     $conf_array = tidConfig();
     $program_key = "itg_programmes_order_by";
-    $Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061);
+    //$Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1768536,1208173,1207755,1206960,1207972,1208898,1208061);
+    $Program_section_list = array(1207797,1207827,1207722,1208900,1208095,1208902,1208173,1207755,1206960,1207972,1208061);
     
 
     // list array building
@@ -734,7 +749,6 @@ function generateVideoDetail($nid) {
         $desc = str_replace("\n", "", $desc);
         $desc = str_replace("\r", "", $desc);
         $desc = str_replace("\t", "", $desc);
-        $desc = str_replace("&nbsp;", "", $desc);
 
         //related content
         $related = relatedContentNodeType($node->field_common_related_content['und']['0']['value']);
@@ -1130,6 +1144,13 @@ function topstoriesList($source) {
         } else {
             $changed_datetime = date("Y-m-d H:i:s", $created);
         }
+        // Get Publish time:
+        $pub_date = get_content_publish_date($nid);
+        if (!empty($pub_date)) {  
+          $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+        } else {
+          $pub_date = "";
+        }
         //json tag writing
         //if ($type == "story") {
         // news list
@@ -1164,7 +1185,7 @@ function topstoriesList($source) {
         $data_newslist[$home_list_count]['n_small_image'] = "$file_small_img_url";
         $data_newslist[$home_list_count]['n_large_image'] = "$file_large_img_url";
         $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
-        $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
+        $data_newslist[$home_list_count]['n_updated_datetime'] = "$pub_date";
         
         $heighligth = array();
         $heighligth = (array) getHighlightByNid($nid);

@@ -3684,7 +3684,7 @@ function itg_rapid_api_login_request($token) {
         $s_code = 0;
         if($user_data->uid > 0){
             $s_code = 2;
-        }        
+        }
         $account['status_code'] = "$s_code";
         $account['status_message'] = "Wrong username or password.";
         return $account;
@@ -4521,7 +4521,8 @@ function itg_rapid_api_anchor_list($token) {
 
     // check args
     if ($user_id > 0) {
-        $jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
+        //$jsondata = list_itg_rapid_api_anchor_list($user_id, $cpageno, $showall);
+        $jsondata = list_itg_rapid_api_anchor_list_default();
     } else {
         $jsondata = list_itg_rapid_api_anchor_list_default();
     }
@@ -5442,7 +5443,7 @@ function itg_rapid_api_user_follow_topic_list($token) {
  * @return array - The processed information array.
  */
 function itg_rapid_api_testing($token) {
-    p(node_load(989809));
+    p(node_load(1069041));
     $str = '{
     "status_code": "0",
     "status_message": "Customised Message",
