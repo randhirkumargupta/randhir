@@ -246,7 +246,7 @@ img {
 .def-cur-none {
   cursor: none; }
 
-.pointer-event-none .tabs-primary {
+.pointer-event-none {
   pointer-events: none; }
 
 .mr-0, *, #block-formblock-ask-an-expert .form-item .form-item {
