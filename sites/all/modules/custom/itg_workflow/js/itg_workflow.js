@@ -148,7 +148,7 @@ jQuery(document).ready(function() {
     
     }); 
     // 
-    jQuery('#edit-submit').click(function() {
+    /*jQuery('#edit-submit').click(function() {
 		var publish_clicked = jQuery( "#edit-submit" ).hasClass( "publish-clicked" );		
 		if(publish_clicked){
 			var story_state = jQuery('#story_submit_link').attr('class').split(' ')[1];
@@ -157,7 +157,7 @@ jQuery(document).ready(function() {
 		else{
 			jQuery("#edit-workbench-moderation-state-new").val('draft');
 		}
-	});                 
+	}); */                
 });
 
 
