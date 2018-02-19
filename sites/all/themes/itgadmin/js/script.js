@@ -1166,35 +1166,36 @@ jQuery(document).ready(function () {
         });
 
         if (selected_check_boxes_index == 0) {
-            alert("Please select video file.");
+            //alert("Please select video file.");
         } else {
             if (unique.length > 1) {
-                alert("Please select same plateform video.");
-                return false;
+                //alert("Please select same plateform video.");
+                //return false;
             }
             var getvideo_tyepe = window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val();
             if (getvideo_tyepe != "") {
                 if (unique[0] == 'DM' && getvideo_tyepe == 'INTERNAL') {
                     alert("Please remove Internal plateform Video ");
-                    return false;
+                    //return false;
 
                 }
                 if (unique[0] == 'INTERNAL' && getvideo_tyepe == 'DM') {
                     alert("Please remove Dailymotion plateform Video ");
-                    return false;
+                    //return false;
                 }
             }
 
 
             jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-            jQuery('.top-actions *').css( 'pointer-events', 'none' );			
-			jQuery('.top-actions *').css("background-color", "#d9d9d9");
-			jQuery('.top-actions *').css("border-color", "#d9d9d9"); 
-			jQuery('.itg-form-action *').css( 'pointer-events', 'none' );
-			jQuery('.itg-form-action input').css("background-color", "#d9d9d9"); 
-			jQuery('.itg-form-action a').css("background-color", "#d9d9d9");
-			jQuery('.itg-form-action *').css("border-color", "#d9d9d9");
-			
+            //~ jQuery('.top-actions *').css( 'pointer-events', 'none' );			
+			//~ jQuery('.top-actions *').css("background-color", "#d9d9d9");
+			//~ jQuery('.top-actions *').css("border-color", "#d9d9d9"); 
+			//~ jQuery('.itg-form-action *').css( 'pointer-events', 'none' );
+			//~ jQuery('.itg-form-action input').css("background-color", "#d9d9d9"); 
+			//~ jQuery('.itg-form-action a').css("background-color", "#d9d9d9");
+			//~ jQuery('.itg-form-action *').css("border-color", "#d9d9d9");
+			jQuery('.top-actions *').prop('disabled', true);
+			jQuery('.itg-form-action *').prop('disabled', true);
             var getbtnmane = jQuery(this).attr('btn_name');
             jQuery.ajax({
                 url: base_url + '/solr-video-make-fid',
@@ -1228,7 +1229,8 @@ jQuery(document).ready(function () {
                             }
 
                             window.parent.jQuery('#widget-ajex-loader').hide();
-                            location.reload();
+                            //jQuery('.top-actions *').prop('disabled', false);
+							//jQuery('.itg-form-action *').prop('disabled', false);
                         } catch (err) {
 
                         }
@@ -1240,3 +1242,12 @@ jQuery(document).ready(function () {
         }
     });
 });
+
+Drupal.behaviors.videogallery = {
+attach: function(context, settings) {  
+  $('#videogallery-node-form').ajaxComplete(function(event, xhr, settings) {
+     jQuery('.top-actions *').prop('disabled', false);
+	 jQuery('.itg-form-action *').prop('disabled', false);
+  });
+ }
+}
