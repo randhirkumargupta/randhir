@@ -189,6 +189,13 @@ function generatePhotoCategoryList($tid, $pageno) {
       else {
         $changed_datetime = "";
       }
+      // Get Publish time:
+      $pub_date = get_content_publish_date($nid);
+      if (!empty($pub_date)) {  
+        $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+      } else {
+        $pub_date = "";
+      }
       // photo detail for listing
       $term_pri = taxonomy_term_load($field_primary_category_value);
       $term_name_pri = $term_pri->name;
@@ -200,7 +207,7 @@ function generatePhotoCategoryList($tid, $pageno) {
       $photo_list_array[$loop_count]['p_count'] = "$toptlapics";
       $photo_list_array[$loop_count]['p_comment_count'] = "$comment_cont";
       $photo_list_array[$loop_count]['p_share_link'] = "$firebase_url";
-      $photo_list_array[$loop_count]['p_updated_datetime'] = "$changed_datetime";
+      $photo_list_array[$loop_count]['p_updated_datetime'] = "$pub_date";
       $photo_list_array[$loop_count]['p_subcategory_id'] = "$field_primary_category_value";
       $photo_list_array[$loop_count]['p_subcategory_title'] = "$term_name_pri";
       $loop_count++;
@@ -208,7 +215,7 @@ function generatePhotoCategoryList($tid, $pageno) {
   }
   $data['lcount'] = $listcount;
   $data['data'] = $photo_list_array;
-  $data['updated_datetime'] = $changed_datetime;
+  $data['updated_datetime'] = $pub_date;
   return $data;
 }
 

@@ -183,7 +183,13 @@ function homePageJsonPackagelist_india() {
             } else {
                 $changed_datetime = "";
             }
-
+			// Get Publish time:
+            $pub_date = get_content_publish_date($nid);
+            if (!empty($pub_date)) {  
+              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            } else {
+              $pub_date = "";
+            }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
             // custom function for get img byline
@@ -210,7 +216,7 @@ function homePageJsonPackagelist_india() {
             $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
-            $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+            $data_newslist[$listcount]['n_updated_datetime'] = "$pub_date";
             $heighligth = array(); 
             $heighligth = (array) getHighlightByNid($nid);
             $data_newslist[$listcount]['n_highlight'] = $heighligth;
@@ -387,7 +393,13 @@ function homePageJsonPackagelist_lifestyle() {
             } else {
                 $changed_datetime = "";
             }
-
+			// Get Publish time:
+            $pub_date = get_content_publish_date($nid);
+            if (!empty($pub_date)) {  
+              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            } else {
+              $pub_date = "";
+            }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
             // custom function for get img byline
@@ -414,7 +426,7 @@ function homePageJsonPackagelist_lifestyle() {
             $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
             $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
-            $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+            $data_newslist[$listcount]['n_updated_datetime'] = "$pub_date";
             $heighligth = array();
             $heighligth = (array) getHighlightByNid($nid);
             $data_newslist[$listcount]['n_highlight'] = $heighligth;
@@ -594,7 +606,13 @@ function homePageJsonPackagelist_world() {
             } else {
                 $changed_datetime = "";
             }
-
+			// Get Publish time:
+            $pub_date = get_content_publish_date($nid);
+            if (!empty($pub_date)) {  
+              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            } else {
+              $pub_date = "";
+            }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
             // custom function for get img byline
@@ -621,7 +639,7 @@ function homePageJsonPackagelist_world() {
             $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
             $data_newslist[$listcount]['n_large_image'] = "$file_medium_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
-            $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+            $data_newslist[$listcount]['n_updated_datetime'] = "$pub_date";
             $heighligth = array();
             $heighligth = (array) getHighlightByNid($nid);
             $data_newslist[$listcount]['n_highlight'] = $heighligth;
@@ -771,6 +789,13 @@ function homePageJsonTopstories() {
         } else {
             $changed_datetime = "";
         }
+        // Get Publish time:
+        $pub_date = get_content_publish_date($nid);
+        if (!empty($pub_date)) {  
+          $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+        } else {
+          $pub_date = "";
+        }
         //json tag writing
         if ($type == "story") {
             $n_rating = getRating($node);
@@ -802,7 +827,7 @@ function homePageJsonTopstories() {
             $data_newslist[$home_list_count]['n_small_image'] = "$file_small_img_url";
             $data_newslist[$home_list_count]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$home_list_count]['n_image_credit'] = "$byline";
-            $data_newslist[$home_list_count]['n_updated_datetime'] = "$changed_datetime";
+            $data_newslist[$home_list_count]['n_updated_datetime'] = "$pub_date";
             $data_newslist[$home_list_count]['n_photo'] = $n_photo;
             $data_newslist[$home_list_count]['n_video'] = $n_video;
             $data_newslist[$home_list_count]['n_polls'] = $n_polls;
@@ -954,7 +979,13 @@ function homePageJsonNewslist_india() {
             } else {
                 $changed_datetime = "";
             }
-
+			// Get Publish time:
+            $pub_date = get_content_publish_date($nid);
+            if (!empty($pub_date)) {  
+              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            } else {
+              $pub_date = "";
+            }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
             // custom function for get img byline
@@ -981,7 +1012,7 @@ function homePageJsonNewslist_india() {
             $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
-            $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+            $data_newslist[$listcount]['n_updated_datetime'] = "$pub_date";
             $heighligth = array();
             $heighligth = (array) getHighlightByNid($nid);
             $data_newslist[$listcount]['n_highlight'] = $heighligth;
@@ -1163,7 +1194,13 @@ function homePageJsonNewslist_world() {
             } else {
                 $changed_datetime = "";
             }
-
+			// Get Publish time:
+            $pub_date = get_content_publish_date($nid);
+            if (!empty($pub_date)) {  
+              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            } else {
+              $pub_date = "";
+            }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
             // custom function for get img byline
@@ -1190,7 +1227,7 @@ function homePageJsonNewslist_world() {
             $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
-            $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+            $data_newslist[$listcount]['n_updated_datetime'] = "$pub_date";
             $heighligth = array();
             $heighligth = (array) getHighlightByNid($nid);
             $data_newslist[$listcount]['n_highlight'] = $heighligth;
@@ -1455,6 +1492,13 @@ function getMagazineStory($issue_date) {
         } else {
             $changed_datetime = "";
         }
+        // Get Publish time:
+        $pub_date = get_content_publish_date($nid);
+        if (!empty($pub_date)) {  
+          $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+        } else {
+          $pub_date = "";
+        }
         $conf = getStoryConfigVal($nid);
         $is_lock = 0;
         if (in_multiarray("lock_story", $conf, "field_story_configurations_value")) {
@@ -1476,7 +1520,7 @@ function getMagazineStory($issue_date) {
         $story[$loop_count]['s_comment_count'] = "$comment_cont";
         $story[$loop_count]['s_small_image'] = "$file_small_img_url";
         $story[$loop_count]['s_large_image'] = "$file_medium_img_url";
-        $story[$loop_count]['s_updated_datetime'] = "$changed_datetime";
+        $story[$loop_count]['s_updated_datetime'] = "$pub_date";
         $story[$loop_count]['s_is_locked'] = "$is_lock";
         $story[$loop_count]['s_author_id'] = "$field_reporter_unique_id_value";
         $story[$loop_count]['s_author_title'] = "$field_itg_common_by_line_name_value";
@@ -1740,7 +1784,13 @@ function homePageJsonNewslist_lifestyle() {
             } else {
                 $changed_datetime = "";
             }
-
+			// Get Publish time:
+            $pub_date = get_content_publish_date($nid);
+            if (!empty($pub_date)) {  
+              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            } else {
+              $pub_date = "";
+            }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
             // custom function for get img byline
@@ -1767,7 +1817,7 @@ function homePageJsonNewslist_lifestyle() {
             $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
-            $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+            $data_newslist[$listcount]['n_updated_datetime'] = "$pub_date";
             $heighligth = array();
             $heighligth = (array) getHighlightByNid($nid);
             $data_newslist[$listcount]['n_highlight'] = $heighligth;
@@ -2010,7 +2060,13 @@ function homePageJsonNewslist_business() {
             } else {
                 $changed_datetime = "";
             }
-
+			// Get Publish time:
+            $pub_date = get_content_publish_date($nid);
+            if (!empty($pub_date)) {  
+              $pub_date = date('Y-m-d H:i:s', strtotime($pub_date[0]['field_itg_content_publish_date_value']));
+            } else {
+              $pub_date = "";
+            }
             // custom function for get img caption
             $caption = getImgCaption($resvalue['field_story_medium_image_fid']);
             // custom function for get img byline
@@ -2037,7 +2093,7 @@ function homePageJsonNewslist_business() {
             $data_newslist[$listcount]['n_small_image'] = "$file_small_img_url";
             $data_newslist[$listcount]['n_large_image'] = "$file_large_img_url";
             $data_newslist[$listcount]['n_image_credit'] = "$byline";
-            $data_newslist[$listcount]['n_updated_datetime'] = "$changed_datetime";
+            $data_newslist[$listcount]['n_updated_datetime'] = "$pub_date";
             $heighligth = array();
             $heighligth = (array) getHighlightByNid($nid);
             $data_newslist[$listcount]['n_highlight'] = $heighligth;
