@@ -1096,20 +1096,7 @@ function getNodeBodyByNid_Report($nid) {
   return $field_data_body;
 }
 
-/**
- * function for getNode prime cat tid ByNid
- * @pram datetime $nid
- *
- * @return obj term_object;
- */
-function getNodePrimeCatByNid($nid) {
-  $query = db_select('field_data_field_primary_category', 'fpc');
-  $query->fields('fpc', array('field_primary_category_value'));
-  $query->condition('fpc.entity_id', $nid);
-  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
-  $field_primary_category_value = $result[0]['field_primary_category_value'];
-  return taxonomy_term_load($field_primary_category_value);
-}
+
 
 /**
  * main function for generate homePageJsonPoll array
