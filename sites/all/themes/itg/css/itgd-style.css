@@ -726,7 +726,7 @@ footer .multiple-items-footer i.slick-prev{left: 0;visibility: visible;z-index: 
 .front .itg-layout-container .itg-h321-section .ad-widget{ height: 315px;padding: 30px 0;width: 322px;margin: 0 auto;background: #f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
 .itg-h321-section .dont-miss ul li{width:100%}
-.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:none }
+.itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){{ display:none}
 }
 @media only screen and (max-width: 767px) {
 .app-area-wrapper{width:94%; padding:0 3%}
@@ -834,7 +834,6 @@ background:none;
 .front .itg-layout-container .itg-h321-section .ad-widget{ height:auto;padding:0;width:300px;margin: 0 auto;background: #f3f3f3;}
 .front .itg-layout-container .itg-h321-section .ad-widget .sidebar-ad {background: #f3f3f3;height: 100%;}
 .itg-h321-section .dont-miss ul li:nth-child(4),.itg-h450-section .watch-right-now-video ul li:nth-child(4),.itg-h321-section .dont-miss ul li:nth-child(5),.itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:block}
-.front .trending-videos .trending-videos-list:nth-child(5){ display:block; }
 .front .mt-50 {margin-top: 30px;}
 /* embed code page scroll */
 .show-embed-code-link .show-embed-code-div{left: -150%;}
@@ -875,7 +874,6 @@ background:none;
      .front .itg-layout-container .ad-widget{
         padding:10px;
     }
-    .itg-h450-section .watch-right-now-video ul li:nth-child(5){ display:none; }
 }
  @media only screen and (max-width: 768px){
      .front .itg-layout-container .itg-h321-section .droppable{
