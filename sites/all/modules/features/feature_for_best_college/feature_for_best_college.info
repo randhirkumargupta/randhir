@@ -5,7 +5,6 @@ package = Features
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = features_for_story
-dependencies[] = field_sql_storage
 dependencies[] = hs_taxonomy
 dependencies[] = image
 dependencies[] = list

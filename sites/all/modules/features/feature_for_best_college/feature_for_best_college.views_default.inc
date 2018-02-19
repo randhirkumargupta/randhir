@@ -34,10 +34,6 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'customstyle';
-  /* Relationship: Content: Taxonomy terms on node */
-  $handler->display->display_options['relationships']['term_node_tid']['id'] = 'term_node_tid';
-  $handler->display->display_options['relationships']['term_node_tid']['table'] = 'node';
-  $handler->display->display_options['relationships']['term_node_tid']['field'] = 'term_node_tid';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -83,6 +79,7 @@ function feature_for_best_college_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['enabled'] = FALSE;
   $handler->display->display_options['defaults']['use_more'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
@@ -90,7 +87,7 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['defaults']['use_more_text'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '2';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'customstyle';
@@ -118,34 +115,8 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Taxonomy term: Term ID */
-  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
-  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
-  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
-  $handler->display->display_options['arguments']['tid']['relationship'] = 'term_node_tid';
-  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '844517';
-  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'story' => 'story',
-  );
-  $handler->display->display_options['filters']['type']['group'] = 1;
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block_1');
@@ -174,50 +145,6 @@ function feature_for_best_college_views_default_views() {
   $handler->display->display_options['relationships']['term_node_tid']['id'] = 'term_node_tid';
   $handler->display->display_options['relationships']['term_node_tid']['table'] = 'node';
   $handler->display->display_options['relationships']['term_node_tid']['field'] = 'term_node_tid';
-  $handler->display->display_options['relationships']['term_node_tid']['vocabularies'] = array(
-    'category_management' => 'category_management',
-    'ads_template_placeholder' => 0,
-    'recipe_cuisine_type' => 0,
-    'recipe_meal_for' => 0,
-    'recipe_calorie_type' => 0,
-    'photo_by' => 0,
-    'bad_words' => 0,
-    'ad_template' => 0,
-    'ads_content' => 0,
-    'ads_section_selection' => 0,
-    'recipe_ailment' => 0,
-    'astro_type' => 0,
-    'bloggers' => 0,
-    'byline_company' => 0,
-    'byline_department' => 0,
-    'cheaper_dearer' => 0,
-    'city' => 0,
-    'client_title' => 0,
-    'country' => 0,
-    'event_registration_configuration' => 0,
-    'event_type' => 0,
-    'featured_name' => 0,
-    'recipe_festivals' => 0,
-    'itg_city' => 0,
-    'live_tv' => 0,
-    'recipe_meal_type' => 0,
-    'mega_review_type' => 0,
-    'movies' => 0,
-    'numerology' => 0,
-    'itg_occupation' => 0,
-    'playlist' => 0,
-    'qualification' => 0,
-    'quiz_message' => 0,
-    'reasons_for_reject' => 0,
-    'regional' => 0,
-    'sponsor' => 0,
-    'state' => 0,
-    'state_managment' => 0,
-    'tags' => 0,
-    'recipe_time' => 0,
-    'website_name' => 0,
-    'zodiac_sign' => 0,
-  );
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Extra large image */
   $handler->display->display_options['fields']['field_story_extra_large_image']['id'] = 'field_story_extra_large_image';
@@ -304,6 +231,14 @@ print itg_city_option($year,$tid, $city, $rstream);
 ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'term_node_tid';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -317,7 +252,9 @@ print itg_city_option($year,$tid, $city, $rstream);
             <p class="group inner list-group-item-text"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]"> 
             [title], [field_bestcollege_city]</a></p> 
             <div class="cl1"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">Rank :  [field_bestcollege_rank]</a></div>
-            <div class="cl"> <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">SEE COMPLETE LIST | DIRECTORY</a></div>
+            <div class="cl"> 
+             <a href="/bestcolleges/[field_bestcollege_year]/ranks/[tid]">SEE COMPLETE LIST</a><span>|</span><a href="/bestcolleges/[field_bestcollege_year]/[name]-bestcollege">DIRECTORY</a>
+            </div>
            [php] 
         </div>
       <div class="clearfix"></div>
@@ -366,6 +303,7 @@ print itg_city_option($year,$tid, $city, $rstream);
   $handler->display->display_options['filters']['field_bestcollege_rank_value']['value'] = array(
     1 => '1',
   );
+  $handler->display->display_options['filters']['field_bestcollege_rank_value']['group'] = 1;
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block_2');
@@ -725,6 +663,46 @@ print "<a href=\'$website_url\' target=\'_blank\' class=\'btn-link\'>Website</a>
     24 => 0,
     25 => 0,
     26 => 0,
+  );
+  /* Filter criterion: Content: Year (field_bestcollege_year) */
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['id'] = 'field_bestcollege_year_value';
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['table'] = 'field_data_field_bestcollege_year';
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['field'] = 'field_bestcollege_year_value';
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['expose']['operator_id'] = 'field_bestcollege_year_value_op';
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['expose']['label'] = 'Year';
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['expose']['operator'] = 'field_bestcollege_year_value_op';
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['expose']['identifier'] = 'field_bestcollege_year_value';
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_bestcollege_year_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    7 => 0,
+    9 => 0,
+    5 => 0,
+    20 => 0,
+    6 => 0,
+    21 => 0,
+    19 => 0,
+    10 => 0,
+    13 => 0,
+    11 => 0,
+    16 => 0,
+    17 => 0,
+    14 => 0,
+    12 => 0,
+    15 => 0,
+    18 => 0,
+    23 => 0,
+    22 => 0,
+    24 => 0,
+    25 => 0,
+    26 => 0,
+    27 => 0,
+    29 => 0,
+    28 => 0,
   );
   $handler->display->display_options['path'] = 'best-college-list';
   $export['best_college_image_slider'] = $view;
