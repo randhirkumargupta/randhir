@@ -1187,6 +1187,13 @@ jQuery(document).ready(function () {
 
 
             jQuery('#loader-data img').show().parent().addClass('loader_overlay');
+            jQuery('.top-actions *').css( 'pointer-events', 'none' );			
+			jQuery('.top-actions *').css("background-color", "#d9d9d9");
+			jQuery('.top-actions *').css("border-color", "#d9d9d9"); 
+			jQuery('.itg-form-action *').css( 'pointer-events', 'none' );
+			jQuery('.itg-form-action input').css("background-color", "#d9d9d9"); 
+			jQuery('.itg-form-action a').css("background-color", "#d9d9d9");
+			jQuery('.itg-form-action *').css("border-color", "#d9d9d9");
             var getbtnmane = jQuery(this).attr('btn_name');
             jQuery.ajax({
                 url: base_url + '/solr-video-make-fid',
