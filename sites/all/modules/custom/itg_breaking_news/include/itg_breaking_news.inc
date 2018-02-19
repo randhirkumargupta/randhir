@@ -4,7 +4,7 @@
  * Function for ajax request callback
  */
 function cricket_live_blog_content_callback() {
-  $match_id = $_POST['match_id'];
+  $match_id = $_GET['match_id'];
   if (isset($match_id)) {
     $html = get_cricket_live_blog_data($match_id);
     print json_encode(array('status' => 'success', 'data' => $html));
