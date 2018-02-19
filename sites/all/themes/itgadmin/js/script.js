@@ -1185,17 +1185,7 @@ jQuery(document).ready(function () {
                 }
             }
 
-
             jQuery('#loader-data img').show().parent().addClass('loader_overlay');
-            //~ jQuery('.top-actions *').css( 'pointer-events', 'none' );			
-			//~ jQuery('.top-actions *').css("background-color", "#d9d9d9");
-			//~ jQuery('.top-actions *').css("border-color", "#d9d9d9"); 
-			//~ jQuery('.itg-form-action *').css( 'pointer-events', 'none' );
-			//~ jQuery('.itg-form-action input').css("background-color", "#d9d9d9"); 
-			//~ jQuery('.itg-form-action a').css("background-color", "#d9d9d9");
-			//~ jQuery('.itg-form-action *').css("border-color", "#d9d9d9");
-			jQuery('.top-actions *').prop('disabled', true);
-			jQuery('.itg-form-action *').prop('disabled', true);
             var getbtnmane = jQuery(this).attr('btn_name');
             jQuery.ajax({
                 url: base_url + '/solr-video-make-fid',
@@ -1227,16 +1217,11 @@ jQuery(document).ready(function () {
                             if (unique[0] == 'INTERNAL') {
                                 window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val('INTERNAL');
                             }
-
                                                         
                             if(flag){
-								jQuery('.top-actions *').prop('disabled', false);
-							    jQuery('.itg-form-action *').prop('disabled', false);
 							    window.parent.jQuery('#widget-ajex-loader').hide();
 							}
 							flag = true;
-                            //jQuery('.top-actions *').prop('disabled', false);
-							//jQuery('.itg-form-action *').prop('disabled', false);
                         } catch (err) {
 
                         }
@@ -1248,13 +1233,3 @@ jQuery(document).ready(function () {
         }
     });
 });
-
-/*Drupal.behaviors.videogallery = {
-attach: function(context, settings) {  
-  jQuery('#videogallery-node-form').ajaxComplete(function(event, xhr, settings) {
-	 alert('2');
-     jQuery('.top-actions *').prop('disabled', false);
-	 jQuery('.itg-form-action *').prop('disabled', false);
-  });
- }
-}*/
