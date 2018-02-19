@@ -30,12 +30,6 @@ function feature_for_best_college_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -72,12 +66,6 @@ function feature_for_best_college_field_default_field_bases() {
       ),
       'allowed_values_function' => '',
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'list_integer',
   );
@@ -101,12 +89,6 @@ function feature_for_best_college_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -132,12 +114,6 @@ function feature_for_best_college_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -161,12 +137,6 @@ function feature_for_best_college_field_default_field_bases() {
     'module' => 'text',
     'settings' => array(
       'max_length' => 255,
-    ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
     ),
     'translatable' => 0,
     'type' => 'text',
@@ -192,12 +162,6 @@ function feature_for_best_college_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -222,12 +186,6 @@ function feature_for_best_college_field_default_field_bases() {
     'settings' => array(
       'max_length' => 255,
     ),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'text',
   );
@@ -243,12 +201,6 @@ function feature_for_best_college_field_default_field_bases() {
     'locked' => 0,
     'module' => 'number',
     'settings' => array(),
-    'storage' => array(
-      'active' => 1,
-      'module' => 'field_sql_storage',
-      'settings' => array(),
-      'type' => 'field_sql_storage',
-    ),
     'translatable' => 0,
     'type' => 'number_integer',
   );
