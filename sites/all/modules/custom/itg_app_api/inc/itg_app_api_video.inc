@@ -1112,13 +1112,13 @@ function topstoriesList($source) {
     // loop on top stories.
     foreach ($result as $key => $value) {
         // varibale for json tag
-        $title = $value['title'];
+        $title = strip_tags($value['title']);
         $type = $value['type'];
         $nid = $value['nid'];
         $created = $value['created'];
         $changed = $value['changed'];
         $tid = $value['tid'];
-        $field_story_kicker_text_value = $value['field_story_kicker_text_value'];
+        $field_story_kicker_text_value = strip_tags($value['field_story_kicker_text_value']);
 
         $term = taxonomy_term_load($tid);
         $term_name = $term->name;

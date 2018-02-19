@@ -161,12 +161,12 @@ function homePageJsonPackagelist_india() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -372,12 +372,12 @@ function homePageJsonPackagelist_lifestyle() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -582,12 +582,12 @@ function homePageJsonPackagelist_world() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             //$weburl = $base_url . "/node/" . $nid;
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
@@ -954,12 +954,12 @@ function homePageJsonNewslist_india() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -1168,12 +1168,12 @@ function homePageJsonNewslist_world() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -1468,12 +1468,12 @@ function getMagazineStory($issue_date) {
 
     foreach ($result as $reskey => $resvalue) {
 
-        $title = $resvalue['title'];
+        $title = strip_tags($resvalue['title']);
         $type = $resvalue['type'];
         $nid = $resvalue['nid'];
         $created = $resvalue['created'];
         $changed = $resvalue['changed'];
-        $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+        $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
         $alias = drupal_get_path_alias('node/' . $nid . '');
         $weburl = $base_url . "/" . $alias;
         $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -1757,12 +1757,12 @@ function homePageJsonNewslist_lifestyle() {
 
         foreach ($result as $reskey => $resvalue) {
 
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -2091,12 +2091,12 @@ function homePageJsonNewslist_business() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -2305,12 +2305,12 @@ function itg_rapid_home_movies_json() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -2519,12 +2519,12 @@ function itg_rapid_home_technology_json() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
@@ -2732,12 +2732,12 @@ function itg_rapid_home_sports_json() {
         $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($result as $reskey => $resvalue) {
-            $title = $resvalue['title'];
+            $title = strip_tags($resvalue['title']);
             $type = $resvalue['type'];
             $nid = $resvalue['nid'];
             $created = $resvalue['created'];
             $changed = $resvalue['changed'];
-            $field_story_kicker_text_value = $resvalue['field_story_kicker_text_value'];
+            $field_story_kicker_text_value = strip_tags($resvalue['field_story_kicker_text_value']);
             $alias = drupal_get_path_alias('node/' . $nid . '');
             $weburl = $base_url . "/" . $alias;
             $field_video_duration_value = $resvalue['field_video_duration_value'];
