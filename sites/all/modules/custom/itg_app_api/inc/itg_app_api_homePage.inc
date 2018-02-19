@@ -2192,6 +2192,4 @@ function homePageJsonNewslist_business() {
     return $data_news;
 }
 
-function get_content_publish_date(){
-    return "";
-}
+
