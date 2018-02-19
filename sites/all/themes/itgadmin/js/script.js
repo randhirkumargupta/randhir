@@ -1194,6 +1194,7 @@ jQuery(document).ready(function () {
 			jQuery('.itg-form-action input').css("background-color", "#d9d9d9"); 
 			jQuery('.itg-form-action a').css("background-color", "#d9d9d9");
 			jQuery('.itg-form-action *').css("border-color", "#d9d9d9");
+			
             var getbtnmane = jQuery(this).attr('btn_name');
             jQuery.ajax({
                 url: base_url + '/solr-video-make-fid',
