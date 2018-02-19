@@ -4410,6 +4410,7 @@ function itg_rapid_api_anchor_list($token) {
     } else {
         $jsondata = list_itg_rapid_api_anchor_list_default();
     }
+
     return $jsondata;
 }
 
