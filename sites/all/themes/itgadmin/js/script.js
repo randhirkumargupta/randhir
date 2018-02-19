@@ -1249,12 +1249,12 @@ jQuery(document).ready(function () {
     });
 });
 
-//~ Drupal.behaviors.videogallery = {
-//~ attach: function(context, settings) {  
-  //~ jQuery('#videogallery-node-form').ajaxComplete(function(event, xhr, settings) {
-	 //~ alert('2');
-     //~ jQuery('.top-actions *').prop('disabled', false);
-	 //~ jQuery('.itg-form-action *').prop('disabled', false);
-  //~ });
- //~ }
-}
+/*Drupal.behaviors.videogallery = {
+attach: function(context, settings) {  
+  jQuery('#videogallery-node-form').ajaxComplete(function(event, xhr, settings) {
+	 alert('2');
+     jQuery('.top-actions *').prop('disabled', false);
+	 jQuery('.itg-form-action *').prop('disabled', false);
+  });
+ }
+}*/
