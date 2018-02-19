@@ -1208,7 +1208,7 @@ jQuery(document).ready(function () {
                 success: function (data) {
                     jQuery(".asso-filed-video").unbind('click');
                     jQuery('.asso-filed-video').prop('disabled', false);
-					var flag = FALSE;
+					var flag = false;
                     jQuery("#video_iframe").contents().find('.video-checkbox-form').prop("checked", false);
                     var as = JSON.parse(data);
                     var parsed = JSON.parse(data);
@@ -1234,7 +1234,7 @@ jQuery(document).ready(function () {
 							    jQuery('.itg-form-action *').prop('disabled', false);
 							    window.parent.jQuery('#widget-ajex-loader').hide();
 							}
-							flag = TRUE;
+							flag = true;
                             //jQuery('.top-actions *').prop('disabled', false);
 							//jQuery('.itg-form-action *').prop('disabled', false);
                         } catch (err) {
