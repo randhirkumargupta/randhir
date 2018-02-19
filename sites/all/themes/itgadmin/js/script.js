@@ -1208,7 +1208,7 @@ jQuery(document).ready(function () {
                 success: function (data) {
                     jQuery(".asso-filed-video").unbind('click');
                     jQuery('.asso-filed-video').prop('disabled', false);
-
+					var flag = FALSE;
                     jQuery("#video_iframe").contents().find('.video-checkbox-form').prop("checked", false);
                     var as = JSON.parse(data);
                     var parsed = JSON.parse(data);
@@ -1228,8 +1228,13 @@ jQuery(document).ready(function () {
                                 window.parent.jQuery('#edit-field-video-repo-type-und-0-value').val('INTERNAL');
                             }
 
-                            window.parent.jQuery('#widget-ajex-loader').hide();
-                             alert('1');
+                                                        
+                            if(flag){
+								jQuery('.top-actions *').prop('disabled', false);
+							    jQuery('.itg-form-action *').prop('disabled', false);
+							    window.parent.jQuery('#widget-ajex-loader').hide();
+							}
+							flag = TRUE;
                             //jQuery('.top-actions *').prop('disabled', false);
 							//jQuery('.itg-form-action *').prop('disabled', false);
                         } catch (err) {
@@ -1244,12 +1249,12 @@ jQuery(document).ready(function () {
     });
 });
 
-Drupal.behaviors.videogallery = {
-attach: function(context, settings) {  
-  jQuery('#videogallery-node-form').ajaxComplete(function(event, xhr, settings) {
-	 alert('2');
-     jQuery('.top-actions *').prop('disabled', false);
-	 jQuery('.itg-form-action *').prop('disabled', false);
-  });
- }
+//~ Drupal.behaviors.videogallery = {
+//~ attach: function(context, settings) {  
+  //~ jQuery('#videogallery-node-form').ajaxComplete(function(event, xhr, settings) {
+	 //~ alert('2');
+     //~ jQuery('.top-actions *').prop('disabled', false);
+	 //~ jQuery('.itg-form-action *').prop('disabled', false);
+  //~ });
+ //~ }
 }
