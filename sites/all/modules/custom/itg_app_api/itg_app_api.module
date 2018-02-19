@@ -3,7 +3,7 @@
 /**
  * @file
  * Module file for APP API Schemes Services.
- * Contains the resource declarations for the service APIs
+ * Contains the resource declarations for the service APIs 
  * and other commons functions/hooks. if necessary
  */
 
@@ -12,6 +12,7 @@
  */
 function itg_app_api_init() {
   module_load_include('inc', 'itg_app_api', 'inc/helper');
+  module_load_include('inc', 'itg_app_api', 'inc/simple_html_dom');
 }
 
 /**
@@ -35,9 +36,7 @@ function itg_app_api_services_resources() {
  * Implements hook_menu().
  */
 function itg_app_api_menu() {
-
   $items = array();
-
   $items['admin/api-configuration'] = array(
     'title' => 'API Configuration',
     'description' => 'API Configuration',
@@ -131,7 +130,6 @@ function itg_app_api_menu() {
   );
 
   //sprint 2 seting menu,  admin/structure/services
-
   $items['admin/api-configuration/rest-api/ad-config-json'] = array(
     'title' => 'update ad config json',
     'description' => 'ad_config_json',
@@ -239,18 +237,35 @@ function itg_app_api_menu() {
     'type' => MENU_NORMAL_ITEM,
   );
   
+  // for redish ttl
   
-
+  $items['admin/api-configuration/rest-api/redish-ttl'] = array(
+    'title' => 'update Rest API redish TTL',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('redish_ttl'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/api-configuration/rest-api/time-interval'] = array(
+    'title' => 'update Rest API redish TTL',
+    //'description' => 'otherapps_android_json',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('time_interval'),
+    'access arguments' => array('itg mobile feed'),
+    'type' => MENU_NORMAL_ITEM,
+  );
 
   return $items;
 }
 
-/*
+/**
  * mobile_service_token form decalation
+ *
+ * @return type
  */
 function mobile_service_token() {
   $form = array();
-
   $form['mobile_service_token'] = array(
     '#type' => 'textfield',
     '#title' => t('web service token'),
@@ -258,22 +273,16 @@ function mobile_service_token() {
     '#description' => t("Token for web service API."),
     '#required' => TRUE,
   );
-
   return system_settings_form($form);
 }
 
-/*
- * mobile_service_token form validation
- */
-function mobile_service_token_validate($form, &$form_state) {}
-
-/*
+/**
  * config_update_status_json form decalation
- * 
+ *
+ * @return type
  */
 function config_update_status_json() {
   $form = array();
-
   $form['config_update_status_json'] = array(
     '#type' => 'textarea',
     '#title' => t('config update status json'),
@@ -284,8 +293,10 @@ function config_update_status_json() {
   return system_settings_form($form);
 }
 
-/*
+/**
  * datanotexist_api_json form decalation
+ *
+ * @return type
  */
 function datanotexist_api_json() {
   $form = array();
@@ -300,8 +311,10 @@ function datanotexist_api_json() {
   return system_settings_form($form);
 }
 
-/*
+/**
  * hamburger_menu_json form decalation
+ *
+ * @return type
  */
 function hamburger_menu_json() {
   $form = array();
@@ -316,7 +329,11 @@ function hamburger_menu_json() {
   return system_settings_form($form);
 }
 
-// horizontal_menu_json form decalation
+/**
+ * horizontal_menu_json form decalation
+ *
+ * @return type
+ */
 function horizontal_menu_json() {
   $form = array();
 
@@ -330,7 +347,11 @@ function horizontal_menu_json() {
   return system_settings_form($form);
 }
 
-// master_config_json form decalation
+/**
+ * master_config_json form decalation
+ *
+ * @return type
+ */
 function master_config_json() {
   $form = array();
 
@@ -344,7 +365,11 @@ function master_config_json() {
   return system_settings_form($form);
 }
 
-// server_error_master_json form decalation
+/**
+ * server_error_master_json form decalation
+ *
+ * @return type
+ */
 function server_error_master_json() {
   $form = array();
 
@@ -365,8 +390,9 @@ function server_error_master_json() {
  * @pram int $nc_count
  */
 function getCommentsCount($nid) {
-
-  $node_anyalytics = analytics_node_data($nid, 'array');
+  $cont = 0;
+  return $cont;
+  $node_anyalytics = analytics_node_data($nid, 'total', 'commentcont');
   $nc_count = $node_anyalytics['data_count_node_comment'];
   return $nc_count;
 }
@@ -395,35 +421,44 @@ function getNodePublishedDate($nid) {
 }
 
 // sprint2 seting function
-// ad_config_json form decalation
+
+/**
+ * ad_config_json form decalation
+ *
+ * @return type
+ */
 function ad_config_json() {
   $form = array();
-
   $form['ad_config_json'] = array(
     '#type' => 'textarea',
     '#title' => t('ad config json'),
     '#default_value' => variable_get('ad_config_json'),
     '#required' => TRUE,
   );
-
   return system_settings_form($form);
 }
 
-// livetv_channellist_json form decalation
+/**
+ * livetv_channellist_json form decalation
+ *
+ * @return type
+ */
 function livetv_channellist_json() {
   $form = array();
-
   $form['livetv_channellist_json'] = array(
     '#type' => 'textarea',
     '#title' => t('livetv channellist json'),
     '#default_value' => variable_get('livetv_channellist_json'),
     '#required' => TRUE,
   );
-
   return system_settings_form($form);
 }
 
-// livetv_json form decalation
+/**
+ * livetv aajtak form decalations
+ *
+ * @return type
+ */
 function livetv_aajtak() {
   $form = array();
 
@@ -437,7 +472,11 @@ function livetv_aajtak() {
   return system_settings_form($form);
 }
 
-// livetv_indiatoday form decalation
+/**
+ * livetv_indiatoday form decalations
+ *
+ * @return type
+ */
 function livetv_indiatoday() {
   $form = array();
 
@@ -451,7 +490,11 @@ function livetv_indiatoday() {
   return system_settings_form($form);
 }
 
-// livetv_delhiaajtak form decalation
+/**
+ * livetv_delhiaajtak form decalation
+ *
+ * @return type
+ */
 function livetv_delhiaajtak() {
   $form = array();
 
@@ -465,7 +508,11 @@ function livetv_delhiaajtak() {
   return system_settings_form($form);
 }
 
-// livetv_tej form decalation
+/**
+ * livetv_tej form decalation
+ *
+ * @return type
+ */
 function livetv_tej() {
   $form = array();
 
@@ -479,7 +526,11 @@ function livetv_tej() {
   return system_settings_form($form);
 }
 
-// otherapps_ios_json form decalation
+/**
+ * otherapps_ios_json form decalation
+ *
+ * @return type
+ */
 function otherapps_ios_json() {
   $form = array();
 
@@ -493,17 +544,19 @@ function otherapps_ios_json() {
   return system_settings_form($form);
 }
 
-// otherapps_android_json form decalation
+/**
+ * otherapps_android_json form decalation
+ *
+ * @return type
+ */
 function otherapps_android_json() {
   $form = array();
-
   $form['otherapps_android_json'] = array(
     '#type' => 'textarea',
     '#title' => t('otherapps android json'),
     '#default_value' => variable_get('otherapps_android_json'),
     '#required' => TRUE,
   );
-
   return system_settings_form($form);
 }
 
@@ -517,8 +570,8 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
   // user agent for browser
   if (preg_match('/MSIE/i', $u_agent) && !preg_match('/Opera/i', $u_agent)) {
     $flag = 1;
-    // this condition is for IE11
   }
+  // this condition is for IE11
   elseif (preg_match('/Trident/i', $u_agent)) {
     $flag = 1;
   }
@@ -549,7 +602,7 @@ function itg_app_api_url_inbound_alter(&$result, $path, $path_language) {
   if ($iphone || $android || $palmpre || $ipod || $berry == TRUE) {
     $flag = 1;
   }
-  $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list", "author_list", "anchor_list", "get_the_user_follow_status", "follow_topic", "get_the_user_follow_status", "user_follow_topic_list");
+  $post_res = array("signup", "login_request", "forgot_password", "otp_verification", "resend_otp", "change_password", "log_out", "get_login_user_detail", "edit_profile", "cast_polls", "bookmark_set", "bookmark_delete", "bookmark_get", "get_preference", "edit_user_image", "update_preference", "reset_password", "authtoken_verification", "follow_anchor", "follow_author", "anchor_follow_list", "author_follow_list", "author_list", "anchor_list", "get_the_user_follow_status", "follow_topic", "get_the_user_follow_status", "user_follow_topic_list", "social_share_save_it");
   if (arg(0) == "appapi" && count(arg()) == 2) {
     if (!in_array(arg(1), $post_res)) {
       $result = $path . "/it";
@@ -581,17 +634,12 @@ function getStoryType($nid) {
  * @return array 
  */
 function callAPI($method, $url, $data = FALSE) {
-
   $curl = curl_init();
-
   switch ($method) {
     case "POST":
       curl_setopt($curl, CURLOPT_POST, 1);
-
       if ($data) {
-
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-
       }
       break;
 
@@ -621,14 +669,19 @@ function callAPI($method, $url, $data = FALSE) {
 
 /**
  * Implements hook_boot().
+ * for url inbond alter.
  */
-function itg_app_api_boot() {}
+function itg_app_api_boot() {
+  // delection function required for inbond alter,
+}
 
-// code for check POST method only start
+/**
+ * code for check POST method only start
+ *
+ * @return int
+ */
 function checkReqMethod() {
-
   $req_method = $_SERVER['REQUEST_METHOD'];
-
   $flag = 1;
   if ($req_method != "POST") {
     $flag = 0;
@@ -636,14 +689,13 @@ function checkReqMethod() {
   else {
     $flag = 1;
   }
-
   return $flag;
 }
 
-// code for check POST method only end
-// for static other device
-/*
+/**
  * adconfig_android form decalation
+ *
+ * @return type
  */
 function adconfig_android() {
   $form = array();
@@ -674,8 +726,10 @@ function adconfig_ipad() {
   return system_settings_form($form);
 }
 
-/*
+/**
  * adconfig_iphone form decalation
+ *
+ * @return type
  */
 function adconfig_iphone() {
   $form = array();
@@ -690,8 +744,10 @@ function adconfig_iphone() {
   return system_settings_form($form);
 }
 
-/*
+/**
  * adconfig_tab form decalation
+ *
+ * @return type
  */
 function adconfig_tab() {
   $form = array();
@@ -720,8 +776,7 @@ function get_personalization_front_data_service($user) {
   // So join field_story_category_tid join is applied on nid.
   $query = db_select('itg_widget_order', 'iwo');
   // Orderby weight or taxonomyterm id.
-  $query->fields('iwo', array('weight', 'nid'))->condition('iwo.widget', "personalization_widget")->condition('iwo.extra', $user->uid)
-  ->orderBy('iwo.weight', 'DESC')->orderBy('iwo.nid', 'DESC')->range(0, 30);
+  $query->fields('iwo', array('weight', 'nid'))->condition('iwo.widget', "personalization_widget")->condition('iwo.extra', $user->uid)->orderBy('iwo.weight', 'DESC')->orderBy('iwo.nid', 'DESC')->range(0, 30);
   $result = $query->execute()->fetchAllAssoc('nid');
   $new_array_of_terms = array_keys($result);
   // case handled if perferences is not saved.
@@ -895,14 +950,8 @@ function signupValidation_rapid($params) {
       if (strlen($first_name) > 25) {
         $error['fname'] = t('Cannot validate Fname');
       }
-      else {
-        //$error['fname'] = t('');
-      }
     }
   }
-
-
-
   // lname validation
   if ($last_name) {
     if (!preg_match("/^[a-zA-Z. ]*$/", $last_name)) {
@@ -912,14 +961,8 @@ function signupValidation_rapid($params) {
       if (strlen($last_name) > 25) {
         $error['lname'] = t('Cannot validate Lname');
       }
-      else {
-        //$error['lname'] = t('');
-      }
     }
   }
-
-
-
   // user_id validation
 
   if (empty($user_id)) {
@@ -934,22 +977,10 @@ function signupValidation_rapid($params) {
       elseif (!empty($get_user_check_email)) {
         $error['user_id'] = t("User already exists with " . $user_id . "");
       }
-      elseif (!empty($get_user_check_domain)) {
-        //$error['user_id'] = t("User already exists with " . $user_id . "");
-      }
-      else {
-        //$error['user_id'] = t("");
-      }
     }
     else {
       if (!preg_match('/^\d{10}$/', $user_id)) {
         $error['user_id'] = t("Invalid Mobile Number");
-      }
-      elseif (!empty($get_user_check_mobile)) {
-        //$error['user_id'] = t("User already exists with " . $user_id . "");
-      }
-      else {
-        //$error['user_id'] = t('');
       }
     }
   }
@@ -976,9 +1007,7 @@ function signupValidation_rapid($params) {
   elseif ($pass != $cpass) {
     $error['password'] = t('Password and Confirm Password do not match');
   }
-  else {
-    //$error['password'] = t('');
-  }
+
   // deviceid/type start
   if (empty($device_id)) {
     $error['device_id'] = t('Device id cannot be an empty');
@@ -1149,12 +1178,6 @@ function loginValidation_rapid($params) {
       if (!preg_match('/^\d{10}$/', $user_id)) {
         $error['user_id'] = t("Invalid Mobile Number");
       }
-      elseif (empty($get_user_check_mobile)) {
-        //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
-      else {
-        //$error['user_id'] = t('');
-      }
     }
   }
 
@@ -1173,9 +1196,6 @@ function loginValidation_rapid($params) {
   }
   elseif (strlen($pass) > $max_length) {
     $error['password'] = t('Password should be maximum 15 characters without any space ');
-  }
-  else {
-    //$error['password'] = t('');
   }
 
   // deviceid/type start
@@ -1209,11 +1229,9 @@ function cleanToken_Rapid($params) {
   $user = user_load_by_name($user_id);
   $uid = $user->uid;
   if ($uid) {
-
     $query = db_delete('itg_app_device');
     $query->condition('uid', $uid);
     $query->condition('device_id', $device_id);
-    //$query->condition('token', $auth_token);
     $query->execute();
   }
 }
@@ -1262,22 +1280,10 @@ function forgotPasswordValidation_rapid($params) {
       if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
         $error['user_id'] = t("Invalid email/phone number");
       }
-      elseif (empty($get_user_check_email)) {
-        // $error['user_id'] = t("This phone number/ email is not registered");
-      }
-      else {
-        //$error['user_id'] = t("");
-      }
     }
     else {
       if (!preg_match('/^\d{10}$/', $user_id)) {
         $error['user_id'] = t("Invalid email/phone number");
-      }
-      elseif (empty($get_user_check_mobile)) {
-        //$error['user_id'] = t("This phone number/ email is not registered");
-      }
-      else {
-        //$error['user_id'] = t('');
       }
     }
   }
@@ -1309,17 +1315,14 @@ function itg_otp_device_info_insert_rapid($params, $rand_otp, $source, $created)
   $user_id = trim($params['user_id']);
   $device_id = trim($params['device_id']);
   $device_type = trim($params['device_type']);
-  //$created_fi = UNIX_TIMESTAMP($created);
 
   // Table name no longer needs {}
-  $otp = db_insert('itg_otp_device_info')
-  ->fields(array(
+  $otp = db_insert('itg_otp_device_info')->fields(array(
       'user_id' => $user_id,
       'device_id' => $device_id,
       'device_type' => $device_type,
       'source' => $source,
       'otp' => $rand_otp,
-      //'created' => UNIX_TIMESTAMP($created),
     ))->execute();
 }
 
@@ -1369,22 +1372,10 @@ function validateResetPass($params) {
       if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
         $error['user_id'] = t("A User is not registered with this " . $user_id . "");
       }
-      elseif (empty($get_user_check_email)) {
-        // $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
-      else {
-        //$error['user_id'] = t("");
-      }
     }
     else {
       if (!preg_match('/^\d{10}$/', $user_id)) {
         $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
-      elseif (empty($get_user_check_mobile)) {
-        //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
-      else {
-        //$error['user_id'] = t('');
       }
     }
   }
@@ -1457,8 +1448,7 @@ function itg_reset_pass_info_insert_rapid($params, $source) {
   $device_type = trim($params['device_type']);
 
   // Table name no longer needs {}
-  $otp = db_insert('itg_reset_pass_info')
-  ->fields(array(
+  $otp = db_insert('itg_reset_pass_info')->fields(array(
       'user_id' => $user_id,
       'device_id' => $device_id,
       'device_type' => $device_type,
@@ -1515,22 +1505,10 @@ function validateChangePass($params) {
       if (!filter_var($user_id, FILTER_VALIDATE_EMAIL)) {
         $error['user_id'] = t("A User is not registered with this " . $user_id . "");
       }
-      elseif (empty($get_user_check_email)) {
-        //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
-      else {
-        //$error['user_id'] = t("");
-      }
     }
     else {
       if (!preg_match('/^\d{10}$/', $user_id)) {
         $error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
-      elseif (empty($get_user_check_mobile)) {
-        //$error['user_id'] = t("A User is not registered with this " . $user_id . "");
-      }
-      else {
-        //$error['user_id'] = t('');
       }
     }
   }
@@ -1544,9 +1522,7 @@ function validateChangePass($params) {
   elseif (!$oldpass_flag) {
     $error['old_password'] = t('old password is not correct');
   }
-  else {
-    //$error['old_password'] = t('');
-  }
+
   // password validation
   $pass = $new_password;
   $pass2 = $confirm_password;
@@ -1593,7 +1569,6 @@ function validateChangePass($params) {
     $error['device_type'] = t('Device type cannot be an empty');
   }
   // deviceid/type end
-
   $error_settings = array();
   $error_settings['custom_error'] = $error;
 
@@ -1872,8 +1847,9 @@ function resentotpValidation_rapid($params) {
  * @return string $n_body
  */
 function formateNodeBodyToken($n_body) {
-  include 'simple_html_dom.php';
-  $token_list = array('div[class=quiz]', 'div[class=poll]', 'div[class=survey]', '<p>[ITG:LISTICLES]</p>', 'div[class=itgimage]', '<p>[ITG:TECH-PHOTOS]</p>', '<p>[ITG:EXPERT-CHUNK]</p>', '<p>[ITG:FACTOIDS]</p>', '<p>[ITG:TECH-PHOTO-GALLERY]</p>');
+  //include 'simple_html_dom.php';
+  $token_list = array('div[class=quiz]', 'div[class=poll]', 'div[class=survey]', '<p>[ITG:LISTICLES]</p>', 'div[class=itgimage]', 'div[class=itg-mosimage]', '<p>[ITG:TECH-PHOTOS]</p>', '<p>[ITG:EXPERT-CHUNK]</p>', '<p>[ITG:FACTOIDS]</p>', '<p>[ITG:TECH-PHOTO-GALLERY]</p>');
+
   $data = array();
   $poll_id = 0;
 
@@ -1881,6 +1857,9 @@ function formateNodeBodyToken($n_body) {
   // loop on token array
   foreach ($token_list as $tkey => $tvalue) {
     if ($tvalue == '<p>[ITG:TECH-PHOTOS]</p>' || $tvalue == '<p>[ITG:EXPERT-CHUNK]</p>' || $tvalue == '<p>[ITG:FACTOIDS]</p>' || $tvalue == '<p>[ITG:LISTICLES]</p>' || $tvalue == '<p>[ITG:TECH-PHOTO-GALLERY]</p>') {
+
+      $tvalue = str_replace("<p>", "", $tvalue);
+      $tvalue = str_replace("</p>", "", $tvalue);
       $tvalue_replave = "<ITG-NATIVEAPP>" . $tvalue . "<ITG-NATIVEAPP>";
       $n_body = str_replace($tvalue, $tvalue_replave, $n_body);
     }
@@ -1911,10 +1890,52 @@ function formateNodeBodyToken($n_body) {
   $paragraph_rep = $paragraph . "<ITG-NATIVEAPP>ADS<ITG-NATIVEAPP>";
   $n_body = str_replace($paragraph, $paragraph_rep, $n_body);
   // add AD block after 1st <p> end
+  $n_body = str_replace('<img', '<img style="width:100%;height:auto;"', $n_body);
+  $n_body = str_replace('<iframe', '<iframe width="100%" ', $n_body);
+  $n_body = str_replace('<div class="body_caption">', '<div class="body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;">', $n_body);
+  //$n_body = fbiframeupdtae($n_body);
+  //jira:78 start
+  $n_body = str_replace('<div class="quotes"', '<div class="quotes" style="border-left:2px solid #eb5a5b; "', $n_body);
+  $n_body = str_replace('<blockquote', '<blockquote style="padding: 0.5em !important; display:block;"', $n_body);
+  $n_body = str_replace('//www.youtube.com', 'https://www.youtube.com', $n_body);
+  $n_body = str_replace('https:https://www.youtube.com', 'https://www.youtube.com', $n_body);
+  $n_body = str_replace('<blockquote style="padding: 0.5em !important; display:block;" class="instagram-media"', '<blockquote class="instagram-media"', $n_body);
+  //$n_body = str_replace('<blockquote class="instagram-media"', '<blockquote class="instagram"', $n_body);
+  $n_body = str_replace('src="//', 'src="https://', $n_body);
+  $n_body = str_replace('<div class="itg-mosimage"', '<div class="itg-mosimage body_caption" style="padding:0.5em!important; color:#767676!important; font-size:10px!important;line-height:15px!important;"', $n_body);
+  //jira:78 end 
   $data['n_body'] = $n_body;
   $data['poll_id'] = $poll_id;
   return $data;
 }
+
+/**
+ * function for  fbiframeupdtae
+ * @pram string $n_body
+ *
+ * @return string $n_body
+ */
+function fbiframeupdtae($n_body) {
+  preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $n_body, $iframes_m);
+  foreach ($iframes_m as $iframes) {
+    foreach ($iframes as $iframes_s) {
+      preg_match('/src="([^"]+)"/', $iframes_s, $match);
+      $find = $iframes_s;
+      $find_up = str_replace('auto', '168vw', $iframes_s);
+      $find_youtube = str_replace('auto', '52vw', $iframes_s);
+      if (strpos($match[1], 'https://www.facebook.com') !== FALSE) {
+        $n_body = str_replace($find, $find_up, $n_body);
+      }
+      if (strpos($match[1], 'https://www.youtube.com') !== FALSE) {
+        $n_body = str_replace($find, $find_youtube, $n_body);
+      }
+      $loop2++;
+    }
+    $loop++;
+  }
+  return $n_body;
+}
+
 
 /**
  * function for  getTechPros
@@ -1931,12 +1952,14 @@ function getTechProsImg($content_org) {
     foreach ($str_html->find('ul[class="pron-cons-img]') as $element) {
       $img_str = $element;
     }
-    $str_html2 = str_get_html($img_str);
-    foreach ($str_html2->find('img') as $element) {
-      $img_str_img = $element;
+    if ($img_str != "") {
+      $str_html2 = str_get_html($img_str);
+      foreach ($str_html2->find('img') as $element) {
+        $img_str_img = $element;
+      }
+      $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
+      $src = $xpath->evaluate("string(//img/@src)");
     }
-    $xpath = new DOMXPath(@DOMDocument::loadHTML($img_str_img));
-    $src = $xpath->evaluate("string(//img/@src)");
   }
   return $src;
 }
@@ -1998,3 +2021,581 @@ function valid_anchor_author($nid, $type) {
   return $status;
 }
 
+/**
+ * function for getNode prime cat tid ByNid
+ * @pram datetime $nid
+ *
+ * @return obj term_object;
+ */
+function getNodePrimeCatByNid($nid) {
+  if ($nid) {
+    $query = db_select('field_data_field_primary_category', 'fpc');
+    $query->fields('fpc', array('field_primary_category_value'));
+    $query->condition('fpc.entity_id', $nid);
+    $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+    $field_primary_category_value = $result[0]['field_primary_category_value'];
+    return taxonomy_term_load($field_primary_category_value);
+  }
+}
+
+/**
+ * function get section/category icon img
+ * @pram int $tid
+ *
+ * @return string url
+ */
+function sectionPrgramIconImg($tid) {
+  $query = db_select('field_data_field_programme_category_image', 'icimg');
+  $query->fields('icimg', array('field_programme_category_image_fid'));
+  $query->condition('icimg.entity_id', $tid);
+  $result = $query->execute()->fetchAll(PDO::FETCH_ASSOC);
+  return completeFilePath($result[0]['field_programme_category_image_fid']);
+}
+
+/**
+ * redish_ttl form decalation
+ *
+ * @return type
+ */
+function redish_ttl() {
+  drupal_add_js(
+'jQuery(document).ready(function () {
+  //called when key is pressed in textbox
+  jQuery("input[type=text]").keypress(function (e) {
+     //if the letter is not digit then display error 
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        alert("Digits Only");
+               return false;
+    }
+   });
+});',
+ array(
+  'type' => 'inline'  
+));
+  $form = array();
+  
+    $form['default_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Default ttl'),
+    '#default_value' => variable_get('default_ttl'),
+    '#required' => TRUE,  
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+
+  $form['config_update_status_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('config update status ttl'),
+    '#default_value' => variable_get('config_update_status_ttl'),
+    '#required' => TRUE,   
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['master_config_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('master config ttl'),
+    '#default_value' => variable_get('master_config_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['hamburger_menu_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('hamburger menu ttl'),
+    '#default_value' => variable_get('hamburger_menu_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['horizontal_menu_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('horizontal menu ttl'),
+    '#default_value' => variable_get('horizontal_menu_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['server_error_master_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('server error master ttl'),
+    '#default_value' => variable_get('server_error_master_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['photolist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('photolist ttl'),
+    '#default_value' => variable_get('photolist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['photodetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('photodetail ttl'),
+    '#default_value' => variable_get('photodetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['programlist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('programlist ttl'),
+    '#default_value' => variable_get('programlist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['newslist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('newslist ttl'),
+    '#default_value' => variable_get('newslist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['videolist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('videolist ttl'),
+    '#default_value' => variable_get('videolist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['adconfig_android_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('adconfig android ttl'),
+    '#default_value' => variable_get('adconfig_android_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['adconfig_ipad_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('adconfig ipad ttl'),
+    '#default_value' => variable_get('adconfig_ipad_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['adconfig_iphone_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('adconfig iphone ttl'),
+    '#default_value' => variable_get('adconfig_iphone_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['adconfig_tab_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('adconfig tab ttl'),
+    '#default_value' => variable_get('adconfig_tab_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['videodetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('videodetail ttl'),
+    '#default_value' => variable_get('videodetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['programdetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('programdetail ttl'),
+    '#default_value' => variable_get('programdetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['topstories_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('topstories ttl'),
+    '#default_value' => variable_get('topstories_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['photostorydetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('photostorydetail ttl'),
+    '#default_value' => variable_get('photostorydetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['program_category_list_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('program category list ttl'),
+    '#default_value' => variable_get('program_category_list_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['ad_config_json_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('ad config json ttl'),
+    '#default_value' => variable_get('ad_config_json_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_channellist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv channellist ttl'),
+    '#default_value' => variable_get('livetv_channellist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['otherapps_ios_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('otherapps ios ttl'),
+    '#default_value' => variable_get('otherapps_ios_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['otherapps_android_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('otherapps android ttl'),
+    '#default_value' => variable_get('otherapps_android_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['magazine_coverstories_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('magazine coverstories ttl'),
+    '#default_value' => variable_get('magazine_coverstories_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['magazine_editionlist_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('magazine editionlist ttl'),
+    '#default_value' => variable_get('magazine_editionlist_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['magazine_edition_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('magazine edition ttl'),
+    '#default_value' => variable_get('magazine_edition_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['storydetail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('storydetail ttl'),
+    '#default_value' => variable_get('storydetail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['home_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('home ttl'),
+    '#default_value' => variable_get('home_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_indiatoday_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv indiatoday ttl'),
+    '#default_value' => variable_get('livetv_indiatoday_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_aajtak_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv aajtak ttl'),
+    '#default_value' => variable_get('livetv_aajtak_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_delhiaajtak_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv delhiaajtak ttl'),
+    '#default_value' => variable_get('livetv_delhiaajtak_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['livetv_tej_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('livetv_tej_ttl'),
+    '#default_value' => variable_get('livetv_tej_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['author_story_list_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('author story list ttl'),
+    '#default_value' => variable_get('author_story_list_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['polls_open_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('polls_open_ttl'),
+    '#default_value' => variable_get('polls_open_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['polls_close_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('polls close ttl'),
+    '#default_value' => variable_get('polls_close_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['poll_detail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('poll_detail_ttl'),
+    '#default_value' => variable_get('poll_detail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['anchor_programm_list_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('anchor programm list ttl'),
+    '#default_value' => variable_get('anchor_programm_list_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['newswrap_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('newswrap ttl'),
+    '#default_value' => variable_get('newswrap_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+  $form['anchor_detail_ttl'] = array(
+    '#type' => 'textfield',
+    '#title' => t('anchor detail ttl'),
+    '#default_value' => variable_get('anchor_detail_ttl'),
+    '#required' => TRUE,
+    '#size' => 20, 
+    '#maxlength' => 7,
+  );
+
+  return system_settings_form($form);
+}
+/**
+ * redish_ttl form decalation
+ *
+ * @return type
+ */
+function time_interval() {
+    drupal_add_js(
+            'jQuery(document).ready(function () {
+  //called when key is pressed in textbox
+  jQuery("input[type=text]").keypress(function (e) {
+     //if the letter is not digit then display error 
+     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        alert("Digits Only");
+               return false;
+    }
+   });
+});', array(
+        'type' => 'inline'
+    ));
+    $form = array();
+
+    $form['itgapp_cat_0'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Default Section'),
+        '#default_value' => variable_get('itgapp_cat_0'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+
+    $form['itgapp_cat_1206552'] = array(
+        '#type' => 'textfield',
+        '#title' => t('VIDEOS Section'),
+        '#default_value' => variable_get('itgapp_cat_1206552'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206578'] = array(
+        '#type' => 'textfield',
+        '#title' => t('INDIA Section'),
+        '#default_value' => variable_get('itgapp_cat_1206578'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206577'] = array(
+        '#type' => 'textfield',
+        '#title' => t('WORLD Section'),
+        '#default_value' => variable_get('itgapp_cat_1206577'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206676'] = array(
+        '#type' => 'textfield',
+        '#title' => t('CRICKET Section'),
+        '#default_value' => variable_get('itgapp_cat_1206676'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206533'] = array(
+        '#type' => 'textfield',
+        '#title' => t('MOVIES Section'),
+        '#default_value' => variable_get('itgapp_cat_1206533'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206689'] = array(
+        '#type' => 'textfield',
+        '#title' => t('AUTO Section'),
+        '#default_value' => variable_get('itgapp_cat_1206689'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206550'] = array(
+        '#type' => 'textfield',
+        '#title' => t('SPORTS Section'),
+        '#default_value' => variable_get('itgapp_cat_1206550'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206567'] = array(
+        '#type' => 'textfield',
+        '#title' => t('LIFESTYLE Section'),
+        '#default_value' => variable_get('itgapp_cat_1206567'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206688'] = array(
+        '#type' => 'textfield',
+        '#title' => t('TECHNOLOGY Section'),
+        '#default_value' => variable_get('itgapp_cat_1206688'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206572'] = array(
+        '#type' => 'textfield',
+        '#title' => t('MAIL TODAY Section'),
+        '#default_value' => variable_get('itgapp_cat_1206572'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1206955'] = array(
+        '#type' => 'textfield',
+        '#title' => t('VIDEOS >> INDIA'),
+        '#default_value' => variable_get('itgapp_cat_1206955'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1207303'] = array(
+        '#type' => 'textfield',
+        '#title' => t('VIDEOS >> MOVIES'),
+        '#default_value' => variable_get('itgapp_cat_1207303'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1208598'] = array(
+        '#type' => 'textfield',
+        '#title' => t('PHOTOS >> MOVIES'),
+        '#default_value' => variable_get('itgapp_cat_1208598'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1208618'] = array(
+        '#type' => 'textfield',
+        '#title' => t('PHOTOS >> CRICKET'),
+        '#default_value' => variable_get('itgapp_cat_1208618'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1208589'] = array(
+        '#type' => 'textfield',
+        '#title' => t('PHOTOS >> LIFESTYLE'),
+        '#default_value' => variable_get('itgapp_cat_1208589'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    $form['itgapp_cat_1208561'] = array(
+        '#type' => 'textfield',
+        '#title' => t('PHOTOS >> SPORTS'),
+        '#default_value' => variable_get('itgapp_cat_1208561'),
+        '#required' => TRUE,
+        '#size' => 20,
+        '#maxlength' => 3,
+        '#description' => t('Enter interval in days.'),
+    );
+    return system_settings_form($form);
+    
+}
+
+    
+     /**
+     * function for get time interval
+     * @pram int $tid
+     *
+     * @return int
+     */
+    function itg_app_time_interval($tid) {
+        $interval = variable_get('itgapp_cat_0');
+        $var_key = "";
+        if ($tid > 0) {
+            $var_key = "itgapp_cat_" . $tid . "";
+            if (variable_get($var_key) > 0) {
+                $interval = variable_get($var_key);
+            }
+        }
+
+        return $interval;
+    }
+    
