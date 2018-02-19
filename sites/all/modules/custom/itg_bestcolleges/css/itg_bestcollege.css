@@ -482,7 +482,8 @@
      background: #f5f5f5;
      color: #333;
      border: solid 1px #ccc;
-     margin-top: 15px;
+     margin-top: 0px;
+     float:left;
  }
  .slider_outer1 .item-list ul.pager li {
      list-style-type: none;
