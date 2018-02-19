@@ -318,6 +318,9 @@ function itg_preprocess_html(&$vars) {
   if($arg[0] == 'magazine') {
       $vars['head_title'] = 'India Today Headlines Archive- Get News headlines by date | '.variable_get('site_name');
   }
+  if($arg[0] == 'livetv' || $arg[0] == 'international-livetv') {
+      $vars['head_title'] = 'India Today Live TV Online: Live TV News Streaming, Watch Live TV News | '.variable_get('site_name');
+  }
 }
 
 /**
