@@ -329,11 +329,11 @@ function itg_image_croping_ajax_make_ajax() {
   }
 
   $file = file_load($image_id);
+  // For Mos image
   if ($_POST['content_type'] == 'bodyeditor') {
     $file_image = image_load($file->uri);
     $orig_width = $file_image->info['width'];
-    // pr($file_image);
-    if ($orig_width > '647') { //print "test";
+    if ($orig_width > '647') { 
         print "<div style='color:#ff0000'>image dimenssions must be less than 647px width.</div>";
         die;
     }
