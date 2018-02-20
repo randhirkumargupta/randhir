@@ -600,7 +600,7 @@ function _get_section_options($term_id, $menu_form_id) {
             $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
             $term_query->fields('tt', array('tid', 'name'));
             $term_query->condition('tt.vid', 14, '=');
-            //$term_query->condition('tt.tid', 1208521, '!=');
+            $term_query->condition('tt.tid', 1208521, '!=');
             $term_query->condition('tt.tid', 1207762, '!=');
             $term_query->condition('th.parent', 0, '=');
             $term_query->orderBy('tt.name', 'ASC');
@@ -629,7 +629,7 @@ function _get_section_options($term_id, $menu_form_id) {
             $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
             $term_query->fields('tt', array('tid', 'name'));
             $term_query->condition('tt.vid', 14, '=');
-            //$term_query->condition('tt.tid', 1208521, '!=');
+            $term_query->condition('tt.tid', 1208521, '!=');
             $term_query->condition('tt.tid', 1207762, '!=');
             $term_query->condition('th.parent', 0, '=');
             $term_query->orderBy('tt.name', 'ASC');
