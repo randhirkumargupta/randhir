@@ -16,7 +16,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'sli', 'sli.entity_id=n.nid');
     $start_date = "2017-02-05";
-    $end_date = "2017-02-10";
+    $end_date = "2017-02-05";
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
@@ -47,7 +47,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'sli', 'sli.entity_id=n.nid');
     $start_date = "2017-02-05";
-    $end_date = "2017-02-10";
+    $end_date = "2017-02-05";
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
@@ -77,7 +77,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $query->leftJoin('field_data_field_story_kicker_text', 'synopsis', 'synopsis.entity_id=n.nid');
     $query->leftJoin('field_data_field_story_extra_large_image', 'sli', 'sli.entity_id=n.nid');
     $start_date = "2017-02-05";
-    $end_date = "2017-02-10";
+    $end_date = "2017-02-05";
     if($start_date != "na" && $end_date != "na"){
         $start_date_timestamp = $start_date . " 00:00:00";
         $end_date_timestamp = $end_date . " 23:59:00";
