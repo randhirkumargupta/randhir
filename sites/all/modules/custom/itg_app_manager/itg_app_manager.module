@@ -652,13 +652,12 @@ function itg_app_manager_form_submit($form, &$form_state) {
                 if ($form_val['has_subcat'] == 1) {
                     $s_id = $form_val['sub_section'];
                     $s_title = $form['container'][$key]['sub_section']['#options'][$form_val['sub_section']];
-                    
+                    echo "andy";die();
                 } else {
-                    //$s_id = 0;
-                    //$s_title = '';
-                    $s_id = $form_val['sub_section'];
-                    $s_title = $form['container'][$key]['sub_section']['#options'][$form_val['sub_section']];
-                }
+                    $s_id = 0;
+                    $s_title = '';
+                    echo "kumar";die();
+                   }
             }
 
 
