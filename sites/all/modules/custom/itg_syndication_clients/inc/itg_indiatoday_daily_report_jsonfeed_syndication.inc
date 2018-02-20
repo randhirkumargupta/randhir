@@ -109,8 +109,8 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
-   echo $file_path;echo "<br>";
-   echo $xml;
+   //echo $file_path;echo "<br>";
+   //echo $xml;
 }
 
 /**
