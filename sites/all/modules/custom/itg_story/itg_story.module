@@ -579,7 +579,7 @@ function itg_story_node_validate($node, $form, &$form_state) {
 
     // code to check if issue based is check fill magazine kicker text
     if (!empty($issue_based) && empty($magazine_kicker)) {
-      form_set_error('field_story_magazine_headline', t("Magazine kicker text is required"));
+      form_set_error('field_story_magazine_headline', t("Magazine headline is required"));
     }
     $external_url = $node->field_story_external_url[LANGUAGE_NONE][0]['value'];
     if (!empty($external_url) && filter_var($external_url, FILTER_VALIDATE_URL) === FALSE) {
