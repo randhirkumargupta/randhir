@@ -348,56 +348,9 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
             ),
         );
         $subsec_options = array('' => '- Select -');
-        $flag_edit_lock = 0;
         if ((isset($form_state['values']['container'][$i]['menu_type'])) && ($form_state['values']['container'][$i]['menu_type'] != '0')) {
-            if($form_state['values']['container'][$i]['menu_type'] == '1206553' || $form_state['values']['container'][$i]['menu_type'] == 1206553){
-                $option_arr = array();
-                $option_arr[1206553] = 'PROGRAMMES';
-                $section_options = $option_arr;
-                $flag_edit_lock = 1;
-                $form['container'][$i]['section']['title'] = array(
-                '#type' => 'textfield',
-                '#title' => '',
-                '#size' => 25,
-                '#maxlength' => 255,
-                '#prefix' => '<div id="menu-title-' . $i . '">',
-                '#suffix' => '</div>',
-                '#default_value' => 1206553,
-            );
-            }
-            elseif($form_state['values']['container'][$i]['menu_type'] == '1206552' || $form_state['values']['container'][$i]['menu_type'] == 1206552){
-                $option_arr = array();
-                $option_arr[1206552] = 'VIDEOS';
-                $section_options = $option_arr;
-                $flag_edit_lock = 1;
-                $form['container'][$i]['section']['title'] = array(
-                '#type' => 'textfield',
-                '#title' => '',
-                '#size' => 25,
-                '#maxlength' => 255,
-                '#prefix' => '<div id="menu-title-' . $i . '">',
-                '#suffix' => '</div>',
-                '#default_value' => 1206552,
-            );
-            }
-            elseif($form_state['values']['container'][$i]['menu_type'] == '1208521' || $form_state['values']['container'][$i]['menu_type'] == 1208521){
-                $option_arr = array();
-                $option_arr[1208521] = 'PHOTOS';
-                $section_options = $option_arr;
-                $flag_edit_lock = 1;
-                $form['container'][$i]['section']['title'] = array(
-                '#type' => 'textfield',
-                '#title' => '',
-                '#size' => 25,
-                '#maxlength' => 255,
-                '#prefix' => '<div id="menu-title-' . $i . '">',
-                '#suffix' => '</div>',
-                '#default_value' => 1208521,
-            );
-            }
-            else{
-              $section_options = _get_section_options($form_state['values']['container'][$i]['menu_type']);  
-              $form['container'][$i]['section']['title'] = array(
+            $section_options = _get_section_options($form_state['values']['container'][$i]['menu_type']);
+            $form['container'][$i]['section']['title'] = array(
                 '#type' => 'select',
                 '#title' => '',
                 '#delta' => $i,
@@ -410,13 +363,10 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 ),
                 '#default_value' => $d_row->title,
             );
-            }
-            
-            
             if (isset($form_state['values']['container'][$i]['section']['title']) && is_numeric($form_state['values']['container'][$i]['section']['title'])) {
                 $subsec_options = _get_section_options($form_state['values']['container'][$i]['section']['title']);
             }
-        } /*else {
+        } else {
             $form['container'][$i]['section']['title'] = array(
                 '#type' => 'textfield',
                 '#title' => '',
@@ -426,7 +376,7 @@ function itg_app_manager_menu_form($form, &$form_state, $menu_form_id) {
                 '#suffix' => '</div>',
                 '#default_value' => $d_row->title,
             );
-        }*/
+        }
         $form['container'][$i]['has_subcat'] = array(
             '#type' => 'checkbox',
             '#title' => '',
@@ -639,7 +589,6 @@ function _get_section_options($term_id) {
             $term_query->condition('tt.tid', 1208521, '!=');
             $term_query->condition('tt.tid', 1207762, '!=');
             $term_query->condition('th.parent', 0, '=');
-            $term_query->orderBy('tt.name', 'ASC');
             $term_query_results = $term_query->execute()->fetchAll();
             foreach ($term_query_results as $key => $val) {
                 $option_arr[$val->tid] = $val->name;
@@ -649,7 +598,6 @@ function _get_section_options($term_id) {
             $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
             $term_query->fields('tt', array('tid', 'name'));
             $term_query->condition('th.parent', $term_id, '=');
-            $term_query->orderBy('tt.name', 'ASC');
             $term_query_results = $term_query->execute()->fetchAll();
             foreach ($term_query_results as $key => $val) {
                 $option_arr[$val->tid] = $val->name;
