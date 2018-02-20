@@ -136,6 +136,8 @@ function vedio_xml($result = NULL) {
         $keywords = $temp['keywords']['value'];
         $description = $temp['description']['value'];
       }
+      $alias = drupal_get_path_alias('node/' . $nid . '');
+      $weburl = "https://www.indiatoday.in/" . $alias;
       $title = $value['title'];
       $created = $value['created'];
       $publish_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
@@ -160,7 +162,7 @@ function vedio_xml($result = NULL) {
       $xml .= '<meta_description>'.$description.'</meta_description>';
       $xml .= '<pv></pv>';
       $xml .= '<uv></uv>';
-      $xml .= '<url>'.$firebase_url.'</url>';
+      $xml .= '<url>'.$weburl.'</url>';
       $xml .= '<date_and_time>'.$created_datetime.'</date_and_time>';
       $xml .= '</item>';
     }
@@ -192,6 +194,8 @@ function story_xml($result = NULL) {
         $keywords = $temp['keywords']['value'];
         $description = $temp['description']['value'];
       }
+      $alias = drupal_get_path_alias('node/' . $nid . '');
+      $weburl = "https://www.indiatoday.in/" . $alias;
       $title = $value['title'];
       $created = $value['created'];
       $publish_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
@@ -216,7 +220,7 @@ function story_xml($result = NULL) {
       $xml .= '<meta_description>'.$description.'</meta_description>';
       $xml .= '<pv></pv>';
       $xml .= '<uv></uv>';
-      $xml .= '<url>'.$firebase_url.'</url>';
+      $xml .= '<url>'.$weburl.'</url>';
       $xml .= '<date_and_time>'.$created_datetime.'</date_and_time>';
       $xml .= '</item>';
     }
@@ -247,6 +251,8 @@ function gallery_xml($result = NULL) {
         $keywords = $temp['keywords']['value'];
         $description = $temp['description']['value'];
       }
+      $alias = drupal_get_path_alias('node/' . $nid . '');
+      $weburl = "https://www.indiatoday.in/" . $alias;
       $title = $value['title'];
       $created = $value['created'];
       $publish_date = date("D, j M Y H:i:s", strtotime($value['field_itg_content_publish_date_value']));
@@ -271,7 +277,7 @@ function gallery_xml($result = NULL) {
       $xml .= '<meta_description>'.$description.'</meta_description>';
       $xml .= '<pv></pv>';
       $xml .= '<uv></uv>';
-      $xml .= '<url>'.$firebase_url.'</url>';
+      $xml .= '<url>'.$weburl.'</url>';
       $xml .= '<date_and_time>'.$created_datetime.'</date_and_time>';
       $xml .= '</item>';
     }
