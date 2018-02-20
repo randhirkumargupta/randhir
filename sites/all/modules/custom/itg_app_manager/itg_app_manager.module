@@ -589,6 +589,7 @@ function _get_section_options($term_id) {
             $term_query->condition('tt.tid', 1208521, '!=');
             $term_query->condition('tt.tid', 1207762, '!=');
             $term_query->condition('th.parent', 0, '=');
+            $term_query->orderBy('tt.name', 'DESC');
             $term_query_results = $term_query->execute()->fetchAll();
             foreach ($term_query_results as $key => $val) {
                 $option_arr[$val->tid] = $val->name;
@@ -598,6 +599,7 @@ function _get_section_options($term_id) {
             $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
             $term_query->fields('tt', array('tid', 'name'));
             $term_query->condition('th.parent', $term_id, '=');
+            $term_query->orderBy('tt.name', 'DESC');
             $term_query_results = $term_query->execute()->fetchAll();
             foreach ($term_query_results as $key => $val) {
                 $option_arr[$val->tid] = $val->name;
