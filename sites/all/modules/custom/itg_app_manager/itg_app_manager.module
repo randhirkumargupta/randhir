@@ -580,8 +580,8 @@ function ajax_subsection_callback($form, $form_state) {
  */
 function _get_section_options($term_id, $menu_form_id, $subsec_options) {
     $option_arr = array('' => '- Select -');
-    
-       if($term_id == 1206553 || $term_id == '1206553'){
+    if($subsec_options == 0){
+        if($term_id == 1206553 || $term_id == '1206553'){
         //$option_arr = array();
         $option_arr[1206553] = 'Programes';
     }
@@ -620,7 +620,37 @@ function _get_section_options($term_id, $menu_form_id, $subsec_options) {
             }
         }
     }
-} 
+}
+    }
+    else{
+        if ((isset($term_id)) && !empty($term_id)) {
+        if ($term_id == '1') {
+            $term_query = db_select('taxonomy_term_data', 'tt');
+            $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
+            $term_query->fields('tt', array('tid', 'name'));
+            $term_query->condition('tt.vid', 14, '=');
+            $term_query->condition('tt.tid', 1208521, '!=');
+            $term_query->condition('tt.tid', 1207762, '!=');
+            $term_query->condition('th.parent', 0, '=');
+            $term_query->orderBy('tt.name', 'ASC');
+            $term_query_results = $term_query->execute()->fetchAll();
+            foreach ($term_query_results as $key => $val) {
+                $option_arr[$val->tid] = $val->name;
+            }
+        } else {
+            $term_query = db_select('taxonomy_term_data', 'tt');
+            $term_query->join('taxonomy_term_hierarchy', 'th', 'tt.tid = th.tid');
+            $term_query->fields('tt', array('tid', 'name'));
+            $term_query->condition('th.parent', $term_id, '=');
+            $term_query->orderBy('tt.name', 'ASC');
+            $term_query_results = $term_query->execute()->fetchAll();
+            foreach ($term_query_results as $key => $val) {
+                $option_arr[$val->tid] = $val->name;
+            }
+        }
+    }
+    }
+     
     
    
     
