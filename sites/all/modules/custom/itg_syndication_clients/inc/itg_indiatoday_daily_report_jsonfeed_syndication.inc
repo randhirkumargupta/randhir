@@ -6,7 +6,7 @@
  * @param string $file_name
  */
 function itg_indiatoday_daily_report_jsonfeed_syndication() {
-    $file_name = date('Y-m-d', time());
+    $file_name = date('Y-m-d', time())."xml";
     // query for vedio
     $query = db_select('node', 'n');
     $query->leftJoin('field_data_body', 'dbody', 'dbody.entity_id=n.nid');
@@ -107,7 +107,7 @@ function itg_indiatoday_daily_report_jsonfeed_syndication() {
     $fp = fopen($file_path, "w");
     fwrite($fp, $xml);
     fclose($fp);
-   echo $file_path;
+   
 }
 
 /**
